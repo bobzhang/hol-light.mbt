@@ -272,7 +272,7 @@ pub fn select_thm(x46 : @kernel.Term, x47 : @kernel.Term) -> @kernel.Thm raise {
 /// Jordan/tactics_ext2.ml:132
 fn step_9() -> Unit raise {
   let t48 = @parser.parse_term("n:num")
-  ignore(select_thm(@parser.parse_term("\\m. (X:num->bool) m /\\ (forall n. X n ==> m <=| n)"), t48))
+  ignore(select_thm(@parser.parse_term("\\m. (X:num->bool) m /\\ (∀ n. X n ==> m <=| n)"), t48))
 }
 
 ///|
@@ -284,7 +284,7 @@ fn step_10() -> Unit raise {
   let t54 = @tactics.disch_then(@tactics.choose_tac)
   let t49 = @parser.parse_term("(?)")
   let t55 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics_ext.disch_all_tac, (x50 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => undisch_find_tac(t49, x50), t54, t53, t52])
-  select_exist_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall(P:A->bool) Q. (?y. P y) /\\ (forall t. (P t ==> Q t)) ==> Q ((@) P)"), t55))
+  select_exist_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀(P:A->bool) Q. (?y. P y) /\\ (∀ t. (P t ==> Q t)) ==> Q ((@) P)"), t55))
 }
 
 ///|
@@ -300,7 +300,7 @@ pub fn select_exist() -> @kernel.Thm {
 /// SELECT_THM
 fn step_11() -> Unit raise {
   let t56 = @list.List([@meson.meson_tac(@list.List([select_exist()]))])
-  select_thm_v1_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall(P:A->bool) Q. (((?y. P y) ==> (forall t. (P t ==> Q t))) /\\ ((~(?y. P y)) ==>\n     (forall t. Q t))) ==> Q ((@) P)"), t56))
+  select_thm_v1_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀(P:A->bool) Q. (((?y. P y) ==> (∀ t. (P t ==> Q t))) /\\ ((~(?y. P y)) ==>\n     (∀ t. Q t))) ==> Q ((@) P)"), t56))
 }
 
 ///|
@@ -316,7 +316,7 @@ pub fn select_thm_v1() -> @kernel.Thm {
 /// SELECT_TAC
 fn step_12() -> Unit raise {
   let t57 = @meson.meson_tac(@list.List([]))
-  let unbeta = @tactics_refine.prove(@parser.parse_term("forall(P:A->bool) (Q:A->bool). (Q ((@) P)) <=> (\\t. Q t) ((@) P)"), t57)
+  let unbeta = @tactics_refine.prove(@parser.parse_term("∀(P:A->bool) (Q:A->bool). (Q ((@) P)) <=> (\\t. Q t) ((@) P)"), t57)
   let unbeta_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.conv_tac(@drule.higher_rewrite_conv(@list.List([unbeta]))(true))
   let t60 = @tactics.then_tac(@tactics.disch_tac, @tactics.gen_tac)
   let t61 = @list.List([@tactics.then_tac(@tactics.disch_then(fn(x58 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -449,9 +449,9 @@ fn step_13() -> Unit raise {
   let t102 = @meson.meson_tac(@list.List([]))
   let t103 = @tactics.undisch_tac(@parser.parse_term("y:num = y"))
   let t100 = @parser.parse_term("y:A")
-  ignore(@tactics_refine.prove_by_refinement(@parser.parse_term("forall y. y:num = y"), @list.List([@tactics.gen_tac, (x101 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => type_then(t100, fn(x98 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  ignore(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ y. y:num = y"), @list.List([@tactics.gen_tac, (x101 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => type_then(t100, fn(x98 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x98
-    @tactics.assume_tac(@bool.ispec(t, @class.taut(@parser.parse_term("forall x:B. x=x"))))
+    @tactics.assume_tac(@bool.ispec(t, @class.taut(@parser.parse_term("∀ x:B. x=x"))))
   }, x101), t103, t102])))
 }
 
@@ -865,7 +865,7 @@ pub fn real_poly_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// test_real_poly_tac
 fn step_17() -> Unit raise {
-  test_real_poly_tac_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall x y . (x + (&.2)*y)*(x- (&.2)*y) = (x*x -. (&.4)*y*y)"), @list.List([@tactics_ext.disch_all_tac, real_poly_tac])))
+  test_real_poly_tac_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ x y . (x + (&.2)*y)*(x- (&.2)*y) = (x*x -. (&.4)*y*y)"), @list.List([@tactics_ext.disch_all_tac, real_poly_tac])))
 }
 
 ///|
@@ -880,7 +880,7 @@ pub fn test_real_poly_tac() -> @kernel.Thm {
 ///|
 /// strict_lemma
 fn step_18() -> Unit raise {
-  strict_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C. (A+B = C) ==> ((&.0 <. B) ==> (A <. C)  )"), @list.List([@calc_rat.real_arith_tac])))
+  strict_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C. (A+B = C) ==> ((&.0 <. B) ==> (A <. C)  )"), @list.List([@calc_rat.real_arith_tac])))
 }
 
 ///|
@@ -895,7 +895,7 @@ pub fn strict_lemma() -> @kernel.Thm {
 ///|
 /// weak_lemma
 fn step_19() -> Unit raise {
-  weak_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C. (A+B = C) ==> ((&.0 <=. B) ==> (A <=. C))"), @list.List([@calc_rat.real_arith_tac])))
+  weak_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C. (A+B = C) ==> ((&.0 <=. B) ==> (A <=. C))"), @list.List([@calc_rat.real_arith_tac])))
 }
 
 ///|
@@ -911,7 +911,7 @@ pub fn weak_lemma() -> @kernel.Thm {
 /// strip_lt_lemma
 fn step_20() -> Unit raise {
   let t233 = @list.List([@meson.asm_meson_tac(@list.List([@realarith.real_let_add()]))])
-  strip_lt_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall B1 B2 C. ((&.0 <. (B1+B2)) ==> C) ==>\n         ((&.0 <. B2) ==> ((&.0 <=. B1) ==> C))"), t233))
+  strip_lt_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ B1 B2 C. ((&.0 <. (B1+B2)) ==> C) ==>\n         ((&.0 <. B2) ==> ((&.0 <=. B1) ==> C))"), t233))
 }
 
 ///|
@@ -927,7 +927,7 @@ pub fn strip_lt_lemma() -> @kernel.Thm {
 /// strip_le_lemma
 fn step_21() -> Unit raise {
   let t234 = @list.List([@meson.asm_meson_tac(@list.List([@realarith.real_le_add()]))])
-  strip_le_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall B1 B2 C. ((&.0 <=. (B1+B2)) ==> C) ==>\n         ((&.0 <=. B2) ==> ((&.0 <=. B1) ==> C))"), t234))
+  strip_le_lemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ B1 B2 C. ((&.0 <=. (B1+B2)) ==> C) ==>\n         ((&.0 <=. B2) ==> ((&.0 <=. B1) ==> C))"), t234))
 }
 
 ///|
@@ -1005,7 +1005,7 @@ pub fn switch_lemma_lt_order(x239 : @kernel.Term, x240 : @kernel.Term) -> Bool r
 /// switch_lemma_le
 fn step_22() -> Unit raise {
   let t241 = @list.List([@meson.asm_meson_tac(@list.List([]))])
-  switch_lemma_le_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C. ((&.0 <= A) ==> (&.0 <= B) ==> C) =\n       ((&.0 <=. B) ==> (&.0 <= A) ==> C)"), t241))
+  switch_lemma_le_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C. ((&.0 <= A) ==> (&.0 <= B) ==> C) =\n       ((&.0 <=. B) ==> (&.0 <= A) ==> C)"), t241))
 }
 
 ///|
@@ -1021,7 +1021,7 @@ pub fn switch_lemma_le() -> @kernel.Thm {
 /// switch_lemma_let
 fn step_23() -> Unit raise {
   let t242 = @list.List([@meson.asm_meson_tac(@list.List([]))])
-  switch_lemma_let_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C. ((&.0 < A) ==> (&.0 <= B) ==> C) =\n       ((&.0 <=. B) ==> (&.0 < A) ==> C)"), t242))
+  switch_lemma_let_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C. ((&.0 < A) ==> (&.0 <= B) ==> C) =\n       ((&.0 <=. B) ==> (&.0 < A) ==> C)"), t242))
 }
 
 ///|
@@ -1037,7 +1037,7 @@ pub fn switch_lemma_let() -> @kernel.Thm {
 /// switch_lemma_lt
 fn step_24() -> Unit raise {
   let t243 = @list.List([@meson.asm_meson_tac(@list.List([]))])
-  switch_lemma_lt_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C. ((&.0 < A) ==> (&.0 < B) ==> C) =\n       ((&.0 <. B) ==> (&.0 < A)  ==> C)"), t243))
+  switch_lemma_lt_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C. ((&.0 < A) ==> (&.0 < B) ==> C) =\n       ((&.0 <. B) ==> (&.0 < A)  ==> C)"), t243))
 }
 
 ///|
@@ -1053,7 +1053,7 @@ pub fn switch_lemma_lt() -> @kernel.Thm {
 /// expand_prod_lt
 fn step_25() -> Unit raise {
   let t244 = @list.List([@meson.asm_meson_tac(@list.List([@real.real_lt_mul()]))])
-  expand_prod_lt_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall B1 B2 C. (&.0 < B1*B2 ==> C) ==>\n              ((&.0 <. B1) ==> (&.0 <. B2) ==> C)"), t244))
+  expand_prod_lt_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ B1 B2 C. (&.0 < B1*B2 ==> C) ==>\n              ((&.0 <. B1) ==> (&.0 <. B2) ==> C)"), t244))
 }
 
 ///|
@@ -1069,7 +1069,7 @@ pub fn expand_prod_lt() -> @kernel.Thm {
 /// expand_prod_le
 fn step_26() -> Unit raise {
   let t245 = @list.List([@meson.asm_meson_tac(@list.List([@analysis.real_le_mul()]))])
-  expand_prod_le_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall B1 B2 C. (&.0 <= B1*B2 ==> C) ==>\n              ((&.0 <=. B1) ==> (&.0 <=. B2) ==> C)"), t245))
+  expand_prod_le_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ B1 B2 C. (&.0 <= B1*B2 ==> C) ==>\n              ((&.0 <=. B1) ==> (&.0 <=. B2) ==> C)"), t245))
 }
 
 ///|
@@ -1171,7 +1171,7 @@ pub fn ineq_le_tac(x : @kernel.Term) -> @tactics.Tactic raise {
 /// test_ineq_tac
 fn step_29() -> Unit raise {
   let t294 = @list.List([@tactics_ext.disch_all_tac, ineq_lt_tac(@parser.parse_term("x * y + x pow 2 + &2 * (&.0 + x * y) + &2 * &2 = x * x + &3 * x * y + &4"))])
-  test_ineq_tac_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall x y z. (&.0 <= x*y) /\\ (&.0 <. z) ==>\n             (x*y)  <. x*x + (&.3)*x*y + &.4 "), t294))
+  test_ineq_tac_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ x y z. (&.0 <= x*y) /\\ (&.0 <. z) ==>\n             (x*y)  <. x*x + (&.3)*x*y + &.4 "), t294))
 }
 
 ///|
@@ -1236,43 +1236,43 @@ fn step_31() -> Unit raise {
     @tactics_refine.prove(f, @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac))
   }
   let t300 = @simp.rewrite_tac(@list.List([tagb(), @class.not_forall_thm()]))
-  let not_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P. ~(TAGB(forall x. P x)) <=> (?x:A. ~(P x))"), t300)
+  let not_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P. ~(TAGB(∀ x. P x)) <=> (?x:A. ~(P x))"), t300)
   let t301 = @simp.rewrite_tac(@list.List([tagb(), @class.skolem_thm()]))
-  let skolem_tag = @tactics_refine.prove(@parser.parse_term("forall P. (?y. TAGB (forall(x:A). P x ((y:A->B) x))) <=>\n     ( (forall(x:A). ?y. P x ((y:B))))"), t301)
+  let skolem_tag = @tactics_refine.prove(@parser.parse_term("∀ P. (?y. TAGB (∀(x:A). P x ((y:A->B) x))) <=>\n     ( (∀(x:A). ?y. P x ((y:B))))"), t301)
   let t302 = @simp.rewrite_tac(@list.List([tagb(), @class.skolem_thm()]))
-  let skolem_tag2 = @tactics_refine.prove(@parser.parse_term("forall P. (forall x:A. TAGB(?y:B. P x y)) <=> (?y. forall x. P x (y x))"), t302)
+  let skolem_tag2 = @tactics_refine.prove(@parser.parse_term("∀ P. (∀ x:A. TAGB(?y:B. P x y)) <=> (?y. ∀ x. P x (y x))"), t302)
   let t303 = @simp.rewrite_tac(@list.List([@theorems.swap_forall_thm(), tagb()]))
-  let swap_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P:A->B->bool. (forall x. TAGB(forall y. P x y)) <=> (forall y x. P x y)"), t303)
-  let swap_exists_thm = iprove(@parser.parse_term("forall P:A->B->bool. (?x. TAGB (?y. P x y)) <=> (?y x. P x y)"))
+  let swap_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P:A->B->bool. (∀ x. TAGB(∀ y. P x y)) <=> (∀ y x. P x y)"), t303)
+  let swap_exists_thm = iprove(@parser.parse_term("∀ P:A->B->bool. (?x. TAGB (?y. P x y)) <=> (?y x. P x y)"))
   let t304 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (TAGB (forall x. P x) /\\ TAGB (forall x. Q x) <=>\n   (forall x. P x /\\ Q x))"), t304)
+  let and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (TAGB (∀ x. P x) /\\ TAGB (∀ x. Q x) <=>\n   (∀ x. P x /\\ Q x))"), t304)
   let t305 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let left_and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (TAGB (forall x. P x) /\\  Q) <=>\n   (forall x. P x /\\ Q )"), t305)
+  let left_and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (TAGB (∀ x. P x) /\\  Q) <=>\n   (∀ x. P x /\\ Q )"), t305)
   let t306 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let right_and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. P /\\ TAGB (forall x. Q x) <=>\n   (forall x. P  /\\ Q x)"), t306)
+  let right_and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. P /\\ TAGB (∀ x. Q x) <=>\n   (∀ x. P  /\\ Q x)"), t306)
   let t307 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let triv_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB (forall x:A. P) \\/ TAGB (forall x:A. Q) <=> (forall x:A. P \\/ Q)"), t307)
+  let triv_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB (∀ x:A. P) \\/ TAGB (∀ x:A. Q) <=> (∀ x:A. P \\/ Q)"), t307)
   let t308 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let right_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (P ==> TAGB (forall x:A. Q x)) <=> (forall x. P ==> Q x)"), t308)
-  let or_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x. P x) \\/ TAGB (?x. Q x) <=> (?x:A. P x \\/ Q x)"))
-  let left_or_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)"))
-  let right_or_exists_thm = iprove(@parser.parse_term("forall P Q. P \\/ TAGB (?x. Q x) <=> (?x:A. P \\/ Q x)"))
-  let left_and_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)"))
-  let right_and_exists_thm = iprove(@parser.parse_term("forall P Q. P /\\ TAGB (?x:A. Q x) <=> (?x:A. P /\\ Q x)"))
-  let triv_and_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x:A. P) /\\ TAGB (?x:A. Q) <=> (?x:A. P /\\ Q)"))
-  let left_imp_exists_thm = iprove(@parser.parse_term("forall P Q. (TAGB (?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)"))
-  let triv_forall_imp_thm = iprove(@parser.parse_term("forall P Q. (TAGB (?x:A. P) ==> TAGB (forall x:A. Q)) <=> (forall x:A. P ==> Q) "))
-  let triv_exists_imp_thm = iprove(@parser.parse_term("forall P Q. (TAGB(forall x:A. P) ==> TAGB (?x:A. Q)) <=> (?x:A. P ==> Q) "))
+  let right_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (P ==> TAGB (∀ x:A. Q x)) <=> (∀ x. P ==> Q x)"), t308)
+  let or_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x. P x) \\/ TAGB (?x. Q x) <=> (?x:A. P x \\/ Q x)"))
+  let left_or_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)"))
+  let right_or_exists_thm = iprove(@parser.parse_term("∀ P Q. P \\/ TAGB (?x. Q x) <=> (?x:A. P \\/ Q x)"))
+  let left_and_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)"))
+  let right_and_exists_thm = iprove(@parser.parse_term("∀ P Q. P /\\ TAGB (?x:A. Q x) <=> (?x:A. P /\\ Q x)"))
+  let triv_and_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x:A. P) /\\ TAGB (?x:A. Q) <=> (?x:A. P /\\ Q)"))
+  let left_imp_exists_thm = iprove(@parser.parse_term("∀ P Q. (TAGB (?x:A. P x) ==> Q) <=> (∀ x. P x ==> Q)"))
+  let triv_forall_imp_thm = iprove(@parser.parse_term("∀ P Q. (TAGB (?x:A. P) ==> TAGB (∀ x:A. Q)) <=> (∀ x:A. P ==> Q) "))
+  let triv_exists_imp_thm = iprove(@parser.parse_term("∀ P Q. (TAGB(∀ x:A. P) ==> TAGB (?x:A. Q)) <=> (?x:A. P ==> Q) "))
   let t309 = @simp.rewrite_tac(@list.List([tagb(), @class.not_exists_thm()]))
-  let not_exists_tag = @tactics_refine.prove(@parser.parse_term("forall P. ~(TAGB(?x:A. P x)) <=> (forall x. ~(P x))"), t309)
+  let not_exists_tag = @tactics_refine.prove(@parser.parse_term("∀ P. ~(TAGB(?x:A. P x)) <=> (∀ x. ~(P x))"), t309)
   let t310 = @simp.rewrite_tac(@list.List([tagb(), @class.left_or_forall_thm()]))
-  let left_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB(forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)"), t310)
+  let left_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB(∀ x:A. P x) \\/ Q <=> (∀ x. P x \\/ Q)"), t310)
   let t311 = @simp.rewrite_tac(@list.List([tagb(), @class.right_or_forall_thm()]))
-  let right_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. P \\/ TAGB(forall x:A. Q x) <=> (forall x. P \\/ Q x)"), t311)
+  let right_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. P \\/ TAGB(∀ x:A. Q x) <=> (∀ x. P \\/ Q x)"), t311)
   let t312 = @simp.rewrite_tac(@list.List([tagb(), @class.left_imp_forall_thm()]))
-  let left_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (TAGB(forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)"), t312)
+  let left_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (TAGB(∀ x:A. P x) ==> Q) <=> (?x. P x ==> Q)"), t312)
   let t313 = @simp.rewrite_tac(@list.List([tagb(), @class.right_imp_exists_thm()]))
-  let right_imp_exists_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (P ==> TAGB(?x:A. Q x)) <=> (?x:A. P ==> Q x)"), t313)
+  let right_imp_exists_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (P ==> TAGB(?x:A. Q x)) <=> (?x:A. P ==> Q x)"), t313)
   quant_left_conv_c.set(fn(x314 : String) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let var_name = x314
     fn(x315 : @kernel.Term) -> @kernel.Thm raise {
@@ -1303,43 +1303,43 @@ fn step_32() -> Unit raise {
     @tactics_refine.prove(f, @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac))
   }
   let t320 = @simp.rewrite_tac(@list.List([tagb(), @class.not_forall_thm()]))
-  let not_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P. ~(TAGB(forall x. P x)) <=> (?x:A. ~(P x))"), t320)
+  let not_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P. ~(TAGB(∀ x. P x)) <=> (?x:A. ~(P x))"), t320)
   let t321 = @simp.rewrite_tac(@list.List([tagb(), @class.skolem_thm()]))
-  let skolem_tag = @tactics_refine.prove(@parser.parse_term("forall P. (?y. TAGB (forall(x:A). P x ((y:A->B) x))) <=>\n     ( (forall(x:A). ?y. P x ((y:B))))"), t321)
+  let skolem_tag = @tactics_refine.prove(@parser.parse_term("∀ P. (?y. TAGB (∀(x:A). P x ((y:A->B) x))) <=>\n     ( (∀(x:A). ?y. P x ((y:B))))"), t321)
   let t322 = @simp.rewrite_tac(@list.List([tagb(), @class.skolem_thm()]))
-  let skolem_tag2 = @tactics_refine.prove(@parser.parse_term("forall P. (forall x:A. TAGB(?y:B. P x y)) <=> (?y. forall x. P x (y x))"), t322)
+  let skolem_tag2 = @tactics_refine.prove(@parser.parse_term("∀ P. (∀ x:A. TAGB(?y:B. P x y)) <=> (?y. ∀ x. P x (y x))"), t322)
   let t323 = @simp.rewrite_tac(@list.List([@theorems.swap_forall_thm(), tagb()]))
-  let swap_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P:A->B->bool. (forall x. TAGB(forall y. P x y)) <=> (forall y x. P x y)"), t323)
-  let swap_exists_thm = iprove(@parser.parse_term("forall P:A->B->bool. (?x. TAGB (?y. P x y)) <=> (?y x. P x y)"))
+  let swap_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P:A->B->bool. (∀ x. TAGB(∀ y. P x y)) <=> (∀ y x. P x y)"), t323)
+  let swap_exists_thm = iprove(@parser.parse_term("∀ P:A->B->bool. (?x. TAGB (?y. P x y)) <=> (?y x. P x y)"))
   let t324 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (TAGB (forall x. P x) /\\ TAGB (forall x. Q x) <=>\n   (forall x. P x /\\ Q x))"), t324)
+  let and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (TAGB (∀ x. P x) /\\ TAGB (∀ x. Q x) <=>\n   (∀ x. P x /\\ Q x))"), t324)
   let t325 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let left_and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (TAGB (forall x. P x) /\\  Q) <=>\n   (forall x. P x /\\ Q )"), t325)
+  let left_and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (TAGB (∀ x. P x) /\\  Q) <=>\n   (∀ x. P x /\\ Q )"), t325)
   let t326 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let right_and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. P /\\ TAGB (forall x. Q x) <=>\n   (forall x. P  /\\ Q x)"), t326)
+  let right_and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. P /\\ TAGB (∀ x. Q x) <=>\n   (∀ x. P  /\\ Q x)"), t326)
   let t327 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let triv_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB (forall x:A. P) \\/ TAGB (forall x:A. Q) <=> (forall x:A. P \\/ Q)"), t327)
+  let triv_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB (∀ x:A. P) \\/ TAGB (∀ x:A. Q) <=> (∀ x:A. P \\/ Q)"), t327)
   let t328 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let right_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (P ==> TAGB (forall x:A. Q x)) <=> (forall x. P ==> Q x)"), t328)
-  let or_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x. P x) \\/ TAGB (?x. Q x) <=> (?x:A. P x \\/ Q x)"))
-  let left_or_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)"))
-  let right_or_exists_thm = iprove(@parser.parse_term("forall P Q. P \\/ TAGB (?x. Q x) <=> (?x:A. P \\/ Q x)"))
-  let left_and_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)"))
-  let right_and_exists_thm = iprove(@parser.parse_term("forall P Q. P /\\ TAGB (?x:A. Q x) <=> (?x:A. P /\\ Q x)"))
-  let triv_and_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x:A. P) /\\ TAGB (?x:A. Q) <=> (?x:A. P /\\ Q)"))
-  let left_imp_exists_thm = iprove(@parser.parse_term("forall P Q. (TAGB (?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)"))
-  let triv_forall_imp_thm = iprove(@parser.parse_term("forall P Q. (TAGB (?x:A. P) ==> TAGB (forall x:A. Q)) <=> (forall x:A. P ==> Q) "))
-  let triv_exists_imp_thm = iprove(@parser.parse_term("forall P Q. (TAGB(forall x:A. P) ==> TAGB (?x:A. Q)) <=> (?x:A. P ==> Q) "))
+  let right_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (P ==> TAGB (∀ x:A. Q x)) <=> (∀ x. P ==> Q x)"), t328)
+  let or_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x. P x) \\/ TAGB (?x. Q x) <=> (?x:A. P x \\/ Q x)"))
+  let left_or_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)"))
+  let right_or_exists_thm = iprove(@parser.parse_term("∀ P Q. P \\/ TAGB (?x. Q x) <=> (?x:A. P \\/ Q x)"))
+  let left_and_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)"))
+  let right_and_exists_thm = iprove(@parser.parse_term("∀ P Q. P /\\ TAGB (?x:A. Q x) <=> (?x:A. P /\\ Q x)"))
+  let triv_and_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x:A. P) /\\ TAGB (?x:A. Q) <=> (?x:A. P /\\ Q)"))
+  let left_imp_exists_thm = iprove(@parser.parse_term("∀ P Q. (TAGB (?x:A. P x) ==> Q) <=> (∀ x. P x ==> Q)"))
+  let triv_forall_imp_thm = iprove(@parser.parse_term("∀ P Q. (TAGB (?x:A. P) ==> TAGB (∀ x:A. Q)) <=> (∀ x:A. P ==> Q) "))
+  let triv_exists_imp_thm = iprove(@parser.parse_term("∀ P Q. (TAGB(∀ x:A. P) ==> TAGB (?x:A. Q)) <=> (?x:A. P ==> Q) "))
   let t329 = @simp.rewrite_tac(@list.List([tagb(), @class.not_exists_thm()]))
-  let not_exists_tag = @tactics_refine.prove(@parser.parse_term("forall P. ~(TAGB(?x:A. P x)) <=> (forall x. ~(P x))"), t329)
+  let not_exists_tag = @tactics_refine.prove(@parser.parse_term("∀ P. ~(TAGB(?x:A. P x)) <=> (∀ x. ~(P x))"), t329)
   let t330 = @simp.rewrite_tac(@list.List([tagb(), @class.left_or_forall_thm()]))
-  let left_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB(forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)"), t330)
+  let left_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB(∀ x:A. P x) \\/ Q <=> (∀ x. P x \\/ Q)"), t330)
   let t331 = @simp.rewrite_tac(@list.List([tagb(), @class.right_or_forall_thm()]))
-  let right_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. P \\/ TAGB(forall x:A. Q x) <=> (forall x. P \\/ Q x)"), t331)
+  let right_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. P \\/ TAGB(∀ x:A. Q x) <=> (∀ x. P \\/ Q x)"), t331)
   let t332 = @simp.rewrite_tac(@list.List([tagb(), @class.left_imp_forall_thm()]))
-  let left_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (TAGB(forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)"), t332)
+  let left_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (TAGB(∀ x:A. P x) ==> Q) <=> (?x. P x ==> Q)"), t332)
   let t333 = @simp.rewrite_tac(@list.List([tagb(), @class.right_imp_exists_thm()]))
-  let right_imp_exists_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. (P ==> TAGB(?x:A. Q x)) <=> (?x:A. P ==> Q x)"), t333)
+  let right_imp_exists_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. (P ==> TAGB(?x:A. Q x)) <=> (?x:A. P ==> Q x)"), t333)
   quant_left_noswap_conv_c.set(fn(x334 : String) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let var_name = x334
     fn(x335 : @kernel.Term) -> @kernel.Thm raise {
@@ -1370,42 +1370,42 @@ fn step_33() -> Unit raise {
     @tactics_refine.prove(f, @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac))
   }
   let t340 = @simp.rewrite_tac(@list.List([tagb(), @equal.gsym(@class.not_forall_thm())]))
-  let not_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P. TAGB(?x:A. ~(P x)) <=> ~((forall x. P x))"), t340)
+  let not_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P. TAGB(?x:A. ~(P x)) <=> ~((∀ x. P x))"), t340)
   let t341 = @simp.rewrite_tac(@list.List([tagb(), @equal.gsym(@class.skolem_thm())]))
-  let skolem_tag = @tactics_refine.prove(@parser.parse_term("forall P. ( TAGB(forall(x:A). ?y. P x ((y:B)))) <=>\n   (?y.  (forall(x:A). P x ((y:A->B) x)))"), t341)
+  let skolem_tag = @tactics_refine.prove(@parser.parse_term("∀ P. ( TAGB(∀(x:A). ?y. P x ((y:B)))) <=>\n   (?y.  (∀(x:A). P x ((y:A->B) x)))"), t341)
   let t342 = @simp.rewrite_tac(@list.List([tagb(), @equal.gsym(@class.skolem_thm())]))
-  let skolem_tag2 = @tactics_refine.prove(@parser.parse_term("forall P. TAGB(?y. forall x. P x (y x)) <=> (forall x:A. (?y:B. P x y))"), t342)
+  let skolem_tag2 = @tactics_refine.prove(@parser.parse_term("∀ P. TAGB(?y. ∀ x. P x (y x)) <=> (∀ x:A. (?y:B. P x y))"), t342)
   let t343 = @simp.rewrite_tac(@list.List([@equal.gsym(@theorems.swap_forall_thm()), tagb()]))
-  let swap_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P:A->B->bool.  TAGB(forall y x. P x y) <=> (forall x. (forall y. P x y))"), t343)
-  let swap_exists_thm = iprove(@parser.parse_term("forall P:A->B->bool.  TAGB (?y x. P x y) <=> (?x. (?y. P x y))"))
-  let and_forall_tag = iprove(@parser.parse_term("forall P Q. TAGB(forall x. P x /\\ Q x) <=>\n   ((forall x. P x) /\\ (forall x. Q x))"))
+  let swap_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P:A->B->bool.  TAGB(∀ y x. P x y) <=> (∀ x. (∀ y. P x y))"), t343)
+  let swap_exists_thm = iprove(@parser.parse_term("∀ P:A->B->bool.  TAGB (?y x. P x y) <=> (?x. (?y. P x y))"))
+  let and_forall_tag = iprove(@parser.parse_term("∀ P Q. TAGB(∀ x. P x /\\ Q x) <=>\n   ((∀ x. P x) /\\ (∀ x. Q x))"))
   let t344 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let left_and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q.\n   TAGB(forall x. P x /\\ Q ) <=> ((forall x. P x) /\\  Q)"), t344)
+  let left_and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q.\n   TAGB(∀ x. P x /\\ Q ) <=> ((∀ x. P x) /\\  Q)"), t344)
   let t345 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let right_and_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q.\n   TAGB(forall x. P  /\\ Q x) <=> P /\\  (forall x. Q x)"), t345)
+  let right_and_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q.\n   TAGB(∀ x. P  /\\ Q x) <=> P /\\  (∀ x. Q x)"), t345)
   let t346 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let triv_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q.   TAGB(forall x:A. P \\/ Q) <=>(forall x:A. P) \\/  (forall x:A. Q)"), t346)
+  let triv_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q.   TAGB(∀ x:A. P \\/ Q) <=>(∀ x:A. P) \\/  (∀ x:A. Q)"), t346)
   let t347 = @tactics.then_tac(@simp.rewrite_tac(@list.List([tagb()])), @itab.itaut_tac)
-  let right_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB (forall x. P ==> Q x) <=> (P ==>  (forall x:A. Q x)) "), t347)
-  let or_exists_thm = iprove(@parser.parse_term("forall P Q.  TAGB(?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x) "))
-  let left_or_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x:A. P x \\/ Q) <=>  (?x. P x) \\/ Q "))
-  let right_or_exists_thm = iprove(@parser.parse_term("forall P Q.TAGB (?x:A. P \\/ Q x) <=>  P \\/ (?x. Q x)"))
-  let left_and_exists_thm = iprove(@parser.parse_term("forall P Q.TAGB (?x:A. P x /\\ Q) <=>  (?x:A. P x) /\\ Q"))
-  let right_and_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB (?x:A. P /\\ Q x) <=>  P /\\ (?x:A. Q x) "))
-  let triv_and_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB(?x:A. P /\\ Q) <=>  (?x:A. P) /\\  (?x:A. Q) "))
-  let left_imp_exists_thm = iprove(@parser.parse_term("forall P Q. TAGB(forall x. P x ==> Q) <=> ( (?x:A. P x) ==> Q) "))
-  let triv_forall_imp_thm = iprove(@parser.parse_term("forall P Q. TAGB(forall x:A. P ==> Q)  <=> ( (?x:A. P) ==>  (forall x:A. Q)) "))
-  let triv_exists_imp_thm = iprove(@parser.parse_term("forall P Q. TAGB(?x:A. P ==> Q)  <=> ((forall x:A. P) ==>  (?x:A. Q)) "))
+  let right_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB (∀ x. P ==> Q x) <=> (P ==>  (∀ x:A. Q x)) "), t347)
+  let or_exists_thm = iprove(@parser.parse_term("∀ P Q.  TAGB(?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x) "))
+  let left_or_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x:A. P x \\/ Q) <=>  (?x. P x) \\/ Q "))
+  let right_or_exists_thm = iprove(@parser.parse_term("∀ P Q.TAGB (?x:A. P \\/ Q x) <=>  P \\/ (?x. Q x)"))
+  let left_and_exists_thm = iprove(@parser.parse_term("∀ P Q.TAGB (?x:A. P x /\\ Q) <=>  (?x:A. P x) /\\ Q"))
+  let right_and_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB (?x:A. P /\\ Q x) <=>  P /\\ (?x:A. Q x) "))
+  let triv_and_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB(?x:A. P /\\ Q) <=>  (?x:A. P) /\\  (?x:A. Q) "))
+  let left_imp_exists_thm = iprove(@parser.parse_term("∀ P Q. TAGB(∀ x. P x ==> Q) <=> ( (?x:A. P x) ==> Q) "))
+  let triv_forall_imp_thm = iprove(@parser.parse_term("∀ P Q. TAGB(∀ x:A. P ==> Q)  <=> ( (?x:A. P) ==>  (∀ x:A. Q)) "))
+  let triv_exists_imp_thm = iprove(@parser.parse_term("∀ P Q. TAGB(?x:A. P ==> Q)  <=> ((∀ x:A. P) ==>  (?x:A. Q)) "))
   let t348 = @simp.rewrite_tac(@list.List([tagb(), @class.not_exists_thm()]))
-  let not_exists_tag = @tactics_refine.prove(@parser.parse_term("forall P. TAGB(forall x. ~(P x)) <=> ~((?x:A. P x)) "), t348)
+  let not_exists_tag = @tactics_refine.prove(@parser.parse_term("∀ P. TAGB(∀ x. ~(P x)) <=> ~((?x:A. P x)) "), t348)
   let t349 = @simp.rewrite_tac(@list.List([tagb(), @class.left_or_forall_thm()]))
-  let left_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB(forall x. P x \\/ Q) <=> (forall x:A. P x) \\/ Q "), t349)
+  let left_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB(∀ x. P x \\/ Q) <=> (∀ x:A. P x) \\/ Q "), t349)
   let t350 = @simp.rewrite_tac(@list.List([tagb(), @class.right_or_forall_thm()]))
-  let right_or_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB(forall x. P \\/ Q x) <=> P \\/ (forall x:A. Q x) "), t350)
+  let right_or_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB(∀ x. P \\/ Q x) <=> P \\/ (∀ x:A. Q x) "), t350)
   let t351 = @simp.rewrite_tac(@list.List([tagb(), @class.left_imp_forall_thm()]))
-  let left_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB(?x. P x ==> Q) <=> ((forall x:A. P x) ==> Q) "), t351)
+  let left_imp_forall_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB(?x. P x ==> Q) <=> ((∀ x:A. P x) ==> Q) "), t351)
   let t352 = @simp.rewrite_tac(@list.List([tagb(), @class.right_imp_exists_thm()]))
-  let right_imp_exists_tag = @tactics_refine.prove(@parser.parse_term("forall P Q. TAGB(?x:A. P ==> Q x) <=> (P ==> (?x:A. Q x)) "), t352)
+  let right_imp_exists_tag = @tactics_refine.prove(@parser.parse_term("∀ P Q. TAGB(?x:A. P ==> Q x) <=> (P ==> (?x:A. Q x)) "), t352)
   quant_right_conv_c.set(fn(x353 : String) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let var_name = x353
     fn(x354 : @kernel.Term) -> @kernel.Thm raise {
@@ -1493,23 +1493,23 @@ pub fn getquants(x361 : @kernel.Term) -> @list.List[String] raise {
 /// rewrite_conjs
 fn step_35() -> Unit raise {
   let t373 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t374 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall A u t B. (A ==> (mark_term (u:A) = t) ==> B) <=>\n         ((mark_term (u:A) = t) ==> A ==> B)"), t373)
+  let t374 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ A u t B. (A ==> (mark_term (u:A) = t) ==> B) <=>\n         ((mark_term (u:A) = t) ==> A ==> B)"), t373)
   let t372 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t375 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall u t C D. (((mark_term (u:A) = t) /\\ C) ==> D) <=>\n        ((mark_term (u:A) = t) ==> C ==> D)"), t372)
+  let t375 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ u t C D. (((mark_term (u:A) = t) /\\ C) ==> D) <=>\n        ((mark_term (u:A) = t) ==> C ==> D)"), t372)
   let t371 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t376 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall A u t. A /\\ (mark_term (u:A) = t)  <=>\n        (mark_term u = t) /\\ A "), t371)
+  let t376 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ A u t. A /\\ (mark_term (u:A) = t)  <=>\n        (mark_term u = t) /\\ A "), t371)
   let t370 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t377 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall u t A C. A /\\ (mark_term (u:A) = t) /\\ C <=>\n        (mark_term u = t) /\\ A /\\ C"), t370)
+  let t377 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ u t A C. A /\\ (mark_term (u:A) = t) /\\ C <=>\n        (mark_term u = t) /\\ A /\\ C"), t370)
   let t369 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t378 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall u a b B. (mark_term (u:A) = a) /\\ (mark_term u = b) /\\ B <=> (mark_term u = a) /\\ (a = b) /\\ B"), t369)
+  let t378 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ u a b B. (mark_term (u:A) = a) /\\ (mark_term u = b) /\\ B <=> (mark_term u = a) /\\ (a = b) /\\ B"), t369)
   let t368 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t379 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall u a b. (mark_term (u:A) = a) /\\ (mark_term u = b) <=> (mark_term u = a) /\\ (a = b)"), t368)
+  let t379 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ u a b. (mark_term (u:A) = a) /\\ (mark_term u = b) <=> (mark_term u = a) /\\ (a = b)"), t368)
   let t367 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t380 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall u t. (t = mark_term (u:A)) <=> (mark_term u = t)"), t367)
+  let t380 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ u t. (t = mark_term (u:A)) <=> (mark_term u = t)"), t367)
   let t366 = @list.List([@meson.meson_tac(@list.List([]))])
-  let t381 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall u. (mark_term (u:A) = mark_term u) <=> T"), t366)
+  let t381 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ u. (mark_term (u:A) = mark_term u) <=> T"), t366)
   let t365 = @list.List([@simp.rewrite_tac(@list.List([@theorems.conj_aci()]))])
-  rewrite_conjs_c.set(@list.List([@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C. (A /\\ B) /\\ C <=> A /\\ B /\\ C"), t365), t381, t380, t379, t378, t377, t376, t375, t374]))
+  rewrite_conjs_c.set(@list.List([@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C. (A /\\ B) /\\ C <=> A /\\ B /\\ C"), t365), t381, t380, t379, t378, t377, t376, t375, t374]))
 }
 
 ///|
@@ -1525,9 +1525,9 @@ pub fn rewrite_conjs() -> @list.List[@kernel.Thm] {
 /// higher_conjs
 fn step_36() -> Unit raise {
   let t383 = @list.List([@meson.meson_tac(@list.List([mark_term()]))])
-  let t384 = @tactics_refine.prove_by_refinement(@parser.parse_term("forall C u t. ((mark_term u = t) /\\ C (mark_term u)) <=>\n         ((mark_term u = t) /\\ C (t:A))"), t383)
+  let t384 = @tactics_refine.prove_by_refinement(@parser.parse_term("∀ C u t. ((mark_term u = t) /\\ C (mark_term u)) <=>\n         ((mark_term u = t) /\\ C (t:A))"), t383)
   let t382 = @list.List([@meson.meson_tac(@list.List([mark_term()]))])
-  higher_conjs_c.set(@list.List([@tactics_refine.prove_by_refinement(@parser.parse_term("forall C u t. ((mark_term u = t) ==> C (mark_term u)) <=>\n       ((mark_term u = t) ==> C (t:A))"), t382), t384]))
+  higher_conjs_c.set(@list.List([@tactics_refine.prove_by_refinement(@parser.parse_term("∀ C u t. ((mark_term u = t) ==> C (mark_term u)) <=>\n       ((mark_term u = t) ==> C (t:A))"), t382), t384]))
 }
 
 ///|
@@ -1543,7 +1543,7 @@ pub fn higher_conjs() -> @list.List[@kernel.Thm] {
 /// dropq_conv
 fn step_37() -> Unit raise {
   let t385 = @list.List([@meson.meson_tac(@list.List([]))])
-  let drop_exist : (@kernel.Term) -> @kernel.Thm raise = @simp.rewrite_conv(@list.List([@tactics_refine.prove_by_refinement(@parser.parse_term("forall t. ?(u:A). (u = t)"), t385)]))
+  let drop_exist : (@kernel.Term) -> @kernel.Thm raise = @simp.rewrite_conv(@list.List([@tactics_refine.prove_by_refinement(@parser.parse_term("∀ t. ?(u:A). (u = t)"), t385)]))
   dropq_conv_c.set(fn(x386 : String) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let qname = x386
     fn(x387 : @kernel.Term) -> @kernel.Thm raise {
@@ -1583,14 +1583,14 @@ pub fn dropq_conv(x : String) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
 ///|
 /// Jordan/tactics_ext2.ml:954
 fn step_38() -> Unit raise {
-  let t395 = @parser.parse_term("forall P Q R . (?(u:B). (?(x:A). (u = P x) /\\ (Q x)) /\\ (R u))")
+  let t395 = @parser.parse_term("∀ P Q R . (?(u:B). (?(x:A). (u = P x) /\\ (Q x)) /\\ (R u))")
   ignore(dropq_conv("u")(t395))
 }
 
 ///|
 /// Jordan/tactics_ext2.ml:955
 fn step_39() -> Unit raise {
-  let t396 = @parser.parse_term("forall P Q R. (forall(t:B). (?(x:A). P x /\\ (t = Q x)) ==> R t)")
+  let t396 = @parser.parse_term("∀ P Q R. (∀(t:B). (?(x:A). P x /\\ (t = Q x)) ==> R t)")
   ignore(dropq_conv("t")(t396))
 }
 
@@ -1844,8 +1844,8 @@ fn step_43() -> Unit raise {
   let t490 = @tactics_refine.prove(@parser.parse_term("(--. (&.n) = (&.m)) <=> ((&.n) + (&.m) = (&.0))"), @calc_rat.real_arith_tac)
   let t491 = @tactics_refine.prove(@parser.parse_term("(--. (&.n) <= (&.m)) <=> (&.0 <= (&.n) + (&.m))"), @calc_rat.real_arith_tac)
   let t492 = @tactics_refine.prove(@parser.parse_term("(--. (&.n) < (&.m)) <=> (&.0 < (&.n) + (&.m))"), @calc_rat.real_arith_tac)
-  let t493 = @calc_rat.real_arith(@parser.parse_term("forall(a:real) b. (a - b + b) = a"))
-  let list = @list.List([@analysis.real_neg_ge0(), @analysis.real_half_double(), @analysis.real_sub_refl(), @analysis.real_neg_neg(), @analysis.real_le_v1(), @arith.le_0(), @realax.real_add_linv(), @calc_int.real_add_rinv(), @analysis.real_neg_0(), @analysis.real_neg_le0(), @analysis.real_neg_ge0(), @analysis.real_le_negl(), @analysis.real_le_negr(), @analysis.real_le_neg2(), @real.real_neg_eq_0(), @analysis.real_sub_rneg(), @calc_rat.real_arith(@parser.parse_term("forall(x:real). (--x = x) <=>  (x = &.0)")), t493, @realax.real_add_lid(), @calc_int.real_add_rid(), @realax.real_inv_0(), @realax.real_of_num_eq(), @realax.real_of_num_le(), @real.real_of_num_lt(), @realax.real_of_num_add(), @realax.real_of_num_mul(), @analysis.real_pos(), @analysis.real_mul_rzero(), @analysis.real_mul_lzero(), @real.real_le_01(), @analysis.real_sub_rzero(), @analysis.real_le_square(), @analysis.real_mul_rid(), @realax.real_mul_lid(), @real.real_abs_zero(), @calc_int.real_abs_num(), @real.real_abs_1(), @calc_int.real_abs_neg(), @real.real_abs_pos(), @analysis.abs_zero(), @analysis.abs_abs(), @analysis.real_neg_lt0(), @analysis.real_neg_gt0(), @analysis.real_lt_neg2(), @analysis.real_neg_mul2(), @calc_int.real_of_num_pow(), @real.real_lt_inv_eq(), @real.real_pow_1(), @float.real_inv2(), t492, t491, t490, t489, t488, t487, t486, t485, t484, t483, t482, t481, @arith.exp_1(), @arith.exp_lt_0(), @arith.add_0(), t480, @arith.add_eq_0(), t479, @arith.eq_add_lcancel_0(), @arith.eq_add_rcancel_0(), @arith.lt_add(), @arith.lt_addr(), t478, t477, t476, t475, t474, @nums.not_suc(), @nums.suc_inj(), @arith.pre(), @arith.add_clauses(), @arith.mult(), @arith.mult_clauses(), @arith.le(), @arith.lt(), t473, t472, t471, @trivia.o_def(), @trivia.i_thm(), @trivia.i_o_id(), @real.real_pow_1(), @real.real_pow_one(), @int.int_add_linv(), @int.int_add_rinv(), @int.int_add_sub2(), @int.int_eq_neg2(), @int.int_le_neg2(), @int.int_le_negl(), @int.int_le_negr(), @int.int_lt_neg2(), @int.int_lt_neg2(), @int.int_neg_neg(), @int.int_neg_0(), @int.int_neg_eq_0(), @int.int_neg_ge0(), @int.int_neg_gt0(), @int.int_neg_le0(), @int.int_neg_lt0(), t470, @int.int_neg_mul2(), @int.int_neg_neg()])
+  let t493 = @calc_rat.real_arith(@parser.parse_term("∀(a:real) b. (a - b + b) = a"))
+  let list = @list.List([@analysis.real_neg_ge0(), @analysis.real_half_double(), @analysis.real_sub_refl(), @analysis.real_neg_neg(), @analysis.real_le_v1(), @arith.le_0(), @realax.real_add_linv(), @calc_int.real_add_rinv(), @analysis.real_neg_0(), @analysis.real_neg_le0(), @analysis.real_neg_ge0(), @analysis.real_le_negl(), @analysis.real_le_negr(), @analysis.real_le_neg2(), @real.real_neg_eq_0(), @analysis.real_sub_rneg(), @calc_rat.real_arith(@parser.parse_term("∀(x:real). (--x = x) <=>  (x = &.0)")), t493, @realax.real_add_lid(), @calc_int.real_add_rid(), @realax.real_inv_0(), @realax.real_of_num_eq(), @realax.real_of_num_le(), @real.real_of_num_lt(), @realax.real_of_num_add(), @realax.real_of_num_mul(), @analysis.real_pos(), @analysis.real_mul_rzero(), @analysis.real_mul_lzero(), @real.real_le_01(), @analysis.real_sub_rzero(), @analysis.real_le_square(), @analysis.real_mul_rid(), @realax.real_mul_lid(), @real.real_abs_zero(), @calc_int.real_abs_num(), @real.real_abs_1(), @calc_int.real_abs_neg(), @real.real_abs_pos(), @analysis.abs_zero(), @analysis.abs_abs(), @analysis.real_neg_lt0(), @analysis.real_neg_gt0(), @analysis.real_lt_neg2(), @analysis.real_neg_mul2(), @calc_int.real_of_num_pow(), @real.real_lt_inv_eq(), @real.real_pow_1(), @float.real_inv2(), t492, t491, t490, t489, t488, t487, t486, t485, t484, t483, t482, t481, @arith.exp_1(), @arith.exp_lt_0(), @arith.add_0(), t480, @arith.add_eq_0(), t479, @arith.eq_add_lcancel_0(), @arith.eq_add_rcancel_0(), @arith.lt_add(), @arith.lt_addr(), t478, t477, t476, t475, t474, @nums.not_suc(), @nums.suc_inj(), @arith.pre(), @arith.add_clauses(), @arith.mult(), @arith.mult_clauses(), @arith.le(), @arith.lt(), t473, t472, t471, @trivia.o_def(), @trivia.i_thm(), @trivia.i_o_id(), @real.real_pow_1(), @real.real_pow_one(), @int.int_add_linv(), @int.int_add_rinv(), @int.int_add_sub2(), @int.int_eq_neg2(), @int.int_le_neg2(), @int.int_le_negl(), @int.int_le_negr(), @int.int_lt_neg2(), @int.int_lt_neg2(), @int.int_neg_neg(), @int.int_neg_0(), @int.int_neg_eq_0(), @int.int_neg_ge0(), @int.int_neg_gt0(), @int.int_neg_le0(), @int.int_neg_lt0(), t470, @int.int_neg_mul2(), @int.int_neg_neg()])
   let t494 = @simp.rewrite_tac(list)
   let (reduce_conv, reduce_tac) = (@simp.rewrite_conv(list), t494)
   reduce_conv_c.set(reduce_conv)
@@ -1860,7 +1860,7 @@ fn step_44() -> Unit raise {
   let t498 = @simp.asm_rewrite_tac(@list.List([]))
   let t495 = @parser.parse_term("(y:real)pow 2")
   let t499 = @list.List([@tactics_ext.disch_all_tac, @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term(" (x:real) pow 2"), t495]), @real.sqrt_mono_le())), t498, t497, t496])
-  real_pow_2_le_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall x y. (&.0 <= x) /\\ (&.0 <= y) /\\ (x pow 2 <=. y pow 2) ==> (x <=. y)"), t499))
+  real_pow_2_le_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ x y. (&.0 <= x) /\\ (&.0 <= y) /\\ (x pow 2 <=. y pow 2) ==> (x <=. y)"), t499))
 }
 
 ///|
@@ -1880,7 +1880,7 @@ fn step_45() -> Unit raise {
   let t503 = @simp.asm_rewrite_tac(@list.List([]))
   let t500 = @parser.parse_term("(y:real)pow 2")
   let t504 = @list.List([@tactics_ext.disch_all_tac, @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term(" (x:real) pow 2"), t500]), @real.sqrt_mono_lt())), t503, t502, t501])
-  real_pow_2_lt_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall x y. (&.0 <= x) /\\ (&.0 <= y) /\\ (x pow 2 <. y pow 2) ==> (x <. y)"), t504))
+  real_pow_2_lt_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ x y. (&.0 <= x) /\\ (&.0 <= y) /\\ (x pow 2 <. y pow 2) ==> (x <. y)"), t504))
 }
 
 ///|
@@ -2374,7 +2374,7 @@ pub fn unify_exists_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// unify_exists_tac_example
 fn step_54() -> Unit raise {
   unify_exists_tac_example_c.set(try {
-    @tactics_refine.prove_by_refinement(@parser.parse_term("forall C a b v A R TX U SS. (A v /\\ (a = v) /\\  (C:num->num->bool) a b /\\ R a ==>\n    ?v v'. TX v' /\\ U v v' /\\  C v' v /\\ SS v)"), @list.List([rep_basic_tac, unify_exists_tac, @tactics_ext.rep_gen_tac, @tactics.disch_tac, unify_exists_tac]))
+    @tactics_refine.prove_by_refinement(@parser.parse_term("∀ C a b v A R TX U SS. (A v /\\ (a = v) /\\  (C:num->num->bool) a b /\\ R a ==>\n    ?v v'. TX v' /\\ U v v' /\\  C v' v /\\ SS v)"), @list.List([rep_basic_tac, unify_exists_tac, @tactics_ext.rep_gen_tac, @tactics.disch_tac, unify_exists_tac]))
   } catch {
     failure => @kernel.refl(@parser.parse_term("T"))
   })
@@ -2582,7 +2582,7 @@ fn step_57() -> Unit raise {
   let t712 = @list.List([rep_basic_tac, fn(x711 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     drop_all_ant_tac(x711.0, x711.1)
   }, @simp.asm_rewrite_tac(@list.List([]))])
-  drop_ant_tac_example_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall A B C D E. (A /\\ (A ==> B) /\\ (C ==>D) /\\ C) ==> (E \\/ C \\/ B)"), t712))
+  drop_ant_tac_example_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("∀ A B C D E. (A /\\ (A ==> B) /\\ (C ==>D) /\\ C) ==> (E \\/ C \\/ B)"), t712))
 }
 
 ///|

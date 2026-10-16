@@ -117,7 +117,7 @@ fn step_1() -> Unit raise {
     @int.asm_arith_tac,
   )
   int_prime_c.set(
-    @tactics.prove(@parser.parse_term("forall p. int_prime(&p) <=> prime p"), t15),
+    @tactics.prove(@parser.parse_term("∀ p. int_prime(&p) <=> prime p"), t15),
   )
 }
 
@@ -251,7 +251,7 @@ fn step_2() -> Unit raise {
   real_poly_diff_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a x y.\n        sum(0..n) (\\i. a(i) * x pow i) - sum(0..n) (\\i. a(i) * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\i. sum(i+1..n) (\\j. a j * y pow (j - 1 - i)) * x pow i)",
+        "∀ n a x y.\n        sum(0..n) (\\i. a(i) * x pow i) - sum(0..n) (\\i. a(i) * y pow i) =\n        (x - y) *\n        sum(0..n-1) (\\i. sum(i+1..n) (\\j. a j * y pow (j - 1 - i)) * x pow i)",
       ),
       t32,
     ),
@@ -302,7 +302,7 @@ fn step_4() -> Unit raise {
   )
   finite_intseg_restrict_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P a b. FINITE {x:int | a <= x /\\ x <= b /\\ P x}"),
+      @parser.parse_term("∀ P a b. FINITE {x:int | a <= x /\\ x <= b /\\ P x}"),
       t33,
     ),
   )
@@ -570,7 +570,7 @@ fn step_5() -> Unit raise {
                   @tactics.match_mp_tac(
                     @sets.set_rule(
                       @parser.parse_term(
-                        "P c /\\ (forall x y. P x /\\ P y ==> x = y)\n                           ==> {x | P x} = {c}",
+                        "P c /\\ (∀ x y. P x /\\ P y ==> x = y)\n                           ==> {x | P x} = {c}",
                       ),
                     ),
                   ),
@@ -874,7 +874,7 @@ fn step_5() -> Unit raise {
               }
             },
             @list.List([
-              @parser.parse_term("~(forall i:num. i <= n ==> (p:int) divides (a i))"),
+              @parser.parse_term("~(∀ i:num. i <= n ==> (p:int) divides (a i))"),
               t46,
             ]),
           ),
@@ -901,7 +901,7 @@ fn step_5() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "forall a. (~(s = a) ==> CARD s <= n) /\\ CARD a <= n ==> CARD s <= n",
+        "∀ a. (~(s = a) ==> CARD s <= n) /\\ CARD a <= n ==> CARD s <= n",
       ),
     ),
   )
@@ -1004,7 +1004,7 @@ fn step_5() -> Unit raise {
   int_poly_lagrange_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p l r.\n    int_prime p /\\ r - l < p\n    ==> forall n a. ~(forall i. i <= n ==> (a i == &0) (mod p))\n              ==> CARD {x | l <= x /\\ x <= r /\\\n                            (isum(0..n) (\\i. a(i) * x pow i) == &0) (mod p)}\n                  <= n",
+        "∀ p l r.\n    int_prime p /\\ r - l < p\n    ==> ∀ n a. ~(∀ i. i <= n ==> (a i == &0) (mod p))\n              ==> CARD {x | l <= x /\\ x <= r /\\\n                            (isum(0..n) (\\i. a(i) * x pow i) == &0) (mod p)}\n                  <= n",
       ),
       t110,
     ),
@@ -1371,7 +1371,7 @@ fn step_6() -> Unit raise {
   num_lagrange_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p d. prime p /\\ 1 <= d\n         ==> CARD {x | x IN 1..p-1 /\\ (x EXP d == 1) (mod p)} <= d",
+        "∀ p d. prime p /\\ 1 <= d\n         ==> CARD {x | x IN 1..p-1 /\\ (x EXP d == 1) (mod p)} <= d",
       ),
       t151,
     ),
@@ -1401,7 +1401,7 @@ fn step_7() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall s f g:A->num.\n          FINITE s /\\ (forall x. x IN s ==> f(x) <= g(x)) /\\ nsum s f = nsum s g\n          ==> forall x. x IN s ==> f x = g x",
+      "∀ s f g:A->num.\n          FINITE s /\\ (∀ x. x IN s ==> f(x) <= g(x)) /\\ nsum s f = nsum s g\n          ==> ∀ x. x IN s ==> f x = g x",
     ),
     t153,
   )
@@ -1815,7 +1815,7 @@ fn step_7() -> Unit raise {
                                 @tactics.match_mp_tac(
                                   @sets.set_rule(
                                     @parser.parse_term(
-                                      "s' SUBSET s /\\ (forall x. x IN t /\\ f x IN s' ==> x IN t')\n      ==> s = IMAGE f t ==> s' SUBSET IMAGE f t'",
+                                      "s' SUBSET s /\\ (∀ x. x IN t /\\ f x IN s' ==> x IN t')\n      ==> s = IMAGE f t ==> s' SUBSET IMAGE f t'",
                                     ),
                                   ),
                                 ),
@@ -2716,7 +2716,7 @@ fn step_7() -> Unit raise {
   let t154 = @simp.once_rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("(forall x. p x ==> q x) <=> (forall x. x IN {x | p x} ==> q x)"),
+        @parser.parse_term("(∀ x. p x ==> q x) <=> (∀ x. x IN {x | p x} ==> q x)"),
       ),
     ]),
   )
@@ -2816,7 +2816,7 @@ fn step_7() -> Unit raise {
   count_orders_modulo_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p d. prime p /\\ d divides (p - 1)\n         ==> CARD {x | x IN 1..p-1 /\\ order p x = d} = phi(d)",
+        "∀ p d. prime p /\\ d divides (p - 1)\n         ==> CARD {x | x IN 1..p-1 /\\ order p x = d} = phi(d)",
       ),
       t306,
     ),
@@ -2852,7 +2852,7 @@ fn step_8() -> Unit raise {
   primitive_roots_modulo_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. prime p ==> CARD {x | x IN 1..p-1 /\\ order p x = p - 1} = phi(p - 1)",
+        "∀ p. prime p ==> CARD {x | x IN 1..p-1 /\\ order p x = p - 1} = phi(p - 1)",
       ),
       t310,
     ),
@@ -3080,7 +3080,7 @@ fn step_9() -> Unit raise {
   primitive_root_modulo_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. prime p ==> ?x. x IN 1..p-1 /\\ order p x = p - 1",
+        "∀ p. prime p ==> ?x. x IN 1..p-1 /\\ order p x = p - 1",
       ),
       t331,
     ),
@@ -3469,7 +3469,7 @@ fn step_10() -> Unit raise {
   coprime_1_plus_power_step_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p z k. prime p /\\ coprime(z,p) /\\ 3 <= p /\\ 1 <= k\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p EXP k) EXP p = 1 + w * p EXP (k + 1)",
+        "∀ p z k. prime p /\\ coprime(z,p) /\\ 3 <= p /\\ 1 <= k\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p EXP k) EXP p = 1 + w * p EXP (k + 1)",
       ),
       t375,
     ),
@@ -3630,7 +3630,7 @@ fn step_11() -> Unit raise {
   coprime_1_plus_power_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p z k. prime p /\\ coprime(z,p) /\\ 3 <= p\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p) EXP (p EXP k) = 1 + w * p EXP (k + 1)",
+        "∀ p z k. prime p /\\ coprime(z,p) /\\ 3 <= p\n           ==> ?w. coprime(w,p) /\\\n                   (1 + z * p) EXP (p EXP k) = 1 + w * p EXP (k + 1)",
       ),
       t393,
     ),
@@ -4414,7 +4414,7 @@ fn step_12() -> Unit raise {
           @tactics.match_mp_tac(
             @int.number_rule(
               @parser.parse_term(
-                "forall y. (a == 1) (mod y) /\\ x divides y ==> (a == 1) (mod x)",
+                "∀ y. (a == 1) (mod y) /\\ x divides y ==> (a == 1) (mod x)",
               ),
             ),
           ),
@@ -4868,7 +4868,7 @@ fn step_12() -> Unit raise {
   primitive_root_modulo_primepows_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. prime p /\\ 3 <= p\n       ==> ?g. forall j. 1 <= j ==> order(p EXP j) g = phi(p EXP j)",
+        "∀ p. prime p /\\ 3 <= p\n       ==> ?g. ∀ j. 1 <= j ==> order(p EXP j) g = phi(p EXP j)",
       ),
       t540,
     ),
@@ -5277,7 +5277,7 @@ fn step_13() -> Unit raise {
   primitive_root_modulo_primepow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(p EXP k - 1) /\\ order (p EXP k) x = phi(p EXP k)",
+        "∀ p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(p EXP k - 1) /\\ order (p EXP k) x = phi(p EXP k)",
       ),
       t587,
     ),
@@ -5781,7 +5781,7 @@ fn step_14() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall x y. R x y <=> R y x) /\\ (forall x y. P x ==> R x y)\n      ==> forall x y. P x \\/ P y ==> R x y",
+        "(∀ x y. R x y <=> R y x) /\\ (∀ x y. P x ==> R x y)\n      ==> ∀ x y. P x \\/ P y ==> R x y",
       ),
     ),
   )
@@ -6077,7 +6077,7 @@ fn step_14() -> Unit raise {
   prime_divisor_order_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n p. ~(n = 0) /\\ prime p /\\ p divides phi(n) ==> ?x. order n x = p",
+        "∀ n p. ~(n = 0) /\\ prime p /\\ p divides phi(n) ==> ?x. order n x = p",
       ),
       t677,
     ),
@@ -6210,7 +6210,7 @@ fn step_15() -> Unit raise {
   injective_exp_modulo_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0)\n         ==> ((forall a b. coprime(n,a) /\\ coprime(n,b) /\\\n                     (a EXP k == b EXP k) (mod n)\n                     ==> (a == b) (mod n)) <=>\n              coprime(k,phi n))",
+        "∀ n k. ~(n = 0)\n         ==> ((∀ a b. coprime(n,a) /\\ coprime(n,b) /\\\n                     (a EXP k == b EXP k) (mod n)\n                     ==> (a == b) (mod n)) <=>\n              coprime(k,phi n))",
       ),
       t700,
     ),
@@ -6373,7 +6373,7 @@ fn step_16() -> Unit raise {
   power_residue_modulo_eq_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0)\n         ==> ((forall a. coprime(n,a)\n                   ==> ?x. coprime(n,x) /\\ (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))",
+        "∀ n k. ~(n = 0)\n         ==> ((∀ a. coprime(n,a)\n                   ==> ?x. coprime(n,x) /\\ (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))",
       ),
       t720,
     ),
@@ -6713,7 +6713,7 @@ fn step_17() -> Unit raise {
   power_residue_modulo_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0)\n         ==> ((forall a. coprime(n,a) ==> ?x. (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))",
+        "∀ n k. ~(n = 0)\n         ==> ((∀ a. coprime(n,a) ==> ?x. (x EXP k == a) (mod n)) <=>\n              coprime(k,phi n))",
       ),
       t753,
     ),
@@ -6910,7 +6910,7 @@ fn step_20() -> Unit raise {
   primitive_root_double_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a. ODD n /\\ ODD a /\\ order n a = phi n\n         ==> order (2 * n) a = phi(2 * n)",
+        "∀ n a. ODD n /\\ ODD a /\\ order n a = phi n\n         ==> order (2 * n) a = phi(2 * n)",
       ),
       t781,
     ),
@@ -7220,7 +7220,7 @@ fn step_21() -> Unit raise {
   primitive_root_modulo_double_primepow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(2 * p EXP k - 1) /\\\n                 order (2 * p EXP k) x = phi(2 * p EXP k)",
+        "∀ p k. prime p /\\ 3 <= p /\\ 1 <= k\n         ==> ?x. x IN 1..(2 * p EXP k - 1) /\\\n                 order (2 * p EXP k) x = phi(2 * p EXP k)",
       ),
       t810,
     ),
@@ -7558,7 +7558,7 @@ fn step_24() -> Unit raise {
   cong_to_1_pow2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k x. ODD x /\\ 1 <= k ==> (x EXP (2 EXP k) == 1) (mod (2 EXP (k + 2)))",
+        "∀ k x. ODD x /\\ 1 <= k ==> (x EXP (2 EXP k) == 1) (mod (2 EXP (k + 2)))",
       ),
       t845,
     ),
@@ -7981,7 +7981,7 @@ fn step_25() -> Unit raise {
   no_primitive_root_modulo_pow2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k. 3 <= k ==> ~(?x. order (2 EXP k) x = phi(2 EXP k))",
+        "∀ k. 3 <= k ==> ~(?x. order (2 EXP k) x = phi(2 EXP k))",
       ),
       t885,
     ),
@@ -8360,7 +8360,7 @@ fn step_26() -> Unit raise {
   no_primitive_root_modulo_composite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b. 3 <= a /\\ 3 <= b /\\ coprime(a,b)\n         ==> ~(?x. order (a * b) x = phi(a * b))",
+        "∀ a b. 3 <= a /\\ 3 <= b /\\ coprime(a,b)\n         ==> ~(?x. order (a * b) x = phi(a * b))",
       ),
       t929,
     ),
@@ -9792,7 +9792,7 @@ fn step_27() -> Unit raise {
   primitive_root_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. (?x. order n x = phi n) <=>\n       n = 0 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)",
+        "∀ n. (?x. order n x = phi n) <=>\n       n = 0 \\/ n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)",
       ),
       t1097,
     ),
@@ -10182,7 +10182,7 @@ fn step_28() -> Unit raise {
   primitive_root_exists_nontrivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. (?x. x IN 1..n-1 /\\ order n x = phi n) <=>\n       n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ 1 <= k /\\ (n = p EXP k \\/ n = 2 * p EXP k)",
+        "∀ n. (?x. x IN 1..n-1 /\\ order n x = phi n) <=>\n       n = 2 \\/ n = 4 \\/\n       ?p k. prime p /\\ 3 <= p /\\ 1 <= k /\\ (n = p EXP k \\/ n = 2 * p EXP k)",
       ),
       t1150,
     ),
@@ -10752,7 +10752,7 @@ fn step_29() -> Unit raise {
   count_primitive_roots_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. {a | a < n /\\ coprime(n,a) /\\ order n a = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)",
+        "∀ n. {a | a < n /\\ coprime(n,a) /\\ order n a = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)",
       ),
       t1223,
     ),
@@ -10807,7 +10807,7 @@ fn step_30() -> Unit raise {
   count_primitive_roots_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. {x | x < n /\\ order n x = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)",
+        "∀ n. {x | x < n /\\ order n x = phi n} HAS_SIZE\n       (if n = 0 \\/ n = 2 \\/ n = 4 \\/\n           ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)\n        then phi(phi n) else 0)",
       ),
       t1227,
     ),
@@ -10929,7 +10929,7 @@ fn step_31() -> Unit raise {
   ])
   let t1318 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall i:num. (a EXP i == 1) (mod n) <=> (g EXP (r * i) == 1) (mod n)",
+      "∀ i:num. (a EXP i == 1) (mod n) <=> (g EXP (r * i) == 1) (mod n)",
     ),
     fn(
       x1316 : @kernel.Thm,
@@ -10971,7 +10971,7 @@ fn step_31() -> Unit raise {
   ])
   let t1313 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall d:num. (g EXP (d * k) == a) (mod n) <=>\n            (g EXP (d * k) == g EXP r) (mod n)",
+      "∀ d:num. (g EXP (d * k) == a) (mod n) <=>\n            (g EXP (d * k) == g EXP r) (mod n)",
     ),
     fn(
       x1311 : @kernel.Thm,
@@ -11752,7 +11752,7 @@ fn step_31() -> Unit raise {
   count_roots_modulo_primitive_gen_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        ~(n = 0) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)",
+        "∀ n a k.\n        ~(n = 0) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)",
       ),
       t1345,
     ),
@@ -11957,7 +11957,7 @@ fn step_32() -> Unit raise {
   count_roots_modulo_primitive_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        ~(n = 0) /\\ ~(k = 0) /\\ coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)",
+        "∀ n a k.\n        ~(n = 0) /\\ ~(k = 0) /\\ coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n)\n             then gcd(k,phi n) else 0)",
       ),
       t1366,
     ),
@@ -12250,7 +12250,7 @@ fn step_33() -> Unit raise {
   power_residue_modulo_primitive_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))",
+        "∀ n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))",
       ),
       t1404,
     ),
@@ -12293,7 +12293,7 @@ fn step_34() -> Unit raise {
   power_residue_modulo_prime_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a k.\n        prime p /\\ ~(p divides a)\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             (a EXP ((p - 1) DIV gcd(k,p - 1)) == 1) (mod p))",
+        "∀ p a k.\n        prime p /\\ ~(p divides a)\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             (a EXP ((p - 1) DIV gcd(k,p - 1)) == 1) (mod p))",
       ),
       t1410,
     ),
@@ -12320,7 +12320,7 @@ fn step_35() -> Unit raise {
   power_residue_modulo_primitive_order_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             order n a divides phi n DIV gcd (k,phi n))",
+        "∀ n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             order n a divides phi n DIV gcd (k,phi n))",
       ),
       t1411,
     ),
@@ -12361,7 +12361,7 @@ fn step_36() -> Unit raise {
   power_residue_modulo_primitive_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             gcd(k,phi n) divides phi n DIV order n a)",
+        "∀ n a k.\n        coprime(n,a) /\\ (?x. order n x = phi n)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             gcd(k,phi n) divides phi n DIV order n a)",
       ),
       t1414,
     ),
@@ -12401,7 +12401,7 @@ fn step_37() -> Unit raise {
   quadratic_residue_modulo_primitive_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a. coprime(n,a) /\\ 3 <= n /\\ (?x. order n x = phi n)\n         ==> ((?x. (x EXP 2 == a) (mod n)) <=> EVEN(phi n DIV order n a))",
+        "∀ n a. coprime(n,a) /\\ 3 <= n /\\ (?x. order n x = phi n)\n         ==> ((?x. (x EXP 2 == a) (mod n)) <=> EVEN(phi n DIV order n a))",
       ),
       t1419,
     ),
@@ -12691,7 +12691,7 @@ fn step_38() -> Unit raise {
   power_residue_modulo_primitive_power_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n g m k.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP k == g EXP m) (mod n)) <=> gcd(k,phi n) divides m)",
+        "∀ n g m k.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP k == g EXP m) (mod n)) <=> gcd(k,phi n) divides m)",
       ),
       t1441,
     ),
@@ -12748,7 +12748,7 @@ fn step_39() -> Unit raise {
   quadratic_residue_modulo_primitive_power_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n g m.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP 2 == g EXP m) (mod n)) <=>\n             3 <= n ==> EVEN m)",
+        "∀ n g m.\n        coprime(n,g) /\\ order n g = phi n\n        ==> ((?x. (x EXP 2 == g EXP m) (mod n)) <=>\n             3 <= n ==> EVEN m)",
       ),
       t1448,
     ),
@@ -12865,7 +12865,7 @@ fn step_40() -> Unit raise {
   count_power_residues_modulo_primitive_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0) /\\ (?g. order n g = phi n)\n         ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)}\n             HAS_SIZE phi n DIV gcd(k,phi n)",
+        "∀ n k. ~(n = 0) /\\ (?g. order n g = phi n)\n         ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)}\n             HAS_SIZE phi n DIV gcd(k,phi n)",
       ),
       t1459,
     ),
@@ -12913,7 +12913,7 @@ fn step_41() -> Unit raise {
   count_quadratic_residues_modulo_primitive_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. 3 <= n /\\ (?g. order n g = phi n)\n       ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP 2 == a) (mod n)}\n           HAS_SIZE phi n DIV 2",
+        "∀ n. 3 <= n /\\ (?g. order n g = phi n)\n       ==> {a | a < n /\\ coprime(n,a) /\\ ?x. (x EXP 2 == a) (mod n)}\n           HAS_SIZE phi n DIV 2",
       ),
       t1464,
     ),
@@ -13031,7 +13031,7 @@ fn step_42() -> Unit raise {
   int_of_num_power_residue_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k a. (?x:num. (x EXP k == a) (mod n)) <=>\n           (?x:int. (x pow k == &a) (mod &n))",
+        "∀ n k a. (?x:num. (x EXP k == a) (mod n)) <=>\n           (?x:int. (x pow k == &a) (mod &n))",
       ),
       t1484,
     ),
@@ -13383,7 +13383,7 @@ fn step_43() -> Unit raise {
   quadratic_residue_modulo_odd_power_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        ODD n /\\ coprime(n,a)\n        ==> ((?x. (x EXP 2 == a) (mod (n EXP k))) <=>\n             k = 0 \\/ ?x. (x EXP 2 == a) (mod n))",
+        "∀ n a k.\n        ODD n /\\ coprime(n,a)\n        ==> ((?x. (x EXP 2 == a) (mod (n EXP k))) <=>\n             k = 0 \\/ ?x. (x EXP 2 == a) (mod n))",
       ),
       t1534,
     ),
@@ -13847,7 +13847,7 @@ fn step_44() -> Unit raise {
   quadratic_residue_modulo_power_2_stable_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=>\n              (?x. (x EXP 2 == a) (mod 8)))",
+        "∀ a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=>\n              (?x. (x EXP 2 == a) (mod 8)))",
       ),
       t1594,
     ),
@@ -14047,7 +14047,7 @@ fn step_45() -> Unit raise {
   quadratic_residue_modulo_power_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=> (a == 1) (mod 8))",
+        "∀ a k. ODD a /\\ 3 <= k\n         ==> ((?x. (x EXP 2 == a) (mod (2 EXP k))) <=> (a == 1) (mod 8))",
       ),
       t1619,
     ),
@@ -14156,7 +14156,7 @@ fn step_46() -> Unit raise {
   generalized_euler_criterion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        (n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n         ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)) /\\\n        coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))",
+        "∀ n a k.\n        (n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 4 \\/\n         ?p k. prime p /\\ 3 <= p /\\ (n = p EXP k \\/ n = 2 * p EXP k)) /\\\n        coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             (a EXP (phi n DIV gcd(k,phi n)) == 1) (mod n))",
       ),
       t1631,
     ),
@@ -14458,7 +14458,7 @@ fn step_47() -> Unit raise {
   generalized_euler_criterion_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a k.\n        prime p\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             if p divides a then ~(k = 0)\n             else (a EXP ((p - 1) DIV gcd(k,p-1)) == 1) (mod p))",
+        "∀ p a k.\n        prime p\n        ==> ((?x. (x EXP k == a) (mod p)) <=>\n             if p divides a then ~(k = 0)\n             else (a EXP ((p - 1) DIV gcd(k,p-1)) == 1) (mod p))",
       ),
       t1665,
     ),
@@ -14632,7 +14632,7 @@ fn step_48() -> Unit raise {
   euler_criterion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. prime p\n         ==> ((?x. (x EXP 2 == a) (mod p)) <=>\n              p divides a \\/ (a EXP ((p - 1) DIV 2) == 1) (mod p))",
+        "∀ p a. prime p\n         ==> ((?x. (x EXP 2 == a) (mod p)) <=>\n              p divides a \\/ (a EXP ((p - 1) DIV 2) == 1) (mod p))",
       ),
       t1687,
     ),
@@ -15028,7 +15028,7 @@ fn step_49() -> Unit raise {
   ])
   let t1752 = @tactics.subgoal_then(
     @parser.parse_term(
-      "(forall p. prime p /\\ p divides a ==> index p (a * b) = index p a) /\\\n      (forall p. prime p /\\ p divides b ==> index p (a * b) = index p b)",
+      "(∀ p. prime p /\\ p divides a ==> index p (a * b) = index p a) /\\\n      (∀ p. prime p /\\ p divides b ==> index p (a * b) = index p b)",
     ),
     @tactics.strip_assume_tac,
   )
@@ -15067,7 +15067,7 @@ fn step_49() -> Unit raise {
       @meson.meson(
         @list.List([]),
         @parser.parse_term(
-          "(forall p. prime p /\\ (P p \\/ Q p) ==> R p) <=>\n      (forall p. prime p /\\ P p ==> R p) /\\ (forall p. prime p /\\ Q p ==> R p)",
+          "(∀ p. prime p /\\ (P p \\/ Q p) ==> R p) <=>\n      (∀ p. prime p /\\ P p ==> R p) /\\ (∀ p. prime p /\\ Q p ==> R p)",
         ),
       ),
     ]),
@@ -15125,7 +15125,7 @@ fn step_49() -> Unit raise {
       @simp.rewrite_tac(
         @list.List([
           @sets.set_rule(
-            @parser.parse_term("DISJOINT s t <=> forall x. ~(x IN s /\\ x IN t)"),
+            @parser.parse_term("DISJOINT s t <=> ∀ x. ~(x IN s /\\ x IN t)"),
           ),
         ]),
       ),
@@ -15915,7 +15915,7 @@ fn step_49() -> Unit raise {
   count_roots_modulo_odd_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        ODD n /\\ coprime(n,a) /\\ ~(k = 0)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if forall p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)",
+        "∀ n a k.\n        ODD n /\\ coprime(n,a) /\\ ~(k = 0)\n        ==> {x | x < n /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if ∀ p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)",
       ),
       t1794,
     ),
@@ -16035,7 +16035,7 @@ fn step_50() -> Unit raise {
   let t1836 = @drule.match_mp(
     @int.number_rule(
       @parser.parse_term(
-        "forall p. (a == 1) (mod n)\n            ==> p divides a /\\ p divides n ==> p divides 1",
+        "∀ p. (a == 1) (mod n)\n            ==> p divides a /\\ p divides n ==> p divides 1",
       ),
     ),
   )
@@ -16544,7 +16544,7 @@ fn step_50() -> Unit raise {
   count_roots_modulo_odd_alt_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        ODD n /\\ ~(k = 0)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if forall p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)",
+        "∀ n a k.\n        ODD n /\\ ~(k = 0)\n        ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == a) (mod n)} HAS_SIZE\n            (if ∀ p. prime p /\\ p divides n\n                    ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                                gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                        (mod (p EXP index p n))\n             then nproduct {p | prime p /\\ p divides n}\n                           (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))\n             else 0)",
       ),
       t1856,
     ),
@@ -16763,7 +16763,7 @@ fn step_51() -> Unit raise {
   power_residue_modulo_odd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a k.\n        ODD n /\\ ~(k = 0) /\\ coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             forall p. prime p /\\ p divides n\n                 ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                              gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                     (mod (p EXP index p n)))",
+        "∀ n a k.\n        ODD n /\\ ~(k = 0) /\\ coprime(n,a)\n        ==> ((?x. (x EXP k == a) (mod n)) <=>\n             ∀ p. prime p /\\ p divides n\n                 ==> (a EXP ((p EXP (index p n - 1) * (p - 1)) DIV\n                              gcd(k,p EXP (index p n - 1) * (p - 1))) == 1)\n                     (mod (p EXP index p n)))",
       ),
       t1890,
     ),
@@ -16863,7 +16863,7 @@ fn step_52() -> Unit raise {
   count_roots_modulo_primitive_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)}\n             HAS_SIZE gcd(k,phi n)",
+        "∀ n k. ~(n = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)}\n             HAS_SIZE gcd(k,phi n)",
       ),
       t1903,
     ),
@@ -17065,7 +17065,7 @@ fn step_53() -> Unit raise {
   count_roots_modulo_primitive_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0) /\\ ~(k = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE gcd(k,phi n)",
+        "∀ n k. ~(n = 0) /\\ ~(k = 0) /\\ (?x. order n x = phi n)\n         ==> { x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE gcd(k,phi n)",
       ),
       t1923,
     ),
@@ -17104,7 +17104,7 @@ fn step_54() -> Unit raise {
   count_roots_modulo_odd_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))",
+        "∀ n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ coprime(n,x) /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))",
       ),
       t1928,
     ),
@@ -17143,7 +17143,7 @@ fn step_55() -> Unit raise {
   count_roots_modulo_odd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))",
+        "∀ n k. ODD n /\\ ~(k = 0)\n         ==> {x | x < n /\\ (x EXP k == 1) (mod n)} HAS_SIZE\n             nproduct {p | prime p /\\ p divides n}\n                      (\\p. gcd(k,p EXP (index p n - 1) * (p - 1)))",
       ),
       t1933,
     ),
@@ -17201,7 +17201,7 @@ fn step_56() -> Unit raise {
   power_residue_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ~(n = 0) ==> ?a. a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)",
+        "∀ n k. ~(n = 0) ==> ?a. a < n /\\ coprime(n,a) /\\ ?x. (x EXP k == a) (mod n)",
       ),
       t1941,
     ),
@@ -18082,7 +18082,7 @@ fn step_57() -> Unit raise {
   quadratic_nonresidue_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. (?a. a < n /\\ coprime(n,a) /\\ ~(?x. (x EXP 2 == a) (mod n))) <=>\n       3 <= n",
+        "∀ n. (?a. a < n /\\ coprime(n,a) /\\ ~(?x. (x EXP 2 == a) (mod n))) <=>\n       3 <= n",
       ),
       t2053,
     ),

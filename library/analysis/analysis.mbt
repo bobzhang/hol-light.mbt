@@ -359,7 +359,7 @@ pub fn and_forall_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// F_IMP
 fn step_13() -> Unit raise {
-  f_imp_c.set(@class.taut(@parser.parse_term("forall t. ~t ==> t ==> F")))
+  f_imp_c.set(@class.taut(@parser.parse_term("∀ t. ~t ==> t ==> F")))
 }
 
 ///|
@@ -377,7 +377,7 @@ fn step_14() -> Unit raise {
   left_and_over_or_c.set(
     @class.taut(
       @parser.parse_term(
-        "forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3",
+        "∀ t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3",
       ),
     ),
   )
@@ -400,7 +400,7 @@ fn step_15() -> Unit raise {
   right_and_over_or_c.set(
     @class.taut(
       @parser.parse_term(
-        "forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1",
+        "∀ t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1",
       ),
     ),
   )
@@ -612,7 +612,7 @@ pub fn less_lemma1() -> @kernel.Thm {
 ///|
 /// LESS_SUC_REFL
 fn step_20() -> Unit raise {
-  less_suc_refl_c.set(@int.arith_rule(@parser.parse_term("forall n. n < SUC n")))
+  less_suc_refl_c.set(@int.arith_rule(@parser.parse_term("∀ n. n < SUC n")))
 }
 
 ///|
@@ -627,7 +627,7 @@ pub fn less_suc_refl() -> @kernel.Thm {
 ///|
 /// LESS_EQ_SUC_REFL
 fn step_21() -> Unit raise {
-  less_eq_suc_refl_c.set(@int.arith_rule(@parser.parse_term("forall n. n <= SUC n")))
+  less_eq_suc_refl_c.set(@int.arith_rule(@parser.parse_term("∀ n. n <= SUC n")))
 }
 
 ///|
@@ -698,7 +698,7 @@ pub fn less_mono_add() -> @kernel.Thm {
 /// LESS_SUC
 fn step_25() -> Unit raise {
   less_suc_c.set(
-    @int.arith_rule(@parser.parse_term("forall m n. m < n ==> m < (SUC n)")),
+    @int.arith_rule(@parser.parse_term("∀ m n. m < n ==> m < (SUC n)")),
   )
 }
 
@@ -737,7 +737,7 @@ pub fn less_add_1() -> @kernel.Thm {
 ///|
 /// SUC_SUB1
 fn step_27() -> Unit raise {
-  suc_sub1_c.set(@int.arith_rule(@parser.parse_term("forall m. SUC m - 1 = m")))
+  suc_sub1_c.set(@int.arith_rule(@parser.parse_term("∀ m. SUC m - 1 = m")))
 }
 
 ///|
@@ -752,7 +752,7 @@ pub fn suc_sub1() -> @kernel.Thm {
 ///|
 /// LESS_ADD_SUC
 fn step_28() -> Unit raise {
-  less_add_suc_c.set(@int.arith_rule(@parser.parse_term("forall m n. m < m + SUC n")))
+  less_add_suc_c.set(@int.arith_rule(@parser.parse_term("∀ m n. m < m + SUC n")))
 }
 
 ///|
@@ -785,7 +785,7 @@ pub fn or_less() -> @kernel.Thm {
 /// NOT_SUC_LESS_EQ
 fn step_30() -> Unit raise {
   not_suc_less_eq_c.set(
-    @int.arith_rule(@parser.parse_term("forall n m. ~(SUC n <= m) <=> m <= n")),
+    @int.arith_rule(@parser.parse_term("∀ n m. ~(SUC n <= m) <=> m <= n")),
   )
 }
 
@@ -804,7 +804,7 @@ pub fn not_suc_less_eq() -> @kernel.Thm {
 /// LESS_LESS_CASES
 fn step_31() -> Unit raise {
   less_less_cases_c.set(
-    @int.arith_rule(@parser.parse_term("forall m n. (m = n) \\/ m < n \\/ n < m")),
+    @int.arith_rule(@parser.parse_term("∀ m n. (m = n) \\/ m < n \\/ n < m")),
   )
 }
 
@@ -828,7 +828,7 @@ fn step_32() -> Unit raise {
   )
   sub_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall b c. c <= b ==> (forall a. a - (b - c) = (a + c) - b)"),
+      @parser.parse_term("∀ b c. c <= b ==> (∀ a. a - (b - c) = (a + c) - b)"),
       t51,
     ),
   )
@@ -847,7 +847,7 @@ pub fn sub_sub() -> @kernel.Thm {
 /// LESS_CASES_IMP
 fn step_33() -> Unit raise {
   less_cases_imp_c.set(
-    @int.arith_rule(@parser.parse_term("forall m n. ~(m < n) /\\ ~(m = n) ==> n < m")),
+    @int.arith_rule(@parser.parse_term("∀ m n. ~(m < n) /\\ ~(m = n) ==> n < m")),
   )
 }
 
@@ -863,7 +863,7 @@ pub fn less_cases_imp() -> @kernel.Thm {
 ///|
 /// SUB_LESS_EQ
 fn step_34() -> Unit raise {
-  sub_less_eq_c.set(@int.arith_rule(@parser.parse_term("forall n m. (n - m) <= n")))
+  sub_less_eq_c.set(@int.arith_rule(@parser.parse_term("∀ n m. (n - m) <= n")))
 }
 
 ///|
@@ -880,7 +880,7 @@ pub fn sub_less_eq() -> @kernel.Thm {
 fn step_35() -> Unit raise {
   sub_eq_eq_0_c.set(
     @int.arith_rule(
-      @parser.parse_term("forall m n. (m - n = m) <=> (m = 0) \\/ (n = 0)"),
+      @parser.parse_term("∀ m n. (m - n = m) <=> (m = 0) \\/ (n = 0)"),
     ),
   )
 }
@@ -899,7 +899,7 @@ pub fn sub_eq_eq_0() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   sub_left_less_eq_c.set(
     @int.arith_rule(
-      @parser.parse_term("forall m n p. m <= (n - p) <=> (m + p) <= n \\/ m <= 0"),
+      @parser.parse_term("∀ m n p. m <= (n - p) <=> (m + p) <= n \\/ m <= 0"),
     ),
   )
 }
@@ -919,7 +919,7 @@ pub fn sub_left_less_eq() -> @kernel.Thm {
 /// SUB_LEFT_GREATER_EQ
 fn step_37() -> Unit raise {
   sub_left_greater_eq_c.set(
-    @int.arith_rule(@parser.parse_term("forall m n p. m >= (n - p) <=> (m + p) >= n")),
+    @int.arith_rule(@parser.parse_term("∀ m n p. m >= (n - p) <=> (m + p) >= n")),
   )
 }
 
@@ -938,7 +938,7 @@ pub fn sub_left_greater_eq() -> @kernel.Thm {
 /// LESS_0_CASES
 fn step_38() -> Unit raise {
   less_0_cases_c.set(
-    @int.arith_rule(@parser.parse_term("forall m. (0 = m) \\/ 0 < m")),
+    @int.arith_rule(@parser.parse_term("∀ m. (0 = m) \\/ 0 < m")),
   )
 }
 
@@ -955,7 +955,7 @@ pub fn less_0_cases() -> @kernel.Thm {
 /// LESS_OR
 fn step_39() -> Unit raise {
   less_or_c.set(
-    @int.arith_rule(@parser.parse_term("forall m n. m < n ==> (SUC m) <= n")),
+    @int.arith_rule(@parser.parse_term("∀ m n. m < n ==> (SUC m) <= n")),
   )
 }
 
@@ -1034,7 +1034,7 @@ fn step_40() -> Unit raise {
   sub_old_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall m. 0 - m = 0) /\\\n                 (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))",
+        "(∀ m. 0 - m = 0) /\\\n                 (∀ m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))",
       ),
       t58,
     ),
@@ -1468,7 +1468,7 @@ fn step_44() -> Unit raise {
 fn step_45() -> Unit raise {
   let t145 = @simp.rewrite_tac(@list.List([@realarith.real_not_lt()]))
   real_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x <= y <=> ~(y < x)"), t145),
+    @tactics.prove(@parser.parse_term("∀ x y. x <= y <=> ~(y < x)"), t145),
   )
 }
 
@@ -1515,7 +1515,7 @@ pub fn real_ldistrib() -> @kernel.Thm {
 /// REAL_LT_IADD
 fn step_48() -> Unit raise {
   real_lt_iadd_c.set(
-    @calc_rat.real_arith(@parser.parse_term("forall x y z. y < z ==> x + y < x + z")),
+    @calc_rat.real_arith(@parser.parse_term("∀ x y z. y < z ==> x + y < x + z")),
   )
 }
 
@@ -1539,7 +1539,7 @@ fn step_49() -> Unit raise {
     ),
     t146,
   )
-  real_mul_rid_c.set(@tactics.prove(@parser.parse_term("forall x. x * &1 = x"), t147))
+  real_mul_rid_c.set(@tactics.prove(@parser.parse_term("∀ x. x * &1 = x"), t147))
 }
 
 ///|
@@ -1564,7 +1564,7 @@ fn step_50() -> Unit raise {
   )
   real_mul_rinv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ~(x = &0) ==> (x * (inv x) = &1)"),
+      @parser.parse_term("∀ x. ~(x = &0) ==> (x * (inv x) = &1)"),
       t149,
     ),
   )
@@ -1590,7 +1590,7 @@ fn step_51() -> Unit raise {
   )
   real_rdistrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) * z = (x * z) + (y * z)"),
+      @parser.parse_term("∀ x y z. (x + y) * z = (x * z) + (y * z)"),
       t152,
     ),
   )
@@ -1745,7 +1745,7 @@ fn step_52() -> Unit raise {
   )
   real_eq_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y = x + z) <=> (y = z)"),
+      @parser.parse_term("∀ x y z. (x + y = x + z) <=> (y = z)"),
       t165,
     ),
   )
@@ -1771,7 +1771,7 @@ fn step_53() -> Unit raise {
   )
   real_eq_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + z = y + z) <=> (x = y)"),
+      @parser.parse_term("∀ x y z. (x + z = y + z) <=> (x = y)"),
       t168,
     ),
   )
@@ -1815,7 +1815,7 @@ fn step_54() -> Unit raise {
     t177,
   )
   real_add_lid_uniq_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x + y = y) <=> (x = &0)"), t178),
+    @tactics.prove(@parser.parse_term("∀ x y. (x + y = y) <=> (x = &0)"), t178),
   )
 }
 
@@ -1840,7 +1840,7 @@ fn step_55() -> Unit raise {
     t180,
   )
   real_add_rid_uniq_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x + y = x) <=> (y = &0)"), t181),
+    @tactics.prove(@parser.parse_term("∀ x y. (x + y = x) <=> (y = &0)"), t181),
   )
 }
 
@@ -1869,7 +1869,7 @@ fn step_56() -> Unit raise {
     t183,
   )
   real_lneg_uniq_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x + y = &0) <=> (x = --y)"), t184),
+    @tactics.prove(@parser.parse_term("∀ x y. (x + y = &0) <=> (x = --y)"), t184),
   )
 }
 
@@ -1892,7 +1892,7 @@ fn step_57() -> Unit raise {
     t186,
   )
   real_rneg_uniq_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x + y = &0) <=> (y = --x)"), t187),
+    @tactics.prove(@parser.parse_term("∀ x y. (x + y = &0) <=> (y = --x)"), t187),
   )
 }
 
@@ -1928,7 +1928,7 @@ fn step_58() -> Unit raise {
     t192,
   )
   real_neg_add_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --(x + y) = (--x) + (--y)"), t193),
+    @tactics.prove(@parser.parse_term("∀ x y. --(x + y) = (--x) + (--y)"), t193),
   )
 }
 
@@ -1963,7 +1963,7 @@ fn step_59() -> Unit raise {
     t195,
   )
   real_mul_lzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 * x = &0"), t196),
+    @tactics.prove(@parser.parse_term("∀ x. &0 * x = &0"), t196),
   )
 }
 
@@ -1988,7 +1988,7 @@ fn step_60() -> Unit raise {
     t197,
   )
   real_mul_rzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x * &0 = &0"), t198),
+    @tactics.prove(@parser.parse_term("∀ x. x * &0 = &0"), t198),
   )
 }
 
@@ -2019,7 +2019,7 @@ fn step_61() -> Unit raise {
     t201,
   )
   real_neg_lmul_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --(x * y) = (--x) * y"), t202),
+    @tactics.prove(@parser.parse_term("∀ x y. --(x * y) = (--x) * y"), t202),
   )
 }
 
@@ -2042,7 +2042,7 @@ fn step_62() -> Unit raise {
     t204,
   )
   real_neg_rmul_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --(x * y) = x * (--y)"), t205),
+    @tactics.prove(@parser.parse_term("∀ x y. --(x * y) = x * (--y)"), t205),
   )
 }
 
@@ -2066,7 +2066,7 @@ fn step_63() -> Unit raise {
     t206,
   )
   real_neg_neg_c.set(
-    @tactics.prove(@parser.parse_term("forall x. --(--x) = x"), t207),
+    @tactics.prove(@parser.parse_term("∀ x. --(--x) = x"), t207),
   )
 }
 
@@ -2087,7 +2087,7 @@ fn step_64() -> Unit raise {
     @list.List([@equal.gsym(real_neg_lmul()), t208, real_neg_neg()]),
   )
   real_neg_mul2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (--x) * (--y) = x * y"), t209),
+    @tactics.prove(@parser.parse_term("∀ x y. (--x) * (--y) = x * y"), t209),
   )
 }
 
@@ -2215,7 +2215,7 @@ fn step_65() -> Unit raise {
   )
   real_lt_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) < (x + z) <=> y < z"),
+      @parser.parse_term("∀ x y z. (x + y) < (x + z) <=> y < z"),
       t221,
     ),
   )
@@ -2241,7 +2241,7 @@ fn step_66() -> Unit raise {
   )
   real_lt_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + z) < (y + z) <=> x < y"),
+      @parser.parse_term("∀ x y z. (x + z) < (y + z) <=> x < y"),
       t224,
     ),
   )
@@ -2262,7 +2262,7 @@ fn step_67() -> Unit raise {
   let t225 = @simp.rewrite_tac(@list.List([real_le()]))
   let t226 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t225)
   real_not_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. ~(x < y) <=> y <= x"), t226),
+    @tactics.prove(@parser.parse_term("∀ x y. ~(x < y) <=> y <= x"), t226),
   )
 }
 
@@ -2353,7 +2353,7 @@ fn step_68() -> Unit raise {
     t233,
   )
   real_lt_antisym_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. ~(x < y /\\ y < x)"), t234),
+    @tactics.prove(@parser.parse_term("∀ x y. ~(x < y /\\ y < x)"), t234),
   )
 }
 
@@ -2468,7 +2468,7 @@ fn step_69() -> Unit raise {
     t243,
   )
   real_lt_gt_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x < y ==> ~(y < x)"), t244),
+    @tactics.prove(@parser.parse_term("∀ x y. x < y ==> ~(y < x)"), t244),
   )
 }
 
@@ -2487,7 +2487,7 @@ fn step_70() -> Unit raise {
   let t245 = @simp.rewrite_tac(@list.List([real_le()]))
   let t246 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t245)
   real_not_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. ~(x <= y) <=> y < x"), t246),
+    @tactics.prove(@parser.parse_term("∀ x y. ~(x <= y) <=> y < x"), t246),
   )
 }
 
@@ -2512,7 +2512,7 @@ fn step_71() -> Unit raise {
   )
   let t248 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t247)
   real_le_total_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x <= y \\/ y <= x"), t248),
+    @tactics.prove(@parser.parse_term("∀ x y. x <= y \\/ y <= x"), t248),
   )
 }
 
@@ -2532,7 +2532,7 @@ fn step_72() -> Unit raise {
     @tactics.gen_tac,
     @simp.rewrite_tac(@list.List([real_le(), @realarith.real_lt_refl()])),
   )
-  real_le_refl_c.set(@tactics.prove(@parser.parse_term("forall x. x <= x"), t249))
+  real_le_refl_c.set(@tactics.prove(@parser.parse_term("∀ x. x <= x"), t249))
 }
 
 ///|
@@ -2823,7 +2823,7 @@ fn step_73() -> Unit raise {
   )
   real_le_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x <= y <=> x < y \\/ (x = y)"),
+      @parser.parse_term("∀ x y. x <= y <=> x < y \\/ (x = y)"),
       t272,
     ),
   )
@@ -2968,7 +2968,7 @@ fn step_74() -> Unit raise {
   )
   real_lt_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x < y <=> x <= y /\\ ~(x = y)"),
+      @parser.parse_term("∀ x y. x < y <=> x <= y /\\ ~(x = y)"),
       t286,
     ),
   )
@@ -2992,7 +2992,7 @@ fn step_75() -> Unit raise {
     t287,
   )
   real_lt_imp_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x < y ==> x <= y"), t288),
+    @tactics.prove(@parser.parse_term("∀ x y. x < y ==> x <= y"), t288),
   )
 }
 
@@ -3187,7 +3187,7 @@ fn step_76() -> Unit raise {
   )
   real_lte_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < y /\\ y <= z ==> x < z"),
+      @parser.parse_term("∀ x y z. x < y /\\ y <= z ==> x < z"),
       t304,
     ),
   )
@@ -3552,7 +3552,7 @@ fn step_77() -> Unit raise {
   )
   real_le_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x <= y /\\ y <= z ==> x <= z"),
+      @parser.parse_term("∀ x y z. x <= y /\\ y <= z ==> x <= z"),
       t341,
     ),
   )
@@ -3590,7 +3590,7 @@ fn step_78() -> Unit raise {
     t344,
   )
   real_neg_lt0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (--x) < &0 <=> &0 < x"), t345),
+    @tactics.prove(@parser.parse_term("∀ x. (--x) < &0 <=> &0 < x"), t345),
   )
 }
 
@@ -3611,7 +3611,7 @@ fn step_79() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.gsym(real_neg_lt0()), real_neg_neg()])),
   )
   real_neg_gt0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < (--x) <=> x < &0"), t346),
+    @tactics.prove(@parser.parse_term("∀ x. &0 < (--x) <=> x < &0"), t346),
   )
 }
 
@@ -3636,7 +3636,7 @@ fn step_80() -> Unit raise {
     t347,
   )
   real_neg_le0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (--x) <= &0 <=> &0 <= x"), t348),
+    @tactics.prove(@parser.parse_term("∀ x. (--x) <= &0 <=> &0 <= x"), t348),
   )
 }
 
@@ -3661,7 +3661,7 @@ fn step_81() -> Unit raise {
     t349,
   )
   real_neg_ge0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= (--x) <=> x <= &0"), t350),
+    @tactics.prove(@parser.parse_term("∀ x. &0 <= (--x) <=> x <= &0"), t350),
   )
 }
 
@@ -3742,7 +3742,7 @@ fn step_82() -> Unit raise {
   )
   real_lt_negtotal_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (x = &0) \\/ (&0 < x) \\/ (&0 < --x)"),
+      @parser.parse_term("∀ x. (x = &0) \\/ (&0 < x) \\/ (&0 < --x)"),
       t358,
     ),
   )
@@ -3821,7 +3821,7 @@ fn step_83() -> Unit raise {
     t364,
   )
   real_le_negtotal_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x \\/ &0 <= --x"), t365),
+    @tactics.prove(@parser.parse_term("∀ x. &0 <= x \\/ &0 <= --x"), t365),
   )
 }
 
@@ -3946,7 +3946,7 @@ fn step_84() -> Unit raise {
   )
   real_le_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= x /\\ &0 <= y ==> &0 <= (x * y)"),
+      @parser.parse_term("∀ x y. &0 <= x /\\ &0 <= y ==> &0 <= (x * y)"),
       t378,
     ),
   )
@@ -4078,7 +4078,7 @@ fn step_85() -> Unit raise {
     t390,
   )
   real_le_square_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x * x"), t391),
+    @tactics.prove(@parser.parse_term("∀ x. &0 <= x * x"), t391),
   )
 }
 
@@ -4129,7 +4129,7 @@ fn step_87() -> Unit raise {
   )
   real_le_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) <= (x + z) <=> y <= z"),
+      @parser.parse_term("∀ x y z. (x + y) <= (x + z) <=> y <= z"),
       t397,
     ),
   )
@@ -4158,7 +4158,7 @@ fn step_88() -> Unit raise {
   )
   real_le_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + z) <= (y + z) <=> x <= y"),
+      @parser.parse_term("∀ x y z. (x + z) <= (y + z) <=> x <= y"),
       t400,
     ),
   )
@@ -4194,7 +4194,7 @@ fn step_89() -> Unit raise {
   )
   real_lt_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall w x y z. w < x /\\ y < z ==> (w + y) < (x + z)"),
+      @parser.parse_term("∀ w x y z. w < x /\\ y < z ==> (w + y) < (x + z)"),
       t404,
     ),
   )
@@ -4288,7 +4288,7 @@ fn step_90() -> Unit raise {
   )
   real_lt_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ &0 < y ==> &0 < (x + y)"),
+      @parser.parse_term("∀ x y. &0 < x /\\ &0 < y ==> &0 < (x + y)"),
       t412,
     ),
   )
@@ -4329,7 +4329,7 @@ fn step_91() -> Unit raise {
   )
   real_lt_addneg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. y < (x + (--z)) <=> (y + z) < x"),
+      @parser.parse_term("∀ x y z. y < (x + (--z)) <=> (y + z) < x"),
       t417,
     ),
   )
@@ -4370,7 +4370,7 @@ fn step_92() -> Unit raise {
   )
   real_lt_addneg2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + (--y)) < z <=> x < (z + y)"),
+      @parser.parse_term("∀ x y z. (x + (--y)) < z <=> x < (z + y)"),
       t422,
     ),
   )
@@ -4570,7 +4570,7 @@ fn step_93() -> Unit raise {
     t444,
   )
   real_lt_add1_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x <= y ==> x < (y + &1)"), t445),
+    @tactics.prove(@parser.parse_term("∀ x y. x <= y ==> x < (y + &1)"), t445),
   )
 }
 
@@ -4596,7 +4596,7 @@ fn step_94() -> Unit raise {
   )
   let t447 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t446)
   real_sub_add_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x - y) + y = x"), t447),
+    @tactics.prove(@parser.parse_term("∀ x y. (x - y) + y = x"), t447),
   )
 }
 
@@ -4619,7 +4619,7 @@ fn step_95() -> Unit raise {
     t449,
   )
   real_sub_add2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. y + (x - y) = x"), t450),
+    @tactics.prove(@parser.parse_term("∀ x y. y + (x - y) = x"), t450),
   )
 }
 
@@ -4642,7 +4642,7 @@ fn step_96() -> Unit raise {
     ),
   )
   real_sub_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x - x = &0"), t451),
+    @tactics.prove(@parser.parse_term("∀ x. x - x = &0"), t451),
   )
 }
 
@@ -4824,7 +4824,7 @@ fn step_97() -> Unit raise {
     t469,
   )
   real_sub_0_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x - y = &0) <=> (x = y)"), t470),
+    @tactics.prove(@parser.parse_term("∀ x y. (x - y = &0) <=> (x = y)"), t470),
   )
 }
 
@@ -5048,7 +5048,7 @@ fn step_98() -> Unit raise {
     t493,
   )
   real_le_double_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x + x <=> &0 <= x"), t494),
+    @tactics.prove(@parser.parse_term("∀ x. &0 <= x + x <=> &0 <= x"), t494),
   )
 }
 
@@ -5084,7 +5084,7 @@ fn step_99() -> Unit raise {
     t497,
   )
   real_le_negl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (--x <= x) <=> (&0 <= x)"), t498),
+    @tactics.prove(@parser.parse_term("∀ x. (--x <= x) <=> (&0 <= x)"), t498),
   )
 }
 
@@ -5144,7 +5144,7 @@ fn step_100() -> Unit raise {
     t509,
   )
   real_le_negr_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (x <= --x) <=> (x <= &0)"), t510),
+    @tactics.prove(@parser.parse_term("∀ x. (x <= --x) <=> (x <= &0)"), t510),
   )
 }
 
@@ -5368,7 +5368,7 @@ fn step_101() -> Unit raise {
     @tactics.refl_tac,
   )
   real_neg_eq0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (--x = &0) <=> (x = &0)"), t530),
+    @tactics.prove(@parser.parse_term("∀ x. (--x = &0) <=> (x = &0)"), t530),
   )
 }
 
@@ -5409,7 +5409,7 @@ fn step_103() -> Unit raise {
     t533,
   )
   real_neg_sub_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --(x - y) = y - x"), t534),
+    @tactics.prove(@parser.parse_term("∀ x y. --(x - y) = y - x"), t534),
   )
 }
 
@@ -5443,7 +5443,7 @@ fn step_104() -> Unit raise {
     t538,
   )
   real_sub_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. &0 < x - y <=> y < x"), t539),
+    @tactics.prove(@parser.parse_term("∀ x y. &0 < x - y <=> y < x"), t539),
   )
 }
 
@@ -5477,7 +5477,7 @@ fn step_105() -> Unit raise {
     t543,
   )
   real_sub_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. &0 <= (x - y) <=> y <= x"), t544),
+    @tactics.prove(@parser.parse_term("∀ x y. &0 <= (x - y) <=> y <= x"), t544),
   )
 }
 
@@ -5667,7 +5667,7 @@ fn step_106() -> Unit raise {
   )
   real_eq_lmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x * y = x * z) <=> (x = &0) \\/ (y = z)"),
+      @parser.parse_term("∀ x y z. (x * y = x * z) <=> (x = &0) \\/ (y = z)"),
       t563,
     ),
   )
@@ -5693,7 +5693,7 @@ fn step_107() -> Unit raise {
   )
   real_eq_rmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x * z = y * z) <=> (z = &0) \\/ (x = y)"),
+      @parser.parse_term("∀ x y z. (x * z = y * z) <=> (z = &0) \\/ (x = y)"),
       t566,
     ),
   )
@@ -5717,7 +5717,7 @@ fn step_108() -> Unit raise {
   let t568 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t567)
   real_sub_ldistrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x * (y - z) = (x * y) - (x * z)"),
+      @parser.parse_term("∀ x y z. x * (y - z) = (x * y) - (x * z)"),
       t568,
     ),
   )
@@ -5745,7 +5745,7 @@ fn step_109() -> Unit raise {
   )
   real_sub_rdistrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y) * z = (x * z) - (y * z)"),
+      @parser.parse_term("∀ x y z. (x - y) * z = (x * z) - (y * z)"),
       t571,
     ),
   )
@@ -5891,7 +5891,7 @@ fn step_110() -> Unit raise {
     t581,
   )
   real_neg_eq_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (--x = y) <=> (x = --y)"), t582),
+    @tactics.prove(@parser.parse_term("∀ x y. (--x = y) <=> (x = --y)"), t582),
   )
 }
 
@@ -5916,7 +5916,7 @@ fn step_111() -> Unit raise {
     t583,
   )
   real_neg_minus1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. --x = (--(&1)) * x"), t584),
+    @tactics.prove(@parser.parse_term("∀ x. --x = (--(&1)) * x"), t584),
   )
 }
 
@@ -6074,7 +6074,7 @@ fn step_112() -> Unit raise {
     t600,
   )
   real_inv_nz_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ~(x = &0) ==> ~(inv x = &0)"), t601),
+    @tactics.prove(@parser.parse_term("∀ x. ~(x = &0) ==> ~(inv x = &0)"), t601),
   )
 }
 
@@ -6363,7 +6363,7 @@ fn step_113() -> Unit raise {
   )
   real_invinv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ~(x = &0) ==> (inv (inv x) = x)"),
+      @parser.parse_term("∀ x. ~(x = &0) ==> (inv (inv x) = x)"),
       t628,
     ),
   )
@@ -6441,7 +6441,7 @@ fn step_114() -> Unit raise {
     t635,
   )
   real_lt_imp_ne_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x < y ==> ~(x = y)"), t636),
+    @tactics.prove(@parser.parse_term("∀ x y. x < y ==> ~(x = y)"), t636),
   )
 }
 
@@ -6854,7 +6854,7 @@ fn step_115() -> Unit raise {
     t678,
   )
   real_inv_pos_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < x ==> &0 < inv x"), t679),
+    @tactics.prove(@parser.parse_term("∀ x. &0 < x ==> &0 < inv x"), t679),
   )
 }
 
@@ -7097,7 +7097,7 @@ fn step_116() -> Unit raise {
   )
   real_lt_lmul_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x ==> (&0 < (x * y) <=> &0 < y)"),
+      @parser.parse_term("∀ x y. &0 < x ==> (&0 < (x * y) <=> &0 < y)"),
       t703,
     ),
   )
@@ -7123,7 +7123,7 @@ fn step_117() -> Unit raise {
   )
   real_lt_rmul_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < y ==> (&0 < (x * y) <=> &0 < x)"),
+      @parser.parse_term("∀ x y. &0 < y ==> (&0 < (x * y) <=> &0 < x)"),
       t706,
     ),
   )
@@ -7208,7 +7208,7 @@ fn step_118() -> Unit raise {
   )
   real_lt_lmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x ==> ((x * y) < (x * z) <=> y < z)"),
+      @parser.parse_term("∀ x y z. &0 < x ==> ((x * y) < (x * z) <=> y < z)"),
       t714,
     ),
   )
@@ -7236,7 +7236,7 @@ fn step_119() -> Unit raise {
   )
   real_lt_rmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> ((x * z) < (y * z) <=> x < y)"),
+      @parser.parse_term("∀ x y z. &0 < z ==> ((x * z) < (y * z) <=> x < y)"),
       t717,
     ),
   )
@@ -7384,7 +7384,7 @@ fn step_120() -> Unit raise {
   )
   real_lt_rmul_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < y /\\ &0 < z ==> (x * z) < (y * z)"),
+      @parser.parse_term("∀ x y z. x < y /\\ &0 < z ==> (x * z) < (y * z)"),
       t728,
     ),
   )
@@ -7532,7 +7532,7 @@ fn step_121() -> Unit raise {
   )
   real_lt_lmul_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. y < z  /\\ &0 < x ==> (x * y) < (x * z)"),
+      @parser.parse_term("∀ x y z. y < z  /\\ &0 < x ==> (x * y) < (x * z)"),
       t739,
     ),
   )
@@ -7782,7 +7782,7 @@ fn step_122() -> Unit raise {
   )
   real_linv_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x * y = &1) ==> (x = inv y)"),
+      @parser.parse_term("∀ x y. (x * y = &1) ==> (x = inv y)"),
       t764,
     ),
   )
@@ -7808,7 +7808,7 @@ fn step_123() -> Unit raise {
   )
   real_rinv_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x * y = &1) ==> (y = inv x)"),
+      @parser.parse_term("∀ x y. (x * y = &1) ==> (y = inv x)"),
       t767,
     ),
   )
@@ -7871,7 +7871,7 @@ fn step_124() -> Unit raise {
   )
   real_neg_inv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ~(x = &0) ==> (--(inv x) = inv(--x))"),
+      @parser.parse_term("∀ x. ~(x = &0) ==> (--(inv x) = inv(--x))"),
       t775,
     ),
   )
@@ -7894,7 +7894,7 @@ fn step_125() -> Unit raise {
     @simp.rewrite_tac(@list.List([@realax.real_div(), @realax.real_mul_lid()])),
   )
   real_inv_1over_c.set(
-    @tactics.prove(@parser.parse_term("forall x. inv x = &1 / x"), t776),
+    @tactics.prove(@parser.parse_term("∀ x. inv x = &1 / x"), t776),
   )
 }
 
@@ -7913,7 +7913,7 @@ fn step_126() -> Unit raise {
   let t777 = @simp.rewrite_tac(
     @list.List([@arith.add1(), @realax.real_of_num_add()]),
   )
-  real_c.set(@tactics.prove(@parser.parse_term("forall n. &(SUC n) = &n + &1"), t777))
+  real_c.set(@tactics.prove(@parser.parse_term("∀ n. &(SUC n) = &n + &1"), t777))
 }
 
 ///|
@@ -7950,7 +7950,7 @@ fn step_127() -> Unit raise {
     ),
     t781,
   )
-  real_pos_c.set(@tactics.prove(@parser.parse_term("forall n. &0 <= &n"), t782))
+  real_pos_c.set(@tactics.prove(@parser.parse_term("∀ n. &0 <= &n"), t782))
 }
 
 ///|
@@ -8153,7 +8153,7 @@ fn step_128() -> Unit raise {
     t803,
   )
   real_le_v1_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m <= &n <=> m <= n"), t804),
+    @tactics.prove(@parser.parse_term("∀ m n. &m <= &n <=> m <= n"), t804),
   )
 }
 
@@ -8183,7 +8183,7 @@ fn step_129() -> Unit raise {
   )
   let t813 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t812)
   real_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m < &n <=> m < n"), t813),
+    @tactics.prove(@parser.parse_term("∀ m n. &m < &n <=> m < n"), t813),
   )
 }
 
@@ -8265,7 +8265,7 @@ fn step_130() -> Unit raise {
   )
   let t821 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t820)
   real_inj_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. (&m = &n) <=> (m = n)"), t821),
+    @tactics.prove(@parser.parse_term("∀ m n. (&m = &n) <=> (m = n)"), t821),
   )
 }
 
@@ -8303,7 +8303,7 @@ fn step_131() -> Unit raise {
     t824,
   )
   real_add_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m + &n = &(m + n)"), t825),
+    @tactics.prove(@parser.parse_term("∀ m n. &m + &n = &(m + n)"), t825),
   )
 }
 
@@ -8363,7 +8363,7 @@ fn step_132() -> Unit raise {
     t829,
   )
   real_mul_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m * &n = &(m * n)"), t830),
+    @tactics.prove(@parser.parse_term("∀ m n. &m * &n = &(m * n)"), t830),
   )
 }
 
@@ -8405,7 +8405,7 @@ fn step_134() -> Unit raise {
   )
   let t835 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t834)
   real_div_lzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 / x = &0"), t835),
+    @tactics.prove(@parser.parse_term("∀ x. &0 / x = &0"), t835),
   )
 }
 
@@ -8440,7 +8440,7 @@ fn step_135() -> Unit raise {
     t838,
   )
   real_lt_nz_c.set(
-    @tactics.prove(@parser.parse_term("forall n. ~(&n = &0) <=> (&0 < &n)"), t839),
+    @tactics.prove(@parser.parse_term("∀ n. ~(&n = &0) <=> (&0 < &n)"), t839),
   )
 }
 
@@ -8461,7 +8461,7 @@ fn step_136() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.gsym(real_inj()), real_lt_nz()])),
   )
   real_nz_imp_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall n. ~(n = 0) ==> &0 < &n"), t840),
+    @tactics.prove(@parser.parse_term("∀ n. ~(n = 0) ==> &0 < &n"), t840),
   )
 }
 
@@ -8544,7 +8544,7 @@ fn step_137() -> Unit raise {
   )
   real_lt_rdiv_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall y z. &0 < z ==> (&0 < (y / z) <=> &0 < y)"),
+      @parser.parse_term("∀ y z. &0 < z ==> (&0 < (y / z) <=> &0 < y)"),
       t848,
     ),
   )
@@ -8629,7 +8629,7 @@ fn step_138() -> Unit raise {
   )
   real_lt_rdiv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> ((x / z) < (y / z) <=> x < y)"),
+      @parser.parse_term("∀ x y z. &0 < z ==> ((x / z) < (y / z) <=> x < y)"),
       t856,
     ),
   )
@@ -8663,7 +8663,7 @@ fn step_139() -> Unit raise {
   )
   real_lt_fraction_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n d. ~(n = 0) ==> (&0 < (d / &n) <=> &0 < d)"),
+      @parser.parse_term("∀ n d. ~(n = 0) ==> (&0 < (d / &n) <=> &0 < d)"),
       t859,
     ),
   )
@@ -8974,7 +8974,7 @@ fn step_140() -> Unit raise {
   )
   real_lt_multiple_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n d. 1 < n ==> (d < (&n * d) <=> &0 < d)"),
+      @parser.parse_term("∀ n d. 1 < n ==> (d < (&n * d) <=> &0 < d)"),
       t891,
     ),
   )
@@ -9181,7 +9181,7 @@ fn step_141() -> Unit raise {
   )
   real_lt_fraction_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n d. (1 < n) ==> ((d / &n) < d <=> &0 < d)"),
+      @parser.parse_term("∀ n d. (1 < n) ==> ((d / &n) < d <=> &0 < d)"),
       t918,
     ),
   )
@@ -9212,7 +9212,7 @@ fn step_142() -> Unit raise {
     t919,
   )
   real_lt_half1_c.set(
-    @tactics.prove(@parser.parse_term("forall d. &0 < (d / &2) <=> &0 < d"), t920),
+    @tactics.prove(@parser.parse_term("∀ d. &0 < (d / &2) <=> &0 < d"), t920),
   )
 }
 
@@ -9241,7 +9241,7 @@ fn step_143() -> Unit raise {
     t922,
   )
   real_lt_half2_c.set(
-    @tactics.prove(@parser.parse_term("forall d. (d / &2) < d <=> &0 < d"), t923),
+    @tactics.prove(@parser.parse_term("∀ d. (d / &2) < d <=> &0 < d"), t923),
   )
 }
 
@@ -9270,7 +9270,7 @@ fn step_144() -> Unit raise {
     t924,
   )
   real_double_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x + x = &2 * x"), t925),
+    @tactics.prove(@parser.parse_term("∀ x. x + x = &2 * x"), t925),
   )
 }
 
@@ -9305,7 +9305,7 @@ fn step_145() -> Unit raise {
     t928,
   )
   real_half_double_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (x / &2) + (x / &2) = x"), t929),
+    @tactics.prove(@parser.parse_term("∀ x. (x / &2) + (x / &2) = x"), t929),
   )
 }
 
@@ -9339,7 +9339,7 @@ fn step_146() -> Unit raise {
     t933,
   )
   real_sub_sub_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x - y) - x = --y"), t934),
+    @tactics.prove(@parser.parse_term("∀ x y. (x - y) - x = --y"), t934),
   )
 }
 
@@ -9372,7 +9372,7 @@ fn step_147() -> Unit raise {
   )
   real_lt_add_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) < z <=> x < (z - y)"),
+      @parser.parse_term("∀ x y z. (x + y) < z <=> x < (z - y)"),
       t939,
     ),
   )
@@ -9409,7 +9409,7 @@ fn step_148() -> Unit raise {
   )
   real_lt_sub_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y) < z <=> x < z + y"),
+      @parser.parse_term("∀ x y z. (x - y) < z <=> x < z + y"),
       t944,
     ),
   )
@@ -9453,7 +9453,7 @@ fn step_149() -> Unit raise {
   )
   real_lt_sub_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < (y - z) <=> (x + z) < y"),
+      @parser.parse_term("∀ x y z. x < (y - z) <=> (x + z) < y"),
       t949,
     ),
   )
@@ -9479,7 +9479,7 @@ fn step_150() -> Unit raise {
   let t951 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t950)
   real_le_sub_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x <= (y - z) <=> (x + z) <= y"),
+      @parser.parse_term("∀ x y z. x <= (y - z) <=> (x + z) <= y"),
       t951,
     ),
   )
@@ -9505,7 +9505,7 @@ fn step_151() -> Unit raise {
   let t953 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t952)
   real_le_sub_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y) <= z <=> x <= z + y"),
+      @parser.parse_term("∀ x y z. (x - y) <= z <=> x <= z + y"),
       t953,
     ),
   )
@@ -9561,7 +9561,7 @@ fn step_152() -> Unit raise {
     t959,
   )
   real_lt_neg2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --x < --y <=> y < x"), t960),
+    @tactics.prove(@parser.parse_term("∀ x y. --x < --y <=> y < x"), t960),
   )
 }
 
@@ -9584,7 +9584,7 @@ fn step_153() -> Unit raise {
     t962,
   )
   real_le_neg2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --x <= --y <=> y <= x"), t963),
+    @tactics.prove(@parser.parse_term("∀ x y. --x <= --y <=> y <= x"), t963),
   )
 }
 
@@ -9605,7 +9605,7 @@ fn step_154() -> Unit raise {
     @simp.rewrite_tac(@list.List([@realax.real_sub(), @realax.real_add_lid()])),
   )
   real_sub_lzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 - x = --x"), t964),
+    @tactics.prove(@parser.parse_term("∀ x. &0 - x = --x"), t964),
   )
 }
 
@@ -9628,7 +9628,7 @@ fn step_155() -> Unit raise {
     ),
   )
   real_sub_rzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x - &0 = x"), t965),
+    @tactics.prove(@parser.parse_term("∀ x. x - &0 = x"), t965),
   )
 }
 
@@ -9656,7 +9656,7 @@ fn step_156() -> Unit raise {
   )
   real_lte_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall w x y z. w < x /\\ y <= z ==> (w + y) < (x + z)"),
+      @parser.parse_term("∀ w x y z. w < x /\\ y <= z ==> (w + y) < (x + z)"),
       t969,
     ),
   )
@@ -9694,7 +9694,7 @@ fn step_157() -> Unit raise {
   )
   real_lte_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ &0 <= y ==> &0 < (x + y)"),
+      @parser.parse_term("∀ x y. &0 < x /\\ &0 <= y ==> &0 < (x + y)"),
       t973,
     ),
   )
@@ -9815,7 +9815,7 @@ fn step_158() -> Unit raise {
   ])
   let t979 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall a b c d.\n    (a * b) - (c * d) = ((a * b) - (a * d)) + ((a * d) - (c * d))",
+      "∀ a b c d.\n    (a * b) - (c * d) = ((a * b) - (a * d)) + ((a * d) - (c * d))",
     ),
     fn(
       x976 : @kernel.Thm,
@@ -9879,7 +9879,7 @@ fn step_158() -> Unit raise {
   real_lt_mul2_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x1 x2 y1 y2. &0 <= x1 /\\ &0 <= y1 /\\ x1 < x2 /\\ y1 < y2 ==>\n        (x1 * y1) < (x2 * y2)",
+        "∀ x1 x2 y1 y2. &0 <= x1 /\\ &0 <= y1 /\\ x1 < x2 /\\ y1 < y2 ==>\n        (x1 * y1) < (x2 * y2)",
       ),
       t1003,
     ),
@@ -9905,7 +9905,7 @@ fn step_159() -> Unit raise {
   )
   let t1005 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1004)
   real_sub_lneg_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (--x) - y = --(x + y)"), t1005),
+    @tactics.prove(@parser.parse_term("∀ x y. (--x) - y = --(x + y)"), t1005),
   )
 }
 
@@ -9926,7 +9926,7 @@ fn step_160() -> Unit raise {
   )
   let t1007 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1006)
   real_sub_rneg_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x - (--y) = x + y"), t1007),
+    @tactics.prove(@parser.parse_term("∀ x y. x - (--y) = x + y"), t1007),
   )
 }
 
@@ -9955,7 +9955,7 @@ fn step_161() -> Unit raise {
     t1010,
   )
   real_sub_neg2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (--x) - (--y) = y - x"), t1011),
+    @tactics.prove(@parser.parse_term("∀ x y. (--x) - (--y) = y - x"), t1011),
   )
 }
 
@@ -9988,7 +9988,7 @@ fn step_162() -> Unit raise {
   )
   real_sub_triangle_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b c. (a - b) + (b - c) = a - c"),
+      @parser.parse_term("∀ a b c. (a - b) + (b - c) = a - c"),
       t1016,
     ),
   )
@@ -10012,7 +10012,7 @@ fn step_163() -> Unit raise {
   real_inv_mul_weak_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. ~(x = &0) /\\ ~(y = &0) ==>\n             (inv(x * y) = inv(x) * inv(y))",
+        "∀ x y. ~(x = &0) /\\ ~(y = &0) ==>\n             (inv(x * y) = inv(x) * inv(y))",
       ),
       t1017,
     ),
@@ -10054,7 +10054,7 @@ fn step_164() -> Unit raise {
   )
   real_le_lmul_local_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x ==> ((x * y) <= (x * z) <=> y <= z)"),
+      @parser.parse_term("∀ x y z. &0 < x ==> ((x * y) <= (x * z) <=> y <= z)"),
       t1021,
     ),
   )
@@ -10082,7 +10082,7 @@ fn step_165() -> Unit raise {
   )
   real_le_rmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> ((x * z) <= (y * z) <=> x <= y)"),
+      @parser.parse_term("∀ x y z. &0 < z ==> ((x * z) <= (y * z) <=> x <= y)"),
       t1024,
     ),
   )
@@ -10258,7 +10258,7 @@ fn step_166() -> Unit raise {
   real_sub_inv2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. ~(x = &0) /\\ ~(y = &0) ==>\n                (inv(x) - inv(y) = (y - x) / (x * y))",
+        "∀ x y. ~(x = &0) /\\ ~(y = &0) ==>\n                (inv(x) - inv(y) = (y - x) / (x * y))",
       ),
       t1044,
     ),
@@ -10287,7 +10287,7 @@ fn step_167() -> Unit raise {
     t1046,
   )
   real_sub_sub2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x - (x - y) = y"), t1047),
+    @tactics.prove(@parser.parse_term("∀ x y. x - (x - y) = y"), t1047),
   )
 }
 
@@ -10424,7 +10424,7 @@ fn step_168() -> Unit raise {
   )
   real_mean_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x < y ==> ?z. x < z /\\ z < y"),
+      @parser.parse_term("∀ x y. x < y ==> ?z. x < z /\\ z < y"),
       t1061,
     ),
   )
@@ -10515,7 +10515,7 @@ fn step_169() -> Unit raise {
   )
   real_eq_lmul2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. ~(x = &0) ==> ((y = z) <=> (x * y = x * z))"),
+      @parser.parse_term("∀ x y z. ~(x = &0) ==> ((y = z) <=> (x * y = x * z))"),
       t1070,
     ),
   )
@@ -10757,7 +10757,7 @@ fn step_170() -> Unit raise {
   real_le_mul2v_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x1 x2 y1 y2.\n    (& 0) <= x1 /\\ (& 0) <= y1 /\\ x1 <= x2 /\\ y1 <= y2 ==>\n    (x1 * y1) <= (x2 * y2)",
+        "∀ x1 x2 y1 y2.\n    (& 0) <= x1 /\\ (& 0) <= y1 /\\ x1 <= x2 /\\ y1 <= y2 ==>\n    (x1 * y1) <= (x2 * y2)",
       ),
       t1104,
     ),
@@ -11086,7 +11086,7 @@ fn step_171() -> Unit raise {
   )
   real_le_ldiv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x /\\ y <= (z * x) ==> (y / x) <= z"),
+      @parser.parse_term("∀ x y z. &0 < x /\\ y <= (z * x) ==> (y / x) <= z"),
       t1137,
     ),
   )
@@ -11417,7 +11417,7 @@ fn step_172() -> Unit raise {
   )
   real_le_rdiv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x /\\ (y * x) <= z ==> y <= (z / x)"),
+      @parser.parse_term("∀ x y z. &0 < x /\\ (y * x) <= z ==> y <= (z / x)"),
       t1173,
     ),
   )
@@ -11587,7 +11587,7 @@ fn step_173() -> Unit raise {
   )
   real_lt_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= x /\\ x < y ==> (x / y) < &1"),
+      @parser.parse_term("∀ x y. &0 <= x /\\ x < y ==> (x / y) < &1"),
       t1194,
     ),
   )
@@ -11839,7 +11839,7 @@ fn step_174() -> Unit raise {
   )
   real_le_lmul_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 <= x /\\ y <= z ==> (x * y) <= (x * z)"),
+      @parser.parse_term("∀ x y z. &0 <= x /\\ y <= z ==> (x * y) <= (x * z)"),
       t1215,
     ),
   )
@@ -11866,7 +11866,7 @@ fn step_175() -> Unit raise {
   )
   real_le_rmul_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 <= x /\\ y <= z ==> (y * x) <= (z * x)"),
+      @parser.parse_term("∀ x y z. &0 <= x /\\ y <= z ==> (y * x) <= (z * x)"),
       t1217,
     ),
   )
@@ -12439,7 +12439,7 @@ fn step_176() -> Unit raise {
   )
   real_inv_lt1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < x /\\ x < &1 ==> &1 < inv(x)"),
+      @parser.parse_term("∀ x. &0 < x /\\ x < &1 ==> &1 < inv(x)"),
       t1281,
     ),
   )
@@ -12583,7 +12583,7 @@ fn step_177() -> Unit raise {
     t1291,
   )
   real_lt_imp_nz_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < x ==> ~(x = &0)"), t1292),
+    @tactics.prove(@parser.parse_term("∀ x. &0 < x ==> ~(x = &0)"), t1292),
   )
 }
 
@@ -12702,7 +12702,7 @@ fn step_178() -> Unit raise {
   )
   real_eq_rmul_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. ~(z = &0) /\\ (x * z = y * z) ==> (x = y)"),
+      @parser.parse_term("∀ x y z. ~(z = &0) /\\ (x * z = y * z) ==> (x = y)"),
       t1301,
     ),
   )
@@ -12729,7 +12729,7 @@ fn step_179() -> Unit raise {
   )
   real_eq_lmul_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. ~(x = &0) /\\ (x * y = x * z) ==> (y = z)"),
+      @parser.parse_term("∀ x y z. ~(x = &0) /\\ (x * y = x * z) ==> (y = z)"),
       t1303,
     ),
   )
@@ -12755,7 +12755,7 @@ fn step_180() -> Unit raise {
     t1304,
   )
   real_fact_nz_c.set(
-    @tactics.prove(@parser.parse_term("forall n. ~(&(FACT n) = &0)"), t1305),
+    @tactics.prove(@parser.parse_term("∀ n. ~(&(FACT n) = &0)"), t1305),
   )
 }
 
@@ -12923,7 +12923,7 @@ fn step_181() -> Unit raise {
     t1320,
   )
   real_possq_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < (x * x) <=> ~(x = &0)"), t1321),
+    @tactics.prove(@parser.parse_term("∀ x. &0 < (x * x) <=> ~(x = &0)"), t1321),
   )
 }
 
@@ -12976,7 +12976,7 @@ fn step_182() -> Unit raise {
   real_sumsq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. ((x * x) + (y * y) = &0) <=> (x = &0) /\\ (y = &0)",
+        "∀ x y. ((x * x) + (y * y) = &0) <=> (x = &0) /\\ (y = &0)",
       ),
       t1330,
     ),
@@ -13004,7 +13004,7 @@ fn step_183() -> Unit raise {
     t1332,
   )
   real_eq_neg_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (--x = --y) <=> (x = y)"), t1333),
+    @tactics.prove(@parser.parse_term("∀ x y. (--x = --y) <=> (x = y)"), t1333),
   )
 }
 
@@ -13063,7 +13063,7 @@ fn step_184() -> Unit raise {
   real_div_mul2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x z. ~(x = &0) /\\ ~(z = &0) ==> forall y. y / z = (x * y) / (x * z)",
+        "∀ x z. ~(x = &0) /\\ ~(z = &0) ==> ∀ y. y / z = (x * y) / (x * z)",
       ),
       t1342,
     ),
@@ -13116,7 +13116,7 @@ fn step_185() -> Unit raise {
   )
   real_middle1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. a <= b ==> a <= (a + b) / &2"),
+      @parser.parse_term("∀ a b. a <= b ==> a <= (a + b) / &2"),
       t1348,
     ),
   )
@@ -13168,7 +13168,7 @@ fn step_186() -> Unit raise {
   )
   real_middle2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. a <= b ==> ((a + b) / &2) <= b"),
+      @parser.parse_term("∀ a b. a <= b ==> ((a + b) / &2) <= b"),
       t1354,
     ),
   )
@@ -13198,7 +13198,7 @@ fn step_187() -> Unit raise {
     t1355,
   )
   abs_zero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (abs(x) = &0) <=> (x = &0)"), t1356),
+    @tactics.prove(@parser.parse_term("∀ x. (abs(x) = &0) <=> (x = &0)"), t1356),
   )
 }
 
@@ -13515,7 +13515,7 @@ fn step_190() -> Unit raise {
     t1382,
   )
   abs_neg_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(--x) = abs(x)"), t1383),
+    @tactics.prove(@parser.parse_term("∀ x. abs(--x) = abs(x)"), t1383),
   )
 }
 
@@ -13642,7 +13642,7 @@ fn step_191() -> Unit raise {
   )
   abs_triangle_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x + y) <= abs(x) + abs(y)"),
+      @parser.parse_term("∀ x y. abs(x + y) <= abs(x) + abs(y)"),
       t1399,
     ),
   )
@@ -13684,7 +13684,7 @@ fn step_192() -> Unit raise {
     ),
     t1402,
   )
-  abs_pos_c.set(@tactics.prove(@parser.parse_term("forall x. &0 <= abs(x)"), t1403))
+  abs_pos_c.set(@tactics.prove(@parser.parse_term("∀ x. &0 <= abs(x)"), t1403))
 }
 
 ///|
@@ -13997,7 +13997,7 @@ fn step_193() -> Unit raise {
   )
   abs_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x * y) = abs(x) * abs(y)"),
+      @parser.parse_term("∀ x y. abs(x * y) = abs(x) * abs(y)"),
       t1451,
     ),
   )
@@ -14034,7 +14034,7 @@ fn step_194() -> Unit raise {
   abs_lt_mul2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall w x y z. abs(w) < y /\\ abs(x) < z ==> abs(w * x) < (y * z)",
+        "∀ w x y z. abs(w) < y /\\ abs(x) < z ==> abs(w * x) < (y * z)",
       ),
       t1455,
     ),
@@ -14079,7 +14079,7 @@ fn step_195() -> Unit raise {
     t1464,
   )
   abs_sub_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. abs(x - y) = abs(y - x)"), t1465),
+    @tactics.prove(@parser.parse_term("∀ x y. abs(x - y) = abs(y - x)"), t1465),
   )
 }
 
@@ -14177,7 +14177,7 @@ fn step_196() -> Unit raise {
     t1476,
   )
   abs_nz_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ~(x = &0) <=> &0 < abs(x)"), t1477),
+    @tactics.prove(@parser.parse_term("∀ x. ~(x = &0) <=> &0 < abs(x)"), t1477),
   )
 }
 
@@ -14248,7 +14248,7 @@ fn step_197() -> Unit raise {
   )
   abs_inv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ~(x = &0) ==> (abs(inv x) = inv(abs(x)))"),
+      @parser.parse_term("∀ x. ~(x = &0) ==> (abs(inv x) = inv(abs(x)))"),
       t1486,
     ),
   )
@@ -14283,7 +14283,7 @@ fn step_198() -> Unit raise {
     t1490,
   )
   abs_abs_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(abs(x)) = abs(x)"), t1491),
+    @tactics.prove(@parser.parse_term("∀ x. abs(abs(x)) = abs(x)"), t1491),
   )
 }
 
@@ -14371,7 +14371,7 @@ fn step_199() -> Unit raise {
     ),
     t1499,
   )
-  abs_le_c.set(@tactics.prove(@parser.parse_term("forall x. x <= abs(x)"), t1500))
+  abs_le_c.set(@tactics.prove(@parser.parse_term("∀ x. x <= abs(x)"), t1500))
 }
 
 ///|
@@ -14523,7 +14523,7 @@ fn step_200() -> Unit raise {
     t1515,
   )
   abs_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (abs(x) = x) <=> &0 <= x"), t1516),
+    @tactics.prove(@parser.parse_term("∀ x. (abs(x) = x) <=> &0 <= x"), t1516),
   )
 }
 
@@ -14543,7 +14543,7 @@ fn step_201() -> Unit raise {
     @tactics.gen_tac,
     @simp.rewrite_tac(@list.List([abs_refl(), real_le_v1(), @arith.le_0()])),
   )
-  abs_n_c.set(@tactics.prove(@parser.parse_term("forall n. abs(&n) = &n"), t1517))
+  abs_n_c.set(@tactics.prove(@parser.parse_term("∀ n. abs(&n) = &n"), t1517))
 }
 
 ///|
@@ -14793,7 +14793,7 @@ fn step_202() -> Unit raise {
   abs_between_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y d. &0 < d /\\ ((x - d) < y) /\\ (y < (x + d)) <=> abs(y - x) < d",
+        "∀ x y d. &0 < d /\\ ((x - d) < y) /\\ (y < (x + d)) <=> abs(y - x) < d",
       ),
       t1553,
     ),
@@ -14827,7 +14827,7 @@ fn step_203() -> Unit raise {
   )
   abs_bound_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y d. abs(x - y) < d ==> y < (x + d)"),
+      @parser.parse_term("∀ x y d. abs(x - y) < d ==> y < (x + d)"),
       t1557,
     ),
   )
@@ -14908,7 +14908,7 @@ fn step_204() -> Unit raise {
   )
   abs_stillnz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x - y) < abs(y) ==> ~(x = &0)"),
+      @parser.parse_term("∀ x y. abs(x - y) < abs(y) ==> ~(x = &0)"),
       t1565,
     ),
   )
@@ -14939,7 +14939,7 @@ fn step_205() -> Unit raise {
     t1567,
   )
   abs_cases_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (x = &0) \\/ &0 < abs(x)"), t1568),
+    @tactics.prove(@parser.parse_term("∀ x. (x = &0) \\/ &0 < abs(x)"), t1568),
   )
 }
 
@@ -15061,7 +15061,7 @@ fn step_206() -> Unit raise {
   )
   abs_between1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < z /\\ (abs(y - x)) < (z - x) ==> y < z"),
+      @parser.parse_term("∀ x y z. x < z /\\ (abs(y - x)) < (z - x) ==> y < z"),
       t1581,
     ),
   )
@@ -15154,7 +15154,7 @@ fn step_207() -> Unit raise {
     t1588,
   )
   abs_sign_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. abs(x - y) < y ==> &0 < x"), t1589),
+    @tactics.prove(@parser.parse_term("∀ x y. abs(x - y) < y ==> &0 < x"), t1589),
   )
 }
 
@@ -15292,7 +15292,7 @@ fn step_208() -> Unit raise {
   )
   abs_sign2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x - y) < --y ==> x < &0"),
+      @parser.parse_term("∀ x y. abs(x - y) < --y ==> x < &0"),
       t1603,
     ),
   )
@@ -15351,7 +15351,7 @@ fn step_209() -> Unit raise {
   )
   abs_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall y. ~(y = &0) ==> forall x. abs(x / y) = abs(x) / abs(y)"),
+      @parser.parse_term("∀ y. ~(y = &0) ==> ∀ x. abs(x / y) = abs(x) / abs(y)"),
       t1609,
     ),
   )
@@ -15536,7 +15536,7 @@ fn step_210() -> Unit raise {
   abs_circle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y h. abs(h) < (abs(y) - abs(x)) ==> abs(x + h) < abs(y)",
+        "∀ x y h. abs(h) < (abs(y) - abs(x)) ==> abs(x + h) < abs(y)",
       ),
       t1627,
     ),
@@ -15625,7 +15625,7 @@ fn step_211() -> Unit raise {
   )
   real_sub_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (abs(x) - abs(y)) <= abs(x - y)"),
+      @parser.parse_term("∀ x y. (abs(x) - abs(y)) <= abs(x - y)"),
       t1645,
     ),
   )
@@ -15685,7 +15685,7 @@ fn step_212() -> Unit raise {
   )
   abs_sub_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(abs(x) - abs(y)) <= abs(x - y)"),
+      @parser.parse_term("∀ x y. abs(abs(x) - abs(y)) <= abs(x - y)"),
       t1658,
     ),
   )
@@ -16279,7 +16279,7 @@ fn step_213() -> Unit raise {
   abs_between2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x0 x y0 y. x0 < y0 /\\ abs(x - x0) < (y0 - x0) / &2 /\\\n                          abs(y - y0) < (y0 - x0) / &2\n        ==> x < y",
+        "∀ x0 x y0 y. x0 < y0 /\\ abs(x - x0) < (y0 - x0) / &2 /\\\n                          abs(y - y0) < (y0 - x0) / &2\n        ==> x < y",
       ),
       t1739,
     ),
@@ -16392,7 +16392,7 @@ fn step_214() -> Unit raise {
   )
   abs_bounds_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x k. abs(x) <= k <=> --k <= x /\\ x <= k"),
+      @parser.parse_term("∀ x k. abs(x) <= k <=> --k <= x /\\ x <= k"),
       t1761,
     ),
   )
@@ -16430,7 +16430,7 @@ fn step_216() -> Unit raise {
     @simp.rewrite_tac(@list.List([pow(), real_mul_lzero()])),
   )
   pow_0_c.set(
-    @tactics.prove(@parser.parse_term("forall n. &0 pow (SUC n) = &0"), t1762),
+    @tactics.prove(@parser.parse_term("∀ n. &0 pow (SUC n) = &0"), t1762),
   )
 }
 
@@ -16466,7 +16466,7 @@ fn step_217() -> Unit raise {
   )
   pow_nz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. ~(c = &0) ==> ~(c pow n = &0)"),
+      @parser.parse_term("∀ c n. ~(c = &0) ==> ~(c pow n = &0)"),
       t1766,
     ),
   )
@@ -16577,7 +16577,7 @@ fn step_218() -> Unit raise {
   )
   pow_inv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. ~(c = &0) ==> (inv(c pow n) = (inv c) pow n)"),
+      @parser.parse_term("∀ c n. ~(c = &0) ==> (inv(c pow n) = (inv c) pow n)"),
       t1778,
     ),
   )
@@ -16602,7 +16602,7 @@ fn step_219() -> Unit raise {
   )
   pow_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. abs(c) pow n = abs(c pow n)"),
+      @parser.parse_term("∀ c n. abs(c) pow n = abs(c pow n)"),
       t1780,
     ),
   )
@@ -16754,7 +16754,7 @@ fn step_220() -> Unit raise {
   )
   pow_plus1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall e n. &0 < e ==> (&1 + (&n * e)) <= (&1 + e) pow n"),
+      @parser.parse_term("∀ e n. &0 < e ==> (&1 + (&n * e)) <= (&1 + e) pow n"),
       t1801,
     ),
   )
@@ -16788,7 +16788,7 @@ fn step_221() -> Unit raise {
   )
   pow_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c m n. c pow (m + n) = (c pow m) * (c pow n)"),
+      @parser.parse_term("∀ c m n. c pow (m + n) = (c pow m) * (c pow n)"),
       t1804,
     ),
   )
@@ -16816,7 +16816,7 @@ fn step_222() -> Unit raise {
     ),
     t1805,
   )
-  pow_1_c.set(@tactics.prove(@parser.parse_term("forall x. x pow 1 = x"), t1806))
+  pow_1_c.set(@tactics.prove(@parser.parse_term("∀ x. x pow 1 = x"), t1806))
 }
 
 ///|
@@ -16841,7 +16841,7 @@ fn step_223() -> Unit raise {
     ),
     t1807,
   )
-  pow_2_c.set(@tactics.prove(@parser.parse_term("forall x. x pow 2 = x * x"), t1808))
+  pow_2_c.set(@tactics.prove(@parser.parse_term("∀ x. x pow 2 = x * x"), t1808))
 }
 
 ///|
@@ -16880,7 +16880,7 @@ fn step_224() -> Unit raise {
   )
   pow_pos_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. &0 <= x ==> &0 <= (x pow n)"),
+      @parser.parse_term("∀ x n. &0 <= x ==> &0 <= (x pow n)"),
       t1812,
     ),
   )
@@ -16924,7 +16924,7 @@ fn step_225() -> Unit raise {
   pow_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x y. &0 <= x /\\ x <= y ==> (x pow n) <= (y pow n)",
+        "∀ n x y. &0 <= x /\\ x <= y ==> (x pow n) <= (y pow n)",
       ),
       t1817,
     ),
@@ -16954,7 +16954,7 @@ fn step_226() -> Unit raise {
     t1818,
   )
   pow_m1_c.set(
-    @tactics.prove(@parser.parse_term("forall n. abs((--(&1)) pow n) = &1"), t1819),
+    @tactics.prove(@parser.parse_term("∀ n. abs((--(&1)) pow n) = &1"), t1819),
   )
 }
 
@@ -16988,7 +16988,7 @@ fn step_227() -> Unit raise {
   )
   pow_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. (x * y) pow n = (x pow n) * (y pow n)"),
+      @parser.parse_term("∀ n x y. (x * y) pow n = (x pow n) * (y pow n)"),
       t1823,
     ),
   )
@@ -17011,7 +17011,7 @@ fn step_228() -> Unit raise {
     @simp.rewrite_tac(@list.List([pow_2(), real_le_square()])),
   )
   real_le_square_pow_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x pow 2"), t1824),
+    @tactics.prove(@parser.parse_term("∀ x. &0 <= x pow 2"), t1824),
   )
 }
 
@@ -17034,7 +17034,7 @@ fn step_229() -> Unit raise {
     @simp.rewrite_tac(@list.List([abs_refl(), real_le_square_pow()])),
   )
   abs_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(x pow 2) = x pow 2"), t1825),
+    @tactics.prove(@parser.parse_term("∀ x. abs(x pow 2) = x pow 2"), t1825),
   )
 }
 
@@ -17078,7 +17078,7 @@ fn step_230() -> Unit raise {
     t1831,
   )
   real_le1_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &1 <= x ==> &1 <= (x pow 2)"), t1832),
+    @tactics.prove(@parser.parse_term("∀ x. &1 <= x ==> &1 <= (x pow 2)"), t1832),
   )
 }
 
@@ -17122,7 +17122,7 @@ fn step_231() -> Unit raise {
     t1838,
   )
   real_lt1_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &1 < x ==> &1 < (x pow 2)"), t1839),
+    @tactics.prove(@parser.parse_term("∀ x. &1 < x ==> &1 < (x pow 2)"), t1839),
   )
 }
 
@@ -17169,7 +17169,7 @@ fn step_232() -> Unit raise {
   )
   pow_pos_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. &0 < x ==> &0 < (x pow (SUC n))"),
+      @parser.parse_term("∀ x n. &0 < x ==> &0 < (x pow (SUC n))"),
       t1847,
     ),
   )
@@ -17222,7 +17222,7 @@ fn step_233() -> Unit raise {
     t1854,
   )
   pow_2_le1_c.set(
-    @tactics.prove(@parser.parse_term("forall n. &1 <= &2 pow n"), t1855),
+    @tactics.prove(@parser.parse_term("∀ n. &1 <= &2 pow n"), t1855),
   )
 }
 
@@ -17257,7 +17257,7 @@ fn step_234() -> Unit raise {
     ),
     t1859,
   )
-  pow_2_lt_c.set(@tactics.prove(@parser.parse_term("forall n. &n < &2 pow n"), t1860))
+  pow_2_lt_c.set(@tactics.prove(@parser.parse_term("∀ n. &n < &2 pow n"), t1860))
 }
 
 ///|
@@ -17316,7 +17316,7 @@ fn step_235() -> Unit raise {
     t1869,
   )
   pow_minus1_c.set(
-    @tactics.prove(@parser.parse_term("forall n. (--(&1)) pow (2 * n) = &1"), t1870),
+    @tactics.prove(@parser.parse_term("∀ n. (--(&1)) pow (2 * n) = &1"), t1870),
   )
 }
 
@@ -17347,7 +17347,7 @@ fn step_236() -> Unit raise {
   real_sup_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (?x. P x) /\\ (?z. forall x. P x ==> x < z) ==>\n     (?s. forall y. (?x. P x /\\ y < x) <=> y < s)",
+        "∀ P. (?x. P x) /\\ (?z. ∀ x. P x ==> x < z) ==>\n     (?s. ∀ y. (?x. P x /\\ y < x) <=> y < s)",
       ),
       t1872,
     ),
@@ -17371,7 +17371,7 @@ fn step_237() -> Unit raise {
   sup_def_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "sup s = @a. (forall x. x IN s ==> x <= a) /\\\n              (forall b. (forall x. x IN s ==> x <= b) ==> a <= b)",
+        "sup s = @a. (∀ x. x IN s ==> x <= a) /\\\n              (∀ b. (∀ x. x IN s ==> x <= b) ==> a <= b)",
       ),
     ),
   )
@@ -17405,7 +17405,7 @@ fn step_238() -> Unit raise {
   )
   sup_c.set(
     @tactics.prove(
-      @parser.parse_term("sup P = @s. forall y. (?x. P x /\\ y < x) <=> y < s"),
+      @parser.parse_term("sup P = @s. ∀ y. (?x. P x /\\ y < x) <=> y < s"),
       t1875,
     ),
   )
@@ -17524,7 +17524,7 @@ fn step_239() -> Unit raise {
   real_sup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (?x. P x) /\\ (?z. forall x. P x ==> x < z) ==>\n          (forall y. (?x. P x /\\ y < x) <=> y < sup P)",
+        "∀ P. (?x. P x) /\\ (?z. ∀ x. P x ==> x < z) ==>\n          (∀ y. (?x. P x /\\ y < x) <=> y < sup P)",
       ),
       t1883,
     ),
@@ -17868,7 +17868,7 @@ fn step_240() -> Unit raise {
   real_sup_ubound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (?x. P x) /\\ (?z. forall x. P x ==> x < z) ==>\n          (forall y. P y ==> y <= sup P)",
+        "∀ P. (?x. P x) /\\ (?z. ∀ x. P x ==> x < z) ==>\n          (∀ y. P y ==> y <= sup P)",
       ),
       t1913,
     ),
@@ -18061,7 +18061,7 @@ fn step_241() -> Unit raise {
   setok_le_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (?x. P x) /\\ (?z. forall x. P x ==> x <= z) <=>\n       (?x. P x) /\\ (?z. forall x. P x ==> x < z)",
+        "∀ P. (?x. P x) /\\ (?z. ∀ x. P x ==> x <= z) <=>\n       (?x. P x) /\\ (?z. ∀ x. P x ==> x < z)",
       ),
       t1931,
     ),
@@ -18087,7 +18087,7 @@ fn step_242() -> Unit raise {
   real_sup_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (?x. P x) /\\ (?z. forall x. P x ==> x <= z) ==>\n           (forall y. (?x. P x /\\ y < x) <=> y < sup P)",
+        "∀ P. (?x. P x) /\\ (?z. ∀ x. P x ==> x <= z) ==>\n           (∀ y. (?x. P x /\\ y < x) <=> y < sup P)",
       ),
       t1932,
     ),
@@ -18113,7 +18113,7 @@ fn step_243() -> Unit raise {
   real_sup_ubound_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (?x. P x) /\\ (?z. forall x. P x ==> x <= z) ==>\n          (forall y. P y ==> y <= sup P)",
+        "∀ P. (?x. P x) /\\ (?z. ∀ x. P x ==> x <= z) ==>\n          (∀ y. P y ==> y <= sup P)",
       ),
       t1933,
     ),
@@ -18136,7 +18136,7 @@ pub fn real_sup_ubound_le() -> @kernel.Thm {
 fn step_244() -> Unit raise {
   let t1934 = @meson.meson_tac(@list.List([]))
   let lemma = @tactics.prove(
-    @parser.parse_term("(forall x. (?n. x = &n) ==> P x) <=> forall n. P(&n)"),
+    @parser.parse_term("(∀ x. (?n. x = &n) ==> P x) <=> ∀ n. P(&n)"),
     t1934,
   )
   let t1936 = @meson.meson_tac(
@@ -18161,7 +18161,7 @@ fn step_244() -> Unit raise {
     t1936,
   )
   real_arch_simple_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ?n. x <= &n"), t1937),
+    @tactics.prove(@parser.parse_term("∀ x. ?n. x <= &n"), t1937),
   )
 }
 
@@ -19233,7 +19233,7 @@ fn step_245() -> Unit raise {
   )
   real_arch_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < x ==> forall y. ?n. y < &n * x"),
+      @parser.parse_term("∀ x. &0 < x ==> ∀ y. ?n. y < &n * x"),
       t2005,
     ),
   )
@@ -19859,7 +19859,7 @@ fn step_246() -> Unit raise {
   real_arch_least_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall y. &0 < y ==> forall x. &0 <= x ==>\n                        ?n. (&n * y) <= x /\\ x < (&(SUC n) * y)",
+        "∀ y. &0 < y ==> ∀ x. &0 <= x ==>\n                        ?n. (&n * y) <= x /\\ x < (&(SUC n) * y)",
       ),
       t2060,
     ),
@@ -19944,7 +19944,7 @@ fn step_247() -> Unit raise {
   )
   real_pow_lbound_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. &0 <= x ==> &1 + &n * x <= (&1 + x) pow n"),
+      @parser.parse_term("∀ x n. &0 <= x ==> &1 + &n * x <= (&1 + x) pow n"),
       t2067,
     ),
   )
@@ -20086,7 +20086,7 @@ fn step_248() -> Unit raise {
   )
   real_arch_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &1 < x ==> ?n. y < x pow n"),
+      @parser.parse_term("∀ x y. &1 < x ==> ?n. y < x pow n"),
       t2083,
     ),
   )
@@ -20108,7 +20108,7 @@ fn step_249() -> Unit raise {
     @list.List([real_arch_pow(), @real.real_of_num_lt(), @calc_num.arith()]),
   )
   real_arch_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ?n. x < &2 pow n"), t2084),
+    @tactics.prove(@parser.parse_term("∀ x. ?n. x < &2 pow n"), t2084),
   )
 }
 
@@ -20160,7 +20160,7 @@ fn step_254() -> Unit raise {
     @parser.parse_term("\\(n,m) f. (sm:num->num->(num->real)->real) n m f"),
   )
   let t2085 = @parser.parse_term(
-    "(forall f n. sm n 0 f = &0) /\\\n     (forall f m n. sm  n (SUC m) f = sm n m f + f(n + m))",
+    "(∀ f n. sm n 0 f = &0) /\\\n     (∀ f m n. sm  n (SUC m) f = sm n m f + f(n + m))",
   )
   let t2086 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t2090 = @tactics.then_tac(
@@ -20173,7 +20173,7 @@ fn step_254() -> Unit raise {
   sum_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "?sum. (forall f n. sum(n,0) f = &0) /\\\n         (forall f m n. sum(n,SUC m) f = sum(n,m) f + f(n + m))",
+        "?sum. (∀ f n. sum(n,0) f = &0) /\\\n         (∀ f m n. sum(n,SUC m) f = sum(n,m) f + f(n + m))",
       ),
       t2090,
     ),
@@ -20351,7 +20351,7 @@ fn step_257() -> Unit raise {
   psum_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f m n. sum(m,n) f = sum {i | m <= i /\\ i < m + n} f",
+        "∀ f m n. sum(m,n) f = sum {i | m <= i /\\ i < m + n} f",
       ),
       t2104,
     ),
@@ -20439,7 +20439,7 @@ fn step_258() -> Unit raise {
   psum_sum_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f m n. ~(m = 0 /\\ n = 0) ==> sum(m,n) f = sum(m..(m+n)-1) f",
+        "∀ f m n. ~(m = 0 /\\ n = 0) ==> sum(m,n) f = sum(m..(m+n)-1) f",
       ),
       t2111,
     ),
@@ -20476,7 +20476,7 @@ fn step_259() -> Unit raise {
   )
   sum_two_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n p. sum(0,n) f + sum(n,p) f = sum(0,n + p) f"),
+      @parser.parse_term("∀ f n p. sum(0,n) f + sum(n,p) f = sum(0,n + p) f"),
       t2114,
     ),
   )
@@ -20506,7 +20506,7 @@ fn step_260() -> Unit raise {
   )
   sum_diff_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f m n. sum(m,n) f = sum(0,m + n) f - sum(0,m) f"),
+      @parser.parse_term("∀ f m n. sum(m,n) f = sum(0,m + n) f - sum(0,m) f"),
       t2118,
     ),
   )
@@ -20555,7 +20555,7 @@ fn step_261() -> Unit raise {
   )
   abs_sum_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f m n. abs(sum(m,n) f) <= sum(m,n) (\\n. abs(f n))"),
+      @parser.parse_term("∀ f m n. abs(sum(m,n) f) <= sum(m,n) (\\n. abs(f n))"),
       t2123,
     ),
   )
@@ -20647,7 +20647,7 @@ fn step_262() -> Unit raise {
   sum_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g m n. (forall r. m <= r /\\ r < n + m ==> f(r) <= g(r))\n        ==> (sum(m,n) f <= sum(m,n) g)",
+        "∀ f g m n. (∀ r. m <= r /\\ r < n + m ==> f(r) <= g(r))\n        ==> (sum(m,n) f <= sum(m,n) g)",
       ),
       t2141,
     ),
@@ -20791,7 +20791,7 @@ fn step_263() -> Unit raise {
   sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g m n. (forall r. m <= r /\\ r < (n + m) ==> (f(r) = g(r)))\n        ==> (sum(m,n) f = sum(m,n) g)",
+        "∀ f g m n. (∀ r. m <= r /\\ r < (n + m) ==> (f(r) = g(r)))\n        ==> (sum(m,n) f = sum(m,n) g)",
       ),
       t2153,
     ),
@@ -20831,7 +20831,7 @@ fn step_264() -> Unit raise {
   )
   sum_pos_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. (forall n. &0 <= f(n)) ==> forall m n. &0 <= sum(m,n) f"),
+      @parser.parse_term("∀ f. (∀ n. &0 <= f(n)) ==> ∀ m n. &0 <= sum(m,n) f"),
       t2157,
     ),
   )
@@ -20878,7 +20878,7 @@ fn step_265() -> Unit raise {
   sum_pos_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f m n.\n     (forall n. m <= n ==> &0 <= f(n))\n     ==> &0 <= sum(m,n) f",
+        "∀ f m n.\n     (∀ n. m <= n ==> &0 <= f(n))\n     ==> &0 <= sum(m,n) f",
       ),
       t2165,
     ),
@@ -20921,7 +20921,7 @@ fn step_266() -> Unit raise {
   sum_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f m n. abs(sum(m,n) (\\m. abs(f m))) = sum(m,n) (\\m. abs(f m))",
+        "∀ f m n. abs(sum(m,n) (\\m. abs(f m))) = sum(m,n) (\\m. abs(f m))",
       ),
       t2171,
     ),
@@ -20973,7 +20973,7 @@ fn step_267() -> Unit raise {
   )
   sum_abs_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f m n. abs(sum(m,n) f) <= sum(m,n)(\\n. abs(f n))"),
+      @parser.parse_term("∀ f m n. abs(sum(m,n) f) <= sum(m,n)(\\n. abs(f n))"),
       t2177,
     ),
   )
@@ -21109,7 +21109,7 @@ fn step_268() -> Unit raise {
   sum_zero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f N. (forall n. n >= N ==> (f(n) = &0)) ==>\n         (forall m n. m >= N ==> (sum(m,n) f = &0))",
+        "∀ f N. (∀ n. n >= N ==> (f(n) = &0)) ==>\n         (∀ m n. m >= N ==> (sum(m,n) f = &0))",
       ),
       t2194,
     ),
@@ -21141,7 +21141,7 @@ fn step_269() -> Unit raise {
   sum_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g m n. sum(m,n) (\\n. f(n) + g(n)) = sum(m,n) f + sum(m,n) g",
+        "∀ f g m n. sum(m,n) (\\n. f(n) + g(n)) = sum(m,n) f + sum(m,n) g",
       ),
       t2196,
     ),
@@ -21177,7 +21177,7 @@ fn step_270() -> Unit raise {
   )
   sum_cmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f c m n. sum(m,n) (\\n. c * f(n)) = c * sum(m,n) f"),
+      @parser.parse_term("∀ f c m n. sum(m,n) (\\n. c * f(n)) = c * sum(m,n) f"),
       t2199,
     ),
   )
@@ -21212,7 +21212,7 @@ fn step_271() -> Unit raise {
   )
   sum_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n d. sum(n,d) (\\n. --(f n)) = --(sum(n,d) f)"),
+      @parser.parse_term("∀ f n d. sum(n,d) (\\n. --(f n)) = --(sum(n,d) f)"),
       t2202,
     ),
   )
@@ -21238,7 +21238,7 @@ fn step_272() -> Unit raise {
   sum_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g m n. sum(m,n)(\\n. (f n) - (g n)) = sum(m,n) f - sum(m,n) g",
+        "∀ f g m n. sum(m,n)(\\n. (f n) - (g n)) = sum(m,n) f - sum(m,n) g",
       ),
       t2205,
     ),
@@ -21315,7 +21315,7 @@ fn step_273() -> Unit raise {
   sum_subst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g m n. (forall p. m <= p /\\ p < (m + n) ==> (f p = g p))\n        ==> (sum(m,n) f = sum(m,n) g)",
+        "∀ f g m n. (∀ p. m <= p /\\ p < (m + n) ==> (f p = g p))\n        ==> (sum(m,n) f = sum(m,n) g)",
       ),
       t2217,
     ),
@@ -21395,7 +21395,7 @@ fn step_274() -> Unit raise {
   sum_nsub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n f c. sum(0,n) f - (&n * c) = sum(0,n)(\\p. f(p) - c)",
+        "∀ n f c. sum(0,n) f - (&n * c) = sum(0,n)(\\p. f(p) - c)",
       ),
       t2224,
     ),
@@ -21494,7 +21494,7 @@ fn step_275() -> Unit raise {
   sum_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f K m n. (forall p. m <= p /\\ p < (m + n) ==> (f(p) <= K))\n        ==> (sum(m,n) f <= (&n * K))",
+        "∀ f K m n. (∀ p. m <= p /\\ p < (m + n) ==> (f(p) <= K))\n        ==> (sum(m,n) f <= (&n * K))",
       ),
       t2237,
     ),
@@ -21535,7 +21535,7 @@ fn step_276() -> Unit raise {
   sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k f. sum(0,n)(\\m. sum(m * k,k) f) = sum(0,n * k) f",
+        "∀ n k f. sum(0,n)(\\m. sum(m * k,k) f) = sum(0,n * k) f",
       ),
       t2241,
     ),
@@ -21564,7 +21564,7 @@ fn step_277() -> Unit raise {
   )
   let t2243 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2242)
   sum_1_c.set(
-    @tactics.prove(@parser.parse_term("forall f n. sum(n,1) f = f(n)"), t2243),
+    @tactics.prove(@parser.parse_term("∀ f n. sum(n,1) f = f(n)"), t2243),
   )
 }
 
@@ -21590,7 +21590,7 @@ fn step_278() -> Unit raise {
   )
   sum_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n. sum(n,2) f = f(n) + f(n + 1)"),
+      @parser.parse_term("∀ f n. sum(n,2) f = f(n) + f(n + 1)"),
       t2246,
     ),
   )
@@ -21670,7 +21670,7 @@ fn step_279() -> Unit raise {
   sum_offset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n k. sum(0,n)(\\m. f(m + k)) = sum(0,n + k) f - sum(0,k) f",
+        "∀ f n k. sum(0,n)(\\m. f(m + k)) = sum(0,n + k) f - sum(0,k) f",
       ),
       t2261,
     ),
@@ -21709,7 +21709,7 @@ fn step_280() -> Unit raise {
   )
   sum_reindex_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f m k n. sum(m + k,n) f = sum(m,n)(\\r. f(r + k))"),
+      @parser.parse_term("∀ f m k n. sum(m + k,n) f = sum(m,n)(\\r. f(r + k))"),
       t2265,
     ),
   )
@@ -21740,7 +21740,7 @@ fn step_281() -> Unit raise {
     t2267,
   )
   sum_0_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. sum(m,n)(\\r. &0) = &0"), t2268),
+    @tactics.prove(@parser.parse_term("∀ m n. sum(m,n)(\\r. &0) = &0"), t2268),
   )
 }
 
@@ -21798,7 +21798,7 @@ fn step_282() -> Unit raise {
   sum_cancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n d. sum(n,d) (\\n. f(SUC n) - f(n)) = f(n + d) - f(n)",
+        "∀ f n d. sum(n,d) (\\n. f(SUC n) - f(n)) = f(n + d) - f(n)",
       ),
       t2273,
     ),
@@ -21898,7 +21898,7 @@ fn step_283() -> Unit raise {
   sum_horner_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n x. sum(0,SUC n)(\\i. f(i) * x pow i) =\n           f(0) + x * sum(0,n)(\\i. f(SUC i) * x pow i)",
+        "∀ f n x. sum(0,SUC n)(\\i. f(i) * x pow i) =\n           f(0) + x * sum(0,n)(\\i. f(SUC i) * x pow i)",
       ),
       t2289,
     ),
@@ -21932,7 +21932,7 @@ fn step_284() -> Unit raise {
   )
   sum_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c n. sum(0,n) (\\m. c) = &n * c"),
+      @parser.parse_term("∀ c n. sum(0,n) (\\m. c) = &n * c"),
       t2292,
     ),
   )
@@ -22015,7 +22015,7 @@ fn step_285() -> Unit raise {
   )
   sum_split_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n p. sum(m,n) f + sum(m + n,p) f = sum(m,n + p) f"),
+      @parser.parse_term("∀ f n p. sum(m,n) f + sum(m + n,p) f = sum(m,n + p) f"),
       t2314,
     ),
   )
@@ -22048,7 +22048,7 @@ fn step_286() -> Unit raise {
   sum_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f m1 n1 m2 n2.\n        sum(m1,n1) (\\a. sum(m2,n2) (\\b. f a b)) =\n        sum(m2,n2) (\\b. sum(m1,n1) (\\a. f a b))",
+        "∀ f m1 n1 m2 n2.\n        sum(m1,n1) (\\a. sum(m2,n2) (\\b. f a b)) =\n        sum(m2,n2) (\\b. sum(m1,n1) (\\a. f a b))",
       ),
       t2317,
     ),
@@ -22105,7 +22105,7 @@ fn step_287() -> Unit raise {
   sum_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall r. m <= r /\\ r < m + n ==> (f(r) = &0)) ==> (sum(m,n) f = &0)",
+        "(∀ r. m <= r /\\ r < m + n ==> (f(r) = &0)) ==> (sum(m,n) f = &0)",
       ),
       t2325,
     ),
@@ -22306,7 +22306,7 @@ fn step_288() -> Unit raise {
   sum_moreterms_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m n p.\n      n <= p /\\ (forall r. m + n <= r /\\ r < m + p ==> (f(r) = &0))\n      ==> (sum(m,p) f = sum(m,n) f)",
+        "∀ m n p.\n      n <= p /\\ (∀ r. m + n <= r /\\ r < m + p ==> (f(r) = &0))\n      ==> (sum(m,p) f = sum(m,n) f)",
       ),
       t2349,
     ),
@@ -22343,7 +22343,7 @@ fn step_289() -> Unit raise {
   sum_differences_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m n p.\n      n <= p /\\ (forall r. m + n <= r /\\ r < m + p ==> (f(r) = g(r)))\n      ==> (sum(m,p) f - sum(m,n) f = sum(m,p) g - sum(m,n) g)",
+        "∀ m n p.\n      n <= p /\\ (∀ r. m + n <= r /\\ r < m + p ==> (f(r) = g(r)))\n      ==> (sum(m,p) f - sum(m,n) f = sum(m,p) g - sum(m,n) g)",
       ),
       t2351,
     ),
@@ -22601,7 +22601,7 @@ pub fn re_universe() -> @kernel.Thm {
 fn step_300() -> Unit raise {
   re_subset_c.set(
     @pair.new_definition(
-      @parser.parse_term("P re_subset Q <=> forall x:A. P x ==> Q x"),
+      @parser.parse_term("P re_subset Q <=> ∀ x:A. P x ==> Q x"),
     ),
   )
 }
@@ -22640,7 +22640,7 @@ fn step_302() -> Unit raise {
     @simp.rewrite_tac(@list.List([re_subset()])),
   )
   subseta_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall S:A->bool. S re_subset S"), t2362),
+    @tactics.prove(@parser.parse_term("∀ S:A->bool. S re_subset S"), t2362),
   )
 }
 
@@ -22667,7 +22667,7 @@ fn step_303() -> Unit raise {
   )
   compl_mem_c.set(
     @tactics.prove(
-      @parser.parse_term("forall S:A->bool. forall x. S x <=> ~(re_compl S x)"),
+      @parser.parse_term("∀ S:A->bool. ∀ x. S x <=> ~(re_compl S x)"),
       t2365,
     ),
   )
@@ -22709,7 +22709,7 @@ fn step_304() -> Unit raise {
   subseta_antisym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->bool. forall Q. P re_subset Q /\\ Q re_subset P <=> (P = Q)",
+        "∀ P:A->bool. ∀ Q. P re_subset Q /\\ Q re_subset P <=> (P = Q)",
       ),
       t2370,
     ),
@@ -22882,7 +22882,7 @@ fn step_305() -> Unit raise {
   subseta_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->bool. forall Q R. P re_subset Q /\\ Q re_subset R ==> P re_subset R",
+        "∀ P:A->bool. ∀ Q R. P re_subset Q /\\ Q re_subset R ==> P re_subset R",
       ),
       t2386,
     ),
@@ -22904,7 +22904,7 @@ fn step_306() -> Unit raise {
   istopology_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "forall L:(A->bool)->bool. istopology L <=>\n            L re_null /\\\n            L re_universe /\\\n     (forall a b. L a /\\ L b ==> L (a re_intersect b)) /\\\n       (forall P. P re_subset L ==> L (re_Union P))",
+        "∀ L:(A->bool)->bool. istopology L <=>\n            L re_null /\\\n            L re_universe /\\\n     (∀ a b. L a /\\ L b ==> L (a re_intersect b)) /\\\n       (∀ P. P re_subset L ==> L (re_Union P))",
       ),
     ),
   )
@@ -22962,7 +22962,7 @@ fn step_308() -> Unit raise {
   topology_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall L:(A)topology. open(L) re_null /\\\n                   open(L) re_universe /\\\n            (forall x y. open(L) x /\\ open(L) y ==> open(L) (x re_intersect y)) /\\\n              (forall P. P re_subset (open L) ==> open(L) (re_Union P))",
+        "∀ L:(A)topology. open(L) re_null /\\\n                   open(L) re_universe /\\\n            (∀ x y. open(L) x /\\ open(L) y ==> open(L) (x re_intersect y)) /\\\n              (∀ P. P re_subset (open L) ==> open(L) (re_Union P))",
       ),
       t2390,
     ),
@@ -22985,7 +22985,7 @@ fn step_309() -> Unit raise {
   topology_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall L:(A)topology. forall P. P re_subset (open L) ==> open(L) (re_Union P)",
+        "∀ L:(A)topology. ∀ P. P re_subset (open L) ==> open(L) (re_Union P)",
       ),
       t2391,
     ),
@@ -23044,7 +23044,7 @@ fn step_311() -> Unit raise {
   open_own_neigh_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall S top. forall x:A. open(top) S /\\ S x ==> neigh(top)(S,x)",
+        "∀ S top. ∀ x:A. open(top) S /\\ S x ==> neigh(top)(S,x)",
       ),
       t2395,
     ),
@@ -23255,7 +23255,7 @@ fn step_312() -> Unit raise {
   open_unopen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall S top. open(top) S <=>\n           (re_Union (\\P:A->bool. open(top) P /\\ P re_subset S) = S)",
+        "∀ S top. open(top) S <=>\n           (re_Union (\\P:A->bool. open(top) P /\\ P re_subset S) = S)",
       ),
       t2414,
     ),
@@ -23676,7 +23676,7 @@ fn step_313() -> Unit raise {
   open_subopen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall S top. open(top) S <=>\n           forall x:A. S x ==> ?P. P x /\\ open(top) P /\\ P re_subset S",
+        "∀ S top. open(top) S <=>\n           ∀ x:A. S x ==> ?P. P x /\\ open(top) P /\\ P re_subset S",
       ),
       t2453,
     ),
@@ -23962,7 +23962,7 @@ fn step_314() -> Unit raise {
   open_neigh_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall S top. open(top) S = forall x:A. S x ==> ?N. neigh(top)(N,x) /\\ N re_subset S",
+        "∀ S top. open(top) S = ∀ x:A. S x ==> ?N. neigh(top)(N,x) /\\ N re_subset S",
       ),
       t2483,
     ),
@@ -24003,7 +24003,7 @@ fn step_316() -> Unit raise {
   limpt_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "limpt(top) x S <=>\n      forall N:A->bool. neigh(top)(N,x) ==> ?y. ~(x = y) /\\ S y /\\ N y",
+        "limpt(top) x S <=>\n      ∀ N:A->bool. neigh(top)(N,x) ==> ?y. ~(x = y) /\\ S y /\\ N y",
       ),
     ),
   )
@@ -24247,7 +24247,7 @@ fn step_317() -> Unit raise {
   closed_limpt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall top S. closed(top) S <=> (forall x:A. limpt(top) x S ==> S x)",
+        "∀ top S. closed(top) S <=> (∀ x:A. limpt(top) x S ==> S x)",
       ),
       t2511,
     ),
@@ -24269,7 +24269,7 @@ fn step_318() -> Unit raise {
   ismet_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "ismet (m:A#A->real) <=> (forall x y. (m(x,y) = &0) <=> (x = y)) /\\\n                           (forall x y z. m(y,z) <= m(x,y) + m(x,z))",
+        "ismet (m:A#A->real) <=> (∀ x y. (m(x,y) = &0) <=> (x = y)) /\\\n                           (∀ x y z. m(y,z) <= m(x,y) + m(x,z))",
       ),
     ),
   )
@@ -24555,7 +24555,7 @@ fn step_320() -> Unit raise {
     @simp.rewrite_tac(@list.List([metric_tybij()])),
   )
   metric_ismet_c.set(
-    @tactics.prove(@parser.parse_term("forall m:(A)metric. ismet (mdist m)"), t2541),
+    @tactics.prove(@parser.parse_term("∀ m:(A)metric. ismet (mdist m)"), t2541),
   )
 }
 
@@ -24586,7 +24586,7 @@ fn step_321() -> Unit raise {
   metric_zero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. forall x y. ((mdist m)(x,y) = &0) <=> (x = y)",
+        "∀ m:(A)metric. ∀ x y. ((mdist m)(x,y) = &0) <=> (x = y)",
       ),
       t2545,
     ),
@@ -24609,7 +24609,7 @@ fn step_322() -> Unit raise {
   let t2547 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2546)
   metric_same_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:(A)metric. forall x. (mdist m)(x,x) = &0"),
+      @parser.parse_term("∀ m:(A)metric. ∀ x. (mdist m)(x,x) = &0"),
       t2547,
     ),
   )
@@ -24859,7 +24859,7 @@ fn step_323() -> Unit raise {
   )
   metric_pos_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:(A)metric. forall x y. &0 <= (mdist m)(x,y)"),
+      @parser.parse_term("∀ m:(A)metric. ∀ x y. &0 <= (mdist m)(x,y)"),
       t2577,
     ),
   )
@@ -25022,7 +25022,7 @@ fn step_324() -> Unit raise {
   )
   metric_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:(A)metric. forall x y. (mdist m)(x,y) = (mdist m)(y,x)"),
+      @parser.parse_term("∀ m:(A)metric. ∀ x y. (mdist m)(x,y) = (mdist m)(y,x)"),
       t2596,
     ),
   )
@@ -25078,7 +25078,7 @@ fn step_325() -> Unit raise {
   metric_triangle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. forall x y z. (mdist m)(x,z) <= (mdist m)(x,y) + (mdist m)(y,z)",
+        "∀ m:(A)metric. ∀ x y z. (mdist m)(x,z) <= (mdist m)(x,y) + (mdist m)(y,z)",
       ),
       t2608,
     ),
@@ -25128,7 +25128,7 @@ fn step_326() -> Unit raise {
   )
   metric_nz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:(A)metric. forall x y. ~(x = y) ==> &0 < (mdist m)(x,y)"),
+      @parser.parse_term("∀ m:(A)metric. ∀ x y. ~(x = y) ==> &0 < (mdist m)(x,y)"),
       t2615,
     ),
   )
@@ -25149,7 +25149,7 @@ fn step_327() -> Unit raise {
   mtop_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "forall m:(A)metric. mtop m =\n    topology(\\S. forall x. S x ==> ?e. &0 < e /\\ (forall y. (mdist m)(x,y) < e ==> S y))",
+        "∀ m:(A)metric. mtop m =\n    topology(\\S. ∀ x. S x ==> ?e. &0 < e /\\ (∀ y. (mdist m)(x,y) < e ==> S y))",
       ),
     ),
   )
@@ -26247,7 +26247,7 @@ fn step_328() -> Unit raise {
   mtop_istopology_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. istopology\n    (\\S. forall x. S x ==> ?e. &0 < e /\\ (forall y. (mdist m)(x,y) < e ==> S y))",
+        "∀ m:(A)metric. istopology\n    (\\S. ∀ x. S x ==> ?e. &0 < e /\\ (∀ y. (mdist m)(x,y) < e ==> S y))",
       ),
       t2721,
     ),
@@ -26289,7 +26289,7 @@ fn step_329() -> Unit raise {
   mtop_open_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. open(mtop m) S <=>\n      (forall x. S x ==> ?e. &0 < e /\\ (forall y. (mdist m(x,y)) < e ==> S y))",
+        "∀ m:(A)metric. open(mtop m) S <=>\n      (∀ x. S x ==> ?e. &0 < e /\\ (∀ y. (mdist m(x,y)) < e ==> S y))",
       ),
       t2723,
     ),
@@ -26311,7 +26311,7 @@ fn step_330() -> Unit raise {
   ball_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "forall m:(A)metric. forall x e. ball(m)(x,e) = \\y. (mdist m)(x,y) < e",
+        "∀ m:(A)metric. ∀ x e. ball(m)(x,e) = \\y. (mdist m)(x,y) < e",
       ),
     ),
   )
@@ -26462,7 +26462,7 @@ fn step_331() -> Unit raise {
   ball_open_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. forall x e. &0 < e ==> open(mtop(m))(ball(m)(x,e))",
+        "∀ m:(A)metric. ∀ x e. &0 < e ==> open(mtop(m))(ball(m)(x,e))",
       ),
       t2741,
     ),
@@ -26564,7 +26564,7 @@ fn step_332() -> Unit raise {
   ball_neigh_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. forall x e. &0 < e ==> neigh(mtop(m))(ball(m)(x,e),x)",
+        "∀ m:(A)metric. ∀ x e. &0 < e ==> neigh(mtop(m))(ball(m)(x,e),x)",
       ),
       t2752,
     ),
@@ -27445,7 +27445,7 @@ fn step_333() -> Unit raise {
   mtop_limpt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:(A)metric. forall x S. limpt(mtop m) x S <=>\n      forall e. &0 < e ==> ?y. ~(x = y) /\\ S y /\\ (mdist m)(x,y) < e",
+        "∀ m:(A)metric. ∀ x S. limpt(mtop m) x S <=>\n      ∀ e. &0 < e ==> ?y. ~(x = y) /\\ S y /\\ (mdist m)(x,y) < e",
       ),
       t2834,
     ),
@@ -27600,7 +27600,7 @@ fn step_336() -> Unit raise {
   )
   mr1_def_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (mdist mr1)(x,y) = abs(y - x)"),
+      @parser.parse_term("∀ x y. (mdist mr1)(x,y) = abs(y - x)"),
       t2853,
     ),
   )
@@ -27622,7 +27622,7 @@ fn step_337() -> Unit raise {
   let t2855 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2854)
   mr1_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x d. (mdist mr1)(x,x+d) = abs(d)"),
+      @parser.parse_term("∀ x d. (mdist mr1)(x,x+d) = abs(d)"),
       t2855,
     ),
   )
@@ -27646,7 +27646,7 @@ fn step_338() -> Unit raise {
   let t2857 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2856)
   mr1_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x d. (mdist mr1)(x,x-d) = abs(d)"),
+      @parser.parse_term("∀ x d. (mdist mr1)(x,x-d) = abs(d)"),
       t2857,
     ),
   )
@@ -27671,7 +27671,7 @@ fn step_339() -> Unit raise {
   )
   mr1_add_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x d. &0 <= d ==> ((mdist mr1)(x,x+d) = d)"),
+      @parser.parse_term("∀ x d. &0 <= d ==> ((mdist mr1)(x,x+d) = d)"),
       t2859,
     ),
   )
@@ -27696,7 +27696,7 @@ fn step_340() -> Unit raise {
   )
   mr1_sub_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x d. &0 <= d ==> ((mdist mr1)(x,x-d) = d)"),
+      @parser.parse_term("∀ x d. &0 <= d ==> ((mdist mr1)(x,x-d) = d)"),
       t2861,
     ),
   )
@@ -27790,7 +27790,7 @@ fn step_341() -> Unit raise {
   )
   mr1_add_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x d. &0 < d ==> ((mdist mr1)(x,x+d) = d)"),
+      @parser.parse_term("∀ x d. &0 < d ==> ((mdist mr1)(x,x+d) = d)"),
       t2869,
     ),
   )
@@ -27884,7 +27884,7 @@ fn step_342() -> Unit raise {
   )
   mr1_sub_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x d. &0 < d ==> ((mdist mr1)(x,x-d) = d)"),
+      @parser.parse_term("∀ x d. &0 < d ==> ((mdist mr1)(x,x-d) = d)"),
       t2877,
     ),
   )
@@ -27907,7 +27907,7 @@ fn step_343() -> Unit raise {
   mr1_between1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y z. x < z /\\ (mdist mr1)(x,y) < (z - x) ==> y < z",
+        "∀ x y z. x < z /\\ (mdist mr1)(x,y) < (z - x) ==> y < z",
       ),
       t2879,
     ),
@@ -28032,7 +28032,7 @@ fn step_344() -> Unit raise {
   )
   mr1_limpt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. limpt(mtop mr1) x re_universe"),
+      @parser.parse_term("∀ x. limpt(mtop mr1) x re_universe"),
       t2895,
     ),
   )
@@ -28059,7 +28059,7 @@ fn step_346() -> Unit raise {
   dorder_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "dorder (g:A->A->bool) <=>\n     forall x y. g x x /\\ g y y ==> ?z. g z z /\\ (forall w. g w z ==> g w x /\\ g w y)",
+        "dorder (g:A->A->bool) <=>\n     ∀ x y. g x x /\\ g y y ==> ?z. g z z /\\ (∀ w. g w z ==> g w x /\\ g w y)",
       ),
     ),
   )
@@ -28080,7 +28080,7 @@ fn step_347() -> Unit raise {
   tends_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "(s tends l)(top,g) <=>\n      forall N:A->bool. neigh(top)(N,l) ==>\n            ?n:B. g n n /\\ forall m:B. g m n ==> N(s m)",
+        "(s tends l)(top,g) <=>\n      ∀ N:A->bool. neigh(top)(N,l) ==>\n            ?n:B. g n n /\\ ∀ m:B. g m n ==> N(s m)",
       ),
     ),
   )
@@ -28101,7 +28101,7 @@ fn step_348() -> Unit raise {
   bounded_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "bounded((m:(A)metric),(g:B->B->bool)) f <=>\n      ?k x N. g N N /\\ (forall n. g n N ==> (mdist m)(f(n),x) < k)",
+        "bounded((m:(A)metric),(g:B->B->bool)) f <=>\n      ?k x N. g N N /\\ (∀ n. g n N ==> (mdist m)(f(n),x) < k)",
       ),
     ),
   )
@@ -28500,7 +28500,7 @@ fn step_352() -> Unit raise {
   dorder_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool.\n      dorder g ==>\n        forall P Q. (?n. g n n /\\ (forall m. g m n ==> P m)) /\\\n              (?n. g n n /\\ (forall m. g m n ==> Q m))\n                  ==> (?n. g n n /\\ (forall m. g m n ==> P m /\\ Q m))",
+        "∀ g:A->A->bool.\n      dorder g ==>\n        ∀ P Q. (?n. g n n /\\ (∀ m. g m n ==> P m)) /\\\n              (?n. g n n /\\ (∀ m. g m n ==> Q m))\n                  ==> (?n. g n n /\\ (∀ m. g m n ==> P m /\\ Q m))",
       ),
       t2938,
     ),
@@ -28815,7 +28815,7 @@ fn step_354() -> Unit raise {
   )
   dorder_tendsto_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:(A)metric. forall x. dorder(tendsto(m,x))"),
+      @parser.parse_term("∀ m:(A)metric. ∀ x. dorder(tendsto(m,x))"),
       t2988,
     ),
   )
@@ -29598,7 +29598,7 @@ fn step_355() -> Unit raise {
   mtop_tends_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall d g. forall x:B->A. forall x0. (x --> x0)(mtop(d),g) <=>\n     forall e. &0 < e ==> ?n. g n n /\\ forall m. g m n ==> mdist(d)(x(m),x0) < e",
+        "∀ d g. ∀ x:B->A. ∀ x0. (x --> x0)(mtop(d),g) <=>\n     ∀ e. &0 < e ==> ?n. g n n /\\ ∀ m. g m n ==> mdist(d)(x(m),x0) < e",
       ),
       t3060,
     ),
@@ -30591,7 +30591,7 @@ fn step_356() -> Unit raise {
   mtop_tends_uniq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g d. dorder (g:B->B->bool) ==>\n      (x --> x0)(mtop(d),g) /\\ (x --> x1)(mtop(d),g) ==> (x0:A = x1)",
+        "∀ g d. dorder (g:B->B->bool) ==>\n      (x --> x0)(mtop(d),g) /\\ (x --> x1)(mtop(d),g) ==> (x0:A = x1)",
       ),
       t3125,
     ),
@@ -30619,7 +30619,7 @@ fn step_357() -> Unit raise {
   seq_tends_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall d:(A)metric. forall x x0. (x --> x0)(mtop(d), (>=) :num->num->bool) <=>\n     forall e. &0 < e ==> ?N. forall n. n >= N ==> mdist(d)(x(n),x0) < e",
+        "∀ d:(A)metric. ∀ x x0. (x --> x0)(mtop(d), (>=) :num->num->bool) <=>\n     ∀ e. &0 < e ==> ?N. ∀ n. n >= N ==> mdist(d)(x(n),x0) < e",
       ),
       t3127,
     ),
@@ -30918,7 +30918,7 @@ fn step_358() -> Unit raise {
   lim_tends_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m1:(A)metric. forall m2:(B)metric. forall f x0 y0.\n      limpt(mtop m1) x0 re_universe ==>\n        ((f --> y0)(mtop(m2),tendsto(m1,x0)) <=>\n          forall e. &0 < e ==>\n            ?d. &0 < d /\\ forall x. &0 < (mdist m1)(x,x0) /\\ (mdist m1)(x,x0) <= d\n                ==> (mdist m2)(f(x),y0) < e)",
+        "∀ m1:(A)metric. ∀ m2:(B)metric. ∀ f x0 y0.\n      limpt(mtop m1) x0 re_universe ==>\n        ((f --> y0)(mtop(m2),tendsto(m1,x0)) <=>\n          ∀ e. &0 < e ==>\n            ?d. &0 < d /\\ ∀ x. &0 < (mdist m1)(x,x0) /\\ (mdist m1)(x,x0) <= d\n                ==> (mdist m2)(f(x),y0) < e)",
       ),
       t3169,
     ),
@@ -31055,7 +31055,7 @@ fn step_359() -> Unit raise {
   lim_tends2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m1:(A)metric. forall m2:(B)metric. forall f x0 y0.\n      limpt(mtop m1) x0 re_universe ==>\n        ((f --> y0)(mtop(m2),tendsto(m1,x0)) <=>\n          forall e. &0 < e ==>\n            ?d. &0 < d /\\ forall x. &0 < (mdist m1)(x,x0) /\\ (mdist m1)(x,x0) < d ==>\n              (mdist m2)(f(x),y0) < e)",
+        "∀ m1:(A)metric. ∀ m2:(B)metric. ∀ f x0 y0.\n      limpt(mtop m1) x0 re_universe ==>\n        ((f --> y0)(mtop(m2),tendsto(m1,x0)) <=>\n          ∀ e. &0 < e ==>\n            ?d. &0 < d /\\ ∀ x. &0 < (mdist m1)(x,x0) /\\ (mdist m1)(x,x0) < d ==>\n              (mdist m2)(f(x),y0) < e)",
       ),
       t3187,
     ),
@@ -31363,7 +31363,7 @@ fn step_360() -> Unit raise {
   mr1_bounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(g:A->A->bool) f. bounded(mr1,g) f <=>\n        ?k N. g N N /\\ (forall n. g n N ==> abs(f n) < k)",
+        "∀(g:A->A->bool) f. bounded(mr1,g) f <=>\n        ?k N. g N N /\\ (∀ n. g n N ==> abs(f n) < k)",
       ),
       t3233,
     ),
@@ -31401,7 +31401,7 @@ fn step_361() -> Unit raise {
   net_null_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) <=> ((\\n. x(n) - x0) --> &0)(mtop(mr1),g)",
+        "∀ g:A->A->bool. ∀ x x0.\n      (x --> x0)(mtop(mr1),g) <=> ((\\n. x(n) - x0) --> &0)(mtop(mr1),g)",
       ),
       t3237,
     ),
@@ -31577,7 +31577,7 @@ fn step_362() -> Unit raise {
   net_conv_bounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) ==> bounded(mr1,g) x",
+        "∀ g:A->A->bool. ∀ x x0.\n      (x --> x0)(mtop(mr1),g) ==> bounded(mr1,g) x",
       ),
       t3256,
     ),
@@ -31960,7 +31960,7 @@ fn step_363() -> Unit raise {
   net_conv_nz_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0) ==>\n        ?N. g N N /\\ (forall n. g n N ==> ~(x n = &0))",
+        "∀ g:A->A->bool. ∀ x x0.\n      (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0) ==>\n        ?N. g N N /\\ (∀ n. g n N ==> ~(x n = &0))",
       ),
       t3290,
     ),
@@ -32733,7 +32733,7 @@ fn step_364() -> Unit raise {
   net_conv_ibounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. forall x x0.\n      (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0) ==>\n        bounded(mr1,g) (\\n. inv(x n))",
+        "∀ g:A->A->bool. ∀ x x0.\n      (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0) ==>\n        bounded(mr1,g) (\\n. inv(x n))",
       ),
       t3370,
     ),
@@ -33121,7 +33121,7 @@ fn step_365() -> Unit raise {
   net_null_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. dorder g ==>\n        forall x y. (x --> &0)(mtop(mr1),g) /\\ (y --> &0)(mtop(mr1),g) ==>\n                ((\\n. x(n) + y(n)) --> &0)(mtop(mr1),g)",
+        "∀ g:A->A->bool. dorder g ==>\n        ∀ x y. (x --> &0)(mtop(mr1),g) /\\ (y --> &0)(mtop(mr1),g) ==>\n                ((\\n. x(n) + y(n)) --> &0)(mtop(mr1),g)",
       ),
       t3410,
     ),
@@ -34187,7 +34187,7 @@ fn step_366() -> Unit raise {
   net_null_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. dorder g ==>\n      forall x y. bounded(mr1,g) x /\\ (y --> &0)(mtop(mr1),g) ==>\n              ((\\n. x(n) * y(n)) --> &0)(mtop(mr1),g)",
+        "∀ g:A->A->bool. dorder g ==>\n      ∀ x y. bounded(mr1,g) x /\\ (y --> &0)(mtop(mr1),g) ==>\n              ((\\n. x(n) * y(n)) --> &0)(mtop(mr1),g)",
       ),
       t3510,
     ),
@@ -34832,7 +34832,7 @@ fn step_367() -> Unit raise {
   net_null_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool. forall k x.\n      (x --> &0)(mtop(mr1),g) ==> ((\\n. k * x(n)) --> &0)(mtop(mr1),g)",
+        "∀ g:A->A->bool. ∀ k x.\n      (x --> &0)(mtop(mr1),g) ==> ((\\n. k * x(n)) --> &0)(mtop(mr1),g)",
       ),
       t3571,
     ),
@@ -35007,7 +35007,7 @@ fn step_368() -> Unit raise {
   net_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x x0 y y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n            ==> ((\\n. x(n) + y(n)) --> (x0 + y0))(mtop(mr1),g)",
+        "∀ g:A->A->bool x x0 y y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n            ==> ((\\n. x(n) + y(n)) --> (x0 + y0))(mtop(mr1),g)",
       ),
       t3587,
     ),
@@ -35074,7 +35074,7 @@ fn step_369() -> Unit raise {
   net_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x x0.\n        dorder g\n        ==> ((x --> x0)(mtop(mr1),g) <=>\n            ((\\n. --(x n)) --> --x0)(mtop(mr1),g))",
+        "∀ g:A->A->bool x x0.\n        dorder g\n        ==> ((x --> x0)(mtop(mr1),g) <=>\n            ((\\n. --(x n)) --> --x0)(mtop(mr1),g))",
       ),
       t3599,
     ),
@@ -35182,7 +35182,7 @@ fn step_370() -> Unit raise {
   net_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x x0 y y0.\n      dorder g\n      ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n          ==> ((\\n. x(n) - y(n)) --> (x0 - y0))(mtop(mr1),g)",
+        "∀ g:A->A->bool x x0 y y0.\n      dorder g\n      ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n          ==> ((\\n. x(n) - y(n)) --> (x0 - y0))(mtop(mr1),g)",
       ),
       t3612,
     ),
@@ -35411,7 +35411,7 @@ fn step_371() -> Unit raise {
   ])
   let t3617 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall a b c d. (a * b) - (c * d) = (a * (b - d)) + ((a - c) * d)",
+      "∀ a b c d. (a * b) - (c * d) = (a * (b - d)) + ((a - c) * d)",
     ),
     fn(
       x3615 : @kernel.Thm,
@@ -35486,7 +35486,7 @@ fn step_371() -> Unit raise {
   net_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x y x0 y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n            ==> ((\\n. x(n) * y(n)) --> (x0 * y0))(mtop(mr1),g)",
+        "∀ g:A->A->bool x y x0 y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ (y --> y0)(mtop(mr1),g)\n            ==> ((\\n. x(n) * y(n)) --> (x0 * y0))(mtop(mr1),g)",
       ),
       t3658,
     ),
@@ -36975,7 +36975,7 @@ fn step_372() -> Unit raise {
   net_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x x0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0)\n            ==> ((\\n. inv(x(n))) --> inv x0)(mtop(mr1),g)",
+        "∀ g:A->A->bool x x0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\ ~(x0 = &0)\n            ==> ((\\n. inv(x(n))) --> inv x0)(mtop(mr1),g)",
       ),
       t3814,
     ),
@@ -37081,7 +37081,7 @@ fn step_373() -> Unit raise {
   net_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x x0 y y0.\n       dorder g\n       ==> (x --> x0)(mtop(mr1),g) /\\\n           (y --> y0)(mtop(mr1),g) /\\ ~(y0 = &0)\n           ==> ((\\n. x(n) / y(n)) --> (x0 / y0))(mtop(mr1),g)",
+        "∀ g:A->A->bool x x0 y y0.\n       dorder g\n       ==> (x --> x0)(mtop(mr1),g) /\\\n           (y --> y0)(mtop(mr1),g) /\\ ~(y0 = &0)\n           ==> ((\\n. x(n) / y(n)) --> (x0 / y0))(mtop(mr1),g)",
       ),
       t3827,
     ),
@@ -37305,7 +37305,7 @@ fn step_374() -> Unit raise {
   net_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0. (x --> x0)(mtop(mr1),g) ==>\n               ((\\n:A. abs(x n)) --> abs(x0))(mtop(mr1),g)",
+        "∀ x x0. (x --> x0)(mtop(mr1),g) ==>\n               ((\\n:A. abs(x n)) --> abs(x0))(mtop(mr1),g)",
       ),
       t3850,
     ),
@@ -37405,7 +37405,7 @@ fn step_375() -> Unit raise {
   net_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g. dorder g /\\\n       ((\\x. &0) --> &0)(mtop(mr1),g)\n       ==> forall m n. (forall r. m <= r /\\ r < m + n ==> (f r --> l r)(mtop(mr1),g))\n                 ==> ((\\x. sum(m,n) (\\r. f r x)) --> sum(m,n) l)\n                     (mtop(mr1),g)",
+        "∀ g. dorder g /\\\n       ((\\x. &0) --> &0)(mtop(mr1),g)\n       ==> ∀ m n. (∀ r. m <= r /\\ r < m + n ==> (f r --> l r)(mtop(mr1),g))\n                 ==> ((\\x. sum(m,n) (\\r. f r x)) --> sum(m,n) l)\n                     (mtop(mr1),g)",
       ),
       t3864,
     ),
@@ -38467,7 +38467,7 @@ fn step_376() -> Unit raise {
   net_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall g:A->A->bool x x0 y y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\\n            (y --> y0)(mtop(mr1),g) /\\\n            (?N. g N N /\\ forall n. g n N ==> x(n) <= y(n))\n            ==> x0 <= y0",
+        "∀ g:A->A->bool x x0 y y0.\n        dorder g\n        ==> (x --> x0)(mtop(mr1),g) /\\\n            (y --> y0)(mtop(mr1),g) /\\\n            (?N. g N N /\\ ∀ n. g n N ==> x(n) <= y(n))\n            ==> x0 <= y0",
       ),
       t3962,
     ),
@@ -38558,7 +38558,7 @@ fn step_381() -> Unit raise {
   seq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0. (x --> x0) <=>\n          forall e. &0 < e ==> ?N. forall n. n >= N ==> abs(x(n) - x0) < e",
+        "∀ x x0. (x --> x0) <=>\n          ∀ e. &0 < e ==> ?N. ∀ n. n >= N ==> abs(x(n) - x0) < e",
       ),
       t3972,
     ),
@@ -38590,7 +38590,7 @@ fn step_382() -> Unit raise {
     t3974,
   )
   seq_const_c.set(
-    @tactics.prove(@parser.parse_term("forall k. (\\x. k) --> k"), t3975),
+    @tactics.prove(@parser.parse_term("∀ k. (\\x. k) --> k"), t3975),
   )
 }
 
@@ -38619,7 +38619,7 @@ fn step_383() -> Unit raise {
   seq_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) + y(n)) --> (x0 + y0)",
+        "∀ x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) + y(n)) --> (x0 + y0)",
       ),
       t3979,
     ),
@@ -38651,7 +38651,7 @@ fn step_384() -> Unit raise {
   seq_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) * y(n)) --> (x0 * y0)",
+        "∀ x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) * y(n)) --> (x0 * y0)",
       ),
       t3983,
     ),
@@ -38682,7 +38682,7 @@ fn step_385() -> Unit raise {
   )
   seq_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x x0. x --> x0 <=> (\\n. --(x n)) --> --x0"),
+      @parser.parse_term("∀ x x0. x --> x0 <=> (\\n. --(x n)) --> --x0"),
       t3987,
     ),
   )
@@ -38713,7 +38713,7 @@ fn step_386() -> Unit raise {
   seq_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0. x --> x0 /\\ ~(x0 = &0) ==> (\\n. inv(x n)) --> inv x0",
+        "∀ x x0. x --> x0 /\\ ~(x0 = &0) ==> (\\n. inv(x n)) --> inv x0",
       ),
       t3991,
     ),
@@ -38745,7 +38745,7 @@ fn step_387() -> Unit raise {
   seq_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) - y(n)) --> (x0 - y0)",
+        "∀ x x0 y y0. x --> x0 /\\ y --> y0 ==> (\\n. x(n) - y(n)) --> (x0 - y0)",
       ),
       t3995,
     ),
@@ -38777,7 +38777,7 @@ fn step_388() -> Unit raise {
   seq_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0 y y0. x --> x0 /\\ y --> y0 /\\ ~(y0 = &0) ==>\n                  (\\n. x(n) / y(n)) --> (x0 / y0)",
+        "∀ x x0 y y0. x --> x0 /\\ y --> y0 /\\ ~(y0 = &0) ==>\n                  (\\n. x(n) / y(n)) --> (x0 / y0)",
       ),
       t3999,
     ),
@@ -38808,7 +38808,7 @@ fn step_389() -> Unit raise {
   )
   seq_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x x1 x2. x --> x1 /\\ x --> x2 ==> (x1 = x2)"),
+      @parser.parse_term("∀ x x1 x2. x --> x1 /\\ x --> x2 ==> (x1 = x2)"),
       t4003,
     ),
   )
@@ -38834,7 +38834,7 @@ fn step_390() -> Unit raise {
   )
   seq_null_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s l. s --> l <=> (\\n. s(n) - l) --> &0"),
+      @parser.parse_term("∀ s l. s --> l <=> (\\n. s(n) - l) --> &0"),
       t4006,
     ),
   )
@@ -38871,7 +38871,7 @@ fn step_391() -> Unit raise {
   seq_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l m n.\n      (forall r. m <= r /\\ r < m + n ==> f r --> l r)\n      ==> (\\k. sum(m,n) (\\r. f r k)) --> sum(m,n) l",
+        "∀ f l m n.\n      (∀ r. m <= r /\\ r < m + n ==> f r --> l r)\n      ==> (\\k. sum(m,n) (\\r. f r k)) --> sum(m,n) l",
       ),
       t4010,
     ),
@@ -38904,7 +38904,7 @@ fn step_392() -> Unit raise {
   seq_transform_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s t l N. (forall n. N <= n ==> (s n = t n)) /\\ s --> l ==> t --> l",
+        "∀ s t l N. (∀ n. N <= n ==> (s n = t n)) /\\ s --> l ==> t --> l",
       ),
       t4012,
     ),
@@ -38943,7 +38943,7 @@ fn step_394() -> Unit raise {
   cauchy_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "cauchy f <=> forall e. &0 < e ==>\n        ?N:num. forall m n. m >= N /\\ n >= N ==> abs(f(m) - f(n)) < e",
+        "cauchy f <=> ∀ e. &0 < e ==>\n        ?N:num. ∀ m n. m >= N /\\ n >= N ==> abs(f(m) - f(n)) < e",
       ),
     ),
   )
@@ -39116,7 +39116,7 @@ fn step_396() -> Unit raise {
   )
   seq_lim_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. convergent f <=> (f --> lim f)"),
+      @parser.parse_term("∀ f. convergent f <=> (f --> lim f)"),
       t4024,
     ),
   )
@@ -39137,7 +39137,7 @@ fn step_397() -> Unit raise {
   subseq_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "subseq (f:num->num) <=> forall m n. m < n ==> (f m) < (f n)",
+        "subseq (f:num->num) <=> ∀ m n. m < n ==> (f m) < (f n)",
       ),
     ),
   )
@@ -39324,7 +39324,7 @@ fn step_398() -> Unit raise {
   )
   subseq_suc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. subseq f <=> forall n. f(n) < f(SUC n)"),
+      @parser.parse_term("∀ f. subseq f <=> ∀ n. f(n) < f(SUC n)"),
       t4045,
     ),
   )
@@ -39345,7 +39345,7 @@ fn step_399() -> Unit raise {
   mono_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "mono (f:num->real) <=>\n            (forall m n. m <= n ==> f(m) <= f(n)) \\/\n            (forall m n. m <= n ==> f(m) >= f(n))",
+        "mono (f:num->real) <=>\n            (∀ m n. m <= n ==> f(m) <= f(n)) \\/\n            (∀ m n. m <= n ==> f(m) >= f(n))",
       ),
     ),
   )
@@ -39590,7 +39590,7 @@ fn step_400() -> Unit raise {
   mono_suc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. mono f <=> (forall n. f(SUC n) >= f(n)) \\/ (forall n. f(SUC n) <= f(n))",
+        "∀ f. mono f <=> (∀ n. f(SUC n) >= f(n)) \\/ (∀ n. f(SUC n) <= f(n))",
       ),
       t4073,
     ),
@@ -39833,7 +39833,7 @@ fn step_401() -> Unit raise {
   )
   max_lemma_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s N. ?k. forall n:num. n < N ==> abs(s n) < k"),
+      @parser.parse_term("∀ s N. ?k. ∀ n:num. n < N ==> abs(s n) < k"),
       t4103,
     ),
   )
@@ -40085,7 +40085,7 @@ fn step_402() -> Unit raise {
   seq_bounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s. bounded(mr1, (>=)) s <=> ?k. forall n:num. abs(s n) < k",
+        "∀ s. bounded(mr1, (>=)) s <=> ?k. ∀ n:num. abs(s n) < k",
       ),
       t4139,
     ),
@@ -40251,7 +40251,7 @@ fn step_403() -> Unit raise {
   seq_bounded_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f k K. (forall n:num. k <= f(n) /\\ f(n) <= K) ==> bounded(mr1, (>=)) f",
+        "∀ f k K. (∀ n:num. k <= f(n) /\\ f(n) <= K) ==> bounded(mr1, (>=)) f",
       ),
       t4168,
     ),
@@ -40495,7 +40495,7 @@ fn step_404() -> Unit raise {
   )
   seq_cbounded_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. cauchy f ==> bounded(mr1, (>=)) f"),
+      @parser.parse_term("∀ f. cauchy f ==> bounded(mr1, (>=)) f"),
       t4195,
     ),
   )
@@ -41126,7 +41126,7 @@ fn step_405() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4277 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. f(n) <= sup(\\x. ?n:num. x = f(n))"),
+    @parser.parse_term("∀ n. f(n) <= sup(\\x. ?n:num. x = f(n))"),
     fn(
       x4274 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -42768,7 +42768,7 @@ fn step_405() -> Unit raise {
   seq_iconv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. bounded(mr1, (>=)) f /\\ (forall m n. m >= n ==> f(m) >= f(n))\n           ==> convergent f",
+        "∀ f. bounded(mr1, (>=)) f /\\ (∀ m n. m >= n ==> f(m) >= f(n))\n           ==> convergent f",
       ),
       t4356,
     ),
@@ -42870,7 +42870,7 @@ fn step_406() -> Unit raise {
   )
   seq_neg_conv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. convergent f <=> convergent (\\n. --(f n))"),
+      @parser.parse_term("∀ f. convergent f <=> convergent (\\n. --(f n))"),
       t4368,
     ),
   )
@@ -42902,7 +42902,7 @@ fn step_407() -> Unit raise {
   seq_neg_bounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. bounded(mr1, (>=))(\\n:num. --(f n)) <=> bounded(mr1, (>=)) f",
+        "∀ f. bounded(mr1, (>=))(\\n:num. --(f n)) <=> bounded(mr1, (>=)) f",
       ),
       t4370,
     ),
@@ -43070,7 +43070,7 @@ fn step_408() -> Unit raise {
   )
   seq_bconv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. bounded(mr1, (>=)) f /\\ mono f ==> convergent f"),
+      @parser.parse_term("∀ f. bounded(mr1, (>=)) f /\\ mono f ==> convergent f"),
       t4387,
     ),
   )
@@ -44060,7 +44060,7 @@ fn step_409() -> Unit raise {
   ])
   let t4511 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall n. f(n) >= (SUC N) /\\\n           f(SUC n) > f(n) /\\ s(f n) < s(f(SUC n):num)",
+      "∀ n. f(n) >= (SUC N) /\\\n           f(SUC n) > f(n) /\\ s(f n) < s(f(SUC n):num)",
     ),
     fn(
       x4508 : @kernel.Thm,
@@ -44551,7 +44551,7 @@ fn step_409() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4463 = @tactics.subgoal_then(
-    @parser.parse_term("forall p. p >= SUC N ==> (?m. m > p /\\ s(p) < s(m))"),
+    @parser.parse_term("∀ p. p >= SUC N ==> (?m. m > p /\\ s(p) < s(m))"),
     fn(
       x4460 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -44848,7 +44848,7 @@ fn step_409() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4441 = @tactics.subgoal_then(
-    @parser.parse_term("forall q. f(SUC q):num >= f(q)"),
+    @parser.parse_term("∀ q. f(SUC q):num >= f(q)"),
     fn(
       x4439 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -44979,7 +44979,7 @@ fn step_409() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4424 = @tactics.subgoal_then(
-    @parser.parse_term("forall p q. p:num >= (f q) ==> s(p) <= s(f(q:num))"),
+    @parser.parse_term("∀ p q. p:num >= (f q) ==> s(p) <= s(f(q:num))"),
     fn(
       x4421 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -45168,10 +45168,10 @@ fn step_409() -> Unit raise {
     })(((x4402 : @kernel.Thm) => @bool.spec(t4401, x4402))(x4403))
   })
   let t4396 = @parser.parse_term(
-    "\\x. \\n:num. @p:num. p > x /\\\n                       (forall m. m >= p ==> (s m) <= (s p))",
+    "\\x. \\n:num. @p:num. p > x /\\\n                       (∀ m. m >= p ==> (s m) <= (s p))",
   )
   let t4397 = @list.List([
-    @parser.parse_term("@p. p > 0 /\\ (forall m. m >= p ==> (s m) <= (s p))"),
+    @parser.parse_term("@p. p > 0 /\\ (∀ m. m >= p ==> (s m) <= (s p))"),
     t4396,
   ])
   let t4391 = @tactics.x_choose_then(@parser.parse_term("f:num->num"))(fn(
@@ -45342,14 +45342,14 @@ fn step_409() -> Unit raise {
     @tactics.then_tac(
       @tactics.gen_tac,
       @class.asm_cases_tac(
-        @parser.parse_term("forall n:num. ?p. p > n /\\ forall m. m >= p ==> s(m) <= s(p)"),
+        @parser.parse_term("∀ n:num. ?p. p > n /\\ ∀ m. m >= p ==> s(m) <= s(p)"),
       ),
     ),
     t4613,
   )
   seq_monosub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s:num->real. ?f. subseq f /\\ mono(\\n.s(f n))"),
+      @parser.parse_term("∀ s:num->real. ?f. subseq f /\\ mono(\\n.s(f n))"),
       t4614,
     ),
   )
@@ -45393,7 +45393,7 @@ fn step_410() -> Unit raise {
   seq_sbounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s (f:num->num). bounded(mr1, (>=)) s ==> bounded(mr1, (>=)) (\\n. s(f n))",
+        "∀ s (f:num->num). bounded(mr1, (>=)) s ==> bounded(mr1, (>=)) (\\n. s(f n))",
       ),
       t4621,
     ),
@@ -45497,7 +45497,7 @@ fn step_411() -> Unit raise {
     t4632,
   )
   seq_suble_c.set(
-    @tactics.prove(@parser.parse_term("forall f n. subseq f ==> n <= f(n)"), t4633),
+    @tactics.prove(@parser.parse_term("∀ f n. subseq f ==> n <= f(n)"), t4633),
   )
 }
 
@@ -45668,7 +45668,7 @@ fn step_412() -> Unit raise {
   )
   seq_direct_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. subseq f ==> forall N1 N2. ?n. n >= N1 /\\ f(n) >= N2"),
+      @parser.parse_term("∀ f. subseq f ==> ∀ N1 N2. ?n. n >= N1 /\\ f(n) >= N2"),
       t4655,
     ),
   )
@@ -46405,7 +46405,7 @@ fn step_413() -> Unit raise {
     })(((x4731 : @kernel.Thm) => @bool.spec(t4730, x4731))(x4732))
   })
   let t4726 = @tactics.undisch_tac(
-    @parser.parse_term("forall n:num. n >= N1 ==> abs(f(g n:num) - l) < (e / &2)"),
+    @parser.parse_term("∀ n:num. n >= N1 ==> abs(f(g n:num) - l) < (e / &2)"),
   )
   let t4725 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
   let t4724 = @tactics.exists_tac(@parser.parse_term("N2:num"))
@@ -47265,7 +47265,7 @@ fn step_413() -> Unit raise {
     t4812,
   )
   seq_cauchy_c.set(
-    @tactics.prove(@parser.parse_term("forall f. cauchy f <=> convergent f"), t4813),
+    @tactics.prove(@parser.parse_term("∀ f. cauchy f <=> convergent f"), t4813),
   )
 }
 
@@ -47343,7 +47343,7 @@ fn step_414() -> Unit raise {
   seq_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m. f --> l /\\ g --> m /\\ (?N. forall n. n >= N ==> f(n) <= g(n))\n        ==> l <= m",
+        "∀ f g l m. f --> l /\\ g --> m /\\ (?N. ∀ n. n >= N ==> f(n) <= g(n))\n        ==> l <= m",
       ),
       t4820,
     ),
@@ -47376,7 +47376,7 @@ fn step_415() -> Unit raise {
   seq_le_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. f --> &0 /\\ (?N. forall n. n >= N ==> abs(g n) <= abs(f n))\n         ==> g --> &0",
+        "∀ f g. f --> &0 /\\ (?N. ∀ n. n >= N ==> abs(g n) <= abs(f n))\n         ==> g --> &0",
       ),
       t4822,
     ),
@@ -47567,7 +47567,7 @@ fn step_416() -> Unit raise {
   )
   seq_suc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f l. f --> l <=> (\\n. f(SUC n)) --> l"),
+      @parser.parse_term("∀ f l. f --> l <=> (\\n. f(SUC n)) --> l"),
       t4849,
     ),
   )
@@ -47598,7 +47598,7 @@ fn step_417() -> Unit raise {
   )
   seq_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. (\\n. abs(f n)) --> &0 <=> f --> &0"),
+      @parser.parse_term("∀ f. (\\n. abs(f n)) --> &0 <=> f --> &0"),
       t4851,
     ),
   )
@@ -47624,7 +47624,7 @@ fn step_418() -> Unit raise {
   )
   seq_abs_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f l. f --> l ==> (\\n. abs(f n)) --> abs(l)"),
+      @parser.parse_term("∀ f l. f --> l ==> (\\n. abs(f n)) --> abs(l)"),
       t4854,
     ),
   )
@@ -48142,7 +48142,7 @@ fn step_419() -> Unit raise {
   seq_inv0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. (forall y. ?N. forall n. n >= N ==> f(n) > y)\n        ==> (\\n. inv(f n)) --> &0",
+        "∀ f. (∀ y. ?N. ∀ n. n >= N ==> f(n) > y)\n        ==> (\\n. inv(f n)) --> &0",
       ),
       t4917,
     ),
@@ -48607,7 +48607,7 @@ fn step_420() -> Unit raise {
                                                             @tactics.thenl(
                                                               @tactics.subgoal_then(
                                                                 @parser.parse_term(
-                                                                  "forall n. abs(c) pow n = inv(inv(abs(c) pow n))",
+                                                                  "∀ n. abs(c) pow n = inv(inv(abs(c) pow n))",
                                                                 ),
                                                                 fn(
                                                                   x4921 : @kernel.Thm,
@@ -48772,7 +48772,7 @@ fn step_420() -> Unit raise {
   )
   seq_power_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c. abs(c) < &1 ==> (\\n. abs(c) pow n) --> &0"),
+      @parser.parse_term("∀ c. abs(c) < &1 ==> (\\n. abs(c) pow n) --> &0"),
       t4998,
     ),
   )
@@ -48876,7 +48876,7 @@ fn step_421() -> Unit raise {
   )
   seq_power_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c. abs(c) < &1 ==> (\\n. c pow n) --> &0"),
+      @parser.parse_term("∀ c. abs(c) < &1 ==> (\\n. c pow n) --> &0"),
       t5007,
     ),
   )
@@ -49109,7 +49109,7 @@ fn step_422() -> Unit raise {
     @int.arith_tac,
   )
   seq_harmonic_c.set(
-    @tactics.prove(@parser.parse_term("forall a. (\\n. a / &n) --> &0"), t5040),
+    @tactics.prove(@parser.parse_term("∀ a. (\\n. a / &n) --> &0"), t5040),
   )
 }
 
@@ -49177,7 +49177,7 @@ fn step_423() -> Unit raise {
   )
   let t5045 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5044 = @tactics.subgoal_then(
-    @parser.parse_term("forall a b n. ~(a = 0) ==> n <= a * n + b"),
+    @parser.parse_term("∀ a b n. ~(a = 0) ==> n <= a * n + b"),
     fn(
       x5042 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -49235,7 +49235,7 @@ fn step_423() -> Unit raise {
   seq_subseq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l. f --> l ==> forall a b. ~(a = 0) ==> (\\n. f(a * n + b)) --> l",
+        "∀ f l. f --> l ==> ∀ a b. ~(a = 0) ==> (\\n. f(a * n + b)) --> l",
       ),
       t5052,
     ),
@@ -49276,7 +49276,7 @@ fn step_424() -> Unit raise {
   seq_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l. (f --> l) ==> forall n. (\\i. f(i) pow n) --> l pow n",
+        "∀ f l. (f --> l) ==> ∀ n. (\\i. f(i) pow n) --> l pow n",
       ),
       t5056,
     ),
@@ -49356,7 +49356,7 @@ fn step_425() -> Unit raise {
     t5217,
   ])
   let t5204 = @tactics.subgoal_then(
-    @parser.parse_term("forall p. g(p + m:num) < lim g"),
+    @parser.parse_term("∀ p. g(p + m:num) < lim g"),
     fn(
       x5201 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -49756,7 +49756,7 @@ fn step_425() -> Unit raise {
     t5173,
   ])
   let t5155 = @tactics.subgoal_then(
-    @parser.parse_term("forall p. lim f <= f(p + m:num)"),
+    @parser.parse_term("∀ p. lim f <= f(p + m:num)"),
     fn(
       x5152 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -50562,7 +50562,7 @@ fn step_425() -> Unit raise {
   nest_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. f(SUC n) >= f(n)) /\\\n         (forall n. g(SUC n) <= g(n)) /\\\n         (forall n. f(n) <= g(n)) ==>\n                ?l m. l <= m /\\ ((forall n. f(n) <= l) /\\ f --> l) /\\\n                                ((forall n. m <= g(n)) /\\ g --> m)",
+        "∀ f g. (∀ n. f(SUC n) >= f(n)) /\\\n         (∀ n. g(SUC n) <= g(n)) /\\\n         (∀ n. f(n) <= g(n)) ==>\n                ?l m. l <= m /\\ ((∀ n. f(n) <= l) /\\ f --> l) /\\\n                                ((∀ n. m <= g(n)) /\\ g --> m)",
       ),
       t5222,
     ),
@@ -51030,7 +51030,7 @@ fn step_426() -> Unit raise {
   nest_lemma_uniq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. f(SUC n) >= f(n)) /\\\n         (forall n. g(SUC n) <= g(n)) /\\\n         (forall n. f(n) <= g(n)) /\\\n         (\\n. f(n) - g(n)) --> &0 ==>\n                ?l. ((forall n. f(n) <= l) /\\ f --> l) /\\\n                    ((forall n. l <= g(n)) /\\ g --> l)",
+        "∀ f g. (∀ n. f(SUC n) >= f(n)) /\\\n         (∀ n. g(SUC n) <= g(n)) /\\\n         (∀ n. f(n) <= g(n)) /\\\n         (\\n. f(n) - g(n)) --> &0 ==>\n                ?l. ((∀ n. f(n) <= l) /\\ f --> l) /\\\n                    ((∀ n. l <= g(n)) /\\ g --> l)",
       ),
       t5270,
     ),
@@ -51167,7 +51167,7 @@ fn step_427() -> Unit raise {
     @tactics.all_tac
   })
   let t5531 = @tactics.undisch_tac(
-    @parser.parse_term("forall n. (SND(f n)) - (FST(f n)) = (b - a) / ((& 2) pow n)"),
+    @parser.parse_term("∀ n. (SND(f n)) - (FST(f n)) = (b - a) / ((& 2) pow n)"),
   )
   let t5526 = @parser.parse_term("SND((f:num->real#real) (N1 + N2))")
   let t5527 = @list.List([
@@ -52348,7 +52348,7 @@ fn step_427() -> Unit raise {
   ])
   let t5386 = @tactics.thenl(
     @tactics.subgoal_then(
-      @parser.parse_term("forall x y z. (x + y) - (x + z) = y - z"),
+      @parser.parse_term("∀ x y z. (x + y) - (x + z) = y - z"),
       fn(
         x5376 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -52508,7 +52508,7 @@ fn step_427() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5356 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. SND(f n) - FST(f n) = (b - a) / (&2 pow n)"),
+    @parser.parse_term("∀ n. SND(f n) - FST(f n) = (b - a) / (&2 pow n)"),
     fn(
       x5353 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -52667,7 +52667,7 @@ fn step_427() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5335 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. SND(f(SUC n) :real#real) <= SND(f n)"),
+    @parser.parse_term("∀ n. SND(f(SUC n) :real#real) <= SND(f n)"),
     fn(
       x5332 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -52816,7 +52816,7 @@ fn step_427() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5318 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. ~P(FST((f:num->real#real) n),SND(f n))"),
+    @parser.parse_term("∀ n. ~P(FST((f:num->real#real) n),SND(f n))"),
     fn(
       x5315 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -52973,7 +52973,7 @@ fn step_427() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5300 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. FST(f n :real#real) <= FST(f(SUC n))"),
+    @parser.parse_term("∀ n. FST(f n :real#real) <= FST(f(SUC n))"),
     fn(
       x5297 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -53091,7 +53091,7 @@ fn step_427() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5287 = @tactics.subgoal_then(
-    @parser.parse_term("forall n:num. FST(f n) <= SND(f n)"),
+    @parser.parse_term("∀ n:num. FST(f n) <= SND(f n)"),
     fn(
       x5284 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -53576,7 +53576,7 @@ fn step_427() -> Unit raise {
   bolzano_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (forall a b c. a <= b /\\ b <= c /\\ P(a,b) /\\ P(b,c) ==> P(a,c)) /\\\n       (forall x. ?d. &0 < d /\\ forall a b. a <= x /\\ x <= b /\\ (b - a) < d ==> P(a,b))\n      ==> forall a b. a <= b ==> P(a,b)",
+        "∀ P. (∀ a b c. a <= b /\\ b <= c /\\ P(a,b) /\\ P(b,c) ==> P(a,c)) /\\\n       (∀ x. ?d. &0 < d /\\ ∀ a b. a <= x /\\ x <= b /\\ (b - a) < d ==> P(a,b))\n      ==> ∀ a b. a <= b ==> P(a,b)",
       ),
       t5562,
     ),
@@ -53619,7 +53619,7 @@ fn step_428() -> Unit raise {
   bolzano_lemma_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (forall a b c. a <= b /\\ b <= c /\\ P a b /\\ P b c ==> P a c) /\\\n       (forall x. ?d. &0 < d /\\ (forall a b. a <= x /\\ x <= b /\\ b - a < d ==> P a b))\n       ==> forall a b. a <= b ==> P a b",
+        "∀ P. (∀ a b c. a <= b /\\ b <= c /\\ P a b /\\ P b c ==> P a c) /\\\n       (∀ x. ?d. &0 < d /\\ (∀ a b. a <= x /\\ x <= b /\\ b - a < d ==> P a b))\n       ==> ∀ a b. a <= b ==> P a b",
       ),
       t5566,
     ),
@@ -53755,7 +53755,7 @@ fn step_432() -> Unit raise {
     t5572,
   )
   sum_summable_c.set(
-    @tactics.prove(@parser.parse_term("forall f l. f sums l ==> summable f"), t5573),
+    @tactics.prove(@parser.parse_term("∀ f l. f sums l ==> summable f"), t5573),
   )
 }
 
@@ -53836,7 +53836,7 @@ fn step_433() -> Unit raise {
   )
   summable_sum_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. summable f ==> f sums (suminf f)"),
+      @parser.parse_term("∀ f. summable f ==> f sums (suminf f)"),
       t5580,
     ),
   )
@@ -54002,7 +54002,7 @@ fn step_434() -> Unit raise {
   )
   sum_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f x. f sums x ==> (x = suminf f)"),
+      @parser.parse_term("∀ f x. f sums x ==> (x = suminf f)"),
       t5597,
     ),
   )
@@ -54023,7 +54023,7 @@ fn step_435() -> Unit raise {
   let t5598 = @meson.meson_tac(@list.List([sum_uniq()]))
   ser_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f x y. f sums x /\\ f sums y ==> (x = y)"),
+      @parser.parse_term("∀ f x y. f sums x /\\ f sums y ==> (x = y)"),
       t5598,
     ),
   )
@@ -54603,7 +54603,7 @@ fn step_436() -> Unit raise {
   ser_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n. (forall m. n <= m ==> (f(m) = &0)) ==>\n        f sums (sum(0,n) f)",
+        "∀ f n. (∀ m. n <= m ==> (f(m) = &0)) ==>\n        f sums (sum(0,n) f)",
       ),
       t5639,
     ),
@@ -54881,7 +54881,7 @@ fn step_437() -> Unit raise {
   ser_pos_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n. summable f /\\ (forall m. n <= m ==> &0 <= f(m))\n        ==> sum(0,n) f <= suminf f",
+        "∀ f n. summable f /\\ (∀ m. n <= m ==> &0 <= f(m))\n        ==> sum(0,n) f <= suminf f",
       ),
       t5667,
     ),
@@ -54978,7 +54978,7 @@ fn step_438() -> Unit raise {
   ser_pos_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n. summable f /\\ (forall m. n <= m ==> &0 < f(m))\n        ==> sum(0,n) f < suminf f",
+        "∀ f n. summable f /\\ (∀ m. n <= m ==> &0 < f(m))\n        ==> sum(0,n) f < suminf f",
       ),
       t5682,
     ),
@@ -55341,7 +55341,7 @@ fn step_439() -> Unit raise {
   ser_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f k. summable f /\\ 0 < k ==>\n          (\\n. sum(n * k,k) f) sums (suminf f)",
+        "∀ f k. summable f /\\ 0 < k ==>\n          (\\n. sum(n * k,k) f) sums (suminf f)",
       ),
       t5721,
     ),
@@ -55459,7 +55459,7 @@ fn step_440() -> Unit raise {
   ser_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. summable f ==> (\\n. sum(2 * n,2) f) sums (suminf f)",
+        "∀ f. summable f ==> (\\n. sum(2 * n,2) f) sums (suminf f)",
       ),
       t5733,
     ),
@@ -56074,7 +56074,7 @@ fn step_441() -> Unit raise {
   ser_offset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. summable f ==> forall k. (\\n. f(n + k)) sums (suminf f - sum(0,k) f)",
+        "∀ f. summable f ==> ∀ k. (\\n. f(n + k)) sums (suminf f - sum(0,k) f)",
       ),
       t5769,
     ),
@@ -56303,7 +56303,7 @@ fn step_442() -> Unit raise {
   ser_offset_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f k. summable(\\n. f(n + k)) ==>\n         f sums (sum(0,k) f) + suminf (\\n. f(n + k))",
+        "∀ f k. summable(\\n. f(n + k)) ==>\n         f sums (sum(0,k) f) + suminf (\\n. f(n + k))",
       ),
       t5793,
     ),
@@ -57656,7 +57656,7 @@ fn step_443() -> Unit raise {
   ser_pos_lt_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n. summable f /\\\n         (forall d. &0 < (f(n + (2 * d))) +\n               f(n + ((2 * d) + 1)))\n        ==> sum(0,n) f < suminf f",
+        "∀ f n. summable f /\\\n         (∀ d. &0 < (f(n + (2 * d))) +\n               f(n + ((2 * d) + 1)))\n        ==> sum(0,n) f < suminf f",
       ),
       t5935,
     ),
@@ -57712,7 +57712,7 @@ fn step_444() -> Unit raise {
   ser_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0 y y0. x sums x0 /\\ y sums y0 ==> (\\n. x(n) + y(n)) sums (x0 + y0)",
+        "∀ x x0 y y0. x sums x0 /\\ y sums y0 ==> (\\n. x(n) + y(n)) sums (x0 + y0)",
       ),
       t5950,
     ),
@@ -57799,7 +57799,7 @@ fn step_445() -> Unit raise {
   )
   ser_cmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x x0 c. x sums x0 ==> (\\n. c * x(n)) sums (c * x0)"),
+      @parser.parse_term("∀ x x0 c. x sums x0 ==> (\\n. c * x(n)) sums (c * x0)"),
       t5959,
     ),
   )
@@ -57825,7 +57825,7 @@ fn step_446() -> Unit raise {
   )
   ser_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x x0. x sums x0 ==> (\\n. --(x n)) sums --x0"),
+      @parser.parse_term("∀ x x0. x sums x0 ==> (\\n. --(x n)) sums --x0"),
       t5962,
     ),
   )
@@ -57881,7 +57881,7 @@ fn step_447() -> Unit raise {
   ser_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x x0 y y0. x sums x0 /\\ y sums y0 ==> (\\n. x(n) - y(n)) sums (x0 - y0)",
+        "∀ x x0 y y0. x sums x0 /\\ y sums y0 ==> (\\n. x(n) - y(n)) sums (x0 - y0)",
       ),
       t5970,
     ),
@@ -57912,7 +57912,7 @@ fn step_448() -> Unit raise {
   )
   ser_cdiv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x x0 c. x sums x0 ==> (\\n. x(n) / c) sums (x0 / c)"),
+      @parser.parse_term("∀ x x0 c. x sums x0 ==> (\\n. x(n) / c) sums (x0 / c)"),
       t5974,
     ),
   )
@@ -58168,7 +58168,7 @@ fn step_449() -> Unit raise {
   ser_cauchy_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. summable f <=>\n          forall e. &0 < e ==> ?N. forall m n. m >= N ==> abs(sum(m,n) f) < e",
+        "∀ f. summable f <=>\n          ∀ e. &0 < e ==> ?N. ∀ m n. m >= N ==> abs(sum(m,n) f) < e",
       ),
       t6008,
     ),
@@ -58599,7 +58599,7 @@ fn step_450() -> Unit raise {
     t6044,
   )
   ser_zero_c.set(
-    @tactics.prove(@parser.parse_term("forall f. summable f ==> f --> &0"), t6045),
+    @tactics.prove(@parser.parse_term("∀ f. summable f ==> f --> &0"), t6045),
   )
 }
 
@@ -58864,7 +58864,7 @@ fn step_451() -> Unit raise {
   ser_compar_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (?N. forall n. n >= N ==> abs(f(n)) <= g(n)) /\\ summable g ==>\n            summable f",
+        "∀ f g. (?N. ∀ n. n >= N ==> abs(f(n)) <= g(n)) /\\ summable g ==>\n            summable f",
       ),
       t6087,
     ),
@@ -58893,7 +58893,7 @@ fn step_452() -> Unit raise {
     t6099,
   ])
   let t6097 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. abs(f(n)) = abs((\\k:num. abs(f k)) n)"),
+    @parser.parse_term("∀ n. abs(f(n)) = abs((\\k:num. abs(f k)) n)"),
     fn(
       x6088 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -58945,7 +58945,7 @@ fn step_452() -> Unit raise {
   ser_compara_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (?N. forall n. n >= N ==> abs(f(n)) <= g(n)) /\\ summable g ==>\n            summable (\\k. abs(f k))",
+        "∀ f g. (?N. ∀ n. n >= N ==> abs(f(n)) <= g(n)) /\\ summable g ==>\n            summable (\\k. abs(f k))",
       ),
       t6101,
     ),
@@ -59246,7 +59246,7 @@ fn step_453() -> Unit raise {
   ser_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. f(n) <= g(n)) /\\ summable f /\\ summable g\n        ==> suminf f <= suminf g",
+        "∀ f g. (∀ n. f(n) <= g(n)) /\\ summable f /\\ summable g\n        ==> suminf f <= suminf g",
       ),
       t6131,
     ),
@@ -59358,7 +59358,7 @@ fn step_454() -> Unit raise {
   ser_le2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. abs(f n) <= g(n)) /\\ summable g ==>\n                summable f /\\ suminf f <= suminf g",
+        "∀ f g. (∀ n. abs(f n) <= g(n)) /\\ summable g ==>\n                summable f /\\ suminf f <= suminf g",
       ),
       t6146,
     ),
@@ -59627,7 +59627,7 @@ fn step_455() -> Unit raise {
   )
   ser_aconv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. summable (\\n. abs(f n)) ==> summable f"),
+      @parser.parse_term("∀ f. summable (\\n. abs(f n)) ==> summable f"),
       t6170,
     ),
   )
@@ -60021,7 +60021,7 @@ fn step_456() -> Unit raise {
   ser_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. summable(\\n. abs(f n)) ==> abs(suminf f) <= suminf(\\n. abs(f n))",
+        "∀ f. summable(\\n. abs(f n)) ==> abs(suminf f) <= suminf(\\n. abs(f n))",
       ),
       t6205,
     ),
@@ -60066,7 +60066,7 @@ fn step_457() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6224 = @tactics.subgoal_then(
-    @parser.parse_term("forall p. (p / (x - &1)) * (x - &1) = p"),
+    @parser.parse_term("∀ p. (p / (x - &1)) * (x - &1) = p"),
     fn(
       x6222 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -60246,7 +60246,7 @@ fn step_457() -> Unit raise {
   gp_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. ~(x = &1) ==>\n        forall n. (sum(0,n) (\\n. x pow n) = ((x pow n) - &1) / (x - &1))",
+        "∀ x. ~(x = &1) ==>\n        ∀ n. (sum(0,n) (\\n. x pow n) = ((x pow n) - &1) / (x - &1))",
       ),
       t6235,
     ),
@@ -60605,7 +60605,7 @@ fn step_458() -> Unit raise {
   )
   gp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. abs(x) < &1 ==> (\\n. x pow n) sums inv(&1 - x)"),
+      @parser.parse_term("∀ x. abs(x) < &1 ==> (\\n. x pow n) sums inv(&1 - x)"),
       t6282,
     ),
   )
@@ -60835,7 +60835,7 @@ fn step_459() -> Unit raise {
   abs_neg_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c x y. c <= &0 ==> abs(x) <= c * abs(y) ==> (x = &0)",
+        "∀ c x y. c <= &0 ==> abs(x) <= c * abs(y) ==> (x = &0)",
       ),
       t6306,
     ),
@@ -61297,7 +61297,7 @@ fn step_460() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6327 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. n >= (SUC N) ==> (f(n) = &0)"),
+    @parser.parse_term("∀ n. n >= (SUC N) ==> (f(n) = &0)"),
     fn(
       x6324 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -61453,7 +61453,7 @@ fn step_460() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6314 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. n >= N ==> (f(SUC n) = &0)"),
+    @parser.parse_term("∀ n. n >= N ==> (f(SUC n) = &0)"),
     fn(
       x6311 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -61557,7 +61557,7 @@ fn step_460() -> Unit raise {
   ser_ratio_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f c N. c < &1 /\\\n           (forall n. n >= N ==> abs(f(SUC n)) <= c * abs(f(n))) ==>\n       summable f",
+        "∀ f c N. c < &1 /\\\n           (∀ n. n >= N ==> abs(f(SUC n)) <= c * abs(f(n))) ==>\n       summable f",
       ),
       t6394,
     ),
@@ -61973,7 +61973,7 @@ fn step_461() -> Unit raise {
   seq_truncation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l n b.\n        f sums l /\\ (forall m. abs(sum(n,m) f) <= b)\n        ==> abs(l - sum(0,n) f) <= b",
+        "∀ f l n b.\n        f sums l /\\ (∀ m. abs(sum(n,m) f) <= b)\n        ==> abs(l - sum(0,n) f) <= b",
       ),
       t6433,
     ),
@@ -62083,7 +62083,7 @@ fn step_468() -> Unit raise {
   lim_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f y0 x0. (f --> y0)(x0) <=>\n        forall e. &0 < e ==>\n            ?d. &0 < d /\\ forall x. &0 < abs(x - x0) /\\ abs(x - x0) < d ==>\n                abs(f(x) - y0) < e",
+        "∀ f y0 x0. (f --> y0)(x0) <=>\n        ∀ e. &0 < e ==>\n            ?d. &0 < d /\\ ∀ x. &0 < abs(x - x0) /\\ abs(x - x0) < d ==>\n                abs(f(x) - y0) < e",
       ),
       t6445,
     ),
@@ -62298,7 +62298,7 @@ fn step_469() -> Unit raise {
     t6468,
   )
   lim_const_c.set(
-    @tactics.prove(@parser.parse_term("forall k x. ((\\x. k) --> k)(x)"), t6469),
+    @tactics.prove(@parser.parse_term("∀ k x. ((\\x. k) --> k)(x)"), t6469),
   )
 }
 
@@ -62327,7 +62327,7 @@ fn step_470() -> Unit raise {
   lim_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) + g(x)) --> (l + m))(x)",
+        "∀ f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) + g(x)) --> (l + m))(x)",
       ),
       t6473,
     ),
@@ -62359,7 +62359,7 @@ fn step_471() -> Unit raise {
   lim_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) * g(x)) --> (l * m))(x)",
+        "∀ f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) * g(x)) --> (l * m))(x)",
       ),
       t6477,
     ),
@@ -62390,7 +62390,7 @@ fn step_472() -> Unit raise {
   )
   lim_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f l. (f --> l)(x) <=> ((\\x. --(f(x))) --> --l)(x)"),
+      @parser.parse_term("∀ f l. (f --> l)(x) <=> ((\\x. --(f(x))) --> --l)(x)"),
       t6481,
     ),
   )
@@ -62421,7 +62421,7 @@ fn step_473() -> Unit raise {
   lim_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l. (f --> l)(x) /\\ ~(l = &0) ==>\n        ((\\x. inv(f(x))) --> inv l)(x)",
+        "∀ f l. (f --> l)(x) /\\ ~(l = &0) ==>\n        ((\\x. inv(f(x))) --> inv l)(x)",
       ),
       t6485,
     ),
@@ -62453,7 +62453,7 @@ fn step_474() -> Unit raise {
   lim_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) - g(x)) --> (l - m))(x)",
+        "∀ f g l m. (f --> l)(x) /\\ (g --> m)(x) ==>\n      ((\\x. f(x) - g(x)) --> (l - m))(x)",
       ),
       t6489,
     ),
@@ -62485,7 +62485,7 @@ fn step_475() -> Unit raise {
   lim_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m. (f --> l)(x) /\\ (g --> m)(x) /\\ ~(m = &0) ==>\n      ((\\x. f(x) / g(x)) --> (l / m))(x)",
+        "∀ f g l m. (f --> l)(x) /\\ (g --> m)(x) /\\ ~(m = &0) ==>\n      ((\\x. f(x) / g(x)) --> (l / m))(x)",
       ),
       t6493,
     ),
@@ -62512,7 +62512,7 @@ fn step_476() -> Unit raise {
   )
   lim_null_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f l x. (f --> l)(x) <=> ((\\x. f(x) - l) --> &0)(x)"),
+      @parser.parse_term("∀ f l x. (f --> l)(x) <=> ((\\x. f(x) - l) --> &0)(x)"),
       t6496,
     ),
   )
@@ -62549,7 +62549,7 @@ fn step_477() -> Unit raise {
   lim_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l m n x.\n      (forall r. m <= r /\\ r < m + n ==> (f r --> l r)(x))\n      ==> ((\\x. sum(m,n) (\\r. f r x)) --> sum(m,n) l)(x)",
+        "∀ f l m n x.\n      (∀ r. m <= r /\\ r < m + n ==> (f r --> l r)(x))\n      ==> ((\\x. sum(m,n) (\\r. f r x)) --> sum(m,n) l)(x)",
       ),
       t6500,
     ),
@@ -62601,7 +62601,7 @@ fn step_478() -> Unit raise {
     t6504,
   )
   lim_x_c.set(
-    @tactics.prove(@parser.parse_term("forall x0. ((\\x. x) --> x0)(x0)"), t6505),
+    @tactics.prove(@parser.parse_term("∀ x0. ((\\x. x) --> x0)(x0)"), t6505),
   )
 }
 
@@ -62629,7 +62629,7 @@ fn step_479() -> Unit raise {
   )
   lim_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f l m x. (f --> l)(x) /\\ (f --> m)(x) ==> (l = m)"),
+      @parser.parse_term("∀ f l m x. (f --> l)(x) /\\ (f --> m)(x) ==> (l = m)"),
       t6509,
     ),
   )
@@ -62790,7 +62790,7 @@ fn step_480() -> Unit raise {
   lim_equal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l x0. (forall x. ~(x = x0) ==> (f x = g x)) ==>\n        ((f --> l)(x0) <=> (g --> l)(x0))",
+        "∀ f g l x0. (∀ x. ~(x = x0) ==> (f x = g x)) ==>\n        ((f --> l)(x0) <=> (g --> l)(x0))",
       ),
       t6520,
     ),
@@ -63207,7 +63207,7 @@ fn step_481() -> Unit raise {
   lim_transform_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g x0 l. ((\\x. f(x) - g(x)) --> &0)(x0) /\\ (g --> l)(x0)\n        ==> (f --> l)(x0)",
+        "∀ f g x0 l. ((\\x. f(x) - g(x)) --> &0)(x0) /\\ (g --> l)(x0)\n        ==> (f --> l)(x0)",
       ),
       t6574,
     ),
@@ -63294,7 +63294,7 @@ fn step_485() -> Unit raise {
   diff_uniq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l m x. (f diffl l)(x) /\\ (f diffl m)(x) ==> (l = m)",
+        "∀ f l m x. (f diffl l)(x) /\\ (f diffl m)(x) ==> (l = m)",
       ),
       t6577,
     ),
@@ -63543,7 +63543,7 @@ fn step_486() -> Unit raise {
   )
   diff_cont_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f l x. (f diffl l)(x) ==> f contl x"),
+      @parser.parse_term("∀ f l x. (f diffl l)(x) ==> f contl x"),
       t6619,
     ),
   )
@@ -63683,7 +63683,7 @@ fn step_487() -> Unit raise {
   )
   contl_lim_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f x. f contl x <=> (f --> f(x))(x)"),
+      @parser.parse_term("∀ f x. f contl x <=> (f --> f(x))(x)"),
       t6634,
     ),
   )
@@ -63703,7 +63703,7 @@ pub fn contl_lim() -> @kernel.Thm {
 fn step_488() -> Unit raise {
   let t6635 = @simp.rewrite_tac(@list.List([contl_lim(), lim_x()]))
   cont_x_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (\\x. x) contl x"), t6635),
+    @tactics.prove(@parser.parse_term("∀ x. (\\x. x) contl x"), t6635),
   )
 }
 
@@ -63726,7 +63726,7 @@ fn step_489() -> Unit raise {
     t6637,
   )
   cont_const_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (\\x. k) contl x"), t6638),
+    @tactics.prove(@parser.parse_term("∀ x. (\\x. k) contl x"), t6638),
   )
 }
 
@@ -63756,7 +63756,7 @@ fn step_490() -> Unit raise {
   cont_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. f contl x /\\ g contl x ==> (\\x. f(x) + g(x)) contl x",
+        "∀ x. f contl x /\\ g contl x ==> (\\x. f(x) + g(x)) contl x",
       ),
       t6640,
     ),
@@ -63789,7 +63789,7 @@ fn step_491() -> Unit raise {
   cont_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. f contl x /\\ g contl x ==> (\\x. f(x) * g(x)) contl x",
+        "∀ x. f contl x /\\ g contl x ==> (\\x. f(x) * g(x)) contl x",
       ),
       t6642,
     ),
@@ -63821,7 +63821,7 @@ fn step_492() -> Unit raise {
   )
   cont_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. f contl x ==> (\\x. --(f(x))) contl x"),
+      @parser.parse_term("∀ x. f contl x ==> (\\x. --(f(x))) contl x"),
       t6644,
     ),
   )
@@ -63853,7 +63853,7 @@ fn step_493() -> Unit raise {
   cont_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. f contl x /\\ ~(f x = &0) ==> (\\x. inv(f(x))) contl x",
+        "∀ x. f contl x /\\ ~(f x = &0) ==> (\\x. inv(f(x))) contl x",
       ),
       t6646,
     ),
@@ -63886,7 +63886,7 @@ fn step_494() -> Unit raise {
   cont_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. f contl x /\\ g contl x ==> (\\x. f(x) - g(x)) contl x",
+        "∀ x. f contl x /\\ g contl x ==> (\\x. f(x) - g(x)) contl x",
       ),
       t6648,
     ),
@@ -63919,7 +63919,7 @@ fn step_495() -> Unit raise {
   cont_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. f contl x /\\ g contl x /\\ ~(g x = &0) ==>\n        (\\x. f(x) / g(x)) contl x",
+        "∀ x. f contl x /\\ g contl x /\\ ~(g x = &0) ==>\n        (\\x. f(x) / g(x)) contl x",
       ),
       t6650,
     ),
@@ -63951,7 +63951,7 @@ fn step_496() -> Unit raise {
   )
   cont_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f x. f contl x ==> (\\x. abs(f x)) contl x"),
+      @parser.parse_term("∀ f x. f contl x ==> (\\x. abs(f x)) contl x"),
       t6652,
     ),
   )
@@ -64619,7 +64619,7 @@ fn step_497() -> Unit raise {
   cont_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g x. f contl x /\\ g contl (f x) ==> (\\x. g(f x)) contl x",
+        "∀ f g x. f contl x /\\ g contl (f x) ==> (\\x. g(f x)) contl x",
       ),
       t6715,
     ),
@@ -65579,7 +65579,7 @@ fn step_498() -> Unit raise {
     })
   })
   let t6800 = @tactics.undisch_tac(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> f contl x"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> f contl x"),
   )
   let t6799 = @simp.asm_rewrite_tac(@list.List([]))
   let t6795 = @parser.parse_term("x:real")
@@ -65652,7 +65652,7 @@ fn step_498() -> Unit raise {
     })(((x6796 : @kernel.Thm) => @bool.spec(t6795, x6796))(x6797))
   })
   let t6791 = @tactics.undisch_tac(
-    @parser.parse_term("forall x. ~(a <= x /\\ x <= b /\\ (f(x) = (y:real)))"),
+    @parser.parse_term("∀ x. ~(a <= x /\\ x <= b /\\ (f(x) = (y:real)))"),
   )
   let t6789 = @simp.asm_rewrite_tac(@list.List([]))
   let t6787 = @tactics.exists_tac(@parser.parse_term("v:real"))
@@ -67004,7 +67004,7 @@ fn step_498() -> Unit raise {
   ivt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b y. a <= b /\\\n             (f(a) <= y /\\ y <= f(b)) /\\\n             (forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> (?x. a <= x /\\ x <= b /\\ (f(x) = y))",
+        "∀ f a b y. a <= b /\\\n             (f(a) <= y /\\ y <= f(b)) /\\\n             (∀ x. a <= x /\\ x <= b ==> f contl x)\n        ==> (?x. a <= x /\\ x <= b /\\ (f(x) = y))",
       ),
       t6920,
     ),
@@ -67073,7 +67073,7 @@ fn step_499() -> Unit raise {
   ivt2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b y. (a <= b) /\\ (f(b) <= y /\\ y <= f(a)) /\\\n             (forall x. a <= x /\\ x <= b ==> f contl x) ==>\n        ?x. a <= x /\\ x <= b /\\ (f(x) = y)",
+        "∀ f a b y. (a <= b) /\\ (f(b) <= y /\\ y <= f(a)) /\\\n             (∀ x. a <= x /\\ x <= b ==> f contl x) ==>\n        ?x. a <= x /\\ x <= b /\\ (f(x) = y)",
       ),
       t6930,
     ),
@@ -67105,7 +67105,7 @@ fn step_500() -> Unit raise {
     t6933,
   )
   diff_const_c.set(
-    @tactics.prove(@parser.parse_term("forall k x. ((\\x. k) diffl &0)(x)"), t6934),
+    @tactics.prove(@parser.parse_term("∀ k x. ((\\x. k) diffl &0)(x)"), t6934),
   )
 }
 
@@ -67171,7 +67171,7 @@ fn step_501() -> Unit raise {
   diff_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) + g(x)) diffl (l + m))(x)",
+        "∀ f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) + g(x)) diffl (l + m))(x)",
       ),
       t6945,
     ),
@@ -67250,7 +67250,7 @@ fn step_502() -> Unit raise {
   ])
   let t6958 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall a b c d e. ((a * b) + (c * d)) / e = ((b / e) * a) + ((c / e) * d)",
+      "∀ a b c d e. ((a * b) + (c * d)) / e = ((b / e) * a) + ((c / e) * d)",
     ),
     fn(
       x6956 : @kernel.Thm,
@@ -67300,7 +67300,7 @@ fn step_502() -> Unit raise {
   ])
   let t6949 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall a b c d. (a * b) - (c * d) = ((a * b) - (a * d)) + ((a * d) - (c * d))",
+      "∀ a b c d. (a * b) - (c * d) = ((a * b) - (a * d)) + ((a * d) - (c * d))",
     ),
     fn(
       x6947 : @kernel.Thm,
@@ -67392,7 +67392,7 @@ fn step_502() -> Unit raise {
   diff_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                  ((\\x. f(x) * g(x)) diffl ((l * g(x)) + (m * f(x))))(x)",
+        "∀ f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                  ((\\x. f(x) * g(x)) diffl ((l * g(x)) + (m * f(x))))(x)",
       ),
       t6986,
     ),
@@ -67605,7 +67605,7 @@ fn step_503() -> Unit raise {
   diff_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f c l x. (f diffl l)(x) ==> ((\\x. c * f(x)) diffl (c * l))(x)",
+        "∀ f c l x. (f diffl l)(x) ==> ((\\x. c * f(x)) diffl (c * l))(x)",
       ),
       t7012,
     ),
@@ -67633,7 +67633,7 @@ fn step_504() -> Unit raise {
   diff_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l x. (f diffl l)(x) ==> ((\\x. --(f x)) diffl --l)(x)",
+        "∀ f l x. (f diffl l)(x) ==> ((\\x. --(f x)) diffl --l)(x)",
       ),
       t7015,
     ),
@@ -67813,7 +67813,7 @@ fn step_505() -> Unit raise {
   diff_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) - g(x)) diffl (l - m))(x)",
+        "∀ f g l m x. (f diffl l)(x) /\\ (g diffl m)(x) ==>\n                   ((\\x. f(x) - g(x)) diffl (l - m))(x)",
       ),
       t7031,
     ),
@@ -68219,7 +68219,7 @@ fn step_506() -> Unit raise {
   diff_carat_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l x. (f diffl l)(x) <=>\n      ?g. (forall z. f(z) - f(x) = g(z) * (z - x)) /\\ g contl x /\\ (g(x) = l)",
+        "∀ f l x. (f diffl l)(x) <=>\n      ?g. (∀ z. f(z) - f(x) = g(z) * (z - x)) /\\ g contl x /\\ (g(x) = l)",
       ),
       t7072,
     ),
@@ -68694,7 +68694,7 @@ fn step_507() -> Unit raise {
   diff_chain_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m x.\n     (f diffl l)(g x) /\\ (g diffl m)(x) ==> ((\\x. f(g x)) diffl (l * m))(x)",
+        "∀ f g l m x.\n     (f diffl l)(g x) /\\ (g diffl m)(x) ==> ((\\x. f(g x)) diffl (l * m))(x)",
       ),
       t7125,
     ),
@@ -68856,7 +68856,7 @@ fn step_508() -> Unit raise {
     t7140,
   )
   diff_x_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ((\\x. x) diffl &1)(x)"), t7141),
+    @tactics.prove(@parser.parse_term("∀ x. ((\\x. x) diffl &1)(x)"), t7141),
   )
 }
 
@@ -69132,7 +69132,7 @@ fn step_509() -> Unit raise {
   diff_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x. ((\\x. x pow n) diffl (&n * (x pow (n - 1))))(x)",
+        "∀ n x. ((\\x. x pow n) diffl (&n * (x pow (n - 1))))(x)",
       ),
       t7173,
     ),
@@ -70688,7 +70688,7 @@ fn step_510() -> Unit raise {
   diff_xm1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. ~(x = &0) ==> ((\\x. inv(x)) diffl (--(inv(x) pow 2)))(x)",
+        "∀ x. ~(x = &0) ==> ((\\x. inv(x)) diffl (--(inv(x) pow 2)))(x)",
       ),
       t7280,
     ),
@@ -70767,7 +70767,7 @@ fn step_511() -> Unit raise {
   diff_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f l x. (f diffl l)(x) /\\ ~(f(x) = &0) ==>\n        ((\\x. inv(f x)) diffl --(l / (f(x) pow 2)))(x)",
+        "∀ f l x. (f diffl l)(x) /\\ ~(f(x) = &0) ==>\n        ((\\x. inv(f x)) diffl --(l / (f(x) pow 2)))(x)",
       ),
       t7291,
     ),
@@ -71448,7 +71448,7 @@ fn step_512() -> Unit raise {
   diff_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l m. (f diffl l)(x) /\\ (g diffl m)(x) /\\ ~(g(x) = &0) ==>\n    ((\\x. f(x) / g(x)) diffl (((l * g(x)) - (m * f(x))) / (g(x) pow 2)))(x)",
+        "∀ f g l m. (f diffl l)(x) /\\ (g diffl m)(x) /\\ ~(g(x) = &0) ==>\n    ((\\x. f(x) / g(x)) diffl (((l * g(x)) - (m * f(x))) / (g(x) pow 2)))(x)",
       ),
       t7349,
     ),
@@ -71536,7 +71536,7 @@ fn step_513() -> Unit raise {
   diff_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f f' m n x. (forall r. m <= r /\\ r < (m + n)\n                 ==> ((\\x. f r x) diffl (f' r x))(x))\n     ==> ((\\x. sum(m,n)(\\n. f n x)) diffl (sum(m,n) (\\r. f' r x)))(x)",
+        "∀ f f' m n x. (∀ r. m <= r /\\ r < (m + n)\n                 ==> ((\\x. f r x) diffl (f' r x))(x))\n     ==> ((\\x. sum(m,n)(\\n. f n x)) diffl (sum(m,n) (\\r. f' r x)))(x)",
       ),
       t7363,
     ),
@@ -72048,7 +72048,7 @@ fn step_514() -> Unit raise {
     })(((x7475 : @kernel.Thm) => @bool.spec(t7474, x7475))(x7476))
   })
   let t7470 = @tactics.undisch_tac(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> f contl x"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> f contl x"),
   )
   let t7468 = @simp.asm_rewrite_tac(@list.List([]))
   let t7466 = @tactics.exists_tac(@parser.parse_term("v:real"))
@@ -72617,7 +72617,7 @@ fn step_514() -> Unit raise {
   ])
   let t7372 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t7370 = @parser.parse_term(
-    "\\(u,v). a <= u /\\ u <= v /\\ v <= b ==>\n               ?M. forall x. u <= x /\\ x <= v ==> f x <= M",
+    "\\(u,v). a <= u /\\ u <= v /\\ v <= b ==>\n               ?M. ∀ x. u <= x /\\ x <= v ==> f x <= M",
   )
   let t7371 = (fn(
     x7364 : @kernel.Thm,
@@ -73629,7 +73629,7 @@ fn step_514() -> Unit raise {
   cont_bounded_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. forall x. a <= x /\\ x <= b ==> f(x) <= M",
+        "∀ f a b. (a <= b /\\ ∀ x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. ∀ x. a <= x /\\ x <= b ==> f(x) <= M",
       ),
       t7551,
     ),
@@ -73725,7 +73725,7 @@ fn step_515() -> Unit raise {
   cont_bounded_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (forall x. a <= x /\\ x <= b ==> f contl x)\n           ==> ?M. forall x. a <= x /\\ x <= b ==> abs(f(x)) <= M",
+        "∀ f a b. (∀ x. a <= x /\\ x <= b ==> f contl x)\n           ==> ?M. ∀ x. a <= x /\\ x <= b ==> abs(f(x)) <= M",
       ),
       t7569,
     ),
@@ -75048,7 +75048,7 @@ fn step_516() -> Unit raise {
   cont_hassup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (forall x. a <= x /\\ x <= b ==> f(x) <= M) /\\\n                (forall N. N < M ==> ?x. a <= x /\\ x <= b /\\ N < f(x))",
+        "∀ f a b. (a <= b /\\ ∀ x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (∀ x. a <= x /\\ x <= b ==> f(x) <= M) /\\\n                (∀ N. N < M ==> ?x. a <= x /\\ x <= b /\\ N < f(x))",
       ),
       t7680,
     ),
@@ -75355,7 +75355,7 @@ fn step_517() -> Unit raise {
     })(((x7786 : @kernel.Thm) => @bool.spec(t7785, x7786))(x7787))
   })
   let t7781 = @tactics.undisch_tac(
-    @parser.parse_term("forall N. N < M ==> (?x. a <= x /\\ x <= b /\\ N < (f x))"),
+    @parser.parse_term("∀ N. N < M ==> (?x. a <= x /\\ x <= b /\\ N < (f x))"),
   )
   let t7780 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(real_lt_sub_ladd())]),
@@ -75488,7 +75488,7 @@ fn step_517() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7763 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> inv(k + &1) < (M - (f x))"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> inv(k + &1) < (M - (f x))"),
     fn(
       x7760 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -75568,7 +75568,7 @@ fn step_517() -> Unit raise {
   ])
   let t7753 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x. a <= x /\\ x <= b ==>\n         inv(k + &1) < inv((\\x. inv(M - (f x))) x)",
+      "∀ x. a <= x /\\ x <= b ==>\n         inv(k + &1) < inv((\\x. inv(M - (f x))) x)",
     ),
     fn(
       x7750 : @kernel.Thm,
@@ -75648,7 +75648,7 @@ fn step_517() -> Unit raise {
   ])
   let t7743 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x. a <= x /\\ x <= b ==> (\\x. inv(M - (f x))) x < (k + &1)",
+      "∀ x. a <= x /\\ x <= b ==> (\\x. inv(M - (f x))) x < (k + &1)",
     ),
     fn(
       x7740 : @kernel.Thm,
@@ -75714,7 +75714,7 @@ fn step_517() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7735 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> &0 < inv(M - f(x))"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> &0 < inv(M - f(x))"),
     fn(
       x7732 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -75773,7 +75773,7 @@ fn step_517() -> Unit raise {
   ])
   let t7726 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?k. forall x. a <= x /\\ x <= b ==> (\\x. inv(M - (f x))) x <= k",
+      "?k. ∀ x. a <= x /\\ x <= b ==> (\\x. inv(M - (f x))) x <= k",
     ),
     fn(
       x7723 : @kernel.Thm,
@@ -75916,7 +75916,7 @@ fn step_517() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7706 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> (\\x. inv(M - f(x))) contl x"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> (\\x. inv(M - f(x))) contl x"),
     fn(
       x7703 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -76032,7 +76032,7 @@ fn step_517() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7694 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> f(x) < M"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> f(x) < M"),
     fn(
       x7691 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -76243,7 +76243,7 @@ fn step_517() -> Unit raise {
   cont_attains_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (forall x. a <= x /\\ x <= b ==> f(x) <= M) /\\\n                (?x. a <= x /\\ x <= b /\\ (f(x) = M))",
+        "∀ f a b. (a <= b /\\ ∀ x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (∀ x. a <= x /\\ x <= b ==> f(x) <= M) /\\\n                (?x. a <= x /\\ x <= b /\\ (f(x) = M))",
       ),
       t7816,
     ),
@@ -76439,7 +76439,7 @@ fn step_518() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7821 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> (\\x. --(f x)) contl x"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> (\\x. --(f x)) contl x"),
     fn(
       x7818 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -76522,7 +76522,7 @@ fn step_518() -> Unit raise {
   cont_attains2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (forall x. a <= x /\\ x <= b ==> M <= f(x)) /\\\n                (?x. a <= x /\\ x <= b /\\ (f(x) = M))",
+        "∀ f a b. (a <= b /\\ ∀ x. a <= x /\\ x <= b ==> f contl x)\n        ==> ?M. (∀ x. a <= x /\\ x <= b ==> M <= f(x)) /\\\n                (?x. a <= x /\\ x <= b /\\ (f(x) = M))",
       ),
       t7847,
     ),
@@ -77673,7 +77673,7 @@ fn step_519() -> Unit raise {
   cont_attains_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (a <= b /\\ forall x. a <= x /\\ x <= b ==>  f contl x)\n        ==> ?L M. (forall x. a <= x /\\ x <= b ==> L <= f(x) /\\ f(x) <= M) /\\\n                  forall y. L <= y /\\ y <= M ==> ?x. a <= x /\\ x <= b /\\ (f(x) = y)",
+        "∀ f a b. (a <= b /\\ ∀ x. a <= x /\\ x <= b ==>  f contl x)\n        ==> ?L M. (∀ x. a <= x /\\ x <= b ==> L <= f(x) /\\ f(x) <= M) /\\\n                  ∀ y. L <= y /\\ y <= M ==> ?x. a <= x /\\ x <= b /\\ (f(x) = y)",
       ),
       t7949,
     ),
@@ -78149,7 +78149,7 @@ fn step_520() -> Unit raise {
   diff_linc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x l. (f diffl l)(x) /\\ &0 < l ==>\n      ?d. &0 < d /\\ forall h. &0 < h /\\ h < d ==> f(x) < f(x + h)",
+        "∀ f x l. (f diffl l)(x) /\\ &0 < l ==>\n      ?d. &0 < d /\\ ∀ h. &0 < h /\\ h < d ==> f(x) < f(x + h)",
       ),
       t7993,
     ),
@@ -78725,7 +78725,7 @@ fn step_521() -> Unit raise {
   diff_ldec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x l. (f diffl l)(x) /\\ l < &0 ==>\n      ?d. &0 < d /\\ forall h. &0 < h /\\ h < d ==> f(x) < f(x - h)",
+        "∀ f x l. (f diffl l)(x) /\\ l < &0 ==>\n      ?d. &0 < d /\\ ∀ h. &0 < h /\\ h < d ==> f(x) < f(x - h)",
       ),
       t8063,
     ),
@@ -80287,7 +80287,7 @@ fn step_522() -> Unit raise {
   diff_lmax_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x l. (f diffl l)(x) /\\\n           (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> f(y) <= f(x))) ==> (l = &0)",
+        "∀ f x l. (f diffl l)(x) /\\\n           (?d. &0 < d /\\ (∀ y. abs(x - y) < d ==> f(y) <= f(x))) ==> (l = &0)",
       ),
       t8202,
     ),
@@ -80347,7 +80347,7 @@ fn step_523() -> Unit raise {
   diff_lmin_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x l. (f diffl l)(x) /\\\n           (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> f(x) <= f(y))) ==> (l = &0)",
+        "∀ f x l. (f diffl l)(x) /\\\n           (?d. &0 < d /\\ (∀ y. abs(x - y) < d ==> f(x) <= f(y))) ==> (l = &0)",
       ),
       t8211,
     ),
@@ -80651,7 +80651,7 @@ fn step_524() -> Unit raise {
   diff_lconst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x l. (f diffl l)(x) /\\\n         (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> (f(y) = f(x)))) ==> (l = &0)",
+        "∀ f x l. (f diffl l)(x) /\\\n         (?d. &0 < d /\\ (∀ y. abs(x - y) < d ==> (f(y) = f(x)))) ==> (l = &0)",
       ),
       t8238,
     ),
@@ -80904,7 +80904,7 @@ fn step_525() -> Unit raise {
   interval_lemma_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b x. a < x /\\ x < b ==>\n        ?d. &0 < d /\\ forall y. abs(x - y) < d ==> a < y /\\ y < b",
+        "∀ a b x. a < x /\\ x < b ==>\n        ?d. &0 < d /\\ ∀ y. abs(x - y) < d ==> a < y /\\ y < b",
       ),
       t8273,
     ),
@@ -81097,7 +81097,7 @@ fn step_526() -> Unit raise {
   interval_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b x. a < x /\\ x < b ==>\n        ?d. &0 < d /\\ forall y. abs(x - y) < d ==> a <= y /\\ y <= b",
+        "∀ a b x. a < x /\\ x < b ==>\n        ?d. &0 < d /\\ ∀ y. abs(x - y) < d ==> a <= y /\\ y <= b",
       ),
       t8293,
     ),
@@ -81443,7 +81443,7 @@ fn step_527() -> Unit raise {
   ])
   let t8470 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?l. (f diffl l)(x) /\\\n        (?d. &0 < d /\\ (forall y. abs(x - y) < d ==> (f(y) = f(x))))",
+      "?l. (f diffl l)(x) /\\\n        (?d. &0 < d /\\ (∀ y. abs(x - y) < d ==> (f(y) = f(x))))",
     ),
     fn(
       x8467 : @kernel.Thm,
@@ -82280,7 +82280,7 @@ fn step_527() -> Unit raise {
     t8506,
   ])
   let t8398 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> (f(x):real = f(b))"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> (f(x):real = f(b))"),
     fn(
       x8395 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -82443,7 +82443,7 @@ fn step_527() -> Unit raise {
   ])
   let t8375 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?l. (f diffl l)(x2) /\\\n          ?d. &0 < d /\\ (forall y. abs(x2 - y) < d ==> f(x2) <= f(y))",
+      "?l. (f diffl l)(x2) /\\\n          ?d. &0 < d /\\ (∀ y. abs(x2 - y) < d ==> f(x2) <= f(y))",
     ),
     fn(
       x8372 : @kernel.Thm,
@@ -82710,7 +82710,7 @@ fn step_527() -> Unit raise {
   ])
   let t8342 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?l. (f diffl l)(x1) /\\\n          ?d. &0 < d /\\ (forall y. abs(x1 - y) < d ==> f(y) <= f(x1))",
+      "?l. (f diffl l)(x1) /\\\n          ?d. &0 < d /\\ (∀ y. abs(x1 - y) < d ==> f(y) <= f(x1))",
     ),
     fn(
       x8339 : @kernel.Thm,
@@ -83202,7 +83202,7 @@ fn step_527() -> Unit raise {
   rolle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. a < b /\\\n           (f(a) = f(b)) /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> f differentiable x)\n        ==> ?z. a < z /\\ z < b /\\ (f diffl &0)(z)",
+        "∀ f a b. a < b /\\\n           (f(a) = f(b)) /\\\n           (∀ x. a <= x /\\ x <= b ==> f contl x) /\\\n           (∀ x. a < x /\\ x < b ==> f differentiable x)\n        ==> ?z. a < z /\\ z < b /\\ (f diffl &0)(z)",
       ),
       t8508,
     ),
@@ -83417,7 +83417,7 @@ fn step_528() -> Unit raise {
   mvt_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:real->real) a b.\n        (\\x. f(x) - (((f(b) - f(a)) / (b - a)) * x))(a) =\n        (\\x. f(x) - (((f(b) - f(a)) / (b - a)) * x))(b)",
+        "∀(f:real->real) a b.\n        (\\x. f(x) - (((f(b) - f(a)) / (b - a)) * x))(a) =\n        (\\x. f(x) - (((f(b) - f(a)) / (b - a)) * x))(b)",
       ),
       t8550,
     ),
@@ -85108,7 +85108,7 @@ fn step_529() -> Unit raise {
   mvt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> f differentiable x)\n        ==> ?l z. a < z /\\ z < b /\\ (f diffl l)(z) /\\\n            (f(b) - f(a) = (b - a) * l)",
+        "∀ f a b. a < b /\\\n           (∀ x. a <= x /\\ x <= b ==> f contl x) /\\\n           (∀ x. a < x /\\ x < b ==> f differentiable x)\n        ==> ?l z. a < z /\\ z < b /\\ (f diffl l)(z) /\\\n            (f(b) - f(a) = (b - a) * l)",
       ),
       t8683,
     ),
@@ -85195,7 +85195,7 @@ fn step_530() -> Unit raise {
   mvt_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f f' a b.\n        a < b /\\ (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x))\n        ==> ?z. a < z /\\ z < b /\\ (f b - f a = (b - a) * f'(z))",
+        "∀ f f' a b.\n        a < b /\\ (∀ x. a <= x /\\ x <= b ==> (f diffl f'(x))(x))\n        ==> ?z. a < z /\\ z < b /\\ (f b - f a = (b - a) * f'(z))",
       ),
       t8692,
     ),
@@ -86229,7 +86229,7 @@ fn step_531() -> Unit raise {
   diff_isconst_end_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> (f diffl &0)(x))\n        ==> (f b = f a)",
+        "∀ f a b. a < b /\\\n           (∀ x. a <= x /\\ x <= b ==> f contl x) /\\\n           (∀ x. a < x /\\ x < b ==> (f diffl &0)(x))\n        ==> (f b = f a)",
       ),
       t8763,
     ),
@@ -86421,7 +86421,7 @@ fn step_532() -> Unit raise {
   diff_isconst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> f contl x) /\\\n           (forall x. a < x /\\ x < b ==> (f diffl &0)(x))\n        ==> forall x. a <= x /\\ x <= b ==> (f x = f a)",
+        "∀ f a b. a < b /\\\n           (∀ x. a <= x /\\ x <= b ==> f contl x) /\\\n           (∀ x. a < x /\\ x < b ==> (f diffl &0)(x))\n        ==> ∀ x. a <= x /\\ x <= b ==> (f x = f a)",
       ),
       t8788,
     ),
@@ -86449,7 +86449,7 @@ fn step_533() -> Unit raise {
   diff_isconst_end_simple_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. a < b /\\\n           (forall x. a <= x /\\ x <= b ==> (f diffl &0)(x))\n        ==> (f b = f a)",
+        "∀ f a b. a < b /\\\n           (∀ x. a <= x /\\ x <= b ==> (f diffl &0)(x))\n        ==> (f b = f a)",
       ),
       t8791,
     ),
@@ -86590,7 +86590,7 @@ fn step_534() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t8795 = @tactics.subgoal_then(@parser.parse_term("forall x. f contl x"), fn(
+  let t8795 = @tactics.subgoal_then(@parser.parse_term("∀ x. f contl x"), fn(
     x8792 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -86671,7 +86671,7 @@ fn step_534() -> Unit raise {
   )
   diff_isconst_all_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f x y. (forall x. (f diffl &0)(x)) ==> (f(x) = f(y))"),
+      @parser.parse_term("∀ f x y. (∀ x. (f diffl &0)(x)) ==> (f(x) = f(y))"),
       t8813,
     ),
   )
@@ -86694,7 +86694,7 @@ fn step_535() -> Unit raise {
   interval_abs_c.set(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "forall x z d. (x - d) <= z /\\ z <= (x + d) <=> abs(z - x) <= d",
+        "∀ x z d. (x - d) <= z /\\ z <= (x + d) <=> abs(z - x) <= d",
       ),
     ),
   )
@@ -88195,7 +88195,7 @@ fn step_536() -> Unit raise {
   cont_inj_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g x d. &0 < d /\\\n            (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (forall z. abs(z - x) <= d ==> f contl z) ==>\n     ~(forall z. abs(z - x) <= d ==> f(z) <= f(x))",
+        "∀ f g x d. &0 < d /\\\n            (∀ z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (∀ z. abs(z - x) <= d ==> f contl z) ==>\n     ~(∀ z. abs(z - x) <= d ==> f(z) <= f(x))",
       ),
       t8950,
     ),
@@ -88309,7 +88309,7 @@ fn step_537() -> Unit raise {
   cont_inj_lemma2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g x d. &0 < d /\\\n            (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (forall z. abs(z - x) <= d ==> f contl z) ==>\n     ~(forall z. abs(z - x) <= d ==> f(x) <= f(z))",
+        "∀ f g x d. &0 < d /\\\n            (∀ z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (∀ z. abs(z - x) <= d ==> f contl z) ==>\n     ~(∀ z. abs(z - x) <= d ==> f(x) <= f(z))",
       ),
       t8963,
     ),
@@ -88936,7 +88936,7 @@ fn step_538() -> Unit raise {
   cont_inj_range_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g x d.  &0 < d /\\\n            (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (forall z. abs(z - x) <= d ==> f contl z) ==>\n        ?e. &0 < e /\\\n            (forall y. abs(y - f(x)) <= e ==> ?z. abs(z - x) <= d /\\ (f z = y))",
+        "∀ f g x d.  &0 < d /\\\n            (∀ z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n            (∀ z. abs(z - x) <= d ==> f contl z) ==>\n        ?e. &0 < e /\\\n            (∀ y. abs(y - f(x)) <= e ==> ?z. abs(z - x) <= d /\\ (f z = y))",
       ),
       t9046,
     ),
@@ -89438,10 +89438,10 @@ fn step_539() -> Unit raise {
     @tactics.all_tac
   })
   let t9076 = @tactics.undisch_tac(
-    @parser.parse_term("forall z. abs(z - x) <= d ==> (f contl z)"),
+    @parser.parse_term("∀ z. abs(z - x) <= d ==> (f contl z)"),
   )
   let t9075 = @tactics.undisch_tac(
-    @parser.parse_term("forall z. abs(z - x) <= d ==> (g(f z :real) = z)"),
+    @parser.parse_term("∀ z. abs(z - x) <= d ==> (g(f z :real) = z)"),
   )
   let t9073 = @simp.asm_rewrite_tac(@list.List([]))
   let t9072 = @tactics.exists_tac(@parser.parse_term("e:real"))
@@ -89467,7 +89467,7 @@ fn step_539() -> Unit raise {
     @tactics.all_tac,
   ])
   let t9069 = @tactics.subgoal_then(
-    @parser.parse_term("forall z. abs(z - x) <= e ==> (f contl z)"),
+    @parser.parse_term("∀ z. abs(z - x) <= e ==> (f contl z)"),
     fn(
       x9066 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -89539,7 +89539,7 @@ fn step_539() -> Unit raise {
     @tactics.all_tac,
   ])
   let t9060 = @tactics.subgoal_then(
-    @parser.parse_term("forall z. abs(z - x) <= e ==> (g(f z :real) = z)"),
+    @parser.parse_term("∀ z. abs(z - x) <= e ==> (g(f z :real) = z)"),
     fn(
       x9057 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -89759,7 +89759,7 @@ fn step_539() -> Unit raise {
   cont_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g x d. &0 < d /\\\n             (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n             (forall z. abs(z - x) <= d ==> f contl z)\n        ==> g contl (f x)",
+        "∀ f g x d. &0 < d /\\\n             (∀ z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n             (∀ z. abs(z - x) <= d ==> f contl z)\n        ==> g contl (f x)",
       ),
       t9134,
     ),
@@ -90139,7 +90139,7 @@ fn step_540() -> Unit raise {
   )
   let t9289 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?e. &0 < e /\\\n         forall y. &0 < abs(y - f(x:real)) /\\ abs(y - f(x)) < e\n                    ==> ~((h:real->real)(g(y)) = &0)",
+      "?e. &0 < e /\\\n         ∀ y. &0 < abs(y - f(x:real)) /\\ abs(y - f(x)) < e\n                    ==> ~((h:real->real)(g(y)) = &0)",
     ),
     t9288,
   )
@@ -90524,7 +90524,7 @@ fn step_540() -> Unit raise {
   )
   let t9250 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?e. &0 < e /\\\n         forall y. &0 < abs(y - f(x:real)) /\\ abs(y - f(x)) < e ==> (f(g(y)) = y)",
+      "?e. &0 < e /\\\n         ∀ y. &0 < abs(y - f(x:real)) /\\ abs(y - f(x)) < e ==> (f(g(y)) = y)",
     ),
     t9249,
   )
@@ -90969,7 +90969,7 @@ fn step_540() -> Unit raise {
   ])
   let t9191 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?e. &0 < e /\\\n                    forall y. &0 < abs(y - f(x:real)) /\\\n                        abs(y - f(x:real)) < e ==>\n                            (f(g(y)) = y) /\\ ~(h(g(y)) = &0)",
+      "?e. &0 < e /\\\n                    ∀ y. &0 < abs(y - f(x:real)) /\\\n                        abs(y - f(x:real)) < e ==>\n                            (f(g(y)) = y) /\\ ~(h(g(y)) = &0)",
     ),
     @tactics.strip_assume_tac,
   )
@@ -91491,7 +91491,7 @@ fn step_540() -> Unit raise {
   diff_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l x d. &0 < d /\\\n               (forall z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n               (forall z. abs(z - x) <= d ==> f contl z) /\\\n               (f diffl l)(x) /\\\n               ~(l = &0)\n        ==> (g diffl (inv l))(f x)",
+        "∀ f g l x d. &0 < d /\\\n               (∀ z. abs(z - x) <= d ==> (g(f(z)) = z)) /\\\n               (∀ z. abs(z - x) <= d ==> f contl z) /\\\n               (f diffl l)(x) /\\\n               ~(l = &0)\n        ==> (g diffl (inv l))(f x)",
       ),
       t9342,
     ),
@@ -91546,7 +91546,7 @@ fn step_541() -> Unit raise {
   diff_inverse_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g l x d. &0 < d /\\\n               (forall z. abs(z - x) < d ==> (g(f(z)) = z)) /\\\n               (forall z. abs(z - x) < d ==> f contl z) /\\\n               (f diffl l)(x) /\\\n               ~(l = &0)\n        ==> (g diffl (inv l))(f x)",
+        "∀ f g l x d. &0 < d /\\\n               (∀ z. abs(z - x) < d ==> (g(f(z)) = z)) /\\\n               (∀ z. abs(z - x) < d ==> f contl z) /\\\n               (f diffl l)(x) /\\\n               ~(l = &0)\n        ==> (g diffl (inv l))(f x)",
       ),
       t9351,
     ),
@@ -91824,7 +91824,7 @@ fn step_542() -> Unit raise {
     })(((x9425 : @kernel.Thm) => @bool.spec(t9424, x9425))(x9426))
   })
   let t9420 = @tactics.undisch_tac(
-    @parser.parse_term("forall h. &0 < h /\\ h < d ==> w < f (b - h)"),
+    @parser.parse_term("∀ h. &0 < h /\\ h < d ==> w < f (b - h)"),
   )
   let t9419 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("e:real"))(
@@ -92099,7 +92099,7 @@ fn step_542() -> Unit raise {
     })(((x9395 : @kernel.Thm) => @bool.spec(t9394, x9395))(x9396))
   })
   let t9390 = @tactics.undisch_tac(
-    @parser.parse_term("forall h. &0 < h /\\ h < d ==> w < f (a + h)"),
+    @parser.parse_term("∀ h. &0 < h /\\ h < d ==> w < f (a + h)"),
   )
   let t9389 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("e:real"))(
@@ -92373,7 +92373,7 @@ fn step_542() -> Unit raise {
   ])
   let t9365 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?w. (forall x. a <= x /\\ x <= b ==> f x <= w) /\\\n                    (?x. a <= x /\\ x <= b /\\ (f x = w))",
+      "?w. (∀ x. a <= x /\\ x <= b ==> f x <= w) /\\\n                    (?x. a <= x /\\ x <= b /\\ (f x = w))",
     ),
     fn(
       x9362 : @kernel.Thm,
@@ -92537,7 +92537,7 @@ fn step_542() -> Unit raise {
   ivt_derivative_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f f' a b.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) > &0 /\\ f'(b) < &0\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = &0)",
+        "∀ f f' a b.\n        a <= b /\\\n        (∀ x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) > &0 /\\ f'(b) < &0\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = &0)",
       ),
       t9463,
     ),
@@ -92662,7 +92662,7 @@ fn step_543() -> Unit raise {
   ivt_derivative_pos_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f f' a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) > y /\\ f'(b) < y\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = y)",
+        "∀ f f' a b y.\n        a <= b /\\\n        (∀ x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) > y /\\ f'(b) < y\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = y)",
       ),
       t9494,
     ),
@@ -92720,7 +92720,7 @@ fn step_544() -> Unit raise {
   ivt_derivative_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f f' a b y.\n        a <= b /\\\n        (forall x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) < y /\\ f'(b) > y\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = y)",
+        "∀ f f' a b y.\n        a <= b /\\\n        (∀ x. a <= x /\\ x <= b ==> (f diffl f'(x))(x)) /\\\n        f'(a) < y /\\ f'(b) > y\n        ==> ?z. a < z /\\ z < b /\\ (f'(z) = y)",
       ),
       t9503,
     ),
@@ -92814,7 +92814,7 @@ fn step_545() -> Unit raise {
   let t9547 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "forall fx sx fx0 sx0 e3.\n        abs(sx - fx) < e3 /\\ abs(sx0 - fx0) < e3 /\\ abs(sx - sx0) < e3 /\\\n        (&3 * e3 = e)\n        ==> abs(fx - fx0) < e",
+        "∀ fx sx fx0 sx0 e3.\n        abs(sx - fx) < e3 /\\ abs(sx0 - fx0) < e3 /\\ abs(sx - sx0) < e3 /\\\n        (&3 * e3 = e)\n        ==> abs(fx - fx0) < e",
       ),
     ),
   )
@@ -93198,7 +93198,7 @@ fn step_545() -> Unit raise {
   seq_cont_uniform_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s f x0. (forall e. &0 < e\n                 ==> ?N d. &0 < d /\\\n                           forall x n. abs(x - x0) < d /\\ n >= N\n                                 ==> abs(s n x - f(x)) < e) /\\\n            (?N:num. forall n. n >= N ==> (s n) contl x0)\n            ==> f contl x0",
+        "∀ s f x0. (∀ e. &0 < e\n                 ==> ?N d. &0 < d /\\\n                           ∀ x n. abs(x - x0) < d /\\ n >= N\n                                 ==> abs(s n x - f(x)) < e) /\\\n            (?N:num. ∀ n. n >= N ==> (s n) contl x0)\n            ==> f contl x0",
       ),
       t9556,
     ),
@@ -93695,7 +93695,7 @@ fn step_546() -> Unit raise {
     @tactics.all_tac,
   ])
   let t9560 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. abs(x - x0) < d ==> ?y. (s x) sums y"),
+    @parser.parse_term("∀ x. abs(x - x0) < d ==> ?y. (s x) sums y"),
     fn(
       x9557 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -93863,7 +93863,7 @@ fn step_546() -> Unit raise {
   ser_compara_uniform_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s x0 g.\n        (?N d. &0 < d /\\\n               forall n x. abs(x - x0) < d /\\ n >= N\n                     ==> abs(s x n) <= g n) /\\ summable g\n        ==> ?f d. &0 < d /\\\n                  forall e. &0 < e\n                      ==> ?N. forall x n. abs(x - x0) < d /\\ n >= N\n                                    ==> abs(sum(0,n) (s x) - f(x)) < e",
+        "∀ s x0 g.\n        (?N d. &0 < d /\\\n               ∀ n x. abs(x - x0) < d /\\ n >= N\n                     ==> abs(s x n) <= g n) /\\ summable g\n        ==> ?f d. &0 < d /\\\n                  ∀ e. &0 < e\n                      ==> ?N. ∀ x n. abs(x - x0) < d /\\ n >= N\n                                    ==> abs(sum(0,n) (s x) - f(x)) < e",
       ),
       t9640,
     ),
@@ -93961,7 +93961,7 @@ fn step_547() -> Unit raise {
   ser_compara_uniform_weak_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s x0 g.\n        (?N d. &0 < d /\\\n               forall n x. abs(x - x0) < d /\\ n >= N\n                     ==> abs(s x n) <= g n) /\\ summable g\n        ==> ?f. forall e. &0 < e\n                    ==> ?N d. &0 < d /\\\n                              forall x n. abs(x - x0) < d /\\ n >= N\n                                    ==> abs(sum(0,n) (s x) - f(x)) < e",
+        "∀ s x0 g.\n        (?N d. &0 < d /\\\n               ∀ n x. abs(x - x0) < d /\\ n >= N\n                     ==> abs(s x n) <= g n) /\\ summable g\n        ==> ?f. ∀ e. &0 < e\n                    ==> ?N d. &0 < d /\\\n                              ∀ x n. abs(x - x0) < d /\\ n >= N\n                                    ==> abs(sum(0,n) (s x) - f(x)) < e",
       ),
       t9648,
     ),
@@ -94036,7 +94036,7 @@ fn step_548() -> Unit raise {
   contl_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x. f contl x <=>\n         forall e. &0 < e ==> ?d. &0 < d /\\ forall x'. abs(x' - x) < d\n                            ==> abs(f(x') - f(x)) < e",
+        "∀ f x. f contl x <=>\n         ∀ e. &0 < e ==> ?d. &0 < d /\\ ∀ x'. abs(x' - x) < d\n                            ==> abs(f(x') - f(x)) < e",
       ),
       t9653,
     ),
@@ -94063,7 +94063,7 @@ fn step_549() -> Unit raise {
   contl_seq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f x l. f contl l /\\ x tends_num_real l\n\n           ==> (\\n. f(x n)) tends_num_real f(l)",
+        "∀ f x l. f contl l /\\ x tends_num_real l\n\n           ==> (\\n. f(x n)) tends_num_real f(l)",
       ),
       t9655,
     ),
@@ -94132,7 +94132,7 @@ fn step_550() -> Unit raise {
   sup_interval_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P a b.\n        (?x. a <= x /\\ x <= b /\\ P x)\n        ==> ?s. a <= s /\\ s <= b /\\\n                forall y. y < s <=> (?x. a <= x /\\ x <= b /\\ P x /\\ y < x)",
+        "∀ P a b.\n        (?x. a <= x /\\ x <= b /\\ P x)\n        ==> ?s. a <= s /\\ s <= b /\\\n                ∀ y. y < s <=> (?x. a <= x /\\ x <= b /\\ P x /\\ y < x)",
       ),
       t9664,
     ),
@@ -94265,7 +94265,7 @@ fn step_551() -> Unit raise {
     })(((x9806 : @kernel.Thm) => @bool.spec(t9805, x9806))(x9807))
   })
   let t9796 = @tactics.undisch_then(
-    @parser.parse_term("forall x. a <= x /\\ x <= b ==> f contl x"),
+    @parser.parse_term("∀ x. a <= x /\\ x <= b ==> f contl x"),
     fn(
       x9795 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -94446,14 +94446,14 @@ fn step_551() -> Unit raise {
   let t9772 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "forall r t d d12.\n       ~(x <= r /\\ y <= r) /\\\n      abs(x - y) < d /\\\n      s - d12 < r /\\ t <= s + d /\\\n      x <= t /\\ y <= t /\\ &2 * d12 <= e /\\\n      &2 * d < e ==> abs(x - s) < e /\\ abs(y - s) < e",
+        "∀ r t d d12.\n       ~(x <= r /\\ y <= r) /\\\n      abs(x - y) < d /\\\n      s - d12 < r /\\ t <= s + d /\\\n      x <= t /\\ y <= t /\\ &2 * d12 <= e /\\\n      &2 * d < e ==> abs(x - s) < e /\\ abs(y - s) < e",
       ),
     ),
   )
   let t9771 = @tactics.match_mp_tac(
     @kernel.assume_rule(
       @parser.parse_term(
-        "forall x y. abs(x - s) < d1 /\\ abs(y - s) < d1 ==> abs(f x - f y) < e",
+        "∀ x y. abs(x - s) < d1 /\\ abs(y - s) < d1 ==> abs(f x - f y) < e",
       ),
     ),
   )
@@ -94963,7 +94963,7 @@ fn step_551() -> Unit raise {
   let t9717 = @tactics.repeat_tac(@tactics.strip_tac)
   let t9716 = @tactics.x_gen_tac(@parser.parse_term("u:real"))
   let t9715 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. abs(x - s) < d1 ==> abs(f x - f s) < e / &2"),
+    @parser.parse_term("∀ x. abs(x - s) < d1 ==> abs(f x - f s) < e / &2"),
     fn(
       x9713 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -95000,7 +95000,7 @@ fn step_551() -> Unit raise {
   let t9710 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "forall a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n            ==> abs(x - y) < e",
+        "∀ a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n            ==> abs(x - y) < e",
       ),
     ),
   )
@@ -95037,7 +95037,7 @@ fn step_551() -> Unit raise {
   ])
   let t9709 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x y. abs(x - s) < d1 /\\ abs(y - s) < d1\n                        ==> abs(f(x) - f(y)) < e",
+      "∀ x y. abs(x - s) < d1 /\\ abs(y - s) < d1\n                        ==> abs(f(x) - f(y)) < e",
     ),
     fn(
       x9706 : @kernel.Thm,
@@ -95290,7 +95290,7 @@ fn step_551() -> Unit raise {
                                                                             @tactics.then_tac(
                                                                               @tactics.undisch_tac(
                                                                                 @parser.parse_term(
-                                                                                  "forall x. a <= x /\\ x <= b ==> f contl x",
+                                                                                  "∀ x. a <= x /\\ x <= b ==> f contl x",
                                                                                 ),
                                                                               ),
                                                                               t9692,
@@ -95371,7 +95371,7 @@ fn step_551() -> Unit raise {
   ])
   let t9685 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?t. s < t /\\ ?d. &0 < d /\\\n                                 forall x y. a <= x /\\ x <= t /\\ a <= y /\\ y <= t /\\\n                                       abs(x - y) < d ==> abs(f(x) - f(y)) < e",
+      "?t. s < t /\\ ?d. &0 < d /\\\n                                 ∀ x y. a <= x /\\ x <= t /\\ a <= y /\\ y <= t /\\\n                                       abs(x - y) < d ==> abs(f(x) - f(y)) < e",
     ),
     fn(
       x9682 : @kernel.Thm,
@@ -95530,7 +95530,7 @@ fn step_551() -> Unit raise {
   let t9665 = @tactics.mp_tac(
     @bool.spec(
       @parser.parse_term(
-        "\\c. ?d. &0 < d /\\\n                       forall x y. a <= x /\\ x <= c /\\\n                             a <= y /\\ y <= c /\\\n                             abs(x - y) < d\n                             ==> abs(f(x) - f(y)) < e",
+        "\\c. ?d. &0 < d /\\\n                       ∀ x y. a <= x /\\ x <= c /\\\n                             a <= y /\\ y <= c /\\\n                             abs(x - y) < d\n                             ==> abs(f(x) - f(y)) < e",
       ),
       sup_interval(),
     ),
@@ -95596,7 +95596,7 @@ fn step_551() -> Unit raise {
   cont_uniform_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. a <= b /\\ (forall x. a <= x /\\ x <= b ==> f contl x)\n           ==> forall e. &0 < e ==> ?d. &0 < d /\\\n                                  forall x y. a <= x /\\ x <= b /\\\n                                        a <= y /\\ y <= b /\\\n                                        abs(x - y) < d\n                                        ==> abs(f(x) - f(y)) < e",
+        "∀ f a b. a <= b /\\ (∀ x. a <= x /\\ x <= b ==> f contl x)\n           ==> ∀ e. &0 < e ==> ?d. &0 < d /\\\n                                  ∀ x y. a <= x /\\ x <= b /\\\n                                        a <= y /\\ y <= b /\\\n                                        abs(x - y) < d\n                                        ==> abs(f(x) - f(y)) < e",
       ),
       t9814,
     ),
@@ -95636,7 +95636,7 @@ fn step_552() -> Unit raise {
   let t9873 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "forall a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n          ==> abs(x - y) < e",
+        "∀ a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n          ==> abs(x - y) < e",
       ),
     ),
   )
@@ -95683,7 +95683,7 @@ fn step_552() -> Unit raise {
   let t9868 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "forall a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n          ==> abs(x - y) < e",
+        "∀ a. abs(x - a) < e / &2 /\\ abs(y - a) < e / &2 /\\ (&2 * e / &2 = e)\n          ==> abs(x - y) < e",
       ),
     ),
   )
@@ -96112,7 +96112,7 @@ fn step_552() -> Unit raise {
   cont_uniform_strong_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f a b. (forall x. a <= x /\\ x <= b ==> f contl x)\n           ==> forall e. &0 < e\n                   ==> ?d. &0 < d /\\\n                           forall x y. (a <= x /\\ x <= b \\/ a <= y /\\ y <= b) /\\\n                                 abs(x - y) < d\n                                 ==> abs(f(x) - f(y)) < e",
+        "∀ f a b. (∀ x. a <= x /\\ x <= b ==> f contl x)\n           ==> ∀ e. &0 < e\n                   ==> ?d. &0 < d /\\\n                           ∀ x y. (a <= x /\\ x <= b \\/ a <= y /\\ y <= b) /\\\n                                 abs(x - y) < d\n                                 ==> abs(f(x) - f(y)) < e",
       ),
       t9879,
     ),

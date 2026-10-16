@@ -240,7 +240,7 @@ pub fn mark_concl(x4 : String) -> @tactics.Tactic raise {
     )
   })
   let t10 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("forall t. (~t ==> F <=> t)"))]),
+    @list.List([@class.taut(@parser.parse_term("∀ t. (~t ==> F <=> t)"))]),
   )
   @tactics.then_tac(
     @tactics.then_tac(

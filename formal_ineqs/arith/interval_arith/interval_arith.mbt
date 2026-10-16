@@ -25,7 +25,7 @@ pub fn interval_arith() -> @kernel.Thm {
 ///|
 /// bounded_on
 fn step_3() -> Unit raise {
-  bounded_on_c.set(@pair.new_definition(@parser.parse_term("bounded_on f s f_bounds <=>\n\tforall x. x IN s ==> interval_arith (f x) f_bounds")))
+  bounded_on_c.set(@pair.new_definition(@parser.parse_term("bounded_on f s f_bounds <=>\n\t∀ x. x IN s ==> interval_arith (f x) f_bounds")))
 }
 
 ///|
@@ -40,7 +40,7 @@ pub fn bounded_on() -> @kernel.Thm {
 ///|
 /// bounded_on_int
 fn step_4() -> Unit raise {
-  bounded_on_int_c.set(@pair.new_definition(@parser.parse_term("bounded_on_int f int f_bounds <=>\n\tforall x. interval_arith x int ==> interval_arith (f x) f_bounds")))
+  bounded_on_int_c.set(@pair.new_definition(@parser.parse_term("bounded_on_int f int f_bounds <=>\n\t∀ x. interval_arith x int ==> interval_arith (f x) f_bounds")))
 }
 
 ///|
@@ -131,7 +131,7 @@ pub fn interval_gt() -> @kernel.Thm {
 /// CONST_INTERVAL
 fn step_10() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([interval_arith(), @realax.real_le_refl()]))
-  const_interval_c.set(@tactics.prove(@parser.parse_term("forall x. interval_arith x (x,x)"), t1))
+  const_interval_c.set(@tactics.prove(@parser.parse_term("∀ x. interval_arith x (x,x)"), t1))
 }
 
 ///|
@@ -185,7 +185,7 @@ pub fn interval_neg_v1() -> @kernel.Thm {
 /// INTERVAL_NEG_EQ
 fn step_13() -> Unit raise {
   let t8 = @tactics.then_tac(@simp.rewrite_tac(@list.List([interval_arith()])), @calc_rat.real_arith_tac)
-  interval_neg_eq_c.set(@tactics.prove(@parser.parse_term("forall x a b. interval_arith (--x) (--b, --a) <=>\n\t\t\t      interval_arith x (a, b)"), t8))
+  interval_neg_eq_c.set(@tactics.prove(@parser.parse_term("∀ x a b. interval_arith (--x) (--b, --a) <=>\n\t\t\t      interval_arith x (a, b)"), t8))
 }
 
 ///|

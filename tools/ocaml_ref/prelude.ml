@@ -91,7 +91,7 @@ let rec sty ty = match ty with
 let rec stm tm = match tm with
     Var(s,ty) -> s ^ ":" ^ sty ty
   (* The port renamed this constant; compare terms modulo that rename only. *)
-  | Const(s,ty) -> "#" ^ (if s = "!" then "forall" else s) ^ ":" ^ sty ty
+  | Const(s,ty) -> "#" ^ (if s = "!" then "∀" else s) ^ ":" ^ sty ty
   | Comb(f,x) -> "(" ^ stm f ^ " " ^ stm x ^ ")"
   | Abs(v,b) -> "(\\" ^ stm v ^ ". " ^ stm b ^ ")";;
 let sthm th = let asl,c = dest_thm th in

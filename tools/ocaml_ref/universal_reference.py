@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from hol_notation import forall_notation, upstream_notation
+from hol_notation import universal_notation, upstream_notation
 
 
 def escaped_notation(text):
@@ -23,7 +23,7 @@ def escaped_notation(text):
     # scanning so existing readable-proof symbols such as ∃! stay intact.
     decoded = re.sub(r'\\(?:[0-9]{3}|.)', unescape, text).encode('latin1').decode(
         'utf-8', errors='surrogateescape')
-    converted = forall_notation(decoded)
+    converted = universal_notation(decoded)
     if converted == decoded:
         return text
     return ''.join({
@@ -46,13 +46,13 @@ def adapt_output(lines):
             trace = False
         if line.startswith('binders = '):
             words = line[10:].split()
-            # forall now occupies the original canonical binder's position.
+            # The universal symbol occupies the original canonical binder's position.
             if '!' in words:
-                words = ['forall' if w == '!' else w for w in words if w != 'forall']
+                words = ['∀' if w == '!' else w for w in words if w != 'forall']
             line = 'binders = ' + ' '.join(words) + '\n'
         elif line.startswith('constants = '):
             line = 'constants = ' + ' '.join(
-                'forall' if w == '!' else w for w in line[12:].split()) + '\n'
+                '∀' if w == '!' else w for w in line[12:].split()) + '\n'
         elif line.startswith(('T: ', 'Y: ')):
             # Only the input label changes. Never rewrite serialized terms or
             # exception separators in the oracle result after the label.
@@ -65,9 +65,9 @@ def adapt_output(lines):
 
 def reference_source(source):
     """Route core loads to the temporary copies without editing upstream."""
-    return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
-        '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
-        '#use "parser.ml"', '#use "_build/parser_forall.ml"')
+    return source.replace('#use "printer.ml"', '#use "_build/printer_universal.ml"').replace(
+        '#use "bool.ml"', '#use "_build/bool_universal.ml"').replace(
+        '#use "parser.ml"', '#use "_build/parser_universal.ml"')
 
 
 def prepare():
@@ -77,17 +77,17 @@ def prepare():
     printer = (root / '.repos/hol-light/printer.ml').read_text()
     patches = [
         ('let reverse_interface (s0,ty0) =\n',
-         'let reverse_interface (s0,ty0) =\n    let spelling = if s0 = "!" then "forall" else s0 in\n'),
+         'let reverse_interface (s0,ty0) =\n    let spelling = if s0 = "!" then "∀" else s0 in\n'),
         ('if not(!reverse_interface_mapping) then s0 else',
          'if not(!reverse_interface_mapping) then spelling else'),
         ('with Failure _ -> s0 in', 'with Failure _ -> spelling in'),
         ('(fun n  -> mem n (!binder_list)),',
-         '(fun n  -> mem n (!binder_list) || n = "forall" && mem "!" (!binder_list)),'),
+         '(fun n  -> mem n (!binder_list) || n = "∀" && mem "!" (!binder_list)),'),
     ]
     for old, new in patches:
         assert printer.count(old) == 1, 'upstream printer changed: ' + old
         printer = printer.replace(old, new)
-    (ref / '_build/printer_forall.ml').write_text(printer)
+    (ref / '_build/printer_universal.ml').write_text(printer)
     # Upstream theories sometimes already spell the binder `forall`. Resolve it
     # directly to the upstream canonical constant, just as the port now does,
     # rather than retaining the alias and its extra type-inference allocations.
@@ -97,11 +97,11 @@ def prepare():
     parser = parser.replace(entry, '  (fun inp ->\n'
         '    let inp = map (function Ident "forall" -> Ident "!" | tok -> tok) inp in\n'
         '    match inp with\n')
-    (ref / '_build/parser_forall.ml').write_text(parser)
+    (ref / '_build/parser_universal.ml').write_text(parser)
     boolean = (root / '.repos/hol-light/bool.ml').read_text()
     alias = '  override_interface("forall",`(!):(A->bool)->bool`);\n'
     assert boolean.count(alias) == 1, 'upstream forall alias changed'
-    (ref / '_build/bool_forall.ml').write_text(boolean.replace(alias, ''))
+    (ref / '_build/bool_universal.ml').write_text(boolean.replace(alias, ''))
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))

@@ -33,7 +33,7 @@ test "Int32 Fibonacci equivalence includes wrapping overflow" {
       (
         #|(fib32_rec 0 = (word 0:32 word)) /\
         #|(fib32_rec (SUC 0) = word 1) /\
-        #|(forall n. fib32_rec (SUC (SUC n)) = word_add (fib32_rec n) (fib32_rec (SUC n)))
+        #|(∀ n. fib32_rec (SUC (SUC n)) = word_add (fib32_rec n) (fib32_rec (SUC n)))
       ),
     ),
   )
@@ -41,8 +41,8 @@ test "Int32 Fibonacci equivalence includes wrapping overflow" {
   let loop_def = @recursion.new_recursive_definition(@nums.num_recursion())(
     @parser.parse_term(
       (
-        #|(forall a b:32 word. fib32_loop 0 a b = a) /\
-        #|(forall n a b. fib32_loop (SUC n) a b = fib32_loop n b (word_add a b))
+        #|(∀ a b:32 word. fib32_loop 0 a b = a) /\
+        #|(∀ n a b. fib32_loop (SUC n) a b = fib32_loop n b (word_add a b))
       ),
     ),
   )
@@ -53,7 +53,7 @@ test "Int32 Fibonacci equivalence includes wrapping overflow" {
   let recurrence = @bool.conjunct2(@bool.conjunct2(recursive))
   let invariant = @tactics.prove(
     @parser.parse_term(
-      "forall n k. fib32_loop n (fib32_rec k) (fib32_rec (SUC k)) = fib32_rec (n + k)",
+      "∀ n k. fib32_loop n (fib32_rec k) (fib32_rec (SUC k)) = fib32_rec (n + k)",
     ),
     @tactics.then_tac(
       @nums.induct_tac,
@@ -72,18 +72,18 @@ test "Int32 Fibonacci equivalence includes wrapping overflow" {
     ),
   )
   let equivalence = @tactics.prove(
-    @parser.parse_term("forall n. fib32_iter n = fib32_rec n"),
+    @parser.parse_term("∀ n. fib32_iter n = fib32_rec n"),
     @simp.rewrite_tac(@list.List([iterative, at_zero])),
   )
   assert_true(@kernel.hyp(invariant).is_empty())
   assert_true(@kernel.hyp(equivalence).is_empty())
   assert_eq(
     @kernel.concl(equivalence),
-    @parser.parse_term("forall n. fib32_iter n = fib32_rec n"),
+    @parser.parse_term("∀ n. fib32_iter n = fib32_rec n"),
   )
   // ival interprets the very same bits as a signed two's-complement integer.
   let signed_equivalence = @tactics.prove(
-    @parser.parse_term("forall n. ival (fib32_iter n) = ival (fib32_rec n)"),
+    @parser.parse_term("∀ n. ival (fib32_iter n) = ival (fib32_rec n)"),
     @simp.rewrite_tac(@list.List([equivalence])),
   )
   assert_true(@kernel.hyp(signed_equivalence).is_empty())

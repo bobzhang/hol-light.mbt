@@ -34,7 +34,7 @@ pub fn unless_stmt() -> @kernel.Thm {
 ///|
 /// UNLESS_term
 fn step_3() -> Unit raise {
-  unless_term_c.set(@parser.parse_term("(forall p q. UNLESS p q  []                   <=> T) /\\\n    (forall p q. UNLESS p q (CONS (st:'a->'a) Pr) <=>\n     ((forall s:'a. (p UNLESS_STMT q) st s) /\\ (UNLESS p q Pr)))"))
+  unless_term_c.set(@parser.parse_term("(∀ p q. UNLESS p q  []                   <=> T) /\\\n    (∀ p q. UNLESS p q (CONS (st:'a->'a) Pr) <=>\n     ((∀ s:'a. (p UNLESS_STMT q) st s) /\\ (UNLESS p q Pr)))"))
 }
 
 ///|
@@ -100,7 +100,7 @@ pub fn stable() -> @kernel.Thm {
 ///|
 /// INVARIANT
 fn step_8() -> Unit raise {
-  invariant_c.set(@aux_definitions.new_infix_definition("INVARIANT", "<=>", @parser.parse_term("INVARIANT p (p0, Pr) = ((forall s:'a. p0 s ==> p s) /\\ (p STABLE Pr))"), tl_fix()))
+  invariant_c.set(@aux_definitions.new_infix_definition("INVARIANT", "<=>", @parser.parse_term("INVARIANT p (p0, Pr) = ((∀ s:'a. p0 s ==> p s) /\\ (p STABLE Pr))"), tl_fix()))
 }
 
 ///|
@@ -192,7 +192,7 @@ pub fn p_v1() -> @kernel.Term {
 fn step_14() -> Unit raise {
   let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t1)
-  imp_imp_conjimp_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q ps qs p' q' p's q's.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p's \\/ q's) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p's \\/ ps /\\ q's \\/ p's /\\ qs \\/ qs /\\ q's)")), t2))
+  imp_imp_conjimp_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q ps qs p' q' p's q's.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p's \\/ q's) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p's \\/ ps /\\ q's \\/ p's /\\ qs \\/ qs /\\ q's)")), t2))
 }
 
 ///|
@@ -208,7 +208,7 @@ pub fn imp_imp_conjimp_lemma() -> @kernel.Thm {
 /// NOT_NOT_OR_lemma
 fn step_15() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@class.not_clauses(), @class.de_morgan_thm(), @equal.sym(@bool.spec_all(@theorems.disj_assoc()))]))
-  not_not_or_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall t1 t2 t3. t1 \\/ t2 \\/ t3 <=> ~(~t1 /\\ ~t2) \\/ t3")), t3))
+  not_not_or_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ t1 t2 t3. t1 \\/ t2 \\/ t3 <=> ~(~t1 /\\ ~t2) \\/ t3")), t3))
 }
 
 ///|
@@ -226,7 +226,7 @@ fn step_16() -> Unit raise {
   let t5 = @tactics.repeat_tac(@simp.asm_rewrite_tac(@list.List([])))
   let t4 = @tactics.repeat_tac(@tactics.strip_tac)
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t4), t5)
-  conj_imply_thm_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p p' q q'.\n     ((p \\/ p') /\\ (p \\/ ~q') /\\ (p' \\/ ~q) /\\ (~q \\/ ~q')) =\n     ((p /\\ ~q) \\/ (p' /\\ ~q'))")), t6))
+  conj_imply_thm_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p p' q q'.\n     ((p \\/ p') /\\ (p \\/ ~q') /\\ (p' \\/ ~q) /\\ (~q \\/ ~q')) =\n     ((p /\\ ~q) \\/ (p' /\\ ~q'))")), t6))
 }
 
 ///|
@@ -245,7 +245,7 @@ fn step_17() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@equal.beta_conv(@parser.parse_term("(\\s:'a. p s /\\ ~(p s) ==> p (st s))s"))]))
   let t7 = @simp.rewrite_tac(@list.List([unless_stmt()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7), t8), t9), @hol88.res_tac)
-  unless_stmt_thm0_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm0", @parser.parse_term("forall p st (s:'a). (p UNLESS_STMT p)st s"), t10))
+  unless_stmt_thm0_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm0", @parser.parse_term("∀ p st (s:'a). (p UNLESS_STMT p)st s"), t10))
 }
 
 ///|
@@ -261,21 +261,21 @@ pub fn unless_stmt_thm0() -> @kernel.Thm {
 /// UNLESS_STMT_thm1
 fn step_18() -> Unit raise {
   let t24 = @simp.asm_rewrite_tac(@list.List([]))
-  let t21 = @kernel.assume_rule(@parser.parse_term("forall s:'a. q s ==> r s"))
+  let t21 = @kernel.assume_rule(@parser.parse_term("∀ s:'a. q s ==> r s"))
   let t22 = @bool.spec(@parser.parse_term("(st:'a->'a) s"), t21)
   let t23 = @tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(q:'a->bool) ((st:'a->'a) s)"))]))(t22))
   let t20 = @simp.asm_rewrite_tac(@list.List([]))
-  let t17 = @kernel.assume_rule(@parser.parse_term("forall s:'a. p s /\\ ~q s ==> p (st s) \\/ q (st s)"))
+  let t17 = @kernel.assume_rule(@parser.parse_term("∀ s:'a. p s /\\ ~q s ==> p (st s) \\/ q (st s)"))
   let t18 = @bool.spec(@parser.parse_term("s:'a"), t17)
   let t16 = @kernel.assume_rule(@parser.parse_term("~q (s:'a)"))
   let t19 = @tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(p:'a->bool) s")), t16]))(t18))
-  let t13 = @kernel.assume_rule(@parser.parse_term("forall s:'a. q s ==> r s"))
+  let t13 = @kernel.assume_rule(@parser.parse_term("∀ s:'a. q s ==> r s"))
   let t14 = @aux_definitions.contrapos(@bool.spec(@parser.parse_term("s:'a"), t13))
   let t15 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("~r (s:'a)"))]))(t14))
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t11 = @simp.rewrite_tac(@list.List([unless_stmt()]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t11), t12), t15), t19), t20), t23), t24)
-  unless_stmt_thm1_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm1", @parser.parse_term("forall(p:'a->bool) q r st.\n      ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (q s) ==> (r s))) ==>\n       (forall s. (p UNLESS_STMT r) st s)"), t25))
+  unless_stmt_thm1_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm1", @parser.parse_term("∀(p:'a->bool) q r st.\n      ((∀ s. (p UNLESS_STMT q) st s) /\\ (∀ s. (q s) ==> (r s))) ==>\n       (∀ s. (p UNLESS_STMT r) st s)"), t25))
 }
 
 ///|
@@ -296,7 +296,7 @@ fn step_19() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([@bool.gen_all(@equal.sym(@bool.spec_all(@theorems.conj_assoc()))), t27, @class.not_clauses(), @class.de_morgan_thm()]))
   let t26 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([unless_stmt(), @mk_state_logic.or_def()])), t26), t28), t30)
-  unless_stmt_thm2_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm2", @parser.parse_term("forall p q p' q' (st:'a->'a).\n    ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n     (forall s. ((p \\/* p') UNLESS_STMT (q \\/* q')) st s)"), t31))
+  unless_stmt_thm2_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm2", @parser.parse_term("∀ p q p' q' (st:'a->'a).\n    ((∀ s. (p UNLESS_STMT q) st s) /\\ (∀ s. (p' UNLESS_STMT q') st s)) ==>\n     (∀ s. ((p \\/* p') UNLESS_STMT (q \\/* q')) st s)"), t31))
 }
 
 ///|
@@ -320,15 +320,15 @@ fn step_20() -> Unit raise {
   let t44 = @bool.spec(@parser.parse_term("(q':'a->bool) s"), t43)
   let t45 = @bool.spec(@parser.parse_term("(p':'a->bool) ((st:'a->'a) s)"), t44)
   let t46 = @tactics.assume_tac(@bool.undisch_all(@bool.spec(@parser.parse_term("(q':'a->bool) ((st:'a->'a) s)"), t45)))
-  let t38 = @tactics.strip_assume_tac(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("(forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))"))))
-  let t37 = @tactics.strip_assume_tac(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("(forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s))"))))
-  let t36 = @tactics.assume_tac(@bool.conjunct2(@kernel.assume_rule(@parser.parse_term("(forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))"))))
-  let t35 = @tactics.assume_tac(@bool.conjunct1(@kernel.assume_rule(@parser.parse_term("(forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))"))))
+  let t38 = @tactics.strip_assume_tac(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("(∀ s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))"))))
+  let t37 = @tactics.strip_assume_tac(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("(∀ s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s))"))))
+  let t36 = @tactics.assume_tac(@bool.conjunct2(@kernel.assume_rule(@parser.parse_term("(∀ s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (∀ s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))"))))
+  let t35 = @tactics.assume_tac(@bool.conjunct1(@kernel.assume_rule(@parser.parse_term("(∀ s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (∀ s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))"))))
   let t33 = @equal.sym(@bool.spec_all(@theorems.disj_assoc()))
   let t34 = @simp.rewrite_tac(@list.List([@bool.gen_all(@equal.sym(@bool.spec_all(@theorems.conj_assoc()))), t33, @class.not_clauses(), @class.de_morgan_thm()]))
   let t32 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t48 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.pure_rewrite_tac(@list.List([unless_stmt(), @mk_state_logic.and_def(), @mk_state_logic.or_def()])), t32), t34), @tactics.strip_tac), @tactics.strip_tac), @tactics.strip_tac), @tactics.strip_tac), @tactics.strip_tac), @tactics.disch_tac), @tactics.strip_tac), @tactics.disch_tac), t35), t36), t37), t38), t46), t47)
-  unless_stmt_thm3_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm3", @parser.parse_term("forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)"), t48))
+  unless_stmt_thm3_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm3", @parser.parse_term("∀ p q p' q' (st:'a->'a).\n     ((∀ s. (p UNLESS_STMT q) st s) /\\ (∀ s. (p' UNLESS_STMT q') st s)) ==>\n      (∀ s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)"), t48))
 }
 
 ///|
@@ -346,7 +346,7 @@ fn step_21() -> Unit raise {
   let t50 = @meson.meson_tac(@list.List([]))
   let t49 = @simp.pure_rewrite_tac(@list.List([unless_stmt(), @mk_state_logic.and_def(), @mk_state_logic.or_def(), @mk_state_logic.not_def1()]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t49), t50)
-  unless_stmt_thm4_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm4", @parser.parse_term("forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)"), t51))
+  unless_stmt_thm4_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm4", @parser.parse_term("∀ p q p' q' (st:'a->'a).\n     ((∀ s. (p UNLESS_STMT q) st s) /\\ (∀ s. (p' UNLESS_STMT q') st s)) ==>\n      (∀ s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)"), t51))
 }
 
 ///|
@@ -364,7 +364,7 @@ fn step_22() -> Unit raise {
   let t52 = @simp.asm_rewrite_tac(@list.List([]))
   let t53 = @list.List([@tactics.then_tac(@hol88.res_tac, @simp.asm_rewrite_tac(@list.List([]))), t52])
   let t54 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t53)
-  unless_stmt_thm5_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r. (p ==> q) ==> (p \\/ r ==> q \\/ r)")), t54))
+  unless_stmt_thm5_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r. (p ==> q) ==> (p \\/ r ==> q \\/ r)")), t54))
 }
 
 ///|
@@ -388,7 +388,7 @@ fn step_23() -> Unit raise {
   let t62 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("n:num")), t56), t61, t60, t59])
   let t55 = @tactics.repeat_tac(@tactics.strip_tac)
   let t63 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t55), t62)
-  unless_stmt_thm5_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(P:num->('a->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)")), t63))
+  unless_stmt_thm5_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(P:num->('a->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)")), t63))
 }
 
 ///|
@@ -409,7 +409,7 @@ fn step_24() -> Unit raise {
   let t65 = @tactics.repeat_tac(@tactics.strip_tac)
   let t64 = @simp.rewrite_tac(@list.List([unless_stmt()]))
   let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), @tactics.beta_tac), t65), t66), t67), @hol88.res_tac), t68)
-  unless_stmt_thm5_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm5", @parser.parse_term("forall(P:num->('a->bool)) q st.\n          (forall m. (forall s. ((P m) UNLESS_STMT q)st s)) ==>\n               (forall s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)"), t69))
+  unless_stmt_thm5_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm5", @parser.parse_term("∀(P:num->('a->bool)) q st.\n          (∀ m. (∀ s. ((P m) UNLESS_STMT q)st s)) ==>\n               (∀ s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)"), t69))
 }
 
 ///|
@@ -427,7 +427,7 @@ fn step_25() -> Unit raise {
   let t71 = @meson.meson_tac(@list.List([]))
   let t70 = @simp.rewrite_tac(@list.List([unless_stmt(), @mk_state_logic.or_def()]))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t70), t71)
-  unless_stmt_thm6_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm6", @parser.parse_term("forall(p:'a->bool) q r (st:'a->'a).\n      (forall s. (p UNLESS_STMT q) st s) ==>\n         (forall s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)"), t72))
+  unless_stmt_thm6_c.set(@aux_definitions.prove_thm("UNLESS_STMT_thm6", @parser.parse_term("∀(p:'a->bool) q r (st:'a->'a).\n      (∀ s. (p UNLESS_STMT q) st s) ==>\n         (∀ s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)"), t72))
 }
 
 ///|
@@ -448,7 +448,7 @@ fn step_26() -> Unit raise {
   let t74 = @simp.asm_rewrite_tac(@list.List([]))
   let t73 = @simp.pure_rewrite_tac(@list.List([unless()]))
   let t78 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t73), t74), t75), t76), t77), @hol88.res_tac)
-  unless_thm1_c.set(@aux_definitions.prove_thm("UNLESS_thm1", @parser.parse_term("forall(p:'a->bool) Pr. (p UNLESS p) Pr"), t78))
+  unless_thm1_c.set(@aux_definitions.prove_thm("UNLESS_thm1", @parser.parse_term("∀(p:'a->bool) Pr. (p UNLESS p) Pr"), t78))
 }
 
 ///|
@@ -470,7 +470,7 @@ fn step_27() -> Unit raise {
   let t80 = @simp.asm_rewrite_tac(@list.List([]))
   let t79 = @simp.pure_rewrite_tac(@list.List([unless()]))
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t79), t80), t81), t82), t83), t84)
-  unless_thm2_c.set(@aux_definitions.prove_thm("UNLESS_thm2", @parser.parse_term("forall(p:'a->bool) Pr. (p UNLESS (Not p)) Pr"), t85))
+  unless_thm2_c.set(@aux_definitions.prove_thm("UNLESS_thm2", @parser.parse_term("∀(p:'a->bool) Pr. (p UNLESS (Not p)) Pr"), t85))
 }
 
 ///|
@@ -489,7 +489,7 @@ fn step_28() -> Unit raise {
   let t87 = @simp.asm_rewrite_tac(@list.List([]))
   let t86 = @simp.rewrite_tac(@list.List([unless()]))
   let t90 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t86), @tactics.strip_tac), t87), @hol88.res_tac), t88), (x89 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(unless_stmt_thm1(), x89))
-  unless_thm3_c.set(@aux_definitions.prove_thm("UNLESS_thm3", @parser.parse_term("forall(p:'a->bool) q r Pr.\n      (((p UNLESS q) Pr) /\\ (forall s. (q s) ==> (r s))) ==> ((p UNLESS r) Pr)"), t90))
+  unless_thm3_c.set(@aux_definitions.prove_thm("UNLESS_thm3", @parser.parse_term("∀(p:'a->bool) q r Pr.\n      (((p UNLESS q) Pr) /\\ (∀ s. (q s) ==> (r s))) ==> ((p UNLESS r) Pr)"), t90))
 }
 
 ///|
@@ -508,7 +508,7 @@ fn step_29() -> Unit raise {
   let t92 = @simp.asm_rewrite_tac(@list.List([]))
   let t91 = @simp.rewrite_tac(@list.List([unless()]))
   let t95 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t91), @tactics.strip_tac), t92), @hol88.res_tac), t93), (x94 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(unless_stmt_thm3(), x94))
-  unless_thm4_c.set(@aux_definitions.prove_thm("UNLESS_thm4", @parser.parse_term("forall(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n        (((p /\\* p') UNLESS\n         (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) Pr)"), t95))
+  unless_thm4_c.set(@aux_definitions.prove_thm("UNLESS_thm4", @parser.parse_term("∀(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n        (((p /\\* p') UNLESS\n         (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) Pr)"), t95))
 }
 
 ///|
@@ -527,7 +527,7 @@ fn step_30() -> Unit raise {
   let t97 = @simp.asm_rewrite_tac(@list.List([]))
   let t96 = @simp.rewrite_tac(@list.List([unless()]))
   let t100 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t96), @tactics.strip_tac), t97), @hol88.res_tac), t98), (x99 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(unless_stmt_thm4(), x99))
-  unless_thm5_c.set(@aux_definitions.prove_thm("UNLESS_thm5", @parser.parse_term("forall(p:'a->bool) q p' q' Pr.\n        (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr))\n      ==>\n        (((p \\/* p') UNLESS\n\t  ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))) Pr)"), t100))
+  unless_thm5_c.set(@aux_definitions.prove_thm("UNLESS_thm5", @parser.parse_term("∀(p:'a->bool) q p' q' Pr.\n        (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr))\n      ==>\n        (((p \\/* p') UNLESS\n\t  ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))) Pr)"), t100))
 }
 
 ///|
@@ -546,7 +546,7 @@ fn step_31() -> Unit raise {
   let t111 = @parser.parse_term("(q:'a->bool) \\/* q'")
   let t112 = @parser.parse_term("((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))")
   let t113 = @simp.asm_rewrite_tac(@list.List([@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(p:'a->bool) /\\* p'"), t112, t111, t110]), unless_thm3()))]))
-  let t108 = @parser.parse_term("forall s. ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))s ==>\n                (q \\/* q')s")
+  let t108 = @parser.parse_term("∀ s. ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))s ==>\n                (q \\/* q')s")
   let t109 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(((p:'a->bool) /\\* p') UNLESS\n\t     (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')))Pr"), t108]), @hol88.and_intro_thm())))
   let t104 = @parser.parse_term("q':'a->bool")
   let t105 = @parser.parse_term("p':'a->bool")
@@ -556,7 +556,7 @@ fn step_31() -> Unit raise {
   let t101 = @parser.parse_term("((p':'a->bool) UNLESS q')Pr")
   let t102 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) UNLESS q)Pr"), t101]), @hol88.and_intro_thm())))
   let t114 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t102), t103), t107), t109), t113)
-  unless_thm6_c.set(@aux_definitions.prove_thm("UNLESS_thm6", @parser.parse_term("forall(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n         (((p /\\* p') UNLESS (q \\/* q')) Pr)"), t114))
+  unless_thm6_c.set(@aux_definitions.prove_thm("UNLESS_thm6", @parser.parse_term("∀(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n         (((p /\\* p') UNLESS (q \\/* q')) Pr)"), t114))
 }
 
 ///|
@@ -575,7 +575,7 @@ fn step_32() -> Unit raise {
   let t125 = @parser.parse_term("(q:'a->bool) \\/* q'")
   let t126 = @parser.parse_term("(((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')")
   let t127 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(p:'a->bool) \\/* p'"), t126, t125, t124]), unless_thm3())))
-  let t122 = @parser.parse_term("forall s. ((((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/*\n                    (q /\\* q'))s ==> (q \\/* q')s")
+  let t122 = @parser.parse_term("∀ s. ((((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/*\n                    (q /\\* q'))s ==> (q \\/* q')s")
   let t123 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(((p:'a->bool) \\/* p') UNLESS\n               ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n               Pr"), t122]), @hol88.and_intro_thm())))
   let t118 = @parser.parse_term("q':'a->bool")
   let t119 = @parser.parse_term("p':'a->bool")
@@ -585,7 +585,7 @@ fn step_32() -> Unit raise {
   let t115 = @parser.parse_term("((p':'a->bool) UNLESS q')Pr")
   let t116 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) UNLESS q)Pr"), t115]), @hol88.and_intro_thm())))
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t116), t117), t121), t123), t127)
-  unless_thm7_c.set(@aux_definitions.prove_thm("UNLESS_thm7", @parser.parse_term("forall(p:'a->bool) q p' q' Pr.\n         (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n             (((p \\/* p') UNLESS (q \\/* q')) Pr)"), t128))
+  unless_thm7_c.set(@aux_definitions.prove_thm("UNLESS_thm7", @parser.parse_term("∀(p:'a->bool) q p' q' Pr.\n         (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n             (((p \\/* p') UNLESS (q \\/* q')) Pr)"), t128))
 }
 
 ///|
@@ -603,7 +603,7 @@ fn step_33() -> Unit raise {
   let t140 = @parser.parse_term("r:'a->bool")
   let t141 = @parser.parse_term("((((Not (p:'a->bool)) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n               (q /\\* r))")
   let t142 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.spec_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) \\/* q)"), t141, t140]), unless_thm3()))))
-  let t138 = @parser.parse_term("forall s:'a. ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n                      (q /\\* r))s ==> r s")
+  let t138 = @parser.parse_term("∀ s:'a. ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n                      (q /\\* r))s ==> r s")
   let t139 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(((p:'a->bool) \\/* q) UNLESS\n           ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))) Pr"), t138]), @hol88.and_intro_thm())))
   let t135 = @parser.parse_term("r:'a->bool")
   let t136 = @parser.parse_term("q:'a->bool")
@@ -615,7 +615,7 @@ fn step_33() -> Unit raise {
   let t129 = @parser.parse_term("((q:'a->bool) UNLESS r)Pr")
   let t130 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) UNLESS q)Pr"), t129]), @hol88.and_intro_thm())))
   let t143 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t130), t134), t137), t139), t142)
-  unless_thm8_c.set(@aux_definitions.prove_thm("UNLESS_thm8", @parser.parse_term("forall(p:'a->bool) q r Pr.\n     (((p UNLESS q) Pr) /\\ ((q UNLESS r) Pr)) ==>\n     (((p \\/* q) UNLESS r) Pr)"), t143))
+  unless_thm8_c.set(@aux_definitions.prove_thm("UNLESS_thm8", @parser.parse_term("∀(p:'a->bool) q r Pr.\n     (((p UNLESS q) Pr) /\\ ((q UNLESS r) Pr)) ==>\n     (((p \\/* q) UNLESS r) Pr)"), t143))
 }
 
 ///|
@@ -634,11 +634,11 @@ fn step_34() -> Unit raise {
   let t148 = @parser.parse_term("q:'a->bool")
   let t149 = @parser.parse_term("p:'a->bool")
   let t150 = @simp.asm_rewrite_tac(@list.List([@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t149, t148, t147]), unless_thm3()))]))
-  let t145 = @parser.parse_term("forall s:'a. p s ==> q s")
+  let t145 = @parser.parse_term("∀ s:'a. p s ==> q s")
   let t146 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) UNLESS p)Pr"), t145]), @hol88.and_intro_thm())))
   let t144 = @tactics.assume_tac(@bool.spec_all(unless_thm1()))
   let t151 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t144), t146), t150)
-  unless_cor1_c.set(@aux_definitions.prove_thm("UNLESS_cor1", @parser.parse_term("forall(p:'a->bool) q Pr. (forall s. p s ==> q s) ==> ((p UNLESS q) Pr)"), t151))
+  unless_cor1_c.set(@aux_definitions.prove_thm("UNLESS_cor1", @parser.parse_term("∀(p:'a->bool) q Pr. (∀ s. p s ==> q s) ==> ((p UNLESS q) Pr)"), t151))
 }
 
 ///|
@@ -657,11 +657,11 @@ fn step_35() -> Unit raise {
   let t156 = @parser.parse_term("q:'a->bool")
   let t157 = @parser.parse_term("Not (p:'a->bool)")
   let t158 = @simp.asm_rewrite_tac(@list.List([@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t157, t156, t155]), unless_thm3()))]))
-  let t153 = @parser.parse_term("forall s:'a. (Not p) s ==> q s")
+  let t153 = @parser.parse_term("∀ s:'a. (Not p) s ==> q s")
   let t154 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) UNLESS (Not p))Pr"), t153]), @hol88.and_intro_thm())))
   let t152 = @tactics.assume_tac(@bool.spec_all(unless_thm2()))
   let t159 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t152), t154), t158)
-  unless_cor2_c.set(@aux_definitions.prove_thm("UNLESS_cor2", @parser.parse_term("forall(p:'a->bool) q Pr. (forall s. (Not p)s ==> q s) ==> ((p UNLESS q) Pr)"), t159))
+  unless_cor2_c.set(@aux_definitions.prove_thm("UNLESS_cor2", @parser.parse_term("∀(p:'a->bool) q Pr. (∀ s. (Not p)s ==> q s) ==> ((p UNLESS q) Pr)"), t159))
 }
 
 ///|
@@ -694,7 +694,7 @@ fn step_36() -> Unit raise {
   let t160 = @parser.parse_term("Pr:('a->'a)list")
   let t161 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("Not (q:'a->bool)"), t160]), unless_thm2()))
   let t177 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t161), t162), t163), t164), t166), t171), t172), t174), t175), t176)
-  unless_cor3a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r Pr.\n          (p UNLESS (q \\/* r)) Pr ==>\n          ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr")), t177))
+  unless_cor3a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r Pr.\n          (p UNLESS (q \\/* r)) Pr ==>\n          ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr")), t177))
 }
 
 ///|
@@ -727,14 +727,14 @@ fn step_37() -> Unit raise {
   let t185 = @parser.parse_term("q:'a->bool")
   let t186 = @parser.parse_term("(p:'a->bool) /\\* q")
   let t187 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(p:'a->bool) /\\* q"), t186, t185, t184]), unless_thm3())))
-  let t182 = @parser.parse_term("forall s:'a. (p /\\* q)s ==> q s")
+  let t182 = @parser.parse_term("∀ s:'a. (p /\\* q)s ==> q s")
   let t183 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("(((p:'a->bool) /\\* q) UNLESS (p /\\* q))Pr"), t182]), @hol88.and_intro_thm())))
   let t180 = @parser.parse_term("q:'a->bool")
   let t181 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t180]), @mk_state_logic.and_imply_weak_lemma()))
   let t178 = @parser.parse_term("Pr:('a->'a)list")
   let t179 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("(p:'a->bool) /\\* q"), t178]), unless_thm1()))
   let t202 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t179), t181), t183), t187), t189), t194), t195), t196), t197), t198), t199), @tactics.strip_tac), t200), t201)
-  unless_cor3b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r Pr.\n      ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr ==> (p UNLESS (q \\/* r)) Pr")), t202))
+  unless_cor3b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r Pr.\n      ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr ==> (p UNLESS (q \\/* r)) Pr")), t202))
 }
 
 ///|
@@ -751,7 +751,7 @@ pub fn unless_cor3b() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t203 = @bool.spec_all(unless_cor3a())
   let t204 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(unless_cor3b()), t203)]))
-  unless_cor3_c.set(@aux_definitions.prove_thm("UNLESS_cor3", @parser.parse_term("forall(p:'a->bool) q r Pr.\n         ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr = (p UNLESS (q \\/* r)) Pr"), t204))
+  unless_cor3_c.set(@aux_definitions.prove_thm("UNLESS_cor3", @parser.parse_term("∀(p:'a->bool) q r Pr.\n         ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr = (p UNLESS (q \\/* r)) Pr"), t204))
 }
 
 ///|
@@ -784,7 +784,7 @@ fn step_39() -> Unit raise {
   let t206 = @tactics.undisch_tac(@parser.parse_term("((Not (q:'a->bool)) UNLESS (Not(Not q)))Pr"))
   let t205 = @tactics.assume_tac(@bool.spec_all(@bool.spec(@parser.parse_term("Not (q:'a->bool)"), unless_thm2())))
   let t222 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t205), t206), t207), @tactics.strip_tac), t209), t213), t214), t215), t217), t218), @tactics.strip_tac), t220), t221)
-  unless_cor4_c.set(@aux_definitions.prove_thm("UNLESS_cor4", @parser.parse_term("forall(p:'a->bool) q r Pr.\n               ((p \\/* q) UNLESS r) Pr ==> (p UNLESS (q \\/* r)) Pr"), t222))
+  unless_cor4_c.set(@aux_definitions.prove_thm("UNLESS_cor4", @parser.parse_term("∀(p:'a->bool) q r Pr.\n               ((p \\/* q) UNLESS r) Pr ==> (p UNLESS (q \\/* r)) Pr"), t222))
 }
 
 ///|
@@ -810,7 +810,7 @@ fn step_40() -> Unit raise {
   let t224 = @tactics.assume_tac(@bool.spec_all(unless_thm2()))
   let t223 = @tactics.assume_tac(@bool.spec_all(unless_thm1()))
   let t233 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t223), t224), t226), t230), t231), t232)
-  unless_cor5_c.set(@aux_definitions.prove_thm("UNLESS_cor5", @parser.parse_term("forall(p:'a->bool) Pr. (p UNLESS True) Pr"), t233))
+  unless_cor5_c.set(@aux_definitions.prove_thm("UNLESS_cor5", @parser.parse_term("∀(p:'a->bool) Pr. (p UNLESS True) Pr"), t233))
 }
 
 ///|
@@ -839,7 +839,7 @@ fn step_41() -> Unit raise {
   let t235 = @tactics.assume_tac(@bool.spec_all(@bool.spec(@parser.parse_term("(Not (p:'a->bool))"), unless_thm2())))
   let t234 = @tactics.assume_tac(@bool.spec_all(unless_thm1()))
   let t247 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t234), t235), t236), t237), @tactics.disch_tac), t239), t243), t244), t245), t246)
-  unless_cor6_c.set(@aux_definitions.prove_thm("UNLESS_cor6", @parser.parse_term("forall(p:'a->bool) Pr. (True UNLESS p) Pr"), t247))
+  unless_cor6_c.set(@aux_definitions.prove_thm("UNLESS_cor6", @parser.parse_term("∀(p:'a->bool) Pr. (True UNLESS p) Pr"), t247))
 }
 
 ///|
@@ -868,7 +868,7 @@ fn step_42() -> Unit raise {
   let t249 = @tactics.assume_tac(@bool.spec_all(@bool.spec(@parser.parse_term("(Not (p:'a->bool))"), unless_thm2())))
   let t248 = @tactics.assume_tac(@bool.spec_all(unless_thm1()))
   let t261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t248), t249), t250), t251), @tactics.disch_tac), t253), t257), t258), t259), t260)
-  unless_cor7_c.set(@aux_definitions.prove_thm("UNLESS_cor7", @parser.parse_term("forall(p:'a->bool) Pr. (False UNLESS p) Pr"), t261))
+  unless_cor7_c.set(@aux_definitions.prove_thm("UNLESS_cor7", @parser.parse_term("∀(p:'a->bool) Pr. (False UNLESS p) Pr"), t261))
 }
 
 ///|
@@ -885,7 +885,7 @@ pub fn unless_cor7() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   let t262 = @simp.asm_rewrite_tac(@list.List([]))
   let t263 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t262)
-  hejifeng_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s ==> p' s /\\ ~q s)")), t263))
+  hejifeng_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q p'.\n     (∀ s. p s /\\ ~q s) ==> (∀ s. p' s) ==> (∀ s. p s \\/ q s) ==>\n         (∀ s. p s /\\ ~q s ==> p' s /\\ ~q s)")), t263))
 }
 
 ///|
@@ -902,7 +902,7 @@ pub fn hejifeng_lemma1() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t264 = @simp.asm_rewrite_tac(@list.List([]))
   let t265 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t264)
-  hejifeng_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p' s /\\ ~q s ==> p s /\\ ~q s)")), t265))
+  hejifeng_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q p'.\n     (∀ s. p s /\\ ~q s) ==> (∀ s. p' s) ==> (∀ s. p s \\/ q s) ==>\n         (∀ s. p' s /\\ ~q s ==> p s /\\ ~q s)")), t265))
 }
 
 ///|
@@ -920,7 +920,7 @@ fn step_45() -> Unit raise {
   let t266 = @bool.spec_all(@bool.undisch(@bool.undisch(@bool.undisch(@bool.spec_all(hejifeng_lemma2())))))
   let t267 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(@bool.undisch(@bool.undisch(@bool.undisch(@bool.spec_all(hejifeng_lemma1()))))), t266)]))
   let t268 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t267)
-  hejifeng_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s <=> p' s /\\ ~q s)")), t268))
+  hejifeng_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q p'.\n     (∀ s. p s /\\ ~q s) ==> (∀ s. p' s) ==> (∀ s. p s \\/ q s) ==>\n         (∀ s. p s /\\ ~q s <=> p' s /\\ ~q s)")), t268))
 }
 
 ///|
@@ -954,7 +954,7 @@ fn step_47() -> Unit raise {
   let t270 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t269 = @simp.rewrite_tac(@list.List([@mk_state_logic.and_def(), @mk_state_logic.or_def(), @mk_state_logic.not_def1()]))
   let t272 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t269), t270), t271)
-  unless_cor8_c.set(@aux_definitions.prove_thm("UNLESS_cor8", @parser.parse_term("forall(p:'a->bool) q p' Pr.\n       (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s)\n            ==> (((p  /\\* (Not q)) UNLESS q) Pr =\n                 ((p' /\\* (Not q)) UNLESS q) Pr)"), t272))
+  unless_cor8_c.set(@aux_definitions.prove_thm("UNLESS_cor8", @parser.parse_term("∀(p:'a->bool) q p' Pr.\n       (∀ s. p s /\\ ~q s) ==> (∀ s. p' s) ==> (∀ s. p s \\/ q s)\n            ==> (((p  /\\* (Not q)) UNLESS q) Pr =\n                 ((p' /\\* (Not q)) UNLESS q) Pr)"), t272))
 }
 
 ///|
@@ -974,7 +974,7 @@ fn step_48() -> Unit raise {
   let t286 = @parser.parse_term("(((p:'a->bool) /\\* q) \\/* (r \\/* r'))")
   let t287 = @parser.parse_term("((((Not((p:'a->bool) \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n          ((q \\/* r) /\\* (p \\/* r')))")
   let t288 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.spec_all(@bool.specl(@list.List([@parser.parse_term("(((p:'a->bool) \\/* p') \\/* (q \\/* q'))"), t287, t286]), unless_thm3()))))
-  let t284 = @parser.parse_term("forall s:'a. ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n              ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n              ((q \\/* r) /\\* (p \\/* r'))) s ==>\n                  ((p /\\* q) \\/* (r \\/* r'))s")
+  let t284 = @parser.parse_term("∀ s:'a. ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n              ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n              ((q \\/* r) /\\* (p \\/* r'))) s ==>\n                  ((p /\\* q) \\/* (r \\/* r'))s")
   let t285 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((((p:'a->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))) Pr"), t284]), @hol88.and_intro_thm())))
   let t278 = @parser.parse_term("r':'a->bool")
   let t279 = @parser.parse_term("r:'a->bool")
@@ -988,7 +988,7 @@ fn step_48() -> Unit raise {
   let t276 = @parser.parse_term("((q:'a->bool) \\/* r)")
   let t277 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) \\/* p')"), t276, t275, t274, t273]), unless_thm5())))
   let t291 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t277), t283), t285), t288), t289), t290)
-  unless_cor9_c.set(@aux_definitions.prove_thm("UNLESS_cor9", @parser.parse_term("forall(p:'a->bool) q p' q' r r' Pr.\n     ((p \\/* p') UNLESS (q \\/* r)) Pr /\\ ((q \\/* q') UNLESS (p \\/* r')) Pr ==>\n            ((p \\/* p' \\/* q \\/* q') UNLESS ((p /\\* q) \\/* r \\/* r')) Pr"), t291))
+  unless_cor9_c.set(@aux_definitions.prove_thm("UNLESS_cor9", @parser.parse_term("∀(p:'a->bool) q p' q' r r' Pr.\n     ((p \\/* p') UNLESS (q \\/* r)) Pr /\\ ((q \\/* q') UNLESS (p \\/* r')) Pr ==>\n            ((p \\/* p' \\/* q \\/* q') UNLESS ((p /\\* q) \\/* r \\/* r')) Pr"), t291))
 }
 
 ///|
@@ -1011,7 +1011,7 @@ fn step_49() -> Unit raise {
   let t296 = @tactics.strip_assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t295, t294, t293]), unless_cor4())))
   let t292 = @simp.rewrite_tac(@list.List([stable()]))
   let t299 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t292), @tactics.disch_tac), t296), t297), t298)
-  unless_cor10_c.set(@aux_definitions.prove_thm("UNLESS_cor10", @parser.parse_term("forall(p:'a->bool) q Pr. (p \\/* q) STABLE Pr ==> (p UNLESS q) Pr"), t299))
+  unless_cor10_c.set(@aux_definitions.prove_thm("UNLESS_cor10", @parser.parse_term("∀(p:'a->bool) q Pr. (p \\/* q) STABLE Pr ==> (p UNLESS q) Pr"), t299))
 }
 
 ///|
@@ -1026,14 +1026,14 @@ pub fn unless_cor10() -> @kernel.Thm {
 ///|
 /// UNLESS_cor11
 fn step_50() -> Unit raise {
-  let t303 = @kernel.assume_rule(@parser.parse_term("forall s:'a. Not (p:'a->bool) s"))
+  let t303 = @kernel.assume_rule(@parser.parse_term("∀ s:'a. Not (p:'a->bool) s"))
   let t304 = @bool.spec(@parser.parse_term("s:'a"), t303)
   let t305 = @tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@mk_state_logic.not_def1()]))(t304))
   let t302 = @simp.rewrite_tac(@list.List([unless_stmt(), @mk_state_logic.false_def()]))
   let t301 = @simp.asm_rewrite_tac(@list.List([]))
   let t300 = @simp.rewrite_tac(@list.List([unless()]))
   let t306 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([stable()]))), @lists.list_induct_tac), t300), @tactics.strip_tac), @hol88.res_tac), t301), @tactics.gen_tac), t302), t305), @tactics.strip_tac), @hol88.res_tac)
-  unless_cor11_c.set(@aux_definitions.prove_thm("UNLESS_cor11", @parser.parse_term("forall(p:'a->bool) Pr. (forall s. (Not p)s) ==> p STABLE Pr"), t306))
+  unless_cor11_c.set(@aux_definitions.prove_thm("UNLESS_cor11", @parser.parse_term("∀(p:'a->bool) Pr. (∀ s. (Not p)s) ==> p STABLE Pr"), t306))
 }
 
 ///|
@@ -1051,7 +1051,7 @@ fn step_51() -> Unit raise {
   let t308 = @simp.asm_rewrite_tac(@list.List([unless_stmt()]))
   let t307 = @simp.rewrite_tac(@list.List([unless()]))
   let t309 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([stable()]))), @lists.list_induct_tac), t307), @tactics.strip_tac), @hol88.res_tac), t308)
-  unless_cor12_c.set(@aux_definitions.prove_thm("UNLESS_cor12", @parser.parse_term("forall(p:'a->bool) Pr. (forall s. (Not p)s) ==> (Not p) STABLE Pr"), t309))
+  unless_cor12_c.set(@aux_definitions.prove_thm("UNLESS_cor12", @parser.parse_term("∀(p:'a->bool) Pr. (∀ s. (Not p)s) ==> (Not p) STABLE Pr"), t309))
 }
 
 ///|
@@ -1094,7 +1094,7 @@ fn step_52() -> Unit raise {
   let t310 = @parser.parse_term("Pr:('a->'a)list")
   let t311 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("((p:'a->bool) /\\* q)"), t310]), unless_cor11())))
   let t337 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t311), t312), t313), @tactics.disch_tac), t315), t320), t321), t322), t323), t324), t325), @tactics.disch_tac), t327), t331), t332), t333), t334), t335), t336)
-  unless_cor13_c.set(@aux_definitions.prove_thm("UNLESS_cor13", @parser.parse_term("forall(p:'a->bool) q Pr.\n        (p UNLESS q) Pr /\\ (q UNLESS p) Pr /\\ (forall s. Not (p /\\* q) s) ==>\n                (p \\/* q) STABLE Pr"), t337))
+  unless_cor13_c.set(@aux_definitions.prove_thm("UNLESS_cor13", @parser.parse_term("∀(p:'a->bool) q Pr.\n        (p UNLESS q) Pr /\\ (q UNLESS p) Pr /\\ (∀ s. Not (p /\\* q) s) ==>\n                (p \\/* q) STABLE Pr"), t337))
 }
 
 ///|
@@ -1148,7 +1148,7 @@ fn step_53() -> Unit raise {
   let t343 = @tactics.assume_tac(@bool.undisch_all(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t342, t341, t340, t339]), unless_thm4())))
   let t338 = @tactics.repeat_tac(@tactics.gen_tac)
   let t376 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([stable()])), t338), @tactics.disch_tac), t343), t344), t345), @tactics.disch_tac), t347), t349), t354), t355), t356), t357), t358), t359), t360), t361), t362), t363), t364), t365), t366), t367), t368), t369), t370), t371), t372), t373), @tactics.disch_tac), t374), t375)
-  unless_cor14_c.set(@aux_definitions.prove_thm("UNLESS_cor14", @parser.parse_term("forall(p:'a->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr"), t376))
+  unless_cor14_c.set(@aux_definitions.prove_thm("UNLESS_cor14", @parser.parse_term("∀(p:'a->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr"), t376))
 }
 
 ///|
@@ -1166,7 +1166,7 @@ fn step_54() -> Unit raise {
   let t378 = @tactics.then_tac(@hol88.res_tac, @simp.asm_rewrite_tac(@list.List([])))
   let t377 = @tactics.repeat_tac(@tactics.strip_tac)
   let t379 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t377), t378)
-  unless_cor15_lem1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. p /\\ (~p \\/ ~q) <=> p /\\ ~q")), t379))
+  unless_cor15_lem1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. p /\\ (~p \\/ ~q) <=> p /\\ ~q")), t379))
 }
 
 ///|
@@ -1184,7 +1184,7 @@ fn step_55() -> Unit raise {
   let t381 = @simp.asm_rewrite_tac(@list.List([]))
   let t380 = @tactics.repeat_tac(@tactics.strip_tac)
   let t382 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t380), t381)
-  unless_cor15_lem2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. p \\/ (p /\\ q) <=> p")), t382))
+  unless_cor15_lem2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. p \\/ (p /\\ q) <=> p")), t382))
 }
 
 ///|
@@ -1202,7 +1202,7 @@ fn step_56() -> Unit raise {
   let t384 = @simp.asm_rewrite_tac(@list.List([]))
   let t383 = @tactics.repeat_tac(@tactics.strip_tac)
   let t385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t383), t384)
-  unless_cor15_lem3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall P Q. (forall(i:num). (P i) /\\ (Q i)) <=> ((forall i. P i) /\\ (forall i. Q i))")), t385))
+  unless_cor15_lem3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ P Q. (∀(i:num). (P i) /\\ (Q i)) <=> ((∀ i. P i) /\\ (∀ i. Q i))")), t385))
 }
 
 ///|
@@ -1221,7 +1221,7 @@ fn step_57() -> Unit raise {
   let t387 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t386 = @simp.rewrite_tac(@list.List([@mk_state_logic.forall_def(), @mk_state_logic.exists_def(), unless_stmt(), @mk_state_logic.and_def()]))
   let t389 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t386), t387), t388)
-  unless_stmt_cor15_c.set(@aux_definitions.prove_thm("UNLESS_STMT_cor15", @parser.parse_term("forall(P:num->('a->bool)) Q st.\n            (forall i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (forall s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)"), t389))
+  unless_stmt_cor15_c.set(@aux_definitions.prove_thm("UNLESS_STMT_cor15", @parser.parse_term("∀(P:num->('a->bool)) Q st.\n            (∀ i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (∀ s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)"), t389))
 }
 
 ///|
@@ -1237,12 +1237,12 @@ pub fn unless_stmt_cor15() -> @kernel.Thm {
 /// UNLESS_cor15
 fn step_58() -> Unit raise {
   let t394 = @simp.asm_rewrite_tac(@list.List([]))
-  let t392 = @kernel.assume_rule(@parser.parse_term("forall i:num. (forall s:'a. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t"))
+  let t392 = @kernel.assume_rule(@parser.parse_term("∀ i:num. (∀ s:'a. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t"))
   let t393 = @tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([unless_cor15_lem3()]))(t392))
   let t391 = @simp.asm_rewrite_tac(@list.List([]))
   let t390 = @simp.rewrite_tac(@list.List([unless()]))
   let t396 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t390), @tactics.strip_tac), @hol88.res_tac), t391), t393), @hol88.res_tac), t394), (x395 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(unless_stmt_cor15(), x395))
-  unless_cor15_c.set(@aux_definitions.prove_thm("UNLESS_cor15", @parser.parse_term("forall(P:num->('a->bool)) Q Pr.\n       (forall i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr"), t396))
+  unless_cor15_c.set(@aux_definitions.prove_thm("UNLESS_cor15", @parser.parse_term("∀(P:num->('a->bool)) Q Pr.\n       (∀ i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr"), t396))
 }
 
 ///|
@@ -1262,12 +1262,12 @@ fn step_59() -> Unit raise {
   let t401 = @parser.parse_term("(P:num->('a->bool))(SUC i)")
   let t402 = @parser.parse_term("\\<=/* (Q:num->('a->bool)) i")
   let t403 = @tactics.strip_assume_tac(@bool.undisch_all(@lib.hd(@hol88.imp_canon(@bool.specl(@list.List([@parser.parse_term("/<=\\* (P:num->('a->bool)) i"), t402, t401, t400, t399]), unless_thm6())))))
-  let t397 = @kernel.assume_rule(@parser.parse_term("forall i. (((P:num->('a->bool)) i) UNLESS (Q i))Pr"))
+  let t397 = @kernel.assume_rule(@parser.parse_term("∀ i. (((P:num->('a->bool)) i) UNLESS (Q i))Pr"))
   let t398 = @tactics.assume_tac(@bool.spec(@parser.parse_term("SUC i"), t397))
   let t404 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_state_logic.and_le_n_def(), @mk_state_logic.or_le_n_def()])), t398), t403)
   let t405 = @list.List([@simp.asm_rewrite_tac(@list.List([@mk_state_logic.and_le_n_def(), @mk_state_logic.or_le_n_def()])), t404])
   let t406 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), @nums.induct_tac), t405)
-  unless_cor16_c.set(@aux_definitions.prove_thm("UNLESS_cor16", @parser.parse_term("forall(P:num->('a->bool)) Q Pr.\n    (forall i. ((P i) UNLESS (Q i))Pr) ==>\n      (forall i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)"), t406))
+  unless_cor16_c.set(@aux_definitions.prove_thm("UNLESS_cor16", @parser.parse_term("∀(P:num->('a->bool)) Q Pr.\n    (∀ i. ((P i) UNLESS (Q i))Pr) ==>\n      (∀ i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)"), t406))
 }
 
 ///|
@@ -1288,12 +1288,12 @@ fn step_60() -> Unit raise {
   let t411 = @parser.parse_term("(P:num->('a->bool))(SUC i)")
   let t412 = @parser.parse_term("q:'a->bool")
   let t413 = @tactics.assume_tac(@bool.undisch_all(@lib.hd(@hol88.imp_canon(@bool.specl(@list.List([@parser.parse_term("/<=\\* (P:num->('a->bool)) i"), t412, t411, t410, t409]), unless_thm6())))))
-  let t407 = @kernel.assume_rule(@parser.parse_term("forall i. (((P:num->('a->bool)) i) UNLESS q)Pr"))
+  let t407 = @kernel.assume_rule(@parser.parse_term("∀ i. (((P:num->('a->bool)) i) UNLESS q)Pr"))
   let t408 = @tactics.assume_tac(@bool.spec(@parser.parse_term("SUC i"), t407))
   let t415 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_state_logic.and_le_n_def(), @mk_state_logic.or_le_n_def()])), t408), t413), @aux_definitions.undisch_one_tac), t414)
   let t416 = @list.List([@simp.asm_rewrite_tac(@list.List([@mk_state_logic.and_le_n_def(), @mk_state_logic.or_le_n_def()])), t415])
   let t417 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), @nums.induct_tac), t416)
-  unless_cor17_c.set(@aux_definitions.prove_thm("UNLESS_cor17", @parser.parse_term("forall(P:num->('a->bool)) q Pr.\n       (forall i. ((P i) UNLESS q)Pr) ==> (forall i. ((/<=\\* P i) UNLESS q)Pr)"), t417))
+  unless_cor17_c.set(@aux_definitions.prove_thm("UNLESS_cor17", @parser.parse_term("∀(P:num->('a->bool)) q Pr.\n       (∀ i. ((P i) UNLESS q)Pr) ==> (∀ i. ((/<=\\* P i) UNLESS q)Pr)"), t417))
 }
 
 ///|
@@ -1312,7 +1312,7 @@ fn step_61() -> Unit raise {
   let t419 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t418 = @simp.rewrite_tac(@list.List([@mk_state_logic.forall_def(), @mk_state_logic.exists_def(), unless_stmt(), @mk_state_logic.and_def()]))
   let t421 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t418), t419), t420)
-  unless_stmt_cor18_c.set(@aux_definitions.prove_thm("UNLESS_STMT_cor18", @parser.parse_term("forall(P:num->('a->bool)) Q st.\n         (forall i s. ((P i) UNLESS_STMT q) st s) ==>\n            (forall s. (((?*) P) UNLESS_STMT q) st s)"), t421))
+  unless_stmt_cor18_c.set(@aux_definitions.prove_thm("UNLESS_STMT_cor18", @parser.parse_term("∀(P:num->('a->bool)) Q st.\n         (∀ i s. ((P i) UNLESS_STMT q) st s) ==>\n            (∀ s. (((?*) P) UNLESS_STMT q) st s)"), t421))
 }
 
 ///|
@@ -1328,12 +1328,12 @@ pub fn unless_stmt_cor18() -> @kernel.Thm {
 /// UNLESS_cor18
 fn step_62() -> Unit raise {
   let t426 = @simp.asm_rewrite_tac(@list.List([]))
-  let t424 = @kernel.assume_rule(@parser.parse_term("forall m:num. (forall s:'a. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t"))
+  let t424 = @kernel.assume_rule(@parser.parse_term("∀ m:num. (∀ s:'a. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t"))
   let t425 = @tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([unless_cor15_lem3()]))(t424))
   let t423 = @simp.asm_rewrite_tac(@list.List([]))
   let t422 = @simp.rewrite_tac(@list.List([unless()]))
   let t428 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t422), @tactics.strip_tac), t423), t425), @hol88.res_tac), t426), (x427 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(unless_stmt_cor18(), x427))
-  unless_cor18_c.set(@aux_definitions.prove_thm("UNLESS_cor18", @parser.parse_term("forall(P:num->('a->bool)) q Pr.\n        (forall m. ((P m) UNLESS q) Pr) ==> (((?*) P) UNLESS q) Pr"), t428))
+  unless_cor18_c.set(@aux_definitions.prove_thm("UNLESS_cor18", @parser.parse_term("∀(P:num->('a->bool)) q Pr.\n        (∀ m. ((P m) UNLESS q) Pr) ==> (((?*) P) UNLESS q) Pr"), t428))
 }
 
 ///|
@@ -1350,7 +1350,7 @@ pub fn unless_cor18() -> @kernel.Thm {
 fn step_63() -> Unit raise {
   let t429 = @simp.rewrite_tac(@list.List([unless_thm1()]))
   let t430 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([stable()]))), t429)
-  unless_cor19_c.set(@aux_definitions.prove_thm("UNLESS_cor19", @parser.parse_term("forall Pr. (False:'a->bool) STABLE Pr"), t430))
+  unless_cor19_c.set(@aux_definitions.prove_thm("UNLESS_cor19", @parser.parse_term("∀ Pr. (False:'a->bool) STABLE Pr"), t430))
 }
 
 ///|
@@ -1373,7 +1373,7 @@ fn step_64() -> Unit raise {
   let t437 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@mk_state_logic.and_false_lemma(), @mk_state_logic.or_false_lemma()]))(t436))
   let t431 = @simp.rewrite_tac(@list.List([stable()]))
   let t438 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t431), t437)
-  unless_cor20_c.set(@aux_definitions.prove_thm("UNLESS_cor20", @parser.parse_term("forall(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p /\\* q) STABLE Pr)"), t438))
+  unless_cor20_c.set(@aux_definitions.prove_thm("UNLESS_cor20", @parser.parse_term("∀(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p /\\* q) STABLE Pr)"), t438))
 }
 
 ///|
@@ -1396,7 +1396,7 @@ fn step_65() -> Unit raise {
   let t445 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@mk_state_logic.and_false_lemma(), @mk_state_logic.or_false_lemma()]))(t444))
   let t439 = @simp.rewrite_tac(@list.List([stable()]))
   let t446 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t439), t445)
-  unless_cor21_c.set(@aux_definitions.prove_thm("UNLESS_cor21", @parser.parse_term("forall(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p \\/* q) STABLE Pr)"), t446))
+  unless_cor21_c.set(@aux_definitions.prove_thm("UNLESS_cor21", @parser.parse_term("∀(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p \\/* q) STABLE Pr)"), t446))
 }
 
 ///|
@@ -1422,7 +1422,7 @@ fn step_66() -> Unit raise {
   let t456 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@mk_state_logic.or_false_lemma()]))(t455))
   let t447 = @simp.rewrite_tac(@list.List([stable()]))
   let t457 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t447), t456)
-  unless_cor22_c.set(@aux_definitions.prove_thm("UNLESS_cor22", @parser.parse_term("forall(p:'a->bool) q r Pr.\n          (p UNLESS q) Pr /\\ (r STABLE Pr) ==>\n          ((p /\\* r) UNLESS (q /\\* r))Pr"), t457))
+  unless_cor22_c.set(@aux_definitions.prove_thm("UNLESS_cor22", @parser.parse_term("∀(p:'a->bool) q r Pr.\n          (p UNLESS q) Pr /\\ (r STABLE Pr) ==>\n          ((p /\\* r) UNLESS (q /\\* r))Pr"), t457))
 }
 
 ///|
@@ -1441,7 +1441,7 @@ fn step_67() -> Unit raise {
   let t459 = @simp.asm_rewrite_tac(@list.List([]))
   let t458 = @simp.rewrite_tac(@list.List([unless()]))
   let t462 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @lists.list_induct_tac), t458), @tactics.strip_tac), @hol88.res_tac), t459), (x460 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(unless_stmt_thm6(), x460)), t461)
-  unless_cor23_c.set(@aux_definitions.prove_thm("UNLESS_cor23", @parser.parse_term("forall(p:'a->bool) q r Pr.\n         ((p UNLESS q) Pr) ==> ((p \\/* r) UNLESS (q \\/* r)) Pr"), t462))
+  unless_cor23_c.set(@aux_definitions.prove_thm("UNLESS_cor23", @parser.parse_term("∀(p:'a->bool) q r Pr.\n         ((p UNLESS q) Pr) ==> ((p \\/* r) UNLESS (q \\/* r)) Pr"), t462))
 }
 
 ///|

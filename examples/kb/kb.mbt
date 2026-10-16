@@ -438,7 +438,7 @@ pub fn complete_equations(x120 : @list.List[@kernel.Term], x121 : @list.List[@ke
 ///|
 /// Examples/kb.ml:201
 fn step_1() -> Unit raise {
-  let t125 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall a b. i(a) * a * b = b")))])
+  let t125 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("∀ a b. i(a) * a * b = b")))])
   let t123 = @parser.parse_term("i:num->num")
   let t124 = @parser.parse_term("(*):num->num->num")
   ignore(complete_equations(@list.List([@parser.parse_term("1"), t124, t123]), t125))
@@ -447,14 +447,14 @@ fn step_1() -> Unit raise {
 ///|
 /// Examples/kb.ml:208
 fn step_2() -> Unit raise {
-  let t126 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall a b c. (a * b) * (b * c) = b")))])
+  let t126 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("∀ a b c. (a * b) * (b * c) = b")))])
   ignore(complete_equations(@list.List([@parser.parse_term("(*):num->num->num")]), t126))
 }
 
 ///|
 /// Examples/kb.ml:215
 fn step_3() -> Unit raise {
-  let t130 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall a b:num. a - a * b = b) /\\\n   (forall a b:num. a * b - b = a) /\\\n   (forall a. a * 1 = a) /\\\n   (forall a. 1 * a = a)"))))
+  let t130 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(∀ a b:num. a - a * b = b) /\\\n   (∀ a b:num. a * b - b = a) /\\\n   (∀ a. a * 1 = a) /\\\n   (∀ a. 1 * a = a)"))))
   let t127 = @parser.parse_term("(-):num->num->num")
   let t128 = @parser.parse_term("(+):num->num->num")
   let t129 = @parser.parse_term("( * ):num->num->num")
@@ -472,7 +472,7 @@ fn step_4() -> Unit raise {
 ///|
 /// eqs
 fn step_5() -> Unit raise {
-  eqs_v1_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall x. 1 * x = x) /\\ (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)")))))
+  eqs_v1_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(∀ x. 1 * x = x) /\\ (∀ x. i(x) * x = 1) /\\\n   (∀ x y z. (x * y) * z = x * y * z)")))))
 }
 
 ///|
@@ -495,7 +495,7 @@ fn step_6() -> Unit raise {
 ///|
 /// eqs
 fn step_7() -> Unit raise {
-  eqs_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))")))))
+  eqs_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(∀ x. 0 + x = x) /\\\n   (∀ x. neg x + x = 0) /\\\n   (∀ x y z. (x + y) + z = x + y + z) /\\\n   (∀ x y z. (x * y) * z = x * y * z) /\\\n   (∀ x y z. (x + y) * z = (x * z) + (y * z))")))))
 }
 
 ///|
@@ -545,7 +545,7 @@ pub fn complete_tac(x138 : @list.List[@kernel.Term], x139 : @kernel.Thm) -> @tac
 ///|
 /// Examples/kb.ml:277
 fn step_9() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(forall x. 1 * x = x) /\\\n   (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)\n   ==> forall x y. i(y) * i(i(i(x * i(y)))) * x = 1")))
+  ignore(@tactics.g(@parser.parse_term("(∀ x. 1 * x = x) /\\\n   (∀ x. i(x) * x = 1) /\\\n   (∀ x y z. (x * y) * z = x * y * z)\n   ==> ∀ x y. i(y) * i(i(i(x * i(y)))) * x = 1")))
 }
 
 ///|
@@ -566,7 +566,7 @@ fn step_11() -> Unit raise {
 ///|
 /// Examples/kb.ml:285
 fn step_12() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))\n   ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n        a + b)")))
+  ignore(@tactics.g(@parser.parse_term("(∀ x. 0 + x = x) /\\\n   (∀ x. neg x + x = 0) /\\\n   (∀ x y z. (x + y) + z = x + y + z) /\\\n   (∀ x y z. (x * y) * z = x * y * z) /\\\n   (∀ x y z. (x + y) * z = (x * z) + (y * z))\n   ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n        a + b)")))
 }
 
 ///|

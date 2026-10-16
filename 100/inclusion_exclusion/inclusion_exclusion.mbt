@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
   let t2 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(a /\\ ~b ==> c) ==> a ==> b \\/ c")))
   let t1 = @list.List([@tactics.all_tac, @sets.set_tac(@list.List([]))])
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1), t2), @tactics.disch_tac), t3), t4)
-  subset_insert_exists_c.set(@tactics.prove(@parser.parse_term("forall s x:A t. s SUBSET (x INSERT t) <=>\n                s SUBSET t \\/ ?u. u SUBSET t /\\ s = x INSERT u"), t5))
+  subset_insert_exists_c.set(@tactics.prove(@parser.parse_term("∀ s x:A t. s SUBSET (x INSERT t) <=>\n                s SUBSET t \\/ ?u. u SUBSET t /\\ s = x INSERT u"), t5))
 }
 
 ///|
@@ -29,7 +29,7 @@ fn step_2() -> Unit raise {
   let t7 = @tactics.exists_tac(@parser.parse_term("{t:A->bool | t SUBSET s}"))
   let t6 = @tactics.match_mp_tac(@sets.finite_subset())
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6), t7), t8), t9)
-  finite_subsets_restrict_v1_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool p. FINITE s ==> FINITE {t | t SUBSET s /\\ p t}"), t10))
+  finite_subsets_restrict_v1_c.set(@tactics.prove(@parser.parse_term("∀ s:A->bool p. FINITE s ==> FINITE {t | t SUBSET s /\\ p t}"), t10))
 }
 
 ///|
@@ -191,7 +191,7 @@ fn step_3() -> Unit raise {
     let t91 = @parser.parse_term("t DIFF s:A->bool")
     @tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s INTER t:A->bool"), t91]), th)), t93)
   })
-  let t88 = @tactics.undisch_tac(@parser.parse_term("forall s t:A->bool. P s /\\ P t /\\ DISJOINT s t\n                                 ==> f(s UNION t):real = f(s) + f(t)"))
+  let t88 = @tactics.undisch_tac(@parser.parse_term("∀ s t:A->bool. P s /\\ P t /\\ DISJOINT s t\n                                 ==> f(s UNION t):real = f(s) + f(t)"))
   let t87 = @tactics.repeat_tac(@tactics.strip_tac)
   let t85 = @parser.parse_term("s:A->bool")
   let t86 = @tactics.spec_tac(@parser.parse_term("(x:I->(A->bool)) a"), t85)
@@ -208,7 +208,7 @@ fn step_3() -> Unit raise {
       s76(x77)
     }
   })
-  let t74 = @tactics.undisch_tac(@parser.parse_term("forall b. b IN A ==> P((x:I->(A->bool)) b)"))
+  let t74 = @tactics.undisch_tac(@parser.parse_term("∀ b. b IN A ==> P((x:I->(A->bool)) b)"))
   let t99 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t74), t78), t79), t81), t82), t83), t98])
   let t100 = @list.List([@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("P(x a) /\\ P(UNIONS(IMAGE (x:I->(A->bool)) A))"), fn(x71 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s72 = @tactics.mp_tac(x71)
@@ -271,7 +271,7 @@ fn step_3() -> Unit raise {
   let t30 = @simp.rewrite_tac(@list.List([@sets.has_size_clauses(), @theorems.left_imp_exists_thm()]))
   let t29 = @tactics.match_mp_tac(@nums.num_induction())
   let t28 = @tactics.match_mp_tac(@arith.num_wf())
-  let t27 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.has_size()]), @parser.parse_term("(forall n s. s HAS_SIZE n ==> P s) ==> (forall s. FINITE s ==> P s)")))
+  let t27 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.has_size()]), @parser.parse_term("(∀ n s. s HAS_SIZE n ==> P s) ==> (∀ s. FINITE s ==> P s)")))
   let t26 = @simp.rewrite_tac(@list.List([@theorems.imp_imp()]))
   let t25 = @simp.gen_rewrite_tac(fn(x24 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x18 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -304,7 +304,7 @@ fn step_3() -> Unit raise {
       })(x143))
     })(x144)(x144)
   }), @tactics.ants_tac), t155), t156), t157), t158), @tactics.conj_tac), t207)
-  inclusion_exclusion_real_restricted_indexed_c.set(@tactics.prove(@parser.parse_term("forall P (f:(A->bool)->real) (A:I->bool) (x:I->(A->bool)).\n        (forall s t. P s /\\ P t /\\ DISJOINT s t\n               ==> f(s UNION t) = f(s) + f(t)) /\\\n        P {} /\\\n        (forall s t. P s /\\ P t ==> P(s INTER t) /\\ P(s UNION t) /\\ P(s DIFF t)) /\\\n        FINITE A /\\ (forall a. a IN A ==> P(x a))\n        ==> f(UNIONS(IMAGE x A)) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS(IMAGE x B)))"), t208))
+  inclusion_exclusion_real_restricted_indexed_c.set(@tactics.prove(@parser.parse_term("∀ P (f:(A->bool)->real) (A:I->bool) (x:I->(A->bool)).\n        (∀ s t. P s /\\ P t /\\ DISJOINT s t\n               ==> f(s UNION t) = f(s) + f(t)) /\\\n        P {} /\\\n        (∀ s t. P s /\\ P t ==> P(s INTER t) /\\ P(s UNION t) /\\ P(s DIFF t)) /\\\n        FINITE A /\\ (∀ a. a IN A ==> P(x a))\n        ==> f(UNIONS(IMAGE x A)) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS(IMAGE x B)))"), t208))
 }
 
 ///|
@@ -325,7 +325,7 @@ fn step_4() -> Unit raise {
   let t211 = @parser.parse_term("f:(A->bool)->real")
   let t212 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("P:(A->bool)->bool"), t211, t210, t209]), inclusion_exclusion_real_restricted_indexed()))
   let t214 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t212), t213)
-  inclusion_exclusion_real_restricted_c.set(@tactics.prove(@parser.parse_term("forall P (f:(A->bool)->real) (A:(A->bool)->bool).\n        (forall s t. P s /\\ P t /\\ DISJOINT s t\n               ==> f(s UNION t) = f(s) + f(t)) /\\\n        P {} /\\\n        (forall s t. P s /\\ P t ==> P(s INTER t) /\\ P(s UNION t) /\\ P(s DIFF t)) /\\\n        FINITE A /\\ (forall a. a IN A ==> P(a))\n        ==> f(UNIONS A) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS B))"), t214))
+  inclusion_exclusion_real_restricted_c.set(@tactics.prove(@parser.parse_term("∀ P (f:(A->bool)->real) (A:(A->bool)->bool).\n        (∀ s t. P s /\\ P t /\\ DISJOINT s t\n               ==> f(s UNION t) = f(s) + f(t)) /\\\n        P {} /\\\n        (∀ s t. P s /\\ P t ==> P(s INTER t) /\\ P(s UNION t) /\\ P(s DIFF t)) /\\\n        FINITE A /\\ (∀ a. a IN A ==> P(a))\n        ==> f(UNIONS A) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS B))"), t214))
 }
 
 ///|
@@ -342,7 +342,7 @@ pub fn inclusion_exclusion_real_restricted() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t215 = @simp.rewrite_tac(@list.List([]))
   let t216 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("\\x:A->bool. T"), inclusion_exclusion_real_restricted_indexed())), t215)
-  inclusion_exclusion_real_indexed_c.set(@tactics.prove(@parser.parse_term("forall(f:(A->bool)->real) (A:I->bool) (x:I->(A->bool)).\n        (forall s t. DISJOINT s t ==> f(s UNION t) = f(s) + f(t)) /\\ FINITE A\n        ==> f(UNIONS(IMAGE x A)) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS(IMAGE x B)))"), t216))
+  inclusion_exclusion_real_indexed_c.set(@tactics.prove(@parser.parse_term("∀(f:(A->bool)->real) (A:I->bool) (x:I->(A->bool)).\n        (∀ s t. DISJOINT s t ==> f(s UNION t) = f(s) + f(t)) /\\ FINITE A\n        ==> f(UNIONS(IMAGE x A)) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS(IMAGE x B)))"), t216))
 }
 
 ///|
@@ -362,7 +362,7 @@ fn step_6() -> Unit raise {
   let t218 = @parser.parse_term("A:(A->bool)->bool")
   let t219 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:(A->bool)->real"), t218, t217]), inclusion_exclusion_real_indexed()))
   let t221 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t219), t220)
-  inclusion_exclusion_real_c.set(@tactics.prove(@parser.parse_term("forall(f:(A->bool)->real) (A:(A->bool)->bool).\n        (forall s t. DISJOINT s t ==> f(s UNION t) = f(s) + f(t)) /\\ FINITE A\n        ==> f(UNIONS A) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS B))"), t221))
+  inclusion_exclusion_real_c.set(@tactics.prove(@parser.parse_term("∀(f:(A->bool)->real) (A:(A->bool)->bool).\n        (∀ s t. DISJOINT s t ==> f(s UNION t) = f(s) + f(t)) /\\ FINITE A\n        ==> f(UNIONS A) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS B))"), t221))
 }
 
 ///|
@@ -384,7 +384,7 @@ fn step_7() -> Unit raise {
   let t223 = @parser.parse_term("\\s:A->bool. &(CARD s)")
   let t224 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\s:A->bool. FINITE s"), t223, t222]), inclusion_exclusion_real_restricted()))
   let t228 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t224), t225), t226), t227)
-  inclusion_exclusion_c.set(@tactics.prove(@parser.parse_term("forall s:(A->bool)->bool.\n        FINITE s /\\ (forall k. k IN s ==> FINITE k)\n        ==> &(CARD(UNIONS s)) =\n                sum {t | t SUBSET s /\\ ~(t = {})}\n                    (\\t. (-- &1) pow (CARD t + 1) * &(CARD(INTERS t)))"), t228))
+  inclusion_exclusion_c.set(@tactics.prove(@parser.parse_term("∀ s:(A->bool)->bool.\n        FINITE s /\\ (∀ k. k IN s ==> FINITE k)\n        ==> &(CARD(UNIONS s)) =\n                sum {t | t SUBSET s /\\ ~(t = {})}\n                    (\\t. (-- &1) pow (CARD t + 1) * &(CARD(INTERS t)))"), t228))
 }
 
 ///|
@@ -443,7 +443,7 @@ fn step_8() -> Unit raise {
       })(x238))
     })(x239)(x239)
   }), t240), t244), t245), @tactics.conj_tac), t250), t251), t252), t253), @tactics.strip_tac), t254), @tactics.ap_term_tac), @tactics.ap_thm_tac), @tactics.ap_term_tac), t255), t257), t258), t259)
-  inclusion_exclusion_usual_c.set(@tactics.prove(@parser.parse_term("forall s:(A->bool)->bool.\n        FINITE s /\\ (forall k. k IN s ==> FINITE k)\n        ==> &(CARD(UNIONS s)) =\n                sum (1..CARD s) (\\n. (-- &1) pow (n + 1) *\n                                     sum {t | t SUBSET s /\\ t HAS_SIZE n}\n                                         (\\t. &(CARD(INTERS t))))"), t260))
+  inclusion_exclusion_usual_c.set(@tactics.prove(@parser.parse_term("∀ s:(A->bool)->bool.\n        FINITE s /\\ (∀ k. k IN s ==> FINITE k)\n        ==> &(CARD(UNIONS s)) =\n                sum (1..CARD s) (\\n. (-- &1) pow (n + 1) *\n                                     sum {t | t SUBSET s /\\ t HAS_SIZE n}\n                                         (\\t. &(CARD(INTERS t))))"), t260))
 }
 
 ///|
@@ -463,7 +463,7 @@ fn step_9() -> Unit raise {
   let t262 = @tactics.exists_tac(@parser.parse_term("{t:A->bool | t SUBSET s}"))
   let t261 = @tactics.match_mp_tac(@sets.finite_subset())
   let t265 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t261), t262), t263), t264)
-  finite_subsets_restrict_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool p. FINITE s ==> FINITE {t | t SUBSET s /\\ p t}"), t265))
+  finite_subsets_restrict_c.set(@tactics.prove(@parser.parse_term("∀ s:A->bool p. FINITE s ==> FINITE {t | t SUBSET s /\\ p t}"), t265))
 }
 
 ///|
@@ -479,7 +479,7 @@ pub fn finite_subsets_restrict() -> @kernel.Thm {
 /// CARD_ADJUST_LEMMA
 fn step_10() -> Unit raise {
   let t266 = @meson.meson_tac(@list.List([@sets.card_image_inj()]))
-  card_adjust_lemma_c.set(@tactics.prove(@parser.parse_term("forall f:A->B s x y.\n        FINITE s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        x = y + CARD (IMAGE f s)\n        ==> x = y + CARD s"), t266))
+  card_adjust_lemma_c.set(@tactics.prove(@parser.parse_term("∀ f:A->B s x y.\n        FINITE s /\\\n        (∀ x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        x = y + CARD (IMAGE f s)\n        ==> x = y + CARD s"), t266))
 }
 
 ///|
@@ -524,7 +524,7 @@ fn step_11() -> Unit raise {
   let t267 = @parser.parse_type("B")
   let t268 = @tactics.match_mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("A"), t267)]), card_adjust_lemma()))
   let t294 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t268), t269), t270), t293)
-  card_subsets_step_c.set(@tactics.prove(@parser.parse_term("forall x:A s. FINITE s /\\ ~(x IN s) /\\ u SUBSET s\n           ==> CARD {t | t SUBSET (x INSERT s) /\\ u SUBSET t /\\ ODD(CARD t)} =\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ ODD(CARD t)} +\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ EVEN(CARD t)} /\\\n               CARD {t | t SUBSET (x INSERT s) /\\ u SUBSET t /\\ EVEN(CARD t)} =\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ EVEN(CARD t)} +\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ ODD(CARD t)}"), t294))
+  card_subsets_step_c.set(@tactics.prove(@parser.parse_term("∀ x:A s. FINITE s /\\ ~(x IN s) /\\ u SUBSET s\n           ==> CARD {t | t SUBSET (x INSERT s) /\\ u SUBSET t /\\ ODD(CARD t)} =\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ ODD(CARD t)} +\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ EVEN(CARD t)} /\\\n               CARD {t | t SUBSET (x INSERT s) /\\ u SUBSET t /\\ EVEN(CARD t)} =\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ EVEN(CARD t)} +\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ ODD(CARD t)}"), t294))
 }
 
 ///|
@@ -573,7 +573,7 @@ fn step_12() -> Unit raise {
   let t296 = @wf.wf_induct_tac(@parser.parse_term("CARD(u:A->bool)"))
   let t295 = @tactics.repeat_tac(@tactics.gen_tac)
   let t321 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a /\\ b /\\ c <=> b /\\ a /\\ c"))])), t295), t296), t297), t304), t305), t311), t312), t313), @tactics.strip_tac), t314), t315), t316), t317), t320)
-  card_subsupersets_even_odd_c.set(@tactics.prove(@parser.parse_term("forall s u:A->bool.\n        FINITE u /\\ s PSUBSET u\n        ==> CARD {t | s SUBSET t /\\ t SUBSET u /\\ EVEN(CARD t)} =\n            CARD {t | s SUBSET t /\\ t SUBSET u /\\ ODD(CARD t)}"), t321))
+  card_subsupersets_even_odd_c.set(@tactics.prove(@parser.parse_term("∀ s u:A->bool.\n        FINITE u /\\ s PSUBSET u\n        ==> CARD {t | s SUBSET t /\\ t SUBSET u /\\ EVEN(CARD t)} =\n            CARD {t | s SUBSET t /\\ t SUBSET u /\\ ODD(CARD t)}"), t321))
 }
 
 ///|
@@ -598,7 +598,7 @@ fn step_13() -> Unit raise {
   let t323 = @tactics.exists_tac(@parser.parse_term("sum {x | x IN s /\\ EVEN(f x)} (\\x. (-- &1) pow (f x)) +\n              sum {x:A | x IN s /\\ ODD(f x)} (\\x. (-- &1) pow (f x))"))
   let t322 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t331 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t322), t323), @tactics.conj_tac), t328), t330)
-  sum_alternating_cancels_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool f.\n        FINITE s /\\\n        CARD {x | x IN s /\\ EVEN(f x)} = CARD {x | x IN s /\\ ODD(f x)}\n        ==> sum s (\\x. (-- &1) pow (f x)) = &0"), t331))
+  sum_alternating_cancels_c.set(@tactics.prove(@parser.parse_term("∀ s:A->bool f.\n        FINITE s /\\\n        CARD {x | x IN s /\\ EVEN(f x)} = CARD {x | x IN s /\\ ODD(f x)}\n        ==> sum s (\\x. (-- &1) pow (f x)) = &0"), t331))
 }
 
 ///|
@@ -664,7 +664,7 @@ fn step_14() -> Unit raise {
       })(x347))
     })(x348)(x348)
   }), t349), t353), t354), t355), t356), @tactics.conj_tac), t357), t358), t359), t360), @tactics.strip_tac), @class.cond_cases_tac), t361), t364), t365), t366), t367), t368), t369), t370), t371)
-  inclusion_exclusion_symmetric_c.set(@tactics.prove(@parser.parse_term("forall f g:(A->bool)->real.\n    (forall s. FINITE s\n         ==> g(s) = sum {t | t SUBSET s} (\\t. (-- &1) pow (CARD t) * f(t)))\n    ==> forall s. FINITE s\n            ==> f(s) = sum {t | t SUBSET s} (\\t. (-- &1) pow (CARD t) * g(t))"), t372))
+  inclusion_exclusion_symmetric_c.set(@tactics.prove(@parser.parse_term("∀ f g:(A->bool)->real.\n    (∀ s. FINITE s\n         ==> g(s) = sum {t | t SUBSET s} (\\t. (-- &1) pow (CARD t) * f(t)))\n    ==> ∀ s. FINITE s\n            ==> f(s) = sum {t | t SUBSET s} (\\t. (-- &1) pow (CARD t) * g(t))"), t372))
 }
 
 ///|
@@ -721,7 +721,7 @@ fn step_15() -> Unit raise {
   let t373 = @parser.parse_term("g:(A->bool)->real")
   let t374 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\t. -- &1 pow CARD(t:A->bool) * f t"), t373]), inclusion_exclusion_symmetric()))
   let t408 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t374), t375), @tactics.ants_tac), t376), t383), t384), t391), t393), t394), t395), t396), t400), t401), t402), t403), t404), t405), t406), t407), @calc_rat.real_arith_tac)
-  inclusion_exclusion_mobius_c.set(@tactics.prove(@parser.parse_term("forall f g:(A->bool)->real.\n        (forall s. FINITE s ==> g(s) = sum {t | t SUBSET s} f)\n        ==> forall s. FINITE s\n                ==> f(s) = sum {t | t SUBSET s}\n                               (\\t. (-- &1) pow (CARD s - CARD t) * g(t))"), t408))
+  inclusion_exclusion_mobius_c.set(@tactics.prove(@parser.parse_term("∀ f g:(A->bool)->real.\n        (∀ s. FINITE s ==> g(s) = sum {t | t SUBSET s} f)\n        ==> ∀ s. FINITE s\n                ==> f(s) = sum {t | t SUBSET s}\n                               (\\t. (-- &1) pow (CARD s - CARD t) * g(t))"), t408))
 }
 
 ///|

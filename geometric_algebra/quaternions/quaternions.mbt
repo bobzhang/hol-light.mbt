@@ -67,7 +67,7 @@ fn step_2() -> Unit raise {
     })(x12))
   }, @list.List([@equal.gsym(@geometricalgebra.mvbasis_expansion())]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t25), t26), t29), t30), t31)
-  complex_product_ga010_c.set(@tactics.prove(@parser.parse_term("forall x y:real^('0,'1,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}"), t32))
+  complex_product_ga010_c.set(@tactics.prove(@parser.parse_term("∀ x y:real^('0,'1,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}"), t32))
 }
 
 ///|
@@ -112,9 +112,9 @@ pub fn dimindex_ga020() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t92 = @tactics.conv_tac(@geometricalgebra.geom_arith)
   let t89 = @meson.meson_tac(@list.List([]))
-  let t90 = @tactics.prove(@parser.parse_term("forall a b:num. (forall x. (x=a) <=> (x=a) \\/ (x=b)) <=> (a=b)"), t89)
+  let t90 = @tactics.prove(@parser.parse_term("∀ a b:num. (∀ x. (x=a) <=> (x=a) \\/ (x=b)) <=> (a=b)"), t89)
   let t88 = @meson.meson_tac(@list.List([]))
-  let t91 = @simp.rewrite_tac(@list.List([@tactics.prove(@parser.parse_term("forall a b:num. (forall x. (x=a) <=> (x=b)) <=> (a=b)"), t88), t90, @theorems.disj_sym(), @calc_num.arith_eq()]))
+  let t91 = @simp.rewrite_tac(@list.List([@tactics.prove(@parser.parse_term("∀ a b:num. (∀ x. (x=a) <=> (x=b)) <=> (a=b)"), t88), t90, @theorems.disj_sym(), @calc_num.arith_eq()]))
   let t87 = @simp.simp_tac(@list.List([@sets.extension(), @sets.in_insert(), @sets.not_in_empty()]))
   let t86 = @simp.simp_tac(@list.List([@vectors.vsum_clauses(), @sets.finite_insert(), @sets.finite_sing(), @sets.in_insert(), @sets.in_sing(), @sets.not_empty_insert(), @vectors.vsum_sing()]))
   let t83 = @simp.asm_rewrite_tac(@list.List([]))
@@ -191,7 +191,7 @@ fn step_6() -> Unit raise {
     })(x44))
   }, @list.List([@equal.gsym(@geometricalgebra.mvbasis_expansion())]))
   let t93 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t45), t57), t58), t66), t67), t68), t85), t86), t87), t91), t92)
-  quat_product_ga020_c.set(@tactics.prove(@parser.parse_term("forall x y:real^('0,'2,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}"), t93))
+  quat_product_ga020_c.set(@tactics.prove(@parser.parse_term("∀ x y:real^('0,'2,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}"), t93))
 }
 
 ///|
@@ -299,7 +299,7 @@ fn step_18() -> Unit raise {
   let t95 = @tactics.repeat_tac(@tactics.strip_tac)
   let t94 = @simp.simp_tac(@list.List([@geometricalgebra.geomalg_beta(), @geometricalgebra.geomalg_eq()]))
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@geometricalgebra.conjugation(), geomalg_300_quat(), @quaternion.quat_cnj(), @quaternion.quat_components()]))), t94), t95), t96), t97), t98), @tactics.binop_tac), t101), @tactics.binop_tac), t104), @tactics.binop_tac), t107), @class.cond_cases_tac), t108), t109), t110), @calc_rat.real_arith_tac), @calc_rat.real_arith_tac)
-  cnj_quat_c.set(@tactics.prove(@parser.parse_term("forall q:quat. conjugation (geomalg_300_quat q) = geomalg_300_quat (cnj q)"), t111))
+  cnj_quat_c.set(@tactics.prove(@parser.parse_term("∀ q:quat. conjugation (geomalg_300_quat q) = geomalg_300_quat (cnj q)"), t111))
 }
 
 ///|

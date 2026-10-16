@@ -55,7 +55,7 @@ fn step_4() -> Unit raise {
   })(t10)
   let t5 = @simp.simp_tac(@list.List([@realarith.real_pow_2()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t5), t11), t12)
-  lemma_c.set(@tactics.prove(@parser.parse_term("forall x y. &0 <= x /\\ &0 <= y ==> (x pow 2 = y pow 2 <=> x = y)"), t13))
+  lemma_c.set(@tactics.prove(@parser.parse_term("∀ x y. &0 <= x /\\ &0 <= y ==> (x pow 2 = y pow 2 <=> x = y)"), t13))
 }
 
 ///|
@@ -133,7 +133,7 @@ fn step_6() -> Unit raise {
   }))
   let t18 = @simp.rewrite_tac(@list.List([length(), norm_cross(), between_thm()]))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t18), t22), t26), t30), t37), t42), t43), t44), t46), t47), t48)
-  segment_chords_c.set(@tactics.prove(@parser.parse_term("forall centre radius q r s t b.\n        between b (q,r) /\\ between b (s,t) /\\\n        length(q,centre) = radius /\\ length(r,centre) = radius /\\\n        length(s,centre) = radius /\\ length(t,centre) = radius\n        ==> length(q,b) * length(b,r) = length(s,b) * length(b,t)"), t49))
+  segment_chords_c.set(@tactics.prove(@parser.parse_term("∀ centre radius q r s t b.\n        between b (q,r) /\\ between b (s,t) /\\\n        length(q,centre) = radius /\\ length(r,centre) = radius /\\\n        length(s,centre) = radius /\\ length(t,centre) = radius\n        ==> length(q,b) * length(b,r) = length(s,b) * length(b,t)"), t49))
 }
 
 ///|

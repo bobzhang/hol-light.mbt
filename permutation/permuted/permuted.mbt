@@ -37,7 +37,7 @@ pub fn permuted_cases() -> @kernel.Thm {
 ///|
 /// PERMUTED_RULES, PERMUTED_INDUCT, PERMUTED_CASES
 fn step_2() -> Unit raise {
-  let (permuted_rules, permuted_induct, permuted_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("[] PERMUTED [] /\\\n   (forall h t1 t2. t1 PERMUTED t2 ==> h :: t1 PERMUTED h :: t2) /\\\n   (forall l1 l2 l3. l1 PERMUTED l2 /\\ l2 PERMUTED l3 ==> l1 PERMUTED l3) /\\\n   (forall x y t. x :: y :: t PERMUTED y :: x :: t)"))
+  let (permuted_rules, permuted_induct, permuted_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("[] PERMUTED [] /\\\n   (∀ h t1 t2. t1 PERMUTED t2 ==> h :: t1 PERMUTED h :: t2) /\\\n   (∀ l1 l2 l3. l1 PERMUTED l2 /\\ l2 PERMUTED l3 ==> l1 PERMUTED l3) /\\\n   (∀ x y t. x :: y :: t PERMUTED y :: x :: t)"))
   permuted_rules_c.set(permuted_rules)
   permuted_induct_c.set(permuted_induct)
   permuted_cases_c.set(permuted_cases)
@@ -62,7 +62,7 @@ pub fn permuted_induct_strong() -> @kernel.Thm {
 /// PERMUTED_RFL
 fn step_4() -> Unit raise {
   let t1 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_simp_tac(@list.List([permuted_rules()])))
-  permuted_rfl_c.set(@tactics.prove(@parser.parse_term("forall l. l PERMUTED l"), t1))
+  permuted_rfl_c.set(@tactics.prove(@parser.parse_term("∀ l. l PERMUTED l"), t1))
 }
 
 ///|
@@ -79,8 +79,8 @@ pub fn permuted_rfl() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t3 = @meson.asm_meson_tac(@list.List([permuted_rules()]))
   let t2 = @tactics.match_mp_tac(permuted_induct())
-  let t4 = @tactics.then_tac(@tactics.then_tac(@morelist.suffice_tac(@list.List([]), @parser.parse_term("forall(xs:A list) l2. xs PERMUTED l2 ==> l2 PERMUTED xs")), t2), t3)
-  permuted_sym_c.set(@tactics.prove(@parser.parse_term("forall(xs:A list) l2. xs PERMUTED l2 <=> l2 PERMUTED xs"), t4))
+  let t4 = @tactics.then_tac(@tactics.then_tac(@morelist.suffice_tac(@list.List([]), @parser.parse_term("∀(xs:A list) l2. xs PERMUTED l2 ==> l2 PERMUTED xs")), t2), t3)
+  permuted_sym_c.set(@tactics.prove(@parser.parse_term("∀(xs:A list) l2. xs PERMUTED l2 <=> l2 PERMUTED xs"), t4))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn permuted_sym() -> @kernel.Thm {
 /// PERMUTED_TRS
 fn step_6() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([permuted_rules()]))
-  permuted_trs_c.set(@tactics.prove(@parser.parse_term("forall xs l2 l3. xs PERMUTED l2 /\\ l2 PERMUTED l3 ==> xs PERMUTED l3"), t5))
+  permuted_trs_c.set(@tactics.prove(@parser.parse_term("∀ xs l2 l3. xs PERMUTED l2 /\\ l2 PERMUTED l3 ==> xs PERMUTED l3"), t5))
 }
 
 ///|
@@ -120,7 +120,7 @@ pub fn permuted_trs_tac(x6 : @kernel.Term) -> @tactics.Tactic raise {
 /// PERMUTED_TAIL_IMP
 fn step_7() -> Unit raise {
   let t9 = @simp.simp_tac(@list.List([permuted_rules()]))
-  permuted_tail_imp_c.set(@tactics.prove(@parser.parse_term("forall h t1 t2. t1 PERMUTED t2 ==> h :: t1 PERMUTED h :: t2"), t9))
+  permuted_tail_imp_c.set(@tactics.prove(@parser.parse_term("∀ h t1 t2. t1 PERMUTED t2 ==> h :: t1 PERMUTED h :: t2"), t9))
 }
 
 ///|
@@ -137,7 +137,7 @@ pub fn permuted_tail_imp() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([@lists.map(), permuted_rules()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(permuted_induct())), t10)
-  permuted_map_c.set(@tactics.prove(@parser.parse_term("forall f l1 l2. l1 PERMUTED l2 ==>  MAP f l1 PERMUTED MAP f l2"), t11))
+  permuted_map_c.set(@tactics.prove(@parser.parse_term("∀ f l1 l2. l1 PERMUTED l2 ==>  MAP f l1 PERMUTED MAP f l2"), t11))
 }
 
 ///|
@@ -155,7 +155,7 @@ fn step_9() -> Unit raise {
   let t13 = @simp.asm_rewrite_tac(@list.List([@lists.length()]))
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(permuted_induct()), t12), t13)
-  permuted_length_c.set(@tactics.prove(@parser.parse_term("forall l1 l2. l1 PERMUTED l2 ==> LENGTH l1 = LENGTH l2"), t14))
+  permuted_length_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2. l1 PERMUTED l2 ==> LENGTH l1 = LENGTH l2"), t14))
 }
 
 ///|
@@ -171,7 +171,7 @@ pub fn permuted_length() -> @kernel.Thm {
 /// PERMUTED_SWAP_HEAD
 fn step_10() -> Unit raise {
   let t15 = @simp.rewrite_tac(@list.List([permuted_rules()]))
-  permuted_swap_head_c.set(@tactics.prove(@parser.parse_term("forall a b l. a :: b :: l PERMUTED b :: a :: l"), t15))
+  permuted_swap_head_c.set(@tactics.prove(@parser.parse_term("∀ a b l. a :: b :: l PERMUTED b :: a :: l"), t15))
 }
 
 ///|
@@ -191,7 +191,7 @@ fn step_11() -> Unit raise {
   let t17 = @tactics.repeat_tac(@tactics.strip_tac)
   let t16 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t20 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(permuted_induct())), t16), t17), t18), t19)
-  permuted_mem_c.set(@tactics.prove(@parser.parse_term("forall(a:A) l1 l2. l1 PERMUTED l2 ==> (MEM a l1 <=> MEM a l2)"), t20))
+  permuted_mem_c.set(@tactics.prove(@parser.parse_term("∀(a:A) l1 l2. l1 PERMUTED l2 ==> (MEM a l1 <=> MEM a l2)"), t20))
 }
 
 ///|
@@ -211,7 +211,7 @@ fn step_12() -> Unit raise {
   let t22 = @tactics.repeat_tac(@tactics.strip_tac)
   let t21 = @simp.rewrite_tac(@list.List([@lists.all()]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(permuted_induct())), t21), t22), t23), t24)
-  permuted_all_c.set(@tactics.prove(@parser.parse_term("forall P xs ys. xs PERMUTED ys ==> (ALL P xs <=> ALL P ys)"), t25))
+  permuted_all_c.set(@tactics.prove(@parser.parse_term("∀ P xs ys. xs PERMUTED ys ==> (ALL P xs <=> ALL P ys)"), t25))
 }
 
 ///|
@@ -228,8 +228,8 @@ pub fn permuted_all() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([permuted_length(), @lists.length(), @nums.not_suc()]))
   let t26 = @simp.asm_rewrite_tac(@list.List([@lists.not_cons_nil(), permuted_rfl()]))
-  let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@morelist.suffice_tac(@list.List([permuted_sym()]), @parser.parse_term("forall l:A list. [] PERMUTED l <=> l = []")), @morelist.list_cases_tac), t26), t27)
-  permuted_nil_eq_nil_c.set(@tactics.prove(@parser.parse_term("(forall l:A list. [] PERMUTED l <=> l = []) /\\\n    (forall l:A list. l PERMUTED [] <=> l = [])"), t28))
+  let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@morelist.suffice_tac(@list.List([permuted_sym()]), @parser.parse_term("∀ l:A list. [] PERMUTED l <=> l = []")), @morelist.list_cases_tac), t26), t27)
+  permuted_nil_eq_nil_c.set(@tactics.prove(@parser.parse_term("(∀ l:A list. [] PERMUTED l <=> l = []) /\\\n    (∀ l:A list. l PERMUTED [] <=> l = [])"), t28))
 }
 
 ///|
@@ -246,8 +246,8 @@ pub fn permuted_nil_eq_nil() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t30 = @simp.simp_tac(@list.List([permuted_nil_eq_nil(), @lists.length(), @lists.not_cons_nil(), @lists.cons_11(), @nums.suc_inj(), @equal.gsym(@lists.length_eq_nil())]))
   let t29 = @tactics.match_mp_tac(permuted_induct())
-  let t31 = @tactics.then_tac(@tactics.then_tac(@morelist.suffice_tac(@list.List([permuted_length(), permuted_rfl()]), @parser.parse_term("forall l1 l2. l1 PERMUTED l2 ==> LENGTH l1 = LENGTH l2 /\\\n                                 (forall x. l1 = [x:A] <=> l2 = [x])")), t29), t30)
-  permuted_singleton_c.set(@tactics.prove(@parser.parse_term("(forall(x:A) l. [x] PERMUTED l <=> l = [x]) /\\\n    (forall(x:A) l. l PERMUTED [x] <=> l = [x])"), t31))
+  let t31 = @tactics.then_tac(@tactics.then_tac(@morelist.suffice_tac(@list.List([permuted_length(), permuted_rfl()]), @parser.parse_term("∀ l1 l2. l1 PERMUTED l2 ==> LENGTH l1 = LENGTH l2 /\\\n                                 (∀ x. l1 = [x:A] <=> l2 = [x])")), t29), t30)
+  permuted_singleton_c.set(@tactics.prove(@parser.parse_term("(∀(x:A) l. [x] PERMUTED l <=> l = [x]) /\\\n    (∀(x:A) l. l PERMUTED [x] <=> l = [x])"), t31))
 }
 
 ///|
@@ -265,7 +265,7 @@ fn step_15() -> Unit raise {
   let t33 = @meson.asm_meson_tac(@list.List([permuted_rfl(), permuted_tail_imp(), permuted_swap_head(), permuted_trs()]))
   let t32 = @simp.rewrite_tac(@list.List([@lists.mem(), @morelist.delete1()]))
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t32), @class.cond_cases_tac), t33)
-  permuted_cons_delete1_c.set(@tactics.prove(@parser.parse_term("forall(a:A) l. MEM a l ==> l PERMUTED a :: DELETE1 a l"), t34))
+  permuted_cons_delete1_c.set(@tactics.prove(@parser.parse_term("∀(a:A) l. MEM a l ==> l PERMUTED a :: DELETE1 a l"), t34))
 }
 
 ///|
@@ -314,7 +314,7 @@ fn step_16() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([@morelist.count()]))
   let t37 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(permuted_induct()), t35), t36), @tactics.all_tac])
   let t63 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([iff_expand, @theorems.forall_and_thm()])), @tactics.conj_tac), t37), @lists.list_induct_tac), t38), t40), t41), t42), t50), t51), t62)
-  permuted_count_c.set(@tactics.prove(@parser.parse_term("forall l1 l2. l1 PERMUTED l2 <=> (forall x:A. COUNT x l1 = COUNT x l2)"), t63))
+  permuted_count_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2. l1 PERMUTED l2 <=> (∀ x:A. COUNT x l1 = COUNT x l2)"), t63))
 }
 
 ///|
@@ -332,7 +332,7 @@ fn step_17() -> Unit raise {
   let t65 = @meson.meson_tac(@list.List([@nums.suc_inj()]))
   let t64 = @simp.rewrite_tac(@list.List([permuted_count(), @morelist.count()]))
   let t66 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), t65)
-  permuted_tail_c.set(@tactics.prove(@parser.parse_term("forall x t1 t2. x :: t1 PERMUTED x :: t2 <=> t1 PERMUTED t2"), t66))
+  permuted_tail_c.set(@tactics.prove(@parser.parse_term("∀ x t1 t2. x :: t1 PERMUTED x :: t2 <=> t1 PERMUTED t2"), t66))
 }
 
 ///|
@@ -348,7 +348,7 @@ pub fn permuted_tail() -> @kernel.Thm {
 /// PERMUTED_DELETE1_L
 fn step_18() -> Unit raise {
   let t67 = @meson.meson_tac(@list.List([permuted_mem(), @lists.mem(), permuted_tail(), permuted_cons_delete1(), permuted_sym(), permuted_trs()]))
-  permuted_delete1_l_c.set(@tactics.prove(@parser.parse_term("forall(h:A) t l. h :: t PERMUTED l <=> MEM h l /\\ t PERMUTED DELETE1 h l"), t67))
+  permuted_delete1_l_c.set(@tactics.prove(@parser.parse_term("∀(h:A) t l. h :: t PERMUTED l <=> MEM h l /\\ t PERMUTED DELETE1 h l"), t67))
 }
 
 ///|
@@ -364,7 +364,7 @@ pub fn permuted_delete1_l() -> @kernel.Thm {
 /// PERMUTED_DELETE1_R
 fn step_19() -> Unit raise {
   let t68 = @meson.meson_tac(@list.List([permuted_sym(), permuted_delete1_l()]))
-  permuted_delete1_r_c.set(@tactics.prove(@parser.parse_term("forall(h:A) t l. l PERMUTED h :: t <=> MEM h l /\\ DELETE1 h l PERMUTED t"), t68))
+  permuted_delete1_r_c.set(@tactics.prove(@parser.parse_term("∀(h:A) t l. l PERMUTED h :: t <=> MEM h l /\\ DELETE1 h l PERMUTED t"), t68))
 }
 
 ///|
@@ -380,7 +380,7 @@ pub fn permuted_delete1_r() -> @kernel.Thm {
 /// PERMUTED_LIST_UNIQ
 fn step_20() -> Unit raise {
   let t69 = @simp.simp_tac(@list.List([permuted_count(), @morelist.list_uniq_count(), @morelist.mem_count()]))
-  permuted_list_uniq_c.set(@tactics.prove(@parser.parse_term("forall xs ys. xs PERMUTED ys ==> (LIST_UNIQ xs <=> LIST_UNIQ ys)"), t69))
+  permuted_list_uniq_c.set(@tactics.prove(@parser.parse_term("∀ xs ys. xs PERMUTED ys ==> (LIST_UNIQ xs <=> LIST_UNIQ ys)"), t69))
 }
 
 ///|
@@ -399,7 +399,7 @@ fn step_21() -> Unit raise {
   let t71 = @simp.asm_simp_tac(@list.List([@lists.pairwise(), @lists.all()]))
   let t70 = @tactics.match_mp_tac(permuted_induct_strong())
   let t73 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()])), @tactics.gen_tac), @tactics.disch_tac), t70), t71), t72)
-  permuted_imp_pairwise_c.set(@tactics.prove(@parser.parse_term("forall(P:A->A->bool) l l'.\n        (forall x y. P x y ==> P y x) /\\ l PERMUTED l' /\\ PAIRWISE P l\n        ==> PAIRWISE P l'"), t73))
+  permuted_imp_pairwise_c.set(@tactics.prove(@parser.parse_term("∀(P:A->A->bool) l l'.\n        (∀ x y. P x y ==> P y x) /\\ l PERMUTED l' /\\ PAIRWISE P l\n        ==> PAIRWISE P l'"), t73))
 }
 
 ///|
@@ -415,7 +415,7 @@ pub fn permuted_imp_pairwise() -> @kernel.Thm {
 /// PERMUTED_PAIRWISE
 fn step_22() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([permuted_imp_pairwise(), permuted_sym()]))
-  permuted_pairwise_c.set(@tactics.prove(@parser.parse_term("forall(P:A->A->bool) l l.\n        (forall x y. P x y ==> P y x) /\\ l PERMUTED l'\n        ==> (PAIRWISE P l <=> PAIRWISE P l')"), t74))
+  permuted_pairwise_c.set(@tactics.prove(@parser.parse_term("∀(P:A->A->bool) l l.\n        (∀ x y. P x y ==> P y x) /\\ l PERMUTED l'\n        ==> (PAIRWISE P l <=> PAIRWISE P l')"), t74))
 }
 
 ///|
@@ -431,7 +431,7 @@ pub fn permuted_pairwise() -> @kernel.Thm {
 /// PERMUTED_APPEND_SWAP
 fn step_23() -> Unit raise {
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permuted_count(), @morelist.count_append()])), @int.arith_tac)
-  permuted_append_swap_c.set(@tactics.prove(@parser.parse_term("forall l1 l2. (APPEND l1 l2) PERMUTED (APPEND l2 l1)"), t75))
+  permuted_append_swap_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2. (APPEND l1 l2) PERMUTED (APPEND l2 l1)"), t75))
 }
 
 ///|
@@ -447,7 +447,7 @@ pub fn permuted_append_swap() -> @kernel.Thm {
 /// PERMUTED_APPEND_LCANCEL
 fn step_24() -> Unit raise {
   let t76 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([@lists.append(), permuted_tail()])))
-  permuted_append_lcancel_c.set(@tactics.prove(@parser.parse_term("forall l1 l2 l3:A list.\n        (APPEND l1 l2) PERMUTED (APPEND l1 l3) <=> l2 PERMUTED l3"), t76))
+  permuted_append_lcancel_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2 l3:A list.\n        (APPEND l1 l2) PERMUTED (APPEND l1 l3) <=> l2 PERMUTED l3"), t76))
 }
 
 ///|
@@ -463,7 +463,7 @@ pub fn permuted_append_lcancel() -> @kernel.Thm {
 /// PERMUTED_APPEND_RCANCEL
 fn step_25() -> Unit raise {
   let t77 = @meson.meson_tac(@list.List([permuted_append_swap(), permuted_append_lcancel(), permuted_trs(), permuted_sym()]))
-  permuted_append_rcancel_c.set(@tactics.prove(@parser.parse_term("forall l1 l2 l3:A list.\n        (APPEND l1 l3) PERMUTED (APPEND l2 l3) <=> l1 PERMUTED l2"), t77))
+  permuted_append_rcancel_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2 l3:A list.\n        (APPEND l1 l3) PERMUTED (APPEND l2 l3) <=> l1 PERMUTED l2"), t77))
 }
 
 ///|
@@ -479,7 +479,7 @@ pub fn permuted_append_rcancel() -> @kernel.Thm {
 /// PERMUTED_APPEND_CONG
 fn step_26() -> Unit raise {
   let t78 = @meson.meson_tac(@list.List([permuted_append_lcancel(), permuted_append_rcancel(), permuted_trs()]))
-  permuted_append_cong_c.set(@tactics.prove(@parser.parse_term("forall l1 l1' l2 l2'.\n        l1 PERMUTED l1' /\\ l2 PERMUTED l2'\n        ==> (APPEND l1 l2) PERMUTED (APPEND l1' l2')"), t78))
+  permuted_append_cong_c.set(@tactics.prove(@parser.parse_term("∀ l1 l1' l2 l2'.\n        l1 PERMUTED l1' /\\ l2 PERMUTED l2'\n        ==> (APPEND l1 l2) PERMUTED (APPEND l1' l2')"), t78))
 }
 
 ///|

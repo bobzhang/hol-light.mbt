@@ -163,7 +163,7 @@ fn step_13() -> Unit raise {
 ///|
 /// deranges
 fn step_14() -> Unit raise {
-  deranges_c.set(@pair.new_definition(@parser.parse_term("r deranges s <=> r permutes s /\\ forall x. ~(r(x,x))")))
+  deranges_c.set(@pair.new_definition(@parser.parse_term("r deranges s <=> r permutes s /\\ ∀ x. ~(r(x,x))")))
 }
 
 ///|
@@ -240,7 +240,7 @@ pub fn rel_rule(x27 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// CONVERSE_COMPOSE
 fn step_16() -> Unit raise {
-  converse_compose_c.set(@tactics.prove(@parser.parse_term("forall r s. converse(r % s) = converse(s) % converse(r)"), rel_tac))
+  converse_compose_c.set(@tactics.prove(@parser.parse_term("∀ r s. converse(r % s) = converse(s) % converse(r)"), rel_tac))
 }
 
 ///|
@@ -255,7 +255,7 @@ pub fn converse_compose() -> @kernel.Thm {
 ///|
 /// CONVERSE_CONVERSE
 fn step_17() -> Unit raise {
-  converse_converse_c.set(@tactics.prove(@parser.parse_term("forall r. converse(converse r) = r"), rel_tac))
+  converse_converse_c.set(@tactics.prove(@parser.parse_term("∀ r. converse(converse r) = r"), rel_tac))
 }
 
 ///|
@@ -270,7 +270,7 @@ pub fn converse_converse() -> @kernel.Thm {
 ///|
 /// PAIRSUP_EXPLICIT
 fn step_18() -> Unit raise {
-  pairsup_explicit_c.set(@tactics.prove(@parser.parse_term("forall p s t.\n        p pairsup (s,t) <=>\n        (forall x y. p(x,y) ==> x IN s /\\ y IN t) /\\\n        (forall x. x IN s ==> ?!y. y IN t /\\ p(x,y)) /\\\n        (forall y. y IN t ==> ?!x. x IN s /\\ p(x,y))"), rel_tac))
+  pairsup_explicit_c.set(@tactics.prove(@parser.parse_term("∀ p s t.\n        p pairsup (s,t) <=>\n        (∀ x y. p(x,y) ==> x IN s /\\ y IN t) /\\\n        (∀ x. x IN s ==> ?!y. y IN t /\\ p(x,y)) /\\\n        (∀ y. y IN t ==> ?!x. x IN s /\\ p(x,y))"), rel_tac))
 }
 
 ///|
@@ -285,7 +285,7 @@ pub fn pairsup_explicit() -> @kernel.Thm {
 ///|
 /// PERMUTES_EXPLICIT
 fn step_19() -> Unit raise {
-  permutes_explicit_c.set(@tactics.prove(@parser.parse_term("forall p s. p permutes s <=>\n         (forall x y. p(x,y) ==> x IN s /\\ y IN s) /\\\n         (forall x. x IN s ==> ?!y. y IN s /\\ p(x,y)) /\\\n         (forall y. y IN s ==> ?!x. x IN s /\\ p(x,y))"), rel_tac))
+  permutes_explicit_c.set(@tactics.prove(@parser.parse_term("∀ p s. p permutes s <=>\n         (∀ x y. p(x,y) ==> x IN s /\\ y IN s) /\\\n         (∀ x. x IN s ==> ?!y. y IN s /\\ p(x,y)) /\\\n         (∀ y. y IN s ==> ?!x. x IN s /\\ p(x,y))"), rel_tac))
 }
 
 ///|
@@ -300,7 +300,7 @@ pub fn permutes_explicit() -> @kernel.Thm {
 ///|
 /// PAIRSUP_DOMRAN
 fn step_20() -> Unit raise {
-  pairsup_domran_c.set(@tactics.prove(@parser.parse_term("forall p s t. p pairsup (s,t) ==> domain p = s /\\ range p = t"), rel_tac))
+  pairsup_domran_c.set(@tactics.prove(@parser.parse_term("∀ p s t. p pairsup (s,t) ==> domain p = s /\\ range p = t"), rel_tac))
 }
 
 ///|
@@ -315,7 +315,7 @@ pub fn pairsup_domran() -> @kernel.Thm {
 ///|
 /// PERMUTES_DOMRAN
 fn step_21() -> Unit raise {
-  permutes_domran_c.set(@tactics.prove(@parser.parse_term("forall p s. p permutes s ==> domain p = s /\\ range p = s"), rel_tac))
+  permutes_domran_c.set(@tactics.prove(@parser.parse_term("∀ p s. p permutes s ==> domain p = s /\\ range p = s"), rel_tac))
 }
 
 ///|
@@ -330,7 +330,7 @@ pub fn permutes_domran() -> @kernel.Thm {
 ///|
 /// PAIRSUP_FUNCTIONAL
 fn step_22() -> Unit raise {
-  pairsup_functional_c.set(@tactics.prove(@parser.parse_term("forall p s t. p pairsup (s,t) ==> forall x y y'. p(x,y) /\\ p(x,y') ==> y = y'"), rel_tac))
+  pairsup_functional_c.set(@tactics.prove(@parser.parse_term("∀ p s t. p pairsup (s,t) ==> ∀ x y y'. p(x,y) /\\ p(x,y') ==> y = y'"), rel_tac))
 }
 
 ///|
@@ -345,7 +345,7 @@ pub fn pairsup_functional() -> @kernel.Thm {
 ///|
 /// PERMUTES_FUNCTIONAL
 fn step_23() -> Unit raise {
-  permutes_functional_c.set(@tactics.prove(@parser.parse_term("forall p s. p permutes s ==> forall x y y'. p(x,y) /\\ p(x,y') ==> y = y'"), rel_tac))
+  permutes_functional_c.set(@tactics.prove(@parser.parse_term("∀ p s. p permutes s ==> ∀ x y y'. p(x,y) /\\ p(x,y') ==> y = y'"), rel_tac))
 }
 
 ///|
@@ -360,7 +360,7 @@ pub fn permutes_functional() -> @kernel.Thm {
 ///|
 /// PAIRSUP_COFUNCTIONAL
 fn step_24() -> Unit raise {
-  pairsup_cofunctional_c.set(@tactics.prove(@parser.parse_term("forall p s t. p pairsup (s,t) ==> forall x x' y. p(x,y) /\\ p(x',y) ==> x = x'"), rel_tac))
+  pairsup_cofunctional_c.set(@tactics.prove(@parser.parse_term("∀ p s t. p pairsup (s,t) ==> ∀ x x' y. p(x,y) /\\ p(x',y) ==> x = x'"), rel_tac))
 }
 
 ///|
@@ -375,7 +375,7 @@ pub fn pairsup_cofunctional() -> @kernel.Thm {
 ///|
 /// PERMUTES_COFUNCTIONAL
 fn step_25() -> Unit raise {
-  permutes_cofunctional_c.set(@tactics.prove(@parser.parse_term("forall p s. p permutes s ==> forall x x' y. p(x,y) /\\ p(x',y) ==> x = x'"), rel_tac))
+  permutes_cofunctional_c.set(@tactics.prove(@parser.parse_term("∀ p s. p permutes s ==> ∀ x x' y. p(x,y) /\\ p(x',y) ==> x = x'"), rel_tac))
 }
 
 ///|
@@ -390,7 +390,7 @@ pub fn permutes_cofunctional() -> @kernel.Thm {
 ///|
 /// PAIRSUP_ID
 fn step_26() -> Unit raise {
-  pairsup_id_c.set(@tactics.prove(@parser.parse_term("forall s. id(s) pairsup (s,s)"), rel_tac))
+  pairsup_id_c.set(@tactics.prove(@parser.parse_term("∀ s. id(s) pairsup (s,s)"), rel_tac))
 }
 
 ///|
@@ -405,7 +405,7 @@ pub fn pairsup_id() -> @kernel.Thm {
 ///|
 /// PERMUTES_ID
 fn step_27() -> Unit raise {
-  permutes_id_c.set(@tactics.prove(@parser.parse_term("forall s. id(s) permutes s"), rel_tac))
+  permutes_id_c.set(@tactics.prove(@parser.parse_term("∀ s. id(s) permutes s"), rel_tac))
 }
 
 ///|
@@ -420,7 +420,7 @@ pub fn permutes_id() -> @kernel.Thm {
 ///|
 /// PAIRSUP_CONVERSE
 fn step_28() -> Unit raise {
-  pairsup_converse_c.set(@tactics.prove(@parser.parse_term("forall p s t. p pairsup (s,t) ==> converse(p) pairsup (t,s)"), rel_tac))
+  pairsup_converse_c.set(@tactics.prove(@parser.parse_term("∀ p s t. p pairsup (s,t) ==> converse(p) pairsup (t,s)"), rel_tac))
 }
 
 ///|
@@ -435,7 +435,7 @@ pub fn pairsup_converse() -> @kernel.Thm {
 ///|
 /// PERMUTES_CONVERSE
 fn step_29() -> Unit raise {
-  permutes_converse_c.set(@tactics.prove(@parser.parse_term("forall p s. p permutes s ==> converse(p) permutes s"), rel_tac))
+  permutes_converse_c.set(@tactics.prove(@parser.parse_term("∀ p s. p permutes s ==> converse(p) permutes s"), rel_tac))
 }
 
 ///|
@@ -450,7 +450,7 @@ pub fn permutes_converse() -> @kernel.Thm {
 ///|
 /// PAIRSUP_COMPOSE
 fn step_30() -> Unit raise {
-  pairsup_compose_c.set(@tactics.prove(@parser.parse_term("forall p p' s t u. p pairsup (s,t) /\\ p' pairsup (t,u) ==> (p % p') pairsup (s,u)"), rel_tac))
+  pairsup_compose_c.set(@tactics.prove(@parser.parse_term("∀ p p' s t u. p pairsup (s,t) /\\ p' pairsup (t,u) ==> (p % p') pairsup (s,u)"), rel_tac))
 }
 
 ///|
@@ -465,7 +465,7 @@ pub fn pairsup_compose() -> @kernel.Thm {
 ///|
 /// PERMUTES_COMPOSE
 fn step_31() -> Unit raise {
-  permutes_compose_c.set(@tactics.prove(@parser.parse_term("forall p p' s. p permutes s /\\ p' permutes s ==> (p % p') permutes s"), rel_tac))
+  permutes_compose_c.set(@tactics.prove(@parser.parse_term("∀ p p' s. p permutes s /\\ p' permutes s ==> (p % p') permutes s"), rel_tac))
 }
 
 ///|
@@ -550,7 +550,7 @@ fn step_34() -> Unit raise {
   let t37 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t32), t36), rel_tac)])
   let t28 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("x IN s ==> x INSERT s = s"))]))
   let t57 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @class.cond_cases_tac), t28), @tactics.eq_tac), t37), @tactics.disch_tac), t41), t47), t48), t49), @tactics.strip_tac), t50), t56), rel_tac)
-  pairsup_insert_c.set(@tactics.prove(@parser.parse_term("forall x:A s t:B->bool p.\n        p pairsup (x INSERT s,t) <=>\n          if x IN s then p pairsup (s,t)\n          else ?y q. y IN t /\\ p = (x,y) INSERT q /\\ q pairsup (s,t DELETE y)"), t57))
+  pairsup_insert_c.set(@tactics.prove(@parser.parse_term("∀ x:A s t:B->bool p.\n        p pairsup (x INSERT s,t) <=>\n          if x IN s then p pairsup (s,t)\n          else ?y q. y IN t /\\ p = (x,y) INSERT q /\\ q pairsup (s,t DELETE y)"), t57))
 }
 
 ///|
@@ -620,7 +620,7 @@ fn step_35() -> Unit raise {
   let t62 = @simp.simp_tac(@list.List([pairsup_empty(), @sets.set_rule(@parser.parse_term("{x | x = a} = {a}"))]))
   let t64 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.has_size_clauses()])), t62), t63), @tactics.all_tac])
   let t100 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@nums.induct_tac, @tactics.repeat_tac(@tactics.gen_tac)), t64), t69), t70), t74), t75), t79), t80), t81), t82), t99)
-  number_of_pairings_c.set(@tactics.prove(@parser.parse_term("forall n s:A->bool t:B->bool.\n        s HAS_SIZE n /\\ t HAS_SIZE n\n        ==> {p | p pairsup (s,t)} HAS_SIZE (FACT n)"), t100))
+  number_of_pairings_c.set(@tactics.prove(@parser.parse_term("∀ n s:A->bool t:B->bool.\n        s HAS_SIZE n /\\ t HAS_SIZE n\n        ==> {p | p pairsup (s,t)} HAS_SIZE (FACT n)"), t100))
 }
 
 ///|
@@ -636,7 +636,7 @@ pub fn number_of_pairings() -> @kernel.Thm {
 /// NUMBER_OF_PERMUTATIONS
 fn step_36() -> Unit raise {
   let t101 = @simp.simp_tac(@list.List([permutes(), number_of_pairings()]))
-  number_of_permutations_c.set(@tactics.prove(@parser.parse_term("forall s n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)"), t101))
+  number_of_permutations_c.set(@tactics.prove(@parser.parse_term("∀ s n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)"), t101))
 }
 
 ///|
@@ -668,12 +668,12 @@ pub fn derangements() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t106 = @simp.asm_simp_tac(@list.List([@calc_num.arith()]))
   let t105 = @simp.asm_simp_tac(@list.List([@arith.add1(), @equal.gsym(@arith.add_assoc())]))
-  let t104 = @tactics.subgoal_then(@parser.parse_term("forall n. P n /\\ P(n + 1)"), fn(x102 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t104 = @tactics.subgoal_then(@parser.parse_term("∀ n. P n /\\ P(n + 1)"), fn(x102 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x102
     @meson.meson_tac(@list.List([th]))
   })
   let t107 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t104), @nums.induct_tac), t105), t106)
-  derangement_induct_c.set(@tactics.prove(@parser.parse_term("forall P. P 0 /\\ P 1 /\\ (forall n. P n /\\ P(n + 1) ==> P(n + 2)) ==> forall n. P n"), t107))
+  derangement_induct_c.set(@tactics.prove(@parser.parse_term("∀ P. P 0 /\\ P 1 /\\ (∀ n. P n /\\ P(n + 1) ==> P(n + 2)) ==> ∀ n. P n"), t107))
 }
 
 ///|
@@ -688,7 +688,7 @@ pub fn derangement_induct() -> @kernel.Thm {
 ///|
 /// DERANGEMENT_ADD2
 fn step_39() -> Unit raise {
-  derangement_add2_c.set(@tactics.prove(@parser.parse_term("forall p s x y.\n        p deranges s /\\ ~(x IN s) /\\ ~(y IN s) /\\ ~(x = y)\n        ==> ((x,y) INSERT (y,x) INSERT p) deranges (x INSERT y INSERT s)"), rel_tac))
+  derangement_add2_c.set(@tactics.prove(@parser.parse_term("∀ p s x y.\n        p deranges s /\\ ~(x IN s) /\\ ~(y IN s) /\\ ~(x = y)\n        ==> ((x,y) INSERT (y,x) INSERT p) deranges (x INSERT y INSERT s)"), rel_tac))
 }
 
 ///|
@@ -703,7 +703,7 @@ pub fn derangement_add2() -> @kernel.Thm {
 ///|
 /// DERANGEMENT_ADD1
 fn step_40() -> Unit raise {
-  derangement_add1_c.set(@tactics.prove(@parser.parse_term("forall p s y x. p deranges s /\\ ~(y IN s) /\\ p(x,z)\n             ==> ((x,y) INSERT (y,z) INSERT (p DELETE (x,z)))\n                 deranges (y INSERT s)"), rel_tac))
+  derangement_add1_c.set(@tactics.prove(@parser.parse_term("∀ p s y x. p deranges s /\\ ~(y IN s) /\\ p(x,z)\n             ==> ((x,y) INSERT (y,z) INSERT (p DELETE (x,z)))\n                 deranges (y INSERT s)"), rel_tac))
 }
 
 ///|
@@ -718,7 +718,7 @@ pub fn derangement_add1() -> @kernel.Thm {
 ///|
 /// DERANGEMENT_EMPTY
 fn step_41() -> Unit raise {
-  derangement_empty_c.set(@tactics.prove(@parser.parse_term("forall p. p deranges {} <=> p = {}"), rel_tac))
+  derangement_empty_c.set(@tactics.prove(@parser.parse_term("∀ p. p deranges {} <=> p = {}"), rel_tac))
 }
 
 ///|
@@ -733,7 +733,7 @@ pub fn derangement_empty() -> @kernel.Thm {
 ///|
 /// DERANGEMENT_SING
 fn step_42() -> Unit raise {
-  derangement_sing_c.set(@tactics.prove(@parser.parse_term("forall x p. ~(p deranges {x})"), rel_tac))
+  derangement_sing_c.set(@tactics.prove(@parser.parse_term("∀ x p. ~(p deranges {x})"), rel_tac))
 }
 
 ///|
@@ -1190,7 +1190,7 @@ fn step_43() -> Unit raise {
   let t109 = @tactics.repeat_tac(@tactics.conj_tac)
   let t108 = @simp.rewrite_tac(@list.List([derangements()]))
   let t444 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(derangement_induct()), t108), t109), t119), t120), @tactics.strip_tac), t121), t122), t123), t125), @tactics.strip_tac), t129), t133), t259), t260), t261), t262), t443)
-  number_of_derangements_c.set(@tactics.prove(@parser.parse_term("forall n s:A->bool. s HAS_SIZE n ==> {p | p deranges s} HAS_SIZE (derangements n)"), t444))
+  number_of_derangements_c.set(@tactics.prove(@parser.parse_term("∀ n s:A->bool. s HAS_SIZE n ==> {p | p deranges s} HAS_SIZE (derangements n)"), t444))
 }
 
 ///|
@@ -1268,7 +1268,7 @@ fn step_46() -> Unit raise {
   let t449 = @simp.rewrite_tac(@list.List([derangements(), sum_1()]))
   let t448 = @simp.rewrite_tac(@list.List([@arith.add_eq_0(), @calc_num.arith_eq()]))
   let t476 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(derangement_induct()), t448), t449), t450), t451), t452), t453), t454), t457), t459), t462), t463), t464), t466), t467), t468), t470), t471), t472), t474), t475)
-  derangements_v1_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0)\n       ==> &(derangements n) =\n           &(FACT n) * sum(0..n) (\\k. --(&1) pow k / &(FACT k))"), t476))
+  derangements_v1_c.set(@tactics.prove(@parser.parse_term("∀ n. ~(n = 0)\n       ==> &(derangements n) =\n           &(FACT n) * sum(0..n) (\\k. --(&1) pow k / &(FACT k))"), t476))
 }
 
 ///|
@@ -1337,7 +1337,7 @@ fn step_47() -> Unit raise {
   let t478 = @simp.rewrite_tac(@list.List([@realax.real_div(), @equal.gsym(@transc.real_exp_neg())]))
   let t477 = @simp.asm_simp_tac(@list.List([derangements_v1(), @pair.let_def(), @pair.let_end_def()]))
   let t524 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t477), t478), t479), t499), t501), t502), t504), t505), t506), t507), t508), t510), t511), t512), t513), t514), t515), t516), @tactics.conj_tac), t518), t519), t520), @tactics.conj_tac), t521), t522), t523), @calc_rat.real_arith_tac)
-  derangements_exp_v1_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0)\n       ==> let e = exp(&1) in\n           abs(&(derangements n) - &(FACT n) / e) < &1 / &2"), t524))
+  derangements_exp_v1_c.set(@tactics.prove(@parser.parse_term("∀ n. ~(n = 0)\n       ==> let e = exp(&1) in\n           abs(&(derangements n) - &(FACT n) / e) < &1 / &2"), t524))
 }
 
 ///|
@@ -1372,7 +1372,7 @@ fn step_49() -> Unit raise {
   let t526 = @tactics.exists_tac(@parser.parse_term("floor(x + &1 / &2)"))
   let t525 = @tactics.conv_tac(@class.select_conv)
   let t529 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([round()]))), t525), t526), t527), t528), @calc_rat.real_arith_tac)
-  round_works_c.set(@tactics.prove(@parser.parse_term("forall x. integer(round x) /\\ round x - &1 / &2 <= x /\\ x < round x + &1 / &2"), t529))
+  round_works_c.set(@tactics.prove(@parser.parse_term("∀ x. integer(round x) /\\ round x - &1 / &2 <= x /\\ x < round x + &1 / &2"), t529))
 }
 
 ///|
@@ -1401,7 +1401,7 @@ fn step_50() -> Unit raise {
   let t531 = @simp.rewrite_tac(@list.List([@floor.integer_closed(), round_works()]))
   let t530 = @tactics.match_mp_tac(@floor.real_eq_integers_imp())
   let t540 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @pair.let_tac), t530), t531), t532), t538), t539), @calc_rat.real_arith_tac)
-  derangements_exp_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0)\n       ==> let e = exp(&1) in &(derangements n) = round(&(FACT n) / e)"), t540))
+  derangements_exp_c.set(@tactics.prove(@parser.parse_term("∀ n. ~(n = 0)\n       ==> let e = exp(&1) in &(derangements n) = round(&(FACT n) / e)"), t540))
 }
 
 ///|
@@ -1427,7 +1427,7 @@ fn step_51() -> Unit raise {
     })(t544(x545))
   })
   let t548 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t546), t547)
-  the_derangements_formula_c.set(@tactics.prove(@parser.parse_term("forall n s. s HAS_SIZE n /\\ ~(n = 0)\n         ==> FINITE {p | p deranges s} /\\\n             let e = exp(&1) in\n             &(CARD {p | p deranges s}) = round(&(FACT n) / e)"), t548))
+  the_derangements_formula_c.set(@tactics.prove(@parser.parse_term("∀ n s. s HAS_SIZE n /\\ ~(n = 0)\n         ==> FINITE {p | p deranges s} /\\\n             let e = exp(&1) in\n             &(CARD {p | p deranges s}) = round(&(FACT n) / e)"), t548))
 }
 
 ///|

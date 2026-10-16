@@ -5594,7 +5594,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  ipow (x:real) (e:int) =\n  (if (&0 <= e)\n   then (x pow (num_of_int e))\n   else (inv (x pow (num_of_int (--e)))))
       #|  &0 <= --(i:int)
       #|  &0 <= (i:int)
-      #|  forall(r:real) (i:int). &0 < r ==> &0 < r ipow i
+      #|  \226\136\128(r:real) (i:int). &0 < r ==> &0 < r ipow i
       #|  ~(&0 <= (i:int))
       #|  ~(&0 <= (i:int)) ==> (&0 <= --i <=> T)
       #|  &0 <= (i:int)
@@ -5605,7 +5605,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (i:int) /\\ &0 <= --i ==> i = &0
       #|  &0 <= --(i:int)
       #|  &0 <= (i:int)
-      #|  forall(x:real) (i:int). ~(x = &0) ==> x ipow i = inv(x ipow -- i)
+      #|  \226\136\128(x:real) (i:int). ~(x = &0) ==> x ipow i = inv(x ipow -- i)
       #|  --((u:int) + (v:int)) = --u + --v
       #|  &0 <= (v:int)
       #|  (a:int) + (b:int) = b + a
@@ -5619,9 +5619,9 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  (u:int) + (&m:int) = &m - (--u)
       #|  &0 <= (u:int) + (v:int)
       #|  &0 <= (u:int) + (v:int)
-      #|  forall(x:real) (u:int) (v:int).\n\t              ~(x = &0) /\\ u < &0 /\\ &0 <= v ==>\n                      (x ipow u) * (x ipow v) = (x ipow (u + v))
-      #|  forall(x:real) (u:int) (v:int).\n\t  ~(x = &0) /\\ &0 <= u /\\ &0 <= v ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
-      #|  forall(x:real) (u:int) (v:int). ~(x = &0) ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
+      #|  \226\136\128(x:real) (u:int) (v:int).\n\t              ~(x = &0) /\\ u < &0 /\\ &0 <= v ==>\n                      (x ipow u) * (x ipow v) = (x ipow (u + v))
+      #|  \226\136\128(x:real) (u:int) (v:int).\n\t  ~(x = &0) /\\ &0 <= u /\\ &0 <= v ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
+      #|  \226\136\128(x:real) (u:int) (v:int). ~(x = &0) ==>\n\t  (x ipow u) * (x ipow v) = (x ipow (u + v))
       #|  &0 <= (u:int) /\\ &0 <= (v:int) ==> &0 <= u + v
       #|  n:num
       #|  m:num
@@ -5633,8 +5633,8 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  ~(&0 <= (u:int) + (v:int)) ==> v < --u
       #|  m < n ==> m <= n
       #|  num_of_int(i)
-      #|  forall(r:num) (i:int). &0 <= i ==> ?(m:num). m = num_of_int(i) /\\\n\t    &r ipow i = &(r EXP m)
-      #|  forall(r:num) (p:num). 0 < p ==> &r ipow (&p - &1) = &(r EXP (p - 1))
+      #|  \226\136\128(r:num) (i:int). &0 <= i ==> ?(m:num). m = num_of_int(i) /\\\n\t    &r ipow i = &(r EXP m)
+      #|  \226\136\128(r:num) (p:num). 0 < p ==> &r ipow (&p - &1) = &(r EXP (p - 1))
       #|  0 < p ==> 0 <= p - 1
       #|  r:num
       #|  0 < x <=> 1 <= x
@@ -5644,16 +5644,16 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  (a:real) * b = b * a
       #|  (x ipow e)
       #|  (y:num) <= z
-      #|  forall(x:real) (y:num) (z:num) (e:int).\n\t  &0 < x /\\ &y * x ipow e <= &z * x ipow e /\\\n\t  &z * x ipow e <= (&y + &1) * x ipow e ==>\n\t  z = y \\/ z = y + 1
+      #|  \226\136\128(x:real) (y:num) (z:num) (e:int).\n\t  &0 < x /\\ &y * x ipow e <= &z * x ipow e /\\\n\t  &z * x ipow e <= (&y + &1) * x ipow e ==>\n\t  z = y \\/ z = y + 1
       #|  &0 <= (&1:int) <=> T
-      #|  forall(x:real). x ipow &1 = x
+      #|  \226\136\128(x:real). x ipow &1 = x
       #|  &0 <= (&0:int) <=> T
-      #|  forall(x:real). x ipow &0 = &1
-      #|  forall(x:real) (e:int). &1 <= x /\\ &0 <= e ==> &1 <= x ipow e
+      #|  \226\136\128(x:real). x ipow &0 = &1
+      #|  \226\136\128(x:real) (e:int). &1 <= x /\\ &0 <= e ==> &1 <= x ipow e
       #|  n:num
       #|  &0 < (e:int)
       #|  &0 < (e:int) ==> ((&0 <= e) <=> T)
-      #|  forall(x:real) (e:int). &1 < x /\\ &0 < e ==> &1 < x ipow e
+      #|  \226\136\128(x:real) (e:int). &1 < x /\\ &0 < e ==> &1 < x ipow e
       #|  &0 < (e:int) ==> &0 <= e
       #|  &0 < (x:real) ==> &0 <= x
       #|  (a:real) * b = b * a
@@ -5665,19 +5665,19 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 < (x:real) ==> &0 <= x
       #|  &0 <= (&0:int) <=> T
       #|  (&0):int
-      #|  forall(r:num) (n:num). 2 <= r ==> ?(e:int). &0 <= e /\\ &n <= &r ipow e
+      #|  \226\136\128(r:num) (n:num). 2 <= r ==> ?(e:int). &0 <= e /\\ &n <= &r ipow e
       #|  2 <= r ==> (?e. &0 <= e /\\ &n <= &r ipow e)
       #|  e:int
-      #|  forall(r:num) (n:num). 2 <= r ==> ?(e:int). &n <= &r ipow e
+      #|  \226\136\128(r:num) (n:num). 2 <= r ==> ?(e:int). &n <= &r ipow e
       #|  n:num
       #|  e:int
       #|  z:real
-      #|  forall(r:num) (z:real). 2 <= r ==> ?(e:int). z <= &r ipow e
+      #|  \226\136\128(r:num) (z:real). 2 <= r ==> ?(e:int). z <= &r ipow e
       #|  n:num
       #|  (x:real) = &1 * x
       #|  -- -- (e:int) = e
       #|  -- (e:int)
-      #|  forall(r:num) (z:real). &0 < z /\\ 2 <= r ==> ?(e:int). &r ipow e <= z
+      #|  \226\136\128(r:num) (z:real). &0 < z /\\ 2 <= r ==> ?(e:int). &r ipow e <= z
       #|  &1 / (z:real)
       #|  &2 <= &r ==> ~(&r = &0)
       #|  e1 <= (e2:int) <=> e2' <= (e1':int)
@@ -5692,7 +5692,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (e2:int)
       #|  (&1:real) = (inv (&1:real))
       #|  &1:real
-      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
+      #|  \226\136\128 y. (x:real) < y /\\ y <= z ==> x < z
       #|  inv (&x ipow e2') < &x ipow e1
       #|  -- e2:int
       #|  ?e2':int. &0 < e2' /\\ --e2 = e2'
@@ -5701,7 +5701,7 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (e1:int)
       #|  &0 <= (e2:int)
       #|  &0 <= (e1:int)
-      #|  forall(x:num) (e1:int) (e2:int). 2 <= x /\\ &x ipow e1 <= &x ipow e2 ==>\n             e1 <= e2
+      #|  \226\136\128(x:num) (e1:int) (e2:int). 2 <= x /\\ &x ipow e1 <= &x ipow e2 ==>\n             e1 <= e2
       #|  2 <= x ==> ((x = 0) <=> F)
       #|  2 <= x ==> ((x = 0) <=> F)
       #|  -- e2:int
@@ -5720,50 +5720,50 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= (e1:int)
       #|  &0 <= (e2:int)
       #|  &0 <= (e1:int)
-      #|  forall(x:real) (e1:int) (e2:int). &1 <= x /\\ e1 <= e2 ==>\n                      x ipow e1 <= x ipow e2
+      #|  \226\136\128(x:real) (e1:int) (e2:int). &1 <= x /\\ e1 <= e2 ==>\n                      x ipow e1 <= x ipow e2
       #|  &1 <= (x:real) ==> &0 < x
       #|  x:real
       #|  &0 < z ==> ~(z = &0)
       #|  x * y = y * (x:real)
       #|  ~(x = &0)
-      #|  forall(x:real) (i:int). &0 < x ==> x ipow i * x ipow (-- i) = &1
+      #|  \226\136\128(x:real) (i:int). &0 < x ==> x ipow i * x ipow (-- i) = &1
       #|  rerror (a:real) (b:real) = abs((b - a) / a)
       #|  closer (x:real) (y:real) (z:real) = (abs(x - z) < abs(y - z))
-      #|  forall(n:num). ODD(2 * n) <=> F
+      #|  \226\136\128(n:num). ODD(2 * n) <=> F
       #|  2 * SUC(d) - 1 = SUC(2 *d)
-      #|  forall(f:num). 0 < f ==> ODD(2 * f - 1)
+      #|  \226\136\128(f:num). 0 < f ==> ODD(2 * f - 1)
       #|  z = x * y /\\ ~(z = &0) ==> ~(x = &0) /\\ ~(y = &0)
       #|  1 = x EXP 0
-      #|  forall(x:num) (n:num). ~(x = 0) ==> 1 <= x EXP n
+      #|  \226\136\128(x:num) (n:num). ~(x = 0) ==> 1 <= x EXP n
       #|  b = 0 \\/ 1 <= b
       #|  b = 0 \\/ 1 <= b
       #|  a = 0 \\/ 1 <= a
-      #|  forall(a:num) (b:num). 1 <= a * b ==> 1 <= a
-      #|  is_sup_num (s:num->bool) (n:num) = (n IN s /\\ forall n'. n' IN s ==> n' <= n)
-      #|  is_sup_int (s:int->bool) (e:int) = (e IN s /\\ forall e'. e' IN s ==> e' <= e)
+      #|  \226\136\128(a:num) (b:num). 1 <= a * b ==> 1 <= a
+      #|  is_sup_num (s:num->bool) (n:num) = (n IN s /\\ \226\136\128 n'. n' IN s ==> n' <= n)
+      #|  is_sup_int (s:int->bool) (e:int) = (e IN s /\\ \226\136\128 e'. e' IN s ==> e' <= e)
       #|  sup_num (s:num->bool) = (@(n:num). is_sup_num s n)
       #|  sup_int (s:int->bool) = (@(e:int). is_sup_int s e)
-      #|  forall x. x = SUC b ==> ~(x IN s)
+      #|  \226\136\128 x. x = SUC b ==> ~(x IN s)
       #|  ~(n = SUC b) /\\ n <= (SUC b) ==> n <= b
-      #|  forall n. n IN s ==> n <= (b:num)
+      #|  \226\136\128 n. n IN s ==> n <= (b:num)
       #|  SUC b <= x
       #|  x <= SUC b
-      #|  forall x. is_sup_num s x ==> x = SUC b
+      #|  \226\136\128 x. is_sup_num s x ==> x = SUC b
       #|  is_sup_num s (SUC b)
       #|  SUC(b)
       #|  SUC(b) IN s
       #|  x <= 0 ==> x = 0
-      #|  forall x. is_sup_num s x ==> x = 0
+      #|  \226\136\128 x. is_sup_num s x ==> x = 0
       #|  x = 0
       #|  x <= 0 ==> x = 0
       #|  x = 0
       #|  is_sup_num s 0
       #|  0:num
-      #|  forall(s:num->bool) (b:num). ~(s = {}) /\\ (forall n. n IN s ==> n <= b) ==>\n\t  ?(n':num). sup_num s = n' /\\ is_sup_num s n'
+      #|  \226\136\128(s:num->bool) (b:num). ~(s = {}) /\\ (\226\136\128 n. n IN s ==> n <= b) ==>\n\t  ?(n':num). sup_num s = n' /\\ is_sup_num s n'
       #|  (x:num) IN s
       #|  SUC b IN s
       #|  (n:num) IN s
-      #|  ~(s = {}) /\\ (forall n. n IN s ==> n <= b)\n                       ==> (?n'. sup_num s = n' /\\ is_sup_num s n')
+      #|  ~(s = {}) /\\ (\226\136\128 n. n IN s ==> n <= b)\n                       ==> (?n'. sup_num s = n' /\\ is_sup_num s n')
       #|  e':int
       #|  &0 <= (e':int) - e
       #|  (z:int) <= y <=> z - e <= y - e
@@ -5776,49 +5776,49 @@ test "IEEE/common matches IEEE/common.ml" {
       #|  &0 <= b - (e:int)
       #|  &0 <= e'' - (e:int)
       #|  num_of_int(b - e)
-      #|  ?(bn:num). forall n. n IN\n                     {n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} ==> n <= bn
+      #|  ?(bn:num). \226\136\128 n. n IN\n                     {n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} ==> n <= bn
       #|  e - (e:int) = &0
       #|  e:int
       #|  0:num
       #|  ~({n | ?(e'':int). n = num_of_int(e'' - e) /\\\n                             e'' IN s /\\ e <= e''} = {})
       #|  CHOICE (s:int->bool)
       #|  ?e. (e:int) IN s
-      #|  forall(s:int->bool) (b:int). ~(s = {}) /\\ (forall e. e IN s ==> e <= b) ==>\n\t    ?(e':int). is_sup_int s e'
+      #|  \226\136\128(s:int->bool) (b:int). ~(s = {}) /\\ (\226\136\128 e. e IN s ==> e <= b) ==>\n\t    ?(e':int). is_sup_int s e'
       #|  b:int
       #|  sup_int s
-      #|  forall(s:int->bool) (b:int). ~(s = {}) /\\ (forall e. e IN s ==> e <= b) ==>\n\t  ?(e':int). sup_int s = e' /\\ is_sup_int s e'
+      #|  \226\136\128(s:int->bool) (b:int). ~(s = {}) /\\ (\226\136\128 e. e IN s ==> e <= b) ==>\n\t  ?(e':int). sup_int s = e' /\\ is_sup_int s e'
       #|ipow =  |- ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) e:int)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int)) ((#real_pow:fun(real,fun(num,real)) x:real) (#num_of_int:fun(int,num) e:int))) (#real_inv:fun(real,real) ((#real_pow:fun(real,fun(num,real)) x:real) (#num_of_int:fun(int,num) (#int_neg:fun(int,int) e:int))))))
-      #|IPOW_LT_0 =  |- (#forall:fun(fun(real,bool),bool) (\r:real. (#forall:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) r:real) i:int)))))))
-      #|IPOW_INV_NEG =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) i:int)) (#real_inv:fun(real,real) ((#ipow:fun(real,fun(int,real)) x:real) (#int_neg:fun(int,int) i:int)))))))))
-      #|IPOW_ADD_EXP =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\u:int. (#forall:fun(fun(int,bool),bool) (\v:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#ipow:fun(real,fun(int,real)) x:real) u:int)) ((#ipow:fun(real,fun(int,real)) x:real) v:int))) ((#ipow:fun(real,fun(int,real)) x:real) ((#int_add:fun(int,fun(int,int)) u:int) v:int))))))))))
-      #|IPOW_EQ_EXP =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) i:int)) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#num_of_int:fun(int,num) i:int))) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) i:int)) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) r:num) m:num)))))))))))
-      #|IPOW_EQ_EXP_P =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) p:num)) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) ((#int_sub:fun(int,fun(int,int)) (#int_of_num:fun(num,int) p:num)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) r:num) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
-      #|IPOW_BETWEEN =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. (#forall:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) y:num)) ((#ipow:fun(real,fun(int,real)) x:real) e:int))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) z:num)) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) z:num)) ((#ipow:fun(real,fun(int,real)) x:real) e:int))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) y:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) z:num) y:num)) ((#=:fun(num,fun(num,bool)) z:num) ((#+:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))
-      #|IPOW_TO_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real)))
-      #|IPOW_TO_0 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
-      #|IPOW_LE_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))))))
-      #|IPOW_LT_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int))) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))))))
-      #|IPOW_LE_NUM =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) r:num)) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) n:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) e:int)))))))))
-      #|IPOW_LE_REAL =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) r:num)) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) z:real) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) e:int)))))))))
-      #|IPOW_LE_REAL_2 =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) r:num))) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) e:int)) z:real))))))))
-      #|IPOW_MONOTONE =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(int,bool),bool) (\e1:int. (#forall:fun(fun(int,bool),bool) (\e2:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:num)) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) x:num)) e1:int)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) x:num)) e2:int)))) ((#int_le:fun(int,fun(int,bool)) e1:int) e2:int))))))))
-      #|IPOW_MONOTONE_2 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e1:int. (#forall:fun(fun(int,bool),bool) (\e2:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#int_le:fun(int,fun(int,bool)) e1:int) e2:int))) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) e1:int)) ((#ipow:fun(real,fun(int,real)) x:real) e2:int)))))))))
-      #|IPOW_MUL_INV_EQ_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#ipow:fun(real,fun(int,real)) x:real) i:int)) ((#ipow:fun(real,fun(int,real)) x:real) (#int_neg:fun(int,int) i:int)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
+      #|IPOW_LT_0 =  |- (#∀:fun(fun(real,bool),bool) (\r:real. (#∀:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) r:real) i:int)))))))
+      #|IPOW_INV_NEG =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) i:int)) (#real_inv:fun(real,real) ((#ipow:fun(real,fun(int,real)) x:real) (#int_neg:fun(int,int) i:int)))))))))
+      #|IPOW_ADD_EXP =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(int,bool),bool) (\u:int. (#∀:fun(fun(int,bool),bool) (\v:int. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#ipow:fun(real,fun(int,real)) x:real) u:int)) ((#ipow:fun(real,fun(int,real)) x:real) v:int))) ((#ipow:fun(real,fun(int,real)) x:real) ((#int_add:fun(int,fun(int,int)) u:int) v:int))))))))))
+      #|IPOW_EQ_EXP =  |- (#∀:fun(fun(num,bool),bool) (\r:num. (#∀:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) i:int)) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#num_of_int:fun(int,num) i:int))) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) i:int)) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) r:num) m:num)))))))))))
+      #|IPOW_EQ_EXP_P =  |- (#∀:fun(fun(num,bool),bool) (\r:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) p:num)) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) ((#int_sub:fun(int,fun(int,int)) (#int_of_num:fun(num,int) p:num)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) r:num) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
+      #|IPOW_BETWEEN =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(num,bool),bool) (\y:num. (#∀:fun(fun(num,bool),bool) (\z:num. (#∀:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) y:num)) ((#ipow:fun(real,fun(int,real)) x:real) e:int))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) z:num)) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) z:num)) ((#ipow:fun(real,fun(int,real)) x:real) e:int))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) y:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) z:num) y:num)) ((#=:fun(num,fun(num,bool)) z:num) ((#+:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))
+      #|IPOW_TO_1 =  |- (#∀:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real)))
+      #|IPOW_TO_0 =  |- (#∀:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
+      #|IPOW_LE_1 =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))))))
+      #|IPOW_LT_1 =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#int_lt:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) e:int))) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#ipow:fun(real,fun(int,real)) x:real) e:int)))))))
+      #|IPOW_LE_NUM =  |- (#∀:fun(fun(num,bool),bool) (\r:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) r:num)) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) n:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) e:int)))))))))
+      #|IPOW_LE_REAL =  |- (#∀:fun(fun(num,bool),bool) (\r:num. (#∀:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) r:num)) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) z:real) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) e:int)))))))))
+      #|IPOW_LE_REAL_2 =  |- (#∀:fun(fun(num,bool),bool) (\r:num. (#∀:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) r:num))) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) r:num)) e:int)) z:real))))))))
+      #|IPOW_MONOTONE =  |- (#∀:fun(fun(num,bool),bool) (\x:num. (#∀:fun(fun(int,bool),bool) (\e1:int. (#∀:fun(fun(int,bool),bool) (\e2:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:num)) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) x:num)) e1:int)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) x:num)) e2:int)))) ((#int_le:fun(int,fun(int,bool)) e1:int) e2:int))))))))
+      #|IPOW_MONOTONE_2 =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(int,bool),bool) (\e1:int. (#∀:fun(fun(int,bool),bool) (\e2:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#int_le:fun(int,fun(int,bool)) e1:int) e2:int))) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) x:real) e1:int)) ((#ipow:fun(real,fun(int,real)) x:real) e2:int)))))))))
+      #|IPOW_MUL_INV_EQ_1 =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(int,bool),bool) (\i:int. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#ipow:fun(real,fun(int,real)) x:real) i:int)) ((#ipow:fun(real,fun(int,real)) x:real) (#int_neg:fun(int,int) i:int)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|rerror =  |- ((#=:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) a:real) b:real)) (#real_abs:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) b:real) a:real)) a:real)))
       #|closer =  |- ((#=:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) z:real))) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) y:real) z:real))))
-      #|DOUBLE_NOT_ODD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) #F:bool)))
-      #|DOUBLE_NEG_1_ODD =  |- (#forall:fun(fun(num,bool),bool) (\f:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) f:num)) (#ODD:fun(num,bool) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) f:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
+      #|DOUBLE_NOT_ODD =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) #F:bool)))
+      #|DOUBLE_NEG_1_ODD =  |- (#∀:fun(fun(num,bool),bool) (\f:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) f:num)) (#ODD:fun(num,bool) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) f:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|REAL_MULT_NOT_0 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) z:real) ((#real_mul:fun(real,fun(real,real)) x:real) y:real))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) z:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) y:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|EXP_LE_1 =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#EXP:fun(num,fun(num,num)) x:num) n:num)))))))
-      #|NUM_LE_MUL_1 =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#*:fun(num,fun(num,num)) a:num) b:num))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) a:num))))))
-      #|is_sup_num =  |- ((#=:fun(bool,fun(bool,bool)) ((#is_sup_num:fun(fun(num,bool),fun(num,bool)) s:fun(num,bool)) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) s:fun(num,bool))) (#forall:fun(fun(num,bool),bool) (\n':num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n':num) s:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) n':num) n:num))))))
-      #|is_sup_int =  |- ((#=:fun(bool,fun(bool,bool)) ((#is_sup_int:fun(fun(int,bool),fun(int,bool)) s:fun(int,bool)) e:int)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(int,fun(fun(int,bool),bool)) e:int) s:fun(int,bool))) (#forall:fun(fun(int,bool),bool) (\e':int. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(int,fun(fun(int,bool),bool)) e':int) s:fun(int,bool))) ((#int_le:fun(int,fun(int,bool)) e':int) e:int))))))
+      #|EXP_LE_1 =  |- (#∀:fun(fun(num,bool),bool) (\x:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#EXP:fun(num,fun(num,num)) x:num) n:num)))))))
+      #|NUM_LE_MUL_1 =  |- (#∀:fun(fun(num,bool),bool) (\a:num. (#∀:fun(fun(num,bool),bool) (\b:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#*:fun(num,fun(num,num)) a:num) b:num))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) a:num))))))
+      #|is_sup_num =  |- ((#=:fun(bool,fun(bool,bool)) ((#is_sup_num:fun(fun(num,bool),fun(num,bool)) s:fun(num,bool)) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) s:fun(num,bool))) (#∀:fun(fun(num,bool),bool) (\n':num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n':num) s:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) n':num) n:num))))))
+      #|is_sup_int =  |- ((#=:fun(bool,fun(bool,bool)) ((#is_sup_int:fun(fun(int,bool),fun(int,bool)) s:fun(int,bool)) e:int)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(int,fun(fun(int,bool),bool)) e:int) s:fun(int,bool))) (#∀:fun(fun(int,bool),bool) (\e':int. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(int,fun(fun(int,bool),bool)) e':int) s:fun(int,bool))) ((#int_le:fun(int,fun(int,bool)) e':int) e:int))))))
       #|sup_num =  |- ((#=:fun(num,fun(num,bool)) (#sup_num:fun(fun(num,bool),num) s:fun(num,bool))) (#@:fun(fun(num,bool),num) (\n:num. ((#is_sup_num:fun(fun(num,bool),fun(num,bool)) s:fun(num,bool)) n:num))))
       #|sup_int =  |- ((#=:fun(int,fun(int,bool)) (#sup_int:fun(fun(int,bool),int) s:fun(int,bool))) (#@:fun(fun(int,bool),int) (\e:int. ((#is_sup_int:fun(fun(int,bool),fun(int,bool)) s:fun(int,bool)) e:int))))
-      #|SUP_NUM_BOUNDED =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\b:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) s:fun(num,bool)) #EMPTY:fun(num,bool)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) s:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) n:num) b:num)))))) (#?:fun(fun(num,bool),bool) (\n':num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#sup_num:fun(fun(num,bool),num) s:fun(num,bool))) n':num)) ((#is_sup_num:fun(fun(num,bool),fun(num,bool)) s:fun(num,bool)) n':num)))))))))
-      #|SUP_INT_BOUNDED =  |- (#forall:fun(fun(fun(int,bool),bool),bool) (\s:fun(int,bool). (#forall:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(int,bool),fun(fun(int,bool),bool)) s:fun(int,bool)) #EMPTY:fun(int,bool)))) (#forall:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(int,fun(fun(int,bool),bool)) e:int) s:fun(int,bool))) ((#int_le:fun(int,fun(int,bool)) e:int) b:int)))))) (#?:fun(fun(int,bool),bool) (\e':int. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) (#sup_int:fun(fun(int,bool),int) s:fun(int,bool))) e':int)) ((#is_sup_int:fun(fun(int,bool),fun(int,bool)) s:fun(int,bool)) e':int)))))))))
+      #|SUP_NUM_BOUNDED =  |- (#∀:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (#∀:fun(fun(num,bool),bool) (\b:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) s:fun(num,bool)) #EMPTY:fun(num,bool)))) (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) n:num) s:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) n:num) b:num)))))) (#?:fun(fun(num,bool),bool) (\n':num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#sup_num:fun(fun(num,bool),num) s:fun(num,bool))) n':num)) ((#is_sup_num:fun(fun(num,bool),fun(num,bool)) s:fun(num,bool)) n':num)))))))))
+      #|SUP_INT_BOUNDED =  |- (#∀:fun(fun(fun(int,bool),bool),bool) (\s:fun(int,bool). (#∀:fun(fun(int,bool),bool) (\b:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(int,bool),fun(fun(int,bool),bool)) s:fun(int,bool)) #EMPTY:fun(int,bool)))) (#∀:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(int,fun(fun(int,bool),bool)) e:int) s:fun(int,bool))) ((#int_le:fun(int,fun(int,bool)) e:int) b:int)))))) (#?:fun(fun(int,bool),bool) (\e':int. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) (#sup_int:fun(fun(int,bool),int) s:fun(int,bool))) e':int)) ((#is_sup_int:fun(fun(int,bool),fun(int,bool)) s:fun(int,bool)) e':int)))))))))
       #|types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
-      #|constants = sup_int sup_num is_sup_int is_sup_num closer rerror ipow superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
+      #|constants = sup_int sup_num is_sup_int is_sup_num closer rerror ipow superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ∀ ==> /\ T =
       #|definitions = 270
       #|Warning: inventing type variables
       #|counter_tyvar = zz_counter:'?145441

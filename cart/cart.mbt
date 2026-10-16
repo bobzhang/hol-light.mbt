@@ -43,7 +43,7 @@ fn step_2() -> Unit raise {
     t2,
   )
   dimindex_nonzero_c.set(
-    @tactics.prove(@parser.parse_term("forall s:A->bool. ~(dimindex(s) = 0)"), t3),
+    @tactics.prove(@parser.parse_term("∀ s:A->bool. ~(dimindex(s) = 0)"), t3),
   )
 }
 
@@ -68,7 +68,7 @@ fn step_3() -> Unit raise {
     ]),
   )
   dimindex_ge_1_c.set(
-    @tactics.prove(@parser.parse_term("forall s:A->bool. 1 <= dimindex(s)"), t4),
+    @tactics.prove(@parser.parse_term("∀ s:A->bool. 1 <= dimindex(s)"), t4),
   )
 }
 
@@ -87,7 +87,7 @@ fn step_4() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([dimindex()]))
   dimindex_univ_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s. dimindex(s:A->bool) = dimindex(:A)"),
+      @parser.parse_term("∀ s. dimindex(s:A->bool) = dimindex(:A)"),
       t5,
     ),
   )
@@ -355,7 +355,7 @@ fn step_12() -> Unit raise {
   has_size_finite_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s. (UNIV:(A)finite_image->bool) HAS_SIZE dimindex(s:A->bool)",
+        "∀ s. (UNIV:(A)finite_image->bool) HAS_SIZE dimindex(s:A->bool)",
       ),
       t24,
     ),
@@ -382,7 +382,7 @@ fn step_13() -> Unit raise {
   card_finite_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s. CARD(UNIV:(A)finite_image->bool) = dimindex(s:A->bool)",
+        "∀ s. CARD(UNIV:(A)finite_image->bool) = dimindex(s:A->bool)",
       ),
       t25,
     ),
@@ -453,7 +453,7 @@ fn step_15() -> Unit raise {
   dimindex_finite_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s t. dimindex(s:(A)finite_image->bool) = dimindex(t:A->bool)",
+        "∀ s t. dimindex(s:(A)finite_image->bool) = dimindex(t:A->bool)",
       ),
       t33,
     ),
@@ -484,7 +484,7 @@ fn step_16() -> Unit raise {
   finite_index_works_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall i:(A)finite_image.\n        ?!n. 1 <= n /\\ n <= dimindex(:A) /\\ (finite_index n = i)",
+        "∀ i:(A)finite_image.\n        ?!n. 1 <= n /\\ n <= dimindex(:A) /\\ (finite_index n = i)",
       ),
       t35,
     ),
@@ -509,7 +509,7 @@ fn step_17() -> Unit raise {
   finite_index_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall i j. 1 <= i /\\ i <= dimindex(:A) /\\\n         1 <= j /\\ j <= dimindex(:A)\n         ==> ((finite_index i :A finite_image = finite_index j) <=>\n              (i = j))",
+        "∀ i j. 1 <= i /\\ i <= dimindex(:A) /\\\n         1 <= j /\\ j <= dimindex(:A)\n         ==> ((finite_index i :A finite_image = finite_index j) <=>\n              (i = j))",
       ),
       t36,
     ),
@@ -534,7 +534,7 @@ fn step_18() -> Unit raise {
   forall_finite_index_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall k:(N)finite_image. P k) =\n   (forall i. 1 <= i /\\ i <= dimindex(:N) ==> P(finite_index i))",
+        "(∀ k:(N)finite_image. P k) =\n   (∀ i. 1 <= i /\\ i <= dimindex(:N) ==> P(finite_index i))",
       ),
       t37,
     ),
@@ -619,7 +619,7 @@ fn step_22() -> Unit raise {
   cart_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x:A^B y.\n    (x = y) <=> forall i. 1 <= i /\\ i <= dimindex(:B) ==> (x$i = y$i)",
+        "∀ x:A^B y.\n    (x = y) <=> ∀ i. 1 <= i /\\ i <= dimindex(:B) ==> (x$i = y$i)",
       ),
       t42,
     ),
@@ -647,7 +647,7 @@ fn step_24() -> Unit raise {
   lambda_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "(lambda) g =\n     @f:A^B. forall i. 1 <= i /\\ i <= dimindex(:B) ==> (f$i = g i)",
+        "(lambda) g =\n     @f:A^B. ∀ i. 1 <= i /\\ i <= dimindex(:B) ==> (f$i = g i)",
       ),
     ),
   )
@@ -711,7 +711,7 @@ fn step_25() -> Unit raise {
   lambda_beta_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall i. 1 <= i /\\ i <= dimindex(:B)\n       ==> (((lambda) g:A^B) $i = g i)",
+        "∀ i. 1 <= i /\\ i <= dimindex(:B)\n       ==> (((lambda) g:A^B) $i = g i)",
       ),
       t50,
     ),
@@ -738,7 +738,7 @@ fn step_26() -> Unit raise {
   lambda_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A^B g.\n        (forall i. 1 <= i /\\ i <= dimindex(:B) ==> (f$i = g i)) <=>\n        ((lambda) g = f)",
+        "∀ f:A^B g.\n        (∀ i. 1 <= i /\\ i <= dimindex(:B) ==> (f$i = g i)) <=>\n        ((lambda) g = f)",
       ),
       t52,
     ),
@@ -759,7 +759,7 @@ pub fn lambda_unique() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t53 = @simp.rewrite_tac(@list.List([cart_eq(), lambda_beta()]))
   lambda_eta_c.set(
-    @tactics.prove(@parser.parse_term("forall g. (lambda i. g$i):A^B = g"), t53),
+    @tactics.prove(@parser.parse_term("∀ g. (lambda i. g$i):A^B = g"), t53),
   )
 }
 
@@ -783,7 +783,7 @@ fn step_28() -> Unit raise {
   finite_index_inrange_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ forall x:A^N. x$i = x$k",
+        "∀ i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ ∀ x:A^N. x$i = x$k",
       ),
       t55,
     ),
@@ -812,7 +812,7 @@ fn step_29() -> Unit raise {
   finite_index_inrange_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\\n           (forall x:A^N. x$i = x$k) /\\ (forall y:B^N. y$i = y$k)",
+        "∀ i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\\n           (∀ x:A^N. x$i = x$k) /\\ (∀ y:B^N. y$i = y$k)",
       ),
       t57,
     ),
@@ -843,7 +843,7 @@ fn step_30() -> Unit raise {
     t59,
   )
   cart_eq_full_c.set(
-    @tactics.prove(@parser.parse_term("forall x y:A^N. x = y <=> forall i. x$i = y$i"), t60),
+    @tactics.prove(@parser.parse_term("∀ x y:A^N. x = y <=> ∀ i. x$i = y$i"), t60),
   )
 }
 
@@ -1080,7 +1080,7 @@ fn step_38() -> Unit raise {
   )
   fstcart_pastecart_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. fstcart(pastecart (x:A^M) (y:A^N)) = x"),
+      @parser.parse_term("∀ x y. fstcart(pastecart (x:A^M) (y:A^N)) = x"),
       t75,
     ),
   )
@@ -1246,7 +1246,7 @@ fn step_39() -> Unit raise {
   )
   sndcart_pastecart_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sndcart(pastecart (x:A^M) (y:A^N)) = y"),
+      @parser.parse_term("∀ x y. sndcart(pastecart (x:A^M) (y:A^N)) = y"),
       t91,
     ),
   )
@@ -1305,7 +1305,7 @@ fn step_40() -> Unit raise {
   pastecart_fst_snd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall z. pastecart (fstcart z) (sndcart z):A^(M,N)finite_sum = z",
+        "∀ z. pastecart (fstcart z) (sndcart z):A^(M,N)finite_sum = z",
       ),
       t97,
     ),
@@ -1330,7 +1330,7 @@ fn step_41() -> Unit raise {
   pastecart_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y:A^(M,N)finite_sum.\n        x = y <=> fstcart x = fstcart y /\\ sndcart x = sndcart y",
+        "∀ x y:A^(M,N)finite_sum.\n        x = y <=> fstcart x = fstcart y /\\ sndcart x = sndcart y",
       ),
       t98,
     ),
@@ -1355,7 +1355,7 @@ fn step_42() -> Unit raise {
   forall_pastecart_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall p:A^(M,N)finite_sum. P p) <=> forall x y. P (pastecart x y)",
+        "(∀ p:A^(M,N)finite_sum. P p) <=> ∀ x y. P (pastecart x y)",
       ),
       t99,
     ),
@@ -1409,7 +1409,7 @@ fn step_44() -> Unit raise {
   pastecart_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x:A^M y:A^N w z. pastecart x y = pastecart w z <=> x = w /\\ y = z",
+        "∀ x:A^M y:A^N w z. pastecart x y = pastecart w z <=> x = w /\\ y = z",
       ),
       t101,
     ),
@@ -1432,7 +1432,7 @@ fn step_45() -> Unit raise {
   fstcart_component_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x:A^(M,N)finite_sum i. 1 <= i /\\ i <= dimindex(:M)\n                           ==> fstcart x$i = x$i",
+        "∀ x:A^(M,N)finite_sum i. 1 <= i /\\ i <= dimindex(:M)\n                           ==> fstcart x$i = x$i",
       ),
       t102,
     ),
@@ -1457,7 +1457,7 @@ fn step_46() -> Unit raise {
   sndcart_component_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x:A^(M,N)finite_sum i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> sndcart x$i = x$(i + dimindex(:M))",
+        "∀ x:A^(M,N)finite_sum i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> sndcart x$i = x$(i + dimindex(:M))",
       ),
       t103,
     ),
@@ -1551,7 +1551,7 @@ fn step_47() -> Unit raise {
   pastecart_component_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall u:A^M v:A^N i. 1 <= i /\\ i <= dimindex(:M) ==> pastecart u v$i = u$i) /\\\n   (forall u:A^M v:A^N i. dimindex(:M) + 1 <= i /\\ i <= dimindex(:M) + dimindex(:N)\n                    ==> pastecart u v$i = v$(i - dimindex(:M)))",
+        "(∀ u:A^M v:A^N i. 1 <= i /\\ i <= dimindex(:M) ==> pastecart u v$i = u$i) /\\\n   (∀ u:A^M v:A^N i. dimindex(:M) + 1 <= i /\\ i <= dimindex(:M) + dimindex(:N)\n                    ==> pastecart u v$i = v$(i - dimindex(:M)))",
       ),
       t111,
     ),
@@ -2930,7 +2930,7 @@ fn step_76() -> Unit raise {
   ])
   let t226 = @tactics.exists_tac(
     @parser.parse_term(
-      "IMAGE (\\(x:A,v:A^N). (lambda i. if i = SUC n then x else v$i):A^N)\n          {x,v | x IN {x:A | P (SUC n) x} /\\\n                 v IN {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                ==> P i (v$i)) /\\\n                           (forall i. 1 <= i /\\ i <= dimindex (:N) /\\ n < i\n                                ==> v$i = (@x. F))}}",
+      "IMAGE (\\(x:A,v:A^N). (lambda i. if i = SUC n then x else v$i):A^N)\n          {x,v | x IN {x:A | P (SUC n) x} /\\\n                 v IN {v:A^N | (∀ i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                ==> P i (v$i)) /\\\n                           (∀ i. 1 <= i /\\ i <= dimindex (:N) /\\ n < i\n                                ==> v$i = (@x. F))}}",
     ),
   )
   let t225 = @tactics.match_mp_tac(@sets.finite_subset())
@@ -2945,7 +2945,7 @@ fn step_76() -> Unit raise {
   )
   let t222 = @tactics.subgoal_then(
     @parser.parse_term(
-      "{v | forall i. 1 <= i /\\ i <= dimindex (:N) ==> v$i = (@x. F)} =\n      {(lambda i. @x. F):A^N}",
+      "{v | ∀ i. 1 <= i /\\ i <= dimindex (:N) ==> v$i = (@x. F)} =\n      {(lambda i. @x. F):A^N}",
     ),
     fn(
       x220 : @kernel.Thm,
@@ -3004,7 +3004,7 @@ fn step_76() -> Unit raise {
   let t214 = @parser.parse_term("dimindex(:N)")
   let t217 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall n. n <= dimindex(:N)\n        ==> FINITE {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                 ==> P i (v$i)) /\\\n                            (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                                 ==> v$i = @x. F)}",
+      "∀ n. n <= dimindex(:N)\n        ==> FINITE {v:A^N | (∀ i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                 ==> P i (v$i)) /\\\n                            (∀ i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                                 ==> v$i = @x. F)}",
     ),
     fn(
       x216 : @kernel.Thm,
@@ -3132,7 +3132,7 @@ fn step_76() -> Unit raise {
   finite_cart_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> FINITE {x | P i x})\n       ==> FINITE {v:A^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)}",
+        "∀ P. (∀ i. 1 <= i /\\ i <= dimindex(:N) ==> FINITE {x | P i x})\n       ==> FINITE {v:A^N | ∀ i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)}",
       ),
       t238,
     ),
@@ -3352,7 +3352,7 @@ fn step_77() -> Unit raise {
   has_size_cart_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m. (:A) HAS_SIZE m ==> (:A^N) HAS_SIZE m EXP (dimindex(:N))",
+        "∀ m. (:A) HAS_SIZE m ==> (:A^N) HAS_SIZE m EXP (dimindex(:N))",
       ),
       t259,
     ),
@@ -3454,7 +3454,7 @@ fn step_81() -> Unit raise {
   in_elim_pastecart_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P (a:A^M) (b:A^N). pastecart a b IN {pastecart x y | P x y} <=> P a b",
+        "∀ P (a:A^M) (b:A^N). pastecart a b IN {pastecart x y | P x y} <=> P a b",
       ),
       t263,
     ),
@@ -3506,7 +3506,7 @@ fn step_84() -> Unit raise {
   forall_in_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall z:A^(M,N)finite_sum. z IN s PCROSS t ==> P z) <=>\n   (forall x y. x IN s /\\ y IN t ==> P(pastecart x y))",
+        "(∀ z:A^(M,N)finite_sum. z IN s PCROSS t ==> P z) <=>\n   (∀ x y. x IN s /\\ y IN t ==> P(pastecart x y))",
       ),
       t264,
     ),
@@ -3558,7 +3558,7 @@ fn step_86() -> Unit raise {
   pastecart_in_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s t (x:A^M) (y:A^N). (pastecart x y) IN (s PCROSS t) <=> x IN s /\\ y IN t",
+        "∀ s t (x:A^M) (y:A^N). (pastecart x y) IN (s PCROSS t) <=> x IN s /\\ y IN t",
       ),
       t266,
     ),
@@ -3584,7 +3584,7 @@ fn step_87() -> Unit raise {
   pcross_eq_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) (t:A^N->bool). s PCROSS t = {} <=> s = {} \\/ t = {}",
+        "∀(s:A^M->bool) (t:A^N->bool). s PCROSS t = {} <=> s = {} \\/ t = {}",
       ),
       t268,
     ),
@@ -3609,7 +3609,7 @@ fn step_88() -> Unit raise {
   pcross_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall s. (s PCROSS {}) :A^(M,N)finite_sum->bool = {}) /\\\n   (forall t. ({} PCROSS t) :A^(M,N)finite_sum->bool = {})",
+        "(∀ s. (s PCROSS {}) :A^(M,N)finite_sum->bool = {}) /\\\n   (∀ t. ({} PCROSS t) :A^(M,N)finite_sum->bool = {})",
       ),
       t269,
     ),
@@ -3639,7 +3639,7 @@ fn step_89() -> Unit raise {
   )
   pcross_sing_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(x:A^M) (y:A^N). {x} PCROSS {y} = {pastecart x y}"),
+      @parser.parse_term("∀(x:A^M) (y:A^N). {x} PCROSS {y} = {pastecart x y}"),
       t270,
     ),
   )
@@ -3675,7 +3675,7 @@ fn step_90() -> Unit raise {
   subset_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) (t:A^N->bool) s' t'.\n        s PCROSS t SUBSET s' PCROSS t' <=>\n        s = {} \\/ t = {} \\/ s SUBSET s' /\\ t SUBSET t'",
+        "∀(s:A^M->bool) (t:A^N->bool) s' t'.\n        s PCROSS t SUBSET s' PCROSS t' <=>\n        s = {} \\/ t = {} \\/ s SUBSET s' /\\ t SUBSET t'",
       ),
       t272,
     ),
@@ -3698,7 +3698,7 @@ fn step_91() -> Unit raise {
   pcross_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) (t:A^N->bool) s' t'.\n        s SUBSET s' /\\ t SUBSET t' ==> s PCROSS t SUBSET s' PCROSS t'",
+        "∀(s:A^M->bool) (t:A^N->bool) s' t'.\n        s SUBSET s' /\\ t SUBSET t' ==> s PCROSS t SUBSET s' PCROSS t'",
       ),
       t273,
     ),
@@ -3727,7 +3727,7 @@ fn step_92() -> Unit raise {
   pcross_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s s':real^M->bool t t':real^N->bool.\n        s PCROSS t = s' PCROSS t' <=>\n        (s = {} \\/ t = {}) /\\ (s' = {} \\/ t' = {}) \\/ s = s' /\\ t = t'",
+        "∀ s s':real^M->bool t t':real^N->bool.\n        s PCROSS t = s' PCROSS t' <=>\n        (s = {} \\/ t = {}) /\\ (s' = {} \\/ t' = {}) \\/ s = s' /\\ t = t'",
       ),
       t275,
     ),
@@ -3898,7 +3898,7 @@ fn step_94() -> Unit raise {
   has_size_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) (t:A^N->bool) m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s PCROSS t) HAS_SIZE (m * n)",
+        "∀(s:A^M->bool) (t:A^N->bool) m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s PCROSS t) HAS_SIZE (m * n)",
       ),
       t292,
     ),
@@ -3927,7 +3927,7 @@ fn step_95() -> Unit raise {
   finite_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) (t:A^N->bool).\n        FINITE s /\\ FINITE t ==> FINITE(s PCROSS t)",
+        "∀(s:A^M->bool) (t:A^N->bool).\n        FINITE s /\\ FINITE t ==> FINITE(s PCROSS t)",
       ),
       t293,
     ),
@@ -4012,7 +4012,7 @@ fn step_96() -> Unit raise {
   finite_pcross_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) (t:A^N->bool).\n        FINITE(s PCROSS t) <=> s = {} \\/ t = {} \\/ FINITE s /\\ FINITE t",
+        "∀(s:A^M->bool) (t:A^N->bool).\n        FINITE(s PCROSS t) <=> s = {} \\/ t = {} \\/ FINITE s /\\ FINITE t",
       ),
       t305,
     ),
@@ -4066,7 +4066,7 @@ fn step_97() -> Unit raise {
   image_fstcart_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s:real^M->bool t:real^N->bool.\n        IMAGE fstcart (s PCROSS t) = if t = {} then {} else s",
+        "∀ s:real^M->bool t:real^N->bool.\n        IMAGE fstcart (s PCROSS t) = if t = {} then {} else s",
       ),
       t311,
     ),
@@ -4120,7 +4120,7 @@ fn step_98() -> Unit raise {
   image_sndcart_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s:real^M->bool t:real^N->bool.\n        IMAGE sndcart (s PCROSS t) = if s = {} then {} else t",
+        "∀ s:real^M->bool t:real^N->bool.\n        IMAGE sndcart (s PCROSS t) = if s = {} then {} else t",
       ),
       t317,
     ),
@@ -4160,7 +4160,7 @@ fn step_99() -> Unit raise {
   pcross_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(s:A^M->bool) (t:A^N->bool) u.\n        s PCROSS (t INTER u) = (s PCROSS t) INTER (s PCROSS u)) /\\\n   (forall(s:A^M->bool) t (u:A^N->bool).\n        (s INTER t) PCROSS u = (s PCROSS u) INTER (t PCROSS u))",
+        "(∀(s:A^M->bool) (t:A^N->bool) u.\n        s PCROSS (t INTER u) = (s PCROSS t) INTER (s PCROSS u)) /\\\n   (∀(s:A^M->bool) t (u:A^N->bool).\n        (s INTER t) PCROSS u = (s PCROSS u) INTER (t PCROSS u))",
       ),
       t320,
     ),
@@ -4198,7 +4198,7 @@ fn step_100() -> Unit raise {
   pcross_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(s:A^M->bool) (t:A^N->bool) u.\n        s PCROSS (t UNION u) = (s PCROSS t) UNION (s PCROSS u)) /\\\n   (forall(s:A^M->bool) t (u:A^N->bool).\n        (s UNION t) PCROSS u = (s PCROSS u) UNION (t PCROSS u))",
+        "(∀(s:A^M->bool) (t:A^N->bool) u.\n        s PCROSS (t UNION u) = (s PCROSS t) UNION (s PCROSS u)) /\\\n   (∀(s:A^M->bool) t (u:A^N->bool).\n        (s UNION t) PCROSS u = (s PCROSS u) UNION (t PCROSS u))",
       ),
       t323,
     ),
@@ -4236,7 +4236,7 @@ fn step_101() -> Unit raise {
   pcross_diff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(s:A^M->bool) (t:A^N->bool) u.\n        s PCROSS (t DIFF u) = (s PCROSS t) DIFF (s PCROSS u)) /\\\n   (forall(s:A^M->bool) t (u:A^N->bool).\n        (s DIFF t) PCROSS u = (s PCROSS u) DIFF (t PCROSS u))",
+        "(∀(s:A^M->bool) (t:A^N->bool) u.\n        s PCROSS (t DIFF u) = (s PCROSS t) DIFF (s PCROSS u)) /\\\n   (∀(s:A^M->bool) t (u:A^N->bool).\n        (s DIFF t) PCROSS u = (s PCROSS u) DIFF (t PCROSS u))",
       ),
       t326,
     ),
@@ -4270,7 +4270,7 @@ fn step_102() -> Unit raise {
   inter_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A^M->bool) s' (t:A^N->bool) t'.\n      (s PCROSS t) INTER (s' PCROSS t') = (s INTER s') PCROSS (t INTER t')",
+        "∀(s:A^M->bool) s' (t:A^N->bool) t'.\n      (s PCROSS t) INTER (s' PCROSS t') = (s INTER s') PCROSS (t INTER t')",
       ),
       t328,
     ),
@@ -4324,7 +4324,7 @@ fn step_103() -> Unit raise {
   )
   let t332 = (
     @parser.parse_term(
-      "(forall f g. ((UNIONS f) PCROSS (UNIONS g)) :A^(M,N)finite_sum->bool =\n          UNIONS {s PCROSS t | s IN f /\\ t IN g}) /\\\n   (forall s f. (s PCROSS (UNIONS f)) :A^(M,N)finite_sum->bool =\n          UNIONS {s PCROSS t | t IN f}) /\\\n   (forall f t. ((UNIONS f) PCROSS t) :A^(M,N)finite_sum->bool =\n          UNIONS {s PCROSS t | s IN f})",
+      "(∀ f g. ((UNIONS f) PCROSS (UNIONS g)) :A^(M,N)finite_sum->bool =\n          UNIONS {s PCROSS t | s IN f /\\ t IN g}) /\\\n   (∀ s f. (s PCROSS (UNIONS f)) :A^(M,N)finite_sum->bool =\n          UNIONS {s PCROSS t | t IN f}) /\\\n   (∀ f t. ((UNIONS f) PCROSS t) :A^(M,N)finite_sum->bool =\n          UNIONS {s PCROSS t | s IN f})",
     ),
     t331,
   )
@@ -4406,7 +4406,7 @@ fn step_104() -> Unit raise {
   )
   let t338 = (
     @parser.parse_term(
-      "(forall f g. ((INTERS f) PCROSS (INTERS g)) :A^(M,N)finite_sum->bool =\n          if f = {} then INTERS {UNIV PCROSS t | t IN g}\n          else if g = {} then INTERS {s PCROSS UNIV | s IN f}\n          else INTERS {s PCROSS t | s IN f /\\ t IN g}) /\\\n   (forall s f. (s PCROSS (INTERS f)) :A^(M,N)finite_sum->bool =\n          if f = {} then s PCROSS UNIV else INTERS {s PCROSS t | t IN f}) /\\\n   (forall f t. ((INTERS f) PCROSS t) :A^(M,N)finite_sum->bool =\n          if f = {} then UNIV PCROSS t else INTERS {s PCROSS t | s IN f})",
+      "(∀ f g. ((INTERS f) PCROSS (INTERS g)) :A^(M,N)finite_sum->bool =\n          if f = {} then INTERS {UNIV PCROSS t | t IN g}\n          else if g = {} then INTERS {s PCROSS UNIV | s IN f}\n          else INTERS {s PCROSS t | s IN f /\\ t IN g}) /\\\n   (∀ s f. (s PCROSS (INTERS f)) :A^(M,N)finite_sum->bool =\n          if f = {} then s PCROSS UNIV else INTERS {s PCROSS t | t IN f}) /\\\n   (∀ f t. ((INTERS f) PCROSS t) :A^(M,N)finite_sum->bool =\n          if f = {} then UNIV PCROSS t else INTERS {s PCROSS t | s IN f})",
     ),
     t337,
   )
@@ -4451,7 +4451,7 @@ fn step_105() -> Unit raise {
   disjoint_pcross_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s:A^M->bool t:A^N->bool s' t'.\n        DISJOINT (s PCROSS t) (s' PCROSS t') <=>\n        DISJOINT s s' \\/ DISJOINT t t'",
+        "∀ s:A^M->bool t:A^N->bool s' t'.\n        DISJOINT (s PCROSS t) (s' PCROSS t') <=>\n        DISJOINT s s' \\/ DISJOINT t t'",
       ),
       t339,
     ),

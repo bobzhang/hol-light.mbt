@@ -13,7 +13,7 @@ fn step_1() -> Unit raise {
 ///|
 /// miz3/Samples/sample.ml:3
 fn step_2() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\nlet R be num->num->bool;\nassume forall x. R x x [1];\nassume forall x y z. R x y /\\ R y z ==> R x z [2];\nthus (forall m n. m <= n ==> R m n) <=> (forall n. R n (SUC n))\nproof\n now [3] // back direction first\n  assume forall n. R n (SUC n);\n  let m n be num;\n  forall d. R m (m + d) ==> R m (m + SUC d) [4] by 2,ADD_CLAUSES;\n  R m (m + 0) by 1,ADD_CLAUSES;\n  forall d. R m (m + d) by 4,INDUCT_TAC;\n  thus m <= n ==> R m n by LE_EXISTS;\n end;\n forall n. n <= SUC n;\nqed by 3")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\nlet R be num->num->bool;\nassume ∀ x. R x x [1];\nassume ∀ x y z. R x y /\\ R y z ==> R x z [2];\nthus (∀ m n. m <= n ==> R m n) <=> (∀ n. R n (SUC n))\nproof\n now [3] // back direction first\n  assume ∀ n. R n (SUC n);\n  let m n be num;\n  ∀ d. R m (m + d) ==> R m (m + SUC d) [4] by 2,ADD_CLAUSES;\n  R m (m + 0) by 1,ADD_CLAUSES;\n  ∀ d. R m (m + d) by 4,INDUCT_TAC;\n  thus m <= n ==> R m n by LE_EXISTS;\n end;\n ∀ n. n <= SUC n;\nqed by 3")))
 }
 
 ///|

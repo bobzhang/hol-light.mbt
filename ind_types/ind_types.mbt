@@ -226,7 +226,7 @@ fn step_1() -> Unit raise {
   inj_inverse2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->B->C.\n    (forall x1 y1 x2 y2. (P x1 y1 = P x2 y2) <=> (x1 = x2) /\\ (y1 = y2))\n    ==> ?X Y. forall x y. (X(P x y) = x) /\\ (Y(P x y) = y)",
+        "∀ P:A->B->C.\n    (∀ x1 y1 x2 y2. (P x1 y1 = P x2 y2) <=> (x1 = x2) /\\ (y1 = y2))\n    ==> ?X Y. ∀ x y. (X(P x y) = x) /\\ (Y(P x y) = y)",
       ),
       t17,
     ),
@@ -364,7 +364,7 @@ fn step_3() -> Unit raise {
   numpair_inj_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) ==> (x1 = x2)",
+        "∀ x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) ==> (x1 = x2)",
       ),
       t29,
     ),
@@ -535,7 +535,7 @@ fn step_4() -> Unit raise {
   numpair_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) <=> (x1 = x2) /\\ (y1 = y2)",
+        "∀ x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) <=> (x1 = x2) /\\ (y1 = y2)",
       ),
       t43,
     ),
@@ -719,7 +719,7 @@ fn step_7() -> Unit raise {
   numsum_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall b1 x1 b2 x2. (NUMSUM b1 x1 = NUMSUM b2 x2) <=> (b1 = b2) /\\ (x1 = x2)",
+        "∀ b1 x1 b2 x2. (NUMSUM b1 x1 = NUMSUM b2 x2) <=> (b1 = b2) /\\ (x1 = x2)",
       ),
       t59,
     ),
@@ -978,7 +978,7 @@ fn step_10() -> Unit raise {
   injn_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n1 n2. (INJN n1 :num->A->bool = INJN n2) <=> (n1 = n2)",
+        "∀ n1 n2. (INJN n1 :num->A->bool = INJN n2) <=> (n1 = n2)",
       ),
       t83,
     ),
@@ -1150,7 +1150,7 @@ fn step_12() -> Unit raise {
   )
   inja_inj_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a1 a2. (INJA a1 = INJA a2) <=> (a1:A = a2)"),
+      @parser.parse_term("∀ a1 a2. (INJA a1 = INJA a2) <=> (a1:A = a2)"),
       t98,
     ),
   )
@@ -1405,7 +1405,7 @@ fn step_14() -> Unit raise {
   injf_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f1 f2. (INJF f1 :num->A->bool = INJF f2) <=> (f1 = f2)",
+        "∀ f1 f2. (INJF f1 :num->A->bool = INJF f2) <=> (f1 = f2)",
       ),
       t125,
     ),
@@ -1681,7 +1681,7 @@ fn step_16() -> Unit raise {
   injp_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f1:num->A->bool) f1' f2 f2'.\n        (INJP f1 f2 = INJP f1' f2') <=> (f1 = f1') /\\ (f2 = f2')",
+        "∀(f1:num->A->bool) f1' f2 f2'.\n        (INJP f1 f2 = INJP f1' f2') <=> (f1 = f1') /\\ (f2 = f2')",
       ),
       t153,
     ),
@@ -1745,7 +1745,7 @@ fn step_19() -> Unit raise {
   )
   zconstr_zbot_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c i r. ~(ZCONSTR c i r :num->A->bool = ZBOT)"),
+      @parser.parse_term("∀ c i r. ~(ZCONSTR c i r :num->A->bool = ZBOT)"),
       t154,
     ),
   )
@@ -1798,7 +1798,7 @@ pub fn zrecspace_cases() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let (zrecspace_rules, zrecspace_induct, zrecspace_cases) = @ind_defs.new_inductive_definition(
     @parser.parse_term(
-      "ZRECSPACE (ZBOT:num->A->bool) /\\\n    (forall c i r. (forall n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))",
+      "ZRECSPACE (ZBOT:num->A->bool) /\\\n    (∀ c i r. (∀ n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))",
     ),
   )
   zrecspace_rules_c.set(zrecspace_rules)
@@ -1915,7 +1915,7 @@ fn step_24() -> Unit raise {
   mk_rec_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. (_mk_rec x :(A)recspace = _mk_rec y)\n         ==> (ZRECSPACE x /\\ ZRECSPACE y ==> (x = y))",
+        "∀ x y. (_mk_rec x :(A)recspace = _mk_rec y)\n         ==> (ZRECSPACE x /\\ ZRECSPACE y ==> (x = y))",
       ),
       t160,
     ),
@@ -2024,7 +2024,7 @@ fn step_25() -> Unit raise {
   dest_rec_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. (_dest_rec x = _dest_rec y) <=> (x:(A)recspace = y)",
+        "∀ x y. (_dest_rec x = _dest_rec y) <=> (x:(A)recspace = y)",
       ),
       t170,
     ),
@@ -2133,7 +2133,7 @@ fn step_26() -> Unit raise {
   )
   constr_bot_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c i r. ~(CONSTR c i r :(A)recspace = BOTTOM)"),
+      @parser.parse_term("∀ c i r. ~(CONSTR c i r :(A)recspace = BOTTOM)"),
       t181,
     ),
   )
@@ -2603,7 +2603,7 @@ fn step_27() -> Unit raise {
   constr_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c1 i1 r1 c2 i2 r2. (CONSTR c1 i1 r1 :(A)recspace = CONSTR c2 i2 r2) <=>\n                       (c1 = c2) /\\ (i1 = i2) /\\ (r1 = r2)",
+        "∀ c1 i1 r1 c2 i2 r2. (CONSTR c1 i1 r1 :(A)recspace = CONSTR c2 i2 r2) <=>\n                       (c1 = c2) /\\ (i1 = i2) /\\ (r1 = r2)",
       ),
       t215,
     ),
@@ -3077,7 +3077,7 @@ fn step_28() -> Unit raise {
   constr_ind_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. P(BOTTOM) /\\\n       (forall c i r. (forall n. P(r n)) ==> P(CONSTR c i r))\n       ==> forall x:(A)recspace. P(x)",
+        "∀ P. P(BOTTOM) /\\\n       (∀ c i r. (∀ n. P(r n)) ==> P(CONSTR c i r))\n       ==> ∀ x:(A)recspace. P(x)",
       ),
       t255,
     ),
@@ -3816,7 +3816,7 @@ fn step_29() -> Unit raise {
     t350,
   ])
   let t276 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. ?!y. (Z:(A)recspace->B->bool) x y"),
+    @parser.parse_term("∀ x. ?!y. (Z:(A)recspace->B->bool) x y"),
     fn(
       x273 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4033,7 +4033,7 @@ fn step_29() -> Unit raise {
     ),
   )
   let t259 = @parser.parse_term(
-    "(Z:(A)recspace->B->bool) BOTTOM b /\\\n     (forall c i r y. (forall n. Z (r n) (y n)) ==> Z (CONSTR c i r) (Fn c i r y))",
+    "(Z:(A)recspace->B->bool) BOTTOM b /\\\n     (∀ c i r y. (∀ n. Z (r n) (y n)) ==> Z (CONSTR c i r) (Fn c i r y))",
   )
   let t260 = (fn(
     x256 : @kernel.Thm,
@@ -4097,7 +4097,7 @@ fn step_29() -> Unit raise {
   constr_rec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall Fn:num->A->(num->(A)recspace)->(num->B)->B.\n     ?f. (forall c i r. f (CONSTR c i r) = Fn c i r (\\n. f (r n)))",
+        "∀ Fn:num->A->(num->(A)recspace)->(num->B)->B.\n     ?f. (∀ c i r. f (CONSTR c i r) = Fn c i r (\\n. f (r n)))",
       ),
       t352,
     ),
@@ -4117,7 +4117,7 @@ pub fn constr_rec() -> @kernel.Thm {
 /// FCONS
 fn step_30() -> Unit raise {
   let t353 = @parser.parse_term(
-    "(forall a f. FCONS (a:A) f 0 = a) /\\\n  (forall a f n. FCONS (a:A) f (SUC n) = f n)",
+    "(∀ a f. FCONS (a:A) f 0 = a) /\\\n  (∀ a f n. FCONS (a:A) f (SUC n) = f n)",
   )
   fcons_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t353))
 }
@@ -4147,7 +4147,7 @@ fn step_31() -> Unit raise {
   )
   fcons_undo_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:num->A. f = FCONS (f 0) (f o SUC)"),
+      @parser.parse_term("∀ f:num->A. f = FCONS (f 0) (f o SUC)"),
       t355,
     ),
   )
@@ -6768,7 +6768,7 @@ fn step_41() -> Unit raise {
   forall_option_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A option->bool. (forall x. P x) <=> P NONE /\\ forall a. P(SOME a)",
+        "∀ P:A option->bool. (∀ x. P x) <=> P NONE /\\ ∀ a. P(SOME a)",
       ),
       t797,
     ),
@@ -6799,7 +6799,7 @@ fn step_42() -> Unit raise {
           @list.List([
             @meson.meson(
               @list.List([]),
-              @parser.parse_term("(?x. P x) <=> ~(forall x. ~P x)"),
+              @parser.parse_term("(?x. P x) <=> ~(∀ x. ~P x)"),
             ),
           ]),
         ),
@@ -6811,7 +6811,7 @@ fn step_42() -> Unit raise {
   exists_option_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A option->bool. (?x. P x) <=> P NONE \\/ ?a. P(SOME a)",
+        "∀ P:A option->bool. (?x. P x) <=> P NONE \\/ ?a. P(SOME a)",
       ),
       t800,
     ),
@@ -7575,7 +7575,7 @@ pub fn cases(x931 : String) -> @kernel.Thm raise {
 fn step_51() -> Unit raise {
   let t932 = @simp.rewrite_tac(@list.List([distinctness("option")]))
   option_distinct_c.set(
-    @tactics.prove(@parser.parse_term("forall a:A. ~(SOME a = NONE)"), t932),
+    @tactics.prove(@parser.parse_term("∀ a:A. ~(SOME a = NONE)"), t932),
   )
 }
 
@@ -7596,7 +7596,7 @@ fn step_52() -> Unit raise {
   let t933 = @simp.rewrite_tac(@list.List([injectivity("option")]))
   option_inj_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b:A. SOME a = SOME b <=> a = b"),
+      @parser.parse_term("∀ a b:A. SOME a = SOME b <=> a = b"),
       t933,
     ),
   )
@@ -7617,7 +7617,7 @@ fn step_53() -> Unit raise {
   iso_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "ISO (f:A->B) (g:B->A) <=> (forall x. f(g x) = x) /\\ (forall y. g(f y) = y)",
+        "ISO (f:A->B) (g:B->A) <=> (∀ x. f(g x) = x) /\\ (∀ y. g(f y) = y)",
       ),
     ),
   )
@@ -7688,7 +7688,7 @@ fn step_56() -> Unit raise {
   iso_usage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "ISO f g\n   ==> (forall P. (forall x. P x) <=> (forall x. P(g x))) /\\\n       (forall P. (?x. P x) <=> (?x. P(g x))) /\\\n       (forall(a:A) (b:B). (a = g b) <=> (f a = b))",
+        "ISO f g\n   ==> (∀ P. (∀ x. P x) <=> (∀ x. P(g x))) /\\\n       (∀ P. (?x. P x) <=> (?x. P(g x))) /\\\n       (∀(a:A) (b:B). (a = g b) <=> (f a = b))",
       ),
       t938,
     ),
@@ -10041,15 +10041,15 @@ fn step_60() -> Unit raise {
   }
   let t1315 = @meson.meson(
     @list.List([]),
-    @parser.parse_term("(forall x. a = x ==> q x) <=> q a"),
+    @parser.parse_term("(∀ x. a = x ==> q x) <=> q a"),
   )
   let t1316 = @meson.meson(
     @list.List([]),
-    @parser.parse_term("(forall x. x = a ==> q x) <=> q a"),
+    @parser.parse_term("(∀ x. x = a ==> q x) <=> q a"),
   )
   let t1317 = @meson.meson(
     @list.List([]),
-    @parser.parse_term("(forall x. a = x /\\ p x ==> q x) <=> (p a ==> q a)"),
+    @parser.parse_term("(∀ x. a = x /\\ p x ==> q x) <=> (p a ==> q a)"),
   )
   let baseconv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
     fn(
@@ -10060,7 +10060,7 @@ fn step_60() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(forall x. x = a /\\ p x ==> q x) <=> (p a ==> q a)"),
+        @parser.parse_term("(∀ x. x = a /\\ p x ==> q x) <=> (p a ==> q a)"),
       ),
       t1317,
       t1316,

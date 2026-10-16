@@ -235,11 +235,11 @@ fn step_4() -> Unit raise {
   let t71 = so(have, @parser.parse_term("EVEN(p * p) <=> EVEN(2 * q * q)"), trivial)
   let t70 = assume_("B", @parser.parse_term("p * p = 2 * q * q"))
   let t69 = fix(@list.List([@parser.parse_term("q:num")]))
-  let t68 = assume_("A", @parser.parse_term("forall m. m < p ==> forall q. m * m = 2 * q * q ==> q = 0"))
+  let t68 = assume_("A", @parser.parse_term("∀ m. m < p ==> ∀ q. m * m = 2 * q * q ==> q = 0"))
   let t67 = fix(@list.List([@parser.parse_term("p:num")]))
   let t66 = @tactics.match_accept_tac(@arith.num_wf())
-  let t102 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(suffices_to_prove(@parser.parse_term("forall p. (forall m. m < p ==> (forall q. m * m = 2 * q * q ==> q = 0))\n        ==> (forall q. p * p = 2 * q * q ==> q = 0)"), t66), t67), t68), t69), t70), t71), t73), t80), t81), t101)
-  nsqrt_2_c.set(@tactics.prove(@parser.parse_term("forall p q. p * p = 2 * q * q ==> q = 0"), t102))
+  let t102 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(suffices_to_prove(@parser.parse_term("∀ p. (∀ m. m < p ==> (∀ q. m * m = 2 * q * q ==> q = 0))\n        ==> (∀ q. p * p = 2 * q * q ==> q = 0)"), t66), t67), t68), t69), t70), t71), t73), t80), t81), t101)
+  nsqrt_2_c.set(@tactics.prove(@parser.parse_term("∀ p q. p * p = 2 * q * q ==> q = 0"), t102))
 }
 
 ///|

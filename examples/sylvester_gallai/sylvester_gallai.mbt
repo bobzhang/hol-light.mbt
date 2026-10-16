@@ -154,7 +154,7 @@ fn step_1() -> Unit raise {
   let t3 = @tactics.x_gen_tac(@parser.parse_term("c:real"))
   let t1 = @parser.parse_term("c:real^2")
   let t120 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@parser.parse_term("q:real^2")), (x2 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_basis_multiple_tac(1L, t1, x2)), t3), t4), t5), t6), @tactics.disch_tac), t8), t9), t16), t22), t23), t24), t28), t29), t36), t37), t38), t39), t40), t41), @tactics.strip_tac), t50), t51), t52), t53), t59), t60), @tactics.strip_tac), t68), t86), t87), @tactics.conj_tac), t94), t95), t96), t97), t98), t99), t100), t101), t102), t104), t105), t119)
-  sylvester_gallai_lemma_c.set(@tactics.prove(@parser.parse_term("forall p q b c:real^2.\n        between b (q,c) /\\ ~(p IN affine hull {q,c}) /\\\n        orthogonal (p - q) (c - q) /\\ ~(c = b) /\\ ~(c = q)\n        ==> ~(b IN affine hull {p,c}) /\\\n            ?x. x IN affine hull {p,c} /\\ dist(b,x) < dist(p,q)"), t120))
+  sylvester_gallai_lemma_c.set(@tactics.prove(@parser.parse_term("∀ p q b c:real^2.\n        between b (q,c) /\\ ~(p IN affine hull {q,c}) /\\\n        orthogonal (p - q) (c - q) /\\ ~(c = b) /\\ ~(c = q)\n        ==> ~(b IN affine hull {p,c}) /\\\n            ?x. x IN affine hull {p,c} /\\ dist(b,x) < dist(p,q)"), t120))
 }
 
 ///|
@@ -186,7 +186,7 @@ fn step_2() -> Unit raise {
   let t122 = @simp.rewrite_tac(@list.List([@convex.collinear_affine_hull(), @theorems.left_imp_exists_thm()]))
   let t121 = @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t138 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t121), t122), t124), t125), (x127 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_basis_multiple_tac(1L, t126, x127)), @tactics.gen_tac), @tactics.disch_tac), t128), t129), t130), t131), @tactics.strip_tac), t132), t133), t134), t135), t136), t137), @calc_rat.real_arith_tac)
-  cases_quick_c.set(@tactics.prove(@parser.parse_term("forall q a b c:real^N.\n        collinear {q,a,b,c} /\\ between b (a,c)\n        ==> between b (q,a) \\/ between b (q,c)"), t138))
+  cases_quick_c.set(@tactics.prove(@parser.parse_term("∀ q a b c:real^N.\n        collinear {q,a,b,c} /\\ between b (a,c)\n        ==> between b (q,a) \\/ between b (q,c)"), t138))
 }
 
 ///|
@@ -224,7 +224,7 @@ fn step_3() -> Unit raise {
     }
   })
   let t156 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t142), t155)
-  cases_lemma_c.set(@tactics.prove(@parser.parse_term("forall q a b c:real^N.\n        collinear {q,a,b,c}\n        ==> between a (q,b) \\/ between a (q,c) \\/\n            between b (q,c) \\/ between b (q,a) \\/\n            between c (q,a) \\/ between c (q,b)"), t156))
+  cases_lemma_c.set(@tactics.prove(@parser.parse_term("∀ q a b c:real^N.\n        collinear {q,a,b,c}\n        ==> between a (q,b) \\/ between a (q,c) \\/\n            between b (q,c) \\/ between b (q,a) \\/\n            between c (q,a) \\/ between c (q,b)"), t156))
 }
 
 ///|
@@ -404,9 +404,9 @@ fn step_4() -> Unit raise {
     ((x178 : @kernel.Thm) => @tactics.x_choose_tac(t177, x178))(t180(x181))
   })
   let t176 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dist_nz())]))
-  let t208 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | x IN s /\\ P x} = {} <=> forall x. x IN s ==> ~P x"))])), t176), t182), t189), t190), t194), t200), @tactics.disch_tac), t201), t202), t203), t204), t205), t206), @tactics.strip_tac), t207), @tactics.all_tac])
+  let t208 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | x IN s /\\ P x} = {} <=> ∀ x. x IN s ==> ~P x"))])), t176), t182), t189), t190), t194), t200), @tactics.disch_tac), t201), t202), t203), t204), t205), t206), @tactics.strip_tac), t207), @tactics.all_tac])
   let t175 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(p ==> r) /\\ (q ==> r) ==> (~p ==> q) ==> r")))
-  let t174 = @simp.asm_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f x y | x IN s /\\ y IN t x} = {} <=>\n    s = {} \\/ (forall x. x IN s ==> t x = {})"))]))
+  let t174 = @simp.asm_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f x y | x IN s /\\ y IN t x} = {} <=>\n    s = {} \\/ (∀ x. x IN s ==> t x = {})"))]))
   let t173 = @simp.asm_simp_tac(@list.List([@sets.finite_product_dependent(), @sets.finite_restrict()]))
   let t172 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("{ dist(closest_point l p,p) |\n      l IN L /\\ p IN {p:real^2 | p IN s /\\ &0 < dist(closest_point l p,p)}}"), @sets.inf_finite()))
   let t170 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -427,7 +427,7 @@ fn step_4() -> Unit raise {
   let t158 = @class.asm_cases_tac(@parser.parse_term("?a:real^2. s = {a}"))
   let t157 = @simp.asm_rewrite_tac(@list.List([@vectors.collinear_empty()]))
   let t317 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("s:real^2->bool = {}"))), t157), t158), t159), t160), t164), t167), t168), t171), t172), t173), t174), t175), @tactics.conj_tac), t208), t209), t211), @tactics.disch_tac), t212), t217), t223), t224), @tactics.disch_tac), t225), @tactics.disch_tac), t227), t228), @tactics.disch_tac), t232), t233), t234), t263), t267), t268), t272), t273), t277), t278), @tactics.ants_tac), t316)
-  sylvester_gallai_c.set(@tactics.prove(@parser.parse_term("forall s:real^2->bool.\n        FINITE s /\\\n        (forall a b. a IN s /\\ b IN s /\\ ~(a = b)\n               ==> ?c. c IN s /\\ ~(c = a) /\\ ~(c = b) /\\ collinear {a,b,c})\n        ==> collinear s"), t317))
+  sylvester_gallai_c.set(@tactics.prove(@parser.parse_term("∀ s:real^2->bool.\n        FINITE s /\\\n        (∀ a b. a IN s /\\ b IN s /\\ ~(a = b)\n               ==> ?c. c IN s /\\ ~(c = a) /\\ ~(c = b) /\\ collinear {a,b,c})\n        ==> collinear s"), t317))
 }
 
 ///|

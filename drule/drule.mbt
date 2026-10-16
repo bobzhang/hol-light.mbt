@@ -1246,7 +1246,7 @@ pub fn new_definition(tm : Term) -> Thm raise {
 fn load_steps() -> Unit raise {
   mk_conj_andtm.set(q("(/\\)"))
   mk_disj_ortm.set(q("(\\/)"))
-  mk_forall_atm.set(@kernel.mk_const("forall", @list.List([])))
+  mk_forall_atm.set(@kernel.mk_const("∀", @list.List([])))
   mk_exists_atm.set(@kernel.mk_const("?", @list.List([])))
   // `term_match`'s dummy variable name.
   dummy_name.set(@kernel.dest_var(@basics.genvar(@kernel.aty)).0)

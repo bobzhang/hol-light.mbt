@@ -163,6 +163,23 @@ fn byte_char(v : Int) -> String {
 }
 
 ///|
+let universal_encoding : Bytes = @utf8.encode("∀")
+
+///|
+/// Recognize the canonical binder without changing byte-oriented literals.
+fn starts_with_universal(chars : ArrayView[Char]) -> Bool {
+  if chars.length() < universal_encoding.length() {
+    return false
+  }
+  for i, b in universal_encoding {
+    if chars[i].to_int() != b.to_int() {
+      return false
+    }
+  }
+  true
+}
+
+///|
 /// A raw token at `i`: string literal, bracket, separator run or
 /// identifier.
 fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
@@ -174,6 +191,9 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
       Some((s, j)) => return Some((Ident(s), j))
       None => ()
     }
+  }
+  if starts_with_universal(chars[i:]) {
+    return Some((Ident("∀"), i + universal_encoding.length()))
   }
   if is_class(@printer.isbra, chars[i]) {
     return Some((Ident(char_str(chars[i])), i + 1))
@@ -208,7 +228,8 @@ fn skip_spaces(chars : Array[Char], i : Int) -> Int {
 ///|
 /// Split a string into HOL tokens. As upstream, the input is processed as
 /// bytes (its UTF-8 encoding), one character per byte, so string literals
-/// carry exactly OCaml's bytes; non-ASCII bytes never form identifiers.
+/// carry exactly OCaml's bytes. The universal binder is a standalone Unicode
+/// token; other non-ASCII bytes do not form identifiers.
 pub fn lex(s : String) -> Array[Lexcode] raise {
   let chars : Array[Char] = [
     for b in @utf8.encode(s) => b.to_int().unsafe_to_char()
@@ -228,8 +249,8 @@ pub fn lex(s : String) -> Array[Lexcode] raise {
       }
       i = m
     } else {
-      if tok is (Ident("!") | Resword("!")) {
-        raise Failure("'!' notation has been removed; use 'forall'")
+      if tok is (Ident("!" | "forall") | Resword("!" | "forall")) {
+        raise Failure("The universal binder is ∀")
       }
       toks.push(tok)
       i = k

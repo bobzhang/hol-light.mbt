@@ -36,7 +36,7 @@ fn step_1() -> Unit raise {
   })
   let t1 = @tactics.repeat_tac(@tactics.strip_tac)
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@floor.rational()])), t1), t8), t9), t10), t14), t15), t21), @tactics.ants_tac), t22), t23), t24)
-  irrational_sqrt_nonsquare_c.set(@tactics.prove(@parser.parse_term("forall n. rational(sqrt(&n)) ==> ?m. n = m EXP 2"), t25))
+  irrational_sqrt_nonsquare_c.set(@tactics.prove(@parser.parse_term("∀ n. rational(sqrt(&n)) ==> ?m. n = m EXP 2"), t25))
 }
 
 ///|
@@ -64,7 +64,7 @@ fn step_2() -> Unit raise {
   })
   let t26 = @simp.rewrite_tac(@list.List([]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@class.contrapos_thm())]))), t26), t33), t34)
-  irrational_sqrt_prime_c.set(@tactics.prove(@parser.parse_term("forall p. prime p ==> ~rational(sqrt(&p))"), t35))
+  irrational_sqrt_prime_c.set(@tactics.prove(@parser.parse_term("∀ p. prime p ==> ~rational(sqrt(&p))"), t35))
 }
 
 ///|

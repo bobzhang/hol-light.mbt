@@ -251,7 +251,7 @@ fn step_6() -> Unit raise {
   let t27 = @parser.parse_term("x:real")
   let t28 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("n:num"), t27]))
   let t67 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.poly(), @poly.poly_diff_aux(), @analysis.real_mul_rzero(), @analysis.diff_const()]))), t28), t29), t31), t39), t47), t66)
-  poly_diff_lemma_c.set(@tactics.prove(@parser.parse_term("forall l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)"), t67))
+  poly_diff_lemma_c.set(@tactics.prove(@parser.parse_term("∀ l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)"), t67))
 }
 
 ///|
@@ -296,7 +296,7 @@ fn step_7() -> Unit raise {
   let t69 = @simp.rewrite_tac(@list.List([@poly.poly(), @analysis.diff_const()]))
   let t68 = @simp.once_rewrite_tac(@list.List([@equal.sym(@class.eta_conv(@parser.parse_term("\\x. poly l x")))]))
   let t92 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([poly_diff_clauses()]))), t68), t69), t70), t73), t74), t75), t76), t84), t90), @tactics.beta_tac), t91)
-  poly_diff_c.set(@tactics.prove(@parser.parse_term("forall l x. ((\\x. poly l x) diffl (poly (poly_diff l) x))(x)"), t92))
+  poly_diff_c.set(@tactics.prove(@parser.parse_term("∀ l x. ((\\x. poly l x) diffl (poly (poly_diff l) x))(x)"), t92))
 }
 
 ///|
@@ -1089,7 +1089,7 @@ pub fn poly_deriv_conv(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @kern
 ///|
 /// lt_lem
 fn step_27() -> Unit raise {
-  lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. x < y <=> x - y < &0"), @list.List([@calc_rat.real_arith_tac])))
+  lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y. x < y <=> x - y < &0"), @list.List([@calc_rat.real_arith_tac])))
 }
 
 ///|
@@ -1104,7 +1104,7 @@ pub fn lt_lem() -> @kernel.Thm {
 ///|
 /// le_lem
 fn step_28() -> Unit raise {
-  le_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. x <= y <=> x - y <= &0"), @list.List([@calc_rat.real_arith_tac])))
+  le_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y. x <= y <=> x - y <= &0"), @list.List([@calc_rat.real_arith_tac])))
 }
 
 ///|
@@ -1119,7 +1119,7 @@ pub fn le_lem() -> @kernel.Thm {
 ///|
 /// eq_lem
 fn step_29() -> Unit raise {
-  eq_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. (x = y) <=> (x - y = &0)"), @list.List([@calc_rat.real_arith_tac])))
+  eq_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y. (x = y) <=> (x - y = &0)"), @list.List([@calc_rat.real_arith_tac])))
 }
 
 ///|
@@ -1199,7 +1199,7 @@ fn step_30() -> Unit raise {
   let t246 = @simp.rewrite_tac(@list.List([@realax.real_pow()]))
   let t247 = @simp.rewrite_tac(@list.List([@realax.real_pow()]))
   let t248 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), @nums.induct_tac), t247, @rewrites.num_simp_tac, @rewrites.real_simp_tac, t246, t245, t244, t243, @calc_rat.real_arith_tac])
-  pow_prod_sum_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x n m. (x pow n) * x pow m = x pow (n + m)"), t248))
+  pow_prod_sum_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x n m. (x pow n) * x pow m = x pow (n + m)"), t248))
 }
 
 ///|
@@ -1244,7 +1244,7 @@ pub fn lem2() -> @kernel.Thm {
 ///|
 /// lem3
 fn step_33() -> Unit raise {
-  lem3_c.set(@calc_rat.real_arith(@parser.parse_term("forall x. x = x pow 1")))
+  lem3_c.set(@calc_rat.real_arith(@parser.parse_term("∀ x. x = x pow 1")))
 }
 
 ///|

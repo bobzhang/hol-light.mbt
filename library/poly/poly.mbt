@@ -100,7 +100,7 @@ fn step_10() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   poly_const_c.set(
-    @tactics.prove(@parser.parse_term("forall c x. poly [c] x = c"), t8),
+    @tactics.prove(@parser.parse_term("∀ c x. poly [c] x = c"), t8),
   )
 }
 
@@ -121,7 +121,7 @@ fn step_11() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   poly_x_c.set(
-    @tactics.prove(@parser.parse_term("forall c x. poly [&0; &1] x = x"), t9),
+    @tactics.prove(@parser.parse_term("∀ c x. poly [&0; &1] x = x"), t9),
   )
 }
 
@@ -281,7 +281,7 @@ fn step_19() -> Unit raise {
   )
   length_poly_diff_aux_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l n. LENGTH(poly_diff_aux n l) = LENGTH l"),
+      @parser.parse_term("∀ l n. LENGTH(poly_diff_aux n l) = LENGTH l"),
       t15,
     ),
   )
@@ -316,7 +316,7 @@ fn step_20() -> Unit raise {
   )
   length_poly_diff_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l. LENGTH(poly_diff l) = PRE(LENGTH l)"),
+      @parser.parse_term("∀ l. LENGTH(poly_diff l) = PRE(LENGTH l)"),
       t16,
     ),
   )
@@ -521,7 +521,7 @@ fn step_26() -> Unit raise {
   )
   poly_add_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x"),
+      @parser.parse_term("∀ p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x"),
       t26,
     ),
   )
@@ -548,7 +548,7 @@ fn step_27() -> Unit raise {
   )
   poly_cmul_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p c x. poly (c ## p) x = c * poly p x"),
+      @parser.parse_term("∀ p c x. poly (c ## p) x = c * poly p x"),
       t27,
     ),
   )
@@ -572,7 +572,7 @@ fn step_28() -> Unit raise {
   )
   poly_neg_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p x. poly (neg p) x = --(poly p x)"),
+      @parser.parse_term("∀ p x. poly (neg p) x = --(poly p x)"),
       t28,
     ),
   )
@@ -642,7 +642,7 @@ fn step_29() -> Unit raise {
   )
   poly_mul_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x"),
+      @parser.parse_term("∀ x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x"),
       t36,
     ),
   )
@@ -676,7 +676,7 @@ fn step_30() -> Unit raise {
   )
   poly_exp_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p n x. poly (p exp n) x = (poly p x) pow n"),
+      @parser.parse_term("∀ p n x. poly (p exp n) x = (poly p x) pow n"),
       t39,
     ),
   )
@@ -1087,7 +1087,7 @@ fn step_31() -> Unit raise {
   poly_diff_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)",
+        "∀ l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)",
       ),
       t80,
     ),
@@ -1315,7 +1315,7 @@ fn step_32() -> Unit raise {
   )
   poly_diff_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l x. ((\\x. poly l x) diffl (poly (diff l) x))(x)"),
+      @parser.parse_term("∀ l x. ((\\x. poly l x) diffl (poly (diff l) x))(x)"),
       t105,
     ),
   )
@@ -1345,7 +1345,7 @@ fn step_33() -> Unit raise {
   )
   poly_differentiable_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l x. (\\x. poly l x) differentiable x"),
+      @parser.parse_term("∀ l x. (\\x. poly l x) differentiable x"),
       t109,
     ),
   )
@@ -1376,7 +1376,7 @@ fn step_34() -> Unit raise {
     t112,
   )
   poly_cont_c.set(
-    @tactics.prove(@parser.parse_term("forall l x. (\\x. poly l x) contl x"), t113),
+    @tactics.prove(@parser.parse_term("∀ l x. (\\x. poly l x) contl x"), t113),
   )
 }
 
@@ -1617,7 +1617,7 @@ fn step_35() -> Unit raise {
   poly_ivt_pos_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a b. a < b /\\ poly p a < &0 /\\ poly p b > &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)",
+        "∀ p a b. a < b /\\ poly p a < &0 /\\ poly p b > &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)",
       ),
       t139,
     ),
@@ -1735,7 +1735,7 @@ fn step_36() -> Unit raise {
   poly_ivt_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a b. a < b /\\ poly p a > &0 /\\ poly p b < &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)",
+        "∀ p a b. a < b /\\ poly p a > &0 /\\ poly p b < &0\n           ==> ?x. a < x /\\ x < b /\\ (poly p x = &0)",
       ),
       t151,
     ),
@@ -1870,7 +1870,7 @@ fn step_37() -> Unit raise {
   poly_mvt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a b. a < b ==>\n           ?x. a < x /\\ x < b /\\\n              (poly p b - poly p a = (b - a) * poly (diff p) x)",
+        "∀ p a b. a < b ==>\n           ?x. a < x /\\ x < b /\\\n              (poly p b - poly p a = (b - a) * poly (diff p) x)",
       ),
       t171,
     ),
@@ -2272,7 +2272,7 @@ fn step_38() -> Unit raise {
   poly_mvt_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a x. ?y. abs(y) <= abs(x) /\\\n               (poly p (a + x) = poly p a + x * poly (diff p) (a + y))",
+        "∀ p a x. ?y. abs(y) <= abs(x) /\\\n               (poly p (a + x) = poly p a + x * poly (diff p) (a + y))",
       ),
       t215,
     ),
@@ -2300,7 +2300,7 @@ fn step_39() -> Unit raise {
     ]),
   )
   poly_add_rzero_c.set(
-    @tactics.prove(@parser.parse_term("forall p. poly (p ++ []) = poly p"), t216),
+    @tactics.prove(@parser.parse_term("∀ p. poly (p ++ []) = poly p"), t216),
   )
 }
 
@@ -2321,7 +2321,7 @@ fn step_40() -> Unit raise {
   )
   poly_mul_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)"),
+      @parser.parse_term("∀ p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)"),
       t217,
     ),
   )
@@ -2355,7 +2355,7 @@ fn step_41() -> Unit raise {
   poly_exp_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)",
+        "∀ d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)",
       ),
       t219,
     ),
@@ -2399,7 +2399,7 @@ fn step_42() -> Unit raise {
   poly_diff_aux_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2 n. poly (poly_diff_aux n (p1 ++ p2)) =\n             poly (poly_diff_aux n p1 ++ poly_diff_aux n p2)",
+        "∀ p1 p2 n. poly (poly_diff_aux n (p1 ++ p2)) =\n             poly (poly_diff_aux n p1 ++ poly_diff_aux n p2)",
       ),
       t221,
     ),
@@ -2435,7 +2435,7 @@ fn step_43() -> Unit raise {
   poly_diff_aux_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p c n. poly (poly_diff_aux n (c ## p)) =\n           poly (c ## poly_diff_aux n p)",
+        "∀ p c n. poly (poly_diff_aux n (c ## p)) =\n           poly (c ## poly_diff_aux n p)",
       ),
       t222,
     ),
@@ -2460,7 +2460,7 @@ fn step_44() -> Unit raise {
   poly_diff_aux_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p n.  poly (poly_diff_aux n (neg p)) =\n          poly (neg (poly_diff_aux n p))",
+        "∀ p n.  poly (poly_diff_aux n (neg p)) =\n          poly (neg (poly_diff_aux n p))",
       ),
       t223,
     ),
@@ -2506,7 +2506,7 @@ fn step_45() -> Unit raise {
   poly_diff_aux_mul_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p n. poly (poly_diff_aux (SUC n) p) = poly (poly_diff_aux n p ++ p)",
+        "∀ p n. poly (poly_diff_aux (SUC n) p) = poly (poly_diff_aux n p ++ p)",
       ),
       t226,
     ),
@@ -2545,7 +2545,7 @@ fn step_46() -> Unit raise {
   poly_diff_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2. poly (diff (p1 ++ p2)) =\n           poly (diff p1  ++ diff p2)",
+        "∀ p1 p2. poly (diff (p1 ++ p2)) =\n           poly (diff p1  ++ diff p2)",
       ),
       t229,
     ),
@@ -2581,7 +2581,7 @@ fn step_47() -> Unit raise {
   )
   poly_diff_cmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p c. poly (diff (c ## p)) = poly (c ## diff p)"),
+      @parser.parse_term("∀ p c. poly (diff (c ## p)) = poly (c ## diff p)"),
       t231,
     ),
   )
@@ -2602,7 +2602,7 @@ fn step_48() -> Unit raise {
   let t232 = @simp.rewrite_tac(@list.List([poly_neg(), poly_diff_cmul()]))
   poly_diff_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. poly (diff (neg p)) = poly (neg (diff p))"),
+      @parser.parse_term("∀ p. poly (diff (neg p)) = poly (neg (diff p))"),
       t232,
     ),
   )
@@ -2664,7 +2664,7 @@ fn step_49() -> Unit raise {
   poly_diff_mul_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall t h. poly (diff (CONS h t)) =\n         poly (CONS (&0) (diff t) ++ t)",
+        "∀ t h. poly (diff (CONS h t)) =\n         poly (CONS (&0) (diff t) ++ t)",
       ),
       t236,
     ),
@@ -2743,7 +2743,7 @@ fn step_50() -> Unit raise {
   poly_diff_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2. poly (diff (p1 ** p2)) =\n           poly (p1 ** diff p2 ++ diff p1 ** p2)",
+        "∀ p1 p2. poly (diff (p1 ** p2)) =\n           poly (p1 ** diff p2 ++ diff p1 ** p2)",
       ),
       t244,
     ),
@@ -2827,7 +2827,7 @@ fn step_51() -> Unit raise {
   poly_diff_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p n. poly (diff (p exp (SUC n))) =\n         poly ((&(SUC n) ## (p exp n)) ** diff p)",
+        "∀ p n. poly (diff (p exp (SUC n))) =\n         poly ((&(SUC n) ## (p exp n)) ** diff p)",
       ),
       t253,
     ),
@@ -2873,7 +2873,7 @@ fn step_52() -> Unit raise {
   poly_diff_exp_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a. poly (diff ([--a; &1] exp (SUC n))) =\n         poly (&(SUC n) ## ([--a; &1] exp n))",
+        "∀ n a. poly (diff ([--a; &1] exp (SUC n))) =\n         poly (&(SUC n) ## ([--a; &1] exp n))",
       ),
       t258,
     ),
@@ -3001,7 +3001,7 @@ fn step_53() -> Unit raise {
   )
   poly_linear_rem_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t h. ?q r. CONS h t = [r] ++ [--a; &1] ** q"),
+      @parser.parse_term("∀ t h. ?q r. CONS h t = [r] ++ [--a; &1] ** q"),
       t277,
     ),
   )
@@ -3209,7 +3209,7 @@ fn step_54() -> Unit raise {
   poly_linear_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a p. (poly p a = &0) <=> (p = []) \\/ ?q. p = [--a; &1] ** q",
+        "∀ a p. (poly p a = &0) <=> (p = []) \\/ ?q. p = [--a; &1] ** q",
       ),
       t305,
     ),
@@ -3238,7 +3238,7 @@ fn step_55() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)",
+      "∀ p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)",
     ),
     t306,
   )
@@ -3247,7 +3247,7 @@ fn step_55() -> Unit raise {
   )
   poly_length_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall q. LENGTH([--a; &1] ** q) = SUC(LENGTH q)"),
+      @parser.parse_term("∀ q. LENGTH([--a; &1] ** q) = SUC(LENGTH q)"),
       t307,
     ),
   )
@@ -3959,7 +3959,7 @@ fn step_56() -> Unit raise {
   poly_roots_index_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. forall p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. forall x. (poly p (x) = &0) ==> ?m. m <= n /\\ (x = i m)",
+        "∀ n. ∀ p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. ∀ x. (poly p (x) = &0) ==> ?m. m <= n /\\ (x = i m)",
       ),
       t384,
     ),
@@ -3984,7 +3984,7 @@ fn step_57() -> Unit raise {
   poly_roots_index_length_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. ~(poly p = poly [])\n       ==> ?i. forall x. (poly p(x) = &0) ==> ?n. n <= LENGTH p /\\ (x = i n)",
+        "∀ p. ~(poly p = poly [])\n       ==> ?i. ∀ x. (poly p(x) = &0) ==> ?n. n <= LENGTH p /\\ (x = i n)",
       ),
       t385,
     ),
@@ -4011,7 +4011,7 @@ fn step_58() -> Unit raise {
   poly_roots_finite_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. ~(poly p = poly [])\n       ==> ?N i. forall x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)",
+        "∀ p. ~(poly p = poly [])\n       ==> ?N i. ∀ x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)",
       ),
       t386,
     ),
@@ -4035,11 +4035,11 @@ fn step_59() -> Unit raise {
   let t408 = @meson.meson_tac(@list.List([]))
   let t407 = @tactics.mp_tac(
     @calc_rat.real_arith(
-      @parser.parse_term("forall u v x. x < v ==> x < abs(v) + abs(u) + &1"),
+      @parser.parse_term("∀ u v x. x < v ==> x < abs(v) + abs(u) + &1"),
     ),
   )
   let t406 = @tactics.mp_tac(
-    @calc_rat.real_arith(@parser.parse_term("forall x v. x < abs(v) + abs(x) + &1")),
+    @calc_rat.real_arith(@parser.parse_term("∀ x v. x < abs(v) + abs(x) + &1")),
   )
   let t405 = @simp.rewrite_tac(@list.List([@arith.lt()]))
   let t404 = @tactics.pop_assum(fn(
@@ -4212,7 +4212,7 @@ fn step_59() -> Unit raise {
   finite_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall i N P. (forall x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. forall x. P x ==> x < a",
+        "∀ i N P. (∀ x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. ∀ x. P x ==> x < a",
       ),
       t409,
     ),
@@ -4271,7 +4271,7 @@ fn step_60() -> Unit raise {
   poly_roots_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. ~(poly p = poly []) <=>\n       ?N i. forall x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)",
+        "∀ p. ~(poly p = poly []) <=>\n       ?N i. ∀ x. (poly p(x) = &0) ==> ?n:num. n < N /\\ (x = i n)",
       ),
       t419,
     ),
@@ -4502,7 +4502,7 @@ fn step_61() -> Unit raise {
   poly_entire_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])",
+        "∀ p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])",
       ),
       t448,
     ),
@@ -4544,7 +4544,7 @@ fn step_62() -> Unit raise {
   poly_entire_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])",
+        "∀ p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])",
       ),
       t452,
     ),
@@ -4576,7 +4576,7 @@ fn step_63() -> Unit raise {
   )
   let lemma1 = @tactics.prove(
     @parser.parse_term(
-      "forall p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)",
+      "∀ p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)",
     ),
     t454,
   )
@@ -4593,7 +4593,7 @@ fn step_63() -> Unit raise {
   )
   let lemma2 = @tactics.prove(
     @parser.parse_term(
-      "forall p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))",
+      "∀ p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))",
     ),
     t455,
   )
@@ -4609,7 +4609,7 @@ fn step_63() -> Unit raise {
   poly_mul_lcancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)",
+        "∀ p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)",
       ),
       t458,
     ),
@@ -4677,7 +4677,7 @@ fn step_64() -> Unit raise {
   poly_exp_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)",
+        "∀ p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)",
       ),
       t466,
     ),
@@ -4776,7 +4776,7 @@ fn step_65() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   poly_prime_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall a. ~(poly [a ; &1] = poly [])"), t474),
+    @tactics.prove(@parser.parse_term("∀ a. ~(poly [a ; &1] = poly [])"), t474),
   )
 }
 
@@ -4797,7 +4797,7 @@ fn step_66() -> Unit raise {
   let t475 = @meson.meson_tac(@list.List([poly_exp_eq_0(), poly_prime_eq_0()]))
   poly_exp_prime_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a n. ~(poly ([a ; &1] exp n) = poly [])"),
+      @parser.parse_term("∀ a n. ~(poly ([a ; &1] exp n) = poly [])"),
       t475,
     ),
   )
@@ -4821,7 +4821,7 @@ fn step_67() -> Unit raise {
     poly_roots_finite(),
   )
   let t519 = @drule.match_mp(
-    @kernel.assume_rule(@parser.parse_term("forall x. (poly t x = &0) ==> x < a")),
+    @kernel.assume_rule(@parser.parse_term("∀ x. (poly t x = &0) ==> x < a")),
   )
   let t521 = @list.List([
     @calc_rat.real_arith_tac,
@@ -5232,7 +5232,7 @@ fn step_67() -> Unit raise {
   poly_zero_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall h t. (poly (CONS h t) = poly []) ==> (h = &0) /\\ (poly t = poly [])",
+        "∀ h t. (poly (CONS h t) = poly []) ==> (h = &0) /\\ (poly t = poly [])",
       ),
       t522,
     ),
@@ -5419,7 +5419,7 @@ fn step_68() -> Unit raise {
   )
   poly_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. (poly p = poly []) <=> ALL (\\c. c = &0) p"),
+      @parser.parse_term("∀ p. (poly p = poly []) <=> ALL (\\c. c = &0) p"),
       t536,
     ),
   )
@@ -5452,7 +5452,7 @@ fn step_69() -> Unit raise {
   poly_diff_aux_iszero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p n. ALL (\\c. c = &0) (poly_diff_aux (SUC n) p) <=>\n         ALL (\\c. c = &0) p",
+        "∀ p n. ALL (\\c. c = &0) (poly_diff_aux (SUC n) p) <=>\n         ALL (\\c. c = &0) p",
       ),
       t537,
     ),
@@ -5518,7 +5518,7 @@ fn step_70() -> Unit raise {
   poly_diff_iszero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. (poly (diff p) = poly []) ==> ?h. poly p = poly [h]",
+        "∀ p. (poly (diff p) = poly []) ==> ?h. poly p = poly [h]",
       ),
       t545,
     ),
@@ -5711,7 +5711,7 @@ fn step_71() -> Unit raise {
   )
   poly_diff_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. (poly p = poly []) ==> (poly (diff p) = poly [])"),
+      @parser.parse_term("∀ p. (poly p = poly []) ==> (poly (diff p) = poly [])"),
       t566,
     ),
   )
@@ -5765,7 +5765,7 @@ fn step_72() -> Unit raise {
   poly_diff_welldef_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q. (poly p = poly q) ==> (poly (diff p) = poly (diff q))",
+        "∀ p q. (poly p = poly q) ==> (poly (diff p) = poly (diff q))",
       ),
       t571,
     ),
@@ -6147,7 +6147,7 @@ fn step_74() -> Unit raise {
   poly_primes_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a p q. [a; &1] divides (p ** q) <=>\n          [a; &1] divides p \\/ [a; &1] divides q",
+        "∀ a p q. [a; &1] divides (p ** q) <=>\n          [a; &1] divides p \\/ [a; &1] divides q",
       ),
       t608,
     ),
@@ -6184,7 +6184,7 @@ fn step_75() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   poly_divides_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall p. p divides p"), t611),
+    @tactics.prove(@parser.parse_term("∀ p. p divides p"), t611),
   )
 }
 
@@ -6369,7 +6369,7 @@ fn step_76() -> Unit raise {
   )
   poly_divides_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p q r. p divides q /\\ q divides r ==> p divides r"),
+      @parser.parse_term("∀ p q r. p divides q /\\ q divides r ==> p divides r"),
       t627,
     ),
   )
@@ -6490,7 +6490,7 @@ fn step_77() -> Unit raise {
   )
   poly_divides_exp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p m n. m <= n ==> (p exp m) divides (p exp n)"),
+      @parser.parse_term("∀ p m n. m <= n ==> (p exp m) divides (p exp n)"),
       t642,
     ),
   )
@@ -6516,7 +6516,7 @@ fn step_78() -> Unit raise {
   poly_exp_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q",
+        "∀ p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q",
       ),
       t643,
     ),
@@ -6708,7 +6708,7 @@ fn step_79() -> Unit raise {
   poly_divides_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q r. p divides q /\\ p divides r ==> p divides (q ++ r)",
+        "∀ p q r. p divides q /\\ p divides r ==> p divides (q ++ r)",
       ),
       t659,
     ),
@@ -7019,7 +7019,7 @@ fn step_80() -> Unit raise {
   poly_divides_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q r. p divides q /\\ p divides (q ++ r) ==> p divides r",
+        "∀ p q r. p divides q /\\ p divides (q ++ r) ==> p divides r",
       ),
       t685,
     ),
@@ -7156,7 +7156,7 @@ fn step_81() -> Unit raise {
   poly_divides_sub2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q r. p divides r /\\ p divides (q ++ r) ==> p divides q",
+        "∀ p q r. p divides r /\\ p divides (q ++ r) ==> p divides q",
       ),
       t703,
     ),
@@ -7202,7 +7202,7 @@ fn step_82() -> Unit raise {
   )
   poly_divides_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p q. (poly p = poly []) ==> q divides p"),
+      @parser.parse_term("∀ p q. (poly p = poly []) ==> q divides p"),
       t707,
     ),
   )
@@ -7716,7 +7716,7 @@ fn step_83() -> Unit raise {
   })
   let t732 = @tactics.undisch_tac(
     @parser.parse_term(
-      "forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                      ~(poly q a = &0)",
+      "∀ p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                      ~(poly q a = &0)",
     ),
   )
   let t731 = @tactics.disch_then(
@@ -7957,7 +7957,7 @@ fn step_83() -> Unit raise {
   ])
   let t713 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                     ~(poly q a = &0)",
+      "∀ d. ∀ p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; &1] q) /\\\n                     ~(poly q a = &0)",
     ),
     fn(
       x710 : @kernel.Thm,
@@ -8007,7 +8007,7 @@ fn step_83() -> Unit raise {
     },
   )
   let t708 = @parser.parse_term(
-    "(forall p q. mulexp 0 p q = q) /\\\n     (forall p q n. mulexp (SUC n) p q = p ** (mulexp n p q))",
+    "(∀ p q. mulexp 0 p q = q) /\\\n     (∀ p q n. mulexp (SUC n) p q = p ** (mulexp n p q))",
   )
   let t709 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t800 = @tactics.thenl(
@@ -8020,7 +8020,7 @@ fn step_83() -> Unit raise {
   poly_order_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; &1] exp n) divides p /\\\n                     ~(([--a; &1] exp (SUC n)) divides p)",
+        "∀ a d. ∀ p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; &1] exp n) divides p /\\\n                     ~(([--a; &1] exp (SUC n)) divides p)",
       ),
       t800,
     ),
@@ -8052,7 +8052,7 @@ fn step_84() -> Unit raise {
   poly_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; &1] exp n) divides p /\\\n                      ~(([--a; &1] exp (SUC n)) divides p)",
+        "∀ p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; &1] exp n) divides p /\\\n                      ~(([--a; &1] exp (SUC n)) divides p)",
       ),
       t801,
     ),
@@ -8356,7 +8356,7 @@ fn step_86() -> Unit raise {
   order_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a n. ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])",
+        "∀ p a n. ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])",
       ),
       t831,
     ),
@@ -8379,7 +8379,7 @@ fn step_87() -> Unit raise {
   order_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. ~(poly p = poly [])\n         ==> ([--a; &1] exp (order a p)) divides p /\\\n             ~(([--a; &1] exp (SUC(order a p))) divides p)",
+        "∀ p a. ~(poly p = poly [])\n         ==> ([--a; &1] exp (order a p)) divides p /\\\n             ~(([--a; &1] exp (SUC(order a p))) divides p)",
       ),
       t832,
     ),
@@ -8402,7 +8402,7 @@ fn step_88() -> Unit raise {
   order_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a n. ~(poly p = poly []) /\\\n           ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p)\n           ==> (n = order a p)",
+        "∀ p a n. ~(poly p = poly []) /\\\n           ([--a; &1] exp n) divides p /\\\n           ~(([--a; &1] exp (SUC n)) divides p)\n           ==> (n = order a p)",
       ),
       t833,
     ),
@@ -8428,7 +8428,7 @@ fn step_89() -> Unit raise {
   order_poly_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q a. (poly p = poly q) ==> (order a p = order a q)",
+        "∀ p q a. (poly p = poly q) ==> (order a p = order a q)",
       ),
       t835,
     ),
@@ -9020,7 +9020,7 @@ fn step_90() -> Unit raise {
   order_root_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. (poly p a = &0) <=> (poly p = poly []) \\/ ~(order a p = 0)",
+        "∀ p a. (poly p a = &0) <=> (poly p = poly []) \\/ ~(order a p = 0)",
       ),
       t888,
     ),
@@ -9075,7 +9075,7 @@ fn step_91() -> Unit raise {
   order_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a n. ([--a; &1] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p",
+        "∀ p a n. ([--a; &1] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p",
       ),
       t895,
     ),
@@ -9382,7 +9382,7 @@ fn step_92() -> Unit raise {
   order_decomp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; &1] exp (order a p)) ** q)) /\\\n                 ~([--a; &1] divides q)",
+        "∀ p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; &1] exp (order a p)) ** q)) /\\\n                 ~([--a; &1] divides q)",
       ),
       t930,
     ),
@@ -9934,7 +9934,7 @@ fn step_93() -> Unit raise {
   order_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)",
+        "∀ a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)",
       ),
       t999,
     ),
@@ -10098,7 +10098,7 @@ fn step_94() -> Unit raise {
   ])
   let t1056 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall a b c. &(SUC n) * a * b * inv(&(SUC n)) * c =\n                          a * b * c",
+      "∀ a b c. &(SUC n) * a * b * inv(&(SUC n)) * c =\n                          a * b * c",
     ),
     fn(
       x1054 : @kernel.Thm,
@@ -10137,7 +10137,7 @@ fn step_94() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1051 = @tactics.subgoal_then(
-    @parser.parse_term("forall a b. (&(SUC n) * a = &(SUC n) * b) ==> (a = b)"),
+    @parser.parse_term("∀ a b. (&(SUC n) * a = &(SUC n) * b) ==> (a = b)"),
     @tactics.match_mp_tac,
   )
   let t1050 = @tactics.x_gen_tac(@parser.parse_term("x:real"))
@@ -10376,7 +10376,7 @@ fn step_94() -> Unit raise {
   ])
   let t1029 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall r. r divides (diff p) <=>\n                    r divides (diff ([-- a; &1] exp SUC n ** q))",
+      "∀ r. r divides (diff p) <=>\n                    r divides (diff ([-- a; &1] exp SUC n ** q))",
     ),
     fn(
       x1027 : @kernel.Thm,
@@ -10693,7 +10693,7 @@ fn step_94() -> Unit raise {
   order_diff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. ~(poly (diff p) = poly []) /\\\n         ~(order a p = 0)\n         ==> (order a p = SUC (order a (diff p)))",
+        "∀ p a. ~(poly (diff p) = poly []) /\\\n         ~(order a p = 0)\n         ==> (order a p = SUC (order a (diff p)))",
       ),
       t1084,
     ),
@@ -11497,7 +11497,7 @@ fn step_95() -> Unit raise {
   poly_squarefree_decomp_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> forall a. order a q = (if order a p = 0 then 0 else 1)",
+        "∀ p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> ∀ a. order a q = (if order a p = 0 then 0 else 1)",
       ),
       t1167,
     ),
@@ -11521,7 +11521,7 @@ fn step_96() -> Unit raise {
   rsquarefree_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "rsquarefree p <=> ~(poly p = poly []) /\\\n                     forall a. (order a p = 0) \\/ (order a p = 1)",
+        "rsquarefree p <=> ~(poly p = poly []) /\\\n                     ∀ a. (order a p = 0) \\/ (order a p = 1)",
       ),
     ),
   )
@@ -11840,7 +11840,7 @@ fn step_97() -> Unit raise {
   rsquarefree_roots_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. rsquarefree p <=> forall a. ~((poly p a = &0) /\\ (poly (diff p) a = &0))",
+        "∀ p. rsquarefree p <=> ∀ a. ~((poly p a = &0) /\\ (poly (diff p) a = &0))",
       ),
       t1203,
     ),
@@ -12354,7 +12354,7 @@ fn step_98() -> Unit raise {
   rsquarefree_decomp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p a. rsquarefree p /\\ (poly p a = &0)\n         ==> ?q. (poly p = poly ([--a; &1] ** q)) /\\\n                 ~(poly q a = &0)",
+        "∀ p a. rsquarefree p /\\ (poly p a = &0)\n         ==> ?q. (poly p = poly ([--a; &1] ** q)) /\\\n                 ~(poly q a = &0)",
       ),
       t1268,
     ),
@@ -12800,7 +12800,7 @@ fn step_99() -> Unit raise {
   poly_squarefree_decomp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> rsquarefree q /\\ (forall a. (poly q a = &0) <=> (poly p a = &0))",
+        "∀ p q d e r s.\n        ~(poly (diff p) = poly []) /\\\n        (poly p = poly (q ** d)) /\\\n        (poly (diff p) = poly (e ** d)) /\\\n        (poly d = poly (r ** p ++ s ** diff p))\n        ==> rsquarefree q /\\ (∀ a. (poly q a = &0) <=> (poly p a = &0))",
       ),
       t1309,
     ),
@@ -12948,7 +12948,7 @@ fn step_101() -> Unit raise {
     t1321,
   )
   poly_normalize_c.set(
-    @tactics.prove(@parser.parse_term("forall p. poly (normalize p) = poly p"), t1322),
+    @tactics.prove(@parser.parse_term("∀ p. poly (normalize p) = poly p"), t1322),
   )
 }
 
@@ -13154,7 +13154,7 @@ fn step_103() -> Unit raise {
   )
   degree_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. (poly p = poly []) ==> (degree p = 0)"),
+      @parser.parse_term("∀ p. (poly p = poly []) ==> (degree p = 0)"),
       t1343,
     ),
   )
@@ -13452,7 +13452,7 @@ fn step_104() -> Unit raise {
   poly_roots_finite_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p. ~(poly p = poly []) ==> FINITE { x | poly p x = &0}",
+        "∀ p. ~(poly p = poly []) ==> FINITE { x | poly p x = &0}",
       ),
       t1371,
     ),
@@ -13526,7 +13526,7 @@ fn step_105() -> Unit raise {
   poly_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x k p. abs(x) <= k ==> abs(poly p x) <= poly (MAP abs p) k",
+        "∀ x k p. abs(x) <= k ==> abs(poly p x) <= poly (MAP abs p) k",
       ),
       t1380,
     ),
@@ -13827,7 +13827,7 @@ fn step_111() -> Unit raise {
   )
   not_poly_cmul_nil_c.set(
     @tactics.prove(
-      @parser.parse_term("forall h p. ~(p = []) ==> ~((h ## p) = [])"),
+      @parser.parse_term("∀ h p. ~(p = []) ==> ~((h ## p) = [])"),
       t1411,
     ),
   )
@@ -13877,7 +13877,7 @@ fn step_112() -> Unit raise {
   not_poly_mul_nil_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> ~((p1 ** p2) = [])",
+        "∀ p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> ~((p1 ** p2) = [])",
       ),
       t1418,
     ),
@@ -13899,7 +13899,7 @@ pub fn not_poly_mul_nil() -> @kernel.Thm {
 /// NOT_POLY_EXP_NIL
 fn step_113() -> Unit raise {
   let lem001 = @kernel.assume_rule(
-    @parser.parse_term("forall p . ~(p = []) ==> ~(poly_exp p n = [])"),
+    @parser.parse_term("∀ p . ~(p = []) ==> ~(poly_exp p n = [])"),
   )
   let t1419 = @bool.spec(@parser.parse_term("CONS (h:real) t"), lem001)
   let lem002 = @simp.simp_rule(@list.List([@lists.not_cons_nil()]))(t1419)
@@ -13919,7 +13919,7 @@ fn step_113() -> Unit raise {
   )
   not_poly_exp_nil_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n p . ~(p = []) ==> ~((poly_exp p n) = [])"),
+      @parser.parse_term("∀ n p . ~(p = []) ==> ~((poly_exp p n) = [])"),
       t1422,
     ),
   )
@@ -13953,7 +13953,7 @@ fn step_114() -> Unit raise {
   )
   not_poly_exp_x_nil_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. ~((poly_exp [&0;&1] n) = [])"),
+      @parser.parse_term("∀ n. ~((poly_exp [&0;&1] n) = [])"),
       t1425,
     ),
   )
@@ -13985,7 +13985,7 @@ fn step_115() -> Unit raise {
     @list.List([@simp.simp_tac(@list.List([poly_cmul()])), t1427]),
   )
   poly_cmul_lid_c.set(
-    @tactics.prove(@parser.parse_term("forall p. &1 ## p = p"), t1428),
+    @tactics.prove(@parser.parse_term("∀ p. &1 ## p = p"), t1428),
   )
 }
 
@@ -14011,7 +14011,7 @@ fn step_116() -> Unit raise {
     @list.List([@simp.simp_tac(@list.List([poly_mul(), poly_cmul()])), t1430]),
   )
   poly_mul_lid_c.set(
-    @tactics.prove(@parser.parse_term("forall p. [&1] ** p = p"), t1431),
+    @tactics.prove(@parser.parse_term("∀ p. [&1] ** p = p"), t1431),
   )
 }
 
@@ -14051,7 +14051,7 @@ fn step_117() -> Unit raise {
     @list.List([@simp.simp_tac(@list.List([poly_mul()])), t1434]),
   )
   poly_mul_rid_c.set(
-    @tactics.prove(@parser.parse_term("forall p. p ** [&1] = p"), t1435),
+    @tactics.prove(@parser.parse_term("∀ p. p ** [&1] = p"), t1435),
   )
 }
 
@@ -14067,7 +14067,7 @@ pub fn poly_mul_rid() -> @kernel.Thm {
 ///|
 /// POLY_ADD_SYM
 fn step_118() -> Unit raise {
-  let lem1 = @kernel.assume_rule(@parser.parse_term("forall y . t ++ y = y ++ t"))
+  let lem1 = @kernel.assume_rule(@parser.parse_term("∀ y . t ++ y = y ++ t"))
   let lem2 = @bool.spec(@parser.parse_term("t':(real)list"), lem1)
   let t1438 = @parser.parse_term("h':real")
   let t1439 = @simp.simp_tac(
@@ -14099,7 +14099,7 @@ fn step_118() -> Unit raise {
     ]),
   )
   poly_add_sym_c.set(
-    @tactics.prove(@parser.parse_term("forall x y . x ++ y = y ++ x"), t1442),
+    @tactics.prove(@parser.parse_term("∀ x y . x ++ y = y ++ x"), t1442),
   )
 }
 
@@ -14116,7 +14116,7 @@ pub fn poly_add_sym() -> @kernel.Thm {
 /// POLY_ADD_ASSOC
 fn step_119() -> Unit raise {
   let lem1 = @kernel.assume_rule(
-    @parser.parse_term("forall y z. t ++ y ++ z = (t ++ y) ++ z"),
+    @parser.parse_term("∀ y z. t ++ y ++ z = (t ++ y) ++ z"),
   )
   let t1443 = @parser.parse_term("t'':(real)list")
   let lem2 = @bool.specl(
@@ -14143,7 +14143,7 @@ fn step_119() -> Unit raise {
   )
   poly_add_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z . x ++ (y ++ z) = (x ++ y) ++ z"),
+      @parser.parse_term("∀ x y z . x ++ (y ++ z) = (x ++ y) ++ z"),
       t1449,
     ),
   )
@@ -14229,7 +14229,7 @@ fn step_120() -> Unit raise {
     ]),
   )
   tl_poly_mul_x_c.set(
-    @tactics.prove(@parser.parse_term("forall p. TL ([&0;&1] ** p) = p"), t1463),
+    @tactics.prove(@parser.parse_term("∀ p. TL ([&0;&1] ** p) = p"), t1463),
   )
 }
 
@@ -14259,7 +14259,7 @@ fn step_121() -> Unit raise {
     ),
   )
   hd_poly_mul_x_c.set(
-    @tactics.prove(@parser.parse_term("forall p. HD ([&0;&1] ** p) = &0"), t1464),
+    @tactics.prove(@parser.parse_term("∀ p. HD ([&0;&1] ** p) = &0"), t1464),
   )
 }
 
@@ -14279,7 +14279,7 @@ fn step_122() -> Unit raise {
   tl_poly_exp_x_suc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n . TL (poly_exp [&0;&1] (SUC n)) = poly_exp [&0;&1] n",
+        "∀ n . TL (poly_exp [&0;&1] (SUC n)) = poly_exp [&0;&1] n",
       ),
       t1465,
     ),
@@ -14321,7 +14321,7 @@ fn step_123() -> Unit raise {
   )
   hd_poly_exp_x_suc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n . HD (poly_exp [&0;&1] (SUC n)) = &0"),
+      @parser.parse_term("∀ n . HD (poly_exp [&0;&1] (SUC n)) = &0"),
       t1467,
     ),
   )
@@ -14369,7 +14369,7 @@ fn step_124() -> Unit raise {
   hd_poly_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> HD (p1 ++ p2) = (HD p1) + (HD p2)",
+        "∀ p1 p2. ~(p1 = []) /\\ ~(p2 = []) ==> HD (p1 ++ p2) = (HD p1) + (HD p2)",
       ),
       t1473,
     ),
@@ -14398,7 +14398,7 @@ fn step_125() -> Unit raise {
   )
   hd_poly_cmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x p . ~(p = []) ==> HD (x ## p) = x * (HD p)"),
+      @parser.parse_term("∀ x p . ~(p = []) ==> HD (x ## p) = x * (HD p)"),
       t1476,
     ),
   )
@@ -14426,7 +14426,7 @@ fn step_126() -> Unit raise {
   )
   tl_poly_cmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x p . ~(p = []) ==> TL (x ## p) = x ## (TL p)"),
+      @parser.parse_term("∀ x p . ~(p = []) ==> TL (x ## p) = x ## (TL p)"),
       t1479,
     ),
   )
@@ -14473,7 +14473,7 @@ fn step_127() -> Unit raise {
   hd_poly_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2 . ~(p1 = []) /\\ ~(p2 = [])  ==> HD (p1 ** p2) = (HD p1) * (HD p2)",
+        "∀ p1 p2 . ~(p1 = []) /\\ ~(p2 = [])  ==> HD (p1 ** p2) = (HD p1) * (HD p2)",
       ),
       t1485,
     ),
@@ -14560,7 +14560,7 @@ fn step_128() -> Unit raise {
   hd_poly_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n p . ~(p = []) ==> HD (poly_exp p n) = (HD p) pow n",
+        "∀ n p . ~(p = []) ==> HD (poly_exp p n) = (HD p) pow n",
       ),
       t1494,
     ),
@@ -14581,7 +14581,7 @@ pub fn hd_poly_exp() -> @kernel.Thm {
 fn step_129() -> Unit raise {
   let l1 = @kernel.assume_rule(
     @parser.parse_term(
-      "forall x. (forall y. x ++ y = y /\\ y ++ x = y)\n                     ==> (forall y. (CONS h t) ++ y = y /\\ y ++ (CONS h t) = y)",
+      "∀ x. (∀ y. x ++ y = y /\\ y ++ x = y)\n                     ==> (∀ y. (CONS h t) ++ y = y /\\ y ++ (CONS h t) = y)",
     ),
   )
   let l2 = @bool.spec(@parser.parse_term("[]:(real)list"), l1)
@@ -14623,7 +14623,7 @@ pub fn poly_add_ident() -> @kernel.Thm {
 fn step_130() -> Unit raise {
   let t1498 = @simp.simp_tac(@list.List([poly_add_ident(), poly_add_clauses()]))
   poly_add_neutral_c.set(
-    @tactics.prove(@parser.parse_term("forall x. neutral (++) ++ x = x"), t1498),
+    @tactics.prove(@parser.parse_term("∀ x. neutral (++) ++ x = x"), t1498),
   )
 }
 
@@ -14670,7 +14670,7 @@ pub fn monoidal_poly_add() -> @kernel.Thm {
 /// POLY_DIFF_AUX_ADD_LEMMA
 fn step_132() -> Unit raise {
   let lem = @calc_rat.real_arith(
-    @parser.parse_term("forall n h h'. (&n * h) + (&n * h') = &n * (h + h')"),
+    @parser.parse_term("∀ n h h'. (&n * h) + (&n * h') = &n * (h + h')"),
   )
   let t1506 = @simp.asm_simp_tac(@list.List([]))
   let t1505 = @simp.once_rewrite_tac(@list.List([lem]))
@@ -14711,7 +14711,7 @@ fn step_132() -> Unit raise {
   poly_diff_aux_add_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall t1 t2 n. poly_diff_aux n (t1 ++ t2) =\n             (poly_diff_aux n t1) ++ (poly_diff_aux n t2)",
+        "∀ t1 t2 n. poly_diff_aux n (t1 ++ t2) =\n             (poly_diff_aux n t1) ++ (poly_diff_aux n t2)",
       ),
       t1507,
     ),
@@ -14736,7 +14736,7 @@ fn step_133() -> Unit raise {
     @list.List([poly_add_clauses(), @lists.not_cons_nil()]),
   )
   let lem1 = @tactics.prove(
-    @parser.parse_term("forall h0 t0 h1 t1. ~(((CONS h0 t0) ++ (CONS h1 t1)) = [])"),
+    @parser.parse_term("∀ h0 t0 h1 t1. ~(((CONS h0 t0) ++ (CONS h1 t1)) = [])"),
     t1508,
   )
   let t1512 = @simp.simp_tac(@list.List([]))
@@ -14755,7 +14755,7 @@ fn step_133() -> Unit raise {
   )
   let lem2 = @tactics.prove(
     @parser.parse_term(
-      "forall h0 t0 h1 t1.\n          (TL ((CONS h0 t0) ++ (CONS h1 t1))\n        = (TL (CONS h0 t0)) ++ (TL (CONS h1 t1)))",
+      "∀ h0 t0 h1 t1.\n          (TL ((CONS h0 t0) ++ (CONS h1 t1))\n        = (TL (CONS h0 t0)) ++ (TL (CONS h1 t1)))",
     ),
     t1513,
   )
@@ -14779,7 +14779,7 @@ fn step_133() -> Unit raise {
   polydiff_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p1 p2. (poly_diff (p1 ++ p2)) = (poly_diff p1  ++ poly_diff p2)",
+        "∀ p1 p2. (poly_diff (p1 ++ p2)) = (poly_diff p1  ++ poly_diff p2)",
       ),
       t1520,
     ),
@@ -14800,7 +14800,7 @@ pub fn polydiff_add() -> @kernel.Thm {
 fn step_134() -> Unit raise {
   let lem01 = @kernel.assume_rule(
     @parser.parse_term(
-      "forall c n. poly_diff_aux n (c ## t) = c ## poly_diff_aux n t",
+      "∀ c n. poly_diff_aux n (c ## t) = c ## poly_diff_aux n t",
     ),
   )
   let t1521 = @parser.parse_term("SUC n")
@@ -14826,7 +14826,7 @@ fn step_134() -> Unit raise {
   poly_diff_aux_poly_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p c n. poly_diff_aux n (c ## p) = c ## (poly_diff_aux n p)",
+        "∀ p c n. poly_diff_aux n (c ## p) = c ## (poly_diff_aux n p)",
       ),
       t1523,
     ),
@@ -14861,7 +14861,7 @@ fn step_135() -> Unit raise {
   )
   poly_cmul_poly_diff_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p c. poly_diff (c ## p) = c ## (poly_diff p)"),
+      @parser.parse_term("∀ p c. poly_diff (c ## p) = c ## (poly_diff p)"),
       t1524,
     ),
   )
@@ -14893,7 +14893,7 @@ fn step_136() -> Unit raise {
   )
   poly_cmul_length_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c p. LENGTH (c ## p) =  LENGTH p"),
+      @parser.parse_term("∀ c p. LENGTH (c ## p) =  LENGTH p"),
       t1528,
     ),
   )
@@ -14980,7 +14980,7 @@ fn step_137() -> Unit raise {
   )
   poly_add_length_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p q. LENGTH (p ++ q) =  MAX (LENGTH p) (LENGTH q)"),
+      @parser.parse_term("∀ p q. LENGTH (p ++ q) =  MAX (LENGTH p) (LENGTH q)"),
       t1538,
     ),
   )
@@ -15001,7 +15001,7 @@ pub fn poly_add_length() -> @kernel.Thm {
 /// POLY_MUL_LENGTH
 fn step_138() -> Unit raise {
   let lemma01 = @kernel.assume_rule(
-    @parser.parse_term("forall h t'. LENGTH (t ** CONS h t') >= LENGTH t"),
+    @parser.parse_term("∀ h t'. LENGTH (t ** CONS h t') >= LENGTH t"),
   )
   let t1539 = @parser.parse_term("t':(real)list")
   let lemma02 = @bool.specl(
@@ -15033,7 +15033,7 @@ fn step_138() -> Unit raise {
       poly_add_length(),
       @lists.length(),
       lemma07,
-      @int.arith_rule(@parser.parse_term("forall x y. (MAX x y) = x + (y - x)")),
+      @int.arith_rule(@parser.parse_term("∀ x y. (MAX x y) = x + (y - x)")),
     ]),
   )
   let t1545 = @list.List([
@@ -15060,7 +15060,7 @@ fn step_138() -> Unit raise {
   )
   poly_mul_length_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p h t. LENGTH (p ** (CONS h t)) >= LENGTH p"),
+      @parser.parse_term("∀ p h t. LENGTH (p ** (CONS h t)) >= LENGTH p"),
       t1547,
     ),
   )
@@ -15089,7 +15089,7 @@ fn step_139() -> Unit raise {
   poly_exp_x_rec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. poly_exp [&0;&1] (SUC n) = CONS (&0) (poly_exp [&0;&1] n)",
+        "∀ n. poly_exp [&0;&1] (SUC n) = CONS (&0) (poly_exp [&0;&1] n)",
       ),
       t1549,
     ),
@@ -15114,7 +15114,7 @@ fn step_140() -> Unit raise {
   )
   poly_mul_length2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall q p. ~(q = []) ==> LENGTH (p ** q) >= LENGTH p"),
+      @parser.parse_term("∀ q p. ~(q = []) ==> LENGTH (p ** q) >= LENGTH p"),
       t1550,
     ),
   )
@@ -15147,7 +15147,7 @@ fn step_141() -> Unit raise {
   )
   poly_exp_x_length_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. LENGTH (poly_exp [&0;&1] n) = SUC n"),
+      @parser.parse_term("∀ n. LENGTH (poly_exp [&0;&1] n) = SUC n"),
       t1551,
     ),
   )
@@ -15332,7 +15332,7 @@ fn step_142() -> Unit raise {
   poly_sum_equiv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p x.\n     ~(p = []) ==>\n     poly p x = sum (0..(PRE (LENGTH p))) (\\i. (EL i p)*(x pow i))",
+        "∀ p x.\n     ~(p = []) ==>\n     poly p x = sum (0..(PRE (LENGTH p))) (\\i. (EL i p)*(x pow i))",
       ),
       t1582,
     ),
@@ -15366,7 +15366,7 @@ fn step_143() -> Unit raise {
   iterate_radd_polyadd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x f. iterate (+) (0..n) (\\i.poly (f i) x) =\n           poly (iterate (++) (0..n) f) x",
+        "∀ n x f. iterate (+) (0..n) (\\i.poly (f i) x) =\n           poly (iterate (++) (0..n) f) x",
       ),
       t1583,
     ),

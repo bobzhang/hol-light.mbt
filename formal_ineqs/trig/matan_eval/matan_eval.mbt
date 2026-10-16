@@ -239,7 +239,7 @@ fn step_14() -> Unit raise {
   })
   let t18 = @tactics.repeat_tac(@tactics.strip_tac)
   let t28 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @matan.matan()])), t18), t22), t26), t27)
-  let t29 = (@parser.parse_term("forall x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (atn (sqrt x) / sqrt x) bounds\n    ==> interval_arith (matan x) bounds"), t28)
+  let t29 = (@parser.parse_term("∀ x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (atn (sqrt x) / sqrt x) bounds\n    ==> interval_arith (matan x) bounds"), t28)
   matan_gt0_c.set(th_rule((fn(x17 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x17.0, x17.1)
   })(t29)))
@@ -352,7 +352,7 @@ fn step_15() -> Unit raise {
   })
   let t36 = @tactics.repeat_tac(@tactics.disch_tac)
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @equal.gsym(@theorems.imp_imp()), @interval_arith.iabs()])), @tactics.gen_tac), t36), t41), t45), t47), @tactics.ants_tac), t51), t52), t53), t54), t55), t56), t57), t58), t62), t106), t110), @calc_rat.real_arith_tac)
-  let t112 = (@parser.parse_term("forall x. \n    interval_arith x (lo, hi) /\\\n    interval_arith ((&1 - x / &3) + (x * x) / &5) (a, b) /\\\n    iabs (lo, hi) = u /\\\n    u <= #0.9 /\\\n    u * u <= u2 /\\\n    u2 * u <= u3 /\\\n    r1 <= &1 - u /\\\n    r2 <= &7 * r1 /\\ (&0 < r2 <=> T) /\\\n    u3 / r2 <= e /\\\n    low <= a - e /\\\n    b + e <= high \n    ==> interval_arith (matan x) (low, high)"), t111)
+  let t112 = (@parser.parse_term("∀ x. \n    interval_arith x (lo, hi) /\\\n    interval_arith ((&1 - x / &3) + (x * x) / &5) (a, b) /\\\n    iabs (lo, hi) = u /\\\n    u <= #0.9 /\\\n    u * u <= u2 /\\\n    u2 * u <= u3 /\\\n    r1 <= &1 - u /\\\n    r2 <= &7 * r1 /\\ (&0 < r2 <=> T) /\\\n    u3 / r2 <= e /\\\n    low <= a - e /\\\n    b + e <= high \n    ==> interval_arith (matan x) (low, high)"), t111)
   let t33 = @simp.pure_rewrite_rule(@list.List([@equal.sym(@arith_float.float_to_num_conv(seven_float())), aux_th]))
   matan_abs1_c.set((fn(x34 : @kernel.Thm) -> @kernel.Thm raise {
     th_rule(t33(x34))
@@ -388,7 +388,7 @@ fn step_16() -> Unit raise {
   })
   let t114 = @tactics.repeat_tac(@tactics.strip_tac)
   let t124 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @matan.dmatan()])), t114), t118), t122), t123)
-  let t125 = (@parser.parse_term("forall x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (inv ((&2 * x) * (x + &1)) - atn (sqrt x) / ((&2 * x) * sqrt x)) bounds\n  ==> interval_arith (dmatan x) bounds"), t124)
+  let t125 = (@parser.parse_term("∀ x. interval_arith x (lo, hi) /\\ (&0 < lo <=> T) /\\\n    interval_arith (inv ((&2 * x) * (x + &1)) - atn (sqrt x) / ((&2 * x) * sqrt x)) bounds\n  ==> interval_arith (dmatan x) bounds"), t124)
   dmatan_gt0_c.set(th_rule((fn(x113 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x113.0, x113.1)
   })(t125)))
@@ -489,7 +489,7 @@ fn step_17() -> Unit raise {
   })
   let t131 = @tactics.repeat_tac(@tactics.disch_tac)
   let t195 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @equal.gsym(@theorems.imp_imp()), @interval_arith.iabs(), @matan.dmatan()])), @tactics.gen_tac), t131), t136), t140), t142), @tactics.ants_tac), t146), t147), t148), t149), t150), t151), t152), t153), t157), t190), t194), @calc_rat.real_arith_tac)
-  let t196 = (@parser.parse_term("forall x. \n\tinterval_arith x (lo, hi) /\\\n\tinterval_arith (&2 * (x / &5) - &1 / &3) (a, b) /\\\n\tiabs (lo, hi) = u /\\\n\tu <= #0.9 /\\\n\tu * u <= u2 /\\\n\tr1 <= &1 - u /\\\n\tr2 <= &2 * r1 /\\ (&0 < r2 <=> T) /\\\n\tu2 / r2 <= e /\\\n\tlow <= a - e /\\\n\tb + e <= high \n\t==> interval_arith (dmatan x) (low, high)"), t195)
+  let t196 = (@parser.parse_term("∀ x. \n\tinterval_arith x (lo, hi) /\\\n\tinterval_arith (&2 * (x / &5) - &1 / &3) (a, b) /\\\n\tiabs (lo, hi) = u /\\\n\tu <= #0.9 /\\\n\tu * u <= u2 /\\\n\tr1 <= &1 - u /\\\n\tr2 <= &2 * r1 /\\ (&0 < r2 <=> T) /\\\n\tu2 / r2 <= e /\\\n\tlow <= a - e /\\\n\tb + e <= high \n\t==> interval_arith (dmatan x) (low, high)"), t195)
   let t128 = @simp.pure_rewrite_rule(@list.List([aux1, aux2]))
   dmatan_abs1_c.set((fn(x129 : @kernel.Thm) -> @kernel.Thm raise {
     th_rule(t128(x129))
@@ -531,7 +531,7 @@ fn step_18() -> Unit raise {
     }
   })
   let t212 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @matan.ddmatan()])), @tactics.gen_tac), @tactics.strip_tac), t201), t205), t206), t207), t211), @calc_rat.real_arith_tac)
-  let t213 = (@parser.parse_term("forall x. interval_arith x (lo, hi) /\\ \n    -- #0.2 <= lo /\\\n    interval_arith (#0.65) (a, b) /\\\n    b2 = --b\n    ==> interval_arith (ddmatan x) (b2, b)"), t212)
+  let t213 = (@parser.parse_term("∀ x. interval_arith x (lo, hi) /\\ \n    -- #0.2 <= lo /\\\n    interval_arith (#0.65) (a, b) /\\\n    b2 = --b\n    ==> interval_arith (ddmatan x) (b2, b)"), t212)
   ddmatan_ge_neg02_c.set(th_rule((fn(x197 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x197.0, x197.1)
   })(t213)))

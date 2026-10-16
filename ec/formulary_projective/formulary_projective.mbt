@@ -26,7 +26,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([pr_dbl_2007_bl(), @projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
   let t1 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @tactics.strip_tac), t2), t3), t4), t5), @ringtheory.field_tac), t6)
-  pr_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (pr_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                          (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t7))
+  pr_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (pr_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                          (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t7))
 }
 
 ///|
@@ -69,7 +69,7 @@ fn step_4() -> Unit raise {
   })
   let t8 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8), @tactics.strip_tac), t12), t13), t14), t15), t16), @ringtheory.field_tac), t17)
-  p3_dbl_2007_bl_2_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (p3_dbl_2007_bl_2 (f,a,b) (x1,y1,z1))\n                            (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t18))
+  p3_dbl_2007_bl_2_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (p3_dbl_2007_bl_2 (f,a,b) (x1,y1,z1))\n                            (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t18))
 }
 
 ///|
@@ -112,7 +112,7 @@ fn step_6() -> Unit raise {
   })
   let t19 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t19), @tactics.strip_tac), t23), t24), t25), t26), t27), @ringtheory.field_tac), t28)
-  p0_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (p0_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                            (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t29))
+  p0_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (p0_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                            (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t29))
 }
 
 ///|
@@ -185,7 +185,7 @@ fn step_8() -> Unit raise {
   }))
   let t30 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t30), t37), t38), t42), t46), t47), t48), t59), @ringtheory.field_tac)
-  pr_add_1998_cmo_2_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1) /\\ projective_point f (x2,y2,z2) /\\\n        ~(z1 = ring_0 f) /\\ ~(z2 = ring_0 f) /\\\n        ~(projective_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> projective_eq f (pr_add_1998_cmo_2 (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                            (projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t60))
+  pr_add_1998_cmo_2_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1) /\\ projective_point f (x2,y2,z2) /\\\n        ~(z1 = ring_0 f) /\\ ~(z2 = ring_0 f) /\\\n        ~(projective_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> projective_eq f (pr_add_1998_cmo_2 (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                            (projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t60))
 }
 
 ///|
@@ -258,7 +258,7 @@ fn step_10() -> Unit raise {
   }))
   let t61 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t61), t68), t69), t73), t77), t78), t79), t90), @ringtheory.field_tac)
-  pr_madd_1998_cmo_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1) /\\ projective_point f (x2,y2,z2) /\\\n        z2 = ring_1 f /\\\n        ~(z1 = ring_0 f) /\\ ~(projective_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> projective_eq f (pr_madd_1998_cmo (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                            (projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t91))
+  pr_madd_1998_cmo_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1) /\\ projective_point f (x2,y2,z2) /\\\n        z2 = ring_1 f /\\\n        ~(z1 = ring_0 f) /\\ ~(projective_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> projective_eq f (pr_madd_1998_cmo (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                            (projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t91))
 }
 
 ///|

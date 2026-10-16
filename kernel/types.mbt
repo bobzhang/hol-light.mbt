@@ -127,9 +127,9 @@ pub impl Compare for Term with fn compare(self, other) {
     (Const(s, ty), Const(t, uy)) => {
       let c = if s == t {
         0
-      } else if s == "forall" {
+      } else if s == "∀" {
         -1
-      } else if t == "forall" {
+      } else if t == "∀" {
         1
       } else {
         compare_string(s, t)

@@ -60,7 +60,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIMES = os.path.join(ROOT, "tools", "test_times.tsv")
 # hol.ml's hand-ported files and the support packages
 QUICK = ["kernel", "lib", "num", "pp", "basics", "nets", "printer", "preterm", "lexer", "parser",
-         "equal", "bool", "drule", "tactics", "itab", "simp", "omap", "oset", "testkit", "tests/forall"]
+         "equal", "bool", "drule", "tactics", "itab", "simp", "omap", "oset", "testkit", "tests/universal"]
 SKIP_DIRS = {"tools", "_build", "target"}
 
 

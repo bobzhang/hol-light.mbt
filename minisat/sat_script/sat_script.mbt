@@ -5,7 +5,7 @@
 /// AND_IMP
 fn step_1() -> Unit raise {
   let t1 = @tactics.conv_tac(@class.taut)
-  and_imp_c.set(@tactics.prove(@parser.parse_term("forall a b c. a /\\ b ==> c <=> a ==> b ==> c"), t1))
+  and_imp_c.set(@tactics.prove(@parser.parse_term("∀ a b c. a /\\ b ==> c <=> a ==> b ==> c"), t1))
 }
 
 ///|
@@ -21,7 +21,7 @@ pub fn and_imp() -> @kernel.Thm {
 /// AND_IMP2
 fn step_2() -> Unit raise {
   let t2 = @tactics.conv_tac(@class.taut)
-  and_imp2_c.set(@tactics.prove(@parser.parse_term("forall a b c. a /\\ b ==> c <=> (a<=>T) ==> b ==> c"), t2))
+  and_imp2_c.set(@tactics.prove(@parser.parse_term("∀ a b c. a /\\ b ==> c <=> (a<=>T) ==> b ==> c"), t2))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn and_imp2() -> @kernel.Thm {
 /// AND_IMP3
 fn step_3() -> Unit raise {
   let t3 = @tactics.conv_tac(@class.taut)
-  and_imp3_c.set(@tactics.prove(@parser.parse_term("forall a b c. ~a /\\ b ==> c <=> (a<=>F) ==> b ==> c"), t3))
+  and_imp3_c.set(@tactics.prove(@parser.parse_term("∀ a b c. ~a /\\ b ==> c <=> (a<=>F) ==> b ==> c"), t3))
 }
 
 ///|
@@ -68,7 +68,7 @@ pub fn not_not() -> @kernel.Thm {
 /// AND_INV
 fn step_5() -> Unit raise {
   let t4 = @tactics.conv_tac(@class.taut)
-  and_inv_c.set(@tactics.prove(@parser.parse_term("forall a. (~a /\\ a) <=> F"), t4))
+  and_inv_c.set(@tactics.prove(@parser.parse_term("∀ a. (~a /\\ a) <=> F"), t4))
 }
 
 ///|
@@ -84,7 +84,7 @@ pub fn and_inv() -> @kernel.Thm {
 /// AND_INV_IMP
 fn step_6() -> Unit raise {
   let t5 = @tactics.conv_tac(@class.taut)
-  and_inv_imp_c.set(@tactics.prove(@parser.parse_term("forall a. a ==> ~a ==> F"), t5))
+  and_inv_imp_c.set(@tactics.prove(@parser.parse_term("∀ a. a ==> ~a ==> F"), t5))
 }
 
 ///|
@@ -180,7 +180,7 @@ pub fn not_elim2() -> @kernel.Thm {
 /// IMP_F_EQ_F
 fn step_12() -> Unit raise {
   let t11 = @tactics.conv_tac(@class.taut)
-  imp_f_eq_f_c.set(@tactics.prove(@parser.parse_term("forall t. (t ==> F) <=> (t <=> F)"), t11))
+  imp_f_eq_f_c.set(@tactics.prove(@parser.parse_term("∀ t. (t ==> F) <=> (t <=> F)"), t11))
 }
 
 ///|

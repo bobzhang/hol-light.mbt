@@ -64,7 +64,7 @@ pub fn montgomery_neg() -> @kernel.Thm {
 ///|
 /// montgomery_add
 fn step_5() -> Unit raise {
-  montgomery_add_c.set(@define.define_(@parser.parse_term("(forall y. montgomery_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (forall x. montgomery_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (forall x1 y1 x2 y2.\n        montgomery_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let l = ring_div f\n                (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n                            (ring_add f (ring_mul f (ring_of_num f 2)\n                                                    (ring_mul f a x1))\n                                        (ring_of_num f 1)))\n                (ring_mul f (ring_of_num f 2) (ring_mul f b y1)) in\n            let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let l = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
+  montgomery_add_c.set(@define.define_(@parser.parse_term("(∀ y. montgomery_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (∀ x. montgomery_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (∀ x1 y1 x2 y2.\n        montgomery_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let l = ring_div f\n                (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n                            (ring_add f (ring_mul f (ring_of_num f 2)\n                                                    (ring_mul f a x1))\n                                        (ring_of_num f 1)))\n                (ring_mul f (ring_of_num f 2) (ring_mul f b y1)) in\n            let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let l = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
 }
 
 ///|
@@ -100,7 +100,7 @@ fn step_7() -> Unit raise {
   let t2 = @tactics.exists_tac(@parser.parse_term("IMAGE SOME {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f} UNION\n    {NONE}"))
   let t1 = @tactics.match_mp_tac(@sets.finite_subset())
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), t2), t3), t4), t5)
-  finite_montgomery_curve_c.set(@tactics.prove(@parser.parse_term("forall f a b:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(montgomery_curve(f,a,b))"), t6))
+  finite_montgomery_curve_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(montgomery_curve(f,a,b))"), t6))
 }
 
 ///|
@@ -132,9 +132,9 @@ fn step_8() -> Unit raise {
   let t9 = @simp.rewrite_tac(@list.List([@ind_types.option_distinct(), @sets.in_cross()]))
   let t18 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([montgomery_curve(), @sets.subset(), @ind_types.forall_option_thm(), @sets.in_union(), @sets.in_sing(), @sets.in_image(), @ind_types.option_inj(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm(), @theorems.unwind_thm1()])), t9), t10), t14), t15), @tactics.strip_tac), t16), @ringtheory.field_tac), t17])
   let t8 = @tactics.exists_tac(@parser.parse_term("IMAGE SOME\n     {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f /\\\n              ring_pow f y 2 =\n              ring_div f (ring_add f (ring_pow f x 3)\n                           (ring_add f (ring_mul f a (ring_pow f x 2)) x)) b}\n    UNION {NONE}"))
-  let t7 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.finite_subset(), @sets.card_subset(), @arith.le_trans()]), @parser.parse_term("forall s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n")))
+  let t7 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.finite_subset(), @sets.card_subset(), @arith.le_trans()]), @parser.parse_term("∀ s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n")))
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7), t8), @tactics.conj_tac), t18), t19), t20), t21), t22)
-  card_bound_montgomery_curve_c.set(@tactics.prove(@parser.parse_term("forall f a b:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n             ==> CARD(montgomery_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1"), t23))
+  card_bound_montgomery_curve_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n             ==> CARD(montgomery_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1"), t23))
 }
 
 ///|
@@ -199,7 +199,7 @@ fn step_10() -> Unit raise {
   let t25 = @simp.rewrite_tac(@list.List([montgomery_strongly_nonsingular()]))
   let t24 = @tactics.repeat_tac(@tactics.strip_tac)
   let t54 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t24), t25), t26), t27), t28), @tactics.binop_tac), t53)
-  montgomery_strongly_nonsingular_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f\n        ==> (montgomery_strongly_nonsingular(f,a,b) <=>\n             forall x y. montgomery_curve(f,a,b) (SOME(x,y))\n                   ==> (y = ring_0 f <=> x = ring_0 f))"), t54))
+  montgomery_strongly_nonsingular_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f\n        ==> (montgomery_strongly_nonsingular(f,a,b) <=>\n             ∀ x y. montgomery_curve(f,a,b) (SOME(x,y))\n                   ==> (y = ring_0 f <=> x = ring_0 f))"), t54))
 }
 
 ///|
@@ -227,7 +227,7 @@ fn step_11() -> Unit raise {
   let t56 = @simp.rewrite_tac(@list.List([@class.not_exists_thm()]))
   let t55 = @tactics.repeat_tac(@tactics.gen_tac)
   let t65 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([montgomery_strongly_nonsingular(), montgomery_nonsingular()])), t55), t56), @tactics.strip_tac), t63), t64), @ringtheory.ring_tac)
-  montgomery_strongly_nonsingular_imp_nonsingular_c.set(@tactics.prove(@parser.parse_term("forall f a b:A.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_strongly_nonsingular(f,a,b)\n        ==> montgomery_nonsingular(f,a,b)"), t65))
+  montgomery_strongly_nonsingular_imp_nonsingular_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_strongly_nonsingular(f,a,b)\n        ==> montgomery_nonsingular(f,a,b)"), t65))
 }
 
 ///|
@@ -244,7 +244,7 @@ pub fn montgomery_strongly_nonsingular_imp_nonsingular() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t66 = @simp.simp_tac(@list.List([montgomery_curve(), montgomery_point()]))
   let t67 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t66)
-  montgomery_curve_imp_point_c.set(@tactics.prove(@parser.parse_term("forall f a b p. montgomery_curve(f,a,b) p ==> montgomery_point f p"), t67))
+  montgomery_curve_imp_point_c.set(@tactics.prove(@parser.parse_term("∀ f a b p. montgomery_curve(f,a,b) p ==> montgomery_point f p"), t67))
 }
 
 ///|
@@ -261,7 +261,7 @@ pub fn montgomery_curve_imp_point() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t68 = @simp.simp_tac(@list.List([montgomery_neg(), montgomery_point(), @ringtheory.ring_neg_v1()]))
   let t69 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t68)
-  montgomery_point_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        montgomery_point f p\n        ==> montgomery_point f (montgomery_neg (f,a,b) p)"), t69))
+  montgomery_point_neg_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a b p.\n        montgomery_point f p\n        ==> montgomery_point f (montgomery_neg (f,a,b) p)"), t69))
 }
 
 ///|
@@ -281,7 +281,7 @@ fn step_14() -> Unit raise {
   let t71 = @tactics.repeat_tac(@tactics.strip_tac)
   let t70 = @simp.simp_tac(@list.List([montgomery_add(), montgomery_point(), @pair.let_def(), @pair.let_end_def()]))
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t70), t71), t72), t73), @ringtheory.ring_carrier_tac)
-  montgomery_point_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_point f p /\\ montgomery_point f q\n        ==> montgomery_point f (montgomery_add (f,a,b) p q)"), t74))
+  montgomery_point_add_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_point f p /\\ montgomery_point f q\n        ==> montgomery_point f (montgomery_add (f,a,b) p q)"), t74))
 }
 
 ///|
@@ -297,7 +297,7 @@ pub fn montgomery_point_add() -> @kernel.Thm {
 /// MONTGOMERY_CURVE_0
 fn step_15() -> Unit raise {
   let t75 = @simp.rewrite_tac(@list.List([montgomery_curve()]))
-  montgomery_curve_0_c.set(@tactics.prove(@parser.parse_term("forall f a b:A. montgomery_curve(f,a,b) NONE"), t75))
+  montgomery_curve_0_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A. montgomery_curve(f,a,b) NONE"), t75))
 }
 
 ///|
@@ -315,7 +315,7 @@ fn step_16() -> Unit raise {
   let t77 = @tactics.conv_tac(@ringtheory.integral_domain_rule)
   let t76 = @tactics.repeat_tac(@tactics.gen_tac)
   let t78 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_neg_v1(), montgomery_curve(), montgomery_neg()])), t76), t77)
-  montgomery_curve_neg_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_curve(f,a,b) (montgomery_neg (f,a,b) p)"), t78))
+  montgomery_curve_neg_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_curve(f,a,b) (montgomery_neg (f,a,b) p)"), t78))
 }
 
 ///|
@@ -362,7 +362,7 @@ fn step_17() -> Unit raise {
   let t80 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_add_v1(), montgomery_nonsingular(), montgomery_curve(), montgomery_add()]))
   let t79 = @tactics.replicate_tac(3, @tactics.gen_tac)
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t79), t80), t81), t85), t86), t87), t91), t95), t99), t100), t101), t102), t103), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_curve_add_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_curve(f,a,b) (montgomery_add (f,a,b) p q)"), t104))
+  montgomery_curve_add_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_curve(f,a,b) (montgomery_add (f,a,b) p q)"), t104))
 }
 
 ///|
@@ -400,7 +400,7 @@ fn step_18() -> Unit raise {
   let t106 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_add_v1(), montgomery_curve(), montgomery_neg(), montgomery_add()]))
   let t105 = @tactics.replicate_tac(3, @tactics.gen_tac)
   let t123 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t105), t106), t108), t109), t110), t114), t118), t119), t120), t121), t122), @ringtheory.field_tac)
-  montgomery_add_lneg_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_add(f,a,b) (montgomery_neg (f,a,b) p) p = NONE"), t123))
+  montgomery_add_lneg_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> montgomery_add(f,a,b) (montgomery_neg (f,a,b) p) p = NONE"), t123))
 }
 
 ///|
@@ -445,7 +445,7 @@ fn step_19() -> Unit raise {
   let t128 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x1:A"), t127, t126, t125]))
   let t124 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_add_v1(), montgomery_curve(), montgomery_add()]))
   let t147 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), t124), t128), t129), t130), t134), t138), t142), t143), t144), t145), t146), @ringtheory.field_tac)
-  montgomery_add_sym_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_add (f,a,b) p q = montgomery_add (f,a,b) q p"), t147))
+  montgomery_add_sym_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> montgomery_add (f,a,b) p q = montgomery_add (f,a,b) q p"), t147))
 }
 
 ///|
@@ -462,7 +462,7 @@ pub fn montgomery_add_sym() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t148 = @simp.rewrite_tac(@list.List([montgomery_curve(), montgomery_neg(), @ind_types.option_inj(), @pair.pair_eq()]))
   let t149 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([montgomery_nonsingular()])), t148), @ringtheory.field_tac)
-  let assoclemma = @tactics.prove(@parser.parse_term("forall f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          montgomery_nonsingular(f,a,b) /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          montgomery_curve(f,a,b) (SOME(x1,y1)) /\\\n          montgomery_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = montgomery_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))"), t149)
+  let assoclemma = @tactics.prove(@parser.parse_term("∀ f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          montgomery_nonsingular(f,a,b) /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          montgomery_curve(f,a,b) (SOME(x1,y1)) /\\\n          montgomery_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = montgomery_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))"), t149)
   let t215 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([montgomery_nonsingular()])))
   let t214 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t213 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x212 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -539,7 +539,7 @@ fn step_20() -> Unit raise {
   let t151 = @tactics.x_gen_tac(@parser.parse_term("f:A ring"))
   let t150 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t216 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t150), t151), t152), t154), t155), t156), t157), t162), t163), t166), t167), @tactics.conj_tac), t168), t189), t190), t191), t192), t193), t194), t195), t196), t197), t198), t199), t200), t201), t205), t213), t214), t215), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_add_assoc_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) q /\\\n        montgomery_curve(f,a,b) r\n        ==> montgomery_add (f,a,b) p (montgomery_add (f,a,b) q r) =\n            montgomery_add (f,a,b) (montgomery_add (f,a,b) p q) r"), t216))
+  montgomery_add_assoc_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\\n        montgomery_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) q /\\\n        montgomery_curve(f,a,b) r\n        ==> montgomery_add (f,a,b) p (montgomery_add (f,a,b) q r) =\n            montgomery_add (f,a,b) (montgomery_add (f,a,b) p q) r"), t216))
 }
 
 ///|
@@ -571,7 +571,7 @@ fn step_21() -> Unit raise {
   let t218 = @simp.rewrite_tac(@list.List([montgomery_group(), @equal.gsym(@bool.conjunct2(@grouptheory.group_tybij()))]))
   let t217 = @simp.rewrite_tac(@list.List([@grouptheory.group_carrier(), @grouptheory.group_id(), @grouptheory.group_inv(), @grouptheory.group_mul(), @equal.gsym(@pair.pair_eq())]))
   let t233 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t217), t218), t219), t232)
-  montgomery_group_v1_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_carrier(montgomery_group(f,a,b)) = montgomery_curve(f,a,b) /\\\n          group_id(montgomery_group(f,a,b)) = NONE /\\\n          group_inv(montgomery_group(f,a,b)) = montgomery_neg(f,a,b) /\\\n          group_mul(montgomery_group(f,a,b)) = montgomery_add(f,a,b)"), t233))
+  montgomery_group_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_carrier(montgomery_group(f,a,b)) = montgomery_curve(f,a,b) /\\\n          group_id(montgomery_group(f,a,b)) = NONE /\\\n          group_inv(montgomery_group(f,a,b)) = montgomery_neg(f,a,b) /\\\n          group_mul(montgomery_group(f,a,b)) = montgomery_add(f,a,b)"), t233))
 }
 
 ///|
@@ -590,7 +590,7 @@ fn step_22() -> Unit raise {
   let t235 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t234 = @simp.asm_simp_tac(@list.List([@grouptheory.abelian_group(), montgomery_group_v1()]))
   let t237 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t234), t235), t236)
-  abelian_montgomery_group_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> abelian_group(montgomery_group(f,a,b))"), t237))
+  abelian_montgomery_group_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> abelian_group(montgomery_group(f,a,b))"), t237))
 }
 
 ///|
@@ -609,7 +609,7 @@ fn step_23() -> Unit raise {
   let t239 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow(), @arith.even(), montgomery_group_v1(), @class.cond_swap()]))
   let t238 = @tactics.repeat_tac(@tactics.gen_tac)
   let t241 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), t238), @tactics.strip_tac), @nums.induct_tac), t239), @class.cond_cases_tac), t240)
-  group_pow_montgomery_torsion_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b)\n        ==> group_pow (montgomery_group(f,a,b)) (SOME (ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)"), t241))
+  group_pow_montgomery_torsion_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b)\n        ==> group_pow (montgomery_group(f,a,b)) (SOME (ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)"), t241))
 }
 
 ///|

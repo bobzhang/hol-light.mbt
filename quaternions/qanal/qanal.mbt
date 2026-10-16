@@ -12,7 +12,7 @@ fn step_1() -> Unit raise {
 fn step_2() -> Unit raise {
   let t1 = @tactics.conv_tac(@equal.binop_conv(@calc_rat.real_poly_conv))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_sqnorm(), @quaternion.quat_cnj(), @quaternion.quat_mul(), @quaternion.quat_components()])), @tactics.gen_tac), t1), @tactics.refl_tac)
-  quat_sqnorm_mul_c.set(@tactics.prove(@parser.parse_term("forall q. norm q pow 2 = Re(cnj q * q)"), t2))
+  quat_sqnorm_mul_c.set(@tactics.prove(@parser.parse_term("∀ q. norm q pow 2 = Re(cnj q * q)"), t2))
 }
 
 ///|
@@ -36,7 +36,7 @@ fn step_3() -> Unit raise {
   }, @list.List([@quaternion.quat_pow()])), t6)
   let t8 = @list.List([@simp.rewrite_tac(@list.List([@quaternion.quat_pow(), @quaternion.quat_inv_1()])), t7])
   let t9 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @quaternions_misc.induct_tac), t8)
-  quat_inv_pow_c.set(@tactics.prove(@parser.parse_term("forall x n. inv (x pow n) = inv x pow n"), t9))
+  quat_inv_pow_c.set(@tactics.prove(@parser.parse_term("∀ x n. inv (x pow n) = inv x pow n"), t9))
 }
 
 ///|
@@ -55,7 +55,7 @@ fn step_4() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([@quaternion.quat_mul(), @quaternion.quat_components(), @quaternion.hx_components(), @quaternion.quat_neg_components(), @quaternion.quat_cnj_components(), @qcalc.cnj_quat()]))
   let t10 = @simp.rewrite_tac(@list.List([@quaternion.quat_pow_2(), @quaternion.forall_quat(), @quaternion.quat_eq()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_norm_pow_2()])), t10), t11), t12)
-  quat_norm_img_c.set(@tactics.prove(@parser.parse_term("forall x. Re x = &0 ==> x pow 2 = --(Hx(norm x) pow 2)"), t13))
+  quat_norm_img_c.set(@tactics.prove(@parser.parse_term("∀ x. Re x = &0 ==> x pow 2 = --(Hx(norm x) pow 2)"), t13))
 }
 
 ///|
@@ -80,7 +80,7 @@ fn step_5() -> Unit raise {
     })(((x17 : @kernel.Thm) => @bool.conj(@quaternion.bilinear_quat_mul(), x17))(x18))
   })
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t19), t20)
-  uniform_lim_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net P f g l m b1 b2.\n     eventually (\\x. forall n. P n ==> norm(l n) <= b1) net /\\\n     eventually (\\x. forall n. P n ==> norm(m n) <= b2) net /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n. P n ==> norm(g n x - m n) < e) net)\n     ==> forall e. &0 < e\n             ==> eventually\n                  (\\x. forall n. P n ==> norm(f n x * g n x - l n * m n) < e)\n                  net"), t21))
+  uniform_lim_quat_mul_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net P f g l m b1 b2.\n     eventually (\\x. ∀ n. P n ==> norm(l n) <= b1) net /\\\n     eventually (\\x. ∀ n. P n ==> norm(m n) <= b2) net /\\\n     (∀ e. &0 < e\n          ==> eventually (\\x. ∀ n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     (∀ e. &0 < e\n          ==> eventually (\\x. ∀ n. P n ==> norm(g n x - m n) < e) net)\n     ==> ∀ e. &0 < e\n             ==> eventually\n                  (\\x. ∀ n. P n ==> norm(f n x * g n x - l n * m n) < e)\n                  net"), t21))
 }
 
 ///|
@@ -144,7 +144,7 @@ fn step_6() -> Unit raise {
   let t46 = @tactics.exists_tac(@parser.parse_term("p:quat"))
   let t45 = @tactics.match_mp_tac(@quaternion.quat_mul_lcancel())
   let t51 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t45), t46), t47), t48), t49), t50), @tactics.all_tac])
-  let t44 = @tactics.subgoal_then(@parser.parse_term("forall p q. ~(p = Hx(&0)) /\\ ~(q = Hx(&0))\n      ==> inv p - inv q = inv p * (q - p) * inv q"), fn(x42 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t44 = @tactics.subgoal_then(@parser.parse_term("∀ p q. ~(p = Hx(&0)) /\\ ~(q = Hx(&0))\n      ==> inv p - inv q = inv p * (q - p) * inv q"), fn(x42 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x42
     @simp.asm_simp_tac(@list.List([th]))
   })
@@ -171,10 +171,10 @@ fn step_6() -> Unit raise {
   let t88 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:A")), @tactics.strip_tac), t26), @tactics.disch_tac), t34), t35), t36), t41), t44), t51), t52), t53), t54), t55), t56), t57), t58), t59), t62), t63), t64), t65), @calc_rat.asm_real_arith_tac), t87])
   let t25 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm()]))
   let t24 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(p ==> q /\\ r) <=> (p ==> q) /\\ (p ==> r)"))]))
-  let t23 = @tactics.exists_tac(@parser.parse_term("\\x. forall n. P n ==> b <= norm(l n) /\\\n                    b / &2 <= norm((f:B->A->quat) n x) /\\\n                    norm(f n x - l n) < e * b pow 2 / &2"))
+  let t23 = @tactics.exists_tac(@parser.parse_term("\\x. ∀ n. P n ==> b <= norm(l n) /\\\n                    b / &2 <= norm((f:B->A->quat) n x) /\\\n                    norm(f n x - l n) < e * b pow 2 / &2"))
   let t22 = @tactics.match_mp_tac(@metric.eventually_mono())
   let t89 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t22), t23), t24), t25), @tactics.conj_tac), t88)
-  uniform_lim_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net P f l b.\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     &0 < b /\\ eventually (\\x. forall n. P n ==> b <= norm(l n)) net\n     ==> forall e. &0 < e\n             ==> eventually\n                 (\\x. forall n. P n ==> norm(inv(f n x) - inv(l n)) < e) net"), t89))
+  uniform_lim_quat_inv_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net P f l b.\n     (∀ e. &0 < e\n          ==> eventually (\\x. ∀ n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     &0 < b /\\ eventually (\\x. ∀ n. P n ==> b <= norm(l n)) net\n     ==> ∀ e. &0 < e\n             ==> eventually\n                 (\\x. ∀ n. P n ==> norm(inv(f n x) - inv(l n)) < e) net"), t89))
 }
 
 ///|
@@ -190,7 +190,7 @@ pub fn uniform_lim_quat_inv() -> @kernel.Thm {
 /// LIM_QUAT_MUL
 fn step_7() -> Unit raise {
   let t90 = @simp.simp_tac(@list.List([@topology.lim_bilinear(), @quaternion.bilinear_quat_mul()]))
-  lim_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g l m.\n     (f --> l) net /\\ (g --> m) net ==> ((\\x. f x * g x) --> l * m) net"), t90))
+  lim_quat_mul_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f g l m.\n     (f --> l) net /\\ (g --> m) net ==> ((\\x. f x * g x) --> l * m) net"), t90))
 }
 
 ///|
@@ -214,7 +214,7 @@ fn step_8() -> Unit raise {
   let t94 = @parser.parse_term("\\x:one. T")
   let t95 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t94, t93, t92, t91]), uniform_lim_quat_inv()))
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t95), t96), t98)
-  lim_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l.\n     (f --> l) net /\\ ~(l = Hx(&0))\n     ==> ((\\x. inv(f x)) --> inv(l)) net"), t99))
+  lim_quat_inv_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l.\n     (f --> l) net /\\ ~(l = Hx(&0))\n     ==> ((\\x. inv(f x)) --> inv(l)) net"), t99))
 }
 
 ///|
@@ -232,7 +232,7 @@ fn step_9() -> Unit raise {
   let t101 = @simp.asm_simp_tac(@list.List([lim_quat_mul(), @quaternion.quat_pow(), @topology.lim_const()]))
   let t100 = @tactics.repeat_tac(@tactics.gen_tac)
   let t102 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), t100), @tactics.disch_tac), @quaternions_misc.induct_tac), t101)
-  lim_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l n.\n     (f --> l) net ==> ((\\x. f(x) pow n) --> l pow n) net"), t102))
+  lim_quat_pow_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l n.\n     (f --> l) net ==> ((\\x. f(x) pow n) --> l pow n) net"), t102))
 }
 
 ///|
@@ -248,7 +248,7 @@ pub fn lim_quat_pow() -> @kernel.Thm {
 /// LIM_QUAT_LMUL
 fn step_10() -> Unit raise {
   let t103 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
-  lim_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f l c. (f --> l) net ==> ((\\x:A. c * f x) --> c * l) net"), t103))
+  lim_quat_lmul_c.set(@tactics.prove(@parser.parse_term("∀ f l c. (f --> l) net ==> ((\\x:A. c * f x) --> c * l) net"), t103))
 }
 
 ///|
@@ -264,7 +264,7 @@ pub fn lim_quat_lmul() -> @kernel.Thm {
 /// LIM_QUAT_RMUL
 fn step_11() -> Unit raise {
   let t104 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
-  lim_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f l c. (f --> l) net ==> ((\\x:A. f x * c) --> l * c) net"), t104))
+  lim_quat_rmul_c.set(@tactics.prove(@parser.parse_term("∀ f l c. (f --> l) net ==> ((\\x:A. f x * c) --> l * c) net"), t104))
 }
 
 ///|
@@ -290,7 +290,7 @@ fn step_12() -> Unit raise {
     })(t108(x109))
   })
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t110), t111)
-  lim_null_quat_neg_c.set(@tactics.prove(@parser.parse_term("forall net f. (f --> Hx(&0)) net ==> ((\\x:A. --(f x)) --> Hx(&0)) net"), t112))
+  lim_null_quat_neg_c.set(@tactics.prove(@parser.parse_term("∀ net f. (f --> Hx(&0)) net ==> ((\\x:A. --(f x)) --> Hx(&0)) net"), t112))
 }
 
 ///|
@@ -316,7 +316,7 @@ fn step_13() -> Unit raise {
     })(t116(x117))
   })
   let t120 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t118), t119)
-  lim_null_quat_add_c.set(@tactics.prove(@parser.parse_term("forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x + g x) --> Hx(&0)) net"), t120))
+  lim_null_quat_add_c.set(@tactics.prove(@parser.parse_term("∀ net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x + g x) --> Hx(&0)) net"), t120))
 }
 
 ///|
@@ -342,7 +342,7 @@ fn step_14() -> Unit raise {
     })(t124(x125))
   })
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t126), t127)
-  lim_null_quat_sub_c.set(@tactics.prove(@parser.parse_term("forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x - g x) --> Hx(&0)) net"), t128))
+  lim_null_quat_sub_c.set(@tactics.prove(@parser.parse_term("∀ net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x - g x) --> Hx(&0)) net"), t128))
 }
 
 ///|
@@ -368,7 +368,7 @@ fn step_15() -> Unit raise {
     })(t132(x133))
   })
   let t136 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t134), t135)
-  lim_null_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x * g x) --> Hx(&0)) net"), t136))
+  lim_null_quat_mul_c.set(@tactics.prove(@parser.parse_term("∀ net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x * g x) --> Hx(&0)) net"), t136))
 }
 
 ///|
@@ -386,7 +386,7 @@ fn step_16() -> Unit raise {
   let t138 = @simp.asm_simp_tac(@list.List([lim_quat_lmul()]))
   let t137 = @tactics.subst1_tac(@qnormalizer.quat_poly(@parser.parse_term("Hx(&0) = c * Hx(&0)")))
   let t139 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t137), t138)
-  lim_null_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. c * f x) --> Hx(&0)) net"), t139))
+  lim_null_quat_lmul_c.set(@tactics.prove(@parser.parse_term("∀ net f c. (f --> Hx(&0)) net ==> ((\\x:A. c * f x) --> Hx(&0)) net"), t139))
 }
 
 ///|
@@ -404,7 +404,7 @@ fn step_17() -> Unit raise {
   let t141 = @simp.asm_simp_tac(@list.List([lim_quat_rmul()]))
   let t140 = @tactics.subst1_tac(@qnormalizer.quat_poly(@parser.parse_term("Hx(&0) = Hx(&0) * c")))
   let t142 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t140), t141)
-  lim_null_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. f x * c) --> Hx(&0)) net"), t142))
+  lim_null_quat_rmul_c.set(@tactics.prove(@parser.parse_term("∀ net f c. (f --> Hx(&0)) net ==> ((\\x:A. f x * c) --> Hx(&0)) net"), t142))
 }
 
 ///|
@@ -433,7 +433,7 @@ fn step_18() -> Unit raise {
     })(t149(x150))
   })
   let t153 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t151), t152)
-  lim_null_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall net f n. (f --> Hx(&0)) net /\\ ~(n = 0)\n             ==> ((\\x:A. (f x) pow n) --> Hx(&0)) net"), t153))
+  lim_null_quat_pow_c.set(@tactics.prove(@parser.parse_term("∀ net f n. (f --> Hx(&0)) net /\\ ~(n = 0)\n             ==> ((\\x:A. (f x) pow n) --> Hx(&0)) net"), t153))
 }
 
 ///|
@@ -449,7 +449,7 @@ pub fn lim_null_quat_pow() -> @kernel.Thm {
 /// LIM_NULL_QUAT_BOUND
 fn step_19() -> Unit raise {
   let t154 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0()), @topology.lim_transform_bound()]))
-  lim_null_quat_bound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n     eventually (\\n. norm (f n) <= norm (g n)) net /\\ (g --> Hx(&0)) net\n     ==> (f --> Hx(&0)) net"), t154))
+  lim_null_quat_bound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f g.\n     eventually (\\n. norm (f n) <= norm (g n)) net /\\ (g --> Hx(&0)) net\n     ==> (f --> Hx(&0)) net"), t154))
 }
 
 ///|
@@ -465,7 +465,7 @@ pub fn lim_null_quat_bound() -> @kernel.Thm {
 /// SUMS_QUAT_0
 fn step_20() -> Unit raise {
   let t155 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0()), @topology.sums_0()]))
-  sums_quat_0_c.set(@tactics.prove(@parser.parse_term("forall f s. (forall n. n IN s ==> f n = Hx(&0)) ==> (f sums Hx(&0)) s"), t155))
+  sums_quat_0_c.set(@tactics.prove(@parser.parse_term("∀ f s. (∀ n. n IN s ==> f n = Hx(&0)) ==> (f sums Hx(&0)) s"), t155))
 }
 
 ///|
@@ -489,7 +489,7 @@ fn step_21() -> Unit raise {
   let t157 = @simp.rewrite_tac(@list.List([@quaternion.quat_norm_mul(), @vectors.lift_cmul()]))
   let t156 = @simp.once_rewrite_tac(@list.List([@topology.lim_null_norm()]))
   let t164 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0())])), t156), t157), t158), t159), t160), t161), t162), t163)
-  lim_null_quat_rmul_bounded_c.set(@tactics.prove(@parser.parse_term("forall f g. (f --> Hx(&0)) net /\\ eventually (\\a:A. norm(g a) <= B) net\n         ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net"), t164))
+  lim_null_quat_rmul_bounded_c.set(@tactics.prove(@parser.parse_term("∀ f g. (f --> Hx(&0)) net /\\ eventually (\\a:A. norm(g a) <= B) net\n         ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net"), t164))
 }
 
 ///|
@@ -515,7 +515,7 @@ fn step_22() -> Unit raise {
   let t166 = @simp.rewrite_tac(@list.List([@quaternion.quat_norm_mul()]))
   let t165 = @simp.once_rewrite_tac(@list.List([@topology.lim_null_norm()]))
   let t175 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0())])), t165), t166), t167), t168), t169), t170), t171), t172), t173), t174)
-  lim_null_quat_lmul_bounded_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n     eventually (\\a. norm(f a) <= B) net /\\ (g --> Hx(&0)) net\n     ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net"), t175))
+  lim_null_quat_lmul_bounded_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f g.\n     eventually (\\a. norm(f a) <= B) net /\\ (g --> Hx(&0)) net\n     ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net"), t175))
 }
 
 ///|
@@ -538,7 +538,7 @@ fn step_23() -> Unit raise {
   let t181 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t180, t179, t178, t177]), @topology.lim_component_ubound()))
   let t176 = @tactics.repeat_tac(@tactics.strip_tac)
   let t183 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_re_def()])), t176), t181), t182)
-  lim_quat_re_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Re(f x) <= b) net\n     ==> Re(l) <= b"), t183))
+  lim_quat_re_ubound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Re(f x) <= b) net\n     ==> Re(l) <= b"), t183))
 }
 
 ///|
@@ -561,7 +561,7 @@ fn step_24() -> Unit raise {
   let t189 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t188, t187, t186, t185]), @topology.lim_component_ubound()))
   let t184 = @tactics.repeat_tac(@tactics.strip_tac)
   let t191 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im1_def()])), t184), t189), t190)
-  lim_im1_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im1(f x) <= b) net\n     ==> Im1(l) <= b"), t191))
+  lim_im1_ubound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im1(f x) <= b) net\n     ==> Im1(l) <= b"), t191))
 }
 
 ///|
@@ -584,7 +584,7 @@ fn step_25() -> Unit raise {
   let t197 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t196, t195, t194, t193]), @topology.lim_component_ubound()))
   let t192 = @tactics.repeat_tac(@tactics.strip_tac)
   let t199 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im2_def()])), t192), t197), t198)
-  lim_im2_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im2(f x) <= b) net\n     ==> Im2(l) <= b"), t199))
+  lim_im2_ubound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im2(f x) <= b) net\n     ==> Im2(l) <= b"), t199))
 }
 
 ///|
@@ -607,7 +607,7 @@ fn step_26() -> Unit raise {
   let t205 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t204, t203, t202, t201]), @topology.lim_component_ubound()))
   let t200 = @tactics.repeat_tac(@tactics.strip_tac)
   let t207 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im3_def()])), t200), t205), t206)
-  lim_im3_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im3(f x) <= b) net\n     ==> Im3(l) <= b"), t207))
+  lim_im3_ubound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im3(f x) <= b) net\n     ==> Im3(l) <= b"), t207))
 }
 
 ///|
@@ -645,7 +645,7 @@ fn step_28() -> Unit raise {
   let t213 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t212, t211, t210, t209]), @topology.lim_component_lbound()))
   let t208 = @tactics.repeat_tac(@tactics.strip_tac)
   let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_re_def()])), t208), t213), t214)
-  lim_quat_re_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Re(f x)) net\n     ==> b <= Re(l)"), t215))
+  lim_quat_re_lbound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Re(f x)) net\n     ==> b <= Re(l)"), t215))
 }
 
 ///|
@@ -668,7 +668,7 @@ fn step_29() -> Unit raise {
   let t221 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t220, t219, t218, t217]), @topology.lim_component_lbound()))
   let t216 = @tactics.repeat_tac(@tactics.strip_tac)
   let t223 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im1_def()])), t216), t221), t222)
-  lim_im1_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im1(f x)) net\n     ==> b <= Im1(l)"), t223))
+  lim_im1_lbound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im1(f x)) net\n     ==> b <= Im1(l)"), t223))
 }
 
 ///|
@@ -691,7 +691,7 @@ fn step_30() -> Unit raise {
   let t229 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t228, t227, t226, t225]), @topology.lim_component_lbound()))
   let t224 = @tactics.repeat_tac(@tactics.strip_tac)
   let t231 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im2_def()])), t224), t229), t230)
-  lim_im2_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im2(f x)) net\n     ==> b <= Im2(l)"), t231))
+  lim_im2_lbound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im2(f x)) net\n     ==> b <= Im2(l)"), t231))
 }
 
 ///|
@@ -714,7 +714,7 @@ fn step_31() -> Unit raise {
   let t237 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t236, t235, t234, t233]), @topology.lim_component_lbound()))
   let t232 = @tactics.repeat_tac(@tactics.strip_tac)
   let t239 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im3_def()])), t232), t237), t238)
-  lim_im3_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im3(f x)) net\n     ==> b <= Im3(l)"), t239))
+  lim_im3_lbound_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im3(f x)) net\n     ==> b <= Im3(l)"), t239))
 }
 
 ///|
@@ -754,7 +754,7 @@ fn step_33() -> Unit raise {
   let t241 = @simp.asm_rewrite_tac(@list.List([]))
   let t240 = @tactics.match_mp_tac(@topology.series_linear())
   let t247 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t240), t241), t245), t246)
-  series_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f l c s. (f sums l) s ==> ((\\x. c * f x) sums c * l) s"), t247))
+  series_quat_lmul_c.set(@tactics.prove(@parser.parse_term("∀ f l c s. (f sums l) s ==> ((\\x. c * f x) sums c * l) s"), t247))
 }
 
 ///|
@@ -784,7 +784,7 @@ fn step_34() -> Unit raise {
     @tactics.then_tac(@tactics.mp_tac(th), t250)
   })
   let t259 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t251), t252), t253), t257), t258)
-  series_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f l c s. (f sums l) s ==> ((\\x. f x * c) sums l * c) s"), t259))
+  series_quat_rmul_c.set(@tactics.prove(@parser.parse_term("∀ f l c s. (f sums l) s ==> ((\\x. f x * c) sums l * c) s"), t259))
 }
 
 ///|
@@ -801,7 +801,7 @@ pub fn series_quat_rmul() -> @kernel.Thm {
 fn step_35() -> Unit raise {
   let t260 = @meson.meson_tac(@list.List([series_quat_lmul()]))
   let t261 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.summable()])), t260)
-  summable_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f c s. summable s f ==> summable s (\\x. c * f x)"), t261))
+  summable_quat_lmul_c.set(@tactics.prove(@parser.parse_term("∀ f c s. summable s f ==> summable s (\\x. c * f x)"), t261))
 }
 
 ///|
@@ -818,7 +818,7 @@ pub fn summable_quat_lmul() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let t262 = @meson.meson_tac(@list.List([series_quat_rmul()]))
   let t263 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.summable()])), t262)
-  summable_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f c s. summable s f ==> summable s (\\x. f x * c)"), t263))
+  summable_quat_rmul_c.set(@tactics.prove(@parser.parse_term("∀ f c s. summable s f ==> summable s (\\x. f x * c)"), t263))
 }
 
 ///|
@@ -834,7 +834,7 @@ pub fn summable_quat_rmul() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_MUL
 fn step_37() -> Unit raise {
   let t264 = @simp.simp_tac(@list.List([@topology.continuous(), lim_quat_mul()]))
-  continuous_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n     f continuous net /\\ g continuous net\n     ==> (\\x. f(x) * g(x)) continuous net"), t264))
+  continuous_quat_mul_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f g.\n     f continuous net /\\ g continuous net\n     ==> (\\x. f(x) * g(x)) continuous net"), t264))
 }
 
 ///|
@@ -850,7 +850,7 @@ pub fn continuous_quat_mul() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_INV
 fn step_38() -> Unit raise {
   let t265 = @simp.simp_tac(@list.List([@topology.continuous(), lim_quat_inv()]))
-  continuous_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f.\n     f continuous net /\\ ~(f(netlimit net) = Hx(&0))\n     ==> (\\x. inv(f x)) continuous net"), t265))
+  continuous_quat_inv_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f.\n     f continuous net /\\ ~(f(netlimit net) = Hx(&0))\n     ==> (\\x. inv(f x)) continuous net"), t265))
 }
 
 ///|
@@ -866,7 +866,7 @@ pub fn continuous_quat_inv() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_POW
 fn step_39() -> Unit raise {
   let t266 = @simp.simp_tac(@list.List([@topology.continuous(), lim_quat_pow()]))
-  continuous_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f n. f continuous net ==> (\\x. f(x) pow n) continuous net"), t266))
+  continuous_quat_pow_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f n. f continuous net ==> (\\x. f(x) pow n) continuous net"), t266))
 }
 
 ///|
@@ -882,7 +882,7 @@ pub fn continuous_quat_pow() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_INV_WITHIN
 fn step_40() -> Unit raise {
   let t267 = @meson.meson_tac(@list.List([continuous_quat_inv(), @topology.continuous_trivial_limit(), @topology.netlimit_within()]))
-  continuous_quat_inv_within_c.set(@tactics.prove(@parser.parse_term("forall f s a. f continuous (at a within s) /\\ ~(f a = Hx(&0))\n           ==> (\\x:real^N. inv(f x)) continuous (at a within s)"), t267))
+  continuous_quat_inv_within_c.set(@tactics.prove(@parser.parse_term("∀ f s a. f continuous (at a within s) /\\ ~(f a = Hx(&0))\n           ==> (\\x:real^N. inv(f x)) continuous (at a within s)"), t267))
 }
 
 ///|
@@ -898,7 +898,7 @@ pub fn continuous_quat_inv_within() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_INV_AT
 fn step_41() -> Unit raise {
   let t268 = @simp.simp_tac(@list.List([continuous_quat_inv(), @topology.netlimit_at()]))
-  continuous_quat_inv_at_c.set(@tactics.prove(@parser.parse_term("forall f a. f continuous (at a) /\\ ~(f a = Hx(&0))\n         ==> (\\x:real^N. inv(f x)) continuous (at a)"), t268))
+  continuous_quat_inv_at_c.set(@tactics.prove(@parser.parse_term("∀ f a. f continuous (at a) /\\ ~(f a = Hx(&0))\n         ==> (\\x:real^N. inv(f x)) continuous (at a)"), t268))
 }
 
 ///|
@@ -915,7 +915,7 @@ pub fn continuous_quat_inv_at() -> @kernel.Thm {
 fn step_42() -> Unit raise {
   let t269 = @simp.simp_tac(@list.List([continuous_quat_mul()]))
   let t270 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_on_eq_continuous_within()])), t269)
-  continuous_on_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall f g s. f continuous_on s /\\ g continuous_on s\n           ==> (\\x:real^N. f(x) * g(x)) continuous_on s"), t270))
+  continuous_on_quat_mul_c.set(@tactics.prove(@parser.parse_term("∀ f g s. f continuous_on s /\\ g continuous_on s\n           ==> (\\x:real^N. f(x) * g(x)) continuous_on s"), t270))
 }
 
 ///|
@@ -932,7 +932,7 @@ pub fn continuous_on_quat_mul() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   let t271 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
   let t272 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_on_v1()])), t271)
-  continuous_on_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->quat s. f continuous_on s ==> (\\x. c * f(x)) continuous_on s"), t272))
+  continuous_on_quat_lmul_c.set(@tactics.prove(@parser.parse_term("∀ f:real^N->quat s. f continuous_on s ==> (\\x. c * f(x)) continuous_on s"), t272))
 }
 
 ///|
@@ -949,7 +949,7 @@ pub fn continuous_on_quat_lmul() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t273 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
   let t274 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_on_v1()])), t273)
-  continuous_on_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->quat s. f continuous_on s ==> (\\x. f(x) * c) continuous_on s"), t274))
+  continuous_on_quat_rmul_c.set(@tactics.prove(@parser.parse_term("∀ f:real^N->quat s. f continuous_on s ==> (\\x. f(x) * c) continuous_on s"), t274))
 }
 
 ///|
@@ -965,7 +965,7 @@ pub fn continuous_on_quat_rmul() -> @kernel.Thm {
 /// CONTINUOUS_ON_QUAT_INV
 fn step_45() -> Unit raise {
   let t275 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_quat_inv_within()]))
-  continuous_on_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->quat.\n     f continuous_on s /\\\n     (forall x. x IN s ==> ~(f x = Hx(&0)))\n     ==> (\\x. inv(f x)) continuous_on s"), t275))
+  continuous_on_quat_inv_c.set(@tactics.prove(@parser.parse_term("∀ f:real^N->quat.\n     f continuous_on s /\\\n     (∀ x. x IN s ==> ~(f x = Hx(&0)))\n     ==> (\\x. inv(f x)) continuous_on s"), t275))
 }
 
 ///|
@@ -981,7 +981,7 @@ pub fn continuous_on_quat_inv() -> @kernel.Thm {
 /// CONTINUOUS_ON_QUAT_POW
 fn step_46() -> Unit raise {
   let t276 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_quat_pow()]))
-  continuous_on_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall f n s. f continuous_on s ==> (\\x:real^N. f(x) pow n) continuous_on s"), t276))
+  continuous_on_quat_pow_c.set(@tactics.prove(@parser.parse_term("∀ f n s. f continuous_on s ==> (\\x:real^N. f(x) pow n) continuous_on s"), t276))
 }
 
 ///|
@@ -998,7 +998,7 @@ pub fn continuous_on_quat_pow() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t277 = @meson.meson_tac(@list.List([@vectors.norm_arith(@parser.parse_term("norm(a - b:real^N) < d ==> abs(norm a - norm b) < d"))]))
   let t278 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_at_v1(), @vectors.dist(), @equal.gsym(@quaternion.hx_sub()), @quaternion.norm_hx()])), t277)
-  continuous_at_hx_norm_c.set(@tactics.prove(@parser.parse_term("forall z:real^N. (\\z. Hx(norm z)) continuous at z"), t278))
+  continuous_at_hx_norm_c.set(@tactics.prove(@parser.parse_term("∀ z:real^N. (\\z. Hx(norm z)) continuous at z"), t278))
 }
 
 ///|
@@ -1014,7 +1014,7 @@ pub fn continuous_at_hx_norm() -> @kernel.Thm {
 /// CONTINUOUS_WITHIN_HX_NORM
 fn step_48() -> Unit raise {
   let t279 = @simp.simp_tac(@list.List([continuous_at_hx_norm(), @topology.continuous_at_within()]))
-  continuous_within_hx_norm_c.set(@tactics.prove(@parser.parse_term("forall z:real^N s. (\\z. Hx(norm z)) continuous (at z within s)"), t279))
+  continuous_within_hx_norm_c.set(@tactics.prove(@parser.parse_term("∀ z:real^N s. (\\z. Hx(norm z)) continuous (at z within s)"), t279))
 }
 
 ///|
@@ -1030,7 +1030,7 @@ pub fn continuous_within_hx_norm() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_NORM
 fn step_49() -> Unit raise {
   let t280 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_within_hx_norm()]))
-  continuous_on_hx_norm_c.set(@tactics.prove(@parser.parse_term("forall s. (\\z:real^N. Hx(norm z)) continuous_on s"), t280))
+  continuous_on_hx_norm_c.set(@tactics.prove(@parser.parse_term("∀ s. (\\z:real^N. Hx(norm z)) continuous_on s"), t280))
 }
 
 ///|
@@ -1048,7 +1048,7 @@ fn step_50() -> Unit raise {
   let t282 = @simp.rewrite_tac(@list.List([@vectors.linear(), @vectors.dot_radd(), @vectors.dot_rmul(), @quaternion.hx_add(), @quaternion.quat_cmul(), @quaternion.hx_mul()]))
   let t281 = @tactics.match_mp_tac(@topology.linear_continuous_at())
   let t283 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t281), t282)
-  continuous_at_hx_dot_c.set(@tactics.prove(@parser.parse_term("forall c z:real^N. (\\z. Hx(c dot z)) continuous at z"), t283))
+  continuous_at_hx_dot_c.set(@tactics.prove(@parser.parse_term("∀ c z:real^N. (\\z. Hx(c dot z)) continuous at z"), t283))
 }
 
 ///|
@@ -1064,7 +1064,7 @@ pub fn continuous_at_hx_dot() -> @kernel.Thm {
 /// CONTINUOUS_WITHIN_HX_DOT
 fn step_51() -> Unit raise {
   let t284 = @simp.simp_tac(@list.List([continuous_at_hx_dot(), @topology.continuous_at_within()]))
-  continuous_within_hx_dot_c.set(@tactics.prove(@parser.parse_term("forall c z:real^N s. (\\z. Hx(c dot z)) continuous (at z within s)"), t284))
+  continuous_within_hx_dot_c.set(@tactics.prove(@parser.parse_term("∀ c z:real^N s. (\\z. Hx(c dot z)) continuous (at z within s)"), t284))
 }
 
 ///|
@@ -1080,7 +1080,7 @@ pub fn continuous_within_hx_dot() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_DOT
 fn step_52() -> Unit raise {
   let t285 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_within_hx_dot()]))
-  continuous_on_hx_dot_c.set(@tactics.prove(@parser.parse_term("forall s c:real^N. (\\z. Hx(c dot z)) continuous_on s"), t285))
+  continuous_on_hx_dot_c.set(@tactics.prove(@parser.parse_term("∀ s c:real^N. (\\z. Hx(c dot z)) continuous_on s"), t285))
 }
 
 ///|
@@ -1099,7 +1099,7 @@ fn step_53() -> Unit raise {
   let t286 = @equal.gsym(@vectors.drop_sub())
   let t287 = @simp.rewrite_tac(@list.List([@vectors.dist(), @equal.gsym(@quaternion.hx_sub()), @quaternion.norm_hx(), t286]))
   let t289 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous(), @topology.tendsto()])), t287), t288)
-  continuous_hx_drop_c.set(@tactics.prove(@parser.parse_term("forall net f. f continuous net ==> (\\x:A. Hx(drop(f x))) continuous net"), t289))
+  continuous_hx_drop_c.set(@tactics.prove(@parser.parse_term("∀ net f. f continuous net ==> (\\x:A. Hx(drop(f x))) continuous net"), t289))
 }
 
 ///|
@@ -1115,7 +1115,7 @@ pub fn continuous_hx_drop() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_DROP
 fn step_54() -> Unit raise {
   let t290 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_hx_drop()]))
-  continuous_on_hx_drop_c.set(@tactics.prove(@parser.parse_term("forall f s. f continuous_on s ==> (\\x:real^N. Hx(drop(f x))) continuous_on s"), t290))
+  continuous_on_hx_drop_c.set(@tactics.prove(@parser.parse_term("∀ f s. f continuous_on s ==> (\\x:real^N. Hx(drop(f x))) continuous_on s"), t290))
 }
 
 ///|
@@ -1133,7 +1133,7 @@ fn step_55() -> Unit raise {
   let t292 = @simp.rewrite_tac(@list.List([@quaternion.norm_hx(), @vectors.norm_lift()]))
   let t291 = @equal.gsym(@vectors.lift_sub())
   let t293 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous(), @topology.tendsto(), @vectors.dist(), @equal.gsym(@quaternion.hx_sub()), t291])), t292)
-  continuous_hx_lift_c.set(@tactics.prove(@parser.parse_term("forall f. (\\x:A. Hx(f x)) continuous net <=> (\\x. lift(f x)) continuous net"), t293))
+  continuous_hx_lift_c.set(@tactics.prove(@parser.parse_term("∀ f. (\\x:A. Hx(f x)) continuous net <=> (\\x. lift(f x)) continuous net"), t293))
 }
 
 ///|
@@ -1149,7 +1149,7 @@ pub fn continuous_hx_lift() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_LIFT
 fn step_56() -> Unit raise {
   let t294 = @simp.rewrite_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_hx_lift()]))
-  continuous_on_hx_lift_c.set(@tactics.prove(@parser.parse_term("forall f s. (\\x:real^N. Hx(f x)) continuous_on s <=>\n         (\\x. lift(f x)) continuous_on s"), t294))
+  continuous_on_hx_lift_c.set(@tactics.prove(@parser.parse_term("∀ f s. (\\x:real^N. Hx(f x)) continuous_on s <=>\n         (\\x. lift(f x)) continuous_on s"), t294))
 }
 
 ///|
@@ -1183,7 +1183,7 @@ fn step_58() -> Unit raise {
   let t297 = @simp.rewrite_tac(@list.List([linear_quat_components()]))
   let t296 = @tactics.match_mp_tac(@topology.linear_continuous_at())
   let t298 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t296), t297)
-  continuous_at_quat_components_c.set(@tactics.prove(@parser.parse_term("(forall q. (Hx o  Re) continuous at q) /\\\n   (forall q. (Hx o Im1) continuous at q) /\\\n   (forall q. (Hx o Im2) continuous at q) /\\\n   (forall q. (Hx o Im3) continuous at q)"), t298))
+  continuous_at_quat_components_c.set(@tactics.prove(@parser.parse_term("(∀ q. (Hx o  Re) continuous at q) /\\\n   (∀ q. (Hx o Im1) continuous at q) /\\\n   (∀ q. (Hx o Im2) continuous at q) /\\\n   (∀ q. (Hx o Im3) continuous at q)"), t298))
 }
 
 ///|
@@ -1201,7 +1201,7 @@ fn step_59() -> Unit raise {
   let t300 = @simp.rewrite_tac(@list.List([linear_quat_components()]))
   let t299 = @tactics.match_mp_tac(@topology.linear_continuous_on())
   let t301 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t299), t300)
-  continuous_on_quat_components_c.set(@tactics.prove(@parser.parse_term("(forall s. (Hx o  Re) continuous_on s) /\\\n   (forall s. (Hx o Im1) continuous_on s) /\\\n   (forall s. (Hx o Im2) continuous_on s) /\\\n   (forall s. (Hx o Im3) continuous_on s)"), t301))
+  continuous_on_quat_components_c.set(@tactics.prove(@parser.parse_term("(∀ s. (Hx o  Re) continuous_on s) /\\\n   (∀ s. (Hx o Im1) continuous_on s) /\\\n   (∀ s. (Hx o Im2) continuous_on s) /\\\n   (∀ s. (Hx o Im3) continuous_on s)"), t301))
 }
 
 ///|

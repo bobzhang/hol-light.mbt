@@ -21,7 +21,7 @@ pub fn vector_sub_elim_thm() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@vectors.dot_pos_le(), @real.sqrt_pow2(), @real.sqrt_unique(), @realarith.real_pow_2(), @real.real_pow2_abs(), @real.real_abs_pos()]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@vectors.vector_norm()]))), t1)
-  norm_elim_thm_c.set(@tactics.prove(@parser.parse_term("forall P t. P (norm t) = forall x. &0 <= x /\\ (x pow 2 = (t:real^N) dot t) ==> P x"), t2))
+  norm_elim_thm_c.set(@tactics.prove(@parser.parse_term("∀ P t. P (norm t) = ∀ x. &0 <= x /\\ (x pow 2 = (t:real^N) dot t) ==> P x"), t2))
 }
 
 ///|
@@ -128,7 +128,7 @@ fn step_7() -> Unit raise {
   let t14 = @list.List([@simp.asm_rewrite_tac(@list.List([@vectors.orthogonal(), @vectors.dot_lzero()])), @tactics.all_tac])
   let t13 = @class.asm_cases_tac(@parser.parse_term("b = vec 0 :real^N"))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t14), t15), t16), t17)
-  component_orthogonal_c.set(@tactics.prove(@parser.parse_term("forall b:real^N x. orthogonal b (x - (component b x) % b)"), t18))
+  component_orthogonal_c.set(@tactics.prove(@parser.parse_term("∀ b:real^N x. orthogonal b (x - (component b x) % b)"), t18))
 }
 
 ///|
@@ -146,7 +146,7 @@ fn step_8() -> Unit raise {
   let t20 = @simp.asm_simp_tac(@list.List([@vectors.orthogonal_clauses(), @nums.suc_inj()]))
   let t19 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil(), @nums.not_suc(), @lists.itlist2(), @lists.length(), @lists.all()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @lists.list_induct_tac), t19), t20)
-  orthogonal_sum_lemma_c.set(@tactics.prove(@parser.parse_term("forall cs vs.\n       ALL (orthogonal x) vs /\\ orthogonal x z /\\ (LENGTH cs = LENGTH vs)\n        ==> orthogonal x (ITLIST2 (\\a v s. a % v + s) cs vs z)"), t21))
+  orthogonal_sum_lemma_c.set(@tactics.prove(@parser.parse_term("∀ cs vs.\n       ALL (orthogonal x) vs /\\ orthogonal x z /\\ (LENGTH cs = LENGTH vs)\n        ==> orthogonal x (ITLIST2 (\\a v s. a % v + s) cs vs z)"), t21))
 }
 
 ///|
@@ -234,7 +234,7 @@ fn step_9() -> Unit raise {
   let t23 = @simp.simp_tac(@list.List([@lists.all(), @lists.length(), @lists.itlist2(), @lists.length_eq_nil()]))
   let t22 = @tactics.match_mp_tac(@ind_types.list_induct())
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()])), t22), t23), @tactics.conj_tac), t27), t29), t30), @tactics.disch_tac), t31), t35), t38), t41), t43), t44), t45), @tactics.disch_tac), t47), t48), t52), t59), t60), t69), t70), t71), t72), t73), t74), t79), t81), @lists.list_induct_tac), @lists.list_induct_tac), @lists.list_induct_tac), t82), t83), t84), @vectors.vector_arith_tac)
-  gram_schmidt_lemma_c.set(@tactics.prove(@parser.parse_term("forall w:real^N vs. ?u as.\n        ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs) /\\\n        (w = ITLIST2 (\\a v s. a % v + s) as vs u)"), t85))
+  gram_schmidt_lemma_c.set(@tactics.prove(@parser.parse_term("∀ w:real^N vs. ?u as.\n        ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs) /\\\n        (w = ITLIST2 (\\a v s. a % v + s) as vs u)"), t85))
 }
 
 ///|
@@ -255,7 +255,7 @@ fn step_10() -> Unit raise {
   let t87 = @tactics.x_gen_tac(@parser.parse_term("w:real^N"))
   let t86 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t86), @tactics.disch_tac), t87), t89), t90)
-  solovay_lemma_c.set(@tactics.prove(@parser.parse_term("forall P vs. (forall w:real^N. P w vs) =\n          (forall as u. ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs)\n                  ==> P (ITLIST2 (\\a v s. a % v + s) as vs u) vs)"), t91))
+  solovay_lemma_c.set(@tactics.prove(@parser.parse_term("∀ P vs. (∀ w:real^N. P w vs) =\n          (∀ as u. ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs)\n                  ==> P (ITLIST2 (\\a v s. a % v + s) as vs u) vs)"), t91))
 }
 
 ///|
@@ -271,7 +271,7 @@ pub fn solovay_lemma() -> @kernel.Thm {
 /// FORALL_LENGTH_CLAUSES
 fn step_11() -> Unit raise {
   let t92 = @meson.meson_tac(@list.List([@lists.length(), @lists.length_eq_nil(), @nums.not_suc(), @lists.length_eq_cons()]))
-  forall_length_clauses_c.set(@tactics.prove(@parser.parse_term("((forall l. (LENGTH l = 0) ==> P l) = P []) /\\\n   ((forall l. (LENGTH l = SUC n) ==> P l) =\n         (forall h t. (LENGTH t = n) ==> P (CONS h t)))"), t92))
+  forall_length_clauses_c.set(@tactics.prove(@parser.parse_term("((∀ l. (LENGTH l = 0) ==> P l) = P []) /\\\n   ((∀ l. (LENGTH l = SUC n) ==> P l) =\n         (∀ h t. (LENGTH t = n) ==> P (CONS h t)))"), t92))
 }
 
 ///|
@@ -319,7 +319,7 @@ fn step_13() -> Unit raise {
   let t104 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_add_assoc()]))
   let t103 = @simp.rewrite_tac(@list.List([@lists.itlist2_def(), @vectors.vector_add_lid()]))
   let t105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t103), t104)
-  itlist2_0_lemma_c.set(@tactics.prove(@parser.parse_term("forall u as vs. ITLIST2 (\\a v s. a % v + s) as vs u =\n             ITLIST2 (\\a v s. a % v + s) as vs (vec 0) + u"), t105))
+  itlist2_0_lemma_c.set(@tactics.prove(@parser.parse_term("∀ u as vs. ITLIST2 (\\a v s. a % v + s) as vs u =\n             ITLIST2 (\\a v s. a % v + s) as vs (vec 0) + u"), t105))
 }
 
 ///|
@@ -422,7 +422,7 @@ fn step_14() -> Unit raise {
   })
   let t106 = @simp.rewrite_tac(@list.List([]))
   let t173 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("\\w:real^N vs.  P (MAP ((dot) w) (CONS w vs)) vs :bool"), solovay_lemma())), t106), t116), t120), @tactics.ap_term_tac), t122), t123), t124), t125), @tactics.ap_term_tac), t127), t128), t129), t130), @tactics.strip_tac), t131), @tactics.binop_tac), t132), t133), t134), t135), t136), t148), t149), @tactics.conj_tac), t172)
-  solovay_proforma_eq_c.set(@tactics.prove(@parser.parse_term("(forall w:real^N. P (MAP ((dot) w) (CONS w vs)) vs) =\n   (forall u. ALL (orthogonal u) vs\n        ==> forall as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS\n                          ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                           (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) +\n                           u dot u)\n                          (MAP ((dot)\n                                (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                               vs))\n                 vs)"), t173))
+  solovay_proforma_eq_c.set(@tactics.prove(@parser.parse_term("(∀ w:real^N. P (MAP ((dot) w) (CONS w vs)) vs) =\n   (∀ u. ALL (orthogonal u) vs\n        ==> ∀ as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS\n                          ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                           (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) +\n                           u dot u)\n                          (MAP ((dot)\n                                (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                               vs))\n                 vs)"), t173))
 }
 
 ///|
@@ -448,7 +448,7 @@ fn step_15() -> Unit raise {
     }
   }, @list.List([solovay_proforma_eq()]))
   let t182 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t177), t178), t179), t180), t181)
-  solovay_proforma_c.set(@tactics.prove(@parser.parse_term("forall P vs.\n   (forall c. &0 <= c\n        ==> forall as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                              (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) + c)\n                             (MAP ((dot)\n                                   (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                                  vs))\n                    vs)\n   ==> forall w:real^N. P (MAP ((dot) w) (CONS w vs)) vs"), t182))
+  solovay_proforma_c.set(@tactics.prove(@parser.parse_term("∀ P vs.\n   (∀ c. &0 <= c\n        ==> ∀ as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                              (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) + c)\n                             (MAP ((dot)\n                                   (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                                  vs))\n                    vs)\n   ==> ∀ w:real^N. P (MAP ((dot) w) (CONS w vs)) vs"), t182))
 }
 
 ///|
@@ -601,7 +601,7 @@ pub fn solovay_vector_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// PYTHAGORAS
 fn step_19() -> Unit raise {
   let t223 = @tactics.then_tac(solovay_vector_tac, @tactics.conv_tac(@calc_rat.real_ring))
-  pythagoras_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t223))
+  pythagoras_c.set(@tactics.prove(@parser.parse_term("∀ A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t223))
 }
 
 ///|
@@ -617,7 +617,7 @@ pub fn pythagoras() -> @kernel.Thm {
 /// EXAMPLE_1
 fn step_20() -> Unit raise {
   let t224 = @tactics.then_tac(solovay_vector_tac, @tactics.conv_tac(@sos.real_sos))
-  example_1_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. x dot y <= norm x * norm y"), t224))
+  example_1_c.set(@tactics.prove(@parser.parse_term("∀ x y:real^N. x dot y <= norm x * norm y"), t224))
 }
 
 ///|
@@ -633,7 +633,7 @@ pub fn example_1() -> @kernel.Thm {
 /// EXAMPLE_2
 fn step_21() -> Unit raise {
   let t225 = @tactics.then_tac(solovay_vector_tac, @tactics.conv_tac(@sos.real_sos))
-  example_2_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. a % (x + y) = a % x + a % y"), t225))
+  example_2_c.set(@tactics.prove(@parser.parse_term("∀ x y:real^N. a % (x + y) = a % x + a % y"), t225))
 }
 
 ///|
@@ -649,7 +649,7 @@ pub fn example_2() -> @kernel.Thm {
 /// EXAMPLE_4
 fn step_22() -> Unit raise {
   let t226 = @tactics.then_tac(solovay_vector_tac, @tactics.conv_tac(@sos.real_sos))
-  example_4_c.set(@tactics.prove(@parser.parse_term("forall x y z. x dot (y + z) = (x dot y) + (x dot z)"), t226))
+  example_4_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x dot (y + z) = (x dot y) + (x dot z)"), t226))
 }
 
 ///|
@@ -665,7 +665,7 @@ pub fn example_4() -> @kernel.Thm {
 /// EXAMPLE_5
 fn step_23() -> Unit raise {
   let t227 = @tactics.then_tac(solovay_vector_tac, @tactics.conv_tac(@sos.real_sos))
-  example_5_c.set(@tactics.prove(@parser.parse_term("forall x y. (x dot x = &0) ==> (x dot y = &0)"), t227))
+  example_5_c.set(@tactics.prove(@parser.parse_term("∀ x y. (x dot x = &0) ==> (x dot y = &0)"), t227))
 }
 
 ///|
@@ -680,7 +680,7 @@ pub fn example_5() -> @kernel.Thm {
 ///|
 /// Examples/solovay.ml:354
 fn step_24() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("forall a d:real^N.\n    ~(d = vec 0) ==> norm (a + d) > norm a \\/ norm (a - d) > norm a")))
+  ignore(@tactics.g(@parser.parse_term("∀ a d:real^N.\n    ~(d = vec 0) ==> norm (a + d) > norm a \\/ norm (a - d) > norm a")))
 }
 
 ///|
@@ -698,7 +698,7 @@ fn step_26() -> Unit raise {
 ///|
 /// Examples/solovay.ml:365
 fn step_27() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("forall b a d:real^N.\n    ~(d = vec 0) ==> dist(a,b + d) > dist(a,b) \\/ dist(a,b - d) > dist(a,b)")))
+  ignore(@tactics.g(@parser.parse_term("∀ b a d:real^N.\n    ~(d = vec 0) ==> dist(a,b + d) > dist(a,b) \\/ dist(a,b - d) > dist(a,b)")))
 }
 
 ///|
@@ -717,7 +717,7 @@ fn step_29() -> Unit raise {
 /// EXAMPLE_7
 fn step_30() -> Unit raise {
   let t228 = @tactics.then_tac(solovay_vector_tac, @tactics.conv_tac(@sos.real_sos))
-  example_7_c.set(@tactics.prove(@parser.parse_term("forall x. abs(norm x) = norm x"), t228))
+  example_7_c.set(@tactics.prove(@parser.parse_term("∀ x. abs(norm x) = norm x"), t228))
 }
 
 ///|
@@ -742,7 +742,7 @@ fn step_31() -> Unit raise {
       }, @kernel.frees(w))
     })(x233)(x233)
   }), t234)
-  example_9_c.set(@tactics.prove(@parser.parse_term("forall x:real^N y. x dot y > &0 ==> ?u. &0 < u /\\ norm(u % y - x) < norm x"), t235))
+  example_9_c.set(@tactics.prove(@parser.parse_term("∀ x:real^N y. x dot y > &0 ==> ?u. &0 < u /\\ norm(u % y - x) < norm x"), t235))
 }
 
 ///|
@@ -767,7 +767,7 @@ fn step_32() -> Unit raise {
       }, @kernel.frees(w))
     })(x240)(x240)
   }), t241)
-  example_10_c.set(@tactics.prove(@parser.parse_term("forall x:real^N y.\n        x dot y > &0\n        ==> ?u. &0 < u /\\\n                forall v. &0 < v /\\ v <= u ==> norm(v % y - x) < norm x"), t242))
+  example_10_c.set(@tactics.prove(@parser.parse_term("∀ x:real^N y.\n        x dot y > &0\n        ==> ?u. &0 < u /\\\n                ∀ v. &0 < v /\\ v <= u ==> norm(v % y - x) < norm x"), t242))
 }
 
 ///|

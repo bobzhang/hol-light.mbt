@@ -21,22 +21,22 @@ test "meson matches meson.ml" {
       sthm(@tactics.prove(t, @meson.meson_tac(@list.List([]))))
     })
   }
-  ms("mp", "(forall x:A. P x ==> Q x) /\\ P a ==> Q a")
-  ms("swap", "(?x:A. forall y:B. P x y) ==> (forall y. ?x. P x y)")
-  ms("drinker", "?x:A. P x ==> forall y. P y")
+  ms("mp", "(∀ x:A. P x ==> Q x) /\\ P a ==> Q a")
+  ms("swap", "(?x:A. ∀ y:B. P x y) ==> (∀ y. ?x. P x y)")
+  ms("drinker", "?x:A. P x ==> ∀ y. P y")
   ms(
-    "trans", "(forall x y z:A. R x y /\\ R y z ==> R x z) /\\ R a b /\\ R b c /\\ R c d ==> R a d",
+    "trans", "(∀ x y z:A. R x y /\\ R y z ==> R x z) /\\ R a b /\\ R b c /\\ R c d ==> R a d",
   )
-  ms("equality", "(forall x:A. f(f x) = x) ==> forall y. ?x. f x = y")
-  ms("p18", "?y:A. forall x. F y ==> F x")
+  ms("equality", "(∀ x:A. f(f x) = x) ==> ∀ y. ?x. f x = y")
+  ms("p18", "?y:A. ∀ x. F y ==> F x")
   log.attempt("meson_thms", () => {
-    let a = @kernel.assume_rule(tm("forall x:A. P x ==> Q x"))
+    let a = @kernel.assume_rule(tm("∀ x:A. P x ==> Q x"))
     let b = @kernel.assume_rule(tm("(P:A->bool) c"))
     let t = tm("(Q:A->bool) c")
     sthm(@tactics.prove(t, @meson.meson_tac(@list.List([a, b]))))
   })
   log.attempt("asm_meson", () => {
-    let t = tm("(forall x:A. P x ==> Q x) ==> P a ==> Q a")
+    let t = tm("(∀ x:A. P x ==> Q x) ==> P a ==> Q a")
     let tac = @tactics.then_tac(
       @tactics.repeat_tac(@tactics.disch_tac),
       @meson.asm_meson_tac(@list.List([])),
@@ -266,20 +266,20 @@ test "meson matches meson.ml" {
       #|  (a <=> b) ==> b \\/ ~a
       #|  a ==> b <=> ~a \\/ b
       #|0..0..1..solved at 4
-      #|mp =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))) (Q:fun('A,bool) a:'A))
+      #|mp =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))) (Q:fun('A,bool) a:'A))
       #|0..0..solved at 2
-      #|swap =  |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('B,bool),bool) (\y:'B. ((P:fun('A,fun('B,bool)) x:'A) y:'B)))))) (#forall:fun(fun('B,bool),bool) (\y:'B. (#?:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) y:'B))))))
+      #|swap =  |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('B,bool),bool) (\y:'B. ((P:fun('A,fun('B,bool)) x:'A) y:'B)))))) (#∀:fun(fun('B,bool),bool) (\y:'B. (#?:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) y:'B))))))
       #|0..0..solved at 2
-      #|drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#forall:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
+      #|drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#∀:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
       #|0..0..1..2..5..9..solved at 15
-      #|trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) a:'A) b:'A)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) b:'A) c:'A)) ((R:fun('A,fun('A,bool)) c:'A) d:'A))))) ((R:fun('A,fun('A,bool)) a:'A) d:'A))
+      #|trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. (#∀:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) a:'A) b:'A)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) b:'A) c:'A)) ((R:fun('A,fun('A,bool)) c:'A) d:'A))))) ((R:fun('A,fun('A,bool)) a:'A) d:'A))
       #|0..0..solved at 2
-      #|equality =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) (f:fun('A,'A) x:'A))) x:'A)))) (#forall:fun(fun('A,bool),bool) (\y:'A. (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) y:'A))))))
+      #|equality =  |- ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) (f:fun('A,'A) x:'A))) x:'A)))) (#∀:fun(fun('A,bool),bool) (\y:'A. (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) y:'A))))))
       #|p18 ! typechecking error (initial type assignment): F has type bool, it cannot be used with type _->bool
       #|0..0..1..solved at 4
       #|meson_thms ! prove: additional assumptions in result
       #|0..0..1..solved at 4
-      #|asm_meson =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) a:'A)) (Q:fun('A,bool) a:'A)))
+      #|asm_meson =  |- ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) a:'A)) (Q:fun('A,bool) a:'A)))
       #|0..0..0..depth_limit ! solve_goal: Too deep
       #|inferences = 0
       #|Warning: inventing type variables

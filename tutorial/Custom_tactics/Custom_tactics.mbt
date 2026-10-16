@@ -337,7 +337,7 @@ fn step_11() -> Unit raise {
     })(prove_nontrivial(x66))
   }, points())
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t67), t72), t73)
-  kochen_specker_lemma_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x y:real^3. ~(x = vec 0) /\\ ~(y = vec 0) /\\ orthogonal x y /\\\n                     ~(P x) ==> P y) /\\\n       (forall x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z /\\\n                P x /\\ P y ==> ~(P z))\n       ==> F"), t74))
+  kochen_specker_lemma_c.set(@tactics.prove(@parser.parse_term("∀ P. (∀ x y:real^3. ~(x = vec 0) /\\ ~(y = vec 0) /\\ orthogonal x y /\\\n                     ~(P x) ==> P y) /\\\n       (∀ x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z /\\\n                P x /\\ P y ==> ~(P z))\n       ==> F"), t74))
 }
 
 ///|
@@ -353,7 +353,7 @@ pub fn kochen_specker_lemma() -> @kernel.Thm {
 /// NONTRIVIAL_CROSS
 fn step_12() -> Unit raise {
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dot_eq_0())])), @Vectors.vec3_tac)
-  nontrivial_cross_c.set(@tactics.prove(@parser.parse_term("forall x y. orthogonal x y /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> ~(x cross y = vec 0)"), t75))
+  nontrivial_cross_c.set(@tactics.prove(@parser.parse_term("∀ x y. orthogonal x y /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> ~(x cross y = vec 0)"), t75))
 }
 
 ///|
@@ -383,7 +383,7 @@ fn step_13() -> Unit raise {
   let t77 = @simp.asm_rewrite_tac(@list.List([]))
   let t76 = @tactics.mp_tac(@bool.spec(@parser.parse_term("\\x:real^3. spin(x) = 1"), kochen_specker_lemma()))
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t76), t77), @tactics.conj_tac), t81), t82), t85), t86)
-  kochen_specker_paradox_c.set(@tactics.prove(@parser.parse_term("~(?spin:real^3->num.\n        forall x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z\n                ==> (spin x = 0) /\\ (spin y = 1) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 0) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 1) /\\ (spin z = 0))"), t87))
+  kochen_specker_paradox_c.set(@tactics.prove(@parser.parse_term("~(?spin:real^3->num.\n        ∀ x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z\n                ==> (spin x = 0) /\\ (spin y = 1) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 0) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 1) /\\ (spin z = 0))"), t87))
 }
 
 ///|

@@ -5,7 +5,7 @@
 /// FORALL_2
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2"))]))
-  forall_2_c.set(@tactics.prove(@parser.parse_term("forall P. (forall i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2"), t1))
+  forall_2_c.set(@tactics.prove(@parser.parse_term("∀ P. (∀ i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2"), t1))
 }
 
 ///|
@@ -41,7 +41,7 @@ fn step_3() -> Unit raise {
   let t5 = @simp.simp_tac(@list.List([@iterate.isum_clauses(), @sets.finite_rules(), @sets.not_in_empty(), @sets.in_sing()]))
   let t4 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("2")), @iterate.numseg_clauses(), @iterate.numseg_sing()])), t4), t5), t6), @int.int_arith_tac)
-  isum_2_c.set(@tactics.prove(@parser.parse_term("forall t. isum(1..2) t = t(1) + t(2)"), t7))
+  isum_2_c.set(@tactics.prove(@parser.parse_term("∀ t. isum(1..2) t = t(1) + t(2)"), t7))
 }
 
 ///|
@@ -120,7 +120,7 @@ pub fn imat_i_v1() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t10 = @simp.simp_tac(@list.List([@cart.cart_eq(), @cart.lambda_beta(), @cart.dimindex_2(), @calc_num.arith(), forall_2(), isum_2()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_thm(), imat_vmul(), imat_mul()])), t10), @int.int_arith_tac)
-  imat_mul_v1_c.set(@tactics.prove(@parser.parse_term("forall m1 m2. imat_vmul (imat_mul m1 m2) = imat_vmul m1 o imat_vmul m2"), t11))
+  imat_mul_v1_c.set(@tactics.prove(@parser.parse_term("∀ m1 m2. imat_vmul (imat_mul m1 m2) = imat_vmul m1 o imat_vmul m2"), t11))
 }
 
 ///|
@@ -136,7 +136,7 @@ pub fn imat_mul_v1() -> @kernel.Thm {
 /// IMAT_MUL_LID
 fn step_9() -> Unit raise {
   let t12 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), forall_2(), imat_i(), @cart.lambda_beta(), imat_mul(), @calc_num.arith(), isum_2()])), @int.int_arith_tac)
-  imat_mul_lid_c.set(@tactics.prove(@parser.parse_term("forall m. imat_mul imat_I m = m"), t12))
+  imat_mul_lid_c.set(@tactics.prove(@parser.parse_term("∀ m. imat_mul imat_I m = m"), t12))
 }
 
 ///|
@@ -152,7 +152,7 @@ pub fn imat_mul_lid() -> @kernel.Thm {
 /// IMAT_MUL_ASSOC
 fn step_10() -> Unit raise {
   let t13 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), forall_2(), imat_i(), @cart.lambda_beta(), imat_mul(), @calc_num.arith(), isum_2()])), @int.int_arith_tac)
-  imat_mul_assoc_c.set(@tactics.prove(@parser.parse_term("forall m1 m2 m3. imat_mul m1 (imat_mul m2 m3) = imat_mul (imat_mul m1 m2) m3"), t13))
+  imat_mul_assoc_c.set(@tactics.prove(@parser.parse_term("∀ m1 m2 m3. imat_mul m1 (imat_mul m2 m3) = imat_mul (imat_mul m1 m2) m3"), t13))
 }
 
 ///|
@@ -204,7 +204,7 @@ fn step_12() -> Unit raise {
     }
   }))
   let t30 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t20), t21), @class.cond_cases_tac), t22), t25), t27), t28), t29)
-  idivstep_stays_odd_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g'.\n         d rem &2 = &1 /\\ idivstep(d,f,g) = d',f',g' ==> d' rem &2 = &1"), t30))
+  idivstep_stays_odd_c.set(@tactics.prove(@parser.parse_term("∀ d f g d' f' g'.\n         d rem &2 = &1 /\\ idivstep(d,f,g) = d',f',g' ==> d' rem &2 = &1"), t30))
 }
 
 ///|
@@ -234,7 +234,7 @@ fn step_13() -> Unit raise {
     }
   }))
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t37), t38), t39), t40), @int.int_arith_tac)
-  idivstep_stays_zero_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g'.\n         g = &0 /\\ idivstep(d,f,g) = d',f',g' ==> g' = &0"), t41))
+  idivstep_stays_zero_c.set(@tactics.prove(@parser.parse_term("∀ d f g d' f' g'.\n         g = &0 /\\ idivstep(d,f,g) = d',f',g' ==> g' = &0"), t41))
 }
 
 ///|
@@ -397,7 +397,7 @@ fn step_22() -> Unit raise {
   let t64 = @simp.rewrite_tac(@list.List([divstep_d_v1()]))
   let t63 = @parser.parse_term("x rem &2 = y rem &2 <=> (&2 divides x <=> &2 divides y)")
   let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@meson.meson(@list.List([@int.int_rem_2_divides(), @int.int_reduce_conv(@parser.parse_term("&1:int = &0"))]), t63)])), @nums.induct_tac), t64), t65), @class.cond_cases_tac), t66), t67), t68)
-  divstep_d_parity_c.set(@tactics.prove(@parser.parse_term("forall n d f g. divstep_d n (d,f,g) rem &2 = d rem &2"), t69))
+  divstep_d_parity_c.set(@tactics.prove(@parser.parse_term("∀ n d f g. divstep_d n (d,f,g) rem &2 = d rem &2"), t69))
 }
 
 ///|
@@ -416,7 +416,7 @@ fn step_23() -> Unit raise {
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.then_tac(@simp.gen_rewrite_tac(fn(x70 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x70
   }, @list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac)), @nums.induct_tac), t71), @int.asm_int_arith_tac)
-  divstep_d_bound_c.set(@tactics.prove(@parser.parse_term("forall n d f g. abs(abs(divstep_d n (d,f,g)) - abs(d)) <= &2 * &n"), t72))
+  divstep_d_bound_c.set(@tactics.prove(@parser.parse_term("∀ n d f g. abs(abs(divstep_d n (d,f,g)) - abs(d)) <= &2 * &n"), t72))
 }
 
 ///|
@@ -434,7 +434,7 @@ fn step_24() -> Unit raise {
   let t74 = @simp.asm_simp_tac(@list.List([]))
   let t73 = @tactics.repeat_tac(@tactics.strip_tac)
   let t75 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([divstep_f_v1()]))), t73), @class.cond_cases_tac), t74)
-  divstep_f_odd_c.set(@tactics.prove(@parser.parse_term("forall n d f g. f rem &2 = &1 ==> divstep_f n (d,f,g) rem &2 = &1"), t75))
+  divstep_f_odd_c.set(@tactics.prove(@parser.parse_term("∀ n d f g. f rem &2 = &1 ==> divstep_f n (d,f,g) rem &2 = &1"), t75))
 }
 
 ///|
@@ -455,7 +455,7 @@ fn step_25() -> Unit raise {
   let t77 = @simp.asm_simp_tac(@list.List([]))
   let t76 = @tactics.repeat_tac(@tactics.strip_tac)
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([divstep_g_v1()]))), t76), t77), t78), t79), t80)
-  divstep_g_zero_c.set(@tactics.prove(@parser.parse_term("forall n d f g. g = &0 ==> divstep_g n (d,f,g) = &0"), t81))
+  divstep_g_zero_c.set(@tactics.prove(@parser.parse_term("∀ n d f g. g = &0 ==> divstep_g n (d,f,g) = &0"), t81))
 }
 
 ///|
@@ -500,7 +500,7 @@ fn step_26() -> Unit raise {
     })(t86(x87))
   })
   let t105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t88), t89), t96), t97), @tactics.gen_tac), t98), t100), t101), t103), t104)
-  let lemma = @tactics.prove(@parser.parse_term("forall m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)"), t105)
+  let lemma = @tactics.prove(@parser.parse_term("∀ m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)"), t105)
   let t138 = @tactics.conv_tac(@int.integer_rule)
   let t137 = @tactics.match_mp_tac(@integer.int_gcd_eq())
   let t136 = @tactics.first_x_assum(fn(x131 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -549,7 +549,7 @@ fn step_26() -> Unit raise {
       })(x121))
     })(x122)(x122)
   }), t124), t125), t126), t130), t136), t137), t138)
-  divstep_fg_gcd_c.set(@tactics.prove(@parser.parse_term("forall n d f g.\n        f rem &2 = &1\n        ==> gcd(divstep_f n (d,f,g),divstep_g n (d,f,g)) = gcd(f,g)"), t139))
+  divstep_fg_gcd_c.set(@tactics.prove(@parser.parse_term("∀ n d f g.\n        f rem &2 = &1\n        ==> gcd(divstep_f n (d,f,g),divstep_g n (d,f,g)) = gcd(f,g)"), t139))
 }
 
 ///|
@@ -596,7 +596,7 @@ fn step_27() -> Unit raise {
     x141
   }, @list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac))
   let t151 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm(), @class.taut(@parser.parse_term("(p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r"))])), @tactics.gen_tac), t142), t143), @tactics.disch_tac), @nums.induct_tac), t144), @class.cond_cases_tac), t145), t150), @int.asm_int_arith_tac)
-  let t152 = (@parser.parse_term("(forall B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (forall B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)"), t151)
+  let t152 = (@parser.parse_term("(∀ B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (∀ B n d f g.\n        --B <= f /\\ f < B /\\ --B <= g /\\ g < B\n        ==> --B <= divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)"), t151)
   let (divstep_f_bounds, divstep_g_bounds) = @bool.conj_pair((fn(x140 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x140.0, x140.1)
   })(t152))
@@ -639,7 +639,7 @@ fn step_28() -> Unit raise {
     x154
   }, @list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac))
   let t164 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm(), @class.taut(@parser.parse_term("(p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r"))])), @tactics.gen_tac), t155), t156), @tactics.disch_tac), @nums.induct_tac), t157), @class.cond_cases_tac), t158), t163), @int.asm_int_arith_tac)
-  let t165 = (@parser.parse_term("(forall B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (forall B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)"), t164)
+  let t165 = (@parser.parse_term("(∀ B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_f n (d,f,g) /\\ divstep_f n (d,f,g) < B) /\\\n   (∀ B n d f g.\n        --B < f /\\ f < B /\\ --B < g /\\ g < B\n        ==> --B < divstep_g n (d,f,g) /\\ divstep_g n (d,f,g) < B)"), t164)
   let (divstep_f_bounds_lt, divstep_g_bounds_lt) = @bool.conj_pair((fn(x153 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x153.0, x153.1)
   })(t165))
@@ -669,7 +669,7 @@ fn step_29() -> Unit raise {
   let t167 = @simp.asm_rewrite_tac(@list.List([@int.int_of_num_th(), @divstep.divstep()]))
   let t166 = @simp.rewrite_tac(@list.List([@divstep.divstep(), @iter.iter(), divstep_d_v1(), divstep_f_v1(), divstep_g_v1()]))
   let t183 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t166), t167), t168), t169), t170), t171), t172), t176), t177), t178), t179), t181), @class.cond_cases_tac), t182)
-  iter_divstep_integer_c.set(@tactics.prove(@parser.parse_term("forall f g n.\n        ITER n divstep (&1 / &2,f,g) =\n        (real_of_int(divstep_d n (&1,f,g)) / &2,\n         divstep_f n (&1,f,g),\n         divstep_g n (&1,f,g))"), t183))
+  iter_divstep_integer_c.set(@tactics.prove(@parser.parse_term("∀ f g n.\n        ITER n divstep (&1 / &2,f,g) =\n        (real_of_int(divstep_d n (&1,f,g)) / &2,\n         divstep_f n (&1,f,g),\n         divstep_g n (&1,f,g))"), t183))
 }
 
 ///|
@@ -718,7 +718,7 @@ fn step_31() -> Unit raise {
   let t185 = @simp.asm_rewrite_tac(@list.List([divstep_mat(), divstep_f_v1(), divstep_g_v1(), imat_i_v1(), @trivia.i_thm(), @int.int_pow_v1(), @int.int_mul_lid()]))
   let t184 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
   let t202 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), t184), @tactics.disch_tac), @nums.induct_tac), t185), t186), @class.cond_cases_tac), t187), t188), t189), t190), t191), t192), t194), @tactics.ap_term_tac), t195), t196), t197), t198), t199), t200), t201), @int.int_arith_tac)
-  divstep_mat_v1_c.set(@tactics.prove(@parser.parse_term("forall d f g n.\n        f rem &2 = &1\n        ==> imat_vmul (divstep_mat n (d,f,g)) (vector[f;g]) =\n            vector[&2 pow n * divstep_f n (d,f,g);\n                   &2 pow n * divstep_g n (d,f,g)]"), t202))
+  divstep_mat_v1_c.set(@tactics.prove(@parser.parse_term("∀ d f g n.\n        f rem &2 = &1\n        ==> imat_vmul (divstep_mat n (d,f,g)) (vector[f;g]) =\n            vector[&2 pow n * divstep_f n (d,f,g);\n                   &2 pow n * divstep_g n (d,f,g)]"), t202))
 }
 
 ///|
@@ -748,7 +748,7 @@ fn step_32() -> Unit raise {
   let t214 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x203 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x203
   }, @list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac), @nums.induct_tac), t204), t205), t206), @class.cond_cases_tac), t207), t212), t213), @int.asm_int_arith_tac)
-  divstep_mat_bounds_c.set(@tactics.prove(@parser.parse_term("forall n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n"), t214))
+  divstep_mat_bounds_c.set(@tactics.prove(@parser.parse_term("∀ n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n"), t214))
 }
 
 ///|
@@ -778,7 +778,7 @@ fn step_33() -> Unit raise {
   let t226 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x215 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x215
   }, @list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac), @nums.induct_tac), t216), t217), t218), @class.cond_cases_tac), t219), t224), t225), @int.asm_int_arith_tac)
-  divstep_mat_abs_bounds_c.set(@tactics.prove(@parser.parse_term("forall n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n /\\\n    abs(divstep_mat n t$1$1) + abs(divstep_mat n t$1$2) <= &2 pow n /\\\n    abs(divstep_mat n t$2$1) + abs(divstep_mat n t$2$2) <= &2 pow n"), t226))
+  divstep_mat_abs_bounds_c.set(@tactics.prove(@parser.parse_term("∀ n t.\n    --(&2 pow n) < divstep_mat n t$1$1 /\\ divstep_mat n t$1$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$1$2 /\\ divstep_mat n t$1$2 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$1 /\\ divstep_mat n t$2$1 <= &2 pow n /\\\n    --(&2 pow n) < divstep_mat n t$2$2 /\\ divstep_mat n t$2$2 <= &2 pow n /\\\n    abs(divstep_mat n t$1$1) + abs(divstep_mat n t$1$2) <= &2 pow n /\\\n    abs(divstep_mat n t$2$1) + abs(divstep_mat n t$2$2) <= &2 pow n"), t226))
 }
 
 ///|
@@ -817,7 +817,7 @@ fn step_35() -> Unit raise {
   let t232 = @simp.simp_tac(@list.List([divstep_g_zero()]))
   let t231 = @simp.asm_simp_tac(@list.List([divstep_mat(), imat_i(), @cart.lambda_beta(), @cart.dimindex_2(), @calc_num.arith()]))
   let t235 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t231), t232), t233), t234), @int.int_arith_tac)
-  divstep_mat_diagonal_c.set(@tactics.prove(@parser.parse_term("forall d f n.\n        divstep_mat n (d,f,&0) $1$2 = &0 /\\\n        divstep_mat n (d,f,&0) $2$1 = &0"), t235))
+  divstep_mat_diagonal_c.set(@tactics.prove(@parser.parse_term("∀ d f n.\n        divstep_mat n (d,f,&0) $1$2 = &0 /\\\n        divstep_mat n (d,f,&0) $2$1 = &0"), t235))
 }
 
 ///|
@@ -833,7 +833,7 @@ pub fn divstep_mat_diagonal() -> @kernel.Thm {
 /// DIVSTEP_MAT_DIAGONAL_1
 fn step_36() -> Unit raise {
   let t236 = @meson.meson_tac(@list.List([divstep_mat_diagonal()]))
-  divstep_mat_diagonal_1_c.set(@tactics.prove(@parser.parse_term("forall d f g n. g = &0 ==> divstep_mat n (d,f,g) $1$2 = &0"), t236))
+  divstep_mat_diagonal_1_c.set(@tactics.prove(@parser.parse_term("∀ d f g n. g = &0 ==> divstep_mat n (d,f,g) $1$2 = &0"), t236))
 }
 
 ///|
@@ -849,7 +849,7 @@ pub fn divstep_mat_diagonal_1() -> @kernel.Thm {
 /// DIVSTEP_MAT_DIAGONAL_2
 fn step_37() -> Unit raise {
   let t237 = @meson.meson_tac(@list.List([divstep_mat_diagonal()]))
-  divstep_mat_diagonal_2_c.set(@tactics.prove(@parser.parse_term("forall d f g n. g = &0 ==> divstep_mat n (d,f,g) $2$1 = &0"), t237))
+  divstep_mat_diagonal_2_c.set(@tactics.prove(@parser.parse_term("∀ d f g n. g = &0 ==> divstep_mat n (d,f,g) $2$1 = &0"), t237))
 }
 
 ///|
@@ -939,7 +939,7 @@ fn step_38() -> Unit raise {
   let t239 = @tactics.repeat_tac(@tactics.disch_tac)
   let t238 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t290 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(6, @tactics.gen_tac), t238), t239), @nums.induct_tac), t240), @tactics.disch_tac), t249), t255), t256), t260), t261), t268), @tactics.disch_tac), t276), t277), @class.cond_cases_tac), t278), t279), t280), t288), t289)
-  divstep_congruence_c.set(@tactics.prove(@parser.parse_term("forall m d f g f' g' n.\n        (f == f') (mod (&2 pow m)) /\\ (g == g') (mod (&2 pow m)) /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == divstep_f n (d,f',g'))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == divstep_g n (d,f',g'))\n            (mod (&2 pow (m - n)))"), t290))
+  divstep_congruence_c.set(@tactics.prove(@parser.parse_term("∀ m d f g f' g' n.\n        (f == f') (mod (&2 pow m)) /\\ (g == g') (mod (&2 pow m)) /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == divstep_f n (d,f',g'))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == divstep_g n (d,f',g'))\n            (mod (&2 pow (m - n)))"), t290))
 }
 
 ///|
@@ -955,7 +955,7 @@ pub fn divstep_congruence() -> @kernel.Thm {
 /// DIVSTEP_D_CONGRUENCE
 fn step_39() -> Unit raise {
   let t291 = @meson.meson_tac(@list.List([divstep_congruence(), @arith.le_refl()]))
-  divstep_d_congruence_c.set(@tactics.prove(@parser.parse_term("forall d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g')"), t291))
+  divstep_d_congruence_c.set(@tactics.prove(@parser.parse_term("∀ d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g')"), t291))
 }
 
 ///|
@@ -971,7 +971,7 @@ pub fn divstep_d_congruence() -> @kernel.Thm {
 /// DIVSTEP_D_CONGRUENCE_GEN
 fn step_40() -> Unit raise {
   let t292 = @meson.meson_tac(@list.List([divstep_congruence(), @arith.le_refl()]))
-  divstep_d_congruence_gen_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d',f',g')"), t292))
+  divstep_d_congruence_gen_c.set(@tactics.prove(@parser.parse_term("∀ d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_d n (d,f,g) = divstep_d n (d',f',g')"), t292))
 }
 
 ///|
@@ -987,7 +987,7 @@ pub fn divstep_d_congruence_gen() -> @kernel.Thm {
 /// DIVSTEP_MAT_CONGRUENCE
 fn step_41() -> Unit raise {
   let t293 = @meson.meson_tac(@list.List([divstep_congruence(), @arith.le_refl()]))
-  divstep_mat_congruence_c.set(@tactics.prove(@parser.parse_term("forall d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d,f',g')"), t293))
+  divstep_mat_congruence_c.set(@tactics.prove(@parser.parse_term("∀ d f g f' g' n.\n        (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d,f',g')"), t293))
 }
 
 ///|
@@ -1003,7 +1003,7 @@ pub fn divstep_mat_congruence() -> @kernel.Thm {
 /// DIVSTEP_MAT_CONGRUENCE_GEN
 fn step_42() -> Unit raise {
   let t294 = @meson.meson_tac(@list.List([divstep_congruence(), @arith.le_refl()]))
-  divstep_mat_congruence_gen_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d',f',g')"), t294))
+  divstep_mat_congruence_gen_c.set(@tactics.prove(@parser.parse_term("∀ d f g d' f' g' n.\n        d = d' /\\ (f == f') (mod (&2 pow n)) /\\ (g == g') (mod (&2 pow n))\n        ==> divstep_mat n (d,f,g) = divstep_mat n (d',f',g')"), t294))
 }
 
 ///|
@@ -1021,10 +1021,10 @@ fn step_43() -> Unit raise {
   let t299 = @simp.asm_simp_tac(@list.List([@integer.int_divides_pow_le_imp()]))
   let t298 = @simp.asm_rewrite_tac(@list.List([@int.int_cong_lrem(), @integer.int_cong_refl()]))
   let t297 = @tactics.exists_tac(@parser.parse_term("(&2:int) pow n"))
-  let t296 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("forall m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)")))
+  let t296 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("∀ m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)")))
   let t295 = @tactics.match_mp_tac(divstep_d_congruence())
   let t300 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t295), @tactics.conj_tac), t296), t297), t298), t299)
-  divstep_d_mod_c.set(@tactics.prove(@parser.parse_term("forall m n d f g.\n        m <= n\n        ==> divstep_d m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_d m (d,f,g)"), t300))
+  divstep_d_mod_c.set(@tactics.prove(@parser.parse_term("∀ m n d f g.\n        m <= n\n        ==> divstep_d m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_d m (d,f,g)"), t300))
 }
 
 ///|
@@ -1042,10 +1042,10 @@ fn step_44() -> Unit raise {
   let t305 = @simp.asm_simp_tac(@list.List([@integer.int_divides_pow_le_imp()]))
   let t304 = @simp.asm_rewrite_tac(@list.List([@int.int_cong_lrem(), @integer.int_cong_refl()]))
   let t303 = @tactics.exists_tac(@parser.parse_term("(&2:int) pow n"))
-  let t302 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("forall m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)")))
+  let t302 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("∀ m:int. (x == y) (mod m) /\\ n divides m ==> (x == y) (mod n)")))
   let t301 = @tactics.match_mp_tac(divstep_mat_congruence())
   let t306 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t301), @tactics.conj_tac), t302), t303), t304), t305)
-  divstep_mat_mod_c.set(@tactics.prove(@parser.parse_term("forall m n d f g.\n        m <= n\n        ==> divstep_mat m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_mat m (d,f,g)"), t306))
+  divstep_mat_mod_c.set(@tactics.prove(@parser.parse_term("∀ m n d f g.\n        m <= n\n        ==> divstep_mat m (d,f rem &2 pow n,g rem &2 pow n) =\n            divstep_mat m (d,f,g)"), t306))
 }
 
 ///|
@@ -1113,7 +1113,7 @@ fn step_45() -> Unit raise {
     x308
   }, @list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac))
   let t323 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm()])), t309), t310), t311), @nums.induct_tac), t312), t313), @class.cond_cases_tac), t314), t315), t316), t317), t318), t319), t320), t321), t322)
-  let t324 = (@parser.parse_term("(forall n d f g.\n      f rem &2 = &1 ==> divstep_d n (d,--f,--g) = divstep_d n (d,f,g)) /\\\n   (forall n d f g.\n      f rem &2 = &1 ==>  divstep_mat n (d,--f,--g) = divstep_mat n (d,f,g)) /\\\n   (forall n d f g.\n      f rem &2 = &1 ==> divstep_f n (d,--f,--g) = --(divstep_f n (d,f,g))) /\\\n   (forall n d f g.\n      f rem &2 = &1 ==> divstep_g n (d,--f,--g) = --(divstep_g n (d,f,g)))"), t323)
+  let t324 = (@parser.parse_term("(∀ n d f g.\n      f rem &2 = &1 ==> divstep_d n (d,--f,--g) = divstep_d n (d,f,g)) /\\\n   (∀ n d f g.\n      f rem &2 = &1 ==>  divstep_mat n (d,--f,--g) = divstep_mat n (d,f,g)) /\\\n   (∀ n d f g.\n      f rem &2 = &1 ==> divstep_f n (d,--f,--g) = --(divstep_f n (d,f,g))) /\\\n   (∀ n d f g.\n      f rem &2 = &1 ==> divstep_g n (d,--f,--g) = --(divstep_g n (d,f,g)))"), t323)
   match @bool.conjuncts_rule((fn(x307 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x307.0, x307.1)
   })(t324)) {
@@ -1141,7 +1141,7 @@ fn step_46() -> Unit raise {
   let t330 = @parser.parse_term("d:int")
   let t331 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:num"), t330, t329, t328, t327, t326, t325]), divstep_congruence()))
   let t334 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t331), t332), t333)
-  divstep_congruence_neg_c.set(@tactics.prove(@parser.parse_term("forall m d f g f' g' n.\n        (f == --f') (mod (&2 pow m)) /\\ (g == --g') (mod (&2 pow m)) /\\\n        f rem &2 = &1 /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == --(divstep_f n (d,f',g')))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == --(divstep_g n (d,f',g')))\n            (mod (&2 pow (m - n)))"), t334))
+  divstep_congruence_neg_c.set(@tactics.prove(@parser.parse_term("∀ m d f g f' g' n.\n        (f == --f') (mod (&2 pow m)) /\\ (g == --g') (mod (&2 pow m)) /\\\n        f rem &2 = &1 /\\ n <= m\n        ==> divstep_d n (d,f,g) = divstep_d n (d,f',g') /\\\n            divstep_mat n (d,f,g) = divstep_mat n (d,f',g') /\\\n            (divstep_f n (d,f,g) == --(divstep_f n (d,f',g')))\n            (mod (&2 pow (m - n))) /\\\n            (divstep_g n (d,f,g) == --(divstep_g n (d,f',g')))\n            (mod (&2 pow (m - n)))"), t334))
 }
 
 ///|
@@ -1199,7 +1199,7 @@ fn step_49() -> Unit raise {
   let t343 = @simp.rewrite_tac(@list.List([@int.int_arith(@parser.parse_term("d >= &0 <=> d:int = &0 \\/ d > &0"))]))
   let t342 = @simp.rewrite_tac(@list.List([idivstep(), hdivstep()]))
   let t347 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t342), t343), t344), t345), t346)
-  hdivstep_idivstep_c.set(@tactics.prove(@parser.parse_term("forall d f g. d rem &2 = &1 ==> hdivstep(d,f,g) = idivstep(d,f,g)"), t347))
+  hdivstep_idivstep_c.set(@tactics.prove(@parser.parse_term("∀ d f g. d rem &2 = &1 ==> hdivstep(d,f,g) = idivstep(d,f,g)"), t347))
 }
 
 ///|

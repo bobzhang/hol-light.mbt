@@ -4,7 +4,7 @@
 ///|
 /// IEEE_FORMAT_SPLIT
 fn step_1() -> Unit raise {
-  ieee_format_split_c.set(@class.taut(@parser.parse_term("forall(fmt:ieee_format).\n  (dest_ieee_format fmt) = (FST (dest_ieee_format fmt),\n                            (FST (SND (dest_ieee_format fmt))),\n                            (FST (SND (SND (dest_ieee_format fmt)))),\n                            (SND (SND (SND (dest_ieee_format fmt)))))")))
+  ieee_format_split_c.set(@class.taut(@parser.parse_term("∀(fmt:ieee_format).\n  (dest_ieee_format fmt) = (FST (dest_ieee_format fmt),\n                            (FST (SND (dest_ieee_format fmt))),\n                            (FST (SND (SND (dest_ieee_format fmt)))),\n                            (SND (SND (SND (dest_ieee_format fmt)))))")))
 }
 
 ///|
@@ -21,7 +21,7 @@ pub fn ieee_format_split() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @int.arith_tac)
-  ieee_format_valid_imp_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (r,p,emin,emax)))"), t2))
+  ieee_format_valid_imp_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("∀(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (r,p,emin,emax)))"), t2))
 }
 
 ///|
@@ -39,7 +39,7 @@ fn step_3() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([]))
   let t3 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3), t4)
-  ieee_format_valid_imp_radix_even_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             EVEN (FST (r,p,emin,emax)))"), t5))
+  ieee_format_valid_imp_radix_even_c.set(@tactics.prove(@parser.parse_term("∀(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             EVEN (FST (r,p,emin,emax)))"), t5))
 }
 
 ///|
@@ -57,7 +57,7 @@ fn step_4() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([]))
   let t6 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6), t7)
-  ieee_format_valid_imp_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (SND (r,p,emin,emax))))"), t8))
+  ieee_format_valid_imp_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("∀(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (SND (r,p,emin,emax))))"), t8))
 }
 
 ///|
@@ -75,7 +75,7 @@ fn step_5() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
   let t9 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9), t10)
-  ieee_format_valid_imp_emin_le_emax_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             (FST (SND (SND (r,p,emin,emax)))) <=\n             (SND (SND (SND (r,p,emin,emax)))))"), t11))
+  ieee_format_valid_imp_emin_le_emax_c.set(@tactics.prove(@parser.parse_term("∀(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             (FST (SND (SND (r,p,emin,emax)))) <=\n             (SND (SND (SND (r,p,emin,emax)))))"), t11))
 }
 
 ///|
@@ -91,7 +91,7 @@ pub fn ieee_format_valid_imp_emin_le_emax() -> @kernel.Thm {
 /// IEEE_FORMAT_VALID
 fn step_6() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([@ieee.ieee_format_typbij()]))
-  ieee_format_valid_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). is_valid_ieee_format (dest_ieee_format fmt)"), t12))
+  ieee_format_valid_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). is_valid_ieee_format (dest_ieee_format fmt)"), t12))
 }
 
 ///|
@@ -110,7 +110,7 @@ fn step_7() -> Unit raise {
   let t14 = @tactics.match_mp_tac(ieee_format_valid_imp_radix_lt_1())
   let t13 = @simp.once_rewrite_tac(@list.List([ieee_format_split()]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.ieee_r()]))), t13), t14), t15)
-  ieee_format_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 1 < (ieee_r fmt)"), t16))
+  ieee_format_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 1 < (ieee_r fmt)"), t16))
 }
 
 ///|
@@ -127,7 +127,7 @@ pub fn ieee_format_radix_lt_1() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([ieee_format_radix_lt_1()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("1 < x ==> 0 < x")))), t17)
-  ieee_format_radix_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 0 < (ieee_r fmt)"), t18))
+  ieee_format_radix_lt_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 0 < (ieee_r fmt)"), t18))
 }
 
 ///|
@@ -145,7 +145,7 @@ fn step_9() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([ieee_format_radix_lt_0()]))
   let t19 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("0 < x ==> ~(x = 0)")))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@realax.real_of_num_eq()]))), t19), t20)
-  ieee_format_radix_ne_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). ~(&(ieee_r fmt) = &0)"), t21))
+  ieee_format_radix_ne_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). ~(&(ieee_r fmt) = &0)"), t21))
 }
 
 ///|
@@ -164,7 +164,7 @@ fn step_10() -> Unit raise {
   let t23 = @tactics.match_mp_tac(ieee_format_valid_imp_radix_even())
   let t22 = @simp.once_rewrite_tac(@list.List([ieee_format_split()]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.ieee_r()]))), t22), t23), t24)
-  ieee_format_radix_even_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). EVEN (ieee_r fmt)"), t25))
+  ieee_format_radix_even_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). EVEN (ieee_r fmt)"), t25))
 }
 
 ///|
@@ -190,8 +190,8 @@ fn step_11() -> Unit raise {
   let t28 = @class.asm_cases_tac(@parser.parse_term("x = 1"))
   let t27 = @class.asm_cases_tac(@parser.parse_term("x = 0"))
   let t34 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_then((x26 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["xneq0", "evenx"]), x26))), t27), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t28), t33), @tactics.all_tac])
-  let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.subgoal_then(@parser.parse_term("forall x. ~(x = 0) /\\ EVEN x ==> 2 <= x"), @tactics.match_mp_tac)), t34), t35), t36)
-  ieee_format_radix_le_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 2 <= (ieee_r fmt)"), t37))
+  let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.subgoal_then(@parser.parse_term("∀ x. ~(x = 0) /\\ EVEN x ==> 2 <= x"), @tactics.match_mp_tac)), t34), t35), t36)
+  ieee_format_radix_le_2_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 2 <= (ieee_r fmt)"), t37))
 }
 
 ///|
@@ -210,7 +210,7 @@ fn step_12() -> Unit raise {
   let t39 = @tactics.match_mp_tac(ieee_format_valid_imp_prec_lt_1())
   let t38 = @simp.once_rewrite_tac(@list.List([ieee_format_split()]))
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.ieee_p()]))), t38), t39), t40)
-  ieee_format_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 1 < (ieee_p fmt)"), t41))
+  ieee_format_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 1 < (ieee_p fmt)"), t41))
 }
 
 ///|
@@ -227,7 +227,7 @@ pub fn ieee_format_prec_lt_1() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t42 = @simp.rewrite_tac(@list.List([ieee_format_prec_lt_1()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("1 < x ==> 1 <= x")))), t42)
-  ieee_format_prec_le_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 1 <= (ieee_p fmt)"), t43))
+  ieee_format_prec_le_1_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 1 <= (ieee_p fmt)"), t43))
 }
 
 ///|
@@ -244,7 +244,7 @@ pub fn ieee_format_prec_le_1() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t44 = @simp.rewrite_tac(@list.List([ieee_format_prec_lt_1()]))
   let t45 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("1 < x ==> 0 < x")))), t44)
-  ieee_format_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 0 < (ieee_p fmt)"), t45))
+  ieee_format_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 0 < (ieee_p fmt)"), t45))
 }
 
 ///|
@@ -261,7 +261,7 @@ pub fn ieee_format_prec_lt_0() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t46 = @simp.rewrite_tac(@list.List([ieee_format_prec_lt_0()]))
   let t47 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("0 < n ==> ~(n = 0)")))), t46)
-  ieee_format_prec_ne_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). ~((ieee_p fmt) = 0)"), t47))
+  ieee_format_prec_ne_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). ~((ieee_p fmt) = 0)"), t47))
 }
 
 ///|
@@ -280,7 +280,7 @@ fn step_16() -> Unit raise {
   let t49 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= n <=> 0 < n"))]))
   let t48 = @simp.rewrite_tac(@list.List([@int.int_of_num_le()]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("&0 <= x:int - &1:int <=> &1 <= x"))])), t48), t49), t50)
-  ieee_format_prec_minus_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). &0 <= (&(ieee_p fmt):int) - (&1:int)"), t51))
+  ieee_format_prec_minus_1_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). &0 <= (&(ieee_p fmt):int) - (&1:int)"), t51))
 }
 
 ///|
@@ -298,7 +298,7 @@ fn step_17() -> Unit raise {
   let t53 = @simp.rewrite_tac(@list.List([ieee_format_prec_lt_0()]))
   let t52 = @tactics.match_mp_tac(@common.ipow_eq_exp_p())
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t52), t53)
-  ieee_format_prec_ipow_eq_exp_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). &(ieee_r fmt) ipow (&(ieee_p fmt) - &1) =\n      &((ieee_r fmt) EXP ((ieee_p fmt) - 1))"), t54))
+  ieee_format_prec_ipow_eq_exp_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). &(ieee_r fmt) ipow (&(ieee_p fmt) - &1) =\n      &((ieee_r fmt) EXP ((ieee_p fmt) - 1))"), t54))
 }
 
 ///|
@@ -318,7 +318,7 @@ fn step_18() -> Unit raise {
   let t56 = @tactics.match_mp_tac(@common.ipow_lt_0())
   let t55 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 < (x:real) ==> &0 <= x")))
   let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t55), t56), t57), t58)
-  ieee_format_radix_ipow_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (e:int). &0 <= &(ieee_r fmt) ipow e"), t59))
+  ieee_format_radix_ipow_le_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (e:int). &0 <= &(ieee_r fmt) ipow e"), t59))
 }
 
 ///|
@@ -337,7 +337,7 @@ fn step_19() -> Unit raise {
   let t61 = @simp.rewrite_tac(@list.List([@real.real_of_num_lt()]))
   let t60 = @tactics.match_mp_tac(@common.ipow_lt_0())
   let t63 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t60), t61), t62)
-  ieee_format_radix_ipow_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (e:int). &0 < &(ieee_r fmt) ipow e"), t63))
+  ieee_format_radix_ipow_lt_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (e:int). &0 < &(ieee_r fmt) ipow e"), t63))
 }
 
 ///|
@@ -357,7 +357,7 @@ fn step_20() -> Unit raise {
   let t65 = @tactics.match_mp_tac(@common.ipow_lt_0())
   let t64 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 < (x:real) ==> ~(x = &0)")))
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), t65), t66), t67)
-  ieee_format_radix_ipow_neq_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (e:int). ~(&(ieee_r fmt) ipow e = &0)"), t68))
+  ieee_format_radix_ipow_neq_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (e:int). ~(&(ieee_r fmt) ipow e = &0)"), t68))
 }
 
 ///|
@@ -375,7 +375,7 @@ fn step_21() -> Unit raise {
   let t70 = @simp.rewrite_tac(@list.List([ieee_format_radix_ne_0()]))
   let t69 = @tactics.match_mp_tac(@common.ipow_add_exp())
   let t71 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t69), t70)
-  ieee_format_radix_ipow_add_exp_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (u:int) (v:int).\n        &(ieee_r fmt) ipow u * &(ieee_r fmt) ipow v =\n      &(ieee_r fmt) ipow (u + v)"), t71))
+  ieee_format_radix_ipow_add_exp_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (u:int) (v:int).\n        &(ieee_r fmt) ipow u * &(ieee_r fmt) ipow v =\n      &(ieee_r fmt) ipow (u + v)"), t71))
 }
 
 ///|
@@ -395,7 +395,7 @@ fn step_22() -> Unit raise {
   let t73 = @simp.once_rewrite_tac(@list.List([ieee_format_split()]))
   let t72 = @simp.rewrite_tac(@list.List([@ieee.ieee_emax()]))
   let t76 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.ieee_emin()]))), t72), t73), t74), t75)
-  ieee_format_emin_le_emax_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). (ieee_emin fmt) <= (ieee_emax fmt)"), t76))
+  ieee_format_emin_le_emax_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). (ieee_emin fmt) <= (ieee_emax fmt)"), t76))
 }
 
 ///|
@@ -421,7 +421,7 @@ fn step_23() -> Unit raise {
     @tactics.assume_tac(@simp.rewrite_rule(@list.List([@fixed.fformat_typbij()]))(thm))
   })
   let t86 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.ieee_to_fformat()]))), t79), t83), t84), t85)
-  ieee_format_to_fformat_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format).\n          (fr (ieee_to_fformat fmt)) = (ieee_r fmt) /\\\n          (fp (ieee_to_fformat fmt)) = (ieee_p fmt) /\\\n          (fe (ieee_to_fformat fmt)) = (ieee_emin fmt)"), t86))
+  ieee_format_to_fformat_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format).\n          (fr (ieee_to_fformat fmt)) = (ieee_r fmt) /\\\n          (fp (ieee_to_fformat fmt)) = (ieee_p fmt) /\\\n          (fe (ieee_to_fformat fmt)) = (ieee_emin fmt)"), t86))
 }
 
 ///|
@@ -447,7 +447,7 @@ fn step_24() -> Unit raise {
     @tactics.assume_tac(@simp.rewrite_rule(@list.List([@float.flformat_typbij()]))(thm))
   })
   let t96 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.ieee_to_flformat()]))), t89), t93), t94), t95)
-  ieee_format_to_flformat_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format).\n          (flr (ieee_to_flformat fmt)) = (ieee_r fmt) /\\\n          (flp (ieee_to_flformat fmt)) = (ieee_p fmt)"), t96))
+  ieee_format_to_flformat_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format).\n          (flr (ieee_to_flformat fmt)) = (ieee_r fmt) /\\\n          (flp (ieee_to_flformat fmt)) = (ieee_p fmt)"), t96))
 }
 
 ///|
@@ -464,7 +464,7 @@ pub fn ieee_format_to_flformat() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t97 = @simp.rewrite_tac(@list.List([ieee_format_emin_le_emax()]))
   let t98 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(a:int) <= b ==> (a = b) \\/ (a < b)")))), t97)
-  ieee_format_disj_exp_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). (ieee_emin fmt) = (ieee_emax fmt) \\/\n      (ieee_emin fmt) < (ieee_emax fmt)"), t98))
+  ieee_format_disj_exp_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). (ieee_emin fmt) = (ieee_emax fmt) \\/\n      (ieee_emin fmt) < (ieee_emax fmt)"), t98))
 }
 
 ///|
@@ -483,7 +483,7 @@ fn step_26() -> Unit raise {
   let t100 = @simp.rewrite_tac(@list.List([ieee_format_radix_lt_1()]))
   let t99 = @simp.rewrite_tac(@list.List([@arith.exp_mono_lt()]))
   let t102 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@bool.spec(@parser.parse_term("(ieee_p fmt)"), @arith.exp_one()))]))), t99), t100), t101)
-  ieee_radix_exp_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). 1 < (ieee_r fmt) EXP (ieee_p fmt)"), t102))
+  ieee_radix_exp_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). 1 < (ieee_r fmt) EXP (ieee_p fmt)"), t102))
 }
 
 ///|
@@ -513,7 +513,7 @@ fn step_27() -> Unit raise {
   }), t109), t110), t111), t112), t113), t114])
   let t103 = @tactics.match_mp_tac(@realax.real_le_mul())
   let t116 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.max_ieee()]))), t103), @tactics.conj_tac), t115)
-  ieee_max_ieee_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). &0 <= (max_ieee fmt)"), t116))
+  ieee_max_ieee_le_0_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). &0 <= (max_ieee fmt)"), t116))
 }
 
 ///|
@@ -650,7 +650,7 @@ fn step_28() -> Unit raise {
   let t129 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("(ieee_r fmt) EXP (ieee_p fmt) - 1")), t118), t119), @tactics.conj_tac), t121), @tactics.conj_tac), t124), t126), t127), t128), @tactics.all_tac])
   let t117 = @simp.rewrite_tac(@list.List([@float.is_float()]))
   let t209 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@ieee.is_ieee()]))), @tactics.disj2_tac), @tactics.disj1_tac), t117), @tactics.conj_tac), t129), t130), t133), t207), t208), @int.arith_tac)
-  ieee_max_ieee_is_ieee_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format). (is_ieee(fmt) (max_ieee fmt))"), t209))
+  ieee_max_ieee_is_ieee_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format). (is_ieee(fmt) (max_ieee fmt))"), t209))
 }
 
 ///|
@@ -697,7 +697,7 @@ fn step_29() -> Unit raise {
     }
   })
   let t239 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t214), t215), @class.cond_cases_tac), t238)
-  ieee_round_near_abs_err_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_near x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1) / &2"), t239))
+  ieee_round_near_abs_err_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_near x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1) / &2"), t239))
 }
 
 ///|
@@ -744,7 +744,7 @@ fn step_30() -> Unit raise {
     }
   })
   let t269 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t244), t245), @class.cond_cases_tac), t268)
-  ieee_round_zero_abs_err_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_zero x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1)"), t269))
+  ieee_round_zero_abs_err_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (x:real). abs(x) <= (ieee_threshold fmt) ==>\n          abs(x - (ieee_round(fmt) To_zero x)) <=\n          &(ieee_r fmt) ipow ((ieee_exp(fmt) x) - &(ieee_p fmt) + &1)"), t269))
 }
 
 ///|
@@ -770,7 +770,7 @@ fn step_31() -> Unit raise {
   let t272 = @simp.rewrite_tac(@list.List([@ieee.ieee_round()]))
   let t271 = @tactics.disch_then((x270 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absxlow", "absxhi"]), x270))
   let t281 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t271), t272), t273), t274), t275), t276), t277), t278), @tactics.conj_tac), t280)
-  ieee_round_near_rel_err_v1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (x:real).\n          ~(abs(x) <= (finf (ieee_to_fformat fmt))) /\\\n          abs(x) <= (ieee_threshold fmt) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= ieee_eps(fmt)"), t281))
+  ieee_round_near_rel_err_v1_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (x:real).\n          ~(abs(x) <= (finf (ieee_to_fformat fmt))) /\\\n          abs(x) <= (ieee_threshold fmt) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= ieee_eps(fmt)"), t281))
 }
 
 ///|
@@ -791,7 +791,7 @@ fn step_32() -> Unit raise {
   let t284 = @simp.rewrite_tac(@list.List([@ieee.ieee_round()]))
   let t283 = @tactics.disch_then((x282 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absxlow", "absxhi"]), x282))
   let t288 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t283), t284), t285), t286), t287)
-  ieee_round_near_rel_err_c.set(@tactics.prove(@parser.parse_term("forall(fmt:ieee_format) (x:real).\n          (abs(x) <= (finf (ieee_to_fformat fmt))) /\\ ~(x = &0) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= &1"), t288))
+  ieee_round_near_rel_err_c.set(@tactics.prove(@parser.parse_term("∀(fmt:ieee_format) (x:real).\n          (abs(x) <= (finf (ieee_to_fformat fmt))) /\\ ~(x = &0) ==>\n          (rerror x (ieee_round(fmt) To_near x)) <= &1"), t288))
 }
 
 ///|

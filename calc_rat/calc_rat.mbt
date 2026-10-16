@@ -2413,7 +2413,7 @@ fn step_31() -> Unit raise {
   )
   let real_integral = @tactics.prove(
     @parser.parse_term(
-      "(forall x. &0 * x = &0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))",
+      "(∀ x. &0 * x = &0) /\\\n     (∀ x y z. (x + y = x + z) <=> (y = z)) /\\\n     (∀ w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))",
     ),
     t246,
   )
@@ -2449,7 +2449,7 @@ fn step_31() -> Unit raise {
     t255,
   )
   let real_rabinowitsch = @tactics.prove(
-    @parser.parse_term("forall x y:real. ~(x = y) <=> ?z. (x - y) * z = &1"),
+    @parser.parse_term("∀ x y:real. ~(x = y) <=> ?z. (x - y) * z = &1"),
     t256,
   )
   let init_ : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
@@ -2782,7 +2782,7 @@ fn step_36() -> Unit raise {
   )
   real_le_trans_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y:real. x <= y <=> (forall z. y <= z ==> x <= z)"),
+      @parser.parse_term("∀ x y:real. x <= y <=> (∀ z. y <= z ==> x <= z)"),
       t307,
     ),
   )
@@ -2886,7 +2886,7 @@ fn step_37() -> Unit raise {
   )
   real_le_trans_lte_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y:real. x <= y <=> (forall z. y < z ==> x <= z)"),
+      @parser.parse_term("∀ x y:real. x <= y <=> (∀ z. y < z ==> x <= z)"),
       t315,
     ),
   )
@@ -2990,7 +2990,7 @@ fn step_38() -> Unit raise {
   )
   real_le_trans_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y:real. x <= y <=> (forall z. y < z ==> x < z)"),
+      @parser.parse_term("∀ x y:real. x <= y <=> (∀ z. y < z ==> x < z)"),
       t323,
     ),
   )
@@ -3240,7 +3240,7 @@ fn step_40() -> Unit raise {
     real_arith_tac,
   )
   real_shrink_range_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(x / (&1 + abs x)) < &1"), t363),
+    @tactics.prove(@parser.parse_term("∀ x. abs(x / (&1 + abs x)) < &1"), t363),
   )
 }
 
@@ -3284,7 +3284,7 @@ fn step_41() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(forall x y. P x y /\\ P y x) <=> (forall x y. P x y)"),
+        @parser.parse_term("(∀ x y. P x y /\\ P y x) <=> (∀ x y. P x y)"),
       ),
     ]),
   )
@@ -3363,7 +3363,7 @@ fn step_41() -> Unit raise {
   )
   real_shrink_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x / (&1 + abs x) < y / (&1 + abs y) <=> x < y"),
+      @parser.parse_term("∀ x y. x / (&1 + abs x) < y / (&1 + abs y) <=> x < y"),
       t376,
     ),
   )
@@ -3387,7 +3387,7 @@ fn step_42() -> Unit raise {
   real_shrink_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. x / (&1 + abs x) <= y / (&1 + abs y) <=> x <= y",
+        "∀ x y. x / (&1 + abs x) <= y / (&1 + abs y) <=> x <= y",
       ),
       t377,
     ),
@@ -3411,7 +3411,7 @@ fn step_43() -> Unit raise {
   )
   real_shrink_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x / (&1 + abs x) = y / (&1 + abs y) <=> x = y"),
+      @parser.parse_term("∀ x y. x / (&1 + abs x) = y / (&1 + abs y) <=> x = y"),
       t378,
     ),
   )
@@ -3599,7 +3599,7 @@ fn step_44() -> Unit raise {
   real_shrink_galois_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. x / (&1 + abs x) = y <=> abs y < &1 /\\ y / (&1 - abs y) = x",
+        "∀ x y. x / (&1 + abs x) = y <=> abs y < &1 /\\ y / (&1 - abs y) = x",
       ),
       t394,
     ),
@@ -3626,7 +3626,7 @@ fn step_45() -> Unit raise {
   real_grow_shrink_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. x / (&1 + abs x) / (&1 - abs(x / (&1 + abs x))) = x",
+        "∀ x. x / (&1 + abs x) / (&1 - abs(x / (&1 + abs x))) = x",
       ),
       t395,
     ),
@@ -3653,7 +3653,7 @@ fn step_46() -> Unit raise {
   real_shrink_grow_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x <=> abs x < &1",
+        "∀ x. x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x <=> abs x < &1",
       ),
       t396,
     ),
@@ -3678,7 +3678,7 @@ fn step_47() -> Unit raise {
   real_shrink_grow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. abs x < &1\n       ==> x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x",
+        "∀ x. abs x < &1\n       ==> x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x",
       ),
       t397,
     ),

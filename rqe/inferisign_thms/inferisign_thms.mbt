@@ -17,7 +17,7 @@ fn step_1() -> Unit raise {
   let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @tactics.first_assum(@tactics.match_mp_tac)
   let t13 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t12, t11, t10, t9, t8, t7, t6, t5, t4, t3, t2, t1])
-  inferisign_lem00_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("x1 < x3 ==> x3 < x2 ==> (forall x. x1 < x /\\ x < x2 ==> P x) ==>\n    (forall x. x1 < x /\\ x < x3 ==> P x) /\\\n    (forall x. (x = x3) ==> P x) /\\\n    (forall x. x3 < x /\\ x < x2 ==> P x)"), t13))
+  inferisign_lem00_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("x1 < x3 ==> x3 < x2 ==> (∀ x. x1 < x /\\ x < x2 ==> P x) ==>\n    (∀ x. x1 < x /\\ x < x3 ==> P x) /\\\n    (∀ x. (x = x3) ==> P x) /\\\n    (∀ x. x3 < x /\\ x < x2 ==> P x)"), t13))
 }
 
 ///|
@@ -136,7 +136,7 @@ fn step_2() -> Unit raise {
   let t93 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list"), t15, t14]), @poly.poly_mvt()))
   let t94 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x < y <=> ~(y <= x)"))]))
   let t95 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t94, @tactics.strip_tac, t93, t92, @tactics.strip_tac, t91, @rqe_tactics_ext.label_all_tac, t90, t89, @calc_rat.real_arith_tac, @tactics.strip_tac, t88, t87, t86, t85, t84, @rqe_tactics_ext.label_all_tac, t83, @rqe_tactics_ext.label_all_tac, t82, t81, t80, @tactics.strip_tac, t79, @rqe_tactics_ext.label_all_tac, t78, t77, @calc_rat.real_arith_tac, @tactics.strip_tac, t76, @rqe_tactics_ext.label_all_tac, t75, @tactics.strip_tac, t74, t73, t72, t71, @calc_rat.real_arith_tac, t70, t69, t68, @calc_rat.real_arith_tac, t67, t66, t65, t64, @tactics.strip_tac, t63, t62, @tactics.strip_tac, t61, @tactics.strip_tac, t60, t59, t58, t57, t56, t55, t54])
-  neg_neg_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y /\\ poly p x < &0 /\\ poly p y < &0 /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z < &0)"), t95))
+  neg_neg_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y /\\ poly p x < &0 /\\ poly p y < &0 /\\\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (∀ z. x < z /\\ z < y ==> poly p z < &0)"), t95))
 }
 
 ///|
@@ -154,7 +154,7 @@ fn step_3() -> Unit raise {
   let t96 = @meson.asm_meson_tac(@list.List([]))
   let t97 = @tactics.match_mp_tac(neg_neg_neq_thm())
   let t98 = @list.List([@rqe_tactics_ext.repeat_n(7L, @tactics.strip_tac), t97, t96])
-  neg_neg_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> poly p x < &0 ==> poly p y < &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z < &0)"), t98))
+  neg_neg_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> poly p x < &0 ==> poly p y < &0 ==>\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (∀ z. x < z /\\ z < y ==> poly p z < &0)"), t98))
 }
 
 ///|
@@ -273,7 +273,7 @@ fn step_4() -> Unit raise {
   let t178 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list"), t100, t99]), @poly.poly_mvt()))
   let t179 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x < y <=> ~(y <= x)"))]))
   let t180 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t179, @tactics.strip_tac, t178, t177, @tactics.strip_tac, t176, @rqe_tactics_ext.label_all_tac, t175, t174, @calc_rat.real_arith_tac, @tactics.strip_tac, t173, t172, t171, t170, t169, @rqe_tactics_ext.label_all_tac, t168, @rqe_tactics_ext.label_all_tac, t167, t166, t165, @tactics.strip_tac, t164, @rqe_tactics_ext.label_all_tac, t163, t162, @calc_rat.real_arith_tac, @tactics.strip_tac, t161, @rqe_tactics_ext.label_all_tac, t160, @tactics.strip_tac, t159, t158, t157, t156, @calc_rat.real_arith_tac, t155, t154, t153, @calc_rat.real_arith_tac, t152, t151, t150, t149, @tactics.strip_tac, t148, t147, @tactics.strip_tac, t146, @tactics.strip_tac, t145, t144, t143, t142, t141, t140, t139])
-  pos_pos_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y /\\ &0 < poly p x /\\ &0 < poly p y /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> &0 < poly p z)"), t180))
+  pos_pos_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y /\\ &0 < poly p x /\\ &0 < poly p y /\\\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (∀ z. x < z /\\ z < y ==> &0 < poly p z)"), t180))
 }
 
 ///|
@@ -292,7 +292,7 @@ fn step_5() -> Unit raise {
   let t182 = @tactics.match_mp_tac(pos_pos_neq_thm())
   let t183 = @rqe_tactics_ext.repeat_n(7L, @tactics.strip_tac)
   let t184 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), t183, t182, t181])
-  pos_pos_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> poly p x > &0 ==> poly p y > &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (forall z. x < z /\\ z < y ==> poly p z > &0)"), t184))
+  pos_pos_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> poly p x > &0 ==> poly p y > &0 ==>\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            (∀ z. x < z /\\ z < y ==> poly p z > &0)"), t184))
 }
 
 ///|
@@ -670,7 +670,7 @@ fn step_6() -> Unit raise {
   let t186 = @parser.parse_term("x:real")
   let t479 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list"), t186, t185]), @poly.poly_ivt_neg()))
   let t480 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t479, t478, t477, t476, t475, t474, t473, @tactics.strip_tac, t472, t471, @tactics.strip_tac, t470, t469, t468, t467, t466, @rqe_tactics_ext.label_all_tac, t465, t464, @calc_rat.real_arith_tac, @tactics.strip_tac, t463, t462, t461, t460, t459, @rqe_tactics_ext.label_all_tac, t458, @rqe_tactics_ext.label_all_tac, t457, t456, t455, t454, t453, t452, @rqe_tactics_ext.label_all_tac, t451, @calc_rat.real_arith_tac, @tactics.strip_tac, t450, @rqe_tactics_ext.label_all_tac, t449, @tactics.strip_tac, t448, t447, t446, t445, @calc_rat.real_arith_tac, t444, t443, t442, t441, t440, @calc_rat.real_arith_tac, t439, t438, t437, t436, @tactics.strip_tac, t435, t434, t433, t432, t431, @tactics.strip_tac, t430, t429, t428, t427, t426, t425, t424, t423, t422, t421, t420, t419, t418, @rewrites.real_simp_tac, t417, t416, t415, t414, @rqe_tactics_ext.label_all_tac, t413, t412, t411, @tactics.strip_tac, t410, t409, t408, t407, t406, t405, t404, t403, t402, @tactics.strip_tac, t401, t400, t399, t398, t397, @rewrites.real_simp_tac, @tactics.strip_tac, t396, @rqe_tactics_ext.label_all_tac, t395, t394, t393, t392, t391, @rqe_tactics_ext.label_all_tac, t390, @rqe_tactics_ext.label_all_tac, t389, t388, @rqe_tactics_ext.label_all_tac, t387, t386, t385, t384, @rqe_tactics_ext.label_all_tac, t383, t382, @calc_rat.real_arith_tac, @tactics.strip_tac, t381, @rqe_tactics_ext.label_all_tac, t380, @tactics.strip_tac, t379, t378, t377, t376, @calc_rat.real_arith_tac, t375, t374, t373, t372, t371, @calc_rat.real_arith_tac, t370, t369, t368, t367, @tactics.strip_tac, t366, t365, t364, t363, t362, @tactics.strip_tac, t361, t360, t359, t358, t357, t356, t355, t354, t353, t352, t351, t350, @rewrites.real_simp_tac, t349, t348, t347, t346, @rqe_tactics_ext.label_all_tac, t345, t344, t343, @tactics.strip_tac, t342, t341, t340, t339, t338, t337, t336])
-  pos_neg_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y /\\ &0 < poly p x /\\ poly p y < &0 /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (forall z. x < z /\\ z < X ==> &0 < poly p z) /\\\n              (forall z. X < z /\\ z < y ==> poly p z < &0)"), t480))
+  pos_neg_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y /\\ &0 < poly p x /\\ poly p y < &0 /\\\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (∀ z. x < z /\\ z < X ==> &0 < poly p z) /\\\n              (∀ z. X < z /\\ z < y ==> poly p z < &0)"), t480))
 }
 
 ///|
@@ -694,7 +694,7 @@ fn step_7() -> Unit raise {
   let t487 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("x:real"), t482, t481]), pos_neg_neq_thm()))
   let t488 = @tactics.repeat_tac(@tactics.strip_tac)
   let t489 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), t488, t487, t486, t485, t484, t483])
-  pos_neg_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> poly p x > &0 ==> poly p y < &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (forall z. (z = X) ==> (poly p z = &0)) /\\\n              (forall z. x < z /\\ z < X ==> poly p z > &0) /\\\n              (forall z. X < z /\\ z < y ==> poly p z < &0)"), t489))
+  pos_neg_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> poly p x > &0 ==> poly p y < &0 ==>\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (∀ z. (z = X) ==> (poly p z = &0)) /\\\n              (∀ z. x < z /\\ z < X ==> poly p z > &0) /\\\n              (∀ z. X < z /\\ z < y ==> poly p z < &0)"), t489))
 }
 
 ///|
@@ -1072,7 +1072,7 @@ fn step_8() -> Unit raise {
   let t491 = @parser.parse_term("x:real")
   let t784 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list"), t491, t490]), @poly.poly_ivt_pos()))
   let t785 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t784, t783, t782, t781, t780, t779, t778, @tactics.strip_tac, t777, t776, @tactics.strip_tac, t775, t774, t773, t772, t771, @rqe_tactics_ext.label_all_tac, t770, t769, @calc_rat.real_arith_tac, @tactics.strip_tac, t768, t767, t766, t765, t764, @rqe_tactics_ext.label_all_tac, t763, @rqe_tactics_ext.label_all_tac, t762, t761, t760, t759, t758, t757, @rqe_tactics_ext.label_all_tac, t756, @calc_rat.real_arith_tac, @tactics.strip_tac, t755, @rqe_tactics_ext.label_all_tac, t754, @tactics.strip_tac, t753, t752, t751, t750, @calc_rat.real_arith_tac, t749, t748, t747, t746, t745, @calc_rat.real_arith_tac, t744, t743, t742, t741, @tactics.strip_tac, t740, t739, t738, t737, t736, @tactics.strip_tac, t735, t734, t733, t732, t731, t730, t729, t728, t727, t726, t725, t724, @rewrites.real_simp_tac, t723, t722, t721, t720, @rqe_tactics_ext.label_all_tac, t719, t718, t717, @tactics.strip_tac, t716, t715, t714, t713, t712, t711, t710, t709, t708, @tactics.strip_tac, t707, t706, t705, t704, t703, @rewrites.real_simp_tac, @tactics.strip_tac, t702, @rqe_tactics_ext.label_all_tac, t701, t700, t699, t698, t697, @rqe_tactics_ext.label_all_tac, t696, @rqe_tactics_ext.label_all_tac, t695, t694, @rqe_tactics_ext.label_all_tac, t693, t692, t691, t690, @rqe_tactics_ext.label_all_tac, t689, t688, @calc_rat.real_arith_tac, @tactics.strip_tac, t687, @rqe_tactics_ext.label_all_tac, t686, @tactics.strip_tac, t685, t684, t683, t682, @calc_rat.real_arith_tac, t681, t680, t679, t678, t677, @calc_rat.real_arith_tac, t676, t675, t674, t673, @tactics.strip_tac, t672, t671, t670, t669, t668, @tactics.strip_tac, t667, t666, t665, t664, t663, t662, t661, t660, t659, t658, t657, t656, t655, @rewrites.real_simp_tac, t654, t653, t652, t651, @rqe_tactics_ext.label_all_tac, t650, t649, t648, @tactics.strip_tac, t647, t646, t645, t644, t643, t642, t641])
-  neg_pos_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y /\\ poly p x < &0 /\\ &0 < poly p y /\\\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (forall z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (forall z. X < z /\\ z < y ==> &0 < poly p z)"), t785))
+  neg_pos_neq_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y /\\ poly p x < &0 /\\ &0 < poly p y /\\\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\ (poly p X = &0) /\\\n              (∀ z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (∀ z. X < z /\\ z < y ==> &0 < poly p z)"), t785))
 }
 
 ///|
@@ -1096,7 +1096,7 @@ fn step_9() -> Unit raise {
   let t792 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("x:real"), t787, t786]), neg_pos_neq_thm()))
   let t793 = @tactics.repeat_tac(@tactics.strip_tac)
   let t794 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), t793, t792, t791, t790, t789, t788])
-  neg_pos_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> poly p x < &0 ==> poly p y > &0 ==>\n            (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (forall z. (z = X) ==> (poly p z = &0)) /\\\n              (forall z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (forall z. X < z /\\ z < y ==> poly p z > &0)"), t794))
+  neg_pos_neq_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> poly p x < &0 ==> poly p y > &0 ==>\n            (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n            ?X. x < X /\\ X < y /\\\n              (∀ z. (z = X) ==> (poly p z = &0)) /\\\n              (∀ z. x < z /\\ z < X ==> poly p z < &0) /\\\n              (∀ z. X < z /\\ z < y ==> poly p z > &0)"), t794))
 }
 
 ///|
@@ -1112,7 +1112,7 @@ pub fn neg_pos_neq_thm2() -> @kernel.Thm {
 /// lt_nz_thm
 fn step_10() -> Unit raise {
   let t795 = @list.List([@meson.meson_tac(@list.List([@analysis.real_lt_nz()]))])
-  lt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall x. x1 < x /\\ x < x2 ==> poly p x < &0) ==> (forall x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))"), t795))
+  lt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(∀ x. x1 < x /\\ x < x2 ==> poly p x < &0) ==> (∀ x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))"), t795))
 }
 
 ///|
@@ -1128,7 +1128,7 @@ pub fn lt_nz_thm() -> @kernel.Thm {
 /// gt_nz_thm
 fn step_11() -> Unit raise {
   let t796 = @list.List([@meson.meson_tac(@list.List([@analysis.real_lt_nz(), @realax.real_gt()]))])
-  gt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall x. x1 < x /\\ x < x2 ==> poly p x > &0) ==> (forall x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))"), t796))
+  gt_nz_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(∀ x. x1 < x /\\ x < x2 ==> poly p x > &0) ==> (∀ x. x1 < x /\\ x < x2 ==> ~(poly p x = &0))"), t796))
 }
 
 ///|
@@ -1177,7 +1177,7 @@ fn step_12() -> Unit raise {
     @tactics.then_tac(@tactics.mp_tac(@drule.match_mp(@bool.ispec(@parser.parse_term("p:real list"), @poly.poly_mvt()))(x)), t799)
   })
   let t824 = @list.List([@rqe_tactics_ext.repeat_n(3L, @tactics.strip_tac), t823, t822, @rqe_tactics_ext.label_all_tac, t821, t820, t819, @calc_rat.real_arith_tac, t818, t817, t816, t815, t814, t813, t812, @tactics.strip_tac, @tactics.strip_tac, t811])
-  eq_eq_false_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> (poly p x = &0) ==> (poly p y = &0) ==>\n       (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==> F"), t824))
+  eq_eq_false_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> (poly p x = &0) ==> (poly p y = &0) ==>\n       (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==> F"), t824))
 }
 
 ///|
@@ -1309,7 +1309,7 @@ fn step_13() -> Unit raise {
   let t918 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x <= y <=> (x < y \\/ (x = y))"))]))
   let t919 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x < y <=> ~(y <= x)"))]))
   let t920 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t919, t918, @tactics.strip_tac, t917, t916, @tactics.strip_tac, t915, @rqe_tactics_ext.label_all_tac, t914, t913, @calc_rat.real_arith_tac, @tactics.strip_tac, t912, t911, t910, t909, t908, t907, @rqe_tactics_ext.label_all_tac, t906, @tactics.strip_tac, t905, t904, @tactics.disj2_tac, t903, t902, t901, t900, @tactics.strip_tac, t899, @rqe_tactics_ext.label_all_tac, t898, @calc_rat.real_arith_tac, @tactics.strip_tac, t897, @rqe_tactics_ext.label_all_tac, t896, @tactics.strip_tac, t895, t894, t893, t892, @calc_rat.real_arith_tac, t891, t890, t889, @calc_rat.real_arith_tac, t888, t887, t886, t885, @tactics.strip_tac, t884, t883, t882, @tactics.strip_tac, t881, @tactics.strip_tac, t880, t879, t878, t877, t876, t875, t874, t873, t872, t871, t870, t869, t868, t867, t866, t865])
-  neg_zero_neg_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> poly p x < &0 ==> (poly p y = &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z < &0)"), t920))
+  neg_zero_neg_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> poly p x < &0 ==> (poly p y = &0) ==>\n     (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (∀ z. x < z /\\ z < y ==> poly p z < &0)"), t920))
 }
 
 ///|
@@ -1441,7 +1441,7 @@ fn step_14() -> Unit raise {
   let t1014 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x >= y <=> (x > y \\/ (x = y))"))]))
   let t1015 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x > y <=> ~(y >= x)"))]))
   let t1016 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1015, t1014, @tactics.strip_tac, t1013, t1012, @tactics.strip_tac, t1011, @rqe_tactics_ext.label_all_tac, t1010, t1009, @calc_rat.real_arith_tac, @tactics.strip_tac, t1008, t1007, t1006, t1005, t1004, t1003, @rqe_tactics_ext.label_all_tac, t1002, @tactics.strip_tac, t1001, t1000, @tactics.disj2_tac, t999, t998, t997, t996, @tactics.strip_tac, t995, @rqe_tactics_ext.label_all_tac, t994, @calc_rat.real_arith_tac, @tactics.strip_tac, t993, @rqe_tactics_ext.label_all_tac, t992, @tactics.strip_tac, t991, t990, t989, t988, @calc_rat.real_arith_tac, t987, t986, t985, @calc_rat.real_arith_tac, t984, t983, t982, t981, @tactics.strip_tac, t980, t979, t978, @tactics.strip_tac, t977, @tactics.strip_tac, t976, t975, t974, t973, t972, t971, t970, t969, t968, t967, t966, t965, t964, t963, t962, t961])
-  pos_zero_pos_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> poly p x > &0 ==> (poly p y = &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z > &0)"), t1016))
+  pos_zero_pos_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> poly p x > &0 ==> (poly p y = &0) ==>\n     (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (∀ z. x < z /\\ z < y ==> poly p z > &0)"), t1016))
 }
 
 ///|
@@ -1579,7 +1579,7 @@ fn step_15() -> Unit raise {
   let t1114 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x <= y <=> (x < y \\/ (x = y))"))]))
   let t1115 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x < y <=> ~(y <= x)"))]))
   let t1116 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1115, t1114, @tactics.strip_tac, t1113, t1112, @tactics.strip_tac, t1111, @rqe_tactics_ext.label_all_tac, t1110, t1109, @calc_rat.real_arith_tac, @tactics.strip_tac, t1108, t1107, t1106, t1105, t1104, t1103, @rqe_tactics_ext.label_all_tac, t1102, @tactics.strip_tac, t1101, t1100, @tactics.disj2_tac, t1099, t1098, t1097, t1096, @tactics.strip_tac, t1095, @rqe_tactics_ext.label_all_tac, t1094, t1093, @calc_rat.real_arith_tac, @tactics.strip_tac, t1092, @rqe_tactics_ext.label_all_tac, t1091, @tactics.strip_tac, t1090, t1089, t1088, t1087, @calc_rat.real_arith_tac, t1086, t1085, t1084, @calc_rat.real_arith_tac, t1083, t1082, t1081, t1080, @tactics.strip_tac, t1079, t1078, t1077, @tactics.strip_tac, t1076, @tactics.strip_tac, t1075, t1074, t1073, t1072, t1071, t1070, t1069, t1068, t1067, t1066, t1065, t1064, t1063, t1062, t1061, t1060])
-  zero_neg_neg_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> (poly p x = &0) ==> (poly p y < &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z < &0)"), t1116))
+  zero_neg_neg_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> (poly p x = &0) ==> (poly p y < &0) ==>\n     (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (∀ z. x < z /\\ z < y ==> poly p z < &0)"), t1116))
 }
 
 ///|
@@ -1712,7 +1712,7 @@ fn step_16() -> Unit raise {
   let t1209 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x >= y <=> (x > y \\/ (x = y))"))]))
   let t1210 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("x > y <=> ~(y >= x)"))]))
   let t1211 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1210, t1209, @tactics.strip_tac, t1208, t1207, @tactics.strip_tac, t1206, @rqe_tactics_ext.label_all_tac, t1205, t1204, @calc_rat.real_arith_tac, @tactics.strip_tac, t1203, t1202, t1201, t1200, t1199, @rqe_tactics_ext.label_all_tac, t1198, t1197, @calc_rat.real_arith_tac, t1196, t1195, @tactics.strip_tac, t1194, @rqe_tactics_ext.label_all_tac, t1193, @calc_rat.real_arith_tac, @tactics.strip_tac, t1192, @rqe_tactics_ext.label_all_tac, t1191, @tactics.strip_tac, t1190, t1189, t1188, t1187, @calc_rat.real_arith_tac, t1186, t1185, t1184, @calc_rat.real_arith_tac, t1183, t1182, t1181, t1180, @tactics.strip_tac, t1179, t1178, t1177, @tactics.strip_tac, t1176, @tactics.strip_tac, t1175, t1174, t1173, t1172, t1171, t1170, t1169, t1168, t1167, t1166, t1165, t1164, t1163, t1162, t1161, t1160])
-  zero_pos_pos_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y p. x < y ==> (poly p x = &0) ==> (poly p y > &0) ==>\n     (forall z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (forall z. x < z /\\ z < y ==> poly p z > &0)"), t1211))
+  zero_pos_pos_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y p. x < y ==> (poly p x = &0) ==> (poly p y > &0) ==>\n     (∀ z. x < z /\\ z < y ==> ~(poly (poly_diff p) z = &0)) ==>\n     (∀ z. x < z /\\ z < y ==> poly p z > &0)"), t1211))
 }
 
 ///|

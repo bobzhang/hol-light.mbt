@@ -4,25 +4,25 @@
 ///|
 /// Tutorial/HOLs_number_systems.ml:1
 fn step_1() -> Unit raise {
-  ignore(@calc_rat.real_arith(@parser.parse_term("forall x y:real. (abs(x) - abs(y)) <= abs(x - y)")))
+  ignore(@calc_rat.real_arith(@parser.parse_term("∀ x y:real. (abs(x) - abs(y)) <= abs(x - y)")))
 }
 
 ///|
 /// Tutorial/HOLs_number_systems.ml:3
 fn step_2() -> Unit raise {
-  ignore(@int.int_arith(@parser.parse_term("forall a b a' b' D:int.\n     (a pow 2 - D * b pow 2) * (a' pow 2 - D * b' pow 2) =\n     (a * a' + D * b * b') pow 2 - D * (a * b' + a' * b) pow 2")))
+  ignore(@int.int_arith(@parser.parse_term("∀ a b a' b' D:int.\n     (a pow 2 - D * b pow 2) * (a' pow 2 - D * b' pow 2) =\n     (a * a' + D * b * b') pow 2 - D * (a * b' + a' * b) pow 2")))
 }
 
 ///|
 /// Tutorial/HOLs_number_systems.ml:8
 fn step_3() -> Unit raise {
-  ignore(@calc_rat.real_arith(@parser.parse_term("forall x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11:real.\n        x3 = abs(x2) - x1 /\\\n        x4 = abs(x3) - x2 /\\\n        x5 = abs(x4) - x3 /\\\n        x6 = abs(x5) - x4 /\\\n        x7 = abs(x6) - x5 /\\\n        x8 = abs(x7) - x6 /\\\n        x9 = abs(x8) - x7 /\\\n        x10 = abs(x9) - x8 /\\\n        x11 = abs(x10) - x9\n        ==> x1 = x10 /\\ x2 = x11")))
+  ignore(@calc_rat.real_arith(@parser.parse_term("∀ x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11:real.\n        x3 = abs(x2) - x1 /\\\n        x4 = abs(x3) - x2 /\\\n        x5 = abs(x4) - x3 /\\\n        x6 = abs(x5) - x4 /\\\n        x7 = abs(x6) - x5 /\\\n        x8 = abs(x7) - x6 /\\\n        x9 = abs(x8) - x7 /\\\n        x10 = abs(x9) - x8 /\\\n        x11 = abs(x10) - x9\n        ==> x1 = x10 /\\ x2 = x11")))
 }
 
 ///|
 /// Tutorial/HOLs_number_systems.ml:21
 fn step_4() -> Unit raise {
-  ignore(@calc_rat.real_arith(@parser.parse_term("forall x y:real. x < y ==> x < (x + y) / &2 /\\ (x + y) / &2 < y")))
+  ignore(@calc_rat.real_arith(@parser.parse_term("∀ x y:real. x < y ==> x < (x + y) / &2 /\\ (x + y) / &2 < y")))
 }
 
 ///|
@@ -94,13 +94,13 @@ fn step_15() -> Unit raise {
 ///|
 /// Tutorial/HOLs_number_systems.ml:122
 fn step_16() -> Unit raise {
-  ignore(@cooper.cooper_rule(@parser.parse_term("forall n. n >= 8 ==> ?a b. n = 3 * a + 5 * b")))
+  ignore(@cooper.cooper_rule(@parser.parse_term("∀ n. n >= 8 ==> ?a b. n = 3 * a + 5 * b")))
 }
 
 ///|
 /// Tutorial/HOLs_number_systems.ml:126
 fn step_17() -> Unit raise {
-  ignore(@rqe_main.real_qelim_conv(@parser.parse_term("forall x. &0 <= x ==> ?y. y pow 2 = x")))
+  ignore(@rqe_main.real_qelim_conv(@parser.parse_term("∀ x. &0 <= x ==> ?y. y pow 2 = x")))
 }
 
 ///|

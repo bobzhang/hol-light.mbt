@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   iter_c.set(
     @define.define_(
       @parser.parse_term(
-        "(forall f. ITER 0 f x = x) /\\\n   (forall f n. ITER (SUC n) f x = f (ITER n f x))",
+        "(∀ f. ITER 0 f x = x) /\\\n   (∀ f n. ITER (SUC n) f x = f (ITER n f x))",
       ),
     ),
   )
@@ -31,7 +31,7 @@ fn step_2() -> Unit raise {
   iter_pointless_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall f. ITER 0 f = I) /\\\n    (forall f n. ITER (SUC n) f = f o ITER n f)",
+        "(∀ f. ITER 0 f = I) /\\\n    (∀ f n. ITER (SUC n) f = f o ITER n f)",
       ),
       t1,
     ),
@@ -64,7 +64,7 @@ fn step_3() -> Unit raise {
   iter_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall f x. ITER 0 f x = x) /\\\n    (forall f n x. ITER (SUC n) f x = ITER n f (f x))",
+        "(∀ f x. ITER 0 f x = x) /\\\n    (∀ f n x. ITER (SUC n) f x = ITER n f (f x))",
       ),
       t3,
     ),
@@ -94,7 +94,7 @@ fn step_4() -> Unit raise {
   iter_alt_pointless_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall f. ITER 0 f = I) /\\\n    (forall f n. ITER (SUC n) f = ITER n f o f)",
+        "(∀ f. ITER 0 f = I) /\\\n    (∀ f n. ITER (SUC n) f = ITER n f o f)",
       ),
       t4,
     ),
@@ -118,7 +118,7 @@ fn step_5() -> Unit raise {
   let t5 = @simp.rewrite_tac(
     @list.List([@calc_num.num_conv(@parser.parse_term("1")), iter()]),
   )
-  iter_1_c.set(@tactics.prove(@parser.parse_term("forall f x. ITER 1 f x = f x"), t5))
+  iter_1_c.set(@tactics.prove(@parser.parse_term("∀ f x. ITER 1 f x = f x"), t5))
 }
 
 ///|
@@ -140,7 +140,7 @@ fn step_6() -> Unit raise {
   )
   iter_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n m x. ITER n f (ITER m f x) = ITER (n + m) f x"),
+      @parser.parse_term("∀ f n m x. ITER n f (ITER m f x) = ITER (n + m) f x"),
       t7,
     ),
   )
@@ -163,7 +163,7 @@ fn step_7() -> Unit raise {
   )
   iter_add_pointless_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. ITER (m + n) f = ITER m f o ITER n f"),
+      @parser.parse_term("∀ m n. ITER (m + n) f = ITER m f o ITER n f"),
       t8,
     ),
   )
@@ -192,7 +192,7 @@ fn step_8() -> Unit raise {
   )
   iter_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n m x. ITER n (ITER m f) x = ITER (n * m) f x"),
+      @parser.parse_term("∀ f n m x. ITER n (ITER m f) x = ITER (n * m) f x"),
       t10,
     ),
   )
@@ -217,7 +217,7 @@ fn step_9() -> Unit raise {
   )
   iter_fixpoint_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f n x. f x = x ==> ITER n f x = x"),
+      @parser.parse_term("∀ f n x. f x = x ==> ITER n f x = x"),
       t12,
     ),
   )
@@ -482,7 +482,7 @@ fn step_10() -> Unit raise {
     t22,
   ])
   let t13 = @class.asm_cases_tac(
-    @parser.parse_term("forall n. ~(n = 0) ==> ~P(f n:A)"),
+    @parser.parse_term("∀ n. ~(n = 0) ==> ~P(f n:A)"),
   )
   let t52 = @tactics.thenl(
     @tactics.then_tac(
@@ -553,7 +553,7 @@ fn step_10() -> Unit raise {
   order_existence_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P f:num->A.\n         P(f 0) /\\ (forall m n. P(f m) /\\ ~(m = 0) ==> (P(f(m + n)) <=> P(f n)))\n         ==> ?d. forall n. P(f n) <=> d divides n",
+        "∀ P f:num->A.\n         P(f 0) /\\ (∀ m n. P(f m) /\\ ~(m = 0) ==> (P(f(m + n)) <=> P(f n)))\n         ==> ?d. ∀ n. P(f n) <=> d divides n",
       ),
       t52,
     ),
@@ -582,7 +582,7 @@ fn step_11() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "forall a b:num->A. (forall x y. R x y ==> R y x) /\\\n          (forall x y z. R x y /\\ R y z ==> R x z) /\\\n          (forall n. R (a n) (b n))\n          ==> (forall n. R (a n) z <=> R (b n) z)",
+        "∀ a b:num->A. (∀ x y. R x y ==> R y x) /\\\n          (∀ x y z. R x y /\\ R y z ==> R x z) /\\\n          (∀ n. R (a n) (b n))\n          ==> (∀ n. R (a n) z <=> R (b n) z)",
       ),
     ),
   )
@@ -645,7 +645,7 @@ fn step_11() -> Unit raise {
   order_existence_iter_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall R f z:A.\n        R z z /\\\n        (forall x y. R x y ==> R y x) /\\\n        (forall x y z. R x y /\\ R y z ==> R x z) /\\\n        (forall x y. R x y ==> R (f x) (f y))\n        ==> ?d. forall n. R (ITER n f z) z <=> d divides n",
+        "∀ R f z:A.\n        R z z /\\\n        (∀ x y. R x y ==> R y x) /\\\n        (∀ x y z. R x y /\\ R y z ==> R x z) /\\\n        (∀ x y. R x y ==> R (f x) (f y))\n        ==> ?d. ∀ n. R (ITER n f z) z <=> d divides n",
       ),
       t66,
     ),
@@ -738,7 +738,7 @@ fn step_12() -> Unit raise {
   let t131 = @simp.asm_simp_tac(
     @list.List([
       @arith.le_1(),
-      @int.number_rule(@parser.parse_term("forall n. 0 divides n <=> n = 0")),
+      @int.number_rule(@parser.parse_term("∀ n. 0 divides n <=> n = 0")),
     ]),
   )
   let t127 = @parser.parse_term("m:num")
@@ -1088,7 +1088,7 @@ fn step_12() -> Unit raise {
   ])
   let t88 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall d. d <= p\n             ==> (R:A->A->bool) (ITER (p - d) f z) (ITER (q - d) f z)",
+      "∀ d. d <= p\n             ==> (R:A->A->bool) (ITER (p - d) f z) (ITER (q - d) f z)",
     ),
     fn(
       x85 : @kernel.Thm,
@@ -1281,7 +1281,7 @@ fn step_12() -> Unit raise {
   order_existence_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall R f z:A k.\n     FINITE { R(ITER n f z) | n IN (:num)} /\\\n     CARD { R(ITER n f z) | n IN (:num)} <= k /\\\n     R z z /\\\n     (forall x y. R x y ==> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall x y. R (f x) (f y) <=> R x y)\n     ==> ?d. 0 < d /\\ d <= k /\\ forall n. R (ITER n f z) z <=> d divides n",
+        "∀ R f z:A k.\n     FINITE { R(ITER n f z) | n IN (:num)} /\\\n     CARD { R(ITER n f z) | n IN (:num)} <= k /\\\n     R z z /\\\n     (∀ x y. R x y ==> R y x) /\\\n     (∀ x y z. R x y /\\ R y z ==> R x z) /\\\n     (∀ x y. R (f x) (f y) <=> R x y)\n     ==> ?d. 0 < d /\\ d <= k /\\ ∀ n. R (ITER n f z) z <=> d divides n",
       ),
       t140,
     ),
@@ -1325,7 +1325,7 @@ fn step_13() -> Unit raise {
   order_existence_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall R f z:A.\n     FINITE { R(ITER n f z) | n IN (:num)} /\\\n     R z z /\\\n     (forall x y. R x y ==> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall x y. R (f x) (f y) <=> R x y)\n     ==> ?d. 0 < d /\\ forall n. R (ITER n f z) z <=> d divides n",
+        "∀ R f z:A.\n     FINITE { R(ITER n f z) | n IN (:num)} /\\\n     R z z /\\\n     (∀ x y. R x y ==> R y x) /\\\n     (∀ x y z. R x y /\\ R y z ==> R x z) /\\\n     (∀ x y. R (f x) (f y) <=> R x y)\n     ==> ?d. 0 < d /\\ ∀ n. R (ITER n f z) z <=> d divides n",
       ),
       t147,
     ),

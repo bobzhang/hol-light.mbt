@@ -75,7 +75,7 @@ fn step_10() -> Unit raise {
 /// CONG_TRIVIAL
 fn step_11() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([@pocklington.cong_0(), @pocklington.cong_sym(), @pocklington.cong_trans()]))
-  cong_trivial_c.set(@tactics.prove(@parser.parse_term("forall x y. n divides x /\\ n divides y ==> (x == y) (mod n)"), t4))
+  cong_trivial_c.set(@tactics.prove(@parser.parse_term("∀ x y. n divides x /\\ n divides y ==> (x == y) (mod n)"), t4))
 }
 
 ///|
@@ -131,7 +131,7 @@ fn step_17() -> Unit raise {
   let t8 = @list.List([@meson.asm_meson_tac(@list.List([@int.divides_one(), @prime.prime_0(), @prime.prime_1()])), t7])
   let t6 = @simp.rewrite_tac(@list.List([@arith.fact(), @arith.le()]))
   let t9 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @nums.induct_tac), t6), t8)
-  divides_fact_prime_c.set(@tactics.prove(@parser.parse_term("forall p. prime p ==> forall n. p divides (FACT n) <=> p <= n"), t9))
+  divides_fact_prime_c.set(@tactics.prove(@parser.parse_term("∀ p. prime p ==> ∀ n. p divides (FACT n) <=> p <= n"), t9))
 }
 
 ///|
@@ -153,7 +153,7 @@ fn step_18() -> Unit raise {
   let t11 = @bool.specl(@list.List([@parser.parse_term("p - n"), t10]), @binomial.binom_fact())
   let t12 = @tactics.mp_tac(@equal.ap_term(@parser.parse_term("(divides) p"), t11))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t12), t13), t14), t15)
-  divides_binom_prime_c.set(@tactics.prove(@parser.parse_term("forall n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)"), t16))
+  divides_binom_prime_c.set(@tactics.prove(@parser.parse_term("∀ n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)"), t16))
 }
 
 ///|
@@ -171,7 +171,7 @@ fn step_19() -> Unit raise {
   let t18 = @meson.asm_meson_tac(@list.List([@arith.le(), @arith.le_trans(), @prime.divides_0(), @prime.divides_add(), @arith.le_refl()]))
   let t17 = @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t17), t18)
-  divides_nsum_c.set(@tactics.prove(@parser.parse_term("forall m n. (forall i. m <= i /\\ i <= n ==> p divides f(i)) ==> p divides nsum(m..n) f"), t19))
+  divides_nsum_c.set(@tactics.prove(@parser.parse_term("∀ m n. (∀ i. m <= i /\\ i <= n ==> p divides f(i)) ==> p divides nsum(m..n) f"), t19))
 }
 
 ///|
@@ -211,7 +211,7 @@ fn step_20() -> Unit raise {
   let t21 = @tactics.subgoal_then(@parser.parse_term("1 <= p /\\ 0 < p"), @tactics.strip_assume_tac)
   let t20 = @simp.rewrite_tac(@list.List([@binomial.binomial_theorem()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t20), t21), t27), t28), t29), t33), t35), t36), t37), t38)
-  flt_lemma_c.set(@tactics.prove(@parser.parse_term("forall p a b. prime p ==> ((a + b) EXP p == a EXP p + b EXP p) (mod p)"), t39))
+  flt_lemma_c.set(@tactics.prove(@parser.parse_term("∀ p a b. prime p ==> ((a + b) EXP p == a EXP p + b EXP p) (mod p)"), t39))
 }
 
 ///|
@@ -229,7 +229,7 @@ fn step_21() -> Unit raise {
   let t40 = @meson.asm_meson_tac(@list.List([@arith.add1(), flt_lemma(), @arith.exp_one(), @pocklington.cong_add(), @pocklington.cong_trans(), @pocklington.cong_refl()]))
   let t41 = @list.List([@meson.asm_meson_tac(@list.List([@arith.exp_eq_0(), @pocklington.cong_refl(), @prime.prime_0()])), t40])
   let t42 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))), @tactics.disch_tac), @nums.induct_tac), t41)
-  fermat_little_c.set(@tactics.prove(@parser.parse_term("forall p a. prime p ==> (a EXP p == a) (mod p)"), t42))
+  fermat_little_c.set(@tactics.prove(@parser.parse_term("∀ p a. prime p ==> (a EXP p == a) (mod p)"), t42))
 }
 
 ///|
@@ -250,7 +250,7 @@ fn step_22() -> Unit raise {
   let t44 = @tactics.exists_tac(@parser.parse_term("a:num"))
   let t43 = @tactics.match_mp_tac(@pocklington.cong_mult_lcancel())
   let t48 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t43), t44), t45), t46), t47)
-  fermat_little_coprime_c.set(@tactics.prove(@parser.parse_term("forall p a. prime p /\\ coprime(a,p) ==> (a EXP (p - 1) == 1) (mod p)"), t48))
+  fermat_little_coprime_c.set(@tactics.prove(@parser.parse_term("∀ p a. prime p /\\ coprime(a,p) ==> (a EXP (p - 1) == 1) (mod p)"), t48))
 }
 
 ///|
@@ -284,7 +284,7 @@ fn step_23() -> Unit raise {
     })(t52(x53))
   })
   let t64 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t54), t55), t59), t60), t61), t62), t63)
-  fermat_little_variant_c.set(@tactics.prove(@parser.parse_term("forall p a. prime p ==> (a EXP (1 + m * (p - 1)) == a) (mod p)"), t64))
+  fermat_little_variant_c.set(@tactics.prove(@parser.parse_term("∀ p a. prime p ==> (a EXP (1 + m * (p - 1)) == a) (mod p)"), t64))
 }
 
 ///|

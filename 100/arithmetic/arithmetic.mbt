@@ -5,7 +5,7 @@
 /// ARITHMETIC_PROGRESSION_LEMMA
 fn step_1() -> Unit raise {
   let t1 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  arithmetic_progression_lemma_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(0..n) (\\i. a + d * i) = ((n + 1) * (2 * a + n * d)) DIV 2"), t1))
+  arithmetic_progression_lemma_c.set(@tactics.prove(@parser.parse_term("∀ n. nsum(0..n) (\\i. a + d * i) = ((n + 1) * (2 * a + n * d)) DIV 2"), t1))
 }
 
 ///|
@@ -21,7 +21,7 @@ pub fn arithmetic_progression_lemma() -> @kernel.Thm {
 /// ARITHMETIC_PROGRESSION
 fn step_2() -> Unit raise {
   let t2 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([arithmetic_progression_lemma(), @arith.suc_sub1()]))), @int.arith_tac)
-  arithmetic_progression_c.set(@tactics.prove(@parser.parse_term("forall n. 1 <= n\n       ==> nsum(0..n-1) (\\i. a + d * i) = (n * (2 * a + (n - 1) * d)) DIV 2"), t2))
+  arithmetic_progression_c.set(@tactics.prove(@parser.parse_term("∀ n. 1 <= n\n       ==> nsum(0..n-1) (\\i. a + d * i) = (n * (2 * a + (n - 1) * d)) DIV 2"), t2))
 }
 
 ///|

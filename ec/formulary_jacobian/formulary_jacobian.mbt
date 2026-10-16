@@ -26,7 +26,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([ja_dbl_2007_bl(), @jacobian.jacobian_add(), @jacobian.jacobian_eq(), @jacobian.jacobian_neg(), @jacobian.jacobian_0()]))
   let t1 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @tactics.strip_tac), t2), t3), t4), t5), @ringtheory.field_tac), t6)
-  ja_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1)\n        ==> jacobian_eq f (ja_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t7))
+  ja_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1)\n        ==> jacobian_eq f (ja_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t7))
 }
 
 ///|
@@ -54,7 +54,7 @@ fn step_3() -> Unit raise {
   let t9 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
   let t8 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8), t9), t10), @tactics.strip_tac), t14), t15), t16), @ringtheory.field_tac), t17)
-  ja_dbl_2007_bl_p_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\\n        (z1 = ring_0 f ==> (x1,y1,z1) = jacobian_0 (f,a,b))\n        ==> ja_dbl_2007_bl (f,a,b) (x1,y1,z1) =\n            jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1)"), t18))
+  ja_dbl_2007_bl_p_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\\n        (z1 = ring_0 f ==> (x1,y1,z1) = jacobian_0 (f,a,b))\n        ==> ja_dbl_2007_bl (f,a,b) (x1,y1,z1) =\n            jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1)"), t18))
 }
 
 ///|
@@ -97,7 +97,7 @@ fn step_5() -> Unit raise {
   })
   let t19 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t19), @tactics.strip_tac), t23), t24), t25), t26), t27), @ringtheory.field_tac), t28)
-  j3_dbl_2001_b_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1)\n        ==> jacobian_eq f (j3_dbl_2001_b (f,a,b) (x1,y1,z1))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t29))
+  j3_dbl_2001_b_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1)\n        ==> jacobian_eq f (j3_dbl_2001_b (f,a,b) (x1,y1,z1))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t29))
 }
 
 ///|
@@ -125,7 +125,7 @@ fn step_6() -> Unit raise {
   let t31 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
   let t30 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t30), t31), t32), @tactics.strip_tac), t36), t37), t38), @ringtheory.field_tac), t39)
-  j3_dbl_2001_b_p_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\\n        (z1 = ring_0 f ==> (x1,y1,z1) = jacobian_0 (f,a,b))\n        ==> j3_dbl_2001_b (f,a,b) (x1,y1,z1) =\n            jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1)"), t40))
+  j3_dbl_2001_b_p_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\\n        (z1 = ring_0 f ==> (x1,y1,z1) = jacobian_0 (f,a,b))\n        ==> j3_dbl_2001_b (f,a,b) (x1,y1,z1) =\n            jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1)"), t40))
 }
 
 ///|
@@ -168,7 +168,7 @@ fn step_8() -> Unit raise {
   })
   let t41 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t41), @tactics.strip_tac), t45), t46), t47), t48), t49), @ringtheory.field_tac), t50)
-  j0_dbl_2009_l_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1)\n        ==> jacobian_eq f (j0_dbl_2009_l (f,a,b) (x1,y1,z1))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t51))
+  j0_dbl_2009_l_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1)\n        ==> jacobian_eq f (j0_dbl_2009_l (f,a,b) (x1,y1,z1))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t51))
 }
 
 ///|
@@ -196,7 +196,7 @@ fn step_9() -> Unit raise {
   let t53 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
   let t52 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t62 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t52), t53), t54), @tactics.strip_tac), t58), t59), t60), @ringtheory.field_tac), t61)
-  j0_dbl_2009_l_p_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\\n        (z1 = ring_0 f ==> (x1,y1,z1) = jacobian_0 (f,a,b))\n        ==> j0_dbl_2009_l (f,a,b) (x1,y1,z1) =\n            jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1)"), t62))
+  j0_dbl_2009_l_p_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\\n        (z1 = ring_0 f ==> (x1,y1,z1) = jacobian_0 (f,a,b))\n        ==> j0_dbl_2009_l (f,a,b) (x1,y1,z1) =\n            jacobian_add (f,a,b) (x1,y1,z1) (x1,y1,z1)"), t62))
 }
 
 ///|
@@ -269,7 +269,7 @@ fn step_11() -> Unit raise {
   }))
   let t63 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t93 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t63), t70), t71), t75), t79), t80), t81), t92), @ringtheory.field_tac)
-  ja_add_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\ jacobian_point f (x2,y2,z2) /\\\n        ~(z1 = ring_0 f) /\\ ~(z2 = ring_0 f) /\\\n        ~(jacobian_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> jacobian_eq f (ja_add_2007_bl (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t93))
+  ja_add_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\ jacobian_point f (x2,y2,z2) /\\\n        ~(z1 = ring_0 f) /\\ ~(z2 = ring_0 f) /\\\n        ~(jacobian_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> jacobian_eq f (ja_add_2007_bl (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t93))
 }
 
 ///|
@@ -342,7 +342,7 @@ fn step_13() -> Unit raise {
   }))
   let t94 = @simp.rewrite_tac(@list.List([@jacobian.jacobian_point()]))
   let t124 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t94), t101), t102), t106), t110), t111), t112), t123), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  ja_madd_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\ jacobian_point f (x2,y2,z2) /\\\n        z2 = ring_1 f /\\\n        ~(z1 = ring_0 f) /\\ ~(jacobian_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> jacobian_eq f (ja_madd_2007_bl (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t124))
+  ja_madd_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("∀ f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f (x1,y1,z1) /\\ jacobian_point f (x2,y2,z2) /\\\n        z2 = ring_1 f /\\\n        ~(z1 = ring_0 f) /\\ ~(jacobian_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> jacobian_eq f (ja_madd_2007_bl (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                          (jacobian_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t124))
 }
 
 ///|

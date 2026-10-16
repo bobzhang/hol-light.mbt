@@ -49,7 +49,7 @@ pub fn termini() -> @kernel.Thm {
 ///|
 /// graph
 fn step_4() -> Unit raise {
-  graph_c.set(@pair.new_definition(@parser.parse_term("graph G <=>\n        forall e. e IN edges(G)\n            ==> ?a b. a IN vertices(G) /\\ b IN vertices(G) /\\\n                      termini G e = {a,b}")))
+  graph_c.set(@pair.new_definition(@parser.parse_term("graph G <=>\n        ∀ e. e IN edges(G)\n            ==> ?a b. a IN vertices(G) /\\ b IN vertices(G) /\\\n                      termini G e = {a,b}")))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn graph() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([graph(), @sets.extension(), @sets.in_insert(), @sets.not_in_empty()])), t1)
-  termini_in_vertices_c.set(@tactics.prove(@parser.parse_term("forall G e v. graph G /\\ e IN edges(G) /\\ v IN termini G e ==> v IN vertices G"), t2))
+  termini_in_vertices_c.set(@tactics.prove(@parser.parse_term("∀ G e v. graph G /\\ e IN edges(G) /\\ v IN termini G e ==> v IN vertices G"), t2))
 }
 
 ///|
@@ -112,7 +112,7 @@ pub fn delete_edge() -> @kernel.Thm {
 /// DELETE_EDGE_CLAUSES
 fn step_8() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), delete_edge(), edges(), vertices(), termini()]))
-  delete_edge_clauses_c.set(@tactics.prove(@parser.parse_term("(forall G. edges(delete_edge e G) = (edges G) DELETE e) /\\\n   (forall G. vertices(delete_edge e G) = vertices G) /\\\n   (forall G. termini(delete_edge e G) = termini G)"), t3))
+  delete_edge_clauses_c.set(@tactics.prove(@parser.parse_term("(∀ G. edges(delete_edge e G) = (edges G) DELETE e) /\\\n   (∀ G. vertices(delete_edge e G) = vertices G) /\\\n   (∀ G. termini(delete_edge e G) = termini G)"), t3))
 }
 
 ///|
@@ -129,7 +129,7 @@ pub fn delete_edge_clauses() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([]))
   let t5 = @tactics.then_tac(@simp.rewrite_tac(@list.List([graph(), delete_edge_clauses(), @sets.in_delete()])), t4)
-  graph_delete_edge_c.set(@tactics.prove(@parser.parse_term("forall G e. graph G ==> graph(delete_edge e G)"), t5))
+  graph_delete_edge_c.set(@tactics.prove(@parser.parse_term("∀ G e. graph G ==> graph(delete_edge e G)"), t5))
 }
 
 ///|
@@ -144,7 +144,7 @@ pub fn graph_delete_edge() -> @kernel.Thm {
 ///|
 /// locally_finite
 fn step_10() -> Unit raise {
-  locally_finite_c.set(@pair.new_definition(@parser.parse_term("locally_finite G <=>\n     forall v. v IN vertices(G) ==> FINITE {e | e IN edges G /\\ v IN termini G e}")))
+  locally_finite_c.set(@pair.new_definition(@parser.parse_term("locally_finite G <=>\n     ∀ v. v IN vertices(G) ==> FINITE {e | e IN edges G /\\ v IN termini G e}")))
 }
 
 ///|
@@ -225,7 +225,7 @@ fn step_13() -> Unit raise {
   })
   let t6 = @simp.rewrite_tac(@list.List([degree(), delete_edge_clauses(), @sets.in_delete()]))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t6), t10), t13), t14), t15), t19), t22), t26), t27), t28), t32), t33), t34), t35)
-  degree_delete_edge_c.set(@tactics.prove(@parser.parse_term("forall G e:E v:V.\n        graph G /\\ locally_finite G /\\ e IN edges(G)\n        ==> degree G v =\n                if termini G e = {v} then degree (delete_edge e G) v + 2\n                else if v IN termini G e then degree (delete_edge e G) v + 1\n                else degree (delete_edge e G) v"), t36))
+  degree_delete_edge_c.set(@tactics.prove(@parser.parse_term("∀ G e:E v:V.\n        graph G /\\ locally_finite G /\\ e IN edges(G)\n        ==> degree G v =\n                if termini G e = {v} then degree (delete_edge e G) v + 2\n                else if v IN termini G e then degree (delete_edge e G) v + 1\n                else degree (delete_edge e G) v"), t36))
 }
 
 ///|
@@ -267,7 +267,7 @@ pub fn eulerian_cases() -> @kernel.Thm {
 ///|
 /// eulerian_RULES, eulerian_INDUCT, eulerian_CASES
 fn step_14() -> Unit raise {
-  let (eulerian_rules, eulerian_induct, eulerian_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall G a. a IN vertices G /\\ edges G = {} ==> eulerian G [] (a,a)) /\\\n  (forall G a b c e es. e IN edges(G) /\\ connects G e (a,b) /\\\n                  eulerian (delete_edge e G) es (b,c)\n                  ==> eulerian G (CONS e es) (a,c))"))
+  let (eulerian_rules, eulerian_induct, eulerian_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ G a. a IN vertices G /\\ edges G = {} ==> eulerian G [] (a,a)) /\\\n  (∀ G a b c e es. e IN edges(G) /\\ connects G e (a,b) /\\\n                  eulerian (delete_edge e G) es (b,c)\n                  ==> eulerian G (CONS e es) (a,c))"))
   eulerian_rules_c.set(eulerian_rules)
   eulerian_induct_c.set(eulerian_induct)
   eulerian_cases_c.set(eulerian_cases)
@@ -278,7 +278,7 @@ fn step_14() -> Unit raise {
 fn step_15() -> Unit raise {
   let t37 = @simp.simp_tac(@list.List([delete_edge_clauses(), @sets.finite_delete(), @sets.finite_rules()]))
   let t38 = @tactics.then_tac(@tactics.match_mp_tac(eulerian_induct()), t37)
-  eulerian_finite_c.set(@tactics.prove(@parser.parse_term("forall G es ab. eulerian G es ab ==> FINITE (edges G)"), t38))
+  eulerian_finite_c.set(@tactics.prove(@parser.parse_term("∀ G es ab. eulerian G es ab ==> FINITE (edges G)"), t38))
 }
 
 ///|
@@ -345,7 +345,7 @@ fn step_16() -> Unit raise {
   let t39 = @simp.simp_tac(@list.List([@iterate.nsum_clauses(), @sets.finite_rules(), @calc_num.arith()]))
   let t40 = @list.List([@tactics.then_tac(@simp.simp_tac(@list.List([degree(), @sets.not_in_empty(), @sets.set_rule(@parser.parse_term("{x | F} = {}"))])), t39), @tactics.all_tac])
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(eulerian_induct()), @tactics.conj_tac), t40), t41), t42), t45), t46), @tactics.strip_tac), t47), @tactics.disch_tac), t50), @tactics.ants_tac), t54), t58), t60), t61), t68), t72), t73), t74), t75), t77), t78), @class.cond_cases_tac), t79), t80)
-  eulerian_odd_lemma_c.set(@tactics.prove(@parser.parse_term("forall G:(E->bool)#(V->bool)#(E->V->bool) es ab.\n        eulerian G es ab\n        ==> graph G\n            ==> FINITE(edges G) /\\\n                forall v. v IN vertices G\n                    ==> (ODD(degree G v) <=>\n                         ~(FST ab = SND ab) /\\ (v = FST ab \\/ v = SND ab))"), t81))
+  eulerian_odd_lemma_c.set(@tactics.prove(@parser.parse_term("∀ G:(E->bool)#(V->bool)#(E->V->bool) es ab.\n        eulerian G es ab\n        ==> graph G\n            ==> FINITE(edges G) /\\\n                ∀ v. v IN vertices G\n                    ==> (ODD(degree G v) <=>\n                         ~(FST ab = SND ab) /\\ (v = FST ab \\/ v = SND ab))"), t81))
 }
 
 ///|
@@ -382,7 +382,7 @@ fn step_17() -> Unit raise {
     }
   }))
   let t96 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t88), t94), t95)
-  eulerian_odd_c.set(@tactics.prove(@parser.parse_term("forall G es a b.\n        graph G /\\ eulerian G es (a,b)\n        ==> forall v. v IN vertices G\n                ==> (ODD(degree G v) <=> ~(a = b) /\\ (v = a \\/ v = b))"), t96))
+  eulerian_odd_c.set(@tactics.prove(@parser.parse_term("∀ G es a b.\n        graph G /\\ eulerian G es (a,b)\n        ==> ∀ v. v IN vertices G\n                ==> (ODD(degree G v) <=> ~(a = b) /\\ (v = a \\/ v = b))"), t96))
 }
 
 ///|
@@ -431,7 +431,7 @@ fn step_18() -> Unit raise {
   let t98 = @simp.rewrite_tac(@list.List([@class.not_exists_thm()]))
   let t97 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("G:(num->bool)#(num->bool)#(num->num->bool)"), eulerian_odd()))
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t97), t98), t99), t102), @tactics.ants_tac), t106), t107), t108), t109), t110), t111), t112), t113), t114), t115), t116), t117), t118), t119), t120), t126), t127), @int.arith_tac)
-  koenigsberg_c.set(@tactics.prove(@parser.parse_term("forall G. vertices(G) = {0,1,2,3} /\\\n       edges(G) = {10,20,30,40,50,60,70} /\\\n       termini G (10) = {0,1} /\\\n       termini G (20) = {0,2} /\\\n       termini G (30) = {0,3} /\\\n       termini G (40) = {1,2} /\\\n       termini G (50) = {1,2} /\\\n       termini G (60) = {2,3} /\\\n       termini G (70) = {2,3}\n       ==> ~(?es a b. eulerian G es (a,b))"), t128))
+  koenigsberg_c.set(@tactics.prove(@parser.parse_term("∀ G. vertices(G) = {0,1,2,3} /\\\n       edges(G) = {10,20,30,40,50,60,70} /\\\n       termini G (10) = {0,1} /\\\n       termini G (20) = {0,2} /\\\n       termini G (30) = {0,3} /\\\n       termini G (40) = {1,2} /\\\n       termini G (50) = {1,2} /\\\n       termini G (60) = {2,3} /\\\n       termini G (70) = {2,3}\n       ==> ~(?es a b. eulerian G es (a,b))"), t128))
 }
 
 ///|

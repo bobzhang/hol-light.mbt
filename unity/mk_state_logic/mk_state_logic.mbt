@@ -94,7 +94,7 @@ pub fn or_def() -> @kernel.Thm {
 ///|
 /// FORALL_def
 fn step_7() -> Unit raise {
-  forall_def_c.set(@aux_definitions.new_binder_definition(@parser.parse_term("!* (P:'b->('a->bool)) = (\\s. (forall x. ((P x)s)))"), "!*"))
+  forall_def_c.set(@aux_definitions.new_binder_definition(@parser.parse_term("!* (P:'b->('a->bool)) = (\\s. (∀ x. ((P x)s)))"), "!*"))
 }
 
 ///|
@@ -394,7 +394,7 @@ pub fn ind_def() -> @kernel.Thm {
 ///|
 /// FORALL_LE_def
 fn step_27() -> Unit raise {
-  forall_le_def_c.set(@pair.new_definition(@parser.parse_term("!<=* (P:num->('a->bool)) m = (\\s:'a. (forall i. i <= m ==> ((P i)s)))")))
+  forall_le_def_c.set(@pair.new_definition(@parser.parse_term("!<=* (P:num->('a->bool)) m = (\\s:'a. (∀ i. i <= m ==> ((P i)s)))")))
 }
 
 ///|
@@ -439,7 +439,7 @@ pub fn exists_lt_def() -> @kernel.Thm {
 ///|
 /// AND_LE_N_def
 fn step_30() -> Unit raise {
-  let t1 = @parser.parse_term("(forall P. /<=\\* P 0       = (P:num->('a->bool)) 0) /\\\n     (forall P. /<=\\* P (SUC i) = ((/<=\\* P i) /\\* (P (SUC i))))")
+  let t1 = @parser.parse_term("(∀ P. /<=\\* P 0       = (P:num->('a->bool)) 0) /\\\n     (∀ P. /<=\\* P (SUC i) = ((/<=\\* P i) /\\* (P (SUC i))))")
   and_le_n_def_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t1))
 }
 
@@ -455,7 +455,7 @@ pub fn and_le_n_def() -> @kernel.Thm {
 ///|
 /// OR_LE_N_def
 fn step_31() -> Unit raise {
-  let t2 = @parser.parse_term("(forall P. \\<=/* P 0       = (P:num->('a->bool)) 0) /\\\n     (forall P. (\\<=/* P (SUC i)) = ((\\<=/* P i) \\/* (P (SUC i))))")
+  let t2 = @parser.parse_term("(∀ P. \\<=/* P 0       = (P:num->('a->bool)) 0) /\\\n     (∀ P. (\\<=/* P (SUC i)) = ((\\<=/* P i) \\/* (P (SUC i))))")
   or_le_n_def_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t2))
 }
 
@@ -471,7 +471,7 @@ pub fn or_le_n_def() -> @kernel.Thm {
 ///|
 /// AND_LT_N_def
 fn step_32() -> Unit raise {
-  let t3 = @parser.parse_term("(forall P. /<\\* P 0       = (False:'a->bool)) /\\\n     (forall P. /<\\* P (SUC i) = ((/<\\* P i) /\\* (P i)))")
+  let t3 = @parser.parse_term("(∀ P. /<\\* P 0       = (False:'a->bool)) /\\\n     (∀ P. /<\\* P (SUC i) = ((/<\\* P i) /\\* (P i)))")
   and_lt_n_def_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t3))
 }
 
@@ -487,7 +487,7 @@ pub fn and_lt_n_def() -> @kernel.Thm {
 ///|
 /// OR_LT_N_def
 fn step_33() -> Unit raise {
-  let t4 = @parser.parse_term("(forall P. \\</* P 0       = (False:'a->bool)) /\\\n     (forall P. \\</* P (SUC i) = ((\\</* P i) \\/* (P i)))")
+  let t4 = @parser.parse_term("(∀ P. \\</* P 0       = (False:'a->bool)) /\\\n     (∀ P. \\</* P (SUC i) = ((\\</* P i) \\/* (P i)))")
   or_lt_n_def_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t4))
 }
 
@@ -601,7 +601,7 @@ fn step_40() -> Unit raise {
   let t6 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t5 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t12 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5), t6), t7), t8), t11)
-  imply_weak_lemma1_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma1", @parser.parse_term("forall p q p' q' (s:'a).\n         ( (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')) s ) ==> ((q \\/* q') s)"), t12))
+  imply_weak_lemma1_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma1", @parser.parse_term("∀ p q p' q' (s:'a).\n         ( (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')) s ) ==> ((q \\/* q') s)"), t12))
 }
 
 ///|
@@ -624,7 +624,7 @@ fn step_41() -> Unit raise {
   let t15 = @simp.rewrite_tac(@list.List([@bool.gen_all(@equal.sym(@bool.spec_all(@theorems.conj_assoc()))), t14, @class.not_clauses(), @class.de_morgan_thm()]))
   let t13 = @simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()]))
   let t20 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), @tactics.beta_tac), t15), t16), t19)
-  imply_weak_lemma2_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma2", @parser.parse_term("forall p q p' q' (s:'a).\n         ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))s\n       ==>\n         (q \\/* q')s"), t20))
+  imply_weak_lemma2_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma2", @parser.parse_term("∀ p q p' q' (s:'a).\n         ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))s\n       ==>\n         (q \\/* q')s"), t20))
 }
 
 ///|
@@ -644,7 +644,7 @@ fn step_42() -> Unit raise {
   let t22 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t21 = @simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t21), t22), t23), t24), @hol88.res_tac)
-  imply_weak_lemma3_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma3", @parser.parse_term("forall p q r (s:'a).\n         ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))s\n       ==>\n         r s"), t25))
+  imply_weak_lemma3_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma3", @parser.parse_term("∀ p q r (s:'a).\n         ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))s\n       ==>\n         r s"), t25))
 }
 
 ///|
@@ -666,7 +666,7 @@ fn step_43() -> Unit raise {
   let t27 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t26 = @simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t26), t27), t29), t30), @hol88.res_tac), t31)
-  imply_weak_lemma4_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma4", @parser.parse_term("forall p q p' q' r r' (s:'a).\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))s\n      ==>\n        ((p /\\* q) \\/* r \\/* r')s"), t32))
+  imply_weak_lemma4_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma4", @parser.parse_term("∀ p q p' q' r r' (s:'a).\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))s\n      ==>\n        ((p /\\* q) \\/* r \\/* r')s"), t32))
 }
 
 ///|
@@ -686,7 +686,7 @@ fn step_44() -> Unit raise {
   let t34 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t33 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t33), t34), t35), @hol88.res_tac), t36)
-  imply_weak_lemma5_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma5", @parser.parse_term("forall p q r (s:'a).\n        ((p /\\* r) \\/* (((p \\/* q) /\\* (q \\/* r)) \\/* r)) s\n      ==>\n        (q \\/* r) s"), t37))
+  imply_weak_lemma5_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma5", @parser.parse_term("∀ p q r (s:'a).\n        ((p /\\* r) \\/* (((p \\/* q) /\\* (q \\/* r)) \\/* r)) s\n      ==>\n        (q \\/* r) s"), t37))
 }
 
 ///|
@@ -706,7 +706,7 @@ fn step_45() -> Unit raise {
   let t39 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t38 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t42 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t38), t39), t40), t41)
-  imply_weak_lemma6_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma6", @parser.parse_term("forall p q b r (s:'a).\n        ((r /\\* q) \\/* (p /\\* b) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s"), t42))
+  imply_weak_lemma6_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma6", @parser.parse_term("∀ p q b r (s:'a).\n        ((r /\\* q) \\/* (p /\\* b) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s"), t42))
 }
 
 ///|
@@ -726,7 +726,7 @@ fn step_46() -> Unit raise {
   let t44 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t43 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t47 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t43), t44), t45), t46)
-  imply_weak_lemma7_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma7", @parser.parse_term("forall p q b r (s:'a).\n        (((r /\\* q) \\/* ((r /\\* p) /\\* b)) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s"), t47))
+  imply_weak_lemma7_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma7", @parser.parse_term("∀ p q b r (s:'a).\n        (((r /\\* q) \\/* ((r /\\* p) /\\* b)) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s"), t47))
 }
 
 ///|
@@ -744,7 +744,7 @@ fn step_47() -> Unit raise {
   let t48 = @simp.asm_rewrite_tac(@list.List([]))
   let t49 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t48])
   let t50 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t49)
-  conj_comm_disj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n           (r s /\\ q s) \\/ p s\n         ==>\n\t   (q s /\\ r s) \\/ p s")), t50))
+  conj_comm_disj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n           (r s /\\ q s) \\/ p s\n         ==>\n\t   (q s /\\ r s) \\/ p s")), t50))
 }
 
 ///|
@@ -762,7 +762,7 @@ fn step_48() -> Unit raise {
   let t51 = @simp.asm_rewrite_tac(@list.List([]))
   let t52 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t51])
   let t53 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t52)
-  conj_comm_disj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (q s /\\ r s) \\/ p s\n       ==>\n         (r s /\\ q s) \\/ p s")), t53))
+  conj_comm_disj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (q s /\\ r s) \\/ p s\n       ==>\n         (r s /\\ q s) \\/ p s")), t53))
 }
 
 ///|
@@ -780,7 +780,7 @@ fn step_49() -> Unit raise {
   let t54 = @bool.spec_all(conj_comm_disj_lemma_b())
   let t55 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(conj_comm_disj_lemma_a()), t54))
   let t56 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t55)
-  conj_comm_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (r s /\\ q s) \\/ p s\n       <=> (q s /\\ r s) \\/ p s")), t56))
+  conj_comm_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (r s /\\ q s) \\/ p s\n       <=> (q s /\\ r s) \\/ p s")), t56))
 }
 
 ///|
@@ -799,7 +799,7 @@ fn step_50() -> Unit raise {
   let t58 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t57 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t57), t58), t59)
-  and_comm_or_lemma_c.set(@aux_definitions.prove_thm("AND_COMM_OR_lemma", @parser.parse_term("forall(p:'a->bool) q r. ((r /\\* q) \\/* p) = ((q /\\* r) \\/* p)"), t60))
+  and_comm_or_lemma_c.set(@aux_definitions.prove_thm("AND_COMM_OR_lemma", @parser.parse_term("∀(p:'a->bool) q r. ((r /\\* q) \\/* p) = ((q /\\* r) \\/* p)"), t60))
 }
 
 ///|
@@ -819,7 +819,7 @@ fn step_51() -> Unit raise {
   let t63 = @simp.asm_rewrite_tac(@list.List([]))
   let t64 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t63, t62, t61])
   let t65 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t64)
-  conj_disj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       ==>\n         (p s /\\ (q s \\/ r s))")), t65))
+  conj_disj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       ==>\n         (p s /\\ (q s \\/ r s))")), t65))
 }
 
 ///|
@@ -839,7 +839,7 @@ fn step_52() -> Unit raise {
   let t68 = @simp.asm_rewrite_tac(@list.List([]))
   let t69 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t68, t67, t66])
   let t70 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t69)
-  conj_disj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (p s /\\ (q s \\/ r s))\n        ==>\n         (p s /\\ (r s \\/ q s))")), t70))
+  conj_disj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (p s /\\ (q s \\/ r s))\n        ==>\n         (p s /\\ (r s \\/ q s))")), t70))
 }
 
 ///|
@@ -857,7 +857,7 @@ fn step_53() -> Unit raise {
   let t71 = @bool.spec_all(conj_disj_comm_lemma_b())
   let t72 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(conj_disj_comm_lemma_a()), t71))
   let t73 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t72)
-  conj_disj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       = (p s /\\ (q s \\/ r s))")), t73))
+  conj_disj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (p s /\\ (r s \\/ q s))\n       = (p s /\\ (q s \\/ r s))")), t73))
 }
 
 ///|
@@ -876,7 +876,7 @@ fn step_54() -> Unit raise {
   let t75 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t74 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t76)
-  and_or_comm_lemma_c.set(@aux_definitions.prove_thm("AND_OR_COMM_lemma", @parser.parse_term("forall(p:'a->bool) q r.\n        p /\\* (r \\/* q)\n      = p /\\* (q \\/* r)"), t77))
+  and_or_comm_lemma_c.set(@aux_definitions.prove_thm("AND_OR_COMM_lemma", @parser.parse_term("∀(p:'a->bool) q r.\n        p /\\* (r \\/* q)\n      = p /\\* (q \\/* r)"), t77))
 }
 
 ///|
@@ -896,7 +896,7 @@ fn step_55() -> Unit raise {
   let t80 = @simp.asm_rewrite_tac(@list.List([]))
   let t81 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t80, t79, t78])
   let t82 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t81)
-  disj_comm_conj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       ==>\n         (q s \\/ r s) /\\ p s")), t82))
+  disj_comm_conj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       ==>\n         (q s \\/ r s) /\\ p s")), t82))
 }
 
 ///|
@@ -916,7 +916,7 @@ fn step_56() -> Unit raise {
   let t85 = @simp.asm_rewrite_tac(@list.List([]))
   let t86 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t85, t84, t83])
   let t87 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t86)
-  disj_comm_conj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (q s \\/ r s) /\\ p s\n       ==>\n         (r s \\/ q s) /\\ p s")), t87))
+  disj_comm_conj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (q s \\/ r s) /\\ p s\n       ==>\n         (r s \\/ q s) /\\ p s")), t87))
 }
 
 ///|
@@ -934,7 +934,7 @@ fn step_57() -> Unit raise {
   let t88 = @bool.spec_all(disj_comm_conj_lemma_b())
   let t89 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(disj_comm_conj_lemma_a()), t88))
   let t90 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t89)
-  disj_comm_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       <=> (q s \\/ r s) /\\ p s")), t90))
+  disj_comm_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (r s \\/ q s) /\\ p s\n       <=> (q s \\/ r s) /\\ p s")), t90))
 }
 
 ///|
@@ -953,7 +953,7 @@ fn step_58() -> Unit raise {
   let t92 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t91 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t94 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t91), t92), t93)
-  or_comm_and_lemma_c.set(@aux_definitions.prove_thm("OR_COMM_AND_lemma", @parser.parse_term("forall(p:'a->bool) q r.\n        (r \\/* q) /\\* p\n      = (q \\/* r) /\\* p"), t94))
+  or_comm_and_lemma_c.set(@aux_definitions.prove_thm("OR_COMM_AND_lemma", @parser.parse_term("∀(p:'a->bool) q r.\n        (r \\/* q) /\\* p\n      = (q \\/* r) /\\* p"), t94))
 }
 
 ///|
@@ -972,7 +972,7 @@ fn step_59() -> Unit raise {
   let t96 = @simp.asm_rewrite_tac(@list.List([]))
   let t97 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t96, t95])
   let t98 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t97)
-  disj_comm_disj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (r s \\/ q s) \\/ p s\n       ==>\n         (q s \\/ r s) \\/ p s")), t98))
+  disj_comm_disj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (r s \\/ q s) \\/ p s\n       ==>\n         (q s \\/ r s) \\/ p s")), t98))
 }
 
 ///|
@@ -991,7 +991,7 @@ fn step_60() -> Unit raise {
   let t100 = @simp.asm_rewrite_tac(@list.List([]))
   let t101 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t100, t99])
   let t102 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t101)
-  disj_comm_disj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (q s \\/ r s) \\/ p s\n       ==>\n         (r s \\/ q s) \\/ p s")), t102))
+  disj_comm_disj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (q s \\/ r s) \\/ p s\n       ==>\n         (r s \\/ q s) \\/ p s")), t102))
 }
 
 ///|
@@ -1009,7 +1009,7 @@ fn step_61() -> Unit raise {
   let t103 = @bool.spec_all(disj_comm_disj_lemma_b())
   let t104 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(disj_comm_disj_lemma_a()), t103))
   let t105 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t104)
-  disj_comm_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r s. (r s \\/ q s) \\/ p s <=> (q s \\/ r s) \\/ p s")), t105))
+  disj_comm_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r s. (r s \\/ q s) \\/ p s <=> (q s \\/ r s) \\/ p s")), t105))
 }
 
 ///|
@@ -1028,7 +1028,7 @@ fn step_62() -> Unit raise {
   let t107 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t106 = @simp.rewrite_tac(@list.List([or_def()]))
   let t109 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t106), t107), t108)
-  or_comm_or_lemma_c.set(@aux_definitions.prove_thm("OR_COMM_OR_lemma", @parser.parse_term("forall(p:'a->bool) q r. (r \\/* q) \\/* p = (q \\/* r) \\/* p"), t109))
+  or_comm_or_lemma_c.set(@aux_definitions.prove_thm("OR_COMM_OR_lemma", @parser.parse_term("∀(p:'a->bool) q r. (r \\/* q) \\/* p = (q \\/* r) \\/* p"), t109))
 }
 
 ///|
@@ -1047,7 +1047,7 @@ fn step_63() -> Unit raise {
   let t111 = @simp.asm_rewrite_tac(@list.List([]))
   let t112 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t111, t110])
   let t113 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t112)
-  disj_disj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s \\/ (r s \\/ q s) ==> p s \\/ (q s \\/ r s)")), t113))
+  disj_disj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s \\/ (r s \\/ q s) ==> p s \\/ (q s \\/ r s)")), t113))
 }
 
 ///|
@@ -1066,7 +1066,7 @@ fn step_64() -> Unit raise {
   let t115 = @simp.asm_rewrite_tac(@list.List([]))
   let t116 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t115, t114])
   let t117 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t116)
-  disj_disj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s \\/ (q s \\/ r s) ==> p s \\/ (r s \\/ q s)")), t117))
+  disj_disj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s \\/ (q s \\/ r s) ==> p s \\/ (r s \\/ q s)")), t117))
 }
 
 ///|
@@ -1084,7 +1084,7 @@ fn step_65() -> Unit raise {
   let t118 = @bool.spec_all(disj_disj_comm_lemma_b())
   let t119 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(disj_disj_comm_lemma_a()), t118))
   let t120 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t119)
-  disj_disj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s \\/ (r s \\/ q s) <=> p s \\/ (q s \\/ r s) ")), t120))
+  disj_disj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s \\/ (r s \\/ q s) <=> p s \\/ (q s \\/ r s) ")), t120))
 }
 
 ///|
@@ -1103,7 +1103,7 @@ fn step_66() -> Unit raise {
   let t122 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t121 = @simp.rewrite_tac(@list.List([or_def()]))
   let t124 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t121), t122), t123)
-  or_or_comm_lemma_c.set(@aux_definitions.prove_thm("OR_OR_COMM_lemma", @parser.parse_term("forall(p:'a->bool) q r. p \\/* (r \\/* q) = p \\/* (q \\/* r)"), t124))
+  or_or_comm_lemma_c.set(@aux_definitions.prove_thm("OR_OR_COMM_lemma", @parser.parse_term("∀(p:'a->bool) q r. p \\/* (r \\/* q) = p \\/* (q \\/* r)"), t124))
 }
 
 ///|
@@ -1120,7 +1120,7 @@ pub fn or_or_comm_lemma() -> @kernel.Thm {
 fn step_67() -> Unit raise {
   let t125 = @simp.asm_rewrite_tac(@list.List([]))
   let t126 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t125)
-  conj_comm_conj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). (r s /\\ q s) /\\ p s ==> (q s /\\ r s) /\\ p s")), t126))
+  conj_comm_conj_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). (r s /\\ q s) /\\ p s ==> (q s /\\ r s) /\\ p s")), t126))
 }
 
 ///|
@@ -1137,7 +1137,7 @@ pub fn conj_comm_conj_lemma_a() -> @kernel.Thm {
 fn step_68() -> Unit raise {
   let t127 = @simp.asm_rewrite_tac(@list.List([]))
   let t128 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t127)
-  conj_comm_conj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). (q s /\\ r s) /\\ p s ==> (r s /\\ q s) /\\ p s")), t128))
+  conj_comm_conj_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). (q s /\\ r s) /\\ p s ==> (r s /\\ q s) /\\ p s")), t128))
 }
 
 ///|
@@ -1155,7 +1155,7 @@ fn step_69() -> Unit raise {
   let t129 = @bool.spec_all(conj_comm_conj_lemma_b())
   let t130 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(conj_comm_conj_lemma_a()), t129))
   let t131 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t130)
-  conj_comm_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). (r s /\\ q s) /\\ p s <=> (q s /\\ r s) /\\ p s")), t131))
+  conj_comm_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). (r s /\\ q s) /\\ p s <=> (q s /\\ r s) /\\ p s")), t131))
 }
 
 ///|
@@ -1174,7 +1174,7 @@ fn step_70() -> Unit raise {
   let t133 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t132 = @simp.rewrite_tac(@list.List([and_def()]))
   let t135 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t132), t133), t134)
-  and_comm_and_lemma_c.set(@aux_definitions.prove_thm("AND_COMM_AND_lemma", @parser.parse_term("forall(p:'a->bool) q r. (r /\\* q) /\\* p = (q /\\* r) /\\* p"), t135))
+  and_comm_and_lemma_c.set(@aux_definitions.prove_thm("AND_COMM_AND_lemma", @parser.parse_term("∀(p:'a->bool) q r. (r /\\* q) /\\* p = (q /\\* r) /\\* p"), t135))
 }
 
 ///|
@@ -1191,7 +1191,7 @@ pub fn and_comm_and_lemma() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   let t136 = @simp.asm_rewrite_tac(@list.List([]))
   let t137 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t136)
-  conj_conj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s /\\ (r s /\\ q s) ==> p s /\\ (q s /\\ r s)")), t137))
+  conj_conj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s /\\ (r s /\\ q s) ==> p s /\\ (q s /\\ r s)")), t137))
 }
 
 ///|
@@ -1208,7 +1208,7 @@ pub fn conj_conj_comm_lemma_a() -> @kernel.Thm {
 fn step_72() -> Unit raise {
   let t138 = @simp.asm_rewrite_tac(@list.List([]))
   let t139 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t138)
-  conj_conj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s /\\ (q s /\\ r s) ==> p s /\\ (r s /\\ q s)")), t139))
+  conj_conj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s /\\ (q s /\\ r s) ==> p s /\\ (r s /\\ q s)")), t139))
 }
 
 ///|
@@ -1226,7 +1226,7 @@ fn step_73() -> Unit raise {
   let t140 = @bool.spec_all(conj_conj_comm_lemma_b())
   let t141 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(conj_conj_comm_lemma_a()), t140))
   let t142 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t141)
-  conj_conj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s /\\ (r s /\\ q s) <=> p s /\\ (q s /\\ r s) ")), t142))
+  conj_conj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s /\\ (r s /\\ q s) <=> p s /\\ (q s /\\ r s) ")), t142))
 }
 
 ///|
@@ -1245,7 +1245,7 @@ fn step_74() -> Unit raise {
   let t144 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t143 = @simp.rewrite_tac(@list.List([and_def()]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t143), t144), t145)
-  and_and_comm_lemma_c.set(@aux_definitions.prove_thm("AND_AND_COMM_lemma", @parser.parse_term("forall(p:'a->bool) q r. p /\\* (r /\\* q) = p /\\* (q /\\* r)"), t146))
+  and_and_comm_lemma_c.set(@aux_definitions.prove_thm("AND_AND_COMM_lemma", @parser.parse_term("∀(p:'a->bool) q r. p /\\* (r /\\* q) = p /\\* (q /\\* r)"), t146))
 }
 
 ///|
@@ -1263,7 +1263,7 @@ fn step_75() -> Unit raise {
   let t147 = @simp.asm_rewrite_tac(@list.List([]))
   let t148 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t147])
   let t149 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t148)
-  disj_conj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s \\/ (r s /\\ q s) ==> p s \\/ (q s /\\ r s)")), t149))
+  disj_conj_comm_lemma_a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s \\/ (r s /\\ q s) ==> p s \\/ (q s /\\ r s)")), t149))
 }
 
 ///|
@@ -1281,7 +1281,7 @@ fn step_76() -> Unit raise {
   let t150 = @simp.asm_rewrite_tac(@list.List([]))
   let t151 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t150])
   let t152 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t151)
-  disj_conj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s \\/ (q s /\\ r s) ==> p s \\/ (r s /\\ q s)")), t152))
+  disj_conj_comm_lemma_b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s \\/ (q s /\\ r s) ==> p s \\/ (r s /\\ q s)")), t152))
 }
 
 ///|
@@ -1299,7 +1299,7 @@ fn step_77() -> Unit raise {
   let t153 = @bool.spec_all(disj_conj_comm_lemma_b())
   let t154 = @tactics.strip_assume_tac(@bool.imp_antisym_rule(@bool.spec_all(disj_conj_comm_lemma_a()), t153))
   let t155 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t154)
-  disj_conj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). p s \\/ (r s /\\ q s) <=> p s \\/ (q s /\\ r s)")), t155))
+  disj_conj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). p s \\/ (r s /\\ q s) <=> p s \\/ (q s /\\ r s)")), t155))
 }
 
 ///|
@@ -1318,7 +1318,7 @@ fn step_78() -> Unit raise {
   let t157 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t156 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t159 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t156), t157), t158)
-  or_and_comm_lemma_c.set(@aux_definitions.prove_thm("OR_AND_COMM_lemma", @parser.parse_term("forall(p:'a->bool) q r. p \\/* (r /\\* q) = p \\/* (q /\\* r)"), t159))
+  or_and_comm_lemma_c.set(@aux_definitions.prove_thm("OR_AND_COMM_lemma", @parser.parse_term("∀(p:'a->bool) q r. p \\/* (r /\\* q) = p \\/* (q /\\* r)"), t159))
 }
 
 ///|
@@ -1336,7 +1336,7 @@ fn step_79() -> Unit raise {
   let t161 = @simp.rewrite_tac(@list.List([@class.not_clauses(), @class.eta_ax()]))
   let t160 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t162 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([not_def1()])), t160), t161)
-  not_not_lemma_c.set(@aux_definitions.prove_thm("NOT_NOT_lemma", @parser.parse_term("forall(p:'a->bool). (Not (Not p)) = p"), t162))
+  not_not_lemma_c.set(@aux_definitions.prove_thm("NOT_NOT_lemma", @parser.parse_term("∀(p:'a->bool). (Not (Not p)) = p"), t162))
 }
 
 ///|
@@ -1354,7 +1354,7 @@ fn step_80() -> Unit raise {
   let t163 = @parser.parse_term("(q (s:'a)):bool")
   let t164 = @tactics.strip_assume_tac(@bool.specl(@list.List([@parser.parse_term("(p (s:'a)):bool"), t163]), @theorems.disj_sym()))
   let t165 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t164)
-  disj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q (s:'a). p s \\/ q s <=> q s \\/ p s")), t165))
+  disj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q (s:'a). p s \\/ q s <=> q s \\/ p s")), t165))
 }
 
 ///|
@@ -1369,11 +1369,11 @@ pub fn disj_comm_lemma() -> @kernel.Thm {
 ///|
 /// OR_COMM_lemma
 fn step_81() -> Unit raise {
-  let t168 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q()]), @kernel.assume_rule(@parser.parse_term("forall(p:'a->bool) q s. p s \\/ q s <=> q s \\/ p s")))))
+  let t168 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q()]), @kernel.assume_rule(@parser.parse_term("∀(p:'a->bool) q s. p s \\/ q s <=> q s \\/ p s")))))
   let t167 = @tactics.assume_tac(disj_comm_lemma())
   let t166 = @simp.rewrite_tac(@list.List([or_def()]))
   let t169 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t166), t167), t168)
-  or_comm_lemma_c.set(@aux_definitions.prove_thm("OR_COMM_lemma", @parser.parse_term("forall(p:'a->bool) q. (p \\/* q) = (q \\/* p)"), t169))
+  or_comm_lemma_c.set(@aux_definitions.prove_thm("OR_COMM_lemma", @parser.parse_term("∀(p:'a->bool) q. (p \\/* q) = (q \\/* p)"), t169))
 }
 
 ///|
@@ -1389,7 +1389,7 @@ pub fn or_comm_lemma() -> @kernel.Thm {
 /// OR_OR_lemma
 fn step_82() -> Unit raise {
   let t170 = @tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([or_def(), @class.eta_ax()])))
-  or_or_lemma_c.set(@aux_definitions.prove_thm("OR_OR_lemma", @parser.parse_term("forall p:'a->bool. p \\/* p = p"), t170))
+  or_or_lemma_c.set(@aux_definitions.prove_thm("OR_OR_lemma", @parser.parse_term("∀ p:'a->bool. p \\/* p = p"), t170))
 }
 
 ///|
@@ -1405,7 +1405,7 @@ pub fn or_or_lemma() -> @kernel.Thm {
 /// DISJ_ASSOC_lemma
 fn step_83() -> Unit raise {
   let t171 = @simp.rewrite_tac(@list.List([@equal.sym(@bool.spec_all(@theorems.disj_assoc()))]))
-  disj_assoc_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q  r (s:'a). ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))")), t171))
+  disj_assoc_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q  r (s:'a). ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))")), t171))
 }
 
 ///|
@@ -1420,12 +1420,12 @@ pub fn disj_assoc_lemma() -> @kernel.Thm {
 ///|
 /// OR_ASSOC_lemma
 fn step_84() -> Unit raise {
-  let t175 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q(), r()]), @kernel.assume_rule(@parser.parse_term("forall p q r (s:'a).\n                    ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))")))))
+  let t175 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q(), r()]), @kernel.assume_rule(@parser.parse_term("∀ p q r (s:'a).\n                    ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))")))))
   let t174 = @tactics.assume_tac(disj_assoc_lemma())
   let t173 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t172 = @simp.rewrite_tac(@list.List([or_def()]))
   let t176 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t172), t173), t174), t175)
-  or_assoc_lemma_c.set(@aux_definitions.prove_thm("OR_ASSOC_lemma", @parser.parse_term("forall(p:'a->bool) q r. (p \\/* q) \\/* r = p \\/* (q \\/* r)"), t176))
+  or_assoc_lemma_c.set(@aux_definitions.prove_thm("OR_ASSOC_lemma", @parser.parse_term("∀(p:'a->bool) q r. (p \\/* q) \\/* r = p \\/* (q \\/* r)"), t176))
 }
 
 ///|
@@ -1441,7 +1441,7 @@ pub fn or_assoc_lemma() -> @kernel.Thm {
 /// CONJ_WEAK_lemma
 fn step_85() -> Unit raise {
   let t177 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  conj_weak_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q (s:'a). p s /\\ q s ==> q s")), t177))
+  conj_weak_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q (s:'a). p s /\\ q s ==> q s")), t177))
 }
 
 ///|
@@ -1459,7 +1459,7 @@ fn step_86() -> Unit raise {
   let t179 = @simp.rewrite_tac(@list.List([conj_weak_lemma()]))
   let t178 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t180 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([and_def()])), t178), t179)
-  and_imply_weak_lemma_c.set(@aux_definitions.prove_thm("AND_IMPLY_WEAK_lemma", @parser.parse_term("forall p q (s:'a). (p /\\* q) s ==> q s"), t180))
+  and_imply_weak_lemma_c.set(@aux_definitions.prove_thm("AND_IMPLY_WEAK_lemma", @parser.parse_term("∀ p q (s:'a). (p /\\* q) s ==> q s"), t180))
 }
 
 ///|
@@ -1475,7 +1475,7 @@ pub fn and_imply_weak_lemma() -> @kernel.Thm {
 /// SYM_CONJ_WEAK_lemma
 fn step_87() -> Unit raise {
   let t181 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  sym_conj_weak_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q (s:'a). p s /\\ q s ==> p s")), t181))
+  sym_conj_weak_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q (s:'a). p s /\\ q s ==> p s")), t181))
 }
 
 ///|
@@ -1493,7 +1493,7 @@ fn step_88() -> Unit raise {
   let t183 = @simp.rewrite_tac(@list.List([sym_conj_weak_lemma()]))
   let t182 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t184 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([and_def()])), t182), t183)
-  sym_and_imply_weak_lemma_c.set(@aux_definitions.prove_thm("SYM_AND_IMPLY_WEAK_lemma", @parser.parse_term("forall p q (s:'a). (p /\\* q) s ==> p s"), t184))
+  sym_and_imply_weak_lemma_c.set(@aux_definitions.prove_thm("SYM_AND_IMPLY_WEAK_lemma", @parser.parse_term("∀ p q (s:'a). (p /\\* q) s ==> p s"), t184))
 }
 
 ///|
@@ -1512,7 +1512,7 @@ fn step_89() -> Unit raise {
   let t186 = @tactics.repeat_tac(@tactics.strip_tac)
   let t185 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t188 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([or_def()])), t185), t186), t187)
-  or_imply_weak_lemma_c.set(@aux_definitions.prove_thm("OR_IMPLY_WEAK_lemma", @parser.parse_term("forall p q (s:'a). p s ==> (p \\/* q) s"), t188))
+  or_imply_weak_lemma_c.set(@aux_definitions.prove_thm("OR_IMPLY_WEAK_lemma", @parser.parse_term("∀ p q (s:'a). p s ==> (p \\/* q) s"), t188))
 }
 
 ///|
@@ -1531,7 +1531,7 @@ fn step_90() -> Unit raise {
   let t190 = @tactics.repeat_tac(@tactics.strip_tac)
   let t189 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t192 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([or_def()])), t189), t190), t191)
-  sym_or_imply_weak_lemma_c.set(@aux_definitions.prove_thm("SYM_OR_IMPLY_WEAK_lemma", @parser.parse_term("forall p q (s:'a). p s ==> (q \\/* p) s"), t192))
+  sym_or_imply_weak_lemma_c.set(@aux_definitions.prove_thm("SYM_OR_IMPLY_WEAK_lemma", @parser.parse_term("∀ p q (s:'a). p s ==> (q \\/* p) s"), t192))
 }
 
 ///|
@@ -1550,7 +1550,7 @@ fn step_91() -> Unit raise {
   let t194 = @tactics.repeat_tac(@tactics.strip_tac)
   let t193 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t196 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([and_def()])), t193), t194), t195)
-  imply_weak_and_lemma_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_AND_lemma", @parser.parse_term("forall(p:'a->bool) q r.\n        (forall s. p s ==> q s)\n      ==>\n        (forall s. (p /\\* r) s ==> (q /\\* r) s)"), t196))
+  imply_weak_and_lemma_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_AND_lemma", @parser.parse_term("∀(p:'a->bool) q r.\n        (∀ s. p s ==> q s)\n      ==>\n        (∀ s. (p /\\* r) s ==> (q /\\* r) s)"), t196))
 }
 
 ///|
@@ -1570,7 +1570,7 @@ fn step_92() -> Unit raise {
   let t198 = @tactics.repeat_tac(@tactics.strip_tac)
   let t197 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t201 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([or_def()])), t197), t198), t200)
-  imply_weak_or_lemma_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_OR_lemma", @parser.parse_term("forall(p:'a->bool) q r.\n        (forall s. p s ==> q s)\n      ==>\n        (forall s. (p \\/* r) s ==> (q \\/* r) s)"), t201))
+  imply_weak_or_lemma_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_OR_lemma", @parser.parse_term("∀(p:'a->bool) q r.\n        (∀ s. p s ==> q s)\n      ==>\n        (∀ s. (p \\/* r) s ==> (q \\/* r) s)"), t201))
 }
 
 ///|
@@ -1586,7 +1586,7 @@ pub fn imply_weak_or_lemma() -> @kernel.Thm {
 /// AND_AND_lemma
 fn step_93() -> Unit raise {
   let t202 = @simp.rewrite_tac(@list.List([and_def(), @class.eta_ax()]))
-  and_and_lemma_c.set(@aux_definitions.prove_thm("AND_AND_lemma", @parser.parse_term("forall p:'a->bool. p /\\* p = p"), t202))
+  and_and_lemma_c.set(@aux_definitions.prove_thm("AND_AND_lemma", @parser.parse_term("∀ p:'a->bool. p /\\* p = p"), t202))
 }
 
 ///|
@@ -1604,7 +1604,7 @@ fn step_94() -> Unit raise {
   let t203 = @parser.parse_term("(q:'a->bool) s")
   let t204 = @tactics.strip_assume_tac(@bool.specl(@list.List([@parser.parse_term("(p:'a->bool) s"), t203]), @theorems.conj_sym()))
   let t205 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t204)
-  conj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q (s:'a). (p s /\\ q s) <=> (q s /\\ p s)")), t205))
+  conj_comm_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q (s:'a). (p s /\\ q s) <=> (q s /\\ p s)")), t205))
 }
 
 ///|
@@ -1619,11 +1619,11 @@ pub fn conj_comm_lemma() -> @kernel.Thm {
 ///|
 /// AND_COMM_lemma
 fn step_95() -> Unit raise {
-  let t208 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q()]), @kernel.assume_rule(@parser.parse_term("forall p q (s:'a). p s /\\ q s <=> q s /\\ p s")))))
+  let t208 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q()]), @kernel.assume_rule(@parser.parse_term("∀ p q (s:'a). p s /\\ q s <=> q s /\\ p s")))))
   let t207 = @tactics.assume_tac(conj_comm_lemma())
   let t206 = @tactics.repeat_tac(@tactics.gen_tac)
   let t209 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([and_def()])), t206), t207), t208)
-  and_comm_lemma_c.set(@aux_definitions.prove_thm("AND_COMM_lemma", @parser.parse_term("forall(p:'a->bool) q. (p /\\* q) = (q /\\* p)"), t209))
+  and_comm_lemma_c.set(@aux_definitions.prove_thm("AND_COMM_lemma", @parser.parse_term("∀(p:'a->bool) q. (p /\\* q) = (q /\\* p)"), t209))
 }
 
 ///|
@@ -1639,7 +1639,7 @@ pub fn and_comm_lemma() -> @kernel.Thm {
 /// CONJ_ASSOC_lemma
 fn step_96() -> Unit raise {
   let t210 = @simp.rewrite_tac(@list.List([@bool.gen_all(@equal.sym(@bool.spec_all(@theorems.conj_assoc())))]))
-  conj_assoc_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a). ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))")), t210))
+  conj_assoc_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a). ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))")), t210))
 }
 
 ///|
@@ -1654,12 +1654,12 @@ pub fn conj_assoc_lemma() -> @kernel.Thm {
 ///|
 /// AND_ASSOC_lemma
 fn step_97() -> Unit raise {
-  let t214 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q(), r()]), @kernel.assume_rule(@parser.parse_term("forall p q  r (s:'a).\n                 ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))")))))
+  let t214 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p(), q(), r()]), @kernel.assume_rule(@parser.parse_term("∀ p q  r (s:'a).\n                 ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))")))))
   let t213 = @tactics.assume_tac(conj_assoc_lemma())
   let t212 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t211 = @simp.rewrite_tac(@list.List([and_def()]))
   let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t211), t212), t213), t214)
-  and_assoc_lemma_c.set(@aux_definitions.prove_thm("AND_ASSOC_lemma", @parser.parse_term("forall(p:'a->bool) q r. (p /\\* q) /\\* r = p /\\* (q /\\* r)"), t215))
+  and_assoc_lemma_c.set(@aux_definitions.prove_thm("AND_ASSOC_lemma", @parser.parse_term("∀(p:'a->bool) q r. (p /\\* q) /\\* r = p /\\* (q /\\* r)"), t215))
 }
 
 ///|
@@ -1707,7 +1707,7 @@ pub fn not_false_lemma() -> @kernel.Thm {
 /// AND_True_lemma
 fn step_100() -> Unit raise {
   let t218 = @simp.rewrite_tac(@list.List([and_def(), true_def(), @class.eta_ax()]))
-  and_true_lemma_c.set(@aux_definitions.prove_thm("AND_True_lemma", @parser.parse_term("forall p:'a->bool. p /\\* True = p"), t218))
+  and_true_lemma_c.set(@aux_definitions.prove_thm("AND_True_lemma", @parser.parse_term("∀ p:'a->bool. p /\\* True = p"), t218))
 }
 
 ///|
@@ -1723,7 +1723,7 @@ pub fn and_true_lemma() -> @kernel.Thm {
 /// OR_True_lemma
 fn step_101() -> Unit raise {
   let t219 = @simp.rewrite_tac(@list.List([or_def(), true_def(), @class.eta_ax()]))
-  or_true_lemma_c.set(@aux_definitions.prove_thm("OR_True_lemma", @parser.parse_term("forall p:'a->bool. p \\/* True = True"), t219))
+  or_true_lemma_c.set(@aux_definitions.prove_thm("OR_True_lemma", @parser.parse_term("∀ p:'a->bool. p \\/* True = True"), t219))
 }
 
 ///|
@@ -1739,7 +1739,7 @@ pub fn or_true_lemma() -> @kernel.Thm {
 /// AND_False_lemma
 fn step_102() -> Unit raise {
   let t220 = @simp.rewrite_tac(@list.List([and_def(), false_def(), @class.eta_ax()]))
-  and_false_lemma_c.set(@aux_definitions.prove_thm("AND_False_lemma", @parser.parse_term("forall p:'a->bool. p /\\* False = False"), t220))
+  and_false_lemma_c.set(@aux_definitions.prove_thm("AND_False_lemma", @parser.parse_term("∀ p:'a->bool. p /\\* False = False"), t220))
 }
 
 ///|
@@ -1755,7 +1755,7 @@ pub fn and_false_lemma() -> @kernel.Thm {
 /// OR_False_lemma
 fn step_103() -> Unit raise {
   let t221 = @simp.rewrite_tac(@list.List([or_def(), false_def(), @class.eta_ax()]))
-  or_false_lemma_c.set(@aux_definitions.prove_thm("OR_False_lemma", @parser.parse_term("forall p:'a->bool. p \\/* False = p"), t221))
+  or_false_lemma_c.set(@aux_definitions.prove_thm("OR_False_lemma", @parser.parse_term("∀ p:'a->bool. p \\/* False = p"), t221))
 }
 
 ///|
@@ -1773,7 +1773,7 @@ fn step_104() -> Unit raise {
   let t223 = @simp.rewrite_tac(@list.List([@class.excluded_middle(), @theorems.or_clauses(), @class.not_clauses(), @class.eta_ax()]))
   let t222 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t224 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([or_def(), not_def1(), true_def()])), t222), t223)
-  p_or_not_p_lemma_c.set(@aux_definitions.prove_thm("P_OR_NOT_P_lemma", @parser.parse_term("forall p:'a->bool. p \\/* (Not p) = True"), t224))
+  p_or_not_p_lemma_c.set(@aux_definitions.prove_thm("P_OR_NOT_P_lemma", @parser.parse_term("∀ p:'a->bool. p \\/* (Not p) = True"), t224))
 }
 
 ///|
@@ -1791,7 +1791,7 @@ fn step_105() -> Unit raise {
   let t226 = @simp.rewrite_tac(@list.List([@hol88.not_and(), @theorems.and_clauses(), @class.not_clauses(), @class.eta_ax()]))
   let t225 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t227 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([and_def(), not_def1(), false_def()])), t225), t226)
-  p_and_not_p_lemma_c.set(@aux_definitions.prove_thm("P_AND_NOT_P_lemma", @parser.parse_term("forall p:'a->bool. p /\\* (Not p) = False"), t227))
+  p_and_not_p_lemma_c.set(@aux_definitions.prove_thm("P_AND_NOT_P_lemma", @parser.parse_term("∀ p:'a->bool. p /\\* (Not p) = False"), t227))
 }
 
 ///|
@@ -1807,7 +1807,7 @@ pub fn p_and_not_p_lemma() -> @kernel.Thm {
 /// CONJ_COMPL_DISJ_lemma1
 fn step_106() -> Unit raise {
   let t228 = @tactics.repeat_tac(@tactics.strip_tac)
-  conj_compl_disj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. p /\\ ~q \\/ p /\\ q ==> p")), t228))
+  conj_compl_disj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. p /\\ ~q \\/ p /\\ q ==> p")), t228))
 }
 
 ///|
@@ -1826,7 +1826,7 @@ fn step_107() -> Unit raise {
   let t230 = @simp.pure_once_rewrite_tac(@list.List([@theorems.disj_sym()]))
   let t229 = @simp.asm_rewrite_tac(@list.List([]))
   let t232 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t229), t230), t231)
-  conj_compl_disj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. p ==> p /\\ ~q \\/ p /\\ q")), t232))
+  conj_compl_disj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. p ==> p /\\ ~q \\/ p /\\ q")), t232))
 }
 
 ///|
@@ -1843,7 +1843,7 @@ pub fn conj_compl_disj_lemma2() -> @kernel.Thm {
 fn step_108() -> Unit raise {
   let t233 = @bool.spec_all(conj_compl_disj_lemma2())
   let t234 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(conj_compl_disj_lemma1()), t233)]))
-  conj_compl_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. p /\\ ~q \\/ p /\\ q <=> p")), t234))
+  conj_compl_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. p /\\ ~q \\/ p /\\ q <=> p")), t234))
 }
 
 ///|
@@ -1861,7 +1861,7 @@ fn step_109() -> Unit raise {
   let t236 = @simp.rewrite_tac(@list.List([conj_compl_disj_lemma(), @class.eta_ax()]))
   let t235 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t237 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()])), t235), t236)
-  and_compl_or_lemma_c.set(@aux_definitions.prove_thm("AND_COMPL_OR_lemma", @parser.parse_term("forall(p:'a->bool) q. ((p /\\* (Not q)) \\/* (p /\\* q)) = p"), t237))
+  and_compl_or_lemma_c.set(@aux_definitions.prove_thm("AND_COMPL_OR_lemma", @parser.parse_term("∀(p:'a->bool) q. ((p /\\* (Not q)) \\/* (p /\\* q)) = p"), t237))
 }
 
 ///|
@@ -1878,7 +1878,7 @@ pub fn and_compl_or_lemma() -> @kernel.Thm {
 fn step_110() -> Unit raise {
   let t238 = @simp.asm_rewrite_tac(@list.List([]))
   let t239 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t238), @hol88.res_tac)
-  disj_not_conj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. (p \\/ q) /\\ ~q ==> p /\\ ~q")), t239))
+  disj_not_conj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. (p \\/ q) /\\ ~q ==> p /\\ ~q")), t239))
 }
 
 ///|
@@ -1895,7 +1895,7 @@ pub fn disj_not_conj_lemma1() -> @kernel.Thm {
 fn step_111() -> Unit raise {
   let t240 = @simp.asm_rewrite_tac(@list.List([]))
   let t241 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t240), @hol88.res_tac)
-  disj_not_conj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. p /\\ ~q ==> (p \\/ q) /\\ ~q")), t241))
+  disj_not_conj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. p /\\ ~q ==> (p \\/ q) /\\ ~q")), t241))
 }
 
 ///|
@@ -1912,7 +1912,7 @@ pub fn disj_not_conj_lemma2() -> @kernel.Thm {
 fn step_112() -> Unit raise {
   let t242 = @bool.spec_all(disj_not_conj_lemma2())
   let t243 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(disj_not_conj_lemma1()), t242)]))
-  disj_not_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q. (p \\/ q) /\\ ~q <=> p /\\ ~q")), t243))
+  disj_not_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q. (p \\/ q) /\\ ~q <=> p /\\ ~q")), t243))
 }
 
 ///|
@@ -1931,7 +1931,7 @@ fn step_113() -> Unit raise {
   let t245 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t244 = @simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()]))
   let t247 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t244), t245), t246)
-  or_not_and_lemma_c.set(@aux_definitions.prove_thm("OR_NOT_AND_lemma", @parser.parse_term("forall(p:'a->bool) q. ((p \\/* q) /\\* (Not q)) = p /\\* (Not q)"), t247))
+  or_not_and_lemma_c.set(@aux_definitions.prove_thm("OR_NOT_AND_lemma", @parser.parse_term("∀(p:'a->bool) q. ((p \\/* q) /\\* (Not q)) = p /\\* (Not q)"), t247))
 }
 
 ///|
@@ -1947,7 +1947,7 @@ pub fn or_not_and_lemma() -> @kernel.Thm {
 /// P_CONJ_Q_DISJ_Q_lemma1
 fn step_114() -> Unit raise {
   let t248 = @tactics.repeat_tac(@tactics.strip_tac)
-  p_conj_q_disj_q_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. (p s /\\ q s) \\/ q s ==> q s")), t248))
+  p_conj_q_disj_q_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. (p s /\\ q s) \\/ q s ==> q s")), t248))
 }
 
 ///|
@@ -1964,7 +1964,7 @@ pub fn p_conj_q_disj_q_lemma1() -> @kernel.Thm {
 fn step_115() -> Unit raise {
   let t249 = @simp.asm_rewrite_tac(@list.List([]))
   let t250 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t249)
-  p_conj_q_disj_q_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. q s ==> (p s /\\ q s) \\/ q s")), t250))
+  p_conj_q_disj_q_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. q s ==> (p s /\\ q s) \\/ q s")), t250))
 }
 
 ///|
@@ -1981,7 +1981,7 @@ pub fn p_conj_q_disj_q_lemma2() -> @kernel.Thm {
 fn step_116() -> Unit raise {
   let t251 = @bool.spec_all(p_conj_q_disj_q_lemma2())
   let t252 = @simp.asm_rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(p_conj_q_disj_q_lemma1()), t251)]))
-  p_conj_q_disj_q_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. (p s /\\ q s) \\/ q s <=> q s")), t252))
+  p_conj_q_disj_q_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. (p s /\\ q s) \\/ q s <=> q s")), t252))
 }
 
 ///|
@@ -2000,7 +2000,7 @@ fn step_117() -> Unit raise {
   let t254 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t253 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t256 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t253), t254), t255)
-  p_and_q_or_q_lemma_c.set(@aux_definitions.prove_thm("P_AND_Q_OR_Q_lemma", @parser.parse_term("forall(p:'a->bool) q. (p /\\* q) \\/* q = q"), t256))
+  p_and_q_or_q_lemma_c.set(@aux_definitions.prove_thm("P_AND_Q_OR_Q_lemma", @parser.parse_term("∀(p:'a->bool) q. (p /\\* q) \\/* q = q"), t256))
 }
 
 ///|
@@ -2016,7 +2016,7 @@ pub fn p_and_q_or_q_lemma() -> @kernel.Thm {
 /// P_DISJ_Q_CONJ_Q_lemma1
 fn step_118() -> Unit raise {
   let t257 = @tactics.repeat_tac(@tactics.strip_tac)
-  p_disj_q_conj_q_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. (p s \\/ q s) /\\ q s ==> q s")), t257))
+  p_disj_q_conj_q_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. (p s \\/ q s) /\\ q s ==> q s")), t257))
 }
 
 ///|
@@ -2033,7 +2033,7 @@ pub fn p_disj_q_conj_q_lemma1() -> @kernel.Thm {
 fn step_119() -> Unit raise {
   let t258 = @simp.asm_rewrite_tac(@list.List([]))
   let t259 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t258)
-  p_disj_q_conj_q_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. q s ==> (p s \\/ q s) /\\ q s")), t259))
+  p_disj_q_conj_q_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. q s ==> (p s \\/ q s) /\\ q s")), t259))
 }
 
 ///|
@@ -2050,7 +2050,7 @@ pub fn p_disj_q_conj_q_lemma2() -> @kernel.Thm {
 fn step_120() -> Unit raise {
   let t260 = @bool.spec_all(p_disj_q_conj_q_lemma2())
   let t261 = @simp.asm_rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(p_disj_q_conj_q_lemma1()), t260)]))
-  p_disj_q_conj_q_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. (p s \\/ q s) /\\ q s <=> q s")), t261))
+  p_disj_q_conj_q_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. (p s \\/ q s) /\\ q s <=> q s")), t261))
 }
 
 ///|
@@ -2069,7 +2069,7 @@ fn step_121() -> Unit raise {
   let t263 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t262 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t265 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t262), t263), t264)
-  p_or_q_and_q_lemma_c.set(@aux_definitions.prove_thm("P_OR_Q_AND_Q_lemma", @parser.parse_term("forall(p:'a->bool) q. (p \\/* q) /\\* q = q"), t265))
+  p_or_q_and_q_lemma_c.set(@aux_definitions.prove_thm("P_OR_Q_AND_Q_lemma", @parser.parse_term("∀(p:'a->bool) q. (p \\/* q) /\\* q = q"), t265))
 }
 
 ///|
@@ -2088,7 +2088,7 @@ fn step_122() -> Unit raise {
   let t267 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t266 = @simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()]))
   let t269 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t266), t267), t268)
-  not_or_and_not_lemma_c.set(@aux_definitions.prove_thm("NOT_OR_AND_NOT_lemma", @parser.parse_term("forall(p:'a->bool) q. Not (p \\/* q) = (Not p) /\\* (Not q)"), t269))
+  not_or_and_not_lemma_c.set(@aux_definitions.prove_thm("NOT_OR_AND_NOT_lemma", @parser.parse_term("∀(p:'a->bool) q. Not (p \\/* q) = (Not p) /\\* (Not q)"), t269))
 }
 
 ///|
@@ -2107,7 +2107,7 @@ fn step_123() -> Unit raise {
   let t271 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t270 = @simp.rewrite_tac(@list.List([not_def1(), and_def(), or_def()]))
   let t273 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t270), t271), t272)
-  not_and_or_not_lemma_c.set(@aux_definitions.prove_thm("NOT_AND_OR_NOT_lemma", @parser.parse_term("forall(p:'a->bool) q. Not (p /\\* q) = (Not p) \\/* (Not q)"), t273))
+  not_and_or_not_lemma_c.set(@aux_definitions.prove_thm("NOT_AND_OR_NOT_lemma", @parser.parse_term("∀(p:'a->bool) q. Not (p /\\* q) = (Not p) \\/* (Not q)"), t273))
 }
 
 ///|
@@ -2126,7 +2126,7 @@ fn step_124() -> Unit raise {
   let t275 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t274 = @simp.rewrite_tac(@list.List([not_def1(), or_def()]))
   let t277 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t274), t275), t276)
-  not_imply_or_lemma_c.set(@aux_definitions.prove_thm("NOT_IMPLY_OR_lemma", @parser.parse_term("forall(p:'a->bool) q.\n        (forall s. (Not p)s ==> q s)\n      = (forall s. (p \\/* q)s)"), t277))
+  not_imply_or_lemma_c.set(@aux_definitions.prove_thm("NOT_IMPLY_OR_lemma", @parser.parse_term("∀(p:'a->bool) q.\n        (∀ s. (Not p)s ==> q s)\n      = (∀ s. (p \\/* q)s)"), t277))
 }
 
 ///|
@@ -2145,7 +2145,7 @@ fn step_125() -> Unit raise {
   let t279 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t278 = @simp.rewrite_tac(@list.List([not_def1(), or_def()]))
   let t281 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t278), t279), t280)
-  imply_or_lemma_c.set(@aux_definitions.prove_thm("IMPLY_OR_lemma", @parser.parse_term("forall(p:'a->bool) q. (forall s. p s ==> q s) = (forall s. ((Not p) \\/* q)s)"), t281))
+  imply_or_lemma_c.set(@aux_definitions.prove_thm("IMPLY_OR_lemma", @parser.parse_term("∀(p:'a->bool) q. (∀ s. p s ==> q s) = (∀ s. ((Not p) \\/* q)s)"), t281))
 }
 
 ///|
@@ -2164,7 +2164,7 @@ fn step_126() -> Unit raise {
   let t283 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t282 = @simp.rewrite_tac(@list.List([not_def1(), or_def()]))
   let t285 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t282), t283), t284)
-  or_imply_lemma_c.set(@aux_definitions.prove_thm("OR_IMPLY_lemma", @parser.parse_term("forall(p:'a->bool) q. (forall s. (p \\/* q)s) = (forall s. (Not p)s ==> q s)"), t285))
+  or_imply_lemma_c.set(@aux_definitions.prove_thm("OR_IMPLY_lemma", @parser.parse_term("∀(p:'a->bool) q. (∀ s. (p \\/* q)s) = (∀ s. (Not p)s ==> q s)"), t285))
 }
 
 ///|
@@ -2183,7 +2183,7 @@ fn step_127() -> Unit raise {
   let t287 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t286 = @simp.rewrite_tac(@list.List([not_def1(), or_def()]))
   let t289 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t286), t287), t288)
-  not_or_imply_lemma_c.set(@aux_definitions.prove_thm("NOT_OR_IMPLY_lemma", @parser.parse_term("forall(p:'a->bool) q. (forall s. ((Not p) \\/* q)s) = (forall s. p s ==> q s)"), t289))
+  not_or_imply_lemma_c.set(@aux_definitions.prove_thm("NOT_OR_IMPLY_lemma", @parser.parse_term("∀(p:'a->bool) q. (∀ s. ((Not p) \\/* q)s) = (∀ s. p s ==> q s)"), t289))
 }
 
 ///|
@@ -2203,7 +2203,7 @@ fn step_128() -> Unit raise {
   let t292 = @simp.asm_rewrite_tac(@list.List([]))
   let t293 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t292, t291, t290])
   let t294 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t293)
-  disj_conj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q r (s:'a).\n         (p s \\/ q s /\\ r s)\n       ==>\n         ((p s \\/ q s) /\\ (p s \\/ r s))")), t294))
+  disj_conj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ p q r (s:'a).\n         (p s \\/ q s /\\ r s)\n       ==>\n         ((p s \\/ q s) /\\ (p s \\/ r s))")), t294))
 }
 
 ///|
@@ -2223,7 +2223,7 @@ fn step_129() -> Unit raise {
   let t297 = @simp.asm_rewrite_tac(@list.List([]))
   let t298 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t297, t296, t295])
   let t299 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t298)
-  disj_conj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r s.\n             ((p s \\/ q s) /\\ (p s \\/ r s)) ==> (p s \\/ q s /\\ r s)")), t299))
+  disj_conj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r s.\n             ((p s \\/ q s) /\\ (p s \\/ r s)) ==> (p s \\/ q s /\\ r s)")), t299))
 }
 
 ///|
@@ -2240,7 +2240,7 @@ pub fn disj_conj_lemma2() -> @kernel.Thm {
 fn step_130() -> Unit raise {
   let t300 = @bool.spec_all(disj_conj_lemma2())
   let t301 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(disj_conj_lemma1()), t300)]))
-  disj_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r s.\n            (p s \\/ q s /\\ r s) <=> ((p s \\/ q s) /\\ (p s \\/ r s))")), t301))
+  disj_conj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r s.\n            (p s \\/ q s /\\ r s) <=> ((p s \\/ q s) /\\ (p s \\/ r s))")), t301))
 }
 
 ///|
@@ -2259,7 +2259,7 @@ fn step_131() -> Unit raise {
   let t303 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t302 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t305 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t302), t303), t304)
-  or_and_distr_lemma_c.set(@aux_definitions.prove_thm("OR_AND_DISTR_lemma", @parser.parse_term("forall(p:'a->bool) q r. p \\/* (q /\\* r) = (p \\/* q) /\\* (p \\/* r)"), t305))
+  or_and_distr_lemma_c.set(@aux_definitions.prove_thm("OR_AND_DISTR_lemma", @parser.parse_term("∀(p:'a->bool) q r. p \\/* (q /\\* r) = (p \\/* q) /\\* (p \\/* r)"), t305))
 }
 
 ///|
@@ -2277,7 +2277,7 @@ fn step_132() -> Unit raise {
   let t306 = @simp.asm_rewrite_tac(@list.List([]))
   let t307 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t306])
   let t308 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t307)
-  conj_disj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) ==> (p s /\\ q s \\/ p s /\\ r s)")), t308))
+  conj_disj_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) ==> (p s /\\ q s \\/ p s /\\ r s)")), t308))
 }
 
 ///|
@@ -2297,7 +2297,7 @@ fn step_133() -> Unit raise {
   let t311 = @simp.asm_rewrite_tac(@list.List([]))
   let t312 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t311, t310, t309])
   let t313 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t312)
-  conj_disj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r s.\n            (p s /\\ q s \\/ p s /\\ r s) ==> (p s /\\ (q s \\/ r s))")), t313))
+  conj_disj_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r s.\n            (p s /\\ q s \\/ p s /\\ r s) ==> (p s /\\ (q s \\/ r s))")), t313))
 }
 
 ///|
@@ -2314,7 +2314,7 @@ pub fn conj_disj_lemma2() -> @kernel.Thm {
 fn step_134() -> Unit raise {
   let t314 = @bool.spec_all(conj_disj_lemma2())
   let t315 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(conj_disj_lemma1()), t314)]))
-  conj_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) <=> (p s /\\ q s \\/ p s /\\ r s)")), t315))
+  conj_disj_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q r s.\n            (p s /\\ (q s \\/ r s)) <=> (p s /\\ q s \\/ p s /\\ r s)")), t315))
 }
 
 ///|
@@ -2333,7 +2333,7 @@ fn step_135() -> Unit raise {
   let t317 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t316 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t319 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t316), t317), t318)
-  and_or_distr_lemma_c.set(@aux_definitions.prove_thm("AND_OR_DISTR_lemma", @parser.parse_term("forall(p:'a->bool) q r. p /\\* (q \\/* r) = (p /\\* q) \\/* (p /\\* r)"), t319))
+  and_or_distr_lemma_c.set(@aux_definitions.prove_thm("AND_OR_DISTR_lemma", @parser.parse_term("∀(p:'a->bool) q r. p /\\* (q \\/* r) = (p /\\* q) \\/* (p /\\* r)"), t319))
 }
 
 ///|
@@ -2351,7 +2351,7 @@ fn step_136() -> Unit raise {
   let t321 = @simp.rewrite_tac(@list.List([]))
   let t320 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t322 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([false_def(), not_def1()])), t320), t321)
-  not_implies_false_lemma_c.set(@aux_definitions.prove_thm("NOT_IMPLIES_False_lemma", @parser.parse_term("forall(p:'a->bool). (forall s. (Not p)s) ==> (forall s. p s = False s)"), t322))
+  not_implies_false_lemma_c.set(@aux_definitions.prove_thm("NOT_IMPLIES_False_lemma", @parser.parse_term("∀(p:'a->bool). (∀ s. (Not p)s) ==> (∀ s. p s = False s)"), t322))
 }
 
 ///|
@@ -2370,7 +2370,7 @@ fn step_137() -> Unit raise {
   let t324 = @tactics.undisch_tac(@parser.parse_term("(\\s:'a. p s) = (\\s. False s)"))
   let t323 = @tactics.assume_tac(@hol88.mk_abs(@bool.undisch_all(@bool.spec_all(not_implies_false_lemma()))))
   let t326 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t323), t324), t325)
-  not_p_implies_p_eq_false_lemma_c.set(@aux_definitions.prove_thm("NOT_P_IMPLIES_P_EQ_False_lemma", @parser.parse_term("forall(p:'a->bool). (forall s. (Not p)s) ==> (p = False)"), t326))
+  not_p_implies_p_eq_false_lemma_c.set(@aux_definitions.prove_thm("NOT_P_IMPLIES_P_EQ_False_lemma", @parser.parse_term("∀(p:'a->bool). (∀ s. (Not p)s) ==> (p = False)"), t326))
 }
 
 ///|
@@ -2388,7 +2388,7 @@ fn step_138() -> Unit raise {
   let t328 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm(), @class.not_clauses(), @hol88.imp_disj_thm()]))
   let t327 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t329 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([not_def1(), and_def()])), t327), t328)
-  not_and_implies_lemma_c.set(@aux_definitions.prove_thm("NOT_AND_IMPLIES_lemma", @parser.parse_term("forall(p:'a->bool) q. (forall s. (Not (p /\\* q))s) <=> (forall s. p s ==> Not q s)"), t329))
+  not_and_implies_lemma_c.set(@aux_definitions.prove_thm("NOT_AND_IMPLIES_lemma", @parser.parse_term("∀(p:'a->bool) q. (∀ s. (Not (p /\\* q))s) <=> (∀ s. p s ==> Not q s)"), t329))
 }
 
 ///|
@@ -2404,7 +2404,7 @@ pub fn not_and_implies_lemma() -> @kernel.Thm {
 /// NOT_AND_IMPLIES_lemma1
 fn step_139() -> Unit raise {
   let t330 = @simp.rewrite_tac(@list.List([not_and_implies_lemma()]))
-  not_and_implies_lemma1_c.set(@aux_definitions.prove_thm("NOT_AND_IMPLIES_lemma1", @parser.parse_term("forall(p:'a->bool) q. (forall s. (Not (p /\\* q))s) ==> (forall s. p s ==> Not q s)"), t330))
+  not_and_implies_lemma1_c.set(@aux_definitions.prove_thm("NOT_AND_IMPLIES_lemma1", @parser.parse_term("∀(p:'a->bool) q. (∀ s. (Not (p /\\* q))s) ==> (∀ s. p s ==> Not q s)"), t330))
 }
 
 ///|
@@ -2422,7 +2422,7 @@ fn step_140() -> Unit raise {
   let t332 = @tactics.repeat_tac(@tactics.strip_tac)
   let t331 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t333 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([not_and_implies_lemma(), not_def1()])), t331), t332), @hol88.res_tac)
-  not_and_implies_lemma2_c.set(@aux_definitions.prove_thm("NOT_AND_IMPLIES_lemma2", @parser.parse_term("forall(p:'a->bool) q. (forall s. (Not (p /\\* q))s) ==> (forall s. q s ==> Not p s)"), t333))
+  not_and_implies_lemma2_c.set(@aux_definitions.prove_thm("NOT_AND_IMPLIES_lemma2", @parser.parse_term("∀(p:'a->bool) q. (∀ s. (Not (p /\\* q))s) ==> (∀ s. q s ==> Not p s)"), t333))
 }
 
 ///|
@@ -2438,7 +2438,7 @@ pub fn not_and_implies_lemma2() -> @kernel.Thm {
 /// CONJ_DISJ_IMPLY_lemma1
 fn step_141() -> Unit raise {
   let t334 = @tactics.repeat_tac(@tactics.strip_tac)
-  conj_disj_imply_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. p s /\\ (p s \\/ q s) ==> p s")), t334))
+  conj_disj_imply_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. p s /\\ (p s \\/ q s) ==> p s")), t334))
 }
 
 ///|
@@ -2456,7 +2456,7 @@ fn step_142() -> Unit raise {
   let t335 = @simp.asm_rewrite_tac(@list.List([]))
   let t336 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t335])
   let t337 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t336)
-  conj_disj_imply_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. p s ==> p s /\\ (p s \\/ q s)")), t337))
+  conj_disj_imply_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. p s ==> p s /\\ (p s \\/ q s)")), t337))
 }
 
 ///|
@@ -2473,7 +2473,7 @@ pub fn conj_disj_imply_lemma2() -> @kernel.Thm {
 fn step_143() -> Unit raise {
   let t338 = @bool.spec_all(conj_disj_imply_lemma2())
   let t339 = @simp.rewrite_tac(@list.List([@bool.imp_antisym_rule(@bool.spec_all(conj_disj_imply_lemma1()), t338)]))
-  conj_disj_imply_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q s. p s /\\ (p s \\/ q s) <=> p s")), t339))
+  conj_disj_imply_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q s. p s /\\ (p s \\/ q s) <=> p s")), t339))
 }
 
 ///|
@@ -2490,7 +2490,7 @@ pub fn conj_disj_imply_lemma() -> @kernel.Thm {
 fn step_144() -> Unit raise {
   let t340 = @simp.rewrite_tac(@list.List([conj_disj_imply_lemma(), @class.eta_ax()]))
   let t341 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t340)
-  conj_disj_abs_imply_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(p:'a->bool) q.  (\\s. p s /\\ (p s \\/ q s)) = p")), t341))
+  conj_disj_abs_imply_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(p:'a->bool) q.  (\\s. p s /\\ (p s \\/ q s)) = p")), t341))
 }
 
 ///|
@@ -2509,7 +2509,7 @@ fn step_145() -> Unit raise {
   let t343 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t342 = @simp.rewrite_tac(@list.List([and_def(), or_def()]))
   let t345 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t342), t343), t344)
-  and_or_eq_lemma_c.set(@aux_definitions.prove_thm("AND_OR_EQ_lemma", @parser.parse_term("forall(p:'a->bool) q. p /\\* (p \\/* q) = p"), t345))
+  and_or_eq_lemma_c.set(@aux_definitions.prove_thm("AND_OR_EQ_lemma", @parser.parse_term("∀(p:'a->bool) q. p /\\* (p \\/* q) = p"), t345))
 }
 
 ///|
@@ -2528,7 +2528,7 @@ fn step_146() -> Unit raise {
   let t347 = @simp.once_rewrite_tac(@list.List([or_comm_lemma()]))
   let t346 = @simp.rewrite_tac(@list.List([and_or_eq_lemma()]))
   let t349 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t346), t347), t348)
-  and_or_eq_and_comm_or_lemma_c.set(@aux_definitions.prove_thm("AND_OR_EQ_AND_COMM_OR_lemma", @parser.parse_term("forall(p:'a->bool) q. p /\\* (q \\/* p) = p /\\* (p \\/* q)"), t349))
+  and_or_eq_and_comm_or_lemma_c.set(@aux_definitions.prove_thm("AND_OR_EQ_AND_COMM_OR_lemma", @parser.parse_term("∀(p:'a->bool) q. p /\\* (q \\/* p) = p /\\* (p \\/* q)"), t349))
 }
 
 ///|
@@ -2547,7 +2547,7 @@ fn step_147() -> Unit raise {
   let t351 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t350 = @simp.rewrite_tac(@list.List([or_def()]))
   let t353 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t350), t351), t352)
-  imply_weak_lemma_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma", @parser.parse_term("forall(p:'a->bool) q. (forall s. p s) ==> (forall s. (p \\/* q) s)"), t353))
+  imply_weak_lemma_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma", @parser.parse_term("∀(p:'a->bool) q. (∀ s. p s) ==> (∀ s. (p \\/* q) s)"), t353))
 }
 
 ///|
@@ -2566,7 +2566,7 @@ fn step_148() -> Unit raise {
   let t355 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
   let t354 = @simp.rewrite_tac(@list.List([or_def()]))
   let t357 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t354), t355), t356)
-  imply_weak_lemma_b_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma_b", @parser.parse_term("forall(p:'a->bool) q s. p s ==> (p \\/* q) s"), t357))
+  imply_weak_lemma_b_c.set(@aux_definitions.prove_thm("IMPLY_WEAK_lemma_b", @parser.parse_term("∀(p:'a->bool) q s. p s ==> (p \\/* q) s"), t357))
 }
 
 ///|
@@ -2587,7 +2587,7 @@ fn step_149() -> Unit raise {
   let t359 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t358])
   let t362 = @list.List([@tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t359), t361])
   let t363 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t362)
-  all_and_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(P:num->('a->bool)) i s. (forall i. P i s) <=> (P i s /\\ (forall i. P i s))")), t363))
+  all_and_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(P:num->('a->bool)) i s. (∀ i. P i s) <=> (P i s /\\ (∀ i. P i s))")), t363))
 }
 
 ///|
@@ -2611,7 +2611,7 @@ fn step_150() -> Unit raise {
   let t364 = @tactics.exists_tac(@parser.parse_term("i':num"))
   let t371 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.disj2_tac), t364), t365), t370])
   let t372 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t371)
-  all_or_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall(P:num->('a->bool)) i s. (?i. P i s) <=> (P i s \\/ (?i. P i s))")), t372))
+  all_or_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀(P:num->('a->bool)) i s. (?i. P i s) <=> (P i s \\/ (?i. P i s))")), t372))
 }
 
 ///|
@@ -2629,7 +2629,7 @@ fn step_151() -> Unit raise {
   let t374 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.specl(@list.List([p_v1(), i()]), all_or_lemma1())))
   let t373 = @simp.rewrite_tac(@list.List([exists_def(), or_def()]))
   let t375 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t373), @tactics.beta_tac), t374)
-  all_or_lemma_c.set(@aux_definitions.prove_thm("ALL_OR_lemma", @parser.parse_term("forall(P:num->('a->bool)) i. (((?*) P) = ((P i) \\/* ((?*) P)))"), t375))
+  all_or_lemma_c.set(@aux_definitions.prove_thm("ALL_OR_lemma", @parser.parse_term("∀(P:num->('a->bool)) i. (((?*) P) = ((P i) \\/* ((?*) P)))"), t375))
 }
 
 ///|
@@ -2663,7 +2663,7 @@ fn step_152() -> Unit raise {
   let t376 = @tactics.spec_tac(i(), i())
   let t393 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.undisch_tac(@parser.parse_term("\\<=/* (P:num->('a->bool)) i s"))), t376), @nums.induct_tac), t385), t392])
   let t394 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t393)
-  all_i_or_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall P (s:'a). (?i. \\<=/* P i s) = (?i. P i s)")), t394))
+  all_i_or_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("∀ P (s:'a). (?i. \\<=/* P i s) = (?i. P i s)")), t394))
 }
 
 ///|
@@ -2680,7 +2680,7 @@ pub fn all_i_or_lemma1() -> @kernel.Thm {
 fn step_153() -> Unit raise {
   let t395 = @tactics.strip_assume_tac(@hol88.mk_abs(@bool.spec(p_v1(), all_i_or_lemma1())))
   let t396 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([exists_def()])), @tactics.gen_tac), t395)
-  all_i_or_lemma_c.set(@aux_definitions.prove_thm("ALL_i_OR_lemma", @parser.parse_term("forall P. ((\\s:'a. ?i. \\<=/* P i s) = ((?*) P))"), t396))
+  all_i_or_lemma_c.set(@aux_definitions.prove_thm("ALL_i_OR_lemma", @parser.parse_term("∀ P. ((\\s:'a. ?i. \\<=/* P i s) = ((?*) P))"), t396))
 }
 
 ///|

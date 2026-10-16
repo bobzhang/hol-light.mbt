@@ -5709,15 +5709,15 @@ CPU time (user): <t>
 Examples/dlo quotations (278):
   T
   (<)
-  forall x. ~(~ x) <=> x
-  forall a b. (a ==> b) <=> (~a \\/ b)
-  forall a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)
-  forall a b. ~(a /\\ b) <=> (~a \\/ ~b)
-  forall a b. ~(a \\/ b) <=> (~a /\\ ~b)
-  forall a b. ~(a ==> b) <=> (a /\\ ~b)
-  forall a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)
-  forall p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)
-  ~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
+  \226\136\128 x. ~(~ x) <=> x
+  \226\136\128 a b. (a ==> b) <=> (~a \\/ b)
+  \226\136\128 a b. (a = b) <=> (a /\\ b \\/ ~a /\\ ~b)
+  \226\136\128 a b. ~(a /\\ b) <=> (~a \\/ ~b)
+  \226\136\128 a b. ~(a \\/ b) <=> (~a /\\ ~b)
+  \226\136\128 a b. ~(a ==> b) <=> (a /\\ ~b)
+  \226\136\128 a b. ~(a = b) <=> (a /\\ ~b \\/ ~a /\\ b)
+  \226\136\128 p q0 q1. ~(p /\\ q0 \\/ ~p /\\ q1) <=> (p /\\ ~q0 \\/ ~p /\\ ~q1)
+  ~(?!x. P x) <=> (\226\136\128 x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
   ~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r
   (p = q) <=> (p /\\ q) \\/ (~p /\\ ~q)
   ~(p = q) <=> (p /\\ ~q) \\/ (~p /\\ q)
@@ -5730,63 +5730,63 @@ Examples/dlo quotations (278):
   (\\/)
   (MINL [] default = default) /\\\n   (MINL (CONS h t) default = min h (MINL t default))
   (MAXL [] default = default) /\\\n   (MAXL (CONS h t) default = max h (MAXL t default))
-  forall x y z. max x y < z <=> x < z /\\ y < z
-  forall x y z. x < real_min y z <=> x < y /\\ x < z
+  \226\136\128 x y z. max x y < z <=> x < z /\\ y < z
+  \226\136\128 x y z. x < real_min y z <=> x < y /\\ x < z
   t:real list
   t:real list
-  forall left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x
+  \226\136\128 left x lefts. ALL (\\l. l < x) (CONS left lefts) <=> MAXL lefts left < x
   t:real list
   t:real list
-  forall right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right
+  \226\136\128 right x rights.\n        ALL (\\r. x < r) (CONS right rights) <=> x < MINL rights right
   (x + y) / &2
-  forall x y. x < y ==> ?z. x < z /\\ z < y
+  \226\136\128 x y. x < y ==> ?z. x < z /\\ z < y
   x + &1
-  forall x. ?y. x < y
+  \226\136\128 x. ?y. x < y
   x - &1
-  forall x. ?y. y < x
+  \226\136\128 x. ?y. y < x
   ~(s = t) <=> (s < t \\/ t < s)
   ~(s < t) <=> ((s = t) \\/ (t < s))
-  forall l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T
-  forall r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T
-  forall l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)
+  \226\136\128 l ls. (?x. ALL (\\l. l < x) (CONS l ls)) <=> T
+  \226\136\128 r rs. (?x. ALL (\\r. x < r) (CONS r rs)) <=> T
+  \226\136\128 l ls r rs.\n        (?x. ALL (\\l. l < x) (CONS l ls) /\\ ALL (\\r. x < r) (CONS r rs)) <=>\n        ALL (\\l. ALL (\\r. l < r) (CONS r rs)) (CONS l ls)
   :real
   a /\\ T <=> a
   ((?x. x = x) <=> T) /\\\n     ((?x. x = t) <=> T) /\\\n     ((?x. t = x) <=> T) /\\\n     ((?x. (x = t) /\\ P x) <=> P t) /\\\n     ((?x. (t = x) /\\ P x) <=> P t)
   (?x. (x = x) /\\ P x) <=> (?x. P x)
-  forall P. (forall x. P x) <=> ~ (?x. ~ P x)
+  \226\136\128 P. (\226\136\128 x. P x) <=> ~ (?x. ~ P x)
   (~)
   (\\/)
   T
   F
-  forall x y. x <= y \\/ x < y
-  forall x y. x <= y \\/ x > y
-  forall a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)
-  forall x. x < a ==> x <= b
-  forall x. x < a ==> x < b
-  forall a b. (forall x. x < a ==> x < b) <=> (a <= b)
+  \226\136\128 x y. x <= y \\/ x < y
+  \226\136\128 x y. x <= y \\/ x > y
+  \226\136\128 a b. ?x. ~(x = a) \\/ ~(x = b) \\/ (a = b:real)
+  \226\136\128 x. x < a ==> x <= b
+  \226\136\128 x. x < a ==> x < b
+  \226\136\128 a b. (\226\136\128 x. x < a ==> x < b) <=> (a <= b)
   ?z. z < x /\\ x < y
-  forall x y . x < y
-  forall y. x < y /\\ y < z ==> w < z
-  forall x y z. ?u. u < x /\\ u < y /\\ u < z
+  \226\136\128 x y . x < y
+  \226\136\128 y. x < y /\\ y < z ==> w < z
+  \226\136\128 x y z. ?u. u < x /\\ u < y /\\ u < z
   ?z. x < z /\\ z <= y
   ?z. x <= z /\\ z <= y
   ?z. x < z /\\ z < y
   ?x.(x = x) /\\ (x = y)
   ?x. x = x:real
-  forall x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)
-  forall x y. x < y ==> ?z. x < z /\\ z < y
-  forall x y. ?z. z < x /\\ z < y
-  forall x y. ?z. z < x /\\ x < y
+  \226\136\128 x y. ~(x = y) ==> ?u. u < x /\\ (y < u \\/ x < y)
+  \226\136\128 x y. x < y ==> ?z. x < z /\\ z < y
+  \226\136\128 x y. ?z. z < x /\\ z < y
+  \226\136\128 x y. ?z. z < x /\\ x < y
   ?x y. x < y /\\ y < x
-  forall x y. x < y \\/ (x = y) \\/ y < x
-  forall x y. x < y \\/ (x = y) \\/ y < x
-  forall x y z. x < y /\\ y < z ==> x < z
-  forall x. ?y. x < y
-  forall a b. (forall x. (x < a) <=> (x < b)) <=> (a = b)
-  forall x. x < a ==> x < b
+  \226\136\128 x y. x < y \\/ (x = y) \\/ y < x
+  \226\136\128 x y. x < y \\/ (x = y) \\/ y < x
+  \226\136\128 x y z. x < y /\\ y < z ==> x < z
+  \226\136\128 x. ?y. x < y
+  \226\136\128 a b. (\226\136\128 x. (x < a) <=> (x < b)) <=> (a = b)
+  \226\136\128 x. x < a ==> x < b
   ?z. x < z /\\ z < y
   ?z. x < x /\\ z < y
-  forall x y. ?z. z < x /\\ z < y
+  \226\136\128 x y. ?z. z < x /\\ z < y
   s > t <=> t < s
   s >= t <=> ~(s < t)
   s <= t <=> ~(t < s)
@@ -5987,19 +5987,19 @@ Examples/dlo quotations (278):
   s <= t <=> ~(t < s)
 MINL =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#MINL:fun(list(real),fun(real,real)) #NIL:list(real)) default:real)) default:real)) ((#=:fun(real,fun(real,bool)) ((#MINL:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real))) default:real)) ((#real_min:fun(real,fun(real,real)) h:real) ((#MINL:fun(list(real),fun(real,real)) t:list(real)) default:real))))
 MAXL =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#MAXL:fun(list(real),fun(real,real)) #NIL:list(real)) default:real)) default:real)) ((#=:fun(real,fun(real,bool)) ((#MAXL:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real))) default:real)) ((#real_max:fun(real,fun(real,real)) h:real) ((#MAXL:fun(list(real),fun(real,real)) t:list(real)) default:real))))
-MAX_LT =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_max:fun(real,fun(real,real)) x:real) y:real)) z:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) z:real)))))))))
-MIN_GT =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) ((#real_min:fun(real,fun(real,real)) y:real) z:real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)))))))))
-ALL_LT_LEMMA =  |- (#forall:fun(fun(real,bool),bool) (\left:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(list(real),bool),bool) (\lefts:list(real). ((#=:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#real_lt:fun(real,fun(real,bool)) l:real) x:real))) ((#CONS:fun(real,fun(list(real),list(real))) left:real) lefts:list(real)))) ((#real_lt:fun(real,fun(real,bool)) ((#MAXL:fun(list(real),fun(real,real)) lefts:list(real)) left:real)) x:real))))))))
-ALL_GT_LEMMA =  |- (#forall:fun(fun(real,bool),bool) (\right:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(list(real),bool),bool) (\rights:list(real). ((#=:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) x:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) right:real) rights:list(real)))) ((#real_lt:fun(real,fun(real,bool)) x:real) ((#MINL:fun(list(real),fun(real,real)) rights:list(real)) right:real)))))))))
-REAL_DENSE =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real)))))))))
-REAL_LT_EXISTS =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)))))
-REAL_GT_EXISTS =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. ((#real_lt:fun(real,fun(real,bool)) y:real) x:real)))))
-PROFORMA_LEFT =  |- (#forall:fun(fun(real,bool),bool) (\l:real. (#forall:fun(fun(list(real),bool),bool) (\ls:list(real). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(real,bool),bool) (\x:real. ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#real_lt:fun(real,fun(real,bool)) l:real) x:real))) ((#CONS:fun(real,fun(list(real),list(real))) l:real) ls:list(real)))))) #T:bool)))))
-PROFORMA_RIGHT =  |- (#forall:fun(fun(real,bool),bool) (\r:real. (#forall:fun(fun(list(real),bool),bool) (\rs:list(real). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(real,bool),bool) (\x:real. ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) x:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) r:real) rs:list(real)))))) #T:bool)))))
-PROFORMA_BOTH =  |- (#forall:fun(fun(real,bool),bool) (\l:real. (#forall:fun(fun(list(real),bool),bool) (\ls:list(real). (#forall:fun(fun(real,bool),bool) (\r:real. (#forall:fun(fun(list(real),bool),bool) (\rs:list(real). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(real,bool),bool) (\x:real. ((#/\:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#real_lt:fun(real,fun(real,bool)) l:real) x:real))) ((#CONS:fun(real,fun(list(real),list(real))) l:real) ls:list(real)))) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) x:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) r:real) rs:list(real))))))) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) l:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) r:real) rs:list(real))))) ((#CONS:fun(real,fun(list(real),list(real))) l:real) ls:list(real))))))))))))
-forall_thm =  |- (#forall:fun(fun(fun('?143704,bool),bool),bool) (\P:fun('?143704,bool). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('?143704,bool),bool) (\x:'?143704. (P:fun('?143704,bool) x:'?143704)))) (#~:fun(bool,bool) (#?:fun(fun('?143704,bool),bool) (\x:'?143704. (#~:fun(bool,bool) (P:fun('?143704,bool) x:'?143704))))))))
+MAX_LT =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(real,bool),bool) (\y:real. (#∀:fun(fun(real,bool),bool) (\z:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_max:fun(real,fun(real,real)) x:real) y:real)) z:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) z:real)))))))))
+MIN_GT =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(real,bool),bool) (\y:real. (#∀:fun(fun(real,bool),bool) (\z:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) ((#real_min:fun(real,fun(real,real)) y:real) z:real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)))))))))
+ALL_LT_LEMMA =  |- (#∀:fun(fun(real,bool),bool) (\left:real. (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(list(real),bool),bool) (\lefts:list(real). ((#=:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#real_lt:fun(real,fun(real,bool)) l:real) x:real))) ((#CONS:fun(real,fun(list(real),list(real))) left:real) lefts:list(real)))) ((#real_lt:fun(real,fun(real,bool)) ((#MAXL:fun(list(real),fun(real,real)) lefts:list(real)) left:real)) x:real))))))))
+ALL_GT_LEMMA =  |- (#∀:fun(fun(real,bool),bool) (\right:real. (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(list(real),bool),bool) (\rights:list(real). ((#=:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) x:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) right:real) rights:list(real)))) ((#real_lt:fun(real,fun(real,bool)) x:real) ((#MINL:fun(list(real),fun(real,real)) rights:list(real)) right:real)))))))))
+REAL_DENSE =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#∀:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) z:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real)))))))))
+REAL_LT_EXISTS =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)))))
+REAL_GT_EXISTS =  |- (#∀:fun(fun(real,bool),bool) (\x:real. (#?:fun(fun(real,bool),bool) (\y:real. ((#real_lt:fun(real,fun(real,bool)) y:real) x:real)))))
+PROFORMA_LEFT =  |- (#∀:fun(fun(real,bool),bool) (\l:real. (#∀:fun(fun(list(real),bool),bool) (\ls:list(real). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(real,bool),bool) (\x:real. ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#real_lt:fun(real,fun(real,bool)) l:real) x:real))) ((#CONS:fun(real,fun(list(real),list(real))) l:real) ls:list(real)))))) #T:bool)))))
+PROFORMA_RIGHT =  |- (#∀:fun(fun(real,bool),bool) (\r:real. (#∀:fun(fun(list(real),bool),bool) (\rs:list(real). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(real,bool),bool) (\x:real. ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) x:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) r:real) rs:list(real)))))) #T:bool)))))
+PROFORMA_BOTH =  |- (#∀:fun(fun(real,bool),bool) (\l:real. (#∀:fun(fun(list(real),bool),bool) (\ls:list(real). (#∀:fun(fun(real,bool),bool) (\r:real. (#∀:fun(fun(list(real),bool),bool) (\rs:list(real). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(real,bool),bool) (\x:real. ((#/\:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#real_lt:fun(real,fun(real,bool)) l:real) x:real))) ((#CONS:fun(real,fun(list(real),list(real))) l:real) ls:list(real)))) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) x:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) r:real) rs:list(real))))))) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\l:real. ((#ALL:fun(fun(real,bool),fun(list(real),bool)) (\r:real. ((#real_lt:fun(real,fun(real,bool)) l:real) r:real))) ((#CONS:fun(real,fun(list(real),list(real))) r:real) rs:list(real))))) ((#CONS:fun(real,fun(list(real),list(real))) l:real) ls:list(real))))))))))))
+forall_thm =  |- (#∀:fun(fun(fun('?143704,bool),bool),bool) (\P:fun('?143704,bool). ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('?143704,bool),bool) (\x:'?143704. (P:fun('?143704,bool) x:'?143704)))) (#~:fun(bool,bool) (#?:fun(fun('?143704,bool),bool) (\x:'?143704. (#~:fun(bool,bool) (P:fun('?143704,bool) x:'?143704))))))))
 types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
-constants = MAXL MINL superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
+constants = MAXL MINL superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ∀ ==> /\ T =
 definitions = 265
 Warning: inventing type variables
 counter_tyvar = zz_counter:'?146155

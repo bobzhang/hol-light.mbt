@@ -13,7 +13,7 @@ fn step_2() -> Unit raise {
   one_one_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "ONE_ONE(f:A->B) = forall x1 x2. (f x1 = f x2) ==> (x1 = x2)",
+        "ONE_ONE(f:A->B) = ∀ x1 x2. (f x1 = f x2) ==> (x1 = x2)",
       ),
     ),
   )
@@ -32,7 +32,7 @@ pub fn one_one() -> @kernel.Thm {
 /// ONTO
 fn step_3() -> Unit raise {
   onto_c.set(
-    @pair.new_definition(@parser.parse_term("ONTO(f:A->B) = forall y. ?x. y = f x")),
+    @pair.new_definition(@parser.parse_term("ONTO(f:A->B) = ∀ y. ?x. y = f x")),
   )
 }
 
@@ -132,7 +132,7 @@ fn step_5() -> Unit raise {
   ind_suc_0_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "?(f:ind->ind) z. (forall x1 x2. (f x1 = f x2) = (x1 = x2)) /\\ (forall x. ~(f x = z))",
+        "?(f:ind->ind) z. (∀ x1 x2. (f x1 = f x2) = (x1 = x2)) /\\ (∀ x. ~(f x = z))",
       ),
       t8,
     ),
@@ -155,14 +155,14 @@ pub fn ind_suc_0_exists() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let th1 = @pair.new_definition(
     @parser.parse_term(
-      "IND_SUC = @f:ind->ind. ?z. (forall x1 x2. (f x1 = f x2) = (x1 = x2)) /\\\n                                (forall x. ~(f x = z))",
+      "IND_SUC = @f:ind->ind. ?z. (∀ x1 x2. (f x1 = f x2) = (x1 = x2)) /\\\n                                (∀ x. ~(f x = z))",
     ),
   )
   let t9 = @class.select_rule(ind_suc_0_exists())
   let th2 = @simp.rewrite_rule(@list.List([@equal.gsym(th1)]))(t9)
   let th3 = @pair.new_definition(
     @parser.parse_term(
-      "IND_0 = @z:ind. (forall x1 x2. IND_SUC x1 = IND_SUC x2 <=> x1 = x2) /\\\n                    (forall x. ~(IND_SUC x = z))",
+      "IND_0 = @z:ind. (∀ x1 x2. IND_SUC x1 = IND_SUC x2 <=> x1 = x2) /\\\n                    (∀ x. ~(IND_SUC x = z))",
     ),
   )
   let t10 = @class.select_rule(th2)
@@ -236,7 +236,7 @@ pub fn num_rep_cases() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let (num_rep_rules, num_rep_induct, num_rep_cases) = @ind_defs.new_inductive_definition(
     @parser.parse_term(
-      "NUM_REP IND_0 /\\\n    (forall i. NUM_REP i ==> NUM_REP (IND_SUC i))",
+      "NUM_REP IND_0 /\\\n    (∀ i. NUM_REP i ==> NUM_REP (IND_SUC i))",
     ),
   )
   num_rep_rules_c.set(num_rep_rules)
@@ -312,7 +312,7 @@ fn step_12() -> Unit raise {
     @simp.rewrite_tac(@list.List([suc_def(), zero_def()])),
     t11,
   )
-  not_suc_v1_c.set(@tactics.prove(@parser.parse_term("forall n. ~(SUC n = _0)"), t12))
+  not_suc_v1_c.set(@tactics.prove(@parser.parse_term("∀ n. ~(SUC n = _0)"), t12))
 }
 
 ///|
@@ -407,7 +407,7 @@ fn step_13() -> Unit raise {
     @tactics.all_tac,
   ])
   let t25 = @tactics.subgoal_then(
-    @parser.parse_term("forall p. NUM_REP (IND_SUC (dest_num p))"),
+    @parser.parse_term("∀ p. NUM_REP (IND_SUC (dest_num p))"),
     fn(
       x22 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -564,7 +564,7 @@ fn step_13() -> Unit raise {
     t36,
   )
   suc_inj_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. SUC m = SUC n <=> m = n"), t37),
+    @tactics.prove(@parser.parse_term("∀ m n. SUC m = SUC n <=> m = n"), t37),
   )
 }
 
@@ -1077,7 +1077,7 @@ fn step_14() -> Unit raise {
   )
   num_induction_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. P(_0) /\\ (forall n. P(n) ==> P(SUC n)) ==> forall n. P n"),
+      @parser.parse_term("∀ P. P(_0) /\\ (∀ n. P(n) ==> P(SUC n)) ==> ∀ n. P n"),
       t80,
     ),
   )
@@ -1458,7 +1458,7 @@ fn step_15() -> Unit raise {
     t145,
   ])
   let t104 = @tactics.subgoal_then(
-    @parser.parse_term("forall n:num. ?!y:A. PRG n y"),
+    @parser.parse_term("∀ n:num. ?!y:A. PRG n y"),
     fn(
       x101 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1723,7 +1723,7 @@ fn step_15() -> Unit raise {
     ),
   )
   let t85 = @parser.parse_term(
-    "PRG _0 e /\\ (forall b:A n:num. PRG n b ==> PRG (SUC n) (f b n))",
+    "PRG _0 e /\\ (∀ b:A n:num. PRG n b ==> PRG (SUC n) (f b n))",
   )
   let t153 = @list.List([
     @tactics.thenl(
@@ -1797,7 +1797,7 @@ fn step_15() -> Unit raise {
   num_axiom_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(e:A) f. ?!fn. (fn _0 = e) /\\\n                   (forall n. fn (SUC n) = f (fn n) n)",
+        "∀(e:A) f. ?!fn. (fn _0 = e) /\\\n                   (∀ n. fn (SUC n) = f (fn n) n)",
       ),
       t154,
     ),
@@ -1939,7 +1939,7 @@ pub fn num_recursion() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t160 = @tactics.then_tac(induct_tac, @meson.meson_tac(@list.List([])))
   num_cases_c.set(
-    @tactics.prove(@parser.parse_term("forall m. (m = 0) \\/ (?n. m = SUC n)"), t160),
+    @tactics.prove(@parser.parse_term("∀ m. (m = 0) \\/ (?n. m = SUC n)"), t160),
   )
 }
 
@@ -1971,7 +1971,7 @@ fn step_22() -> Unit raise {
   let def = @pair.new_definition(
     @basics.mk_eq(
       bit0_tm,
-      @parser.parse_term("@fn. fn 0 = 0 /\\ (forall n. fn (SUC n) = SUC (SUC(fn n)))"),
+      @parser.parse_term("@fn. fn 0 = 0 /\\ (∀ n. fn (SUC n) = SUC (SUC(fn n)))"),
     ),
   )
   let t161 = @parser.parse_term("\\m n:num. SUC(SUC m)")

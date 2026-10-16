@@ -4,7 +4,7 @@
 ///|
 /// ssreflect_eq_def
 fn step_1() -> Unit raise {
-  ssreflect_eq_def_c.set(@pair.new_definition(@parser.parse_term("forall v P. ssreflect_eq (v:A) (P:bool) = P")))
+  ssreflect_eq_def_c.set(@pair.new_definition(@parser.parse_term("∀ v P. ssreflect_eq (v:A) (P:bool) = P")))
 }
 
 ///|
@@ -484,7 +484,7 @@ pub fn move_(x109 : @list.List[String]) -> ((@tactics.Goal) -> @tactics.Goalstat
             })
           }
         } else {
-          raise Failure("move: not (forall) or (==>)")
+          raise Failure("move: not (∀) or (==>)")
         }
       }
       tac_1(g_1)
@@ -1767,7 +1767,7 @@ fn step_12() -> Unit raise {
   let t389 = @tactics.disch_then(@tactics.disj_cases_tac)
   let t388 = @tactics.mp_tac(@bool.spec(@parser.parse_term("l:(A)list"), @lists.list_cases()))
   let t402 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t388), t389), t390), t394), t398), t401)
-  list_cases_c.set(@tactics.prove(@parser.parse_term("forall P. P [] /\\ (forall(h:A) t. P (CONS h t)) ==> (forall l. P l)"), t402))
+  list_cases_c.set(@tactics.prove(@parser.parse_term("∀ P. P [] /\\ (∀(h:A) t. P (CONS h t)) ==> (∀ l. P l)"), t402))
 }
 
 ///|
@@ -1805,7 +1805,7 @@ fn step_14() -> Unit raise {
   let t404 = @tactics.disch_then(@tactics.disj_cases_tac)
   let t403 = @tactics.mp_tac(@bool.spec(@parser.parse_term("m:num"), @nums.num_cases()))
   let t409 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t403), t404), t405), t408)
-  num_cases_c.set(@tactics.prove(@parser.parse_term("forall P. P 0 /\\ (forall n. P (SUC n)) ==> (forall m. P m)"), t409))
+  num_cases_c.set(@tactics.prove(@parser.parse_term("∀ P. P 0 /\\ (∀ n. P (SUC n)) ==> (∀ m. P m)"), t409))
 }
 
 ///|
@@ -2016,7 +2016,7 @@ pub fn case(x410 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactic
       let t414 = @tactics.repeat_tac(@tactics.conj_tac)
       @tactics.then_tac(@tactics.match_mp_tac(case_th), t414)(g)
     } else {
-      raise Failure("case: not imp or forall")
+      raise Failure("case: not imp or ∀")
     }
   } else {
     let tm = @equal.lhand(goal_tm)
@@ -2076,7 +2076,7 @@ pub fn elim(x429 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactic
     let t433 = @tactics.repeat_tac(@tactics.conj_tac)
     @tactics.then_tac(@tactics.match_mp_tac(induct_th), t433)(g)
   } else {
-    raise Failure("elim: not forall")
+    raise Failure("elim: not ∀")
   }
 }
 

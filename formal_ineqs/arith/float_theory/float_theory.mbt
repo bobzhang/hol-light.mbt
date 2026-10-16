@@ -132,7 +132,7 @@ fn step_9() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_mul()), t4, @realax.real_mul_lid()]))
   let t3 = @simp.rewrite_tac(@list.List([float(), @num_exp_theory.num_exp(), @equal.gsym(arith_base_def())]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3), t5), t6), t7)
-  float_alt_c.set(@tactics.prove(@parser.parse_term("forall s n e. float_num s n e = (if s then -- &1 else &1) * &n *\n      if (min_exp <= e) then &arith_base pow (e - min_exp) else inv (&arith_base pow (min_exp - e))"), t8))
+  float_alt_c.set(@tactics.prove(@parser.parse_term("∀ s n e. float_num s n e = (if s then -- &1 else &1) * &n *\n      if (min_exp <= e) then &arith_base pow (e - min_exp) else inv (&arith_base pow (min_exp - e))"), t8))
 }
 
 ///|
@@ -180,7 +180,7 @@ pub fn float_of_num() -> @kernel.Thm {
 /// FLOAT_NEG
 fn step_11() -> Unit raise {
   let t23 = @tactics.then_tac(@simp.rewrite_tac(@list.List([float()])), @calc_rat.real_arith_tac)
-  float_neg_c.set(@tactics.prove(@parser.parse_term("forall s n e. --float_num s n e = float_num (~s) n e"), t23))
+  float_neg_c.set(@tactics.prove(@parser.parse_term("∀ s n e. --float_num s n e = float_num (~s) n e"), t23))
 }
 
 ///|
@@ -237,7 +237,7 @@ fn step_14() -> Unit raise {
   let t33 = @tactics.match_mp_tac(@realax.real_le_mul())
   let t32 = @simp.rewrite_tac(@list.List([float(), @realax.real_mul_lid(), @realax.real_div()]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t32), t33), t34)
-  float_f_pos_c.set(@tactics.prove(@parser.parse_term("forall n e. &0 <= float_num F n e"), t35))
+  float_f_pos_c.set(@tactics.prove(@parser.parse_term("∀ n e. &0 <= float_num F n e"), t35))
 }
 
 ///|
@@ -257,7 +257,7 @@ fn step_15() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("-- &1 * a * b <= &0 <=> &0 <= a * b"))]))
   let t36 = @simp.rewrite_tac(@list.List([float(), @realax.real_div()]))
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t36), t37), t38), t39)
-  float_t_neg_c.set(@tactics.prove(@parser.parse_term("forall n e. float_num T n e <= &0"), t40))
+  float_t_neg_c.set(@tactics.prove(@parser.parse_term("∀ n e. float_num T n e <= &0"), t40))
 }
 
 ///|
@@ -286,7 +286,7 @@ fn step_16() -> Unit raise {
   let t42 = @simp.rewrite_tac(@list.List([@realarith.real_entire()]))
   let t41 = @simp.rewrite_tac(@list.List([float(), @realax.real_div()]))
   let t52 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t41), t42), @tactics.eq_tac), t51)
-  float_eq_0_c.set(@tactics.prove(@parser.parse_term("forall s n e. float_num s n e = &0 <=> n = 0"), t52))
+  float_eq_0_c.set(@tactics.prove(@parser.parse_term("∀ s n e. float_num s n e = &0 <=> n = 0"), t52))
 }
 
 ///|
@@ -364,7 +364,7 @@ pub fn float_interval_ft_imp_0() -> @kernel.Thm {
 /// FLOAT_0
 fn step_20() -> Unit raise {
   let t68 = @simp.rewrite_tac(@list.List([float_eq_0()]))
-  float_0_c.set(@tactics.prove(@parser.parse_term("forall s e. float_num s 0 e = &0"), t68))
+  float_0_c.set(@tactics.prove(@parser.parse_term("∀ s e. float_num s 0 e = &0"), t68))
 }
 
 ///|

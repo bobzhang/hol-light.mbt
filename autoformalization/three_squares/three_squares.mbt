@@ -18,7 +18,7 @@ fn step_2() -> Unit raise {
   let t1 = @parser.parse_term("q:int")
   let t2 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("x:int"), t1]), @int.int_division()))
   let t8 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2), @tactics.ants_tac), @list.List([@int.asm_int_arith_tac, @tactics.all_tac])), t3), t4), @tactics.strip_tac), t5), t7), @int.asm_int_arith_tac)
-  int_balanced_rem_c.set(@tactics.prove(@parser.parse_term("forall x q:int. &0 < q ==> ?b. abs(x - q * b) * &2 <= q"), t8))
+  int_balanced_rem_c.set(@tactics.prove(@parser.parse_term("∀ x q:int. &0 < q ==> ?b. abs(x - q * b) * &2 <= q"), t8))
 }
 
 ///|
@@ -45,7 +45,7 @@ fn step_3() -> Unit raise {
     }
   })
   let t18 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t12), t17)
-  sq_bound_c.set(@tactics.prove(@parser.parse_term("forall a q:int. abs a * &2 <= q ==> &4 * a pow 2 <= q pow 2"), t18))
+  sq_bound_c.set(@tactics.prove(@parser.parse_term("∀ a q:int. abs a * &2 <= q ==> &4 * a pow 2 <= q pow 2"), t18))
 }
 
 ///|
@@ -98,7 +98,7 @@ fn step_4() -> Unit raise {
   }), t24), t28), t30), t31), t32), t46])
   let t19 = @class.asm_cases_tac(@parser.parse_term("y = &0"))
   let t48 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t19), t47)
-  posdef_binary_criterion_c.set(@tactics.prove(@parser.parse_term("forall A11 A12 A22:int.\n     &0 < A11 /\\ &0 < A11 * A22 - A12 pow 2\n     ==> forall x y. ~(x = &0 /\\ y = &0)\n               ==> &0 < A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2"), t48))
+  posdef_binary_criterion_c.set(@tactics.prove(@parser.parse_term("∀ A11 A12 A22:int.\n     &0 < A11 /\\ &0 < A11 * A22 - A12 pow 2\n     ==> ∀ x y. ~(x = &0 /\\ y = &0)\n               ==> &0 < A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2"), t48))
 }
 
 ///|
@@ -280,7 +280,7 @@ fn step_5() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([@int.int_abs_pos()]))
   let t49 = @tactics.exists_tac(@parser.parse_term("abs:int->int"))
   let t178 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.wf_int_measure()), t49), t50), @tactics.gen_tac), @tactics.disch_tac), @tactics.strip_tac), t51), @tactics.disch_tac), @tactics.gen_tac), t54), t55), t69), t71), t72), t75), t76), t77), t78), t82), t88), t92), t97), t101), t111), t115), t145), t152), @tactics.ants_tac), @list.List([@int.asm_int_arith_tac, @tactics.all_tac])), @tactics.ants_tac), t156), t164), @tactics.ants_tac), t165), t166), t171), t175), t176), t177)
-  binary_disc1_c.set(@tactics.prove(@parser.parse_term("forall A11. &0 < A11\n   ==> forall A12 A22. A11 * A22 - A12 pow 2 = &1\n       ==> forall n. (?x y. A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2 = n)\n               ==> ?u v:int. u pow 2 + v pow 2 = n"), t178))
+  binary_disc1_c.set(@tactics.prove(@parser.parse_term("∀ A11. &0 < A11\n   ==> ∀ A12 A22. A11 * A22 - A12 pow 2 = &1\n       ==> ∀ n. (?x y. A11 * x pow 2 + &2 * A12 * x * y + A22 * y pow 2 = n)\n               ==> ?u v:int. u pow 2 + v pow 2 = n"), t178))
 }
 
 ///|
@@ -295,7 +295,7 @@ pub fn binary_disc1() -> @kernel.Thm {
 ///|
 /// TERNARY_COMPLETE
 fn step_6() -> Unit raise {
-  ternary_complete_c.set(@int.int_ring(@parser.parse_term("forall a11 a12 a13 a22 a23 a33 x1 x2 x3:int.\n    a11 * (a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n           &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 + &2 * a23 * x2 * x3) =\n    (a11 * x1 + a12 * x2 + a13 * x3) pow 2 +\n    ((a11 * a22 - a12 pow 2) * x2 pow 2 +\n     &2 * (a11 * a23 - a12 * a13) * x2 * x3 +\n     (a11 * a33 - a13 pow 2) * x3 pow 2)")))
+  ternary_complete_c.set(@int.int_ring(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33 x1 x2 x3:int.\n    a11 * (a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n           &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 + &2 * a23 * x2 * x3) =\n    (a11 * x1 + a12 * x2 + a13 * x3) pow 2 +\n    ((a11 * a22 - a12 pow 2) * x2 pow 2 +\n     &2 * (a11 * a23 - a12 * a13) * x2 * x3 +\n     (a11 * a33 - a13 pow 2) * x3 pow 2)")))
 }
 
 ///|
@@ -392,7 +392,7 @@ fn step_7() -> Unit raise {
   let t180 = @simp.abbrev_tac(@parser.parse_term("G12 = a23 - a12 * a13"))
   let t179 = @simp.abbrev_tac(@parser.parse_term("G11 = a22 - a12 pow 2"))
   let t245 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t179), t180), t181), t185), t190), t194), t196), t197), t198), t199), t207), t208), t215), @tactics.ants_tac), t234), t237), t243), t244), @int.int_arith_tac)
-  tsq_disc1_a11_1_c.set(@tactics.prove(@parser.parse_term("forall a12 a13 a22 a23 a33 n:int.\n     &0 < &1 * a22 - a12 pow 2 /\\\n     &1 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. &1 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t245))
+  tsq_disc1_a11_1_c.set(@tactics.prove(@parser.parse_term("∀ a12 a13 a22 a23 a33 n:int.\n     &0 < &1 * a22 - a12 pow 2 /\\\n     &1 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. &1 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t245))
 }
 
 ///|
@@ -503,7 +503,7 @@ fn step_8() -> Unit raise {
   let t259 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.pop_assum(@tactics.strip_assume_tac), t255), t256), t257), t258), @tactics.all_tac])
   let t246 = @class.asm_cases_tac(@parser.parse_term("u1 = &0 /\\ u2 = &0"))
   let t325 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t246), t259), t261), t262), @tactics.strip_tac), t266), t271), t280), t289), t293), t302), t306), t310), t319), t320), t321), t322), t323), t324)
-  sl3_extend_c.set(@tactics.prove(@parser.parse_term("forall u1 u2 u3:int. (?x y z. u1 * x + u2 * y + u3 * z = &1)\n     ==> ?c12 c13 c22 c23 c32 c33.\n            u1 * (c22 * c33 - c23 * c32) -\n            c12 * (u2 * c33 - c23 * u3) +\n            c13 * (u2 * c32 - c22 * u3) = &1"), t325))
+  sl3_extend_c.set(@tactics.prove(@parser.parse_term("∀ u1 u2 u3:int. (?x y z. u1 * x + u2 * y + u3 * z = &1)\n     ==> ?c12 c13 c22 c23 c32 c33.\n            u1 * (c22 * c33 - c23 * c32) -\n            c12 * (u2 * c33 - c23 * u3) +\n            c13 * (u2 * c32 - c22 * u3) = &1"), t325))
 }
 
 ///|
@@ -685,7 +685,7 @@ fn step_9() -> Unit raise {
   let t327 = @tactics.exists_tac(@parser.parse_term("abs:int->int"))
   let t326 = @tactics.match_mp_tac(@int.wf_int_measure())
   let t454 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t326), t327), t328), @tactics.gen_tac), @tactics.disch_tac), @tactics.strip_tac), t329), @tactics.disch_tac), t331), t332), t335), t336), t337), t338), t342), t348), t352), t357), t361), t371), t372), t386), t390), t414), t421), @tactics.ants_tac), @list.List([@int.asm_int_arith_tac, @tactics.all_tac])), @tactics.ants_tac), t425), t433), @tactics.ants_tac), t434), t436), t437), t438), @tactics.conj_tac), t453)
-  binary_hermite_c.set(@tactics.prove(@parser.parse_term("forall D. &0 < D ==>\n     forall A11. &0 < A11\n       ==> forall A12 A22. A11 * A22 - A12 pow 2 = D\n           ==> ?x y. ~(x = &0 /\\ y = &0) /\\\n                     &3 * (A11 * x pow 2 + &2 * A12 * x * y +\n                           A22 * y pow 2) pow 2\n                       <= &4 * D"), t454))
+  binary_hermite_c.set(@tactics.prove(@parser.parse_term("∀ D. &0 < D ==>\n     ∀ A11. &0 < A11\n       ==> ∀ A12 A22. A11 * A22 - A12 pow 2 = D\n           ==> ?x y. ~(x = &0 /\\ y = &0) /\\\n                     &3 * (A11 * x pow 2 + &2 * A12 * x * y +\n                           A22 * y pow 2) pow 2\n                       <= &4 * D"), t454))
 }
 
 ///|
@@ -730,7 +730,7 @@ fn step_10() -> Unit raise {
   let t455 = @parser.parse_term("b:int")
   let t456 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:int"), t455]), @int.int_gcd_exists()))
   let t480 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t456), t457), t459), t460), t461), t462), t465), t466), t467), t468), t472), t478), t479), @int.int_arith_tac)
-  int_gcd3_exists_c.set(@tactics.prove(@parser.parse_term("forall a b c:int. ?d. d divides a /\\ d divides b /\\ d divides c /\\\n                   (?x y z. d = a * x + b * y + c * z)"), t480))
+  int_gcd3_exists_c.set(@tactics.prove(@parser.parse_term("∀ a b c:int. ?d. d divides a /\\ d divides b /\\ d divides c /\\\n                   (?x y z. d = a * x + b * y + c * z)"), t480))
 }
 
 ///|
@@ -812,7 +812,7 @@ fn step_11() -> Unit raise {
   let t481 = @bool.gen(@parser.parse_term("P:int->bool"), @int.int_wop())
   let t482 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\v:int. ?x y z. ~(x = &0 /\\ y = &0 /\\ z = &0) /\\\n                v = a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                    &2*a12*x*y + &2*a13*x*z + &2*a23*y*z"), t481))
   let t535 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t482), t483), t486), t503), t504), t510), t511), t514), @tactics.disch_tac), t521), @tactics.ants_tac), t534)
-  ternary_min_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?v1 v2 v3.\n            ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n            (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                     ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                         &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                         &2 * a23 * v2 * v3\n                         <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                            &2 * a12 * x * y + &2 * a13 * x * z +\n                            &2 * a23 * y * z)"), t535))
+  ternary_min_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33:int.\n     (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?v1 v2 v3.\n            ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n            (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                     ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                         &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                         &2 * a23 * v2 * v3\n                         <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                            &2 * a12 * x * y + &2 * a13 * x * z +\n                            &2 * a23 * y * z)"), t535))
 }
 
 ///|
@@ -881,7 +881,7 @@ fn step_12() -> Unit raise {
       }
     })(((x625 : @kernel.Thm) => @bool.specl(t624, x625))(x626))
   })
-  let t618 = @tactics.undisch_tac(@parser.parse_term("forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11*(g*w1) pow 2 + a22*(g*w2) pow 2 +\n                  a33*(g*w3) pow 2 + &2*a12*(g*w1)*(g*w2) +\n                  &2*a13*(g*w1)*(g*w3) + &2*a23*(g*w2)*(g*w3)\n                  <= a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z"))
+  let t618 = @tactics.undisch_tac(@parser.parse_term("∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11*(g*w1) pow 2 + a22*(g*w2) pow 2 +\n                  a33*(g*w3) pow 2 + &2*a12*(g*w1)*(g*w2) +\n                  &2*a13*(g*w1)*(g*w3) + &2*a23*(g*w2)*(g*w3)\n                  <= a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z"))
   let t616 = @simp.asm_simp_tac(@list.List([]))
   let t617 = @list.List([@tactics.then_tac(@simp.expand_tac("Fw"), t616), @tactics.all_tac])
   let t615 = @tactics.subgoal_then(@parser.parse_term("&0 < Fw"), fn(x612 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -999,7 +999,7 @@ fn step_12() -> Unit raise {
     }
   })))
   let t661 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t545), t548), t549), t558), t567), t576), t583), t587), t589), t593), t601), t605), t607), t611), t650), t656), t657), t658), t659), t660)
-  min_primitive_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33 v1 v2 v3:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z +\n                       &2 * a23 * y * z) /\\\n     ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?x y z. v1 * x + v2 * y + v3 * z = &1"), t661))
+  min_primitive_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33 v1 v2 v3:int.\n     (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                       &2 * a12 * x * y + &2 * a13 * x * z +\n                       &2 * a23 * y * z) /\\\n     ~(v1 = &0 /\\ v2 = &0 /\\ v3 = &0) /\\\n     (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z)\n     ==> ?x y z. v1 * x + v2 * y + v3 * z = &1"), t661))
 }
 
 ///|
@@ -1014,7 +1014,7 @@ pub fn min_primitive() -> @kernel.Thm {
 ///|
 /// DISC_G
 fn step_13() -> Unit raise {
-  disc_g_c.set(@int.int_ring(@parser.parse_term("forall a11 a12 a13 a22 a23 a33:int.\n    (a11 * a22 - a12 pow 2) * (a11 * a33 - a13 pow 2) -\n    (a11 * a23 - a12 * a13) pow 2 =\n    a11 * (a11 * (a22 * a33 - a23 pow 2) -\n           a12 * (a12 * a33 - a23 * a13) +\n           a13 * (a12 * a23 - a22 * a13))")))
+  disc_g_c.set(@int.int_ring(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33:int.\n    (a11 * a22 - a12 pow 2) * (a11 * a33 - a13 pow 2) -\n    (a11 * a23 - a12 * a13) pow 2 =\n    a11 * (a11 * (a22 * a33 - a23 pow 2) -\n           a12 * (a12 * a33 - a23 * a13) +\n           a13 * (a12 * a23 - a22 * a13))")))
 }
 
 ///|
@@ -1033,7 +1033,7 @@ fn step_14() -> Unit raise {
   let t663 = @tactics.exists_tac(@parser.parse_term("&2 pow 3"))
   let t662 = @tactics.match_mp_tac(@int.int_le_trans())
   let t665 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t662), t663), @tactics.conj_tac), t664)
-  cube_ge_8_c.set(@tactics.prove(@parser.parse_term("forall a:int. &2 <= a ==> &8 <= a pow 3"), t665))
+  cube_ge_8_c.set(@tactics.prove(@parser.parse_term("∀ a:int. &2 <= a ==> &8 <= a pow 3"), t665))
 }
 
 ///|
@@ -1060,7 +1060,7 @@ fn step_15() -> Unit raise {
     }
   })
   let t675 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t669), t671), t672), t673), t674), @int.int_arith_tac)
-  hermite_lower_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33 x1 s t Gst:int.\n     &0 < a11 /\\\n     a11 <= a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n             &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t /\\\n     &4 * (a11 * x1 + a12 * s + a13 * t) pow 2 <= a11 pow 2 /\\\n     a11 * (a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n            &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t) =\n       (a11 * x1 + a12 * s + a13 * t) pow 2 + Gst\n     ==> &3 * a11 pow 2 <= &4 * Gst"), t675))
+  hermite_lower_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33 x1 s t Gst:int.\n     &0 < a11 /\\\n     a11 <= a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n             &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t /\\\n     &4 * (a11 * x1 + a12 * s + a13 * t) pow 2 <= a11 pow 2 /\\\n     a11 * (a11 * x1 pow 2 + a22 * s pow 2 + a33 * t pow 2 +\n            &2 * a12 * x1 * s + &2 * a13 * x1 * t + &2 * a23 * s * t) =\n       (a11 * x1 + a12 * s + a13 * t) pow 2 + Gst\n     ==> &3 * a11 pow 2 <= &4 * Gst"), t675))
 }
 
 ///|
@@ -1100,7 +1100,7 @@ fn step_16() -> Unit raise {
     }
   })
   let t696 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t679), t683), t684), @tactics.disch_tac), t685), t686), @tactics.conj_tac), t690), t691), t692), @tactics.conj_tac), t695)
-  hermite_cube_c.set(@tactics.prove(@parser.parse_term("forall a G:int.\n     &0 < a /\\ &0 < G /\\\n     &3 * a pow 2 <= &4 * G /\\ &3 * G pow 2 <= &4 * a\n     ==> &27 * a pow 3 <= &64"), t696))
+  hermite_cube_c.set(@tactics.prove(@parser.parse_term("∀ a G:int.\n     &0 < a /\\ &0 < G /\\\n     &3 * a pow 2 <= &4 * G /\\ &3 * G pow 2 <= &4 * a\n     ==> &27 * a pow 3 <= &64"), t696))
 }
 
 ///|
@@ -1197,7 +1197,7 @@ fn step_17() -> Unit raise {
   let t698 = @simp.abbrev_tac(@parser.parse_term("G11 = a11*a22 - a12 pow 2"))
   let t697 = @tactics.repeat_tac(@tactics.gen_tac)
   let t762 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t697), @tactics.disch_tac), t698), t699), t700), t704), t715), t719), t761)
-  ternary_posdef_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33:int.\n     &0 < a11 /\\ &0 < a11 * a22 - a12 pow 2 /\\\n     &0 < a11 * (a22 * a33 - a23 pow 2) -\n          a12 * (a12 * a33 - a23 * a13) +\n          a13 * (a12 * a23 - a22 * a13)\n     ==> forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                          &2 * a12 * x * y + &2 * a13 * x * z +\n                          &2 * a23 * y * z"), t762))
+  ternary_posdef_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33:int.\n     &0 < a11 /\\ &0 < a11 * a22 - a12 pow 2 /\\\n     &0 < a11 * (a22 * a33 - a23 pow 2) -\n          a12 * (a12 * a33 - a23 * a13) +\n          a13 * (a12 * a23 - a22 * a13)\n     ==> ∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> &0 < a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                          &2 * a12 * x * y + &2 * a13 * x * z +\n                          &2 * a23 * y * z"), t762))
 }
 
 ///|
@@ -1223,7 +1223,7 @@ fn step_18() -> Unit raise {
     }
   }, @list.List([@parser.parse_term("(c22*c33 - c23*c32)*X1 + (c13*c32 - c12*c33)*X2 + (c12*c23 - c13*c22)*X3"), t767, t766]))
   let t771 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t768), t769), t770)
-  adj_preimage_c.set(@tactics.prove(@parser.parse_term("forall u1 u2 u3 c12 c22 c32 c13 c23 c33 X1 X2 X3:int.\n     u1 * (c22 * c33 - c23 * c32) -\n     c12 * (u2 * c33 - c23 * u3) +\n     c13 * (u2 * c32 - c22 * u3) = &1\n     ==> ?y1 y2 y3.\n            u1 * y1 + c12 * y2 + c13 * y3 = X1 /\\\n            u2 * y1 + c22 * y2 + c23 * y3 = X2 /\\\n            u3 * y1 + c32 * y2 + c33 * y3 = X3"), t771))
+  adj_preimage_c.set(@tactics.prove(@parser.parse_term("∀ u1 u2 u3 c12 c22 c32 c13 c23 c33 X1 X2 X3:int.\n     u1 * (c22 * c33 - c23 * c32) -\n     c12 * (u2 * c33 - c23 * u3) +\n     c13 * (u2 * c32 - c22 * u3) = &1\n     ==> ?y1 y2 y3.\n            u1 * y1 + c12 * y2 + c13 * y3 = X1 /\\\n            u2 * y1 + c22 * y2 + c23 * y3 = X2 /\\\n            u3 * y1 + c32 * y2 + c33 * y3 = X3"), t771))
 }
 
 ///|
@@ -1391,7 +1391,7 @@ fn step_19() -> Unit raise {
   let t773 = @simp.abbrev_tac(@parser.parse_term("G12 = b11*b23 - b12*b13"))
   let t772 = @simp.abbrev_tac(@parser.parse_term("G11 = b11*b22 - b12 pow 2"))
   let t900 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t772), t773), t774), t778), t785), t786), t787), t794), t795), t803), t804), t806), t807), t809), t810), t813), t814), t818), t822), t826), t870), t874), t889), t891), t892), @tactics.disch_tac), t896), t899), @int.asm_int_arith_tac)
-  hermite_a1_c.set(@tactics.prove(@parser.parse_term("forall b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     b11 * (b22 * b33 - b23 pow 2) - b12 * (b12 * b33 - b13 * b23) +\n       b13 * (b12 * b23 - b13 * b22) = &1 /\\\n     &0 < b11 * b22 - b12 pow 2 /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                         &2 * b12 * x * y + &2 * b13 * x * z +\n                         &2 * b23 * y * z)\n     ==> b11 = &1"), t900))
+  hermite_a1_c.set(@tactics.prove(@parser.parse_term("∀ b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     b11 * (b22 * b33 - b23 pow 2) - b12 * (b12 * b33 - b13 * b23) +\n       b13 * (b12 * b23 - b13 * b22) = &1 /\\\n     &0 < b11 * b22 - b12 pow 2 /\\\n     (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                         &2 * b12 * x * y + &2 * b13 * x * z +\n                         &2 * b23 * y * z)\n     ==> b11 = &1"), t900))
 }
 
 ///|
@@ -1433,7 +1433,7 @@ fn step_20() -> Unit raise {
   })
   let t901 = @tactics.repeat_tac(@tactics.strip_tac)
   let t924 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t901), t910), @tactics.ants_tac), t918), t919), @tactics.conj_tac), t923)
-  conj_min_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33:int.\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z) /\\\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) + a33 * c32 * c33\n     ==> forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                            &2 * b12 * x * y + &2 * b13 * x * z +\n                            &2 * b23 * y * z"), t924))
+  conj_min_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33:int.\n     (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> a11 * v1 pow 2 + a22 * v2 pow 2 + a33 * v3 pow 2 +\n                  &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n                  &2 * a23 * v2 * v3\n                  <= a11 * x pow 2 + a22 * y pow 2 + a33 * z pow 2 +\n                     &2 * a12 * x * y + &2 * a13 * x * z + &2 * a23 * y * z) /\\\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) + a33 * c32 * c33\n     ==> ∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n                 ==> b11 <= b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                            &2 * b12 * x * y + &2 * b13 * x * z +\n                            &2 * b23 * y * z"), t924))
 }
 
 ///|
@@ -1476,7 +1476,7 @@ fn step_21() -> Unit raise {
     }
   })
   let t946 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t928), t945)
-  posdef_minor2_c.set(@tactics.prove(@parser.parse_term("forall b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     (forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                       &2 * b12 * x * y + &2 * b13 * x * z + &2 * b23 * y * z)\n     ==> &0 < b11 * b22 - b12 pow 2"), t946))
+  posdef_minor2_c.set(@tactics.prove(@parser.parse_term("∀ b11 b12 b13 b22 b23 b33:int.\n     &0 < b11 /\\\n     (∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n              ==> &0 < b11 * x pow 2 + b22 * y pow 2 + b33 * z pow 2 +\n                       &2 * b12 * x * y + &2 * b13 * x * z + &2 * b23 * y * z)\n     ==> &0 < b11 * b22 - b12 pow 2"), t946))
 }
 
 ///|
@@ -1528,7 +1528,7 @@ fn step_22() -> Unit raise {
   let t957 = @parser.parse_term("v2:int")
   let t958 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("v1:int"), t957, t956, t955, t954, t953, t952, t951, t950, t949, t948, t947]), adj_preimage()))
   let t978 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t958), @tactics.ants_tac), t962), t965), t971), t976), t977)
-  conj_reps_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33 n:int.\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) +\n            a33 * c32 * c33 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?y1 y2 y3. b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n                    &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n                    &2 * b23 * y2 * y3 = n"), t978))
+  conj_reps_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33 v1 v2 v3 c12 c13 c22 c23 c32 c33\n     b11 b12 b13 b22 b23 b33 n:int.\n     v1 * (c22 * c33 - c23 * c32) -\n     c12 * (v2 * c33 - c23 * v3) +\n     c13 * (v2 * c32 - c22 * v3) = &1 /\\\n     b11 = a11 * v1 pow 2 + &2 * a12 * v1 * v2 + &2 * a13 * v1 * v3 +\n            a22 * v2 pow 2 + &2 * a23 * v2 * v3 + a33 * v3 pow 2 /\\\n     b22 = a11 * c12 pow 2 + &2 * a12 * c12 * c22 + &2 * a13 * c12 * c32 +\n            a22 * c22 pow 2 + &2 * a23 * c22 * c32 + a33 * c32 pow 2 /\\\n     b33 = a11 * c13 pow 2 + &2 * a12 * c13 * c23 + &2 * a13 * c13 * c33 +\n            a22 * c23 pow 2 + &2 * a23 * c23 * c33 + a33 * c33 pow 2 /\\\n     b12 = a11 * v1 * c12 + a12 * (v1 * c22 + v2 * c12) +\n            a13 * (v1 * c32 + v3 * c12) +\n            a22 * v2 * c22 + a23 * (v2 * c32 + v3 * c22) + a33 * v3 * c32 /\\\n     b13 = a11 * v1 * c13 + a12 * (v1 * c23 + v2 * c13) +\n            a13 * (v1 * c33 + v3 * c13) +\n            a22 * v2 * c23 + a23 * (v2 * c33 + v3 * c23) + a33 * v3 * c33 /\\\n     b23 = a11 * c12 * c13 + a12 * (c12 * c23 + c22 * c13) +\n            a13 * (c12 * c33 + c32 * c13) +\n            a22 * c22 * c23 + a23 * (c22 * c33 + c32 * c23) +\n            a33 * c32 * c33 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?y1 y2 y3. b11 * y1 pow 2 + b22 * y2 pow 2 + b33 * y3 pow 2 +\n                    &2 * b12 * y1 * y2 + &2 * b13 * y1 * y3 +\n                    &2 * b23 * y2 * y3 = n"), t978))
 }
 
 ///|
@@ -1638,7 +1638,7 @@ fn step_23() -> Unit raise {
   let t1082 = @tactics.exists_tac(@parser.parse_term("b11:int"))
   let t1081 = @tactics.match_mp_tac(@int.int_lte_trans())
   let t1086 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1081), t1082), t1083), t1084), t1085), @tactics.all_tac])
-  let t1080 = @tactics.subgoal_then(@parser.parse_term("forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                     &2*b12*x*y + &2*b13*x*z + &2*b23*y*z"), fn(x1077 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1080 = @tactics.subgoal_then(@parser.parse_term("∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                     &2*b12*x*y + &2*b13*x*z + &2*b23*y*z"), fn(x1077 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1078 = @tactics.assume_tac(x1077)
     fn(x1079 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1078(x1079)
@@ -1704,7 +1704,7 @@ fn step_23() -> Unit raise {
     }
   }, @list.List([@parser.parse_term("a11:int"), t1047, t1046, t1045, t1044, t1043, t1042, t1041, t1040, t1039, t1038, t1037, t1036, t1035, t1034]))
   let t1050 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(conj_min()), t1048), t1049), @tactics.all_tac])
-  let t1030 = @tactics.subgoal_then(@parser.parse_term("forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> b11 <= b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                       &2*b12*x*y + &2*b13*x*z + &2*b23*y*z"), fn(x1027 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1030 = @tactics.subgoal_then(@parser.parse_term("∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> b11 <= b11*x pow 2 + b22*y pow 2 + b33*z pow 2 +\n                       &2*b12*x*y + &2*b13*x*z + &2*b23*y*z"), fn(x1027 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1028 = @tactics.assume_tac(x1027)
     fn(x1029 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1028(x1029)
@@ -1758,14 +1758,14 @@ fn step_23() -> Unit raise {
   let t984 = @tactics.undisch_tac(@parser.parse_term("a11*(a22*a33 - a23 pow 2) - a12*(a12*a33 - a23*a13) +\n       a13*(a12*a23 - a22*a13) = &1"))
   let t983 = @simp.asm_rewrite_tac(@list.List([]))
   let t985 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(ternary_posdef()), t983), t984), @int.int_arith_tac), @tactics.all_tac])
-  let t982 = @tactics.subgoal_then(@parser.parse_term("forall x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z"), fn(x979 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t982 = @tactics.subgoal_then(@parser.parse_term("∀ x y z. ~(x = &0 /\\ y = &0 /\\ z = &0)\n            ==> &0 < a11*x pow 2 + a22*y pow 2 + a33*z pow 2 +\n                     &2*a12*x*y + &2*a13*x*z + &2*a23*y*z"), fn(x979 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s980 = @tactics.assume_tac(x979)
     fn(x981 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s980(x981)
     }
   })
   let t1162 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t982), t985), t991), t992), t995), t996), t1007), t1010), @tactics.ants_tac), t1011), t1020), t1021), t1022), t1023), t1024), t1025), t1026), t1030), t1050), t1054), t1065), t1069), t1076), t1080), t1086), t1090), t1098), t1102), t1112), t1113), t1134), t1135), t1143), t1144), t1145), t1161)
-  tsq_disc1_c.set(@tactics.prove(@parser.parse_term("forall a11 a12 a13 a22 a23 a33 n:int.\n     &0 < a11 /\\\n     &0 < a11 * a22 - a12 pow 2 /\\\n     a11 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t1162))
+  tsq_disc1_c.set(@tactics.prove(@parser.parse_term("∀ a11 a12 a13 a22 a23 a33 n:int.\n     &0 < a11 /\\\n     &0 < a11 * a22 - a12 pow 2 /\\\n     a11 * (a22 * a33 - a23 pow 2) - a12 * (a12 * a33 - a23 * a13) +\n       a13 * (a12 * a23 - a22 * a13) = &1 /\\\n     (?x1 x2 x3. a11 * x1 pow 2 + a22 * x2 pow 2 + a33 * x3 pow 2 +\n                 &2 * a12 * x1 * x2 + &2 * a13 * x1 * x3 +\n                 &2 * a23 * x2 * x3 = n)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t1162))
 }
 
 ///|
@@ -1859,7 +1859,7 @@ fn step_24() -> Unit raise {
   let t1164 = @tactics.undisch_tac(@parser.parse_term("a22 divides (t pow 2 + d')"))
   let t1163 = @simp.abbrev_tac(@parser.parse_term("a22 = d'*n - &1"))
   let t1224 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1163), t1164), t1165), t1168), t1172), t1178), t1182), t1183), t1187), t1197), t1198), t1207), t1208), t1223)
-  lemma_1_7_c.set(@tactics.prove(@parser.parse_term("forall n d' t:int.\n     &1 < n /\\ &0 < d' /\\ (d' * n - &1) divides (t pow 2 + d')\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t1224))
+  lemma_1_7_c.set(@tactics.prove(@parser.parse_term("∀ n d' t:int.\n     &1 < n /\\ &0 < d' /\\ (d' * n - &1) divides (t pow 2 + d')\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t1224))
 }
 
 ///|
@@ -1894,7 +1894,7 @@ fn step_25() -> Unit raise {
   }, @list.List([@parser.parse_term("d':int"), t1229]))
   let t1225 = @tactics.match_mp_tac(lemma_1_7())
   let t1240 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1225), t1230), t1231), t1232), t1233), t1234), @tactics.strip_tac), t1235), t1239), @int.int_arith_tac)
-  lemma_1_7_cong_c.set(@tactics.prove(@parser.parse_term("forall n d':int.\n     &1 < n /\\ &0 < d' /\\ (?x:int. (x pow 2 + d' == &0) (mod (d' * n - &1)))\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t1240))
+  lemma_1_7_cong_c.set(@tactics.prove(@parser.parse_term("∀ n d':int.\n     &1 < n /\\ &0 < d' /\\ (?x:int. (x pow 2 + d' == &0) (mod (d' * n - &1)))\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = n"), t1240))
 }
 
 ///|
@@ -1910,7 +1910,7 @@ pub fn lemma_1_7_cong() -> @kernel.Thm {
 /// CONG_1_MOD_8
 fn step_26() -> Unit raise {
   let t1241 = @meson.meson_tac(@list.List([@pocklington.cong_case(), @arith.mult_sym(), @int.arith_rule(@parser.parse_term("1 < 8"))]))
-  cong_1_mod_8_c.set(@tactics.prove(@parser.parse_term("forall d:num. (d == 1) (mod 8) ==> ?q. d = 8 * q + 1"), t1241))
+  cong_1_mod_8_c.set(@tactics.prove(@parser.parse_term("∀ d:num. (d == 1) (mod 8) ==> ?q. d = 8 * q + 1"), t1241))
 }
 
 ///|
@@ -1932,7 +1932,7 @@ fn step_27() -> Unit raise {
   let t1244 = @parser.parse_term("a:num")
   let t1245 = @tactics.match_mp_tac(@bool.specl(@list.List([@parser.parse_term("x:num"), t1244, t1243, t1242]), @pocklington.cong_divides_modulus()))
   let t1248 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1245), t1246), t1247)
-  cong_mod_8_imp_mod_4_c.set(@tactics.prove(@parser.parse_term("forall x a:num. (x == a) (mod 8) ==> (x == a) (mod 4)"), t1248))
+  cong_mod_8_imp_mod_4_c.set(@tactics.prove(@parser.parse_term("∀ x a:num. (x == a) (mod 8) ==> (x == a) (mod 4)"), t1248))
 }
 
 ///|
@@ -1957,7 +1957,7 @@ fn step_28() -> Unit raise {
     ((x1250 : @kernel.Thm) => @tactics.x_choose_tac(t1249, x1250))(t1251(x1252))
   })
   let t1258 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1253), t1254), t1255), t1256), t1257)
-  jacobi_2_1mod8_c.set(@tactics.prove(@parser.parse_term("forall d:num. (d == 1) (mod 8) ==> jacobi(2, d) = &1"), t1258))
+  jacobi_2_1mod8_c.set(@tactics.prove(@parser.parse_term("∀ d:num. (d == 1) (mod 8) ==> jacobi(2, d) = &1"), t1258))
 }
 
 ///|
@@ -1973,7 +1973,7 @@ pub fn jacobi_2_1mod8() -> @kernel.Thm {
 /// CONG_1_MOD_4
 fn step_29() -> Unit raise {
   let t1259 = @meson.meson_tac(@list.List([@pocklington.cong_case(), @arith.mult_sym(), @int.arith_rule(@parser.parse_term("1 < 4"))]))
-  cong_1_mod_4_c.set(@tactics.prove(@parser.parse_term("forall d:num. (d == 1) (mod 4) ==> ?q. d = 4 * q + 1"), t1259))
+  cong_1_mod_4_c.set(@tactics.prove(@parser.parse_term("∀ d:num. (d == 1) (mod 4) ==> ?q. d = 4 * q + 1"), t1259))
 }
 
 ///|
@@ -2000,7 +2000,7 @@ fn step_30() -> Unit raise {
     t1264(t1263(x1265))
   })
   let t1268 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1266), t1267)
-  odd_of_1mod4_c.set(@tactics.prove(@parser.parse_term("forall p:num. (p == 1) (mod 4) ==> ODD p"), t1268))
+  odd_of_1mod4_c.set(@tactics.prove(@parser.parse_term("∀ p:num. (p == 1) (mod 4) ==> ODD p"), t1268))
 }
 
 ///|
@@ -2016,7 +2016,7 @@ pub fn odd_of_1mod4() -> @kernel.Thm {
 /// JACOBI_M1_1MOD4
 fn step_31() -> Unit raise {
   let t1269 = @simp.simp_tac(@list.List([@jacobi.jacobi_minus1_cases(), odd_of_1mod4()]))
-  jacobi_m1_1mod4_c.set(@tactics.prove(@parser.parse_term("forall p:num. (p == 1) (mod 4) ==> jacobi(p - 1, p) = &1"), t1269))
+  jacobi_m1_1mod4_c.set(@tactics.prove(@parser.parse_term("∀ p:num. (p == 1) (mod 4) ==> jacobi(p - 1, p) = &1"), t1269))
 }
 
 ///|
@@ -2032,7 +2032,7 @@ pub fn jacobi_m1_1mod4() -> @kernel.Thm {
 /// CONG_3_MOD_8
 fn step_32() -> Unit raise {
   let t1270 = @meson.meson_tac(@list.List([@pocklington.cong_case(), @arith.mult_sym(), @int.arith_rule(@parser.parse_term("3 < 8"))]))
-  cong_3_mod_8_c.set(@tactics.prove(@parser.parse_term("forall d:num. (d == 3) (mod 8) ==> ?q. d = 8 * q + 3"), t1270))
+  cong_3_mod_8_c.set(@tactics.prove(@parser.parse_term("∀ d:num. (d == 3) (mod 8) ==> ?q. d = 8 * q + 3"), t1270))
 }
 
 ///|
@@ -2048,7 +2048,7 @@ pub fn cong_3_mod_8() -> @kernel.Thm {
 /// CONG_3_MOD_4
 fn step_33() -> Unit raise {
   let t1271 = @meson.meson_tac(@list.List([@pocklington.cong_case(), @arith.mult_sym(), @int.arith_rule(@parser.parse_term("3 < 4"))]))
-  cong_3_mod_4_c.set(@tactics.prove(@parser.parse_term("forall d:num. (d == 3) (mod 4) ==> ?q. d = 4 * q + 3"), t1271))
+  cong_3_mod_4_c.set(@tactics.prove(@parser.parse_term("∀ d:num. (d == 3) (mod 4) ==> ?q. d = 4 * q + 3"), t1271))
 }
 
 ///|
@@ -2070,7 +2070,7 @@ fn step_34() -> Unit raise {
     ((x1273 : @kernel.Thm) => @tactics.x_choose_tac(t1272, x1273))(t1274(x1275))
   })
   let t1278 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1276), t1277)
-  odd_of_3mod4_c.set(@tactics.prove(@parser.parse_term("forall p:num. (p == 3) (mod 4) ==> ODD p"), t1278))
+  odd_of_3mod4_c.set(@tactics.prove(@parser.parse_term("∀ p:num. (p == 3) (mod 4) ==> ODD p"), t1278))
 }
 
 ///|
@@ -2102,7 +2102,7 @@ fn step_35() -> Unit raise {
     ((x1280 : @kernel.Thm) => @tactics.x_choose_tac(t1279, x1280))(t1281(x1282))
   })
   let t1293 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1283), t1287), t1289), t1290), t1291), t1292)
-  jacobi_m1_3mod4_c.set(@tactics.prove(@parser.parse_term("forall p:num. (p == 3) (mod 4) ==> jacobi(p - 1, p) = -- &1"), t1293))
+  jacobi_m1_3mod4_c.set(@tactics.prove(@parser.parse_term("∀ p:num. (p == 3) (mod 4) ==> jacobi(p - 1, p) = -- &1"), t1293))
 }
 
 ///|
@@ -2127,7 +2127,7 @@ fn step_36() -> Unit raise {
     ((x1295 : @kernel.Thm) => @tactics.x_choose_tac(t1294, x1295))(t1296(x1297))
   })
   let t1303 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1298), t1299), t1300), t1301), t1302)
-  jacobi_2_3mod8_c.set(@tactics.prove(@parser.parse_term("forall d:num. (d == 3) (mod 8) ==> jacobi(2, d) = -- &1"), t1303))
+  jacobi_2_3mod8_c.set(@tactics.prove(@parser.parse_term("∀ d:num. (d == 3) (mod 8) ==> jacobi(2, d) = -- &1"), t1303))
 }
 
 ///|
@@ -2181,7 +2181,7 @@ fn step_37() -> Unit raise {
     }, x1312))(x1313))
   })
   let t1331 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1314), t1326), t1329), t1330), @int.int_arith_tac)
-  jacobi_p_dprime_c.set(@tactics.prove(@parser.parse_term("forall p d':num.\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> jacobi(p, d') = &1"), t1331))
+  jacobi_p_dprime_c.set(@tactics.prove(@parser.parse_term("∀ p d':num.\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> jacobi(p, d') = &1"), t1331))
 }
 
 ///|
@@ -2214,7 +2214,7 @@ fn step_38() -> Unit raise {
   let t1332 = @parser.parse_term("d':num")
   let t1333 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p:num"), t1332]), @jacobi.jacobi_reciprocity()))
   let t1347 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1333), t1334), t1339), t1343), t1344), t1345), t1346)
-  jacobi_flip_1mod4_c.set(@tactics.prove(@parser.parse_term("forall p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\ (p == 1) (mod 4)\n     ==> jacobi(d', p) = jacobi(p, d')"), t1347))
+  jacobi_flip_1mod4_c.set(@tactics.prove(@parser.parse_term("∀ p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\ (p == 1) (mod 4)\n     ==> jacobi(d', p) = jacobi(p, d')"), t1347))
 }
 
 ///|
@@ -2242,7 +2242,7 @@ fn step_39() -> Unit raise {
   let t1349 = @simp.asm_simp_tac(@list.List([jacobi_m1_1mod4()]))
   let t1348 = @simp.rewrite_tac(@list.List([@jacobi.jacobi_lmul()]))
   let t1358 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1348), t1349), t1350), t1354), t1356), t1357)
-  jacobi_neg_1mod4_c.set(@tactics.prove(@parser.parse_term("forall p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1"), t1358))
+  jacobi_neg_1mod4_c.set(@tactics.prove(@parser.parse_term("∀ p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1"), t1358))
 }
 
 ///|
@@ -2297,7 +2297,7 @@ fn step_40() -> Unit raise {
   let t1366 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("d * (p - 1)"), t1360]), @jacobi.jacobi_prime())), t1361), t1362), t1363), t1364), t1365), @int.int_arith_tac), @tactics.all_tac])
   let t1359 = @tactics.subgoal_then(@parser.parse_term("?x:num. (x EXP 2 == d * (p - 1)) (mod p)"), @tactics.strip_assume_tac)
   let t1391 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1359), t1366), t1367), t1368), t1369), @tactics.conj_tac), t1371), t1375), t1390)
-  jacobi_negative_square_c.set(@tactics.prove(@parser.parse_term("forall p d:num.\n     prime p /\\ jacobi(d * (p - 1),p) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)"), t1391))
+  jacobi_negative_square_c.set(@tactics.prove(@parser.parse_term("∀ p d:num.\n     prime p /\\ jacobi(d * (p - 1),p) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)"), t1391))
 }
 
 ///|
@@ -2325,7 +2325,7 @@ fn step_41() -> Unit raise {
     }
   })
   let t1402 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1395), t1397), t1398), t1399), t1400), t1401)
-  qr_mod_p_1mod4_c.set(@tactics.prove(@parser.parse_term("forall p d:num.\n     prime p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)"), t1402))
+  qr_mod_p_1mod4_c.set(@tactics.prove(@parser.parse_term("∀ p d:num.\n     prime p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 1) (mod 4) /\\ jacobi(p,d) = &1\n     ==> ?x. (x EXP 2 + d == 0) (mod p)"), t1402))
 }
 
 ///|
@@ -2343,7 +2343,7 @@ fn step_42() -> Unit raise {
   let t1404 = @simp.asm_simp_tac(@list.List([jacobi_p_dprime()]))
   let t1403 = @tactics.match_mp_tac(qr_mod_p_1mod4())
   let t1405 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1403), t1404)
-  qr_mod_p_c.set(@tactics.prove(@parser.parse_term("forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)"), t1405))
+  qr_mod_p_c.set(@tactics.prove(@parser.parse_term("∀ p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\\n     ((d' == 1) (mod 8) \\/ (d' == 3) (mod 8)) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)"), t1405))
 }
 
 ///|
@@ -2380,14 +2380,14 @@ fn step_43() -> Unit raise {
   let t1414 = @tactics.match_mp_tac(@prime.divides_mul())
   let t1413 = @simp.rewrite_tac(@list.List([@pocklington.cong_0_divides()]))
   let t1412 = @tactics.exists_tac(@parser.parse_term("z:num"))
-  let t1408 = @simp.asm_rewrite_tac(@list.List([@arith.odd_add(), @int.number_rule(@parser.parse_term("forall x p:num. (x + p == x) (mod p)"))]))
+  let t1408 = @simp.asm_rewrite_tac(@list.List([@arith.odd_add(), @int.number_rule(@parser.parse_term("∀ x p:num. (x + p == x) (mod p)"))]))
   let t1409 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("x + p:num")), t1408)
   let t1407 = @simp.asm_rewrite_tac(@list.List([@pocklington.cong_refl()]))
   let t1410 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("x:num")), t1407), t1409])
   let t1411 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("ODD x")), t1410), @tactics.all_tac])
   let t1406 = @tactics.subgoal_then(@parser.parse_term("?z. ODD z /\\ (z == x) (mod p)"), @tactics.strip_assume_tac)
   let t1432 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1406), t1411), t1412), t1413), t1414), t1415), t1431)
-  qr_lift_2p_c.set(@tactics.prove(@parser.parse_term("forall p d' x:num.\n     ODD p /\\ ODD d' /\\ (x EXP 2 + d' == 0) (mod p)\n     ==> ?z. (z EXP 2 + d' == 0) (mod (2 * p))"), t1432))
+  qr_lift_2p_c.set(@tactics.prove(@parser.parse_term("∀ p d' x:num.\n     ODD p /\\ ODD d' /\\ (x EXP 2 + d' == 0) (mod p)\n     ==> ?z. (z EXP 2 + d' == 0) (mod (2 * p))"), t1432))
 }
 
 ///|
@@ -2421,7 +2421,7 @@ fn step_44() -> Unit raise {
   let t1433 = @parser.parse_term("&d:int")
   let t1434 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("&m:int"), t1433]), lemma_1_7_cong()))
   let t1449 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1434), @tactics.ants_tac), t1448)
-  legendre_tail_c.set(@tactics.prove(@parser.parse_term("forall q d m x:num.\n     (x EXP 2 + d == 0) (mod q) /\\\n     q + 1 = d * m /\\\n     1 < m /\\ 1 <= d\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m"), t1449))
+  legendre_tail_c.set(@tactics.prove(@parser.parse_term("∀ q d m x:num.\n     (x EXP 2 + d == 0) (mod q) /\\\n     q + 1 = d * m /\\\n     1 < m /\\ 1 <= d\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m"), t1449))
 }
 
 ///|
@@ -2463,7 +2463,7 @@ fn step_45() -> Unit raise {
   let t1451 = @parser.parse_term("d:num")
   let t1452 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p:num"), t1451, t1450]), qr_lift_2p()))
   let t1472 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1452), t1453), t1456), t1460), t1461), t1471), @int.arith_tac)
-  legendre_tail_2p_c.set(@tactics.prove(@parser.parse_term("forall p d m:num.\n     ODD p /\\ ODD d /\\\n     (?x. (x EXP 2 + d == 0) (mod p)) /\\\n     2 * p + 1 = d * m /\\\n     1 < m\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m"), t1472))
+  legendre_tail_2p_c.set(@tactics.prove(@parser.parse_term("∀ p d m:num.\n     ODD p /\\ ODD d /\\\n     (?x. (x EXP 2 + d == 0) (mod p)) /\\\n     2 * p + 1 = d * m /\\\n     1 < m\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &m"), t1472))
 }
 
 ///|
@@ -2490,7 +2490,7 @@ fn step_46() -> Unit raise {
   let t1481 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("4 = 2 * 2")), @prime.coprime_rmul(), @prime.coprime_2()])), t1474), t1480])
   let t1473 = @simp.rewrite_tac(@list.List([@prime.coprime_rmul()]))
   let t1482 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1473), @tactics.conj_tac), t1481)
-  coprime_dirichlet_c.set(@tactics.prove(@parser.parse_term("forall a b c:num. ODD a /\\ c * b = 2 * a + 1 ==> coprime(a,4 * b)"), t1482))
+  coprime_dirichlet_c.set(@tactics.prove(@parser.parse_term("∀ a b c:num. ODD a /\\ c * b = 2 * a + 1 ==> coprime(a,4 * b)"), t1482))
 }
 
 ///|
@@ -2520,7 +2520,7 @@ fn step_47() -> Unit raise {
   let t1483 = @parser.parse_term("a:num")
   let t1484 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:num"), t1483]), @dirichlet.dirichlet()))
   let t1494 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1484), @tactics.ants_tac), t1485), t1491), t1492), t1493)
-  dirichlet_prime_cong_c.set(@tactics.prove(@parser.parse_term("forall m a:num. 1 < m /\\ coprime(a,m)\n            ==> ?p. prime p /\\ (p == a) (mod m)"), t1494))
+  dirichlet_prime_cong_c.set(@tactics.prove(@parser.parse_term("∀ m a:num. 1 < m /\\ coprime(a,m)\n            ==> ?p. prime p /\\ (p == a) (mod m)"), t1494))
 }
 
 ///|
@@ -2540,7 +2540,7 @@ fn step_48() -> Unit raise {
   let t1496 = @parser.parse_term("8*k+3")
   let t1497 = @tactics.match_mp_tac(@bool.specl(@list.List([@parser.parse_term("4*k+1"), t1496, t1495]), coprime_dirichlet()))
   let t1499 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(dirichlet_prime_cong())), @tactics.conj_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t1497), t1498), @int.arith_tac)
-  dirichlet_prime_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?p. prime p /\\ (p == 4 * k + 1) (mod (4 * (8 * k + 3)))"), t1499))
+  dirichlet_prime_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?p. prime p /\\ (p == 4 * k + 1) (mod (4 * (8 * k + 3)))"), t1499))
 }
 
 ///|
@@ -2555,7 +2555,7 @@ pub fn dirichlet_prime() -> @kernel.Thm {
 ///|
 /// COPRIME_FROM_MULTP1
 fn step_49() -> Unit raise {
-  coprime_from_multp1_c.set(@int.number_rule(@parser.parse_term("forall p c d m:num. prime p /\\ c * p + 1 = d * m ==> coprime(p,d)")))
+  coprime_from_multp1_c.set(@int.number_rule(@parser.parse_term("∀ p c d m:num. prime p /\\ c * p + 1 = d * m ==> coprime(p,d)")))
 }
 
 ///|
@@ -2654,7 +2654,7 @@ fn step_50() -> Unit raise {
   let t1503 = @tactics.subgoal_then(@parser.parse_term("?j. p = 4*(8*k+3)*j + (4*k+1)"), (x1502 : @kernel.Thm) => @tactics.x_choose_tac(t1501, x1502))
   let t1500 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("p:num"))(@tactics.strip_assume_tac))
   let t1568 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.spec(@parser.parse_term("k:num"), dirichlet_prime()))), t1500), t1503), t1508), t1509), t1510), t1511), t1516), t1520), t1524), t1528), t1530), t1534), t1537), t1541), t1542), t1546), t1550), t1554), t1559), t1562), t1563), t1567), @int.arith_tac)
-  three_sq_3mod8_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 3)"), t1568))
+  three_sq_3mod8_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 3)"), t1568))
 }
 
 ///|
@@ -2686,7 +2686,7 @@ fn step_51() -> Unit raise {
   let t1569 = @parser.parse_term("w:int")
   let t1571 = @tactics.x_choose_then(@parser.parse_term("v:int"))((x1570 : @kernel.Thm) => @tactics.x_choose_tac(t1569, x1570))
   let t1584 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("u:int"))(t1571))), t1577), t1580), t1581), t1582), t1583)
-  three_sq_int_to_num_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n)\n     ==> (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n)"), t1584))
+  three_sq_int_to_num_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n)\n     ==> (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n)"), t1584))
 }
 
 ///|
@@ -2703,7 +2703,7 @@ pub fn three_sq_int_to_num() -> @kernel.Thm {
 fn step_52() -> Unit raise {
   let t1585 = @simp.rewrite_tac(@list.List([three_sq_3mod8()]))
   let t1586 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(three_sq_int_to_num())), t1585)
-  three_sq_3mod8_num_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?u v w:num. u EXP 2 + v EXP 2 + w EXP 2 = 8 * k + 3"), t1586))
+  three_sq_3mod8_num_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?u v w:num. u EXP 2 + v EXP 2 + w EXP 2 = 8 * k + 3"), t1586))
 }
 
 ///|
@@ -2739,7 +2739,7 @@ fn step_53() -> Unit raise {
   let t1589 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n:num"), t1588]), @arith.division()))
   let t1587 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@arith.mod_exp_mod())]))
   let t1602 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.simp_tac(@list.List([@int.cong_v1(), @calc_num.arith_eq()]))), t1587), t1589), t1590), t1595), t1596), t1600), t1601)
-  square_mod_8_c.set(@tactics.prove(@parser.parse_term("forall n. (n EXP 2 == 0) (mod 8) \\/\n       (n EXP 2 == 1) (mod 8) \\/\n       (n EXP 2 == 4) (mod 8)"), t1602))
+  square_mod_8_c.set(@tactics.prove(@parser.parse_term("∀ n. (n EXP 2 == 0) (mod 8) \\/\n       (n EXP 2 == 1) (mod 8) \\/\n       (n EXP 2 == 4) (mod 8)"), t1602))
 }
 
 ///|
@@ -2786,7 +2786,7 @@ fn step_54() -> Unit raise {
     })(x1609))
   }, @list.List([@parser.parse_term("z:num"), t1611, t1610]))
   let t1625 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1612), t1615), t1621), t1622), t1623), t1624)
-  three_squares_mod_8_c.set(@tactics.prove(@parser.parse_term("forall x y z. ~((x EXP 2 + y EXP 2 + z EXP 2 == 7) (mod 8))"), t1625))
+  three_squares_mod_8_c.set(@tactics.prove(@parser.parse_term("∀ x y z. ~((x EXP 2 + y EXP 2 + z EXP 2 == 7) (mod 8))"), t1625))
 }
 
 ///|
@@ -2837,7 +2837,7 @@ fn step_55() -> Unit raise {
     })(x1632))
   }, @list.List([@parser.parse_term("x:num"), t1634, t1633]))
   let t1653 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1635), t1636), t1637), t1638), t1639), t1643), t1645), t1649), t1650), t1651), t1652)
-  three_squares_4_lemma_c.set(@tactics.prove(@parser.parse_term("forall x y z.\n     4 divides (x EXP 2 + y EXP 2 + z EXP 2)\n     ==> EVEN x /\\ EVEN y /\\ EVEN z"), t1653))
+  three_squares_4_lemma_c.set(@tactics.prove(@parser.parse_term("∀ x y z.\n     4 divides (x EXP 2 + y EXP 2 + z EXP 2)\n     ==> EVEN x /\\ EVEN y /\\ EVEN z"), t1653))
 }
 
 ///|
@@ -2885,7 +2885,7 @@ fn step_56() -> Unit raise {
     })(t1660(x1661))
   })
   let t1681 = @tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1662), t1665), t1666), t1668), @int.number_tac), t1680]))
-  not_three_squares_c.set(@tactics.prove(@parser.parse_term("forall a m x y z. ~(4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2)"), t1681))
+  not_three_squares_c.set(@tactics.prove(@parser.parse_term("∀ a m x y z. ~(4 EXP a * (8 * m + 7) = x EXP 2 + y EXP 2 + z EXP 2)"), t1681))
 }
 
 ///|
@@ -2914,7 +2914,7 @@ fn step_57() -> Unit raise {
   let t1682 = @parser.parse_term("z:num")
   let t1684 = @tactics.x_choose_then(@parser.parse_term("y:num"))((x1683 : @kernel.Thm) => @tactics.x_choose_tac(t1682, x1683))
   let t1694 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("x:num"))(t1684))), t1690), t1691), t1692), t1693)
-  three_sq_double_c.set(@tactics.prove(@parser.parse_term("forall n.\n     (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = n)\n     ==> (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = 4 * n)"), t1694))
+  three_sq_double_c.set(@tactics.prove(@parser.parse_term("∀ n.\n     (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = n)\n     ==> (?x y z. x EXP 2 + y EXP 2 + z EXP 2 = 4 * n)"), t1694))
 }
 
 ///|
@@ -2935,7 +2935,7 @@ fn step_58() -> Unit raise {
   let t1696 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@arith.not_even())]))
   let t1695 = @simp.rewrite_tac(@list.List([@arith.odd_sub(), @calc_num.arith()]))
   let t1700 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1695), t1696), t1697), t1699)
-  odd_pred_even_c.set(@tactics.prove(@parser.parse_term("forall n:num. 1 <= n /\\ EVEN n ==> ODD(n - 1)"), t1700))
+  odd_pred_even_c.set(@tactics.prove(@parser.parse_term("∀ n:num. 1 <= n /\\ EVEN n ==> ODD(n - 1)"), t1700))
 }
 
 ///|
@@ -2951,7 +2951,7 @@ pub fn odd_pred_even() -> @kernel.Thm {
 /// CONG_2_MOD_4
 fn step_59() -> Unit raise {
   let t1701 = @meson.meson_tac(@list.List([@pocklington.cong_case(), @arith.mult_sym(), @int.arith_rule(@parser.parse_term("2 < 4"))]))
-  cong_2_mod_4_c.set(@tactics.prove(@parser.parse_term("forall n:num. (n == 2) (mod 4) ==> ?t. n = 4 * t + 2"), t1701))
+  cong_2_mod_4_c.set(@tactics.prove(@parser.parse_term("∀ n:num. (n == 2) (mod 4) ==> ?t. n = 4 * t + 2"), t1701))
 }
 
 ///|
@@ -2975,7 +2975,7 @@ fn step_60() -> Unit raise {
   let t1703 = @simp.asm_rewrite_tac(@list.List([]))
   let t1702 = @tactics.match_mp_tac(qr_mod_p_1mod4())
   let t1710 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1702), t1703), t1704), t1705), @tactics.conj_tac), t1709)
-  qr_mod_p_18_c.set(@tactics.prove(@parser.parse_term("forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\ (d' == 1) (mod 4) /\\\n     (p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)"), t1710))
+  qr_mod_p_18_c.set(@tactics.prove(@parser.parse_term("∀ p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 1) (mod 4) /\\ (d' == 1) (mod 4) /\\\n     (p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)"), t1710))
 }
 
 ///|
@@ -2998,7 +2998,7 @@ fn step_61() -> Unit raise {
   let t1717 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("4 = 2 * 2")), @prime.coprime_rmul()])), t1712), t1713), t1714), t1716])
   let t1711 = @simp.rewrite_tac(@list.List([@prime.coprime_rmul()]))
   let t1718 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1711), @tactics.conj_tac), t1717)
-  coprime_dirichlet_18_c.set(@tactics.prove(@parser.parse_term("forall n:num. 1 <= n /\\ EVEN n ==> coprime(n - 1, 4 * n)"), t1718))
+  coprime_dirichlet_18_c.set(@tactics.prove(@parser.parse_term("∀ n:num. 1 <= n /\\ EVEN n ==> coprime(n - 1, 4 * n)"), t1718))
 }
 
 ///|
@@ -3016,7 +3016,7 @@ fn step_62() -> Unit raise {
   let t1720 = @simp.asm_simp_tac(@list.List([coprime_dirichlet_18()]))
   let t1719 = @tactics.match_mp_tac(dirichlet_prime_cong())
   let t1721 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1719), t1720), @int.asm_arith_tac)
-  dirichlet_prime_18_c.set(@tactics.prove(@parser.parse_term("forall n:num. 1 <= n /\\ EVEN n ==> ?p. prime p /\\ (p == n - 1) (mod (4 * n))"), t1721))
+  dirichlet_prime_18_c.set(@tactics.prove(@parser.parse_term("∀ n:num. 1 <= n /\\ EVEN n ==> ?p. prime p /\\ (p == n - 1) (mod (4 * n))"), t1721))
 }
 
 ///|
@@ -3154,7 +3154,7 @@ fn step_63() -> Unit raise {
     t1726(t1725(x1727))
   })
   let t1821 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1728), t1729), t1730), t1731), t1732), t1733), t1736), t1741), t1742), t1746), t1748), t1752), t1754), t1758), t1762), t1766), t1774), t1778), t1784), t1788), t1792), t1796), t1809), t1812), t1814), t1818), t1819), t1820), @int.arith_tac)
-  three_sq_2mod4_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n"), t1821))
+  three_sq_2mod4_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &n"), t1821))
 }
 
 ///|
@@ -3174,7 +3174,7 @@ fn step_64() -> Unit raise {
   let t1823 = @parser.parse_term("8*k+1")
   let t1824 = @tactics.match_mp_tac(@bool.specl(@list.List([@parser.parse_term("12*k+1"), t1823, t1822]), coprime_dirichlet()))
   let t1826 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(dirichlet_prime_cong())), @tactics.conj_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t1824), t1825), @int.arith_tac)
-  dirichlet_prime_1mod8_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?p. prime p /\\ (p == 12 * k + 1) (mod (4 * (8 * k + 1)))"), t1826))
+  dirichlet_prime_1mod8_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?p. prime p /\\ (p == 12 * k + 1) (mod (4 * (8 * k + 1)))"), t1826))
 }
 
 ///|
@@ -3285,7 +3285,7 @@ fn step_65() -> Unit raise {
   }, @list.List([@parser.parse_term("&1:int"), t1831, t1830]))
   let t1835 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t1832), t1833), t1834), @tactics.all_tac])
   let t1905 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("k = 0"))), t1835), t1836), t1837), t1840), t1845), t1846), t1847), t1848), t1853), t1857), t1861), t1865), t1867), t1871), t1874), t1878), t1879), t1883), t1887), t1891), t1896), t1899), t1900), t1904), @int.asm_arith_tac)
-  three_sq_1mod8_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 1)"), t1905))
+  three_sq_1mod8_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 1)"), t1905))
 }
 
 ///|
@@ -3329,7 +3329,7 @@ fn step_66() -> Unit raise {
   let t1906 = @parser.parse_term("d':num")
   let t1907 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p:num"), t1906]), @jacobi.jacobi_reciprocity()))
   let t1930 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1907), t1908), t1913), t1918), t1922), t1923), t1927), t1928), t1929), @int.int_arith_tac)
-  jacobi_flip_3mod4_c.set(@tactics.prove(@parser.parse_term("forall p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8)\n     ==> jacobi(d', p) = -- jacobi(p, d')"), t1930))
+  jacobi_flip_3mod4_c.set(@tactics.prove(@parser.parse_term("∀ p d':num.\n     ODD p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8)\n     ==> jacobi(d', p) = -- jacobi(p, d')"), t1930))
 }
 
 ///|
@@ -3356,7 +3356,7 @@ fn step_67() -> Unit raise {
   let t1932 = @simp.asm_simp_tac(@list.List([jacobi_m1_3mod4()]))
   let t1931 = @simp.rewrite_tac(@list.List([@jacobi.jacobi_lmul()]))
   let t1940 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1931), t1932), t1936), t1938), t1939), @int.int_arith_tac)
-  jacobi_neg_3mod4_c.set(@tactics.prove(@parser.parse_term("forall p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 3) (mod 4) /\\ (d == 3) (mod 8) /\\\n     jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1"), t1940))
+  jacobi_neg_3mod4_c.set(@tactics.prove(@parser.parse_term("∀ p d:num.\n     ODD p /\\ ODD d /\\ coprime(p,d) /\\\n     (p == 3) (mod 4) /\\ (d == 3) (mod 8) /\\\n     jacobi(p,d) = &1\n     ==> jacobi(d * (p - 1),p) = &1"), t1940))
 }
 
 ///|
@@ -3384,7 +3384,7 @@ fn step_68() -> Unit raise {
     }
   })
   let t1951 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1944), t1946), t1947), t1948), t1949), t1950)
-  qr_mod_p_5mod8_c.set(@tactics.prove(@parser.parse_term("forall p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)"), t1951))
+  qr_mod_p_5mod8_c.set(@tactics.prove(@parser.parse_term("∀ p d':num.\n     prime p /\\ ODD d' /\\ coprime(p,d') /\\\n     (p == 3) (mod 4) /\\ (d' == 3) (mod 8) /\\\n     (2 * p == d' - 1) (mod d')\n     ==> ?x. (x EXP 2 + d' == 0) (mod p)"), t1951))
 }
 
 ///|
@@ -3404,7 +3404,7 @@ fn step_69() -> Unit raise {
   let t1953 = @parser.parse_term("8*k+5")
   let t1954 = @tactics.match_mp_tac(@bool.specl(@list.List([@parser.parse_term("12*k+7"), t1953, t1952]), coprime_dirichlet()))
   let t1956 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(dirichlet_prime_cong())), @tactics.conj_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t1954), t1955), @int.arith_tac)
-  dirichlet_prime_5mod8_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?p. prime p /\\ (p == 12 * k + 7) (mod (4 * (8 * k + 5)))"), t1956))
+  dirichlet_prime_5mod8_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?p. prime p /\\ (p == 12 * k + 7) (mod (4 * (8 * k + 5)))"), t1956))
 }
 
 ///|
@@ -3503,7 +3503,7 @@ fn step_70() -> Unit raise {
   let t1960 = @tactics.subgoal_then(@parser.parse_term("?j. p = 4*(8*k+5)*j + (12*k+7)"), (x1959 : @kernel.Thm) => @tactics.x_choose_tac(t1958, x1959))
   let t1957 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("p:num"))(@tactics.strip_assume_tac))
   let t2025 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.spec(@parser.parse_term("k:num"), dirichlet_prime_5mod8()))), t1957), t1960), t1965), t1966), t1967), t1968), t1973), t1977), t1981), t1985), t1987), t1991), t1994), t1998), t1999), t2003), t2007), t2011), t2016), t2019), t2020), t2024), @int.arith_tac)
-  three_sq_5mod8_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 5)"), t2025))
+  three_sq_5mod8_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?u v w:int. u pow 2 + v pow 2 + w pow 2 = &(8 * k + 5)"), t2025))
 }
 
 ///|
@@ -3520,7 +3520,7 @@ pub fn three_sq_5mod8() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   let t2026 = @simp.rewrite_tac(@list.List([three_sq_1mod8()]))
   let t2027 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(three_sq_int_to_num())), t2026)
-  three_sq_1mod8_num_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 1"), t2027))
+  three_sq_1mod8_num_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 1"), t2027))
 }
 
 ///|
@@ -3537,7 +3537,7 @@ pub fn three_sq_1mod8_num() -> @kernel.Thm {
 fn step_72() -> Unit raise {
   let t2028 = @simp.rewrite_tac(@list.List([three_sq_5mod8()]))
   let t2029 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(three_sq_int_to_num())), t2028)
-  three_sq_5mod8_num_c.set(@tactics.prove(@parser.parse_term("forall k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 5"), t2029))
+  three_sq_5mod8_num_c.set(@tactics.prove(@parser.parse_term("∀ k:num. ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = 8 * k + 5"), t2029))
 }
 
 ///|
@@ -3556,7 +3556,7 @@ fn step_73() -> Unit raise {
   let t2031 = @tactics.match_mp_tac(three_sq_2mod4())
   let t2030 = @tactics.match_mp_tac(three_sq_int_to_num())
   let t2033 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2030), t2031), t2032)
-  three_sq_2mod4_num_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n"), t2033))
+  three_sq_2mod4_num_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     1 < n /\\ (n == 2) (mod 4)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n"), t2033))
 }
 
 ///|
@@ -3599,7 +3599,7 @@ fn step_74() -> Unit raise {
   let t2035 = @bool.conjunct1(@arith.division_simp())
   let t2034 = @parser.parse_term("8")
   let t2055 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n:num"), t2034]), t2035))), t2036), t2046), @tactics.strip_tac), t2047), t2048), t2049), t2050), t2052), t2053), t2054)
-  three_sq_residue_num_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     (n MOD 8 = 1 \\/ n MOD 8 = 2 \\/ n MOD 8 = 3 \\/\n      n MOD 8 = 5 \\/ n MOD 8 = 6)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n"), t2055))
+  three_sq_residue_num_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     (n MOD 8 = 1 \\/ n MOD 8 = 2 \\/ n MOD 8 = 3 \\/\n      n MOD 8 = 5 \\/ n MOD 8 = 6)\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n"), t2055))
 }
 
 ///|
@@ -3624,7 +3624,7 @@ fn step_75() -> Unit raise {
     }
   })
   let t2063 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@int.divides_mod()]))), t2059), t2062)
-  mod8_04_div4_c.set(@tactics.prove(@parser.parse_term("forall n:num. (n MOD 8 = 0 \\/ n MOD 8 = 4) ==> 4 divides n"), t2063))
+  mod8_04_div4_c.set(@tactics.prove(@parser.parse_term("∀ n:num. (n MOD 8 = 0 \\/ n MOD 8 = 4) ==> 4 divides n"), t2063))
 }
 
 ///|
@@ -3681,7 +3681,7 @@ fn step_76() -> Unit raise {
   let t2066 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:num"), t2065]))
   let t2064 = @simp.rewrite_tac(@list.List([@class.not_exists_thm()]))
   let t2096 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t2064), t2066), @tactics.disch_tac), t2067), t2068), t2073), t2074), t2079), t2085), t2088), t2089), t2093), t2095)
-  descent_not_form_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     4 divides n /\\ ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ~(?a m. n DIV 4 = 4 EXP a * (8 * m + 7))"), t2096))
+  descent_not_form_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     4 divides n /\\ ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ~(?a m. n DIV 4 = 4 EXP a * (8 * m + 7))"), t2096))
 }
 
 ///|
@@ -3719,7 +3719,7 @@ fn step_77() -> Unit raise {
     })(t2100(x2101))
   })
   let t2112 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2102), t2106), t2110), t2111)
-  div4_less_c.set(@tactics.prove(@parser.parse_term("forall n:num. ~(n = 0) /\\ 4 divides n ==> n DIV 4 < n"), t2112))
+  div4_less_c.set(@tactics.prove(@parser.parse_term("∀ n:num. ~(n = 0) /\\ 4 divides n ==> n DIV 4 < n"), t2112))
 }
 
 ///|
@@ -3747,7 +3747,7 @@ fn step_78() -> Unit raise {
     }
   }, @list.List([@parser.parse_term("0:num"), t2116]))
   let t2123 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t2117), t2118), t2121), t2122), @int.arith_tac)
-  mod8_7_form_c.set(@tactics.prove(@parser.parse_term("forall n:num. n MOD 8 = 7 ==> ?a m. n = 4 EXP a * (8 * m + 7)"), t2123))
+  mod8_7_form_c.set(@tactics.prove(@parser.parse_term("∀ n:num. n MOD 8 = 7 ==> ?a m. n = 4 EXP a * (8 * m + 7)"), t2123))
 }
 
 ///|
@@ -3841,7 +3841,7 @@ fn step_79() -> Unit raise {
   let t2125 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
   let t2124 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t2184 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), t2124), @tactics.strip_tac), @tactics.disch_tac), t2125), t2133), t2134), t2139), t2140), t2142), t2146), t2148), t2152), t2164), t2170), t2174), t2183)
-  three_sq_not_form_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n"), t2184))
+  three_sq_not_form_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     ~(?a m. n = 4 EXP a * (8 * m + 7))\n     ==> ?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n"), t2184))
 }
 
 ///|
@@ -3857,7 +3857,7 @@ pub fn three_sq_not_form() -> @kernel.Thm {
 /// LEGENDRE_THREE_SQUARES
 fn step_80() -> Unit raise {
   let t2185 = @meson.meson_tac(@list.List([not_three_squares(), three_sq_not_form()]))
-  legendre_three_squares_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n) <=>\n     ~(?a m. n = 4 EXP a * (8 * m + 7))"), t2185))
+  legendre_three_squares_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     (?x y z:num. x EXP 2 + y EXP 2 + z EXP 2 = n) <=>\n     ~(?a m. n = 4 EXP a * (8 * m + 7))"), t2185))
 }
 
 ///|
@@ -3874,7 +3874,7 @@ pub fn legendre_three_squares() -> @kernel.Thm {
 fn step_81() -> Unit raise {
   let t2186 = @parser.parse_term("&8:int")
   let t2187 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("x:int"), t2186]), @int.int_division()))), @int.int_arith_tac)
-  rem_8_cases_c.set(@tactics.prove(@parser.parse_term("forall x:int. x rem &8 = &0 \\/ x rem &8 = &1 \\/ x rem &8 = &2 \\/ x rem &8 = &3 \\/\n           x rem &8 = &4 \\/ x rem &8 = &5 \\/ x rem &8 = &6 \\/ x rem &8 = &7"), t2187))
+  rem_8_cases_c.set(@tactics.prove(@parser.parse_term("∀ x:int. x rem &8 = &0 \\/ x rem &8 = &1 \\/ x rem &8 = &2 \\/ x rem &8 = &3 \\/\n           x rem &8 = &4 \\/ x rem &8 = &5 \\/ x rem &8 = &6 \\/ x rem &8 = &7"), t2187))
 }
 
 ///|
@@ -3893,7 +3893,7 @@ fn step_82() -> Unit raise {
   let t2189 = @simp.asm_rewrite_tac(@list.List([]))
   let t2188 = @tactics.mp_tac(@bool.spec(@parser.parse_term("x:int"), rem_8_cases()))
   let t2191 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@int.int_pow_rem())]))), t2188), @tactics.strip_tac), t2189), t2190)
-  sq_mod_8_c.set(@tactics.prove(@parser.parse_term("forall x:int.\n     (x pow 2) rem &8 = &0 \\/\n     (x pow 2) rem &8 = &1 \\/\n     (x pow 2) rem &8 = &4"), t2191))
+  sq_mod_8_c.set(@tactics.prove(@parser.parse_term("∀ x:int.\n     (x pow 2) rem &8 = &0 \\/\n     (x pow 2) rem &8 = &1 \\/\n     (x pow 2) rem &8 = &4"), t2191))
 }
 
 ///|
@@ -3920,7 +3920,7 @@ fn step_83() -> Unit raise {
   })
   let t2192 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_rem_eq_0())]))
   let t2201 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@int.int_pow_rem())]))), t2192), t2196), t2197), t2198), @tactics.strip_tac), t2199), t2200)
-  odd_sq_mod_8_c.set(@tactics.prove(@parser.parse_term("forall x:int. (x pow 2 rem &8 = &1) <=> ~(&2 divides x)"), t2201))
+  odd_sq_mod_8_c.set(@tactics.prove(@parser.parse_term("∀ x:int. (x pow 2 rem &8 = &1) <=> ~(&2 divides x)"), t2201))
 }
 
 ///|
@@ -3945,7 +3945,7 @@ fn step_84() -> Unit raise {
   })
   let t2202 = @simp.asm_rewrite_tac(@list.List([]))
   let t2209 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t2202), t2206), t2207), t2208)
-  sum3_mod8_core_c.set(@tactics.prove(@parser.parse_term("forall pu pv pw:int.\n     (pu = &0 \\/ pu = &1 \\/ pu = &4) /\\\n     (pv = &0 \\/ pv = &1 \\/ pv = &4) /\\\n     (pw = &0 \\/ pw = &1 \\/ pw = &4) /\\\n     (pu + pv + pw) rem &8 = &3\n     ==> pu = &1 /\\ pv = &1 /\\ pw = &1"), t2209))
+  sum3_mod8_core_c.set(@tactics.prove(@parser.parse_term("∀ pu pv pw:int.\n     (pu = &0 \\/ pu = &1 \\/ pu = &4) /\\\n     (pv = &0 \\/ pv = &1 \\/ pv = &4) /\\\n     (pw = &0 \\/ pw = &1 \\/ pw = &4) /\\\n     (pu + pv + pw) rem &8 = &3\n     ==> pu = &1 /\\ pv = &1 /\\ pw = &1"), t2209))
 }
 
 ///|
@@ -3974,7 +3974,7 @@ fn step_85() -> Unit raise {
   let t2211 = @tactics.match_mp_tac(sum3_mod8_core())
   let t2210 = @simp.rewrite_tac(@list.List([@equal.gsym(odd_sq_mod_8())]))
   let t2221 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t2210), t2211), t2212), t2216), t2220)
-  three_sq_all_odd_c.set(@tactics.prove(@parser.parse_term("forall u v w n:int.\n     u pow 2 + v pow 2 + w pow 2 = &8 * n + &3\n     ==> ~(&2 divides u) /\\ ~(&2 divides v) /\\ ~(&2 divides w)"), t2221))
+  three_sq_all_odd_c.set(@tactics.prove(@parser.parse_term("∀ u v w n:int.\n     u pow 2 + v pow 2 + w pow 2 = &8 * n + &3\n     ==> ~(&2 divides u) /\\ ~(&2 divides v) /\\ ~(&2 divides w)"), t2221))
 }
 
 ///|
@@ -4001,7 +4001,7 @@ fn step_86() -> Unit raise {
   let t2224 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("u:int"), t2223]), @int.int_division()))
   let t2222 = @tactics.exists_tac(@parser.parse_term("u div &2"))
   let t2231 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2222), t2224), t2225), t2229), t2230)
-  int_odd_form_c.set(@tactics.prove(@parser.parse_term("forall u:int. ~(&2 divides u) ==> ?a. u = &2 * a + &1"), t2231))
+  int_odd_form_c.set(@tactics.prove(@parser.parse_term("∀ u:int. ~(&2 divides u) ==> ?a. u = &2 * a + &1"), t2231))
 }
 
 ///|
@@ -4040,7 +4040,7 @@ fn step_87() -> Unit raise {
   })
   let t2250 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("num_of_int a")), t2235), t2237), t2239), t2240), @int.int_arith_tac), t2249])
   let t2251 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.disj_cases_tac(@int.int_arith(@parser.parse_term("&0 <= a \\/ a < &0")))), t2250)
-  int_tri_nat_c.set(@tactics.prove(@parser.parse_term("forall a:int. ?k:num. a * (a + &1) = &(k * (k + 1))"), t2251))
+  int_tri_nat_c.set(@tactics.prove(@parser.parse_term("∀ a:int. ?k:num. a * (a + &1) = &(k * (k + 1))"), t2251))
 }
 
 ///|
@@ -4102,7 +4102,7 @@ fn step_88() -> Unit raise {
   let t2252 = @parser.parse_term("w:int")
   let t2254 = @tactics.x_choose_then(@parser.parse_term("v:int"))((x2253 : @kernel.Thm) => @tactics.x_choose_tac(t2252, x2253))
   let t2301 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("u:int"))(t2254))), t2258), t2259), @tactics.strip_tac), t2260), t2261), t2264), t2265), t2266), t2269), t2270), t2271), t2274), t2278), t2280), t2281), t2284), t2285), t2288), t2289), t2292), t2298), t2299), t2300)
-  gauss_tri_from_3sq_c.set(@tactics.prove(@parser.parse_term("forall n.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &8 * &n + &3)\n     ==> ?a b c:num. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)"), t2301))
+  gauss_tri_from_3sq_c.set(@tactics.prove(@parser.parse_term("∀ n.\n     (?u v w:int. u pow 2 + v pow 2 + w pow 2 = &8 * &n + &3)\n     ==> ?a b c:num. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)"), t2301))
 }
 
 ///|
@@ -4119,7 +4119,7 @@ pub fn gauss_tri_from_3sq() -> @kernel.Thm {
 fn step_89() -> Unit raise {
   let t2302 = @simp.rewrite_tac(@list.List([@int.int_of_num_clauses(), three_sq_3mod8()]))
   let t2303 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(gauss_tri_from_3sq())), t2302)
-  gauss_triangular_c.set(@tactics.prove(@parser.parse_term("forall n:num. ?a b c. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)"), t2303))
+  gauss_triangular_c.set(@tactics.prove(@parser.parse_term("∀ n:num. ?a b c. 2 * n = a * (a + 1) + b * (b + 1) + c * (c + 1)"), t2303))
 }
 
 ///|
@@ -4185,7 +4185,7 @@ fn step_91() -> Unit raise {
   let t2306 = @tactics.x_choose_then(@parser.parse_term("b:num"))((x2305 : @kernel.Thm) => @tactics.x_choose_tac(t2304, x2305))
   let t2307 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("a:num"))(t2306))
   let t2339 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), gauss_triangular()))), t2307), t2311), t2313), t2314), t2322), t2328), t2329), t2330), t2338)
-  gauss_triangular_sum_c.set(@tactics.prove(@parser.parse_term("forall n:num.\n     ?a b c. triangular a /\\ triangular b /\\ triangular c /\\\n             n = a + b + c"), t2339))
+  gauss_triangular_sum_c.set(@tactics.prove(@parser.parse_term("∀ n:num.\n     ?a b c. triangular a /\\ triangular b /\\ triangular c /\\\n             n = a + b + c"), t2339))
 }
 
 ///|

@@ -98,20 +98,20 @@ fn step_1() -> Unit raise {
   let t12 = @simp.asm_rewrite_tac(@list.List([]))
   let t11 = @tactics.match_mp_tac(@wf.minimal_bad_sequence())
   let t87 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@arith.not_lt())])), t11), t12), @tactics.conj_tac), t13), t14), t15), t16), t18), @tactics.strip_tac), t19), t20), t28), t29), @tactics.strip_tac), t34), t35), t86])
-  let t10 = @tactics.subgoal_then(@parser.parse_term("?x. bad (SUC n) (x:num->num->num) /\\\n        forall y j. bad (SUC n) y /\\ (forall i. i < j ==> y i = x i)\n              ==> x j n <= y j n"), @tactics.strip_assume_tac)
+  let t10 = @tactics.subgoal_then(@parser.parse_term("?x. bad (SUC n) (x:num->num->num) /\\\n        ∀ y j. bad (SUC n) y /\\ (∀ i. i < j ==> y i = x i)\n              ==> x j n <= y j n"), @tactics.strip_assume_tac)
   let t9 = @simp.rewrite_tac(@list.List([@equal.gsym(@class.not_exists_thm())]))
   let t7 = @meson.meson_tac(@list.List([@arith.lt()]))
   let t8 = @list.List([@tactics.then_tac(@simp.expand_tac("bad"), t7), @tactics.all_tac])
   let t5 = @meson.meson_tac(@list.List([@arith.not_lt()]))
   let t6 = @list.List([@tactics.all_tac, @tactics.then_tac(@simp.expand_tac("bad"), t5)])
-  let t4 = @tactics.subgoal_then(@parser.parse_term("forall n:num x:num->num->num. ~(bad n x)"), fn(x1 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t4 = @tactics.subgoal_then(@parser.parse_term("∀ n:num x:num->num->num. ~(bad n x)"), fn(x1 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2 = @tactics.mp_tac(x1)
     fn(x3 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2(x3)
     }
   })
-  let t88 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.abbrev_tac(@parser.parse_term("bad = \\n x:num->num->num. forall i j. i < j ==> ?k. k < n /\\ x j k < x i k")), t4), t6), @nums.induct_tac), t8), t9), @tactics.disch_tac), t10), t87)
-  dickson_c.set(@tactics.prove(@parser.parse_term("forall n x:num->num->num. ?i j. i < j /\\ (forall k. k < n ==> x i k <= x j k)"), t88))
+  let t88 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.abbrev_tac(@parser.parse_term("bad = \\n x:num->num->num. ∀ i j. i < j ==> ?k. k < n /\\ x j k < x i k")), t4), t6), @nums.induct_tac), t8), t9), @tactics.disch_tac), t10), t87)
+  dickson_c.set(@tactics.prove(@parser.parse_term("∀ n x:num->num->num. ?i j. i < j /\\ (∀ k. k < n ==> x i k <= x j k)"), t88))
 }
 
 ///|

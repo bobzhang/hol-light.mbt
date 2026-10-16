@@ -168,7 +168,7 @@ pub fn qjoin() -> @kernel.Thm {
 /// QLE_REFL
 fn step_12() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([qle()]))
-  qle_refl_c.set(@tactics.prove(@parser.parse_term("forall x. x <<= x"), t2))
+  qle_refl_c.set(@tactics.prove(@parser.parse_term("∀ x. x <<= x"), t2))
 }
 
 ///|
@@ -186,7 +186,7 @@ fn step_13() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([qle(), quat_distinct()]))
   let t3 = @tactics.repeat_tac(@tactics.conj_tac)
   let t5 = @tactics.then_tac(@tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(quat_induct()), t3)), t4)
-  qle_trans_c.set(@tactics.prove(@parser.parse_term("forall x y z. x <<= y /\\ y <<= z ==> x <<= z"), t5))
+  qle_trans_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x <<= y /\\ y <<= z ==> x <<= z"), t5))
 }
 
 ///|
@@ -204,7 +204,7 @@ fn step_14() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([qjoin(), qle(), quat_distinct()]))
   let t6 = @tactics.repeat_tac(@tactics.conj_tac)
   let t8 = @tactics.then_tac(@tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(quat_induct()), t6)), t7)
-  qle_ljoin_c.set(@tactics.prove(@parser.parse_term("forall x y z. x && y <<= z <=> x <<= z /\\ y <<= z"), t8))
+  qle_ljoin_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x && y <<= z <=> x <<= z /\\ y <<= z"), t8))
 }
 
 ///|
@@ -222,7 +222,7 @@ fn step_15() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([qjoin(), qle(), quat_distinct()]))
   let t9 = @tactics.repeat_tac(@tactics.conj_tac)
   let t11 = @tactics.then_tac(@tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(quat_induct()), t9)), t10)
-  qle_rjoin_c.set(@tactics.prove(@parser.parse_term("forall x y. x <<= x && y /\\ y <<= x && y"), t11))
+  qle_rjoin_c.set(@tactics.prove(@parser.parse_term("∀ x y. x <<= x && y /\\ y <<= x && y"), t11))
 }
 
 ///|
@@ -330,7 +330,7 @@ pub fn defseq() -> @kernel.Thm {
 /// DEFSEQ_MINIMAL
 fn step_21() -> Unit raise {
   let t18 = @meson.meson_tac(@list.List([@nums.num_cases()]))
-  let cases_lemma = @tactics.prove(@parser.parse_term("(forall t. P t) <=> P 0 /\\ forall t. P(SUC t)"), t18)
+  let cases_lemma = @tactics.prove(@parser.parse_term("(∀ t. P t) <=> P 0 /\\ ∀ t. P(SUC t)"), t18)
   let t27 = @simp.asm_rewrite_tac(@list.List([qle_choice(), @nums.not_suc(), @arith.add1(), @arith.add_sub()]))
   let t26 = @simp.once_rewrite_tac(@list.List([cases_lemma]))
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t26), t27)
@@ -346,7 +346,7 @@ fn step_21() -> Unit raise {
   let t20 = @tactics.repeat_tac(@tactics.conj_tac)
   let t19 = @simp.rewrite_tac(@list.List([defseq(), tholds()]))
   let t33 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(trajform_induct()), t19), t20), t32)
-  defseq_minimal_c.set(@tactics.prove(@parser.parse_term("forall tf seq v. tholds tf seq v <=> forall t nd. defseq tf t nd v <<= seq t nd v"), t33))
+  defseq_minimal_c.set(@tactics.prove(@parser.parse_term("∀ tf seq v. tholds tf seq v <=> ∀ t nd. defseq tf t nd v <<= seq t nd v"), t33))
 }
 
 ///|
@@ -361,7 +361,7 @@ pub fn defseq_minimal() -> @kernel.Thm {
 ///|
 /// trajectory
 fn step_22() -> Unit raise {
-  trajectory_c.set(@pair.new_definition(@parser.parse_term("trajectory next seq v <=> forall t nd. next(seq t) nd v <<= seq (t + 1) nd v")))
+  trajectory_c.set(@pair.new_definition(@parser.parse_term("trajectory next seq v <=> ∀ t nd. next(seq t) nd v <<= seq (t + 1) nd v")))
 }
 
 ///|
@@ -394,7 +394,7 @@ pub fn deftraj() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([deftraj(), qle_refl(), qle_rjoin()]))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t35)
-  deftraj_defseq_c.set(@tactics.prove(@parser.parse_term("forall tf t nd v. defseq tf t nd v <<= deftraj step tf t nd v"), t36))
+  deftraj_defseq_c.set(@tactics.prove(@parser.parse_term("∀ tf t nd v. defseq tf t nd v <<= deftraj step tf t nd v"), t36))
 }
 
 ///|
@@ -412,7 +412,7 @@ fn step_25() -> Unit raise {
   let t38 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.add1()), deftraj(), qle_rjoin()]))
   let t37 = @simp.rewrite_tac(@list.List([trajectory()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t37), t38)
-  trajectory_deftraj_c.set(@tactics.prove(@parser.parse_term("forall step tf v. trajectory step (deftraj step tf) v"), t39))
+  trajectory_deftraj_c.set(@tactics.prove(@parser.parse_term("∀ step tf v. trajectory step (deftraj step tf) v"), t39))
 }
 
 ///|
@@ -427,7 +427,7 @@ pub fn trajectory_deftraj() -> @kernel.Thm {
 ///|
 /// monotonic
 fn step_26() -> Unit raise {
-  monotonic_c.set(@pair.new_definition(@parser.parse_term("monotonic next v <=>\n   forall s1 s2. (forall nd. s1 nd v <<= s2 nd v) ==> forall nd. next s1 nd v <<= next s2 nd v")))
+  monotonic_c.set(@pair.new_definition(@parser.parse_term("monotonic next v <=>\n   ∀ s1 s2. (∀ nd. s1 nd v <<= s2 nd v) ==> ∀ nd. next s1 nd v <<= next s2 nd v")))
 }
 
 ///|
@@ -447,7 +447,7 @@ fn step_27() -> Unit raise {
   let t41 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([defseq_minimal(), deftraj_defseq(), qle_trans()]))])
   let t40 = @tactics.repeat_tac(@tactics.strip_tac)
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([monotonic(), trajectory(), @theorems.right_imp_forall_thm()])), t40), @tactics.eq_tac), t41), @tactics.disch_tac), @nums.induct_tac), t42), t43)
-  deftraj_minimal_c.set(@tactics.prove(@parser.parse_term("forall step v.\n      monotonic step v\n      ==> forall tf seq. trajectory step seq v\n                   ==> (tholds tf seq v <=>\n                        forall t nd. deftraj step tf t nd v <<= seq t nd v)"), t44))
+  deftraj_minimal_c.set(@tactics.prove(@parser.parse_term("∀ step v.\n      monotonic step v\n      ==> ∀ tf seq. trajectory step seq v\n                   ==> (tholds tf seq v <=>\n                        ∀ t nd. deftraj step tf t nd v <<= seq t nd v)"), t44))
 }
 
 ///|
@@ -462,7 +462,7 @@ pub fn deftraj_minimal() -> @kernel.Thm {
 ///|
 /// ste
 fn step_28() -> Unit raise {
-  ste_c.set(@pair.new_definition(@parser.parse_term("(A >~~> C) ckt v <=>\n      forall seq. trajectory ckt seq v /\\ tholds A seq v ==> tholds C seq v")))
+  ste_c.set(@pair.new_definition(@parser.parse_term("(A >~~> C) ckt v <=>\n      ∀ seq. trajectory ckt seq v /\\ tholds A seq v ==> tholds C seq v")))
 }
 
 ///|
@@ -478,7 +478,7 @@ pub fn ste() -> @kernel.Thm {
 /// STE_THM
 fn step_29() -> Unit raise {
   let t45 = @meson.meson_tac(@list.List([ste(), deftraj_minimal(), defseq_minimal(), deftraj_defseq(), trajectory_deftraj(), qle_trans()]))
-  ste_thm_c.set(@tactics.prove(@parser.parse_term("monotonic ckt v\n   ==> ((A >~~> C) ckt v <=> forall t nd. defseq C t nd v <<= deftraj ckt A t nd v)"), t45))
+  ste_thm_c.set(@tactics.prove(@parser.parse_term("monotonic ckt v\n   ==> ((A >~~> C) ckt v <=> ∀ t nd. defseq C t nd v <<= deftraj ckt A t nd v)"), t45))
 }
 
 ///|

@@ -18,7 +18,7 @@ fn step_1() -> Unit raise {
     x1
   }, @list.List([@sets.extension()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2), @tactics.gen_tac), t3), t4), t8), t9), t10)
-  lemma_c.set(@tactics.prove(@parser.parse_term("forall f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))"), t11))
+  lemma_c.set(@tactics.prove(@parser.parse_term("∀ f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))"), t11))
 }
 
 ///|
@@ -109,7 +109,7 @@ fn step_2() -> Unit raise {
     }
   }))
   let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t18), t20), t31), t32), t33), @tactics.strip_tac), t37), t38), t39), t40), t41), @tactics.disch_tac), t42), @tactics.conj_tac), t45), @tactics.disch_tac), t46), @tactics.disch_tac), t55), t56), t57), t58), t65), t66), t67), t68)
-  pigeonhole_lemma_c.set(@tactics.prove(@parser.parse_term("forall f:A->B s n.\n        FINITE s /\\ (n - 1) * CARD(IMAGE f s) < CARD s\n        ==> ?t a. t SUBSET s /\\ t HAS_SIZE n /\\ (forall x. x IN t ==> f(x) = a)"), t69))
+  pigeonhole_lemma_c.set(@tactics.prove(@parser.parse_term("∀ f:A->B s n.\n        FINITE s /\\ (n - 1) * CARD(IMAGE f s) < CARD s\n        ==> ?t a. t SUBSET s /\\ t HAS_SIZE n /\\ (∀ x. x IN t ==> f(x) = a)"), t69))
 }
 
 ///|
@@ -124,7 +124,7 @@ pub fn pigeonhole_lemma() -> @kernel.Thm {
 ///|
 /// mono_on
 fn step_3() -> Unit raise {
-  mono_on_c.set(@define.define_(@parser.parse_term("mono_on (f:num->real) r s <=>\n    forall i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)")))
+  mono_on_c.set(@define.define_(@parser.parse_term("mono_on (f:num->real) r s <=>\n    ∀ i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)")))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn mono_on() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t70 = @meson.meson_tac(@list.List([]))
   let t71 = @tactics.then_tac(@simp.rewrite_tac(@list.List([mono_on(), @sets.subset()])), t70)
-  mono_on_subset_c.set(@tactics.prove(@parser.parse_term("forall s t. t SUBSET s /\\ mono_on f r s ==> mono_on f r t"), t71))
+  mono_on_subset_c.set(@tactics.prove(@parser.parse_term("∀ s t. t SUBSET s /\\ mono_on f r s ==> mono_on f r t"), t71))
 }
 
 ///|
@@ -209,7 +209,7 @@ fn step_5() -> Unit raise {
   let t141 = @tactics.match_mp_tac(@arith.let_trans())
   let t140 = @simp.rewrite_tac(@list.List([@iterate.finite_numseg(), @iterate.card_numseg_1(), @arith.add_sub()]))
   let t149 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(pigeonhole_lemma()), t140), t141), t142), @tactics.conj_tac), t143), t144), @tactics.disj2_tac), t145), t146), t147), t148), @tactics.all_tac])
-  let t139 = @tactics.subgoal_then(@parser.parse_term("?s k:num. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\\n              forall i. i IN s ==> t(i) = k"), fn(x136 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t139 = @tactics.subgoal_then(@parser.parse_term("?s k:num. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\\n              ∀ i. i IN s ==> t(i) = k"), fn(x136 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s137 = @tactics.mp_tac(x136)
     fn(x138 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s137(x138)
@@ -243,7 +243,7 @@ fn step_5() -> Unit raise {
     let t115 = @tactics.match_mp_tac(@theorems.mono_forall())
     @tactics.then_tac(@tactics.mp_tac(th), t115)
   }), t116), t119), t120), t128), @tactics.strip_tac), @tactics.conj_tac), t129), t130), t131), t132), t133), t134), @tactics.all_tac])
-  let t112 = @tactics.subgoal_then(@parser.parse_term("forall i. i IN (1..m*n+1) ==> 1 <= t i /\\ t i <= m"), fn(x109 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t112 = @tactics.subgoal_then(@parser.parse_term("∀ i. i IN (1..m*n+1) ==> 1 <= t i /\\ t i <= m"), fn(x109 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s110 = @tactics.assume_tac(x109)
     fn(x111 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s110(x111)
@@ -288,14 +288,14 @@ fn step_5() -> Unit raise {
   }, @list.List([@parser.parse_term("1"), t80])), t81), t82), t83), t85])
   let t76 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.num_max())]))
   let t93 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t76), @tactics.conj_tac), t86), t92])
-  let t75 = @tactics.subgoal_then(@parser.parse_term("forall i. i IN (1..m*n+1)\n        ==> ?k. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE k /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (forall j. j IN s ==> i <= j)) /\\\n                (forall l. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE l /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (forall j. j IN s ==> i <= j))\n                     ==> l <= k)"), fn(x72 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t75 = @tactics.subgoal_then(@parser.parse_term("∀ i. i IN (1..m*n+1)\n        ==> ?k. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE k /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (∀ j. j IN s ==> i <= j)) /\\\n                (∀ l. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE l /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (∀ j. j IN s ==> i <= j))\n                     ==> l <= k)"), fn(x72 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s73 = @tactics.mp_tac(x72)
     fn(x74 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s73(x74)
     }
   })
   let t188 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t75), t93), t94), t108), t112), t135), @tactics.disj2_tac), t139), t149), t150), t151), t152), t153), t155), t156), @tactics.strip_tac), t157), t161), @tactics.ants_tac), t162), t165), @tactics.ants_tac), t166), t174), t176), t177), @tactics.disch_tac), t178), t179), t184), t185), t186), t187)
-  erdos_szekeres_c.set(@tactics.prove(@parser.parse_term("forall f:num->real m n.\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (m + 1) /\\ mono_on f (<=) s) \\/\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\ mono_on f (>=) s)"), t188))
+  erdos_szekeres_c.set(@tactics.prove(@parser.parse_term("∀ f:num->real m n.\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (m + 1) /\\ mono_on f (<=) s) \\/\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\ mono_on f (>=) s)"), t188))
 }
 
 ///|

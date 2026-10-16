@@ -50,7 +50,7 @@ t "imp_chain" (bin "==>" pv (bin "==>" q (bin "\\/" r (bin "/\\" pv q))));;
 t "neg" (neg (neg (bin "/\\" pv q)));;
 t "neg_atom" (neg pv);;
 t "eq" (mk_eq(bin "+" x y, numeral 42));;
-t "forall" (mk_binder "!" (x, mk_binder "!" (y, mk_eq(x,y))));;
+t "∀" (mk_binder "!" (x, mk_binder "!" (y, mk_eq(x,y))));;
 t "exists" (mk_binder "?" (pv, bin "\\/" pv (neg pv)));;
 t "lambda" (mk_abs(x, mk_abs(y, bin "+" x y)));;
 t "app_lambda" (mk_comb(mk_abs(x, bin "+" x x), numeral 3));;

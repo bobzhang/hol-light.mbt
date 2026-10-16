@@ -54,7 +54,7 @@ pub fn vec3_rule(x2 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// ORTHOGONAL_CROSS
 fn step_5() -> Unit raise {
-  orthogonal_cross_c.set(@tactics.prove(@parser.parse_term("forall x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n         orthogonal x (x cross y) /\\ orthogonal y (x cross y)"), vec3_tac))
+  orthogonal_cross_c.set(@tactics.prove(@parser.parse_term("∀ x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n         orthogonal x (x cross y) /\\ orthogonal y (x cross y)"), vec3_tac))
 }
 
 ///|
@@ -69,7 +69,7 @@ pub fn orthogonal_cross() -> @kernel.Thm {
 ///|
 /// CROSS_LZERO
 fn step_6() -> Unit raise {
-  cross_lzero_c.set(@tactics.prove(@parser.parse_term("forall x. (vec 0) cross x = vec 0"), vec3_tac))
+  cross_lzero_c.set(@tactics.prove(@parser.parse_term("∀ x. (vec 0) cross x = vec 0"), vec3_tac))
 }
 
 ///|
@@ -84,7 +84,7 @@ pub fn cross_lzero() -> @kernel.Thm {
 ///|
 /// CROSS_RZERO
 fn step_7() -> Unit raise {
-  cross_rzero_c.set(@tactics.prove(@parser.parse_term("forall x. x cross (vec 0) = vec 0"), vec3_tac))
+  cross_rzero_c.set(@tactics.prove(@parser.parse_term("∀ x. x cross (vec 0) = vec 0"), vec3_tac))
 }
 
 ///|
@@ -99,7 +99,7 @@ pub fn cross_rzero() -> @kernel.Thm {
 ///|
 /// CROSS_SKEW
 fn step_8() -> Unit raise {
-  cross_skew_c.set(@tactics.prove(@parser.parse_term("forall x y. (x cross y) = --(y cross x)"), vec3_tac))
+  cross_skew_c.set(@tactics.prove(@parser.parse_term("∀ x y. (x cross y) = --(y cross x)"), vec3_tac))
 }
 
 ///|
@@ -114,7 +114,7 @@ pub fn cross_skew() -> @kernel.Thm {
 ///|
 /// CROSS_REFL
 fn step_9() -> Unit raise {
-  cross_refl_c.set(@tactics.prove(@parser.parse_term("forall x. x cross x = vec 0"), vec3_tac))
+  cross_refl_c.set(@tactics.prove(@parser.parse_term("∀ x. x cross x = vec 0"), vec3_tac))
 }
 
 ///|
@@ -129,7 +129,7 @@ pub fn cross_refl() -> @kernel.Thm {
 ///|
 /// CROSS_LADD
 fn step_10() -> Unit raise {
-  cross_ladd_c.set(@tactics.prove(@parser.parse_term("forall x y z. (x + y) cross z = (x cross z) + (y cross z)"), vec3_tac))
+  cross_ladd_c.set(@tactics.prove(@parser.parse_term("∀ x y z. (x + y) cross z = (x cross z) + (y cross z)"), vec3_tac))
 }
 
 ///|
@@ -144,7 +144,7 @@ pub fn cross_ladd() -> @kernel.Thm {
 ///|
 /// CROSS_RADD
 fn step_11() -> Unit raise {
-  cross_radd_c.set(@tactics.prove(@parser.parse_term("forall x y z. x cross (y + z) = (x cross y) + (x cross z)"), vec3_tac))
+  cross_radd_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x cross (y + z) = (x cross y) + (x cross z)"), vec3_tac))
 }
 
 ///|
@@ -159,7 +159,7 @@ pub fn cross_radd() -> @kernel.Thm {
 ///|
 /// CROSS_LMUL
 fn step_12() -> Unit raise {
-  cross_lmul_c.set(@tactics.prove(@parser.parse_term("forall c x y. (c % x) cross y = c % (x cross y)"), vec3_tac))
+  cross_lmul_c.set(@tactics.prove(@parser.parse_term("∀ c x y. (c % x) cross y = c % (x cross y)"), vec3_tac))
 }
 
 ///|
@@ -174,7 +174,7 @@ pub fn cross_lmul() -> @kernel.Thm {
 ///|
 /// CROSS_RMUL
 fn step_13() -> Unit raise {
-  cross_rmul_c.set(@tactics.prove(@parser.parse_term("forall c x y. x cross (c % y) = c % (x cross y)"), vec3_tac))
+  cross_rmul_c.set(@tactics.prove(@parser.parse_term("∀ c x y. x cross (c % y) = c % (x cross y)"), vec3_tac))
 }
 
 ///|
@@ -189,7 +189,7 @@ pub fn cross_rmul() -> @kernel.Thm {
 ///|
 /// CROSS_LNEG
 fn step_14() -> Unit raise {
-  cross_lneg_c.set(@tactics.prove(@parser.parse_term("forall x y. (--x) cross y = --(x cross y)"), vec3_tac))
+  cross_lneg_c.set(@tactics.prove(@parser.parse_term("∀ x y. (--x) cross y = --(x cross y)"), vec3_tac))
 }
 
 ///|
@@ -204,7 +204,7 @@ pub fn cross_lneg() -> @kernel.Thm {
 ///|
 /// CROSS_RNEG
 fn step_15() -> Unit raise {
-  cross_rneg_c.set(@tactics.prove(@parser.parse_term("forall x y. x cross (--y) = --(x cross y)"), vec3_tac))
+  cross_rneg_c.set(@tactics.prove(@parser.parse_term("∀ x y. x cross (--y) = --(x cross y)"), vec3_tac))
 }
 
 ///|
@@ -219,7 +219,7 @@ pub fn cross_rneg() -> @kernel.Thm {
 ///|
 /// CROSS_LSUB
 fn step_16() -> Unit raise {
-  cross_lsub_c.set(@tactics.prove(@parser.parse_term("forall x y z. (x - y) cross z = x cross z - y cross z"), vec3_tac))
+  cross_lsub_c.set(@tactics.prove(@parser.parse_term("∀ x y z. (x - y) cross z = x cross z - y cross z"), vec3_tac))
 }
 
 ///|
@@ -234,7 +234,7 @@ pub fn cross_lsub() -> @kernel.Thm {
 ///|
 /// CROSS_RSUB
 fn step_17() -> Unit raise {
-  cross_rsub_c.set(@tactics.prove(@parser.parse_term("forall x y z. x cross (y - z) = x cross y - x cross z"), vec3_tac))
+  cross_rsub_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x cross (y - z) = x cross y - x cross z"), vec3_tac))
 }
 
 ///|
@@ -249,7 +249,7 @@ pub fn cross_rsub() -> @kernel.Thm {
 ///|
 /// CROSS_JACOBI
 fn step_18() -> Unit raise {
-  cross_jacobi_c.set(@tactics.prove(@parser.parse_term("forall x y z.\n    x cross (y cross z) + y cross (z cross x) + z cross (x cross y) = vec 0"), vec3_tac))
+  cross_jacobi_c.set(@tactics.prove(@parser.parse_term("∀ x y z.\n    x cross (y cross z) + y cross (z cross x) + z cross (x cross y) = vec 0"), vec3_tac))
 }
 
 ///|
@@ -264,7 +264,7 @@ pub fn cross_jacobi() -> @kernel.Thm {
 ///|
 /// CROSS_LAGRANGE
 fn step_19() -> Unit raise {
-  cross_lagrange_c.set(@tactics.prove(@parser.parse_term("forall x y z. x cross (y cross z) = (x dot z) % y - (x dot y) % z"), vec3_tac))
+  cross_lagrange_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x cross (y cross z) = (x dot z) % y - (x dot y) % z"), vec3_tac))
 }
 
 ///|
@@ -279,7 +279,7 @@ pub fn cross_lagrange() -> @kernel.Thm {
 ///|
 /// CROSS_TRIPLE
 fn step_20() -> Unit raise {
-  cross_triple_c.set(@tactics.prove(@parser.parse_term("forall x y z.  (x cross y) dot z = (y cross z) dot x"), vec3_tac))
+  cross_triple_c.set(@tactics.prove(@parser.parse_term("∀ x y z.  (x cross y) dot z = (y cross z) dot x"), vec3_tac))
 }
 
 ///|
@@ -294,7 +294,7 @@ pub fn cross_triple() -> @kernel.Thm {
 ///|
 /// DOT_CROSS_SELF
 fn step_21() -> Unit raise {
-  dot_cross_self_c.set(@tactics.prove(@parser.parse_term("(forall x y. x dot (x cross y) = &0) /\\\n   (forall x y. x dot (y cross x) = &0) /\\\n   (forall x y. (x cross y) dot y = &0) /\\\n   (forall x y. (y cross x) dot y = &0)"), vec3_tac))
+  dot_cross_self_c.set(@tactics.prove(@parser.parse_term("(∀ x y. x dot (x cross y) = &0) /\\\n   (∀ x y. x dot (y cross x) = &0) /\\\n   (∀ x y. (x cross y) dot y = &0) /\\\n   (∀ x y. (y cross x) dot y = &0)"), vec3_tac))
 }
 
 ///|
@@ -309,7 +309,7 @@ pub fn dot_cross_self() -> @kernel.Thm {
 ///|
 /// CROSS_COMPONENTS
 fn step_22() -> Unit raise {
-  cross_components_c.set(@tactics.prove(@parser.parse_term("forall x y. (x cross y)$1 = x$2 * y$3 - y$2 * x$3 /\\\n         (x cross y)$2 = x$3 * y$1 - y$3 * x$1 /\\\n         (x cross y)$3 = x$1 * y$2 - y$1 * x$2"), vec3_tac))
+  cross_components_c.set(@tactics.prove(@parser.parse_term("∀ x y. (x cross y)$1 = x$2 * y$3 - y$2 * x$3 /\\\n         (x cross y)$2 = x$3 * y$1 - y$3 * x$1 /\\\n         (x cross y)$3 = x$1 * y$2 - y$1 * x$2"), vec3_tac))
 }
 
 ///|
@@ -339,7 +339,7 @@ pub fn cross_basis() -> @kernel.Thm {
 ///|
 /// CROSS_BASIS_NONZERO
 fn step_24() -> Unit raise {
-  cross_basis_nonzero_c.set(@tactics.prove(@parser.parse_term("forall u. ~(u = vec 0)\n       ==> ~(u cross basis 1 = vec 0) \\/\n           ~(u cross basis 2 = vec 0) \\/\n           ~(u cross basis 3 = vec 0)"), vec3_tac))
+  cross_basis_nonzero_c.set(@tactics.prove(@parser.parse_term("∀ u. ~(u = vec 0)\n       ==> ~(u cross basis 1 = vec 0) \\/\n           ~(u cross basis 2 = vec 0) \\/\n           ~(u cross basis 3 = vec 0)"), vec3_tac))
 }
 
 ///|
@@ -356,7 +356,7 @@ pub fn cross_basis_nonzero() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dot_eq_0())]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@vectors.vector_sub_eq())])), t3), vec3_tac)
-  cross_dot_cancel_c.set(@tactics.prove(@parser.parse_term("forall x y z.\n     x dot y = x dot z /\\ x cross y = x cross z /\\ ~(x = vec 0) ==> y = z"), t4))
+  cross_dot_cancel_c.set(@tactics.prove(@parser.parse_term("∀ x y z.\n     x dot y = x dot z /\\ x cross y = x cross z /\\ ~(x = vec 0) ==> y = z"), t4))
 }
 
 ///|
@@ -372,7 +372,7 @@ pub fn cross_dot_cancel() -> @kernel.Thm {
 /// NORM_CROSS_DOT
 fn step_26() -> Unit raise {
   let t5 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@real.real_pow_mul(), @vectors.norm_pow_2()])), vec3_tac)
-  norm_cross_dot_c.set(@tactics.prove(@parser.parse_term("forall x y. norm(x cross y) pow 2 + (x dot y) pow 2 = (norm(x) * norm y) pow 2"), t5))
+  norm_cross_dot_c.set(@tactics.prove(@parser.parse_term("∀ x y. norm(x cross y) pow 2 + (x dot y) pow 2 = (norm(x) * norm y) pow 2"), t5))
 }
 
 ///|
@@ -387,7 +387,7 @@ pub fn norm_cross_dot() -> @kernel.Thm {
 ///|
 /// DOT_CROSS_DET
 fn step_27() -> Unit raise {
-  dot_cross_det_c.set(@tactics.prove(@parser.parse_term("forall x y z. x dot (y cross z) = det(vector[x;y;z]:real^3^3)"), vec3_tac))
+  dot_cross_det_c.set(@tactics.prove(@parser.parse_term("∀ x y z. x dot (y cross z) = det(vector[x;y;z]:real^3^3)"), vec3_tac))
 }
 
 ///|
@@ -402,7 +402,7 @@ pub fn dot_cross_det() -> @kernel.Thm {
 ///|
 /// CROSS_CROSS_DET
 fn step_28() -> Unit raise {
-  cross_cross_det_c.set(@tactics.prove(@parser.parse_term("forall w x y z. (w cross x) cross (y cross z) =\n                det(vector[w;x;z]:real^3^3) % y -\n                det(vector[w;x;y]:real^3^3) % z"), vec3_tac))
+  cross_cross_det_c.set(@tactics.prove(@parser.parse_term("∀ w x y z. (w cross x) cross (y cross z) =\n                det(vector[w;x;z]:real^3^3) % y -\n                det(vector[w;x;y]:real^3^3) % z"), vec3_tac))
 }
 
 ///|
@@ -417,7 +417,7 @@ pub fn cross_cross_det() -> @kernel.Thm {
 ///|
 /// DOT_CROSS
 fn step_29() -> Unit raise {
-  dot_cross_c.set(@tactics.prove(@parser.parse_term("forall w x y z. (w cross x) dot (y cross z) =\n                (w dot y) * (x dot z) - (w dot z) * (x dot y)"), vec3_tac))
+  dot_cross_c.set(@tactics.prove(@parser.parse_term("∀ w x y z. (w cross x) dot (y cross z) =\n                (w dot y) * (x dot z) - (w dot z) * (x dot y)"), vec3_tac))
 }
 
 ///|
@@ -433,7 +433,7 @@ pub fn dot_cross() -> @kernel.Thm {
 /// NORM_CROSS
 fn step_30() -> Unit raise {
   let t6 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.norm_pow_2()])), vec3_tac)
-  norm_cross_c.set(@tactics.prove(@parser.parse_term("forall x y. norm(x cross y) pow 2 =\n           norm(x) pow 2 * norm(y) pow 2 - (x dot y) pow 2"), t6))
+  norm_cross_c.set(@tactics.prove(@parser.parse_term("∀ x y. norm(x cross y) pow 2 =\n           norm(x) pow 2 * norm(y) pow 2 - (x dot y) pow 2"), t6))
 }
 
 ///|
@@ -455,7 +455,7 @@ fn step_31() -> Unit raise {
   let t8 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_ring(@parser.parse_term("x = &0 <=> x pow 2 = &0"))]))
   let t7 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.norm_eq_0())]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7), t8), t9), t11), t12)
-  cross_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x y. x cross y = vec 0 <=> collinear{vec 0,x,y}"), t13))
+  cross_eq_0_c.set(@tactics.prove(@parser.parse_term("∀ x y. x cross y = vec 0 <=> collinear{vec 0,x,y}"), t13))
 }
 
 ///|
@@ -470,7 +470,7 @@ pub fn cross_eq_0() -> @kernel.Thm {
 ///|
 /// CROSS_0
 fn step_32() -> Unit raise {
-  cross_0_c.set(@tactics.prove(@parser.parse_term("(forall x. vec 0 cross x = vec 0) /\\\n   (forall x. x cross vec 0 = vec 0)"), vec3_tac))
+  cross_0_c.set(@tactics.prove(@parser.parse_term("(∀ x. vec 0 cross x = vec 0) /\\\n   (∀ x. x cross vec 0 = vec 0)"), vec3_tac))
 }
 
 ///|
@@ -486,7 +486,7 @@ pub fn cross_0() -> @kernel.Thm {
 /// CROSS_EQ_SELF
 fn step_33() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([orthogonal_cross(), cross_0(), @vectors.orthogonal_refl()]))
-  cross_eq_self_c.set(@tactics.prove(@parser.parse_term("(forall x y. x cross y = x <=> x = vec 0) /\\\n   (forall x y. x cross y = y <=> y = vec 0)"), t14))
+  cross_eq_self_c.set(@tactics.prove(@parser.parse_term("(∀ x y. x cross y = x <=> x = vec 0) /\\\n   (∀ x y. x cross y = y <=> y = vec 0)"), t14))
 }
 
 ///|
@@ -519,7 +519,7 @@ fn step_34() -> Unit raise {
   let t16 = @simp.asm_rewrite_tac(@list.List([cross_0(), @vectors.dot_lzero()]))
   let t15 = @class.asm_cases_tac(@parser.parse_term("x:real^3 = vec 0"))
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t15), t16), t17), t18), t25), t26), t27)
-  norm_and_cross_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x y. x dot y = &0 /\\ x cross y = vec 0 <=> x = vec 0 \\/ y = vec 0"), t28))
+  norm_and_cross_eq_0_c.set(@tactics.prove(@parser.parse_term("∀ x y. x dot y = &0 /\\ x cross y = vec 0 <=> x = vec 0 \\/ y = vec 0"), t28))
 }
 
 ///|
@@ -551,7 +551,7 @@ pub fn bilinear_cross() -> @kernel.Thm {
 /// CROSS_MATRIX_MUL
 fn step_36() -> Unit raise {
   let t30 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_3(), @vectors.forall_3(), @vectors.sum_3(), @vectors.matrix_vector_mul(), cross_components(), @cart.lambda_beta(), @calc_num.arith(), @vectors.transp(), @determinants.det_3(), @vectors.vector_mul_component()])), @calc_rat.real_arith_tac)
-  cross_matrix_mul_c.set(@tactics.prove(@parser.parse_term("forall A x y. transp A ** ((A ** x) cross (A ** y)) = det A % (x cross y)"), t30))
+  cross_matrix_mul_c.set(@tactics.prove(@parser.parse_term("∀ A x y. transp A ** ((A ** x) cross (A ** y)) = det A % (x cross y)"), t30))
 }
 
 ///|
@@ -590,7 +590,7 @@ fn step_37() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([@determinants.orthogonal_matrix()]))
   let t31 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(cross_matrix_mul()), t31), t32), t35), t42), t43), t47), t48)
-  cross_orthogonal_matrix_c.set(@tactics.prove(@parser.parse_term("forall A x y. orthogonal_matrix A\n           ==> (A ** x) cross (A ** y) = det A % (A ** (x cross y))"), t49))
+  cross_orthogonal_matrix_c.set(@tactics.prove(@parser.parse_term("∀ A x y. orthogonal_matrix A\n           ==> (A ** x) cross (A ** y) = det A % (A ** (x cross y))"), t49))
 }
 
 ///|
@@ -606,7 +606,7 @@ pub fn cross_orthogonal_matrix() -> @kernel.Thm {
 /// CROSS_ROTATION_MATRIX
 fn step_38() -> Unit raise {
   let t50 = @simp.simp_tac(@list.List([@determinants.rotation_matrix(), cross_orthogonal_matrix(), @vectors.vector_mul_lid()]))
-  cross_rotation_matrix_c.set(@tactics.prove(@parser.parse_term("forall A x y. rotation_matrix A\n           ==> (A ** x) cross (A ** y) =  A ** (x cross y)"), t50))
+  cross_rotation_matrix_c.set(@tactics.prove(@parser.parse_term("∀ A x y. rotation_matrix A\n           ==> (A ** x) cross (A ** y) =  A ** (x cross y)"), t50))
 }
 
 ///|
@@ -622,7 +622,7 @@ pub fn cross_rotation_matrix() -> @kernel.Thm {
 /// CROSS_ROTOINVERSION_MATRIX
 fn step_39() -> Unit raise {
   let t51 = @simp.simp_tac(@list.List([@determinants.rotoinversion_matrix(), cross_orthogonal_matrix(), @vectors.vector_mul_lid(), @vectors.vector_mul_lneg()]))
-  cross_rotoinversion_matrix_c.set(@tactics.prove(@parser.parse_term("forall A x y. rotoinversion_matrix A\n           ==> (A ** x) cross (A ** y) =  --(A ** (x cross y))"), t51))
+  cross_rotoinversion_matrix_c.set(@tactics.prove(@parser.parse_term("∀ A x y. rotoinversion_matrix A\n           ==> (A ** x) cross (A ** y) =  --(A ** (x cross y))"), t51))
 }
 
 ///|
@@ -645,7 +645,7 @@ fn step_40() -> Unit raise {
   })
   let t52 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac))
   let t58 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.ispec(@parser.parse_term("matrix(f:real^3->real^3)"), cross_orthogonal_matrix()))), t52), t55), @tactics.ants_tac), t57)
-  cross_orthogonal_transformation_c.set(@tactics.prove(@parser.parse_term("forall f x y.\n        orthogonal_transformation f\n        ==> (f x) cross (f y) = det(matrix f) % f(x cross y)"), t58))
+  cross_orthogonal_transformation_c.set(@tactics.prove(@parser.parse_term("∀ f x y.\n        orthogonal_transformation f\n        ==> (f x) cross (f y) = det(matrix f) % f(x cross y)"), t58))
 }
 
 ///|
@@ -661,7 +661,7 @@ pub fn cross_orthogonal_transformation() -> @kernel.Thm {
 /// CROSS_LINEAR_IMAGE
 fn step_41() -> Unit raise {
   let t59 = @simp.simp_tac(@list.List([@determinants.orthogonal_transformation_v1(), @theorems.conj_assoc(), @vectors.vector_mul_lid(), cross_orthogonal_transformation()]))
-  cross_linear_image_c.set(@tactics.prove(@parser.parse_term("forall f x y. linear f /\\ (forall x. norm(f x) = norm x) /\\ det(matrix f) = &1\n           ==> (f x) cross (f y) = f(x cross y)"), t59))
+  cross_linear_image_c.set(@tactics.prove(@parser.parse_term("∀ f x y. linear f /\\ (∀ x. norm(f x) = norm x) /\\ det(matrix f) = &1\n           ==> (f x) cross (f y) = f(x cross y)"), t59))
 }
 
 ///|
@@ -684,7 +684,7 @@ fn step_42() -> Unit raise {
   let t61 = @simp.rewrite_tac(@list.List([cross(), @vectors.vector_3(), @cart.dimindex_3(), @vectors.forall_3(), @vectors.lift_sub()]))
   let t60 = @simp.once_rewrite_tac(@list.List([@topology.continuous_componentwise_lift()]))
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t60), t61), t62), t63), t64), @tactics.conj_tac), t65), t66)
-  continuous_cross_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n        f continuous net /\\ g continuous net\n        ==> (\\x. (f x) cross (g x)) continuous net"), t67))
+  continuous_cross_c.set(@tactics.prove(@parser.parse_term("∀ net:(A)net f g.\n        f continuous net /\\ g continuous net\n        ==> (\\x. (f x) cross (g x)) continuous net"), t67))
 }
 
 ///|
@@ -700,7 +700,7 @@ pub fn continuous_cross() -> @kernel.Thm {
 /// CONTINUOUS_ON_CROSS
 fn step_43() -> Unit raise {
   let t68 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_cross()]))
-  continuous_on_cross_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->real^3 g s.\n        f continuous_on s /\\ g continuous_on s\n        ==> (\\x. (f x) cross (g x)) continuous_on s"), t68))
+  continuous_on_cross_c.set(@tactics.prove(@parser.parse_term("∀ f:real^N->real^3 g s.\n        f continuous_on s /\\ g continuous_on s\n        ==> (\\x. (f x) cross (g x)) continuous_on s"), t68))
 }
 
 ///|
@@ -717,7 +717,7 @@ pub fn continuous_on_cross() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t69 = @simp.simp_tac(@list.List([@determinants.orthogonal_transformation_v1(), @theorems.conj_assoc(), @vectors.vector_mul_lid(), cross_orthogonal_transformation()]))
   let t70 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.dimindex_3(), @calc_num.arith()])), t69)
-  cross_linear_image_weak_c.set(@tactics.prove(@parser.parse_term("forall f x y. linear f /\\ (forall x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:3) ==> det(matrix f) = &1)\n           ==> (f x) cross (f y) = f(x cross y)"), t70))
+  cross_linear_image_weak_c.set(@tactics.prove(@parser.parse_term("∀ f x y. linear f /\\ (∀ x. norm(f x) = norm x) /\\\n           (2 <= dimindex(:3) ==> det(matrix f) = &1)\n           ==> (f x) cross (f y) = f(x cross y)"), t70))
 }
 
 ///|

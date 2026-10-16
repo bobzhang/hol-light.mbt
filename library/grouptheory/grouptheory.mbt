@@ -66,7 +66,7 @@ fn step_1() -> Unit raise {
   )
   let eth = @tactics.prove(
     @parser.parse_term(
-      "?s (z:A) n a.\n          z IN s /\\\n          (forall x. x IN s ==> n x IN s) /\\\n          (forall x y. x IN s /\\ y IN s ==> a x y IN s) /\\\n          (forall x y z. x IN s /\\ y IN s /\\ z IN s\n                   ==> a x (a y z) = a (a x y) z) /\\\n          (forall x. x IN s ==> a z x = x /\\ a x z = x) /\\\n          (forall x. x IN s ==> a (n x) x = z /\\ a x (n x) = z)",
+      "?s (z:A) n a.\n          z IN s /\\\n          (∀ x. x IN s ==> n x IN s) /\\\n          (∀ x y. x IN s /\\ y IN s ==> a x y IN s) /\\\n          (∀ x y z. x IN s /\\ y IN s /\\ z IN s\n                   ==> a x (a y z) = a (a x y) z) /\\\n          (∀ x. x IN s ==> a z x = x /\\ a x z = x) /\\\n          (∀ x. x IN s ==> a (n x) x = z /\\ a x (n x) = z)",
     ),
     t9,
   )
@@ -276,7 +276,7 @@ fn step_6() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall a. mk(dest a) = a) /\\ (forall r. P r <=> dest(mk r) = r)\n    ==> forall a. P(dest a)",
+        "(∀ a. mk(dest a) = a) /\\ (∀ r. P r <=> dest(mk r) = r)\n    ==> ∀ a. P(dest a)",
       ),
     ),
   )(group_tybij())
@@ -296,7 +296,7 @@ fn step_6() -> Unit raise {
   )
   let t19 = (
     @parser.parse_term(
-      "(forall G:A group. group_id G IN group_carrier G) /\\\n   (forall G x:A. x IN group_carrier G ==> group_inv G x IN group_carrier G) /\\\n   (forall G x y:A. x IN group_carrier G /\\ y IN group_carrier G\n              ==> group_mul G x y IN group_carrier G) /\\\n   (forall G x y z:A. x IN group_carrier G /\\\n                y IN group_carrier G /\\\n                z IN group_carrier G\n                ==> group_mul G x (group_mul G y z) =\n                    group_mul G (group_mul G x y) z) /\\\n   (forall G x:A. x IN group_carrier G ==> group_mul G (group_id G) x = x) /\\\n   (forall G x:A. x IN group_carrier G ==> group_mul G x (group_id G) = x) /\\\n   (forall G x:A. x IN group_carrier G\n            ==> group_mul G (group_inv G x) x = group_id G) /\\\n   (forall G x:A. x IN group_carrier G\n            ==> group_mul G x(group_inv G x) = group_id G)",
+      "(∀ G:A group. group_id G IN group_carrier G) /\\\n   (∀ G x:A. x IN group_carrier G ==> group_inv G x IN group_carrier G) /\\\n   (∀ G x y:A. x IN group_carrier G /\\ y IN group_carrier G\n              ==> group_mul G x y IN group_carrier G) /\\\n   (∀ G x y z:A. x IN group_carrier G /\\\n                y IN group_carrier G /\\\n                z IN group_carrier G\n                ==> group_mul G x (group_mul G y z) =\n                    group_mul G (group_mul G x y) z) /\\\n   (∀ G x:A. x IN group_carrier G ==> group_mul G (group_id G) x = x) /\\\n   (∀ G x:A. x IN group_carrier G ==> group_mul G x (group_id G) = x) /\\\n   (∀ G x:A. x IN group_carrier G\n            ==> group_mul G (group_inv G x) x = group_id G) /\\\n   (∀ G x:A. x IN group_carrier G\n            ==> group_mul G x(group_inv G x) = group_id G)",
     ),
     t18,
   )
@@ -380,7 +380,7 @@ fn step_7() -> Unit raise {
   groups_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H:A group.\n        G = H <=>\n        group_carrier G = group_carrier H /\\\n        group_id G = group_id H /\\\n        group_inv G = group_inv H /\\\n        group_mul G = group_mul H",
+        "∀ G H:A group.\n        G = H <=>\n        group_carrier G = group_carrier H /\\\n        group_id G = group_id H /\\\n        group_inv G = group_inv H /\\\n        group_mul G = group_mul H",
       ),
       t22,
     ),
@@ -404,7 +404,7 @@ fn step_8() -> Unit raise {
   )
   group_carrier_nonempty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. ~(group_carrier G = {})"),
+      @parser.parse_term("∀ G:A group. ~(group_carrier G = {})"),
       t23,
     ),
   )
@@ -482,7 +482,7 @@ fn step_10() -> Unit raise {
   singleton_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall a:A. group_carrier(singleton_group a) = {a}) /\\\n   (forall a:A. group_id(singleton_group a) = a) /\\\n   (forall a:A. group_inv(singleton_group a) = \\x. a) /\\\n   (forall a:A. group_mul(singleton_group a) = \\x y. a)",
+        "(∀ a:A. group_carrier(singleton_group a) = {a}) /\\\n   (∀ a:A. group_id(singleton_group a) = a) /\\\n   (∀ a:A. group_inv(singleton_group a) = \\x. a) /\\\n   (∀ a:A. group_mul(singleton_group a) = \\x y. a)",
       ),
       t29,
     ),
@@ -526,7 +526,7 @@ fn step_12() -> Unit raise {
   trivial_imp_finite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group G ==> FINITE(group_carrier G)",
+        "∀ G:A group. trivial_group G ==> FINITE(group_carrier G)",
       ),
       t30,
     ),
@@ -552,7 +552,7 @@ fn step_13() -> Unit raise {
   )
   trivial_group_singleton_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a:A. trivial_group(singleton_group a)"),
+      @parser.parse_term("∀ a:A. trivial_group(singleton_group a)"),
       t31,
     ),
   )
@@ -577,7 +577,7 @@ fn step_14() -> Unit raise {
   )
   finite_singleton_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a:A. FINITE(group_carrier(singleton_group a))"),
+      @parser.parse_term("∀ a:A. FINITE(group_carrier(singleton_group a))"),
       t32,
     ),
   )
@@ -608,7 +608,7 @@ fn step_15() -> Unit raise {
   trivial_group_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group G <=> group_carrier G SUBSET {group_id G}",
+        "∀ G:A group. trivial_group G <=> group_carrier G SUBSET {group_id G}",
       ),
       t33,
     ),
@@ -646,7 +646,7 @@ fn step_16() -> Unit raise {
   trivial_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group G <=> ?a. group_carrier G = {a}",
+        "∀ G:A group. trivial_group G <=> ?a. group_carrier G = {a}",
       ),
       t36,
     ),
@@ -679,7 +679,7 @@ fn step_17() -> Unit raise {
   trivial_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group G <=> ?a. group_carrier G SUBSET {a}",
+        "∀ G:A group. trivial_group G <=> ?a. group_carrier G SUBSET {a}",
       ),
       t37,
     ),
@@ -711,7 +711,7 @@ fn step_18() -> Unit raise {
   trivial_group_has_size_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group G <=> group_carrier(G) HAS_SIZE 1",
+        "∀ G:A group. trivial_group G <=> group_carrier(G) HAS_SIZE 1",
       ),
       t39,
     ),
@@ -736,7 +736,7 @@ fn step_19() -> Unit raise {
   group_carrier_has_size_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_carrier(G) HAS_SIZE 1 <=> trivial_group G",
+        "∀ G:A group. group_carrier(G) HAS_SIZE 1 <=> trivial_group G",
       ),
       t40,
     ),
@@ -811,7 +811,7 @@ fn step_21() -> Unit raise {
   opposite_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        group_carrier(opposite_group G) = group_carrier G /\\\n        group_id(opposite_group G) = group_id G /\\\n        group_inv(opposite_group G) = group_inv G /\\\n        group_mul(opposite_group G) = \\x y. group_mul G y x",
+        "∀ G:A group.\n        group_carrier(opposite_group G) = group_carrier G /\\\n        group_id(opposite_group G) = group_id G /\\\n        group_inv(opposite_group G) = group_inv G /\\\n        group_mul(opposite_group G) = \\x y. group_mul G y x",
       ),
       t45,
     ),
@@ -865,7 +865,7 @@ fn step_22() -> Unit raise {
   )
   opposite_opposite_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. opposite_group (opposite_group G) = G"),
+      @parser.parse_term("∀ G:A group. opposite_group (opposite_group G) = G"),
       t52,
     ),
   )
@@ -889,7 +889,7 @@ fn step_23() -> Unit raise {
   opposite_group_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. group_inv(opposite_group G) x = group_inv G x",
+        "∀ G x:A. group_inv(opposite_group G) x = group_inv G x",
       ),
       t53,
     ),
@@ -914,7 +914,7 @@ fn step_24() -> Unit raise {
   opposite_group_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A. group_mul(opposite_group G) x y = group_mul G y x",
+        "∀ G x y:A. group_mul(opposite_group G) x y = group_mul G y x",
       ),
       t54,
     ),
@@ -941,7 +941,7 @@ fn step_25() -> Unit raise {
   opposite_singleton_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a:A. opposite_group(singleton_group a) = singleton_group a",
+        "∀ a:A. opposite_group(singleton_group a) = singleton_group a",
       ),
       t55,
     ),
@@ -968,7 +968,7 @@ fn step_26() -> Unit raise {
   trivial_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group(opposite_group G) <=> trivial_group G",
+        "∀ G:A group. trivial_group(opposite_group G) <=> trivial_group G",
       ),
       t56,
     ),
@@ -993,7 +993,7 @@ fn step_27() -> Unit raise {
   finite_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. FINITE(group_carrier(opposite_group G)) <=>\n               FINITE(group_carrier G)",
+        "∀ G:A group. FINITE(group_carrier(opposite_group G)) <=>\n               FINITE(group_carrier G)",
       ),
       t57,
     ),
@@ -1039,7 +1039,7 @@ fn step_29() -> Unit raise {
   group_div_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_div G x y) IN group_carrier G",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_div G x y) IN group_carrier G",
       ),
       t58,
     ),
@@ -1155,7 +1155,7 @@ fn step_30() -> Unit raise {
   group_mul_lcancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G\n        ==> (group_mul G x y = group_mul G x z <=> y = z)",
+        "∀ G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G\n        ==> (group_mul G x y = group_mul G x z <=> y = z)",
       ),
       t68,
     ),
@@ -1180,7 +1180,7 @@ fn step_31() -> Unit raise {
   group_mul_lcancel_imp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G /\\\n        group_mul G x y = group_mul G x z\n        ==> y = z",
+        "∀ G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G /\\\n        group_mul G x y = group_mul G x z\n        ==> y = z",
       ),
       t69,
     ),
@@ -1211,7 +1211,7 @@ fn step_32() -> Unit raise {
   group_mul_rcancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G\n        ==> (group_mul G x z = group_mul G y z <=> x = y)",
+        "∀ G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G\n        ==> (group_mul G x z = group_mul G y z <=> x = y)",
       ),
       t71,
     ),
@@ -1236,7 +1236,7 @@ fn step_33() -> Unit raise {
   group_mul_rcancel_imp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G /\\\n        group_mul G x z = group_mul G y z\n        ==> x = y",
+        "∀ G x y z:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ z IN group_carrier G /\\\n        group_mul G x z = group_mul G y z\n        ==> x = y",
       ),
       t72,
     ),
@@ -1268,7 +1268,7 @@ fn step_34() -> Unit raise {
   group_lid_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ group_mul G x y = y\n        ==> x = group_id G",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ group_mul G x y = y\n        ==> x = group_id G",
       ),
       t73,
     ),
@@ -1300,7 +1300,7 @@ fn step_35() -> Unit raise {
   group_rid_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ group_mul G x y = x\n        ==> y = group_id G",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ group_mul G x y = x\n        ==> y = group_id G",
       ),
       t74,
     ),
@@ -1325,7 +1325,7 @@ fn step_36() -> Unit raise {
   group_lid_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = y <=> x = group_id G)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = y <=> x = group_id G)",
       ),
       t75,
     ),
@@ -1348,7 +1348,7 @@ fn step_37() -> Unit raise {
   group_rid_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = x <=> y = group_id G)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = x <=> y = group_id G)",
       ),
       t76,
     ),
@@ -1373,7 +1373,7 @@ fn step_38() -> Unit raise {
   group_linv_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_id G\n        ==> group_inv G x = y",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_id G\n        ==> group_inv G x = y",
       ),
       t77,
     ),
@@ -1400,7 +1400,7 @@ fn step_39() -> Unit raise {
   group_rinv_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_id G\n        ==> group_inv G y = x",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_id G\n        ==> group_inv G y = x",
       ),
       t78,
     ),
@@ -1427,7 +1427,7 @@ fn step_40() -> Unit raise {
   group_linv_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_inv G x = y <=> group_mul G x y = group_id G)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_inv G x = y <=> group_mul G x y = group_id G)",
       ),
       t79,
     ),
@@ -1452,7 +1452,7 @@ fn step_41() -> Unit raise {
   group_rinv_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_inv G x = y <=> group_mul G y x = group_id G)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_inv G x = y <=> group_mul G y x = group_id G)",
       ),
       t80,
     ),
@@ -1475,7 +1475,7 @@ fn step_42() -> Unit raise {
   group_mul_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = group_id G <=> group_mul G y x = group_id G)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G x y = group_id G <=> group_mul G y x = group_id G)",
       ),
       t81,
     ),
@@ -1505,7 +1505,7 @@ fn step_43() -> Unit raise {
   group_inv_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_inv G (group_inv G x) = x",
+        "∀ G x:A. x IN group_carrier G ==> group_inv G (group_inv G x) = x",
       ),
       t84,
     ),
@@ -1534,7 +1534,7 @@ fn step_44() -> Unit raise {
   )
   group_inv_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_inv G (group_id G) = group_id G"),
+      @parser.parse_term("∀ G:A group. group_inv G (group_id G) = group_id G"),
       t86,
     ),
   )
@@ -1556,7 +1556,7 @@ fn step_45() -> Unit raise {
   group_inv_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> (group_inv G x = group_id G <=> x = group_id G)",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> (group_inv G x = group_id G <=> x = group_id G)",
       ),
       t87,
     ),
@@ -1845,7 +1845,7 @@ fn step_46() -> Unit raise {
   group_inv_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_inv G (group_mul G x y) =\n            group_mul G (group_inv G y) (group_inv G x)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_inv G (group_mul G x y) =\n            group_mul G (group_inv G y) (group_inv G x)",
       ),
       t108,
     ),
@@ -1868,7 +1868,7 @@ fn step_47() -> Unit raise {
   group_inv_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A. x IN group_carrier G /\\ y IN group_carrier G\n             ==> (group_inv G x = group_inv G y <=> x = y)",
+        "∀ G x y:A. x IN group_carrier G /\\ y IN group_carrier G\n             ==> (group_inv G x = group_inv G y <=> x = y)",
       ),
       t109,
     ),
@@ -1891,7 +1891,7 @@ fn step_48() -> Unit raise {
   group_div_refl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_div G x x = group_id G",
+        "∀ G x:A. x IN group_carrier G ==> group_div G x x = group_id G",
       ),
       t110,
     ),
@@ -1973,7 +1973,7 @@ fn step_49() -> Unit raise {
   group_div_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_div G x y = group_id G <=> x = y)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_div G x y = group_id G <=> x = y)",
       ),
       t117,
     ),
@@ -2078,7 +2078,7 @@ fn step_50() -> Unit raise {
   group_commutes_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==>  group_mul G (group_inv G x) y = group_mul G y (group_inv G x)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==>  group_mul G (group_inv G x) y = group_mul G y (group_inv G x)",
       ),
       t127,
     ),
@@ -2105,7 +2105,7 @@ fn step_51() -> Unit raise {
   group_commutes_inv_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G (group_inv G x) y = group_mul G y (group_inv G x) <=>\n             group_mul G x y = group_mul G y x)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_mul G (group_inv G x) y = group_mul G y (group_inv G x) <=>\n             group_mul G x y = group_mul G y x)",
       ),
       t128,
     ),
@@ -2130,7 +2130,7 @@ fn step_52() -> Unit raise {
   group_commutes_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y z:A.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        z IN group_carrier G /\\\n        group_mul G x z = group_mul G z x /\\\n        group_mul G y z = group_mul G z y\n        ==> group_mul G (group_mul G x y) z = group_mul G z (group_mul G x y)",
+        "∀ G x y z:A.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        z IN group_carrier G /\\\n        group_mul G x z = group_mul G z x /\\\n        group_mul G y z = group_mul G z y\n        ==> group_mul G (group_mul G x y) z = group_mul G z (group_mul G x y)",
       ),
       t129,
     ),
@@ -2155,7 +2155,7 @@ fn step_53() -> Unit raise {
   forall_in_group_carrier_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(P:A->bool) G.\n        (forall x. x IN group_carrier G ==> P(group_inv G x)) <=>\n        (forall x. x IN group_carrier G ==> P x)",
+        "∀(P:A->bool) G.\n        (∀ x. x IN group_carrier G ==> P(group_inv G x)) <=>\n        (∀ x. x IN group_carrier G ==> P x)",
       ),
       t130,
     ),
@@ -2180,7 +2180,7 @@ fn step_54() -> Unit raise {
   exists_in_group_carrier_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G:A group.\n        (?x. x IN group_carrier G /\\ P(group_inv G x)) <=>\n        (?x. x IN group_carrier G /\\ P x)",
+        "∀ P G:A group.\n        (?x. x IN group_carrier G /\\ P(group_inv G x)) <=>\n        (?x. x IN group_carrier G /\\ P x)",
       ),
       t131,
     ),
@@ -2241,7 +2241,7 @@ fn step_56() -> Unit raise {
   group_pow_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n. x IN group_carrier G ==> group_pow G x n IN group_carrier G",
+        "∀ G (x:A) n. x IN group_carrier G ==> group_pow G x n IN group_carrier G",
       ),
       t135,
     ),
@@ -2263,7 +2263,7 @@ fn step_57() -> Unit raise {
   let t136 = @simp.rewrite_tac(@list.List([group_pow()]))
   group_pow_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G (x:A). group_pow G x 0 = group_id G"),
+      @parser.parse_term("∀ G (x:A). group_pow G x 0 = group_id G"),
       t136,
     ),
   )
@@ -2290,7 +2290,7 @@ fn step_58() -> Unit raise {
   )
   group_pow_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x:A. x IN group_carrier G ==> group_pow G x 1 = x"),
+      @parser.parse_term("∀ G x:A. x IN group_carrier G ==> group_pow G x 1 = x"),
       t137,
     ),
   )
@@ -2320,7 +2320,7 @@ fn step_59() -> Unit raise {
   group_pow_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_pow G x 2 = group_mul G x x",
+        "∀ G x:A. x IN group_carrier G ==> group_pow G x 2 = group_mul G x x",
       ),
       t139,
     ),
@@ -2347,7 +2347,7 @@ fn step_60() -> Unit raise {
   )
   group_pow_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. group_pow G (group_id G) n = group_id G"),
+      @parser.parse_term("∀ n. group_pow G (group_id G) n = group_id G"),
       t140,
     ),
   )
@@ -2394,7 +2394,7 @@ fn step_61() -> Unit raise {
   group_pow_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G x (m + n) =\n            group_mul G (group_pow G x m) (group_pow G x n)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G x (m + n) =\n            group_mul G (group_pow G x m) (group_pow G x n)",
       ),
       t144,
     ),
@@ -2488,7 +2488,7 @@ fn step_62() -> Unit raise {
   group_pow_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G /\\ n <= m\n        ==> group_pow G x (m - n) =\n            group_div G (group_pow G x m) (group_pow G x n)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G /\\ n <= m\n        ==> group_pow G x (m - n) =\n            group_div G (group_pow G x m) (group_pow G x n)",
       ),
       t153,
     ),
@@ -2582,7 +2582,7 @@ fn step_63() -> Unit raise {
   group_pow_sub_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G /\\ n <= m\n        ==> group_pow G x (m - n) =\n            group_mul G (group_inv G (group_pow G x n)) (group_pow G x m)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G /\\ n <= m\n        ==> group_pow G x (m - n) =\n            group_mul G (group_inv G (group_pow G x n)) (group_pow G x m)",
       ),
       t162,
     ),
@@ -2659,7 +2659,7 @@ fn step_64() -> Unit raise {
   group_inv_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_inv G (group_pow G x n) = group_pow G (group_inv G x) n",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_inv G (group_pow G x n) = group_pow G (group_inv G x) n",
       ),
       t174,
     ),
@@ -2707,7 +2707,7 @@ fn step_65() -> Unit raise {
   group_pow_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G x (m * n) = group_pow G (group_pow G x m) n",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G x (m * n) = group_pow G (group_pow G x m) n",
       ),
       t178,
     ),
@@ -2730,7 +2730,7 @@ fn step_66() -> Unit raise {
   group_pow_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G (group_pow G x m) n = group_pow G x (m * n)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_pow G (group_pow G x m) n = group_pow G x (m * n)",
       ),
       t179,
     ),
@@ -2775,7 +2775,7 @@ fn step_67() -> Unit raise {
   group_commutes_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_mul G (group_pow G x n) y = group_mul G y (group_pow G x n)",
+        "∀ G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_mul G (group_pow G x n) y = group_mul G y (group_pow G x n)",
       ),
       t183,
     ),
@@ -2852,7 +2852,7 @@ fn step_68() -> Unit raise {
   group_mul_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_pow G (group_mul G x y) n =\n            group_mul G (group_pow G x n) (group_pow G y n)",
+        "∀ G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_pow G (group_mul G x y) n =\n            group_mul G (group_pow G x n) (group_pow G y n)",
       ),
       t191,
     ),
@@ -2904,7 +2904,7 @@ fn step_70() -> Unit raise {
   group_zpow_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n. x IN group_carrier G ==> group_zpow G x n IN group_carrier G",
+        "∀ G (x:A) n. x IN group_carrier G ==> group_zpow G x n IN group_carrier G",
       ),
       t194,
     ),
@@ -2928,7 +2928,7 @@ fn step_71() -> Unit raise {
   )
   group_npow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G (x:A) n. group_zpow G x (&n) = group_pow G x n"),
+      @parser.parse_term("∀ G (x:A) n. group_zpow G x (&n) = group_pow G x n"),
       t195,
     ),
   )
@@ -2949,7 +2949,7 @@ fn step_72() -> Unit raise {
   let t196 = @simp.rewrite_tac(@list.List([group_npow(), group_pow_0()]))
   group_zpow_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G (x:A). group_zpow G x (&0) = group_id G"),
+      @parser.parse_term("∀ G (x:A). group_zpow G x (&0) = group_id G"),
       t196,
     ),
   )
@@ -2971,7 +2971,7 @@ fn step_73() -> Unit raise {
   group_zpow_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_zpow G x (&1) = x",
+        "∀ G x:A. x IN group_carrier G ==> group_zpow G x (&1) = x",
       ),
       t197,
     ),
@@ -2994,7 +2994,7 @@ fn step_74() -> Unit raise {
   group_zpow_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_zpow G x (&2) = group_mul G x x",
+        "∀ G x:A. x IN group_carrier G ==> group_zpow G x (&2) = group_mul G x x",
       ),
       t198,
     ),
@@ -3026,7 +3026,7 @@ fn step_75() -> Unit raise {
   )
   group_zpow_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. group_zpow G (group_id G) n = group_id G"),
+      @parser.parse_term("∀ n. group_zpow G (group_id G) n = group_id G"),
       t199,
     ),
   )
@@ -3077,7 +3077,7 @@ fn step_76() -> Unit raise {
   group_zpow_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G x (--n) = group_inv G (group_zpow G x n)",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G x (--n) = group_inv G (group_zpow G x n)",
       ),
       t206,
     ),
@@ -3100,7 +3100,7 @@ fn step_77() -> Unit raise {
   group_zpow_minus1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_zpow G x (-- &1) = group_inv G x",
+        "∀ G x:A. x IN group_carrier G ==> group_zpow G x (-- &1) = group_inv G x",
       ),
       t207,
     ),
@@ -3148,7 +3148,7 @@ fn step_78() -> Unit raise {
   group_zpow_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G (x:A) n. group_zpow G x (&n) = group_pow G x n) /\\\n   (forall G (x:A) n. group_zpow G x (-- &n) = group_inv G (group_pow G x n))",
+        "(∀ G (x:A) n. group_zpow G x (&n) = group_pow G x n) /\\\n   (∀ G (x:A) n. group_zpow G x (-- &n) = group_inv G (group_pow G x n))",
       ),
       t210,
     ),
@@ -3185,7 +3185,7 @@ fn step_79() -> Unit raise {
   group_zpow_abs_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> (group_zpow G x (abs n) = group_id G <=>\n             group_zpow G x n = group_id G)",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> (group_zpow G x (abs n) = group_id G <=>\n             group_zpow G x n = group_id G)",
       ),
       t213,
     ),
@@ -3520,7 +3520,7 @@ fn step_80() -> Unit raise {
   group_zpow_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m + n) =\n            group_mul G (group_zpow G x m) (group_zpow G x n)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m + n) =\n            group_mul G (group_zpow G x m) (group_zpow G x n)",
       ),
       t250,
     ),
@@ -3550,7 +3550,7 @@ fn step_81() -> Unit raise {
   group_zpow_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m - n) =\n            group_div G (group_zpow G x m) (group_zpow G x n)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m - n) =\n            group_div G (group_zpow G x m) (group_zpow G x n)",
       ),
       t251,
     ),
@@ -3579,7 +3579,7 @@ fn step_82() -> Unit raise {
   group_zpow_sub_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m - n) =\n            group_mul G (group_inv G (group_zpow G x n)) (group_zpow G x m)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m - n) =\n            group_mul G (group_inv G (group_zpow G x n)) (group_zpow G x m)",
       ),
       t253,
     ),
@@ -3612,7 +3612,7 @@ fn step_83() -> Unit raise {
   group_inv_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_inv G (group_zpow G x n) = group_zpow G (group_inv G x) n",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_inv G (group_zpow G x n) = group_zpow G (group_inv G x) n",
       ),
       t256,
     ),
@@ -3636,7 +3636,7 @@ fn step_84() -> Unit raise {
   group_zpow_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G (group_inv G x) n = group_zpow G x (--n)",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G (group_inv G x) n = group_zpow G x (--n)",
       ),
       t258,
     ),
@@ -3890,7 +3890,7 @@ fn step_85() -> Unit raise {
   group_zpow_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m * n) = group_zpow G (group_zpow G x m) n",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> group_zpow G x (m * n) = group_zpow G (group_zpow G x m) n",
       ),
       t282,
     ),
@@ -3941,7 +3941,7 @@ fn step_86() -> Unit raise {
   group_commutes_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) (y:A) n.\n      x IN group_carrier G /\\ y IN group_carrier G /\\\n      group_mul G x y = group_mul G y x\n      ==> group_mul G (group_zpow G x n) y = group_mul G y (group_zpow G x n)",
+        "∀ G (x:A) (y:A) n.\n      x IN group_carrier G /\\ y IN group_carrier G /\\\n      group_mul G x y = group_mul G y x\n      ==> group_mul G (group_zpow G x n) y = group_mul G y (group_zpow G x n)",
       ),
       t289,
     ),
@@ -3978,7 +3978,7 @@ fn step_87() -> Unit raise {
   group_mul_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_zpow G (group_mul G x y) n =\n            group_mul G (group_zpow G x n) (group_zpow G y n)",
+        "∀ G (x:A) (y:A) n.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_zpow G (group_mul G x y) n =\n            group_mul G (group_zpow G x n) (group_zpow G y n)",
       ),
       t292,
     ),
@@ -4000,7 +4000,7 @@ fn step_88() -> Unit raise {
   abelian_group_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "abelian_group (G:A group) <=>\n  forall x y. x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_mul G x y = group_mul G y x",
+        "abelian_group (G:A group) <=>\n  ∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_mul G x y = group_mul G y x",
       ),
     ),
   )
@@ -4023,7 +4023,7 @@ fn step_89() -> Unit raise {
   )
   trivial_imp_abelian_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. trivial_group G ==> abelian_group G"),
+      @parser.parse_term("∀ G:A group. trivial_group G ==> abelian_group G"),
       t293,
     ),
   )
@@ -4048,7 +4048,7 @@ fn step_90() -> Unit raise {
   )
   abelian_singleton_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a:A. abelian_group(singleton_group a)"),
+      @parser.parse_term("∀ a:A. abelian_group(singleton_group a)"),
       t294,
     ),
   )
@@ -4078,7 +4078,7 @@ fn step_91() -> Unit raise {
   abelian_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. abelian_group (opposite_group G) <=> abelian_group G",
+        "∀ G:A group. abelian_group (opposite_group G) <=> abelian_group G",
       ),
       t296,
     ),
@@ -4103,7 +4103,7 @@ fn step_92() -> Unit raise {
   abelian_group_mul_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_pow G (group_mul G x y) n =\n            group_mul G (group_pow G x n) (group_pow G y n)",
+        "∀ G (x:A) (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_pow G (group_mul G x y) n =\n            group_mul G (group_pow G x n) (group_pow G y n)",
       ),
       t297,
     ),
@@ -4128,7 +4128,7 @@ fn step_93() -> Unit raise {
   abelian_group_mul_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_zpow G (group_mul G x y) n =\n            group_mul G (group_zpow G x n) (group_zpow G y n)",
+        "∀ G (x:A) (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_zpow G (group_mul G x y) n =\n            group_mul G (group_zpow G x n) (group_zpow G y n)",
       ),
       t298,
     ),
@@ -4160,7 +4160,7 @@ fn step_94() -> Unit raise {
   abelian_group_div_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_zpow G (group_div G x y) n =\n            group_div G (group_zpow G x n) (group_zpow G y n)",
+        "∀ G x (y:A) n.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_zpow G (group_div G x y) n =\n            group_div G (group_zpow G x n) (group_zpow G y n)",
       ),
       t299,
     ),
@@ -4189,7 +4189,7 @@ fn step_95() -> Unit raise {
   abelian_group_mul_ac_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G <=>\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> group_mul G x y = group_mul G y x) /\\\n        (forall x y z. x IN group_carrier G /\\ y IN group_carrier G /\\\n                 z IN group_carrier G\n                 ==> group_mul G (group_mul G x y) z =\n                     group_mul G x (group_mul G y z)) /\\\n        (forall x y z. x IN group_carrier G /\\ y IN group_carrier G /\\\n                 z IN group_carrier G\n                 ==> group_mul G x (group_mul G y z) =\n                     group_mul G y (group_mul G x z))",
+        "∀ G:A group.\n        abelian_group G <=>\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> group_mul G x y = group_mul G y x) /\\\n        (∀ x y z. x IN group_carrier G /\\ y IN group_carrier G /\\\n                 z IN group_carrier G\n                 ==> group_mul G (group_mul G x y) z =\n                     group_mul G x (group_mul G y z)) /\\\n        (∀ x y z. x IN group_carrier G /\\ y IN group_carrier G /\\\n                 z IN group_carrier G\n                 ==> group_mul G x (group_mul G y z) =\n                     group_mul G y (group_mul G x z))",
       ),
       t301,
     ),
@@ -4280,7 +4280,7 @@ fn step_99() -> Unit raise {
   group_neg_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. group_neg G x IN group_carrier G <=> x IN group_carrier G",
+        "∀ G x:A. group_neg G x IN group_carrier G <=> x IN group_carrier G",
       ),
       t304,
     ),
@@ -4307,7 +4307,7 @@ fn step_100() -> Unit raise {
   group_add_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        group_add G x y IN group_carrier G <=>\n        x IN group_carrier G /\\ y IN group_carrier G",
+        "∀ G x y:A.\n        group_add G x y IN group_carrier G <=>\n        x IN group_carrier G /\\ y IN group_carrier G",
       ),
       t306,
     ),
@@ -4330,7 +4330,7 @@ fn step_101() -> Unit raise {
   group_neg_eq_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_neg G x = group_inv G x",
+        "∀ G x:A. x IN group_carrier G ==> group_neg G x = group_inv G x",
       ),
       t307,
     ),
@@ -4355,7 +4355,7 @@ fn step_102() -> Unit raise {
   group_add_eq_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_add G x y = group_mul G x y",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_add G x y = group_mul G x y",
       ),
       t308,
     ),
@@ -4381,7 +4381,7 @@ fn step_103() -> Unit raise {
   )
   group_add_lid_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x:A. group_add G (group_id G) x = x"),
+      @parser.parse_term("∀ G x:A. group_add G (group_id G) x = x"),
       t309,
     ),
   )
@@ -4404,7 +4404,7 @@ fn step_104() -> Unit raise {
   )
   group_add_rid_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x:A. group_add G x (group_id G) = x"),
+      @parser.parse_term("∀ G x:A. group_add G x (group_id G) = x"),
       t310,
     ),
   )
@@ -4450,7 +4450,7 @@ fn step_105() -> Unit raise {
   group_add_assoc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y z:A.\n        group_add G x (group_add G y z) = group_add G (group_add G x y) z",
+        "∀ G x y z:A.\n        group_add G x (group_add G y z) = group_add G (group_add G x y) z",
       ),
       t318,
     ),
@@ -4503,7 +4503,7 @@ fn step_106() -> Unit raise {
   group_neg_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A. group_neg G (group_add G x y) =\n             group_add G (group_neg G y) (group_neg G x)",
+        "∀ G x y:A. group_neg G (group_add G x y) =\n             group_add G (group_neg G y) (group_neg G x)",
       ),
       t325,
     ),
@@ -4530,7 +4530,7 @@ fn step_107() -> Unit raise {
   )
   group_neg_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x:A. group_neg G (group_neg G x) = x"),
+      @parser.parse_term("∀ G x:A. group_neg G (group_neg G x) = x"),
       t328,
     ),
   )
@@ -4553,7 +4553,7 @@ fn step_108() -> Unit raise {
   )
   group_neg_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_neg G (group_id G) = group_id G"),
+      @parser.parse_term("∀ G:A group. group_neg G (group_id G) = group_id G"),
       t329,
     ),
   )
@@ -4581,7 +4581,7 @@ fn step_109() -> Unit raise {
   group_add_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A. group_add G x y = group_id G <=> group_add G y x = group_id G",
+        "∀ G x y:A. group_add G x y = group_id G <=> group_add G y x = group_id G",
       ),
       t331,
     ),
@@ -4613,7 +4613,7 @@ fn step_110() -> Unit raise {
   group_neg_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. group_neg G x = group_id G <=> x = group_id G",
+        "∀ G x:A. group_neg G x = group_id G <=> x = group_id G",
       ),
       t332,
     ),
@@ -4654,7 +4654,7 @@ fn step_111() -> Unit raise {
   group_nmul_eq_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n. x IN group_carrier G ==> group_nmul G n x = group_pow G x n",
+        "∀ G (x:A) n. x IN group_carrier G ==> group_nmul G n x = group_pow G x n",
       ),
       t335,
     ),
@@ -4692,7 +4692,7 @@ fn step_112() -> Unit raise {
   group_nmul_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        group_nmul G (m + n) x =\n        group_add G (group_nmul G m x) (group_nmul G n x)",
+        "∀ G (x:A) m n.\n        group_nmul G (m + n) x =\n        group_add G (group_nmul G m x) (group_nmul G n x)",
       ),
       t338,
     ),
@@ -4734,7 +4734,7 @@ fn step_113() -> Unit raise {
   group_nmul_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        group_nmul G (m * n) x = group_nmul G m (group_nmul G n x)",
+        "∀ G (x:A) m n.\n        group_nmul G (m * n) x = group_nmul G m (group_nmul G n x)",
       ),
       t342,
     ),
@@ -4761,7 +4761,7 @@ fn step_114() -> Unit raise {
     ]),
   )
   group_nmul_1_c.set(
-    @tactics.prove(@parser.parse_term("forall G x:A. group_nmul G 1 x = x"), t343),
+    @tactics.prove(@parser.parse_term("∀ G x:A. group_nmul G 1 x = x"), t343),
   )
 }
 
@@ -4813,7 +4813,7 @@ fn step_115() -> Unit raise {
   group_neg_nmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        group_neg G (group_nmul G n x) = group_nmul G n (group_neg G x)",
+        "∀ G (x:A) n.\n        group_neg G (group_nmul G n x) = group_nmul G n (group_neg G x)",
       ),
       t351,
     ),
@@ -4840,7 +4840,7 @@ fn step_116() -> Unit raise {
   group_add_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A. abelian_group G ==> group_add G x y = group_add G y x",
+        "∀ G x y:A. abelian_group G ==> group_add G x y = group_add G y x",
       ),
       t353,
     ),
@@ -4867,7 +4867,7 @@ fn step_117() -> Unit raise {
   group_add_sym_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. (forall x y. group_add G x y = group_add G y x) <=> abelian_group G",
+        "∀ G:A group. (∀ x y. group_add G x y = group_add G y x) <=> abelian_group G",
       ),
       t355,
     ),
@@ -4933,7 +4933,7 @@ fn step_118() -> Unit raise {
   group_add_nmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) y n.\n        abelian_group G\n        ==> group_nmul G n (group_add G x y) =\n            group_add G (group_nmul G n x) (group_nmul G n y)",
+        "∀ G (x:A) y n.\n        abelian_group G\n        ==> group_nmul G n (group_add G x y) =\n            group_add G (group_nmul G n x) (group_nmul G n y)",
       ),
       t360,
     ),
@@ -4962,7 +4962,7 @@ fn step_119() -> Unit raise {
   )
   neutral_group_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. neutral(group_add G) = group_id G"),
+      @parser.parse_term("∀ G:A group. neutral(group_add G) = group_id G"),
       t362,
     ),
   )
@@ -4994,7 +4994,7 @@ fn step_120() -> Unit raise {
   monoidal_group_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. monoidal(group_add G) <=> abelian_group G",
+        "∀ G:A group. monoidal(group_add G) <=> abelian_group G",
       ),
       t363,
     ),
@@ -5078,7 +5078,7 @@ fn step_121() -> Unit raise {
   )
   let t373 = (
     @parser.parse_term(
-      "forall G t t':A.\n            t = t' /\\ t IN group_carrier G\n            ==> group_inv G t = group_neg G t' /\\\n                group_inv G t IN group_carrier G",
+      "∀ G t t':A.\n            t = t' /\\ t IN group_carrier G\n            ==> group_inv G t = group_neg G t' /\\\n                group_inv G t IN group_carrier G",
     ),
     t372,
   )
@@ -5113,7 +5113,7 @@ fn step_121() -> Unit raise {
   let t375 = @simp.simp_tac(@list.List([group_neg_v1()]))
   let t376 = (
     @parser.parse_term(
-      "forall G t t':A.\n            t = t' /\\ t IN group_carrier G\n            ==> group_neg G t = group_neg G t' /\\\n                group_neg G t IN group_carrier G",
+      "∀ G t t':A.\n            t = t' /\\ t IN group_carrier G\n            ==> group_neg G t = group_neg G t' /\\\n                group_neg G t IN group_carrier G",
     ),
     t375,
   )
@@ -5150,7 +5150,7 @@ fn step_121() -> Unit raise {
   )
   let t379 = (
     @parser.parse_term(
-      "forall G t (t':A) n.\n            t = t' /\\ t IN group_carrier G\n            ==> group_pow G t n = group_nmul G n t' /\\\n                group_pow G t n IN group_carrier G",
+      "∀ G t (t':A) n.\n            t = t' /\\ t IN group_carrier G\n            ==> group_pow G t n = group_nmul G n t' /\\\n                group_pow G t n IN group_carrier G",
     ),
     t378,
   )
@@ -5187,7 +5187,7 @@ fn step_121() -> Unit raise {
   )
   let t382 = (
     @parser.parse_term(
-      "forall G t (t':A) n.\n            t = t' /\\ t IN group_carrier G\n            ==> group_nmul G n t = group_nmul G n t' /\\\n                group_nmul G n t IN group_carrier G",
+      "∀ G t (t':A) n.\n            t = t' /\\ t IN group_carrier G\n            ==> group_nmul G n t = group_nmul G n t' /\\\n                group_nmul G n t IN group_carrier G",
     ),
     t381,
   )
@@ -5224,7 +5224,7 @@ fn step_121() -> Unit raise {
   )
   let t385 = (
     @parser.parse_term(
-      "forall G s t s' t':A.\n            (s = s' /\\ s IN group_carrier G) /\\\n            (t = t' /\\ t IN group_carrier G)\n            ==> group_mul G s t = group_add G s' t' /\\\n                group_mul G s t IN group_carrier G",
+      "∀ G s t s' t':A.\n            (s = s' /\\ s IN group_carrier G) /\\\n            (t = t' /\\ t IN group_carrier G)\n            ==> group_mul G s t = group_add G s' t' /\\\n                group_mul G s t IN group_carrier G",
     ),
     t384,
   )
@@ -5259,7 +5259,7 @@ fn step_121() -> Unit raise {
   let t387 = @simp.simp_tac(@list.List([group_add_v1()]))
   let t388 = (
     @parser.parse_term(
-      "forall G s t s' t':A.\n            (s = s' /\\ s IN group_carrier G) /\\\n            (t = t' /\\ t IN group_carrier G)\n            ==> group_add G s t = group_add G s' t' /\\\n                group_add G s t IN group_carrier G",
+      "∀ G s t s' t':A.\n            (s = s' /\\ s IN group_carrier G) /\\\n            (t = t' /\\ t IN group_carrier G)\n            ==> group_add G s t = group_add G s' t' /\\\n                group_add G s t IN group_carrier G",
     ),
     t387,
   )
@@ -5437,7 +5437,7 @@ fn step_121() -> Unit raise {
   )
   let t410 = (
     @parser.parse_term(
-      "(forall G x:A. x IN group_carrier G\n                ==> group_add G x (group_neg G x) = group_id G) /\\\n       (forall G x:A. x IN group_carrier G\n                ==> group_add G (group_neg G x) x = group_id G) /\\\n       (forall G x y:A. x IN group_carrier G\n                ==> group_add G x (group_add G (group_neg G x) y) = y) /\\\n       (forall G x y:A. x IN group_carrier G\n                ==> group_add G (group_neg G x) (group_add G x y) = y)",
+      "(∀ G x:A. x IN group_carrier G\n                ==> group_add G x (group_neg G x) = group_id G) /\\\n       (∀ G x:A. x IN group_carrier G\n                ==> group_add G (group_neg G x) x = group_id G) /\\\n       (∀ G x y:A. x IN group_carrier G\n                ==> group_add G x (group_add G (group_neg G x) y) = y) /\\\n       (∀ G x y:A. x IN group_carrier G\n                ==> group_add G (group_neg G x) (group_add G x y) = y)",
     ),
     t409,
   )
@@ -5964,7 +5964,7 @@ fn step_125() -> Unit raise {
   group_product_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k (f:K->A) g.\n        (forall i. i IN k ==> f i = g i)\n        ==> group_product G (<<=) k f = group_product G (<<=) k g",
+        "∀ G (<<=) k (f:K->A) g.\n        (∀ i. i IN k ==> f i = g i)\n        ==> group_product G (<<=) k f = group_product G (<<=) k g",
       ),
       t485,
     ),
@@ -5989,7 +5989,7 @@ fn step_126() -> Unit raise {
   group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A) g.\n        (forall i. i IN k ==> f i = g i) ==> group_sum G k f = group_sum G k g",
+        "∀ G k (f:K->A) g.\n        (∀ i. i IN k ==> f i = g i) ==> group_sum G k f = group_sum G k g",
       ),
       t486,
     ),
@@ -6013,7 +6013,7 @@ fn step_127() -> Unit raise {
   )
   let th = @tactics.prove(
     @parser.parse_term(
-      "(forall G (<<=) k f (g:K->A).\n         (forall i. i IN k ==> f i = g i)\n         ==> group_product G (<<=) k (\\i. f i) = group_product G (<<=) k g) /\\\n   (forall G k f (g:K->A).\n         (forall i. i IN k ==> f i = g i)\n         ==> group_sum G k (\\i. f i) = group_sum G k g)",
+      "(∀ G (<<=) k f (g:K->A).\n         (∀ i. i IN k ==> f i = g i)\n         ==> group_product G (<<=) k (\\i. f i) = group_product G (<<=) k g) /\\\n   (∀ G k f (g:K->A).\n         (∀ i. i IN k ==> f i = g i)\n         ==> group_sum G k (\\i. f i) = group_sum G k g)",
     ),
     t487,
   )
@@ -6055,7 +6055,7 @@ fn step_128() -> Unit raise {
   group_product_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G (<<=) k (f:K->A).\n       P(group_id G) /\\\n       (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n              P x /\\ P y\n              ==> P(group_mul G x y)) /\\\n       (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G) ==> P(f i))\n       ==> P(group_product G (<<=) k f)",
+        "∀ P G (<<=) k (f:K->A).\n       P(group_id G) /\\\n       (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n              P x /\\ P y\n              ==> P(group_mul G x y)) /\\\n       (∀ i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G) ==> P(f i))\n       ==> P(group_product G (<<=) k f)",
       ),
       t497,
     ),
@@ -6082,7 +6082,7 @@ fn step_129() -> Unit raise {
   group_sum_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G k (f:K->A).\n       P(group_id G) /\\\n       (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n              P x /\\ P y\n              ==> P(group_mul G x y)) /\\\n       (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G) ==> P(f i))\n       ==> P(group_sum G k f)",
+        "∀ P G k (f:K->A).\n       P(group_id G) /\\\n       (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n              P x /\\ P y\n              ==> P(group_mul G x y)) /\\\n       (∀ i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G) ==> P(f i))\n       ==> P(group_sum G k f)",
       ),
       t498,
     ),
@@ -6116,7 +6116,7 @@ fn step_130() -> Unit raise {
   group_product_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k (f:K->A). group_product G (<<=) k f IN group_carrier G",
+        "∀ G (<<=) k (f:K->A). group_product G (<<=) k f IN group_carrier G",
       ),
       t502,
     ),
@@ -6140,7 +6140,7 @@ fn step_131() -> Unit raise {
   let t503 = @simp.rewrite_tac(@list.List([group_sum(), group_product_v1()]))
   group_sum_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G k (f:K->A). group_sum G k f IN group_carrier G"),
+      @parser.parse_term("∀ G k (f:K->A). group_sum G k f IN group_carrier G"),
       t503,
     ),
   )
@@ -6179,7 +6179,7 @@ fn step_132() -> Unit raise {
   group_product_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k (f:K->A).\n        group_product G (<<=) {i | i IN k /\\ ~(f i = group_id G)} f =\n        group_product G (<<=) k f",
+        "∀ G (<<=) k (f:K->A).\n        group_product G (<<=) {i | i IN k /\\ ~(f i = group_id G)} f =\n        group_product G (<<=) k f",
       ),
       t507,
     ),
@@ -6206,7 +6206,7 @@ fn step_133() -> Unit raise {
   group_sum_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A).\n      group_sum G {i | i IN k /\\ ~(f i = group_id G)} f =\n      group_sum G k f",
+        "∀ G k (f:K->A).\n      group_sum G {i | i IN k /\\ ~(f i = group_id G)} f =\n      group_sum G k f",
       ),
       t508,
     ),
@@ -6248,7 +6248,7 @@ fn step_134() -> Unit raise {
   group_product_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k (f:K->A).\n        group_product G (<<=) {i | i IN k /\\ f i IN group_carrier G} f =\n        group_product G (<<=) k f",
+        "∀ G (<<=) k (f:K->A).\n        group_product G (<<=) {i | i IN k /\\ f i IN group_carrier G} f =\n        group_product G (<<=) k f",
       ),
       t512,
     ),
@@ -6275,7 +6275,7 @@ fn step_135() -> Unit raise {
   group_sum_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A).\n        group_sum G {i | i IN k /\\ f i IN group_carrier G} f =\n        group_sum G k f",
+        "∀ G k (f:K->A).\n        group_sum G {i | i IN k /\\ f i IN group_carrier G} f =\n        group_sum G k f",
       ),
       t513,
     ),
@@ -6305,7 +6305,7 @@ fn step_136() -> Unit raise {
   group_product_expand_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k (f:K->A).\n        group_product G (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}}\n        then group_product G (<<=)\n              {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} f\n        else group_id G",
+        "∀ G (<<=) k (f:K->A).\n        group_product G (<<=) k f =\n        if FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}}\n        then group_product G (<<=)\n              {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} f\n        else group_id G",
       ),
       t516,
     ),
@@ -6335,7 +6335,7 @@ fn step_137() -> Unit raise {
   group_sum_expand_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A).\n        group_sum G k f =\n        if FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}}\n        then group_sum G\n              {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} f\n        else group_id G",
+        "∀ G k (f:K->A).\n        group_sum G k f =\n        if FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}}\n        then group_sum G\n              {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} f\n        else group_id G",
       ),
       t519,
     ),
@@ -6388,7 +6388,7 @@ fn step_138() -> Unit raise {
   group_product_restrict_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) P s (f:K->A).\n        group_product G (<<=) {x | x IN s /\\ P x} f =\n        group_product G (<<=) s (\\x. if P x then f x else group_id G)",
+        "∀ G (<<=) P s (f:K->A).\n        group_product G (<<=) {x | x IN s /\\ P x} f =\n        group_product G (<<=) s (\\x. if P x then f x else group_id G)",
       ),
       t525,
     ),
@@ -6415,7 +6415,7 @@ fn step_139() -> Unit raise {
   group_sum_restrict_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G P s (f:K->A).\n        group_sum G {x | x IN s /\\ P x} f =\n        group_sum G s (\\x. if P x then f x else group_id G)",
+        "∀ G P s (f:K->A).\n        group_sum G {x | x IN s /\\ P x} f =\n        group_sum G s (\\x. if P x then f x else group_id G)",
       ),
       t526,
     ),
@@ -6453,7 +6453,7 @@ fn step_140() -> Unit raise {
   group_product_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) s t (f:K->A).\n        t SUBSET s /\\ (forall x. x IN s /\\ ~(x IN t) ==> f x = group_id G)\n        ==> group_product G (<<=) s f = group_product G (<<=) t f",
+        "∀ G (<<=) s t (f:K->A).\n        t SUBSET s /\\ (∀ x. x IN s /\\ ~(x IN t) ==> f x = group_id G)\n        ==> group_product G (<<=) s f = group_product G (<<=) t f",
       ),
       t529,
     ),
@@ -6480,7 +6480,7 @@ fn step_141() -> Unit raise {
   group_sum_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t (f:K->A).\n        t SUBSET s /\\ (forall x. x IN s /\\ ~(x IN t) ==> f x = group_id G)\n        ==> group_sum G s f = group_sum G t f",
+        "∀ G s t (f:K->A).\n        t SUBSET s /\\ (∀ x. x IN s /\\ ~(x IN t) ==> f x = group_id G)\n        ==> group_sum G s f = group_sum G t f",
       ),
       t530,
     ),
@@ -6535,7 +6535,7 @@ fn step_142() -> Unit raise {
   group_product_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) (f:K->A).\n      group_product G (<<=) {} f = group_id G /\\\n      (forall i k. FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n             (forall j. j IN k ==> i <<= j /\\ ~(j <<= i))\n             ==> group_product G (<<=) (i INSERT k) f =\n                   if f i IN group_carrier G ==> i IN k\n                   then group_product G (<<=) k f\n                   else group_mul G (f i) (group_product G (<<=) k f))",
+        "∀ G (<<=) (f:K->A).\n      group_product G (<<=) {} f = group_id G /\\\n      (∀ i k. FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n             (∀ j. j IN k ==> i <<= j /\\ ~(j <<= i))\n             ==> group_product G (<<=) (i INSERT k) f =\n                   if f i IN group_carrier G ==> i IN k\n                   then group_product G (<<=) k f\n                   else group_mul G (f i) (group_product G (<<=) k f))",
       ),
       t537,
     ),
@@ -6564,7 +6564,7 @@ fn step_143() -> Unit raise {
   group_product_clauses_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) (f:K->A).\n      group_product G (<<=) {} f = group_id G /\\\n      (forall k. FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n           ~({i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} = {})\n           ==> ?i. i IN k /\\\n                   f i IN group_carrier G DIFF {group_id G} /\\\n                   group_product G (<<=) k f =\n                   group_mul G (f i) (group_product G (<<=) (k DELETE i) f))",
+        "∀ G (<<=) (f:K->A).\n      group_product G (<<=) {} f = group_id G /\\\n      (∀ k. FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n           ~({i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} = {})\n           ==> ?i. i IN k /\\\n                   f i IN group_carrier G DIFF {group_id G} /\\\n                   group_product G (<<=) k f =\n                   group_mul G (f i) (group_product G (<<=) (k DELETE i) f))",
       ),
       t539,
     ),
@@ -6593,7 +6593,7 @@ fn step_144() -> Unit raise {
   group_sum_clauses_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:K->A).\n      group_sum G {} f = group_id G /\\\n      (forall k. FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n           ~({i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} = {})\n           ==> ?i. i IN k /\\\n                   f i IN group_carrier G DIFF {group_id G} /\\\n                   group_sum G k f =\n                   group_mul G (f i) (group_sum G (k DELETE i) f))",
+        "∀ G (f:K->A).\n      group_sum G {} f = group_id G /\\\n      (∀ k. FINITE {i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n           ~({i | i IN k /\\ f i IN group_carrier G DIFF {group_id G}} = {})\n           ==> ?i. i IN k /\\\n                   f i IN group_carrier G DIFF {group_id G} /\\\n                   group_sum G k f =\n                   group_mul G (f i) (group_sum G (k DELETE i) f))",
       ),
       t541,
     ),
@@ -6631,7 +6631,7 @@ fn step_145() -> Unit raise {
   group_product_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (<<=) (s:K->bool) f.\n        (forall i. i IN s ==> f i = group_id G)\n        ==> group_product G (<<=) s f = group_id G",
+        "∀(G:A group) (<<=) (s:K->bool) f.\n        (∀ i. i IN s ==> f i = group_id G)\n        ==> group_product G (<<=) s f = group_id G",
       ),
       t545,
     ),
@@ -6656,7 +6656,7 @@ fn step_146() -> Unit raise {
   group_sum_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (s:K->bool) f.\n        (forall i. i IN s ==> f i = group_id G)\n        ==> group_sum G s f = group_id G",
+        "∀(G:A group) (s:K->bool) f.\n        (∀ i. i IN s ==> f i = group_id G)\n        ==> group_sum G s f = group_id G",
       ),
       t546,
     ),
@@ -6681,7 +6681,7 @@ fn step_147() -> Unit raise {
   group_product_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (<<=) (s:K->bool).\n        group_product G (<<=) s (\\x. group_id G) = group_id G",
+        "∀(G:A group) (<<=) (s:K->bool).\n        group_product G (<<=) s (\\x. group_id G) = group_id G",
       ),
       t547,
     ),
@@ -6706,7 +6706,7 @@ fn step_148() -> Unit raise {
   group_sum_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (s:K->bool).\n        group_sum G s (\\x. group_id G) = group_id G",
+        "∀(G:A group) (s:K->bool).\n        group_sum G s (\\x. group_id G) = group_id G",
       ),
       t548,
     ),
@@ -6742,7 +6742,7 @@ fn step_149() -> Unit raise {
   group_commutes_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k (f:K->A) z.\n        (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G)\n             ==> group_mul G (f i) z = group_mul G z (f i)) /\\\n        z IN group_carrier G\n        ==> group_mul G (group_product G (<<=) k f) z =\n            group_mul G z (group_product G (<<=) k f)",
+        "∀ G (<<=) k (f:K->A) z.\n        (∀ i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G)\n             ==> group_mul G (f i) z = group_mul G z (f i)) /\\\n        z IN group_carrier G\n        ==> group_mul G (group_product G (<<=) k f) z =\n            group_mul G z (group_product G (<<=) k f)",
       ),
       t553,
     ),
@@ -6769,7 +6769,7 @@ fn step_150() -> Unit raise {
   group_commutes_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A) z.\n        (forall i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G)\n             ==> group_mul G (f i) z = group_mul G z (f i)) /\\\n        z IN group_carrier G\n        ==> group_mul G (group_sum G k f) z = group_mul G z (group_sum G k f)",
+        "∀ G k (f:K->A) z.\n        (∀ i. i IN k /\\ f i IN group_carrier G /\\ ~(f i = group_id G)\n             ==> group_mul G (f i) z = group_mul G z (f i)) /\\\n        z IN group_carrier G\n        ==> group_mul G (group_sum G k f) z = group_mul G z (group_sum G k f)",
       ),
       t554,
     ),
@@ -6806,7 +6806,7 @@ fn step_151() -> Unit raise {
   group_product_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) i (f:K->A).\n        group_product G (<<=) {i} f =\n        if f i IN group_carrier G then f i else group_id G",
+        "∀ G (<<=) i (f:K->A).\n        group_product G (<<=) {i} f =\n        if f i IN group_carrier G then f i else group_id G",
       ),
       t557,
     ),
@@ -6831,7 +6831,7 @@ fn step_152() -> Unit raise {
   group_sum_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G i (f:K->A).\n        group_sum G {i} f =\n        if f i IN group_carrier G then f i else group_id G",
+        "∀ G i (f:K->A).\n        group_sum G {i} f =\n        if f i IN group_carrier G then f i else group_id G",
       ),
       t558,
     ),
@@ -7476,7 +7476,7 @@ fn step_153() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall n s. FINITE s /\\ CARD s = n ==> P s) ==> forall s. FINITE s ==> P s",
+        "(∀ n s. FINITE s /\\ CARD s = n ==> P s) ==> ∀ s. FINITE s ==> P s",
       ),
     ),
   )
@@ -7486,7 +7486,7 @@ fn step_153() -> Unit raise {
   )
   let t594 = @class.asm_cases_tac(
     @parser.parse_term(
-      "forall i. i IN t ==> (f:K->A) i IN group_carrier G /\\ ~(f i = group_id G)",
+      "∀ i. i IN t ==> (f:K->A) i IN group_carrier G /\\ ~(f i = group_id G)",
     ),
   )
   let t593 = @tactics.x_gen_tac(@parser.parse_term("t:K->bool"))
@@ -7658,7 +7658,7 @@ fn step_153() -> Unit raise {
   ])
   let t572 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x y. x IN {i | i IN s /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n          y IN {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n          ==> x <<= y /\\ ~(x = y)",
+      "∀ x y. x IN {i | i IN s /\\ f i IN group_carrier G DIFF {group_id G}} /\\\n          y IN {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n          ==> x <<= y /\\ ~(x = y)",
     ),
     fn(
       x569 : @kernel.Thm,
@@ -7713,7 +7713,7 @@ fn step_153() -> Unit raise {
   ])
   let t567 = @tactics.subgoal_then(
     @parser.parse_term(
-      "(forall i. i IN {i | i IN s /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n         ==> f i IN group_carrier G /\\ ~(f i = group_id G)) /\\\n    (forall i. i IN {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n         ==> f i IN group_carrier G /\\ ~(f i = group_id G))",
+      "(∀ i. i IN {i | i IN s /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n         ==> f i IN group_carrier G /\\ ~(f i = group_id G)) /\\\n    (∀ i. i IN {i | i IN t /\\ (f:K->A) i IN group_carrier G DIFF {group_id G}}\n         ==> f i IN group_carrier G /\\ ~(f i = group_id G))",
     ),
     fn(
       x564 : @kernel.Thm,
@@ -7956,7 +7956,7 @@ fn step_153() -> Unit raise {
   group_product_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) (f:K->A) s t.\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        (FINITE {i | i IN s /\\ f i IN group_carrier G DIFF {group_id G}} <=>\n         FINITE {i | i IN t /\\ f i IN group_carrier G DIFF {group_id G}}) /\\\n        (forall x y. x IN s /\\ y IN t ==> x <<= y /\\ ~(x = y))\n        ==> group_product G (<<=) (s UNION t) f =\n            group_mul G (group_product G (<<=) s f)\n                        (group_product G (<<=) t f)",
+        "∀ G (<<=) (f:K->A) s t.\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        (FINITE {i | i IN s /\\ f i IN group_carrier G DIFF {group_id G}} <=>\n         FINITE {i | i IN t /\\ f i IN group_carrier G DIFF {group_id G}}) /\\\n        (∀ x y. x IN s /\\ y IN t ==> x <<= y /\\ ~(x = y))\n        ==> group_product G (<<=) (s UNION t) f =\n            group_mul G (group_product G (<<=) s f)\n                        (group_product G (<<=) t f)",
       ),
       t673,
     ),
@@ -8249,7 +8249,7 @@ fn step_154() -> Unit raise {
   group_product_clauses_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:num->A) m n.\n        group_product G (<=) (m..n) f =\n        if m <= n then\n           if f m IN group_carrier G\n           then group_mul G (f m) (group_product G (<=) (m+1..n) f)\n           else group_product G (<=) (m+1..n) f\n         else group_id G",
+        "∀ G (f:num->A) m n.\n        group_product G (<=) (m..n) f =\n        if m <= n then\n           if f m IN group_carrier G\n           then group_mul G (f m) (group_product G (<=) (m+1..n) f)\n           else group_product G (<=) (m+1..n) f\n         else group_id G",
       ),
       t694,
     ),
@@ -8576,7 +8576,7 @@ fn step_155() -> Unit raise {
   group_product_clauses_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:num->A) m n.\n        group_product G (<=) (m..n) f =\n        if m <= n then\n           if f n IN group_carrier G\n           then if n = 0 then f 0\n                else group_mul G (group_product G (<=) (m..n-1) f) (f n)\n           else group_product G (<=) (m..n-1) f\n         else group_id G",
+        "∀ G (f:num->A) m n.\n        group_product G (<=) (m..n) f =\n        if m <= n then\n           if f n IN group_carrier G\n           then if n = 0 then f 0\n                else group_mul G (group_product G (<=) (m..n-1) f) (f n)\n           else group_product G (<=) (m..n-1) f\n         else group_id G",
       ),
       t722,
     ),
@@ -8648,7 +8648,7 @@ fn step_156() -> Unit raise {
   group_product_clauses_numseg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G m f:num->A.\n        group_product G (<=) (m..0) f =\n        if m = 0 /\\ f 0 IN group_carrier G then f 0 else group_id G) /\\\n   (forall G m n f:num->A.\n        group_product G (<=) (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN group_carrier G\n        then group_mul G (group_product G (<=) (m..n) f) (f(SUC n))\n        else group_product G (<=) (m..n) f)",
+        "(∀ G m f:num->A.\n        group_product G (<=) (m..0) f =\n        if m = 0 /\\ f 0 IN group_carrier G then f 0 else group_id G) /\\\n   (∀ G m n f:num->A.\n        group_product G (<=) (m..SUC n) f =\n        if m <= SUC n /\\ f(SUC n) IN group_carrier G\n        then group_mul G (group_product G (<=) (m..n) f) (f(SUC n))\n        else group_product G (<=) (m..n) f)",
       ),
       t733,
     ),
@@ -8846,7 +8846,7 @@ fn step_157() -> Unit raise {
     let t747 = @drule.match_mp(
       @meson.meson(
         @list.List([@sets.finite_insert(), @sets.finite_subset()]),
-        @parser.parse_term("FINITE s ==> forall i. t SUBSET i INSERT s ==> FINITE t"),
+        @parser.parse_term("FINITE s ==> ∀ i. t SUBSET i INSERT s ==> FINITE t"),
       ),
     )
     let t749 = @tactics.first_x_assum(fn(
@@ -9321,7 +9321,7 @@ fn step_157() -> Unit raise {
   group_product_clauses_commuting_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) i k (f:K->A).\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n        (forall j. j IN k /\\ j <<= i /\\ ~(j = i) /\\\n             f i IN group_carrier G /\\ f j IN group_carrier G\n             ==> group_mul G (f i) (f j) = group_mul G (f j) (f i))\n        ==> group_product G (<<=) (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_product G (<<=) k f\n                else group_mul G (f i) (group_product G (<<=) k f)",
+        "∀ G (<<=) i k (f:K->A).\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n        (∀ j. j IN k /\\ j <<= i /\\ ~(j = i) /\\\n             f i IN group_carrier G /\\ f j IN group_carrier G\n             ==> group_mul G (f i) (f j) = group_mul G (f j) (f i))\n        ==> group_product G (<<=) (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_product G (<<=) k f\n                else group_mul G (f i) (group_product G (<<=) k f)",
       ),
       t798,
     ),
@@ -9355,7 +9355,7 @@ fn step_158() -> Unit raise {
   abelian_group_product_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) i k (f:K->A).\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        abelian_group G /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}}\n        ==> group_product G (<<=) (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_product G (<<=) k f\n                else group_mul G (f i) (group_product G (<<=) k f)",
+        "∀ G (<<=) i k (f:K->A).\n        woset(<<=) /\\ fld(<<=) = (:K) /\\\n        abelian_group G /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}}\n        ==> group_product G (<<=) (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_product G (<<=) k f\n                else group_mul G (f i) (group_product G (<<=) k f)",
       ),
       t802,
     ),
@@ -9397,7 +9397,7 @@ fn step_159() -> Unit raise {
   group_sum_clauses_commuting_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G i k (f:K->A).\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n        (forall j. j IN k /\\ ~(j = i) /\\\n             f i IN group_carrier G /\\ f j IN group_carrier G\n             ==> group_mul G (f i) (f j) = group_mul G (f j) (f i))\n        ==> group_sum G (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_sum G k f\n                else group_mul G (f i) (group_sum G k f)",
+        "∀ G i k (f:K->A).\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}} /\\\n        (∀ j. j IN k /\\ ~(j = i) /\\\n             f i IN group_carrier G /\\ f j IN group_carrier G\n             ==> group_mul G (f i) (f j) = group_mul G (f j) (f i))\n        ==> group_sum G (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_sum G k f\n                else group_mul G (f i) (group_sum G k f)",
       ),
       t808,
     ),
@@ -9427,7 +9427,7 @@ fn step_160() -> Unit raise {
   abelian_group_sum_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G i k (f:K->A).\n        abelian_group G /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}}\n        ==> group_sum G (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_sum G k f\n                else group_mul G (f i) (group_sum G k f)",
+        "∀ G i k (f:K->A).\n        abelian_group G /\\\n        FINITE {j | j IN k /\\ f j IN group_carrier G DIFF {group_id G}}\n        ==> group_sum G (i INSERT k) f =\n                if f i IN group_carrier G ==> i IN k\n                then group_sum G k f\n                else group_mul G (f i) (group_sum G k f)",
       ),
       t811,
     ),
@@ -10006,7 +10006,7 @@ fn step_161() -> Unit raise {
   let t899 = @drule.match_mp(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("(forall s. ~(s = {}) ==> P s) /\\ ~(t = {}) ==> P t"),
+      @parser.parse_term("(∀ s. ~(s = {}) ==> P s) /\\ ~(t = {}) ==> P t"),
     ),
   )
   let t901 = @tactics.disch_then(fn(
@@ -10300,7 +10300,7 @@ fn step_161() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall n s. FINITE s /\\ CARD s = n ==> P s)\n    ==> forall s. FINITE s ==> P s",
+        "(∀ n s. FINITE s /\\ CARD s = n ==> P s)\n    ==> ∀ s. FINITE s ==> P s",
       ),
     ),
   )
@@ -10561,7 +10561,7 @@ fn step_161() -> Unit raise {
               @tactics.thenl(
                 @tactics.subgoal_then(
                   @parser.parse_term(
-                    "forall i. i IN t ==> (f:K->A) i IN group_carrier G /\\ g i IN group_carrier G",
+                    "∀ i. i IN t ==> (f:K->A) i IN group_carrier G /\\ g i IN group_carrier G",
                   ),
                   fn(
                     x835 : @kernel.Thm,
@@ -12632,7 +12632,7 @@ fn step_161() -> Unit raise {
   group_product_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) k f (g:K->A).\n      woset(<<=) /\\ fld(<<=) = (:K) /\\\n      FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n      FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n      (forall i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G) /\\\n      pairwise (\\i j. group_mul G (f i) (g j) = group_mul G (g j) (f i)) k\n      ==> group_product G (<<=) k (\\i. group_mul G (f i) (g i)) =\n          group_mul G (group_product G (<<=) k f) (group_product G (<<=) k g)",
+        "∀ G (<<=) k f (g:K->A).\n      woset(<<=) /\\ fld(<<=) = (:K) /\\\n      FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n      FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n      (∀ i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G) /\\\n      pairwise (\\i j. group_mul G (f i) (g j) = group_mul G (g j) (f i)) k\n      ==> group_product G (<<=) k (\\i. group_mul G (f i) (g i)) =\n          group_mul G (group_product G (<<=) k f) (group_product G (<<=) k g)",
       ),
       t996,
     ),
@@ -12674,7 +12674,7 @@ fn step_162() -> Unit raise {
   group_sum_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k f (g:K->A).\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (g j) = group_mul G (g j) (f i)) k\n        ==> group_sum G k (\\i. group_mul G (f i) (g i)) =\n            group_mul G (group_sum G k f) (group_sum G k g)",
+        "∀ G k f (g:K->A).\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (g j) = group_mul G (g j) (f i)) k\n        ==> group_sum G k (\\i. group_mul G (f i) (g i)) =\n            group_mul G (group_sum G k f) (group_sum G k g)",
       ),
       t1002,
     ),
@@ -12706,7 +12706,7 @@ fn step_163() -> Unit raise {
   abelian_group_sum_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k f (g:K->A).\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G)\n        ==> group_sum G k (\\i. group_mul G (f i) (g i)) =\n            group_mul G (group_sum G k f) (group_sum G k g)",
+        "∀ G k f (g:K->A).\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        FINITE {i | i IN k /\\ ~(g i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G /\\ g i IN group_carrier G)\n        ==> group_sum G k (\\i. group_mul G (f i) (g i)) =\n            group_mul G (group_sum G k f) (group_sum G k g)",
       ),
       t1006,
     ),
@@ -13019,7 +13019,7 @@ fn step_164() -> Unit raise {
   group_sum_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A).\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_inv G (f i)) =\n            group_inv G (group_sum G k f)",
+        "∀ G k (f:K->A).\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_inv G (f i)) =\n            group_inv G (group_sum G k f)",
       ),
       t1034,
     ),
@@ -13051,7 +13051,7 @@ fn step_165() -> Unit raise {
   abelian_group_sum_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A).\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_inv G (f i)) =\n            group_inv G (group_sum G k f)",
+        "∀ G k (f:K->A).\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_inv G (f i)) =\n            group_inv G (group_sum G k f)",
       ),
       t1038,
     ),
@@ -13438,7 +13438,7 @@ fn step_166() -> Unit raise {
   group_sum_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A) n.\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_pow G (f i) n) =\n            group_pow G (group_sum G k f) n",
+        "∀ G k (f:K->A) n.\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_pow G (f i) n) =\n            group_pow G (group_sum G k f) n",
       ),
       t1069,
     ),
@@ -13470,7 +13470,7 @@ fn step_167() -> Unit raise {
   abelian_group_sum_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A) n.\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_pow G (f i) n) =\n            group_pow G (group_sum G k f) n",
+        "∀ G k (f:K->A) n.\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_pow G (f i) n) =\n            group_pow G (group_sum G k f) n",
       ),
       t1073,
     ),
@@ -13858,7 +13858,7 @@ fn step_168() -> Unit raise {
   group_sum_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A) n.\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_zpow G (f i) n) =\n            group_zpow G (group_sum G k f) n",
+        "∀ G k (f:K->A) n.\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G) /\\\n        pairwise (\\i j. group_mul G (f i) (f j) = group_mul G (f j) (f i)) k\n        ==> group_sum G k (\\i. group_zpow G (f i) n) =\n            group_zpow G (group_sum G k f) n",
       ),
       t1104,
     ),
@@ -13890,7 +13890,7 @@ fn step_169() -> Unit raise {
   abelian_group_sum_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (f:K->A) n.\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (forall i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_zpow G (f i) n) =\n            group_zpow G (group_sum G k f) n",
+        "∀ G k (f:K->A) n.\n        abelian_group G /\\\n        FINITE {i | i IN k /\\ ~(f i = group_id G)} /\\\n        (∀ i. i IN k ==> f i IN group_carrier G)\n        ==> group_sum G k (\\i. group_zpow G (f i) n) =\n            group_zpow G (group_sum G k f) n",
       ),
       t1108,
     ),
@@ -14069,7 +14069,7 @@ fn step_170() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "((forall s. FINITE s ==> P s) ==> (forall s. P s)) /\\ (forall s. FINITE s ==> P s)\n    ==> forall s. P s",
+        "((∀ s. FINITE s ==> P s) ==> (∀ s. P s)) /\\ (∀ s. FINITE s ==> P s)\n    ==> ∀ s. P s",
       ),
     ),
   )
@@ -14143,7 +14143,7 @@ fn step_170() -> Unit raise {
   group_sum_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:K->A) (g:A->B) s.\n        abelian_group G /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> group_sum G (IMAGE f s) g = group_sum G s (g o f)",
+        "∀ G (f:K->A) (g:A->B) s.\n        abelian_group G /\\\n        (∀ x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> group_sum G (IMAGE f s) g = group_sum G s (g o f)",
       ),
       t1138,
     ),
@@ -14256,7 +14256,7 @@ fn step_171() -> Unit raise {
   ])
   let t1148 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall i. i IN {j | j IN k /\\ ~((x:K->A) j = group_id G)}\n        ==> x i IN group_carrier G /\\ ~(x i = group_id G)",
+      "∀ i. i IN {j | j IN k /\\ ~((x:K->A) j = group_id G)}\n        ==> x i IN group_carrier G /\\ ~(x i = group_id G)",
     ),
     fn(
       x1145 : @kernel.Thm,
@@ -14369,7 +14369,7 @@ fn step_171() -> Unit raise {
   abelian_group_product_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (<<=) (x:K->A) k.\n        woset(<<=) /\\\n        fld(<<=) = (:K) /\\\n        abelian_group G /\\\n        (forall i. i IN k ==> x i IN group_carrier G)\n        ==> group_product G (<<=) k x = iterate (group_add G) k x",
+        "∀ G (<<=) (x:K->A) k.\n        woset(<<=) /\\\n        fld(<<=) = (:K) /\\\n        abelian_group G /\\\n        (∀ i. i IN k ==> x i IN group_carrier G)\n        ==> group_product G (<<=) k x = iterate (group_add G) k x",
       ),
       t1165,
     ),
@@ -14411,7 +14411,7 @@ fn step_172() -> Unit raise {
   abelian_group_sum_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:K->A) k.\n        abelian_group G /\\\n        (forall i. i IN k ==> x i IN group_carrier G)\n        ==> group_sum G k x = iterate (group_add G) k x",
+        "∀ G (x:K->A) k.\n        abelian_group G /\\\n        (∀ i. i IN k ==> x i IN group_carrier G)\n        ==> group_sum G k x = iterate (group_add G) k x",
       ),
       t1171,
     ),
@@ -14438,7 +14438,7 @@ fn step_173() -> Unit raise {
   abelian_group_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:K->A) k.\n        abelian_group G /\\\n        (forall i. i IN k ==> x i IN group_carrier G)\n        ==> iterate (group_add G) k x IN group_carrier G",
+        "∀ G (x:K->A) k.\n        abelian_group G /\\\n        (∀ i. i IN k ==> x i IN group_carrier G)\n        ==> iterate (group_add G) k x IN group_carrier G",
       ),
       t1172,
     ),
@@ -14488,7 +14488,7 @@ fn step_175() -> Unit raise {
   group_conjugation_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_conjugation G x y IN group_carrier G",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_conjugation G x y IN group_carrier G",
       ),
       t1173,
     ),
@@ -14516,7 +14516,7 @@ fn step_176() -> Unit raise {
   group_conjugation_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a b x:A.\n        a IN group_carrier G /\\ b IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a (group_conjugation G b x) =\n            group_conjugation G (group_mul G a b) x",
+        "∀ G a b x:A.\n        a IN group_carrier G /\\ b IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a (group_conjugation G b x) =\n            group_conjugation G (group_mul G a b) x",
       ),
       t1174,
     ),
@@ -14544,7 +14544,7 @@ fn step_177() -> Unit raise {
   group_conjugation_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a x y:A.\n        a IN group_carrier G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_conjugation G a x = group_conjugation G a y <=> x = y)",
+        "∀ G a x y:A.\n        a IN group_carrier G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_conjugation G a x = group_conjugation G a y <=> x = y)",
       ),
       t1175,
     ),
@@ -14572,7 +14572,7 @@ fn step_178() -> Unit raise {
   group_conjugation_eq_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_conjugation G x y = y <=>\n             group_mul G x y = group_mul G y x)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_conjugation G x y = y <=>\n             group_mul G x y = group_mul G y x)",
       ),
       t1176,
     ),
@@ -14600,7 +14600,7 @@ fn step_179() -> Unit raise {
   group_conjugation_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (group_conjugation G a x = group_id G <=> x = group_id G)",
+        "∀ G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (group_conjugation G a x = group_id G <=> x = group_id G)",
       ),
       t1177,
     ),
@@ -14628,7 +14628,7 @@ fn step_180() -> Unit raise {
   group_conjugation_by_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> group_conjugation G (group_id G) x = x",
+        "∀ G x:A. x IN group_carrier G ==> group_conjugation G (group_id G) x = x",
       ),
       t1178,
     ),
@@ -14661,7 +14661,7 @@ fn step_181() -> Unit raise {
   group_conjugation_linv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G (group_inv G a) (group_conjugation G a x) = x",
+        "∀ G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G (group_inv G a) (group_conjugation G a x) = x",
       ),
       t1180,
     ),
@@ -14694,7 +14694,7 @@ fn step_182() -> Unit raise {
   group_conjugation_rinv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a (group_conjugation G (group_inv G a) x) = x",
+        "∀ G a x:A.\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a (group_conjugation G (group_inv G a) x) = x",
       ),
       t1182,
     ),
@@ -14722,7 +14722,7 @@ fn step_183() -> Unit raise {
   let t1183 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall u. s SUBSET u /\\ x IN u /\\\n        (forall x. x IN u ==> f(g x) = x /\\ g(f x) = x)\n        ==> (x IN IMAGE f s <=> g x IN s)",
+        "∀ u. s SUBSET u /\\ x IN u /\\\n        (∀ x. x IN u ==> f(g x) = x /\\ g(f x) = x)\n        ==> (x IN IMAGE f s <=> g x IN s)",
       ),
     ),
   )
@@ -14736,7 +14736,7 @@ fn step_183() -> Unit raise {
   in_image_group_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        s SUBSET group_carrier G\n        ==> (x IN IMAGE (group_conjugation G y) s <=>\n             group_conjugation G (group_inv G y) x IN s)",
+        "∀ G s x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        s SUBSET group_carrier G\n        ==> (x IN IMAGE (group_conjugation G y) s <=>\n             group_conjugation G (group_inv G y) x IN s)",
       ),
       t1186,
     ),
@@ -14763,7 +14763,7 @@ fn step_184() -> Unit raise {
   image_group_conjugation_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A) s.\n        a IN group_carrier G /\\ s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G a) s SUBSET group_carrier G",
+        "∀ G (a:A) s.\n        a IN group_carrier G /\\ s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G a) s SUBSET group_carrier G",
       ),
       t1187,
     ),
@@ -14789,7 +14789,7 @@ fn step_185() -> Unit raise {
   )
   let t1188 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("(forall x. x IN s ==> f x = x) ==> IMAGE f s = s"),
+      @parser.parse_term("(∀ x. x IN s ==> f x = x) ==> IMAGE f s = s"),
     ),
   )
   let t1190 = @tactics.then_tac(
@@ -14799,7 +14799,7 @@ fn step_185() -> Unit raise {
   image_group_conjugation_by_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G (group_id G)) s = s",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G (group_id G)) s = s",
       ),
       t1190,
     ),
@@ -14839,7 +14839,7 @@ fn step_186() -> Unit raise {
   image_group_conjugation_by_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s a b:A.\n        a IN group_carrier G /\\\n        b IN group_carrier G /\\\n        s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G (group_mul G a b)) s =\n            IMAGE (group_conjugation G a) (IMAGE (group_conjugation G b) s)",
+        "∀ G s a b:A.\n        a IN group_carrier G /\\\n        b IN group_carrier G /\\\n        s SUBSET group_carrier G\n        ==> IMAGE (group_conjugation G (group_mul G a b)) s =\n            IMAGE (group_conjugation G a) (IMAGE (group_conjugation G b) s)",
       ),
       t1194,
     ),
@@ -14870,7 +14870,7 @@ fn step_187() -> Unit raise {
   let t1195 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> g(f x) = x) /\\ (forall y. y IN t ==> f(g y) = y)\n    ==> (IMAGE f s = t <=> IMAGE g t = s)",
+        "(∀ x. x IN s ==> g(f x) = x) /\\ (∀ y. y IN t ==> f(g y) = y)\n    ==> (IMAGE f s = t <=> IMAGE g t = s)",
       ),
     ),
   )
@@ -14881,7 +14881,7 @@ fn step_187() -> Unit raise {
   image_group_conjugation_by_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G (group_inv G a)) s = t <=>\n             IMAGE (group_conjugation G a) t = s)",
+        "∀ G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G (group_inv G a)) s = t <=>\n             IMAGE (group_conjugation G a) t = s)",
       ),
       t1197,
     ),
@@ -14906,7 +14906,7 @@ fn step_188() -> Unit raise {
   image_group_conjugation_eq_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G /\\\n        IMAGE (group_conjugation G (group_inv G a)) s = t\n        ==> IMAGE (group_conjugation G a) t = s",
+        "∀ G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G /\\\n        IMAGE (group_conjugation G (group_inv G a)) s = t\n        ==> IMAGE (group_conjugation G a) t = s",
       ),
       t1198,
     ),
@@ -14941,7 +14941,7 @@ fn step_189() -> Unit raise {
   let t1199 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall g. s SUBSET u /\\ t SUBSET u /\\\n        (forall x. x IN u ==> f(x) IN u /\\ g(f x) = x) /\\\n        (forall y. y IN u ==> g(y) IN u /\\ f(g(y)) = y)\n       ==> (IMAGE f s = t <=> {x | x IN u /\\ f x IN t} = s)",
+        "∀ g. s SUBSET u /\\ t SUBSET u /\\\n        (∀ x. x IN u ==> f(x) IN u /\\ g(f x) = x) /\\\n        (∀ y. y IN u ==> g(y) IN u /\\ f(g(y)) = y)\n       ==> (IMAGE f s = t <=> {x | x IN u /\\ f x IN t} = s)",
       ),
     ),
   )
@@ -14955,7 +14955,7 @@ fn step_189() -> Unit raise {
   image_group_conjugation_eq_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G a) s = t <=>\n             {x | x IN group_carrier G /\\\n                  group_conjugation G a x IN t} = s)",
+        "∀ G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G a) s = t <=>\n             {x | x IN group_carrier G /\\\n                  group_conjugation G a x IN t} = s)",
       ),
       t1202,
     ),
@@ -14985,7 +14985,7 @@ fn step_191() -> Unit raise {
   subgroup_of_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "(s:A->bool) subgroup_of (G:A group) <=>\n        s SUBSET group_carrier G /\\\n        group_id G IN s /\\\n        (forall x. x IN s ==> group_inv G x IN s) /\\\n        (forall x y. x IN s /\\ y IN s ==> group_mul G x y IN s)",
+        "(s:A->bool) subgroup_of (G:A group) <=>\n        s SUBSET group_carrier G /\\\n        group_id G IN s /\\\n        (∀ x. x IN s ==> group_inv G x IN s) /\\\n        (∀ x y. x IN s /\\ y IN s ==> group_mul G x y IN s)",
       ),
     ),
   )
@@ -15006,7 +15006,7 @@ fn step_192() -> Unit raise {
   let t1203 = @simp.simp_tac(@list.List([subgroup_of()]))
   in_subgroup_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G h:A->bool. h subgroup_of G ==> group_id G IN h"),
+      @parser.parse_term("∀ G h:A->bool. h subgroup_of G ==> group_id G IN h"),
       t1203,
     ),
   )
@@ -15028,7 +15028,7 @@ fn step_193() -> Unit raise {
   in_subgroup_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A. h subgroup_of G /\\ x IN h ==> group_inv G x IN h",
+        "∀ G h x:A. h subgroup_of G /\\ x IN h ==> group_inv G x IN h",
       ),
       t1204,
     ),
@@ -15053,7 +15053,7 @@ fn step_194() -> Unit raise {
   in_subgroup_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A. h subgroup_of G /\\ x IN h /\\ y IN h ==> group_mul G x y IN h",
+        "∀ G h x y:A. h subgroup_of G /\\ x IN h /\\ y IN h ==> group_mul G x y IN h",
       ),
       t1205,
     ),
@@ -15080,7 +15080,7 @@ fn step_195() -> Unit raise {
   in_subgroup_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A. h subgroup_of G /\\ x IN h /\\ y IN h ==> group_div G x y IN h",
+        "∀ G h x y:A. h subgroup_of G /\\ x IN h /\\ y IN h ==> group_div G x y IN h",
       ),
       t1206,
     ),
@@ -15121,7 +15121,7 @@ fn step_196() -> Unit raise {
   in_subgroup_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h (x:A) n. h subgroup_of G /\\ x IN h ==> group_pow G x n IN h",
+        "∀ G h (x:A) n. h subgroup_of G /\\ x IN h ==> group_pow G x n IN h",
       ),
       t1209,
     ),
@@ -15156,7 +15156,7 @@ fn step_197() -> Unit raise {
   in_subgroup_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h (x:A) n. h subgroup_of G /\\ x IN h ==> group_zpow G x n IN h",
+        "∀ G h (x:A) n. h subgroup_of G /\\ x IN h ==> group_zpow G x n IN h",
       ),
       t1212,
     ),
@@ -15181,7 +15181,7 @@ fn step_198() -> Unit raise {
   in_subgroup_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a x:A.\n        h subgroup_of G /\\ a IN h /\\ x IN h ==> group_conjugation G a x IN h",
+        "∀ G h a x:A.\n        h subgroup_of G /\\ a IN h /\\ x IN h ==> group_conjugation G a x IN h",
       ),
       t1213,
     ),
@@ -15215,7 +15215,7 @@ fn step_199() -> Unit raise {
   in_subgroup_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h (<<=) k (f:K->A).\n        h subgroup_of G /\\\n        (forall i. i IN k /\\ f i IN group_carrier G ==> f i IN h)\n        ==> group_product G (<<=) k f IN h",
+        "∀ G h (<<=) k (f:K->A).\n        h subgroup_of G /\\\n        (∀ i. i IN k /\\ f i IN group_carrier G ==> f i IN h)\n        ==> group_product G (<<=) k f IN h",
       ),
       t1217,
     ),
@@ -15242,7 +15242,7 @@ fn step_200() -> Unit raise {
   in_subgroup_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h k (f:K->A).\n        h subgroup_of G /\\\n        (forall i. i IN k /\\ f i IN group_carrier G ==> f i IN h)\n        ==> group_sum G k f IN h",
+        "∀ G h k (f:K->A).\n        h subgroup_of G /\\\n        (∀ i. i IN k /\\ f i IN group_carrier G ==> f i IN h)\n        ==> group_sum G k f IN h",
       ),
       t1218,
     ),
@@ -15279,7 +15279,7 @@ fn step_201() -> Unit raise {
   let t1219 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall g. (forall x. x IN s ==> f x IN s /\\ g x IN s /\\ g(f x) = x /\\ f(g x) = x)\n    ==> IMAGE f s = s",
+        "∀ g. (∀ x. x IN s ==> f x IN s /\\ g x IN s /\\ g(f x) = x /\\ f(g x) = x)\n    ==> IMAGE f s = s",
       ),
     ),
   )
@@ -15293,7 +15293,7 @@ fn step_201() -> Unit raise {
   image_group_conjugation_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a:A.\n        h subgroup_of G /\\ a IN h ==> IMAGE (group_conjugation G a) h = h",
+        "∀ G h a:A.\n        h subgroup_of G /\\ a IN h ==> IMAGE (group_conjugation G a) h = h",
       ),
       t1222,
     ),
@@ -15324,7 +15324,7 @@ fn step_202() -> Unit raise {
   subgroup_of_inters_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (gs:(A->bool)->bool).\n        (forall g. g IN gs ==> g subgroup_of G) /\\ ~(gs = {})\n        ==> (INTERS gs) subgroup_of G",
+        "∀ G (gs:(A->bool)->bool).\n        (∀ g. g IN gs ==> g subgroup_of G) /\\ ~(gs = {})\n        ==> (INTERS gs) subgroup_of G",
       ),
       t1224,
     ),
@@ -15355,7 +15355,7 @@ fn step_203() -> Unit raise {
   subgroup_of_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G ==> (g INTER h) subgroup_of G",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G ==> (g INTER h) subgroup_of G",
       ),
       t1226,
     ),
@@ -15384,7 +15384,7 @@ fn step_204() -> Unit raise {
   subgroup_of_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> h subgroup_of G) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) subgroup_of G",
+        "∀ G (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (∀ h. h IN u ==> h subgroup_of G) /\\\n        (∀ g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) subgroup_of G",
       ),
       t1228,
     ),
@@ -15413,7 +15413,7 @@ fn step_205() -> Unit raise {
   subgroup_of_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool. h subgroup_of opposite_group G <=> h subgroup_of G",
+        "∀ G h:A->bool. h subgroup_of opposite_group G <=> h subgroup_of G",
       ),
       t1230,
     ),
@@ -15438,7 +15438,7 @@ fn step_206() -> Unit raise {
   subgroup_of_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. s subgroup_of G ==> s SUBSET group_carrier G",
+        "∀ G s:A->bool. s subgroup_of G ==> s SUBSET group_carrier G",
       ),
       t1231,
     ),
@@ -15466,7 +15466,7 @@ fn step_207() -> Unit raise {
   )
   subgroup_of_imp_nonempty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G s:A->bool. s subgroup_of G ==> ~(s = {})"),
+      @parser.parse_term("∀ G s:A->bool. s subgroup_of G ==> ~(s = {})"),
       t1233,
     ),
   )
@@ -15495,7 +15495,7 @@ fn step_208() -> Unit raise {
   )
   trivial_subgroup_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. {group_id G} subgroup_of G"),
+      @parser.parse_term("∀ G:A group. {group_id G} subgroup_of G"),
       t1235,
     ),
   )
@@ -15522,7 +15522,7 @@ fn step_209() -> Unit raise {
   )
   carrier_subgroup_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. (group_carrier G) subgroup_of G"),
+      @parser.parse_term("∀ G:A group. (group_carrier G) subgroup_of G"),
       t1237,
     ),
   )
@@ -15563,7 +15563,7 @@ fn step_210() -> Unit raise {
   finite_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group). FINITE(group_carrier G) ==> FINITE {h | h subgroup_of G}",
+        "∀(G:A group). FINITE(group_carrier G) ==> FINITE {h | h subgroup_of G}",
       ),
       t1242,
     ),
@@ -15605,7 +15605,7 @@ fn step_211() -> Unit raise {
   finite_restricted_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P (G:A group).\n        FINITE(group_carrier G) ==> FINITE {h | h subgroup_of G /\\ P h}",
+        "∀ P (G:A group).\n        FINITE(group_carrier G) ==> FINITE {h | h subgroup_of G /\\ P h}",
       ),
       t1247,
     ),
@@ -15811,7 +15811,7 @@ fn step_213() -> Unit raise {
   subgroup_generated_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G s:A->bool.\n        group_carrier (subgroup_generated G s) =\n          INTERS {h | h subgroup_of G /\\ (group_carrier G INTER s) SUBSET h}) /\\\n    (forall G s:A->bool. group_id (subgroup_generated G s) = group_id G) /\\\n    (forall G s:A->bool. group_inv (subgroup_generated G s) = group_inv G) /\\\n    (forall G s:A->bool. group_mul (subgroup_generated G s) = group_mul G)",
+        "(∀ G s:A->bool.\n        group_carrier (subgroup_generated G s) =\n          INTERS {h | h subgroup_of G /\\ (group_carrier G INTER s) SUBSET h}) /\\\n    (∀ G s:A->bool. group_id (subgroup_generated G s) = group_id G) /\\\n    (∀ G s:A->bool. group_inv (subgroup_generated G s) = group_inv G) /\\\n    (∀ G s:A->bool. group_mul (subgroup_generated G s) = group_mul G)",
       ),
       t1267,
     ),
@@ -15851,7 +15851,7 @@ fn step_214() -> Unit raise {
   subgroup_generated_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        subgroup_generated G s = G <=>\n        group_carrier(subgroup_generated G s) = group_carrier G",
+        "∀ G s:A->bool.\n        subgroup_generated G s = G <=>\n        group_carrier(subgroup_generated G s) = group_carrier G",
       ),
       t1273,
     ),
@@ -15878,7 +15878,7 @@ fn step_215() -> Unit raise {
   group_id_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_id G IN group_carrier(subgroup_generated G s)",
+        "∀ G s:A->bool. group_id G IN group_carrier(subgroup_generated G s)",
       ),
       t1274,
     ),
@@ -15905,7 +15905,7 @@ fn step_216() -> Unit raise {
   group_inv_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. x IN group_carrier (subgroup_generated G s)\n       ==> group_inv G x IN group_carrier(subgroup_generated G s)",
+        "∀ x. x IN group_carrier (subgroup_generated G s)\n       ==> group_inv G x IN group_carrier(subgroup_generated G s)",
       ),
       t1275,
     ),
@@ -15932,7 +15932,7 @@ fn step_217() -> Unit raise {
   group_mul_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. x IN group_carrier (subgroup_generated G s) /\\\n         y IN group_carrier (subgroup_generated G s)\n         ==> group_mul G x y IN group_carrier(subgroup_generated G s)",
+        "∀ x y. x IN group_carrier (subgroup_generated G s) /\\\n         y IN group_carrier (subgroup_generated G s)\n         ==> group_mul G x y IN group_carrier(subgroup_generated G s)",
       ),
       t1276,
     ),
@@ -16053,7 +16053,7 @@ fn step_218() -> Unit raise {
   abelian_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        abelian_group G ==> abelian_group(subgroup_generated G h)",
+        "∀ G h:A->bool.\n        abelian_group G ==> abelian_group(subgroup_generated G h)",
       ),
       t1288,
     ),
@@ -16080,7 +16080,7 @@ fn step_219() -> Unit raise {
   group_div_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_div (subgroup_generated G s) = group_div G",
+        "∀ G s:A->bool. group_div (subgroup_generated G s) = group_div G",
       ),
       t1289,
     ),
@@ -16118,7 +16118,7 @@ fn step_220() -> Unit raise {
   group_pow_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_pow (subgroup_generated G s) = group_pow G",
+        "∀ G s:A->bool. group_pow (subgroup_generated G s) = group_pow G",
       ),
       t1292,
     ),
@@ -16150,7 +16150,7 @@ fn step_221() -> Unit raise {
   group_zpow_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_zpow (subgroup_generated G s) = group_zpow G",
+        "∀ G s:A->bool. group_zpow (subgroup_generated G s) = group_zpow G",
       ),
       t1293,
     ),
@@ -16181,7 +16181,7 @@ fn step_222() -> Unit raise {
   group_conjugation_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n    group_conjugation (subgroup_generated G s) = group_conjugation G",
+        "∀ G s:A->bool.\n    group_conjugation (subgroup_generated G s) = group_conjugation G",
       ),
       t1294,
     ),
@@ -16211,7 +16211,7 @@ fn step_223() -> Unit raise {
   subgroup_generated_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        subgroup_generated G s =\n        subgroup_generated G (group_carrier G INTER s)",
+        "∀ G s:A->bool.\n        subgroup_generated G s =\n        subgroup_generated G (group_carrier G INTER s)",
       ),
       t1295,
     ),
@@ -16257,7 +16257,7 @@ fn step_224() -> Unit raise {
   subgroup_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_carrier(subgroup_generated G s) subgroup_of G",
+        "∀ G s:A->bool. group_carrier(subgroup_generated G s) subgroup_of G",
       ),
       t1301,
     ),
@@ -16286,7 +16286,7 @@ fn step_225() -> Unit raise {
   subgroup_generated_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET t\n        ==> group_carrier(subgroup_generated G s) SUBSET\n            group_carrier(subgroup_generated G t)",
+        "∀ G s t:A->bool.\n        s SUBSET t\n        ==> group_carrier(subgroup_generated G s) SUBSET\n            group_carrier(subgroup_generated G t)",
       ),
       t1303,
     ),
@@ -16317,7 +16317,7 @@ fn step_226() -> Unit raise {
   subgroup_generated_minimal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_carrier(subgroup_generated G s) SUBSET h",
+        "∀ G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_carrier(subgroup_generated G s) SUBSET h",
       ),
       t1305,
     ),
@@ -16366,7 +16366,7 @@ fn step_227() -> Unit raise {
   subgroups_generated_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET group_carrier(subgroup_generated G t) /\\\n        t SUBSET group_carrier(subgroup_generated G s)\n        ==> subgroup_generated G s = subgroup_generated G t",
+        "∀ G s t:A->bool.\n        s SUBSET group_carrier(subgroup_generated G t) /\\\n        t SUBSET group_carrier(subgroup_generated G s)\n        ==> subgroup_generated G s = subgroup_generated G t",
       ),
       t1311,
     ),
@@ -16469,7 +16469,7 @@ fn step_228() -> Unit raise {
   subgroup_generated_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G P s:A->bool.\n        (forall x. x IN group_carrier G /\\ x IN s ==> P x) /\\\n        P(group_id G) /\\\n        (forall x. P x ==> P(group_inv G x)) /\\\n        (forall x y. P x /\\ P y ==> P(group_mul G x y))\n        ==> forall x. x IN group_carrier(subgroup_generated G s) ==> P x",
+        "∀ G P s:A->bool.\n        (∀ x. x IN group_carrier G /\\ x IN s ==> P x) /\\\n        P(group_id G) /\\\n        (∀ x. P x ==> P(group_inv G x)) /\\\n        (∀ x y. P x /\\ P y ==> P(group_mul G x y))\n        ==> ∀ x. x IN group_carrier(subgroup_generated G s) ==> P x",
       ),
       t1323,
     ),
@@ -16511,7 +16511,7 @@ fn step_229() -> Unit raise {
   group_carrier_subgroup_generated_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        group_carrier (subgroup_generated G h) SUBSET group_carrier G",
+        "∀ G h:A->bool.\n        group_carrier (subgroup_generated G h) SUBSET group_carrier G",
       ),
       t1327,
     ),
@@ -16547,7 +16547,7 @@ fn step_230() -> Unit raise {
   subgroup_generated_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n    subgroup_generated G s = G <=>\n    group_carrier G SUBSET group_carrier(subgroup_generated G s)",
+        "∀ G s:A->bool.\n    subgroup_generated G s = G <=>\n    group_carrier G SUBSET group_carrier(subgroup_generated G s)",
       ),
       t1329,
     ),
@@ -16580,7 +16580,7 @@ fn step_231() -> Unit raise {
   subgroup_of_subgroup_generated_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h k:A->bool.\n        h subgroup_of (subgroup_generated G k) <=>\n        h subgroup_of G /\\ h SUBSET group_carrier(subgroup_generated G k)",
+        "∀ G h k:A->bool.\n        h subgroup_of (subgroup_generated G k) <=>\n        h subgroup_of G /\\ h SUBSET group_carrier(subgroup_generated G k)",
       ),
       t1331,
     ),
@@ -16608,7 +16608,7 @@ fn step_232() -> Unit raise {
   let t1336 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t1335 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x. x IN group_carrier (subgroup_generated G s)\n        ==> (x:A) IN group_carrier G /\\ P x",
+      "∀ x. x IN group_carrier (subgroup_generated G s)\n        ==> (x:A) IN group_carrier G /\\ P x",
     ),
     fn(
       x1332 : @kernel.Thm,
@@ -16676,7 +16676,7 @@ fn step_232() -> Unit raise {
   subgroup_generated_induct_strong_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G P s:A->bool.\n        (forall x. x IN group_carrier G /\\ x IN s ==> P x) /\\\n        P (group_id G) /\\\n        (forall x. x IN group_carrier G /\\ P x ==> P (group_inv G x)) /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ P x /\\ P y\n               ==> P (group_mul G x y))\n         ==> forall x. x IN group_carrier (subgroup_generated G s) ==> P x",
+        "∀ G P s:A->bool.\n        (∀ x. x IN group_carrier G /\\ x IN s ==> P x) /\\\n        P (group_id G) /\\\n        (∀ x. x IN group_carrier G /\\ P x ==> P (group_inv G x)) /\\\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\ P x /\\ P y\n               ==> P (group_mul G x y))\n         ==> ∀ x. x IN group_carrier (subgroup_generated G s) ==> P x",
       ),
       t1339,
     ),
@@ -16709,7 +16709,7 @@ fn step_233() -> Unit raise {
   let t1344 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t1343 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x:A. x IN group_carrier (subgroup_generated G s)\n          ==> P x /\\ P(group_inv G x)",
+      "∀ x:A. x IN group_carrier (subgroup_generated G s)\n          ==> P x /\\ P(group_inv G x)",
     ),
     fn(
       x1340 : @kernel.Thm,
@@ -16777,7 +16777,7 @@ fn step_233() -> Unit raise {
   subgroup_generated_induct_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G P s:A->bool.\n        P (group_id G) /\\\n        (forall x. x IN group_carrier G /\\ x IN s ==> P x /\\ P(group_inv G x)) /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ P x /\\ P y\n               ==> P (group_mul G x y))\n        ==> forall x. x IN group_carrier (subgroup_generated G s) ==> P x",
+        "∀ G P s:A->bool.\n        P (group_id G) /\\\n        (∀ x. x IN group_carrier G /\\ x IN s ==> P x /\\ P(group_inv G x)) /\\\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\ P x /\\ P y\n               ==> P (group_mul G x y))\n        ==> ∀ x. x IN group_carrier (subgroup_generated G s) ==> P x",
       ),
       t1347,
     ),
@@ -16816,7 +16816,7 @@ fn step_234() -> Unit raise {
   ])
   let t1351 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x:A. x IN group_carrier (subgroup_generated G s)\n          ==> forall y. y IN group_carrier G /\\ P y ==> P(group_mul G x y)",
+      "∀ x:A. x IN group_carrier (subgroup_generated G s)\n          ==> ∀ y. y IN group_carrier G /\\ P y ==> P(group_mul G x y)",
     ),
     fn(
       x1348 : @kernel.Thm,
@@ -16884,7 +16884,7 @@ fn step_234() -> Unit raise {
   subgroup_generated_induct_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G P s:A->bool.\n        P (group_id G) /\\\n        (forall x y. x IN group_carrier G /\\ x IN s /\\ y IN group_carrier G /\\ P y\n               ==> P (group_mul G x y) /\\ P (group_mul G (group_inv G x) y))\n        ==> forall x. x IN group_carrier(subgroup_generated G s) ==> P x",
+        "∀ G P s:A->bool.\n        P (group_id G) /\\\n        (∀ x y. x IN group_carrier G /\\ x IN s /\\ y IN group_carrier G /\\ P y\n               ==> P (group_mul G x y) /\\ P (group_mul G (group_inv G x) y))\n        ==> ∀ x. x IN group_carrier(subgroup_generated G s) ==> P x",
       ),
       t1355,
     ),
@@ -16914,7 +16914,7 @@ fn step_235() -> Unit raise {
   finite_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        FINITE(group_carrier G)\n        ==> FINITE(group_carrier(subgroup_generated G s))",
+        "∀ G s:A->bool.\n        FINITE(group_carrier G)\n        ==> FINITE(group_carrier(subgroup_generated G s))",
       ),
       t1356,
     ),
@@ -17622,11 +17622,11 @@ fn step_236() -> Unit raise {
     t1406,
   ])
   let t1369 = @parser.parse_term(
-    "IMAGE (groupel:(bool#K)list->A)\n          {l | forall x. MEM x l ==> x IN (:bool) CROSS k}",
+    "IMAGE (groupel:(bool#K)list->A)\n          {l | ∀ x. MEM x l ==> x IN (:bool) CROSS k}",
   )
   let t1370 = @tactics.trans_tac(@card.card_le_trans())(t1369)
   let t1367 = @parser.parse_term(
-    "?groupel:(bool#K)list->A.\n        groupel [] = group_id G /\\\n        (forall x l. groupel (CONS (F,x) l) = group_mul G (gdecmap x) (groupel l)) /\\\n        (forall x l. groupel (CONS (T,x) l) =\n               group_mul G (group_inv G (gdecmap x)) (groupel l))",
+    "?groupel:(bool#K)list->A.\n        groupel [] = group_id G /\\\n        (∀ x l. groupel (CONS (F,x) l) = group_mul G (gdecmap x) (groupel l)) /\\\n        (∀ x l. groupel (CONS (T,x) l) =\n               group_mul G (group_inv G (gdecmap x)) (groupel l))",
   )
   let t1368 = @tactics.choose_tac(
     @define.prove_general_recursive_function_exists(t1367),
@@ -17758,7 +17758,7 @@ fn step_236() -> Unit raise {
   card_le_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) s (k:K->bool).\n      INFINITE k /\\ s <=_c k ==> group_carrier(subgroup_generated G s) <=_c k",
+        "∀(G:A group) s (k:K->bool).\n      INFINITE k /\\ s <=_c k ==> group_carrier(subgroup_generated G s) <=_c k",
       ),
       t1425,
     ),
@@ -17884,7 +17884,7 @@ fn step_237() -> Unit raise {
   countable_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        COUNTABLE(group_carrier G) \\/ COUNTABLE s\n        ==> COUNTABLE(group_carrier(subgroup_generated G s))",
+        "∀ G s:A->bool.\n        COUNTABLE(group_carrier G) \\/ COUNTABLE s\n        ==> COUNTABLE(group_carrier(subgroup_generated G s))",
       ),
       t1437,
     ),
@@ -17915,7 +17915,7 @@ fn step_238() -> Unit raise {
   subgroup_generated_subset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n     group_carrier G INTER h SUBSET group_carrier(subgroup_generated G h)",
+        "∀ G h:A->bool.\n     group_carrier G INTER h SUBSET group_carrier(subgroup_generated G h)",
       ),
       t1439,
     ),
@@ -17946,7 +17946,7 @@ fn step_239() -> Unit raise {
   subset_carrier_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ s SUBSET t\n        ==> s SUBSET group_carrier(subgroup_generated G t)",
+        "∀ G s t:A->bool.\n        s SUBSET group_carrier G /\\ s SUBSET t\n        ==> s SUBSET group_carrier(subgroup_generated G t)",
       ),
       t1440,
     ),
@@ -17993,7 +17993,7 @@ fn step_240() -> Unit raise {
   subgroup_generated_minimal_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        h subgroup_of G\n        ==> (group_carrier (subgroup_generated G s) SUBSET h <=>\n             group_carrier G INTER s SUBSET h)",
+        "∀ G h s:A->bool.\n        h subgroup_of G\n        ==> (group_carrier (subgroup_generated G s) SUBSET h <=>\n             group_carrier G INTER s SUBSET h)",
       ),
       t1445,
     ),
@@ -18145,7 +18145,7 @@ fn step_241() -> Unit raise {
   carrier_subgroup_generated_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G ==> group_carrier (subgroup_generated G h) = h",
+        "∀ G h:A->bool.\n        h subgroup_of G ==> group_carrier (subgroup_generated G h) = h",
       ),
       t1462,
     ),
@@ -18176,7 +18176,7 @@ fn step_242() -> Unit raise {
   subgroup_of_subgroup_generated_subgroup_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h k:A->bool.\n        k subgroup_of G\n        ==> (h subgroup_of (subgroup_generated G k) <=>\n             h subgroup_of G /\\ h SUBSET k)",
+        "∀ G h k:A->bool.\n        k subgroup_of G\n        ==> (h subgroup_of (subgroup_generated G k) <=>\n             h subgroup_of G /\\ h SUBSET k)",
       ),
       t1464,
     ),
@@ -18214,7 +18214,7 @@ fn step_243() -> Unit raise {
   subgroup_generated_group_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. subgroup_generated G (group_carrier G) = G",
+        "∀ G:A group. subgroup_generated G (group_carrier G) = G",
       ),
       t1467,
     ),
@@ -18245,7 +18245,7 @@ fn step_244() -> Unit raise {
   subgroup_of_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ g SUBSET h\n        ==> g subgroup_of (subgroup_generated G h)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ g SUBSET h\n        ==> g subgroup_of (subgroup_generated G h)",
       ),
       t1469,
     ),
@@ -18275,7 +18275,7 @@ fn step_245() -> Unit raise {
   subgroup_generated_subset_carrier_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> s SUBSET group_carrier(subgroup_generated G s)",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> s SUBSET group_carrier(subgroup_generated G s)",
       ),
       t1470,
     ),
@@ -18317,7 +18317,7 @@ fn step_246() -> Unit raise {
   subgroup_generated_refl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_carrier G SUBSET s ==> subgroup_generated G s = G",
+        "∀ G s:A->bool. group_carrier G SUBSET s ==> subgroup_generated G s = G",
       ),
       t1474,
     ),
@@ -18354,7 +18354,7 @@ fn step_247() -> Unit raise {
   subgroup_generated_inc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s x:A.\n        s SUBSET group_carrier G /\\ x IN s\n        ==> x IN group_carrier(subgroup_generated G s)",
+        "∀ G s x:A.\n        s SUBSET group_carrier G /\\ x IN s\n        ==> x IN group_carrier(subgroup_generated G s)",
       ),
       t1476,
     ),
@@ -18385,7 +18385,7 @@ fn step_248() -> Unit raise {
   subgroup_generated_inc_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s x:A.\n        x IN group_carrier G /\\ x IN s\n        ==> x IN group_carrier(subgroup_generated G s)",
+        "∀ G s x:A.\n        x IN group_carrier G /\\ x IN s\n        ==> x IN group_carrier(subgroup_generated G s)",
       ),
       t1477,
     ),
@@ -18418,7 +18418,7 @@ fn step_249() -> Unit raise {
   subgroup_of_subgroup_generated_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of (subgroup_generated G h)\n        ==> g subgroup_of G",
+        "∀ G g h:A->bool.\n        g subgroup_of (subgroup_generated G h)\n        ==> g subgroup_of G",
       ),
       t1479,
     ),
@@ -18450,7 +18450,7 @@ fn step_250() -> Unit raise {
   trivial_group_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        trivial_group G ==> trivial_group(subgroup_generated G s)",
+        "∀ G s:A->bool.\n        trivial_group G ==> trivial_group(subgroup_generated G s)",
       ),
       t1482,
     ),
@@ -18500,7 +18500,7 @@ fn step_251() -> Unit raise {
   trivial_group_subgroup_generated_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET {group_id G} ==> trivial_group(subgroup_generated G s)",
+        "∀ G s:A->bool.\n        s SUBSET {group_id G} ==> trivial_group(subgroup_generated G s)",
       ),
       t1489,
     ),
@@ -18565,7 +18565,7 @@ fn step_252() -> Unit raise {
   trivial_group_subgroup_generated_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        trivial_group(subgroup_generated G s) <=>\n        group_carrier G INTER s SUBSET {group_id G}",
+        "∀ G s:A->bool.\n        trivial_group(subgroup_generated G s) <=>\n        group_carrier G INTER s SUBSET {group_id G}",
       ),
       t1497,
     ),
@@ -18743,7 +18743,7 @@ fn step_253() -> Unit raise {
   trivial_group_generated_by_anything_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. trivial_group G ==> subgroup_generated G s = G",
+        "∀ G s:A->bool. trivial_group G ==> subgroup_generated G s = G",
       ),
       t1513,
     ),
@@ -18798,7 +18798,7 @@ fn step_254() -> Unit raise {
   subgroup_generated_by_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s)) =\n        subgroup_generated G s",
+        "∀ G s:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s)) =\n        subgroup_generated G s",
       ),
       t1520,
     ),
@@ -18858,7 +18858,7 @@ fn step_255() -> Unit raise {
   subgroup_generated_insert_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        subgroup_generated G (group_id G INSERT s) = subgroup_generated G s",
+        "∀ G s:A->bool.\n        subgroup_generated G (group_id G INSERT s) = subgroup_generated G s",
       ),
       t1525,
     ),
@@ -18942,7 +18942,7 @@ fn step_256() -> Unit raise {
   group_carrier_subgroup_generated_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        group_carrier(subgroup_generated (subgroup_generated G s) t) SUBSET\n        group_carrier(subgroup_generated G t)",
+        "∀ G s t:A->bool.\n        group_carrier(subgroup_generated (subgroup_generated G s) t) SUBSET\n        group_carrier(subgroup_generated G t)",
       ),
       t1537,
     ),
@@ -18999,7 +18999,7 @@ fn step_257() -> Unit raise {
   subgroup_generated_idempot_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET group_carrier(subgroup_generated G t)\n        ==> subgroup_generated (subgroup_generated G t) s =\n            subgroup_generated G s",
+        "∀ G s t:A->bool.\n        s SUBSET group_carrier(subgroup_generated G t)\n        ==> subgroup_generated (subgroup_generated G t) s =\n            subgroup_generated G s",
       ),
       t1544,
     ),
@@ -19289,7 +19289,7 @@ fn step_258() -> Unit raise {
   subgroup_generated_idempot_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET t\n        ==> subgroup_generated (subgroup_generated G t) s =\n            subgroup_generated G s",
+        "∀ G s t:A->bool.\n        s SUBSET t\n        ==> subgroup_generated (subgroup_generated G t) s =\n            subgroup_generated G s",
       ),
       t1568,
     ),
@@ -19320,7 +19320,7 @@ fn step_259() -> Unit raise {
   subgroup_generated_by_subgroup_generated_idempot_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET t\n        ==> subgroup_generated (subgroup_generated G t)\n                               (group_carrier (subgroup_generated G s)) =\n            subgroup_generated G s",
+        "∀ G s t:A->bool.\n        s SUBSET t\n        ==> subgroup_generated (subgroup_generated G t)\n                               (group_carrier (subgroup_generated G s)) =\n            subgroup_generated G s",
       ),
       t1569,
     ),
@@ -19433,7 +19433,7 @@ fn step_260() -> Unit raise {
   subgroup_generated_union_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s) UNION t) =\n        subgroup_generated G (s UNION t)",
+        "∀ G s t:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s) UNION t) =\n        subgroup_generated G (s UNION t)",
       ),
       t1589,
     ),
@@ -19462,7 +19462,7 @@ fn step_261() -> Unit raise {
   subgroup_generated_union_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        subgroup_generated G (s UNION group_carrier(subgroup_generated G t)) =\n        subgroup_generated G (s UNION t)",
+        "∀ G s t:A->bool.\n        subgroup_generated G (s UNION group_carrier(subgroup_generated G t)) =\n        subgroup_generated G (s UNION t)",
       ),
       t1591,
     ),
@@ -19492,7 +19492,7 @@ fn step_262() -> Unit raise {
   subgroup_generated_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s) UNION\n                              group_carrier(subgroup_generated G t)) =\n        subgroup_generated G (s UNION t)",
+        "∀ G s t:A->bool.\n        subgroup_generated G (group_carrier(subgroup_generated G s) UNION\n                              group_carrier(subgroup_generated G t)) =\n        subgroup_generated G (s UNION t)",
       ),
       t1592,
     ),
@@ -19520,7 +19520,7 @@ fn step_263() -> Unit raise {
   )
   trivial_group_subgroup_generated_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. trivial_group(subgroup_generated G {})"),
+      @parser.parse_term("∀ G:A group. trivial_group(subgroup_generated G {})"),
       t1594,
     ),
   )
@@ -19560,7 +19560,7 @@ fn step_264() -> Unit raise {
   subgroup_of_commuting_elements_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G z:A.\n        z IN group_carrier G\n        ==> {x | x IN group_carrier G /\\ group_mul G x z = group_mul G z x}\n            subgroup_of G",
+        "∀ G z:A.\n        z IN group_carrier G\n        ==> {x | x IN group_carrier G /\\ group_mul G x z = group_mul G z x}\n            subgroup_of G",
       ),
       t1596,
     ),
@@ -19767,7 +19767,7 @@ fn step_265() -> Unit raise {
   group_commutes_subgroup_generated_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s z:A.\n        z IN group_carrier G\n        ==> ((forall x. x IN group_carrier(subgroup_generated G s)\n                  ==> group_mul G x z = group_mul G z x) <=>\n             (forall x. x IN group_carrier G /\\ x IN s\n                  ==> group_mul G x z = group_mul G z x))",
+        "∀ G s z:A.\n        z IN group_carrier G\n        ==> ((∀ x. x IN group_carrier(subgroup_generated G s)\n                  ==> group_mul G x z = group_mul G z x) <=>\n             (∀ x. x IN group_carrier G /\\ x IN s\n                  ==> group_mul G x z = group_mul G z x))",
       ),
       t1614,
     ),
@@ -19794,7 +19794,7 @@ fn step_266() -> Unit raise {
   group_commutes_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s z:A.\n        (forall x. x IN s ==> group_mul G x z = group_mul G z x) /\\\n        z IN group_carrier G\n        ==> (forall x. x IN group_carrier(subgroup_generated G s)\n                 ==> group_mul G x z = group_mul G z x)",
+        "∀ G s z:A.\n        (∀ x. x IN s ==> group_mul G x z = group_mul G z x) /\\\n        z IN group_carrier G\n        ==> (∀ x. x IN group_carrier(subgroup_generated G s)\n                 ==> group_mul G x z = group_mul G z x)",
       ),
       t1615,
     ),
@@ -19918,7 +19918,7 @@ fn step_267() -> Unit raise {
   group_commutes_subgroups_generated_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        (forall x y. x IN group_carrier(subgroup_generated G s) /\\\n               y IN group_carrier(subgroup_generated G t)\n               ==> group_mul G x y = group_mul G y x) <=>\n        (forall x y. x IN group_carrier G /\\ x IN s /\\\n               y IN group_carrier G /\\ y IN t\n               ==> group_mul G x y = group_mul G y x)",
+        "∀ G s t:A->bool.\n        (∀ x y. x IN group_carrier(subgroup_generated G s) /\\\n               y IN group_carrier(subgroup_generated G t)\n               ==> group_mul G x y = group_mul G y x) <=>\n        (∀ x y. x IN group_carrier G /\\ x IN s /\\\n               y IN group_carrier G /\\ y IN t\n               ==> group_mul G x y = group_mul G y x)",
       ),
       t1641,
     ),
@@ -19951,7 +19951,7 @@ fn step_268() -> Unit raise {
   abelian_group_subgroup_generated_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        (forall x y. x IN group_carrier G /\\ x IN s /\\\n               y IN group_carrier G /\\ y IN s\n               ==> group_mul G x y = group_mul G y x)\n        ==> abelian_group (subgroup_generated G s)",
+        "∀ G s:A->bool.\n        (∀ x y. x IN group_carrier G /\\ x IN s /\\\n               y IN group_carrier G /\\ y IN s\n               ==> group_mul G x y = group_mul G y x)\n        ==> abelian_group (subgroup_generated G s)",
       ),
       t1643,
     ),
@@ -20041,7 +20041,7 @@ fn step_270() -> Unit raise {
   prod_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(G:A group) (G':B group).\n        group_carrier (prod_group G G') =\n        (group_carrier G) CROSS (group_carrier G')) /\\\n   (forall(G:A group) (G':B group).\n        group_id (prod_group G G') = (group_id G,group_id G')) /\\\n   (forall(G:A group) (G':B group).\n        group_inv (prod_group G G') =\n          \\(x,x'). group_inv G x,group_inv G' x') /\\\n   (forall(G:A group) (G':B group).\n        group_mul (prod_group G G') =\n          \\(x,x') (y,y'). group_mul G x y,group_mul G' x' y')",
+        "(∀(G:A group) (G':B group).\n        group_carrier (prod_group G G') =\n        (group_carrier G) CROSS (group_carrier G')) /\\\n   (∀(G:A group) (G':B group).\n        group_id (prod_group G G') = (group_id G,group_id G')) /\\\n   (∀(G:A group) (G':B group).\n        group_inv (prod_group G G') =\n          \\(x,x'). group_inv G x,group_inv G' x') /\\\n   (∀(G:A group) (G':B group).\n        group_mul (prod_group G G') =\n          \\(x,x') (y,y'). group_mul G x y,group_mul G' x' y')",
       ),
       t1651,
     ),
@@ -20078,7 +20078,7 @@ fn step_271() -> Unit raise {
   group_pow_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) x y n.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_pow (prod_group G H) (x,y) n =\n            (group_pow G x n,group_pow H y n)",
+        "∀(G:A group) (H:B group) x y n.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_pow (prod_group G H) (x,y) n =\n            (group_pow G x n,group_pow H y n)",
       ),
       t1654,
     ),
@@ -20109,7 +20109,7 @@ fn step_272() -> Unit raise {
   group_zpow_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) x y n.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_zpow (prod_group G H) (x,y) n =\n            (group_zpow G x n,group_zpow H y n)",
+        "∀(G:A group) (H:B group) x y n.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_zpow (prod_group G H) (x,y) n =\n            (group_zpow G x n,group_zpow H y n)",
       ),
       t1656,
     ),
@@ -20141,7 +20141,7 @@ fn step_273() -> Unit raise {
   opposite_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group).\n        opposite_group(prod_group G1 G2) =\n        prod_group (opposite_group G1) (opposite_group G2)",
+        "∀(G1:A group) (G2:B group).\n        opposite_group(prod_group G1 G2) =\n        prod_group (opposite_group G1) (opposite_group G2)",
       ),
       t1659,
     ),
@@ -20178,7 +20178,7 @@ fn step_274() -> Unit raise {
   trivial_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        trivial_group(prod_group G H) <=>\n        trivial_group G /\\ trivial_group H",
+        "∀(G:A group) (H:B group).\n        trivial_group(prod_group G H) <=>\n        trivial_group G /\\ trivial_group H",
       ),
       t1661,
     ),
@@ -20209,7 +20209,7 @@ fn step_275() -> Unit raise {
   finite_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        FINITE(group_carrier(prod_group G H)) <=>\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H)",
+        "∀(G:A group) (H:B group).\n        FINITE(group_carrier(prod_group G H)) <=>\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H)",
       ),
       t1662,
     ),
@@ -20330,7 +20330,7 @@ fn step_276() -> Unit raise {
   abelian_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        abelian_group(prod_group G H) <=>\n        abelian_group G /\\ abelian_group H",
+        "∀(G:A group) (H:B group).\n        abelian_group(prod_group G H) <=>\n        abelian_group G /\\ abelian_group H",
       ),
       t1675,
     ),
@@ -20371,7 +20371,7 @@ fn step_277() -> Unit raise {
   cross_subgroup_of_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) h1 h2.\n        (h1 CROSS h2) subgroup_of (prod_group G1 G2) <=>\n        h1 subgroup_of G1 /\\ h2 subgroup_of G2",
+        "∀(G1:A group) (G2:B group) h1 h2.\n        (h1 CROSS h2) subgroup_of (prod_group G1 G2) <=>\n        h1 subgroup_of G1 /\\ h2 subgroup_of G2",
       ),
       t1679,
     ),
@@ -20409,7 +20409,7 @@ fn step_278() -> Unit raise {
   prod_group_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) h1 h2.\n        h1 subgroup_of G1 /\\ h2 subgroup_of G2\n        ==> (prod_group (subgroup_generated G1 h1) (subgroup_generated G2 h2) =\n             subgroup_generated (prod_group G1 G2) (h1 CROSS h2))",
+        "∀(G1:A group) (G2:B group) h1 h2.\n        h1 subgroup_of G1 /\\ h2 subgroup_of G2\n        ==> (prod_group (subgroup_generated G1 h1) (subgroup_generated G2 h2) =\n             subgroup_generated (prod_group G1 G2) (h1 CROSS h2))",
       ),
       t1682,
     ),
@@ -20527,7 +20527,7 @@ fn step_280() -> Unit raise {
   product_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall k (G:K->A group).\n        group_carrier(product_group k G) =\n          cartesian_product k (\\i. group_carrier(G i))) /\\\n   (forall k (G:K->A group).\n        group_id (product_group k G) =\n          RESTRICTION k (\\i. group_id (G i))) /\\\n   (forall k (G:K->A group).\n        group_inv (product_group k G) =\n          \\x. RESTRICTION k (\\i. group_inv (G i) (x i))) /\\\n   (forall k (G:K->A group).\n        group_mul (product_group k G) =\n          (\\x y. RESTRICTION k (\\i. group_mul (G i) (x i) (y i))))",
+        "(∀ k (G:K->A group).\n        group_carrier(product_group k G) =\n          cartesian_product k (\\i. group_carrier(G i))) /\\\n   (∀ k (G:K->A group).\n        group_id (product_group k G) =\n          RESTRICTION k (\\i. group_id (G i))) /\\\n   (∀ k (G:K->A group).\n        group_inv (product_group k G) =\n          \\x. RESTRICTION k (\\i. group_inv (G i) (x i))) /\\\n   (∀ k (G:K->A group).\n        group_mul (product_group k G) =\n          (\\x y. RESTRICTION k (\\i. group_mul (G i) (x i) (y i))))",
       ),
       t1694,
     ),
@@ -20569,7 +20569,7 @@ fn step_281() -> Unit raise {
   group_pow_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k x n.\n        group_pow (product_group k G) x n =\n        RESTRICTION k (\\i. group_pow (G i) (x i) n)",
+        "∀(G:K->A group) k x n.\n        group_pow (product_group k G) x n =\n        RESTRICTION k (\\i. group_pow (G i) (x i) n)",
       ),
       t1698,
     ),
@@ -20610,7 +20610,7 @@ fn step_282() -> Unit raise {
   group_zpow_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k x n.\n        group_zpow (product_group k G) x n =\n        RESTRICTION k (\\i. group_zpow (G i) (x i) n)",
+        "∀(G:K->A group) k x n.\n        group_zpow (product_group k G) x n =\n        RESTRICTION k (\\i. group_zpow (G i) (x i) n)",
       ),
       t1702,
     ),
@@ -20638,7 +20638,7 @@ fn step_283() -> Unit raise {
   opposite_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k.\n        opposite_group(product_group k G) =\n        product_group k (\\i. opposite_group(G i))",
+        "∀(G:K->A group) k.\n        opposite_group(product_group k G) =\n        product_group k (\\i. opposite_group(G i))",
       ),
       t1704,
     ),
@@ -20673,7 +20673,7 @@ fn step_284() -> Unit raise {
   group_product_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group) a i.\n        RESTRICTION k (\\j. if j = i then a else group_id (G j)) IN\n        group_carrier(product_group k G) <=>\n        i IN k ==> a IN group_carrier(G i)",
+        "∀ k (G:K->A group) a i.\n        RESTRICTION k (\\j. if j = i then a else group_id (G j)) IN\n        group_carrier(product_group k G) <=>\n        i IN k ==> a IN group_carrier(G i)",
       ),
       t1706,
     ),
@@ -20716,7 +20716,7 @@ fn step_285() -> Unit raise {
   trivial_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        trivial_group(product_group k G) <=>\n        forall i. i IN k ==> trivial_group(G i)",
+        "∀ k (G:K->A group).\n        trivial_group(product_group k G) <=>\n        ∀ i. i IN k ==> trivial_group(G i)",
       ),
       t1710,
     ),
@@ -20865,7 +20865,7 @@ fn step_286() -> Unit raise {
   cartesian_product_subgroup_of_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k h G:K->A group.\n        (cartesian_product k h) subgroup_of (product_group k G) <=>\n        forall i. i IN k ==> (h i) subgroup_of (G i)",
+        "∀ k h G:K->A group.\n        (cartesian_product k h) subgroup_of (product_group k G) <=>\n        ∀ i. i IN k ==> (h i) subgroup_of (G i)",
       ),
       t1725,
     ),
@@ -20918,7 +20918,7 @@ fn step_287() -> Unit raise {
   product_group_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of (G i))\n        ==> product_group k (\\i. subgroup_generated (G i) (h i)) =\n            subgroup_generated (product_group k G) (cartesian_product k h)",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) subgroup_of (G i))\n        ==> product_group k (\\i. subgroup_generated (G i) (h i)) =\n            subgroup_generated (product_group k G) (cartesian_product k h)",
       ),
       t1732,
     ),
@@ -20959,7 +20959,7 @@ fn step_288() -> Unit raise {
   finite_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        FINITE(group_carrier(product_group k G)) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        forall i. i IN k ==> FINITE(group_carrier(G i))",
+        "∀ k (G:K->A group).\n        FINITE(group_carrier(product_group k G)) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        ∀ i. i IN k ==> FINITE(group_carrier(G i))",
       ),
       t1736,
     ),
@@ -21090,7 +21090,7 @@ fn step_289() -> Unit raise {
   abelian_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        abelian_group(product_group k G) <=>\n        forall i. i IN k ==> abelian_group(G i)",
+        "∀ k (G:K->A group).\n        abelian_group(product_group k G) <=>\n        ∀ i. i IN k ==> abelian_group(G i)",
       ),
       t1761,
     ),
@@ -21154,7 +21154,7 @@ fn step_291() -> Unit raise {
   sum_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n      sum_group k G =\n      subgroup_generated (product_group k G)\n                 {x | FINITE {i | i IN k /\\ ~(x i = group_id (G i))}}",
+        "∀ k (G:K->A group).\n      sum_group k G =\n      subgroup_generated (product_group k G)\n                 {x | FINITE {i | i IN k /\\ ~(x i = group_id (G i))}}",
       ),
       t1766,
     ),
@@ -21192,7 +21192,7 @@ fn step_292() -> Unit raise {
   sum_group_eq_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group). FINITE k ==> sum_group k G = product_group k G",
+        "∀ k (G:K->A group). FINITE k ==> sum_group k G = product_group k G",
       ),
       t1769,
     ),
@@ -21370,7 +21370,7 @@ fn step_293() -> Unit raise {
   subgroup_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n    {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n         FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}\n    subgroup_of product_group k G",
+        "∀ k (G:K->A group).\n    {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n         FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}\n    subgroup_of product_group k G",
       ),
       t1787,
     ),
@@ -21407,7 +21407,7 @@ fn step_294() -> Unit raise {
   sum_group_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall k (G:K->A group).\n        group_carrier(sum_group k G) =\n          {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n               FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}) /\\\n   (forall k (G:K->A group).\n        group_id (sum_group k G) =\n          RESTRICTION k (\\i. group_id (G i))) /\\\n   (forall k (G:K->A group).\n        group_inv (sum_group k G) =\n          \\x. RESTRICTION k (\\i. group_inv (G i) (x i))) /\\\n   (forall k (G:K->A group).\n        group_mul (sum_group k G) =\n          (\\x y. RESTRICTION k (\\i. group_mul (G i) (x i) (y i))))",
+        "(∀ k (G:K->A group).\n        group_carrier(sum_group k G) =\n          {x | x IN cartesian_product k (\\i. group_carrier(G i)) /\\\n               FINITE {i | i IN k /\\ ~(x i = group_id(G i))}}) /\\\n   (∀ k (G:K->A group).\n        group_id (sum_group k G) =\n          RESTRICTION k (\\i. group_id (G i))) /\\\n   (∀ k (G:K->A group).\n        group_inv (sum_group k G) =\n          \\x. RESTRICTION k (\\i. group_inv (G i) (x i))) /\\\n   (∀ k (G:K->A group).\n        group_mul (sum_group k G) =\n          (\\x y. RESTRICTION k (\\i. group_mul (G i) (x i) (y i))))",
       ),
       t1789,
     ),
@@ -21438,7 +21438,7 @@ fn step_295() -> Unit raise {
   group_pow_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k x n.\n        group_pow (sum_group k G) x n =\n        RESTRICTION k (\\i. group_pow (G i) (x i) n)",
+        "∀(G:K->A group) k x n.\n        group_pow (sum_group k G) x n =\n        RESTRICTION k (\\i. group_pow (G i) (x i) n)",
       ),
       t1791,
     ),
@@ -21469,7 +21469,7 @@ fn step_296() -> Unit raise {
   group_zpow_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k x n.\n        group_zpow (sum_group k G) x n =\n        RESTRICTION k (\\i. group_zpow (G i) (x i) n)",
+        "∀(G:K->A group) k x n.\n        group_zpow (sum_group k G) x n =\n        RESTRICTION k (\\i. group_zpow (G i) (x i) n)",
       ),
       t1793,
     ),
@@ -21533,7 +21533,7 @@ fn step_297() -> Unit raise {
   group_sum_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group) a i.\n        RESTRICTION k (\\j. if j = i then a else group_id (G j)) IN\n        group_carrier(sum_group k G) <=>\n        i IN k ==> a IN group_carrier(G i)",
+        "∀ k (G:K->A group) a i.\n        RESTRICTION k (\\j. if j = i then a else group_id (G j)) IN\n        group_carrier(sum_group k G) <=>\n        i IN k ==> a IN group_carrier(G i)",
       ),
       t1802,
     ),
@@ -21799,7 +21799,7 @@ fn step_298() -> Unit raise {
   trivial_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        trivial_group(sum_group k G) <=> forall i. i IN k ==> trivial_group(G i)",
+        "∀ k (G:K->A group).\n        trivial_group(sum_group k G) <=> ∀ i. i IN k ==> trivial_group(G i)",
       ),
       t1834,
     ),
@@ -21825,7 +21825,7 @@ fn step_299() -> Unit raise {
   let t1840 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "s SUBSET t\n    ==> ((forall x. x IN s ==> x IN t /\\ P x) <=> (forall x. x IN s ==> P x))",
+        "s SUBSET t\n    ==> ((∀ x. x IN s ==> x IN t /\\ P x) <=> (∀ x. x IN s ==> P x))",
       ),
     ),
   )
@@ -21877,7 +21877,7 @@ fn step_299() -> Unit raise {
   cartesian_product_subgroup_of_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k h G:K->A group.\n        (cartesian_product k h) subgroup_of (sum_group k G) <=>\n        (forall i. i IN k ==> (h i) subgroup_of (G i)) /\\\n        (forall z. z IN cartesian_product k h\n             ==> FINITE {i | i IN k /\\ ~(z i = group_id(G i))})",
+        "∀ k h G:K->A group.\n        (cartesian_product k h) subgroup_of (sum_group k G) <=>\n        (∀ i. i IN k ==> (h i) subgroup_of (G i)) /\\\n        (∀ z. z IN cartesian_product k h\n             ==> FINITE {i | i IN k /\\ ~(z i = group_id(G i))})",
       ),
       t1843,
     ),
@@ -22317,7 +22317,7 @@ fn step_300() -> Unit raise {
   sum_group_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of (G i))\n        ==> sum_group k (\\i. subgroup_generated (G i) (h i)) =\n            subgroup_generated (sum_group k G) (cartesian_product k h)",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) subgroup_of (G i))\n        ==> sum_group k (\\i. subgroup_generated (G i) (h i)) =\n            subgroup_generated (sum_group k G) (cartesian_product k h)",
       ),
       t1888,
     ),
@@ -22543,7 +22543,7 @@ fn step_301() -> Unit raise {
   abelian_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n           abelian_group (sum_group k G) <=>\n           (forall i. i IN k ==> abelian_group (G i))",
+        "∀ k (G:K->A group).\n           abelian_group (sum_group k G) <=>\n           (∀ i. i IN k ==> abelian_group (G i))",
       ),
       t1912,
     ),
@@ -22567,7 +22567,7 @@ fn step_302() -> Unit raise {
   group_homomorphism_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "group_homomorphism (G,G') (f:A->B) <=>\n        IMAGE f (group_carrier G) SUBSET group_carrier G' /\\\n        f (group_id G) = group_id G' /\\\n        (forall x. x IN group_carrier G\n             ==> f(group_inv G x) = group_inv G' (f x)) /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> f(group_mul G x y) = group_mul G' (f x) (f y))",
+        "group_homomorphism (G,G') (f:A->B) <=>\n        IMAGE f (group_carrier G) SUBSET group_carrier G' /\\\n        f (group_id G) = group_id G' /\\\n        (∀ x. x IN group_carrier G\n             ==> f(group_inv G x) = group_inv G' (f x)) /\\\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> f(group_mul G x y) = group_mul G' (f x) (f y))",
       ),
     ),
   )
@@ -22590,7 +22590,7 @@ fn step_303() -> Unit raise {
   group_monomorphism_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "group_monomorphism (G,G') (f:A->B) <=>\n        group_homomorphism (G,G') f /\\\n        forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y",
+        "group_monomorphism (G,G') (f:A->B) <=>\n        group_homomorphism (G,G') f /\\\n        ∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y",
       ),
     ),
   )
@@ -22659,7 +22659,7 @@ fn step_306() -> Unit raise {
   group_isomorphisms_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "group_isomorphisms (G,G') ((f:A->B),g) <=>\n        group_homomorphism (G,G') f /\\\n        group_homomorphism (G',G) g /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x) /\\\n        (forall y. y IN group_carrier G' ==> f(g y) = y)",
+        "group_isomorphisms (G,G') ((f:A->B),g) <=>\n        group_homomorphism (G,G') f /\\\n        group_homomorphism (G',G) g /\\\n        (∀ x. x IN group_carrier G ==> g(f x) = x) /\\\n        (∀ y. y IN group_carrier G' ==> f(g y) = y)",
       ),
     ),
   )
@@ -22737,7 +22737,7 @@ fn step_309() -> Unit raise {
   group_homomorphism_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) f'.\n        group_homomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> f' x = f x)\n        ==> group_homomorphism (G,H) f'",
+        "∀ G H (f:A->B) f'.\n        group_homomorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x)\n        ==> group_homomorphism (G,H) f'",
       ),
       t1914,
     ),
@@ -22779,7 +22779,7 @@ fn step_310() -> Unit raise {
   group_monomorphism_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) f'.\n        group_monomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> f' x = f x)\n        ==> group_monomorphism (G,H) f'",
+        "∀ G H (f:A->B) f'.\n        group_monomorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x)\n        ==> group_monomorphism (G,H) f'",
       ),
       t1917,
     ),
@@ -22821,7 +22821,7 @@ fn step_311() -> Unit raise {
   group_epimorphism_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) f'.\n        group_epimorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> f' x = f x)\n        ==> group_epimorphism (G,H) f'",
+        "∀ G H (f:A->B) f'.\n        group_epimorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x)\n        ==> group_epimorphism (G,H) f'",
       ),
       t1920,
     ),
@@ -22848,7 +22848,7 @@ fn step_312() -> Unit raise {
   group_endomorphism_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:A->A) f'.\n        group_endomorphism G f /\\\n        (forall x. x IN group_carrier G ==> f' x = f x)\n        ==> group_endomorphism G f'",
+        "∀ G (f:A->A) f'.\n        group_endomorphism G f /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x)\n        ==> group_endomorphism G f'",
       ),
       t1921,
     ),
@@ -22890,7 +22890,7 @@ fn step_313() -> Unit raise {
   group_isomorphisms_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) g.\n        group_isomorphisms(G,H) (f,g) /\\\n        (forall x. x IN group_carrier G ==> f' x = f x) /\\\n        (forall y. y IN group_carrier H ==> g' y = g y)\n        ==> group_isomorphisms(G,H) (f',g')",
+        "∀ G H (f:A->B) g.\n        group_isomorphisms(G,H) (f,g) /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x) /\\\n        (∀ y. y IN group_carrier H ==> g' y = g y)\n        ==> group_isomorphisms(G,H) (f',g')",
       ),
       t1924,
     ),
@@ -23023,7 +23023,7 @@ fn step_314() -> Unit raise {
   group_isomorphism_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) f'.\n        group_isomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> f' x = f x)\n        ==> group_isomorphism (G,H) f'",
+        "∀ G H (f:A->B) f'.\n        group_isomorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x)\n        ==> group_isomorphism (G,H) f'",
       ),
       t1935,
     ),
@@ -23050,7 +23050,7 @@ fn step_315() -> Unit raise {
   group_automorphism_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:A->A) f'.\n        group_automorphism G f /\\\n        (forall x. x IN group_carrier G ==> f' x = f x)\n        ==> group_automorphism G f'",
+        "∀ G (f:A->A) f'.\n        group_automorphism G f /\\\n        (∀ x. x IN group_carrier G ==> f' x = f x)\n        ==> group_automorphism G f'",
       ),
       t1936,
     ),
@@ -23096,7 +23096,7 @@ fn step_316() -> Unit raise {
   group_homomorphisms_eq_on_generators_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(G,H) g /\\\n        (forall x. x IN group_carrier G /\\ x IN s ==> f x = g x)\n        ==> forall x. x IN group_carrier(subgroup_generated G s) ==> f x = g x",
+        "∀ G H s (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(G,H) g /\\\n        (∀ x. x IN group_carrier G /\\ x IN s ==> f x = g x)\n        ==> ∀ x. x IN group_carrier(subgroup_generated G s) ==> f x = g x",
       ),
       t1940,
     ),
@@ -23125,7 +23125,7 @@ fn step_317() -> Unit raise {
   group_isomorphisms_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B) g.\n        group_isomorphisms (G,G') (f,g) <=> group_isomorphisms(G',G) (g,f)",
+        "∀ G G' (f:A->B) g.\n        group_isomorphisms (G,G') (f,g) <=> group_isomorphisms(G',G) (g,f)",
       ),
       t1942,
     ),
@@ -23154,7 +23154,7 @@ fn step_318() -> Unit raise {
   group_isomorphisms_imp_isomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) g G G'.\n        group_isomorphisms (G,G') (f,g) ==> group_isomorphism (G,G') f",
+        "∀(f:A->B) g G G'.\n        group_isomorphisms (G,G') (f,g) ==> group_isomorphism (G,G') f",
       ),
       t1944,
     ),
@@ -23181,7 +23181,7 @@ fn step_319() -> Unit raise {
   group_isomorphisms_imp_isomorphism_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) g G G'.\n        group_isomorphisms (G,G') (f,g) ==> group_isomorphism (G',G) g",
+        "∀(f:A->B) g G G'.\n        group_isomorphisms (G,G') (f,g) ==> group_isomorphism (G',G) g",
       ),
       t1945,
     ),
@@ -23413,7 +23413,7 @@ fn step_320() -> Unit raise {
   group_homomorphism_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' f:A->B.\n        group_homomorphism (G,G') (f:A->B) <=>\n        IMAGE f (group_carrier G) SUBSET group_carrier G' /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> f(group_mul G x y) = group_mul G' (f x) (f y))",
+        "∀ G G' f:A->B.\n        group_homomorphism (G,G') (f:A->B) <=>\n        IMAGE f (group_carrier G) SUBSET group_carrier G' /\\\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n               ==> f(group_mul G x y) = group_mul G' (f x) (f y))",
       ),
       t1976,
     ),
@@ -23442,7 +23442,7 @@ fn step_321() -> Unit raise {
   group_epimorphism_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_carrier G' SUBSET IMAGE f (group_carrier G)",
+        "∀ G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_carrier G' SUBSET IMAGE f (group_carrier G)",
       ),
       t1978,
     ),
@@ -23496,7 +23496,7 @@ fn step_322() -> Unit raise {
   group_isomorphisms_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) g.\n        group_isomorphisms(G,H) (f,g) <=>\n        group_homomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x) /\\\n        (forall y. y IN group_carrier H ==> g y IN group_carrier G /\\ f(g y) = y)",
+        "∀ G H (f:A->B) g.\n        group_isomorphisms(G,H) (f,g) <=>\n        group_homomorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> g(f x) = x) /\\\n        (∀ y. y IN group_carrier H ==> g y IN group_carrier G /\\ f(g y) = y)",
       ),
       t1984,
     ),
@@ -23521,7 +23521,7 @@ fn step_323() -> Unit raise {
   group_homomorphism_of_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G G'.\n        group_homomorphism(G,G') f ==> f (group_id G) = group_id G'",
+        "∀(f:A->B) G G'.\n        group_homomorphism(G,G') f ==> f (group_id G) = group_id G'",
       ),
       t1985,
     ),
@@ -23546,7 +23546,7 @@ fn step_324() -> Unit raise {
   group_homomorphism_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x. x IN group_carrier G\n                ==> f(group_inv G x) = group_inv G' (f x)",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> ∀ x. x IN group_carrier G\n                ==> f(group_inv G x) = group_inv G' (f x)",
       ),
       t1986,
     ),
@@ -23571,7 +23571,7 @@ fn step_325() -> Unit raise {
   group_homomorphism_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x y. x IN group_carrier G /\\ y IN group_carrier G\n                  ==> f(group_mul G x y) = group_mul G' (f x) (f y)",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> ∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n                  ==> f(group_mul G x y) = group_mul G' (f x) (f y)",
       ),
       t1987,
     ),
@@ -23600,7 +23600,7 @@ fn step_326() -> Unit raise {
   group_homomorphism_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x y. x IN group_carrier G /\\ y IN group_carrier G\n                  ==> f(group_div G x y) = group_div G' (f x) (f y)",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> ∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n                  ==> f(group_div G x y) = group_div G' (f x) (f y)",
       ),
       t1989,
     ),
@@ -23646,7 +23646,7 @@ fn step_327() -> Unit raise {
   group_homomorphism_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x n. x IN group_carrier G\n                  ==> f(group_pow G x n) = group_pow G' (f x) n",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> ∀ x n. x IN group_carrier G\n                  ==> f(group_pow G x n) = group_pow G' (f x) n",
       ),
       t1993,
     ),
@@ -23685,7 +23685,7 @@ fn step_328() -> Unit raise {
   group_homomorphism_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> forall x n. x IN group_carrier G\n                  ==> f(group_zpow G x n) = group_zpow G' (f x) n",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> ∀ x n. x IN group_carrier G\n                  ==> f(group_zpow G x n) = group_zpow G' (f x) n",
       ),
       t1996,
     ),
@@ -23718,7 +23718,7 @@ fn step_329() -> Unit raise {
   )
   group_homomorphism_trivial_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G H. group_homomorphism (G,H) (\\x. group_id H)"),
+      @parser.parse_term("∀ G H. group_homomorphism (G,H) (\\x. group_id H)"),
       t1997,
     ),
   )
@@ -23743,7 +23743,7 @@ fn step_330() -> Unit raise {
   )
   group_homomorphism_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_homomorphism (G,G) (\\x. x)"),
+      @parser.parse_term("∀ G:A group. group_homomorphism (G,G) (\\x. x)"),
       t1998,
     ),
   )
@@ -23768,7 +23768,7 @@ fn step_331() -> Unit raise {
   )
   group_monomorphism_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_monomorphism (G,G) (\\x. x)"),
+      @parser.parse_term("∀ G:A group. group_monomorphism (G,G) (\\x. x)"),
       t1999,
     ),
   )
@@ -23793,7 +23793,7 @@ fn step_332() -> Unit raise {
   )
   group_epimorphism_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_epimorphism (G,G) (\\x. x)"),
+      @parser.parse_term("∀ G:A group. group_epimorphism (G,G) (\\x. x)"),
       t2000,
     ),
   )
@@ -23819,7 +23819,7 @@ fn step_333() -> Unit raise {
   group_isomorphisms_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_isomorphisms (G,G) ((\\x. x),(\\x. x))",
+        "∀ G:A group. group_isomorphisms (G,G) ((\\x. x),(\\x. x))",
       ),
       t2001,
     ),
@@ -23847,7 +23847,7 @@ fn step_334() -> Unit raise {
   )
   group_isomorphism_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_isomorphism (G,G) (\\x. x)"),
+      @parser.parse_term("∀ G:A group. group_isomorphism (G,G) (\\x. x)"),
       t2003,
     ),
   )
@@ -23879,7 +23879,7 @@ fn step_335() -> Unit raise {
   group_homomorphism_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_homomorphism(G1,G2) f /\\ group_homomorphism(G2,G3) g\n        ==> group_homomorphism(G1,G3) (g o f)",
+        "∀ G1 G2 G3 (f:A->B) (g:B->C).\n        group_homomorphism(G1,G2) f /\\ group_homomorphism(G2,G3) g\n        ==> group_homomorphism(G1,G3) (g o f)",
       ),
       t2004,
     ),
@@ -23921,7 +23921,7 @@ fn step_336() -> Unit raise {
   group_monomorphism_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_monomorphism(G1,G2) f /\\ group_monomorphism(G2,G3) g\n        ==> group_monomorphism(G1,G3) (g o f)",
+        "∀ G1 G2 G3 (f:A->B) (g:B->C).\n        group_monomorphism(G1,G2) f /\\ group_monomorphism(G2,G3) g\n        ==> group_monomorphism(G1,G3) (g o f)",
       ),
       t2006,
     ),
@@ -23950,7 +23950,7 @@ fn step_337() -> Unit raise {
   group_monomorphism_compose_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_monomorphism(A,C) (g o f)\n        ==> group_monomorphism(A,B) f",
+        "∀(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_monomorphism(A,C) (g o f)\n        ==> group_monomorphism(A,B) f",
       ),
       t2008,
     ),
@@ -23979,7 +23979,7 @@ fn step_338() -> Unit raise {
   group_epimorphism_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_epimorphism(G1,G2) f /\\ group_epimorphism(G2,G3) g\n        ==> group_epimorphism(G1,G3) (g o f)",
+        "∀ G1 G2 G3 (f:A->B) (g:B->C).\n        group_epimorphism(G1,G2) f /\\ group_epimorphism(G2,G3) g\n        ==> group_epimorphism(G1,G3) (g o f)",
       ),
       t2010,
     ),
@@ -24015,7 +24015,7 @@ fn step_339() -> Unit raise {
   group_epimorphism_compose_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_epimorphism(A,C) (g o f)\n        ==> group_epimorphism(B,C) g",
+        "∀(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_epimorphism(A,C) (g o f)\n        ==> group_epimorphism(B,C) g",
       ),
       t2012,
     ),
@@ -24046,7 +24046,7 @@ fn step_340() -> Unit raise {
   group_monomorphism_left_invertible_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_monomorphism (G,H) f",
+        "∀ G H (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_monomorphism (G,H) f",
       ),
       t2014,
     ),
@@ -24076,7 +24076,7 @@ fn step_341() -> Unit raise {
   group_epimorphism_right_invertible_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,G) g /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_epimorphism (H,G) g",
+        "∀ G H (f:A->B) g.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,G) g /\\\n        (∀ x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_epimorphism (H,G) g",
       ),
       t2017,
     ),
@@ -24112,7 +24112,7 @@ fn step_342() -> Unit raise {
   group_homomorphism_into_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' h (f:A->B).\n        group_homomorphism (G,G') f /\\ IMAGE f (group_carrier G) SUBSET h\n        ==> group_homomorphism (G,subgroup_generated G' h) f",
+        "∀ G G' h (f:A->B).\n        group_homomorphism (G,G') f /\\ IMAGE f (group_carrier G) SUBSET h\n        ==> group_homomorphism (G,subgroup_generated G' h) f",
       ),
       t2021,
     ),
@@ -24156,7 +24156,7 @@ fn step_343() -> Unit raise {
   group_homomorphism_into_subgroup_eq_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H s.\n      group_homomorphism(G,subgroup_generated H s) f <=>\n      group_homomorphism(G,H) f /\\\n      IMAGE f (group_carrier G) SUBSET group_carrier(subgroup_generated H s)",
+        "∀(f:A->B) G H s.\n      group_homomorphism(G,subgroup_generated H s) f <=>\n      group_homomorphism(G,H) f /\\\n      IMAGE f (group_carrier G) SUBSET group_carrier(subgroup_generated H s)",
       ),
       t2027,
     ),
@@ -24186,7 +24186,7 @@ fn step_344() -> Unit raise {
   group_homomorphism_into_subgroup_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' h (f:A->B).\n        h subgroup_of G'\n        ==> (group_homomorphism (G,subgroup_generated G' h) f <=>\n             group_homomorphism (G,G') f /\\\n             IMAGE f (group_carrier G) SUBSET h)",
+        "∀ G G' h (f:A->B).\n        h subgroup_of G'\n        ==> (group_homomorphism (G,subgroup_generated G' h) f <=>\n             group_homomorphism (G,G') f /\\\n             IMAGE f (group_carrier G) SUBSET h)",
       ),
       t2028,
     ),
@@ -24232,7 +24232,7 @@ fn step_345() -> Unit raise {
   group_homomorphism_from_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H s.\n        group_homomorphism (G,H) f\n        ==> group_homomorphism(subgroup_generated G s,H) f",
+        "∀(f:A->B) G H s.\n        group_homomorphism (G,H) f\n        ==> group_homomorphism(subgroup_generated G s,H) f",
       ),
       t2034,
     ),
@@ -24369,7 +24369,7 @@ fn step_346() -> Unit raise {
   group_homomorphism_between_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H g h (f:A->B).\n      group_homomorphism(G,H) f /\\ IMAGE f g SUBSET h\n      ==> group_homomorphism(subgroup_generated G g,subgroup_generated H h) f",
+        "∀ G H g h (f:A->B).\n      group_homomorphism(G,H) f /\\ IMAGE f g SUBSET h\n      ==> group_homomorphism(subgroup_generated G g,subgroup_generated H h) f",
       ),
       t2055,
     ),
@@ -24399,7 +24399,7 @@ fn step_347() -> Unit raise {
   group_homomorphism_between_subgroups_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H g h (f:A->B).\n      group_homomorphism(G,H) f /\\ IMAGE f (group_carrier G INTER g) SUBSET h\n      ==> group_homomorphism(subgroup_generated G g,subgroup_generated H h) f",
+        "∀ G H g h (f:A->B).\n      group_homomorphism(G,H) f /\\ IMAGE f (group_carrier G INTER g) SUBSET h\n      ==> group_homomorphism(subgroup_generated G g,subgroup_generated H h) f",
       ),
       t2056,
     ),
@@ -24449,7 +24449,7 @@ fn step_348() -> Unit raise {
   group_monomorphism_from_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H s.\n        group_monomorphism (G,H) f\n        ==> group_monomorphism(subgroup_generated G s,H) f",
+        "∀(f:A->B) G H s.\n        group_monomorphism (G,H) f\n        ==> group_monomorphism(subgroup_generated G s,H) f",
       ),
       t2063,
     ),
@@ -24495,7 +24495,7 @@ fn step_349() -> Unit raise {
   group_monomorphism_between_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s t (f:A->B).\n      group_monomorphism(G,H) f /\\ IMAGE f s SUBSET t\n      ==> group_monomorphism(subgroup_generated G s,subgroup_generated H t) f",
+        "∀ G H s t (f:A->B).\n      group_monomorphism(G,H) f /\\ IMAGE f s SUBSET t\n      ==> group_monomorphism(subgroup_generated G s,subgroup_generated H t) f",
       ),
       t2069,
     ),
@@ -24529,7 +24529,7 @@ fn step_350() -> Unit raise {
   group_monomorphism_into_supergroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' t (f:A->B).\n        group_monomorphism(G,subgroup_generated G' t) f\n        ==> group_monomorphism(G,G') f",
+        "∀ G G' t (f:A->B).\n        group_monomorphism(G,subgroup_generated G' t) f\n        ==> group_monomorphism(G,G') f",
       ),
       t2071,
     ),
@@ -24559,7 +24559,7 @@ fn step_351() -> Unit raise {
   group_homomorphism_inclusion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_homomorphism(subgroup_generated G s,G) (\\x. x)",
+        "∀ G s:A->bool. group_homomorphism(subgroup_generated G s,G) (\\x. x)",
       ),
       t2072,
     ),
@@ -24589,7 +24589,7 @@ fn step_352() -> Unit raise {
   group_monomorphism_inclusion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_monomorphism(subgroup_generated G s,G) (\\x. x)",
+        "∀ G s:A->bool. group_monomorphism(subgroup_generated G s,G) (\\x. x)",
       ),
       t2073,
     ),
@@ -24881,7 +24881,7 @@ fn step_353() -> Unit raise {
   subgroup_generated_by_homomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> group_carrier (subgroup_generated H (IMAGE f s)) =\n            IMAGE f (group_carrier(subgroup_generated G s))",
+        "∀ G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> group_carrier (subgroup_generated H (IMAGE f s)) =\n            IMAGE f (group_carrier(subgroup_generated G s))",
       ),
       t2106,
     ),
@@ -24915,7 +24915,7 @@ fn step_354() -> Unit raise {
   subgroup_generated_by_homomorphic_image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s t (f:A->B).\n        group_homomorphism (G,H) f /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G /\\\n        subgroup_generated G s = subgroup_generated G t\n        ==> subgroup_generated H (IMAGE f s) =\n            subgroup_generated H (IMAGE f t)",
+        "∀ G H s t (f:A->B).\n        group_homomorphism (G,H) f /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G /\\\n        subgroup_generated G s = subgroup_generated G t\n        ==> subgroup_generated H (IMAGE f s) =\n            subgroup_generated H (IMAGE f t)",
       ),
       t2109,
     ),
@@ -24946,7 +24946,7 @@ fn step_355() -> Unit raise {
   subgroup_generated_by_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s (f:A->B).\n        group_epimorphism (G,H) f /\\\n        s SUBSET group_carrier G /\\\n        subgroup_generated G s = G\n        ==> subgroup_generated H (IMAGE f s) = H",
+        "∀ G H s (f:A->B).\n        group_epimorphism (G,H) f /\\\n        s SUBSET group_carrier G /\\\n        subgroup_generated G s = G\n        ==> subgroup_generated H (IMAGE f s) = H",
       ),
       t2111,
     ),
@@ -24988,7 +24988,7 @@ fn step_356() -> Unit raise {
   group_epimorphism_between_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> group_epimorphism(subgroup_generated G s,\n                              subgroup_generated H (IMAGE f s)) f",
+        "∀ G H (f:A->B).\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> group_epimorphism(subgroup_generated G s,\n                              subgroup_generated H (IMAGE f s)) f",
       ),
       t2114,
     ),
@@ -25022,7 +25022,7 @@ fn step_357() -> Unit raise {
   group_epimorphism_into_subgroup_eq_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H s.\n      group_epimorphism(G,subgroup_generated H s) f <=>\n      group_homomorphism(G,H) f /\\\n      IMAGE f (group_carrier G) = group_carrier(subgroup_generated H s)",
+        "∀(f:A->B) G H s.\n      group_epimorphism(G,subgroup_generated H s) f <=>\n      group_homomorphism(G,H) f /\\\n      IMAGE f (group_carrier G) = group_carrier(subgroup_generated H s)",
       ),
       t2116,
     ),
@@ -25052,7 +25052,7 @@ fn step_358() -> Unit raise {
   group_epimorphism_into_subgroup_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' h (f:A->B).\n        h subgroup_of G'\n        ==> (group_epimorphism (G,subgroup_generated G' h) f <=>\n             group_homomorphism (G,G') f /\\\n             IMAGE f (group_carrier G) = h)",
+        "∀ G G' h (f:A->B).\n        h subgroup_of G'\n        ==> (group_epimorphism (G,subgroup_generated G' h) f <=>\n             group_homomorphism (G,G') f /\\\n             IMAGE f (group_carrier G) = h)",
       ),
       t2117,
     ),
@@ -25145,7 +25145,7 @@ fn step_359() -> Unit raise {
   group_isomorphism_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' f:A->B.\n      group_isomorphism (G,G') (f:A->B) <=>\n      group_homomorphism (G,G') f /\\\n      IMAGE f (group_carrier G) = group_carrier G' /\\\n      (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y)",
+        "∀ G G' f:A->B.\n      group_isomorphism (G,G') (f:A->B) <=>\n      group_homomorphism (G,G') f /\\\n      IMAGE f (group_carrier G) = group_carrier G' /\\\n      (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y)",
       ),
       t2126,
     ),
@@ -25176,7 +25176,7 @@ fn step_360() -> Unit raise {
   group_isomorphism_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' f:A->B.\n      group_isomorphism (G,G') (f:A->B) <=>\n      group_homomorphism (G,G') f /\\\n      (forall z. z IN group_carrier G' ==> ?x. x IN group_carrier G /\\ f x = z) /\\\n      (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y)",
+        "∀ G G' f:A->B.\n      group_isomorphism (G,G') (f:A->B) <=>\n      group_homomorphism (G,G') f /\\\n      (∀ z. z IN group_carrier G' ==> ?x. x IN group_carrier G /\\ f x = z) /\\\n      (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n             ==> x = y)",
       ),
       t2128,
     ),
@@ -25205,7 +25205,7 @@ fn step_361() -> Unit raise {
   subgroup_of_homomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism (G,G') f /\\ h subgroup_of G\n        ==> IMAGE f h subgroup_of G'",
+        "∀ G G' (f:A->B).\n        group_homomorphism (G,G') f /\\ h subgroup_of G\n        ==> IMAGE f h subgroup_of G'",
       ),
       t2130,
     ),
@@ -25244,7 +25244,7 @@ fn step_362() -> Unit raise {
   subgroup_of_homomorphic_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) h.\n        group_homomorphism(G,H) f /\\ h subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN h} subgroup_of G",
+        "∀ G H (f:A->B) h.\n        group_homomorphism(G,H) f /\\ h subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN h} subgroup_of G",
       ),
       t2133,
     ),
@@ -25293,7 +25293,7 @@ fn step_363() -> Unit raise {
   subgroup_of_epimorphic_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) h.\n        group_epimorphism(G,H) f /\\ h subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN h} subgroup_of G /\\\n            IMAGE f {x | x IN group_carrier G /\\ f x IN h} = h",
+        "∀ G H (f:A->B) h.\n        group_epimorphism(G,H) f /\\ h subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN h} subgroup_of G /\\\n            IMAGE f {x | x IN group_carrier G /\\ f x IN h} = h",
       ),
       t2138,
     ),
@@ -25328,7 +25328,7 @@ fn step_364() -> Unit raise {
   group_monomorphism_epimorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' f:A->B.\n        group_monomorphism (G,G') f /\\ group_epimorphism (G,G') f <=>\n        group_isomorphism (G,G') f",
+        "∀ G G' f:A->B.\n        group_monomorphism (G,G') f /\\ group_epimorphism (G,G') f <=>\n        group_isomorphism (G,G') f",
       ),
       t2140,
     ),
@@ -25363,7 +25363,7 @@ fn step_365() -> Unit raise {
   group_isomorphism_epimorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_epimorphism (G,G') f /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n               ==> x = y)",
+        "∀ G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_epimorphism (G,G') f /\\\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\ f x = f y\n               ==> x = y)",
       ),
       t2142,
     ),
@@ -25396,7 +25396,7 @@ fn step_366() -> Unit raise {
   subgroup_monomorphism_epimorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' s (f:A->B).\n        group_monomorphism(G,G') f /\\\n        group_epimorphism(G,subgroup_generated G' s) f <=>\n        group_isomorphism(G,subgroup_generated G' s) f",
+        "∀ G G' s (f:A->B).\n        group_monomorphism(G,G') f /\\\n        group_epimorphism(G,subgroup_generated G' s) f <=>\n        group_isomorphism(G,subgroup_generated G' s) f",
       ),
       t2143,
     ),
@@ -25423,7 +25423,7 @@ fn step_367() -> Unit raise {
   group_isomorphism_imp_monomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_isomorphism (G,G') f ==> group_monomorphism (G,G') f",
+        "∀ G G' (f:A->B).\n        group_isomorphism (G,G') f ==> group_monomorphism (G,G') f",
       ),
       t2144,
     ),
@@ -25450,7 +25450,7 @@ fn step_368() -> Unit raise {
   group_isomorphism_imp_epimorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_isomorphism (G,G') f ==> group_epimorphism (G,G') f",
+        "∀ G G' (f:A->B).\n        group_isomorphism (G,G') f ==> group_epimorphism (G,G') f",
       ),
       t2145,
     ),
@@ -25475,7 +25475,7 @@ fn step_369() -> Unit raise {
   group_monomorphism_imp_homomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H. group_monomorphism(G,H) f ==> group_homomorphism(G,H) f",
+        "∀(f:A->B) G H. group_monomorphism(G,H) f ==> group_homomorphism(G,H) f",
       ),
       t2146,
     ),
@@ -25500,7 +25500,7 @@ fn step_370() -> Unit raise {
   group_epimorphism_imp_homomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H. group_epimorphism(G,H) f ==> group_homomorphism(G,H) f",
+        "∀(f:A->B) G H. group_epimorphism(G,H) f ==> group_homomorphism(G,H) f",
       ),
       t2147,
     ),
@@ -25525,7 +25525,7 @@ fn step_371() -> Unit raise {
   group_isomorphism_imp_homomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H. group_isomorphism(G,H) f ==> group_homomorphism(G,H) f",
+        "∀(f:A->B) G H. group_isomorphism(G,H) f ==> group_homomorphism(G,H) f",
       ),
       t2148,
     ),
@@ -25556,7 +25556,7 @@ fn step_372() -> Unit raise {
   group_automorphism_imp_endomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (f:A->A). group_automorphism G f ==> group_endomorphism G f",
+        "∀ G (f:A->A). group_automorphism G f ==> group_endomorphism G f",
       ),
       t2150,
     ),
@@ -25724,7 +25724,7 @@ fn step_373() -> Unit raise {
   group_isomorphism_eq_monomorphism_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> (group_isomorphism(G,H) f <=> group_monomorphism(G,H) f)",
+        "∀ G H (f:A->B).\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> (group_isomorphism(G,H) f <=> group_monomorphism(G,H) f)",
       ),
       t2167,
     ),
@@ -25892,7 +25892,7 @@ fn step_374() -> Unit raise {
   group_isomorphism_eq_epimorphism_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> (group_isomorphism(G,H) f <=> group_epimorphism(G,H) f)",
+        "∀ G H (f:A->B).\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> (group_isomorphism(G,H) f <=> group_epimorphism(G,H) f)",
       ),
       t2184,
     ),
@@ -25949,7 +25949,7 @@ fn step_375() -> Unit raise {
   group_isomorphisms_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A.\n        a IN group_carrier G\n        ==> group_isomorphisms (G,G)\n             (group_conjugation G a,group_conjugation G (group_inv G a))",
+        "∀ G a:A.\n        a IN group_carrier G\n        ==> group_isomorphisms (G,G)\n             (group_conjugation G a,group_conjugation G (group_inv G a))",
       ),
       t2189,
     ),
@@ -25978,7 +25978,7 @@ fn step_376() -> Unit raise {
   group_automorphism_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A.\n        a IN group_carrier G ==> group_automorphism G (group_conjugation G a)",
+        "∀ G a:A.\n        a IN group_carrier G ==> group_automorphism G (group_conjugation G a)",
       ),
       t2191,
     ),
@@ -26008,7 +26008,7 @@ fn step_377() -> Unit raise {
   group_isomorphism_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A. a IN group_carrier G\n           ==> group_isomorphism (G,G) (group_conjugation G a)",
+        "∀ G a:A. a IN group_carrier G\n           ==> group_isomorphism (G,G) (group_conjugation G a)",
       ),
       t2192,
     ),
@@ -26038,7 +26038,7 @@ fn step_378() -> Unit raise {
   group_homomorphism_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A. a IN group_carrier G\n           ==> group_homomorphism (G,G) (group_conjugation G a)",
+        "∀ G a:A. a IN group_carrier G\n           ==> group_homomorphism (G,G) (group_conjugation G a)",
       ),
       t2193,
     ),
@@ -26077,7 +26077,7 @@ fn step_379() -> Unit raise {
   card_le_group_monomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_monomorphism(G,H) f ==> group_carrier G <=_c group_carrier H",
+        "∀ G H (f:A->B).\n        group_monomorphism(G,H) f ==> group_carrier G <=_c group_carrier H",
       ),
       t2197,
     ),
@@ -26120,7 +26120,7 @@ fn step_380() -> Unit raise {
   card_le_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_epimorphism(G,H) f ==> group_carrier H <=_c group_carrier G",
+        "∀ G H (f:A->B).\n        group_epimorphism(G,H) f ==> group_carrier H <=_c group_carrier G",
       ),
       t2201,
     ),
@@ -26157,7 +26157,7 @@ fn step_381() -> Unit raise {
   card_eq_group_isomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_isomorphism(G,H) f ==> group_carrier G =_c group_carrier H",
+        "∀ G H (f:A->B).\n        group_isomorphism(G,H) f ==> group_carrier G =_c group_carrier H",
       ),
       t2204,
     ),
@@ -26184,7 +26184,7 @@ fn step_382() -> Unit raise {
   finite_group_monomorphic_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_monomorphism(G,H) f /\\ FINITE(group_carrier H)\n        ==> FINITE(group_carrier G)",
+        "∀ G H (f:A->B).\n        group_monomorphism(G,H) f /\\ FINITE(group_carrier H)\n        ==> FINITE(group_carrier G)",
       ),
       t2205,
     ),
@@ -26319,7 +26319,7 @@ fn step_383() -> Unit raise {
   finite_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ FINITE(group_carrier G)\n        ==> FINITE(group_carrier H)",
+        "∀ G H (f:A->B).\n        group_epimorphism(G,H) f /\\ FINITE(group_carrier G)\n        ==> FINITE(group_carrier H)",
       ),
       t2215,
     ),
@@ -26348,7 +26348,7 @@ fn step_384() -> Unit raise {
   card_eq_group_monomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_monomorphism(G,H) f\n        ==> IMAGE f (group_carrier G) =_c group_carrier G",
+        "∀ G H (f:A->B).\n        group_monomorphism(G,H) f\n        ==> IMAGE f (group_carrier G) =_c group_carrier G",
       ),
       t2217,
     ),
@@ -26381,7 +26381,7 @@ fn step_385() -> Unit raise {
   group_isomorphisms_between_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H g h (f:A->B) f'.\n      group_isomorphisms(G,H) (f,f') /\\\n      IMAGE f g SUBSET h /\\ IMAGE f' h SUBSET g\n      ==> group_isomorphisms (subgroup_generated G g,subgroup_generated H h)\n                             (f,f')",
+        "∀ G H g h (f:A->B) f'.\n      group_isomorphisms(G,H) (f,f') /\\\n      IMAGE f g SUBSET h /\\ IMAGE f' h SUBSET g\n      ==> group_isomorphisms (subgroup_generated G g,subgroup_generated H h)\n                             (f,f')",
       ),
       t2219,
     ),
@@ -26417,7 +26417,7 @@ fn step_386() -> Unit raise {
   group_isomorphisms_between_subgroups_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H g h (f:A->B) f'.\n      group_isomorphisms(G,H) (f,f') /\\\n      IMAGE f (group_carrier G INTER g) SUBSET h /\\\n      IMAGE f' (group_carrier H INTER h) SUBSET g\n      ==> group_isomorphisms (subgroup_generated G g,subgroup_generated H h)\n                             (f,f')",
+        "∀ G H g h (f:A->B) f'.\n      group_isomorphisms(G,H) (f,f') /\\\n      IMAGE f (group_carrier G INTER g) SUBSET h /\\\n      IMAGE f' (group_carrier H INTER h) SUBSET g\n      ==> group_isomorphisms (subgroup_generated G g,subgroup_generated H h)\n                             (f,f')",
       ),
       t2221,
     ),
@@ -26619,7 +26619,7 @@ fn step_387() -> Unit raise {
   group_isomorphism_between_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H g h (f:A->B).\n      group_isomorphism(G,H) f /\\ g SUBSET group_carrier G /\\ IMAGE f g = h\n      ==> group_isomorphism(subgroup_generated G g,subgroup_generated H h) f",
+        "∀ G H g h (f:A->B).\n      group_isomorphism(G,H) f /\\ g SUBSET group_carrier G /\\ IMAGE f g = h\n      ==> group_isomorphism(subgroup_generated G g,subgroup_generated H h) f",
       ),
       t2249,
     ),
@@ -26653,7 +26653,7 @@ fn step_388() -> Unit raise {
   group_isomorphisms_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 G3 (f1:A->B) (f2:B->C) g1 g2.\n        group_isomorphisms(G1,G2) (f1,g1) /\\ group_isomorphisms(G2,G3) (f2,g2)\n        ==> group_isomorphisms(G1,G3) (f2 o f1,g1 o g2)",
+        "∀ G1 G2 G3 (f1:A->B) (f2:B->C) g1 g2.\n        group_isomorphisms(G1,G2) (f1,g1) /\\ group_isomorphisms(G2,G3) (f2,g2)\n        ==> group_isomorphisms(G1,G3) (f2 o f1,g1 o g2)",
       ),
       t2250,
     ),
@@ -26682,7 +26682,7 @@ fn step_389() -> Unit raise {
   group_isomorphism_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 G3 (f:A->B) (g:B->C).\n        group_isomorphism(G1,G2) f /\\ group_isomorphism(G2,G3) g\n        ==> group_isomorphism(G1,G3) (g o f)",
+        "∀ G1 G2 G3 (f:A->B) (g:B->C).\n        group_isomorphism(G1,G2) f /\\ group_isomorphism(G2,G3) g\n        ==> group_isomorphism(G1,G3) (g o f)",
       ),
       t2252,
     ),
@@ -26718,7 +26718,7 @@ fn step_390() -> Unit raise {
   group_isomorphism_compose_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_isomorphism(A,C) (g o f)\n        ==> group_monomorphism(A,B) f /\\ group_epimorphism(B,C) g",
+        "∀(f:A->B) (g:B->C) A B C.\n        group_homomorphism(A,B) f /\\ group_homomorphism(B,C) g /\\\n        group_isomorphism(A,C) (g o f)\n        ==> group_monomorphism(A,B) f /\\ group_epimorphism(B,C) g",
       ),
       t2254,
     ),
@@ -26829,7 +26829,7 @@ fn step_391() -> Unit raise {
   group_epimorphism_isomorphism_compose_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        group_epimorphism (A,B) f /\\\n        group_homomorphism (B,C) g /\\\n        group_isomorphism (A,C) (g o f)\n        ==> group_isomorphism (A,B) f /\\ group_isomorphism (B,C) g",
+        "∀(f:A->B) (g:B->C) A B C.\n        group_epimorphism (A,B) f /\\\n        group_homomorphism (B,C) g /\\\n        group_isomorphism (A,C) (g o f)\n        ==> group_isomorphism (A,B) f /\\ group_isomorphism (B,C) g",
       ),
       t2267,
     ),
@@ -26933,7 +26933,7 @@ fn step_392() -> Unit raise {
   group_monomorphism_isomorphism_compose_rev_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        group_homomorphism (A,B) f /\\\n        group_monomorphism (B,C) g /\\\n        group_isomorphism (A,C) (g o f)\n        ==> group_isomorphism (A,B) f /\\ group_isomorphism (B,C) g",
+        "∀(f:A->B) (g:B->C) A B C.\n        group_homomorphism (A,B) f /\\\n        group_monomorphism (B,C) g /\\\n        group_isomorphism (A,C) (g o f)\n        ==> group_isomorphism (A,B) f /\\ group_isomorphism (B,C) g",
       ),
       t2279,
     ),
@@ -26959,7 +26959,7 @@ fn step_393() -> Unit raise {
   )
   let t2293 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t2292 = @tactics.subgoal_then(
-    @parser.parse_term("forall y. y IN group_carrier H ==> (f:A->B)(g y) = y"),
+    @parser.parse_term("∀ y. y IN group_carrier H ==> (f:A->B)(g y) = y"),
     fn(
       x2289 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -27010,7 +27010,7 @@ fn step_393() -> Unit raise {
   let t2288 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t2287 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall y. y IN group_carrier H ==> (g:B->A) y IN group_carrier G",
+      "∀ y. y IN group_carrier H ==> (g:B->A) y IN group_carrier G",
     ),
     fn(
       x2284 : @kernel.Thm,
@@ -27102,7 +27102,7 @@ fn step_393() -> Unit raise {
   group_isomorphism_inverse_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) g G H.\n        group_isomorphism(G,H) f /\\\n        (forall x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_isomorphism(H,G) g",
+        "∀(f:A->B) g G H.\n        group_isomorphism(G,H) f /\\\n        (∀ x. x IN group_carrier G ==> g(f x) = x)\n        ==> group_isomorphism(H,G) g",
       ),
       t2295,
     ),
@@ -27145,7 +27145,7 @@ fn step_394() -> Unit raise {
   group_isomorphisms_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        group_isomorphisms(G,opposite_group G) (group_inv G,group_inv G)",
+        "∀ G:A group.\n        group_isomorphisms(G,opposite_group G) (group_inv G,group_inv G)",
       ),
       t2298,
     ),
@@ -27176,7 +27176,7 @@ fn step_395() -> Unit raise {
   group_isomorphism_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        group_isomorphism(G,opposite_group G) (group_inv G)",
+        "∀ G:A group.\n        group_isomorphism(G,opposite_group G) (group_inv G)",
       ),
       t2300,
     ),
@@ -27253,7 +27253,7 @@ fn step_396() -> Unit raise {
   group_homomorphism_from_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H.\n        trivial_group G\n        ==> (group_homomorphism(G,H) f <=> f(group_id G) = group_id H)",
+        "∀(f:A->B) G H.\n        trivial_group G\n        ==> (group_homomorphism(G,H) f <=> f(group_id G) = group_id H)",
       ),
       t2307,
     ),
@@ -27282,7 +27282,7 @@ fn step_397() -> Unit raise {
   group_monomorphism_from_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H.\n        trivial_group G\n        ==> (group_monomorphism (G,H) f <=> group_homomorphism (G,H) f)",
+        "∀(f:A->B) G H.\n        trivial_group G\n        ==> (group_monomorphism (G,H) f <=> group_homomorphism (G,H) f)",
       ),
       t2309,
     ),
@@ -27327,7 +27327,7 @@ fn step_398() -> Unit raise {
   group_monomorphism_to_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H.\n        trivial_group H\n        ==> (group_monomorphism (G,H) f <=>\n             group_homomorphism (G,H) f /\\ trivial_group G)",
+        "∀(f:A->B) G H.\n        trivial_group H\n        ==> (group_monomorphism (G,H) f <=>\n             group_homomorphism (G,H) f /\\ trivial_group G)",
       ),
       t2313,
     ),
@@ -27358,7 +27358,7 @@ fn step_399() -> Unit raise {
   group_epimorphism_from_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H.\n        trivial_group G\n        ==> (group_epimorphism (G,H) f <=>\n             group_homomorphism (G,H) f /\\ trivial_group H)",
+        "∀(f:A->B) G H.\n        trivial_group G\n        ==> (group_epimorphism (G,H) f <=>\n             group_homomorphism (G,H) f /\\ trivial_group H)",
       ),
       t2315,
     ),
@@ -27482,7 +27482,7 @@ fn step_400() -> Unit raise {
   group_epimorphism_to_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H.\n        trivial_group H\n        ==> (group_epimorphism (G,H) f <=>\n             group_homomorphism (G,H) f)",
+        "∀(f:A->B) G H.\n        trivial_group H\n        ==> (group_epimorphism (G,H) f <=>\n             group_homomorphism (G,H) f)",
       ),
       t2327,
     ),
@@ -27527,7 +27527,7 @@ fn step_401() -> Unit raise {
   group_homomorphism_pairwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B#C) G H K.\n        group_homomorphism(G,prod_group H K) f <=>\n        group_homomorphism(G,H) (FST o f) /\\\n        group_homomorphism(G,K) (SND o f)",
+        "∀(f:A->B#C) G H K.\n        group_homomorphism(G,prod_group H K) f <=>\n        group_homomorphism(G,H) (FST o f) /\\\n        group_homomorphism(G,K) (SND o f)",
       ),
       t2331,
     ),
@@ -27554,7 +27554,7 @@ fn step_402() -> Unit raise {
   group_homomorphism_paired_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:A->C) G H K.\n        group_homomorphism(G,prod_group H K) (\\x. f x,g x) <=>\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(G,K) g",
+        "∀(f:A->B) (g:A->C) G H K.\n        group_homomorphism(G,prod_group H K) (\\x. f x,g x) <=>\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(G,K) g",
       ),
       t2332,
     ),
@@ -27601,7 +27601,7 @@ fn step_403() -> Unit raise {
   group_homomorphism_paired2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:C->D) G H G' H'.\n        group_homomorphism(prod_group G H,prod_group G' H')\n                (\\(x,y). f x,g y) <=>\n        group_homomorphism(G,G') f /\\ group_homomorphism(H,H') g",
+        "∀(f:A->B) (g:C->D) G H G' H'.\n        group_homomorphism(prod_group G H,prod_group G' H')\n                (\\(x,y). f x,g y) <=>\n        group_homomorphism(G,G') f /\\ group_homomorphism(H,H') g",
       ),
       t2335,
     ),
@@ -27638,7 +27638,7 @@ fn step_404() -> Unit raise {
   group_isomorphisms_paired2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:C->D) f' g' G H G' H'.\n        group_isomorphisms(prod_group G H,prod_group G' H')\n                ((\\(x,y). f x,g y),(\\(x,y). f' x,g' y)) <=>\n        group_isomorphisms(G,G') (f,f') /\\\n        group_isomorphisms(H,H') (g,g')",
+        "∀(f:A->B) (g:C->D) f' g' G H G' H'.\n        group_isomorphisms(prod_group G H,prod_group G' H')\n                ((\\(x,y). f x,g y),(\\(x,y). f' x,g' y)) <=>\n        group_isomorphisms(G,G') (f,f') /\\\n        group_isomorphisms(H,H') (g,g')",
       ),
       t2338,
     ),
@@ -27691,7 +27691,7 @@ fn step_405() -> Unit raise {
   group_isomorphism_paired2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:C->D) G H G' H'.\n        group_isomorphism(prod_group G H,prod_group G' H')\n                (\\(x,y). f x,g y) <=>\n        group_isomorphism(G,G') f /\\ group_isomorphism(H,H') g",
+        "∀(f:A->B) (g:C->D) G H G' H'.\n        group_isomorphism(prod_group G H,prod_group G' H')\n                (\\(x,y). f x,g y) <=>\n        group_isomorphism(G,G') f /\\ group_isomorphism(H,H') g",
       ),
       t2342,
     ),
@@ -27733,7 +27733,7 @@ fn step_406() -> Unit raise {
   group_homomorphism_of_fst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->C) A (B:B group) C.\n        group_homomorphism (prod_group A B,C) (f o FST) <=>\n        group_homomorphism (A,C) f",
+        "∀(f:A->C) A (B:B group) C.\n        group_homomorphism (prod_group A B,C) (f o FST) <=>\n        group_homomorphism (A,C) f",
       ),
       t2345,
     ),
@@ -27775,7 +27775,7 @@ fn step_407() -> Unit raise {
   group_homomorphism_of_snd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:B->C) (A:A group) B C.\n        group_homomorphism (prod_group A B,C) (f o SND) <=>\n        group_homomorphism (B,C) f",
+        "∀(f:B->C) (A:A group) B C.\n        group_homomorphism (prod_group A B,C) (f o SND) <=>\n        group_homomorphism (B,C) f",
       ),
       t2348,
     ),
@@ -27813,7 +27813,7 @@ fn step_408() -> Unit raise {
   group_epimorphism_of_fst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->C) A (B:B group) C.\n        group_epimorphism (prod_group A B,C) (f o FST) <=>\n        group_epimorphism (A,C) f",
+        "∀(f:A->C) A (B:B group) C.\n        group_epimorphism (prod_group A B,C) (f o FST) <=>\n        group_epimorphism (A,C) f",
       ),
       t2350,
     ),
@@ -27851,7 +27851,7 @@ fn step_409() -> Unit raise {
   group_epimorphism_of_snd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:B->C) (A:A group) B C.\n        group_epimorphism (prod_group A B,C) (f o SND) <=>\n        group_epimorphism (B,C) f",
+        "∀(f:B->C) (A:A group) B C.\n        group_epimorphism (prod_group A B,C) (f o SND) <=>\n        group_epimorphism (B,C) f",
       ),
       t2352,
     ),
@@ -27893,7 +27893,7 @@ fn step_410() -> Unit raise {
   group_homomorphism_fst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(A:A group) (B:B group). group_homomorphism (prod_group A B,A) FST",
+        "∀(A:A group) (B:B group). group_homomorphism (prod_group A B,A) FST",
       ),
       t2355,
     ),
@@ -27935,7 +27935,7 @@ fn step_411() -> Unit raise {
   group_homomorphism_snd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(A:A group) (B:B group). group_homomorphism (prod_group A B,B) SND",
+        "∀(A:A group) (B:B group). group_homomorphism (prod_group A B,B) SND",
       ),
       t2358,
     ),
@@ -27973,7 +27973,7 @@ fn step_412() -> Unit raise {
   group_epimorphism_fst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(A:A group) (B:B group). group_epimorphism (prod_group A B,A) FST",
+        "∀(A:A group) (B:B group). group_epimorphism (prod_group A B,A) FST",
       ),
       t2360,
     ),
@@ -28011,7 +28011,7 @@ fn step_413() -> Unit raise {
   group_epimorphism_snd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(A:A group) (B:B group). group_epimorphism (prod_group A B,B) SND",
+        "∀(A:A group) (B:B group). group_epimorphism (prod_group A B,B) SND",
       ),
       t2362,
     ),
@@ -28074,7 +28074,7 @@ fn step_414() -> Unit raise {
   group_isomorphism_fst_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        group_isomorphism (prod_group G H,G) FST <=> trivial_group H",
+        "∀(G:A group) (H:B group).\n        group_isomorphism (prod_group G H,G) FST <=> trivial_group H",
       ),
       t2370,
     ),
@@ -28137,7 +28137,7 @@ fn step_415() -> Unit raise {
   group_isomorphism_snd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        group_isomorphism (prod_group G H,H) SND <=> trivial_group G",
+        "∀(G:A group) (H:B group).\n        group_isomorphism (prod_group G H,H) SND <=> trivial_group G",
       ),
       t2378,
     ),
@@ -28192,7 +28192,7 @@ fn step_416() -> Unit raise {
   group_isomorphisms_prod_group_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        group_isomorphisms (prod_group G H,prod_group H G)\n                           ((\\(x,y). y,x),(\\(y,x). x,y))",
+        "∀(G:A group) (H:B group).\n        group_isomorphisms (prod_group G H,prod_group H G)\n                           ((\\(x,y). y,x),(\\(y,x). x,y))",
       ),
       t2383,
     ),
@@ -28220,7 +28220,7 @@ fn step_417() -> Unit raise {
   let t2389 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
   let t2388 = @class.asm_cases_tac(
     @parser.parse_term(
-      "forall x. x IN group_carrier G ==> EXTENSIONAL k ((f:A->K->B) x)",
+      "∀ x. x IN group_carrier G ==> EXTENSIONAL k ((f:A->K->B) x)",
     ),
   )
   let t2387 = @simp.rewrite_tac(
@@ -28262,7 +28262,7 @@ fn step_417() -> Unit raise {
   group_homomorphism_componentwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k H (f:A->K->B).\n        group_homomorphism(G,product_group k H) f <=>\n        IMAGE f (group_carrier G) SUBSET EXTENSIONAL k /\\\n        forall i. i IN k ==> group_homomorphism (G,H i) (\\x. f x i)",
+        "∀ G k H (f:A->K->B).\n        group_homomorphism(G,product_group k H) f <=>\n        IMAGE f (group_carrier G) SUBSET EXTENSIONAL k /\\\n        ∀ i. i IN k ==> group_homomorphism (G,H i) (\\x. f x i)",
       ),
       t2392,
     ),
@@ -28286,7 +28286,7 @@ fn step_418() -> Unit raise {
   let t2394 = @simp.rewrite_tac(@list.List([@sets.extensional_univ()]))
   let t2393 = @simp.rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("s SUBSET P <=> forall x. x IN s ==> P x")),
+      @sets.set_rule(@parser.parse_term("s SUBSET P <=> ∀ x. x IN s ==> P x")),
     ]),
   )
   let t2395 = @tactics.then_tac(
@@ -28301,7 +28301,7 @@ fn step_418() -> Unit raise {
   group_homomorphism_componentwise_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->K->B).\n        group_homomorphism(G,product_group (:K) H) f <=>\n        forall i. group_homomorphism (G,H i) (\\x. f x i)",
+        "∀ G H (f:A->K->B).\n        group_homomorphism(G,product_group (:K) H) f <=>\n        ∀ i. group_homomorphism (G,H i) (\\x. f x i)",
       ),
       t2395,
     ),
@@ -28350,7 +28350,7 @@ fn step_419() -> Unit raise {
   group_homomorphism_product_projection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k i.\n        i IN k ==> group_homomorphism (product_group k G,G i) (\\x. x i)",
+        "∀(G:K->A group) k i.\n        i IN k ==> group_homomorphism (product_group k G,G i) (\\x. x i)",
       ),
       t2402,
     ),
@@ -28384,7 +28384,7 @@ fn step_420() -> Unit raise {
   group_homomorphism_sum_projection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k i.\n        i IN k ==> group_homomorphism (sum_group k G,G i) (\\x. x i)",
+        "∀(G:K->A group) k i.\n        i IN k ==> group_homomorphism (sum_group k G,G i) (\\x. x i)",
       ),
       t2404,
     ),
@@ -28443,7 +28443,7 @@ fn step_421() -> Unit raise {
   group_homomorphism_product_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group) i.\n        group_homomorphism\n          (G i,product_group k G)\n          (\\a. RESTRICTION k (\\j. if j = i then a else group_id(G j)))",
+        "∀ k (G:K->A group) i.\n        group_homomorphism\n          (G i,product_group k G)\n          (\\a. RESTRICTION k (\\j. if j = i then a else group_id(G j)))",
       ),
       t2411,
     ),
@@ -28519,7 +28519,7 @@ fn step_422() -> Unit raise {
   group_homomorphism_sum_injection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group) i.\n        group_homomorphism\n          (G i,sum_group k G)\n          (\\a. RESTRICTION k (\\j. if j = i then a else group_id(G j)))",
+        "∀ k (G:K->A group) i.\n        group_homomorphism\n          (G i,sum_group k G)\n          (\\a. RESTRICTION k (\\j. if j = i then a else group_id(G j)))",
       ),
       t2422,
     ),
@@ -28653,7 +28653,7 @@ fn step_423() -> Unit raise {
   group_homomorphism_product_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A->B) k G H.\n        group_homomorphism (product_group k G,product_group k H)\n                           (\\x. RESTRICTION k (\\i. (f i) (x i))) <=>\n        forall i. i IN k ==> group_homomorphism(G i,H i) (f i)",
+        "∀(f:K->A->B) k G H.\n        group_homomorphism (product_group k G,product_group k H)\n                           (\\x. RESTRICTION k (\\i. (f i) (x i))) <=>\n        ∀ i. i IN k ==> group_homomorphism(G i,H i) (f i)",
       ),
       t2443,
     ),
@@ -28975,7 +28975,7 @@ fn step_424() -> Unit raise {
   group_homomorphism_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A->B) k G H.\n        group_homomorphism (sum_group k G,sum_group k H)\n                           (\\x. RESTRICTION k (\\i. (f i) (x i))) <=>\n        forall i. i IN k ==> group_homomorphism(G i,H i) (f i)",
+        "∀(f:K->A->B) k G H.\n        group_homomorphism (sum_group k G,sum_group k H)\n                           (\\x. RESTRICTION k (\\i. (f i) (x i))) <=>\n        ∀ i. i IN k ==> group_homomorphism(G i,H i) (f i)",
       ),
       t2485,
     ),
@@ -29013,7 +29013,7 @@ fn step_425() -> Unit raise {
   group_epimorphism_product_projection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k i.\n        i IN k ==> group_epimorphism (product_group k G,G i) (\\x. x i)",
+        "∀(G:K->A group) k i.\n        i IN k ==> group_epimorphism (product_group k G,G i) (\\x. x i)",
       ),
       t2487,
     ),
@@ -29075,7 +29075,7 @@ fn step_426() -> Unit raise {
   group_isomorphism_product_projection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k. group_isomorphism (product_group {k} G,G k) (\\x. x k)",
+        "∀ G k. group_isomorphism (product_group {k} G,G k) (\\x. x k)",
       ),
       t2494,
     ),
@@ -29169,7 +29169,7 @@ fn step_427() -> Unit raise {
   group_epimorphism_sum_projection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k i.\n        i IN k ==> group_epimorphism (sum_group k G,G i) (\\x. x i)",
+        "∀(G:K->A group) k i.\n        i IN k ==> group_epimorphism (sum_group k G,G i) (\\x. x i)",
       ),
       t2506,
     ),
@@ -29231,7 +29231,7 @@ fn step_428() -> Unit raise {
   group_isomorphism_sum_projection_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k. group_isomorphism (sum_group {k} G,G k) (\\x. x k)",
+        "∀ G k. group_isomorphism (sum_group {k} G,G k) (\\x. x k)",
       ),
       t2513,
     ),
@@ -29293,7 +29293,7 @@ fn step_429() -> Unit raise {
   abelian_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n     group_epimorphism(G,H) f /\\ abelian_group G ==> abelian_group H",
+        "∀ G H (f:A->B).\n     group_epimorphism(G,H) f /\\ abelian_group G ==> abelian_group H",
       ),
       t2519,
     ),
@@ -29338,7 +29338,7 @@ fn step_430() -> Unit raise {
   abelian_group_homomorphism_group_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) g A B.\n        abelian_group B /\\\n        group_homomorphism(A,B) f /\\ group_homomorphism(A,B) g\n        ==> group_homomorphism(A,B) (\\x. group_mul B (f x) (g x))",
+        "∀(f:A->B) g A B.\n        abelian_group B /\\\n        group_homomorphism(A,B) f /\\ group_homomorphism(A,B) g\n        ==> group_homomorphism(A,B) (\\x. group_mul B (f x) (g x))",
       ),
       t2522,
     ),
@@ -29390,7 +29390,7 @@ fn step_431() -> Unit raise {
   abelian_group_homomorphism_inversion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_homomorphism (G,G) (group_inv G) <=> abelian_group G",
+        "∀ G:A group. group_homomorphism (G,G) (group_inv G) <=> abelian_group G",
       ),
       t2526,
     ),
@@ -29424,7 +29424,7 @@ fn step_432() -> Unit raise {
   abelian_group_isomorphisms_inversion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_isomorphisms (G,G) (group_inv G,group_inv G) <=>\n               abelian_group G",
+        "∀ G:A group. group_isomorphisms (G,G) (group_inv G,group_inv G) <=>\n               abelian_group G",
       ),
       t2528,
     ),
@@ -29464,7 +29464,7 @@ fn step_433() -> Unit raise {
   abelian_group_isomorphism_inversion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_isomorphism (G,G) (group_inv G) <=> abelian_group G",
+        "∀ G:A group. group_isomorphism (G,G) (group_inv G) <=> abelian_group G",
       ),
       t2531,
     ),
@@ -29496,7 +29496,7 @@ fn step_434() -> Unit raise {
   abelian_group_monomorphism_inversion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_monomorphism (G,G) (group_inv G) <=> abelian_group G",
+        "∀ G:A group. group_monomorphism (G,G) (group_inv G) <=> abelian_group G",
       ),
       t2532,
     ),
@@ -29528,7 +29528,7 @@ fn step_435() -> Unit raise {
   abelian_group_epimorphism_inversion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_epimorphism (G,G) (group_inv G) <=> abelian_group G",
+        "∀ G:A group. group_epimorphism (G,G) (group_inv G) <=> abelian_group G",
       ),
       t2533,
     ),
@@ -29564,7 +29564,7 @@ fn step_436() -> Unit raise {
   abelian_group_homomorphism_powering_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G ==> group_homomorphism(G,G) (\\x. group_pow G x n)",
+        "∀(G:A group) n.\n        abelian_group G ==> group_homomorphism(G,G) (\\x. group_pow G x n)",
       ),
       t2535,
     ),
@@ -29600,7 +29600,7 @@ fn step_437() -> Unit raise {
   abelian_group_homomorphism_zpowering_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G ==> group_homomorphism(G,G) (\\x. group_zpow G x n)",
+        "∀(G:A group) n.\n        abelian_group G ==> group_homomorphism(G,G) (\\x. group_zpow G x n)",
       ),
       t2537,
     ),
@@ -29658,7 +29658,7 @@ fn step_440() -> Unit raise {
   group_isomorphism_imp_isomorphic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H f:A->B. group_isomorphism (G,H) f ==> G isomorphic_group H",
+        "∀ G H f:A->B. group_isomorphism (G,H) f ==> G isomorphic_group H",
       ),
       t2539,
     ),
@@ -29689,7 +29689,7 @@ fn step_441() -> Unit raise {
   isomorphic_product_group_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k. product_group {k} G isomorphic_group G k",
+        "∀(G:K->A group) k. product_group {k} G isomorphic_group G k",
       ),
       t2541,
     ),
@@ -29718,7 +29718,7 @@ fn step_442() -> Unit raise {
   isomorphic_sum_group_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k. sum_group {k} G isomorphic_group G k",
+        "∀(G:K->A group) k. sum_group {k} G isomorphic_group G k",
       ),
       t2543,
     ),
@@ -29753,7 +29753,7 @@ fn step_443() -> Unit raise {
   )
   isomorphic_group_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. G isomorphic_group G"),
+      @parser.parse_term("∀ G:A group. G isomorphic_group G"),
       t2546,
     ),
   )
@@ -29781,7 +29781,7 @@ fn step_444() -> Unit raise {
   isomorphic_group_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group). G isomorphic_group H <=> H isomorphic_group G",
+        "∀(G:A group) (H:B group). G isomorphic_group H <=> H isomorphic_group G",
       ),
       t2548,
     ),
@@ -29810,7 +29810,7 @@ fn step_445() -> Unit raise {
   isomorphic_group_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) (G3:C group).\n        G1 isomorphic_group G2 /\\ G2 isomorphic_group G3\n        ==> G1 isomorphic_group G3",
+        "∀(G1:A group) (G2:B group) (G3:C group).\n        G1 isomorphic_group G2 /\\ G2 isomorphic_group G3\n        ==> G1 isomorphic_group G3",
       ),
       t2550,
     ),
@@ -29846,7 +29846,7 @@ fn step_446() -> Unit raise {
   )
   isomorphic_group_opposite_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. (opposite_group G) isomorphic_group G"),
+      @parser.parse_term("∀ G:A group. (opposite_group G) isomorphic_group G"),
       t2553,
     ),
   )
@@ -29882,7 +29882,7 @@ fn step_447() -> Unit raise {
   isomorphic_group_triviality_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H ==> (trivial_group G <=> trivial_group H)",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H ==> (trivial_group G <=> trivial_group H)",
       ),
       t2555,
     ),
@@ -30011,7 +30011,7 @@ fn step_448() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall(G:A group) (H:B group).\n        trivial_group G ==> (G isomorphic_group H <=> trivial_group H)",
+      "∀(G:A group) (H:B group).\n        trivial_group G ==> (G isomorphic_group H <=> trivial_group H)",
     ),
     t2569,
   )
@@ -30024,7 +30024,7 @@ fn step_448() -> Unit raise {
   isomorphic_to_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(G:A group) (H:B group).\n        trivial_group G ==> (G isomorphic_group H <=> trivial_group H)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group H ==> (G isomorphic_group H <=> trivial_group G))",
+        "(∀(G:A group) (H:B group).\n        trivial_group G ==> (G isomorphic_group H <=> trivial_group H)) /\\\n   (∀(G:A group) (H:B group).\n        trivial_group H ==> (G isomorphic_group H <=> trivial_group G))",
       ),
       t2572,
     ),
@@ -30049,7 +30049,7 @@ fn step_449() -> Unit raise {
   isomorphic_trivial_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        trivial_group G /\\ trivial_group H\n        ==> G isomorphic_group H",
+        "∀(G:A group) (H:B group).\n        trivial_group G /\\ trivial_group H\n        ==> G isomorphic_group H",
       ),
       t2573,
     ),
@@ -30076,7 +30076,7 @@ fn step_450() -> Unit raise {
   isomorphic_group_singleton_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(G:A group) (b:B).\n        G isomorphic_group singleton_group b <=> trivial_group G) /\\\n   (forall a:A (G:B group).\n        singleton_group a isomorphic_group G <=> trivial_group G)",
+        "(∀(G:A group) (b:B).\n        G isomorphic_group singleton_group b <=> trivial_group G) /\\\n   (∀ a:A (G:B group).\n        singleton_group a isomorphic_group G <=> trivial_group G)",
       ),
       t2574,
     ),
@@ -30126,7 +30126,7 @@ fn step_451() -> Unit raise {
   isomorphic_group_prod_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (G':B group) (H:C group) (H':D group).\n        G isomorphic_group G' /\\ H isomorphic_group H'\n        ==> (prod_group G H) isomorphic_group (prod_group G' H')",
+        "∀(G:A group) (G':B group) (H:C group) (H':D group).\n        G isomorphic_group G' /\\ H isomorphic_group H'\n        ==> (prod_group G H) isomorphic_group (prod_group G' H')",
       ),
       t2578,
     ),
@@ -30157,7 +30157,7 @@ fn step_452() -> Unit raise {
   isomorphic_group_prod_group_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        prod_group G H isomorphic_group prod_group H G",
+        "∀(G:A group) (H:B group).\n        prod_group G H isomorphic_group prod_group H G",
       ),
       t2580,
     ),
@@ -30194,7 +30194,7 @@ fn step_453() -> Unit raise {
   isomorphic_group_prod_group_swap_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) (K:C group).\n        prod_group G H isomorphic_group K <=>\n        prod_group H G isomorphic_group K",
+        "∀(G:A group) (H:B group) (K:C group).\n        prod_group G H isomorphic_group K <=>\n        prod_group H G isomorphic_group K",
       ),
       t2583,
     ),
@@ -30225,7 +30225,7 @@ fn step_454() -> Unit raise {
   isomorphic_group_prod_group_swap_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) (K:C group).\n        G isomorphic_group prod_group H K <=>\n        G isomorphic_group prod_group K H",
+        "∀(G:A group) (H:B group) (K:C group).\n        G isomorphic_group prod_group H K <=>\n        G isomorphic_group prod_group K H",
       ),
       t2585,
     ),
@@ -30258,7 +30258,7 @@ fn step_455() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall(G:A group) (H:B group).\n        trivial_group G ==> (prod_group G H isomorphic_group H)",
+      "∀(G:A group) (H:B group).\n        trivial_group G ==> (prod_group G H isomorphic_group H)",
     ),
     t2589,
   )
@@ -30327,7 +30327,7 @@ fn step_455() -> Unit raise {
   isomorphic_prod_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(G:A group) (H:B group).\n        trivial_group G ==> (prod_group G H isomorphic_group H)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group H ==> (prod_group G H isomorphic_group G)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group G ==> (H isomorphic_group prod_group G H)) /\\\n   (forall(G:A group) (H:B group).\n        trivial_group H ==> (G isomorphic_group prod_group G H))",
+        "(∀(G:A group) (H:B group).\n        trivial_group G ==> (prod_group G H isomorphic_group H)) /\\\n   (∀(G:A group) (H:B group).\n        trivial_group H ==> (prod_group G H isomorphic_group G)) /\\\n   (∀(G:A group) (H:B group).\n        trivial_group G ==> (H isomorphic_group prod_group G H)) /\\\n   (∀(G:A group) (H:B group).\n        trivial_group H ==> (G isomorphic_group prod_group G H))",
       ),
       t2609,
     ),
@@ -30480,7 +30480,7 @@ fn step_456() -> Unit raise {
   isomorphic_product_group_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        product_group {i | i IN k /\\ ~trivial_group(G i)} G isomorphic_group\n        product_group k G",
+        "∀ k (G:K->A group).\n        product_group {i | i IN k /\\ ~trivial_group(G i)} G isomorphic_group\n        product_group k G",
       ),
       t2626,
     ),
@@ -30877,7 +30877,7 @@ fn step_457() -> Unit raise {
   isomorphic_product_group_symdiff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l (G:K->A group).\n        (forall i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_group(G i))\n        ==> product_group k G isomorphic_group product_group l G",
+        "∀ k l (G:K->A group).\n        (∀ i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_group(G i))\n        ==> product_group k G isomorphic_group product_group l G",
       ),
       t2653,
     ),
@@ -31091,7 +31091,7 @@ fn step_458() -> Unit raise {
   isomorphic_sum_group_support_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        sum_group {i | i IN k /\\ ~trivial_group(G i)} G isomorphic_group\n        sum_group k G",
+        "∀ k (G:K->A group).\n        sum_group {i | i IN k /\\ ~trivial_group(G i)} G isomorphic_group\n        sum_group k G",
       ),
       t2680,
     ),
@@ -31482,7 +31482,7 @@ fn step_459() -> Unit raise {
   isomorphic_sum_group_symdiff_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l (G:K->A group).\n        (forall i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_group(G i))\n        ==> sum_group k G isomorphic_group sum_group l G",
+        "∀ k l (G:K->A group).\n        (∀ i. i IN (k DIFF l) UNION (l DIFF k) ==> trivial_group(G i))\n        ==> sum_group k G isomorphic_group sum_group l G",
       ),
       t2707,
     ),
@@ -31624,7 +31624,7 @@ fn step_460() -> Unit raise {
   let t2751 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([@sets.finite_image(), @sets.finite_subset()]),
-      @parser.parse_term("forall f. t SUBSET IMAGE f s ==> FINITE s ==> FINITE t"),
+      @parser.parse_term("∀ f. t SUBSET IMAGE f s ==> FINITE s ==> FINITE t"),
     ),
   )
   let t2750 = @tactics.disch_then(
@@ -31992,7 +31992,7 @@ fn step_460() -> Unit raise {
   )
   let t2777 = (
     @parser.parse_term(
-      "(forall s (G:K->A group) t (H:L->B group) f g.\n        (forall x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (forall y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (forall i. i IN s ==> (G i) isomorphic_group H(f i))\n        ==> product_group s G isomorphic_group product_group t H) /\\\n   (forall s (G:K->A group) t (H:L->B group) f g.\n        (forall x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (forall y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (forall i. i IN s ==> (G i) isomorphic_group H(f i))\n        ==> sum_group s G isomorphic_group sum_group t H)",
+      "(∀ s (G:K->A group) t (H:L->B group) f g.\n        (∀ x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (∀ y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (∀ i. i IN s ==> (G i) isomorphic_group H(f i))\n        ==> product_group s G isomorphic_group product_group t H) /\\\n   (∀ s (G:K->A group) t (H:L->B group) f g.\n        (∀ x. x IN s ==> f(x) IN t /\\ g(f x) = x) /\\\n        (∀ y. y IN t ==> g(y) IN s /\\ f(g y) = y) /\\\n        (∀ i. i IN s ==> (G i) isomorphic_group H(f i))\n        ==> sum_group s G isomorphic_group sum_group t H)",
     ),
     t2776,
   )
@@ -32046,7 +32046,7 @@ fn step_461() -> Unit raise {
   isomorphic_group_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) (H:K->B group) k.\n        (forall i. i IN k ==> (G i) isomorphic_group (H i))\n        ==> (product_group k G) isomorphic_group (product_group k H)",
+        "∀(G:K->A group) (H:K->B group) k.\n        (∀ i. i IN k ==> (G i) isomorphic_group (H i))\n        ==> (product_group k G) isomorphic_group (product_group k H)",
       ),
       t2781,
     ),
@@ -32082,7 +32082,7 @@ fn step_462() -> Unit raise {
   isomorphic_group_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) (H:K->B group) k.\n        (forall i. i IN k ==> (G i) isomorphic_group (H i))\n        ==> (sum_group k G) isomorphic_group (sum_group k H)",
+        "∀(G:K->A group) (H:K->B group) k.\n        (∀ i. i IN k ==> (G i) isomorphic_group (H i))\n        ==> (sum_group k G) isomorphic_group (sum_group k H)",
       ),
       t2785,
     ),
@@ -32177,7 +32177,7 @@ fn step_463() -> Unit raise {
   group_isomorphisms_product_group_disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphisms\n                (product_group (k UNION l) f,\n                 prod_group (product_group k f) (product_group l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))",
+        "∀(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphisms\n                (product_group (k UNION l) f,\n                 prod_group (product_group k f) (product_group l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))",
       ),
       t2795,
     ),
@@ -32471,7 +32471,7 @@ fn step_464() -> Unit raise {
   group_isomorphisms_sum_group_disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphisms\n                (sum_group (k UNION l) f,\n                 prod_group (sum_group k f) (sum_group l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))",
+        "∀(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphisms\n                (sum_group (k UNION l) f,\n                 prod_group (sum_group k f) (sum_group l f))\n                ((\\f. RESTRICTION k f,RESTRICTION l f),\n                 (\\(f,g) x. if x IN k then f x else g x))",
       ),
       t2825,
     ),
@@ -32502,7 +32502,7 @@ fn step_465() -> Unit raise {
   group_isomorphism_product_group_disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphism\n                (product_group (k UNION l) f,\n                 prod_group (product_group k f) (product_group l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)",
+        "∀(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphism\n                (product_group (k UNION l) f,\n                 prod_group (product_group k f) (product_group l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)",
       ),
       t2827,
     ),
@@ -32533,7 +32533,7 @@ fn step_466() -> Unit raise {
   group_isomorphism_sum_group_disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphism\n                (sum_group (k UNION l) f,\n                 prod_group (sum_group k f) (sum_group l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)",
+        "∀(f:K->A group) k l.\n        DISJOINT k l\n        ==> group_isomorphism\n                (sum_group (k UNION l) f,\n                 prod_group (sum_group k f) (sum_group l f))\n                (\\f. RESTRICTION k f,RESTRICTION l f)",
       ),
       t2829,
     ),
@@ -32564,7 +32564,7 @@ fn step_467() -> Unit raise {
   isomorphic_product_group_disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> product_group (k UNION l) f isomorphic_group\n            prod_group (product_group k f) (product_group l f)",
+        "∀(f:K->A group) k l.\n        DISJOINT k l\n        ==> product_group (k UNION l) f isomorphic_group\n            prod_group (product_group k f) (product_group l f)",
       ),
       t2831,
     ),
@@ -32595,7 +32595,7 @@ fn step_468() -> Unit raise {
   isomorphic_sum_group_disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) k l.\n        DISJOINT k l\n        ==> sum_group (k UNION l) f isomorphic_group\n            prod_group (sum_group k f) (sum_group l f)",
+        "∀(f:K->A group) k l.\n        DISJOINT k l\n        ==> sum_group (k UNION l) f isomorphic_group\n            prod_group (sum_group k f) (sum_group l f)",
       ),
       t2833,
     ),
@@ -32649,7 +32649,7 @@ fn step_469() -> Unit raise {
   isomorphic_product_group_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) i k.\n        ~(i IN k)\n        ==> product_group (i INSERT k) f isomorphic_group\n            prod_group (f i) (product_group k f)",
+        "∀(f:K->A group) i k.\n        ~(i IN k)\n        ==> product_group (i INSERT k) f isomorphic_group\n            prod_group (f i) (product_group k f)",
       ),
       t2840,
     ),
@@ -32700,7 +32700,7 @@ fn step_470() -> Unit raise {
   isomorphic_sum_group_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A group) i k.\n        ~(i IN k)\n        ==> sum_group (i INSERT k) f isomorphic_group\n            prod_group (f i) (sum_group k f)",
+        "∀(f:K->A group) i k.\n        ~(i IN k)\n        ==> sum_group (i INSERT k) f isomorphic_group\n            prod_group (f i) (sum_group k f)",
       ),
       t2847,
     ),
@@ -32731,7 +32731,7 @@ fn step_471() -> Unit raise {
   isomorphic_group_card_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H ==> group_carrier G =_c group_carrier H",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H ==> group_carrier G =_c group_carrier H",
       ),
       t2849,
     ),
@@ -32829,7 +32829,7 @@ fn step_472() -> Unit raise {
   isomorphic_group_finiteness_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (FINITE(group_carrier G) <=> FINITE(group_carrier H))",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (FINITE(group_carrier G) <=> FINITE(group_carrier H))",
       ),
       t2857,
     ),
@@ -32863,7 +32863,7 @@ fn step_473() -> Unit raise {
   isomorphic_group_infiniteness_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (INFINITE(group_carrier G) <=> INFINITE(group_carrier H))",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (INFINITE(group_carrier G) <=> INFINITE(group_carrier H))",
       ),
       t2859,
     ),
@@ -32961,7 +32961,7 @@ fn step_474() -> Unit raise {
   isomorphic_group_has_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) n.\n        G isomorphic_group H\n        ==> (group_carrier G HAS_SIZE n <=> group_carrier H HAS_SIZE n)",
+        "∀(G:A group) (H:B group) n.\n        G isomorphic_group H\n        ==> (group_carrier G HAS_SIZE n <=> group_carrier H HAS_SIZE n)",
       ),
       t2867,
     ),
@@ -32992,7 +32992,7 @@ fn step_475() -> Unit raise {
   isomorphic_group_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H /\\\n        (FINITE(group_carrier G) \\/ FINITE(group_carrier H))\n        ==> CARD(group_carrier G) = CARD(group_carrier H)",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H /\\\n        (FINITE(group_carrier G) \\/ FINITE(group_carrier H))\n        ==> CARD(group_carrier G) = CARD(group_carrier H)",
       ),
       t2868,
     ),
@@ -33038,7 +33038,7 @@ fn step_476() -> Unit raise {
   isomorphic_group_abelianness_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H ==> (abelian_group G <=> abelian_group H)",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H ==> (abelian_group G <=> abelian_group H)",
       ),
       t2871,
     ),
@@ -33215,7 +33215,7 @@ fn step_477() -> Unit raise {
   create_isomorphic_copy_of_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) g G s z i m.\n        z IN s /\\\n        (forall x. x IN group_carrier G ==> f x IN s /\\ g(f x) = x) /\\\n        (forall y. y IN s ==> g y IN group_carrier G /\\ f(g y) = y) /\\\n        g z = group_id G /\\\n        (forall x. x IN s ==> i x = f(group_inv G (g x))) /\\\n        (forall x y. x IN s /\\ y IN s ==> m x y = f(group_mul G (g x) (g y)))\n        ==> group_isomorphisms (G,group(s,z,i,m)) (f,g) /\\\n            group_carrier (group(s,z,i,m)) = s /\\\n            group_id (group(s,z,i,m)) = z /\\\n            group_inv (group(s,z,i,m)) = i /\\\n            group_mul (group(s,z,i,m)) = m",
+        "∀(f:A->B) g G s z i m.\n        z IN s /\\\n        (∀ x. x IN group_carrier G ==> f x IN s /\\ g(f x) = x) /\\\n        (∀ y. y IN s ==> g y IN group_carrier G /\\ f(g y) = y) /\\\n        g z = group_id G /\\\n        (∀ x. x IN s ==> i x = f(group_inv G (g x))) /\\\n        (∀ x y. x IN s /\\ y IN s ==> m x y = f(group_mul G (g x) (g y)))\n        ==> group_isomorphisms (G,group(s,z,i,m)) (f,g) /\\\n            group_carrier (group(s,z,i,m)) = s /\\\n            group_id (group(s,z,i,m)) = z /\\\n            group_inv (group(s,z,i,m)) = i /\\\n            group_mul (group(s,z,i,m)) = m",
       ),
       t2889,
     ),
@@ -33448,7 +33448,7 @@ fn step_478() -> Unit raise {
   isomorphic_copy_of_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (s:B->bool).\n        (?G'. group_carrier G' = s /\\ G isomorphic_group G') <=>\n        group_carrier G =_c s",
+        "∀(G:A group) (s:B->bool).\n        (?G'. group_carrier G' = s /\\ G isomorphic_group G') <=>\n        group_carrier G =_c s",
       ),
       t2908,
     ),
@@ -34119,7 +34119,7 @@ fn step_479() -> Unit raise {
   ])
   let t2915 = @tactics.subgoal_then(
     @parser.parse_term(
-      "(forall g. g IN c ==> gid:A = group_id g) /\\\n    (forall g x. g IN c /\\ x IN group_carrier g ==> ginv x = group_inv g x) /\\\n    (forall g x y. g IN c /\\ x IN group_carrier g /\\ y IN group_carrier g\n              ==> mul x y = group_mul g x y)",
+      "(∀ g. g IN c ==> gid:A = group_id g) /\\\n    (∀ g x. g IN c /\\ x IN group_carrier g ==> ginv x = group_inv g x) /\\\n    (∀ g x y. g IN c /\\ x IN group_carrier g /\\ y IN group_carrier g\n              ==> mul x y = group_mul g x y)",
     ),
     fn(
       x2912 : @kernel.Thm,
@@ -34201,7 +34201,7 @@ fn step_479() -> Unit raise {
   group_direct_limit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c:(A group->bool).\n        ~(c = {}) /\\\n        (forall g g'. g IN c /\\ g' IN c\n                ==> ?G. G IN c /\\\n                        group_monomorphism(g,G) I /\\\n                        group_monomorphism(g',G) I)\n        ==> ?G. group_carrier G = UNIONS {group_carrier g | g IN c} /\\\n                forall g. g IN c ==> group_monomorphism(g,G) I",
+        "∀ c:(A group->bool).\n        ~(c = {}) /\\\n        (∀ g g'. g IN c /\\ g' IN c\n                ==> ?G. G IN c /\\\n                        group_monomorphism(g,G) I /\\\n                        group_monomorphism(g',G) I)\n        ==> ?G. group_carrier G = UNIONS {group_carrier g | g IN c} /\\\n                ∀ g. g IN c ==> group_monomorphism(g,G) I",
       ),
       t2986,
     ),
@@ -34272,7 +34272,7 @@ fn step_482() -> Unit raise {
   )
   group_setinv_as_image_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_setinv G = IMAGE (group_inv G)"),
+      @parser.parse_term("∀ G:A group. group_setinv G = IMAGE (group_inv G)"),
       t2987,
     ),
   )
@@ -34302,7 +34302,7 @@ fn step_483() -> Unit raise {
   subgroup_of_setwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s subgroup_of G <=>\n        s SUBSET group_carrier G /\\\n        group_id G IN s /\\\n        group_setinv G s SUBSET s /\\\n        group_setmul G s s SUBSET s",
+        "∀ G s:A->bool.\n        s subgroup_of G <=>\n        s SUBSET group_carrier G /\\\n        group_id G IN s /\\\n        group_setinv G s SUBSET s /\\\n        group_setmul G s s SUBSET s",
       ),
       t2989,
     ),
@@ -34356,7 +34356,7 @@ fn step_484() -> Unit raise {
   ])
   let t2997 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x y:A. x IN s /\\ y IN s ==> ?z. z IN s /\\ group_mul G x z = y",
+      "∀ x y:A. x IN s /\\ y IN s ==> ?z. z IN s /\\ group_mul G x z = y",
     ),
     fn(
       x2994 : @kernel.Thm,
@@ -34458,7 +34458,7 @@ fn step_484() -> Unit raise {
   finite_subgroup_of_setwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        FINITE s\n        ==> (s subgroup_of G <=>\n             s SUBSET group_carrier G /\\\n             ~(s = {}) /\\\n             group_setmul G s s SUBSET s)",
+        "∀ G s:A->bool.\n        FINITE s\n        ==> (s subgroup_of G <=>\n             s SUBSET group_carrier G /\\\n             ~(s = {}) /\\\n             group_setmul G s s SUBSET s)",
       ),
       t3006,
     ),
@@ -34486,7 +34486,7 @@ fn step_485() -> Unit raise {
   opposite_group_setinv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_setinv (opposite_group G) s = group_setinv G s",
+        "∀ G s:A->bool.\n        group_setinv (opposite_group G) s = group_setinv G s",
       ),
       t3008,
     ),
@@ -34518,7 +34518,7 @@ fn step_486() -> Unit raise {
   opposite_group_setmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        group_setmul (opposite_group G) s t = group_setmul G t s",
+        "∀ G s t:A->bool.\n        group_setmul (opposite_group G) s t = group_setmul G t s",
       ),
       t3011,
     ),
@@ -34546,7 +34546,7 @@ fn step_487() -> Unit raise {
   )
   group_setinv_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G g:A->bool. group_setinv G g = {} <=> g = {}"),
+      @parser.parse_term("∀ G g:A->bool. group_setinv G g = {} <=> g = {}"),
       t3013,
     ),
   )
@@ -34574,7 +34574,7 @@ fn step_488() -> Unit raise {
   group_setmul_eq_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool. group_setmul G g h = {} <=> g = {} \\/ h = {}",
+        "∀ G g h:A->bool. group_setmul G g h = {} <=> g = {} \\/ h = {}",
       ),
       t3015,
     ),
@@ -34599,7 +34599,7 @@ fn step_489() -> Unit raise {
   group_setmul_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G s:A->bool. group_setmul G s {} = {}) /\\\n   (forall G t:A->bool. group_setmul G {} t = {})",
+        "(∀ G s:A->bool. group_setmul G s {} = {}) /\\\n   (∀ G t:A->bool. group_setmul G {} t = {})",
       ),
       t3016,
     ),
@@ -34628,7 +34628,7 @@ fn step_490() -> Unit raise {
   group_setinv_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s s':A->bool.\n        s SUBSET s' ==> group_setinv G s SUBSET group_setinv G s'",
+        "∀ G s s':A->bool.\n        s SUBSET s' ==> group_setinv G s SUBSET group_setinv G s'",
       ),
       t3018,
     ),
@@ -34657,7 +34657,7 @@ fn step_491() -> Unit raise {
   group_setmul_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t s' t':A->bool.\n        s SUBSET s' /\\ t SUBSET t'\n        ==> group_setmul G s t SUBSET group_setmul G s' t'",
+        "∀ G s t s' t':A->bool.\n        s SUBSET s' /\\ t SUBSET t'\n        ==> group_setmul G s t SUBSET group_setmul G s' t'",
       ),
       t3020,
     ),
@@ -34804,7 +34804,7 @@ fn step_492() -> Unit raise {
   group_setmul_inc_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G s t:A->bool.\n        group_id G IN s /\\ t SUBSET group_carrier G\n        ==> t SUBSET group_setmul G s t) /\\\n   (forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ group_id G IN t\n        ==> s SUBSET group_setmul G s t)",
+        "(∀ G s t:A->bool.\n        group_id G IN s /\\ t SUBSET group_carrier G\n        ==> t SUBSET group_setmul G s t) /\\\n   (∀ G s t:A->bool.\n        s SUBSET group_carrier G /\\ group_id G IN t\n        ==> s SUBSET group_setmul G s t)",
       ),
       t3034,
     ),
@@ -34831,7 +34831,7 @@ fn step_493() -> Unit raise {
   group_setmul_inc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G s t:A->bool.\n        s subgroup_of G /\\ t subgroup_of G ==> t SUBSET group_setmul G s t) /\\\n   (forall G s t:A->bool.\n        s subgroup_of G /\\ t subgroup_of G ==> s SUBSET group_setmul G s t)",
+        "(∀ G s t:A->bool.\n        s subgroup_of G /\\ t subgroup_of G ==> t SUBSET group_setmul G s t) /\\\n   (∀ G s t:A->bool.\n        s subgroup_of G /\\ t subgroup_of G ==> s SUBSET group_setmul G s t)",
       ),
       t3035,
     ),
@@ -34858,7 +34858,7 @@ fn step_494() -> Unit raise {
   finite_group_setmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        FINITE s /\\ FINITE t ==> FINITE(group_setmul G s t)",
+        "∀ G s t:A->bool.\n        FINITE s /\\ FINITE t ==> FINITE(group_setmul G s t)",
       ),
       t3036,
     ),
@@ -34887,7 +34887,7 @@ fn step_495() -> Unit raise {
   group_setmul_sym_elementwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t u:A->bool.\n        (forall a. a IN s ==> group_setmul G {a} t = group_setmul G u {a})\n        ==> group_setmul G s t = group_setmul G u s",
+        "∀ G s t u:A->bool.\n        (∀ a. a IN s ==> group_setmul G {a} t = group_setmul G u {a})\n        ==> group_setmul G s t = group_setmul G u s",
       ),
       t3038,
     ),
@@ -34915,7 +34915,7 @@ fn step_496() -> Unit raise {
   )
   group_setinv_sing_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x:A. group_setinv G {x} = {group_inv G x}"),
+      @parser.parse_term("∀ G x:A. group_setinv G {x} = {group_inv G x}"),
       t3040,
     ),
   )
@@ -34942,7 +34942,7 @@ fn step_497() -> Unit raise {
   )
   group_setmul_sing_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x y:A. group_setmul G {x} {y} = {group_mul G x y}"),
+      @parser.parse_term("∀ G x y:A. group_setmul G {x} {y} = {group_mul G x y}"),
       t3042,
     ),
   )
@@ -34973,7 +34973,7 @@ fn step_498() -> Unit raise {
   group_setinv_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g:A->bool.\n        g SUBSET group_carrier G ==> group_setinv G g SUBSET group_carrier G",
+        "∀ G g:A->bool.\n        g SUBSET group_carrier G ==> group_setinv G g SUBSET group_carrier G",
       ),
       t3043,
     ),
@@ -35003,7 +35003,7 @@ fn step_499() -> Unit raise {
   group_setmul_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G==>\n        group_setmul G g h SUBSET group_carrier G",
+        "∀ G g h:A->bool.\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G==>\n        group_setmul G g h SUBSET group_carrier G",
       ),
       t3044,
     ),
@@ -35029,7 +35029,7 @@ fn step_500() -> Unit raise {
   let t3046 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall y. y IN s ==> f a y = y) ==> {f x y | x IN {a} /\\ y IN s} = s",
+        "(∀ y. y IN s ==> f a y = y) ==> {f x y | x IN {a} /\\ y IN s} = s",
       ),
     ),
   )
@@ -35047,7 +35047,7 @@ fn step_500() -> Unit raise {
   group_setmul_lid_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g:A->bool.\n        g SUBSET group_carrier G ==> group_setmul G {group_id G} g = g",
+        "∀ G g:A->bool.\n        g SUBSET group_carrier G ==> group_setmul G {group_id G} g = g",
       ),
       t3049,
     ),
@@ -35078,7 +35078,7 @@ fn step_501() -> Unit raise {
   group_setmul_rid_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g:A->bool.\n        g SUBSET group_carrier G ==> group_setmul G g {group_id G} = g",
+        "∀ G g:A->bool.\n        g SUBSET group_carrier G ==> group_setmul G g {group_id G} = g",
       ),
       t3051,
     ),
@@ -35105,7 +35105,7 @@ fn step_502() -> Unit raise {
   let t3055 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x y z. P x y z ==> f x y z = g x y z)\n    ==> {f x y z | P x y z} = {g x y z | P x y z}",
+        "(∀ x y z. P x y z ==> f x y z = g x y z)\n    ==> {f x y z | P x y z} = {g x y z | P x y z}",
       ),
     ),
   )
@@ -35150,7 +35150,7 @@ fn step_502() -> Unit raise {
   group_setmul_assoc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h i:A->bool.\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G /\\\n        i SUBSET group_carrier G\n        ==> group_setmul G g (group_setmul G h i) =\n            group_setmul G (group_setmul G g h) i",
+        "∀ G g h i:A->bool.\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G /\\\n        i SUBSET group_carrier G\n        ==> group_setmul G g (group_setmul G h i) =\n            group_setmul G (group_setmul G g h) i",
       ),
       t3059,
     ),
@@ -35179,7 +35179,7 @@ fn step_503() -> Unit raise {
   group_setmul_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        abelian_group G /\\ g SUBSET group_carrier G /\\ h SUBSET group_carrier G\n        ==> group_setmul G g h = group_setmul G h g",
+        "∀ G g h:A->bool.\n        abelian_group G /\\ g SUBSET group_carrier G /\\ h SUBSET group_carrier G\n        ==> group_setmul G g h = group_setmul G h g",
       ),
       t3061,
     ),
@@ -35204,7 +35204,7 @@ fn step_504() -> Unit raise {
   let t3063 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> f x IN s /\\ f(f x) = x) ==> {f x | x IN s} = s",
+        "(∀ x. x IN s ==> f x IN s /\\ f(f x) = x) ==> {f x | x IN s} = s",
       ),
     ),
   )
@@ -35224,7 +35224,7 @@ fn step_504() -> Unit raise {
   group_setinv_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool. h subgroup_of G ==> group_setinv G h = h",
+        "∀ G h:A->bool. h subgroup_of G ==> group_setinv G h = h",
       ),
       t3065,
     ),
@@ -35527,7 +35527,7 @@ fn step_505() -> Unit raise {
   group_setmul_lsubset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET h /\\ ~(s = {}) ==> group_setmul G s h = h",
+        "∀ G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET h /\\ ~(s = {}) ==> group_setmul G s h = h",
       ),
       t3092,
     ),
@@ -35562,7 +35562,7 @@ fn step_506() -> Unit raise {
   group_setmul_rsubset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET h /\\ ~(s = {}) ==> group_setmul G h s = h",
+        "∀ G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET h /\\ ~(s = {}) ==> group_setmul G h s = h",
       ),
       t3094,
     ),
@@ -35758,7 +35758,7 @@ fn step_507() -> Unit raise {
   group_setmul_lsubset_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET group_carrier G\n        ==> (group_setmul G s h = h <=> s SUBSET h /\\ ~(s = {}))",
+        "∀ G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET group_carrier G\n        ==> (group_setmul G s h = h <=> s SUBSET h /\\ ~(s = {}))",
       ),
       t3113,
     ),
@@ -35793,7 +35793,7 @@ fn step_508() -> Unit raise {
   group_setmul_rsubset_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET group_carrier G\n        ==> (group_setmul G h s = h <=> s SUBSET h /\\ ~(s = {}))",
+        "∀ G h s:A->bool.\n        h subgroup_of G /\\ s SUBSET group_carrier G\n        ==> (group_setmul G h s = h <=> s SUBSET h /\\ ~(s = {}))",
       ),
       t3115,
     ),
@@ -35824,7 +35824,7 @@ fn step_509() -> Unit raise {
   image_group_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A) s.\n        IMAGE (group_conjugation G a) s =\n        group_setmul G {a} (group_setmul G s {group_inv G a})",
+        "∀ G (a:A) s.\n        IMAGE (group_conjugation G a) s =\n        group_setmul G {a} (group_setmul G s {group_inv G a})",
       ),
       t3117,
     ),
@@ -36012,7 +36012,7 @@ fn step_510() -> Unit raise {
   image_group_conjugation_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G a) s = t <=>\n             group_setmul G {a} s = group_setmul G t {a})",
+        "∀ G (a:A) s t.\n        a IN group_carrier G /\\\n        s SUBSET group_carrier G /\\\n        t SUBSET group_carrier G\n        ==> (IMAGE (group_conjugation G a) s = t <=>\n             group_setmul G {a} s = group_setmul G t {a})",
       ),
       t3134,
     ),
@@ -36044,7 +36044,7 @@ fn step_511() -> Unit raise {
   group_setmul_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G ==> group_setmul G h h = h",
+        "∀ G h:A->bool.\n        h subgroup_of G ==> group_setmul G h h = h",
       ),
       t3137,
     ),
@@ -36160,7 +36160,7 @@ fn step_512() -> Unit raise {
   group_setmul_lcancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h x:A.\n        x IN group_carrier G /\\\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G\n        ==> (group_setmul G {x} g = group_setmul G {x} h <=> g = h)",
+        "∀ G g h x:A.\n        x IN group_carrier G /\\\n        g SUBSET group_carrier G /\\ h SUBSET group_carrier G\n        ==> (group_setmul G {x} g = group_setmul G {x} h <=> g = h)",
       ),
       t3148,
     ),
@@ -36191,7 +36191,7 @@ fn step_513() -> Unit raise {
   group_setmul_rcancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h x:A.\n        x IN group_carrier G /\\ g SUBSET group_carrier G /\\\n        h SUBSET group_carrier G\n        ==> (group_setmul G g {x} = group_setmul G h {x} <=> g = h)",
+        "∀ G g h x:A.\n        x IN group_carrier G /\\ g SUBSET group_carrier G /\\\n        h SUBSET group_carrier G\n        ==> (group_setmul G g {x} = group_setmul G h {x} <=> g = h)",
       ),
       t3150,
     ),
@@ -36335,7 +36335,7 @@ fn step_514() -> Unit raise {
   group_setmul_lcancel_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ h subgroup_of G\n        ==> (group_setmul G h {x} = group_setmul G h {y} <=>\n             group_div G x y IN h)",
+        "∀ G h x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ h subgroup_of G\n        ==> (group_setmul G h {x} = group_setmul G h {y} <=>\n             group_div G x y IN h)",
       ),
       t3165,
     ),
@@ -36386,7 +36386,7 @@ fn step_515() -> Unit raise {
   group_setmul_rcancel_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ h subgroup_of G\n        ==> (group_setmul G {x} h = group_setmul G {y} h <=>\n             group_mul G (group_inv G x) y IN h)",
+        "∀ G h x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\ h subgroup_of G\n        ==> (group_setmul G {x} h = group_setmul G {y} h <=>\n             group_mul G (group_inv G x) y IN h)",
       ),
       t3172,
     ),
@@ -36560,7 +36560,7 @@ fn step_516() -> Unit raise {
     @list.List([group_setmul(), @sets.forall_in_gspec()]),
   )
   let t3237 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("s = t ==> forall x. x IN s ==> x IN t")),
+    @sets.set_rule(@parser.parse_term("s = t ==> ∀ x. x IN s ==> x IN t")),
   )
   let t3239 = @tactics.first_x_assum(fn(
     x3238 : @kernel.Thm,
@@ -37239,7 +37239,7 @@ fn step_516() -> Unit raise {
   subgroup_setmul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> ((group_setmul G g h) subgroup_of G <=>\n             group_setmul G g h = group_setmul G h g)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> ((group_setmul G g h) subgroup_of G <=>\n             group_setmul G g h = group_setmul G h g)",
       ),
       t3265,
     ),
@@ -37266,7 +37266,7 @@ fn step_517() -> Unit raise {
   subgroup_setmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        abelian_group G /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> (group_setmul G g h) subgroup_of G",
+        "∀ G g h:A->bool.\n        abelian_group G /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> (group_setmul G g h) subgroup_of G",
       ),
       t3266,
     ),
@@ -37378,7 +37378,7 @@ fn step_518() -> Unit raise {
   subgroup_generated_setmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> subgroup_generated G (group_setmul G g h) =\n            subgroup_generated G (g UNION h)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> subgroup_generated G (group_setmul G g h) =\n            subgroup_generated G (g UNION h)",
       ),
       t3280,
     ),
@@ -37409,7 +37409,7 @@ fn step_519() -> Unit raise {
   carrier_subgroup_generated_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_setmul G g h = group_setmul G h g\n        ==> group_carrier(subgroup_generated G (g UNION h)) =\n            group_setmul G g h",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_setmul G g h = group_setmul G h g\n        ==> group_carrier(subgroup_generated G (g UNION h)) =\n            group_setmul G g h",
       ),
       t3281,
     ),
@@ -37433,7 +37433,7 @@ fn step_520() -> Unit raise {
   group_action_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "group_action G s (a:A->X->X) <=>\n        (forall g x. g IN group_carrier G /\\ x IN s ==> a g x IN s) /\\\n        (forall x. x IN s ==> a (group_id G) x = x) /\\\n        (forall g h x. g IN group_carrier G /\\ h IN group_carrier G /\\ x IN s\n                 ==> a (group_mul G g h) x = a g (a h x))",
+        "group_action G s (a:A->X->X) <=>\n        (∀ g x. g IN group_carrier G /\\ x IN s ==> a g x IN s) /\\\n        (∀ x. x IN s ==> a (group_id G) x = x) /\\\n        (∀ g h x. g IN group_carrier G /\\ h IN group_carrier G /\\ x IN s\n                 ==> a (group_mul G g h) x = a g (a h x))",
       ),
     ),
   )
@@ -37459,7 +37459,7 @@ fn step_521() -> Unit raise {
   group_action_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        group_action G s (a:A->X->X) <=>\n        (forall g x. g IN group_carrier G /\\ x IN s ==> a g x IN s) /\\\n        (forall x. x IN s ==> a (group_id G) x = x) /\\\n        (forall g h x. g IN group_carrier G /\\ h IN group_carrier G /\\ x IN s\n                 ==> a g (a h x) = a (group_mul G g h) x)",
+        "∀ G s (a:A->X->X).\n        group_action G s (a:A->X->X) <=>\n        (∀ g x. g IN group_carrier G /\\ x IN s ==> a g x IN s) /\\\n        (∀ x. x IN s ==> a (group_id G) x = x) /\\\n        (∀ g h x. g IN group_carrier G /\\ h IN group_carrier G /\\ x IN s\n                 ==> a g (a h x) = a (group_mul G g h) x)",
       ),
       t3283,
     ),
@@ -37484,7 +37484,7 @@ fn step_522() -> Unit raise {
   group_action_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g h x.\n        group_action G s a /\\\n        g IN group_carrier G /\\\n        h IN group_carrier G /\\\n        x IN s\n        ==> a g (a h x) = a (group_mul G g h) x",
+        "∀ G s (a:A->X->X) g h x.\n        group_action G s a /\\\n        g IN group_carrier G /\\\n        h IN group_carrier G /\\\n        x IN s\n        ==> a g (a h x) = a (group_mul G g h) x",
       ),
       t3284,
     ),
@@ -37513,7 +37513,7 @@ fn step_523() -> Unit raise {
   group_action_linv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> a (group_inv G g) (a g x) = x",
+        "∀ G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> a (group_inv G g) (a g x) = x",
       ),
       t3286,
     ),
@@ -37542,7 +37542,7 @@ fn step_524() -> Unit raise {
   group_action_rinv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> a g (a (group_inv G g) x) = x",
+        "∀ G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> a g (a (group_inv G g) x) = x",
       ),
       t3288,
     ),
@@ -37574,7 +37574,7 @@ fn step_525() -> Unit raise {
   group_action_bijective_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> forall y. y IN s ==> ?!x. x IN s /\\ a g x = y",
+        "∀ G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> ∀ y. y IN s ==> ?!x. x IN s /\\ a g x = y",
       ),
       t3289,
     ),
@@ -37599,7 +37599,7 @@ fn step_526() -> Unit raise {
   group_action_surjective_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g y.\n        group_action G s a /\\ g IN group_carrier G /\\ y IN s\n        ==> ?x. a g x = y",
+        "∀ G s (a:A->X->X) g y.\n        group_action G s a /\\ g IN group_carrier G /\\ y IN s\n        ==> ?x. a g x = y",
       ),
       t3290,
     ),
@@ -37626,7 +37626,7 @@ fn step_527() -> Unit raise {
   group_action_injective_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s /\\ y IN s\n        ==> (a g x = a g y <=> x = y)",
+        "∀ G s (a:A->X->X).\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s /\\ y IN s\n        ==> (a g x = a g y <=> x = y)",
       ),
       t3291,
     ),
@@ -37655,7 +37655,7 @@ fn step_528() -> Unit raise {
   group_action_on_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t (a:A->X->X).\n        group_action G s a /\\\n        t SUBSET s /\\\n        (forall g x. g IN group_carrier G /\\ x IN t ==> a g x IN t)\n        ==> group_action G t a",
+        "∀ G s t (a:A->X->X).\n        group_action G s a /\\\n        t SUBSET s /\\\n        (∀ g x. g IN group_carrier G /\\ x IN t ==> a g x IN t)\n        ==> group_action G t a",
       ),
       t3293,
     ),
@@ -37701,7 +37701,7 @@ fn step_529() -> Unit raise {
   group_action_from_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s h (a:A->X->X).\n        group_action G s a ==> group_action (subgroup_generated G h) s a",
+        "∀ G s h (a:A->X->X).\n        group_action G s a ==> group_action (subgroup_generated G h) s a",
       ),
       t3299,
     ),
@@ -37792,7 +37792,7 @@ fn step_530() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "forall f:X->X.\n        (forall x y. x IN s /\\ y IN s ==> (f x = f y <=> x = y)) /\\\n        g a IN s /\\ h a IN s /\\ f(g a) = a /\\ f(h a) = a\n        ==> g a = h a",
+        "∀ f:X->X.\n        (∀ x y. x IN s /\\ y IN s ==> (f x = f y <=> x = y)) /\\\n        g a IN s /\\ h a IN s /\\ f(g a) = a /\\ f(h a) = a\n        ==> g a = h a",
       ),
     ),
   )
@@ -37874,7 +37874,7 @@ fn step_530() -> Unit raise {
       },
       (
         @parser.parse_term(
-          "forall G t s (a:A->X->X) a'.\n        group_action G s a /\\\n        group_action G s a' /\\\n        (forall g x. g IN group_carrier G /\\ g IN t /\\ x IN s ==> a g x = a' g x)\n        ==> forall g x. g IN group_carrier(subgroup_generated G t) /\\ x IN s\n                  ==> a g x = a' g x",
+          "∀ G t s (a:A->X->X) a'.\n        group_action G s a /\\\n        group_action G s a' /\\\n        (∀ g x. g IN group_carrier G /\\ g IN t /\\ x IN s ==> a g x = a' g x)\n        ==> ∀ g x. g IN group_carrier(subgroup_generated G t) /\\ x IN s\n                  ==> a g x = a' g x",
         ),
         t3318,
       ),
@@ -37904,7 +37904,7 @@ fn step_531() -> Unit raise {
   group_action_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G u s (a:A->X->X).\n        group_action G s a /\\\n        (forall t. t IN u ==> t SUBSET s) /\\\n        (forall g t. g IN group_carrier G /\\ t IN u ==> IMAGE (a g) t IN u)\n        ==> group_action G u (IMAGE o a)",
+        "∀ G u s (a:A->X->X).\n        group_action G s a /\\\n        (∀ t. t IN u ==> t SUBSET s) /\\\n        (∀ g t. g IN group_carrier G /\\ t IN u ==> IMAGE (a g) t IN u)\n        ==> group_action G u (IMAGE o a)",
       ),
       t3320,
     ),
@@ -37970,7 +37970,7 @@ fn step_532() -> Unit raise {
   group_action_image_sized_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s k (a:A->X->X).\n        group_action G s a\n        ==> group_action G {t | t SUBSET s /\\ t HAS_SIZE k} (IMAGE o a)",
+        "∀ G s k (a:A->X->X).\n        group_action G s a\n        ==> group_action G {t | t SUBSET s /\\ t HAS_SIZE k} (IMAGE o a)",
       ),
       t3330,
     ),
@@ -38020,7 +38020,7 @@ fn step_534() -> Unit raise {
   group_stabilizer_subset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a x. group_stabilizer G a x SUBSET group_carrier G",
+        "∀ G a x. group_stabilizer G a x SUBSET group_carrier G",
       ),
       t3331,
     ),
@@ -38047,7 +38047,7 @@ fn step_535() -> Unit raise {
   finite_group_stabilizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A->X->X) x.\n        FINITE(group_carrier G) ==> FINITE(group_stabilizer G a x)",
+        "∀ G (a:A->X->X) x.\n        FINITE(group_carrier G) ==> FINITE(group_stabilizer G a x)",
       ),
       t3332,
     ),
@@ -38092,7 +38092,7 @@ fn step_536() -> Unit raise {
   subgroup_of_group_stabilizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s ==> group_stabilizer G a x subgroup_of G",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s ==> group_stabilizer G a x subgroup_of G",
       ),
       t3335,
     ),
@@ -38133,7 +38133,7 @@ fn step_537() -> Unit raise {
   group_stabilizer_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A->X->X) s x.\n        group_action G s a /\\ x IN s ==> ~(group_stabilizer G a x = {})",
+        "∀ G (a:A->X->X) s x.\n        group_action G s a /\\ x IN s ==> ~(group_stabilizer G a x = {})",
       ),
       t3339,
     ),
@@ -38171,7 +38171,7 @@ fn step_538() -> Unit raise {
   group_stabilizer_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h (a:A->X->X) x.\n        group_stabilizer (subgroup_generated G h) a x =\n        group_carrier(subgroup_generated G h) INTER group_stabilizer G a x",
+        "∀ G h (a:A->X->X) x.\n        group_stabilizer (subgroup_generated G h) a x =\n        group_carrier(subgroup_generated G h) INTER group_stabilizer G a x",
       ),
       t3341,
     ),
@@ -38201,7 +38201,7 @@ fn step_539() -> Unit raise {
   group_stabilizer_on_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h (a:A->X->X) x.\n        h subgroup_of G\n        ==> group_stabilizer (subgroup_generated G h) a x =\n            h INTER group_stabilizer G a x",
+        "∀ G h (a:A->X->X) x.\n        h subgroup_of G\n        ==> group_stabilizer (subgroup_generated G h) a x =\n            h INTER group_stabilizer G a x",
       ),
       t3342,
     ),
@@ -38240,7 +38240,7 @@ fn step_540() -> Unit raise {
   group_action_kernel_pointwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        {g | g IN group_carrier G /\\ forall x. x IN s ==> a g x = x} =\n        if s = {} then group_carrier G\n        else INTERS {group_stabilizer G a x | x IN s}",
+        "∀ G s (a:A->X->X).\n        {g | g IN group_carrier G /\\ ∀ x. x IN s ==> a g x = x} =\n        if s = {} then group_carrier G\n        else INTERS {group_stabilizer G a x | x IN s}",
       ),
       t3346,
     ),
@@ -38442,7 +38442,7 @@ fn step_541() -> Unit raise {
   group_action_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g h x.\n        group_action G s a /\\\n        g IN group_carrier G /\\ h IN group_carrier G /\\\n        x IN s\n        ==> (a g x = a h x <=>\n             group_mul G (group_inv G g) h IN group_stabilizer G a x)",
+        "∀ G s (a:A->X->X) g h x.\n        group_action G s a /\\\n        g IN group_carrier G /\\ h IN group_carrier G /\\\n        x IN s\n        ==> (a g x = a h x <=>\n             group_mul G (group_inv G g) h IN group_stabilizer G a x)",
       ),
       t3366,
     ),
@@ -38484,7 +38484,7 @@ fn step_542() -> Unit raise {
   let t3367 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall g. (forall x. x IN u ==> (P x <=> g x IN t)) /\\ t SUBSET u /\\\n        (forall y. y IN u ==> f y IN u /\\ g(f y) = y /\\ f(g y) = y)\n        ==> {x | x IN u /\\ P x} = IMAGE f t",
+        "∀ g. (∀ x. x IN u ==> (P x <=> g x IN t)) /\\ t SUBSET u /\\\n        (∀ y. y IN u ==> f y IN u /\\ g(f y) = y /\\ f(g y) = y)\n        ==> {x | x IN u /\\ P x} = IMAGE f t",
       ),
     ),
   )
@@ -38507,7 +38507,7 @@ fn step_542() -> Unit raise {
   group_action_fibres_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) h x.\n        group_action G s a /\\ h IN group_carrier G /\\ x IN s\n        ==> {g | g IN group_carrier G /\\ (a:A->X->X) g x = a h x} =\n            IMAGE (group_mul G h) (group_stabilizer G a x)",
+        "∀ G s (a:A->X->X) h x.\n        group_action G s a /\\ h IN group_carrier G /\\ x IN s\n        ==> {g | g IN group_carrier G /\\ (a:A->X->X) g x = a h x} =\n            IMAGE (group_mul G h) (group_stabilizer G a x)",
       ),
       t3372,
     ),
@@ -38553,7 +38553,7 @@ fn step_544() -> Unit raise {
   group_orbit_in_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_orbit G s a x y ==> x IN s /\\ y IN s",
+        "∀ G s (a:A->X->X) x y.\n        group_orbit G s a x y ==> x IN s /\\ y IN s",
       ),
       t3373,
     ),
@@ -38591,7 +38591,7 @@ fn step_545() -> Unit raise {
   in_group_orbit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        y IN group_orbit G s a x <=>\n        x IN s /\\ y IN s /\\ ?g. g IN group_carrier G /\\ a g x = y",
+        "∀ G s (a:A->X->X) x y.\n        y IN group_orbit G s a x <=>\n        x IN s /\\ y IN s /\\ ?g. g IN group_carrier G /\\ a g x = y",
       ),
       t3379,
     ),
@@ -38650,7 +38650,7 @@ fn step_546() -> Unit raise {
   group_orbit_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> group_orbit G s a x =\n            if x IN s then {a g x | g IN group_carrier G} else {}",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a\n        ==> group_orbit G s a x =\n            if x IN s then {a g x | g IN group_carrier G} else {}",
       ),
       t3388,
     ),
@@ -38676,7 +38676,7 @@ fn step_547() -> Unit raise {
       @simp.rewrite_tac(
         @list.List([
           @sets.set_rule(
-            @parser.parse_term("s SUBSET t <=> forall x. s x ==> x IN t"),
+            @parser.parse_term("s SUBSET t <=> ∀ x. s x ==> x IN t"),
           ),
         ]),
       ),
@@ -38686,7 +38686,7 @@ fn step_547() -> Unit raise {
   )
   group_orbit_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G s (a:A->X->X) x. group_orbit G s a x SUBSET s"),
+      @parser.parse_term("∀ G s (a:A->X->X) x. group_orbit G s a x SUBSET s"),
       t3391,
     ),
   )
@@ -38711,7 +38711,7 @@ fn step_548() -> Unit raise {
   let t3392 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("u = t INTER v <=> forall x. u x <=> x IN t /\\ v x"),
+        @parser.parse_term("u = t INTER v <=> ∀ x. u x <=> x IN t /\\ v x"),
       ),
     ]),
   )
@@ -38725,7 +38725,7 @@ fn step_548() -> Unit raise {
   group_orbit_on_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t (a:A->X->X).\n        t SUBSET s /\\ x IN t\n        ==> group_orbit G t a x = t INTER group_orbit G s a x",
+        "∀ G s t (a:A->X->X).\n        t SUBSET s /\\ x IN t\n        ==> group_orbit G t a x = t INTER group_orbit G s a x",
       ),
       t3395,
     ),
@@ -38751,7 +38751,7 @@ fn step_549() -> Unit raise {
   let t3399 = @simp.asm_simp_tac(
     @list.List([
       @sets.finite_image(),
-      @sets.set_rule(@parser.parse_term("P SUBSET s <=> forall x. P x ==> x IN s")),
+      @sets.set_rule(@parser.parse_term("P SUBSET s <=> ∀ x. P x ==> x IN s")),
     ]),
   )
   let t3398 = @tactics.exists_tac(
@@ -38783,7 +38783,7 @@ fn step_549() -> Unit raise {
   finite_group_orbit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        FINITE(group_carrier G) \\/ FINITE s ==> FINITE(group_orbit G s a x)",
+        "∀ G s (a:A->X->X) x.\n        FINITE(group_carrier G) \\/ FINITE s ==> FINITE(group_orbit G s a x)",
       ),
       t3402,
     ),
@@ -38812,7 +38812,7 @@ fn step_550() -> Unit raise {
   group_orbit_refl_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a ==> (group_orbit G s a x x <=> x IN s)",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a ==> (group_orbit G s a x x <=> x IN s)",
       ),
       t3404,
     ),
@@ -38837,7 +38837,7 @@ fn step_551() -> Unit raise {
   group_orbit_refl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s\n        ==> group_orbit G s a x x",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s\n        ==> group_orbit G s a x x",
       ),
       t3405,
     ),
@@ -38867,7 +38867,7 @@ fn step_552() -> Unit raise {
   in_group_orbit_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s ==> x IN group_orbit G s a x",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a /\\ x IN s ==> x IN group_orbit G s a x",
       ),
       t3408,
     ),
@@ -38891,14 +38891,14 @@ fn step_553() -> Unit raise {
   let t3409 = @simp.simp_tac(@list.List([group_orbit()]))
   let t3410 = @tactics.then_tac(
     @simp.rewrite_tac(
-      @list.List([@sets.set_rule(@parser.parse_term("s = {} <=> forall x. ~s x"))]),
+      @list.List([@sets.set_rule(@parser.parse_term("s = {} <=> ∀ x. ~s x"))]),
     ),
     t3409,
   )
   group_orbit_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x. ~(x IN s) ==> group_orbit G s a x = {}",
+        "∀ G s (a:A->X->X) x. ~(x IN s) ==> group_orbit G s a x = {}",
       ),
       t3410,
     ),
@@ -38936,7 +38936,7 @@ fn step_554() -> Unit raise {
   group_orbit_eq_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x = {} <=> ~(x IN s))",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x = {} <=> ~(x IN s))",
       ),
       t3413,
     ),
@@ -38967,7 +38967,7 @@ fn step_555() -> Unit raise {
   group_orbit_sym_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a\n        ==> (group_orbit G s a x y <=> group_orbit G s a y x)",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a\n        ==> (group_orbit G s a x y <=> group_orbit G s a y x)",
       ),
       t3415,
     ),
@@ -38992,7 +38992,7 @@ fn step_556() -> Unit raise {
   group_orbit_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a /\\ group_orbit G s a x y\n        ==> group_orbit G s a y x",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a /\\ group_orbit G s a x y\n        ==> group_orbit G s a y x",
       ),
       t3416,
     ),
@@ -39021,7 +39021,7 @@ fn step_557() -> Unit raise {
   group_orbit_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y z.\n        group_action G s a /\\ group_orbit G s a x y /\\ group_orbit G s a y z\n        ==> group_orbit G s a x z",
+        "∀ G s (a:A->X->X) x y z.\n        group_action G s a /\\ group_orbit G s a x y /\\ group_orbit G s a y z\n        ==> group_orbit G s a x z",
       ),
       t3418,
     ),
@@ -39056,7 +39056,7 @@ fn step_558() -> Unit raise {
   group_orbit_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (group_orbit G s a x = group_orbit G s a y <=>\n             group_orbit G s a x y)",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (group_orbit G s a x = group_orbit G s a y <=>\n             group_orbit G s a x y)",
       ),
       t3420,
     ),
@@ -39101,7 +39101,7 @@ fn step_559() -> Unit raise {
   closed_group_orbit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) (group_orbit G s a x) SUBSET group_orbit G s a x",
+        "∀ G s (a:A->X->X) x g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) (group_orbit G s a x) SUBSET group_orbit G s a x",
       ),
       t3426,
     ),
@@ -39154,7 +39154,7 @@ fn step_560() -> Unit raise {
   group_orbit_eq_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a\n        ==> (group_orbit G s a y = {x} <=>\n             x IN s /\\ y = x /\\ forall g. g IN group_carrier G ==> a g x = x)",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a\n        ==> (group_orbit G s a y = {x} <=>\n             x IN s /\\ y = x /\\ ∀ g. g IN group_carrier G ==> a g x = x)",
       ),
       t3433,
     ),
@@ -39179,7 +39179,7 @@ fn step_561() -> Unit raise {
   group_orbit_eq_sing_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x = {x} <=>\n             x IN s /\\ forall g. g IN group_carrier G ==> a g x = x)",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x = {x} <=>\n             x IN s /\\ ∀ g. g IN group_carrier G ==> a g x = x)",
       ),
       t3434,
     ),
@@ -39213,7 +39213,7 @@ fn step_562() -> Unit raise {
   group_orbit_has_size_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x HAS_SIZE 1 <=>\n             x IN s /\\ forall g. g IN group_carrier G ==> a g x = x)",
+        "∀ G s (a:A->X->X) x.\n        group_action G s a\n        ==> (group_orbit G s a x HAS_SIZE 1 <=>\n             x IN s /\\ ∀ g. g IN group_carrier G ==> a g x = x)",
       ),
       t3438,
     ),
@@ -39247,7 +39247,7 @@ fn step_563() -> Unit raise {
   let t3442 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall g. (forall x. x IN s ==> f(g x) = x /\\ g(f x) = x) /\\\n        IMAGE f s SUBSET s /\\ IMAGE g s SUBSET s\n        ==> IMAGE f s = s",
+        "∀ g. (∀ x. x IN s ==> f(g x) = x /\\ g(f x) = x) /\\\n        IMAGE f s SUBSET s /\\ IMAGE g s SUBSET s\n        ==> IMAGE f s = s",
       ),
     ),
   )
@@ -39285,7 +39285,7 @@ fn step_563() -> Unit raise {
   group_action_invariant_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s\n        ==> ((forall g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t) <=>\n             (forall g. g IN group_carrier G ==> IMAGE (a g) t = t))",
+        "∀ G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s\n        ==> ((∀ g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t) <=>\n             (∀ g. g IN group_carrier G ==> IMAGE (a g) t = t))",
       ),
       t3447,
     ),
@@ -39314,7 +39314,7 @@ fn step_564() -> Unit raise {
   group_action_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) s SUBSET s",
+        "∀ G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) s SUBSET s",
       ),
       t3449,
     ),
@@ -39345,7 +39345,7 @@ fn step_565() -> Unit raise {
   group_action_invariant_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) s = s",
+        "∀ G s (a:A->X->X) g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) s = s",
       ),
       t3450,
     ),
@@ -39376,7 +39376,7 @@ fn step_566() -> Unit raise {
   invariant_group_orbit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) (group_orbit G s a x) = group_orbit G s a x",
+        "∀ G s (a:A->X->X) x g.\n        group_action G s a /\\ g IN group_carrier G\n        ==> IMAGE (a g) (group_orbit G s a x) = group_orbit G s a x",
       ),
       t3451,
     ),
@@ -39869,7 +39869,7 @@ fn step_567() -> Unit raise {
   subset_group_orbit_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t)\n        ==> (group_orbit G s a x SUBSET t <=>\n             x IN s ==> ~DISJOINT (group_orbit G s a x) t)",
+        "∀ G s (a:A->X->X) x t.\n        group_action G s a /\\ t SUBSET s /\\\n        (∀ g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t)\n        ==> (group_orbit G s a x SUBSET t <=>\n             x IN s ==> ~DISJOINT (group_orbit G s a x) t)",
       ),
       t3490,
     ),
@@ -39899,7 +39899,7 @@ fn step_568() -> Unit raise {
   subset_group_orbit_invariant_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t = t)\n        ==> (group_orbit G s a x SUBSET t <=>\n             x IN s ==> ~DISJOINT (group_orbit G s a x) t)",
+        "∀ G s (a:A->X->X) x t.\n        group_action G s a /\\ t SUBSET s /\\\n        (∀ g. g IN group_carrier G ==> IMAGE (a g) t = t)\n        ==> (group_orbit G s a x SUBSET t <=>\n             x IN s ==> ~DISJOINT (group_orbit G s a x) t)",
       ),
       t3493,
     ),
@@ -39932,7 +39932,7 @@ fn step_569() -> Unit raise {
       @list.List([
         group_orbit_eq(),
         @sets.set_rule(
-          @parser.parse_term("DISJOINT s t <=> forall x. ~(s x /\\ t x)"),
+          @parser.parse_term("DISJOINT s t <=> ∀ x. ~(s x /\\ t x)"),
         ),
       ]),
     ),
@@ -39941,7 +39941,7 @@ fn step_569() -> Unit raise {
   group_orbits_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (group_orbit G s a x = group_orbit G s a y <=>\n             ~DISJOINT (group_orbit G s a x) (group_orbit G s a y))",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (group_orbit G s a x = group_orbit G s a y <=>\n             ~DISJOINT (group_orbit G s a x) (group_orbit G s a y))",
       ),
       t3495,
     ),
@@ -39966,7 +39966,7 @@ fn step_570() -> Unit raise {
   disjoint_group_orbits_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (DISJOINT (group_orbit G s a x) (group_orbit G s a y) <=>\n             ~(group_orbit G s a x = group_orbit G s a y))",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a /\\ x IN s /\\ y IN s\n        ==> (DISJOINT (group_orbit G s a x) (group_orbit G s a y) <=>\n             ~(group_orbit G s a x = group_orbit G s a y))",
       ),
       t3496,
     ),
@@ -39999,7 +39999,7 @@ fn step_571() -> Unit raise {
   pairwise_disjoint_group_orbits_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        group_action G s a\n        ==> pairwise DISJOINT {group_orbit G s a x |x| x IN s}",
+        "∀ G s (a:A->X->X).\n        group_action G s a\n        ==> pairwise DISJOINT {group_orbit G s a x |x| x IN s}",
       ),
       t3498,
     ),
@@ -40030,7 +40030,7 @@ fn step_572() -> Unit raise {
   let t3499 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN t ==> x IN f x) /\\\n    (forall x. x IN t /\\ ~DISJOINT (f x) t ==> f x SUBSET t)\n    ==> UNIONS {f x | x IN t} = t",
+        "(∀ x. x IN t ==> x IN f x) /\\\n    (∀ x. x IN t /\\ ~DISJOINT (f x) t ==> f x SUBSET t)\n    ==> UNIONS {f x | x IN t} = t",
       ),
     ),
   )
@@ -40044,7 +40044,7 @@ fn step_572() -> Unit raise {
   unions_group_orbits_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t)\n        ==> UNIONS {group_orbit G s a x |x| x IN t} = t",
+        "∀ G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s /\\\n        (∀ g. g IN group_carrier G ==> IMAGE (a g) t SUBSET t)\n        ==> UNIONS {group_orbit G s a x |x| x IN t} = t",
       ),
       t3502,
     ),
@@ -40076,7 +40076,7 @@ fn step_573() -> Unit raise {
   unions_group_orbits_invariant_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s /\\\n        (forall g. g IN group_carrier G ==> IMAGE (a g) t = t)\n        ==> UNIONS {group_orbit G s a x |x| x IN t} = t",
+        "∀ G s (a:A->X->X) t.\n        group_action G s a /\\ t SUBSET s /\\\n        (∀ g. g IN group_carrier G ==> IMAGE (a g) t = t)\n        ==> UNIONS {group_orbit G s a x |x| x IN t} = t",
       ),
       t3505,
     ),
@@ -40108,7 +40108,7 @@ fn step_574() -> Unit raise {
   unions_group_orbits_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        group_action G s a\n        ==> UNIONS {group_orbit G s a x |x| x IN s} = s",
+        "∀ G s (a:A->X->X).\n        group_action G s a\n        ==> UNIONS {group_orbit G s a x |x| x IN s} = s",
       ),
       t3508,
     ),
@@ -40335,7 +40335,7 @@ fn step_575() -> Unit raise {
   nsum_card_group_orbits_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        group_action G s a /\\ FINITE s\n        ==> nsum {group_orbit G s a x | x | x IN s} CARD = CARD s",
+        "∀ G s (a:A->X->X).\n        group_action G s a /\\ FINITE s\n        ==> nsum {group_orbit G s a x | x | x IN s} CARD = CARD s",
       ),
       t3526,
     ),
@@ -40501,7 +40501,7 @@ fn step_576() -> Unit raise {
   orbit_stabilizer_mul_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n      group_action G s a /\\ x IN s\n      ==> group_orbit G s a x *_c group_stabilizer G a x =_c group_carrier G",
+        "∀ G s (a:A->X->X) x.\n      group_action G s a /\\ x IN s\n      ==> group_orbit G s a x *_c group_stabilizer G a x =_c group_carrier G",
       ),
       t3543,
     ),
@@ -40658,7 +40658,7 @@ fn step_577() -> Unit raise {
   orbit_stabilizer_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n      FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n      ==> CARD(group_orbit G s a x) * CARD(group_stabilizer G a x) =\n          CARD(group_carrier G)",
+        "∀ G s (a:A->X->X) x.\n      FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n      ==> CARD(group_orbit G s a x) * CARD(group_stabilizer G a x) =\n          CARD(group_carrier G)",
       ),
       t3555,
     ),
@@ -40778,7 +40778,7 @@ fn step_578() -> Unit raise {
   card_group_orbit_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n        ==> CARD(group_orbit G s a x) divides CARD(group_carrier G)",
+        "∀ G s (a:A->X->X) x.\n        FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n        ==> CARD(group_orbit G s a x) divides CARD(group_carrier G)",
       ),
       t3564,
     ),
@@ -40898,7 +40898,7 @@ fn step_579() -> Unit raise {
   card_group_stabilizer_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n        FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n        ==> CARD(group_stabilizer G a x) divides CARD(group_carrier G)",
+        "∀ G s (a:A->X->X) x.\n        FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n        ==> CARD(group_stabilizer G a x) divides CARD(group_carrier G)",
       ),
       t3573,
     ),
@@ -41267,7 +41267,7 @@ fn step_580() -> Unit raise {
   group_stabilizer_of_action_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> group_stabilizer G a (a g x) =\n            IMAGE (group_conjugation G g) (group_stabilizer G a x)",
+        "∀ G s (a:A->X->X) g x.\n        group_action G s a /\\ g IN group_carrier G /\\ x IN s\n        ==> group_stabilizer G a (a g x) =\n            IMAGE (group_conjugation G g) (group_stabilizer G a x)",
       ),
       t3610,
     ),
@@ -41382,7 +41382,7 @@ fn step_581() -> Unit raise {
   group_action_subgroup_translation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (h:A->bool).\n    group_action (subgroup_generated G h) (group_carrier G) (group_mul G)",
+        "∀ G (h:A->bool).\n    group_action (subgroup_generated G h) (group_carrier G) (group_mul G)",
       ),
       t3619,
     ),
@@ -41413,7 +41413,7 @@ fn step_582() -> Unit raise {
   let t3621 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "a IN s /\\ (forall x. x IN s ==> (P x <=> x = a))\n    ==> {x | x IN s /\\ P x} = {a}",
+        "a IN s /\\ (∀ x. x IN s ==> (P x <=> x = a))\n    ==> {x | x IN s /\\ P x} = {a}",
       ),
     ),
   )
@@ -41430,7 +41430,7 @@ fn step_582() -> Unit raise {
   group_stabilizer_subgroup_translation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_stabilizer (subgroup_generated G h) (group_mul G) a =\n            {group_id G}",
+        "∀ G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_stabilizer (subgroup_generated G h) (group_mul G) a =\n            {group_id G}",
       ),
       t3623,
     ),
@@ -41459,7 +41459,7 @@ fn step_583() -> Unit raise {
   )
   group_action_group_translation_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G. group_action G (group_carrier G) (group_mul G)"),
+      @parser.parse_term("∀ G. group_action G (group_carrier G) (group_mul G)"),
       t3624,
     ),
   )
@@ -41497,7 +41497,7 @@ fn step_584() -> Unit raise {
   group_stabilizer_group_translation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A.\n        a IN group_carrier G\n        ==> group_stabilizer G (group_mul G) a = {group_id G}",
+        "∀ G a:A.\n        a IN group_carrier G\n        ==> group_stabilizer G (group_mul G) a = {group_id G}",
       ),
       t3629,
     ),
@@ -41529,7 +41529,7 @@ fn step_585() -> Unit raise {
   group_action_subset_translation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) u.\n      (forall s. s IN u ==> s SUBSET group_carrier G) /\\\n      (forall a s. a IN group_carrier G /\\ s IN u ==> IMAGE (group_mul G a) s IN u)\n      ==> group_action G u (IMAGE o group_mul G)",
+        "∀(G:A group) u.\n      (∀ s. s IN u ==> s SUBSET group_carrier G) /\\\n      (∀ a s. a IN group_carrier G /\\ s IN u ==> IMAGE (group_mul G a) s IN u)\n      ==> group_action G u (IMAGE o group_mul G)",
       ),
       t3632,
     ),
@@ -41564,7 +41564,7 @@ fn step_586() -> Unit raise {
   group_action_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_action G (group_carrier G) (group_conjugation G)",
+        "∀ G:A group. group_action G (group_carrier G) (group_conjugation G)",
       ),
       t3634,
     ),
@@ -41982,7 +41982,7 @@ fn step_587() -> Unit raise {
   card_group_setmul_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_setmul G g h) *_c (g INTER h) =_c g *_c h",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_setmul G g h) *_c (g INTER h) =_c g *_c h",
       ),
       t3697,
     ),
@@ -42027,7 +42027,7 @@ fn step_588() -> Unit raise {
   card_group_setmul_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) * CARD(g INTER h) = CARD g * CARD h",
+        "∀ G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) * CARD(g INTER h) = CARD g * CARD h",
       ),
       t3702,
     ),
@@ -42090,7 +42090,7 @@ fn step_589() -> Unit raise {
   card_group_setmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) = (CARD g * CARD h) DIV CARD(g INTER h)",
+        "∀ G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) = (CARD g * CARD h) DIV CARD(g INTER h)",
       ),
       t3711,
     ),
@@ -42122,7 +42122,7 @@ fn step_590() -> Unit raise {
   card_group_setmul_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) divides CARD(g) * CARD(h)",
+        "∀ G g h:A->bool.\n        FINITE g /\\ FINITE h /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> CARD(group_setmul G g h) divides CARD(g) * CARD(h)",
       ),
       t3714,
     ),
@@ -42471,7 +42471,7 @@ fn step_591() -> Unit raise {
   group_orbit_common_divisor_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) n.\n        group_action G s a /\\\n        FINITE s /\\\n        (forall x. x IN s ==> n divides CARD(group_orbit G s a x))\n        ==> n divides CARD s",
+        "∀ G s (a:A->X->X) n.\n        group_action G s a /\\\n        FINITE s /\\\n        (∀ x. x IN s ==> n divides CARD(group_orbit G s a x))\n        ==> n divides CARD s",
       ),
       t3739,
     ),
@@ -42524,7 +42524,7 @@ fn step_592() -> Unit raise {
   group_orbit_common_index_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) p k.\n        group_action G s a /\\\n        FINITE s /\\ (s = {} ==> k = 0) /\\\n        (forall x. x IN s ==> k <= index p (CARD(group_orbit G s a x)))\n        ==> k <= index p (CARD s)",
+        "∀ G s (a:A->X->X) p k.\n        group_action G s a /\\\n        FINITE s /\\ (s = {} ==> k = 0) /\\\n        (∀ x. x IN s ==> k <= index p (CARD(group_orbit G s a x)))\n        ==> k <= index p (CARD s)",
       ),
       t3745,
     ),
@@ -42590,7 +42590,7 @@ fn step_595() -> Unit raise {
   )
   left_coset_as_image_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(x:A) h. left_coset G x h = IMAGE (group_mul G x) h"),
+      @parser.parse_term("∀(x:A) h. left_coset G x h = IMAGE (group_mul G x) h"),
       t3747,
     ),
   )
@@ -42616,7 +42616,7 @@ fn step_596() -> Unit raise {
   right_coset_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        x IN group_carrier G /\\ h SUBSET group_carrier G\n        ==> right_coset G h x SUBSET group_carrier G",
+        "∀ G h x:A.\n        x IN group_carrier G /\\ h SUBSET group_carrier G\n        ==> right_coset G h x SUBSET group_carrier G",
       ),
       t3748,
     ),
@@ -42641,7 +42641,7 @@ fn step_597() -> Unit raise {
   left_coset_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        x IN group_carrier G /\\ h SUBSET group_carrier G\n        ==> left_coset G x h SUBSET group_carrier G",
+        "∀ G h x:A.\n        x IN group_carrier G /\\ h SUBSET group_carrier G\n        ==> left_coset G x h SUBSET group_carrier G",
       ),
       t3749,
     ),
@@ -42716,7 +42716,7 @@ fn step_598() -> Unit raise {
   in_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x a:A.\n        h SUBSET group_carrier G /\\\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (x IN right_coset G h a <=>\n             group_mul G x (group_inv G a) IN h)",
+        "∀ G h x a:A.\n        h SUBSET group_carrier G /\\\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (x IN right_coset G h a <=>\n             group_mul G x (group_inv G a) IN h)",
       ),
       t3755,
     ),
@@ -42792,7 +42792,7 @@ fn step_599() -> Unit raise {
   in_left_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x a:A.\n        h SUBSET group_carrier G /\\\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (x IN left_coset G a h <=>\n             group_mul G (group_inv G a) x IN h)",
+        "∀ G h x a:A.\n        h SUBSET group_carrier G /\\\n        a IN group_carrier G /\\ x IN group_carrier G\n        ==> (x IN left_coset G a h <=>\n             group_mul G (group_inv G a) x IN h)",
       ),
       t3761,
     ),
@@ -42817,7 +42817,7 @@ fn step_600() -> Unit raise {
   in_right_coset_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (x IN right_coset G h (group_inv G y) <=>\n             group_mul G x y IN h)",
+        "∀ G h x y:A.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (x IN right_coset G h (group_inv G y) <=>\n             group_mul G x y IN h)",
       ),
       t3762,
     ),
@@ -42844,7 +42844,7 @@ fn step_601() -> Unit raise {
   in_left_coset_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (x IN left_coset G (group_inv G y) h <=>\n             group_mul G y x IN h)",
+        "∀ G h x y:A.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (x IN left_coset G (group_inv G y) h <=>\n             group_mul G y x IN h)",
       ),
       t3763,
     ),
@@ -43002,7 +43002,7 @@ fn step_602() -> Unit raise {
   let t3777 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall u. s SUBSET u /\\ t SUBSET u /\\ (forall x. x IN u ==> f(f x) = x) /\\\n        (forall x. x IN u ==> (f x IN t <=> x IN s)) /\\\n        (forall x. x IN u ==> (f x IN s <=> x IN t))\n        ==> IMAGE f s = t /\\ IMAGE f t = s",
+        "∀ u. s SUBSET u /\\ t SUBSET u /\\ (∀ x. x IN u ==> f(f x) = x) /\\\n        (∀ x. x IN u ==> (f x IN t <=> x IN s)) /\\\n        (∀ x. x IN u ==> (f x IN s <=> x IN t))\n        ==> IMAGE f s = t /\\ IMAGE f t = s",
       ),
     ),
   )
@@ -43093,7 +43093,7 @@ fn step_602() -> Unit raise {
   )
   let t3792 = (
     @parser.parse_term(
-      "(forall G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (left_coset G a h) =\n            right_coset G h (group_inv G a)) /\\\n   (forall G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (right_coset G h a) =\n            left_coset G (group_inv G a) h)",
+      "(∀ G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (left_coset G a h) =\n            right_coset G h (group_inv G a)) /\\\n   (∀ G h a:A.\n        h subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (right_coset G h a) =\n            left_coset G (group_inv G a) h)",
     ),
     t3791,
   )
@@ -43138,7 +43138,7 @@ fn step_603() -> Unit raise {
   right_coset_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A. right_coset G h x = left_coset (opposite_group G) x h",
+        "∀ G h x:A. right_coset G h x = left_coset (opposite_group G) x h",
       ),
       t3793,
     ),
@@ -43165,7 +43165,7 @@ fn step_604() -> Unit raise {
   left_coset_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A. left_coset G x h = right_coset (opposite_group G) h x",
+        "∀ G h x:A. left_coset G x h = right_coset (opposite_group G) h x",
       ),
       t3794,
     ),
@@ -43206,7 +43206,7 @@ fn step_605() -> Unit raise {
   group_conjugation_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n     x IN group_carrier G /\\ h SUBSET group_carrier G\n     ==> IMAGE (group_conjugation G x) (right_coset G h x) = left_coset G x h",
+        "∀ G h x:A.\n     x IN group_carrier G /\\ h SUBSET group_carrier G\n     ==> IMAGE (group_conjugation G x) (right_coset G h x) = left_coset G x h",
       ),
       t3796,
     ),
@@ -43247,7 +43247,7 @@ fn step_606() -> Unit raise {
   right_coset_group_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n     x IN group_carrier G /\\ h SUBSET group_carrier G\n     ==> right_coset G (IMAGE (group_conjugation G x) h) x =\n         left_coset G x h",
+        "∀ G h x:A.\n     x IN group_carrier G /\\ h SUBSET group_carrier G\n     ==> right_coset G (IMAGE (group_conjugation G x) h) x =\n         left_coset G x h",
       ),
       t3798,
     ),
@@ -43296,7 +43296,7 @@ fn step_607() -> Unit raise {
   left_coset_left_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y h:A->bool.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        h SUBSET group_carrier G\n        ==> left_coset G x (left_coset G y h) =\n            left_coset G (group_mul G x y) h",
+        "∀ x y h:A->bool.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        h SUBSET group_carrier G\n        ==> left_coset G x (left_coset G y h) =\n            left_coset G (group_mul G x y) h",
       ),
       t3803,
     ),
@@ -43327,7 +43327,7 @@ fn step_608() -> Unit raise {
   right_coset_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y h:A->bool.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G\n        ==> right_coset G (right_coset G h x) y =\n            right_coset G h (group_mul G x y)",
+        "∀ x y h:A->bool.\n        h SUBSET group_carrier G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G\n        ==> right_coset G (right_coset G h x) y =\n            right_coset G h (group_mul G x y)",
       ),
       t3805,
     ),
@@ -43351,7 +43351,7 @@ fn step_609() -> Unit raise {
   let t3809 = @simp.asm_simp_tac(@list.List([group_mul_rid()]))
   let t3808 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("(forall x. x IN s ==> f x = x) ==> {f x | x IN s} = s"),
+      @parser.parse_term("(∀ x. x IN s ==> f x = x) ==> {f x | x IN s} = s"),
     ),
   )
   let t3807 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -43380,7 +43380,7 @@ fn step_609() -> Unit raise {
   right_coset_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h SUBSET group_carrier G ==> right_coset G h (group_id G) = h",
+        "∀ G h:A->bool.\n        h SUBSET group_carrier G ==> right_coset G h (group_id G) = h",
       ),
       t3810,
     ),
@@ -43409,7 +43409,7 @@ fn step_610() -> Unit raise {
   left_coset_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h SUBSET group_carrier G ==> left_coset G (group_id G) h = h",
+        "∀ G h:A->bool.\n        h SUBSET group_carrier G ==> left_coset G (group_id G) h = h",
       ),
       t3811,
     ),
@@ -43439,7 +43439,7 @@ fn step_611() -> Unit raise {
   left_coset_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> left_coset G x {group_id G} = {x}",
+        "∀ G x:A. x IN group_carrier G ==> left_coset G x {group_id G} = {x}",
       ),
       t3812,
     ),
@@ -43471,7 +43471,7 @@ fn step_612() -> Unit raise {
   right_coset_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G ==> right_coset G {group_id G} x = {x}",
+        "∀ G x:A. x IN group_carrier G ==> right_coset G {group_id G} x = {x}",
       ),
       t3813,
     ),
@@ -43504,7 +43504,7 @@ fn step_613() -> Unit raise {
   left_coset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G\n           ==> left_coset G x (group_carrier G) = group_carrier G",
+        "∀ G x:A. x IN group_carrier G\n           ==> left_coset G x (group_carrier G) = group_carrier G",
       ),
       t3814,
     ),
@@ -43537,7 +43537,7 @@ fn step_614() -> Unit raise {
   right_coset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G\n           ==> right_coset G (group_carrier G) x = group_carrier G",
+        "∀ G x:A. x IN group_carrier G\n           ==> right_coset G (group_carrier G) x = group_carrier G",
       ),
       t3815,
     ),
@@ -43564,7 +43564,7 @@ fn step_615() -> Unit raise {
   right_coset_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (right_coset G h x = right_coset G h y <=> group_div G x y IN h)",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (right_coset G h x = right_coset G h y <=> group_div G x y IN h)",
       ),
       t3816,
     ),
@@ -43589,7 +43589,7 @@ fn step_616() -> Unit raise {
   left_coset_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (left_coset G x h = left_coset G y h <=>\n             group_mul G (group_inv G x) y IN h)",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (left_coset G x h = left_coset G y h <=>\n             group_mul G (group_inv G x) y IN h)",
       ),
       t3817,
     ),
@@ -43618,7 +43618,7 @@ fn step_617() -> Unit raise {
   right_coset_eq_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (right_coset G h x = h <=> x IN h)",
+        "∀ G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (right_coset G h x = h <=> x IN h)",
       ),
       t3819,
     ),
@@ -43649,7 +43649,7 @@ fn step_618() -> Unit raise {
   left_coset_eq_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (left_coset G x h = h <=> x IN h)",
+        "∀ G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (left_coset G x h = h <=> x IN h)",
       ),
       t3821,
     ),
@@ -43679,7 +43679,7 @@ fn step_619() -> Unit raise {
   )
   right_coset_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G h x:A. right_coset G h x = {} <=> h = {}"),
+      @parser.parse_term("∀ G h x:A. right_coset G h x = {} <=> h = {}"),
       t3822,
     ),
   )
@@ -43704,7 +43704,7 @@ fn step_620() -> Unit raise {
   )
   left_coset_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G h x:A. left_coset G x h = {} <=> h = {}"),
+      @parser.parse_term("∀ G h x:A. left_coset G x h = {} <=> h = {}"),
       t3823,
     ),
   )
@@ -43730,7 +43730,7 @@ fn step_621() -> Unit raise {
   right_coset_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A. h subgroup_of G ==> ~(right_coset G h x = {})",
+        "∀ G h x:A. h subgroup_of G ==> ~(right_coset G h x = {})",
       ),
       t3824,
     ),
@@ -43757,7 +43757,7 @@ fn step_622() -> Unit raise {
   left_coset_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A. h subgroup_of G ==> ~(left_coset G x h = {})",
+        "∀ G h x:A. h subgroup_of G ==> ~(left_coset G x h = {})",
       ),
       t3825,
     ),
@@ -43794,7 +43794,7 @@ fn step_623() -> Unit raise {
   in_right_coset_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n      h subgroup_of G /\\ x IN group_carrier G ==> x IN right_coset G h x",
+        "∀ G h x:A.\n      h subgroup_of G /\\ x IN group_carrier G ==> x IN right_coset G h x",
       ),
       t3827,
     ),
@@ -43831,7 +43831,7 @@ fn step_624() -> Unit raise {
   in_left_coset_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n      h subgroup_of G /\\ x IN group_carrier G ==> x IN left_coset G x h",
+        "∀ G h x:A.\n      h subgroup_of G /\\ x IN group_carrier G ==> x IN left_coset G x h",
       ),
       t3829,
     ),
@@ -43879,7 +43879,7 @@ fn step_625() -> Unit raise {
   unions_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> UNIONS {right_coset G h x |x| x IN group_carrier G} =\n            group_carrier G",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> UNIONS {right_coset G h x |x| x IN group_carrier G} =\n            group_carrier G",
       ),
       t3834,
     ),
@@ -43927,7 +43927,7 @@ fn step_626() -> Unit raise {
   unions_left_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> UNIONS {left_coset G x h |x| x IN group_carrier G} =\n            group_carrier G",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> UNIONS {left_coset G x h |x| x IN group_carrier G} =\n            group_carrier G",
       ),
       t3839,
     ),
@@ -44165,7 +44165,7 @@ fn step_627() -> Unit raise {
   right_cosets_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (right_coset G h x = right_coset G h y <=>\n             ~(DISJOINT (right_coset G h x) (right_coset G h y)))",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (right_coset G h x = right_coset G h y <=>\n             ~(DISJOINT (right_coset G h x) (right_coset G h y)))",
       ),
       t3860,
     ),
@@ -44200,7 +44200,7 @@ fn step_628() -> Unit raise {
   left_cosets_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (left_coset G x h = left_coset G y h <=>\n             ~(DISJOINT (left_coset G x h) (left_coset G y h)))",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (left_coset G x h = left_coset G y h <=>\n             ~(DISJOINT (left_coset G x h) (left_coset G y h)))",
       ),
       t3862,
     ),
@@ -44223,7 +44223,7 @@ fn step_629() -> Unit raise {
   disjoint_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (DISJOINT (right_coset G h x) (right_coset G h y) <=>\n             ~(right_coset G h x = right_coset G h y))",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (DISJOINT (right_coset G h x) (right_coset G h y) <=>\n             ~(right_coset G h x = right_coset G h y))",
       ),
       t3863,
     ),
@@ -44248,7 +44248,7 @@ fn step_630() -> Unit raise {
   disjoint_left_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (DISJOINT (left_coset G x h) (left_coset G y h) <=>\n             ~(left_coset G x h = left_coset G y h))",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> (DISJOINT (left_coset G x h) (left_coset G y h) <=>\n             ~(left_coset G x h = left_coset G y h))",
       ),
       t3864,
     ),
@@ -44281,7 +44281,7 @@ fn step_631() -> Unit raise {
   pairwise_disjoint_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> pairwise DISJOINT {right_coset G h a |a| a IN group_carrier G}",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> pairwise DISJOINT {right_coset G h a |a| a IN group_carrier G}",
       ),
       t3866,
     ),
@@ -44314,7 +44314,7 @@ fn step_632() -> Unit raise {
   pairwise_disjoint_left_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> pairwise DISJOINT {left_coset G a h |a| a IN group_carrier G}",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> pairwise DISJOINT {left_coset G a h |a| a IN group_carrier G}",
       ),
       t3868,
     ),
@@ -44446,7 +44446,7 @@ fn step_633() -> Unit raise {
   image_right_coset_switch_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> IMAGE (\\a. group_mul G a (group_mul G (group_inv G x) y))\n                  (right_coset G h x) =\n            right_coset G h y",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> IMAGE (\\a. group_mul G a (group_mul G (group_inv G x) y))\n                  (right_coset G h x) =\n            right_coset G h y",
       ),
       t3881,
     ),
@@ -44578,7 +44578,7 @@ fn step_634() -> Unit raise {
   image_left_coset_switch_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> IMAGE (\\a. group_mul G (group_div G y x) a)\n                  (left_coset G x h) =\n            left_coset G y h",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> IMAGE (\\a. group_mul G (group_div G y x) a)\n                  (left_coset G x h) =\n            left_coset G y h",
       ),
       t3894,
     ),
@@ -44639,7 +44639,7 @@ fn step_635() -> Unit raise {
   card_eq_left_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> {left_coset G x h |x| x IN group_carrier G} =_c\n            {right_coset G h x |x| x IN group_carrier G}",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> {left_coset G x h |x| x IN group_carrier G} =_c\n            {right_coset G h x |x| x IN group_carrier G}",
       ),
       t3901,
     ),
@@ -44673,7 +44673,7 @@ fn step_636() -> Unit raise {
   has_size_left_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> ({left_coset G x h | x | x IN group_carrier G} HAS_SIZE n <=>\n             {right_coset G h x | x | x IN group_carrier G} HAS_SIZE n)",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> ({left_coset G x h | x | x IN group_carrier G} HAS_SIZE n <=>\n             {right_coset G h x | x | x IN group_carrier G} HAS_SIZE n)",
       ),
       t3905,
     ),
@@ -44707,7 +44707,7 @@ fn step_637() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall f g. (IMAGE f s = t /\\ IMAGE g t = s) /\\\n           (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n     ==> s =_c t",
+      "∀ f g. (IMAGE f s = t /\\ IMAGE g t = s) /\\\n           (∀ x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n     ==> s =_c t",
     ),
     t3908,
   )
@@ -44754,7 +44754,7 @@ fn step_637() -> Unit raise {
   card_eq_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> right_coset G h x =_c right_coset G h y",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> right_coset G h x =_c right_coset G h y",
       ),
       t3916,
     ),
@@ -44791,7 +44791,7 @@ fn step_638() -> Unit raise {
   group_id_in_left_coset_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h SUBSET group_carrier G /\\ x IN group_carrier G\n        ==> (group_id G IN left_coset G x h <=> group_inv G x IN h)",
+        "∀ G h x:A.\n        h SUBSET group_carrier G /\\ x IN group_carrier G\n        ==> (group_id G IN left_coset G x h <=> group_inv G x IN h)",
       ),
       t3918,
     ),
@@ -44820,7 +44820,7 @@ fn step_639() -> Unit raise {
   group_id_in_left_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (group_id G IN left_coset G x h <=> x IN h)",
+        "∀ G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (group_id G IN left_coset G x h <=> x IN h)",
       ),
       t3920,
     ),
@@ -44851,7 +44851,7 @@ fn step_640() -> Unit raise {
   subgroup_of_left_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (left_coset G x h subgroup_of G <=> left_coset G x h = h)",
+        "∀ G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (left_coset G x h subgroup_of G <=> left_coset G x h = h)",
       ),
       t3921,
     ),
@@ -44888,7 +44888,7 @@ fn step_641() -> Unit raise {
   group_id_in_right_coset_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h SUBSET group_carrier G /\\ x IN group_carrier G\n        ==> (group_id G IN right_coset G h x <=> group_inv G x IN h)",
+        "∀ G h x:A.\n        h SUBSET group_carrier G /\\ x IN group_carrier G\n        ==> (group_id G IN right_coset G h x <=> group_inv G x IN h)",
       ),
       t3923,
     ),
@@ -44917,7 +44917,7 @@ fn step_642() -> Unit raise {
   group_id_in_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (group_id G IN right_coset G h x <=> x IN h)",
+        "∀ G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (group_id G IN right_coset G h x <=> x IN h)",
       ),
       t3925,
     ),
@@ -44948,7 +44948,7 @@ fn step_643() -> Unit raise {
   subgroup_of_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (right_coset G h x subgroup_of G <=> right_coset G h x = h)",
+        "∀ G h x:A.\n        h subgroup_of G /\\ x IN group_carrier G\n        ==> (right_coset G h x subgroup_of G <=> right_coset G h x = h)",
       ),
       t3926,
     ),
@@ -44980,7 +44980,7 @@ fn step_644() -> Unit raise {
   card_eq_left_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> left_coset G x h =_c left_coset G y h",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> left_coset G x h =_c left_coset G y h",
       ),
       t3927,
     ),
@@ -45012,7 +45012,7 @@ fn step_645() -> Unit raise {
   card_eq_right_coset_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> right_coset G h x =_c h",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> right_coset G h x =_c h",
       ),
       t3928,
     ),
@@ -45044,7 +45044,7 @@ fn step_646() -> Unit raise {
   card_eq_left_coset_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> left_coset G x h =_c h",
+        "∀ G h x y:A.\n        h subgroup_of G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> left_coset G x h =_c h",
       ),
       t3929,
     ),
@@ -45089,7 +45089,7 @@ fn step_647() -> Unit raise {
   group_orbit_subgroup_translation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a:A.\n   h subgroup_of G /\\ a IN group_carrier G\n   ==> group_orbit (subgroup_generated G h) (group_carrier G) (group_mul G) a =\n       right_coset G h a",
+        "∀ G h a:A.\n   h subgroup_of G /\\ a IN group_carrier G\n   ==> group_orbit (subgroup_generated G h) (group_carrier G) (group_mul G) a =\n       right_coset G h a",
       ),
       t3932,
     ),
@@ -45132,7 +45132,7 @@ fn step_648() -> Unit raise {
   group_orbit_group_translation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A.\n    a IN group_carrier G\n    ==> group_orbit G (group_carrier G) (group_mul G) a = group_carrier G",
+        "∀ G a:A.\n    a IN group_carrier G\n    ==> group_orbit G (group_carrier G) (group_mul G) a = group_carrier G",
       ),
       t3938,
     ),
@@ -45174,7 +45174,7 @@ fn step_649() -> Unit raise {
   orbit_stabilizer_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n      group_action G s a /\\ x IN s\n      ==> group_orbit G s a x =_c\n          {left_coset G g (group_stabilizer G a x) |g| g IN group_carrier G}",
+        "∀ G s (a:A->X->X) x.\n      group_action G s a /\\ x IN s\n      ==> group_orbit G s a x =_c\n          {left_coset G g (group_stabilizer G a x) |g| g IN group_carrier G}",
       ),
       t3942,
     ),
@@ -45331,7 +45331,7 @@ fn step_650() -> Unit raise {
   orbit_stabilizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x.\n      FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n      ==> CARD (group_orbit G s a x) =\n          CARD {left_coset G g (group_stabilizer G a x) |g|\n                g IN group_carrier G}",
+        "∀ G s (a:A->X->X) x.\n      FINITE(group_carrier G) /\\ group_action G s a /\\ x IN s\n      ==> CARD (group_orbit G s a x) =\n          CARD {left_coset G g (group_stabilizer G a x) |g|\n                g IN group_carrier G}",
       ),
       t3954,
     ),
@@ -45420,7 +45420,7 @@ fn step_651() -> Unit raise {
   group_action_left_coset_multiplication_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h SUBSET group_carrier G\n        ==> group_action G {left_coset G x h | x | x IN group_carrier G}\n                           (IMAGE o group_mul G)",
+        "∀ G h:A->bool.\n        h SUBSET group_carrier G\n        ==> group_action G {left_coset G x h | x | x IN group_carrier G}\n                           (IMAGE o group_mul G)",
       ),
       t3966,
     ),
@@ -45491,7 +45491,7 @@ fn step_652() -> Unit raise {
       group_inv_mul(),
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)"),
+        @parser.parse_term("(?x. P x /\\ Q x) <=> ~(∀ x. P x ==> ~Q x)"),
       ),
     ]),
   )
@@ -45634,7 +45634,7 @@ fn step_652() -> Unit raise {
   group_orbit_left_coset_multiplication_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a:A.\n        a IN group_carrier G /\\ h subgroup_of G\n        ==> group_orbit G { left_coset G x h | x | x IN group_carrier G}\n                          (IMAGE o group_mul G) (left_coset G a h) =\n            { left_coset G x h | x | x IN group_carrier G}",
+        "∀ G h a:A.\n        a IN group_carrier G /\\ h subgroup_of G\n        ==> group_orbit G { left_coset G x h | x | x IN group_carrier G}\n                          (IMAGE o group_mul G) (left_coset G a h) =\n            { left_coset G x h | x | x IN group_carrier G}",
       ),
       t3986,
     ),
@@ -45662,7 +45662,7 @@ fn step_653() -> Unit raise {
   let t4009 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> f(g x) = x) /\\ (forall x. x IN s ==> f x IN s /\\ g(f x) = x) /\\\n    t SUBSET s\n    ==> {x | x IN s /\\ g x IN t} = IMAGE f t",
+        "(∀ x. x IN s ==> f(g x) = x) /\\ (∀ x. x IN s ==> f x IN s /\\ g(f x) = x) /\\\n    t SUBSET s\n    ==> {x | x IN s /\\ g x IN t} = IMAGE f t",
       ),
     ),
   )
@@ -45841,7 +45841,7 @@ fn step_653() -> Unit raise {
   group_stabilizer_left_coset_multiplication_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a:A.\n        a IN group_carrier G /\\ h subgroup_of G\n        ==> group_stabilizer G (IMAGE o group_mul G) (left_coset G a h) =\n            IMAGE (group_conjugation G a) h",
+        "∀ G h a:A.\n        a IN group_carrier G /\\ h subgroup_of G\n        ==> group_stabilizer G (IMAGE o group_mul G) (left_coset G a h) =\n            IMAGE (group_conjugation G a) h",
       ),
       t4012,
     ),
@@ -45880,7 +45880,7 @@ fn step_654() -> Unit raise {
   group_orbit_left_coset_multiplication_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> group_orbit G { left_coset G x h | x | x IN group_carrier G}\n                          (IMAGE o group_mul G) h =\n            { left_coset G x h | x | x IN group_carrier G}",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> group_orbit G { left_coset G x h | x | x IN group_carrier G}\n                          (IMAGE o group_mul G) h =\n            { left_coset G x h | x | x IN group_carrier G}",
       ),
       t4017,
     ),
@@ -45906,7 +45906,7 @@ fn step_655() -> Unit raise {
   )
   let t4024 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("(forall x. x IN s ==> f x = x) ==> IMAGE f s = s"),
+      @parser.parse_term("(∀ x. x IN s ==> f x = x) ==> IMAGE f s = s"),
     ),
   )
   let t4023 = @tactics.disch_then(fn(
@@ -45959,7 +45959,7 @@ fn step_655() -> Unit raise {
   group_stabilizer_left_coset_multiplication_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> group_stabilizer G (IMAGE o group_mul G) h = h",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> group_stabilizer G (IMAGE o group_mul G) h = h",
       ),
       t4026,
     ),
@@ -46252,7 +46252,7 @@ fn step_656() -> Unit raise {
   lagrange_theorem_left_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> {left_coset G x h | x | x IN group_carrier G} *_c h =_c\n            group_carrier G",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> {left_coset G x h | x | x IN group_carrier G} *_c h =_c\n            group_carrier G",
       ),
       t4053,
     ),
@@ -46296,7 +46296,7 @@ fn step_657() -> Unit raise {
   lagrange_theorem_right_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> {right_coset G h x | x | x IN group_carrier G} *_c h =_c\n            group_carrier G",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> {right_coset G h x | x | x IN group_carrier G} *_c h =_c\n            group_carrier G",
       ),
       t4058,
     ),
@@ -46458,7 +46458,7 @@ fn step_658() -> Unit raise {
   lagrange_theorem_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h |x| x IN group_carrier G} * CARD h =\n            CARD(group_carrier G)",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h |x| x IN group_carrier G} * CARD h =\n            CARD(group_carrier G)",
       ),
       t4071,
     ),
@@ -46502,7 +46502,7 @@ fn step_659() -> Unit raise {
   lagrange_theorem_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x |x| x IN group_carrier G} * CARD h =\n            CARD(group_carrier G)",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x |x| x IN group_carrier G} * CARD h =\n            CARD(group_carrier G)",
       ),
       t4076,
     ),
@@ -46621,7 +46621,7 @@ fn step_660() -> Unit raise {
   lagrange_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> (CARD h) divides CARD(group_carrier G)",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> (CARD h) divides CARD(group_carrier G)",
       ),
       t4084,
     ),
@@ -46648,7 +46648,7 @@ fn step_661() -> Unit raise {
   card_left_cosets_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h | x | x IN group_carrier G} divides\n            CARD(group_carrier G)",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h | x | x IN group_carrier G} divides\n            CARD(group_carrier G)",
       ),
       t4085,
     ),
@@ -46675,7 +46675,7 @@ fn step_662() -> Unit raise {
   card_right_cosets_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x | x | x IN group_carrier G} divides\n            CARD(group_carrier G)",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x | x | x IN group_carrier G} divides\n            CARD(group_carrier G)",
       ),
       t4086,
     ),
@@ -46820,7 +46820,7 @@ fn step_663() -> Unit raise {
   lagrange_theorem_left_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h | x | x IN group_carrier G} =\n            CARD(group_carrier G) DIV CARD h",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {left_coset G x h | x | x IN group_carrier G} =\n            CARD(group_carrier G) DIV CARD h",
       ),
       t4098,
     ),
@@ -46965,7 +46965,7 @@ fn step_664() -> Unit raise {
   lagrange_theorem_right_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x | x | x IN group_carrier G} =\n            CARD(group_carrier G) DIV CARD h",
+        "∀ G h:A->bool.\n        FINITE(group_carrier G) /\\ h subgroup_of G\n        ==> CARD {right_coset G h x | x | x IN group_carrier G} =\n            CARD(group_carrier G) DIV CARD h",
       ),
       t4110,
     ),
@@ -47005,7 +47005,7 @@ fn step_665() -> Unit raise {
   group_setmul_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) s1 s2 t1 t2.\n        group_setmul (prod_group G1 G2) (s1 CROSS s2) (t1 CROSS t2) =\n        (group_setmul G1 s1 t1) CROSS (group_setmul G2 s2 t2)",
+        "∀(G1:A group) (G2:B group) s1 s2 t1 t2.\n        group_setmul (prod_group G1 G2) (s1 CROSS s2) (t1 CROSS t2) =\n        (group_setmul G1 s1 t1) CROSS (group_setmul G2 s2 t2)",
       ),
       t4112,
     ),
@@ -47036,7 +47036,7 @@ fn step_666() -> Unit raise {
   right_coset_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 h1 h2 (x1:A) (x2:B).\n        right_coset (prod_group G1 G2) (h1 CROSS h2) (x1,x2) =\n        (right_coset G1 h1 x1) CROSS (right_coset G2 h2 x2)",
+        "∀ G1 G2 h1 h2 (x1:A) (x2:B).\n        right_coset (prod_group G1 G2) (h1 CROSS h2) (x1,x2) =\n        (right_coset G1 h1 x1) CROSS (right_coset G2 h2 x2)",
       ),
       t4113,
     ),
@@ -47067,7 +47067,7 @@ fn step_667() -> Unit raise {
   left_coset_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G1 G2 h1 h2 (x1:A) (x2:B).\n        left_coset (prod_group G1 G2) (x1,x2) (h1 CROSS h2) =\n        (left_coset G1 x1 h1) CROSS (left_coset G2 x2 h2)",
+        "∀ G1 G2 h1 h2 (x1:A) (x2:B).\n        left_coset (prod_group G1 G2) (x1,x2) (h1 CROSS h2) =\n        (left_coset G1 x1 h1) CROSS (left_coset G2 x2 h2)",
       ),
       t4114,
     ),
@@ -47093,7 +47093,7 @@ fn step_668() -> Unit raise {
   let t4128 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x y. R x y ==> f x y = g x y)\n    ==> {f x y | R x y} = {g x y | R x y}",
+        "(∀ x y. R x y ==> f x y = g x y)\n    ==> {f x y | R x y} = {g x y | R x y}",
       ),
     ),
   )
@@ -47178,7 +47178,7 @@ fn step_668() -> Unit raise {
   group_setmul_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k s t.\n        group_setmul (product_group k G)\n                     (cartesian_product k s) (cartesian_product k t) =\n        cartesian_product k (\\i. group_setmul (G i) (s i) (t i))",
+        "∀(G:K->A group) k s t.\n        group_setmul (product_group k G)\n                     (cartesian_product k s) (cartesian_product k t) =\n        cartesian_product k (\\i. group_setmul (G i) (s i) (t i))",
       ),
       t4131,
     ),
@@ -47204,7 +47204,7 @@ fn step_669() -> Unit raise {
   let t4136 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}",
+        "(∀ x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}",
       ),
     ),
   )
@@ -47246,7 +47246,7 @@ fn step_669() -> Unit raise {
   right_coset_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) h x k.\n        right_coset (product_group k G) (cartesian_product k h) x =\n        cartesian_product k (\\i. right_coset (G i) (h i) (x i))",
+        "∀(G:K->A group) h x k.\n        right_coset (product_group k G) (cartesian_product k h) x =\n        cartesian_product k (\\i. right_coset (G i) (h i) (x i))",
       ),
       t4139,
     ),
@@ -47277,7 +47277,7 @@ fn step_670() -> Unit raise {
   left_coset_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) h x k.\n        left_coset (product_group k G) x (cartesian_product k h) =\n        cartesian_product k (\\i. left_coset (G i) (x i) (h i))",
+        "∀(G:K->A group) h x k.\n        left_coset (product_group k G) x (cartesian_product k h) =\n        cartesian_product k (\\i. left_coset (G i) (x i) (h i))",
       ),
       t4141,
     ),
@@ -47304,7 +47304,7 @@ fn step_671() -> Unit raise {
   group_setinv_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        group_setinv (subgroup_generated G h) = group_setinv G",
+        "∀ G h:A->bool.\n        group_setinv (subgroup_generated G h) = group_setinv G",
       ),
       t4142,
     ),
@@ -47331,7 +47331,7 @@ fn step_672() -> Unit raise {
   group_setmul_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        group_setmul (subgroup_generated G h) = group_setmul G",
+        "∀ G h:A->bool.\n        group_setmul (subgroup_generated G h) = group_setmul G",
       ),
       t4143,
     ),
@@ -47358,7 +47358,7 @@ fn step_673() -> Unit raise {
   right_coset_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h k x. right_coset (subgroup_generated G h) k x = right_coset G k x",
+        "∀ G h k x. right_coset (subgroup_generated G h) k x = right_coset G k x",
       ),
       t4144,
     ),
@@ -47385,7 +47385,7 @@ fn step_674() -> Unit raise {
   left_coset_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h k x. left_coset (subgroup_generated G h) x k = left_coset G x k",
+        "∀ G h k x. left_coset (subgroup_generated G h) x k = left_coset G x k",
       ),
       t4145,
     ),
@@ -49138,7 +49138,7 @@ fn step_675() -> Unit raise {
   ])
   let t4213 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x:A. x IN group_carrier(subgroup_generated G s)\n          ==> ~(x = group_id G)\n              ==> forall y. y IN t\n                      ==> ?z y'. z IN group_carrier(subgroup_generated G k) /\\\n                                 y' IN t /\\\n                                 group_mul G y x = group_mul G z y'",
+      "∀ x:A. x IN group_carrier(subgroup_generated G s)\n          ==> ~(x = group_id G)\n              ==> ∀ y. y IN t\n                      ==> ?z y'. z IN group_carrier(subgroup_generated G k) /\\\n                                 y' IN t /\\\n                                 group_mul G y x = group_mul G z y'",
     ),
     fn(
       x4210 : @kernel.Thm,
@@ -49583,7 +49583,7 @@ fn step_675() -> Unit raise {
   ])
   let t4160 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall y x. y IN t /\\ x IN s\n          ==> ?z y'. z IN group_carrier G /\\ y' IN group_carrier G /\\\n                     z IN k /\\ y' IN t /\\\n                     group_mul G y x:A = group_mul G z y'",
+      "∀ y x. y IN t /\\ x IN s\n          ==> ?z y'. z IN group_carrier G /\\ y' IN group_carrier G /\\\n                     z IN k /\\ y' IN t /\\\n                     group_mul G y x:A = group_mul G z y'",
     ),
     fn(
       x4157 : @kernel.Thm,
@@ -49837,7 +49837,7 @@ fn step_675() -> Unit raise {
   schreier_transversal_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) h s t.\n      h subgroup_of G /\\\n      s SUBSET group_carrier G /\\\n      subgroup_generated G s = G /\\\n      (forall x. x IN s ==> group_inv G x IN s) /\\\n      t SUBSET group_carrier G /\\\n      UNIONS {right_coset G h x | x IN t} = group_carrier G /\\\n      t INTER h SUBSET {group_id G}\n      ==> group_carrier(subgroup_generated G\n           (h INTER group_setmul G t (group_setmul G s (group_setinv G t)))) =\n          h",
+        "∀(G:A group) h s t.\n      h subgroup_of G /\\\n      s SUBSET group_carrier G /\\\n      subgroup_generated G s = G /\\\n      (∀ x. x IN s ==> group_inv G x IN s) /\\\n      t SUBSET group_carrier G /\\\n      UNIONS {right_coset G h x | x IN t} = group_carrier G /\\\n      t INTER h SUBSET {group_id G}\n      ==> group_carrier(subgroup_generated G\n           (h INTER group_setmul G t (group_setmul G s (group_setinv G t)))) =\n          h",
       ),
       t4390,
     ),
@@ -49867,7 +49867,7 @@ fn step_677() -> Unit raise {
   normal_subgroup_of_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "(n:A->bool) normal_subgroup_of (G:A group) <=>\n        n subgroup_of G /\\\n        forall x. x IN group_carrier G ==> left_coset G x n = right_coset G n x",
+        "(n:A->bool) normal_subgroup_of (G:A group) <=>\n        n subgroup_of G /\\\n        ∀ x. x IN group_carrier G ==> left_coset G x n = right_coset G n x",
       ),
     ),
   )
@@ -49891,7 +49891,7 @@ fn step_678() -> Unit raise {
   normal_subgroup_imp_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool. n normal_subgroup_of G ==> n subgroup_of G",
+        "∀ G n:A->bool. n normal_subgroup_of G ==> n subgroup_of G",
       ),
       t4391,
     ),
@@ -49918,7 +49918,7 @@ fn step_679() -> Unit raise {
   normal_subgroup_of_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool. n normal_subgroup_of G ==> n SUBSET group_carrier G",
+        "∀ G n:A->bool. n normal_subgroup_of G ==> n SUBSET group_carrier G",
       ),
       t4392,
     ),
@@ -49960,7 +49960,7 @@ fn step_680() -> Unit raise {
   normal_subgroup_of_opposite_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of opposite_group G <=> n normal_subgroup_of G",
+        "∀ G n:A->bool.\n        n normal_subgroup_of opposite_group G <=> n normal_subgroup_of G",
       ),
       t4396,
     ),
@@ -49998,7 +49998,7 @@ fn step_681() -> Unit raise {
   abelian_group_normal_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        abelian_group G ==> (n normal_subgroup_of G <=> n subgroup_of G)",
+        "∀ G n:A->bool.\n        abelian_group G ==> (n normal_subgroup_of G <=> n subgroup_of G)",
       ),
       t4398,
     ),
@@ -50370,7 +50370,7 @@ fn step_682() -> Unit raise {
   normal_subgroup_conjugate_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        forall x. x IN group_carrier G\n            ==> group_setmul G {group_inv G x} (group_setmul G n {x}) = n",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        ∀ x. x IN group_carrier G\n            ==> group_setmul G {group_inv G x} (group_setmul G n {x}) = n",
       ),
       t4433,
     ),
@@ -50495,7 +50495,7 @@ fn step_683() -> Unit raise {
   let t4465 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> f x = x) ==> IMAGE f s SUBSET t ==> s SUBSET t",
+        "(∀ x. x IN s ==> f x = x) ==> IMAGE f s SUBSET t ==> s SUBSET t",
       ),
     ),
   )
@@ -50826,7 +50826,7 @@ fn step_683() -> Unit raise {
   normal_subgroup_conjugate_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n      n normal_subgroup_of G <=>\n      n subgroup_of G /\\\n      forall x. x IN group_carrier G\n          ==> group_setmul G {group_inv G x} (group_setmul G n {x}) SUBSET n",
+        "∀ G n:A->bool.\n      n normal_subgroup_of G <=>\n      n subgroup_of G /\\\n      ∀ x. x IN group_carrier G\n          ==> group_setmul G {group_inv G x} (group_setmul G n {x}) SUBSET n",
       ),
       t4478,
     ),
@@ -51251,7 +51251,7 @@ fn step_684() -> Unit raise {
   normal_subgroup_conjugation_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall a. a IN group_carrier G ==> IMAGE (group_conjugation G a) h = h",
+        "∀ G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        ∀ a. a IN group_carrier G ==> IMAGE (group_conjugation G a) h = h",
       ),
       t4524,
     ),
@@ -51284,7 +51284,7 @@ fn step_685() -> Unit raise {
   let t4544 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN h ==> f(g x) = x)\n    ==> IMAGE g h SUBSET h ==> h SUBSET IMAGE f h",
+        "(∀ x. x IN h ==> f(g x) = x)\n    ==> IMAGE g h SUBSET h ==> h SUBSET IMAGE f h",
       ),
     ),
   )
@@ -51485,7 +51485,7 @@ fn step_685() -> Unit raise {
   normal_subgroup_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall a. a IN group_carrier G ==> IMAGE (group_conjugation G a) h SUBSET h",
+        "∀ G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        ∀ a. a IN group_carrier G ==> IMAGE (group_conjugation G a) h SUBSET h",
       ),
       t4548,
     ),
@@ -51518,7 +51518,7 @@ fn step_686() -> Unit raise {
   let t4560 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN h ==> g(f x) = x)\n    ==> h SUBSET IMAGE f h ==> IMAGE g h SUBSET h",
+        "(∀ x. x IN h ==> g(f x) = x)\n    ==> h SUBSET IMAGE f h ==> IMAGE g h SUBSET h",
       ),
     ),
   )
@@ -51637,7 +51637,7 @@ fn step_686() -> Unit raise {
   normal_subgroup_conjugation_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall a. a IN group_carrier G ==> h SUBSET IMAGE (group_conjugation G a) h",
+        "∀ G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        ∀ a. a IN group_carrier G ==> h SUBSET IMAGE (group_conjugation G a) h",
       ),
       t4564,
     ),
@@ -51664,7 +51664,7 @@ fn step_687() -> Unit raise {
   abelian_group_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a x:A.\n        abelian_group G /\\ a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a x = x",
+        "∀ G a x:A.\n        abelian_group G /\\ a IN group_carrier G /\\ x IN group_carrier G\n        ==> group_conjugation G a x = x",
       ),
       t4565,
     ),
@@ -51695,7 +51695,7 @@ fn step_688() -> Unit raise {
   normal_subgroup_of_inters_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G gs. (forall g. g IN gs ==> g normal_subgroup_of G) /\\ ~(gs = {})\n          ==> INTERS gs normal_subgroup_of G",
+        "∀ G gs. (∀ g. g IN gs ==> g normal_subgroup_of G) /\\ ~(gs = {})\n          ==> INTERS gs normal_subgroup_of G",
       ),
       t4567,
     ),
@@ -51735,7 +51735,7 @@ fn step_689() -> Unit raise {
   normal_subgroup_of_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G\n        ==> g INTER h normal_subgroup_of G",
+        "∀ G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G\n        ==> g INTER h normal_subgroup_of G",
       ),
       t4571,
     ),
@@ -51766,7 +51766,7 @@ fn step_690() -> Unit raise {
   normal_subgroup_of_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (forall h. h IN u ==> h normal_subgroup_of G) /\\\n        (forall g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) normal_subgroup_of G",
+        "∀ G (u:(A->bool)->bool).\n        ~(u = {}) /\\\n        (∀ h. h IN u ==> h normal_subgroup_of G) /\\\n        (∀ g h. g IN u /\\ h IN u ==> g SUBSET h \\/ h SUBSET g)\n        ==> (UNIONS u) normal_subgroup_of G",
       ),
       t4573,
     ),
@@ -51941,7 +51941,7 @@ fn step_691() -> Unit raise {
   normal_subgroup_action_kernel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X).\n        group_action G s a\n        ==> {g | g IN group_carrier G /\\ forall x. x IN s ==> a g x = x}\n            normal_subgroup_of G",
+        "∀ G s (a:A->X->X).\n        group_action G s a\n        ==> {g | g IN group_carrier G /\\ ∀ x. x IN s ==> a g x = x}\n            normal_subgroup_of G",
       ),
       t4592,
     ),
@@ -51971,7 +51971,7 @@ fn step_692() -> Unit raise {
       @tactics.match_mp_tac(
         @sets.set_rule(
           @parser.parse_term(
-            "(forall x. x IN s ==> x IN f x /\\ x IN g x) /\\\n      (forall x y. x IN s /\\ y IN s /\\ ~(f x = f y) ==> DISJOINT (f x) (f y)) /\\\n      {f x | x IN s} = {g x | x IN s}\n      ==> forall x. x IN s ==> f x = g x",
+            "(∀ x. x IN s ==> x IN f x /\\ x IN g x) /\\\n      (∀ x y. x IN s /\\ y IN s /\\ ~(f x = f y) ==> DISJOINT (f x) (f y)) /\\\n      {f x | x IN s} = {g x | x IN s}\n      ==> ∀ x. x IN s ==> f x = g x",
           ),
         ),
       ),
@@ -51985,7 +51985,7 @@ fn step_692() -> Unit raise {
       @tactics.match_mp_tac(
         @sets.set_rule(
           @parser.parse_term(
-            "(forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}",
+            "(∀ x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}",
           ),
         ),
       ),
@@ -52017,7 +52017,7 @@ fn step_692() -> Unit raise {
   normal_subgroup_left_eq_right_cosets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {left_coset G x n |x| x IN group_carrier G} =\n        {right_coset G n x |x| x IN group_carrier G}",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {left_coset G x n |x| x IN group_carrier G} =\n        {right_coset G n x |x| x IN group_carrier G}",
       ),
       t4601,
     ),
@@ -52070,7 +52070,7 @@ fn step_693() -> Unit raise {
   let t4620 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN t ==> ~(P x))\n    ==> (forall x. x IN t DIFF s ==> P x) ==> t SUBSET s",
+        "(∀ x. x IN t ==> ~(P x))\n    ==> (∀ x. x IN t DIFF s ==> P x) ==> t SUBSET s",
       ),
     ),
   )
@@ -52271,7 +52271,7 @@ fn step_693() -> Unit raise {
   )
   let t4623 = (
     @parser.parse_term(
-      "(forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {left_coset G x n |x| x IN group_carrier G} SUBSET\n        {right_coset G n x |x| x IN group_carrier G}) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {right_coset G n x |x| x IN group_carrier G} SUBSET\n        {left_coset G x n |x| x IN group_carrier G})",
+      "(∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {left_coset G x n |x| x IN group_carrier G} SUBSET\n        {right_coset G n x |x| x IN group_carrier G}) /\\\n   (∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\\n        {right_coset G n x |x| x IN group_carrier G} SUBSET\n        {left_coset G x n |x| x IN group_carrier G})",
     ),
     t4622,
   )
@@ -52357,7 +52357,7 @@ fn step_694() -> Unit raise {
     t4639,
   ])
   let t4631 = @parser.parse_term(
-    "forall x y:A. x IN group_carrier G /\\ y IN group_carrier G\n            ==> (y IN left_coset G (group_inv G x) h <=>\n                 y IN right_coset G h (group_inv G x))",
+    "∀ x y:A. x IN group_carrier G /\\ y IN group_carrier G\n            ==> (y IN left_coset G (group_inv G x) h <=>\n                 y IN right_coset G h (group_inv G x))",
   )
   let t4632 = @tactics.trans_tac(@theorems.eq_trans())(t4631)
   let t4630 = @simp.gen_rewrite_tac(
@@ -52396,7 +52396,7 @@ fn step_694() -> Unit raise {
   normal_subgroup_mul_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        forall x y. x IN group_carrier G /\\ y IN group_carrier G\n              ==> (group_mul G x y IN h <=> group_mul G y x IN h)",
+        "∀ G h:A->bool.\n        h normal_subgroup_of G <=>\n        h subgroup_of G /\\\n        ∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n              ==> (group_mul G x y IN h <=> group_mul G y x IN h)",
       ),
       t4641,
     ),
@@ -52427,7 +52427,7 @@ fn step_695() -> Unit raise {
   )
   trivial_normal_subgroup_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. {group_id G} normal_subgroup_of G"),
+      @parser.parse_term("∀ G:A group. {group_id G} normal_subgroup_of G"),
       t4642,
     ),
   )
@@ -52456,7 +52456,7 @@ fn step_696() -> Unit raise {
   )
   carrier_normal_subgroup_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. (group_carrier G) normal_subgroup_of G"),
+      @parser.parse_term("∀ G:A group. (group_carrier G) normal_subgroup_of G"),
       t4644,
     ),
   )
@@ -52612,7 +52612,7 @@ fn step_697() -> Unit raise {
   group_setinv_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (right_coset G n a) =\n            right_coset G n (group_inv G a)",
+        "∀ G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (right_coset G n a) =\n            right_coset G n (group_inv G a)",
       ),
       t4661,
     ),
@@ -52653,7 +52653,7 @@ fn step_698() -> Unit raise {
   group_setinv_left_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (left_coset G a n) =\n            left_coset G (group_inv G a) n",
+        "∀ G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_setinv G (left_coset G a n) =\n            left_coset G (group_inv G a) n",
       ),
       t4664,
     ),
@@ -53225,7 +53225,7 @@ fn step_699() -> Unit raise {
   group_setmul_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_setmul G (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_mul G a b)",
+        "∀ G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_setmul G (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_mul G a b)",
       ),
       t4714,
     ),
@@ -53266,7 +53266,7 @@ fn step_700() -> Unit raise {
   group_setmul_left_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_setmul G (left_coset G a n) (left_coset G b n) =\n            left_coset G (group_mul G a b) n",
+        "∀ G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_setmul G (left_coset G a n) (left_coset G b n) =\n            left_coset G (group_mul G a b) n",
       ),
       t4717,
     ),
@@ -53336,7 +53336,7 @@ fn step_701() -> Unit raise {
   cross_normal_subgroup_of_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) h1 h2.\n        (h1 CROSS h2) normal_subgroup_of (prod_group G1 G2) <=>\n        h1 normal_subgroup_of G1 /\\ h2 normal_subgroup_of G2",
+        "∀(G1:A group) (G2:B group) h1 h2.\n        (h1 CROSS h2) normal_subgroup_of (prod_group G1 G2) <=>\n        h1 normal_subgroup_of G1 /\\ h2 normal_subgroup_of G2",
       ),
       t4726,
     ),
@@ -53382,7 +53382,7 @@ fn step_702() -> Unit raise {
   normal_subgroup_of_subgroup_generated_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s h:A->bool.\n        h normal_subgroup_of G /\\\n        h SUBSET group_carrier(subgroup_generated G s)\n        ==> h normal_subgroup_of (subgroup_generated G s)",
+        "∀ G s h:A->bool.\n        h normal_subgroup_of G /\\\n        h SUBSET group_carrier(subgroup_generated G s)\n        ==> h normal_subgroup_of (subgroup_generated G s)",
       ),
       t4729,
     ),
@@ -53576,7 +53576,7 @@ fn step_703() -> Unit raise {
   normal_subgroup_of_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s h:A->bool.\n        h normal_subgroup_of G /\\ h SUBSET s\n        ==> h normal_subgroup_of (subgroup_generated G s)",
+        "∀ G s h:A->bool.\n        h normal_subgroup_of G /\\ h SUBSET s\n        ==> h normal_subgroup_of (subgroup_generated G s)",
       ),
       t4743,
     ),
@@ -53677,7 +53677,7 @@ fn step_704() -> Unit raise {
   let t4749 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> {f x y | y IN t} = {f y x | y IN t})\n    ==> {f x y | x IN s /\\ y IN t} = {f y x | y IN t /\\ x IN s}",
+        "(∀ x. x IN s ==> {f x y | y IN t} = {f y x | y IN t})\n    ==> {f x y | x IN s /\\ y IN t} = {f y x | y IN t /\\ x IN s}",
       ),
     ),
   )
@@ -53737,7 +53737,7 @@ fn step_704() -> Unit raise {
   group_setmul_normal_subgroup_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n h:A->bool.\n        n normal_subgroup_of G /\\ h subgroup_of G\n        ==> group_setmul G n h subgroup_of G",
+        "∀ G n h:A->bool.\n        n normal_subgroup_of G /\\ h subgroup_of G\n        ==> group_setmul G n h subgroup_of G",
       ),
       t4762,
     ),
@@ -53838,7 +53838,7 @@ fn step_705() -> Unit raise {
   let t4767 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> {f x y | y IN t} = {f y x | y IN t})\n    ==> {f x y | x IN s /\\ y IN t} = {f y x | y IN t /\\ x IN s}",
+        "(∀ x. x IN s ==> {f x y | y IN t} = {f y x | y IN t})\n    ==> {f x y | x IN s /\\ y IN t} = {f y x | y IN t /\\ x IN s}",
       ),
     ),
   )
@@ -53894,7 +53894,7 @@ fn step_705() -> Unit raise {
   group_setmul_normal_subgroup_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h n:A->bool.\n        h subgroup_of G /\\ n normal_subgroup_of G\n        ==> group_setmul G h n subgroup_of G",
+        "∀ G h n:A->bool.\n        h subgroup_of G /\\ n normal_subgroup_of G\n        ==> group_setmul G h n subgroup_of G",
       ),
       t4780,
     ),
@@ -54144,7 +54144,7 @@ fn step_706() -> Unit raise {
   group_setmul_normal_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h k:A->bool.\n        h normal_subgroup_of G /\\ k normal_subgroup_of G\n        ==> group_setmul G h k normal_subgroup_of G",
+        "∀ G h k:A->bool.\n        h normal_subgroup_of G /\\ k normal_subgroup_of G\n        ==> group_setmul G h k normal_subgroup_of G",
       ),
       t4799,
     ),
@@ -54176,7 +54176,7 @@ fn step_707() -> Unit raise {
   carrier_subgroup_generated_union_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h subgroup_of G\n        ==> group_carrier(subgroup_generated G (g UNION h)) =\n            group_setmul G g h",
+        "∀ G g h:A->bool.\n        g normal_subgroup_of G /\\ h subgroup_of G\n        ==> group_carrier(subgroup_generated G (g UNION h)) =\n            group_setmul G g h",
       ),
       t4800,
     ),
@@ -54208,7 +54208,7 @@ fn step_708() -> Unit raise {
   carrier_subgroup_generated_union_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h normal_subgroup_of G\n        ==> group_carrier(subgroup_generated G (g UNION h)) =\n            group_setmul G g h",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h normal_subgroup_of G\n        ==> group_carrier(subgroup_generated G (g UNION h)) =\n            group_setmul G g h",
       ),
       t4801,
     ),
@@ -54263,7 +54263,7 @@ fn step_710() -> Unit raise {
   group_conjugate_refl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_conjugate G s s <=> s SUBSET group_carrier G",
+        "∀ G s:A->bool.\n        group_conjugate G s s <=> s SUBSET group_carrier G",
       ),
       t4804,
     ),
@@ -54316,7 +54316,7 @@ fn step_711() -> Unit raise {
   group_conjugate_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool. group_conjugate G s t <=> group_conjugate G t s",
+        "∀ G s t:A->bool. group_conjugate G s t <=> group_conjugate G t s",
       ),
       t4815,
     ),
@@ -54347,7 +54347,7 @@ fn step_712() -> Unit raise {
   group_conjugate_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t u:A->bool.\n        group_conjugate G s t /\\ group_conjugate G t u\n        ==> group_conjugate G s u",
+        "∀ G s t u:A->bool.\n        group_conjugate G s t /\\ group_conjugate G t u\n        ==> group_conjugate G s u",
       ),
       t4817,
     ),
@@ -54432,7 +54432,7 @@ fn step_713() -> Unit raise {
   group_conjugate_subgroups_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        group_conjugate G s t\n        ==> group_conjugate G (group_carrier(subgroup_generated G s))\n                              (group_carrier(subgroup_generated G t))",
+        "∀ G s t:A->bool.\n        group_conjugate G s t\n        ==> group_conjugate G (group_carrier(subgroup_generated G s))\n                              (group_carrier(subgroup_generated G t))",
       ),
       t4828,
     ),
@@ -54489,7 +54489,7 @@ fn step_714() -> Unit raise {
   group_conjugate_imp_isomorphic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n      group_conjugate G s t\n      ==> (subgroup_generated G s) isomorphic_group (subgroup_generated G t)",
+        "∀ G s t:A->bool.\n      group_conjugate G s t\n      ==> (subgroup_generated G s) isomorphic_group (subgroup_generated G t)",
       ),
       t4835,
     ),
@@ -54602,7 +54602,7 @@ fn step_715() -> Unit raise {
   )
   group_conjugate_imp_card_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G s t:A->bool. group_conjugate G s t ==> s =_c t"),
+      @parser.parse_term("∀ G s t:A->bool. group_conjugate G s t ==> s =_c t"),
       t4845,
     ),
   )
@@ -54860,7 +54860,7 @@ fn step_716() -> Unit raise {
   group_orbit_conjugate_stabilizers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n      group_action G s a /\\ group_orbit G s a x y\n      ==> group_conjugate G (group_stabilizer G a x) (group_stabilizer G a y)",
+        "∀ G s (a:A->X->X) x y.\n      group_action G s a /\\ group_orbit G s a x y\n      ==> group_conjugate G (group_stabilizer G a x) (group_stabilizer G a y)",
       ),
       t4865,
     ),
@@ -54890,7 +54890,7 @@ fn step_717() -> Unit raise {
   card_eq_group_orbit_stabilizers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) x y.\n        group_action G s a /\\ group_orbit G s a x y\n        ==> group_stabilizer G a x =_c group_stabilizer G a y",
+        "∀ G s (a:A->X->X) x y.\n        group_action G s a /\\ group_orbit G s a x y\n        ==> group_stabilizer G a x =_c group_stabilizer G a y",
       ),
       t4866,
     ),
@@ -54914,7 +54914,7 @@ fn step_718() -> Unit raise {
   group_centralizer_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "group_centralizer G s =\n        {x:A | x IN group_carrier G /\\\n               forall y. y IN group_carrier G /\\ y IN s\n                   ==> group_mul G x y = group_mul G y x}",
+        "group_centralizer G s =\n        {x:A | x IN group_carrier G /\\\n               ∀ y. y IN group_carrier G /\\ y IN s\n                   ==> group_mul G x y = group_mul G y x}",
       ),
     ),
   )
@@ -54965,7 +54965,7 @@ fn step_720() -> Unit raise {
   group_centralizer_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_centralizer G s =\n             {x | x IN group_carrier G /\\\n                  forall y. y IN s ==> group_mul G x y = group_mul G y x}",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_centralizer G s =\n             {x | x IN group_carrier G /\\\n                  ∀ y. y IN s ==> group_mul G x y = group_mul G y x}",
       ),
       t4868,
     ),
@@ -54995,7 +54995,7 @@ fn step_721() -> Unit raise {
   group_normalizer_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_normalizer G s =\n             {x | x IN group_carrier G /\\\n                  group_setmul G {x} s = group_setmul G s {x}}",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_normalizer G s =\n             {x | x IN group_carrier G /\\\n                  group_setmul G {x} s = group_setmul G s {x}}",
       ),
       t4869,
     ),
@@ -55040,7 +55040,7 @@ fn step_722() -> Unit raise {
   group_normalizer_conjugation_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_normalizer G s =\n             {x | x IN group_carrier G /\\\n                  IMAGE (group_conjugation G x) (group_carrier G INTER s) =\n                  (group_carrier G INTER s)}",
+        "∀ G s:A->bool.\n        group_normalizer G s =\n             {x | x IN group_carrier G /\\\n                  IMAGE (group_conjugation G x) (group_carrier G INTER s) =\n                  (group_carrier G INTER s)}",
       ),
       t4874,
     ),
@@ -55070,7 +55070,7 @@ fn step_723() -> Unit raise {
   group_normalizer_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_normalizer G s =\n            {x | x IN group_carrier G /\\ IMAGE (group_conjugation G x) s = s}",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_normalizer G s =\n            {x | x IN group_carrier G /\\ IMAGE (group_conjugation G x) s = s}",
       ),
       t4875,
     ),
@@ -55146,7 +55146,7 @@ fn step_724() -> Unit raise {
   group_normalizer_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G /\\ FINITE s\n        ==> group_normalizer G s =\n            {x | x IN group_carrier G /\\\n                 IMAGE (group_conjugation G x) s SUBSET s}",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G /\\ FINITE s\n        ==> group_normalizer G s =\n            {x | x IN group_carrier G /\\\n                 IMAGE (group_conjugation G x) s SUBSET s}",
       ),
       t4886,
     ),
@@ -55175,7 +55175,7 @@ fn step_725() -> Unit raise {
   group_centralizer_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_centralizer G s =\n        group_centralizer G (group_carrier G INTER s)",
+        "∀ G s:A->bool.\n        group_centralizer G s =\n        group_centralizer G (group_carrier G INTER s)",
       ),
       t4888,
     ),
@@ -55205,7 +55205,7 @@ fn step_726() -> Unit raise {
   group_normalizer_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_normalizer G s =\n        group_normalizer G (group_carrier G INTER s)",
+        "∀ G s:A->bool.\n        group_normalizer G s =\n        group_normalizer G (group_carrier G INTER s)",
       ),
       t4889,
     ),
@@ -55232,7 +55232,7 @@ fn step_727() -> Unit raise {
   group_centralizer_subset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_centralizer G s SUBSET group_carrier G",
+        "∀ G s:A->bool. group_centralizer G s SUBSET group_carrier G",
       ),
       t4890,
     ),
@@ -55259,7 +55259,7 @@ fn step_728() -> Unit raise {
   group_normalizer_subset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_normalizer G s SUBSET group_carrier G",
+        "∀ G s:A->bool. group_normalizer G s SUBSET group_carrier G",
       ),
       t4891,
     ),
@@ -55286,7 +55286,7 @@ fn step_729() -> Unit raise {
   finite_group_centralizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) s. FINITE(group_carrier G) ==> FINITE(group_centralizer G s)",
+        "∀(G:A group) s. FINITE(group_carrier G) ==> FINITE(group_centralizer G s)",
       ),
       t4892,
     ),
@@ -55313,7 +55313,7 @@ fn step_730() -> Unit raise {
   finite_group_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) s. FINITE(group_carrier G) ==> FINITE(group_normalizer G s)",
+        "∀(G:A group) s. FINITE(group_carrier G) ==> FINITE(group_normalizer G s)",
       ),
       t4893,
     ),
@@ -55369,7 +55369,7 @@ fn step_731() -> Unit raise {
   group_centralizer_subset_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool. group_centralizer G s SUBSET group_normalizer G s",
+        "∀ G s:A->bool. group_centralizer G s SUBSET group_normalizer G s",
       ),
       t4900,
     ),
@@ -55437,7 +55437,7 @@ fn step_732() -> Unit raise {
   )
   subgroup_group_centralizer_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G s:A->bool. (group_centralizer G s) subgroup_of G"),
+      @parser.parse_term("∀ G s:A->bool. (group_centralizer G s) subgroup_of G"),
       t4908,
     ),
   )
@@ -55515,7 +55515,7 @@ fn step_733() -> Unit raise {
   )
   subgroup_group_normalizer_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G s:A->bool. (group_normalizer G s) subgroup_of G"),
+      @parser.parse_term("∀ G s:A->bool. (group_normalizer G s) subgroup_of G"),
       t4919,
     ),
   )
@@ -55618,7 +55618,7 @@ fn step_734() -> Unit raise {
   group_centralizer_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_centralizer (subgroup_generated G h) s =\n             h INTER group_centralizer G s",
+        "∀ G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_centralizer (subgroup_generated G h) s =\n             h INTER group_centralizer G s",
       ),
       t4930,
     ),
@@ -55720,7 +55720,7 @@ fn step_735() -> Unit raise {
   group_normalizer_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_normalizer (subgroup_generated G h) s =\n             h INTER group_normalizer G s",
+        "∀ G h s:A->bool.\n        s SUBSET h /\\ h subgroup_of G\n        ==> group_normalizer (subgroup_generated G h) s =\n             h INTER group_normalizer G s",
       ),
       t4941,
     ),
@@ -55750,7 +55750,7 @@ fn step_736() -> Unit raise {
   )
   in_group_centralizer_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(G:A group) s. group_id G IN group_centralizer G s"),
+      @parser.parse_term("∀(G:A group) s. group_id G IN group_centralizer G s"),
       t4943,
     ),
   )
@@ -55779,7 +55779,7 @@ fn step_737() -> Unit raise {
   )
   in_group_normalizer_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(G:A group) s. group_id G IN group_normalizer G s"),
+      @parser.parse_term("∀(G:A group) s. group_id G IN group_normalizer G s"),
       t4944,
     ),
   )
@@ -55804,7 +55804,7 @@ fn step_738() -> Unit raise {
   )
   group_centralizer_nonempty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(G:A group) s. ~(group_centralizer G s = {})"),
+      @parser.parse_term("∀(G:A group) s. ~(group_centralizer G s = {})"),
       t4945,
     ),
   )
@@ -55829,7 +55829,7 @@ fn step_739() -> Unit raise {
   )
   group_normalizer_nonempty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(G:A group) s. ~(group_normalizer G s = {})"),
+      @parser.parse_term("∀(G:A group) s. ~(group_normalizer G s = {})"),
       t4946,
     ),
   )
@@ -55857,7 +55857,7 @@ fn step_740() -> Unit raise {
   group_centralizer_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_centralizer G s <=>\n        s SUBSET group_carrier G /\\\n        forall a b. a IN s /\\ b IN s ==> group_mul G a b = group_mul G b a",
+        "∀ G s:A->bool.\n        s SUBSET group_centralizer G s <=>\n        s SUBSET group_carrier G /\\\n        ∀ a b. a IN s /\\ b IN s ==> group_mul G a b = group_mul G b a",
       ),
       t4948,
     ),
@@ -55898,7 +55898,7 @@ fn step_741() -> Unit raise {
   group_centralizer_subset_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G\n        ==> (h SUBSET group_centralizer G h <=>\n             abelian_group(subgroup_generated G h))",
+        "∀ G h:A->bool.\n        h subgroup_of G\n        ==> (h SUBSET group_centralizer G h <=>\n             abelian_group(subgroup_generated G h))",
       ),
       t4951,
     ),
@@ -55927,7 +55927,7 @@ fn step_742() -> Unit raise {
   group_centre_eq_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        group_centralizer G (group_carrier G) = group_carrier G <=>\n        abelian_group G",
+        "∀ G:A group.\n        group_centralizer G (group_carrier G) = group_carrier G <=>\n        abelian_group G",
       ),
       t4953,
     ),
@@ -55956,7 +55956,7 @@ fn step_743() -> Unit raise {
   group_centralizer_centralizer_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_centralizer G (group_centralizer G s) <=>\n        s SUBSET group_carrier G",
+        "∀ G s:A->bool.\n        s SUBSET group_centralizer G (group_centralizer G s) <=>\n        s SUBSET group_carrier G",
       ),
       t4955,
     ),
@@ -55982,7 +55982,7 @@ fn step_744() -> Unit raise {
       group_carrier_subgroup_generated_subset(),
       @sets.set_rule(
         @parser.parse_term(
-          "s SUBSET {x | x IN t /\\ Q x} <=> s SUBSET t /\\ forall x. x IN s ==> Q x",
+          "s SUBSET {x | x IN t /\\ Q x} <=> s SUBSET t /\\ ∀ x. x IN s ==> Q x",
         ),
       ),
     ]),
@@ -56028,7 +56028,7 @@ fn step_744() -> Unit raise {
   group_normalizer_maximal_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h n:A->bool.\n        h normal_subgroup_of (subgroup_generated G n) <=>\n        h subgroup_of (subgroup_generated G n) /\\\n        group_carrier G INTER n SUBSET group_normalizer G h",
+        "∀ G h n:A->bool.\n        h normal_subgroup_of (subgroup_generated G n) <=>\n        h subgroup_of (subgroup_generated G n) /\\\n        group_carrier G INTER n SUBSET group_normalizer G h",
       ),
       t4961,
     ),
@@ -56065,7 +56065,7 @@ fn step_745() -> Unit raise {
   group_normalizer_maximal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h n:A->bool.\n        n subgroup_of G\n        ==> (h normal_subgroup_of (subgroup_generated G n) <=>\n             h subgroup_of G /\\ h SUBSET n /\\ n SUBSET group_normalizer G h)",
+        "∀ G h n:A->bool.\n        n subgroup_of G\n        ==> (h normal_subgroup_of (subgroup_generated G n) <=>\n             h subgroup_of G /\\ h SUBSET n /\\ n SUBSET group_normalizer G h)",
       ),
       t4963,
     ),
@@ -56108,7 +56108,7 @@ fn step_746() -> Unit raise {
   normal_subgroup_normalizer_contains_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ group_carrier G SUBSET group_normalizer G n",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ group_carrier G SUBSET group_normalizer G n",
       ),
       t4969,
     ),
@@ -56144,7 +56144,7 @@ fn step_747() -> Unit raise {
   normal_subgroup_normalizer_eq_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ group_normalizer G n = group_carrier G",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ group_normalizer G n = group_carrier G",
       ),
       t4971,
     ),
@@ -56185,7 +56185,7 @@ fn step_748() -> Unit raise {
   group_normalizer_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h subgroup_of G ==> h SUBSET group_normalizer G h",
+        "∀ G h:A->bool.\n        h subgroup_of G ==> h SUBSET group_normalizer G h",
       ),
       t4974,
     ),
@@ -56225,7 +56225,7 @@ fn step_749() -> Unit raise {
   normal_subgroup_of_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        h normal_subgroup_of (subgroup_generated G (group_normalizer G h)) <=>\n        h subgroup_of G",
+        "∀ G h:A->bool.\n        h normal_subgroup_of (subgroup_generated G (group_normalizer G h)) <=>\n        h subgroup_of G",
       ),
       t4977,
     ),
@@ -56269,7 +56269,7 @@ fn step_750() -> Unit raise {
   group_centralizer_pointwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_centralizer G s =\n        if s = {} then group_carrier G\n        else INTERS {group_centralizer G {x} | x IN s}",
+        "∀ G s:A->bool.\n        group_centralizer G s =\n        if s = {} then group_carrier G\n        else INTERS {group_centralizer G {x} | x IN s}",
       ),
       t4981,
     ),
@@ -56300,7 +56300,7 @@ fn step_751() -> Unit raise {
   group_centralizer_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        group_centralizer G s =\n         {x | x IN group_carrier G /\\\n              forall y. y IN group_carrier G /\\ y IN s\n                  ==> group_conjugation G x y = y}",
+        "∀ G s:A->bool.\n        group_centralizer G s =\n         {x | x IN group_carrier G /\\\n              ∀ y. y IN group_carrier G /\\ y IN s\n                  ==> group_conjugation G x y = y}",
       ),
       t4983,
     ),
@@ -56536,7 +56536,7 @@ fn step_752() -> Unit raise {
   normal_subgroup_centralizer_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        group_centralizer G h normal_subgroup_of\n        subgroup_generated G (group_normalizer G h)",
+        "∀ G h:A->bool.\n        group_centralizer G h normal_subgroup_of\n        subgroup_generated G (group_normalizer G h)",
       ),
       t5024,
     ),
@@ -56567,7 +56567,7 @@ fn step_753() -> Unit raise {
   normal_subgroup_centralizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_centralizer G n normal_subgroup_of G",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_centralizer G n normal_subgroup_of G",
       ),
       t5025,
     ),
@@ -56631,7 +56631,7 @@ fn step_754() -> Unit raise {
   group_normalizer_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A. group_normalizer G {a} = group_centralizer G {a}",
+        "∀ G a:A. group_normalizer G {a} = group_centralizer G {a}",
       ),
       t5032,
     ),
@@ -56660,7 +56660,7 @@ fn step_755() -> Unit raise {
   group_centralizer_galois_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ t SUBSET group_carrier G\n        ==> (s SUBSET group_centralizer G t <=>\n             t SUBSET group_centralizer G s)",
+        "∀ G s t:A->bool.\n        s SUBSET group_carrier G /\\ t SUBSET group_carrier G\n        ==> (s SUBSET group_centralizer G t <=>\n             t SUBSET group_centralizer G s)",
       ),
       t5034,
     ),
@@ -56689,7 +56689,7 @@ fn step_756() -> Unit raise {
   group_centralizer_galois_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET group_carrier G /\\ t SUBSET group_centralizer G s\n        ==> s SUBSET group_centralizer G t",
+        "∀ G s t:A->bool.\n        s SUBSET group_carrier G /\\ t SUBSET group_centralizer G s\n        ==> s SUBSET group_centralizer G t",
       ),
       t5036,
     ),
@@ -56718,7 +56718,7 @@ fn step_757() -> Unit raise {
   group_centralizer_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        s SUBSET t ==> group_centralizer G t SUBSET group_centralizer G s",
+        "∀ G s t:A->bool.\n        s SUBSET t ==> group_centralizer G t SUBSET group_centralizer G s",
       ),
       t5038,
     ),
@@ -56839,7 +56839,7 @@ fn step_758() -> Unit raise {
   group_action_conjugation_normal_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_action G n (group_conjugation G)",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_action G n (group_conjugation G)",
       ),
       t5051,
     ),
@@ -56876,7 +56876,7 @@ fn step_759() -> Unit raise {
   group_stabilizer_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A.\n     a IN group_carrier G\n     ==> group_stabilizer G (group_conjugation G) a =\n         group_centralizer G {a}",
+        "∀ G a:A.\n     a IN group_carrier G\n     ==> group_stabilizer G (group_conjugation G) a =\n         group_centralizer G {a}",
       ),
       t5054,
     ),
@@ -56940,7 +56940,7 @@ fn step_760() -> Unit raise {
   group_orbit_conjugation_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s x:A.\n        s SUBSET group_carrier G\n        ==> group_orbit G s (group_conjugation G) x =\n            if x IN s then {y | y IN s /\\ group_conjugate G {x} {y}} else {}",
+        "∀ G s x:A.\n        s SUBSET group_carrier G\n        ==> group_orbit G s (group_conjugation G) x =\n            if x IN s then {y | y IN s /\\ group_conjugate G {x} {y}} else {}",
       ),
       t5062,
     ),
@@ -56967,7 +56967,7 @@ fn step_761() -> Unit raise {
   group_orbit_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        group_orbit G (group_carrier G) (group_conjugation G) x =\n        if x IN group_carrier G\n        then {y | y IN group_carrier G /\\ group_conjugate G {x} {y}}\n        else {}",
+        "∀ G x:A.\n        group_orbit G (group_carrier G) (group_conjugation G) x =\n        if x IN group_carrier G\n        then {y | y IN group_carrier G /\\ group_conjugate G {x} {y}}\n        else {}",
       ),
       t5063,
     ),
@@ -57001,7 +57001,7 @@ fn step_762() -> Unit raise {
   group_action_image_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G u:(A->bool)->bool.\n        (forall t. t IN u ==> t SUBSET group_carrier G) /\\\n        (forall g t. g IN group_carrier G /\\ t IN u\n               ==> IMAGE (group_conjugation G g) t IN u)\n        ==> group_action G u (IMAGE o group_conjugation G)",
+        "∀ G u:(A->bool)->bool.\n        (∀ t. t IN u ==> t SUBSET group_carrier G) /\\\n        (∀ g t. g IN group_carrier G /\\ t IN u\n               ==> IMAGE (group_conjugation G g) t IN u)\n        ==> group_action G u (IMAGE o group_conjugation G)",
       ),
       t5067,
     ),
@@ -57032,7 +57032,7 @@ fn step_763() -> Unit raise {
   group_stabilizer_image_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_stabilizer G (IMAGE o group_conjugation G) s =\n            group_normalizer G s",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> group_stabilizer G (IMAGE o group_conjugation G) s =\n            group_normalizer G s",
       ),
       t5068,
     ),
@@ -57066,7 +57066,7 @@ fn step_764() -> Unit raise {
   group_action_image_conjugation_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_action G {s | s SUBSET group_carrier G}\n                              (IMAGE o group_conjugation G)",
+        "∀ G:A group. group_action G {s | s SUBSET group_carrier G}\n                              (IMAGE o group_conjugation G)",
       ),
       t5070,
     ),
@@ -57114,7 +57114,7 @@ fn step_765() -> Unit raise {
   group_action_image_conjugation_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. group_action G {n | n subgroup_of G}\n                              (IMAGE o group_conjugation G)",
+        "∀ G:A group. group_action G {n | n subgroup_of G}\n                              (IMAGE o group_conjugation G)",
       ),
       t5075,
     ),
@@ -57147,7 +57147,7 @@ fn step_766() -> Unit raise {
   group_orbit_image_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G. group_orbit G {s | s SUBSET group_carrier G}\n                     (IMAGE o group_conjugation G) =\n       group_conjugate G",
+        "∀ G. group_orbit G {s | s SUBSET group_carrier G}\n                     (IMAGE o group_conjugation G) =\n       group_conjugate G",
       ),
       t5076,
     ),
@@ -57183,7 +57183,7 @@ fn step_767() -> Unit raise {
   group_orbit_image_conjugation_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G u s:A->bool.\n        (forall t. t IN u ==> t SUBSET group_carrier G) /\\ s IN u\n        ==> group_orbit G u (IMAGE o group_conjugation G) s =\n            \\t. t IN u /\\ group_conjugate G s t",
+        "∀ G u s:A->bool.\n        (∀ t. t IN u ==> t SUBSET group_carrier G) /\\ s IN u\n        ==> group_orbit G u (IMAGE o group_conjugation G) s =\n            \\t. t IN u /\\ group_conjugate G s t",
       ),
       t5080,
     ),
@@ -57246,7 +57246,7 @@ fn step_768() -> Unit raise {
   card_conjugate_subsets_mul_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        s SUBSET group_carrier G\n        ==> {t | group_conjugate G s t} *_c group_normalizer G s =_c\n            group_carrier G",
+        "∀ G s:A->bool.\n        s SUBSET group_carrier G\n        ==> {t | group_conjugate G s t} *_c group_normalizer G s =_c\n            group_carrier G",
       ),
       t5088,
     ),
@@ -57540,7 +57540,7 @@ fn step_769() -> Unit raise {
   card_conjugate_subsets_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        FINITE(group_carrier G) /\\ s SUBSET group_carrier G\n        ==> CARD {t | group_conjugate G s t} * CARD(group_normalizer G s) =\n            CARD(group_carrier G)",
+        "∀ G s:A->bool.\n        FINITE(group_carrier G) /\\ s SUBSET group_carrier G\n        ==> CARD {t | group_conjugate G s t} * CARD(group_normalizer G s) =\n            CARD(group_carrier G)",
       ),
       t5112,
     ),
@@ -57684,7 +57684,7 @@ fn step_770() -> Unit raise {
   card_conjugate_subsets_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s:A->bool.\n        FINITE(group_carrier G) /\\ s SUBSET group_carrier G\n        ==> CARD {t | group_conjugate G s t} =\n            CARD(group_carrier G) DIV CARD(group_normalizer G s)",
+        "∀ G s:A->bool.\n        FINITE(group_carrier G) /\\ s SUBSET group_carrier G\n        ==> CARD {t | group_conjugate G s t} =\n            CARD(group_carrier G) DIV CARD(group_normalizer G s)",
       ),
       t5124,
     ),
@@ -58095,7 +58095,7 @@ fn step_772() -> Unit raise {
   quotient_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_carrier(quotient_group G n) =\n              {right_coset G n x |x| x IN group_carrier G}) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_id(quotient_group G n) = n) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_inv(quotient_group G n) = group_setinv G) /\\\n   (forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_mul(quotient_group G n) = group_setmul G)",
+        "(∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_carrier(quotient_group G n) =\n              {right_coset G n x |x| x IN group_carrier G}) /\\\n   (∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_id(quotient_group G n) = n) /\\\n   (∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_inv(quotient_group G n) = group_setinv G) /\\\n   (∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_mul(quotient_group G n) = group_setmul G)",
       ),
       t5165,
     ),
@@ -58136,7 +58136,7 @@ fn step_773() -> Unit raise {
   abelian_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n     abelian_group G /\\ n subgroup_of G ==> abelian_group(quotient_group G n)",
+        "∀ G n:A->bool.\n     abelian_group G /\\ n subgroup_of G ==> abelian_group(quotient_group G n)",
       ),
       t5168,
     ),
@@ -58168,7 +58168,7 @@ fn step_774() -> Unit raise {
   finite_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        FINITE(group_carrier G) /\\ n normal_subgroup_of G\n        ==> FINITE(group_carrier(quotient_group G n))",
+        "∀ G n:A->bool.\n        FINITE(group_carrier G) /\\ n normal_subgroup_of G\n        ==> FINITE(group_carrier(quotient_group G n))",
       ),
       t5171,
     ),
@@ -58226,7 +58226,7 @@ fn step_775() -> Unit raise {
   trivial_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        trivial_group G /\\  n normal_subgroup_of G\n        ==> trivial_group(quotient_group G n)",
+        "∀ G n:A->bool.\n        trivial_group G /\\  n normal_subgroup_of G\n        ==> trivial_group(quotient_group G n)",
       ),
       t5182,
     ),
@@ -58251,7 +58251,7 @@ fn step_776() -> Unit raise {
   quotient_group_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_id(quotient_group G n) = n",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_id(quotient_group G n) = n",
       ),
       t5183,
     ),
@@ -58278,7 +58278,7 @@ fn step_777() -> Unit raise {
   quotient_group_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_inv (quotient_group G n) (right_coset G n a) =\n            right_coset G n (group_inv G a)",
+        "∀ G n a:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_inv (quotient_group G n) (right_coset G n a) =\n            right_coset G n (group_inv G a)",
       ),
       t5184,
     ),
@@ -58305,7 +58305,7 @@ fn step_778() -> Unit raise {
   quotient_group_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_mul (quotient_group G n)\n                      (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_mul G a b)",
+        "∀ G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_mul (quotient_group G n)\n                      (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_mul G a b)",
       ),
       t5185,
     ),
@@ -58337,7 +58337,7 @@ fn step_779() -> Unit raise {
   quotient_group_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_div (quotient_group G n)\n                      (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_div G a b)",
+        "∀ G n a b:A.\n        n normal_subgroup_of G /\\ a IN group_carrier G /\\ b IN group_carrier G\n        ==> group_div (quotient_group G n)\n                      (right_coset G n a) (right_coset G n b) =\n            right_coset G n (group_div G a b)",
       ),
       t5186,
     ),
@@ -58389,7 +58389,7 @@ fn step_780() -> Unit raise {
   quotient_group_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n (a:A) k.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_pow (quotient_group G n) (right_coset G n a) k =\n            right_coset G n (group_pow G a k)",
+        "∀ G n (a:A) k.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_pow (quotient_group G n) (right_coset G n a) k =\n            right_coset G n (group_pow G a k)",
       ),
       t5190,
     ),
@@ -58424,7 +58424,7 @@ fn step_781() -> Unit raise {
   quotient_group_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n (a:A) k.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_zpow (quotient_group G n) (right_coset G n a) k =\n            right_coset G n (group_zpow G a k)",
+        "∀ G n (a:A) k.\n        n normal_subgroup_of G /\\ a IN group_carrier G\n        ==> group_zpow (quotient_group G n) (right_coset G n a) k =\n            right_coset G n (group_zpow G a k)",
       ),
       t5193,
     ),
@@ -58471,7 +58471,7 @@ fn step_782() -> Unit raise {
   group_homomorphism_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_homomorphism (G,quotient_group G n) (right_coset G n)",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_homomorphism (G,quotient_group G n) (right_coset G n)",
       ),
       t5197,
     ),
@@ -58506,7 +58506,7 @@ fn step_783() -> Unit raise {
   group_epimorphism_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_epimorphism (G,quotient_group G n) (right_coset G n)",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_epimorphism (G,quotient_group G n) (right_coset G n)",
       ),
       t5200,
     ),
@@ -58604,7 +58604,7 @@ fn step_784() -> Unit raise {
   card_le_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_carrier(quotient_group G n) <=_c group_carrier G",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_carrier(quotient_group G n) <=_c group_carrier G",
       ),
       t5208,
     ),
@@ -58635,7 +58635,7 @@ fn step_785() -> Unit raise {
   card_quotient_group_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        FINITE(group_carrier G) /\\ n normal_subgroup_of G\n        ==> CARD(group_carrier(quotient_group G n)) divides\n            CARD(group_carrier G)",
+        "∀ G n:A->bool.\n        FINITE(group_carrier G) /\\ n normal_subgroup_of G\n        ==> CARD(group_carrier(quotient_group G n)) divides\n            CARD(group_carrier G)",
       ),
       t5209,
     ),
@@ -58753,7 +58753,7 @@ fn step_786() -> Unit raise {
   trivial_quotient_group_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> (trivial_group(quotient_group G n) <=> n = group_carrier G)",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> (trivial_group(quotient_group G n) <=> n = group_carrier G)",
       ),
       t5221,
     ),
@@ -58780,7 +58780,7 @@ fn step_787() -> Unit raise {
   trivial_quotient_group_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group(quotient_group G (group_carrier G))",
+        "∀ G:A group. trivial_group(quotient_group G (group_carrier G))",
       ),
       t5222,
     ),
@@ -58835,7 +58835,7 @@ fn step_788() -> Unit raise {
   quotient_group_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. quotient_group G {group_id G} isomorphic_group G",
+        "∀ G:A group. quotient_group G {group_id G} isomorphic_group G",
       ),
       t5226,
     ),
@@ -58976,7 +58976,7 @@ fn step_789() -> Unit raise {
   group_isomorphism_prod_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) n1 n2.\n        n1 normal_subgroup_of G1 /\\ n2 normal_subgroup_of G2\n        ==> group_isomorphism(prod_group (quotient_group G1 n1)\n                                         (quotient_group G2 n2),\n                              quotient_group (prod_group G1 G2) (n1 CROSS n2))\n                             (\\(s,t). s CROSS t)",
+        "∀(G1:A group) (G2:B group) n1 n2.\n        n1 normal_subgroup_of G1 /\\ n2 normal_subgroup_of G2\n        ==> group_isomorphism(prod_group (quotient_group G1 n1)\n                                         (quotient_group G2 n2),\n                              quotient_group (prod_group G1 G2) (n1 CROSS n2))\n                             (\\(s,t). s CROSS t)",
       ),
       t5243,
     ),
@@ -59080,7 +59080,7 @@ fn step_790() -> Unit raise {
   isomorphic_quotient_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G1:A group) (G2:B group) n1 n2.\n        n1 normal_subgroup_of G1 /\\ n2 normal_subgroup_of G2\n        ==> quotient_group (prod_group G1 G2) (n1 CROSS n2) isomorphic_group\n            prod_group (quotient_group G1 n1) (quotient_group G2 n2)",
+        "∀(G1:A group) (G2:B group) n1 n2.\n        n1 normal_subgroup_of G1 /\\ n2 normal_subgroup_of G2\n        ==> quotient_group (prod_group G1 G2) (n1 CROSS n2) isomorphic_group\n            prod_group (quotient_group G1 n1) (quotient_group G2 n2)",
       ),
       t5252,
     ),
@@ -59120,13 +59120,13 @@ fn step_791() -> Unit raise {
     t5259,
   ])
   let t5258 = @class.asm_cases_tac(
-    @parser.parse_term("forall i. i IN k ==> (h:K->A->bool) i subgroup_of G i"),
+    @parser.parse_term("∀ i. i IN k ==> (h:K->A->bool) i subgroup_of G i"),
   )
   let t5257 = @simp.rewrite_tac(
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)"),
+        @parser.parse_term("(?x. P x /\\ Q x) <=> ~(∀ x. P x ==> ~Q x)"),
       ),
     ]),
   )
@@ -59177,7 +59177,7 @@ fn step_791() -> Unit raise {
   cartesian_product_normal_subgroup_of_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) h k.\n        (cartesian_product k h) normal_subgroup_of (product_group k G) <=>\n        forall i. i IN k ==> (h i) normal_subgroup_of (G i)",
+        "∀(G:K->A group) h k.\n        (cartesian_product k h) normal_subgroup_of (product_group k G) <=>\n        ∀ i. i IN k ==> (h i) normal_subgroup_of (G i)",
       ),
       t5264,
     ),
@@ -59447,7 +59447,7 @@ fn step_792() -> Unit raise {
   group_isomorphism_product_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) n k.\n        (forall i. i IN k ==> (n i) normal_subgroup_of (G i))\n        ==> group_isomorphism\n              (product_group k (\\i. quotient_group (G i) (n i)),\n               quotient_group (product_group k G) (cartesian_product k n))\n              (cartesian_product k)",
+        "∀(G:K->A group) n k.\n        (∀ i. i IN k ==> (n i) normal_subgroup_of (G i))\n        ==> group_isomorphism\n              (product_group k (\\i. quotient_group (G i) (n i)),\n               quotient_group (product_group k G) (cartesian_product k n))\n              (cartesian_product k)",
       ),
       t5306,
     ),
@@ -59551,7 +59551,7 @@ fn step_793() -> Unit raise {
   isomorphic_quotient_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) n k.\n        (forall i. i IN k ==> (n i) normal_subgroup_of (G i))\n        ==> (quotient_group (product_group k G) (cartesian_product k n))\n            isomorphic_group\n            (product_group k (\\i. quotient_group (G i) (n i)))",
+        "∀(G:K->A group) n k.\n        (∀ i. i IN k ==> (n i) normal_subgroup_of (G i))\n        ==> (quotient_group (product_group k G) (cartesian_product k n))\n            isomorphic_group\n            (product_group k (\\i. quotient_group (G i) (n i)))",
       ),
       t5315,
     ),
@@ -59904,7 +59904,7 @@ fn step_794() -> Unit raise {
   )
   let t5350 = (
     @parser.parse_term(
-      "(forall G n h:(A->bool)->bool.\n        n normal_subgroup_of G\n        ==> (h subgroup_of quotient_group G n <=>\n             ?k. k subgroup_of G /\\ { right_coset G n x | x IN k} = h)) /\\\n   (forall G n h:(A->bool)->bool.\n        n normal_subgroup_of G\n        ==> (h subgroup_of quotient_group G n <=>\n             ?k. k subgroup_of G /\\\n                 n SUBSET k /\\\n                 { right_coset G n x | x IN k} = h))",
+      "(∀ G n h:(A->bool)->bool.\n        n normal_subgroup_of G\n        ==> (h subgroup_of quotient_group G n <=>\n             ?k. k subgroup_of G /\\ { right_coset G n x | x IN k} = h)) /\\\n   (∀ G n h:(A->bool)->bool.\n        n normal_subgroup_of G\n        ==> (h subgroup_of quotient_group G n <=>\n             ?k. k subgroup_of G /\\\n                 n SUBSET k /\\\n                 { right_coset G n x | x IN k} = h))",
     ),
     t5349,
   )
@@ -60086,7 +60086,7 @@ fn step_795() -> Unit raise {
   subgroup_of_quotient_group_generated_by_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n h:(A->bool)->bool.\n        n normal_subgroup_of G /\\ h subgroup_of quotient_group G n\n        ==> ?k. k subgroup_of G /\\ n SUBSET k /\\\n                quotient_group (subgroup_generated G k) n =\n                subgroup_generated (quotient_group G n) h",
+        "∀ G n h:(A->bool)->bool.\n        n normal_subgroup_of G /\\ h subgroup_of quotient_group G n\n        ==> ?k. k subgroup_of G /\\ n SUBSET k /\\\n                quotient_group (subgroup_generated G k) n =\n                subgroup_generated (quotient_group G n) h",
       ),
       t5367,
     ),
@@ -60287,7 +60287,7 @@ fn step_796() -> Unit raise {
   quotient_group_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h n:A->bool.\n        n normal_subgroup_of G /\\ h subgroup_of G /\\ n SUBSET h\n        ==> quotient_group (subgroup_generated G h) n =\n            subgroup_generated (quotient_group G n)\n                               {right_coset G n x | x IN h}",
+        "∀ G h n:A->bool.\n        n normal_subgroup_of G /\\ h subgroup_of G /\\ n SUBSET h\n        ==> quotient_group (subgroup_generated G h) n =\n            subgroup_generated (quotient_group G n)\n                               {right_coset G n x | x IN h}",
       ),
       t5383,
     ),
@@ -60361,7 +60361,7 @@ fn step_799() -> Unit raise {
   group_kernel_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> group_id G IN group_kernel (G,G') f",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> group_id G IN group_kernel (G,G') f",
       ),
       t5384,
     ),
@@ -60388,7 +60388,7 @@ fn step_800() -> Unit raise {
   group_kernel_nonempty_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism(G,H) f ==> ~(group_kernel(G,H) f = {})",
+        "∀ G H (f:A->B).\n        group_homomorphism(G,H) f ==> ~(group_kernel(G,H) f = {})",
       ),
       t5385,
     ),
@@ -60415,7 +60415,7 @@ fn step_801() -> Unit raise {
   group_kernel_subset_carrier_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B). group_kernel(G,H) f SUBSET group_carrier G",
+        "∀ G H (f:A->B). group_kernel(G,H) f SUBSET group_carrier G",
       ),
       t5386,
     ),
@@ -61037,7 +61037,7 @@ fn step_802() -> Unit raise {
   group_monomorphism_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_monomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel (G,G') f = {group_id G}",
+        "∀ G G' (f:A->B).\n        group_monomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel (G,G') f = {group_id G}",
       ),
       t5441,
     ),
@@ -61079,7 +61079,7 @@ fn step_803() -> Unit raise {
   group_monomorphism_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_monomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        forall x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G",
+        "∀ G G' (f:A->B).\n        group_monomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        ∀ x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G",
       ),
       t5446,
     ),
@@ -61106,7 +61106,7 @@ fn step_804() -> Unit raise {
   group_monomorphism_alt_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' f:A->B.\n        group_monomorphism (G,G') f <=>\n        group_homomorphism (G,G') f /\\\n        forall x. x IN group_carrier G ==> (f x = group_id G' <=> x = group_id G)",
+        "∀ G G' f:A->B.\n        group_monomorphism (G,G') f <=>\n        group_homomorphism (G,G') f /\\\n        ∀ x. x IN group_carrier G ==> (f x = group_id G' <=> x = group_id G)",
       ),
       t5447,
     ),
@@ -61135,7 +61135,7 @@ fn step_805() -> Unit raise {
   group_epimorphism_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_image (G,G') f = group_carrier G'",
+        "∀ G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_image (G,G') f = group_carrier G'",
       ),
       t5449,
     ),
@@ -61166,7 +61166,7 @@ fn step_806() -> Unit raise {
   group_epimorphism_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_carrier G' SUBSET group_image (G,G') f",
+        "∀ G G' (f:A->B).\n        group_epimorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_carrier G' SUBSET group_image (G,G') f",
       ),
       t5451,
     ),
@@ -61201,7 +61201,7 @@ fn step_807() -> Unit raise {
   group_isomorphism_epimorphism_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_epimorphism (G,G') f /\\\n        (forall x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G)",
+        "∀ G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_epimorphism (G,G') f /\\\n        (∀ x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G)",
       ),
       t5453,
     ),
@@ -61238,7 +61238,7 @@ fn step_808() -> Unit raise {
   group_isomorphism_group_kernel_group_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel (G,G') f = {group_id G} /\\\n        group_image (G,G') f = group_carrier G'",
+        "∀ G G' (f:A->B).\n        group_isomorphism (G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel (G,G') f = {group_id G} /\\\n        group_image (G,G') f = group_carrier G'",
       ),
       t5456,
     ),
@@ -61305,7 +61305,7 @@ fn step_809() -> Unit raise {
   group_isomorphism_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n      group_isomorphism (G,G') f <=>\n      IMAGE f (group_carrier G) = group_carrier G' /\\\n      (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n             ==> f(group_mul G x y) = group_mul G' (f x) (f y)) /\\\n      (forall x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G)",
+        "∀ G G' (f:A->B).\n      group_isomorphism (G,G') f <=>\n      IMAGE f (group_carrier G) = group_carrier G' /\\\n      (∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n             ==> f(group_mul G x y) = group_mul G' (f x) (f y)) /\\\n      (∀ x. x IN group_carrier G /\\ f x = group_id G' ==> x = group_id G)",
       ),
       t5463,
     ),
@@ -61344,7 +61344,7 @@ fn step_810() -> Unit raise {
   subgroup_group_kernel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f ==> (group_kernel (G,G') f) subgroup_of G",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f ==> (group_kernel (G,G') f) subgroup_of G",
       ),
       t5464,
     ),
@@ -61385,7 +61385,7 @@ fn step_811() -> Unit raise {
   subgroup_group_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f ==> (group_image (G,G') f) subgroup_of G'",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f ==> (group_image (G,G') f) subgroup_of G'",
       ),
       t5466,
     ),
@@ -61412,7 +61412,7 @@ fn step_812() -> Unit raise {
   group_kernel_to_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s (f:A->B).\n        group_kernel (G,subgroup_generated H s) f = group_kernel(G,H) f",
+        "∀ G H s (f:A->B).\n        group_kernel (G,subgroup_generated H s) f = group_kernel(G,H) f",
       ),
       t5467,
     ),
@@ -61437,7 +61437,7 @@ fn step_813() -> Unit raise {
   group_image_to_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s (f:A->B).\n        group_image (G,subgroup_generated H s) f = group_image(G,H) f",
+        "∀ G H s (f:A->B).\n        group_image (G,subgroup_generated H s) f = group_image(G,H) f",
       ),
       t5468,
     ),
@@ -61472,7 +61472,7 @@ fn step_814() -> Unit raise {
   group_kernel_from_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s f:A->B.\n        s subgroup_of G\n        ==> group_kernel(subgroup_generated G s,H) f =\n            group_kernel(G,H) f INTER s",
+        "∀ G H s f:A->B.\n        s subgroup_of G\n        ==> group_kernel(subgroup_generated G s,H) f =\n            group_kernel(G,H) f INTER s",
       ),
       t5471,
     ),
@@ -61507,7 +61507,7 @@ fn step_815() -> Unit raise {
   group_image_from_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H s f:A->B.\n        s subgroup_of G\n        ==> group_image(subgroup_generated G s,H) f =\n            group_image(G,H) f INTER IMAGE f s",
+        "∀ G H s f:A->B.\n        s subgroup_of G\n        ==> group_image(subgroup_generated G s,H) f =\n            group_image(G,H) f INTER IMAGE f s",
       ),
       t5474,
     ),
@@ -61569,7 +61569,7 @@ fn step_816() -> Unit raise {
   group_isomorphism_onto_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H.\n        group_isomorphism(G,subgroup_generated H (group_image (G,H) f)) f <=>\n        group_monomorphism(G,H) f",
+        "∀(f:A->B) G H.\n        group_isomorphism(G,subgroup_generated H (group_image (G,H) f)) f <=>\n        group_monomorphism(G,H) f",
       ),
       t5482,
     ),
@@ -61655,7 +61655,7 @@ fn step_817() -> Unit raise {
   normal_subgroup_group_kernel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> (group_kernel (G,G') f) normal_subgroup_of G",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> (group_kernel (G,G') f) normal_subgroup_of G",
       ),
       t5491,
     ),
@@ -61803,7 +61803,7 @@ fn step_818() -> Unit raise {
   group_kernel_right_coset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_kernel(G,quotient_group G n) (right_coset G n) = n",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> group_kernel(G,quotient_group G n) (right_coset G n) = n",
       ),
       t5506,
     ),
@@ -61849,7 +61849,7 @@ fn step_819() -> Unit raise {
   let t5516 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall g. IMAGE f s SUBSET t /\\ IMAGE g t SUBSET s /\\ (forall y. y IN t ==> f(g y) = y)\n        ==> t = IMAGE f s",
+        "∀ g. IMAGE f s SUBSET t /\\ IMAGE g t SUBSET s /\\ (∀ y. y IN t ==> f(g y) = y)\n        ==> t = IMAGE f s",
       ),
     ),
   )
@@ -61916,7 +61916,7 @@ fn step_819() -> Unit raise {
   card_eq_group_image_kernel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism(G,H) f\n        ==> group_image(G,H) f *_c group_kernel(G,H) f =_c group_carrier G",
+        "∀ G H (f:A->B).\n        group_homomorphism(G,H) f\n        ==> group_image(G,H) f *_c group_kernel(G,H) f =_c group_carrier G",
       ),
       t5520,
     ),
@@ -62020,7 +62020,7 @@ fn step_820() -> Unit raise {
   card_divides_group_monomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_monomorphism(G,H) f /\\ FINITE(group_carrier H)\n        ==> CARD(group_carrier G) divides CARD(group_carrier H)",
+        "∀ G H (f:A->B).\n        group_monomorphism(G,H) f /\\ FINITE(group_carrier H)\n        ==> CARD(group_carrier G) divides CARD(group_carrier H)",
       ),
       t5531,
     ),
@@ -62317,7 +62317,7 @@ fn step_821() -> Unit raise {
   card_divides_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ FINITE(group_carrier G)\n        ==> CARD(group_carrier H) divides CARD(group_carrier G)",
+        "∀ G H (f:A->B).\n        group_epimorphism(G,H) f /\\ FINITE(group_carrier G)\n        ==> CARD(group_carrier H) divides CARD(group_carrier G)",
       ),
       t5555,
     ),
@@ -62554,7 +62554,7 @@ fn step_822() -> Unit raise {
   quotient_group_universal_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' n (f:A->B).\n        group_homomorphism (G,G') f /\\ n normal_subgroup_of G /\\\n        (forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n               right_coset G n x = right_coset G n y\n               ==> f x = f y)\n        ==> ?g. group_homomorphism(quotient_group G n,G') g /\\\n                forall x. x IN group_carrier G ==> g(right_coset G n x) = f x",
+        "∀ G G' n (f:A->B).\n        group_homomorphism (G,G') f /\\ n normal_subgroup_of G /\\\n        (∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n               right_coset G n x = right_coset G n y\n               ==> f x = f y)\n        ==> ?g. group_homomorphism(quotient_group G n,G') g /\\\n                ∀ x. x IN group_carrier G ==> g(right_coset G n x) = f x",
       ),
       t5577,
     ),
@@ -62727,7 +62727,7 @@ fn step_823() -> Unit raise {
   quotient_group_universal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' n (f:A->B).\n        group_homomorphism (G,G') f /\\\n        n normal_subgroup_of G /\\\n        n SUBSET group_kernel (G,G') f\n        ==> ?g. group_homomorphism(quotient_group G n,G') g /\\\n                forall x. x IN group_carrier G ==> g(right_coset G n x) = f x",
+        "∀ G G' n (f:A->B).\n        group_homomorphism (G,G') f /\\\n        n normal_subgroup_of G /\\\n        n SUBSET group_kernel (G,G') f\n        ==> ?g. group_homomorphism(quotient_group G n,G') g /\\\n                ∀ x. x IN group_carrier G ==> g(right_coset G n x) = f x",
       ),
       t5597,
     ),
@@ -62784,7 +62784,7 @@ fn step_824() -> Unit raise {
   quotient_group_universal_epimorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' n (f:A->B).\n        group_epimorphism (G,G') f /\\\n        n normal_subgroup_of G /\\\n        n SUBSET group_kernel (G,G') f\n        ==> ?g. group_epimorphism(quotient_group G n,G') g /\\\n                forall x. x IN group_carrier G ==> g(right_coset G n x) = f x",
+        "∀ G G' n (f:A->B).\n        group_epimorphism (G,G') f /\\\n        n normal_subgroup_of G /\\\n        n SUBSET group_kernel (G,G') f\n        ==> ?g. group_epimorphism(quotient_group G n,G') g /\\\n                ∀ x. x IN group_carrier G ==> g(right_coset G n x) = f x",
       ),
       t5607,
     ),
@@ -62815,7 +62815,7 @@ fn step_825() -> Unit raise {
   group_kernel_from_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group G\n        ==> group_kernel (G,H) f = group_carrier G",
+        "∀ G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group G\n        ==> group_kernel (G,H) f = group_carrier G",
       ),
       t5609,
     ),
@@ -62846,7 +62846,7 @@ fn step_826() -> Unit raise {
   group_image_from_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group G\n        ==> group_image (G,H) f = {group_id H}",
+        "∀ G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group G\n        ==> group_image (G,H) f = {group_id H}",
       ),
       t5611,
     ),
@@ -62877,7 +62877,7 @@ fn step_827() -> Unit raise {
   group_kernel_to_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group H\n        ==> group_kernel (G,H) f = group_carrier G",
+        "∀ G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group H\n        ==> group_kernel (G,H) f = group_carrier G",
       ),
       t5613,
     ),
@@ -62926,7 +62926,7 @@ fn step_828() -> Unit raise {
   group_image_to_trivial_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group H\n        ==> group_image (G,H) f = group_carrier H",
+        "∀ G H (f:A->B).\n        group_homomorphism (G,H) f /\\ trivial_group H\n        ==> group_image (G,H) f = group_carrier H",
       ),
       t5619,
     ),
@@ -63153,7 +63153,7 @@ fn step_829() -> Unit raise {
   first_group_isomorphism_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> (quotient_group G (group_kernel (G,G') f)) isomorphic_group\n            (subgroup_generated G' (group_image (G,G') f))",
+        "∀ G G' (f:A->B).\n        group_homomorphism(G,G') f\n        ==> (quotient_group G (group_kernel (G,G') f)) isomorphic_group\n            (subgroup_generated G' (group_image (G,G') f))",
       ),
       t5643,
     ),
@@ -63260,7 +63260,7 @@ fn step_830() -> Unit raise {
   first_group_epimorphism_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G G' (f:A->B).\n        group_epimorphism(G,G') f\n        ==> (quotient_group G (group_kernel (G,G') f)) isomorphic_group G'",
+        "∀ G G' (f:A->B).\n        group_epimorphism(G,G') f\n        ==> (quotient_group G (group_kernel (G,G') f)) isomorphic_group G'",
       ),
       t5652,
     ),
@@ -63856,7 +63856,7 @@ fn step_831() -> Unit raise {
   group_homomorphism_preimage_image_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} =\n            group_setmul G s (group_kernel(G,H) f)",
+        "∀ G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} =\n            group_setmul G s (group_kernel(G,H) f)",
       ),
       t5710,
     ),
@@ -64427,7 +64427,7 @@ fn step_832() -> Unit raise {
   group_homomorphism_preimage_image_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} =\n            group_setmul G (group_kernel(G,H) f) s",
+        "∀ G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\ s SUBSET group_carrier G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} =\n            group_setmul G (group_kernel(G,H) f) s",
       ),
       t5774,
     ),
@@ -64456,7 +64456,7 @@ fn step_833() -> Unit raise {
   group_homomorphism_image_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) t.\n        group_homomorphism(G,H) f\n        ==> IMAGE f {x | x IN group_carrier G /\\ f x IN t} =\n            t INTER (group_image(G,H) f)",
+        "∀ G H (f:A->B) t.\n        group_homomorphism(G,H) f\n        ==> IMAGE f {x | x IN group_carrier G /\\ f x IN t} =\n            t INTER (group_image(G,H) f)",
       ),
       t5776,
     ),
@@ -64747,7 +64747,7 @@ fn step_834() -> Unit raise {
   group_homomorphism_preimage_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\\n        group_kernel(G,H) f SUBSET s /\\\n        s subgroup_of G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} = s",
+        "∀ G H (f:A->B) s.\n        group_homomorphism(G,H) f /\\\n        group_kernel(G,H) f SUBSET s /\\\n        s subgroup_of G\n        ==> {x | x IN group_carrier G /\\ f x IN IMAGE f s} = s",
       ),
       t5797,
     ),
@@ -64776,7 +64776,7 @@ fn step_835() -> Unit raise {
   group_homomorphism_image_preimage_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) t.\n        group_homomorphism(G,H) f /\\ t SUBSET group_image(G,H) f\n        ==> IMAGE f {x | x IN group_carrier G /\\ f x IN t} = t",
+        "∀ G H (f:A->B) t.\n        group_homomorphism(G,H) f /\\ t SUBSET group_image(G,H) f\n        ==> IMAGE f {x | x IN group_carrier G /\\ f x IN t} = t",
       ),
       t5799,
     ),
@@ -64929,7 +64929,7 @@ fn step_836() -> Unit raise {
   group_epimorphism_subgroup_correspondence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) k.\n        group_epimorphism(G,H) f\n        ==> (k subgroup_of H <=>\n             ?j. j subgroup_of G /\\\n                 group_kernel(G,H) f SUBSET j /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
+        "∀ G H (f:A->B) k.\n        group_epimorphism(G,H) f\n        ==> (k subgroup_of H <=>\n             ?j. j subgroup_of G /\\\n                 group_kernel(G,H) f SUBSET j /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
       ),
       t5815,
     ),
@@ -65314,7 +65314,7 @@ fn step_837() -> Unit raise {
   let t5824 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "j SUBSET s /\\ (forall x y. x IN j /\\ y IN s /\\ f x = f y ==> y IN j)\n      ==> {x | x IN s /\\ f x IN IMAGE f j} = j",
+        "j SUBSET s /\\ (∀ x y. x IN j /\\ y IN s /\\ f x = f y ==> y IN j)\n      ==> {x | x IN s /\\ f x IN IMAGE f j} = j",
       ),
     ),
   )
@@ -65441,7 +65441,7 @@ fn step_837() -> Unit raise {
   group_epimorphism_subgroup_correspondence_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j.\n        group_epimorphism(G,H) f\n        ==> (j subgroup_of G /\\ group_kernel(G,H) f SUBSET j <=>\n             ?k. k subgroup_of H /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
+        "∀ G H (f:A->B) j.\n        group_epimorphism(G,H) f\n        ==> (j subgroup_of G /\\ group_kernel(G,H) f SUBSET j <=>\n             ?k. k subgroup_of H /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
       ),
       t5867,
     ),
@@ -65566,7 +65566,7 @@ fn step_838() -> Unit raise {
   normal_subgroup_of_homomorphic_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j.\n        group_homomorphism(G,H) f /\\ j normal_subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN j} normal_subgroup_of G",
+        "∀ G H (f:A->B) j.\n        group_homomorphism(G,H) f /\\ j normal_subgroup_of H\n        ==> {x | x IN group_carrier G /\\ f x IN j} normal_subgroup_of G",
       ),
       t5879,
     ),
@@ -66111,7 +66111,7 @@ fn step_839() -> Unit raise {
   normal_subgroup_of_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) n.\n        group_epimorphism(G,H) f /\\ n normal_subgroup_of G\n        ==> IMAGE f n normal_subgroup_of H",
+        "∀ G H (f:A->B) n.\n        group_epimorphism(G,H) f /\\ n normal_subgroup_of G\n        ==> IMAGE f n normal_subgroup_of H",
       ),
       t5929,
     ),
@@ -66220,7 +66220,7 @@ fn step_840() -> Unit raise {
   normal_subgroup_of_epimorphic_preimage_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j k.\n        group_epimorphism (G,H) f /\\\n        k subgroup_of H /\\\n        {x | x IN group_carrier G /\\ f x IN k} = j\n        ==> (j normal_subgroup_of G <=> k normal_subgroup_of H)",
+        "∀ G H (f:A->B) j k.\n        group_epimorphism (G,H) f /\\\n        k subgroup_of H /\\\n        {x | x IN group_carrier G /\\ f x IN k} = j\n        ==> (j normal_subgroup_of G <=> k normal_subgroup_of H)",
       ),
       t5938,
     ),
@@ -66251,7 +66251,7 @@ fn step_841() -> Unit raise {
   group_epimorphism_normal_subgroup_correspondence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) k.\n        group_epimorphism(G,H) f\n        ==> (k normal_subgroup_of H <=>\n             ?j. j normal_subgroup_of G /\\\n                 group_kernel(G,H) f SUBSET j /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
+        "∀ G H (f:A->B) k.\n        group_epimorphism(G,H) f\n        ==> (k normal_subgroup_of H <=>\n             ?j. j normal_subgroup_of G /\\\n                 group_kernel(G,H) f SUBSET j /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
       ),
       t5939,
     ),
@@ -66282,7 +66282,7 @@ fn step_842() -> Unit raise {
   group_epimorphism_normal_subgroup_correspondence_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j.\n        group_epimorphism(G,H) f\n        ==> (j normal_subgroup_of G /\\ group_kernel(G,H) f SUBSET j <=>\n             ?k. k normal_subgroup_of H /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
+        "∀ G H (f:A->B) j.\n        group_epimorphism(G,H) f\n        ==> (j normal_subgroup_of G /\\ group_kernel(G,H) f SUBSET j <=>\n             ?k. k normal_subgroup_of H /\\\n                 {x | x IN group_carrier G /\\ f x IN k} = j /\\\n                 IMAGE f j = k)",
       ),
       t5940,
     ),
@@ -66398,7 +66398,7 @@ fn step_843() -> Unit raise {
   subgroup_of_isomorphic_image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j.\n        group_isomorphism(G,H) f /\\ j SUBSET group_carrier G\n        ==> ((IMAGE f j) subgroup_of H <=> j subgroup_of G)",
+        "∀ G H (f:A->B) j.\n        group_isomorphism(G,H) f /\\ j SUBSET group_carrier G\n        ==> ((IMAGE f j) subgroup_of H <=> j subgroup_of G)",
       ),
       t5950,
     ),
@@ -66543,7 +66543,7 @@ fn step_844() -> Unit raise {
   normal_subgroup_of_isomorphic_image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j.\n        group_isomorphism(G,H) f /\\ j SUBSET group_carrier G\n        ==> ((IMAGE f j) normal_subgroup_of H <=> j normal_subgroup_of G)",
+        "∀ G H (f:A->B) j.\n        group_isomorphism(G,H) f /\\ j SUBSET group_carrier G\n        ==> ((IMAGE f j) normal_subgroup_of H <=> j normal_subgroup_of G)",
       ),
       t5965,
     ),
@@ -66621,7 +66621,7 @@ fn step_845() -> Unit raise {
   group_conjugate_subgroup_of_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        group_conjugate G s t\n        ==> (s subgroup_of G <=> t subgroup_of G)",
+        "∀ G s t:A->bool.\n        group_conjugate G s t\n        ==> (s subgroup_of G <=> t subgroup_of G)",
       ),
       t5974,
     ),
@@ -66699,7 +66699,7 @@ fn step_846() -> Unit raise {
   group_conjugate_normal_subgroup_of_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s t:A->bool.\n        group_conjugate G s t\n        ==> (s normal_subgroup_of G <=> t normal_subgroup_of G)",
+        "∀ G s t:A->bool.\n        group_conjugate G s t\n        ==> (s normal_subgroup_of G <=> t normal_subgroup_of G)",
       ),
       t5983,
     ),
@@ -66735,7 +66735,7 @@ fn step_847() -> Unit raise {
   normal_subgroup_conjugate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ forall n'. group_conjugate G n n' ==> n' = n",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G <=>\n        n subgroup_of G /\\ ∀ n'. group_conjugate G n n' ==> n' = n",
       ),
       t5987,
     ),
@@ -66767,7 +66767,7 @@ fn step_848() -> Unit raise {
   normal_subgroup_conjugate_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n n':A->bool.\n        n normal_subgroup_of G \\/ n' normal_subgroup_of G\n        ==> (group_conjugate G n n' <=> n = n')",
+        "∀ G n n':A->bool.\n        n normal_subgroup_of G \\/ n' normal_subgroup_of G\n        ==> (group_conjugate G n n' <=> n = n')",
       ),
       t5988,
     ),
@@ -66937,7 +66937,7 @@ fn step_849() -> Unit raise {
   quotient_subgroup_correspondence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) j k.\n        j normal_subgroup_of G\n        ==> (k subgroup_of (quotient_group G j) <=>\n             ?i. i subgroup_of G /\\ j SUBSET i /\\\n                 {x | x IN group_carrier G /\\ right_coset G j x IN k} = i /\\\n                 IMAGE (right_coset G j) i = k)",
+        "∀(G:A group) j k.\n        j normal_subgroup_of G\n        ==> (k subgroup_of (quotient_group G j) <=>\n             ?i. i subgroup_of G /\\ j SUBSET i /\\\n                 {x | x IN group_carrier G /\\ right_coset G j x IN k} = i /\\\n                 IMAGE (right_coset G j) i = k)",
       ),
       t6002,
     ),
@@ -67109,7 +67109,7 @@ fn step_850() -> Unit raise {
   quotient_normal_subgroup_correspondence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) j k.\n        j normal_subgroup_of G\n        ==> (k normal_subgroup_of (quotient_group G j) <=>\n             ?i. i normal_subgroup_of G /\\ j SUBSET i /\\\n                 {x | x IN group_carrier G /\\ right_coset G j x IN k} = i /\\\n                 IMAGE (right_coset G j) i = k)",
+        "∀(G:A group) j k.\n        j normal_subgroup_of G\n        ==> (k normal_subgroup_of (quotient_group G j) <=>\n             ?i. i normal_subgroup_of G /\\ j SUBSET i /\\\n                 {x | x IN group_carrier G /\\ right_coset G j x IN k} = i /\\\n                 IMAGE (right_coset G j) i = k)",
       ),
       t6016,
     ),
@@ -67226,7 +67226,7 @@ fn step_851() -> Unit raise {
   first_group_isomorphism_theorem_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j k.\n        group_epimorphism(G,H) f /\\\n        k normal_subgroup_of H /\\ {x | x IN group_carrier G /\\ f x IN k} = j\n        ==> quotient_group G j isomorphic_group quotient_group H k",
+        "∀ G H (f:A->B) j k.\n        group_epimorphism(G,H) f /\\\n        k normal_subgroup_of H /\\ {x | x IN group_carrier G /\\ f x IN k} = j\n        ==> quotient_group G j isomorphic_group quotient_group H k",
       ),
       t6035,
     ),
@@ -67266,7 +67266,7 @@ fn step_852() -> Unit raise {
   first_group_isomorphism_theorem_gen_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) j k.\n        group_epimorphism(G,H) f /\\ j normal_subgroup_of G /\\\n        group_kernel (G,H) f SUBSET j /\\ IMAGE f j = k\n        ==> quotient_group G j isomorphic_group quotient_group H k",
+        "∀ G H (f:A->B) j k.\n        group_epimorphism(G,H) f /\\ j normal_subgroup_of G /\\\n        group_kernel (G,H) f SUBSET j /\\ IMAGE f j = k\n        ==> quotient_group G j isomorphic_group quotient_group H k",
       ),
       t6040,
     ),
@@ -67487,7 +67487,7 @@ fn step_853() -> Unit raise {
   simple_group_epimorphic_image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n      group_epimorphism(G,H) f\n      ==> ((forall k. k normal_subgroup_of H\n                ==> k = {group_id H} \\/ k = group_carrier H) <=>\n           (forall h. h normal_subgroup_of G /\\ group_kernel(G,H) f PSUBSET h\n                ==> h = group_carrier G))",
+        "∀ G H (f:A->B).\n      group_epimorphism(G,H) f\n      ==> ((∀ k. k normal_subgroup_of H\n                ==> k = {group_id H} \\/ k = group_carrier H) <=>\n           (∀ h. h normal_subgroup_of G /\\ group_kernel(G,H) f PSUBSET h\n                ==> h = group_carrier G))",
       ),
       t6064,
     ),
@@ -67701,7 +67701,7 @@ fn step_854() -> Unit raise {
   no_proper_subgroup_epimorphic_image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n      group_epimorphism(G,H) f\n      ==> ((forall k. k subgroup_of H\n                ==> k = {group_id H} \\/ k = group_carrier H) <=>\n           (forall h. h subgroup_of G /\\ group_kernel(G,H) f PSUBSET h\n                ==> h = group_carrier G))",
+        "∀ G H (f:A->B).\n      group_epimorphism(G,H) f\n      ==> ((∀ k. k subgroup_of H\n                ==> k = {group_id H} \\/ k = group_carrier H) <=>\n           (∀ h. h subgroup_of G /\\ group_kernel(G,H) f PSUBSET h\n                ==> h = group_carrier G))",
       ),
       t6088,
     ),
@@ -67898,7 +67898,7 @@ fn step_855() -> Unit raise {
   maximal_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             (forall k. k subgroup_of quotient_group G n\n                  ==> k = {group_id(quotient_group G n)} \\/\n                      k = group_carrier(quotient_group G n)))",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((∀ h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             (∀ k. k subgroup_of quotient_group G n\n                  ==> k = {group_id(quotient_group G n)} \\/\n                      k = group_carrier(quotient_group G n)))",
       ),
       t6105,
     ),
@@ -68095,7 +68095,7 @@ fn step_856() -> Unit raise {
   maximal_normal_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((forall h. h normal_subgroup_of G /\\ n PSUBSET h\n                  ==> h = group_carrier G) <=>\n             (forall k. k normal_subgroup_of quotient_group G n\n                  ==> k = {group_id(quotient_group G n)} \\/\n                      k = group_carrier(quotient_group G n)))",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((∀ h. h normal_subgroup_of G /\\ n PSUBSET h\n                  ==> h = group_carrier G) <=>\n             (∀ k. k normal_subgroup_of quotient_group G n\n                  ==> k = {group_id(quotient_group G n)} \\/\n                      k = group_carrier(quotient_group G n)))",
       ),
       t6122,
     ),
@@ -68119,7 +68119,7 @@ fn step_857() -> Unit raise {
   trivial_homomorphism_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "trivial_homomorphism(G,G') (f:A->B) <=>\n        group_homomorphism(G,G') f /\\\n        forall x. x IN group_carrier G ==> f x = group_id G'",
+        "trivial_homomorphism(G,G') (f:A->B) <=>\n        group_homomorphism(G,G') f /\\\n        ∀ x. x IN group_carrier G ==> f x = group_id G'",
       ),
     ),
   )
@@ -68156,7 +68156,7 @@ fn step_858() -> Unit raise {
   group_kernel_image_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G G'.\n        group_homomorphism (G,G') f\n        ==> (group_kernel(G,G') f = group_carrier G <=>\n             group_image(G,G') f = {group_id G'})",
+        "∀(f:A->B) G G'.\n        group_homomorphism (G,G') f\n        ==> (group_kernel(G,G') f = group_carrier G <=>\n             group_image(G,G') f = {group_id G'})",
       ),
       t6126,
     ),
@@ -68188,7 +68188,7 @@ fn step_859() -> Unit raise {
   trivial_homomorphism_group_kernel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G G'.\n        trivial_homomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel(G,G') f = group_carrier G",
+        "∀(f:A->B) G G'.\n        trivial_homomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_kernel(G,G') f = group_carrier G",
       ),
       t6129,
     ),
@@ -68218,7 +68218,7 @@ fn step_860() -> Unit raise {
   trivial_homomorphism_group_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G G'.\n        trivial_homomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_image(G,G') f = {group_id G'}",
+        "∀(f:A->B) G G'.\n        trivial_homomorphism(G,G') f <=>\n        group_homomorphism(G,G') f /\\\n        group_image(G,G') f = {group_id G'}",
       ),
       t6130,
     ),
@@ -68244,7 +68244,7 @@ fn step_861() -> Unit raise {
   )
   trivial_homomorphism_trivial_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G H. trivial_homomorphism (G,H) (\\x. group_id H)"),
+      @parser.parse_term("∀ G H. trivial_homomorphism (G,H) (\\x. group_id H)"),
       t6131,
     ),
   )
@@ -68278,7 +68278,7 @@ fn step_862() -> Unit raise {
   group_monomorphism_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H. group_monomorphism (G,H) (\\x. group_id H) <=> trivial_group G",
+        "∀ G H. group_monomorphism (G,H) (\\x. group_id H) <=> trivial_group G",
       ),
       t6134,
     ),
@@ -68320,7 +68320,7 @@ fn step_863() -> Unit raise {
   group_epimorphism_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H. group_epimorphism (G,H) (\\x. group_id H) <=> trivial_group H",
+        "∀ G H. group_epimorphism (G,H) (\\x. group_id H) <=> trivial_group H",
       ),
       t6137,
     ),
@@ -68353,7 +68353,7 @@ fn step_864() -> Unit raise {
   group_isomorphism_trivial_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H. group_isomorphism (G,H) (\\x. group_id H) <=>\n         trivial_group G /\\ trivial_group H",
+        "∀ G H. group_isomorphism (G,H) (\\x. group_id H) <=>\n         trivial_group G /\\ trivial_group H",
       ),
       t6139,
     ),
@@ -68377,7 +68377,7 @@ fn step_865() -> Unit raise {
   group_element_order_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "group_element_order G (x:A) =\n        @d. forall n. group_pow G x n = group_id G <=> d divides n",
+        "group_element_order G (x:A) =\n        @d. ∀ n. group_pow G x n = group_id G <=> d divides n",
       ),
     ),
   )
@@ -68695,7 +68695,7 @@ fn step_866() -> Unit raise {
     t6152,
   ])
   let t6143 = @class.asm_cases_tac(
-    @parser.parse_term("forall n. group_pow G (x:A) n = group_id G ==> n = 0"),
+    @parser.parse_term("∀ n. group_pow G (x:A) n = group_id G ==> n = 0"),
   )
   let t6142 = @tactics.conv_tac(@class.select_conv)
   let t6141 = @simp.rewrite_tac(@list.List([group_element_order()]))
@@ -68780,7 +68780,7 @@ fn step_866() -> Unit raise {
   group_pow_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> (group_pow G x n = group_id G <=>\n             (group_element_order G x) divides n)",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> (group_pow G x n = group_id G <=>\n             (group_element_order G x) divides n)",
       ),
       t6188,
     ),
@@ -68809,7 +68809,7 @@ fn step_867() -> Unit raise {
   group_pow_eq_id_divisor_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G /\\\n        group_pow G x m = group_id G /\\\n        m divides n\n        ==> group_pow G x n = group_id G",
+        "∀ G (x:A) m n.\n        x IN group_carrier G /\\\n        group_pow G x m = group_id G /\\\n        m divides n\n        ==> group_pow G x n = group_id G",
       ),
       t6190,
     ),
@@ -68839,7 +68839,7 @@ fn step_868() -> Unit raise {
   group_pow_element_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G\n           ==> group_pow G x (group_element_order G x) = group_id G",
+        "∀ G x:A. x IN group_carrier G\n           ==> group_pow G x (group_element_order G x) = group_id G",
       ),
       t6191,
     ),
@@ -68939,7 +68939,7 @@ fn step_869() -> Unit raise {
   group_zpow_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> (group_zpow G x n = group_id G <=>\n             &(group_element_order G x) divides n)",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> (group_zpow G x n = group_id G <=>\n             &(group_element_order G x) divides n)",
       ),
       t6200,
     ),
@@ -68968,7 +68968,7 @@ fn step_870() -> Unit raise {
   group_zpow_eq_id_divisor_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G /\\\n        group_zpow G x m = group_id G /\\\n        m divides n\n        ==> group_zpow G x n = group_id G",
+        "∀ G (x:A) m n.\n        x IN group_carrier G /\\\n        group_zpow G x m = group_id G /\\\n        m divides n\n        ==> group_zpow G x n = group_id G",
       ),
       t6202,
     ),
@@ -69003,7 +69003,7 @@ fn step_871() -> Unit raise {
   group_zpow_eq_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_zpow G x m = group_zpow G x n <=>\n             &(group_element_order G x) divides n - m)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_zpow G x m = group_zpow G x n <=>\n             &(group_element_order G x) divides n - m)",
       ),
       t6205,
     ),
@@ -69033,7 +69033,7 @@ fn step_872() -> Unit raise {
   group_zpow_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_zpow G x m = group_zpow G x n <=>\n             (m == n) (mod &(group_element_order G x)))",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_zpow G x m = group_zpow G x n <=>\n             (m == n) (mod &(group_element_order G x)))",
       ),
       t6208,
     ),
@@ -69062,7 +69062,7 @@ fn step_873() -> Unit raise {
   group_pow_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_pow G x m = group_pow G x n <=>\n             (m == n) (mod (group_element_order G x)))",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_pow G x m = group_pow G x n <=>\n             (m == n) (mod (group_element_order G x)))",
       ),
       t6209,
     ),
@@ -69093,7 +69093,7 @@ fn step_874() -> Unit raise {
   group_zpow_rem_element_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G x (n rem &(group_element_order G x)) =\n            group_zpow G x n",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_zpow G x (n rem &(group_element_order G x)) =\n            group_zpow G x n",
       ),
       t6212,
     ),
@@ -69125,7 +69125,7 @@ fn step_875() -> Unit raise {
   group_pow_mod_element_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_pow G x (n MOD group_element_order G x) =\n            group_pow G x n",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_pow G x (n MOD group_element_order G x) =\n            group_pow G x n",
       ),
       t6214,
     ),
@@ -69146,7 +69146,7 @@ pub fn group_pow_mod_element_order() -> @kernel.Thm {
 ///|
 /// GROUP_ELEMENT_ORDER_EQ_0
 fn step_876() -> Unit raise {
-  let t6215 = @int.number_rule(@parser.parse_term("forall n:num. n divides n"))
+  let t6215 = @int.number_rule(@parser.parse_term("∀ n:num. n divides n"))
   let t6216 = @meson.meson_tac(
     @list.List([
       @int.number_rule(@parser.parse_term("0 divides n <=> n = 0")),
@@ -69160,7 +69160,7 @@ fn step_876() -> Unit raise {
   group_element_order_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A).\n        x IN group_carrier G\n        ==> (group_element_order G x = 0 <=>\n              forall n. ~(n = 0) ==> ~(group_pow G x n = group_id G))",
+        "∀ G (x:A).\n        x IN group_carrier G\n        ==> (group_element_order G x = 0 <=>\n              ∀ n. ~(n = 0) ==> ~(group_pow G x n = group_id G))",
       ),
       t6217,
     ),
@@ -69271,7 +69271,7 @@ fn step_877() -> Unit raise {
   group_element_order_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) d.\n        x IN group_carrier G\n        ==> (group_element_order G x = d <=>\n             forall n. group_pow G x n = group_id G <=> d divides n)",
+        "∀ G (x:A) d.\n        x IN group_carrier G\n        ==> (group_element_order G x = d <=>\n             ∀ n. group_pow G x n = group_id G <=> d divides n)",
       ),
       t6227,
     ),
@@ -69305,7 +69305,7 @@ fn step_878() -> Unit raise {
   group_element_order_eq_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A).\n        x IN group_carrier G\n        ==> (group_element_order G x = 1 <=> x = group_id G)",
+        "∀ G (x:A).\n        x IN group_carrier G\n        ==> (group_element_order G x = 1 <=> x = group_id G)",
       ),
       t6229,
     ),
@@ -69344,7 +69344,7 @@ fn step_879() -> Unit raise {
   group_element_order_unique_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) p.\n        x IN group_carrier G /\\ prime p\n        ==> (group_element_order G x = p <=>\n             ~(x = group_id G) /\\ group_pow G x p = group_id G)",
+        "∀ G (x:A) p.\n        x IN group_carrier G /\\ prime p\n        ==> (group_element_order G x = p <=>\n             ~(x = group_id G) /\\ group_pow G x p = group_id G)",
       ),
       t6232,
     ),
@@ -69370,7 +69370,7 @@ fn step_880() -> Unit raise {
   )
   group_element_order_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. group_element_order G (group_id G) = 1"),
+      @parser.parse_term("∀ G:A group. group_element_order G (group_id G) = 1"),
       t6233,
     ),
   )
@@ -69406,7 +69406,7 @@ fn step_881() -> Unit raise {
   group_element_order_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> group_element_order G (group_inv G x) = group_element_order G x",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> group_element_order G (group_inv G x) = group_element_order G x",
       ),
       t6235,
     ),
@@ -69435,7 +69435,7 @@ fn step_882() -> Unit raise {
   group_pow_gcd_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_pow G x (gcd(m,n)) = group_id G <=>\n             group_pow G x m = group_id G /\\ group_pow G x n = group_id G)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G\n        ==> (group_pow G x (gcd(m,n)) = group_id G <=>\n             group_pow G x m = group_id G /\\ group_pow G x n = group_id G)",
       ),
       t6237,
     ),
@@ -69466,7 +69466,7 @@ fn step_883() -> Unit raise {
   group_pow_coprime_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        x IN group_carrier G /\\ coprime(m,n)\n        ==> (group_pow G x m = group_id G /\\ group_pow G x n = group_id G <=>\n             x = group_id G)",
+        "∀ G (x:A) m n.\n        x IN group_carrier G /\\ coprime(m,n)\n        ==> (group_pow G x m = group_id G /\\ group_pow G x n = group_id G <=>\n             x = group_id G)",
       ),
       t6238,
     ),
@@ -69638,7 +69638,7 @@ fn step_884() -> Unit raise {
   finite_group_element_order_nonzero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        FINITE(group_carrier G) /\\ x IN group_carrier G\n        ==> ~(group_element_order G x = 0)",
+        "∀ G x:A.\n        FINITE(group_carrier G) /\\ x IN group_carrier G\n        ==> ~(group_element_order G x = 0)",
       ),
       t6255,
     ),
@@ -69744,7 +69744,7 @@ fn step_885() -> Unit raise {
   group_element_order_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) k.\n        x IN group_carrier G /\\ ~(k = 0) /\\ k divides group_element_order G x\n        ==> group_element_order G (group_pow G x k) =\n            group_element_order G x DIV k",
+        "∀ G (x:A) k.\n        x IN group_carrier G /\\ ~(k = 0) /\\ k divides group_element_order G x\n        ==> group_element_order G (group_pow G x k) =\n            group_element_order G x DIV k",
       ),
       t6266,
     ),
@@ -69953,7 +69953,7 @@ fn step_886() -> Unit raise {
   group_element_order_pow_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) k.\n        x IN group_carrier G\n        ==> group_element_order G (group_pow G x k) =\n            if k = 0 then 1\n            else group_element_order G x DIV gcd(group_element_order G x,k)",
+        "∀ G (x:A) k.\n        x IN group_carrier G\n        ==> group_element_order G (group_pow G x k) =\n            if k = 0 then 1\n            else group_element_order G x DIV gcd(group_element_order G x,k)",
       ),
       t6300,
     ),
@@ -69991,7 +69991,7 @@ fn step_887() -> Unit raise {
   group_element_order_mul_divides_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x (y:A) n.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x /\\\n        group_element_order G x divides n /\\\n        group_element_order G y divides n\n        ==> group_element_order G (group_mul G x y) divides n",
+        "∀ G x (y:A) n.\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x /\\\n        group_element_order G x divides n /\\\n        group_element_order G y divides n\n        ==> group_element_order G (group_mul G x y) divides n",
       ),
       t6303,
     ),
@@ -70022,7 +70022,7 @@ fn step_888() -> Unit raise {
   abelian_group_element_order_mul_divides_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x (y:A) n.\n        abelian_group G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_element_order G x divides n /\\\n        group_element_order G y divides n\n        ==> group_element_order G (group_mul G x y) divides n",
+        "∀ G x (y:A) n.\n        abelian_group G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_element_order G x divides n /\\\n        group_element_order G y divides n\n        ==> group_element_order G (group_mul G x y) divides n",
       ),
       t6305,
     ),
@@ -70056,7 +70056,7 @@ fn step_889() -> Unit raise {
   group_element_order_mul_divides_lcm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x (y:A).\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_element_order G (group_mul G x y) divides\n            lcm(group_element_order G x,group_element_order G y)",
+        "∀ G x (y:A).\n        x IN group_carrier G /\\\n        y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_element_order G (group_mul G x y) divides\n            lcm(group_element_order G x,group_element_order G y)",
       ),
       t6309,
     ),
@@ -70087,7 +70087,7 @@ fn step_890() -> Unit raise {
   abelian_group_element_order_mul_divides_lcm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x (y:A).\n        abelian_group G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G\n        ==> group_element_order G (group_mul G x y) divides\n            lcm(group_element_order G x,group_element_order G y)",
+        "∀ G x (y:A).\n        abelian_group G /\\\n        x IN group_carrier G /\\\n        y IN group_carrier G\n        ==> group_element_order G (group_mul G x y) divides\n            lcm(group_element_order G x,group_element_order G y)",
       ),
       t6311,
     ),
@@ -70318,7 +70318,7 @@ fn step_891() -> Unit raise {
   group_element_order_homomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) x.\n        group_homomorphism(G,H) f /\\ x IN group_carrier G\n        ==> group_element_order H (f x) divides group_element_order G x",
+        "∀ G H (f:A->B) x.\n        group_homomorphism(G,H) f /\\ x IN group_carrier G\n        ==> group_element_order H (f x) divides group_element_order G x",
       ),
       t6330,
     ),
@@ -70357,7 +70357,7 @@ fn step_892() -> Unit raise {
   group_element_order_monomorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) G H x.\n        group_monomorphism(G,H) f /\\ x IN group_carrier G\n        ==> group_element_order H (f x) = group_element_order G x",
+        "∀(f:A->B) G H x.\n        group_monomorphism(G,H) f /\\ x IN group_carrier G\n        ==> group_element_order H (f x) = group_element_order G x",
       ),
       t6334,
     ),
@@ -70431,7 +70431,7 @@ fn step_893() -> Unit raise {
   isomorphic_group_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P (G:A group) (H:B group).\n        G isomorphic_group H\n        ==> ((forall x. x IN group_carrier G ==> P(group_element_order G x)) <=>\n             (forall y. y IN group_carrier H ==> P(group_element_order H y)))",
+        "∀ P (G:A group) (H:B group).\n        G isomorphic_group H\n        ==> ((∀ x. x IN group_carrier G ==> P(group_element_order G x)) <=>\n             (∀ y. y IN group_carrier H ==> P(group_element_order H y)))",
       ),
       t6341,
     ),
@@ -70471,7 +70471,7 @@ fn step_894() -> Unit raise {
   group_element_order_conjugation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_conjugation G x y) =\n            group_element_order G y",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_conjugation G x y) =\n            group_element_order G y",
       ),
       t6345,
     ),
@@ -70575,7 +70575,7 @@ fn step_895() -> Unit raise {
   group_element_order_mul_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_element_order G (group_mul G x y)\n            divides (group_element_order G x * group_element_order G y)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> group_element_order G (group_mul G x y)\n            divides (group_element_order G x * group_element_order G y)",
       ),
       t6364,
     ),
@@ -70602,7 +70602,7 @@ fn step_896() -> Unit raise {
   abelian_group_element_order_mul_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_mul G x y)\n            divides (group_element_order G x * group_element_order G y)",
+        "∀ G x y:A.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_mul G x y)\n            divides (group_element_order G x * group_element_order G y)",
       ),
       t6365,
     ),
@@ -70680,7 +70680,7 @@ fn step_897() -> Unit raise {
   group_pow_mul_eq_id_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_pow G (group_mul G x y) n = group_id G <=>\n             group_pow G (group_mul G y x) n = group_id G)",
+        "∀ G n x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> (group_pow G (group_mul G x y) n = group_id G <=>\n             group_pow G (group_mul G y x) n = group_id G)",
       ),
       t6374,
     ),
@@ -70716,7 +70716,7 @@ fn step_898() -> Unit raise {
   group_element_order_mul_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G (group_mul G y x)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G (group_mul G y x)",
       ),
       t6377,
     ),
@@ -71260,7 +71260,7 @@ fn step_899() -> Unit raise {
   group_element_order_unique_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G /\\ ~(n = 0)\n        ==> (group_element_order G x = n <=>\n             group_pow G x n = group_id G /\\\n             forall m. 0 < m /\\ m < n ==> ~(group_pow G x m = group_id G))",
+        "∀ G (x:A) n.\n        x IN group_carrier G /\\ ~(n = 0)\n        ==> (group_element_order G x = n <=>\n             group_pow G x n = group_id G /\\\n             ∀ m. 0 < m /\\ m < n ==> ~(group_pow G x m = group_id G))",
       ),
       t6426,
     ),
@@ -71304,7 +71304,7 @@ fn step_900() -> Unit raise {
   group_element_order_eq_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> (group_element_order G x = 2 <=>\n             ~(x = group_id G) /\\ group_pow G x 2 = group_id G)",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> (group_element_order G x = 2 <=>\n             ~(x = group_id G) /\\ group_pow G x 2 = group_id G)",
       ),
       t6431,
     ),
@@ -71331,7 +71331,7 @@ fn step_901() -> Unit raise {
   group_element_order_eq_2_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> (group_element_order G x = 2 <=>\n             ~(x = group_id G) /\\ group_inv G x = x)",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> (group_element_order G x = 2 <=>\n             ~(x = group_id G) /\\ group_inv G x = x)",
       ),
       t6432,
     ),
@@ -71371,7 +71371,7 @@ fn step_902() -> Unit raise {
   group_element_order_pow_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        x IN group_carrier G\n        ==> group_element_order G (group_pow G x n) divides\n            group_element_order G x",
+        "∀ G (x:A) n.\n        x IN group_carrier G\n        ==> group_element_order G (group_pow G x n) divides\n            group_element_order G x",
       ),
       t6437,
     ),
@@ -71463,7 +71463,7 @@ fn step_903() -> Unit raise {
   group_element_order_mul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x /\\\n        coprime(group_element_order G x,group_element_order G y)\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G x * group_element_order G y",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x /\\\n        coprime(group_element_order G x,group_element_order G y)\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G x * group_element_order G y",
       ),
       t6449,
     ),
@@ -71531,7 +71531,7 @@ fn step_904() -> Unit raise {
   group_element_order_eq_mul_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) k n.\n        x IN group_carrier G /\\ ~(k = 0)\n        ==> (group_element_order G x = k * n <=>\n             k divides group_element_order G x /\\\n             group_element_order G (group_pow G x k) = n)",
+        "∀ G (x:A) k n.\n        x IN group_carrier G /\\ ~(k = 0)\n        ==> (group_element_order G x = k * n <=>\n             k divides group_element_order G x /\\\n             group_element_order G (group_pow G x k) = n)",
       ),
       t6457,
     ),
@@ -71563,7 +71563,7 @@ fn step_905() -> Unit raise {
   group_element_order_eq_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) k n.\n        x IN group_carrier G /\\ ~(k = 0) /\\ k divides n\n        ==> (group_element_order G x = k * n <=>\n             group_element_order G (group_pow G x k) = n)",
+        "∀ G (x:A) k n.\n        x IN group_carrier G /\\ ~(k = 0) /\\ k divides n\n        ==> (group_element_order G x = k * n <=>\n             group_element_order G (group_pow G x k) = n)",
       ),
       t6460,
     ),
@@ -71593,7 +71593,7 @@ fn step_906() -> Unit raise {
   abelian_group_element_order_mul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G /\\\n        coprime(group_element_order G x,group_element_order G y)\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G x * group_element_order G y",
+        "∀ G x y:A.\n        abelian_group G /\\ x IN group_carrier G /\\ y IN group_carrier G /\\\n        coprime(group_element_order G x,group_element_order G y)\n        ==> group_element_order G (group_mul G x y) =\n            group_element_order G x * group_element_order G y",
       ),
       t6463,
     ),
@@ -71981,7 +71981,7 @@ fn step_907() -> Unit raise {
   group_element_order_lcm_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> ?z. z IN group_carrier G /\\\n                group_element_order G z =\n                lcm(group_element_order G x,group_element_order G y)",
+        "∀ G x y:A.\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_mul G x y = group_mul G y x\n        ==> ?z. z IN group_carrier G /\\\n                group_element_order G z =\n                lcm(group_element_order G x,group_element_order G y)",
       ),
       t6507,
     ),
@@ -72011,7 +72011,7 @@ fn step_908() -> Unit raise {
   abelian_group_element_order_lcm_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x y:A.\n        abelian_group G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> ?z. z IN group_carrier G /\\\n                group_element_order G z =\n                lcm(group_element_order G x,group_element_order G y)",
+        "∀ G x y:A.\n        abelian_group G /\\\n        x IN group_carrier G /\\ y IN group_carrier G\n        ==> ?z. z IN group_carrier G /\\\n                group_element_order G z =\n                lcm(group_element_order G x,group_element_order G y)",
       ),
       t6510,
     ),
@@ -72130,7 +72130,7 @@ fn step_909() -> Unit raise {
   abelian_group_order_divides_maximal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      abelian_group G /\\ FINITE(group_carrier G)\n      ==> ?x. x IN group_carrier G /\\\n              forall y. y IN group_carrier G\n                  ==> group_element_order G y divides group_element_order G x",
+        "∀ G:A group.\n      abelian_group G /\\ FINITE(group_carrier G)\n      ==> ?x. x IN group_carrier G /\\\n              ∀ y. y IN group_carrier G\n                  ==> group_element_order G y divides group_element_order G x",
       ),
       t6524,
     ),
@@ -72161,7 +72161,7 @@ fn step_910() -> Unit raise {
   abelian_group_element_order_divides_maximal_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> ?x. x IN group_carrier G /\\\n                forall y. y IN group_carrier G\n                    ==> group_pow G y (group_element_order G x) = group_id G",
+        "∀ G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> ?x. x IN group_carrier G /\\\n                ∀ y. y IN group_carrier G\n                    ==> group_pow G y (group_element_order G x) = group_id G",
       ),
       t6526,
     ),
@@ -72192,7 +72192,7 @@ fn step_911() -> Unit raise {
   group_element_order_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        group_element_order (subgroup_generated G h) x =\n        group_element_order G x",
+        "∀ G h x:A.\n        group_element_order (subgroup_generated G h) x =\n        group_element_order G x",
       ),
       t6527,
     ),
@@ -72233,7 +72233,7 @@ fn step_912() -> Unit raise {
   group_element_order_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) x y.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_element_order (prod_group G H) (x,y) =\n            lcm(group_element_order G x,group_element_order H y)",
+        "∀(G:A group) (H:B group) x y.\n        x IN group_carrier G /\\ y IN group_carrier H\n        ==> group_element_order (prod_group G H) (x,y) =\n            lcm(group_element_order G x,group_element_order H y)",
       ),
       t6530,
     ),
@@ -72264,7 +72264,7 @@ fn step_913() -> Unit raise {
   group_element_order_prod_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) z.\n        z IN group_carrier(prod_group G H)\n        ==> group_element_order (prod_group G H) z =\n            lcm(group_element_order G (FST z),group_element_order H (SND z))",
+        "∀(G:A group) (H:B group) z.\n        z IN group_carrier(prod_group G H)\n        ==> group_element_order (prod_group G H) z =\n            lcm(group_element_order G (FST z),group_element_order H (SND z))",
       ),
       t6532,
     ),
@@ -72376,7 +72376,7 @@ fn step_914() -> Unit raise {
   group_element_order_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:K->A group) k x.\n        x IN group_carrier(sum_group k G)\n        ==> (group_element_order (sum_group k G) x =\n             iterate (\\m n. lcm(m,n)) k\n                     (\\i. group_element_order (G i) (x i)))",
+        "∀(G:K->A group) k x.\n        x IN group_carrier(sum_group k G)\n        ==> (group_element_order (sum_group k G) x =\n             iterate (\\m n. lcm(m,n)) k\n                     (\\i. group_element_order (G i) (x i)))",
       ),
       t6545,
     ),
@@ -72451,7 +72451,7 @@ fn step_915() -> Unit raise {
   group_element_order_sum_group_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G k (x:K->A).\n        x IN group_carrier (sum_group k G)\n        ==> (group_element_order (sum_group k G) x = 0 <=>\n             ?i. i IN k /\\ group_element_order (G i) (x i) = 0)",
+        "∀ G k (x:K->A).\n        x IN group_carrier (sum_group k G)\n        ==> (group_element_order (sum_group k G) x = 0 <=>\n             ?i. i IN k /\\ group_element_order (G i) (x i) = 0)",
       ),
       t6551,
     ),
@@ -72594,7 +72594,7 @@ fn step_916() -> Unit raise {
   let t6559 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t6556 = @drule.match_mp(
     @int.integer_rule(
-      @parser.parse_term("forall m n:int. coprime(m,n) ==> ?a b. b * n + a * m = &1"),
+      @parser.parse_term("∀ m n:int. coprime(m,n) ==> ?a b. b * n + a * m = &1"),
     ),
   )
   let t6558 = @tactics.first_assum(fn(
@@ -72709,7 +72709,7 @@ fn step_916() -> Unit raise {
   group_element_order_coprime_decomp_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) m n.\n        coprime(m,n) /\\\n        x IN group_carrier G /\\\n        group_element_order G x = m * n\n        ==> ?r s. group_element_order G (group_zpow G x r) = m /\\\n                  group_element_order G (group_zpow G x s) = n /\\\n                  group_mul G (group_zpow G x r) (group_zpow G x s) = x",
+        "∀ G (x:A) m n.\n        coprime(m,n) /\\\n        x IN group_carrier G /\\\n        group_element_order G x = m * n\n        ==> ?r s. group_element_order G (group_zpow G x r) = m /\\\n                  group_element_order G (group_zpow G x s) = n /\\\n                  group_mul G (group_zpow G x r) (group_zpow G x s) = x",
       ),
       t6578,
     ),
@@ -73253,7 +73253,7 @@ fn step_917() -> Unit raise {
   group_element_order_coprime_decomp_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z = m * n\n        ==> ?!(x,y). x IN group_carrier G /\\ y IN group_carrier G /\\\n                     group_mul G x y = z /\\\n                     group_mul G y x = z /\\\n                     group_element_order G x = m /\\\n                     group_element_order G y = n",
+        "∀ G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z = m * n\n        ==> ?!(x,y). x IN group_carrier G /\\ y IN group_carrier G /\\\n                     group_mul G x y = z /\\\n                     group_mul G y x = z /\\\n                     group_element_order G x = m /\\\n                     group_element_order G y = n",
       ),
       t6625,
     ),
@@ -73428,7 +73428,7 @@ fn step_918() -> Unit raise {
   group_element_order_coprime_decomp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z = m * n\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_element_order G x = m /\\\n                  group_element_order G y = n",
+        "∀ G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z = m * n\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_element_order G x = m /\\\n                  group_element_order G y = n",
       ),
       t6639,
     ),
@@ -73500,7 +73500,7 @@ fn step_919() -> Unit raise {
   group_element_order_coprime_decomp_divides_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z divides m * n\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_element_order G x divides m /\\\n                  group_element_order G y divides n",
+        "∀ G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_element_order G z divides m * n\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_element_order G x divides m /\\\n                  group_element_order G y divides n",
       ),
       t6648,
     ),
@@ -73527,7 +73527,7 @@ fn step_920() -> Unit raise {
   group_pow_eq_id_decomp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_pow G z (m * n) = group_id G\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_pow G x m = group_id G /\\\n                  group_pow G y n = group_id G",
+        "∀ G (z:A) m n.\n        coprime(m,n) /\\\n        z IN group_carrier G /\\\n        group_pow G z (m * n) = group_id G\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  group_pow G x m = group_id G /\\\n                  group_pow G y n = group_id G",
       ),
       t6649,
     ),
@@ -73604,7 +73604,7 @@ fn step_921() -> Unit raise {
   group_element_order_primepow_decomp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (z:A) p.\n        prime p /\\\n        z IN group_carrier G /\\\n        ~(group_element_order G z = 0)\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  (?k. group_element_order G x = p EXP k) /\\\n                  coprime(p,group_element_order G y)",
+        "∀ G (z:A) p.\n        prime p /\\\n        z IN group_carrier G /\\\n        ~(group_element_order G z = 0)\n        ==> ?x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                  group_mul G x y = z /\\\n                  group_mul G y x = z /\\\n                  (?k. group_element_order G x = p EXP k) /\\\n                  coprime(p,group_element_order G y)",
       ),
       t6661,
     ),
@@ -73797,7 +73797,7 @@ fn step_922() -> Unit raise {
   subgroup_of_torsion_general_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G:A group.\n        abelian_group G /\\\n        P 1 /\\ (forall m n p. p divides lcm(m,n) /\\ P m /\\ P n ==> P p)\n        ==> {x | x IN group_carrier G /\\ P(group_element_order G x)}\n            subgroup_of G",
+        "∀ P G:A group.\n        abelian_group G /\\\n        P 1 /\\ (∀ m n p. p divides lcm(m,n) /\\ P m /\\ P n ==> P p)\n        ==> {x | x IN group_carrier G /\\ P(group_element_order G x)}\n            subgroup_of G",
       ),
       t6679,
     ),
@@ -73963,7 +73963,7 @@ fn step_923() -> Unit raise {
   subgroup_of_torsion_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G:A group.\n        abelian_group G /\\\n        P 1 /\\ (forall m n p. p divides m * n /\\ P m /\\ P n ==> P p)\n        ==> {x | x IN group_carrier G /\\ P(group_element_order G x)}\n            subgroup_of G",
+        "∀ P G:A group.\n        abelian_group G /\\\n        P 1 /\\ (∀ m n p. p divides m * n /\\ P m /\\ P n ==> P p)\n        ==> {x | x IN group_carrier G /\\ P(group_element_order G x)}\n            subgroup_of G",
       ),
       t6694,
     ),
@@ -73997,7 +73997,7 @@ fn step_924() -> Unit raise {
   subgroup_of_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n            subgroup_of G",
+        "∀ G:A group.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n            subgroup_of G",
       ),
       t6698,
     ),
@@ -74034,7 +74034,7 @@ fn step_925() -> Unit raise {
   subgroup_of_primes_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) Q.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\\n                 forall p. prime p /\\ p divides group_element_order G x\n                     ==> Q p}\n            subgroup_of G",
+        "∀(G:A group) Q.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\\n                 ∀ p. prime p /\\ p divides group_element_order G x\n                     ==> Q p}\n            subgroup_of G",
       ),
       t6701,
     ),
@@ -74061,7 +74061,7 @@ fn step_926() -> Unit raise {
   subgroup_of_prime_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> {x | x IN group_carrier G /\\ ?k. group_element_order G x = p EXP k}\n            subgroup_of G",
+        "∀(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> {x | x IN group_carrier G /\\ ?k. group_element_order G x = p EXP k}\n            subgroup_of G",
       ),
       t6702,
     ),
@@ -74097,7 +74097,7 @@ fn step_927() -> Unit raise {
   subgroup_of_lower_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ group_element_order G x divides n}\n            subgroup_of G",
+        "∀(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ group_element_order G x divides n}\n            subgroup_of G",
       ),
       t6706,
     ),
@@ -74234,7 +74234,7 @@ fn step_928() -> Unit raise {
   subgroup_of_lower_order_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ group_pow G x n = group_id G}\n            subgroup_of G",
+        "∀(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\ group_pow G x n = group_id G}\n            subgroup_of G",
       ),
       t6719,
     ),
@@ -74278,7 +74278,7 @@ fn step_929() -> Unit raise {
   subgroup_of_nondivisible_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> {x | x IN group_carrier G /\\\n                 ~(p divides group_element_order G x)}\n            subgroup_of G",
+        "∀(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> {x | x IN group_carrier G /\\\n                 ~(p divides group_element_order G x)}\n            subgroup_of G",
       ),
       t6723,
     ),
@@ -74312,7 +74312,7 @@ fn step_930() -> Unit raise {
   subgroup_of_coprime_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\\n                 coprime(n,group_element_order G x)}\n            subgroup_of G",
+        "∀(G:A group) n.\n        abelian_group G\n        ==> {x | x IN group_carrier G /\\\n                 coprime(n,group_element_order G x)}\n            subgroup_of G",
       ),
       t6727,
     ),
@@ -74349,7 +74349,7 @@ fn step_931() -> Unit raise {
   torsion_free_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n        (forall x. x IN group_carrier G /\\ ~(x = group_id G)\n             ==> group_element_order G x = 0)",
+        "∀ G:A group.\n        (∀ x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n        (∀ x. x IN group_carrier G /\\ ~(x = group_id G)\n             ==> group_element_order G x = 0)",
       ),
       t6730,
     ),
@@ -74380,7 +74380,7 @@ fn step_932() -> Unit raise {
   torsion_free_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n        (forall x n. x IN group_carrier G /\\ group_pow G x n = group_id G\n               ==> x = group_id G \\/ n = 0)",
+        "∀ G:A group.\n        (∀ x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n        (∀ x n. x IN group_carrier G /\\ group_pow G x n = group_id G\n               ==> x = group_id G \\/ n = 0)",
       ),
       t6732,
     ),
@@ -74415,7 +74415,7 @@ fn step_933() -> Unit raise {
   quotient_group_pow_eq_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n x k.\n        n normal_subgroup_of G /\\ x IN group_carrier G\n        ==> (group_pow (quotient_group G n) (right_coset G n x) k =\n             group_id (quotient_group G n) <=>\n             group_pow G x k IN n)",
+        "∀(G:A group) n x k.\n        n normal_subgroup_of G /\\ x IN group_carrier G\n        ==> (group_pow (quotient_group G n) (right_coset G n x) k =\n             group_id (quotient_group G n) <=>\n             group_pow G x k IN n)",
       ),
       t6734,
     ),
@@ -74554,7 +74554,7 @@ fn step_934() -> Unit raise {
   torsion_free_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) H.\n        abelian_group G /\\\n        quotient_group\n          G {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)} = H\n        ==> forall x. x IN group_carrier H ==> group_element_order H x <= 1",
+        "∀(G:A group) H.\n        abelian_group G /\\\n        quotient_group\n          G {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)} = H\n        ==> ∀ x. x IN group_carrier H ==> group_element_order H x <= 1",
       ),
       t6747,
     ),
@@ -74591,7 +74591,7 @@ fn step_935() -> Unit raise {
   let t6748 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall g. (forall x. x IN s ==> f x IN s /\\ g(f x) = x) /\\\n        (forall x. x IN s ==> g x IN s /\\ f(g x) = x)\n        ==> IMAGE f s = s",
+        "∀ g. (∀ x. x IN s ==> f x IN s /\\ g(f x) = x) /\\\n        (∀ x. x IN s ==> g x IN s /\\ f(g x) = x)\n        ==> IMAGE f s = s",
       ),
     ),
   )
@@ -74605,7 +74605,7 @@ fn step_935() -> Unit raise {
   image_group_conjugation_torsion_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G P a:A.\n        a IN group_carrier G\n        ==> IMAGE (group_conjugation G a)\n                  {x | x IN group_carrier G /\\ P(group_element_order G x)} =\n            {x | x IN group_carrier G /\\ P(group_element_order G x)}",
+        "∀ G P a:A.\n        a IN group_carrier G\n        ==> IMAGE (group_conjugation G a)\n                  {x | x IN group_carrier G /\\ P(group_element_order G x)} =\n            {x | x IN group_carrier G /\\ P(group_element_order G x)}",
       ),
       t6751,
     ),
@@ -74639,7 +74639,7 @@ fn step_936() -> Unit raise {
   normal_subgroup_of_torsion_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G:A group.\n        {x | x IN group_carrier G /\\ P(group_element_order G x)}\n        normal_subgroup_of G <=>\n        {x | x IN group_carrier G /\\ P(group_element_order G x)}\n        subgroup_of G",
+        "∀ P G:A group.\n        {x | x IN group_carrier G /\\ P(group_element_order G x)}\n        normal_subgroup_of G <=>\n        {x | x IN group_carrier G /\\ P(group_element_order G x)}\n        subgroup_of G",
       ),
       t6753,
     ),
@@ -74664,7 +74664,7 @@ fn step_937() -> Unit raise {
   normal_subgroup_of_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n        normal_subgroup_of G <=>\n        {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n        subgroup_of G",
+        "∀ G:A group.\n        {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n        normal_subgroup_of G <=>\n        {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n        subgroup_of G",
       ),
       t6754,
     ),
@@ -74716,7 +74716,7 @@ fn step_938() -> Unit raise {
   subgroup_of_powers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A).\n      x IN group_carrier G ==> {group_zpow G x n | n IN (:int)} subgroup_of G",
+        "∀ G (x:A).\n      x IN group_carrier G ==> {group_zpow G x n | n IN (:int)} subgroup_of G",
       ),
       t6760,
     ),
@@ -74933,7 +74933,7 @@ fn step_939() -> Unit raise {
   carrier_subgroup_generated_by_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> group_carrier(subgroup_generated G {x}) =\n            {group_zpow G x n | n IN (:int)}",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> group_carrier(subgroup_generated G {x}) =\n            {group_zpow G x n | n IN (:int)}",
       ),
       t6788,
     ),
@@ -74987,7 +74987,7 @@ fn step_941() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall x. P x ==> (Q x <=> R x))\n    ==> ((?x. P x /\\ Q x) <=> (?x. P x /\\ R x))",
+        "(∀ x. P x ==> (Q x <=> R x))\n    ==> ((?x. P x /\\ Q x) <=> (?x. P x /\\ R x))",
       ),
     ),
   )
@@ -75013,7 +75013,7 @@ fn step_941() -> Unit raise {
   cyclic_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        cyclic_group G <=>\n        ?x. x IN group_carrier G /\\\n            group_carrier G = {group_zpow G x n | n IN (:int)}",
+        "∀ G:A group.\n        cyclic_group G <=>\n        ?x. x IN group_carrier G /\\\n            group_carrier G = {group_zpow G x n | n IN (:int)}",
       ),
       t6794,
     ),
@@ -75059,7 +75059,7 @@ fn step_942() -> Unit raise {
   )
   cyclic_imp_abelian_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. cyclic_group G ==> abelian_group G"),
+      @parser.parse_term("∀ G:A group. cyclic_group G ==> abelian_group G"),
       t6798,
     ),
   )
@@ -75096,7 +75096,7 @@ fn step_943() -> Unit raise {
   )
   trivial_imp_cyclic_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. trivial_group G ==> cyclic_group G"),
+      @parser.parse_term("∀ G:A group. trivial_group G ==> cyclic_group G"),
       t6802,
     ),
   )
@@ -75276,7 +75276,7 @@ fn step_944() -> Unit raise {
   cyclic_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. cyclic_group G <=> ?x. subgroup_generated G {x} = G",
+        "∀ G:A group. cyclic_group G <=> ?x. subgroup_generated G {x} = G",
       ),
       t6818,
     ),
@@ -75317,7 +75317,7 @@ fn step_945() -> Unit raise {
   )
   cyclic_group_generated_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G x:A. cyclic_group(subgroup_generated G {x})"),
+      @parser.parse_term("∀ G x:A. cyclic_group(subgroup_generated G {x})"),
       t6823,
     ),
   )
@@ -75366,7 +75366,7 @@ fn step_946() -> Unit raise {
   })
   let t6836 = @drule.match_mp(
     @sets.set_rule(
-      @parser.parse_term("t = IMAGE f s ==> forall x. x IN s ==> f x IN t"),
+      @parser.parse_term("t = IMAGE f s ==> ∀ x. x IN s ==> f x IN t"),
     ),
   )
   let t6838 = @tactics.first_assum(fn(
@@ -75541,7 +75541,7 @@ fn step_946() -> Unit raise {
   cyclic_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ cyclic_group G ==> cyclic_group H",
+        "∀ G H (f:A->B).\n        group_epimorphism(G,H) f /\\ cyclic_group G ==> cyclic_group H",
       ),
       t6843,
     ),
@@ -75587,7 +75587,7 @@ fn step_947() -> Unit raise {
   isomorphic_group_cyclicity_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H ==> (cyclic_group G <=> cyclic_group H)",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H ==> (cyclic_group G <=> cyclic_group H)",
       ),
       t6846,
     ),
@@ -75909,7 +75909,7 @@ fn step_948() -> Unit raise {
   let t6898 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "h SUBSET {f x | x IN s} ==> (forall x. f x IN h ==> P(f x))\n   ==> forall y. y IN h ==> P y",
+        "h SUBSET {f x | x IN s} ==> (∀ x. f x IN h ==> P(f x))\n   ==> ∀ y. y IN h ==> P y",
       ),
     ),
   )
@@ -76548,7 +76548,7 @@ fn step_948() -> Unit raise {
   subgroup_of_cyclic_group_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h x:A.\n        x IN group_carrier G /\\ h subgroup_of (subgroup_generated G {x})\n        ==> ?k. h = {group_zpow G x (&k * n) | n IN (:int)}",
+        "∀ G h x:A.\n        x IN group_carrier G /\\ h subgroup_of (subgroup_generated G {x})\n        ==> ?k. h = {group_zpow G x (&k * n) | n IN (:int)}",
       ),
       t6957,
     ),
@@ -76714,7 +76714,7 @@ fn step_949() -> Unit raise {
   subgroup_of_cyclic_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        cyclic_group G /\\ h subgroup_of G\n        ==> cyclic_group(subgroup_generated G h)",
+        "∀ G h:A->bool.\n        cyclic_group G /\\ h subgroup_of G\n        ==> cyclic_group(subgroup_generated G h)",
       ),
       t6980,
     ),
@@ -76746,7 +76746,7 @@ fn step_950() -> Unit raise {
   cyclic_group_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n     cyclic_group G /\\ n subgroup_of G ==> cyclic_group(quotient_group G n)",
+        "∀ G n:A->bool.\n     cyclic_group G /\\ n subgroup_of G ==> cyclic_group(quotient_group G n)",
       ),
       t6981,
     ),
@@ -77061,7 +77061,7 @@ fn step_951() -> Unit raise {
   no_proper_subgroups_imp_cyclic_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        (forall h. h subgroup_of G ==> h SUBSET {group_id G} \\/ h = group_carrier G)\n        ==> cyclic_group G",
+        "∀ G:A group.\n        (∀ h. h subgroup_of G ==> h SUBSET {group_id G} \\/ h = group_carrier G)\n        ==> cyclic_group G",
       ),
       t7016,
     ),
@@ -77600,7 +77600,7 @@ fn step_952() -> Unit raise {
   )
   let t7087 = (
     @parser.parse_term(
-      "(forall G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ?n. ~(n = 0) /\\ group_pow G x n = group_id G)) /\\\n   (forall G x:A.\n        x IN group_carrier G\n        ==> (INFINITE(group_carrier(subgroup_generated G {x})) <=>\n             forall m n. group_pow G x m = group_pow G x n ==> m = n)) /\\\n   (forall G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ?n. ~(n = &0) /\\ group_zpow G x n = group_id G)) /\\\n   (forall G x:A.\n        x IN group_carrier G\n        ==> (INFINITE(group_carrier(subgroup_generated G {x})) <=>\n             forall m n. group_zpow G x m = group_zpow G x n ==> m = n))",
+      "(∀ G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ?n. ~(n = 0) /\\ group_pow G x n = group_id G)) /\\\n   (∀ G x:A.\n        x IN group_carrier G\n        ==> (INFINITE(group_carrier(subgroup_generated G {x})) <=>\n             ∀ m n. group_pow G x m = group_pow G x n ==> m = n)) /\\\n   (∀ G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ?n. ~(n = &0) /\\ group_zpow G x n = group_id G)) /\\\n   (∀ G x:A.\n        x IN group_carrier G\n        ==> (INFINITE(group_carrier(subgroup_generated G {x})) <=>\n             ∀ m n. group_zpow G x m = group_zpow G x n ==> m = n))",
     ),
     t7086,
   )
@@ -77666,7 +77666,7 @@ fn step_953() -> Unit raise {
   finite_cyclic_subgroup_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ~(group_element_order G x = 0))",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> (FINITE(group_carrier(subgroup_generated G {x})) <=>\n             ~(group_element_order G x = 0))",
       ),
       t7089,
     ),
@@ -77693,7 +77693,7 @@ fn step_954() -> Unit raise {
   infinite_cyclic_subgroup_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> (INFINITE (group_carrier(subgroup_generated G {x})) <=>\n             group_element_order G x = 0)",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> (INFINITE (group_carrier(subgroup_generated G {x})) <=>\n             group_element_order G x = 0)",
       ),
       t7090,
     ),
@@ -77815,7 +77815,7 @@ fn step_955() -> Unit raise {
   finite_cyclic_subgroup_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        FINITE(group_carrier(subgroup_generated G {x})) /\\ x IN group_carrier G\n        ==> group_carrier(subgroup_generated G {x}) =\n            {group_pow G x n |n| n < group_element_order G x}",
+        "∀ G x:A.\n        FINITE(group_carrier(subgroup_generated G {x})) /\\ x IN group_carrier G\n        ==> group_carrier(subgroup_generated G {x}) =\n            {group_pow G x n |n| n < group_element_order G x}",
       ),
       t7109,
     ),
@@ -77926,7 +77926,7 @@ fn step_956() -> Unit raise {
   let t7152 = @tactics.exists_tac(@parser.parse_term("group_pow G (x:A) m"))
   let t7151 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("forall a. a IN s /\\ ~(a IN t) ==> s = t ==> P"),
+      @parser.parse_term("∀ a. a IN s /\\ ~(a IN t) ==> s = t ==> P"),
     ),
   )
   let t7150 = @tactics.replicate_tac(
@@ -78330,7 +78330,7 @@ fn step_956() -> Unit raise {
   finite_subgroups_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. FINITE {h | h subgroup_of G} <=> FINITE(group_carrier G)",
+        "∀ G:A group. FINITE {h | h subgroup_of G} <=> FINITE(group_carrier G)",
       ),
       t7165,
     ),
@@ -78491,7 +78491,7 @@ fn step_957() -> Unit raise {
   card_cyclic_subgroup_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        FINITE(group_carrier(subgroup_generated G {x})) /\\ x IN group_carrier G\n        ==> CARD(group_carrier(subgroup_generated G {x})) =\n            group_element_order G x",
+        "∀ G x:A.\n        FINITE(group_carrier(subgroup_generated G {x})) /\\ x IN group_carrier G\n        ==> CARD(group_carrier(subgroup_generated G {x})) =\n            group_element_order G x",
       ),
       t7185,
     ),
@@ -78559,7 +78559,7 @@ fn step_958() -> Unit raise {
   let t7189 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "z IN s /\\ (forall x. x IN s /\\ ~(x = z) ==> s = t) ==> s = {z} \\/ s = t",
+        "z IN s /\\ (∀ x. x IN s /\\ ~(x = z) ==> s = t) ==> s = {z} \\/ s = t",
       ),
     ),
   )
@@ -78629,7 +78629,7 @@ fn step_958() -> Unit raise {
   prime_order_imp_no_proper_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n        (group_carrier G) HAS_SIZE p /\\ (p = 1 \\/ prime p)\n        ==> forall h. h subgroup_of G\n                ==> h = {group_id G} \\/ h = group_carrier G",
+        "∀(G:A group) p.\n        (group_carrier G) HAS_SIZE p /\\ (p = 1 \\/ prime p)\n        ==> ∀ h. h subgroup_of G\n                ==> h = {group_id G} \\/ h = group_carrier G",
       ),
       t7206,
     ),
@@ -80241,7 +80241,7 @@ fn step_959() -> Unit raise {
   )
   let t7358 = (
     @parser.parse_term(
-      "(forall(G:A group).\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))) <=>\n        forall h. h subgroup_of G ==> h = {group_id G} \\/ h = group_carrier G) /\\\n   (forall(G:A group).\n        (forall h. h subgroup_of G ==> h = {group_id G} \\/ h = group_carrier G) <=>\n        cyclic_group G /\\\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))))",
+      "(∀(G:A group).\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))) <=>\n        ∀ h. h subgroup_of G ==> h = {group_id G} \\/ h = group_carrier G) /\\\n   (∀(G:A group).\n        (∀ h. h subgroup_of G ==> h = {group_id G} \\/ h = group_carrier G) <=>\n        cyclic_group G /\\\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))))",
     ),
     t7357,
   )
@@ -80293,7 +80293,7 @@ fn step_960() -> Unit raise {
   abelian_simple_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G\n        ==> ((forall h. h normal_subgroup_of G\n                  ==> h = {group_id G} \\/ h = group_carrier G) <=>\n             FINITE(group_carrier G) /\\\n             (CARD (group_carrier G) = 1 \\/ prime(CARD(group_carrier G))))",
+        "∀ G:A group.\n        abelian_group G\n        ==> ((∀ h. h normal_subgroup_of G\n                  ==> h = {group_id G} \\/ h = group_carrier G) <=>\n             FINITE(group_carrier G) /\\\n             (CARD (group_carrier G) = 1 \\/ prime(CARD(group_carrier G))))",
       ),
       t7360,
     ),
@@ -80328,7 +80328,7 @@ fn step_961() -> Unit raise {
   prime_order_imp_cyclic_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G)))\n        ==> cyclic_group G",
+        "∀ G:A group.\n        FINITE(group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G)))\n        ==> cyclic_group G",
       ),
       t7363,
     ),
@@ -80367,7 +80367,7 @@ fn step_962() -> Unit raise {
   group_element_order_divides_group_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G /\\ FINITE(group_carrier G)\n        ==> (group_element_order G x) divides CARD(group_carrier G)",
+        "∀ G x:A.\n        x IN group_carrier G /\\ FINITE(group_carrier G)\n        ==> (group_element_order G x) divides CARD(group_carrier G)",
       ),
       t7367,
     ),
@@ -80394,7 +80394,7 @@ fn step_963() -> Unit raise {
   group_pow_group_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G /\\ FINITE(group_carrier G)\n        ==> group_pow G x (CARD(group_carrier G)) = group_id G",
+        "∀ G x:A.\n        x IN group_carrier G /\\ FINITE(group_carrier G)\n        ==> group_pow G x (CARD(group_carrier G)) = group_id G",
       ),
       t7368,
     ),
@@ -80429,7 +80429,7 @@ fn step_964() -> Unit raise {
   let t7370 = @tactics.match_mp_tac(
     @int.integer_rule(
       @parser.parse_term(
-        "forall d:int. (x == y) (mod d) /\\ e divides d ==> (x == y) (mod e)",
+        "∀ d:int. (x == y) (mod d) /\\ e divides d ==> (x == y) (mod e)",
       ),
     ),
   )
@@ -80450,7 +80450,7 @@ fn step_964() -> Unit raise {
   group_zpow_rem_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n.\n        FINITE(group_carrier G) /\\ x IN group_carrier G\n        ==> group_zpow G x (n rem &(CARD(group_carrier G))) =\n            group_zpow G x n",
+        "∀ G (x:A) n.\n        FINITE(group_carrier G) /\\ x IN group_carrier G\n        ==> group_zpow G x (n rem &(CARD(group_carrier G))) =\n            group_zpow G x n",
       ),
       t7374,
     ),
@@ -80478,7 +80478,7 @@ fn step_965() -> Unit raise {
   group_pow_mod_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (x:A) n. FINITE(group_carrier G) /\\ x IN group_carrier G\n           ==> group_pow G x (n MOD CARD(group_carrier G)) =\n               group_pow G x n",
+        "∀ G (x:A) n. FINITE(group_carrier G) /\\ x IN group_carrier G\n           ==> group_pow G x (n MOD CARD(group_carrier G)) =\n               group_pow G x n",
       ),
       t7376,
     ),
@@ -80694,7 +80694,7 @@ fn step_966() -> Unit raise {
   subgroup_of_finite_cyclic_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h a:A.\n        FINITE(group_carrier G) /\\\n        a IN group_carrier G /\\\n        subgroup_generated G {a} = G\n        ==> (h subgroup_of G <=>\n             ?d. d divides CARD(group_carrier G) /\\\n                 h = group_carrier(subgroup_generated G {group_pow G a d}))",
+        "∀ G h a:A.\n        FINITE(group_carrier G) /\\\n        a IN group_carrier G /\\\n        subgroup_generated G {a} = G\n        ==> (h subgroup_of G <=>\n             ?d. d divides CARD(group_carrier G) /\\\n                 h = group_carrier(subgroup_generated G {group_pow G a d}))",
       ),
       t7406,
     ),
@@ -81183,7 +81183,7 @@ fn step_967() -> Unit raise {
   let t7442 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(?x. P x) /\\ (forall x. P x ==> forall x'. P x' ==> x = x')\n    ==> ?a. {x | P x} = {a}",
+        "(?x. P x) /\\ (∀ x. P x ==> ∀ x'. P x' ==> x = x')\n    ==> ?a. {x | P x} = {a}",
       ),
     ),
   )
@@ -81570,7 +81570,7 @@ fn step_967() -> Unit raise {
   count_finite_cyclic_group_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) d.\n        FINITE(group_carrier G) /\\ cyclic_group G\n        ==> (CARD {h | h subgroup_of G /\\ CARD h = d} =\n             if d divides CARD(group_carrier G) then 1 else 0)",
+        "∀(G:A group) d.\n        FINITE(group_carrier G) /\\ cyclic_group G\n        ==> (CARD {h | h subgroup_of G /\\ CARD h = d} =\n             if d divides CARD(group_carrier G) then 1 else 0)",
       ),
       t7509,
     ),
@@ -81611,7 +81611,7 @@ fn step_968() -> Unit raise {
   let t7513 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall y. y IN t ==> ?a. {x | x IN s /\\ f x = y} = {a}) /\\\n    (forall y. ~(y IN t) ==> {x | x IN s /\\ f x = y} = {})\n    ==> t = IMAGE f s /\\ (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)",
+        "(∀ y. y IN t ==> ?a. {x | x IN s /\\ f x = y} = {a}) /\\\n    (∀ y. ~(y IN t) ==> {x | x IN s /\\ f x = y} = {})\n    ==> t = IMAGE f s /\\ (∀ x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)",
       ),
     ),
   )
@@ -81621,7 +81621,7 @@ fn step_968() -> Unit raise {
     @meson.meson(
       @list.List([@sets.card_image_inj()]),
       @parser.parse_term(
-        "forall f. FINITE s /\\\n        t = IMAGE f s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> CARD s = CARD t",
+        "∀ f. FINITE s /\\\n        t = IMAGE f s /\\\n        (∀ x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> CARD s = CARD t",
       ),
     ),
   )
@@ -81647,7 +81647,7 @@ fn step_968() -> Unit raise {
   count_finite_cyclic_group_subgroups_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      FINITE(group_carrier G) /\\ cyclic_group G\n      ==> CARD {h | h subgroup_of G} =\n          CARD {d | d divides CARD(group_carrier G)}",
+        "∀ G:A group.\n      FINITE(group_carrier G) /\\ cyclic_group G\n      ==> CARD {h | h subgroup_of G} =\n          CARD {d | d divides CARD(group_carrier G)}",
       ),
       t7518,
     ),
@@ -81681,7 +81681,7 @@ fn step_969() -> Unit raise {
   maximal_subgroup_prime_index_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             (CARD {right_coset G n x | x | x IN group_carrier G} = 1 \\/\n              prime(CARD {right_coset G n x | x | x IN group_carrier G})))",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> ((∀ h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             (CARD {right_coset G n x | x | x IN group_carrier G} = 1 \\/\n              prime(CARD {right_coset G n x | x | x IN group_carrier G})))",
       ),
       t7520,
     ),
@@ -81726,7 +81726,7 @@ fn step_970() -> Unit raise {
   prime_index_maximal_proper_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> (FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             prime(CARD {right_coset G n x | x | x IN group_carrier G}) <=>\n             ~(n = group_carrier G) /\\\n             forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G)",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> (FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             prime(CARD {right_coset G n x | x | x IN group_carrier G}) <=>\n             ~(n = group_carrier G) /\\\n             ∀ h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G)",
       ),
       t7524,
     ),
@@ -81753,7 +81753,7 @@ fn step_971() -> Unit raise {
   maximal_proper_subgroup_prime_index_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G /\\ ~(n = group_carrier G)\n        ==> ((forall h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             prime(CARD {right_coset G n x | x | x IN group_carrier G}))",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G /\\ ~(n = group_carrier G)\n        ==> ((∀ h. h subgroup_of G /\\ n PSUBSET h ==> h = group_carrier G) <=>\n             FINITE {right_coset G n x | x | x IN group_carrier G} /\\\n             prime(CARD {right_coset G n x | x | x IN group_carrier G}))",
       ),
       t7525,
     ),
@@ -81849,7 +81849,7 @@ fn step_972() -> Unit raise {
   let t7529 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(?g. (forall x. x IN s ==> g(f x) = x))\n    ==> forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y",
+        "(?g. (∀ x. x IN s ==> g(f x) = x))\n    ==> ∀ x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y",
       ),
     ),
   )
@@ -81912,7 +81912,7 @@ fn step_972() -> Unit raise {
   group_zpow_cancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n x y:A.\n        FINITE(group_carrier G) /\\ coprime(n,&(CARD(group_carrier G))) /\\\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_zpow G x n = group_zpow G y n\n        ==> x = y",
+        "∀ G n x y:A.\n        FINITE(group_carrier G) /\\ coprime(n,&(CARD(group_carrier G))) /\\\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_zpow G x n = group_zpow G y n\n        ==> x = y",
       ),
       t7546,
     ),
@@ -81943,7 +81943,7 @@ fn step_973() -> Unit raise {
   group_pow_cancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n x y:A.\n        FINITE(group_carrier G) /\\ coprime(n,CARD(group_carrier G)) /\\\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_pow G x n = group_pow G y n\n        ==> x = y",
+        "∀ G n x y:A.\n        FINITE(group_carrier G) /\\ coprime(n,CARD(group_carrier G)) /\\\n        x IN group_carrier G /\\ y IN group_carrier G /\\\n        group_pow G x n = group_pow G y n\n        ==> x = y",
       ),
       t7547,
     ),
@@ -82004,7 +82004,7 @@ fn step_975() -> Unit raise {
   finitely_generated_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        finitely_generated_group G <=>\n        ?s. FINITE s /\\\n            s SUBSET group_carrier G /\\\n            subgroup_generated G s = G",
+        "∀ G:A group.\n        finitely_generated_group G <=>\n        ?s. FINITE s /\\\n            s SUBSET group_carrier G /\\\n            subgroup_generated G s = G",
       ),
       t7549,
     ),
@@ -82035,7 +82035,7 @@ fn step_976() -> Unit raise {
   cyclic_imp_finitely_generated_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. cyclic_group G ==> finitely_generated_group G",
+        "∀ G:A group. cyclic_group G ==> finitely_generated_group G",
       ),
       t7551,
     ),
@@ -82064,7 +82064,7 @@ fn step_977() -> Unit raise {
   finite_imp_finitely_generated_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. FINITE(group_carrier G) ==> finitely_generated_group G",
+        "∀ G:A group. FINITE(group_carrier G) ==> finitely_generated_group G",
       ),
       t7553,
     ),
@@ -82095,7 +82095,7 @@ fn step_978() -> Unit raise {
   trivial_imp_finitely_generated_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. trivial_group G ==> finitely_generated_group G",
+        "∀ G:A group. trivial_group G ==> finitely_generated_group G",
       ),
       t7555,
     ),
@@ -82242,7 +82242,7 @@ fn step_979() -> Unit raise {
   finitely_generated_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B).\n        group_epimorphism(G,H) f /\\ finitely_generated_group G\n        ==> finitely_generated_group H",
+        "∀ G H (f:A->B).\n        group_epimorphism(G,H) f /\\ finitely_generated_group G\n        ==> finitely_generated_group H",
       ),
       t7570,
     ),
@@ -82288,7 +82288,7 @@ fn step_980() -> Unit raise {
   isomorphic_group_finite_generation_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (finitely_generated_group G <=> finitely_generated_group H)",
+        "∀(G:A group) (H:B group).\n        G isomorphic_group H\n        ==> (finitely_generated_group G <=> finitely_generated_group H)",
       ),
       t7573,
     ),
@@ -82318,7 +82318,7 @@ fn step_981() -> Unit raise {
   finitely_generated_group_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n     finitely_generated_group G /\\ n normal_subgroup_of G\n     ==> finitely_generated_group(quotient_group G n)",
+        "∀ G n:A->bool.\n     finitely_generated_group G /\\ n normal_subgroup_of G\n     ==> finitely_generated_group(quotient_group G n)",
       ),
       t7574,
     ),
@@ -82349,7 +82349,7 @@ fn step_982() -> Unit raise {
   finitely_generated_imp_countable_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. finitely_generated_group G ==> COUNTABLE(group_carrier G)",
+        "∀ G:A group. finitely_generated_group G ==> COUNTABLE(group_carrier G)",
       ),
       t7576,
     ),
@@ -82694,7 +82694,7 @@ fn step_983() -> Unit raise {
   finitely_generated_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        finitely_generated_group(prod_group G H) <=>\n        finitely_generated_group G /\\ finitely_generated_group H",
+        "∀(G:A group) (H:B group).\n        finitely_generated_group(prod_group G H) <=>\n        finitely_generated_group G /\\ finitely_generated_group H",
       ),
       t7624,
     ),
@@ -82834,7 +82834,7 @@ fn step_984() -> Unit raise {
                                 trivial_imp_finitely_generated_group(),
                               ]),
                               @parser.parse_term(
-                                "(forall i. P i ==> finitely_generated_group(G i)) <=>\n      (forall i. P i /\\ ~trivial_group(G i) ==> finitely_generated_group(G i))",
+                                "(∀ i. P i ==> finitely_generated_group(G i)) <=>\n      (∀ i. P i /\\ ~trivial_group(G i) ==> finitely_generated_group(G i))",
                               ),
                             ),
                           ]),
@@ -82987,7 +82987,7 @@ fn step_984() -> Unit raise {
                           @tactics.mp_tac(
                             @sets.set_rule(
                               @parser.parse_term(
-                                "forall i. i IN {i | i IN k /\\ ~trivial_group (G i)}\n          ==> ~trivial_group((G:K->A group) i)",
+                                "∀ i. i IN {i | i IN k /\\ ~trivial_group (G i)}\n          ==> ~trivial_group((G:K->A group) i)",
                               ),
                             ),
                           ),
@@ -83301,7 +83301,7 @@ fn step_984() -> Unit raise {
   finitely_generated_product_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        finitely_generated_group(product_group k G) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        forall i. i IN k ==> finitely_generated_group(G i)",
+        "∀ k (G:K->A group).\n        finitely_generated_group(product_group k G) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        ∀ i. i IN k ==> finitely_generated_group(G i)",
       ),
       t7677,
     ),
@@ -83425,7 +83425,7 @@ fn step_985() -> Unit raise {
       @meson.meson(
         @list.List([trivial_imp_finitely_generated_group()]),
         @parser.parse_term(
-          "(forall i. P i ==> finitely_generated_group(G i)) <=>\n    (forall i. P i /\\ ~trivial_group(G i) ==> finitely_generated_group(G i))",
+          "(∀ i. P i ==> finitely_generated_group(G i)) <=>\n    (∀ i. P i /\\ ~trivial_group(G i) ==> finitely_generated_group(G i))",
         ),
       ),
     ]),
@@ -83626,7 +83626,7 @@ fn step_985() -> Unit raise {
   ])
   let t7703 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall f:K->A. f IN group_carrier(subgroup_generated (sum_group k G) s)\n               ==> f i = group_id(G i)",
+      "∀ f:K->A. f IN group_carrier(subgroup_generated (sum_group k G) s)\n               ==> f i = group_id(G i)",
     ),
     fn(
       x7700 : @kernel.Thm,
@@ -84197,7 +84197,7 @@ fn step_985() -> Unit raise {
   finitely_generated_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group).\n        finitely_generated_group(sum_group k G) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        forall i. i IN k ==> finitely_generated_group(G i)",
+        "∀ k (G:K->A group).\n        finitely_generated_group(sum_group k G) <=>\n        FINITE {i | i IN k /\\ ~trivial_group(G i)} /\\\n        ∀ i. i IN k ==> finitely_generated_group(G i)",
       ),
       t7754,
     ),
@@ -84469,7 +84469,7 @@ fn step_986() -> Unit raise {
   finite_group_actions_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (f:(A->X->X)->B).\n        finitely_generated_group G /\\ FINITE s /\\\n        (forall a a'. (forall g x. g IN group_carrier G /\\ x IN s ==> a g x = a' g x)\n                ==> f a = f a')\n        ==> FINITE {f a | group_action G s a}",
+        "∀ G s (f:(A->X->X)->B).\n        finitely_generated_group G /\\ FINITE s /\\\n        (∀ a a'. (∀ g x. g IN group_carrier G /\\ x IN s ==> a g x = a' g x)\n                ==> f a = f a')\n        ==> FINITE {f a | group_action G s a}",
       ),
       t7782,
     ),
@@ -84950,7 +84950,7 @@ fn step_987() -> Unit raise {
   finitely_generated_fixed_index_subgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n     finitely_generated_group G\n     ==> FINITE {h | h subgroup_of G /\\\n                     {right_coset G h x |x| x IN group_carrier G} HAS_SIZE n}",
+        "∀(G:A group) n.\n     finitely_generated_group G\n     ==> FINITE {h | h subgroup_of G /\\\n                     {right_coset G h x |x| x IN group_carrier G} HAS_SIZE n}",
       ),
       t7847,
     ),
@@ -85886,7 +85886,7 @@ fn step_988() -> Unit raise {
   ])
   let t7848 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?s:A->bool. FINITE s /\\\n                s SUBSET group_carrier G /\\\n                subgroup_generated G s = G /\\\n                (forall x. x IN s ==> group_inv G x IN s)",
+      "?s:A->bool. FINITE s /\\\n                s SUBSET group_carrier G /\\\n                subgroup_generated G s = G /\\\n                (∀ x. x IN s ==> group_inv G x IN s)",
     ),
     @tactics.strip_assume_tac,
   )
@@ -85918,7 +85918,7 @@ fn step_988() -> Unit raise {
   finitely_generated_finite_index_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        finitely_generated_group G /\\\n        h subgroup_of G /\\\n        FINITE {right_coset G h x | x | x IN group_carrier G}\n        ==> finitely_generated_group(subgroup_generated G h)",
+        "∀ G h:A->bool.\n        finitely_generated_group G /\\\n        h subgroup_of G /\\\n        FINITE {right_coset G h x | x | x IN group_carrier G}\n        ==> finitely_generated_group(subgroup_generated G h)",
       ),
       t7947,
     ),
@@ -86046,7 +86046,7 @@ fn step_989() -> Unit raise {
     @parser.parse_term("group_carrier (subgroup_generated G {b:A})"),
   )
   let t8503 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("forall s. s SUBSET t /\\ z IN s ==> z IN t")),
+    @sets.set_rule(@parser.parse_term("∀ s. s SUBSET t /\\ z IN s ==> z IN t")),
   )
   let t8501 = @sets.set_tac(@list.List([]))
   let t8500 = @tactics.match_mp_tac(subgroup_generated_mono())
@@ -86387,7 +86387,7 @@ fn step_989() -> Unit raise {
   ])
   let t8457 = @simp.asm_rewrite_tac(@list.List([]))
   let t8454 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("{x | P x} = s ==> forall x. P x ==> x IN s")),
+    @sets.set_rule(@parser.parse_term("{x | P x} = s ==> ∀ x. P x ==> x IN s")),
   )
   let t8451 = @parser.parse_term("x:A")
   let t8456 = @tactics.disch_then(fn(
@@ -87249,7 +87249,7 @@ fn step_989() -> Unit raise {
   )
   let t8334 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("(forall x. x IN s ==> f x = x) ==> IMAGE f s = s"),
+      @parser.parse_term("(∀ x. x IN s ==> f x = x) ==> IMAGE f s = s"),
     ),
   )
   let t8333 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.image_o())]))
@@ -87430,7 +87430,7 @@ fn step_989() -> Unit raise {
   )
   let t8302 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("(forall x. x IN s ==> f x = x) ==> IMAGE f s = s"),
+      @parser.parse_term("(∀ x. x IN s ==> f x = x) ==> IMAGE f s = s"),
     ),
   )
   let t8301 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.image_o())]))
@@ -91137,7 +91137,7 @@ fn step_989() -> Unit raise {
   ])
   let t7961 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall G s h:A->bool.\n        s SUBSET group_carrier G /\\ FINITE s /\\ CARD s = n /\\\n        subgroup_generated G s = G /\\\n        abelian_group G /\\ h subgroup_of G\n        ==> ?t. FINITE t /\\\n                t SUBSET group_carrier G /\\\n                CARD t <= n /\\\n                subgroup_generated G t = subgroup_generated G h",
+      "∀ G s h:A->bool.\n        s SUBSET group_carrier G /\\ FINITE s /\\ CARD s = n /\\\n        subgroup_generated G s = G /\\\n        abelian_group G /\\ h subgroup_of G\n        ==> ?t. FINITE t /\\\n                t SUBSET group_carrier G /\\\n                CARD t <= n /\\\n                subgroup_generated G t = subgroup_generated G h",
     ),
     fn(
       x7958 : @kernel.Thm,
@@ -91305,7 +91305,7 @@ fn step_989() -> Unit raise {
                                                                                                                                                                                                       @tactics.thenl(
                                                                                                                                                                                                         @tactics.subgoal_then(
                                                                                                                                                                                                           @parser.parse_term(
-                                                                                                                                                                                                            "forall n G s h:A->bool.\n        s SUBSET group_carrier G /\\ s HAS_SIZE n /\\\n        abelian_group G /\\ h subgroup_of subgroup_generated G s\n        ==> ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n                CARD t <= n /\\\n                subgroup_generated G t = subgroup_generated G h",
+                                                                                                                                                                                                            "∀ n G s h:A->bool.\n        s SUBSET group_carrier G /\\ s HAS_SIZE n /\\\n        abelian_group G /\\ h subgroup_of subgroup_generated G s\n        ==> ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n                CARD t <= n /\\\n                subgroup_generated G t = subgroup_generated G h",
                                                                                                                                                                                                           ),
                                                                                                                                                                                                           fn(
                                                                                                                                                                                                             x7948 : @kernel.Thm,
@@ -91665,7 +91665,7 @@ fn step_989() -> Unit raise {
   finitely_generated_abelian_subgroup_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s h:A->bool.\n        FINITE s /\\ s SUBSET group_carrier G /\\\n        abelian_group G /\\ h subgroup_of subgroup_generated G s\n        ==> ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n                CARD t <= CARD s /\\\n                subgroup_generated G t = subgroup_generated G h",
+        "∀ G s h:A->bool.\n        FINITE s /\\ s SUBSET group_carrier G /\\\n        abelian_group G /\\ h subgroup_of subgroup_generated G s\n        ==> ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n                CARD t <= CARD s /\\\n                subgroup_generated G t = subgroup_generated G h",
       ),
       t8525,
     ),
@@ -91795,7 +91795,7 @@ fn step_990() -> Unit raise {
   finitely_generated_abelian_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G h:A->bool.\n        finitely_generated_group G /\\ abelian_group G /\\ h subgroup_of G\n        ==> finitely_generated_group(subgroup_generated G h)",
+        "∀ G h:A->bool.\n        finitely_generated_group G /\\ abelian_group G /\\ h subgroup_of G\n        ==> finitely_generated_group(subgroup_generated G h)",
       ),
       t8539,
     ),
@@ -92739,7 +92739,7 @@ fn step_991() -> Unit raise {
   maximal_subgroup_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      finitely_generated_group G /\\ ~trivial_group G\n      ==> ?h. h subgroup_of G /\\ ~(h = group_carrier G) /\\\n              forall h'. h' subgroup_of G /\\ h PSUBSET h'\n                   ==> h' = group_carrier G",
+        "∀ G:A group.\n      finitely_generated_group G /\\ ~trivial_group G\n      ==> ?h. h subgroup_of G /\\ ~(h = group_carrier G) /\\\n              ∀ h'. h' subgroup_of G /\\ h PSUBSET h'\n                   ==> h' = group_carrier G",
       ),
       t8643,
     ),
@@ -93685,7 +93685,7 @@ fn step_992() -> Unit raise {
   maximal_normal_subgroup_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      finitely_generated_group G /\\ ~trivial_group G\n      ==> ?h. h normal_subgroup_of G /\\ ~(h = group_carrier G) /\\\n              forall h'. h' normal_subgroup_of G /\\ h PSUBSET h'\n                   ==> h' = group_carrier G",
+        "∀ G:A group.\n      finitely_generated_group G /\\ ~trivial_group G\n      ==> ?h. h normal_subgroup_of G /\\ ~(h = group_carrier G) /\\\n              ∀ h'. h' normal_subgroup_of G /\\ h PSUBSET h'\n                   ==> h' = group_carrier G",
       ),
       t8747,
     ),
@@ -93845,7 +93845,7 @@ fn step_997() -> Unit raise {
   )
   group_pow_integer_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. group_pow integer_group x n = &n * x"),
+      @parser.parse_term("∀ x n. group_pow integer_group x n = &n * x"),
       t8756,
     ),
   )
@@ -93883,7 +93883,7 @@ fn step_998() -> Unit raise {
   )
   group_zpow_integer_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. group_zpow integer_group x n = n * x"),
+      @parser.parse_term("∀ x n. group_zpow integer_group x n = n * x"),
       t8757,
     ),
   )
@@ -93929,7 +93929,7 @@ fn step_999() -> Unit raise {
   group_element_order_integer_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. group_element_order integer_group n = if n = &0 then 1 else 0",
+        "∀ n. group_element_order integer_group n = if n = &0 then 1 else 0",
       ),
       t8761,
     ),
@@ -93968,7 +93968,7 @@ fn step_1000() -> Unit raise {
   )
   group_endomorphism_integer_group_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c. group_endomorphism integer_group (\\x. c * x)"),
+      @parser.parse_term("∀ c. group_endomorphism integer_group (\\x. c * x)"),
       t8763,
     ),
   )
@@ -94129,7 +94129,7 @@ fn step_1001() -> Unit raise {
   group_endomorphism_integer_group_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. group_endomorphism integer_group f ==> f = \\x. f(&1) * x",
+        "∀ f. group_endomorphism integer_group f ==> f = \\x. f(&1) * x",
       ),
       t8783,
     ),
@@ -94203,7 +94203,7 @@ fn step_1002() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall c. P(m c)) /\\ (forall f. P f ==> ?c. f = m c) /\\\n    (forall c d. m c = m d ==> c = d)\n    ==> (P f <=> ?c. f = m c) /\\ (P f <=> ?!c. f = m c)",
+        "(∀ c. P(m c)) /\\ (∀ f. P f ==> ?c. f = m c) /\\\n    (∀ c d. m c = m d ==> c = d)\n    ==> (P f <=> ?c. f = m c) /\\ (P f <=> ?!c. f = m c)",
       ),
     ),
   )
@@ -94225,7 +94225,7 @@ fn step_1002() -> Unit raise {
   )
   let t8794 = (
     @parser.parse_term(
-      "(forall f. group_endomorphism integer_group f <=> ?c. f = \\x. c * x) /\\\n   (forall f. group_endomorphism integer_group f <=> ?!c. f = \\x. c * x)",
+      "(∀ f. group_endomorphism integer_group f <=> ?c. f = \\x. c * x) /\\\n   (∀ f. group_endomorphism integer_group f <=> ?!c. f = \\x. c * x)",
     ),
     t8793,
   )
@@ -94292,7 +94292,7 @@ fn step_1003() -> Unit raise {
   group_homomorphism_group_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G\n           ==> group_homomorphism(integer_group,G) (group_zpow G x)",
+        "∀ G x:A. x IN group_carrier G\n           ==> group_homomorphism(integer_group,G) (group_zpow G x)",
       ),
       t8796,
     ),
@@ -94353,7 +94353,7 @@ fn step_1004() -> Unit raise {
   group_epimorphism_group_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. x IN group_carrier G\n           ==> group_epimorphism (integer_group,subgroup_generated G {x})\n                                 (group_zpow G x)",
+        "∀ G x:A. x IN group_carrier G\n           ==> group_epimorphism (integer_group,subgroup_generated G {x})\n                                 (group_zpow G x)",
       ),
       t8803,
     ),
@@ -94493,7 +94493,7 @@ fn step_1005() -> Unit raise {
   group_isomorphism_group_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A. INFINITE(group_carrier(subgroup_generated G {x})) /\\\n           x IN group_carrier G\n           ==> group_isomorphism (integer_group,subgroup_generated G {x})\n                                 (group_zpow G x)",
+        "∀ G x:A. INFINITE(group_carrier(subgroup_generated G {x})) /\\\n           x IN group_carrier G\n           ==> group_isomorphism (integer_group,subgroup_generated G {x})\n                                 (group_zpow G x)",
       ),
       t8815,
     ),
@@ -94620,7 +94620,7 @@ fn step_1006() -> Unit raise {
   isomorphic_group_infinite_cyclic_integer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        cyclic_group G /\\ INFINITE(group_carrier G)\n        ==> G isomorphic_group integer_group",
+        "∀ G:A group.\n        cyclic_group G /\\ INFINITE(group_carrier G)\n        ==> G isomorphic_group integer_group",
       ),
       t8828,
     ),
@@ -94665,7 +94665,7 @@ fn step_1007() -> Unit raise {
   isomorphic_infinite_cyclic_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        cyclic_group G /\\ INFINITE(group_carrier G) /\\\n        cyclic_group H /\\ INFINITE(group_carrier H)\n        ==> G isomorphic_group H",
+        "∀(G:A group) (H:B group).\n        cyclic_group G /\\ INFINITE(group_carrier G) /\\\n        cyclic_group H /\\ INFINITE(group_carrier H)\n        ==> G isomorphic_group H",
       ),
       t8836,
     ),
@@ -94844,7 +94844,7 @@ fn step_1009() -> Unit raise {
   integer_mod_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(group_carrier(integer_mod_group 0) = (:int)) /\\\n   (forall n. 0 < n\n        ==> group_carrier(integer_mod_group n) = {m | &0 <= m /\\ m < &n}) /\\\n   (forall n. group_id(integer_mod_group n) = &0) /\\\n   (forall n. group_inv(integer_mod_group n) = \\a. --a rem &n) /\\\n   (forall n. group_mul(integer_mod_group n) = \\a b. (a + b) rem &n)",
+        "(group_carrier(integer_mod_group 0) = (:int)) /\\\n   (∀ n. 0 < n\n        ==> group_carrier(integer_mod_group n) = {m | &0 <= m /\\ m < &n}) /\\\n   (∀ n. group_id(integer_mod_group n) = &0) /\\\n   (∀ n. group_inv(integer_mod_group n) = \\a. --a rem &n) /\\\n   (∀ n. group_mul(integer_mod_group n) = \\a b. (a + b) rem &n)",
       ),
       t8858,
     ),
@@ -94900,7 +94900,7 @@ fn step_1011() -> Unit raise {
   let t8861 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> f x = x) /\\ (forall x. f x IN s)\n    ==> s = IMAGE f UNIV",
+        "(∀ x. x IN s ==> f x = x) /\\ (∀ x. f x IN s)\n    ==> s = IMAGE f UNIV",
       ),
     ),
   )
@@ -94934,7 +94934,7 @@ fn step_1011() -> Unit raise {
   group_carrier_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. group_carrier (integer_mod_group n) = IMAGE (\\x. x rem &n) (:int)",
+        "∀ n. group_carrier (integer_mod_group n) = IMAGE (\\x. x rem &n) (:int)",
       ),
       t8865,
     ),
@@ -95004,7 +95004,7 @@ fn step_1012() -> Unit raise {
   group_pow_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x m. group_pow (integer_mod_group n) x m = (&m * x) rem &n",
+        "∀ n x m. group_pow (integer_mod_group n) x m = (&m * x) rem &n",
       ),
       t8872,
     ),
@@ -95057,7 +95057,7 @@ fn step_1013() -> Unit raise {
   group_zpow_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x m. group_zpow (integer_mod_group n) x m = (m * x) rem &n",
+        "∀ n x m. group_zpow (integer_mod_group n) x m = (m * x) rem &n",
       ),
       t8877,
     ),
@@ -95083,7 +95083,7 @@ fn step_1014() -> Unit raise {
   )
   abelian_integer_mod_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. abelian_group(integer_mod_group n)"),
+      @parser.parse_term("∀ n. abelian_group(integer_mod_group n)"),
       t8878,
     ),
   )
@@ -95108,7 +95108,7 @@ fn step_1015() -> Unit raise {
   )
   integer_mod_group_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. &0 IN group_carrier(integer_mod_group n)"),
+      @parser.parse_term("∀ n. &0 IN group_carrier(integer_mod_group n)"),
       t8879,
     ),
   )
@@ -95156,7 +95156,7 @@ fn step_1016() -> Unit raise {
   integer_mod_group_1r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x. (x rem &n) IN group_carrier(integer_mod_group n)",
+        "∀ n x. (x rem &n) IN group_carrier(integer_mod_group n)",
       ),
       t8884,
     ),
@@ -95209,7 +95209,7 @@ fn step_1017() -> Unit raise {
   integer_mod_group_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. &1 IN group_carrier(integer_mod_group n) <=> ~(n = 1)",
+        "∀ n. &1 IN group_carrier(integer_mod_group n) <=> ~(n = 1)",
       ),
       t8889,
     ),
@@ -95265,7 +95265,7 @@ fn step_1018() -> Unit raise {
   group_homomorphism_prod_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m n.\n        group_homomorphism\n         (integer_mod_group (m * n),\n          prod_group (integer_mod_group m) (integer_mod_group n))\n         (\\a. (a rem &m),(a rem &n))",
+        "∀ m n.\n        group_homomorphism\n         (integer_mod_group (m * n),\n          prod_group (integer_mod_group m) (integer_mod_group n))\n         (\\a. (a rem &m),(a rem &n))",
       ),
       t8895,
     ),
@@ -95343,7 +95343,7 @@ fn step_1019() -> Unit raise {
   let t8898 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall a b. (a IN s /\\ b IN s /\\ ~(a = b)) ==> ~(?c. s SUBSET {c})",
+        "∀ a b. (a IN s /\\ b IN s /\\ ~(a = b)) ==> ~(?c. s SUBSET {c})",
       ),
     ),
   )
@@ -95392,7 +95392,7 @@ fn step_1019() -> Unit raise {
   )
   trivial_integer_mod_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. trivial_group(integer_mod_group n) <=> n = 1"),
+      @parser.parse_term("∀ n. trivial_group(integer_mod_group n) <=> n = 1"),
       t8908,
     ),
   )
@@ -95489,7 +95489,7 @@ fn step_1021() -> Unit raise {
   group_element_order_integer_mod_group_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. group_element_order (integer_mod_group n) (&1) = n",
+        "∀ n. group_element_order (integer_mod_group n) (&1) = n",
       ),
       t8918,
     ),
@@ -95564,7 +95564,7 @@ fn step_1022() -> Unit raise {
   group_element_order_integer_mod_group_1r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. group_element_order (integer_mod_group n) (&1 rem &n) = n",
+        "∀ n. group_element_order (integer_mod_group n) (&1 rem &n) = n",
       ),
       t8926,
     ),
@@ -95659,7 +95659,7 @@ fn step_1023() -> Unit raise {
   group_element_order_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n m. group_element_order (integer_mod_group n) (&m) =\n         if m = 0 /\\ n = 0 then 1 else n DIV gcd(n,m)",
+        "∀ n m. group_element_order (integer_mod_group n) (&m) =\n         if m = 0 /\\ n = 0 then 1 else n DIV gcd(n,m)",
       ),
       t8940,
     ),
@@ -95694,7 +95694,7 @@ fn step_1024() -> Unit raise {
   let t8947 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. f x IN s) /\\ (forall x. x IN s ==> f x = x)\n   ==> {f x | x IN UNIV} = s",
+        "(∀ x. f x IN s) /\\ (∀ x. x IN s ==> f x = x)\n   ==> {f x | x IN UNIV} = s",
       ),
     ),
   )
@@ -95749,7 +95749,7 @@ fn step_1024() -> Unit raise {
   integer_mod_subgroup_generated_by_1r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. subgroup_generated (integer_mod_group n) {&1 rem &n} =\n       integer_mod_group n",
+        "∀ n. subgroup_generated (integer_mod_group n) {&1 rem &n} =\n       integer_mod_group n",
       ),
       t8949,
     ),
@@ -95830,7 +95830,7 @@ fn step_1025() -> Unit raise {
   integer_mod_subgroup_generated_by_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. subgroup_generated (integer_mod_group n) {&1} =\n       integer_mod_group n",
+        "∀ n. subgroup_generated (integer_mod_group n) {&1} =\n       integer_mod_group n",
       ),
       t8959,
     ),
@@ -95860,7 +95860,7 @@ fn step_1026() -> Unit raise {
   )
   cyclic_group_integer_mod_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. cyclic_group(integer_mod_group n)"),
+      @parser.parse_term("∀ n. cyclic_group(integer_mod_group n)"),
       t8961,
     ),
   )
@@ -95928,7 +95928,7 @@ fn step_1028() -> Unit raise {
   finite_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. FINITE(group_carrier(integer_mod_group n)) <=> ~(n = 0)",
+        "∀ n. FINITE(group_carrier(integer_mod_group n)) <=> ~(n = 0)",
       ),
       t8966,
     ),
@@ -95960,7 +95960,7 @@ fn step_1029() -> Unit raise {
   group_epimorphism_integer_mod_group_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. ~(n = 1)\n       ==> group_epimorphism (integer_group,integer_mod_group n)\n                             (group_zpow (integer_mod_group n) (&1))",
+        "∀ n. ~(n = 1)\n       ==> group_epimorphism (integer_group,integer_mod_group n)\n                             (group_zpow (integer_mod_group n) (&1))",
       ),
       t8967,
     ),
@@ -96112,7 +96112,7 @@ fn step_1030() -> Unit raise {
   group_isomorphism_group_zpow_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G x:A.\n        x IN group_carrier G\n        ==> group_isomorphism (integer_mod_group (group_element_order G x),\n                               subgroup_generated G {x})\n                              (group_zpow G x)",
+        "∀ G x:A.\n        x IN group_carrier G\n        ==> group_isomorphism (integer_mod_group (group_element_order G x),\n                               subgroup_generated G {x})\n                              (group_zpow G x)",
       ),
       t8987,
     ),
@@ -96154,7 +96154,7 @@ fn step_1031() -> Unit raise {
   isomorphic_group_cyclic_integer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. cyclic_group G <=> ?n. G isomorphic_group integer_mod_group n",
+        "∀ G:A group. cyclic_group G <=> ?n. G isomorphic_group integer_mod_group n",
       ),
       t8991,
     ),
@@ -96286,7 +96286,7 @@ fn step_1032() -> Unit raise {
   order_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. ~(n = 0) ==> CARD(group_carrier(integer_mod_group n)) = n",
+        "∀ n. ~(n = 0) ==> CARD(group_carrier(integer_mod_group n)) = n",
       ),
       t9003,
     ),
@@ -96497,7 +96497,7 @@ fn step_1033() -> Unit raise {
   isomorphic_finite_cyclic_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        cyclic_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group integer_mod_group (CARD(group_carrier G))",
+        "∀ G:A group.\n        cyclic_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group integer_mod_group (CARD(group_carrier G))",
       ),
       t9023,
     ),
@@ -96696,7 +96696,7 @@ fn step_1034() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall m n. R m /\\ R n ==> P m ==> P n) /\\\n    (forall n. P n ==> R n)\n    ==> forall n. P n <=> (?m. P m) /\\ R n",
+        "(∀ m n. R m /\\ R n ==> P m ==> P n) /\\\n    (∀ n. P n ==> R n)\n    ==> ∀ n. P n <=> (?m. P m) /\\ R n",
       ),
     ),
   )
@@ -96762,7 +96762,7 @@ fn step_1034() -> Unit raise {
   isomorphic_group_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall(G:A group) n.\n        G isomorphic_group integer_mod_group n <=>\n        cyclic_group G /\\\n        (n = 0 /\\ INFINITE(group_carrier G) \\/\n         ~(n = 0) /\\ (group_carrier G) HAS_SIZE n)) /\\\n   (forall(G:A group) n.\n        integer_mod_group n isomorphic_group G <=>\n        cyclic_group G /\\\n        (n = 0 /\\ INFINITE(group_carrier G) \\/\n         ~(n = 0) /\\ (group_carrier G) HAS_SIZE n))",
+        "(∀(G:A group) n.\n        G isomorphic_group integer_mod_group n <=>\n        cyclic_group G /\\\n        (n = 0 /\\ INFINITE(group_carrier G) \\/\n         ~(n = 0) /\\ (group_carrier G) HAS_SIZE n)) /\\\n   (∀(G:A group) n.\n        integer_mod_group n isomorphic_group G <=>\n        cyclic_group G /\\\n        (n = 0 /\\ INFINITE(group_carrier G) \\/\n         ~(n = 0) /\\ (group_carrier G) HAS_SIZE n))",
       ),
       t9054,
     ),
@@ -96810,7 +96810,7 @@ fn step_1035() -> Unit raise {
   isomorphic_integer_mod_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m n. integer_mod_group m isomorphic_group integer_mod_group n <=>\n         m = n",
+        "∀ m n. integer_mod_group m isomorphic_group integer_mod_group n <=>\n         m = n",
       ),
       t9058,
     ),
@@ -96856,7 +96856,7 @@ fn step_1036() -> Unit raise {
   isomorphic_finite_cyclic_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        cyclic_group G /\\ cyclic_group H /\\\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> G isomorphic_group H",
+        "∀(G:A group) (H:B group).\n        cyclic_group G /\\ cyclic_group H /\\\n        FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n        CARD(group_carrier G) = CARD(group_carrier H)\n        ==> G isomorphic_group H",
       ),
       t9063,
     ),
@@ -96895,7 +96895,7 @@ fn step_1037() -> Unit raise {
   cyclic_imp_countable_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group. cyclic_group G ==> COUNTABLE(group_carrier G)",
+        "∀ G:A group. cyclic_group G ==> COUNTABLE(group_carrier G)",
       ),
       t9067,
     ),
@@ -97012,7 +97012,7 @@ fn step_1038() -> Unit raise {
   subgroup_generated_element_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A.\n        FINITE(group_carrier G) /\\ a IN group_carrier G\n        ==> (subgroup_generated G {a} = G <=>\n             group_element_order G a = CARD(group_carrier G))",
+        "∀ G a:A.\n        FINITE(group_carrier G) /\\ a IN group_carrier G\n        ==> (subgroup_generated G {a} = G <=>\n             group_element_order G a = CARD(group_carrier G))",
       ),
       t9078,
     ),
@@ -97068,7 +97068,7 @@ fn step_1039() -> Unit raise {
   cyclic_group_element_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        FINITE(group_carrier G)\n        ==> (cyclic_group G <=>\n             ?a. a IN group_carrier G /\\\n                 group_element_order G a = CARD(group_carrier G))",
+        "∀ G:A group.\n        FINITE(group_carrier G)\n        ==> (cyclic_group G <=>\n             ?a. a IN group_carrier G /\\\n                 group_element_order G a = CARD(group_carrier G))",
       ),
       t9085,
     ),
@@ -97131,7 +97131,7 @@ fn step_1040() -> Unit raise {
   let t9168 = @drule.match_mp(
     @int.integer_rule(
       @parser.parse_term(
-        "coprime(m:int,n)\n          ==> forall a b. (a == b) (mod m) /\\ (a == b) (mod n)\n        ==> (a == b) (mod (m * n))",
+        "coprime(m:int,n)\n          ==> ∀ a b. (a == b) (mod m) /\\ (a == b) (mod n)\n        ==> (a == b) (mod (m * n))",
       ),
     ),
   )
@@ -97354,7 +97354,7 @@ fn step_1040() -> Unit raise {
   let t9146 = @drule.match_mp(
     @int.integer_rule(
       @parser.parse_term(
-        "coprime(m:int,n)\n          ==> forall a b. ?c. (c == a) (mod m) /\\ (c == b) (mod n)",
+        "coprime(m:int,n)\n          ==> ∀ a b. ?c. (c == a) (mod m) /\\ (c == b) (mod n)",
       ),
     ),
   )
@@ -97768,7 +97768,7 @@ fn step_1040() -> Unit raise {
     ]),
   )
   let t9105 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("forall z. z IN s /\\ ~(z IN t) ==> ~(s = t)")),
+    @sets.set_rule(@parser.parse_term("∀ z. z IN s /\\ ~(z IN t) ==> ~(s = t)")),
   )
   let t9103 = @parser.parse_term("b:int")
   let t9104 = @tactics.map_every(
@@ -97797,7 +97797,7 @@ fn step_1040() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("~(?x. P x /\\ Q x) <=> forall x. P x ==> ~Q x"),
+        @parser.parse_term("~(?x. P x /\\ Q x) <=> ∀ x. P x ==> ~Q x"),
       ),
     ]),
   )
@@ -97969,7 +97969,7 @@ fn step_1040() -> Unit raise {
   )
   let t9182 = (
     @parser.parse_term(
-      "(forall m n. cyclic_group (prod_group (integer_mod_group m) (integer_mod_group n))\n          <=> coprime(m,n)) /\\\n   (forall m n.\n        prod_group (integer_mod_group m) (integer_mod_group n) isomorphic_group\n        integer_mod_group (m * n) <=>\n        coprime(m,n)) /\\\n   (forall m n.\n        group_isomorphism\n         (integer_mod_group (m * n),\n          prod_group (integer_mod_group m) (integer_mod_group n))\n         (\\a. (a rem &m),(a rem &n)) <=>\n        coprime(m,n))",
+      "(∀ m n. cyclic_group (prod_group (integer_mod_group m) (integer_mod_group n))\n          <=> coprime(m,n)) /\\\n   (∀ m n.\n        prod_group (integer_mod_group m) (integer_mod_group n) isomorphic_group\n        integer_mod_group (m * n) <=>\n        coprime(m,n)) /\\\n   (∀ m n.\n        group_isomorphism\n         (integer_mod_group (m * n),\n          prod_group (integer_mod_group m) (integer_mod_group n))\n         (\\a. (a rem &m),(a rem &n)) <=>\n        coprime(m,n))",
     ),
     t9181,
   )
@@ -98711,7 +98711,7 @@ fn step_1041() -> Unit raise {
   cyclic_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        cyclic_group (prod_group G H) <=>\n        cyclic_group G /\\ cyclic_group H /\\\n        (trivial_group G \\/\n         trivial_group H \\/\n         FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n         coprime(CARD(group_carrier G),CARD(group_carrier H)))",
+        "∀(G:A group) (H:B group).\n        cyclic_group (prod_group G H) <=>\n        cyclic_group G /\\ cyclic_group H /\\\n        (trivial_group G \\/\n         trivial_group H \\/\n         FINITE(group_carrier G) /\\ FINITE(group_carrier H) /\\\n         coprime(CARD(group_carrier G),CARD(group_carrier H)))",
       ),
       t9259,
     ),
@@ -98828,7 +98828,7 @@ fn step_1042() -> Unit raise {
   cyclic_prime_order_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (a:A).\n        FINITE (group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))) /\\\n        a IN group_carrier G /\\ ~(a = group_id G)\n        ==> subgroup_generated G {a} = G",
+        "∀ G (a:A).\n        FINITE (group_carrier G) /\\\n        (CARD(group_carrier G) = 1 \\/ prime(CARD(group_carrier G))) /\\\n        a IN group_carrier G /\\ ~(a = group_id G)\n        ==> subgroup_generated G {a} = G",
       ),
       t9271,
     ),
@@ -98863,7 +98863,7 @@ fn step_1043() -> Unit raise {
   group_element_order_prime_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G a:A. prime p /\\ (group_carrier G) HAS_SIZE p /\\ a IN group_carrier G\n           ==> group_element_order G a =\n               if a = group_id G then 1 else CARD(group_carrier G)",
+        "∀ G a:A. prime p /\\ (group_carrier G) HAS_SIZE p /\\ a IN group_carrier G\n           ==> group_element_order G a =\n               if a = group_id G then 1 else CARD(group_carrier G)",
       ),
       t9273,
     ),
@@ -99193,7 +99193,7 @@ fn step_1044() -> Unit raise {
             @int.int_rem_eq(),
             @sets.set_rule(
               @parser.parse_term(
-                "{(x * a) rem &n | x IN (:int)} = IMAGE (\\x. x rem &n) (:int) <=>\n        forall x. ?y. (y * a) rem &n = x rem &n",
+                "{(x * a) rem &n | x IN (:int)} = IMAGE (\\x. x rem &n) (:int) <=>\n        ∀ x. ?y. (y * a) rem &n = x rem &n",
               ),
             ),
           ]),
@@ -99310,7 +99310,7 @@ fn step_1044() -> Unit raise {
   generator_integer_mod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a. subgroup_generated (integer_mod_group n) {a} = integer_mod_group n <=>\n         (n <= 1 \\/ &0 <= a /\\ a < &n) /\\ coprime(&n,a)",
+        "∀ n a. subgroup_generated (integer_mod_group n) {a} = integer_mod_group n <=>\n         (n <= 1 \\/ &0 <= a /\\ a < &n) /\\ coprime(&n,a)",
       ),
       t9321,
     ),
@@ -100111,7 +100111,7 @@ fn step_1045() -> Unit raise {
   cyclic_group_prime_order_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group).\n        (forall a. a IN group_carrier G /\\ ~(a = group_id G)\n             ==> subgroup_generated G {a} = G) <=>\n        FINITE(group_carrier G) /\\\n        (CARD (group_carrier G) = 1 \\/ prime (CARD (group_carrier G)))",
+        "∀(G:A group).\n        (∀ a. a IN group_carrier G /\\ ~(a = group_id G)\n             ==> subgroup_generated G {a} = G) <=>\n        FINITE(group_carrier G) /\\\n        (CARD (group_carrier G) = 1 \\/ prime (CARD (group_carrier G)))",
       ),
       t9418,
     ),
@@ -100135,7 +100135,7 @@ fn step_1046() -> Unit raise {
   pgroup_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "pgroup s (G:A group) <=>\n        forall p x. prime p /\\\n              x IN group_carrier G /\\\n              p divides group_element_order G x\n              ==> p IN s",
+        "pgroup s (G:A group) <=>\n        ∀ p x. prime p /\\\n              x IN group_carrier G /\\\n              p divides group_element_order G x\n              ==> p IN s",
       ),
     ),
   )
@@ -100335,7 +100335,7 @@ fn step_1047() -> Unit raise {
   pgroup_monomorphic_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) s. group_monomorphism (G,H) f /\\ pgroup s H ==> pgroup s G",
+        "∀ G H (f:A->B) s. group_monomorphism (G,H) f /\\ pgroup s H ==> pgroup s G",
       ),
       t9433,
     ),
@@ -100503,7 +100503,7 @@ fn step_1048() -> Unit raise {
   pgroup_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G H (f:A->B) s. group_epimorphism (G,H) f /\\ pgroup s G ==> pgroup s H",
+        "∀ G H (f:A->B) s. group_epimorphism (G,H) f /\\ pgroup s G ==> pgroup s H",
       ),
       t9447,
     ),
@@ -100530,7 +100530,7 @@ fn step_1049() -> Unit raise {
   pgroup_quotient_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n s.\n      n normal_subgroup_of G /\\ pgroup s G ==> pgroup s (quotient_group G n)",
+        "∀(G:A group) n s.\n      n normal_subgroup_of G /\\ pgroup s G ==> pgroup s (quotient_group G n)",
       ),
       t9448,
     ),
@@ -100557,7 +100557,7 @@ fn step_1050() -> Unit raise {
   pgroup_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) s h.\n        pgroup s G ==> pgroup s (subgroup_generated G h)",
+        "∀(G:A group) s h.\n        pgroup s G ==> pgroup s (subgroup_generated G h)",
       ),
       t9449,
     ),
@@ -100613,7 +100613,7 @@ fn step_1051() -> Unit raise {
   pgroup_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:A group) s.\n        pgroup s (prod_group G H) <=> pgroup s G /\\ pgroup s H",
+        "∀(G:A group) (H:A group) s.\n        pgroup s (prod_group G H) <=> pgroup s G /\\ pgroup s H",
       ),
       t9454,
     ),
@@ -100651,7 +100651,7 @@ fn step_1052() -> Unit raise {
               @prime.prime_1(),
             ]),
             @parser.parse_term(
-              "(forall p x. ~(prime p /\\ P x /\\ p divides f x)) <=>\n    (forall x. P x ==> f x = 1)",
+              "(∀ p x. ~(prime p /\\ P x /\\ p divides f x)) <=>\n    (∀ x. P x ==> f x = 1)",
             ),
           ),
         ]),
@@ -100662,7 +100662,7 @@ fn step_1052() -> Unit raise {
   )
   pgroup_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. pgroup {} G <=> trivial_group G"),
+      @parser.parse_term("∀ G:A group. pgroup {} G <=> trivial_group G"),
       t9457,
     ),
   )
@@ -100688,7 +100688,7 @@ fn step_1053() -> Unit raise {
   pgroup_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) s t. pgroup s G /\\ s SUBSET t ==> pgroup t G",
+        "∀(G:A group) s t. pgroup s G /\\ s SUBSET t ==> pgroup t G",
       ),
       t9459,
     ),
@@ -100796,7 +100796,7 @@ fn step_1054() -> Unit raise {
   pgroup_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (G:K->A group) s.\n        pgroup s (sum_group k G) <=> forall i. i IN k ==> pgroup s (G i)",
+        "∀ k (G:K->A group) s.\n        pgroup s (sum_group k G) <=> ∀ i. i IN k ==> pgroup s (G i)",
       ),
       t9472,
     ),
@@ -100825,7 +100825,7 @@ fn step_1055() -> Unit raise {
   pgroup_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n     prime p\n     ==> (pgroup {p} G <=>\n          forall x. x IN group_carrier G ==> ?k. group_element_order G x = p EXP k)",
+        "∀(G:A group) p.\n     prime p\n     ==> (pgroup {p} G <=>\n          ∀ x. x IN group_carrier G ==> ?k. group_element_order G x = p EXP k)",
       ),
       t9474,
     ),
@@ -101345,7 +101345,7 @@ fn step_1056() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall(s:A->bool) (t:B->bool) k.\n          FINITE s /\\ FINITE t /\\ CARD s = CARD t\n          ==> CARD {s' | s' SUBSET s /\\ CARD s' = k} =\n              CARD {t' | t' SUBSET t /\\ CARD t' = k}",
+      "∀(s:A->bool) (t:B->bool) k.\n          FINITE s /\\ FINITE t /\\ CARD s = CARD t\n          ==> CARD {s' | s' SUBSET s /\\ CARD s' = k} =\n              CARD {t' | t' SUBSET t /\\ CARD t' = k}",
     ),
     t9513,
   )
@@ -101355,7 +101355,7 @@ fn step_1056() -> Unit raise {
   let t9768 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "t SUBSET u /\\ (forall x. x IN u ==> (P x <=> x IN t))\n      ==> t SUBSET {x | x IN u /\\ P x}",
+        "t SUBSET u /\\ (∀ x. x IN u ==> (P x <=> x IN t))\n      ==> t SUBSET {x | x IN u /\\ P x}",
       ),
     ),
   )
@@ -101998,7 +101998,7 @@ fn step_1056() -> Unit raise {
   let t9681 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "forall Q. s'' SUBSET {x | x IN s /\\ Q x} /\\\n          (forall x. x IN s ==> f x = f' x) /\\\n          (forall x. x IN s ==> ?x'. x' IN s /\\ Q x' /\\ f x' = f x) /\\\n          (forall x. x IN s /\\ Q x ==> (P(f x) <=> x IN s''))\n          ==> {y | y IN IMAGE f s /\\ P y} = IMAGE f' s''",
+        "∀ Q. s'' SUBSET {x | x IN s /\\ Q x} /\\\n          (∀ x. x IN s ==> f x = f' x) /\\\n          (∀ x. x IN s ==> ?x'. x' IN s /\\ Q x' /\\ f x' = f x) /\\\n          (∀ x. x IN s /\\ Q x ==> (P(f x) <=> x IN s''))\n          ==> {y | y IN IMAGE f s /\\ P y} = IMAGE f' s''",
       ),
     ),
   )
@@ -102009,7 +102009,7 @@ fn step_1056() -> Unit raise {
   let t9675 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "{f x | x IN u} = {g x | x IN u}\n        ==> forall a. a IN u ==> ?b. b IN u /\\ g b = f a",
+        "{f x | x IN u} = {g x | x IN u}\n        ==> ∀ a. a IN u ==> ?b. b IN u /\\ g b = f a",
       ),
     ),
   )
@@ -102667,7 +102667,7 @@ fn step_1056() -> Unit raise {
   let t9610 = @tactics.match_mp_tac(
     @int.number_rule(
       @parser.parse_term(
-        "forall g. (nsum s g == nsum s f) (mod n) /\\ nsum s g = z\n          ==> (nsum s f == z) (mod n)",
+        "∀ g. (nsum s g == nsum s f) (mod n) /\\ nsum s g = z\n          ==> (nsum s f == z) (mod n)",
       ),
     ),
   )
@@ -102821,7 +102821,7 @@ fn step_1056() -> Unit raise {
   ])
   let t9596 = @tactics.subgoal_then(
     @parser.parse_term(
-      "(forall t r. t SUBSET group_carrier G /\\ CARD t = r <=>\n             t SUBSET group_carrier G /\\ t HAS_SIZE r) /\\\n      (forall h r. (h:A->bool) subgroup_of G /\\ CARD h = r <=>\n             h subgroup_of G /\\ h HAS_SIZE r)",
+      "(∀ t r. t SUBSET group_carrier G /\\ CARD t = r <=>\n             t SUBSET group_carrier G /\\ t HAS_SIZE r) /\\\n      (∀ h r. (h:A->bool) subgroup_of G /\\ CARD h = r <=>\n             h subgroup_of G /\\ h HAS_SIZE r)",
     ),
     fn(
       x9594 : @kernel.Thm,
@@ -103305,7 +103305,7 @@ fn step_1056() -> Unit raise {
   ])
   let t9536 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall t. t IN m\n          ==> CARD(group_stabilizer G (a:A->(A->bool)->(A->bool)) t)\n              divides p EXP k",
+      "∀ t. t IN m\n          ==> CARD(group_stabilizer G (a:A->(A->bool)->(A->bool)) t)\n              divides p EXP k",
     ),
     fn(
       x9533 : @kernel.Thm,
@@ -103653,7 +103653,7 @@ fn step_1056() -> Unit raise {
   )
   let sylow_lemma = @tactics.prove(
     @parser.parse_term(
-      "forall(G:A group) p k n.\n          FINITE(group_carrier G) /\\\n          prime p /\\\n          p EXP k * n = CARD(group_carrier G)\n          ==> (CARD {t | t SUBSET group_carrier G /\\ CARD t = p EXP k} ==\n               CARD {h | h subgroup_of G /\\ CARD h = p EXP k} * n)\n              (mod (p * n))",
+      "∀(G:A group) p k n.\n          FINITE(group_carrier G) /\\\n          prime p /\\\n          p EXP k * n = CARD(group_carrier G)\n          ==> (CARD {t | t SUBSET group_carrier G /\\ CARD t = p EXP k} ==\n               CARD {h | h subgroup_of G /\\ CARD h = p EXP k} * n)\n              (mod (p * n))",
     ),
     t9770,
   )
@@ -103900,7 +103900,7 @@ fn step_1056() -> Unit raise {
   sylow_theorem_count_mod_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        p EXP k divides CARD(group_carrier G)\n        ==> (CARD {h | h subgroup_of G /\\ CARD h = p EXP k} == 1) (mod p)",
+        "∀(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        p EXP k divides CARD(group_carrier G)\n        ==> (CARD {h | h subgroup_of G /\\ CARD h = p EXP k} == 1) (mod p)",
       ),
       t9798,
     ),
@@ -103969,7 +103969,7 @@ fn step_1057() -> Unit raise {
   sylow_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        p EXP k divides CARD(group_carrier G)\n        ==> ?h. h subgroup_of G /\\ CARD h = p EXP k",
+        "∀(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        p EXP k divides CARD(group_carrier G)\n        ==> ?h. h subgroup_of G /\\ CARD h = p EXP k",
       ),
       t9807,
     ),
@@ -104228,7 +104228,7 @@ fn step_1058() -> Unit raise {
   cauchy_group_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n        FINITE(group_carrier G) /\\ prime p /\\ p divides CARD(group_carrier G)\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = p",
+        "∀(G:A group) p.\n        FINITE(group_carrier G) /\\ prime p /\\ p divides CARD(group_carrier G)\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = p",
       ),
       t9836,
     ),
@@ -104260,7 +104260,7 @@ fn step_1059() -> Unit raise {
   prime_divides_group_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n    FINITE(group_carrier G) /\\ prime p\n    ==> ((?x. x IN group_carrier G /\\ p divides (group_element_order G x)) <=>\n         p divides CARD(group_carrier G))",
+        "∀(G:A group) p.\n    FINITE(group_carrier G) /\\ prime p\n    ==> ((?x. x IN group_carrier G /\\ p divides (group_element_order G x)) <=>\n         p divides CARD(group_carrier G))",
       ),
       t9837,
     ),
@@ -104289,7 +104289,7 @@ fn step_1060() -> Unit raise {
   coprime_group_order_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n    FINITE(group_carrier G)\n    ==> ((forall x. x IN group_carrier G ==> coprime(group_element_order G x,n)) <=>\n         coprime(CARD(group_carrier G),n))",
+        "∀(G:A group) n.\n    FINITE(group_carrier G)\n    ==> ((∀ x. x IN group_carrier G ==> coprime(group_element_order G x,n)) <=>\n         coprime(CARD(group_carrier G),n))",
       ),
       t9839,
     ),
@@ -104325,7 +104325,7 @@ fn step_1061() -> Unit raise {
   finite_pgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s (G:A group).\n        FINITE(group_carrier G)\n        ==> (pgroup s G <=>\n             forall p. prime p /\\ p divides CARD(group_carrier G) ==> p IN s)",
+        "∀ s (G:A group).\n        FINITE(group_carrier G)\n        ==> (pgroup s G <=>\n             ∀ p. prime p /\\ p divides CARD(group_carrier G) ==> p IN s)",
       ),
       t9841,
     ),
@@ -104352,7 +104352,7 @@ fn step_1062() -> Unit raise {
   finite_pgroup_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n     FINITE(group_carrier G) /\\ prime p\n     ==> (pgroup {p} G <=> ?k. CARD(group_carrier G) = p EXP k)",
+        "∀(G:A group) p.\n     FINITE(group_carrier G) /\\ prime p\n     ==> (pgroup {p} G <=> ?k. CARD(group_carrier G) = p EXP k)",
       ),
       t9843,
     ),
@@ -104381,7 +104381,7 @@ fn step_1063() -> Unit raise {
   finite_and_pgroup_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n     prime p\n     ==> (FINITE(group_carrier G) /\\ pgroup {p} G <=>\n          ?k. (group_carrier G) HAS_SIZE (p EXP k))",
+        "∀(G:A group) p.\n     prime p\n     ==> (FINITE(group_carrier G) /\\ pgroup {p} G <=>\n          ?k. (group_carrier G) HAS_SIZE (p EXP k))",
       ),
       t9845,
     ),
@@ -104491,7 +104491,7 @@ fn step_1064() -> Unit raise {
   finite_group_pow_injective_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                    group_pow G x n = group_pow G y n\n                    ==> x = y) <=>\n             coprime(n,CARD(group_carrier G)))",
+        "∀(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                    group_pow G x n = group_pow G y n\n                    ==> x = y) <=>\n             coprime(n,CARD(group_carrier G)))",
       ),
       t9861,
     ),
@@ -104542,7 +104542,7 @@ fn step_1065() -> Unit raise {
   finite_group_zpow_injective_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                    group_zpow G x n = group_zpow G y n\n                    ==> x = y) <=>\n             coprime(n,&(CARD(group_carrier G))))",
+        "∀(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((∀ x y. x IN group_carrier G /\\ y IN group_carrier G /\\\n                    group_zpow G x n = group_zpow G y n\n                    ==> x = y) <=>\n             coprime(n,&(CARD(group_carrier G))))",
       ),
       t9865,
     ),
@@ -104779,7 +104779,7 @@ fn step_1066() -> Unit raise {
   finite_group_pow_surjective_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x. x IN group_carrier G\n                  ==> ?y. y IN group_carrier G /\\ group_pow G y n = x) <=>\n             coprime(n,CARD(group_carrier G)))",
+        "∀(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((∀ x. x IN group_carrier G\n                  ==> ?y. y IN group_carrier G /\\ group_pow G y n = x) <=>\n             coprime(n,CARD(group_carrier G)))",
       ),
       t9883,
     ),
@@ -105016,7 +105016,7 @@ fn step_1067() -> Unit raise {
   finite_group_zpow_surjective_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((forall x. x IN group_carrier G\n                  ==> ?y. y IN group_carrier G /\\ group_zpow G y n = x) <=>\n             coprime(n,&(CARD(group_carrier G))))",
+        "∀(G:A group) n.\n        FINITE(group_carrier G)\n        ==> ((∀ x. x IN group_carrier G\n                  ==> ?y. y IN group_carrier G /\\ group_zpow G y n = x) <=>\n             coprime(n,&(CARD(group_carrier G))))",
       ),
       t9901,
     ),
@@ -105041,7 +105041,7 @@ fn step_1068() -> Unit raise {
   finite_group_zroot_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n x:A.\n        FINITE(group_carrier G) /\\\n        coprime(n,&(CARD(group_carrier G))) /\\\n        x IN group_carrier G\n        ==> ?y. y IN group_carrier G /\\ group_zpow G y n = x",
+        "∀ G n x:A.\n        FINITE(group_carrier G) /\\\n        coprime(n,&(CARD(group_carrier G))) /\\\n        x IN group_carrier G\n        ==> ?y. y IN group_carrier G /\\ group_zpow G y n = x",
       ),
       t9902,
     ),
@@ -105066,7 +105066,7 @@ fn step_1069() -> Unit raise {
   finite_group_root_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n x:A.\n        FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G)) /\\\n        x IN group_carrier G\n        ==> ?y. y IN group_carrier G /\\ group_pow G y n = x",
+        "∀ G n x:A.\n        FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G)) /\\\n        x IN group_carrier G\n        ==> ?y. y IN group_carrier G /\\ group_pow G y n = x",
       ),
       t9903,
     ),
@@ -105097,7 +105097,7 @@ fn step_1070() -> Unit raise {
   abelian_group_monomorphism_powering_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_monomorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))",
+        "∀(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_monomorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))",
       ),
       t9905,
     ),
@@ -105124,7 +105124,7 @@ fn step_1071() -> Unit raise {
   abelian_group_monomorphism_powering_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_monomorphism (G,G) (\\x. group_pow G x n)",
+        "∀(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_monomorphism (G,G) (\\x. group_pow G x n)",
       ),
       t9906,
     ),
@@ -105155,7 +105155,7 @@ fn step_1072() -> Unit raise {
   abelian_group_isomorphism_powering_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_isomorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))",
+        "∀(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_isomorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))",
       ),
       t9908,
     ),
@@ -105182,7 +105182,7 @@ fn step_1073() -> Unit raise {
   abelian_group_isomorphism_powering_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_isomorphism (G,G) (\\x. group_pow G x n)",
+        "∀(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_isomorphism (G,G) (\\x. group_pow G x n)",
       ),
       t9909,
     ),
@@ -105215,7 +105215,7 @@ fn step_1074() -> Unit raise {
   abelian_group_epimorphism_powering_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_epimorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))",
+        "∀(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> (group_epimorphism (G,G) (\\x. group_pow G x n) <=>\n             coprime(n,CARD(group_carrier G)))",
       ),
       t9911,
     ),
@@ -105242,7 +105242,7 @@ fn step_1075() -> Unit raise {
   abelian_group_epimorphism_powering_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_epimorphism (G,G) (\\x. group_pow G x n)",
+        "∀(G:A group) n.\n        abelian_group G /\\ FINITE(group_carrier G) /\\\n        coprime(n,CARD(group_carrier G))\n        ==> group_epimorphism (G,G) (\\x. group_pow G x n)",
       ),
       t9912,
     ),
@@ -105514,7 +105514,7 @@ fn step_1076() -> Unit raise {
   let t9923 = @tactics.match_mp_tac(
     @int.number_rule(
       @parser.parse_term(
-        "forall y:num. x = y /\\ (y == z) (mod n) ==> (x == z) (mod n)",
+        "∀ y:num. x = y /\\ (y == z) (mod n) ==> (x == z) (mod n)",
       ),
     ),
   )
@@ -105712,7 +105712,7 @@ fn step_1076() -> Unit raise {
   pgroup_action_fixpoints_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) p.\n        group_action G s a /\\ FINITE s /\\\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G\n        ==> (CARD {x | x IN s /\\ forall g. g IN group_carrier G ==> a g x = x} ==\n             CARD s) (mod p)",
+        "∀ G s (a:A->X->X) p.\n        group_action G s a /\\ FINITE s /\\\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G\n        ==> (CARD {x | x IN s /\\ ∀ g. g IN group_carrier G ==> a g x = x} ==\n             CARD s) (mod p)",
       ),
       t9961,
     ),
@@ -105836,7 +105836,7 @@ fn step_1077() -> Unit raise {
   pgroup_action_fixpoint_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G s (a:A->X->X) p.\n        group_action G s a /\\\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        FINITE s /\\ ~(p divides CARD s)\n        ==> ?x. x IN s /\\ forall g. g IN group_carrier G ==> a g x = x",
+        "∀ G s (a:A->X->X) p.\n        group_action G s a /\\\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        FINITE s /\\ ~(p divides CARD s)\n        ==> ?x. x IN s /\\ ∀ g. g IN group_carrier G ==> a g x = x",
       ),
       t9975,
     ),
@@ -106265,7 +106265,7 @@ fn step_1078() -> Unit raise {
   sylow_theorem_conjugate_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k h j.\n        prime p /\\\n        h subgroup_of G /\\\n        FINITE {left_coset G x h | x | x IN group_carrier G} /\\\n        ~(p divides CARD {left_coset G x h | x | x IN group_carrier G}) /\\\n        j subgroup_of G /\\ FINITE j /\\ CARD j = p EXP k\n        ==> ?a. a IN group_carrier G /\\\n                j SUBSET IMAGE (group_conjugation G a) h",
+        "∀(G:A group) p k h j.\n        prime p /\\\n        h subgroup_of G /\\\n        FINITE {left_coset G x h | x | x IN group_carrier G} /\\\n        ~(p divides CARD {left_coset G x h | x | x IN group_carrier G}) /\\\n        j subgroup_of G /\\ FINITE j /\\ CARD j = p EXP k\n        ==> ?a. a IN group_carrier G /\\\n                j SUBSET IMAGE (group_conjugation G a) h",
       ),
       t10021,
     ),
@@ -106471,7 +106471,7 @@ fn step_1079() -> Unit raise {
   sylow_theorem_conjugate_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k l h j.\n        FINITE(group_carrier G) /\\ prime p /\\\n        ~(p EXP (k + 1) divides CARD(group_carrier G)) /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        j subgroup_of G /\\ CARD j = p EXP l\n        ==> ?a. a IN group_carrier G /\\\n                j SUBSET IMAGE (group_conjugation G a) h",
+        "∀(G:A group) p k l h j.\n        FINITE(group_carrier G) /\\ prime p /\\\n        ~(p EXP (k + 1) divides CARD(group_carrier G)) /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        j subgroup_of G /\\ CARD j = p EXP l\n        ==> ?a. a IN group_carrier G /\\\n                j SUBSET IMAGE (group_conjugation G a) h",
       ),
       t10042,
     ),
@@ -106561,7 +106561,7 @@ fn step_1080() -> Unit raise {
   sylow_theorem_conjugate_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k h h'.\n        FINITE(group_carrier G) /\\ prime p /\\\n        ~(p EXP (k + 1) divides CARD(group_carrier G)) /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        h' subgroup_of G /\\ CARD h' = p EXP k\n        ==> group_conjugate G h h'",
+        "∀(G:A group) p k h h'.\n        FINITE(group_carrier G) /\\ prime p /\\\n        ~(p EXP (k + 1) divides CARD(group_carrier G)) /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        h' subgroup_of G /\\ CARD h' = p EXP k\n        ==> group_conjugate G h h'",
       ),
       t10057,
     ),
@@ -106666,7 +106666,7 @@ fn step_1081() -> Unit raise {
   sylow_theorem_conjugate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k h h'.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        h' subgroup_of G /\\ CARD h' = p EXP k\n        ==> group_conjugate G h h'",
+        "∀(G:A group) p k h h'.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        h' subgroup_of G /\\ CARD h' = p EXP k\n        ==> group_conjugate G h h'",
       ),
       t10069,
     ),
@@ -106800,7 +106800,7 @@ fn step_1082() -> Unit raise {
   sylow_theorem_conjugate_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k h h'.\n      FINITE(group_carrier G) /\\ prime p /\\\n      index p (CARD(group_carrier G)) = k /\\\n      h subgroup_of G /\\ CARD h = p EXP k\n      ==> (h' subgroup_of G /\\ CARD h' = p EXP k <=> group_conjugate G h h')",
+        "∀(G:A group) p k h h'.\n      FINITE(group_carrier G) /\\ prime p /\\\n      index p (CARD(group_carrier G)) = k /\\\n      h subgroup_of G /\\ CARD h = p EXP k\n      ==> (h' subgroup_of G /\\ CARD h' = p EXP k <=> group_conjugate G h h')",
       ),
       t10080,
     ),
@@ -107094,7 +107094,7 @@ fn step_1083() -> Unit raise {
   sylow_theorem_pgroup_superset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p k (h:A->bool).\n        FINITE(group_carrier G) /\\ prime p /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> ?h'. h' subgroup_of G /\\ h SUBSET h' /\\\n                 CARD h' = p EXP (index p (CARD(group_carrier G)))",
+        "∀ G p k (h:A->bool).\n        FINITE(group_carrier G) /\\ prime p /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> ?h'. h' subgroup_of G /\\ h SUBSET h' /\\\n                 CARD h' = p EXP (index p (CARD(group_carrier G)))",
       ),
       t10113,
     ),
@@ -107125,7 +107125,7 @@ fn step_1084() -> Unit raise {
   sylow_theorem_normal_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k h h'.\n      FINITE(group_carrier G) /\\ prime p /\\\n      index p (CARD(group_carrier G)) = k /\\\n      h normal_subgroup_of G /\\ CARD h = p EXP k\n      ==> (h' subgroup_of G /\\ CARD h' = p EXP k <=> h' = h)",
+        "∀(G:A group) p k h h'.\n      FINITE(group_carrier G) /\\ prime p /\\\n      index p (CARD(group_carrier G)) = k /\\\n      h normal_subgroup_of G /\\ CARD h = p EXP k\n      ==> (h' subgroup_of G /\\ CARD h' = p EXP k <=> h' = h)",
       ),
       t10114,
     ),
@@ -107182,7 +107182,7 @@ fn step_1085() -> Unit raise {
   sylow_theorem_count_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) h p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k} =\n            CARD(group_carrier G) DIV CARD(group_normalizer G h)",
+        "∀(G:A group) h p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k} =\n            CARD(group_carrier G) DIV CARD(group_normalizer G h)",
       ),
       t10121,
     ),
@@ -107327,7 +107327,7 @@ fn step_1086() -> Unit raise {
   sylow_theorem_count_normalizer_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) h p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k} *\n            CARD(group_normalizer G h) =\n            CARD(group_carrier G)",
+        "∀(G:A group) h p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k} *\n            CARD(group_normalizer G h) =\n            CARD(group_carrier G)",
       ),
       t10135,
     ),
@@ -107370,7 +107370,7 @@ fn step_1087() -> Unit raise {
   let t10137 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("(forall x. P x <=> x = a) <=> {x | P x} = {a}"),
+        @parser.parse_term("(∀ x. P x <=> x = a) <=> {x | P x} = {a}"),
       ),
     ]),
   )
@@ -107412,7 +107412,7 @@ fn step_1087() -> Unit raise {
   sylow_theorem_normal_unique_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p k h:A->bool.\n        FINITE (group_carrier G) /\\\n        prime p /\\\n        index p (CARD (group_carrier G)) = k /\\\n        h subgroup_of G /\\\n        CARD h = p EXP k\n        ==> ((forall h'. h' subgroup_of G /\\ CARD h' = p EXP k <=> h' = h) <=>\n             h normal_subgroup_of G)",
+        "∀ G p k h:A->bool.\n        FINITE (group_carrier G) /\\\n        prime p /\\\n        index p (CARD (group_carrier G)) = k /\\\n        h subgroup_of G /\\\n        CARD h = p EXP k\n        ==> ((∀ h'. h' subgroup_of G /\\ CARD h' = p EXP k <=> h' = h) <=>\n             h normal_subgroup_of G)",
       ),
       t10146,
     ),
@@ -107502,7 +107502,7 @@ fn step_1088() -> Unit raise {
   sylow_theorem_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k\n        ==> ((?!h. h subgroup_of G /\\ CARD h = p EXP k) <=>\n             (?h. h normal_subgroup_of G /\\ CARD h = p EXP k))",
+        "∀(G:A group) p k.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k\n        ==> ((?!h. h subgroup_of G /\\ CARD h = p EXP k) <=>\n             (?h. h normal_subgroup_of G /\\ CARD h = p EXP k))",
       ),
       t10161,
     ),
@@ -107688,7 +107688,7 @@ fn step_1089() -> Unit raise {
   sylow_theorem_count_divisor_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k}\n            divides (CARD(group_carrier G)) DIV (p EXP k)",
+        "∀(G:A group) p k.\n        FINITE(group_carrier G) /\\ prime p /\\\n        index p (CARD(group_carrier G)) = k\n        ==> CARD {h | h subgroup_of G /\\ CARD h = p EXP k}\n            divides (CARD(group_carrier G)) DIV (p EXP k)",
       ),
       t10184,
     ),
@@ -107785,7 +107785,7 @@ fn step_1090() -> Unit raise {
                   @tactics.match_mp_tac(
                     @sets.set_rule(
                       @parser.parse_term(
-                        "z IN s /\\ (forall x. P x ==> x IN s DELETE z)\n      ==> (?x. P x) ==> {z} PSUBSET s",
+                        "z IN s /\\ (∀ x. P x ==> x IN s DELETE z)\n      ==> (?x. P x) ==> {z} PSUBSET s",
                       ),
                     ),
                   ),
@@ -108419,7 +108419,7 @@ fn step_1090() -> Unit raise {
   pgroup_nontrivial_centre_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (n:A->bool) p.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        n normal_subgroup_of G /\\ ~(n = {group_id G})\n        ==> {group_id G} PSUBSET\n            (group_centralizer G (group_carrier G) INTER n)",
+        "∀ G (n:A->bool) p.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        n normal_subgroup_of G /\\ ~(n = {group_id G})\n        ==> {group_id G} PSUBSET\n            (group_centralizer G (group_carrier G) INTER n)",
       ),
       t10261,
     ),
@@ -108493,7 +108493,7 @@ fn step_1091() -> Unit raise {
   pgroup_nontrivial_centre_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k.\n        prime p /\\ ~(k = 0) /\\ (group_carrier G) HAS_SIZE (p EXP k)\n        ==> {group_id G} PSUBSET (group_centralizer G (group_carrier G))",
+        "∀(G:A group) p k.\n        prime p /\\ ~(k = 0) /\\ (group_carrier G) HAS_SIZE (p EXP k)\n        ==> {group_id G} PSUBSET (group_centralizer G (group_carrier G))",
       ),
       t10271,
     ),
@@ -108738,7 +108738,7 @@ fn step_1092() -> Unit raise {
   let t10341 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. x IN s ==> f x = g x) /\\\n      (IMAGE g s SUBSET s ==> IMAGE g s = s)\n      ==> ((forall x. x IN s ==> f x IN s) <=> IMAGE g s = s)",
+        "(∀ x. x IN s ==> f x = g x) /\\\n      (IMAGE g s SUBSET s ==> IMAGE g s = s)\n      ==> ((∀ x. x IN s ==> f x IN s) <=> IMAGE g s = s)",
       ),
     ),
   )
@@ -108905,7 +108905,7 @@ fn step_1092() -> Unit raise {
     @tactics.all_tac,
   ])
   let t10315 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A. x IN h ==> x IN group_carrier G"),
+    @parser.parse_term("∀ x:A. x IN h ==> x IN group_carrier G"),
     fn(
       x10312 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -108962,7 +108962,7 @@ fn step_1092() -> Unit raise {
         group_inv_inv(),
       ]),
       @parser.parse_term(
-        "h subgroup_of G /\\ ((forall x. x IN h ==> P(group_inv G x)) <=> Q)\n      ==> ((forall x. x IN h ==> P x) <=> Q)",
+        "h subgroup_of G /\\ ((∀ x. x IN h ==> P(group_inv G x)) <=> Q)\n      ==> ((∀ x. x IN h ==> P x) <=> Q)",
       ),
     ),
   )
@@ -108978,7 +108978,7 @@ fn step_1092() -> Unit raise {
   let t10305 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. P x /\\ R(f x) <=> Q x)\n      ==> {y | y IN {f x | P x} /\\ R y} = {f x | Q x}",
+        "(∀ x. P x /\\ R(f x) <=> Q x)\n      ==> {y | y IN {f x | P x} /\\ R y} = {f x | Q x}",
       ),
     ),
   )
@@ -109569,7 +109569,7 @@ fn step_1092() -> Unit raise {
   pgroup_divides_normalizer_quotient_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p k h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        p divides CARD(group_carrier G) DIV CARD h\n        ==> p divides CARD(group_normalizer G h) DIV CARD h",
+        "∀ G p k h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        h subgroup_of G /\\ CARD h = p EXP k /\\\n        p divides CARD(group_carrier G) DIV CARD h\n        ==> p divides CARD(group_normalizer G h) DIV CARD h",
       ),
       t10363,
     ),
@@ -109895,7 +109895,7 @@ fn step_1093() -> Unit raise {
   pgroup_subgroup_psubset_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p h:A->bool.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        h subgroup_of G /\\ ~(h = group_carrier G)\n        ==> h PSUBSET group_normalizer G h",
+        "∀ G p h:A->bool.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        h subgroup_of G /\\ ~(h = group_carrier G)\n        ==> h PSUBSET group_normalizer G h",
       ),
       t10398,
     ),
@@ -109949,7 +109949,7 @@ fn step_1094() -> Unit raise {
   pgroup_maximal_normal_subgroup_of_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p h:A->bool.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        h subgroup_of G /\\\n        (forall h'. h' subgroup_of G /\\ h PSUBSET h' ==> h' = group_carrier G)\n        ==> h normal_subgroup_of G",
+        "∀ G p h:A->bool.\n        prime p /\\ FINITE(group_carrier G) /\\ pgroup {p} G /\\\n        h subgroup_of G /\\\n        (∀ h'. h' subgroup_of G /\\ h PSUBSET h' ==> h' = group_carrier G)\n        ==> h normal_subgroup_of G",
       ),
       t10406,
     ),
@@ -110401,7 +110401,7 @@ fn step_1095() -> Unit raise {
   pgroup_frattini_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p k h j.\n        prime p /\\\n        FINITE j /\\ j normal_subgroup_of G /\\\n        h SUBSET j /\\ h subgroup_of G /\\\n        index p (CARD j) = k /\\ CARD h = p EXP k\n        ==> group_setmul G (group_normalizer G h) j = group_carrier G",
+        "∀(G:A group) p k h j.\n        prime p /\\\n        FINITE j /\\ j normal_subgroup_of G /\\\n        h SUBSET j /\\ h subgroup_of G /\\\n        index p (CARD j) = k /\\ CARD h = p EXP k\n        ==> group_setmul G (group_normalizer G h) j = group_carrier G",
       ),
       t10451,
     ),
@@ -110878,7 +110878,7 @@ fn step_1096() -> Unit raise {
   pgroup_self_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p k s h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        s subgroup_of G /\\ CARD s = p EXP k /\\\n        h subgroup_of G /\\ group_normalizer G s SUBSET h\n        ==> group_normalizer G h = h",
+        "∀ G p k s h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        s subgroup_of G /\\ CARD s = p EXP k /\\\n        h subgroup_of G /\\ group_normalizer G s SUBSET h\n        ==> group_normalizer G h = h",
       ),
       t10508,
     ),
@@ -110964,7 +110964,7 @@ fn step_1097() -> Unit raise {
   pgroup_normalizer_normalizer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G p k h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> group_normalizer G (group_normalizer G h) = group_normalizer G h",
+        "∀ G p k h:A->bool.\n        FINITE(group_carrier G) /\\\n        prime p /\\\n        index p (CARD(group_carrier G)) = k /\\\n        h subgroup_of G /\\ CARD h = p EXP k\n        ==> group_normalizer G (group_normalizer G h) = group_normalizer G h",
       ),
       t10517,
     ),
@@ -110993,7 +110993,7 @@ fn step_1098() -> Unit raise {
   group_disjoint_sum_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=> g INTER h = {group_id G})",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=> g INTER h = {group_id G})",
       ),
       t10519,
     ),
@@ -111031,7 +111031,7 @@ fn step_1099() -> Unit raise {
     t10524,
   ])
   let t10521 = @parser.parse_term(
-    "forall x y:A. x IN g /\\ y IN h /\\ group_mul G x (group_inv G y) = group_id G\n            ==> x = group_id G /\\ group_inv G y = group_id G",
+    "∀ x y:A. x IN g /\\ y IN h /\\ group_mul G x (group_inv G y) = group_id G\n            ==> x = group_id G /\\ group_inv G y = group_id G",
   )
   let t10522 = @tactics.trans_tac(@theorems.eq_trans())(t10521)
   let t10520 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -111058,7 +111058,7 @@ fn step_1099() -> Unit raise {
   group_disjoint_sum_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=>\n             forall x y. x IN g /\\ y IN h /\\ group_mul G x y = group_id G\n                   ==> x = group_id G /\\ y = group_id G)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=>\n             ∀ x y. x IN g /\\ y IN h /\\ group_mul G x y = group_id G\n                   ==> x = group_id G /\\ y = group_id G)",
       ),
       t10526,
     ),
@@ -111509,7 +111509,7 @@ fn step_1100() -> Unit raise {
   group_disjoint_sum_cancel_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=>\n             forall x x' y y'. x IN g /\\ x' IN g /\\ y IN h /\\ y' IN h /\\\n                         group_mul G x y = group_mul G x' y'\n                         ==> x = x' /\\ y = y')",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (g INTER h SUBSET {group_id G} <=>\n             ∀ x x' y y'. x IN g /\\ x' IN g /\\ y IN h /\\ y' IN h /\\\n                         group_mul G x y = group_mul G x' y'\n                         ==> x = x' /\\ y = y')",
       ),
       t10574,
     ),
@@ -111798,7 +111798,7 @@ fn step_1101() -> Unit raise {
   group_sum_commuting_imp_normal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_carrier G SUBSET group_setmul G g h /\\\n        (forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)\n        ==> g normal_subgroup_of G /\\ h normal_subgroup_of G",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_carrier G SUBSET group_setmul G g h /\\\n        (∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)\n        ==> g normal_subgroup_of G /\\ h normal_subgroup_of G",
       ),
       t10612,
     ),
@@ -112038,7 +112038,7 @@ fn step_1102() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "u = v /\\ s = t\n    ==> (forall x. x IN t ==> x IN s) /\\ (forall x. x IN u ==> x IN v)",
+        "u = v /\\ s = t\n    ==> (∀ x. x IN t ==> x IN s) /\\ (∀ x. x IN u ==> x IN v)",
       ),
     ),
   )
@@ -113104,7 +113104,7 @@ fn step_1102() -> Unit raise {
   group_sum_normal_imp_commuting_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n        g INTER h SUBSET {group_id G}\n        ==> forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x",
+        "∀ G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n        g INTER h SUBSET {group_id G}\n        ==> ∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x",
       ),
       t10695,
     ),
@@ -113151,7 +113151,7 @@ fn step_1103() -> Unit raise {
   group_sum_normal_eq_commuting_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_carrier G SUBSET group_setmul G g h /\\\n        g INTER h SUBSET {group_id G}\n        ==> (g normal_subgroup_of G /\\ h normal_subgroup_of G <=>\n             forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G /\\\n        group_carrier G SUBSET group_setmul G g h /\\\n        g INTER h SUBSET {group_id G}\n        ==> (g normal_subgroup_of G /\\ h normal_subgroup_of G <=>\n             ∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
       ),
       t10700,
     ),
@@ -113399,7 +113399,7 @@ fn step_1104() -> Unit raise {
   group_homomorphism_group_mul_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        group_homomorphism\n            (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n            (\\(x,y). group_mul G x y) <=>\n        forall x y. x IN group_carrier G /\\ x IN g /\\\n              y IN group_carrier G /\\ y IN h\n              ==> group_mul G x y = group_mul G y x",
+        "∀ G g h:A->bool.\n        group_homomorphism\n            (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n            (\\(x,y). group_mul G x y) <=>\n        ∀ x y. x IN group_carrier G /\\ x IN g /\\\n              y IN group_carrier G /\\ y IN h\n              ==> group_mul G x y = group_mul G y x",
       ),
       t10728,
     ),
@@ -113431,7 +113431,7 @@ fn step_1105() -> Unit raise {
   group_homomorphism_group_mul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_homomorphism\n              (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n              (\\(x,y). group_mul G x y) <=>\n              forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_homomorphism\n              (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n              (\\(x,y). group_mul G x y) <=>\n              ∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
       ),
       t10731,
     ),
@@ -113466,7 +113466,7 @@ fn step_1106() -> Unit raise {
   group_homomorphism_group_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        abelian_group G\n        ==> group_homomorphism\n              (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n              (\\(x,y). group_mul G x y)",
+        "∀ G g h:A->bool.\n        abelian_group G\n        ==> group_homomorphism\n              (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n              (\\(x,y). group_mul G x y)",
       ),
       t10734,
     ),
@@ -113546,7 +113546,7 @@ fn step_1107() -> Unit raise {
   group_epimorphism_group_mul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_epimorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             group_setmul G g h = group_carrier G /\\\n             forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_epimorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             group_setmul G g h = group_carrier G /\\\n             ∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
       ),
       t10743,
     ),
@@ -113620,7 +113620,7 @@ fn step_1108() -> Unit raise {
   group_monomorphism_group_mul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_monomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h = {group_id G} /\\\n             forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_monomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h = {group_id G} /\\\n             ∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
       ),
       t10753,
     ),
@@ -113660,7 +113660,7 @@ fn step_1109() -> Unit raise {
   group_isomorphism_group_mul_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h = {group_id G} /\\\n             group_setmul G g h = group_carrier G /\\\n             forall x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h = {group_id G} /\\\n             group_setmul G g h = group_carrier G /\\\n             ∀ x y. x IN g /\\ y IN h ==> group_mul G x y = group_mul G y x)",
       ),
       t10756,
     ),
@@ -113710,7 +113710,7 @@ fn step_1110() -> Unit raise {
   group_isomorphism_group_mul_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n             g INTER h = {group_id G} /\\\n             group_setmul G g h = group_carrier G)",
+        "∀ G g h:A->bool.\n        g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n             g INTER h = {group_id G} /\\\n             group_setmul G g h = group_carrier G)",
       ),
       t10761,
     ),
@@ -113741,7 +113741,7 @@ fn step_1111() -> Unit raise {
   group_isomorphism_group_mul_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h SUBSET {group_id G} /\\\n             group_setmul G g h = group_carrier G)",
+        "∀ G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h SUBSET {group_id G} /\\\n             group_setmul G g h = group_carrier G)",
       ),
       t10762,
     ),
@@ -113773,7 +113773,7 @@ fn step_1112() -> Unit raise {
   group_isomorphism_group_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        abelian_group G /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h SUBSET {group_id G} /\\\n             group_setmul G g h = group_carrier G)",
+        "∀ G g h:A->bool.\n        abelian_group G /\\ g subgroup_of G /\\ h subgroup_of G\n        ==> (group_isomorphism\n               (prod_group (subgroup_generated G g) (subgroup_generated G h),G)\n               (\\(x,y). group_mul G x y) <=>\n             g INTER h SUBSET {group_id G} /\\\n             group_setmul G g h = group_carrier G)",
       ),
       t10765,
     ),
@@ -113832,7 +113832,7 @@ fn step_1113() -> Unit raise {
   isomorphic_prod_group_subgroup_generated_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n        g INTER h = {group_id G}\n        ==> prod_group (subgroup_generated G g) (subgroup_generated G h)\n            isomorphic_group subgroup_generated G (group_setmul G g h)",
+        "∀ G g h:A->bool.\n        g normal_subgroup_of G /\\ h normal_subgroup_of G /\\\n        g INTER h = {group_id G}\n        ==> prod_group (subgroup_generated G g) (subgroup_generated G h)\n            isomorphic_group subgroup_generated G (group_setmul G g h)",
       ),
       t10771,
     ),
@@ -113882,7 +113882,7 @@ fn step_1114() -> Unit raise {
   group_inter_im_ker_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_monomorphism(G,K) (g o f)\n        ==> (group_image(G,H) f) INTER (group_kernel(H,K) g) =\n            {group_id H}",
+        "∀(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_monomorphism(G,K) (g o f)\n        ==> (group_image(G,H) f) INTER (group_kernel(H,K) g) =\n            {group_id H}",
       ),
       t10775,
     ),
@@ -113944,7 +113944,7 @@ fn step_1115() -> Unit raise {
   let t10794 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "P /\\ IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y",
+        "P /\\ IMAGE f s = t ==> ∀ y. y IN t ==> ?x. x IN s /\\ f x = y",
       ),
     ),
   )
@@ -114187,7 +114187,7 @@ fn step_1115() -> Unit raise {
   group_sum_im_ker_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_epimorphism(G,K) (g o f)\n        ==> group_setmul H (group_image(G,H) f) (group_kernel(H,K) g) =\n            group_carrier H",
+        "∀(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_epimorphism(G,K) (g o f)\n        ==> group_setmul H (group_image(G,H) f) (group_kernel(H,K) g) =\n            group_carrier H",
       ),
       t10806,
     ),
@@ -114250,7 +114250,7 @@ fn step_1116() -> Unit raise {
   let t10825 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "P /\\ IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y",
+        "P /\\ IMAGE f s = t ==> ∀ y. y IN t ==> ?x. x IN s /\\ f x = y",
       ),
     ),
   )
@@ -114501,7 +114501,7 @@ fn step_1116() -> Unit raise {
   group_sum_ker_im_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_epimorphism(G,K) (g o f)\n        ==> group_setmul H (group_kernel(H,K) g) (group_image(G,H) f) =\n            group_carrier H",
+        "∀(f:A->B) (g:B->C) G H K.\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_epimorphism(G,K) (g o f)\n        ==> group_setmul H (group_kernel(H,K) g) (group_image(G,H) f) =\n            group_carrier H",
       ),
       t10839,
     ),
@@ -114535,7 +114535,7 @@ fn step_1117() -> Unit raise {
   group_semidirect_sum_im_ker_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n      group_homomorphism(G,H) f /\\\n      group_homomorphism(H,K) g /\\\n      group_isomorphism(G,K) (g o f)\n      ==> (group_image(G,H) f) INTER (group_kernel(H,K) g) = {group_id H} /\\\n          group_setmul H (group_image(G,H) f) (group_kernel(H,K) g) =\n          group_carrier H",
+        "∀(f:A->B) (g:B->C) G H K.\n      group_homomorphism(G,H) f /\\\n      group_homomorphism(H,K) g /\\\n      group_isomorphism(G,K) (g o f)\n      ==> (group_image(G,H) f) INTER (group_kernel(H,K) g) = {group_id H} /\\\n          group_setmul H (group_image(G,H) f) (group_kernel(H,K) g) =\n          group_carrier H",
       ),
       t10841,
     ),
@@ -114573,7 +114573,7 @@ fn step_1118() -> Unit raise {
   group_semidirect_sum_ker_im_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n      group_homomorphism(G,H) f /\\\n      group_homomorphism(H,K) g /\\\n      group_isomorphism(G,K) (g o f)\n      ==> (group_kernel(H,K) g) INTER (group_image(G,H) f) = {group_id H} /\\\n           group_setmul H (group_kernel(H,K) g) (group_image(G,H) f) =\n           group_carrier H",
+        "∀(f:A->B) (g:B->C) G H K.\n      group_homomorphism(G,H) f /\\\n      group_homomorphism(H,K) g /\\\n      group_isomorphism(G,K) (g o f)\n      ==> (group_kernel(H,K) g) INTER (group_image(G,H) f) = {group_id H} /\\\n           group_setmul H (group_kernel(H,K) g) (group_image(G,H) f) =\n           group_carrier H",
       ),
       t10844,
     ),
@@ -114610,7 +114610,7 @@ fn step_1119() -> Unit raise {
   group_isomorphism_group_mul_im_ker_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n        abelian_group H /\\\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_isomorphism(G,K) (g o f)\n        ==> group_isomorphism\n              (prod_group (subgroup_generated H (group_image(G,H) f))\n                          (subgroup_generated H (group_kernel(H,K) g)),H)\n              (\\(x,y). group_mul H x y)",
+        "∀(f:A->B) (g:B->C) G H K.\n        abelian_group H /\\\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_isomorphism(G,K) (g o f)\n        ==> group_isomorphism\n              (prod_group (subgroup_generated H (group_image(G,H) f))\n                          (subgroup_generated H (group_kernel(H,K) g)),H)\n              (\\(x,y). group_mul H x y)",
       ),
       t10846,
     ),
@@ -114647,7 +114647,7 @@ fn step_1120() -> Unit raise {
   group_isomorphism_group_mul_ker_im_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) G H K.\n        abelian_group H /\\\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_isomorphism(G,K) (g o f)\n        ==> group_isomorphism\n              (prod_group (subgroup_generated H (group_kernel(H,K) g))\n                          (subgroup_generated H (group_image(G,H) f)),H)\n              (\\(x,y). group_mul H x y)",
+        "∀(f:A->B) (g:B->C) G H K.\n        abelian_group H /\\\n        group_homomorphism(G,H) f /\\\n        group_homomorphism(H,K) g /\\\n        group_isomorphism(G,K) (g o f)\n        ==> group_isomorphism\n              (prod_group (subgroup_generated H (group_kernel(H,K) g))\n                          (subgroup_generated H (group_image(G,H) f)),H)\n              (\\(x,y). group_mul H x y)",
       ),
       t10848,
     ),
@@ -115746,7 +115746,7 @@ fn step_1121() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "group_sum G k f = group_inv G(group_sum G k g)\n      ==> forall k'. group_sum G k' f = group_sum G k f /\\\n               group_sum G k' g = group_sum G k g\n               ==> group_sum G k' f = group_inv G (group_sum G k' g)",
+        "group_sum G k f = group_inv G(group_sum G k g)\n      ==> ∀ k'. group_sum G k' f = group_sum G k f /\\\n               group_sum G k' g = group_sum G k g\n               ==> group_sum G k' f = group_inv G (group_sum G k' g)",
       ),
     ),
   )
@@ -116113,7 +116113,7 @@ fn step_1121() -> Unit raise {
   group_homomorphism_group_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l G (h:K->A->bool).\n      k SUBSET l\n      ==> (group_homomorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                 y IN group_carrier G /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)",
+        "∀ k l G (h:K->A->bool).\n      k SUBSET l\n      ==> (group_homomorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                 y IN group_carrier G /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)",
       ),
       t10986,
     ),
@@ -116149,7 +116149,7 @@ fn step_1122() -> Unit raise {
   group_homomorphism_group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l G (h:K->A->bool).\n      k SUBSET l /\\\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_homomorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)",
+        "∀ k l G (h:K->A->bool).\n      k SUBSET l /\\\n      (∀ i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_homomorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. ∀ x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)",
       ),
       t10990,
     ),
@@ -116185,7 +116185,7 @@ fn step_1123() -> Unit raise {
   group_homomorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k\n        ==> group_homomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k\n        ==> group_homomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
       ),
       t10994,
     ),
@@ -116228,7 +116228,7 @@ fn step_1124() -> Unit raise {
   group_homomorphism_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G\n        ==> group_homomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        abelian_group G\n        ==> group_homomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
       ),
       t10998,
     ),
@@ -116353,7 +116353,7 @@ fn step_1125() -> Unit raise {
   abelian_group_homomorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:K->A->B) k A B.\n        abelian_group B /\\\n        (forall i. i IN k ==> group_homomorphism (A i,B) (f i))\n        ==> group_homomorphism (sum_group k A,B)\n             (\\x. group_sum B k (\\i. (f i) (x i)))",
+        "∀(f:K->A->B) k A B.\n        abelian_group B /\\\n        (∀ i. i IN k ==> group_homomorphism (A i,B) (f i))\n        ==> group_homomorphism (sum_group k A,B)\n             (\\x. group_sum B k (\\i. (f i) (x i)))",
       ),
       t11026,
     ),
@@ -116441,7 +116441,7 @@ fn step_1126() -> Unit raise {
   let t11062 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall i. i IN f ==> forall x. x IN i /\\ x IN u ==> x IN t)\n      ==> u INTER UNIONS f SUBSET t",
+        "(∀ i. i IN f ==> ∀ x. x IN i /\\ x IN u ==> x IN t)\n      ==> u INTER UNIONS f SUBSET t",
       ),
     ),
   )
@@ -117102,7 +117102,7 @@ fn step_1126() -> Unit raise {
   subgroup_epimorphism_group_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l G (h:K->A->bool).\n        k SUBSET l\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),\n                                subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k) <=>\n             pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                   y IN group_carrier G /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k)",
+        "∀ k l G (h:K->A->bool).\n        k SUBSET l\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),\n                                subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k) <=>\n             pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                   y IN group_carrier G /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k)",
       ),
       t11083,
     ),
@@ -117138,7 +117138,7 @@ fn step_1127() -> Unit raise {
   subgroup_epimorphism_group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l G (h:K->A->bool).\n      k SUBSET l /\\\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),\n                              subgroup_generated G (UNIONS {h i | i IN k}))\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)",
+        "∀ k l G (h:K->A->bool).\n      k SUBSET l /\\\n      (∀ i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),\n                              subgroup_generated G (UNIONS {h i | i IN k}))\n                              (group_sum G k) <=>\n           pairwise (\\i j. ∀ x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k)",
       ),
       t11087,
     ),
@@ -117174,7 +117174,7 @@ fn step_1128() -> Unit raise {
   subgroup_epimorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
       ),
       t11091,
     ),
@@ -117217,7 +117217,7 @@ fn step_1129() -> Unit raise {
   subgroup_epimorphism_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        abelian_group G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
       ),
       t11095,
     ),
@@ -117262,7 +117262,7 @@ fn step_1130() -> Unit raise {
   group_epimorphism_group_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l G (h:K->A->bool).\n        k SUBSET l\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k) <=>\n             pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                   y IN group_carrier G /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k /\\\n             subgroup_generated G (UNIONS {h i | i IN k}) = G)",
+        "∀ k l G (h:K->A->bool).\n        k SUBSET l\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k) <=>\n             pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                                   y IN group_carrier G /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k /\\\n             subgroup_generated G (UNIONS {h i | i IN k}) = G)",
       ),
       t11100,
     ),
@@ -117298,7 +117298,7 @@ fn step_1131() -> Unit raise {
   group_epimorphism_group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k l G (h:K->A->bool).\n        k SUBSET l /\\\n        (forall i. i IN k ==> (h i) subgroup_of G)\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k) <=>\n             pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k /\\\n             subgroup_generated G (UNIONS {h i | i IN k}) = G)",
+        "∀ k l G (h:K->A->bool).\n        k SUBSET l /\\\n        (∀ i. i IN k ==> (h i) subgroup_of G)\n        ==> (group_epimorphism (sum_group l (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k) <=>\n             pairwise (\\i j. ∀ x y. x IN (h i) /\\ y IN (h j)\n                                   ==> group_mul G x y = group_mul G y x) k /\\\n             subgroup_generated G (UNIONS {h i | i IN k}) = G)",
       ),
       t11104,
     ),
@@ -117334,7 +117334,7 @@ fn step_1132() -> Unit raise {
   group_epimorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
       ),
       t11108,
     ),
@@ -117377,7 +117377,7 @@ fn step_1133() -> Unit raise {
   group_epimorphism_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        abelian_group G /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G\n        ==> group_epimorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
       ),
       t11112,
     ),
@@ -118531,7 +118531,7 @@ fn step_1134() -> Unit raise {
   let t11174 = @drule.match_mp(
     @meson.meson(
       @list.List([@sets.finite_insert(), @sets.finite_subset()]),
-      @parser.parse_term("FINITE t ==> forall x. s SUBSET x INSERT t ==> FINITE s"),
+      @parser.parse_term("FINITE t ==> ∀ x. s SUBSET x INSERT t ==> FINITE s"),
     ),
   )
   let t11201 = @list.List([
@@ -118633,7 +118633,7 @@ fn step_1134() -> Unit raise {
   let t11164 = @drule.match_mp(
     @meson.meson(
       @list.List([@sets.finite_insert(), @sets.finite_subset()]),
-      @parser.parse_term("FINITE t ==> forall x. s SUBSET x INSERT t ==> FINITE s"),
+      @parser.parse_term("FINITE t ==> ∀ x. s SUBSET x INSERT t ==> FINITE s"),
     ),
   )
   let t11166 = @tactics.first_x_assum(fn(
@@ -118789,7 +118789,7 @@ fn step_1134() -> Unit raise {
   let t11147 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "P /\\ IMAGE f s = t ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y",
+        "P /\\ IMAGE f s = t ==> ∀ y. y IN t ==> ?x. x IN s /\\ f x = y",
       ),
     ),
   )
@@ -119199,7 +119199,7 @@ fn step_1134() -> Unit raise {
   group_monomorphism_group_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n      group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                         (group_sum G k) <=>\n      pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                            y IN group_carrier G /\\ y IN (h j)\n                            ==> group_mul G x y = group_mul G y x) k /\\\n      forall i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}",
+        "∀ k G (h:K->A->bool).\n      group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                         (group_sum G k) <=>\n      pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                            y IN group_carrier G /\\ y IN (h j)\n                            ==> group_mul G x y = group_mul G y x) k /\\\n      ∀ i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}",
       ),
       t11317,
     ),
@@ -119237,7 +119237,7 @@ fn step_1135() -> Unit raise {
   group_monomorphism_group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})",
+        "∀ k G (h:K->A->bool).\n      (∀ i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k) <=>\n           pairwise (\\i j. ∀ x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           ∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})",
       ),
       t11320,
     ),
@@ -119262,7 +119262,7 @@ fn step_1136() -> Unit raise {
   group_monomorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
       ),
       t11321,
     ),
@@ -119297,7 +119297,7 @@ fn step_1137() -> Unit raise {
   group_monomorphism_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G /\\\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        abelian_group G /\\\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_monomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
       ),
       t11324,
     ),
@@ -119340,7 +119340,7 @@ fn step_1138() -> Unit raise {
   subgroup_isomorphism_group_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                           subgroup_generated G (UNIONS {h i | i IN k}))\n                          (group_sum G k) <=>\n        pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        forall i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}",
+        "∀ k G (h:K->A->bool).\n        group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                           subgroup_generated G (UNIONS {h i | i IN k}))\n                          (group_sum G k) <=>\n        pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        ∀ i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}",
       ),
       t11328,
     ),
@@ -119381,7 +119381,7 @@ fn step_1139() -> Unit raise {
   subgroup_isomorphism_group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                              subgroup_generated G (UNIONS {h i | i IN k}))\n                             (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})",
+        "∀ k G (h:K->A->bool).\n      (∀ i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                              subgroup_generated G (UNIONS {h i | i IN k}))\n                             (group_sum G k) <=>\n           pairwise (\\i j. ∀ x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           ∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})",
       ),
       t11332,
     ),
@@ -119422,7 +119422,7 @@ fn step_1140() -> Unit raise {
   subgroup_isomorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
       ),
       t11336,
     ),
@@ -119471,7 +119471,7 @@ fn step_1141() -> Unit raise {
   subgroup_isomorphism_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G /\\\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        (forall i. i IN k\n             ==> h i INTER\n                 group_carrier\n                   (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        abelian_group G /\\\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        (∀ i. i IN k\n             ==> h i INTER\n                 group_carrier\n                   (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),\n                               subgroup_generated G (UNIONS {h i | i IN k}))\n                               (group_sum G k)",
       ),
       t11341,
     ),
@@ -119514,7 +119514,7 @@ fn step_1142() -> Unit raise {
   group_isomorphism_group_sum_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                          (group_sum G k) <=>\n        pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        forall i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}",
+        "∀ k G (h:K->A->bool).\n        group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                          (group_sum G k) <=>\n        pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        ∀ i. i IN k\n          ==> group_carrier\n                 (subgroup_generated G (h i)) INTER\n              group_carrier\n                 (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n              {group_id G}",
       ),
       t11345,
     ),
@@ -119555,7 +119555,7 @@ fn step_1143() -> Unit raise {
   group_isomorphism_group_sum_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n      (forall i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                             (group_sum G k) <=>\n           pairwise (\\i j. forall x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n           forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})",
+        "∀ k G (h:K->A->bool).\n      (∀ i. i IN k ==> (h i) subgroup_of G)\n      ==> (group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                             (group_sum G k) <=>\n           pairwise (\\i j. ∀ x y. x IN (h i) /\\ y IN (h j)\n                                 ==> group_mul G x y = group_mul G y x) k /\\\n           subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n           ∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})",
       ),
       t11349,
     ),
@@ -119596,7 +119596,7 @@ fn step_1144() -> Unit raise {
   group_isomorphism_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                               (group_sum G k)",
       ),
       t11353,
     ),
@@ -119645,7 +119645,7 @@ fn step_1145() -> Unit raise {
   group_isomorphism_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G /\\\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n             ==> h i INTER\n                 group_carrier\n                   (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
+        "∀ k G (h:K->A->bool).\n        abelian_group G /\\\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (∀ i. i IN k\n             ==> h i INTER\n                 group_carrier\n                   (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> group_isomorphism (sum_group k (\\i. subgroup_generated G (h i)),G)\n                              (group_sum G k)",
       ),
       t11358,
     ),
@@ -119679,7 +119679,7 @@ fn step_1146() -> Unit raise {
   isomorphic_sum_group_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        pairwise (\\i j. forall x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n             ==> group_carrier\n                    (subgroup_generated G (h i)) INTER\n                 group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
+        "∀ k G (h:K->A->bool).\n        pairwise (\\i j. ∀ x y. x IN group_carrier G /\\ x IN (h i) /\\\n                              y IN group_carrier G /\\ y IN (h j)\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (∀ i. i IN k\n             ==> group_carrier\n                    (subgroup_generated G (h i)) INTER\n                 group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                 {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
       ),
       t11360,
     ),
@@ -119715,7 +119715,7 @@ fn step_1147() -> Unit raise {
   isomorphic_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. forall x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        pairwise (\\i j. ∀ x y. x IN h i /\\ y IN h j\n                              ==> group_mul G x y = group_mul G y x) k /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
       ),
       t11364,
     ),
@@ -119753,7 +119753,7 @@ fn step_1148() -> Unit raise {
   isomorphic_abelian_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        abelian_group G /\\\n        (forall i. i IN k ==> (h i) subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
+        "∀ k G (h:K->A->bool).\n        abelian_group G /\\\n        (∀ i. i IN k ==> (h i) subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
       ),
       t11368,
     ),
@@ -120036,7 +120036,7 @@ fn step_1149() -> Unit raise {
   isomorphic_normal_sum_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k G (h:K->A->bool).\n        (forall i. i IN k ==> (h i) normal_subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (forall i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
+        "∀ k G (h:K->A->bool).\n        (∀ i. i IN k ==> (h i) normal_subgroup_of G) /\\\n        subgroup_generated G (UNIONS {h i | i IN k}) = G /\\\n        (∀ i. i IN k\n               ==> h i INTER\n                   group_carrier\n                    (subgroup_generated G (UNIONS {h j | j IN k DELETE i})) =\n                   {group_id G})\n        ==> sum_group k (\\i. subgroup_generated G (h i)) isomorphic_group G",
       ),
       t11404,
     ),
@@ -120194,7 +120194,7 @@ fn step_1150() -> Unit raise {
   carrier_subgroup_generated_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            IMAGE (group_sum G u)\n                  (group_carrier (sum_group u (\\i. subgroup_generated G i)))",
+        "∀(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            IMAGE (group_sum G u)\n                  (group_carrier (sum_group u (\\i. subgroup_generated G i)))",
       ),
       t11419,
     ),
@@ -120290,7 +120290,7 @@ fn step_1151() -> Unit raise {
   carrier_subgroup_generated_unions_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G u f | f |\n              (forall s. s IN u ==> f s IN group_carrier(subgroup_generated G s)) /\\\n              FINITE {s | s IN u /\\ ~(f s = group_id G)}}",
+        "∀(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G u f | f |\n              (∀ s. s IN u ==> f s IN group_carrier(subgroup_generated G s)) /\\\n              FINITE {s | s IN u /\\ ~(f s = group_id G)}}",
       ),
       t11436,
     ),
@@ -120320,7 +120320,7 @@ fn step_1152() -> Unit raise {
   carrier_subgroup_generated_unions_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) u.\n        abelian_group G /\\ FINITE u\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G u f | f |\n              (forall s. s IN u ==> f s IN group_carrier(subgroup_generated G s))}",
+        "∀(G:A group) u.\n        abelian_group G /\\ FINITE u\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G u f | f |\n              (∀ s. s IN u ==> f s IN group_carrier(subgroup_generated G s))}",
       ),
       t11437,
     ),
@@ -120516,7 +120516,7 @@ fn step_1153() -> Unit raise {
   carrier_subgroup_generated_unions_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G t f | t,f |\n              FINITE t /\\ t SUBSET u /\\\n              (forall s. s IN t ==> f s IN group_carrier(subgroup_generated G s))}",
+        "∀(G:A group) u.\n        abelian_group G\n        ==> group_carrier(subgroup_generated G (UNIONS u)) =\n            { group_sum G t f | t,f |\n              FINITE t /\\ t SUBSET u /\\\n              (∀ s. s IN t ==> f s IN group_carrier(subgroup_generated G s))}",
       ),
       t11462,
     ),
@@ -121398,7 +121398,7 @@ fn step_1154() -> Unit raise {
   carrier_subgroup_generated_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G s (\\x. group_zpow G x (n x)) | n |\n              FINITE {x | x IN s /\\ ~(n x = &0)}}",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G s (\\x. group_zpow G x (n x)) | n |\n              FINITE {x | x IN s /\\ ~(n x = &0)}}",
       ),
       t11552,
     ),
@@ -121429,7 +121429,7 @@ fn step_1155() -> Unit raise {
   carrier_subgroup_generated_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ FINITE s /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G s (\\x. group_zpow G x (n x)) | n IN (:A->int)}",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ FINITE s /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G s (\\x. group_zpow G x (n x)) | n IN (:A->int)}",
       ),
       t11553,
     ),
@@ -121637,7 +121637,7 @@ fn step_1156() -> Unit raise {
   carrier_subgroup_generated_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G t (\\x. group_zpow G x (n x)) | t,n |\n              FINITE t /\\ t SUBSET s}",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ s SUBSET group_carrier G\n        ==> group_carrier(subgroup_generated G s) =\n            { group_sum G t (\\x. group_zpow G x (n x)) | t,n |\n              FINITE t /\\ t SUBSET s}",
       ),
       t11579,
     ),
@@ -121724,7 +121724,7 @@ fn step_1157() -> Unit raise {
   let t11657 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall q. prime q ==> P q \\/ Q q ==> q IN p INSERT t)\n      ==> ~Q p ==> (forall q. prime q /\\ Q q ==> q IN t)",
+        "(∀ q. prime q ==> P q \\/ Q q ==> q IN p INSERT t)\n      ==> ~Q p ==> (∀ q. prime q /\\ Q q ==> q IN t)",
       ),
     ),
   )
@@ -121875,7 +121875,7 @@ fn step_1157() -> Unit raise {
   let t11639 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "~({p | prime p} SUBSET s) ==> (forall p. prime p ==> p IN s) ==> Q",
+        "~({p | prime p} SUBSET s) ==> (∀ p. prime p ==> p IN s) ==> Q",
       ),
     ),
   )
@@ -122218,7 +122218,7 @@ fn step_1157() -> Unit raise {
   )
   let t11598 = @tactics.mp_tac(
     @sets.set_rule(
-      @parser.parse_term("forall p. p IN {p | prime p /\\ P p} ==> prime p"),
+      @parser.parse_term("∀ p. p IN {p | prime p /\\ P p} ==> prime p"),
     ),
   )
   let t11597 = @simp.gen_rewrite_tac(
@@ -122243,7 +122243,7 @@ fn step_1157() -> Unit raise {
   )
   let t11589 = @list.List([@sets.set_tac(@list.List([])), @tactics.all_tac])
   let t11587 = @parser.parse_term(
-    "{x | x IN group_carrier G /\\\n         forall p. prime p /\\ p divides group_element_order G (x:A)\n             ==> p IN {p | prime p /\\ P p}}",
+    "{x | x IN group_carrier G /\\\n         ∀ p. prime p /\\ p divides group_element_order G (x:A)\n             ==> p IN {p | prime p /\\ P p}}",
   )
   let t11588 = @tactics.trans_tac(@sets.subset_trans())(t11587)
   let t11585 = @meson.asm_meson_tac(
@@ -122416,7 +122416,7 @@ fn step_1157() -> Unit raise {
   subgroup_generated_unions_prime_torsion_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) P.\n      FINITE {p | prime p /\\ P p}\n      ==> subgroup_generated G\n           (UNIONS\n            {{ x | x IN group_carrier G /\\\n                   ?k. group_element_order G x = p EXP k} | prime p /\\ P p}) =\n          subgroup_generated G\n           {x | x IN group_carrier G /\\\n                forall p. prime p /\\ p divides group_element_order G x ==> P p}",
+        "∀(G:A group) P.\n      FINITE {p | prime p /\\ P p}\n      ==> subgroup_generated G\n           (UNIONS\n            {{ x | x IN group_carrier G /\\\n                   ?k. group_element_order G x = p EXP k} | prime p /\\ P p}) =\n          subgroup_generated G\n           {x | x IN group_carrier G /\\\n                ∀ p. prime p /\\ p divides group_element_order G x ==> P p}",
       ),
       t11674,
     ),
@@ -122505,7 +122505,7 @@ fn step_1158() -> Unit raise {
     ),
   )
   let t11684 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("forall s. x IN s /\\ s SUBSET t ==> x IN t")),
+    @sets.set_rule(@parser.parse_term("∀ s. x IN s /\\ s SUBSET t ==> x IN t")),
   )
   let t11683 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
   let t11681 = @simp.rewrite_tac(
@@ -122768,7 +122768,7 @@ fn step_1158() -> Unit raise {
   subgroup_generated_unions_prime_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) P.\n        subgroup_generated G\n         (UNIONS\n           {{ x | x IN group_carrier G /\\\n                  ?k. group_element_order G x = p EXP k} | prime p /\\ P p}) =\n        subgroup_generated G\n         {x | x IN group_carrier G /\\ ~(group_element_order G x = 0) /\\\n              forall p. prime p /\\ p divides group_element_order G x ==> P p}",
+        "∀(G:A group) P.\n        subgroup_generated G\n         (UNIONS\n           {{ x | x IN group_carrier G /\\\n                  ?k. group_element_order G x = p EXP k} | prime p /\\ P p}) =\n        subgroup_generated G\n         {x | x IN group_carrier G /\\ ~(group_element_order G x = 0) /\\\n              ∀ p. prime p /\\ p divides group_element_order G x ==> P p}",
       ),
       t11706,
     ),
@@ -122809,7 +122809,7 @@ fn step_1159() -> Unit raise {
   subgroup_generated_unions_prime_torsion_full_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group).\n        subgroup_generated G\n         (UNIONS\n           {{ x | x IN group_carrier G /\\\n                  ?k. group_element_order G x = p EXP k} | prime p}) =\n        subgroup_generated G\n         {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}",
+        "∀(G:A group).\n        subgroup_generated G\n         (UNIONS\n           {{ x | x IN group_carrier G /\\\n                  ?k. group_element_order G x = p EXP k} | prime p}) =\n        subgroup_generated G\n         {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}",
       ),
       t11709,
     ),
@@ -122846,7 +122846,7 @@ fn step_1160() -> Unit raise {
   pgroup_prime_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> pgroup {p} (subgroup_generated G\n                         {x | x IN group_carrier G /\\\n                              ?k. group_element_order G x = p EXP k})",
+        "∀(G:A group) p.\n        abelian_group G /\\ prime p\n        ==> pgroup {p} (subgroup_generated G\n                         {x | x IN group_carrier G /\\\n                              ?k. group_element_order G x = p EXP k})",
       ),
       t11711,
     ),
@@ -122903,7 +122903,7 @@ fn step_1161() -> Unit raise {
   pgroup_subset_prime_torsion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) p s.\n        prime p /\\\n        s SUBSET group_carrier G /\\\n        pgroup {p} (subgroup_generated G s)\n        ==> s SUBSET {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}",
+        "∀(G:A group) p s.\n        prime p /\\\n        s SUBSET group_carrier G /\\\n        pgroup {p} (subgroup_generated G s)\n        ==> s SUBSET {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}",
       ),
       t11719,
     ),
@@ -123849,7 +123849,7 @@ fn step_1162() -> Unit raise {
   abelian_group_torsion_isomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G\n        ==> group_isomorphism\n             (sum_group {p | prime p}\n               (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}),\n              subgroup_generated G\n               {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)})\n             (group_sum G {p | prime p})",
+        "∀ G:A group.\n        abelian_group G\n        ==> group_isomorphism\n             (sum_group {p | prime p}\n               (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}),\n              subgroup_generated G\n               {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)})\n             (group_sum G {p | prime p})",
       ),
       t11773,
     ),
@@ -123953,7 +123953,7 @@ fn step_1163() -> Unit raise {
   abelian_group_torsion_structure_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G\n        ==> subgroup_generated G\n               {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n            isomorphic_group\n            sum_group {p | prime p}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
+        "∀ G:A group.\n        abelian_group G\n        ==> subgroup_generated G\n               {x | x IN group_carrier G /\\ ~(group_element_order G x = 0)}\n            isomorphic_group\n            sum_group {p | prime p}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
       ),
       t11782,
     ),
@@ -124118,7 +124118,7 @@ fn step_1164() -> Unit raise {
   torsion_abelian_group_isomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G /\\\n        (forall x. x IN group_carrier G ==> ~(group_element_order G x = 0))\n        ==> group_isomorphism\n             (sum_group {p | prime p}\n               (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}),\n              G)\n             (group_sum G {p | prime p})",
+        "∀ G:A group.\n        abelian_group G /\\\n        (∀ x. x IN group_carrier G ==> ~(group_element_order G x = 0))\n        ==> group_isomorphism\n             (sum_group {p | prime p}\n               (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k}),\n              G)\n             (group_sum G {p | prime p})",
       ),
       t11795,
     ),
@@ -124222,7 +124222,7 @@ fn step_1165() -> Unit raise {
   torsion_abelian_group_structure_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G /\\\n        (forall x. x IN group_carrier G ==> ~(group_element_order G x = 0))\n        ==> G isomorphic_group\n            sum_group {p | prime p}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
+        "∀ G:A group.\n        abelian_group G /\\\n        (∀ x. x IN group_carrier G ==> ~(group_element_order G x = 0))\n        ==> G isomorphic_group\n            sum_group {p | prime p}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
       ),
       t11804,
     ),
@@ -124383,7 +124383,7 @@ fn step_1166() -> Unit raise {
   finite_abelian_group_structure_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group\n            sum_group {p | prime p /\\ p divides CARD(group_carrier G)}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
+        "∀ G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group\n            sum_group {p | prime p /\\ p divides CARD(group_carrier G)}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
       ),
       t11826,
     ),
@@ -124504,7 +124504,7 @@ fn step_1167() -> Unit raise {
   finite_abelian_group_structure_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group\n            product_group {p | prime p /\\ p divides CARD(group_carrier G)}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
+        "∀ G:A group.\n        abelian_group G /\\ FINITE(group_carrier G)\n        ==> G isomorphic_group\n            product_group {p | prime p /\\ p divides CARD(group_carrier G)}\n              (\\p. subgroup_generated G\n                     {x | x IN group_carrier G /\\\n                          ?k. group_element_order G x = p EXP k})",
       ),
       t11837,
     ),
@@ -125052,7 +125052,7 @@ fn step_1168() -> Unit raise {
   torsion_abelian_group_as_sum_of_pgroups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        abelian_group G\n        ==> ((forall x. x IN group_carrier G ==> ~(group_element_order G x = 0)) <=>\n             ?H:num->A group.\n                (forall p. prime p ==> pgroup {p} (H p)) /\\\n                G isomorphic_group sum_group {p | prime p} H)",
+        "∀ G:A group.\n        abelian_group G\n        ==> ((∀ x. x IN group_carrier G ==> ~(group_element_order G x = 0)) <=>\n             ?H:num->A group.\n                (∀ p. prime p ==> pgroup {p} (H p)) /\\\n                G isomorphic_group sum_group {p | prime p} H)",
       ),
       t11892,
     ),
@@ -125249,7 +125249,7 @@ fn step_1169() -> Unit raise {
     })(t12526(x12527))
   })
   let t12520 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("(forall x. x IN a INSERT s ==> P x) ==> P a")),
+    @sets.set_rule(@parser.parse_term("(∀ x. x IN a INSERT s ==> P x) ==> P a")),
   )
   let t12522 = @tactics.first_x_assum(fn(
     x12521 : @kernel.Thm,
@@ -127162,7 +127162,7 @@ fn step_1169() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "(forall x. P x /\\ Q x ==> R x ==> S x)\n        ==> (forall x. P x ==> Q x) /\\ (forall x. R x) ==> (forall x. P x ==> S x)",
+        "(∀ x. P x /\\ Q x ==> R x ==> S x)\n        ==> (∀ x. P x ==> Q x) /\\ (∀ x. R x) ==> (∀ x. P x ==> S x)",
       ),
     ),
   )
@@ -127242,7 +127242,7 @@ fn step_1169() -> Unit raise {
   let t12297 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall b. b IN s /\\ P b ==> Q b)\n        ==> forall t a. t SUBSET s DELETE a\n                  ==> forall b. b IN t /\\ ~(b = a) ==> P b ==> Q b",
+        "(∀ b. b IN s /\\ P b ==> Q b)\n        ==> ∀ t a. t SUBSET s DELETE a\n                  ==> ∀ b. b IN t /\\ ~(b = a) ==> P b ==> Q b",
       ),
     ),
   )
@@ -131310,7 +131310,7 @@ fn step_1169() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(forall x y z. P x y z) <=> (forall y z x. P x y z)"),
+        @parser.parse_term("(∀ x y z. P x y z) <=> (∀ y z x. P x y z)"),
       ),
     ]),
   )
@@ -131460,7 +131460,7 @@ fn step_1169() -> Unit raise {
     @meson.meson(
       @list.List([]),
       @parser.parse_term(
-        "forall R. (forall s. (forall m. ~R m s) ==> P s) /\\ (forall(m:num) s. R m s ==> P s)\n        ==> forall s. P s",
+        "∀ R. (∀ s. (∀ m. ~R m s) ==> P s) /\\ (∀(m:num) s. R m s ==> P s)\n        ==> ∀ s. P s",
       ),
     ),
   )
@@ -131719,7 +131719,7 @@ fn step_1169() -> Unit raise {
       @meson.meson(
         @list.List([@arith.let_trans(), @arith.le_refl()]),
         @parser.parse_term(
-          "(forall m. m < r ==> forall s. FINITE s /\\ CARD s <= m ==> Q s) <=>\n    (forall s. FINITE s /\\ CARD s < r ==> Q s)",
+          "(∀ m. m < r ==> ∀ s. FINITE s /\\ CARD s <= m ==> Q s) <=>\n    (∀ s. FINITE s /\\ CARD s < r ==> Q s)",
         ),
       ),
     ]),
@@ -131730,7 +131730,7 @@ fn step_1169() -> Unit raise {
     @meson.meson(
       @list.List([@arith.le_refl()]),
       @parser.parse_term(
-        "(forall n s. FINITE s /\\ CARD s <= n ==> P s) ==> (forall s. FINITE s ==> P s)",
+        "(∀ n s. FINITE s /\\ CARD s <= n ==> P s) ==> (∀ s. FINITE s ==> P s)",
       ),
     ),
   )
@@ -131996,7 +131996,7 @@ fn step_1169() -> Unit raise {
   finitely_generated_abelian_subgroup_structure_isomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                group_isomorphism\n                  (sum_group t (\\x. subgroup_generated G {x}),\n                   subgroup_generated G s)\n                  (group_sum G t)",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                group_isomorphism\n                  (sum_group t (\\x. subgroup_generated G {x}),\n                   subgroup_generated G s)\n                  (group_sum G t)",
       ),
       t12554,
     ),
@@ -132106,7 +132106,7 @@ fn step_1170() -> Unit raise {
   finitely_generated_abelian_subgroup_structure_isomorphism_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                group_isomorphism\n                  (product_group t (\\x. subgroup_generated G {x}),\n                   subgroup_generated G s)\n                  (group_sum G t)",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                group_isomorphism\n                  (product_group t (\\x. subgroup_generated G {x}),\n                   subgroup_generated G s)\n                  (group_sum G t)",
       ),
       t12563,
     ),
@@ -132226,7 +132226,7 @@ fn step_1171() -> Unit raise {
   finitely_generated_abelian_subgroup_structure_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                subgroup_generated G s isomorphic_group\n                sum_group t (\\x. subgroup_generated G {x})",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                subgroup_generated G s isomorphic_group\n                sum_group t (\\x. subgroup_generated G {x})",
       ),
       t12574,
     ),
@@ -132336,7 +132336,7 @@ fn step_1172() -> Unit raise {
   finitely_generated_abelian_subgroup_structure_explicit_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                subgroup_generated G s isomorphic_group\n                product_group t (\\x. subgroup_generated G {x})",
+        "∀ G (s:A->bool).\n        abelian_group G /\\ FINITE s\n        ==> ?t. FINITE t /\\ CARD t <= CARD s /\\ t SUBSET group_carrier G /\\\n                subgroup_generated G t = subgroup_generated G s /\\\n                subgroup_generated G s isomorphic_group\n                product_group t (\\x. subgroup_generated G {x})",
       ),
       t12583,
     ),
@@ -132636,7 +132636,7 @@ fn step_1173() -> Unit raise {
   finitely_generated_abelian_group_structure_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n            G isomorphic_group sum_group t (\\x. subgroup_generated G {x})",
+        "∀ G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n            G isomorphic_group sum_group t (\\x. subgroup_generated G {x})",
       ),
       t12611,
     ),
@@ -132667,7 +132667,7 @@ fn step_1174() -> Unit raise {
   finitely_generated_abelian_group_structure_explicit_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n            G isomorphic_group product_group t (\\x. subgroup_generated G {x})",
+        "∀ G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?t. FINITE t /\\ t SUBSET group_carrier G /\\\n            G isomorphic_group product_group t (\\x. subgroup_generated G {x})",
       ),
       t12613,
     ),
@@ -133077,7 +133077,7 @@ fn step_1175() -> Unit raise {
   finitely_generated_abelian_group_as_sum_of_cyclic_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?n H:num->A group.\n            (forall i. 1 <= i /\\ i <= n ==> cyclic_group (H i)) /\\\n            G isomorphic_group sum_group (1..n) H",
+        "∀ G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?n H:num->A group.\n            (∀ i. 1 <= i /\\ i <= n ==> cyclic_group (H i)) /\\\n            G isomorphic_group sum_group (1..n) H",
       ),
       t12657,
     ),
@@ -133110,7 +133110,7 @@ fn step_1176() -> Unit raise {
   finitely_generated_abelian_group_as_product_of_cyclic_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?n H:num->A group.\n            (forall i. 1 <= i /\\ i <= n ==> cyclic_group (H i)) /\\\n            G isomorphic_group product_group (1..n) H",
+        "∀ G:A group.\n        finitely_generated_group G /\\ abelian_group G <=>\n        ?n H:num->A group.\n            (∀ i. 1 <= i /\\ i <= n ==> cyclic_group (H i)) /\\\n            G isomorphic_group product_group (1..n) H",
       ),
       t12659,
     ),
@@ -133430,7 +133430,7 @@ fn step_1177() -> Unit raise {
   finitely_generated_abelian_group_as_sum_of_integer_mod_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      finitely_generated_group G /\\ abelian_group G <=>\n      ?n d. G isomorphic_group sum_group (1..n) (\\i. integer_mod_group(d i))",
+        "∀ G:A group.\n      finitely_generated_group G /\\ abelian_group G <=>\n      ?n d. G isomorphic_group sum_group (1..n) (\\i. integer_mod_group(d i))",
       ),
       t12702,
     ),
@@ -133467,7 +133467,7 @@ fn step_1178() -> Unit raise {
   finitely_generated_abelian_group_as_product_of_integer_mod_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      finitely_generated_group G /\\ abelian_group G <=>\n      ?n d. G isomorphic_group\n            product_group (1..n) (\\i. integer_mod_group(d i))",
+        "∀ G:A group.\n      finitely_generated_group G /\\ abelian_group G <=>\n      ?n d. G isomorphic_group\n            product_group (1..n) (\\i. integer_mod_group(d i))",
       ),
       t12704,
     ),
@@ -134913,7 +134913,7 @@ fn step_1179() -> Unit raise {
   finitely_generated_abelian_group_as_sum_of_integer_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      finitely_generated_group G /\\ abelian_group G /\\\n      (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n      ?n. G isomorphic_group sum_group (1..n) (\\i. integer_group)",
+        "∀ G:A group.\n      finitely_generated_group G /\\ abelian_group G /\\\n      (∀ x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n      ?n. G isomorphic_group sum_group (1..n) (\\i. integer_group)",
       ),
       t12813,
     ),
@@ -134946,7 +134946,7 @@ fn step_1180() -> Unit raise {
   finitely_generated_abelian_group_as_product_of_integer_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n      finitely_generated_group G /\\ abelian_group G /\\\n      (forall x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n      ?n. G isomorphic_group product_group (1..n) (\\i. integer_group)",
+        "∀ G:A group.\n      finitely_generated_group G /\\ abelian_group G /\\\n      (∀ x. x IN group_carrier G ==> group_element_order G x <= 1) <=>\n      ?n. G isomorphic_group product_group (1..n) (\\i. integer_group)",
       ),
       t12815,
     ),
@@ -135200,7 +135200,7 @@ fn step_1182() -> Unit raise {
   free_abelian_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall s:A->bool.\n        group_carrier(free_abelian_group s) = {c | frag_support c SUBSET s}) /\\\n   (forall s:A->bool. group_id(free_abelian_group s) = frag_0) /\\\n   (forall s:A->bool. group_inv(free_abelian_group s) = frag_neg) /\\\n   (forall s:A->bool. group_mul(free_abelian_group s) = frag_add)",
+        "(∀ s:A->bool.\n        group_carrier(free_abelian_group s) = {c | frag_support c SUBSET s}) /\\\n   (∀ s:A->bool. group_id(free_abelian_group s) = frag_0) /\\\n   (∀ s:A->bool. group_inv(free_abelian_group s) = frag_neg) /\\\n   (∀ s:A->bool. group_mul(free_abelian_group s) = frag_add)",
       ),
       t12834,
     ),
@@ -135232,7 +135232,7 @@ fn step_1183() -> Unit raise {
   )
   abelian_free_abelian_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s:A->bool. abelian_group(free_abelian_group s)"),
+      @parser.parse_term("∀ s:A->bool. abelian_group(free_abelian_group s)"),
       t12837,
     ),
   )
@@ -135273,7 +135273,7 @@ fn step_1184() -> Unit raise {
   free_abelian_group_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A->bool) x n.\n        group_pow (free_abelian_group s) x n = frag_cmul (&n) x",
+        "∀(s:A->bool) x n.\n        group_pow (free_abelian_group s) x n = frag_cmul (&n) x",
       ),
       t12840,
     ),
@@ -135316,7 +135316,7 @@ fn step_1185() -> Unit raise {
   free_abelian_group_zpow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A->bool) x n.\n        group_zpow (free_abelian_group s) x n = frag_cmul n x",
+        "∀(s:A->bool) x n.\n        group_zpow (free_abelian_group s) x n = frag_cmul n x",
       ),
       t12844,
     ),
@@ -135348,7 +135348,7 @@ fn step_1186() -> Unit raise {
   frag_of_in_free_abelian_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s x:A. frag_of x IN group_carrier(free_abelian_group s) <=> x IN s",
+        "∀ s x:A. frag_of x IN group_carrier(free_abelian_group s) <=> x IN s",
       ),
       t12845,
     ),
@@ -135410,7 +135410,7 @@ fn step_1187() -> Unit raise {
   free_abelian_group_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P s:A->bool.\n        P(frag_0) /\\\n        (forall x y. x IN group_carrier(free_abelian_group s) /\\\n               y IN group_carrier(free_abelian_group s) /\\\n               P x /\\ P y\n               ==> P(frag_sub x y)) /\\\n        (forall a. a IN s ==> P(frag_of a))\n        ==> forall x. x IN group_carrier(free_abelian_group s) ==> P x",
+        "∀ P s:A->bool.\n        P(frag_0) /\\\n        (∀ x y. x IN group_carrier(free_abelian_group s) /\\\n               y IN group_carrier(free_abelian_group s) /\\\n               P x /\\ P y\n               ==> P(frag_sub x y)) /\\\n        (∀ a. a IN s ==> P(frag_of a))\n        ==> ∀ x. x IN group_carrier(free_abelian_group s) ==> P x",
       ),
       t12851,
     ),
@@ -136208,7 +136208,7 @@ fn step_1188() -> Unit raise {
   free_abelian_group_universal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) s G.\n        IMAGE f s SUBSET group_carrier G /\\ abelian_group G\n        ==> ?h. group_homomorphism(free_abelian_group s,G) h /\\\n                forall x. x IN s ==> h(frag_of x) = f x",
+        "∀(f:A->B) s G.\n        IMAGE f s SUBSET group_carrier G /\\ abelian_group G\n        ==> ?h. group_homomorphism(free_abelian_group s,G) h /\\\n                ∀ x. x IN s ==> h(frag_of x) = f x",
       ),
       t12930,
     ),
@@ -136344,7 +136344,7 @@ fn step_1189() -> Unit raise {
   isomorphic_group_integer_free_abelian_group_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x:A. integer_group isomorphic_group free_abelian_group {x}",
+        "∀ x:A. integer_group isomorphic_group free_abelian_group {x}",
       ),
       t12946,
     ),
@@ -136477,7 +136477,7 @@ fn step_1190() -> Unit raise {
   group_homomorphism_free_abelian_groups_id_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k k':A->bool.\n    group_homomorphism (free_abelian_group k,free_abelian_group k') (\\x. x) <=>\n    k SUBSET k'",
+        "∀ k k':A->bool.\n    group_homomorphism (free_abelian_group k,free_abelian_group k') (\\x. x) <=>\n    k SUBSET k'",
       ),
       t12959,
     ),
@@ -137061,7 +137061,7 @@ fn step_1191() -> Unit raise {
     @list.List([
       @sets.set_rule(
         @parser.parse_term(
-          "DISJOINT a (UNIONS {f i | i IN s}) <=>\n        forall i. i IN s ==> DISJOINT a (f i)",
+          "DISJOINT a (UNIONS {f i | i IN s}) <=>\n        ∀ i. i IN s ==> DISJOINT a (f i)",
         ),
       ),
     ]),
@@ -137331,7 +137331,7 @@ fn step_1191() -> Unit raise {
   )
   let t13038 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("forall u. s SUBSET u /\\ DISJOINT t u ==> s = t ==> t = {}"),
+      @parser.parse_term("∀ u. s SUBSET u /\\ DISJOINT t u ==> s = t ==> t = {}"),
     ),
   )
   let t13035 = @drule.match_mp(
@@ -138273,7 +138273,7 @@ fn step_1191() -> Unit raise {
   group_isomorphism_free_abelian_group_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k (f:K->A->bool).\n        pairwise (\\i j. DISJOINT (f i) (f j)) k\n        ==> group_isomorphism (sum_group k (\\i. free_abelian_group(f i)),\n                               free_abelian_group(UNIONS {f i | i IN k}))\n                              (iterate frag_add k)",
+        "∀ k (f:K->A->bool).\n        pairwise (\\i j. DISJOINT (f i) (f j)) k\n        ==> group_isomorphism (sum_group k (\\i. free_abelian_group(f i)),\n                               free_abelian_group(UNIONS {f i | i IN k}))\n                              (iterate frag_add k)",
       ),
       t13124,
     ),
@@ -138389,7 +138389,7 @@ fn step_1192() -> Unit raise {
   isomorphic_free_abelian_group_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k:(A->bool)->bool.\n        pairwise DISJOINT k\n        ==> free_abelian_group(UNIONS k) isomorphic_group\n            sum_group k free_abelian_group",
+        "∀ k:(A->bool)->bool.\n        pairwise DISJOINT k\n        ==> free_abelian_group(UNIONS k) isomorphic_group\n            sum_group k free_abelian_group",
       ),
       t13136,
     ),
@@ -138458,7 +138458,7 @@ fn step_1193() -> Unit raise {
   isomorphic_sum_integer_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k:A->bool.\n        sum_group k (\\i. integer_group) isomorphic_group free_abelian_group k",
+        "∀ k:A->bool.\n        sum_group k (\\i. integer_group) isomorphic_group free_abelian_group k",
       ),
       t13145,
     ),
@@ -139243,7 +139243,7 @@ fn step_1194() -> Unit raise {
   card_eq_free_abelian_group_infinite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s:A->bool. INFINITE s ==> group_carrier(free_abelian_group s) =_c s",
+        "∀ s:A->bool. INFINITE s ==> group_carrier(free_abelian_group s) =_c s",
       ),
       t13199,
     ),
@@ -139605,7 +139605,7 @@ fn step_1195() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
   ])
   let t13230 = @tactics.subgoal_then(
-    @parser.parse_term("forall c. frag_support c SUBSET s ==> (g:A frag->B) c = h c"),
+    @parser.parse_term("∀ c. frag_support c SUBSET s ==> (g:A frag->B) c = h c"),
     fn(
       x13227 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -139877,7 +139877,7 @@ fn step_1195() -> Unit raise {
   card_eq_homomorphisms_from_free_abelian_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A->bool) (G:B group).\n        abelian_group G\n        ==> {f | EXTENSIONAL (group_carrier(free_abelian_group s)) f /\\\n                 group_homomorphism(free_abelian_group s,G) f} =_c\n            (group_carrier G) ^_c s",
+        "∀(s:A->bool) (G:B group).\n        abelian_group G\n        ==> {f | EXTENSIONAL (group_carrier(free_abelian_group s)) f /\\\n                 group_homomorphism(free_abelian_group s,G) f} =_c\n            (group_carrier G) ^_c s",
       ),
       t13270,
     ),
@@ -139922,7 +139922,7 @@ fn step_1196() -> Unit raise {
   let t13387 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("IMAGE f s SUBSET t <=> forall x. x IN s ==> f x IN t"),
+        @parser.parse_term("IMAGE f s SUBSET t <=> ∀ x. x IN s ==> f x IN t"),
       ),
     ]),
   )
@@ -140695,7 +140695,7 @@ fn step_1196() -> Unit raise {
             @meson.meson(
               @list.List([group_homomorphism_eq()]),
               @parser.parse_term(
-                "group_homomorphism(G,H) f /\\\n          (forall x. x IN group_carrier G ==> RESTRICTION s f x = f x)\n          ==> group_homomorphism(G,H) (RESTRICTION s f)",
+                "group_homomorphism(G,H) f /\\\n          (∀ x. x IN group_carrier G ==> RESTRICTION s f x = f x)\n          ==> group_homomorphism(G,H) (RESTRICTION s f)",
               ),
             ),
           ),
@@ -141076,7 +141076,7 @@ fn step_1196() -> Unit raise {
   isomorphic_free_abelian_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(s:A->bool) (t:B->bool).\n      free_abelian_group s isomorphic_group free_abelian_group t <=>\n      s =_c t",
+        "∀(s:A->bool) (t:B->bool).\n      free_abelian_group s isomorphic_group free_abelian_group t <=>\n      s =_c t",
       ),
       t13405,
     ),
@@ -141100,7 +141100,7 @@ fn step_1197() -> Unit raise {
   solvable_group_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "solvable_group (G:A group) <=>\n    ?k (c:num->A->bool).\n      c 0 = group_carrier G /\\\n      c k = {group_id G} /\\\n      (forall i. i < k\n           ==> c(SUC i) normal_subgroup_of (subgroup_generated G (c i)) /\\\n               abelian_group(quotient_group\n                               (subgroup_generated G (c i)) (c(SUC i))))",
+        "solvable_group (G:A group) <=>\n    ?k (c:num->A->bool).\n      c 0 = group_carrier G /\\\n      c k = {group_id G} /\\\n      (∀ i. i < k\n           ==> c(SUC i) normal_subgroup_of (subgroup_generated G (c i)) /\\\n               abelian_group(quotient_group\n                               (subgroup_generated G (c i)) (c(SUC i))))",
       ),
     ),
   )
@@ -141472,7 +141472,7 @@ fn step_1198() -> Unit raise {
   solvable_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G:A group.\n     solvable_group G <=>\n     (?k c. c 0 = {group_id G} /\\\n            c k = group_carrier G /\\\n            (forall i. i < k\n                 ==> c i normal_subgroup_of\n                     subgroup_generated G (c(SUC i)) /\\\n                     abelian_group\n                     (quotient_group\n                        (subgroup_generated G (c(SUC i))) (c i))))",
+        "∀ G:A group.\n     solvable_group G <=>\n     (?k c. c 0 = {group_id G} /\\\n            c k = group_carrier G /\\\n            (∀ i. i < k\n                 ==> c i normal_subgroup_of\n                     subgroup_generated G (c(SUC i)) /\\\n                     abelian_group\n                     (quotient_group\n                        (subgroup_generated G (c(SUC i))) (c i))))",
       ),
       t13444,
     ),
@@ -141754,7 +141754,7 @@ fn step_1199() -> Unit raise {
   abelian_quotient_commutator_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (n:A->bool) x y.\n     n normal_subgroup_of G /\\\n     abelian_group(quotient_group G n) /\\\n     x IN group_carrier G /\\ y IN group_carrier G\n     ==> group_mul G (group_inv G x)\n           (group_mul G (group_inv G y)\n             (group_mul G x y)) IN n",
+        "∀ G (n:A->bool) x y.\n     n normal_subgroup_of G /\\\n     abelian_group(quotient_group G n) /\\\n     x IN group_carrier G /\\ y IN group_carrier G\n     ==> group_mul G (group_inv G x)\n           (group_mul G (group_inv G y)\n             (group_mul G x y)) IN n",
       ),
       t13473,
     ),
@@ -141869,7 +141869,7 @@ fn step_1200() -> Unit raise {
   )
   trivial_imp_solvable_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. trivial_group G ==> solvable_group G"),
+      @parser.parse_term("∀ G:A group. trivial_group G ==> solvable_group G"),
       t13485,
     ),
   )
@@ -142006,7 +142006,7 @@ fn step_1201() -> Unit raise {
   )
   abelian_imp_solvable_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall G:A group. abelian_group G ==> solvable_group G"),
+      @parser.parse_term("∀ G:A group. abelian_group G ==> solvable_group G"),
       t13501,
     ),
   )
@@ -142892,7 +142892,7 @@ fn step_1202() -> Unit raise {
   ])
   let t13539 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall j. j <= m\n         ==> (d:num->(A->bool)) j subgroup_of\n             subgroup_generated (G:A group) n /\\\n             d j SUBSET n",
+      "∀ j. j <= m\n         ==> (d:num->(A->bool)) j subgroup_of\n             subgroup_generated (G:A group) n /\\\n             d j SUBSET n",
     ),
     fn(
       x13536 : @kernel.Thm,
@@ -143323,7 +143323,7 @@ fn step_1202() -> Unit raise {
   solvable_group_normal_extension_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     abelian_group(quotient_group G n) /\\\n     solvable_group(subgroup_generated G n)\n     ==> solvable_group G",
+        "∀ G (n:A->bool).\n     n normal_subgroup_of G /\\\n     abelian_group(quotient_group G n) /\\\n     solvable_group(subgroup_generated G n)\n     ==> solvable_group G",
       ),
       t13629,
     ),
@@ -143750,7 +143750,7 @@ fn step_1203() -> Unit raise {
   abelian_quotient_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) (f:A->B) n.\n    group_epimorphism(G,H) f /\\\n    n normal_subgroup_of G /\\\n    abelian_group(quotient_group G n)\n    ==> IMAGE f n normal_subgroup_of H /\\\n        abelian_group(quotient_group H (IMAGE f n))",
+        "∀(G:A group) (H:B group) (f:A->B) n.\n    group_epimorphism(G,H) f /\\\n    n normal_subgroup_of G /\\\n    abelian_group(quotient_group G n)\n    ==> IMAGE f n normal_subgroup_of H /\\\n        abelian_group(quotient_group H (IMAGE f n))",
       ),
       t13674,
     ),
@@ -144038,7 +144038,7 @@ fn step_1204() -> Unit raise {
   ])
   let t13697 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall j. j <= k ==> (c:num->A->bool) j SUBSET group_carrier G",
+      "∀ j. j <= k ==> (c:num->A->bool) j SUBSET group_carrier G",
     ),
     fn(
       x13694 : @kernel.Thm,
@@ -144298,7 +144298,7 @@ fn step_1204() -> Unit raise {
   solvable_group_epimorphic_image_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) (f:A->B).\n    group_epimorphism(G,H) f /\\ solvable_group G ==> solvable_group H",
+        "∀(G:A group) (H:B group) (f:A->B).\n    group_epimorphism(G,H) f /\\ solvable_group G ==> solvable_group H",
       ),
       t13729,
     ),
@@ -144338,7 +144338,7 @@ fn step_1205() -> Unit raise {
   solvable_group_quotient_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) n.\n     solvable_group G /\\ n normal_subgroup_of G\n     ==> solvable_group(quotient_group G n)",
+        "∀(G:A group) n.\n     solvable_group G /\\ n normal_subgroup_of G\n     ==> solvable_group(quotient_group G n)",
       ),
       t13734,
     ),
@@ -144654,7 +144654,7 @@ fn step_1206() -> Unit raise {
   isomorphic_group_solvability_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n     G isomorphic_group H ==> (solvable_group G <=> solvable_group H)",
+        "∀(G:A group) (H:B group).\n     G isomorphic_group H ==> (solvable_group G <=> solvable_group H)",
       ),
       t13770,
     ),
@@ -144873,7 +144873,7 @@ fn step_1207() -> Unit raise {
   commutator_imp_abelian_quotient_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n            ==> group_mul G (group_inv G x)\n                  (group_mul G (group_inv G y)\n                    (group_mul G x y)) IN n)\n     ==> abelian_group(quotient_group G n)",
+        "∀ G (n:A->bool).\n     n normal_subgroup_of G /\\\n     (∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n            ==> group_mul G (group_inv G x)\n                  (group_mul G (group_inv G y)\n                    (group_mul G x y)) IN n)\n     ==> abelian_group(quotient_group G n)",
       ),
       t13794,
     ),
@@ -145007,7 +145007,7 @@ fn step_1208() -> Unit raise {
   abelian_quotient_group_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     (forall x y. x IN group_carrier G /\\ y IN group_carrier G\n            ==> group_div G (group_mul G x y) (group_mul G y x) IN n)\n     ==> abelian_group(quotient_group G n)",
+        "∀ G (n:A->bool).\n     n normal_subgroup_of G /\\\n     (∀ x y. x IN group_carrier G /\\ y IN group_carrier G\n            ==> group_div G (group_mul G x y) (group_mul G y x) IN n)\n     ==> abelian_group(quotient_group G n)",
       ),
       t13808,
     ),
@@ -145428,7 +145428,7 @@ fn step_1209() -> Unit raise {
   ])
   let t13919 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall a x. a IN (c:num->A->bool) i INTER h /\\ x IN c(SUC i) INTER h\n           ==> group_conjugation G a x IN c(SUC i) INTER h",
+      "∀ a x. a IN (c:num->A->bool) i INTER h /\\ x IN c(SUC i) INTER h\n           ==> group_conjugation G a x IN c(SUC i) INTER h",
     ),
     fn(
       x13916 : @kernel.Thm,
@@ -146222,7 +146222,7 @@ fn step_1209() -> Unit raise {
     @tactics.all_tac,
   ])
   let t13838 = @tactics.subgoal_then(
-    @parser.parse_term("forall j. j <= k ==> (c:num->A->bool) j subgroup_of G"),
+    @parser.parse_term("∀ j. j <= k ==> (c:num->A->bool) j subgroup_of G"),
     fn(
       x13835 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -146613,7 +146613,7 @@ fn step_1209() -> Unit raise {
   solvable_group_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (h:A->bool).\n     h subgroup_of G /\\ solvable_group G\n     ==> solvable_group(subgroup_generated G h)",
+        "∀ G (h:A->bool).\n     h subgroup_of G /\\ solvable_group G\n     ==> solvable_group(subgroup_generated G h)",
       ),
       t13978,
     ),
@@ -146721,7 +146721,7 @@ fn step_1210() -> Unit raise {
   solvable_group_monomorphic_preimage_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group) (f:A->B).\n     group_monomorphism(G,H) f /\\ solvable_group H ==> solvable_group G",
+        "∀(G:A group) (H:B group) (f:A->B).\n     group_monomorphism(G,H) f /\\ solvable_group H ==> solvable_group G",
       ),
       t13990,
     ),
@@ -149776,7 +149776,7 @@ fn step_1211() -> Unit raise {
   ])
   let t14083 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall j. j <= p\n         ==> (e:num->A->bool) j subgroup_of subgroup_generated G (n:A->bool) /\\\n             e j SUBSET n",
+      "∀ j. j <= p\n         ==> (e:num->A->bool) j subgroup_of subgroup_generated G (n:A->bool) /\\\n             e j SUBSET n",
     ),
     fn(
       x14080 : @kernel.Thm,
@@ -150064,7 +150064,7 @@ fn step_1211() -> Unit raise {
   ])
   let t14055 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall j. j <= m\n         ==> (d:num->(A->bool)->bool) j subgroup_of\n             quotient_group G (n:A->bool)",
+      "∀ j. j <= m\n         ==> (d:num->(A->bool)->bool) j subgroup_of\n             quotient_group G (n:A->bool)",
     ),
     fn(
       x14052 : @kernel.Thm,
@@ -150880,7 +150880,7 @@ fn step_1211() -> Unit raise {
   solvable_group_solvable_quotient_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G (n:A->bool).\n     n normal_subgroup_of G /\\\n     solvable_group(subgroup_generated G n) /\\\n     solvable_group(quotient_group G n)\n     ==> solvable_group G",
+        "∀ G (n:A->bool).\n     n normal_subgroup_of G /\\\n     solvable_group(subgroup_generated G n) /\\\n     solvable_group(quotient_group G n)\n     ==> solvable_group G",
       ),
       t14380,
     ),
@@ -150962,7 +150962,7 @@ fn step_1214() -> Unit raise {
   short_exact_sequence_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) <=>\n        group_monomorphism (A,B) f /\\\n        group_epimorphism (B,C) g /\\\n        group_image (A,B) f = group_kernel (B,C) g",
+        "∀(f:A->B) (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) <=>\n        group_monomorphism (A,B) f /\\\n        group_epimorphism (B,C) g /\\\n        group_image (A,B) f = group_kernel (B,C) g",
       ),
       t14382,
     ),
@@ -151000,7 +151000,7 @@ fn step_1215() -> Unit raise {
   group_exactness_monomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:(A->B) (g:B->C) A B C.\n        trivial_group A\n        ==> (group_exactness (A,B,C) (f,g) <=>\n             group_homomorphism(A,B) f /\\ group_monomorphism (B,C) g)",
+        "∀ f:(A->B) (g:B->C) A B C.\n        trivial_group A\n        ==> (group_exactness (A,B,C) (f,g) <=>\n             group_homomorphism(A,B) f /\\ group_monomorphism (B,C) g)",
       ),
       t14384,
     ),
@@ -151037,7 +151037,7 @@ fn step_1216() -> Unit raise {
   group_exactness_epimorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:(A->B) (g:B->C) A B C.\n        trivial_group C\n        ==> (group_exactness (A,B,C) (f,g) <=>\n             group_epimorphism(A,B) f /\\ group_homomorphism (B,C) g)",
+        "∀ f:(A->B) (g:B->C) A B C.\n        trivial_group C\n        ==> (group_exactness (A,B,C) (f,g) <=>\n             group_epimorphism(A,B) f /\\ group_homomorphism (B,C) g)",
       ),
       t14387,
     ),
@@ -151072,7 +151072,7 @@ fn step_1217() -> Unit raise {
   extremely_short_exact_sequence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:(A->B) (g:B->C) A B C.\n        group_exactness (A,B,C) (f,g) /\\\n        trivial_group A /\\ trivial_group C\n        ==> trivial_group B",
+        "∀ f:(A->B) (g:B->C) A B C.\n        group_exactness (A,B,C) (f,g) /\\\n        trivial_group A /\\ trivial_group C\n        ==> trivial_group B",
       ),
       t14389,
     ),
@@ -151101,7 +151101,7 @@ fn step_1218() -> Unit raise {
   group_exactness_epimorphism_eq_triviality_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) A B C D.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h)\n        ==> (group_epimorphism (A,B) f <=> trivial_homomorphism(B,C) g)",
+        "∀(f:A->B) (g:B->C) (h:C->D) A B C D.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h)\n        ==> (group_epimorphism (A,B) f <=> trivial_homomorphism(B,C) g)",
       ),
       t14391,
     ),
@@ -151130,7 +151130,7 @@ fn step_1219() -> Unit raise {
   group_exactness_monomorphism_eq_triviality_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) A B C D.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h)\n        ==> (group_monomorphism (C,D) h <=>  trivial_homomorphism(B,C) g)",
+        "∀(f:A->B) (g:B->C) (h:C->D) A B C D.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h)\n        ==> (group_monomorphism (C,D) h <=>  trivial_homomorphism(B,C) g)",
       ),
       t14393,
     ),
@@ -151176,7 +151176,7 @@ fn step_1220() -> Unit raise {
   very_short_exact_sequence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) A B C D.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        trivial_group A /\\ trivial_group D\n        ==> group_isomorphism (B,C) g",
+        "∀(f:A->B) (g:B->C) (h:C->D) A B C D.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        trivial_group A /\\ trivial_group D\n        ==> group_isomorphism (B,C) g",
       ),
       t14396,
     ),
@@ -151217,7 +151217,7 @@ fn step_1221() -> Unit raise {
   group_exactness_eq_triviality_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:(A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,k)\n        ==> (trivial_group C <=>\n             group_epimorphism (A,B) f /\\\n             group_monomorphism (D,E) k)",
+        "∀ f:(A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,k)\n        ==> (trivial_group C <=>\n             group_epimorphism (A,B) f /\\\n             group_monomorphism (D,E) k)",
       ),
       t14398,
     ),
@@ -151248,7 +151248,7 @@ fn step_1222() -> Unit raise {
   group_exactness_imp_triviality_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,k) /\\\n        group_isomorphism (A,B) f /\\\n        group_isomorphism (D,E) k\n        ==> trivial_group C",
+        "∀(f:A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,k) /\\\n        group_isomorphism (A,B) f /\\\n        group_isomorphism (D,E) k\n        ==> trivial_group C",
       ),
       t14400,
     ),
@@ -151429,7 +151429,7 @@ fn step_1223() -> Unit raise {
   group_exactness_isomorphism_eq_triviality_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (j:D->E) (k:E->G) A B C D E G.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,j) /\\\n        group_exactness (D,E,G) (j,k)\n        ==> (group_isomorphism (C,D) h <=>\n             trivial_homomorphism(B,C) g /\\ trivial_homomorphism(D,E) j)",
+        "∀(f:A->B) (g:B->C) (h:C->D) (j:D->E) (k:E->G) A B C D E G.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,j) /\\\n        group_exactness (D,E,G) (j,k)\n        ==> (group_isomorphism (C,D) h <=>\n             trivial_homomorphism(B,C) g /\\ trivial_homomorphism(D,E) j)",
       ),
       t14415,
     ),
@@ -151468,7 +151468,7 @@ fn step_1224() -> Unit raise {
   group_exactness_isomorphism_eq_mono_epi_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (j:D->E) (k:E->G) A B C D E G.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,j) /\\\n        group_exactness (D,E,G) (j,k)\n        ==> (group_isomorphism (C,D) h <=>\n             group_epimorphism(A,B) f /\\ group_monomorphism(E,G) k)",
+        "∀(f:A->B) (g:B->C) (h:C->D) (j:D->E) (k:E->G) A B C D E G.\n        group_exactness (A,B,C) (f,g) /\\\n        group_exactness (B,C,D) (g,h) /\\\n        group_exactness (C,D,E) (h,j) /\\\n        group_exactness (D,E,G) (j,k)\n        ==> (group_isomorphism (C,D) h <=>\n             group_epimorphism(A,B) f /\\ group_monomorphism(E,G) k)",
       ),
       t14418,
     ),
@@ -151519,7 +151519,7 @@ fn step_1225() -> Unit raise {
   short_exact_sequence_normal_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall G n:A->bool.\n        n normal_subgroup_of G\n        ==> short_exact_sequence\n             (subgroup_generated G n,G,quotient_group G n)\n             ((\\x. x),right_coset G n)",
+        "∀ G n:A->bool.\n        n normal_subgroup_of G\n        ==> short_exact_sequence\n             (subgroup_generated G n,G,quotient_group G n)\n             ((\\x. x),right_coset G n)",
       ),
       t14424,
     ),
@@ -151596,7 +151596,7 @@ fn step_1226() -> Unit raise {
   short_exact_sequence_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        short_exact_sequence(G,prod_group G H,H) ((\\x. x,group_id H),SND)",
+        "∀(G:A group) (H:B group).\n        short_exact_sequence(G,prod_group G H,H) ((\\x. x,group_id H),SND)",
       ),
       t14433,
     ),
@@ -151673,7 +151673,7 @@ fn step_1227() -> Unit raise {
   short_exact_sequence_prod_group_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(G:A group) (H:B group).\n        short_exact_sequence(H,prod_group G H,G) ((\\x. group_id G,x),FST)",
+        "∀(G:A group) (H:B group).\n        short_exact_sequence(H,prod_group G H,G) ((\\x. group_id G,x),FST)",
       ),
       t14442,
     ),
@@ -152669,7 +152669,7 @@ fn step_1228() -> Unit raise {
   exact_sequence_sum_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:X->C) (g:X->D) (h:A->C) (i:A->X) (j:B->X) (k:B->D) A B C D X.\n        abelian_group X /\\\n        group_isomorphism(A,C) h /\\\n        group_isomorphism(B,D) k /\\\n        group_exactness(A,X,D) (i,g) /\\\n        group_exactness(B,X,C) (j,f) /\\\n        (forall x. x IN group_carrier A ==> f(i x) = h x) /\\\n        (forall x. x IN group_carrier B ==> g(j x) = k x)\n        ==> group_isomorphism (prod_group A B,X)\n                              (\\(x,y). group_mul X (i x) (j y)) /\\\n            group_isomorphism (X,prod_group C D) (\\z. f z,g z)",
+        "∀(f:X->C) (g:X->D) (h:A->C) (i:A->X) (j:B->X) (k:B->D) A B C D X.\n        abelian_group X /\\\n        group_isomorphism(A,C) h /\\\n        group_isomorphism(B,D) k /\\\n        group_exactness(A,X,D) (i,g) /\\\n        group_exactness(B,X,C) (j,f) /\\\n        (∀ x. x IN group_carrier A ==> f(i x) = h x) /\\\n        (∀ x. x IN group_carrier B ==> g(j x) = k x)\n        ==> group_isomorphism (prod_group A B,X)\n                              (\\(x,y). group_mul X (i x) (j y)) /\\\n            group_isomorphism (X,prod_group C D) (\\z. f z,g z)",
       ),
       t14545,
     ),
@@ -152743,7 +152743,7 @@ fn step_1229() -> Unit raise {
   short_exact_sequence_quotient_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g)\n        ==> subgroup_generated B (group_image(A,B) f) isomorphic_group A /\\\n            quotient_group B (group_image(A,B) f) isomorphic_group C",
+        "∀(f:A->B) (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g)\n        ==> subgroup_generated B (group_image(A,B) f) isomorphic_group A /\\\n            quotient_group B (group_image(A,B) f) isomorphic_group C",
       ),
       t14557,
     ),
@@ -152775,7 +152775,7 @@ fn step_1230() -> Unit raise {
   trivial_groups_imp_short_exact_sequence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        trivial_group A /\\ trivial_group E /\\\n        group_exactness(A,B,C) (f,g) /\\\n        group_exactness(B,C,D) (g,h) /\\\n        group_exactness(C,D,E) (h,k)\n        ==> short_exact_sequence(B,C,D) (g,h)",
+        "∀(f:A->B) (g:B->C) (h:C->D) (k:D->E) A B C D E.\n        trivial_group A /\\ trivial_group E /\\\n        group_exactness(A,B,C) (f,g) /\\\n        group_exactness(B,C,D) (g,h) /\\\n        group_exactness(C,D,E) (h,k)\n        ==> short_exact_sequence(B,C,D) (g,h)",
       ),
       t14558,
     ),
@@ -152909,7 +152909,7 @@ fn step_1231() -> Unit raise {
   short_exact_sequence_trivial_groups_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(g:B->C) h B C D.\n        short_exact_sequence(B,C,D) (g,h) <=>\n        ?f:(A->B) (k:D->E) A E.\n                trivial_group A /\\ trivial_group E /\\\n                group_exactness(A,B,C) (f,g) /\\\n                group_exactness(B,C,D) (g,h) /\\\n                group_exactness(C,D,E) (h,k)",
+        "∀(g:B->C) h B C D.\n        short_exact_sequence(B,C,D) (g,h) <=>\n        ?f:(A->B) (k:D->E) A E.\n                trivial_group A /\\ trivial_group E /\\\n                group_exactness(A,B,C) (f,g) /\\\n                group_exactness(B,C,D) (g,h) /\\\n                group_exactness(C,D,E) (h,k)",
       ),
       t14572,
     ),
@@ -153165,7 +153165,7 @@ fn step_1232() -> Unit raise {
   splitting_sublemma_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C h k.\n        group_exactness(A,B,C) (f,g) /\\\n        group_image(A,B) f = h /\\ k subgroup_of B /\\\n        h INTER k SUBSET {group_id B} /\\ group_setmul B h k = group_carrier B\n        ==> group_isomorphism(subgroup_generated B k,\n                              subgroup_generated C (group_image(B,C) g)) g",
+        "∀(f:A->B) (g:B->C) A B C h k.\n        group_exactness(A,B,C) (f,g) /\\\n        group_image(A,B) f = h /\\ k subgroup_of B /\\\n        h INTER k SUBSET {group_id B} /\\ group_setmul B h k = group_carrier B\n        ==> group_isomorphism(subgroup_generated B k,\n                              subgroup_generated C (group_image(B,C) g)) g",
       ),
       t14604,
     ),
@@ -153271,7 +153271,7 @@ fn step_1233() -> Unit raise {
   splitting_sublemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C h k.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_image(A,B) f = h /\\ k subgroup_of B /\\\n        h INTER k SUBSET {group_id B} /\\ group_setmul B h k = group_carrier B\n        ==> group_isomorphism(A,subgroup_generated B h) f /\\\n            group_isomorphism(subgroup_generated B k,C) g",
+        "∀(f:A->B) (g:B->C) A B C h k.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_image(A,B) f = h /\\ k subgroup_of B /\\\n        h INTER k SUBSET {group_id B} /\\ group_setmul B h k = group_carrier B\n        ==> group_isomorphism(A,subgroup_generated B h) f /\\\n            group_isomorphism(subgroup_generated B k,C) g",
       ),
       t14614,
     ),
@@ -153425,7 +153425,7 @@ fn step_1234() -> Unit raise {
   splitting_lemma_left_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(B,A) f' /\\\n        group_isomorphism(A,A) (f' o f)\n        ==> ?h k. h normal_subgroup_of B /\\ k normal_subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
+        "∀(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(B,A) f' /\\\n        group_isomorphism(A,A) (f' o f)\n        ==> ?h k. h normal_subgroup_of B /\\ k normal_subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
       ),
       t14634,
     ),
@@ -153473,7 +153473,7 @@ fn step_1235() -> Unit raise {
   splitting_lemma_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(B,A) f' /\\\n        (forall x. x IN group_carrier A ==> f'(f x) = x)\n        ==> ?h k. h normal_subgroup_of B /\\ k normal_subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
+        "∀(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(B,A) f' /\\\n        (∀ x. x IN group_carrier A ==> f'(f x) = x)\n        ==> ?h k. h normal_subgroup_of B /\\ k normal_subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
       ),
       t14641,
     ),
@@ -153587,7 +153587,7 @@ fn step_1236() -> Unit raise {
   splitting_lemma_left_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        abelian_group B /\\\n        group_homomorphism(B,A) f' /\\\n        (forall x. x IN group_carrier A ==> f'(f x) = x)\n        ==> B isomorphic_group prod_group A C",
+        "∀(f:A->B) f' (g:B->C) A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        abelian_group B /\\\n        group_homomorphism(B,A) f' /\\\n        (∀ x. x IN group_carrier A ==> f'(f x) = x)\n        ==> B isomorphic_group prod_group A C",
       ),
       t14664,
     ),
@@ -153748,7 +153748,7 @@ fn step_1237() -> Unit raise {
   splitting_lemma_right_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(C,B) g' /\\\n        group_isomorphism(C,C) (g o g')\n        ==> ?h k. h normal_subgroup_of B /\\ k subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
+        "∀(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(C,B) g' /\\\n        group_isomorphism(C,C) (g o g')\n        ==> ?h k. h normal_subgroup_of B /\\ k subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
       ),
       t14685,
     ),
@@ -153796,7 +153796,7 @@ fn step_1238() -> Unit raise {
   splitting_lemma_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(C,B) g' /\\\n        (forall z. z IN group_carrier C ==> g(g' z) = z)\n        ==> ?h k. h normal_subgroup_of B /\\ k subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
+        "∀(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        group_homomorphism(C,B) g' /\\\n        (∀ z. z IN group_carrier C ==> g(g' z) = z)\n        ==> ?h k. h normal_subgroup_of B /\\ k subgroup_of B /\\\n                  h INTER k SUBSET {group_id B} /\\\n                  group_setmul B h k = group_carrier B /\\\n                  group_isomorphism(A,subgroup_generated B h) f /\\\n                  group_isomorphism(subgroup_generated B k,C) g",
       ),
       t14692,
     ),
@@ -153910,7 +153910,7 @@ fn step_1239() -> Unit raise {
   splitting_lemma_right_prod_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        abelian_group B /\\\n        group_homomorphism(C,B) g' /\\\n        (forall z. z IN group_carrier C ==> g(g' z) = z)\n        ==> B isomorphic_group prod_group A C",
+        "∀(f:A->B) (g:B->C) g' A B C.\n        short_exact_sequence(A,B,C) (f,g) /\\\n        abelian_group B /\\\n        group_homomorphism(C,B) g' /\\\n        (∀ z. z IN group_carrier C ==> g(g' z) = z)\n        ==> B isomorphic_group prod_group A C",
       ),
       t14715,
     ),
@@ -154301,7 +154301,7 @@ fn step_1240() -> Unit raise {
   let t14734 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "IMAGE f s = t ==> forall y. ?x. y IN t ==> x IN s /\\ f x = y",
+        "IMAGE f s = t ==> ∀ y. ?x. y IN t ==> x IN s /\\ f x = y",
       ),
     ),
   )
@@ -154545,7 +154545,7 @@ fn step_1240() -> Unit raise {
   splitting_lemma_free_abelian_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) A B C (s:D->bool).\n        short_exact_sequence (A,B,C) (f,g) /\\\n        abelian_group B /\\ C isomorphic_group free_abelian_group s\n        ==> B isomorphic_group prod_group A C",
+        "∀(f:A->B) (g:B->C) A B C (s:D->bool).\n        short_exact_sequence (A,B,C) (f,g) /\\\n        abelian_group B /\\ C isomorphic_group free_abelian_group s\n        ==> B isomorphic_group prod_group A C",
       ),
       t14793,
     ),
@@ -154798,7 +154798,7 @@ fn step_1241() -> Unit raise {
   four_lemma_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (f':A'->B') (g':B'->C') (h':C'->D') a b c d\n     A B C D A' B' C' D'.\n      group_epimorphism(A,A') a /\\\n      group_monomorphism(B,B') b /\\\n      group_homomorphism(C,C') c /\\\n      group_monomorphism(D,D') d /\\\n      group_exactness(A,B,C) (f,g) /\\ group_exactness(B,C,D) (g,h) /\\\n      group_exactness(A',B',C') (f',g') /\\ group_exactness(B',C',D') (g',h') /\\\n      (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (forall y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (forall z. z IN group_carrier C ==> h'(c z) = d(h z))\n      ==> group_monomorphism(C,C') c",
+        "∀(f:A->B) (g:B->C) (h:C->D) (f':A'->B') (g':B'->C') (h':C'->D') a b c d\n     A B C D A' B' C' D'.\n      group_epimorphism(A,A') a /\\\n      group_monomorphism(B,B') b /\\\n      group_homomorphism(C,C') c /\\\n      group_monomorphism(D,D') d /\\\n      group_exactness(A,B,C) (f,g) /\\ group_exactness(B,C,D) (g,h) /\\\n      group_exactness(A',B',C') (f',g') /\\ group_exactness(B',C',D') (g',h') /\\\n      (∀ x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (∀ y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (∀ z. z IN group_carrier C ==> h'(c z) = d(h z))\n      ==> group_monomorphism(C,C') c",
       ),
       t14827,
     ),
@@ -155170,7 +155170,7 @@ fn step_1242() -> Unit raise {
   four_lemma_epi_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (f':A'->B') (g':B'->C') (h':C'->D') a b c d\n     A B C D A' B' C' D'.\n      group_epimorphism(A,A') a /\\\n      group_homomorphism(B,B') b /\\\n      group_epimorphism(C,C') c /\\\n      group_monomorphism(D,D') d /\\\n      group_exactness(A,B,C) (f,g) /\\ group_exactness(B,C,D) (g,h) /\\\n      group_exactness(A',B',C') (f',g') /\\ group_exactness(B',C',D') (g',h') /\\\n      (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (forall y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (forall z. z IN group_carrier C ==> h'(c z) = d(h z))\n      ==> group_epimorphism(B,B') b",
+        "∀(f:A->B) (g:B->C) (h:C->D) (f':A'->B') (g':B'->C') (h':C'->D') a b c d\n     A B C D A' B' C' D'.\n      group_epimorphism(A,A') a /\\\n      group_homomorphism(B,B') b /\\\n      group_epimorphism(C,C') c /\\\n      group_monomorphism(D,D') d /\\\n      group_exactness(A,B,C) (f,g) /\\ group_exactness(B,C,D) (g,h) /\\\n      group_exactness(A',B',C') (f',g') /\\ group_exactness(B',C',D') (g',h') /\\\n      (∀ x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (∀ y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (∀ z. z IN group_carrier C ==> h'(c z) = d(h z))\n      ==> group_epimorphism(B,B') b",
       ),
       t14878,
     ),
@@ -155284,7 +155284,7 @@ fn step_1243() -> Unit raise {
   five_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (h:C->D) (k:D->E)\n    (f':A'->B') (g':B'->C') (h':C'->D') (k':D'->E') a b c d e\n     A B C D E A' B' C' D' E'.\n      group_epimorphism(A,A') a /\\\n      group_isomorphism(B,B') b /\\\n      group_homomorphism(C,C') c /\\\n      group_isomorphism(D,D') d /\\\n      group_monomorphism(E,E') e /\\\n      group_exactness(A,B,C) (f,g) /\\\n      group_exactness(B,C,D) (g,h) /\\\n      group_exactness(C,D,E) (h,k) /\\\n      group_exactness(A',B',C') (f',g') /\\\n      group_exactness(B',C',D') (g',h') /\\\n      group_exactness(C',D',E') (h',k') /\\\n      (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (forall y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (forall z. z IN group_carrier C ==> h'(c z) = d(h z)) /\\\n      (forall w. w IN group_carrier D ==> k'(d w) = e(k w))\n      ==> group_isomorphism(C,C') c",
+        "∀(f:A->B) (g:B->C) (h:C->D) (k:D->E)\n    (f':A'->B') (g':B'->C') (h':C'->D') (k':D'->E') a b c d e\n     A B C D E A' B' C' D' E'.\n      group_epimorphism(A,A') a /\\\n      group_isomorphism(B,B') b /\\\n      group_homomorphism(C,C') c /\\\n      group_isomorphism(D,D') d /\\\n      group_monomorphism(E,E') e /\\\n      group_exactness(A,B,C) (f,g) /\\\n      group_exactness(B,C,D) (g,h) /\\\n      group_exactness(C,D,E) (h,k) /\\\n      group_exactness(A',B',C') (f',g') /\\\n      group_exactness(B',C',D') (g',h') /\\\n      group_exactness(C',D',E') (h',k') /\\\n      (∀ x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n      (∀ y. y IN group_carrier B ==> g'(b y) = c(g y)) /\\\n      (∀ z. z IN group_carrier C ==> h'(c z) = d(h z)) /\\\n      (∀ w. w IN group_carrier D ==> k'(d w) = e(k w))\n      ==> group_isomorphism(C,C') c",
       ),
       t14888,
     ),
@@ -155401,7 +155401,7 @@ fn step_1244() -> Unit raise {
   short_five_lemma_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_monomorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_monomorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (forall y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_monomorphism(B,B') b",
+        "∀(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_monomorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_monomorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (∀ x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (∀ y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_monomorphism(B,B') b",
       ),
       t14914,
     ),
@@ -155520,7 +155520,7 @@ fn step_1245() -> Unit raise {
   short_five_lemma_epi_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_epimorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_epimorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (forall y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_epimorphism(B,B') b",
+        "∀(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_epimorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_epimorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (∀ x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (∀ y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_epimorphism(B,B') b",
       ),
       t14940,
     ),
@@ -155636,7 +155636,7 @@ fn step_1246() -> Unit raise {
   short_five_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_isomorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_isomorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (forall x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (forall y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_isomorphism(B,B') b",
+        "∀(f:A->B) (g:B->C) (f':A'->B') (g':B'->C') a b c A B C A' B' C'.\n        group_isomorphism(A,A') a /\\\n        group_homomorphism(B,B') b /\\\n        group_isomorphism(C,C') c /\\\n        short_exact_sequence(A,B,C) (f,g) /\\\n        short_exact_sequence(A',B',C') (f',g') /\\\n        (∀ x. x IN group_carrier A ==> f'(a x) = b(f x)) /\\\n        (∀ y. y IN group_carrier B ==> g'(b y) = c(g y))\n        ==> group_isomorphism(B,B') b",
       ),
       t14950,
     ),
@@ -157066,7 +157066,7 @@ fn step_1247() -> Unit raise {
   let t14987 = @drule.match_mp(
     @sets.set_rule(
       @parser.parse_term(
-        "IMAGE f s = t /\\ P ==> forall y. y IN t ==> ?x. x IN s /\\ f x = y",
+        "IMAGE f s = t /\\ P ==> ∀ y. y IN t ==> ?x. x IN s /\\ f x = y",
       ),
     ),
   )
@@ -157525,7 +157525,7 @@ fn step_1247() -> Unit raise {
   exact_sequence_hexagon_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:X->C) (g:X->D) (h:A->C) (h':C->A) (i:A->X) (j:B->X) (k:B->D) (k':D->B)\n    (a:A->Y) (b:B->Y) (c:W->C) (d:W->D) (l:W->X) (m:X->Y) A B C D W X Y.\n        abelian_group X /\\\n        group_homomorphism(A,Y) a /\\\n        group_homomorphism(B,Y) b /\\\n        group_homomorphism(W,C) c /\\\n        group_homomorphism(W,D) d /\\\n        group_isomorphisms(A,C) (h,h') /\\\n        group_isomorphisms(B,D) (k,k') /\\\n        group_exactness(A,X,D) (i,g) /\\\n        group_exactness(B,X,C) (j,f) /\\\n        group_exactness(W,X,Y) (l,m) /\\\n        (forall x. x IN group_carrier W ==> f(l x) = c x) /\\\n        (forall x. x IN group_carrier W ==> g(l x) = d x) /\\\n        (forall x. x IN group_carrier A ==> f(i x) = h x) /\\\n        (forall x. x IN group_carrier A ==> m(i x) = a x) /\\\n        (forall x. x IN group_carrier B ==> g(j x) = k x) /\\\n        (forall x. x IN group_carrier B ==> m(j x) = b x)\n        ==> forall x. x IN group_carrier W\n                ==> group_inv Y (a(h'(c x))) = b(k'(d x))",
+        "∀(f:X->C) (g:X->D) (h:A->C) (h':C->A) (i:A->X) (j:B->X) (k:B->D) (k':D->B)\n    (a:A->Y) (b:B->Y) (c:W->C) (d:W->D) (l:W->X) (m:X->Y) A B C D W X Y.\n        abelian_group X /\\\n        group_homomorphism(A,Y) a /\\\n        group_homomorphism(B,Y) b /\\\n        group_homomorphism(W,C) c /\\\n        group_homomorphism(W,D) d /\\\n        group_isomorphisms(A,C) (h,h') /\\\n        group_isomorphisms(B,D) (k,k') /\\\n        group_exactness(A,X,D) (i,g) /\\\n        group_exactness(B,X,C) (j,f) /\\\n        group_exactness(W,X,Y) (l,m) /\\\n        (∀ x. x IN group_carrier W ==> f(l x) = c x) /\\\n        (∀ x. x IN group_carrier W ==> g(l x) = d x) /\\\n        (∀ x. x IN group_carrier A ==> f(i x) = h x) /\\\n        (∀ x. x IN group_carrier A ==> m(i x) = a x) /\\\n        (∀ x. x IN group_carrier B ==> g(j x) = k x) /\\\n        (∀ x. x IN group_carrier B ==> m(j x) = b x)\n        ==> ∀ x. x IN group_carrier W\n                ==> group_inv Y (a(h'(c x))) = b(k'(d x))",
       ),
       t15115,
     ),

@@ -20,7 +20,7 @@ pub fn leap_year() -> @kernel.Thm {
 /// LEAP_YEAR_MOD
 fn step_2() -> Unit raise {
   let t1 = @tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([leap_year(), @int.divides_mod()])))
-  leap_year_mod_c.set(@tactics.prove(@parser.parse_term("forall y. leap_year y <=>\n       y MOD 4 = 0 /\\ ~(y MOD 100 = 0) \\/ y MOD 400 = 0"), t1))
+  leap_year_mod_c.set(@tactics.prove(@parser.parse_term("∀ y. leap_year y <=>\n       y MOD 4 = 0 /\\ ~(y MOD 100 = 0) \\/ y MOD 400 = 0"), t1))
 }
 
 ///|
@@ -199,7 +199,7 @@ pub fn month_cases_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// DAYS_IN_MONTH_POS
 fn step_13() -> Unit raise {
   let t15 = @tactics.then_tac(@tactics.then_tac(month_cases_tac, @simp.rewrite_tac(@list.List([days_in_month()]))), @int.arith_tac)
-  days_in_month_pos_c.set(@tactics.prove(@parser.parse_term("forall y m. 1 <= m /\\ m <= 12 ==> 1 <= days_in_month y m"), t15))
+  days_in_month_pos_c.set(@tactics.prove(@parser.parse_term("∀ y m. 1 <= m /\\ m <= 12 ==> 1 <= days_in_month y m"), t15))
 }
 
 ///|
@@ -217,7 +217,7 @@ fn step_14() -> Unit raise {
   let t17 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t16 = @simp.rewrite_tac(@list.List([days_in_month()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t16), t17), @int.arith_tac)
-  days_in_month_upper_c.set(@tactics.prove(@parser.parse_term("forall y m. days_in_month y m <= 31"), t18))
+  days_in_month_upper_c.set(@tactics.prove(@parser.parse_term("∀ y m. days_in_month y m <= 31"), t18))
 }
 
 ///|
@@ -263,7 +263,7 @@ pub fn day_of_year() -> @kernel.Thm {
 /// CUMDAYS_BEFORE_STEP
 fn step_17() -> Unit raise {
   let t19 = @tactics.then_tac(@tactics.then_tac(month_cases_tac, @simp.rewrite_tac(@list.List([cumdays_before(), days_in_month()]))), @int.arith_tac)
-  cumdays_before_step_c.set(@tactics.prove(@parser.parse_term("forall y m. 1 <= m /\\ m <= 12 ==>\n         cumdays_before y (m + 1) = cumdays_before y m + days_in_month y m"), t19))
+  cumdays_before_step_c.set(@tactics.prove(@parser.parse_term("∀ y m. 1 <= m /\\ m <= 12 ==>\n         cumdays_before y (m + 1) = cumdays_before y m + days_in_month y m"), t19))
 }
 
 ///|
@@ -280,7 +280,7 @@ pub fn cumdays_before_step() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t20 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([days_in_year(), cumdays_before()]))), t20), @class.cond_cases_tac), @int.arith_tac)
-  days_in_year_sum_c.set(@tactics.prove(@parser.parse_term("forall y. days_in_year y = cumdays_before y 13"), t21))
+  days_in_year_sum_c.set(@tactics.prove(@parser.parse_term("∀ y. days_in_year y = cumdays_before y 13"), t21))
 }
 
 ///|
@@ -386,7 +386,7 @@ pub fn doomsday() -> @kernel.Thm {
 /// VALID_DOOMSDAY
 fn step_25() -> Unit raise {
   let t22 = @tactics.then_tac(@tactics.then_tac(month_cases_tac, @simp.rewrite_tac(@list.List([valid_date(), doomsday_date(), days_in_month()]))), @int.arith_tac)
-  valid_doomsday_c.set(@tactics.prove(@parser.parse_term("forall y m. 1 <= m /\\ m <= 12 ==> valid_date(y, m, doomsday_date y m)"), t22))
+  valid_doomsday_c.set(@tactics.prove(@parser.parse_term("∀ y m. 1 <= m /\\ m <= 12 ==> valid_date(y, m, doomsday_date y m)"), t22))
 }
 
 ///|
@@ -404,7 +404,7 @@ fn step_26() -> Unit raise {
   let t24 = @simp.asm_rewrite_tac(@list.List([]))
   let t23 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@arith.mod_add_mod())]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t23), t24)
-  mod_add_eq_compat_c.set(@tactics.prove(@parser.parse_term("forall a b c n. a MOD n = b MOD n ==> (c + a) MOD n = (c + b) MOD n"), t25))
+  mod_add_eq_compat_c.set(@tactics.prove(@parser.parse_term("∀ a b c n. a MOD n = b MOD n ==> (c + a) MOD n = (c + b) MOD n"), t25))
 }
 
 ///|
@@ -442,7 +442,7 @@ fn step_28() -> Unit raise {
   let t27 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t26 = @simp.rewrite_tac(@list.List([cumdays_before(), doomsday_date()]))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(month_cases_tac, @simp.rewrite_tac(@list.List([day_of_week(), day_number(), year_doomsday(), day_of_year()]))), t26), t27), @class.cond_cases_tac), t28), t29), t30), t31), t32), @int.arith_tac)
-  year_doomsday_eq_dow_c.set(@tactics.prove(@parser.parse_term("forall y m. 1 <= m /\\ m <= 12 ==>\n         day_of_week y m (doomsday_date y m) = year_doomsday y"), t33))
+  year_doomsday_eq_dow_c.set(@tactics.prove(@parser.parse_term("∀ y m. 1 <= m /\\ m <= 12 ==>\n         day_of_week y m (doomsday_date y m) = year_doomsday y"), t33))
 }
 
 ///|
@@ -458,7 +458,7 @@ pub fn year_doomsday_eq_dow() -> @kernel.Thm {
 /// DOOMSDAY_SAME_WEEKDAY
 fn step_29() -> Unit raise {
   let t34 = @meson.meson_tac(@list.List([year_doomsday_eq_dow()]))
-  doomsday_same_weekday_c.set(@tactics.prove(@parser.parse_term("forall y m1 m2. 1 <= m1 /\\ m1 <= 12 /\\ 1 <= m2 /\\ m2 <= 12 ==>\n             day_of_week y m1 (doomsday_date y m1) =\n             day_of_week y m2 (doomsday_date y m2)"), t34))
+  doomsday_same_weekday_c.set(@tactics.prove(@parser.parse_term("∀ y m1 m2. 1 <= m1 /\\ m1 <= 12 /\\ 1 <= m2 /\\ m2 <= 12 ==>\n             day_of_week y m1 (doomsday_date y m1) =\n             day_of_week y m2 (doomsday_date y m2)"), t34))
 }
 
 ///|
@@ -474,7 +474,7 @@ pub fn doomsday_same_weekday() -> @kernel.Thm {
 /// CUMULATIVE_DAYS_SUC
 fn step_30() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([cumulative_days()]))
-  cumulative_days_suc_c.set(@tactics.prove(@parser.parse_term("forall y. cumulative_days (SUC y) = cumulative_days y + days_in_year y"), t35))
+  cumulative_days_suc_c.set(@tactics.prove(@parser.parse_term("∀ y. cumulative_days (SUC y) = cumulative_days y + days_in_year y"), t35))
 }
 
 ///|
@@ -497,7 +497,7 @@ fn step_31() -> Unit raise {
   let t37 = @simp.asm_simp_tac(@list.List([@arith.mod_mult_add(), @arith.le_1(), @arith.mod_lt()]))
   let t36 = @simp.rewrite_tac(@list.List([leap_year_mod()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t36), t37), t38), t39), t40), t41), t42), @int.arith_tac)
-  leap_year_in_century_c.set(@tactics.prove(@parser.parse_term("forall c t. 0 < t /\\ t < 100 ==> (leap_year (100 * c + t) <=> t MOD 4 = 0)"), t43))
+  leap_year_in_century_c.set(@tactics.prove(@parser.parse_term("∀ c t. 0 < t /\\ t < 100 ==> (leap_year (100 * c + t) <=> t MOD 4 = 0)"), t43))
 }
 
 ///|
@@ -518,7 +518,7 @@ fn step_32() -> Unit raise {
   let t45 = @simp.rewrite_tac(@list.List([]))
   let t44 = @tactics.conv_tac(@arith.mod_down_conv)
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([year_doomsday(), cumulative_days_suc(), days_in_year()]))), t44), @class.cond_cases_tac), t45), t46), t47), t48)
-  year_doomsday_step_c.set(@tactics.prove(@parser.parse_term("forall y. year_doomsday(SUC y) =\n       (year_doomsday y + (if leap_year(SUC y) then 2 else 1)) MOD 7"), t49))
+  year_doomsday_step_c.set(@tactics.prove(@parser.parse_term("∀ y. year_doomsday(SUC y) =\n       (year_doomsday y + (if leap_year(SUC y) then 2 else 1)) MOD 7"), t49))
 }
 
 ///|
@@ -538,7 +538,7 @@ fn step_33() -> Unit raise {
   let t51 = @tactics.subgoal_then(@parser.parse_term("SUC t < 100 /\\ t < 100"), @tactics.strip_assume_tac)
   let t50 = @simp.rewrite_tac(@list.List([doomsday(), century_anchor()]))
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t50), t51), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t52), t53), @tactics.ap_thm_tac), @tactics.ap_term_tac), @int.arith_tac)
-  doomsday_step_c.set(@tactics.prove(@parser.parse_term("forall c t. t < 99 ==>\n         doomsday(100 * c + SUC t) =\n         (doomsday(100 * c + t) + (if SUC t MOD 4 = 0 then 2 else 1)) MOD 7"), t54))
+  doomsday_step_c.set(@tactics.prove(@parser.parse_term("∀ c t. t < 99 ==>\n         doomsday(100 * c + SUC t) =\n         (doomsday(100 * c + t) + (if SUC t MOD 4 = 0 then 2 else 1)) MOD 7"), t54))
 }
 
 ///|
@@ -586,7 +586,7 @@ fn step_34() -> Unit raise {
   let t55 = @simp.asm_rewrite_tac(@list.List([]))
   let t78 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.add_clauses()])), t55), t77])
   let t79 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @nums.induct_tac), t78)
-  within_century_c.set(@tactics.prove(@parser.parse_term("forall c. year_doomsday(100 * c) = doomsday(100 * c) ==>\n       forall t. t < 100 ==> year_doomsday(100 * c + t) = doomsday(100 * c + t)"), t79))
+  within_century_c.set(@tactics.prove(@parser.parse_term("∀ c. year_doomsday(100 * c) = doomsday(100 * c) ==>\n       ∀ t. t < 100 ==> year_doomsday(100 * c + t) = doomsday(100 * c + t)"), t79))
 }
 
 ///|
@@ -770,7 +770,7 @@ fn step_44() -> Unit raise {
   let t96 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("4 * 100 = 400 * 1")), @arith.mod_mult_add()]))
   let t95 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("y + 400 = y + 4 * 100")), @arith.mod_mult_add()]))
   let t97 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([leap_year_mod()]))), t95), t96)
-  leap_year_400_period_c.set(@tactics.prove(@parser.parse_term("forall y. leap_year(y + 400) <=> leap_year y"), t97))
+  leap_year_400_period_c.set(@tactics.prove(@parser.parse_term("∀ y. leap_year(y + 400) <=> leap_year y"), t97))
 }
 
 ///|
@@ -789,7 +789,7 @@ fn step_45() -> Unit raise {
   let t99 = @simp.simp_tac(@list.List([@arith.div_mult_add(), @int.arith_rule(@parser.parse_term("~(100 = 0)"))]))
   let t98 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("y + 400 = 100 * 4 + y")), @arith.mod_mult_add()]))
   let t101 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([doomsday(), century_anchor()]))), t98), t99), t100)
-  doomsday_400_period_c.set(@tactics.prove(@parser.parse_term("forall y. doomsday(y + 400) = doomsday y"), t101))
+  doomsday_400_period_c.set(@tactics.prove(@parser.parse_term("∀ y. doomsday(y + 400) = doomsday y"), t101))
 }
 
 ///|
@@ -816,7 +816,7 @@ fn step_46() -> Unit raise {
   let t102 = @simp.rewrite_tac(@list.List([year_doomsday_step()]))
   let t110 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC y + 400 = SUC(y + 400)"))])), t102), t106), t109)
   let t111 = @tactics.thenl(@nums.induct_tac, @list.List([@simp.rewrite_tac(@list.List([@arith.add_clauses(), year_doomsday_400(), year_doomsday_0()])), t110]))
-  year_doomsday_400_period_c.set(@tactics.prove(@parser.parse_term("forall y. year_doomsday(y + 400) = year_doomsday y"), t111))
+  year_doomsday_400_period_c.set(@tactics.prove(@parser.parse_term("∀ y. year_doomsday(y + 400) = year_doomsday y"), t111))
 }
 
 ///|
@@ -861,7 +861,7 @@ fn step_47() -> Unit raise {
   let t113 = @simp.abbrev_tac(@parser.parse_term("q = c DIV 4"))
   let t112 = @parser.parse_term("4")
   let t137 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("c:num"), t112]), @arith.division()))), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t113), t114), @tactics.strip_tac), t118), t119), t123), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t125), t127), @nums.induct_tac), t136)
-  century_base_all_c.set(@tactics.prove(@parser.parse_term("forall c. year_doomsday(100 * c) = doomsday(100 * c)"), t137))
+  century_base_all_c.set(@tactics.prove(@parser.parse_term("∀ c. year_doomsday(100 * c) = doomsday(100 * c)"), t137))
 }
 
 ///|
@@ -901,7 +901,7 @@ fn step_48() -> Unit raise {
   let t139 = @simp.abbrev_tac(@parser.parse_term("c = y DIV 100"))
   let t138 = @parser.parse_term("100")
   let t157 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("y:num"), t138]), @arith.division()))), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t139), t140), @tactics.strip_tac), t144), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t145), t148), t155), t156)
-  year_doomsday_eq_doomsday_c.set(@tactics.prove(@parser.parse_term("forall y. year_doomsday y = doomsday y"), t157))
+  year_doomsday_eq_doomsday_c.set(@tactics.prove(@parser.parse_term("∀ y. year_doomsday y = doomsday y"), t157))
 }
 
 ///|
@@ -920,7 +920,7 @@ fn step_49() -> Unit raise {
   let t158 = @parser.parse_term("m:num")
   let t159 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("y:num"), t158]), year_doomsday_eq_dow()))
   let t161 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t159), t160)
-  doomsday_correct_c.set(@tactics.prove(@parser.parse_term("forall y m. 1 <= m /\\ m <= 12 ==>\n         day_of_week y m (doomsday_date y m) = doomsday y"), t161))
+  doomsday_correct_c.set(@tactics.prove(@parser.parse_term("∀ y m. 1 <= m /\\ m <= 12 ==>\n         day_of_week y m (doomsday_date y m) = doomsday y"), t161))
 }
 
 ///|
@@ -938,7 +938,7 @@ fn step_50() -> Unit raise {
   let t163 = @tactics.conv_tac(@arith.mod_down_conv)
   let t162 = @simp.rewrite_tac(@list.List([day_of_week(), day_number(), day_of_year()]))
   let t164 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t162), t163), @tactics.ap_thm_tac), @tactics.ap_term_tac), @int.arith_tac)
-  dow_shift_c.set(@tactics.prove(@parser.parse_term("forall y m d1 d2. day_of_week y m (d1 + d2) = (day_of_week y m d1 + d2) MOD 7"), t164))
+  dow_shift_c.set(@tactics.prove(@parser.parse_term("∀ y m d1 d2. day_of_week y m (d1 + d2) = (day_of_week y m d1 + d2) MOD 7"), t164))
 }
 
 ///|
@@ -963,7 +963,7 @@ fn step_51() -> Unit raise {
     }
   })
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t168), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t169), t170), t171), @tactics.ap_thm_tac), @tactics.ap_term_tac), @int.asm_arith_tac)
-  dow_from_doomsday_c.set(@tactics.prove(@parser.parse_term("forall y m d. 1 <= m /\\ m <= 12 /\\ doomsday_date y m <= d ==>\n           day_of_week y m d = (doomsday y + d - doomsday_date y m) MOD 7"), t172))
+  dow_from_doomsday_c.set(@tactics.prove(@parser.parse_term("∀ y m d. 1 <= m /\\ m <= 12 /\\ doomsday_date y m <= d ==>\n           day_of_week y m d = (doomsday y + d - doomsday_date y m) MOD 7"), t172))
 }
 
 ///|
@@ -1028,7 +1028,7 @@ fn step_53() -> Unit raise {
   let t189 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC y + 400 = SUC(y + 400)"))])), t179), t182), t183), @class.cond_cases_tac), t184), t185), t186), t187), t188)
   let t178 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t190 = @tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.add_clauses(), cumdays_400(), cumulative_days()])), t178), t189]))
-  cumulative_days_400_mod7_c.set(@tactics.prove(@parser.parse_term("forall y. cumulative_days(y + 400) MOD 7 = cumulative_days y MOD 7"), t190))
+  cumulative_days_400_mod7_c.set(@tactics.prove(@parser.parse_term("∀ y. cumulative_days(y + 400) MOD 7 = cumulative_days y MOD 7"), t190))
 }
 
 ///|
@@ -1058,7 +1058,7 @@ fn step_54() -> Unit raise {
   })
   let t191 = @simp.rewrite_tac(@list.List([day_of_week(), day_number(), day_of_year()]))
   let t203 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t191), t195), t196), t197), t198), t199), t200), t201), t202)
-  day_of_week_400_period_c.set(@tactics.prove(@parser.parse_term("forall y m d. day_of_week (y + 400) m d = day_of_week y m d"), t203))
+  day_of_week_400_period_c.set(@tactics.prove(@parser.parse_term("∀ y m d. day_of_week (y + 400) m d = day_of_week y m d"), t203))
 }
 
 ///|
@@ -1080,7 +1080,7 @@ fn step_55() -> Unit raise {
   let t205 = @tactics.conv_tac(@arith.mod_down_conv)
   let t204 = @simp.rewrite_tac(@list.List([day_of_week(), day_number(), day_of_year()]))
   let t210 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t204), t205), t206), t207), t208), t209)
-  dow_period_c.set(@tactics.prove(@parser.parse_term("forall y m d k. day_of_week y m (d + 7 * k) = day_of_week y m d"), t210))
+  dow_period_c.set(@tactics.prove(@parser.parse_term("∀ y m d k. day_of_week y m (d + 7 * k) = day_of_week y m d"), t210))
 }
 
 ///|
@@ -1096,7 +1096,7 @@ pub fn dow_period() -> @kernel.Thm {
 /// DOOMSDAY_DATE_BOUND
 fn step_56() -> Unit raise {
   let t211 = @tactics.then_tac(@tactics.then_tac(month_cases_tac, @simp.rewrite_tac(@list.List([doomsday_date()]))), @int.arith_tac)
-  doomsday_date_bound_c.set(@tactics.prove(@parser.parse_term("forall y m. 1 <= m /\\ m <= 12 ==>\n         1 <= doomsday_date y m /\\ doomsday_date y m <= 29"), t211))
+  doomsday_date_bound_c.set(@tactics.prove(@parser.parse_term("∀ y m. 1 <= m /\\ m <= 12 ==>\n         1 <= doomsday_date y m /\\ doomsday_date y m <= 29"), t211))
 }
 
 ///|
@@ -1151,7 +1151,7 @@ fn step_58() -> Unit raise {
   })
   let t212 = @simp.rewrite_tac(@list.List([doomsday_algorithm()]))
   let t232 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t212), t216), t218), t221), @tactics.ants_tac), t231)
-  doomsday_algorithm_correct_c.set(@tactics.prove(@parser.parse_term("forall y m d. valid_date(y,m,d) ==>\n           doomsday_algorithm y m d = day_of_week y m d"), t232))
+  doomsday_algorithm_correct_c.set(@tactics.prove(@parser.parse_term("∀ y m d. valid_date(y,m,d) ==>\n           doomsday_algorithm y m d = day_of_week y m d"), t232))
 }
 
 ///|
@@ -1224,7 +1224,7 @@ pub fn doomsday_day() -> @kernel.Thm {
 fn step_62() -> Unit raise {
   let t233 = @meson.meson_tac(@list.List([doomsday_algorithm_correct()]))
   let t234 = @tactics.then_tac(@simp.rewrite_tac(@list.List([doomsday_day()])), t233)
-  doomsday_day_correct_c.set(@tactics.prove(@parser.parse_term("forall y m d. valid_date(y,m,d)\n           ==> doomsday_day y m d = dayname(day_of_week y m d)"), t234))
+  doomsday_day_correct_c.set(@tactics.prove(@parser.parse_term("∀ y m d. valid_date(y,m,d)\n           ==> doomsday_day y m d = dayname(day_of_week y m d)"), t234))
 }
 
 ///|

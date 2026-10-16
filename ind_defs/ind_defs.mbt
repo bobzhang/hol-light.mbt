@@ -115,7 +115,7 @@ fn step_3() -> Unit raise {
     @tactics.refl_tac,
   )
   let pth = @tactics.prove(
-    @parser.parse_term("forall P t. (forall x:A. (x = t) ==> P x) ==> (?) P"),
+    @parser.parse_term("∀ P t. (∀ x:A. (x = t) ==> P x) ==> (?) P"),
     t22,
   )
   exists_equation_c.set(fn(
@@ -1104,7 +1104,7 @@ pub fn monotonicity_theorems() -> Ref[@list.List[@kernel.Thm]] {
 /// MONO_TAC
 fn step_6() -> Unit raise {
   let imp = @parser.parse_term("(==>)")
-  let imp_refl = @itab.itaut(@parser.parse_term("forall p. p ==> p"))
+  let imp_refl = @itab.itaut(@parser.parse_term("∀ p. p ==> p"))
   let mono_abs_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
       @list.List[@kernel.Term],

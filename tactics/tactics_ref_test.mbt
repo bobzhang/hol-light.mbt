@@ -93,11 +93,11 @@ test "tactics matches tactics.ml" {
     (w, then_tac(@tactics.disj2_tac, accept_tac(truth)))
   })
   pv("GEN_DISCH", () => {
-    let w = tm("forall p:bool. p ==> p")
+    let w = tm("∀ p:bool. p ==> p")
     (w, then_tac(then_tac(gen_tac, disch_tac), accept))
   })
   pv("STRIP_TAC", () => {
-    let w = tm("forall p q. p /\\ q ==> q /\\ p")
+    let w = tm("∀ p q. p /\\ q ==> q /\\ p")
     (w, then_tac(then_tac(repeat_tac(@tactics.strip_tac), conj_tac), accept))
   })
   pv("EXISTS_TAC", () => {
@@ -142,12 +142,12 @@ test "tactics matches tactics.ml" {
     (w, disch_then(th => @tactics.contr_tac(th)))
   })
   pv("MATCH_ACCEPT_TAC", () => {
-    let w = tm("forall b:bool. b = b")
+    let w = tm("∀ b:bool. b = b")
     let x = tm("x:A")
     (w, @tactics.match_accept_tac(@bool.gen(x, @kernel.refl(x))))
   })
   pv("MATCH_MP_TAC", () => {
-    let w = tm("(forall x:A. P x ==> Q x) ==> P c ==> Q c")
+    let w = tm("(∀ x:A. P x ==> Q x) ==> P c ==> Q c")
     (
       w,
       then_tac(
@@ -217,7 +217,7 @@ test "tactics matches tactics.ml" {
     (w, @tactics.conv_tac(_ => @kernel.refl(r)))
   })
   pv("SUBST1_TAC", () => {
-    let w = tm("forall a b:bool. (a = b) ==> b ==> a")
+    let w = tm("∀ a b:bool. (a = b) ==> b ==> a")
     (
       w,
       then_tac(
@@ -276,17 +276,17 @@ test "tactics matches tactics.ml" {
     (w, then_tac(then_tac(@tactics.spec_tac(a, z), gen_tac), @tactics.refl_tac))
   })
   pv("X_GEN_TAC_type", () => {
-    let w = tm("forall x:bool. x = x")
+    let w = tm("∀ x:bool. x = x")
     let y = tm("y:A")
     (w, @tactics.x_gen_tac(y))
   })
   pv("X_GEN_TAC_notvar", () => {
-    let w = tm("forall x:bool. x = x")
+    let w = tm("∀ x:bool. x = x")
     let t = tm("T")
     (w, @tactics.x_gen_tac(t))
   })
   pv("X_GEN_TAC_invalid", () => {
-    let w = tm("forall x:bool. x = y")
+    let w = tm("∀ x:bool. x = y")
     let y = tm("y:bool")
     (w, @tactics.x_gen_tac(y))
   })
@@ -296,7 +296,7 @@ test "tactics matches tactics.ml" {
     (w, @tactics.x_gen_tac(y))
   })
   st("GEN_TAC_primed", () => {
-    let w = tm("forall x:bool. x = x \\/ x'")
+    let w = tm("∀ x:bool. x = x \\/ x'")
     (w, gen_tac)
   })
   pv("SUBGOAL_THEN", () => {
@@ -450,11 +450,11 @@ test "tactics matches tactics.ml" {
     (w, @tactics.changed_tac(all_tac))
   })
   st("CHANGED_TAC_gen", () => {
-    let w = tm("forall x:bool. x")
+    let w = tm("∀ x:bool. x")
     (w, @tactics.changed_tac(gen_tac))
   })
   st("REPLICATE_TAC", () => {
-    let w = tm("forall x y z:bool. x")
+    let w = tm("∀ x y z:bool. x")
     (w, @tactics.replicate_tac(2, gen_tac))
   })
   st("FAIL_TAC", () => {
@@ -478,7 +478,7 @@ test "tactics matches tactics.ml" {
     (w, @tactics.first(@list.List([@tactics.disj1_tac, conj_tac])))
   })
   st("MAP_EVERY", () => {
-    let w = tm("forall x y:bool. x")
+    let w = tm("∀ x y:bool. x")
     let a = tm("a:bool")
     let b = tm("b:bool")
     (w, @tactics.map_every(@tactics.x_gen_tac, @list.List([a, b])))
@@ -597,7 +597,7 @@ test "tactics matches tactics.ml" {
     (w, disch_then(@tactics.first_tcl(@list.List([]))(th => assume_tac(th))))
   })
   st("TRANS_TAC", () => {
-    let tw = tm("forall x y z:A. x = y /\\ y = z ==> x = z")
+    let tw = tm("∀ x y z:A. x = y /\\ y = z ==> x = z")
     let th = @tactics.prove(
       tw,
       then_tac(
@@ -633,7 +633,7 @@ test "tactics matches tactics.ml" {
   st("META_SPEC_TAC", () => {
     let w = tm("q:bool")
     let t = tm("t:bool")
-    let a = tm("forall x:bool. P x")
+    let a = tm("∀ x:bool. P x")
     (w, @tactics.meta_spec_tac(t, @kernel.assume_rule(a)))
   })
   pv("CHEAT_TAC", () => {
@@ -660,8 +660,8 @@ test "tactics matches tactics.ml" {
     (w, all_tac)
   })
   pv("prove_alpha", () => {
-    let w = tm("forall x:bool. x ==> x")
-    let w2 = tm("forall y:bool. y ==> y")
+    let w = tm("∀ x:bool. x ==> x")
+    let w2 = tm("∀ y:bool. y ==> y")
     (
       w,
       @tactics.match_accept_tac(
@@ -719,7 +719,7 @@ test "tactics matches tactics.ml" {
     sgs(@tactics.g(t))
   })
   log.attempt("g", () => {
-    let t = tm("forall p q:bool. p /\\ q ==> q /\\ p")
+    let t = tm("∀ p q:bool. p /\\ q ==> q /\\ p")
     sgs(@tactics.g(t))
   })
   log.attempt("e1", () => sgs(@tactics.e(repeat_tac(gen_tac))))
@@ -806,15 +806,15 @@ test "tactics matches tactics.ml" {
       #|CONJ_TAC =  |- ((#/\:fun(bool,fun(bool,bool)) #T:bool) #T:bool)
       #|DISJ1_TAC =  |- ((#\/:fun(bool,fun(bool,bool)) #T:bool) #F:bool)
       #|DISJ2_TAC =  |- ((#\/:fun(bool,fun(bool,bool)) #F:bool) #T:bool)
-      #|GEN_DISCH =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)))
+      #|GEN_DISCH =  |- (#∀:fun(fun(bool,bool),bool) (\p:bool. ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)))
       #|STRIP_TAC ! CONJ_TAC
       #|EXISTS_TAC =  |- (#?:fun(fun(bool,bool),bool) (\x:bool. x:bool))
       #|X_CHOOSE_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(bool,bool),bool) (\x:bool. (P:fun(bool,bool) x:bool)))) (#?:fun(fun(bool,bool),bool) (\y:bool. (P:fun(bool,bool) y:bool))))
       #|STRIP_EXISTS =  |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))
       #|DISJ_CASES_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#\/:fun(bool,fun(bool,bool)) q:bool) p:bool))
       #|CONTR_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) #F:bool) p:bool)
-      #|MATCH_ACCEPT_TAC =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. ((#=:fun(bool,fun(bool,bool)) b:bool) b:bool)))
-      #|MATCH_MP_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) c:'A)) (Q:fun('A,bool) c:'A)))
+      #|MATCH_ACCEPT_TAC =  |- (#∀:fun(fun(bool,bool),bool) (\b:bool. ((#=:fun(bool,fun(bool,bool)) b:bool) b:bool)))
+      #|MATCH_MP_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) c:'A)) (Q:fun('A,bool) c:'A)))
       #|ANTS_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #T:bool) q:bool)) q:bool)
       #|EQ_TAC =  |- ((#=:fun(bool,fun(bool,bool)) p:bool) p:bool)
       #|MK_COMB_TAC =  |- ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (f:fun('A,'B) x:'A))
@@ -826,7 +826,7 @@ test "tactics matches tactics.ml" {
       #|CONV_TAC_eq =  |- ((#=:fun(bool,fun(bool,bool)) ((\x:bool. x:bool) #T:bool)) #T:bool)
       #|CONV_TAC_T =  |- #T:bool
       #|CONV_TAC_bad ! CONV_TAC: bad equation
-      #|SUBST1_TAC =  |- (#forall:fun(fun(bool,bool),bool) (\a:bool. (#forall:fun(fun(bool,bool),bool) (\b:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) a:bool))))))
+      #|SUBST1_TAC =  |- (#∀:fun(fun(bool,bool),bool) (\a:bool. (#∀:fun(fun(bool,bool),bool) (\b:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) a:bool))))))
       #|SUBST_ALL_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) a:bool) b:bool))
       #|SUBST_VAR_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) y:'A)))
       #|UNDISCH_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)
@@ -858,7 +858,7 @@ test "tactics matches tactics.ml" {
       #|CHANGED_TAC_all ! CHANGED_TAC
       #|CHANGED_TAC_gen = [\n`x`\n]
       #|Warning: inventing type variables
-      #|REPLICATE_TAC = [\n`forall z. x`\n]
+      #|REPLICATE_TAC = [\n`∀ z. x`\n]
       #|FAIL_TAC ! boom
       #|NO_TAC ! NO_TAC
       #|FIRST_empty ! end_itlist
@@ -892,14 +892,14 @@ test "tactics matches tactics.ml" {
       #|prove_hyps ! prove: additional assumptions in result
       #|prove_unsolved ! TAC_PROOF: Unsolved goals
       #|prove_nonbool ! mk_goalstate: Non-boolean goal
-      #|prove_alpha =  |- (#forall:fun(fun(bool,bool),bool) (\x:bool. ((#==>:fun(bool,fun(bool,bool)) x:bool) x:bool)))
+      #|prove_alpha =  |- (#∀:fun(fun(bool,bool),bool) (\x:bool. ((#==>:fun(bool,fun(bool,bool)) x:bool) x:bool)))
       #|mk_fthm = #_FALSITY_:bool, a:bool |- b:bool
       #|equals_goal = true false
       #|compose_insts = [a:bool; b:'A; a:'A] [x:bool; y:'A; x:'A] [bool]
       #|inst_goal = \n  0 [`a`] (h)\n\n`a`\n
       #|Warning: Free variables in goal: x, y
       #|g_free = 1 subgoal (1 total)\n\n`x /\\ y ==> y`\n
-      #|g = 1 subgoal (1 total)\n\n`forall p q. p /\\ q ==> q /\\ p`\n
+      #|g = 1 subgoal (1 total)\n\n`∀ p q. p /\\ q ==> q /\\ p`\n
       #|e1 = 1 subgoal (1 total)\n\n`p /\\ q ==> q /\\ p`\n
       #|e2 = 1 subgoal (1 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`q /\\ p`\n
       #|top_goal = [q:bool; p:bool] ?- ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool)
@@ -911,7 +911,7 @@ test "tactics matches tactics.ml" {
       #|e4 = 1 subgoal (1 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`q`\n
       #|e_bad = No subgoals\n
       #|e5 ! No goal set
-      #|top_thm =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool))))))
+      #|top_thm =  |- (#∀:fun(fun(bool,bool),bool) (\p:bool. (#∀:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool))))))
       #|p = No subgoals\n
       #|flush = No subgoals\n
       #|b_too_far ! Can't back up any more
@@ -929,7 +929,7 @@ test "tactics matches tactics.ml" {
       #|e_nogoal ! No current goal
       #|by_nogoal ! No goal set
       #|axioms =  |- #F:bool
-      #|constants = _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
+      #|constants = _FALSITY_ ?! ~ F \/ ? ∀ ==> /\ T =
       #|Warning: inventing type variables
       #|counter_tyvar = zz_counter:'?878
       #|counter_genvar = _22:bool

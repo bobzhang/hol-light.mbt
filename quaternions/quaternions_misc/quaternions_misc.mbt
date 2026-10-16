@@ -73,7 +73,7 @@ pub fn mp_list_tac(x : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// VECTOR_EQ_1
 fn step_3() -> Unit raise {
   let t24 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_1(), @vectors.forall_1()]))
-  vector_eq_1_c.set(@tactics.prove(@parser.parse_term("forall u v:real^1. u = v <=> u$1 = v$1"), t24))
+  vector_eq_1_c.set(@tactics.prove(@parser.parse_term("∀ u v:real^1. u = v <=> u$1 = v$1"), t24))
 }
 
 ///|
@@ -89,7 +89,7 @@ pub fn vector_eq_1() -> @kernel.Thm {
 /// VECTOR_EQ_2
 fn step_4() -> Unit raise {
   let t25 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), @vectors.forall_2()]))
-  vector_eq_2_c.set(@tactics.prove(@parser.parse_term("forall u v:real^2. u = v <=> u$1 = v$1 /\\ u$2 = v$2"), t25))
+  vector_eq_2_c.set(@tactics.prove(@parser.parse_term("∀ u v:real^2. u = v <=> u$1 = v$1 /\\ u$2 = v$2"), t25))
 }
 
 ///|
@@ -105,7 +105,7 @@ pub fn vector_eq_2() -> @kernel.Thm {
 /// VECTOR_EQ_3
 fn step_5() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_3(), @vectors.forall_3()]))
-  vector_eq_3_c.set(@tactics.prove(@parser.parse_term("forall u v:real^3. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3"), t26))
+  vector_eq_3_c.set(@tactics.prove(@parser.parse_term("∀ u v:real^3. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3"), t26))
 }
 
 ///|
@@ -121,7 +121,7 @@ pub fn vector_eq_3() -> @kernel.Thm {
 /// VECTOR_EQ_4
 fn step_6() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_4(), @vectors.forall_4()]))
-  vector_eq_4_c.set(@tactics.prove(@parser.parse_term("forall u v:real^4. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3 /\\ u$4 = v$4"), t27))
+  vector_eq_4_c.set(@tactics.prove(@parser.parse_term("∀ u v:real^4. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3 /\\ u$4 = v$4"), t27))
 }
 
 ///|
@@ -146,8 +146,8 @@ fn step_7() -> Unit raise {
   let t29 = @parser.parse_term("sum {i} (\\j. (basis i:real^N)$j * (x:real^N)$j)")
   let t30 = @tactics.trans_tac(@theorems.eq_trans())(t29)
   let t28 = @simp.rewrite_tac(@list.List([@vectors.dot()]))
-  let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall i x; ihp"), t28), t30), @tactics.conj_tac), t31), t32), t33), t34), t35), t36), t37)
-  dot_lbasis_c.set(@tactics.prove(@parser.parse_term("forall i x:real^N. 1 <= i /\\ i <= dimindex(:N) ==> basis i dot x = x$i"), t38))
+  let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ i x; ihp"), t28), t30), @tactics.conj_tac), t31), t32), t33), t34), t35), t36), t37)
+  dot_lbasis_c.set(@tactics.prove(@parser.parse_term("∀ i x:real^N. 1 <= i /\\ i <= dimindex(:N) ==> basis i dot x = x$i"), t38))
 }
 
 ///|
@@ -163,7 +163,7 @@ pub fn dot_lbasis() -> @kernel.Thm {
 /// DOT_RBASIS
 fn step_8() -> Unit raise {
   let t39 = @meson.meson_tac(@list.List([@vectors.dot_sym(), dot_lbasis()]))
-  dot_rbasis_c.set(@tactics.prove(@parser.parse_term("forall x:real^N i. 1 <= i /\\ i <= dimindex(:N) ==> x dot basis i = x$i"), t39))
+  dot_rbasis_c.set(@tactics.prove(@parser.parse_term("∀ x:real^N i. 1 <= i /\\ i <= dimindex(:N) ==> x dot basis i = x$i"), t39))
 }
 
 ///|
@@ -182,7 +182,7 @@ fn step_9() -> Unit raise {
   let t41 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a pow 2 = &1 <=> (a - &1) * (a + &1) = &0")), @realarith.real_entire()]))
   let t40 = @simp.simp_tac(@list.List([@real.real_pow_one()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t40), t41), t42)
-  vector_norm_sqnorm_unit_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. norm x pow 2 = &1 <=> norm x = &1"), t43))
+  vector_norm_sqnorm_unit_c.set(@tactics.prove(@parser.parse_term("∀ x:real^N. norm x pow 2 = &1 <=> norm x = &1"), t43))
 }
 
 ///|

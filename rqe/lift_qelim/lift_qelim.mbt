@@ -46,7 +46,7 @@ pub fn aci_conj(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
 fn step_2() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_imp(), @theorems.conj_assoc()]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.exists_unique_thm(), @class.de_morgan_thm(), @class.not_exists_thm()])), t8)
-  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t9)
+  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (∀ x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t9)
   let t10 = @class.taut(@parser.parse_term("~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r"))
   let t11 = @class.taut(@parser.parse_term("(p <=> q) <=> (p /\\ q) \\/ (~p /\\ ~q)"))
   let t12 = @class.taut(@parser.parse_term("~(p <=> q) <=> (p /\\ ~q) \\/ (~p /\\ q)"))
@@ -91,7 +91,7 @@ pub fn or_assoc() -> @kernel.Thm {
 /// forall_thm
 fn step_4() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([]))
-  forall_thm_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. P x) <=> ~ (?x. ~ P x)"), t20))
+  forall_thm_c.set(@tactics.prove(@parser.parse_term("∀ P. (∀ x. P x) <=> ~ (?x. ~ P x)"), t20))
 }
 
 ///|

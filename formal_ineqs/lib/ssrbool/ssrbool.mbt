@@ -619,7 +619,7 @@ pub fn contraff() -> @kernel.Thm {
 ///|
 /// isSome
 fn step_38() -> Unit raise {
-  issome_c.set(@define.define_(@parser.parse_term("isSome NONE = F /\\ (forall x. isSome (SOME x) = T)")))
+  issome_c.set(@define.define_(@parser.parse_term("isSome NONE = F /\\ (∀ x. isSome (SOME x) = T)")))
 }
 
 ///|
@@ -2051,7 +2051,7 @@ pub fn addnb() -> @kernel.Thm {
 ///|
 /// subpred
 fn step_124() -> Unit raise {
-  subpred_c.set(@pair.new_definition(@parser.parse_term("subpred p1 p2 <=> (forall x. p1 x ==> p2 x)")))
+  subpred_c.set(@pair.new_definition(@parser.parse_term("subpred p1 p2 <=> (∀ x. p1 x ==> p2 x)")))
 }
 
 ///|
@@ -2066,7 +2066,7 @@ pub fn subpred() -> @kernel.Thm {
 ///|
 /// subrel
 fn step_125() -> Unit raise {
-  subrel_c.set(@pair.new_definition(@parser.parse_term("subrel r1 r2 <=> (forall x y. r1 x y ==> r2 x y)")))
+  subrel_c.set(@pair.new_definition(@parser.parse_term("subrel r1 r2 <=> (∀ x y. r1 x y ==> r2 x y)")))
 }
 
 ///|

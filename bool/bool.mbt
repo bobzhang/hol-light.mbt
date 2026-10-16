@@ -498,7 +498,7 @@ pub fn forall_def() -> Thm {
 
 ///|
 pub fn mk_forall(v : Term, tm : Term) -> Term raise {
-  @basics.mk_binder("forall", v, tm)
+  @basics.mk_binder("∀", v, tm)
 }
 
 ///|
@@ -1081,7 +1081,7 @@ pub fn existence(th : Thm) -> Thm raise {
 
 ///|
 /// Enable verbose aliases for existence and truth values.
-/// `forall` is the canonical constant name and needs no alias.
+/// `∀` is the canonical constant name and needs no alias.
 pub fn set_verbose_symbols() -> Unit raise {
   for b in ["exists", "existsunique"] {
     @printer.parse_as_binder(b)
@@ -1121,7 +1121,7 @@ fn load_steps() -> Unit raise {
   // Parse status of the logical constants.
   @printer.parse_as_prefix("~")
   @printer.parse_as_binder("\\")
-  @printer.parse_as_binder("forall")
+  @printer.parse_as_binder("∀")
   @printer.parse_as_binder("?")
   @printer.parse_as_binder("?!")
   @printer.parse_as_infix("==>", (4, "right"))
@@ -1283,13 +1283,13 @@ fn load_steps() -> Unit raise {
     imp_trans_r.set(r)
     imp_trans_pth.set(pth)
   }
-  // forall
-  forall_def_c.set(nbd("(forall) = \\P:A->bool. P = \\x. T"))
+  // ∀
+  forall_def_c.set(nbd("(∀) = \\P:A->bool. P = \\x. T"))
   {
     let p = q("P:A->bool")
     let x = q("x:A")
     // `EQ_MP (AP_THM FORALL_DEF `P`) (ASSUME `(!)P`)`: right to left.
-    let a = @kernel.assume_rule(q("(forall)(P:A->bool)"))
+    let a = @kernel.assume_rule(q("(∀)(P:A->bool)"))
     let th1 = @kernel.eq_mp(@equal.ap_thm(forall_def(), q("P:A->bool")), a)
     let xv = q("x:A")
     let th2 = @equal.ap_thm(@equal.conv_rule(@equal.beta_conv, th1), xv)
@@ -1302,17 +1302,17 @@ fn load_steps() -> Unit raise {
     @equal.sym(rand_beta(@equal.ap_thm(forall_def(), q("P:A->bool")))),
   )
   // ?
-  exists_def_c.set(nbd("(?) = \\P:A->bool. forall q. (forall x. P x ==> q) ==> q"))
+  exists_def_c.set(nbd("(?) = \\P:A->bool. ∀ q. (∀ x. P x ==> q) ==> q"))
   {
     let p = q("P:A->bool")
     let x = q("x:A")
     let th1 = rand_beta(@equal.ap_thm(exists_def(), p))
     // `SPEC `x:A` (ASSUME `!x:A. P x ==> Q`)`: right to left.
-    let a = @kernel.assume_rule(q("forall x:A. P x ==> Q"))
+    let a = @kernel.assume_rule(q("∀ x:A. P x ==> Q"))
     let th2 = spec(q("x:A"), a)
     // `DISCH `!x. ...` (MP th2 (ASSUME `(P:A->bool) x`))`: right to left.
     let m = mp(th2, @kernel.assume_rule(q("(P:A->bool) x")))
-    let th3 = disch(q("forall x:A. P x ==> Q"), m)
+    let th3 = disch(q("∀ x:A. P x ==> Q"), m)
     // `EQ_MP (SYM th1) (GEN `Q:bool` th3)`: right to left.
     let g = gen(q("Q:bool"), th3)
     exists_p.set(p)
@@ -1331,7 +1331,7 @@ fn load_steps() -> Unit raise {
     choose_pth.set(disch_all(disch(q("(?) (P:A->bool)"), u2)))
   }
   // \/
-  or_def_c.set(nbd("(\\/) = \\p q. forall r. (p ==> r) ==> (q ==> r) ==> r"))
+  or_def_c.set(nbd("(\\/) = \\p q. ∀ r. (p ==> r) ==> (q ==> r) ==> r"))
   let disj_pth = (left : Bool) => {
     let p = q("P:bool")
     let qv = q("Q:bool")
@@ -1377,7 +1377,7 @@ fn load_steps() -> Unit raise {
     disj_cases_pth.set(undisch(undisch(th3)))
   }
   // F and ~
-  f_def_c.set(nbd("F = forall p:bool. p"))
+  f_def_c.set(nbd("F = ∀ p:bool. p"))
   not_def_c.set(nbd("(~) = \\p. p ==> F"))
   mk_neg_tm.set(q("(~)"))
   {
@@ -1418,7 +1418,7 @@ fn load_steps() -> Unit raise {
   }
   // ?!
   exists_unique_def_c.set(
-    nbd("(?!) = \\P:A->bool. ((?) P) /\\ (forall x y. P x /\\ P y ==> x = y)"),
+    nbd("(?!) = \\P:A->bool. ((?) P) /\\ (∀ x y. P x /\\ P y ==> x = y)"),
   )
   {
     let p = q("P:A->bool")

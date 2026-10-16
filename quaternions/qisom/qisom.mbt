@@ -20,7 +20,7 @@ pub fn him_def() -> @kernel.Thm {
 /// HIM
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([him_def(), @quaternion.quat(), @vectors.vector_4()]))
-  him_c.set(@tactics.prove(@parser.parse_term("forall x y z w. HIm(quat(x,y,z,w)):real^3 = vector[y;z;w]"), t1))
+  him_c.set(@tactics.prove(@parser.parse_term("∀ x y z w. HIm(quat(x,y,z,w)):real^3 = vector[y;z;w]"), t1))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn him() -> @kernel.Thm {
 /// HIM_COMPONENT
 fn step_3() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@quaternion.forall_quat(), him(), @quaternion.quat_components(), @vectors.vector_3()]))
-  him_component_c.set(@tactics.prove(@parser.parse_term("(forall q. HIm q $ 1 = Im1 q) /\\\n   (forall q. HIm q $ 2 = Im2 q) /\\\n   (forall q. HIm q $ 3 = Im3 q)"), t2))
+  him_component_c.set(@tactics.prove(@parser.parse_term("(∀ q. HIm q $ 1 = Im1 q) /\\\n   (∀ q. HIm q $ 2 = Im2 q) /\\\n   (∀ q. HIm q $ 3 = Im3 q)"), t2))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn him_component() -> @kernel.Thm {
 /// HIM_EQ
 fn step_4() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_3(), @vectors.forall_3(), him_component()]))
-  him_eq_c.set(@tactics.prove(@parser.parse_term("forall p q. HIm p = HIm q <=> Im1 p = Im1 q /\\ Im2 p = Im2 q /\\ Im3 p = Im3 q"), t3))
+  him_eq_c.set(@tactics.prove(@parser.parse_term("∀ p q. HIm p = HIm q <=> Im1 p = Im1 q /\\ Im2 p = Im2 q /\\ Im3 p = Im3 q"), t3))
 }
 
 ///|
@@ -68,7 +68,7 @@ pub fn him_eq() -> @kernel.Thm {
 /// HIM_HX
 fn step_5() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([@quaternion.hx_def(), him(), @cart.cart_eq(), @cart.dimindex_3(), @vectors.vec_component(), @cart.dimindex_3(), @vectors.forall_3(), @vectors.vector_3()]))
-  him_hx_c.set(@tactics.prove(@parser.parse_term("forall a. HIm(Hx a) = vec 0"), t4))
+  him_hx_c.set(@tactics.prove(@parser.parse_term("∀ a. HIm(Hx a) = vec 0"), t4))
 }
 
 ///|
@@ -84,7 +84,7 @@ pub fn him_hx() -> @kernel.Thm {
 /// HIM_CNJ
 fn step_6() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @quaternion.quat_cnj_components(), him_component(), @vectors.vector_neg_component(), @cart.dimindex_3(), @vectors.forall_3(), @vectors.vector_3()]))
-  him_cnj_c.set(@tactics.prove(@parser.parse_term("forall q. HIm(cnj q) = -- HIm q"), t5))
+  him_cnj_c.set(@tactics.prove(@parser.parse_term("∀ q. HIm(cnj q) = -- HIm q"), t5))
 }
 
 ///|
@@ -101,7 +101,7 @@ pub fn him_cnj() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([@realax.real_mul_sym()]))
   let t7 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq(), @vectors.vector_mul_component(), him_component(), @cart.dimindex_3(), @vectors.forall_3(), @vectors.vector_3(), @quaternion.mul_hx_components()])), t6)
-  him_mul_hx_c.set(@tactics.prove(@parser.parse_term("(forall a q. HIm(Hx a * q) = a % HIm q) /\\\n   (forall a q. HIm(q * Hx a) = a % HIm q)"), t7))
+  him_mul_hx_c.set(@tactics.prove(@parser.parse_term("(∀ a q. HIm(Hx a * q) = a % HIm q) /\\\n   (∀ a q. HIm(q * Hx a) = a % HIm q)"), t7))
 }
 
 ///|
@@ -118,7 +118,7 @@ pub fn him_mul_hx() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@vectors.forall_3(), him_component(), @quaternion.quat_add_components()]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq(), @vectors.vector_add_component(), @cart.dimindex_3()])), t8)
-  him_add_c.set(@tactics.prove(@parser.parse_term("forall p q. HIm(p + q) = HIm p + HIm q"), t9))
+  him_add_c.set(@tactics.prove(@parser.parse_term("∀ p q. HIm(p + q) = HIm p + HIm q"), t9))
 }
 
 ///|
@@ -135,7 +135,7 @@ pub fn him_add() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([@vectors.forall_3(), him_component(), @quaternion.quat_neg_components()]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq(), @vectors.vector_neg_component(), @cart.dimindex_3()])), t10)
-  him_neg_c.set(@tactics.prove(@parser.parse_term("forall q. HIm(--q) = --HIm q"), t11))
+  him_neg_c.set(@tactics.prove(@parser.parse_term("∀ q. HIm(--q) = --HIm q"), t11))
 }
 
 ///|
@@ -152,7 +152,7 @@ pub fn him_neg() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([@vectors.forall_3(), him_component(), @quaternion.quat_sub_components()]))
   let t13 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq(), @vectors.vector_sub_component(), @cart.dimindex_3()])), t12)
-  him_sub_c.set(@tactics.prove(@parser.parse_term("forall p q. HIm(p - q) = HIm p - HIm q"), t13))
+  him_sub_c.set(@tactics.prove(@parser.parse_term("∀ p q. HIm(p - q) = HIm p - HIm q"), t13))
 }
 
 ///|
@@ -172,7 +172,7 @@ fn step_11() -> Unit raise {
   let t15 = @simp.asm_simp_tac(@list.List([@vectors.vsum_component()]))
   let t14 = @simp.rewrite_tac(@list.List([@cart.cart_eq()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t14), t15), t16), t17)
-  him_vsum_c.set(@tactics.prove(@parser.parse_term("forall f s. FINITE s ==> HIm(vsum s f) = vsum s (\\x:A. HIm(f x))"), t18))
+  him_vsum_c.set(@tactics.prove(@parser.parse_term("∀ f s. FINITE s ==> HIm(vsum s f) = vsum s (\\x:A. HIm(f x))"), t18))
 }
 
 ///|
@@ -188,7 +188,7 @@ pub fn him_vsum() -> @kernel.Thm {
 /// CMUL_HIM
 fn step_12() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_cmul()), @quaternions_misc.vector_eq_3(), him_def(), @vectors.vector_3(), @vectors.vector_mul_component()]))
-  cmul_him_c.set(@tactics.prove(@parser.parse_term("forall c q. c % HIm q = HIm(Hx c * q)"), t19))
+  cmul_him_c.set(@tactics.prove(@parser.parse_term("∀ c q. c % HIm q = HIm(Hx c * q)"), t19))
 }
 
 ///|
@@ -235,7 +235,7 @@ pub fn hv() -> @kernel.Thm {
 /// HV_COMPONENTS
 fn step_15() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([hv(), @quaternion.quat_components(), @vectors.vector_4()]))
-  hv_components_c.set(@tactics.prove(@parser.parse_term("(forall x. Re(Hv(x)) = &0) /\\\n   (forall x. Im1(Hv(x)) = x$1) /\\\n   (forall x. Im2(Hv(x)) = x$2) /\\\n   (forall x. Im3(Hv(x)) = x$3)"), t21))
+  hv_components_c.set(@tactics.prove(@parser.parse_term("(∀ x. Re(Hv(x)) = &0) /\\\n   (∀ x. Im1(Hv(x)) = x$1) /\\\n   (∀ x. Im2(Hv(x)) = x$2) /\\\n   (∀ x. Im3(Hv(x)) = x$3)"), t21))
 }
 
 ///|
@@ -251,7 +251,7 @@ pub fn hv_components() -> @kernel.Thm {
 /// HV_VEC
 fn step_16() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.quat_components(), @vectors.vec_component()]))
-  hv_vec_c.set(@tactics.prove(@parser.parse_term("forall n. Hv(vec n) = quat(&0, &n, &n, &n)"), t22))
+  hv_vec_c.set(@tactics.prove(@parser.parse_term("∀ n. Hv(vec n) = quat(&0, &n, &n, &n)"), t22))
 }
 
 ///|
@@ -268,7 +268,7 @@ pub fn hv_vec() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t23 = @simp.rewrite_tac(@list.List([@quaternions_misc.vector_eq_3(), @vectors.vec_component()]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.hx_components()]))), t23)
-  hv_eq_zero_c.set(@tactics.prove(@parser.parse_term("forall v. Hv v = Hx(&0) <=> v = vec 0"), t24))
+  hv_eq_zero_c.set(@tactics.prove(@parser.parse_term("∀ v. Hv v = Hx(&0) <=> v = vec 0"), t24))
 }
 
 ///|
@@ -300,7 +300,7 @@ pub fn hv_zero() -> @kernel.Thm {
 /// HV_VECTOR
 fn step_19() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.quat_components(), @vectors.vector_3()]))
-  hv_vector_c.set(@tactics.prove(@parser.parse_term("forall x y z. Hv(vector[x;y;z]) = quat(&0,x,y,z)"), t26))
+  hv_vector_c.set(@tactics.prove(@parser.parse_term("∀ x y z. Hv(vector[x;y;z]) = quat(&0,x,y,z)"), t26))
 }
 
 ///|
@@ -333,7 +333,7 @@ pub fn hv_basis() -> @kernel.Thm {
 /// HV_ADD
 fn step_21() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.quat_add_components(), @vectors.vector_add_component(), @realax.real_add_lid()]))
-  hv_add_c.set(@tactics.prove(@parser.parse_term("forall x y. Hv(x + y) = Hv x + Hv y"), t29))
+  hv_add_c.set(@tactics.prove(@parser.parse_term("∀ x y. Hv(x + y) = Hv x + Hv y"), t29))
 }
 
 ///|
@@ -349,7 +349,7 @@ pub fn hv_add() -> @kernel.Thm {
 /// HV_NEG
 fn step_22() -> Unit raise {
   let t30 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.quat_neg_components(), @vectors.vector_neg_component(), @calc_int.real_neg_0()]))
-  hv_neg_c.set(@tactics.prove(@parser.parse_term("forall x. Hv(--x) = --Hv x"), t30))
+  hv_neg_c.set(@tactics.prove(@parser.parse_term("∀ x. Hv(--x) = --Hv x"), t30))
 }
 
 ///|
@@ -365,7 +365,7 @@ pub fn hv_neg() -> @kernel.Thm {
 /// HV_SUB
 fn step_23() -> Unit raise {
   let t31 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.quat_sub_components(), @vectors.vector_sub_component(), @real.real_sub_rzero()]))
-  hv_sub_c.set(@tactics.prove(@parser.parse_term("forall x y. Hv(x - y) = Hv x - Hv y"), t31))
+  hv_sub_c.set(@tactics.prove(@parser.parse_term("∀ x y. Hv(x - y) = Hv x - Hv y"), t31))
 }
 
 ///|
@@ -381,7 +381,7 @@ pub fn hv_sub() -> @kernel.Thm {
 /// HV_CMUL
 fn step_24() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), @quaternion.mul_hx_components(), @calc_int.real_mul_rzero(), @vectors.vector_mul_component()]))
-  hv_cmul_c.set(@tactics.prove(@parser.parse_term("forall a x. Hv(a % x) = Hx a * Hv x"), t32))
+  hv_cmul_c.set(@tactics.prove(@parser.parse_term("∀ a x. Hv(a % x) = Hx a * Hv x"), t32))
 }
 
 ///|
@@ -400,7 +400,7 @@ fn step_25() -> Unit raise {
   let t34 = @simp.asm_simp_tac(@list.List([hv_components(), @quaternion.quat_vsum_components(), @iterate.sum_0()]))
   let t33 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq()]))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t33), t34), t35)
-  hv_vsum_c.set(@tactics.prove(@parser.parse_term("forall f s. FINITE s ==> Hv(vsum s f) = vsum s (\\x:A. Hv(f x))"), t36))
+  hv_vsum_c.set(@tactics.prove(@parser.parse_term("∀ f s. FINITE s ==> Hv(vsum s f) = vsum s (\\x:A. Hv(f x))"), t36))
 }
 
 ///|
@@ -417,7 +417,7 @@ pub fn hv_vsum() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_3(), @vectors.forall_3()]))
   let t38 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components()])), t37)
-  hv_inj_c.set(@tactics.prove(@parser.parse_term("forall x y. Hv x = Hv y <=> x = y"), t38))
+  hv_inj_c.set(@tactics.prove(@parser.parse_term("∀ x y. Hv x = Hv y <=> x = y"), t38))
 }
 
 ///|
@@ -449,7 +449,7 @@ pub fn linear_hv() -> @kernel.Thm {
 /// HIM_HV
 fn step_28() -> Unit raise {
   let t40 = @simp.rewrite_tac(@list.List([him(), hv(), @cart.cart_eq(), @cart.dimindex_3(), @vectors.forall_3(), @vectors.vector_mul_component(), @vectors.vector_3()]))
-  him_hv_c.set(@tactics.prove(@parser.parse_term("forall x. HIm(Hv x) = x"), t40))
+  him_hv_c.set(@tactics.prove(@parser.parse_term("∀ x. HIm(Hv x) = x"), t40))
 }
 
 ///|
@@ -465,7 +465,7 @@ pub fn him_hv() -> @kernel.Thm {
 /// CNJ_HV
 fn step_29() -> Unit raise {
   let t41 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), @quaternion.quat_cnj_components(), hv_components(), @quaternion.quat_neg_components(), @calc_int.real_neg_0()]))
-  cnj_hv_c.set(@tactics.prove(@parser.parse_term("forall v. cnj(Hv v) = --Hv v"), t41))
+  cnj_hv_c.set(@tactics.prove(@parser.parse_term("∀ v. cnj(Hv v) = --Hv v"), t41))
 }
 
 ///|
@@ -481,7 +481,7 @@ pub fn cnj_hv() -> @kernel.Thm {
 /// HV_HIM
 fn step_30() -> Unit raise {
   let t42 = @simp.rewrite_tac(@list.List([@quaternion.forall_quat(), him(), hv(), @quaternion.quat_components(), @vectors.vector_3()]))
-  hv_him_c.set(@tactics.prove(@parser.parse_term("forall q. Hv(HIm q) = quat(&0, Im1 q, Im2 q, Im3 q)"), t42))
+  hv_him_c.set(@tactics.prove(@parser.parse_term("∀ q. Hv(HIm q) = quat(&0, Im1 q, Im2 q, Im3 q)"), t42))
 }
 
 ///|
@@ -498,7 +498,7 @@ pub fn hv_him() -> @kernel.Thm {
 fn step_31() -> Unit raise {
   let t43 = @simp.asm_rewrite_tac(@list.List([]))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), him_component()]))), @tactics.eq_tac), @tactics.disch_tac), t43)
-  hv_him_eq_c.set(@tactics.prove(@parser.parse_term("forall q. Hv(HIm q) = q <=> Re q = &0"), t44))
+  hv_him_eq_c.set(@tactics.prove(@parser.parse_term("∀ q. Hv(HIm q) = q <=> Re q = &0"), t44))
 }
 
 ///|
@@ -514,7 +514,7 @@ pub fn hv_him_eq() -> @kernel.Thm {
 /// DOT_HV
 fn step_32() -> Unit raise {
   let t45 = @simp.rewrite_tac(@list.List([@vectors.dot_3(), @quaternion.quat_dot(), hv_components(), @calc_int.real_mul_lzero(), @realax.real_add_lid()]))
-  dot_hv_c.set(@tactics.prove(@parser.parse_term("forall u v. Hv u dot Hv v = u dot v"), t45))
+  dot_hv_c.set(@tactics.prove(@parser.parse_term("∀ u v. Hv u dot Hv v = u dot v"), t45))
 }
 
 ///|
@@ -530,7 +530,7 @@ pub fn dot_hv() -> @kernel.Thm {
 /// NORM_HV
 fn step_33() -> Unit raise {
   let t46 = @simp.rewrite_tac(@list.List([@vectors.vector_norm(), dot_hv()]))
-  norm_hv_c.set(@tactics.prove(@parser.parse_term("forall v. norm (Hv v) = norm v"), t46))
+  norm_hv_c.set(@tactics.prove(@parser.parse_term("∀ v. norm (Hv v) = norm v"), t46))
 }
 
 ///|
@@ -547,7 +547,7 @@ pub fn norm_hv() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t47 = @tactics.conv_tac(@calc_rat.real_ring)
   let t48 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_eq(), @quaternion.quat_sub_components(), hv_components(), @quaternion.hx_components(), @quaternion.quat_mul(), @quaternion.quat_components(), @cross.cross_components(), @vectors.dot_3()])), t47)
-  mul_hv_eq_cross_dot_c.set(@tactics.prove(@parser.parse_term("forall x y. Hv x * Hv y = Hv(x cross y) - Hx (x dot y)"), t48))
+  mul_hv_eq_cross_dot_c.set(@tactics.prove(@parser.parse_term("∀ x y. Hv x * Hv y = Hv(x cross y) - Hx (x dot y)"), t48))
 }
 
 ///|
@@ -578,10 +578,10 @@ fn step_35() -> Unit raise {
   let t53 = @list.List([@simp.rewrite_tac(@list.List([hv_add(), @quaternion.quat_add_ldistrib(), @quaternion.quat_add_rdistrib(), him_add()])), t52])
   let t54 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.conj_tac, @tactics.repeat_tac(@tactics.strip_tac)), t53), @tactics.all_tac])
   let t50 = @simp.rewrite_tac(@list.List([@determinants.orthogonal_transformation(), @vectors.linear()]))
-  let t64 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall q; qnorm"), t50), @tactics.conj_tac), t54), t55), t56), t60), t61), t62), t63)
+  let t64 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ q; qnorm"), t50), @tactics.conj_tac), t54), t55), t56), t60), t61), t62), t63)
   orthogonal_transformation_quat_congruence_c.set(@lib.time(fn(x49 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x49.0, x49.1)
-  }, (@parser.parse_term("forall q. norm q = &1\n       ==> orthogonal_transformation (\\x. HIm(cnj q * Hv x * q))"), t64)))
+  }, (@parser.parse_term("∀ q. norm q = &1\n       ==> orthogonal_transformation (\\x. HIm(cnj q * Hv x * q))"), t64)))
 }
 
 ///|
@@ -623,8 +623,8 @@ fn step_36() -> Unit raise {
   }, @list.List([@parser.parse_term("norm (q:quat)"), t70])), t72), t73), @tactics.all_tac])
   let t65 = @theorems.destruct_tac("@c p. qeq pnorm")
   let t66 = @tactics.subgoal_then(@parser.parse_term("?c p. q = Hx c * p /\\ norm p = &1"), t65)
-  let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@theorems.intro_tac("forall q; qnz"), t66), t74), t78), t82), t83), t84), t85), t86)
-  orthogonal_transformation_quat_conjugation_c.set(@tactics.prove(@parser.parse_term("forall q. ~(q = Hx(&0))\n       ==> orthogonal_transformation (\\x. HIm(inv q * Hv x * q))"), t87))
+  let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@theorems.intro_tac("∀ q; qnz"), t66), t74), t78), t82), t83), t84), t85), t86)
+  orthogonal_transformation_quat_conjugation_c.set(@tactics.prove(@parser.parse_term("∀ q. ~(q = Hx(&0))\n       ==> orthogonal_transformation (\\x. HIm(inv q * Hv x * q))"), t87))
 }
 
 ///|
@@ -657,10 +657,10 @@ fn step_37() -> Unit raise {
     }
   })
   let t89 = @simp.rewrite_tac(@list.List([@determinants.reflect_along()]))
-  let t103 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall v x; vnorm"), t89), t93), t95), t96), t100), t101), t102)
+  let t103 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ v x; vnorm"), t89), t93), t95), t96), t100), t101), t102)
   reflect_along_eq_quat_product_c.set(@lib.time(fn(x88 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x88.0, x88.1)
-  }, (@parser.parse_term("forall v x. norm v = &1 ==> reflect_along v x = HIm(Hv v * Hv x * Hv v)"), t103)))
+  }, (@parser.parse_term("∀ v x. norm v = &1 ==> reflect_along v x = HIm(Hv v * Hv x * Hv v)"), t103)))
 }
 
 ///|
@@ -715,9 +715,9 @@ fn step_38() -> Unit raise {
   }, @list.List([@parser.parse_term("norm (v:real^3)"), t110])), t111), t112), @tactics.all_tac])
   let t105 = @theorems.destruct_tac("@c u. veq unorm")
   let t106 = @tactics.subgoal_then(@parser.parse_term("?c u:real^3. v = c % u /\\ norm u = &1"), t105)
-  let t104 = @theorems.intro_tac("forall v; vnz; forall x")
+  let t104 = @theorems.intro_tac("∀ v; vnz; ∀ x")
   let t137 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm()])), t104), t106), t113), t117), t121), t122), t123), t124), t125), t127), @tactics.ap_term_tac), t128), t129), t133), t136)
-  reflect_along_eq_quat_conjugation_c.set(@tactics.prove(@parser.parse_term("forall v. ~(v = vec 0)\n       ==> reflect_along v = \\x. -- HIm(inv (Hv v) * Hv x * Hv v)"), t137))
+  reflect_along_eq_quat_conjugation_c.set(@tactics.prove(@parser.parse_term("∀ v. ~(v = vec 0)\n       ==> reflect_along v = \\x. -- HIm(inv (Hv v) * Hv x * Hv v)"), t137))
 }
 
 ///|
@@ -770,7 +770,7 @@ fn step_39() -> Unit raise {
   let t206 = @tactics.conv_tac(@calc_rat.real_ring)
   let t205 = @simp.rewrite_tac(@list.List([hv_him_eq(), @quaternion.quat_mul(), @quaternion.quat_components(), @quaternion.quat_cnj_components(), hv_components()]))
   let t207 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.asm_simp_tac(@list.List([@quaternion.quat_inv_eq_cnj()]))), t205), t206), @tactics.all_tac])
-  let t204 = @tactics.subgoal_then(@parser.parse_term("forall x. Hv(HIm((inv q * Hv x) * q)) = (inv q * Hv x) * q"), fn(x201 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t204 = @tactics.subgoal_then(@parser.parse_term("∀ x. Hv(HIm((inv q * Hv x) * q)) = (inv q * Hv x) * q"), fn(x201 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s202 = ((x200 : @kernel.Thm) => @tactics.label_tac("rel", x200))(x201)
     fn(x203 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s202(x203)
@@ -858,8 +858,8 @@ fn step_39() -> Unit raise {
   let t140 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@cart.dimindex_3()])), @int.arith_tac), @tactics.all_tac])
   let t138 = @parser.parse_term("3")
   let t139 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real^3->real^3"), t138]), @determinants.orthogonal_transformation_generated_by_reflections()))
-  let t237 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall f; orth"), t139), @tactics.ants_tac), t140), t141), t142), t144), t145), t149), t154), @quaternions_misc.induct_tac), t167), t168), t169), t170), t178), t182), t186), t187), t188), t189), t190), t198), t199), t204), t207), t208), t209), t214), t215), @tactics.conj_tac), t219), t220), t221), @list.List([@tactics.disj2_tac, @tactics.disj1_tac])), @tactics.gen_tac), t222), t223), @tactics.ap_term_tac), t224), t228), t233), t234), t235), t236)
-  orthogonal_transformation_as_quat_conjugation_c.set(@tactics.prove(@parser.parse_term("forall f. orthogonal_transformation f\n       ==> (?q. norm q = &1 /\\\n                ((forall x. f x = HIm(inv q * Hv x * q)) \\/\n                 (forall x. f x = -- HIm(inv q * Hv x * q))))"), t237))
+  let t237 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ f; orth"), t139), @tactics.ants_tac), t140), t141), t142), t144), t145), t149), t154), @quaternions_misc.induct_tac), t167), t168), t169), t170), t178), t182), t186), t187), t188), t189), t190), t198), t199), t204), t207), t208), t209), t214), t215), @tactics.conj_tac), t219), t220), t221), @list.List([@tactics.disj2_tac, @tactics.disj1_tac])), @tactics.gen_tac), t222), t223), @tactics.ap_term_tac), t224), t228), t233), t234), t235), t236)
+  orthogonal_transformation_as_quat_conjugation_c.set(@tactics.prove(@parser.parse_term("∀ f. orthogonal_transformation f\n       ==> (?q. norm q = &1 /\\\n                ((∀ x. f x = HIm(inv q * Hv x * q)) \\/\n                 (∀ x. f x = -- HIm(inv q * Hv x * q))))"), t237))
 }
 
 ///|

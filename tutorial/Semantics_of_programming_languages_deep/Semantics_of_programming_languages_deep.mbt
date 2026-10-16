@@ -160,7 +160,7 @@ pub fn sem_cases() -> @kernel.Thm {
 ///|
 /// sem_RULES, sem_INDUCT, sem_CASES
 fn step_11() -> Unit raise {
-  let (sem_rules, sem_induct, sem_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall x e s s'. s'(x) = value e s /\\ (forall y. ~(y = x) ==> s'(y) = s(y))\n               ==> sem (x := e) s s') /\\\n   (forall c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s'' ==> sem(c1 ;; c2) s s'') /\\\n   (forall e c1 c2 s s'. ~(value e s = 0) /\\ sem(c1) s s' ==> sem(If e c1 c2) s s') /\\\n   (forall e c1 c2 s s'. value e s = 0 /\\ sem(c2) s s' ==> sem(If e c1 c2) s s') /\\\n   (forall e c s. value e s = 0 ==> sem(While e c) s s) /\\\n   (forall e c s s' s''. ~(value e s = 0) /\\ sem(c) s s' /\\ sem(While e c) s' s''\n                   ==> sem(While e c) s s'')"))
+  let (sem_rules, sem_induct, sem_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ x e s s'. s'(x) = value e s /\\ (∀ y. ~(y = x) ==> s'(y) = s(y))\n               ==> sem (x := e) s s') /\\\n   (∀ c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s'' ==> sem(c1 ;; c2) s s'') /\\\n   (∀ e c1 c2 s s'. ~(value e s = 0) /\\ sem(c1) s s' ==> sem(If e c1 c2) s s') /\\\n   (∀ e c1 c2 s s'. value e s = 0 /\\ sem(c2) s s' ==> sem(If e c1 c2) s s') /\\\n   (∀ e c s. value e s = 0 ==> sem(While e c) s s) /\\\n   (∀ e c s s' s''. ~(value e s = 0) /\\ sem(c) s s' /\\ sem(While e c) s' s''\n                   ==> sem(While e c) s s'')"))
   sem_rules_c.set(sem_rules)
   sem_induct_c.set(sem_induct)
   sem_cases_c.set(sem_cases)
@@ -178,7 +178,7 @@ fn step_12() -> Unit raise {
   let t2 = @tactics.repeat_tac(@tactics.conj_tac)
   let t1 = @tactics.match_mp_tac(sem_induct())
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()])), t1), t2), t3), @tactics.disch_tac), t4), t6), t7), t8)
-  determinism_c.set(@tactics.prove(@parser.parse_term("forall c s s' s''. sem c s s' /\\ sem c s s'' ==> (s' = s'')"), t9))
+  determinism_c.set(@tactics.prove(@parser.parse_term("∀ c s s' s''. sem c s s' /\\ sem c s s'' ==> (s' = s'')"), t9))
 }
 
 ///|
@@ -193,7 +193,7 @@ pub fn determinism() -> @kernel.Thm {
 ///|
 /// wlp
 fn step_13() -> Unit raise {
-  wlp_c.set(@pair.new_definition(@parser.parse_term("wlp c q s <=> forall s'. sem c s s' ==> q s'")))
+  wlp_c.set(@pair.new_definition(@parser.parse_term("wlp c q s <=> ∀ s'. sem c s s' ==> q s'")))
 }
 
 ///|
@@ -240,7 +240,7 @@ pub fn wp() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), @sets.empty()])), t10)
-  wp_total_c.set(@tactics.prove(@parser.parse_term("forall c. (wp c EMPTY = EMPTY)"), t11))
+  wp_total_c.set(@tactics.prove(@parser.parse_term("∀ c. (wp c EMPTY = EMPTY)"), t11))
 }
 
 ///|
@@ -307,7 +307,7 @@ fn step_19() -> Unit raise {
   }, @list.List([sem_cases()]))
   let t16 = @tactics.repeat_tac(@tactics.gen_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([wp(), wlp(), terminates(), @class.fun_eq_thm(), @trivia.o_thm()])), t16), t24), t26), t27)
-  wp_seq_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 q. wp (c1 ;; c2) = wp c1 o wp c2"), t28))
+  wp_seq_c.set(@tactics.prove(@parser.parse_term("∀ c1 c2 q. wp (c1 ;; c2) = wp c1 o wp c2"), t28))
 }
 
 ///|
@@ -338,7 +338,7 @@ pub fn correct() -> @kernel.Thm {
 /// CORRECT_PRESTRENGTH
 fn step_21() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([correct(), @sets.subset_trans()]))
-  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q"), t29))
+  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("∀ p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q"), t29))
 }
 
 ///|
@@ -355,7 +355,7 @@ pub fn correct_prestrength() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t30 = @meson.meson_tac(@list.List([wp_monotonic(), @sets.subset_trans()]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct()])), t30)
-  correct_postweak_c.set(@tactics.prove(@parser.parse_term("forall p c q q'. correct p c q' /\\ q' SUBSET q ==> correct p c q"), t31))
+  correct_postweak_c.set(@tactics.prove(@parser.parse_term("∀ p c q q'. correct p c q' /\\ q' SUBSET q ==> correct p c q"), t31))
 }
 
 ///|
@@ -372,7 +372,7 @@ pub fn correct_postweak() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t32 = @meson.meson_tac(@list.List([wp_monotonic(), @sets.subset_trans()]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), wp_seq(), @trivia.o_thm()])), t32)
-  correct_seq_c.set(@tactics.prove(@parser.parse_term("forall p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 ;; c2) q"), t33))
+  correct_seq_c.set(@tactics.prove(@parser.parse_term("∀ p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 ;; c2) q"), t33))
 }
 
 ///|

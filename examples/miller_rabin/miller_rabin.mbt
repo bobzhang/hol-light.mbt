@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// miller_rabin_composite
 fn step_2() -> Unit raise {
-  miller_rabin_composite_c.set(@pair.new_definition(@parser.parse_term("miller_rabin_composite a n <=>\n        if EVEN n then ~(n = 2) else\n        let e = index 2 (n - 1) in\n        let k = (n - 1) DIV 2 EXP e in\n        ~(a EXP k == 1) (mod n) /\\\n        forall i. i < e ==> ~((a EXP (2 EXP i * k) == n - 1) (mod n))")))
+  miller_rabin_composite_c.set(@pair.new_definition(@parser.parse_term("miller_rabin_composite a n <=>\n        if EVEN n then ~(n = 2) else\n        let e = index 2 (n - 1) in\n        let k = (n - 1) DIV 2 EXP e in\n        ~(a EXP k == 1) (mod n) /\\\n        ∀ i. i < e ==> ~((a EXP (2 EXP i * k) == n - 1) (mod n))")))
 }
 
 ///|
@@ -48,7 +48,7 @@ fn step_4() -> Unit raise {
   let t2 = @class.asm_cases_tac(@parser.parse_term("n = 2"))
   let t1 = @tactics.repeat_tac(@tactics.gen_tac)
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([miller_rabin_composite(), miller_rabin_pseudoprime()])), t1), t2), t3), t4), t5), t6), t7)
-  not_miller_rabin_composite_c.set(@tactics.prove(@parser.parse_term("forall a n. ~(miller_rabin_composite a n) <=> miller_rabin_pseudoprime a n"), t8))
+  not_miller_rabin_composite_c.set(@tactics.prove(@parser.parse_term("∀ a n. ~(miller_rabin_composite a n) <=> miller_rabin_pseudoprime a n"), t8))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn not_miller_rabin_composite() -> @kernel.Thm {
 /// NOT_MILLER_RABIN_PSEUDOPRIME
 fn step_5() -> Unit raise {
   let t9 = @simp.rewrite_tac(@list.List([@equal.gsym(not_miller_rabin_composite())]))
-  not_miller_rabin_pseudoprime_c.set(@tactics.prove(@parser.parse_term("forall a n. ~(miller_rabin_pseudoprime a n) <=> miller_rabin_composite a n"), t9))
+  not_miller_rabin_pseudoprime_c.set(@tactics.prove(@parser.parse_term("∀ a n. ~(miller_rabin_pseudoprime a n) <=> miller_rabin_composite a n"), t9))
 }
 
 ///|
@@ -156,7 +156,7 @@ fn step_6() -> Unit raise {
     }
   }))
   let t69 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t16), t17), t18), t19), t20), @tactics.strip_tac), t68)
-  miller_rabin_imp_fermat_pseudoprime_explicit_c.set(@tactics.prove(@parser.parse_term("forall a q. miller_rabin_pseudoprime a q /\\ ~(q = 2)\n         ==> (a EXP (q - 1) == 1) (mod q)"), t69))
+  miller_rabin_imp_fermat_pseudoprime_explicit_c.set(@tactics.prove(@parser.parse_term("∀ a q. miller_rabin_pseudoprime a q /\\ ~(q = 2)\n         ==> (a EXP (q - 1) == 1) (mod q)"), t69))
 }
 
 ///|
@@ -245,7 +245,7 @@ fn step_7() -> Unit raise {
   let t71 = @meson.asm_meson_tac(@list.List([@arith.odd_exp(), @simp.rewrite_conv(@list.List([@calc_num.arith()]))(t70)]))
   let t74 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj_alt()]))(miller_rabin_imp_fermat_pseudoprime_explicit())), t71), t73])
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), @tactics.eq_tac), t74), @tactics.disj2_tac), @tactics.conj_tac), t75), t76), t77), @tactics.ants_tac), t92), t93), t94), t95), @tactics.strip_tac), @tactics.disj2_tac), t96), @tactics.conj_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t103), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t104), @tactics.conj_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t109), t110), t111), t118), t123), t124), t125), t126), t127)
-  miller_rabin_eq_fermat_pseudoprime_explicit_c.set(@tactics.prove(@parser.parse_term("forall a q. (?p k. prime p /\\ ODD p /\\ p EXP k = q)\n         ==> (miller_rabin_pseudoprime a q <=> (a EXP (q - 1) == 1) (mod q))"), t128))
+  miller_rabin_eq_fermat_pseudoprime_explicit_c.set(@tactics.prove(@parser.parse_term("∀ a q. (?p k. prime p /\\ ODD p /\\ p EXP k = q)\n         ==> (miller_rabin_pseudoprime a q <=> (a EXP (q - 1) == 1) (mod q))"), t128))
 }
 
 ///|
@@ -289,7 +289,7 @@ fn step_8() -> Unit raise {
       })(x138))
     })(x139)(x139)
   }), t140), t141), t146), t147)
-  prime_imp_miller_rabin_pseudoprime_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ coprime(a,p) ==> miller_rabin_pseudoprime a p"), t148))
+  prime_imp_miller_rabin_pseudoprime_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ coprime(a,p) ==> miller_rabin_pseudoprime a p"), t148))
 }
 
 ///|
@@ -305,7 +305,7 @@ pub fn prime_imp_miller_rabin_pseudoprime() -> @kernel.Thm {
 /// PRIME_IMP_MILLER_RABIN_PSEUDOPRIME_ALT
 fn step_9() -> Unit raise {
   let t149 = @meson.asm_meson_tac(@list.List([@prime.prime_coprime_eq(), @prime.coprime_sym(), prime_imp_miller_rabin_pseudoprime()]))
-  prime_imp_miller_rabin_pseudoprime_alt_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ ~(p divides a) ==> miller_rabin_pseudoprime a p"), t149))
+  prime_imp_miller_rabin_pseudoprime_alt_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ ~(p divides a) ==> miller_rabin_pseudoprime a p"), t149))
 }
 
 ///|
@@ -322,7 +322,7 @@ pub fn prime_imp_miller_rabin_pseudoprime_alt() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t150 = @meson.meson_tac(@list.List([prime_imp_miller_rabin_pseudoprime()]))
   let t151 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(not_miller_rabin_pseudoprime())])), t150)
-  miller_rabin_composite_imp_composite_c.set(@tactics.prove(@parser.parse_term("forall a p. coprime(a,p) /\\ miller_rabin_composite a p ==> ~(prime p)"), t151))
+  miller_rabin_composite_imp_composite_c.set(@tactics.prove(@parser.parse_term("∀ a p. coprime(a,p) /\\ miller_rabin_composite a p ==> ~(prime p)"), t151))
 }
 
 ///|
@@ -338,7 +338,7 @@ pub fn miller_rabin_composite_imp_composite() -> @kernel.Thm {
 /// MILLER_RABIN_COMPOSITE_IMP_COMPOSITE_ALT
 fn step_11() -> Unit raise {
   let t152 = @meson.asm_meson_tac(@list.List([@prime.prime_coprime_eq(), @prime.coprime_sym(), miller_rabin_composite_imp_composite()]))
-  miller_rabin_composite_imp_composite_alt_c.set(@tactics.prove(@parser.parse_term("forall a p. ~(p divides a) /\\ miller_rabin_composite a p ==> ~(prime p)"), t152))
+  miller_rabin_composite_imp_composite_alt_c.set(@tactics.prove(@parser.parse_term("∀ a p. ~(p divides a) /\\ miller_rabin_composite a p ==> ~(prime p)"), t152))
 }
 
 ///|
@@ -383,7 +383,7 @@ fn step_12() -> Unit raise {
   let t154 = @simp.asm_rewrite_tac(@list.List([]))
   let t153 = @class.asm_cases_tac(@parser.parse_term("p = 2"))
   let t176 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t153), t154), t155), t156), t157), t158), t164), t165), t171), t172), t173), t174), @tactics.strip_tac), t175), @int.asm_arith_tac)
-  miller_rabin_pseudoprime_imp_coprime_c.set(@tactics.prove(@parser.parse_term("forall a p. miller_rabin_pseudoprime a p ==> p = 2 \\/ coprime(a,p)"), t176))
+  miller_rabin_pseudoprime_imp_coprime_c.set(@tactics.prove(@parser.parse_term("∀ a p. miller_rabin_pseudoprime a p ==> p = 2 \\/ coprime(a,p)"), t176))
 }
 
 ///|
@@ -435,7 +435,7 @@ fn step_13() -> Unit raise {
     })(x183))
   }, @list.List([@pocklington.cong_sym()]))
   let t206 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.forall_and_thm(), @class.taut(@parser.parse_term("p ==> (q <=> r) <=> (p ==> q ==> r) /\\ (p ==> r ==> q)"))])), t184), t188), t189), t192), @tactics.disch_tac), t193), t194), t195), @tactics.conj_tac), t196), t197), t198), t199), @tactics.conj_tac), t203), t204), t205)
-  miller_rabin_pseudoprime_cong_c.set(@tactics.prove(@parser.parse_term("forall a b p.\n        (a == b) (mod p)\n        ==> (miller_rabin_pseudoprime a p <=> miller_rabin_pseudoprime b p)"), t206))
+  miller_rabin_pseudoprime_cong_c.set(@tactics.prove(@parser.parse_term("∀ a b p.\n        (a == b) (mod p)\n        ==> (miller_rabin_pseudoprime a p <=> miller_rabin_pseudoprime b p)"), t206))
 }
 
 ///|
@@ -453,7 +453,7 @@ fn step_14() -> Unit raise {
   let t208 = @simp.simp_tac(@list.List([]))
   let t207 = @tactics.conv_tac(@equal.top_depth_conv(@pair.let_conv))
   let t209 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([miller_rabin_pseudoprime(), @arith.exp_one(), @pocklington.cong_refl()])), t207), t208)
-  miller_rabin_pseudoprime_1_c.set(@tactics.prove(@parser.parse_term("forall p. ODD p ==> miller_rabin_pseudoprime 1 p"), t209))
+  miller_rabin_pseudoprime_1_c.set(@tactics.prove(@parser.parse_term("∀ p. ODD p ==> miller_rabin_pseudoprime 1 p"), t209))
 }
 
 ///|
@@ -471,7 +471,7 @@ fn step_15() -> Unit raise {
   let t211 = @simp.rewrite_tac(@list.List([@calc_num.arith()]))
   let t210 = @tactics.conv_tac(@equal.top_depth_conv(@pair.let_conv))
   let t212 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([miller_rabin_pseudoprime(), @pocklington.cong_mod_1()])), t210), t211)
-  miller_rabin_pseudoprime_mod_1_c.set(@tactics.prove(@parser.parse_term("forall a. miller_rabin_pseudoprime a 1"), t212))
+  miller_rabin_pseudoprime_mod_1_c.set(@tactics.prove(@parser.parse_term("∀ a. miller_rabin_pseudoprime a 1"), t212))
 }
 
 ///|
@@ -514,7 +514,7 @@ fn step_16() -> Unit raise {
   let t214 = @list.List([@simp.asm_rewrite_tac(@list.List([@pocklington.inverse_mod(), miller_rabin_pseudoprime(), @calc_num.arith()])), @tactics.all_tac])
   let t213 = @class.asm_cases_tac(@parser.parse_term("p = 0"))
   let t240 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t213), t214), t215), t216), t217), t218), t219), t220), t221), t222), t223), @tactics.conj_tac), t239)
-  miller_rabin_pseudoprime_inverse_mod_c.set(@tactics.prove(@parser.parse_term("forall a p. miller_rabin_pseudoprime a p\n         ==> miller_rabin_pseudoprime (inverse_mod p a) p"), t240))
+  miller_rabin_pseudoprime_inverse_mod_c.set(@tactics.prove(@parser.parse_term("∀ a p. miller_rabin_pseudoprime a p\n         ==> miller_rabin_pseudoprime (inverse_mod p a) p"), t240))
 }
 
 ///|
@@ -559,7 +559,7 @@ fn step_17() -> Unit raise {
   let t245 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@prime.coprime_0()])), @tactics.strip_tac), t242), t243), t244), @tactics.strip_tac])
   let t241 = @class.asm_cases_tac(@parser.parse_term("k = 0"))
   let t267 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t241), t245), t248), t249), t250), t253), @class.cond_cases_tac), t254), t255), t256), t257), t258), @tactics.strip_tac), t259), t260), @tactics.disj1_tac), t265), t266)
-  bound_power_residues_modulo_odd_coprime_c.set(@tactics.prove(@parser.parse_term("forall n a k.\n        ODD n /\\ coprime(k,n) /\\ coprime(n,a)\n        ==> CARD {x | x < n /\\ (x EXP k == a) (mod n)}\n            <= nproduct {p | prime p /\\ p divides n} (\\p. gcd(k,p - 1))"), t267))
+  bound_power_residues_modulo_odd_coprime_c.set(@tactics.prove(@parser.parse_term("∀ n a k.\n        ODD n /\\ coprime(k,n) /\\ coprime(n,a)\n        ==> CARD {x | x < n /\\ (x EXP k == a) (mod n)}\n            <= nproduct {p | prime p /\\ p divides n} (\\p. gcd(k,p - 1))"), t267))
 }
 
 ///|
@@ -615,7 +615,7 @@ fn step_18() -> Unit raise {
     let th = x465
     @tactics.then_tac(@tactics.conj_tac, @tactics.match_mp_tac(th))
   }), t467)])
-  let t464 = @tactics.subgoal_then(@parser.parse_term("forall z. coprime(n,z)\n          ==> CARD {a | a < n /\\ (a EXP (2 EXP v * t) == z) (mod n)} <=\n              nproduct {p | prime p /\\ p divides n}\n                       (\\p. 2 EXP v * gcd(t,p - 1))"), fn(x461 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t464 = @tactics.subgoal_then(@parser.parse_term("∀ z. coprime(n,z)\n          ==> CARD {a | a < n /\\ (a EXP (2 EXP v * t) == z) (mod n)} <=\n              nproduct {p | prime p /\\ p divides n}\n                       (\\p. 2 EXP v * gcd(t,p - 1))"), fn(x461 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s462 = @tactics.mp_tac(x461)
     fn(x463 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s462(x463)
@@ -679,7 +679,7 @@ fn step_18() -> Unit raise {
   })
   let t429 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("~(i <= n) /\\ i <= n + 1 <=> i = n + 1"))]))
   let t428 = @list.List([@simp.simp_tac(@list.List([@arith.add_clauses()])), @tactics.all_tac])
-  let t425 = @drule.match_mp(@meson.meson(@list.List([@prime.prime_2()]), @parser.parse_term("(forall p. prime p ==> P p) /\\ ~(forall p. prime p ==> Q p) /\\\n         (forall p. prime p ==> R p)\n         ==> (forall p. ~(p = 2) ==> (Q p <=> R p)) ==> P 2 /\\ ~Q 2 /\\ R 2")))
+  let t425 = @drule.match_mp(@meson.meson(@list.List([@prime.prime_2()]), @parser.parse_term("(∀ p. prime p ==> P p) /\\ ~(∀ p. prime p ==> Q p) /\\\n         (∀ p. prime p ==> R p)\n         ==> (∀ p. ~(p = 2) ==> (Q p <=> R p)) ==> P 2 /\\ ~Q 2 /\\ R 2")))
   let t427 = @tactics.disch_then(fn(x426 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x422 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s423 = @tactics.mp_tac(x422)
@@ -720,7 +720,7 @@ fn step_18() -> Unit raise {
     }
   }, @list.List([@equal.gsym(@class.contrapos_thm())]))
   let t397 = @simp.asm_rewrite_tac(@list.List([]))
-  let t394 = @drule.match_mp(@int.number_rule(@parser.parse_term("forall p:num. (a == b) (mod n)\n                ==> p divides n /\\ (a == 1) (mod p)\n                    ==> (b == 1) (mod p)")))
+  let t394 = @drule.match_mp(@int.number_rule(@parser.parse_term("∀ p:num. (a == b) (mod n)\n                ==> p divides n /\\ (a == 1) (mod p)\n                    ==> (b == 1) (mod p)")))
   let t391 = @parser.parse_term("p:num")
   let t396 = @tactics.first_assum(fn(x395 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x393 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -733,7 +733,7 @@ fn step_18() -> Unit raise {
     })(t394(x395))
   })
   let t387 = @simp.asm_rewrite_tac(@list.List([@pocklington.cong_minus1_squared()]))
-  let t384 = @drule.match_mp(@int.number_rule(@parser.parse_term("forall p:num. (a == b) (mod n)\n                ==> p divides n /\\ (b EXP 2 == 1) (mod n)\n                    ==> (a EXP 2 == 1) (mod p)")))
+  let t384 = @drule.match_mp(@int.number_rule(@parser.parse_term("∀ p:num. (a == b) (mod n)\n                ==> p divides n /\\ (b EXP 2 == 1) (mod n)\n                    ==> (a EXP 2 == 1) (mod p)")))
   let t381 = @parser.parse_term("p:num")
   let t386 = @tactics.first_assum(fn(x385 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x383 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -840,7 +840,7 @@ fn step_18() -> Unit raise {
   })
   let t310 = @meson.asm_meson_tac(@list.List([@prime.divides_2(), @arith.not_odd()]))
   let t309 = @simp.asm_simp_tac(@list.List([@prime.divides_prime_prime(), @prime.prime_2()]))
-  let t306 = @drule.match_mp(@int.number_rule(@parser.parse_term("forall p. (a == 1) (mod n) /\\ n divides (a + 1)\n            ==> p divides n ==> p divides 2")))
+  let t306 = @drule.match_mp(@int.number_rule(@parser.parse_term("∀ p. (a == 1) (mod n) /\\ n divides (a + 1)\n            ==> p divides n ==> p divides 2")))
   let t303 = @parser.parse_term("p:num")
   let t308 = @tactics.disch_then(fn(x307 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x305 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -854,7 +854,7 @@ fn step_18() -> Unit raise {
   })
   let t299 = @simp.asm_rewrite_tac(@list.List([@pocklington.cong_minus1()]))
   let t298 = @tactics.x_gen_tac(@parser.parse_term("a:num"))
-  let t297 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. ~(Q x /\\ R x))\n        ==> {x | P x /\\ Q x} INTER {x | P x /\\ R x} = {}")))
+  let t297 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(∀ x. ~(Q x /\\ R x))\n        ==> {x | P x /\\ Q x} INTER {x | P x /\\ R x} = {}")))
   let t296 = @simp.simp_tac(@list.List([@sets.finite_restrict(), @sets.finite_numseg_lt()]))
   let t316 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}"))])), t296), t297), t298), t299), t308), t309), t310), t315])
   let t290 = @drule.part_match(fn(x289 : @kernel.Term) -> @kernel.Term raise {
@@ -897,7 +897,7 @@ fn step_18() -> Unit raise {
   let t273 = @list.List([@tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@parser.parse_term("n = 2")), t269), t270), t272])
   let t268 = @tactics.disj_cases_tac(@bool.spec(@parser.parse_term("n:num"), @arith.even_or_odd()))
   let t509 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t268), t273), t274), t275), t276), t277), t278), t279), t283), t285), @tactics.conj_tac), t508)
-  miller_rabin_pseudoprime_bound_gen_c.set(@tactics.prove(@parser.parse_term("forall n s t v.\n        ~(prime n) /\\ 2 EXP s * t = n - 1 /\\ ODD t /\\\n        (?p. prime p /\\ p divides n /\\ ~(2 EXP (v + 2) divides (p - 1)))\n        ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n}\n            <= 2 * nproduct {p | prime p /\\ p divides n}\n                            (\\p. 2 EXP v * gcd(t,p - 1))"), t509))
+  miller_rabin_pseudoprime_bound_gen_c.set(@tactics.prove(@parser.parse_term("∀ n s t v.\n        ~(prime n) /\\ 2 EXP s * t = n - 1 /\\ ODD t /\\\n        (?p. prime p /\\ p divides n /\\ ~(2 EXP (v + 2) divides (p - 1)))\n        ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n}\n            <= 2 * nproduct {p | prime p /\\ p divides n}\n                            (\\p. 2 EXP v * gcd(t,p - 1))"), t509))
 }
 
 ///|
@@ -1076,7 +1076,7 @@ fn step_19() -> Unit raise {
   let t699 = @list.List([@sets.set_tac(@list.List([])), @tactics.all_tac])
   let t698 = @simp.rewrite_tac(@list.List([]))
   let t697 = @tactics.exists_tac(@parser.parse_term("\\p. 2 <= index p n \\/ 2 EXP (v + 2) divides p - 1"))
-  let t696 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall P. (forall p q. R p q ==> R q p) /\\\n          (forall p q. P p ==> R p q) /\\\n          (forall p q. ~P p /\\ ~P q ==> R p q)\n          ==> forall p q. R p q")))
+  let t696 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("∀ P. (∀ p q. R p q ==> R q p) /\\\n          (∀ p q. P p ==> R p q) /\\\n          (∀ p q. ~P p /\\ ~P q ==> R p q)\n          ==> ∀ p q. R p q")))
   let t695 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t830 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conv_tac(@equal.land_conv(@sets.has_size_conv)), t695), t696), t697), t698), @tactics.conj_tac), t699), @tactics.conj_tac), t701), t705), t709), t713), t715), t716), t717), t722), t829)
   let t692 = @simp.asm_rewrite_tac(@list.List([@prime.index_eq_0()]))
@@ -1290,7 +1290,7 @@ fn step_19() -> Unit raise {
   let t524 = @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), @prime.prime_factor()))
   let t533 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@meson.meson_tac(@list.List([@arith.exp(), @prime.divides_1()])), @tactics.all_tac])), t524), t525), t526), t527), t528), t529), t530), t531), t532])
   let t523 = @simp.rewrite_tac(@list.List([]))
-  let t522 = @tactics.mp_tac(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\v. forall p. prime p /\\ p divides n ==> 2 EXP v divides p - 1"), @arith.num_max())).0)
+  let t522 = @tactics.mp_tac(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\v. ∀ p. prime p /\\ p divides n ==> 2 EXP v divides p - 1"), @arith.num_max())).0)
   let t521 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("t:num"))(@tactics.strip_assume_tac))
   let t520 = @simp.rewrite_tac(@list.List([@prime.divides_2(), @arith.not_even()]))
   let t519 = @simp.asm_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("n - 1 = 0 <=> n = 0 \\/ n = 1")), @calc_num.arith_eq()]))
@@ -1305,7 +1305,7 @@ fn step_19() -> Unit raise {
     @tactics.then_tac(@class.asm_cases_tac(t), t512)
   }, @list.List([@parser.parse_term("n = 0"), t514, t513]))
   let t834 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@arith.gt()]))), t515), @tactics.strip_tac), t517), t518), t519), t520), t521), t522), t523), @tactics.ants_tac), t533), t534), @tactics.conj_tac), t547), t548), t558), t559), t560), @tactics.disch_tac), t564), t565), t566), t567), t571), t572), t576), t577), t581), t833)
-  miller_rabin_pseudoprime_bound_phi_c.set(@tactics.prove(@parser.parse_term("forall n. ODD n /\\ ~prime n /\\ n > 9\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= (phi n) DIV 4"), t834))
+  miller_rabin_pseudoprime_bound_phi_c.set(@tactics.prove(@parser.parse_term("∀ n. ODD n /\\ ~prime n /\\ n > 9\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= (phi n) DIV 4"), t834))
 }
 
 ///|
@@ -1323,7 +1323,7 @@ fn step_20() -> Unit raise {
   let t885 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t884 = @simp.rewrite_tac(@list.List([@int.cong_v1()]))
   let t883 = @tactics.conv_tac(@equal.top_depth_conv(@calc_num.expand_cases_conv))
-  let t882 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)"))]))
+  let t882 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(?x. P x /\\ Q x) <=> ~(∀ x. P x ==> ~Q x)"))]))
   let t881 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t880 = @tactics.conv_tac(@equal.top_depth_conv(@pair.let_conv))
   let t879 = @simp.simp_tac(@list.List([@prime.index_exp(), @prime.index_refl(), @prime.prime_2()]))
@@ -1366,7 +1366,7 @@ fn step_20() -> Unit raise {
   let t848 = @list.List([@meson.asm_meson_tac(@list.List([miller_rabin_pseudoprime_imp_coprime()])), t847])
   let t846 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
   let t845 = @tactics.match_mp_tac(@sets.card_psubset_imp())
-  let t844 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("{a | a < n /\\ miller_rabin_pseudoprime a n} PSUBSET\n      {a | coprime(a,n) /\\ a < n}\n      ==> ~(forall a. coprime (a,n) ==> miller_rabin_pseudoprime a n)")))
+  let t844 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("{a | a < n /\\ miller_rabin_pseudoprime a n} PSUBSET\n      {a | coprime(a,n) /\\ a < n}\n      ==> ~(∀ a. coprime (a,n) ==> miller_rabin_pseudoprime a n)")))
   let t856 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x843 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x843
   }, @list.List([@equal.gsym(@class.contrapos_thm())])), @tactics.disch_tac), t844), t845), t846), @tactics.conj_tac), t848), t849), t850), t851), t855])
@@ -1379,7 +1379,7 @@ fn step_20() -> Unit raise {
   let t836 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([prime_imp_miller_rabin_pseudoprime()]))])
   let t835 = @simp.asm_rewrite_tac(@list.List([miller_rabin_pseudoprime_mod_1()]))
   let t886 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("n = 1"))), t835), @tactics.eq_tac), t836), t837), t838), t839), t841), t842), t856), t857), @list.List([@tactics.all_tac, @int.asm_arith_tac])), t861), t863), t864), t865), t866), t867), t874), t875), t876), t877), t878), t879), t880), t881), t882), t883), t884), t885)
-  absolute_miller_rabin_pseudoprime_c.set(@tactics.prove(@parser.parse_term("forall n. (forall a. coprime(a,n) ==> miller_rabin_pseudoprime a n) <=>\n       n = 1 \\/ prime n"), t886))
+  absolute_miller_rabin_pseudoprime_c.set(@tactics.prove(@parser.parse_term("∀ n. (∀ a. coprime(a,n) ==> miller_rabin_pseudoprime a n) <=>\n       n = 1 \\/ prime n"), t886))
 }
 
 ///|
@@ -1399,7 +1399,7 @@ fn step_21() -> Unit raise {
   let t919 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t918 = @simp.rewrite_tac(@list.List([@int.cong_v1()]))
   let t917 = @tactics.conv_tac(@equal.top_depth_conv(@calc_num.expand_cases_conv))
-  let t916 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(?x. P x /\\ Q x) <=> ~(forall x. P x ==> ~Q x)"))]))
+  let t916 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(?x. P x /\\ Q x) <=> ~(∀ x. P x ==> ~Q x)"))]))
   let t915 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t914 = @tactics.conv_tac(@equal.top_depth_conv(@pair.let_conv))
   let t913 = @simp.simp_tac(@list.List([@prime.index_exp(), @prime.index_refl(), @prime.prime_2()]))
@@ -1409,7 +1409,7 @@ fn step_21() -> Unit raise {
   let t909 = @simp.rewrite_tac(@list.List([@sets.in_insert(), @sets.not_in_empty()]))
   let t908 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t907 = @simp.rewrite_tac(@list.List([@sets.forall_in_insert(), @sets.not_in_empty()]))
-  let t922 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall i. i IN s ==> R i) /\\ (forall i. R i ==> (P i <=> i IN s))\n      ==> {i | R i /\\ P i} = s"))), t907), t908), t909), t910), t911), t912), t913), t914), t915), t916), t917), t918), t919), t921])
+  let t922 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(∀ i. i IN s ==> R i) /\\ (∀ i. R i ==> (P i <=> i IN s))\n      ==> {i | R i /\\ P i} = s"))), t907), t908), t909), t910), t911), t912), t913), t914), t915), t916), t917), t918), t919), t921])
   let t906 = @tactics.subgoal_then(@parser.parse_term("{a | a < 9 /\\ miller_rabin_pseudoprime a 9} = {1,8}"), fn(x903 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s904 = @tactics.subst1_tac(x903)
     fn(x905 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1432,8 +1432,8 @@ fn step_21() -> Unit raise {
   let t902 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("n:num")), t889), t890), t892), @tactics.conj_tac), @list.List([@tactics.all_tac, @int.asm_arith_tac])), t894), t895), t896), t897), t901])
   let t888 = @simp.rewrite_tac(@list.List([]))
   let t887 = @tactics.exists_tac(@parser.parse_term("\\n. n < 10"))
-  let t923 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall Q. (forall n. ~Q n ==> P n) /\\ (forall n. Q n ==> P n)\n        ==> forall n. P n"))), t887), t888), @tactics.conj_tac), t902), t906), t922)
-  miller_rabin_pseudoprime_bound_lt_c.set(@tactics.prove(@parser.parse_term("forall n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> 4 * CARD {a | a < n /\\ miller_rabin_pseudoprime a n} < n"), t923))
+  let t923 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("∀ Q. (∀ n. ~Q n ==> P n) /\\ (∀ n. Q n ==> P n)\n        ==> ∀ n. P n"))), t887), t888), @tactics.conj_tac), t902), t906), t922)
+  miller_rabin_pseudoprime_bound_lt_c.set(@tactics.prove(@parser.parse_term("∀ n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> 4 * CARD {a | a < n /\\ miller_rabin_pseudoprime a n} < n"), t923))
 }
 
 ///|
@@ -1457,7 +1457,7 @@ fn step_22() -> Unit raise {
       }
     })(t927(x928))
   })), @int.arith_tac)
-  miller_rabin_pseudoprime_bound_c.set(@tactics.prove(@parser.parse_term("forall n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= n DIV 4"), t929))
+  miller_rabin_pseudoprime_bound_c.set(@tactics.prove(@parser.parse_term("∀ n. ODD n /\\ ~prime n /\\ ~(n = 1)\n       ==> CARD {a | a < n /\\ miller_rabin_pseudoprime a n} <= n DIV 4"), t929))
 }
 
 ///|

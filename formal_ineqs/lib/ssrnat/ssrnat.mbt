@@ -446,7 +446,7 @@ pub fn subn0() -> @kernel.Thm {
 /// subnn
 fn step_24() -> Unit raise {
   let t130 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n - n = 0"), t130))
+  subnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n - n = 0"), t130))
 }
 
 ///|
@@ -462,7 +462,7 @@ pub fn subnn() -> @kernel.Thm {
 /// subSS
 fn step_25() -> Unit raise {
   let t131 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subss_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m. SUC m - SUC n = m - n"), t131))
+  subss_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n m. SUC m - SUC n = m - n"), t131))
 }
 
 ///|
@@ -478,7 +478,7 @@ pub fn subss() -> @kernel.Thm {
 /// subn_add2l
 fn step_26() -> Unit raise {
   let t132 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (p + m) - (p + n) = m - n"), t132))
+  subn_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. (p + m) - (p + n) = m - n"), t132))
 }
 
 ///|
@@ -508,7 +508,7 @@ fn step_27() -> Unit raise {
   let t134 = @ssreflect.move_(@list.List(["n"]))
   let t133 = @ssreflect.move_(@list.List(["m"]))
   let t150 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t133), t134), t149])
-  subn_add2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (m + p) - (n + p) = m - n"), t150))
+  subn_add2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. (m + p) - (n + p) = m - n"), t150))
 }
 
 ///|
@@ -541,7 +541,7 @@ fn step_28() -> Unit raise {
   })
   let t171 = @tactics.then_tac(@tactics.then_tac((x158 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x157 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t156, x157), x158), (x164 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_add2l", @list.List([subn_add2l()])), t163, x164)), (x170 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn0", @list.List([subn0()])), t169, x170))
   let t172 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t171), @ssreflect.done_tac)])
-  addkn_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("forall x. (n + x) - n = x"), t172))
+  addkn_c.set(@sections.section_proof(@list.List(["n"]), @parser.parse_term("∀ x. (n + x) - n = x"), t172))
 }
 
 ///|
@@ -577,7 +577,7 @@ fn step_29() -> Unit raise {
   })), (x192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addKn", @list.List([addkn()])), t191, x192))
   let t173 = @ssreflect.move_(@list.List(["m"]))
   let t194 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t173), t193), @ssreflect.done_tac)])
-  addnk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n x. (x + n) - n = x"), t194))
+  addnk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n x. (x + n) - n = x"), t194))
 }
 
 ///|
@@ -648,7 +648,7 @@ fn step_32() -> Unit raise {
   let t211 = @ssreflect.move_(@list.List(["p"]))
   let t210 = @ssreflect.move_(@list.List(["n"]))
   let t225 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t210), t211), t224), @ssreflect.done_tac)])
-  subnac_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m - n) - p = (m - p) - n"), t225))
+  subnac_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. (m - n) - p = (m - p) - n"), t225))
 }
 
 ///|
@@ -676,7 +676,7 @@ fn step_33() -> Unit raise {
   let t239 = @tactics.then_tac((x232 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subn_sub", @list.List([subn_sub()])), t231, x232), (x238 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn1", @list.List([addn1()])), t237, x238))
   let t226 = @ssreflect.move_(@list.List(["n"]))
   let t240 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t226), t239), @ssreflect.done_tac)])
-  predn_sub_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m - n) - 1 = m - SUC n"), t240))
+  predn_sub_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m - n) - 1 = m - SUC n"), t240))
 }
 
 ///|
@@ -702,7 +702,7 @@ fn step_34() -> Unit raise {
     }
   })
   let t253 = @list.List([@tactics.then_tac(@tactics.then_tac((x246 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("predn_sub", @list.List([predn_sub()])), t245, x246), (x252 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subSS", @list.List([subss()])), t251, x252)), @ssreflect.done_tac)])
-  predn_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (SUC m - n) - 1 = m - n"), t253))
+  predn_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (SUC m - n) - 1 = m - n"), t253))
 }
 
 ///|
@@ -718,7 +718,7 @@ pub fn predn_subs() -> @kernel.Thm {
 /// ltnS
 fn step_35() -> Unit raise {
   let t254 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltns_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m < SUC n) = (m <= n)"), t254))
+  ltns_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m < SUC n) = (m <= n)"), t254))
 }
 
 ///|
@@ -734,7 +734,7 @@ pub fn ltns() -> @kernel.Thm {
 /// leq0n
 fn step_36() -> Unit raise {
   let t255 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 <= n"), t255))
+  leq0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. 0 <= n"), t255))
 }
 
 ///|
@@ -750,7 +750,7 @@ pub fn leq0n() -> @kernel.Thm {
 /// ltn0Sn
 fn step_37() -> Unit raise {
   let t256 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn0sn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 < SUC n"), t256))
+  ltn0sn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. 0 < SUC n"), t256))
 }
 
 ///|
@@ -766,7 +766,7 @@ pub fn ltn0sn() -> @kernel.Thm {
 /// ltn0
 fn step_38() -> Unit raise {
   let t257 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n < 0 <=> F"), t257))
+  ltn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n < 0 <=> F"), t257))
 }
 
 ///|
@@ -782,7 +782,7 @@ pub fn ltn0() -> @kernel.Thm {
 /// leqnn
 fn step_39() -> Unit raise {
   let t258 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n <= n"), t258))
+  leqnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n <= n"), t258))
 }
 
 ///|
@@ -798,7 +798,7 @@ pub fn leqnn() -> @kernel.Thm {
 /// ltnSn
 fn step_40() -> Unit raise {
   let t259 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltnsn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n < SUC n"), t259))
+  ltnsn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n < SUC n"), t259))
 }
 
 ///|
@@ -830,7 +830,7 @@ fn step_41() -> Unit raise {
   }))
   let t260 = @ssreflect.move_(@list.List(["n"]))
   let t275 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t260), t268), (x274 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t273, x274)), @ssreflect.done_tac)])
-  eq_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m = n ==> m <= n"), t275))
+  eq_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m = n ==> m <= n"), t275))
 }
 
 ///|
@@ -846,7 +846,7 @@ pub fn eq_leq() -> @kernel.Thm {
 /// leqnSn
 fn step_42() -> Unit raise {
   let t276 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqnsn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n <= SUC n"), t276))
+  leqnsn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n <= SUC n"), t276))
 }
 
 ///|
@@ -862,7 +862,7 @@ pub fn leqnsn() -> @kernel.Thm {
 /// leq_pred
 fn step_43() -> Unit raise {
   let t277 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_pred_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n - 1 <= n"), t277))
+  leq_pred_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n - 1 <= n"), t277))
 }
 
 ///|
@@ -878,7 +878,7 @@ pub fn leq_pred() -> @kernel.Thm {
 /// leqSpred
 fn step_44() -> Unit raise {
   let t278 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqspred_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n <= SUC (n - 1)"), t278))
+  leqspred_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n <= SUC (n - 1)"), t278))
 }
 
 ///|
@@ -894,7 +894,7 @@ pub fn leqspred() -> @kernel.Thm {
 /// ltn_predK
 fn step_45() -> Unit raise {
   let t279 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn_predk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m < n ==> SUC (n - 1) = n"), t279))
+  ltn_predk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m < n ==> SUC (n - 1) = n"), t279))
 }
 
 ///|
@@ -924,7 +924,7 @@ fn step_46() -> Unit raise {
   })((x291 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x291)), @ssreflect.exact_tac)
   let t280 = @ssreflect.move_(@list.List(["H"]))
   let t293 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t280), t292)])
-  prednk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 < n ==> SUC (n - 1) = n"), t293))
+  prednk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. 0 < n ==> SUC (n - 1) = n"), t293))
 }
 
 ///|
@@ -940,7 +940,7 @@ pub fn prednk() -> @kernel.Thm {
 /// leqNgt
 fn step_47() -> Unit raise {
   let t294 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqngt_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m <= n) <=> ~(n < m)"), t294))
+  leqngt_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m <= n) <=> ~(n < m)"), t294))
 }
 
 ///|
@@ -962,7 +962,7 @@ fn step_48() -> Unit raise {
   })
   let t295 = @ssreflect.move_(@list.List(["n"]))
   let t302 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t295), (x301 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), t300, x301)), @ssreflect.done_tac)])
-  ltnnge_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m < n) = ~(n <= m)"), t302))
+  ltnnge_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m < n) = ~(n <= m)"), t302))
 }
 
 ///|
@@ -989,7 +989,7 @@ fn step_49() -> Unit raise {
   })
   let t315 = @tactics.then_tac((x308 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t307, x308), (x314 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t313, x314))
   let t316 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t315), @ssreflect.done_tac)])
-  ltnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. n < n <=> F"), t316))
+  ltnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. n < n <=> F"), t316))
 }
 
 ///|
@@ -1005,7 +1005,7 @@ pub fn ltnn() -> @kernel.Thm {
 /// leqn0
 fn step_50() -> Unit raise {
   let t317 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (n <= 0) = (n = 0)"), t317))
+  leqn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. (n <= 0) = (n = 0)"), t317))
 }
 
 ///|
@@ -1021,7 +1021,7 @@ pub fn leqn0() -> @kernel.Thm {
 /// lt0n
 fn step_51() -> Unit raise {
   let t318 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  lt0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (0 < n) = ~(n = 0)"), t318))
+  lt0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. (0 < n) = ~(n = 0)"), t318))
 }
 
 ///|
@@ -1037,7 +1037,7 @@ pub fn lt0n() -> @kernel.Thm {
 /// lt0n_neq0
 fn step_52() -> Unit raise {
   let t319 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  lt0n_neq0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. 0 < n ==> ~(n = 0)"), t319))
+  lt0n_neq0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. 0 < n ==> ~(n = 0)"), t319))
 }
 
 ///|
@@ -1053,7 +1053,7 @@ pub fn lt0n_neq0() -> @kernel.Thm {
 /// eqn0Ngt
 fn step_53() -> Unit raise {
   let t320 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqn0ngt_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (n = 0) = ~(0 < n)"), t320))
+  eqn0ngt_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. (n = 0) = ~(0 < n)"), t320))
 }
 
 ///|
@@ -1069,7 +1069,7 @@ pub fn eqn0ngt() -> @kernel.Thm {
 /// neq0_lt0n
 fn step_54() -> Unit raise {
   let t321 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  neq0_lt0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. (n = 0) = F ==> 0 < n"), t321))
+  neq0_lt0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. (n = 0) = F ==> 0 < n"), t321))
 }
 
 ///|
@@ -1085,7 +1085,7 @@ pub fn neq0_lt0n() -> @kernel.Thm {
 /// eqn_leq
 fn step_55() -> Unit raise {
   let t322 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  eqn_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m = n) = (m <= n /\\ n <= m)"), t322))
+  eqn_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m = n) = (m <= n /\\ n <= m)"), t322))
 }
 
 ///|
@@ -1107,7 +1107,7 @@ fn step_56() -> Unit raise {
   })
   let t323 = @ssreflect.move_(@list.List(["n"]))
   let t331 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t323), (x330 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), (x329 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t328, x329), x330)), @ssreflect.done_tac)])
-  anti_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n /\\ n <= m ==> m = n"), t331))
+  anti_leq_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n /\\ n <= m ==> m = n"), t331))
 }
 
 ///|
@@ -1146,7 +1146,7 @@ fn step_57() -> Unit raise {
   let t359 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x338 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_leq", @list.List([eqn_leq()])), t337, x338), (x344 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_and", @list.List([@ssrbool.negb_and()])), t343, x344)), (x350 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("orbC", @list.List([@ssrbool.orbc()])), t349, x350)), t358), @ssreflect.done_tac)
   let t332 = @ssreflect.move_(@list.List(["n"]))
   let t360 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t332), t359])
-  neq_ltn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. ~(m = n) <=> (m < n) \\/ (n < m)"), t360))
+  neq_ltn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. ~(m = n) <=> (m < n) \\/ (n < m)"), t360))
 }
 
 ///|
@@ -1178,7 +1178,7 @@ pub fn leq_eqvlt() -> @kernel.Thm {
 /// eq_sym
 fn step_59() -> Unit raise {
   let t364 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x363 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("EQ_SYM_EQ", @list.List([@theorems.eq_sym_eq()])), (x362 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x362), x363), @ssreflect.clear_assumption("EQ_SYM_EQ")), @tactics.beta_tac), @ssreflect.done_tac)])
-  eq_sym_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall x y:A. x = y <=> y = x"), t364))
+  eq_sym_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ x y:A. x = y <=> y = x"), t364))
 }
 
 ///|
@@ -1222,7 +1222,7 @@ fn step_60() -> Unit raise {
   let t398 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x371 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltnNge", @list.List([ltnnge()])), t370, x371), (x377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_eqVlt", @list.List([leq_eqvlt()])), t376, x377)), (x383 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_or", @list.List([@ssrbool.negb_or()])), t382, x383)), (x390 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqNgt", @list.List([leqngt()])), (x389 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t388, x389), x390)), (x397 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eq_sym", @list.List([eq_sym()])), t396, x397)), @ssreflect.done_tac)
   let t365 = @ssreflect.move_(@list.List(["n"]))
   let t399 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t365), t398])
-  ltn_neqale_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m < n) <=> ~(m = n) /\\ (m <= n)"), t399))
+  ltn_neqale_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m < n) <=> ~(m = n) /\\ (m <= n)"), t399))
 }
 
 ///|
@@ -1238,7 +1238,7 @@ pub fn ltn_neqale() -> @kernel.Thm {
 /// leq_trans
 fn step_61() -> Unit raise {
   let t400 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m p. m <= n ==> n <= p ==> m <= p"), t400))
+  leq_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n m p. m <= n ==> n <= p ==> m <= p"), t400))
 }
 
 ///|
@@ -1254,7 +1254,7 @@ pub fn leq_trans() -> @kernel.Thm {
 /// ltE
 fn step_62() -> Unit raise {
   let t401 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  lte_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m. n < m <=> SUC n <= m"), t401))
+  lte_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n m. n < m <=> SUC n <= m"), t401))
 }
 
 ///|
@@ -1270,7 +1270,7 @@ pub fn lte() -> @kernel.Thm {
 /// leqSS
 fn step_63() -> Unit raise {
   let t402 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqss_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m. SUC n <= SUC m <=> n <= m"), t402))
+  leqss_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n m. SUC n <= SUC m <=> n <= m"), t402))
 }
 
 ///|
@@ -1306,7 +1306,7 @@ fn step_64() -> Unit raise {
   let t404 = @ssreflect.move_(@list.List(["p"]))
   let t403 = @ssreflect.move_(@list.List(["m"]))
   let t425 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t403), t404), t405), t424])
-  leq_ltn_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m p. m <= n ==> n < p ==> m < p"), t425))
+  leq_ltn_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n m p. m <= n ==> n < p ==> m < p"), t425))
 }
 
 ///|
@@ -1355,7 +1355,7 @@ fn step_66() -> Unit raise {
   })
   let t427 = @ssreflect.move_(@list.List(["n"]))
   let t446 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t427), (x433 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("ltE", @list.List([lte()])), t432, x433)), t439), (x445 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnSn", @list.List([leqnsn()])), t444, x445)), @ssreflect.done_tac)])
-  ltnw_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m < n ==> m <= n"), t446))
+  ltnw_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m < n ==> m <= n"), t446))
 }
 
 ///|
@@ -1390,7 +1390,7 @@ fn step_67() -> Unit raise {
   let t448 = @ssreflect.move_(@list.List(["le_mn"]))
   let t447 = @ssreflect.move_(@list.List(["n"]))
   let t468 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t447), t448), t454), t467), @ssreflect.done_tac)])
-  leqw_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> m <= SUC n"), t468))
+  leqw_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n ==> m <= SUC n"), t468))
 }
 
 ///|
@@ -1435,7 +1435,7 @@ fn step_68() -> Unit raise {
   let t470 = @ssreflect.move_(@list.List(["p"]))
   let t469 = @ssreflect.move_(@list.List(["m"]))
   let t500 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t469), t470), t471), t499, t498])
-  ltn_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n m p. m < n ==> n < p ==> m < p"), t500))
+  ltn_trans_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n m p. m < n ==> n < p ==> m < p"), t500))
 }
 
 ///|
@@ -1451,7 +1451,7 @@ pub fn ltn_trans() -> @kernel.Thm {
 /// geqE
 fn step_69() -> Unit raise {
   let t501 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  geqe_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m >= n <=> n <= m"), t501))
+  geqe_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m >= n <=> n <= m"), t501))
 }
 
 ///|
@@ -1574,7 +1574,7 @@ pub fn ltngtp() -> @kernel.Thm {
 /// leq_add2l
 fn step_76() -> Unit raise {
   let t525 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leq_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (p + m <= p + n) = (m <= n)"), t525))
+  leq_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. (p + m <= p + n) = (m <= n)"), t525))
 }
 
 ///|
@@ -1608,7 +1608,7 @@ fn step_77() -> Unit raise {
   let t527 = @ssreflect.move_(@list.List(["n"]))
   let t526 = @ssreflect.move_(@list.List(["m"]))
   let t548 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t526), t527), t547])
-  ltn_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (p + m < p + n) = (m < n)"), t548))
+  ltn_add2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. (p + m < p + n) = (m < n)"), t548))
 }
 
 ///|
@@ -1677,7 +1677,7 @@ fn step_79() -> Unit raise {
   let t572 = @ssreflect.move_(@list.List(["n"]))
   let t571 = @ssreflect.move_(@list.List(["m"]))
   let t593 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t571), t572), t592])
-  ltn_add2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. (m + p < n + p) = (m < n)"), t593))
+  ltn_add2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. (m + p < n + p) = (m < n)"), t593))
 }
 
 ///|
@@ -1725,7 +1725,7 @@ fn step_80() -> Unit raise {
   let t595 = @ssreflect.move_(@list.List(["n1"]))
   let t594 = @ssreflect.move_(@list.List(["m2"]))
   let t626 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t594), t595), t596), t597), t598), t625])
-  leq_add_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n1 n2. m1 <= n1 ==> m2 <= n2 ==> m1 + m2 <= n1 + n2"), t626))
+  leq_add_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 n1 n2. m1 <= n1 ==> m2 <= n2 ==> m1 + m2 <= n1 + n2"), t626))
 }
 
 ///|
@@ -1759,7 +1759,7 @@ fn step_81() -> Unit raise {
   let t648 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x635 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x634 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t633, x634), x635), (x641 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_add2l", @list.List([leq_add2l()])), t640, x641)), (x647 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq0n", @list.List([leq0n()])), t646, x647)), @ssreflect.done_tac)
   let t627 = @ssreflect.move_(@list.List(["n"]))
   let t649 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t627), t648])
-  leq_addr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n <= n + m"), t649))
+  leq_addr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. n <= n + m"), t649))
 }
 
 ///|
@@ -1785,7 +1785,7 @@ fn step_82() -> Unit raise {
     }
   })
   let t662 = @list.List([@tactics.then_tac(@tactics.then_tac((x655 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t654, x655), (x661 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_addr", @list.List([leq_addr()])), t660, x661)), @ssreflect.done_tac)])
-  leq_addl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n <= m + n"), t662))
+  leq_addl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. n <= m + n"), t662))
 }
 
 ///|
@@ -1847,7 +1847,7 @@ pub fn ltn_addr() -> @kernel.Thm {
 /// ltn_addl
 fn step_84() -> Unit raise {
   let t693 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  ltn_addl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. m < n ==> m < p + n"), t693))
+  ltn_addl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. m < n ==> m < p + n"), t693))
 }
 
 ///|
@@ -1880,7 +1880,7 @@ fn step_85() -> Unit raise {
   let t714 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x700 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("lt0n", @list.List([lt0n()])), t699, x700)), (x707 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negb_and", @list.List([@ssrbool.negb_and()])), (x706 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t705, x706), x707)), (x713 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn_eq0", @list.List([addn_eq0()])), t712, x713)), @ssreflect.done_tac)
   let t694 = @ssreflect.move_(@list.List(["n"]))
   let t715 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t694), t714])
-  addn_gt0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (0 < m + n) <=> (0 < m) \\/ (0 < n)"), t715))
+  addn_gt0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (0 < m + n) <=> (0 < m) \\/ (0 < n)"), t715))
 }
 
 ///|
@@ -1912,7 +1912,7 @@ pub fn subn_gt0() -> @kernel.Thm {
 /// subn_eq0
 fn step_87() -> Unit raise {
   let t717 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subn_eq0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (m - n = 0) = (m <= n)"), t717))
+  subn_eq0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (m - n = 0) = (m <= n)"), t717))
 }
 
 ///|
@@ -1928,7 +1928,7 @@ pub fn subn_eq0() -> @kernel.Thm {
 /// leqE
 fn step_88() -> Unit raise {
   let t718 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  leqe_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n <=> m - n = 0"), t718))
+  leqe_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n <=> m - n = 0"), t718))
 }
 
 ///|
@@ -1962,7 +1962,7 @@ fn step_89() -> Unit raise {
   let t720 = @ssreflect.move_(@list.List(["p"]))
   let t719 = @ssreflect.move_(@list.List(["n"]))
   let t742 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t719), t720), t741])
-  leq_sub_add_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m - n <= p) = (m <= n + p)"), t742))
+  leq_sub_add_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. (m - n <= p) = (m <= n + p)"), t742))
 }
 
 ///|
@@ -1988,7 +1988,7 @@ fn step_90() -> Unit raise {
     }
   })
   let t755 = @list.List([@tactics.then_tac(@tactics.then_tac((x748 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_sub_add", @list.List([leq_sub_add()])), t747, x748), (x754 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leq_addl", @list.List([leq_addl()])), t753, x754)), @ssreflect.done_tac)])
-  leq_subr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n - m <= n"), t755))
+  leq_subr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. n - m <= n"), t755))
 }
 
 ///|
@@ -2004,7 +2004,7 @@ pub fn leq_subr() -> @kernel.Thm {
 /// subnKC
 fn step_91() -> Unit raise {
   let t756 = @list.List([@tactics.then_tac(@ssreflect.arith_tac, @ssreflect.done_tac)])
-  subnkc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> m + (n - m) = n"), t756))
+  subnkc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n ==> m + (n - m) = n"), t756))
 }
 
 ///|
@@ -2026,7 +2026,7 @@ fn step_92() -> Unit raise {
     }
   })
   let t766 = @list.List([@tactics.then_tac(@tactics.then_tac((x762 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addnC", @list.List([addnc()])), t761, x762), t765), @ssreflect.done_tac)])
-  subnk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> (n - m) + m = n"), t766))
+  subnk_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n ==> (n - m) + m = n"), t766))
 }
 
 ///|
@@ -2070,7 +2070,7 @@ fn step_93() -> Unit raise {
   let t768 = @ssreflect.move_(@list.List(["p"]))
   let t767 = @ssreflect.move_(@list.List(["n"]))
   let t798 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t767), t768), t769), t797])
-  addn_suba_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. p <= n ==> m + (n - p) = (m + n) - p"), t798))
+  addn_suba_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. p <= n ==> m + (n - p) = (m + n) - p"), t798))
 }
 
 ///|
@@ -2109,7 +2109,7 @@ fn step_94() -> Unit raise {
   let t800 = @ssreflect.move_(@list.List(["p"]))
   let t799 = @ssreflect.move_(@list.List(["n"]))
   let t824 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t799), t800), t801), t823])
-  subn_suba_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. p <= n ==> m - (n - p) = (m + p) - n"), t824))
+  subn_suba_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. p <= n ==> m - (n - p) = (m + p) - n"), t824))
 }
 
 ///|
@@ -2159,7 +2159,7 @@ fn step_95() -> Unit raise {
   }), @tactics.beta_tac), t848), (x854 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addKn", @list.List([addkn()])), t853, x854)), @ssreflect.done_tac)
   let t825 = @ssreflect.move_(@list.List(["n"]))
   let t856 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t825), t855])
-  subkn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> n - (n - m) = m"), t856))
+  subkn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n ==> n - (n - m) = m"), t856))
 }
 
 ///|
@@ -2220,7 +2220,7 @@ fn step_96() -> Unit raise {
   let t899 = @tactics.then_tac((x864 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add1n", @list.List([add1n()])), (x863 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t862, x863), x864), t891)
   let t857 = @ssreflect.move_(@list.List(["n"]))
   let t900 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t857), t899, t898])
-  leq_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> SUC n - m = SUC (n - m)"), t900))
+  leq_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n ==> SUC n - m = SUC (n - m)"), t900))
 }
 
 ///|
@@ -2256,7 +2256,7 @@ fn step_97() -> Unit raise {
   let t902 = @ssreflect.move_(@list.List(["lt_mn"]))
   let t901 = @ssreflect.move_(@list.List(["n"]))
   let t926 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t901), t902), t925), @ssreflect.done_tac)])
-  ltn_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m < n ==> n - m = SUC (n - SUC m)"), t926))
+  ltn_subs_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m < n ==> n - m = SUC (n - SUC m)"), t926))
 }
 
 ///|
@@ -2305,7 +2305,7 @@ fn step_98() -> Unit raise {
   let t928 = @ssreflect.move_(@list.List(["n"]))
   let t927 = @ssreflect.move_(@list.List(["m"]))
   let t964 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t927), t928), t929), t963])
-  leq_sub2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. m <= n ==> m - p <= n - p"), t964))
+  leq_sub2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. m <= n ==> m - p <= n - p"), t964))
 }
 
 ///|
@@ -2363,7 +2363,7 @@ fn step_99() -> Unit raise {
   let t966 = @ssreflect.move_(@list.List(["n"]))
   let t965 = @ssreflect.move_(@list.List(["m"]))
   let t1010 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t965), t966), t989), t1009])
-  leq_sub2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. m <= n ==> p - n <= p - m"), t1010))
+  leq_sub2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. m <= n ==> p - n <= p - m"), t1010))
 }
 
 ///|
@@ -2420,7 +2420,7 @@ fn step_100() -> Unit raise {
   let t1012 = @ssreflect.move_(@list.List(["n1"]))
   let t1011 = @ssreflect.move_(@list.List(["m2"]))
   let t1050 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1011), t1012), t1013), t1049])
-  leq_sub2_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n1 n2. m1 <= m2 ==> n2 <= n1 ==> m1 - n1 <= m2 - n2"), t1050))
+  leq_sub2_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 n1 n2. m1 <= m2 ==> n2 <= n1 ==> m1 - n1 <= m2 - n2"), t1050))
 }
 
 ///|
@@ -2495,7 +2495,7 @@ fn step_101() -> Unit raise {
   let t1052 = @ssreflect.move_(@list.List(["n"]))
   let t1051 = @ssreflect.move_(@list.List(["m"]))
   let t1106 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t1051), t1052), t1105, t1104])
-  ltn_sub2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. p < n ==> m < n ==> m - p < n - p"), t1106))
+  ltn_sub2r_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. p < n ==> m < n ==> m - p < n - p"), t1106))
 }
 
 ///|
@@ -2562,7 +2562,7 @@ fn step_102() -> Unit raise {
   let t1108 = @ssreflect.move_(@list.List(["n"]))
   let t1107 = @ssreflect.move_(@list.List(["m"]))
   let t1155 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["p"]))), t1107), t1108), t1154, t1153])
-  ltn_sub2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall p m n. m < p ==> m < n ==> p - n < p - m"), t1155))
+  ltn_sub2l_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ p m n. m < p ==> m < n ==> p - n < p - m"), t1155))
 }
 
 ///|
@@ -2591,7 +2591,7 @@ fn step_103() -> Unit raise {
   let t1157 = @ssreflect.move_(@list.List(["p"]))
   let t1156 = @ssreflect.move_(@list.List(["n"]))
   let t1171 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1156), t1157), t1170])
-  ltn_add_sub_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m + n < p) = (n < p - m)"), t1171))
+  ltn_add_sub_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. (m + n < p) = (n < p - m)"), t1171))
 }
 
 ///|
@@ -2642,7 +2642,7 @@ fn step_106() -> Unit raise {
     }
   })
   let t1178 = @list.List([@tactics.then_tac(@tactics.then_tac((x1177 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1176, x1177), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  max0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. maxn 0 n = n"), t1178))
+  max0n_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. maxn 0 n = n"), t1178))
 }
 
 ///|
@@ -2663,7 +2663,7 @@ fn step_107() -> Unit raise {
     }
   })
   let t1185 = @list.List([@tactics.then_tac(@tactics.then_tac((x1184 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1183, x1184), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. maxn n 0 = n"), t1185))
+  maxn0_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. maxn n 0 = n"), t1185))
 }
 
 ///|
@@ -2684,7 +2684,7 @@ fn step_108() -> Unit raise {
     }
   })
   let t1192 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x1191 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1190, x1191)), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxnc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. maxn m n = maxn n m"), t1192))
+  maxnc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. maxn m n = maxn n m"), t1192))
 }
 
 ///|
@@ -2705,7 +2705,7 @@ fn step_109() -> Unit raise {
     }
   })
   let t1199 = @list.List([@tactics.then_tac(@tactics.then_tac((x1198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1197, x1198), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxnl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. n <= m ==> maxn m n = m"), t1199))
+  maxnl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. n <= m ==> maxn m n = m"), t1199))
 }
 
 ///|
@@ -2726,7 +2726,7 @@ fn step_110() -> Unit raise {
     }
   })
   let t1206 = @list.List([@tactics.then_tac(@tactics.then_tac((x1205 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1204, x1205), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  maxnr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m <= n ==> maxn m n = n"), t1206))
+  maxnr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m <= n ==> maxn m n = n"), t1206))
 }
 
 ///|
@@ -2747,7 +2747,7 @@ fn step_111() -> Unit raise {
     }
   })
   let t1213 = @list.List([@tactics.then_tac(@tactics.then_tac((x1212 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxn", @list.List([maxn()])), t1211, x1212), @ssreflect.arith_tac), @ssreflect.done_tac)])
-  add_sub_maxn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m + (n - m) = maxn m n"), t1213))
+  add_sub_maxn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m + (n - m) = maxn m n"), t1213))
 }
 
 ///|
@@ -2794,7 +2794,7 @@ fn step_112() -> Unit raise {
   let t1215 = @ssreflect.move_(@list.List(["p"]))
   let t1214 = @ssreflect.move_(@list.List(["n"]))
   let t1253 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1214), t1215), t1252])
-  maxnac_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. maxn (maxn m n) p = maxn (maxn m p) n"), t1253))
+  maxnac_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. maxn (maxn m n) p = maxn (maxn m p) n"), t1253))
 }
 
 ///|
@@ -2824,7 +2824,7 @@ fn step_113() -> Unit raise {
   let t1255 = @ssreflect.move_(@list.List(["p"]))
   let t1254 = @ssreflect.move_(@list.List(["n"]))
   let t1270 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1254), t1255), t1269])
-  maxna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. maxn m (maxn n p) = maxn (maxn m n) p"), t1270))
+  maxna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. maxn m (maxn n p) = maxn (maxn m n) p"), t1270))
 }
 
 ///|
@@ -2854,7 +2854,7 @@ fn step_114() -> Unit raise {
   let t1272 = @ssreflect.move_(@list.List(["p"]))
   let t1271 = @ssreflect.move_(@list.List(["n"]))
   let t1287 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1271), t1272), t1286), @ssreflect.done_tac)])
-  maxnca_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. maxn m (maxn n p) = maxn n (maxn m p)"), t1287))
+  maxnca_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. maxn m (maxn n p) = maxn n (maxn m p)"), t1287))
 }
 
 ///|
@@ -2898,7 +2898,7 @@ fn step_115() -> Unit raise {
   let t1322 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1294 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnC", @list.List([maxnc()])), t1293, x1294), (x1302 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x1301 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1300, x1301), x1302)), (x1309 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add_sub_maxn", @list.List([add_sub_maxn()])), (x1308 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1307, x1308), x1309)), (x1315 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_addl", @list.List([eqn_addl()])), t1314, x1315)), (x1321 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), t1320, x1321)), @ssreflect.done_tac)
   let t1288 = @ssreflect.move_(@list.List(["n"]))
   let t1323 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1288), t1322])
-  eqn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (maxn m n = n) = (m <= n)"), t1323))
+  eqn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (maxn m n = n) = (m <= n)"), t1323))
 }
 
 ///|
@@ -2937,7 +2937,7 @@ fn step_116() -> Unit raise {
   let t1352 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1332 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("addn0", @list.List([addn0()])), (x1331 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1330, x1331), x1332), (x1339 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("add_sub_maxn", @list.List([add_sub_maxn()])), (x1338 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t1337, x1338), x1339)), (x1345 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_addl", @list.List([eqn_addl()])), t1344, x1345)), (x1351 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqE", @list.List([leqe()])), t1350, x1351)), @ssreflect.done_tac)
   let t1324 = @ssreflect.move_(@list.List(["n"]))
   let t1353 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1324), t1352])
-  eqn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. (maxn m n = m) = (n <= m)"), t1353))
+  eqn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. (maxn m n = m) = (n <= m)"), t1353))
 }
 
 ///|
@@ -2965,7 +2965,7 @@ fn step_117() -> Unit raise {
   })
   let t1367 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x1359 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("maxnl", @list.List([maxnl()])), t1358, x1359), t1360), (x1366 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("leqnn", @list.List([leqnn()])), t1365, x1366)), @ssreflect.done_tac)
   let t1368 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["n"]))), t1367])
-  maxnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall n. maxn n n = n"), t1368))
+  maxnn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ n. maxn n n = n"), t1368))
 }
 
 ///|
@@ -3175,7 +3175,7 @@ fn step_120() -> Unit raise {
   let t1522 = @ssreflect.move_(@list.List(["n"]))
   let t1521 = @ssreflect.move_(@list.List(["m2"]))
   let t1543 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1521), t1522), t1542), @ssreflect.done_tac)])
-  addn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n. (maxn m1 m2) + n = maxn (m1 + n) (m2 + n)"), t1543))
+  addn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 n. (maxn m1 m2) + n = maxn (m1 + n) (m2 + n)"), t1543))
 }
 
 ///|
@@ -3205,7 +3205,7 @@ fn step_121() -> Unit raise {
   let t1545 = @ssreflect.move_(@list.List(["n2"]))
   let t1544 = @ssreflect.move_(@list.List(["n1"]))
   let t1560 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t1544), t1545), t1559), @ssreflect.done_tac)])
-  addn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n1 n2. m + maxn n1 n2 = maxn (m + n1) (m + n2)"), t1560))
+  addn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n1 n2. m + maxn n1 n2 = maxn (m + n1) (m + n2)"), t1560))
 }
 
 ///|
@@ -3509,7 +3509,7 @@ fn step_130() -> Unit raise {
   let t1658 = @ssreflect.move_(@list.List(["m3"]))
   let t1657 = @ssreflect.move_(@list.List(["m2"]))
   let t1750 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1657), t1658), t1666), t1749, t1748])
-  minnca_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 m3. minn m1 (minn m2 m3) = minn m2 (minn m1 m3)"), t1750))
+  minnca_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 m3. minn m1 (minn m2 m3) = minn m2 (minn m1 m3)"), t1750))
 }
 
 ///|
@@ -3544,7 +3544,7 @@ fn step_131() -> Unit raise {
   let t1752 = @ssreflect.move_(@list.List(["m3"]))
   let t1751 = @ssreflect.move_(@list.List(["m2"]))
   let t1773 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1751), t1752), t1772])
-  minna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 m3. minn m1 (minn m2 m3) = minn (minn m1 m2) m3"), t1773))
+  minna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 m3. minn m1 (minn m2 m3) = minn (minn m1 m2) m3"), t1773))
 }
 
 ///|
@@ -3861,7 +3861,7 @@ fn step_138() -> Unit raise {
   let t1954 = @ssreflect.move_(@list.List(["n"]))
   let t1953 = @ssreflect.move_(@list.List(["m2"]))
   let t2024 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t1953), t1954), t1986), t2023])
-  addn_minl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n. (minn m1 m2) + n = minn (m1 + n) (m2 + n)"), t2024))
+  addn_minl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 n. (minn m1 m2) + n = minn (m1 + n) (m2 + n)"), t2024))
 }
 
 ///|
@@ -3899,7 +3899,7 @@ fn step_139() -> Unit raise {
   let t2026 = @ssreflect.move_(@list.List(["n2"]))
   let t2025 = @ssreflect.move_(@list.List(["n1"]))
   let t2048 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2025), t2026), t2047])
-  addn_minr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n1 n2. m + minn n1 n2 = minn (m + n1) (m + n2)"), t2048))
+  addn_minr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n1 n2. m + minn n1 n2 = minn (m + n1) (m + n2)"), t2048))
 }
 
 ///|
@@ -4139,7 +4139,7 @@ fn step_146() -> Unit raise {
   let t2163 = @ssreflect.move_(@list.List(["n"]))
   let t2162 = @ssreflect.move_(@list.List(["m2"]))
   let t2205 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m1"]))), t2162), t2163), t2204), @ssreflect.done_tac)])
-  minn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m1 m2 n. minn (maxn m1 m2) n = maxn (minn m1 n) (minn m2 n)"), t2205))
+  minn_maxl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m1 m2 n. minn (maxn m1 m2) n = maxn (minn m1 n) (minn m2 n)"), t2205))
 }
 
 ///|
@@ -4177,7 +4177,7 @@ fn step_147() -> Unit raise {
   let t2207 = @ssreflect.move_(@list.List(["n2"]))
   let t2206 = @ssreflect.move_(@list.List(["n1"]))
   let t2229 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2206), t2207), t2228])
-  minn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n1 n2. minn m (maxn n1 n2) = maxn (minn m n1) (minn m n2)"), t2229))
+  minn_maxr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n1 n2. minn m (maxn n1 n2) = maxn (minn m n1) (minn m n2)"), t2229))
 }
 
 ///|
@@ -4659,7 +4659,7 @@ fn step_170() -> Unit raise {
   let t2415 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac((x2377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("m", @list.List([])), (x2376 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x2376), x2377), @ssreflect.clear_assumption("m")), @ssreflect.elim), t2378), t2414), @ssreflect.done_tac)
   let t2375 = @ssreflect.move_(@list.List(["n"]))
   let t2416 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2375), t2415])
-  mulnc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. m * n = n * m"), t2416))
+  mulnc_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. m * n = n * m"), t2416))
 }
 
 ///|
@@ -4824,7 +4824,7 @@ fn step_173() -> Unit raise {
   let t2485 = @tactics.thenl(@ssreflect.case, @list.List([@tactics.all_tac, @ssreflect.move_(@list.List(["n'"]))]))
   let t2484 = @ssreflect.move_(@list.List(["n"]))
   let t2558 = @list.List([@ssreflect.thenl_first(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2484), t2485))(t2498), t2557, t2556])
-  muln_subl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. (m - n) * p = m * p - n * p"), t2558))
+  muln_subl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. (m - n) * p = m * p - n * p"), t2558))
 }
 
 ///|
@@ -4854,7 +4854,7 @@ fn step_174() -> Unit raise {
   let t2560 = @ssreflect.move_(@list.List(["p"]))
   let t2559 = @ssreflect.move_(@list.List(["n"]))
   let t2575 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2559), t2560), t2574), @ssreflect.done_tac)])
-  muln_subr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. m * (n - p) = m * n - m * p"), t2575))
+  muln_subr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. m * (n - p) = m * n - m * p"), t2575))
 }
 
 ///|
@@ -4901,7 +4901,7 @@ fn step_175() -> Unit raise {
   let t2577 = @ssreflect.move_(@list.List(["p"]))
   let t2576 = @ssreflect.move_(@list.List(["n"]))
   let t2610 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t2576), t2577), t2609, t2608])
-  mulna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n p. m * (n * p) = (m * n) * p"), t2610))
+  mulna_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n p. m * (n * p) = (m * n) * p"), t2610))
 }
 
 ///|
@@ -6803,7 +6803,7 @@ fn step_220() -> Unit raise {
   let t4010 = @ssreflect.move_(@list.List(["e2"]))
   let t4009 = @ssreflect.move_(@list.List(["e1"]))
   let t4017 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m_gt1"]))), t4009), t4010), (x4016 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_exp2l", @list.List([eqn_exp2l()])), t4015, x4016)), @ssreflect.done_tac)])
-  expni_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("1 < m ==> forall e1 e2. m ^ e1 = m ^ e2 ==> e1 = e2"), t4017))
+  expni_c.set(@sections.section_proof(@list.List(["m"]), @parser.parse_term("1 < m ==> ∀ e1 e2. m ^ e1 = m ^ e2 ==> e1 = e2"), t4017))
 }
 
 ///|
@@ -7078,7 +7078,7 @@ fn step_226() -> Unit raise {
   let t4237 = @ssreflect.move_(@list.List(["n"]))
   let t4236 = @ssreflect.move_(@list.List(["m"]))
   let t4244 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["e_gt0"]))), t4236), t4237), (x4243 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eqn_exp2r", @list.List([eqn_exp2r()])), t4242, x4243)), @ssreflect.done_tac)])
-  expin_c.set(@sections.section_proof(@list.List(["e"]), @parser.parse_term("0 < e ==> forall m n. m ^ e = n ^ e ==> m = n"), t4244))
+  expin_c.set(@sections.section_proof(@list.List(["e"]), @parser.parse_term("0 < e ==> ∀ m n. m ^ e = n ^ e ==> m = n"), t4244))
 }
 
 ///|
@@ -7561,7 +7561,7 @@ pub fn odd_exp() -> @kernel.Thm {
 ///|
 /// double
 fn step_239() -> Unit raise {
-  double_c.set(@define.define_(@parser.parse_term("double 0 = 0 /\\ (forall n. double (SUC n) = SUC (SUC (double n)))")))
+  double_c.set(@define.define_(@parser.parse_term("double 0 = 0 /\\ (∀ n. double (SUC n) = SUC (SUC (double n)))")))
 }
 
 ///|
@@ -8093,7 +8093,7 @@ pub fn double_mulr() -> @kernel.Thm {
 ///|
 /// half_def
 fn step_256() -> Unit raise {
-  half_def_c.set(@define.define_(@parser.parse_term("HALF 0 = (0, 0) /\\\n        forall n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))")))
+  half_def_c.set(@define.define_(@parser.parse_term("HALF 0 = (0, 0) /\\\n        ∀ n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))")))
 }
 
 ///|
@@ -8338,7 +8338,7 @@ fn step_265() -> Unit raise {
   let t5030 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x5013 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleK", @list.List([doublek()])), (x5012 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5011, x5012), x5013), (x5021 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("doubleK", @list.List([doublek()])), (x5020 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t5019, x5020), x5021)), t5029), @ssreflect.done_tac)
   let t5005 = @ssreflect.move_(@list.List(["n"]))
   let t5031 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["m"]))), t5005), t5030])
-  double_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("forall m n. double m = double n ==> m = n"), t5031))
+  double_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("∀ m n. double m = double n ==> m = n"), t5031))
 }
 
 ///|
@@ -9319,7 +9319,7 @@ pub fn sqrn_inj() -> @kernel.Thm {
 ///|
 /// leqif
 fn step_283() -> Unit raise {
-  leqif_c.set(@pair.new_definition(@parser.parse_term("forall m n c. leqif m n c <=> (m <= n /\\ ((m = n) <=> c))")))
+  leqif_c.set(@pair.new_definition(@parser.parse_term("∀ m n c. leqif m n c <=> (m <= n /\\ ((m = n) <=> c))")))
 }
 
 ///|
@@ -9516,7 +9516,7 @@ fn step_289() -> Unit raise {
   let t5952 = @ssreflect.move_(@list.List(["n"]))
   let t5951 = @ssreflect.move_(@list.List(["m"]))
   let t5982 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["f_mono"]))), t5951), t5952), t5953), t5981])
-  monotone_leqif_c.set(@sections.section_proof(@list.List(["f"]), @parser.parse_term("(forall m n. f m <= f n <=> m <= n) ==>\n  forall m n c. (leqif (f m) (f n) c) <=> (leqif m n c)"), t5982))
+  monotone_leqif_c.set(@sections.section_proof(@list.List(["f"]), @parser.parse_term("(∀ m n. f m <= f n <=> m <= n) ==>\n  ∀ m n c. (leqif (f m) (f n) c) <=> (leqif m n c)"), t5982))
 }
 
 ///|
@@ -10311,7 +10311,7 @@ pub fn nat_agm2() -> @kernel.Thm {
 ///|
 /// distn
 fn step_298() -> Unit raise {
-  distn_c.set(@pair.new_definition(@parser.parse_term("forall m n. distn m n = (m - n) + (n - m)")))
+  distn_c.set(@pair.new_definition(@parser.parse_term("∀ m n. distn m n = (m - n) + (n - m)")))
 }
 
 ///|
@@ -11125,7 +11125,7 @@ fn step_311() -> Unit raise {
   let t7088 = @ssreflect.move_(@list.List(["IH"]))
   let t7093 = (fn(x7086 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x7086
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("forall m p. m <= p ==> leqif (distn m p) (distn m n + distn n p) (m <= n /\\ n <= p \\/ p <= n /\\ n <= m)")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("∀ m p. m <= p ==> leqif (distn m p) (distn m n + distn n p) (m <= n /\\ n <= p \\/ p <= n /\\ n <= m)")))
   })(@ssreflect.term_tac(fn(x7091 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x7092 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       ((x7089 : @kernel.Term, x7090 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.have_gen_tac(@list.List([]), t7088, x7089, x7090))(x7091, x7092)

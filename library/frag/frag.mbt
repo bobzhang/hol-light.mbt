@@ -181,7 +181,7 @@ fn step_9() -> Unit raise {
   frag_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c1 c2:A frag. c1 = c2 <=> dest_frag c1 = dest_frag c2",
+        "∀ c1 c2:A frag. c1 = c2 <=> dest_frag c1 = dest_frag c2",
       ),
       t3,
     ),
@@ -261,7 +261,7 @@ fn step_11() -> Unit raise {
   dest_frag_of_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c:A. dest_frag(frag_of c) = \\a. if a = c then &1 else &0",
+        "∀ c:A. dest_frag(frag_of c) = \\a. if a = c then &1 else &0",
       ),
       t11,
     ),
@@ -294,7 +294,7 @@ fn step_12() -> Unit raise {
   dest_frag_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x:A frag. dest_frag(frag_neg x) = \\a. --(dest_frag x a)",
+        "∀ x:A frag. dest_frag(frag_neg x) = \\a. --(dest_frag x a)",
       ),
       t14,
     ),
@@ -345,7 +345,7 @@ fn step_13() -> Unit raise {
   dest_frag_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c x:A frag. dest_frag(frag_cmul c x) = \\a. c * dest_frag x a",
+        "∀ c x:A frag. dest_frag(frag_cmul c x) = \\a. c * dest_frag x a",
       ),
       t20,
     ),
@@ -405,7 +405,7 @@ fn step_14() -> Unit raise {
   dest_frag_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y:A frag. dest_frag(frag_add x y) = \\a. dest_frag x a + dest_frag y a",
+        "∀ x y:A frag. dest_frag(frag_add x y) = \\a. dest_frag x a + dest_frag y a",
       ),
       t27,
     ),
@@ -465,7 +465,7 @@ fn step_15() -> Unit raise {
   dest_frag_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y:A frag. dest_frag(frag_sub x y) = \\a. dest_frag x a - dest_frag y a",
+        "∀ x y:A frag. dest_frag(frag_sub x y) = \\a. dest_frag x a - dest_frag y a",
       ),
       t34,
     ),
@@ -489,7 +489,7 @@ fn step_16() -> Unit raise {
   let t41 = @drule.match_mp(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("c = d ==> forall a:A. dest_frag c a = dest_frag d a"),
+      @parser.parse_term("c = d ==> ∀ a:A. dest_frag c a = dest_frag d a"),
     ),
   )
   let t38 = @parser.parse_term("a:A")
@@ -593,7 +593,7 @@ fn step_16() -> Unit raise {
     t44,
   )
   frag_of_nonzero_c.set(
-    @tactics.prove(@parser.parse_term("forall a:A. ~(frag_of a = frag_0)"), t45),
+    @tactics.prove(@parser.parse_term("∀ a:A. ~(frag_of a = frag_0)"), t45),
   )
 }
 
@@ -652,7 +652,7 @@ fn step_17() -> Unit raise {
     ]),
   )
   let t49 = @parser.parse_term(
-    "forall x y:A frag. x = y <=> forall a. dest_frag x a = dest_frag y a",
+    "∀ x y:A frag. x = y <=> ∀ a. dest_frag x a = dest_frag y a",
   )
   let t50 = @simp.gen_rewrite_tac(
     fn(
@@ -729,7 +729,7 @@ fn step_18() -> Unit raise {
   )
   finite_frag_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:A frag. FINITE(frag_support (x:A frag))"),
+      @parser.parse_term("∀ x:A frag. FINITE(frag_support (x:A frag))"),
       t63,
     ),
   )
@@ -799,7 +799,7 @@ fn step_20() -> Unit raise {
   )
   frag_support_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a:A. frag_support(frag_of a) = {a}"),
+      @parser.parse_term("∀ a:A. frag_support(frag_of a) = {a}"),
       t70,
     ),
   )
@@ -824,7 +824,7 @@ fn step_21() -> Unit raise {
   )
   frag_support_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:A frag. frag_support(frag_neg x) = frag_support x"),
+      @parser.parse_term("∀ x:A frag. frag_support(frag_neg x) = frag_support x"),
       t71,
     ),
   )
@@ -863,7 +863,7 @@ fn step_22() -> Unit raise {
   frag_support_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a x:A frag. frag_support(frag_cmul a x) SUBSET frag_support x",
+        "∀ a x:A frag. frag_support(frag_cmul a x) SUBSET frag_support x",
       ),
       t74,
     ),
@@ -904,7 +904,7 @@ fn step_23() -> Unit raise {
   frag_support_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y:A frag. frag_support(frag_add x y) SUBSET\n                frag_support x UNION frag_support y",
+        "∀ x y:A frag. frag_support(frag_add x y) SUBSET\n                frag_support x UNION frag_support y",
       ),
       t77,
     ),
@@ -945,7 +945,7 @@ fn step_24() -> Unit raise {
   frag_support_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y:A frag. frag_support(frag_sub x y) SUBSET\n                frag_support x UNION frag_support y",
+        "∀ x y:A frag. frag_support(frag_sub x y) SUBSET\n                frag_support x UNION frag_support y",
       ),
       t80,
     ),
@@ -991,7 +991,7 @@ fn step_25() -> Unit raise {
   )
   frag_support_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c:A frag. frag_support c = {} <=> c = frag_0"),
+      @parser.parse_term("∀ c:A frag. frag_support c = {} <=> c = frag_0"),
       t83,
     ),
   )
@@ -1019,7 +1019,7 @@ fn step_26() -> Unit raise {
   )
   frag_of_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y:A. frag_of x = frag_of y <=> x = y"),
+      @parser.parse_term("∀ x y:A. frag_of x = frag_of y <=> x = y"),
       t84,
     ),
   )
@@ -1173,7 +1173,7 @@ fn step_27() -> Unit raise {
   frag_add_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c1 c2:A frag.\n        DISJOINT (frag_support c1) (frag_support c2) /\\\n        frag_add c1 c2 = frag_0\n        ==> c1 = frag_0 /\\ c2 = frag_0",
+        "∀ c1 c2:A frag.\n        DISJOINT (frag_support c1) (frag_support c2) /\\\n        frag_add c1 c2 = frag_0\n        ==> c1 = frag_0 /\\ c2 = frag_0",
       ),
       t97,
     ),
@@ -1339,7 +1339,7 @@ fn step_30() -> Unit raise {
   frag_cmul_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:B->A frag k a.\n        frag_cmul a (iterate frag_add k f) =\n        iterate frag_add k (\\b. frag_cmul a (f b))",
+        "∀ f:B->A frag k a.\n        frag_cmul a (iterate frag_add k f) =\n        iterate frag_add k (\\b. frag_cmul a (f b))",
       ),
       t115,
     ),
@@ -1640,7 +1640,7 @@ fn step_31() -> Unit raise {
   frag_support_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:B->A frag k.\n        frag_support(iterate frag_add k f) SUBSET\n        UNIONS {frag_support(f i) | i IN k}",
+        "∀ f:B->A frag k.\n        frag_support(iterate frag_add k f) SUBSET\n        UNIONS {frag_support(f i) | i IN k}",
       ),
       t145,
     ),
@@ -1718,7 +1718,7 @@ fn step_33() -> Unit raise {
   frag_extend_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag x.\n        frag_extend f x =\n        iterate frag_add UNIV (\\a. frag_cmul (dest_frag x a) (f a))",
+        "∀ f:A->B frag x.\n        frag_extend f x =\n        iterate frag_add UNIV (\\a. frag_cmul (dest_frag x a) (f a))",
       ),
       t152,
     ),
@@ -1752,7 +1752,7 @@ fn step_34() -> Unit raise {
   )
   frag_extend_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A->B frag. frag_extend f frag_0 = frag_0"),
+      @parser.parse_term("∀ f:A->B frag. frag_extend f frag_0 = frag_0"),
       t155,
     ),
   )
@@ -1792,7 +1792,7 @@ fn step_35() -> Unit raise {
   )
   frag_extend_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A->B frag a. frag_extend f (frag_of a) = f a"),
+      @parser.parse_term("∀ f:A->B frag a. frag_extend f (frag_of a) = f a"),
       t159,
     ),
   )
@@ -1842,7 +1842,7 @@ fn step_36() -> Unit raise {
   frag_extend_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag c x.\n        frag_extend f (frag_cmul c x) = frag_cmul c (frag_extend f x)",
+        "∀ f:A->B frag c x.\n        frag_extend f (frag_cmul c x) = frag_cmul c (frag_extend f x)",
       ),
       t164,
     ),
@@ -1875,7 +1875,7 @@ fn step_37() -> Unit raise {
   frag_extend_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag x.\n        frag_extend f (frag_neg x) = frag_neg(frag_extend f x)",
+        "∀ f:A->B frag x.\n        frag_extend f (frag_neg x) = frag_neg(frag_extend f x)",
       ),
       t166,
     ),
@@ -2193,7 +2193,7 @@ fn step_38() -> Unit raise {
   frag_extend_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag x y.\n        frag_extend f (frag_add x y) =\n        frag_add (frag_extend f x) (frag_extend f y)",
+        "∀ f:A->B frag x y.\n        frag_extend f (frag_add x y) =\n        frag_add (frag_extend f x) (frag_extend f y)",
       ),
       t195,
     ),
@@ -2230,7 +2230,7 @@ fn step_39() -> Unit raise {
   frag_extend_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag x y.\n        frag_extend f (frag_sub x y) =\n        frag_sub (frag_extend f x) (frag_extend f y)",
+        "∀ f:A->B frag x y.\n        frag_extend f (frag_sub x y) =\n        frag_sub (frag_extend f x) (frag_extend f y)",
       ),
       t197,
     ),
@@ -2282,7 +2282,7 @@ fn step_40() -> Unit raise {
   frag_extend_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag g k:C->bool.\n        FINITE k\n        ==> frag_extend f (iterate frag_add k g) =\n            iterate frag_add k (frag_extend f o g)",
+        "∀ f:A->B frag g k:C->bool.\n        FINITE k\n        ==> frag_extend f (iterate frag_add k g) =\n            iterate frag_add k (frag_extend f o g)",
       ),
       t202,
     ),
@@ -2318,7 +2318,7 @@ fn step_41() -> Unit raise {
   frag_extend_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(g:A->B frag) h c.\n        (forall f. f IN frag_support c ==> g f = h f)\n        ==> frag_extend g c = frag_extend h c",
+        "∀(g:A->B frag) h c.\n        (∀ f. f IN frag_support c ==> g f = h f)\n        ==> frag_extend g c = frag_extend h c",
       ),
       t206,
     ),
@@ -2364,7 +2364,7 @@ fn step_42() -> Unit raise {
   frag_extend_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:A->B frag) c.\n        (forall a. a IN frag_support c ==> f a = frag_0)\n        ==> frag_extend f c = frag_0",
+        "∀(f:A->B frag) c.\n        (∀ a. a IN frag_support c ==> f a = frag_0)\n        ==> frag_extend f c = frag_0",
       ),
       t213,
     ),
@@ -2559,7 +2559,7 @@ fn step_43() -> Unit raise {
   frag_support_frag_extend_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B frag c.\n        frag_support(frag_extend f c) SUBSET\n        UNIONS {frag_support(f a) | a IN frag_support c}",
+        "∀ f:A->B frag c.\n        frag_support(frag_extend f c) SUBSET\n        UNIONS {frag_support(f a) | a IN frag_support c}",
       ),
       t228,
     ),
@@ -2630,7 +2630,7 @@ fn step_44() -> Unit raise {
   ])
   let t234 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall k. FINITE k\n        ==> dest_frag(iterate frag_add k\n                        (\\a:A. frag_cmul (dest_frag x a) (frag_of a))) b =\n            if b IN k then dest_frag x b else &0",
+      "∀ k. FINITE k\n        ==> dest_frag(iterate frag_add k\n                        (\\a:A. frag_cmul (dest_frag x a) (frag_of a))) b =\n            if b IN k then dest_frag x b else &0",
     ),
     fn(
       x232 : @kernel.Thm,
@@ -2688,7 +2688,7 @@ fn step_44() -> Unit raise {
   )
   frag_expansion_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:A frag. x = frag_extend frag_of x"),
+      @parser.parse_term("∀ x:A frag. x = frag_extend frag_of x"),
       t245,
     ),
   )
@@ -2774,7 +2774,7 @@ fn step_45() -> Unit raise {
     @tactics.all_tac,
   ])
   let t251 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. (P:(A frag)->bool) (frag_cmul (&n) c)"),
+    @parser.parse_term("∀ n. (P:(A frag)->bool) (frag_cmul (&n) c)"),
     fn(
       x248 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2858,7 +2858,7 @@ fn step_45() -> Unit raise {
   frag_closure_sub_cmul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A frag->bool.\n        P frag_0 /\\\n        (forall c1 c2. P c1 /\\ P c2 ==> P(frag_sub c1 c2))\n        ==> forall a c. P c ==> P(frag_cmul a c)",
+        "∀ P:A frag->bool.\n        P frag_0 /\\\n        (∀ c1 c2. P c1 /\\ P c2 ==> P(frag_sub c1 c2))\n        ==> ∀ a c. P c ==> P(frag_cmul a c)",
       ),
       t266,
     ),
@@ -3008,7 +3008,7 @@ fn step_46() -> Unit raise {
   frag_induction_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A frag->bool s.\n        P frag_0 /\\\n        (forall a. a IN s ==> P(frag_of a)) /\\\n        (forall c1 c2. P c1 /\\ P c2 ==> P(frag_sub c1 c2))\n        ==> forall c. frag_support c SUBSET s ==> P c",
+        "∀ P:A frag->bool s.\n        P frag_0 /\\\n        (∀ a. a IN s ==> P(frag_of a)) /\\\n        (∀ c1 c2. P c1 /\\ P c2 ==> P(frag_sub c1 c2))\n        ==> ∀ c. frag_support c SUBSET s ==> P c",
       ),
       t295,
     ),
@@ -3040,7 +3040,7 @@ fn step_47() -> Unit raise {
     @meson.meson(
       @list.List([@sets.subset_univ()]),
       @parser.parse_term(
-        "(forall c. frag_support c SUBSET UNIV ==> P c) ==> (forall c. P c)",
+        "(∀ c. frag_support c SUBSET UNIV ==> P c) ==> (∀ c. P c)",
       ),
     ),
   )
@@ -3057,7 +3057,7 @@ fn step_47() -> Unit raise {
   frag_extend_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(f:B->C frag) (g:A->B) c.\n        frag_extend f (frag_extend (frag_of o g) c) = frag_extend (f o g) c",
+        "∀(f:B->C frag) (g:A->B) c.\n        frag_extend f (frag_extend (frag_of o g) c) = frag_extend (f o g) c",
       ),
       t299,
     ),
@@ -3438,7 +3438,7 @@ fn step_48() -> Unit raise {
   frag_split_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c s t:A->bool.\n        frag_support c SUBSET s UNION t\n        ==> ?d e. frag_support d SUBSET s /\\ frag_support e SUBSET t /\\\n                  frag_add d e = c",
+        "∀ c s t:A->bool.\n        frag_support c SUBSET s UNION t\n        ==> ?d e. frag_support d SUBSET s /\\ frag_support e SUBSET t /\\\n                  frag_add d e = c",
       ),
       t334,
     ),

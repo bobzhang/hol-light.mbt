@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_def(), @trivia.i_def()])), t1)
-  surjective_iff_right_inverse_c.set(@tactics.prove(@parser.parse_term("(forall y. ?x. g x = y) <=> (?f. g o f = I)"), t2))
+  surjective_iff_right_inverse_c.set(@tactics.prove(@parser.parse_term("(∀ y. ?x. g x = y) <=> (?f. g o f = I)"), t2))
 }
 
 ///|
@@ -21,10 +21,10 @@ pub fn surjective_iff_right_inverse() -> @kernel.Thm {
 ///|
 /// INJECTIVE_IFF_LEFT_INVERSE
 fn step_2() -> Unit raise {
-  let lemma = @meson.meson(@list.List([]), @parser.parse_term("(forall x x'. f x = f x' ==> x = x') <=> (forall y:B. ?u:A. forall x. f x = y ==> u = x)"))
+  let lemma = @meson.meson(@list.List([]), @parser.parse_term("(∀ x x'. f x = f x' ==> x = x') <=> (∀ y:B. ?u:A. ∀ x. f x = y ==> u = x)"))
   let t3 = @meson.meson_tac(@list.List([]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([lemma, @class.fun_eq_thm(), @trivia.o_def(), @trivia.i_def()])), t3)
-  injective_iff_left_inverse_c.set(@tactics.prove(@parser.parse_term("(forall x y. f x = f y ==> x = y) <=> (?g. g o f = I)"), t4))
+  injective_iff_left_inverse_c.set(@tactics.prove(@parser.parse_term("(∀ x y. f x = f y ==> x = y) <=> (?g. g o f = I)"), t4))
 }
 
 ///|
@@ -107,7 +107,7 @@ fn step_6() -> Unit raise {
   })
   let t13 = @tactics.repeat_tac(@tactics.gen_tac)
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @pair.pair_eq()])), t13), t17), t18), t19), t23), @int.arith_tac)
-  cantor_inj_c.set(@tactics.prove(@parser.parse_term("forall w z. cantor w = cantor z ==> w = z"), t24))
+  cantor_inj_c.set(@tactics.prove(@parser.parse_term("∀ w z. cantor w = cantor z ==> w = z"), t24))
 }
 
 ///|
@@ -133,7 +133,7 @@ fn step_7() -> Unit raise {
     })(((x29 : @kernel.Thm) => @bool.spec(t28, x29))(x30))
   })
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([injective_iff_left_inverse(), @class.fun_eq_thm(), @trivia.i_def(), @trivia.o_def()])), @tactics.strip_tac), t31), t32)
-  cantor_thm_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))"), t33))
+  cantor_thm_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (∀ x y. f(x) = f(y) ==> x = y))"), t33))
 }
 
 ///|

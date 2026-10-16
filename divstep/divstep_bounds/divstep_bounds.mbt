@@ -20,7 +20,7 @@ fn step_1() -> Unit raise {
   })
   let t1 = @simp.asm_rewrite_tac(@list.List([@iter.iter(), @real.real_sub_refl(), @floor.integer_closed()]))
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t1), t5), t7), t8), t9), @class.cond_cases_tac), t10), t11), t12), t13)
-  integer_divstep_delta_c.set(@tactics.prove(@parser.parse_term("forall f g n. integer(FST(ITER n divstep (&1 / &2,f,g)) - &1 / &2)"), t14))
+  integer_divstep_delta_c.set(@tactics.prove(@parser.parse_term("∀ f g n. integer(FST(ITER n divstep (&1 / &2,f,g)) - &1 / &2)"), t14))
 }
 
 ///|
@@ -38,7 +38,7 @@ fn step_2() -> Unit raise {
   let t16 = @meson.asm_meson_tac(@list.List([@pair.pair()]))
   let t15 = @tactics.match_mp_tac(@divstep.iter_divstep_odd())
   let t17 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t15), t16)
-  iter_divstep_odd_alt_c.set(@tactics.prove(@parser.parse_term("forall f g n.\n        f rem &2 = &1\n        ==> FST(SND(ITER n divstep (&1 / &2,f,g))) rem &2 = &1"), t17))
+  iter_divstep_odd_alt_c.set(@tactics.prove(@parser.parse_term("∀ f g n.\n        f rem &2 = &1\n        ==> FST(SND(ITER n divstep (&1 / &2,f,g))) rem &2 = &1"), t17))
 }
 
 ///|
@@ -108,7 +108,7 @@ fn step_3() -> Unit raise {
   }, @list.List([@equal.gsym(@divstep.iter_divstep_bound_alt())]))
   let t18 = @tactics.repeat_tac(@tactics.strip_tac)
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@hull_light.divsteps_s())])), t18), t20), t25), t27), t28), t29), t30), t31), t32), t33), t34), t35), t36), t37), t40), t43), t45), t46), t48), t51), @tactics.disch_tac), @tactics.disch_tac), t55), t56), t57), t58), t59), t60), @class.cond_cases_tac), t61), @list.List([@tactics.disj1_tac, @tactics.disj1_tac, @tactics.disj2_tac, @tactics.disj2_tac])), t62), t63), t64), t65), t66), t67)
-  divstep_endtoend_bits_simple_c.set(@tactics.prove(@parser.parse_term("forall f g b n.\n        &0 <= g /\\ g <= f /\\ f <= &2 pow b /\\ f rem &2 = &1 /\\\n        9437 * b + 1 <= 4096 * n\n        ==> SND(SND(ITER n divstep (&1 / &2,f,g))) = &0"), t68))
+  divstep_endtoend_bits_simple_c.set(@tactics.prove(@parser.parse_term("∀ f g b n.\n        &0 <= g /\\ g <= f /\\ f <= &2 pow b /\\ f rem &2 = &1 /\\\n        9437 * b + 1 <= 4096 * n\n        ==> SND(SND(ITER n divstep (&1 / &2,f,g))) = &0"), t68))
 }
 
 ///|
@@ -136,7 +136,7 @@ fn step_4() -> Unit raise {
   }), t75), t76])
   let t69 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")))
   let t78 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t69), @tactics.conj_tac), t77)
-  idivstep_endtoend_bits_simple_c.set(@tactics.prove(@parser.parse_term("forall f g b n.\n        &0 <= g /\\ g <= f /\\ f <= &2 pow b /\\ f rem &2 = &1 /\\\n        9437 * b + 1 <= 4096 * n\n        ==> divstep_g n (&1,f,g) = &0 /\\\n            abs(divstep_f n (&1,f,g)) = gcd(f,g)"), t78))
+  idivstep_endtoend_bits_simple_c.set(@tactics.prove(@parser.parse_term("∀ f g b n.\n        &0 <= g /\\ g <= f /\\ f <= &2 pow b /\\ f rem &2 = &1 /\\\n        9437 * b + 1 <= 4096 * n\n        ==> divstep_g n (&1,f,g) = &0 /\\\n            abs(divstep_f n (&1,f,g)) = gcd(f,g)"), t78))
 }
 
 ///|

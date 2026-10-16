@@ -50,7 +50,7 @@ fn step_4() -> Unit raise {
     }
   })
   let t8 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4), t7)
-  odd_pow2_minus1_c.set(@tactics.prove(@parser.parse_term("forall k. ~(k = 0) ==> ODD(2 EXP k - 1)"), t8))
+  odd_pow2_minus1_c.set(@tactics.prove(@parser.parse_term("∀ k. ~(k = 0) ==> ODD(2 EXP k - 1)"), t8))
 }
 
 ///|
@@ -100,7 +100,7 @@ fn step_5() -> Unit raise {
   let t10 = @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), @arith.even_or_odd()))
   let t9 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t39 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), t9), t10), t11), t15), t38)
-  even_odd_decomp_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0) ==> ?r s. ODD s /\\ n = 2 EXP r * s"), t39))
+  even_odd_decomp_c.set(@tactics.prove(@parser.parse_term("∀ n. ~(n = 0) ==> ?r s. ODD s /\\ n = 2 EXP r * s"), t39))
 }
 
 ///|
@@ -121,7 +121,7 @@ fn step_6() -> Unit raise {
   let t41 = @tactics.exists_tac(@parser.parse_term("{d | d <= n}"))
   let t40 = @tactics.match_mp_tac(@sets.finite_subset())
   let t45 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t40), t41), t42), t43), t44)
-  finite_divisors_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0) ==> FINITE {d | d divides n}"), t45))
+  finite_divisors_c.set(@tactics.prove(@parser.parse_term("∀ n. ~(n = 0) ==> FINITE {d | d divides n}"), t45))
 }
 
 ///|
@@ -150,7 +150,7 @@ fn step_7() -> Unit raise {
   let t47 = @parser.parse_term("x:num")
   let t48 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:num"), t47, t46]), @prime.coprime_divprod()))
   let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t48), t51), t53), t54), t55), t56), t57), t58)
-  mult_eq_coprime_c.set(@tactics.prove(@parser.parse_term("forall a b x y. a * b = x * y /\\ coprime(a,x)\n             ==> ?d. y = a * d /\\ b = x * d"), t59))
+  mult_eq_coprime_c.set(@tactics.prove(@parser.parse_term("∀ a b x y. a * b = x * y /\\ coprime(a,x)\n             ==> ?d. y = a * d /\\ b = x * d"), t59))
 }
 
 ///|
@@ -171,7 +171,7 @@ fn step_8() -> Unit raise {
   let t61 = @tactics.repeat_tac(@tactics.strip_tac)
   let t60 = @simp.rewrite_tac(@list.List([@int.divides()]))
   let t65 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@int.coprime(), @prime.prime_2(), @prime.divides_primepow()])), t60), t61), t62), t63), t64)
-  coprime_odd_pow2_c.set(@tactics.prove(@parser.parse_term("forall k n. ODD(n) ==> coprime(2 EXP k,n)"), t65))
+  coprime_odd_pow2_c.set(@tactics.prove(@parser.parse_term("∀ k n. ODD(n) ==> coprime(2 EXP k,n)"), t65))
 }
 
 ///|
@@ -187,7 +187,7 @@ pub fn coprime_odd_pow2() -> @kernel.Thm {
 /// MULT_NSUM
 fn step_9() -> Unit raise {
   let t66 = @simp.simp_tac(@list.List([@equal.gsym(@iterate.nsum_nsum_product()), @iterate.nsum_lmul(), @iterate.nsum_rmul()]))
-  mult_nsum_c.set(@tactics.prove(@parser.parse_term("forall s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))"), t66))
+  mult_nsum_c.set(@tactics.prove(@parser.parse_term("∀ s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))"), t66))
 }
 
 ///|
@@ -253,7 +253,7 @@ fn step_12() -> Unit raise {
     })(t73(x74))
   })
   let t84 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t75), t76), t77), t78), @tactics.conj_tac), t83)
-  sigma_lbound_c.set(@tactics.prove(@parser.parse_term("forall n. 1 < n ==> n + 1 <= sigma(n)"), t84))
+  sigma_lbound_c.set(@tactics.prove(@parser.parse_term("∀ n. 1 < n ==> n + 1 <= sigma(n)"), t84))
 }
 
 ///|
@@ -290,7 +290,7 @@ fn step_13() -> Unit raise {
     })(t88(x89))
   })
   let t103 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t90), t91), t92), t93), @tactics.conj_tac), t102)
-  sigma_mult_c.set(@tactics.prove(@parser.parse_term("forall a b. 1 < a /\\ 1 < b ==> 1 + b + a * b <= sigma(a * b)"), t103))
+  sigma_mult_c.set(@tactics.prove(@parser.parse_term("∀ a b. 1 < a /\\ 1 < b ==> 1 + b + a * b <= sigma(a * b)"), t103))
 }
 
 ///|
@@ -316,7 +316,7 @@ fn step_14() -> Unit raise {
   let t105 = @class.asm_cases_tac(@parser.parse_term("p = 1"))
   let t104 = @simp.asm_rewrite_tac(@list.List([@prime.prime_0(), sigma_0(), @calc_num.arith()]))
   let t114 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("p = 0"))), t104), t105), t106), @tactics.disch_tac), t107), t108), t109), @tactics.conj_tac), t113)
-  sigma_prime_c.set(@tactics.prove(@parser.parse_term("forall p. prime(p) ==> sigma(p) = p + 1"), t114))
+  sigma_prime_c.set(@tactics.prove(@parser.parse_term("∀ p. prime(p) ==> sigma(p) = p + 1"), t114))
 }
 
 ///|
@@ -371,7 +371,7 @@ fn step_15() -> Unit raise {
   let t116 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@class.contrapos_thm())]))
   let t115 = @simp.rewrite_tac(@list.List([sigma_prime()]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t115), t116), t117), t118), t119), t120), t128), t132), t134), t135), t136), t137), t138), t142), t143), t144), t145), @int.arith_tac)
-  sigma_prime_eq_c.set(@tactics.prove(@parser.parse_term("forall p. prime(p) <=> sigma(p) = p + 1"), t146))
+  sigma_prime_eq_c.set(@tactics.prove(@parser.parse_term("∀ p. prime(p) <=> sigma(p) = p + 1"), t146))
 }
 
 ///|
@@ -411,7 +411,7 @@ fn step_16() -> Unit raise {
   let t148 = @tactics.exists_tac(@parser.parse_term("nsum {2 EXP i | i <= k} (\\i. i)"))
   let t147 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t169 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([sigma(), @arith.exp_eq_0(), @calc_num.arith()]))), t147), t148), @tactics.conj_tac), t150), t151), t153), @nums.induct_tac), t154), t156), t157), t161), t162), t163), t164), t165), t166), @tactics.disch_tac), t167), t168), @int.arith_tac)
-  sigma_pow2_c.set(@tactics.prove(@parser.parse_term("forall k. sigma(2 EXP k) = 2 EXP (k + 1) - 1"), t169))
+  sigma_pow2_c.set(@tactics.prove(@parser.parse_term("∀ k. sigma(2 EXP k) = 2 EXP (k + 1) - 1"), t169))
 }
 
 ///|
@@ -483,7 +483,7 @@ fn step_17() -> Unit raise {
       }, @iterate.nsum_image())(t193))
     })(x194)(x194)
   }), t195), t196), t197), t201), t202), @tactics.strip_tac), t213), t214), t215)
-  sigma_multiplicative_c.set(@tactics.prove(@parser.parse_term("forall a b. coprime(a,b) ==> sigma(a * b) = sigma(a) * sigma(b)"), t216))
+  sigma_multiplicative_c.set(@tactics.prove(@parser.parse_term("∀ a b. coprime(a,b) ==> sigma(a * b) = sigma(a) * sigma(b)"), t216))
 }
 
 ///|
@@ -520,7 +520,7 @@ fn step_18() -> Unit raise {
   })
   let t217 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith(), @prime.prime_0()]))
   let t234 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("k = 0"))), t217), @tactics.disch_tac), t221), t223), t224), t225), @tactics.conj_tac), t226), t227), t231), @tactics.ap_term_tac), t232), @tactics.ap_term_tac), t233), @int.arith_tac)
-  perfect_euclid_c.set(@tactics.prove(@parser.parse_term("forall k. prime(2 EXP k - 1) ==> perfect(2 EXP (k - 1) * (2 EXP k - 1))"), t234))
+  perfect_euclid_c.set(@tactics.prove(@parser.parse_term("∀ k. prime(2 EXP k - 1) ==> perfect(2 EXP (k - 1) * (2 EXP k - 1))"), t234))
 }
 
 ///|
@@ -661,7 +661,7 @@ fn step_19() -> Unit raise {
   let t237 = @list.List([@simp.asm_rewrite_tac(@list.List([perfect()])), t236])
   let t235 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
   let t330 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), even_odd_decomp()))), t235), t237), t238), t240), t247), t248), t255), t256), t257), @tactics.disch_tac), t258), t259), t260), t269), t270), t276), @tactics.ants_tac), t279), t283), t284), t285), t286), t287), t300), t308), t310), t311), t312), t313), t329)
-  perfect_euler_c.set(@tactics.prove(@parser.parse_term("forall n. EVEN(n) /\\ perfect(n)\n       ==> ?k. prime(2 EXP k - 1) /\\ n = 2 EXP (k - 1) * (2 EXP k - 1)"), t330))
+  perfect_euler_c.set(@tactics.prove(@parser.parse_term("∀ n. EVEN(n) /\\ perfect(n)\n       ==> ?k. prime(2 EXP k - 1) /\\ n = 2 EXP (k - 1) * (2 EXP k - 1)"), t330))
 }
 
 ///|

@@ -11,9 +11,9 @@ test "standalone lexer preserves tokens and default comments" {
 }
 
 ///|
-test "forall spelling leaves strings and other symbolic tokens unchanged" {
-  assert_eq(@lexer.lex("forall x. ?!y. P x y"), [
-    Ident("forall"),
+test "∀ spelling leaves strings and other symbolic tokens unchanged" {
+  assert_eq(@lexer.lex("∀ x. ?!y. P x y"), [
+    Ident("∀"),
     Ident("x"),
     Resword("."),
     Ident("?!"),
@@ -23,10 +23,10 @@ test "forall spelling leaves strings and other symbolic tokens unchanged" {
     Ident("x"),
     Ident("y"),
   ])
-  assert_eq(@lexer.lex("\"!\" !! !_x // ! is only a comment\nforall"), [
+  assert_eq(@lexer.lex("\"!\" !! !_x // ! is only a comment\n∀"), [
     Ident("\"!\""),
     Ident("!!"),
     Ident("!_x"),
-    Ident("forall"),
+    Ident("∀"),
   ])
 }
