@@ -223,7 +223,10 @@ pub impl @lib.OHash for WzMaximaObject with fn ohash_visit(self, h) {
 pub fn wz_maxima_tokens(x17 : String) -> @list.List[String] raise {
   let s = x17
   @lib.map(fn(x18 : @parser.Lexcode) -> String raise {
-    x18.text()
+    match x18 {
+      @parser.Lexcode::Ident(s_1) => s_1
+      @parser.Lexcode::Resword(s_2) => s_2
+    }
   }, @parser.lex_list(@lib.explode(s)))
 }
 

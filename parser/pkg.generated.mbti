@@ -81,37 +81,11 @@ pub fn Noparse::to_repr(Self) -> @debug.Repr
 // Types and methods
 pub(all) enum Lexcode {
   Ident(String)
-  Symbol(Symbol)
   Resword(String)
 } derive(Eq, @debug.Debug)
 pub fn Lexcode::equal(Self, Self) -> Bool
-pub fn Lexcode::ident(String) -> Self
-pub fn Lexcode::identifier(Self) -> String?
 pub fn Lexcode::not_equal(Self, Self) -> Bool
-pub fn Lexcode::text(Self) -> String
 pub fn Lexcode::to_repr(Self) -> @debug.Repr
-
-pub(all) enum Symbol {
-  Forall
-  Exists
-  ExistsUnique
-  Choice
-  Lambda
-  And
-  Or
-  Not
-  Implies
-  Iff
-  Equal
-  Less
-  LessEqual
-  Greater
-  GreaterEqual
-} derive(Eq, @debug.Debug)
-pub fn Symbol::equal(Self, Self) -> Bool
-pub fn Symbol::name(Self) -> String
-pub fn Symbol::not_equal(Self, Self) -> Bool
-pub fn Symbol::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 pub type UserParser = (String, (@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise)

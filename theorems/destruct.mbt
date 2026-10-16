@@ -144,7 +144,7 @@ fn name_pull_forall_conv(s : String) -> @equal.Conv {
 fn pa_ident(p : (String) -> Bool) -> P[String] {
   inp => {
     match inp {
-      More(tok_s, tail=rest) if tok_s.identifier() is Some(s) && p(s) => (s, rest)
+      More(Ident(s), tail=rest) if p(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }
@@ -256,7 +256,7 @@ fn obtain(inp : List[Lexcode]) -> (ThmTactic, List[Lexcode]) raise {
   let var_list = @parser.atleast(1, pa_var)
   let obtain_prfx = @parser.map(
     @parser.seq(
-      @parser.map(@parser.seq(tok(Symbol(Choice)), var_list), p => p.1),
+      @parser.map(@parser.seq(tok(Ident("@")), var_list), p => p.1),
       tok(Resword(".")),
     ),
     p => p.0,
@@ -272,7 +272,7 @@ fn atom(inp : List[Lexcode]) -> (ThmTactic, List[Lexcode]) raise {
     match inp {
       More(Ident("_"), tail=res) => (_ => @tactics.all_tac, res)
       More(Ident("+"), tail=res) => (th => @tactics.mp_tac(th), res)
-      More(tok_s, tail=res) if tok_s.identifier() is Some(s) && @printer.isalnum(s) =>
+      More(Ident(s), tail=res) if @printer.isalnum(s) =>
         (th => @tactics.label_tac(s, th), res)
       _ => raise @parser.Noparse
     }
@@ -294,7 +294,7 @@ fn atom(inp : List[Lexcode]) -> (ThmTactic, List[Lexcode]) raise {
 ///|
 fn number(inp : List[Lexcode]) -> (Int, List[Lexcode]) raise {
   match inp {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) => {
+    More(Ident(s), tail=rest) => {
       let n = @lib.check(n => 1 <= n, @lib.int_of_string(s)) catch {
         Failure(_) => raise @parser.Noparse
         e => raise e
@@ -307,7 +307,7 @@ fn number(inp : List[Lexcode]) -> (Int, List[Lexcode]) raise {
 
 ///|
 fn pa_prefix(inp : List[Lexcode]) -> (List[Tactic], List[Lexcode]) raise {
-  let pa_fix = @parser.map(@parser.seq(tok(Symbol(Forall)), fix_parser), p => p.1)
+  let pa_fix = @parser.map(@parser.seq(tok(Ident("!")), fix_parser), p => p.1)
   let pa_dest = @parser.map(destruct, ttac => @tactics.disch_then(ttac))
   @parser.elistof(
     @parser.alt(pa_fix, pa_dest),
