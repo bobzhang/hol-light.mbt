@@ -91,15 +91,13 @@ pub fn consider(x14 : String, x15 : @kernel.Term, x16 : @list.List[((@list.List[
   }
   let n_1 = findsuchthat(1L)
   let vars = @lib.string_sub(vars_suchthat, 0, @lib.int63_to_int(@lib.sub63(n_1, 1L)))
-  let xl = @lib.map(@parser.parse_term, (fn(x23 : @list.List[String]) -> @list.List[String] raise {
+  let xl = @lib.map(@parser.parse_term, (fn(x23 : String) -> @list.List[String] raise {
     (fn(x22 : @list.List[@lexer.Lexcode]) -> @list.List[String] raise {
       (fn(x21 : (@list.List[String], @list.List[@lexer.Lexcode])) -> @list.List[String] raise {
         x21.0
       })(parse_using(x22))
-    })(@lexer.lex_list(x23))
-  })((fn(x24 : String) -> @list.List[String] raise {
-    @lib.explode(x24)
-  })(vars)))
+    })(@lexer.lex(x23))
+  })(vars))
   let tm = @lib.itlist(buildexist, xl, t)
   match prfs {
     More(p, tail=ps) => {

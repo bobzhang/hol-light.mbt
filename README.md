@@ -60,7 +60,7 @@ Library and Multivariate packages load on demand, after what they need:
 let th = @prime.prime_2()
 ```
 
-The `lexer` package owns `Lexcode`, `lex`, `lex_list`, and `comment_token`.
+The `lexer` package owns `Lexcode`, `lex`, and `comment_token`.
 The `parser` package consumes lexer tokens and owns parser combinators and
 type/term parsing. Both packages use the syntax tables in `printer`.
 

@@ -12,8 +12,6 @@ pub let comment_token : @ref.Ref[Lexcode]
 
 pub fn lex(String) -> @list.List[Lexcode] raise
 
-pub fn lex_list(@list.List[String]) -> @list.List[Lexcode] raise
-
 // Errors
 
 // Types and methods

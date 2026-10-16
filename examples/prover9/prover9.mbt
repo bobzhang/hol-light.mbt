@@ -1045,7 +1045,7 @@ pub fn prover9_refute(x146 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
       ignore(@lib.sys_remove(filename_in))
       ignore(@lib.sys_remove(filename_out))
     }
-    match sexpression(@lexer.lex_list(@lib.explode(skipheader(0L, p9proof)))) {
+    match sexpression(@lexer.lex(skipheader(0L, p9proof))) {
       (Sexp::List(sexps), unp) => {
         let t184 = @lexer.Lexcode::Ident("OBJECT")
         let t185 = @lexer.Lexcode::Ident("PROOF")

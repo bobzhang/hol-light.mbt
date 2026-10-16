@@ -8,5 +8,4 @@ test "standalone lexer preserves tokens and default comments" {
     Ident("z"),
   ])
   assert_eq(@lexer.lex(source), expected)
-  assert_eq(@lexer.lex_list(@list.List([source])), expected)
 }

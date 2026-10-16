@@ -10,11 +10,9 @@ pub type Mterm = String
 pub fn parse_context_term(x1 : String, x2 : @list.List[@kernel.Term]) -> @kernel.Term raise {
   let s = x1
   let env = x2
-  let (ptm, l) = (fn(x3 : @list.List[String]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
-    @parser.parse_preterm(@lexer.lex_list(x3))
-  })((fn(x4 : String) -> @list.List[String] raise {
-    @lib.explode(x4)
-  })(s))
+  let (ptm, l) = (fn(x3 : String) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+    @parser.parse_preterm(@lexer.lex(x3))
+  })(s)
   if @list.List::is_empty(l) {
     let t7 = @lib.map(fn(x6 : @kernel.Term) -> (String, @preterm.Pretype) raise {
       (fn(x5 : (String, @kernel.HolType)) -> (String, @preterm.Pretype) raise {

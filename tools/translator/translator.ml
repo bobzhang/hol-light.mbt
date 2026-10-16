@@ -604,7 +604,6 @@ module Names = struct
     | "_FALSITY_" -> Some "falsity"
     (* parser.ml's combinators *)
     | ">>" -> Some "map" | "++" -> Some "seq" | "|||" -> Some "alt"
-    | "lex" -> Some "lex_list"
     | _ -> None
 
   (* An uppercase name whose lowercase form is itself an OCaml value (e.g.

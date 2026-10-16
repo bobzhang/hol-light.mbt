@@ -5,15 +5,15 @@
 /// parse_preterm
 fn step_1() -> Unit raise {
   parse_preterm_c.set(fn(x5 : String) -> @preterm.Preterm raise {
-    (fn(x3 : @list.List[String]) -> @preterm.Preterm raise {
+    (fn(x3 : String) -> @preterm.Preterm raise {
       (fn(x2 : @list.List[@lexer.Lexcode]) -> @preterm.Preterm raise {
         (fn(
           x1 : (@preterm.Preterm, @list.List[@lexer.Lexcode]),
         ) -> @preterm.Preterm raise {
           x1.0
         })(@parser.parse_preterm(x2))
-      })(@lexer.lex_list(x3))
-    })((fn(x4 : String) -> @list.List[String] raise { @lib.explode(x4) })(x5))
+      })(@lexer.lex(x3))
+    })(x5)
   })
 }
 
