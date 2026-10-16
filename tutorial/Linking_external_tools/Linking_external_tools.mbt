@@ -198,7 +198,7 @@ pub fn lexe(x24 : String) -> @list.List[String] raise {
       @lexer.Lexcode::Resword(s_1) => s_1
       @lexer.Lexcode::Ident(s_2) => s_2
     }
-  }, @lexer.lex_list(@lib.explode(s)))
+  }, @lexer.lex(s))
 }
 
 ///|

@@ -1361,6 +1361,21 @@ module Lower = struct
         { (Hashtbl.find local_aliases (Ident.unique_name id)) with exp_type = e.exp_type; exp_loc = e.exp_loc }
     | _ -> e
 
+  let source_value file name e =
+    match (dealias e).exp_desc with
+    | Texp_ident (p, _, _) -> Prov.lookup p = Some (file, name)
+    | _ -> false
+
+  (* The MoonBit lexer takes the original string, whereas upstream's lex
+     takes explode's list of one-character strings. Match provenance so
+     locally shadowed lex/explode/composition functions are not rewritten. *)
+  let string_lexer_head = {
+    hstmts = []; hexp = Atom "@lexer.lex";
+    hmty = M.Fun ([ M.Named ("String", []) ],
+      M.Named ("@list.List", [ M.Named ("@lexer.Lexcode", []) ]), true);
+    hoty = None;
+  }
+
   let rec lower ?expect (e : expression) : stmt list * exp * M.ty =
     let e = dealias e in
     let ss, x, t = lower0 ?expect e in
@@ -1584,6 +1599,28 @@ module Lower = struct
     let f = dealias f in
     let loc = whole.exp_loc in
     match f.exp_desc with
+    | Texp_ident (p, _, _) when lib_combinator p = Some "o"
+        && (match args with
+            | [ lex; explode ] | [ lex; explode; _ ] ->
+                source_value "parser.ml" "lex" lex && source_value "lib.ml" "explode" explode
+            | _ -> false) ->
+        (* lex o explode, including its use inside longer compositions *)
+        apply_head ?expect ~res:whole.exp_type loc string_lexer_head (List.tl (List.tl args))
+    | Texp_ident _ when source_value "parser.ml" "lex" f ->
+        (match args with
+         | [ { exp_desc = Texp_apply (explode, [ (Asttypes.Nolabel, Some s) ]); _ } ]
+             when source_value "lib.ml" "explode" explode ->
+             apply_head ?expect ~res:whole.exp_type loc string_lexer_head [ s ]
+         | _ ->
+             (* Preserve first-class lex and arbitrary list inputs without
+                requiring a separate public MoonBit adapter. *)
+             let cs = fresh "cs" in
+             let hmty = mty_of f.exp_type in
+             let ps, ret = match hmty with M.Fun (ps, ret, _) -> (ps, ret) | _ -> assert false in
+             let hexp = typed_lam [ param cs (List.hd ps) ] ret
+               ([], Call (Atom "@lexer.lex", [ Call (Atom "@lib.implode", [ Atom cs ]) ])) in
+             apply_head ?expect ~res:whole.exp_type loc
+               { hstmts = []; hexp; hmty; hoty = Some f.exp_type } args)
     | Texp_ident (p, _, vd) when list_alias p vd <> None ->
         let name = Option.get (list_alias p vd) in
         (match Names.resolve "lib.ml" name with

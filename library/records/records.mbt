@@ -63,7 +63,7 @@ fn step_1() -> Unit raise {
     x5 : String,
   ) -> (String, @list.List[(String, @kernel.HolType)]) raise {
     let s_1 = x5
-    match @lexer.lex_list(@lib.explode(s_1)) {
+    match @lexer.lex(s_1) {
       More(
         @lexer.Lexcode::Ident(tyname),
         tail=More(@lexer.Lexcode::Ident("="), tail=rst_2)

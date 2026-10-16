@@ -227,7 +227,7 @@ pub fn wz_maxima_tokens(x17 : String) -> @list.List[String] raise {
       @lexer.Lexcode::Ident(s_1) => s_1
       @lexer.Lexcode::Resword(s_2) => s_2
     }
-  }, @lexer.lex_list(@lib.explode(s)))
+  }, @lexer.lex(s))
 }
 
 ///|

@@ -835,11 +835,9 @@ fn step_29() -> Unit raise {
   })
   let parse_ntrie : (String) -> @kernel.Term raise = fn(x109 : String) -> @kernel.Term raise {
     let s_2 = x109
-    let (ptm, l) = (fn(x110 : @list.List[String]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
-      preparse_ntrie(@lexer.lex_list(x110))
-    })((fn(x111 : String) -> @list.List[String] raise {
-      @lib.explode(x111)
-    })(s_2))
+    let (ptm, l) = (fn(x110 : String) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+      preparse_ntrie(@lexer.lex(x110))
+    })(s_2)
     if @list.List::is_empty(l) {
       @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
     } else {

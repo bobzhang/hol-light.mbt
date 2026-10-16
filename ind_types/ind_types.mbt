@@ -6201,17 +6201,15 @@ fn step_34() -> Unit raise {
   ] raise {
     let s = x733
     let (spec, rst_3) = (fn(
-      x734 : @list.List[String],
+      x734 : String,
     ) -> (
       @list.List[
         (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
       ],
       @list.List[@lexer.Lexcode],
     ) raise {
-      parse_type_definition(@lexer.lex_list(x734))
-    })(
-      (fn(x735 : String) -> @list.List[String] raise { @lib.explode(x735) })(s),
-    )
+      parse_type_definition(@lexer.lex(x734))
+    })(s)
     if rst_3 == @list.List([]) {
       spec
     } else {
