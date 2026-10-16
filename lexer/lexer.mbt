@@ -8,9 +8,6 @@
 // ===========================================================================
 
 ///|
-using @list {type List}
-
-///|
 fn init {
   @printer.reserve_words(@list.singleton("//"))
 }
@@ -212,7 +209,7 @@ fn skip_spaces(chars : Array[Char], i : Int) -> Int {
 /// Split a string into HOL tokens. As upstream, the input is processed as
 /// bytes (its UTF-8 encoding), one character per byte, so string literals
 /// carry exactly OCaml's bytes; non-ASCII bytes never form identifiers.
-pub fn lex(s : String) -> List[Lexcode] raise {
+pub fn lex(s : String) -> Array[Lexcode] raise {
   let chars : Array[Char] = [
     for b in @utf8.encode(s) => b.to_int().unsafe_to_char()
   ]
@@ -238,5 +235,5 @@ pub fn lex(s : String) -> List[Lexcode] raise {
   if skip_spaces(chars, i) < chars.length() {
     raise Failure("Unparsed input")
   }
-  @list.List(toks)
+  toks
 }

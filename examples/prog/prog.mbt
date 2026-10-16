@@ -1476,20 +1476,20 @@ fn step_85() -> Unit raise {
 }
 
 ///|
-let parse_program_c : @lib.Cell[(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise] = @lib.Cell::new("parse_program")
+let parse_program_c : @lib.Cell[(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise] = @lib.Cell::new("parse_program")
 
 ///|
 /// `parse_program`
-pub fn parse_program(x : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_program(x : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
   (parse_program_c.get())(x)
 }
 
 ///|
-let parse_program_assertion_c : @lib.Cell[(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise] = @lib.Cell::new("parse_program_assertion")
+let parse_program_assertion_c : @lib.Cell[(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise] = @lib.Cell::new("parse_program_assertion")
 
 ///|
 /// `parse_program_assertion`
-pub fn parse_program_assertion(x : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_program_assertion(x : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
   (parse_program_assertion_c.get())(x)
 }
 
@@ -1653,20 +1653,20 @@ fn step_86() -> Unit raise {
       }
     }
   }
-  let expression : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise) raise = fn(x226 : @preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise) raise {
+  let expression : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) raise = fn(x226 : @preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) raise {
     let s_2 = x226
     @parser.map(@parser.parse_preterm, fn(x228 : @preterm.Preterm) -> @preterm.Preterm raise {
       let p = x228
       @preterm.Preterm::Absp(s_2, p)
     })
   }
-  let identifier : (@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise = fn(x229 : @list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise {
+  let identifier : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise = fn(x229 : ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise {
     match x229 {
-      More(@lexer.Lexcode::Ident(n_1), tail=rest) => (n_1, rest)
+      [@lexer.Lexcode::Ident(n_1), ..rest] => (n_1, rest)
       _ => raise @parser.Noparse
     }
   }
-  let variant : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise) raise = fn(x230 : @preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise) raise {
+  let variant : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) raise = fn(x230 : @preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) raise {
     let s_3 = x230
     let t233 = expression(s_3)
     let t235 = @parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Ident("measure")), t233), fn(x234 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
@@ -1677,7 +1677,7 @@ fn step_86() -> Unit raise {
       x232.1
     }), t235)
   }
-  let annotation : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise) raise = fn(x236 : @preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise) raise {
+  let annotation : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise) raise = fn(x236 : @preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise) raise {
     let s_4 = x236
     let t242 = @parser.a(@lexer.Lexcode::Resword("]"))
     let t241 = variant(s_4)
@@ -1689,18 +1689,18 @@ fn step_86() -> Unit raise {
       (i_2, v_4)
     })
   }
-  let command = (x244 : @preterm.Preterm, x245 : @list.List[@lexer.Lexcode]) => command_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x244, x245)
-  let commands = (x278 : @preterm.Preterm, x279 : @list.List[@lexer.Lexcode]) => commands_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x278, x279)
-  let program : (@list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise = fn(x284 : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise {
+  let command = (x244 : @preterm.Preterm, x245 : ArrayView[@lexer.Lexcode]) => command_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x244, x245)
+  let commands = (x278 : @preterm.Preterm, x279 : ArrayView[@lexer.Lexcode]) => commands_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x278, x279)
+  let program : (ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise = fn(x284 : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise {
     let i_5 = x284
     let t285 = @parser.a(@lexer.Lexcode::Resword(";"))
     let (((_, s_7), _), r) = @parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("var")), @parser.parse_preterm), t285)(i_5)
-    let (c_13, r_p) = @parser.map(@parser.seq((x286 : @list.List[@lexer.Lexcode]) => commands(s_7, x286), @parser.a(@lexer.Lexcode::Resword("end"))), fn(x287 : (@preterm.Preterm, @lexer.Lexcode)) -> @preterm.Preterm raise {
+    let (c_13, r_p) = @parser.map(@parser.seq((x286 : ArrayView[@lexer.Lexcode]) => commands(s_7, x286), @parser.a(@lexer.Lexcode::Resword("end"))), fn(x287 : (@preterm.Preterm, @lexer.Lexcode)) -> @preterm.Preterm raise {
       x287.0
     })(r)
     ((s_7, c_13), r_p)
   }
-  let assertion : (@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Ident("correct")), @parser.parse_preterm), program), @parser.parse_preterm), fn(x288 : (((@lexer.Lexcode, @preterm.Preterm), (@preterm.Preterm, @preterm.Preterm)), @preterm.Preterm)) -> @preterm.Preterm raise {
+  let assertion : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Ident("correct")), @parser.parse_preterm), program), @parser.parse_preterm), fn(x288 : (((@lexer.Lexcode, @preterm.Preterm), (@preterm.Preterm, @preterm.Preterm)), @preterm.Preterm)) -> @preterm.Preterm raise {
     let (((_, p_1), (s_8, c_14)), q) = x288
     let t290 = @preterm.Preterm::Absp(s_8, q)
     let t289 = @preterm.Preterm::Absp(s_8, p_1)
@@ -1724,9 +1724,9 @@ fn[TB] lmk_abort_l(abort_ptm : @preterm.Preterm, x204 : TB) -> @preterm.Preterm 
 }
 
 ///|
-fn command_l(skip_ptm : @preterm.Preterm, abort_ptm : @preterm.Preterm, expression : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise) raise, lmk_if : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise, lmk_ite : (@preterm.Preterm) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, annotation : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise) raise, lmk_gwhile : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_gdo : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_assert : (@preterm.Preterm) -> @preterm.Preterm raise, identifier : (@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise, lmk_assign : (@preterm.Preterm) -> ((String) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_seq : (@preterm.Preterm) -> ((@list.List[@preterm.Preterm]) -> @preterm.Preterm raise) raise, x244 : @preterm.Preterm, x245 : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @list.List[@lexer.Lexcode])) raise {
-  let command = (x244 : @preterm.Preterm, x245 : @list.List[@lexer.Lexcode]) => command_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x244, x245)
-  let commands = (x278 : @preterm.Preterm, x279 : @list.List[@lexer.Lexcode]) => commands_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x278, x279)
+fn command_l(skip_ptm : @preterm.Preterm, abort_ptm : @preterm.Preterm, expression : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) raise, lmk_if : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise, lmk_ite : (@preterm.Preterm) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, annotation : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise) raise, lmk_gwhile : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_gdo : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_assert : (@preterm.Preterm) -> @preterm.Preterm raise, identifier : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise, lmk_assign : (@preterm.Preterm) -> ((String) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_seq : (@preterm.Preterm) -> ((@list.List[@preterm.Preterm]) -> @preterm.Preterm raise) raise, x244 : @preterm.Preterm, x245 : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
+  let command = (x244 : @preterm.Preterm, x245 : ArrayView[@lexer.Lexcode]) => command_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x244, x245)
+  let commands = (x278 : @preterm.Preterm, x279 : ArrayView[@lexer.Lexcode]) => commands_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x278, x279)
   let s_5 = x244
   let i_3 = x245
   let t277 = @parser.map(@parser.seq(@parser.seq(identifier, @parser.a(@lexer.Lexcode::Resword(":="))), @parser.parse_preterm), fn(x276 : ((String, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
@@ -1742,23 +1742,23 @@ fn command_l(skip_ptm : @preterm.Preterm, abort_ptm : @preterm.Preterm, expressi
   let t269 = expression(s_5)
   let t268 = @parser.a(@lexer.Lexcode::Resword("while"))
   let t266 = @parser.possibly(annotation(s_5))
-  let t271 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("do")), t266), (x267 : @list.List[@lexer.Lexcode]) => command(s_5, x267)), t268), t269), fn(x270 : ((((@lexer.Lexcode, @list.List[(@preterm.Preterm, @preterm.Preterm)]), @preterm.Preterm), @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
+  let t271 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("do")), t266), (x267 : ArrayView[@lexer.Lexcode]) => command(s_5, x267)), t268), t269), fn(x270 : ((((@lexer.Lexcode, @list.List[(@preterm.Preterm, @preterm.Preterm)]), @preterm.Preterm), @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
     let ((((_, al_3), c_11), _), e_13) = x270
     lmk_gdo(al_3)(c_11)(e_13)
   })
   let t262 = @parser.possibly(annotation(s_5))
   let t261 = @parser.a(@lexer.Lexcode::Resword("do"))
   let t260 = expression(s_5)
-  let t265 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("while")), t260), t261), t262), (x263 : @list.List[@lexer.Lexcode]) => command(s_5, x263)), fn(x264 : ((((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode), @list.List[(@preterm.Preterm, @preterm.Preterm)]), @preterm.Preterm)) -> @preterm.Preterm raise {
+  let t265 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("while")), t260), t261), t262), (x263 : ArrayView[@lexer.Lexcode]) => command(s_5, x263)), fn(x264 : ((((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode), @list.List[(@preterm.Preterm, @preterm.Preterm)]), @preterm.Preterm)) -> @preterm.Preterm raise {
     let ((((_, e_12), _), al_2), c_10) = x264
     lmk_gwhile(al_2)(e_12)(c_10)
   })
-  let t256 = @parser.possibly(@parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword("else")), (x254 : @list.List[@lexer.Lexcode]) => command(s_5, x254)), fn(x255 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
+  let t256 = @parser.possibly(@parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword("else")), (x254 : ArrayView[@lexer.Lexcode]) => command(s_5, x254)), fn(x255 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
     x255.1
   }))
   let t252 = @parser.a(@lexer.Lexcode::Resword("then"))
   let t251 = expression(s_5)
-  let t259 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("if")), t251), t252), (x253 : @list.List[@lexer.Lexcode]) => command(s_5, x253)), t256), fn(x257 : ((((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode), @preterm.Preterm), @list.List[@preterm.Preterm])) -> @preterm.Preterm raise {
+  let t259 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("if")), t251), t252), (x253 : ArrayView[@lexer.Lexcode]) => command(s_5, x253)), t256), fn(x257 : ((((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode), @preterm.Preterm), @list.List[@preterm.Preterm])) -> @preterm.Preterm raise {
     let ((((_, e_11), _), c_9), cs_1) = x257
     if @list.List::is_empty(cs_1) {
       lmk_if(e_11)(c_9)
@@ -1770,19 +1770,19 @@ fn command_l(skip_ptm : @preterm.Preterm, abort_ptm : @preterm.Preterm, expressi
   let t250 = @parser.map(@parser.a(@lexer.Lexcode::Resword("abort")), ((x204) => lmk_abort_l(abort_ptm, x204)))
   let t249 = @parser.map(@parser.a(@lexer.Lexcode::Resword("skip")), ((x203) => lmk_skip_l(skip_ptm, x203)))
   let t247 = @parser.a(@lexer.Lexcode::Resword(")"))
-  @parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("(")), (x246 : @list.List[@lexer.Lexcode]) => commands(s_5, x246)), t247), fn(x248 : ((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode)) -> @preterm.Preterm raise {
+  @parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.alt(@parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("(")), (x246 : ArrayView[@lexer.Lexcode]) => commands(s_5, x246)), t247), fn(x248 : ((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode)) -> @preterm.Preterm raise {
     let ((_, c_8), _) = x248
     c_8
   }), t249), t250), t259), t265), t271), t275), t277)(i_3)
 }
 
 ///|
-fn commands_l(skip_ptm : @preterm.Preterm, abort_ptm : @preterm.Preterm, expression : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise) raise, lmk_if : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise, lmk_ite : (@preterm.Preterm) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, annotation : (@preterm.Preterm) -> ((@list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise) raise, lmk_gwhile : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_gdo : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_assert : (@preterm.Preterm) -> @preterm.Preterm raise, identifier : (@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise, lmk_assign : (@preterm.Preterm) -> ((String) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_seq : (@preterm.Preterm) -> ((@list.List[@preterm.Preterm]) -> @preterm.Preterm raise) raise, x278 : @preterm.Preterm, x279 : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @list.List[@lexer.Lexcode])) raise {
-  let command = (x244 : @preterm.Preterm, x245 : @list.List[@lexer.Lexcode]) => command_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x244, x245)
-  let commands = (x278 : @preterm.Preterm, x279 : @list.List[@lexer.Lexcode]) => commands_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x278, x279)
+fn commands_l(skip_ptm : @preterm.Preterm, abort_ptm : @preterm.Preterm, expression : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) raise, lmk_if : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise, lmk_ite : (@preterm.Preterm) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, annotation : (@preterm.Preterm) -> ((ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise) raise, lmk_gwhile : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_gdo : (@list.List[(@preterm.Preterm, @preterm.Preterm)]) -> ((@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_assert : (@preterm.Preterm) -> @preterm.Preterm raise, identifier : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise, lmk_assign : (@preterm.Preterm) -> ((String) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise) raise, lmk_seq : (@preterm.Preterm) -> ((@list.List[@preterm.Preterm]) -> @preterm.Preterm raise) raise, x278 : @preterm.Preterm, x279 : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
+  let command = (x244 : @preterm.Preterm, x245 : ArrayView[@lexer.Lexcode]) => command_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x244, x245)
+  let commands = (x278 : @preterm.Preterm, x279 : ArrayView[@lexer.Lexcode]) => commands_l(skip_ptm, abort_ptm, expression, lmk_if, lmk_ite, annotation, lmk_gwhile, lmk_gdo, lmk_assert, identifier, lmk_assign, lmk_seq, x278, x279)
   let s_6 = x278
   let i_4 = x279
-  @parser.map(@parser.seq((x280 : @list.List[@lexer.Lexcode]) => command(s_6, x280), @parser.possibly(@parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword(";")), (x281 : @list.List[@lexer.Lexcode]) => commands(s_6, x281)), fn(x282 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
+  @parser.map(@parser.seq((x280 : ArrayView[@lexer.Lexcode]) => command(s_6, x280), @parser.possibly(@parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword(";")), (x281 : ArrayView[@lexer.Lexcode]) => commands(s_6, x281)), fn(x282 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
     x282.1
   }))), fn(x283 : (@preterm.Preterm, @list.List[@preterm.Preterm])) -> @preterm.Preterm raise {
     let (c_12, cs_2) = x283

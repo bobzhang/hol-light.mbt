@@ -6,9 +6,9 @@
 fn step_1() -> Unit raise {
   parse_preterm_c.set(fn(x5 : String) -> @preterm.Preterm raise {
     (fn(x3 : String) -> @preterm.Preterm raise {
-      (fn(x2 : @list.List[@lexer.Lexcode]) -> @preterm.Preterm raise {
+      (fn(x2 : ArrayView[@lexer.Lexcode]) -> @preterm.Preterm raise {
         (fn(
-          x1 : (@preterm.Preterm, @list.List[@lexer.Lexcode]),
+          x1 : (@preterm.Preterm, ArrayView[@lexer.Lexcode]),
         ) -> @preterm.Preterm raise {
           x1.0
         })(@parser.parse_preterm(x2))

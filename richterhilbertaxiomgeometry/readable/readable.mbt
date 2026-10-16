@@ -293,10 +293,10 @@ pub fn make_env(x25 : @list.List[(String, @kernel.Thm)], x26 : @kernel.Term) -> 
 pub fn parse_env_string(x32 : @list.List[(String, @preterm.Pretype)], x33 : String) -> @kernel.Term raise {
   let env = x32
   let s = x33
-  let (ptm, l) = (fn(x34 : String) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+  let (ptm, l) = (fn(x34 : String) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise {
     @parser.parse_preterm(@lexer.lex(x34))
   })(s)
-  if @list.List::is_empty(l) {
+  if l.is_empty() {
     @preterm.term_of_preterm(((x36 : @preterm.Preterm) => @preterm.retypecheck(env, x36))(ptm))
   } else {
     raise Readable_fail::Readable_fail(("Unparsed input  at the end of the term\n" + s))

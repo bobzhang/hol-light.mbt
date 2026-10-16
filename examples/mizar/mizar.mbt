@@ -1131,7 +1131,7 @@ fn step_20() -> Unit raise {
 
 ///|
 /// `parse_preform`
-pub fn parse_preform(x286 : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_preform(x286 : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
   let l_1 = x286
   let (ptm, rst) = @parser.parse_preterm(l_1)
   let ptm_p = @preterm.Preterm::Typing(ptm, @preterm.Pretype::Ptycon("bool", @list.List([])))
@@ -1140,7 +1140,7 @@ pub fn parse_preform(x286 : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @
 
 ///|
 /// `parse_fulltype`
-pub fn parse_fulltype(x287 : @list.List[@lexer.Lexcode]) -> ((@kernel.HolType, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_fulltype(x287 : ArrayView[@lexer.Lexcode]) -> ((@kernel.HolType, ArrayView[@lexer.Lexcode])) raise {
   let l_1 = x287
   let (pty, rst) = @parser.parse_pretype(l_1)
   (@preterm.type_of_pretype(pty), rst)
@@ -1148,31 +1148,31 @@ pub fn parse_fulltype(x287 : @list.List[@lexer.Lexcode]) -> ((@kernel.HolType, @
 
 ///|
 /// `parse_ident`
-pub fn parse_ident(x288 : @list.List[@lexer.Lexcode]) -> ((String, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_ident(x288 : ArrayView[@lexer.Lexcode]) -> ((String, ArrayView[@lexer.Lexcode])) raise {
   let l_1 = x288
-  match @lib.hd(l_1) {
-    @lexer.Lexcode::Ident(n) => (n, @lib.tl(l_1))
+  match token_hd(l_1) {
+    @lexer.Lexcode::Ident(n) => (n, token_tl(l_1))
     _ => raise @parser.Noparse
   }
 }
 
 ///|
 /// `parse_string`
-pub fn parse_string(x289 : @list.List[@lexer.Lexcode]) -> ((String, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_string(x289 : ArrayView[@lexer.Lexcode]) -> ((String, ArrayView[@lexer.Lexcode])) raise {
   let l_1 = x289
-  match @lib.hd(l_1) {
-    @lexer.Lexcode::Ident(n) => (n, @lib.tl(l_1))
-    @lexer.Lexcode::Resword(n_1) => (n_1, @lib.tl(l_1))
+  match token_hd(l_1) {
+    @lexer.Lexcode::Ident(n) => (n, token_tl(l_1))
+    @lexer.Lexcode::Resword(n_1) => (n_1, token_tl(l_1))
   }
 }
 
 ///|
 /// `parse_lform`
-pub fn parse_lform(x290 : String, x291 : @list.List[@lexer.Lexcode]) -> (((String, @preterm.Preterm), @list.List[@lexer.Lexcode])) raise {
+pub fn parse_lform(x290 : String, x291 : ArrayView[@lexer.Lexcode]) -> (((String, @preterm.Preterm), ArrayView[@lexer.Lexcode])) raise {
   let oldlab = x290
   let l_1 = x291
   match l_1 {
-    More(@lexer.Lexcode::Ident(n), tail=More(@lexer.Lexcode::Resword(":"), tail=rst)) => {
+    [@lexer.Lexcode::Ident(n), @lexer.Lexcode::Resword(":"), ..rst] => {
       if (oldlab == "") {
         parse_lform(n, rst)
       } else {
@@ -1188,33 +1188,33 @@ pub fn parse_lform(x290 : String, x291 : @list.List[@lexer.Lexcode]) -> (((Strin
 
 ///|
 /// `parse_lforms`
-pub fn parse_lforms(x292 : String) -> ((@list.List[@lexer.Lexcode]) -> (@list.List[(String, @preterm.Preterm)], @list.List[@lexer.Lexcode]) raise) raise {
+pub fn parse_lforms(x292 : String) -> ((ArrayView[@lexer.Lexcode]) -> (@list.List[(String, @preterm.Preterm)], ArrayView[@lexer.Lexcode]) raise) raise {
   let oldlab = x292
-  @parser.listof((x294 : @list.List[@lexer.Lexcode]) => parse_lform(oldlab, x294), @parser.a(@lexer.Lexcode::Resword("and")), "labelled formula")
+  @parser.listof((x294 : ArrayView[@lexer.Lexcode]) => parse_lform(oldlab, x294), @parser.a(@lexer.Lexcode::Resword("and")), "labelled formula")
 }
 
 ///|
 /// `parse_just`
-pub fn parse_just(x295 : Bool, x296 : @list.List[@lexer.Lexcode]) -> (((String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]), @list.List[@lexer.Lexcode])) raise {
+pub fn parse_just(x295 : Bool, x296 : ArrayView[@lexer.Lexcode]) -> (((String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]), ArrayView[@lexer.Lexcode])) raise {
   let tlink = x295
   let l_1 = x296
-  if @list.List::is_empty(l_1) {
+  if l_1.is_empty() {
     if tlink {
       (("", @list.List([(x297 : @list.List[(String, @kernel.Thm)]) => l("", x297)])), l_1)
     } else {
       (("", @list.List([])), l_1)
     }
   } else {
-    match @lib.hd(l_1) {
+    match token_hd(l_1) {
       @lexer.Lexcode::Resword("by") => {
-        let (pot, rem) = parse_string(@lib.tl(l_1))
-        if (if @list.List::is_empty(rem) {
+        let (pot, rem) = parse_string(token_tl(l_1))
+        if (if rem.is_empty() {
           true
         } else {
           let t298 = @lexer.Lexcode::Ident(",")
-          if (@lib.hd(rem) != t298) {
+          if (token_hd(rem) != t298) {
             let t299 = @lexer.Lexcode::Ident("with")
-            (@lib.hd(rem) != t299)
+            (token_hd(rem) != t299)
           } else {
             false
           }
@@ -1234,8 +1234,8 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@lexer.Lexcode]) -> (((String, 
           }
         } else {
           let t305 = @lexer.Lexcode::Ident(",")
-          if (@lib.hd(rem) == t305) {
-            let t306 = @lib.tl(rem)
+          if (token_hd(rem) == t305) {
+            let t306 = token_tl(rem)
             let (oths, rst) = @parser.listof(parse_string, @parser.a(@lexer.Lexcode::Ident(",")), "theorem name")(t306)
             let ths = if tlink {
               (oths.prepend(pot)).prepend("")
@@ -1248,7 +1248,7 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@lexer.Lexcode]) -> (((String, 
               }
             }, ths)), rst)
           } else {
-            let t309 = @lib.tl(rem)
+            let t309 = token_tl(rem)
             let (oths_1, rst_1) = @parser.listof(parse_string, @parser.a(@lexer.Lexcode::Ident(",")), "theorem name")(t309)
             let ths_1 = if tlink {
               oths_1.prepend("")
@@ -1263,7 +1263,7 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@lexer.Lexcode]) -> (((String, 
           }
         }
       }
-      @lexer.Lexcode::Resword("proof") => (("proof", @list.List([])), @lib.tl(l_1))
+      @lexer.Lexcode::Resword("proof") => (("proof", @list.List([])), token_tl(l_1))
       _ => {
         if tlink {
           (("", @list.List([(x312 : @list.List[(String, @kernel.Thm)]) => l("", x312)])), l_1)
@@ -1277,27 +1277,27 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@lexer.Lexcode]) -> (((String, 
 
 ///|
 /// `parse_step`
-pub fn parse_step(x313 : Bool, x314 : @list.List[@lexer.Lexcode]) -> ((@tactics.Refinement, @list.List[@lexer.Lexcode])) raise {
+pub fn parse_step(x313 : Bool, x314 : ArrayView[@lexer.Lexcode]) -> ((@tactics.Refinement, ArrayView[@lexer.Lexcode])) raise {
   let tlink = x313
   let l_1 = x314
-  let t427 = @parser.map(@parser.seq(parse_lforms(""), (x423 : @list.List[@lexer.Lexcode]) => parse_just(tlink, x423)), fn(x424 : (@list.List[(String, @preterm.Preterm)], (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t427 = @parser.map(@parser.seq(parse_lforms(""), (x423 : ArrayView[@lexer.Lexcode]) => parse_just(tlink, x423)), fn(x424 : (@list.List[(String, @preterm.Preterm)], (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let (lf_6, jst_5) = x424
     @tactics.by((x426 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => mizar_step_tac(false, lf_6, jst_5, x426))
   })
   let t417 = parse_lforms("")
-  let t422 = @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("thus")), t417), (x418 : @list.List[@lexer.Lexcode]) => parse_just(tlink, x418)), fn(x419 : ((@lexer.Lexcode, @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t422 = @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("thus")), t417), (x418 : ArrayView[@lexer.Lexcode]) => parse_just(tlink, x418)), fn(x419 : ((@lexer.Lexcode, @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let ((_, lf_5), jst_4) = x419
     @tactics.by((x421 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => mizar_step_tac(true, lf_5, jst_4, x421))
   })
   let t411 = parse_lforms("")
-  let t416 = @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("hence")), t411), (x412 : @list.List[@lexer.Lexcode]) => parse_just(true, x412)), fn(x413 : ((@lexer.Lexcode, @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t416 = @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("hence")), t411), (x412 : ArrayView[@lexer.Lexcode]) => parse_just(true, x412)), fn(x413 : ((@lexer.Lexcode, @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let ((_, lf_4), jst_3) = x413
     @tactics.by((x415 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => mizar_step_tac(true, lf_4, jst_3, x415))
   })
-  let t410 = @parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword("so")), (x408 : @list.List[@lexer.Lexcode]) => parse_step(true, x408)), fn(x409 : (@lexer.Lexcode, (((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t410 = @parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword("so")), (x408 : ArrayView[@lexer.Lexcode]) => parse_step(true, x408)), fn(x409 : (@lexer.Lexcode, (((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     x409.1
   })
-  let t407 = @parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword("then")), (x405 : @list.List[@lexer.Lexcode]) => parse_step(true, x405)), fn(x406 : (@lexer.Lexcode, (((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t407 = @parser.map(@parser.seq(@parser.a(@lexer.Lexcode::Resword("then")), (x405 : ArrayView[@lexer.Lexcode]) => parse_step(true, x405)), fn(x406 : (@lexer.Lexcode, (((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     x406.1
   })
   let t402 = @tactics.by(mizar_end_tac)
@@ -1313,7 +1313,7 @@ pub fn parse_step(x313 : Bool, x314 : @list.List[@lexer.Lexcode]) -> ((@tactics.
     mizar_suppose_ref(lf_3)
   })
   let t385 = @parser.a(@lexer.Lexcode::Resword("cases"))
-  let t395 = @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("per")), t385), (x386 : @list.List[@lexer.Lexcode]) => parse_just(tlink, x386)), fn(x387 : ((@lexer.Lexcode, @lexer.Lexcode), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t395 = @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("per")), t385), (x386 : ArrayView[@lexer.Lexcode]) => parse_just(tlink, x386)), fn(x387 : ((@lexer.Lexcode, @lexer.Lexcode), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let ((_, _), jst_2) = x387
     @tactics.by(fn(x390 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       let t391 = ((x389 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => mizar_per_cases_tac(jst_2, x389))(x390)
@@ -1326,7 +1326,7 @@ pub fn parse_step(x313 : Bool, x314 : @list.List[@lexer.Lexcode]) -> ((@tactics.
   let t377 = parse_lforms("")
   let t376 = @parser.a(@lexer.Lexcode::Resword("show"))
   let t375 = @parser.a(@lexer.Lexcode::Resword("to"))
-  let t384 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("suffices")), t375), t376), t377), (x378 : @list.List[@lexer.Lexcode]) => parse_just(tlink, x378)), fn(x379 : ((((@lexer.Lexcode, @lexer.Lexcode), @lexer.Lexcode), @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t384 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("suffices")), t375), t376), t377), (x378 : ArrayView[@lexer.Lexcode]) => parse_just(tlink, x378)), fn(x379 : ((((@lexer.Lexcode, @lexer.Lexcode), @lexer.Lexcode), @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let ((((_, _), _), lf_2), jst_1) = x379
     let t382 = @lib.map(fn(x381 : (String, @preterm.Preterm)) -> @preterm.Preterm raise {
       x381.1
@@ -1351,7 +1351,7 @@ pub fn parse_step(x313 : Bool, x314 : @list.List[@lexer.Lexcode]) -> ((@tactics.
   let t355 = @parser.a(@lexer.Lexcode::Resword("that"))
   let t354 = @parser.a(@lexer.Lexcode::Resword("such"))
   let t353 = @parser.map(@parser.parse_preterm, split_ppair)
-  let t361 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("consider")), t353), t354), t355), t356), (x357 : @list.List[@lexer.Lexcode]) => parse_just(tlink, x357)), fn(x358 : (((((@lexer.Lexcode, @list.List[@preterm.Preterm]), @lexer.Lexcode), @lexer.Lexcode), @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t361 = @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("consider")), t353), t354), t355), t356), (x357 : ArrayView[@lexer.Lexcode]) => parse_just(tlink, x357)), fn(x358 : (((((@lexer.Lexcode, @list.List[@preterm.Preterm]), @lexer.Lexcode), @lexer.Lexcode), @list.List[(String, @preterm.Preterm)]), (String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]))) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let (((((_, vars), _), _), lf), jst) = x358
     @tactics.by((x360 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => mizar_consider_tac(vars, lf, jst, x360))
   })
@@ -1417,23 +1417,23 @@ pub fn parse_step(x313 : Bool, x314 : @list.List[@lexer.Lexcode]) -> ((@tactics.
 
 ///|
 /// `run_steps`
-pub fn run_steps(x428 : @list.List[@lexer.Lexcode]) -> @tactics.Goalstack raise {
+pub fn run_steps(x428 : ArrayView[@lexer.Lexcode]) -> @tactics.Goalstack raise {
   let lexemes = x428
-  fn compose_steps(x429 : @list.List[@lexer.Lexcode], x430 : ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> @tactics.Goalstate raise {
+  fn compose_steps(x429 : ArrayView[@lexer.Lexcode], x430 : ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> @tactics.Goalstate raise {
     let lexemes_1 = x429
     let gs = x430
-    if @list.List::is_empty(lexemes_1) {
+    if lexemes_1.is_empty() {
       gs
     } else {
       let (rf, rest) = parse_step(false, lexemes_1)
       let gs_p = rf(gs)
-      if (if !@list.List::is_empty(rest) {
+      if (if !rest.is_empty() {
         let t431 = @lexer.Lexcode::Resword(";")
-        (@lib.hd(rest) == t431)
+        (token_hd(rest) == t431)
       } else {
         false
       }) {
-        compose_steps(@lib.tl(rest), gs_p)
+        compose_steps(token_tl(rest), gs_p)
       } else {
         compose_steps(rest, gs_p)
       }
@@ -1577,4 +1577,21 @@ fn load_steps() -> Unit raise {
   step_31()
   step_32()
   step_33()
+}
+
+///|
+// Preserve the list parser's errors while consuming token views.
+fn token_hd(input : ArrayView[@lexer.Lexcode]) -> @lexer.Lexcode raise {
+  match input {
+    [head, ..] => head
+    [] => raise Failure("hd")
+  }
+}
+
+///|
+fn token_tl(input : ArrayView[@lexer.Lexcode]) -> ArrayView[@lexer.Lexcode] raise {
+  match input {
+    [_, ..rest] => rest
+    [] => raise Failure("tl")
+  }
 }

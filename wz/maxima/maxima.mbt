@@ -222,12 +222,12 @@ pub impl @lib.OHash for WzMaximaObject with fn ohash_visit(self, h) {
 /// `wz_maxima_tokens`
 pub fn wz_maxima_tokens(x17 : String) -> @list.List[String] raise {
   let s = x17
-  @lib.map(fn(x18 : @lexer.Lexcode) -> String raise {
+  @list.List(@lexer.lex(s).map(fn(x18 : @lexer.Lexcode) -> String raise {
     match x18 {
       @lexer.Lexcode::Ident(s_1) => s_1
       @lexer.Lexcode::Resword(s_2) => s_2
     }
-  }, @lexer.lex(s))
+  }))
 }
 
 ///|
