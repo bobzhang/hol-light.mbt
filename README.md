@@ -96,6 +96,13 @@ across machines. Builds run 4 compiler processes at once (`--build-jobs`,
 `$HOL_MOON_JOBS`): linking the test executable of a long chain takes about
 14 GB, so moon's default of one per core is not safe here.
 
+Shard allocation uses `tools/test_times.tsv`. Within each shard, test
+executables start in descending estimated runtime; test order inside each
+executable stays unchanged. Wasm runs print separate compilation and test
+execution wall times and save them, along with time waiting for the build
+lock, in `_build/test_<target>_timings.json`. Full-suite artifacts include
+these reports so compilation cost can be distinguished from test imbalance.
+
 CI (`.github/workflows/ci.yml`) runs the core tier on every push and pull
 request, as upstream's CI builds HOL Light and loads hol.ml. The whole
 suite (`.github/workflows/full.yml`, upstream's `holtest`) runs each night

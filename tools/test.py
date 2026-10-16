@@ -38,7 +38,10 @@ executable above `--max-rss-gb` (16) is killed and reported.
 
 `--shard I/N` runs the I-th of N parts of the selection (I from 1), for
 machines in parallel; the parts are balanced with the recorded times
-(tools/test_times.tsv, seconds on wasm-gc; `--list` shows them).
+(tools/test_times.tsv, seconds on wasm-gc; `--list` shows them). Within
+each shard, the longest estimated test executables start first. Test order
+inside an executable is unchanged. Wasm runs record build-lock wait, build,
+and test-execution wall times in _build/test_<target>_timings.json.
 """
 import argparse
 import fcntl
@@ -196,9 +199,16 @@ def describe(message):
 def run_wasm(target, ps, a):
     """Build the test executables, then run each with moonrun."""
     logf = build_log(target)
+    waiting = time.monotonic()
     with build_lock():
+        started = time.monotonic()
         b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.build_jobs] + ps,
                            cwd=ROOT, capture_output=True, text=True)
+        build_seconds = time.monotonic() - started
+    phases = {"target": target, "build_wait_seconds": started - waiting,
+              "build_seconds": build_seconds, "execution_seconds": None}
+    record_phases(target, phases)
+    print(f"   build: {build_seconds:.1f}s (lock wait: {phases['build_wait_seconds']:.1f}s)", flush=True)
     open(logf, "w").write(b.stdout + b.stderr)
     log_lock = threading.Lock()
     if b.returncode != 0:
@@ -230,9 +240,14 @@ def run_wasm(target, ps, a):
             args = json.dumps({"package": "bobzhang/hol_light/" + p, "file_and_index": ranges})
             jobs.append((p, kind, exe[0], args, sum(r[1][0]["end"] for r in ranges)))
 
+    # Executables are separate processes. Leave each one's file/test order
+    # intact, but avoid starting a long proof only after shorter ones finish.
+    estimates = weights(ps)
+    jobs.sort(key=lambda job: (-estimates[job[0]], job[0], job[1]))
+
     def run(job):
         p, kind, exe, args, n = job
-        t = time.time()
+        t = time.monotonic()
         proc = subprocess.Popen(["sh", "-c", f'ulimit -s {stack_limit_kb(int(a.stack_size))} 2>/dev/null; exec "$@"', "sh",
                                  "moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
                                 cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -272,10 +287,14 @@ def run_wasm(target, ps, a):
                                      "failures": bad, "stderr": err}) + "\n")
         for l in lines:
             print(l, flush=True)
-        return p, time.time() - t, n, len(res) - len(bad), not lines, peak[0]
+        return p, time.monotonic() - t, n, len(res) - len(bad), not lines, peak[0]
 
+    executing = time.monotonic()
     with ThreadPoolExecutor(int(a.jobs)) as ex:
         results = list(ex.map(run, jobs))
+    phases["execution_seconds"] = time.monotonic() - executing
+    record_phases(target, phases)
+    print(f"   test execution: {phases['execution_seconds']:.1f}s", flush=True)
     total, passed = sum(r[2] for r in results), sum(r[3] for r in results)
     print(f"Total tests: {total}, passed: {passed}, failed: {total - passed}.")
     top = sorted(results, key=lambda r: -r[5])[:3]
@@ -286,6 +305,18 @@ def run_wasm(target, ps, a):
             secs[p] = secs.get(p, 0) + dt
         record_times(secs)
     return all(r[4] for r in results)
+
+
+def record_phases(target, phases):
+    """Separate elapsed phases, not the sum of parallel package runtimes.
+
+    A null execution time means tests did not run (for example, build failure).
+    Write after the build too, so its measurement survives a later failure.
+    """
+    path = os.path.join(ROOT, "_build", f"test_{target}_timings.json")
+    with open(path, "w") as f:
+        json.dump(phases, f, indent=2)
+        f.write("\n")
 
 
 def record_times(secs):

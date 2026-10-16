@@ -104,4 +104,5 @@ jobs:
           path: |
             tools/test_times.tsv
             _build/test_wasm-gc.log
+            _build/test_*_timings.json
           if-no-files-found: ignore
