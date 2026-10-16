@@ -58,7 +58,7 @@ fn step_4() -> Unit raise {
   let t25 = @tactics.match_mp_tac(@analysis.seq_mul())
   let t26 = @tactics.conv_tac(@equal.rand_conv(@simp.once_rewrite_conv(@list.List([@calc_rat.real_arith(@parser.parse_term("&0 = c * &0"))]))))
   let t27 = @list.List([@simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("c / &n = c * &1 / &n"))])), @tactics.strip_tac, t26, t25, t24])
-  lim_inv_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!c. (\\n. c / &n) --> &0"), t27))
+  lim_inv_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c. (\\n. c / &n) --> &0"), t27))
 }
 
 ///|
@@ -95,7 +95,7 @@ fn step_5() -> Unit raise {
   let t43 = @rqe_tactics_ext.cases_on(@parser.parse_term("k = 0"))
   let t44 = @simp.rewrite_tac(@list.List([@realax.real_pow(), @rqe_real.real_div_distrib_r()]))
   let t45 = @list.List([@tactics.strip_tac, @nums.induct_tac, @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("~(0 < 0)"))])), t44, @tactics.strip_tac, t43, t42, t41, t40, t39, t38, @tactics.strip_tac, t37, t36, t35])
-  lim_inv_1np_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!c k. 0 < k ==> (\\n. c / &n pow k) --> &0"), t45))
+  lim_inv_1np_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c k. 0 < k ==> (\\n. c / &n pow k) --> &0"), t45))
 }
 
 ///|
@@ -122,7 +122,7 @@ fn step_6() -> Unit raise {
   let t53 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("&0 = (&1 / d) * &0"))]))
   let t54 = @tactics.repeat_tac(@tactics.strip_tac)
   let t55 = @list.List([@simp.rewrite_tac(@list.List([@rqe_real.real_div_distrib_r()])), t54, t53, t52, @tactics.conj_tac, t51, t50])
-  lim_inv_con_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!c d k. 0 < k ==> (\\n. c / (d * &n pow k)) --> &0"), t55))
+  lim_inv_con_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c d k. 0 < k ==> (\\n. c / (d * &n pow k)) --> &0"), t55))
 }
 
 ///|
@@ -216,7 +216,7 @@ fn step_9() -> Unit raise {
   let t96 = @simp.rewrite_tac(@list.List([@realax.real_pow(), @analysis.real_mul_rid()]))
   let t97 = @tactics.repeat_tac(@tactics.strip_tac)
   let t98 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), @nums.induct_tac, t97, t96, t95, t94, t93, t92, t91, @tactics.strip_tac, t90, t89, t88, t87, t86, t85, @tactics.conj_tac, t84, t83, t82, @rqe_tactics_ext.label_all_tac, t81, @int.arith_tac])
-  lim_mono_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!c d a b. ~(d = &0) /\\ a < b ==> (\\n. (c * &n pow a) / (d * &n pow b)) --> &0"), t98))
+  lim_mono_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c d a b. ~(d = &0) /\\ a < b ==> (\\n. (c * &n pow a) / (d * &n pow b)) --> &0"), t98))
 }
 
 ///|
@@ -288,7 +288,7 @@ fn step_10() -> Unit raise {
   let t141 = @simp.rewrite_tac(@list.List([@analysis.real_div_lzero(), @analysis.seq_const()]))
   let t142 = @tactics.repeat_tac(@tactics.strip_tac)
   let t143 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.poly(), @lists.length()])), t142, t141, t140, t139, t138, t137, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t136, t135, t134, @tactics.strip_tac, t133, t132, t131, @tactics.conj_tac, t130, t129, t128, t127, t126, @tactics.strip_tac, t125, t124, t123, t122, t121, @tactics.conj_tac, t120, t119, t118])
-  lim_poly_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p k. LENGTH p <= k ==> (\\n. poly p (&n) / &n pow k) --> &0"), t143))
+  lim_poly_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p k. LENGTH p <= k ==> (\\n. poly p (&n) / &n pow k) --> &0"), t143))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_11() -> Unit raise {
   let t185 = @tactics.repeat_tac(@tactics.strip_tac)
   let t186 = @simp.asm_rewrite_tac(@list.List([@lists.length(), @poly.poly()]))
   let t187 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length(), @arith.lt()])), t186, t185, t184, t183, t182, t181, @tactics.strip_tac, t180, t179, @tactics.conj_tac, t178, t177, t176, t175, t174, t173, @tactics.strip_tac, t172, t171, t170, t169, t168, t167, @tactics.strip_tac, @tactics.conj_tac, t166, t165, t164, t163, @tactics.strip_tac, t162, t161, t160, t159, t158, t157, @tactics.conj_tac, t156, t155, @tactics.conj_tac, @rqe_tactics_ext.label_all_tac, t154, t153])
-  lim_poly_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (0 < LENGTH p /\\ ~(LAST p = &0)) ==>\n     (\\n. poly p (&n) / (LAST p * &n pow PRE (LENGTH p))) --> &1"), t187))
+  lim_poly_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (0 < LENGTH p /\\ ~(LAST p = &0)) ==>\n     (\\n. poly p (&n) / (LAST p * &n pow PRE (LENGTH p))) --> &1"), t187))
 }
 
 ///|
@@ -368,7 +368,7 @@ pub fn lim_poly() -> @kernel.Thm {
 ///|
 /// mono_inc
 fn step_12() -> Unit raise {
-  mono_inc_c.set(@pair.new_definition(@parser.parse_term("mono_inc (f:num -> real) = !(m:num) n. m <= n ==> f m <= f n")))
+  mono_inc_c.set(@pair.new_definition(@parser.parse_term("mono_inc (f:num -> real) = forall(m:num) n. m <= n ==> f m <= f n")))
 }
 
 ///|
@@ -383,7 +383,7 @@ pub fn mono_inc() -> @kernel.Thm {
 ///|
 /// mono_dec
 fn step_13() -> Unit raise {
-  mono_dec_c.set(@pair.new_definition(@parser.parse_term("mono_dec (f:num -> real) = !(m:num) n. m <= n ==> f n <= f m")))
+  mono_dec_c.set(@pair.new_definition(@parser.parse_term("mono_dec (f:num -> real) = forall(m:num) n. m <= n ==> f n <= f m")))
 }
 
 ///|
@@ -399,7 +399,7 @@ pub fn mono_dec() -> @kernel.Thm {
 /// mono_inc_dec
 fn step_14() -> Unit raise {
   let t188 = @list.List([@simp.rewrite_tac(@list.List([mono_inc(), mono_dec(), @analysis.mono(), @realax.real_ge()]))])
-  mono_inc_dec_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!f. mono f <=> mono_inc f \\/ mono_dec f"), t188))
+  mono_inc_dec_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall f. mono f <=> mono_inc f \\/ mono_dec f"), t188))
 }
 
 ///|
@@ -437,7 +437,7 @@ fn step_15() -> Unit raise {
   let t204 = @tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac)
   let t205 = @tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@realax.real_pow(), @analysis.real_le_refl()])))
   let t206 = @list.List([@simp.rewrite_tac(@list.List([mono_inc()])), t205, t204, t203, t202, t201, t200, t199, t198, t197, t196])
-  mono_inc_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k. mono_inc (\\n. &n pow k)"), t206))
+  mono_inc_pow_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k. mono_inc (\\n. &n pow k)"), t206))
 }
 
 ///|
@@ -460,7 +460,7 @@ fn step_16() -> Unit raise {
   let t212 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t213 = @tactics.repeat_tac(@tactics.strip_tac)
   let t214 = @list.List([@simp.rewrite_tac(@list.List([mono_inc()])), t213, t212, t211, t210, @calc_rat.real_arith_tac, t209, t208, t207])
-  mono_inc_pow_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k c. &0 < c ==> mono_inc (\\n. c * &n pow k)"), t214))
+  mono_inc_pow_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k c. &0 < c ==> mono_inc (\\n. c * &n pow k)"), t214))
 }
 
 ///|
@@ -475,7 +475,7 @@ pub fn mono_inc_pow_const() -> @kernel.Thm {
 ///|
 /// mono_unbounded_above
 fn step_17() -> Unit raise {
-  mono_unbounded_above_c.set(@pair.new_definition(@parser.parse_term("mono_unbounded_above (f:num -> real) = !c. ?N. !n. N <= n ==> c < f n")))
+  mono_unbounded_above_c.set(@pair.new_definition(@parser.parse_term("mono_unbounded_above (f:num -> real) = forall c. ?N. forall n. N <= n ==> c < f n")))
 }
 
 ///|
@@ -490,7 +490,7 @@ pub fn mono_unbounded_above() -> @kernel.Thm {
 ///|
 /// mono_unbounded_below
 fn step_18() -> Unit raise {
-  mono_unbounded_below_c.set(@pair.new_definition(@parser.parse_term("mono_unbounded_below (f:num -> real) = !c. ?N. !n. N <= n ==> f n < c")))
+  mono_unbounded_below_c.set(@pair.new_definition(@parser.parse_term("mono_unbounded_below (f:num -> real) = forall c. ?N. forall n. N <= n ==> f n < c")))
 }
 
 ///|
@@ -537,7 +537,7 @@ fn step_19() -> Unit raise {
   let t236 = @tactics.repeat_tac(@tactics.strip_tac)
   let t237 = @tactics.thenl(@tactics.eq_tac, @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac]))
   let t238 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded_above()])), t237, t236, t235, t234, @tactics.strip_tac, t233, @tactics.gen_tac, t232, t231])
-  mono_unbounded_above_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("mono_unbounded_above (f:num -> real) = !c. &0 <= c ==> ?N. !n. N <= n ==> c < f n"), t238))
+  mono_unbounded_above_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("mono_unbounded_above (f:num -> real) = forall c. &0 <= c ==> ?N. forall n. N <= n ==> c < f n"), t238))
 }
 
 ///|
@@ -589,7 +589,7 @@ fn step_20() -> Unit raise {
   let t263 = @tactics.repeat_tac(@tactics.strip_tac)
   let t264 = @tactics.thenl(@tactics.eq_tac, @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac]))
   let t265 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded_below()])), t264, t263, t262, t261, @tactics.strip_tac, t260, @tactics.gen_tac, t259, t258])
-  mono_unbounded_below_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("mono_unbounded_below (f:num -> real) = !c. c <= &0 ==> ?N. !n. N <= n ==> f n < c"), t265))
+  mono_unbounded_below_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("mono_unbounded_below (f:num -> real) = forall c. c <= &0 ==> ?N. forall n. N <= n ==> f n < c"), t265))
 }
 
 ///|
@@ -832,7 +832,7 @@ fn step_21() -> Unit raise {
   let t443 = @rqe_tactics_ext.claim(@parser.parse_term("&0 < k / &2"))
   let t444 = @tactics.repeat_tac(@tactics.gen_tac)
   let t445 = @list.List([@simp.rewrite_tac(@list.List([@analysis.seq(), mono_unbounded_above_pos(), @basic.and_imp_thm()])), t444, @tactics.strip_tac, t443, t442, t441, t440, @tactics.strip_tac, t439, @tactics.strip_tac, t438, t437, t436, t435, t434, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x279 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.move_to_front("Z-2", x279), t433, t432, t431, t430, t429, t428, @tactics.strip_tac, t427, t426, t425, t424, t423, t422, t421, t420, t419, @rqe_tactics_ext.label_all_tac, t418, t417, @calc_rat.real_arith_tac, t416, t415, @tactics.strip_tac, t414, t413, t412, t411, t410, t409, t408, t407, @tactics.strip_tac, t406, t405, @tactics.strip_tac, t404, @tactics.strip_tac, t403, t402, t401, t400, t399, t398, t397, t396, t395, @tactics.strip_tac, t394, t393, t392, t391, @rqe_tactics_ext.label_all_tac, t390, @tactics.strip_tac, t389, t388, @rqe_tactics_ext.label_all_tac, t387, t386, t385, @tactics.strip_tac, t384, t383, t382, t381, t380, t379, @tactics.conj_tac, t378, t377, t376, t375, t374, t373, @tactics.strip_tac, t372, t371, t370, @tactics.strip_tac, t369, t368, t367, @tactics.conj_tac, t366, t365, @rqe_tactics_ext.label_all_tac, t364, t363, t362, t361, @calc_rat.real_arith_tac, @tactics.strip_tac, t360, t359, @calc_rat.real_arith_tac])
-  mua_quotient_limit_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_above g\n    ==> mono_unbounded_above f"), t445))
+  mua_quotient_limit_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_above g\n    ==> mono_unbounded_above f"), t445))
 }
 
 ///|
@@ -849,7 +849,7 @@ pub fn mua_quotient_limit() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t446 = @calc_rat.real_arith(@parser.parse_term("-- (-- x) = x"))
   let t447 = @list.List([@meson.meson_tac(@list.List([mono_unbounded_above(), mono_unbounded_below(), @calc_rat.real_arith(@parser.parse_term("x < y ==> --y < -- x")), t446]))])
-  mua_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!f. mono_unbounded_above f = mono_unbounded_below (\\n. -- (f n))"), t447))
+  mua_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall f. mono_unbounded_above f = mono_unbounded_below (\\n. -- (f n))"), t447))
 }
 
 ///|
@@ -866,7 +866,7 @@ pub fn mua_neg() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t448 = @calc_rat.real_arith(@parser.parse_term("-- (-- x) = x"))
   let t449 = @list.List([@meson.meson_tac(@list.List([mono_unbounded_above(), mono_unbounded_below(), @calc_rat.real_arith(@parser.parse_term("x < y ==> --y < -- x")), t448]))])
-  mua_neg2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!f. mono_unbounded_below f = mono_unbounded_above (\\n. -- (f n))"), t449))
+  mua_neg2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall f. mono_unbounded_below f = mono_unbounded_above (\\n. -- (f n))"), t449))
 }
 
 ///|
@@ -922,7 +922,7 @@ fn step_24() -> Unit raise {
   let t480 = @tactics.match_mp_tac(mua_quotient_limit())
   let t481 = @tactics.repeat_tac(@tactics.strip_tac)
   let t482 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2()])), t481, t480, t479, t478, t477, t476, t475, t474, t473, t472, @tactics.ants_tac, t471, @tactics.strip_tac, t470, t469, t468, t467])
-  mua_quotient_limit_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_below g\n    ==> mono_unbounded_below f"), t482))
+  mua_quotient_limit_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_below g\n    ==> mono_unbounded_below f"), t482))
 }
 
 ///|
@@ -952,7 +952,7 @@ pub fn normal() -> @kernel.Thm {
 ///|
 /// nonconstant
 fn step_26() -> Unit raise {
-  nonconstant_c.set(@pair.new_definition(@parser.parse_term("nonconstant p <=> normal p /\\ (!x. ~(p = [x]))")))
+  nonconstant_c.set(@pair.new_definition(@parser.parse_term("nonconstant p <=> normal p /\\ (forall x. ~(p = [x]))")))
 }
 
 ///|
@@ -968,7 +968,7 @@ pub fn nonconstant() -> @kernel.Thm {
 /// NORMALIZE_SING
 fn step_27() -> Unit raise {
   let t483 = @list.List([@meson.meson_tac(@list.List([@lists.not_cons_nil(), @poly.normalize()]))])
-  normalize_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. (normalize [x] = [x]) <=> ~(x = &0)"), t483))
+  normalize_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. (normalize [x] = [x]) <=> ~(x = &0)"), t483))
 }
 
 ///|
@@ -995,7 +995,7 @@ fn step_28() -> Unit raise {
   let t491 = @rqe_tactics_ext.claim(@parser.parse_term("y = &0"))
   let t492 = @tactics.repeat_tac(@tactics.gen_tac)
   let t493 = @list.List([@simp.rewrite_tac(@list.List([@poly.normalize(), @lists.not_cons_nil()])), t492, @class.cond_cases_tac, t491, t490, t489, t488, t487])
-  normalize_pair_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. ~(y = &0) <=> (normalize [x; y] = [x; y])"), t493))
+  normalize_pair_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. ~(y = &0) <=> (normalize [x; y] = [x; y])"), t493))
 }
 
 ///|
@@ -1025,7 +1025,7 @@ fn step_29() -> Unit raise {
   let t495 = @simp.asm_rewrite_tac(@list.List([]))
   let t494 = @class.asm_cases_tac(@parser.parse_term("h = &0"))
   let t505 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.normalize(), @poly.poly()]))), t494), t495), @class.cond_cases_tac), t496), t497), t502), t503), t504)
-  poly_normalize_c.set(@tactics.prove(@parser.parse_term("!p. poly (normalize p) = poly p"), t505))
+  poly_normalize_c.set(@tactics.prove(@parser.parse_term("forall p. poly (normalize p) = poly p"), t505))
 }
 
 ///|
@@ -1044,7 +1044,7 @@ fn step_30() -> Unit raise {
   let t507 = @simp.asm_rewrite_tac(@list.List([]))
   let t508 = @tactics.repeat_tac(@tactics.strip_tac)
   let t509 = @list.List([@simp.rewrite_tac(@list.List([normal(), @poly.normalize()])), t508, t507, t506])
-  normal_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h t. normal t ==> normal (CONS h t)"), t509))
+  normal_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. normal t ==> normal (CONS h t)"), t509))
 }
 
 ///|
@@ -1065,7 +1065,7 @@ fn step_31() -> Unit raise {
   let t510 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
   let t514 = @tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t510)
   let t515 = @list.List([@simp.rewrite_tac(@list.List([normal(), @poly.normalize()])), t514, t513, t512, t511])
-  normal_tail_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h t. ~(t = []) /\\ normal (CONS h t) ==> normal t"), t515))
+  normal_tail_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. ~(t = []) /\\ normal (CONS h t) ==> normal t"), t515))
 }
 
 ///|
@@ -1089,7 +1089,7 @@ fn step_32() -> Unit raise {
   let t522 = @simp.asm_rewrite_tac(@list.List([normal(), @poly.normalize(), @lists.not_cons_nil(), @lists.last()]))
   let t523 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t524 = @list.List([@lists.list_induct_tac, @meson.asm_meson_tac(@list.List([normal()])), t523, t522, t521, t520, t519, @tactics.strip_tac, t518, t517, t516])
-  normal_last_nonzero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p ==> ~(LAST p = &0)"), t524))
+  normal_last_nonzero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p ==> ~(LAST p = &0)"), t524))
 }
 
 ///|
@@ -1105,7 +1105,7 @@ pub fn normal_last_nonzero() -> @kernel.Thm {
 /// NORMAL_LENGTH
 fn step_33() -> Unit raise {
   let t525 = @list.List([@meson.meson_tac(@list.List([normal(), @rqe_list.length_0(), @int.arith_rule(@parser.parse_term("~(n = 0) <=> 0 < n"))]))])
-  normal_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p ==> 0 < LENGTH p"), t525))
+  normal_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p ==> 0 < LENGTH p"), t525))
 }
 
 ///|
@@ -1128,7 +1128,7 @@ fn step_34() -> Unit raise {
   let t531 = @simp.asm_rewrite_tac(@list.List([normal(), normalize_sing(), @lists.not_cons_nil()]))
   let t532 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t533 = @list.List([@lists.list_induct_tac, @meson.meson_tac(@list.List([@lists.length(), @arith.lt_refl()])), @tactics.strip_tac, t532, t531, t530, t529, t528, @tactics.strip_tac, t527, t526])
-  normal_last_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. 0 < LENGTH p /\\ ~(LAST p = &0) ==> normal p"), t533))
+  normal_last_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. 0 < LENGTH p /\\ ~(LAST p = &0) ==> normal p"), t533))
 }
 
 ///|
@@ -1144,7 +1144,7 @@ pub fn normal_last_length() -> @kernel.Thm {
 /// NORMAL_ID
 fn step_35() -> Unit raise {
   let t534 = @list.List([@meson.meson_tac(@list.List([normal_last_length(), normal_length(), normal_last_nonzero()]))])
-  normal_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p <=> 0 < LENGTH p /\\ ~(LAST p = &0)"), t534))
+  normal_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p <=> 0 < LENGTH p /\\ ~(LAST p = &0)"), t534))
 }
 
 ///|
@@ -1171,7 +1171,7 @@ fn step_36() -> Unit raise {
   let t542 = @rqe_tactics_ext.claim(@parser.parse_term("normalize p = p"))
   let t543 = @simp.rewrite_tac(@list.List([@poly.degree()]))
   let t544 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t543, t542, t541, t540, t539, t538])
-  lim_poly2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p ==> (\\n. poly p (&n) / (LAST p * &n pow (degree p))) --> &1"), t544))
+  lim_poly2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p ==> (\\n. poly p (&n) / (LAST p * &n pow (degree p))) --> &1"), t544))
 }
 
 ///|
@@ -1213,7 +1213,7 @@ fn step_37() -> Unit raise {
   let t567 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("max (&1) c"), @rqe_real.real_arch_simple_lt()))
   let t568 = @tactics.repeat_tac(@tactics.strip_tac)
   let t569 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded_above()])), t568, t567, @tactics.strip_tac, t566, t565, t564, t563, @tactics.conj_tac, t562, t561, t560, t559, t558, @tactics.strip_tac, t557, t556, t555, @tactics.strip_tac, t554, t553, t552, t551, t550, t549, t548])
-  pow_unb_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k. 0 < k ==> mono_unbounded_above (\\n. (&n) pow k)"), t569))
+  pow_unb_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k. 0 < k ==> mono_unbounded_above (\\n. (&n) pow k)"), t569))
 }
 
 ///|
@@ -1264,7 +1264,7 @@ fn step_38() -> Unit raise {
   })
   let t598 = @tactics.repeat_tac(@tactics.strip_tac)
   let t599 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded_above(), @basic.and_imp_thm()])), t598, @rqe_tactics_ext.label_all_tac, (x570 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.move_to_front("Z-1", x570), t597, t596, t595, @tactics.strip_tac, t594, @tactics.strip_tac, t593, t592, t591, t590, @tactics.strip_tac, t589, t588, @tactics.conj_tac, t587, t586])
-  pow_unb_con_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k a. 0 < k /\\ &0 < a ==> mono_unbounded_above (\\n. a * (&n) pow k)"), t599))
+  pow_unb_con_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k a. 0 < k /\\ &0 < a ==> mono_unbounded_above (\\n. a * (&n) pow k)"), t599))
 }
 
 ///|
@@ -1294,7 +1294,7 @@ fn step_39() -> Unit raise {
   let t608 = @tactics.match_mp_tac(pow_unb_con())
   let t609 = @tactics.repeat_tac(@tactics.strip_tac)
   let t610 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2(), @int.arith_rule(@parser.parse_term("--(x * y) = -- x * y"))])), t609, t608, @tactics.strip_tac, t607, t606])
-  pow_unbb_con_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k a. 0 < k /\\ a < &0 ==> mono_unbounded_below (\\n. a * (&n) pow k)"), t610))
+  pow_unbb_con_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k a. 0 < k /\\ a < &0 ==> mono_unbounded_below (\\n. a * (&n) pow k)"), t610))
 }
 
 ///|
@@ -1310,7 +1310,7 @@ pub fn pow_unbb_con() -> @kernel.Thm {
 /// POLY_SING
 fn step_40() -> Unit raise {
   let t611 = @list.List([@simp.rewrite_tac(@list.List([@poly.poly()])), @calc_rat.real_arith_tac])
-  poly_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y. poly [x] y = x"), t611))
+  poly_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. poly [x] y = x"), t611))
 }
 
 ///|
@@ -1470,7 +1470,7 @@ fn step_41() -> Unit raise {
   }), @tactics.strip_tac)
   let t721 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@rqe_list.length_1()])))
   let t722 = @list.List([@tactics.gen_tac, @rqe_tactics_ext.cases_on(@parser.parse_term("LENGTH p = 1")), t721, t720, t719, t718, t717, t716, @calc_rat.real_arith_tac, t715, t714, t713, t712, t711, t710, t709, t708, t707, t706, t705, t704, t703, t702, t701, t700, @rqe_tactics_ext.label_all_tac, t699, @int.arith_tac, @tactics.strip_tac, t698, t697, @tactics.beta_tac, t696, t695, t694, @calc_rat.real_arith_tac, @tactics.beta_tac, t693, t692, t691, t690, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t689, t688, t687, t686, @tactics.strip_tac, t685, t684, t683, t682, @class.cond_cases_tac, t681, t680, t679, t678, t677, @int.arith_tac, t676])
-  poly_last_gt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p /\\ (?X. !x. X < x ==> &0 < poly p x) ==> &0 < LAST p"), t722))
+  poly_last_gt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p /\\ (?X. forall x. X < x ==> &0 < poly p x) ==> &0 < LAST p"), t722))
 }
 
 ///|
@@ -1630,7 +1630,7 @@ fn step_42() -> Unit raise {
   }), @tactics.strip_tac)
   let t832 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@rqe_list.length_1()])))
   let t833 = @list.List([@tactics.gen_tac, @rqe_tactics_ext.cases_on(@parser.parse_term("LENGTH p = 1")), t832, t831, t830, t829, t828, t827, @calc_rat.real_arith_tac, t826, t825, t824, t823, t822, t821, t820, t819, t818, t817, t816, t815, t814, t813, t812, @rqe_tactics_ext.label_all_tac, t811, @int.arith_tac, @tactics.strip_tac, t810, t809, @tactics.beta_tac, t808, t807, t806, @calc_rat.real_arith_tac, @tactics.beta_tac, t805, t804, t803, t802, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t801, t800, t799, t798, @tactics.strip_tac, t797, t796, t795, t794, @class.cond_cases_tac, t793, t792, t791, t790, t789, @int.arith_tac, t788])
-  poly_last_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p /\\ (?X. !x. X < x ==> poly p x < &0) ==> LAST p < &0"), t833))
+  poly_last_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p /\\ (?X. forall x. X < x ==> poly p x < &0) ==> LAST p < &0"), t833))
 }
 
 ///|
@@ -1655,7 +1655,7 @@ fn step_43() -> Unit raise {
   let t839 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@class.cond_cases_tac), t834), t838), @int.arith_tac)
   let t840 = @simp.rewrite_tac(@list.List([@lists.length(), @poly.normalize()]))
   let t841 = @list.List([@lists.list_induct_tac, @meson.meson_tac(@list.List([@poly.normalize(), @arith.le_refl()])), t840, t839])
-  normalize_length_mono_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. LENGTH (normalize l) <= LENGTH l"), t841))
+  normalize_length_mono_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. LENGTH (normalize l) <= LENGTH l"), t841))
 }
 
 ///|
@@ -1682,7 +1682,7 @@ fn step_44() -> Unit raise {
   let t849 = @simp.asm_rewrite_tac(@list.List([@poly.normalize(), @lists.length()]))
   let t850 = @rqe_tactics_ext.cases_on(@parser.parse_term("x = &0"))
   let t851 = @list.List([@simp.rewrite_tac(@list.List([@poly.degree()])), @tactics.strip_tac, t850, t849, @int.arith_tac, t848, t847, t846, t845, @int.arith_tac])
-  degree_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. (degree [x] = 0)"), t851))
+  degree_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. (degree [x] = 0)"), t851))
 }
 
 ///|
@@ -1712,7 +1712,7 @@ fn step_45() -> Unit raise {
   let t862 = @meson.asm_meson_tac(@list.List([normal_cons()]))
   let t863 = @rqe_tactics_ext.claim(@parser.parse_term("normal (CONS h t)"))
   let t864 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t863, t862, t861, @tactics.strip_tac, t860, t859, t858, t857, @tactics.strip_tac, t856, t855])
-  degree_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h t. normal t ==> (degree (CONS h t) = 1 + degree t)"), t864))
+  degree_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. normal t ==> (degree (CONS h t) = 1 + degree t)"), t864))
 }
 
 ///|
@@ -1733,7 +1733,7 @@ fn step_46() -> Unit raise {
   let t868 = @simp.rewrite_tac(@list.List([@lists.length(), @poly.poly_diff_aux()]))
   let t869 = @tactics.then_tac(@tactics.gen_tac, @tactics.disch_then(@rqe_tactics_ext.ignore_))
   let t870 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t869, t868, t867, t866, t865])
-  pda_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. ~(p = []) ==> (LENGTH(poly_diff_aux n p) = LENGTH p)"), t870))
+  pda_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. ~(p = []) ==> (LENGTH(poly_diff_aux n p) = LENGTH p)"), t870))
 }
 
 ///|
@@ -1760,7 +1760,7 @@ fn step_47() -> Unit raise {
   let t878 = @simp.asm_rewrite_tac(@list.List([@lists.length(), @arith.pre()]))
   let t879 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t880 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.poly_diff(), @lists.length(), @arith.pre()])), t879, t878, t877, t876, t875, t874])
-  poly_diff_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. LENGTH (poly_diff p) = PRE (LENGTH p)"), t880))
+  poly_diff_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. LENGTH (poly_diff p) = PRE (LENGTH p)"), t880))
 }
 
 ///|
@@ -1825,10 +1825,10 @@ fn step_48() -> Unit raise {
   let t920 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@rqe_list.length_1()])))
   let t921 = @tactics.pop_assum(@tactics.disj_cases_tac)
   let t922 = @meson.asm_meson_tac(@list.List([@poly.poly_diff(), @rqe_list.length_0(), @lists.not_cons_nil()]))
-  let t881 = @int.arith_rule(@parser.parse_term("!n. (n = 0) \\/ (n = 1) \\/ (n = 2) \\/ 2 < n"))
+  let t881 = @int.arith_rule(@parser.parse_term("forall n. (n = 0) \\/ (n = 1) \\/ (n = 2) \\/ 2 < n"))
   let t923 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("LENGTH (p:real list)"), t881))
   let t924 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t923, t922, t921, t920, t919, t918, t917, t916, t915, t914, t913, t912, @tactics.eq_tac, @tactics.strip_tac, t911, t910, t909, t908, @tactics.strip_tac, t907, t906, t905, t904, t903, t902])
-  poly_diff_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p h. (poly_diff p = [h]) <=> ?x. p = [x; h]"), t924))
+  poly_diff_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p h. (poly_diff p = [h]) <=> ?x. p = [x; h]"), t924))
 }
 
 ///|
@@ -1873,7 +1873,7 @@ fn step_49() -> Unit raise {
   let t948 = @tactics.pop_assum(@rqe_tactics_ext.ignore_)
   let t949 = @tactics.repeat_tac(@tactics.strip_tac)
   let t950 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t949, t948, t947, t946, t945, t944, @int.arith_tac, t943, t942, @calc_rat.real_arith_tac, t941, @tactics.strip_tac, t940, @list_rewrites.list_simp_tac, t939, @class.cond_cases_tac, t938, t937, t936, t935, @tactics.disj2_tac, @tactics.ap_term_tac, t934, t933, @int.arith_tac])
-  lem_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. ~(p = []) ==> (LAST (poly_diff_aux n p) = LAST p * &(PRE(LENGTH p) + n))"), t950))
+  lem_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. ~(p = []) ==> (LAST (poly_diff_aux n p) = LAST p * &(PRE(LENGTH p) + n))"), t950))
 }
 
 ///|
@@ -1890,7 +1890,7 @@ pub fn lem_v1() -> @kernel.Thm {
 fn step_50() -> Unit raise {
   let t951 = @meson.asm_meson_tac(@list.List([@rqe_list.length_0(), @rqe_list.length_1(), @int.arith_rule(@parser.parse_term("(x = 0) \\/ (x = 1) \\/ 1 < x"))]))
   let t952 = @list.List([@simp.rewrite_tac(@list.List([nonconstant(), normal()])), t951])
-  nonconstant_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> 1 < LENGTH p"), t952))
+  nonconstant_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> 1 < LENGTH p"), t952))
 }
 
 ///|
@@ -1917,7 +1917,7 @@ fn step_51() -> Unit raise {
   let t960 = @meson.asm_meson_tac(@list.List([nonconstant_length()]))
   let t961 = @rqe_tactics_ext.claim(@parser.parse_term("1 < LENGTH p"))
   let t962 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t961, t960, @tactics.strip_tac, t959, t958, t957, t956, @int.arith_tac])
-  nonconstant_diff_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> ~(poly_diff p = [])"), t962))
+  nonconstant_diff_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> ~(poly_diff p = [])"), t962))
 }
 
 ///|
@@ -1944,7 +1944,7 @@ fn step_52() -> Unit raise {
     let t965 = @tactics.mp_tac(x)
     @tactics.then_tac(@tactics.assume_tac(x), t965)
   }), t972, t971, t970, t969, @tactics.strip_tac, t968, t967, t966, @int.arith_tac])
-  nonconstant_degree_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> 0 < degree p"), t973))
+  nonconstant_degree_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> 0 < degree p"), t973))
 }
 
 ///|
@@ -2002,7 +2002,7 @@ fn step_53() -> Unit raise {
   let t1007 = @meson.asm_meson_tac(@list.List([normal()]))
   let t1008 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1009 = @list.List([@simp.rewrite_tac(@list.List([nonconstant(), @poly.poly_diff()])), t1008, @class.cond_cases_tac, t1007, t1006, t1005, t1004, t1003, t1002, t1001, t1000, t999, t998, t997, t996, t995, t994, @tactics.disj2_tac, @tactics.ap_term_tac, t993, t992, t991, t990, t989, @int.arith_tac])
-  poly_diff_last_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> (LAST (poly_diff p) = LAST p * &(degree p))"), t1009))
+  poly_diff_last_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> (LAST (poly_diff p) = LAST p * &(degree p))"), t1009))
 }
 
 ///|
@@ -2062,7 +2062,7 @@ fn step_54() -> Unit raise {
     let t1012 = @tactics.assume_tac(x)
     @tactics.then_tac(@tactics.mp_tac(x), t1012)
   }), t1046, t1045, t1044, t1043, t1042, t1041, t1040, t1039, @tactics.strip_tac, t1038, t1037, t1036, @tactics.strip_tac, t1035, t1034, @tactics.strip_tac, t1033, t1032, t1031, @tactics.strip_tac, t1030, t1029, @tactics.strip_tac, t1028, @tactics.strip_tac, t1027, t1026, t1025, @int.arith_tac])
-  nonconstant_diff_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> ~(poly_diff p = [&0])"), t1047))
+  nonconstant_diff_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> ~(poly_diff p = [&0])"), t1047))
 }
 
 ///|
@@ -2092,7 +2092,7 @@ fn step_55() -> Unit raise {
   let t1058 = @rqe_tactics_ext.claim(@parser.parse_term("&0 <= &(degree p)"))
   let t1059 = @simp.asm_simp_tac(@list.List([poly_diff_last_lem()]))
   let t1060 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1059, t1058, @calc_rat.real_arith_tac, @tactics.strip_tac, @tactics.eq_tac, t1057, @tactics.strip_tac, t1056, t1055, @tactics.strip_tac, t1054, @rewrites.real_simp_tac, t1053, @tactics.strip_tac, t1052, t1051])
-  poly_diff_last_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> (LAST (poly_diff p) < &0 <=> LAST p < &0)"), t1060))
+  poly_diff_last_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> (LAST (poly_diff p) < &0 <=> LAST p < &0)"), t1060))
 }
 
 ///|
@@ -2126,7 +2126,7 @@ fn step_56() -> Unit raise {
   let t1073 = @rqe_tactics_ext.claim(@parser.parse_term("&0 < &(degree p)"))
   let t1074 = @simp.asm_simp_tac(@list.List([poly_diff_last_lem()]))
   let t1075 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1074, t1073, t1072, @tactics.strip_tac, @tactics.eq_tac, t1071, @tactics.strip_tac, t1070, @tactics.strip_tac, t1069, t1068, t1067])
-  poly_diff_last_gt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> (&0 < LAST (poly_diff p) <=> &0 < LAST p)"), t1075))
+  poly_diff_last_gt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> (&0 < LAST (poly_diff p) <=> &0 < LAST p)"), t1075))
 }
 
 ///|
@@ -2175,7 +2175,7 @@ fn step_57() -> Unit raise {
     let t1078 = @tactics.mp_tac(x)
     @tactics.then_tac(@tactics.assume_tac(x), t1078)
   }), t1103, t1102, t1101, @tactics.strip_tac, t1100, t1099, @tactics.strip_tac, t1098, t1097, t1096, @tactics.strip_tac, t1095, t1094, t1093, t1092, @calc_rat.real_arith_tac, t1091, t1090, t1089, t1088, t1087, t1086, @calc_rat.real_arith_tac, t1085])
-  nonconstant_diff_normal_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> normal (poly_diff p)"), t1104))
+  nonconstant_diff_normal_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> normal (poly_diff p)"), t1104))
 }
 
 ///|
@@ -2196,7 +2196,7 @@ fn step_58() -> Unit raise {
   let t1108 = @tactics.match_mp_tac(poly_last_gt())
   let t1109 = @rqe_tactics_ext.claim(@parser.parse_term("&0 < LAST (poly_diff p)"))
   let t1110 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1109, t1108, t1107, t1106, @tactics.strip_tac, t1105])
-  pdiff_pos_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ (?X. !x. X < x ==> &0 < poly (poly_diff p) x) ==> &0 < LAST p"), t1110))
+  pdiff_pos_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ (?X. forall x. X < x ==> &0 < poly (poly_diff p) x) ==> &0 < LAST p"), t1110))
 }
 
 ///|
@@ -2220,7 +2220,7 @@ fn step_59() -> Unit raise {
   let t1117 = @rqe_tactics_ext.exists_tac(@parser.parse_term("&1"))
   let t1118 = @tactics.match_mp_tac(mua_quotient_limit())
   let t1119 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1118, t1117, t1116, @tactics.beta_tac, @tactics.strip_tac, @calc_rat.real_arith_tac, @tactics.strip_tac, t1115, t1114, t1113, t1112, t1111])
-  last_unb_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ &0 < LAST p ==> mono_unbounded_above (\\n. poly p (&n))"), t1119))
+  last_unb_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ &0 < LAST p ==> mono_unbounded_above (\\n. poly p (&n))"), t1119))
 }
 
 ///|
@@ -2295,7 +2295,7 @@ fn step_60() -> Unit raise {
   let t1169 = @tactics.match_mp_tac(last_unb())
   let t1170 = @rqe_tactics_ext.claim(@parser.parse_term("mono_unbounded_above (\\n. poly p (&n))"))
   let t1171 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1170, t1169, t1168, t1167, t1166, @tactics.strip_tac, t1165, t1164, @tactics.strip_tac, t1163, t1162, @rqe_tactics_ext.ccontr_tac, t1161, t1160, t1159, t1158, t1157, @tactics.ants_tac, t1156, @tactics.strip_tac, t1155, t1154, t1153, t1152, t1151, t1150, @tactics.strip_tac, t1149, t1148, @int.arith_tac, @tactics.strip_tac, t1147, @rqe_tactics_ext.label_all_tac, t1146, @calc_rat.real_arith_tac, @tactics.strip_tac, t1145, t1144, t1143, @tactics.strip_tac, t1142, t1141, t1140, @tactics.strip_tac, @rewrites.real_solve_tac])
-  poly_diff_up_right_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("nonconstant p /\\ (?X. !x. X < x ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. !y. Y < y ==> &0 < poly p y)"), t1171))
+  poly_diff_up_right_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("nonconstant p /\\ (?X. forall x. X < x ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. forall y. Y < y ==> &0 < poly p y)"), t1171))
 }
 
 ///|
@@ -2316,7 +2316,7 @@ fn step_61() -> Unit raise {
   let t1175 = @tactics.match_mp_tac(poly_last_lt())
   let t1176 = @rqe_tactics_ext.claim(@parser.parse_term("LAST (poly_diff p) < &0"))
   let t1177 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1176, t1175, t1174, t1173, @tactics.strip_tac, t1172])
-  pdiff_neg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ (?X. !x. X < x ==> poly (poly_diff p) x < &0) ==> LAST p < &0"), t1177))
+  pdiff_neg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ (?X. forall x. X < x ==> poly (poly_diff p) x < &0) ==> LAST p < &0"), t1177))
 }
 
 ///|
@@ -2340,7 +2340,7 @@ fn step_62() -> Unit raise {
   let t1184 = @rqe_tactics_ext.exists_tac(@parser.parse_term("&1"))
   let t1185 = @tactics.match_mp_tac(mua_quotient_limit_neg())
   let t1186 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1185, t1184, t1183, @tactics.beta_tac, @tactics.strip_tac, @calc_rat.real_arith_tac, @tactics.strip_tac, t1182, t1181, t1180, t1179, t1178])
-  last_unb_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ LAST p < &0 ==> mono_unbounded_below (\\n. poly p (&n))"), t1186))
+  last_unb_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ LAST p < &0 ==> mono_unbounded_below (\\n. poly p (&n))"), t1186))
 }
 
 ///|
@@ -2407,7 +2407,7 @@ fn step_63() -> Unit raise {
   let t1230 = @tactics.match_mp_tac(last_unb_neg())
   let t1231 = @rqe_tactics_ext.claim(@parser.parse_term("mono_unbounded_below (\\n. poly p (&n))"))
   let t1232 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1231, t1230, t1229, t1228, t1227, @tactics.strip_tac, t1226, t1225, @tactics.strip_tac, t1224, t1223, @rqe_tactics_ext.ccontr_tac, t1222, t1221, t1220, t1219, t1218, @tactics.ants_tac, t1217, @tactics.strip_tac, t1216, t1215, t1214, t1213, t1212, t1211, @tactics.strip_tac, t1210, t1209, @int.arith_tac, @tactics.strip_tac, t1208, @rqe_tactics_ext.label_all_tac, t1207, @calc_rat.real_arith_tac, @tactics.strip_tac, t1206, t1205, @rewrites.real_solve_tac, @tactics.strip_tac, t1204, t1203, t1202, @rewrites.real_solve_tac])
-  poly_diff_down_right_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("nonconstant p /\\ (?X. !x. X < x ==> poly (poly_diff p) x < &0) ==>\n   (?Y. !y. Y < y ==> poly p y < &0)"), t1232))
+  poly_diff_down_right_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("nonconstant p /\\ (?X. forall x. X < x ==> poly (poly_diff p) x < &0) ==>\n   (?Y. forall y. Y < y ==> poly p y < &0)"), t1232))
 }
 
 ///|
@@ -2431,7 +2431,7 @@ fn step_64() -> Unit raise {
   let t1237 = @tactics.match_mp_tac(pow_unb())
   let t1238 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_pow_neg()]))
   let t1239 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1238, t1237, t1236])
-  unb_left_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k. 0 < k /\\ EVEN k ==> mono_unbounded_above (\\n. (-- &n) pow k)"), t1239))
+  unb_left_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k. 0 < k /\\ EVEN k ==> mono_unbounded_above (\\n. (-- &n) pow k)"), t1239))
 }
 
 ///|
@@ -2457,7 +2457,7 @@ fn step_65() -> Unit raise {
   let t1246 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_pow_neg()]))
   let t1247 = @rqe_tactics_ext.rewrite_assums(@list.List([@equal.gsym(@arith.not_even())]))
   let t1248 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1247, t1246, t1245, t1244, t1243])
-  unb_left_odd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k. 0 < k /\\ ODD k ==> mono_unbounded_below (\\n. (-- &n) pow k)"), t1248))
+  unb_left_odd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k. 0 < k /\\ ODD k ==> mono_unbounded_below (\\n. (-- &n) pow k)"), t1248))
 }
 
 ///|
@@ -2473,7 +2473,7 @@ pub fn unb_left_odd() -> @kernel.Thm {
 /// EVEN_CONS
 fn step_66() -> Unit raise {
   let t1249 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.asm_meson_tac(@list.List([@rqe_list.length_sing(), @lists.length(), @arith.even(), @arith.odd(), @arith.one()])))])
-  even_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!t h. ODD (LENGTH (CONS h t)) = EVEN (LENGTH t)"), t1249))
+  even_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall t h. ODD (LENGTH (CONS h t)) = EVEN (LENGTH t)"), t1249))
 }
 
 ///|
@@ -2489,7 +2489,7 @@ pub fn even_cons() -> @kernel.Thm {
 /// ODD_CONS
 fn step_67() -> Unit raise {
   let t1250 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.asm_meson_tac(@list.List([@rqe_list.length_sing(), @lists.length(), @arith.even(), @arith.odd(), @arith.one()])))])
-  odd_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!t h. EVEN (LENGTH (CONS h t)) = ODD (LENGTH t)"), t1250))
+  odd_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall t h. EVEN (LENGTH (CONS h t)) = ODD (LENGTH t)"), t1250))
 }
 
 ///|
@@ -2681,7 +2681,7 @@ fn step_68() -> Unit raise {
   let t1392 = @rqe_tactics_ext.cases_on(@parser.parse_term("a = &0"))
   let t1393 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1394 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded_above(), @analysis.seq()])), t1393, @rewrites.real_simp_tac, t1392, t1391, t1390, t1389, @tactics.strip_tac, t1388, t1387, t1386, t1385, t1384, t1383, t1382, @tactics.strip_tac, t1381, t1380, t1379, @rqe_tactics_ext.label_all_tac, t1378, t1377, @tactics.strip_tac, t1376, t1375, t1374, t1373, @tactics.strip_tac, t1372, t1371, t1370, t1369, t1368, t1367, t1366, @tactics.strip_tac, t1365, t1364, t1363, t1362, @tactics.strip_tac, t1361, @tactics.strip_tac, t1360, t1359, t1358, t1357, t1356, t1355, t1354, @tactics.strip_tac, t1353, t1352, t1351, t1350, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t1349, t1348, @tactics.strip_tac, t1347, t1346, t1345, t1344, t1343, t1342, t1341, t1340, @rewrites.real_simp_tac, t1339, t1338, t1337, @tactics.strip_tac, t1336, @rewrites.real_simp_tac, t1335, t1334, t1333, @tactics.strip_tac, t1332, t1331, t1330, t1329, @tactics.strip_tac, t1328, t1327, t1326, t1325, t1324, t1323, @rqe_tactics_ext.label_all_tac, t1322, t1321, @tactics.strip_tac, t1320, t1319, t1318, t1317, t1316, t1315, t1314, t1313, t1312, t1311, t1310, @tactics.strip_tac, t1309, @rewrites.real_simp_tac, t1308])
-  mua_div_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a b p. mono_unbounded_above (\\n. p n) ==> (\\n. a / (b + p n)) --> &0"), t1394))
+  mua_div_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b p. mono_unbounded_above (\\n. p n) ==> (\\n. a / (b + p n)) --> &0"), t1394))
 }
 
 ///|
@@ -2734,7 +2734,7 @@ fn step_69() -> Unit raise {
   let t1422 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1423 = @tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac)
   let t1424 = @list.List([@simp.rewrite_tac(@list.List([@analysis.seq()])), t1423, t1422, @rqe_tactics_ext.label_all_tac, t1421, @tactics.strip_tac, t1420, t1419, t1418, @rewrites.real_simp_tac, @tactics.strip_tac, t1417, t1416, @rqe_tactics_ext.label_all_tac, t1415, @tactics.strip_tac, t1414, t1413, t1412, @rewrites.real_simp_tac, @tactics.strip_tac, t1411])
-  seq_0_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (\\n. p n) --> &0 <=> (\\n. -- p n) --> &0"), t1424))
+  seq_0_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (\\n. p n) --> &0 <=> (\\n. -- p n) --> &0"), t1424))
 }
 
 ///|
@@ -2754,7 +2754,7 @@ fn step_70() -> Unit raise {
   let t1427 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("--(x * y) = x * -- y"))]))
   let t1428 = @simp.rewrite_tac(@list.List([@realax.real_div()]))
   let t1429 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1428, t1427, t1426, t1425])
-  lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z. --(x / (y + z)) = x / (-- y + -- z)"), t1429))
+  lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z. --(x / (y + z)) = x / (-- y + -- z)"), t1429))
 }
 
 ///|
@@ -2780,7 +2780,7 @@ fn step_71() -> Unit raise {
   let t1436 = @simp.once_rewrite_tac(@list.List([seq_0_neg()]))
   let t1437 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1438 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2()])), t1437, t1436, t1435, t1434, t1433])
-  mub_div_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a b p. mono_unbounded_below (\\n. p n) ==> (\\n. a / (b + p n)) --> &0"), t1438))
+  mub_div_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b p. mono_unbounded_below (\\n. p n) ==> (\\n. a / (b + p n)) --> &0"), t1438))
 }
 
 ///|
@@ -2828,7 +2828,7 @@ fn step_73() -> Unit raise {
   let t1450 = @tactics.match_mp_tac(mua_div_const())
   let t1451 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1452 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded()])), t1451, t1450, t1449, t1448, t1447, t1446, t1445])
-  mu_div_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!a b p. mono_unbounded p ==> (\\n. a / (b + p n)) --> &0"), t1452))
+  mu_div_const_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b p. mono_unbounded p ==> (\\n. a / (b + p n)) --> &0"), t1452))
 }
 
 ///|
@@ -2940,7 +2940,7 @@ fn step_74() -> Unit raise {
   let t1524 = @rqe_tactics_ext.claim(@parser.parse_term("&0 <= max c (&1)"))
   let t1525 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1526 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded_above_pos()])), t1525, t1524, t1523, @class.cond_cases_tac, @calc_rat.real_arith_tac, t1522, t1521, t1520, t1519, t1518, t1517, t1516, t1515, t1514, t1513, t1512, t1511, t1510, t1509, @rewrites.real_solve_tac, @rewrites.real_simp_tac, @calc_rat.real_arith_tac, @rewrites.real_solve_tac, t1508, t1507, @rewrites.real_solve_tac, t1506, t1505, t1504, @class.cond_cases_tac, t1503, t1502, t1501, t1500, t1499, t1498, t1497, t1496, t1495, @rewrites.real_solve_tac, t1494, t1493])
-  mua_mua_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p q. mono_unbounded_above (\\n. p n) /\\ mono_unbounded_above (\\n. q n) ==>\n           mono_unbounded_above (\\n. p n * q n)"), t1526))
+  mua_mua_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p q. mono_unbounded_above (\\n. p n) /\\ mono_unbounded_above (\\n. q n) ==>\n           mono_unbounded_above (\\n. p n * q n)"), t1526))
 }
 
 ///|
@@ -2960,7 +2960,7 @@ fn step_75() -> Unit raise {
   let t1529 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1530 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("--(x * y) = x * -- y"))]))
   let t1531 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2()])), t1530, t1529, t1528, t1527])
-  mua_mub_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p q. mono_unbounded_above (\\n. p n) /\\ mono_unbounded_below (\\n. q n) ==>\n           mono_unbounded_below (\\n. p n * q n)"), t1531))
+  mua_mub_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p q. mono_unbounded_above (\\n. p n) /\\ mono_unbounded_below (\\n. q n) ==>\n           mono_unbounded_below (\\n. p n * q n)"), t1531))
 }
 
 ///|
@@ -2980,7 +2980,7 @@ fn step_76() -> Unit raise {
   let t1534 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1535 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("--(x * y) = -- x * y"))]))
   let t1536 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2()])), t1535, t1534, t1533, t1532])
-  mub_mua_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p q. mono_unbounded_below (\\n. p n) /\\ mono_unbounded_above (\\n. q n) ==>\n           mono_unbounded_below (\\n. p n * q n)"), t1536))
+  mub_mua_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p q. mono_unbounded_below (\\n. p n) /\\ mono_unbounded_above (\\n. q n) ==>\n           mono_unbounded_below (\\n. p n * q n)"), t1536))
 }
 
 ///|
@@ -3000,7 +3000,7 @@ fn step_77() -> Unit raise {
   let t1539 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1540 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(x * y) = -- x * -- y"))]))
   let t1541 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2()])), t1540, t1539, t1538, t1537])
-  mub_mub_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p q. mono_unbounded_below (\\n. p n) /\\ mono_unbounded_below (\\n. q n) ==>\n           mono_unbounded_above (\\n. p n * q n)"), t1541))
+  mub_mub_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p q. mono_unbounded_below (\\n. p n) /\\ mono_unbounded_below (\\n. q n) ==>\n           mono_unbounded_above (\\n. p n * q n)"), t1541))
 }
 
 ///|
@@ -3017,7 +3017,7 @@ pub fn mub_mub() -> @kernel.Thm {
 fn step_78() -> Unit raise {
   let t1542 = @meson.asm_meson_tac(@list.List([mua_mua(), mua_mub(), mub_mua(), mub_mub()]))
   let t1543 = @list.List([@simp.rewrite_tac(@list.List([mono_unbounded()])), t1542])
-  mu_prod_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p q. mono_unbounded (\\n. p n) /\\ mono_unbounded (\\n. q n) ==> mono_unbounded (\\n. p n * q n)"), t1543))
+  mu_prod_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p q. mono_unbounded (\\n. p n) /\\ mono_unbounded (\\n. q n) ==> mono_unbounded (\\n. p n * q n)"), t1543))
 }
 
 ///|
@@ -3057,7 +3057,7 @@ fn step_79() -> Unit raise {
   let t1560 = @tactics.match_mp_tac(mua_quotient_limit())
   let t1561 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1562 = @list.List([@simp.rewrite_tac(@list.List([mua_neg2()])), t1561, t1560, t1559, t1558, t1557, t1556, @tactics.beta_tac, t1555, t1554, t1553])
-  mub_quotient_limit_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_below g\n    ==> mono_unbounded_below f"), t1562))
+  mub_quotient_limit_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k f g. &0 < k /\\ (\\n. f n / g n) --> k /\\ mono_unbounded_below g\n    ==> mono_unbounded_below f"), t1562))
 }
 
 ///|
@@ -3135,7 +3135,7 @@ fn step_80() -> Unit raise {
     let t1565 = @tactics.mp_tac(x)
     @tactics.then_tac(@tactics.assume_tac(x), t1565)
   }), t1612, t1611, t1610, t1609, t1608, @tactics.disj2_tac, t1607, t1606, t1605, t1604, @calc_rat.real_arith_tac, @tactics.beta_tac, t1603, t1602, t1601, t1600, t1599, t1598, t1597, t1596, t1595, t1594, @tactics.disj1_tac, t1593, t1592, t1591, t1590, @calc_rat.real_arith_tac, @tactics.beta_tac, t1589, t1588, t1587, t1586, t1585, t1584, t1583])
-  poly_ub_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> mono_unbounded (\\n. poly p (&n))"), t1613))
+  poly_ub_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> mono_unbounded (\\n. poly p (&n))"), t1613))
 }
 
 ///|
@@ -3185,7 +3185,7 @@ fn step_83() -> Unit raise {
   let t1616 = @meson.asm_meson_tac(@list.List([]))
   let t1617 = @simp.rewrite_tac(@list.List([pneg_aux(), @analysis.pow()]))
   let t1618 = @list.List([@lists.list_induct_tac, @tactics.strip_tac, @simp.rewrite_tac(@list.List([pneg_aux()])), t1617, @rewrites.real_simp_tac, @tactics.strip_tac, @tactics.ap_term_tac, t1616])
-  poly_pneg_aux_suc_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!t n. pneg_aux (SUC (SUC n)) t = pneg_aux n t"), t1618))
+  poly_pneg_aux_suc_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall t n. pneg_aux (SUC (SUC n)) t = pneg_aux n t"), t1618))
 }
 
 ///|
@@ -3203,7 +3203,7 @@ fn step_84() -> Unit raise {
   let t1619 = @meson.asm_meson_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul()]))
   let t1620 = @simp.rewrite_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul()]))
   let t1621 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul()])), t1620, @rewrites.real_simp_tac, @tactics.ap_term_tac, t1619])
-  poly_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. poly_neg (poly_neg p) = p"), t1621))
+  poly_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. poly_neg (poly_neg p) = p"), t1621))
 }
 
 ///|
@@ -3229,7 +3229,7 @@ fn step_85() -> Unit raise {
   let t1629 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1630 = @simp.rewrite_tac(@list.List([pneg_aux()]))
   let t1631 = @list.List([@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([pneg_aux(), @poly.poly_neg(), @poly.poly_cmul()])), t1630, t1629, t1628, t1627, @rewrites.real_simp_tac, @tactics.ap_term_tac, t1626, t1625, t1624, t1623])
-  poly_pneg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. poly_neg (pneg_aux (SUC n) p) = pneg_aux n p"), t1631))
+  poly_pneg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. poly_neg (pneg_aux (SUC n) p) = pneg_aux n p"), t1631))
 }
 
 ///|
@@ -3268,7 +3268,7 @@ fn step_86() -> Unit raise {
   let t1648 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1649 = @simp.rewrite_tac(@list.List([pneg_aux(), @poly.poly()]))
   let t1650 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t1649, t1648, t1647, t1646, @rewrites.real_simp_tac, t1645, @rewrites.real_simp_tac, t1644, t1643, t1642, @rewrites.real_simp_tac, t1641, @rewrites.real_simp_tac, @tactics.ap_term_tac, t1640, t1639, @rewrites.real_simp_tac])
-  poly_pneg_aux_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!k p n. EVEN n ==> (poly p (-- k) = poly (pneg_aux n p) k)"), t1650))
+  poly_pneg_aux_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k p n. EVEN n ==> (poly p (-- k) = poly (pneg_aux n p) k)"), t1650))
 }
 
 ///|
@@ -3295,7 +3295,7 @@ fn step_87() -> Unit raise {
   let t1658 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1659 = @simp.rewrite_tac(@list.List([pneg(), @poly.poly()]))
   let t1660 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([pneg(), @poly.poly()])), t1659, t1658, t1657, t1656, t1655, t1654])
-  poly_pneg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p x. poly p (-- x) = poly (pneg p) x"), t1660))
+  poly_pneg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p x. poly p (-- x) = poly (pneg p) x"), t1660))
 }
 
 ///|
@@ -3328,7 +3328,7 @@ pub fn degree_0() -> @kernel.Thm {
 /// EVEN_ODD
 fn step_89() -> Unit raise {
   let t1663 = @list.List([@simp.rewrite_tac(@list.List([@arith.even(), @arith.not_even()]))])
-  even_odd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. EVEN (SUC x) = ODD x"), t1663))
+  even_odd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. EVEN (SUC x) = ODD x"), t1663))
 }
 
 ///|
@@ -3344,7 +3344,7 @@ pub fn even_odd() -> @kernel.Thm {
 /// ODD_EVEN
 fn step_90() -> Unit raise {
   let t1664 = @list.List([@simp.rewrite_tac(@list.List([@arith.odd(), @arith.not_odd()]))])
-  odd_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. ODD (SUC x) = EVEN x"), t1664))
+  odd_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. ODD (SUC x) = EVEN x"), t1664))
 }
 
 ///|
@@ -3373,7 +3373,7 @@ fn step_91() -> Unit raise {
   let t1674 = @simp.rewrite_tac(@list.List([poly_pneg_aux_suc()]))
   let t1675 = @simp.once_rewrite_tac(@list.List([@equal.gsym(poly_pneg_neg())]))
   let t1676 = @list.List([@simp.rewrite_tac(@list.List([pneg(), pneg_aux()])), @rewrites.real_simp_tac, t1675, t1674, t1673, t1672, t1671, t1670, t1669, t1668])
-  pneg_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. pneg (CONS h t) = CONS h (neg (pneg t))"), t1676))
+  pneg_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. pneg (CONS h t) = CONS h (neg (pneg t))"), t1676))
 }
 
 ///|
@@ -3389,7 +3389,7 @@ pub fn pneg_cons() -> @kernel.Thm {
 /// PNEG_NIL
 fn step_92() -> Unit raise {
   let t1677 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([pneg(), @lists.not_cons_nil(), pneg_aux()])))])
-  pneg_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (pneg p = []) <=> (p = [])"), t1677))
+  pneg_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (pneg p = []) <=> (p = [])"), t1677))
 }
 
 ///|
@@ -3405,7 +3405,7 @@ pub fn pneg_nil() -> @kernel.Thm {
 /// PNEG_AUX_NIL
 fn step_93() -> Unit raise {
   let t1678 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([pneg(), @lists.not_cons_nil(), pneg_aux()])))])
-  pneg_aux_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. (pneg_aux n p = []) <=> (p = [])"), t1678))
+  pneg_aux_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. (pneg_aux n p = []) <=> (p = [])"), t1678))
 }
 
 ///|
@@ -3421,7 +3421,7 @@ pub fn pneg_aux_nil() -> @kernel.Thm {
 /// POLY_CMUL_NIL
 fn step_94() -> Unit raise {
   let t1679 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([@poly.poly_cmul(), @lists.not_cons_nil(), pneg_aux()])))])
-  poly_cmul_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (c ## p = []) <=> (p = [])"), t1679))
+  poly_cmul_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (c ## p = []) <=> (p = [])"), t1679))
 }
 
 ///|
@@ -3437,7 +3437,7 @@ pub fn poly_cmul_nil() -> @kernel.Thm {
 /// POLY_NEG_NIL
 fn step_95() -> Unit raise {
   let t1680 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul(), @lists.not_cons_nil()])))])
-  poly_neg_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (poly_neg p = []) <=> (p = [])"), t1680))
+  poly_neg_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (poly_neg p = []) <=> (p = [])"), t1680))
 }
 
 ///|
@@ -3466,7 +3466,7 @@ fn step_96() -> Unit raise {
   let t1691 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t1692 = @tactics.disch_then(@rqe_tactics_ext.ignore_)
   let t1693 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t1692, t1691, t1690, @calc_rat.real_arith_tac, t1689, t1688, t1687, t1686, @tactics.strip_tac, t1685, t1684])
-  neg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. ~(p = []) ==> (LAST (neg p) = -- LAST p)"), t1693))
+  neg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. ~(p = []) ==> (LAST (neg p) = -- LAST p)"), t1693))
 }
 
 ///|
@@ -3525,7 +3525,7 @@ fn step_97() -> Unit raise {
   let t1732 = @simp.asm_rewrite_tac(@list.List([@lists.last(), pneg(), pneg_aux()]))
   let t1733 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t1734 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([normal()])), @tactics.strip_tac, t1733, t1732, @rewrites.real_simp_tac, t1731, t1730, t1729, t1728, t1727, @tactics.strip_tac, @tactics.strip_tac, t1726, t1725, t1724, t1723, t1722, t1721, t1720, t1719, @tactics.strip_tac, t1718, t1717, t1716, t1715, t1714, t1713, t1712, t1711, t1710, t1709, t1708, t1707, t1706, t1705, @tactics.strip_tac, t1704, t1703, @rewrites.real_simp_tac])
-  poly_pneg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p ==>\n      (EVEN (degree p) ==> (LAST p = LAST (pneg p))) /\\\n      (ODD (degree p) ==> (LAST p = -- LAST (pneg p)))"), t1734))
+  poly_pneg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p ==>\n      (EVEN (degree p) ==> (LAST p = LAST (pneg p))) /\\\n      (ODD (degree p) ==> (LAST p = -- LAST (pneg p)))"), t1734))
 }
 
 ///|
@@ -3543,7 +3543,7 @@ fn step_98() -> Unit raise {
   let t1735 = @meson.asm_meson_tac(@list.List([]))
   let t1736 = @simp.rewrite_tac(@list.List([@lists.length(), pneg(), pneg_aux()]))
   let t1737 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length(), pneg(), pneg_aux()])), t1736, t1735])
-  pneg_aux_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. LENGTH (pneg_aux n p) = LENGTH p"), t1737))
+  pneg_aux_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. LENGTH (pneg_aux n p) = LENGTH p"), t1737))
 }
 
 ///|
@@ -3561,7 +3561,7 @@ fn step_99() -> Unit raise {
   let t1738 = @meson.asm_meson_tac(@list.List([pneg_aux_length()]))
   let t1739 = @simp.rewrite_tac(@list.List([@lists.length(), pneg(), pneg_aux()]))
   let t1740 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length(), pneg(), pneg_aux()])), t1739, t1738])
-  pneg_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. LENGTH (pneg p) = LENGTH p"), t1740))
+  pneg_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. LENGTH (pneg p) = LENGTH p"), t1740))
 }
 
 ///|
@@ -3597,7 +3597,7 @@ fn step_100() -> Unit raise {
   let t1757 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t1758 = @tactics.disch_then(@rqe_tactics_ext.ignore_)
   let t1759 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), @tactics.strip_tac, t1758, t1757, t1756, @rewrites.real_simp_tac, t1755, @rewrites.real_simp_tac, @tactics.eq_tac, t1754, @rewrites.real_simp_tac, @tactics.strip_tac, t1753, @rewrites.real_simp_tac, t1752, @tactics.strip_tac, t1751, t1750, t1749, t1748, t1747, @tactics.strip_tac, t1746, t1745])
-  last_pneg_aux_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. ~(p = []) ==> ((LAST p = &0) <=> (LAST (pneg_aux n p) = &0))"), t1759))
+  last_pneg_aux_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. ~(p = []) ==> ((LAST p = &0) <=> (LAST (pneg_aux n p) = &0))"), t1759))
 }
 
 ///|
@@ -3613,7 +3613,7 @@ pub fn last_pneg_aux_0() -> @kernel.Thm {
 /// LAST_PNEG_0
 fn step_101() -> Unit raise {
   let t1760 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([last_pneg_aux_0(), pneg()])))])
-  last_pneg_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. ~(p = []) ==> ((LAST p = &0) = (LAST (pneg p) = &0))"), t1760))
+  last_pneg_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. ~(p = []) ==> ((LAST p = &0) = (LAST (pneg p) = &0))"), t1760))
 }
 
 ///|
@@ -3652,7 +3652,7 @@ fn step_102() -> Unit raise {
   let t1778 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:real list"), poly_pneg_last()))
   let t1779 = @rqe_tactics_ext.cases_on(@parser.parse_term("normal p"))
   let t1780 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1779, t1778, t1777, @tactics.strip_tac, t1776, t1775, t1774, t1773, t1772, t1771, t1770, t1769, t1768, @tactics.disj1_tac, t1767])
-  pneg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. ~(p = []) ==> (LAST (pneg p) = LAST p) \\/ (LAST (pneg p) = -- LAST p)"), t1780))
+  pneg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. ~(p = []) ==> (LAST (pneg p) = LAST p) \\/ (LAST (pneg p) = -- LAST p)"), t1780))
 }
 
 ///|
@@ -3694,7 +3694,7 @@ fn step_103() -> Unit raise {
   let t1801 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1802 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1803 = @list.List([@simp.rewrite_tac(@list.List([normal_id()])), t1802, @tactics.eq_tac, t1801, t1800, t1799, t1798, t1797, @tactics.strip_tac, t1796, t1795, t1794, t1793, t1792, t1791, t1790, t1789, @tactics.strip_tac, t1788, t1787])
-  normal_pneg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p = normal (pneg p)"), t1803))
+  normal_pneg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p = normal (pneg p)"), t1803))
 }
 
 ///|
@@ -3722,7 +3722,7 @@ fn step_104() -> Unit raise {
   let t1815 = @tactics.then_tac(@tactics.repeat_tac(@class.cond_cases_tac), t1804)
   let t1816 = @simp.rewrite_tac(@list.List([@poly.normalize(), @lists.length(), pneg(), pneg_aux()]))
   let t1817 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.normalize(), @lists.length(), pneg_aux()])), t1816, @tactics.strip_tac, t1815, @rqe_tactics_ext.label_all_tac, (x1805 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.keep(@list.List(["Z-2", "Z-0"]), x1805), t1814, t1813, @calc_rat.real_arith_tac, @tactics.strip_tac, t1812, t1811, t1810, t1809, @calc_rat.real_arith_tac, @tactics.strip_tac, t1808, t1807, t1806])
-  pneg_aux_normalize_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. LENGTH (normalize (pneg_aux n p)) = LENGTH (normalize p)"), t1817))
+  pneg_aux_normalize_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. LENGTH (normalize (pneg_aux n p)) = LENGTH (normalize p)"), t1817))
 }
 
 ///|
@@ -3739,7 +3739,7 @@ pub fn pneg_aux_normalize_length() -> @kernel.Thm {
 fn step_105() -> Unit raise {
   let t1818 = @meson.asm_meson_tac(@list.List([pneg_aux_normalize_length(), pneg(), pneg_aux()]))
   let t1819 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([pneg()])), t1818])
-  pneg_normalize_length_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. LENGTH (normalize (pneg p)) = LENGTH (normalize p)"), t1819))
+  pneg_normalize_length_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. LENGTH (normalize (pneg p)) = LENGTH (normalize p)"), t1819))
 }
 
 ///|
@@ -3756,7 +3756,7 @@ pub fn pneg_normalize_length_v1() -> @kernel.Thm {
 fn step_106() -> Unit raise {
   let t1820 = @meson.asm_meson_tac(@list.List([pneg_normalize_length_v1()]))
   let t1821 = @list.List([@simp.rewrite_tac(@list.List([@poly.degree()])), t1820])
-  degree_pneg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. degree (pneg p) = degree p"), t1821))
+  degree_pneg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. degree (pneg p) = degree p"), t1821))
 }
 
 ///|
@@ -3791,7 +3791,7 @@ fn step_107() -> Unit raise {
   let t1835 = @rqe_tactics_ext.rewrite_assums(@list.List([pneg(), pneg_aux()]))
   let t1836 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1837 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([pneg(), pneg_aux()])), @tactics.eq_tac, t1836, @list_rewrites.list_simp_tac, @tactics.strip_tac, t1835, t1834, @rewrites.real_simp_tac, @list_rewrites.list_simp_tac, t1833, t1832, t1831, @list_rewrites.list_simp_tac, t1830, t1829, @rewrites.real_simp_tac, @list_rewrites.list_simp_tac, @tactics.strip_tac, t1828])
-  pneg_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (pneg p = [x]) <=> (p = [x])"), t1837))
+  pneg_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (pneg p = [x]) <=> (p = [x])"), t1837))
 }
 
 ///|
@@ -3824,7 +3824,7 @@ fn step_108() -> Unit raise {
   let t1850 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1851 = @tactics.then_tac(@tactics.strip_tac, @tactics.eq_tac)
   let t1852 = @list.List([@simp.rewrite_tac(@list.List([nonconstant()])), t1851, t1850, t1849, t1848, t1847, t1846, @rewrites.real_simp_tac, t1845, t1844, t1843, t1842])
-  pneg_nonconstant_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant (pneg p) = nonconstant p"), t1852))
+  pneg_nonconstant_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant (pneg p) = nonconstant p"), t1852))
 }
 
 ///|
@@ -3844,7 +3844,7 @@ fn step_109() -> Unit raise {
   let t1855 = @tactics.match_mp_tac(last_unb_neg())
   let t1856 = @simp.rewrite_tac(@list.List([poly_pneg()]))
   let t1857 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1856, t1855, t1854, t1853])
-  last_unbb_even_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ EVEN (degree p) /\\ LAST p < &0 ==>\n       mono_unbounded_below (\\n. poly p (-- &n))"), t1857))
+  last_unbb_even_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ EVEN (degree p) /\\ LAST p < &0 ==>\n       mono_unbounded_below (\\n. poly p (-- &n))"), t1857))
 }
 
 ///|
@@ -3862,7 +3862,7 @@ fn step_110() -> Unit raise {
   let t1858 = @meson.asm_meson_tac(@list.List([poly_pneg_last(), @int.arith_rule(@parser.parse_term("(--x = y) <=> (x = -- y)"))]))
   let t1859 = @meson.asm_meson_tac(@list.List([poly_pneg_last()]))
   let t1860 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1859, t1858])
-  poly_pneg_last2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p\n         ==> (EVEN (degree p) ==> (LAST (pneg p) = LAST p)) /\\\n             (ODD (degree p) ==> (LAST (pneg p) = -- LAST p))"), t1860))
+  poly_pneg_last2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p\n         ==> (EVEN (degree p) ==> (LAST (pneg p) = LAST p)) /\\\n             (ODD (degree p) ==> (LAST (pneg p) = -- LAST p))"), t1860))
 }
 
 ///|
@@ -3895,7 +3895,7 @@ fn step_111() -> Unit raise {
   let t1872 = @tactics.match_mp_tac(last_unb())
   let t1873 = @simp.rewrite_tac(@list.List([poly_pneg()]))
   let t1874 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1873, t1872, t1871, t1870, t1869, t1868, t1867])
-  last_unb_odd_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ ODD (degree p) /\\ LAST p < &0 ==>\n       mono_unbounded_above (\\n. poly p (-- &n))"), t1874))
+  last_unb_odd_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ ODD (degree p) /\\ LAST p < &0 ==>\n       mono_unbounded_above (\\n. poly p (-- &n))"), t1874))
 }
 
 ///|
@@ -3915,7 +3915,7 @@ fn step_112() -> Unit raise {
   let t1877 = @tactics.match_mp_tac(last_unb())
   let t1878 = @simp.rewrite_tac(@list.List([poly_pneg()]))
   let t1879 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1878, t1877, t1876, t1875])
-  last_unb_even_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ EVEN (degree p) /\\ &0 < LAST p ==>\n       mono_unbounded_above (\\n. poly p (-- &n))"), t1879))
+  last_unb_even_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ EVEN (degree p) /\\ &0 < LAST p ==>\n       mono_unbounded_above (\\n. poly p (-- &n))"), t1879))
 }
 
 ///|
@@ -3948,7 +3948,7 @@ fn step_113() -> Unit raise {
   let t1891 = @tactics.match_mp_tac(last_unb_neg())
   let t1892 = @simp.rewrite_tac(@list.List([poly_pneg()]))
   let t1893 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t1892, t1891, t1890, t1889, t1888, t1887, t1886])
-  last_unb_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ ODD (degree p) /\\ &0 < LAST p ==>\n       mono_unbounded_below (\\n. poly p (-- &n))"), t1893))
+  last_unb_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ ODD (degree p) /\\ &0 < LAST p ==>\n       mono_unbounded_below (\\n. poly p (-- &n))"), t1893))
 }
 
 ///|
@@ -3965,7 +3965,7 @@ pub fn last_unb_odd_pos() -> @kernel.Thm {
 fn step_114() -> Unit raise {
   let t1894 = @meson.asm_meson_tac(@list.List([pneg_aux_normalize_length(), pneg(), pneg_aux()]))
   let t1895 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([pneg()])), t1894])
-  pneg_normalize_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. LENGTH (normalize (pneg p)) = LENGTH (normalize p)"), t1895))
+  pneg_normalize_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. LENGTH (normalize (pneg p)) = LENGTH (normalize p)"), t1895))
 }
 
 ///|
@@ -4017,7 +4017,7 @@ fn step_115() -> Unit raise {
   let t1928 = @simp.rewrite_tac(@list.List([@poly.poly_diff_aux()]))
   let t1929 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1930 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([normal(), @poly.poly_diff_aux()])), t1929, t1928, t1927, t1926, t1925, @tactics.eq_tac, t1924, t1923, @class.cond_cases_tac, t1922, t1921, @tactics.strip_tac, t1920, t1919, t1918, @tactics.strip_tac, t1917, t1916, t1915, t1914, t1913, @tactics.eq_tac, t1912, t1911, t1910, @tactics.strip_tac, t1909, t1908, @tactics.strip_tac, t1907, t1906, t1905, @tactics.strip_tac, t1904, t1903, t1902, t1901, t1900])
-  poly_diff_aux_normal_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. ~(n = 0) ==> (normal p = normal (poly_diff_aux n p))"), t1930))
+  poly_diff_aux_normal_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. ~(n = 0) ==> (normal p = normal (poly_diff_aux n p))"), t1930))
 }
 
 ///|
@@ -4040,7 +4040,7 @@ fn step_116() -> Unit raise {
   let t1936 = @simp.rewrite_tac(@list.List([nonconstant()]))
   let t1937 = @simp.rewrite_tac(@list.List([@poly.poly_diff(), @lists.not_cons_nil(), @lists.tl()]))
   let t1938 = @list.List([@lists.list_induct_tac, @meson.asm_meson_tac(@list.List([normal(), @poly.poly_diff(), @poly.poly_diff_aux(), poly_diff_aux_normal(), @int.arith_rule(@parser.parse_term("~(1 = 0)")), nonconstant()])), t1937, t1936, @tactics.strip_tac, t1935, t1934, t1933, t1932, @tactics.strip_tac, t1931])
-  poly_diff_normal_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p ==> normal (poly_diff p)"), t1938))
+  poly_diff_normal_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p ==> normal (poly_diff p)"), t1938))
 }
 
 ///|
@@ -4056,7 +4056,7 @@ pub fn poly_diff_normal() -> @kernel.Thm {
 /// POLY_DIFF_AUX_NORMAL2
 fn step_117() -> Unit raise {
   let t1939 = @list.List([@meson.meson_tac(@list.List([poly_diff_aux_normal()]))])
-  poly_diff_aux_normal2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. ~(n = 0) ==> (normal (poly_diff_aux n p) <=> normal p)"), t1939))
+  poly_diff_aux_normal2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. ~(n = 0) ==> (normal (poly_diff_aux n p) <=> normal p)"), t1939))
 }
 
 ///|
@@ -4092,7 +4092,7 @@ fn step_118() -> Unit raise {
   let t1958 = @simp.rewrite_tac(@list.List([@poly.poly_diff_aux()]))
   let t1959 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1960 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.poly_diff_aux()])), t1959, t1958, t1957, t1956, t1955, t1954, t1953, t1952, t1951, t1950, @tactics.strip_tac, t1949, t1948, t1947, t1946, t1945, t1944, @tactics.strip_tac, t1943, @tactics.ap_term_tac, t1942, @tactics.strip_tac, @int.arith_tac, @tactics.strip_tac, @int.arith_tac, t1941, t1940])
-  poly_diff_aux_degree_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p m n. ~(n = 0) /\\ ~(m = 0) /\\ normal p ==>\n    (degree (poly_diff_aux n p) = degree (poly_diff_aux m p))"), t1960))
+  poly_diff_aux_degree_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p m n. ~(n = 0) /\\ ~(m = 0) /\\ normal p ==>\n    (degree (poly_diff_aux n p) = degree (poly_diff_aux m p))"), t1960))
 }
 
 ///|
@@ -4166,7 +4166,7 @@ fn step_119() -> Unit raise {
     @tactics.then_tac(@tactics.assume_tac(x), t1963)
   })
   let t2013 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([normal(), nonconstant()])), @tactics.strip_tac, t2012, t2011, @tactics.strip_tac, t2010, t2009, t2008, t2007, t2006, @tactics.strip_tac, t2005, t2004, @tactics.strip_tac, t2003, t2002, t2001, t2000, @tactics.strip_tac, t1999, t1998, t1997, t1996, t1995, t1994, @tactics.strip_tac, t1993, t1992, t1991, t1990, t1989, @tactics.strip_tac, t1988, @int.arith_tac, @tactics.strip_tac, t1987, t1986, t1985, @tactics.strip_tac, t1984, t1983, t1982, @int.arith_tac, @tactics.strip_tac, t1981, t1980, t1979, t1978, @tactics.strip_tac, t1977, t1976, t1975, t1974])
-  poly_diff_aux_odd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. nonconstant p ==>\n  (EVEN (degree p) = EVEN (degree (poly_diff_aux n p))) /\\\n  (ODD (degree p) = ODD (degree (poly_diff_aux n p)))"), t2013))
+  poly_diff_aux_odd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. nonconstant p ==>\n  (EVEN (degree p) = EVEN (degree (poly_diff_aux n p))) /\\\n  (ODD (degree p) = ODD (degree (poly_diff_aux n p)))"), t2013))
 }
 
 ///|
@@ -4233,7 +4233,7 @@ fn step_120() -> Unit raise {
   let t2059 = @simp.rewrite_tac(@list.List([@poly.poly_diff()]))
   let t2060 = @simp.rewrite_tac(@list.List([nonconstant()]))
   let t2061 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([nonconstant(), normal()])), @tactics.strip_tac, @rqe_tactics_ext.disch_ass, t2060, @tactics.strip_tac, t2059, @list_rewrites.list_simp_tac, t2058, @int.arith_tac, @tactics.strip_tac, t2057, t2056, t2055, @tactics.strip_tac, t2054, t2053, t2052, t2051, t2050, @tactics.strip_tac, t2049, t2048, t2047, @tactics.strip_tac, t2046, t2045, t2044, t2043, t2042, @rqe_tactics_ext.disch_ass, t2041, t2040, t2039, t2038, t2037, @tactics.strip_tac, t2036, t2035, t2034, t2033, t2032, @tactics.strip_tac, t2031, t2030, @tactics.strip_tac, t2029, t2028, t2027, t2026, t2025, @tactics.strip_tac, t2024])
-  poly_diff_parity_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. nonconstant p ==>\n  (EVEN (degree p) = ODD (degree (poly_diff p))) /\\\n  (ODD (degree p) = EVEN (degree (poly_diff p)))"), t2061))
+  poly_diff_parity_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. nonconstant p ==>\n  (EVEN (degree p) = ODD (degree (poly_diff p))) /\\\n  (ODD (degree p) = EVEN (degree (poly_diff p)))"), t2061))
 }
 
 ///|
@@ -4249,7 +4249,7 @@ pub fn poly_diff_parity() -> @kernel.Thm {
 /// poly_diff_parity2
 fn step_121() -> Unit raise {
   let t2062 = @list.List([@meson.meson_tac(@list.List([poly_diff_parity()]))])
-  poly_diff_parity2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p n. nonconstant p ==>\n  (ODD (degree (poly_diff p)) = EVEN (degree p)) /\\\n  (EVEN (degree (poly_diff p)) = ODD (degree p))"), t2062))
+  poly_diff_parity2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p n. nonconstant p ==>\n  (ODD (degree (poly_diff p)) = EVEN (degree p)) /\\\n  (EVEN (degree (poly_diff p)) = ODD (degree p))"), t2062))
 }
 
 ///|
@@ -4266,7 +4266,7 @@ pub fn poly_diff_parity2() -> @kernel.Thm {
 fn step_122() -> Unit raise {
   let t2063 = @meson.asm_meson_tac(@list.List([degree_sing(), @arith.lt_refl()]))
   let t2064 = @list.List([@simp.rewrite_tac(@list.List([nonconstant()])), t2063])
-  normal_nonconstant_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal p /\\ 0 < degree p ==> nonconstant p"), t2064))
+  normal_nonconstant_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal p /\\ 0 < degree p ==> nonconstant p"), t2064))
 }
 
 ///|
@@ -4283,7 +4283,7 @@ pub fn normal_nonconstant() -> @kernel.Thm {
 fn step_123() -> Unit raise {
   let t2065 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2066 = @list.List([@simp.rewrite_tac(@list.List([@rqe_num.nmax()])), t2065, @class.cond_cases_tac, @int.arith_tac, @int.arith_tac])
-  nmax_le_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!n m. n <= nmax n m /\\ m <= nmax n m"), t2066))
+  nmax_le_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall n m. n <= nmax n m /\\ m <= nmax n m"), t2066))
 }
 
 ///|
@@ -4583,7 +4583,7 @@ fn step_124() -> Unit raise {
   let t2300 = @simp.rewrite_tac(@list.List([poly_pneg()]))
   let t2301 = @rqe_tactics_ext.claim(@parser.parse_term("mono_unbounded_above (\\n. poly p (-- &n))"))
   let t2302 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2301, t2300, t2299, t2298, t2297, t2296, t2295, @calc_rat.real_arith_tac, @tactics.beta_tac, t2294, t2293, t2292, t2291, @tactics.strip_tac, t2290, t2289, t2288, t2287, t2286, t2285, t2284, @tactics.strip_tac, t2283, t2282, t2281, t2280, t2279, t2278, t2277, @tactics.strip_tac, t2276, @tactics.strip_tac, t2275, t2274, @tactics.strip_tac, t2273, t2272, @tactics.strip_tac, t2271, t2270, t2269, @tactics.strip_tac, t2268, t2267, t2266, t2265, t2264, t2263, @tactics.strip_tac, t2262, t2261, t2260, t2259, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t2258, @tactics.strip_tac, t2257, t2256, t2255, t2254, t2253, t2252, @tactics.strip_tac, t2251, t2250, t2249, @tactics.strip_tac, t2248, t2247, t2246, t2245, t2244, t2243, t2242, t2241, @rqe_tactics_ext.label_all_tac, t2240, t2239, t2238, @rewrites.real_simp_tac, t2237, t2236, t2235, @calc_rat.real_arith_tac, t2234, t2233, @tactics.strip_tac, t2232, t2231, t2230, @tactics.strip_tac, t2229, t2228, @tactics.strip_tac, t2227, t2226, t2225, t2224, t2223, t2222, t2221, @tactics.strip_tac, t2220, t2219, t2218, t2217, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t2216, @tactics.strip_tac, t2215, t2214, t2213, t2212, t2211, t2210, @tactics.strip_tac, t2209, t2208, t2207, @tactics.strip_tac, t2206, t2205, t2204, t2203, @tactics.strip_tac, t2202, t2201, t2200, t2199, t2198, t2197, @tactics.strip_tac, t2196, t2195, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t2194, t2193, @tactics.strip_tac, t2192, t2191, t2190, t2189, t2188, t2187, t2186, @tactics.strip_tac, t2185, t2184, t2183, t2182, @tactics.strip_tac, t2181, t2180, t2179, @tactics.strip_tac, t2178, t2177, @tactics.strip_tac, t2176, @rqe_tactics_ext.label_all_tac, t2175, @tactics.strip_tac, t2174, t2173, t2172, t2171, t2170, @calc_rat.real_arith_tac])
-  poly_diff_up_left_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ (?X. !x. x < X ==> poly (poly_diff p) x < &0) ==>\n   (?Y. !y. y < Y ==> &0 < poly p y)"), t2302))
+  poly_diff_up_left_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ (?X. forall x. x < X ==> poly (poly_diff p) x < &0) ==>\n   (?Y. forall y. y < Y ==> &0 < poly p y)"), t2302))
 }
 
 ///|
@@ -4883,7 +4883,7 @@ fn step_125() -> Unit raise {
   let t2536 = @simp.rewrite_tac(@list.List([poly_pneg()]))
   let t2537 = @rqe_tactics_ext.claim(@parser.parse_term("mono_unbounded_below (\\n. poly p (-- &n))"))
   let t2538 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2537, t2536, t2535, t2534, t2533, t2532, t2531, @calc_rat.real_arith_tac, @tactics.beta_tac, t2530, t2529, t2528, t2527, @tactics.strip_tac, t2526, t2525, t2524, t2523, t2522, t2521, t2520, @tactics.strip_tac, t2519, t2518, t2517, t2516, t2515, t2514, t2513, @tactics.strip_tac, t2512, @tactics.strip_tac, t2511, t2510, @tactics.strip_tac, t2509, t2508, @tactics.strip_tac, t2507, t2506, t2505, @tactics.strip_tac, t2504, t2503, t2502, t2501, t2500, t2499, @tactics.strip_tac, t2498, t2497, t2496, t2495, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t2494, @tactics.strip_tac, t2493, t2492, t2491, t2490, t2489, t2488, @tactics.strip_tac, t2487, t2486, t2485, @tactics.strip_tac, t2484, t2483, t2482, t2481, t2480, t2479, t2478, t2477, @rqe_tactics_ext.label_all_tac, t2476, t2475, t2474, @rewrites.real_simp_tac, t2473, t2472, t2471, @calc_rat.real_arith_tac, t2470, t2469, @tactics.strip_tac, t2468, t2467, t2466, @tactics.strip_tac, t2465, t2464, @tactics.strip_tac, t2463, t2462, t2461, t2460, t2459, t2458, t2457, @tactics.strip_tac, t2456, t2455, t2454, t2453, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t2452, @tactics.strip_tac, t2451, t2450, t2449, t2448, t2447, t2446, @tactics.strip_tac, t2445, t2444, t2443, @tactics.strip_tac, t2442, t2441, t2440, t2439, @tactics.strip_tac, t2438, t2437, t2436, t2435, t2434, t2433, @tactics.strip_tac, t2432, t2431, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, t2430, t2429, @tactics.strip_tac, t2428, t2427, t2426, t2425, t2424, t2423, t2422, @tactics.strip_tac, t2421, t2420, t2419, t2418, @tactics.strip_tac, t2417, t2416, t2415, @tactics.strip_tac, t2414, t2413, @tactics.strip_tac, t2412, @rqe_tactics_ext.label_all_tac, t2411, @tactics.strip_tac, t2410, t2409, t2408, t2407, t2406, @calc_rat.real_arith_tac])
-  poly_diff_down_left_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p /\\ (?X. !x. x < X ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. !y. y < Y ==> poly p y < &0)"), t2538))
+  poly_diff_down_left_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p /\\ (?X. forall x. x < X ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. forall y. y < Y ==> poly p y < &0)"), t2538))
 }
 
 ///|
@@ -4911,7 +4911,7 @@ fn step_126() -> Unit raise {
   let t2547 = @simp.asm_rewrite_tac(@list.List([]))
   let t2548 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:real list"), poly_diff_down_left()))
   let t2549 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2548, t2547, @tactics.ants_tac, t2546, @tactics.strip_tac, t2545, t2544, @calc_rat.real_arith_tac, t2543, t2542])
-  poly_diff_down_left2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p X. nonconstant p /\\ (!x. x < X ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. Y < X /\\ (!y. y < Y ==> poly p y < &0))"), t2549))
+  poly_diff_down_left2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p X. nonconstant p /\\ (forall x. x < X ==> &0 < poly (poly_diff p) x) ==>\n   (?Y. Y < X /\\ (forall y. y < Y ==> poly p y < &0))"), t2549))
 }
 
 ///|
@@ -4939,7 +4939,7 @@ fn step_127() -> Unit raise {
   let t2558 = @simp.asm_rewrite_tac(@list.List([]))
   let t2559 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:real list"), poly_diff_up_left()))
   let t2560 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2559, t2558, @tactics.ants_tac, t2557, @tactics.strip_tac, t2556, t2555, @calc_rat.real_arith_tac, t2554, t2553])
-  poly_diff_up_left2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p X. nonconstant p /\\ (!x. x < X ==> poly (poly_diff p) x < &0) ==>\n   (?Y. Y < X /\\ (!y. y < Y ==> &0 < poly p y))"), t2560))
+  poly_diff_up_left2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p X. nonconstant p /\\ (forall x. x < X ==> poly (poly_diff p) x < &0) ==>\n   (?Y. Y < X /\\ (forall y. y < Y ==> &0 < poly p y))"), t2560))
 }
 
 ///|
@@ -4967,7 +4967,7 @@ fn step_128() -> Unit raise {
   let t2569 = @simp.asm_rewrite_tac(@list.List([]))
   let t2570 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:real list"), poly_diff_down_left()))
   let t2571 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2570, t2569, @tactics.ants_tac, t2568, @tactics.strip_tac, t2567, t2566, @calc_rat.real_arith_tac, t2565, t2564])
-  poly_diff_down_left3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (!x. x < X ==> &0 < poly p' x) ==>\n     (?Y. Y < X /\\ (!y. y < Y ==> poly p y < &0))"), t2571))
+  poly_diff_down_left3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> &0 < poly p' x) ==>\n     (?Y. Y < X /\\ (forall y. y < Y ==> poly p y < &0))"), t2571))
 }
 
 ///|
@@ -4995,7 +4995,7 @@ fn step_129() -> Unit raise {
   let t2580 = @simp.asm_rewrite_tac(@list.List([]))
   let t2581 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:real list"), poly_diff_up_left()))
   let t2582 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2581, t2580, @tactics.ants_tac, t2579, @tactics.strip_tac, t2578, t2577, @calc_rat.real_arith_tac, t2576, t2575])
-  poly_diff_up_left3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (!x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (!y. y < Y ==> &0 < poly p y))"), t2582))
+  poly_diff_up_left3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (forall y. y < Y ==> &0 < poly p y))"), t2582))
 }
 
 ///|
@@ -5032,7 +5032,7 @@ fn step_130() -> Unit raise {
   let t2584 = @parser.parse_term("p':real list")
   let t2599 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list"), t2584, t2583]), poly_diff_down_left3()))
   let t2600 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2599, t2598, t2597, t2596, @tactics.strip_tac, t2595, t2594, @calc_rat.real_arith_tac, t2593, t2592, t2591])
-  poly_diff_down_left4_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (!x. x < X ==> &0 < poly p' x) ==>\n     (?Y. Y < X /\\ (!y. y <= Y ==> poly p y < &0))"), t2600))
+  poly_diff_down_left4_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> &0 < poly p' x) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> poly p y < &0))"), t2600))
 }
 
 ///|
@@ -5069,7 +5069,7 @@ fn step_131() -> Unit raise {
   let t2602 = @parser.parse_term("p':real list")
   let t2617 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list"), t2602, t2601]), poly_diff_up_left3()))
   let t2618 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2617, t2616, t2615, t2614, @tactics.strip_tac, t2613, t2612, @calc_rat.real_arith_tac, t2611, t2610, t2609])
-  poly_diff_up_left4_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (!x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (!y. y <= Y ==> &0 < poly p y))"), t2618))
+  poly_diff_up_left4_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> &0 < poly p y))"), t2618))
 }
 
 ///|
@@ -5086,7 +5086,7 @@ pub fn poly_diff_up_left4() -> @kernel.Thm {
 fn step_132() -> Unit raise {
   let t2619 = @meson.asm_meson_tac(@list.List([poly_diff_down_left4()]))
   let t2620 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), t2619])
-  poly_diff_down_left5_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (!x. x < X ==> poly p' x > &0) ==>\n     (?Y. Y < X /\\ (!y. y <= Y ==> poly p y < &0))"), t2620))
+  poly_diff_down_left5_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x > &0) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> poly p y < &0))"), t2620))
 }
 
 ///|
@@ -5103,7 +5103,7 @@ pub fn poly_diff_down_left5() -> @kernel.Thm {
 fn step_133() -> Unit raise {
   let t2621 = @meson.meson_tac(@list.List([poly_diff_up_left4()]))
   let t2622 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), t2621])
-  poly_diff_up_left5_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (!x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (!y. y <= Y ==> poly p y > &0))"), t2622))
+  poly_diff_up_left5_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n   (forall x. x < X ==> poly p' x < &0) ==>\n     (?Y. Y < X /\\ (forall y. y <= Y ==> poly p y > &0))"), t2622))
 }
 
 ///|
@@ -5130,7 +5130,7 @@ fn step_134() -> Unit raise {
   let t2631 = @simp.rewrite_tac(@list.List([@poly.poly_diff(), @poly.poly_diff_aux(), @lists.not_cons_nil(), @lists.tl()]))
   let t2632 = @simp.rewrite_tac(@list.List([nonconstant()]))
   let t2633 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([normal(), @poly.poly_diff(), @poly.poly_diff_aux()])), t2632, t2631, t2630, t2629, t2628, t2627, t2626, t2625, t2624])
-  normal_pdiff_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. normal (poly_diff p) ==> nonconstant p"), t2633))
+  normal_pdiff_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. normal (poly_diff p) ==> nonconstant p"), t2633))
 }
 
 ///|
@@ -5146,7 +5146,7 @@ pub fn normal_pdiff_lem() -> @kernel.Thm {
 /// NORMAL_PDIFF
 fn step_135() -> Unit raise {
   let t2634 = @list.List([@meson.meson_tac(@list.List([normal_pdiff_lem(), poly_diff_normal()]))])
-  normal_pdiff_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. nonconstant p = normal (poly_diff p)"), t2634))
+  normal_pdiff_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. nonconstant p = normal (poly_diff p)"), t2634))
 }
 
 ///|
@@ -5176,7 +5176,7 @@ fn step_136() -> Unit raise {
   let t2635 = @bool.gen_all(poly_diff_up_right())
   let t2646 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list")]), t2635))
   let t2647 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2646, t2645, @tactics.ants_tac, t2644, t2643, t2642, @tactics.strip_tac, @calc_rat.real_arith_tac, t2641, t2640, t2639])
-  poly_diff_up_right2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (!x. X < x ==> &0 < poly p' x) ==>\n     (?Y. X < Y /\\ (!y. Y <= y ==> &0 < poly p y))"), t2647))
+  poly_diff_up_right2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> &0 < poly p' x) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> &0 < poly p y))"), t2647))
 }
 
 ///|
@@ -5206,7 +5206,7 @@ fn step_137() -> Unit raise {
   let t2648 = @bool.gen_all(poly_diff_down_right())
   let t2659 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real list")]), t2648))
   let t2660 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t2659, t2658, @tactics.ants_tac, t2657, t2656, t2655, @tactics.strip_tac, @calc_rat.real_arith_tac, t2654, t2653, t2652])
-  poly_diff_down_right2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (!x. X < x ==> poly p' x < &0) ==>\n     (?Y. X < Y /\\ (!y. Y <= y ==> poly p y < &0))"), t2660))
+  poly_diff_down_right2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> poly p' x < &0) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> poly p y < &0))"), t2660))
 }
 
 ///|
@@ -5223,7 +5223,7 @@ pub fn poly_diff_down_right2() -> @kernel.Thm {
 fn step_138() -> Unit raise {
   let t2661 = @meson.meson_tac(@list.List([poly_diff_up_right2()]))
   let t2662 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt(), @realax.real_ge()])), t2661])
-  poly_diff_up_right3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (!x. X < x ==> poly p' x > &0) ==>\n     (?Y. X < Y /\\ (!y. Y <= y ==> poly p y > &0))"), t2662))
+  poly_diff_up_right3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> poly p' x > &0) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> poly p y > &0))"), t2662))
 }
 
 ///|
@@ -5240,7 +5240,7 @@ pub fn poly_diff_up_right3() -> @kernel.Thm {
 fn step_139() -> Unit raise {
   let t2663 = @meson.meson_tac(@list.List([poly_diff_down_right2()]))
   let t2664 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt(), @realax.real_ge()])), t2663])
-  poly_diff_down_right3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (!x. X < x ==> poly p' x < &0) ==>\n     (?Y. X < Y /\\ (!y. Y <= y ==> poly p y < &0))"), t2664))
+  poly_diff_down_right3_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p p' X. nonconstant p ==> (poly_diff p = p') ==>\n     (forall x. X < x ==> poly p' x < &0) ==>\n     (?Y. X < Y /\\ (forall y. Y <= y ==> poly p y < &0))"), t2664))
 }
 
 ///|

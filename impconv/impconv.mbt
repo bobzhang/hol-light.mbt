@@ -2365,7 +2365,7 @@ fn step_1() -> Unit raise {
               "/\\" => conj_ctximpconv
               "\\/" => disj_ctximpconv
               "=" if ty_9 == iff_ty => iff_ctximpconv
-              "!" => forall_ctximpconv
+              "forall" => forall_ctximpconv
               "?" => exists_ctximpconv
               "~" => not_ctximpconv
               _ => raise Failure("SUB_CTXIMPCONV")
@@ -4493,7 +4493,7 @@ fn step_1() -> Unit raise {
               "==>" => imp_ctximpmconv
               "/\\" => conj_ctximpmconv
               "\\/" => disj_ctximpmconv
-              "!" => forall_ctximpmconv
+              "forall" => forall_ctximpmconv
               "?" => exists_ctximpmconv
               "~" => not_ctximpmconv
               "=" if ty_10 == iff_ty_1 => iff_ctximpconv_1

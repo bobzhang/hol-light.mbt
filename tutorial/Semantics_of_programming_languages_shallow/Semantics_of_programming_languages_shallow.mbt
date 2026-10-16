@@ -97,7 +97,7 @@ pub fn while_cases() -> @kernel.Thm {
 ///|
 /// while_RULES, while_INDUCT, while_CASES
 fn step_6() -> Unit raise {
-  let (while_rules, while_induct, while_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("!q s. If e (c ;; while e c) q s ==> while e c q s"))
+  let (while_rules, while_induct, while_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("forall q s. If e (c ;; while e c) q s ==> while e c q s"))
   while_rules_c.set(while_rules)
   while_induct_c.set(while_induct)
   while_cases_c.set(while_cases)
@@ -106,7 +106,7 @@ fn step_6() -> Unit raise {
 ///|
 /// while_def
 fn step_7() -> Unit raise {
-  while_def_c.set(@pair.new_definition(@parser.parse_term("While e c q =\n    {s | !w. (!s:S. (if e(s) then c w s else q s) ==> w s) ==> w s}")))
+  while_def_c.set(@pair.new_definition(@parser.parse_term("While e c q =\n    {s | forall w. (forall s:S. (if e(s) then c w s else q s) ==> w s) ==> w s}")))
 }
 
 ///|
@@ -121,7 +121,7 @@ pub fn while_def() -> @kernel.Thm {
 ///|
 /// monotonic
 fn step_8() -> Unit raise {
-  monotonic_c.set(@pair.new_definition(@parser.parse_term("monotonic c <=> !q q'. q SUBSET q' ==> (c q) SUBSET (c q')")))
+  monotonic_c.set(@pair.new_definition(@parser.parse_term("monotonic c <=> forall q q'. q SUBSET q' ==> (c q) SUBSET (c q')")))
 }
 
 ///|
@@ -231,7 +231,7 @@ fn step_14() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), while_def(), @sets.in_elim_thm()]))
   let t18 = @tactics.disch_then(@tactics.match_mp_tac)
   let t17 = @simp.rewrite_tac(@list.List([if_def(), sequence(), @trivia.o_thm(), @sets.in_elim_thm(), @theorems.imp_imp()]))
-  let t15 = @parser.parse_term("!s:S. (if e s then c w s else q s) ==> w s")
+  let t15 = @parser.parse_term("forall s:S. (if e s then c w s else q s) ==> w s")
   let t16 = (fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x13 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x10 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -243,7 +243,7 @@ fn step_14() -> Unit raise {
     })(@bool.disch_all(x14))
   })(@ind_defs.derive_nonschematic_inductive_relations(t15))
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t16), t17), t18), t19), t23), t24), t25)
-  while_thm_c.set(@tactics.prove(@parser.parse_term("!e c q:S->bool.\n    monotonic c\n    ==> (!s. If e (c ;; While e c) q s ==> While e c q s) /\\\n        (!w'. (!s. If e (c ;; (\\q. w')) q s ==> w' s)\n              ==> (!a. While e c q a ==> w' a)) /\\\n        (!s. While e c q s <=> If e (c ;; While e c) q s)"), t26))
+  while_thm_c.set(@tactics.prove(@parser.parse_term("forall e c q:S->bool.\n    monotonic c\n    ==> (forall s. If e (c ;; While e c) q s ==> While e c q s) /\\\n        (forall w'. (forall s. If e (c ;; (\\q. w')) q s ==> w' s)\n              ==> (forall a. While e c q a ==> w' a)) /\\\n        (forall s. While e c q s <=> If e (c ;; While e c) q s)"), t26))
 }
 
 ///|
@@ -260,7 +260,7 @@ pub fn while_thm() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([while_thm()]))
   let t28 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm()])), t27)
-  while_fix_c.set(@tactics.prove(@parser.parse_term("!e c. monotonic c ==> (While e c = If e (c ;; While e c))"), t28))
+  while_fix_c.set(@tactics.prove(@parser.parse_term("forall e c. monotonic c ==> (While e c = If e (c ;; While e c))"), t28))
 }
 
 ///|
@@ -291,7 +291,7 @@ pub fn correct() -> @kernel.Thm {
 /// CORRECT_PRESTRENGTH
 fn step_17() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([correct(), @sets.subset_trans()]))
-  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("!p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q"), t29))
+  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q"), t29))
 }
 
 ///|
@@ -308,7 +308,7 @@ pub fn correct_prestrength() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t30 = @sets.set_tac(@list.List([]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), monotonic()])), t30)
-  correct_postweak_c.set(@tactics.prove(@parser.parse_term("!p c q q'. monotonic c /\\ correct p c q' /\\ q' SUBSET q ==> correct p c q"), t31))
+  correct_postweak_c.set(@tactics.prove(@parser.parse_term("forall p c q q'. monotonic c /\\ correct p c q' /\\ q' SUBSET q ==> correct p c q"), t31))
 }
 
 ///|
@@ -324,7 +324,7 @@ pub fn correct_postweak() -> @kernel.Thm {
 /// CORRECT_ASSIGN
 fn step_19() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([correct(), assign()]))
-  correct_assign_c.set(@tactics.prove(@parser.parse_term("!p f q. (p SUBSET (q o f)) ==> correct p (Assign f) q"), t32))
+  correct_assign_c.set(@tactics.prove(@parser.parse_term("forall p f q. (p SUBSET (q o f)) ==> correct p (Assign f) q"), t32))
 }
 
 ///|
@@ -341,7 +341,7 @@ pub fn correct_assign() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t33 = @sets.set_tac(@list.List([]))
   let t34 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), sequence(), monotonic(), @trivia.o_thm()])), t33)
-  correct_seq_c.set(@tactics.prove(@parser.parse_term("!p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; c2) q"), t34))
+  correct_seq_c.set(@tactics.prove(@parser.parse_term("forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; c2) q"), t34))
 }
 
 ///|
@@ -358,7 +358,7 @@ pub fn correct_seq() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t35 = @sets.set_tac(@list.List([]))
   let t36 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), ite_def()])), t35)
-  correct_ite_c.set(@tactics.prove(@parser.parse_term("!p e c1 c2 q.\n       correct (p INTER e) c1 q /\\ correct (p INTER (UNIV DIFF e)) c2 q\n       ==> correct p (Ite e c1 c2) q"), t36))
+  correct_ite_c.set(@tactics.prove(@parser.parse_term("forall p e c1 c2 q.\n       correct (p INTER e) c1 q /\\ correct (p INTER (UNIV DIFF e)) c2 q\n       ==> correct p (Ite e c1 c2) q"), t36))
 }
 
 ///|
@@ -375,7 +375,7 @@ pub fn correct_ite() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t37 = @sets.set_tac(@list.List([]))
   let t38 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), if_def()])), t37)
-  correct_if_c.set(@tactics.prove(@parser.parse_term("!p e c q.\n       correct (p INTER e) c q /\\ p INTER (UNIV DIFF e) SUBSET q\n       ==> correct p (If e c) q"), t38))
+  correct_if_c.set(@tactics.prove(@parser.parse_term("forall p e c q.\n       correct (p INTER e) c q /\\ p INTER (UNIV DIFF e) SUBSET q\n       ==> correct p (If e c) q"), t38))
 }
 
 ///|
@@ -428,7 +428,7 @@ fn step_23() -> Unit raise {
     @tactics.match_mp_tac(t45(x46))
   })
   let t44 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
-  let t43 = @tactics.subgoal_then(@parser.parse_term("!s:S. invariant s ==> While e c q s"), fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t43 = @tactics.subgoal_then(@parser.parse_term("forall s:S. invariant s ==> While e c q s"), fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s41 = @tactics.mp_tac(x40)
     fn(x42 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s41(x42)
@@ -436,7 +436,7 @@ fn step_23() -> Unit raise {
   })
   let t39 = @tactics.repeat_tac(@tactics.gen_tac)
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), @sets.subset(), @sets.in_inter(), @sets.in_univ(), @sets.in_diff(), @sets.in_()])), t39), @tactics.strip_tac), t43), t44), t47), t48), t49), t52), t53), @class.cond_cases_tac), t54), t62), t63), t70), t71), t72), t73)
-  correct_while_c.set(@tactics.prove(@parser.parse_term("!(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (!X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q"), t74))
+  correct_while_c.set(@tactics.prove(@parser.parse_term("forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q"), t74))
 }
 
 ///|
@@ -483,7 +483,7 @@ pub fn variant_def() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t75 = @sets.set_tac(@list.List([]))
   let t76 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), sequence(), monotonic(), assert_def(), @trivia.o_thm()])), t75)
-  correct_seq_vc_c.set(@tactics.prove(@parser.parse_term("!p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; assert r ;; c2) q"), t76))
+  correct_seq_vc_c.set(@tactics.prove(@parser.parse_term("forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; assert r ;; c2) q"), t76))
 }
 
 ///|
@@ -501,7 +501,7 @@ fn step_27() -> Unit raise {
   let t78 = @meson.asm_meson_tac(@list.List([correct_while()]))
   let t77 = @simp.rewrite_tac(@list.List([sequence(), variant_def(), assert_def(), @trivia.o_def(), @class.eta_ax()]))
   let t79 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t77), t78)
-  correct_while_vc_c.set(@tactics.prove(@parser.parse_term("!(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (!X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q"), t79))
+  correct_while_vc_c.set(@tactics.prove(@parser.parse_term("forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q"), t79))
 }
 
 ///|
@@ -661,7 +661,7 @@ fn step_41() -> Unit raise {
 ///|
 /// refines
 fn step_42() -> Unit raise {
-  refines_c.set(@pair.new_definition(@parser.parse_term("c2 refines c1 <=> !q. c1(q) SUBSET c2(q)")))
+  refines_c.set(@pair.new_definition(@parser.parse_term("c2 refines c1 <=> forall q. c1(q) SUBSET c2(q)")))
 }
 
 ///|
@@ -677,7 +677,7 @@ pub fn refines() -> @kernel.Thm {
 /// REFINES_REFL
 fn step_43() -> Unit raise {
   let t103 = @simp.rewrite_tac(@list.List([refines(), @sets.subset_refl()]))
-  refines_refl_c.set(@tactics.prove(@parser.parse_term("!c. c refines c"), t103))
+  refines_refl_c.set(@tactics.prove(@parser.parse_term("forall c. c refines c"), t103))
 }
 
 ///|
@@ -694,7 +694,7 @@ pub fn refines_refl() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t104 = @meson.meson_tac(@list.List([@sets.subset_trans()]))
   let t105 = @tactics.then_tac(@simp.rewrite_tac(@list.List([refines()])), t104)
-  refines_trans_c.set(@tactics.prove(@parser.parse_term("!c1 c2 c3. c3 refines c2 /\\ c2 refines c1 ==> c3 refines c1"), t105))
+  refines_trans_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 c3. c3 refines c2 /\\ c2 refines c1 ==> c3 refines c1"), t105))
 }
 
 ///|

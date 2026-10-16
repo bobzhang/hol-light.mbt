@@ -12,7 +12,7 @@ fn step_1() -> Unit raise {
 fn step_2() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_rat.real_ring)
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.norm_pow_2(), @vectors.orthogonal(), @vectors.dot_lsub(), @vectors.dot_rsub(), @vectors.dot_sym()])), t1)
-  pythagoras_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t2))
+  pythagoras_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t2))
 }
 
 ///|
@@ -45,7 +45,7 @@ fn step_4() -> Unit raise {
   let t4 = @meson.asm_meson_tac(@list.List([@vectors.preserves_norm_preserves_dot()]))
   let t3 = @simp.asm_simp_tac(@list.List([vector_angle(), @equal.gsym(@vectors.norm_eq_0())]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3), t4)
-  vector_angle_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("!f x y. linear f /\\ (!x. norm(f x) = norm x)\n           ==> (vector_angle (f x) (f y) = vector_angle x y)"), t5))
+  vector_angle_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("forall f x y. linear f /\\ (forall x. norm(f x) = norm x)\n           ==> (vector_angle (f x) (f y) = vector_angle x y)"), t5))
 }
 
 ///|
@@ -67,7 +67,7 @@ fn step_5() -> Unit raise {
 /// VECTOR_ANGLE_ORTHOGONAL_TRANSFORMATION
 fn step_6() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([@determinants.orthogonal_transformation_v1(), vector_angle_linear_image_eq()]))
-  vector_angle_orthogonal_transformation_c.set(@tactics.prove(@parser.parse_term("!f x y:real^N.\n        orthogonal_transformation f\n        ==> vector_angle (f x) (f y) = vector_angle x y"), t6))
+  vector_angle_orthogonal_transformation_c.set(@tactics.prove(@parser.parse_term("forall f x y:real^N.\n        orthogonal_transformation f\n        ==> vector_angle (f x) (f y) = vector_angle x y"), t6))
 }
 
 ///|
@@ -85,7 +85,7 @@ fn step_7() -> Unit raise {
   let t8 = @simp.asm_simp_tac(@list.List([@real.real_div_refl(), @realarith.real_entire(), @vectors.norm_eq_0(), @transcendentals.acs_1()]))
   let t7 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@vectors.norm_pow_2()), @realarith.real_pow_2()]))
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([vector_angle(), @theorems.disj_aci()]))), @class.cond_cases_tac), t7), t8)
-  vector_angle_refl_c.set(@tactics.prove(@parser.parse_term("!x. vector_angle x x = if x = vec 0 then pi / &2 else &0"), t9))
+  vector_angle_refl_c.set(@tactics.prove(@parser.parse_term("forall x. vector_angle x x = if x = vec 0 then pi / &2 else &0"), t9))
 }
 
 ///|
@@ -101,7 +101,7 @@ pub fn vector_angle_refl() -> @kernel.Thm {
 /// VECTOR_ANGLE_SYM
 fn step_8() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([vector_angle(), @theorems.disj_sym(), @vectors.dot_sym(), @realax.real_mul_sym()]))
-  vector_angle_sym_c.set(@tactics.prove(@parser.parse_term("!x y. vector_angle x y = vector_angle y x"), t10))
+  vector_angle_sym_c.set(@tactics.prove(@parser.parse_term("forall x y. vector_angle x y = vector_angle y x"), t10))
 }
 
 ///|
@@ -127,7 +127,7 @@ fn step_9() -> Unit raise {
   let t12 = @class.asm_cases_tac(@parser.parse_term("x:real^N = vec 0 \\/ y:real^N = vec 0"))
   let t11 = @simp.asm_rewrite_tac(@list.List([vector_angle(), @vectors.vector_mul_eq_0()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t11), t12), t13), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t14), @class.cond_cases_tac), t15), t16), t17), t19), t20)
-  vector_angle_lmul_c.set(@tactics.prove(@parser.parse_term("!a x y:real^N.\n        vector_angle (a % x) y =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y"), t21))
+  vector_angle_lmul_c.set(@tactics.prove(@parser.parse_term("forall a x y:real^N.\n        vector_angle (a % x) y =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y"), t21))
 }
 
 ///|
@@ -144,7 +144,7 @@ pub fn vector_angle_lmul() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([vector_angle_lmul()]))
   let t23 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([vector_angle_sym()])), t22)
-  vector_angle_rmul_c.set(@tactics.prove(@parser.parse_term("!a x y:real^N.\n        vector_angle x (a % y) =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y"), t23))
+  vector_angle_rmul_c.set(@tactics.prove(@parser.parse_term("forall a x y:real^N.\n        vector_angle x (a % y) =\n                if a = &0 then pi / &2\n                else if &0 <= a then vector_angle x y\n                else pi - vector_angle x y"), t23))
 }
 
 ///|
@@ -161,7 +161,7 @@ pub fn vector_angle_rmul() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t24 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
   let t25 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.vector_arith(@parser.parse_term("--x = -- &1 % x")), vector_angle_lmul()])), t24)
-  vector_angle_lneg_c.set(@tactics.prove(@parser.parse_term("!x y. vector_angle (--x) y = pi - vector_angle x y"), t25))
+  vector_angle_lneg_c.set(@tactics.prove(@parser.parse_term("forall x y. vector_angle (--x) y = pi - vector_angle x y"), t25))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn vector_angle_lneg() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([vector_angle_lneg()]))
   let t27 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([vector_angle_sym()])), t26)
-  vector_angle_rneg_c.set(@tactics.prove(@parser.parse_term("!x y. vector_angle x (--y) = pi - vector_angle x y"), t27))
+  vector_angle_rneg_c.set(@tactics.prove(@parser.parse_term("forall x y. vector_angle x (--y) = pi - vector_angle x y"), t27))
 }
 
 ///|
@@ -194,7 +194,7 @@ pub fn vector_angle_rneg() -> @kernel.Thm {
 /// VECTOR_ANGLE_NEG2
 fn step_13() -> Unit raise {
   let t28 = @tactics.then_tac(@simp.rewrite_tac(@list.List([vector_angle_lneg(), vector_angle_rneg()])), @calc_rat.real_arith_tac)
-  vector_angle_neg2_c.set(@tactics.prove(@parser.parse_term("!x y. vector_angle (--x) (--y) = vector_angle x y"), t28))
+  vector_angle_neg2_c.set(@tactics.prove(@parser.parse_term("forall x y. vector_angle (--x) (--y) = vector_angle x y"), t28))
 }
 
 ///|
@@ -214,7 +214,7 @@ fn step_14() -> Unit raise {
   let t30 = @class.asm_cases_tac(@parser.parse_term("a = &0"))
   let t29 = @simp.rewrite_tac(@list.List([vector_angle_lmul()]))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t29), t30), t31), @class.cond_cases_tac), t32), @calc_rat.real_arith_tac)
-  sin_vector_angle_lmul_c.set(@tactics.prove(@parser.parse_term("!a x y:real^N.\n        sin(vector_angle (a % x) y) =\n        if a = &0 then &1 else sin(vector_angle x y)"), t33))
+  sin_vector_angle_lmul_c.set(@tactics.prove(@parser.parse_term("forall a x y:real^N.\n        sin(vector_angle (a % x) y) =\n        if a = &0 then &1 else sin(vector_angle x y)"), t33))
 }
 
 ///|
@@ -231,7 +231,7 @@ pub fn sin_vector_angle_lmul() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([sin_vector_angle_lmul()]))
   let t35 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([vector_angle_sym()])), t34)
-  sin_vector_angle_rmul_c.set(@tactics.prove(@parser.parse_term("!a x y:real^N.\n        sin(vector_angle x (a % y)) =\n        if a = &0 then &1 else sin(vector_angle x y)"), t35))
+  sin_vector_angle_rmul_c.set(@tactics.prove(@parser.parse_term("forall a x y:real^N.\n        sin(vector_angle x (a % y)) =\n        if a = &0 then &1 else sin(vector_angle x y)"), t35))
 }
 
 ///|
@@ -257,7 +257,7 @@ fn step_16() -> Unit raise {
   let t37 = @class.asm_cases_tac(@parser.parse_term("x:real^N = vec 0"))
   let t36 = @simp.rewrite_tac(@list.List([vector_angle()]))
   let t46 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t36), t37), t38), t39), t40), t42), t43), t44), t45)
-  vector_angle_v1_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. x dot y = norm(x) * norm(y) * cos(vector_angle x y)"), t46))
+  vector_angle_v1_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. x dot y = norm(x) * norm(y) * cos(vector_angle x y)"), t46))
 }
 
 ///|
@@ -278,7 +278,7 @@ fn step_17() -> Unit raise {
   let t48 = @list.List([@tactics.then_tac(@tactics.mp_tac(@transcendentals.pi_pos()), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t47 = @simp.rewrite_tac(@list.List([vector_angle()]))
   let t52 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t47), @class.cond_cases_tac), t48), t49), t50), t51)
-  vector_angle_range_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. &0 <= vector_angle x y /\\ vector_angle x y <= pi"), t52))
+  vector_angle_range_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. &0 <= vector_angle x y /\\ vector_angle x y <= pi"), t52))
 }
 
 ///|
@@ -315,7 +315,7 @@ fn step_18() -> Unit raise {
   let t54 = @class.asm_cases_tac(@parser.parse_term("x:real^N = vec 0"))
   let t53 = @simp.rewrite_tac(@list.List([@vectors.orthogonal(), vector_angle()]))
   let t72 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t53), t54), t55), t56), t57), @tactics.eq_tac), t71)
-  orthogonal_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. orthogonal x y <=> vector_angle x y = pi / &2"), t72))
+  orthogonal_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. orthogonal x y <=> vector_angle x y = pi / &2"), t72))
 }
 
 ///|
@@ -350,7 +350,7 @@ fn step_19() -> Unit raise {
   let t73 = @parser.parse_term("y:real^N = vec 0")
   let t74 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("x:real^N = vec 0"), t73]))
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t76), t84), t85), t86)
-  vector_angle_eq_0_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x) % y = norm(y) % x"), t87))
+  vector_angle_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x) % y = norm(y) % x"), t87))
 }
 
 ///|
@@ -370,7 +370,7 @@ fn step_20() -> Unit raise {
   let t88 = @parser.parse_term("--y:real^N")
   let t89 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("x:real^N"), t88]), vector_angle_eq_0()))
   let t92 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t89), t90), @tactics.strip_tac), t91), @tactics.ap_term_tac), @tactics.ap_term_tac), @vectors.vector_arith_tac)
-  vector_angle_eq_pi_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\\n                norm(x) % y + norm(y) % x = vec 0"), t92))
+  vector_angle_eq_pi_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\\n                norm(x) % y + norm(y) % x = vec 0"), t92))
 }
 
 ///|
@@ -386,7 +386,7 @@ pub fn vector_angle_eq_pi() -> @kernel.Thm {
 /// VECTOR_ANGLE_EQ_0_DIST
 fn step_21() -> Unit raise {
   let t93 = @simp.rewrite_tac(@list.List([vector_angle_eq_0(), @equal.gsym(@vectors.norm_triangle_eq())]))
-  vector_angle_eq_0_dist_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x + y) = norm x + norm y"), t93))
+  vector_angle_eq_0_dist_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. vector_angle x y = &0 <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x + y) = norm x + norm y"), t93))
 }
 
 ///|
@@ -406,7 +406,7 @@ fn step_22() -> Unit raise {
   let t94 = @parser.parse_term("--y:real^N")
   let t95 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("x:real^N"), t94]), vector_angle_eq_0_dist()))
   let t98 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t95), t96), @tactics.strip_tac), t97), @vectors.norm_arith_tac)
-  vector_angle_eq_pi_dist_c.set(@tactics.prove(@parser.parse_term("!x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x - y) = norm x + norm y"), t98))
+  vector_angle_eq_pi_dist_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N. vector_angle x y = pi <=>\n                ~(x = vec 0) /\\ ~(y = vec 0) /\\ norm(x - y) = norm x + norm y"), t98))
 }
 
 ///|
@@ -422,7 +422,7 @@ pub fn vector_angle_eq_pi_dist() -> @kernel.Thm {
 /// SIN_VECTOR_ANGLE_POS
 fn step_23() -> Unit raise {
   let t99 = @simp.simp_tac(@list.List([@transcendentals.sin_pos_pi_le(), vector_angle_range()]))
-  sin_vector_angle_pos_c.set(@tactics.prove(@parser.parse_term("!v w. &0 <= sin(vector_angle v w)"), t99))
+  sin_vector_angle_pos_c.set(@tactics.prove(@parser.parse_term("forall v w. &0 <= sin(vector_angle v w)"), t99))
 }
 
 ///|
@@ -438,7 +438,7 @@ pub fn sin_vector_angle_pos() -> @kernel.Thm {
 /// SIN_VECTOR_ANGLE_EQ_0
 fn step_24() -> Unit raise {
   let t100 = @meson.meson_tac(@list.List([@transcendentals.sin_pos_pi(), vector_angle_range(), @realarith.real_lt_le(), @transcendentals.sin_0(), @transcendentals.sin_pi()]))
-  sin_vector_angle_eq_0_c.set(@tactics.prove(@parser.parse_term("!x y. sin(vector_angle x y) = &0 <=>\n           vector_angle x y = &0 \\/ vector_angle x y = pi"), t100))
+  sin_vector_angle_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x y. sin(vector_angle x y) = &0 <=>\n           vector_angle x y = &0 \\/ vector_angle x y = pi"), t100))
 }
 
 ///|
@@ -460,7 +460,7 @@ fn step_25() -> Unit raise {
   let t101 = @tactics.exists_tac(@parser.parse_term("asn(sin(pi - vector_angle (x:real^N) y))"))
   let t103 = @list.List([@tactics.all_tac, @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t101), @tactics.conj_tac), t102)])
   let t107 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @class.cond_cases_tac), t103), t104), t106), @calc_rat.asm_real_arith_tac)
-  asn_sin_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n        asn(sin(vector_angle x y)) =\n          if vector_angle x y <= pi / &2 then vector_angle x y\n          else pi - vector_angle x y"), t107))
+  asn_sin_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n        asn(sin(vector_angle x y)) =\n          if vector_angle x y <= pi / &2 then vector_angle x y\n          else pi - vector_angle x y"), t107))
 }
 
 ///|
@@ -487,7 +487,7 @@ fn step_26() -> Unit raise {
   })
   let t108 = @simp.asm_rewrite_tac(@list.List([@transcendentals.sin_sub(), @transcendentals.sin_pi(), @transcendentals.cos_pi()]))
   let t117 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), @tactics.strip_tac), t108), @list.List([@tactics.all_tac, @calc_rat.real_arith_tac])), t115), t116), @calc_rat.real_arith_tac)
-  sin_vector_angle_eq_c.set(@tactics.prove(@parser.parse_term("!x y w z.\n        sin(vector_angle x y) = sin(vector_angle w z) <=>\n            vector_angle x y = vector_angle w z \\/\n            vector_angle x y = pi - vector_angle w z"), t117))
+  sin_vector_angle_eq_c.set(@tactics.prove(@parser.parse_term("forall x y w z.\n        sin(vector_angle x y) = sin(vector_angle w z) <=>\n            vector_angle x y = vector_angle w z \\/\n            vector_angle x y = pi - vector_angle w z"), t117))
 }
 
 ///|
@@ -561,7 +561,7 @@ fn step_27() -> Unit raise {
   let t119 = @simp.asm_simp_tac(@list.List([@topology.continuous_trivial_limit(), vector_angle()]))
   let t118 = @class.asm_cases_tac(@parser.parse_term("trivial_limit(at (x:real^M) within s)"))
   let t168 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t118), t119), t123), t167)
-  continuous_within_cx_vector_angle_compose_c.set(@tactics.prove(@parser.parse_term("!f:real^M->real^N g x s.\n     ~(f x = vec 0) /\\ ~(g x = vec 0) /\\\n     f continuous (at x within s) /\\\n     g continuous (at x within s)\n     ==> (\\x. Cx(vector_angle (f x) (g x))) continuous (at x within s)"), t168))
+  continuous_within_cx_vector_angle_compose_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N g x s.\n     ~(f x = vec 0) /\\ ~(g x = vec 0) /\\\n     f continuous (at x within s) /\\\n     g continuous (at x within s)\n     ==> (\\x. Cx(vector_angle (f x) (g x))) continuous (at x within s)"), t168))
 }
 
 ///|
@@ -605,7 +605,7 @@ fn step_28() -> Unit raise {
   let t170 = @class.asm_cases_tac(@parser.parse_term("c:real^N = vec 0"))
   let t169 = @simp.rewrite_tac(@list.List([@trivia.o_def(), vector_angle()]))
   let t195 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t169), t170), t171), t172), t177), t178), @tactics.conj_tac), t182), t183), t184), @tactics.conj_tac), t194)
-  continuous_at_cx_vector_angle_c.set(@tactics.prove(@parser.parse_term("!c x:real^N. ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x)"), t195))
+  continuous_at_cx_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall c x:real^N. ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x)"), t195))
 }
 
 ///|
@@ -621,7 +621,7 @@ pub fn continuous_at_cx_vector_angle() -> @kernel.Thm {
 /// CONTINUOUS_WITHIN_CX_VECTOR_ANGLE
 fn step_29() -> Unit raise {
   let t196 = @simp.simp_tac(@list.List([@topology.continuous_at_within(), continuous_at_cx_vector_angle()]))
-  continuous_within_cx_vector_angle_c.set(@tactics.prove(@parser.parse_term("!c x:real^N s.\n     ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x within s)"), t196))
+  continuous_within_cx_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall c x:real^N s.\n     ~(x = vec 0) ==> (Cx o vector_angle c) continuous (at x within s)"), t196))
 }
 
 ///|
@@ -637,7 +637,7 @@ pub fn continuous_within_cx_vector_angle() -> @kernel.Thm {
 /// REAL_CONTINUOUS_AT_VECTOR_ANGLE
 fn step_30() -> Unit raise {
   let t197 = @simp.rewrite_tac(@list.List([@realanalysis.real_continuous_continuous(), continuous_at_cx_vector_angle()]))
-  real_continuous_at_vector_angle_c.set(@tactics.prove(@parser.parse_term("!c x:real^N. ~(x = vec 0) ==> (vector_angle c) real_continuous (at x)"), t197))
+  real_continuous_at_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall c x:real^N. ~(x = vec 0) ==> (vector_angle c) real_continuous (at x)"), t197))
 }
 
 ///|
@@ -653,7 +653,7 @@ pub fn real_continuous_at_vector_angle() -> @kernel.Thm {
 /// REAL_CONTINUOUS_WITHIN_VECTOR_ANGLE
 fn step_31() -> Unit raise {
   let t198 = @simp.rewrite_tac(@list.List([@realanalysis.real_continuous_continuous(), continuous_within_cx_vector_angle()]))
-  real_continuous_within_vector_angle_c.set(@tactics.prove(@parser.parse_term("!c s x:real^N. ~(x = vec 0)\n                  ==> (vector_angle c) real_continuous (at x within s)"), t198))
+  real_continuous_within_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall c s x:real^N. ~(x = vec 0)\n                  ==> (vector_angle c) real_continuous (at x within s)"), t198))
 }
 
 ///|
@@ -671,7 +671,7 @@ fn step_32() -> Unit raise {
   let t200 = @meson.asm_meson_tac(@list.List([continuous_within_cx_vector_angle()]))
   let t199 = @simp.rewrite_tac(@list.List([@topology.continuous_on_eq_continuous_within()]))
   let t201 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t199), t200)
-  continuous_on_cx_vector_angle_c.set(@tactics.prove(@parser.parse_term("!s. ~(vec 0 IN s) ==> (Cx o vector_angle c) continuous_on s"), t201))
+  continuous_on_cx_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall s. ~(vec 0 IN s) ==> (Cx o vector_angle c) continuous_on s"), t201))
 }
 
 ///|
@@ -699,7 +699,7 @@ fn step_33() -> Unit raise {
   let t203 = @simp.simp_tac(@list.List([]))
   let t202 = @tactics.repeat_tac(@tactics.strip_tac)
   let t212 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([vector_angle(), @vectors.norm_eq_0(), @calc_rat.real_field(@parser.parse_term("~(u = &0) /\\ ~(v = &0) /\\ ~(x = &0) /\\ ~(y = &0)\n    ==> (a * u * v = b * x * y <=> a / (x * y) = b / (u * v))"))])), t202), @tactics.eq_tac), t203), t210), t211)
-  vector_angle_eq_c.set(@tactics.prove(@parser.parse_term("!u v x y. ~(u = vec 0) /\\  ~(v = vec 0) /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n             ==> (vector_angle u v = vector_angle x y <=>\n                        (x dot y) * norm(u) * norm(v) =\n                        (u dot v) * norm(x) * norm(y))"), t212))
+  vector_angle_eq_c.set(@tactics.prove(@parser.parse_term("forall u v x y. ~(u = vec 0) /\\  ~(v = vec 0) /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n             ==> (vector_angle u v = vector_angle x y <=>\n                        (x dot y) * norm(u) * norm(v) =\n                        (u dot v) * norm(x) * norm(y))"), t212))
 }
 
 ///|
@@ -715,7 +715,7 @@ pub fn vector_angle_eq() -> @kernel.Thm {
 /// COS_VECTOR_ANGLE_EQ
 fn step_34() -> Unit raise {
   let t213 = @meson.meson_tac(@list.List([@transcendentals.acs_cos(), vector_angle_range()]))
-  cos_vector_angle_eq_c.set(@tactics.prove(@parser.parse_term("!u v x y.\n        cos(vector_angle u v) = cos(vector_angle x y) <=>\n        vector_angle u v = vector_angle x y"), t213))
+  cos_vector_angle_eq_c.set(@tactics.prove(@parser.parse_term("forall u v x y.\n        cos(vector_angle u v) = cos(vector_angle x y) <=>\n        vector_angle u v = vector_angle x y"), t213))
 }
 
 ///|
@@ -733,7 +733,7 @@ fn step_35() -> Unit raise {
   let t215 = @simp.asm_rewrite_tac(@list.List([]))
   let t214 = @tactics.repeat_tac(@tactics.strip_tac)
   let t216 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@vectors.norm_cauchy_schwarz_equal()), @vectors.norm_cauchy_schwarz_abs_eq(), vector_angle_eq_0(), vector_angle_eq_pi()])), t214), t215), @tactics.binop_tac), @vectors.vector_arith_tac)
-  collinear_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=>\n                vector_angle x y = &0 \\/ vector_angle x y = pi)"), t216))
+  collinear_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=>\n                vector_angle x y = &0 \\/ vector_angle x y = pi)"), t216))
 }
 
 ///|
@@ -749,7 +749,7 @@ pub fn collinear_vector_angle() -> @kernel.Thm {
 /// COLLINEAR_SIN_VECTOR_ANGLE
 fn step_36() -> Unit raise {
   let t217 = @simp.rewrite_tac(@list.List([sin_vector_angle_eq_0(), collinear_vector_angle()]))
-  collinear_sin_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=> sin(vector_angle x y) = &0)"), t217))
+  collinear_sin_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y. ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> (collinear {vec 0,x,y} <=> sin(vector_angle x y) = &0)"), t217))
 }
 
 ///|
@@ -765,7 +765,7 @@ pub fn collinear_sin_vector_angle() -> @kernel.Thm {
 /// COLLINEAR_SIN_VECTOR_ANGLE_IMP
 fn step_37() -> Unit raise {
   let t218 = @meson.meson_tac(@list.List([collinear_sin_vector_angle(), sin_vector_angle_eq_0(), vector_angle_eq_0_dist(), vector_angle_eq_pi_dist()]))
-  collinear_sin_vector_angle_imp_c.set(@tactics.prove(@parser.parse_term("!x y. sin(vector_angle x y) = &0\n         ==> ~(x = vec 0) /\\ ~(y = vec 0) /\\ collinear {vec 0,x,y}"), t218))
+  collinear_sin_vector_angle_imp_c.set(@tactics.prove(@parser.parse_term("forall x y. sin(vector_angle x y) = &0\n         ==> ~(x = vec 0) /\\ ~(y = vec 0) /\\ collinear {vec 0,x,y}"), t218))
 }
 
 ///|
@@ -788,7 +788,7 @@ fn step_38() -> Unit raise {
   let t220 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t219 = @tactics.repeat_tac(@tactics.strip_tac)
   let t226 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([vector_angle_eq_0()])), t219), t220), t221), @tactics.conj_tac), t225)
-  vector_angle_eq_0_right_c.set(@tactics.prove(@parser.parse_term("!x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle x z = vector_angle y z)"), t226))
+  vector_angle_eq_0_right_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle x z = vector_angle y z)"), t226))
 }
 
 ///|
@@ -804,7 +804,7 @@ pub fn vector_angle_eq_0_right() -> @kernel.Thm {
 /// VECTOR_ANGLE_EQ_0_LEFT
 fn step_39() -> Unit raise {
   let t227 = @meson.meson_tac(@list.List([vector_angle_eq_0_right(), vector_angle_sym()]))
-  vector_angle_eq_0_left_c.set(@tactics.prove(@parser.parse_term("!x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle z x = vector_angle z y)"), t227))
+  vector_angle_eq_0_left_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^N. vector_angle x y = &0\n                  ==> (vector_angle z x = vector_angle z y)"), t227))
 }
 
 ///|
@@ -824,7 +824,7 @@ fn step_40() -> Unit raise {
   let t229 = @parser.parse_term("y:real^N")
   let t230 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("--x:real^N"), t229, t228]), vector_angle_eq_0_right()))
   let t232 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t230), t231), @calc_rat.real_arith_tac)
-  vector_angle_eq_pi_right_c.set(@tactics.prove(@parser.parse_term("!x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle x z = pi - vector_angle y z)"), t232))
+  vector_angle_eq_pi_right_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle x z = pi - vector_angle y z)"), t232))
 }
 
 ///|
@@ -840,7 +840,7 @@ pub fn vector_angle_eq_pi_right() -> @kernel.Thm {
 /// VECTOR_ANGLE_EQ_PI_LEFT
 fn step_41() -> Unit raise {
   let t233 = @meson.meson_tac(@list.List([vector_angle_eq_pi_right(), vector_angle_sym()]))
-  vector_angle_eq_pi_left_c.set(@tactics.prove(@parser.parse_term("!x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle z x = pi - vector_angle z y)"), t233))
+  vector_angle_eq_pi_left_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^N. vector_angle x y = pi\n                  ==> (vector_angle z x = pi - vector_angle z y)"), t233))
 }
 
 ///|
@@ -861,7 +861,7 @@ fn step_42() -> Unit raise {
   let t235 = @list.List([@simp.asm_rewrite_tac(@list.List([vector_angle(), @transcendentals.cos_pi2()])), @tactics.all_tac])
   let t234 = @class.asm_cases_tac(@parser.parse_term("x:real^N = vec 0"))
   let t239 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t234), t235), t236), t237), t238), @calc_rat.real_arith_tac)
-  cos_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n        cos(vector_angle x y) = if x = vec 0 \\/ y = vec 0 then &0\n                                else (x dot y) / (norm x * norm y)"), t239))
+  cos_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n        cos(vector_angle x y) = if x = vec 0 \\/ y = vec 0 then &0\n                                else (x dot y) / (norm x * norm y)"), t239))
 }
 
 ///|
@@ -881,7 +881,7 @@ fn step_43() -> Unit raise {
   let t241 = @simp.asm_rewrite_tac(@list.List([]))
   let t240 = @tactics.repeat_tac(@tactics.gen_tac)
   let t244 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@transcendentals.sin_cos_sqrt(), sin_vector_angle_pos(), cos_vector_angle()])), t240), @class.cond_cases_tac), t241), t242), t243)
-  sin_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n        sin(vector_angle x y) =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else sqrt(&1 - ((x dot y) / (norm x * norm y)) pow 2)"), t244))
+  sin_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n        sin(vector_angle x y) =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else sqrt(&1 - ((x dot y) / (norm x * norm y)) pow 2)"), t244))
 }
 
 ///|
@@ -899,7 +899,7 @@ fn step_44() -> Unit raise {
   let t246 = @simp.rewrite_tac(@list.List([cos_vector_angle()]))
   let t245 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@calc_rat.real_arith(@parser.parse_term("s + c = &1 <=> s = &1 - c"))]))(@transcendentals.sin_circle())]))
   let t247 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t245), t246), @calc_rat.real_arith_tac)
-  sin_squared_vector_angle_c.set(@tactics.prove(@parser.parse_term("!x y:real^N.\n        sin(vector_angle x y) pow 2 =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else &1 - ((x dot y) / (norm x * norm y)) pow 2"), t247))
+  sin_squared_vector_angle_c.set(@tactics.prove(@parser.parse_term("forall x y:real^N.\n        sin(vector_angle x y) pow 2 =\n            if x = vec 0 \\/ y = vec 0 then &1\n            else &1 - ((x dot y) / (norm x * norm y)) pow 2"), t247))
 }
 
 ///|
@@ -935,7 +935,7 @@ fn step_45() -> Unit raise {
   let t249 = @list.List([@simp.asm_rewrite_tac(@list.List([@complexes.complex_mul_rzero(), vector_angle(), @complexes.complex_vec_0()])), @tactics.all_tac])
   let t248 = @class.asm_cases_tac(@parser.parse_term("x = Cx(&0)"))
   let t266 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t248), t249), t250), t251), t255), t256), t260), t261), t262), t263), t265), @calc_rat.real_arith_tac)
-  vector_angle_complex_lmul_c.set(@tactics.prove(@parser.parse_term("!a. ~(a = Cx(&0))\n       ==> vector_angle (a * x) (a * y) = vector_angle x y"), t266))
+  vector_angle_complex_lmul_c.set(@tactics.prove(@parser.parse_term("forall a. ~(a = Cx(&0))\n       ==> vector_angle (a * x) (a * y) = vector_angle x y"), t266))
 }
 
 ///|
@@ -955,7 +955,7 @@ fn step_46() -> Unit raise {
   let t268 = @simp.rewrite_tac(@list.List([@complexes.complex_norm_cx(), @calc_int.real_abs_num(), @realarith.real_mul_rid()]))
   let t267 = @list.List([@simp.asm_rewrite_tac(@list.List([@realax.real_div(), @complexes.re_cx(), @transcendentals.acs_0(), @calc_int.real_mul_lzero()])), @tactics.all_tac])
   let t271 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.simp_tac(@list.List([vector_angle(), @complexes.complex_vec_0(), @complexes.cx_inj(), @realax.real_of_num_eq(), @calc_num.arith_eq()]))), @class.cond_cases_tac), t267), t268), t270), @tactics.ap_term_tac), @calc_rat.real_arith_tac)
-  vector_angle_1_c.set(@tactics.prove(@parser.parse_term("!x. vector_angle x (Cx(&1)) = acs(Re x / norm x)"), t271))
+  vector_angle_1_c.set(@tactics.prove(@parser.parse_term("forall x. vector_angle x (Cx(&1)) = acs(Re x / norm x)"), t271))
 }
 
 ///|
@@ -1005,7 +1005,7 @@ fn step_47() -> Unit raise {
   }, @list.List([@transcendentals.arg()]))
   let t272 = @simp.rewrite_tac(@list.List([vector_angle_1()]))
   let t295 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t272), t288), t289), t290), t291), t292), t293), t294)
-  arg_eq_vector_angle_1_c.set(@tactics.prove(@parser.parse_term("!z. ~(z = Cx(&0)) /\\ &0 <= Im z ==> Arg z = vector_angle z (Cx(&1))"), t295))
+  arg_eq_vector_angle_1_c.set(@tactics.prove(@parser.parse_term("forall z. ~(z = Cx(&0)) /\\ &0 <= Im z ==> Arg z = vector_angle z (Cx(&1))"), t295))
 }
 
 ///|
@@ -1097,7 +1097,7 @@ fn step_48() -> Unit raise {
     }
   }), t303), t312])
   let t351 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t313), t323), t324), t350)
-  vector_angle_arg_c.set(@tactics.prove(@parser.parse_term("!w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> vector_angle w z = if &0 <= Im(z / w) then Arg(z / w)\n                                else &2 * pi - Arg(z / w)"), t351))
+  vector_angle_arg_c.set(@tactics.prove(@parser.parse_term("forall w z. ~(w = Cx(&0)) /\\ ~(z = Cx(&0))\n         ==> vector_angle w z = if &0 <= Im(z / w) then Arg(z / w)\n                                else &2 * pi - Arg(z / w)"), t351))
 }
 
 ///|
@@ -1138,7 +1138,7 @@ fn step_49() -> Unit raise {
   let t352 = @simp.asm_simp_tac(@list.List([vector_angle_lmul(), vector_angle_rmul()]))
   let t355 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@determinants.orthogonal_transformation_linear(), @vectors.linear_compose_cmul()])), t352), t353), t354)])
   let t375 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), @tactics.strip_tac), t355), t356), t357), t358), t359), t360), t361), t362), t363), t371), t372), t373), t374), @calc_rat.real_arith_tac)
-  vector_angle_preserving_eq_similarity_c.set(@tactics.prove(@parser.parse_term("!f:real^N->real^N.\n      linear f /\\ (!x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. ~(c = &0) /\\ orthogonal_transformation g /\\ f = \\z. c % g z"), t375))
+  vector_angle_preserving_eq_similarity_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->real^N.\n      linear f /\\ (forall x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. ~(c = &0) /\\ orthogonal_transformation g /\\ f = \\z. c % g z"), t375))
 }
 
 ///|
@@ -1172,7 +1172,7 @@ fn step_50() -> Unit raise {
   let t376 = @meson.meson_tac(@list.List([@realarith.real_lt_refl()]))
   let t377 = @list.List([@simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()])), t376])
   let t391 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([vector_angle_preserving_eq_similarity()]))), @tactics.eq_tac), t377), t379), @tactics.strip_tac), t382), t383), t388), t389), t390)
-  vector_angle_preserving_eq_similarity_alt_c.set(@tactics.prove(@parser.parse_term("!f:real^N->real^N.\n      linear f /\\ (!x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. &0 < c /\\ orthogonal_transformation g /\\ f = \\z. c % g z"), t391))
+  vector_angle_preserving_eq_similarity_alt_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->real^N.\n      linear f /\\ (forall x y. vector_angle (f x) (f y) = vector_angle x y) <=>\n      ?c g. &0 < c /\\ orthogonal_transformation g /\\ f = \\z. c % g z"), t391))
 }
 
 ///|
@@ -1203,7 +1203,7 @@ pub fn angle() -> @kernel.Thm {
 /// ANGLE_LINEAR_IMAGE_EQ
 fn step_52() -> Unit raise {
   let t392 = @simp.simp_tac(@list.List([angle(), @equal.gsym(@vectors.linear_sub()), vector_angle_linear_image_eq()]))
-  angle_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("!f a b c.\n        linear f /\\ (!x. norm(f x) = norm x)\n        ==> angle(f a,f b,f c) = angle(a,b,c)"), t392))
+  angle_linear_image_eq_c.set(@tactics.prove(@parser.parse_term("forall f a b c.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> angle(f a,f b,f c) = angle(a,b,c)"), t392))
 }
 
 ///|
@@ -1226,7 +1226,7 @@ fn step_53() -> Unit raise {
 fn step_54() -> Unit raise {
   let t393 = @simp.rewrite_tac(@list.List([angle()]))
   let t394 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t393), @tactics.binop_tac), @vectors.vector_arith_tac)
-  angle_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a b c d. angle(a + b,a + c,a + d) = angle(b,c,d)"), t394))
+  angle_translation_eq_c.set(@tactics.prove(@parser.parse_term("forall a b c d. angle(a + b,a + c,a + d) = angle(b,c,d)"), t394))
 }
 
 ///|
@@ -1264,7 +1264,7 @@ pub fn vector_angle_angle() -> @kernel.Thm {
 /// ANGLE_EQ_PI_DIST
 fn step_57() -> Unit raise {
   let t396 = @tactics.then_tac(@simp.rewrite_tac(@list.List([angle(), vector_angle_eq_pi_dist()])), @vectors.norm_arith_tac)
-  angle_eq_pi_dist_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        angle(A,B,C) = pi <=>\n        ~(A = B) /\\ ~(C = B) /\\ dist(A,C) = dist(A,B) + dist(B,C)"), t396))
+  angle_eq_pi_dist_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        angle(A,B,C) = pi <=>\n        ~(A = B) /\\ ~(C = B) /\\ dist(A,C) = dist(A,B) + dist(B,C)"), t396))
 }
 
 ///|
@@ -1280,7 +1280,7 @@ pub fn angle_eq_pi_dist() -> @kernel.Thm {
 /// SIN_ANGLE_POS
 fn step_58() -> Unit raise {
   let t397 = @simp.rewrite_tac(@list.List([angle(), sin_vector_angle_pos()]))
-  sin_angle_pos_c.set(@tactics.prove(@parser.parse_term("!A B C. &0 <= sin(angle(A,B,C))"), t397))
+  sin_angle_pos_c.set(@tactics.prove(@parser.parse_term("forall A B C. &0 <= sin(angle(A,B,C))"), t397))
 }
 
 ///|
@@ -1296,7 +1296,7 @@ pub fn sin_angle_pos() -> @kernel.Thm {
 /// ANGLE
 fn step_59() -> Unit raise {
   let t398 = @simp.rewrite_tac(@list.List([angle(), @vectors.dist(), @equal.gsym(vector_angle_v1())]))
-  angle_v1_c.set(@tactics.prove(@parser.parse_term("!A B C. (A - C) dot (B - C) = dist(A,C) * dist(B,C) * cos(angle(A,C,B))"), t398))
+  angle_v1_c.set(@tactics.prove(@parser.parse_term("forall A B C. (A - C) dot (B - C) = dist(A,C) * dist(B,C) * cos(angle(A,C,B))"), t398))
 }
 
 ///|
@@ -1312,7 +1312,7 @@ pub fn angle_v1() -> @kernel.Thm {
 /// ANGLE_REFL
 fn step_60() -> Unit raise {
   let t399 = @simp.rewrite_tac(@list.List([angle(), vector_angle(), @vectors.vector_sub_refl()]))
-  angle_refl_c.set(@tactics.prove(@parser.parse_term("!A B. angle(A,A,B) = pi / &2 /\\ angle(B,A,A) = pi / &2"), t399))
+  angle_refl_c.set(@tactics.prove(@parser.parse_term("forall A B. angle(A,A,B) = pi / &2 /\\ angle(B,A,A) = pi / &2"), t399))
 }
 
 ///|
@@ -1329,7 +1329,7 @@ pub fn angle_refl() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   let t400 = @equal.gsym(@realarith.real_pow_2())
   let t401 = @simp.simp_tac(@list.List([angle(), vector_angle(), @vectors.vector_sub_eq(), @equal.gsym(@vectors.norm_pow_2()), @calc_num.arith(), t400, @real.real_div_refl(), @transcendentals.acs_1(), @real.real_pow_eq_0(), @vectors.norm_eq_0()]))
-  angle_refl_mid_c.set(@tactics.prove(@parser.parse_term("!A B. ~(A = B) ==> angle(A,B,A) = &0"), t401))
+  angle_refl_mid_c.set(@tactics.prove(@parser.parse_term("forall A B. ~(A = B) ==> angle(A,B,A) = &0"), t401))
 }
 
 ///|
@@ -1345,7 +1345,7 @@ pub fn angle_refl_mid() -> @kernel.Thm {
 /// ANGLE_SYM
 fn step_62() -> Unit raise {
   let t402 = @simp.rewrite_tac(@list.List([angle(), vector_angle(), @vectors.vector_sub_eq(), @theorems.disj_sym(), @realax.real_mul_sym(), @vectors.dot_sym()]))
-  angle_sym_c.set(@tactics.prove(@parser.parse_term("!A B C. angle(A,B,C) = angle(C,B,A)"), t402))
+  angle_sym_c.set(@tactics.prove(@parser.parse_term("forall A B C. angle(A,B,C) = angle(C,B,A)"), t402))
 }
 
 ///|
@@ -1361,7 +1361,7 @@ pub fn angle_sym() -> @kernel.Thm {
 /// ANGLE_RANGE
 fn step_63() -> Unit raise {
   let t403 = @simp.rewrite_tac(@list.List([angle(), vector_angle_range()]))
-  angle_range_c.set(@tactics.prove(@parser.parse_term("!A B C. &0 <= angle(A,B,C) /\\ angle(A,B,C) <= pi"), t403))
+  angle_range_c.set(@tactics.prove(@parser.parse_term("forall A B C. &0 <= angle(A,B,C) /\\ angle(A,B,C) <= pi"), t403))
 }
 
 ///|
@@ -1377,7 +1377,7 @@ pub fn angle_range() -> @kernel.Thm {
 /// COS_ANGLE_EQ
 fn step_64() -> Unit raise {
   let t404 = @simp.rewrite_tac(@list.List([angle(), cos_vector_angle_eq()]))
-  cos_angle_eq_c.set(@tactics.prove(@parser.parse_term("!a b c a' b' c'.\n        cos(angle(a,b,c)) = cos(angle(a',b',c')) <=>\n        angle(a,b,c) = angle(a',b',c')"), t404))
+  cos_angle_eq_c.set(@tactics.prove(@parser.parse_term("forall a b c a' b' c'.\n        cos(angle(a,b,c)) = cos(angle(a',b',c')) <=>\n        angle(a,b,c) = angle(a',b',c')"), t404))
 }
 
 ///|
@@ -1393,7 +1393,7 @@ pub fn cos_angle_eq() -> @kernel.Thm {
 /// ANGLE_EQ
 fn step_65() -> Unit raise {
   let t405 = @simp.simp_tac(@list.List([angle(), vector_angle_eq(), @vectors.vector_sub_eq()]))
-  angle_eq_c.set(@tactics.prove(@parser.parse_term("!a b c a' b' c'.\n        ~(a = b) /\\ ~(c = b) /\\ ~(a' = b') /\\ ~(c' = b')\n        ==> (angle(a,b,c) = angle(a',b',c') <=>\n                ((a' - b') dot (c' - b')) * norm (a - b) * norm (c - b) =\n                ((a - b) dot (c - b)) * norm (a' - b') * norm (c' - b'))"), t405))
+  angle_eq_c.set(@tactics.prove(@parser.parse_term("forall a b c a' b' c'.\n        ~(a = b) /\\ ~(c = b) /\\ ~(a' = b') /\\ ~(c' = b')\n        ==> (angle(a,b,c) = angle(a',b',c') <=>\n                ((a' - b') dot (c' - b')) * norm (a - b) * norm (c - b) =\n                ((a - b) dot (c - b)) * norm (a' - b') * norm (c' - b'))"), t405))
 }
 
 ///|
@@ -1409,7 +1409,7 @@ pub fn angle_eq() -> @kernel.Thm {
 /// SIN_ANGLE_EQ_0
 fn step_66() -> Unit raise {
   let t406 = @simp.rewrite_tac(@list.List([angle(), sin_vector_angle_eq_0()]))
-  sin_angle_eq_0_c.set(@tactics.prove(@parser.parse_term("!A B C. sin(angle(A,B,C)) = &0 <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi"), t406))
+  sin_angle_eq_0_c.set(@tactics.prove(@parser.parse_term("forall A B C. sin(angle(A,B,C)) = &0 <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi"), t406))
 }
 
 ///|
@@ -1425,7 +1425,7 @@ pub fn sin_angle_eq_0() -> @kernel.Thm {
 /// SIN_ANGLE_EQ
 fn step_67() -> Unit raise {
   let t407 = @simp.rewrite_tac(@list.List([angle(), sin_vector_angle_eq()]))
-  sin_angle_eq_c.set(@tactics.prove(@parser.parse_term("!A B C A' B' C'. sin(angle(A,B,C)) = sin(angle(A',B',C')) <=>\n                        angle(A,B,C) = angle(A',B',C') \\/\n                        angle(A,B,C) = pi - angle(A',B',C')"), t407))
+  sin_angle_eq_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'. sin(angle(A,B,C)) = sin(angle(A',B',C')) <=>\n                        angle(A,B,C) = angle(A',B',C') \\/\n                        angle(A,B,C) = pi - angle(A',B',C')"), t407))
 }
 
 ///|
@@ -1442,7 +1442,7 @@ pub fn sin_angle_eq() -> @kernel.Thm {
 fn step_68() -> Unit raise {
   let t408 = @simp.simp_tac(@list.List([collinear_vector_angle(), @vectors.vector_sub_eq(), angle()]))
   let t409 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@vectors.collinear_3()])), t408)
-  collinear_angle_c.set(@tactics.prove(@parser.parse_term("!A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi)"), t409))
+  collinear_angle_c.set(@tactics.prove(@parser.parse_term("forall A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> angle(A,B,C) = &0 \\/ angle(A,B,C) = pi)"), t409))
 }
 
 ///|
@@ -1458,7 +1458,7 @@ pub fn collinear_angle() -> @kernel.Thm {
 /// COLLINEAR_SIN_ANGLE
 fn step_69() -> Unit raise {
   let t410 = @simp.rewrite_tac(@list.List([sin_angle_eq_0(), collinear_angle()]))
-  collinear_sin_angle_c.set(@tactics.prove(@parser.parse_term("!A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> sin(angle(A,B,C)) = &0)"), t410))
+  collinear_sin_angle_c.set(@tactics.prove(@parser.parse_term("forall A B C. ~(A = B) /\\ ~(B = C)\n           ==> (collinear {A,B,C} <=> sin(angle(A,B,C)) = &0)"), t410))
 }
 
 ///|
@@ -1486,7 +1486,7 @@ fn step_70() -> Unit raise {
   let t412 = @simp.rewrite_tac(@list.List([angle()]))
   let t411 = @simp.once_rewrite_tac(@list.List([@vectors.collinear_3()]))
   let t420 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t411), t412), t418), t419)
-  collinear_sin_angle_imp_c.set(@tactics.prove(@parser.parse_term("!A B C. sin(angle(A,B,C)) = &0\n           ==> ~(A = B) /\\ ~(B = C) /\\ collinear {A,B,C}"), t420))
+  collinear_sin_angle_imp_c.set(@tactics.prove(@parser.parse_term("forall A B C. sin(angle(A,B,C)) = &0\n           ==> ~(A = B) /\\ ~(B = C) /\\ collinear {A,B,C}"), t420))
 }
 
 ///|
@@ -1502,7 +1502,7 @@ pub fn collinear_sin_angle_imp() -> @kernel.Thm {
 /// ANGLE_EQ_0_RIGHT
 fn step_71() -> Unit raise {
   let t421 = @simp.rewrite_tac(@list.List([vector_angle_eq_0_right(), angle()]))
-  angle_eq_0_right_c.set(@tactics.prove(@parser.parse_term("!A B C. angle(A,B,C) = &0 ==> angle(A,B,D) = angle(C,B,D)"), t421))
+  angle_eq_0_right_c.set(@tactics.prove(@parser.parse_term("forall A B C. angle(A,B,C) = &0 ==> angle(A,B,D) = angle(C,B,D)"), t421))
 }
 
 ///|
@@ -1518,7 +1518,7 @@ pub fn angle_eq_0_right() -> @kernel.Thm {
 /// ANGLE_EQ_0_LEFT
 fn step_72() -> Unit raise {
   let t422 = @meson.meson_tac(@list.List([angle_eq_0_right(), angle_sym()]))
-  angle_eq_0_left_c.set(@tactics.prove(@parser.parse_term("!A B C. angle(A,B,C) = &0 ==> angle(D,B,A) = angle(D,B,C)"), t422))
+  angle_eq_0_left_c.set(@tactics.prove(@parser.parse_term("forall A B C. angle(A,B,C) = &0 ==> angle(D,B,A) = angle(D,B,C)"), t422))
 }
 
 ///|
@@ -1534,7 +1534,7 @@ pub fn angle_eq_0_left() -> @kernel.Thm {
 /// ANGLE_EQ_PI_RIGHT
 fn step_73() -> Unit raise {
   let t423 = @simp.rewrite_tac(@list.List([vector_angle_eq_pi_left(), angle()]))
-  angle_eq_pi_right_c.set(@tactics.prove(@parser.parse_term("!A B C. angle(A,B,C) = pi ==> angle(D,B,A) = pi - angle(D,B,C)"), t423))
+  angle_eq_pi_right_c.set(@tactics.prove(@parser.parse_term("forall A B C. angle(A,B,C) = pi ==> angle(D,B,A) = pi - angle(D,B,C)"), t423))
 }
 
 ///|
@@ -1550,7 +1550,7 @@ pub fn angle_eq_pi_right() -> @kernel.Thm {
 /// ANGLE_EQ_PI_LEFT
 fn step_74() -> Unit raise {
   let t424 = @meson.meson_tac(@list.List([angle_eq_pi_right(), angle_sym()]))
-  angle_eq_pi_left_c.set(@tactics.prove(@parser.parse_term("!A B C. angle(A,B,C) = pi ==> angle(A,B,D) = pi - angle(C,B,D)"), t424))
+  angle_eq_pi_left_c.set(@tactics.prove(@parser.parse_term("forall A B C. angle(A,B,C) = pi ==> angle(A,B,D) = pi - angle(C,B,D)"), t424))
 }
 
 ///|
@@ -1566,7 +1566,7 @@ pub fn angle_eq_pi_left() -> @kernel.Thm {
 /// COS_ANGLE
 fn step_75() -> Unit raise {
   let t425 = @simp.rewrite_tac(@list.List([angle(), cos_vector_angle(), @vectors.vector_sub_eq()]))
-  cos_angle_c.set(@tactics.prove(@parser.parse_term("!a b c. cos(angle(a,b,c)) = if a = b \\/ c = b then &0\n                               else ((a - b) dot (c - b)) /\n                                    (norm(a - b) * norm(c - b))"), t425))
+  cos_angle_c.set(@tactics.prove(@parser.parse_term("forall a b c. cos(angle(a,b,c)) = if a = b \\/ c = b then &0\n                               else ((a - b) dot (c - b)) /\n                                    (norm(a - b) * norm(c - b))"), t425))
 }
 
 ///|
@@ -1582,7 +1582,7 @@ pub fn cos_angle() -> @kernel.Thm {
 /// SIN_ANGLE
 fn step_76() -> Unit raise {
   let t426 = @simp.rewrite_tac(@list.List([angle(), sin_vector_angle(), @vectors.vector_sub_eq()]))
-  sin_angle_c.set(@tactics.prove(@parser.parse_term("!a b c. sin(angle(a,b,c)) =\n             if a = b \\/ c = b then &1\n             else sqrt(&1 - (((a - b) dot (c - b)) /\n                             (norm(a - b) * norm(c - b))) pow 2)"), t426))
+  sin_angle_c.set(@tactics.prove(@parser.parse_term("forall a b c. sin(angle(a,b,c)) =\n             if a = b \\/ c = b then &1\n             else sqrt(&1 - (((a - b) dot (c - b)) /\n                             (norm(a - b) * norm(c - b))) pow 2)"), t426))
 }
 
 ///|
@@ -1598,7 +1598,7 @@ pub fn sin_angle() -> @kernel.Thm {
 /// SIN_SQUARED_ANGLE
 fn step_77() -> Unit raise {
   let t427 = @simp.rewrite_tac(@list.List([angle(), sin_squared_vector_angle(), @vectors.vector_sub_eq()]))
-  sin_squared_angle_c.set(@tactics.prove(@parser.parse_term("!a b c. sin(angle(a,b,c)) pow 2 =\n             if a = b \\/ c = b then &1\n             else &1 - (((a - b) dot (c - b)) /\n                        (norm(a - b) * norm(c - b))) pow 2"), t427))
+  sin_squared_angle_c.set(@tactics.prove(@parser.parse_term("forall a b c. sin(angle(a,b,c)) pow 2 =\n             if a = b \\/ c = b then &1\n             else &1 - (((a - b) dot (c - b)) /\n                        (norm(a - b) * norm(c - b))) pow 2"), t427))
 }
 
 ///|
@@ -1633,7 +1633,7 @@ fn step_78() -> Unit raise {
   let t429 = @simp.rewrite_tac(@list.List([@vectors.dist_0(), angle(), @vectors.vector_sub_rzero()]))
   let t428 = @tactics.repeat_tac(@tactics.gen_tac)
   let t443 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@parser.parse_term("A:real^N")), t428), t429), t430), @tactics.disch_tac), t431), t442)
-  cos_adjacent_hypotenuse_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * cos(angle(B,A,C)) = dist(A,B)"), t443))
+  cos_adjacent_hypotenuse_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * cos(angle(B,A,C)) = dist(A,B)"), t443))
 }
 
 ///|
@@ -1655,7 +1655,7 @@ fn step_79() -> Unit raise {
   let t449 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@vectors.dist_refl(), @realax.real_div(), @realax.real_inv_0(), angle(), @vectors.vector_sub_refl(), vector_angle()])), t445), t448])
   let t444 = @class.asm_cases_tac(@parser.parse_term("A:real^N = C"))
   let t450 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t444), t449)
-  cos_adjacent_over_hypotenuse_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> cos(angle(B,A,C)) = dist(A,B) / dist(A,C)"), t450))
+  cos_adjacent_over_hypotenuse_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> cos(angle(B,A,C)) = dist(A,B) / dist(A,C)"), t450))
 }
 
 ///|
@@ -1708,7 +1708,7 @@ fn step_80() -> Unit raise {
   let t452 = @simp.asm_simp_tac(@list.List([@vectors.orthogonal_refl(), @vectors.vector_sub_eq(), @vectors.dist_refl(), @calc_int.real_mul_lzero()]))
   let t451 = @class.asm_cases_tac(@parser.parse_term("A:real^N = C"))
   let t479 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t451), t452), @tactics.disch_tac), t453), t454), t455), t461), t467), t469), t470), t471), t477), t478), @calc_rat.real_arith_tac)
-  sin_opposite_hypotenuse_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * sin(angle(B,A,C)) = dist(C,B)"), t479))
+  sin_opposite_hypotenuse_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> dist(A,C) * sin(angle(B,A,C)) = dist(C,B)"), t479))
 }
 
 ///|
@@ -1726,7 +1726,7 @@ fn step_81() -> Unit raise {
   let t481 = @simp.simp_tac(@list.List([sin_opposite_hypotenuse()]))
   let t480 = @simp.once_rewrite_tac(@list.List([@realax.real_mul_sym()]))
   let t482 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@real.real_eq_rdiv_eq(), @vectors.dist_pos_lt()])), t480), t481)
-  sin_opposite_over_hypotenuse_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = C)\n        ==> sin(angle(B,A,C)) = dist(C,B) / dist(A,C)"), t482))
+  sin_opposite_over_hypotenuse_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = C)\n        ==> sin(angle(B,A,C)) = dist(C,B) / dist(A,C)"), t482))
 }
 
 ///|
@@ -1771,7 +1771,7 @@ fn step_82() -> Unit raise {
   })
   let t483 = @simp.rewrite_tac(@list.List([@transcendentals.tan()]))
   let t504 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t483), t489), t495), t496), t501), t502), t503)
-  tan_opposite_adjacent_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = B)\n        ==> dist(A,B) * tan(angle(B,A,C)) = dist(C,B)"), t504))
+  tan_opposite_adjacent_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B) /\\ ~(A = B)\n        ==> dist(A,B) * tan(angle(B,A,C)) = dist(C,B)"), t504))
 }
 
 ///|
@@ -1793,7 +1793,7 @@ fn step_83() -> Unit raise {
   let t510 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([angle(), @vectors.vector_sub_refl(), vector_angle()])), t506), t509])
   let t505 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
   let t511 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t505), t510)
-  tan_opposite_over_adjacent_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> tan(angle(B,A,C)) = dist(C,B) / dist(A,B)"), t511))
+  tan_opposite_over_adjacent_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> tan(angle(B,A,C)) = dist(C,B) / dist(A,B)"), t511))
 }
 
 ///|
@@ -1811,7 +1811,7 @@ fn step_84() -> Unit raise {
   let t512 = @equal.gsym(vector_angle_v1())
   let t513 = @simp.rewrite_tac(@list.List([angle(), @simp.once_rewrite_rule(@list.List([@vectors.norm_sub()]))(@vectors.dist()), t512, @vectors.norm_pow_2()]))
   let t514 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t513), @vectors.vector_arith_tac)
-  law_of_cosines_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        dist(B,C) pow 2 = (dist(A,B) pow 2 + dist(A,C) pow 2) -\n                          &2 * dist(A,B) * dist(A,C) * cos(angle(B,A,C))"), t514))
+  law_of_cosines_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        dist(B,C) pow 2 = (dist(A,B) pow 2 + dist(A,C) pow 2) -\n                          &2 * dist(A,B) * dist(A,C) * cos(angle(B,A,C))"), t514))
 }
 
 ///|
@@ -1868,7 +1868,7 @@ fn step_85() -> Unit raise {
   let t516 = @tactics.exists_tac(@parser.parse_term("2"))
   let t515 = @tactics.match_mp_tac(@real.real_pow_eq())
   let t547 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t515), t516), t517), t519), t520), t521), t522), t523), t526), t527), t528), t540), t541), t543), t544), t545), t546)
-  law_of_sines_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n      sin(angle(A,B,C)) * dist(B,C) = sin(angle(B,A,C)) * dist(A,C)"), t547))
+  law_of_sines_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n      sin(angle(A,B,C)) * dist(B,C) = sin(angle(B,A,C)) * dist(A,C)"), t547))
 }
 
 ///|
@@ -1913,7 +1913,7 @@ fn step_86() -> Unit raise {
   let t549 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.norm_eq_0())]))
   let t548 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@vectors.vector_sub_eq())]))
   let t576 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t548), t549), t552), t555), t558), t561), t564), t567), t568), t573), t574), t575)
-  triangle_angle_sum_lemma_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> cos(angle(B,A,C) + angle(A,B,C) + angle(B,C,A)) = -- &1"), t576))
+  triangle_angle_sum_lemma_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N. ~(A = B) /\\ ~(A = C) /\\ ~(B = C)\n                  ==> cos(angle(B,A,C) + angle(A,B,C) + angle(B,C,A)) = -- &1"), t576))
 }
 
 ///|
@@ -1984,7 +1984,7 @@ fn step_87() -> Unit raise {
   let t584 = @tactics.x_choose_then(@parser.parse_term("nn:real"))(t583)
   let t585 = @tactics.subgoal_then(@parser.parse_term("?n. integer n /\\ x = n * pi"), t584)
   let t618 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t585), t586), t589), t594), t603), t604), t605), t606), t607), t608), @tactics.conj_tac), t612), t616), t617), @calc_rat.real_arith_tac)
-  cos_minus1_lemma_c.set(@tactics.prove(@parser.parse_term("!x. cos(x) = -- &1 /\\ &0 <= x /\\ x < &3 * pi ==> x = pi"), t618))
+  cos_minus1_lemma_c.set(@tactics.prove(@parser.parse_term("forall x. cos(x) = -- &1 /\\ &0 <= x /\\ x < &3 * pi ==> x = pi"), t618))
 }
 
 ///|
@@ -2049,7 +2049,7 @@ fn step_88() -> Unit raise {
   let t620 = @parser.parse_term("B:real^N = C")
   let t621 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("A:real^N = B"), t620, t619]))
   let t655 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t621), t622), t626), t630), t631), t632), t633), t634), t635), t636), t637), t644), t653), t654), @calc_rat.real_arith_tac)
-  triangle_angle_sum_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N. ~(A = B /\\ B = C /\\ A = C)\n                  ==> angle(B,A,C) + angle(A,B,C) + angle(B,C,A) = pi"), t655))
+  triangle_angle_sum_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N. ~(A = B /\\ B = C /\\ A = C)\n                  ==> angle(B,A,C) + angle(A,B,C) + angle(B,C,A) = pi"), t655))
 }
 
 ///|
@@ -2085,7 +2085,7 @@ fn step_89() -> Unit raise {
     @tactics.strip_assume_tac(t657(x658))
   })
   let t671 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t659), t662), t663), t669), t670)
-  angle_eq_pi_others_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N.\n        angle(A,B,C) = pi\n        ==> angle(B,C,A) = &0 /\\ angle(A,C,B) = &0 /\\\n            angle(B,A,C) = &0 /\\ angle(C,A,B) = &0"), t671))
+  angle_eq_pi_others_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N.\n        angle(A,B,C) = pi\n        ==> angle(B,C,A) = &0 /\\ angle(A,C,B) = &0 /\\\n            angle(B,A,C) = &0 /\\ angle(C,A,B) = &0"), t671))
 }
 
 ///|
@@ -2149,7 +2149,7 @@ fn step_90() -> Unit raise {
   let t673 = @list.List([@simp.asm_rewrite_tac(@list.List([angle(), vector_angle_eq_0(), @vectors.vector_sub_eq()])), @tactics.all_tac])
   let t672 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
   let t712 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t672), t673), t674), t675), t676), t677), @tactics.eq_tac), t692), t693), t699), t702), t708), t709), t710), t711)
-  angle_eq_0_dist_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                  (dist(A,B) = dist(A,C) + dist(C,B) \\/\n                   dist(B,C) = dist(A,C) + dist(A,B))"), t712))
+  angle_eq_0_dist_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                  (dist(A,B) = dist(A,C) + dist(C,B) \\/\n                   dist(B,C) = dist(A,C) + dist(A,B))"), t712))
 }
 
 ///|
@@ -2169,7 +2169,7 @@ fn step_91() -> Unit raise {
   let t715 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("A:real^N"), t714]), @vectors.dist_pos_le()))
   let t713 = @simp.rewrite_tac(@list.List([angle_eq_0_dist()]))
   let t717 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t713), @tactics.ap_term_tac), @tactics.ap_term_tac), t715), t716), @calc_rat.real_arith_tac)
-  angle_eq_0_dist_abs_c.set(@tactics.prove(@parser.parse_term("!A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                   dist(A,C) = abs(dist(A,B) - dist(C,B))"), t717))
+  angle_eq_0_dist_abs_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N. angle(A,B,C) = &0 <=>\n                  ~(A = B) /\\ ~(C = B) /\\\n                   dist(A,C) = abs(dist(A,B) - dist(C,B))"), t717))
 }
 
 ///|
@@ -2205,7 +2205,7 @@ fn step_92() -> Unit raise {
   let t718 = @parser.parse_term("dist(B':real^N,C') = &0")
   let t719 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("dist(A':real^N,B') = &0"), t718]))
   let t736 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t719), t720), @tactics.strip_tac), t721), t722), t723), t726), t729), t733), t734), t735)
-  congruent_triangles_sss_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> angle(A,B,C) = angle(A',B',C')"), t736))
+  congruent_triangles_sss_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> angle(A,B,C) = angle(A',B',C')"), t736))
 }
 
 ///|
@@ -2236,7 +2236,7 @@ fn step_93() -> Unit raise {
   let t740 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("B:real^M"), t739, t738]), law_of_cosines()))
   let t737 = @simp.rewrite_tac(@list.List([@vectors.dist_eq()]))
   let t750 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t737), t740), t743), t747), t748), t749)
-  congruent_triangles_sas_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,C) = dist(A',C')"), t750))
+  congruent_triangles_sas_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,C) = dist(A',C')"), t750))
 }
 
 ///|
@@ -2301,7 +2301,7 @@ fn step_94() -> Unit raise {
   }), t755), @tactics.all_tac])
   let t751 = @class.asm_cases_tac(@parser.parse_term("A:real^M = B"))
   let t792 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t751), t756), @tactics.disch_tac), t760), t761), t765), t773), t774), @tactics.conj_tac), t791)
-  congruent_triangles_aas_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C') /\\ dist(B,C) = dist(B',C')"), t792))
+  congruent_triangles_aas_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C') /\\ dist(B,C) = dist(B',C')"), t792))
 }
 
 ///|
@@ -2350,7 +2350,7 @@ fn step_95() -> Unit raise {
   }), t797), @tactics.all_tac])
   let t793 = @class.asm_cases_tac(@parser.parse_term("A:real^M = B"))
   let t819 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t793), t798), t799), t803), t804), t807), t810), t811), t817), t818)
-  congruent_triangles_asa_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C')"), t819))
+  congruent_triangles_asa_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,C) = dist(A',C')"), t819))
 }
 
 ///|
@@ -2366,7 +2366,7 @@ pub fn congruent_triangles_asa() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_SSS_FULL
 fn step_96() -> Unit raise {
   let t820 = @meson.meson_tac(@list.List([congruent_triangles_sss(), @vectors.dist_sym(), angle_sym()]))
-  congruent_triangles_sss_full_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t820))
+  congruent_triangles_sss_full_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        dist(B,C) = dist(B',C') /\\\n        dist(C,A) = dist(C',A')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t820))
 }
 
 ///|
@@ -2382,7 +2382,7 @@ pub fn congruent_triangles_sss_full() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_SAS_FULL
 fn step_97() -> Unit raise {
   let t821 = @meson.meson_tac(@list.List([congruent_triangles_sss(), @vectors.dist_sym(), angle_sym(), congruent_triangles_sas()]))
-  congruent_triangles_sas_full_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t821))
+  congruent_triangles_sas_full_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        dist(A,B) = dist(A',B') /\\\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(B,C) = dist(B',C')\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t821))
 }
 
 ///|
@@ -2398,7 +2398,7 @@ pub fn congruent_triangles_sas_full() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_AAS_FULL
 fn step_98() -> Unit raise {
   let t822 = @meson.meson_tac(@list.List([congruent_triangles_sss(), @vectors.dist_sym(), angle_sym(), congruent_triangles_aas()]))
-  congruent_triangles_aas_full_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t822))
+  congruent_triangles_aas_full_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        angle(B,C,A) = angle(B',C',A') /\\\n        dist(A,B) = dist(A',B') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t822))
 }
 
 ///|
@@ -2414,7 +2414,7 @@ pub fn congruent_triangles_aas_full() -> @kernel.Thm {
 /// CONGRUENT_TRIANGLES_ASA_FULL
 fn step_99() -> Unit raise {
   let t823 = @meson.meson_tac(@list.List([congruent_triangles_asa(), congruent_triangles_sas_full(), @vectors.dist_sym(), angle_sym()]))
-  congruent_triangles_asa_full_c.set(@tactics.prove(@parser.parse_term("!A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t823))
+  congruent_triangles_asa_full_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^M A' B' C':real^N.\n        angle(A,B,C) = angle(A',B',C') /\\\n        dist(A,B) = dist(A',B') /\\\n        angle(B,A,C) = angle(B',A',C') /\\\n        ~(collinear {A,B,C})\n        ==> dist(A,B) = dist(A',B') /\\\n            dist(B,C) = dist(B',C') /\\\n            dist(C,A) = dist(C',A') /\\\n            angle(A,B,C) = angle(A',B',C') /\\\n            angle(B,C,A) = angle(B',C',A') /\\\n            angle(C,A,B) = angle(C',A',B')"), t823))
 }
 
 ///|
@@ -2432,7 +2432,7 @@ fn step_100() -> Unit raise {
   let t825 = @simp.rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
   let t824 = @simp.rewrite_tac(@list.List([@vectors.between(), angle_eq_pi_dist()]))
   let t826 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t824), t825)
-  angle_between_c.set(@tactics.prove(@parser.parse_term("!a b x. angle(a,x,b) = pi <=> ~(x = a) /\\ ~(x = b) /\\ between x (a,b)"), t826))
+  angle_between_c.set(@tactics.prove(@parser.parse_term("forall a b x. angle(a,x,b) = pi <=> ~(x = a) /\\ ~(x = b) /\\ between x (a,b)"), t826))
 }
 
 ///|
@@ -2450,7 +2450,7 @@ fn step_101() -> Unit raise {
   let t828 = @meson.meson_tac(@list.List([@vectors.between_refl()]))
   let t827 = @simp.rewrite_tac(@list.List([angle_between()]))
   let t829 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t827), t828)
-  between_angle_c.set(@tactics.prove(@parser.parse_term("!a b x. between x (a,b) <=> x = a \\/ x = b \\/ angle(a,x,b) = pi"), t829))
+  between_angle_c.set(@tactics.prove(@parser.parse_term("forall a b x. between x (a,b) <=> x = a \\/ x = b \\/ angle(a,x,b) = pi"), t829))
 }
 
 ///|
@@ -2476,7 +2476,7 @@ fn step_102() -> Unit raise {
   })
   let t830 = @simp.rewrite_tac(@list.List([@equal.gsym(angle_between())]))
   let t837 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t830), t836), @calc_rat.real_arith_tac)
-  angles_along_line_c.set(@tactics.prove(@parser.parse_term("!A B C D:real^N.\n      ~(C = A) /\\ ~(C = B) /\\ between C (A,B)\n      ==> angle(A,C,D) + angle(B,C,D) = pi"), t837))
+  angles_along_line_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n      ~(C = A) /\\ ~(C = B) /\\ between C (A,B)\n      ==> angle(A,C,D) + angle(B,C,D) = pi"), t837))
 }
 
 ///|
@@ -2534,7 +2534,7 @@ fn step_103() -> Unit raise {
   let t847 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@vectors.between_refl_eq()])), t845), t846), @tactics.all_tac])
   let t838 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
   let t874 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t838), t847), t848), t849), t850), t851), @tactics.strip_tac), t855), t858), t861), t864), t865), t870), t871), @tactics.conj_tac), t872), t873)
-  angles_add_between_c.set(@tactics.prove(@parser.parse_term("!A B C D:real^N.\n        between C (A,B) /\\ ~(D = A) /\\ ~(D = B)\n        ==> angle(A,D,C) + angle(C,D,B) = angle(A,D,B)"), t874))
+  angles_add_between_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        between C (A,B) /\\ ~(D = A) /\\ ~(D = B)\n        ==> angle(A,D,C) + angle(C,D,B) = angle(A,D,B)"), t874))
 }
 
 ///|
@@ -2600,7 +2600,7 @@ fn step_104() -> Unit raise {
   let t876 = @tactics.repeat_tac(@tactics.gen_tac)
   let t875 = @determinants.geom_origin_tac(@parser.parse_term("y:real^N"))
   let t916 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t875), t876), t877), t878), t881), t884), t885), t887), t892), t893), @tactics.ap_term_tac), t901), t903), t904), t905), t906), t908), @tactics.strip_tac), t911), t912), t913), @class.cond_cases_tac), t914), t915)
-  setdist_point_line_c.set(@tactics.prove(@parser.parse_term("!x y z:real^N.\n        setdist({x},affine hull {y,z}) = dist(x,y) * sin(angle(x,y,z))"), t916))
+  setdist_point_line_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^N.\n        setdist({x},affine hull {y,z}) = dist(x,y) * sin(angle(x,y,z))"), t916))
 }
 
 ///|
@@ -2630,7 +2630,7 @@ fn step_105() -> Unit raise {
   let t918 = @simp.rewrite_tac(@list.List([@vectors.vector_sub_rzero(), @vectors.vec_component(), @real.real_sub_rzero(), @vectors.dist_0()]))
   let t917 = @simp.rewrite_tac(@list.List([@measure.measure_triangle(), angle()]))
   let t931 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@parser.parse_term("a:real^2")), t917), t918), t919), t920), t921), t922), t923), t924), t925), t926), t927), t928), t929), t930)
-  area_triangle_sin_c.set(@tactics.prove(@parser.parse_term("!a b c:real^2.\n     measure(convex hull {a,b,c}) =\n     (dist(a,b) * dist(a,c) * sin(angle(b,a,c))) / &2"), t931))
+  area_triangle_sin_c.set(@tactics.prove(@parser.parse_term("forall a b c:real^2.\n     measure(convex hull {a,b,c}) =\n     (dist(a,b) * dist(a,c) * sin(angle(b,a,c))) / &2"), t931))
 }
 
 ///|
@@ -2733,7 +2733,7 @@ fn step_106() -> Unit raise {
       })(x967))
     })(x968)(x968)
   }), t969), t974), t975), t976), t977), t978), t979), t980), t987), t991), t993), t994), t995), t996), t997), t998)
-  let lemma1 = @tactics.prove(@parser.parse_term("!p u v w:real^3.\n          norm(u - p) = &1 /\\ norm(v - p) = &1 /\\ norm(w - p) = &1\n          ==> angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)"), t999)
+  let lemma1 = @tactics.prove(@parser.parse_term("forall p u v w:real^3.\n          norm(u - p) = &1 /\\ norm(v - p) = &1 /\\ norm(w - p) = &1\n          ==> angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)"), t999)
   let t1020 = @simp.asm_rewrite_tac(@list.List([@real.real_inv_eq_0(), @vectors.norm_eq_0(), @real.real_le_inv_eq(), @vectors.norm_pos_le()]))
   let t1019 = @simp.asm_rewrite_tac(@list.List([vector_angle_lmul(), vector_angle_rmul()]))
   let t1018 = @simp.asm_simp_tac(@list.List([@real.real_abs_inv(), @vectors.real_abs_norm(), @realax.real_mul_linv(), @vectors.norm_eq_0()]))
@@ -2756,7 +2756,7 @@ fn step_106() -> Unit raise {
   let t1001 = @class.asm_cases_tac(@parser.parse_term("u:real^3 = vec 0"))
   let t1000 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1021 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@parser.parse_term("p:real^3")), t1000), t1001), t1004), t1005), t1008), t1009), t1012), t1016), t1017), t1018), t1019), t1020)
-  let lemma2 = @tactics.prove(@parser.parse_term("!p u v w:real^3. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)"), t1021)
+  let lemma2 = @tactics.prove(@parser.parse_term("forall p u v w:real^3. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)"), t1021)
   let t1068 = @simp.rewrite_tac(@list.List([lemma2]))
   let t1067 = @tactics.disch_then(fn(x1065 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1065
@@ -2820,7 +2820,7 @@ fn step_106() -> Unit raise {
     })(x1026))
   })])
   let t1069 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.disj_cases_tac(@int.arith_rule(@parser.parse_term("dimindex(:3) <= dimindex(:N) \\/ dimindex(:N) <= dimindex(:3)"))), t1027), t1028), t1029), t1033), t1038), t1044), t1045), t1052), t1056), t1057), t1058), @tactics.strip_tac), t1059), t1063), t1064), t1067), t1068)
-  angle_triangle_law_c.set(@tactics.prove(@parser.parse_term("!p u v w:real^N. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)"), t1069))
+  angle_triangle_law_c.set(@tactics.prove(@parser.parse_term("forall p u v w:real^N. angle(u,p,w) <= angle(u,p,v) + angle(v,p,w)"), t1069))
 }
 
 ///|
@@ -2836,7 +2836,7 @@ pub fn angle_triangle_law() -> @kernel.Thm {
 /// VECTOR_ANGLE_TRIANGLE_LAW
 fn step_107() -> Unit raise {
   let t1070 = @simp.rewrite_tac(@list.List([vector_angle_angle(), angle_triangle_law()]))
-  vector_angle_triangle_law_c.set(@tactics.prove(@parser.parse_term("!u v w:real^N. vector_angle u w <= vector_angle u v + vector_angle v w"), t1070))
+  vector_angle_triangle_law_c.set(@tactics.prove(@parser.parse_term("forall u v w:real^N. vector_angle u w <= vector_angle u v + vector_angle v w"), t1070))
 }
 
 ///|

@@ -75,7 +75,7 @@ pub fn el_conv(x6 : (@kernel.Term) -> @kernel.Thm raise, x7 : Int64, x8 : @kerne
 /// NOT_CONS
 fn step_2() -> Unit raise {
   let t11 = @list.List([@meson.meson_tac(@list.List([@lists.list_cases()]))])
-  not_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. (~ ?(h:A) t. (l = CONS h t)) ==> (l = [])"), t11))
+  not_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. (~ ?(h:A) t. (l = CONS h t)) ==> (l = [])"), t11))
 }
 
 ///|
@@ -145,7 +145,7 @@ fn step_6() -> Unit raise {
   let t19 = @simp.asm_rewrite_tac(@list.List([]))
   let t20 = @rqe_tactics_ext.cases_on(@parser.parse_term("x = h"))
   let t21 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @meson.asm_meson_tac(@list.List([@lists.mem(), rem_nil()])), t20, t19, t18, t17, t16, t15])
-  rem_false_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x l. ~(MEM x (REMOVE x l))"), t21))
+  rem_false_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x l. ~(MEM x (REMOVE x l))"), t21))
 }
 
 ///|
@@ -165,7 +165,7 @@ fn step_7() -> Unit raise {
   let t24 = @simp.asm_rewrite_tac(@list.List([remove(), @pair.let_def(), @pair.let_end_def()]))
   let t25 = @rqe_tactics_ext.cases_on(@parser.parse_term("y = z"))
   let t26 = @list.List([@rqe_tactics_ext.repeat_n(3L, @tactics.strip_tac), t25, t24, t23, t22])
-  mem_remove_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x y z l. MEM x (REMOVE y l) ==> MEM x (REMOVE y (CONS z l))"), t26))
+  mem_remove_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y z l. MEM x (REMOVE y l) ==> MEM x (REMOVE y (CONS z l))"), t26))
 }
 
 ///|
@@ -201,7 +201,7 @@ fn step_8() -> Unit raise {
   let t41 = @rqe_tactics_ext.cases_on(@parser.parse_term("x = h"))
   let t42 = @meson.meson_tac(@list.List([@lists.mem()]))
   let t43 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), @lists.list_induct_tac, t42, t41, t40, @tactics.strip_tac, t39, @tactics.strip_tac, t38, t37, @tactics.strip_tac, t36, t35, @tactics.strip_tac, t34, t33])
-  rem_neq_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x x1 l. MEM x l /\\ ~(x = x1) ==> MEM x (REMOVE x1 l)"), t43))
+  rem_neq_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x x1 l. MEM x l /\\ ~(x = x1) ==> MEM x (REMOVE x1 l)"), t43))
 }
 
 ///|
@@ -217,7 +217,7 @@ pub fn rem_neq() -> @kernel.Thm {
 /// LAST_SING
 fn step_9() -> Unit raise {
   let t44 = @list.List([@meson.meson_tac(@list.List([@lists.last()]))])
-  last_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h. LAST [h] = h"), t44))
+  last_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h. LAST [h] = h"), t44))
 }
 
 ///|
@@ -233,7 +233,7 @@ pub fn last_sing() -> @kernel.Thm {
 /// LAST_CONS
 fn step_10() -> Unit raise {
   let t45 = @list.List([@meson.asm_meson_tac(@list.List([@lists.last()]))])
-  last_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h t. ~(t = []) ==> (LAST (CONS h t) = LAST t)"), t45))
+  last_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. ~(t = []) ==> (LAST (CONS h t) = LAST t)"), t45))
 }
 
 ///|
@@ -250,7 +250,7 @@ pub fn last_cons() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t46 = @meson.meson_tac(@list.List([@lists.last(), @lists.not_cons_nil(), @class.cond_clauses()]))
   let t47 = @list.List([@simp.rewrite_tac(@list.List([@lists.last(), @lists.not_cons_nil()])), t46])
-  last_cons_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h1 h2 t. ~(t = []) ==> (LAST (CONS h1 (CONS h2 t)) = LAST (CONS h1 t))"), t47))
+  last_cons_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h1 h2 t. ~(t = []) ==> (LAST (CONS h1 (CONS h2 t)) = LAST (CONS h1 t))"), t47))
 }
 
 ///|
@@ -266,7 +266,7 @@ pub fn last_cons_cons() -> @kernel.Thm {
 /// HD_APPEND
 fn step_12() -> Unit raise {
   let t48 = @list.List([@meson.asm_meson_tac(@list.List([@lists.hd(), @lists.append()]))])
-  hd_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h t l. HD (APPEND (CONS h t) l) = h"), t48))
+  hd_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t l. HD (APPEND (CONS h t) l) = h"), t48))
 }
 
 ///|
@@ -283,7 +283,7 @@ pub fn hd_append() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t49 = @meson.asm_meson_tac(@list.List([@lists.length(), @lists.not_cons_nil(), @int.arith_rule(@parser.parse_term("~(0 = SUC n)"))]))
   let t50 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length()])), t49])
-  length_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. (LENGTH l = 0) <=> (l = [])"), t50))
+  length_0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. (LENGTH l = 0) <=> (l = [])"), t50))
 }
 
 ///|
@@ -314,7 +314,7 @@ fn step_14() -> Unit raise {
   let t62 = @simp.rewrite_tac(@list.List([@lists.length(), @int.arith_rule(@parser.parse_term("~(0 = 1)"))]))
   let t63 = @meson.meson_tac(@list.List([@lists.not_cons_nil()]))
   let t64 = @list.List([@lists.list_induct_tac, @tactics.eq_tac, @meson.meson_tac(@list.List([@lists.length(), @int.arith_rule(@parser.parse_term("~(1 = 0)"))])), t63, @tactics.eq_tac, t62, t61, @tactics.strip_tac, t60, t59, @tactics.strip_tac, t58, t57, @tactics.strip_tac, t56, t55, @tactics.strip_tac, t54])
-  length_1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. (LENGTH l = 1) <=> ?x. l = [x]"), t64))
+  length_1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. (LENGTH l = 1) <=> ?x. l = [x]"), t64))
 }
 
 ///|
@@ -340,7 +340,7 @@ fn step_15() -> Unit raise {
   }), @tactics.strip_tac)
   let t72 = @simp.asm_rewrite_tac(@list.List([]))
   let t73 = @list.List([@tactics.strip_tac, @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("p:A list"), @lists.list_cases())), t72, t71, t70, t69, t68])
-  list_tri_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (p = []) \\/ (?x. p = [x:A]) \\/ (?x y t. p = CONS x (CONS y t))"), t73))
+  list_tri_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (p = []) \\/ (?x. p = [x:A]) \\/ (?x y t. p = CONS x (CONS y t))"), t73))
 }
 
 ///|
@@ -376,7 +376,7 @@ fn step_16() -> Unit raise {
   let t90 = @meson.asm_meson_tac(@list.List([length_0(), @int.arith_rule(@parser.parse_term("~(2 = 0)"))]))
   let t91 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:A list"), @lists.list_cases()))
   let t92 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.eq_tac), @tactics.strip_tac, t91, @tactics.strip_tac, t90, t89, @tactics.strip_tac, t88, t87, @tactics.strip_tac, t86, t85, t84, t83, t82, @tactics.strip_tac, t81, t80, t79, @int.arith_tac, t78, @tactics.strip_tac, t77, @int.arith_tac])
-  length_pair_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (LENGTH p = 2) <=> ?h t. p = [h:A; t]"), t92))
+  length_pair_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (LENGTH p = 2) <=> ?h t. p = [h:A; t]"), t92))
 }
 
 ///|
@@ -409,7 +409,7 @@ fn step_17() -> Unit raise {
   let t106 = @meson.asm_meson_tac(@list.List([length_0(), @int.arith_rule(@parser.parse_term("~(1 = 0)"))]))
   let t107 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("p:A list"), @lists.list_cases()))
   let t108 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.eq_tac), @tactics.strip_tac, t107, @tactics.strip_tac, t106, t105, @tactics.strip_tac, t104, t103, t102, t101, @tactics.strip_tac, t100, t99, t98, @int.arith_tac, t97, @int.arith_tac, @tactics.strip_tac, t96, @int.arith_tac])
-  length_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (LENGTH p = 1) <=> ?h. p = [h:A]"), t108))
+  length_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (LENGTH p = 1) <=> ?h. p = [h:A]"), t108))
 }
 
 ///|
@@ -430,7 +430,7 @@ fn step_18() -> Unit raise {
   let t112 = @meson.asm_meson_tac(@list.List([@lists.list_cases()]))
   let t113 = @rqe_tactics_ext.claim(@parser.parse_term("?h t. l = CONS h t"))
   let t114 = @list.List([@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t113, t112, @tactics.strip_tac, t111, t110, t109])
-  tl_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. ~(l = []) ==> ((TL l = []) <=> ?x. l = [x])"), t114))
+  tl_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> ((TL l = []) <=> ?x. l = [x])"), t114))
 }
 
 ///|
@@ -448,7 +448,7 @@ fn step_19() -> Unit raise {
   let t115 = @meson.asm_meson_tac(@list.List([@lists.not_cons_nil()]))
   let t116 = @simp.rewrite_tac(@list.List([@lists.tl(), @lists.last()]))
   let t117 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t116, t115])
-  last_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. ~(l = []) /\\  ~(TL l = []) ==> (LAST (TL l) = LAST l)"), t117))
+  last_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) /\\  ~(TL l = []) ==> (LAST (TL l) = LAST l)"), t117))
 }
 
 ///|
@@ -465,7 +465,7 @@ pub fn last_tl() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t118 = @tactics.repeat_tac(@tactics.strip_tac)
   let t119 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t118, @list_rewrites.list_simp_tac, @rewrites.num_simp_tac])
-  length_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!l. ~(l = []) /\\  ~(TL l = []) ==> (LENGTH (TL l) = PRE(LENGTH l))"), t119))
+  length_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) /\\  ~(TL l = []) ==> (LENGTH (TL l) = PRE(LENGTH l))"), t119))
 }
 
 ///|
@@ -485,7 +485,7 @@ fn step_21() -> Unit raise {
   let t122 = @simp.rewrite_tac(@list.List([@lists.length(), @lists.not_cons_nil(), @arith.lt_refl(), @list_rewrites.not_nil()]))
   let t123 = @meson.asm_meson_tac(@list.List([@lists.length(), @lists.not_cons_nil(), @arith.lt_refl()]))
   let t124 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac, t123, t122, t121, t120, @int.arith_tac])
-  length_nz_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. 0 < LENGTH p <=> ~(p = [])"), t124))
+  length_nz_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. 0 < LENGTH p <=> ~(p = [])"), t124))
 }
 
 ///|

@@ -204,7 +204,7 @@ pub fn cellth() -> @kernel.Thm {
 /// S'_APPEND
 fn step_11() -> Unit raise {
   let t6 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_simp_tac(@list.List([s_p_def(), @lists.append()])))
-  s_p_append_c.set(@tactics.prove(@parser.parse_term("!p1 p2 s. S' (APPEND p1 p2) s = S' p2 (S' p1 s)"), t6))
+  s_p_append_c.set(@tactics.prove(@parser.parse_term("forall p1 p2 s. S' (APPEND p1 p2) s = S' p2 (S' p1 s)"), t6))
 }
 
 ///|
@@ -220,7 +220,7 @@ pub fn s_p_append() -> @kernel.Thm {
 /// UPDATE_DIFFERENT
 fn step_12() -> Unit raise {
   let t7 = @simp.simp_tac(@list.List([update_def()]))
-  update_different_c.set(@tactics.prove(@parser.parse_term("!x y z s. ~(x = y) ==> (update x z s y = s y)"), t7))
+  update_different_c.set(@tactics.prove(@parser.parse_term("forall x y z s. ~(x = y) ==> (update x z s y = s y)"), t7))
 }
 
 ///|
@@ -236,7 +236,7 @@ pub fn update_different() -> @kernel.Thm {
 /// UPDATE_SAME
 fn step_13() -> Unit raise {
   let t8 = @simp.simp_tac(@list.List([update_def()]))
-  update_same_c.set(@tactics.prove(@parser.parse_term("!x z s. update x z s x = z"), t8))
+  update_same_c.set(@tactics.prove(@parser.parse_term("forall x z s. update x z s x = z"), t8))
 }
 
 ///|
@@ -255,7 +255,7 @@ fn step_14() -> Unit raise {
   let t11 = @simp.simp_tac(@list.List([@int.arith_rule(@parser.parse_term("(x < y ==> x < y + 1 /\\ ~(x = y)) /\\ x < x + 1")), cellth(), update_same(), update_different(), t10, @theorems.exists_refl()]))
   let t9 = @simp.rewrite_tac(@list.List([e_def(), s_def(), s_p_def(), update_def(), c_def(), s_p_append()]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(exp_induct()), t9), t11)
-  correctness_theorem_c.set(@tactics.prove(@parser.parse_term("!e map s s' r.\n      (!v. map v < r) ==>\n      (!v. s v = s' (Reg (map v))) ==>\n          (S' (C e map r) s' Acc = E e s) /\\\n          (!x. (x < r) ==> (S' (C e map r) s' (Reg x) = s' (Reg x)))"), t12))
+  correctness_theorem_c.set(@tactics.prove(@parser.parse_term("forall e map s s' r.\n      (forall v. map v < r) ==>\n      (forall v. s v = s' (Reg (map v))) ==>\n          (S' (C e map r) s' Acc = E e s) /\\\n          (forall x. (x < r) ==> (S' (C e map r) s' (Reg x) = s' (Reg x)))"), t12))
 }
 
 ///|

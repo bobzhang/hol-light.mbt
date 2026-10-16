@@ -4,7 +4,7 @@
 ///|
 /// IMP_DISJ_THM
 fn step_1() -> Unit raise {
-  imp_disj_thm_c.set(@class.taut(@parser.parse_term("!t1 t2. t1 ==> t2 <=> ~t1 \\/ t2")))
+  imp_disj_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn imp_disj_thm() -> @kernel.Thm {
 ///|
 /// RIGHT_OR_OVER_AND
 fn step_2() -> Unit raise {
-  right_or_over_and_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)")))
+  right_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn right_or_over_and() -> @kernel.Thm {
 ///|
 /// LEFT_OR_OVER_AND
 fn step_3() -> Unit raise {
-  left_or_over_and_c.set(@class.taut(@parser.parse_term("!t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)")))
+  left_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)")))
 }
 
 ///|

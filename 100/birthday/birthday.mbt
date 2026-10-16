@@ -16,7 +16,7 @@ fn step_2() -> Unit raise {
 ///|
 /// funspace
 fn step_3() -> Unit raise {
-  funspace_c.set(@pair.new_definition(@parser.parse_term("(s --> t) = {f:A->B | (!x. x IN s ==> f(x) IN t) /\\\n                        (!x. ~(x IN s) ==> f(x) = @y. T)}")))
+  funspace_c.set(@pair.new_definition(@parser.parse_term("(s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}")))
 }
 
 ///|
@@ -114,7 +114,7 @@ fn step_5() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
   let t3 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.has_size(), @equal.gsym(@theorems.conj_assoc())])), t3), t4), t5), @tactics.conj_tac), t10), t11), t12), t16), t37), t38), @tactics.conj_tac), t49), t54), t55), t56), t57)
-  has_size_funspace_c.set(@tactics.prove(@parser.parse_term("!s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)"), t58))
+  has_size_funspace_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)"), t58))
 }
 
 ///|
@@ -135,7 +135,7 @@ fn step_6() -> Unit raise {
   let t60 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t59 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
   let t64 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.le_exists(), @theorems.left_imp_exists_thm()])), t59), t60), t61), @nums.induct_tac), t62), t63)
-  fact_divides_c.set(@tactics.prove(@parser.parse_term("!m n. m <= n ==> ?d. FACT(n) = d * FACT(m)"), t64))
+  fact_divides_c.set(@tactics.prove(@parser.parse_term("forall m n. m <= n ==> ?d. FACT(n) = d * FACT(m)"), t64))
 }
 
 ///|
@@ -177,7 +177,7 @@ fn step_7() -> Unit raise {
     @tactics.strip_assume_tac(t65(x66))
   })
   let t82 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t67), t68), t80), t81)
-  fact_div_mult_c.set(@tactics.prove(@parser.parse_term("!m n. m <= n ==> FACT n = (FACT(n) DIV FACT(m)) * FACT(m)"), t82))
+  fact_div_mult_c.set(@tactics.prove(@parser.parse_term("forall m n. m <= n ==> FACT n = (FACT(n) DIV FACT(m)) * FACT(m)"), t82))
 }
 
 ///|
@@ -264,7 +264,7 @@ fn step_8() -> Unit raise {
   let t101 = @simp.rewrite_tac(@list.List([@pair.pair_eq(), @pair.exists_pair_thm(), @equal.gsym(@theorems.conj_assoc())]))
   let t100 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("(a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c"))]))
   let t121 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_image(), funspace(), @sets.in_elim_thm()])), t100), t101), t102), t103), t104), @tactics.eq_tac), t120), @tactics.all_tac])
-  let t99 = @tactics.subgoal_then(@parser.parse_term("{f | f IN (x INSERT s) --> t /\\\n    (!u v. u IN (x INSERT s) /\\ v IN (x INSERT s) /\\ f u = f v ==> u = v)} =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\\n                     g IN {f | f IN (s --> (t DELETE y)) /\\\n                               !u v. u IN s /\\ v IN s /\\ f u = f v ==> u = v}}"), fn(x96 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t99 = @tactics.subgoal_then(@parser.parse_term("{f | f IN (x INSERT s) --> t /\\\n    (forall u v. u IN (x INSERT s) /\\ v IN (x INSERT s) /\\ f u = f v ==> u = v)} =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\\n                     g IN {f | f IN (s --> (t DELETE y)) /\\\n                               forall u v. u IN s /\\ v IN s /\\ f u = f v ==> u = v}}"), fn(x96 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s97 = @tactics.subst1_tac(x96)
     fn(x98 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s97(x98)
@@ -285,7 +285,7 @@ fn step_8() -> Unit raise {
   let t84 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
   let t83 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t163 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.has_size(), @equal.gsym(@theorems.conj_assoc())])), t83), t84), t85), @tactics.conj_tac), t93), t94), t95), t99), t121), t122), @tactics.conj_tac), t133), t138), t139), t143), t162)
-  has_size_funspace_injective_c.set(@tactics.prove(@parser.parse_term("!s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}\n            HAS_SIZE (if n < m then 0 else (FACT n) DIV (FACT(n - m)))"), t163))
+  has_size_funspace_injective_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}\n            HAS_SIZE (if n < m then 0 else (FACT n) DIV (FACT(n - m)))"), t163))
 }
 
 ///|
@@ -361,7 +361,7 @@ fn step_9() -> Unit raise {
   }))
   let t164 = @tactics.repeat_tac(@tactics.gen_tac)
   let t203 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.has_size(), @sets.finite_diff()])), t164), t171), t175), t180), t185), t191), t201), t202)
-  has_size_diff_c.set(@tactics.prove(@parser.parse_term("!s t:A->bool m n.\n        s SUBSET t /\\ s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> (t DIFF s) HAS_SIZE (n - m)"), t203))
+  has_size_diff_c.set(@tactics.prove(@parser.parse_term("forall s t:A->bool m n.\n        s SUBSET t /\\ s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> (t DIFF s) HAS_SIZE (n - m)"), t203))
 }
 
 ///|
@@ -380,9 +380,9 @@ fn step_10() -> Unit raise {
   let t207 = @simp.asm_simp_tac(@list.List([has_size_funspace_injective(), has_size_funspace()]))
   let t206 = @tactics.match_mp_tac(has_size_diff())
   let t205 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(if a <= b then x - y else x) = x - (if b < a then 0 else y)"))]))
-  let t204 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f:A->B | f IN (s --> t) /\\\n              ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)} =\n    (s --> t) DIFF\n    {f | f IN (s --> t) /\\\n                 (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}"))]))
+  let t204 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f:A->B | f IN (s --> t) /\\\n              ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)} =\n    (s --> t) DIFF\n    {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}"))]))
   let t209 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t204), t205), t206), t207), t208)
-  birthday_thm_c.set(@tactics.prove(@parser.parse_term("!s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n            HAS_SIZE (if m <= n then (n EXP m) - (FACT n) DIV (FACT(n - m))\n                      else n EXP m)"), t209))
+  birthday_thm_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n            HAS_SIZE (if m <= n then (n EXP m) - (FACT n) DIV (FACT(n - m))\n                      else n EXP m)"), t209))
 }
 
 ///|
@@ -409,7 +409,7 @@ fn step_11() -> Unit raise {
   let t211 = @simp.simp_tac(@list.List([@theorems.left_forall_imp_thm(), @theorems.exists_refl()]))
   let t210 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t221 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@arith.lt_exists(), @theorems.left_imp_exists_thm()]))), t210), t211), t212), t213), @tactics.gen_tac), t214), t215), t216), t217), t219), t220)
-  fact_div_simp_c.set(@tactics.prove(@parser.parse_term("!m n. m < n\n         ==> (FACT n) DIV (FACT m) = n * FACT(n - 1) DIV FACT(m)"), t221))
+  fact_div_simp_c.set(@tactics.prove(@parser.parse_term("forall m n. m < n\n         ==> (FACT n) DIV (FACT m) = n * FACT(n - 1) DIV FACT(m)"), t221))
 }
 
 ///|
@@ -451,7 +451,7 @@ fn step_12() -> Unit raise {
     })(t225(x226))
   })
   let t242 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t227), t233), t234), t236), t237), t238), t239), t240), t241)
-  birthday_thm_explicit_c.set(@tactics.prove(@parser.parse_term("!s t. s HAS_SIZE 23 /\\ t HAS_SIZE 365\n         ==> 2 * CARD {f | f IN (s --> t) /\\\n                           ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n             >= CARD (s --> t)"), t242))
+  birthday_thm_explicit_c.set(@tactics.prove(@parser.parse_term("forall s t. s HAS_SIZE 23 /\\ t HAS_SIZE 365\n         ==> 2 * CARD {f | f IN (s --> t) /\\\n                           ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n             >= CARD (s --> t)"), t242))
 }
 
 ///|

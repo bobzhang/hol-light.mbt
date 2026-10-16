@@ -154,7 +154,7 @@ fn step_1() -> Unit raise {
       })(x63))
     })(x64)(x64)
   }), @tactics.ants_tac), t72), t73), t74), t75), t76), t77), t78), @tactics.conj_tac), t112)
-  brunn_minkowski_interval_c.set(@tactics.prove(@parser.parse_term("!a b c d:real^N.\n    ~(interval[a,b] = {}) /\\ ~(interval[c,d] = {})\n    ==> root (dimindex(:N))\n             (measure {x + y | x IN interval[a,b] /\\ y IN interval[c,d]})\n        >= root (dimindex(:N)) (measure(interval[a,b])) +\n           root (dimindex(:N)) (measure(interval[c,d]))"), t113))
+  brunn_minkowski_interval_c.set(@tactics.prove(@parser.parse_term("forall a b c d:real^N.\n    ~(interval[a,b] = {}) /\\ ~(interval[c,d] = {})\n    ==> root (dimindex(:N))\n             (measure {x + y | x IN interval[a,b] /\\ y IN interval[c,d]})\n        >= root (dimindex(:N)) (measure(interval[a,b])) +\n           root (dimindex(:N)) (measure(interval[c,d]))"), t113))
 }
 
 ///|
@@ -605,7 +605,7 @@ fn step_2() -> Unit raise {
       })(x679))
     }, @list.List([th_5]))
   })
-  let t681 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.conj_tac, @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. P x \\/ Q x)\n        ==> s = (s INTER {x | P x}) UNION (s INTER {x | Q x})")))), @calc_rat.real_arith_tac), t680])
+  let t681 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.conj_tac, @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. P x \\/ Q x)\n        ==> s = (s INTER {x | P x}) UNION (s INTER {x | Q x})")))), @calc_rat.real_arith_tac), t680])
   let t670 = @tactics.subgoal_then(@parser.parse_term("s = (s INTER {x:real^N | x$k <= &0}) UNION (s INTER {x | x$k >= &0}) /\\\n      t = (t INTER {x:real^N | x$k <= &0}) UNION (t INTER {x | x$k >= &0})"), fn(x667 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s668 = @tactics.mp_tac(x667)
     fn(x669 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -712,7 +712,7 @@ fn step_2() -> Unit raise {
   let t582 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("x <= a /\\ x >= a <=> x = a"))]))
   let t581 = @tactics.match_mp_tac(@meson.meson(@list.List([@integration.negligible_subset(), @sets.inter_subset()]), @parser.parse_term("negligible t ==> negligible(s INTER t)")))
   let t584 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(t INTER {x | P x}) INTER (t INTER {x | Q x}) =\n                               t INTER {x | P x /\\ Q x}"))])), t581), t582), t583)
-  let t585 = @tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x. P x \\/ Q x)\n           ==> s INTER {x | P x} UNION s INTER {x | Q x} = s"))), @calc_rat.real_arith_tac)
+  let t585 = @tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x. P x \\/ Q x)\n           ==> s INTER {x | P x} UNION s INTER {x | Q x} = s"))), @calc_rat.real_arith_tac)
   let t580 = @meson.asm_meson_tac(@list.List([@integration.elementary_compact()]))
   let t579 = @simp.rewrite_tac(@list.List([@topology.closed_halfspace_component_le(), @topology.closed_halfspace_component_ge()]))
   let t578 = @tactics.match_mp_tac(@topology.compact_inter_closed())
@@ -729,7 +729,7 @@ fn step_2() -> Unit raise {
   let t569 = @tactics.thenl(@tactics.conj_tac, @list.List([@calc_rat.real_arith_tac, @vectors.vector_arith_tac]))
   let t568 = @tactics.exists_tac(@parser.parse_term("\\x:real^N. a % basis k + x"))
   let t567 = @simp.asm_simp_tac(@list.List([@sets.in_elim_thm(), @vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.basis_component(), @vectors.vector_neg_component()]))
-  let t570 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conj_tac, @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("!g. (!x. f(x) IN s' <=> x IN s) /\\ (!x. g(f x) = x)\n               ==> IMAGE f t INTER s' = IMAGE f (t INTER s)")))), t567), t568), t569), @tactics.all_tac])
+  let t570 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conj_tac, @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("forall g. (forall x. f(x) IN s' <=> x IN s) /\\ (forall x. g(f x) = x)\n               ==> IMAGE f t INTER s' = IMAGE f (t INTER s)")))), t567), t568), t569), @tactics.all_tac])
   let t565 = @tactics.conjuncts_then(fn(x562 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s563 = @tactics.subst1_tac(x562)
     fn(x564 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -738,7 +738,7 @@ fn step_2() -> Unit raise {
   })
   let t566 = @tactics.subgoal_then(@parser.parse_term("IMAGE (\\x. --(a % basis k) + x) t INTER {x:real^N | x$k >= &0} =\n        IMAGE (\\x. --(a % basis k) + x) (t INTER {x | x$k >= a}) /\\\n        IMAGE (\\x. --(a % basis k) + x) t INTER {x:real^N | x$k <= &0} =\n        IMAGE (\\x. --(a % basis k) + x) (t INTER {x | x$k <= a})"), t565)
   let t561 = @simp.rewrite_tac(@list.List([@sets.injective_image()]))
-  let t560 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x y. Q x y ==> R x y)\n          ==> (!x y. P x /\\ P y /\\ Q x y ==> R x y)")))
+  let t560 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. Q x y ==> R x y)\n          ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)")))
   let t559 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([@integration.division_of_finite()]))])
   let t558 = @tactics.match_mp_tac(@sets.card_image_inj())
   let t595 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("n"), @tactics.ap_term_tac), t558), @tactics.conj_tac), t559), t560), t561), @vectors.vector_arith_tac), @tactics.all_tac])), t566), t570), t571), t572), t573), @tactics.conj_tac), t574), t588), t594])
@@ -801,7 +801,7 @@ fn step_2() -> Unit raise {
       s506(x507)
     }
   }), t509), t510), t511), @tactics.all_tac])
-  let t504 = @tactics.subgoal_then(@parser.parse_term("?b:real. &0 < b /\\ !x:real^N. x IN t ==> abs(x$k) <= b"), @tactics.strip_assume_tac)
+  let t504 = @tactics.subgoal_then(@parser.parse_term("?b:real. &0 < b /\\ forall x:real^N. x IN t ==> abs(x$k) <= b"), @tactics.strip_assume_tac)
   let t503 = @tactics.x_gen_tac(@parser.parse_term("u:real"))
   let t500 = @parser.parse_term("u:real")
   let t501 = @tactics.spec_tac(@parser.parse_term("measure(s INTER {x:real^N | x$k <= &0}) / measure s"), t500)
@@ -829,7 +829,7 @@ fn step_2() -> Unit raise {
   let t596 = @list.List([@tactics.all_tac, @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.pop_assum(fn(x482 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   }), @tactics.disch_tac), t483), t484), t485), t486), t540), t553), t554), t555), t556), t557), @tactics.ants_tac), t595)])
-  let t481 = @tactics.subgoal_then(@parser.parse_term("!d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\ ~(negligible i) /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\ ~(negligible j) /\\\n        measure(t INTER {x | x$k <= &0}) / measure t =\n        measure(s INTER {x | x$k <= &0}) / measure s /\\\n        measure(t INTER {x | x$k >= &0}) / measure t =\n        measure(s INTER {x | x$k >= &0}) / measure s /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)"), fn(x478 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t481 = @tactics.subgoal_then(@parser.parse_term("forall d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\ ~(negligible i) /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\ ~(negligible j) /\\\n        measure(t INTER {x | x$k <= &0}) / measure t =\n        measure(s INTER {x | x$k <= &0}) / measure s /\\\n        measure(t INTER {x | x$k >= &0}) / measure t =\n        measure(s INTER {x | x$k >= &0}) / measure s /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)"), fn(x478 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s479 = @tactics.mp_tac(x478)
     fn(x480 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s479(x480)
@@ -867,9 +867,9 @@ fn step_2() -> Unit raise {
   let t471 = @tactics.then_tac(@tactics.match_mp_tac(@sets.fun_in_image()), t442)
   let t441 = @meson.asm_meson_tac(@list.List([]))
   let t440 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@parser.parse_term("x - a:real^N = y - a <=> x = y"))]))
-  let t472 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!x y. f x = f y ==> x = y) /\\ ~(s = t)\n           ==> ~(IMAGE f s = IMAGE f t)"))), t440), t441)
+  let t472 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall x y. f x = f y ==> x = y) /\\ ~(s = t)\n           ==> ~(IMAGE f s = IMAGE f t)"))), t440), t441)
   let t439 = @simp.rewrite_tac(@list.List([@sets.injective_image()]))
-  let t438 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x y. Q x y ==> R x y)\n           ==> (!x y. P x /\\ P y /\\ Q x y ==> R x y)")))
+  let t438 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall x y. Q x y ==> R x y)\n           ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)")))
   let t437 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([@integration.division_of_finite()]))])
   let t436 = @tactics.match_mp_tac(@sets.card_image_inj())
   let t473 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("n"), @tactics.ap_thm_tac), @tactics.ap_term_tac), t436), @tactics.conj_tac), t437), t438), t439), @vectors.vector_arith_tac), t472, t471, t470, t469, t468, t467, t466, t465, t464, t463, t462])
@@ -916,7 +916,7 @@ fn step_2() -> Unit raise {
     let t402 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("interval[w:real^N,z]"), th_2))
     @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("interval[u:real^N,v]"), th_2)), t402)
   })
-  let t406 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("!i:real^N->bool. i IN d1 ==> ~(interior i = {})")), t403), t404), t405), @tactics.all_tac])
+  let t406 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("forall i:real^N->bool. i IN d1 ==> ~(interior i = {})")), t403), t404), t405), @tactics.all_tac])
   let t397 = @drule.match_mp(@calc_rat.real_arith(@parser.parse_term("min v z <= a /\\ a <= max u w\n        ==> u < v /\\ w < z\n            ==> u <= a /\\ v <= a /\\ a <= w /\\ a <= z \\/\n                w <= a /\\ z <= a /\\ a <= u /\\ a <= v")))
   let t399 = @tactics.disch_then(fn(x398 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x394 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1143,7 +1143,7 @@ fn step_2() -> Unit raise {
       s225(x226)
     }
   }), t231), t232), t233), t476)])
-  let t222 = @tactics.subgoal_then(@parser.parse_term("!d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\\n        ~(negligible i) /\\ ~(negligible j) /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)"), fn(x219 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t222 = @tactics.subgoal_then(@parser.parse_term("forall d1 d2 s t i j k.\n        CARD d1 + CARD d2 = n /\\\n        1 <= k /\\ k <= dimindex(:N) /\\ ~(i = j) /\\\n        i IN d1 /\\ i SUBSET {x:real^N | x$k <= &0} /\\\n        j IN d1 /\\ j SUBSET {x | x$k >= &0} /\\\n        ~(negligible i) /\\ ~(negligible j) /\\\n        ~(s = {}) /\\ ~(t = {}) /\\ ~(negligible s) /\\ ~(negligible t) /\\\n        d1 division_of s /\\ d2 division_of t\n        ==> root(dimindex (:N)) (measure {x + y | x IN s /\\ y IN t}) >=\n            root(dimindex (:N)) (measure s) + root(dimindex (:N)) (measure t)"), fn(x219 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s220 = @tactics.mp_tac(x219)
     fn(x221 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s220(x221)
@@ -1237,8 +1237,8 @@ fn step_2() -> Unit raise {
   let t147 = @tactics.match_mp_tac(@theorems.mono_imp())
   let t218 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t147), @tactics.conj_tac), t148), t149), @tactics.ap_term_tac), @tactics.ap_term_tac), t150), t151), t217, t216, t215])
   let t146 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t145 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!d d' s s'. P d d' s s' ==> P d' d s' s) /\\\n    (!d d' s s'. ~(2 <= CARD d) /\\ ~(2 <= CARD d') ==> P d d' s s') /\\\n    (!d d' s s'. negligible s ==>  P d d' s s') /\\\n    (!d d' s s'. 2 <= CARD d /\\ ~(negligible s) /\\ ~(negligible s')\n                 ==> P d d' s s')\n    ==> !d d' s s'.  P d d' s s'")))
-  let t144 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(!m. m < n ==> !a b c d. f a b = m /\\ stuff a b c d ==> other a b c d) <=>\n    (!a b c d. f a b:num < n /\\ stuff a b c d ==> other a b c d)"))]))
+  let t145 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(forall d d' s s'. P d d' s s' ==> P d' d s' s) /\\\n    (forall d d' s s'. ~(2 <= CARD d) /\\ ~(2 <= CARD d') ==> P d d' s s') /\\\n    (forall d d' s s'. negligible s ==>  P d d' s s') /\\\n    (forall d d' s s'. 2 <= CARD d /\\ ~(negligible s) /\\ ~(negligible s')\n                 ==> P d d' s s')\n    ==> forall d d' s s'.  P d d' s s'")))
+  let t144 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(forall m. m < n ==> forall a b c d. f a b = m /\\ stuff a b c d ==> other a b c d) <=>\n    (forall a b c d. f a b:num < n /\\ stuff a b c d ==> other a b c d)"))]))
   let t143 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t142 = @tactics.match_mp_tac(@arith.num_wf())
   let t137 = @parser.parse_term("n:num")
@@ -1288,7 +1288,7 @@ fn step_2() -> Unit raise {
       })(x619))
     })(x620)(x620)
   }), t621), t625), t626), t627), t628), t629), @tactics.conj_tac), t724), t725), t734), t744), t745), @tactics.ants_tac), t843), t844), @tactics.ants_tac), t942), t943), t944), t956), t957), t958), t959), t965), t973), t974), t979), t1019), t1024), t1026), t1027), t1032), t1034), t1035), t1036), t1040), t1055)
-  brunn_minkowski_elementary_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ (?d. d division_of s) /\\ (?d. d division_of t)\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1056))
+  brunn_minkowski_elementary_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ (?d. d division_of s) /\\ (?d. d division_of t)\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1056))
 }
 
 ///|
@@ -1416,7 +1416,7 @@ fn step_3() -> Unit raise {
   let t1058 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("{x + y:real^N | x IN {} /\\ y IN {}} = {}")), @realax.real_le_refl(), @measure.measure_empty(), @transcendentals.root_0(), @cart.dimindex_nonzero(), @realax.real_ge(), @realax.real_add_lid()]))
   let t1057 = @class.asm_cases_tac(@parser.parse_term("t:real^N->bool = {}"))
   let t1149 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1057), t1058), @tactics.strip_tac), t1059), t1060), t1061), t1148)
-  brunn_minkowski_open_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ open s /\\ bounded t /\\ open t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1149))
+  brunn_minkowski_open_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ open s /\\ bounded t /\\ open t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1149))
 }
 
 ///|
@@ -1482,7 +1482,7 @@ fn step_4() -> Unit raise {
   let t1151 = @simp.asm_simp_tac(@list.List([brunn_minkowski_open(), @topology.open_empty()]))
   let t1150 = @class.asm_cases_tac(@parser.parse_term("t:real^N->bool = {}"))
   let t1195 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1150), t1151), @tactics.strip_tac), t1152), t1153), t1164), t1165), t1184), t1185), t1186), t1187), t1188), t1189), t1190), t1191), t1192), t1193), t1194)
-  brunn_minkowski_convex_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ convex s /\\ bounded t /\\ convex t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1195))
+  brunn_minkowski_convex_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ bounded s /\\ convex s /\\ bounded t /\\ convex t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1195))
 }
 
 ///|
@@ -1573,7 +1573,7 @@ fn step_5() -> Unit raise {
     x1196
   }, @list.List([@sets.extension()]))
   let t1254 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1197), t1198), t1199), @tactics.eq_tac), t1253)
-  inters_sums_closed_ball_sequential_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s"), t1254))
+  inters_sums_closed_ball_sequential_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s"), t1254))
 }
 
 ///|
@@ -1648,7 +1648,7 @@ fn step_6() -> Unit raise {
   let t1256 = @simp.asm_simp_tac(@list.List([inters_sums_closed_ball_sequential(), @topology.compact_imp_closed()]))
   let t1255 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\n. {x + d:real^N | x IN s /\\ d IN ball(vec 0,inv(&n + &1))}"), @measure.has_measure_nested_inters()))
   let t1307 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1255), t1256), @tactics.ants_tac), t1261), t1262), t1263), @tactics.strip_tac), t1264), @tactics.disch_tac), t1271), t1272), t1275), t1276), t1277), @tactics.conj_tac), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t1278), t1279), t1280), t1284), t1291), t1292), t1293), @tactics.conj_tac), t1294), t1295), t1306)
-  measure_sums_compact_epsilon_c.set(@tactics.prove(@parser.parse_term("!s:real^N->bool.\n        compact s\n        ==> ((\\e. measure {x + d | x IN s /\\ d IN ball(vec 0,e)})\n             ---> measure s)\n            (atreal (&0) within {e | &0 <= e})"), t1307))
+  measure_sums_compact_epsilon_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        compact s\n        ==> ((\\e. measure {x + d | x IN s /\\ d IN ball(vec 0,e)})\n             ---> measure s)\n            (atreal (&0) within {e | &0 <= e})"), t1307))
 }
 
 ///|
@@ -1787,7 +1787,7 @@ fn step_7() -> Unit raise {
   let t1347 = @simp.asm_simp_tac(@list.List([brunn_minkowski_open(), @topology.open_empty(), @topology.bounded_empty()]))
   let t1346 = @class.asm_cases_tac(@parser.parse_term("t:real^N->bool = {}"))
   let t1411 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1346), t1347), @tactics.strip_tac), t1348), t1349), t1350), t1351), t1352), t1353), t1410)
-  brunn_minkowski_compact_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ compact s /\\ compact t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1411))
+  brunn_minkowski_compact_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ compact s /\\ compact t\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1411))
 }
 
 ///|
@@ -1945,7 +1945,7 @@ fn step_8() -> Unit raise {
   let t1413 = @simp.asm_simp_tac(@list.List([brunn_minkowski_open(), @topology.open_empty(), @topology.bounded_empty()]))
   let t1412 = @class.asm_cases_tac(@parser.parse_term("t:real^N->bool = {}"))
   let t1531 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1412), t1413), @tactics.strip_tac), t1414), t1415), t1426), t1427), t1446), t1447), t1448), t1449), t1450), t1451), t1530)
-  brunn_minkowski_measurable_c.set(@tactics.prove(@parser.parse_term("!s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ measurable s /\\ measurable t /\\\n    measurable {x + y | x IN s /\\ y IN t}\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1531))
+  brunn_minkowski_measurable_c.set(@tactics.prove(@parser.parse_term("forall s t:real^N->bool.\n    (s = {} <=> t = {}) /\\ measurable s /\\ measurable t /\\\n    measurable {x + y | x IN s /\\ y IN t}\n    ==> root (dimindex(:N)) (measure {x + y | x IN s /\\ y IN t})\n        >= root (dimindex(:N)) (measure s) + root (dimindex(:N)) (measure t)"), t1531))
 }
 
 ///|

@@ -24,7 +24,7 @@ fn step_1() -> Unit raise {
   real_sub_sum0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y m. sum(0,m) x - sum(0,m) y = sum(0,m) (\\i. x i - y i)",
+        "forall x y m. sum(0,m) x - sum(0,m) y = sum(0,m) (\\i. x i - y i)",
       ),
       t2,
     ),
@@ -55,7 +55,7 @@ fn step_2() -> Unit raise {
   )
   real_mul_rsum0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m c x. c * sum(0,m) x = sum(0,m) (\\i. c * x(i))"),
+      @parser.parse_term("forall m c x. c * sum(0,m) x = sum(0,m) (\\i. c * x(i))"),
       t3,
     ),
   )
@@ -82,7 +82,7 @@ fn step_3() -> Unit raise {
   )
   real_abs_lemma_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b n. (&a pow n) * abs b = abs((&a pow n) * b)"),
+      @parser.parse_term("forall a b n. (&a pow n) * abs b = abs((&a pow n) * b)"),
       t4,
     ),
   )
@@ -104,7 +104,7 @@ fn step_4() -> Unit raise {
     @list.List([@real.real_abs_mul(), @calc_int.real_abs_num()]),
   )
   real_abs_lemma1_c.set(
-    @tactics.prove(@parser.parse_term("!a b. &a * abs b = abs(&a * b)"), t5),
+    @tactics.prove(@parser.parse_term("forall a b. &a * abs b = abs(&a * b)"), t5),
   )
 }
 
@@ -125,7 +125,7 @@ fn step_5() -> Unit raise {
   real_abs_triangle_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!u x y z. abs(x - y) + abs(z - x) < u ==> abs(z - y) < u",
+        "forall u x y z. abs(x - y) + abs(z - x) < u ==> abs(z - y) < u",
       ),
       @calc_rat.real_arith_tac,
     ),
@@ -277,7 +277,7 @@ fn step_6() -> Unit raise {
   )
   real_mono_pow2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. m <= n ==> &2 pow m <= &2 pow n"),
+      @parser.parse_term("forall m n. m <= n ==> &2 pow m <= &2 pow n"),
       t19,
     ),
   )
@@ -308,7 +308,7 @@ fn step_7() -> Unit raise {
   )
   real_le_suc_pow2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m. &2 pow m + &1 <= &2 pow (SUC m)"),
+      @parser.parse_term("forall m. &2 pow m + &1 <= &2 pow (SUC m)"),
       t20,
     ),
   )
@@ -562,7 +562,7 @@ fn step_8() -> Unit raise {
   real_oppsign_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y. (x * y < &0) <=> (x < &0 /\\ &0 < y) \\/ (&0 < x /\\ y < &0)",
+        "forall x y. (x * y < &0) <=> (x < &0 /\\ &0 < y) \\/ (&0 < x /\\ y < &0)",
       ),
       t43,
     ),
@@ -904,7 +904,7 @@ fn step_10() -> Unit raise {
   real_ndiv_lemma1a_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a m n. &2 * abs(&2 pow m * &a - &2 pow (m + n)) <= &2 pow m\n           ==> (&a = &2 pow n)",
+        "forall a m n. &2 * abs(&2 pow m * &a - &2 pow (m + n)) <= &2 pow m\n           ==> (&a = &2 pow n)",
       ),
       t83,
     ),
@@ -1080,7 +1080,7 @@ fn step_11() -> Unit raise {
   real_ndiv_lemma1b_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a m n. ~(&2 * abs(-- (&2 pow m * &a) - &2 pow (m + n)) <= &2 pow m)",
+        "forall a m n. ~(&2 * abs(-- (&2 pow m * &a) - &2 pow (m + n)) <= &2 pow m)",
       ),
       t110,
     ),
@@ -1401,7 +1401,7 @@ fn step_12() -> Unit raise {
   real_ndiv_lemma2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b m n. (?k. (b = &k) \\/ (b = --(&k))) /\\\n             (abs(a) = &2 pow m) /\\\n             &2 * abs(a * b - &2 pow (m + n)) <= abs(a)\n             ==> (a * b = &2 pow (m + n))",
+        "forall a b m n. (?k. (b = &k) \\/ (b = --(&k))) /\\\n             (abs(a) = &2 pow m) /\\\n             &2 * abs(a * b - &2 pow (m + n)) <= abs(a)\n             ==> (a * b = &2 pow (m + n))",
       ),
       t137,
     ),
@@ -1599,7 +1599,7 @@ fn step_13() -> Unit raise {
   real_ndiv_lemma3_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b m n. m <= n /\\\n             (?k. (b = &k) \\/ (b = --(&k))) /\\\n             (abs(a) = &2 pow m) /\\\n             &2 * abs(a * b - &2 pow n) <= abs(a)\n             ==> (a * b = &2 pow n)",
+        "forall a b m n. m <= n /\\\n             (?k. (b = &k) \\/ (b = --(&k))) /\\\n             (abs(a) = &2 pow m) /\\\n             &2 * abs(a * b - &2 pow n) <= abs(a)\n             ==> (a * b = &2 pow n)",
       ),
       t153,
     ),
@@ -2042,12 +2042,12 @@ pub fn realcalc_abs() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let lemma1 = @calc_rat.real_arith(
     @parser.parse_term(
-      "!x y z b. &2 * abs(x - y) <= b /\\ &2 * abs(y - z) < b\n              ==> &2 * abs(x - z) < &2 * b",
+      "forall x y z b. &2 * abs(x - y) <= b /\\ &2 * abs(y - z) < b\n              ==> &2 * abs(x - z) < &2 * b",
     ),
   )
   let lemma2 = @calc_rat.real_arith(
     @parser.parse_term(
-      "!x y z. x + &1 <= abs(z) /\\ abs(z - y) < &1 ==> x <= abs(y)",
+      "forall x y z. x + &1 <= abs(z) /\\ abs(z - y) < &1 ==> x <= abs(y)",
     ),
   )
   let lemma3 = @calc_rat.real_arith(
@@ -2057,7 +2057,7 @@ fn step_19() -> Unit raise {
   )
   let lemma4 = @calc_rat.real_arith(
     @parser.parse_term(
-      "!a b c. c <= abs(a) + abs(b) /\\ abs(a - b) < c ==>\n             (&0 < a ==> &0 <= b) /\\ (a < &0 ==> b <= &0)",
+      "forall a b c. c <= abs(a) + abs(b) /\\ abs(a - b) < c ==>\n             (&0 < a ==> &0 <= b) /\\ (a < &0 ==> b <= &0)",
     ),
   )
   let t552 = @simp.rewrite_tac(@list.List([real_oppsign()]))
@@ -5573,7 +5573,7 @@ fn step_23() -> Unit raise {
   let t675 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "!c d. abs(b - c) <= d /\\ abs(c - a) < e - d\n          ==> abs(b - a) < e",
+        "forall c d. abs(b - c) <= d /\\ abs(c - a) < e - d\n          ==> abs(b - a) < e",
       ),
     ),
   )
@@ -5606,7 +5606,7 @@ fn step_23() -> Unit raise {
           @tactics.match_mp_tac(
             @calc_rat.real_arith(
               @parser.parse_term(
-                "!z. abs(z) <= b /\\ &0 < c ==> &0 < abs(b + c)",
+                "forall z. abs(z) <= b /\\ &0 < c ==> &0 < abs(b + c)",
               ),
             ),
           ),
@@ -6039,7 +6039,7 @@ fn step_24() -> Unit raise {
   step_lemma1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d x y.\n        abs(a - c) <= x /\\ abs(b - d) <= y\n        ==> abs(a * b - c * d) <= abs(c) * y + abs(d) * x + x * y",
+        "forall a b c d x y.\n        abs(a - c) <= x /\\ abs(b - d) <= y\n        ==> abs(a * b - c * d) <= abs(c) * y + abs(d) * x + x * y",
       ),
       t747,
     ),
@@ -6477,7 +6477,7 @@ fn step_25() -> Unit raise {
   ])
   let t784 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!z. (&2 * &2 pow n * d) * abs(z) = abs((&2 * &2 pow n * d) * z)",
+      "forall z. (&2 * &2 pow n * d) * abs(z) = abs((&2 * &2 pow n * d) * z)",
     ),
     fn(
       x782 : @kernel.Thm,
@@ -6963,7 +6963,7 @@ fn step_25() -> Unit raise {
   step_lemma2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n s t u x y k l a d.\n        &0 < a /\\\n        &0 < d /\\\n        abs(s - &2 pow n * x) <= k /\\\n        abs(t - &2 pow n * y) <= l /\\\n        &2 * abs(u * &2 pow n * d - a * s * t) <= &2 pow n * d\n        ==> abs(u - &2 pow n * (a / d) * (x * y)) <=\n            (a / d) * (abs(x) + k / (&2 pow n)) * l +\n            ((a / d) * k * abs(y) + &1 / &2)",
+        "forall n s t u x y k l a d.\n        &0 < a /\\\n        &0 < d /\\\n        abs(s - &2 pow n * x) <= k /\\\n        abs(t - &2 pow n * y) <= l /\\\n        &2 * abs(u * &2 pow n * d - a * s * t) <= &2 pow n * d\n        ==> abs(u - &2 pow n * (a / d) * (x * y)) <=\n            (a / d) * (abs(x) + k / (&2 pow n)) * l +\n            ((a / d) * k * abs(y) + &1 / &2)",
       ),
       t896,
     ),
@@ -9443,7 +9443,7 @@ pub fn step_ln() -> @kernel.Thm {
 fn step_30() -> Unit raise {
   let t1291 = @simp.rewrite_tac(@list.List([@arith.lt()]))
   let pth0 = @tactics.prove(
-    @parser.parse_term("(!k. SUC k < 0 ==> P k) <=> T"),
+    @parser.parse_term("(forall k. SUC k < 0 ==> P k) <=> T"),
     t1291,
   )
   let t1292 = @meson.meson_tac(@list.List([]))
@@ -9453,13 +9453,13 @@ fn step_30() -> Unit raise {
   )
   let pth1 = @tactics.prove(
     @parser.parse_term(
-      "(!k. k < (SUC m) ==> P k) <=>\n     (!k. k < m ==> P k) /\\ P m",
+      "(forall k. k < (SUC m) ==> P k) <=>\n     (forall k. k < m ==> P k) /\\ P m",
     ),
     t1293,
   )
   let t1294 = @simp.rewrite_tac(@list.List([@arith.lt()]))
   let pth2 = @tactics.prove(
-    @parser.parse_term("(!k. k < 0 ==> P k) <=> T"),
+    @parser.parse_term("(forall k. k < 0 ==> P k) <=> T"),
     t1294,
   )
   let triv_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
@@ -9822,7 +9822,7 @@ fn step_38() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "(!k. k < (SUC m) ==> P k) <=>\n     (!k. k < m ==> P k) /\\ P m",
+      "(forall k. k < (SUC m) ==> P k) <=>\n     (forall k. k < m ==> P k) /\\ P m",
     ),
     t1324,
   )
@@ -10565,7 +10565,7 @@ fn step_38() -> Unit raise {
   step_exp_4_plus_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "4 <= m /\\\n   abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < SUC m ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(t m - &2 pow n * x pow m / &(FACT m)) <= &2",
+        "4 <= m /\\\n   abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < SUC m ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(t m - &2 pow n * x pow m / &(FACT m)) <= &2",
       ),
       t1411,
     ),
@@ -10604,7 +10604,7 @@ fn step_39() -> Unit raise {
   steps_exp_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < 0 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,0) t -\n           &2 pow n * sum(0,0) (\\i. x pow i / &(FACT i))) <= &2 * &0",
+        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < 0 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,0) t -\n           &2 pow n * sum(0,0) (\\i. x pow i / &(FACT i))) <= &2 * &0",
       ),
       t1413,
     ),
@@ -10664,7 +10664,7 @@ fn step_40() -> Unit raise {
   steps_exp_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < 1 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,1) t - &2 pow n * sum(0,1)(\\i. x pow i / &(FACT i)))\n         <= &2 * &1",
+        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < 1 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,1) t - &2 pow n * sum(0,1)(\\i. x pow i / &(FACT i)))\n         <= &2 * &1",
       ),
       t1422,
     ),
@@ -10760,7 +10760,7 @@ fn step_41() -> Unit raise {
   steps_exp_2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < 2 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,2) t - &2 pow n * sum(0,2) (\\i. x pow i / &(FACT i)))\n       <= &2 * &2",
+        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < 2 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,2) t - &2 pow n * sum(0,2) (\\i. x pow i / &(FACT i)))\n       <= &2 * &2",
       ),
       t1437,
     ),
@@ -10872,7 +10872,7 @@ fn step_42() -> Unit raise {
   steps_exp_3_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < 3 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,3) t - &2 pow n * sum(0,3) (\\i. x pow i / &(FACT i)))\n       <= &2 * &3",
+        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < 3 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,3) t - &2 pow n * sum(0,3) (\\i. x pow i / &(FACT i)))\n       <= &2 * &3",
       ),
       t1455,
     ),
@@ -10992,7 +10992,7 @@ fn step_43() -> Unit raise {
   steps_exp_4_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < 4 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,4) t - &2 pow n * sum(0,4) (\\i. x pow i / &(FACT i)))\n       <= &2 * &4",
+        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < 4 ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,4) t - &2 pow n * sum(0,4) (\\i. x pow i / &(FACT i)))\n       <= &2 * &4",
       ),
       t1475,
     ),
@@ -11291,7 +11291,7 @@ fn step_44() -> Unit raise {
       @tactics.strip_tac,
       @tactics.subgoal_then(
         @parser.parse_term(
-          "!d. P(d + 4) ==>\n         abs(sum(0,d + 4) z) <= &2 * &(d + 4)",
+          "forall d. P(d + 4) ==>\n         abs(sum(0,d + 4) z) <= &2 * &(d + 4)",
         ),
         fn(
           x1476 : @kernel.Thm,
@@ -11346,7 +11346,7 @@ fn step_44() -> Unit raise {
   steps_exp_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!k. P(SUC k) ==> P(k)) /\\\n   (P(0) ==> (abs(sum(0,0) z) <= &2 * &0)) /\\\n   (P(1) ==> (abs(sum(0,1) z) <= &2 * &1)) /\\\n   (P(2) ==> (abs(sum(0,2) z) <= &2 * &2)) /\\\n   (P(3) ==> (abs(sum(0,3) z) <= &2 * &3)) /\\\n   (P(4) ==> (abs(sum(0,4) z) <= &2 * &4)) /\\\n   (!m. 4 <= m /\\ P(SUC m) ==> (abs(z m) <= &2))\n   ==> !m. P(m) ==> (abs(sum(0,m) z) <= &2 * &m)",
+        "(forall k. P(SUC k) ==> P(k)) /\\\n   (P(0) ==> (abs(sum(0,0) z) <= &2 * &0)) /\\\n   (P(1) ==> (abs(sum(0,1) z) <= &2 * &1)) /\\\n   (P(2) ==> (abs(sum(0,2) z) <= &2 * &2)) /\\\n   (P(3) ==> (abs(sum(0,3) z) <= &2 * &3)) /\\\n   (P(4) ==> (abs(sum(0,4) z) <= &2 * &4)) /\\\n   (forall m. 4 <= m /\\ P(SUC m) ==> (abs(z m) <= &2))\n   ==> forall m. P(m) ==> (abs(sum(0,m) z) <= &2 * &m)",
       ),
       t1518,
     ),
@@ -11435,7 +11435,7 @@ fn step_45() -> Unit raise {
   steps_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (!k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,m) t - &2 pow n * sum(0,m) (\\i. x pow i / &(FACT i)))\n       <= &2 * &m",
+        "abs(x) <= &1 /\\\n   abs(s - &2 pow n * x) < &1 /\\\n   (t(0) = &2 pow n) /\\\n   (forall k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC k) - s * t(k))\n                <= &2 pow n * &(SUC k))\n   ==> abs(sum(0,m) t - &2 pow n * sum(0,m) (\\i. x pow i / &(FACT i)))\n       <= &2 * &m",
       ),
       t1532,
     ),
@@ -11729,7 +11729,7 @@ fn step_46() -> Unit raise {
   let t1645 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
       @parser.parse_term(
-        "!y. abs(x - y) < &1 /\\ abs(y) <= d - &1 ==> abs(x) <= d",
+        "forall y. abs(x - y) < &1 /\\ abs(y) <= d - &1 ==> abs(x) <= d",
       ),
     ),
   )
@@ -12275,7 +12275,7 @@ fn step_46() -> Unit raise {
   )
   let t1589 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
-      @parser.parse_term("!y. abs(x - y) + abs(y - z) <= e ==> abs(x - z) <= e"),
+      @parser.parse_term("forall y. abs(x - y) + abs(y - z) <= e ==> abs(x - z) <= e"),
     ),
   )
   let t1587 = @simp.simp_tac(
@@ -12288,7 +12288,7 @@ fn step_46() -> Unit raise {
     ]),
   )
   let t1586 = @tactics.subgoal_then(
-    @parser.parse_term("!a b c d. &0 < a ==> ((b * c * d / a) * a = b * c * d)"),
+    @parser.parse_term("forall a b c d. &0 < a ==> ((b * c * d / a) * a = b * c * d)"),
     fn(
       x1584 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12337,7 +12337,7 @@ fn step_46() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1574 = @tactics.subgoal_then(
-    @parser.parse_term("!x y. &0 < y ==> (abs(x) * y = abs(x * y))"),
+    @parser.parse_term("forall x y. &0 < y ==> (abs(x) * y = abs(x * y))"),
     fn(
       x1572 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12489,7 +12489,7 @@ fn step_46() -> Unit raise {
   )
   let t1560 = @tactics.match_mp_tac(
     @calc_rat.real_arith(
-      @parser.parse_term("!y. abs(x - y) + abs(y - z) <= e ==> abs(x - z) <= e"),
+      @parser.parse_term("forall y. abs(x - y) + abs(y - z) <= e ==> abs(x - z) <= e"),
     ),
   )
   let t1559 = @list.List([
@@ -12812,7 +12812,7 @@ fn step_46() -> Unit raise {
   steps_ln_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "2 <= n /\\\n   abs(x) <= &1 / &2 /\\\n   abs(s - &2 pow n * --x) < &1 /\\\n   (t(0) = --s) /\\\n   (!k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC(SUC k))\n                         - &(SUC k) * s * t(k))\n                <= &2 pow n * &(SUC(SUC k)))\n   ==> abs(sum(0,m) t - &2 pow n * sum(0,m)\n                (\\i. (--(&1)) pow i * x pow (SUC i) / &(SUC i))) <= &3 * &m",
+        "2 <= n /\\\n   abs(x) <= &1 / &2 /\\\n   abs(s - &2 pow n * --x) < &1 /\\\n   (t(0) = --s) /\\\n   (forall k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow n * &(SUC(SUC k))\n                         - &(SUC k) * s * t(k))\n                <= &2 pow n * &(SUC(SUC k)))\n   ==> abs(sum(0,m) t - &2 pow n * sum(0,m)\n                (\\i. (--(&1)) pow i * x pow (SUC i) / &(SUC i))) <= &3 * &m",
       ),
       t1708,
     ),
@@ -12870,7 +12870,7 @@ fn step_47() -> Unit raise {
   mclaurin_exp_le1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x n. abs(x) <= &1\n         ==> ?t. abs(t) <= &1 /\\\n             (exp(x) = sum(0,n) (\\m. x pow m / &(FACT m)) +\n                       (exp(t) / &(FACT n)) * x pow n)",
+        "forall x n. abs(x) <= &1\n         ==> ?t. abs(t) <= &1 /\\\n             (exp(x) = sum(0,n) (\\m. x pow m / &(FACT m)) +\n                       (exp(t) / &(FACT n)) * x pow n)",
       ),
       t1717,
     ),
@@ -13971,7 +13971,7 @@ fn step_52() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1857 = @tactics.subgoal_then(
-    @parser.parse_term("!i. --(&1) pow i = --(&1) pow (SUC(SUC i))"),
+    @parser.parse_term("forall i. --(&1) pow i = --(&1) pow (SUC(SUC i))"),
     fn(
       x1855 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -14787,7 +14787,7 @@ fn step_54() -> Unit raise {
   approx_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(n + e + 2 = p) /\\\n   &3 * &2 pow (n + 2) <= &(FACT m) /\\\n   &2 * &m <= &2 pow e /\\\n   abs(x) <= &1 /\\\n   abs(s - &2 pow p * x) < &1 /\\\n   (t(0) = &2 pow p) /\\\n   (!k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow p * &(SUC k) - s * t(k))\n                <= &2 pow p * &(SUC k)) /\\\n   abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n   ==> abs(u - &2 pow n * exp(x)) < &1",
+        "(n + e + 2 = p) /\\\n   &3 * &2 pow (n + 2) <= &(FACT m) /\\\n   &2 * &m <= &2 pow e /\\\n   abs(x) <= &1 /\\\n   abs(s - &2 pow p * x) < &1 /\\\n   (t(0) = &2 pow p) /\\\n   (forall k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow p * &(SUC k) - s * t(k))\n                <= &2 pow p * &(SUC k)) /\\\n   abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n   ==> abs(u - &2 pow n * exp(x)) < &1",
       ),
       t2020,
     ),
@@ -15108,7 +15108,7 @@ fn step_55() -> Unit raise {
   approx_ln_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "~(k = 0) /\\\n   (n + e + 2 = p) /\\\n   &2 pow (n + 2) <= &2 pow (k * SUC m) * &(SUC m) /\\\n   &3 * &m <= &2 pow e /\\\n   (&0 <= x /\\ x <= inv(&2 pow k)) /\\\n   abs(s - &2 pow p * --x) < &1 /\\\n   (t(0) = --s) /\\\n   (!k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow p * &(SUC(SUC k)) -\n                         &(SUC k) * s * t(k))\n                <= &2 pow p * &(SUC(SUC k))) /\\\n   abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n   ==> abs(u - &2 pow n * ln(&1 + x)) < &1",
+        "~(k = 0) /\\\n   (n + e + 2 = p) /\\\n   &2 pow (n + 2) <= &2 pow (k * SUC m) * &(SUC m) /\\\n   &3 * &m <= &2 pow e /\\\n   (&0 <= x /\\ x <= inv(&2 pow k)) /\\\n   abs(s - &2 pow p * --x) < &1 /\\\n   (t(0) = --s) /\\\n   (forall k. SUC k < m ==>\n                &2 * abs(t(SUC k) * &2 pow p * &(SUC(SUC k)) -\n                         &(SUC k) * s * t(k))\n                <= &2 pow p * &(SUC(SUC k))) /\\\n   abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n   ==> abs(u - &2 pow n * ln(&1 + x)) < &1",
       ),
       t2069,
     ),
@@ -15658,7 +15658,7 @@ fn step_58() -> Unit raise {
   )
   let pth = @tactics.prove(
     @parser.parse_term(
-      "abs(x) <= &1 ==>\n       abs(s - &2 pow p * x) < &1 ==>\n       (n + e + 2 = p) /\\\n       &3 * &2 pow (n + 2) <= &(FACT m) /\\\n       &2 * &m <= &2 pow e /\\\n       (t(0) = &2 pow p) /\\\n       (!k. SUC k < m ==>\n                    &2 * abs(t(SUC k) * &2 pow p * &(SUC k) - s * t(k))\n                    <= &2 pow p * &(SUC k)) /\\\n       abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n       ==> abs(u - &2 pow n * exp(x)) < &1",
+      "abs(x) <= &1 ==>\n       abs(s - &2 pow p * x) < &1 ==>\n       (n + e + 2 = p) /\\\n       &3 * &2 pow (n + 2) <= &(FACT m) /\\\n       &2 * &m <= &2 pow e /\\\n       (t(0) = &2 pow p) /\\\n       (forall k. SUC k < m ==>\n                    &2 * abs(t(SUC k) * &2 pow p * &(SUC k) - s * t(k))\n                    <= &2 pow p * &(SUC k)) /\\\n       abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n       ==> abs(u - &2 pow n * exp(x)) < &1",
     ),
     t2144,
   )
@@ -15913,7 +15913,7 @@ fn step_58() -> Unit raise {
   )
   let pth_1 = @tactics.prove(
     @parser.parse_term(
-      "&0 <= x /\\ x <= inv(&2 pow k) ==>\n       abs(s - &2 pow p * x) < &1 ==>\n       ~(k = 0) /\\\n       (n + e + 2 = p) /\\\n       &2 pow (n + 2) <= &2 pow (k * SUC m) * &(SUC m) /\\\n       &3 * &m <= &2 pow e /\\\n       (t(0) = s) /\\\n       (!k. SUC k < m ==>\n                    &2 * abs(t(SUC k) * &2 pow p * &(SUC(SUC k)) -\n                             &(SUC k) * --s * t(k))\n                    <= &2 pow p * &(SUC(SUC k))) /\\\n       abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n       ==> abs(u - &2 pow n * ln(&1 + x)) < &1",
+      "&0 <= x /\\ x <= inv(&2 pow k) ==>\n       abs(s - &2 pow p * x) < &1 ==>\n       ~(k = 0) /\\\n       (n + e + 2 = p) /\\\n       &2 pow (n + 2) <= &2 pow (k * SUC m) * &(SUC m) /\\\n       &3 * &m <= &2 pow e /\\\n       (t(0) = s) /\\\n       (forall k. SUC k < m ==>\n                    &2 * abs(t(SUC k) * &2 pow p * &(SUC(SUC k)) -\n                             &(SUC k) * --s * t(k))\n                    <= &2 pow p * &(SUC(SUC k))) /\\\n       abs(u * &2 pow (e + 2) - sum(0,m) t) <= &2 pow (e + 1)\n       ==> abs(u - &2 pow n * ln(&1 + x)) < &1",
     ),
     t2190,
   )

@@ -214,7 +214,7 @@ fn step_3() -> Unit raise {
   sym_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (!x y. R x y ==> R y x) <=> (!x y. R x y <=> R y x)",
+        "forall R:A->A->bool. (forall x y. R x y ==> R y x) <=> (forall x y. R x y <=> R y x)",
       ),
       t16,
     ),
@@ -250,7 +250,7 @@ fn step_4() -> Unit raise {
   trans_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) (S:A->A->bool) U.\n        (!x z. (?y. R x y /\\ S y z) ==> U x z) <=>\n        (!x y z. R x y /\\ S y z ==> U x z)",
+        "forall(R:A->A->bool) (S:A->A->bool) U.\n        (forall x z. (?y. R x y /\\ S y z) ==> U x z) <=>\n        (forall x y z. R x y /\\ S y z ==> U x z)",
       ),
       t19,
     ),
@@ -297,7 +297,7 @@ pub fn rc_cases() -> @kernel.Thm {
 /// RC_RULES, RC_INDUCT, RC_CASES
 fn step_5() -> Unit raise {
   let (rc_rules, rc_induct, rc_cases) = @ind_defs.new_inductive_definition(
-    @parser.parse_term("(!x y. R x y ==> RC R x y) /\\\n   (!x:A. RC R x x)"),
+    @parser.parse_term("(forall x y. R x y ==> RC R x y) /\\\n   (forall x:A. RC R x x)"),
   )
   rc_rules_c.set(rc_rules)
   rc_induct_c.set(rc_induct)
@@ -310,7 +310,7 @@ fn step_6() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([rc_rules()]))
   rc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> RC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> RC R x y"),
       t20,
     ),
   )
@@ -330,7 +330,7 @@ pub fn rc_inc() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([rc_rules()]))
   rc_refl_c.set(
-    @tactics.prove(@parser.parse_term("!(R:A->A->bool) x. RC R x x"), t21),
+    @tactics.prove(@parser.parse_term("forall(R:A->A->bool) x. RC R x x"), t21),
   )
 }
 
@@ -349,7 +349,7 @@ fn step_8() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([rc_cases(), @theorems.eq_sym_eq()]))
   rc_explicit_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. RC R x y <=> R x y \\/ (x = y)"),
+      @parser.parse_term("forall(R:A->A->bool) x y. RC R x y <=> R x y \\/ (x = y)"),
       t22,
     ),
   )
@@ -371,7 +371,7 @@ fn step_9() -> Unit raise {
   rc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n            (!x y. RC R x y ==> RC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n            (forall x y. RC R x y ==> RC S x y)",
       ),
       t23,
     ),
@@ -397,7 +397,7 @@ fn step_10() -> Unit raise {
   )
   rc_closed_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. (RC R = R) <=> !x. R x x"),
+      @parser.parse_term("forall R:A->A->bool. (RC R = R) <=> forall x. R x x"),
       t25,
     ),
   )
@@ -417,7 +417,7 @@ pub fn rc_closed() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([rc_closed(), rc_refl()]))
   rc_idemp_c.set(
-    @tactics.prove(@parser.parse_term("!R:A->A->bool. RC(RC R) = RC R"), t26),
+    @tactics.prove(@parser.parse_term("forall R:A->A->bool. RC(RC R) = RC R"), t26),
   )
 }
 
@@ -437,7 +437,7 @@ fn step_12() -> Unit raise {
   rc_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool.\n        (!x y. R x y ==> R y x) ==> (!x y. RC R x y ==> RC R y x)",
+        "forall R:A->A->bool.\n        (forall x y. R x y ==> R y x) ==> (forall x y. RC R x y ==> RC R y x)",
       ),
       t27,
     ),
@@ -461,7 +461,7 @@ fn step_13() -> Unit raise {
   rc_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool.\n        (!x y z. R x y /\\ R y z ==> R x z) ==>\n        (!x y z. RC R x y /\\ RC R y z ==> RC R x z)",
+        "forall R:A->A->bool.\n        (forall x y z. R x y /\\ R y z ==> R x z) ==>\n        (forall x y z. RC R x y /\\ RC R y z ==> RC R x z)",
       ),
       t29,
     ),
@@ -509,7 +509,7 @@ pub fn sc_cases() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let (sc_rules, sc_induct, sc_cases) = @ind_defs.new_inductive_definition(
     @parser.parse_term(
-      "(!x y. R x y ==> SC R x y) /\\\n   (!x:A y. SC R x y ==> SC R y x)",
+      "(forall x y. R x y ==> SC R x y) /\\\n   (forall x:A y. SC R x y ==> SC R y x)",
     ),
   )
   sc_rules_c.set(sc_rules)
@@ -523,7 +523,7 @@ fn step_15() -> Unit raise {
   let t30 = @simp.rewrite_tac(@list.List([sc_rules()]))
   sc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> SC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> SC R x y"),
       t30,
     ),
   )
@@ -544,7 +544,7 @@ fn step_16() -> Unit raise {
   let t31 = @simp.rewrite_tac(@list.List([sc_rules()]))
   sc_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. SC R x y ==> SC R y x"),
+      @parser.parse_term("forall(R:A->A->bool) x y. SC R x y ==> SC R y x"),
       t31,
     ),
   )
@@ -574,7 +574,7 @@ fn step_17() -> Unit raise {
   )
   sc_explicit_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. SC(R) x y <=> R x y \\/ R y x"),
+      @parser.parse_term("forall R:A->A->bool. SC(R) x y <=> R x y \\/ R y x"),
       t35,
     ),
   )
@@ -596,7 +596,7 @@ fn step_18() -> Unit raise {
   sc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. SC R x y ==> SC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. SC R x y ==> SC S x y)",
       ),
       t36,
     ),
@@ -622,7 +622,7 @@ fn step_19() -> Unit raise {
   )
   sc_closed_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. (SC R = R) <=> !x y. R x y ==> R y x"),
+      @parser.parse_term("forall R:A->A->bool. (SC R = R) <=> forall x y. R x y ==> R y x"),
       t38,
     ),
   )
@@ -642,7 +642,7 @@ pub fn sc_closed() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t39 = @simp.rewrite_tac(@list.List([sc_closed(), sc_sym()]))
   sc_idemp_c.set(
-    @tactics.prove(@parser.parse_term("!R:A->A->bool. SC(SC R) = SC R"), t39),
+    @tactics.prove(@parser.parse_term("forall R:A->A->bool. SC(SC R) = SC R"), t39),
   )
 }
 
@@ -661,7 +661,7 @@ fn step_21() -> Unit raise {
   let t40 = @meson.meson_tac(@list.List([sc_explicit()]))
   sc_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. (!x. R x x) ==> (!x. SC R x x)"),
+      @parser.parse_term("forall R:A->A->bool. (forall x. R x x) ==> (forall x. SC R x x)"),
       t40,
     ),
   )
@@ -708,7 +708,7 @@ pub fn tc_cases() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let (tc_rules, tc_induct, tc_cases) = @ind_defs.new_inductive_definition(
     @parser.parse_term(
-      "(!x y. R x y ==> TC R x y) /\\\n    (!(x:A) y z. TC R x y /\\ TC R y z ==> TC R x z)",
+      "(forall x y. R x y ==> TC R x y) /\\\n    (forall(x:A) y z. TC R x y /\\ TC R y z ==> TC R x z)",
     ),
   )
   tc_rules_c.set(tc_rules)
@@ -722,7 +722,7 @@ fn step_23() -> Unit raise {
   let t41 = @simp.rewrite_tac(@list.List([tc_rules()]))
   tc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> TC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> TC R x y"),
       t41,
     ),
   )
@@ -744,7 +744,7 @@ fn step_24() -> Unit raise {
   tc_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. TC R x y /\\ TC R y z ==> TC R x z",
+        "forall(R:A->A->bool) x y z. TC R x y /\\ TC R y z ==> TC R x z",
       ),
       t42,
     ),
@@ -778,7 +778,7 @@ fn step_25() -> Unit raise {
   tc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. TC R x y ==> TC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. TC R x y ==> TC S x y)",
       ),
       t45,
     ),
@@ -824,7 +824,7 @@ fn step_26() -> Unit raise {
   tc_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (TC R = R) <=> !x y z. R x y /\\ R y z ==> R x z",
+        "forall R:A->A->bool. (TC R = R) <=> forall x y z. R x y /\\ R y z ==> R x z",
       ),
       t51,
     ),
@@ -845,7 +845,7 @@ pub fn tc_closed() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t52 = @simp.rewrite_tac(@list.List([tc_closed(), tc_trans()]))
   tc_idemp_c.set(
-    @tactics.prove(@parser.parse_term("!R:A->A->bool. TC(TC R) = TC R"), t52),
+    @tactics.prove(@parser.parse_term("forall R:A->A->bool. TC(TC R) = TC R"), t52),
   )
 }
 
@@ -864,7 +864,7 @@ fn step_28() -> Unit raise {
   let t53 = @meson.meson_tac(@list.List([tc_inc()]))
   tc_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. (!x. R x x) ==> (!x. TC R x x)"),
+      @parser.parse_term("forall R:A->A->bool. (forall x. R x x) ==> (forall x. TC R x x)"),
       t53,
     ),
   )
@@ -894,7 +894,7 @@ fn step_29() -> Unit raise {
   tc_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (!x y. R x y ==> R y x) ==> (!x y. TC R x y ==> TC R y x)",
+        "forall R:A->A->bool. (forall x y. R x y ==> R y x) ==> (forall x y. TC R x y ==> TC R y x)",
       ),
       t56,
     ),
@@ -922,7 +922,7 @@ fn step_30() -> Unit raise {
   )
   rc_sc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. RC(SC R) = SC(RC R)"),
+      @parser.parse_term("forall R:A->A->bool. RC(SC R) = SC(RC R)"),
       t58,
     ),
   )
@@ -943,7 +943,7 @@ fn step_31() -> Unit raise {
   let t59 = @simp.rewrite_tac(@list.List([rc_sc()]))
   sc_rc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. SC(RC R) = RC(SC R)"),
+      @parser.parse_term("forall R:A->A->bool. SC(RC R) = RC(SC R)"),
       t59,
     ),
   )
@@ -981,7 +981,7 @@ fn step_32() -> Unit raise {
   )
   rc_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. RC(TC R) = TC(RC R)"),
+      @parser.parse_term("forall R:A->A->bool. RC(TC R) = TC(RC R)"),
       t65,
     ),
   )
@@ -1002,7 +1002,7 @@ fn step_33() -> Unit raise {
   let t66 = @simp.rewrite_tac(@list.List([rc_tc()]))
   tc_rc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. TC(RC R) = RC(TC R)"),
+      @parser.parse_term("forall R:A->A->bool. TC(RC R) = RC(TC R)"),
       t66,
     ),
   )
@@ -1027,7 +1027,7 @@ fn step_34() -> Unit raise {
   )
   tc_sc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y"),
       t68,
     ),
   )
@@ -1048,7 +1048,7 @@ fn step_35() -> Unit raise {
   let t69 = @simp.rewrite_tac(@list.List([tc_sc()]))
   sc_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. SC(TC R) x y ==> TC(SC R) x y"),
       t69,
     ),
   )
@@ -1070,7 +1070,7 @@ fn step_36() -> Unit raise {
   tc_trans_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. TC R x y /\\ R y z ==> TC R x z",
+        "forall(R:A->A->bool) x y z. TC R x y /\\ R y z ==> TC R x z",
       ),
       t70,
     ),
@@ -1093,7 +1093,7 @@ fn step_37() -> Unit raise {
   tc_trans_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. R x y /\\ TC R y z ==> TC R x z",
+        "forall(R:A->A->bool) x y z. R x y /\\ TC R y z ==> TC R x z",
       ),
       t71,
     ),
@@ -1125,7 +1125,7 @@ fn step_38() -> Unit raise {
   tc_cases_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. TC R x y /\\ R y z)",
+        "forall(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. TC R x y /\\ R y z)",
       ),
       t75,
     ),
@@ -1157,7 +1157,7 @@ fn step_39() -> Unit raise {
   tc_cases_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. R x y /\\ TC R y z)",
+        "forall(R:A->A->bool) x z. TC R x z <=> R x z \\/ (?y. R x y /\\ TC R y z)",
       ),
       t79,
     ),
@@ -1183,7 +1183,7 @@ fn step_40() -> Unit raise {
     t85,
   ])
   let t83 = @tactics.subgoal_then(
-    @parser.parse_term("!y:A z. TC(R) y z ==> !x:A. P x y ==> P x z"),
+    @parser.parse_term("forall y:A z. TC(R) y z ==> forall x:A. P x y ==> P x z"),
     fn(
       x80 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1244,7 +1244,7 @@ fn step_40() -> Unit raise {
   tc_induct_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x y z. P x y /\\ R y z ==> P x z) ==>\n            (!x y. TC R x y ==> P x y)",
+        "forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x y z. P x y /\\ R y z ==> P x z) ==>\n            (forall x y. TC R x y ==> P x y)",
       ),
       t87,
     ),
@@ -1270,7 +1270,7 @@ fn step_41() -> Unit raise {
     t93,
   ])
   let t91 = @tactics.subgoal_then(
-    @parser.parse_term("!x:A y. TC(R) x y ==> !z:A. P y z ==> P x z"),
+    @parser.parse_term("forall x:A y. TC(R) x y ==> forall z:A. P y z ==> P x z"),
     fn(
       x88 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1331,7 +1331,7 @@ fn step_41() -> Unit raise {
   tc_induct_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x z. (?y. R x y /\\ P y z) ==> P x z) ==>\n            (!x y. TC R x y ==> P x y)",
+        "forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x z. (?y. R x y /\\ P y z) ==> P x z) ==>\n            (forall x y. TC R x y ==> P x y)",
       ),
       t95,
     ),
@@ -1448,7 +1448,7 @@ fn step_42() -> Unit raise {
   )
   wf_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. WF(TC R) <=> WF(R)"),
+      @parser.parse_term("forall R:A->A->bool. WF(TC R) <=> WF(R)"),
       t108,
     ),
   )
@@ -1487,7 +1487,7 @@ fn step_44() -> Unit raise {
   let t110 = @tactics.then_tac(@simp.rewrite_tac(@list.List([rsc()])), t109)
   rsc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> RSC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> RSC R x y"),
       t110,
     ),
   )
@@ -1507,7 +1507,7 @@ pub fn rsc_inc() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t111 = @simp.rewrite_tac(@list.List([rsc(), rc_refl()]))
   rsc_refl_c.set(
-    @tactics.prove(@parser.parse_term("!(R:A->A->bool) x. RSC R x x"), t111),
+    @tactics.prove(@parser.parse_term("forall(R:A->A->bool) x. RSC R x x"), t111),
   )
 }
 
@@ -1526,7 +1526,7 @@ fn step_46() -> Unit raise {
   let t112 = @simp.rewrite_tac(@list.List([rsc(), rc_sc(), sc_sym()]))
   rsc_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. RSC R x y ==> RSC R y x"),
+      @parser.parse_term("forall(R:A->A->bool) x y. RSC R x y ==> RSC R y x"),
       t112,
     ),
   )
@@ -1550,7 +1550,7 @@ fn step_47() -> Unit raise {
   rsc_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y. RSC R x y <=> (x = y) \\/ R x y \\/ R y x",
+        "forall(R:A->A->bool) x y. RSC R x y <=> (x = y) \\/ R x y \\/ R y x",
       ),
       t113,
     ),
@@ -1577,7 +1577,7 @@ fn step_48() -> Unit raise {
   rsc_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x. P x x) /\\\n        (!x y. P x y ==> P y x)\n        ==>  !x y. RSC R x y ==> P x y",
+        "forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x. P x x) /\\\n        (forall x y. P x y ==> P y x)\n        ==>  forall x y. RSC R x y ==> P x y",
       ),
       t115,
     ),
@@ -1601,7 +1601,7 @@ fn step_49() -> Unit raise {
   rsc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. RSC R x y ==> RSC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. RSC R x y ==> RSC S x y)",
       ),
       t117,
     ),
@@ -1630,7 +1630,7 @@ fn step_50() -> Unit raise {
   rsc_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (RSC R = R) <=> (!x. R x x) /\\ (!x y. R x y ==> R y x)",
+        "forall R:A->A->bool. (RSC R = R) <=> (forall x. R x x) /\\ (forall x y. R x y ==> R y x)",
       ),
       t119,
     ),
@@ -1654,7 +1654,7 @@ fn step_51() -> Unit raise {
   )
   rsc_idemp_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. RSC(RSC R) = RSC R"),
+      @parser.parse_term("forall R:A->A->bool. RSC(RSC R) = RSC R"),
       t120,
     ),
   )
@@ -1693,7 +1693,7 @@ fn step_53() -> Unit raise {
   let t122 = @tactics.then_tac(@simp.rewrite_tac(@list.List([rtc()])), t121)
   rtc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> RTC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> RTC R x y"),
       t122,
     ),
   )
@@ -1713,7 +1713,7 @@ pub fn rtc_inc() -> @kernel.Thm {
 fn step_54() -> Unit raise {
   let t123 = @simp.rewrite_tac(@list.List([rtc(), rc_refl()]))
   rtc_refl_c.set(
-    @tactics.prove(@parser.parse_term("!(R:A->A->bool) x. RTC R x x"), t123),
+    @tactics.prove(@parser.parse_term("forall(R:A->A->bool) x. RTC R x x"), t123),
   )
 }
 
@@ -1733,7 +1733,7 @@ fn step_55() -> Unit raise {
   rtc_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. RTC R x y /\\ RTC R y z ==> RTC R x z",
+        "forall(R:A->A->bool) x y z. RTC R x y /\\ RTC R y z ==> RTC R x z",
       ),
       t124,
     ),
@@ -1756,7 +1756,7 @@ fn step_56() -> Unit raise {
   rtc_rules_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool).\n        (!x y. R x y ==> RTC R x y) /\\\n        (!x. RTC R x x) /\\\n        (!x y z. RTC R x y /\\ RTC R y z ==> RTC R x z)",
+        "forall(R:A->A->bool).\n        (forall x y. R x y ==> RTC R x y) /\\\n        (forall x. RTC R x x) /\\\n        (forall x y z. RTC R x y /\\ RTC R y z ==> RTC R x z)",
       ),
       t125,
     ),
@@ -1783,7 +1783,7 @@ fn step_57() -> Unit raise {
   rtc_trans_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. RTC R x y /\\ R y z ==> RTC R x z",
+        "forall(R:A->A->bool) x y z. RTC R x y /\\ R y z ==> RTC R x z",
       ),
       t127,
     ),
@@ -1810,7 +1810,7 @@ fn step_58() -> Unit raise {
   rtc_trans_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. R x y /\\ RTC R y z ==> RTC R x z",
+        "forall(R:A->A->bool) x y z. R x y /\\ RTC R y z ==> RTC R x z",
       ),
       t129,
     ),
@@ -1837,7 +1837,7 @@ fn step_59() -> Unit raise {
   rtc_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ RTC R y z",
+        "forall(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ RTC R y z",
       ),
       t131,
     ),
@@ -1864,7 +1864,7 @@ fn step_60() -> Unit raise {
   rtc_cases_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ R y z",
+        "forall(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. RTC R x y /\\ R y z",
       ),
       t133,
     ),
@@ -1891,7 +1891,7 @@ fn step_61() -> Unit raise {
   rtc_cases_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. R x y /\\ RTC R y z",
+        "forall(R:A->A->bool) x z. RTC R x z <=> (x = z) \\/ ?y. R x y /\\ RTC R y z",
       ),
       t135,
     ),
@@ -1933,7 +1933,7 @@ fn step_62() -> Unit raise {
   rtc_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x. P x x) /\\\n        (!x y z. P x y /\\ P y z ==> P x z)\n        ==> !x y. RTC R x y ==> P x y",
+        "forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x. P x x) /\\\n        (forall x y z. P x y /\\ P y z ==> P x z)\n        ==> forall x y. RTC R x y ==> P x y",
       ),
       t140,
     ),
@@ -1975,7 +1975,7 @@ fn step_63() -> Unit raise {
   rtc_induct_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x. P x x) /\\\n        (!x y z. P x y /\\ R y z ==> P x z)\n        ==> !x y. RTC R x y ==> P x y",
+        "forall(R:A->A->bool) P.\n        (forall x. P x x) /\\\n        (forall x y z. P x y /\\ R y z ==> P x z)\n        ==> forall x y. RTC R x y ==> P x y",
       ),
       t145,
     ),
@@ -2017,7 +2017,7 @@ fn step_64() -> Unit raise {
   rtc_induct_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x. P x x) /\\\n        (!x y z. R x y /\\ P y z ==> P x z)\n        ==> !x y. RTC R x y ==> P x y",
+        "forall(R:A->A->bool) P.\n        (forall x. P x x) /\\\n        (forall x y z. R x y /\\ P y z ==> P x z)\n        ==> forall x y. RTC R x y ==> P x y",
       ),
       t150,
     ),
@@ -2041,7 +2041,7 @@ fn step_65() -> Unit raise {
   rtc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. RTC R x y ==> RTC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. RTC R x y ==> RTC S x y)",
       ),
       t152,
     ),
@@ -2068,7 +2068,7 @@ fn step_66() -> Unit raise {
   rtc_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (RTC R = R) <=> (!x. R x x) /\\\n                                  (!x y z. R x y /\\ R y z ==> R x z)",
+        "forall R:A->A->bool. (RTC R = R) <=> (forall x. R x x) /\\\n                                  (forall x y z. R x y /\\ R y z ==> R x z)",
       ),
       t154,
     ),
@@ -2092,7 +2092,7 @@ fn step_67() -> Unit raise {
   )
   rtc_idemp_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. RTC(RTC R) = RTC R"),
+      @parser.parse_term("forall R:A->A->bool. RTC(RTC R) = RTC R"),
       t155,
     ),
   )
@@ -2115,7 +2115,7 @@ fn step_68() -> Unit raise {
   rtc_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (!x y. R x y ==> R y x) ==> (!x y. RTC R x y ==> RTC R y x)",
+        "forall R:A->A->bool. (forall x y. R x y ==> R y x) ==> (forall x y. RTC R x y ==> RTC R y x)",
       ),
       t157,
     ),
@@ -2202,7 +2202,7 @@ fn step_71() -> Unit raise {
   )
   tc_rtc_cases_r_c.set(
     @tactics.prove(
-      @parser.parse_term("!R x z. TC R x z <=> ?y. R x y /\\ RTC R y z"),
+      @parser.parse_term("forall R x z. TC R x z <=> ?y. R x y /\\ RTC R y z"),
       t165,
     ),
   )
@@ -2227,7 +2227,7 @@ fn step_72() -> Unit raise {
   )
   tc_tc_rtc_cases_c.set(
     @tactics.prove(
-      @parser.parse_term("!R x z. TC R x z <=> ?y. TC R x y /\\ RTC R y z"),
+      @parser.parse_term("forall R x z. TC R x z <=> ?y. TC R x y /\\ RTC R y z"),
       t167,
     ),
   )
@@ -2254,7 +2254,7 @@ fn step_73() -> Unit raise {
   )
   tc_rtc_tc_cases_c.set(
     @tactics.prove(
-      @parser.parse_term("!R x z. TC R x z <=> ?y. RTC R x y /\\ TC R y z"),
+      @parser.parse_term("forall R x z. TC R x z <=> ?y. RTC R x y /\\ TC R y z"),
       t169,
     ),
   )
@@ -2292,7 +2292,7 @@ fn step_74() -> Unit raise {
   )
   rtc_ne_imp_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R x y. RTC R x y /\\ ~(x = y) ==> TC R x y"),
+      @parser.parse_term("forall R x y. RTC R x y /\\ ~(x = y) ==> TC R x y"),
       t173,
     ),
   )
@@ -2331,7 +2331,7 @@ fn step_76() -> Unit raise {
   let t175 = @tactics.then_tac(@simp.rewrite_tac(@list.List([stc()])), t174)
   stc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> STC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> STC R x y"),
       t175,
     ),
   )
@@ -2353,7 +2353,7 @@ fn step_77() -> Unit raise {
   let t177 = @tactics.then_tac(@simp.rewrite_tac(@list.List([stc()])), t176)
   stc_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. STC R x y ==> STC R y x"),
+      @parser.parse_term("forall(R:A->A->bool) x y. STC R x y ==> STC R y x"),
       t177,
     ),
   )
@@ -2375,7 +2375,7 @@ fn step_78() -> Unit raise {
   stc_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. STC R x y /\\ STC R y z ==> STC R x z",
+        "forall(R:A->A->bool) x y z. STC R x y /\\ STC R y z ==> STC R x z",
       ),
       t178,
     ),
@@ -2399,7 +2399,7 @@ fn step_79() -> Unit raise {
   stc_trans_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. STC R x y /\\ R y z ==> STC R x z",
+        "forall(R:A->A->bool) x y z. STC R x y /\\ R y z ==> STC R x z",
       ),
       t180,
     ),
@@ -2423,7 +2423,7 @@ fn step_80() -> Unit raise {
   stc_trans_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. R x y /\\ STC R y z ==> STC R x z",
+        "forall(R:A->A->bool) x y z. R x y /\\ STC R y z ==> STC R x z",
       ),
       t182,
     ),
@@ -2449,7 +2449,7 @@ fn step_81() -> Unit raise {
   stc_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ STC R y z",
+        "forall(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ STC R y z",
       ),
       t184,
     ),
@@ -2475,7 +2475,7 @@ fn step_82() -> Unit raise {
   stc_cases_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ R y z",
+        "forall(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. STC R x y /\\ R y z",
       ),
       t186,
     ),
@@ -2501,7 +2501,7 @@ fn step_83() -> Unit raise {
   stc_cases_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. R x y /\\ STC R y z",
+        "forall(R:A->A->bool) x z. STC R x z <=> R x z \\/ STC R z x \\/\n                                      ?y. R x y /\\ STC R y z",
       ),
       t188,
     ),
@@ -2539,7 +2539,7 @@ fn step_84() -> Unit raise {
   stc_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x y. P x y ==> P y x) /\\\n        (!x y z. P x y /\\ P y z ==> P x z) ==>\n                !x y. STC R x y ==> P x y",
+        "forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x y. P x y ==> P y x) /\\\n        (forall x y z. P x y /\\ P y z ==> P x z) ==>\n                forall x y. STC R x y ==> P x y",
       ),
       t192,
     ),
@@ -2563,7 +2563,7 @@ fn step_85() -> Unit raise {
   stc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. STC R x y ==> STC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. STC R x y ==> STC S x y)",
       ),
       t194,
     ),
@@ -2676,7 +2676,7 @@ fn step_86() -> Unit raise {
   stc_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (STC R = R) <=> (!x y. R x y ==> R y x) /\\\n                                  (!x y z. R x y /\\ R y z ==> R x z)",
+        "forall R:A->A->bool. (STC R = R) <=> (forall x y. R x y ==> R y x) /\\\n                                  (forall x y z. R x y /\\ R y z ==> R x z)",
       ),
       t204,
     ),
@@ -2700,7 +2700,7 @@ fn step_87() -> Unit raise {
   )
   stc_idemp_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. STC(STC R) = STC R"),
+      @parser.parse_term("forall R:A->A->bool. STC(STC R) = STC R"),
       t205,
     ),
   )
@@ -2721,7 +2721,7 @@ fn step_88() -> Unit raise {
   let t206 = @meson.meson_tac(@list.List([stc_inc()]))
   stc_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. (!x. R x x) ==> !x. STC R x x"),
+      @parser.parse_term("forall R:A->A->bool. (forall x. R x x) ==> forall x. STC R x x"),
       t206,
     ),
   )
@@ -2762,7 +2762,7 @@ fn step_90() -> Unit raise {
   let t208 = @tactics.then_tac(@simp.rewrite_tac(@list.List([rstc()])), t207)
   rstc_inc_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. R x y ==> RSTC R x y"),
+      @parser.parse_term("forall(R:A->A->bool) x y. R x y ==> RSTC R x y"),
       t208,
     ),
   )
@@ -2782,7 +2782,7 @@ pub fn rstc_inc() -> @kernel.Thm {
 fn step_91() -> Unit raise {
   let t209 = @simp.rewrite_tac(@list.List([rstc(), rc_refl()]))
   rstc_refl_c.set(
-    @tactics.prove(@parser.parse_term("!(R:A->A->bool) x. RSTC R x x"), t209),
+    @tactics.prove(@parser.parse_term("forall(R:A->A->bool) x. RSTC R x x"), t209),
   )
 }
 
@@ -2802,7 +2802,7 @@ fn step_92() -> Unit raise {
   let t211 = @tactics.then_tac(@simp.rewrite_tac(@list.List([rstc()])), t210)
   rstc_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("!(R:A->A->bool) x y. RSTC R x y ==> RSTC R y x"),
+      @parser.parse_term("forall(R:A->A->bool) x y. RSTC R x y ==> RSTC R y x"),
       t211,
     ),
   )
@@ -2824,7 +2824,7 @@ fn step_93() -> Unit raise {
   rstc_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z",
+        "forall(R:A->A->bool) x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z",
       ),
       t212,
     ),
@@ -2849,7 +2849,7 @@ fn step_94() -> Unit raise {
   rstc_rules_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool).\n        (!x y. R x y ==> RSTC R x y) /\\\n        (!x. RSTC R x x) /\\\n        (!x y. RSTC R x y ==> RSTC R y x) /\\\n        (!x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z)",
+        "forall(R:A->A->bool).\n        (forall x y. R x y ==> RSTC R x y) /\\\n        (forall x. RSTC R x x) /\\\n        (forall x y. RSTC R x y ==> RSTC R y x) /\\\n        (forall x y z. RSTC R x y /\\ RSTC R y z ==> RSTC R x z)",
       ),
       t213,
     ),
@@ -2876,7 +2876,7 @@ fn step_95() -> Unit raise {
   rstc_trans_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. RSTC R x y /\\ R y z ==> RSTC R x z",
+        "forall(R:A->A->bool) x y z. RSTC R x y /\\ R y z ==> RSTC R x z",
       ),
       t215,
     ),
@@ -2903,7 +2903,7 @@ fn step_96() -> Unit raise {
   rstc_trans_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x y z. R x y /\\ RSTC R y z ==> RSTC R x z",
+        "forall(R:A->A->bool) x y z. R x y /\\ RSTC R y z ==> RSTC R x z",
       ),
       t217,
     ),
@@ -2934,7 +2934,7 @@ fn step_97() -> Unit raise {
   rstc_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. RSTC R x y /\\ RSTC R y z",
+        "forall(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. RSTC R x y /\\ RSTC R y z",
       ),
       t220,
     ),
@@ -2965,7 +2965,7 @@ fn step_98() -> Unit raise {
   rstc_cases_l_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                     ?y. RSTC R x y /\\ R y z",
+        "forall(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                     ?y. RSTC R x y /\\ R y z",
       ),
       t223,
     ),
@@ -2996,7 +2996,7 @@ fn step_99() -> Unit raise {
   rstc_cases_r_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. R x y /\\ RSTC R y z",
+        "forall(R:A->A->bool) x z. RSTC R x z <=> (x = z) \\/ R x z \\/ RSTC R z x \\/\n                                       ?y. R x y /\\ RSTC R y z",
       ),
       t226,
     ),
@@ -3042,7 +3042,7 @@ fn step_100() -> Unit raise {
   rstc_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) P.\n        (!x y. R x y ==> P x y) /\\\n        (!x. P x x) /\\\n        (!x y. P x y ==> P y x) /\\\n        (!x y z. P x y /\\ P y z ==> P x z)\n        ==> !x y. RSTC R x y ==> P x y",
+        "forall(R:A->A->bool) P.\n        (forall x y. R x y ==> P x y) /\\\n        (forall x. P x x) /\\\n        (forall x y. P x y ==> P y x) /\\\n        (forall x y z. P x y /\\ P y z ==> P x z)\n        ==> forall x y. RSTC R x y ==> P x y",
       ),
       t232,
     ),
@@ -3066,7 +3066,7 @@ fn step_101() -> Unit raise {
   rstc_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(R:A->A->bool) S.\n        (!x y. R x y ==> S x y) ==>\n        (!x y. RSTC R x y ==> RSTC S x y)",
+        "forall(R:A->A->bool) S.\n        (forall x y. R x y ==> S x y) ==>\n        (forall x y. RSTC R x y ==> RSTC S x y)",
       ),
       t234,
     ),
@@ -3099,7 +3099,7 @@ fn step_102() -> Unit raise {
   rstc_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool. (RSTC R = R) <=> (!x. R x x) /\\\n                                   (!x y. R x y ==> R y x) /\\\n                                   (!x y z. R x y /\\ R y z ==> R x z)",
+        "forall R:A->A->bool. (RSTC R = R) <=> (forall x. R x x) /\\\n                                   (forall x y. R x y ==> R y x) /\\\n                                   (forall x y z. R x y /\\ R y z ==> R x z)",
       ),
       t239,
     ),
@@ -3123,7 +3123,7 @@ fn step_103() -> Unit raise {
   )
   rstc_idemp_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. RSTC(RSTC R) = RSTC R"),
+      @parser.parse_term("forall R:A->A->bool. RSTC(RSTC R) = RSTC R"),
       t240,
     ),
   )
@@ -3144,7 +3144,7 @@ fn step_104() -> Unit raise {
   let t241 = @simp.rewrite_tac(@list.List([rsc(), rc_sc(), sc_inc()]))
   rsc_inc_rc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. RC R x y ==> RSC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. RC R x y ==> RSC R x y"),
       t241,
     ),
   )
@@ -3165,7 +3165,7 @@ fn step_105() -> Unit raise {
   let t242 = @simp.rewrite_tac(@list.List([rsc(), rc_inc()]))
   rsc_inc_sc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. SC R x y ==> RSC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. SC R x y ==> RSC R x y"),
       t242,
     ),
   )
@@ -3186,7 +3186,7 @@ fn step_106() -> Unit raise {
   let t243 = @simp.rewrite_tac(@list.List([rtc(), rc_tc(), tc_inc()]))
   rtc_inc_rc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. RC R x y ==> RTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. RC R x y ==> RTC R x y"),
       t243,
     ),
   )
@@ -3207,7 +3207,7 @@ fn step_107() -> Unit raise {
   let t244 = @simp.rewrite_tac(@list.List([rtc(), rc_inc()]))
   rtc_inc_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. TC R x y ==> RTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. TC R x y ==> RTC R x y"),
       t244,
     ),
   )
@@ -3228,7 +3228,7 @@ fn step_108() -> Unit raise {
   let t245 = @simp.rewrite_tac(@list.List([stc(), tc_inc()]))
   stc_inc_sc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. SC R x y ==> STC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. SC R x y ==> STC R x y"),
       t245,
     ),
   )
@@ -3250,7 +3250,7 @@ fn step_109() -> Unit raise {
   let t247 = @tactics.then_tac(@simp.rewrite_tac(@list.List([stc()])), t246)
   stc_inc_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. TC R x y ==> STC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. TC R x y ==> STC R x y"),
       t247,
     ),
   )
@@ -3273,7 +3273,7 @@ fn step_110() -> Unit raise {
   )
   rstc_inc_rc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. RC R x y ==> RSTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. RC R x y ==> RSTC R x y"),
       t248,
     ),
   )
@@ -3296,7 +3296,7 @@ fn step_111() -> Unit raise {
   )
   rstc_inc_sc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. SC R x y ==> RSTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. SC R x y ==> RSTC R x y"),
       t249,
     ),
   )
@@ -3321,7 +3321,7 @@ fn step_112() -> Unit raise {
   )
   rstc_inc_tc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. TC R x y ==> RSTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. TC R x y ==> RSTC R x y"),
       t251,
     ),
   )
@@ -3342,7 +3342,7 @@ fn step_113() -> Unit raise {
   let t252 = @simp.rewrite_tac(@list.List([rsc(), rstc(), rc_tc(), tc_inc()]))
   rstc_inc_rsc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. RSC R x y ==> RSTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. RSC R x y ==> RSTC R x y"),
       t252,
     ),
   )
@@ -3367,7 +3367,7 @@ fn step_114() -> Unit raise {
   )
   rstc_inc_rtc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. RTC R x y ==> RSTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. RTC R x y ==> RSTC R x y"),
       t254,
     ),
   )
@@ -3390,7 +3390,7 @@ fn step_115() -> Unit raise {
   )
   rstc_inc_stc_c.set(
     @tactics.prove(
-      @parser.parse_term("!R:A->A->bool. !x y. STC R x y ==> RSTC R x y"),
+      @parser.parse_term("forall R:A->A->bool. forall x y. STC R x y ==> RSTC R x y"),
       t255,
     ),
   )
@@ -3696,7 +3696,7 @@ fn step_127() -> Unit raise {
   relpow_m_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n x:A y. RELPOW (m + n) R x y <=> ?z. RELPOW m R x z /\\ RELPOW n R z y",
+        "forall m n x:A y. RELPOW (m + n) R x y <=> ?z. RELPOW m R x z /\\ RELPOW n R z y",
       ),
       t276,
     ),
@@ -3747,7 +3747,7 @@ fn step_128() -> Unit raise {
   )
   rtc_relpow_c.set(
     @tactics.prove(
-      @parser.parse_term("!R (x:A) y. RTC R x y <=> ?n. RELPOW n R x y"),
+      @parser.parse_term("forall R (x:A) y. RTC R x y <=> ?n. RELPOW n R x y"),
       t285,
     ),
   )
@@ -3787,7 +3787,7 @@ fn step_129() -> Unit raise {
   )
   tc_relpow_c.set(
     @tactics.prove(
-      @parser.parse_term("!R (x:A) y. TC R x y <=> ?n. RELPOW (SUC n) R x y"),
+      @parser.parse_term("forall R (x:A) y. TC R x y <=> ?n. RELPOW (SUC n) R x y"),
       t291,
     ),
   )
@@ -3989,7 +3989,7 @@ fn step_130() -> Unit raise {
   relpow_sequence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R n x y. RELPOW n R x y <=> ?f. (f(0) = x:A) /\\ (f(n) = y) /\\\n                                    !i. i < n ==> R (f i) (f(SUC i))",
+        "forall R n x y. RELPOW n R x y <=> ?f. (f(0) = x:A) /\\ (f(n) = y) /\\\n                                    forall i. i < n ==> R (f i) (f(SUC i))",
       ),
       t324,
     ),

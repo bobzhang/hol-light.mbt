@@ -43,8 +43,8 @@ test "impconv matches impconv.ml" {
     tac : (@tactics.Goal) -> @tactics.Goalstate raise,
   ) => log.attempt(name, () => sthm(@tactics.prove(w, tac)))
   let (ax, ax2, px) = try {
-    let ax = @kernel.assume_rule(tm("!x:bool. P x ==> (f x <=> g x)"))
-    let ax2 = @kernel.assume_rule(tm("!x:bool. Q x ==> (g x <=> h x)"))
+    let ax = @kernel.assume_rule(tm("forall x:bool. P x ==> (f x <=> g x)"))
+    let ax2 = @kernel.assume_rule(tm("forall x:bool. Q x ==> (g x <=> h x)"))
     let px = @kernel.assume_rule(tm("P (a:bool):bool"))
     (ax, ax2, px)
   } catch {
@@ -98,7 +98,7 @@ test "impconv matches impconv.ml" {
     st("hint_exists_none", goal("?x:bool. P x"), @impconv.hint_exists_tac)
     st(
       "imp_rewrite_forall",
-      goal("!y:bool. P y ==> f y"),
+      goal("forall y:bool. P y ==> f y"),
       @impconv.imp_rewrite_tac(ths([ax])),
     )
     st(
@@ -108,7 +108,7 @@ test "impconv matches impconv.ml" {
     )
     pv(
       "prove_imp_rewrite",
-      tm("(!x:bool. P x ==> (f x <=> g x)) ==> P a ==> g a ==> f a"),
+      tm("(forall x:bool. P x ==> (f x <=> g x)) ==> P a ==> g a ==> f a"),
       @tactics.then_tac(
         @tactics.disch_then(th => @impconv.imp_rewrite_tac(ths([th]))),
         @itab.itaut_tac,
@@ -386,9 +386,9 @@ test "impconv matches impconv.ml" {
       #|target_rewrite ! vsubst: Bad substitution list
       #|hint_exists = []
       #|hint_exists_none ! Unchanged
-      #|imp_rewrite_forall = [[] ?- (#!:fun(fun(bool,bool),bool) (\y:bool. ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) y:bool)) (g:fun(bool,bool) y:bool))))]
+      #|imp_rewrite_forall = [[] ?- (#forall:fun(fun(bool,bool),bool) (\y:bool. ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) y:bool)) (g:fun(bool,bool) y:bool))))]
       #|imp_rewrite_exists = [[] ?- (#?:fun(fun(bool,bool),bool) (\y:bool. ((#/\:fun(bool,fun(bool,bool)) (g:fun(bool,bool) y:bool)) (P:fun(bool,bool) y:bool))))]
-      #|prove_imp_rewrite =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(bool,bool),bool) (\x:bool. ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) x:bool)) ((#=:fun(bool,fun(bool,bool)) (f:fun(bool,bool) x:bool)) (g:fun(bool,bool) x:bool)))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) a:bool)) ((#==>:fun(bool,fun(bool,bool)) (g:fun(bool,bool) a:bool)) (f:fun(bool,bool) a:bool))))
+      #|prove_imp_rewrite =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(bool,bool),bool) (\x:bool. ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) x:bool)) ((#=:fun(bool,fun(bool,bool)) (f:fun(bool,bool) x:bool)) (g:fun(bool,bool) x:bool)))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) a:bool)) ((#==>:fun(bool,fun(bool,bool)) (g:fun(bool,bool) a:bool)) (f:fun(bool,bool) a:bool))))
       #|case_rewrite_conj = [[] ?- ((#==>:fun(bool,fun(bool,bool)) q:bool) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) a:bool)) (g:fun(bool,bool) a:bool))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun(bool,bool) a:bool))) (f:fun(bool,bool) a:bool))))]
       #|Warning: inventing type variables
       #|target_rewrite_hyp ! vsubst: Bad substitution list

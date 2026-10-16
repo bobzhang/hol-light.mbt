@@ -163,6 +163,12 @@ module Main = struct
       (Loader.phrases (Loader.source ~hol target));
     Loader.load_file ~hol ~on_item:(Emit.item ~hand) ~on_phrase:Emit.begin_phrase ~on_exec:Emit.exec_phrases target;
     Emit.output ~source:target ~out:(Filename.concat root out);
+    (* The source oracle still uses upstream notation. Convert only HOL-input
+       literals in the emitted program, before it is compiled or checked. *)
+    let migrate = Filename.concat root "tools/hol_notation.py" in
+    if Sys.command ("python3 " ^ Filename.quote migrate ^ " " ^
+                    Filename.quote (Filename.concat root out)) <> 0 then
+      failwith ("HOL notation migration failed: " ^ out);
     Printf.printf "wrote %s; %d unsupported items\n" out !Emit.errors
 
   (* Several files in one session (tools/ocaml_ref/batch.py). The plan is a

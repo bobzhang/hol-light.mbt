@@ -225,7 +225,7 @@ pub fn poly_mul_clauses() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t21 = @simp.asm_rewrite_tac(@list.List([@lists.not_cons_nil(), @lists.hd(), @lists.tl(), poly(), @complexnumbers.complex_add_rid()]))
   let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([poly_add(), poly(), @complexnumbers.complex_add_lid()]))), @lists.list_induct_tac), t21), @complexnumbers.simple_complex_arith_tac)
-  poly_add_v1_c.set(@tactics.prove(@parser.parse_term("!p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x"), t22))
+  poly_add_v1_c.set(@tactics.prove(@parser.parse_term("forall p1 p2 x. poly (p1 ++ p2) x = poly p1 x + poly p2 x"), t22))
 }
 
 ///|
@@ -241,7 +241,7 @@ pub fn poly_add_v1() -> @kernel.Thm {
 /// POLY_CMUL
 fn step_19() -> Unit raise {
   let t23 = @tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([poly(), poly_cmul()]))), @complexnumbers.simple_complex_arith_tac)
-  poly_cmul_v1_c.set(@tactics.prove(@parser.parse_term("!p c x. poly (c ## p) x = c * poly p x"), t23))
+  poly_cmul_v1_c.set(@tactics.prove(@parser.parse_term("forall p c x. poly (c ## p) x = c * poly p x"), t23))
 }
 
 ///|
@@ -257,7 +257,7 @@ pub fn poly_cmul_v1() -> @kernel.Thm {
 /// POLY_NEG
 fn step_20() -> Unit raise {
   let t24 = @tactics.then_tac(@simp.rewrite_tac(@list.List([poly_neg(), poly_cmul_v1()])), @complexnumbers.simple_complex_arith_tac)
-  poly_neg_v1_c.set(@tactics.prove(@parser.parse_term("!p x. poly (neg p) x = --(poly p x)"), t24))
+  poly_neg_v1_c.set(@tactics.prove(@parser.parse_term("forall p x. poly (neg p) x = --(poly p x)"), t24))
 }
 
 ///|
@@ -280,7 +280,7 @@ fn step_21() -> Unit raise {
   let t27 = @tactics.spec_tac(@parser.parse_term("h:complex"), t26)
   let t25 = @simp.rewrite_tac(@list.List([poly_mul(), poly(), @complexnumbers.complex_mul_lzero(), poly_cmul_v1(), poly_add_v1()]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t25), t27), t29), @lists.list_induct_tac), t30), t31), @complexnumbers.simple_complex_arith_tac)
-  poly_mul_v1_c.set(@tactics.prove(@parser.parse_term("!x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x"), t32))
+  poly_mul_v1_c.set(@tactics.prove(@parser.parse_term("forall x p1 p2. poly (p1 ** p2) x = poly p1 x * poly p2 x"), t32))
 }
 
 ///|
@@ -298,7 +298,7 @@ fn step_22() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([poly()]))
   let t33 = @simp.asm_rewrite_tac(@list.List([poly_exp(), @complexnumbers.complex_pow(), poly_mul_v1()]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t33), t34), @complexnumbers.simple_complex_arith_tac)
-  poly_exp_v1_c.set(@tactics.prove(@parser.parse_term("!p n x. poly (p exp n) x = (poly p x) pow n"), t35))
+  poly_exp_v1_c.set(@tactics.prove(@parser.parse_term("forall p n x. poly (p exp n) x = (poly p x) pow n"), t35))
 }
 
 ///|
@@ -314,7 +314,7 @@ pub fn poly_exp_v1() -> @kernel.Thm {
 /// POLY_ADD_RZERO
 fn step_23() -> Unit raise {
   let t36 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_add_v1(), poly(), @complexnumbers.complex_add_rid()]))
-  poly_add_rzero_c.set(@tactics.prove(@parser.parse_term("!p. poly (p ++ []) = poly p"), t36))
+  poly_add_rzero_c.set(@tactics.prove(@parser.parse_term("forall p. poly (p ++ []) = poly p"), t36))
 }
 
 ///|
@@ -330,7 +330,7 @@ pub fn poly_add_rzero() -> @kernel.Thm {
 /// POLY_MUL_ASSOC
 fn step_24() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_mul_v1(), @complexnumbers.complex_mul_assoc()]))
-  poly_mul_assoc_c.set(@tactics.prove(@parser.parse_term("!p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)"), t37))
+  poly_mul_assoc_c.set(@tactics.prove(@parser.parse_term("forall p q r. poly (p ** (q ** r)) = poly ((p ** q) ** r)"), t37))
 }
 
 ///|
@@ -347,7 +347,7 @@ pub fn poly_mul_assoc() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t38 = @simp.asm_rewrite_tac(@list.List([poly_mul_v1(), @arith.add_clauses(), poly_exp(), poly()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_mul_v1()])), @nums.induct_tac), t38), @complexnumbers.simple_complex_arith_tac)
-  poly_exp_add_c.set(@tactics.prove(@parser.parse_term("!d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)"), t39))
+  poly_exp_add_c.set(@tactics.prove(@parser.parse_term("forall d n p. poly(p exp (n + d)) = poly(p exp n ** p exp d)"), t39))
 }
 
 ///|
@@ -381,7 +381,7 @@ fn step_26() -> Unit raise {
   let t40 = @tactics.exists_tac(@parser.parse_term("h:complex"))
   let t57 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@parser.parse_term("[]:complex list"))), t40), t41), t42), t56])
   let t58 = @tactics.thenl(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([]))), t57)
-  poly_linear_rem_c.set(@tactics.prove(@parser.parse_term("!t h. ?q r. CONS h t = [r] ++ [--a; Cx(&1)] ** q"), t58))
+  poly_linear_rem_c.set(@tactics.prove(@parser.parse_term("forall t h. ?q r. CONS h t = [r] ++ [--a; Cx(&1)] ** q"), t58))
 }
 
 ///|
@@ -426,7 +426,7 @@ fn step_27() -> Unit raise {
   let t85 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disj2_tac, @tactics.strip_assume_tac(@bool.spec_all(poly_linear_rem()))), t60), t61), t65), t76), t84, t83])
   let t59 = @list.List([@simp.rewrite_tac(@list.List([poly()])), @tactics.all_tac])
   let t86 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t59), @tactics.eq_tac), @tactics.strip_tac), t85)
-  poly_linear_divides_c.set(@tactics.prove(@parser.parse_term("!a p. (poly p a = Cx(&0)) <=> (p = []) \\/ ?q. p = [--a; Cx(&1)] ** q"), t86))
+  poly_linear_divides_c.set(@tactics.prove(@parser.parse_term("forall a p. (poly p a = Cx(&0)) <=> (p = []) \\/ ?q. p = [--a; Cx(&1)] ** q"), t86))
 }
 
 ///|
@@ -442,9 +442,9 @@ pub fn poly_linear_divides() -> @kernel.Thm {
 /// POLY_LENGTH_MUL
 fn step_28() -> Unit raise {
   let t87 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([poly_cmul(), poly_add_clauses(), @lists.length()])))
-  let lemma = @tactics.prove(@parser.parse_term("!p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)"), t87)
+  let lemma = @tactics.prove(@parser.parse_term("forall p h k a. LENGTH (k ## p ++ CONS h (a ## p)) = SUC(LENGTH p)"), t87)
   let t88 = @simp.rewrite_tac(@list.List([poly_mul(), @lists.not_cons_nil(), lemma]))
-  poly_length_mul_c.set(@tactics.prove(@parser.parse_term("!q. LENGTH([--a; Cx(&1)] ** q) = SUC(LENGTH q)"), t88))
+  poly_length_mul_c.set(@tactics.prove(@parser.parse_term("forall q. LENGTH([--a; Cx(&1)] ** q) = SUC(LENGTH q)"), t88))
 }
 
 ///|
@@ -558,7 +558,7 @@ fn step_29() -> Unit raise {
   let t164 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t90), t163)
   let t89 = @meson.meson_tac(@list.List([]))
   let t165 = @tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@lists.length_eq_nil()])), t89), t164]))
-  poly_roots_index_lemma_c.set(@tactics.prove(@parser.parse_term("!n. !p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. !x. (poly p x = Cx(&0)) ==> ?m. m <= n /\\ (x = i m)"), t165))
+  poly_roots_index_lemma_c.set(@tactics.prove(@parser.parse_term("forall n. forall p. ~(poly p = poly []) /\\ (LENGTH p = n)\n           ==> ?i. forall x. (poly p x = Cx(&0)) ==> ?m. m <= n /\\ (x = i m)"), t165))
 }
 
 ///|
@@ -574,7 +574,7 @@ pub fn poly_roots_index_lemma() -> @kernel.Thm {
 /// POLY_ROOTS_INDEX_LENGTH
 fn step_30() -> Unit raise {
   let t166 = @meson.meson_tac(@list.List([poly_roots_index_lemma()]))
-  poly_roots_index_length_c.set(@tactics.prove(@parser.parse_term("!p. ~(poly p = poly [])\n       ==> ?i. !x. (poly p(x) = Cx(&0)) ==> ?n. n <= LENGTH p /\\ (x = i n)"), t166))
+  poly_roots_index_length_c.set(@tactics.prove(@parser.parse_term("forall p. ~(poly p = poly [])\n       ==> ?i. forall x. (poly p(x) = Cx(&0)) ==> ?n. n <= LENGTH p /\\ (x = i n)"), t166))
 }
 
 ///|
@@ -590,7 +590,7 @@ pub fn poly_roots_index_length() -> @kernel.Thm {
 /// POLY_ROOTS_FINITE_LEMMA
 fn step_31() -> Unit raise {
   let t167 = @meson.meson_tac(@list.List([poly_roots_index_length(), @arith.lt_suc_le()]))
-  poly_roots_finite_lemma_c.set(@tactics.prove(@parser.parse_term("!p. ~(poly p = poly [])\n       ==> ?N i. !x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)"), t167))
+  poly_roots_finite_lemma_c.set(@tactics.prove(@parser.parse_term("forall p. ~(poly p = poly [])\n       ==> ?N i. forall x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)"), t167))
 }
 
 ///|
@@ -607,7 +607,7 @@ pub fn poly_roots_finite_lemma() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   let t192 = @tactics.mp_tac(@bool.spec(@parser.parse_term("y:complex"), @complexnumbers.complex_norm_pos()))
   let t191 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t190 = @tactics.subgoal_then(@parser.parse_term("(!x. norm(x) < abs(a) + norm(x) + &1) /\\\n                (!x y. norm(x) < a ==> norm(x) < abs(a) + norm(y) + &1)"), fn(x187 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t190 = @tactics.subgoal_then(@parser.parse_term("(forall x. norm(x) < abs(a) + norm(x) + &1) /\\\n                (forall x y. norm(x) < a ==> norm(x) < abs(a) + norm(y) + &1)"), fn(x187 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x187
     let t189 = @meson.meson_tac(@list.List([]))
     @tactics.then_tac(@tactics.mp_tac(th), t189)
@@ -635,7 +635,7 @@ fn step_32() -> Unit raise {
   let t168 = @meson.meson_tac(@list.List([]))
   let t169 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.lt()])), t168), @tactics.all_tac])
   let t193 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@class.right_imp_exists_thm()]))), @nums.induct_tac), t169), t170), t177), t180), t181), t185), t186), t190), @tactics.conj_tac), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t191), t192), @calc_rat.real_arith_tac)
-  finite_lemma_c.set(@tactics.prove(@parser.parse_term("!i N P. (!x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. !x. P x ==> norm(x) < a"), t193))
+  finite_lemma_c.set(@tactics.prove(@parser.parse_term("forall i N P. (forall x. P x ==> ?n:num. n < N /\\ (x = i n))\n           ==> ?a. forall x. P x ==> norm(x) < a"), t193))
 }
 
 ///|
@@ -660,7 +660,7 @@ fn step_33() -> Unit raise {
   let t195 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @theorems.left_imp_exists_thm(), @class.not_forall_thm(), poly()]))
   let t194 = @simp.rewrite_tac(@list.List([poly_roots_finite_lemma()]))
   let t203 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t194), t195), t200), t201), t202)
-  poly_roots_finite_c.set(@tactics.prove(@parser.parse_term("!p. ~(poly p = poly []) <=>\n       ?N i. !x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)"), t203))
+  poly_roots_finite_c.set(@tactics.prove(@parser.parse_term("forall p. ~(poly p = poly []) <=>\n       ?N i. forall x. (poly p(x) = Cx(&0)) ==> ?n:num. n < N /\\ (x = i n)"), t203))
 }
 
 ///|
@@ -706,7 +706,7 @@ fn step_34() -> Unit raise {
   }))
   let t204 = @simp.rewrite_tac(@list.List([poly_roots_finite()]))
   let t232 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t204), t208), t211), t214), t215), t216), t217), t218), t221), t231)
-  poly_entire_lemma_c.set(@tactics.prove(@parser.parse_term("!p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])"), t232))
+  poly_entire_lemma_c.set(@tactics.prove(@parser.parse_term("forall p q. ~(poly p = poly []) /\\ ~(poly q = poly [])\n         ==> ~(poly (p ** q) = poly [])"), t232))
 }
 
 ///|
@@ -725,7 +725,7 @@ fn step_35() -> Unit raise {
   let t234 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_mul_v1()])), @tactics.strip_tac), t233)
   let t235 = @list.List([@meson.meson_tac(@list.List([poly_entire_lemma()])), t234])
   let t236 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t235)
-  poly_entire_c.set(@tactics.prove(@parser.parse_term("!p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])"), t236))
+  poly_entire_c.set(@tactics.prove(@parser.parse_term("forall p q. (poly (p ** q) = poly []) <=>\n         (poly p = poly []) \\/ (poly q = poly [])"), t236))
 }
 
 ///|
@@ -742,13 +742,13 @@ pub fn poly_entire() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let t237 = @simp.rewrite_tac(@list.List([simple_complex_arith(@parser.parse_term("(p + --q = Cx(&0)) <=> (p = q)"))]))
   let t238 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_add_v1(), poly_neg_v1(), poly()])), t237)
-  let lemma1 = @tactics.prove(@parser.parse_term("!p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)"), t238)
+  let lemma1 = @tactics.prove(@parser.parse_term("forall p q. (poly (p ++ neg q) = poly []) <=> (poly p = poly q)"), t238)
   let t239 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_add_v1(), poly_neg_v1(), poly_mul_v1()])), @complexnumbers.simple_complex_arith_tac)
-  let lemma2 = @tactics.prove(@parser.parse_term("!p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))"), t239)
+  let lemma2 = @tactics.prove(@parser.parse_term("forall p q r. poly (p ** q ++ neg(p ** r)) = poly (p ** (q ++ neg(r)))"), t239)
   let t241 = @simp.rewrite_tac(@list.List([lemma1]))
   let t240 = @simp.rewrite_tac(@list.List([lemma2, poly_entire()]))
   let t242 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(lemma1)])), t240), t241)
-  poly_mul_lcancel_c.set(@tactics.prove(@parser.parse_term("!p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)"), t242))
+  poly_mul_lcancel_c.set(@tactics.prove(@parser.parse_term("forall p q r. (poly (p ** q) = poly (p ** r)) <=>\n           (poly p = poly []) \\/ (poly q = poly r)"), t242))
 }
 
 ///|
@@ -771,7 +771,7 @@ fn step_37() -> Unit raise {
   let t244 = @simp.rewrite_tac(@list.List([@theorems.left_and_forall_thm()]))
   let t243 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly()]))
   let t250 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t243), t244), @tactics.ap_term_tac), @tactics.abs_tac), t246), @nums.induct_tac), t247), t248), t249)
-  poly_exp_eq_0_c.set(@tactics.prove(@parser.parse_term("!p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)"), t250))
+  poly_exp_eq_0_c.set(@tactics.prove(@parser.parse_term("forall p n. (poly (p exp n) = poly []) <=> (poly p = poly []) /\\ ~(n = 0)"), t250))
 }
 
 ///|
@@ -796,7 +796,7 @@ fn step_38() -> Unit raise {
     })(((x255 : @kernel.Thm) => @bool.spec(t254, x255))(x256))
   })
   let t258 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly()]))), t257), @complexnumbers.simple_complex_arith_tac)
-  poly_prime_eq_0_c.set(@tactics.prove(@parser.parse_term("!a. ~(poly [a ; Cx(&1)] = poly [])"), t258))
+  poly_prime_eq_0_c.set(@tactics.prove(@parser.parse_term("forall a. ~(poly [a ; Cx(&1)] = poly [])"), t258))
 }
 
 ///|
@@ -812,7 +812,7 @@ pub fn poly_prime_eq_0() -> @kernel.Thm {
 /// POLY_EXP_PRIME_EQ_0
 fn step_39() -> Unit raise {
   let t259 = @meson.meson_tac(@list.List([poly_exp_eq_0(), poly_prime_eq_0()]))
-  poly_exp_prime_eq_0_c.set(@tactics.prove(@parser.parse_term("!a n. ~(poly ([a ; Cx(&1)] exp n) = poly [])"), t259))
+  poly_exp_prime_eq_0_c.set(@tactics.prove(@parser.parse_term("forall a n. ~(poly ([a ; Cx(&1)] exp n) = poly [])"), t259))
 }
 
 ///|
@@ -829,7 +829,7 @@ pub fn poly_exp_prime_eq_0() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let lemma = @simp.rewrite_rule(@list.List([@class.fun_eq_thm(), poly()]))(poly_roots_finite())
   let t305 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_norm_cx()]))
-  let t303 = @drule.match_mp(@kernel.assume_rule(@parser.parse_term("!x. (poly t x = Cx(&0)) ==> norm(x) < a")))
+  let t303 = @drule.match_mp(@kernel.assume_rule(@parser.parse_term("forall x. (poly t x = Cx(&0)) ==> norm(x) < a")))
   let t306 = @tactics.then_tac(@tactics.then_tac(@tactics.disch_then(fn(x304 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x300 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s301 = @tactics.mp_tac(x300)
@@ -887,7 +887,7 @@ fn step_40() -> Unit raise {
   let t261 = @class.asm_cases_tac(@parser.parse_term("h = Cx(&0)"))
   let t260 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly()]))
   let t308 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t260), t261), t262), t274), t275), t281), t284), t287), t288), t291), t298), t299), @tactics.conj_tac), t307)
-  poly_zero_lemma_c.set(@tactics.prove(@parser.parse_term("!h t. (poly (CONS h t) = poly []) ==> (h = Cx(&0)) /\\ (poly t = poly [])"), t308))
+  poly_zero_lemma_c.set(@tactics.prove(@parser.parse_term("forall h t. (poly (CONS h t) = poly []) ==> (h = Cx(&0)) /\\ (poly t = poly [])"), t308))
 }
 
 ///|
@@ -922,7 +922,7 @@ fn step_41() -> Unit raise {
     })(t312(x313))
   }), t314), t320])
   let t322 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([@lists.all()]))), @tactics.eq_tac), t321)
-  poly_zero_c.set(@tactics.prove(@parser.parse_term("!p. (poly p = poly []) <=> ALL (\\c. c = Cx(&0)) p"), t322))
+  poly_zero_c.set(@tactics.prove(@parser.parse_term("forall p. (poly p = poly []) <=> ALL (\\c. c = Cx(&0)) p"), t322))
 }
 
 ///|
@@ -997,7 +997,7 @@ fn step_43() -> Unit raise {
   let t324 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_mul_rzero(), @complexnumbers.complex_add_rid(), @complexnumbers.complex_mul_rid()]))
   let t323 = @simp.rewrite_tac(@list.List([divides(), poly_mul_v1(), @class.fun_eq_thm(), poly()]))
   let t359 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t323), t324), @tactics.eq_tac), t358)
-  poly_primes_c.set(@tactics.prove(@parser.parse_term("!a p q. [a; Cx(&1)] divides (p ** q) <=>\n           [a; Cx(&1)] divides p \\/ [a; Cx(&1)] divides q"), t359))
+  poly_primes_c.set(@tactics.prove(@parser.parse_term("forall a p q. [a; Cx(&1)] divides (p ** q) <=>\n           [a; Cx(&1)] divides p \\/ [a; Cx(&1)] divides q"), t359))
 }
 
 ///|
@@ -1015,7 +1015,7 @@ fn step_44() -> Unit raise {
   let t361 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), poly_mul_v1(), poly()]))
   let t360 = @tactics.exists_tac(@parser.parse_term("[Cx(&1)]"))
   let t362 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([divides()]))), t360), t361), @complexnumbers.simple_complex_arith_tac)
-  poly_divides_refl_c.set(@tactics.prove(@parser.parse_term("!p. p divides p"), t362))
+  poly_divides_refl_c.set(@tactics.prove(@parser.parse_term("forall p. p divides p"), t362))
 }
 
 ///|
@@ -1052,7 +1052,7 @@ fn step_45() -> Unit raise {
   }))
   let t363 = @simp.rewrite_tac(@list.List([divides()]))
   let t378 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t363), t367), t371), t375), t376), t377)
-  poly_divides_trans_c.set(@tactics.prove(@parser.parse_term("!p q r. p divides q /\\ q divides r ==> p divides r"), t378))
+  poly_divides_trans_c.set(@tactics.prove(@parser.parse_term("forall p q r. p divides q /\\ q divides r ==> p divides r"), t378))
 }
 
 ///|
@@ -1084,7 +1084,7 @@ fn step_46() -> Unit raise {
   }))
   let t379 = @simp.rewrite_tac(@list.List([@arith.le_exists()]))
   let t393 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t379), t383), t385), @nums.induct_tac), t386), t387), t388), t389), t390), t391), t392), @complexnumbers.simple_complex_arith_tac)
-  poly_divides_exp_c.set(@tactics.prove(@parser.parse_term("!p m n. m <= n ==> (p exp m) divides (p exp n)"), t393))
+  poly_divides_exp_c.set(@tactics.prove(@parser.parse_term("forall p m n. m <= n ==> (p exp m) divides (p exp n)"), t393))
 }
 
 ///|
@@ -1100,7 +1100,7 @@ pub fn poly_divides_exp() -> @kernel.Thm {
 /// POLY_EXP_DIVIDES
 fn step_47() -> Unit raise {
   let t394 = @meson.meson_tac(@list.List([poly_divides_trans(), poly_divides_exp()]))
-  poly_exp_divides_c.set(@tactics.prove(@parser.parse_term("!p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q"), t394))
+  poly_exp_divides_c.set(@tactics.prove(@parser.parse_term("forall p q m n. (p exp n) divides q /\\ m <= n ==> (p exp m) divides q"), t394))
 }
 
 ///|
@@ -1137,7 +1137,7 @@ fn step_48() -> Unit raise {
   }))
   let t395 = @simp.rewrite_tac(@list.List([divides()]))
   let t410 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t395), t399), t403), t407), t408), t409), @complexnumbers.simple_complex_arith_tac)
-  poly_divides_add_c.set(@tactics.prove(@parser.parse_term("!p q r. p divides q /\\ p divides r ==> p divides (q ++ r)"), t410))
+  poly_divides_add_c.set(@tactics.prove(@parser.parse_term("forall p q r. p divides q /\\ p divides r ==> p divides (q ++ r)"), t410))
 }
 
 ///|
@@ -1187,7 +1187,7 @@ fn step_49() -> Unit raise {
   }))
   let t411 = @simp.rewrite_tac(@list.List([divides()]))
   let t436 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t411), t415), t419), t423), t424), t430), t431), t433), t434), t435), @complexnumbers.simple_complex_arith_tac)
-  poly_divides_sub_c.set(@tactics.prove(@parser.parse_term("!p q r. p divides q /\\ p divides (q ++ r) ==> p divides r"), t436))
+  poly_divides_sub_c.set(@tactics.prove(@parser.parse_term("forall p q r. p divides q /\\ p divides (q ++ r) ==> p divides r"), t436))
 }
 
 ///|
@@ -1221,7 +1221,7 @@ fn step_50() -> Unit raise {
   let t438 = @tactics.exists_tac(@parser.parse_term("r:complex list"))
   let t437 = @tactics.match_mp_tac(poly_divides_sub())
   let t454 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t437), t438), t439), t440), t441), t444), t445), t446), t453), @complexnumbers.simple_complex_arith_tac)
-  poly_divides_sub2_c.set(@tactics.prove(@parser.parse_term("!p q r. p divides r /\\ p divides (q ++ r) ==> p divides q"), t454))
+  poly_divides_sub2_c.set(@tactics.prove(@parser.parse_term("forall p q r. p divides r /\\ p divides (q ++ r) ==> p divides q"), t454))
 }
 
 ///|
@@ -1240,7 +1240,7 @@ fn step_51() -> Unit raise {
   let t456 = @tactics.exists_tac(@parser.parse_term("[]:complex list"))
   let t455 = @simp.rewrite_tac(@list.List([divides()]))
   let t458 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t455), t456), t457)
-  poly_divides_zero_c.set(@tactics.prove(@parser.parse_term("!p q. (poly p = poly []) ==> q divides p"), t458))
+  poly_divides_zero_c.set(@tactics.prove(@parser.parse_term("forall p q. (poly p = poly []) ==> q divides p"), t458))
 }
 
 ///|
@@ -1332,7 +1332,7 @@ fn step_52() -> Unit raise {
       }
     })(((x488 : @kernel.Thm) => @bool.spec(t487, x488))(x489))
   })
-  let t483 = @tactics.undisch_tac(@parser.parse_term("!p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                      ~(poly q a = Cx(&0))"))
+  let t483 = @tactics.undisch_tac(@parser.parse_term("forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n            ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                      ~(poly q a = Cx(&0))"))
   let t482 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("q:complex list"))(fn(x479 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s480 = @tactics.subst_all_tac(x479)
     fn(x481 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1360,16 +1360,16 @@ fn step_52() -> Unit raise {
   let t466 = @tactics.x_gen_tac(@parser.parse_term("p:complex list"))
   let t465 = @meson.meson_tac(@list.List([]))
   let t550 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@lists.length_eq_nil()])), t465), @tactics.all_tac])), t466), t467), t501), t549])
-  let t464 = @tactics.subgoal_then(@parser.parse_term("!d. !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                     ~(poly q a = Cx(&0))"), fn(x461 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t464 = @tactics.subgoal_then(@parser.parse_term("forall d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n           ==> ?n q. (p = mulexp (n:num) [--a; Cx(&1)] q) /\\\n                     ~(poly q a = Cx(&0))"), fn(x461 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s462 = @tactics.mp_tac(x461)
     fn(x463 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s462(x463)
     }
   })
-  let t459 = @parser.parse_term("(!p q. mulexp 0 p q = q) /\\\n     (!p q n. mulexp (SUC n) p q = p ** (mulexp n p q))")
+  let t459 = @parser.parse_term("(forall p q. mulexp 0 p q = q) /\\\n     (forall p q n. mulexp (SUC n) p q = p ** (mulexp n p q))")
   let t460 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t551 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_assume_tac(t460(t459))), t464), t550)
-  poly_order_exists_c.set(@tactics.prove(@parser.parse_term("!a d. !p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; Cx(&1)] exp n) divides p /\\\n                     ~(([--a; Cx(&1)] exp (SUC n)) divides p)"), t551))
+  poly_order_exists_c.set(@tactics.prove(@parser.parse_term("forall a d. forall p. (LENGTH p = d) /\\ ~(poly p = poly [])\n             ==> ?n. ([--a; Cx(&1)] exp n) divides p /\\\n                     ~(([--a; Cx(&1)] exp (SUC n)) divides p)"), t551))
 }
 
 ///|
@@ -1385,7 +1385,7 @@ pub fn poly_order_exists() -> @kernel.Thm {
 /// POLY_ORDER
 fn step_53() -> Unit raise {
   let t552 = @meson.meson_tac(@list.List([poly_order_exists(), poly_exp_divides(), @arith.le_suc_lt(), @arith.lt_cases()]))
-  poly_order_c.set(@tactics.prove(@parser.parse_term("!p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; Cx(&1)] exp n) divides p /\\\n                      ~(([--a; Cx(&1)] exp (SUC n)) divides p)"), t552))
+  poly_order_c.set(@tactics.prove(@parser.parse_term("forall p a. ~(poly p = poly [])\n         ==> ?!n. ([--a; Cx(&1)] exp n) divides p /\\\n                      ~(([--a; Cx(&1)] exp (SUC n)) divides p)"), t552))
 }
 
 ///|
@@ -1454,7 +1454,7 @@ fn step_55() -> Unit raise {
   }), t577), t579])
   let t553 = @simp.rewrite_tac(@list.List([order()]))
   let t582 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t553), @tactics.eq_tac), @tactics.strip_tac), t580), t581)
-  order_v1_c.set(@tactics.prove(@parser.parse_term("!p a n. ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])"), t582))
+  order_v1_c.set(@tactics.prove(@parser.parse_term("forall p a n. ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p) <=>\n           (n = order a p) /\\\n           ~(poly p = poly [])"), t582))
 }
 
 ///|
@@ -1470,7 +1470,7 @@ pub fn order_v1() -> @kernel.Thm {
 /// ORDER_THM
 fn step_56() -> Unit raise {
   let t583 = @meson.meson_tac(@list.List([order_v1()]))
-  order_thm_c.set(@tactics.prove(@parser.parse_term("!p a. ~(poly p = poly [])\n         ==> ([--a; Cx(&1)] exp (order a p)) divides p /\\\n             ~(([--a; Cx(&1)] exp (SUC(order a p))) divides p)"), t583))
+  order_thm_c.set(@tactics.prove(@parser.parse_term("forall p a. ~(poly p = poly [])\n         ==> ([--a; Cx(&1)] exp (order a p)) divides p /\\\n             ~(([--a; Cx(&1)] exp (SUC(order a p))) divides p)"), t583))
 }
 
 ///|
@@ -1486,7 +1486,7 @@ pub fn order_thm() -> @kernel.Thm {
 /// ORDER_UNIQUE
 fn step_57() -> Unit raise {
   let t584 = @meson.meson_tac(@list.List([order_v1()]))
-  order_unique_c.set(@tactics.prove(@parser.parse_term("!p a n. ~(poly p = poly []) /\\\n           ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p)\n           ==> (n = order a p)"), t584))
+  order_unique_c.set(@tactics.prove(@parser.parse_term("forall p a n. ~(poly p = poly []) /\\\n           ([--a; Cx(&1)] exp n) divides p /\\\n           ~(([--a; Cx(&1)] exp (SUC n)) divides p)\n           ==> (n = order a p)"), t584))
 }
 
 ///|
@@ -1503,7 +1503,7 @@ pub fn order_unique() -> @kernel.Thm {
 fn step_58() -> Unit raise {
   let t585 = @simp.asm_rewrite_tac(@list.List([order(), divides(), @class.fun_eq_thm(), poly_mul_v1()]))
   let t586 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t585)
-  order_poly_c.set(@tactics.prove(@parser.parse_term("!p q a. (poly p = poly q) ==> (order a p = order a q)"), t586))
+  order_poly_c.set(@tactics.prove(@parser.parse_term("forall p q a. (poly p = poly q) ==> (order a p = order a q)"), t586))
 }
 
 ///|
@@ -1587,7 +1587,7 @@ fn step_59() -> Unit raise {
   let t588 = @simp.asm_rewrite_tac(@list.List([poly()]))
   let t587 = @class.asm_cases_tac(@parser.parse_term("poly p = poly []"))
   let t639 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t587), t588), @tactics.eq_tac), t638)
-  order_root_c.set(@tactics.prove(@parser.parse_term("!p a. (poly p a = Cx(&0)) <=> (poly p = poly []) \\/ ~(order a p = 0)"), t639))
+  order_root_c.set(@tactics.prove(@parser.parse_term("forall p a. (poly p a = Cx(&0)) <=> (poly p = poly []) \\/ ~(order a p = 0)"), t639))
 }
 
 ///|
@@ -1609,7 +1609,7 @@ fn step_60() -> Unit raise {
   let t641 = @simp.asm_rewrite_tac(@list.List([]))
   let t640 = @class.asm_cases_tac(@parser.parse_term("poly p = poly []"))
   let t646 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t640), t641), t645)
-  order_divides_c.set(@tactics.prove(@parser.parse_term("!p a n. ([--a; Cx(&1)] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p"), t646))
+  order_divides_c.set(@tactics.prove(@parser.parse_term("forall p a n. ([--a; Cx(&1)] exp n) divides p <=>\n           (poly p = poly []) \\/ n <= order a p"), t646))
 }
 
 ///|
@@ -1666,7 +1666,7 @@ fn step_61() -> Unit raise {
     })(t650(x651))
   })
   let t681 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t652), t663), t668), t669), t670), t675), t676), t677), t678), t679), t680), @complexnumbers.simple_complex_arith_tac)
-  order_decomp_c.set(@tactics.prove(@parser.parse_term("!p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; Cx(&1)] exp (order a p)) ** q)) /\\\n                 ~([--a; Cx(&1)] divides q)"), t681))
+  order_decomp_c.set(@tactics.prove(@parser.parse_term("forall p a. ~(poly p = poly [])\n         ==> ?q. (poly p = poly (([--a; Cx(&1)] exp (order a p)) ** q)) /\\\n                 ~([--a; Cx(&1)] divides q)"), t681))
 }
 
 ///|
@@ -1764,7 +1764,7 @@ fn step_62() -> Unit raise {
     @tactics.then_tac(@tactics.assume_tac(th), t684)
   })
   let t750 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t685), t686), @tactics.strip_tac), t690), t691), t692), @tactics.conj_tac), t749)
-  order_mul_c.set(@tactics.prove(@parser.parse_term("!a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)"), t750))
+  order_mul_c.set(@tactics.prove(@parser.parse_term("forall a p q. ~(poly (p ** q) = poly []) ==>\n           (order a (p ** q) = order a p + order a q)"), t750))
 }
 
 ///|
@@ -1810,7 +1810,7 @@ fn step_64() -> Unit raise {
   let t753 = @simp.asm_rewrite_tac(@list.List([]))
   let t752 = @class.asm_cases_tac(@parser.parse_term("h = Cx(&0)"))
   let t763 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([normalize(), poly()]))), t752), t753), @class.cond_cases_tac), t754), t755), t760), t761), t762)
-  poly_normalize_c.set(@tactics.prove(@parser.parse_term("!p. poly (normalize p) = poly p"), t763))
+  poly_normalize_c.set(@tactics.prove(@parser.parse_term("forall p. poly (normalize p) = poly p"), t763))
 }
 
 ///|
@@ -1828,7 +1828,7 @@ fn step_65() -> Unit raise {
   let t765 = @simp.rewrite_tac(@list.List([@lists.length()]))
   let t764 = @simp.asm_rewrite_tac(@list.List([@lists.length(), @arith.le_suc()]))
   let t766 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length(), normalize(), @arith.le_refl()]))), @class.cond_cases_tac), t764), @class.cond_cases_tac), t765), @int.arith_tac)
-  length_normalize_le_c.set(@tactics.prove(@parser.parse_term("!p. LENGTH(normalize p) <= LENGTH p"), t766))
+  length_normalize_le_c.set(@tactics.prove(@parser.parse_term("forall p. LENGTH(normalize p) <= LENGTH p"), t766))
 }
 
 ///|
@@ -1884,7 +1884,7 @@ fn step_67() -> Unit raise {
   })
   let t767 = @simp.rewrite_tac(@list.List([degree()]))
   let t787 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t767), t771), t786)
-  degree_zero_c.set(@tactics.prove(@parser.parse_term("!p. (poly p = poly []) ==> (degree p = 0)"), t787))
+  degree_zero_c.set(@tactics.prove(@parser.parse_term("forall p. (poly p = poly []) ==> (degree p = 0)"), t787))
 }
 
 ///|
@@ -1943,7 +1943,7 @@ fn step_69() -> Unit raise {
   let t807 = @class.asm_cases_tac(@parser.parse_term("normalize t = []"))
   let t806 = @simp.rewrite_tac(@list.List([@lists.all(), normalize()]))
   let t811 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([poly_zero()])), @lists.list_induct_tac), t806), t807), t808), t809), @class.cond_cases_tac), t810)
-  poly_normalize_zero_c.set(@tactics.prove(@parser.parse_term("!p. (poly p = poly []) <=> (normalize p = [])"), t811))
+  poly_normalize_zero_c.set(@tactics.prove(@parser.parse_term("forall p. (poly p = poly []) <=> (normalize p = [])"), t811))
 }
 
 ///|
@@ -1978,7 +1978,7 @@ fn step_70() -> Unit raise {
   let t813 = @simp.rewrite_tac(@list.List([poly_cons_eq()]))
   let t812 = @list.List([@meson.meson_tac(@list.List([poly_normalize_zero()])), @tactics.all_tac])
   let t827 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@lists.list_induct_tac, @list.List([@meson.meson_tac(@list.List([poly_normalize_zero()])), @tactics.all_tac])), @lists.list_induct_tac), t812), t813), @tactics.strip_tac), t814), t821), t822), t826), @tactics.refl_tac)
-  poly_normalize_eq_lemma_c.set(@tactics.prove(@parser.parse_term("!p q. (poly p = poly q) ==> (normalize p = normalize q)"), t827))
+  poly_normalize_eq_lemma_c.set(@tactics.prove(@parser.parse_term("forall p q. (poly p = poly q) ==> (normalize p = normalize q)"), t827))
 }
 
 ///|
@@ -1994,7 +1994,7 @@ pub fn poly_normalize_eq_lemma() -> @kernel.Thm {
 /// POLY_NORMALIZE_EQ
 fn step_71() -> Unit raise {
   let t828 = @meson.meson_tac(@list.List([poly_normalize_eq_lemma(), poly_normalize()]))
-  poly_normalize_eq_c.set(@tactics.prove(@parser.parse_term("!p q. (poly p = poly q) <=> (normalize p = normalize q)"), t828))
+  poly_normalize_eq_c.set(@tactics.prove(@parser.parse_term("forall p q. (poly p = poly q) <=> (normalize p = normalize q)"), t828))
 }
 
 ///|
@@ -2010,7 +2010,7 @@ pub fn poly_normalize_eq() -> @kernel.Thm {
 /// DEGREE_WELLDEF
 fn step_72() -> Unit raise {
   let t829 = @simp.simp_tac(@list.List([degree(), poly_normalize_eq()]))
-  degree_welldef_c.set(@tactics.prove(@parser.parse_term("!p q. (poly p = poly q) ==> (degree p = degree q)"), t829))
+  degree_welldef_c.set(@tactics.prove(@parser.parse_term("forall p q. (poly p = poly q) ==> (degree p = degree q)"), t829))
 }
 
 ///|
@@ -2030,7 +2030,7 @@ fn step_73() -> Unit raise {
   let t831 = @simp.rewrite_tac(@list.List([normalize(), @lists.last()]))
   let t830 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil()]))
   let t834 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t830), t831), t832), t833)
-  normalize_eq_c.set(@tactics.prove(@parser.parse_term("!p. ~(LAST p = Cx(&0)) ==> (normalize p = p)"), t834))
+  normalize_eq_c.set(@tactics.prove(@parser.parse_term("forall p. ~(LAST p = Cx(&0)) ==> (normalize p = p)"), t834))
 }
 
 ///|
@@ -2047,7 +2047,7 @@ pub fn normalize_eq() -> @kernel.Thm {
 fn step_74() -> Unit raise {
   let t835 = @tactics.repeat_tac(@tactics.strip_tac)
   let t836 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([degree(), normalize_eq()])), t835), @int.arith_tac)
-  normal_degree_c.set(@tactics.prove(@parser.parse_term("!p. ~(LAST p = Cx(&0)) ==> (degree p = LENGTH p - 1)"), t836))
+  normal_degree_c.set(@tactics.prove(@parser.parse_term("forall p. ~(LAST p = Cx(&0)) ==> (degree p = LENGTH p - 1)"), t836))
 }
 
 ///|
@@ -2075,7 +2075,7 @@ fn step_75() -> Unit raise {
   })
   let t837 = @tactics.repeat_tac(@tactics.gen_tac)
   let t847 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([poly_cmul(), poly_add(), @lists.last(), @lists.hd(), @lists.tl(), @lists.not_cons_nil()]))), t837), t841), t844), t845), @class.cond_cases_tac), t846)
-  last_linear_mul_lemma_c.set(@tactics.prove(@parser.parse_term("!p a b x.\n     LAST(a ## p ++ CONS x (b ## p)) = if p = [] then x else b * LAST(p)"), t847))
+  last_linear_mul_lemma_c.set(@tactics.prove(@parser.parse_term("forall p a b x.\n     LAST(a ## p ++ CONS x (b ## p)) = if p = [] then x else b * LAST(p)"), t847))
 }
 
 ///|
@@ -2091,7 +2091,7 @@ pub fn last_linear_mul_lemma() -> @kernel.Thm {
 /// LAST_LINEAR_MUL
 fn step_76() -> Unit raise {
   let t848 = @simp.simp_tac(@list.List([poly_mul(), @lists.not_cons_nil(), last_linear_mul_lemma(), @complexnumbers.complex_mul_lid()]))
-  last_linear_mul_c.set(@tactics.prove(@parser.parse_term("!p. ~(p = []) ==> (LAST([a; Cx(&1)] ** p) = LAST p)"), t848))
+  last_linear_mul_c.set(@tactics.prove(@parser.parse_term("forall p. ~(p = []) ==> (LAST([a; Cx(&1)] ** p) = LAST p)"), t848))
 }
 
 ///|
@@ -2116,7 +2116,7 @@ fn step_77() -> Unit raise {
     }
   })
   let t856 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([normalize()]))), t852), t853), t854), @class.cond_cases_tac), t855)
-  normal_normalize_c.set(@tactics.prove(@parser.parse_term("!p. ~(normalize p = []) ==> ~(LAST(normalize p) = Cx(&0))"), t856))
+  normal_normalize_c.set(@tactics.prove(@parser.parse_term("forall p. ~(normalize p = []) ==> ~(LAST(normalize p) = Cx(&0))"), t856))
 }
 
 ///|
@@ -2182,7 +2182,7 @@ fn step_78() -> Unit raise {
     }
   })
   let t894 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t860), t893)
-  linear_mul_degree_c.set(@tactics.prove(@parser.parse_term("!p a. ~(poly p = poly []) ==> (degree([a; Cx(&1)] ** p) = degree(p) + 1)"), t894))
+  linear_mul_degree_c.set(@tactics.prove(@parser.parse_term("forall p a. ~(poly p = poly []) ==> (degree([a; Cx(&1)] ** p) = degree(p) + 1)"), t894))
 }
 
 ///|
@@ -2227,7 +2227,7 @@ fn step_79() -> Unit raise {
   let t895 = @simp.asm_rewrite_tac(@list.List([]))
   let t908 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.cond_cases_tac), t895), t907), @tactics.all_tac])
   let t923 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([poly_exp()]))), t908), t909), t910), t911), @tactics.conj_tac), t913), t914), t915), t916), t917), t920), t921), t922)
-  linear_pow_mul_degree_c.set(@tactics.prove(@parser.parse_term("!n a p. degree([a; Cx(&1)] exp n ** p) =\n                if poly p = poly [] then 0 else degree p + n"), t923))
+  linear_pow_mul_degree_c.set(@tactics.prove(@parser.parse_term("forall n a p. degree([a; Cx(&1)] exp n ** p) =\n                if poly p = poly [] then 0 else degree p + n"), t923))
 }
 
 ///|
@@ -2297,7 +2297,7 @@ fn step_80() -> Unit raise {
     })(t930(x931))
   })
   let t962 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t932), t939), t943), t949), t950), t957), @class.cond_cases_tac), t958), t961)
-  order_degree_c.set(@tactics.prove(@parser.parse_term("!a p. ~(poly p = poly []) ==> order a p <= degree p"), t962))
+  order_degree_c.set(@tactics.prove(@parser.parse_term("forall a p. ~(poly p = poly []) ==> order a p <= degree p"), t962))
 }
 
 ///|
@@ -2348,7 +2348,7 @@ fn step_81() -> Unit raise {
     }
   }))
   let t990 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([poly_roots_finite()]))), t966), t970), t971), t972), @tactics.conj_tac), t989)
-  poly_roots_finite_set_c.set(@tactics.prove(@parser.parse_term("!p. ~(poly p = poly []) ==> FINITE { x | poly p x = Cx(&0)}"), t990))
+  poly_roots_finite_set_c.set(@tactics.prove(@parser.parse_term("forall p. ~(poly p = poly []) ==> FINITE { x | poly p x = Cx(&0)}"), t990))
 }
 
 ///|

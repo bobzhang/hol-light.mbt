@@ -23,8 +23,8 @@ test "equal matches equal.ml" {
   @kernel.new_type("num", 0)
   @kernel.new_constant("+", @parser.parse_type("num->num->num"))
   @printer.parse_as_infix("+", (16, "right"))
-  @kernel.new_constant("!", @parser.parse_type("(A->bool)->bool"))
-  @printer.parse_as_binder("!")
+  @kernel.new_constant("forall", @parser.parse_type("(A->bool)->bool"))
+  @printer.parse_as_binder("forall")
   @printer.parse_as_binder("\\")
   @printer.parse_as_infix("=", (12, "right"))
   @kernel.new_constant("c", @parser.parse_type("num"))
@@ -54,7 +54,7 @@ test "equal matches equal.ml" {
   })
   th("ALPHA_CONV", () => @equal.alpha_conv(tm("z:num"))(tm("\\x:num. x + c")))
   th("GEN_ALPHA_CONV", () => {
-    @equal.gen_alpha_conv(tm("z:num"))(tm("!x:num. x + c = c"))
+    @equal.gen_alpha_conv(tm("z:num"))(tm("forall x:num. x + c = c"))
   })
   th("MK_BINOP", () => {
     @equal.mk_binop_rule(
@@ -93,7 +93,7 @@ test "equal matches equal.ml" {
     )
   })
   th("BINDER_CONV", () => {
-    @equal.binder_conv(beta)(tm("!y:num. (\\x:num. x + y) c = c"))
+    @equal.binder_conv(beta)(tm("forall y:num. (\\x:num. x + y) c = c"))
   })
   th("SUB_CONV", () => {
     @equal.sub_conv(@equal.try_conv(beta))(
@@ -136,7 +136,7 @@ test "equal matches equal.ml" {
   th("BETA_RULE", () => {
     @equal.beta_rule(hyp_of("(\\x:num. (\\y:num. y) x) c = c"))
   })
-  th("GSYM", () => @equal.gsym(hyp_of("!x:num. x = c")))
+  th("GSYM", () => @equal.gsym(hyp_of("forall x:num. x = c")))
   let cc = @equal.cache_conv(beta)
   th("CACHE_CONV1", () => cc(tm("(\\x:num. x + x) c")))
   th("CACHE_CONV2", () => cc(tm("(\\y:num. y + y) c")))
@@ -187,7 +187,7 @@ test "equal matches equal.ml" {
       #|ALPHA = |- (\x. x + c) = (\y. y + c)
       #|ALPHA_bad ! ALPHA
       #|ALPHA_CONV = |- (\x. x + c) = (\z. z + c)
-      #|GEN_ALPHA_CONV = |- (!x. x + c = c) = (!z. z + c = c)
+      #|GEN_ALPHA_CONV = |- (forall x. x + c = c) = (forall z. z + c = c)
       #|MK_BINOP = a = b, c' = d
       #||- a + c' = b + d
       #|THENC = |- (\x. (\y. y + x) c) c = c + c
@@ -224,8 +224,8 @@ test "equal matches equal.ml" {
       #||- b + b = c
       #|BETA_RULE = (\x. (\y. y) x) c = c
       #||- c = c
-      #|GSYM = !x. x = c
-      #||- !x. c = x
+      #|GSYM = forall x. x = c
+      #||- forall x. c = x
       #|CACHE_CONV1 = |- (\x. x + x) c = c + c
       #|CACHE_CONV2 = |- (\y. y + y) c = c + c
       #|CACHE_CONV3 = |- (\x. x + x) c = c + c
@@ -238,6 +238,7 @@ test "equal matches equal.ml" {
       #|BINOP2_CONV_order ! right
       #|COMB_CONV_genvar ! _8
       #|
+
     ),
   )
 }

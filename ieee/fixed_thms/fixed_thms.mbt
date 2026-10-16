@@ -4,7 +4,7 @@
 ///|
 /// FFORMAT_SPLIT
 fn step_1() -> Unit raise {
-  fformat_split_c.set(@class.taut(@parser.parse_term("!(fmt:fformat).\n  (dest_fformat fmt) = (FST (dest_fformat fmt),\n                        (FST (SND (dest_fformat fmt)),\n                         SND (SND (dest_fformat fmt))))")))
+  fformat_split_c.set(@class.taut(@parser.parse_term("forall(fmt:fformat).\n  (dest_fformat fmt) = (FST (dest_fformat fmt),\n                        (FST (SND (dest_fformat fmt)),\n                         SND (SND (dest_fformat fmt))))")))
 }
 
 ///|
@@ -21,7 +21,7 @@ pub fn fformat_split() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([@fixed.is_valid_fformat()]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @int.arith_tac)
-  fformat_valid_imp_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      1 < (FST (r,p,e)))"), t2))
+  fformat_valid_imp_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      1 < (FST (r,p,e)))"), t2))
 }
 
 ///|
@@ -39,7 +39,7 @@ fn step_3() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([]))
   let t3 = @simp.rewrite_tac(@list.List([@fixed.is_valid_fformat()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3), t4)
-  fformat_valid_imp_radix_even_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      EVEN (FST (r,p,e)))"), t5))
+  fformat_valid_imp_radix_even_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      EVEN (FST (r,p,e)))"), t5))
 }
 
 ///|
@@ -57,7 +57,7 @@ fn step_4() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([]))
   let t6 = @simp.rewrite_tac(@list.List([@fixed.is_valid_fformat()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6), t7)
-  fformat_valid_imp_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      0 < (FST (SND (r,p,e))))"), t8))
+  fformat_valid_imp_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      0 < (FST (SND (r,p,e))))"), t8))
 }
 
 ///|
@@ -73,7 +73,7 @@ pub fn fformat_valid_imp_prec_lt_0() -> @kernel.Thm {
 /// FFORMAT_VALID
 fn step_5() -> Unit raise {
   let t9 = @simp.rewrite_tac(@list.List([@fixed.fformat_typbij()]))
-  fformat_valid_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). is_valid_fformat (dest_fformat fmt)"), t9))
+  fformat_valid_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). is_valid_fformat (dest_fformat fmt)"), t9))
 }
 
 ///|
@@ -92,7 +92,7 @@ fn step_6() -> Unit raise {
   let t11 = @tactics.match_mp_tac(fformat_valid_imp_radix_lt_1())
   let t10 = @simp.once_rewrite_tac(@list.List([fformat_split()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fr()]))), t10), t11), t12)
-  fformat_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). 1 < (fr fmt)"), t13))
+  fformat_radix_lt_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). 1 < (fr fmt)"), t13))
 }
 
 ///|
@@ -109,7 +109,7 @@ pub fn fformat_radix_lt_1() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t14 = @simp.rewrite_tac(@list.List([fformat_radix_lt_1()]))
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("1 < x ==> 0 < x")))), t14)
-  fformat_radix_lt_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). 0 < (fr fmt)"), t15))
+  fformat_radix_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). 0 < (fr fmt)"), t15))
 }
 
 ///|
@@ -127,7 +127,7 @@ fn step_8() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([fformat_radix_lt_0()]))
   let t16 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("0 < x ==> ~(x = 0)")))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@realax.real_of_num_eq()]))), t16), t17)
-  fformat_radix_ne_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). ~(&(fr fmt) = &0)"), t18))
+  fformat_radix_ne_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). ~(&(fr fmt) = &0)"), t18))
 }
 
 ///|
@@ -146,7 +146,7 @@ fn step_9() -> Unit raise {
   let t20 = @tactics.match_mp_tac(fformat_valid_imp_radix_even())
   let t19 = @simp.once_rewrite_tac(@list.List([fformat_split()]))
   let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fr()]))), t19), t20), t21)
-  fformat_radix_even_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). EVEN (fr fmt)"), t22))
+  fformat_radix_even_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). EVEN (fr fmt)"), t22))
 }
 
 ///|
@@ -165,7 +165,7 @@ fn step_10() -> Unit raise {
   let t24 = @tactics.match_mp_tac(fformat_valid_imp_prec_lt_0())
   let t23 = @simp.once_rewrite_tac(@list.List([fformat_split()]))
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fp()]))), t23), t24), t25)
-  fformat_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). 0 < (fp fmt)"), t26))
+  fformat_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). 0 < (fp fmt)"), t26))
 }
 
 ///|
@@ -184,7 +184,7 @@ fn step_11() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= n <=> 0 < n"))]))
   let t27 = @simp.rewrite_tac(@list.List([@int.int_of_num_le()]))
   let t30 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("&0 <= x:int - &1:int <=> &1 <= x"))])), t27), t28), t29)
-  fformat_prec_minus_1_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). &0 <= (&(fp fmt):int) - (&1:int)"), t30))
+  fformat_prec_minus_1_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). &0 <= (&(fp fmt):int) - (&1:int)"), t30))
 }
 
 ///|
@@ -202,7 +202,7 @@ fn step_12() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([fformat_prec_lt_0()]))
   let t31 = @tactics.match_mp_tac(@common.ipow_eq_exp_p())
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t31), t32)
-  fformat_prec_ipow_eq_exp_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). &(fr fmt) ipow (&(fp fmt) - &1) =\n      &((fr fmt) EXP ((fp fmt) - 1))"), t33))
+  fformat_prec_ipow_eq_exp_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). &(fr fmt) ipow (&(fp fmt) - &1) =\n      &((fr fmt) EXP ((fp fmt) - 1))"), t33))
 }
 
 ///|
@@ -222,7 +222,7 @@ fn step_13() -> Unit raise {
   let t35 = @tactics.match_mp_tac(@common.ipow_lt_0())
   let t34 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 < (x:real) ==> &0 <= x")))
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t34), t35), t36), t37)
-  fformat_radix_ipow_le_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (e:int). &0 <= &(fr fmt) ipow e"), t38))
+  fformat_radix_ipow_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (e:int). &0 <= &(fr fmt) ipow e"), t38))
 }
 
 ///|
@@ -241,7 +241,7 @@ fn step_14() -> Unit raise {
   let t40 = @simp.rewrite_tac(@list.List([@real.real_of_num_lt()]))
   let t39 = @tactics.match_mp_tac(@common.ipow_lt_0())
   let t42 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t39), t40), t41)
-  fformat_radix_ipow_lt_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (e:int). &0 < &(fr fmt) ipow e"), t42))
+  fformat_radix_ipow_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (e:int). &0 < &(fr fmt) ipow e"), t42))
 }
 
 ///|
@@ -261,7 +261,7 @@ fn step_15() -> Unit raise {
   let t44 = @tactics.match_mp_tac(@common.ipow_lt_0())
   let t43 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 < (x:real) ==> ~(x = &0)")))
   let t47 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t43), t44), t45), t46)
-  fformat_radix_ipow_neq_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (e:int). ~(&(fr fmt) ipow e = &0)"), t47))
+  fformat_radix_ipow_neq_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (e:int). ~(&(fr fmt) ipow e = &0)"), t47))
 }
 
 ///|
@@ -279,7 +279,7 @@ fn step_16() -> Unit raise {
   let t49 = @simp.rewrite_tac(@list.List([fformat_radix_ne_0()]))
   let t48 = @tactics.match_mp_tac(@common.ipow_add_exp())
   let t50 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t48), t49)
-  fformat_radix_ipow_add_exp_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (u:int) (v:int).\n        &(fr fmt) ipow u * &(fr fmt) ipow v = &(fr fmt) ipow (u + v)"), t50))
+  fformat_radix_ipow_add_exp_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (u:int) (v:int).\n        &(fr fmt) ipow u * &(fr fmt) ipow v = &(fr fmt) ipow (u + v)"), t50))
 }
 
 ///|
@@ -300,7 +300,7 @@ fn step_17() -> Unit raise {
   let t52 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t51 = @simp.rewrite_tac(@list.List([@fixed.fixed()]))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t51), t52), t53), t54), t55)
-  fixed_neg_sym_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). (x IN (fixed fmt)) <=> (-- x IN (fixed fmt))"), t56))
+  fixed_neg_sym_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). (x IN (fixed fmt)) <=> (-- x IN (fixed fmt))"), t56))
 }
 
 ///|
@@ -343,7 +343,7 @@ fn step_18() -> Unit raise {
       s59(x60)
     }
   })), t77), t78), t81)
-  fixed_finf_in_fixed_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). ((finf fmt) IN (fixed fmt) /\\\n                            (-- (finf fmt)) IN (fixed fmt))"), t82))
+  fixed_finf_in_fixed_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). ((finf fmt) IN (fixed fmt) /\\\n                            (-- (finf fmt)) IN (fixed fmt))"), t82))
 }
 
 ///|
@@ -363,7 +363,7 @@ fn step_19() -> Unit raise {
   let t84 = @simp.rewrite_tac(@list.List([@fixed.is_fixed()]))
   let t83 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fixed()]))), t83), t84), t85), t86), @int.arith_tac)
-  fixed_zero_in_fixed_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). &0 IN (fixed fmt)"), t87))
+  fixed_zero_in_fixed_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). &0 IN (fixed fmt)"), t87))
 }
 
 ///|
@@ -390,7 +390,7 @@ fn step_20() -> Unit raise {
   let t89 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t88 = @simp.rewrite_tac(@list.List([@fixed.fixed()]))
   let t99 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fulp()]))), t88), t89), t90), t91), t92), @tactics.conj_tac), t98)
-  fixed_fulp_in_fixed_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). (fulp fmt) IN (fixed fmt)"), t99))
+  fixed_fulp_in_fixed_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). (fulp fmt) IN (fixed fmt)"), t99))
 }
 
 ///|
@@ -462,7 +462,7 @@ fn step_21() -> Unit raise {
     @tactics.choose_then((x102 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["frac1", "frac2"]), x102))(t106)
   })
   let t145 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t107), t112), t135), @tactics.conj_tac), t144)
-  fixed_finf_bounds_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). x IN (fixed fmt) ==> -- (finf fmt) <= x /\\\n          x <= (finf fmt)"), t145))
+  fixed_finf_bounds_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). x IN (fixed fmt) ==> -- (finf fmt) <= x /\\\n          x <= (finf fmt)"), t145))
 }
 
 ///|
@@ -492,7 +492,7 @@ fn step_22() -> Unit raise {
     @common.label_conjuncts_tac(@list.List(["a1", "a2", "a3"]), @simp.rewrite_rule(@list.List([@fixed.is_frac()]))(thm))
   })
   let t157 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t148), t149), t150), t156)
-  fixed_frac_lt_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (u:real) (f:num).\n          ~(u = &0) /\\ (is_frac(fmt) u f) ==> 0 < f"), t157))
+  fixed_frac_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (u:real) (f:num).\n          ~(u = &0) /\\ (is_frac(fmt) u f) ==> 0 < f"), t157))
 }
 
 ///|
@@ -531,7 +531,7 @@ fn step_23() -> Unit raise {
     }
   })
   let t177 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t162), t163), t164), t165), @canon.select_elim_tac), t174), t175), t176)
-  fixed_ff_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). (x IN (fixed fmt)) ==>\n          (?(f:num). ff(fmt) x = f /\\ is_frac(fmt) x f)"), t177))
+  fixed_ff_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). (x IN (fixed fmt)) ==>\n          (?(f:num). ff(fmt) x = f /\\ is_frac(fmt) x f)"), t177))
 }
 
 ///|
@@ -561,7 +561,7 @@ fn step_24() -> Unit raise {
   let t180 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_eq())]))
   let t179 = @tactics.disch_then((x178 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["f1frac", "f2frac"]), x178))
   let t191 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t179), t180), t181), t182), @tactics.conj_tac), t190)
-  fixed_ff_unique_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (f1:num) (f2:num).\n          (is_frac(fmt) x f1) /\\ (is_frac(fmt) x f2) ==> f1 = f2"), t191))
+  fixed_ff_unique_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (f1:num) (f2:num).\n          (is_frac(fmt) x f1) /\\ (is_frac(fmt) x f2) ==> f1 = f2"), t191))
 }
 
 ///|
@@ -578,7 +578,7 @@ pub fn fixed_ff_unique() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t192 = @simp.rewrite_tac(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fformat_radix_ipow_le_0())]))
   let t193 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fulp()]))), t192)
-  fixed_fulp_le_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). &0 <= (fulp fmt)"), t193))
+  fixed_fulp_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). &0 <= (fulp fmt)"), t193))
 }
 
 ///|
@@ -595,7 +595,7 @@ pub fn fixed_fulp_le_0() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t194 = @simp.rewrite_tac(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fformat_radix_ipow_lt_0())]))
   let t195 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fulp()]))), t194)
-  fixed_fulp_lt_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). &0 < (fulp fmt)"), t195))
+  fixed_fulp_lt_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). &0 < (fulp fmt)"), t195))
 }
 
 ///|
@@ -660,7 +660,7 @@ fn step_27() -> Unit raise {
   let t197 = @tactics.exists_tac(@parser.parse_term("&((fr fmt) EXP ((fp fmt) - 1)) *\n                      &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"))
   let t196 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t232 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fixed.fulp()]))), t196), t197), @tactics.conj_tac), t231)
-  fixed_fulp_le_finf_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). (fulp fmt) <= (finf fmt)"), t232))
+  fixed_fulp_le_finf_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). (fulp fmt) <= (finf fmt)"), t232))
 }
 
 ///|
@@ -697,7 +697,7 @@ fn step_28() -> Unit raise {
     }
   })
   let t250 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t237), t242), t246), t249)
-  fixed_ff_le_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) x <= (fr fmt) EXP ((fp fmt) - 1)"), t250))
+  fixed_ff_le_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) x <= (fr fmt) EXP ((fp fmt) - 1)"), t250))
 }
 
 ///|
@@ -748,7 +748,7 @@ fn step_29() -> Unit raise {
   })
   let t252 = @tactics.disch_then((x251 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["xfixed", "absxlt"]), x251))
   let t281 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t252), t257), t261), t264), t268), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t269), t271), t274), t275), t277), t278), t279), t280)
-  fixed_ff_lt_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). is_fixed(fmt) x /\\ abs(x) < (finf fmt) ==>\n          ff(fmt) x < (fr fmt) EXP ((fp fmt) - 1)"), t281))
+  fixed_ff_lt_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). is_fixed(fmt) x /\\ abs(x) < (finf fmt) ==>\n          ff(fmt) x < (fr fmt) EXP ((fp fmt) - 1)"), t281))
 }
 
 ///|
@@ -807,7 +807,7 @@ fn step_30() -> Unit raise {
     }
   })
   let t317 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t286), t290), t293), t294), t296), t297), t298), @tactics.conj_tac), t299), t301), t302), t303), t313), t316), @int.asm_arith_tac)
-  fixed_ff_finf_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). ff(fmt) (finf fmt) = (fr fmt) EXP ((fp fmt) - 1)"), t317))
+  fixed_ff_finf_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). ff(fmt) (finf fmt) = (fr fmt) EXP ((fp fmt) - 1)"), t317))
 }
 
 ///|
@@ -870,7 +870,7 @@ fn step_31() -> Unit raise {
     }
   })
   let t355 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t322), t327), t331), t336), t350), t351), t352), t353), t354)
-  fixed_ff_neg_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) (-- x) = ff(fmt) x"), t355))
+  fixed_ff_neg_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) (-- x) = ff(fmt) x"), t355))
 }
 
 ///|
@@ -907,7 +907,7 @@ fn step_32() -> Unit raise {
     }
   })
   let t373 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t360), t365), t369), t372)
-  fixed_ff_rep_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          abs(x) = &(ff(fmt) x) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"), t373))
+  fixed_ff_rep_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          abs(x) = &(ff(fmt) x) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"), t373))
 }
 
 ///|
@@ -930,7 +930,7 @@ fn step_33() -> Unit raise {
   let t394 = @list.List([@simp.rewrite_tac(@list.List([fformat_radix_ipow_neq_0()])), t393])
   let t389 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_eq_mul_rcancel())]))
   let t388 = @tactics.exists_tac(@parser.parse_term("&(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1) = &0"))
-  let t387 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("!(b:bool). (~b) /\\ (a \\/ b) ==> a")))
+  let t387 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("forall(b:bool). (~b) /\\ (a \\/ b) ==> a")))
   let t386 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_eq())]))
   let t385 = @simp.once_rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
   let t383 = @tactics.use_then("zerofixed", fn(x381 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -947,7 +947,7 @@ fn step_33() -> Unit raise {
   let t374 = @bool.spec(@parser.parse_term("fmt:fformat"), fixed_zero_in_fixed())
   let t375 = @simp.rewrite_rule(@list.List([@fixed.fixed()]))(t374)
   let t395 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.label_tac("zerofixed", @simp.rewrite_rule(@list.List([@sets.in_elim_thm()]))(t375))), t380), t384), t385), t386), t387), t388), t389), @tactics.conj_tac), t394)
-  fixed_ff_zero_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). ff(fmt) (&0) = 0"), t395))
+  fixed_ff_zero_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). ff(fmt) (&0) = 0"), t395))
 }
 
 ///|
@@ -1074,7 +1074,7 @@ fn step_36() -> Unit raise {
   })
   let t396 = @simp.rewrite_tac(@list.List([fixed_corr()]))
   let t463 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t396), t406), t409), t410), t462)
-  fixed_in_image_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). x IN (fixed fmt) ==>\n          ?(n:num). n IN (fixed_preimage fmt) /\\ (fixed_corr fmt n) = x"), t463))
+  fixed_in_image_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). x IN (fixed fmt) ==>\n          ?(n:num). n IN (fixed_preimage fmt) /\\ (fixed_corr fmt n) = x"), t463))
 }
 
 ///|
@@ -1169,7 +1169,7 @@ fn step_37() -> Unit raise {
     })(x500))
   }, @list.List([@sets.in_elim_thm()]))
   let t531 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.subset()]))), t501), t529), t530), @tactics.all_tac])
-  let t485 = @tactics.subgoal_then(@parser.parse_term("!(fmt:fformat). (fixed fmt) SUBSET\n          {(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n               y = (fixed_corr fmt n)}"), fn(x482 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t485 = @tactics.subgoal_then(@parser.parse_term("forall(fmt:fformat). (fixed fmt) SUBSET\n          {(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n               y = (fixed_corr fmt n)}"), fn(x482 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s483 = ((x481 : @kernel.Thm) => @tactics.label_tac("lem3", x481))(x482)
     fn(x484 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s483(x484)
@@ -1181,7 +1181,7 @@ fn step_37() -> Unit raise {
   })
   let t476 = @tactics.match_mp_tac(@sets.finite_image())
   let t480 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@equal.gsym(@sets.image())]))), t476), t479), @tactics.all_tac])
-  let t475 = @tactics.subgoal_then(@parser.parse_term("!(fmt:fformat).\n                     FINITE({(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n                          y = (fixed_corr fmt n)})"), fn(x472 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t475 = @tactics.subgoal_then(@parser.parse_term("forall(fmt:fformat).\n                     FINITE({(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n                          y = (fixed_corr fmt n)})"), fn(x472 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s473 = ((x471 : @kernel.Thm) => @tactics.label_tac("lem2", x471))(x472)
     fn(x474 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s473(x474)
@@ -1190,13 +1190,13 @@ fn step_37() -> Unit raise {
   let t469 = @simp.rewrite_tac(@list.List([@iterate.finite_numseg()]))
   let t468 = @simp.rewrite_tac(@list.List([@equal.gsym(@iterate.numseg())]))
   let t470 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([fixed_preimage()]))), t468), t469), @tactics.all_tac])
-  let t535 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!(fmt:fformat). FINITE(fixed_preimage fmt)"), fn(x465 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t535 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall(fmt:fformat). FINITE(fixed_preimage fmt)"), fn(x465 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s466 = ((x464 : @kernel.Thm) => @tactics.label_tac("lem1", x464))(x465)
     fn(x467 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s466(x467)
     }
   }), t470), t475), t480), t485), t531), @tactics.gen_tac), t532), t533), t534)
-  fixed_finite_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). FINITE(fixed fmt)"), t535))
+  fixed_finite_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). FINITE(fixed fmt)"), t535))
 }
 
 ///|
@@ -1224,7 +1224,7 @@ fn step_38() -> Unit raise {
   let t537 = @simp.rewrite_tac(@list.List([@fixed.fixed()]))
   let t536 = @tactics.exists_tac(@parser.parse_term("(&0):real"))
   let t548 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@equal.gsym(@sets.member_not_empty())]))), t536), t537), t538), t539), t540), t541), t542), t543), t547), @int.arith_tac)
-  fixed_nonempty_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat). ~((fixed fmt) = {})"), t548))
+  fixed_nonempty_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat). ~((fixed fmt) = {})"), t548))
 }
 
 ///|
@@ -1298,7 +1298,7 @@ fn step_39() -> Unit raise {
     }
   })
   let t598 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t553), t554), t559), t565), t570), t578), t584), t585), t586), t587), t588), t591), t594), t597)
-  fixed_glb_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (glb(fmt) x) = y /\\ (is_glb(fmt) x y)"), t598))
+  fixed_glb_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (glb(fmt) x) = y /\\ (is_glb(fmt) x y)"), t598))
 }
 
 ///|
@@ -1372,7 +1372,7 @@ fn step_40() -> Unit raise {
     }
   })
   let t648 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t603), t604), t609), t615), t620), t628), t634), t635), t636), t637), t638), t641), t644), t647)
-  fixed_lub_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (lub(fmt) x) = y /\\ (is_lub(fmt) x y)"), t648))
+  fixed_lub_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (lub(fmt) x) = y /\\ (is_lub(fmt) x y)"), t648))
 }
 
 ///|
@@ -1419,7 +1419,7 @@ fn step_41() -> Unit raise {
   })
   let t650 = @tactics.disch_then((x649 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "glby11", "glby21"]), x649))
   let t673 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t650), t653), t656), t660), t664), t668), t672), @int.asm_arith_tac)
-  fixed_glb_unique_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_glb(fmt) x y1 /\\ is_glb(fmt) x y2 ==>\n           y1 = y2"), t673))
+  fixed_glb_unique_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_glb(fmt) x y1 /\\ is_glb(fmt) x y2 ==>\n           y1 = y2"), t673))
 }
 
 ///|
@@ -1466,7 +1466,7 @@ fn step_42() -> Unit raise {
   })
   let t675 = @tactics.disch_then((x674 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "luby11", "luby21"]), x674))
   let t698 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t675), t678), t681), t685), t689), t693), t697), @int.asm_arith_tac)
-  fixed_lub_unique_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_lub(fmt) x y1 /\\ is_lub(fmt) x y2 ==>\n           y1 = y2"), t698))
+  fixed_lub_unique_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_lub(fmt) x y1 /\\ is_lub(fmt) x y2 ==>\n           y1 = y2"), t698))
 }
 
 ///|
@@ -1493,7 +1493,7 @@ fn step_43() -> Unit raise {
     @tactics.choose_then((x701 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["glbeq", "isglb"]), x701))(t702)
   })
   let t709 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t703), t704), t708)
-  fixed_glb_is_fixed_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (glb(fmt) x) IN (fixed fmt)"), t709))
+  fixed_glb_is_fixed_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (glb(fmt) x) IN (fixed fmt)"), t709))
 }
 
 ///|
@@ -1520,7 +1520,7 @@ fn step_44() -> Unit raise {
     @tactics.choose_then((x712 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["lubeq", "islub"]), x712))(t713)
   })
   let t720 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t714), t715), t719)
-  fixed_lub_is_fixed_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (lub(fmt) x) IN (fixed fmt)"), t720))
+  fixed_lub_is_fixed_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (lub(fmt) x) IN (fixed fmt)"), t720))
 }
 
 ///|
@@ -1550,7 +1550,7 @@ fn step_45() -> Unit raise {
     @common.label_conjuncts_tac(@list.List(["a1", "a2", "a3"]), @simp.rewrite_rule(@list.List([@fixed.is_frac()]))(thm))
   })
   let t732 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t723), t728), t729), t730), t731)
-  fixed_plus_fulp_nneg_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (u:real) (f:num).\n          &0 <= u /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              &(f + 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"), t732))
+  fixed_plus_fulp_nneg_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (u:real) (f:num).\n          &0 <= u /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              &(f + 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"), t732))
 }
 
 ///|
@@ -1596,7 +1596,7 @@ fn step_46() -> Unit raise {
     @common.label_conjuncts_tac(@list.List(["a1", "a2"]), thm)
   })
   let t756 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t735), t738), t743), t744), t745), t751), t755)
-  fixed_plus_fulp_neg_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (u:real) (f:num).\n          u < &0 /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              -- &(f - 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"), t756))
+  fixed_plus_fulp_neg_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (u:real) (f:num).\n          u < &0 /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              -- &(f - 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)"), t756))
 }
 
 ///|
@@ -1803,7 +1803,7 @@ fn step_47() -> Unit raise {
   })
   let t758 = @tactics.disch_then((x757 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["ufixed", "vfixed", "ulev", "vlefulp"]), x757))
   let t916 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t758), t768), t778), t781), t784), t785), t915)
-  fixed_fulp_distance_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (u:real) (v:real).\n          (u IN (fixed fmt)) /\\ (v IN (fixed fmt)) /\\\n          (u <= v) /\\ (v <= u + (fulp fmt)) ==>\n          (v = u \\/ v = u + (fulp fmt))"), t916))
+  fixed_fulp_distance_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (u:real) (v:real).\n          (u IN (fixed fmt)) /\\ (v IN (fixed fmt)) /\\\n          (u <= v) /\\ (v <= u + (fulp fmt)) ==>\n          (v = u \\/ v = u + (fulp fmt))"), t916))
 }
 
 ///|
@@ -2112,7 +2112,7 @@ fn step_48() -> Unit raise {
     @tactics.label_tac("absx", thm)
   })
   let t1169 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t919), t924), t929), t930), @tactics.conj_tac), t1168)
-  fixed_glb_lub_bounds_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          glb(fmt) x <= lub(fmt) x /\\ lub(fmt) x <= glb(fmt) x + (fulp fmt)"), t1169))
+  fixed_glb_lub_bounds_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          glb(fmt) x <= lub(fmt) x /\\ lub(fmt) x <= glb(fmt) x + (fulp fmt)"), t1169))
 }
 
 ///|
@@ -2136,7 +2136,7 @@ fn step_49() -> Unit raise {
   let t1171 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("a /\\ b /\\ c /\\ d <=> (a /\\ b) /\\ (c /\\ d)"))]))
   let t1170 = @tactics.match_mp_tac(fixed_fulp_distance())
   let t1178 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t1170), t1171), @tactics.conj_tac), t1177)
-  fixed_glb_lub_dist_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          lub(fmt) x = glb(fmt) x \\/ lub(fmt) x = glb(fmt) x + (fulp fmt)"), t1178))
+  fixed_glb_lub_dist_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          lub(fmt) x = glb(fmt) x \\/ lub(fmt) x = glb(fmt) x + (fulp fmt)"), t1178))
 }
 
 ///|
@@ -2163,7 +2163,7 @@ fn step_50() -> Unit raise {
     @tactics.disj_cases_tac(@drule.match_mp(fixed_glb_lub_dist())(thm))
   })
   let t1189 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1181), t1188)
-  fixed_glb_lub_dist_2_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(lub(fmt) x - glb(fmt) x) <= (fulp fmt)"), t1189))
+  fixed_glb_lub_dist_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(lub(fmt) x - glb(fmt) x) <= (fulp fmt)"), t1189))
 }
 
 ///|
@@ -2299,7 +2299,7 @@ fn step_51() -> Unit raise {
   let t1311 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realax.real_le_trans()), t1310), @int.asm_arith_tac)
   let t1312 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t1311])
   let t1309 = @tactics.exists_tac(@parser.parse_term("glb(fmt) x"))
-  let t1313 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!x. &0 <= x /\\ x <= y ==> &0 <= (y:real)"))), t1309), @tactics.conj_tac), t1312), @tactics.all_tac])
+  let t1313 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall x. &0 <= x /\\ x <= y ==> &0 <= (y:real)"))), t1309), @tactics.conj_tac), t1312), @tactics.all_tac])
   let t1308 = @tactics.subgoal_then(@parser.parse_term("&0 <= lub(fmt) x"), fn(x1305 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1306 = ((x1304 : @kernel.Thm) => @tactics.label_tac("lubgeq0", x1304))(x1305)
     fn(x1307 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -2395,7 +2395,7 @@ fn step_51() -> Unit raise {
     }
   })
   let t1365 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1239), t1242), t1244), t1249), t1252), t1257), t1260), t1261), t1264), t1364)
-  fixed_glb_lub_frac_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (f1:num) (f2:num). abs(x) <= (finf fmt) ==>\n          ((is_frac(fmt) (lub(fmt) x) f1) /\\ (is_frac(fmt) (glb(fmt) x) f2) ==>\n          (f1 = f2 /\\ (lub(fmt) x = glb(fmt) x)) \\/ f1 = f2 + 1 \\/\n            f1 = f2 - 1)"), t1365))
+  fixed_glb_lub_frac_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (f1:num) (f2:num). abs(x) <= (finf fmt) ==>\n          ((is_frac(fmt) (lub(fmt) x) f1) /\\ (is_frac(fmt) (glb(fmt) x) f2) ==>\n          (f1 = f2 /\\ (lub(fmt) x = glb(fmt) x)) \\/ f1 = f2 + 1 \\/\n            f1 = f2 - 1)"), t1365))
 }
 
 ///|
@@ -2437,7 +2437,7 @@ fn step_52() -> Unit raise {
     }
   })
   let t1388 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1370), @tactics.gen_tac), @tactics.disch_tac), t1371), t1387)
-  fixed_glb_lub_discrete_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (!(s:real). s IN (fixed fmt) ==>\n             s <= glb(fmt) x \\/ lub(fmt) x <= s)"), t1388))
+  fixed_glb_lub_discrete_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (forall(s:real). s IN (fixed fmt) ==>\n             s <= glb(fmt) x \\/ lub(fmt) x <= s)"), t1388))
 }
 
 ///|
@@ -2475,7 +2475,7 @@ fn step_53() -> Unit raise {
   })
   let t1390 = @tactics.disch_then((x1389 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xgeq0"]), x1389))
   let t1408 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1390), t1393), t1394), t1399), t1402), t1407)
-  fixed_glb_le_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (glb(fmt) x)"), t1408))
+  fixed_glb_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (glb(fmt) x)"), t1408))
 }
 
 ///|
@@ -2500,7 +2500,7 @@ fn step_54() -> Unit raise {
   })
   let t1410 = @tactics.disch_then((x1409 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xgeq0"]), x1409))
   let t1418 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1410), t1413), t1414), t1415), t1416), t1417)
-  fixed_glb_le_0_2_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (glb(fmt) x) <= &0"), t1418))
+  fixed_glb_le_0_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (glb(fmt) x) <= &0"), t1418))
 }
 
 ///|
@@ -2525,7 +2525,7 @@ fn step_55() -> Unit raise {
   })
   let t1420 = @tactics.disch_then((x1419 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xgeq0"]), x1419))
   let t1428 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1420), t1423), t1424), t1425), t1426), t1427)
-  fixed_lub_le_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (lub(fmt) x)"), t1428))
+  fixed_lub_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (lub(fmt) x)"), t1428))
 }
 
 ///|
@@ -2563,7 +2563,7 @@ fn step_56() -> Unit raise {
   })
   let t1430 = @tactics.disch_then((x1429 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xgeq0"]), x1429))
   let t1448 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1430), t1433), t1434), t1439), t1442), t1447)
-  fixed_lub_le_0_2_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (lub(fmt) x) <= &0"), t1448))
+  fixed_lub_le_0_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (lub(fmt) x) <= &0"), t1448))
 }
 
 ///|
@@ -2600,7 +2600,7 @@ fn step_57() -> Unit raise {
   })
   let t1449 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1464 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1449), @tactics.disch_tac), t1453), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1457), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1458), t1462), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1463), @int.asm_arith_tac)
-  closer_lower_c.set(@tactics.prove(@parser.parse_term("!(x:real) (y:real) (z:real). x < y /\\ y <= z ==>\n          closer y x z"), t1464))
+  closer_lower_c.set(@tactics.prove(@parser.parse_term("forall(x:real) (y:real) (z:real). x < y /\\ y <= z ==>\n          closer y x z"), t1464))
 }
 
 ///|
@@ -2637,7 +2637,7 @@ fn step_58() -> Unit raise {
   })
   let t1465 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1480 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1465), @tactics.disch_tac), t1469), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1473), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1474), t1478), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1479), @int.asm_arith_tac)
-  closer_higher_c.set(@tactics.prove(@parser.parse_term("!(x:real) (y:real) (z:real). x <= y /\\ y < z ==>\n          closer y z x"), t1480))
+  closer_higher_c.set(@tactics.prove(@parser.parse_term("forall(x:real) (y:real) (z:real). x <= y /\\ y < z ==>\n          closer y z x"), t1480))
 }
 
 ///|
@@ -2654,7 +2654,7 @@ pub fn closer_higher() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   let t1481 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1482 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1481), @int.arith_tac)
-  closer_eq_c.set(@tactics.prove(@parser.parse_term("!(x:real) (y:real). closer y y x <=> F"), t1482))
+  closer_eq_c.set(@tactics.prove(@parser.parse_term("forall(x:real) (y:real). closer y y x <=> F"), t1482))
 }
 
 ///|
@@ -2671,7 +2671,7 @@ pub fn closer_eq() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   let t1483 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1484 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1483), @int.arith_tac)
-  closer_neg_c.set(@tactics.prove(@parser.parse_term("!(a:real) (x:real) (y:real). (closer x y a) ==> ~(closer y x a)"), t1484))
+  closer_neg_c.set(@tactics.prove(@parser.parse_term("forall(a:real) (x:real) (y:real). (closer x y a) ==> ~(closer y x a)"), t1484))
 }
 
 ///|
@@ -2688,7 +2688,7 @@ pub fn closer_neg() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   let t1485 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1486 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1485), @int.arith_tac)
-  closer_trans_c.set(@tactics.prove(@parser.parse_term("!(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ (closer y z a) ==> (closer x z a)"), t1486))
+  closer_trans_c.set(@tactics.prove(@parser.parse_term("forall(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ (closer y z a) ==> (closer x z a)"), t1486))
 }
 
 ///|
@@ -2705,7 +2705,7 @@ pub fn closer_trans() -> @kernel.Thm {
 fn step_62() -> Unit raise {
   let t1487 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1488 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1487), @int.arith_tac)
-  closer_trans_2_c.set(@tactics.prove(@parser.parse_term("!(a:real) (x:real) (y:real) (z:real).\n          ~(closer x y a) /\\ ~(closer y x a) /\\ (closer y z a) ==>\n          (closer x z a)"), t1488))
+  closer_trans_2_c.set(@tactics.prove(@parser.parse_term("forall(a:real) (x:real) (y:real) (z:real).\n          ~(closer x y a) /\\ ~(closer y x a) /\\ (closer y z a) ==>\n          (closer x z a)"), t1488))
 }
 
 ///|
@@ -2722,7 +2722,7 @@ pub fn closer_trans_2() -> @kernel.Thm {
 fn step_63() -> Unit raise {
   let t1489 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1490 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1489), @int.arith_tac)
-  closer_between_1_c.set(@tactics.prove(@parser.parse_term("!(a:real) (x:real) (y:real).\n          (closer x y a \\/ ~closer y x a) /\\ x <= a /\\ a <= y ==>\n          abs(x - a) <= abs(y - x) / &2"), t1490))
+  closer_between_1_c.set(@tactics.prove(@parser.parse_term("forall(a:real) (x:real) (y:real).\n          (closer x y a \\/ ~closer y x a) /\\ x <= a /\\ a <= y ==>\n          abs(x - a) <= abs(y - x) / &2"), t1490))
 }
 
 ///|
@@ -2739,7 +2739,7 @@ pub fn closer_between_1() -> @kernel.Thm {
 fn step_64() -> Unit raise {
   let t1491 = @simp.rewrite_tac(@list.List([@common.closer()]))
   let t1492 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1491), @int.arith_tac)
-  closer_between_2_c.set(@tactics.prove(@parser.parse_term("!(a:real) (x:real) (y:real).\n          (closer y x a \\/ ~closer x y a) /\\ x <= a /\\ a <= y ==>\n              abs(y - a) <= abs(y - x) / &2"), t1492))
+  closer_between_2_c.set(@tactics.prove(@parser.parse_term("forall(a:real) (x:real) (y:real).\n          (closer y x a \\/ ~closer x y a) /\\ x <= a /\\ a <= y ==>\n              abs(y - a) <= abs(y - x) / &2"), t1492))
 }
 
 ///|
@@ -2754,7 +2754,7 @@ pub fn closer_between_2() -> @kernel.Thm {
 ///|
 /// is_closest
 fn step_65() -> Unit raise {
-  is_closest_c.set(@define.define_(@parser.parse_term("is_closest (fmt:fformat) (x:real) (y:real) =\n         (!(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))")))
+  is_closest_c.set(@define.define_(@parser.parse_term("is_closest (fmt:fformat) (x:real) (y:real) =\n         (forall(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))")))
 }
 
 ///|
@@ -2769,7 +2769,7 @@ pub fn is_closest() -> @kernel.Thm {
 ///|
 /// to_even
 fn step_66() -> Unit raise {
-  to_even_c.set(@define.define_(@parser.parse_term("to_even (fmt:fformat) (x:real) (y:real) = (!(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))")))
+  to_even_c.set(@define.define_(@parser.parse_term("to_even (fmt:fformat) (x:real) (y:real) = (forall(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))")))
 }
 
 ///|
@@ -2984,7 +2984,7 @@ fn step_69() -> Unit raise {
     }
   })
   let t1638 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1517), t1518), t1519), @pair.let_tac), t1520), t1521), t1524), t1527), t1530), t1533), t1536), @class.cond_cases_tac), t1561), @class.cond_cases_tac), t1581), @class.cond_cases_tac), t1637)
-  fixed_rd_nearest_closest_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\ is_closest(fmt) x y"), t1638))
+  fixed_rd_nearest_closest_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\ is_closest(fmt) x y"), t1638))
 }
 
 ///|
@@ -3373,7 +3373,7 @@ fn step_70() -> Unit raise {
     }
   })
   let t1952 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1643), t1644), @pair.let_tac), t1645), t1646), t1649), t1652), t1655), t1658), t1661), @class.cond_cases_tac), t1718), @class.cond_cases_tac), t1774), @class.cond_cases_tac), t1807), t1808), t1809), @tactics.conj_tac), @list.List([lub_fixed_proof, @tactics.all_tac])), t1810), t1811), t1813), t1818), t1884), t1890), t1893), t1898), t1904), t1917), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1918), t1951)
-  fixed_rd_nearest_even_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_even(fmt) x y"), t1952))
+  fixed_rd_nearest_even_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_even(fmt) x y"), t1952))
 }
 
 ///|
@@ -3414,7 +3414,7 @@ fn step_71() -> Unit raise {
     }
   })
   let t1976 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1957), t1962), t1967), t1968), t1969), t1970), t1971), t1974), t1975)
-  fixed_rd_nearest_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     is_closest(fmt) x y /\\\n                     to_even(fmt) x y"), t1976))
+  fixed_rd_nearest_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     is_closest(fmt) x y /\\\n                     to_even(fmt) x y"), t1976))
 }
 
 ///|
@@ -3429,7 +3429,7 @@ pub fn fixed_rd_nearest_exists() -> @kernel.Thm {
 ///|
 /// to_zero
 fn step_72() -> Unit raise {
-  to_zero_c.set(@define.define_(@parser.parse_term("to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
+  to_zero_c.set(@define.define_(@parser.parse_term("to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       forall(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       forall(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
 }
 
 ///|
@@ -3501,7 +3501,7 @@ fn step_73() -> Unit raise {
     }
   })
   let t2025 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1981), t1984), t1985), @class.cond_cases_tac), t2004), t2005), t2006), @tactics.conj_tac), @list.List([lub_fixed_proof, @tactics.all_tac])), t2007), t2008), @tactics.conj_tac), t2024)
-  fixed_rd_zero_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_zero x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_zero(fmt) x y"), t2025))
+  fixed_rd_zero_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_zero x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_zero(fmt) x y"), t2025))
 }
 
 ///|
@@ -3516,7 +3516,7 @@ pub fn fixed_rd_zero_exists() -> @kernel.Thm {
 ///|
 /// to_pinf
 fn step_74() -> Unit raise {
-  to_pinf_c.set(@define.define_(@parser.parse_term("to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
+  to_pinf_c.set(@define.define_(@parser.parse_term("to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ forall(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
 }
 
 ///|
@@ -3549,7 +3549,7 @@ fn step_75() -> Unit raise {
     }
   })
   let t2041 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2030), t2033), t2034), t2035), t2036), @tactics.conj_tac), @list.List([lub_fixed_proof, @tactics.all_tac])), t2037), t2038), t2039), t2040)
-  fixed_rd_pinf_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_pinf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_pinf(fmt) x y"), t2041))
+  fixed_rd_pinf_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_pinf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_pinf(fmt) x y"), t2041))
 }
 
 ///|
@@ -3564,7 +3564,7 @@ pub fn fixed_rd_pinf_exists() -> @kernel.Thm {
 ///|
 /// to_ninf
 fn step_76() -> Unit raise {
-  to_ninf_c.set(@define.define_(@parser.parse_term("to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)")))
+  to_ninf_c.set(@define.define_(@parser.parse_term("to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ forall(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)")))
 }
 
 ///|
@@ -3597,7 +3597,7 @@ fn step_77() -> Unit raise {
     }
   })
   let t2057 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2046), t2049), t2050), t2051), t2052), @tactics.conj_tac), @list.List([glb_fixed_proof, @tactics.all_tac])), t2053), t2054), t2055), t2056)
-  fixed_rd_ninf_exists_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_ninf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_ninf(fmt) x y"), t2057))
+  fixed_rd_ninf_exists_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_ninf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_ninf(fmt) x y"), t2057))
 }
 
 ///|
@@ -3623,7 +3623,7 @@ fn step_78() -> Unit raise {
   let t2059 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2058 = @tactics.match_mp_tac(@fixed.roundmode_induct())
   let t2068 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t2058), t2059), t2060), @tactics.conj_tac), t2067)
-  fixed_rd_is_glb_lub_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (m:roundmode) (y:real).\n          fround(fmt) m x = y ==>\n             y = glb(fmt) x \\/ y = lub(fmt) x"), t2068))
+  fixed_rd_is_glb_lub_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (m:roundmode) (y:real).\n          fround(fmt) m x = y ==>\n             y = glb(fmt) x \\/ y = lub(fmt) x"), t2068))
 }
 
 ///|
@@ -3648,7 +3648,7 @@ fn step_79() -> Unit raise {
   let t2070 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2069 = @tactics.match_mp_tac(@fixed.roundmode_induct())
   let t2078 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t2069), t2070), @tactics.conj_tac), t2077)
-  fixed_rd_is_glb_lub_2_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (m:roundmode).\n          fround(fmt) m x = glb(fmt) x \\/ fround(fmt) m x = lub(fmt) x"), t2078))
+  fixed_rd_is_glb_lub_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (m:roundmode).\n          fround(fmt) m x = glb(fmt) x \\/ fround(fmt) m x = lub(fmt) x"), t2078))
 }
 
 ///|
@@ -3671,7 +3671,7 @@ fn step_80() -> Unit raise {
   let t2080 = @parser.parse_term("x:real")
   let t2081 = @tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2080, t2079]), fixed_rd_is_glb_lub_2()))
   let t2086 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2081), t2085)
-  fixed_rd_le_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          &0 <= x ==>\n          &0 <= (fround(fmt) m x)"), t2086))
+  fixed_rd_le_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          &0 <= x ==>\n          &0 <= (fround(fmt) m x)"), t2086))
 }
 
 ///|
@@ -3694,7 +3694,7 @@ fn step_81() -> Unit raise {
   let t2088 = @parser.parse_term("x:real")
   let t2089 = @tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2088, t2087]), fixed_rd_is_glb_lub_2()))
   let t2094 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2089), t2093)
-  fixed_rd_le_0_2_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          x <= &0 ==>\n          (fround(fmt) m x) <= &0"), t2094))
+  fixed_rd_le_0_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          x <= &0 ==>\n          (fround(fmt) m x) <= &0"), t2094))
 }
 
 ///|
@@ -3734,7 +3734,7 @@ fn step_82() -> Unit raise {
   let t2097 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t2096 = @tactics.disch_then((x2095 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "yfixed", "xleqy"]), x2095))
   let t2117 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2096), t2097), t2098), @tactics.conj_tac), t2116)
-  fixed_rd_mono_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ x <= y ==>\n          (fround(fmt) m x) <= y"), t2117))
+  fixed_rd_mono_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ x <= y ==>\n          (fround(fmt) m x) <= y"), t2117))
 }
 
 ///|
@@ -3774,7 +3774,7 @@ fn step_83() -> Unit raise {
   let t2120 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t2119 = @tactics.disch_then((x2118 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "yfixed", "yleqx"]), x2118))
   let t2140 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2119), t2120), t2121), @tactics.conj_tac), t2139)
-  fixed_rd_mono_2_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ y <= x ==>\n          y <= (fround(fmt) m x)"), t2140))
+  fixed_rd_mono_2_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ y <= x ==>\n          y <= (fround(fmt) m x)"), t2140))
 }
 
 ///|
@@ -3810,7 +3810,7 @@ fn step_84() -> Unit raise {
     }
   })
   let t2157 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2144), t2148), t2152), t2156), @int.asm_arith_tac)
-  fixed_rd_eq_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (m:roundmode). (fround(fmt) m (&0)) = &0"), t2157))
+  fixed_rd_eq_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (m:roundmode). (fround(fmt) m (&0)) = &0"), t2157))
 }
 
 ///|
@@ -3849,7 +3849,7 @@ fn step_85() -> Unit raise {
     }
   })
   let t2178 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2162), t2165), t2177)
-  fixed_rd_is_fixed_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real) (m:roundmode).\n          abs(x) <= (finf fmt) ==> is_fixed(fmt) (fround(fmt) m x)"), t2178))
+  fixed_rd_is_fixed_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real) (m:roundmode).\n          abs(x) <= (finf fmt) ==> is_fixed(fmt) (fround(fmt) m x)"), t2178))
 }
 
 ///|
@@ -3914,7 +3914,7 @@ fn step_86() -> Unit raise {
   let t2257 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(x:real) <= y /\\ ~(x = y) ==> x < y")))
   let t2256 = @simp.asm_rewrite_tac(@list.List([]))
   let t2255 = @tactics.exists_tac(@parser.parse_term("x:real"))
-  let t2259 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!(x:real). z1 <= x /\\ x < z2 ==> ~(z2 = z1)"))), t2255), t2256), t2257), t2258), @tactics.all_tac])
+  let t2259 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall(x:real). z1 <= x /\\ x < z2 ==> ~(z2 = z1)"))), t2255), t2256), t2257), t2258), @tactics.all_tac])
   let t2297 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(y' = (y:real))"), fn(x2252 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2253 = @tactics.assume_tac(x2252)
     fn(x2254 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3977,7 +3977,7 @@ fn step_86() -> Unit raise {
   let t2206 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(y:real) <= x /\\ ~(x = y) ==> y < x")))
   let t2205 = @simp.asm_rewrite_tac(@list.List([]))
   let t2204 = @tactics.exists_tac(@parser.parse_term("x:real"))
-  let t2208 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!(x:real). z1 < x /\\ x <= z2 ==> ~(z2 = z1)"))), t2204), t2205), t2206), t2207), @tactics.all_tac])
+  let t2208 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall(x:real). z1 < x /\\ x <= z2 ==> ~(z2 = z1)"))), t2204), t2205), t2206), t2207), @tactics.all_tac])
   let t2246 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(y' = (y:real))"), fn(x2201 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2202 = @tactics.assume_tac(x2201)
     fn(x2203 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -4012,7 +4012,7 @@ fn step_86() -> Unit raise {
     }
   })
   let t2301 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2183), t2186), t2191), t2192), t2195), t2300)
-  fixed_rd_nearest_abs_error_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_near x - x) <= (fulp fmt) / &2"), t2301))
+  fixed_rd_nearest_abs_error_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_near x - x) <= (fulp fmt) / &2"), t2301))
 }
 
 ///|
@@ -4084,7 +4084,7 @@ fn step_87() -> Unit raise {
     }
   })
   let t2349 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2306), t2309), t2314), t2315), t2318), t2348)
-  fixed_rd_zero_abs_error_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_zero x - x) <= fulp fmt"), t2349))
+  fixed_rd_zero_abs_error_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_zero x - x) <= fulp fmt"), t2349))
 }
 
 ///|
@@ -4156,7 +4156,7 @@ fn step_88() -> Unit raise {
     }
   })
   let t2397 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2354), t2357), t2362), t2363), t2366), t2396)
-  fixed_rd_pinf_abs_error_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_pinf x - x) <= fulp fmt"), t2397))
+  fixed_rd_pinf_abs_error_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_pinf x - x) <= fulp fmt"), t2397))
 }
 
 ///|
@@ -4228,7 +4228,7 @@ fn step_89() -> Unit raise {
     }
   })
   let t2445 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2402), t2405), t2410), t2411), t2414), t2444)
-  fixed_rd_ninf_abs_error_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_ninf x - x) <= fulp fmt"), t2445))
+  fixed_rd_ninf_abs_error_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_ninf x - x) <= fulp fmt"), t2445))
 }
 
 ///|
@@ -4312,7 +4312,7 @@ fn step_90() -> Unit raise {
   })
   let t2447 = @tactics.disch_then((x2446 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xleqglb"]), x2446))
   let t2504 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2447), t2450), t2455), t2456), t2459), t2503)
-  fixed_rd_nearest_to_glb_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ x < glb(fmt) x + (fulp fmt) / &2 ==>\n          (fround(fmt) To_near x) = glb(fmt) x"), t2504))
+  fixed_rd_nearest_to_glb_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ x < glb(fmt) x + (fulp fmt) / &2 ==>\n          (fround(fmt) To_near x) = glb(fmt) x"), t2504))
 }
 
 ///|
@@ -4409,7 +4409,7 @@ fn step_91() -> Unit raise {
   })
   let t2506 = @tactics.disch_then((x2505 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xleqglb"]), x2505))
   let t2570 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2506), t2509), t2514), t2515), t2518), t2569)
-  fixed_rd_nearest_to_lub_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ lub(fmt) x - (fulp fmt) / &2 < x ==>\n          (fround(fmt) To_near x) = lub(fmt) x"), t2570))
+  fixed_rd_nearest_to_lub_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ lub(fmt) x - (fulp fmt) / &2 < x ==>\n          (fround(fmt) To_near x) = lub(fmt) x"), t2570))
 }
 
 ///|
@@ -4467,7 +4467,7 @@ fn step_92() -> Unit raise {
     @tactics.assume_tac(@simp.rewrite_rule(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("~(&0 <= (x:real)) ==>\n                                       (abs(x) < z <=> x > -- z)")))(t2711)]))(absxleqfulp_1))
   })
   let t2708 = @tactics.exists_tac(@parser.parse_term("(-- (fulp fmt)) / &2"))
-  let t2707 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!y. (x:real) < y /\\ y <= z ==> x < z")))
+  let t2707 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall y. (x:real) < y /\\ y <= z ==> x < z")))
   let t2713 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(x:real) < y ==> ~(y = x)"))), t2707), t2708), t2712), @tactics.conj_tac), @list.List([@int.asm_arith_tac, @int.asm_arith_tac])), @tactics.all_tac])
   let t2714 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(y' = -- (fulp fmt))"), fn(x2704 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2705 = @tactics.assume_tac(x2704)
@@ -4587,7 +4587,7 @@ fn step_92() -> Unit raise {
     @tactics.assume_tac(@simp.rewrite_rule(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> abs(x) = x")))(t2616)]))(absxleqfulp))
   })
   let t2613 = @tactics.exists_tac(@parser.parse_term("(fulp fmt) / &2"))
-  let t2612 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!y. (x:real) <= y /\\ y < z ==> x < z")))
+  let t2612 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall y. (x:real) <= y /\\ y < z ==> x < z")))
   let t2611 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("&0 + x = (x:real)"))]))
   let t2620 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(x:real) < y ==> ~(x = y)"))), t2611), t2612), t2613), t2617), @tactics.conj_tac), t2619), @tactics.all_tac])
   let t2621 = @tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(y' = &0 + (fulp fmt))"), fn(x2608 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4644,7 +4644,7 @@ fn step_92() -> Unit raise {
     }
   })
   let t2748 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2575), t2580), t2583), t2584), t2585), t2747)
-  fixed_rd_nearest_to_0_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real).\n          abs(x) < (fulp fmt) / &2 ==> (fround(fmt) To_near x) = &0"), t2748))
+  fixed_rd_nearest_to_0_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real).\n          abs(x) < (fulp fmt) / &2 ==> (fround(fmt) To_near x) = &0"), t2748))
 }
 
 ///|
@@ -4688,7 +4688,7 @@ fn step_93() -> Unit raise {
   let t2751 = @class.asm_cases_tac(@parser.parse_term("abs(x) < (fulp fmt) / &2"))
   let t2750 = @tactics.disch_then((x2749 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absx", "xneq0"]), x2749))
   let t2776 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2750), t2751), t2775)
-  fixed_rd_nearest_rel_error_c.set(@tactics.prove(@parser.parse_term("!(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ ~(x = &0) ==>\n          (rerror x (fround(fmt) To_near x)) <= &1"), t2776))
+  fixed_rd_nearest_rel_error_c.set(@tactics.prove(@parser.parse_term("forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ ~(x = &0) ==>\n          (rerror x (fround(fmt) To_near x)) <= &1"), t2776))
 }
 
 ///|

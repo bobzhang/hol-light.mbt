@@ -39,4 +39,6 @@ jobs:
         run: moon version --all
 
       - name: Core tier
-        run: python3 tools/test.py core --build-jobs 4 -j 4
+        run: |
+          python3 tools/test_hol_notation.py
+          python3 tools/test.py core --build-jobs 4 -j 4

@@ -255,7 +255,7 @@ fn step_17() -> Unit raise {
 /// NO_ROOTS_P256
 fn step_18() -> Unit raise {
   let t26 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p256(), @list.List([p_256(), b_256()]))
-  no_roots_p256_c.set(@tactics.prove(@parser.parse_term("!x:int. ~((x pow 3 - &3 * x + &b_256 == &0) (mod &p_256))"), t26))
+  no_roots_p256_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 - &3 * x + &b_256 == &0) (mod &p_256))"), t26))
 }
 
 ///|
@@ -443,7 +443,7 @@ pub fn p256_group_order() -> @kernel.Thm {
 /// P256_GROUP_ELEMENT_ORDER
 fn step_24() -> Unit raise {
   let t104 = @meson.meson_tac(@list.List([size_p256_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n256()]))
-  p256_group_element_order_c.set(@tactics.prove(@parser.parse_term("!P. P IN group_carrier p256_group\n       ==> group_element_order p256_group P =\n           if P = group_id p256_group then 1 else n_256"), t104))
+  p256_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p256_group\n       ==> group_element_order p256_group P =\n           if P = group_id p256_group then 1 else n_256"), t104))
 }
 
 ///|

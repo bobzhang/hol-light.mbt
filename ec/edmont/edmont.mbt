@@ -67,7 +67,7 @@ fn step_5() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([mcurve_of_ecurve(), ecurve_of_mcurve(), @pair.pair_eq()]))
   let t1 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t1), t2), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  ecurve_of_mcurve_of_ecurve_c.set(@tactics.prove(@parser.parse_term("!f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = d)\n        ==> ecurve_of_mcurve (mcurve_of_ecurve (f,a,d) c) c = (f,a,d)"), t3))
+  ecurve_of_mcurve_of_ecurve_c.set(@tactics.prove(@parser.parse_term("forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = d)\n        ==> ecurve_of_mcurve (mcurve_of_ecurve (f,a,d) c) c = (f,a,d)"), t3))
 }
 
 ///|
@@ -85,7 +85,7 @@ fn step_6() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([mcurve_of_ecurve(), ecurve_of_mcurve(), @pair.pair_eq()]))
   let t4 = @tactics.repeat_tac(@tactics.strip_tac)
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t4), t5), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  mcurve_of_ecurve_of_mcurve_c.set(@tactics.prove(@parser.parse_term("!f A B c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(B = ring_0 f)\n        ==> mcurve_of_ecurve (ecurve_of_mcurve (f,A,B) c) c = (f,A,B)"), t6))
+  mcurve_of_ecurve_of_mcurve_c.set(@tactics.prove(@parser.parse_term("forall f A B c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(B = ring_0 f)\n        ==> mcurve_of_ecurve (ecurve_of_mcurve (f,A,B) c) c = (f,A,B)"), t6))
 }
 
 ///|
@@ -109,11 +109,11 @@ fn step_7() -> Unit raise {
   let t13 = @list.List([@tactics.then_tac(@ringtheory.field_tac, @misc.not_ring_char_divides_tac), t12, @tactics.disch_tac])
   let t11 = @tactics.repeat_tac(@tactics.conj_tac)
   let t10 = @tactics.exists_tac(@parser.parse_term("a:A = d"))
-  let t9 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("!p'. (p' <=> p) /\\ (p' ==> r) /\\ (~p' ==> (q <=> r))\n         ==> (~p /\\ ~q <=> ~r)")))
+  let t9 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("forall p'. (p' <=> p) /\\ (p' ==> r) /\\ (~p' ==> (q <=> r))\n         ==> (~p /\\ ~q <=> ~r)")))
   let t8 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_strongly_nonsingular(), mcurve_of_ecurve()]))
   let t7 = @tactics.repeat_tac(@tactics.strip_tac)
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t7), t8), t9), t10), t11), t13), @tactics.eq_tac), t14), t16), t17), t18), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  mcurve_of_ecurve_strongly_nonsingular_eq_c.set(@tactics.prove(@parser.parse_term("!f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(?z. z IN ring_carrier f /\\ ring_pow f z 2 = ring_mul f a d))"), t19))
+  mcurve_of_ecurve_strongly_nonsingular_eq_c.set(@tactics.prove(@parser.parse_term("forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(?z. z IN ring_carrier f /\\ ring_pow f z 2 = ring_mul f a d))"), t19))
 }
 
 ///|
@@ -131,7 +131,7 @@ fn step_8() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_nonsingular(), mcurve_of_ecurve()]))
   let t20 = @tactics.repeat_tac(@tactics.strip_tac)
   let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t20), t21), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  mcurve_of_ecurve_nonsingular_eq_c.set(@tactics.prove(@parser.parse_term("!f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f))"), t22))
+  mcurve_of_ecurve_nonsingular_eq_c.set(@tactics.prove(@parser.parse_term("forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f)\n        ==> (montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c) <=>\n             ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f))"), t22))
 }
 
 ///|
@@ -175,7 +175,7 @@ fn step_9() -> Unit raise {
   let t24 = @tactics.repeat_tac(@tactics.gen_tac)
   let t23 = @simp.rewrite_tac(@list.List([@misc.field_char_not2()]))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mcurve_of_ecurve_strongly_nonsingular_eq()])), t23), t24), t31), t32), t33), @tactics.disch_tac), t38), t39), t40), @tactics.strip_tac), t41), t42), t43), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  mcurve_of_ecurve_strongly_nonsingular_c.set(@tactics.prove(@parser.parse_term("!f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c)"), t44))
+  mcurve_of_ecurve_strongly_nonsingular_c.set(@tactics.prove(@parser.parse_term("forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_strongly_nonsingular(mcurve_of_ecurve(f,a,d) c)"), t44))
 }
 
 ///|
@@ -198,7 +198,7 @@ fn step_10() -> Unit raise {
   let t46 = @tactics.match_mp_tac(@montgomery.montgomery_strongly_nonsingular_imp_nonsingular())
   let t45 = @simp.rewrite_tac(@list.List([mcurve_of_ecurve()]))
   let t52 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t45), t46), t47), t48), t49), t50), t51)
-  mcurve_of_ecurve_nonsingular_c.set(@tactics.prove(@parser.parse_term("!f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c)"), t52))
+  mcurve_of_ecurve_nonsingular_c.set(@tactics.prove(@parser.parse_term("forall f a d c:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        c IN ring_carrier f /\\ ~(c = ring_0 f) /\\\n        ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_nonsingular(mcurve_of_ecurve(f,a,d) c)"), t52))
 }
 
 ///|
@@ -242,7 +242,7 @@ fn step_11() -> Unit raise {
   let t59 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t58, t57, t56, t55, t54]))
   let t53 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t77 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t53), t59), t60), t67), t68), t69), t70), t76)
-  montgomery_of_edwards_v1_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_curve (mcurve_of_ecurve(f,a,d) c)\n                             (montgomery_of_edwards f c p)"), t77))
+  montgomery_of_edwards_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_curve (mcurve_of_ecurve(f,a,d) c)\n                             (montgomery_of_edwards f c p)"), t77))
 }
 
 ///|
@@ -284,7 +284,7 @@ fn step_12() -> Unit raise {
   let t84 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t83, t82, t81, t80, t79]))
   let t78 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t100 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t78), t84), t85), t92), t93), t94), t99)
-  edwards_of_montgomery_of_edwards_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) a d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_of_montgomery f c (montgomery_of_edwards f c p) = p"), t100))
+  edwards_of_montgomery_of_edwards_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(c = ring_0 f) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_of_montgomery f c (montgomery_of_edwards f c p) = p"), t100))
 }
 
 ///|
@@ -365,7 +365,7 @@ fn step_13() -> Unit raise {
   let t102 = @parser.parse_term("B:A")
   let t103 = @parser.parse_term("A:A")
   let t156 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t103, t102, t101])), t104), t105), @tactics.conj_tac), t111), t112), @tactics.strip_tac), @class.cond_cases_tac), t113), t115), t116), t117), t137), t138), t145), t146), t151), t152), @tactics.conj_tac), @list.List([@ringtheory.field_tac, @tactics.all_tac])), t153), t154), t155), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  edwards_of_montgomery_v1_c.set(@tactics.prove(@parser.parse_term("!f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> edwards_curve (ecurve_of_mcurve(f,A,B) c)\n                          (edwards_of_montgomery f c p)"), t156))
+  edwards_of_montgomery_v1_c.set(@tactics.prove(@parser.parse_term("forall f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> edwards_curve (ecurve_of_mcurve(f,A,B) c)\n                          (edwards_of_montgomery f c p)"), t156))
 }
 
 ///|
@@ -438,7 +438,7 @@ fn step_14() -> Unit raise {
   let t158 = @parser.parse_term("B:A")
   let t159 = @parser.parse_term("A:A")
   let t204 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t159, t158, t157])), t160), t161), t162), t164), @tactics.strip_tac), t165), @list.List([@ringtheory.field_tac, @ringtheory.field_tac, @ringtheory.field_tac, @tactics.all_tac])), t166), t185), t186), t193), t194), t199), t200), @tactics.conj_tac), @list.List([@ringtheory.field_tac, @tactics.all_tac])), t201), t202), t203), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_of_edwards_of_montgomery_c.set(@tactics.prove(@parser.parse_term("!f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> montgomery_of_edwards f c (edwards_of_montgomery f c p) = p"), t204))
+  montgomery_of_edwards_of_montgomery_c.set(@tactics.prove(@parser.parse_term("forall f (A:A) B c p.\n        field f /\\ ~(ring_char f = 2) /\\\n        A IN ring_carrier f /\\ B IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(B = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        montgomery_strongly_nonsingular(f,A,B) /\\\n        edwards_nonsingular(ecurve_of_mcurve(f,A,B) c) /\\\n        montgomery_curve(f,A,B) p\n        ==> montgomery_of_edwards f c (edwards_of_montgomery f c p) = p"), t204))
 }
 
 ///|
@@ -480,7 +480,7 @@ fn step_15() -> Unit raise {
   let t209 = @parser.parse_term("a:A")
   let t210 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t209, t208, t207, t206, t205]))
   let t227 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm()])), t210), t211), t218), t219), t220), t221), t222), t223), t224), t225), t226), @ringtheory.field_tac)
-  montgomery_of_edwards_neg_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_of_edwards f c (edwards_neg(f,a,d) p) =\n            montgomery_neg (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)"), t227))
+  montgomery_of_edwards_neg_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> montgomery_of_edwards f c (edwards_neg(f,a,d) p) =\n            montgomery_neg (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)"), t227))
 }
 
 ///|
@@ -551,7 +551,7 @@ fn step_16() -> Unit raise {
   let t235 = @class.asm_cases_tac(@parser.parse_term("x:A = group_id G"))
   let t234 = @parser.parse_term("y:A")
   let t263 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t234])), @tactics.strip_tac), t235), t236), t237), t239), t240), t241), t242), t245), t246), t248), t249), t256), t257), t258), t259), t260), t261), t262), @tactics.all_tac])
-  let t233 = @tactics.subgoal_then(@parser.parse_term("!x y. x IN group_carrier G /\\ y IN group_carrier G /\\ ~(x = y)\n            ==> (f:A->B) (group_mul G x y) = group_mul H (f x) (f y)"), fn(x230 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t233 = @tactics.subgoal_then(@parser.parse_term("forall x y. x IN group_carrier G /\\ y IN group_carrier G /\\ ~(x = y)\n            ==> (f:A->B) (group_mul G x y) = group_mul H (f x) (f y)"), fn(x230 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s231 = @tactics.assume_tac(x230)
     fn(x232 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s231(x232)
@@ -560,7 +560,7 @@ fn step_16() -> Unit raise {
   let t229 = @simp.asm_simp_tac(@list.List([@grouptheory.group_homomorphism_v1(), @sets.subset(), @sets.forall_in_image()]))
   let t228 = @simp.asm_simp_tac(@list.List([@grouptheory.group_isomorphisms_v1()]))
   let t283 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t228), t229), t233), t263), t265), @tactics.strip_tac), t266), t267), t272), t273), t274), t278), t281), t282)
-  let isolemma = @tactics.prove(@parser.parse_term("!(G:A group) (H:B group) f g z.\n          abelian_group G /\\ abelian_group H /\\\n          z IN group_carrier G /\\ ~(z = group_id G) /\\\n          (!x. x IN group_carrier G\n               ==> f(x) IN group_carrier H /\\ g(f x) = x) /\\\n          (!y. y IN group_carrier H\n               ==> g(y) IN group_carrier G /\\ f(g y) = y) /\\\n          f(group_id G) = group_id H /\\\n          (!x. x IN group_carrier G ==> f(group_inv G x) = group_inv H (f x)) /\\\n          (!x. x IN group_carrier G\n               ==> f(group_mul G z x) = group_mul H (f z) (f x)) /\\\n          (!u v w. u IN group_carrier G /\\ ~(u = group_id G) /\\ ~(u = z) /\\\n                   v IN group_carrier G /\\ ~(v = group_id G) /\\ ~(v = z) /\\\n                   w IN group_carrier G /\\ ~(w = group_id G) /\\ ~(w = z) /\\\n                   group_mul G u v = w /\\\n                   ~(f v = f u) /\\ ~(group_inv H (f v) = f u)\n                   ==> group_mul H (f u) (f v) = f w)\n          ==> group_isomorphisms (G,H) (f,g)"), t283)
+  let isolemma = @tactics.prove(@parser.parse_term("forall(G:A group) (H:B group) f g z.\n          abelian_group G /\\ abelian_group H /\\\n          z IN group_carrier G /\\ ~(z = group_id G) /\\\n          (forall x. x IN group_carrier G\n               ==> f(x) IN group_carrier H /\\ g(f x) = x) /\\\n          (forall y. y IN group_carrier H\n               ==> g(y) IN group_carrier G /\\ f(g y) = y) /\\\n          f(group_id G) = group_id H /\\\n          (forall x. x IN group_carrier G ==> f(group_inv G x) = group_inv H (f x)) /\\\n          (forall x. x IN group_carrier G\n               ==> f(group_mul G z x) = group_mul H (f z) (f x)) /\\\n          (forall u v w. u IN group_carrier G /\\ ~(u = group_id G) /\\ ~(u = z) /\\\n                   v IN group_carrier G /\\ ~(v = group_id G) /\\ ~(v = z) /\\\n                   w IN group_carrier G /\\ ~(w = group_id G) /\\ ~(w = z) /\\\n                   group_mul G u v = w /\\\n                   ~(f v = f u) /\\ ~(group_inv H (f v) = f u)\n                   ==> group_mul H (f u) (f v) = f w)\n          ==> group_isomorphisms (G,H) (f,g)"), t283)
   let t584 = @equal.rand_conv(@equal.sym_conv)
   let t587 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x586 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x583 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -946,7 +946,7 @@ fn step_16() -> Unit raise {
   }), t573), fn(x574 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x574.0, x574.1)
   }), t579), t582), t587), @ringtheory.ring_tac)
-  group_isomorphisms_edwards_montgomery_group_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (edwards_group(f,a,d),\n                                montgomery_group(mcurve_of_ecurve(f,a,d) c))\n                               (montgomery_of_edwards f c,\n                                edwards_of_montgomery f c)"), t588))
+  group_isomorphisms_edwards_montgomery_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (edwards_group(f,a,d),\n                                montgomery_group(mcurve_of_ecurve(f,a,d) c))\n                               (montgomery_of_edwards f c,\n                                edwards_of_montgomery f c)"), t588))
 }
 
 ///|
@@ -990,7 +990,7 @@ fn step_17() -> Unit raise {
   let t591 = @parser.parse_term("a:A")
   let t592 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t591, t590, t589]), group_isomorphisms_edwards_montgomery_group()))
   let t613 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t592), t593), t594), t596), t600), t601), t602), t609), @tactics.ants_tac), t610), t611), t612), @ringtheory.ring_carrier_tac)
-  montgomery_of_edwards_add_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) p /\\\n        edwards_curve(f,a,d) q\n        ==> montgomery_of_edwards f c (edwards_add(f,a,d) p q) =\n            montgomery_add (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)\n                           (montgomery_of_edwards f c q)"), t613))
+  montgomery_of_edwards_add_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) p /\\\n        edwards_curve(f,a,d) q\n        ==> montgomery_of_edwards f c (edwards_add(f,a,d) p q) =\n            montgomery_add (mcurve_of_ecurve(f,a,d) c)\n                           (montgomery_of_edwards f c p)\n                           (montgomery_of_edwards f c q)"), t613))
 }
 
 ///|
@@ -1007,7 +1007,7 @@ pub fn montgomery_of_edwards_add() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t614 = @tactics.accept_tac(group_isomorphisms_edwards_montgomery_group())
   let t615 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@grouptheory.group_isomorphisms_sym()])), t614)
-  group_isomorphisms_montgomery_edwards_group_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (montgomery_group(mcurve_of_ecurve(f,a,d) c),\n                                edwards_group(f,a,d))\n                               (edwards_of_montgomery f c,\n                                montgomery_of_edwards f c)"), t615))
+  group_isomorphisms_montgomery_edwards_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> group_isomorphisms (montgomery_group(mcurve_of_ecurve(f,a,d) c),\n                                edwards_group(f,a,d))\n                               (edwards_of_montgomery f c,\n                                montgomery_of_edwards f c)"), t615))
 }
 
 ///|
@@ -1033,7 +1033,7 @@ fn step_19() -> Unit raise {
     })(t619(x620))
   })
   let t623 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t621), t622)
-  isomorphic_edwards_montgomery_group_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> edwards_group(f,a,d) isomorphic_group\n            montgomery_group(mcurve_of_ecurve(f,a,d) c)"), t623))
+  isomorphic_edwards_montgomery_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> edwards_group(f,a,d) isomorphic_group\n            montgomery_group(mcurve_of_ecurve(f,a,d) c)"), t623))
 }
 
 ///|
@@ -1050,7 +1050,7 @@ pub fn isomorphic_edwards_montgomery_group() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t624 = @tactics.match_accept_tac(isomorphic_edwards_montgomery_group())
   let t625 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@grouptheory.isomorphic_group_sym()])), t624)
-  isomorphic_montgomery_edwards_group_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_group(mcurve_of_ecurve(f,a,d) c) isomorphic_group\n            edwards_group(f,a,d)"), t625))
+  isomorphic_montgomery_edwards_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d c.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\ c IN ring_carrier f /\\\n        ~(a = d) /\\ ~(a = ring_0 f) /\\ ~(d = ring_0 f) /\\ ~(c = ring_0 f) /\\\n        edwards_nonsingular(f,a,d)\n        ==> montgomery_group(mcurve_of_ecurve(f,a,d) c) isomorphic_group\n            edwards_group(f,a,d)"), t625))
 }
 
 ///|

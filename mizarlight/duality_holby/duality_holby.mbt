@@ -213,7 +213,7 @@ pub fn on_clauses() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t11 = @simp.simp_tac(@list.List([]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @simp.rewrite_tac(@list.List([point_induct()]))), t11)
-  forall_point_c.set(@tactics.prove(@parser.parse_term("(!p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t12))
+  forall_point_c.set(@tactics.prove(@parser.parse_term("(forall p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t12))
 }
 
 ///|
@@ -247,7 +247,7 @@ pub fn exists_point() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t15 = @simp.simp_tac(@list.List([]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @simp.rewrite_tac(@list.List([line_induct()]))), t15)
-  forall_line_c.set(@tactics.prove(@parser.parse_term("(!p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t16))
+  forall_line_c.set(@tactics.prove(@parser.parse_term("(forall p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t16))
 }
 
 ///|
@@ -307,7 +307,7 @@ pub fn fano_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 fn step_17() -> Unit raise {
   axiom_1_c.set(@lib.time(fn(x26 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x26.0, x26.1)
-  }, (@parser.parse_term("!p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n     !l'. p ON l' /\\ p' ON l' ==> (l' = l)"), fano_tac)))
+  }, (@parser.parse_term("forall p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n     forall l'. p ON l' /\\ p' ON l' ==> (l' = l)"), fano_tac)))
 }
 
 ///|
@@ -324,7 +324,7 @@ pub fn axiom_1() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   axiom_2_c.set(@lib.time(fn(x27 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x27.0, x27.1)
-  }, (@parser.parse_term("!l l'. ?p. p ON l /\\ p ON l'"), fano_tac)))
+  }, (@parser.parse_term("forall l l'. ?p. p ON l /\\ p ON l'"), fano_tac)))
 }
 
 ///|
@@ -358,7 +358,7 @@ pub fn axiom_3() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   axiom_4_c.set(@lib.time(fn(x29 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x29.0, x29.1)
-  }, (@parser.parse_term("!l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p ON l /\\ p' ON l /\\ p'' ON l"), fano_tac)))
+  }, (@parser.parse_term("forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p ON l /\\ p' ON l /\\ p'' ON l"), fano_tac)))
 }
 
 ///|
@@ -375,10 +375,10 @@ pub fn axiom_4() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t30 = @miz2a.from(@miz2a.so(@miz2a.have, "... = l'"), @list.List([1L, 2L]))
   let t31 = @miz2a.from(@miz2a.have("l = l1"), @list.List([1L, 2L]))
-  let t32 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["l1:Line"])))("p ON l1 /\\ p' ON l1 /\\\n    !l'. p ON l' /\\ p' ON l' ==> (l' = l1)"), @list.List([1L])), @list.List([axiom_1()])), 2L)
+  let t32 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["l1:Line"])))("p ON l1 /\\ p' ON l1 /\\\n    forall l'. p ON l' /\\ p' ON l' ==> (l' = l1)"), @list.List([1L])), @list.List([axiom_1()])), 2L)
   let t33 = @miz2a.at(@miz2a.assume_("~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'"), 1L)
   let t34 = @list.List([@miz2a.fix(@list.List(["p:Point", "p':Point", "l:Line", "l':Line"])), t33, t32, t31, t30, @miz2a.qed()])
-  axiom_1_p_c.set(@miz2a.theorem("!p p' l l'. ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'\n    ==> (l' = l)")(t34))
+  axiom_1_p_c.set(@miz2a.theorem("forall p p' l l'. ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'\n    ==> (l' = l)")(t34))
 }
 
 ///|
@@ -394,12 +394,12 @@ pub fn axiom_1_p() -> @kernel.Thm {
 /// LEMMA_1
 fn step_22() -> Unit raise {
   let t35 = @miz2a.from(@miz2a.thus("?l. O ON l"), @list.List([3L]))
-  let t36 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["l:Line"])))("O ON l /\\ P ON l /\\\n    !l'. O ON l' /\\ P ON l' ==> (l' = l)"), @list.List([2L])), @list.List([axiom_1()])), 3L)
+  let t36 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["l:Line"])))("O ON l /\\ P ON l /\\\n    forall l'. O ON l' /\\ P ON l' ==> (l' = l)"), @list.List([2L])), @list.List([axiom_1()])), 3L)
   let t37 = @miz2a.at(@miz2a.st(@miz2a.so(@miz2a.consider, @list.List(["P:Point"])))("~(P = O)"), 2L)
   let t38 = @miz2a.from(@miz2a.have("~(p = O) \\/ ~(p' = O)"), @list.List([1L]))
   let t39 = @miz2a.fix(@list.List(["O:Point"]))
   let t40 = @list.List([@miz2a.at(@miz2a.by(@miz2a.st(@miz2a.consider(@list.List(["p:Point", "p':Point", "p'':Point"])))("~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n     ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)"), @list.List([axiom_3()])), 1L), t39, t38, t37, t36, t35])
-  lemma_1_c.set(@miz2a.theorem("!O. ?l. O ON l")(t40))
+  lemma_1_c.set(@miz2a.theorem("forall O. ?l. O ON l")(t40))
 }
 
 ///|
@@ -417,8 +417,8 @@ fn step_23() -> Unit raise {
   let t41 = @miz2a.by(@miz2a.from(@miz2a.hence(@miz2a.contradiction()), @list.List([1L, 2L])), @list.List([axiom_1_p()]))
   let t42 = @miz2a.at(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["p':Point"])))("p' ON l /\\ p' ON l' /\\ ~(p' = p)"), @list.List([1L, 2L])), 3L)
   let t43 = @miz2a.at(@miz2a.by(@miz2a.st(@miz2a.consider(@list.List(["p:Point"])))("p ON l /\\ p ON l'"), @list.List([axiom_2()])), 2L)
-  let t44 = @list.List([@miz2a.at(@miz2a.st(@miz2a.otherwise(@miz2a.consider, @list.List(["l:Line", "l':Line"])))("~(l = l') /\\ !p. p ON l /\\ p ON l'\n     ==> ?p'. p' ON l /\\ p' ON l' /\\ ~(p' = p)"), 1L), t43, t42, t41])
-  dual_1_c.set(@miz2a.theorem("!l l'. ~(l = l') ==> ?p. p ON l /\\ p ON l' /\\\n    !p'. p' ON l /\\ p' ON l' ==> (p' = p)")(t44))
+  let t44 = @list.List([@miz2a.at(@miz2a.st(@miz2a.otherwise(@miz2a.consider, @list.List(["l:Line", "l':Line"])))("~(l = l') /\\ forall p. p ON l /\\ p ON l'\n     ==> ?p'. p' ON l /\\ p' ON l' /\\ ~(p' = p)"), 1L), t43, t42, t41])
+  dual_1_c.set(@miz2a.theorem("forall l l'. ~(l = l') ==> ?p. p ON l /\\ p ON l' /\\\n    forall p'. p' ON l /\\ p' ON l' ==> (p' = p)")(t44))
 }
 
 ///|
@@ -434,10 +434,10 @@ pub fn dual_1() -> @kernel.Thm {
 /// DUAL_2
 fn step_24() -> Unit raise {
   let t45 = @miz2a.from(@miz2a.hence(@miz2a.thesis()), @list.List([1L]))
-  let t46 = @miz2a.by(@miz2a.have("(p = p') \\/\n    ?l. p ON l /\\ p' ON l /\\\n      !l'. p ON l' /\\ p' ON l' ==> (l' = l)"), @list.List([axiom_1()]))
+  let t46 = @miz2a.by(@miz2a.have("(p = p') \\/\n    ?l. p ON l /\\ p' ON l /\\\n      forall l'. p ON l' /\\ p' ON l' ==> (l' = l)"), @list.List([axiom_1()]))
   let t47 = @miz2a.at(@miz2a.by(@miz2a.have("?l. p ON l"), @list.List([lemma_1()])), 1L)
   let t48 = @list.List([@miz2a.fix(@list.List(["p:Point", "p':Point"])), t47, t46, t45])
-  dual_2_c.set(@miz2a.theorem("!p p'. ?l. p ON l /\\ p' ON l")(t48))
+  dual_2_c.set(@miz2a.theorem("forall p p'. ?l. p ON l /\\ p' ON l")(t48))
 }
 
 ///|
@@ -455,7 +455,7 @@ fn step_25() -> Unit raise {
   let t49 = @miz2a.from(@miz2a.hence(@miz2a.contradiction()), @list.List([1L, 3L, 6L]))
   let t50 = @miz2a.from(@miz2a.so(@miz2a.have, "... = p1"), @list.List([2L, 4L, 7L]))
   let t51 = @miz2a.from(@miz2a.have("q = q'"), @list.List([6L, 7L]))
-  let t52 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["q':Point"])))("q' ON l1 /\\ q' ON l3 /\\\n    !p'. p' ON l1 /\\ p' ON l3 ==> (p' = q')"), @list.List([5L])), @list.List([dual_1()])), 7L)
+  let t52 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["q':Point"])))("q' ON l1 /\\ q' ON l3 /\\\n    forall p'. p' ON l1 /\\ p' ON l3 ==> (p' = q')"), @list.List([5L])), @list.List([dual_1()])), 7L)
   let t53 = @miz2a.at(@miz2a.st(@miz2a.otherwise(@miz2a.consider, @list.List(["q:Point"])))("q ON l1 /\\ q ON l2 /\\ q ON l3"), 6L)
   let t54 = @miz2a.at(@miz2a.from(@miz2a.thus("~(l1 = l2) /\\ ~(l2 = l3) /\\ ~(l1 = l3)"), @list.List([1L, 2L, 3L, 4L])), 5L)
   let t55 = @miz2a.take(@list.List(["l1", "l2", "l3"]))
@@ -495,7 +495,7 @@ fn step_26() -> Unit raise {
   let t74 = @miz2a.at(@miz2a.by(@miz2a.st(@miz2a.consider(@list.List(["p:Point", "p':Point", "p'':Point"])))("~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n      p ON OP /\\ p' ON OP /\\ p'' ON OP"), @list.List([axiom_4()])), 2L)
   let t75 = @miz2a.at(@miz2a.by(@miz2a.st(@miz2a.consider(@list.List(["OP:Line"])))("O ON OP"), @list.List([lemma_1()])), 1L)
   let t76 = @list.List([@miz2a.fix(@list.List(["O:Point"])), t75, t74, t73, t72, t71, t70, t69, t68, t67, t66, t65, t64, t63, t62, t61, t60])
-  dual_4_c.set(@miz2a.theorem("!O. ?OP OQ OR. ~(OP = OQ) /\\ ~(OQ = OR) /\\ ~(OP = OR) /\\\n    O ON OP /\\ O ON OQ /\\ O ON OR")(t76))
+  dual_4_c.set(@miz2a.theorem("forall O. ?OP OQ OR. ~(OP = OQ) /\\ ~(OQ = OR) /\\ ~(OP = OR) /\\\n    O ON OP /\\ O ON OQ /\\ O ON OR")(t76))
 }
 
 ///|

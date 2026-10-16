@@ -90,7 +90,7 @@ pub fn msum() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t14 = @simp.asm_simp_tac(@list.List([msum(), @cart.lambda_beta()]))
   let t15 = @list.List([@simp.rewrite_tac(@list.List([@cart.finite_index_inrange()])), t14])
-  let t11 = @parser.parse_term("(?h. 1 <= h /\\ h <= dimindex(:N) /\\ !z:real^M^N. z$i = z$h) /\\\n     (?k. 1 <= k /\\ k <= dimindex(:M) /\\ !z:real^M. z$j = z$k)")
+  let t11 = @parser.parse_term("(?h. 1 <= h /\\ h <= dimindex(:N) /\\ forall z:real^M^N. z$i = z$h) /\\\n     (?k. 1 <= k /\\ k <= dimindex(:M) /\\ forall z:real^M. z$j = z$k)")
   let t12 = @tactics.conjuncts_then(@tactics.choose_tac)
   let t13 = (fn(x7 : @kernel.Term) -> (((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x8 : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -101,7 +101,7 @@ fn step_8() -> Unit raise {
     }
   })(t11)(t12)
   let t16 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t15)
-  msum_component_c.set(@tactics.prove(@parser.parse_term("!s (f:A->real^M^N) i j. msum s f$i$j = sum s (\\x. f x$i$j)"), t16))
+  msum_component_c.set(@tactics.prove(@parser.parse_term("forall s (f:A->real^M^N) i j. msum s f$i$j = sum s (\\x. f x$i$j)"), t16))
 }
 
 ///|
@@ -117,7 +117,7 @@ pub fn msum_component() -> @kernel.Thm {
 /// MSUM_ROW
 fn step_9() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.vsum_component()]))
-  msum_row_c.set(@tactics.prove(@parser.parse_term("!s f:A->real^M^N i. msum s f$i = vsum s (\\x. f x$i)"), t17))
+  msum_row_c.set(@tactics.prove(@parser.parse_term("forall s f:A->real^M^N i. msum s f$i = vsum s (\\x. f x$i)"), t17))
 }
 
 ///|
@@ -136,7 +136,7 @@ fn step_10() -> Unit raise {
   let t19 = @tactics.repeat_tac(@tactics.strip_tac)
   let t18 = @simp.simp_tac(@list.List([@vectors.mat_0_component()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([msum(), @cart.cart_eq(), @cart.lambda_beta(), @vectors.matrix_add_component(), @iterate.sum_clauses()])), t18), t19), @class.cond_cases_tac), t20)
-  msum_clauses_c.set(@tactics.prove(@parser.parse_term("(!f:A->real^M^N. msum {} f = mat 0) /\\\n   (!x:A f s. FINITE s\n            ==> msum (x INSERT s) f : real^M^N=\n                if x IN s then msum s f else f(x) + msum s f)"), t21))
+  msum_clauses_c.set(@tactics.prove(@parser.parse_term("(forall f:A->real^M^N. msum {} f = mat 0) /\\\n   (forall x:A f s. FINITE s\n            ==> msum (x INSERT s) f : real^M^N=\n                if x IN s then msum s f else f(x) + msum s f)"), t21))
 }
 
 ///|
@@ -154,7 +154,7 @@ fn step_11() -> Unit raise {
   let t23 = @simp.rewrite_tac(@list.List([neutral_matrix_add()]))
   let t22 = @simp.asm_simp_tac(@list.List([msum_clauses(), @iterate.iterate_clauses(), monoidal_matrix_add()]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@sets.finite_induct_strong())), t22), t23)
-  msum_v1_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s. FINITE s ==> msum s f = iterate (+) s f"), t24))
+  msum_v1_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s. FINITE s ==> msum s f = iterate (+) s f"), t24))
 }
 
 ///|
@@ -171,7 +171,7 @@ pub fn msum_v1() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t25 = @simp.simp_tac(@list.List([@iterate.sum_eq_0()]))
   let t26 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.mat_0_component()])), t25)
-  msum_eq_0_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s. (!x. x IN s ==> (f(x) = mat 0)) ==> (msum s f = mat 0)"), t26))
+  msum_eq_0_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s. (forall x. x IN s ==> (f(x) = mat 0)) ==> (msum s f = mat 0)"), t26))
 }
 
 ///|
@@ -203,7 +203,7 @@ pub fn msum_0() -> @kernel.Thm {
 /// MSUM_LMUL
 fn step_14() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_cmul_component(), @iterate.sum_lmul()]))
-  msum_lmul_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N c s.  msum s (\\x. c %% f(x)) = c %% msum s f"), t28))
+  msum_lmul_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N c s.  msum s (\\x. c %% f(x)) = c %% msum s f"), t28))
 }
 
 ///|
@@ -219,7 +219,7 @@ pub fn msum_lmul() -> @kernel.Thm {
 /// MSUM_RMUL
 fn step_15() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_cmul_component(), @iterate.sum_rmul()]))
-  msum_rmul_c.set(@tactics.prove(@parser.parse_term("!c:A->real s v:real^M^N. msum s (\\x. c x %% v) = (sum s c) %% v"), t29))
+  msum_rmul_c.set(@tactics.prove(@parser.parse_term("forall c:A->real s v:real^M^N. msum s (\\x. c x %% v) = (sum s c) %% v"), t29))
 }
 
 ///|
@@ -236,7 +236,7 @@ pub fn msum_rmul() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t30 = @simp.simp_tac(@list.List([@iterate.sum_add()]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component()])), t30)
-  msum_add_c.set(@tactics.prove(@parser.parse_term("!f g:A->real^M^N s.\n     FINITE s ==> (msum s (\\x. f x + g x) = msum s f + msum s g)"), t31))
+  msum_add_c.set(@tactics.prove(@parser.parse_term("forall f g:A->real^M^N s.\n     FINITE s ==> (msum s (\\x. f x + g x) = msum s f + msum s g)"), t31))
 }
 
 ///|
@@ -253,7 +253,7 @@ pub fn msum_add() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t32 = @simp.simp_tac(@list.List([@iterate.sum_sub()]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_sub_component()])), t32)
-  msum_sub_c.set(@tactics.prove(@parser.parse_term("!f g:A->real^M^N s.\n     FINITE s ==> (msum s (\\x. f x - g x) = msum s f - msum s g)"), t33))
+  msum_sub_c.set(@tactics.prove(@parser.parse_term("forall f g:A->real^M^N s.\n     FINITE s ==> (msum s (\\x. f x - g x) = msum s f - msum s g)"), t33))
 }
 
 ///|
@@ -270,7 +270,7 @@ pub fn msum_sub() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t34 = @simp.simp_tac(@list.List([@iterate.sum_const()]))
   let t35 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_cmul_component()])), t34)
-  msum_const_c.set(@tactics.prove(@parser.parse_term("!c:real^M^N s. FINITE s ==> (msum s (\\n:A. c) = &(CARD s) %% c)"), t35))
+  msum_const_c.set(@tactics.prove(@parser.parse_term("forall c:real^M^N s. FINITE s ==> (msum s (\\n:A. c) = &(CARD s) %% c)"), t35))
 }
 
 ///|
@@ -288,7 +288,7 @@ fn step_19() -> Unit raise {
   let t37 = @simp.simp_tac(@list.List([msum_clauses(), @vectors.matrix_mul_lzero(), @vectors.matrix_add_rdistrib()]))
   let t36 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t36), t37)
-  msum_matrix_rmul_c.set(@tactics.prove(@parser.parse_term("!(f:A->real^N^M) (A:real^P^N) s.\n        FINITE s ==> msum s (\\i. f(i) ** A) = msum s f ** A"), t38))
+  msum_matrix_rmul_c.set(@tactics.prove(@parser.parse_term("forall(f:A->real^N^M) (A:real^P^N) s.\n        FINITE s ==> msum s (\\i. f(i) ** A) = msum s f ** A"), t38))
 }
 
 ///|
@@ -306,7 +306,7 @@ fn step_20() -> Unit raise {
   let t40 = @simp.simp_tac(@list.List([msum_clauses(), @vectors.matrix_mul_rzero(), @vectors.matrix_add_ldistrib()]))
   let t39 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t39), t40)
-  msum_matrix_lmul_c.set(@tactics.prove(@parser.parse_term("!(f:A->real^P^N) (A:real^N^M) s.\n        FINITE s ==> msum s (\\i. A ** f(i)) = A ** msum s f"), t41))
+  msum_matrix_lmul_c.set(@tactics.prove(@parser.parse_term("forall(f:A->real^P^N) (A:real^N^M) s.\n        FINITE s ==> msum s (\\i. A ** f(i)) = A ** msum s f"), t41))
 }
 
 ///|
@@ -343,7 +343,7 @@ fn step_21() -> Unit raise {
       })(x52))
     })(x53)(x53)
   }), t54)
-  msum_image_c.set(@tactics.prove(@parser.parse_term("!(f:A->B) (g:B->real^M^N) s.\n        (!x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> msum (IMAGE f s) g = msum s (g o f)"), t55))
+  msum_image_c.set(@tactics.prove(@parser.parse_term("forall(f:A->B) (g:B->real^M^N) s.\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> msum (IMAGE f s) g = msum s (g o f)"), t55))
 }
 
 ///|
@@ -360,7 +360,7 @@ pub fn msum_image() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t56 = @simp.simp_tac(@list.List([@iterate.sum_union()]))
   let t57 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), @vectors.matrix_add_component(), msum_component()])), t56)
-  msum_union_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s t.\n     FINITE s /\\ FINITE t /\\ DISJOINT s t\n     ==> (msum (s UNION t) f = msum s f + msum t f)"), t57))
+  msum_union_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s t.\n     FINITE s /\\ FINITE t /\\ DISJOINT s t\n     ==> (msum (s UNION t) f = msum s f + msum t f)"), t57))
 }
 
 ///|
@@ -377,7 +377,7 @@ pub fn msum_union() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t58 = @simp.simp_tac(@list.List([@iterate.sum_diff()]))
   let t59 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), @vectors.matrix_sub_component(), msum_component()])), t58)
-  msum_diff_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s t. FINITE s /\\ t SUBSET s\n           ==> (msum (s DIFF t) f = msum s f - msum t f)"), t59))
+  msum_diff_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s t. FINITE s /\\ t SUBSET s\n           ==> (msum (s DIFF t) f = msum s f - msum t f)"), t59))
 }
 
 ///|
@@ -394,7 +394,7 @@ pub fn msum_diff() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t60 = @simp.simp_tac(@list.List([@iterate.sum_delete()]))
   let t61 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), @vectors.matrix_sub_component(), msum_component()])), t60)
-  msum_delete_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s a.\n     FINITE s /\\ a IN s\n     ==> msum (s DELETE a) f = msum s f - f a"), t61))
+  msum_delete_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s a.\n     FINITE s /\\ a IN s\n     ==> msum (s DELETE a) f = msum s f - f a"), t61))
 }
 
 ///|
@@ -411,7 +411,7 @@ pub fn msum_delete() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t62 = @simp.simp_tac(@list.List([@iterate.sum_incl_excl()]))
   let t63 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component()])), t62)
-  msum_incl_excl_c.set(@tactics.prove(@parser.parse_term("!s t (f:A->real^M^N).\n     FINITE s /\\ FINITE t\n     ==> msum s f + msum t f = msum (s UNION t) f + msum (s INTER t) f"), t63))
+  msum_incl_excl_c.set(@tactics.prove(@parser.parse_term("forall s t (f:A->real^M^N).\n     FINITE s /\\ FINITE t\n     ==> msum s f + msum t f = msum (s UNION t) f + msum (s INTER t) f"), t63))
 }
 
 ///|
@@ -427,7 +427,7 @@ pub fn msum_incl_excl() -> @kernel.Thm {
 /// MSUM_NEG
 fn step_26() -> Unit raise {
   let t64 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_neg_component(), @iterate.sum_neg()]))
-  msum_neg_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s. msum s (\\x. --f x) = --msum s f"), t64))
+  msum_neg_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s. msum s (\\x. --f x) = --msum s f"), t64))
 }
 
 ///|
@@ -444,7 +444,7 @@ pub fn msum_neg() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t65 = @simp.simp_tac(@list.List([@iterate.sum_eq()]))
   let t66 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component()])), t65)
-  msum_eq_c.set(@tactics.prove(@parser.parse_term("!f g:A->real^M^N s. (!x. x IN s ==> (f x = g x)) ==> (msum s f = msum s g)"), t66))
+  msum_eq_c.set(@tactics.prove(@parser.parse_term("forall f g:A->real^M^N s. (forall x. x IN s ==> (f x = g x)) ==> (msum s f = msum s g)"), t66))
 }
 
 ///|
@@ -461,7 +461,7 @@ pub fn msum_eq() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   let t67 = @simp.simp_tac(@list.List([@iterate.sum_superset()]))
   let t68 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.mat_0_component()])), t67)
-  msum_superset_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N u v.\n        u SUBSET v /\\ (!x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum v f = msum u f)"), t68))
+  msum_superset_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N u v.\n        u SUBSET v /\\ (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum v f = msum u f)"), t68))
 }
 
 ///|
@@ -480,7 +480,7 @@ fn step_29() -> Unit raise {
   let t70 = @tactics.match_mp_tac(msum_superset())
   let t69 = @tactics.conv_tac(@equal.sym_conv)
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t69), t70), t71)
-  msum_support_explicit_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s. msum {x | x IN s /\\ ~(f x = mat 0)} f = msum s f"), t72))
+  msum_support_explicit_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s. msum {x | x IN s /\\ ~(f x = mat 0)} f = msum s f"), t72))
 }
 
 ///|
@@ -496,7 +496,7 @@ pub fn msum_support_explicit() -> @kernel.Thm {
 /// MSUM_SUPPORT
 fn step_30() -> Unit raise {
   let t73 = @simp.simp_tac(@list.List([@iterate.support(), neutral_matrix_add(), msum_support_explicit()]))
-  msum_support_c.set(@tactics.prove(@parser.parse_term("!f s. msum (support (+) f s) f = msum s f"), t73))
+  msum_support_c.set(@tactics.prove(@parser.parse_term("forall f s. msum (support (+) f s) f = msum s f"), t73))
 }
 
 ///|
@@ -515,7 +515,7 @@ fn step_31() -> Unit raise {
   let t75 = @simp.once_rewrite_tac(@list.List([@equal.gsym(msum_support_explicit())]))
   let t74 = @tactics.repeat_tac(@tactics.strip_tac)
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.support(), neutral_matrix_add()])), t74), t75), @tactics.ap_thm_tac), @tactics.ap_term_tac), t76)
-  msum_univ_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s.\n     support (+) f (:A) SUBSET s ==> msum s f = msum (:A) f"), t77))
+  msum_univ_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s.\n     support (+) f (:A) SUBSET s ==> msum s f = msum (:A) f"), t77))
 }
 
 ///|
@@ -531,7 +531,7 @@ pub fn msum_univ() -> @kernel.Thm {
 /// MSUM_EQ_SUPERSET
 fn step_32() -> Unit raise {
   let t78 = @meson.meson_tac(@list.List([msum_superset(), msum_eq()]))
-  msum_eq_superset_c.set(@tactics.prove(@parser.parse_term("!(f:A->real^M^N) s t.\n        FINITE t /\\ t SUBSET s /\\\n        (!x. x IN t ==> (f x = g x)) /\\\n        (!x. x IN s /\\ ~(x IN t) ==> f(x) = mat 0)\n        ==> msum s f = msum t g"), t78))
+  msum_eq_superset_c.set(@tactics.prove(@parser.parse_term("forall(f:A->real^M^N) s t.\n        FINITE t /\\ t SUBSET s /\\\n        (forall x. x IN t ==> (f x = g x)) /\\\n        (forall x. x IN s /\\ ~(x IN t) ==> f(x) = mat 0)\n        ==> msum s f = msum t g"), t78))
 }
 
 ///|
@@ -549,7 +549,7 @@ fn step_33() -> Unit raise {
   let t80 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t79 = @tactics.match_mp_tac(msum_superset())
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t79), t80)
-  msum_union_rzero_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N u v.\n        (!x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum u f)"), t81))
+  msum_union_rzero_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N u v.\n        (forall x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum u f)"), t81))
 }
 
 ///|
@@ -567,7 +567,7 @@ fn step_34() -> Unit raise {
   let t83 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t82 = @tactics.match_mp_tac(msum_superset())
   let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t82), t83)
-  msum_union_lzero_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N u v.\n        (!x. x IN u /\\ ~(x IN v) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum v f)"), t84))
+  msum_union_lzero_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N u v.\n        (forall x. x IN u /\\ ~(x IN v) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum v f)"), t84))
 }
 
 ///|
@@ -585,7 +585,7 @@ fn step_35() -> Unit raise {
   let t86 = @simp.simp_tac(@list.List([]))
   let t85 = @tactics.match_mp_tac(msum_eq())
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t85), t86)
-  msum_restrict_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s. msum s (\\x. if x IN s then f(x) else mat 0) = msum s f"), t87))
+  msum_restrict_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s. msum s (\\x. if x IN s then f(x) else mat 0) = msum s f"), t87))
 }
 
 ///|
@@ -602,7 +602,7 @@ pub fn msum_restrict() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let t88 = @simp.simp_tac(@list.List([@iterate.sum_restrict_set(), @vectors.cond_component()]))
   let t89 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.mat_0_component(), @vectors.cond_component()])), t88)
-  msum_restrict_set_c.set(@tactics.prove(@parser.parse_term("!P s f:A->real^M^N. msum {x | x IN s /\\ P x} f =\n                       msum s (\\x. if P x then f x else mat 0)"), t89))
+  msum_restrict_set_c.set(@tactics.prove(@parser.parse_term("forall P s f:A->real^M^N. msum {x | x IN s /\\ P x} f =\n                       msum s (\\x. if P x then f x else mat 0)"), t89))
 }
 
 ///|
@@ -619,7 +619,7 @@ pub fn msum_restrict_set() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   let t90 = @simp.simp_tac(@list.List([@iterate.sum_cases()]))
   let t91 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component(), @vectors.cond_component()])), t90)
-  msum_cases_c.set(@tactics.prove(@parser.parse_term("!s P f g. FINITE s\n             ==> msum s (\\x:A. if P x then (f x):real^M^N else g x) =\n                 msum {x | x IN s /\\ P x} f + msum {x | x IN s /\\ ~P x} g"), t91))
+  msum_cases_c.set(@tactics.prove(@parser.parse_term("forall s P f g. FINITE s\n             ==> msum s (\\x:A. if P x then (f x):real^M^N else g x) =\n                 msum {x | x IN s /\\ P x} f + msum {x | x IN s /\\ ~P x} g"), t91))
 }
 
 ///|
@@ -635,7 +635,7 @@ pub fn msum_cases() -> @kernel.Thm {
 /// MSUM_SING
 fn step_38() -> Unit raise {
   let t92 = @simp.simp_tac(@list.List([msum_clauses(), @sets.finite_rules(), @sets.not_in_empty(), @vectors.matrix_add_rid()]))
-  msum_sing_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N x. msum {x} f = f(x)"), t92))
+  msum_sing_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N x. msum {x} f = f(x)"), t92))
 }
 
 ///|
@@ -651,7 +651,7 @@ pub fn msum_sing() -> @kernel.Thm {
 /// VECTORIZE_MSUM
 fn step_39() -> Unit raise {
   let t93 = @simp.simp_tac(@list.List([@cart.cart_eq(), @misc.vectorize_component(), @cart.dimindex_finite_prod(), @vectors.vsum_component(), msum_component()]))
-  vectorize_msum_c.set(@tactics.prove(@parser.parse_term("!s f:A->real^M^N. vectorize (msum s f) = vsum s (\\x. vectorize (f x))"), t93))
+  vectorize_msum_c.set(@tactics.prove(@parser.parse_term("forall s f:A->real^M^N. vectorize (msum s f) = vsum s (\\x. vectorize (f x))"), t93))
 }
 
 ///|
@@ -668,7 +668,7 @@ pub fn vectorize_msum() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t94 = @simp.simp_tac(@list.List([@vectors.vsum_norm()]))
   let t95 = @tactics.then_tac(@simp.rewrite_tac(@list.List([matrix_norm(), vectorize_msum()])), t94)
-  msum_norm_c.set(@tactics.prove(@parser.parse_term("!s f:A->real^M^N. FINITE s ==> norm(msum s f) <= sum s (\\x. norm(f x))"), t95))
+  msum_norm_c.set(@tactics.prove(@parser.parse_term("forall s f:A->real^M^N. FINITE s ==> norm(msum s f) <= sum s (\\x. norm(f x))"), t95))
 }
 
 ///|
@@ -687,7 +687,7 @@ fn step_41() -> Unit raise {
   let t97 = @tactics.exists_tac(@parser.parse_term("sum s (\\x:A. norm(f x:real^M^N))"))
   let t96 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t96), t97), t98)
-  msum_norm_le_c.set(@tactics.prove(@parser.parse_term("!s f:A->real^M^N g. FINITE s /\\ (!x. x IN s ==> norm(f x) <= g(x))\n                       ==> norm(msum s f) <= sum s g"), t99))
+  msum_norm_le_c.set(@tactics.prove(@parser.parse_term("forall s f:A->real^M^N g. FINITE s /\\ (forall x. x IN s ==> norm(f x) <= g(x))\n                       ==> norm(msum s f) <= sum s g"), t99))
 }
 
 ///|
@@ -703,7 +703,7 @@ pub fn msum_norm_le() -> @kernel.Thm {
 /// MSUM_NORM_TRIANGLE
 fn step_42() -> Unit raise {
   let t100 = @meson.meson_tac(@list.List([msum_norm(), @realax.real_le_trans()]))
-  msum_norm_triangle_c.set(@tactics.prove(@parser.parse_term("!s f:A->real^M^N b. FINITE s /\\ sum s (\\a. norm(f a)) <= b\n                       ==> norm(msum s f) <= b"), t100))
+  msum_norm_triangle_c.set(@tactics.prove(@parser.parse_term("forall s f:A->real^M^N b. FINITE s /\\ sum s (\\a. norm(f a)) <= b\n                       ==> norm(msum s f) <= b"), t100))
 }
 
 ///|
@@ -719,7 +719,7 @@ pub fn msum_norm_triangle() -> @kernel.Thm {
 /// MSUM_NORM_BOUND
 fn step_43() -> Unit raise {
   let t101 = @simp.simp_tac(@list.List([@equal.gsym(@iterate.sum_const()), msum_norm_le()]))
-  msum_norm_bound_c.set(@tactics.prove(@parser.parse_term("!s f:A->real^M^N b. FINITE s /\\ (!x. x IN s ==> norm(f(x)) <= b)\n                       ==> norm(msum s f) <= &(CARD s) * b"), t101))
+  msum_norm_bound_c.set(@tactics.prove(@parser.parse_term("forall s f:A->real^M^N b. FINITE s /\\ (forall x. x IN s ==> norm(f(x)) <= b)\n                       ==> norm(msum s f) <= &(CARD s) * b"), t101))
 }
 
 ///|
@@ -738,7 +738,7 @@ fn step_44() -> Unit raise {
   let t103 = @simp.asm_simp_tac(@list.List([msum_sing(), msum_clauses(), @iterate.finite_numseg(), @iterate.in_numseg()]))
   let t102 = @tactics.repeat_tac(@tactics.strip_tac)
   let t105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.numseg_clauses()])), t102), @class.cond_cases_tac), t103), t104)
-  msum_clauses_numseg_c.set(@tactics.prove(@parser.parse_term("(!m. msum(m..0) f = if m = 0 then f(0) else mat 0:real^M^N) /\\\n   (!m n. msum(m..SUC n) f = if m <= SUC n then msum(m..n) f + f(SUC n)\n                             else msum(m..n) f)"), t105))
+  msum_clauses_numseg_c.set(@tactics.prove(@parser.parse_term("(forall m. msum(m..0) f = if m = 0 then f(0) else mat 0:real^M^N) /\\\n   (forall m n. msum(m..SUC n) f = if m <= SUC n then msum(m..n) f + f(SUC n)\n                             else msum(m..n) f)"), t105))
 }
 
 ///|
@@ -755,7 +755,7 @@ pub fn msum_clauses_numseg() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t106 = @simp.simp_tac(@list.List([@arith.lt_refl(), msum_clauses_numseg(), @arith.suc_sub1()]))
   let t107 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t106)
-  msum_clauses_right_c.set(@tactics.prove(@parser.parse_term("!f m n. 0 < n /\\ m <= n ==> msum(m..n) f = msum(m..n-1) f + (f n):real^M^N"), t107))
+  msum_clauses_right_c.set(@tactics.prove(@parser.parse_term("forall f m n. 0 < n /\\ m <= n ==> msum(m..n) f = msum(m..n-1) f + (f n):real^M^N"), t107))
 }
 
 ///|
@@ -771,7 +771,7 @@ pub fn msum_clauses_right() -> @kernel.Thm {
 /// MSUM_CMUL_NUMSEG
 fn step_46() -> Unit raise {
   let t108 = @simp.simp_tac(@list.List([msum_lmul(), @iterate.finite_numseg()]))
-  msum_cmul_numseg_c.set(@tactics.prove(@parser.parse_term("!f c m n. msum (m..n) (\\x. c %% f x) = c %% msum (m..n) f:real^M^N"), t108))
+  msum_cmul_numseg_c.set(@tactics.prove(@parser.parse_term("forall f c m n. msum (m..n) (\\x. c %% f x) = c %% msum (m..n) f:real^M^N"), t108))
 }
 
 ///|
@@ -789,7 +789,7 @@ fn step_47() -> Unit raise {
   let t110 = @simp.asm_simp_tac(@list.List([@iterate.finite_numseg(), @iterate.in_numseg()]))
   let t109 = @tactics.match_mp_tac(msum_eq())
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t109), t110)
-  msum_eq_numseg_c.set(@tactics.prove(@parser.parse_term("!f g m n.\n         (!x. m <= x /\\ x <= n ==> (f x = g x:real^M^N))\n         ==> (msum(m .. n) f = msum(m .. n) g)"), t111))
+  msum_eq_numseg_c.set(@tactics.prove(@parser.parse_term("forall f g m n.\n         (forall x. m <= x /\\ x <= n ==> (f x = g x:real^M^N))\n         ==> (msum(m .. n) f = msum(m .. n) g)"), t111))
 }
 
 ///|
@@ -806,7 +806,7 @@ pub fn msum_eq_numseg() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t112 = @simp.simp_tac(@list.List([@iterate.sum_image_gen()]))
   let t113 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component()])), t112)
-  msum_image_gen_c.set(@tactics.prove(@parser.parse_term("!f:A->B (g:A->real^M^N) s.\n        FINITE s\n        ==> (msum s g =\n             msum (IMAGE f s) (\\y. msum {x | x IN s /\\ (f(x) = y)} g))"), t113))
+  msum_image_gen_c.set(@tactics.prove(@parser.parse_term("forall f:A->B (g:A->real^M^N) s.\n        FINITE s\n        ==> (msum s g =\n             msum (IMAGE f s) (\\y. msum {x | x IN s /\\ (f(x) = y)} g))"), t113))
 }
 
 ///|
@@ -823,7 +823,7 @@ pub fn msum_image_gen() -> @kernel.Thm {
 fn step_49() -> Unit raise {
   let t114 = @simp.simp_tac(@list.List([@iterate.sum_group()]))
   let t115 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component()])), t114)
-  msum_group_c.set(@tactics.prove(@parser.parse_term("!f:A->B (g:A->real^M^N) s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> msum t (\\y. msum {x | x IN s /\\ f(x) = y} g) = msum s g"), t115))
+  msum_group_c.set(@tactics.prove(@parser.parse_term("forall f:A->B (g:A->real^M^N) s t.\n        FINITE s /\\ IMAGE f s SUBSET t\n        ==> msum t (\\y. msum {x | x IN s /\\ f(x) = y} g) = msum s g"), t115))
 }
 
 ///|
@@ -840,7 +840,7 @@ pub fn msum_group() -> @kernel.Thm {
 fn step_50() -> Unit raise {
   let t116 = @simp.simp_tac(@list.List([@iterate.sum_group_relation()]))
   let t117 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component()])), t116)
-  msum_group_relation_c.set(@tactics.prove(@parser.parse_term("!R:A->B->bool (g:A->real^M^N) s t.\n         FINITE s /\\\n         (!x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> msum t (\\y. msum {x | x IN s /\\ R x y} g) = msum s g"), t117))
+  msum_group_relation_c.set(@tactics.prove(@parser.parse_term("forall R:A->B->bool (g:A->real^M^N) s t.\n         FINITE s /\\\n         (forall x. x IN s ==> ?!y. y IN t /\\ R x y)\n         ==> msum t (\\y. msum {x | x IN s /\\ R x y} g) = msum s g"), t117))
 }
 
 ///|
@@ -856,7 +856,7 @@ pub fn msum_group_relation() -> @kernel.Thm {
 /// MSUM_VMUL
 fn step_51() -> Unit raise {
   let t118 = @simp.rewrite_tac(@list.List([msum_rmul()]))
-  msum_vmul_c.set(@tactics.prove(@parser.parse_term("!f v:real^M^N s. (sum s f) %% v = msum s (\\x:A. f(x) %% v)"), t118))
+  msum_vmul_c.set(@tactics.prove(@parser.parse_term("forall f v:real^M^N s. (sum s f) %% v = msum s (\\x:A. f(x) %% v)"), t118))
 }
 
 ///|
@@ -873,7 +873,7 @@ pub fn msum_vmul() -> @kernel.Thm {
 fn step_52() -> Unit raise {
   let t119 = @simp.simp_tac(@list.List([@vectors.mat_0_component(), @iterate.sum_delta()]))
   let t120 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.cond_component()])), t119)
-  msum_delta_c.set(@tactics.prove(@parser.parse_term("!s a. msum s (\\x:A. if x = a then b else mat 0:real^M^N) =\n         if a IN s then b else mat 0"), t120))
+  msum_delta_c.set(@tactics.prove(@parser.parse_term("forall s a. msum s (\\x:A. if x = a then b else mat 0:real^M^N) =\n         if a IN s then b else mat 0"), t120))
 }
 
 ///|
@@ -889,7 +889,7 @@ pub fn msum_delta() -> @kernel.Thm {
 /// MSUM_ADD_NUMSEG
 fn step_53() -> Unit raise {
   let t121 = @simp.simp_tac(@list.List([msum_add(), @iterate.finite_numseg()]))
-  msum_add_numseg_c.set(@tactics.prove(@parser.parse_term("!f g m n.\n     msum(m..n) (\\i. f i + g i) = msum(m..n) f + msum(m..n) g:real^M^N"), t121))
+  msum_add_numseg_c.set(@tactics.prove(@parser.parse_term("forall f g m n.\n     msum(m..n) (\\i. f i + g i) = msum(m..n) f + msum(m..n) g:real^M^N"), t121))
 }
 
 ///|
@@ -905,7 +905,7 @@ pub fn msum_add_numseg() -> @kernel.Thm {
 /// MSUM_SUB_NUMSEG
 fn step_54() -> Unit raise {
   let t122 = @simp.simp_tac(@list.List([msum_sub(), @iterate.finite_numseg()]))
-  msum_sub_numseg_c.set(@tactics.prove(@parser.parse_term("!f g m n.\n     msum(m..n) (\\i. f i - g i) = msum(m..n) f - msum(m..n) g:real^M^N"), t122))
+  msum_sub_numseg_c.set(@tactics.prove(@parser.parse_term("forall f g m n.\n     msum(m..n) (\\i. f i - g i) = msum(m..n) f - msum(m..n) g:real^M^N"), t122))
 }
 
 ///|
@@ -922,7 +922,7 @@ pub fn msum_sub_numseg() -> @kernel.Thm {
 fn step_55() -> Unit raise {
   let t123 = @simp.simp_tac(@list.List([@iterate.sum_add_split()]))
   let t124 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component()])), t123)
-  msum_add_split_c.set(@tactics.prove(@parser.parse_term("!f m n p.\n       m <= n + 1\n       ==> msum(m..n + p) f = msum(m..n) f + msum(n + 1..n + p) f:real^M^N"), t124))
+  msum_add_split_c.set(@tactics.prove(@parser.parse_term("forall f m n p.\n       m <= n + 1\n       ==> msum(m..n + p) f = msum(m..n) f + msum(n + 1..n + p) f:real^M^N"), t124))
 }
 
 ///|
@@ -941,7 +941,7 @@ fn step_56() -> Unit raise {
   let t126 = @tactics.repeat_tac(@tactics.strip_tac)
   let t125 = @simp.simp_tac(@list.List([@iterate.sum_sum_product()]))
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.cond_component()])), t125), t126), @tactics.ap_term_tac), t127)
-  msum_msum_product_c.set(@tactics.prove(@parser.parse_term("!s:A->bool t:A->B->bool x.\n        FINITE s /\\ (!i. i IN s ==> FINITE(t i))\n        ==> msum s (\\i. msum (t i) (x i)) =\n            msum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j):real^M^N"), t128))
+  msum_msum_product_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:A->B->bool x.\n        FINITE s /\\ (forall i. i IN s ==> FINITE(t i))\n        ==> msum s (\\i. msum (t i) (x i)) =\n            msum {i,j | i IN s /\\ j IN t i} (\\(i,j). x i j):real^M^N"), t128))
 }
 
 ///|
@@ -974,7 +974,7 @@ fn step_57() -> Unit raise {
   let t130 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t129 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t144 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t129), t130), t131), t133), t134), t135), t139), t140), @class.cond_cases_tac), t141), t142), t143)
-  msum_image_nonzero_c.set(@tactics.prove(@parser.parse_term("!d:B->real^M^N i:A->B s.\n     FINITE s /\\\n     (!x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = mat 0)\n     ==> msum (IMAGE i s) d = msum s (d o i):real^M^N"), t144))
+  msum_image_nonzero_c.set(@tactics.prove(@parser.parse_term("forall d:B->real^M^N i:A->B s.\n     FINITE s /\\\n     (forall x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ i x = i y ==> d(i x) = mat 0)\n     ==> msum (IMAGE i s) d = msum s (d o i):real^M^N"), t144))
 }
 
 ///|
@@ -991,7 +991,7 @@ pub fn msum_image_nonzero() -> @kernel.Thm {
 fn step_58() -> Unit raise {
   let t145 = @simp.simp_tac(@list.List([@iterate.sum_union_nonzero()]))
   let t146 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component(), @vectors.mat_0_component()])), t145)
-  msum_union_nonzero_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s t.\n     FINITE s /\\ FINITE t /\\ (!x. x IN s INTER t ==> f(x) = mat 0)\n     ==> msum (s UNION t) f = msum s f + msum t f"), t146))
+  msum_union_nonzero_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s t.\n     FINITE s /\\ FINITE t /\\ (forall x. x IN s INTER t ==> f(x) = mat 0)\n     ==> msum (s UNION t) f = msum s f + msum t f"), t146))
 }
 
 ///|
@@ -1029,7 +1029,7 @@ fn step_59() -> Unit raise {
   let t148 = @simp.rewrite_tac(@list.List([@sets.unions_0(), @sets.unions_insert(), msum_clauses(), @sets.in_insert()]))
   let t147 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t165 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))), t147), t148), t150), t153), t154), t155), @tactics.ants_tac), t161), @tactics.strip_tac), t162), t163), t164)
-  msum_unions_nonzero_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s.\n     FINITE s /\\ (!t. t IN s ==> FINITE t) /\\\n     (!t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                ==> f x = mat 0)\n     ==> msum (UNIONS s) f = msum s (\\t. msum t f)"), t165))
+  msum_unions_nonzero_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N s.\n     FINITE s /\\ (forall t. t IN s ==> FINITE t) /\\\n     (forall t1 t2 x. t1 IN s /\\ t2 IN s /\\ ~(t1 = t2) /\\ x IN t1 /\\ x IN t2\n                ==> f x = mat 0)\n     ==> msum (UNIONS s) f = msum s (\\t. msum t f)"), t165))
 }
 
 ///|
@@ -1046,7 +1046,7 @@ pub fn msum_unions_nonzero() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   let t166 = @simp.simp_tac(@list.List([@vectors.vec_component(), @iterate.sum_clauses_left()]))
   let t167 = @tactics.then_tac(@simp.simp_tac(@list.List([msum(), @cart.cart_eq(), @cart.lambda_beta(), @vectors.matrix_add_component()])), t166)
-  msum_clauses_left_c.set(@tactics.prove(@parser.parse_term("!f m n. m <= n ==> msum(m..n) f = f m + msum(m + 1..n) f:real^M^N"), t167))
+  msum_clauses_left_c.set(@tactics.prove(@parser.parse_term("forall f m n. m <= n ==> msum(m..n) f = f m + msum(m + 1..n) f:real^M^N"), t167))
 }
 
 ///|
@@ -1067,7 +1067,7 @@ fn step_61() -> Unit raise {
   let t169 = @class.asm_cases_tac(@parser.parse_term("m = SUC n"))
   let t168 = @simp.asm_simp_tac(@list.List([msum_clauses_numseg(), @arith.le()]))
   let t173 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t168), t169), t170), @class.cond_cases_tac), t171), t172), @vectors.matrix_arith_tac)
-  msum_diffs_c.set(@tactics.prove(@parser.parse_term("!m n. msum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else mat 0:real^M^N"), t173))
+  msum_diffs_c.set(@tactics.prove(@parser.parse_term("forall m n. msum(m..n) (\\k. f(k) - f(k + 1)) =\n          if m <= n then f(m) - f(n + 1) else mat 0:real^M^N"), t173))
 }
 
 ///|
@@ -1086,7 +1086,7 @@ fn step_62() -> Unit raise {
   let t175 = @simp.simp_tac(@list.List([msum_neg(), msum_diffs()]))
   let t174 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@vectors.matrix_neg_sub())]))
   let t177 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t174), t175), @class.cond_cases_tac), t176)
-  msum_diffs_alt_c.set(@tactics.prove(@parser.parse_term("!m n. msum(m..n) (\\k. f(k + 1) - f(k)) =\n         if m <= n then f(n + 1) - f(m) else mat 0:real^M^N"), t177))
+  msum_diffs_alt_c.set(@tactics.prove(@parser.parse_term("forall m n. msum(m..n) (\\k. f(k + 1) - f(k)) =\n         if m <= n then f(n + 1) - f(m) else mat 0:real^M^N"), t177))
 }
 
 ///|
@@ -1120,7 +1120,7 @@ fn step_63() -> Unit raise {
   })
   let t178 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("~(x:A IN s) ==> s DELETE x = s"))]))
   let t190 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t178), t188), t189), @vectors.matrix_arith_tac)
-  msum_delete_cases_c.set(@tactics.prove(@parser.parse_term("!x f:A->real^M^N s.\n        FINITE s\n        ==> msum(s DELETE x) f = if x IN s then msum s f - f x else msum s f"), t190))
+  msum_delete_cases_c.set(@tactics.prove(@parser.parse_term("forall x f:A->real^M^N s.\n        FINITE s\n        ==> msum(s DELETE x) f = if x IN s then msum s f - f x else msum s f"), t190))
 }
 
 ///|
@@ -1140,7 +1140,7 @@ fn step_64() -> Unit raise {
   let t192 = @tactics.match_mp_tac(@iterate.sum_eq_general())
   let t191 = @tactics.repeat_tac(@tactics.strip_tac)
   let t195 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([msum(), @cart.cart_eq(), @cart.lambda_beta()])), t191), t192), t193), t194)
-  msum_eq_general_c.set(@tactics.prove(@parser.parse_term("!s:A->bool t:B->bool (f:A->real^M^N) g h.\n        (!y. y IN t ==> ?!x. x IN s /\\ h x = y) /\\\n        (!x. x IN s ==> h x IN t /\\ g(h x) = f x)\n        ==> msum s f = msum t g"), t195))
+  msum_eq_general_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:B->bool (f:A->real^M^N) g h.\n        (forall y. y IN t ==> ?!x. x IN s /\\ h x = y) /\\\n        (forall x. x IN s ==> h x IN t /\\ g(h x) = f x)\n        ==> msum s f = msum t g"), t195))
 }
 
 ///|
@@ -1166,7 +1166,7 @@ fn step_65() -> Unit raise {
   let t197 = @tactics.match_mp_tac(@iterate.sum_eq_general_inverses())
   let t196 = @tactics.repeat_tac(@tactics.strip_tac)
   let t204 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([msum(), @cart.cart_eq(), @cart.lambda_beta()])), t196), t197), t202), t203)
-  msum_eq_general_inverses_c.set(@tactics.prove(@parser.parse_term("!s t (f:A->real^M^N) (g:B->real^M^N) h k.\n        (!y. y IN t ==> k y IN s /\\ h (k y) = y) /\\\n        (!x. x IN s ==> h x IN t /\\ k (h x) = x /\\ g (h x) = f x)\n        ==> msum s f = msum t g"), t204))
+  msum_eq_general_inverses_c.set(@tactics.prove(@parser.parse_term("forall s t (f:A->real^M^N) (g:B->real^M^N) h k.\n        (forall y. y IN t ==> k y IN s /\\ h (k y) = y) /\\\n        (forall x. x IN s ==> h x IN t /\\ k (h x) = x /\\ g (h x) = f x)\n        ==> msum s f = msum t g"), t204))
 }
 
 ///|
@@ -1183,7 +1183,7 @@ pub fn msum_eq_general_inverses() -> @kernel.Thm {
 fn step_66() -> Unit raise {
   let t205 = @simp.simp_tac(@list.List([@iterate.sum_offset()]))
   let t206 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component()])), t205)
-  msum_offset_c.set(@tactics.prove(@parser.parse_term("!p f m n. msum(m + p..n + p) f = msum(m..n) (\\i. f (i + p)):real^M^N"), t206))
+  msum_offset_c.set(@tactics.prove(@parser.parse_term("forall p f m n. msum(m + p..n + p) f = msum(m..n) (\\i. f (i + p)):real^M^N"), t206))
 }
 
 ///|
@@ -1200,7 +1200,7 @@ pub fn msum_offset() -> @kernel.Thm {
 fn step_67() -> Unit raise {
   let t207 = @simp.simp_tac(@list.List([@iterate.sum_offset_0()]))
   let t208 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component()])), t207)
-  msum_offset_0_c.set(@tactics.prove(@parser.parse_term("!f m n. m <= n ==> msum(m..n) f = msum(0..n - m) (\\i. f (i + m)):real^M^N"), t208))
+  msum_offset_0_c.set(@tactics.prove(@parser.parse_term("forall f m n. m <= n ==> msum(m..n) f = msum(0..n - m) (\\i. f (i + m)):real^M^N"), t208))
 }
 
 ///|
@@ -1216,7 +1216,7 @@ pub fn msum_offset_0() -> @kernel.Thm {
 /// MSUM_TRIV_NUMSEG
 fn step_68() -> Unit raise {
   let t209 = @simp.simp_tac(@list.List([@equal.gsym(@iterate.numseg_empty()), msum_clauses()]))
-  msum_triv_numseg_c.set(@tactics.prove(@parser.parse_term("!f m n. n < m ==> msum(m..n) f = mat 0:real^M^N"), t209))
+  msum_triv_numseg_c.set(@tactics.prove(@parser.parse_term("forall f m n. n < m ==> msum(m..n) f = mat 0:real^M^N"), t209))
 }
 
 ///|
@@ -1232,7 +1232,7 @@ pub fn msum_triv_numseg() -> @kernel.Thm {
 /// MSUM_CONST_NUMSEG
 fn step_69() -> Unit raise {
   let t210 = @simp.simp_tac(@list.List([msum_const(), @iterate.finite_numseg(), @iterate.card_numseg()]))
-  msum_const_numseg_c.set(@tactics.prove(@parser.parse_term("!c m n. msum(m..n) (\\n. c) = &((n + 1) - m) %% c:real^M^N"), t210))
+  msum_const_numseg_c.set(@tactics.prove(@parser.parse_term("forall c m n. msum(m..n) (\\n. c) = &((n + 1) - m) %% c:real^M^N"), t210))
 }
 
 ///|
@@ -1257,7 +1257,7 @@ fn step_70() -> Unit raise {
     }
   })
   let t218 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t214), t217)
-  msum_suc_c.set(@tactics.prove(@parser.parse_term("!f m n. msum (SUC n..SUC m) f = msum (n..m) (f o SUC):real^M^N"), t218))
+  msum_suc_c.set(@tactics.prove(@parser.parse_term("forall f m n. msum (SUC n..SUC m) f = msum (n..m) (f o SUC):real^M^N"), t218))
 }
 
 ///|
@@ -1277,7 +1277,7 @@ fn step_71() -> Unit raise {
   let t220 = @tactics.match_mp_tac(msum_eq_general())
   let t219 = @tactics.conv_tac(@equal.sym_conv)
   let t223 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t219), t220), t221), t222)
-  msum_bijection_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N p s:A->bool.\n                (!x. x IN s ==> p(x) IN s) /\\\n                (!y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> msum s f = msum s (f o p)"), t223))
+  msum_bijection_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N p s:A->bool.\n                (forall x. x IN s ==> p(x) IN s) /\\\n                (forall y. y IN s ==> ?!x. x IN s /\\ p(x) = y)\n                ==> msum s f = msum s (f o p)"), t223))
 }
 
 ///|
@@ -1321,7 +1321,7 @@ fn step_72() -> Unit raise {
   let t225 = @simp.asm_rewrite_tac(@list.List([msum_clauses_numseg()]))
   let t224 = @simp.asm_simp_tac(@list.List([msum_triv_numseg(), @equal.gsym(@arith.not_le())]))
   let t244 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @nums.induct_tac), @class.cond_cases_tac), t224), t225), t226), t233), t240), t242), t243), @vectors.matrix_arith_tac)
-  msum_partial_suc_c.set(@tactics.prove(@parser.parse_term("!f g:num->real^M^N m n.\n        msum (m..n) (\\k. f(k) %% (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) %% g(n + 1) - f(m) %% g(m) -\n                           msum (m..n) (\\k. (f(k + 1) - f(k)) %% g(k + 1))\n            else mat 0"), t244))
+  msum_partial_suc_c.set(@tactics.prove(@parser.parse_term("forall f g:num->real^M^N m n.\n        msum (m..n) (\\k. f(k) %% (g(k + 1) - g(k))) =\n            if m <= n then f(n + 1) %% g(n + 1) - f(m) %% g(m) -\n                           msum (m..n) (\\k. (f(k + 1) - f(k)) %% g(k + 1))\n            else mat 0"), t244))
 }
 
 ///|
@@ -1349,7 +1349,7 @@ fn step_73() -> Unit raise {
   let t247 = @parser.parse_term("\\k. (g:num->real^M^N)(k - 1)")
   let t248 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:num->real"), t247, t246, t245]), msum_partial_suc()))
   let t255 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t248), t249), t253), @class.cond_cases_tac), t254)
-  msum_partial_pre_c.set(@tactics.prove(@parser.parse_term("!f g:num->real^M^N m n.\n        msum (m..n) (\\k. f(k) %% (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) %% g(n) - f(m) %% g(m - 1) -\n                           msum (m..n) (\\k. (f(k + 1) - f(k)) %% g(k))\n            else mat 0"), t255))
+  msum_partial_pre_c.set(@tactics.prove(@parser.parse_term("forall f g:num->real^M^N m n.\n        msum (m..n) (\\k. f(k) %% (g(k) - g(k - 1))) =\n            if m <= n then f(n + 1) %% g(n) - f(m) %% g(m - 1) -\n                           msum (m..n) (\\k. (f(k + 1) - f(k)) %% g(k))\n            else mat 0"), t255))
 }
 
 ///|
@@ -1366,7 +1366,7 @@ pub fn msum_partial_pre() -> @kernel.Thm {
 fn step_74() -> Unit raise {
   let t256 = @simp.simp_tac(@list.List([@iterate.sum_combine_l()]))
   let t257 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component()])), t256)
-  msum_combine_l_c.set(@tactics.prove(@parser.parse_term("!f m n p.\n        0 < n /\\ m <= n /\\ n <= p + 1\n        ==> msum(m..n - 1) f + msum(n..p) f = msum(m..p) f:real^M^N"), t257))
+  msum_combine_l_c.set(@tactics.prove(@parser.parse_term("forall f m n p.\n        0 < n /\\ m <= n /\\ n <= p + 1\n        ==> msum(m..n - 1) f + msum(n..p) f = msum(m..p) f:real^M^N"), t257))
 }
 
 ///|
@@ -1383,7 +1383,7 @@ pub fn msum_combine_l() -> @kernel.Thm {
 fn step_75() -> Unit raise {
   let t258 = @simp.simp_tac(@list.List([@iterate.sum_combine_r()]))
   let t259 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component()])), t258)
-  msum_combine_r_c.set(@tactics.prove(@parser.parse_term("!f m n p.\n        m <= n + 1 /\\ n <= p\n        ==> msum(m..n) f + msum(n + 1..p) f = msum(m..p) f:real^M^N"), t259))
+  msum_combine_r_c.set(@tactics.prove(@parser.parse_term("forall f m n p.\n        m <= n + 1 /\\ n <= p\n        ==> msum(m..n) f + msum(n + 1..p) f = msum(m..p) f:real^M^N"), t259))
 }
 
 ///|
@@ -1410,7 +1410,7 @@ fn step_76() -> Unit raise {
     })(t263(x264))
   })
   let t268 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t265), t266), t267)
-  msum_injection_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N p:A->A s.\n     FINITE s /\\\n     (!x. x IN s ==> p x IN s) /\\\n     (!x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n     ==> msum s (f o p) = msum s f"), t268))
+  msum_injection_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^M^N p:A->A s.\n     FINITE s /\\\n     (forall x. x IN s ==> p x IN s) /\\\n     (forall x y. x IN s /\\ y IN s /\\ p x = p y ==> x = y)\n     ==> msum s (f o p) = msum s f"), t268))
 }
 
 ///|
@@ -1446,7 +1446,7 @@ fn step_77() -> Unit raise {
       })(x278))
     })(x279)(x279)
   }), t280)
-  msum_swap_c.set(@tactics.prove(@parser.parse_term("!f:A->B->real^M^N s t.\n     FINITE s /\\ FINITE t\n     ==> msum s (\\i. msum t (f i)) = msum t (\\j. msum s (\\i. f i j))"), t281))
+  msum_swap_c.set(@tactics.prove(@parser.parse_term("forall f:A->B->real^M^N s t.\n     FINITE s /\\ FINITE t\n     ==> msum s (\\i. msum t (f i)) = msum t (\\j. msum s (\\i. f i j))"), t281))
 }
 
 ///|
@@ -1464,7 +1464,7 @@ fn step_78() -> Unit raise {
   let t283 = @simp.rewrite_tac(@list.List([@iterate.finite_numseg()]))
   let t282 = @tactics.match_mp_tac(msum_swap())
   let t284 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t282), t283)
-  msum_swap_numseg_c.set(@tactics.prove(@parser.parse_term("!a b c d f.\n         msum (a..b) (\\i. msum (c..d) (f i)) =\n         msum (c..d) (\\j. msum (a..b) (\\i. f i j)):real^M^N"), t284))
+  msum_swap_numseg_c.set(@tactics.prove(@parser.parse_term("forall a b c d f.\n         msum (a..b) (\\i. msum (c..d) (f i)) =\n         msum (c..d) (\\j. msum (a..b) (\\i. f i j)):real^M^N"), t284))
 }
 
 ///|
@@ -1496,7 +1496,7 @@ fn step_79() -> Unit raise {
   let t286 = @simp.simp_tac(@list.List([@cart.cart_eq(), msum(), @cart.lambda_beta(), @vectors.matrix_add_component()]))
   let t285 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component()]))
   let t299 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t285), t286), t287), t288), t292), t293), @tactics.conj_tac), t294), t295), @tactics.gen_tac), t296), t297), @tactics.strip_tac), t298)
-  msum_add_gen_c.set(@tactics.prove(@parser.parse_term("!f g:A->real^M^N s.\n       FINITE {x | x IN s /\\ ~(f x = mat 0)} /\\\n       FINITE {x | x IN s /\\ ~(g x = mat 0)}\n       ==> msum s (\\x. f x + g x) = msum s f + msum s g"), t299))
+  msum_add_gen_c.set(@tactics.prove(@parser.parse_term("forall f g:A->real^M^N s.\n       FINITE {x | x IN s /\\ ~(f x = mat 0)} /\\\n       FINITE {x | x IN s /\\ ~(g x = mat 0)}\n       ==> msum s (\\x. f x + g x) = msum s f + msum s g"), t299))
 }
 
 ///|
@@ -1516,7 +1516,7 @@ fn step_80() -> Unit raise {
   let t301 = @simp.asm_simp_tac(@list.List([@equal.gsym(@sets.delete()), msum_delete()]))
   let t300 = @simp.asm_simp_tac(@list.List([msum_cases()]))
   let t304 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t300), t301), t302), t303), @vectors.matrix_arith_tac)
-  msum_cases_1_c.set(@tactics.prove(@parser.parse_term("!s a:A. FINITE s /\\ a IN s\n           ==> msum s (\\x. if x = a then y else f(x)) =\n               msum s f + (y - f a):real^M^N"), t304))
+  msum_cases_1_c.set(@tactics.prove(@parser.parse_term("forall s a:A. FINITE s /\\ a IN s\n           ==> msum s (\\x. if x = a then y else f(x)) =\n               msum s f + (y - f a):real^M^N"), t304))
 }
 
 ///|
@@ -1565,7 +1565,7 @@ pub fn msum_1() -> @kernel.Thm {
 fn step_83() -> Unit raise {
   let t307 = @simp.rewrite_tac(@list.List([msum_sing_numseg(), @calc_num.arith(), @realax.real_add_assoc()]))
   let t308 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("2")), msum_clauses_numseg()])), t307)
-  msum_2_c.set(@tactics.prove(@parser.parse_term("!t. msum(1..2) t = t(1) + t(2):real^M^N"), t308))
+  msum_2_c.set(@tactics.prove(@parser.parse_term("forall t. msum(1..2) t = t(1) + t(2):real^M^N"), t308))
 }
 
 ///|
@@ -1583,7 +1583,7 @@ fn step_84() -> Unit raise {
   let t310 = @simp.rewrite_tac(@list.List([msum_sing_numseg(), @calc_num.arith(), @vectors.matrix_add_assoc()]))
   let t309 = @calc_num.num_conv(@parser.parse_term("2"))
   let t311 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("3")), t309, msum_clauses_numseg()])), t310)
-  msum_3_c.set(@tactics.prove(@parser.parse_term("!t. msum(1..3) t = t(1) + t(2) + t(3):real^M^N"), t311))
+  msum_3_c.set(@tactics.prove(@parser.parse_term("forall t. msum(1..3) t = t(1) + t(2) + t(3):real^M^N"), t311))
 }
 
 ///|
@@ -1602,7 +1602,7 @@ fn step_85() -> Unit raise {
   let t312 = @calc_num.num_conv(@parser.parse_term("2"))
   let t313 = @calc_num.num_conv(@parser.parse_term("3"))
   let t315 = @tactics.then_tac(@simp.simp_tac(@list.List([@calc_num.num_conv(@parser.parse_term("4")), t313, t312, msum_clauses_numseg()])), t314)
-  msum_4_c.set(@tactics.prove(@parser.parse_term("!t. msum(1..4) t = t(1) + t(2) + t(3) + t(4):real^M^N"), t315))
+  msum_4_c.set(@tactics.prove(@parser.parse_term("forall t. msum(1..4) t = t(1) + t(2) + t(3) + t(4):real^M^N"), t315))
 }
 
 ///|
@@ -1618,7 +1618,7 @@ pub fn msum_4() -> @kernel.Thm {
 /// MSUM_PAIR
 fn step_86() -> Unit raise {
   let t316 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @vectors.matrix_add_component(), @iterate.sum_pair()]))
-  msum_pair_c.set(@tactics.prove(@parser.parse_term("!f:num->real^M^N m n.\n        msum(2*m..2*n+1) f = msum(m..n) (\\i. f(2*i) + f(2*i+1))"), t316))
+  msum_pair_c.set(@tactics.prove(@parser.parse_term("forall f:num->real^M^N m n.\n        msum(2*m..2*n+1) f = msum(m..n) (\\i. f(2*i) + f(2*i+1))"), t316))
 }
 
 ///|
@@ -1638,7 +1638,7 @@ fn step_87() -> Unit raise {
   let t318 = @parser.parse_term("0")
   let t319 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:num->real^M^N"), t318, t317]), msum_pair()))
   let t321 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t319), t320)
-  msum_pair_0_c.set(@tactics.prove(@parser.parse_term("!f:num->real^M^N n. msum(0..2*n+1) f = msum(0..n) (\\i. f(2*i) + f(2*i+1))"), t321))
+  msum_pair_0_c.set(@tactics.prove(@parser.parse_term("forall f:num->real^M^N n. msum(0..2*n+1) f = msum(0..n) (\\i. f(2*i) + f(2*i+1))"), t321))
 }
 
 ///|
@@ -1662,7 +1662,7 @@ fn step_88() -> Unit raise {
   }, @list.List([@drule.match_mp(@iterate.iterate_reflect())(monoidal_matrix_add())]))
   let t322 = @simp.simp_tac(@list.List([msum_v1(), @iterate.finite_numseg()]))
   let t328 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t322), t326), t327)
-  msum_reflect_c.set(@tactics.prove(@parser.parse_term("!x m n. msum(m..n) x =\n           if n < m then mat 0 else msum(0..n-m) (\\i. x(n - i)):real^M^N"), t328))
+  msum_reflect_c.set(@tactics.prove(@parser.parse_term("forall x m n. msum(m..n) x =\n           if n < m then mat 0 else msum(0..n-m) (\\i. x(n - i)):real^M^N"), t328))
 }
 
 ///|

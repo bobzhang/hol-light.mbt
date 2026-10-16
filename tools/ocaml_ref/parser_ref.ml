@@ -29,5 +29,5 @@ let run line =
   | ["margin"; n] -> set_margin (int_of_string n)
   | _ -> failwith ("bad command: " ^ line)
   with Failure s -> out (line ^ " ! " ^ s);;
-let ic = open_in "parse_cases.txt";;
+let ic = open_in "_build/parse_cases_legacy.txt";;
 let () = try while true do run (input_line ic) done with End_of_file -> ();;

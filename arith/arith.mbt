@@ -64,7 +64,7 @@ fn step_10() -> Unit raise {
 ///|
 /// PRE
 fn step_11() -> Unit raise {
-  let t1 = @parser.parse_term("(PRE 0 = 0) /\\\n  (!n. PRE (SUC n) = n)")
+  let t1 = @parser.parse_term("(PRE 0 = 0) /\\\n  (forall n. PRE (SUC n) = n)")
   pre_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t1))
 }
 
@@ -81,7 +81,7 @@ pub fn pre() -> @kernel.Thm {
 /// ADD
 fn step_12() -> Unit raise {
   let t2 = @parser.parse_term(
-    "(!n. 0 + n = n) /\\\n  (!m n. (SUC m) + n = SUC(m + n))",
+    "(forall n. 0 + n = n) /\\\n  (forall m n. (SUC m) + n = SUC(m + n))",
   )
   add_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t2))
 }
@@ -102,7 +102,7 @@ fn step_13() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([add()])),
   )
-  add_0_c.set(@tactics.prove(@parser.parse_term("!m. m + 0 = m"), t3))
+  add_0_c.set(@tactics.prove(@parser.parse_term("forall m. m + 0 = m"), t3))
 }
 
 ///|
@@ -122,7 +122,7 @@ fn step_14() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([add()])),
   )
   add_suc_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m + (SUC n) = SUC(m + n)"), t4),
+    @tactics.prove(@parser.parse_term("forall m n. m + (SUC n) = SUC(m + n)"), t4),
   )
 }
 
@@ -142,7 +142,7 @@ fn step_15() -> Unit raise {
   add_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!n. 0 + n = n) /\\\n   (!m. m + 0 = m) /\\\n   (!m n. (SUC m) + n = SUC(m + n)) /\\\n   (!m n. m + (SUC n) = SUC(m + n))",
+        "(forall n. 0 + n = n) /\\\n   (forall m. m + 0 = m) /\\\n   (forall m n. (SUC m) + n = SUC(m + n)) /\\\n   (forall m n. m + (SUC n) = SUC(m + n))",
       ),
       t5,
     ),
@@ -165,7 +165,7 @@ fn step_16() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([add_clauses()])),
   )
-  add_sym_c.set(@tactics.prove(@parser.parse_term("!m n. m + n = n + m"), t6))
+  add_sym_c.set(@tactics.prove(@parser.parse_term("forall m n. m + n = n + m"), t6))
 }
 
 ///|
@@ -185,7 +185,7 @@ fn step_17() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([add_clauses()])),
   )
   add_assoc_c.set(
-    @tactics.prove(@parser.parse_term("!m n p. m + (n + p) = (m + n) + p"), t7),
+    @tactics.prove(@parser.parse_term("forall m n p. m + (n + p) = (m + n) + p"), t7),
   )
 }
 
@@ -228,7 +228,7 @@ fn step_19() -> Unit raise {
   let t10 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t9)
   add_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m + n = 0) <=> (m = 0) /\\ (n = 0)"),
+      @parser.parse_term("forall m n. (m + n = 0) <=> (m = 0) /\\ (n = 0)"),
       t10,
     ),
   )
@@ -252,7 +252,7 @@ fn step_20() -> Unit raise {
   )
   eq_add_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + n = m + p) <=> (n = p)"),
+      @parser.parse_term("forall m n p. (m + n = m + p) <=> (n = p)"),
       t11,
     ),
   )
@@ -277,7 +277,7 @@ fn step_21() -> Unit raise {
   )
   eq_add_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + p = n + p) <=> (m = n)"),
+      @parser.parse_term("forall m n p. (m + p = n + p) <=> (m = n)"),
       t13,
     ),
   )
@@ -300,7 +300,7 @@ fn step_22() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([add_clauses(), @nums.suc_inj()])),
   )
   eq_add_lcancel_0_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m + n = m) <=> (n = 0)"), t14),
+    @tactics.prove(@parser.parse_term("forall m n. (m + n = m) <=> (n = 0)"), t14),
   )
 }
 
@@ -324,7 +324,7 @@ fn step_23() -> Unit raise {
     t15,
   )
   eq_add_rcancel_0_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m + n = n) <=> (m = 0)"), t16),
+    @tactics.prove(@parser.parse_term("forall m n. (m + n = n) <=> (m = 0)"), t16),
   )
 }
 
@@ -346,7 +346,7 @@ fn step_24() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([@nums.bit0_def(), add_clauses()])),
   )
-  bit0_c.set(@tactics.prove(@parser.parse_term("!n. BIT0 n = n + n"), t17))
+  bit0_c.set(@tactics.prove(@parser.parse_term("forall n. BIT0 n = n + n"), t17))
 }
 
 ///|
@@ -362,7 +362,7 @@ pub fn bit0() -> @kernel.Thm {
 /// BIT1
 fn step_25() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([@nums.bit1_def(), bit0()]))
-  bit1_c.set(@tactics.prove(@parser.parse_term("!n. BIT1 n = SUC(n + n)"), t18))
+  bit1_c.set(@tactics.prove(@parser.parse_term("forall n. BIT1 n = SUC(n + n)"), t18))
 }
 
 ///|
@@ -380,7 +380,7 @@ fn step_26() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@nums.numeral(), bit0()]))
   bit0_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. NUMERAL (BIT0 n) = NUMERAL n + NUMERAL n"),
+      @parser.parse_term("forall n. NUMERAL (BIT0 n) = NUMERAL n + NUMERAL n"),
       t19,
     ),
   )
@@ -401,7 +401,7 @@ fn step_27() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@nums.numeral(), bit1()]))
   bit1_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. NUMERAL (BIT1 n) = SUC(NUMERAL n + NUMERAL n)"),
+      @parser.parse_term("forall n. NUMERAL (BIT1 n) = SUC(NUMERAL n + NUMERAL n)"),
       t20,
     ),
   )
@@ -465,7 +465,7 @@ pub fn two() -> @kernel.Thm {
 /// ADD1
 fn step_30() -> Unit raise {
   let t23 = @simp.rewrite_tac(@list.List([bit1_thm(), add_clauses()]))
-  add1_c.set(@tactics.prove(@parser.parse_term("!m. SUC m = m + 1"), t23))
+  add1_c.set(@tactics.prove(@parser.parse_term("forall m. SUC m = m + 1"), t23))
 }
 
 ///|
@@ -481,7 +481,7 @@ pub fn add1() -> @kernel.Thm {
 /// MULT
 fn step_31() -> Unit raise {
   let t24 = @parser.parse_term(
-    "(!n. 0 * n = 0) /\\\n  (!m n. (SUC m) * n = (m * n) + n)",
+    "(forall n. 0 * n = 0) /\\\n  (forall m n. (SUC m) * n = (m * n) + n)",
   )
   mult_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t24))
 }
@@ -502,7 +502,7 @@ fn step_32() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([mult(), add_clauses()])),
   )
-  mult_0_c.set(@tactics.prove(@parser.parse_term("!m. m * 0 = 0"), t25))
+  mult_0_c.set(@tactics.prove(@parser.parse_term("forall m. m * 0 = 0"), t25))
 }
 
 ///|
@@ -522,7 +522,7 @@ fn step_33() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([mult(), add_clauses(), add_assoc()])),
   )
   mult_suc_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m * (SUC n) = m + (m * n)"), t26),
+    @tactics.prove(@parser.parse_term("forall m n. m * (SUC n) = m + (m * n)"), t26),
   )
 }
 
@@ -544,7 +544,7 @@ fn step_34() -> Unit raise {
   mult_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!n. 0 * n = 0) /\\\n   (!m. m * 0 = 0) /\\\n   (!n. 1 * n = n) /\\\n   (!m. m * 1 = m) /\\\n   (!m n. (SUC m) * n = (m * n) + n) /\\\n   (!m n. m * (SUC n) = m + (m * n))",
+        "(forall n. 0 * n = 0) /\\\n   (forall m. m * 0 = 0) /\\\n   (forall n. 1 * n = n) /\\\n   (forall m. m * 1 = m) /\\\n   (forall m n. (SUC m) * n = (m * n) + n) /\\\n   (forall m n. m * (SUC n) = m + (m * n))",
       ),
       t27,
     ),
@@ -569,7 +569,7 @@ fn step_35() -> Unit raise {
       @list.List([mult_clauses(), @bool.eqt_intro(@bool.spec_all(add_sym()))]),
     ),
   )
-  mult_sym_c.set(@tactics.prove(@parser.parse_term("!m n. m * n = n * m"), t28))
+  mult_sym_c.set(@tactics.prove(@parser.parse_term("forall m n. m * n = n * m"), t28))
 }
 
 ///|
@@ -593,7 +593,7 @@ fn step_36() -> Unit raise {
   )
   left_add_distrib_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m * (n + p) = (m * n) + (m * p)"),
+      @parser.parse_term("forall m n p. m * (n + p) = (m * n) + (m * p)"),
       t30,
     ),
   )
@@ -620,7 +620,7 @@ fn step_37() -> Unit raise {
   )
   right_add_distrib_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + n) * p = (m * p) + (n * p)"),
+      @parser.parse_term("forall m n p. (m + n) * p = (m * p) + (n * p)"),
       t32,
     ),
   )
@@ -645,7 +645,7 @@ fn step_38() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([mult_clauses(), right_add_distrib()])),
   )
   mult_assoc_c.set(
-    @tactics.prove(@parser.parse_term("!m n p. m * (n * p) = (m * n) * p"), t33),
+    @tactics.prove(@parser.parse_term("forall m n p. m * (n * p) = (m * n) * p"), t33),
   )
 }
 
@@ -690,7 +690,7 @@ fn step_40() -> Unit raise {
   let t36 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t35)
   mult_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m * n = 0) <=> (m = 0) \\/ (n = 0)"),
+      @parser.parse_term("forall m n. (m * n = 0) <=> (m = 0) \\/ (n = 0)"),
       t36,
     ),
   )
@@ -735,7 +735,7 @@ fn step_41() -> Unit raise {
   )
   eq_mult_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * n = m * p) <=> (m = 0) \\/ (n = p)"),
+      @parser.parse_term("forall m n p. (m * n = m * p) <=> (m = 0) \\/ (n = p)"),
       t40,
     ),
   )
@@ -762,7 +762,7 @@ fn step_42() -> Unit raise {
   )
   eq_mult_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * p = n * p) <=> (m = n) \\/ (p = 0)"),
+      @parser.parse_term("forall m n p. (m * p = n * p) <=> (m = n) \\/ (p = 0)"),
       t42,
     ),
   )
@@ -788,7 +788,7 @@ fn step_43() -> Unit raise {
       @list.List([bit0_thm(), mult_clauses(), right_add_distrib()]),
     ),
   )
-  mult_2_c.set(@tactics.prove(@parser.parse_term("!n. 2 * n = n + n"), t43))
+  mult_2_c.set(@tactics.prove(@parser.parse_term("forall n. 2 * n = n + n"), t43))
 }
 
 ///|
@@ -828,7 +828,7 @@ fn step_44() -> Unit raise {
   )
   mult_eq_1_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m * n = 1) <=> (m = 1) /\\ (n = 1)"),
+      @parser.parse_term("forall m n. (m * n = 1) <=> (m = 1) /\\ (n = 1)"),
       t47,
     ),
   )
@@ -847,7 +847,7 @@ pub fn mult_eq_1() -> @kernel.Thm {
 /// EXP
 fn step_45() -> Unit raise {
   let t48 = @parser.parse_term(
-    "(!m. m EXP 0 = 1) /\\\n  (!m n. m EXP (SUC n) = m * (m EXP n))",
+    "(forall m. m EXP 0 = 1) /\\\n  (forall m n. m EXP (SUC n) = m * (m EXP n))",
   )
   exp_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t48))
 }
@@ -878,7 +878,7 @@ fn step_46() -> Unit raise {
   let t50 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t49)
   exp_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m EXP n = 0) <=> (m = 0) /\\ ~(n = 0)"),
+      @parser.parse_term("forall m n. (m EXP n = 0) <=> (m = 0) /\\ ~(n = 0)"),
       t50,
     ),
   )
@@ -909,7 +909,7 @@ fn step_47() -> Unit raise {
   )
   exp_eq_1_c.set(
     @tactics.prove(
-      @parser.parse_term("!x n. x EXP n = 1 <=> x = 1 \\/ n = 0"),
+      @parser.parse_term("forall x n. x EXP n = 1 <=> x = 1 \\/ n = 0"),
       t53,
     ),
   )
@@ -934,7 +934,7 @@ fn step_48() -> Unit raise {
   )
   exp_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. 0 EXP n = if n = 0 then 1 else 0"),
+      @parser.parse_term("forall n. 0 EXP n = if n = 0 then 1 else 0"),
       t55,
     ),
   )
@@ -964,7 +964,7 @@ fn step_49() -> Unit raise {
   )
   exp_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m EXP (n + p) = (m EXP n) * (m EXP p)"),
+      @parser.parse_term("forall m n p. m EXP (n + p) = (m EXP n) * (m EXP p)"),
       t57,
     ),
   )
@@ -986,7 +986,7 @@ fn step_50() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([exp(), mult_clauses()])),
   )
-  exp_one_c.set(@tactics.prove(@parser.parse_term("!n. 1 EXP n = 1"), t58))
+  exp_one_c.set(@tactics.prove(@parser.parse_term("forall n. 1 EXP n = 1"), t58))
 }
 
 ///|
@@ -1004,7 +1004,7 @@ fn step_51() -> Unit raise {
   let t59 = @simp.rewrite_tac(
     @list.List([one(), exp(), mult_clauses(), add_clauses()]),
   )
-  exp_1_c.set(@tactics.prove(@parser.parse_term("!n. n EXP 1 = n"), t59))
+  exp_1_c.set(@tactics.prove(@parser.parse_term("forall n. n EXP 1 = n"), t59))
 }
 
 ///|
@@ -1029,7 +1029,7 @@ fn step_52() -> Unit raise {
       add_clauses(),
     ]),
   )
-  exp_2_c.set(@tactics.prove(@parser.parse_term("!n. n EXP 2 = n * n"), t60))
+  exp_2_c.set(@tactics.prove(@parser.parse_term("forall n. n EXP 2 = n * n"), t60))
 }
 
 ///|
@@ -1050,7 +1050,7 @@ fn step_53() -> Unit raise {
   )
   mult_exp_c.set(
     @tactics.prove(
-      @parser.parse_term("!p m n. (m * n) EXP p = m EXP p * n EXP p"),
+      @parser.parse_term("forall p m n. (m * n) EXP p = m EXP p * n EXP p"),
       t61,
     ),
   )
@@ -1093,7 +1093,7 @@ fn step_54() -> Unit raise {
   )
   exp_mult_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m EXP (n * p) = (m EXP n) EXP p"),
+      @parser.parse_term("forall m n p. m EXP (n * p) = (m EXP n) EXP p"),
       t67,
     ),
   )
@@ -1114,7 +1114,7 @@ fn step_55() -> Unit raise {
   let t68 = @simp.rewrite_tac(@list.List([exp_mult()]))
   exp_exp_c.set(
     @tactics.prove(
-      @parser.parse_term("!x m n. (x EXP m) EXP n = x EXP (m * n)"),
+      @parser.parse_term("forall x m n. (x EXP m) EXP n = x EXP (m * n)"),
       t68,
     ),
   )
@@ -1133,7 +1133,7 @@ pub fn exp_exp() -> @kernel.Thm {
 /// LE
 fn step_56() -> Unit raise {
   let t69 = @parser.parse_term(
-    "(!m. (m <= 0) <=> (m = 0)) /\\\n  (!m n. (m <= SUC n) <=> (m = SUC n) \\/ (m <= n))",
+    "(forall m. (m <= 0) <=> (m = 0)) /\\\n  (forall m n. (m <= SUC n) <=> (m = SUC n) \\/ (m <= n))",
   )
   le_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t69))
 }
@@ -1151,7 +1151,7 @@ pub fn le() -> @kernel.Thm {
 /// LT
 fn step_57() -> Unit raise {
   let t70 = @parser.parse_term(
-    "(!m. (m < 0) <=> F) /\\\n  (!m n. (m < SUC n) <=> (m = n) \\/ (m < n))",
+    "(forall m. (m < 0) <=> F) /\\\n  (forall m n. (m < SUC n) <=> (m = n) \\/ (m < n))",
   )
   lt_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t70))
 }
@@ -1200,7 +1200,7 @@ pub fn gt() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   max_c.set(
     @pair.new_definition(
-      @parser.parse_term("!m n. MAX m n = if m <= n then n else m"),
+      @parser.parse_term("forall m n. MAX m n = if m <= n then n else m"),
     ),
   )
 }
@@ -1219,7 +1219,7 @@ pub fn max() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   min_c.set(
     @pair.new_definition(
-      @parser.parse_term("!m n. MIN m n = if m <= n then m else n"),
+      @parser.parse_term("forall m n. MIN m n = if m <= n then m else n"),
     ),
   )
 }
@@ -1244,7 +1244,7 @@ fn step_62() -> Unit raise {
     t71,
   )
   le_suc_lt_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (SUC m <= n) <=> (m < n)"), t72),
+    @tactics.prove(@parser.parse_term("forall m n. (SUC m <= n) <=> (m < n)"), t72),
   )
 }
 
@@ -1274,7 +1274,7 @@ fn step_63() -> Unit raise {
     t75,
   )
   lt_suc_le_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m < SUC n) <=> (m <= n)"), t76),
+    @tactics.prove(@parser.parse_term("forall m n. (m < SUC n) <=> (m <= n)"), t76),
   )
 }
 
@@ -1293,7 +1293,7 @@ fn step_64() -> Unit raise {
   let t77 = @simp.rewrite_tac(@list.List([le_suc_lt(), lt_suc_le()]))
   le_suc_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (SUC m <= SUC n) <=> (m <= n)"),
+      @parser.parse_term("forall m n. (SUC m <= SUC n) <=> (m <= n)"),
       t77,
     ),
   )
@@ -1313,7 +1313,7 @@ pub fn le_suc() -> @kernel.Thm {
 fn step_65() -> Unit raise {
   let t78 = @simp.rewrite_tac(@list.List([lt_suc_le(), le_suc_lt()]))
   lt_suc_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (SUC m < SUC n) <=> (m < n)"), t78),
+    @tactics.prove(@parser.parse_term("forall m n. (SUC m < SUC n) <=> (m < n)"), t78),
   )
 }
 
@@ -1333,7 +1333,7 @@ fn step_66() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([le()])),
   )
-  le_0_c.set(@tactics.prove(@parser.parse_term("!n. 0 <= n"), t79))
+  le_0_c.set(@tactics.prove(@parser.parse_term("forall n. 0 <= n"), t79))
 }
 
 ///|
@@ -1349,7 +1349,7 @@ pub fn le_0() -> @kernel.Thm {
 /// LT_0
 fn step_67() -> Unit raise {
   let t80 = @simp.rewrite_tac(@list.List([lt_suc_le(), le_0()]))
-  lt_0_c.set(@tactics.prove(@parser.parse_term("!n. 0 < SUC n"), t80))
+  lt_0_c.set(@tactics.prove(@parser.parse_term("forall n. 0 < SUC n"), t80))
 }
 
 ///|
@@ -1368,7 +1368,7 @@ fn step_68() -> Unit raise {
     @nums.induct_tac,
     @simp.rewrite_tac(@list.List([le()])),
   )
-  le_refl_c.set(@tactics.prove(@parser.parse_term("!n. n <= n"), t81))
+  le_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n <= n"), t81))
 }
 
 ///|
@@ -1391,7 +1391,7 @@ fn step_69() -> Unit raise {
     ),
     t82,
   )
-  lt_refl_c.set(@tactics.prove(@parser.parse_term("!n. ~(n < n)"), t83))
+  lt_refl_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n < n)"), t83))
 }
 
 ///|
@@ -1408,7 +1408,7 @@ pub fn lt_refl() -> @kernel.Thm {
 fn step_70() -> Unit raise {
   let t84 = @meson.meson_tac(@list.List([lt_refl()]))
   lt_imp_ne_c.set(
-    @tactics.prove(@parser.parse_term("!m n:num. m < n ==> ~(m = n)"), t84),
+    @tactics.prove(@parser.parse_term("forall m n:num. m < n ==> ~(m = n)"), t84),
   )
 }
 
@@ -1434,7 +1434,7 @@ fn step_71() -> Unit raise {
   )
   le_antisym_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m <= n /\\ n <= m) <=> (m = n)"),
+      @parser.parse_term("forall m n. (m <= n /\\ n <= m) <=> (m = n)"),
       t87,
     ),
   )
@@ -1459,7 +1459,7 @@ fn step_72() -> Unit raise {
     t89,
   )
   lt_antisym_c.set(
-    @tactics.prove(@parser.parse_term("!m n. ~(m < n /\\ n < m)"), t90),
+    @tactics.prove(@parser.parse_term("forall m n. ~(m < n /\\ n < m)"), t90),
   )
 }
 
@@ -1482,7 +1482,7 @@ fn step_73() -> Unit raise {
     t92,
   )
   let_antisym_c.set(
-    @tactics.prove(@parser.parse_term("!m n. ~(m <= n /\\ n < m)"), t93),
+    @tactics.prove(@parser.parse_term("forall m n. ~(m <= n /\\ n < m)"), t93),
   )
 }
 
@@ -1504,7 +1504,7 @@ fn step_74() -> Unit raise {
     t94,
   )
   lte_antisym_c.set(
-    @tactics.prove(@parser.parse_term("!m n. ~(m < n /\\ n <= m)"), t95),
+    @tactics.prove(@parser.parse_term("forall m n. ~(m < n /\\ n <= m)"), t95),
   )
 }
 
@@ -1528,7 +1528,7 @@ fn step_75() -> Unit raise {
   )
   le_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m <= n /\\ n <= p ==> m <= p"),
+      @parser.parse_term("forall m n p. m <= n /\\ n <= p ==> m <= p"),
       t98,
     ),
   )
@@ -1554,7 +1554,7 @@ fn step_76() -> Unit raise {
   )
   lt_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m < n /\\ n < p ==> m < p"),
+      @parser.parse_term("forall m n p. m < n /\\ n < p ==> m < p"),
       t101,
     ),
   )
@@ -1580,7 +1580,7 @@ fn step_77() -> Unit raise {
   )
   let_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m <= n /\\ n < p ==> m < p"),
+      @parser.parse_term("forall m n p. m <= n /\\ n < p ==> m < p"),
       t104,
     ),
   )
@@ -1606,7 +1606,7 @@ fn step_78() -> Unit raise {
   )
   lte_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m < n /\\ n <= p ==> m < p"),
+      @parser.parse_term("forall m n p. m < n /\\ n <= p ==> m < p"),
       t107,
     ),
   )
@@ -1627,7 +1627,7 @@ fn step_79() -> Unit raise {
   let t108 = @simp.asm_rewrite_tac(@list.List([le_0(), le_suc()]))
   let t109 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t108)
   le_cases_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m <= n \\/ n <= m"), t109),
+    @tactics.prove(@parser.parse_term("forall m n. m <= n \\/ n <= m"), t109),
   )
 }
 
@@ -1921,7 +1921,7 @@ fn step_80() -> Unit raise {
   )
   lt_cases_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m < n) \\/ (n < m) \\/ (m = n)"),
+      @parser.parse_term("forall m n. (m < n) \\/ (n < m) \\/ (m = n)"),
       t129,
     ),
   )
@@ -1944,7 +1944,7 @@ fn step_81() -> Unit raise {
   )
   let t131 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t130)
   let_cases_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m <= n \\/ n < m"), t131),
+    @tactics.prove(@parser.parse_term("forall m n. m <= n \\/ n < m"), t131),
   )
 }
 
@@ -1966,7 +1966,7 @@ fn step_82() -> Unit raise {
     t132,
   )
   lte_cases_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m < n \\/ n <= m"), t133),
+    @tactics.prove(@parser.parse_term("forall m n. m < n \\/ n <= m"), t133),
   )
 }
 
@@ -1992,7 +1992,7 @@ fn step_83() -> Unit raise {
   )
   le_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m <= n) <=> (m < n) \\/ (m = n)"),
+      @parser.parse_term("forall m n. (m <= n) <=> (m < n) \\/ (m = n)"),
       t136,
     ),
   )
@@ -2181,7 +2181,7 @@ fn step_84() -> Unit raise {
   )
   lt_le_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m < n) <=> (m <= n) /\\ ~(m = n)"),
+      @parser.parse_term("forall m n. (m < n) <=> (m <= n) /\\ ~(m = n)"),
       t153,
     ),
   )
@@ -2482,7 +2482,7 @@ fn step_85() -> Unit raise {
     t172,
   )
   not_le_c.set(
-    @tactics.prove(@parser.parse_term("!m n. ~(m <= n) <=> (n < m)"), t173),
+    @tactics.prove(@parser.parse_term("forall m n. ~(m <= n) <=> (n < m)"), t173),
   )
 }
 
@@ -2781,7 +2781,7 @@ fn step_86() -> Unit raise {
     t192,
   )
   not_lt_c.set(
-    @tactics.prove(@parser.parse_term("!m n. ~(m < n) <=> n <= m"), t193),
+    @tactics.prove(@parser.parse_term("forall m n. ~(m < n) <=> n <= m"), t193),
   )
 }
 
@@ -2804,7 +2804,7 @@ fn step_87() -> Unit raise {
     t195,
   )
   lt_imp_le_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m < n ==> m <= n"), t196),
+    @tactics.prove(@parser.parse_term("forall m n. m < n ==> m <= n"), t196),
   )
 }
 
@@ -2823,7 +2823,7 @@ fn step_88() -> Unit raise {
   let t197 = @simp.asm_rewrite_tac(@list.List([le_refl()]))
   let t198 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t197)
   eq_imp_le_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m = n) ==> m <= n"), t198),
+    @tactics.prove(@parser.parse_term("forall m n. (m = n) ==> m <= n"), t198),
   )
 }
 
@@ -2850,7 +2850,7 @@ fn step_89() -> Unit raise {
     t199,
   )
   lt_nz_c.set(
-    @tactics.prove(@parser.parse_term("!n. 0 < n <=> ~(n = 0)"), t200),
+    @tactics.prove(@parser.parse_term("forall n. 0 < n <=> ~(n = 0)"), t200),
   )
 }
 
@@ -2872,7 +2872,7 @@ fn step_90() -> Unit raise {
   le_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!n. ~(n = 0) ==> 0 < n) /\\\n   (!n. ~(n = 0) ==> 1 <= n) /\\\n   (!n. 0 < n ==> ~(n = 0)) /\\\n   (!n. 0 < n ==> 1 <= n) /\\\n   (!n. 1 <= n ==> 0 < n) /\\\n   (!n. 1 <= n ==> ~(n = 0))",
+        "(forall n. ~(n = 0) ==> 0 < n) /\\\n   (forall n. ~(n = 0) ==> 1 <= n) /\\\n   (forall n. 0 < n ==> ~(n = 0)) /\\\n   (forall n. 0 < n ==> 1 <= n) /\\\n   (forall n. 1 <= n ==> 0 < n) /\\\n   (forall n. 1 <= n ==> ~(n = 0))",
       ),
       t201,
     ),
@@ -3152,7 +3152,7 @@ fn step_91() -> Unit raise {
   )
   le_exists_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m <= n) <=> (?d. n = m + d)"),
+      @parser.parse_term("forall m n. (m <= n) <=> (?d. n = m + d)"),
       t229,
     ),
   )
@@ -3428,7 +3428,7 @@ fn step_92() -> Unit raise {
   )
   lt_exists_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m < n) <=> (?d. n = m + SUC d)"),
+      @parser.parse_term("forall m n. (m < n) <=> (?d. n = m + SUC d)"),
       t255,
     ),
   )
@@ -3451,7 +3451,7 @@ fn step_93() -> Unit raise {
     @tactics.then_tac(@tactics.gen_tac, @nums.induct_tac),
     t256,
   )
-  le_add_c.set(@tactics.prove(@parser.parse_term("!m n. m <= m + n"), t257))
+  le_add_c.set(@tactics.prove(@parser.parse_term("forall m n. m <= m + n"), t257))
 }
 
 ///|
@@ -3471,7 +3471,7 @@ fn step_94() -> Unit raise {
     @simp.once_rewrite_tac(@list.List([add_sym()])),
     t258,
   )
-  le_addr_c.set(@tactics.prove(@parser.parse_term("!m n. n <= m + n"), t259))
+  le_addr_c.set(@tactics.prove(@parser.parse_term("forall m n. n <= m + n"), t259))
 }
 
 ///|
@@ -3491,7 +3491,7 @@ fn step_95() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([add_clauses(), lt_suc()])),
   )
   lt_add_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m < m + n) <=> (0 < n)"), t260),
+    @tactics.prove(@parser.parse_term("forall m n. (m < m + n) <=> (0 < n)"), t260),
   )
 }
 
@@ -3513,7 +3513,7 @@ fn step_96() -> Unit raise {
     t261,
   )
   lt_addr_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (n < m + n) <=> (0 < m)"), t262),
+    @tactics.prove(@parser.parse_term("forall m n. (n < m + n) <=> (0 < m)"), t262),
   )
 }
 
@@ -3534,7 +3534,7 @@ fn step_97() -> Unit raise {
   )
   le_add_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + n) <= (m + p) <=> n <= p"),
+      @parser.parse_term("forall m n p. (m + n) <= (m + p) <=> n <= p"),
       t263,
     ),
   )
@@ -3559,7 +3559,7 @@ fn step_98() -> Unit raise {
   )
   le_add_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + p) <= (n + p) <=> (m <= n)"),
+      @parser.parse_term("forall m n p. (m + p) <= (n + p) <=> (m <= n)"),
       t265,
     ),
   )
@@ -3587,7 +3587,7 @@ fn step_99() -> Unit raise {
   )
   lt_add_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + n) < (m + p) <=> n < p"),
+      @parser.parse_term("forall m n p. (m + n) < (m + p) <=> n < p"),
       t266,
     ),
   )
@@ -3612,7 +3612,7 @@ fn step_100() -> Unit raise {
   )
   lt_add_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + p) < (n + p) <=> (m < n)"),
+      @parser.parse_term("forall m n p. (m + p) < (n + p) <=> (m < n)"),
       t268,
     ),
   )
@@ -3653,7 +3653,7 @@ fn step_101() -> Unit raise {
   )
   le_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m <= p /\\ n <= q ==> m + n <= p + q"),
+      @parser.parse_term("forall m n p q. m <= p /\\ n <= q ==> m + n <= p + q"),
       t277,
     ),
   )
@@ -3696,7 +3696,7 @@ fn step_102() -> Unit raise {
   )
   let_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m <= p /\\ n < q ==> m + n < p + q"),
+      @parser.parse_term("forall m n p q. m <= p /\\ n < q ==> m + n < p + q"),
       t286,
     ),
   )
@@ -3721,7 +3721,7 @@ fn step_103() -> Unit raise {
   )
   lte_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m < p /\\ n <= q ==> m + n < p + q"),
+      @parser.parse_term("forall m n p q. m < p /\\ n <= q ==> m + n < p + q"),
       t288,
     ),
   )
@@ -3755,7 +3755,7 @@ fn step_104() -> Unit raise {
   )
   lt_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m < p /\\ n < q ==> m + n < p + q"),
+      @parser.parse_term("forall m n p q. m < p /\\ n < q ==> m + n < p + q"),
       t293,
     ),
   )
@@ -3779,7 +3779,7 @@ fn step_105() -> Unit raise {
   let t295 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t294)
   lt_mult_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (0 < m * n) <=> (0 < m) /\\ (0 < n)"),
+      @parser.parse_term("forall m n. (0 < m * n) <=> (0 < m) /\\ (0 < n)"),
       t295,
     ),
   )
@@ -3826,7 +3826,7 @@ fn step_106() -> Unit raise {
   )
   le_mult2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m <= n /\\ p <= q ==> m * p <= n * q"),
+      @parser.parse_term("forall m n p q. m <= n /\\ p <= q ==> m * p <= n * q"),
       t305,
     ),
   )
@@ -3863,7 +3863,7 @@ fn step_107() -> Unit raise {
   )
   lt_lmult_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. ~(m = 0) /\\ n < p ==> m * n < m * p"),
+      @parser.parse_term("forall m n p. ~(m = 0) /\\ n < p ==> m * n < m * p"),
       t310,
     ),
   )
@@ -3912,7 +3912,7 @@ fn step_108() -> Unit raise {
   )
   le_mult_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * n) <= (m * p) <=> (m = 0) \\/ n <= p"),
+      @parser.parse_term("forall m n p. (m * n) <= (m * p) <=> (m = 0) \\/ n <= p"),
       t315,
     ),
   )
@@ -3939,7 +3939,7 @@ fn step_109() -> Unit raise {
   )
   le_mult_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * p) <= (n * p) <=> (m <= n) \\/ (p = 0)"),
+      @parser.parse_term("forall m n p. (m * p) <= (n * p) <=> (m <= n) \\/ (p = 0)"),
       t317,
     ),
   )
@@ -3990,7 +3990,7 @@ fn step_110() -> Unit raise {
   )
   lt_mult_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * n) < (m * p) <=> ~(m = 0) /\\ n < p"),
+      @parser.parse_term("forall m n p. (m * n) < (m * p) <=> ~(m = 0) /\\ n < p"),
       t322,
     ),
   )
@@ -4017,7 +4017,7 @@ fn step_111() -> Unit raise {
   )
   lt_mult_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * p) < (n * p) <=> (m < n) /\\ ~(p = 0)"),
+      @parser.parse_term("forall m n p. (m * p) < (n * p) <=> (m < n) /\\ ~(p = 0)"),
       t324,
     ),
   )
@@ -4063,7 +4063,7 @@ fn step_112() -> Unit raise {
   )
   lt_mult2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m < n /\\ p < q ==> m * p < n * q"),
+      @parser.parse_term("forall m n p q. m < n /\\ p < q ==> m * p < n * q"),
       t331,
     ),
   )
@@ -4086,7 +4086,7 @@ fn step_113() -> Unit raise {
     @simp.rewrite_tac(@list.List([mult_clauses(), le_0(), le_addr()])),
   )
   le_square_refl_c.set(
-    @tactics.prove(@parser.parse_term("!n. n <= n * n"), t332),
+    @tactics.prove(@parser.parse_term("forall n. n <= n * n"), t332),
   )
 }
 
@@ -4127,7 +4127,7 @@ fn step_114() -> Unit raise {
     t337,
   )
   lt_pow2_refl_c.set(
-    @tactics.prove(@parser.parse_term("!n. n < 2 EXP n"), t338),
+    @tactics.prove(@parser.parse_term("forall n. n < 2 EXP n"), t338),
   )
 }
 
@@ -4147,7 +4147,7 @@ fn step_115() -> Unit raise {
   wlog_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m n. P m n <=> P n m) /\\ (!m n. m <= n ==> P m n) ==> !m n. P m n",
+        "(forall m n. P m n <=> P n m) /\\ (forall m n. m <= n ==> P m n) ==> forall m n. P m n",
       ),
       t339,
     ),
@@ -4170,7 +4170,7 @@ fn step_116() -> Unit raise {
   wlog_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m. P m m) /\\ (!m n. P m n <=> P n m) /\\ (!m n. m < n ==> P m n)\n   ==> !m y. P m y",
+        "(forall m. P m m) /\\ (forall m n. P m n <=> P n m) /\\ (forall m n. m < n ==> P m n)\n   ==> forall m y. P m y",
       ),
       t340,
     ),
@@ -4193,7 +4193,7 @@ fn step_117() -> Unit raise {
   wlog_le_3_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P. (!x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (!x y z. x <= y /\\ y <= z ==> P x y z)\n       ==> !x y z. P x y z",
+        "forall P. (forall x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (forall x y z. x <= y /\\ y <= z ==> P x y z)\n       ==> forall x y z. P x y z",
       ),
       t341,
     ),
@@ -4220,7 +4220,7 @@ fn step_118() -> Unit raise {
         @tactics.gen_tac,
         @tactics.mp_tac(
           @bool.spec(
-            @parser.parse_term("\\n. !m. m < n ==> P m"),
+            @parser.parse_term("\\n. forall m. m < n ==> P m"),
             @nums.num_induction(),
           ),
         ),
@@ -4231,7 +4231,7 @@ fn step_118() -> Unit raise {
   )
   num_wf_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. (!n. (!m. m < n ==> P m) ==> P n) ==> !n. P n"),
+      @parser.parse_term("forall P. (forall n. (forall m. m < n ==> P m) ==> P n) ==> forall n. P n"),
       t344,
     ),
   )
@@ -4275,7 +4275,7 @@ fn step_119() -> Unit raise {
   )
   num_wop_c.set(
     @tactics.prove(
-      @parser.parse_term("!P. (?n. P n) <=> (?n. P(n) /\\ !m. m < n ==> ~P(m))"),
+      @parser.parse_term("forall P. (?n. P n) <=> (?n. P(n) /\\ forall m. m < n ==> ~P(m))"),
       t350,
     ),
   )
@@ -4839,7 +4839,7 @@ fn step_120() -> Unit raise {
   num_max_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P. (?x. P x) /\\ (?M. !x. P x ==> x <= M) <=>\n       ?m. P m /\\ (!x. P x ==> x <= m)",
+        "forall P. (?x. P x) /\\ (?M. forall x. P x ==> x <= M) <=>\n       ?m. P m /\\ (forall x. P x ==> x <= m)",
       ),
       t407,
     ),
@@ -4872,7 +4872,7 @@ fn step_121() -> Unit raise {
                 @meson.meson(
                   @list.List([le_exists()]),
                   @parser.parse_term(
-                    "(!m n:num. m <= n ==> R m n) <=> (!m d. R m (m + d))",
+                    "(forall m n:num. m <= n ==> R m n) <=> (forall m d. R m (m + d))",
                   ),
                 ),
               ]),
@@ -4889,7 +4889,7 @@ fn step_121() -> Unit raise {
   le_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P. (!m:num. P m m) /\\\n       (!m n. m <= n /\\ P m n ==> P m (SUC n))\n       ==> (!m n. m <= n ==> P m n)",
+        "forall P. (forall m:num. P m m) /\\\n       (forall m n. m <= n /\\ P m n ==> P m (SUC n))\n       ==> (forall m n. m <= n ==> P m n)",
       ),
       t410,
     ),
@@ -4932,7 +4932,7 @@ fn step_122() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("(!x. P x) <=> ~(?x. ~P x)"),
+        @parser.parse_term("(forall x. P x) <=> ~(?x. ~P x)"),
       ),
     ]),
   )
@@ -5110,7 +5110,7 @@ fn step_122() -> Unit raise {
   num_induction_down_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(P:num->bool) m.\n        (!n. m <= n ==> P n) /\\\n        (!n. n < m /\\ P(n + 1) ==> P n)\n        ==> !n. P n",
+        "forall(P:num->bool) m.\n        (forall n. m <= n ==> P n) /\\\n        (forall n. n < m /\\ P(n + 1) ==> P n)\n        ==> forall n. P n",
       ),
       t427,
     ),
@@ -5132,7 +5132,7 @@ pub fn num_induction_down() -> @kernel.Thm {
 /// EVEN
 fn step_123() -> Unit raise {
   let t428 = @parser.parse_term(
-    "(EVEN 0 <=> T) /\\\n   (!n. EVEN (SUC n) <=> ~(EVEN n))",
+    "(EVEN 0 <=> T) /\\\n   (forall n. EVEN (SUC n) <=> ~(EVEN n))",
   )
   even_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t428))
 }
@@ -5150,7 +5150,7 @@ pub fn even() -> @kernel.Thm {
 /// ODD
 fn step_124() -> Unit raise {
   let t429 = @parser.parse_term(
-    "(ODD 0 <=> F) /\\\n   (!n. ODD (SUC n) <=> ~(ODD n))",
+    "(ODD 0 <=> F) /\\\n   (forall n. ODD (SUC n) <=> ~(ODD n))",
   )
   odd_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t429))
 }
@@ -5172,7 +5172,7 @@ fn step_125() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([even(), odd()])),
   )
   not_even_c.set(
-    @tactics.prove(@parser.parse_term("!n. ~(EVEN n) <=> ODD n"), t430),
+    @tactics.prove(@parser.parse_term("forall n. ~(EVEN n) <=> ODD n"), t430),
   )
 }
 
@@ -5193,7 +5193,7 @@ fn step_126() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([even(), odd()])),
   )
   not_odd_c.set(
-    @tactics.prove(@parser.parse_term("!n. ~(ODD n) <=> EVEN n"), t431),
+    @tactics.prove(@parser.parse_term("forall n. ~(ODD n) <=> EVEN n"), t431),
   )
 }
 
@@ -5222,7 +5222,7 @@ fn step_127() -> Unit raise {
     t433,
   )
   even_or_odd_c.set(
-    @tactics.prove(@parser.parse_term("!n. EVEN n \\/ ODD n"), t434),
+    @tactics.prove(@parser.parse_term("forall n. EVEN n \\/ ODD n"), t434),
   )
 }
 
@@ -5241,7 +5241,7 @@ fn step_128() -> Unit raise {
   let t435 = @itab.itaut(@parser.parse_term("~(p /\\ ~p)"))
   let t436 = @simp.rewrite_tac(@list.List([@equal.gsym(not_even()), t435]))
   even_and_odd_c.set(
-    @tactics.prove(@parser.parse_term("!n. ~(EVEN n /\\ ODD n)"), t436),
+    @tactics.prove(@parser.parse_term("forall n. ~(EVEN n /\\ ODD n)"), t436),
   )
 }
 
@@ -5378,7 +5378,7 @@ fn step_129() -> Unit raise {
   )
   even_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. EVEN(m + n) <=> (EVEN m <=> EVEN n)"),
+      @parser.parse_term("forall m n. EVEN(m + n) <=> (EVEN m <=> EVEN n)"),
       t450,
     ),
   )
@@ -5519,7 +5519,7 @@ fn step_130() -> Unit raise {
   )
   even_mult_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. EVEN(m * n) <=> EVEN(m) \\/ EVEN(n)"),
+      @parser.parse_term("forall m n. EVEN(m * n) <=> EVEN(m) \\/ EVEN(n)"),
       t464,
     ),
   )
@@ -5550,7 +5550,7 @@ fn step_131() -> Unit raise {
   )
   even_exp_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. EVEN(m EXP n) <=> EVEN(m) /\\ ~(n = 0)"),
+      @parser.parse_term("forall m n. EVEN(m EXP n) <=> EVEN(m) /\\ ~(n = 0)"),
       t467,
     ),
   )
@@ -5578,7 +5578,7 @@ fn step_132() -> Unit raise {
   )
   odd_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ODD(m + n) <=> ~(ODD m <=> ODD n)"),
+      @parser.parse_term("forall m n. ODD(m + n) <=> ~(ODD m <=> ODD n)"),
       t470,
     ),
   )
@@ -5606,7 +5606,7 @@ fn step_133() -> Unit raise {
   )
   odd_mult_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ODD(m * n) <=> ODD(m) /\\ ODD(n)"),
+      @parser.parse_term("forall m n. ODD(m * n) <=> ODD(m) /\\ ODD(n)"),
       t473,
     ),
   )
@@ -5637,7 +5637,7 @@ fn step_134() -> Unit raise {
   )
   odd_exp_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ODD(m EXP n) <=> ODD(m) \\/ (n = 0)"),
+      @parser.parse_term("forall m n. ODD(m EXP n) <=> ODD(m) \\/ (n = 0)"),
       t476,
     ),
   )
@@ -5670,7 +5670,7 @@ fn step_135() -> Unit raise {
     ),
     t478,
   )
-  even_double_c.set(@tactics.prove(@parser.parse_term("!n. EVEN(2 * n)"), t479))
+  even_double_c.set(@tactics.prove(@parser.parse_term("forall n. EVEN(2 * n)"), t479))
 }
 
 ///|
@@ -5688,7 +5688,7 @@ fn step_136() -> Unit raise {
   let t480 = @simp.rewrite_tac(@list.List([not_odd(), even_double()]))
   let t481 = @tactics.then_tac(@simp.rewrite_tac(@list.List([odd()])), t480)
   odd_double_c.set(
-    @tactics.prove(@parser.parse_term("!n. ODD(SUC(2 * n))"), t481),
+    @tactics.prove(@parser.parse_term("forall n. ODD(SUC(2 * n))"), t481),
   )
 }
 
@@ -5753,7 +5753,7 @@ fn step_137() -> Unit raise {
   even_exists_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n. (EVEN n ==> ?m. n = 2 * m) /\\\n       (~EVEN n ==> ?m. n = SUC(2 * m))",
+        "forall n. (EVEN n ==> ?m. n = 2 * m) /\\\n       (~EVEN n ==> ?m. n = SUC(2 * m))",
       ),
       t494,
     ),
@@ -5844,7 +5844,7 @@ fn step_138() -> Unit raise {
     t501,
   )
   even_exists_c.set(
-    @tactics.prove(@parser.parse_term("!n. EVEN n <=> ?m. n = 2 * m"), t502),
+    @tactics.prove(@parser.parse_term("forall n. EVEN n <=> ?m. n = 2 * m"), t502),
   )
 }
 
@@ -5930,7 +5930,7 @@ fn step_139() -> Unit raise {
     t509,
   )
   odd_exists_c.set(
-    @tactics.prove(@parser.parse_term("!n. ODD n <=> ?m. n = SUC(2 * m)"), t510),
+    @tactics.prove(@parser.parse_term("forall n. ODD n <=> ?m. n = SUC(2 * m)"), t510),
   )
 }
 
@@ -6260,7 +6260,7 @@ fn step_140() -> Unit raise {
   )
   even_odd_decomposition_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. (?k m. ODD m /\\ (n = 2 EXP k * m)) <=> ~(n = 0)"),
+      @parser.parse_term("forall n. (?k m. ODD m /\\ (n = 2 EXP k * m)) <=> ~(n = 0)"),
       t551,
     ),
   )
@@ -6281,7 +6281,7 @@ pub fn even_odd_decomposition() -> @kernel.Thm {
 /// SUB
 fn step_141() -> Unit raise {
   let t552 = @parser.parse_term(
-    "(!m. m - 0 = m) /\\\n  (!m n. m - (SUC n) = PRE(m - n))",
+    "(forall m. m - 0 = m) /\\\n  (forall m n. m - (SUC n) = PRE(m - n))",
   )
   sub_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t552))
 }
@@ -6304,7 +6304,7 @@ fn step_142() -> Unit raise {
     t553,
   )
   sub_0_c.set(
-    @tactics.prove(@parser.parse_term("!m. (0 - m = 0) /\\ (m - 0 = m)"), t554),
+    @tactics.prove(@parser.parse_term("forall m. (0 - m = 0) /\\ (m - 0 = m)"), t554),
   )
 }
 
@@ -6326,7 +6326,7 @@ fn step_143() -> Unit raise {
     t555,
   )
   sub_presuc_c.set(
-    @tactics.prove(@parser.parse_term("!m n. PRE(SUC m - n) = m - n"), t556),
+    @tactics.prove(@parser.parse_term("forall m n. PRE(SUC m - n) = m - n"), t556),
   )
 }
 
@@ -6345,7 +6345,7 @@ fn step_144() -> Unit raise {
   let t557 = @simp.asm_rewrite_tac(@list.List([sub(), pre(), sub_presuc()]))
   let t558 = @tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t557)
   sub_suc_c.set(
-    @tactics.prove(@parser.parse_term("!m n. SUC m - SUC n = m - n"), t558),
+    @tactics.prove(@parser.parse_term("forall m n. SUC m - SUC n = m - n"), t558),
   )
 }
 
@@ -6365,7 +6365,7 @@ fn step_145() -> Unit raise {
     @nums.induct_tac,
     @simp.asm_rewrite_tac(@list.List([sub_suc(), sub_0()])),
   )
-  sub_refl_c.set(@tactics.prove(@parser.parse_term("!n. n - n = 0"), t559))
+  sub_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n - n = 0"), t559))
 }
 
 ///|
@@ -6388,7 +6388,7 @@ fn step_146() -> Unit raise {
     t560,
   )
   add_sub_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m + n) - n = m"), t561),
+    @tactics.prove(@parser.parse_term("forall m n. (m + n) - n = m"), t561),
   )
 }
 
@@ -6410,7 +6410,7 @@ fn step_147() -> Unit raise {
     t562,
   )
   add_sub2_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m + n) - m = n"), t563),
+    @tactics.prove(@parser.parse_term("forall m n. (m + n) - m = n"), t563),
   )
 }
 
@@ -6433,7 +6433,7 @@ fn step_148() -> Unit raise {
     t565,
   )
   sub_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m - n = 0) <=> m <= n"), t566),
+    @tactics.prove(@parser.parse_term("forall m n. (m - n = 0) <=> m <= n"), t566),
   )
 }
 
@@ -6451,7 +6451,7 @@ pub fn sub_eq_0() -> @kernel.Thm {
 fn step_149() -> Unit raise {
   let t567 = @simp.rewrite_tac(@list.List([sub_eq_0(), le_add()]))
   add_subr2_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m - (m + n) = 0"), t567),
+    @tactics.prove(@parser.parse_term("forall m n. m - (m + n) = 0"), t567),
   )
 }
 
@@ -6473,7 +6473,7 @@ fn step_150() -> Unit raise {
     t568,
   )
   add_subr_c.set(
-    @tactics.prove(@parser.parse_term("!m n. n - (m + n) = 0"), t569),
+    @tactics.prove(@parser.parse_term("forall m n. n - (m + n) = 0"), t569),
   )
 }
 
@@ -6503,7 +6503,7 @@ fn step_151() -> Unit raise {
   )
   sub_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. n <= m ==> ((m - n) + n = m)"),
+      @parser.parse_term("forall m n. n <= m ==> ((m - n) + n = m)"),
       t573,
     ),
   )
@@ -6527,7 +6527,7 @@ fn step_152() -> Unit raise {
   )
   sub_add_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + n) - (m + p) = n - p"),
+      @parser.parse_term("forall m n p. (m + n) - (m + p) = n - p"),
       t574,
     ),
   )
@@ -6554,7 +6554,7 @@ fn step_153() -> Unit raise {
   )
   sub_add_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m + p) - (n + p) = m - n"),
+      @parser.parse_term("forall m n p. (m + p) - (n + p) = m - n"),
       t576,
     ),
   )
@@ -6705,7 +6705,7 @@ fn step_154() -> Unit raise {
   )
   left_sub_distrib_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m * (n - p) = m * n - m * p"),
+      @parser.parse_term("forall m n p. m * (n - p) = m * n - m * p"),
       t593,
     ),
   )
@@ -6732,7 +6732,7 @@ fn step_155() -> Unit raise {
   )
   right_sub_distrib_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m - n) * p = m * p - n * p"),
+      @parser.parse_term("forall m n p. (m - n) * p = m * p - n * p"),
       t595,
     ),
   )
@@ -6753,7 +6753,7 @@ pub fn right_sub_distrib() -> @kernel.Thm {
 /// SUC_SUB1
 fn step_156() -> Unit raise {
   let t596 = @simp.rewrite_tac(@list.List([one(), sub_suc(), sub_0()]))
-  suc_sub1_c.set(@tactics.prove(@parser.parse_term("!n. SUC n - 1 = n"), t596))
+  suc_sub1_c.set(@tactics.prove(@parser.parse_term("forall n. SUC n - 1 = n"), t596))
 }
 
 ///|
@@ -6890,7 +6890,7 @@ fn step_157() -> Unit raise {
   even_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. EVEN(m - n) <=> m <= n \\/ (EVEN(m) <=> EVEN(n))",
+        "forall m n. EVEN(m - n) <=> m <= n \\/ (EVEN(m) <=> EVEN(n))",
       ),
       t612,
     ),
@@ -6923,7 +6923,7 @@ fn step_158() -> Unit raise {
   )
   odd_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ODD(m - n) <=> n < m /\\ ~(ODD m <=> ODD n)"),
+      @parser.parse_term("forall m n. ODD(m - n) <=> n < m /\\ ~(ODD m <=> ODD n)"),
       t614,
     ),
   )
@@ -6942,7 +6942,7 @@ pub fn odd_sub() -> @kernel.Thm {
 /// FACT
 fn step_159() -> Unit raise {
   let t615 = @parser.parse_term(
-    "(FACT 0 = 1) /\\\n   (!n. FACT (SUC n) = (SUC n) * FACT(n))",
+    "(FACT 0 = 1) /\\\n   (forall n. FACT (SUC n) = (SUC n) * FACT(n))",
   )
   fact_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t615))
 }
@@ -6967,7 +6967,7 @@ fn step_160() -> Unit raise {
     ),
     t616,
   )
-  fact_lt_c.set(@tactics.prove(@parser.parse_term("!n. 0 < FACT n"), t617))
+  fact_lt_c.set(@tactics.prove(@parser.parse_term("forall n. 0 < FACT n"), t617))
 }
 
 ///|
@@ -6983,7 +6983,7 @@ pub fn fact_lt() -> @kernel.Thm {
 /// FACT_LE
 fn step_161() -> Unit raise {
   let t618 = @simp.rewrite_tac(@list.List([one(), le_suc_lt(), fact_lt()]))
-  fact_le_c.set(@tactics.prove(@parser.parse_term("!n. 1 <= FACT n"), t618))
+  fact_le_c.set(@tactics.prove(@parser.parse_term("forall n. 1 <= FACT n"), t618))
 }
 
 ///|
@@ -6999,7 +6999,7 @@ pub fn fact_le() -> @kernel.Thm {
 /// FACT_NZ
 fn step_162() -> Unit raise {
   let t619 = @simp.rewrite_tac(@list.List([@equal.gsym(lt_nz()), fact_lt()]))
-  fact_nz_c.set(@tactics.prove(@parser.parse_term("!n. ~(FACT n = 0)"), t619))
+  fact_nz_c.set(@tactics.prove(@parser.parse_term("forall n. ~(FACT n = 0)"), t619))
 }
 
 ///|
@@ -7138,7 +7138,7 @@ fn step_163() -> Unit raise {
   )
   fact_mono_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. m <= n ==> FACT m <= FACT n"),
+      @parser.parse_term("forall m n. m <= n ==> FACT m <= FACT n"),
       t640,
     ),
   )
@@ -7161,7 +7161,7 @@ fn step_164() -> Unit raise {
   )
   exp_lt_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!n x. 0 < x EXP n <=> ~(x = 0) \\/ (n = 0)"),
+      @parser.parse_term("forall n x. 0 < x EXP n <=> ~(x = 0) \\/ (n = 0)"),
       t641,
     ),
   )
@@ -7540,7 +7540,7 @@ fn step_165() -> Unit raise {
   lt_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x m n. x EXP m < x EXP n <=> 2 <= x /\\ m < n \\/\n                                 (x = 0) /\\ ~(m = 0) /\\ (n = 0)",
+        "forall x m n. x EXP m < x EXP n <=> 2 <= x /\\ m < n \\/\n                                 (x = 0) /\\ ~(m = 0) /\\ (n = 0)",
       ),
       t701,
     ),
@@ -7579,7 +7579,7 @@ fn step_166() -> Unit raise {
   le_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x m n. x EXP m <= x EXP n <=>\n           if x = 0 then (m = 0) ==> (n = 0)\n           else (x = 1) \\/ m <= n",
+        "forall x m n. x EXP m <= x EXP n <=>\n           if x = 0 then (m = 0) ==> (n = 0)\n           else (x = 1) \\/ m <= n",
       ),
       t706,
     ),
@@ -7626,7 +7626,7 @@ fn step_167() -> Unit raise {
   eq_exp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x m n. x EXP m = x EXP n <=>\n           if x = 0 then (m = 0 <=> n = 0)\n           else (x = 1) \\/ m = n",
+        "forall x m n. x EXP m = x EXP n <=>\n           if x = 0 then (m = 0 <=> n = 0)\n           else (x = 1) \\/ m = n",
       ),
       t714,
     ),
@@ -7662,7 +7662,7 @@ fn step_168() -> Unit raise {
   )
   exp_mono_le_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y n. x <= y ==> x EXP n <= y EXP n"),
+      @parser.parse_term("forall x y n. x <= y ==> x EXP n <= y EXP n"),
       t717,
     ),
   )
@@ -7719,7 +7719,7 @@ fn step_169() -> Unit raise {
   )
   exp_mono_lt_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y n. x < y /\\ ~(n = 0) ==> x EXP n < y EXP n"),
+      @parser.parse_term("forall x y n. x < y /\\ ~(n = 0) ==> x EXP n < y EXP n"),
       t723,
     ),
   )
@@ -7758,7 +7758,7 @@ fn step_170() -> Unit raise {
   )
   exp_mono_le_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y n. x EXP n <= y EXP n <=> x <= y \\/ n = 0"),
+      @parser.parse_term("forall x y n. x EXP n <= y EXP n <=> x <= y \\/ n = 0"),
       t726,
     ),
   )
@@ -7781,7 +7781,7 @@ fn step_171() -> Unit raise {
   )
   exp_mono_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y n. x EXP n < y EXP n <=> x < y /\\ ~(n = 0)"),
+      @parser.parse_term("forall x y n. x EXP n < y EXP n <=> x < y /\\ ~(n = 0)"),
       t727,
     ),
   )
@@ -7806,7 +7806,7 @@ fn step_172() -> Unit raise {
   )
   exp_mono_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y n. x EXP n = y EXP n <=> x = y \\/ n = 0"),
+      @parser.parse_term("forall x y n. x EXP n = y EXP n <=> x = y \\/ n = 0"),
       t729,
     ),
   )
@@ -8313,7 +8313,7 @@ fn step_173() -> Unit raise {
   )
   divmod_exist_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ~(n = 0) ==> ?q r. (m = q * n + r) /\\ r < n"),
+      @parser.parse_term("forall m n. ~(n = 0) ==> ?q r. (m = q * n + r) /\\ r < n"),
       t782,
     ),
   )
@@ -8346,7 +8346,7 @@ fn step_174() -> Unit raise {
   divmod_exist_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. ?q r. if n = 0 then q = 0 /\\ r = m\n               else m = q * n + r /\\ r < n",
+        "forall m n. ?q r. if n = 0 then q = 0 /\\ r = m\n               else m = q * n + r /\\ r < n",
       ),
       t785,
     ),
@@ -8387,7 +8387,7 @@ fn step_176() -> Unit raise {
   division_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\\ m MOD n < n",
+        "forall m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\\ m MOD n < n",
       ),
       t787,
     ),
@@ -8407,7 +8407,7 @@ pub fn division() -> @kernel.Thm {
 /// DIV_ZERO
 fn step_177() -> Unit raise {
   let t788 = @meson.meson_tac(@list.List([division_0()]))
-  div_zero_c.set(@tactics.prove(@parser.parse_term("!n. n DIV 0 = 0"), t788))
+  div_zero_c.set(@tactics.prove(@parser.parse_term("forall n. n DIV 0 = 0"), t788))
 }
 
 ///|
@@ -8423,7 +8423,7 @@ pub fn div_zero() -> @kernel.Thm {
 /// MOD_ZERO
 fn step_178() -> Unit raise {
   let t789 = @meson.meson_tac(@list.List([division_0()]))
-  mod_zero_c.set(@tactics.prove(@parser.parse_term("!n. n MOD 0 = n"), t789))
+  mod_zero_c.set(@tactics.prove(@parser.parse_term("forall n. n MOD 0 = n"), t789))
 }
 
 ///|
@@ -8453,7 +8453,7 @@ fn step_179() -> Unit raise {
   division_simp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m n. m DIV n * n + m MOD n = m) /\\\n   (!m n. n * m DIV n + m MOD n = m)",
+        "(forall m n. m DIV n * n + m MOD n = m) /\\\n   (forall m n. n * m DIV n + m MOD n = m)",
       ),
       t793,
     ),
@@ -8476,7 +8476,7 @@ fn step_180() -> Unit raise {
   eq_divmod_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!p m n. m DIV p = n DIV p /\\ m MOD p = n MOD p <=> m = n",
+        "forall p m n. m DIV p = n DIV p /\\ m MOD p = n MOD p <=> m = n",
       ),
       t794,
     ),
@@ -8499,7 +8499,7 @@ fn step_181() -> Unit raise {
     @list.List([division(), le_1(), @bool.conjunct1(lt())]),
   )
   mod_lt_eq_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m MOD n < n <=> ~(n = 0)"), t795),
+    @tactics.prove(@parser.parse_term("forall m n. m MOD n < n <=> ~(n = 0)"), t795),
   )
 }
 
@@ -8519,7 +8519,7 @@ fn step_182() -> Unit raise {
     @list.List([division(), le_1(), @bool.conjunct1(lt())]),
   )
   mod_lt_eq_lt_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m MOD n < n <=> 0 < n"), t796),
+    @tactics.prove(@parser.parse_term("forall m n. m MOD n < n <=> 0 < n"), t796),
   )
 }
 
@@ -8928,7 +8928,7 @@ fn step_183() -> Unit raise {
   divmod_uniq_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n q1 r1 q2 r2. ((m = q1 * n + r1) /\\ r1 < n) /\\\n                     ((m = q2 * n + r2) /\\ r2 < n)\n                     ==> (q1 = q2) /\\ (r1 = r2)",
+        "forall m n q1 r1 q2 r2. ((m = q1 * n + r1) /\\ r1 < n) /\\\n                     ((m = q2 * n + r2) /\\ r2 < n)\n                     ==> (q1 = q2) /\\ (r1 = r2)",
       ),
       t841,
     ),
@@ -9098,7 +9098,7 @@ fn step_184() -> Unit raise {
   divmod_uniq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q) /\\ (m MOD n = r)",
+        "forall m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q) /\\ (m MOD n = r)",
       ),
       t858,
     ),
@@ -9145,7 +9145,7 @@ fn step_185() -> Unit raise {
   mod_uniq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n q r. (m = q * n + r) /\\ r < n ==> (m MOD n = r)",
+        "forall m n q r. (m = q * n + r) /\\ r < n ==> (m MOD n = r)",
       ),
       t862,
     ),
@@ -9192,7 +9192,7 @@ fn step_186() -> Unit raise {
   div_uniq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q)",
+        "forall m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q)",
       ),
       t866,
     ),
@@ -9252,7 +9252,7 @@ fn step_187() -> Unit raise {
     t871,
   )
   let t873 = (
-    @parser.parse_term("(!n. 0 DIV n = 0) /\\ (!n. 0 MOD n = 0)"),
+    @parser.parse_term("(forall n. 0 DIV n = 0) /\\ (forall n. 0 MOD n = 0)"),
     t872,
   )
   let (div_0, mod_0) = @bool.conj_pair(
@@ -9333,7 +9333,7 @@ fn step_188() -> Unit raise {
   )
   let t881 = (
     @parser.parse_term(
-      "(!m n. ~(m = 0) ==> (m * n) DIV m = n) /\\\n   (!m n. (m * n) MOD m = 0)",
+      "(forall m n. ~(m = 0) ==> (m * n) DIV m = n) /\\\n   (forall m n. (m * n) MOD m = 0)",
     ),
     t880,
   )
@@ -9383,7 +9383,7 @@ fn step_189() -> Unit raise {
     t884,
   )
   mod_lt_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m < n ==> m MOD n = m"), t885),
+    @tactics.prove(@parser.parse_term("forall m n. m < n ==> m MOD n = m"), t885),
   )
 }
 
@@ -9404,7 +9404,7 @@ fn step_190() -> Unit raise {
   )
   mod_eq_self_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. m MOD n = m <=> n = 0 \\/ m < n"),
+      @parser.parse_term("forall m n. m MOD n = m <=> n = 0 \\/ m < n"),
       t886,
     ),
   )
@@ -9459,7 +9459,7 @@ fn step_191() -> Unit raise {
   mod_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n p. n < 2 * p ==> n MOD p = if n < p then n else n - p",
+        "forall n p. n < 2 * p ==> n MOD p = if n < p then n else n - p",
       ),
       t894,
     ),
@@ -9491,7 +9491,7 @@ fn step_192() -> Unit raise {
   mod_add_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p.\n        m < p /\\ n < p\n        ==> (m + n) MOD p = if m + n < p then m + n else (m + n) - p",
+        "forall m n p.\n        m < p /\\ n < p\n        ==> (m + n) MOD p = if m + n < p then m + n else (m + n) - p",
       ),
       t898,
     ),
@@ -9758,7 +9758,7 @@ fn step_193() -> Unit raise {
   )
   mod_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p q. m = n + q * p ==> m MOD p = n MOD p"),
+      @parser.parse_term("forall m n p q. m = n + q * p ==> m MOD p = n MOD p"),
       t924,
     ),
   )
@@ -9835,7 +9835,7 @@ fn step_194() -> Unit raise {
     ),
     t936,
   )
-  div_le_c.set(@tactics.prove(@parser.parse_term("!m n. m DIV n <= m"), t937))
+  div_le_c.set(@tactics.prove(@parser.parse_term("forall m n. m DIV n <= m"), t937))
 }
 
 ///|
@@ -9991,7 +9991,7 @@ fn step_195() -> Unit raise {
     t955,
   )
   div_mul_le_c.set(
-    @tactics.prove(@parser.parse_term("!m n. n * (m DIV n) <= m"), t956),
+    @tactics.prove(@parser.parse_term("forall m n. n * (m DIV n) <= m"), t956),
   )
 }
 
@@ -10099,7 +10099,7 @@ fn step_196() -> Unit raise {
   )
   mod_le_twice_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. 0 < m /\\ m <= n ==> 2 * n MOD m <= n"),
+      @parser.parse_term("forall m n. 0 < m /\\ m <= n ==> 2 * n MOD m <= n"),
       t975,
     ),
   )
@@ -10152,7 +10152,7 @@ fn step_197() -> Unit raise {
     t979,
   )
   let t981 = (
-    @parser.parse_term("(!n. n DIV 1 = n) /\\ (!n. n MOD 1 = 0)"),
+    @parser.parse_term("(forall n. n DIV 1 = n) /\\ (forall n. n MOD 1 = 0)"),
     t980,
   )
   let (div_1, mod_1) = @bool.conj_pair(
@@ -10201,7 +10201,7 @@ fn step_198() -> Unit raise {
     t984,
   )
   div_lt_c.set(
-    @tactics.prove(@parser.parse_term("!m n. m < n ==> m DIV n = 0"), t985),
+    @tactics.prove(@parser.parse_term("forall m n. m < n ==> m DIV n = 0"), t985),
   )
 }
 
@@ -10288,7 +10288,7 @@ fn step_199() -> Unit raise {
   )
   mod_mod_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m MOD (n * p)) MOD n = m MOD n"),
+      @parser.parse_term("forall m n p. (m MOD (n * p)) MOD n = m MOD n"),
       t999,
     ),
   )
@@ -10332,7 +10332,7 @@ fn step_200() -> Unit raise {
     t1006,
   )
   mod_mod_refl_c.set(
-    @tactics.prove(@parser.parse_term("!m n. (m MOD n) MOD n = m MOD n"), t1007),
+    @tactics.prove(@parser.parse_term("forall m n. (m MOD n) MOD n = m MOD n"), t1007),
   )
 }
 
@@ -10357,7 +10357,7 @@ fn step_201() -> Unit raise {
   mod_mod_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p. ~(n = 0) /\\ n <= p ==> (m MOD n) MOD p = m MOD n",
+        "forall m n p. ~(n = 0) /\\ n <= p ==> (m MOD n) MOD p = m MOD n",
       ),
       t1010,
     ),
@@ -10381,7 +10381,7 @@ fn step_202() -> Unit raise {
   )
   mod_even_2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. EVEN n ==> m MOD n MOD 2 = m MOD 2"),
+      @parser.parse_term("forall m n. EVEN n ==> m MOD n MOD 2 = m MOD 2"),
       t1011,
     ),
   )
@@ -10439,7 +10439,7 @@ fn step_203() -> Unit raise {
   )
   div_mult2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. ~(m = 0) ==> ((m * n) DIV (m * p) = n DIV p)"),
+      @parser.parse_term("forall m n p. ~(m = 0) ==> ((m * n) DIV (m * p) = n DIV p)"),
       t1021,
     ),
   )
@@ -10505,7 +10505,7 @@ fn step_204() -> Unit raise {
   )
   mod_mult2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * n) MOD (m * p) = m * n MOD p"),
+      @parser.parse_term("forall m n p. (m * n) MOD (m * p) = m * n MOD p"),
       t1033,
     ),
   )
@@ -10591,7 +10591,7 @@ fn step_205() -> Unit raise {
   mod_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n. (?q. m = n * q) <=> if n = 0 then (m = 0) else (m MOD n = 0)",
+        "forall m n. (?q. m = n * q) <=> if n = 0 then (m = 0) else (m MOD n = 0)",
       ),
       t1045,
     ),
@@ -10715,7 +10715,7 @@ fn step_206() -> Unit raise {
   )
   le_rdiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b n. ~(a = 0) ==> (n <= b DIV a <=> a * n <= b)"),
+      @parser.parse_term("forall a b n. ~(a = 0) ==> (n <= b DIV a <=> a * n <= b)"),
       t1059,
     ),
   )
@@ -10736,7 +10736,7 @@ fn step_207() -> Unit raise {
   let t1060 = @simp.simp_tac(@list.List([@equal.gsym(not_le()), le_rdiv_eq()]))
   rdiv_lt_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b n. ~(a = 0) ==> (b DIV a < n <=> b < a * n)"),
+      @parser.parse_term("forall a b n. ~(a = 0) ==> (b DIV a < n <=> b < a * n)"),
       t1060,
     ),
   )
@@ -10790,7 +10790,7 @@ fn step_208() -> Unit raise {
   le_ldiv_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b n. ~(a = 0) ==> (b DIV a <= n <=> b < a * (n + 1))",
+        "forall a b n. ~(a = 0) ==> (b DIV a <= n <=> b < a * (n + 1))",
       ),
       t1072,
     ),
@@ -10813,7 +10813,7 @@ fn step_209() -> Unit raise {
   ldiv_lt_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b n. ~(a = 0) ==> (n < b DIV a <=> a * (n + 1) <= b)",
+        "forall a b n. ~(a = 0) ==> (n < b DIV a <=> a * (n + 1) <= b)",
       ),
       t1073,
     ),
@@ -10841,7 +10841,7 @@ fn step_210() -> Unit raise {
   )
   le_ldiv_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b n. ~(a = 0) /\\ b <= a * n ==> b DIV a <= n"),
+      @parser.parse_term("forall a b n. ~(a = 0) /\\ b <= a * n ==> b DIV a <= n"),
       t1075,
     ),
   )
@@ -10864,7 +10864,7 @@ fn step_211() -> Unit raise {
   let t1078 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([le_refl()]),
-      @parser.parse_term("(!k:num. k <= a ==> k <= b) ==> a <= b"),
+      @parser.parse_term("(forall k:num. k <= a ==> k <= b) ==> a <= b"),
     ),
   )
   let t1077 = @simp.asm_rewrite_tac(@list.List([div_zero(), le_refl()]))
@@ -10884,7 +10884,7 @@ fn step_211() -> Unit raise {
   )
   div_mono_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m <= n ==> m DIV p <= n DIV p"),
+      @parser.parse_term("forall m n p. m <= n ==> m DIV p <= n DIV p"),
       t1081,
     ),
   )
@@ -10911,7 +10911,7 @@ fn step_212() -> Unit raise {
   let t1082 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([add1(), le_suc_lt(), le_refl()]),
-      @parser.parse_term("(!k:num. k <= a ==> k + 1 <= b) ==> a < b"),
+      @parser.parse_term("(forall k:num. k <= a ==> k + 1 <= b) ==> a < b"),
     ),
   )
   let t1085 = @tactics.then_tac(
@@ -10924,7 +10924,7 @@ fn step_212() -> Unit raise {
   div_mono_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p. ~(p = 0) /\\ m + p <= n ==> m DIV p < n DIV p",
+        "forall m n p. ~(p = 0) /\\ m + p <= n ==> m DIV p < n DIV p",
       ),
       t1085,
     ),
@@ -11080,7 +11080,7 @@ fn step_213() -> Unit raise {
   )
   div_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ~(n = 0) ==> ((m DIV n = 0) <=> m < n)"),
+      @parser.parse_term("forall m n. ~(n = 0) ==> ((m DIV n = 0) <=> m < n)"),
       t1100,
     ),
   )
@@ -11125,7 +11125,7 @@ fn step_214() -> Unit raise {
   let t1104 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1103)
   mod_div_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. ~(n = 0) ==> (m MOD n) DIV n = 0"),
+      @parser.parse_term("forall m n. ~(n = 0) ==> (m MOD n) DIV n = 0"),
       t1104,
     ),
   )
@@ -11295,7 +11295,7 @@ fn step_215() -> Unit raise {
   )
   mod_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. (m MOD n = 0) <=> ?q. m = q * n"),
+      @parser.parse_term("forall m n. (m MOD n = 0) <=> ?q. m = q * n"),
       t1123,
     ),
   )
@@ -11374,7 +11374,7 @@ fn step_216() -> Unit raise {
   )
   div_eq_self_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. m DIV n = m <=> m = 0 \\/ n = 1"),
+      @parser.parse_term("forall m n. m DIV n = m <=> m = 0 \\/ n = 1"),
       t1139,
     ),
   )
@@ -11394,7 +11394,7 @@ pub fn div_eq_self() -> @kernel.Thm {
 fn step_217() -> Unit raise {
   let t1140 = @meson.meson_tac(@list.List([mult_clauses()]))
   let t1141 = @tactics.then_tac(@simp.simp_tac(@list.List([mod_eq_0()])), t1140)
-  mod_refl_c.set(@tactics.prove(@parser.parse_term("!n. n MOD n = 0"), t1141))
+  mod_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n MOD n = 0"), t1141))
 }
 
 ///|
@@ -11415,7 +11415,7 @@ fn step_218() -> Unit raise {
     t1142,
   )
   even_mod_c.set(
-    @tactics.prove(@parser.parse_term("!n. EVEN(n) <=> n MOD 2 = 0"), t1143),
+    @tactics.prove(@parser.parse_term("forall n. EVEN(n) <=> n MOD 2 = 0"), t1143),
   )
 }
 
@@ -11507,7 +11507,7 @@ fn step_219() -> Unit raise {
     t1152,
   )
   odd_mod_c.set(
-    @tactics.prove(@parser.parse_term("!n. ODD(n) <=> n MOD 2 = 1"), t1153),
+    @tactics.prove(@parser.parse_term("forall n. ODD(n) <=> n MOD 2 = 1"), t1153),
   )
 }
 
@@ -11526,7 +11526,7 @@ fn step_220() -> Unit raise {
   let t1154 = @meson.meson_tac(@list.List([even_mod(), odd_mod(), not_odd()]))
   mod_2_cases_c.set(
     @tactics.prove(
-      @parser.parse_term("!n. n MOD 2 = if EVEN n then 0 else 1"),
+      @parser.parse_term("forall n. n MOD 2 = if EVEN n then 0 else 1"),
       t1154,
     ),
   )
@@ -11552,7 +11552,7 @@ fn step_221() -> Unit raise {
   )
   even_mod_even_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. EVEN n ==> (EVEN(m MOD n) <=> EVEN m)"),
+      @parser.parse_term("forall m n. EVEN n ==> (EVEN(m MOD n) <=> EVEN m)"),
       t1157,
     ),
   )
@@ -11575,7 +11575,7 @@ fn step_222() -> Unit raise {
   )
   odd_mod_even_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. EVEN n ==> (ODD(m MOD n) <=> ODD m)"),
+      @parser.parse_term("forall m n. EVEN n ==> (ODD(m MOD n) <=> ODD m)"),
       t1158,
     ),
   )
@@ -11619,7 +11619,7 @@ fn step_223() -> Unit raise {
   )
   half_double_c.set(
     @tactics.prove(
-      @parser.parse_term("(!n. (2 * n) DIV 2 = n) /\\ (!n. (n * 2) DIV 2 = n)"),
+      @parser.parse_term("(forall n. (2 * n) DIV 2 = n) /\\ (forall n. (n * 2) DIV 2 = n)"),
       t1167,
     ),
   )
@@ -11647,7 +11647,7 @@ fn step_224() -> Unit raise {
   double_half_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!n. EVEN n ==> 2 * n DIV 2 = n) /\\\n   (!n. EVEN n ==> n DIV 2 * 2 = n)",
+        "(forall n. EVEN n ==> 2 * n DIV 2 = n) /\\\n   (forall n. EVEN n ==> n DIV 2 * 2 = n)",
       ),
       t1169,
     ),
@@ -11709,7 +11709,7 @@ fn step_225() -> Unit raise {
   )
   mod_mult_rmod_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m * (p MOD n)) MOD n = (m * p) MOD n"),
+      @parser.parse_term("forall m n p. (m * (p MOD n)) MOD n = (m * p) MOD n"),
       t1180,
     ),
   )
@@ -11734,7 +11734,7 @@ fn step_226() -> Unit raise {
   )
   mod_mult_lmod_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. ((m MOD n) * p) MOD n = (m * p) MOD n"),
+      @parser.parse_term("forall m n p. ((m MOD n) * p) MOD n = (m * p) MOD n"),
       t1182,
     ),
   )
@@ -11756,7 +11756,7 @@ fn step_227() -> Unit raise {
   mod_mult_mod2_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p. ((m MOD n) * (p MOD n)) MOD n = (m * p) MOD n",
+        "forall m n p. ((m MOD n) * (p MOD n)) MOD n = (m * p) MOD n",
       ),
       t1183,
     ),
@@ -11826,7 +11826,7 @@ fn step_228() -> Unit raise {
   )
   mod_exp_mod_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. ((m MOD n) EXP p) MOD n = (m EXP p) MOD n"),
+      @parser.parse_term("forall m n p. ((m MOD n) EXP p) MOD n = (m EXP p) MOD n"),
       t1194,
     ),
   )
@@ -11888,7 +11888,7 @@ fn step_229() -> Unit raise {
   mod_mult_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!m n p. (m * n + p) MOD n = p MOD n) /\\\n   (!m n p. (n * m + p) MOD n = p MOD n) /\\\n   (!m n p. (p + m * n) MOD n = p MOD n) /\\\n   (!m n p. (p + n * m) MOD n = p MOD n)",
+        "(forall m n p. (m * n + p) MOD n = p MOD n) /\\\n   (forall m n p. (n * m + p) MOD n = p MOD n) /\\\n   (forall m n p. (p + m * n) MOD n = p MOD n) /\\\n   (forall m n p. (p + n * m) MOD n = p MOD n)",
       ),
       t1202,
     ),
@@ -11942,7 +11942,7 @@ fn step_230() -> Unit raise {
   div_mult_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!a b n. ~(n = 0) ==> (a * n + b) DIV n = a + b DIV n) /\\\n   (!a b n. ~(n = 0) ==> (n * a + b) DIV n = a + b DIV n) /\\\n   (!a b n. ~(n = 0) ==> (b + a * n) DIV n = b DIV n + a) /\\\n   (!a b n. ~(n = 0) ==> (b + n * a) DIV n = b DIV n + a)",
+        "(forall a b n. ~(n = 0) ==> (a * n + b) DIV n = a + b DIV n) /\\\n   (forall a b n. ~(n = 0) ==> (n * a + b) DIV n = a + b DIV n) /\\\n   (forall a b n. ~(n = 0) ==> (b + a * n) DIV n = b DIV n + a) /\\\n   (forall a b n. ~(n = 0) ==> (b + n * a) DIV n = b DIV n + a)",
       ),
       t1209,
     ),
@@ -12002,7 +12002,7 @@ fn step_231() -> Unit raise {
   )
   mod_add_mod_c.set(
     @tactics.prove(
-      @parser.parse_term("!a b n. (a MOD n + b MOD n) MOD n = (a + b) MOD n"),
+      @parser.parse_term("forall a b n. (a MOD n + b MOD n) MOD n = (a + b) MOD n"),
       t1219,
     ),
   )
@@ -12375,7 +12375,7 @@ fn step_232() -> Unit raise {
   div_add_mod_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b n. ~(n = 0)\n           ==> (((a + b) MOD n = a MOD n + b MOD n) <=>\n                ((a + b) DIV n = a DIV n + b DIV n))",
+        "forall a b n. ~(n = 0)\n           ==> (((a + b) MOD n = a MOD n + b MOD n) <=>\n                ((a + b) DIV n = a DIV n + b DIV n))",
       ),
       t1260,
     ),
@@ -12400,7 +12400,7 @@ fn step_233() -> Unit raise {
   mod_add_eq_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n x y. (x + y) MOD n = x MOD n + y MOD n <=>\n           n = 0 \\/ x MOD n + y MOD n < n",
+        "forall n x y. (x + y) MOD n = x MOD n + y MOD n <=>\n           n = 0 \\/ x MOD n + y MOD n < n",
       ),
       t1261,
     ),
@@ -12425,7 +12425,7 @@ fn step_234() -> Unit raise {
   div_add_eq_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n x y. (x + y) DIV n = x DIV n + y DIV n <=>\n           n = 0 \\/ x MOD n + y MOD n < n",
+        "forall n x y. (x + y) DIV n = x DIV n + y DIV n <=>\n           n = 0 \\/ x MOD n + y MOD n < n",
       ),
       t1262,
     ),
@@ -12448,7 +12448,7 @@ fn step_235() -> Unit raise {
   div_add_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n x y. x MOD n + y MOD n < n ==> (x + y) DIV n = x DIV n + y DIV n",
+        "forall n x y. x MOD n + y MOD n < n ==> (x + y) DIV n = x DIV n + y DIV n",
       ),
       t1263,
     ),
@@ -12471,7 +12471,7 @@ fn step_236() -> Unit raise {
   mod_add_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!n x y. x MOD n + y MOD n < n ==> (x + y) MOD n = x MOD n + y MOD n",
+        "forall n x y. x MOD n + y MOD n < n ==> (x + y) MOD n = x MOD n + y MOD n",
       ),
       t1264,
     ),
@@ -12562,7 +12562,7 @@ fn step_237() -> Unit raise {
     t1274,
   )
   div_refl_c.set(
-    @tactics.prove(@parser.parse_term("!n. ~(n = 0) ==> (n DIV n = 1)"), t1275),
+    @tactics.prove(@parser.parse_term("forall n. ~(n = 0) ==> (n DIV n = 1)"), t1275),
   )
 }
 
@@ -12627,7 +12627,7 @@ fn step_238() -> Unit raise {
     ),
     t1285,
   )
-  mod_le_c.set(@tactics.prove(@parser.parse_term("!m n. m MOD n <= m"), t1286))
+  mod_le_c.set(@tactics.prove(@parser.parse_term("forall m n. m MOD n <= m"), t1286))
 }
 
 ///|
@@ -12673,7 +12673,7 @@ fn step_239() -> Unit raise {
   )
   div_mono2_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. ~(p = 0) /\\ p <= m ==> n DIV m <= n DIV p"),
+      @parser.parse_term("forall m n p. ~(p = 0) /\\ p <= m ==> n DIV m <= n DIV p"),
       t1295,
     ),
   )
@@ -12753,7 +12753,7 @@ fn step_240() -> Unit raise {
   let t1298 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([le_refl()]),
-      @parser.parse_term("(!k:num. k <= a ==> k <= b) ==> a <= b"),
+      @parser.parse_term("(forall k:num. k <= a ==> k <= b) ==> a <= b"),
     ),
   )
   let t1297 = @simp.asm_rewrite_tac(@list.List([mult_clauses(), lt()]))
@@ -12792,7 +12792,7 @@ fn step_240() -> Unit raise {
   div_le_exclusion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d. ~(b = 0) /\\ b * c < (a + 1) * d ==> c DIV d <= a DIV b",
+        "forall a b c d. ~(b = 0) /\\ b * c < (a + 1) * d ==> c DIV d <= a DIV b",
       ),
       t1308,
     ),
@@ -12836,7 +12836,7 @@ fn step_241() -> Unit raise {
   div_eq_exclusion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!a b c d.\n        b * c < (a + 1) * d /\\ a * d < (c + 1) * b ==> (a DIV b = c DIV d)",
+        "forall a b c d.\n        b * c < (a + 1) * d /\\ a * d < (c + 1) * b ==> (a DIV b = c DIV d)",
       ),
       t1314,
     ),
@@ -13020,7 +13020,7 @@ fn step_242() -> Unit raise {
   )
   mult_div_le_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. m * (n DIV p) <= (m * n) DIV p"),
+      @parser.parse_term("forall m n p. m * (n DIV p) <= (m * n) DIV p"),
       t1339,
     ),
   )
@@ -13044,7 +13044,7 @@ fn step_243() -> Unit raise {
   let t1346 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([le_antisym()]),
-      @parser.parse_term("(!k. k <= m <=> k <= n) ==> m = n"),
+      @parser.parse_term("(forall k. k <= m <=> k <= n) ==> m = n"),
     ),
   )
   let t1345 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -13081,7 +13081,7 @@ fn step_243() -> Unit raise {
   )
   div_div_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m DIV n) DIV p = m DIV (n * p)"),
+      @parser.parse_term("forall m n p. (m DIV n) DIV p = m DIV (n * p)"),
       t1348,
     ),
   )
@@ -13135,7 +13135,7 @@ fn step_244() -> Unit raise {
   let t1353 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([le_antisym()]),
-      @parser.parse_term("(!k. k <= m <=> k <= n) ==> m = n"),
+      @parser.parse_term("(forall k. k <= m <=> k <= n) ==> m = n"),
     ),
   )
   let t1352 = @simp.asm_rewrite_tac(
@@ -13183,7 +13183,7 @@ fn step_244() -> Unit raise {
   )
   div_mod_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n p. (m DIV n) MOD p = (m MOD (n * p)) DIV n"),
+      @parser.parse_term("forall m n p. (m DIV n) MOD p = (m MOD (n * p)) DIV n"),
       t1365,
     ),
   )
@@ -13263,7 +13263,7 @@ fn step_245() -> Unit raise {
   mod_mult_mod_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m n p. m MOD (n * p) = n * (m DIV n) MOD p + m MOD n",
+        "forall m n p. m MOD (n * p) = n * (m DIV n) MOD p + m MOD n",
       ),
       t1379,
     ),
@@ -13490,7 +13490,7 @@ fn step_246() -> Unit raise {
   mod_mod_exp_min_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x p m n. x MOD (p EXP m) MOD (p EXP n) = x MOD (p EXP (MIN m n))",
+        "forall x p m n. x MOD (p EXP m) MOD (p EXP n) = x MOD (p EXP (MIN m n))",
       ),
       t1410,
     ),
@@ -13581,7 +13581,7 @@ fn step_247() -> Unit raise {
   )
   let t1424 = (
     @parser.parse_term(
-      "(!m n p. ~(m = 0)\n            ==> (m EXP n) DIV (m EXP p) =\n                if p <= n then m EXP (n - p)\n                else if m = 1 then 1 else 0) /\\\n   (!m n p. ~(m = 0)\n            ==> (m EXP n) MOD (m EXP p) =\n                if p <= n \\/ m = 1 then 0 else m EXP n)",
+      "(forall m n p. ~(m = 0)\n            ==> (m EXP n) DIV (m EXP p) =\n                if p <= n then m EXP (n - p)\n                else if m = 1 then 1 else 0) /\\\n   (forall m n p. ~(m = 0)\n            ==> (m EXP n) MOD (m EXP p) =\n                if p <= n \\/ m = 1 then 0 else m EXP n)",
     ),
     t1423,
   )
@@ -13624,7 +13624,7 @@ fn step_248() -> Unit raise {
   forall_lt_mod_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. (!a. a < n ==> P a) <=> n = 0 \\/ !a. P(a MOD n)",
+        "forall P n. (forall a. a < n ==> P a) <=> n = 0 \\/ forall a. P(a MOD n)",
       ),
       t1425,
     ),
@@ -13649,7 +13649,7 @@ fn step_249() -> Unit raise {
   forall_mod_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. ~(n = 0) ==> ((!a. P(a MOD n)) <=> (!a. a < n ==> P a))",
+        "forall P n. ~(n = 0) ==> ((forall a. P(a MOD n)) <=> (forall a. a < n ==> P a))",
       ),
       t1426,
     ),
@@ -13672,7 +13672,7 @@ fn step_250() -> Unit raise {
   exists_lt_mod_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. (?a. a < n /\\ P a) <=> ~(n = 0) /\\ ?a. P(a MOD n)",
+        "forall P n. (?a. a < n /\\ P a) <=> ~(n = 0) /\\ ?a. P(a MOD n)",
       ),
       t1427,
     ),
@@ -13697,7 +13697,7 @@ fn step_251() -> Unit raise {
   exists_mod_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. ~(n = 0) ==> ((?a. P(a MOD n)) <=> (?a. a < n /\\ P a))",
+        "forall P n. ~(n = 0) ==> ((?a. P(a MOD n)) <=> (?a. a < n /\\ P a))",
       ),
       t1428,
     ),
@@ -13734,7 +13734,7 @@ fn step_252() -> Unit raise {
   pre_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "P(PRE n) <=> !m. n = SUC m \\/ m = 0 /\\ n = 0 ==> P m",
+        "P(PRE n) <=> forall m. n = SUC m \\/ m = 0 /\\ n = 0 ==> P m",
       ),
       t1432,
     ),
@@ -13888,7 +13888,7 @@ fn step_254() -> Unit raise {
   sub_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "P(a - b) <=> !d. a = b + d \\/ a < b /\\ d = 0 ==> P d",
+        "P(a - b) <=> forall d. a = b + d \\/ a < b /\\ d = 0 ==> P d",
       ),
       t1447,
     ),
@@ -14025,7 +14025,7 @@ fn step_256() -> Unit raise {
   divmod_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "P (m DIV n) (m MOD n) <=>\n        !q r. n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n ==> P q r",
+        "P (m DIV n) (m MOD n) <=>\n        forall q r. n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n ==> P q r",
       ),
       t1460,
     ),
@@ -14317,7 +14317,7 @@ fn step_262() -> Unit raise {
   minimal_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "(minimal) (P:num->bool) = @n. P n /\\ !m. m < n ==> ~(P m)",
+        "(minimal) (P:num->bool) = @n. P n /\\ forall m. m < n ==> ~(P m)",
       ),
     ),
   )
@@ -14350,7 +14350,7 @@ fn step_263() -> Unit raise {
   minimal_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P. (?n. P n) <=> P((minimal) P) /\\ (!m. m < (minimal) P ==> ~(P m))",
+        "forall P. (?n. P n) <=> P((minimal) P) /\\ (forall m. m < (minimal) P ==> ~(P m))",
       ),
       t1511,
     ),
@@ -14382,7 +14382,7 @@ fn step_264() -> Unit raise {
   minimal_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. P n /\\ (!m. m < n ==> ~P m) ==> (minimal) P = n",
+        "forall P n. P n /\\ (forall m. m < n ==> ~P m) ==> (minimal) P = n",
       ),
       t1515,
     ),
@@ -14418,7 +14418,7 @@ fn step_265() -> Unit raise {
   le_minimal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n.\n        (?r. P r) ==> (n <= (minimal) P <=> !i. P i ==> n <= i)",
+        "forall P n.\n        (?r. P r) ==> (n <= (minimal) P <=> forall i. P i ==> n <= i)",
       ),
       t1521,
     ),
@@ -14453,7 +14453,7 @@ fn step_266() -> Unit raise {
   minimal_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. (?r. P r) ==> ((minimal) P <= n <=> ?i. i <= n /\\ P i)",
+        "forall P n. (?r. P r) ==> ((minimal) P <= n <=> ?i. i <= n /\\ P i)",
       ),
       t1525,
     ),
@@ -14474,7 +14474,7 @@ pub fn minimal_le() -> @kernel.Thm {
 fn step_267() -> Unit raise {
   let t1526 = @meson.meson_tac(@list.List([minimal_v1(), not_lt()]))
   minimal_ubound_c.set(
-    @tactics.prove(@parser.parse_term("!P n. P n ==> (minimal) P <= n"), t1526),
+    @tactics.prove(@parser.parse_term("forall P n. P n ==> (minimal) P <= n"), t1526),
   )
 }
 
@@ -14498,7 +14498,7 @@ fn step_268() -> Unit raise {
   minimal_lbound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P n. (?r. P r) /\\ (!m. m < n ==> ~P m) ==> n <= (minimal) P",
+        "forall P n. (?r. P r) /\\ (forall m. m < n ==> ~P m) ==> n <= (minimal) P",
       ),
       t1528,
     ),
@@ -14521,7 +14521,7 @@ fn step_269() -> Unit raise {
   let t1538 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([le_trans(), le_refl()]),
-      @parser.parse_term("(!p:num. p <= m ==> p <= n) ==> m <= n"),
+      @parser.parse_term("(forall p:num. p <= m ==> p <= n) ==> m <= n"),
     ),
   )
   let t1537 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
@@ -14635,7 +14635,7 @@ fn step_269() -> Unit raise {
   minimal_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P Q. (?n. P n) /\\ (!n. P n ==> Q n) ==> (minimal) Q <= (minimal) P",
+        "forall P Q. (?n. P n) /\\ (forall n. P n ==> Q n) ==> (minimal) Q <= (minimal) P",
       ),
       t1540,
     ),
@@ -14702,7 +14702,7 @@ fn step_270() -> Unit raise {
   transitive_stepwise_lt_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R. (!x y z. R x y /\\ R y z ==> R x z)\n         ==> ((!m n. m < n ==> R m n) <=> (!n. R n (SUC n)))",
+        "forall R. (forall x y z. R x y /\\ R y z ==> R x z)\n         ==> ((forall m n. m < n ==> R m n) <=> (forall n. R n (SUC n)))",
       ),
       t1547,
     ),
@@ -14734,7 +14734,7 @@ fn step_271() -> Unit raise {
   transitive_stepwise_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R. (!x y z. R x y /\\ R y z ==> R x z) /\\ (!n. R n (SUC n))\n       ==> !m n. m < n ==> R m n",
+        "forall R. (forall x y z. R x y /\\ R y z ==> R x z) /\\ (forall n. R n (SUC n))\n       ==> forall m n. m < n ==> R m n",
       ),
       t1550,
     ),
@@ -14803,7 +14803,7 @@ fn step_272() -> Unit raise {
   transitive_stepwise_le_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R. (!x. R x x) /\\ (!x y z. R x y /\\ R y z ==> R x z)\n       ==> ((!m n. m <= n ==> R m n) <=> (!n. R n (SUC n)))",
+        "forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z)\n       ==> ((forall m n. m <= n ==> R m n) <=> (forall n. R n (SUC n)))",
       ),
       t1557,
     ),
@@ -14837,7 +14837,7 @@ fn step_273() -> Unit raise {
   transitive_stepwise_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R. (!x. R x x) /\\ (!x y z. R x y /\\ R y z ==> R x z) /\\\n       (!n. R n (SUC n))\n       ==> !m n. m <= n ==> R m n",
+        "forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z) /\\\n       (forall n. R n (SUC n))\n       ==> forall m n. m <= n ==> R m n",
       ),
       t1560,
     ),
@@ -14870,14 +14870,14 @@ fn step_274() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([@nums.num_cases()]),
-        @parser.parse_term("(!n. P n) <=> P 0 /\\ !n. P(SUC n)"),
+        @parser.parse_term("(forall n. P n) <=> P 0 /\\ forall n. P(SUC n)"),
       ),
     ]),
   )
   let t1568 = @simp.asm_rewrite_tac(@list.List([]))
   let t1567 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t1564 = @parser.parse_term(
-    "f 0 = (a:A) /\\ (!n. f(SUC n) = @y. P (SUC n) y /\\ R n (f n) y)",
+    "f 0 = (a:A) /\\ (forall n. f(SUC n) = @y. P (SUC n) y /\\ R n (f n) y)",
   )
   let t1565 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t1566 = (fn(
@@ -14957,7 +14957,7 @@ fn step_274() -> Unit raise {
   dependent_choice_fixed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P R a:A.\n        P 0 a /\\ (!n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. f 0 = a /\\ (!n. P n (f n)) /\\ (!n. R n (f n) (f(SUC n)))",
+        "forall P R a:A.\n        P 0 a /\\ (forall n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. f 0 = a /\\ (forall n. P n (f n)) /\\ (forall n. R n (f n) (f(SUC n)))",
       ),
       t1575,
     ),
@@ -14982,7 +14982,7 @@ fn step_275() -> Unit raise {
   dependent_choice_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P R:num->A->A->bool.\n        (?a. P 0 a) /\\ (!n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. (!n. P n (f n)) /\\ (!n. R n (f n) (f(SUC n)))",
+        "forall P R:num->A->A->bool.\n        (?a. P 0 a) /\\ (forall n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. (forall n. P n (f n)) /\\ (forall n. R n (f n) (f(SUC n)))",
       ),
       t1576,
     ),

@@ -31,7 +31,7 @@ pub fn herbase_cases() -> @kernel.Thm {
 ///|
 /// herbase_RULES, herbase_INDUCT, herbase_CASES
 fn step_1() -> Unit raise {
-  let (herbase_rules, herbase_induct, herbase_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(~(?c. (c,0) IN fns) ==> herbase fns (V 0)) /\\\n   (!f l. (f,LENGTH l) IN fns /\\ ALL (herbase fns) l\n          ==> herbase fns (Fn f l))"))
+  let (herbase_rules, herbase_induct, herbase_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(~(?c. (c,0) IN fns) ==> herbase fns (V 0)) /\\\n   (forall f l. (f,LENGTH l) IN fns /\\ ALL (herbase fns) l\n          ==> herbase fns (Fn f l))"))
   herbase_rules_c.set(herbase_rules)
   herbase_induct_c.set(herbase_induct)
   herbase_cases_c.set(herbase_cases)
@@ -40,7 +40,7 @@ fn step_1() -> Unit raise {
 ///|
 /// herbrand
 fn step_2() -> Unit raise {
-  herbrand_c.set(@pair.new_definition(@parser.parse_term("herbrand (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = herbase (FST L)) /\\\n       (!f. Fun(M) f = Fn f)")))
+  herbrand_c.set(@pair.new_definition(@parser.parse_term("herbrand (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = herbase (FST L)) /\\\n       (forall f. Fun(M) f = Fn f)")))
 }
 
 ///|
@@ -75,7 +75,7 @@ fn step_3() -> Unit raise {
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x1 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x1
   }, @list.List([@pair.forall_pair_thm()])), t2), t3), @tactics.strip_tac), t4), t11), t12), t13), t14)
-  herbrand_interpretation_c.set(@tactics.prove(@parser.parse_term("!L M. herbrand L M ==> interpretation L M"), t15))
+  herbrand_interpretation_c.set(@tactics.prove(@parser.parse_term("forall L M. herbrand L M ==> interpretation L M"), t15))
 }
 
 ///|
@@ -96,7 +96,7 @@ fn step_4() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([@fol.functions_term(), @sets.empty_subset()]))
   let t16 = @tactics.match_mp_tac(herbase_induct())
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), t16), t17), t19), t20)
-  herbase_functions_c.set(@tactics.prove(@parser.parse_term("!fns t. t IN herbase fns ==> (functions_term t) SUBSET fns"), t21))
+  herbase_functions_c.set(@tactics.prove(@parser.parse_term("forall fns t. t IN herbase fns ==> (functions_term t) SUBSET fns"), t21))
 }
 
 ///|
@@ -114,7 +114,7 @@ fn step_5() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([@lists.all(), @lists.length()]))
   let t22 = @simp.once_rewrite_tac(@list.List([herbase_cases()]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), t22), t23)
-  herbase_nonempty_c.set(@tactics.prove(@parser.parse_term("!fns. ?t. t IN herbase fns"), t24))
+  herbase_nonempty_c.set(@tactics.prove(@parser.parse_term("forall fns. ?t. t IN herbase fns"), t24))
 }
 
 ///|
@@ -131,7 +131,7 @@ pub fn herbase_nonempty() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t25 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), herbase_nonempty()]))
   let t26 = @tactics.then_tac(@simp.simp_tac(@list.List([herbrand(), @fol.dom_def(), @sets.extension(), @sets.not_in_empty()])), t25)
-  herbrand_nonempty_c.set(@tactics.prove(@parser.parse_term("!L M. herbrand L M ==> ~(Dom M = {})"), t26))
+  herbrand_nonempty_c.set(@tactics.prove(@parser.parse_term("forall L M. herbrand L M ==> ~(Dom M = {})"), t26))
 }
 
 ///|
@@ -175,7 +175,7 @@ fn step_8() -> Unit raise {
   let t28 = @tactics.repeat_tac(@tactics.ap_term_tac)
   let t27 = @tactics.repeat_tac(@tactics.gen_tac)
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@logic_canon.prop_of_model(), herbrand_of_prop(), @fol.holds(), @fol.pred_def()])), t27), t28), t29), t31), @lists.list_induct_tac), t32), t34), t35), t36), t37), @tactics.ap_term_tac), t38), t39)
-  prop_of_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("!p l. prop_of_model (herbrand_of_prop L d) V (Atom p l) = d (Atom p l)"), t40))
+  prop_of_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall p l. prop_of_model (herbrand_of_prop L d) V (Atom p l) = d (Atom p l)"), t40))
 }
 
 ///|
@@ -206,7 +206,7 @@ fn step_9() -> Unit raise {
     let t43 = @simp.rewrite_tac(@list.List([@equal.gsym(@drule.match_mp(@logic_canon.pholds_prop_of_model())(th))]))
     @tactics.then_tac(@tactics.mp_tac(th), t43)
   })), t45), t46), t47), t48), @tactics.strip_tac), t52), @tactics.refl_tac)
-  holds_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("!p. qfree p ==> (holds (herbrand_of_prop L d) V p <=> pholds d p)"), t53))
+  holds_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall p. qfree p ==> (holds (herbrand_of_prop L d) V p <=> pholds d p)"), t53))
 }
 
 ///|
@@ -259,7 +259,7 @@ pub fn holds_herbrand_of_prop_general() -> @kernel.Thm {
 /// HERBRAND_HERBRAND_OF_PROP
 fn step_11() -> Unit raise {
   let t73 = @simp.rewrite_tac(@list.List([herbrand(), herbrand_of_prop(), @fol.dom_def(), @fol.fun_def(), @class.fun_eq_thm()]))
-  herbrand_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("!d. herbrand L (herbrand_of_prop L d)"), t73))
+  herbrand_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall d. herbrand L (herbrand_of_prop L d)"), t73))
 }
 
 ///|
@@ -276,7 +276,7 @@ pub fn herbrand_herbrand_of_prop() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([herbase_rules(), @sets.in_()]))
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @fol.interpretation(), herbrand_of_prop(), @fol.fun_def(), @fol.dom_def(), @sets.in_(), @class.eta_ax()])), t74)
-  interpretation_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("!L d. interpretation L (herbrand_of_prop L d)"), t75))
+  interpretation_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall L d. interpretation L (herbrand_of_prop L d)"), t75))
 }
 
 ///|
@@ -339,7 +339,7 @@ fn step_13() -> Unit raise {
   }, @list.List([herbrand_of_prop(), @fol.dom_def(), @fol.valuation()]))
   let t76 = @tactics.repeat_tac(@tactics.gen_tac)
   let t112 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfies(), @fol_prop.psatisfies(), @sets.in_elim_thm(), @theorems.left_imp_exists_thm()])), @tactics.strip_tac), t76), t84), @tactics.strip_tac), t93), t94), @tactics.disch_tac), t98), t99), t103), t111)
-  psatisfies_herbrand_instances_c.set(@tactics.prove(@parser.parse_term("(!p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (!x. v x IN herbase(FST L)) /\\ p IN s}\n   ==> (herbrand_of_prop L d) satisfies s"), t112))
+  psatisfies_herbrand_instances_c.set(@tactics.prove(@parser.parse_term("(forall p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (forall x. v x IN herbase(FST L)) /\\ p IN s}\n   ==> (herbrand_of_prop L d) satisfies s"), t112))
 }
 
 ///|
@@ -356,7 +356,7 @@ pub fn psatisfies_herbrand_instances() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t113 = @meson.meson_tac(@list.List([]))
   let t114 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfies(), @sets.subset()])), t113)
-  satisfies_subset_c.set(@tactics.prove(@parser.parse_term("!M s t. s SUBSET t /\\ M satisfies t ==> M satisfies s"), t114))
+  satisfies_subset_c.set(@tactics.prove(@parser.parse_term("forall M s t. s SUBSET t /\\ M satisfies t ==> M satisfies s"), t114))
 }
 
 ///|
@@ -375,7 +375,7 @@ fn step_15() -> Unit raise {
   let t116 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t115 = @tactics.match_mp_tac(herbase_induct())
   let t118 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_()])), t115), t116), t117)
-  herbase_subset_terms_c.set(@tactics.prove(@parser.parse_term("!t. t IN herbase fns ==> t IN terms fns"), t118))
+  herbase_subset_terms_c.set(@tactics.prove(@parser.parse_term("forall t. t IN herbase fns ==> t IN terms fns"), t118))
 }
 
 ///|
@@ -429,7 +429,7 @@ fn step_16() -> Unit raise {
     ((x120 : @kernel.Thm) => @tactics.x_choose_tac(t119, x120))(t121(x122))
   }), t123), t124), t125), @tactics.conj_tac), t143), t150])
   let t152 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @tactics.eq_tac), @tactics.strip_tac), t151)
-  herbrand_theorem_c.set(@tactics.prove(@parser.parse_term("!s. (!p. p IN s ==> qfree p)\n       ==> ((?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n                 interpretation (language s) M /\\ ~(Dom M = {}) /\\\n                 M satisfies s) <=>\n            (?d. d psatisfies\n                 {formsubst v p | (!x. v x IN herbase(functions s)) /\\\n                                  p IN s}))"), t152))
+  herbrand_theorem_c.set(@tactics.prove(@parser.parse_term("forall s. (forall p. p IN s ==> qfree p)\n       ==> ((?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n                 interpretation (language s) M /\\ ~(Dom M = {}) /\\\n                 M satisfies s) <=>\n            (?d. d psatisfies\n                 {formsubst v p | (forall x. v x IN herbase(functions s)) /\\\n                                  p IN s}))"), t152))
 }
 
 ///|

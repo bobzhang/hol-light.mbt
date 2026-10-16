@@ -20,7 +20,7 @@ pub fn montgomery_xz() -> @kernel.Thm {
 /// MONTGOMERY_XZ_IN_CARRIER
 fn step_2() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), montgomery_xz()]))
-  montgomery_xz_in_carrier_c.set(@tactics.prove(@parser.parse_term("!P X Z.\n        montgomery_xz f P (X,Z)\n        ==> X IN ring_carrier f /\\ Z IN ring_carrier f"), t1))
+  montgomery_xz_in_carrier_c.set(@tactics.prove(@parser.parse_term("forall P X Z.\n        montgomery_xz f P (X,Z)\n        ==> X IN ring_carrier f /\\ Z IN ring_carrier f"), t1))
 }
 
 ///|
@@ -74,7 +74,7 @@ fn step_5() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), @montgomery.montgomery_add(), montgomery_xz(), @equal.gsym(@class.de_morgan_thm()), montgomery_xzdouble(), @montgomery.montgomery_nonsingular()]))
   let t2 = @simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t2), t3), t4), t5), t6), t7), t8), t9), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_xzdouble_v1_c.set(@tactics.prove(@parser.parse_term("!f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_xz f p q\n        ==> montgomery_xz f (montgomery_add(f,a,b) p p)\n                            (montgomery_xzdouble(f,a,b) q)"), t10))
+  montgomery_xzdouble_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_xz f p q\n        ==> montgomery_xz f (montgomery_add(f,a,b) p p)\n                            (montgomery_xzdouble(f,a,b) q)"), t10))
 }
 
 ///|
@@ -111,7 +111,7 @@ fn step_6() -> Unit raise {
       }, @kernel.frees(w))
     })(x20)(x20)
   }), t21), t22), t23), t24), t25), t26), t27), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_xzdiffadd_v1_c.set(@tactics.prove(@parser.parse_term("!f (a:A) b p q pm qm pn qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) pm /\\\n        montgomery_curve(f,a,b) pn /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f pm qm /\\\n        montgomery_xz f pn qn /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        montgomery_add (f,a,b) pm (montgomery_neg (f,a,b) pn) = p\n        ==> montgomery_xz f (montgomery_add(f,a,b) pm pn)\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)"), t28))
+  montgomery_xzdiffadd_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p q pm qm pn qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) pm /\\\n        montgomery_curve(f,a,b) pn /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f pm qm /\\\n        montgomery_xz f pn qn /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        montgomery_add (f,a,b) pm (montgomery_neg (f,a,b) pn) = p\n        ==> montgomery_xz f (montgomery_add(f,a,b) pm pn)\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)"), t28))
 }
 
 ///|
@@ -145,7 +145,7 @@ fn step_7() -> Unit raise {
   let t30 = @simp.asm_simp_tac(@list.List([@montgomery.montgomery_group_v1()]))
   let t29 = @simp.asm_simp_tac(@list.List([@arith.mult_2(), @grouptheory.group_pow_add()]))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), t30), t31), t32), t41), t42), t43)
-  montgomery_xzdouble_group_c.set(@tactics.prove(@parser.parse_term("!f (a:A) b p n q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) q\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n))\n                            (montgomery_xzdouble(f,a,b) q)"), t44))
+  montgomery_xzdouble_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p n q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) q\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n))\n                            (montgomery_xzdouble(f,a,b) q)"), t44))
 }
 
 ///|
@@ -193,7 +193,7 @@ fn step_8() -> Unit raise {
   let t46 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow_add()]))
   let t45 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("2 * n + 1 = SUC n + n"))]))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t45), t46), t49), t50), t56), t57), t58), t59), t62), t63), t66), t67), t68), t69), t70), t71)
-  montgomery_xzdiffadd_group_c.set(@tactics.prove(@parser.parse_term("!f (a:A) b p n q qm qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (n + 1)) qm /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) qn\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n + 1))\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)"), t72))
+  montgomery_xzdiffadd_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p n q qm qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (n + 1)) qm /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) qn\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n + 1))\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)"), t72))
 }
 
 ///|
@@ -227,7 +227,7 @@ fn step_10() -> Unit raise {
   let t74 = @simp.simp_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_1(), @ringtheory.ring_mul_rid()]))
   let t73 = @simp.simp_tac(@list.List([montgomery_xz(), montgomery_xmap(), @ringtheory.field_nontrivial(), @ringtheory.ring_1_v1()]))
   let t76 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t73), t74), t75)
-  montgomery_xz_xmap_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) P X.\n        field f /\\ X IN ring_carrier f /\\ ~(X = ring_0 f)\n        ==> (montgomery_xz f P (X,ring_1 f) <=> montgomery_xmap f P = X)"), t76))
+  montgomery_xz_xmap_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) P X.\n        field f /\\ X IN ring_carrier f /\\ ~(X = ring_0 f)\n        ==> (montgomery_xz f P (X,ring_1 f) <=> montgomery_xmap f P = X)"), t76))
 }
 
 ///|
@@ -291,7 +291,7 @@ fn step_11() -> Unit raise {
   let t78 = @simp.simp_tac(@list.List([@theorems.imp_conj(), @montgomery.montgomery_group_v1()]))
   let t77 = @simp.rewrite_tac(@list.List([@ind_types.option_distinct(), @ind_types.option_inj(), @pair.pair_eq()]))
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), montgomery_xmap()])), t77), t78), t83), t84), t85), t86), t87), t88), t95), t103), t104), t111), @ringtheory.field_tac)
-  montgomery_xmap_eq_0_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) a b P.\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular (f,a,b) /\\\n      P IN group_carrier(montgomery_group(f,a,b))\n      ==> (montgomery_xmap f P = ring_0 f <=>\n           P = NONE \\/ P = SOME(ring_0 f,ring_0 f))"), t112))
+  montgomery_xmap_eq_0_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b P.\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular (f,a,b) /\\\n      P IN group_carrier(montgomery_group(f,a,b))\n      ==> (montgomery_xmap f P = ring_0 f <=>\n           P = NONE \\/ P = SOME(ring_0 f,ring_0 f))"), t112))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_12() -> Unit raise {
       })(x140))
     })(x141)(x141)
   }), t142)
-  montgomery_xmap_eq_0_pow_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b) /\\\n        P IN group_carrier(montgomery_group(f,a,b)) /\\\n        montgomery_xmap f P = ring_0 f\n        ==> montgomery_xmap f (group_pow (montgomery_group(f,a,b)) P n) =\n            ring_0 f"), t143))
+  montgomery_xmap_eq_0_pow_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b) /\\\n        P IN group_carrier(montgomery_group(f,a,b)) /\\\n        montgomery_xmap f P = ring_0 f\n        ==> montgomery_xmap f (group_pow (montgomery_group(f,a,b)) P n) =\n            ring_0 f"), t143))
 }
 
 ///|
@@ -383,7 +383,7 @@ fn step_13() -> Unit raise {
   let t145 = @tactics.repeat_tac(@tactics.gen_tac)
   let t144 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_nonsingular()]))
   let t155 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t144), t145), t146), t147), t148), t149), t154), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_add_yrecovery_c.set(@tactics.prove(@parser.parse_term("!f a (b:A) x y x1 y1 x2 y2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x,y)) /\\ ~(y = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x1,y1)) /\\\n        montgomery_add(f,a,b) (SOME(x,y)) (SOME(x1,y1)) = SOME(x2,y2)\n        ==> y1 = ring_div f\n                  (ring_sub f\n                   (ring_sub f\n                    (ring_mul f (ring_add f (ring_mul f x1 x) (ring_1 f))\n                    (ring_add f x1\n                      (ring_add f x (ring_mul f (ring_of_num f 2) a))))\n                      (ring_mul f (ring_of_num f 2) a))\n                     (ring_mul f (ring_pow f (ring_sub f x1 x) 2) x2))\n                  (ring_mul f (ring_of_num f 2) (ring_mul f b y))"), t155))
+  montgomery_add_yrecovery_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) x y x1 y1 x2 y2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x,y)) /\\ ~(y = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x1,y1)) /\\\n        montgomery_add(f,a,b) (SOME(x,y)) (SOME(x1,y1)) = SOME(x2,y2)\n        ==> y1 = ring_div f\n                  (ring_sub f\n                   (ring_sub f\n                    (ring_mul f (ring_add f (ring_mul f x1 x) (ring_1 f))\n                    (ring_add f x1\n                      (ring_add f x (ring_mul f (ring_of_num f 2) a))))\n                      (ring_mul f (ring_of_num f 2) a))\n                     (ring_mul f (ring_pow f (ring_sub f x1 x) 2) x2))\n                  (ring_mul f (ring_of_num f 2) (ring_mul f b y))"), t155))
 }
 
 ///|

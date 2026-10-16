@@ -4,7 +4,7 @@
 ///|
 /// TARSKI_AXIOM_1_EUCLIDEAN
 fn step_1() -> Unit raise {
-  tarski_axiom_1_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b:real^2. dist(a,b) = dist(b,a)"), @vectors.norm_arith_tac))
+  tarski_axiom_1_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b:real^2. dist(a,b) = dist(b,a)"), @vectors.norm_arith_tac))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn tarski_axiom_1_euclidean() -> @kernel.Thm {
 ///|
 /// TARSKI_AXIOM_2_EUCLIDEAN
 fn step_2() -> Unit raise {
-  tarski_axiom_2_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b p q r s.\n        dist(a,b) = dist(p,q) /\\ dist(a,b) = dist(r,s)\n        ==> dist(p,q) = dist(r,s)"), @calc_rat.real_arith_tac))
+  tarski_axiom_2_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b p q r s.\n        dist(a,b) = dist(p,q) /\\ dist(a,b) = dist(r,s)\n        ==> dist(p,q) = dist(r,s)"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn tarski_axiom_2_euclidean() -> @kernel.Thm {
 ///|
 /// TARSKI_AXIOM_3_EUCLIDEAN
 fn step_3() -> Unit raise {
-  tarski_axiom_3_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b c. dist(a,b) = dist(c,c) ==> a = b"), @vectors.norm_arith_tac))
+  tarski_axiom_3_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c. dist(a,b) = dist(c,c) ==> a = b"), @vectors.norm_arith_tac))
 }
 
 ///|
@@ -60,7 +60,7 @@ fn step_4() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@vectors.dist_0()]))
   let t1 = @tactics.repeat_tac(@tactics.gen_tac)
   let t11 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@parser.parse_term("a:real^2")), t1), t2), t3), t10)
-  tarski_axiom_4_euclidean_c.set(@tactics.prove(@parser.parse_term("!a q b c:real^2. ?x:real^2. between a (q,x) /\\ dist(a,x) = dist(b,c)"), t11))
+  tarski_axiom_4_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a q b c:real^2. ?x:real^2. between a (q,x) /\\ dist(a,x) = dist(b,c)"), t11))
 }
 
 ///|
@@ -90,7 +90,7 @@ fn step_5() -> Unit raise {
     })(t15(x16))
   }))
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), t18), t19), t20), t21), t22)
-  let lemma = @tactics.prove(@parser.parse_term("!a b x y:real^N.\n      ~(b = a) /\\ between b (a,x) /\\ between b (a,y) /\\ dist(b,x) = dist(b,y)\n      ==> x = y"), t23)
+  let lemma = @tactics.prove(@parser.parse_term("forall a b x y:real^N.\n      ~(b = a) /\\ between b (a,x) /\\ between b (a,y) /\\ dist(b,x) = dist(b,y)\n      ==> x = y"), t23)
   let t56 = @meson.asm_meson_tac(@list.List([@vectors.between_translation(), @determinants.orthogonal_transformation(), @vectors.norm_arith(@parser.parse_term("dist(a + x:real^N,a + y) = dist(x,y)")), @determinants.orthogonal_transformation_isometry(), @convex.between_linear_image_eq(), @vectors.dist_eq_0(), @determinants.orthogonal_transformation_injective()]))
   let t54 = @vectors.vector_arith(@parser.parse_term("a + x:real^N = a + y <=> x = y"))
   let t55 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@parser.parse_term("dist(a + x:real^N,a + y) = dist(x,y)")), @vectors.between_translation(), t54]))
@@ -135,7 +135,7 @@ fn step_5() -> Unit raise {
   let t28 = @parser.parse_term("b:real^2")
   let t29 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("a:real^2"), t28, t27, t26, t25, t24]), @convex.rigid_transformation_between_3()))
   let t57 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), @tactics.ants_tac), t30), t39), t43), t47), t53), t55), t56)
-  tarski_axiom_5_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b c x:real^2 a' b' c' x':real^2.\n        ~(a = b) /\\\n        dist(a,b) = dist(a',b') /\\\n        dist(a,c) = dist(a',c') /\\\n        dist(b,c) = dist(b',c') /\\\n        between b (a,x) /\\ between b' (a',x') /\\ dist(b,x) = dist(b',x')\n        ==> dist(c,x) = dist(c',x')"), t57))
+  tarski_axiom_5_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c x:real^2 a' b' c' x':real^2.\n        ~(a = b) /\\\n        dist(a,b) = dist(a',b') /\\\n        dist(a,c) = dist(a',c') /\\\n        dist(b,c) = dist(b',c') /\\\n        between b (a,x) /\\ between b' (a',x') /\\ dist(b,x) = dist(b',x')\n        ==> dist(c,x) = dist(c',x')"), t57))
 }
 
 ///|
@@ -151,7 +151,7 @@ pub fn tarski_axiom_5_euclidean() -> @kernel.Thm {
 /// TARSKI_AXIOM_6_EUCLIDEAN
 fn step_6() -> Unit raise {
   let t58 = @simp.simp_tac(@list.List([@vectors.between_refl_eq()]))
-  tarski_axiom_6_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b. between b (a,a) ==> a = b"), t58))
+  tarski_axiom_6_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b. between b (a,a) ==> a = b"), t58))
 }
 
 ///|
@@ -252,7 +252,7 @@ fn step_7() -> Unit raise {
   let t64 = @list.List([@meson.asm_meson_tac(@list.List([@vectors.between_refl(), @vectors.between_sym()])), t63])
   let t59 = @class.asm_cases_tac(@parser.parse_term("q:real^2 = c"))
   let t127 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t59), t64), t65), t70), t71), t72), @tactics.conj_tac), t75), (x77 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_basis_multiple_tac(1L, t76, x77)), t78), @tactics.gen_tac), t80), t81), t82), t83), @tactics.disch_tac), @tactics.disch_tac), t92), t93), t94), @tactics.strip_tac), t95), t96), t100), t126)
-  tarski_axiom_7_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b c p q:real^2.\n        between p (a,c) /\\ between q (b,c)\n        ==> ?x. between x (p,b) /\\ between x (q,a)"), t127))
+  tarski_axiom_7_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c p q:real^2.\n        between p (a,c) /\\ between q (b,c)\n        ==> ?x. between x (p,b) /\\ between x (q,a)"), t127))
 }
 
 ///|
@@ -303,7 +303,7 @@ fn step_9() -> Unit raise {
   let t140 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.collinear_between_cases())]))
   let t139 = @simp.once_rewrite_tac(@list.List([@vectors.between_sym()]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t139), t140), t141), t142), t143), t144), t145)
-  tarski_axiom_9_euclidean_c.set(@tactics.prove(@parser.parse_term("!p q a b c:real^2.\n        ~(p = q) /\\\n        dist(a,p) = dist(a,q) /\\ dist(b,p) = dist(b,q) /\\ dist(c,p) = dist(c,q)\n        ==> between b (a,c) \\/ between c (b,a) \\/ between a (c,b)"), t146))
+  tarski_axiom_9_euclidean_c.set(@tactics.prove(@parser.parse_term("forall p q a b c:real^2.\n        ~(p = q) /\\\n        dist(a,p) = dist(a,q) /\\ dist(b,p) = dist(b,q) /\\ dist(c,p) = dist(c,q)\n        ==> between b (a,c) \\/ between c (b,a) \\/ between a (c,b)"), t146))
 }
 
 ///|
@@ -339,7 +339,7 @@ fn step_10() -> Unit raise {
   let t148 = @tactics.repeat_tac(@tactics.strip_tac)
   let t147 = @determinants.geom_origin_tac(@parser.parse_term("a:real^N"))
   let t165 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t147), t148), t151), t152), t153), @tactics.strip_tac), t158), t159), t160), t161), t162), t164), @calc_rat.real_arith_tac)
-  tarski_axiom_10_euclidean_c.set(@tactics.prove(@parser.parse_term("!a b c d t:real^N.\n        between d (a,t) /\\ between d (b,c) /\\ ~(a = d)\n        ==> ?x y. between b (a,x) /\\ between c (a,y) /\\ between t (x,y)"), t165))
+  tarski_axiom_10_euclidean_c.set(@tactics.prove(@parser.parse_term("forall a b c d t:real^N.\n        between d (a,t) /\\ between d (b,c) /\\ ~(a = d)\n        ==> ?x y. between b (a,x) /\\ between c (a,y) /\\ between t (x,y)"), t165))
 }
 
 ///|
@@ -474,11 +474,11 @@ fn step_11() -> Unit raise {
     }
   })
   let t173 = @list.List([@meson.asm_meson_tac(@list.List([@vectors.between_refl()])), t172])
-  let t168 = @class.asm_cases_tac(@parser.parse_term("!x:real^2. x IN X ==> x = vec 0"))
+  let t168 = @class.asm_cases_tac(@parser.parse_term("forall x:real^2. x IN X ==> x = vec 0"))
   let t167 = @tactics.repeat_tac(@tactics.gen_tac)
   let t166 = @determinants.geom_origin_tac(@parser.parse_term("a:real^2"))
   let t270 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()])), t166), t167), t168), t173), t174), t175), t180), t185), (x187 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_basis_multiple_tac(1L, t186, x187)), t188), @tactics.disch_tac), t189), @tactics.disch_tac), @tactics.disch_tac), t190), t191), t196), t200), t269)
-  tarski_axiom_11_euclidean_c.set(@tactics.prove(@parser.parse_term("!X Y:real^2->bool.\n        (?a. !x y. x IN X /\\ y IN Y ==> between x (a,y))\n        ==> (?b. !x y. x IN X /\\ y IN Y ==> between b (x,y))"), t270))
+  tarski_axiom_11_euclidean_c.set(@tactics.prove(@parser.parse_term("forall X Y:real^2->bool.\n        (?a. forall x y. x IN X /\\ y IN Y ==> between x (a,y))\n        ==> (?b. forall x y. x IN X /\\ y IN Y ==> between b (x,y))"), t270))
 }
 
 ///|

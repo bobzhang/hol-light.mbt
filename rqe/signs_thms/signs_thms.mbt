@@ -253,7 +253,7 @@ pub fn signs_lem08() -> @kernel.Thm {
 /// signs_lem002
 fn step_12() -> Unit raise {
   let t24 = @list.List([@meson.meson_tac(@list.List([@basic.neq()]))])
-  signs_lem002_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!p. (p = &0) \\/ (p <> &0)"), t24))
+  signs_lem002_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (p = &0) \\/ (p <> &0)"), t24))
 }
 
 ///|
@@ -320,7 +320,7 @@ fn step_16() -> Unit raise {
   let t29 = @tactics.map_every(@class.bool_cases_tac, @list.List([@parser.parse_term("p:bool"), t28, t27, t26]))
   let t25 = @simp.rewrite_tac(@list.List([@basic.neq()]))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t25), t29), t30), @calc_rat.real_arith_tac)
-  pull_cases_thm_c.set(@tactics.prove(@parser.parse_term("!a p p0 p1.\n((a = &0) /\\ (p <=> p0) \\/ (a <> &0) /\\ (p <=> p1)) <=> ((p <=> (a = &0) /\\ p0 \\/ a <> &0 /\\ p1 ))"), t31))
+  pull_cases_thm_c.set(@tactics.prove(@parser.parse_term("forall a p p0 p1.\n((a = &0) /\\ (p <=> p0) \\/ (a <> &0) /\\ (p <=> p1)) <=> ((p <=> (a = &0) /\\ p0 \\/ a <> &0 /\\ p1 ))"), t31))
 }
 
 ///|
@@ -336,7 +336,7 @@ pub fn pull_cases_thm() -> @kernel.Thm {
 /// signs_lem0002
 fn step_17() -> Unit raise {
   let t32 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq()])), @calc_rat.real_arith_tac)
-  signs_lem0002_c.set(@tactics.prove(@parser.parse_term("!p. p <> &0 ==> (p > &0) \\/ (p < &0)"), t32))
+  signs_lem0002_c.set(@tactics.prove(@parser.parse_term("forall p. p <> &0 ==> (p > &0) \\/ (p < &0)"), t32))
 }
 
 ///|
@@ -380,7 +380,7 @@ fn step_19() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@basic.neq()]))
   let t33 = @tactics.repeat_tac(@tactics.strip_tac)
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq()])), t33), t34), t38), t39), t43)
-  pull_cases_thm_nz_c.set(@tactics.prove(@parser.parse_term("!a p p1 p2.\n  (a <> &0) ==> ((a > &0 /\\ (p <=> p1) \\/ a < &0 /\\ (p <=> p2)) <=>\n   ((p <=> a > &0 /\\ p1 \\/ a < &0 /\\ p2)))"), t44))
+  pull_cases_thm_nz_c.set(@tactics.prove(@parser.parse_term("forall a p p1 p2.\n  (a <> &0) ==> ((a > &0 /\\ (p <=> p1) \\/ a < &0 /\\ (p <=> p2)) <=>\n   ((p <=> a > &0 /\\ p1 \\/ a < &0 /\\ p2)))"), t44))
 }
 
 ///|

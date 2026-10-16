@@ -43,7 +43,7 @@ fn step_3() -> Unit raise {
 ///|
 /// psatisfies
 fn step_4() -> Unit raise {
-  psatisfies_c.set(@pair.new_definition(@parser.parse_term("v psatisfies s <=> !p. p IN s ==> pholds v p")))
+  psatisfies_c.set(@pair.new_definition(@parser.parse_term("v psatisfies s <=> forall p. p IN s ==> pholds v p")))
 }
 
 ///|
@@ -58,7 +58,7 @@ pub fn psatisfies() -> @kernel.Thm {
 ///|
 /// psatisfiable
 fn step_5() -> Unit raise {
-  psatisfiable_c.set(@pair.new_definition(@parser.parse_term("psatisfiable s <=> ?v. !p. p IN s ==> pholds v p")))
+  psatisfiable_c.set(@pair.new_definition(@parser.parse_term("psatisfiable s <=> ?v. forall p. p IN s ==> pholds v p")))
 }
 
 ///|
@@ -75,7 +75,7 @@ pub fn psatisfiable() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([@sets.subset()]))
   let t5 = @tactics.then_tac(@simp.rewrite_tac(@list.List([psatisfiable()])), t4)
-  psatisfiable_mono_c.set(@tactics.prove(@parser.parse_term("!A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B"), t5))
+  psatisfiable_mono_c.set(@tactics.prove(@parser.parse_term("forall A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B"), t5))
 }
 
 ///|
@@ -90,7 +90,7 @@ pub fn psatisfiable_mono() -> @kernel.Thm {
 ///|
 /// finsat
 fn step_7() -> Unit raise {
-  finsat_c.set(@pair.new_definition(@parser.parse_term("finsat A <=> !B. B SUBSET A /\\ FINITE(B) ==> psatisfiable B")))
+  finsat_c.set(@pair.new_definition(@parser.parse_term("finsat A <=> forall B. B SUBSET A /\\ FINITE(B) ==> psatisfiable B")))
 }
 
 ///|
@@ -107,7 +107,7 @@ pub fn finsat() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([@sets.subset_trans(), @sets.finite_subset()]))
   let t7 = @tactics.then_tac(@simp.rewrite_tac(@list.List([finsat()])), t6)
-  finsat_mono_c.set(@tactics.prove(@parser.parse_term("!A B. finsat A /\\ B SUBSET A ==> finsat B"), t7))
+  finsat_mono_c.set(@tactics.prove(@parser.parse_term("forall A B. finsat A /\\ B SUBSET A ==> finsat B"), t7))
 }
 
 ///|
@@ -124,7 +124,7 @@ pub fn finsat_mono() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t8 = @meson.meson_tac(@list.List([@sets.subset()]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([psatisfiable()])), t8)
-  satisfiable_mono_c.set(@tactics.prove(@parser.parse_term("!A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B"), t9))
+  satisfiable_mono_c.set(@tactics.prove(@parser.parse_term("forall A B. psatisfiable A /\\ B SUBSET A ==> psatisfiable B"), t9))
 }
 
 ///|
@@ -243,7 +243,7 @@ fn step_11() -> Unit raise {
   let t67 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
   let t68 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.empty_subset()])), t67), @tactics.all_tac])
   let t110 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_induct()), @tactics.conj_tac), t68), t69), t70), t71), t72), t76), t78), t79), t80), t81), t82), t89), t90), t91), t92), t100), t101), @tactics.strip_tac), t109), @tactics.all_tac])
-  let t66 = @tactics.subgoal_then(@parser.parse_term("!B:form->bool. FINITE B ==> B SUBSET (UNIONS C)\n                               ==> ?U. U IN C /\\ B SUBSET U"), fn(x63 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t66 = @tactics.subgoal_then(@parser.parse_term("forall B:form->bool. FINITE B ==> B SUBSET (UNIONS C)\n                               ==> ?U. U IN C /\\ B SUBSET U"), fn(x63 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s64 = @tactics.assume_tac(x63)
     fn(x65 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s64(x65)
@@ -318,7 +318,7 @@ fn step_11() -> Unit raise {
       })(x38))
     })(x39)(x39)
   }), t40), t41), t42), t43), @tactics.disch_tac), t44), t46), t47), t54), t55), @tactics.disch_tac), t59), t62), t66), t110), t114), t141)
-  finsat_max_c.set(@tactics.prove(@parser.parse_term("!A. finsat(A) ==> ?B. A SUBSET B /\\ finsat(B) /\\\n                         !C. B SUBSET C /\\ finsat(C) ==> (C = B)"), t142))
+  finsat_max_c.set(@tactics.prove(@parser.parse_term("forall A. finsat(A) ==> ?B. A SUBSET B /\\ finsat(B) /\\\n                         forall C. B SUBSET C /\\ finsat(C) ==> (C = B)"), t142))
 }
 
 ///|
@@ -365,7 +365,7 @@ fn step_12() -> Unit raise {
       }
     })(((x171 : @kernel.Thm) => @bool.spec(t170, x171))(x172))
   })
-  let t166 = @tactics.undisch_tac(@parser.parse_term("!v. ?p. p IN C /\\ ~pholds v p"))
+  let t166 = @tactics.undisch_tac(@parser.parse_term("forall v. ?p. p IN C /\\ ~pholds v p"))
   let t165 = @tactics.x_gen_tac(@parser.parse_term("v:form->bool"))
   let t164 = @tactics.repeat_tac(@tactics.disch_tac)
   let t163 = @simp.rewrite_tac(@list.List([@class.not_exists_thm(), @class.not_forall_thm(), @class.not_imp()]))
@@ -422,7 +422,7 @@ fn step_13() -> Unit raise {
     @tactics.disj_cases_tac(t196(x197))
   })
   let t203 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t198), @list.List([@tactics.disj1_tac, @tactics.disj2_tac])), t199), t200), t201), t202)
-  finsat_max_complete_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p. p IN B \\/ Not(p) IN B"), t203))
+  finsat_max_complete_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. p IN B \\/ Not(p) IN B"), t203))
 }
 
 ///|
@@ -465,7 +465,7 @@ fn step_14() -> Unit raise {
   let t205 = @list.List([@meson.asm_meson_tac(@list.List([finsat_max_complete()])), @tactics.all_tac])
   let t204 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(a \\/ b) /\\ ~(a /\\ b) ==> (b <=> ~a)")))
   let t227 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t204), @tactics.conj_tac), t205), @tactics.disch_tac), t206), t207), t214), t215), t216), t217), @tactics.conj_tac), t218), t222), t223), t224), t225), t226)
-  finsat_max_complete_strong_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p. Not(p) IN B <=> ~(p IN B)"), t227))
+  finsat_max_complete_strong_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. Not(p) IN B <=> ~(p IN B)"), t227))
 }
 
 ///|
@@ -483,7 +483,7 @@ fn step_15() -> Unit raise {
   let t243 = @meson.meson_tac(@list.List([]))
   let t242 = @simp.rewrite_tac(@list.List([psatisfiable(), @sets.in_union(), @sets.in_delete()]))
   let t241 = @tactics.undisch_tac(@parser.parse_term("~(psatisfiable A1)"))
-  let t240 = @tactics.undisch_tac(@parser.parse_term("!v. (!q. q IN A ==> pholds v q) ==> pholds v p"))
+  let t240 = @tactics.undisch_tac(@parser.parse_term("forall v. (forall q. q IN A ==> pholds v q) ==> pholds v p"))
   let t239 = @list.List([@tactics.assum_list(@sets.set_tac), @tactics.all_tac])
   let t238 = @simp.asm_rewrite_tac(@list.List([@sets.finite_union(), @sets.finite_delete()]))
   let t237 = @tactics.exists_tac(@parser.parse_term("(A:form->bool) UNION (A1 DELETE p)"))
@@ -499,7 +499,7 @@ fn step_15() -> Unit raise {
   let t228 = @simp.rewrite_tac(@list.List([@sets.finite_insert(), @sets.finite_rules()]))
   let t245 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.exists_tac(@parser.parse_term("{p:form}"))), t228), t229), t230), t244])
   let t246 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t245)
-  finsat_deduction_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p. p IN B <=> ?A. FINITE(A) /\\ A SUBSET B /\\\n                        !v. (!q. q IN A ==> pholds v q) ==> pholds v p"), t246))
+  finsat_deduction_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p. p IN B <=> ?A. FINITE(A) /\\ A SUBSET B /\\\n                        forall v. (forall q. q IN A ==> pholds v q) ==> pholds v p"), t246))
 }
 
 ///|
@@ -540,7 +540,7 @@ fn step_16() -> Unit raise {
       }
     })(@bool.conjunct1(x250))
   }), t251), t252), @tactics.disch_tac), t253), t260), t261), t262), t263), t264), t265), t266)
-  finsat_max_consistent_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> ~(False IN B)"), t267))
+  finsat_max_consistent_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> ~(False IN B)"), t267))
 }
 
 ///|
@@ -589,8 +589,8 @@ fn step_17() -> Unit raise {
   }, @list.List([@class.taut(@parser.parse_term("p ==> q <=> ~p \\/ q"))])), t284), t287), @tactics.strip_tac), t288), t289), t298), t299), t300)
   let t278 = @meson.meson_tac(@list.List([]))
   let t277 = @simp.rewrite_tac(@list.List([@fol.entails(), @sets.in_union(), pholds_v1()]))
-  let t276 = @tactics.undisch_tac(@parser.parse_term("!v. (!q. q IN A1 ==> pholds v q) ==> pholds v (p --> q)"))
-  let t275 = @tactics.undisch_tac(@parser.parse_term("!v. (!q. q IN A2 ==> pholds v q) ==> pholds v p"))
+  let t276 = @tactics.undisch_tac(@parser.parse_term("forall v. (forall q. q IN A1 ==> pholds v q) ==> pholds v (p --> q)"))
+  let t275 = @tactics.undisch_tac(@parser.parse_term("forall v. (forall q. q IN A2 ==> pholds v q) ==> pholds v p"))
   let t274 = @list.List([@tactics.assum_list(@sets.set_tac), @tactics.all_tac])
   let t273 = @simp.asm_rewrite_tac(@list.List([@sets.finite_union()]))
   let t272 = @tactics.exists_tac(@parser.parse_term("(A1:form->bool) UNION A2"))
@@ -601,7 +601,7 @@ fn step_17() -> Unit raise {
     @simp.rewrite_tac(@list.List([@drule.match_mp(finsat_deduction())(th)]))
   }), t270), t271), t272), t273), @tactics.conj_tac), t274), t275), t276), t277), t278), t301])
   let t303 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.repeat_tac(@tactics.gen_tac)), @tactics.eq_tac), t302)
-  finsat_max_homo_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (!C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> !p q. (p --> q) IN B <=> p IN B ==> q IN B"), t303))
+  finsat_max_homo_c.set(@tactics.prove(@parser.parse_term("finsat(B) /\\ (forall C. B SUBSET C /\\ finsat(C) ==> (C = B))\n   ==> forall p q. (p --> q) IN B <=> p IN B ==> q IN B"), t303))
 }
 
 ///|
@@ -627,7 +627,7 @@ fn step_18() -> Unit raise {
   })
   let t324 = @simp.rewrite_tac(@list.List([pholds()]))
   let t323 = @tactics.match_mp_tac(@fol.form_induction())
-  let t322 = @tactics.subgoal_then(@parser.parse_term("!r. pholds (\\p. p IN B) r <=> r IN B"), fn(x320 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t322 = @tactics.subgoal_then(@parser.parse_term("forall r. pholds (\\p. p IN B) r <=> r IN B"), fn(x320 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x320
     @meson.asm_meson_tac(@list.List([th, @sets.subset()]))
   })
@@ -655,7 +655,7 @@ fn step_18() -> Unit raise {
       }
     })(t307(x308))
   })), t310), t314), t318), t319), t322), t323), t324), t327), t330), t331)
-  compact_prop_c.set(@tactics.prove(@parser.parse_term("(!B. FINITE(B) /\\ B SUBSET A\n        ==> ?d. !r. r IN B ==> pholds(d) r)\n   ==> ?d. !r. r IN A ==> pholds(d) r"), t332))
+  compact_prop_c.set(@tactics.prove(@parser.parse_term("(forall B. FINITE(B) /\\ B SUBSET A\n        ==> ?d. forall r. r IN B ==> pholds(d) r)\n   ==> ?d. forall r. r IN A ==> pholds(d) r"), t332))
 }
 
 ///|
@@ -702,14 +702,14 @@ fn step_19() -> Unit raise {
   let t338 = @meson.asm_meson_tac(@list.List([pholds()]))
   let t337 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @fol.not_def()]))
   let t339 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_exists_thm(), @class.not_imp()])), t337), t338), @tactics.all_tac])
-  let t336 = @tactics.subgoal_then(@parser.parse_term("~(?d. !r. r IN { Not q | q IN A } ==> pholds(d) r)"), fn(x333 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t336 = @tactics.subgoal_then(@parser.parse_term("~(?d. forall r. r IN { Not q | q IN A } ==> pholds(d) r)"), fn(x333 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s334 = @tactics.mp_tac(x333)
     fn(x335 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s334(x335)
     }
   })
   let t363 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t336), t339), t346), t347), t348), t349), t350), @tactics.conj_tac), t362)
-  compact_prop_alt_c.set(@tactics.prove(@parser.parse_term("!A. (!d. ?p. p IN A /\\ pholds d p)\n       ==> ?B. FINITE(B) /\\ B SUBSET A /\\ (!d. ?p. p IN B /\\ pholds d p)"), t363))
+  compact_prop_alt_c.set(@tactics.prove(@parser.parse_term("forall A. (forall d. ?p. p IN A /\\ pholds d p)\n       ==> ?B. FINITE(B) /\\ B SUBSET A /\\ (forall d. ?p. p IN B /\\ pholds d p)"), t363))
 }
 
 ///|
@@ -739,7 +739,7 @@ fn step_20() -> Unit raise {
   let t364 = @simp.rewrite_tac(@list.List([@lists.all(), @lists.itlist()]))
   let t377 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("[] :form list")), t364), t365), t376])
   let t378 = @tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_induct()), @tactics.conj_tac), t377)
-  finite_disj_lemma_c.set(@tactics.prove(@parser.parse_term("!A. FINITE(A) ==> ?ps. ALL (\\p. p IN A) ps /\\\n                          !d. pholds(d) (ITLIST (||) ps False) <=>\n                              ?p. p IN A /\\ pholds d p"), t378))
+  finite_disj_lemma_c.set(@tactics.prove(@parser.parse_term("forall A. FINITE(A) ==> ?ps. ALL (\\p. p IN A) ps /\\\n                          forall d. pholds(d) (ITLIST (||) ps False) <=>\n                              ?p. p IN A /\\ pholds d p"), t378))
 }
 
 ///|
@@ -786,7 +786,7 @@ fn step_21() -> Unit raise {
       }
     })(t382(x383))
   })), t387), t391), t395), t396), t397), t398), t399), t400), t401)
-  compact_disj_c.set(@tactics.prove(@parser.parse_term("!A. (!d. ?p. p IN A /\\ pholds d p)\n       ==> ?ps. ALL (\\p. p IN A) ps /\\\n                !d. pholds(d) (ITLIST (||) ps False)"), t402))
+  compact_disj_c.set(@tactics.prove(@parser.parse_term("forall A. (forall d. ?p. p IN A /\\ pholds d p)\n       ==> ?ps. ALL (\\p. p IN A) ps /\\\n                forall d. pholds(d) (ITLIST (||) ps False)"), t402))
 }
 
 ///|

@@ -750,133 +750,133 @@ test "arith matches arith.ml" {
       #|0..0..0..1..2..3..7..14..22..33..57..84..141..221..305..441..638..849..solved at 1042
       #|0..0..0..1..2..3..4..5..6..11..16..21..40..59..78..103..128..153..192..231..270..358..446..534..650..766..882..1036..1190..1344..solved at 3172
       #|arith quotations (790):
-      #|  (PRE 0 = 0) /\\\n  (!n. PRE (SUC n) = n)
-      #|  (!n. 0 + n = n) /\\\n  (!m n. (SUC m) + n = SUC(m + n))
-      #|  !m. m + 0 = m
-      #|  !m n. m + (SUC n) = SUC(m + n)
-      #|  (!n. 0 + n = n) /\\\n   (!m. m + 0 = m) /\\\n   (!m n. (SUC m) + n = SUC(m + n)) /\\\n   (!m n. m + (SUC n) = SUC(m + n))
-      #|  !m n. m + n = n + m
-      #|  !m n p. m + (n + p) = (m + n) + p
+      #|  (PRE 0 = 0) /\\\n  (forall n. PRE (SUC n) = n)
+      #|  (forall n. 0 + n = n) /\\\n  (forall m n. (SUC m) + n = SUC(m + n))
+      #|  forall m. m + 0 = m
+      #|  forall m n. m + (SUC n) = SUC(m + n)
+      #|  (forall n. 0 + n = n) /\\\n   (forall m. m + 0 = m) /\\\n   (forall m n. (SUC m) + n = SUC(m + n)) /\\\n   (forall m n. m + (SUC n) = SUC(m + n))
+      #|  forall m n. m + n = n + m
+      #|  forall m n p. m + (n + p) = (m + n) + p
       #|  (m + n = n + m) /\\\n   ((m + n) + p = m + (n + p)) /\\\n   (m + (n + p) = n + (m + p))
-      #|  !m n. (m + n = 0) <=> (m = 0) /\\ (n = 0)
-      #|  !m n p. (m + n = m + p) <=> (n = p)
-      #|  !m n p. (m + p = n + p) <=> (m = n)
-      #|  !m n. (m + n = m) <=> (n = 0)
-      #|  !m n. (m + n = n) <=> (m = 0)
-      #|  !n. BIT0 n = n + n
-      #|  !n. BIT1 n = SUC(n + n)
-      #|  !n. NUMERAL (BIT0 n) = NUMERAL n + NUMERAL n
-      #|  !n. NUMERAL (BIT1 n) = SUC(NUMERAL n + NUMERAL n)
+      #|  forall m n. (m + n = 0) <=> (m = 0) /\\ (n = 0)
+      #|  forall m n p. (m + n = m + p) <=> (n = p)
+      #|  forall m n p. (m + p = n + p) <=> (m = n)
+      #|  forall m n. (m + n = m) <=> (n = 0)
+      #|  forall m n. (m + n = n) <=> (m = 0)
+      #|  forall n. BIT0 n = n + n
+      #|  forall n. BIT1 n = SUC(n + n)
+      #|  forall n. NUMERAL (BIT0 n) = NUMERAL n + NUMERAL n
+      #|  forall n. NUMERAL (BIT1 n) = SUC(NUMERAL n + NUMERAL n)
       #|  1 = SUC 0
       #|  2 = SUC 1
-      #|  !m. SUC m = m + 1
-      #|  (!n. 0 * n = 0) /\\\n  (!m n. (SUC m) * n = (m * n) + n)
-      #|  !m. m * 0 = 0
-      #|  !m n. m * (SUC n) = m + (m * n)
-      #|  (!n. 0 * n = 0) /\\\n   (!m. m * 0 = 0) /\\\n   (!n. 1 * n = n) /\\\n   (!m. m * 1 = m) /\\\n   (!m n. (SUC m) * n = (m * n) + n) /\\\n   (!m n. m * (SUC n) = m + (m * n))
-      #|  !m n. m * n = n * m
-      #|  !m n p. m * (n + p) = (m * n) + (m * p)
-      #|  !m n p. (m + n) * p = (m * p) + (n * p)
-      #|  !m n p. m * (n * p) = (m * n) * p
+      #|  forall m. SUC m = m + 1
+      #|  (forall n. 0 * n = 0) /\\\n  (forall m n. (SUC m) * n = (m * n) + n)
+      #|  forall m. m * 0 = 0
+      #|  forall m n. m * (SUC n) = m + (m * n)
+      #|  (forall n. 0 * n = 0) /\\\n   (forall m. m * 0 = 0) /\\\n   (forall n. 1 * n = n) /\\\n   (forall m. m * 1 = m) /\\\n   (forall m n. (SUC m) * n = (m * n) + n) /\\\n   (forall m n. m * (SUC n) = m + (m * n))
+      #|  forall m n. m * n = n * m
+      #|  forall m n p. m * (n + p) = (m * n) + (m * p)
+      #|  forall m n p. (m + n) * p = (m * p) + (n * p)
+      #|  forall m n p. m * (n * p) = (m * n) * p
       #|  (m * n = n * m) /\\\n   ((m * n) * p = m * (n * p)) /\\\n   (m * (n * p) = n * (m * p))
-      #|  !m n. (m * n = 0) <=> (m = 0) \\/ (n = 0)
-      #|  !m n p. (m * n = m * p) <=> (m = 0) \\/ (n = p)
-      #|  !m n p. (m * p = n * p) <=> (m = n) \\/ (p = 0)
-      #|  !n. 2 * n = n + n
-      #|  !m n. (m * n = 1) <=> (m = 1) /\\ (n = 1)
-      #|  (!m. m EXP 0 = 1) /\\\n  (!m n. m EXP (SUC n) = m * (m EXP n))
-      #|  !m n. (m EXP n = 0) <=> (m = 0) /\\ ~(n = 0)
-      #|  !x n. x EXP n = 1 <=> x = 1 \\/ n = 0
-      #|  !n. 0 EXP n = if n = 0 then 1 else 0
-      #|  !m n p. m EXP (n + p) = (m EXP n) * (m EXP p)
-      #|  !n. 1 EXP n = 1
-      #|  !n. n EXP 1 = n
-      #|  !n. n EXP 2 = n * n
-      #|  !p m n. (m * n) EXP p = m EXP p * n EXP p
-      #|  !m n p. m EXP (n * p) = (m EXP n) EXP p
-      #|  !x m n. (x EXP m) EXP n = x EXP (m * n)
-      #|  (!m. (m <= 0) <=> (m = 0)) /\\\n  (!m n. (m <= SUC n) <=> (m = SUC n) \\/ (m <= n))
-      #|  (!m. (m < 0) <=> F) /\\\n  (!m n. (m < SUC n) <=> (m = n) \\/ (m < n))
+      #|  forall m n. (m * n = 0) <=> (m = 0) \\/ (n = 0)
+      #|  forall m n p. (m * n = m * p) <=> (m = 0) \\/ (n = p)
+      #|  forall m n p. (m * p = n * p) <=> (m = n) \\/ (p = 0)
+      #|  forall n. 2 * n = n + n
+      #|  forall m n. (m * n = 1) <=> (m = 1) /\\ (n = 1)
+      #|  (forall m. m EXP 0 = 1) /\\\n  (forall m n. m EXP (SUC n) = m * (m EXP n))
+      #|  forall m n. (m EXP n = 0) <=> (m = 0) /\\ ~(n = 0)
+      #|  forall x n. x EXP n = 1 <=> x = 1 \\/ n = 0
+      #|  forall n. 0 EXP n = if n = 0 then 1 else 0
+      #|  forall m n p. m EXP (n + p) = (m EXP n) * (m EXP p)
+      #|  forall n. 1 EXP n = 1
+      #|  forall n. n EXP 1 = n
+      #|  forall n. n EXP 2 = n * n
+      #|  forall p m n. (m * n) EXP p = m EXP p * n EXP p
+      #|  forall m n p. m EXP (n * p) = (m EXP n) EXP p
+      #|  forall x m n. (x EXP m) EXP n = x EXP (m * n)
+      #|  (forall m. (m <= 0) <=> (m = 0)) /\\\n  (forall m n. (m <= SUC n) <=> (m = SUC n) \\/ (m <= n))
+      #|  (forall m. (m < 0) <=> F) /\\\n  (forall m n. (m < SUC n) <=> (m = n) \\/ (m < n))
       #|  m >= n <=> n <= m
       #|  m > n <=> n < m
-      #|  !m n. MAX m n = if m <= n then n else m
-      #|  !m n. MIN m n = if m <= n then m else n
-      #|  !m n. (SUC m <= n) <=> (m < n)
-      #|  !m n. (m < SUC n) <=> (m <= n)
-      #|  !m n. (SUC m <= SUC n) <=> (m <= n)
-      #|  !m n. (SUC m < SUC n) <=> (m < n)
-      #|  !n. 0 <= n
-      #|  !n. 0 < SUC n
-      #|  !n. n <= n
-      #|  !n. ~(n < n)
-      #|  !m n:num. m < n ==> ~(m = n)
-      #|  !m n. (m <= n /\\ n <= m) <=> (m = n)
-      #|  !m n. ~(m < n /\\ n < m)
-      #|  !m n. ~(m <= n /\\ n < m)
-      #|  !m n. ~(m < n /\\ n <= m)
-      #|  !m n p. m <= n /\\ n <= p ==> m <= p
-      #|  !m n p. m < n /\\ n < p ==> m < p
-      #|  !m n p. m <= n /\\ n < p ==> m < p
-      #|  !m n p. m < n /\\ n <= p ==> m < p
-      #|  !m n. m <= n \\/ n <= m
-      #|  !m n. (m < n) \\/ (n < m) \\/ (m = n)
-      #|  !m n. m <= n \\/ n < m
-      #|  !m n. m < n \\/ n <= m
-      #|  !m n. (m <= n) <=> (m < n) \\/ (m = n)
-      #|  !m n. (m < n) <=> (m <= n) /\\ ~(m = n)
-      #|  !m n. ~(m <= n) <=> (n < m)
-      #|  !m n. ~(m < n) <=> n <= m
-      #|  !m n. m < n ==> m <= n
-      #|  !m n. (m = n) ==> m <= n
-      #|  !n. 0 < n <=> ~(n = 0)
-      #|  (!n. ~(n = 0) ==> 0 < n) /\\\n   (!n. ~(n = 0) ==> 1 <= n) /\\\n   (!n. 0 < n ==> ~(n = 0)) /\\\n   (!n. 0 < n ==> 1 <= n) /\\\n   (!n. 1 <= n ==> 0 < n) /\\\n   (!n. 1 <= n ==> ~(n = 0))
+      #|  forall m n. MAX m n = if m <= n then n else m
+      #|  forall m n. MIN m n = if m <= n then m else n
+      #|  forall m n. (SUC m <= n) <=> (m < n)
+      #|  forall m n. (m < SUC n) <=> (m <= n)
+      #|  forall m n. (SUC m <= SUC n) <=> (m <= n)
+      #|  forall m n. (SUC m < SUC n) <=> (m < n)
+      #|  forall n. 0 <= n
+      #|  forall n. 0 < SUC n
+      #|  forall n. n <= n
+      #|  forall n. ~(n < n)
+      #|  forall m n:num. m < n ==> ~(m = n)
+      #|  forall m n. (m <= n /\\ n <= m) <=> (m = n)
+      #|  forall m n. ~(m < n /\\ n < m)
+      #|  forall m n. ~(m <= n /\\ n < m)
+      #|  forall m n. ~(m < n /\\ n <= m)
+      #|  forall m n p. m <= n /\\ n <= p ==> m <= p
+      #|  forall m n p. m < n /\\ n < p ==> m < p
+      #|  forall m n p. m <= n /\\ n < p ==> m < p
+      #|  forall m n p. m < n /\\ n <= p ==> m < p
+      #|  forall m n. m <= n \\/ n <= m
+      #|  forall m n. (m < n) \\/ (n < m) \\/ (m = n)
+      #|  forall m n. m <= n \\/ n < m
+      #|  forall m n. m < n \\/ n <= m
+      #|  forall m n. (m <= n) <=> (m < n) \\/ (m = n)
+      #|  forall m n. (m < n) <=> (m <= n) /\\ ~(m = n)
+      #|  forall m n. ~(m <= n) <=> (n < m)
+      #|  forall m n. ~(m < n) <=> n <= m
+      #|  forall m n. m < n ==> m <= n
+      #|  forall m n. (m = n) ==> m <= n
+      #|  forall n. 0 < n <=> ~(n = 0)
+      #|  (forall n. ~(n = 0) ==> 0 < n) /\\\n   (forall n. ~(n = 0) ==> 1 <= n) /\\\n   (forall n. 0 < n ==> ~(n = 0)) /\\\n   (forall n. 0 < n ==> 1 <= n) /\\\n   (forall n. 1 <= n ==> 0 < n) /\\\n   (forall n. 1 <= n ==> ~(n = 0))
       #|  SUC d
       #|  d:num
       #|  0
-      #|  !m n. (m <= n) <=> (?d. n = m + d)
+      #|  forall m n. (m <= n) <=> (?d. n = m + d)
       #|  SUC d
       #|  d:num
       #|  0
-      #|  !m n. (m < n) <=> (?d. n = m + SUC d)
-      #|  !m n. m <= m + n
-      #|  !m n. n <= m + n
-      #|  !m n. (m < m + n) <=> (0 < n)
-      #|  !m n. (n < m + n) <=> (0 < m)
-      #|  !m n p. (m + n) <= (m + p) <=> n <= p
-      #|  !m n p. (m + p) <= (n + p) <=> (m <= n)
-      #|  !m n p. (m + n) < (m + p) <=> n < p
-      #|  !m n p. (m + p) < (n + p) <=> (m < n)
+      #|  forall m n. (m < n) <=> (?d. n = m + SUC d)
+      #|  forall m n. m <= m + n
+      #|  forall m n. n <= m + n
+      #|  forall m n. (m < m + n) <=> (0 < n)
+      #|  forall m n. (n < m + n) <=> (0 < m)
+      #|  forall m n p. (m + n) <= (m + p) <=> n <= p
+      #|  forall m n p. (m + p) <= (n + p) <=> (m <= n)
+      #|  forall m n p. (m + n) < (m + p) <=> n < p
+      #|  forall m n p. (m + p) < (n + p) <=> (m < n)
       #|  a + b
       #|  b:num
       #|  a:num
-      #|  !m n p q. m <= p /\\ n <= q ==> m + n <= p + q
+      #|  forall m n p q. m <= p /\\ n <= q ==> m + n <= p + q
       #|  a + b
       #|  b:num
       #|  a:num
-      #|  !m n p q. m <= p /\\ n < q ==> m + n < p + q
-      #|  !m n p q. m < p /\\ n <= q ==> m + n < p + q
-      #|  !m n p q. m < p /\\ n < q ==> m + n < p + q
-      #|  !m n. (0 < m * n) <=> (0 < m) /\\ (0 < n)
+      #|  forall m n p q. m <= p /\\ n < q ==> m + n < p + q
+      #|  forall m n p q. m < p /\\ n <= q ==> m + n < p + q
+      #|  forall m n p q. m < p /\\ n < q ==> m + n < p + q
+      #|  forall m n. (0 < m * n) <=> (0 < m) /\\ (0 < n)
       #|  a * p + m * b + a * b
       #|  b:num
       #|  a:num
-      #|  !m n p q. m <= n /\\ p <= q ==> m * p <= n * q
-      #|  !m n p. ~(m = 0) /\\ n < p ==> m * n < m * p
-      #|  !m n p. (m * n) <= (m * p) <=> (m = 0) \\/ n <= p
-      #|  !m n p. (m * p) <= (n * p) <=> (m <= n) \\/ (p = 0)
-      #|  !m n p. (m * n) < (m * p) <=> ~(m = 0) /\\ n < p
-      #|  !m n p. (m * p) < (n * p) <=> (m < n) /\\ ~(p = 0)
+      #|  forall m n p q. m <= n /\\ p <= q ==> m * p <= n * q
+      #|  forall m n p. ~(m = 0) /\\ n < p ==> m * n < m * p
+      #|  forall m n p. (m * n) <= (m * p) <=> (m = 0) \\/ n <= p
+      #|  forall m n p. (m * p) <= (n * p) <=> (m <= n) \\/ (p = 0)
+      #|  forall m n p. (m * n) < (m * p) <=> ~(m = 0) /\\ n < p
+      #|  forall m n p. (m * p) < (n * p) <=> (m < n) /\\ ~(p = 0)
       #|  m < n
       #|  n * p
-      #|  !m n p q. m < n /\\ p < q ==> m * p < n * q
-      #|  !n. n <= n * n
-      #|  !n. n < 2 EXP n
-      #|  (!m n. P m n <=> P n m) /\\ (!m n. m <= n ==> P m n) ==> !m n. P m n
-      #|  (!m. P m m) /\\ (!m n. P m n <=> P n m) /\\ (!m n. m < n ==> P m n)\n   ==> !m y. P m y
-      #|  !P. (!x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (!x y z. x <= y /\\ y <= z ==> P x y z)\n       ==> !x y z. P x y z
-      #|  \\n. !m. m < n ==> P m
-      #|  !P. (!n. (!m. m < n ==> P m) ==> P n) ==> !n. P n
-      #|  !P. (?n. P n) <=> (?n. P(n) /\\ !m. m < n ==> ~P(m))
+      #|  forall m n p q. m < n /\\ p < q ==> m * p < n * q
+      #|  forall n. n <= n * n
+      #|  forall n. n < 2 EXP n
+      #|  (forall m n. P m n <=> P n m) /\\ (forall m n. m <= n ==> P m n) ==> forall m n. P m n
+      #|  (forall m. P m m) /\\ (forall m n. P m n <=> P n m) /\\ (forall m n. m < n ==> P m n)\n   ==> forall m y. P m y
+      #|  forall P. (forall x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (forall x y z. x <= y /\\ y <= z ==> P x y z)\n       ==> forall x y z. P x y z
+      #|  \\n. forall m. m < n ==> P m
+      #|  forall P. (forall n. (forall m. m < n ==> P m) ==> P n) ==> forall n. P n
+      #|  forall P. (?n. P n) <=> (?n. P(n) /\\ forall m. m < n ==> ~P(m))
       #|  m:num
       #|  p = SUC m
       #|  p:num
@@ -887,43 +887,43 @@ test "arith matches arith.ml" {
       #|  (a /\\ b ==> c /\\ a) <=> (a /\\ b ==> c)
       #|  m:num
       #|  a:num
-      #|  !P. (?x. P x) /\\ (?M. !x. P x ==> x <= M) <=>\n       ?m. P m /\\ (!x. P x ==> x <= m)
+      #|  forall P. (?x. P x) /\\ (?M. forall x. P x ==> x <= M) <=>\n       ?m. P m /\\ (forall x. P x ==> x <= m)
       #|  m:num
-      #|  (!m n:num. m <= n ==> R m n) <=> (!m d. R m (m + d))
-      #|  !P. (!m:num. P m m) /\\\n       (!m n. m <= n /\\ P m n ==> P m (SUC n))\n       ==> (!m n. m <= n ==> P m n)
+      #|  (forall m n:num. m <= n ==> R m n) <=> (forall m d. R m (m + d))
+      #|  forall P. (forall m:num. P m m) /\\\n       (forall m n. m <= n /\\ P m n ==> P m (SUC n))\n       ==> (forall m n. m <= n ==> P m n)
       #|  ~(~p /\\ q) <=> q ==> p
       #|  ~p ==> q <=> ~q ==> p
       #|  q /\\ ~r ==> (p /\\ q <=> r) ==> ~p
-      #|  (!x. P x) <=> ~(?x. ~P x)
-      #|  !(P:num->bool) m.\n        (!n. m <= n ==> P n) /\\\n        (!n. n < m /\\ P(n + 1) ==> P n)\n        ==> !n. P n
-      #|  (EVEN 0 <=> T) /\\\n   (!n. EVEN (SUC n) <=> ~(EVEN n))
-      #|  (ODD 0 <=> F) /\\\n   (!n. ODD (SUC n) <=> ~(ODD n))
-      #|  !n. ~(EVEN n) <=> ODD n
-      #|  !n. ~(ODD n) <=> EVEN n
-      #|  !n. EVEN n \\/ ODD n
+      #|  (forall x. P x) <=> ~(?x. ~P x)
+      #|  forall(P:num->bool) m.\n        (forall n. m <= n ==> P n) /\\\n        (forall n. n < m /\\ P(n + 1) ==> P n)\n        ==> forall n. P n
+      #|  (EVEN 0 <=> T) /\\\n   (forall n. EVEN (SUC n) <=> ~(EVEN n))
+      #|  (ODD 0 <=> F) /\\\n   (forall n. ODD (SUC n) <=> ~(ODD n))
+      #|  forall n. ~(EVEN n) <=> ODD n
+      #|  forall n. ~(ODD n) <=> EVEN n
+      #|  forall n. EVEN n \\/ ODD n
       #|  ~(p /\\ ~p)
-      #|  !n. ~(EVEN n /\\ ODD n)
+      #|  forall n. ~(EVEN n /\\ ODD n)
       #|  p:num
       #|  n:num
       #|  p:num
-      #|  !m n. EVEN(m + n) <=> (EVEN m <=> EVEN n)
+      #|  forall m n. EVEN(m + n) <=> (EVEN m <=> EVEN n)
       #|  p:num
       #|  n:num
       #|  p:num
-      #|  !m n. EVEN(m * n) <=> EVEN(m) \\/ EVEN(n)
-      #|  !m n. EVEN(m EXP n) <=> EVEN(m) /\\ ~(n = 0)
-      #|  !m n. ODD(m + n) <=> ~(ODD m <=> ODD n)
-      #|  !m n. ODD(m * n) <=> ODD(m) /\\ ODD(n)
-      #|  !m n. ODD(m EXP n) <=> ODD(m) \\/ (n = 0)
-      #|  !n. EVEN(2 * n)
-      #|  !n. ODD(SUC(2 * n))
+      #|  forall m n. EVEN(m * n) <=> EVEN(m) \\/ EVEN(n)
+      #|  forall m n. EVEN(m EXP n) <=> EVEN(m) /\\ ~(n = 0)
+      #|  forall m n. ODD(m + n) <=> ~(ODD m <=> ODD n)
+      #|  forall m n. ODD(m * n) <=> ODD(m) /\\ ODD(n)
+      #|  forall m n. ODD(m EXP n) <=> ODD(m) \\/ (n = 0)
+      #|  forall n. EVEN(2 * n)
+      #|  forall n. ODD(SUC(2 * n))
       #|  m:num
       #|  SUC m
       #|  m:num
       #|  0
-      #|  !n. (EVEN n ==> ?m. n = 2 * m) /\\\n       (~EVEN n ==> ?m. n = SUC(2 * m))
-      #|  !n. EVEN n <=> ?m. n = 2 * m
-      #|  !n. ODD n <=> ?m. n = SUC(2 * m)
+      #|  forall n. (EVEN n ==> ?m. n = 2 * m) /\\\n       (~EVEN n ==> ?m. n = SUC(2 * m))
+      #|  forall n. EVEN n <=> ?m. n = 2 * m
+      #|  forall n. ODD n <=> ?m. n = SUC(2 * m)
       #|  SUC k
       #|  k:num
       #|  p:num
@@ -932,41 +932,41 @@ test "arith matches arith.ml" {
       #|  m:num
       #|  n:num
       #|  n:num
-      #|  !n. (?k m. ODD m /\\ (n = 2 EXP k * m)) <=> ~(n = 0)
-      #|  (!m. m - 0 = m) /\\\n  (!m n. m - (SUC n) = PRE(m - n))
-      #|  !m. (0 - m = 0) /\\ (m - 0 = m)
-      #|  !m n. PRE(SUC m - n) = m - n
-      #|  !m n. SUC m - SUC n = m - n
-      #|  !n. n - n = 0
-      #|  !m n. (m + n) - n = m
-      #|  !m n. (m + n) - m = n
-      #|  !m n. (m - n = 0) <=> m <= n
-      #|  !m n. m - (m + n) = 0
-      #|  !m n. n - (m + n) = 0
-      #|  !m n. n <= m ==> ((m - n) + n = m)
-      #|  !m n p. (m + n) - (m + p) = n - p
-      #|  !m n p. (m + p) - (n + p) = m - n
+      #|  forall n. (?k m. ODD m /\\ (n = 2 EXP k * m)) <=> ~(n = 0)
+      #|  (forall m. m - 0 = m) /\\\n  (forall m n. m - (SUC n) = PRE(m - n))
+      #|  forall m. (0 - m = 0) /\\ (m - 0 = m)
+      #|  forall m n. PRE(SUC m - n) = m - n
+      #|  forall m n. SUC m - SUC n = m - n
+      #|  forall n. n - n = 0
+      #|  forall m n. (m + n) - n = m
+      #|  forall m n. (m + n) - m = n
+      #|  forall m n. (m - n = 0) <=> m <= n
+      #|  forall m n. m - (m + n) = 0
+      #|  forall m n. n - (m + n) = 0
+      #|  forall m n. n <= m ==> ((m - n) + n = m)
+      #|  forall m n p. (m + n) - (m + p) = n - p
+      #|  forall m n p. (m + p) - (n + p) = m - n
       #|  p:num
       #|  n:num
-      #|  !m n p. m * (n - p) = m * n - m * p
-      #|  !m n p. (m - n) * p = m * p - n * p
-      #|  !n. SUC n - 1 = n
+      #|  forall m n p. m * (n - p) = m * n - m * p
+      #|  forall m n p. (m - n) * p = m * p - n * p
+      #|  forall n. SUC n - 1 = n
       #|  EVEN
       #|  n:num
       #|  m:num
       #|  m <= n:num
-      #|  !m n. EVEN(m - n) <=> m <= n \\/ (EVEN(m) <=> EVEN(n))
-      #|  !m n. ODD(m - n) <=> n < m /\\ ~(ODD m <=> ODD n)
-      #|  (FACT 0 = 1) /\\\n   (!n. FACT (SUC n) = (SUC n) * FACT(n))
-      #|  !n. 0 < FACT n
-      #|  !n. 1 <= FACT n
-      #|  !n. ~(FACT n = 0)
+      #|  forall m n. EVEN(m - n) <=> m <= n \\/ (EVEN(m) <=> EVEN(n))
+      #|  forall m n. ODD(m - n) <=> n < m /\\ ~(ODD m <=> ODD n)
+      #|  (FACT 0 = 1) /\\\n   (forall n. FACT (SUC n) = (SUC n) * FACT(n))
+      #|  forall n. 0 < FACT n
+      #|  forall n. 1 <= FACT n
+      #|  forall n. ~(FACT n = 0)
       #|  FACT(m + d)
       #|  d:num
       #|  d:num
       #|  d:num
-      #|  !m n. m <= n ==> FACT m <= FACT n
-      #|  !n x. 0 < x EXP n <=> ~(x = 0) \\/ (n = 0)
+      #|  forall m n. m <= n ==> FACT m <= FACT n
+      #|  forall n x. 0 < x EXP n <=> ~(x = 0) \\/ (n = 0)
       #|  ~(x = 0)
       #|  x * 1
       #|  x EXP (m + SUC d)
@@ -984,15 +984,15 @@ test "arith matches arith.ml" {
       #|  n:num
       #|  n:num
       #|  x = 0
-      #|  !x m n. x EXP m < x EXP n <=> 2 <= x /\\ m < n \\/\n                                 (x = 0) /\\ ~(m = 0) /\\ (n = 0)
-      #|  !x m n. x EXP m <= x EXP n <=>\n           if x = 0 then (m = 0) ==> (n = 0)\n           else (x = 1) \\/ m <= n
-      #|  !x m n. x EXP m = x EXP n <=>\n           if x = 0 then (m = 0 <=> n = 0)\n           else (x = 1) \\/ m = n
-      #|  !x y n. x <= y ==> x EXP n <= y EXP n
+      #|  forall x m n. x EXP m < x EXP n <=> 2 <= x /\\ m < n \\/\n                                 (x = 0) /\\ ~(m = 0) /\\ (n = 0)
+      #|  forall x m n. x EXP m <= x EXP n <=>\n           if x = 0 then (m = 0) ==> (n = 0)\n           else (x = 1) \\/ m <= n
+      #|  forall x m n. x EXP m = x EXP n <=>\n           if x = 0 then (m = 0 <=> n = 0)\n           else (x = 1) \\/ m = n
+      #|  forall x y n. x <= y ==> x EXP n <= y EXP n
       #|  x * y EXP n
-      #|  !x y n. x < y /\\ ~(n = 0) ==> x EXP n < y EXP n
-      #|  !x y n. x EXP n <= y EXP n <=> x <= y \\/ n = 0
-      #|  !x y n. x EXP n < y EXP n <=> x < y /\\ ~(n = 0)
-      #|  !x y n. x EXP n = y EXP n <=> x = y \\/ n = 0
+      #|  forall x y n. x < y /\\ ~(n = 0) ==> x EXP n < y EXP n
+      #|  forall x y n. x EXP n <= y EXP n <=> x <= y \\/ n = 0
+      #|  forall x y n. x EXP n < y EXP n <=> x < y /\\ ~(n = 0)
+      #|  forall x y n. x EXP n = y EXP n <=> x = y \\/ n = 0
       #|  q + 1
       #|  d:num
       #|  d:num
@@ -1001,19 +1001,19 @@ test "arith matches arith.ml" {
       #|  0
       #|  m:num
       #|  \\r. ?q. m = q * n + r
-      #|  !m n. ~(n = 0) ==> ?q r. (m = q * n + r) /\\ r < n
+      #|  forall m n. ~(n = 0) ==> ?q r. (m = q * n + r) /\\ r < n
       #|  r:num
       #|  q:num
       #|  n = 0
-      #|  !m n. ?q r. if n = 0 then q = 0 /\\ r = m\n               else m = q * n + r /\\ r < n
-      #|  !m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\\ m MOD n < n
-      #|  !n. n DIV 0 = 0
-      #|  !n. n MOD 0 = n
+      #|  forall m n. ?q r. if n = 0 then q = 0 /\\ r = m\n               else m = q * n + r /\\ r < n
+      #|  forall m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\\ m MOD n < n
+      #|  forall n. n DIV 0 = 0
+      #|  forall n. n MOD 0 = n
       #|  n = 0
-      #|  (!m n. m DIV n * n + m MOD n = m) /\\\n   (!m n. n * m DIV n + m MOD n = m)
-      #|  !p m n. m DIV p = n DIV p /\\ m MOD p = n MOD p <=> m = n
-      #|  !m n. m MOD n < n <=> ~(n = 0)
-      #|  !m n. m MOD n < n <=> 0 < n
+      #|  (forall m n. m DIV n * n + m MOD n = m) /\\\n   (forall m n. n * m DIV n + m MOD n = m)
+      #|  forall p m n. m DIV p = n DIV p /\\ m MOD p = n MOD p <=> m = n
+      #|  forall m n. m MOD n < n <=> ~(n = 0)
+      #|  forall m n. m MOD n < n <=> 0 < n
       #|  n = 0
       #|  r2 < n
       #|  m = q1 * n + r2
@@ -1026,134 +1026,134 @@ test "arith matches arith.ml" {
       #|  q1:num
       #|  m = q2 * n + r2
       #|  r1:num = r2
-      #|  !m n q1 r1 q2 r2. ((m = q1 * n + r1) /\\ r1 < n) /\\\n                     ((m = q2 * n + r2) /\\ r2 < n)\n                     ==> (q1 = q2) /\\ (r1 = r2)
+      #|  forall m n q1 r1 q2 r2. ((m = q1 * n + r1) /\\ r1 < n) /\\\n                     ((m = q2 * n + r2) /\\ r2 < n)\n                     ==> (q1 = q2) /\\ (r1 = r2)
       #|  r < n
       #|  n:num
       #|  m:num
-      #|  !m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q) /\\ (m MOD n = r)
-      #|  !m n q r. (m = q * n + r) /\\ r < n ==> (m MOD n = r)
-      #|  !m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q)
+      #|  forall m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q) /\\ (m MOD n = r)
+      #|  forall m n q r. (m = q * n + r) /\\ r < n ==> (m MOD n = r)
+      #|  forall m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q)
       #|  n = 0
-      #|  (!n. 0 DIV n = 0) /\\ (!n. 0 MOD n = 0)
+      #|  (forall n. 0 DIV n = 0) /\\ (forall n. 0 MOD n = 0)
       #|  m = 0
-      #|  (!m n. ~(m = 0) ==> (m * n) DIV m = n) /\\\n   (!m n. (m * n) MOD m = 0)
+      #|  (forall m n. ~(m = 0) ==> (m * n) DIV m = n) /\\\n   (forall m n. (m * n) MOD m = 0)
       #|  0
-      #|  !m n. m < n ==> m MOD n = m
-      #|  !m n. m MOD n = m <=> n = 0 \\/ m < n
+      #|  forall m n. m < n ==> m MOD n = m
+      #|  forall m n. m MOD n = m <=> n = 0 \\/ m < n
       #|  1
-      #|  !n p. n < 2 * p ==> n MOD p = if n < p then n else n - p
-      #|  !m n p.\n        m < p /\\ n < p\n        ==> (m + n) MOD p = if m + n < p then m + n else (m + n) - p
+      #|  forall n p. n < 2 * p ==> n MOD p = if n < p then n else n - p
+      #|  forall m n p.\n        m < p /\\ n < p\n        ==> (m + n) MOD p = if m + n < p then m + n else (m + n) - p
       #|  n:num
       #|  q + n DIV p
       #|  p = 0
-      #|  !m n p q. m = n + q * p ==> m MOD p = n MOD p
+      #|  forall m n p q. m = n + q * p ==> m MOD p = n MOD p
       #|  n:num
       #|  n:num
       #|  ~(n = 0)
       #|  n = 0
-      #|  !m n. m DIV n <= m
+      #|  forall m n. m DIV n <= m
       #|  m:num
       #|  n = 0
-      #|  !m n. n * (m DIV n) <= m
+      #|  forall m n. n * (m DIV n) <= m
       #|  n - m:num < m <=> (n - m) + m < m + m
       #|  1
       #|  n MOD m = n - m
       #|  m + n MOD m
       #|  2 * m
       #|  2 * m <= n
-      #|  !m n. 0 < m /\\ m <= n ==> 2 * n MOD m <= n
-      #|  (!n. n DIV 1 = n) /\\ (!n. n MOD 1 = 0)
+      #|  forall m n. 0 < m /\\ m <= n ==> 2 * n MOD m <= n
+      #|  (forall n. n DIV 1 = n) /\\ (forall n. n MOD 1 = 0)
       #|  m:num
-      #|  !m n. m < n ==> m DIV n = 0
+      #|  forall m n. m < n ==> m DIV n = 0
       #|  n * p:num
       #|  m:num
       #|  m DIV (n * p) * p
       #|  n = 0
       #|  p = 0
-      #|  !m n p. (m MOD (n * p)) MOD n = m MOD n
+      #|  forall m n p. (m MOD (n * p)) MOD n = m MOD n
       #|  1
       #|  n:num
       #|  m:num
       #|  n = 0
-      #|  !m n. (m MOD n) MOD n = m MOD n
-      #|  !m n p. ~(n = 0) /\\ n <= p ==> (m MOD n) MOD p = m MOD n
-      #|  !m n. EVEN n ==> m MOD n MOD 2 = m MOD 2
+      #|  forall m n. (m MOD n) MOD n = m MOD n
+      #|  forall m n p. ~(n = 0) /\\ n <= p ==> (m MOD n) MOD p = m MOD n
+      #|  forall m n. EVEN n ==> m MOD n MOD 2 = m MOD 2
       #|  a * b * c:num = b * a * c
       #|  m * (n MOD p)
       #|  p = 0
-      #|  !m n p. ~(m = 0) ==> ((m * n) DIV (m * p) = n DIV p)
+      #|  forall m n p. ~(m = 0) ==> ((m * n) DIV (m * p) = n DIV p)
       #|  a * b * c:num = b * a * c
       #|  n DIV p
       #|  m = 0
       #|  p = 0
-      #|  !m n p. (m * n) MOD (m * p) = m * n MOD p
+      #|  forall m n p. (m * n) MOD (m * p) = m * n MOD p
       #|  m = (m DIV n) * n + m MOD n
       #|  m DIV n
-      #|  !m n. (?q. m = n * q) <=> if n = 0 then (m = 0) else (m MOD n = 0)
+      #|  forall m n. (?q. m = n * q) <=> if n = 0 then (m = 0) else (m MOD n = 0)
       #|  (b DIV a) * a + b MOD a
       #|  a * n < a * (b DIV a + 1)
       #|  a * (b DIV a)
-      #|  !a b n. ~(a = 0) ==> (n <= b DIV a <=> a * n <= b)
-      #|  !a b n. ~(a = 0) ==> (b DIV a < n <=> b < a * n)
-      #|  !a b n. ~(a = 0) ==> (b DIV a <= n <=> b < a * (n + 1))
-      #|  !a b n. ~(a = 0) ==> (n < b DIV a <=> a * (n + 1) <= b)
-      #|  !a b n. ~(a = 0) /\\ b <= a * n ==> b DIV a <= n
-      #|  (!k:num. k <= a ==> k <= b) ==> a <= b
+      #|  forall a b n. ~(a = 0) ==> (n <= b DIV a <=> a * n <= b)
+      #|  forall a b n. ~(a = 0) ==> (b DIV a < n <=> b < a * n)
+      #|  forall a b n. ~(a = 0) ==> (b DIV a <= n <=> b < a * (n + 1))
+      #|  forall a b n. ~(a = 0) ==> (n < b DIV a <=> a * (n + 1) <= b)
+      #|  forall a b n. ~(a = 0) /\\ b <= a * n ==> b DIV a <= n
+      #|  (forall k:num. k <= a ==> k <= b) ==> a <= b
       #|  p = 0
-      #|  !m n p. m <= n ==> m DIV p <= n DIV p
-      #|  (!k:num. k <= a ==> k + 1 <= b) ==> a < b
-      #|  !m n p. ~(p = 0) /\\ m + p <= n ==> m DIV p < n DIV p
+      #|  forall m n p. m <= n ==> m DIV p <= n DIV p
+      #|  (forall k:num. k <= a ==> k + 1 <= b) ==> a < b
+      #|  forall m n p. ~(p = 0) /\\ m + p <= n ==> m DIV p < n DIV p
       #|  m:num
       #|  m:num
-      #|  !m n. ~(n = 0) ==> ((m DIV n = 0) <=> m < n)
-      #|  !m n. ~(n = 0) ==> (m MOD n) DIV n = 0
+      #|  forall m n. ~(n = 0) ==> ((m DIV n = 0) <=> m < n)
+      #|  forall m n. ~(n = 0) ==> (m MOD n) DIV n = 0
       #|  m:num
       #|  n = 0
-      #|  !m n. (m MOD n = 0) <=> ?q. m = q * n
+      #|  forall m n. (m MOD n = 0) <=> ?q. m = q * n
       #|  n = 0
       #|  n = 1
       #|  m = 0
-      #|  !m n. m DIV n = m <=> m = 0 \\/ n = 1
-      #|  !n. n MOD n = 0
-      #|  !n. EVEN(n) <=> n MOD 2 = 0
+      #|  forall m n. m DIV n = m <=> m = 0 \\/ n = 1
+      #|  forall n. n MOD n = 0
+      #|  forall n. EVEN(n) <=> n MOD 2 = 0
       #|  n:num
       #|  n MOD 2
       #|  n MOD 2 < 2
-      #|  !n. ODD(n) <=> n MOD 2 = 1
-      #|  !n. n MOD 2 = if EVEN n then 0 else 1
-      #|  !m n. EVEN n ==> (EVEN(m MOD n) <=> EVEN m)
-      #|  !m n. EVEN n ==> (ODD(m MOD n) <=> ODD m)
-      #|  (!n. (2 * n) DIV 2 = n) /\\ (!n. (n * 2) DIV 2 = n)
-      #|  (!n. EVEN n ==> 2 * n DIV 2 = n) /\\\n   (!n. EVEN n ==> n DIV 2 * 2 = n)
+      #|  forall n. ODD(n) <=> n MOD 2 = 1
+      #|  forall n. n MOD 2 = if EVEN n then 0 else 1
+      #|  forall m n. EVEN n ==> (EVEN(m MOD n) <=> EVEN m)
+      #|  forall m n. EVEN n ==> (ODD(m MOD n) <=> ODD m)
+      #|  (forall n. (2 * n) DIV 2 = n) /\\ (forall n. (n * 2) DIV 2 = n)
+      #|  (forall n. EVEN n ==> 2 * n DIV 2 = n) /\\\n   (forall n. EVEN n ==> n DIV 2 * 2 = n)
       #|  m * p DIV n
       #|  n = 0
-      #|  !m n p. (m * (p MOD n)) MOD n = (m * p) MOD n
-      #|  !m n p. ((m MOD n) * p) MOD n = (m * p) MOD n
-      #|  !m n p. ((m MOD n) * (p MOD n)) MOD n = (m * p) MOD n
+      #|  forall m n p. (m * (p MOD n)) MOD n = (m * p) MOD n
+      #|  forall m n p. ((m MOD n) * p) MOD n = (m * p) MOD n
+      #|  forall m n p. ((m MOD n) * (p MOD n)) MOD n = (m * p) MOD n
       #|  (m * ((m MOD n) EXP p) MOD n) MOD n
       #|  p:num
       #|  p:num
       #|  n = 0
-      #|  !m n p. ((m MOD n) EXP p) MOD n = (m EXP p) MOD n
+      #|  forall m n p. ((m MOD n) EXP p) MOD n = (m EXP p) MOD n
       #|  m + p DIV n
       #|  n = 0
       #|  (p ==> q) /\\ p ==> p /\\ q
-      #|  (!m n p. (m * n + p) MOD n = p MOD n) /\\\n   (!m n p. (n * m + p) MOD n = p MOD n) /\\\n   (!m n p. (p + m * n) MOD n = p MOD n) /\\\n   (!m n p. (p + n * m) MOD n = p MOD n)
+      #|  (forall m n p. (m * n + p) MOD n = p MOD n) /\\\n   (forall m n p. (n * m + p) MOD n = p MOD n) /\\\n   (forall m n p. (p + m * n) MOD n = p MOD n) /\\\n   (forall m n p. (p + n * m) MOD n = p MOD n)
       #|  b MOD n
       #|  (p ==> q) /\\ p ==> p /\\ q
-      #|  (!a b n. ~(n = 0) ==> (a * n + b) DIV n = a + b DIV n) /\\\n   (!a b n. ~(n = 0) ==> (n * a + b) DIV n = a + b DIV n) /\\\n   (!a b n. ~(n = 0) ==> (b + a * n) DIV n = b DIV n + a) /\\\n   (!a b n. ~(n = 0) ==> (b + n * a) DIV n = b DIV n + a)
+      #|  (forall a b n. ~(n = 0) ==> (a * n + b) DIV n = a + b DIV n) /\\\n   (forall a b n. ~(n = 0) ==> (n * a + b) DIV n = a + b DIV n) /\\\n   (forall a b n. ~(n = 0) ==> (b + a * n) DIV n = b DIV n + a) /\\\n   (forall a b n. ~(n = 0) ==> (b + n * a) DIV n = b DIV n + a)
       #|  (a + b) + (c + d) = (c + a) + (d + b)
       #|  a DIV n + b DIV n
       #|  n = 0
-      #|  !a b n. (a MOD n + b MOD n) MOD n = (a + b) MOD n
+      #|  forall a b n. (a MOD n + b MOD n) MOD n = (a + b) MOD n
       #|  (a + b) + c + d = (a + c) + (b + d)
-      #|  !a b n. ~(n = 0)\n           ==> (((a + b) MOD n = a MOD n + b MOD n) <=>\n                ((a + b) DIV n = a DIV n + b DIV n))
+      #|  forall a b n. ~(n = 0)\n           ==> (((a + b) MOD n = a MOD n + b MOD n) <=>\n                ((a + b) DIV n = a DIV n + b DIV n))
       #|  b:num
       #|  a:num
       #|  a + b:num
       #|  (+)
-      #|  !n x y. (x + y) MOD n = x MOD n + y MOD n <=>\n           n = 0 \\/ x MOD n + y MOD n < n
-      #|  !n x y. (x + y) DIV n = x DIV n + y DIV n <=>\n           n = 0 \\/ x MOD n + y MOD n < n
+      #|  forall n x y. (x + y) MOD n = x MOD n + y MOD n <=>\n           n = 0 \\/ x MOD n + y MOD n < n
+      #|  forall n x y. (x + y) DIV n = x DIV n + y DIV n <=>\n           n = 0 \\/ x MOD n + y MOD n < n
       #|  \\/
       #|  \\/
       #|  \\/
@@ -1410,49 +1410,49 @@ test "arith matches arith.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  !n x y. x MOD n + y MOD n < n ==> (x + y) DIV n = x DIV n + y DIV n
-      #|  !n x y. x MOD n + y MOD n < n ==> (x + y) MOD n = x MOD n + y MOD n
+      #|  forall n x y. x MOD n + y MOD n < n ==> (x + y) DIV n = x DIV n + y DIV n
+      #|  forall n x y. x MOD n + y MOD n < n ==> (x + y) MOD n = x MOD n + y MOD n
       #|  n:num
       #|  n:num
       #|  0
-      #|  !n. ~(n = 0) ==> (n DIV n = 1)
+      #|  forall n. ~(n = 0) ==> (n DIV n = 1)
       #|  n = 0
-      #|  !m n. m MOD n <= m
+      #|  forall m n. m MOD n <= m
       #|  m:num
       #|  n:num
       #|  m * n DIV m
-      #|  !m n p. ~(p = 0) /\\ p <= m ==> n DIV m <= n DIV p
+      #|  forall m n p. ~(p = 0) /\\ p <= m ==> n DIV m <= n DIV p
       #|  b * d * k <= b * c ==> (b * k) * d < (a + 1) * d
       #|  k:num
-      #|  (!k:num. k <= a ==> k <= b) ==> a <= b
+      #|  (forall k:num. k <= a ==> k <= b) ==> a <= b
       #|  d = 0
-      #|  !a b c d. ~(b = 0) /\\ b * c < (a + 1) * d ==> c DIV d <= a DIV b
+      #|  forall a b c d. ~(b = 0) /\\ b * c < (a + 1) * d ==> c DIV d <= a DIV b
       #|  d = 0
       #|  b = 0
-      #|  !a b c d.\n        b * c < (a + 1) * d /\\ a * d < (c + 1) * b ==> (a DIV b = c DIV d)
+      #|  forall a b c d.\n        b * c < (a + 1) * d /\\ a * d < (c + 1) * b ==> (a DIV b = c DIV d)
       #|  n:num
       #|  p = 0
-      #|  !m n p. m * (n DIV p) <= (m * n) DIV p
-      #|  (!k. k <= m <=> k <= n) ==> m = n
+      #|  forall m n p. m * (n DIV p) <= (m * n) DIV p
+      #|  (forall k. k <= m <=> k <= n) ==> m = n
       #|  n = 0
       #|  p = 0
-      #|  !m n p. (m DIV n) DIV p = m DIV (n * p)
+      #|  forall m n p. (m DIV n) DIV p = m DIV (n * p)
       #|  n * p:num
       #|  m:num
       #|  p:num
       #|  m DIV n
       #|  k + p * ((m DIV n) DIV p) <= (m DIV n)
       #|  k:num
-      #|  (!k. k <= m <=> k <= n) ==> m = n
+      #|  (forall k. k <= m <=> k <= n) ==> m = n
       #|  n = 0
       #|  p = 0
-      #|  !m n p. (m DIV n) MOD p = (m MOD (n * p)) DIV n
+      #|  forall m n p. (m DIV n) MOD p = (m MOD (n * p)) DIV n
       #|  d * n * p = n * (d * p)
       #|  m DIV n DIV p * n * p
       #|  (?a. a + x = a + y) ==> x = y
       #|  p = 0
       #|  n = 0
-      #|  !m n p. m MOD (n * p) = n * (m DIV n) MOD p + m MOD n
+      #|  forall m n p. m MOD (n * p) = n * (m DIV n) MOD p + m MOD n
       #|  \\/
       #|  ~
       #|  \\/
@@ -1470,30 +1470,30 @@ test "arith matches arith.ml" {
       #|  m:num <= n
       #|  m = 0
       #|  p = 0
-      #|  !x p m n. x MOD (p EXP m) MOD (p EXP n) = x MOD (p EXP (MIN m n))
+      #|  forall x p m n. x MOD (p EXP m) MOD (p EXP n) = x MOD (p EXP (MIN m n))
       #|  m = 1
       #|  p:num <= n
       #|  m = 0
-      #|  (!m n p. ~(m = 0)\n            ==> (m EXP n) DIV (m EXP p) =\n                if p <= n then m EXP (n - p)\n                else if m = 1 then 1 else 0) /\\\n   (!m n p. ~(m = 0)\n            ==> (m EXP n) MOD (m EXP p) =\n                if p <= n \\/ m = 1 then 0 else m EXP n)
-      #|  !P n. (!a. a < n ==> P a) <=> n = 0 \\/ !a. P(a MOD n)
-      #|  !P n. ~(n = 0) ==> ((!a. P(a MOD n)) <=> (!a. a < n ==> P a))
-      #|  !P n. (?a. a < n /\\ P a) <=> ~(n = 0) /\\ ?a. P(a MOD n)
-      #|  !P n. ~(n = 0) ==> ((?a. P(a MOD n)) <=> (?a. a < n /\\ P a))
+      #|  (forall m n p. ~(m = 0)\n            ==> (m EXP n) DIV (m EXP p) =\n                if p <= n then m EXP (n - p)\n                else if m = 1 then 1 else 0) /\\\n   (forall m n p. ~(m = 0)\n            ==> (m EXP n) MOD (m EXP p) =\n                if p <= n \\/ m = 1 then 0 else m EXP n)
+      #|  forall P n. (forall a. a < n ==> P a) <=> n = 0 \\/ forall a. P(a MOD n)
+      #|  forall P n. ~(n = 0) ==> ((forall a. P(a MOD n)) <=> (forall a. a < n ==> P a))
+      #|  forall P n. (?a. a < n /\\ P a) <=> ~(n = 0) /\\ ?a. P(a MOD n)
+      #|  forall P n. ~(n = 0) ==> ((?a. P(a MOD n)) <=> (?a. a < n /\\ P a))
       #|  n:num
       #|  n:num
-      #|  P(PRE n) <=> !m. n = SUC m \\/ m = 0 /\\ n = 0 ==> P m
+      #|  P(PRE n) <=> forall m. n = SUC m \\/ m = 0 /\\ n = 0 ==> P m
       #|  P:num->bool
       #|  \\x:num. ~P x
       #|  P(PRE n) <=> ?m. (n = SUC m \\/ m = 0 /\\ n = 0) /\\ P m
       #|  e:num
       #|  b:num
       #|  a:num
-      #|  P(a - b) <=> !d. a = b + d \\/ a < b /\\ d = 0 ==> P d
+      #|  P(a - b) <=> forall d. a = b + d \\/ a < b /\\ d = 0 ==> P d
       #|  P:num->bool
       #|  \\x:num. ~P x
       #|  P(a - b) <=> ?d. (a = b + d \\/ a < b /\\ d = 0) /\\ P d
       #|  n = 0
-      #|  P (m DIV n) (m MOD n) <=>\n        !q r. n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n ==> P q r
+      #|  P (m DIV n) (m MOD n) <=>\n        forall q r. n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n ==> P q r
       #|  P:num->num->bool
       #|  \\x:num y:num. ~P x y
       #|  P (m DIV n) (m MOD n) <=>\n        ?q r. (n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n) /\\ P q r
@@ -1515,301 +1515,301 @@ test "arith matches arith.ml" {
       #|  F
       #|  (+)
       #|  (=) :num->num->bool
-      #|  (minimal) (P:num->bool) = @n. P n /\\ !m. m < n ==> ~(P m)
-      #|  !P. (?n. P n) <=> P((minimal) P) /\\ (!m. m < (minimal) P ==> ~(P m))
-      #|  !P n. P n /\\ (!m. m < n ==> ~P m) ==> (minimal) P = n
-      #|  !P n.\n        (?r. P r) ==> (n <= (minimal) P <=> !i. P i ==> n <= i)
-      #|  !P n. (?r. P r) ==> ((minimal) P <= n <=> ?i. i <= n /\\ P i)
-      #|  !P n. P n ==> (minimal) P <= n
-      #|  !P n. (?r. P r) /\\ (!m. m < n ==> ~P m) ==> n <= (minimal) P
-      #|  (!p:num. p <= m ==> p <= n) ==> m <= n
+      #|  (minimal) (P:num->bool) = @n. P n /\\ forall m. m < n ==> ~(P m)
+      #|  forall P. (?n. P n) <=> P((minimal) P) /\\ (forall m. m < (minimal) P ==> ~(P m))
+      #|  forall P n. P n /\\ (forall m. m < n ==> ~P m) ==> (minimal) P = n
+      #|  forall P n.\n        (?r. P r) ==> (n <= (minimal) P <=> forall i. P i ==> n <= i)
+      #|  forall P n. (?r. P r) ==> ((minimal) P <= n <=> ?i. i <= n /\\ P i)
+      #|  forall P n. P n ==> (minimal) P <= n
+      #|  forall P n. (?r. P r) /\\ (forall m. m < n ==> ~P m) ==> n <= (minimal) P
+      #|  (forall p:num. p <= m ==> p <= n) ==> m <= n
       #|  ?n:num. Q n
-      #|  !P Q. (?n. P n) /\\ (!n. P n ==> Q n) ==> (minimal) Q <= (minimal) P
-      #|  !R. (!x y z. R x y /\\ R y z ==> R x z)\n         ==> ((!m n. m < n ==> R m n) <=> (!n. R n (SUC n)))
+      #|  forall P Q. (?n. P n) /\\ (forall n. P n ==> Q n) ==> (minimal) Q <= (minimal) P
+      #|  forall R. (forall x y z. R x y /\\ R y z ==> R x z)\n         ==> ((forall m n. m < n ==> R m n) <=> (forall n. R n (SUC n)))
       #|  (a ==> (c <=> b)) ==> a /\\ b ==> c
-      #|  !R. (!x y z. R x y /\\ R y z ==> R x z) /\\ (!n. R n (SUC n))\n       ==> !m n. m < n ==> R m n
-      #|  !R. (!x. R x x) /\\ (!x y z. R x y /\\ R y z ==> R x z)\n       ==> ((!m n. m <= n ==> R m n) <=> (!n. R n (SUC n)))
+      #|  forall R. (forall x y z. R x y /\\ R y z ==> R x z) /\\ (forall n. R n (SUC n))\n       ==> forall m n. m < n ==> R m n
+      #|  forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z)\n       ==> ((forall m n. m <= n ==> R m n) <=> (forall n. R n (SUC n)))
       #|  (a /\\ a' ==> (c <=> b)) ==> a /\\ a' /\\ b ==> c
-      #|  !R. (!x. R x x) /\\ (!x y z. R x y /\\ R y z ==> R x z) /\\\n       (!n. R n (SUC n))\n       ==> !m n. m <= n ==> R m n
-      #|  (!n. P n) <=> P 0 /\\ !n. P(SUC n)
-      #|  f 0 = (a:A) /\\ (!n. f(SUC n) = @y. P (SUC n) y /\\ R n (f n) y)
-      #|  !P R a:A.\n        P 0 a /\\ (!n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. f 0 = a /\\ (!n. P n (f n)) /\\ (!n. R n (f n) (f(SUC n)))
-      #|  !P R:num->A->A->bool.\n        (?a. P 0 a) /\\ (!n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. (!n. P n (f n)) /\\ (!n. R n (f n) (f(SUC n)))
+      #|  forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z) /\\\n       (forall n. R n (SUC n))\n       ==> forall m n. m <= n ==> R m n
+      #|  (forall n. P n) <=> P 0 /\\ forall n. P(SUC n)
+      #|  f 0 = (a:A) /\\ (forall n. f(SUC n) = @y. P (SUC n) y /\\ R n (f n) y)
+      #|  forall P R a:A.\n        P 0 a /\\ (forall n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. f 0 = a /\\ (forall n. P n (f n)) /\\ (forall n. R n (f n) (f(SUC n)))
+      #|  forall P R:num->A->A->bool.\n        (?a. P 0 a) /\\ (forall n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. (forall n. P n (f n)) /\\ (forall n. R n (f n) (f(SUC n)))
       #|  m = n <=> NUMERAL m = n
       #|  0
       #|  (m = n <=> BIT0 m = 2 * n) /\\\n           (m = n <=> BIT1 m = 2 * n + 1)
       #|  n:num
       #|  m:num
-      #|PRE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) (#SUC:fun(num,num) n:num))) n:num))))
-      #|ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) n:num)))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))))
-      #|ADD_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))
-      #|ADD_SUC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num)))))))
-      #|ADD_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num)))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))))))
-      #|ADD_SYM =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) n:num) m:num))))))
-      #|ADD_ASSOC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
+      #|PRE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) (#SUC:fun(num,num) n:num))) n:num))))
+      #|ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) n:num)))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))))
+      #|ADD_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))
+      #|ADD_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num)))))))
+      #|ADD_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num)))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))))))
+      #|ADD_SYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) n:num) m:num))))))
+      #|ADD_ASSOC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
       #|ADD_AC =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) n:num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#+:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num)))) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) m:num) p:num)))))
-      #|ADD_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|EQ_ADD_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#=:fun(num,fun(num,bool)) n:num) p:num))))))))
-      #|EQ_ADD_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|EQ_ADD_LCANCEL_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))
-      #|EQ_ADD_RCANCEL_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))))
-      #|BIT0 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#BIT0:fun(num,num) n:num)) ((#+:fun(num,fun(num,num)) n:num) n:num))))
-      #|BIT1 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#BIT1:fun(num,num) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) n:num) n:num)))))
-      #|BIT0_THM =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num))) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) n:num)) (#NUMERAL:fun(num,num) n:num)))))
-      #|BIT1_THM =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) n:num))) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) n:num)) (#NUMERAL:fun(num,num) n:num))))))
+      #|ADD_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|EQ_ADD_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#=:fun(num,fun(num,bool)) n:num) p:num))))))))
+      #|EQ_ADD_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|EQ_ADD_LCANCEL_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))
+      #|EQ_ADD_RCANCEL_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))))
+      #|BIT0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#BIT0:fun(num,num) n:num)) ((#+:fun(num,fun(num,num)) n:num) n:num))))
+      #|BIT1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#BIT1:fun(num,num) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) n:num) n:num)))))
+      #|BIT0_THM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num))) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) n:num)) (#NUMERAL:fun(num,num) n:num)))))
+      #|BIT1_THM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) n:num))) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) n:num)) (#NUMERAL:fun(num,num) n:num))))))
       #|ONE =  |- ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#SUC:fun(num,num) (#NUMERAL:fun(num,num) #_0:num)))
       #|TWO =  |- ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#SUC:fun(num,num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))
-      #|ADD1 =  |- (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
-      #|MULT =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) n:num)))))))
-      #|MULT_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))))
-      #|MULT_SUC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) ((#+:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) m:num) n:num)))))))
-      #|MULT_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) n:num))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) ((#+:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) m:num) n:num))))))))))))
-      #|MULT_SYM =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) n:num) m:num))))))
-      #|LEFT_ADD_DISTRIB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num)))))))))
-      #|RIGHT_ADD_DISTRIB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|MULT_ASSOC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#*:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
+      #|ADD1 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
+      #|MULT =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) n:num)))))))
+      #|MULT_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))))
+      #|MULT_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) ((#+:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) m:num) n:num)))))))
+      #|MULT_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) n:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) ((#+:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) m:num) n:num))))))))))))
+      #|MULT_SYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) n:num) m:num))))))
+      #|LEFT_ADD_DISTRIB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num)))))))))
+      #|RIGHT_ADD_DISTRIB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|MULT_ASSOC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#*:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
       #|MULT_AC =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) n:num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#*:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num)))) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#*:fun(num,fun(num,num)) n:num) ((#*:fun(num,fun(num,num)) m:num) p:num)))))
-      #|MULT_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|EQ_MULT_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) p:num)))))))))
-      #|EQ_MULT_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
-      #|MULT_2 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) ((#+:fun(num,fun(num,num)) n:num) n:num))))
-      #|MULT_EQ_1 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
-      #|EXP =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) ((#*:fun(num,fun(num,num)) m:num) ((#EXP:fun(num,fun(num,num)) m:num) n:num))))))))
-      #|EXP_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))
-      #|EXP_EQ_1 =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|EXP_ZERO =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)))))
-      #|EXP_ADD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num)))))))))
-      #|EXP_ONE =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))
-      #|EXP_1 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
-      #|EXP_2 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#*:fun(num,fun(num,num)) n:num) n:num))))
-      #|MULT_EXP =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num)) ((#EXP:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|EXP_MULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#EXP:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
-      #|EXP_EXP =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) n:num)) ((#EXP:fun(num,fun(num,num)) x:num) ((#*:fun(num,fun(num,num)) m:num) n:num)))))))))
-      #|LE =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|LT =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) #F:bool)))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|GE =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|GT =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|MAX =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MAX:fun(num,fun(num,num)) m:num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) n:num) m:num))))))
-      #|MIN =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MIN:fun(num,fun(num,num)) m:num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) m:num) n:num))))))
-      #|LE_SUC_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|LT_SUC_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|LE_SUC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|LT_SUC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|LE_0 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))
-      #|LT_0 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))))
-      #|LE_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) n:num)))
-      #|LT_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) n:num) n:num))))
-      #|LT_IMP_NE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
-      #|LE_ANTISYM =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|LT_ANTISYM =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num)))))))
-      #|LET_ANTISYM =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num)))))))
-      #|LTE_ANTISYM =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num)))))))
-      #|LE_TRANS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<=:fun(num,fun(num,bool)) m:num) p:num))))))))
-      #|LT_TRANS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
-      #|LET_TRANS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
-      #|LTE_TRANS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
-      #|LE_CASES =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|LT_CASES =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) m:num)) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
-      #|LET_CASES =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|LTE_CASES =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|LE_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
-      #|LT_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|NOT_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|NOT_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) n:num))) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-      #|LT_IMP_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|EQ_IMP_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|LT_NZ =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|LE_1 =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))))
-      #|LE_EXISTS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) d:num)))))))))
-      #|LT_EXISTS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) d:num))))))))))
-      #|LE_ADD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))
-      #|LE_ADDR =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))
-      #|LT_ADD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))))
-      #|LT_ADDR =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num))))))
-      #|LE_ADD_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#<=:fun(num,fun(num,bool)) n:num) p:num))))))))
-      #|LE_ADD_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|LT_ADD_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#<:fun(num,fun(num,bool)) n:num) p:num))))))))
-      #|LT_ADD_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|LE_ADD2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) p:num)) ((#<=:fun(num,fun(num,bool)) n:num) q:num))) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
-      #|LET_ADD2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
-      #|LTE_ADD2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<=:fun(num,fun(num,bool)) n:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
-      #|LT_ADD2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
-      #|LT_MULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) ((#*:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))))))
-      #|LE_MULT2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) p:num) q:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) q:num)))))))))))
-      #|LT_LMULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num)))))))))
-      #|LE_MULT_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<=:fun(num,fun(num,bool)) n:num) p:num)))))))))
-      #|LE_MULT_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
-      #|LT_MULT_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) n:num) p:num)))))))))
-      #|LT_MULT_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))))))))))
-      #|LT_MULT2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) p:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) q:num)))))))))))
-      #|LE_SQUARE_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) n:num) n:num))))
-      #|LT_POW2_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))
-      #|WLOG_LE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) n:num) m:num))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num)))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|WLOG_LT =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((P:fun(num,fun(num,bool)) m:num) m:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) n:num) m:num))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num))))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\y:num. ((P:fun(num,fun(num,bool)) m:num) y:num))))))
-      #|WLOG_LE_3 =  |- (#!:fun(fun(fun(num,fun(num,fun(num,bool))),bool),bool) (\P:fun(num,fun(num,fun(num,bool))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) (((P:fun(num,fun(num,fun(num,bool))) x:num) y:num) z:num)) ((#/\:fun(bool,fun(bool,bool)) (((P:fun(num,fun(num,fun(num,bool))) y:num) x:num) z:num)) (((P:fun(num,fun(num,fun(num,bool))) x:num) z:num) y:num)))))))))) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) x:num) y:num)) ((#<=:fun(num,fun(num,bool)) y:num) z:num))) (((P:fun(num,fun(num,fun(num,bool))) x:num) y:num) z:num)))))))))) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. (((P:fun(num,fun(num,fun(num,bool))) x:num) y:num) z:num))))))))))
-      #|num_WF =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (P:fun(num,bool) m:num))))) (P:fun(num,bool) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num))))))
-      #|num_WOP =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num)))) (#?:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num)))))))))))
-      #|num_MAX =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\x:num. (P:fun(num,bool) x:num)))) (#?:fun(fun(num,bool),bool) (\M:num. (#!:fun(fun(num,bool),bool) (\x:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) x:num)) ((#<=:fun(num,fun(num,bool)) x:num) M:num)))))))) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) m:num)) (#!:fun(fun(num,bool),bool) (\x:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) x:num)) ((#<=:fun(num,fun(num,bool)) x:num) m:num))))))))))
-      #|LE_INDUCT =  |- (#!:fun(fun(fun(num,fun(num,bool)),bool),bool) (\P:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((P:fun(num,fun(num,bool)) m:num) m:num)))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num))) ((P:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num)))))))))
-      #|num_INDUCTION_DOWN =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (P:fun(num,bool) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) m:num)) (P:fun(num,bool) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) n:num)))))) (#!:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num))))))))
-      #|EVEN =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) (#NUMERAL:fun(num,num) #_0:num))) #T:bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) (#SUC:fun(num,num) n:num))) (#~:fun(bool,bool) (#EVEN:fun(num,bool) n:num))))))
-      #|ODD =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) (#NUMERAL:fun(num,num) #_0:num))) #F:bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) (#SUC:fun(num,num) n:num))) (#~:fun(bool,bool) (#ODD:fun(num,bool) n:num))))))
-      #|NOT_EVEN =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#EVEN:fun(num,bool) n:num))) (#ODD:fun(num,bool) n:num))))
-      #|NOT_ODD =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#ODD:fun(num,bool) n:num))) (#EVEN:fun(num,bool) n:num))))
-      #|EVEN_OR_ODD =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#ODD:fun(num,bool) n:num))))
-      #|EVEN_AND_ODD =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#ODD:fun(num,bool) n:num)))))
-      #|EVEN_ADD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#EVEN:fun(num,bool) n:num)))))))
-      #|EVEN_MULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#*:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#EVEN:fun(num,bool) n:num)))))))
-      #|EVEN_EXP =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#EXP:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))
-      #|ODD_ADD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#+:fun(num,fun(num,num)) m:num) n:num))) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) (#ODD:fun(num,bool) n:num))))))))
-      #|ODD_MULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#*:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) (#ODD:fun(num,bool) n:num)))))))
-      #|ODD_EXP =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#EXP:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|EVEN_DOUBLE =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#EVEN:fun(num,bool) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))
-      #|ODD_DOUBLE =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#ODD:fun(num,bool) (#SUC:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))))
-      #|EVEN_EXISTS_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#EVEN:fun(num,bool) n:num))) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))))))))
-      #|EVEN_EXISTS =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))))))
-      #|ODD_EXISTS =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num))))))))
-      #|EVEN_ODD_DECOMPOSITION =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\k:num. (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) k:num)) m:num)))))))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|SUB =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) (#PRE:fun(num,num) ((#-:fun(num,fun(num,num)) m:num) n:num))))))))
-      #|SUB_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num))))
-      #|SUB_PRESUC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))
-      #|SUB_SUC =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))
-      #|SUB_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
-      #|ADD_SUB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) n:num)) m:num)))))
-      #|ADD_SUB2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) m:num)) n:num)))))
-      #|SUB_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-      #|ADD_SUBR2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|ADD_SUBR =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|SUB_ADD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) n:num) m:num)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) m:num) n:num)) n:num)) m:num))))))
-      #|SUB_ADD_LCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#-:fun(num,fun(num,num)) n:num) p:num))))))))
-      #|SUB_ADD_RCANCEL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))))
-      #|LEFT_SUB_DISTRIB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num)))))))))
-      #|RIGHT_SUB_DISTRIB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|SUC_SUB1 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
-      #|EVEN_SUB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#-:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#EVEN:fun(num,bool) n:num))))))))
-      #|ODD_SUB =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#-:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) m:num)) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) (#ODD:fun(num,bool) n:num)))))))))
-      #|FACT =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) (#SUC:fun(num,num) n:num))) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) (#FACT:fun(num,num) n:num))))))
-      #|FACT_LT =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#FACT:fun(num,num) n:num))))
-      #|FACT_LE =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FACT:fun(num,num) n:num))))
-      #|FACT_NZ =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) n:num)) (#NUMERAL:fun(num,num) #_0:num)))))
-      #|FACT_MONO =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) (#FACT:fun(num,num) m:num)) (#FACT:fun(num,num) n:num)))))))
-      #|EXP_LT_0 =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\x:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|LT_EXP =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))))
-      #|LE_EXP =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))))
-      #|EQ_EXP =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))))
-      #|EXP_MONO_LE_IMP =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) x:num) y:num)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num)))))))))
-      #|EXP_MONO_LT_IMP =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) x:num) y:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))) ((#<:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num)))))))))
-      #|EXP_MONO_LE =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) x:num) y:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
-      #|EXP_MONO_LT =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) x:num) y:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))))
-      #|EXP_MONO_EQ =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) y:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
-      #|DIVMOD_EXIST =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) (#?:fun(fun(num,bool),bool) (\q:num. (#?:fun(fun(num,bool),bool) (\r:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))))))))))
-      #|DIVMOD_EXIST_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#?:fun(fun(num,bool),bool) (\q:num. (#?:fun(fun(num,bool),bool) (\r:num. (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) r:num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))))))))))
-      #|DIVISION_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)))))))
-      #|DIVISION =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)))))))
-      #|DIV_ZERO =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))))
-      #|MOD_ZERO =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) #_0:num))) n:num)))
-      #|DIVISION_SIMP =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) m:num)))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#DIV:fun(num,fun(num,num)) m:num) n:num))) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) m:num))))))
-      #|EQ_DIVMOD =  |- (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) p:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) p:num)) ((#MOD:fun(num,fun(num,num)) n:num) p:num)))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))
-      #|MOD_LT_EQ =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|MOD_LT_EQ_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))))
-      #|DIVMOD_UNIQ_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\q1:num. (#!:fun(fun(num,bool),bool) (\r1:num. (#!:fun(fun(num,bool),bool) (\q2:num. (#!:fun(fun(num,bool),bool) (\r2:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q1:num) n:num)) r1:num))) ((#<:fun(num,fun(num,bool)) r1:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q2:num) n:num)) r2:num))) ((#<:fun(num,fun(num,bool)) r2:num) n:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q1:num) q2:num)) ((#=:fun(num,fun(num,bool)) r1:num) r2:num)))))))))))))))
-      #|DIVMOD_UNIQ =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\q:num. (#!:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) q:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) r:num)))))))))))
-      #|MOD_UNIQ =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\q:num. (#!:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) r:num))))))))))
-      #|DIV_UNIQ =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\q:num. (#!:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) q:num))))))))))
-      #|DIV_0 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
-      #|MOD_0 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
-      #|DIV_MULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) m:num)) n:num))))))
-      #|MOD_MULT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) m:num)) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|MOD_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num))))))
-      #|MOD_EQ_SELF =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
-      #|MOD_CASES =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) p:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) n:num) p:num)) n:num) ((#-:fun(num,fun(num,num)) n:num) p:num))))))))
-      #|MOD_ADD_CASES =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))))
-      #|MOD_EQ =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) n:num) ((#*:fun(num,fun(num,num)) q:num) p:num)))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) p:num)) ((#MOD:fun(num,fun(num,num)) n:num) p:num)))))))))))
-      #|DIV_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) m:num)))))
-      #|DIV_MUL_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) n:num) ((#DIV:fun(num,fun(num,num)) m:num) n:num))) m:num)))))
-      #|MOD_LE_TWICE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#MOD:fun(num,fun(num,num)) n:num) m:num))) n:num))))))
-      #|DIV_1 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
-      #|MOD_1 =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) #_0:num))))
-      #|DIV_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num)))))))
-      #|MOD_MOD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))))))))
-      #|MOD_MOD_REFL =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))))))
-      #|MOD_MOD_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))))))))
-      #|MOD_EVEN_2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#MOD:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
-      #|DIV_MULT2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|MOD_MULT2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#*:fun(num,fun(num,num)) m:num) ((#MOD:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|MOD_EXISTS =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\q:num. ((#=:fun(num,fun(num,bool)) m:num) ((#*:fun(num,fun(num,num)) n:num) q:num))))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|LE_RDIV_EQ =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) n:num) ((#DIV:fun(num,fun(num,num)) b:num) a:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) a:num) n:num)) b:num)))))))))
-      #|RDIV_LT_EQ =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) b:num) a:num)) n:num)) ((#<:fun(num,fun(num,bool)) b:num) ((#*:fun(num,fun(num,num)) a:num) n:num))))))))))
-      #|LE_LDIV_EQ =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) b:num) a:num)) n:num)) ((#<:fun(num,fun(num,bool)) b:num) ((#*:fun(num,fun(num,num)) a:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))
-      #|LDIV_LT_EQ =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) ((#DIV:fun(num,fun(num,num)) b:num) a:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) a:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) b:num)))))))))
-      #|LE_LDIV =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) b:num) ((#*:fun(num,fun(num,num)) a:num) n:num)))) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) b:num) a:num)) n:num))))))))
-      #|DIV_MONO =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) p:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|DIV_MONO_LT =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) n:num))) ((#<:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) p:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|DIV_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
-      #|MOD_DIV_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num)))))))
-      #|MOD_EQ_0 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) (#?:fun(fun(num,bool),bool) (\q:num. ((#=:fun(num,fun(num,bool)) m:num) ((#*:fun(num,fun(num,num)) q:num) n:num)))))))))
-      #|DIV_EQ_SELF =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
-      #|MOD_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
-      #|EVEN_MOD =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) #_0:num)))))
-      #|ODD_MOD =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
-      #|MOD_2_CASES =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#COND:fun(bool,fun(num,fun(num,num))) (#EVEN:fun(num,bool) n:num)) (#NUMERAL:fun(num,num) #_0:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
-      #|EVEN_MOD_EVEN =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#EVEN:fun(num,bool) m:num)))))))
-      #|ODD_MOD_EVEN =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#ODD:fun(num,bool) m:num)))))))
-      #|HALF_DOUBLE =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))) (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))
-      #|DOUBLE_HALF =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))))
-      #|MOD_MULT_RMOD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) ((#MOD:fun(num,fun(num,num)) p:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
-      #|MOD_MULT_LMOD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
-      #|MOD_MULT_MOD2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
-      #|MOD_EXP_MOD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
-      #|MOD_MULT_ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) m:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) p:num) ((#*:fun(num,fun(num,num)) m:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) p:num) ((#*:fun(num,fun(num,num)) n:num) m:num))) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num)))))))))))
-      #|DIV_MULT_ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) n:num)) b:num)) n:num)) ((#+:fun(num,fun(num,num)) a:num) ((#DIV:fun(num,fun(num,num)) b:num) n:num))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) a:num)) b:num)) n:num)) ((#+:fun(num,fun(num,num)) a:num) ((#DIV:fun(num,fun(num,num)) b:num) n:num))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) b:num) ((#*:fun(num,fun(num,num)) a:num) n:num))) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) b:num) n:num)) a:num)))))))))) (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) b:num) ((#*:fun(num,fun(num,num)) n:num) a:num))) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) b:num) n:num)) a:num))))))))))))
-      #|MOD_ADD_MOD =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) a:num) n:num)) ((#MOD:fun(num,fun(num,num)) b:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) b:num)) n:num))))))))
-      #|DIV_ADD_MOD =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) b:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) a:num) n:num)) ((#MOD:fun(num,fun(num,num)) b:num) n:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) b:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) a:num) n:num)) ((#DIV:fun(num,fun(num,num)) b:num) n:num)))))))))))
-      #|MOD_ADD_EQ_EQ =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)))))))))
-      #|DIV_ADD_EQ_EQ =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) x:num) n:num)) ((#DIV:fun(num,fun(num,num)) y:num) n:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)))))))))
-      #|DIV_ADD_EQ =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) x:num) n:num)) ((#DIV:fun(num,fun(num,num)) y:num) n:num))))))))))
-      #|MOD_ADD_EQ =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))))))))))
-      #|DIV_REFL =  |- (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
-      #|MOD_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num)))))
-      #|DIV_MONO2 =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) p:num) m:num))) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) m:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|DIV_LE_EXCLUSION =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\c:num. (#!:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) b:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) b:num) c:num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:num)))) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) c:num) d:num)) ((#DIV:fun(num,fun(num,num)) a:num) b:num)))))))))))
-      #|DIV_EQ_EXCLUSION =  |- (#!:fun(fun(num,bool),bool) (\a:num. (#!:fun(fun(num,bool),bool) (\b:num. (#!:fun(fun(num,bool),bool) (\c:num. (#!:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) b:num) c:num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:num))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) a:num) d:num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) c:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) b:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) a:num) b:num)) ((#DIV:fun(num,fun(num,num)) c:num) d:num)))))))))))
-      #|MULT_DIV_LE =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#DIV:fun(num,fun(num,num)) n:num) p:num))) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
-      #|DIV_DIV =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#DIV:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
-      #|DIV_MOD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#DIV:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) n:num))))))))
-      #|MOD_MULT_MOD =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#MOD:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) p:num))) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))))))))
-      #|MOD_MOD_EXP_MIN =  |- (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\p:num. (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) ((#EXP:fun(num,fun(num,num)) p:num) m:num))) ((#EXP:fun(num,fun(num,num)) p:num) n:num))) ((#MOD:fun(num,fun(num,num)) x:num) ((#EXP:fun(num,fun(num,num)) p:num) ((#MIN:fun(num,fun(num,num)) m:num) n:num))))))))))))
-      #|DIV_EXP =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) p:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)))))))))))
-      #|MOD_EXP =  |- (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) p:num) n:num)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) #_0:num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num))))))))))
-      #|FORALL_LT_MOD_THM =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#!:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))))))))
-      #|FORALL_MOD_THM =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))) (#!:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))))))))
-      #|EXISTS_LT_MOD_THM =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\a:num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) (#?:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))))))))
-      #|EXISTS_MOD_THM =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))) (#?:fun(fun(num,bool),bool) (\a:num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))))))))
-      #|PRE_ELIM_THM =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#PRE:fun(num,num) n:num))) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))) (P:fun(num,bool) m:num)))))
+      #|MULT_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|EQ_MULT_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) p:num)))))))))
+      #|EQ_MULT_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
+      #|MULT_2 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) ((#+:fun(num,fun(num,num)) n:num) n:num))))
+      #|MULT_EQ_1 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
+      #|EXP =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) ((#*:fun(num,fun(num,num)) m:num) ((#EXP:fun(num,fun(num,num)) m:num) n:num))))))))
+      #|EXP_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))
+      #|EXP_EQ_1 =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|EXP_ZERO =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)))))
+      #|EXP_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num)))))))))
+      #|EXP_ONE =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))
+      #|EXP_1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
+      #|EXP_2 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#*:fun(num,fun(num,num)) n:num) n:num))))
+      #|MULT_EXP =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num)) ((#EXP:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|EXP_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#EXP:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
+      #|EXP_EXP =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) n:num)) ((#EXP:fun(num,fun(num,num)) x:num) ((#*:fun(num,fun(num,num)) m:num) n:num)))))))))
+      #|LE =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|LT =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) #F:bool)))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|GE =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|GT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|MAX =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MAX:fun(num,fun(num,num)) m:num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) n:num) m:num))))))
+      #|MIN =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MIN:fun(num,fun(num,num)) m:num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) m:num) n:num))))))
+      #|LE_SUC_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|LT_SUC_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|LE_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|LT_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|LE_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))
+      #|LT_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))))
+      #|LE_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) n:num)))
+      #|LT_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) n:num) n:num))))
+      #|LT_IMP_NE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
+      #|LE_ANTISYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|LT_ANTISYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num)))))))
+      #|LET_ANTISYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num)))))))
+      #|LTE_ANTISYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num)))))))
+      #|LE_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<=:fun(num,fun(num,bool)) m:num) p:num))))))))
+      #|LT_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
+      #|LET_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
+      #|LTE_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
+      #|LE_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|LT_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) m:num)) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
+      #|LET_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|LTE_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|LE_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
+      #|LT_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|NOT_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|NOT_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) n:num))) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+      #|LT_IMP_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|EQ_IMP_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|LT_NZ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))
+      #|LE_1 =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))))
+      #|LE_EXISTS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) d:num)))))))))
+      #|LT_EXISTS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) d:num))))))))))
+      #|LE_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))
+      #|LE_ADDR =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))
+      #|LT_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))))
+      #|LT_ADDR =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num))))))
+      #|LE_ADD_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#<=:fun(num,fun(num,bool)) n:num) p:num))))))))
+      #|LE_ADD_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|LT_ADD_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#<:fun(num,fun(num,bool)) n:num) p:num))))))))
+      #|LT_ADD_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|LE_ADD2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) p:num)) ((#<=:fun(num,fun(num,bool)) n:num) q:num))) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
+      #|LET_ADD2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
+      #|LTE_ADD2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<=:fun(num,fun(num,bool)) n:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
+      #|LT_ADD2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) p:num) q:num)))))))))))
+      #|LT_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) ((#*:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))))))
+      #|LE_MULT2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) p:num) q:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) q:num)))))))))))
+      #|LT_LMULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num)))))))))
+      #|LE_MULT_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<=:fun(num,fun(num,bool)) n:num) p:num)))))))))
+      #|LE_MULT_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
+      #|LT_MULT_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) n:num) p:num)))))))))
+      #|LT_MULT_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))))))))))
+      #|LT_MULT2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) p:num) q:num))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) q:num)))))))))))
+      #|LE_SQUARE_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) n:num) n:num))))
+      #|LT_POW2_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))
+      #|WLOG_LE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) n:num) m:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num)))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|WLOG_LT =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((P:fun(num,fun(num,bool)) m:num) m:num)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) n:num) m:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num))))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\y:num. ((P:fun(num,fun(num,bool)) m:num) y:num))))))
+      #|WLOG_LE_3 =  |- (#forall:fun(fun(fun(num,fun(num,fun(num,bool))),bool),bool) (\P:fun(num,fun(num,fun(num,bool))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) (((P:fun(num,fun(num,fun(num,bool))) x:num) y:num) z:num)) ((#/\:fun(bool,fun(bool,bool)) (((P:fun(num,fun(num,fun(num,bool))) y:num) x:num) z:num)) (((P:fun(num,fun(num,fun(num,bool))) x:num) z:num) y:num)))))))))) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) x:num) y:num)) ((#<=:fun(num,fun(num,bool)) y:num) z:num))) (((P:fun(num,fun(num,fun(num,bool))) x:num) y:num) z:num)))))))))) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. (((P:fun(num,fun(num,fun(num,bool))) x:num) y:num) z:num))))))))))
+      #|num_WF =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (P:fun(num,bool) m:num))))) (P:fun(num,bool) n:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num))))))
+      #|num_WOP =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num)))) (#?:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num)))))))))))
+      #|num_MAX =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\x:num. (P:fun(num,bool) x:num)))) (#?:fun(fun(num,bool),bool) (\M:num. (#forall:fun(fun(num,bool),bool) (\x:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) x:num)) ((#<=:fun(num,fun(num,bool)) x:num) M:num)))))))) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) m:num)) (#forall:fun(fun(num,bool),bool) (\x:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) x:num)) ((#<=:fun(num,fun(num,bool)) x:num) m:num))))))))))
+      #|LE_INDUCT =  |- (#forall:fun(fun(fun(num,fun(num,bool)),bool),bool) (\P:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((P:fun(num,fun(num,bool)) m:num) m:num)))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num))) ((P:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((P:fun(num,fun(num,bool)) m:num) n:num)))))))))
+      #|num_INDUCTION_DOWN =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (P:fun(num,bool) n:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) m:num)) (P:fun(num,bool) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) n:num)))))) (#forall:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num))))))))
+      #|EVEN =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) (#NUMERAL:fun(num,num) #_0:num))) #T:bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) (#SUC:fun(num,num) n:num))) (#~:fun(bool,bool) (#EVEN:fun(num,bool) n:num))))))
+      #|ODD =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) (#NUMERAL:fun(num,num) #_0:num))) #F:bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) (#SUC:fun(num,num) n:num))) (#~:fun(bool,bool) (#ODD:fun(num,bool) n:num))))))
+      #|NOT_EVEN =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#EVEN:fun(num,bool) n:num))) (#ODD:fun(num,bool) n:num))))
+      #|NOT_ODD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#ODD:fun(num,bool) n:num))) (#EVEN:fun(num,bool) n:num))))
+      #|EVEN_OR_ODD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#ODD:fun(num,bool) n:num))))
+      #|EVEN_AND_ODD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#ODD:fun(num,bool) n:num)))))
+      #|EVEN_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#EVEN:fun(num,bool) n:num)))))))
+      #|EVEN_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#*:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#EVEN:fun(num,bool) n:num)))))))
+      #|EVEN_EXP =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#EXP:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))
+      #|ODD_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#+:fun(num,fun(num,num)) m:num) n:num))) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) (#ODD:fun(num,bool) n:num))))))))
+      #|ODD_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#*:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) (#ODD:fun(num,bool) n:num)))))))
+      #|ODD_EXP =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#EXP:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|EVEN_DOUBLE =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#EVEN:fun(num,bool) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))
+      #|ODD_DOUBLE =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#ODD:fun(num,bool) (#SUC:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))))
+      #|EVEN_EXISTS_LEMMA =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#EVEN:fun(num,bool) n:num))) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))))))))
+      #|EVEN_EXISTS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))))))
+      #|ODD_EXISTS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num))))))))
+      #|EVEN_ODD_DECOMPOSITION =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\k:num. (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) k:num)) m:num)))))))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))
+      #|SUB =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num))) (#PRE:fun(num,num) ((#-:fun(num,fun(num,num)) m:num) n:num))))))))
+      #|SUB_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num))))
+      #|SUB_PRESUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))
+      #|SUB_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))
+      #|SUB_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
+      #|ADD_SUB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) n:num)) m:num)))))
+      #|ADD_SUB2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) m:num)) n:num)))))
+      #|SUB_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+      #|ADD_SUBR2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) (#NUMERAL:fun(num,num) #_0:num))))))
+      #|ADD_SUBR =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) m:num) n:num))) (#NUMERAL:fun(num,num) #_0:num))))))
+      #|SUB_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) n:num) m:num)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) m:num) n:num)) n:num)) m:num))))))
+      #|SUB_ADD_LCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#+:fun(num,fun(num,num)) m:num) p:num))) ((#-:fun(num,fun(num,num)) n:num) p:num))))))))
+      #|SUB_ADD_RCANCEL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))))
+      #|LEFT_SUB_DISTRIB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num)))))))))
+      #|RIGHT_SUB_DISTRIB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|SUC_SUB1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
+      #|EVEN_SUB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#-:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) (#EVEN:fun(num,bool) n:num))))))))
+      #|ODD_SUB =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#-:fun(num,fun(num,num)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) m:num)) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) (#ODD:fun(num,bool) n:num)))))))))
+      #|FACT =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) (#SUC:fun(num,num) n:num))) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) (#FACT:fun(num,num) n:num))))))
+      #|FACT_LT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#FACT:fun(num,num) n:num))))
+      #|FACT_LE =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FACT:fun(num,num) n:num))))
+      #|FACT_NZ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) n:num)) (#NUMERAL:fun(num,num) #_0:num)))))
+      #|FACT_MONO =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) (#FACT:fun(num,num) m:num)) (#FACT:fun(num,num) n:num)))))))
+      #|EXP_LT_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\x:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|LT_EXP =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))))
+      #|LE_EXP =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))))))
+      #|EQ_EXP =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) m:num)) ((#EXP:fun(num,fun(num,num)) x:num) n:num))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))))
+      #|EXP_MONO_LE_IMP =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) x:num) y:num)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num)))))))))
+      #|EXP_MONO_LT_IMP =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) x:num) y:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))) ((#<:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num)))))))))
+      #|EXP_MONO_LE =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) x:num) y:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
+      #|EXP_MONO_LT =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) x:num) y:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))))))
+      #|EXP_MONO_EQ =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) x:num) n:num)) ((#EXP:fun(num,fun(num,num)) y:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) x:num) y:num)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
+      #|DIVMOD_EXIST =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) (#?:fun(fun(num,bool),bool) (\q:num. (#?:fun(fun(num,bool),bool) (\r:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))))))))))
+      #|DIVMOD_EXIST_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#?:fun(fun(num,bool),bool) (\q:num. (#?:fun(fun(num,bool),bool) (\r:num. (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) r:num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))))))))))
+      #|DIVISION_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)))))))
+      #|DIVISION =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)))))))
+      #|DIV_ZERO =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))))
+      #|MOD_ZERO =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) #_0:num))) n:num)))
+      #|DIVISION_SIMP =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) m:num)))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#DIV:fun(num,fun(num,num)) m:num) n:num))) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) m:num))))))
+      #|EQ_DIVMOD =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) p:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) p:num)) ((#MOD:fun(num,fun(num,num)) n:num) p:num)))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))))
+      #|MOD_LT_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|MOD_LT_EQ_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))))))
+      #|DIVMOD_UNIQ_LEMMA =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\q1:num. (#forall:fun(fun(num,bool),bool) (\r1:num. (#forall:fun(fun(num,bool),bool) (\q2:num. (#forall:fun(fun(num,bool),bool) (\r2:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q1:num) n:num)) r1:num))) ((#<:fun(num,fun(num,bool)) r1:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q2:num) n:num)) r2:num))) ((#<:fun(num,fun(num,bool)) r2:num) n:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q1:num) q2:num)) ((#=:fun(num,fun(num,bool)) r1:num) r2:num)))))))))))))))
+      #|DIVMOD_UNIQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\q:num. (#forall:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) q:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) r:num)))))))))))
+      #|MOD_UNIQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\q:num. (#forall:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) r:num))))))))))
+      #|DIV_UNIQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\q:num. (#forall:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) q:num))))))))))
+      #|DIV_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
+      #|MOD_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
+      #|DIV_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) m:num)) n:num))))))
+      #|MOD_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) m:num)) (#NUMERAL:fun(num,num) #_0:num))))))
+      #|MOD_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num))))))
+      #|MOD_EQ_SELF =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
+      #|MOD_CASES =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) p:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) n:num) p:num)) n:num) ((#-:fun(num,fun(num,num)) n:num) p:num))))))))
+      #|MOD_ADD_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))))
+      #|MOD_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) n:num) ((#*:fun(num,fun(num,num)) q:num) p:num)))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) p:num)) ((#MOD:fun(num,fun(num,num)) n:num) p:num)))))))))))
+      #|DIV_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) m:num)))))
+      #|DIV_MUL_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) n:num) ((#DIV:fun(num,fun(num,num)) m:num) n:num))) m:num)))))
+      #|MOD_LE_TWICE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#MOD:fun(num,fun(num,num)) n:num) m:num))) n:num))))))
+      #|DIV_1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)))
+      #|MOD_1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) #_0:num))))
+      #|DIV_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num)))))))
+      #|MOD_MOD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))))))))
+      #|MOD_MOD_REFL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))))))
+      #|MOD_MOD_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))))))))
+      #|MOD_EVEN_2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#MOD:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
+      #|DIV_MULT2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|MOD_MULT2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) ((#*:fun(num,fun(num,num)) m:num) p:num))) ((#*:fun(num,fun(num,num)) m:num) ((#MOD:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|MOD_EXISTS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\q:num. ((#=:fun(num,fun(num,bool)) m:num) ((#*:fun(num,fun(num,num)) n:num) q:num))))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|LE_RDIV_EQ =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) n:num) ((#DIV:fun(num,fun(num,num)) b:num) a:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) a:num) n:num)) b:num)))))))))
+      #|RDIV_LT_EQ =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) b:num) a:num)) n:num)) ((#<:fun(num,fun(num,bool)) b:num) ((#*:fun(num,fun(num,num)) a:num) n:num))))))))))
+      #|LE_LDIV_EQ =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) b:num) a:num)) n:num)) ((#<:fun(num,fun(num,bool)) b:num) ((#*:fun(num,fun(num,num)) a:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))
+      #|LDIV_LT_EQ =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) n:num) ((#DIV:fun(num,fun(num,num)) b:num) a:num))) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) a:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) b:num)))))))))
+      #|LE_LDIV =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) a:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) b:num) ((#*:fun(num,fun(num,num)) a:num) n:num)))) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) b:num) a:num)) n:num))))))))
+      #|DIV_MONO =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) p:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|DIV_MONO_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) n:num))) ((#<:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) p:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|DIV_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
+      #|MOD_DIV_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) (#NUMERAL:fun(num,num) #_0:num)))))))
+      #|MOD_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))) (#?:fun(fun(num,bool),bool) (\q:num. ((#=:fun(num,fun(num,bool)) m:num) ((#*:fun(num,fun(num,num)) q:num) n:num)))))))))
+      #|DIV_EQ_SELF =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
+      #|MOD_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
+      #|EVEN_MOD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) #_0:num)))))
+      #|ODD_MOD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
+      #|MOD_2_CASES =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#COND:fun(bool,fun(num,fun(num,num))) (#EVEN:fun(num,bool) n:num)) (#NUMERAL:fun(num,num) #_0:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
+      #|EVEN_MOD_EVEN =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#EVEN:fun(num,bool) m:num)))))))
+      #|ODD_MOD_EVEN =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#ODD:fun(num,bool) m:num)))))))
+      #|HALF_DOUBLE =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))
+      #|DOUBLE_HALF =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) n:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)))))
+      #|MOD_MULT_RMOD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) ((#MOD:fun(num,fun(num,num)) p:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
+      #|MOD_MULT_LMOD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
+      #|MOD_MULT_MOD2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
+      #|MOD_EXP_MOD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
+      #|MOD_MULT_ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) m:num)) p:num)) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) p:num) ((#*:fun(num,fun(num,num)) m:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num))))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) p:num) ((#*:fun(num,fun(num,num)) n:num) m:num))) n:num)) ((#MOD:fun(num,fun(num,num)) p:num) n:num)))))))))))
+      #|DIV_MULT_ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) n:num)) b:num)) n:num)) ((#+:fun(num,fun(num,num)) a:num) ((#DIV:fun(num,fun(num,num)) b:num) n:num))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) a:num)) b:num)) n:num)) ((#+:fun(num,fun(num,num)) a:num) ((#DIV:fun(num,fun(num,num)) b:num) n:num))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) b:num) ((#*:fun(num,fun(num,num)) a:num) n:num))) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) b:num) n:num)) a:num)))))))))) (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) b:num) ((#*:fun(num,fun(num,num)) n:num) a:num))) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) b:num) n:num)) a:num))))))))))))
+      #|MOD_ADD_MOD =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) a:num) n:num)) ((#MOD:fun(num,fun(num,num)) b:num) n:num))) n:num)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) b:num)) n:num))))))))
+      #|DIV_ADD_MOD =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) b:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) a:num) n:num)) ((#MOD:fun(num,fun(num,num)) b:num) n:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) b:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) a:num) n:num)) ((#DIV:fun(num,fun(num,num)) b:num) n:num)))))))))))
+      #|MOD_ADD_EQ_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)))))))))
+      #|DIV_ADD_EQ_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) x:num) n:num)) ((#DIV:fun(num,fun(num,num)) y:num) n:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)))))))))
+      #|DIV_ADD_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) x:num) n:num)) ((#DIV:fun(num,fun(num,num)) y:num) n:num))))))))))
+      #|MOD_ADD_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))) n:num)) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) n:num)) ((#+:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) n:num)) ((#MOD:fun(num,fun(num,num)) y:num) n:num))))))))))
+      #|DIV_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
+      #|MOD_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) m:num)))))
+      #|DIV_MONO2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<=:fun(num,fun(num,bool)) p:num) m:num))) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) n:num) m:num)) ((#DIV:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|DIV_LE_EXCLUSION =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\c:num. (#forall:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) b:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) b:num) c:num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:num)))) ((#<=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) c:num) d:num)) ((#DIV:fun(num,fun(num,num)) a:num) b:num)))))))))))
+      #|DIV_EQ_EXCLUSION =  |- (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\c:num. (#forall:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) b:num) c:num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:num))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) a:num) d:num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) c:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) b:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) a:num) b:num)) ((#DIV:fun(num,fun(num,num)) c:num) d:num)))))))))))
+      #|MULT_DIV_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) ((#DIV:fun(num,fun(num,num)) n:num) p:num))) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) n:num)) p:num))))))))
+      #|DIV_DIV =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#DIV:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
+      #|DIV_MOD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#DIV:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) n:num))))))))
+      #|MOD_MULT_MOD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) m:num) ((#*:fun(num,fun(num,num)) n:num) p:num))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#MOD:fun(num,fun(num,num)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) p:num))) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))))))))
+      #|MOD_MOD_EXP_MIN =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) x:num) ((#EXP:fun(num,fun(num,num)) p:num) m:num))) ((#EXP:fun(num,fun(num,num)) p:num) n:num))) ((#MOD:fun(num,fun(num,num)) x:num) ((#EXP:fun(num,fun(num,num)) p:num) ((#MIN:fun(num,fun(num,num)) m:num) n:num))))))))))))
+      #|DIV_EXP =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) p:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)))))))))))
+      #|MOD_EXP =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num)) ((#EXP:fun(num,fun(num,num)) m:num) p:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) p:num) n:num)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) #_0:num)) ((#EXP:fun(num,fun(num,num)) m:num) n:num))))))))))
+      #|FORALL_LT_MOD_THM =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))))))))
+      #|FORALL_MOD_THM =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))) (#forall:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))))))))
+      #|EXISTS_LT_MOD_THM =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\a:num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) (#?:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))))))))
+      #|EXISTS_MOD_THM =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\a:num. (P:fun(num,bool) ((#MOD:fun(num,fun(num,num)) a:num) n:num))))) (#?:fun(fun(num,bool),bool) (\a:num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) n:num)) (P:fun(num,bool) a:num))))))))))
+      #|PRE_ELIM_THM =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#PRE:fun(num,num) n:num))) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))) (P:fun(num,bool) m:num)))))
       #|PRE_ELIM_THM' =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#PRE:fun(num,num) n:num))) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) m:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))) (P:fun(num,bool) m:num)))))
-      #|SUB_ELIM_THM =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(num,bool) ((#-:fun(num,fun(num,num)) a:num) b:num))) (#!:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) a:num) ((#+:fun(num,fun(num,num)) b:num) d:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) b:num)) ((#=:fun(num,fun(num,bool)) d:num) (#NUMERAL:fun(num,num) #_0:num))))) (P:fun(num,bool) d:num)))))
+      #|SUB_ELIM_THM =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(num,bool) ((#-:fun(num,fun(num,num)) a:num) b:num))) (#forall:fun(fun(num,bool),bool) (\d:num. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) a:num) ((#+:fun(num,fun(num,num)) b:num) d:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) b:num)) ((#=:fun(num,fun(num,bool)) d:num) (#NUMERAL:fun(num,num) #_0:num))))) (P:fun(num,bool) d:num)))))
       #|SUB_ELIM_THM' =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(num,bool) ((#-:fun(num,fun(num,num)) a:num) b:num))) (#?:fun(fun(num,bool),bool) (\d:num. ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) a:num) ((#+:fun(num,fun(num,num)) b:num) d:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) a:num) b:num)) ((#=:fun(num,fun(num,bool)) d:num) (#NUMERAL:fun(num,num) #_0:num))))) (P:fun(num,bool) d:num)))))
-      #|DIVMOD_ELIM_THM =  |- ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#!:fun(fun(num,bool),bool) (\q:num. (#!:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) r:num) m:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))) ((P:fun(num,fun(num,bool)) q:num) r:num)))))))
+      #|DIVMOD_ELIM_THM =  |- ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#forall:fun(fun(num,bool),bool) (\q:num. (#forall:fun(fun(num,bool),bool) (\r:num. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) r:num) m:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))) ((P:fun(num,fun(num,bool)) q:num) r:num)))))))
       #|DIVMOD_ELIM_THM' =  |- ((#=:fun(bool,fun(bool,bool)) ((P:fun(num,fun(num,bool)) ((#DIV:fun(num,fun(num,num)) m:num) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num))) (#?:fun(fun(num,bool),bool) (\q:num. (#?:fun(fun(num,bool),bool) (\r:num. ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) r:num) m:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) q:num) n:num)) r:num))) ((#<:fun(num,fun(num,bool)) r:num) n:num)))) ((P:fun(num,fun(num,bool)) q:num) r:num)))))))
-      #|minimal =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) (#@:fun(fun(num,bool),num) (\n:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num)))))))))))
-      #|MINIMAL =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#minimal:fun(fun(num,bool),num) P:fun(num,bool)))) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#minimal:fun(fun(num,bool),num) P:fun(num,bool)))) (#~:fun(bool,bool) (P:fun(num,bool) m:num)))))))))
-      #|MINIMAL_UNIQUE =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num))))))) ((#=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) n:num))))))
-      #|LE_MINIMAL =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\r:num. (P:fun(num,bool) r:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) n:num) (#minimal:fun(fun(num,bool),num) P:fun(num,bool)))) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) i:num)) ((#<=:fun(num,fun(num,bool)) n:num) i:num))))))))))
-      #|MINIMAL_LE =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\r:num. (P:fun(num,bool) r:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) n:num)) (#?:fun(fun(num,bool),bool) (\i:num. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) i:num) n:num)) (P:fun(num,bool) i:num))))))))))
-      #|MINIMAL_UBOUND =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) ((#<=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) n:num))))))
-      #|MINIMAL_LBOUND =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\r:num. (P:fun(num,bool) r:num)))) (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num))))))) ((#<=:fun(num,fun(num,bool)) n:num) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))))))))
-      #|MINIMAL_MONO =  |- (#!:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#!:fun(fun(fun(num,bool),bool),bool) (\Q:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num)))) (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (Q:fun(num,bool) n:num)))))) ((#<=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) Q:fun(num,bool))) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))))))))
-      #|TRANSITIVE_STEPWISE_LT_EQ =  |- (#!:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num))))))))) ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num))))))) (#!:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))))))
-      #|TRANSITIVE_STEPWISE_LT =  |- (#!:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num))))))))) (#!:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num)))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num)))))))))
-      #|TRANSITIVE_STEPWISE_LE_EQ =  |- (#!:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. ((R:fun(num,fun(num,bool)) x:num) x:num)))) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num)))))))))) ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num))))))) (#!:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))))))
-      #|TRANSITIVE_STEPWISE_LE =  |- (#!:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. ((R:fun(num,fun(num,bool)) x:num) x:num)))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\x:num. (#!:fun(fun(num,bool),bool) (\y:num. (#!:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num))))))))) (#!:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))))) (#!:fun(fun(num,bool),bool) (\m:num. (#!:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num)))))))))
-      #|DEPENDENT_CHOICE_FIXED =  |- (#!:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#!:fun(fun(fun(num,fun('A,fun('A,bool))),bool),bool) (\R:fun(num,fun('A,fun('A,bool))). (#!:fun(fun('A,bool),bool) (\a:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) (#NUMERAL:fun(num,num) #_0:num)) a:'A)) (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) n:num) x:'A)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) (#SUC:fun(num,num) n:num)) y:'A)) (((R:fun(num,fun('A,fun('A,bool))) n:num) x:'A) y:'A))))))))))) (#?:fun(fun(fun(num,'A),bool),bool) (\f:fun(num,'A). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(num,'A) (#NUMERAL:fun(num,num) #_0:num))) a:'A)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun('A,bool)) n:num) (f:fun(num,'A) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. (((R:fun(num,fun('A,fun('A,bool))) n:num) (f:fun(num,'A) n:num)) (f:fun(num,'A) (#SUC:fun(num,num) n:num))))))))))))))))
-      #|DEPENDENT_CHOICE =  |- (#!:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#!:fun(fun(fun(num,fun('A,fun('A,bool))),bool),bool) (\R:fun(num,fun('A,fun('A,bool))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\a:'A. ((P:fun(num,fun('A,bool)) (#NUMERAL:fun(num,num) #_0:num)) a:'A)))) (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) n:num) x:'A)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) (#SUC:fun(num,num) n:num)) y:'A)) (((R:fun(num,fun('A,fun('A,bool))) n:num) x:'A) y:'A))))))))))) (#?:fun(fun(fun(num,'A),bool),bool) (\f:fun(num,'A). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun('A,bool)) n:num) (f:fun(num,'A) n:num))))) (#!:fun(fun(num,bool),bool) (\n:num. (((R:fun(num,fun('A,fun('A,bool))) n:num) (f:fun(num,'A) n:num)) (f:fun(num,'A) (#SUC:fun(num,num) n:num)))))))))))))
+      #|minimal =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) (#@:fun(fun(num,bool),num) (\n:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num)))))))))))
+      #|MINIMAL =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#minimal:fun(fun(num,bool),num) P:fun(num,bool)))) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#minimal:fun(fun(num,bool),num) P:fun(num,bool)))) (#~:fun(bool,bool) (P:fun(num,bool) m:num)))))))))
+      #|MINIMAL_UNIQUE =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num))))))) ((#=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) n:num))))))
+      #|LE_MINIMAL =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\r:num. (P:fun(num,bool) r:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) n:num) (#minimal:fun(fun(num,bool),num) P:fun(num,bool)))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) i:num)) ((#<=:fun(num,fun(num,bool)) n:num) i:num))))))))))
+      #|MINIMAL_LE =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\r:num. (P:fun(num,bool) r:num)))) ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) n:num)) (#?:fun(fun(num,bool),bool) (\i:num. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) i:num) n:num)) (P:fun(num,bool) i:num))))))))))
+      #|MINIMAL_UBOUND =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) ((#<=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))) n:num))))))
+      #|MINIMAL_LBOUND =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\r:num. (P:fun(num,bool) r:num)))) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#~:fun(bool,bool) (P:fun(num,bool) m:num))))))) ((#<=:fun(num,fun(num,bool)) n:num) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))))))))
+      #|MINIMAL_MONO =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(fun(num,bool),bool),bool) (\Q:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (Q:fun(num,bool) n:num)))))) ((#<=:fun(num,fun(num,bool)) (#minimal:fun(fun(num,bool),num) Q:fun(num,bool))) (#minimal:fun(fun(num,bool),num) P:fun(num,bool))))))))
+      #|TRANSITIVE_STEPWISE_LT_EQ =  |- (#forall:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num))))))))) ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num))))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))))))
+      #|TRANSITIVE_STEPWISE_LT =  |- (#forall:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num))))))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num)))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num)))))))))
+      #|TRANSITIVE_STEPWISE_LE_EQ =  |- (#forall:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. ((R:fun(num,fun(num,bool)) x:num) x:num)))) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num)))))))))) ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num))))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))))))
+      #|TRANSITIVE_STEPWISE_LE =  |- (#forall:fun(fun(fun(num,fun(num,bool)),bool),bool) (\R:fun(num,fun(num,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. ((R:fun(num,fun(num,bool)) x:num) x:num)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. (#forall:fun(fun(num,bool),bool) (\z:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun(num,fun(num,bool)) x:num) y:num)) ((R:fun(num,fun(num,bool)) y:num) z:num))) ((R:fun(num,fun(num,bool)) x:num) z:num))))))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((R:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((R:fun(num,fun(num,bool)) m:num) n:num)))))))))
+      #|DEPENDENT_CHOICE_FIXED =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun(num,fun('A,fun('A,bool))),bool),bool) (\R:fun(num,fun('A,fun('A,bool))). (#forall:fun(fun('A,bool),bool) (\a:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) (#NUMERAL:fun(num,num) #_0:num)) a:'A)) (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) n:num) x:'A)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) (#SUC:fun(num,num) n:num)) y:'A)) (((R:fun(num,fun('A,fun('A,bool))) n:num) x:'A) y:'A))))))))))) (#?:fun(fun(fun(num,'A),bool),bool) (\f:fun(num,'A). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(num,'A) (#NUMERAL:fun(num,num) #_0:num))) a:'A)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun('A,bool)) n:num) (f:fun(num,'A) n:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. (((R:fun(num,fun('A,fun('A,bool))) n:num) (f:fun(num,'A) n:num)) (f:fun(num,'A) (#SUC:fun(num,num) n:num))))))))))))))))
+      #|DEPENDENT_CHOICE =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun(num,fun('A,fun('A,bool))),bool),bool) (\R:fun(num,fun('A,fun('A,bool))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\a:'A. ((P:fun(num,fun('A,bool)) (#NUMERAL:fun(num,num) #_0:num)) a:'A)))) (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) n:num) x:'A)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) (#SUC:fun(num,num) n:num)) y:'A)) (((R:fun(num,fun('A,fun('A,bool))) n:num) x:'A) y:'A))))))))))) (#?:fun(fun(fun(num,'A),bool),bool) (\f:fun(num,'A). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun('A,bool)) n:num) (f:fun(num,'A) n:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. (((R:fun(num,fun('A,fun('A,bool))) n:num) (f:fun(num,'A) n:num)) (f:fun(num,'A) (#SUC:fun(num,num) n:num)))))))))))))
       #|types = num/0 ind/0 prod/2 1/0 bool/0 fun/2
-      #|constants = minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+      #|constants = minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 58
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?24004
+      #|counter_tyvar = zz_counter:'?24002
       #|counter_genvar = _6923:bool
       #|
     ),

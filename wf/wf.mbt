@@ -13,7 +13,7 @@ fn step_2() -> Unit raise {
   wf_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "WF(<<) <=> !P:A->bool. (?x. P(x)) ==> (?x. P(x) /\\ !y. y << x ==> ~P(y))",
+        "WF(<<) <=> forall P:A->bool. (?x. P(x)) ==> (?x. P(x) /\\ forall y. y << x ==> ~P(y))",
       ),
     ),
   )
@@ -36,7 +36,7 @@ fn step_3() -> Unit raise {
   wf_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF(<<) <=> !P:A->bool. (?x. P(x)) <=> (?x. P(x) /\\ !y. y << x ==> ~P(y))",
+        "WF(<<) <=> forall P:A->bool. (?x. P(x)) <=> (?x. P(x) /\\ forall y. y << x ==> ~P(y))",
       ),
       t2,
     ),
@@ -148,7 +148,7 @@ fn step_4() -> Unit raise {
   wf_ind_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF(<<) <=> !P:A->bool. (!x. (!y. y << x ==> P(y)) ==> P(x)) ==> !x. P(x)",
+        "WF(<<) <=> forall P:A->bool. (forall x. (forall y. y << x ==> P(y)) ==> P(x)) ==> forall x. P(x)",
       ),
       t12,
     ),
@@ -179,7 +179,7 @@ fn step_5() -> Unit raise {
   let t40 = @meson.asm_meson_tac(@list.List([]))
   let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @tactics.subgoal_then(
-    @parser.parse_term("!n. P(s n) /\\ s(SUC n):A << s(n)"),
+    @parser.parse_term("forall n. P(s n) /\\ s(SUC n):A << s(n)"),
     fn(
       x36 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -207,7 +207,7 @@ fn step_5() -> Unit raise {
   )
   let t35 = @simp.asm_rewrite_tac(@list.List([]))
   let t34 = @tactics.exists_tac(@parser.parse_term("s:num->A"))
-  let t32 = @parser.parse_term("(s(0) = a:A) /\\ (!n. s(SUC n) = f(s n))")
+  let t32 = @parser.parse_term("(s(0) = a:A) /\\ (forall n. s(SUC n) = f(s n))")
   let t33 = @tactics.choose_tac(
     @recursion.prove_recursive_functions_exist(@nums.num_recursion())(t32),
   )
@@ -219,7 +219,7 @@ fn step_5() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([@class.skolem_thm()]))
   let t30 = @list.List([@meson.asm_meson_tac(@list.List([])), t29])
   let t28 = @tactics.subgoal_then(
-    @parser.parse_term("!x:A. ?y. P(x) ==> P(y) /\\ y << x"),
+    @parser.parse_term("forall x:A. ?y. P(x) ==> P(y) /\\ y << x"),
     fn(
       x25 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -466,7 +466,7 @@ fn step_5() -> Unit raise {
   )
   wf_dchain_c.set(
     @tactics.prove(
-      @parser.parse_term("WF(<<) <=> ~(?s:num->A. !n. s(SUC n) << s(n))"),
+      @parser.parse_term("WF(<<) <=> ~(?s:num->A. forall n. s(SUC n) << s(n))"),
       t45,
     ),
   )
@@ -521,7 +521,7 @@ fn step_6() -> Unit raise {
   wf_dhain_transitive_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(<<):A->A->bool.\n        (!x y z. x << y /\\ y << z ==> x << z)\n        ==> (WF(<<) <=> ~(?s:num->A. !i j. i < j ==> s j << s i))",
+        "forall(<<):A->A->bool.\n        (forall x y z. x << y /\\ y << z ==> x << z)\n        ==> (WF(<<) <=> ~(?s:num->A. forall i j. i < j ==> s j << s i))",
       ),
       t52,
     ),
@@ -613,7 +613,7 @@ fn step_7() -> Unit raise {
   wf_urec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF(<<) ==>\n       !H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> !(f:A->B) g. (!x. f x = H f x) /\\ (!x. g x = H g x)\n                              ==> (f = g)",
+        "WF(<<) ==>\n       forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> forall(f:A->B) g. (forall x. f x = H f x) /\\ (forall x. g x = H g x)\n                              ==> (f = g)",
       ),
       t61,
     ),
@@ -712,7 +712,7 @@ fn step_8() -> Unit raise {
   )
   let t92 = @list.List([@meson.meson_tac(@list.List([])), t91])
   let t69 = @simp.rewrite_tac(@list.List([]))
-  let t65 = @parser.parse_term("\\f x. P(x:A) \\/ !z:A. z << x ==> f(z)")
+  let t65 = @parser.parse_term("\\f x. P(x:A) \\/ forall z:A. z << x ==> f(z)")
   let t68 = @tactics.first_x_assum(fn(
     x67 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1036,7 +1036,7 @@ fn step_8() -> Unit raise {
   wf_urec_wf_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n        ==> !(f:A->bool) g. (!x. f x = H f x) /\\ (!x. g x = H g x)\n                          ==> (f = g))\n   ==> WF(<<)",
+        "(forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n        ==> forall(f:A->bool) g. (forall x. f x = H f x) /\\ (forall x. g x = H g x)\n                          ==> (f = g))\n   ==> WF(<<)",
       ),
       t93,
     ),
@@ -1056,11 +1056,11 @@ pub fn wf_urec_wf() -> @kernel.Thm {
 /// WF_REC_INVARIANT
 fn step_9() -> Unit raise {
   let lemma = @ind_defs.prove_inductive_relations_exist(
-    @parser.parse_term("!f:A->B x. (!z. z << x ==> R z (f z)) ==> R x (H f x)"),
+    @parser.parse_term("forall f:A->B x. (forall z. z << x ==> R z (f z)) ==> R x (H f x)"),
   )
   let t111 = @meson.asm_meson_tac(@list.List([]))
   let t110 = @tactics.subgoal_then(
-    @parser.parse_term("!x:A y:B. R x y ==> S x y"),
+    @parser.parse_term("forall x:A y:B. R x y ==> S x y"),
     fn(
       x107 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1142,7 +1142,7 @@ fn step_9() -> Unit raise {
   })
   let t100 = @tactics.repeat_tac(@tactics.strip_tac)
   let t99 = @tactics.first_x_assum(@tactics.match_mp_tac)
-  let t98 = @tactics.subgoal_then(@parser.parse_term("!x:A. ?!y:B. R x y"), fn(
+  let t98 = @tactics.subgoal_then(@parser.parse_term("forall x:A. ?!y:B. R x y"), fn(
     x96 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -1198,7 +1198,7 @@ fn step_9() -> Unit raise {
   wf_rec_invariant_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF(<<)\n   ==> !H S. (!f g x. (!z. z << x ==> (f z = g z) /\\ S z (f z))\n                      ==> (H f x = H g x) /\\ S x (H f x))\n             ==> ?f:A->B. !x. (f x = H f x)",
+        "WF(<<)\n   ==> forall H S. (forall f g x. (forall z. z << x ==> (f z = g z) /\\ S z (f z))\n                      ==> (H f x = H g x) /\\ S x (H f x))\n             ==> ?f:A->B. forall x. (f x = H f x)",
       ),
       t112,
     ),
@@ -1255,7 +1255,7 @@ fn step_10() -> Unit raise {
   wf_rec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF(<<)\n   ==> !H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n           ==> ?f:A->B. !x. f x = H f x",
+        "WF(<<)\n   ==> forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n           ==> ?f:A->B. forall x. f x = H f x",
       ),
       t118,
     ),
@@ -1335,7 +1335,7 @@ fn step_11() -> Unit raise {
     t178,
   ])
   let t168 = @tactics.subgoal_then(
-    @parser.parse_term("!n:num. ?k. f(x(k):A) < f(x(n))"),
+    @parser.parse_term("forall n:num. ?k. f(x(k):A) < f(x(n))"),
     fn(
       x165 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1385,7 +1385,7 @@ fn step_11() -> Unit raise {
   )
   let t164 = @list.List([@meson.meson_tac(@list.List([])), @tactics.disch_tac])
   let t163 = @tactics.subgoal_then(
-    @parser.parse_term("!n. ?p. (x:num->A) n = x p"),
+    @parser.parse_term("forall n. ?p. (x:num->A) n = x p"),
     fn(
       x161 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1750,7 +1750,7 @@ fn step_11() -> Unit raise {
     @tactics.all_tac,
   ])
   let t125 = @tactics.subgoal_then(
-    @parser.parse_term("!n. (x:num->A)(@m. x(m) << x(n)) << x(n)"),
+    @parser.parse_term("forall n. (x:num->A)(@m. x(m) << x(n)) << x(n)"),
     fn(
       x122 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1848,7 +1848,7 @@ fn step_11() -> Unit raise {
   wf_rec_wf_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n                 ==> ?f:A->num. !x. f x = H f x)\n   ==> WF(<<)",
+        "(forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n                 ==> ?f:A->num. forall x. f x = H f x)\n   ==> WF(<<)",
       ),
       t180,
     ),
@@ -1871,7 +1871,7 @@ fn step_12() -> Unit raise {
   wf_erec_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF(<<) ==>\n       !H. (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> ?!f:A->B. !x. f x = H f x",
+        "WF(<<) ==>\n       forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> ?!f:A->B. forall x. f x = H f x",
       ),
       t181,
     ),
@@ -2011,7 +2011,7 @@ fn step_13() -> Unit raise {
     t202,
   ])
   let t185 = @tactics.subgoal_then(
-    @parser.parse_term("?f:A->B. !x. f x = @y. P f x y"),
+    @parser.parse_term("?f:A->B. forall x. f x = @y. P f x y"),
     fn(
       x182 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2066,7 +2066,7 @@ fn step_13() -> Unit raise {
   wf_rec_exists_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "WF((<<):A->A->bool)\n   ==> !P. (!f g x y. (!z. z << x ==> f z = g z) ==> (P f x y <=> P g x y)) /\\\n           (!f x. (!z. z << x ==> P f z (f z)) ==> ?y. P f x y)\n           ==> ?f:A->B. !x. P f x (f x)",
+        "WF((<<):A->A->bool)\n   ==> forall P. (forall f g x y. (forall z. z << x ==> f z = g z) ==> (P f x y <=> P g x y)) /\\\n           (forall f x. (forall z. z << x ==> P f z (f z)) ==> ?y. P f x y)\n           ==> ?f:A->B. forall x. P f x (f x)",
       ),
       t204,
     ),
@@ -2093,7 +2093,7 @@ fn step_14() -> Unit raise {
 fn step_15() -> Unit raise {
   let t218 = @meson.meson_tac(@list.List([]))
   let t217 = @tactics.undisch_tac(
-    @parser.parse_term("!(x:A) (y:A). x << y ==> x <<< y"),
+    @parser.parse_term("forall(x:A) (y:A). x << y ==> x <<< y"),
   )
   let t216 = @tactics.disch_then(
     @tactics.ante_res_then(fn(
@@ -2262,7 +2262,7 @@ fn step_15() -> Unit raise {
   wf_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(<<) (<<<). (!(x:A) y. x << y ==> x <<< y) /\\ WF(<<<) ==> WF(<<)",
+        "forall(<<) (<<<). (forall(x:A) y. x << y ==> x <<< y) /\\ WF(<<<) ==> WF(<<)",
       ),
       t219,
     ),
@@ -2292,7 +2292,7 @@ fn step_16() -> Unit raise {
   wf_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(<<) P:A->bool. WF(<<) ==> WF(\\x y. P x /\\ P y /\\ x << y)",
+        "forall(<<) P:A->bool. WF(<<) ==> WF(\\x y. P x /\\ P y /\\ x << y)",
       ),
       t222,
     ),
@@ -2314,9 +2314,9 @@ fn step_17() -> Unit raise {
   let t234 = @meson.meson_tac(@list.List([]))
   let t233 = @simp.rewrite_tac(@list.List([]))
   let t232 = @tactics.undisch_tac(
-    @parser.parse_term("!x. (!y. (m:A->B) y << m x ==> P y) ==> P x"),
+    @parser.parse_term("forall x. (forall y. (m:A->B) y << m x ==> P y) ==> P x"),
   )
-  let t228 = @parser.parse_term("\\y:B. !x:A. (m(x) = y) ==> P x")
+  let t228 = @parser.parse_term("\\y:B. forall x:A. (m(x) = y) ==> P x")
   let t231 = @tactics.first_assum(fn(
     x230 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2405,7 +2405,7 @@ fn step_17() -> Unit raise {
   )
   wf_measure_gen_c.set(
     @tactics.prove(
-      @parser.parse_term("!(<<) (m:A->B). WF(<<) ==> WF(\\x x'. m x << m x')"),
+      @parser.parse_term("forall(<<) (m:A->B). WF(<<) ==> WF(\\x x'. m x << m x')"),
       t235,
     ),
   )
@@ -2998,7 +2998,7 @@ fn step_18() -> Unit raise {
   wf_lex_dependent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool S:A->B->B->bool. WF(R) /\\ (!a. WF(S a))\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S r1 s1 s2)",
+        "forall R:A->A->bool S:A->B->B->bool. WF(R) /\\ (forall a. WF(S a))\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S r1 s1 s2)",
       ),
       t300,
     ),
@@ -3023,7 +3023,7 @@ fn step_19() -> Unit raise {
   wf_lex_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!R:A->A->bool S:B->B->bool. WF(R) /\\ WF(S)\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S s1 s2)",
+        "forall R:A->A->bool S:B->B->bool. WF(R) /\\ WF(S)\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S s1 s2)",
       ),
       t301,
     ),
@@ -3112,7 +3112,7 @@ fn step_22() -> Unit raise {
   wf_rec_num_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!H. (!f g n. (!m. m < n ==> (f m = g m)) ==> (H f n = H g n))\n        ==> ?f:num->A. !n. f n = H f n",
+        "forall H. (forall f g n. (forall m. m < n ==> (f m = g m)) ==> (H f n = H g n))\n        ==> ?f:num->A. forall n. f n = H f n",
       ),
       t309,
     ),
@@ -3161,7 +3161,7 @@ fn step_24() -> Unit raise {
     t312,
   )
   wf_measure_c.set(
-    @tactics.prove(@parser.parse_term("!m:A->num. WF(MEASURE m)"), t313),
+    @tactics.prove(@parser.parse_term("forall m:A->num. WF(MEASURE m)"), t313),
   )
 }
 
@@ -3184,7 +3184,7 @@ fn step_25() -> Unit raise {
   measure_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!m:A->num. (!y. MEASURE m y a ==> MEASURE m y b) <=> m(a) <= m(b)",
+        "forall m:A->num. (forall y. MEASURE m y a ==> MEASURE m y b) <=> m(a) <= m(b)",
       ),
       t315,
     ),
@@ -3358,7 +3358,7 @@ fn step_26() -> Unit raise {
   )
   wf_antisym_c.set(
     @tactics.prove(
-      @parser.parse_term("!(<<) x y:A. WF(<<) ==> ~(x << y /\\ y << x)"),
+      @parser.parse_term("forall(<<) x y:A. WF(<<) ==> ~(x << y /\\ y << x)"),
       t331,
     ),
   )
@@ -3378,7 +3378,7 @@ pub fn wf_antisym() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t332 = @meson.meson_tac(@list.List([wf_antisym()]))
   wf_refl_c.set(
-    @tactics.prove(@parser.parse_term("!x:A. WF(<<) ==> ~(x << x)"), t332),
+    @tactics.prove(@parser.parse_term("forall x:A. WF(<<) ==> ~(x << x)"), t332),
   )
 }
 
@@ -3501,7 +3501,7 @@ fn step_29() -> Unit raise {
       @meson.meson(
         @list.List([]),
         @parser.parse_term(
-          "(?a. (?y. P y /\\ Q y /\\ f y = a) /\\ (!z. A z ==> ~B a z)) <=>\n     ?y. (P y /\\ Q y) /\\ (!z. B (f y) z ==> ~A z)",
+          "(?a. (?y. P y /\\ Q y /\\ f y = a) /\\ (forall z. A z ==> ~B a z)) <=>\n     ?y. (P y /\\ Q y) /\\ (forall z. B (f y) z ==> ~A z)",
         ),
       ),
     ]),
@@ -3526,7 +3526,7 @@ fn step_29() -> Unit raise {
   ])
   let t337 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?x:num->A. !n. (?y. bad y /\\ (!k. k < n ==> y k = x k) /\\ y n = x n) /\\\n                   !z. bad z /\\ (!k. k < n ==> z k = x k) ==> ~(z n << x n)",
+      "?x:num->A. forall n. (?y. bad y /\\ (forall k. k < n ==> y k = x k) /\\ y n = x n) /\\\n                   forall z. bad z /\\ (forall k. k < n ==> z k = x k) ==> ~(z n << x n)",
     ),
     fn(
       x334 : @kernel.Thm,
@@ -3624,7 +3624,7 @@ fn step_29() -> Unit raise {
   minimal_bad_sequence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(<<) (bad:(num->A)->bool).\n        WF(<<) /\\\n        (!x. ~bad x ==> ?n. !y. (!k. k < n ==> y k = x k) ==> ~bad y) /\\\n        (?x. bad x)\n         ==> ?y. bad y /\\\n                 !z n. bad z /\\ (!k. k < n ==> z k = y k) ==> ~(z n << y n)",
+        "forall(<<) (bad:(num->A)->bool).\n        WF(<<) /\\\n        (forall x. ~bad x ==> ?n. forall y. (forall k. k < n ==> y k = x k) ==> ~bad y) /\\\n        (?x. bad x)\n         ==> ?y. bad y /\\\n                 forall z n. bad z /\\ (forall k. k < n ==> z k = y k) ==> ~(z n << y n)",
       ),
       t360,
     ),
@@ -3662,7 +3662,7 @@ fn step_30() -> Unit raise {
   )
   let lemma2 = @tactics.prove(
     @parser.parse_term(
-      "(P 0) ==> ((!m. m < n ==> P(SUC m)) <=> (!m. m < SUC n ==> P(m)))",
+      "(P 0) ==> ((forall m. m < n ==> P(SUC m)) <=> (forall m. m < SUC n ==> P(m)))",
     ),
     t363,
   )
@@ -3732,7 +3732,7 @@ fn step_30() -> Unit raise {
   let t379 = @simp.asm_rewrite_tac(@list.List([]))
   let t378 = @class.asm_cases_tac(@parser.parse_term("(P:A->bool) x"))
   let t376 = @tactics.undisch_then(
-    @parser.parse_term("!x:A n. s x (SUC n) :A = g (s x n)"),
+    @parser.parse_term("forall x:A n. s x (SUC n) :A = g (s x n)"),
     fn(
       x375 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3762,7 +3762,7 @@ fn step_30() -> Unit raise {
     t376,
   ])
   let t374 = @tactics.subgoal_then(
-    @parser.parse_term("!n x:A. s (g x) n :A = s x (SUC n)"),
+    @parser.parse_term("forall n x:A. s (g x) n :A = s x (SUC n)"),
     fn(
       x371 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3813,7 +3813,7 @@ fn step_30() -> Unit raise {
   let t370 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
   let t369 = @tactics.exists_tac(
     @parser.parse_term(
-      "\\x:A. if ?n:num. ~P(s x n)\n                    then (h:A->B)(@y. ?n. (y = s x n) /\\ ~P(s x n) /\\\n                                          !m. m < n ==> P(s x m))\n                    else something_arbitrary:B",
+      "\\x:A. if ?n:num. ~P(s x n)\n                    then (h:A->B)(@y. ?n. (y = s x n) /\\ ~P(s x n) /\\\n                                          forall m. m < n ==> P(s x m))\n                    else something_arbitrary:B",
     ),
   )
   let t368 = @tactics.disch_then(
@@ -3864,7 +3864,7 @@ fn step_30() -> Unit raise {
   wf_rec_tail_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P g h. ?f:A->B. !x. f x = if P(x) then f(g x) else h x",
+        "forall P g h. ?f:A->B. forall x. f x = if P(x) then f(g x) else h x",
       ),
       t392,
     ),
@@ -3935,7 +3935,7 @@ fn step_31() -> Unit raise {
   let t429 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t428 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!f:A->B. (!x:A y:A. P f x /\\ y << G f x ==> y << x)\n         ==> !x. terminates f x ==> !y. y << while f x ==> y << x",
+      "forall f:A->B. (forall x:A y:A. P f x /\\ y << G f x ==> y << x)\n         ==> forall x. terminates f x ==> forall y. y << while f x ==> y << x",
     ),
     fn(
       x426 : @kernel.Thm,
@@ -3983,7 +3983,7 @@ fn step_31() -> Unit raise {
       @tactics.then_tac(
         @tactics.subgoal_then(
           @parser.parse_term(
-            "!x:A. terminates (f:A->B) x /\\\n              (!y:A. (!z:A. z << y ==> z << x)\n                     ==> (P f y <=> P g y) /\\ (G f y :A = G g y))\n              ==> (while f x :A = while g x)",
+            "forall x:A. terminates (f:A->B) x /\\\n              (forall y:A. (forall z:A. z << y ==> z << x)\n                     ==> (P f y <=> P g y) /\\ (G f y :A = G g y))\n              ==> (while f x :A = while g x)",
           ),
           fn(
             x420 : @kernel.Thm,
@@ -4037,7 +4037,7 @@ fn step_31() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.subgoal_then(
                     @parser.parse_term(
-                      "!f g x.\n           (!x y. P f x /\\ y << G (f:A->B) x ==> y << x) /\\\n           (!y:A. (!z:A. z << y ==> z << x)\n                  ==> (P f y = P g y) /\\ (G f y = G g y))\n               ==> terminates f x ==> terminates g x",
+                      "forall f g x.\n           (forall x y. P f x /\\ y << G (f:A->B) x ==> y << x) /\\\n           (forall y:A. (forall z:A. z << y ==> z << x)\n                  ==> (P f y = P g y) /\\ (G f y = G g y))\n               ==> terminates f x ==> terminates g x",
                     ),
                     fn(
                       x413 : @kernel.Thm,
@@ -4141,7 +4141,7 @@ fn step_31() -> Unit raise {
   ])
   let t407 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?f:A->B. !x. f x = if terminates f x then H f (while f x :A) else anything",
+      "?f:A->B. forall x. f x = if terminates f x then H f (while f x :A) else anything",
     ),
     fn(
       x404 : @kernel.Thm,
@@ -4198,7 +4198,7 @@ fn step_31() -> Unit raise {
   ])
   let t402 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?while. !f:A->B x:A. while f x = if P f x then while f (G f x) else x",
+      "?while. forall f:A->B x:A. while f x = if P f x then while f (G f x) else x",
     ),
     fn(
       x401 : @kernel.Thm,
@@ -4250,7 +4250,7 @@ fn step_31() -> Unit raise {
   let t398 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm()]))
   let t396 = @ind_defs.prove_inductive_relations_exist(
     @parser.parse_term(
-      "(!x:A. ~(P f x) ==> terminates f x) /\\\n      (!x. P (f:A->B) x /\\ terminates f (G f x) ==> terminates f x)",
+      "(forall x:A. ~(P f x) ==> terminates f x) /\\\n      (forall x. P (f:A->B) x /\\ terminates f (G f x) ==> terminates f x)",
     ),
   )
   let t397 = @tactics.choose_then(fn(
@@ -4321,7 +4321,7 @@ fn step_31() -> Unit raise {
   wf_rec_tail_general_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!P G H. WF(<<) /\\\n           (!f g x. (!z. z << x ==> (f z = g z))\n                    ==> (P f x <=> P g x) /\\ G f x = G g x /\\ H f x = H g x) /\\\n           (!f g x. (!z. z << x ==> (f z = g z)) ==> (H f x = H g x)) /\\\n           (!f x y. P f x /\\ y << G f x ==> y << x)\n           ==> ?f:A->B. !x. f x = if P f x then f(G f x) else H f x",
+        "forall P G H. WF(<<) /\\\n           (forall f g x. (forall z. z << x ==> (f z = g z))\n                    ==> (P f x <=> P g x) /\\ G f x = G g x /\\ H f x = H g x) /\\\n           (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x)) /\\\n           (forall f x y. P f x /\\ y << G f x ==> y << x)\n           ==> ?f:A->B. forall x. f x = if P f x then f(G f x) else H f x",
       ),
       t444,
     ),
@@ -4344,7 +4344,7 @@ pub fn wf_rec_tail_general() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   let t445 = @meson.meson_tac(@list.List([]))
   let pth = @tactics.prove(
-    @parser.parse_term("(!x. P x ==> !y. Q x y) <=> !y x. P x ==> Q x y"),
+    @parser.parse_term("(forall x. P x ==> forall y. Q x y) <=> forall y x. P x ==> Q x y"),
     t445,
   )
   let qqconv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
@@ -4357,7 +4357,7 @@ fn step_32() -> Unit raise {
   )
   let t447 = @meson.meson_tac(@list.List([]))
   let pth_1 = @tactics.prove(
-    @parser.parse_term("(!m. P m ==> (m = e) ==> Q) <=> (P e ==> Q)"),
+    @parser.parse_term("(forall m. P m ==> (m = e) ==> Q) <=> (P e ==> Q)"),
     t447,
   )
   let eqconv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(pth_1)

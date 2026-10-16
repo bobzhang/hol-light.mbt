@@ -139,7 +139,7 @@ pub fn iff_def() -> @kernel.Thm {
 ///|
 /// forever
 fn step_13() -> Unit raise {
-  forever_c.set(@define.define_(@parser.parse_term("forever p = \\t:num. !t'. t <= t' ==> p t'")))
+  forever_c.set(@define.define_(@parser.parse_term("forever p = \\t:num. forall t'. t <= t' ==> p t'")))
 }
 
 ///|
@@ -190,7 +190,7 @@ fn step_16() -> Unit raise {
 ///|
 /// until
 fn step_17() -> Unit raise {
-  until_c.set(@define.define_(@parser.parse_term("p until q =\n    \\t:num. ?t'. t <= t' /\\ (!t''. t <= t'' /\\ t'' < t' ==> p t'') /\\ q t'")))
+  until_c.set(@define.define_(@parser.parse_term("p until q =\n    \\t:num. ?t'. t <= t' /\\ (forall t''. t <= t'' /\\ t'' < t' ==> p t'') /\\ q t'")))
 }
 
 ///|

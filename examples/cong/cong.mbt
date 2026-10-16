@@ -57,7 +57,7 @@ pub fn cong_mod_1_v1() -> @kernel.Thm {
 ///|
 /// CONG_REFL
 fn step_5() -> Unit raise {
-  cong_refl_c.set(@tactics.prove(@parser.parse_term("!n x. (x == x) (mod n)"), @int.integer_tac))
+  cong_refl_c.set(@tactics.prove(@parser.parse_term("forall n x. (x == x) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -72,7 +72,7 @@ pub fn cong_refl() -> @kernel.Thm {
 ///|
 /// CONG_SYM
 fn step_6() -> Unit raise {
-  cong_sym_c.set(@tactics.prove(@parser.parse_term("!n x y. (x == y) (mod n) ==> (y == x) (mod n)"), @int.integer_tac))
+  cong_sym_c.set(@tactics.prove(@parser.parse_term("forall n x y. (x == y) (mod n) ==> (y == x) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -87,7 +87,7 @@ pub fn cong_sym() -> @kernel.Thm {
 ///|
 /// CONG_TRANS
 fn step_7() -> Unit raise {
-  cong_trans_c.set(@tactics.prove(@parser.parse_term("!n x y z. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)"), @int.integer_tac))
+  cong_trans_c.set(@tactics.prove(@parser.parse_term("forall n x y z. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -102,7 +102,7 @@ pub fn cong_trans() -> @kernel.Thm {
 ///|
 /// CONG_ADD
 fn step_8() -> Unit raise {
-  cong_add_c.set(@tactics.prove(@parser.parse_term("!n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 + y1 == x2 + y2) (mod n)"), @int.integer_tac))
+  cong_add_c.set(@tactics.prove(@parser.parse_term("forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 + y1 == x2 + y2) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -117,7 +117,7 @@ pub fn cong_add() -> @kernel.Thm {
 ///|
 /// CONG_NEG
 fn step_9() -> Unit raise {
-  cong_neg_c.set(@tactics.prove(@parser.parse_term("!n x1 x2. (x1 == x2) (mod n) ==> (--x1 == --x2) (mod n)"), @int.integer_tac))
+  cong_neg_c.set(@tactics.prove(@parser.parse_term("forall n x1 x2. (x1 == x2) (mod n) ==> (--x1 == --x2) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -132,7 +132,7 @@ pub fn cong_neg() -> @kernel.Thm {
 ///|
 /// CONG_SUB
 fn step_10() -> Unit raise {
-  cong_sub_c.set(@tactics.prove(@parser.parse_term("!n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 - y1 == x2 - y2) (mod n)"), @int.integer_tac))
+  cong_sub_c.set(@tactics.prove(@parser.parse_term("forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 - y1 == x2 - y2) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -147,7 +147,7 @@ pub fn cong_sub() -> @kernel.Thm {
 ///|
 /// CONG_MUL
 fn step_11() -> Unit raise {
-  cong_mul_c.set(@tactics.prove(@parser.parse_term("!n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 * y1 == x2 * y2) (mod n)"), @int.integer_tac))
+  cong_mul_c.set(@tactics.prove(@parser.parse_term("forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 * y1 == x2 * y2) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -162,7 +162,7 @@ pub fn cong_mul() -> @kernel.Thm {
 ///|
 /// CONG_MOD_NEG
 fn step_12() -> Unit raise {
-  cong_mod_neg_c.set(@tactics.prove(@parser.parse_term("!x y n. (x == y) (mod (--n)) <=> (x == y) (mod n)"), @int.integer_tac))
+  cong_mod_neg_c.set(@tactics.prove(@parser.parse_term("forall x y n. (x == y) (mod (--n)) <=> (x == y) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -180,7 +180,7 @@ fn step_13() -> Unit raise {
   let t4 = @simp.asm_rewrite_tac(@list.List([cong_mod_neg()]))
   let t3 = @simp.rewrite_tac(@list.List([@int.int_abs_v1()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3), @class.cond_cases_tac), t4)
-  cong_mod_abs_c.set(@tactics.prove(@parser.parse_term("!x y n. (x == y) (mod (abs n)) <=> (x == y) (mod n)"), t5))
+  cong_mod_abs_c.set(@tactics.prove(@parser.parse_term("forall x y n. (x == y) (mod (abs n)) <=> (x == y) (mod n)"), t5))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn cong_mod_abs() -> @kernel.Thm {
 ///|
 /// CONG_MULTIPLE
 fn step_14() -> Unit raise {
-  cong_multiple_c.set(@tactics.prove(@parser.parse_term("!m n. (m * n == &0) (mod n)"), @int.integer_tac))
+  cong_multiple_c.set(@tactics.prove(@parser.parse_term("forall m n. (m * n == &0) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -210,7 +210,7 @@ pub fn cong_multiple() -> @kernel.Thm {
 ///|
 /// CONG_SELF
 fn step_15() -> Unit raise {
-  cong_self_c.set(@tactics.prove(@parser.parse_term("!n. (n == &0) (mod n)"), @int.integer_tac))
+  cong_self_c.set(@tactics.prove(@parser.parse_term("forall n. (n == &0) (mod n)"), @int.integer_tac))
 }
 
 ///|
@@ -227,7 +227,7 @@ pub fn cong_self() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([cong_self()]))
   let t7 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(cong_mod_abs())])), t6)
-  cong_self_abs_c.set(@tactics.prove(@parser.parse_term("!n. (abs(n) == &0) (mod n)"), t7))
+  cong_self_abs_c.set(@tactics.prove(@parser.parse_term("forall n. (abs(n) == &0) (mod n)"), t7))
 }
 
 ///|
@@ -276,7 +276,7 @@ fn step_18() -> Unit raise {
   let t10 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("n:int"), t9]))
   let t8 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_forall_pos())]))
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj()])), t8), t10), t11), t12), t13), t15), t16), t17), t18), @tactics.disch_tac), t19), t20), t21), t22), t23), t24), t25)
-  cong_rep_pos_pos_c.set(@tactics.prove(@parser.parse_term("!n x. &0 <= x /\\ ~(n = &0)\n         ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)"), t26))
+  cong_rep_pos_pos_c.set(@tactics.prove(@parser.parse_term("forall n x. &0 <= x /\\ ~(n = &0)\n         ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)"), t26))
 }
 
 ///|
@@ -352,7 +352,7 @@ fn step_19() -> Unit raise {
   let t28 = @simp.asm_simp_tac(@list.List([cong_rep_pos_pos()]))
   let t27 = @tactics.disj_cases_tac(@int.int_arith(@parser.parse_term("&0 <= x \\/ &0 <= --x")))
   let t73 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t27), t28), t30), t31), t32), t33), t41), t42), t44), t50), t56), t63), t64), t70), t71), t72)
-  cong_rep_pos_c.set(@tactics.prove(@parser.parse_term("!n x. ~(n = &0) ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)"), t73))
+  cong_rep_pos_c.set(@tactics.prove(@parser.parse_term("forall n x. ~(n = &0) ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)"), t73))
 }
 
 ///|
@@ -409,7 +409,7 @@ fn step_20() -> Unit raise {
     })(t77(x78))
   })
   let t106 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t79), t84), t85), t86), @tactics.strip_tac), t87), t88), t89), t90), t96), t97), t98), t104), t105)
-  cong_rep_min_c.set(@tactics.prove(@parser.parse_term("!n x. ~(n = &0)\n         ==> ?y. --(abs n) <= &2 * y /\\ &2 * y < abs n /\\ (x == y) (mod n)"), t106))
+  cong_rep_min_c.set(@tactics.prove(@parser.parse_term("forall n x. ~(n = &0)\n         ==> ?y. --(abs n) <= &2 * y /\\ &2 * y < abs n /\\ (x == y) (mod n)"), t106))
 }
 
 ///|
@@ -445,7 +445,7 @@ fn step_21() -> Unit raise {
     })(t110(x111))
   })
   let t122 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t112), t119), t120), t121), @int.int_arith_tac)
-  cong_rep_min_abs_c.set(@tactics.prove(@parser.parse_term("!n x. ~(n = &0) ==> ?y. &2 * abs(y) <= abs(n) /\\ (x == y) (mod n)"), t122))
+  cong_rep_min_abs_c.set(@tactics.prove(@parser.parse_term("forall n x. ~(n = &0) ==> ?y. &2 * abs(y) <= abs(n) /\\ (x == y) (mod n)"), t122))
 }
 
 ///|

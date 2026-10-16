@@ -257,10 +257,10 @@ pub fn normalize_times(s : String) -> String {
 /// nums.ml: `INFINITY_AX`), as `sthm` renders them.
 let approved_axioms : Array[String] = [
   (
-    #| |- (#!:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
+    #| |- (#forall:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
   ),
   (
-    #| |- (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool))))))))
+    #| |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool))))))))
   ),
   (
     #| |- (#?:fun(fun(fun(ind,ind),bool),bool) (\f:fun(ind,ind). ((#/\:fun(bool,fun(bool,bool)) (#ONE_ONE:fun(fun(ind,ind),bool) f:fun(ind,ind))) (#~:fun(bool,bool) (#ONTO:fun(fun(ind,ind),bool) f:fun(ind,ind))))))

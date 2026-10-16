@@ -21,13 +21,13 @@ test "quot matches quot.ml" {
   let meson = @meson.meson_tac(@list.List([])) catch { e => fail("\{e}") }
   try {
     let beq = @drule.new_definition(tm("BEQ x y <=> (x:bool <=> y)"))
-    let refl_th = @tactics.prove(tm("!x. BEQ x x"), rw([beq]))
+    let refl_th = @tactics.prove(tm("forall x. BEQ x x"), rw([beq]))
     let sym_th = @tactics.prove(
-      tm("!x y. BEQ x y <=> BEQ y x"),
+      tm("forall x y. BEQ x y <=> BEQ y x"),
       @tactics.then_tac(rw([beq]), meson),
     )
     let trans_th = @tactics.prove(
-      tm("!x y z. BEQ x y /\\ BEQ y z ==> BEQ x z"),
+      tm("forall x y z. BEQ x y /\\ BEQ y z ==> BEQ x z"),
       @tactics.then_tac(rw([beq]), meson),
     )
     let q = @quot.define_quotient_type(
@@ -37,12 +37,12 @@ test "quot matches quot.ml" {
     )
     log.attempt("define", () => sthm(q.0) + " ;; " + sthm(q.1))
     let wth = @tactics.prove(
-      tm("!x y. BEQ x y ==> BEQ (~x) (~y)"),
+      tm("forall x y. BEQ x y ==> BEQ (~x) (~y)"),
       @tactics.then_tac(rw([beq]), meson),
     )
     let lf = @quot.lift_function(q.1)((refl_th, trans_th))("qnot")(wth)
     log.attempt("lift_function", () => sthm(lf.0) + " ;; " + sthm(lf.1))
-    let th = @tactics.prove(tm("!x. BEQ (~ ~x) x"), rw([beq]))
+    let th = @tactics.prove(tm("forall x. BEQ (~ ~x) x"), rw([beq]))
     log.attempt("lift_theorem", () => {
       sthm(
         @quot.lift_theorem(q)((refl_th, sym_th, trans_th))(
@@ -282,20 +282,20 @@ test "quot matches quot.ml" {
       #|0..0..1..solved at 4
       #|0..0..solved at 2
       #|quot quotations (6):
-      #|  !x:A. (@y. x = y) = x
+      #|  forall x:A. (@y. x = y) = x
       #|  dest(mk((R:Repty->Repty->bool) x):Absty) = R x
       #|  x:Repty
       #|  (a /\\ b /\\ c) /\\ (b ==> a ==> d)\n                       ==> a /\\ b /\\ c /\\ d
-      #|  !x y. (mk((R:Repty->Repty->bool) x):Absty = mk(R y)) <=> (R x = R y)
-      #|  (!x:Repty. R x x) /\\\n     (!x y. R x y <=> R y x) /\\\n     (!x y z. R x y /\\ R y z ==> R x z) /\\\n     (!a. mk(dest a) = a) /\\\n     (!r. (?x. r = R x) <=> (dest(mk r) = r))\n     ==> (!x y. R x y <=> (mk(R x) = mk(R y))) /\\\n         (!P. (!x. P(mk(R x))) <=> (!x. P x)) /\\\n         (!P. (?x. P(mk(R x))) <=> (?x. P x)) /\\\n         (!x:Absty. mk(R((@)(dest x))) = x)
+      #|  forall x y. (mk((R:Repty->Repty->bool) x):Absty = mk(R y)) <=> (R x = R y)
+      #|  (forall x:Repty. R x x) /\\\n     (forall x y. R x y <=> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall a. mk(dest a) = a) /\\\n     (forall r. (?x. r = R x) <=> (dest(mk r) = r))\n     ==> (forall x y. R x y <=> (mk(R x) = mk(R y))) /\\\n         (forall P. (forall x. P(mk(R x))) <=> (forall x. P x)) /\\\n         (forall P. (?x. P(mk(R x))) <=> (?x. P x)) /\\\n         (forall x:Absty. mk(R((@)(dest x))) = x)
       #|define =  |- ((#=:fun(qbool,fun(qbool,bool)) (#mk_qbool:fun(fun(bool,bool),qbool) (#dest_qbool:fun(qbool,fun(bool,bool)) a:qbool))) a:qbool) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(bool,bool),bool) (\x:bool. ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) r:fun(bool,bool)) (#BEQ:fun(bool,fun(bool,bool)) x:bool))))) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (#dest_qbool:fun(qbool,fun(bool,bool)) (#mk_qbool:fun(fun(bool,bool),qbool) r:fun(bool,bool)))) r:fun(bool,bool)))
       #|lift_function =  |- ((#=:fun(qbool,fun(qbool,bool)) (#qnot:fun(qbool,qbool) x:qbool)) (#mk_qbool:fun(fun(bool,bool),qbool) (\u:bool. (#?:fun(fun(bool,bool),bool) (\x:bool. ((#/\:fun(bool,fun(bool,bool)) ((#BEQ:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) x:bool)) u:bool)) ((#dest_qbool:fun(qbool,fun(bool,bool)) x:qbool) x:bool))))))) ;;  |- ((#=:fun(qbool,fun(qbool,bool)) (#mk_qbool:fun(fun(bool,bool),qbool) (#BEQ:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) x:bool)))) (#qnot:fun(qbool,qbool) (#mk_qbool:fun(fun(bool,bool),qbool) (#BEQ:fun(bool,fun(bool,bool)) x:bool))))
-      #|lift_theorem =  |- (#!:fun(fun(qbool,bool),bool) (\x:qbool. ((#=:fun(qbool,fun(qbool,bool)) (#qnot:fun(qbool,qbool) (#qnot:fun(qbool,qbool) x:qbool))) x:qbool)))
+      #|lift_theorem =  |- (#forall:fun(fun(qbool,bool),bool) (\x:qbool. ((#=:fun(qbool,fun(qbool,bool)) (#qnot:fun(qbool,qbool) (#qnot:fun(qbool,qbool) x:qbool))) x:qbool)))
       #|define_again ! new_basic_type_definition: Constant(s) already in use
       #|types = qbool 1 bool fun
-      #|constants = qnot dest_qbool mk_qbool BEQ hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+      #|constants = qnot dest_qbool mk_qbool BEQ hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?4418
+      #|counter_tyvar = zz_counter:'?4416
       #|counter_genvar = _1077:bool
       #|
     ),

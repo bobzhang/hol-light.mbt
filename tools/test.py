@@ -57,7 +57,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIMES = os.path.join(ROOT, "tools", "test_times.tsv")
 # hol.ml's hand-ported files and the support packages
 QUICK = ["kernel", "lib", "num", "pp", "basics", "nets", "printer", "preterm", "lexer", "parser",
-         "equal", "bool", "drule", "tactics", "itab", "simp", "omap", "oset", "testkit"]
+         "equal", "bool", "drule", "tactics", "itab", "simp", "omap", "oset", "testkit", "tests/forall"]
 SKIP_DIRS = {"tools", "_build", "target"}
 
 
@@ -74,9 +74,11 @@ def packages():
 
 
 def tier_of(pkg):
+    if pkg in QUICK:
+        return "quick"
     if "/" in pkg:
         return pkg.split("/")[0]
-    return "quick" if pkg in QUICK else "core"
+    return "core"
 
 
 # package -> the test files selected in it (all of them when absent)
@@ -93,7 +95,7 @@ def select(names, pkgs):
         elif n == "all":
             sel = pkgs
         elif n == "core":
-            sel = [p for p in pkgs if "/" not in p]
+            sel = [p for p in pkgs if "/" not in p or p in QUICK]
         elif n in pkgs:
             sel = [n]
         else:
@@ -198,6 +200,7 @@ def run_wasm(target, ps, a):
         b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.build_jobs] + ps,
                            cwd=ROOT, capture_output=True, text=True)
     open(logf, "w").write(b.stdout + b.stderr)
+    log_lock = threading.Lock()
     if b.returncode != 0:
         errs = [l for l in (b.stdout + b.stderr).splitlines() if l.startswith(("Error", "error"))]
         print("\n".join(errs[:20]) or (b.stdout + b.stderr)[-2000:])
@@ -261,6 +264,12 @@ def run_wasm(target, ps, a):
             tail = [l for l in err.strip().splitlines() if l.strip()][:6]
             lines.append(f"   FAILED {p} ({kind}): exit {proc.returncode}, {len(res)} of {n} tests ran\n     " +
                          "\n     ".join(l[:300] for l in tail))
+        if lines:
+            # Keep complete snapshots and stacks in the CI artifact; the console
+            # summary deliberately shows only the first difference.
+            with log_lock, open(logf, "a") as lf:
+                lf.write(json.dumps({"package": p, "kind": kind,
+                                     "failures": bad, "stderr": err}) + "\n")
         for l in lines:
             print(l, flush=True)
         return p, time.time() - t, n, len(res) - len(bad), not lines, peak[0]

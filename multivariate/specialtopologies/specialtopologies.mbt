@@ -63,7 +63,7 @@ fn step_2() -> Unit raise {
       })(x14))
     })(x15)(x15)
   }), @tactics.ants_tac), t27)
-  open_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        open_in (indiscrete_topology u) s <=> s = {} \\/ s = u"), t28))
+  open_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        open_in (indiscrete_topology u) s <=> s = {} \\/ s = u"), t28))
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn open_in_indiscrete_topology() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t29 = @sets.set_tac(@list.List([]))
   let t30 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.topspace(), open_in_indiscrete_topology()])), t29)
-  topspace_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. topspace(indiscrete_topology u) = u"), t30))
+  topspace_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. topspace(indiscrete_topology u) = u"), t30))
 }
 
 ///|
@@ -97,7 +97,7 @@ pub fn topspace_indiscrete_topology() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t31 = @sets.set_tac(@list.List([]))
   let t32 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.closed_in(), open_in_indiscrete_topology(), topspace_indiscrete_topology()])), t31)
-  closed_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        closed_in (indiscrete_topology u) s <=> s = {} \\/ s = u"), t32))
+  closed_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        closed_in (indiscrete_topology u) s <=> s = {} \\/ s = u"), t32))
 }
 
 ///|
@@ -119,7 +119,7 @@ fn step_5() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@metric.open_in_subtopology_alt()]))
   let t33 = @simp.rewrite_tac(@list.List([@metric.topology_eq()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t33), @tactics.gen_tac), t34), t35), t36), t37), t38)
-  subtopology_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        subtopology (indiscrete_topology u) s =\n        indiscrete_topology (u INTER s)"), t39))
+  subtopology_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        subtopology (indiscrete_topology u) s =\n        indiscrete_topology (u INTER s)"), t39))
 }
 
 ///|
@@ -145,7 +145,7 @@ fn step_6() -> Unit raise {
   let t41 = @tactics.exists_tac(@parser.parse_term("U:(A->bool)->bool"))
   let t40 = @tactics.x_gen_tac(@parser.parse_term("U:(A->bool)->bool"))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.compact_space_v1(), open_in_indiscrete_topology()]))), t40), @tactics.strip_tac), t41), t42), t43), t44), t45), t47), t48)
-  compact_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. compact_space (indiscrete_topology u)"), t49))
+  compact_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. compact_space (indiscrete_topology u)"), t49))
 }
 
 ///|
@@ -162,7 +162,7 @@ pub fn compact_space_indiscrete_topology() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([subtopology_indiscrete_topology(), compact_space_indiscrete_topology()]))
   let t51 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.compact_in_subspace(), topspace_indiscrete_topology()])), t50)
-  compact_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        compact_in (indiscrete_topology u) s <=> s SUBSET u"), t51))
+  compact_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        compact_in (indiscrete_topology u) s <=> s SUBSET u"), t51))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn compact_in_indiscrete_topology() -> @kernel.Thm {
 /// LOCALLY_COMPACT_SPACE_INDISCRETE_TOPOLOGY
 fn step_8() -> Unit raise {
   let t52 = @simp.simp_tac(@list.List([@metric.compact_imp_locally_compact_space(), compact_space_indiscrete_topology()]))
-  locally_compact_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. locally_compact_space (indiscrete_topology u)"), t52))
+  locally_compact_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. locally_compact_space (indiscrete_topology u)"), t52))
 }
 
 ///|
@@ -201,7 +201,7 @@ fn step_9() -> Unit raise {
   let t54 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @theorems.forall_unwind_thm2()]))
   let t53 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("(s = {} \\/ s = u) /\\ x IN u DIFF s <=> s = {} /\\ x IN u"))]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.completely_regular_space(), closed_in_indiscrete_topology(), topspace_indiscrete_topology()])), t53), t54), t56), @tactics.disch_tac), t57), t58), t59)
-  completely_regular_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. completely_regular_space(indiscrete_topology u)"), t60))
+  completely_regular_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. completely_regular_space(indiscrete_topology u)"), t60))
 }
 
 ///|
@@ -217,7 +217,7 @@ pub fn completely_regular_space_indiscrete_topology() -> @kernel.Thm {
 /// REGULAR_SPACE_INDISCRETE_TOPOLOGY
 fn step_10() -> Unit raise {
   let t61 = @simp.simp_tac(@list.List([@metric.completely_regular_imp_regular_space(), completely_regular_space_indiscrete_topology()]))
-  regular_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. regular_space(indiscrete_topology u)"), t61))
+  regular_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. regular_space(indiscrete_topology u)"), t61))
 }
 
 ///|
@@ -234,7 +234,7 @@ pub fn regular_space_indiscrete_topology() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t62 = @sets.set_tac(@list.List([]))
   let t63 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing(), topspace_indiscrete_topology(), closed_in_indiscrete_topology()])), t62)
-  t1_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. t1_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t63))
+  t1_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t1_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t63))
 }
 
 ///|
@@ -253,7 +253,7 @@ fn step_12() -> Unit raise {
   let t65 = @simp.simp_tac(@list.List([@theorems.exists_or_thm(), @theorems.unwind_thm2(), @sets.not_in_empty()]))
   let t64 = @simp.rewrite_tac(@list.List([topspace_indiscrete_topology(), @theorems.right_or_distrib()]))
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.t0_space(), open_in_indiscrete_topology()]))), t64), t65), t66)
-  t0_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. t0_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t67))
+  t0_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t0_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t67))
 }
 
 ///|
@@ -269,7 +269,7 @@ pub fn t0_space_indiscrete_topology() -> @kernel.Thm {
 /// HAUSDORFF_SPACE_INDISCRETE_TOPOLOGY
 fn step_13() -> Unit raise {
   let t68 = @meson.meson_tac(@list.List([@metric.regular_t1_eq_hausdorff_space(), regular_space_indiscrete_topology(), t1_space_indiscrete_topology()]))
-  hausdorff_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. hausdorff_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t68))
+  hausdorff_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. hausdorff_space(indiscrete_topology u) <=> ?a. u SUBSET {a}"), t68))
 }
 
 ///|
@@ -289,7 +289,7 @@ fn step_14() -> Unit raise {
   let t70 = @simp.rewrite_tac(@list.List([@theorems.exists_or_thm(), @equal.gsym(@theorems.conj_assoc()), @theorems.right_exists_and_thm()]))
   let t69 = @simp.rewrite_tac(@list.List([open_in_indiscrete_topology(), @theorems.right_or_distrib()]))
   let t73 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.normal_space(), closed_in_indiscrete_topology()]))), t69), t70), t71), t72)
-  normal_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. normal_space(indiscrete_topology u)"), t73))
+  normal_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. normal_space(indiscrete_topology u)"), t73))
 }
 
 ///|
@@ -323,7 +323,7 @@ fn step_15() -> Unit raise {
   let t75 = @simp.once_rewrite_tac(@list.List([@sets.disjoint(), @sets.set_rule(@parser.parse_term("u DIFF s = u DIFF (u INTER s)"))]))
   let t74 = @simp.once_rewrite_tac(@list.List([@metric.derived_set_of_restrict()]))
   let t92 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t76), t77), t79), t80), @tactics.strip_tac), t81), t82), t83), t84), t85), t86), t87), @class.cond_cases_tac), t88), t89), t90), t91)
-  derived_set_of_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        (indiscrete_topology u) derived_set_of s =\n        if ?a. u INTER s SUBSET {a} then if DISJOINT u s then {} else u DIFF s\n        else u"), t92))
+  derived_set_of_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        (indiscrete_topology u) derived_set_of s =\n        if ?a. u INTER s SUBSET {a} then if DISJOINT u s then {} else u DIFF s\n        else u"), t92))
 }
 
 ///|
@@ -341,7 +341,7 @@ fn step_16() -> Unit raise {
   let t94 = @simp.rewrite_tac(@list.List([@sets.diff_eq_empty(), @class.cond_id()]))
   let t93 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.disjoint_empty_refl()), @sets.inter_idempot()]))
   let t95 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([derived_set_of_indiscrete_topology()]))), t93), t94)
-  derived_set_of_topspace_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool.\n        (indiscrete_topology u) derived_set_of u =\n        if ?a. u SUBSET {a} then {} else u"), t95))
+  derived_set_of_topspace_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool.\n        (indiscrete_topology u) derived_set_of u =\n        if ?a. u SUBSET {a} then {} else u"), t95))
 }
 
 ///|
@@ -371,7 +371,7 @@ fn step_17() -> Unit raise {
   let t97 = @simp.asm_rewrite_tac(@list.List([@metric.derived_set_of_empty()]))
   let t96 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
   let t108 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t96), t97), t98), t99), t100), t104), t105), @class.cond_cases_tac), t106), t107)
-  perfect_set_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        (indiscrete_topology u) derived_set_of s = s <=>\n        s = {} \\/ s = u /\\ ~(?a.  u SUBSET {a})"), t108))
+  perfect_set_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        (indiscrete_topology u) derived_set_of s = s <=>\n        s = {} \\/ s = u /\\ ~(?a.  u SUBSET {a})"), t108))
 }
 
 ///|
@@ -395,7 +395,7 @@ fn step_18() -> Unit raise {
   let t110 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)"))]))
   let t109 = @simp.rewrite_tac(@list.List([@metric.continuous_map(), open_in_indiscrete_topology()]))
   let t117 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t109), t110), t111), t112), t113), t114), t115), t116)
-  continuous_map_into_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!(f:A->B) top u.\n        continuous_map (top,indiscrete_topology u) f <=>\n        IMAGE f (topspace top) SUBSET u"), t117))
+  continuous_map_into_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall(f:A->B) top u.\n        continuous_map (top,indiscrete_topology u) f <=>\n        IMAGE f (topspace top) SUBSET u"), t117))
 }
 
 ///|
@@ -420,13 +420,13 @@ fn step_19() -> Unit raise {
   let t124 = @parser.parse_term("b:A")
   let t125 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:A"), t124]))
   let t123 = @simp.asm_rewrite_tac(@list.List([]))
-  let t122 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("~(u = {}) /\\\n    (!x. x IN u ==> f x IN v) /\\\n    (!x y. x IN u /\\ y IN u ==> f x = f y)\n    ==> ?a. a IN v /\\ (!x. x IN u ==> f x = a)")))
+  let t122 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("~(u = {}) /\\\n    (forall x. x IN u ==> f x IN v) /\\\n    (forall x y. x IN u /\\ y IN u ==> f x = f y)\n    ==> ?a. a IN v /\\ (forall x. x IN u ==> f x = a)")))
   let t121 = @list.List([@tactics.all_tac, @tactics.asm_tac(@sets.set_tac)(@list.List([]))])
   let t120 = @simp.asm_rewrite_tac(@list.List([@metric.continuous_map_closed_in(), topspace_indiscrete_topology(), closed_in_indiscrete_topology(), @sets.not_in_empty(), @sets.empty_gspec()]))
   let t119 = @class.asm_cases_tac(@parser.parse_term("u:A->bool = {}"))
   let t118 = @tactics.repeat_tac(@tactics.strip_tac)
   let t132 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing()])), t118), t119), t120), @tactics.eq_tac), t121), @tactics.strip_tac), t122), t123), t125), @tactics.strip_tac), t129), t130), t131)
-  continuous_map_from_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!top u (f:A->B).\n        t1_space top\n        ==> (continuous_map(indiscrete_topology u,top) f <=>\n             u = {} \\/ ?a. a IN topspace top /\\ !x. x IN u ==> f x = a)"), t132))
+  continuous_map_from_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall top u (f:A->B).\n        t1_space top\n        ==> (continuous_map(indiscrete_topology u,top) f <=>\n             u = {} \\/ ?a. a IN topspace top /\\ forall x. x IN u ==> f x = a)"), t132))
 }
 
 ///|
@@ -452,7 +452,7 @@ fn step_20() -> Unit raise {
   let t134 = @simp.rewrite_tac(@list.List([@metric.path_in(), continuous_map_into_indiscrete_topology()]))
   let t133 = @simp.rewrite_tac(@list.List([@metric.path_connected_space()]))
   let t143 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t133), t134), t135), t136), t138), @tactics.strip_tac), t139), t140), t141), t142)
-  path_connected_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. path_connected_space(indiscrete_topology u)"), t143))
+  path_connected_space_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. path_connected_space(indiscrete_topology u)"), t143))
 }
 
 ///|
@@ -468,7 +468,7 @@ pub fn path_connected_space_indiscrete_topology() -> @kernel.Thm {
 /// PATH_CONNECTED_IN_INDISCRETE_TOPOLOGY
 fn step_21() -> Unit raise {
   let t144 = @simp.rewrite_tac(@list.List([@metric.path_connected_in(), path_connected_space_indiscrete_topology(), subtopology_indiscrete_topology(), topspace_indiscrete_topology()]))
-  path_connected_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        path_connected_in (indiscrete_topology u) s <=> s SUBSET u"), t144))
+  path_connected_in_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        path_connected_in (indiscrete_topology u) s <=> s SUBSET u"), t144))
 }
 
 ///|
@@ -492,7 +492,7 @@ fn step_22() -> Unit raise {
   let t146 = @simp.simp_tac(@list.List([@sets.in_elim_thm(), @theorems.right_forall_imp_thm(), @sets.not_in_empty()]))
   let t145 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(p \\/ q) /\\ r ==> s <=> (p ==> r ==> s) /\\ (q ==> r ==> s)"))]))
   let t153 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.neighbourhood_base_of_v1(), open_in_indiscrete_topology()])), t145), t146), t147), t148), t149), t150), t151), t152)
-  neighbourhood_base_of_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("!P u:A->bool.\n        neighbourhood_base_of P (indiscrete_topology u) <=>\n        u = {} \\/ P u"), t153))
+  neighbourhood_base_of_indiscrete_topology_c.set(@tactics.prove(@parser.parse_term("forall P u:A->bool.\n        neighbourhood_base_of P (indiscrete_topology u) <=>\n        u = {} \\/ P u"), t153))
 }
 
 ///|
@@ -548,7 +548,7 @@ fn step_24() -> Unit raise {
   let t195 = @parser.parse_term("v:(A->bool)->bool")
   let t196 = @tactics.spec_tac(@parser.parse_term("(k DELETE {}):(A->bool)->bool"), t195)
   let t194 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@sets.unions_delete_empty())]))
-  let t191 = @drule.match_mp(@sets.set_rule(@parser.parse_term("k SUBSET a INSERT s /\\ ~(!x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})")))
+  let t191 = @drule.match_mp(@sets.set_rule(@parser.parse_term("k SUBSET a INSERT s /\\ ~(forall x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})")))
   let t193 = @tactics.disch_then(fn(x192 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x188 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s189 = @tactics.mp_tac(x188)
@@ -610,7 +610,7 @@ fn step_24() -> Unit raise {
       })(x167))
     })(x168)(x168)
   }), @tactics.ants_tac), t178), t179), t180), @tactics.conj_tac), t216)
-  open_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        open_in (cofinite_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ FINITE(u DIFF s)"), t217))
+  open_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        open_in (cofinite_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ FINITE(u DIFF s)"), t217))
 }
 
 ///|
@@ -627,9 +627,9 @@ pub fn open_in_cofinite_topology() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t220 = @sets.set_tac(@list.List([]))
   let t219 = @simp.rewrite_tac(@list.List([@sets.diff_eq_empty(), @sets.finite_empty()]))
-  let t218 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u")))
+  let t218 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u")))
   let t221 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.topspace(), open_in_cofinite_topology()]))), t218), t219), t220)
-  topspace_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. topspace(cofinite_topology u) = u"), t221))
+  topspace_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. topspace(cofinite_topology u) = u"), t221))
 }
 
 ///|
@@ -649,7 +649,7 @@ fn step_26() -> Unit raise {
   let t223 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
   let t222 = @tactics.repeat_tac(@tactics.gen_tac)
   let t226 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.closed_in(), open_in_cofinite_topology(), topspace_cofinite_topology()])), t222), t223), t224), t225)
-  closed_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        closed_in (cofinite_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ FINITE s"), t226))
+  closed_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        closed_in (cofinite_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ FINITE s"), t226))
 }
 
 ///|
@@ -666,7 +666,7 @@ pub fn closed_in_cofinite_topology() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t227 = @simp.simp_tac(@list.List([@sets.finite_sing(), @sets.sing_subset(), topspace_cofinite_topology()]))
   let t228 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing(), closed_in_cofinite_topology()])), t227)
-  t1_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. t1_space(cofinite_topology u)"), t228))
+  t1_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t1_space(cofinite_topology u)"), t228))
 }
 
 ///|
@@ -683,7 +683,7 @@ pub fn t1_space_cofinite_topology() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   let t229 = @meson.meson_tac(@list.List([@metric.t1_space_closed_in_finite(), @metric.closed_in_topspace()]))
   let t230 = @tactics.then_tac(@simp.rewrite_tac(@list.List([closed_in_cofinite_topology()])), t229)
-  t1_space_cofinite_topology_minimal_c.set(@tactics.prove(@parser.parse_term("!top s:A->bool.\n        t1_space top /\\ closed_in (cofinite_topology(topspace top)) s\n        ==> closed_in top s"), t230))
+  t1_space_cofinite_topology_minimal_c.set(@tactics.prove(@parser.parse_term("forall top s:A->bool.\n        t1_space top /\\ closed_in (cofinite_topology(topspace top)) s\n        ==> closed_in top s"), t230))
 }
 
 ///|
@@ -700,7 +700,7 @@ pub fn t1_space_cofinite_topology_minimal() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let t231 = @sets.set_tac(@list.List([]))
   let t232 = @tactics.then_tac(@simp.simp_tac(@list.List([@metric.topology_eq(), @metric.open_in_discrete_topology(), open_in_cofinite_topology(), @sets.finite_diff()])), t231)
-  cofinite_eq_discrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. FINITE u ==> cofinite_topology u = discrete_topology u"), t232))
+  cofinite_eq_discrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. FINITE u ==> cofinite_topology u = discrete_topology u"), t232))
 }
 
 ///|
@@ -722,7 +722,7 @@ fn step_30() -> Unit raise {
   let t234 = @tactics.repeat_tac(@tactics.strip_tac)
   let t233 = @simp.simp_tac(@list.List([topspace_cofinite_topology()]))
   let t239 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.connected_in_closed_in(), closed_in_cofinite_topology()])), t233), t234), t238)
-  connected_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        INFINITE s /\\ s SUBSET u ==> connected_in (cofinite_topology u) s"), t239))
+  connected_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        INFINITE s /\\ s SUBSET u ==> connected_in (cofinite_topology u) s"), t239))
 }
 
 ///|
@@ -743,7 +743,7 @@ fn step_31() -> Unit raise {
   let t241 = @simp.rewrite_tac(@list.List([@metric.connected_space_discrete_topology()]))
   let t240 = @simp.asm_simp_tac(@list.List([@sets.infinite(), cofinite_eq_discrete_topology()]))
   let t245 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("FINITE(u:A->bool)"))), t240), t241), t242), t243), t244)
-  connected_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool.\n        connected_space(cofinite_topology u) <=>\n        (?a. u SUBSET {a}) \\/ INFINITE u"), t245))
+  connected_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool.\n        connected_space(cofinite_topology u) <=>\n        (?a. u SUBSET {a}) \\/ INFINITE u"), t245))
 }
 
 ///|
@@ -792,7 +792,7 @@ fn step_32() -> Unit raise {
   let t277 = @simp.rewrite_tac(@list.List([@sets.inter_inters(), @sets.finite_insert(), @sets.not_insert_empty()]))
   let t276 = @simp.once_rewrite_tac(@list.List([@sets.inters_insert()]))
   let t275 = @tactics.exists_tac(@parser.parse_term("k:A->bool"))
-  let t274 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("!k. (?s. P(k INSERT k INSERT s)) ==> (?s. P s)")))
+  let t274 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall k. (?s. P(k INSERT k INSERT s)) ==> (?s. P s)")))
   let t273 = @list.List([@meson.asm_meson_tac(@list.List([@sets.finite_sing()])), @tactics.all_tac])
   let t272 = @simp.asm_simp_tac(@list.List([@sets.set_rule(@parser.parse_term("a IN s ==> (s DELETE a = {} <=> s = {a})"))]))
   let t270 = @simp.rewrite_tac(@list.List([@sets.inter_inters(), @sets.inters_insert()]))
@@ -828,7 +828,7 @@ fn step_32() -> Unit raise {
   let t247 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology()]))
   let t246 = @simp.rewrite_tac(@list.List([@metric.compact_in_fip(), closed_in_cofinite_topology()]))
   let t304 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t246), t247), t248), t249), t250), @tactics.strip_tac), t251), t252), t253), t260), t264), t265), t269), t271), t272), @class.cond_cases_tac), t273), t274), t275), t276), t277), t281), t303)
-  compact_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool. compact_in(cofinite_topology u) s <=> s SUBSET u"), t304))
+  compact_in_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool. compact_in(cofinite_topology u) s <=> s SUBSET u"), t304))
 }
 
 ///|
@@ -845,7 +845,7 @@ pub fn compact_in_cofinite_topology() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   let t305 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology(), @sets.subset_refl()]))
   let t306 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.compact_space(), compact_in_cofinite_topology()])), t305)
-  compact_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. compact_space(cofinite_topology u)"), t306))
+  compact_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. compact_space(cofinite_topology u)"), t306))
 }
 
 ///|
@@ -923,7 +923,7 @@ fn step_34() -> Unit raise {
   let t308 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology()]))
   let t307 = @simp.once_rewrite_tac(@list.List([@metric.subtopology_restrict()]))
   let t362 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t307), t308), t309), t311), t312), @tactics.eq_tac), @tactics.disch_tac), t361)
-  hausdorff_space_subtopology_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        hausdorff_space (subtopology (cofinite_topology u) s) <=>\n        FINITE(u INTER s)"), t362))
+  hausdorff_space_subtopology_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        hausdorff_space (subtopology (cofinite_topology u) s) <=>\n        FINITE(u INTER s)"), t362))
 }
 
 ///|
@@ -941,7 +941,7 @@ fn step_35() -> Unit raise {
   let t364 = @simp.rewrite_tac(@list.List([topspace_cofinite_topology(), @sets.inter_idempot()]))
   let t363 = @simp.rewrite_tac(@list.List([hausdorff_space_subtopology_cofinite_topology()]))
   let t365 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@metric.subtopology_topspace())]))), t363), t364)
-  hausdorff_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. hausdorff_space(cofinite_topology u) <=> FINITE u"), t365))
+  hausdorff_space_cofinite_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. hausdorff_space(cofinite_topology u) <=> FINITE u"), t365))
 }
 
 ///|
@@ -997,7 +997,7 @@ fn step_37() -> Unit raise {
   let t407 = @parser.parse_term("v:(A->bool)->bool")
   let t408 = @tactics.spec_tac(@parser.parse_term("(k DELETE {}):(A->bool)->bool"), t407)
   let t406 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@sets.unions_delete_empty())]))
-  let t403 = @drule.match_mp(@sets.set_rule(@parser.parse_term("k SUBSET a INSERT s /\\ ~(!x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})")))
+  let t403 = @drule.match_mp(@sets.set_rule(@parser.parse_term("k SUBSET a INSERT s /\\ ~(forall x. x IN k ==> x = a)\n      ==> k DELETE a SUBSET s /\\ ~(k DELETE a = {})")))
   let t405 = @tactics.disch_then(fn(x404 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x400 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s401 = @tactics.mp_tac(x400)
@@ -1059,7 +1059,7 @@ fn step_37() -> Unit raise {
       })(x379))
     })(x380)(x380)
   }), @tactics.ants_tac), t390), t391), t392), @tactics.conj_tac), t428)
-  open_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        open_in (cocountable_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ COUNTABLE(u DIFF s)"), t429))
+  open_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        open_in (cocountable_topology u) s <=>\n        s = {} \\/ s SUBSET u /\\ COUNTABLE(u DIFF s)"), t429))
 }
 
 ///|
@@ -1076,9 +1076,9 @@ pub fn open_in_cocountable_topology() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t432 = @sets.set_tac(@list.List([]))
   let t431 = @simp.rewrite_tac(@list.List([@sets.diff_eq_empty(), @card.countable_empty()]))
-  let t430 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(!s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u")))
+  let t430 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("(forall s. P s ==> s SUBSET u) /\\ P u ==> UNIONS {s | P s} = u")))
   let t433 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@metric.topspace(), open_in_cocountable_topology()]))), t430), t431), t432)
-  topspace_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. topspace(cocountable_topology u) = u"), t433))
+  topspace_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. topspace(cocountable_topology u) = u"), t433))
 }
 
 ///|
@@ -1098,7 +1098,7 @@ fn step_39() -> Unit raise {
   let t435 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
   let t434 = @tactics.repeat_tac(@tactics.gen_tac)
   let t438 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.closed_in(), open_in_cocountable_topology(), topspace_cocountable_topology()])), t434), t435), t436), t437)
-  closed_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        closed_in (cocountable_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ COUNTABLE s"), t438))
+  closed_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        closed_in (cocountable_topology u) s <=>\n        s = u \\/ s SUBSET u /\\ COUNTABLE s"), t438))
 }
 
 ///|
@@ -1115,7 +1115,7 @@ pub fn closed_in_cocountable_topology() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t439 = @simp.simp_tac(@list.List([@card.countable_sing(), @sets.sing_subset(), topspace_cocountable_topology()]))
   let t440 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.t1_space_closed_in_sing(), closed_in_cocountable_topology()])), t439)
-  t1_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. t1_space(cocountable_topology u)"), t440))
+  t1_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. t1_space(cocountable_topology u)"), t440))
 }
 
 ///|
@@ -1132,7 +1132,7 @@ pub fn t1_space_cocountable_topology() -> @kernel.Thm {
 fn step_41() -> Unit raise {
   let t441 = @sets.set_tac(@list.List([]))
   let t442 = @tactics.then_tac(@simp.simp_tac(@list.List([@metric.topology_eq(), @metric.open_in_discrete_topology(), open_in_cocountable_topology(), @card.countable_diff()])), t441)
-  cocountable_eq_discrete_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. COUNTABLE u ==> cocountable_topology u = discrete_topology u"), t442))
+  cocountable_eq_discrete_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. COUNTABLE u ==> cocountable_topology u = discrete_topology u"), t442))
 }
 
 ///|
@@ -1154,7 +1154,7 @@ fn step_42() -> Unit raise {
   let t444 = @tactics.repeat_tac(@tactics.strip_tac)
   let t443 = @simp.simp_tac(@list.List([topspace_cocountable_topology()]))
   let t449 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.connected_in_closed_in(), closed_in_cocountable_topology()])), t443), t444), t448)
-  connected_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        ~COUNTABLE s /\\ s SUBSET u\n        ==> connected_in (cocountable_topology u) s"), t449))
+  connected_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        ~COUNTABLE s /\\ s SUBSET u\n        ==> connected_in (cocountable_topology u) s"), t449))
 }
 
 ///|
@@ -1175,7 +1175,7 @@ fn step_43() -> Unit raise {
   let t451 = @simp.rewrite_tac(@list.List([@metric.connected_space_discrete_topology()]))
   let t450 = @simp.asm_simp_tac(@list.List([cocountable_eq_discrete_topology()]))
   let t455 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("COUNTABLE(u:A->bool)"))), t450), t451), t452), t453), t454)
-  connected_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool.\n        connected_space(cocountable_topology u) <=>\n        (?a. u SUBSET {a}) \\/ ~COUNTABLE u"), t455))
+  connected_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool.\n        connected_space(cocountable_topology u) <=>\n        (?a. u SUBSET {a}) \\/ ~COUNTABLE u"), t455))
 }
 
 ///|
@@ -1243,7 +1243,7 @@ fn step_44() -> Unit raise {
   let t458 = @list.List([@tactics.then_tac(@tactics.eq_tac, @simp.asm_simp_tac(@list.List([@metric.finite_imp_compact_in(), topspace_cocountable_topology()]))), t457])
   let t456 = @class.asm_cases_tac(@parser.parse_term("(s:A->bool) SUBSET u"))
   let t501 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t456), t458), t460), t461), t462), t468), t469), t470), t471), @tactics.disch_tac), t472), t473), t480), t481), t482), t490), t491), t492), @tactics.strip_tac), t495), t496), t497), t498), t499), t500)
-  compact_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool. compact_in(cocountable_topology u) s <=>\n                 s SUBSET u /\\ FINITE s"), t501))
+  compact_in_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool. compact_in(cocountable_topology u) s <=>\n                 s SUBSET u /\\ FINITE s"), t501))
 }
 
 ///|
@@ -1260,7 +1260,7 @@ pub fn compact_in_cocountable_topology() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t502 = @simp.rewrite_tac(@list.List([topspace_cocountable_topology(), @sets.subset_refl()]))
   let t503 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.compact_space(), compact_in_cocountable_topology()])), t502)
-  compact_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. compact_space(cocountable_topology u) <=> FINITE u"), t503))
+  compact_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. compact_space(cocountable_topology u) <=> FINITE u"), t503))
 }
 
 ///|
@@ -1338,7 +1338,7 @@ fn step_46() -> Unit raise {
   let t505 = @simp.rewrite_tac(@list.List([topspace_cocountable_topology()]))
   let t504 = @simp.once_rewrite_tac(@list.List([@metric.subtopology_restrict()]))
   let t559 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t504), t505), t506), t508), t509), @tactics.eq_tac), @tactics.disch_tac), t558)
-  hausdorff_space_subtopology_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u s:A->bool.\n        hausdorff_space (subtopology (cocountable_topology u) s) <=>\n        COUNTABLE(u INTER s)"), t559))
+  hausdorff_space_subtopology_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u s:A->bool.\n        hausdorff_space (subtopology (cocountable_topology u) s) <=>\n        COUNTABLE(u INTER s)"), t559))
 }
 
 ///|
@@ -1356,7 +1356,7 @@ fn step_47() -> Unit raise {
   let t561 = @simp.rewrite_tac(@list.List([topspace_cocountable_topology(), @sets.inter_idempot()]))
   let t560 = @simp.rewrite_tac(@list.List([hausdorff_space_subtopology_cocountable_topology()]))
   let t562 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@metric.subtopology_topspace())]))), t560), t561)
-  hausdorff_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. hausdorff_space(cocountable_topology u) <=> COUNTABLE u"), t562))
+  hausdorff_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. hausdorff_space(cocountable_topology u) <=> COUNTABLE u"), t562))
 }
 
 ///|
@@ -1373,7 +1373,7 @@ pub fn hausdorff_space_cocountable_topology() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t563 = @simp.simp_tac(@list.List([@card.finite_imp_countable()]))
   let t564 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@metric.kc_space(), closed_in_cocountable_topology(), compact_in_cocountable_topology()])), t563)
-  kc_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("!u:A->bool. kc_space(cocountable_topology u)"), t564))
+  kc_space_cocountable_topology_c.set(@tactics.prove(@parser.parse_term("forall u:A->bool. kc_space(cocountable_topology u)"), t564))
 }
 
 ///|

@@ -255,7 +255,7 @@ fn step_17() -> Unit raise {
 /// NO_ROOTS_P384
 fn step_18() -> Unit raise {
   let t26 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p384(), @list.List([p_384(), b_384()]))
-  no_roots_p384_c.set(@tactics.prove(@parser.parse_term("!x:int. ~((x pow 3 - &3 * x + &b_384 == &0) (mod &p_384))"), t26))
+  no_roots_p384_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 - &3 * x + &b_384 == &0) (mod &p_384))"), t26))
 }
 
 ///|
@@ -443,7 +443,7 @@ pub fn p384_group_order() -> @kernel.Thm {
 /// P384_GROUP_ELEMENT_ORDER
 fn step_24() -> Unit raise {
   let t104 = @meson.meson_tac(@list.List([size_p384_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n384()]))
-  p384_group_element_order_c.set(@tactics.prove(@parser.parse_term("!P. P IN group_carrier p384_group\n       ==> group_element_order p384_group P =\n           if P = group_id p384_group then 1 else n_384"), t104))
+  p384_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p384_group\n       ==> group_element_order p384_group P =\n           if P = group_id p384_group then 1 else n_384"), t104))
 }
 
 ///|

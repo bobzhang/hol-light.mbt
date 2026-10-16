@@ -14,7 +14,7 @@ fn step_1() -> Unit raise {
     t5,
   ])
   let t4 = @tactics.subgoal_then(
-    @parser.parse_term("!s s':S. init s /\\ RTC step s s' ==> invariant s'"),
+    @parser.parse_term("forall s s':S. init s /\\ RTC step s s' ==> invariant s'"),
     fn(
       x1 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -81,7 +81,7 @@ fn step_1() -> Unit raise {
   overapproximate_reachable_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!init step final invariant.\n        (!s. init s ==> invariant s) /\\\n        (!s s'. invariant s /\\ step s s' ==> invariant s') /\\\n        (!s. invariant s ==> final s)\n        ==> (!s s':S. init s /\\ RTC step s s' ==> final s')",
+        "forall init step final invariant.\n        (forall s. init s ==> invariant s) /\\\n        (forall s s'. invariant s /\\ step s s' ==> invariant s') /\\\n        (forall s. invariant s ==> final s)\n        ==> (forall s s':S. init s /\\ RTC step s s' ==> final s')",
       ),
       t9,
     ),
@@ -351,7 +351,7 @@ fn step_2() -> Unit raise {
   )
   let pth = @tactics.prove(
     @parser.parse_term(
-      "(!x n. word_shl x (SUC n):N word = word_shl (word_shl x 1) n) /\\\n     (!x n. word_ushr x (SUC n):N word = word_ushr (word_ushr x 1) n) /\\\n     (!x n. word_ishr x (SUC n):N word = word_ishr (word_ishr x 1) n)",
+      "(forall x n. word_shl x (SUC n):N word = word_shl (word_shl x 1) n) /\\\n     (forall x n. word_ushr x (SUC n):N word = word_ushr (word_ushr x 1) n) /\\\n     (forall x n. word_ishr x (SUC n):N word = word_ishr (word_ishr x 1) n)",
     ),
     t51,
   )
@@ -484,7 +484,7 @@ fn step_4() -> Unit raise {
   word_shladd_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!(x:N word) b.\n        word_shladd (x:N word) b = word_add (word_shl x 1) (word(bitval b))",
+        "forall(x:N word) b.\n        word_shladd (x:N word) b = word_add (word_shl x 1) (word(bitval b))",
       ),
       t62,
     ),
@@ -534,7 +534,7 @@ fn step_5() -> Unit raise {
   bit_word_shladd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!(x:N word) b. bit 0 (word_shladd x b) <=> b) /\\\n   (!(x:N word) b i. bit (i + 1) (word_shladd x b) <=>\n                     i + 1 < dimindex(:N) /\\ bit i x)",
+        "(forall(x:N word) b. bit 0 (word_shladd x b) <=> b) /\\\n   (forall(x:N word) b i. bit (i + 1) (word_shladd x b) <=>\n                     i + 1 < dimindex(:N) /\\ bit i x)",
       ),
       t66,
     ),
@@ -560,7 +560,7 @@ fn step_6() -> Unit raise {
   )
   word_shladd_0_c.set(
     @tactics.prove(
-      @parser.parse_term("!x:N word. word_shladd x F = word_shl x 1"),
+      @parser.parse_term("forall x:N word. word_shladd x F = word_shl x 1"),
       t67,
     ),
   )
@@ -666,7 +666,7 @@ fn step_8() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([@nums.num_cases()]),
-        @parser.parse_term("(!i. P i) <=> P 0 /\\ (!i. P(SUC i))"),
+        @parser.parse_term("(forall i. P i) <=> P 0 /\\ (forall i. P(SUC i))"),
       ),
     ]),
   )
@@ -792,7 +792,7 @@ fn step_8() -> Unit raise {
   )
   let t96 = (
     @parser.parse_term(
-      "(!x y:N word.\n        word_ushr x 1 = y <=>\n        word_and word_INT_MIN y = word 0 /\\\n        word_shladd y (bit 0 x) = x) /\\\n   (!x y:N word.\n        word_ishr x 1 = y <=>\n        word_and word_INT_MIN y = word_and word_INT_MIN x /\\\n        word_shladd y (bit 0 x) = x)",
+      "(forall x y:N word.\n        word_ushr x 1 = y <=>\n        word_and word_INT_MIN y = word 0 /\\\n        word_shladd y (bit 0 x) = x) /\\\n   (forall x y:N word.\n        word_ishr x 1 = y <=>\n        word_and word_INT_MIN y = word_and word_INT_MIN x /\\\n        word_shladd y (bit 0 x) = x)",
     ),
     t95,
   )
@@ -1016,7 +1016,7 @@ fn step_10() -> Unit raise {
   val_lt_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y:N word.\n        val x < val y <=>\n        ~(word_and word_INT_MIN\n                   (word_or (word_and (word_not x) y)\n                            (word_and (word_or (word_not x) y)\n                                      (word_sub x y))) =\n          word 0)",
+        "forall x y:N word.\n        val x < val y <=>\n        ~(word_and word_INT_MIN\n                   (word_or (word_and (word_not x) y)\n                            (word_and (word_or (word_not x) y)\n                                      (word_sub x y))) =\n          word 0)",
       ),
       t114,
     ),
@@ -1061,7 +1061,7 @@ fn step_11() -> Unit raise {
   ival_lt_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y:N word.\n        ival x < ival y <=>\n        ~(word_and word_INT_MIN\n                   (word_or (word_and x (word_not y))\n                            (word_and (word_not(word_xor x y))\n                                      (word_sub x y))) =\n          word 0)",
+        "forall x y:N word.\n        ival x < ival y <=>\n        ~(word_and word_INT_MIN\n                   (word_or (word_and x (word_not y))\n                            (word_and (word_not(word_xor x y))\n                                      (word_sub x y))) =\n          word 0)",
       ),
       t117,
     ),
@@ -1107,7 +1107,7 @@ fn step_12() -> Unit raise {
   ival_lt_0_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x:N word.\n        ival x < &0 <=> ~(word_and word_INT_MIN x = word 0)",
+        "forall x:N word.\n        ival x < &0 <=> ~(word_and word_INT_MIN x = word 0)",
       ),
       t120,
     ),
@@ -1164,7 +1164,7 @@ fn step_14() -> Unit raise {
   disj_word_eq_0_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y:N word.\n        x = word 0 \\/ y = word 0 <=>\n        word_and (word_or x (word_neg x)) (word_or y (word_neg y)) = word 0",
+        "forall x y:N word.\n        x = word 0 \\/ y = word 0 <=>\n        word_and (word_or x (word_neg x)) (word_or y (word_neg y)) = word 0",
       ),
       t124,
     ),
@@ -1239,7 +1239,7 @@ fn step_15() -> Unit raise {
   let t132 = @meson.asm_meson_tac(@list.List([]))
   let t133 = @list.List([@tactics.match_mp_tac(@nums.num_induction()), t132])
   let t131 = @tactics.subgoal_then(
-    @parser.parse_term("!i. i < n ==> RTC step ((b:num->S) 0) (b i)"),
+    @parser.parse_term("forall i. i < n ==> RTC step ((b:num->S) 0) (b i)"),
     fn(
       x128 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1300,7 +1300,7 @@ fn step_15() -> Unit raise {
   )
   let pth = @tactics.prove(
     @parser.parse_term(
-      "!step init final b n.\n          (!s s':S. init s /\\ RTC step s s' ==> final s')\n          ==> init(b 0)\n              ==> (!i. i + 1 < n ==> step (b i) (b(i+1)))\n                  ==> !i. i < n ==> final(b i)",
+      "forall step init final b n.\n          (forall s s':S. init s /\\ RTC step s s' ==> final s')\n          ==> init(b 0)\n              ==> (forall i. i + 1 < n ==> step (b i) (b(i+1)))\n                  ==> forall i. i < n ==> final(b i)",
     ),
     t135,
   )
@@ -1555,7 +1555,7 @@ fn step_16() -> Unit raise {
   lsb_carrying_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!x z:N word. word_neg x = z ==> (bit 0 z <=> bit 0 x)) /\\\n   (!x y z:N word. word_add x y = z ==> (bit 0 z <=> ~(bit 0 x <=> bit 0 y))) /\\\n   (!x y z:N word. word_sub x y = z ==> (bit 0 z <=> ~(bit 0 x <=> bit 0 y))) /\\\n   (!x (z:N word) b. word_shladd x b = z ==> (bit 0 z <=> b)) /\\\n   (!a b:N word. a = b ==> (bit 0 a <=> bit 0 b))",
+        "(forall x z:N word. word_neg x = z ==> (bit 0 z <=> bit 0 x)) /\\\n   (forall x y z:N word. word_add x y = z ==> (bit 0 z <=> ~(bit 0 x <=> bit 0 y))) /\\\n   (forall x y z:N word. word_sub x y = z ==> (bit 0 z <=> ~(bit 0 x <=> bit 0 y))) /\\\n   (forall x (z:N word) b. word_shladd x b = z ==> (bit 0 z <=> b)) /\\\n   (forall a b:N word. a = b ==> (bit 0 a <=> bit 0 b))",
       ),
       t164,
     ),
@@ -1643,7 +1643,7 @@ fn step_17() -> Unit raise {
   xsb_carrying_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!x z:N word.\n        word_neg x = z\n        ==> !i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     (bit (i + 1) x <=> ~bit i x /\\ ~bit i z))) /\\\n   (!x y z:N word.\n        word_add x y = z\n        ==> !i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     ((bit (i + 1) x <=> bit (i + 1) y) <=>\n                      bit i x /\\ bit i y \\/\n                      (bit i x \\/ bit i y) /\\ ~bit i z))) /\\\n   (!x y z:N word.\n        word_sub x y = z\n        ==> !i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     ((bit (i + 1) x <=> bit (i + 1) y) <=>\n                      ~bit i x /\\ bit i y \\/\n                      (~bit i x \\/ bit i y) /\\ bit i z))) /\\\n   (!x (z:N word) b.\n        word_shladd x b = z\n        ==> !i. i + 1 < dimindex(:N) ==> (bit (i + 1) z <=> bit i x)) /\\\n   (!a b:N word.\n        a = b\n        ==> !i. i + 1 < dimindex(:N) ==> (bit (i + 1) a = bit (i + 1) b))",
+        "(forall x z:N word.\n        word_neg x = z\n        ==> forall i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     (bit (i + 1) x <=> ~bit i x /\\ ~bit i z))) /\\\n   (forall x y z:N word.\n        word_add x y = z\n        ==> forall i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     ((bit (i + 1) x <=> bit (i + 1) y) <=>\n                      bit i x /\\ bit i y \\/\n                      (bit i x \\/ bit i y) /\\ ~bit i z))) /\\\n   (forall x y z:N word.\n        word_sub x y = z\n        ==> forall i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     ((bit (i + 1) x <=> bit (i + 1) y) <=>\n                      ~bit i x /\\ bit i y \\/\n                      (~bit i x \\/ bit i y) /\\ bit i z))) /\\\n   (forall x (z:N word) b.\n        word_shladd x b = z\n        ==> forall i. i + 1 < dimindex(:N) ==> (bit (i + 1) z <=> bit i x)) /\\\n   (forall a b:N word.\n        a = b\n        ==> forall i. i + 1 < dimindex(:N) ==> (bit (i + 1) a = bit (i + 1) b))",
       ),
       t176,
     ),
@@ -2293,7 +2293,7 @@ fn step_25() -> Unit raise {
   word_mul_shladd_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!x y:N word.\n    word_mul (word_shladd x T) y = word_add (word_shladd (word_mul x y) F) y /\\\n    word_mul y (word_shladd x T) = word_add (word_shladd (word_mul y x) F) y /\\\n    word_mul (word_shladd x F) y = word_shladd (word_mul x y) F /\\\n    word_mul y (word_shladd x F) = word_shladd (word_mul y x) F",
+        "forall x y:N word.\n    word_mul (word_shladd x T) y = word_add (word_shladd (word_mul x y) F) y /\\\n    word_mul y (word_shladd x T) = word_add (word_shladd (word_mul y x) F) y /\\\n    word_mul (word_shladd x F) y = word_shladd (word_mul x y) F /\\\n    word_mul y (word_shladd x F) = word_shladd (word_mul y x) F",
       ),
       t235,
     ),

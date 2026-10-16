@@ -76,7 +76,7 @@ test "printer matches printer.ml" {
     ("~", fn_(bool, bool)),
     ("T", bool),
     ("F", bool),
-    ("!", fn_(fn_(a, bool), bool)),
+    ("forall", fn_(fn_(a, bool), bool)),
     ("?", fn_(fn_(a, bool), bool)),
     ("NUMERAL", fn_(num_ty, num_ty)),
     ("BIT0", fn_(num_ty, num_ty)),
@@ -113,7 +113,7 @@ test "printer matches printer.ml" {
   @printer.parse_as_infix("*", (20, "right"))
   @printer.parse_as_infix("-", (18, "left"))
   @printer.parse_as_infix(",", (14, "right"))
-  @printer.parse_as_binder("!")
+  @printer.parse_as_binder("forall")
   @printer.parse_as_binder("?")
   @printer.parse_as_binder("\\")
   @printer.parse_as_prefix("~")
@@ -164,7 +164,7 @@ test "printer matches printer.ml" {
   t("eq", @basics.mk_eq(bin("+", x, y), numeral(42)))
   t(
     "forall",
-    @basics.mk_binder("!", x, @basics.mk_binder("!", y, @basics.mk_eq(x, y))),
+    @basics.mk_binder("forall", x, @basics.mk_binder("forall", y, @basics.mk_eq(x, y))),
   )
   t("exists", @basics.mk_binder("?", pv, bin("\\/", pv, neg(pv))))
   t("lambda", @kernel.mk_abs(x, @kernel.mk_abs(y, bin("+", x, y))))
@@ -273,7 +273,7 @@ test "printer matches printer.ml" {
   t(
     "binder_atom",
     @kernel.mk_comb(
-      @kernel.inst(@list.List([(num_ty, a)]), c0("!")),
+      @kernel.inst(@list.List([(num_ty, a)]), c0("forall")),
       mk_var("P", fn_(num_ty, bool)),
     ),
   )
@@ -332,7 +332,7 @@ test "printer matches printer.ml" {
       #|neg = ~ ~(p /\ q)
       #|neg_atom = ~p
       #|eq = x + y = 42
-      #|forall = !x y. x = y
+      #|forall = forall x y. x = y
       #|exists = ?p. p \/ ~p
       #|lambda = \x y. x + y
       #|app_lambda = (\x. x + x) 3
@@ -384,7 +384,7 @@ test "printer matches printer.ml" {
       #|invented = (v:?7) = (v:?7)
       #|types_all = (x:num) + 1
       #|infix_atom = (+)
-      #|binder_atom = (!) P
+      #|binder_atom = (forall) P
       #|interface = x ++ y
       #|thm = p /\ q
       #||- p /\ q
@@ -413,6 +413,7 @@ test "printer matches printer.ml" {
       #|long_variable_name_1 * y +
       #|x
       #|
+
     ),
   )
 }

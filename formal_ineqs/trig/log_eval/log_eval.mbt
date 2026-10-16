@@ -63,7 +63,7 @@ fn step_4() -> Unit raise {
   let t17 = @simp.asm_simp_tac(@list.List([@transcendentals.log_div(), @transcendentals.real_exp_pos_lt(), @transcendentals.log_exp()]))
   let t16 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a + (b - a) = b"))]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t16), t17), @calc_rat.real_arith_tac)
-  log_reduce_c.set(@tactics.prove(@parser.parse_term("!x k. &0 < x ==> log x = log (&1 + (x / exp k - &1)) + k"), t18))
+  log_reduce_c.set(@tactics.prove(@parser.parse_term("forall x k. &0 < x ==> log x = log (&1 + (x / exp k - &1)) + k"), t18))
 }
 
 ///|

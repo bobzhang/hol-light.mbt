@@ -30,7 +30,7 @@ test "itab matches itab.ml" {
   it("imp_trans", "(p ==> q) ==> (q ==> r) ==> p ==> r")
   it("triple_neg", "~ ~ ~p ==> ~p")
   it("disj_elim", "(p \\/ q) /\\ (p ==> r) /\\ (q ==> r) ==> r")
-  it("forall_inst", "(!x:A. P x) ==> P a")
+  it("forall_inst", "(forall x:A. P x) ==> P a")
   it("exists_weaken", "(?x:A. P x /\\ Q x) ==> ?x. P x")
   it("iff", "(p <=> q) ==> q ==> p")
   it("contrapos", "(p ==> q) ==> ~q ==> ~p")
@@ -98,7 +98,7 @@ test "itab matches itab.ml" {
       #|Searching with limit 1
       #|Searching with limit 2
       #|Searching with limit 3
-      #|forall_inst =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (P:fun('A,bool) a:'A))
+      #|forall_inst =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (P:fun('A,bool) a:'A))
       #|Searching with limit 0
       #|Searching with limit 1
       #|Searching with limit 2
@@ -144,9 +144,10 @@ test "itab matches itab.ml" {
       #|refl6_noteq ! dest_eq
       #|accept_bad ! dest_comb: not a combination
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?450
+      #|counter_tyvar = zz_counter:'?448
       #|counter_genvar = _8:bool
       #|
+
     ),
   )
 }

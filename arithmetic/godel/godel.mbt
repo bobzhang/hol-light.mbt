@@ -31,7 +31,7 @@ pub fn sigmapi_cases() -> @kernel.Thm {
 ///|
 /// sigmapi_RULES, sigmapi_INDUCT, sigmapi_CASES
 fn step_1() -> Unit raise {
-  let (sigmapi_rules, sigmapi_induct, sigmapi_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!b n. sigmapi b n False) /\\\n   (!b n. sigmapi b n True) /\\\n   (!b n s t. sigmapi b n (s === t)) /\\\n   (!b n s t. sigmapi b n (s << t)) /\\\n   (!b n s t. sigmapi b n (s <<= t)) /\\\n   (!b n p. sigmapi (~b) n p ==> sigmapi b n (Not p)) /\\\n   (!b n p q. sigmapi b n p /\\ sigmapi b n q ==> sigmapi b n (p && q)) /\\\n   (!b n p q. sigmapi b n p /\\ sigmapi b n q ==> sigmapi b n (p || q)) /\\\n   (!b n p q. sigmapi (~b) n p /\\ sigmapi b n q ==> sigmapi b n (p --> q)) /\\\n   (!b n p q. (!b. sigmapi b n p) /\\ (!b. sigmapi b n q)\n            ==> sigmapi b n (p <-> q)) /\\\n   (!n x p. sigmapi T n p /\\ ~(n = 0) ==> sigmapi T n (??x p)) /\\\n   (!n x p. sigmapi F n p /\\ ~(n = 0) ==> sigmapi F n (!!x p)) /\\\n   (!b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (??x (V x << t && p))) /\\\n   (!b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (??x (V x <<= t && p))) /\\\n   (!b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (!!x (V x << t --> p))) /\\\n   (!b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (!!x (V x <<= t --> p))) /\\\n   (!b c n p. sigmapi b n p ==> sigmapi c (n + 1) p)"))
+  let (sigmapi_rules, sigmapi_induct, sigmapi_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall b n. sigmapi b n False) /\\\n   (forall b n. sigmapi b n True) /\\\n   (forall b n s t. sigmapi b n (s === t)) /\\\n   (forall b n s t. sigmapi b n (s << t)) /\\\n   (forall b n s t. sigmapi b n (s <<= t)) /\\\n   (forall b n p. sigmapi (~b) n p ==> sigmapi b n (Not p)) /\\\n   (forall b n p q. sigmapi b n p /\\ sigmapi b n q ==> sigmapi b n (p && q)) /\\\n   (forall b n p q. sigmapi b n p /\\ sigmapi b n q ==> sigmapi b n (p || q)) /\\\n   (forall b n p q. sigmapi (~b) n p /\\ sigmapi b n q ==> sigmapi b n (p --> q)) /\\\n   (forall b n p q. (forall b. sigmapi b n p) /\\ (forall b. sigmapi b n q)\n            ==> sigmapi b n (p <-> q)) /\\\n   (forall n x p. sigmapi T n p /\\ ~(n = 0) ==> sigmapi T n (??x p)) /\\\n   (forall n x p. sigmapi F n p /\\ ~(n = 0) ==> sigmapi F n (!!x p)) /\\\n   (forall b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (??x (V x << t && p))) /\\\n   (forall b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (??x (V x <<= t && p))) /\\\n   (forall b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (!!x (V x << t --> p))) /\\\n   (forall b n x p t. sigmapi b n p /\\ ~(x IN FVT t)\n            ==> sigmapi b n (!!x (V x <<= t --> p))) /\\\n   (forall b c n p. sigmapi b n p ==> sigmapi c (n + 1) p)"))
   sigmapi_rules_c.set(sigmapi_rules)
   sigmapi_induct_c.set(sigmapi_induct)
   sigmapi_cases_c.set(sigmapi_cases)
@@ -110,7 +110,7 @@ fn step_5() -> Unit raise {
     }
   }, @list.List([@theorems.and_forall_thm()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sigmapi_rules()])), t4), @nums.induct_tac), t5), t6), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20)
-  sigmapi_prop_c.set(@tactics.prove(@parser.parse_term("(!n b. sigmapi b n False <=> T) /\\\n   (!n b. sigmapi b n True <=> T) /\\\n   (!n b s t. sigmapi b n (s === t) <=> T) /\\\n   (!n b s t. sigmapi b n (s << t) <=> T) /\\\n   (!n b s t. sigmapi b n (s <<= t) <=> T) /\\\n   (!n b p. sigmapi b n (Not p) <=> sigmapi (~b) n p) /\\\n   (!n b p q. sigmapi b n (p && q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p || q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p --> q) <=> sigmapi (~b) n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p <-> q) <=> (sigmapi b n p /\\ sigmapi (~b) n p) /\\\n                                        (sigmapi b n q /\\ sigmapi (~b) n q))"), t21))
+  sigmapi_prop_c.set(@tactics.prove(@parser.parse_term("(forall n b. sigmapi b n False <=> T) /\\\n   (forall n b. sigmapi b n True <=> T) /\\\n   (forall n b s t. sigmapi b n (s === t) <=> T) /\\\n   (forall n b s t. sigmapi b n (s << t) <=> T) /\\\n   (forall n b s t. sigmapi b n (s <<= t) <=> T) /\\\n   (forall n b p. sigmapi b n (Not p) <=> sigmapi (~b) n p) /\\\n   (forall n b p q. sigmapi b n (p && q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p || q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p --> q) <=> sigmapi (~b) n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p <-> q) <=> (sigmapi b n p /\\ sigmapi (~b) n p) /\\\n                                        (sigmapi b n q /\\ sigmapi (~b) n q))"), t21))
 }
 
 ///|
@@ -143,7 +143,7 @@ fn step_6() -> Unit raise {
   })
   let t28 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t27)
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.repeat_tac(@tactics.strip_tac), t28])), t32), t33)
-  sigmapi_mono_lemma_c.set(@tactics.prove(@parser.parse_term("(!b n p. sigmapi b n p ==> sigmapi b (n + 1) p) /\\\n   (!b n p. ~(n = 0) /\\ sigmapi b (n - 1) p ==> sigmapi b n p) /\\\n   (!b n p. ~(n = 0) /\\ sigmapi (~b) (n - 1) p ==> sigmapi b n p)"), t34))
+  sigmapi_mono_lemma_c.set(@tactics.prove(@parser.parse_term("(forall b n p. sigmapi b n p ==> sigmapi b (n + 1) p) /\\\n   (forall b n p. ~(n = 0) /\\ sigmapi b (n - 1) p ==> sigmapi b n p) /\\\n   (forall b n p. ~(n = 0) /\\ sigmapi (~b) (n - 1) p ==> sigmapi b n p)"), t34))
 }
 
 ///|
@@ -171,7 +171,7 @@ fn step_7() -> Unit raise {
   }, @list.List([sigmapi_cases()]))
   let t35 = @tactics.repeat_tac(@tactics.gen_tac)
   let t45 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), @tactics.gen_tac), @tactics.disch_tac), t35), t39), t40), t41), t42), t43), t44)
-  sigmapi_rev_exists_c.set(@tactics.prove(@parser.parse_term("!n b x p. sigmapi b n (??x p) ==> sigmapi b n p"), t45))
+  sigmapi_rev_exists_c.set(@tactics.prove(@parser.parse_term("forall n b x p. sigmapi b n (??x p) ==> sigmapi b n p"), t45))
 }
 
 ///|
@@ -199,7 +199,7 @@ fn step_8() -> Unit raise {
   }, @list.List([sigmapi_cases()]))
   let t46 = @tactics.repeat_tac(@tactics.gen_tac)
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), @tactics.gen_tac), @tactics.disch_tac), t46), t50), t51), t52), t53), t54), t55)
-  sigmapi_rev_forall_c.set(@tactics.prove(@parser.parse_term("!n b x p. sigmapi b n (!!x p) ==> sigmapi b n p"), t56))
+  sigmapi_rev_forall_c.set(@tactics.prove(@parser.parse_term("forall n b x p. sigmapi b n (!!x p) ==> sigmapi b n p"), t56))
 }
 
 ///|
@@ -360,7 +360,7 @@ fn step_9() -> Unit raise {
       }, w))
     })(x87)(x87)
   }), t88), t164)
-  sigmapi_clauses_code_c.set(@tactics.prove(@parser.parse_term("(!n b. sigmapi b n False <=> T) /\\\n   (!n b. sigmapi b n True <=> T) /\\\n   (!n b s t. sigmapi b n (s === t) <=> T) /\\\n   (!n b s t. sigmapi b n (s << t) <=> T) /\\\n   (!n b s t. sigmapi b n (s <<= t) <=> T) /\\\n   (!n b p. sigmapi b n (Not p) <=> sigmapi (~b) n p) /\\\n   (!n b p q. sigmapi b n (p && q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p || q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p --> q) <=> sigmapi (~b) n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p <-> q) <=> (sigmapi b n p /\\ sigmapi (~b) n p) /\\\n                                        (sigmapi b n q /\\ sigmapi (~b) n q)) /\\\n   (!n b x p. sigmapi b n (??x p) <=>\n                if b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t && q) \\/ p = (V x <<= t && q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else ~(n = 0) /\\ sigmapi (~b) (n - 1) (??x p)) /\\\n   (!n b x p. sigmapi b n (!!x p) <=>\n                if ~b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t --> q) \\/ p = (V x <<= t --> q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else ~(n = 0) /\\ sigmapi (~b) (n - 1) (!!x p))"), t165))
+  sigmapi_clauses_code_c.set(@tactics.prove(@parser.parse_term("(forall n b. sigmapi b n False <=> T) /\\\n   (forall n b. sigmapi b n True <=> T) /\\\n   (forall n b s t. sigmapi b n (s === t) <=> T) /\\\n   (forall n b s t. sigmapi b n (s << t) <=> T) /\\\n   (forall n b s t. sigmapi b n (s <<= t) <=> T) /\\\n   (forall n b p. sigmapi b n (Not p) <=> sigmapi (~b) n p) /\\\n   (forall n b p q. sigmapi b n (p && q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p || q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p --> q) <=> sigmapi (~b) n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p <-> q) <=> (sigmapi b n p /\\ sigmapi (~b) n p) /\\\n                                        (sigmapi b n q /\\ sigmapi (~b) n q)) /\\\n   (forall n b x p. sigmapi b n (??x p) <=>\n                if b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t && q) \\/ p = (V x <<= t && q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else ~(n = 0) /\\ sigmapi (~b) (n - 1) (??x p)) /\\\n   (forall n b x p. sigmapi b n (!!x p) <=>\n                if ~b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t --> q) \\/ p = (V x <<= t --> q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else ~(n = 0) /\\ sigmapi (~b) (n - 1) (!!x p))"), t165))
 }
 
 ///|
@@ -397,7 +397,7 @@ fn step_10() -> Unit raise {
   }, @list.List([sigmapi_clauses_code()]))
   let t166 = @tactics.repeat_tac(@tactics.gen_tac)
   let t183 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t166), t170), t171), t172), t173), t174), t175), @class.cond_cases_tac), t176), t180), t181), t182)
-  sigmapi_clauses_c.set(@tactics.prove(@parser.parse_term("(!n b. sigmapi b n False <=> T) /\\\n   (!n b. sigmapi b n True <=> T) /\\\n   (!n b s t. sigmapi b n (s === t) <=> T) /\\\n   (!n b s t. sigmapi b n (s << t) <=> T) /\\\n   (!n b s t. sigmapi b n (s <<= t) <=> T) /\\\n   (!n b p. sigmapi b n (Not p) <=> sigmapi (~b) n p) /\\\n   (!n b p q. sigmapi b n (p && q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p || q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p --> q) <=> sigmapi (~b) n p /\\ sigmapi b n q) /\\\n   (!n b p q. sigmapi b n (p <-> q) <=> (sigmapi b n p /\\ sigmapi (~b) n p) /\\\n                                        (sigmapi b n q /\\ sigmapi (~b) n q)) /\\\n   (!n b x p. sigmapi b n (??x p) <=>\n                if b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t && q) \\/ p = (V x <<= t && q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else 2 <= n /\\ sigmapi (~b) (n - 1) p) /\\\n   (!n b x p. sigmapi b n (!!x p) <=>\n                if ~b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t --> q) \\/ p = (V x <<= t --> q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else 2 <= n /\\ sigmapi (~b) (n - 1) p)"), t183))
+  sigmapi_clauses_c.set(@tactics.prove(@parser.parse_term("(forall n b. sigmapi b n False <=> T) /\\\n   (forall n b. sigmapi b n True <=> T) /\\\n   (forall n b s t. sigmapi b n (s === t) <=> T) /\\\n   (forall n b s t. sigmapi b n (s << t) <=> T) /\\\n   (forall n b s t. sigmapi b n (s <<= t) <=> T) /\\\n   (forall n b p. sigmapi b n (Not p) <=> sigmapi (~b) n p) /\\\n   (forall n b p q. sigmapi b n (p && q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p || q) <=> sigmapi b n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p --> q) <=> sigmapi (~b) n p /\\ sigmapi b n q) /\\\n   (forall n b p q. sigmapi b n (p <-> q) <=> (sigmapi b n p /\\ sigmapi (~b) n p) /\\\n                                        (sigmapi b n q /\\ sigmapi (~b) n q)) /\\\n   (forall n b x p. sigmapi b n (??x p) <=>\n                if b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t && q) \\/ p = (V x <<= t && q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else 2 <= n /\\ sigmapi (~b) (n - 1) p) /\\\n   (forall n b x p. sigmapi b n (!!x p) <=>\n                if ~b /\\ ~(n = 0) \\/\n                   ?q t. (p = (V x << t --> q) \\/ p = (V x <<= t --> q)) /\\\n                         ~(x IN FVT t)\n                then sigmapi b n p\n                else 2 <= n /\\ sigmapi (~b) (n - 1) p)"), t183))
 }
 
 ///|
@@ -482,7 +482,7 @@ fn step_11() -> Unit raise {
       @tactics.then_tac(@tactics.mp_tac(@bool.spec(@kernel.rand(@kernel.rand(t)), @fol.variant_thm())), t236)
     })(x237)(x237)
   }), t238), @tactics.gen_tac), @tactics.disch_tac), t239), t240)
-  sigmapi_formsubst_c.set(@tactics.prove(@parser.parse_term("!p v n b. sigmapi b n p ==> sigmapi b n (formsubst v p)"), t241))
+  sigmapi_formsubst_c.set(@tactics.prove(@parser.parse_term("forall p v n b. sigmapi b n p ==> sigmapi b n (formsubst v p)"), t241))
 }
 
 ///|
@@ -511,7 +511,7 @@ pub fn sigmapi_tac(x242 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// SIGMAPI_DIVIDES
 fn step_12() -> Unit raise {
   let t249 = sigmapi_tac(@list.List([@definability.arith_divides()]))
-  sigmapi_divides_c.set(@tactics.prove(@parser.parse_term("!n s t. sigmapi b n (arith_divides s t)"), t249))
+  sigmapi_divides_c.set(@tactics.prove(@parser.parse_term("forall n s t. sigmapi b n (arith_divides s t)"), t249))
 }
 
 ///|
@@ -527,7 +527,7 @@ pub fn sigmapi_divides() -> @kernel.Thm {
 /// SIGMAPI_PRIME
 fn step_13() -> Unit raise {
   let t250 = sigmapi_tac(@list.List([@definability.arith_prime(), sigmapi_divides()]))
-  sigmapi_prime_c.set(@tactics.prove(@parser.parse_term("!n t. sigmapi b n (arith_prime t)"), t250))
+  sigmapi_prime_c.set(@tactics.prove(@parser.parse_term("forall n t. sigmapi b n (arith_prime t)"), t250))
 }
 
 ///|
@@ -543,7 +543,7 @@ pub fn sigmapi_prime() -> @kernel.Thm {
 /// SIGMAPI_PRIMEPOW
 fn step_14() -> Unit raise {
   let t251 = sigmapi_tac(@list.List([@definability.arith_primepow(), sigmapi_divides(), sigmapi_prime()]))
-  sigmapi_primepow_c.set(@tactics.prove(@parser.parse_term("!n s t. sigmapi b n (arith_primepow s t)"), t251))
+  sigmapi_primepow_c.set(@tactics.prove(@parser.parse_term("forall n s t. sigmapi b n (arith_primepow s t)"), t251))
 }
 
 ///|
@@ -564,7 +564,7 @@ fn step_15() -> Unit raise {
   let t253 = @tactics.match_mp_tac(sigmapi_formsubst())
   let t252 = @simp.rewrite_tac(@list.List([@definability.arith_rtc()]))
   let t257 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t252), t253), t255), t256)
-  sigmapi_rtc_c.set(@tactics.prove(@parser.parse_term("(!s t. sigmapi T 1 (R s t))\n   ==> !s t. sigmapi T 1 (arith_rtc R s t)"), t257))
+  sigmapi_rtc_c.set(@tactics.prove(@parser.parse_term("(forall s t. sigmapi T 1 (R s t))\n   ==> forall s t. sigmapi T 1 (arith_rtc R s t)"), t257))
 }
 
 ///|
@@ -585,7 +585,7 @@ fn step_16() -> Unit raise {
   let t259 = @tactics.match_mp_tac(sigmapi_formsubst())
   let t258 = @simp.rewrite_tac(@list.List([@definability.arith_rtcp()]))
   let t263 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t258), t259), t261), t262)
-  sigmapi_rtcp_c.set(@tactics.prove(@parser.parse_term("(!s t u. sigmapi T 1 (R s t u))\n   ==> !s t u. sigmapi T 1 (arith_rtcp R s t u)"), t263))
+  sigmapi_rtcp_c.set(@tactics.prove(@parser.parse_term("(forall s t u. sigmapi T 1 (R s t u))\n   ==> forall s t u. sigmapi T 1 (arith_rtcp R s t u)"), t263))
 }
 
 ///|
@@ -601,7 +601,7 @@ pub fn sigmapi_rtcp() -> @kernel.Thm {
 /// SIGMAPI_TERM1
 fn step_17() -> Unit raise {
   let t264 = sigmapi_tac(@list.List([@arithprov.arith_term1()]))
-  sigmapi_term1_c.set(@tactics.prove(@parser.parse_term("!s t. sigmapi T 1 (arith_term1 s t)"), t264))
+  sigmapi_term1_c.set(@tactics.prove(@parser.parse_term("forall s t. sigmapi T 1 (arith_term1 s t)"), t264))
 }
 
 ///|
@@ -617,7 +617,7 @@ pub fn sigmapi_term1() -> @kernel.Thm {
 /// SIGMAPI_TERM
 fn step_18() -> Unit raise {
   let t265 = sigmapi_tac(@list.List([@arithprov.arith_term(), sigmapi_rtc(), sigmapi_term1()]))
-  sigmapi_term_c.set(@tactics.prove(@parser.parse_term("!t. sigmapi T 1 (arith_term t)"), t265))
+  sigmapi_term_c.set(@tactics.prove(@parser.parse_term("forall t. sigmapi T 1 (arith_term t)"), t265))
 }
 
 ///|
@@ -633,7 +633,7 @@ pub fn sigmapi_term() -> @kernel.Thm {
 /// SIGMAPI_FORM1
 fn step_19() -> Unit raise {
   let t266 = sigmapi_tac(@list.List([@arithprov.arith_form1(), sigmapi_term()]))
-  sigmapi_form1_c.set(@tactics.prove(@parser.parse_term("!s t. sigmapi T 1 (arith_form1 s t)"), t266))
+  sigmapi_form1_c.set(@tactics.prove(@parser.parse_term("forall s t. sigmapi T 1 (arith_form1 s t)"), t266))
 }
 
 ///|
@@ -649,7 +649,7 @@ pub fn sigmapi_form1() -> @kernel.Thm {
 /// SIGMAPI_FORM
 fn step_20() -> Unit raise {
   let t267 = sigmapi_tac(@list.List([@arithprov.arith_form(), sigmapi_rtc(), sigmapi_form1()]))
-  sigmapi_form_c.set(@tactics.prove(@parser.parse_term("!t. sigmapi T 1 (arith_form t)"), t267))
+  sigmapi_form_c.set(@tactics.prove(@parser.parse_term("forall t. sigmapi T 1 (arith_form t)"), t267))
 }
 
 ///|
@@ -665,7 +665,7 @@ pub fn sigmapi_form() -> @kernel.Thm {
 /// SIGMAPI_FREETERM1
 fn step_21() -> Unit raise {
   let t268 = sigmapi_tac(@list.List([@arithprov.arith_freeterm1()]))
-  sigmapi_freeterm1_c.set(@tactics.prove(@parser.parse_term("!s t u. sigmapi T 1 (arith_freeterm1 s t u)"), t268))
+  sigmapi_freeterm1_c.set(@tactics.prove(@parser.parse_term("forall s t u. sigmapi T 1 (arith_freeterm1 s t u)"), t268))
 }
 
 ///|
@@ -681,7 +681,7 @@ pub fn sigmapi_freeterm1() -> @kernel.Thm {
 /// SIGMAPI_FREETERM
 fn step_22() -> Unit raise {
   let t269 = sigmapi_tac(@list.List([@arithprov.arith_freeterm(), sigmapi_freeterm1(), sigmapi_rtcp()]))
-  sigmapi_freeterm_c.set(@tactics.prove(@parser.parse_term("!s t. sigmapi T 1 (arith_freeterm s t)"), t269))
+  sigmapi_freeterm_c.set(@tactics.prove(@parser.parse_term("forall s t. sigmapi T 1 (arith_freeterm s t)"), t269))
 }
 
 ///|
@@ -697,7 +697,7 @@ pub fn sigmapi_freeterm() -> @kernel.Thm {
 /// SIGMAPI_FREEFORM1
 fn step_23() -> Unit raise {
   let t270 = sigmapi_tac(@list.List([@arithprov.arith_freeform1(), sigmapi_freeterm(), sigmapi_form()]))
-  sigmapi_freeform1_c.set(@tactics.prove(@parser.parse_term("!s t u. sigmapi T 1 (arith_freeform1 s t u)"), t270))
+  sigmapi_freeform1_c.set(@tactics.prove(@parser.parse_term("forall s t u. sigmapi T 1 (arith_freeform1 s t u)"), t270))
 }
 
 ///|
@@ -713,7 +713,7 @@ pub fn sigmapi_freeform1() -> @kernel.Thm {
 /// SIGMAPI_FREEFORM
 fn step_24() -> Unit raise {
   let t271 = sigmapi_tac(@list.List([@arithprov.arith_freeform(), sigmapi_freeform1(), sigmapi_rtcp()]))
-  sigmapi_freeform_c.set(@tactics.prove(@parser.parse_term("!s t. sigmapi T 1 (arith_freeform s t)"), t271))
+  sigmapi_freeform_c.set(@tactics.prove(@parser.parse_term("forall s t. sigmapi T 1 (arith_freeform s t)"), t271))
 }
 
 ///|
@@ -729,7 +729,7 @@ pub fn sigmapi_freeform() -> @kernel.Thm {
 /// SIGMAPI_AXIOM
 fn step_25() -> Unit raise {
   let t272 = sigmapi_tac(@list.List([@arithprov.arith_axiom(), sigmapi_freeform(), sigmapi_freeterm(), sigmapi_form(), sigmapi_term()]))
-  sigmapi_axiom_c.set(@tactics.prove(@parser.parse_term("!t. sigmapi T 1 (arith_axiom t)"), t272))
+  sigmapi_axiom_c.set(@tactics.prove(@parser.parse_term("forall t. sigmapi T 1 (arith_axiom t)"), t272))
 }
 
 ///|
@@ -745,7 +745,7 @@ pub fn sigmapi_axiom() -> @kernel.Thm {
 /// SIGMAPI_PROV1
 fn step_26() -> Unit raise {
   let t273 = sigmapi_tac(@list.List([@arithprov.arith_prov1(), sigmapi_axiom()]))
-  sigmapi_prov1_c.set(@tactics.prove(@parser.parse_term("!A. (!t. sigmapi T 1 (A t)) ==> !s t. sigmapi T 1 (arith_prov1 A s t)"), t273))
+  sigmapi_prov1_c.set(@tactics.prove(@parser.parse_term("forall A. (forall t. sigmapi T 1 (A t)) ==> forall s t. sigmapi T 1 (arith_prov1 A s t)"), t273))
 }
 
 ///|
@@ -761,7 +761,7 @@ pub fn sigmapi_prov1() -> @kernel.Thm {
 /// SIGMAPI_PROV
 fn step_27() -> Unit raise {
   let t274 = sigmapi_tac(@list.List([@arithprov.arith_prov(), sigmapi_prov1(), sigmapi_rtc()]))
-  sigmapi_prov_c.set(@tactics.prove(@parser.parse_term("(!t. sigmapi T 1 (A t)) ==> !t. sigmapi T 1 (arith_prov A t)"), t274))
+  sigmapi_prov_c.set(@tactics.prove(@parser.parse_term("(forall t. sigmapi T 1 (A t)) ==> forall t. sigmapi T 1 (arith_prov A t)"), t274))
 }
 
 ///|
@@ -777,7 +777,7 @@ pub fn sigmapi_prov() -> @kernel.Thm {
 /// SIGMAPI_PRIMRECSTEP
 fn step_28() -> Unit raise {
   let t275 = sigmapi_tac(@list.List([@definability.arith_primrecstep()]))
-  sigmapi_primrecstep_c.set(@tactics.prove(@parser.parse_term("(!s t u. sigmapi T 1 (R s t u))\n   ==> !s t. sigmapi T 1 (arith_primrecstep R s t)"), t275))
+  sigmapi_primrecstep_c.set(@tactics.prove(@parser.parse_term("(forall s t u. sigmapi T 1 (R s t u))\n   ==> forall s t. sigmapi T 1 (arith_primrecstep R s t)"), t275))
 }
 
 ///|
@@ -793,7 +793,7 @@ pub fn sigmapi_primrecstep() -> @kernel.Thm {
 /// SIGMAPI_PRIMREC
 fn step_29() -> Unit raise {
   let t276 = sigmapi_tac(@list.List([@definability.arith_primrec(), sigmapi_primrecstep(), sigmapi_rtc()]))
-  sigmapi_primrec_c.set(@tactics.prove(@parser.parse_term("(!s t u. sigmapi T 1 (R s t u))\n   ==> !s t. sigmapi T 1 (arith_primrec R c s t)"), t276))
+  sigmapi_primrec_c.set(@tactics.prove(@parser.parse_term("(forall s t u. sigmapi T 1 (R s t u))\n   ==> forall s t. sigmapi T 1 (arith_primrec R c s t)"), t276))
 }
 
 ///|
@@ -809,7 +809,7 @@ pub fn sigmapi_primrec() -> @kernel.Thm {
 /// SIGMAPI_GNUMERAL1
 fn step_30() -> Unit raise {
   let t277 = sigmapi_tac(@list.List([@tarski.arith_gnumeral1()]))
-  sigmapi_gnumeral1_c.set(@tactics.prove(@parser.parse_term("!s t. sigmapi T 1 (arith_gnumeral1 s t)"), t277))
+  sigmapi_gnumeral1_c.set(@tactics.prove(@parser.parse_term("forall s t. sigmapi T 1 (arith_gnumeral1 s t)"), t277))
 }
 
 ///|
@@ -825,7 +825,7 @@ pub fn sigmapi_gnumeral1() -> @kernel.Thm {
 /// SIGMAPI_GNUMERAL
 fn step_31() -> Unit raise {
   let t278 = sigmapi_tac(@list.List([@tarski.arith_gnumeral(), @tarski.arith_gnumeral1_p(), sigmapi_gnumeral1(), sigmapi_rtc()]))
-  sigmapi_gnumeral_c.set(@tactics.prove(@parser.parse_term("!s t. sigmapi T 1 (arith_gnumeral s t)"), t278))
+  sigmapi_gnumeral_c.set(@tactics.prove(@parser.parse_term("forall s t. sigmapi T 1 (arith_gnumeral s t)"), t278))
 }
 
 ///|
@@ -841,7 +841,7 @@ pub fn sigmapi_gnumeral() -> @kernel.Thm {
 /// SIGMAPI_QSUBST
 fn step_32() -> Unit raise {
   let t279 = sigmapi_tac(@list.List([@fol.qsubst()]))
-  sigmapi_qsubst_c.set(@tactics.prove(@parser.parse_term("!x n p.  sigmapi T 1 p ==> sigmapi T 1 (qsubst(x,n) p)"), t279))
+  sigmapi_qsubst_c.set(@tactics.prove(@parser.parse_term("forall x n p.  sigmapi T 1 p ==> sigmapi T 1 (qsubst(x,n) p)"), t279))
 }
 
 ///|
@@ -857,7 +857,7 @@ pub fn sigmapi_qsubst() -> @kernel.Thm {
 /// SIGMAPI_QDIAG
 fn step_33() -> Unit raise {
   let t280 = sigmapi_tac(@list.List([@tarski.arith_qdiag(), sigmapi_gnumeral()]))
-  sigmapi_qdiag_c.set(@tactics.prove(@parser.parse_term("!x s t. sigmapi T 1 (arith_qdiag x s t)"), t280))
+  sigmapi_qdiag_c.set(@tactics.prove(@parser.parse_term("forall x s t. sigmapi T 1 (arith_qdiag x s t)"), t280))
 }
 
 ///|
@@ -873,7 +873,7 @@ pub fn sigmapi_qdiag() -> @kernel.Thm {
 /// SIGMAPI_DIAGONALIZE
 fn step_34() -> Unit raise {
   let t281 = sigmapi_tac(@list.List([@tarski.diagonalize(), sigmapi_qdiag(), sigmapi_formsubst(), @pair.let_def(), @pair.let_end_def()]))
-  sigmapi_diagonalize_c.set(@tactics.prove(@parser.parse_term("!x p. sigmapi T 1 p ==> sigmapi T 1 (diagonalize x p)"), t281))
+  sigmapi_diagonalize_c.set(@tactics.prove(@parser.parse_term("forall x p. sigmapi T 1 p ==> sigmapi T 1 (diagonalize x p)"), t281))
 }
 
 ///|
@@ -889,7 +889,7 @@ pub fn sigmapi_diagonalize() -> @kernel.Thm {
 /// SIGMAPI_FIXPOINT
 fn step_35() -> Unit raise {
   let t282 = sigmapi_tac(@list.List([@tarski.fixpoint(), @tarski.qdiag(), sigmapi_qsubst(), sigmapi_diagonalize()]))
-  sigmapi_fixpoint_c.set(@tactics.prove(@parser.parse_term("!x p. sigmapi T 1 p ==> sigmapi T 1 (fixpoint x p)"), t282))
+  sigmapi_fixpoint_c.set(@tactics.prove(@parser.parse_term("forall x p. sigmapi T 1 p ==> sigmapi T 1 (fixpoint x p)"), t282))
 }
 
 ///|
@@ -936,7 +936,7 @@ pub fn gsentence() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   let t283 = @simp.rewrite_tac(@list.List([@definability.fvt_pair(), @fol.fvt_numeral(), @fol.fvt(), @sets.union_empty(), @sets.delete_insert(), @sets.empty_delete()]))
   let t284 = @tactics.then_tac(@simp.simp_tac(@list.List([hsentence(), @tarski.fv_fixpoint(), @arithprov.fv_prov()])), t283)
-  fv_hsentence_c.set(@tactics.prove(@parser.parse_term("!Arep. (!t. FV(Arep t) = FVT t) ==> (FV(hsentence Arep) = {})"), t284))
+  fv_hsentence_c.set(@tactics.prove(@parser.parse_term("forall Arep. (forall t. FV(Arep t) = FVT t) ==> (FV(hsentence Arep) = {})"), t284))
 }
 
 ///|
@@ -952,7 +952,7 @@ pub fn fv_hsentence() -> @kernel.Thm {
 /// FV_GSENTENCE
 fn step_39() -> Unit raise {
   let t285 = @simp.simp_tac(@list.List([gsentence(), fv_hsentence(), @fol.fv()]))
-  fv_gsentence_c.set(@tactics.prove(@parser.parse_term("!Arep. (!t. FV(Arep t) = FVT t) ==> (FV(gsentence Arep) = {})"), t285))
+  fv_gsentence_c.set(@tactics.prove(@parser.parse_term("forall Arep. (forall t. FV(Arep t) = FVT t) ==> (FV(gsentence Arep) = {})"), t285))
 }
 
 ///|
@@ -968,7 +968,7 @@ pub fn fv_gsentence() -> @kernel.Thm {
 /// SIGMAPI_HSENTENCE
 fn step_40() -> Unit raise {
   let t286 = sigmapi_tac(@list.List([hsentence(), sigmapi_fixpoint(), sigmapi_prov()]))
-  sigmapi_hsentence_c.set(@tactics.prove(@parser.parse_term("!Arep. (!t. sigmapi T 1 (Arep t)) ==> sigmapi T 1 (hsentence Arep)"), t286))
+  sigmapi_hsentence_c.set(@tactics.prove(@parser.parse_term("forall Arep. (forall t. sigmapi T 1 (Arep t)) ==> sigmapi T 1 (hsentence Arep)"), t286))
 }
 
 ///|
@@ -984,7 +984,7 @@ pub fn sigmapi_hsentence() -> @kernel.Thm {
 /// SIGMAPI_GSENTENCE
 fn step_41() -> Unit raise {
   let t287 = sigmapi_tac(@list.List([gsentence(), sigmapi_hsentence()]))
-  sigmapi_gsentence_c.set(@tactics.prove(@parser.parse_term("!Arep. (!t. sigmapi T 1 (Arep t)) ==> sigmapi F 1 (gsentence Arep)"), t287))
+  sigmapi_gsentence_c.set(@tactics.prove(@parser.parse_term("forall Arep. (forall t. sigmapi T 1 (Arep t)) ==> sigmapi F 1 (gsentence Arep)"), t287))
 }
 
 ///|
@@ -1015,7 +1015,7 @@ fn step_42() -> Unit raise {
   })
   let t288 = @tactics.repeat_tac(@tactics.strip_tac)
   let t300 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([hsentence(), @fol.arithtrue(), @tarski.holds_fixpoint()])), t288), t294), t295), t296), @tactics.disch_tac), t297), t298), t299)
-  hsentence_fix_strong_c.set(@tactics.prove(@parser.parse_term("!A Arep.\n        (!v t. holds v (Arep t) <=> (termval v t) IN IMAGE gform A)\n        ==> !v. holds v (hsentence Arep) <=> A |-- Not(hsentence Arep)"), t300))
+  hsentence_fix_strong_c.set(@tactics.prove(@parser.parse_term("forall A Arep.\n        (forall v t. holds v (Arep t) <=> (termval v t) IN IMAGE gform A)\n        ==> forall v. holds v (hsentence Arep) <=> A |-- Not(hsentence Arep)"), t300))
 }
 
 ///|
@@ -1032,7 +1032,7 @@ pub fn hsentence_fix_strong() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   let t301 = @meson.meson_tac(@list.List([hsentence_fix_strong()]))
   let t302 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.arithtrue()])), t301)
-  hsentence_fix_c.set(@tactics.prove(@parser.parse_term("!A Arep.\n        (!v t. holds v (Arep t) <=> (termval v t) IN IMAGE gform A)\n        ==> (arithtrue(hsentence Arep) <=> A |-- Not(hsentence Arep))"), t302))
+  hsentence_fix_c.set(@tactics.prove(@parser.parse_term("forall A Arep.\n        (forall v t. holds v (Arep t) <=> (termval v t) IN IMAGE gform A)\n        ==> (arithtrue(hsentence Arep) <=> A |-- Not(hsentence Arep))"), t302))
 }
 
 ///|
@@ -1049,7 +1049,7 @@ pub fn hsentence_fix() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t303 = @meson.meson_tac(@list.List([hsentence_fix_strong()]))
   let t304 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.arithtrue(), @fol.holds(), gsentence()])), t303)
-  gsentence_fix_c.set(@tactics.prove(@parser.parse_term("!A Arep.\n        (!v t. holds v (Arep t) <=> (termval v t) IN IMAGE gform A)\n        ==> (arithtrue(gsentence Arep) <=> ~(A |-- gsentence Arep))"), t304))
+  gsentence_fix_c.set(@tactics.prove(@parser.parse_term("forall A Arep.\n        (forall v t. holds v (Arep t) <=> (termval v t) IN IMAGE gform A)\n        ==> (arithtrue(gsentence Arep) <=> ~(A |-- gsentence Arep))"), t304))
 }
 
 ///|
@@ -1079,7 +1079,7 @@ pub fn ground() -> @kernel.Thm {
 ///|
 /// complete_for
 fn step_46() -> Unit raise {
-  complete_for_c.set(@pair.new_definition(@parser.parse_term("complete_for P A <=> !p. P p /\\ arithtrue p ==> A |-- p")))
+  complete_for_c.set(@pair.new_definition(@parser.parse_term("complete_for P A <=> forall p. P p /\\ arithtrue p ==> A |-- p")))
 }
 
 ///|
@@ -1094,7 +1094,7 @@ pub fn complete_for() -> @kernel.Thm {
 ///|
 /// sound_for
 fn step_47() -> Unit raise {
-  sound_for_c.set(@pair.new_definition(@parser.parse_term("sound_for P A <=> !p. P p /\\ A |-- p ==> arithtrue p")))
+  sound_for_c.set(@pair.new_definition(@parser.parse_term("sound_for P A <=> forall p. P p /\\ A |-- p ==> arithtrue p")))
 }
 
 ///|
@@ -1125,7 +1125,7 @@ pub fn consistent() -> @kernel.Thm {
 /// CONSISTENT_ALT
 fn step_49() -> Unit raise {
   let t305 = @meson.meson_tac(@list.List([@fol.proves_rules(), @fol.axiom_rules()]))
-  consistent_alt_c.set(@tactics.prove(@parser.parse_term("!A p. A |-- p /\\ A |-- Not p <=> A |-- False"), t305))
+  consistent_alt_c.set(@tactics.prove(@parser.parse_term("forall A p. A |-- p /\\ A |-- Not p <=> A |-- False"), t305))
 }
 
 ///|
@@ -1150,7 +1150,7 @@ fn step_50() -> Unit raise {
   let t309 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("p:form"))((x308 : @kernel.Thm) => @tactics.x_choose_tac(t307, x308)))
   let t306 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t316 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([@tarski.definable_by(), sigma()])), @tactics.eq_tac), t306), t309), t310), t311), t312), t313), t314), t315)
-  definable_by_onevar_c.set(@tactics.prove(@parser.parse_term("definable_by (SIGMA 1) s <=>\n        ?p x. SIGMA 1 p /\\ (FV p = {x}) /\\ !v. holds v p <=> (v x) IN s"), t316))
+  definable_by_onevar_c.set(@tactics.prove(@parser.parse_term("definable_by (SIGMA 1) s <=>\n        ?p x. SIGMA 1 p /\\ (FV p = {x}) /\\ forall v. holds v p <=> (v x) IN s"), t316))
 }
 
 ///|
@@ -1167,7 +1167,7 @@ pub fn definable_by_onevar() -> @kernel.Thm {
 fn step_51() -> Unit raise {
   let t317 = @meson.meson_tac(@list.List([@fol.holds_valuation(), @sets.not_in_empty()]))
   let t318 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.closed(), @fol.arithtrue(), @fol.holds()])), t317)
-  closed_not_true_c.set(@tactics.prove(@parser.parse_term("!p. closed p ==> (arithtrue(Not p) <=> ~(arithtrue p))"), t318))
+  closed_not_true_c.set(@tactics.prove(@parser.parse_term("forall p. closed p ==> (arithtrue(Not p) <=> ~(arithtrue p))"), t318))
 }
 
 ///|
@@ -1234,7 +1234,7 @@ fn step_52() -> Unit raise {
   let t319 = @tactics.x_choose_then(@parser.parse_term("a:num"))(@tactics.strip_assume_tac)
   let t320 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("Arep:form"))(t319))
   let t363 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([sound_for(), @sets.inter(), @sets.in_elim_thm(), definable_by_onevar()]))), t320), t322), t323), @tactics.ants_tac), t325), @tactics.strip_tac), t326), t327), t328), t329), t336), t337), t338), t339), t343), t347), t353), t354), @tactics.disch_tac), t358), t359), t360), t361), t362)
-  g1_c.set(@tactics.prove(@parser.parse_term("!A. definable_by (SIGMA 1) (IMAGE gform A)\n       ==> ?G. PI 1 G /\\ closed G /\\\n               (sound_for (PI 1 INTER closed) A ==> arithtrue G /\\ ~(A |-- G)) /\\\n               (sound_for (SIGMA 1 INTER closed) A ==> ~(A |-- Not G))"), t363))
+  g1_c.set(@tactics.prove(@parser.parse_term("forall A. definable_by (SIGMA 1) (IMAGE gform A)\n       ==> ?G. PI 1 G /\\ closed G /\\\n               (sound_for (PI 1 INTER closed) A ==> arithtrue G /\\ ~(A |-- G)) /\\\n               (sound_for (SIGMA 1 INTER closed) A ==> ~(A |-- Not G))"), t363))
 }
 
 ///|
@@ -1291,7 +1291,7 @@ fn step_54() -> Unit raise {
   let t381 = @tactics.mp_tac(@bool.spec(@parser.parse_term("A:form->bool"), g1()))
   let t380 = @tactics.repeat_tac(@tactics.strip_tac)
   let t385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sigma()])), t380), t381), t382), t383), t384)
-  g1_trad_c.set(@tactics.prove(@parser.parse_term("!A. consistent A /\\\n       complete_for (SIGMA 1 INTER closed) A /\\\n       definable_by (SIGMA 1) (IMAGE gform A)\n       ==> ?G. PI 1 G /\\ closed G /\\ arithtrue G /\\ ~(A |-- G) /\\\n               (sound_for (SIGMA 1 INTER closed) A ==> ~(A |-- Not G))"), t385))
+  g1_trad_c.set(@tactics.prove(@parser.parse_term("forall A. consistent A /\\\n       complete_for (SIGMA 1 INTER closed) A /\\\n       definable_by (SIGMA 1) (IMAGE gform A)\n       ==> ?G. PI 1 G /\\ closed G /\\ arithtrue G /\\ ~(A |-- G) /\\\n               (sound_for (SIGMA 1 INTER closed) A ==> ~(A |-- Not G))"), t385))
 }
 
 ///|

@@ -146,7 +146,7 @@ pub fn prove_by_refinement(x15 : @kernel.Term, x16 : @list.List[((@list.List[(St
 ///|
 /// exclude_list
 fn step_3() -> Unit raise {
-  exclude_list_c.set(Ref::{ val: @list.List(["=", "FINITE", "COND", "@", "!", "?", "UNION", "DELETE", "CARD", "swap", "IN"]) })
+  exclude_list_c.set(Ref::{ val: @list.List(["=", "FINITE", "COND", "@", "forall", "?", "UNION", "DELETE", "CARD", "swap", "IN"]) })
 }
 
 ///|

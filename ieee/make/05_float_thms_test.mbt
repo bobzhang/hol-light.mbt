@@ -5763,78 +5763,78 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|IEEE/float_thms quotations (1400):
-      #|  !(fmt:flformat).\n  (dest_flformat fmt) = (FST (dest_flformat fmt),\n                         SND (dest_flformat fmt))
-      #|  !(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      1 < (FST (r,p)))
-      #|  !(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      EVEN (FST (r,p)))
-      #|  !(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      1 < (SND (r,p)))
-      #|  !(fmt:flformat). is_valid_flformat (dest_flformat fmt)
-      #|  !(fmt:flformat). 1 < (flr fmt)
+      #|  forall(fmt:flformat).\n  (dest_flformat fmt) = (FST (dest_flformat fmt),\n                         SND (dest_flformat fmt))
+      #|  forall(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      1 < (FST (r,p)))
+      #|  forall(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      EVEN (FST (r,p)))
+      #|  forall(r:num) (p:num). ((is_valid_flformat (r,p)) ==>\n                                      1 < (SND (r,p)))
+      #|  forall(fmt:flformat). is_valid_flformat (dest_flformat fmt)
+      #|  forall(fmt:flformat). 1 < (flr fmt)
       #|  1 < x ==> 0 < x
-      #|  !(fmt:flformat). 0 < (flr fmt)
+      #|  forall(fmt:flformat). 0 < (flr fmt)
       #|  0 < x ==> ~(x = 0)
-      #|  !(fmt:flformat). ~(&(flr fmt) = &0)
-      #|  !(fmt:flformat). EVEN (flr fmt)
+      #|  forall(fmt:flformat). ~(&(flr fmt) = &0)
+      #|  forall(fmt:flformat). EVEN (flr fmt)
       #|  ODD 1
       #|  x = 1
       #|  x = 0
-      #|  !x. ~(x = 0) /\\ EVEN x ==> 2 <= x
-      #|  !(fmt:flformat). 2 <= (flr fmt)
+      #|  forall x. ~(x = 0) /\\ EVEN x ==> 2 <= x
+      #|  forall(fmt:flformat). 2 <= (flr fmt)
       #|  x = 1
-      #|  !(fmt:flformat). 1 < (flp fmt)
+      #|  forall(fmt:flformat). 1 < (flp fmt)
       #|  1 < x ==> 0 < x
-      #|  !(fmt:flformat). 0 < (flp fmt)
+      #|  forall(fmt:flformat). 0 < (flp fmt)
       #|  1 <= n <=> 0 < n
       #|  &0 <= x:int - &1:int <=> &1 <= x
-      #|  !(fmt:flformat). &0 <= (&(flp fmt):int) - (&1:int)
-      #|  !(fmt:flformat). &(flr fmt) ipow (&(flp fmt) - &1) =\n      &((flr fmt) EXP ((flp fmt) - 1))
+      #|  forall(fmt:flformat). &0 <= (&(flp fmt):int) - (&1:int)
+      #|  forall(fmt:flformat). &(flr fmt) ipow (&(flp fmt) - &1) =\n      &((flr fmt) EXP ((flp fmt) - 1))
       #|  (&0:int) <= (&n)
-      #|  !(fmt:flformat) (n:num). &((flr fmt) EXP n) = &(flr fmt) ipow (&n)
+      #|  forall(fmt:flformat) (n:num). &((flr fmt) EXP n) = &(flr fmt) ipow (&n)
       #|  &0 < (x:real) ==> &0 <= x
-      #|  !(fmt:flformat) (e:int). &0 <= &(flr fmt) ipow e
-      #|  !(fmt:flformat) (e:int). &0 < &(flr fmt) ipow e
+      #|  forall(fmt:flformat) (e:int). &0 <= &(flr fmt) ipow e
+      #|  forall(fmt:flformat) (e:int). &0 < &(flr fmt) ipow e
       #|  &0 < (x:real) ==> ~(x = &0)
-      #|  !(fmt:flformat) (e:int). ~(&(flr fmt) ipow e = &0)
-      #|  !(fmt:flformat) (u:int) (v:int).\n        &(flr fmt) ipow u * &(flr fmt) ipow v = &(flr fmt) ipow (u + v)
+      #|  forall(fmt:flformat) (e:int). ~(&(flr fmt) ipow e = &0)
+      #|  forall(fmt:flformat) (u:int) (v:int).\n        &(flr fmt) ipow u * &(flr fmt) ipow v = &(flr fmt) ipow (u + v)
       #|  is_valid_fformat ((flr fmt), (flp fmt), e)
       #|  mk_fformat ((flr fmt), (flp fmt), e)
-      #|  !(fmt:flformat) (e:int). ?(fmt':fformat).\n          (to_fformat fmt e) = fmt' /\\\n          (fr fmt') = (flr fmt)     /\\\n          (fp fmt') = (flp fmt)     /\\\n          (fe fmt') = e
+      #|  forall(fmt:flformat) (e:int). ?(fmt':fformat).\n          (to_fformat fmt e) = fmt' /\\\n          (fr fmt') = (flr fmt)     /\\\n          (fp fmt') = (flp fmt)     /\\\n          (fe fmt') = e
       #|  is_valid_fformat (flr fmt, flp fmt, (e:int))
-      #|  !(fmt:flformat) (e:int).\n          (fr (to_fformat fmt e)) = (flr fmt) /\\\n          (fp (to_fformat fmt e)) = (flp fmt) /\\\n          (fe (to_fformat fmt e)) = e
+      #|  forall(fmt:flformat) (e:int).\n          (fr (to_fformat fmt e)) = (flr fmt) /\\\n          (fp (to_fformat fmt e)) = (flp fmt) /\\\n          (fe (to_fformat fmt e)) = e
       #|  fmt:flformat
-      #|  !(fmt:flformat) (z:real). ?(e:int). z <= &(flr fmt) ipow e
-      #|  !(fmt:flformat) (z:real). &0 < z ==> ?(e:int). &(flr fmt) ipow e <= z
+      #|  forall(fmt:flformat) (z:real). ?(e:int). z <= &(flr fmt) ipow e
+      #|  forall(fmt:flformat) (z:real). &0 < z ==> ?(e:int). &(flr fmt) ipow e <= z
       #|  fmt:flformat
       #|  abs(-- x) = abs(x)
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x <=> is_float(fmt) (-- x)
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x <=> is_float(fmt) (-- x)
       #|  &0 < x ==> ~(x = &0)
       #|  &f * &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  !y. (x:real) = y /\\ ~(y = &0) ==> ~(x = &0)
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x ==> ~(x = &0)
-      #|  is_greatest_e (fmt:flformat) (x:real) (e:int) =\n  (&(flr fmt) ipow e <= abs(x) /\\ !(e':int). &(flr fmt) ipow e' <= abs(x)\n     ==> e' <= e)
+      #|  forall y. (x:real) = y /\\ ~(y = &0) ==> ~(x = &0)
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==> ~(x = &0)
+      #|  is_greatest_e (fmt:flformat) (x:real) (e:int) =\n  (&(flr fmt) ipow e <= abs(x) /\\ forall(e':int). &(flr fmt) ipow e' <= abs(x)\n     ==> e' <= e)
       #|  e':int
       #|  (flr fmt)
       #|  e:int
       #|  abs((x:real))
       #|  fmt:flformat
-      #|  ?(b:int). !(e:int). e IN\n              { e:int | &(flr fmt) ipow e <= abs(x) } ==> e <= b
+      #|  ?(b:int). forall(e:int). e IN\n              { e:int | &(flr fmt) ipow e <= abs(x) } ==> e <= b
       #|  ~({ e:int | &(flr fmt) ipow e <= abs(x) } = {})
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(e:int). greatest_e(fmt) x = e /\\ is_greatest_e(fmt) x e
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(e:int). greatest_e(fmt) x = e /\\ is_greatest_e(fmt) x e
       #|  ~((x:real) = &0) ==> &0 < abs(x)
       #|  (e2:int) <= e1
       #|  (e1:int) <= e2
-      #|  !(fmt:flformat) (x:real) (e1:int) (e2:int).\n        is_greatest_e(fmt) x e1 /\\ is_greatest_e(fmt) x e2 ==>\n         e1 = e2
+      #|  forall(fmt:flformat) (x:real) (e1:int) (e2:int).\n        is_greatest_e(fmt) x e1 /\\ is_greatest_e(fmt) x e2 ==>\n         e1 = e2
       #|  abs(-- x) = abs(x)
       #|  ~(-- x = &0)
       #|  -- x
       #|  fmt:flformat
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          greatest_e(fmt) (-- x) = greatest_e(fmt) x
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          greatest_e(fmt) (-- x) = greatest_e(fmt) x
       #|  fmt:flformat
       #|  fmt:flformat
-      #|  is_greatest_m (fmt:flformat) (x:real) (m:num) =\n  (&m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) /\\\n  !(m':num). &m' * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) ==>\n   m' <= m)
+      #|  is_greatest_m (fmt:flformat) (x:real) (m:num) =\n  (&m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) /\\\n  forall(m':num). &m' * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) ==>\n   m' <= m)
       #|  n':num
-      #|  !(m:num). m IN\n              { (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } ==> m <= (flr fmt)
+      #|  forall(m:num). m IN\n              { (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } ==> m <= (flr fmt)
       #|  &k * &(flr fmt) ipow e
-      #|  !z. &0 <= z /\\ (a:real) + z <= b ==> a <= b
+      #|  forall z. &0 <= z /\\ (a:real) + z <= b ==> a <= b
       #|  &(flr fmt + k) * &(flr fmt) ipow e <= abs x
       #|  ((a:real) + b) * c =\n              a * c + b * c
       #|  (a:real) * b = b * a
@@ -5843,22 +5843,22 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  m - (flr fmt)
       #|  ?k. m = (flr fmt) + k
       #|  m < (flr fmt)
-      #|  !(m:num). m IN\n              { (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } ==> m < (flr fmt)
+      #|  forall(m:num). m IN\n              { (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } ==> m < (flr fmt)
       #|  1:num
       #|  ~({ (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <=\n                      abs(x) } = {})
       #|  &1 * (x:real) = x
       #|  1 IN { (m:num) |\n              &m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) }
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(m:num). greatest_m(fmt) x = m /\\\n                     is_greatest_m(fmt) x m /\\\n                     1 <= m /\\\n                     m < (flr fmt)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(m:num). greatest_m(fmt) x = m /\\\n                     is_greatest_m(fmt) x m /\\\n                     1 <= m /\\\n                     m < (flr fmt)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  (m2:num) <= m1
       #|  (m1:num) <= m2
-      #|  !(fmt:flformat) (x:real) (m1:num) (m2:num).\n        is_greatest_m(fmt) x m1 /\\ is_greatest_m(fmt) x m2 ==>\n         m1 = m2
+      #|  forall(fmt:flformat) (x:real) (m1:num) (m2:num).\n        is_greatest_m(fmt) x m1 /\\ is_greatest_m(fmt) x m2 ==>\n         m1 = m2
       #|  abs(-- x) = abs(x)
       #|  ~(-- x = &0)
       #|  -- x
       #|  fmt:flformat
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n        greatest_m(fmt) (-- x) = greatest_m(fmt) x
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n        greatest_m(fmt) (-- x) = greatest_m(fmt) x
       #|  fmt:flformat
       #|  fmt:flformat
       #|  (a:real) * b + b = (a + &1) * b
@@ -5872,21 +5872,21 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  &0 <= (x:real)
       #|  e:int
       #|  fmt:flformat
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(y:real). greatest_r(fmt) x = y /\\\n                      abs(y) < (finf (to_fformat fmt (greatest_e(fmt) x)))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n           ?(y:real). greatest_r(fmt) x = y /\\\n                      abs(y) < (finf (to_fformat fmt (greatest_e(fmt) x)))
       #|  fmt:flformat
       #|  fmt:flformat
       #|  ~(m + 1 <= m)
       #|  ~(m + 1 <= m)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n        greatest_r(fmt) (-- x) = -- greatest_r(fmt) x
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n        greatest_r(fmt) (-- x) = -- greatest_r(fmt) x
       #|  &0 <= (z:real) - w <=> w <= z
-      #|  !(fmt:flformat) (x:real). ~(x = &0) /\\ &0 <= x ==>\n          &0 <= greatest_r(fmt) x
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) /\\ &0 <= x ==>\n          &0 <= greatest_r(fmt) x
       #|  &0 <= (x:real) ==> x = abs(x)
       #|  fmt:flformat
       #|  ((z:real) + w <= &0) <=> (w <= -- z)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) /\\ ~(&0 <= x) ==>\n          greatest_r(fmt) x <= &0
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) /\\ ~(&0 <= x) ==>\n          greatest_r(fmt) x <= &0
       #|  ~(&0 <= (x:real)) ==> -- x = abs(x)
       #|  fmt:flformat
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (if (&0 <= x)\n           then\n             x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                 (greatest_r(fmt) x)\n           else\n             x = -- (&(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x)) +\n                 (greatest_r(fmt) x))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (if (&0 <= x)\n           then\n             x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                 (greatest_r(fmt) x)\n           else\n             x = -- (&(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x)) +\n                 (greatest_r(fmt) x))
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -5916,21 +5916,21 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  n:num = n * 1
       #|  (flp fmt) - 1
       #|  ?n. (flr fmt) EXP ((flp fmt) - 1) <=\n                          f * (flr fmt) EXP n
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x ==>\n          ?(f:num) (e:int). (flr fmt) EXP ((flp fmt) - 1) <= f /\\\n                            is_frac_and_exp(fmt) x f e
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n          ?(f:num) (e:int). (flr fmt) EXP ((flp fmt) - 1) <= f /\\\n                            is_frac_and_exp(fmt) x f e
       #|  (flr fmt)
       #|  fmt:flformat
       #|  0 < n ==> SUC (n - 1) = n
       #|  (flr fmt) EXP ((flp fmt) - 1)
-      #|  !(a:num). x < (y:num) /\\ ~(a = 0) ==>\n                          x < y
+      #|  forall(a:num). x < (y:num) /\\ ~(a = 0) ==>\n                          x < y
       #|  (flr fmt) EXP ((flp fmt) - 1) - f'
-      #|  !b. (a:num) < b /\\ b <= c ==> a < c
+      #|  forall b. (a:num) < b /\\ b <= c ==> a < c
       #|  1 <= b <=> 0 < b
       #|  (flr fmt) EXP ((flp fmt) - 1)
       #|  f':num
       #|  e:int
       #|  m:num
       #|  ?(m:num) (f':num).\n                f = m * ((flr fmt) EXP ((flp fmt) - 1)) + f' /\\\n                f' < (flr fmt) EXP ((flp fmt) - 1)
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x ==>\n          (?(m:num) (e:int) (f':num).\n             f' < (flr fmt) EXP ((flp fmt) - 1) /\\\n             1 <= m /\\\n             m < (flr fmt) /\\\n             abs(x) = &(m * (flr fmt) EXP ((flp fmt) - 1) + f') *\n                        &(flr fmt) ipow (e - &(flp fmt) + &1))
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n          (?(m:num) (e:int) (f':num).\n             f' < (flr fmt) EXP ((flp fmt) - 1) /\\\n             1 <= m /\\\n             m < (flr fmt) /\\\n             abs(x) = &(m * (flr fmt) EXP ((flp fmt) - 1) + f') *\n                        &(flr fmt) ipow (e - &(flp fmt) + &1))
       #|  (a:real) * b = b * a
       #|  fmt:flformat
       #|  &(flr fmt)
@@ -5946,10 +5946,10 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  (flr fmt)
       #|  &((flr fmt) EXP ((flp fmt) - 1)) *\n                                &(flr fmt) ipow (e - &(flp fmt) + &1)
-      #|  !b. (a:real) < b /\\ b = c ==> a < c
+      #|  forall b. (a:real) < b /\\ b = c ==> a < c
       #|  (a:real) < b /\\ c = d ==> c + a < d + b
       #|  &(m + 1) * &(flr fmt) ipow e
-      #|  !b. (a:real) < b /\\ b <= d ==> a < d
+      #|  forall b. (a:real) < b /\\ b <= d ==> a < d
       #|  abs(x) < &(flr fmt) ipow (e + &1)
       #|  1 < x ==> 1 <= x
       #|  &(flr fmt) ipow e'
@@ -5966,7 +5966,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  (flr fmt)
       #|  &((flr fmt) EXP ((flp fmt) - 1)) *\n                                &(flr fmt) ipow (e' - &(flp fmt) + &1)
-      #|  !b. (a:real) < b /\\ b = c ==> a < c
+      #|  forall b. (a:real) < b /\\ b = c ==> a < c
       #|  (a:real) < b /\\ c = d ==> c + a < d + b
       #|  abs(x) < &(m + 1) * &(flr fmt) ipow e'
       #|  &m' * &(flr fmt) ipow e'
@@ -5990,7 +5990,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  &m * &(flr fmt) ipow e
       #|  &(flr fmt) ipow e <= abs(x)
       #|  f':num
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x ==>\n           (?(f':num).\n              f' < (flr fmt) EXP ((flp fmt) - 1) /\\\n              abs(x) = &((greatest_m(fmt) x) * ((flr fmt) EXP ((flp fmt) - 1))\n                          + f') *\n                    &(flr fmt) ipow ((greatest_e(fmt) x) - &(flp fmt) + &1))
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n           (?(f':num).\n              f' < (flr fmt) EXP ((flp fmt) - 1) /\\\n              abs(x) = &((greatest_m(fmt) x) * ((flr fmt) EXP ((flp fmt) - 1))\n                          + f') *\n                    &(flr fmt) ipow ((greatest_e(fmt) x) - &(flp fmt) + &1))
       #|  fmt:flformat
       #|  fmt:flformat
       #|  (e:int) <= b ==>\n          e = b \\/ e < b
@@ -6022,14 +6022,14 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  &0 <= (x:real)
       #|  greatest_e(fmt) x
       #|  fmt:flformat
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x ==>\n          is_fixed(to_fformat fmt (greatest_e(fmt) x)) (greatest_r(fmt) x) /\\\n          (if (&0 <= x)\n           then\n             x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                 (greatest_r(fmt) x)\n           else\n             x = -- (&(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x)) +\n                 (greatest_r(fmt) x))
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x ==>\n          is_fixed(to_fformat fmt (greatest_e(fmt) x)) (greatest_r(fmt) x) /\\\n          (if (&0 <= x)\n           then\n             x = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                 (greatest_r(fmt) x)\n           else\n             x = -- (&(greatest_m(fmt) x) *\n                     &(flr fmt) ipow (greatest_e(fmt) x)) +\n                 (greatest_r(fmt) x))
       #|  (x:real) * y + y = (x + &1) * y
       #|  e:int
       #|  fmt:flformat
       #|  &(m + 1) * &(flr fmt) ipow e
       #|  (x:real) < x + y <=> &0 < y
       #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  !y. (x:real) < y /\\ y <= z ==> x < z
+      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
       #|  ~((i:real) <= j) <=> j < i
       #|  x:real
       #|  fmt:flformat
@@ -6044,24 +6044,24 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  &(flr fmt) ipow (e + &1)
       #|  (x:real) < x + y <=> &0 < y
       #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  !y. (x:real) < y /\\ y <= z ==> x < z
+      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
       #|  ~((i:real) <= j) <=> j < i
       #|  (x:real) = &1 * x
       #|  &m * &(flr fmt) ipow e
       #|  x:real
       #|  fmt:flformat
       #|  greatest_e(fmt) x = e
-      #|  !(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          abs(x) = &m * &(flr fmt) ipow e ==>\n          greatest_e(fmt) x = e /\\\n          greatest_m(fmt) x = m
+      #|  forall(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          abs(x) = &m * &(flr fmt) ipow e ==>\n          greatest_e(fmt) x = e /\\\n          greatest_m(fmt) x = m
       #|  fmt:flformat
       #|  fmt:flformat
       #|  greatest_e(fmt) x = e /\\ greatest_m(fmt) x = m
-      #|  !(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          abs(x) = &m * &(flr fmt) ipow e ==>\n          greatest_r(fmt) x = &0
+      #|  forall(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          abs(x) = &m * &(flr fmt) ipow e ==>\n          greatest_r(fmt) x = &0
       #|  (x:real) * y + y = (x + &1) * y
       #|  e:int
       #|  fmt:flformat
       #|  &(m + 1) * &(flr fmt) ipow e
       #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  !y. (x:real) < y /\\ y <= z ==> x < z
+      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
       #|  ~((i:real) <= j) <=> j < i
       #|  x:real
       #|  fmt:flformat
@@ -6075,14 +6075,14 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  &(flr fmt) ipow (e + &1)
       #|  &m * &(flr fmt) ipow e + finf (to_fformat fmt e)
-      #|  !y. (x:real) < y /\\ y <= z ==> x < z
+      #|  forall y. (x:real) < y /\\ y <= z ==> x < z
       #|  ~((i:real) <= j) <=> j < i
       #|  (x:real) = &1 * x
       #|  &m * &(flr fmt) ipow e
       #|  x:real
       #|  fmt:flformat
       #|  greatest_e(fmt) x = e
-      #|  !(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          &m * &(flr fmt) ipow e <= abs(x) /\\\n          abs(x) < &m * &(flr fmt) ipow e + (finf (to_fformat fmt e)) ==>\n          greatest_e(fmt) x = e /\\\n          greatest_m(fmt) x = m
+      #|  forall(fmt:flformat) (x:real) (e:int) (m:num).\n          ~(x = &0) /\\\n          1 <= m /\\\n          m < (flr fmt) /\\\n          &m * &(flr fmt) ipow e <= abs(x) /\\\n          abs(x) < &m * &(flr fmt) ipow e + (finf (to_fformat fmt e)) ==>\n          greatest_e(fmt) x = e /\\\n          greatest_m(fmt) x = m
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -6135,7 +6135,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  0 < x ==> SUC(x - 1) = x
       #|  (flr fmt) * flr fmt EXP (flp fmt - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  1 <= x ==> 0 < x
       #|  0 < m + 1
       #|  (greatest_e(fmt) x)
@@ -6164,7 +6164,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_e(fmt) x
       #|  fmt:flformat
       #|  ((flr fmt) - 1) * (flr fmt) EXP ((flp fmt) - 1) +\n                            (flr fmt) EXP ((flp fmt) - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  greatest_m fmt x * flr fmt EXP (flp fmt - 1) <=\n                            ((flr fmt) - 1) * flr fmt EXP (flp fmt - 1)
       #|  0 < x <=> 1 <= x
       #|  0 < x ==> 0 < x + y
@@ -6221,7 +6221,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  0 < x ==> SUC(x - 1) = x
       #|  (flr fmt) * flr fmt EXP (flp fmt - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  1 <= x ==> 0 < x
       #|  0 < m + 1
       #|  (greatest_e(fmt) x)
@@ -6250,7 +6250,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_e(fmt) x
       #|  fmt:flformat
       #|  ((flr fmt) - 1) * (flr fmt) EXP ((flp fmt) - 1) +\n                            (flr fmt) EXP ((flp fmt) - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  greatest_m fmt x * flr fmt EXP (flp fmt - 1) <=\n                            ((flr fmt) - 1) * flr fmt EXP (flp fmt - 1)
       #|  0 < x <=> 1 <= x
       #|  0 < x ==> 0 < x + y
@@ -6258,7 +6258,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                        (ff(to_fformat fmt (greatest_e(fmt) x))\n                         (fround(to_fformat fmt (greatest_e(fmt) x)) mode\n                                 (greatest_r(fmt) x)))
       #|  is_fixed(to_fformat fmt (greatest_e fmt x))\n                                (fround (to_fformat fmt (greatest_e fmt x))\n                                        mode\n                                        (greatest_r fmt x))
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real) (mode:roundmode). ~(x = &0) ==>\n          is_float(fmt) (flround(fmt) mode x)
+      #|  forall(fmt:flformat) (x:real) (mode:roundmode). ~(x = &0) ==>\n          is_float(fmt) (flround(fmt) mode x)
       #|  fmt:flformat
       #|  (to_fformat fmt (greatest_e(fmt) x))
       #|  (x:num) <= y ==> x < y \\/ x = y
@@ -6297,10 +6297,10 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  (x:real) <= &0 ==> -- x = abs(x)
       #|  (to_fformat fmt e)
       #|  fmt:flformat
-      #|  !(a:real) (x:real) (y:real).\n          x < y /\\ y <= a ==> (closer y x a)
-      #|  !(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ ((closer z x a) \\/ ~(closer x z a)) ==>\n          (closer z y a)
-      #|  !(a:real) (x:real) (y:real).\n          a <= y /\\ y < x ==> (closer y x a)
-      #|  fl_is_closest (fmt:flformat) (x:real) (y:real) =\n  (!(s:real). is_float(fmt) s /\\ ~(s = y) ==>\n     ((closer y s x) \\/ ~(closer s y x)))
+      #|  forall(a:real) (x:real) (y:real).\n          x < y /\\ y <= a ==> (closer y x a)
+      #|  forall(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ ((closer z x a) \\/ ~(closer x z a)) ==>\n          (closer z y a)
+      #|  forall(a:real) (x:real) (y:real).\n          a <= y /\\ y < x ==> (closer y x a)
+      #|  fl_is_closest (fmt:flformat) (x:real) (y:real) =\n  (forall(s:real). is_float(fmt) s /\\ ~(s = y) ==>\n     ((closer y s x) \\/ ~(closer s y x)))
       #|  greatest_e(fmt) x = e
       #|  greatest_r(fmt) x = y
       #|  (x:real) = y <=>\n         -- (&(greatest_m fmt s) * &(flr fmt) ipow greatest_e fmt s) + x =\n         -- (&(greatest_m fmt s) * &(flr fmt) ipow greatest_e fmt s) + y
@@ -6312,7 +6312,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_m(fmt) x = m
       #|  &0 < (x:real) ==> -- x < &0
       #|  -- (&m * &(flr fmt) ipow e)
-      #|  !y. (y:real) < &0 /\\ s <= y ==> s < &0
+      #|  forall y. (y:real) < &0 /\\ s <= y ==> s < &0
       #|  (s:real) < &0 ==> ~(s = &0)
       #|  ~(s = &0)
       #|  &0 <= (x:real) ==> -- x <= &0
@@ -6369,7 +6369,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_e(fmt) s = e /\\ greatest_m(fmt) s = m
       #|  greatest_m(fmt) x = m
       #|  &m * &(flr fmt) ipow e
-      #|  !y. &0 < (y:real) /\\ y <= s ==> &0 < s
+      #|  forall y. &0 < (y:real) /\\ y <= s ==> &0 < s
       #|  &0 < (s:real) ==> ~(s = &0)
       #|  ~(s = &0)
       #|  &m * &(flr fmt) ipow e
@@ -6411,7 +6411,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  s < &m * &(flr fmt) ipow e
       #|  &m * &(flr fmt) ipow e +\n                         fround (to_fformat fmt e) To_near y
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          ?(z:real). flround(fmt) To_near x = z /\\  fl_is_closest(fmt) x z
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          ?(z:real). flround(fmt) To_near x = z /\\  fl_is_closest(fmt) x z
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -6464,16 +6464,16 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  0 < x ==> SUC(x - 1) = x
       #|  (flr fmt) * flr fmt EXP ((flp fmt) - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  (greatest_e(fmt) x)
       #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          is_float(fmt)\n          (&(greatest_m(fmt) x) *\n           &(flr fmt) ipow (greatest_e(fmt) x))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          is_float(fmt)\n          (&(greatest_m(fmt) x) *\n           &(flr fmt) ipow (greatest_e(fmt) x))
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
       #|  &0 <= (x:real) ==> abs(x) = x
       #|  abs(-- x) = abs(x)
-      #|  !(fmt:flformat) (x:real). is_float(fmt) x <=> is_float(fmt) (-- x)
+      #|  forall(fmt:flformat) (x:real). is_float(fmt) x <=> is_float(fmt) (-- x)
       #|  (greatest_e(fmt) x)
       #|  fmt:flformat
       #|  z = abs(z)
@@ -6492,9 +6492,9 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  abs(z) < finf (to_fformat fmt (greatest_e(fmt) x))
       #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                      (flr fmt) EXP ((flp fmt) - 1)
-      #|  !y. (x:num) < y /\\ y <= z ==> x < z
+      #|  forall y. (x:num) < y /\\ y <= z ==> x < z
       #|  (flr fmt) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  0 < x ==> 0 < x + y
       #|  (greatest_e(fmt) x)
       #|  (greatest_m(fmt) x) * (flr fmt) EXP ((flp fmt) - 1) +\n                    ff(to_fformat fmt (greatest_e(fmt) x)) z
@@ -6510,7 +6510,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  (flp fmt) = SUC((flp fmt) - 1)
       #|  (flr fmt) * (flr fmt) EXP ((flp fmt) - 1)
-      #|  !y. (x:num) < y /\\ y = z ==> x < z
+      #|  forall y. (x:num) < y /\\ y = z ==> x < z
       #|  greatest_e(fmt) x
       #|  ((greatest_m(fmt) x) + 1) * (flr fmt) EXP ((flp fmt) - 1)
       #|  (a:int) + b = b + a
@@ -6534,8 +6534,8 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_m(fmt) x = (flr fmt) - 1
       #|  z = (finf (to_fformat fmt (greatest_e(fmt) x)))
       #|  &0 <= (x:real) /\\ &0 <= y ==> abs(x + y) = x + y
-      #|  !(m:num).\n            abs(&m * &(flr fmt) ipow (greatest_e(fmt) x) + z) =\n                &m * &(flr fmt) ipow (greatest_e(fmt) x) + z
-      #|  !(fmt:flformat) (x:real) (z:real).\n          ~(x = &0) /\\ &0 <= z /\\\n            is_fixed(to_fformat(fmt) (greatest_e(fmt) x)) z ==>\n          is_float(fmt)\n          (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) + z)
+      #|  forall(m:num).\n            abs(&m * &(flr fmt) ipow (greatest_e(fmt) x) + z) =\n                &m * &(flr fmt) ipow (greatest_e(fmt) x) + z
+      #|  forall(fmt:flformat) (x:real) (z:real).\n          ~(x = &0) /\\ &0 <= z /\\\n            is_fixed(to_fformat(fmt) (greatest_e(fmt) x)) z ==>\n          is_float(fmt)\n          (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) + z)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -6546,7 +6546,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  -- ( (-- (x:real)) + z) = x + (-- z)
       #|  &0 <= (-- z)
       #|  is_fixed (to_fformat fmt (greatest_e fmt x)) (-- z)
-      #|  !(fmt:flformat) (x:real) (z:real).\n          ~(x = &0) /\\ ~(&0 <= z) /\\\n            is_fixed(to_fformat(fmt) (greatest_e(fmt) x)) z ==>\n          is_float(fmt)\n       ((-- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))) + z)
+      #|  forall(fmt:flformat) (x:real) (z:real).\n          ~(x = &0) /\\ ~(&0 <= z) /\\\n            is_fixed(to_fformat(fmt) (greatest_e(fmt) x)) z ==>\n          is_float(fmt)\n       ((-- (&(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))) + z)
       #|  greatest_r(fmt) y
       #|  fmt:flformat
       #|  greatest_e(fmt) y = greatest_e(fmt) x /\\\n                 greatest_m(fmt) y = greatest_m(fmt) x
@@ -6588,7 +6588,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  a /\\ b <=> b /\\ a
       #|  abs(y) = &(greatest_m fmt x) *\n                         &(flr fmt) ipow greatest_e fmt x
-      #|  !(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ is_float(fmt) y /\\ fl_is_closest(fmt) x y ==>\n          (~(abs(y) = &(greatest_m fmt x) *\n                         &(flr fmt) ipow greatest_e fmt x +\n                         (finf (to_fformat fmt (greatest_e(fmt) x)))) ==>\n            (greatest_m(fmt) y) = (greatest_m(fmt) x) /\\\n            (greatest_e(fmt) y) = (greatest_e(fmt) x)) /\\\n          ?(z:real). is_fixed(to_fformat fmt (greatest_e(fmt) x)) z /\\\n          (if (&0 <= y)\n           then\n               y = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                  z\n           else\n               y = -- (&(greatest_m(fmt) x) *\n                      &(flr fmt) ipow (greatest_e(fmt) x)) + z)
+      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ is_float(fmt) y /\\ fl_is_closest(fmt) x y ==>\n          (~(abs(y) = &(greatest_m fmt x) *\n                         &(flr fmt) ipow greatest_e fmt x +\n                         (finf (to_fformat fmt (greatest_e(fmt) x)))) ==>\n            (greatest_m(fmt) y) = (greatest_m(fmt) x) /\\\n            (greatest_e(fmt) y) = (greatest_e(fmt) x)) /\\\n          ?(z:real). is_fixed(to_fformat fmt (greatest_e(fmt) x)) z /\\\n          (if (&0 <= y)\n           then\n               y = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                  z\n           else\n               y = -- (&(greatest_m(fmt) x) *\n                      &(flr fmt) ipow (greatest_e(fmt) x)) + z)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -6612,7 +6612,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  ~(&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x) = y)
       #|  &(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x) = y
       #|  &0 <= &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  !(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ &0 <= x /\\ fl_is_closest(fmt) x y ==>\n          &0 <= y
+      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ &0 <= x /\\ fl_is_closest(fmt) x y ==>\n          &0 <= y
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -6622,12 +6622,12 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  (-- (&(greatest_m fmt x) *\n                              &(flr fmt) ipow (greatest_e fmt x))) = y
       #|  abs (-- (&(greatest_m fmt x) *\n                         &(flr fmt) ipow (greatest_e fmt x)) - x) =\n             (-- x) - &(greatest_m fmt x) * &(flr fmt) ipow (greatest_e fmt x)
       #|  &0 < &(greatest_m(fmt) x) *\n                           &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  !(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ ~(&0 <= x) /\\ fl_is_closest(fmt) x y ==>\n          ~(&0 <= y)
+      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ ~(&0 <= x) /\\ fl_is_closest(fmt) x y ==>\n          ~(&0 <= y)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
-      #|  !(a:real) (x:real) (y:real) (z:real).\n          ((closer x y a) \\/ ~(closer y x a)) /\\ y <= a /\\ z < y ==>\n          (closer x z a)
-      #|  !(a:real) (x:real) (y:real) (z:real).\n          ((closer x y a) \\/ ~(closer y x a)) /\\ (a <= y) /\\ y < z ==>\n          (closer x z a)
+      #|  forall(a:real) (x:real) (y:real) (z:real).\n          ((closer x y a) \\/ ~(closer y x a)) /\\ y <= a /\\ z < y ==>\n          (closer x z a)
+      #|  forall(a:real) (x:real) (y:real) (z:real).\n          ((closer x y a) \\/ ~(closer y x a)) /\\ (a <= y) /\\ y < z ==>\n          (closer x z a)
       #|  (-- x:real) * y = -- (x * y)
       #|  (y:real) + x = z <=> y = (-- x) + z
       #|  (y:real) - x = z <=> y = x + z
@@ -6741,7 +6741,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  abs(y) =\n                 &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x
       #|  (z:real) = &0
       #|  z:real
-      #|  !(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ is_float(fmt) y /\\ fl_is_closest(fmt) x y ==>\n          ?(z:real). is_fixed(to_fformat fmt (greatest_e(fmt) x)) z /\\\n     is_closest(to_fformat fmt (greatest_e(fmt) x)) (greatest_r(fmt) x) z /\\\n          (if (&0 <= y)\n           then\n               y = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                  z\n           else\n               y = -- (&(greatest_m(fmt) x) *\n                      &(flr fmt) ipow (greatest_e(fmt) x)) + z) /\\\n          (EVEN (ff(to_fformat fmt (greatest_e(fmt) y))\n               (greatest_r(fmt) y)) <=>\n              EVEN (ff(to_fformat fmt (greatest_e(fmt) x)) z))
+      #|  forall(fmt:flformat) (x:real) (y:real).\n          ~(x = &0) /\\ is_float(fmt) y /\\ fl_is_closest(fmt) x y ==>\n          ?(z:real). is_fixed(to_fformat fmt (greatest_e(fmt) x)) z /\\\n     is_closest(to_fformat fmt (greatest_e(fmt) x)) (greatest_r(fmt) x) z /\\\n          (if (&0 <= y)\n           then\n               y = &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x) +\n                  z\n           else\n               y = -- (&(greatest_m(fmt) x) *\n                      &(flr fmt) ipow (greatest_e(fmt) x)) + z) /\\\n          (EVEN (ff(to_fformat fmt (greatest_e(fmt) y))\n               (greatest_r(fmt) y)) <=>\n              EVEN (ff(to_fformat fmt (greatest_e(fmt) x)) z))
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
@@ -6759,7 +6759,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  ~(abs y =\n        &(greatest_m fmt x) * &(flr fmt) ipow greatest_e fmt x +\n        finf (to_fformat fmt (greatest_e fmt x)))
       #|  fl_norm_frac (fmt:flformat) (y:real) =\n  ( (greatest_m(fmt) y) * (flr fmt) EXP ((flp fmt) - 1) +\n    (ff (to_fformat fmt (greatest_e(fmt) y)) (greatest_r(fmt) y)) )
-      #|  fl_to_even (fmt:flformat) (x:real) (y:real) = (!(y2:real).\n   is_float(fmt) y2 /\\\n   (fl_is_closest(fmt) x y) /\\\n   (fl_is_closest(fmt) x y2) /\\\n   ~(y2 = y) ==>\n   (EVEN (fl_norm_frac(fmt) y)))
+      #|  fl_to_even (fmt:flformat) (x:real) (y:real) = (forall(y2:real).\n   is_float(fmt) y2 /\\\n   (fl_is_closest(fmt) x y) /\\\n   (fl_is_closest(fmt) x y2) /\\\n   ~(y2 = y) ==>\n   (EVEN (fl_norm_frac(fmt) y)))
       #|  z:real
       #|  to_even (to_fformat fmt (greatest_e fmt x))\n              (greatest_r fmt x) z'
       #|  is_frac (to_fformat fmt (greatest_e(fmt) x))\n                       z'\n                      (ff (to_fformat fmt (greatest_e(fmt) x)) z')
@@ -6794,12 +6794,12 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  &0 <= (x:real)
       #|  fround (to_fformat fmt (greatest_e(fmt) x)) To_near (greatest_r(fmt) x) = z'
       #|  is_float(fmt) (flround(fmt) To_near x)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_even(fmt) x (flround(fmt) To_near x)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_even(fmt) x (flround(fmt) To_near x)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
       #|  (to_fformat fmt (greatest_e(fmt) x))
-      #|  fl_to_zero (fmt:flformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')
+      #|  fl_to_zero (fmt:flformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       forall(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       forall(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')
       #|  y'' = &0
       #|  (y:real) = &0
       #|  &0 <= (y:real)
@@ -6816,7 +6816,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_m(fmt) x = m
       #|  &0 < &m * &(flr fmt) ipow e
       #|  &m * &(flr fmt) ipow e
-      #|  !z. &0 < z /\\ y <= (-- z) ==> ~(y = &0)
+      #|  forall z. &0 < z /\\ y <= (-- z) ==> ~(y = &0)
       #|  (greatest_e(fmt) y') = e /\\\n                               (greatest_m(fmt) y') = m
       #|  (y'':real) <= &0
       #|  (-- y'') = abs(y'')
@@ -6847,7 +6847,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_r(fmt) y' <= y
       #|  &0 <= (y':real)
       #|  &m * &(flr fmt) ipow e
-      #|  !z. &0 < z /\\ z <= y ==> ~(y = &0)
+      #|  forall z. &0 < z /\\ z <= y ==> ~(y = &0)
       #|  (greatest_e(fmt) y') = e /\\\n                               (greatest_m(fmt) y') = m
       #|  &0 <= (y'':real)
       #|  y'' = abs(y'')
@@ -6860,7 +6860,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  y' <\n             &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)
       #|  &0 <= (y:real)
       #|  abs(y) <= (finf (to_fformat fmt e))
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_zero(fmt) x (flround (fmt) To_zero x)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_zero(fmt) x (flround (fmt) To_zero x)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  &0 <= (x:real)
@@ -6891,7 +6891,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  (to_fformat fmt e)
       #|  ~(&0 <= (y:real))
-      #|  fl_to_pinf (fmt:flformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')
+      #|  fl_to_pinf (fmt:flformat) (x:real) (y:real) =\n  (x <= y /\\ forall(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')
       #|  a <= b <=>\n             (-- (&m * &(flr fmt) ipow e)) + a <=\n             (-- (&m * &(flr fmt) ipow e)) + b
       #|  abs(y) <=\n                       finf (to_fformat fmt (greatest_e fmt x))
       #|  ~(&0 <= (y':real))
@@ -6925,7 +6925,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  abs(y) <= (finf (to_fformat fmt e))
       #|  abs(y) <= (finf (to_fformat fmt e))
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_pinf(fmt) x (flround(fmt) To_pinf x)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_pinf(fmt) x (flround(fmt) To_pinf x)
       #|  fmt:flformat
       #|  &0 <= (x:real)
       #|  fmt:flformat
@@ -6950,7 +6950,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fmt:flformat
       #|  fmt:flformat
       #|  ~(&0 <= (x:real))
-      #|  fl_to_ninf (fmt:flformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y)
+      #|  fl_to_ninf (fmt:flformat) (x:real) (y:real) =\n  (y <= x /\\ forall(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y)
       #|  a <= b <=>\n             (-- (&m * &(flr fmt) ipow e)) + a <=\n             (-- (&m * &(flr fmt) ipow e)) + b
       #|  abs(y) <=\n                       finf (to_fformat fmt (greatest_e fmt x))
       #|  ~(&0 <= (y':real))
@@ -6984,7 +6984,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  abs(y) <= (finf (to_fformat fmt e))
       #|  abs(y) <= (finf (to_fformat fmt e))
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_ninf(fmt) x (flround(fmt) To_ninf x)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          fl_to_ninf(fmt) x (flround(fmt) To_ninf x)
       #|  fmt:flformat
       #|  &0 <= (x:real)
       #|  fmt:flformat
@@ -7010,7 +7010,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  ((a:real) + b) - (a + c) = b - c
       #|  ((a:real) + b) - (a + c) = b - c
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_near x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x))) / &2
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_near x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x))) / &2
       #|  &0 <= (x:real)
       #|  fmt:flformat
       #|  ~(&0 <= (x:real))
@@ -7018,7 +7018,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  ((a:real) + b) - (a + c) = b - c
       #|  ((a:real) + b) - (a + c) = b - c
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_zero x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_zero x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
       #|  &0 <= (x:real)
       #|  fmt:flformat
       #|  ~(&0 <= (x:real))
@@ -7026,7 +7026,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  ((a:real) + b) - (a + c) = b - c
       #|  ((a:real) + b) - (a + c) = b - c
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_pinf x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_pinf x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
       #|  &0 <= (x:real)
       #|  fmt:flformat
       #|  ~(&0 <= (x:real))
@@ -7034,7 +7034,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  ((a:real) + b) - (a + c) = b - c
       #|  ((a:real) + b) - (a + c) = b - c
       #|  &0 <= (x:real)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_ninf x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          abs( (flround(fmt) To_ninf x) - x ) <=\n              (fulp (to_fformat fmt (greatest_e(fmt) x)))
       #|  &0 <= (x:real)
       #|  fmt:flformat
       #|  ~(&0 <= (x:real))
@@ -7050,7 +7050,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fulp (to_fformat fmt (greatest_e fmt x)) / &2 /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
       #|  &0 < abs(x)
       #|  (fulp (to_fformat fmt (greatest_e fmt x)) / &2) /\n                       abs(x)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_near x)) <= fl_eps(fmt)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_near x)) <= fl_eps(fmt)
       #|  fmt:flformat
       #|  ((e:int) - p + &1) + (-- e) = &1 - p
       #|  fmt:flformat
@@ -7063,7 +7063,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fulp (to_fformat fmt (greatest_e fmt x)) /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
       #|  &0 < abs(x)
       #|  (fulp (to_fformat fmt (greatest_e fmt x))) / abs(x)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_zero x)) <= &2 * fl_eps(fmt)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_zero x)) <= &2 * fl_eps(fmt)
       #|  fmt:flformat
       #|  ((e:int) - p + &1) + (-- e) = &1 - p
       #|  fmt:flformat
@@ -7076,7 +7076,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fulp (to_fformat fmt (greatest_e fmt x)) /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
       #|  &0 < abs(x)
       #|  (fulp (to_fformat fmt (greatest_e fmt x))) / abs(x)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_pinf x)) <= &2 * fl_eps(fmt)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_pinf x)) <= &2 * fl_eps(fmt)
       #|  fmt:flformat
       #|  ((e:int) - p + &1) + (-- e) = &1 - p
       #|  fmt:flformat
@@ -7089,20 +7089,20 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  fulp (to_fformat fmt (greatest_e fmt x)) /\n           (&(flr fmt) ipow (greatest_e(fmt) x))
       #|  &0 < abs(x)
       #|  (fulp (to_fformat fmt (greatest_e fmt x))) / abs(x)
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_ninf x)) <= &2 * fl_eps(fmt)
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (rerror x (flround(fmt) To_ninf x)) <= &2 * fl_eps(fmt)
       #|  fmt:flformat
-      #|  !z. z / x * x = z
+      #|  forall z. z / x * x = z
       #|  ((flround(fmt) To_near x) - x) / x
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_near x = (&1 + d) * x /\\\n                      abs(d) <= fl_eps(fmt))
-      #|  !z. z / x * x = z
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_near x = (&1 + d) * x /\\\n                      abs(d) <= fl_eps(fmt))
+      #|  forall z. z / x * x = z
       #|  ((flround(fmt) To_zero x) - x) / x
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_zero x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
-      #|  !z. z / x * x = z
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_zero x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
+      #|  forall z. z / x * x = z
       #|  ((flround(fmt) To_pinf x) - x) / x
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_pinf x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
-      #|  !z. z / x * x = z
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_pinf x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
+      #|  forall z. z / x * x = z
       #|  ((flround(fmt) To_ninf x) - x) / x
-      #|  !(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_ninf x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
+      #|  forall(fmt:flformat) (x:real). ~(x = &0) ==>\n          (?(d:real). flround(fmt) To_ninf x = (&1 + d) * x /\\\n                      abs(d) <= &2 * fl_eps(fmt))
       #|  &1 < x ==> &1 <= x
       #|  (e:int) + e2 - e + &1 = e2 + &1
       #|  fmt:flformat
@@ -7119,7 +7119,7 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  flr fmt EXP (flp fmt - 1)
       #|  0 < f ==> ~(f = 0)
       #|  ~(&f * &(flr fmt) ipow (e - &(flp fmt) + &1) = &0)
-      #|  !(fmt:flformat) (e:int) (f:num).\n          (flr fmt) EXP ((flp fmt) - 1) <= f /\\\n          f < (flr fmt) EXP (flp fmt) ==>\n          greatest_e(fmt) (&f * &(flr fmt) ipow (e - &(flp fmt) + &1)) = e
+      #|  forall(fmt:flformat) (e:int) (f:num).\n          (flr fmt) EXP ((flp fmt) - 1) <= f /\\\n          f < (flr fmt) EXP (flp fmt) ==>\n          greatest_e(fmt) (&f * &(flr fmt) ipow (e - &(flp fmt) + &1)) = e
       #|  fmt:flformat
       #|  &0 <= x ==> abs(x) = x
       #|  &0 <= x ==> abs(x) = x
@@ -7127,14 +7127,14 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  greatest_e(fmt) x = e
       #|  greatest_r(fmt) x = y
       #|  &0 <= (fround (to_fformat fmt e) m y)
-      #|  !(fmt:flformat) (x:real) (m:roundmode).\n          ~(x = &0) /\\ &0 <= x ==> &0 <= (flround(fmt) m x)
+      #|  forall(fmt:flformat) (x:real) (m:roundmode).\n          ~(x = &0) /\\ &0 <= x ==> &0 <= (flround(fmt) m x)
       #|  fmt:flformat
       #|  --(x:real) + y <= &0 <=> &0 <= x + (-- y)
       #|  greatest_r(fmt) x = y
       #|  greatest_e(fmt) x = e
       #|  greatest_r(fmt) x = y
       #|  (fround (to_fformat fmt e) m y) <= &0
-      #|  !(fmt:flformat) (x:real) (m:roundmode).\n          ~(x = &0) /\\ ~(&0 <= x) ==> (flround(fmt) m x) <= &0
+      #|  forall(fmt:flformat) (x:real) (m:roundmode).\n          ~(x = &0) /\\ ~(&0 <= x) ==> (flround(fmt) m x) <= &0
       #|  fmt:flformat
       #|  x = x + &0
       #|  -- ((-- (x:real)) + y) = x + (-- y)
@@ -7156,104 +7156,104 @@ test "IEEE/float_thms matches IEEE/float_thms.ml" {
       #|  &1 < x ==> &1 <= x
       #|  &(flr fmt) ipow (greatest_e(fmt) x)
       #|  &(flr fmt) ipow e <=\n             &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)
-      #|  !(fmt:flformat) (x:real) (e:int) (m:roundmode).\n          ~(x = &0) /\\ &(flr fmt) ipow e <= abs(x) ==>\n          &(flr fmt) ipow e <= abs(flround(fmt) m x)
+      #|  forall(fmt:flformat) (x:real) (e:int) (m:roundmode).\n          ~(x = &0) /\\ &(flr fmt) ipow e <= abs(x) ==>\n          &(flr fmt) ipow e <= abs(flround(fmt) m x)
       #|  fmt:flformat
       #|  fmt:flformat
       #|  fmt:flformat
       #|  &0 <= x ==> abs(x) = x
       #|  fmt:flformat
       #|  x <= &0 ==> abs(x) = -- x
-      #|FLFORMAT_SPLIT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#=:fun(prod(num,num),fun(prod(num,num),bool)) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat)) ((#,:fun(num,fun(num,prod(num,num))) (#FST:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))) (#SND:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))))))
-      #|FLFORMAT_VALID_IMP_RADIX_LT_1 =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FST:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
-      #|FLFORMAT_VALID_IMP_RADIX_EVEN =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) (#EVEN:fun(num,bool) (#FST:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
-      #|FLFORMAT_VALID_IMP_PREC_LT_1 =  |- (#!:fun(fun(num,bool),bool) (\r:num. (#!:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#SND:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
-      #|FLFORMAT_VALID =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#is_valid_flformat:fun(prod(num,num),bool) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))))
-      #|FLFORMAT_RADIX_LT_1 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#flr:fun(flformat,num) fmt:flformat))))
-      #|FLFORMAT_RADIX_LT_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#flr:fun(flformat,num) fmt:flformat))))
-      #|FLFORMAT_RADIX_NE_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))
-      #|FLFORMAT_RADIX_EVEN =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#EVEN:fun(num,bool) (#flr:fun(flformat,num) fmt:flformat))))
-      #|FLFORMAT_RADIX_LE_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#flr:fun(flformat,num) fmt:flformat))))
-      #|FLFORMAT_PREC_LT_1 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#flp:fun(flformat,num) fmt:flformat))))
-      #|FLFORMAT_PREC_LT_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#flp:fun(flformat,num) fmt:flformat))))
-      #|FLFORMAT_PREC_MINUS_1 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) ((#int_sub:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
-      #|FLFORMAT_PREC_IPOW_EQ_EXP =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_sub:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
-      #|FLFORMAT_PREC_EXP_EQ_IPOW =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) n:num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) (#int_of_num:fun(num,int) n:num)))))))
-      #|FLFORMAT_RADIX_IPOW_LE_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))
-      #|FLFORMAT_RADIX_IPOW_LT_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\e:int. ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))
-      #|FLFORMAT_RADIX_IPOW_NEQ_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\e:int. (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|FLFORMAT_RADIX_IPOW_ADD_EXP =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\u:int. (#!:fun(fun(int,bool),bool) (\v:int. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) u:int)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) v:int))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) u:int) v:int)))))))))
-      #|FLFORMAT_TO_FFORMAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\e:int. (#?:fun(fun(fformat,bool),bool) (\fmt':fformat. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fformat,fun(fformat,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int)) fmt':fformat)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fr:fun(fformat,num) fmt':fformat)) (#flr:fun(flformat,num) fmt:flformat))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fp:fun(fformat,num) fmt':fformat)) (#flp:fun(flformat,num) fmt:flformat))) ((#=:fun(int,fun(int,bool)) (#fe:fun(fformat,int) fmt':fformat)) e:int))))))))))
-      #|FLFORMAT_TO_FFORMAT_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\e:int. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fr:fun(fformat,num) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))) (#flr:fun(flformat,num) fmt:flformat))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fp:fun(fformat,num) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))) (#flp:fun(flformat,num) fmt:flformat))) ((#=:fun(int,fun(int,bool)) (#fe:fun(fformat,int) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))) e:int)))))))
-      #|FLOAT_IPOW_LE_REAL =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\z:real. (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) z:real) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))))
-      #|FLOAT_IPOW_LE_REAL_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real)) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) z:real))))))))
-      #|FLOAT_NEG =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) (#real_neg:fun(real,real) x:real)))))))
-      #|FLOAT_NOT_ZERO =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))
-      #|is_greatest_e =  |- ((#=:fun(bool,fun(bool,bool)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e:int)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_abs:fun(real,real) x:real))) (#!:fun(fun(int,bool),bool) (\e':int. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e':int)) (#real_abs:fun(real,real) x:real))) ((#int_le:fun(int,fun(int,bool)) e':int) e:int))))))
-      #|FLOAT_GREATEST_E_EXISTS =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(int,bool),bool) (\e:int. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) e:int)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e:int)))))))))
-      #|FLOAT_GREATEST_E_UNIQUE =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(int,bool),bool) (\e1:int. (#!:fun(fun(int,bool),bool) (\e2:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e1:int)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e2:int))) ((#=:fun(int,fun(int,bool)) e1:int) e2:int))))))))))
-      #|FLOAT_GREATEST_E_NEG =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) (#real_neg:fun(real,real) x:real))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))
-      #|is_greatest_m =  |- ((#=:fun(bool,fun(bool,bool)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#real_abs:fun(real,real) x:real))) (#!:fun(fun(num,bool),bool) (\m':num. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m':num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#real_abs:fun(real,real) x:real))) ((#<=:fun(num,fun(num,bool)) m':num) m:num))))))
-      #|FLOAT_GREATEST_M_EXISTS =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) m:num)) ((#/\:fun(bool,fun(bool,bool)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))))))))))))
-      #|FLOAT_GREATEST_M_UNIQUE =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(num,bool),bool) (\m1:num. (#!:fun(fun(num,bool),bool) (\m2:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m1:num)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m2:num))) ((#=:fun(num,fun(num,bool)) m1:num) m2:num))))))))))
-      #|FLOAT_GREATEST_M_NEG =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) (#real_neg:fun(real,real) x:real))) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)))))))
-      #|FLOAT_GREATEST_R_EXISTS =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\y:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) y:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) y:real)) (#finf:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))))))))))
-      #|FLOAT_GREATEST_R_NEG =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) (#real_neg:fun(real,real) x:real))) (#real_neg:fun(real,real) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real))))))))
-      #|FLOAT_GREATEST_R_LE_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))))))
-      #|FLOAT_GREATEST_R_LE_0_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)))) ((#real_le:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
-      #|FLOAT_NORMALIZE_REAL =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))))))))
-      #|FLOAT_NORM_FRAC =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#?:fun(fun(num,bool),bool) (\f:num. (#?:fun(fun(int,bool),bool) (\e:int. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) f:num)) ((((#is_frac_and_exp:fun(flformat,fun(real,fun(num,fun(int,bool)))) fmt:flformat) x:real) f:num) e:int)))))))))))
-      #|FLOAT_NORM_M =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#?:fun(fun(num,bool),bool) (\m:num. (#?:fun(fun(int,bool),bool) (\e:int. (#?:fun(fun(num,bool),bool) (\f':num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) f':num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) f':num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) e:int) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))))))))
-      #|FLOAT_NORM_GREATEST =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#?:fun(fun(num,bool),bool) (\f':num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) f':num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) f':num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))
-      #|FLOAT_NORMALIZE_FLOAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real))))))))))
-      #|FLOAT_EQ_IPOW =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(int,bool),bool) (\e:int. (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) e:int)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) m:num)))))))))))
-      #|FLOAT_EQ_IPOW_R_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(int,bool),bool) (\e:int. (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))) ((#=:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))
-      #|FLOAT_BETWEEN =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(int,bool),bool) (\e:int. (#!:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))) (#real_abs:fun(real,real) x:real))) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))) (#finf:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) e:int)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) m:num)))))))))))
-      #|FLOAT_RD_IS_FLOAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(roundmode,bool),bool) (\mode:roundmode. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) mode:roundmode) x:real)))))))))
-      #|CLOSER_BETWEEN_3 =  |- (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#real_le:fun(real,fun(real,bool)) y:real) a:real))) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real))))))))
-      #|CLOSER_BETWEEN_4 =  |- (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) a:real)) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) z:real) x:real) a:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) z:real) a:real))))) (((#closer:fun(real,fun(real,fun(real,bool))) z:real) y:real) a:real))))))))))
-      #|CLOSER_BETWEEN_5 =  |- (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) a:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) x:real))) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real))))))))
-      #|fl_is_closest =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) (#!:fun(fun(real,bool),bool) (\s:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) s:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) s:real) y:real)))) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) s:real) x:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) s:real) y:real) x:real)))))))
-      #|FLOAT_RD_NEAREST_CLOSEST =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)) z:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) z:real)))))))))
-      #|FLOAT_M_POW_E_IS_FLOAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
-      #|FLOAT_NEG_IS_FLOAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) (#real_neg:fun(real,real) x:real)))))))
-      #|FLOAT_PLUS_FIXED_IS_FLOAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) z:real)))))))))
-      #|FLOAT_PLUS_FIXED_IS_FLOAT_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real))) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) z:real)))))))))
-      #|FLOAT_REVERSE_NORMALIZE_FLOAT =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) y:real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#finf:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) y:real)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) y:real)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) z:real))) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) z:real))))))))))))))
-      #|FLOAT_REVERSE_NORMALIZE_LE =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real))))))))
-      #|FLOAT_REVERSE_NORMALIZE_LE_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)))))))))
-      #|CLOSEST_LEMMA_1 =  |- (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) a:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) a:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real)))) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) z:real) a:real))))))))))
-      #|CLOSEST_LEMMA_2 =  |- (#!:fun(fun(real,bool),bool) (\a:real. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. (#!:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) a:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) a:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) z:real)))) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) z:real) a:real))))))))))
-      #|FLOAT_IS_CLOSEST_FIXED =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)) ((#/\:fun(bool,fun(bool,bool)) (((#is_closest:fun(fformat,fun(real,fun(real,bool))) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) z:real)) ((#/\:fun(bool,fun(bool,bool)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) z:real))) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) z:real)))) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#ff:fun(fformat,fun(real,num)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) y:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) y:real)))) (#EVEN:fun(num,bool) ((#ff:fun(fformat,fun(real,num)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)))))))))))))))
+      #|FLFORMAT_SPLIT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#=:fun(prod(num,num),fun(prod(num,num),bool)) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat)) ((#,:fun(num,fun(num,prod(num,num))) (#FST:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))) (#SND:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))))))
+      #|FLFORMAT_VALID_IMP_RADIX_LT_1 =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FST:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
+      #|FLFORMAT_VALID_IMP_RADIX_EVEN =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) (#EVEN:fun(num,bool) (#FST:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
+      #|FLFORMAT_VALID_IMP_PREC_LT_1 =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#SND:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))))))))
+      #|FLFORMAT_VALID =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#is_valid_flformat:fun(prod(num,num),bool) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat))))
+      #|FLFORMAT_RADIX_LT_1 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#flr:fun(flformat,num) fmt:flformat))))
+      #|FLFORMAT_RADIX_LT_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#flr:fun(flformat,num) fmt:flformat))))
+      #|FLFORMAT_RADIX_NE_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))
+      #|FLFORMAT_RADIX_EVEN =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#EVEN:fun(num,bool) (#flr:fun(flformat,num) fmt:flformat))))
+      #|FLFORMAT_RADIX_LE_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#flr:fun(flformat,num) fmt:flformat))))
+      #|FLFORMAT_PREC_LT_1 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#flp:fun(flformat,num) fmt:flformat))))
+      #|FLFORMAT_PREC_LT_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#flp:fun(flformat,num) fmt:flformat))))
+      #|FLFORMAT_PREC_MINUS_1 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) ((#int_sub:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
+      #|FLFORMAT_PREC_IPOW_EQ_EXP =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_sub:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
+      #|FLFORMAT_PREC_EXP_EQ_IPOW =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) n:num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) (#int_of_num:fun(num,int) n:num)))))))
+      #|FLFORMAT_RADIX_IPOW_LE_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))
+      #|FLFORMAT_RADIX_IPOW_LT_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\e:int. ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))
+      #|FLFORMAT_RADIX_IPOW_NEQ_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\e:int. (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|FLFORMAT_RADIX_IPOW_ADD_EXP =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\u:int. (#forall:fun(fun(int,bool),bool) (\v:int. ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) u:int)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) v:int))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) u:int) v:int)))))))))
+      #|FLFORMAT_TO_FFORMAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\e:int. (#?:fun(fun(fformat,bool),bool) (\fmt':fformat. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fformat,fun(fformat,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int)) fmt':fformat)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fr:fun(fformat,num) fmt':fformat)) (#flr:fun(flformat,num) fmt:flformat))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fp:fun(fformat,num) fmt':fformat)) (#flp:fun(flformat,num) fmt:flformat))) ((#=:fun(int,fun(int,bool)) (#fe:fun(fformat,int) fmt':fformat)) e:int))))))))))
+      #|FLFORMAT_TO_FFORMAT_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\e:int. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fr:fun(fformat,num) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))) (#flr:fun(flformat,num) fmt:flformat))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fp:fun(fformat,num) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))) (#flp:fun(flformat,num) fmt:flformat))) ((#=:fun(int,fun(int,bool)) (#fe:fun(fformat,int) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))) e:int)))))))
+      #|FLOAT_IPOW_LE_REAL =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\z:real. (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) z:real) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))))
+      #|FLOAT_IPOW_LE_REAL_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real)) (#?:fun(fun(int,bool),bool) (\e:int. ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) z:real))))))))
+      #|FLOAT_NEG =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) (#real_neg:fun(real,real) x:real)))))))
+      #|FLOAT_NOT_ZERO =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))
+      #|is_greatest_e =  |- ((#=:fun(bool,fun(bool,bool)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e:int)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_abs:fun(real,real) x:real))) (#forall:fun(fun(int,bool),bool) (\e':int. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e':int)) (#real_abs:fun(real,real) x:real))) ((#int_le:fun(int,fun(int,bool)) e':int) e:int))))))
+      #|FLOAT_GREATEST_E_EXISTS =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(int,bool),bool) (\e:int. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) e:int)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e:int)))))))))
+      #|FLOAT_GREATEST_E_UNIQUE =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e1:int. (#forall:fun(fun(int,bool),bool) (\e2:int. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e1:int)) (((#is_greatest_e:fun(flformat,fun(real,fun(int,bool))) fmt:flformat) x:real) e2:int))) ((#=:fun(int,fun(int,bool)) e1:int) e2:int))))))))))
+      #|FLOAT_GREATEST_E_NEG =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) (#real_neg:fun(real,real) x:real))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))
+      #|is_greatest_m =  |- ((#=:fun(bool,fun(bool,bool)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#real_abs:fun(real,real) x:real))) (#forall:fun(fun(num,bool),bool) (\m':num. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m':num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#real_abs:fun(real,real) x:real))) ((#<=:fun(num,fun(num,bool)) m':num) m:num))))))
+      #|FLOAT_GREATEST_M_EXISTS =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(num,bool),bool) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) m:num)) ((#/\:fun(bool,fun(bool,bool)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))))))))))))
+      #|FLOAT_GREATEST_M_UNIQUE =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\m1:num. (#forall:fun(fun(num,bool),bool) (\m2:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m1:num)) (((#is_greatest_m:fun(flformat,fun(real,fun(num,bool))) fmt:flformat) x:real) m2:num))) ((#=:fun(num,fun(num,bool)) m1:num) m2:num))))))))))
+      #|FLOAT_GREATEST_M_NEG =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) (#real_neg:fun(real,real) x:real))) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)))))))
+      #|FLOAT_GREATEST_R_EXISTS =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\y:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) y:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) y:real)) (#finf:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))))))))))
+      #|FLOAT_GREATEST_R_NEG =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) (#real_neg:fun(real,real) x:real))) (#real_neg:fun(real,real) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real))))))))
+      #|FLOAT_GREATEST_R_LE_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))))))
+      #|FLOAT_GREATEST_R_LE_0_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)))) ((#real_le:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
+      #|FLOAT_NORMALIZE_REAL =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))))))))
+      #|FLOAT_NORM_FRAC =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#?:fun(fun(num,bool),bool) (\f:num. (#?:fun(fun(int,bool),bool) (\e:int. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) f:num)) ((((#is_frac_and_exp:fun(flformat,fun(real,fun(num,fun(int,bool)))) fmt:flformat) x:real) f:num) e:int)))))))))))
+      #|FLOAT_NORM_M =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#?:fun(fun(num,bool),bool) (\m:num. (#?:fun(fun(int,bool),bool) (\e:int. (#?:fun(fun(num,bool),bool) (\f':num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) f':num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) m:num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) f':num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) e:int) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))))))))
+      #|FLOAT_NORM_GREATEST =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) (#?:fun(fun(num,bool),bool) (\f':num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) f':num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) f':num))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))
+      #|FLOAT_NORMALIZE_FLOAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)))) ((#=:fun(real,fun(real,bool)) x:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real))))))))))
+      #|FLOAT_EQ_IPOW =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e:int. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) e:int)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) m:num)))))))))))
+      #|FLOAT_EQ_IPOW_R_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e:int. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))))))) ((#=:fun(real,fun(real,bool)) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))
+      #|FLOAT_BETWEEN =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e:int. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#flr:fun(flformat,num) fmt:flformat))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))) (#real_abs:fun(real,real) x:real))) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int))) (#finf:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) e:int))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)) e:int)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real)) m:num)))))))))))
+      #|FLOAT_RD_IS_FLOAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(roundmode,bool),bool) (\mode:roundmode. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) mode:roundmode) x:real)))))))))
+      #|CLOSER_BETWEEN_3 =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)) ((#real_le:fun(real,fun(real,bool)) y:real) a:real))) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real))))))))
+      #|CLOSER_BETWEEN_4 =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) a:real)) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) z:real) x:real) a:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) z:real) a:real))))) (((#closer:fun(real,fun(real,fun(real,bool))) z:real) y:real) a:real))))))))))
+      #|CLOSER_BETWEEN_5 =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) a:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) x:real))) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real))))))))
+      #|fl_is_closest =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) (#forall:fun(fun(real,bool),bool) (\s:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) s:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) s:real) y:real)))) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) s:real) x:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) s:real) y:real) x:real)))))))
+      #|FLOAT_RD_NEAREST_CLOSEST =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)) z:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) z:real)))))))))
+      #|FLOAT_M_POW_E_IS_FLOAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
+      #|FLOAT_NEG_IS_FLOAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) x:real)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) (#real_neg:fun(real,real) x:real)))))))
+      #|FLOAT_PLUS_FIXED_IS_FLOAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) z:real)))))))))
+      #|FLOAT_PLUS_FIXED_IS_FLOAT_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) z:real))) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)))) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) z:real)))))))))
+      #|FLOAT_REVERSE_NORMALIZE_FLOAT =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) y:real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#finf:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) y:real)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) y:real)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) z:real))) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) z:real))))))))))))))
+      #|FLOAT_REVERSE_NORMALIZE_LE =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real))))))))
+      #|FLOAT_REVERSE_NORMALIZE_LE_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)))))))))
+      #|CLOSEST_LEMMA_1 =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) a:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) a:real)) ((#real_lt:fun(real,fun(real,bool)) z:real) y:real)))) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) z:real) a:real))))))))))
+      #|CLOSEST_LEMMA_2 =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) y:real) a:real)) (#~:fun(bool,bool) (((#closer:fun(real,fun(real,fun(real,bool))) y:real) x:real) a:real)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) a:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) z:real)))) (((#closer:fun(real,fun(real,fun(real,bool))) x:real) z:real) a:real))))))))))
+      #|FLOAT_IS_CLOSEST_FIXED =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y:real)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)))) (#?:fun(fun(real,bool),bool) (\z:real. ((#/\:fun(bool,fun(bool,bool)) ((#is_fixed:fun(fformat,fun(real,bool)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)) ((#/\:fun(bool,fun(bool,bool)) (((#is_closest:fun(fformat,fun(real,fun(real,bool))) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) x:real)) z:real)) ((#/\:fun(bool,fun(bool,bool)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) z:real))) ((#=:fun(real,fun(real,bool)) y:real) ((#real_add:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) x:real))) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))))) z:real)))) ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) ((#ff:fun(fformat,fun(real,num)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) y:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) y:real)))) (#EVEN:fun(num,bool) ((#ff:fun(fformat,fun(real,num)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real))) z:real)))))))))))))))
       #|fl_norm_frac =  |- ((#=:fun(num,fun(num,bool)) ((#fl_norm_frac:fun(flformat,fun(real,num)) fmt:flformat) y:real)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#greatest_m:fun(flformat,fun(real,num)) fmt:flformat) y:real)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#ff:fun(fformat,fun(real,num)) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) y:real))) ((#greatest_r:fun(flformat,fun(real,real)) fmt:flformat) y:real))))
-      #|fl_to_even =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_even:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) (#!:fun(fun(real,bool),bool) (\y2:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y2:real)) ((#/\:fun(bool,fun(bool,bool)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y2:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) y2:real) y:real)))))) (#EVEN:fun(num,bool) ((#fl_norm_frac:fun(flformat,fun(real,num)) fmt:flformat) y:real))))))
-      #|FLOAT_RD_NEAREST_EVEN =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_even:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)))))))
-      #|fl_to_zero =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_zero:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) x:real)) (#!:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) y':real) x:real))) ((#real_le:fun(real,fun(real,bool)) y':real) y:real))))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real)) (#!:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) x:real) y':real))) ((#real_le:fun(real,fun(real,bool)) y:real) y':real))))))))
-      #|FLOAT_RD_ZERO_EXISTS =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_zero:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real)))))))
-      #|fl_to_pinf =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_pinf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real)) (#!:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) x:real) y':real))) ((#real_le:fun(real,fun(real,bool)) y:real) y':real))))))
-      #|FLOAT_RD_PINF_EXISTS =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_pinf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real)))))))
-      #|fl_to_ninf =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_ninf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) x:real)) (#!:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) y':real) x:real))) ((#real_le:fun(real,fun(real,bool)) y':real) y:real))))))
-      #|FLOAT_RD_NINF_EXISTS =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_ninf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real)))))))
-      #|FLOAT_RD_NEAR_ABS_ERR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)) x:real))) ((#real_div:fun(real,fun(real,real)) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
-      #|FLOAT_RD_ZERO_ABS_ERR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real)) x:real))) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
-      #|FLOAT_RD_PINF_ABS_ERR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real)) x:real))) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
-      #|FLOAT_RD_NINF_ABS_ERR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real)) x:real))) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
-      #|FLOAT_RD_NEAR_REL_ERROR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))
-      #|FLOAT_RD_ZERO_REL_ERROR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat))))))))
-      #|FLOAT_RD_PINF_REL_ERROR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat))))))))
-      #|FLOAT_RD_NINF_REL_ERROR =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat))))))))
-      #|FLOAT_RD_NEAR_REL_DELTA =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) (#fl_eps:fun(flformat,real) fmt:flformat))))))))))
-      #|FLOAT_RD_ZERO_REL_DELTA =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))))))
-      #|FLOAT_RD_PINF_REL_DELTA =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))))))
-      #|FLOAT_RD_NINF_REL_DELTA =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))))))
-      #|FLOAT_GREATEST_E_OF =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(int,bool),bool) (\e:int. (#!:fun(fun(num,bool),bool) (\f:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) f:num)) ((#<:fun(num,fun(num,bool)) f:num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) (#flp:fun(flformat,num) fmt:flformat))))) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) f:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) e:int) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) e:int))))))))
-      #|FLOAT_RD_LE_0 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(roundmode,bool),bool) (\m:roundmode. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) m:roundmode) x:real)))))))))
-      #|FLOAT_RD_LE_0_2 =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(roundmode,bool),bool) (\m:roundmode. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)))) ((#real_le:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) m:roundmode) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
-      #|FLOAT_RD_MONO =  |- (#!:fun(fun(flformat,bool),bool) (\fmt:flformat. (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(int,bool),bool) (\e:int. (#!:fun(fun(roundmode,bool),bool) (\m:roundmode. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_abs:fun(real,real) x:real)))) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_abs:fun(real,real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) m:roundmode) x:real))))))))))))
+      #|fl_to_even =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_even:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) (#forall:fun(fun(real,bool),bool) (\y2:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y2:real)) ((#/\:fun(bool,fun(bool,bool)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) (((#fl_is_closest:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y2:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) y2:real) y:real)))))) (#EVEN:fun(num,bool) ((#fl_norm_frac:fun(flformat,fun(real,num)) fmt:flformat) y:real))))))
+      #|FLOAT_RD_NEAREST_EVEN =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_even:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)))))))
+      #|fl_to_zero =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_zero:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) x:real)) (#forall:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) y':real) x:real))) ((#real_le:fun(real,fun(real,bool)) y':real) y:real))))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real)) (#forall:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) x:real) y':real))) ((#real_le:fun(real,fun(real,bool)) y:real) y':real))))))))
+      #|FLOAT_RD_ZERO_EXISTS =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_zero:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real)))))))
+      #|fl_to_pinf =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_pinf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real)) (#forall:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) x:real) y':real))) ((#real_le:fun(real,fun(real,bool)) y:real) y':real))))))
+      #|FLOAT_RD_PINF_EXISTS =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_pinf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real)))))))
+      #|fl_to_ninf =  |- ((#=:fun(bool,fun(bool,bool)) (((#fl_to_ninf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) y:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) x:real)) (#forall:fun(fun(real,bool),bool) (\y':real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#is_float:fun(flformat,fun(real,bool)) fmt:flformat) y':real)) ((#real_le:fun(real,fun(real,bool)) y':real) x:real))) ((#real_le:fun(real,fun(real,bool)) y':real) y:real))))))
+      #|FLOAT_RD_NINF_EXISTS =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (((#fl_to_ninf:fun(flformat,fun(real,fun(real,bool))) fmt:flformat) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real)))))))
+      #|FLOAT_RD_NEAR_ABS_ERR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)) x:real))) ((#real_div:fun(real,fun(real,real)) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
+      #|FLOAT_RD_ZERO_ABS_ERR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real)) x:real))) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
+      #|FLOAT_RD_PINF_ABS_ERR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real)) x:real))) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
+      #|FLOAT_RD_NINF_ABS_ERR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real)) x:real))) (#fulp:fun(fformat,real) ((#to_fformat:fun(flformat,fun(int,fformat)) fmt:flformat) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) x:real)))))))))
+      #|FLOAT_RD_NEAR_REL_ERROR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))
+      #|FLOAT_RD_ZERO_REL_ERROR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat))))))))
+      #|FLOAT_RD_PINF_REL_ERROR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat))))))))
+      #|FLOAT_RD_NINF_REL_ERROR =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#rerror:fun(real,fun(real,real)) x:real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat))))))))
+      #|FLOAT_RD_NEAR_REL_DELTA =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_near:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) (#fl_eps:fun(flformat,real) fmt:flformat))))))))))
+      #|FLOAT_RD_ZERO_REL_DELTA =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_zero:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))))))
+      #|FLOAT_RD_PINF_REL_DELTA =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_pinf:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))))))
+      #|FLOAT_RD_NINF_REL_DELTA =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) #To_ninf:roundmode) x:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d:real)) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) d:real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fl_eps:fun(flformat,real) fmt:flformat)))))))))))
+      #|FLOAT_GREATEST_E_OF =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(int,bool),bool) (\e:int. (#forall:fun(fun(num,bool),bool) (\f:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) ((#-:fun(num,fun(num,num)) (#flp:fun(flformat,num) fmt:flformat)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) f:num)) ((#<:fun(num,fun(num,bool)) f:num) ((#EXP:fun(num,fun(num,num)) (#flr:fun(flformat,num) fmt:flformat)) (#flp:fun(flformat,num) fmt:flformat))))) ((#=:fun(int,fun(int,bool)) ((#greatest_e:fun(flformat,fun(real,int)) fmt:flformat) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) f:num)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) e:int) (#int_of_num:fun(num,int) (#flp:fun(flformat,num) fmt:flformat)))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) e:int))))))))
+      #|FLOAT_RD_LE_0 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(roundmode,bool),bool) (\m:roundmode. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) m:roundmode) x:real)))))))))
+      #|FLOAT_RD_LE_0_2 =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(roundmode,bool),bool) (\m:roundmode. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)))) ((#real_le:fun(real,fun(real,bool)) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) m:roundmode) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
+      #|FLOAT_RD_MONO =  |- (#forall:fun(fun(flformat,bool),bool) (\fmt:flformat. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(int,bool),bool) (\e:int. (#forall:fun(fun(roundmode,bool),bool) (\m:roundmode. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_abs:fun(real,real) x:real)))) ((#real_le:fun(real,fun(real,bool)) ((#ipow:fun(real,fun(int,real)) (#real_of_num:fun(num,real) (#flr:fun(flformat,num) fmt:flformat))) e:int)) (#real_abs:fun(real,real) (((#flround:fun(flformat,fun(roundmode,fun(real,real))) fmt:flformat) m:roundmode) x:real))))))))))))
       #|types = flformat/0 roundmode/0 fformat/0 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
-      #|constants = fl_to_ninf fl_to_pinf fl_to_zero fl_to_even fl_norm_frac fl_is_closest is_greatest_m is_greatest_e fl_eps flround greatest_r greatest_m greatest_e to_fformat is_float is_frac_and_exp flp flr dest_flformat mk_flformat is_valid_flformat to_ninf to_pinf to_zero to_even is_closest fixed_preimage fixed_corr fround To_ninf To_pinf To_zero To_near _116450 _116449 _116448 _116447 _dest_roundmode _mk_roundmode lub glb is_lub is_ub is_glb is_lb fixed finf fulp is_fixed ff is_frac fe fp fr dest_fformat mk_fformat is_valid_fformat sup_int sup_num is_sup_int is_sup_num closer rerror ipow superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+      #|constants = fl_to_ninf fl_to_pinf fl_to_zero fl_to_even fl_norm_frac fl_is_closest is_greatest_m is_greatest_e fl_eps flround greatest_r greatest_m greatest_e to_fformat is_float is_frac_and_exp flp flr dest_flformat mk_flformat is_valid_flformat to_ninf to_pinf to_zero to_even is_closest fixed_preimage fixed_corr fround To_ninf To_pinf To_zero To_near _116450 _116449 _116448 _116447 _dest_roundmode _mk_roundmode lub glb is_lub is_ub is_glb is_lb fixed finf fulp is_fixed ff is_frac fe fp fr dest_fformat mk_fformat is_valid_fformat sup_int sup_num is_sup_int is_sup_num closer rerror ipow superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 321
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?169316
+      #|counter_tyvar = zz_counter:'?169314
       #|counter_genvar = _131962:bool
       #|
     ),

@@ -663,7 +663,7 @@ test "grobner matches grobner.ml" {
       #|  d:A
       #|  n:A
       #|  n0:A
-      #|  !(add:A->A->A) (mul:A->A->A) (n0:A).\n          (!x. mul n0 x = n0) /\\\n          (!x y z. (add x y = add x z) <=> (y = z)) /\\\n          (!w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (!a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (!n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
+      #|  forall(add:A->A->A) (mul:A->A->A) (n0:A).\n          (forall x. mul n0 x = n0) /\\\n          (forall x y z. (add x y = add x z) <=> (y = z)) /\\\n          (forall w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (forall a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (forall n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
       #|  (p ==> F) ==> (~q = p) ==> q
       #|  F
       #|  PRE
@@ -676,20 +676,20 @@ test "grobner matches grobner.ml" {
       #|  a:num
       #|  b:num
       #|  (-):num->num->num
-      #|  (EVEN(x) <=> (!y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (!y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (!y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (!y. ~(x = SUC(2 * y))))
+      #|  (EVEN(x) <=> (forall y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (forall y. ~(x = SUC(2 * y))))
       #|  a + b + c + d + e = a + c + e + b + d
       #|  (w = x + d) /\\ (y = z + e)\n     ==> ((w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
       #|  z:num
       #|  y:num
       #|  x:num
       #|  w:num
-      #|  (!x. 0 * x = 0) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+      #|  (forall x. 0 * x = 0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
       #|  (EXP):num->num->num
       #|  (*):num->num->num
       #|  (+):num->num->num
       #|  T
       #|types = num/0 ind/0 prod/2 1/0 bool/0 fun/2
-      #|constants = MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+      #|constants = MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 60
       #|ring_sq =  |- ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#*:fun(num,fun(num,num)) x:num) y:num))) ((#EXP:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|ring_comm =  |- ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) b:num)) c:num)) ((#+:fun(num,fun(num,num)) c:num) ((#*:fun(num,fun(num,num)) b:num) a:num)))
@@ -701,7 +701,7 @@ test "grobner matches grobner.ml" {
       #|ring_cancel =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) a:num) b:num)) ((#+:fun(num,fun(num,num)) a:num) c:num))) ((#=:fun(num,fun(num,bool)) b:num) c:num))
       #|ring_false ! EQ_MP
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?32512
+      #|counter_tyvar = zz_counter:'?32510
       #|counter_genvar = _17487:bool
       #|
     ),

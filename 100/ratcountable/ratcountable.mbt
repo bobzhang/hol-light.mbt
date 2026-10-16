@@ -124,7 +124,7 @@ fn step_7() -> Unit raise {
   let t32 = @simp.once_rewrite_tac(@list.List([@card.card_eq_sym()]))
   let t31 = @simp.rewrite_tac(@list.List([denumerable()]))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(denumerable_rationals()), t31), t32), t33), t34), t35), t36)
-  denumerable_rationals_expand_c.set(@tactics.prove(@parser.parse_term("?rat:num->real. (!n. rational(rat n)) /\\\n                   (!x. rational x ==> ?!n. x = rat n)"), t37))
+  denumerable_rationals_expand_c.set(@tactics.prove(@parser.parse_term("?rat:num->real. (forall n. rational(rat n)) /\\\n                   (forall x. rational x ==> ?!n. x = rat n)"), t37))
 }
 
 ///|

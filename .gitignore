@@ -5,3 +5,5 @@ target/
 .DS_Store
 .claude/scheduled_tasks.lock
 .port/
+
+__pycache__/

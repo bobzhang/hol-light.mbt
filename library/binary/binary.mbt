@@ -23,7 +23,7 @@ fn step_1() -> Unit raise {
   )
   bounded_finite_c.set(
     @tactics.prove(
-      @parser.parse_term("!s. (!x:num. x IN s ==> x <= n) ==> FINITE s"),
+      @parser.parse_term("forall s. (forall x:num. x IN s ==> x <= n) ==> FINITE s"),
       t4,
     ),
   )
@@ -57,7 +57,7 @@ fn step_2() -> Unit raise {
   even_nsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s. FINITE s /\\ (!i. i IN s ==> EVEN(f i)) ==> EVEN(nsum s f)",
+        "forall s. FINITE s /\\ (forall i. i IN s ==> EVEN(f i)) ==> EVEN(nsum s f)",
       ),
       t7,
     ),
@@ -123,7 +123,7 @@ fn step_5() -> Unit raise {
   )
   bitset_bound_lemma_c.set(
     @tactics.prove(
-      @parser.parse_term("!n i. i IN (bitset n) ==> 2 EXP i <= n"),
+      @parser.parse_term("forall n i. i IN (bitset n) ==> 2 EXP i <= n"),
       t9,
     ),
   )
@@ -147,7 +147,7 @@ fn step_6() -> Unit raise {
     @list.List([bitset_bound_lemma(), @arith.lt_pow2_refl(), @arith.lte_trans()]),
   )
   bitset_bound_weak_c.set(
-    @tactics.prove(@parser.parse_term("!n i. i IN (bitset n) ==> i < n"), t10),
+    @tactics.prove(@parser.parse_term("forall n i. i IN (bitset n) ==> i < n"), t10),
   )
 }
 
@@ -191,7 +191,7 @@ fn step_7() -> Unit raise {
     t13,
   )
   finite_bitset_c.set(
-    @tactics.prove(@parser.parse_term("!n. FINITE(bitset n)"), t14),
+    @tactics.prove(@parser.parse_term("forall n. FINITE(bitset n)"), t14),
   )
 }
 
@@ -364,7 +364,7 @@ fn step_9() -> Unit raise {
   bitset_step_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!n. bitset(2 * n) = IMAGE SUC (bitset n)) /\\\n   (!n. bitset(2 * n + 1) = 0 INSERT (IMAGE SUC (bitset n)))",
+        "(forall n. bitset(2 * n) = IMAGE SUC (bitset n)) /\\\n   (forall n. bitset(2 * n + 1) = 0 INSERT (IMAGE SUC (bitset n)))",
       ),
       t28,
     ),
@@ -431,7 +431,7 @@ fn step_10() -> Unit raise {
     t35,
   )
   binarysum_bitset_c.set(
-    @tactics.prove(@parser.parse_term("!n. binarysum (bitset n) = n"), t36),
+    @tactics.prove(@parser.parse_term("forall n. binarysum (bitset n) = n"), t36),
   )
 }
 
@@ -452,7 +452,7 @@ fn step_11() -> Unit raise {
   let t37 = @meson.meson_tac(@list.List([binarysum_bitset()]))
   bitset_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("!m n. bitset m = bitset n <=> m = n"),
+      @parser.parse_term("forall m n. bitset m = bitset n <=> m = n"),
       t37,
     ),
   )
@@ -472,7 +472,7 @@ pub fn bitset_eq() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t38 = @meson.meson_tac(@list.List([bitset_eq(), bitset_0()]))
   bitset_eq_empty_c.set(
-    @tactics.prove(@parser.parse_term("!n. bitset n = {} <=> n = 0"), t38),
+    @tactics.prove(@parser.parse_term("forall n. bitset n = {} <=> n = 0"), t38),
   )
 }
 
@@ -612,7 +612,7 @@ fn step_13() -> Unit raise {
   binarysum_bound_lemma_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!k s. (!i. i IN s ==> i < k) ==> nsum s (\\i. 2 EXP i) < 2 EXP k",
+        "forall k s. (forall i. i IN s ==> i < k) ==> nsum s (\\i. 2 EXP i) < 2 EXP k",
       ),
       t53,
     ),
@@ -671,7 +671,7 @@ fn step_14() -> Unit raise {
   binarysum_div_divisible_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s k. FINITE s /\\ (!i. i IN s ==> k <= i)\n         ==> nsum s (\\i. 2 EXP i) = 2 EXP k * nsum s (\\i. 2 EXP (i - k))",
+        "forall s k. FINITE s /\\ (forall i. i IN s ==> k <= i)\n         ==> nsum s (\\i. 2 EXP i) = 2 EXP k * nsum s (\\i. 2 EXP (i - k))",
       ),
       t59,
     ),
@@ -896,7 +896,7 @@ fn step_15() -> Unit raise {
   binarysum_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!k s. FINITE s\n         ==> (nsum s (\\j. 2 EXP j)) DIV (2 EXP k) =\n             nsum s (\\j. if j < k then 0 else 2 EXP (j - k))",
+        "forall k s. FINITE s\n         ==> (nsum s (\\j. 2 EXP j)) DIV (2 EXP k) =\n             nsum s (\\j. if j < k then 0 else 2 EXP (j - k))",
       ),
       t91,
     ),
@@ -1075,7 +1075,7 @@ fn step_16() -> Unit raise {
   )
   bitset_binarysum_c.set(
     @tactics.prove(
-      @parser.parse_term("!s. FINITE s ==> bitset (binarysum s) = s"),
+      @parser.parse_term("forall s. FINITE s ==> bitset (binarysum s) = s"),
       t112,
     ),
   )
@@ -1101,7 +1101,7 @@ fn step_17() -> Unit raise {
   binarysum_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!k s. (!i. i IN s ==> i < k) ==> binarysum s < 2 EXP k",
+        "forall k s. (forall i. i IN s ==> i < k) ==> binarysum s < 2 EXP k",
       ),
       t113,
     ),
@@ -1179,7 +1179,7 @@ fn step_18() -> Unit raise {
   )
   bitset_bound_c.set(
     @tactics.prove(
-      @parser.parse_term("!n i k. n < 2 EXP k /\\ i IN bitset n ==> i < k"),
+      @parser.parse_term("forall n i k. n < 2 EXP k /\\ i IN bitset n ==> i < k"),
       t120,
     ),
   )
@@ -1202,7 +1202,7 @@ fn step_19() -> Unit raise {
   )
   bitset_bound_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("!n k. n < 2 EXP k <=> (!i. i IN bitset n ==> i < k)"),
+      @parser.parse_term("forall n k. n < 2 EXP k <=> (forall i. i IN bitset n ==> i < k)"),
       t121,
     ),
   )
@@ -1228,7 +1228,7 @@ fn step_20() -> Unit raise {
   binarysum_bound_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s k. FINITE s ==> (binarysum s < 2 EXP k <=> (!i. i IN s ==> i < k))",
+        "forall s k. FINITE s ==> (binarysum s < 2 EXP k <=> (forall i. i IN s ==> i < k))",
       ),
       t122,
     ),

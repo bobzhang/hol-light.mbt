@@ -41,7 +41,7 @@ pub fn suffice_tac(x6 : @list.List[@kernel.Thm], x7 : @kernel.Term) -> @tactics.
 fn step_3() -> Unit raise {
   let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), @lists.list_induct_tac), t11)
-  let th = @tactics.prove(@parser.parse_term("!P. P [] /\\ (!h t. P (h :: t)) ==> !l. P l"), t12)
+  let th = @tactics.prove(@parser.parse_term("forall P. P [] /\\ (forall h t. P (h :: t)) ==> forall l. P l"), t12)
   let t13 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac)])
   list_cases_tac_c.set(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(th), @tactics.conj_tac), t13))
 }
@@ -59,7 +59,7 @@ pub fn list_cases_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// NULL_EQ_NIL
 fn step_4() -> Unit raise {
   let t14 = @tactics.then_tac(list_cases_tac, @simp.rewrite_tac(@list.List([@lists.null(), @lists.not_cons_nil()])))
-  null_eq_nil_c.set(@tactics.prove(@parser.parse_term("!l. NULL l <=> l = []"), t14))
+  null_eq_nil_c.set(@tactics.prove(@parser.parse_term("forall l. NULL l <=> l = []"), t14))
 }
 
 ///|
@@ -75,7 +75,7 @@ pub fn null_eq_nil() -> @kernel.Thm {
 /// NULL_LENGTH
 fn step_5() -> Unit raise {
   let t15 = @tactics.then_tac(list_cases_tac, @simp.rewrite_tac(@list.List([@lists.null(), @lists.length(), @nums.not_suc()])))
-  null_length_c.set(@tactics.prove(@parser.parse_term("!l. NULL l <=> LENGTH l = 0"), t15))
+  null_length_c.set(@tactics.prove(@parser.parse_term("forall l. NULL l <=> LENGTH l = 0"), t15))
 }
 
 ///|
@@ -93,7 +93,7 @@ fn step_6() -> Unit raise {
   let t17 = @simp.asm_simp_tac(@list.List([@lists.length(), @arith.le_suc(), @int.arith_rule(@parser.parse_term("n<=m ==> n<= SUC m"))]))
   let t16 = @simp.rewrite_tac(@list.List([@lists.filter(), @lists.length(), @arith.le_0()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t16), @class.cond_cases_tac), t17)
-  length_filter_le_c.set(@tactics.prove(@parser.parse_term("!f l:A list. LENGTH (FILTER f l) <= LENGTH l"), t18))
+  length_filter_le_c.set(@tactics.prove(@parser.parse_term("forall f l:A list. LENGTH (FILTER f l) <= LENGTH l"), t18))
 }
 
 ///|
@@ -110,7 +110,7 @@ pub fn length_filter_le() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@wf.wf_ind(), @wf.measure()]))
   let t20 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("LENGTH:A list->num"), @wf.wf_measure())), t19)
-  list_wf_c.set(@tactics.prove(@parser.parse_term("!P. (!l. (!l'. LENGTH l' < LENGTH l ==> P l') ==> P l)\n        ==> (!l:A list. P l)"), t20))
+  list_wf_c.set(@tactics.prove(@parser.parse_term("forall P. (forall l. (forall l'. LENGTH l' < LENGTH l ==> P l') ==> P l)\n        ==> (forall l:A list. P l)"), t20))
 }
 
 ///|
@@ -125,7 +125,7 @@ pub fn list_wf() -> @kernel.Thm {
 ///|
 /// DELETE1
 fn step_8() -> Unit raise {
-  delete1_c.set(@define.define_(@parser.parse_term("(!x. DELETE1 x [] = []) /\\\n   (!x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)")))
+  delete1_c.set(@define.define_(@parser.parse_term("(forall x. DELETE1 x [] = []) /\\\n   (forall x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)")))
 }
 
 ///|
@@ -143,7 +143,7 @@ fn step_9() -> Unit raise {
   let t22 = @simp.asm_rewrite_tac(@list.List([@lists.not_cons_nil(), @lists.cons_11()]))
   let t21 = @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t21), @class.cond_cases_tac), t22)
-  delete1_id_c.set(@tactics.prove(@parser.parse_term("!x l. ~MEM x l ==> DELETE1 x l = l"), t23))
+  delete1_id_c.set(@tactics.prove(@parser.parse_term("forall x l. ~MEM x l ==> DELETE1 x l = l"), t23))
 }
 
 ///|
@@ -162,7 +162,7 @@ fn step_10() -> Unit raise {
   let t25 = @simp.asm_rewrite_tac(@list.List([@lists.mem(), @lists.append()]))
   let t24 = @simp.rewrite_tac(@list.List([@lists.append(), delete1(), @lists.mem()]))
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t24), @tactics.gen_tac), @class.cond_cases_tac), t25), @class.cond_cases_tac), t26)
-  delete1_append_c.set(@tactics.prove(@parser.parse_term("!x l1 l2. DELETE1 x (APPEND l1 l2) =\n              if MEM x l1 then APPEND (DELETE1 x l1) l2\n                          else APPEND l1 (DELETE1 x l2)"), t27))
+  delete1_append_c.set(@tactics.prove(@parser.parse_term("forall x l1 l2. DELETE1 x (APPEND l1 l2) =\n              if MEM x l1 then APPEND (DELETE1 x l1) l2\n                          else APPEND l1 (DELETE1 x l2)"), t27))
 }
 
 ///|
@@ -180,7 +180,7 @@ fn step_11() -> Unit raise {
   let t29 = @meson.asm_meson_tac(@list.List([]))
   let t28 = @tactics.repeat_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([delete1(), @lists.filter()])), @class.cond_cases_tac))
   let t30 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t28), t29)
-  filter_delete1_c.set(@tactics.prove(@parser.parse_term("!P x l. FILTER P (DELETE1 x l) =\n            if P x then DELETE1 x (FILTER P l) else FILTER P l"), t30))
+  filter_delete1_c.set(@tactics.prove(@parser.parse_term("forall P x l. FILTER P (DELETE1 x l) =\n            if P x then DELETE1 x (FILTER P l) else FILTER P l"), t30))
 }
 
 ///|
@@ -199,7 +199,7 @@ fn step_12() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC (PRE n)=n <=> ~(n=0)")), @lists.length_eq_nil()]))
   let t31 = @simp.asm_rewrite_tac(@list.List([@arith.pre(), @lists.length()]))
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.mem(), @lists.length(), delete1()]))), @tactics.gen_tac), @class.cond_cases_tac), t31), @class.cond_cases_tac), t32), t33)
-  length_delete1_c.set(@tactics.prove(@parser.parse_term("!l x:A. LENGTH (DELETE1 x l) =\n            if MEM x l then PRE (LENGTH l) else LENGTH l"), t34))
+  length_delete1_c.set(@tactics.prove(@parser.parse_term("forall l x:A. LENGTH (DELETE1 x l) =\n            if MEM x l then PRE (LENGTH l) else LENGTH l"), t34))
 }
 
 ///|
@@ -218,7 +218,7 @@ fn step_13() -> Unit raise {
   let t36 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t35 = @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), @tactics.gen_tac), t35), @class.cond_cases_tac), t36), @tactics.strip_tac), t37)
-  mem_delete1_mem_imp_c.set(@tactics.prove(@parser.parse_term("!h t x. MEM x (DELETE1 h t) ==> MEM x t"), t38))
+  mem_delete1_mem_imp_c.set(@tactics.prove(@parser.parse_term("forall h t x. MEM x (DELETE1 h t) ==> MEM x t"), t38))
 }
 
 ///|
@@ -237,7 +237,7 @@ fn step_14() -> Unit raise {
   let t40 = @simp.rewrite_tac(@list.List([@lists.mem(), @class.de_morgan_thm()]))
   let t39 = @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))
   let t42 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @tactics.gen_tac), @tactics.gen_tac), t39), @class.cond_cases_tac), t40), @tactics.strip_tac), t41)
-  not_mem_delete1_c.set(@tactics.prove(@parser.parse_term("!t h x. ~MEM x t ==> ~MEM x (DELETE1 h t)"), t42))
+  not_mem_delete1_c.set(@tactics.prove(@parser.parse_term("forall t h x. ~MEM x t ==> ~MEM x (DELETE1 h t)"), t42))
 }
 
 ///|
@@ -257,7 +257,7 @@ fn step_15() -> Unit raise {
   let t43 = @meson.meson_tac(@list.List([]))
   let t46 = @list.List([@tactics.then_tac(@simp.expand_tac("h"), t43), t45])
   let t47 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))), @tactics.gen_tac), @tactics.gen_tac), @class.cond_cases_tac), t46)
-  mem_delete1_c.set(@tactics.prove(@parser.parse_term("!l x y:A. MEM x l /\\ ~(x = y) ==> MEM x (DELETE1 y l)"), t47))
+  mem_delete1_c.set(@tactics.prove(@parser.parse_term("forall l x y:A. MEM x l /\\ ~(x = y) ==> MEM x (DELETE1 y l)"), t47))
 }
 
 ///|
@@ -275,7 +275,7 @@ fn step_16() -> Unit raise {
   let t49 = @simp.asm_simp_tac(@list.List([@lists.all()]))
   let t48 = @simp.rewrite_tac(@list.List([@lists.all(), delete1()]))
   let t50 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t48), @class.cond_cases_tac), t49)
-  all_delete1_all_imp_c.set(@tactics.prove(@parser.parse_term("!P x l. P x /\\ ALL P (DELETE1 x l) ==> ALL P l"), t50))
+  all_delete1_all_imp_c.set(@tactics.prove(@parser.parse_term("forall P x l. P x /\\ ALL P (DELETE1 x l) ==> ALL P l"), t50))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn all_delete1_all_imp() -> @kernel.Thm {
 ///|
 /// COUNT
 fn step_17() -> Unit raise {
-  count_c.set(@define.define_(@parser.parse_term("(!x. COUNT x [] = 0) /\\\n   (!x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)")))
+  count_c.set(@define.define_(@parser.parse_term("(forall x. COUNT x [] = 0) /\\\n   (forall x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)")))
 }
 
 ///|
@@ -308,7 +308,7 @@ fn step_18() -> Unit raise {
   let t52 = @simp.asm_rewrite_tac(@list.List([@lists.length()]))
   let t51 = @simp.rewrite_tac(@list.List([count(), @lists.filter(), @lists.length()]))
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t51), @class.cond_cases_tac), t52)
-  count_length_filter_c.set(@tactics.prove(@parser.parse_term("!x l. COUNT x l = LENGTH (FILTER ((=) x) l)"), t53))
+  count_length_filter_c.set(@tactics.prove(@parser.parse_term("forall x l. COUNT x l = LENGTH (FILTER ((=) x) l)"), t53))
 }
 
 ///|
@@ -326,7 +326,7 @@ fn step_19() -> Unit raise {
   let t55 = @meson.asm_meson_tac(@list.List([]))
   let t54 = @tactics.repeat_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([count(), @lists.filter()])), @class.cond_cases_tac))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t54), t55)
-  count_filter_c.set(@tactics.prove(@parser.parse_term("!P x l. COUNT x (FILTER P l) =\n            if P x then COUNT x l else 0"), t56))
+  count_filter_c.set(@tactics.prove(@parser.parse_term("forall P x l. COUNT x (FILTER P l) =\n            if P x then COUNT x l else 0"), t56))
 }
 
 ///|
@@ -342,7 +342,7 @@ pub fn count_filter() -> @kernel.Thm {
 /// COUNT_APPEND
 fn step_20() -> Unit raise {
   let t57 = @simp.rewrite_tac(@list.List([count_length_filter(), @lists.length_append(), @lists.filter_append()]))
-  count_append_c.set(@tactics.prove(@parser.parse_term("!x l1 l2. COUNT x (APPEND l1 l2) = COUNT x l1 + COUNT x l2"), t57))
+  count_append_c.set(@tactics.prove(@parser.parse_term("forall x l1 l2. COUNT x (APPEND l1 l2) = COUNT x l1 + COUNT x l2"), t57))
 }
 
 ///|
@@ -360,7 +360,7 @@ fn step_21() -> Unit raise {
   let t59 = @simp.asm_simp_tac(@list.List([@arith.le_suc(), @int.arith_rule(@parser.parse_term("n<=m ==> n <= SUC m"))]))
   let t58 = @simp.asm_rewrite_tac(@list.List([count(), @lists.length(), @arith.le_refl()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t58), @class.cond_cases_tac), t59)
-  count_le_length_c.set(@tactics.prove(@parser.parse_term("!x l. COUNT x l <= LENGTH l"), t60))
+  count_le_length_c.set(@tactics.prove(@parser.parse_term("forall x l. COUNT x l <= LENGTH l"), t60))
 }
 
 ///|
@@ -378,7 +378,7 @@ fn step_22() -> Unit raise {
   let t62 = @simp.asm_rewrite_tac(@list.List([@lists.not_cons_nil()]))
   let t61 = @simp.rewrite_tac(@list.List([@lists.filter(), @lists.mem()]))
   let t63 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([count_length_filter(), @lists.length_eq_nil()]))), @lists.list_induct_tac), t61), @class.cond_cases_tac), t62)
-  count_zero_c.set(@tactics.prove(@parser.parse_term("!x l. COUNT x l = 0 <=> ~MEM x l"), t63))
+  count_zero_c.set(@tactics.prove(@parser.parse_term("forall x l. COUNT x l = 0 <=> ~MEM x l"), t63))
 }
 
 ///|
@@ -394,7 +394,7 @@ pub fn count_zero() -> @kernel.Thm {
 /// MEM_COUNT
 fn step_23() -> Unit raise {
   let t64 = @meson.meson_tac(@list.List([count_zero()]))
-  mem_count_c.set(@tactics.prove(@parser.parse_term("!x l. MEM x l <=> ~(COUNT x l = 0)"), t64))
+  mem_count_c.set(@tactics.prove(@parser.parse_term("forall x l. MEM x l <=> ~(COUNT x l = 0)"), t64))
 }
 
 ///|
@@ -412,7 +412,7 @@ fn step_24() -> Unit raise {
   let t66 = @simp.asm_rewrite_tac(@list.List([@lists.mem_filter(), length_delete1()]))
   let t65 = @tactics.repeat_tac(@tactics.gen_tac)
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([count_length_filter(), filter_delete1()])), t65), @class.cond_cases_tac), t66)
-  count_delete1_c.set(@tactics.prove(@parser.parse_term("!y x l. COUNT y (DELETE1 (x:A) l) =\n            if y=x /\\ MEM x l then PRE (COUNT y l) else COUNT y l"), t67))
+  count_delete1_c.set(@tactics.prove(@parser.parse_term("forall y x l. COUNT y (DELETE1 (x:A) l) =\n            if y=x /\\ MEM x l then PRE (COUNT y l) else COUNT y l"), t67))
 }
 
 ///|
@@ -454,7 +454,7 @@ pub fn list_uniq_cases() -> @kernel.Thm {
 ///|
 /// LIST_UNIQ_RULES, LIST_UNIQ_INDUCT, LIST_UNIQ_CASES
 fn step_25() -> Unit raise {
-  let (list_uniq_rules, list_uniq_induct, list_uniq_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("LIST_UNIQ [] /\\\n   (!x xs. LIST_UNIQ xs /\\ ~MEM x xs ==> LIST_UNIQ (x :: xs))"))
+  let (list_uniq_rules, list_uniq_induct, list_uniq_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("LIST_UNIQ [] /\\\n   (forall x xs. LIST_UNIQ xs /\\ ~MEM x xs ==> LIST_UNIQ (x :: xs))"))
   list_uniq_rules_c.set(list_uniq_rules)
   list_uniq_induct_c.set(list_uniq_induct)
   list_uniq_cases_c.set(list_uniq_cases)
@@ -470,7 +470,7 @@ fn step_26() -> Unit raise {
   let t73 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@bool.ispec(@parser.parse_term("h :: t"), list_uniq_cases())])), t69), t70), t71), t72])
   let t68 = @tactics.repeat_tac(@tactics.gen_tac)
   let t74 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([list_uniq_rules(), @lists.mem()])), t68), @tactics.eq_tac), t73)
-  list_uniq_c.set(@tactics.prove(@parser.parse_term("LIST_UNIQ [] /\\\n   (!x. LIST_UNIQ [x]) /\\\n   (!x xs. LIST_UNIQ (x :: xs) <=> ~MEM x xs /\\ LIST_UNIQ xs)"), t74))
+  list_uniq_c.set(@tactics.prove(@parser.parse_term("LIST_UNIQ [] /\\\n   (forall x. LIST_UNIQ [x]) /\\\n   (forall x xs. LIST_UNIQ (x :: xs) <=> ~MEM x xs /\\ LIST_UNIQ xs)"), t74))
 }
 
 ///|
@@ -533,7 +533,7 @@ fn step_28() -> Unit raise {
   let t80 = @simp.rewrite_tac(@list.List([count(), @lists.mem()]))
   let t101 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(list_uniq_induct()), t80), t81), @class.cond_cases_tac), t82), t100])
   let t102 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([iff_expand, @theorems.forall_and_thm()])), @tactics.conj_tac), t101)
-  list_uniq_count_c.set(@tactics.prove(@parser.parse_term("!l. LIST_UNIQ l <=> (!x:A. COUNT x l = if MEM x l then 1 else 0)"), t102))
+  list_uniq_count_c.set(@tactics.prove(@parser.parse_term("forall l. LIST_UNIQ l <=> (forall x:A. COUNT x l = if MEM x l then 1 else 0)"), t102))
 }
 
 ///|
@@ -551,7 +551,7 @@ fn step_29() -> Unit raise {
   let t104 = @simp.asm_simp_tac(@list.List([list_uniq(), not_mem_delete1()]))
   let t103 = @simp.rewrite_tac(@list.List([list_uniq(), delete1()]))
   let t105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @tactics.gen_tac), t103), @tactics.strip_tac), @class.cond_cases_tac), t104)
-  list_uniq_delete1_c.set(@tactics.prove(@parser.parse_term("!l x. LIST_UNIQ l ==> LIST_UNIQ (DELETE1 x l)"), t105))
+  list_uniq_delete1_c.set(@tactics.prove(@parser.parse_term("forall l x. LIST_UNIQ l ==> LIST_UNIQ (DELETE1 x l)"), t105))
 }
 
 ///|
@@ -572,7 +572,7 @@ fn step_30() -> Unit raise {
   let t110 = @list.List([@meson.asm_meson_tac(@list.List([mem_delete1()])), t109])
   let t106 = @simp.asm_rewrite_tac(@list.List([@lists.mem(), list_uniq()]))
   let t111 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([list_uniq(), delete1(), @lists.mem()]))), @tactics.gen_tac), @class.cond_cases_tac), t106), @tactics.strip_tac), @tactics.conj_tac), t110)
-  delete1_list_uniq_c.set(@tactics.prove(@parser.parse_term("!l x:A. ~MEM x (DELETE1 x l) /\\ LIST_UNIQ (DELETE1 x l)\n            ==> LIST_UNIQ l"), t111))
+  delete1_list_uniq_c.set(@tactics.prove(@parser.parse_term("forall l x:A. ~MEM x (DELETE1 x l) /\\ LIST_UNIQ (DELETE1 x l)\n            ==> LIST_UNIQ l"), t111))
 }
 
 ///|
@@ -589,7 +589,7 @@ pub fn delete1_list_uniq() -> @kernel.Thm {
 fn step_31() -> Unit raise {
   let t112 = @meson.meson_tac(@list.List([]))
   let t113 = @tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([@lists.append(), list_uniq(), @lists.mem(), @lists.mem_append()]))), t112)
-  list_uniq_append_c.set(@tactics.prove(@parser.parse_term("!l m. LIST_UNIQ (APPEND l m) <=>\n         LIST_UNIQ l /\\ LIST_UNIQ m /\\\n         !x. ~(MEM x l /\\ MEM x m)"), t113))
+  list_uniq_append_c.set(@tactics.prove(@parser.parse_term("forall l m. LIST_UNIQ (APPEND l m) <=>\n         LIST_UNIQ l /\\ LIST_UNIQ m /\\\n         forall x. ~(MEM x l /\\ MEM x m)"), t113))
 }
 
 ///|
@@ -609,7 +609,7 @@ fn step_32() -> Unit raise {
   let t114 = @tactics.exists_tac(@parser.parse_term("LENGTH (t:A list)"))
   let t117 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.le_trans()), t114), t115), @int.arith_tac), t116])
   let t118 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.simp_tac(@list.List([@sets.set_of_list(), @sets.card_clauses(), @lists.length(), @sets.finite_set_of_list(), @calc_num.arith()]))), @class.cond_cases_tac), t117)
-  card_length_c.set(@tactics.prove(@parser.parse_term("!l:A list. CARD (set_of_list l) <= LENGTH l"), t118))
+  card_length_c.set(@tactics.prove(@parser.parse_term("forall l:A list. CARD (set_of_list l) <= LENGTH l"), t118))
 }
 
 ///|
@@ -633,7 +633,7 @@ fn step_33() -> Unit raise {
     }
   })
   let t125 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.simp_tac(@list.List([list_uniq(), @sets.set_of_list(), @sets.finite_set_of_list(), @lists.length(), @sets.card_clauses(), @sets.in_set_of_list()]))), t122), @class.cond_cases_tac), t123), t124), @int.arith_tac)
-  list_uniq_card_length_c.set(@tactics.prove(@parser.parse_term("!l:A list. LIST_UNIQ l <=> CARD (set_of_list l) = LENGTH l"), t125))
+  list_uniq_card_length_c.set(@tactics.prove(@parser.parse_term("forall l:A list. LIST_UNIQ l <=> CARD (set_of_list l) = LENGTH l"), t125))
 }
 
 ///|
@@ -649,7 +649,7 @@ pub fn list_uniq_card_length() -> @kernel.Thm {
 /// LIST_UNIQ_LIST_OF_SET
 fn step_34() -> Unit raise {
   let t126 = @simp.simp_tac(@list.List([list_uniq_card_length(), @sets.set_of_list_of_set(), @sets.length_list_of_set()]))
-  list_uniq_list_of_set_c.set(@tactics.prove(@parser.parse_term("!s. FINITE s ==> LIST_UNIQ(list_of_set s)"), t126))
+  list_uniq_list_of_set_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s ==> LIST_UNIQ(list_of_set s)"), t126))
 }
 
 ///|

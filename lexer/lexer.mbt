@@ -228,6 +228,9 @@ pub fn lex(s : String) -> Array[Lexcode] raise {
       }
       i = m
     } else {
+      if tok is (Ident("!") | Resword("!")) {
+        raise Failure("'!' notation has been removed; use 'forall'")
+      }
       toks.push(tok)
       i = k
     }

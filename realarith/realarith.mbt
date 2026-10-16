@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
     t1,
   )
   real_lte_total_c.set(
-    @tactics.prove(@parser.parse_term("!x y. x < y \\/ y <= x"), t2),
+    @tactics.prove(@parser.parse_term("forall x y. x < y \\/ y <= x"), t2),
   )
 }
 
@@ -32,7 +32,7 @@ fn step_2() -> Unit raise {
     t3,
   )
   real_let_total_c.set(
-    @tactics.prove(@parser.parse_term("!x y. x <= y \\/ y < x"), t4),
+    @tactics.prove(@parser.parse_term("forall x y. x <= y \\/ y < x"), t4),
   )
 }
 
@@ -52,7 +52,7 @@ fn step_3() -> Unit raise {
     @list.List([@realax.real_lt(), @realax.real_le_total()]),
   )
   real_lt_imp_le_c.set(
-    @tactics.prove(@parser.parse_term("!x y. x < y ==> x <= y"), t5),
+    @tactics.prove(@parser.parse_term("forall x y. x < y ==> x <= y"), t5),
   )
 }
 
@@ -72,7 +72,7 @@ fn step_4() -> Unit raise {
     @list.List([@realax.real_lt(), @realax.real_le_trans()]),
   )
   real_lte_trans_c.set(
-    @tactics.prove(@parser.parse_term("!x y z. x < y /\\ y <= z ==> x < z"), t6),
+    @tactics.prove(@parser.parse_term("forall x y z. x < y /\\ y <= z ==> x < z"), t6),
   )
 }
 
@@ -92,7 +92,7 @@ fn step_5() -> Unit raise {
     @list.List([@realax.real_lt(), @realax.real_le_trans()]),
   )
   real_let_trans_c.set(
-    @tactics.prove(@parser.parse_term("!x y z. x <= y /\\ y < z ==> x < z"), t7),
+    @tactics.prove(@parser.parse_term("forall x y z. x <= y /\\ y < z ==> x < z"), t7),
   )
 }
 
@@ -110,7 +110,7 @@ pub fn real_let_trans() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t8 = @meson.meson_tac(@list.List([real_lte_trans(), real_lt_imp_le()]))
   real_lt_trans_c.set(
-    @tactics.prove(@parser.parse_term("!x y z. x < y /\\ y < z ==> x < z"), t8),
+    @tactics.prove(@parser.parse_term("forall x y z. x < y /\\ y < z ==> x < z"), t8),
   )
 }
 
@@ -135,7 +135,7 @@ fn step_7() -> Unit raise {
   )
   real_le_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. &0 <= x /\\ &0 <= y ==> &0 <= x + y"),
+      @parser.parse_term("forall x y. &0 <= x /\\ &0 <= y ==> &0 <= x + y"),
       t9,
     ),
   )
@@ -155,7 +155,7 @@ pub fn real_le_add() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([@realax.real_lt()]))
   real_lte_antisym_c.set(
-    @tactics.prove(@parser.parse_term("!x y. ~(x < y /\\ y <= x)"), t10),
+    @tactics.prove(@parser.parse_term("forall x y. ~(x < y /\\ y <= x)"), t10),
   )
 }
 
@@ -181,7 +181,7 @@ fn step_9() -> Unit raise {
     ]),
   )
   real_sub_le_c.set(
-    @tactics.prove(@parser.parse_term("!x y. &0 <= (x - y) <=> y <= x"), t11),
+    @tactics.prove(@parser.parse_term("forall x y. &0 <= (x - y) <=> y <= x"), t11),
   )
 }
 
@@ -209,7 +209,7 @@ fn step_10() -> Unit raise {
     t12,
   )
   real_neg_sub_c.set(
-    @tactics.prove(@parser.parse_term("!x y. --(x - y) = y - x"), t13),
+    @tactics.prove(@parser.parse_term("forall x y. --(x - y) = y - x"), t13),
   )
 }
 
@@ -234,7 +234,7 @@ fn step_11() -> Unit raise {
   )
   real_le_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. x <= y <=> x < y \\/ (x = y)"),
+      @parser.parse_term("forall x y. x <= y <=> x < y \\/ (x = y)"),
       t15,
     ),
   )
@@ -265,7 +265,7 @@ fn step_12() -> Unit raise {
     t17,
   )
   real_sub_lt_c.set(
-    @tactics.prove(@parser.parse_term("!x y. &0 < (x - y) <=> y < x"), t18),
+    @tactics.prove(@parser.parse_term("forall x y. &0 < (x - y) <=> y < x"), t18),
   )
 }
 
@@ -283,7 +283,7 @@ pub fn real_sub_lt() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@realax.real_lt()]))
   real_not_lt_c.set(
-    @tactics.prove(@parser.parse_term("!x y. ~(x < y) <=> y <= x"), t19),
+    @tactics.prove(@parser.parse_term("forall x y. ~(x < y) <=> y <= x"), t19),
   )
 }
 
@@ -335,7 +335,7 @@ fn step_14() -> Unit raise {
     t30,
   )
   real_sub_0_c.set(
-    @tactics.prove(@parser.parse_term("!x y. (x - y = &0) <=> (x = y)"), t31),
+    @tactics.prove(@parser.parse_term("forall x y. (x - y = &0) <=> (x = y)"), t31),
   )
 }
 
@@ -360,7 +360,7 @@ fn step_15() -> Unit raise {
   )
   real_lt_le_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. x < y <=> x <= y /\\ ~(x = y)"),
+      @parser.parse_term("forall x y. x < y <=> x <= y /\\ ~(x = y)"),
       t32,
     ),
   )
@@ -381,7 +381,7 @@ fn step_16() -> Unit raise {
   let t33 = @simp.rewrite_tac(
     @list.List([@realax.real_lt(), @realax.real_le_refl()]),
   )
-  real_lt_refl_c.set(@tactics.prove(@parser.parse_term("!x. ~(x < x)"), t33))
+  real_lt_refl_c.set(@tactics.prove(@parser.parse_term("forall x. ~(x < x)"), t33))
 }
 
 ///|
@@ -405,7 +405,7 @@ fn step_17() -> Unit raise {
   )
   real_lte_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. &0 < x /\\ &0 <= y ==> &0 < x + y"),
+      @parser.parse_term("forall x y. &0 < x /\\ &0 <= y ==> &0 < x + y"),
       t34,
     ),
   )
@@ -428,7 +428,7 @@ fn step_18() -> Unit raise {
   )
   real_let_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. &0 <= x /\\ &0 < y ==> &0 < x + y"),
+      @parser.parse_term("forall x y. &0 <= x /\\ &0 < y ==> &0 < x + y"),
       t35,
     ),
   )
@@ -449,7 +449,7 @@ fn step_19() -> Unit raise {
   let t36 = @meson.meson_tac(@list.List([real_lt_imp_le(), real_lte_add()]))
   real_lt_add_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. &0 < x /\\ &0 < y ==> &0 < x + y"),
+      @parser.parse_term("forall x y. &0 < x /\\ &0 < y ==> &0 < x + y"),
       t36,
     ),
   )
@@ -601,7 +601,7 @@ fn step_20() -> Unit raise {
   )
   real_entire_c.set(
     @tactics.prove(
-      @parser.parse_term("!x y. (x * y = &0) <=> (x = &0) \\/ (y = &0)"),
+      @parser.parse_term("forall x y. (x * y = &0) <=> (x = &0) \\/ (y = &0)"),
       t52,
     ),
   )
@@ -627,7 +627,7 @@ fn step_21() -> Unit raise {
     ]),
   )
   real_le_negtotal_c.set(
-    @tactics.prove(@parser.parse_term("!x. &0 <= x \\/ &0 <= --x"), t53),
+    @tactics.prove(@parser.parse_term("forall x. &0 <= x \\/ &0 <= --x"), t53),
   )
 }
 
@@ -690,7 +690,7 @@ fn step_22() -> Unit raise {
     t58,
   )
   real_le_square_c.set(
-    @tactics.prove(@parser.parse_term("!x. &0 <= x * x"), t59),
+    @tactics.prove(@parser.parse_term("forall x. &0 <= x * x"), t59),
   )
 }
 
@@ -709,7 +709,7 @@ fn step_23() -> Unit raise {
   let t60 = @meson.meson_tac(
     @list.List([@realax.real_mul_lid(), @realax.real_mul_sym()]),
   )
-  real_mul_rid_c.set(@tactics.prove(@parser.parse_term("!x. x * &1 = x"), t60))
+  real_mul_rid_c.set(@tactics.prove(@parser.parse_term("forall x. x * &1 = x"), t60))
 }
 
 ///|
@@ -733,7 +733,7 @@ fn step_24() -> Unit raise {
     t62,
   )
   real_pow_2_c.set(
-    @tactics.prove(@parser.parse_term("!x. x pow 2 = x * x"), t63),
+    @tactics.prove(@parser.parse_term("forall x. x pow 2 = x * x"), t63),
   )
 }
 
@@ -777,7 +777,7 @@ fn step_25() -> Unit raise {
   real_poly_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!x y z. x + (y + z) = (x + y) + z) /\\\n   (!x y. x + y = y + x) /\\\n   (!x. &0 + x = x) /\\\n   (!x y z. x * (y * z) = (x * y) * z) /\\\n   (!x y. x * y = y * x) /\\\n   (!x. &1 * x = x) /\\\n   (!x. &0 * x = &0) /\\\n   (!x y z. x * (y + z) = x * y + x * z) /\\\n   (!x. x pow 0 = &1) /\\\n   (!x n. x pow (SUC n) = x * x pow n)",
+        "(forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x. &0 + x = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x y. x * y = y * x) /\\\n   (forall x. &1 * x = x) /\\\n   (forall x. &0 * x = &0) /\\\n   (forall x y z. x * (y + z) = x * y + x * z) /\\\n   (forall x. x pow 0 = &1) /\\\n   (forall x n. x pow (SUC n) = x * x pow n)",
       ),
       t67,
     ),
@@ -808,7 +808,7 @@ fn step_26() -> Unit raise {
   real_poly_neg_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!x. --x = --(&1) * x) /\\\n   (!x y. x - y = x + --(&1) * y)",
+        "(forall x. --x = --(&1) * x) /\\\n   (forall x y. x - y = x + --(&1) * y)",
       ),
       t68,
     ),
@@ -832,7 +832,7 @@ fn step_27() -> Unit raise {
   let t69 = @simp.rewrite_tac(
     @list.List([@realax.real_of_num_le(), @arith.le_0()]),
   )
-  real_pos_c.set(@tactics.prove(@parser.parse_term("!n. &0 <= &n"), t69))
+  real_pos_c.set(@tactics.prove(@parser.parse_term("forall n. &0 <= &n"), t69))
 }
 
 ///|
@@ -868,7 +868,7 @@ fn step_28() -> Unit raise {
     t72,
   )
   real_lt_nz_c.set(
-    @tactics.prove(@parser.parse_term("!n. ~(&n = &0) <=> (&0 < &n)"), t73),
+    @tactics.prove(@parser.parse_term("forall n. ~(&n = &0) <=> (&0 < &n)"), t73),
   )
 }
 
@@ -901,7 +901,7 @@ fn step_29() -> Unit raise {
     t75,
   )
   real_pos_lt_c.set(
-    @tactics.prove(@parser.parse_term("!n. &0 < &(SUC n)"), t76),
+    @tactics.prove(@parser.parse_term("forall n. &0 < &(SUC n)"), t76),
   )
 }
 
@@ -1119,13 +1119,13 @@ fn step_30() -> Unit raise {
   )
   let t86 = @simp.simp_tac(@list.List([@calc_int.real_mul_rzero()]))
   let pth_emul = @tactics.prove(
-    @parser.parse_term("(y = &0) ==> !x. x * y = &0"),
+    @parser.parse_term("(y = &0) ==> forall x. x * y = &0"),
     t86,
   )
   let t87 = @simp.rewrite_tac(
     @list.List([@realax.real_ge(), real_pow_2(), real_le_square()]),
   )
-  let pth_square = @tactics.prove(@parser.parse_term("!x. x * x >= &0"), t87)
+  let pth_square = @tactics.prove(@parser.parse_term("forall x. x * x >= &0"), t87)
   let match_mp_rule : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x88 : @kernel.Thm,
   ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {

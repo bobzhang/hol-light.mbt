@@ -61,7 +61,7 @@ test "drule matches drule.ml" {
   tmatch("match_lconst", ["x:bool"], "x /\\ y", "x /\\ T")
   tmatch("match_lconst_bad", ["x:bool"], "x /\\ y", "y /\\ T")
   tmatch("match_bad", [], "x /\\ y", "a \\/ b")
-  tmatch("match_ho", [], "!x:A. (P:A->bool) x", "!n:num. n = n")
+  tmatch("match_ho", [], "forall x:A. (P:A->bool) x", "forall n:num. n = n")
   tmatch("match_ho2", [], "?x:A. (P:A->B->bool) x y", "?n:num. n = m /\\ m = n")
   tmatch("match_ho_app", [], "(P:A->bool) (f (x:A))", "Q (g (y:B)):bool")
   tmatch("match_ho_beta", [], "\\x:A. (P:A->A->bool) x c", "\\n:num. n = c")
@@ -69,8 +69,8 @@ test "drule matches drule.ml" {
   tmatch("match_repeat_bad", [], "(x:A) = x", "T = F")
   let i1 = @drule.term_match(
     @list.List([]),
-    tm("!x:A. (P:A->bool) x"),
-    tm("!n:num. n = n"),
+    tm("forall x:A. (P:A->bool) x"),
+    tm("forall n:num. n = n"),
   )
   log.attempt("instantiate_ho", () => {
     stm(@drule.instantiate(i1, tm("(P:A->bool) (z:A)")))
@@ -159,7 +159,7 @@ test "drule matches drule.ml" {
       ),
     )
   })
-  let addth = hyp_of("!x y. (f:A->A->A) x y = f y x")
+  let addth = hyp_of("forall x y. (f:A->A->A) x y = f y x")
   th("PART_MATCH", () => {
     @drule.part_match(@equal.lhs, addth)(tm("(f:A->A->A) u v"))
   })
@@ -167,20 +167,20 @@ test "drule matches drule.ml" {
     @drule.part_match(@equal.lhs, addth)(tm("(g:A->A->A) u v"))
   })
   th("GEN_PART_MATCH", () => {
-    @drule.gen_part_match(@equal.lhs, hyp_of("!x. (f:A->A->A) x y = f y x"))(
+    @drule.gen_part_match(@equal.lhs, hyp_of("forall x. (f:A->A->A) x y = f y x"))(
       tm("(f:A->A->A) u v"),
     )
   })
   th("MATCH_MP", () => {
-    @drule.match_mp(hyp_of("!x:A. (P:A->bool) x ==> Q x"))(
+    @drule.match_mp(hyp_of("forall x:A. (P:A->bool) x ==> Q x"))(
       hyp_of("(P:A->bool) c"),
     )
   })
   th("MATCH_MP_ty", () => {
-    @drule.match_mp(hyp_of("!x:A. (x = x) ==> T"))(@kernel.refl(tm("F")))
+    @drule.match_mp(hyp_of("forall x:A. (x = x) ==> T"))(@kernel.refl(tm("F")))
   })
   th("MATCH_MP_bad", () => {
-    @drule.match_mp(hyp_of("!x:A. (P:A->bool) x ==> Q x"))(
+    @drule.match_mp(hyp_of("forall x:A. (P:A->bool) x ==> Q x"))(
       hyp_of("(R:A->bool) c"),
     )
   })
@@ -191,11 +191,11 @@ test "drule matches drule.ml" {
     @drule.match_mp(a1)(a2)
   })
   th("MATCH_MP_partial", () => {
-    @drule.match_mp(hyp_of("!x y:A. (P:A->bool) x ==> (R:A->A->bool) x y"))(
+    @drule.match_mp(hyp_of("forall x y:A. (P:A->bool) x ==> (R:A->A->bool) x y"))(
       hyp_of("(P:A->bool) c"),
     )
   })
-  let hr = hyp_of("!x:A. (P:A->bool) ((f:A->A) x) <=> Q x")
+  let hr = hyp_of("forall x:A. (P:A->bool) ((f:A->A) x) <=> Q x")
   th("HIGHER_REWRITE_CONV", () => {
     @drule.higher_rewrite_conv(@list.singleton(hr))(true)(
       tm("a /\\ (R:A->bool) ((f:A->A) c)"),
@@ -238,7 +238,7 @@ test "drule matches drule.ml" {
       #|  (\\/)
       #|MK_CONJ = ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool), ((#=:fun(bool,fun(bool,bool)) c:bool) d:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) d:bool))
       #|MK_DISJ = ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool), ((#=:fun(bool,fun(bool,bool)) c:bool) d:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#\/:fun(bool,fun(bool,bool)) b:bool) d:bool))
-      #|MK_FORALL =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A))))
+      #|MK_FORALL =  |- ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A))))
       #|MK_FORALL_bad ! ABS
       #|MK_EXISTS =  |- ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A))))
       #|MP_CONV = ((#==>:fun(bool,fun(bool,bool)) ((\x:bool. x:bool) #T:bool)) b:bool) |- b:bool
@@ -266,33 +266,34 @@ test "drule matches drule.ml" {
       #|INSTANTIATE_ALL_ty = ((#=:fun(bool,fun(bool,bool)) x:bool) x:bool) |- ((#=:fun(bool,fun(bool,bool)) x:bool) x:bool)
       #|Warning: inventing type variables
       #|Warning: inventing type variables
-      #|term_unify = [] [(g:fun('?474,'A) z:'?474)/x:'A; (g:fun('?470,'A) y:'?470)/y:'A] []
+      #|term_unify = [] [(g:fun('?472,'A) z:'?472)/x:'A; (g:fun('?468,'A) y:'?468)/y:'A] []
       #|term_unify_occurs ! augment_insts
       #|term_unify_abs = [] [c:'A/x:'A] []
       #|type_unify = bool/'A; 'C/'B
       #|type_unify_bad ! type_unify: augment_insts
       #|term_type_unify = [] [g:fun(bool,'C)/f:fun(bool,'C); #T:bool/x:bool] ['C/'B; bool/'A]
       #|deep_alpha = (\y:'A. (\b:'A. ((f:fun('A,fun('A,'A)) y:'A) b:'A)))
-      #|PART_MATCH = (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) x:'A) y:'A)) ((f:fun('A,fun('A,'A)) y:'A) x:'A)))))) |- ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) u:'A) v:'A)) ((f:fun('A,fun('A,'A)) v:'A) u:'A))
+      #|PART_MATCH = (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) x:'A) y:'A)) ((f:fun('A,fun('A,'A)) y:'A) x:'A)))))) |- ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) u:'A) v:'A)) ((f:fun('A,fun('A,'A)) v:'A) u:'A))
       #|PART_MATCH_bad ! term_pmatch: can't instantiate local constant
       #|GEN_PART_MATCH ! term_pmatch: can't instantiate local constant
-      #|MATCH_MP = (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))), (P:fun('A,bool) c:'A) |- (Q:fun('A,bool) c:'A)
+      #|MATCH_MP = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))), (P:fun('A,bool) c:'A) |- (Q:fun('A,bool) c:'A)
       #|MATCH_MP_ty ! MATCH_MP: No match
       #|MATCH_MP_bad ! MATCH_MP: No match
       #|MATCH_MP_notimp ! MATCH_MP: Not an implication
-      #|MATCH_MP_partial = (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))), (P:fun('A,bool) c:'A) |- (#!:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) c:'A) y:'A)))
-      #|HIGHER_REWRITE_CONV = (#!:fun(fun(bool,bool),bool) (\x:bool. ((#=:fun(bool,fun(bool,bool)) ((\_5:bool. _5:bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) x:bool))) (Q:fun(bool,bool) x:bool)))) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) (R:fun('A,bool) (f:fun('A,'A) c:'A)))) (Q:fun(bool,bool) (R:fun('A,bool) (f:fun('A,'A) c:'A))))
-      #|new_definition =  |- (#!:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) ((#TWICE:fun(fun('A,'A),fun('A,'A)) f:fun('A,'A)) x:'A)) (f:fun('A,'A) (f:fun('A,'A) x:'A)))))))
+      #|MATCH_MP_partial = (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))), (P:fun('A,bool) c:'A) |- (#forall:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) c:'A) y:'A)))
+      #|HIGHER_REWRITE_CONV = (#forall:fun(fun(bool,bool),bool) (\x:bool. ((#=:fun(bool,fun(bool,bool)) ((\_5:bool. _5:bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) x:bool))) (Q:fun(bool,bool) x:bool)))) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) (R:fun('A,bool) (f:fun('A,'A) c:'A)))) (Q:fun(bool,bool) (R:fun('A,bool) (f:fun('A,'A) c:'A))))
+      #|new_definition =  |- (#forall:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) ((#TWICE:fun(fun('A,'A),fun('A,'A)) f:fun('A,'A)) x:'A)) (f:fun('A,'A) (f:fun('A,'A) x:'A)))))))
       #|new_definition_bad ! new_definition: Not an equation
       #|mk_thm = a:bool, b:bool |- c:bool
       #|axioms =  |- ((#==>:fun(bool,fun(bool,bool)) b:bool) ((#==>:fun(bool,fun(bool,bool)) a:bool) c:bool))
-      #|constants = TWICE ?! ~ F \/ ? ! ==> /\ T =
+      #|constants = TWICE ?! ~ F \/ ? forall ==> /\ T =
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?618
+      #|counter_tyvar = zz_counter:'?616
       #|counter_genvar = _7:bool
       #|term_unify_abs_bad ! body: Not an abstraction
       #|term_type_unify_abs_bad ! body: Not an abstraction
       #|
+
     ),
   )
 }

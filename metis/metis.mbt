@@ -14739,7 +14739,7 @@ pub fn equivalencename() -> Name {
 ///|
 /// universalName
 fn step_87() -> Unit raise {
-  universalname_c.set(fromstring("!"))
+  universalname_c.set(fromstring("forall"))
 }
 
 ///|
@@ -35881,11 +35881,11 @@ pub fn front(
 ///|
 /// RESOLVE_N
 fn step_231() -> Unit raise {
-  let resolve_1 = @class.taut(@parser.parse_term("!a. a ==> ~a ==> F"))
-  let resolve_2l = @class.taut(@parser.parse_term("!a b. a \\/ b ==> ~a ==> b"))
-  let resolve_2r = @class.taut(@parser.parse_term("!a c. a ==> ~a \\/ c ==> c"))
+  let resolve_1 = @class.taut(@parser.parse_term("forall a. a ==> ~a ==> F"))
+  let resolve_2l = @class.taut(@parser.parse_term("forall a b. a \\/ b ==> ~a ==> b"))
+  let resolve_2r = @class.taut(@parser.parse_term("forall a c. a ==> ~a \\/ c ==> c"))
   let resolve_3 = @class.taut(
-    @parser.parse_term("!a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c"),
+    @parser.parse_term("forall a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c"),
   )
   resolve_n_c.set(fn(
     x5055 : @kernel.Term,
@@ -35950,10 +35950,10 @@ pub fn resolve_v2(
 /// DISCH_DISJ
 fn step_232() -> Unit raise {
   let impl_not_l = @class.taut(
-    @parser.parse_term("!a b. ~a ==> b <=>  a \\/ b"),
+    @parser.parse_term("forall a b. ~a ==> b <=>  a \\/ b"),
   )
   let impl_not_r = @class.taut(
-    @parser.parse_term("!a b.  a ==> b <=> ~a \\/ b"),
+    @parser.parse_term("forall a b.  a ==> b <=> ~a \\/ b"),
   )
   disch_disj_c.set(fn(
     x5061 : @kernel.Term,

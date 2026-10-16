@@ -19,7 +19,7 @@ pub fn periodic_point() -> @kernel.Thm {
 ///|
 /// minimal_period
 fn step_2() -> Unit raise {
-  minimal_period_c.set(@pair.new_definition(@parser.parse_term("minimal_period (f:A->A) n x <=>\n        0 < n /\\\n        periodic_point f n x /\\\n        !m. 0 < m /\\ m < n ==> ~periodic_point f m x")))
+  minimal_period_c.set(@pair.new_definition(@parser.parse_term("minimal_period (f:A->A) n x <=>\n        0 < n /\\\n        periodic_point f n x /\\\n        forall m. 0 < m /\\ m < n ==> ~periodic_point f m x")))
 }
 
 ///|
@@ -50,7 +50,7 @@ pub fn has_period() -> @kernel.Thm {
 /// PERIODIC_POINT_0
 fn step_4() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([periodic_point(), @iter.iter()]))
-  periodic_point_0_c.set(@tactics.prove(@parser.parse_term("!f:A->A x. periodic_point f 0 x"), t1))
+  periodic_point_0_c.set(@tactics.prove(@parser.parse_term("forall f:A->A x. periodic_point f 0 x"), t1))
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn periodic_point_0() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([@iter.iter_fixpoint(), @iter.iter_mul()]))
   let t3 = @tactics.then_tac(@simp.rewrite_tac(@list.List([periodic_point()])), t2)
-  periodic_point_multiple_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x m.\n        periodic_point f n x ==> periodic_point f (m * n) x"), t3))
+  periodic_point_multiple_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x m.\n        periodic_point f n x ==> periodic_point f (m * n) x"), t3))
 }
 
 ///|
@@ -92,7 +92,7 @@ fn step_6() -> Unit raise {
   })
   let t4 = @tactics.repeat_tac(@tactics.strip_tac)
   let t11 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([periodic_point()])), t4), t8), t10)
-  periodic_point_iter_add_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x m.\n        periodic_point f n x ==> ITER (n + m) f x = ITER m f x"), t11))
+  periodic_point_iter_add_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x m.\n        periodic_point f n x ==> ITER (n + m) f x = ITER m f x"), t11))
 }
 
 ///|
@@ -111,7 +111,7 @@ fn step_7() -> Unit raise {
   let t13 = @tactics.match_mp_tac(periodic_point_iter_add())
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([periodic_point(), @iter.iter_add()])), t12), t13), t14)
-  periodic_point_iterate_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x i.\n        periodic_point f n x\n        ==> periodic_point f n (ITER i f x)"), t15))
+  periodic_point_iterate_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x i.\n        periodic_point f n x\n        ==> periodic_point f n (ITER i f x)"), t15))
 }
 
 ///|
@@ -208,7 +208,7 @@ fn step_8() -> Unit raise {
   }), t25), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t30), t48), t53), t71), t72), t73])
   let t16 = @theorems.intro_tac("positive periodx periody")
   let t75 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t16), @tactics.eq_tac), t74)
-  periodic_points_image_inj_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x y.\n        0 < n /\\\n        periodic_point f n x /\\\n        periodic_point f n y\n        ==> (f x = f y <=> x = y)"), t75))
+  periodic_points_image_inj_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x y.\n        0 < n /\\\n        periodic_point f n x /\\\n        periodic_point f n y\n        ==> (f x = f y <=> x = y)"), t75))
 }
 
 ///|
@@ -266,7 +266,7 @@ fn step_9() -> Unit raise {
   }), t81), t82), t83), t87), @tactics.ants_tac), t105), t106), t107)
   let t109 = @list.List([@simp.simp_tac(@list.List([@iter.iter()])), t108])
   let t110 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t109)
-  periodic_points_iter_inj_c.set(@tactics.prove(@parser.parse_term("!f:A->A n k x y.\n        0 < (n:num) /\\\n        periodic_point (f:A->A) n (x:A) /\\\n        periodic_point f n (y:A)\n        ==> (ITER (k:num) f x = ITER k f y <=> x = y)"), t110))
+  periodic_points_iter_inj_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n k x y.\n        0 < (n:num) /\\\n        periodic_point (f:A->A) n (x:A) /\\\n        periodic_point f n (y:A)\n        ==> (ITER (k:num) f x = ITER k f y <=> x = y)"), t110))
 }
 
 ///|
@@ -282,7 +282,7 @@ pub fn periodic_points_iter_inj() -> @kernel.Thm {
 /// PERIODIC_POINT_ITER
 fn step_10() -> Unit raise {
   let t111 = @simp.rewrite_tac(@list.List([periodic_point(), @iter.iter_mul()]))
-  periodic_point_iter_c.set(@tactics.prove(@parser.parse_term("!f:A->A k m x.\n        periodic_point (ITER k f) m x <=>\n        periodic_point f (m * k) x"), t111))
+  periodic_point_iter_c.set(@tactics.prove(@parser.parse_term("forall f:A->A k m x.\n        periodic_point (ITER k f) m x <=>\n        periodic_point f (m * k) x"), t111))
 }
 
 ///|
@@ -317,7 +317,7 @@ fn step_11() -> Unit raise {
   let t112 = @parser.parse_term("n:num")
   let t113 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:num"), t112]), @arith.division()))
   let t128 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t113), @tactics.ants_tac), t114), t118), t120), t122), @tactics.conj_tac), t127)
-  periodic_point_iter_mod_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x m.\n        0 < n /\\ periodic_point f n x\n        ==> ITER m f x = ITER (m MOD n) f x"), t128))
+  periodic_point_iter_mod_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x m.\n        0 < n /\\ periodic_point f n x\n        ==> ITER m f x = ITER (m MOD n) f x"), t128))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_12() -> Unit raise {
   })
   let t129 = @tactics.repeat_tac(@tactics.strip_tac)
   let t145 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([periodic_point()])), t129), t133), t135), t136), t137), t141), t144)
-  periodic_point_iter_eq_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x i j.\n        periodic_point f n x /\\\n        i <= j /\\\n        j <= n /\\\n        ITER i f x = ITER j f x\n        ==> periodic_point f (j - i) x"), t145))
+  periodic_point_iter_eq_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x i j.\n        periodic_point f n x /\\\n        i <= j /\\\n        j <= n /\\\n        ITER i f x = ITER j f x\n        ==> periodic_point f (j - i) x"), t145))
 }
 
 ///|
@@ -507,7 +507,7 @@ fn step_13() -> Unit raise {
   let t254 = @list.List([@tactics.thenl(@tactics.then_tac(@theorems.intro_tac("positive period least"), @tactics.conj_tac), t218), t253])
   let t146 = @simp.rewrite_tac(@list.List([minimal_period()]))
   let t255 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t146), @tactics.eq_tac), t254)
-  minimal_period_divisibility_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x.\n        minimal_period f n x <=>\n        0 < n /\\ !m. periodic_point f m x <=> n divides m"), t255))
+  minimal_period_divisibility_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x.\n        minimal_period f n x <=>\n        0 < n /\\ forall m. periodic_point f m x <=> n divides m"), t255))
 }
 
 ///|
@@ -523,7 +523,7 @@ pub fn minimal_period_divisibility() -> @kernel.Thm {
 /// MINIMAL_PERIOD_POS
 fn step_14() -> Unit raise {
   let t256 = @simp.simp_tac(@list.List([minimal_period()]))
-  minimal_period_pos_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x. minimal_period f n x ==> 0 < n"), t256))
+  minimal_period_pos_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x. minimal_period f n x ==> 0 < n"), t256))
 }
 
 ///|
@@ -549,7 +549,7 @@ fn step_15() -> Unit raise {
   }))
   let t257 = @simp.rewrite_tac(@list.List([has_period()]))
   let t264 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t257), t263)
-  has_period_pos_c.set(@tactics.prove(@parser.parse_term("!f:A->A n. has_period f n ==> 0 < n"), t264))
+  has_period_pos_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n. has_period f n ==> 0 < n"), t264))
 }
 
 ///|
@@ -565,7 +565,7 @@ pub fn has_period_pos() -> @kernel.Thm {
 /// MINIMAL_PERIOD_PERIODIC
 fn step_16() -> Unit raise {
   let t265 = @simp.simp_tac(@list.List([minimal_period()]))
-  minimal_period_periodic_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x. minimal_period f n x ==> periodic_point f n x"), t265))
+  minimal_period_periodic_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x. minimal_period f n x ==> periodic_point f n x"), t265))
 }
 
 ///|
@@ -581,7 +581,7 @@ pub fn minimal_period_periodic() -> @kernel.Thm {
 /// MINIMAL_PERIOD_DIVIDES
 fn step_17() -> Unit raise {
   let t266 = @simp.simp_tac(@list.List([minimal_period_divisibility()]))
-  minimal_period_divides_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x m.\n        minimal_period f n x\n        ==> (periodic_point f m x <=> n divides m)"), t266))
+  minimal_period_divides_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x m.\n        minimal_period f n x\n        ==> (periodic_point f m x <=> n divides m)"), t266))
 }
 
 ///|
@@ -725,7 +725,7 @@ fn step_18() -> Unit raise {
     }
   })
   let t366 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t271), t272), @tactics.conj_tac), t365)
-  minimal_period_iterate_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period f n (ITER k f x)"), t366))
+  minimal_period_iterate_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period f n (ITER k f x)"), t366))
 }
 
 ///|
@@ -768,7 +768,7 @@ fn step_19() -> Unit raise {
     }
   })
   let t390 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t370), t378), t382), t387), t389), @int.asm_arith_tac)
-  minimal_period_iter_inj_le_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x i j.\n        minimal_period f n x /\\\n        i <= j /\\\n        j < n /\\\n        ITER i f x = ITER j f x\n        ==> i = j"), t390))
+  minimal_period_iter_inj_le_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x i j.\n        minimal_period f n x /\\\n        i <= j /\\\n        j < n /\\\n        ITER i f x = ITER j f x\n        ==> i = j"), t390))
 }
 
 ///|
@@ -810,7 +810,7 @@ fn step_20() -> Unit raise {
   let t407 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A->A"), t394, t393, t392, t391]), minimal_period_iter_inj_le())), t395), t406])
   let t412 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.disch_tac, @class.asm_cases_tac(@parser.parse_term("(i:num) <= j"))), t407), t411])
   let t413 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), @tactics.eq_tac), t412)
-  minimal_period_iter_inj_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x i j.\n        minimal_period f n x /\\\n        i < n /\\\n        j < n\n        ==> (ITER i f x = ITER j f x <=> i = j)"), t413))
+  minimal_period_iter_inj_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x i j.\n        minimal_period f n x /\\\n        i < n /\\\n        j < n\n        ==> (ITER i f x = ITER j f x <=> i = j)"), t413))
 }
 
 ///|
@@ -827,7 +827,7 @@ pub fn minimal_period_iter_inj() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t414 = @meson.meson_tac(@list.List([@int.divides_antisym()]))
   let t415 = @tactics.then_tac(@simp.rewrite_tac(@list.List([minimal_period_divisibility()])), t414)
-  minimal_period_unique_c.set(@tactics.prove(@parser.parse_term("!f:A->A m n x.\n        minimal_period f m x /\\ minimal_period f n x\n        ==> m = n"), t415))
+  minimal_period_unique_c.set(@tactics.prove(@parser.parse_term("forall f:A->A m n x.\n        minimal_period f m x /\\ minimal_period f n x\n        ==> m = n"), t415))
 }
 
 ///|
@@ -872,7 +872,7 @@ fn step_22() -> Unit raise {
   let t417 = @parser.parse_term("f:A->A")
   let t418 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("(=):A->A->bool"), t417, t416]), @iter.order_existence_iter()))
   let t442 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t418), @tactics.ants_tac), t419), t422), t423), t424), @tactics.conj_tac), t441)
-  periodic_point_imp_minimal_period_c.set(@tactics.prove(@parser.parse_term("!f:A->A x m.\n        0 < m /\\ periodic_point f m x\n        ==> ?n. n divides m /\\ minimal_period f n x"), t442))
+  periodic_point_imp_minimal_period_c.set(@tactics.prove(@parser.parse_term("forall f:A->A x m.\n        0 < m /\\ periodic_point f m x\n        ==> ?n. n divides m /\\ minimal_period f n x"), t442))
 }
 
 ///|
@@ -927,7 +927,7 @@ fn step_23() -> Unit raise {
   })
   let t443 = @simp.rewrite_tac(@list.List([minimal_period_divisibility(), periodic_point_iter()]))
   let t474 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t443), t446), t450), t451), t455), t456), @tactics.conj_tac), t473)
-  minimal_period_iter_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period (ITER k f) (n DIV gcd(n,k)) x"), t474))
+  minimal_period_iter_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period (ITER k f) (n DIV gcd(n,k)) x"), t474))
 }
 
 ///|
@@ -944,7 +944,7 @@ pub fn minimal_period_iter() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t475 = @meson.meson_tac(@list.List([minimal_period_iter()]))
   let t476 = @tactics.then_tac(@simp.rewrite_tac(@list.List([has_period()])), t475)
-  has_period_iter_c.set(@tactics.prove(@parser.parse_term("!f:A->A n k.\n        has_period f n\n        ==> has_period (ITER k f) (n DIV gcd(n,k))"), t476))
+  has_period_iter_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n k.\n        has_period f n\n        ==> has_period (ITER k f) (n DIV gcd(n,k))"), t476))
 }
 
 ///|
@@ -993,7 +993,7 @@ fn step_25() -> Unit raise {
     }
   })
   let t503 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t481), t486), t488), t493), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t496), t502), @int.asm_arith_tac)
-  divides_not_sub_c.set(@tactics.prove(@parser.parse_term("!d m r.\n        d divides m /\\ 0 < r /\\ r < d /\\ r <= m\n        ==> ~(d divides (m - r))"), t503))
+  divides_not_sub_c.set(@tactics.prove(@parser.parse_term("forall d m r.\n        d divides m /\\ 0 < r /\\ r < d /\\ r <= m\n        ==> ~(d divides (m - r))"), t503))
 }
 
 ///|
@@ -1020,7 +1020,7 @@ fn step_26() -> Unit raise {
     }
   })
   let t514 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t508), t511), @tactics.ants_tac), t513)
-  sub_not_divides_c.set(@tactics.prove(@parser.parse_term("!m r.\n        0 < r /\\ 2 * r < m\n        ==> ~((m - r) divides m)"), t514))
+  sub_not_divides_c.set(@tactics.prove(@parser.parse_term("forall m r.\n        0 < r /\\ 2 * r < m\n        ==> ~((m - r) divides m)"), t514))
 }
 
 ///|
@@ -1050,7 +1050,7 @@ fn step_27() -> Unit raise {
   let t515 = @parser.parse_term("CARD {i:num | i < n}")
   let t516 = @tactics.trans_tac(@theorems.eq_trans())(t515)
   let t529 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t516), @tactics.conj_tac), t528)
-  minimal_period_orbit_card_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x.\n        minimal_period f n x\n        ==> CARD (IMAGE (\\i. ITER i f x) {i | i < n}) = n"), t529))
+  minimal_period_orbit_card_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x.\n        minimal_period f n x\n        ==> CARD (IMAGE (\\i. ITER i f x) {i | i < n}) = n"), t529))
 }
 
 ///|
@@ -1164,7 +1164,7 @@ fn step_28() -> Unit raise {
     }
   }))
   let t601 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t537), t538), t546), t550), t556), t560), t565), t570), t572), t577), t578), t583), t591), t592), @tactics.conj_tac), t600)
-  minimal_period_orbit_image_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> f y IN IMAGE (\\i. ITER i f x) {i | i < n}"), t601))
+  minimal_period_orbit_image_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> f y IN IMAGE (\\i. ITER i f x) {i | i < n}"), t601))
 }
 
 ///|
@@ -1211,7 +1211,7 @@ fn step_29() -> Unit raise {
     }
   }))
   let t624 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t609), t610), t618), t619), t623)
-  minimal_period_orbit_minimal_c.set(@tactics.prove(@parser.parse_term("!f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> minimal_period f n y"), t624))
+  minimal_period_orbit_minimal_c.set(@tactics.prove(@parser.parse_term("forall f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> minimal_period f n y"), t624))
 }
 
 ///|
@@ -1275,7 +1275,7 @@ fn step_30() -> Unit raise {
   })
   let t625 = @simp.abbrev_tac(@parser.parse_term("s:real->bool = IMAGE (\\i. ITER i (f:real->real) x) {i | i < n}"))
   let t667 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t625), t629), t635), t636), @tactics.ants_tac), t637), t645), t646), t647), t648), @tactics.conj_tac), t666)
-  minimal_period_ordered_orbit_c.set(@tactics.prove(@parser.parse_term("!f:real->real n x.\n        minimal_period f n x\n        ==> ?z.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              IMAGE z {i | i < n} =\n              IMAGE (\\i. ITER i f x) {i | i < n}"), t667))
+  minimal_period_ordered_orbit_c.set(@tactics.prove(@parser.parse_term("forall f:real->real n x.\n        minimal_period f n x\n        ==> ?z.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              IMAGE z {i | i < n} =\n              IMAGE (\\i. ITER i f x) {i | i < n}"), t667))
 }
 
 ///|
@@ -1321,7 +1321,7 @@ fn step_31() -> Unit raise {
   let t668 = @simp.asm_rewrite_tac(@list.List([]))
   let t691 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @class.asm_cases_tac(@parser.parse_term("(i:num) = j"))), t668), t669), t686), t690])
   let t692 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), @tactics.eq_tac), t691)
-  finite_strictly_increasing_inj_c.set(@tactics.prove(@parser.parse_term("!z:num->real n i j.\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        i < n /\\\n        j < n\n        ==> (z i = z j <=> i = j)"), t692))
+  finite_strictly_increasing_inj_c.set(@tactics.prove(@parser.parse_term("forall z:num->real n i j.\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i < n /\\\n        j < n\n        ==> (z i = z j <=> i = j)"), t692))
 }
 
 ///|
@@ -1405,7 +1405,7 @@ fn step_32() -> Unit raise {
   let t694 = @simp.abbrev_tac(@parser.parse_term("p:num->num =\n    \\i. @j:num. j < n /\\ (f:real->real)((z:num->real) i) = z j"))
   let t693 = @theorems.intro_tac("minimal enum")
   let t745 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t693), t694), t695), t696), @tactics.disch_tac), t697), @tactics.beta_tac), t701), t744)
-  minimal_period_ordered_orbit_transition_c.set(@tactics.prove(@parser.parse_term("!f:real->real n x z.\n        minimal_period f n x /\\\n        IMAGE z {i | i < n} = IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> ?p:num->num.\n              !i. i < n ==> p i < n /\\ f(z i) = z(p i)"), t745))
+  minimal_period_ordered_orbit_transition_c.set(@tactics.prove(@parser.parse_term("forall f:real->real n x z.\n        minimal_period f n x /\\\n        IMAGE z {i | i < n} = IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> ?p:num->num.\n              forall i. i < n ==> p i < n /\\ f(z i) = z(p i)"), t745))
 }
 
 ///|
@@ -1470,7 +1470,7 @@ fn step_33() -> Unit raise {
     }
   })
   let t785 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t750), @nums.induct_tac), t784)
-  finite_orbit_transition_iter_c.set(@tactics.prove(@parser.parse_term("!f:A->A z p n.\n        (!i:num.\n             i < n\n             ==> (p:num->num) i < n /\\\n                 f((z:num->A) i) = z(p i))\n        ==> !k i:num.\n              i < n\n              ==> ITER k p i < n /\\\n                  ITER k f (z i) = z(ITER k p i)"), t785))
+  finite_orbit_transition_iter_c.set(@tactics.prove(@parser.parse_term("forall f:A->A z p n.\n        (forall i:num.\n             i < n\n             ==> (p:num->num) i < n /\\\n                 f((z:num->A) i) = z(p i))\n        ==> forall k i:num.\n              i < n\n              ==> ITER k p i < n /\\\n                  ITER k f (z i) = z(ITER k p i)"), t785))
 }
 
 ///|
@@ -1592,7 +1592,7 @@ fn step_34() -> Unit raise {
   let t787 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
   let t786 = @theorems.intro_tac("minimal ordered enum transition")
   let t872 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t786), t787), t792), t797), t803), t808), t813), t814), @tactics.conj_tac), t871)
-  minimal_period_ordered_orbit_transition_minimal_c.set(@tactics.prove(@parser.parse_term("!f:real->real n x z p.\n        minimal_period f n x /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        IMAGE z {i | i < n} =\n        IMAGE (\\i. ITER i f x) {i | i < n} /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i))\n        ==> !i. i < n ==> minimal_period p n i"), t872))
+  minimal_period_ordered_orbit_transition_minimal_c.set(@tactics.prove(@parser.parse_term("forall f:real->real n x z p.\n        minimal_period f n x /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        IMAGE z {i | i < n} =\n        IMAGE (\\i. ITER i f x) {i | i < n} /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i))\n        ==> forall i. i < n ==> minimal_period p n i"), t872))
 }
 
 ///|
@@ -1623,7 +1623,7 @@ pub fn adjacent_interval_cover() -> @kernel.Thm {
 /// ADJACENT_INTERVAL_COVER_BOUND
 fn step_36() -> Unit raise {
   let t873 = @tactics.then_tac(@simp.rewrite_tac(@list.List([adjacent_interval_cover()])), @int.arith_tac)
-  adjacent_interval_cover_bound_c.set(@tactics.prove(@parser.parse_term("!p n i j.\n        p i < n /\\\n        p(i + 1) < n /\\\n        adjacent_interval_cover p i j\n        ==> j + 1 < n"), t873))
+  adjacent_interval_cover_bound_c.set(@tactics.prove(@parser.parse_term("forall p n i j.\n        p i < n /\\\n        p(i + 1) < n /\\\n        adjacent_interval_cover p i j\n        ==> j + 1 < n"), t873))
 }
 
 ///|
@@ -1640,7 +1640,7 @@ pub fn adjacent_interval_cover_bound() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   let t874 = @simp.rewrite_tac(@list.List([adjacent_interval_cover(), @arith.min(), @arith.max()]))
   let t875 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t874), @class.cond_cases_tac), @int.asm_arith_tac)
-  adjacent_interval_cover_minmax_c.set(@tactics.prove(@parser.parse_term("!p i j.\n        adjacent_interval_cover p i j <=>\n        MIN (p i) (p(i + 1)) <= j /\\\n        j < MAX (p i) (p(i + 1))"), t875))
+  adjacent_interval_cover_minmax_c.set(@tactics.prove(@parser.parse_term("forall p i j.\n        adjacent_interval_cover p i j <=>\n        MIN (p i) (p(i + 1)) <= j /\\\n        j < MAX (p i) (p(i + 1))"), t875))
 }
 
 ///|
@@ -1656,7 +1656,7 @@ pub fn adjacent_interval_cover_minmax() -> @kernel.Thm {
 /// ADJACENT_INTERVAL_COVER_CONVEX
 fn step_38() -> Unit raise {
   let t876 = @tactics.then_tac(@simp.rewrite_tac(@list.List([adjacent_interval_cover_minmax()])), @int.arith_tac)
-  adjacent_interval_cover_convex_c.set(@tactics.prove(@parser.parse_term("!p i j k l.\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p i k /\\\n        j <= l /\\\n        l <= k\n        ==> adjacent_interval_cover p i l"), t876))
+  adjacent_interval_cover_convex_c.set(@tactics.prove(@parser.parse_term("forall p i j k l.\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p i k /\\\n        j <= l /\\\n        l <= k\n        ==> adjacent_interval_cover p i l"), t876))
 }
 
 ///|
@@ -1739,13 +1739,13 @@ fn step_39() -> Unit raise {
   let t881 = @parser.parse_term("j:num")
   let t882 = @parser.parse_term("a:num")
   let t926 = @list.List([@tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:num->num"), t882, t881])), @tactics.disch_tac), t883), t884), @int.asm_arith_tac), t925])), @tactics.all_tac])
-  let t942 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("!d p a j.\n        ((p a <= j /\\ j < p(a + SUC d)) \\/\n         (p(a + SUC d) <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < a + SUC d /\\\n              adjacent_interval_cover p i j"), fn(x878 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t942 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall d p a j.\n        ((p a <= j /\\ j < p(a + SUC d)) \\/\n         (p(a + SUC d) <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < a + SUC d /\\\n              adjacent_interval_cover p i j"), fn(x878 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s879 = ((x877 : @kernel.Thm) => @tactics.label_tac("induction", x877))(x878)
     fn(x880 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s879(x880)
     }
   }), t926), t927), @tactics.strip_tac), t929), t933), t940), t941)
-  adjacent_interval_cover_between_c.set(@tactics.prove(@parser.parse_term("!p a b j.\n        a < b /\\\n        ((p a <= j /\\ j < p b) \\/ (p b <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < b /\\\n              adjacent_interval_cover p i j"), t942))
+  adjacent_interval_cover_between_c.set(@tactics.prove(@parser.parse_term("forall p a b j.\n        a < b /\\\n        ((p a <= j /\\ j < p b) \\/ (p b <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < b /\\\n              adjacent_interval_cover p i j"), t942))
 }
 
 ///|
@@ -1806,7 +1806,7 @@ fn step_40() -> Unit raise {
   let t945 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("a:num")), t944), @tactics.all_tac])
   let t943 = @class.asm_cases_tac(@parser.parse_term("adjacent_interval_cover (p:num->num) a l"))
   let t982 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t943), t945), t946), t948), t949), t953), t954), t958), t962), t972), t976), @tactics.ants_tac), t979), t980), t981), @int.asm_arith_tac)
-  adjacent_interval_cover_range_c.set(@tactics.prove(@parser.parse_term("!p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        j <= l /\\\n        l <= k\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l"), t982))
+  adjacent_interval_cover_range_c.set(@tactics.prove(@parser.parse_term("forall p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        j <= l /\\\n        l <= k\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l"), t982))
 }
 
 ///|
@@ -1867,7 +1867,7 @@ fn step_41() -> Unit raise {
   let t985 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("a:num")), t984), @tactics.all_tac])
   let t983 = @class.asm_cases_tac(@parser.parse_term("adjacent_interval_cover (p:num->num) a l"))
   let t1022 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t983), t985), t986), t988), t989), t993), t994), t998), t1002), t1012), t1016), @tactics.ants_tac), t1019), t1020), t1021), @int.asm_arith_tac)
-  adjacent_interval_cover_range_reverse_c.set(@tactics.prove(@parser.parse_term("!p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        k <= l /\\\n        l <= j\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l"), t1022))
+  adjacent_interval_cover_range_reverse_c.set(@tactics.prove(@parser.parse_term("forall p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        k <= l /\\\n        l <= j\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l"), t1022))
 }
 
 ///|
@@ -1882,7 +1882,7 @@ pub fn adjacent_interval_cover_range_reverse() -> @kernel.Thm {
 ///|
 /// adjacent_interval_reachable
 fn step_42() -> Unit raise {
-  let t1023 = @parser.parse_term("(adjacent_interval_reachable p 0 i j <=> j = i) /\\\n    (!k. adjacent_interval_reachable p (SUC k) i j <=>\n         ?h. adjacent_interval_reachable p k i h /\\\n             adjacent_interval_cover p h j)")
+  let t1023 = @parser.parse_term("(adjacent_interval_reachable p 0 i j <=> j = i) /\\\n    (forall k. adjacent_interval_reachable p (SUC k) i j <=>\n         ?h. adjacent_interval_reachable p k i h /\\\n             adjacent_interval_cover p h j)")
   adjacent_interval_reachable_c.set(@recursion.new_recursive_definition(@nums.num_recursion())(t1023))
 }
 
@@ -1900,7 +1900,7 @@ pub fn adjacent_interval_reachable() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   let t1024 = @meson.meson_tac(@list.List([]))
   let t1025 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.one(), adjacent_interval_reachable()])), t1024)
-  adjacent_interval_reachable_1_c.set(@tactics.prove(@parser.parse_term("!p i j.\n        adjacent_interval_reachable p 1 i j <=>\n        adjacent_interval_cover p i j"), t1025))
+  adjacent_interval_reachable_1_c.set(@tactics.prove(@parser.parse_term("forall p i j.\n        adjacent_interval_reachable p 1 i j <=>\n        adjacent_interval_cover p i j"), t1025))
 }
 
 ///|
@@ -1961,7 +1961,7 @@ fn step_44() -> Unit raise {
   let t1026 = @parser.parse_term("j:num")
   let t1065 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("i:num"), t1026])), t1027), @int.arith_tac), t1064])
   let t1066 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t1065)
-  adjacent_interval_reachable_bound_c.set(@tactics.prove(@parser.parse_term("!p n k i j.\n        (!r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        adjacent_interval_reachable p k i j\n        ==> j + 1 < n"), t1066))
+  adjacent_interval_reachable_bound_c.set(@tactics.prove(@parser.parse_term("forall p n k i j.\n        (forall r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        adjacent_interval_reachable p k i j\n        ==> j + 1 < n"), t1066))
 }
 
 ///|
@@ -2015,7 +2015,7 @@ fn step_45() -> Unit raise {
   let t1067 = @meson.meson_tac(@list.List([]))
   let t1098 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([adjacent_interval_reachable()])), t1067), t1097])
   let t1099 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1098)
-  adjacent_interval_reachable_prepend_c.set(@tactics.prove(@parser.parse_term("!p k i h j.\n        adjacent_interval_cover p i h /\\\n        adjacent_interval_reachable p k h j\n        ==> adjacent_interval_reachable p (SUC k) i j"), t1099))
+  adjacent_interval_reachable_prepend_c.set(@tactics.prove(@parser.parse_term("forall p k i h j.\n        adjacent_interval_cover p i h /\\\n        adjacent_interval_reachable p k h j\n        ==> adjacent_interval_reachable p (SUC k) i j"), t1099))
 }
 
 ///|
@@ -2070,7 +2070,7 @@ fn step_46() -> Unit raise {
   let t1100 = @meson.meson_tac(@list.List([]))
   let t1132 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.add_clauses(), adjacent_interval_reachable()])), t1100), t1131])
   let t1133 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t1132)
-  adjacent_interval_reachable_trans_c.set(@tactics.prove(@parser.parse_term("!p k l i j h.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p l j h\n        ==> adjacent_interval_reachable p (k + l) i h"), t1133))
+  adjacent_interval_reachable_trans_c.set(@tactics.prove(@parser.parse_term("forall p k l i j h.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p l j h\n        ==> adjacent_interval_reachable p (k + l) i h"), t1133))
 }
 
 ///|
@@ -2092,7 +2092,7 @@ fn step_47() -> Unit raise {
   let t1137 = @parser.parse_term("k:num")
   let t1138 = @tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t1137, t1136, t1135, t1134]), adjacent_interval_reachable_prepend()))
   let t1140 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1138), t1139)
-  adjacent_interval_reachable_self_c.set(@tactics.prove(@parser.parse_term("!p k i j.\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_reachable p k i j\n        ==> adjacent_interval_reachable p (SUC k) i j"), t1140))
+  adjacent_interval_reachable_self_c.set(@tactics.prove(@parser.parse_term("forall p k i j.\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_reachable p k i j\n        ==> adjacent_interval_reachable p (SUC k) i j"), t1140))
 }
 
 ///|
@@ -2187,7 +2187,7 @@ fn step_48() -> Unit raise {
   }), t1148), t1149), t1155), t1156), t1162), t1163), t1167), t1205), t1206), t1207), t1208)
   let t1210 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([adjacent_interval_reachable()])), @int.arith_tac), t1209])
   let t1211 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1210)
-  adjacent_interval_reachable_convex_c.set(@tactics.prove(@parser.parse_term("!p k i j l m.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p k i l /\\\n        j <= m /\\\n        m <= l\n        ==> adjacent_interval_reachable p k i m"), t1211))
+  adjacent_interval_reachable_convex_c.set(@tactics.prove(@parser.parse_term("forall p k i j l m.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p k i l /\\\n        j <= m /\\\n        m <= l\n        ==> adjacent_interval_reachable p k i m"), t1211))
 }
 
 ///|
@@ -2290,7 +2290,7 @@ fn step_49() -> Unit raise {
   let t1213 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("i:num"), t1212]))
   let t1284 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([adjacent_interval_reachable()])), t1213), @tactics.eq_tac), t1224), t1283])
   let t1285 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1284)
-  adjacent_interval_reachable_path_c.set(@tactics.prove(@parser.parse_term("!p k i j.\n        adjacent_interval_reachable p k i j <=>\n        ?q. q 0 = i /\\\n            q k = j /\\\n            !r. r < k\n                ==> adjacent_interval_cover p (q r) (q(SUC r))"), t1285))
+  adjacent_interval_reachable_path_c.set(@tactics.prove(@parser.parse_term("forall p k i j.\n        adjacent_interval_reachable p k i j <=>\n        ?q. q 0 = i /\\\n            q k = j /\\\n            forall r. r < k\n                ==> adjacent_interval_cover p (q r) (q(SUC r))"), t1285))
 }
 
 ///|
@@ -2330,7 +2330,7 @@ fn step_50() -> Unit raise {
   let t1307 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t1306])
   let t1286 = @theorems.intro_tac("transition ibound initial path")
   let t1308 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1286), @nums.induct_tac), t1307)
-  adjacent_interval_path_bound_c.set(@tactics.prove(@parser.parse_term("!p n k i (q:num->num).\n        (!r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        q 0 = i /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> !r. r <= k ==> q r + 1 < n"), t1308))
+  adjacent_interval_path_bound_c.set(@tactics.prove(@parser.parse_term("forall p n k i (q:num->num).\n        (forall r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        q 0 = i /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> forall r. r <= k ==> q r + 1 < n"), t1308))
 }
 
 ///|
@@ -2376,7 +2376,7 @@ fn step_51() -> Unit raise {
   let t1320 = @list.List([@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("CARD((s:num->A->bool) 0)")), t1310), @tactics.refl_tac), t1318])), t1319])
   let t1309 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\m. ?k. m = CARD((s:num->A->bool) k)"), @arith.num_max())).0))
   let t1335 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1309), @tactics.ants_tac), t1320), t1324), t1325), t1326), t1327), t1328), t1334)
-  finite_ascending_chain_stabilizes_c.set(@tactics.prove(@parser.parse_term("!s:num->A->bool u.\n        FINITE u /\\\n        (!k. s k SUBSET u) /\\\n        (!k. s k SUBSET s(SUC k))\n        ==> ?k. s(SUC k) = s k"), t1335))
+  finite_ascending_chain_stabilizes_c.set(@tactics.prove(@parser.parse_term("forall s:num->A->bool u.\n        FINITE u /\\\n        (forall k. s k SUBSET u) /\\\n        (forall k. s k SUBSET s(SUC k))\n        ==> ?k. s(SUC k) = s k"), t1335))
 }
 
 ///|
@@ -2427,11 +2427,11 @@ fn step_52() -> Unit raise {
   })
   let t1444 = @simp.asm_rewrite_tac(@list.List([]))
   let t1443 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@iterate.in_numseg()])))
-  let t1441 = @kernel.assume_rule(@parser.parse_term("!r. a <= r /\\ r <= b\n             ==> a <= (p:num->num) r /\\ p r <= b"))
+  let t1441 = @kernel.assume_rule(@parser.parse_term("forall r. a <= r /\\ r <= b\n             ==> a <= (p:num->num) r /\\ p r <= b"))
   let t1442 = @tactics.match_mp_tac(@bool.spec(@parser.parse_term("ITER m (p:num->num) a"), t1441))
   let t1445 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iter.iter(), @iterate.in_numseg()])), t1442), t1443), t1444)
   let t1446 = @list.List([@tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@iter.iter(), @iterate.in_numseg()])), @int.asm_arith_tac), t1445])), @tactics.all_tac])
-  let t1440 = @tactics.subgoal_then(@parser.parse_term("!m. ITER m (p:num->num) a IN (a..b)"), fn(x1437 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1440 = @tactics.subgoal_then(@parser.parse_term("forall m. ITER m (p:num->num) a IN (a..b)"), fn(x1437 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1438 = ((x1436 : @kernel.Thm) => @tactics.label_tac("orbit_in_interval", x1436))(x1437)
     fn(x1439 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1438(x1439)
@@ -2472,7 +2472,7 @@ fn step_52() -> Unit raise {
   }), t1419), @tactics.ants_tac), t1426), t1433])
   let t1409 = @class.asm_cases_tac(@parser.parse_term("(r:num) = b"))
   let t1435 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("r:num")), @tactics.strip_tac), t1409), t1434), @tactics.all_tac])
-  let t1408 = @tactics.subgoal_then(@parser.parse_term("!r. a <= r /\\ r <= b\n        ==> a <= (p:num->num) r /\\ p r <= b"), fn(x1405 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1408 = @tactics.subgoal_then(@parser.parse_term("forall r. a <= r /\\ r <= b\n        ==> a <= (p:num->num) r /\\ p r <= b"), fn(x1405 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1406 = ((x1404 : @kernel.Thm) => @tactics.label_tac("invariant", x1404))(x1405)
     fn(x1407 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1406(x1407)
@@ -2548,7 +2548,7 @@ fn step_52() -> Unit raise {
     }
   })
   let t1403 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("h:num")), @tactics.strip_tac), t1345), t1369), t1370), t1402), @tactics.all_tac])
-  let t1341 = @tactics.subgoal_then(@parser.parse_term("!h. a <= h /\\ h < b\n        ==> a <= (p:num->num) h /\\\n            p h <= b /\\\n            a <= p(h + 1) /\\\n            p(h + 1) <= b"), fn(x1338 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1341 = @tactics.subgoal_then(@parser.parse_term("forall h. a <= h /\\ h < b\n        ==> a <= (p:num->num) h /\\\n            p h <= b /\\\n            a <= p(h + 1) /\\\n            p(h + 1) <= b"), fn(x1338 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1339 = ((x1337 : @kernel.Thm) => @tactics.label_tac("edge_invariant", x1337))(x1338)
     fn(x1340 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1339(x1340)
@@ -2556,7 +2556,7 @@ fn step_52() -> Unit raise {
   })
   let t1336 = @theorems.intro_tac("nontrivial bound cycle closed")
   let t1473 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1336), t1341), t1403), t1408), t1435), t1440), t1446), t1450), t1452), t1456), t1465), t1469), t1472)
-  finite_cyclic_closed_interval_c.set(@tactics.prove(@parser.parse_term("!p n a b.\n        a < b /\\\n        b < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i) /\\\n        (!i j.\n             a <= i /\\\n             i < b /\\\n             adjacent_interval_cover p i j\n             ==> a <= j /\\ j < b)\n        ==> a = 0 /\\ b + 1 = n"), t1473))
+  finite_cyclic_closed_interval_c.set(@tactics.prove(@parser.parse_term("forall p n a b.\n        a < b /\\\n        b < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i) /\\\n        (forall i j.\n             a <= i /\\\n             i < b /\\\n             adjacent_interval_cover p i j\n             ==> a <= j /\\ j < b)\n        ==> a = 0 /\\ b + 1 = n"), t1473))
 }
 
 ///|
@@ -2722,7 +2722,7 @@ fn step_53() -> Unit raise {
   let t1590 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@parser.parse_term("(a:num) <= h")), t1573), t1577), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1584), @tactics.ants_tac), t1587), t1589])
   let t1600 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.disch_tac, @tactics.conj_tac), t1590), t1599])
   let t1601 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("h:num")), @tactics.eq_tac), t1600), @tactics.all_tac])
-  let t1572 = @tactics.subgoal_then(@parser.parse_term("!h.\n        (h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h <=>\n         a <= h /\\ h <= b)"), fn(x1569 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1572 = @tactics.subgoal_then(@parser.parse_term("forall h.\n        (h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h <=>\n         a <= h /\\ h <= b)"), fn(x1569 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1570 = ((x1568 : @kernel.Thm) => @tactics.label_tac("range", x1568))(x1569)
     fn(x1571 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1570(x1571)
@@ -2801,7 +2801,7 @@ fn step_53() -> Unit raise {
   })
   let t1506 = @parser.parse_term("l:num")
   let t1550 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("h:num"), t1506])), @tactics.strip_tac), t1510), t1532), @tactics.conj_tac), t1549), @tactics.all_tac])
-  let t1505 = @tactics.subgoal_then(@parser.parse_term("!h l.\n        h + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i h /\\\n        adjacent_interval_cover p h l\n        ==> l + 1 < n /\\\n            adjacent_interval_reachable p k i l"), fn(x1502 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1505 = @tactics.subgoal_then(@parser.parse_term("forall h l.\n        h + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i h /\\\n        adjacent_interval_cover p h l\n        ==> l + 1 < n /\\\n            adjacent_interval_reachable p k i l"), fn(x1502 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1503 = ((x1501 : @kernel.Thm) => @tactics.label_tac("reachclosed", x1501))(x1502)
     fn(x1504 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1503(x1504)
@@ -2830,7 +2830,7 @@ fn step_53() -> Unit raise {
   let t1480 = @simp.asm_rewrite_tac(@list.List([]))
   let t1481 = @tactics.then_tac(@tactics.match_mp_tac(adjacent_interval_reachable_self()), t1480)
   let t1482 = @list.List([@tactics.thenl(@nums.induct_tac, @list.List([@simp.rewrite_tac(@list.List([adjacent_interval_reachable()])), t1481])), @tactics.all_tac])
-  let t1479 = @tactics.subgoal_then(@parser.parse_term("!m. adjacent_interval_reachable (p:num->num) m i i"), fn(x1476 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1479 = @tactics.subgoal_then(@parser.parse_term("forall m. adjacent_interval_reachable (p:num->num) m i i"), fn(x1476 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1477 = ((x1475 : @kernel.Thm) => @tactics.label_tac("loop", x1475))(x1476)
     fn(x1478 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1477(x1478)
@@ -2838,7 +2838,7 @@ fn step_53() -> Unit raise {
   })
   let t1474 = @theorems.intro_tac("cycle ibound jbound distinct self exit")
   let t1693 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1474), t1479), t1482), t1484), @tactics.ants_tac), t1500), t1505), t1550), t1551), t1557), t1558), @tactics.ants_tac), t1561), t1562), @tactics.ants_tac), t1567), t1572), t1601), t1605), t1645), t1649), @tactics.ants_tac), t1682), t1683), t1684), @tactics.disch_tac), t1688), t1692)
-  finite_cyclic_reachable_all_c.set(@tactics.prove(@parser.parse_term("!p n i j.\n        (!r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(j = i) /\\\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_cover p i j\n        ==> ?k.\n              !h. h + 1 < n\n                  ==> adjacent_interval_reachable p k i h"), t1693))
+  finite_cyclic_reachable_all_c.set(@tactics.prove(@parser.parse_term("forall p n i j.\n        (forall r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(j = i) /\\\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_cover p i j\n        ==> ?k.\n              forall h. h + 1 < n\n                  ==> adjacent_interval_reachable p k i h"), t1693))
 }
 
 ///|
@@ -2953,7 +2953,7 @@ fn step_54() -> Unit raise {
   let t1695 = @tactics.subgoal_then(@parser.parse_term("(p:num->num) i < n /\\\n    minimal_period p n i /\\\n    p(i + 1) < n"), @tactics.strip_assume_tac)
   let t1694 = @theorems.intro_tac("nontrivial cycle ibound self")
   let t1778 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1694), t1695), t1724), t1727), t1777)
-  finite_cyclic_selfcover_exit_c.set(@tactics.prove(@parser.parse_term("!p n i.\n        2 < n /\\\n        (!r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        adjacent_interval_cover p i i\n        ==> ?j.\n              j + 1 < n /\\\n              ~(j = i) /\\\n              adjacent_interval_cover p i j"), t1778))
+  finite_cyclic_selfcover_exit_c.set(@tactics.prove(@parser.parse_term("forall p n i.\n        2 < n /\\\n        (forall r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        adjacent_interval_cover p i i\n        ==> ?j.\n              j + 1 < n /\\\n              ~(j = i) /\\\n              adjacent_interval_cover p i j"), t1778))
 }
 
 ///|
@@ -2975,7 +2975,7 @@ fn step_55() -> Unit raise {
   let t1879 = @tactics.undisch_tac(@parser.parse_term("~((p:num->num) (i + 1) = i + 1)"))
   let t1880 = @tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("~((p:num->num) (i + 1) <= i)")), t1879), @int.arith_tac)
   let t1881 = @list.List([@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.accept_tac(@kernel.assume_rule(@parser.parse_term("(i:num) + 1 < n"))), t1880])), @int.arith_tac])
-  let t1877 = @kernel.assume_rule(@parser.parse_term("!j. j < n /\\ j < (p:num->num) j ==> j <= i"))
+  let t1877 = @kernel.assume_rule(@parser.parse_term("forall j. j < n /\\ j < (p:num->num) j ==> j <= i"))
   let t1878 = @tactics.mp_tac(@bool.spec(@parser.parse_term("i + 1"), t1877))
   let t1874 = @tactics.then_tac(@tactics.disch_then(fn(x1870 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let ith_1 = x1870
@@ -3096,7 +3096,7 @@ fn step_55() -> Unit raise {
     })(@bool.eq_imp_rule(x1795))
   })
   let t1822 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("\\j:num. j < n /\\ j < (p:num->num) j"), @arith.num_max())), t1796), t1797), @tactics.beta_tac), @tactics.conj_tac), t1820), t1821])
-  let t1788 = @tactics.subgoal_then(@parser.parse_term("?i:num.\n        (i < n /\\ i < (p:num->num) i) /\\\n        !j. j < n /\\ j < p j ==> j <= i"), fn(x1785 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1788 = @tactics.subgoal_then(@parser.parse_term("?i:num.\n        (i < n /\\ i < (p:num->num) i) /\\\n        forall j. j < n /\\ j < p j ==> j <= i"), fn(x1785 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1786 = @tactics.mp_tac(x1785)
     fn(x1787 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1786(x1787)
@@ -3109,7 +3109,7 @@ fn step_55() -> Unit raise {
   let t1780 = @tactics.subgoal_then(@parser.parse_term("(p:num->num) 0 < n /\\ minimal_period p n 0"), @tactics.strip_assume_tac)
   let t1779 = @theorems.intro_tac("nontrivial cycle")
   let t1887 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1779), t1780), t1784), t1788), t1822), t1826), t1842), t1843), t1848), t1852), t1882), t1883), @tactics.conj_tac), t1886)
-  finite_cyclic_crossing_c.set(@tactics.prove(@parser.parse_term("!p n.\n        1 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i.\n              i + 1 < n /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i"), t1887))
+  finite_cyclic_crossing_c.set(@tactics.prove(@parser.parse_term("forall p n.\n        1 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i.\n              i + 1 < n /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i"), t1887))
 }
 
 ///|
@@ -3284,7 +3284,7 @@ fn step_56() -> Unit raise {
   let t2011 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t2010, t2009, t2008]), periodic_points_image_inj()))
   let t2007 = @parser.parse_term("s:num")
   let t2042 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("r:num"), t2007])), @tactics.strip_tac), t2011), @tactics.ants_tac), t2041), @tactics.all_tac])
-  let t2006 = @tactics.subgoal_then(@parser.parse_term("!r s.\n        r < n /\\ s < n /\\ (p:num->num) r = p s\n        ==> r = s"), fn(x2003 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2006 = @tactics.subgoal_then(@parser.parse_term("forall r s.\n        r < n /\\ s < n /\\ (p:num->num) r = p s\n        ==> r = s"), fn(x2003 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2004 = ((x2002 : @kernel.Thm) => @tactics.label_tac("injective", x2002))(x2003)
     fn(x2005 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2004(x2005)
@@ -3322,7 +3322,7 @@ fn step_56() -> Unit raise {
   let t1977 = @simp.asm_rewrite_tac(@list.List([]))
   let t1976 = @class.asm_cases_tac(@parser.parse_term("(p:num->num) r <= i"))
   let t2001 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("r:num")), @tactics.strip_tac), t1976), t1977), t1981), @tactics.ants_tac), t1989), t1993), t2000), @tactics.all_tac])
-  let t1975 = @tactics.subgoal_then(@parser.parse_term("!r. i + 1 <= r /\\ r < n ==> (p:num->num) r <= i"), fn(x1972 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1975 = @tactics.subgoal_then(@parser.parse_term("forall r. i + 1 <= r /\\ r < n ==> (p:num->num) r <= i"), fn(x1972 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1973 = ((x1971 : @kernel.Thm) => @tactics.label_tac("right", x1971))(x1972)
     fn(x1974 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1973(x1974)
@@ -3354,7 +3354,7 @@ fn step_56() -> Unit raise {
   let t1950 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @int.asm_arith_tac), @tactics.all_tac])
   let t1949 = @class.asm_cases_tac(@parser.parse_term("(r:num) = i"))
   let t1970 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("r:num")), @tactics.disch_tac), t1949), t1950), t1951), t1952), t1956), @tactics.ants_tac), t1958), t1962), t1969), @tactics.all_tac])
-  let t1948 = @tactics.subgoal_then(@parser.parse_term("!r. r <= i ==> i < (p:num->num) r"), fn(x1945 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1948 = @tactics.subgoal_then(@parser.parse_term("forall r. r <= i ==> i < (p:num->num) r"), fn(x1945 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1946 = ((x1944 : @kernel.Thm) => @tactics.label_tac("left", x1944))(x1945)
     fn(x1947 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1946(x1947)
@@ -3435,7 +3435,7 @@ fn step_56() -> Unit raise {
   let t1890 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t1889]), finite_cyclic_crossing()))
   let t1888 = @theorems.intro_tac("odd nontrivial cycle")
   let t2137 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1888), t1890), @tactics.ants_tac), t1899), t1903), t1912), t1916), t1930), t1931), t1943), t1948), t1970), t1975), t2001), t2006), t2042), t2047), t2064), t2069), t2078), t2083), t2089), t2094), t2100), t2104), t2109), t2113), t2118), t2122), t2123), t2127), t2130), t2134), t2135), t2136)
-  finite_odd_cyclic_return_c.set(@tactics.prove(@parser.parse_term("!p n.\n        ODD n /\\\n        2 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i j.\n              i + 1 < n /\\\n              j + 1 < n /\\\n              ~(j = i) /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i /\\\n              adjacent_interval_cover p i i /\\\n              adjacent_interval_cover p j i"), t2137))
+  finite_odd_cyclic_return_c.set(@tactics.prove(@parser.parse_term("forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i j.\n              i + 1 < n /\\\n              j + 1 < n /\\\n              ~(j = i) /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i /\\\n              adjacent_interval_cover p i i /\\\n              adjacent_interval_cover p j i"), t2137))
 }
 
 ///|
@@ -3567,7 +3567,7 @@ fn step_57() -> Unit raise {
   let t2140 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t2139]), finite_odd_cyclic_return()))
   let t2138 = @theorems.intro_tac("odd nontrivial cycle")
   let t2239 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2138), t2140), @tactics.ants_tac), t2143), t2146), @tactics.ants_tac), t2148), t2152), @tactics.ants_tac), t2154), t2158), t2160), t2164), t2165), t2166), t2170), t2181), t2186), @tactics.ants_tac), t2205), t2206), t2207), t2208), t2238)
-  finite_odd_cyclic_return_cycle_c.set(@tactics.prove(@parser.parse_term("!p n.\n        ODD n /\\\n        2 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t2239))
+  finite_odd_cyclic_return_cycle_c.set(@tactics.prove(@parser.parse_term("forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t2239))
 }
 
 ///|
@@ -3727,7 +3727,7 @@ fn step_58() -> Unit raise {
       s2247(x2248)
     }
   }), t2249), t2250])
-  let t2245 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\k. ?q:num->A.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))"), @arith.num_wop())).0))
+  let t2245 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))"), @arith.num_wop())).0))
   let t2244 = @tactics.disch_then(fn(x2241 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2242 = ((x2240 : @kernel.Thm) => @tactics.label_tac("exists", x2240))(x2241)
     fn(x2243 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3735,7 +3735,7 @@ fn step_58() -> Unit raise {
     }
   })
   let t2359 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2244), t2245), @tactics.ants_tac), t2251), t2256), t2257), t2258), t2259), t2264), t2270), t2274), t2278), t2291), t2295), t2296), t2303), t2304), t2307), t2308), t2309), t2358)
-  path_first_return_cycle_c.set(@tactics.prove(@parser.parse_term("!v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))"), t2359))
+  path_first_return_cycle_c.set(@tactics.prove(@parser.parse_term("forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))"), t2359))
 }
 
 ///|
@@ -3808,7 +3808,7 @@ fn step_59() -> Unit raise {
     @tactics.use_then("sk", fn(x2426 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let sth = x2426
       let t2432 = @bool.conj(rth, sth)
-      let t2431 = @int.arith_rule(@parser.parse_term("!r s k:num.\n               r < s /\\ s < k ==> s - r <= k"))
+      let t2431 = @int.arith_rule(@parser.parse_term("forall r s k:num.\n               r < s /\\ s < k ==> s - r <= k"))
       let t2429 = @parser.parse_term("k:num")
       let t2430 = @parser.parse_term("s:num")
       let t2433 = @drule.match_mp(@bool.specl(@list.List([@parser.parse_term("r:num"), t2430, t2429]), t2431))(t2432)
@@ -3894,7 +3894,7 @@ fn step_59() -> Unit raise {
     }
   })
   let t2372 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(path_first_return_cycle()), t2369), t2370), t2371])
-  let t2365 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\k. ?q:num->A.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))"), @arith.num_wop())).0))
+  let t2365 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))"), @arith.num_wop())).0))
   let t2364 = @tactics.disch_then(fn(x2361 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2362 = ((x2360 : @kernel.Thm) => @tactics.label_tac("exists", x2360))(x2361)
     fn(x2363 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3902,7 +3902,7 @@ fn step_59() -> Unit raise {
     }
   })
   let t2483 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2364), t2365), @tactics.ants_tac), t2372), t2377), t2378), t2380), t2381), t2386), t2391), t2397), t2399), t2405), t2412), t2415), t2416), t2417), t2482)
-  path_simple_cycle_c.set(@tactics.prove(@parser.parse_term("!v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))"), t2483))
+  path_simple_cycle_c.set(@tactics.prove(@parser.parse_term("forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))"), t2483))
 }
 
 ///|
@@ -4066,7 +4066,7 @@ fn step_60() -> Unit raise {
   let t2529 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:num")), @tactics.disch_tac), t2521), @tactics.beta_tac), @class.cond_cases_tac), t2522), @int.asm_arith_tac), t2528, t2527])
   let t2530 = @list.List([@tactics.thenl(@tactics.repeat_tac(@tactics.conj_tac), t2529), @tactics.all_tac])
   let t2519 = @theorems.destruct_tac("hbound indexbound indexorder")
-  let t2520 = @tactics.subgoal_then(@parser.parse_term("(!i. i <= l ==> v((h:num->A) i)) /\\\n      (!i. i < l\n           ==> (if i <= r then i else i + d) < k) /\\\n      (!i j. i < j /\\ j < l\n             ==> (if i <= r then i else i + d) <\n                 (if j <= r then j else j + d))"), t2519)
+  let t2520 = @tactics.subgoal_then(@parser.parse_term("(forall i. i <= l ==> v((h:num->A) i)) /\\\n      (forall i. i < l\n           ==> (if i <= r then i else i + d) < k) /\\\n      (forall i j. i < j /\\ j < l\n             ==> (if i <= r then i else i + d) <\n                 (if j <= r then j else j + d))"), t2519)
   let t2518 = @simp.abbrev_tac(@parser.parse_term("h = \\i:num. if i <= r then (q:num->A) i else q(i + d)"))
   let t2517 = @tactics.subgoal_then(@parser.parse_term("SUC r + d = s"), fn(x2514 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2515 = ((x2513 : @kernel.Thm) => @tactics.label_tac("jump", x2513))(x2514)
@@ -4103,7 +4103,7 @@ fn step_60() -> Unit raise {
     }
   })
   let t2496 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(path_simple_cycle()), t2493), t2494), t2495])
-  let t2489 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\k. ?q:num->A.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))"), @arith.num_wop())).0))
+  let t2489 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))"), @arith.num_wop())).0))
   let t2488 = @tactics.disch_then(fn(x2485 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2486 = ((x2484 : @kernel.Thm) => @tactics.label_tac("exists", x2484))(x2485)
     fn(x2487 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -4111,7 +4111,7 @@ fn step_60() -> Unit raise {
     }
   })
   let t2647 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2488), t2489), @tactics.ants_tac), t2496), t2501), t2502), @tactics.conj_tac), t2646)
-  path_shortest_simple_cycle_c.set(@tactics.prove(@parser.parse_term("!v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (!r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (!r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < k ==> ~e (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < k ==> ~e (q r) (q 0)) /\\\n              (!r. r < k ==> e (q r) (q(SUC r)))"), t2647))
+  path_shortest_simple_cycle_c.set(@tactics.prove(@parser.parse_term("forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k ==> ~e (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k ==> ~e (q r) (q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))"), t2647))
 }
 
 ///|
@@ -4260,7 +4260,7 @@ fn step_61() -> Unit raise {
   }), t2670), t2674), t2680])
   let t2664 = @class.asm_cases_tac(@parser.parse_term("(j:num) = k"))
   let t2682 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("j:num")), @tactics.strip_tac), t2664), t2681), @tactics.all_tac])
-  let t2663 = @tactics.subgoal_then(@parser.parse_term("!j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)"), fn(x2660 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2663 = @tactics.subgoal_then(@parser.parse_term("forall j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)"), fn(x2660 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2661 = ((x2659 : @kernel.Thm) => @tactics.label_tac("taildistinct", x2659))(x2660)
     fn(x2662 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2661(x2662)
@@ -4279,7 +4279,7 @@ fn step_61() -> Unit raise {
   })
   let t2648 = @theorems.intro_tac("length bound closed base distinct path")
   let t2768 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2648), t2653), t2658), t2663), t2682), t2683), t2684), t2767)
-  path_simple_cycle_wait_c.set(@tactics.prove(@parser.parse_term("!v e k (q:num->A).\n        1 < k /\\\n        (!i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (!i. i <= k + 1 ==> v(r i)) /\\\n              r 0 = r(k + 1) /\\\n              (!i. 0 < i /\\ i < k + 1 ==> ~(r i = r 0)) /\\\n              (!i. i < k + 1 ==> e (r i) (r(SUC i)))"), t2768))
+  path_simple_cycle_wait_c.set(@tactics.prove(@parser.parse_term("forall v e k (q:num->A).\n        1 < k /\\\n        (forall i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (forall i. i <= k + 1 ==> v(r i)) /\\\n              r 0 = r(k + 1) /\\\n              (forall i. 0 < i /\\ i < k + 1 ==> ~(r i = r 0)) /\\\n              (forall i. i < k + 1 ==> e (r i) (r(SUC i)))"), t2768))
 }
 
 ///|
@@ -4421,7 +4421,7 @@ fn step_62() -> Unit raise {
   }), t2791), t2795), t2801])
   let t2785 = @class.asm_cases_tac(@parser.parse_term("(j:num) = k"))
   let t2803 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("j:num")), @tactics.strip_tac), t2785), t2802), @tactics.all_tac])
-  let t2784 = @tactics.subgoal_then(@parser.parse_term("!j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)"), fn(x2781 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2784 = @tactics.subgoal_then(@parser.parse_term("forall j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)"), fn(x2781 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2782 = ((x2780 : @kernel.Thm) => @tactics.label_tac("taildistinct", x2780))(x2781)
     fn(x2783 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2782(x2783)
@@ -4440,7 +4440,7 @@ fn step_62() -> Unit raise {
   })
   let t2769 = @theorems.intro_tac("length wait bound closed base distinct path")
   let t2884 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2769), t2774), t2779), t2784), t2803), t2804), t2805), t2883)
-  path_simple_cycle_waits_c.set(@tactics.prove(@parser.parse_term("!v e k (q:num->A) t.\n        1 < k /\\\n        0 < t /\\\n        (!i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (!i. i <= k + t ==> v(r i)) /\\\n              r 0 = r(k + t) /\\\n              (!i. 0 < i /\\ i < k + t ==> ~(r i = r 0)) /\\\n              (!i. i < k + t ==> e (r i) (r(SUC i)))"), t2884))
+  path_simple_cycle_waits_c.set(@tactics.prove(@parser.parse_term("forall v e k (q:num->A) t.\n        1 < k /\\\n        0 < t /\\\n        (forall i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (forall i. i <= k + t ==> v(r i)) /\\\n              r 0 = r(k + t) /\\\n              (forall i. 0 < i /\\ i < k + t ==> ~(r i = r 0)) /\\\n              (forall i. i < k + t ==> e (r i) (r(SUC i)))"), t2884))
 }
 
 ///|
@@ -4468,7 +4468,7 @@ fn step_63() -> Unit raise {
   let t2887 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{i:num | i < k}"), t2886]), @sets.surjective_iff_injective()))
   let t2885 = @theorems.intro_tac("bound distinct")
   let t2896 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2885), t2887), @tactics.ants_tac), t2892), t2894), @tactics.strip_tac), t2895)
-  finite_index_enumeration_c.set(@tactics.prove(@parser.parse_term("!q (k:num).\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> !x. x < k ==> ?i. i < k /\\ q i = x"), t2896))
+  finite_index_enumeration_c.set(@tactics.prove(@parser.parse_term("forall q (k:num).\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> forall x. x < k ==> ?i. i < k /\\ q i = x"), t2896))
 }
 
 ///|
@@ -4483,7 +4483,7 @@ pub fn finite_index_enumeration() -> @kernel.Thm {
 ///|
 /// FINITE_PATH_NEXT_COVER
 fn step_64() -> Unit raise {
-  let t2910 = @meson.asm_meson_tac(@list.List([@arith.not_le(), @int.arith_rule(@parser.parse_term("!r s:num. r < s ==> s = r + 1 \\/ r + 1 < s"))]))
+  let t2910 = @meson.asm_meson_tac(@list.List([@arith.not_le(), @int.arith_rule(@parser.parse_term("forall r s:num. r < s ==> s = r + 1 \\/ r + 1 < s"))]))
   let t2907 = @theorems.intro_tac("@s. sbound same")
   let t2906 = @simp.asm_rewrite_tac(@list.List([]))
   let t2903 = @parser.parse_term("x:num")
@@ -4500,7 +4500,7 @@ fn step_64() -> Unit raise {
   let t2899 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("q:num->num"), t2898]), finite_index_enumeration()))
   let t2897 = @theorems.intro_tac("bound distinct chordless next xbound cover unseen")
   let t2911 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2897), t2899), @tactics.ants_tac), t2909), t2910)
-  finite_path_next_cover_c.set(@tactics.prove(@parser.parse_term("!p q k r x.\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        x < k /\\\n        adjacent_interval_cover p (q r) x /\\\n        (!s. s <= r ==> ~(q s = x))\n        ==> x = q(r + 1)"), t2911))
+  finite_path_next_cover_c.set(@tactics.prove(@parser.parse_term("forall p q k r x.\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        x < k /\\\n        adjacent_interval_cover p (q r) x /\\\n        (forall s. s <= r ==> ~(q s = x))\n        ==> x = q(r + 1)"), t2911))
 }
 
 ///|
@@ -4515,9 +4515,9 @@ pub fn finite_path_next_cover() -> @kernel.Thm {
 ///|
 /// FINITE_PATH_NEXT_OUTSIDE
 fn step_65() -> Unit raise {
-  let t2916 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@parser.parse_term("!s r:num. s <= r ==> s < r + 1"))]))
+  let t2916 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@parser.parse_term("forall s r:num. s <= r ==> s < r + 1"))]))
   let t2915 = @list.List([@int.asm_arith_tac, @theorems.intro_tac("@s. sle same")])
-  let t2914 = @kernel.assume_rule(@parser.parse_term("!x. a <= x /\\ x <= b\n             ==> ?s. s <= r /\\ (q:num->num) s = x"))
+  let t2914 = @kernel.assume_rule(@parser.parse_term("forall x. a <= x /\\ x <= b\n             ==> ?s. s <= r /\\ (q:num->num) s = x"))
   let t2917 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("(q:num->num) (r + 1)"), t2914)), @tactics.ants_tac), t2915), t2916)
   let t2918 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t2917])
   let t2919 = @tactics.thenl(@class.asm_cases_tac(@parser.parse_term("b < (q:num->num) (r + 1)")), t2918)
@@ -4525,7 +4525,7 @@ fn step_65() -> Unit raise {
   let t2913 = @class.asm_cases_tac(@parser.parse_term("(q:num->num) (r + 1) < a"))
   let t2912 = @theorems.intro_tac("distinct next range full")
   let t2921 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2912), t2913), t2920)
-  finite_path_next_outside_c.set(@tactics.prove(@parser.parse_term("!(q:num->num) k r a b.\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        r + 1 < k /\\\n        (!s. s <= r ==> a <= q s /\\ q s <= b) /\\\n        (!x. a <= x /\\ x <= b ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) < a \\/ b < q(r + 1)"), t2921))
+  finite_path_next_outside_c.set(@tactics.prove(@parser.parse_term("forall(q:num->num) k r a b.\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        r + 1 < k /\\\n        (forall s. s <= r ==> a <= q s /\\ q s <= b) /\\\n        (forall x. a <= x /\\ x <= b ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) < a \\/ b < q(r + 1)"), t2921))
 }
 
 ///|
@@ -4717,7 +4717,7 @@ fn step_66() -> Unit raise {
   })
   let t2922 = @theorems.intro_tac(("bound distinct chordless next nobase cover last endpoint " + "alower aupper range full"))
   let t3073 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2922), t2927), t2941), t2946), t2952), t2957), t2960), t2965), t2970), t2975), t2978), t2983), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t2988), t2990), t2995), t3012), t3017), t3019), t3024), t3041), t3042), @tactics.conj_tac), t3072)
-  finite_path_zigzag_down_c.set(@tactics.prove(@parser.parse_term("!p q k r a lo hi.\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = hi /\\\n        p hi = lo /\\\n        lo <= a /\\ a <= hi /\\\n        (!s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (!x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> 0 < lo /\\\n            q(r + 1) = lo - 1 /\\\n            p(hi + 1) = lo - 1 /\\\n            (!s. s <= r + 1 ==> lo - 1 <= q s /\\ q s <= hi) /\\\n            (!x. lo - 1 <= x /\\ x <= hi\n                 ==> ?s. s <= r + 1 /\\ q s = x)"), t3073))
+  finite_path_zigzag_down_c.set(@tactics.prove(@parser.parse_term("forall p q k r a lo hi.\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = hi /\\\n        p hi = lo /\\\n        lo <= a /\\ a <= hi /\\\n        (forall s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (forall x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> 0 < lo /\\\n            q(r + 1) = lo - 1 /\\\n            p(hi + 1) = lo - 1 /\\\n            (forall s. s <= r + 1 ==> lo - 1 <= q s /\\ q s <= hi) /\\\n            (forall x. lo - 1 <= x /\\ x <= hi\n                 ==> ?s. s <= r + 1 /\\ q s = x)"), t3073))
 }
 
 ///|
@@ -4950,7 +4950,7 @@ fn step_67() -> Unit raise {
   })
   let t3074 = @theorems.intro_tac(("pbound bound distinct chordless next nobase cover last " + "endpoint alower aupper range full"))
   let t3259 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3074), t3079), t3093), t3098), t3107), t3112), t3118), t3123), t3126), t3131), t3136), t3141), t3144), t3149), t3151), t3156), t3173), t3178), t3186), t3191), t3227), t3228), @tactics.conj_tac), t3258)
-  finite_path_zigzag_up_c.set(@tactics.prove(@parser.parse_term("!p q k r a lo hi.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = lo /\\\n        p(lo + 1) = hi + 1 /\\\n        lo <= a /\\ a <= hi /\\\n        (!s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (!x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) = hi + 1 /\\\n            p lo = hi + 2 /\\\n            (!s. s <= r + 1 ==> lo <= q s /\\ q s <= hi + 1) /\\\n            (!x. lo <= x /\\ x <= hi + 1\n                 ==> ?s. s <= r + 1 /\\ q s = x)"), t3259))
+  finite_path_zigzag_up_c.set(@tactics.prove(@parser.parse_term("forall p q k r a lo hi.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = lo /\\\n        p(lo + 1) = hi + 1 /\\\n        lo <= a /\\ a <= hi /\\\n        (forall s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (forall x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) = hi + 1 /\\\n            p lo = hi + 2 /\\\n            (forall s. s <= r + 1 ==> lo <= q s /\\ q s <= hi + 1) /\\\n            (forall x. lo <= x /\\ x <= hi + 1\n                 ==> ?s. s <= r + 1 /\\ q s = x)"), t3259))
 }
 
 ///|
@@ -5210,7 +5210,7 @@ fn step_68() -> Unit raise {
   })
   let t3300 = @kernel.assume_rule(@parser.parse_term("(a:num) + 1 <= (p:num->num) a"))
   let t3301 = @bool.conj(@kernel.assume_rule(@parser.parse_term("(q:num->num) 1 < a")), t3300)
-  let t3299 = @int.arith_rule(@parser.parse_term("!pa pa1 q a:num.\n          q < a /\\ a + 1 <= pa\n          ==> ~(pa <= q /\\ q + 1 <= pa1)"))
+  let t3299 = @int.arith_rule(@parser.parse_term("forall pa pa1 q a:num.\n          q < a /\\ a + 1 <= pa\n          ==> ~(pa <= q /\\ q + 1 <= pa1)"))
   let t3296 = @parser.parse_term("a:num")
   let t3297 = @parser.parse_term("(q:num->num) 1")
   let t3298 = @parser.parse_term("(p:num->num) (a + 1)")
@@ -5263,7 +5263,7 @@ fn step_68() -> Unit raise {
   })
   let t3260 = @theorems.intro_tac(("pbound bound distinct chordless nontrivial base lower " + "upper left cover"))
   let t3494 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3260), t3265), t3279), t3284), t3295), t3302), t3307), t3313), t3318), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t3323), t3325), t3330), t3363), t3368), t3370), t3375), t3408), t3413), t3421), t3426), t3478), t3479), @tactics.conj_tac), t3493)
-  finite_path_zigzag_left_start_c.set(@tactics.prove(@parser.parse_term("!p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> 0 < a /\\\n            q 1 = a - 1 /\\\n            p(a + 1) = a - 1 /\\\n            p a = a + 1 /\\\n            (!s. s <= 1 ==> a - 1 <= q s /\\ q s <= a) /\\\n            (!x. a - 1 <= x /\\ x <= a\n                 ==> ?s. s <= 1 /\\ q s = x)"), t3494))
+  finite_path_zigzag_left_start_c.set(@tactics.prove(@parser.parse_term("forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> 0 < a /\\\n            q 1 = a - 1 /\\\n            p(a + 1) = a - 1 /\\\n            p a = a + 1 /\\\n            (forall s. s <= 1 ==> a - 1 <= q s /\\ q s <= a) /\\\n            (forall x. a - 1 <= x /\\ x <= a\n                 ==> ?s. s <= 1 /\\ q s = x)"), t3494))
 }
 
 ///|
@@ -5542,7 +5542,7 @@ fn step_69() -> Unit raise {
   })
   let t3535 = @kernel.assume_rule(@parser.parse_term("(a:num) < (q:num->num) 1"))
   let t3536 = @bool.conj(@kernel.assume_rule(@parser.parse_term("(p:num->num) (a + 1) <= a")), t3535)
-  let t3534 = @int.arith_rule(@parser.parse_term("!pa pa1 q a:num.\n          pa1 <= a /\\ a < q\n          ==> ~(pa <= q /\\ q + 1 <= pa1)"))
+  let t3534 = @int.arith_rule(@parser.parse_term("forall pa pa1 q a:num.\n          pa1 <= a /\\ a < q\n          ==> ~(pa <= q /\\ q + 1 <= pa1)"))
   let t3531 = @parser.parse_term("a:num")
   let t3532 = @parser.parse_term("(q:num->num) 1")
   let t3533 = @parser.parse_term("(p:num->num) (a + 1)")
@@ -5595,7 +5595,7 @@ fn step_69() -> Unit raise {
   })
   let t3495 = @theorems.intro_tac(("pbound bound distinct chordless nontrivial base lower " + "upper right cover"))
   let t3744 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3495), t3500), t3514), t3519), t3530), t3537), t3542), t3548), t3553), t3555), t3560), t3593), t3598), t3653), t3658), t3666), t3671), t3728), t3729), @tactics.conj_tac), t3743)
-  finite_path_zigzag_right_start_c.set(@tactics.prove(@parser.parse_term("!p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1 /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> q 1 = a + 1 /\\\n            p(a + 1) = a /\\\n            p a = a + 2 /\\\n            (!s. s <= 1 ==> a <= q s /\\ q s <= a + 1) /\\\n            (!x. a <= x /\\ x <= a + 1\n                 ==> ?s. s <= 1 /\\ q s = x)"), t3744))
+  finite_path_zigzag_right_start_c.set(@tactics.prove(@parser.parse_term("forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1 /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> q 1 = a + 1 /\\\n            p(a + 1) = a /\\\n            p a = a + 2 /\\\n            (forall s. s <= 1 ==> a <= q s /\\ q s <= a + 1) /\\\n            (forall x. a <= x /\\ x <= a + 1\n                 ==> ?s. s <= 1 /\\ q s = x)"), t3744))
 }
 
 ///|
@@ -6018,7 +6018,7 @@ fn step_70() -> Unit raise {
   let t4053 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t3748, t3747, t3746]), finite_path_zigzag_left_start()))), @tactics.ants_tac), t3767), t4052])
   let t3745 = @theorems.intro_tac(("pbound bound distinct chordless nobase path nontrivial " + "base lower upper left"))
   let t4054 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3745), @nums.induct_tac), t4053)
-  finite_path_zigzag_left_c.set(@tactics.prove(@parser.parse_term("!p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> !t. 2 * t + 1 < k\n                ==> t < a /\\\n                    q(2 * t) = a + t /\\\n                    q(2 * t + 1) = a - t - 1 /\\\n                    p(a - t) = a + t + 1 /\\\n                    p(a + t + 1) = a - t - 1 /\\\n                    (!s. s <= 2 * t + 1\n                         ==> a - t - 1 <= q s /\\ q s <= a + t) /\\\n                    (!x. a - t - 1 <= x /\\ x <= a + t\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)"), t4054))
+  finite_path_zigzag_left_c.set(@tactics.prove(@parser.parse_term("forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> forall t. 2 * t + 1 < k\n                ==> t < a /\\\n                    q(2 * t) = a + t /\\\n                    q(2 * t + 1) = a - t - 1 /\\\n                    p(a - t) = a + t + 1 /\\\n                    p(a + t + 1) = a - t - 1 /\\\n                    (forall s. s <= 2 * t + 1\n                         ==> a - t - 1 <= q s /\\ q s <= a + t) /\\\n                    (forall x. a - t - 1 <= x /\\ x <= a + t\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)"), t4054))
 }
 
 ///|
@@ -6428,7 +6428,7 @@ fn step_71() -> Unit raise {
   let t4354 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t4058, t4057, t4056]), finite_path_zigzag_right_start()))), @tactics.ants_tac), t4077), t4353])
   let t4055 = @theorems.intro_tac(("pbound bound distinct chordless nobase path nontrivial " + "base lower upper right"))
   let t4355 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4055), @nums.induct_tac), t4354)
-  finite_path_zigzag_right_c.set(@tactics.prove(@parser.parse_term("!p q k a.\n        (!i. i <= k ==> p i <= k) /\\\n        (!i. i < k ==> q i < k) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> !t. 2 * t + 1 < k\n                ==> t <= a /\\\n                    q(2 * t) = a - t /\\\n                    q(2 * t + 1) = a + t + 1 /\\\n                    p(a - t) = a + t + 2 /\\\n                    p(a + t + 1) = a - t /\\\n                    (!s. s <= 2 * t + 1\n                         ==> a - t <= q s /\\ q s <= a + t + 1) /\\\n                    (!x. a - t <= x /\\ x <= a + t + 1\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)"), t4355))
+  finite_path_zigzag_right_c.set(@tactics.prove(@parser.parse_term("forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> forall t. 2 * t + 1 < k\n                ==> t <= a /\\\n                    q(2 * t) = a - t /\\\n                    q(2 * t + 1) = a + t + 1 /\\\n                    p(a - t) = a + t + 2 /\\\n                    p(a + t + 1) = a - t /\\\n                    (forall s. s <= 2 * t + 1\n                         ==> a - t <= q s /\\ q s <= a + t + 1) /\\\n                    (forall x. a - t <= x /\\ x <= a + t + 1\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)"), t4355))
 }
 
 ///|
@@ -6756,7 +6756,7 @@ fn step_72() -> Unit raise {
   let t4360 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t4359, t4358, t4357]), finite_path_zigzag_left()))
   let t4356 = @theorems.intro_tac(("pbound bound distinct chordless nobase path positive base " + "closed lower upper left"))
   let t4593 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4356), t4360), @tactics.ants_tac), t4371), t4378), @tactics.ants_tac), t4384), t4389), t4395), t4400), t4407), t4412), t4414), t4419), t4438), t4443), t4479), t4484), t4488), t4493), t4517), t4522), t4539), t4540), t4592)
-  finite_path_zigzag_left_terminal_c.set(@tactics.prove(@parser.parse_term("!p q m a.\n        (!i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (!i. i < 2 * m ==> q i < 2 * m) /\\\n        (!i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> a = m /\\\n            q(2 * m - 1) = 0 /\\\n            p 1 = 2 * m /\\\n            (!r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))"), t4593))
+  finite_path_zigzag_left_terminal_c.set(@tactics.prove(@parser.parse_term("forall p q m a.\n        (forall i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (forall i. i < 2 * m ==> q i < 2 * m) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> a = m /\\\n            q(2 * m - 1) = 0 /\\\n            p 1 = 2 * m /\\\n            (forall r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))"), t4593))
 }
 
 ///|
@@ -7102,7 +7102,7 @@ fn step_73() -> Unit raise {
   let t4598 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t4597, t4596, t4595]), finite_path_zigzag_right()))
   let t4594 = @theorems.intro_tac(("pbound bound distinct chordless nobase path positive base " + "closed lower upper right"))
   let t4844 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4594), t4598), @tactics.ants_tac), t4609), t4616), @tactics.ants_tac), t4622), t4627), t4633), t4638), t4645), t4650), t4652), t4657), t4689), t4694), t4724), t4729), t4733), t4738), t4762), t4767), t4787), t4788), t4843)
-  finite_path_zigzag_right_terminal_c.set(@tactics.prove(@parser.parse_term("!p q m a.\n        (!i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (!i. i < 2 * m ==> q i < 2 * m) /\\\n        (!i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (!i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (!r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (!r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> a = m - 1 /\\\n            q(2 * m - 1) = 2 * m - 1 /\\\n            p(2 * m - 1) = 0 /\\\n            (!r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))"), t4844))
+  finite_path_zigzag_right_terminal_c.set(@tactics.prove(@parser.parse_term("forall p q m a.\n        (forall i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (forall i. i < 2 * m ==> q i < 2 * m) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> a = m - 1 /\\\n            q(2 * m - 1) = 2 * m - 1 /\\\n            p(2 * m - 1) = 0 /\\\n            (forall r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))"), t4844))
 }
 
 ///|
@@ -7178,7 +7178,7 @@ fn step_74() -> Unit raise {
   let t4846 = @tactics.exists_tac(@parser.parse_term("\\i. if i = 0 then (q:num->A)(k - 1)\n        else q(r + i - 1)"))
   let t4845 = @theorems.intro_tac("positive rlt bound distinct terminal path")
   let t4893 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4845), t4846), t4847), t4892)
-  path_terminal_tail_cycle_c.set(@tactics.prove(@parser.parse_term("!v e (q:num->A) k r.\n        0 < k /\\\n        r < k /\\\n        (!i. i < k ==> v(q i)) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        e (q(k - 1)) (q r) /\\\n        (!i. i < k ==> e (q i) (q(i + 1)))\n        ==> ?u.\n              (!i. i <= k - r ==> v(u i)) /\\\n              u 0 = u(k - r) /\\\n              (!i. 0 < i /\\ i < k - r ==> ~(u i = u 0)) /\\\n              (!i. i < k - r ==> e (u i) (u(i + 1)))"), t4893))
+  path_terminal_tail_cycle_c.set(@tactics.prove(@parser.parse_term("forall v e (q:num->A) k r.\n        0 < k /\\\n        r < k /\\\n        (forall i. i < k ==> v(q i)) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        e (q(k - 1)) (q r) /\\\n        (forall i. i < k ==> e (q i) (q(i + 1)))\n        ==> ?u.\n              (forall i. i <= k - r ==> v(u i)) /\\\n              u 0 = u(k - r) /\\\n              (forall i. 0 < i /\\ i < k - r ==> ~(u i = u 0)) /\\\n              (forall i. i < k - r ==> e (u i) (u(i + 1)))"), t4893))
 }
 
 ///|
@@ -7253,7 +7253,7 @@ fn step_75() -> Unit raise {
   let t4895 = @tactics.x_gen_tac(@parser.parse_term("s:num"))
   let t4894 = @theorems.intro_tac("positive bound distinct path terminal")
   let t4941 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4894), t4895), t4896), t4901), @tactics.ants_tac), t4925), t4930), t4935), t4936), t4939), t4940)
-  finite_path_terminal_even_cycles_c.set(@tactics.prove(@parser.parse_term("!v e (q:num->A) m.\n        0 < m /\\\n        (!i. i < 2 * m ==> v(q i)) /\\\n        (!i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (!i. i < 2 * m ==> e (q i) (q(i + 1))) /\\\n        (!r. r < m ==> e (q(2 * m - 1)) (q(2 * r)))\n        ==> !s. 0 < s /\\ s <= m\n                ==> ?u.\n                      (!i. i <= 2 * s ==> v(u i)) /\\\n                      u 0 = u(2 * s) /\\\n                      (!i. 0 < i /\\ i < 2 * s\n                           ==> ~(u i = u 0)) /\\\n                      (!i. i < 2 * s ==> e (u i) (u(i + 1)))"), t4941))
+  finite_path_terminal_even_cycles_c.set(@tactics.prove(@parser.parse_term("forall v e (q:num->A) m.\n        0 < m /\\\n        (forall i. i < 2 * m ==> v(q i)) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i. i < 2 * m ==> e (q i) (q(i + 1))) /\\\n        (forall r. r < m ==> e (q(2 * m - 1)) (q(2 * r)))\n        ==> forall s. 0 < s /\\ s <= m\n                ==> ?u.\n                      (forall i. i <= 2 * s ==> v(u i)) /\\\n                      u 0 = u(2 * s) /\\\n                      (forall i. 0 < i /\\ i < 2 * s\n                           ==> ~(u i = u 0)) /\\\n                      (forall i. i < 2 * s ==> e (u i) (u(i + 1)))"), t4941))
 }
 
 ///|
@@ -7332,7 +7332,7 @@ fn step_76() -> Unit raise {
   })
   let t4942 = @theorems.intro_tac("bound distinct")
   let t4996 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4942), t4947), t4982), t4987), t4992), t4994), t4995)
-  finite_injective_index_bound_c.set(@tactics.prove(@parser.parse_term("!q (k:num) (n:num).\n        (!i. i < k ==> q i < n) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k <= n"), t4996))
+  finite_injective_index_bound_c.set(@tactics.prove(@parser.parse_term("forall q (k:num) (n:num).\n        (forall i. i < k ==> q i < n) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k <= n"), t4996))
 }
 
 ///|
@@ -7368,7 +7368,7 @@ fn step_77() -> Unit raise {
   let t5000 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("q:num->num"), t4999, t4998]), finite_injective_index_bound()))
   let t4997 = @theorems.intro_tac("positive bound distinct")
   let t5013 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4997), t5000), @tactics.ants_tac), t5012)
-  finite_simple_cycle_length_c.set(@tactics.prove(@parser.parse_term("!q (k:num) (n:num).\n        0 < k /\\\n        (!i. i < k ==> q i + 1 < n) /\\\n        (!i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k < n"), t5013))
+  finite_simple_cycle_length_c.set(@tactics.prove(@parser.parse_term("forall q (k:num) (n:num).\n        0 < k /\\\n        (forall i. i < k ==> q i + 1 < n) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k < n"), t5013))
 }
 
 ///|
@@ -7440,7 +7440,7 @@ fn step_78() -> Unit raise {
   let t5014 = @parser.parse_term("n:num")
   let t5015 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t5014]), finite_odd_cyclic_return_cycle()))
   let t5063 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t5015), @tactics.ants_tac), t5018), t5019), t5024), t5025), t5028), @tactics.ants_tac), t5037), t5042), t5049), t5054), t5055), t5060), t5061), t5062)
-  finite_odd_cyclic_shortest_cycle_c.set(@tactics.prove(@parser.parse_term("!p n.\n        ODD n /\\\n        2 < n /\\\n        (!i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              k < n /\\\n              (!r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (!r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t5063))
+  finite_odd_cyclic_shortest_cycle_c.set(@tactics.prove(@parser.parse_term("forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              k < n /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t5063))
 }
 
 ///|
@@ -7476,7 +7476,7 @@ fn step_79() -> Unit raise {
   let t5081 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realanalysis.real_bounded_subset()), t5065), t5066), t5067), t5080])
   let t5064 = @simp.rewrite_tac(@list.List([@metric.real_compact_eq_bounded_closed()]))
   let t5082 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5064), @tactics.conj_tac), t5081)
-  real_compact_levelset_c.set(@tactics.prove(@parser.parse_term("!f s y.\n        real_compact s /\\ f real_continuous_on s\n        ==> real_compact {x | x IN s /\\ f x = y}"), t5082))
+  real_compact_levelset_c.set(@tactics.prove(@parser.parse_term("forall f s y.\n        real_compact s /\\ f real_continuous_on s\n        ==> real_compact {x | x IN s /\\ f x = y}"), t5082))
 }
 
 ///|
@@ -7512,7 +7512,7 @@ fn step_80() -> Unit raise {
   let t5084 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t5083 = @theorems.intro_tac("ab cd continuous ends")
   let t5103 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5083), t5084), t5085), t5086), @tactics.disch_tac), t5087), t5097), t5098), t5099), t5100), t5101), t5102)
-  real_interval_endpoints_cover_c.set(@tactics.prove(@parser.parse_term("!f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        ((f a <= c /\\ d <= f b) \\/ (f b <= c /\\ d <= f a))\n        ==> real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])"), t5103))
+  real_interval_endpoints_cover_c.set(@tactics.prove(@parser.parse_term("forall f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        ((f a <= c /\\ d <= f b) \\/ (f b <= c /\\ d <= f a))\n        ==> real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])"), t5103))
 }
 
 ///|
@@ -7557,7 +7557,7 @@ fn step_81() -> Unit raise {
   let t5105 = @theorems.intro_tac("ordered ibound jbound distinct left right")
   let t5104 = @simp.rewrite_tac(@list.List([@misc.in_real_interval()]))
   let t5127 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5104), t5105), t5106), t5126)
-  real_interval_adjacent_intersection_c.set(@tactics.prove(@parser.parse_term("!z n i j x.\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        x IN real_interval[z i,z(i + 1)] /\\\n        x IN real_interval[z j,z(j + 1)]\n        ==> (i + 1 = j /\\ x = z j) \\/\n            (j + 1 = i /\\ x = z i)"), t5127))
+  real_interval_adjacent_intersection_c.set(@tactics.prove(@parser.parse_term("forall z n i j x.\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        x IN real_interval[z i,z(i + 1)] /\\\n        x IN real_interval[z j,z(j + 1)]\n        ==> (i + 1 = j /\\ x = z j) \\/\n            (j + 1 = i /\\ x = z i)"), t5127))
 }
 
 ///|
@@ -7623,7 +7623,7 @@ fn step_82() -> Unit raise {
   let t5135 = @class.asm_cases_tac(@parser.parse_term("(r:num) = s"))
   let t5134 = @parser.parse_term("s:num")
   let t5143 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("r:num"), t5134])), @tactics.strip_tac), t5135), t5136), t5137), t5142), @int.asm_arith_tac), @tactics.all_tac])
-  let t5133 = @tactics.subgoal_then(@parser.parse_term("!r s. r <= s /\\ s < n ==> (z:num->real) r <= z s"), fn(x5130 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5133 = @tactics.subgoal_then(@parser.parse_term("forall r s. r <= s /\\ s < n ==> (z:num->real) r <= z s"), fn(x5130 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5131 = ((x5129 : @kernel.Thm) => @tactics.label_tac("monotone", x5129))(x5130)
     fn(x5132 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s5131(x5132)
@@ -7631,7 +7631,7 @@ fn step_82() -> Unit raise {
   })
   let t5128 = @theorems.intro_tac(("continuous ordered ibound jbound pibound psibound " + "fi fsi straddles"))
   let t5184 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5128), t5133), t5143), t5144), t5145), t5183)
-  real_interval_ordered_cover_c.set(@tactics.prove(@parser.parse_term("!f z p n i j.\n        f real_continuous_on (:real) /\\\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        p i < n /\\\n        p(i + 1) < n /\\\n        f(z i) = z(p i) /\\\n        f(z(i + 1)) = z(p(i + 1)) /\\\n        adjacent_interval_cover p i j\n        ==> real_interval[z j,z(j + 1)]\n            SUBSET IMAGE f (real_interval[z i,z(i + 1)])"), t5184))
+  real_interval_ordered_cover_c.set(@tactics.prove(@parser.parse_term("forall f z p n i j.\n        f real_continuous_on (:real) /\\\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        p i < n /\\\n        p(i + 1) < n /\\\n        f(z i) = z(p i) /\\\n        f(z(i + 1)) = z(p(i + 1)) /\\\n        adjacent_interval_cover p i j\n        ==> real_interval[z j,z(j + 1)]\n            SUBSET IMAGE f (real_interval[z i,z(i + 1)])"), t5184))
 }
 
 ///|
@@ -7694,7 +7694,7 @@ fn step_83() -> Unit raise {
   let t5187 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t5186]), finite_cyclic_crossing()))
   let t5185 = @theorems.intro_tac("continuous nontrivial ordered cycle")
   let t5227 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5185), t5187), @tactics.ants_tac), t5205), t5206), t5211), t5212), t5217), t5218), @tactics.conj_tac), t5226)
-  real_interval_cyclic_selfcover_c.set(@tactics.prove(@parser.parse_term("!f z p n.\n        f real_continuous_on (:real) /\\\n        1 < n /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n\n             ==> p i < n /\\\n                 minimal_period p n i /\\\n                 f(z i) = z(p i))\n        ==> ?i.\n              i + 1 < n /\\\n              real_interval[z i,z(i + 1)]\n              SUBSET IMAGE f (real_interval[z i,z(i + 1)])"), t5227))
+  real_interval_cyclic_selfcover_c.set(@tactics.prove(@parser.parse_term("forall f z p n.\n        f real_continuous_on (:real) /\\\n        1 < n /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n\n             ==> p i < n /\\\n                 minimal_period p n i /\\\n                 f(z i) = z(p i))\n        ==> ?i.\n              i + 1 < n /\\\n              real_interval[z i,z(i + 1)]\n              SUBSET IMAGE f (real_interval[z i,z(i + 1)])"), t5227))
 }
 
 ///|
@@ -7809,7 +7809,7 @@ fn step_84() -> Unit raise {
   let t5336 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.asm_cases_tac(@parser.parse_term("c <= (f:real->real) z")), t5275), t5279), @tactics.ants_tac), t5284), t5285), t5290), t5291), t5299), @tactics.disch_tac), t5300), t5304), @calc_rat.asm_real_arith_tac), t5335])
   let t5274 = @simp.rewrite_tac(@list.List([@misc.in_real_interval()]))
   let t5337 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("z:real")), t5274), @tactics.strip_tac), @tactics.conj_tac), t5336), @tactics.all_tac])
-  let t5273 = @tactics.subgoal_then(@parser.parse_term("!z. z IN real_interval[u,v]\n        ==> c <= (f:real->real) z /\\ f z <= d"), fn(x5270 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5273 = @tactics.subgoal_then(@parser.parse_term("forall z. z IN real_interval[u,v]\n        ==> c <= (f:real->real) z /\\ f z <= d"), fn(x5270 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5271 = ((x5269 : @kernel.Thm) => @tactics.label_tac("bounds", x5269))(x5270)
     fn(x5272 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s5271(x5272)
@@ -7865,7 +7865,7 @@ fn step_84() -> Unit raise {
     }
   })
   let t5360 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5231), t5233), t5234), @tactics.ants_tac), t5238), t5239), t5243), t5248), t5252), t5254), t5255), @tactics.ants_tac), t5260), t5261), t5266), t5267), t5268), @list.List([@calc_rat.asm_real_arith_tac, @calc_rat.asm_real_arith_tac, @calc_rat.asm_real_arith_tac, @tactics.all_tac])), t5273), t5337), t5338), @tactics.conj_tac), t5359)
-  real_interval_endpoints_subinterval_c.set(@tactics.prove(@parser.parse_term("!f x y c d.\n        x < y /\\\n        c < d /\\\n        f real_continuous_on real_interval[x,y] /\\\n        f x = c /\\\n        f y = d\n        ==> ?u v.\n              x <= u /\\ u <= v /\\ v <= y /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]"), t5360))
+  real_interval_endpoints_subinterval_c.set(@tactics.prove(@parser.parse_term("forall f x y c d.\n        x < y /\\\n        c < d /\\\n        f real_continuous_on real_interval[x,y] /\\\n        f x = c /\\\n        f y = d\n        ==> ?u v.\n              x <= u /\\ u <= v /\\ v <= y /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]"), t5360))
 }
 
 ///|
@@ -8025,7 +8025,7 @@ fn step_85() -> Unit raise {
   let t5362 = @class.asm_cases_tac(@parser.parse_term("c:real = d"))
   let t5361 = @theorems.intro_tac("ab cd continuous cover")
   let t5477 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5361), t5362), t5388), t5392), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t5396), t5401), t5403), t5407), t5411), t5412), t5434), t5438), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t5443), @tactics.ants_tac), t5450), t5451), t5456), t5457), t5459), t5463), t5468), t5475), t5476)
-  real_interval_cover_subinterval_c.set(@tactics.prove(@parser.parse_term("!f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a,b] /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]"), t5477))
+  real_interval_cover_subinterval_c.set(@tactics.prove(@parser.parse_term("forall f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a,b] /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]"), t5477))
 }
 
 ///|
@@ -8079,7 +8079,7 @@ fn step_86() -> Unit raise {
     }
   })
   let t5511 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5481), t5485), t5489), t5490), t5493), @tactics.ants_tac), t5501), t5505), t5506), t5507), t5508), t5509), t5510), @calc_rat.asm_real_arith_tac)
-  real_continuous_on_fixpoint_c.set(@tactics.prove(@parser.parse_term("!f s.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        (?x. x IN s /\\ f x <= x) /\\\n        (?y. y IN s /\\ y <= f y)\n        ==> ?x. x IN s /\\ f x = x"), t5511))
+  real_continuous_on_fixpoint_c.set(@tactics.prove(@parser.parse_term("forall f s.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        (?x. x IN s /\\ f x <= x) /\\\n        (?y. y IN s /\\ y <= f y)\n        ==> ?x. x IN s /\\ f x = x"), t5511))
 }
 
 ///|
@@ -8146,7 +8146,7 @@ fn step_87() -> Unit raise {
   let t5513 = @tactics.match_mp_tac(real_continuous_on_fixpoint())
   let t5512 = @theorems.intro_tac("endpoints continuous cover")
   let t5553 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5512), t5513), t5514), @tactics.conj_tac), t5552)
-  real_interval_cover_fixpoint_c.set(@tactics.prove(@parser.parse_term("!f a b.\n        a <= b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[a,b] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?x. x IN real_interval[a,b] /\\ f x = x"), t5553))
+  real_interval_cover_fixpoint_c.set(@tactics.prove(@parser.parse_term("forall f a b.\n        a <= b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[a,b] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?x. x IN real_interval[a,b] /\\ f x = x"), t5553))
 }
 
 ///|
@@ -8181,7 +8181,7 @@ fn step_88() -> Unit raise {
   let t5554 = @simp.rewrite_tac(@list.List([@iter.iter_pointless(), @trivia.i_def(), @realanalysis.real_continuous_on_id()]))
   let t5571 = @list.List([@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5554), t5570])
   let t5572 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t5571)
-  real_continuous_on_iter_c.set(@tactics.prove(@parser.parse_term("!f n s.\n        f real_continuous_on (:real)\n        ==> ITER n f real_continuous_on s"), t5572))
+  real_continuous_on_iter_c.set(@tactics.prove(@parser.parse_term("forall f n s.\n        f real_continuous_on (:real)\n        ==> ITER n f real_continuous_on s"), t5572))
 }
 
 ///|
@@ -8323,7 +8323,7 @@ fn step_89() -> Unit raise {
   let t5573 = @parser.parse_term("b:num->real")
   let t5601 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:num->real"), t5573])), t5574), t5579), t5580), t5592), t5600])
   let t5682 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t5601), t5609), @tactics.ants_tac), t5620), t5625), t5626), t5631), @tactics.ants_tac), t5655), t5656), t5661), t5662), t5681)
-  real_interval_cover_chain_c.set(@tactics.prove(@parser.parse_term("!f n a b.\n        f real_continuous_on (:real) /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i]))\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a 0,b 0] /\\\n              IMAGE (ITER n f) (real_interval[u,v]) =\n              real_interval[a n,b n] /\\\n              !i. i <= n\n                  ==> IMAGE (ITER i f) (real_interval[u,v])\n                      SUBSET real_interval[a i,b i]"), t5682))
+  real_interval_cover_chain_c.set(@tactics.prove(@parser.parse_term("forall f n a b.\n        f real_continuous_on (:real) /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i]))\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a 0,b 0] /\\\n              IMAGE (ITER n f) (real_interval[u,v]) =\n              real_interval[a n,b n] /\\\n              forall i. i <= n\n                  ==> IMAGE (ITER i f) (real_interval[u,v])\n                      SUBSET real_interval[a i,b i]"), t5682))
 }
 
 ///|
@@ -8394,7 +8394,7 @@ fn step_90() -> Unit raise {
   let t5687 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t5686, t5685, t5684]), real_interval_cover_chain()))
   let t5683 = @theorems.intro_tac("continuous endpoints covers closeda closedb")
   let t5731 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5683), t5687), @tactics.ants_tac), t5688), t5689), t5693), t5700), t5703), @tactics.ants_tac), t5706), t5707), t5708), t5709), t5730)
-  real_interval_cover_cycle_c.set(@tactics.prove(@parser.parse_term("!f n a b.\n        f real_continuous_on (:real) /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0\n        ==> ?x.\n              x IN real_interval[a 0,b 0] /\\\n              ITER n f x = x /\\\n              !i. i <= n ==> ITER i f x IN real_interval[a i,b i]"), t5731))
+  real_interval_cover_cycle_c.set(@tactics.prove(@parser.parse_term("forall f n a b.\n        f real_continuous_on (:real) /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0\n        ==> ?x.\n              x IN real_interval[a 0,b 0] /\\\n              ITER n f x = x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]"), t5731))
 }
 
 ///|
@@ -8529,7 +8529,7 @@ fn step_91() -> Unit raise {
   let t5736 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t5735, t5734, t5733]), real_interval_cover_cycle()))
   let t5732 = @theorems.intro_tac("continuous positive endpoints covers closeda closedb separated")
   let t5823 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5732), t5736), @tactics.ants_tac), t5737), t5738), t5741), t5742), t5743), t5747), t5753), t5757), t5820), t5821), t5822)
-  real_interval_cover_cycle_minimal_period_gen_c.set(@tactics.prove(@parser.parse_term("!f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (!i x.\n             0 < i /\\ i < n /\\\n             x IN real_interval[a 0,b 0] /\\\n             x IN real_interval[a i,b i]\n             ==> ~(ITER i f x = x))\n        ==> ?x.\n              minimal_period f n x /\\\n              !i. i <= n ==> ITER i f x IN real_interval[a i,b i]"), t5823))
+  real_interval_cover_cycle_minimal_period_gen_c.set(@tactics.prove(@parser.parse_term("forall f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (forall i x.\n             0 < i /\\ i < n /\\\n             x IN real_interval[a 0,b 0] /\\\n             x IN real_interval[a i,b i]\n             ==> ~(ITER i f x = x))\n        ==> ?x.\n              minimal_period f n x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]"), t5823))
 }
 
 ///|
@@ -8770,7 +8770,7 @@ fn step_92() -> Unit raise {
   let t5828 = @tactics.mp_tac(@equal.beta_rule(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t5827, t5826, t5825]), real_interval_cover_cycle_minimal_period_gen())))
   let t5824 = @theorems.intro_tac(("continuous ordered transition oldminimal positive short " + "bound closed first covers"))
   let t6004 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5824), t5828), @tactics.ants_tac), t6003)
-  real_interval_ordered_first_return_cycle_c.set(@tactics.prove(@parser.parse_term("!f z p n k q.\n        f real_continuous_on (:real) /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (!i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (!r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x"), t6004))
+  real_interval_ordered_first_return_cycle_c.set(@tactics.prove(@parser.parse_term("forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x"), t6004))
 }
 
 ///|
@@ -9068,7 +9068,7 @@ fn step_93() -> Unit raise {
   let t6009 = @tactics.mp_tac(@equal.beta_rule(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6008, t6007, t6006]), real_interval_cover_cycle())))
   let t6005 = @theorems.intro_tac(("continuous ordered transition oldminimal positive " + "nonmultiple bound closed first covers"))
   let t6230 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6005), t6009), @tactics.ants_tac), t6084), t6087), @tactics.ants_tac), t6089), t6093), t6099), t6103), t6224), t6225), t6229)
-  real_interval_ordered_first_return_cycle_nonmultiple_c.set(@tactics.prove(@parser.parse_term("!f z p n k q.\n        f real_continuous_on (:real) /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (!i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        ~(n divides k) /\\\n        (!r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (!r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x"), t6230))
+  real_interval_ordered_first_return_cycle_nonmultiple_c.set(@tactics.prove(@parser.parse_term("forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        ~(n divides k) /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x"), t6230))
 }
 
 ///|
@@ -9165,7 +9165,7 @@ fn step_94() -> Unit raise {
   let t6237 = @tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6236, t6235, t6234, t6233, t6232]), real_interval_ordered_first_return_cycle()))
   let t6231 = @theorems.intro_tac(("continuous ordered transition oldminimal positive short " + "bound closed distinct covers"))
   let t6291 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6231), t6237), t6238), t6290)
-  real_interval_ordered_simple_cycle_c.set(@tactics.prove(@parser.parse_term("!f z p n k q.\n        f real_continuous_on (:real) /\\\n        (!i j. i < j /\\ j < n ==> z i < z j) /\\\n        (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (!i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (!r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n        (!r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x"), t6291))
+  real_interval_ordered_simple_cycle_c.set(@tactics.prove(@parser.parse_term("forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x"), t6291))
 }
 
 ///|
@@ -9208,7 +9208,7 @@ fn step_95() -> Unit raise {
   let t6293 = @tactics.match_mp_tac(real_interval_cover_cycle_minimal_period_gen())
   let t6292 = @theorems.intro_tac(("continuous positive endpoints covers closedleft closedright " + "separated"))
   let t6315 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6292), t6293), t6294), t6296), t6297), t6302), t6307), t6313), t6314)
-  real_interval_cover_cycle_minimal_period_c.set(@tactics.prove(@parser.parse_term("!f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (!i. i <= n ==> a i <= b i) /\\\n        (!i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (!i. 0 < i /\\ i < n\n             ==> DISJOINT (real_interval[a 0,b 0])\n                          (real_interval[a i,b i]))\n        ==> ?x.\n              minimal_period f n x /\\\n              !i. i <= n ==> ITER i f x IN real_interval[a i,b i]"), t6315))
+  real_interval_cover_cycle_minimal_period_c.set(@tactics.prove(@parser.parse_term("forall f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (forall i. 0 < i /\\ i < n\n             ==> DISJOINT (real_interval[a 0,b 0])\n                          (real_interval[a i,b i]))\n        ==> ?x.\n              minimal_period f n x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]"), t6315))
 }
 
 ///|
@@ -9255,7 +9255,7 @@ fn step_96() -> Unit raise {
   let t6364 = @parser.parse_term("n:num")
   let t6365 = @tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6364, t6363, t6362]), minimal_period_orbit_minimal()))
   let t6376 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:num")), @tactics.disch_tac), t6365), @tactics.conj_tac), t6375), @tactics.all_tac])
-  let t6361 = @tactics.subgoal_then(@parser.parse_term("!i. i < n\n        ==> minimal_period (f:real->real) n ((z:num->real) i)"), fn(x6358 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6361 = @tactics.subgoal_then(@parser.parse_term("forall i. i < n\n        ==> minimal_period (f:real->real) n ((z:num->real) i)"), fn(x6358 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6359 = ((x6357 : @kernel.Thm) => @tactics.label_tac("oldminimal", x6357))(x6358)
     fn(x6360 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6359(x6360)
@@ -9275,7 +9275,7 @@ fn step_96() -> Unit raise {
     })(((x6349 : @kernel.Thm) => @bool.spec(t6348, x6349))(x6350))
   }), @tactics.ants_tac), t6352), t6354])
   let t6356 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:num")), @tactics.disch_tac), @tactics.conj_tac), t6355), @tactics.all_tac])
-  let t6344 = @tactics.subgoal_then(@parser.parse_term("!i. i < n\n        ==> (p:num->num) i < n /\\ minimal_period p n i"), fn(x6341 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6344 = @tactics.subgoal_then(@parser.parse_term("forall i. i < n\n        ==> (p:num->num) i < n /\\ minimal_period p n i"), fn(x6341 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6342 = ((x6340 : @kernel.Thm) => @tactics.label_tac("cycle", x6340))(x6341)
     fn(x6343 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6342(x6343)
@@ -9287,7 +9287,7 @@ fn step_96() -> Unit raise {
   let t6336 = @parser.parse_term("x:real")
   let t6337 = @parser.parse_term("n:num")
   let t6339 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6337, t6336, t6335, t6334]), minimal_period_ordered_orbit_transition_minimal())), t6338), @tactics.all_tac])
-  let t6333 = @tactics.subgoal_then(@parser.parse_term("!i. i < n ==> minimal_period (p:num->num) n i"), fn(x6330 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6333 = @tactics.subgoal_then(@parser.parse_term("forall i. i < n ==> minimal_period (p:num->num) n i"), fn(x6330 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6331 = ((x6329 : @kernel.Thm) => @tactics.label_tac("pminimal", x6329))(x6330)
     fn(x6332 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6331(x6332)
@@ -9307,7 +9307,7 @@ fn step_96() -> Unit raise {
   let t6317 = @theorems.intro_tac("odd nontrivial @x. minimal")
   let t6316 = @simp.rewrite_tac(@list.List([has_period()]))
   let t6389 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6316), t6317), t6321), t6322), t6326), @tactics.ants_tac), t6328), t6333), t6339), t6344), t6356), t6361), t6376), t6378), @tactics.ants_tac), t6380), t6387), t6388)
-  odd_period_ordered_simple_cycle_c.set(@tactics.prove(@parser.parse_term("!f n.\n        ODD n /\\\n        2 < n /\\\n        has_period f n\n        ==> ?z p k q.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (!i. i < n ==> minimal_period f n (z i)) /\\\n              (!i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              1 < k /\\\n              k < n /\\\n              (!r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (!r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (!r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t6389))
+  odd_period_ordered_simple_cycle_c.set(@tactics.prove(@parser.parse_term("forall f n.\n        ODD n /\\\n        2 < n /\\\n        has_period f n\n        ==> ?z p k q.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              1 < k /\\\n              k < n /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t6389))
 }
 
 ///|
@@ -9386,7 +9386,7 @@ fn step_97() -> Unit raise {
   let t6392 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6391]), odd_period_ordered_simple_cycle()))
   let t6390 = @theorems.intro_tac("continuous odd nontrivial period larger nonmultiple")
   let t6444 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6390), t6392), @tactics.ants_tac), t6394), t6399), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t6404), @tactics.ants_tac), t6406), t6411), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t6414), t6420), @tactics.ants_tac), t6437), t6438), t6439), t6443)
-  odd_period_imp_larger_nonmultiple_period_c.set(@tactics.prove(@parser.parse_term("!f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m /\\\n        ~(n divides m)\n        ==> has_period f m"), t6444))
+  odd_period_imp_larger_nonmultiple_period_c.set(@tactics.prove(@parser.parse_term("forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m /\\\n        ~(n divides m)\n        ==> has_period f m"), t6444))
 }
 
 ///|
@@ -9503,7 +9503,7 @@ fn step_98() -> Unit raise {
   let t6446 = @class.asm_cases_tac(@parser.parse_term("(n:num) divides m"))
   let t6445 = @theorems.intro_tac("continuous odd nontrivial period larger")
   let t6536 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6445), t6446), t6450), t6455), t6458), t6459), t6535)
-  odd_period_imp_larger_period_c.set(@tactics.prove(@parser.parse_term("!f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m\n        ==> has_period f m"), t6536))
+  odd_period_imp_larger_period_c.set(@tactics.prove(@parser.parse_term("forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m\n        ==> has_period f m"), t6536))
 }
 
 ///|
@@ -9675,7 +9675,7 @@ fn step_99() -> Unit raise {
   let t6539 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6538]), odd_period_ordered_simple_cycle()))
   let t6537 = @theorems.intro_tac("continuous odd nontrivial period least")
   let t6666 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6537), t6539), @tactics.ants_tac), t6541), t6547), @tactics.ants_tac), t6561), t6566), t6572), t6577), t6655), t6658), t6664), t6665)
-  least_odd_period_ordered_cycle_c.set(@tactics.prove(@parser.parse_term("!f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (!m. ODD m /\\ 1 < m /\\ m < n ==> ~has_period f m)\n        ==> ?z p q.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (!i. i < n ==> minimal_period f n (z i)) /\\\n              (!i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              (!r. r <= n - 1 ==> q r + 1 < n) /\\\n              q 0 = q(n - 1) /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (!r s. r < s /\\ s < n - 1 ==> ~(q r = q s)) /\\\n              (!r s. r + 1 < s /\\ s < n - 1\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (!r. 0 < r /\\ r + 1 < n - 1\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (!r. r < n - 1\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t6666))
+  least_odd_period_ordered_cycle_c.set(@tactics.prove(@parser.parse_term("forall f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (forall m. ODD m /\\ 1 < m /\\ m < n ==> ~has_period f m)\n        ==> ?z p q.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              (forall r. r <= n - 1 ==> q r + 1 < n) /\\\n              q 0 = q(n - 1) /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < n - 1 ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < n - 1\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < n - 1\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < n - 1\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))"), t6666))
 }
 
 ///|
@@ -9785,7 +9785,7 @@ fn step_100() -> Unit raise {
   let t6668 = @theorems.intro_tac("@x. minimal")
   let t6667 = @simp.rewrite_tac(@list.List([has_period()]))
   let t6745 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6667), t6668), t6671), t6672), t6673), t6677), t6678), t6679), t6684), t6685), t6690), t6695), t6696), t6744)
-  has_period_ordered_cycle_c.set(@tactics.prove(@parser.parse_term("!f n.\n        has_period (f:real->real) n\n        ==> ?z p.\n              (!i j. i < j /\\ j < n ==> z i < z j) /\\\n              (!i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (!i. i < n ==> minimal_period f n (z i)) /\\\n              (!i. i < n ==> p i < n /\\ minimal_period p n i)"), t6745))
+  has_period_ordered_cycle_c.set(@tactics.prove(@parser.parse_term("forall f n.\n        has_period (f:real->real) n\n        ==> ?z p.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n ==> p i < n /\\ minimal_period p n i)"), t6745))
 }
 
 ///|
@@ -10057,7 +10057,7 @@ fn step_101() -> Unit raise {
       s6748(x6749)
     }
   })), t6754), t6763), t6768), t6778), t6783), t6809), t6814), t6841), t6846), t6874), t6879), t6887), t6892), t6900), t6905), t6913), t6918), t6926), t6930), t6934), t6938), t6942), t6943), t6944), t6945), t6946), t6947), t6948), t6949), @int.asm_arith_tac)
-  finite_cyclic_4_two_cycle_c.set(@tactics.prove(@parser.parse_term("!p.\n        (!i. i < 4 ==> p i < 4 /\\ minimal_period p 4 i)\n        ==> (adjacent_interval_cover p 0 1 /\\\n             adjacent_interval_cover p 1 0) \\/\n            (adjacent_interval_cover p 0 2 /\\\n             adjacent_interval_cover p 2 0) \\/\n            (adjacent_interval_cover p 1 2 /\\\n             adjacent_interval_cover p 2 1)"), t6950))
+  finite_cyclic_4_two_cycle_c.set(@tactics.prove(@parser.parse_term("forall p.\n        (forall i. i < 4 ==> p i < 4 /\\ minimal_period p 4 i)\n        ==> (adjacent_interval_cover p 0 1 /\\\n             adjacent_interval_cover p 1 0) \\/\n            (adjacent_interval_cover p 0 2 /\\\n             adjacent_interval_cover p 2 0) \\/\n            (adjacent_interval_cover p 1 2 /\\\n             adjacent_interval_cover p 2 1)"), t6950))
 }
 
 ///|
@@ -10095,7 +10095,7 @@ fn step_102() -> Unit raise {
   let t6955 = @parser.parse_term("z:num->real")
   let t6956 = @tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6955, t6954, t6953, t6952, t6951]), real_interval_ordered_simple_cycle()))
   let t6973 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t6956), t6972)
-  real_interval_ordered_two_cycle_c.set(@tactics.prove(@parser.parse_term("!f z p n i j.\n        f real_continuous_on (:real) /\\\n        (!r s. r < s /\\ s < n ==> z r < z s) /\\\n        (!r. r < n ==> p r < n /\\ f(z r) = z(p r)) /\\\n        (!r. r < n ==> minimal_period f n (z r)) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p j i\n        ==> ?x. minimal_period f 2 x"), t6973))
+  real_interval_ordered_two_cycle_c.set(@tactics.prove(@parser.parse_term("forall f z p n i j.\n        f real_continuous_on (:real) /\\\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        (forall r. r < n ==> p r < n /\\ f(z r) = z(p r)) /\\\n        (forall r. r < n ==> minimal_period f n (z r)) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p j i\n        ==> ?x. minimal_period f 2 x"), t6973))
 }
 
 ///|
@@ -10143,7 +10143,7 @@ fn step_103() -> Unit raise {
   let t6974 = @parser.parse_term("4")
   let t6975 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t6974]), has_period_ordered_cycle()))
   let t7006 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @theorems.intro_tac("continuous period")), t6975), t6976), t6977), t6978), t6979), t6980), t6981), t7005)
-  period_4_imp_period_2_c.set(@tactics.prove(@parser.parse_term("!f. f real_continuous_on (:real) /\\ has_period f 4\n       ==> has_period f 2"), t7006))
+  period_4_imp_period_2_c.set(@tactics.prove(@parser.parse_term("forall f. f real_continuous_on (:real) /\\ has_period f 4\n       ==> has_period f 2"), t7006))
 }
 
 ///|
@@ -10176,7 +10176,7 @@ fn step_104() -> Unit raise {
   let t7027 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t7022), @int.asm_arith_tac), t7026])
   let t7021 = @class.asm_cases_tac(@parser.parse_term("(k:num) = 0"))
   let t7036 = @list.List([@tactics.thenl(@nums.induct_tac, @list.List([@int.arith_tac, @tactics.thenl(@tactics.then_tac(@theorems.intro_tac("positive bound"), t7021), t7027)])), t7035])
-  let t7020 = @tactics.subgoal_then(@parser.parse_term("!k. 0 < k /\\ k <= n ==> (x:num->real) 0 < x k"), fn(x7017 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7020 = @tactics.subgoal_then(@parser.parse_term("forall k. 0 < k /\\ k <= n ==> (x:num->real) 0 < x k"), fn(x7017 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7018 = ((x7016 : @kernel.Thm) => @tactics.label_tac("chain", x7016))(x7017)
     fn(x7019 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7018(x7019)
@@ -10184,7 +10184,7 @@ fn step_104() -> Unit raise {
   })
   let t7014 = @meson.asm_meson_tac(@list.List([@real.real_not_le()]))
   let t7015 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:num")), @tactics.disch_tac), t7014), @tactics.all_tac])
-  let t7013 = @tactics.subgoal_then(@parser.parse_term("!i. i < n ==> (x:num->real) i < x(SUC i)"), fn(x7010 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7013 = @tactics.subgoal_then(@parser.parse_term("forall i. i < n ==> (x:num->real) i < x(SUC i)"), fn(x7010 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7011 = ((x7009 : @kernel.Thm) => @tactics.label_tac("increasing", x7009))(x7010)
     fn(x7012 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7011(x7012)
@@ -10193,7 +10193,7 @@ fn step_104() -> Unit raise {
   let t7008 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
   let t7007 = @class.asm_cases_tac(@parser.parse_term("?i:num. i < n /\\ (x:num->real)(SUC i) <= x i"))
   let t7037 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t7007), t7008), t7013), t7015), t7020), t7036)
-  finite_real_cycle_descent_c.set(@tactics.prove(@parser.parse_term("!x n.\n        0 < n /\\ x n = x 0\n        ==> ?i. i < n /\\ x(SUC i) <= x i"), t7037))
+  finite_real_cycle_descent_c.set(@tactics.prove(@parser.parse_term("forall x n.\n        0 < n /\\ x n = x 0\n        ==> ?i. i < n /\\ x(SUC i) <= x i"), t7037))
 }
 
 ///|
@@ -10282,7 +10282,7 @@ fn step_105() -> Unit raise {
   })
   let t7038 = @theorems.intro_tac("continuous period")
   let t7098 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7038), t7044), t7045), t7047), t7048), t7053), t7063), t7068), t7078), t7080), @tactics.ants_tac), t7089), t7090), t7091), t7092), t7093), t7094), t7095), t7096), t7097)
-  has_period_imp_period_1_c.set(@tactics.prove(@parser.parse_term("!f n.\n        f real_continuous_on (:real) /\\ has_period f n\n        ==> has_period f 1"), t7098))
+  has_period_imp_period_1_c.set(@tactics.prove(@parser.parse_term("forall f n.\n        f real_continuous_on (:real) /\\ has_period f n\n        ==> has_period f 1"), t7098))
 }
 
 ///|
@@ -10583,7 +10583,7 @@ fn step_106() -> Unit raise {
   let t7179 = @parser.parse_term("q:num->num")
   let t7294 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:num->num"), t7179, t7178, t7177]), finite_path_zigzag_left_terminal())), @tactics.ants_tac), t7228), t7293])
   let t7295 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("(q:num->num) 1 < q 0")), t7294), @tactics.all_tac])
-  let t7176 = @tactics.subgoal_then(@parser.parse_term("!r. r < m\n        ==> adjacent_interval_cover (p:num->num)\n             (q(2 * m - 1)) (q(2 * r))"), fn(x7173 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7176 = @tactics.subgoal_then(@parser.parse_term("forall r. r < m\n        ==> adjacent_interval_cover (p:num->num)\n             (q(2 * m - 1)) (q(2 * r))"), fn(x7173 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7174 = ((x7172 : @kernel.Thm) => @tactics.label_tac("terminalcovers", x7172))(x7173)
     fn(x7175 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7174(x7175)
@@ -10616,7 +10616,7 @@ fn step_106() -> Unit raise {
     })(((x7154 : @kernel.Thm) => @bool.spec(t7153, x7154))(x7155))
   })
   let t7157 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:num")), @tactics.disch_tac), t7156), @tactics.ants_tac), @list.List([@int.asm_arith_tac, @int.arith_tac])), @tactics.all_tac])
-  let t7149 = @tactics.subgoal_then(@parser.parse_term("!i. i < 2 * m ==> (q:num->num) i < 2 * m"), fn(x7146 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7149 = @tactics.subgoal_then(@parser.parse_term("forall i. i < 2 * m ==> (q:num->num) i < 2 * m"), fn(x7146 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7147 = ((x7145 : @kernel.Thm) => @tactics.label_tac("qbound", x7145))(x7146)
     fn(x7148 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7147(x7148)
@@ -10633,7 +10633,7 @@ fn step_106() -> Unit raise {
     })(((x7140 : @kernel.Thm) => @bool.spec(t7139, x7140))(x7141))
   })
   let t7144 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("i:num")), @tactics.disch_tac), t7142), @tactics.ants_tac), t7143), @tactics.all_tac])
-  let t7135 = @tactics.subgoal_then(@parser.parse_term("!i. i <= 2 * m ==> (p:num->num) i <= 2 * m"), fn(x7132 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7135 = @tactics.subgoal_then(@parser.parse_term("forall i. i <= 2 * m ==> (p:num->num) i <= 2 * m"), fn(x7132 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7133 = ((x7131 : @kernel.Thm) => @tactics.label_tac("pbound", x7131))(x7132)
     fn(x7134 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7133(x7134)
@@ -10682,7 +10682,7 @@ fn step_106() -> Unit raise {
   let t7101 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t7100]), least_odd_period_ordered_cycle()))
   let t7099 = @theorems.intro_tac("continuous positive period least")
   let t7385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7099), t7101), @tactics.ants_tac), t7122), t7127), t7130), t7135), t7144), t7149), t7157), t7162), t7171), t7176), t7295), t7296), t7297), t7301), @tactics.ants_tac), t7339), t7345), @tactics.ants_tac), t7378), t7379), t7380), t7384)
-  least_odd_period_imp_even_periods_indexed_c.set(@tactics.prove(@parser.parse_term("!f m.\n        f real_continuous_on (:real) /\\\n        0 < m /\\\n        has_period f (2 * m + 1) /\\\n        (!d. ODD d /\\ 1 < d /\\ d < 2 * m + 1\n             ==> ~has_period f d)\n        ==> !s. 0 < s /\\ s <= m ==> has_period f (2 * s)"), t7385))
+  least_odd_period_imp_even_periods_indexed_c.set(@tactics.prove(@parser.parse_term("forall f m.\n        f real_continuous_on (:real) /\\\n        0 < m /\\\n        has_period f (2 * m + 1) /\\\n        (forall d. ODD d /\\ 1 < d /\\ d < 2 * m + 1\n             ==> ~has_period f d)\n        ==> forall s. 0 < s /\\ s <= m ==> has_period f (2 * s)"), t7385))
 }
 
 ///|
@@ -10752,7 +10752,7 @@ fn step_107() -> Unit raise {
   })
   let t7386 = @theorems.intro_tac("continuous odd nontrivial period least")
   let t7426 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7386), t7392), t7396), t7398), @tactics.ants_tac), t7423), t7424), @tactics.strip_tac), t7425), @int.asm_arith_tac)
-  least_odd_period_imp_even_periods_c.set(@tactics.prove(@parser.parse_term("!f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (!d. ODD d /\\ 1 < d /\\ d < n ==> ~has_period f d)\n        ==> !s. 0 < s /\\ 2 * s < n ==> has_period f (2 * s)"), t7426))
+  least_odd_period_imp_even_periods_c.set(@tactics.prove(@parser.parse_term("forall f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (forall d. ODD d /\\ 1 < d /\\ d < n ==> ~has_period f d)\n        ==> forall s. 0 < s /\\ 2 * s < n ==> has_period f (2 * s)"), t7426))
 }
 
 ///|
@@ -10816,7 +10816,7 @@ fn step_108() -> Unit raise {
   }), t7460), t7462), @tactics.ants_tac), t7472), t7486])
   let t7451 = @class.asm_cases_tac(@parser.parse_term("(m:num) < d"))
   let t7450 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
-  let t7449 = @tactics.subgoal_then(@parser.parse_term("!e. ODD e /\\ 1 < e /\\ e < d\n        ==> ~has_period (f:real->real) e"), fn(x7446 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t7449 = @tactics.subgoal_then(@parser.parse_term("forall e. ODD e /\\ 1 < e /\\ e < d\n        ==> ~has_period (f:real->real) e"), fn(x7446 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7447 = ((x7445 : @kernel.Thm) => @tactics.label_tac("leastodd", x7445))(x7446)
     fn(x7448 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7447(x7448)
@@ -10844,7 +10844,7 @@ fn step_108() -> Unit raise {
   let t7428 = @tactics.mp_tac(@equal.beta_rule(@bool.eq_imp_rule(@bool.spec(@parser.parse_term("\\d:num. ODD d /\\ 1 < d /\\ has_period (f:real->real) d"), @arith.num_wop())).0))
   let t7427 = @theorems.intro_tac("continuous odd nontrivial period even positive")
   let t7488 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7427), t7428), @tactics.ants_tac), t7431), t7436), t7444), t7449), t7450), t7451), t7487)
-  odd_period_imp_even_period_c.set(@tactics.prove(@parser.parse_term("!f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        1 < n /\\\n        has_period f n /\\\n        EVEN m /\\\n        0 < m\n        ==> has_period f m"), t7488))
+  odd_period_imp_even_period_c.set(@tactics.prove(@parser.parse_term("forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        1 < n /\\\n        has_period f n /\\\n        EVEN m /\\\n        0 < m\n        ==> has_period f m"), t7488))
 }
 
 ///|
@@ -10970,7 +10970,7 @@ fn step_109() -> Unit raise {
   let t7490 = @theorems.intro_tac("@x. square")
   let t7489 = @simp.rewrite_tac(@list.List([has_period()]))
   let t7573 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7489), t7490), t7495), t7501), t7506), t7512), t7515), @tactics.ants_tac), t7517), t7522), t7532), t7533), t7572)
-  has_period_square_cases_c.set(@tactics.prove(@parser.parse_term("!f:A->A m.\n        has_period (ITER 2 f) m\n        ==> (ODD m /\\ has_period f m) \\/ has_period f (2 * m)"), t7573))
+  has_period_square_cases_c.set(@tactics.prove(@parser.parse_term("forall f:A->A m.\n        has_period (ITER 2 f) m\n        ==> (ODD m /\\ has_period f m) \\/ has_period f (2 * m)"), t7573))
 }
 
 ///|
@@ -11029,7 +11029,7 @@ fn step_110() -> Unit raise {
   let t7574 = @parser.parse_term("m:num")
   let t7575 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t7574]), has_period_square_cases()))
   let t7610 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t7575), t7576), t7581), t7609)
-  has_period_square_imp_double_c.set(@tactics.prove(@parser.parse_term("!f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER 2 f) m\n        ==> has_period f (2 * m)"), t7610))
+  has_period_square_imp_double_c.set(@tactics.prove(@parser.parse_term("forall f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER 2 f) m\n        ==> has_period f (2 * m)"), t7610))
 }
 
 ///|
@@ -11096,7 +11096,7 @@ fn step_111() -> Unit raise {
   let t7612 = @parser.parse_term("(2 EXP a) * m")
   let t7613 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A->A"), t7612, t7611]), has_period_iter()))
   let t7652 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t7613), t7614), t7618), t7651)
-  has_period_power2_multiple_imp_iter_c.set(@tactics.prove(@parser.parse_term("!f:A->A a m.\n        has_period f ((2 EXP a) * m)\n        ==> has_period (ITER (2 EXP a) f) m"), t7652))
+  has_period_power2_multiple_imp_iter_c.set(@tactics.prove(@parser.parse_term("forall f:A->A a m.\n        has_period f ((2 EXP a) * m)\n        ==> has_period (ITER (2 EXP a) f) m"), t7652))
 }
 
 ///|
@@ -11216,7 +11216,7 @@ fn step_112() -> Unit raise {
     @simp.rewrite_tac(@list.List([@arith.exp(), @arith.mult_clauses(), th]))
   })
   let t7735 = @tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7655), t7656), t7657), t7734]))
-  has_period_iter_power2_imp_multiple_c.set(@tactics.prove(@parser.parse_term("!a f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER (2 EXP a) f) m\n        ==> has_period f ((2 EXP a) * m)"), t7735))
+  has_period_iter_power2_imp_multiple_c.set(@tactics.prove(@parser.parse_term("forall a f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER (2 EXP a) f) m\n        ==> has_period f ((2 EXP a) * m)"), t7735))
 }
 
 ///|
@@ -11328,7 +11328,7 @@ fn step_113() -> Unit raise {
   let t7737 = @class.asm_cases_tac(@parser.parse_term("(a:num) = 0"))
   let t7736 = @theorems.intro_tac("continuous period")
   let t7811 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7736), t7737), t7760), t7765), t7770), t7775), t7786), t7791), t7793), t7796), @tactics.ants_tac), t7802), t7809), t7810)
-  has_period_power2_suc_imp_power2_c.set(@tactics.prove(@parser.parse_term("!f a.\n        f real_continuous_on (:real) /\\\n        has_period f (2 EXP (SUC a))\n        ==> has_period f (2 EXP a)"), t7811))
+  has_period_power2_suc_imp_power2_c.set(@tactics.prove(@parser.parse_term("forall f a.\n        f real_continuous_on (:real) /\\\n        has_period f (2 EXP (SUC a))\n        ==> has_period f (2 EXP a)"), t7811))
 }
 
 ///|
@@ -11381,7 +11381,7 @@ fn step_114() -> Unit raise {
   })
   let t7841 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("b:num")), @tactics.strip_tac), t7815), t7816), t7840])
   let t7842 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t7841)
-  has_period_power2_mono_c.set(@tactics.prove(@parser.parse_term("!f a b.\n        f real_continuous_on (:real) /\\\n        b <= a /\\\n        has_period f (2 EXP a)\n        ==> has_period f (2 EXP b)"), t7842))
+  has_period_power2_mono_c.set(@tactics.prove(@parser.parse_term("forall f a b.\n        f real_continuous_on (:real) /\\\n        b <= a /\\\n        has_period f (2 EXP a)\n        ==> has_period f (2 EXP b)"), t7842))
 }
 
 ///|
@@ -11397,7 +11397,7 @@ pub fn has_period_power2_mono() -> @kernel.Thm {
 /// ODD_POS
 fn step_115() -> Unit raise {
   let t7843 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.odd_exists()])), @int.arith_tac)
-  odd_pos_c.set(@tactics.prove(@parser.parse_term("!n. ODD n ==> 0 < n"), t7843))
+  odd_pos_c.set(@tactics.prove(@parser.parse_term("forall n. ODD n ==> 0 < n"), t7843))
 }
 
 ///|
@@ -11437,7 +11437,7 @@ fn step_116() -> Unit raise {
   }), t7860])
   let t7844 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("1 < n /\\ ~(n = 2) ==> 2 < n")))
   let t7862 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @theorems.intro_tac("odd large")), t7844), @tactics.conj_tac), t7861)
-  odd_gt_1_imp_gt_2_c.set(@tactics.prove(@parser.parse_term("!n. ODD n /\\ 1 < n ==> 2 < n"), t7862))
+  odd_gt_1_imp_gt_2_c.set(@tactics.prove(@parser.parse_term("forall n. ODD n /\\ 1 < n ==> 2 < n"), t7862))
 }
 
 ///|
@@ -11477,7 +11477,7 @@ fn step_117() -> Unit raise {
   }), t7879])
   let t7863 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("0 < n /\\ ~(n = 1) ==> 1 < n")))
   let t7881 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @theorems.intro_tac("even positive")), t7863), @tactics.conj_tac), t7880)
-  even_pos_imp_gt_1_c.set(@tactics.prove(@parser.parse_term("!n. EVEN n /\\ 0 < n ==> 1 < n"), t7881))
+  even_pos_imp_gt_1_c.set(@tactics.prove(@parser.parse_term("forall n. EVEN n /\\ 0 < n ==> 1 < n"), t7881))
 }
 
 ///|
@@ -11494,7 +11494,7 @@ pub fn even_pos_imp_gt_1() -> @kernel.Thm {
 fn step_118() -> Unit raise {
   let t7882 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.exp_add())]))
   let t7883 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7882), @tactics.ap_term_tac), @int.asm_arith_tac)
-  power2_split_c.set(@tactics.prove(@parser.parse_term("!a b. a <= b\n          ==> 2 EXP a * 2 EXP (b - a) = 2 EXP b"), t7883))
+  power2_split_c.set(@tactics.prove(@parser.parse_term("forall a b. a <= b\n          ==> 2 EXP a * 2 EXP (b - a) = 2 EXP b"), t7883))
 }
 
 ///|
@@ -11784,7 +11784,7 @@ fn step_119() -> Unit raise {
   })
   let t7884 = @theorems.intro_tac("continuous uodd ularge vodd period later")
   let t8105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7884), t7889), t7894), t7899), t7906), t7911), t7913), t7914), t8013), t8018), t8025), t8029), t8032), t8104)
-  odd_factor_period_imp_later_period_c.set(@tactics.prove(@parser.parse_term("!f a u b v.\n        f real_continuous_on (:real) /\\\n        ODD u /\\\n        1 < u /\\\n        ODD v /\\\n        has_period f (2 EXP a * u) /\\\n        (v = 1 \\/ a < b \\/ a = b /\\ u < v)\n        ==> has_period f (2 EXP b * v)"), t8105))
+  odd_factor_period_imp_later_period_c.set(@tactics.prove(@parser.parse_term("forall f a u b v.\n        f real_continuous_on (:real) /\\\n        ODD u /\\\n        1 < u /\\\n        ODD v /\\\n        has_period f (2 EXP a * u) /\\\n        (v = 1 \\/ a < b \\/ a = b /\\ u < v)\n        ==> has_period f (2 EXP b * v)"), t8105))
 }
 
 ///|
@@ -11837,7 +11837,7 @@ fn step_121() -> Unit raise {
   let t8107 = @theorems.intro_tac("@a b u v. uodd vodd meq neq _")
   let t8106 = @simp.rewrite_tac(@list.List([sarkovskii_precedes()]))
   let t8124 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8106), t8107), @tactics.conj_tac), t8123)
-  sarkovskii_precedes_pos_c.set(@tactics.prove(@parser.parse_term("!m n.\n        sarkovskii_precedes m n\n        ==> 0 < m /\\ 0 < n"), t8124))
+  sarkovskii_precedes_pos_c.set(@tactics.prove(@parser.parse_term("forall m n.\n        sarkovskii_precedes m n\n        ==> 0 < m /\\ 0 < n"), t8124))
 }
 
 ///|
@@ -11903,7 +11903,7 @@ fn step_122() -> Unit raise {
   })
   let t8125 = @theorems.intro_tac("uodd eq le")
   let t8163 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8125), t8131), t8132), t8137), t8145), t8149), t8162)
-  odd_power2_factor_le_c.set(@tactics.prove(@parser.parse_term("!a b u v.\n        ODD u /\\\n        2 EXP a * u = 2 EXP b * v /\\\n        a <= b\n        ==> b <= a"), t8163))
+  odd_power2_factor_le_c.set(@tactics.prove(@parser.parse_term("forall a b u v.\n        ODD u /\\\n        2 EXP a * u = 2 EXP b * v /\\\n        a <= b\n        ==> b <= a"), t8163))
 }
 
 ///|
@@ -11967,7 +11967,7 @@ fn step_123() -> Unit raise {
   })
   let t8164 = @theorems.intro_tac("uodd vodd eq")
   let t8202 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8164), t8169), t8189), @tactics.conj_tac), t8201)
-  odd_power2_factor_unique_c.set(@tactics.prove(@parser.parse_term("!a b u v.\n        ODD u /\\\n        ODD v /\\\n        2 EXP a * u = 2 EXP b * v\n        ==> a = b /\\ u = v"), t8202))
+  odd_power2_factor_unique_c.set(@tactics.prove(@parser.parse_term("forall a b u v.\n        ODD u /\\\n        ODD v /\\\n        2 EXP a * u = 2 EXP b * v\n        ==> a = b /\\ u = v"), t8202))
 }
 
 ///|
@@ -12009,7 +12009,7 @@ fn step_124() -> Unit raise {
   let t8204 = @simp.rewrite_tac(@list.List([sarkovskii_precedes()]))
   let t8203 = @theorems.intro_tac("uodd vodd")
   let t8226 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8203), t8204), @tactics.eq_tac), t8225)
-  sarkovskii_precedes_odd_factors_c.set(@tactics.prove(@parser.parse_term("!a b u v.\n        ODD u /\\\n        ODD v\n        ==> (sarkovskii_precedes (2 EXP a * u) (2 EXP b * v) <=>\n             (1 < u /\\\n              (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n             (u = 1 /\\ v = 1 /\\ b < a))"), t8226))
+  sarkovskii_precedes_odd_factors_c.set(@tactics.prove(@parser.parse_term("forall a b u v.\n        ODD u /\\\n        ODD v\n        ==> (sarkovskii_precedes (2 EXP a * u) (2 EXP b * v) <=>\n             (1 < u /\\\n              (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n             (u = 1 /\\ v = 1 /\\ b < a))"), t8226))
 }
 
 ///|
@@ -12037,7 +12037,7 @@ fn step_125() -> Unit raise {
   let t8228 = @tactics.subgoal_then(@parser.parse_term("(a:num) = b /\\ (u:num) = v"), @tactics.strip_assume_tac)
   let t8227 = @theorems.intro_tac("@a b u v. uodd vodd first second order")
   let t8237 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([sarkovskii_precedes()]))), t8227), t8228), t8236)
-  sarkovskii_precedes_irreflexive_c.set(@tactics.prove(@parser.parse_term("!n. ~sarkovskii_precedes n n"), t8237))
+  sarkovskii_precedes_irreflexive_c.set(@tactics.prove(@parser.parse_term("forall n. ~sarkovskii_precedes n n"), t8237))
 }
 
 ///|
@@ -12094,7 +12094,7 @@ fn step_126() -> Unit raise {
   })
   let t8238 = @theorems.intro_tac("first second")
   let t8269 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8238), t8244), t8245), t8251), t8252), t8253), t8261), t8264), t8267), t8268), @int.asm_arith_tac)
-  sarkovskii_precedes_transitive_c.set(@tactics.prove(@parser.parse_term("!m n p.\n        sarkovskii_precedes m n /\\\n        sarkovskii_precedes n p\n        ==> sarkovskii_precedes m p"), t8269))
+  sarkovskii_precedes_transitive_c.set(@tactics.prove(@parser.parse_term("forall m n p.\n        sarkovskii_precedes m n /\\\n        sarkovskii_precedes n p\n        ==> sarkovskii_precedes m p"), t8269))
 }
 
 ///|
@@ -12110,7 +12110,7 @@ pub fn sarkovskii_precedes_transitive() -> @kernel.Thm {
 /// SARKOVSKII_PRECEDES_ASYMMETRIC
 fn step_127() -> Unit raise {
   let t8270 = @meson.meson_tac(@list.List([sarkovskii_precedes_transitive(), sarkovskii_precedes_irreflexive()]))
-  sarkovskii_precedes_asymmetric_c.set(@tactics.prove(@parser.parse_term("!m n.\n        sarkovskii_precedes m n\n        ==> ~sarkovskii_precedes n m"), t8270))
+  sarkovskii_precedes_asymmetric_c.set(@tactics.prove(@parser.parse_term("forall m n.\n        sarkovskii_precedes m n\n        ==> ~sarkovskii_precedes n m"), t8270))
 }
 
 ///|
@@ -12154,7 +12154,7 @@ fn step_128() -> Unit raise {
   let t8272 = @tactics.mp_tac(@bool.spec(@parser.parse_term("m:num"), @arith.even_odd_decomposition()))
   let t8271 = @theorems.intro_tac("mpos npos")
   let t8295 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8271), t8272), t8273), t8274), t8275), t8276), t8277), t8278), t8280), t8284), t8288), t8289), t8290), t8291), t8292), t8293), t8294), @int.asm_arith_tac)
-  sarkovskii_precedes_trichotomy_c.set(@tactics.prove(@parser.parse_term("!m n.\n        0 < m /\\\n        0 < n\n        ==> m = n \\/\n            sarkovskii_precedes m n \\/\n            sarkovskii_precedes n m"), t8295))
+  sarkovskii_precedes_trichotomy_c.set(@tactics.prove(@parser.parse_term("forall m n.\n        0 < m /\\\n        0 < n\n        ==> m = n \\/\n            sarkovskii_precedes m n \\/\n            sarkovskii_precedes n m"), t8295))
 }
 
 ///|
@@ -12214,7 +12214,7 @@ fn step_129() -> Unit raise {
   let t8304 = @tactics.subgoal_then(@parser.parse_term("(b:num) = 0 /\\ (v:num) = 3"), t8303)
   let t8296 = @theorems.intro_tac("@a b u v. uodd vodd _ three order")
   let t8329 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([sarkovskii_precedes()]))), t8296), t8304), t8320), t8324), t8325), t8326), t8328)
-  sarkovskii_precedes_3_c.set(@tactics.prove(@parser.parse_term("!n. ~sarkovskii_precedes n 3"), t8329))
+  sarkovskii_precedes_3_c.set(@tactics.prove(@parser.parse_term("forall n. ~sarkovskii_precedes n 3"), t8329))
 }
 
 ///|
@@ -12263,7 +12263,7 @@ fn step_130() -> Unit raise {
       s8332(x8333)
     }
   })), @tactics.eq_tac), t8355)
-  sarkovskii_3_precedes_c.set(@tactics.prove(@parser.parse_term("!n.\n        0 < n\n        ==> (sarkovskii_precedes 3 n <=> ~(n = 3))"), t8356))
+  sarkovskii_3_precedes_c.set(@tactics.prove(@parser.parse_term("forall n.\n        0 < n\n        ==> (sarkovskii_precedes 3 n <=> ~(n = 3))"), t8356))
 }
 
 ///|
@@ -12320,7 +12320,7 @@ fn step_131() -> Unit raise {
   let t8365 = @tactics.subgoal_then(@parser.parse_term("(a:num) = 0 /\\ (u:num) = 1"), t8364)
   let t8357 = @theorems.intro_tac("@a b u v. uodd _ one _ order")
   let t8387 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([sarkovskii_precedes()]))), t8357), t8365), t8381), t8385), t8386), @int.arith_tac)
-  sarkovskii_1_precedes_c.set(@tactics.prove(@parser.parse_term("!n. ~sarkovskii_precedes 1 n"), t8387))
+  sarkovskii_1_precedes_c.set(@tactics.prove(@parser.parse_term("forall n. ~sarkovskii_precedes 1 n"), t8387))
 }
 
 ///|
@@ -12369,7 +12369,7 @@ fn step_132() -> Unit raise {
       s8390(x8391)
     }
   })), @tactics.eq_tac), t8413)
-  sarkovskii_precedes_1_c.set(@tactics.prove(@parser.parse_term("!n.\n        0 < n\n        ==> (sarkovskii_precedes n 1 <=> ~(n = 1))"), t8414))
+  sarkovskii_precedes_1_c.set(@tactics.prove(@parser.parse_term("forall n.\n        0 < n\n        ==> (sarkovskii_precedes n 1 <=> ~(n = 1))"), t8414))
 }
 
 ///|
@@ -12497,7 +12497,7 @@ fn step_133() -> Unit raise {
   let t8416 = @theorems.intro_tac("continuous (@a b u v. uodd vodd meq neq order) period")
   let t8415 = @simp.rewrite_tac(@list.List([sarkovskii_precedes()]))
   let t8498 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8415), t8416), t8420), t8442), t8497)
-  sarkovskii_precedes_imp_period_c.set(@tactics.prove(@parser.parse_term("!f m n.\n        f real_continuous_on (:real) /\\\n        sarkovskii_precedes m n /\\\n        has_period f m\n        ==> has_period f n"), t8498))
+  sarkovskii_precedes_imp_period_c.set(@tactics.prove(@parser.parse_term("forall f m n.\n        f real_continuous_on (:real) /\\\n        sarkovskii_precedes m n /\\\n        has_period f m\n        ==> has_period f n"), t8498))
 }
 
 ///|
@@ -12548,7 +12548,7 @@ fn step_134() -> Unit raise {
   }), t8522])
   let t8499 = @theorems.intro_tac("continuous (eq | precedes) period")
   let t8524 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8499), t8523)
-  sarkovskii_theorem_c.set(@tactics.prove(@parser.parse_term("!f m n.\n        f real_continuous_on (:real) /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period f m\n        ==> has_period f n"), t8524))
+  sarkovskii_theorem_c.set(@tactics.prove(@parser.parse_term("forall f m n.\n        f real_continuous_on (:real) /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period f m\n        ==> has_period f n"), t8524))
 }
 
 ///|
@@ -12569,7 +12569,7 @@ fn step_135() -> Unit raise {
   let t8528 = @tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t8527, t8526]), sarkovskii_theorem()))
   let t8525 = @theorems.intro_tac("continuous npos period")
   let t8530 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8525), t8528), t8529), @int.arith_tac)
-  period_3_imp_all_periods_c.set(@tactics.prove(@parser.parse_term("!f n.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        has_period f 3\n        ==> has_period f n"), t8530))
+  period_3_imp_all_periods_c.set(@tactics.prove(@parser.parse_term("forall f n.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        has_period f 3\n        ==> has_period f n"), t8530))
 }
 
 ///|
@@ -12652,7 +12652,7 @@ fn step_137() -> Unit raise {
   let t8532 = @simp.rewrite_tac(@list.List([@metric.metric_continuous_map(), @realanalysis.real_continuous_on()]))
   let t8531 = @equal.gsym(@metric.mtopology_submetric())
   let t8572 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@metric.mtopology_real_euclidean_metric()), t8531])), t8532), t8533), t8534), t8542), @tactics.eq_tac), t8571)
-  real_continuous_on_eq_continuous_map_c.set(@tactics.prove(@parser.parse_term("!f s.\n        f real_continuous_on s <=>\n        continuous_map\n         (subtopology euclideanreal s,euclideanreal) f"), t8572))
+  real_continuous_on_eq_continuous_map_c.set(@tactics.prove(@parser.parse_term("forall f s.\n        f real_continuous_on s <=>\n        continuous_map\n         (subtopology euclideanreal s,euclideanreal) f"), t8572))
 }
 
 ///|
@@ -12669,7 +12669,7 @@ pub fn real_continuous_on_eq_continuous_map() -> @kernel.Thm {
 fn step_138() -> Unit raise {
   let t8573 = @simp.rewrite_tac(@list.List([@metric.homeomorphic_maps(), @metric.continuous_map_in_subtopology(), @metric.topspace_euclideanreal_subtopology(), real_continuous_on_eq_continuous_map()]))
   let t8574 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8573), @itab.itaut_tac)
-  real_homeomorphism_c.set(@tactics.prove(@parser.parse_term("!s t h k.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) <=>\n        h real_continuous_on s /\\\n        IMAGE h s SUBSET t /\\\n        k real_continuous_on t /\\\n        IMAGE k t SUBSET s /\\\n        (!x. x IN s ==> k(h x) = x) /\\\n        (!y. y IN t ==> h(k y) = y)"), t8574))
+  real_homeomorphism_c.set(@tactics.prove(@parser.parse_term("forall s t h k.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) <=>\n        h real_continuous_on s /\\\n        IMAGE h s SUBSET t /\\\n        k real_continuous_on t /\\\n        IMAGE k t SUBSET s /\\\n        (forall x. x IN s ==> k(h x) = x) /\\\n        (forall y. y IN t ==> h(k y) = y)"), t8574))
 }
 
 ///|
@@ -12725,7 +12725,7 @@ fn step_139() -> Unit raise {
   let t8576 = @theorems.intro_tac("(_ _ _ _ leftinv _) invariant")
   let t8575 = @simp.rewrite_tac(@list.List([real_homeomorphism()]))
   let t8607 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8575), t8576), @nums.induct_tac), t8606)
-  iter_conjugate_on_c.set(@tactics.prove(@parser.parse_term("!f h k s t.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> !n x.\n              x IN s\n              ==> ITER n (h o f o k) (h x) = h(ITER n f x) /\\\n                  ITER n f x IN s"), t8607))
+  iter_conjugate_on_c.set(@tactics.prove(@parser.parse_term("forall f h k s t.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> forall n x.\n              x IN s\n              ==> ITER n (h o f o k) (h x) = h(ITER n f x) /\\\n                  ITER n f x IN s"), t8607))
 }
 
 ///|
@@ -12793,7 +12793,7 @@ fn step_140() -> Unit raise {
   let t8617 = @parser.parse_term("h:real->real")
   let t8618 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t8617, t8616, t8615, t8614]), iter_conjugate_on()))
   let t8656 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("m:num")), t8618), t8619), t8627), t8628), t8629), t8635), t8636), t8639), @tactics.eq_tac), t8651), t8655])
-  let t8613 = @tactics.subgoal_then(@parser.parse_term("!m. periodic_point ((h:real->real) o f o k) m (h x) <=>\n        periodic_point f m x"), fn(x8610 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8613 = @tactics.subgoal_then(@parser.parse_term("forall m. periodic_point ((h:real->real) o f o k) m (h x) <=>\n        periodic_point f m x"), fn(x8610 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8611 = ((x8609 : @kernel.Thm) => @tactics.label_tac("periodic", x8609))(x8610)
     fn(x8612 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8611(x8612)
@@ -12801,7 +12801,7 @@ fn step_140() -> Unit raise {
   })
   let t8608 = @theorems.intro_tac("homeomorphism invariant inside")
   let t8657 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8608), t8613), t8656)
-  minimal_period_conjugate_on_c.set(@tactics.prove(@parser.parse_term("!f h k s t n x.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s /\\\n        x IN s\n        ==> (minimal_period (h o f o k) n (h x) <=>\n             minimal_period f n x)"), t8657))
+  minimal_period_conjugate_on_c.set(@tactics.prove(@parser.parse_term("forall f h k s t n x.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s /\\\n        x IN s\n        ==> (minimal_period (h o f o k) n (h x) <=>\n             minimal_period f n x)"), t8657))
 }
 
 ///|
@@ -12889,7 +12889,7 @@ fn step_141() -> Unit raise {
   })
   let t8658 = @theorems.intro_tac("homeomorphism invariant")
   let t8715 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8658), t8664), t8665), t8666), @tactics.eq_tac), t8714)
-  has_period_on_conjugate_c.set(@tactics.prove(@parser.parse_term("!f h k s t n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> (has_period_on f n s <=>\n             has_period_on (h o f o k) n t)"), t8715))
+  has_period_on_conjugate_c.set(@tactics.prove(@parser.parse_term("forall f h k s t n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> (has_period_on f n s <=>\n             has_period_on (h o f o k) n t)"), t8715))
 }
 
 ///|
@@ -12963,7 +12963,7 @@ fn step_142() -> Unit raise {
   let t8720 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("euclideanreal"), t8719, t8718, t8717]), @metric.tietze_extension_realinterval()))
   let t8716 = @theorems.intro_tac("closed interval nonempty continuous invariant")
   let t8761 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8716), t8720), @tactics.ants_tac), t8744), t8745), t8746), t8760)
-  real_continuous_extension_into_realinterval_c.set(@tactics.prove(@parser.parse_term("!f s.\n        real_closed s /\\\n        is_realinterval s /\\\n        ~(s = {}) /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s\n        ==> ?g.\n              g real_continuous_on (:real) /\\\n              IMAGE g (:real) SUBSET s /\\\n              (!x. x IN s ==> g x = f x)"), t8761))
+  real_continuous_extension_into_realinterval_c.set(@tactics.prove(@parser.parse_term("forall f s.\n        real_closed s /\\\n        is_realinterval s /\\\n        ~(s = {}) /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s\n        ==> ?g.\n              g real_continuous_on (:real) /\\\n              IMAGE g (:real) SUBSET s /\\\n              (forall x. x IN s ==> g x = f x)"), t8761))
 }
 
 ///|
@@ -13020,7 +13020,7 @@ fn step_143() -> Unit raise {
   let t8794 = @list.List([@simp.simp_tac(@list.List([@iter.iter()])), t8793])
   let t8762 = @theorems.intro_tac("into agrees")
   let t8795 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8762), @nums.induct_tac), t8794)
-  iter_eq_on_extension_c.set(@tactics.prove(@parser.parse_term("!f g s.\n        IMAGE f (:A) SUBSET s /\\\n        (!x. x IN s ==> f x = g x)\n        ==> !n x.\n              x IN s\n              ==> ITER n f x = ITER n g x /\\\n                  ITER n f x IN s"), t8795))
+  iter_eq_on_extension_c.set(@tactics.prove(@parser.parse_term("forall f g s.\n        IMAGE f (:A) SUBSET s /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> forall n x.\n              x IN s\n              ==> ITER n f x = ITER n g x /\\\n                  ITER n f x IN s"), t8795))
 }
 
 ///|
@@ -13057,7 +13057,7 @@ fn step_144() -> Unit raise {
   let t8803 = @parser.parse_term("g:A->A")
   let t8804 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A->A"), t8803, t8802]), iter_eq_on_extension()))
   let t8820 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("m:num")), t8804), t8805), t8813), t8814), t8815), t8819])
-  let t8801 = @tactics.subgoal_then(@parser.parse_term("!m. periodic_point (f:A->A) m (x:A) <=>\n        periodic_point g m x"), fn(x8798 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8801 = @tactics.subgoal_then(@parser.parse_term("forall m. periodic_point (f:A->A) m (x:A) <=>\n        periodic_point g m x"), fn(x8798 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8799 = ((x8797 : @kernel.Thm) => @tactics.label_tac("periodic", x8797))(x8798)
     fn(x8800 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8799(x8800)
@@ -13065,7 +13065,7 @@ fn step_144() -> Unit raise {
   })
   let t8796 = @theorems.intro_tac("into agrees inside")
   let t8821 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8796), t8801), t8820)
-  minimal_period_eq_on_extension_c.set(@tactics.prove(@parser.parse_term("!f g s n x.\n        IMAGE f (:A) SUBSET s /\\\n        (!y. y IN s ==> f y = g y) /\\\n        x IN s\n        ==> (minimal_period f n x <=> minimal_period g n x)"), t8821))
+  minimal_period_eq_on_extension_c.set(@tactics.prove(@parser.parse_term("forall f g s n x.\n        IMAGE f (:A) SUBSET s /\\\n        (forall y. y IN s ==> f y = g y) /\\\n        x IN s\n        ==> (minimal_period f n x <=> minimal_period g n x)"), t8821))
 }
 
 ///|
@@ -13121,7 +13121,7 @@ fn step_145() -> Unit raise {
   let t8823 = @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), @nums.num_cases()))
   let t8822 = @theorems.intro_tac("into positive periodic")
   let t8851 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8822), t8823), t8830), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t8836), t8843), t8844), t8848), t8849), t8850)
-  periodic_point_in_extension_range_c.set(@tactics.prove(@parser.parse_term("!f:A->A s n x.\n        IMAGE f (:A) SUBSET s /\\\n        0 < n /\\\n        periodic_point f n x\n        ==> x IN s"), t8851))
+  periodic_point_in_extension_range_c.set(@tactics.prove(@parser.parse_term("forall f:A->A s n x.\n        IMAGE f (:A) SUBSET s /\\\n        0 < n /\\\n        periodic_point f n x\n        ==> x IN s"), t8851))
 }
 
 ///|
@@ -13191,7 +13191,7 @@ fn step_146() -> Unit raise {
   let t8853 = @simp.rewrite_tac(@list.List([has_period(), has_period_on()]))
   let t8852 = @theorems.intro_tac("into agrees")
   let t8897 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8852), t8853), @tactics.eq_tac), t8896)
-  has_period_extension_eq_c.set(@tactics.prove(@parser.parse_term("!f g s n.\n        IMAGE f (:A) SUBSET s /\\\n        (!x. x IN s ==> f x = g x)\n        ==> (has_period f n <=> has_period_on g n s)"), t8897))
+  has_period_extension_eq_c.set(@tactics.prove(@parser.parse_term("forall f g s n.\n        IMAGE f (:A) SUBSET s /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> (has_period f n <=> has_period_on g n s)"), t8897))
 }
 
 ///|
@@ -13252,7 +13252,7 @@ fn step_147() -> Unit raise {
   })
   let t8898 = @theorems.intro_tac("closed interval continuous invariant order period")
   let t8938 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8898), t8903), t8909), t8911), @tactics.ants_tac), t8913), t8918), t8923), t8928), t8932), t8936), t8937)
-  sarkovskii_theorem_closed_realinterval_c.set(@tactics.prove(@parser.parse_term("!f s m n.\n        real_closed s /\\\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s"), t8938))
+  sarkovskii_theorem_closed_realinterval_c.set(@tactics.prove(@parser.parse_term("forall f s m n.\n        real_closed s /\\\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s"), t8938))
 }
 
 ///|
@@ -13424,7 +13424,7 @@ fn step_148() -> Unit raise {
   })
   let t8939 = @theorems.intro_tac(("homeomorphism closed interval continuous invariant order " + "period"))
   let t9064 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8939), t8945), t8946), t8951), t8991), t8996), t9034), t9039), t9046), t9051), t9056), t9062), t9063)
-  sarkovskii_theorem_homeomorphic_closed_c.set(@tactics.prove(@parser.parse_term("!f s t h k m n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        real_closed t /\\\n        is_realinterval t /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s"), t9064))
+  sarkovskii_theorem_homeomorphic_closed_c.set(@tactics.prove(@parser.parse_term("forall f s t h k m n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        real_closed t /\\\n        is_realinterval t /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s"), t9064))
 }
 
 ///|
@@ -13501,7 +13501,7 @@ fn step_149() -> Unit raise {
     }
   })
   let t9114 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9069), t9070), t9071), t9113)
-  real_affinity_homeomorphism_c.set(@tactics.prove(@parser.parse_term("!s c d.\n        ~(c = &0)\n        ==> homeomorphic_maps\n             (subtopology euclideanreal s,\n              subtopology euclideanreal\n               (IMAGE (\\x. c * x + d) s))\n             ((\\x. c * x + d),(\\y. (y - d) / c))"), t9114))
+  real_affinity_homeomorphism_c.set(@tactics.prove(@parser.parse_term("forall s c d.\n        ~(c = &0)\n        ==> homeomorphic_maps\n             (subtopology euclideanreal s,\n              subtopology euclideanreal\n               (IMAGE (\\x. c * x + d) s))\n             ((\\x. c * x + d),(\\y. (y - d) / c))"), t9114))
 }
 
 ///|
@@ -13773,7 +13773,7 @@ fn step_154() -> Unit raise {
   let t9238 = @parser.parse_term("inv((b:real) - (a:real))")
   let t9239 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{x:real | a < x /\\ x < b}"), t9238, t9237]), real_affinity_homeomorphism()))
   let t9282 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9239), @tactics.ants_tac), t9240), t9243), t9281)
-  real_normalize_open_interval_c.set(@tactics.prove(@parser.parse_term("!a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 < y /\\ y < &1}) (h,k)"), t9282))
+  real_normalize_open_interval_c.set(@tactics.prove(@parser.parse_term("forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 < y /\\ y < &1}) (h,k)"), t9282))
 }
 
 ///|
@@ -13854,7 +13854,7 @@ fn step_155() -> Unit raise {
   let t9284 = @parser.parse_term("inv((b:real) - (a:real))")
   let t9285 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{x:real | a <= x /\\ x < b}"), t9284, t9283]), real_affinity_homeomorphism()))
   let t9332 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9285), @tactics.ants_tac), t9286), t9289), t9331)
-  real_normalize_right_open_interval_c.set(@tactics.prove(@parser.parse_term("!a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)"), t9332))
+  real_normalize_right_open_interval_c.set(@tactics.prove(@parser.parse_term("forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)"), t9332))
 }
 
 ///|
@@ -13935,7 +13935,7 @@ fn step_156() -> Unit raise {
   let t9334 = @parser.parse_term("--inv((b:real) - (a:real))")
   let t9335 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{x:real | a < x /\\ x <= b}"), t9334, t9333]), real_affinity_homeomorphism()))
   let t9382 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9335), @tactics.ants_tac), t9336), t9339), t9381)
-  real_normalize_left_open_interval_c.set(@tactics.prove(@parser.parse_term("!a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)"), t9382))
+  real_normalize_left_open_interval_c.set(@tactics.prove(@parser.parse_term("forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)"), t9382))
 }
 
 ///|
@@ -13967,7 +13967,7 @@ fn step_157() -> Unit raise {
   let t9383 = @parser.parse_term("b:real")
   let t9384 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:real"), t9383]), real_normalize_open_interval()))
   let t9397 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9384), t9385), t9386), t9387), t9388), t9393), t9394), t9395), t9396)
-  real_open_interval_homeomorphic_univ_c.set(@tactics.prove(@parser.parse_term("!a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal (:real)) (h,k)"), t9397))
+  real_open_interval_homeomorphic_univ_c.set(@tactics.prove(@parser.parse_term("forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal (:real)) (h,k)"), t9397))
 }
 
 ///|
@@ -13997,7 +13997,7 @@ fn step_158() -> Unit raise {
   let t9398 = @parser.parse_term("b:real")
   let t9399 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:real"), t9398]), real_normalize_right_open_interval()))
   let t9410 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9399), t9400), t9401), t9406), t9407), t9408), t9409)
-  real_right_open_interval_homeomorphic_nonnegative_c.set(@tactics.prove(@parser.parse_term("!a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)"), t9410))
+  real_right_open_interval_homeomorphic_nonnegative_c.set(@tactics.prove(@parser.parse_term("forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)"), t9410))
 }
 
 ///|
@@ -14027,7 +14027,7 @@ fn step_159() -> Unit raise {
   let t9411 = @parser.parse_term("b:real")
   let t9412 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:real"), t9411]), real_normalize_left_open_interval()))
   let t9423 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9412), t9413), t9414), t9419), t9420), t9421), t9422)
-  real_left_open_interval_homeomorphic_nonnegative_c.set(@tactics.prove(@parser.parse_term("!a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)"), t9423))
+  real_left_open_interval_homeomorphic_nonnegative_c.set(@tactics.prove(@parser.parse_term("forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)"), t9423))
 }
 
 ///|
@@ -14079,7 +14079,7 @@ fn step_160() -> Unit raise {
   let t9424 = @parser.parse_term("--(a:real)")
   let t9425 = @parser.parse_term("&1")
   let t9455 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{x:real | a < x}"), t9425, t9424]), real_affinity_homeomorphism()))), t9426), t9429), t9438), t9443), t9445), t9450), t9451), t9452), t9453), t9454), @calc_rat.real_arith_tac)
-  real_open_upper_ray_homeomorphic_univ_c.set(@tactics.prove(@parser.parse_term("!a.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | a < x},\n            subtopology euclideanreal (:real)) (h,k)"), t9455))
+  real_open_upper_ray_homeomorphic_univ_c.set(@tactics.prove(@parser.parse_term("forall a.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | a < x},\n            subtopology euclideanreal (:real)) (h,k)"), t9455))
 }
 
 ///|
@@ -14131,7 +14131,7 @@ fn step_161() -> Unit raise {
   let t9456 = @parser.parse_term("(b:real)")
   let t9457 = @parser.parse_term("-- &1")
   let t9487 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{x:real | x < b}"), t9457, t9456]), real_affinity_homeomorphism()))), t9458), t9461), t9470), t9475), t9477), t9482), t9483), t9484), t9485), t9486), @calc_rat.real_arith_tac)
-  real_open_lower_ray_homeomorphic_univ_c.set(@tactics.prove(@parser.parse_term("!b.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | x < b},\n            subtopology euclideanreal (:real)) (h,k)"), t9487))
+  real_open_lower_ray_homeomorphic_univ_c.set(@tactics.prove(@parser.parse_term("forall b.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | x < b},\n            subtopology euclideanreal (:real)) (h,k)"), t9487))
 }
 
 ///|
@@ -14356,7 +14356,7 @@ fn step_162() -> Unit raise {
   let t9489 = @simp.asm_rewrite_tac(@list.List([]))
   let t9488 = @tactics.mp_tac(@bool.spec(@parser.parse_term("s:real->bool"), @realanalysis.is_real_interval_cases()))
   let t9650 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @theorems.intro_tac("interval nonempty")), t9488), t9489), t9490), t9649)
-  is_realinterval_homeomorphic_closed_c.set(@tactics.prove(@parser.parse_term("!s.\n        is_realinterval s /\\\n        ~(s = {})\n        ==> ?t h k.\n              real_closed t /\\\n              is_realinterval t /\\\n              homeomorphic_maps\n               (subtopology euclideanreal s,\n                subtopology euclideanreal t) (h,k)"), t9650))
+  is_realinterval_homeomorphic_closed_c.set(@tactics.prove(@parser.parse_term("forall s.\n        is_realinterval s /\\\n        ~(s = {})\n        ==> ?t h k.\n              real_closed t /\\\n              is_realinterval t /\\\n              homeomorphic_maps\n               (subtopology euclideanreal s,\n                subtopology euclideanreal t) (h,k)"), t9650))
 }
 
 ///|
@@ -14398,7 +14398,7 @@ fn step_163() -> Unit raise {
   })
   let t9651 = @theorems.intro_tac("interval continuous invariant order period")
   let t9674 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9651), t9656), t9662), t9663), t9664), t9665), t9672), t9673)
-  sarkovskii_theorem_on_realinterval_c.set(@tactics.prove(@parser.parse_term("!f s m n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s"), t9674))
+  sarkovskii_theorem_on_realinterval_c.set(@tactics.prove(@parser.parse_term("forall f s m n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s"), t9674))
 }
 
 ///|
@@ -14420,7 +14420,7 @@ fn step_164() -> Unit raise {
   let t9679 = @tactics.match_mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:real->real"), t9678, t9677, t9676]), sarkovskii_theorem_on_realinterval()))
   let t9675 = @theorems.intro_tac("interval continuous invariant positive period")
   let t9681 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9675), t9679), t9680), @int.arith_tac)
-  period_3_imp_all_periods_on_realinterval_c.set(@tactics.prove(@parser.parse_term("!f s n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        0 < n /\\\n        has_period_on f 3 s\n        ==> has_period_on f n s"), t9681))
+  period_3_imp_all_periods_on_realinterval_c.set(@tactics.prove(@parser.parse_term("forall f s n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        0 < n /\\\n        has_period_on f 3 s\n        ==> has_period_on f n s"), t9681))
 }
 
 ///|

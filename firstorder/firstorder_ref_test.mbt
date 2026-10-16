@@ -74,7 +74,7 @@ test "firstorder matches firstorder.ml" {
   log.attempt("roundtrip", () => {
     @firstorder.reset_vars(())
     @firstorder.reset_consts(())
-    let t = tm("!x:A. P x (f x y) ==> ~Q (c:A)")
+    let t = tm("forall x:A. P x (f x y) ==> ~Q (c:A)")
     let fm = @firstorder.fol_of_form(@list.List([]), @list.List([]), t)
     let a = @firstorder.fol_of_atom(
       @list.List([]),
@@ -306,9 +306,9 @@ test "firstorder matches firstorder.ml" {
       #|exists_unique = true
       #|Warning: inventing type variables
       #|Warning: inventing type variables
-      #|roundtrip = ((R:fun('A,fun('A,bool)) (g:fun('?3923,'A) _638:'?3923)) _639:'A) / 0
+      #|roundtrip = ((R:fun('A,fun('A,bool)) (g:fun('?3921,'A) _638:'?3921)) _639:'A) / 0
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?3924
+      #|counter_tyvar = zz_counter:'?3922
       #|counter_genvar = _640:bool
       #|
     ),

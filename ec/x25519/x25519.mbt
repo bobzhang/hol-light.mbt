@@ -77,7 +77,7 @@ fn step_3() -> Unit raise {
   let t5 = @simp.asm_simp_tac(@list.List([@ringtheory.field_imp_integral_domain(), @ringtheory.ring_of_num_v1(), @ringtheory.integral_domain_rule(@parser.parse_term("ring_pow f x 2 = ring_of_num f 4 <=>\n    x = ring_of_num f 2 \\/ x = ring_neg f (ring_of_num f 2)"))]))
   let t4 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_nonsingular(), curve25519x()]))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4), t5), t7), t8), t9), t10), t11), t12), t16), t24), t26), @tactics.gen_tac), @tactics.strip_tac), t27), t28), t29), t30), t33), t34), t35), t36)
-  montgomery_nonsingular_curve25519x_gen_c.set(@tactics.prove(@parser.parse_term("!f:A ring.\n        field f /\\\n        ~(ring_char f divides 14802493890)\n        ==> montgomery_nonsingular(curve25519x f)"), t37))
+  montgomery_nonsingular_curve25519x_gen_c.set(@tactics.prove(@parser.parse_term("forall f:A ring.\n        field f /\\\n        ~(ring_char f divides 14802493890)\n        ==> montgomery_nonsingular(curve25519x f)"), t37))
 }
 
 ///|
@@ -97,7 +97,7 @@ fn step_4() -> Unit raise {
   let t39 = @simp.asm_rewrite_tac(@list.List([@curve25519.p_25519()]))
   let t38 = @tactics.match_mp_tac(montgomery_nonsingular_curve25519x_gen())
   let t42 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t38), t39), t40), t41)
-  montgomery_nonsingular_curve25519x_c.set(@tactics.prove(@parser.parse_term("!f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> montgomery_nonsingular(curve25519x f)"), t42))
+  montgomery_nonsingular_curve25519x_c.set(@tactics.prove(@parser.parse_term("forall f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> montgomery_nonsingular(curve25519x f)"), t42))
 }
 
 ///|
@@ -112,7 +112,7 @@ pub fn montgomery_nonsingular_curve25519x() -> @kernel.Thm {
 ///|
 /// SPECIALLY_NONSINGULAR_CURVE25519X
 fn step_5() -> Unit raise {
-  let lemma = @tactics.prove(@parser.parse_term("!f:A ring.\n          field f /\\\n          A IN ring_carrier f /\\\n          x IN ring_carrier f /\\\n          y IN ring_carrier f /\\\n          ~(ring_pow f (ring_add f (ring_mul f (ring_of_num f 2) x) A) 2 =\n            ring_sub f (ring_pow f A 2) (ring_of_num f 4))\n          ==> ring_mul f (ring_1 f) (ring_pow f y 2) =\n              ring_add f (ring_pow f x 3)\n              (ring_add f (ring_mul f A (ring_pow f x 2)) x)\n          ==> (y = ring_0 f <=> x = ring_0 f)"), @ringtheory.field_tac)
+  let lemma = @tactics.prove(@parser.parse_term("forall f:A ring.\n          field f /\\\n          A IN ring_carrier f /\\\n          x IN ring_carrier f /\\\n          y IN ring_carrier f /\\\n          ~(ring_pow f (ring_add f (ring_mul f (ring_of_num f 2) x) A) 2 =\n            ring_sub f (ring_pow f A 2) (ring_of_num f 4))\n          ==> ring_mul f (ring_1 f) (ring_pow f y 2) =\n              ring_add f (ring_pow f x 3)\n              (ring_add f (ring_mul f A (ring_pow f x 2)) x)\n          ==> (y = ring_0 f <=> x = ring_0 f)"), @ringtheory.field_tac)
   let t67 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t66 = @tactics.conv_tac(@equal.once_depth_conv(@calc_num.exp_mod_conv))
   let t65 = @simp.rewrite_tac(@list.List([@int.cong_v1()]))
@@ -146,7 +146,7 @@ fn step_5() -> Unit raise {
   })))
   let t43 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), curve25519x(), @ringtheory.ring_of_num_1()]))
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t43), t50), t51), t52), t53), t54), t55), t56), t62), t63), t64), t65), t66), t67)
-  specially_nonsingular_curve25519x_c.set(@tactics.prove(@parser.parse_term("!f X y:A.\n        field f /\\ ring_char f = p_25519 /\\\n        montgomery_curve (curve25519x f) (SOME(ring_of_num f X,y))\n        ==> (y = ring_0 f <=> ring_of_num f X = ring_0 f)"), t68))
+  specially_nonsingular_curve25519x_c.set(@tactics.prove(@parser.parse_term("forall f X y:A.\n        field f /\\ ring_char f = p_25519 /\\\n        montgomery_curve (curve25519x f) (SOME(ring_of_num f X,y))\n        ==> (y = ring_0 f <=> ring_of_num f X = ring_0 f)"), t68))
 }
 
 ///|
@@ -210,7 +210,7 @@ fn step_8() -> Unit raise {
   let t74 = @tactics.match_mp_tac(@montgomery.montgomery_group_v1())
   let t73 = @simp.rewrite_tac(@list.List([curve25519x_group(), curve25519x()]))
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t73), t74), t75), t76), t77), t81), t82), t83), t84)
-  curve25519x_group_gen_c.set(@tactics.prove(@parser.parse_term("!f:A ring.\n        field f /\\ ~(ring_char f divides 14802493890)\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)"), t85))
+  curve25519x_group_gen_c.set(@tactics.prove(@parser.parse_term("forall f:A ring.\n        field f /\\ ~(ring_char f divides 14802493890)\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)"), t85))
 }
 
 ///|
@@ -230,7 +230,7 @@ fn step_9() -> Unit raise {
   let t87 = @simp.asm_rewrite_tac(@list.List([@curve25519.p_25519()]))
   let t86 = @tactics.match_mp_tac(curve25519x_group_gen())
   let t90 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t86), t87), t88), t89)
-  curve25519x_group_v1_c.set(@tactics.prove(@parser.parse_term("!f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)"), t90))
+  curve25519x_group_v1_c.set(@tactics.prove(@parser.parse_term("forall f:A ring.\n        field f /\\ ring_char f = p_25519\n        ==> group_carrier (curve25519x_group f) =\n              montgomery_curve (curve25519x f) /\\\n            group_id (curve25519x_group f) =\n              NONE /\\\n            group_inv (curve25519x_group f) =\n              montgomery_neg (curve25519x f) /\\\n            group_mul (curve25519x_group f) =\n              montgomery_add (curve25519x f)"), t90))
 }
 
 ///|
@@ -248,7 +248,7 @@ fn step_10() -> Unit raise {
   let t92 = @simp.asm_rewrite_tac(@list.List([@montgomery.montgomery_add(), curve25519x()]))
   let t91 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow(), @arith.even(), curve25519x_group_v1(), @class.cond_swap()]))
   let t93 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), @tactics.gen_tac), @tactics.disch_tac), @nums.induct_tac), t91), @class.cond_cases_tac), t92)
-  group_pow_curve25519x_torsion_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) n.\n        field f /\\ ring_char f = p_25519\n        ==> group_pow (curve25519x_group f) (SOME(ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)"), t93))
+  group_pow_curve25519x_torsion_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) n.\n        field f /\\ ring_char f = p_25519\n        ==> group_pow (curve25519x_group f) (SOME(ring_0 f,ring_0 f)) n =\n            if EVEN n then NONE else SOME(ring_0 f,ring_0 f)"), t93))
 }
 
 ///|
@@ -287,7 +287,7 @@ fn step_12() -> Unit raise {
   let t96 = @tactics.mp_tac(@bool.eq_imp_rule(@bool.ispec(@kernel.rand(@kernel.rand(@basics.strip_forall(@kernel.concl(quadratic_extension())).1)), t95)).0)
   let t94 = @tactics.repeat_tac(@tactics.gen_tac)
   let t102 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm()])), t94), t96), t97), @tactics.ants_tac), t101)
-  quadratic_extension_v1_c.set(@tactics.prove(@parser.parse_term("(!(r:A ring) a. ring_carrier(quadratic_extension r a) =\n                   ring_carrier r CROSS ring_carrier r) /\\\n   (!(r:A ring) a. ring_0 (quadratic_extension r a) =\n                   (ring_0 r,ring_0 r)) /\\\n   (!(r:A ring) a. ring_1 (quadratic_extension r a) =\n                   (ring_1 r,ring_0 r)) /\\\n   (!(r:A ring) a. ring_neg (quadratic_extension r a) =\n                   \\(x,y). ring_neg r x,ring_neg r y) /\\\n   (!(r:A ring) a. ring_add (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2). ring_add r x1 x2,ring_add r y1 y2) /\\\n   (!(r:A ring) a. ring_mul (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2).\n                     ring_add r (ring_mul r x1 x2)\n                                (ring_mul r (ring_of_num r a)\n                                            (ring_mul r y1 y2)),\n                     ring_add r (ring_mul r x1 y2) (ring_mul r x2 y1))"), t102))
+  quadratic_extension_v1_c.set(@tactics.prove(@parser.parse_term("(forall(r:A ring) a. ring_carrier(quadratic_extension r a) =\n                   ring_carrier r CROSS ring_carrier r) /\\\n   (forall(r:A ring) a. ring_0 (quadratic_extension r a) =\n                   (ring_0 r,ring_0 r)) /\\\n   (forall(r:A ring) a. ring_1 (quadratic_extension r a) =\n                   (ring_1 r,ring_0 r)) /\\\n   (forall(r:A ring) a. ring_neg (quadratic_extension r a) =\n                   \\(x,y). ring_neg r x,ring_neg r y) /\\\n   (forall(r:A ring) a. ring_add (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2). ring_add r x1 x2,ring_add r y1 y2) /\\\n   (forall(r:A ring) a. ring_mul (quadratic_extension r a) =\n                   \\(x1,y1) (x2,y2).\n                     ring_add r (ring_mul r x1 x2)\n                                (ring_mul r (ring_of_num r a)\n                                            (ring_mul r y1 y2)),\n                     ring_add r (ring_mul r x1 y2) (ring_mul r x2 y1))"), t102))
 }
 
 ///|
@@ -306,7 +306,7 @@ fn step_13() -> Unit raise {
   let t104 = @tactics.repeat_tac(@tactics.strip_tac)
   let t103 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image(), @pair.forall_pair_thm(), @sets.in_cross()]))
   let t106 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ringtheory.ring_homomorphism_v1(), quadratic_extension_v1(), @pair.pair_eq()])), t103), t104), t105), @ringtheory.ring_tac)
-  ring_homomorphism_into_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) a.\n    ring_homomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))"), t106))
+  ring_homomorphism_into_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) a.\n    ring_homomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))"), t106))
 }
 
 ///|
@@ -324,7 +324,7 @@ fn step_14() -> Unit raise {
   let t108 = @simp.simp_tac(@list.List([quadratic_extension_v1(), @pair.pair_eq()]))
   let t107 = @simp.rewrite_tac(@list.List([ring_homomorphism_into_quadratic_extension()]))
   let t109 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ringtheory.ring_monomorphism_alt()])), t107), t108)
-  ring_monomorphism_into_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) a.\n    ring_monomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))"), t109))
+  ring_monomorphism_into_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) a.\n    ring_monomorphism (r,quadratic_extension r a) (\\x. (x,ring_0 r))"), t109))
 }
 
 ///|
@@ -342,7 +342,7 @@ fn step_15() -> Unit raise {
   let t111 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t110 = @simp.asm_rewrite_tac(@list.List([@ringtheory.ring_of_num(), quadratic_extension_v1()]))
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t110), t111), @ringtheory.ring_tac)
-  ring_of_num_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) a n.\n        ring_of_num (quadratic_extension r a) n = (ring_of_num r n,ring_0 r)"), t112))
+  ring_of_num_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) a n.\n        ring_of_num (quadratic_extension r a) n = (ring_of_num r n,ring_0 r)"), t112))
 }
 
 ///|
@@ -360,7 +360,7 @@ fn step_16() -> Unit raise {
   let t114 = @simp.rewrite_tac(@list.List([@ringtheory.ring_neg_0()]))
   let t113 = @simp.rewrite_tac(@list.List([ring_of_num_quadratic_extension(), quadratic_extension_v1()]))
   let t115 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.forall_int_cases(), @ringtheory.ring_of_int_neg(), @ringtheory.ring_of_int_of_num()])), t113), t114)
-  ring_of_int_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) a n.\n        ring_of_int (quadratic_extension r a) n = (ring_of_int r n,ring_0 r)"), t115))
+  ring_of_int_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) a n.\n        ring_of_int (quadratic_extension r a) n = (ring_of_int r n,ring_0 r)"), t115))
 }
 
 ///|
@@ -379,7 +379,7 @@ fn step_17() -> Unit raise {
   let t117 = @tactics.match_mp_tac(@ringtheory.ring_char_monomorphic_image())
   let t116 = @tactics.conv_tac(@equal.sym_conv)
   let t119 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t116), t117), t118)
-  ring_char_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) a. ring_char (quadratic_extension r a) = ring_char r"), t119))
+  ring_char_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) a. ring_char (quadratic_extension r a) = ring_char r"), t119))
 }
 
 ///|
@@ -448,7 +448,7 @@ fn step_18() -> Unit raise {
   let t121 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @pair.exists_pair_thm(), @sets.in_cross(), @pair.pair_eq()]))
   let t120 = @simp.rewrite_tac(@list.List([@ringtheory.field(), quadratic_extension_v1()]))
   let t160 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t120), t121), t122), t124), @tactics.strip_tac), t125), t129), t159)
-  field_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("!(r:A ring) a.\n        field r /\\\n        (!d. d IN ring_carrier r ==> ~(ring_pow r d 2 = ring_of_num r a))\n        ==> field(quadratic_extension r a)"), t160))
+  field_quadratic_extension_c.set(@tactics.prove(@parser.parse_term("forall(r:A ring) a.\n        field r /\\\n        (forall d. d IN ring_carrier r ==> ~(ring_pow r d 2 = ring_of_num r a))\n        ==> field(quadratic_extension r a)"), t160))
 }
 
 ///|
@@ -566,7 +566,7 @@ fn step_22() -> Unit raise {
   let t182 = @parser.parse_term("1")
   let t183 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p_25519"), t182, t181]), @pocklington.cong_square_1_prime_power()))
   let t211 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@theorems.exists_or_thm(), @primitive.euler_criterion(), @curve25519.prime_p25519(), @prime.prime_divprod_eq()])), @tactics.gen_tac), t183), t186), t188), t189), t190), t191), @tactics.disch_tac), t192), @tactics.disch_tac), @tactics.ants_tac), t193), t197), t199), t200), t201), t202), t206), t207), t208), t209), t210)
-  let lemma = @tactics.prove(@parser.parse_term("!a. ?x. (x EXP 2 == a) (mod p_25519) \\/ (x EXP 2 == 2 * a) (mod p_25519)"), t211)
+  let lemma = @tactics.prove(@parser.parse_term("forall a. ?x. (x EXP 2 == a) (mod p_25519) \\/ (x EXP 2 == 2 * a) (mod p_25519)"), t211)
   let t242 = @tactics.conv_tac(@prime.coprime_conv)
   let t241 = @simp.rewrite_tac(@list.List([@curve25519.p_25519()]))
   let t240 = @simp.asm_rewrite_tac(@list.List([@pocklington.inverse_mod_rmul_eq()]))
@@ -596,14 +596,14 @@ fn step_22() -> Unit raise {
   let t220 = @simp.simp_tac(@list.List([@int.int_arith(@parser.parse_term("~(&p:int < &0)")), @int.int_pos(), @int.int_rem_pos_eq()]))
   let t219 = @simp.rewrite_tac(@list.List([@int.int_lt_rem_eq(), @pair.pair_eq()]))
   let t218 = @tactics.exists_tac(@parser.parse_term("&p_25519:int"))
-  let t217 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("!p. (?x y. P (&x rem p) (&y rem p)) ==> (?x y. P x y)")))
+  let t217 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall p. (?x y. P (&x rem p) (&y rem p)) ==> (?x y. P x y)")))
   let t216 = @simp.rewrite_tac(@list.List([@ringtheory.in_integer_mod_ring_carrier(), @ringtheory.integer_mod_ring_clauses()]))
   let t215 = @simp.rewrite_tac(@list.List([ring_of_num_quadratic_extension(), @pair.exists_pair_thm(), @sets.in_cross()]))
   let t214 = @simp.rewrite_tac(@list.List([sqintmod_field(), quadratic_extension_v1()]))
   let t213 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t212 = @simp.simp_tac(@list.List([@ringtheory.ring_pow_2()]))
   let t243 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]))), t212), t213), t214), t215), t216), t217), t218), t219), t220), t221), t222), t223), t224), t225), t235), t236), t238), t239), t240), t241), t242)
-  square_roots_sqintmod_field_c.set(@tactics.prove(@parser.parse_term("!n. ?x. x IN ring_carrier sqintmod_field /\\\n           ring_pow sqintmod_field x 2 = ring_of_num sqintmod_field n"), t243))
+  square_roots_sqintmod_field_c.set(@tactics.prove(@parser.parse_term("forall n. ?x. x IN ring_carrier sqintmod_field /\\\n           ring_pow sqintmod_field x 2 = ring_of_num sqintmod_field n"), t243))
 }
 
 ///|
@@ -804,7 +804,7 @@ fn step_26() -> Unit raise {
   let t245 = @tactics.match_mp_tac(@arith.num_wf())
   let t244 = @tactics.repeat_tac(@tactics.gen_tac)
   let t362 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), t244), @tactics.strip_tac), t245), t246), @tactics.disch_tac), t247), @class.cond_cases_tac), t262), t263), t264), t268), t270), t271), t275), t279), t280), t281), t282), t286), t290), t294), t296), t303), t304), @pair.let_tac), @tactics.conj_tac), t335), t337), t338), t339), t340), t341), t342), @tactics.ap_term_tac), t349), t350), t351), t356), t357), t358), t359), t360), t361)
-  purex25519_ladder_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) x y n.\n        field f /\\ ring_char f = p_25519 /\\\n        SOME(ring_of_num f x,y) IN group_carrier (curve25519x_group f) /\\\n        ~(ring_of_num f x = ring_0 f)\n        ==> let (X,Z),(X',Z') = x25519_ladder n (&x,&1) in\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) n)\n                            (ring_of_int f X,ring_of_int f Z) /\\\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) (n+1))\n                            (ring_of_int f X',ring_of_int f Z')"), t362))
+  purex25519_ladder_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) x y n.\n        field f /\\ ring_char f = p_25519 /\\\n        SOME(ring_of_num f x,y) IN group_carrier (curve25519x_group f) /\\\n        ~(ring_of_num f x = ring_0 f)\n        ==> let (X,Z),(X',Z') = x25519_ladder n (&x,&1) in\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) n)\n                            (ring_of_int f X,ring_of_int f Z) /\\\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) (n+1))\n                            (ring_of_int f X',ring_of_int f Z')"), t362))
 }
 
 ///|
@@ -825,7 +825,7 @@ fn step_27() -> Unit raise {
   let t364 = @tactics.conv_tac(@equal.top_depth_conv(@pair.let_conv))
   let t363 = @simp.rewrite_tac(@list.List([purex25519_def()]))
   let t368 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t363), @pair.let_tac), t364), t365), t366), t367)
-  purex25519_bound_c.set(@tactics.prove(@parser.parse_term("!n q. purex25519(n,q) < p_25519"), t368))
+  purex25519_bound_c.set(@tactics.prove(@parser.parse_term("forall n q. purex25519(n,q) < p_25519"), t368))
 }
 
 ///|
@@ -1008,7 +1008,7 @@ fn step_28() -> Unit raise {
   let t369 = @parser.parse_term("q:num")
   let t370 = @parser.parse_term("n:num")
   let t499 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t370, t369])), t371), @tactics.conj_tac), t382), t383), t413), t422), t426), t435), t436), @tactics.disch_tac), t440), t441), t442), t446), t448), t449), t453), t457), t458), t463), t465), t466), t467), t468), t470), t471), t472), @tactics.gen_tac), @tactics.strip_tac), t477), t478), t479), t481), t482), t483), t484), t485), t487), @tactics.ap_term_tac), t488), t489), t490), t491), t492), @tactics.conj_tac), t496), t497), t498)
-  purex25519_c.set(@tactics.prove(@parser.parse_term("!(f:A ring) n q Q.\n        field f /\\ ring_char f = p_25519 /\\\n        Q IN group_carrier(curve25519x_group f) /\\\n        montgomery_xmap f Q = ring_of_num f q\n        ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n            ring_of_num f (purex25519(n,q))"), t499))
+  purex25519_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) n q Q.\n        field f /\\ ring_char f = p_25519 /\\\n        Q IN group_carrier(curve25519x_group f) /\\\n        montgomery_xmap f Q = ring_of_num f q\n        ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n            ring_of_num f (purex25519(n,q))"), t499))
 }
 
 ///|
@@ -1072,7 +1072,7 @@ fn step_29() -> Unit raise {
     })(@equal.sym(x503))
   }), t504), t505), @tactics.strip_tac])
   let t541 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t506), t510), t511), t512), t524), t525), t526), t527), t528), t529), t530), t531), t532), t533), t534), t535), t536), t537), t538), t539), t540)
-  purex25519_unique_c.set(@tactics.prove(@parser.parse_term("!n q s. purex25519(n,q) = s <=>\n           s < p_25519 /\\\n           !Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n               montgomery_xmap sqintmod_field Q =\n               ring_of_num sqintmod_field q\n               ==> montgomery_xmap sqintmod_field\n                     (group_pow (curve25519x_group sqintmod_field) Q n) =\n                   ring_of_num sqintmod_field s"), t541))
+  purex25519_unique_c.set(@tactics.prove(@parser.parse_term("forall n q s. purex25519(n,q) = s <=>\n           s < p_25519 /\\\n           forall Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n               montgomery_xmap sqintmod_field Q =\n               ring_of_num sqintmod_field q\n               ==> montgomery_xmap sqintmod_field\n                     (group_pow (curve25519x_group sqintmod_field) Q n) =\n                   ring_of_num sqintmod_field s"), t541))
 }
 
 ///|
@@ -1092,7 +1092,7 @@ fn step_30() -> Unit raise {
   let t543 = @tactics.match_mp_tac(@class.select_unique())
   let t542 = @tactics.conv_tac(@equal.sym_conv)
   let t546 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t542), t543), t544), t545)
-  purex25519_v1_c.set(@tactics.prove(@parser.parse_term("!n q. purex25519(n,q) =\n         @s. s < p_25519 /\\\n             !Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n                 montgomery_xmap sqintmod_field Q =\n                 ring_of_num sqintmod_field q\n                 ==> montgomery_xmap sqintmod_field\n                       (group_pow (curve25519x_group sqintmod_field) Q n) =\n                     ring_of_num sqintmod_field s"), t546))
+  purex25519_v1_c.set(@tactics.prove(@parser.parse_term("forall n q. purex25519(n,q) =\n         @s. s < p_25519 /\\\n             forall Q. Q IN group_carrier(curve25519x_group sqintmod_field) /\\\n                 montgomery_xmap sqintmod_field Q =\n                 ring_of_num sqintmod_field q\n                 ==> montgomery_xmap sqintmod_field\n                       (group_pow (curve25519x_group sqintmod_field) Q n) =\n                     ring_of_num sqintmod_field s"), t546))
 }
 
 ///|
@@ -1108,7 +1108,7 @@ pub fn purex25519_v1() -> @kernel.Thm {
 /// PUREX25519_MOD
 fn step_31() -> Unit raise {
   let t547 = @simp.rewrite_tac(@list.List([purex25519_v1(), @equal.gsym(ring_char_sqintmod_field()), @ringtheory.ring_of_num_mod()]))
-  purex25519_mod_c.set(@tactics.prove(@parser.parse_term("!n q. purex25519(n,q MOD p_25519) = purex25519(n,q)"), t547))
+  purex25519_mod_c.set(@tactics.prove(@parser.parse_term("forall n q. purex25519(n,q MOD p_25519) = purex25519(n,q)"), t547))
 }
 
 ///|
@@ -1128,7 +1128,7 @@ fn step_32() -> Unit raise {
   let t549 = @tactics.repeat_tac(@tactics.strip_tac)
   let t548 = @simp.asm_rewrite_tac(@list.List([purex25519_unique()]))
   let t552 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t548), t549), t550), t551)
-  purex25519_unique_imp_c.set(@tactics.prove(@parser.parse_term("!n q s. s < p_25519 /\\\n           (!(f:(int#int)ring) Q.\n                field f /\\ ring_char f = p_25519 /\\\n                Q IN group_carrier(curve25519x_group f) /\\\n                montgomery_xmap f Q = ring_of_num f q\n                ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n                    ring_of_num f s)\n           ==> purex25519(n,q) = s"), t552))
+  purex25519_unique_imp_c.set(@tactics.prove(@parser.parse_term("forall n q s. s < p_25519 /\\\n           (forall(f:(int#int)ring) Q.\n                field f /\\ ring_char f = p_25519 /\\\n                Q IN group_carrier(curve25519x_group f) /\\\n                montgomery_xmap f Q = ring_of_num f q\n                ==> montgomery_xmap f (group_pow (curve25519x_group f) Q n) =\n                    ring_of_num f s)\n           ==> purex25519(n,q) = s"), t552))
 }
 
 ///|
@@ -1167,7 +1167,7 @@ fn step_34() -> Unit raise {
   let t554 = @simp.rewrite_tac(@list.List([rfcx25519()]))
   let t553 = @tactics.repeat_tac(@tactics.strip_tac)
   let t561 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec()])), t553), t554), @tactics.ap_term_tac), @tactics.binop_tac), t555), t556), t557), t558), t559), @tactics.ap_term_tac), t560), @int.asm_arith_tac)
-  rfcx25519_purex25519_c.set(@tactics.prove(@parser.parse_term("!n q. n IN {2 EXP 254 + 8 * i | i < 2 EXP 251} /\\ q < 2 EXP 255\n         ==> rfcx25519(n,q) = purex25519(n,q)"), t561))
+  rfcx25519_purex25519_c.set(@tactics.prove(@parser.parse_term("forall n q. n IN {2 EXP 254 + 8 * i | i < 2 EXP 251} /\\ q < 2 EXP 255\n         ==> rfcx25519(n,q) = purex25519(n,q)"), t561))
 }
 
 ///|
@@ -1257,7 +1257,7 @@ fn step_35() -> Unit raise {
     }
   })
   let t624 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([rfcx25519()]))), t565), t566), t567), t569), @tactics.gen_tac), @tactics.disch_tac), t570), t571), t572), @tactics.disch_tac), t576), t596), t600), t604), t605), t606), t607), t608), @tactics.ants_tac), t615), t616), t617), t618), t619), t620), @tactics.strip_tac), t621), t622), t623)
-  rfcx25519_base_nonzero_c.set(@tactics.prove(@parser.parse_term("!n. ~(rfcx25519(n,9) = 0)"), t624))
+  rfcx25519_base_nonzero_c.set(@tactics.prove(@parser.parse_term("forall n. ~(rfcx25519(n,9) = 0)"), t624))
 }
 
 ///|

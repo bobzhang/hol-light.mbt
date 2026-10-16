@@ -22,7 +22,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@vectors.vec_component()]))
   let t1 = @simp.simp_tac(@list.List([@vectors.interval_ne_empty(), @vectors.vector_add_component(), @vectors.vector_mul_component()]))
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([cube(), @theorems.left_imp_exists_thm(), @topology.interior_interval()])), t1), t2), @calc_rat.real_arith_tac)
-  cube_imp_nonempty_interior_c.set(@tactics.prove(@parser.parse_term("!k:real^N->bool. cube k ==> ~(interior k = {})"), t3))
+  cube_imp_nonempty_interior_c.set(@tactics.prove(@parser.parse_term("forall k:real^N->bool. cube k ==> ~(interior k = {})"), t3))
 }
 
 ///|
@@ -38,7 +38,7 @@ pub fn cube_imp_nonempty_interior() -> @kernel.Thm {
 /// CUBE_IMP_NONEMPTY
 fn step_3() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([cube_imp_nonempty_interior(), @topology.interior_empty()]))
-  cube_imp_nonempty_c.set(@tactics.prove(@parser.parse_term("!k:real^N->bool. cube k ==> ~(k = {})"), t4))
+  cube_imp_nonempty_c.set(@tactics.prove(@parser.parse_term("forall k:real^N->bool. cube k ==> ~(k = {})"), t4))
 }
 
 ///|
@@ -75,7 +75,7 @@ fn step_5() -> Unit raise {
   let t6 = @simp.simp_tac(@list.List([@integration.interval_upperbound_nonempty(), @integration.interval_lowerbound_nonempty()]))
   let t5 = @simp.rewrite_tac(@list.List([interval_length()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5), t6), t7), t8), t9), t10)
-  interval_length_cube_c.set(@tactics.prove(@parser.parse_term("!(a:real^N) d. interval_length(interval[a,a + d % vec 1]) = max d (&0)"), t11))
+  interval_length_cube_c.set(@tactics.prove(@parser.parse_term("forall(a:real^N) d. interval_length(interval[a,a + d % vec 1]) = max d (&0)"), t11))
 }
 
 ///|
@@ -95,7 +95,7 @@ fn step_6() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([interval_length()]))
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cube()])), t12), t13), t14), t15), @calc_rat.real_arith_tac)
-  interval_length_cube_component_c.set(@tactics.prove(@parser.parse_term("!(k:real^N->bool) i.\n        cube k\n        ==> interval_upperbound k$i - interval_lowerbound k$i =\n            interval_length k"), t16))
+  interval_length_cube_component_c.set(@tactics.prove(@parser.parse_term("forall(k:real^N->bool) i.\n        cube k\n        ==> interval_upperbound k$i - interval_lowerbound k$i =\n            interval_length k"), t16))
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn interval_length_cube_component() -> @kernel.Thm {
 /// INTERVAL_LENGTH_CUBE_POS
 fn step_7() -> Unit raise {
   let t17 = @tactics.then_tac(@simp.rewrite_tac(@list.List([interval_length_cube()])), @calc_rat.real_arith_tac)
-  interval_length_cube_pos_c.set(@tactics.prove(@parser.parse_term("!(a:real^N) d. &0 < d ==> interval_length(interval[a, a + d % vec 1]) = d"), t17))
+  interval_length_cube_pos_c.set(@tactics.prove(@parser.parse_term("forall(a:real^N) d. &0 < d ==> interval_length(interval[a, a + d % vec 1]) = d"), t17))
 }
 
 ///|
@@ -127,7 +127,7 @@ pub fn interval_length_cube_pos() -> @kernel.Thm {
 /// VECTOR2_CUBE
 fn step_8() -> Unit raise {
   let t18 = @simp.simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), @vectors.forall_2(), @vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.vec_component(), @vectors.vector_2(), @realarith.real_mul_rid()]))
-  vector2_cube_c.set(@tactics.prove(@parser.parse_term("!c:real^3 s. vector[c$2 + s; c$3 + s]:real^2 =\n                vector[c$2; c$3] + s % vec 1"), t18))
+  vector2_cube_c.set(@tactics.prove(@parser.parse_term("forall c:real^3 s. vector[c$2 + s; c$3 + s]:real^2 =\n                vector[c$2; c$3] + s % vec 1"), t18))
 }
 
 ///|
@@ -171,7 +171,7 @@ pub fn meson_assume_tac(x19 : @list.List[@kernel.Thm], x20 : @kernel.Term) -> @t
 ///|
 /// cube_dissection
 fn step_10() -> Unit raise {
-  cube_dissection_c.set(@pair.new_definition(@parser.parse_term("cube_dissection (d:(real^N->bool)->bool) <=>\n        d division_of UNIONS d /\\\n        (!k. k IN d ==> cube k) /\\\n        pairwise (\\k k'. ~(interval_length k = interval_length k')) d")))
+  cube_dissection_c.set(@pair.new_definition(@parser.parse_term("cube_dissection (d:(real^N->bool)->bool) <=>\n        d division_of UNIONS d /\\\n        (forall k. k IN d ==> cube k) /\\\n        pairwise (\\k k'. ~(interval_length k = interval_length k')) d")))
 }
 
 ///|
@@ -263,7 +263,7 @@ fn step_11() -> Unit raise {
     }
   }))
   let t89 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t29), t33), t35), t36), @tactics.conj_tac), t38), t39), @tactics.conj_tac), t40), t44), t46), t52), t53), t54), t55), t56), t57), @tactics.disch_tac), @tactics.ants_tac), t58), t59), t60), @tactics.disch_tac), t61), t62), t64), t65), t88)
-  point_in_multiple_division_of_gen_c.set(@tactics.prove(@parser.parse_term("!D a b u v (x:real^N) i.\n        D division_of UNIONS D /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        interval[a,b] SUBSET UNIONS D /\\\n        interval[u,v] SUBSET interval[a,b] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'"), t89))
+  point_in_multiple_division_of_gen_c.set(@tactics.prove(@parser.parse_term("forall D a b u v (x:real^N) i.\n        D division_of UNIONS D /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        interval[a,b] SUBSET UNIONS D /\\\n        interval[u,v] SUBSET interval[a,b] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'"), t89))
 }
 
 ///|
@@ -290,7 +290,7 @@ fn step_12() -> Unit raise {
   }, @list.List([@parser.parse_term("a:real^N"), t95, t94]))
   let t90 = @tactics.match_mp_tac(point_in_multiple_division_of_gen())
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t90), t96), t97), t98)
-  point_in_multiple_division_of_c.set(@tactics.prove(@parser.parse_term("!D a b u v (x:real^N) i.\n        D division_of interval[a,b] /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'"), t99))
+  point_in_multiple_division_of_c.set(@tactics.prove(@parser.parse_term("forall D a b u v (x:real^N) i.\n        D division_of interval[a,b] /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'"), t99))
 }
 
 ///|
@@ -321,7 +321,7 @@ fn step_13() -> Unit raise {
   })
   let t100 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("j:real^N->bool"))(@tactics.strip_assume_tac))
   let t113 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t100), t104), t106), t108), @tactics.strip_tac), t109), t110), t111), t112)
-  cube_exists_form_c.set(@tactics.prove(@parser.parse_term("!D:(real^N->bool)->bool.\n        cube_dissection D /\\\n        (!(x:real^N) e. interval[x,x + e % vec 1] IN D /\\\n               P(interval[x,x + e % vec 1])\n               ==> R x e)\n        ==> (?j. j IN D /\\ P j) ==> (?(x:real^N) e. R x e)"), t113))
+  cube_exists_form_c.set(@tactics.prove(@parser.parse_term("forall D:(real^N->bool)->bool.\n        cube_dissection D /\\\n        (forall(x:real^N) e. interval[x,x + e % vec 1] IN D /\\\n               P(interval[x,x + e % vec 1])\n               ==> R x e)\n        ==> (?j. j IN D /\\ P j) ==> (?(x:real^N) e. R x e)"), t113))
 }
 
 ///|
@@ -359,7 +359,7 @@ fn step_14() -> Unit raise {
   let t355 = @tactics.repeat_tac(@tactics.thenl(@tactics.ants_tac, @list.List([@calc_rat.asm_real_arith_tac, @tactics.strip_tac])))
   let t354 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a + e:real <= a <=> ~(&0 < e)"))]))
   let t353 = @simp.rewrite_tac(@list.List([@vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.vector_2(), @vectors.vec_component(), @realarith.real_mul_rid(), @class.de_morgan_thm(), @vectors.interval_ne_empty()]))
-  let t352 = @simp.asm_rewrite_tac(@list.List([@topology.eq_interval(), @topology.interior_interval(), @vectors.disjoint_interval(), @cart.cart_eq(), @class.de_morgan_thm(), @cart.dimindex_2(), @vectors.forall_2(), @vectors.in_interval(), @vectors.interval_ne_empty(), @meson.meson(@list.List([]), @parser.parse_term("(?i. 1 <= i /\\ i <= 2 /\\ P i) <=>\n      ~(!i. 1 <= i /\\ i <= 2 ==> ~P i)"))]))
+  let t352 = @simp.asm_rewrite_tac(@list.List([@topology.eq_interval(), @topology.interior_interval(), @vectors.disjoint_interval(), @cart.cart_eq(), @class.de_morgan_thm(), @cart.dimindex_2(), @vectors.forall_2(), @vectors.in_interval(), @vectors.interval_ne_empty(), @meson.meson(@list.List([]), @parser.parse_term("(?i. 1 <= i /\\ i <= 2 /\\ P i) <=>\n      ~(forall i. 1 <= i /\\ i <= 2 ==> ~P i)"))]))
   let t344 = @tactics.disch_then(fn(x337 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_3 = x337
     @tactics.map_every(fn(x343 : @list.List[Int64]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -477,7 +477,7 @@ fn step_14() -> Unit raise {
   let t277 = @parser.parse_term("(u:real^2)$1 + d = (b:real^2)$1")
   let t278 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("(u:real^2)$1 = (a:real^2)$1"), t277, t276, t275]))
   let t274 = @simp.rewrite_tac(@list.List([@vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.in_interval(), @vectors.vector_2(), @cart.dimindex_2(), @vectors.forall_2(), @vectors.vec_component(), @realarith.real_mul_rid()]))
-  let t269 = @simp.rewrite_tac(@list.List([@vectors.disjoint_interval(), @cart.dimindex_2(), @vectors.forall_2(), @vectors.in_interval(), @meson.meson(@list.List([]), @parser.parse_term("(?(i:num). 1 <= i /\\ i <= 2 /\\ (P:num->bool) i) <=>\n        ~(!i. 1 <= i /\\ i <= 2 ==> ~P i)")), @vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.vector_2(), @vectors.vec_component(), @realarith.real_mul_rid()]))
+  let t269 = @simp.rewrite_tac(@list.List([@vectors.disjoint_interval(), @cart.dimindex_2(), @vectors.forall_2(), @vectors.in_interval(), @meson.meson(@list.List([]), @parser.parse_term("(?(i:num). 1 <= i /\\ i <= 2 /\\ (P:num->bool) i) <=>\n        ~(forall i. 1 <= i /\\ i <= 2 ==> ~P i)")), @vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.vector_2(), @vectors.vec_component(), @realarith.real_mul_rid()]))
   let t266 = @simp.gen_rewrite_rule(fn(x265 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x265
   }, @list.List([@vectors.in_interval()]))
@@ -684,7 +684,7 @@ fn step_14() -> Unit raise {
     }
   })
   let t356 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t123), t125), t127), t134), t143), t144), @tactics.disch_tac), t145), t147), t151), t152), t153), t154), t155), @tactics.strip_tac), t156), @tactics.strip_tac), t157), t173), t178), t179), @tactics.ants_tac), t181), t182), @tactics.strip_tac), t186), t273), t274), t278), t279), t280), @tactics.strip_tac), t287), t288), t295), t351), t352), t353), t354), t355), @calc_rat.asm_real_arith_tac)
-  square_dissection_nonedge_c.set(@tactics.prove(@parser.parse_term("!D a b j:real^2->bool.\n        cube_dissection D /\\ UNIONS D = interval[a,b] /\\ j IN D /\\\n        (!j'. j' IN D /\\ ~(j' = j)\n             ==> interval_length(j) < interval_length j')\n        ==> j = interval[a,b] \\/ j SUBSET interval(a,b)"), t356))
+  square_dissection_nonedge_c.set(@tactics.prove(@parser.parse_term("forall D a b j:real^2->bool.\n        cube_dissection D /\\ UNIONS D = interval[a,b] /\\ j IN D /\\\n        (forall j'. j' IN D /\\ ~(j' = j)\n             ==> interval_length(j) < interval_length j')\n        ==> j = interval[a,b] \\/ j SUBSET interval(a,b)"), t356))
 }
 
 ///|
@@ -732,7 +732,7 @@ fn step_15() -> Unit raise {
   let t358 = @simp.asm_simp_tac(@list.List([@sets.finite_image(), @sets.image_eq_empty()]))
   let t357 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("IMAGE (f:A->real) s"), @sets.inf_finite_lemma()))
   let t385 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t357), t358), t359), t360), t361), t362), t363), t364), @tactics.strip_tac), t365), @tactics.conj_tac), t384)
-  finite_pairwise_minimum_c.set(@tactics.prove(@parser.parse_term("!(f:A->real) s.\n    FINITE s /\\ ~(s = {}) /\\ pairwise (\\x y. ~(f x = f y)) s\n    ==> ?x. x IN s /\\ !y. y IN s /\\ ~(y = x) ==> f x < f y"), t385))
+  finite_pairwise_minimum_c.set(@tactics.prove(@parser.parse_term("forall(f:A->real) s.\n    FINITE s /\\ ~(s = {}) /\\ pairwise (\\x y. ~(f x = f y)) s\n    ==> ?x. x IN s /\\ forall y. y IN s /\\ ~(y = x) ==> f x < f y"), t385))
 }
 
 ///|
@@ -747,7 +747,7 @@ pub fn finite_pairwise_minimum() -> @kernel.Thm {
 ///|
 /// valley
 fn step_16() -> Unit raise {
-  valley_c.set(@pair.new_definition(@parser.parse_term("valley (D:(real^3->bool)->bool) (v:real^3->bool) <=>\n    cube v /\\\n    (!z:real^3. z$1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3\n                ==> ?k. k IN D /\\ z IN k /\\\n                        interval_lowerbound k $ 1 =\n                        interval_upperbound (v:real^3->bool) $ 1) /\\\n    (!k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_lowerbound (v:real^3->bool) $ 2 <= interval_lowerbound k $ 2 /\\\n             interval_upperbound k $ 2 <= interval_upperbound (v:real^3->bool) $ 2 /\\\n             interval_lowerbound (v:real^3->bool) $ 3 <= interval_lowerbound k $ 3 /\\\n             interval_upperbound k $ 3 <= interval_upperbound (v:real^3->bool) $ 3) /\\\n    (!k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_length k < interval_length v)")))
+  valley_c.set(@pair.new_definition(@parser.parse_term("valley (D:(real^3->bool)->bool) (v:real^3->bool) <=>\n    cube v /\\\n    (forall z:real^3. z$1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3\n                ==> ?k. k IN D /\\ z IN k /\\\n                        interval_lowerbound k $ 1 =\n                        interval_upperbound (v:real^3->bool) $ 1) /\\\n    (forall k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_lowerbound (v:real^3->bool) $ 2 <= interval_lowerbound k $ 2 /\\\n             interval_upperbound k $ 2 <= interval_upperbound (v:real^3->bool) $ 2 /\\\n             interval_lowerbound (v:real^3->bool) $ 3 <= interval_lowerbound k $ 3 /\\\n             interval_upperbound k $ 3 <= interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_length k < interval_length v)")))
 }
 
 ///|
@@ -794,7 +794,7 @@ fn step_17() -> Unit raise {
     x386
   }, @list.List([@sets.extension()]))
   let t410 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t387), t388), t389), @tactics.eq_tac), t409)
-  division_whole_is_singleton_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) b.\n    D division_of interval[a,b] /\\\n    (!k:real^3->bool. k IN D ==> cube k) /\\\n    interval[a,b] IN D\n    ==> D = {interval[a,b]}"), t410))
+  division_whole_is_singleton_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) b.\n    D division_of interval[a,b] /\\\n    (forall k:real^3->bool. k IN D ==> cube k) /\\\n    interval[a,b] IN D\n    ==> D = {interval[a,b]}"), t410))
 }
 
 ///|
@@ -942,7 +942,7 @@ fn step_18() -> Unit raise {
   let t418 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t417 = @simp.simp_tac(@list.List([@vectors.vector_sub_component(), @vectors.vector_add_component(), @vectors.vector_mul_component(), @vectors.vec_component(), @vectors.basis_component(), @cart.dimindex_3()]))
   let t419 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.dimindex_3(), @vectors.forall_3()])), t417), t418), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
-  let t416 = @tactics.subgoal_then(@parser.parse_term("!i. 1 <= i /\\ i <= dimindex(:3)\n         ==> (a - d % basis 1:real^3)$i <=\n             (a - d % basis 1 + d % vec 1:real^3)$i"), fn(x413 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t416 = @tactics.subgoal_then(@parser.parse_term("forall i. 1 <= i /\\ i <= dimindex(:3)\n         ==> (a - d % basis 1:real^3)$i <=\n             (a - d % basis 1 + d % vec 1:real^3)$i"), fn(x413 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s414 = @tactics.assume_tac(x413)
     fn(x415 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s414(x415)
@@ -951,7 +951,7 @@ fn step_18() -> Unit raise {
   let t412 = meson_assume_tac(@list.List([cube_dissection()]), @parser.parse_term("D division_of interval[a:real^3, a + d % vec 1]"))
   let t411 = @simp.rewrite_tac(@list.List([valley()]))
   let t528 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t411), t412), t416), t419), t420), t428), t429), t430), t527)
-  valley_initial_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) d.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    ~(D = {interval[a, a + d % vec 1]})\n    ==> valley D (interval[a - d % basis 1, a - d % basis 1 + d % vec 1])"), t528))
+  valley_initial_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) d.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    ~(D = {interval[a, a + d % vec 1]})\n    ==> valley D (interval[a - d % basis 1, a - d % basis 1 + d % vec 1])"), t528))
 }
 
 ///|
@@ -966,7 +966,7 @@ pub fn valley_initial() -> @kernel.Thm {
 ///|
 /// DIVISION_FACE_LOWERBOUND
 fn step_19() -> Unit raise {
-  let t552 = @simp.asm_rewrite_tac(@list.List([@topology.interior_interval(), @vectors.interval_ne_empty(), @vectors.in_interval(), @vectors.disjoint_interval(), @cart.dimindex_3(), @meson.meson(@list.List([]), @parser.parse_term("(?i. 1 <= i /\\ i <= 3 /\\ P i) <=>\n     ~(!i. 1 <= i /\\ i <= 3 ==> ~P i)")), @vectors.forall_3()]))
+  let t552 = @simp.asm_rewrite_tac(@list.List([@topology.interior_interval(), @vectors.interval_ne_empty(), @vectors.in_interval(), @vectors.disjoint_interval(), @cart.dimindex_3(), @meson.meson(@list.List([]), @parser.parse_term("(?i. 1 <= i /\\ i <= 3 /\\ P i) <=>\n     ~(forall i. 1 <= i /\\ i <= 3 ==> ~P i)")), @vectors.forall_3()]))
   let t544 = @parser.parse_term("(x:real^3)$3 < interval_upperbound (k:real^3->bool) $ 3")
   let t545 = @parser.parse_term("interval_lowerbound (k:real^3->bool) $ 3 < (x:real^3)$3")
   let t546 = @parser.parse_term("(x:real^3)$2 < interval_upperbound (k:real^3->bool) $ 2")
@@ -995,7 +995,7 @@ fn step_19() -> Unit raise {
   let t530 = @list.List([@meson.asm_meson_tac(@list.List([@integration.division_of()])), @tactics.all_tac])
   let t529 = @tactics.subgoal_then(@parser.parse_term("?u v:real^3. k = interval[u,v] /\\ ~(interval[u,v] = {})"), @tactics.strip_assume_tac)
   let t553 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t529), t530), t531), t532), t533), t534), t535), t539), t540), t551), t552), @calc_rat.real_arith_tac)
-  division_face_lowerbound_c.set(@tactics.prove(@parser.parse_term("!D (k:real^3->bool) j (x:real^3).\n    D division_of UNIONS D /\\\n    ~(interior k = {}) /\\ ~(interior j = {}) /\\\n    k IN D /\\ j IN D /\\ ~(j = k) /\\\n    x IN k /\\ x IN j /\\\n    x$1 = interval_upperbound k $ 1 /\\\n    interval_lowerbound k $ 2 < x$2 /\\\n    x$2 < interval_upperbound k $ 2 /\\\n    interval_lowerbound k $ 3 < x$3 /\\\n    x$3 < interval_upperbound k $ 3\n    ==> interval_lowerbound j $ 1 = interval_upperbound k $ 1"), t553))
+  division_face_lowerbound_c.set(@tactics.prove(@parser.parse_term("forall D (k:real^3->bool) j (x:real^3).\n    D division_of UNIONS D /\\\n    ~(interior k = {}) /\\ ~(interior j = {}) /\\\n    k IN D /\\ j IN D /\\ ~(j = k) /\\\n    x IN k /\\ x IN j /\\\n    x$1 = interval_upperbound k $ 1 /\\\n    interval_lowerbound k $ 2 < x$2 /\\\n    x$2 < interval_upperbound k $ 2 /\\\n    interval_lowerbound k $ 3 < x$3 /\\\n    x$3 < interval_upperbound k $ 3\n    ==> interval_lowerbound j $ 1 = interval_upperbound k $ 1"), t553))
 }
 
 ///|
@@ -1145,7 +1145,7 @@ fn step_21() -> Unit raise {
   let t825 = @simp.expand_tac("E")
   let t824 = @tactics.undisch_tac(@parser.parse_term("(e0:real^2->bool) IN E"))
   let t866 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("e0:real^2->bool")), @tactics.strip_tac), t824), t825), t826), t827), t828), t829), t833), t839), t843), t849), t850), t851), t855), t858), t862), t865), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
-  let t823 = @tactics.subgoal_then(@parser.parse_term("!e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e"), fn(x820 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t823 = @tactics.subgoal_then(@parser.parse_term("forall e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e"), fn(x820 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s821 = @tactics.assume_tac(x820)
     fn(x822 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s821(x822)
@@ -1323,7 +1323,7 @@ fn step_21() -> Unit raise {
   let t678 = meson_assume_tac(@list.List([]), @parser.parse_term("(c1:real^3)$1 = (c2:real^3)$1"))
   let t677 = @parser.parse_term("e2:real^2->bool")
   let t697 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("e1:real^2->bool"), t677])), @tactics.strip_tac), e_pair_preimage_tac), t678), t679), t680), @tactics.disch_tac), t687), t688), t689), t690), t694), t695), t696), @tactics.all_tac])
-  let t676 = @tactics.subgoal_then(@parser.parse_term("!e1 e2:real^2->bool. e1 IN E /\\ e2 IN E /\\ ~(e1 = e2)\n       ==> interior e1 INTER interior e2 = {}"), fn(x673 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t676 = @tactics.subgoal_then(@parser.parse_term("forall e1 e2:real^2->bool. e1 IN E /\\ e2 IN E /\\ ~(e1 = e2)\n       ==> interior e1 INTER interior e2 = {}"), fn(x673 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s674 = ((x672 : @kernel.Thm) => @tactics.label_tac("edisj", x672))(x673)
     fn(x675 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s674(x675)
@@ -1340,7 +1340,7 @@ fn step_21() -> Unit raise {
   let t662 = @simp.rewrite_tac(@list.List([@sets.in_image(), @sets.in_elim_thm()]))
   let t661 = @simp.expand_tac("E")
   let t671 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("ea:real^2->bool")), t661), t662), t663), t664), t665), t666), @list.List([cube_bounds_tac, @tactics.all_tac])), t667), t668), t669), t670), @tactics.all_tac])
-  let t660 = @tactics.subgoal_then(@parser.parse_term("!e:real^2->bool. e IN E ==> cube e"), fn(x657 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t660 = @tactics.subgoal_then(@parser.parse_term("forall e:real^2->bool. e IN E ==> cube e"), fn(x657 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s658 = ((x656 : @kernel.Thm) => @tactics.label_tac("ecub", x656))(x657)
     fn(x659 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s658(x659)
@@ -1387,7 +1387,7 @@ fn step_21() -> Unit raise {
       s625(x626)
     }
   }), t636), t640), t645), t649), t655), t660), t671), t676), t697), t702), t714), t718), t741), t745), t819), t823), t866), t867), @tactics.all_tac])
-  let t622 = @tactics.subgoal_then(@parser.parse_term("cube_dissection (E:(real^2->bool)->bool) /\\\n     UNIONS E = (face_sq:real^2->bool) /\\\n     (proj_k:real^2->bool) IN E /\\\n     (!e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e)"), @tactics.strip_assume_tac)
+  let t622 = @tactics.subgoal_then(@parser.parse_term("cube_dissection (E:(real^2->bool)->bool) /\\\n     UNIONS E = (face_sq:real^2->bool) /\\\n     (proj_k:real^2->bool) IN E /\\\n     (forall e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e)"), @tactics.strip_assume_tac)
   let t621 = @simp.abbrev_tac(@parser.parse_term("proj_k = interval[vector[(ck:real^3)$2; ck$3]:real^2,\n                        vector[ck$2 + sk; ck$3 + sk]]"))
   let t620 = @simp.abbrev_tac(@parser.parse_term("face_sq = interval[vector[(cv:real^3)$2; cv$3]:real^2,\n                         vector[cv$2 + sv; cv$3 + sv]]"))
   let t619 = @simp.abbrev_tac(@parser.parse_term("E = IMAGE (\\m:real^3->bool.\n       interval[vector[(interval_lowerbound m)$2;\n                       (interval_lowerbound m)$3]:real^2,\n                vector[(interval_upperbound m)$2;\n                       (interval_upperbound m)$3]])\n       {m | m IN D /\\\n            interval_lowerbound m $ 1 = (cv:real^3)$1 + sv /\\\n            (?z:real^3. z IN m /\\\n                 cv$2 < z$2 /\\ z$2 < cv$2 + sv /\\\n                 cv$3 < z$3 /\\ z$3 < cv$3 + sv)}"))
@@ -1451,7 +1451,7 @@ fn step_21() -> Unit raise {
     @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.label_tac("vcub", @bool.conjunct1(th_p)), t574), t575), t576)
   })
   let t899 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t577), t578), t579), t580), t581), t582), t583), t584), t585), t586), t587), t591), t593), t594), t604), t608), t618), t619), t620), t621), t622), t868), t872), @tactics.ants_tac), t874), t875), t898)
-  valley_face_interior_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) d (v:real^3->bool) k.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (!j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j')\n    ==> interval_lowerbound (v:real^3->bool) $ 2 < interval_lowerbound k $ 2 /\\\n        interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n        interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n        interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3"), t899))
+  valley_face_interior_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) d (v:real^3->bool) k.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j')\n    ==> interval_lowerbound (v:real^3->bool) $ 2 < interval_lowerbound k $ 2 /\\\n        interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n        interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n        interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3"), t899))
 }
 
 ///|
@@ -1486,7 +1486,7 @@ fn step_22() -> Unit raise {
     }
   })
   let t914 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t903), t905), t911), t912), t913)
-  real_open_interval_avoid_finite_c.set(@tactics.prove(@parser.parse_term("!s a b. FINITE s /\\ a < b ==> ?x:real. a < x /\\ x < b /\\ ~(x IN s)"), t914))
+  real_open_interval_avoid_finite_c.set(@tactics.prove(@parser.parse_term("forall s a b. FINITE s /\\ a < b ==> ?x:real. a < x /\\ x < b /\\ ~(x IN s)"), t914))
 }
 
 ///|
@@ -1785,7 +1785,7 @@ fn step_24() -> Unit raise {
   let t1053 = @parser.parse_term("a:real^3")
   let t1054 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("D:(real^3->bool)->bool"), t1053, t1052, t1051, t1050]), valley_face_interior()))
   let t1124 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1054), @tactics.ants_tac), t1056), @tactics.strip_tac), t1057), t1058), t1059), t1060), t1061), t1062), t1063), t1064), t1065), t1066), t1067), t1068), t1069), t1070), t1071), t1072), t1073), t1074), t1075), t1079), t1080), t1081), t1089), t1090), t1093), t1097), t1098), t1099), t1123)
-  valley_descent_containment_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) d (v:real^3->bool) k j.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (!j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j') /\\\n    j IN D /\\\n    interval_lowerbound j $ 1 = interval_upperbound k $ 1 /\\\n    (?z:real^3. z IN j /\\\n         interval_lowerbound k $ 2 < z$2 /\\ z$2 < interval_upperbound k $ 2 /\\\n         interval_lowerbound k $ 3 < z$3 /\\ z$3 < interval_upperbound k $ 3)\n    ==> interval_lowerbound k $ 2 <= interval_lowerbound j $ 2 /\\\n        interval_upperbound j $ 2 <= interval_upperbound k $ 2 /\\\n        interval_lowerbound k $ 3 <= interval_lowerbound j $ 3 /\\\n        interval_upperbound j $ 3 <= interval_upperbound k $ 3"), t1124))
+  valley_descent_containment_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) d (v:real^3->bool) k j.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j') /\\\n    j IN D /\\\n    interval_lowerbound j $ 1 = interval_upperbound k $ 1 /\\\n    (?z:real^3. z IN j /\\\n         interval_lowerbound k $ 2 < z$2 /\\ z$2 < interval_upperbound k $ 2 /\\\n         interval_lowerbound k $ 3 < z$3 /\\ z$3 < interval_upperbound k $ 3)\n    ==> interval_lowerbound k $ 2 <= interval_lowerbound j $ 2 /\\\n        interval_upperbound j $ 2 <= interval_upperbound k $ 2 /\\\n        interval_lowerbound k $ 3 <= interval_lowerbound j $ 3 /\\\n        interval_upperbound j $ 3 <= interval_upperbound k $ 3"), t1124))
 }
 
 ///|
@@ -1847,7 +1847,7 @@ fn step_25() -> Unit raise {
   let t1132 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("D:(real^3->bool)->bool"), t1129, t1128, t1127, t1126]), valley_face_interior())), t1130), t1131), @tactics.all_tac])
   let t1125 = @tactics.subgoal_then(@parser.parse_term("interval_lowerbound (v:real^3->bool) $ 2 <\n       interval_lowerbound (k:real^3->bool) $ 2 /\\\n     interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n     interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n     interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3"), @tactics.strip_assume_tac)
   let t1167 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1125), t1132), t1133), t1134), t1135), @list.List([cube_bounds_tac, @tactics.all_tac])), t1136), t1140), t1146), t1147), t1159), t1160), t1161), t1162), t1163), @tactics.conj_tac), t1166)
-  valley_face_exists_another_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) d (v:real^3->bool) (k:real^3->bool).\n     &0 < d /\\\n     cube_dissection D /\\\n     UNIONS D = interval[a, a + d % vec 1] /\\\n     valley D v /\\\n     k IN D /\\\n     interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n     (?z. z IN k /\\\n          interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n          z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n          interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n          z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n     (!j'. j' IN D /\\ ~(j' = k) /\\\n           interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n           (?z. z IN j' /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3)\n           ==> interval_length k < interval_length j')\n     ==> ?j0. j0 IN D /\\ ~(j0 = k) /\\\n              interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n              (?z'. z' IN j0 /\\\n                    interval_lowerbound (v:real^3->bool) $ 2 < z'$2 /\\\n                    z'$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                    interval_lowerbound (v:real^3->bool) $ 3 < z'$3 /\\\n                    z'$3 < interval_upperbound (v:real^3->bool) $ 3)"), t1167))
+  valley_face_exists_another_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) d (v:real^3->bool) (k:real^3->bool).\n     &0 < d /\\\n     cube_dissection D /\\\n     UNIONS D = interval[a, a + d % vec 1] /\\\n     valley D v /\\\n     k IN D /\\\n     interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n     (?z. z IN k /\\\n          interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n          z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n          interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n          z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n     (forall j'. j' IN D /\\ ~(j' = k) /\\\n           interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n           (?z. z IN j' /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3)\n           ==> interval_length k < interval_length j')\n     ==> ?j0. j0 IN D /\\ ~(j0 = k) /\\\n              interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n              (?z'. z' IN j0 /\\\n                    interval_lowerbound (v:real^3->bool) $ 2 < z'$2 /\\\n                    z'$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                    interval_lowerbound (v:real^3->bool) $ 3 < z'$3 /\\\n                    z'$3 < interval_upperbound (v:real^3->bool) $ 3)"), t1167))
 }
 
 ///|
@@ -2144,7 +2144,7 @@ fn step_26() -> Unit raise {
   let t1169 = meson_assume_tac(@list.List([@integration.division_of()]), @parser.parse_term("FINITE(D:(real^3->bool)->bool)"))
   let t1168 = meson_assume_tac(@list.List([cube_dissection()]), @parser.parse_term("(D:(real^3->bool)->bool) division_of UNIONS D"))
   let t1401 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1168), t1169), t1170), t1171), t1212), t1213), t1215), @tactics.ants_tac), t1227), t1228), t1229), t1233), t1234), t1235), t1236), t1237), t1238), t1239), t1240), t1400)
-  valley_descent_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v\n    ==> ?k. k IN D /\\ interval_length k < interval_length v /\\\n            valley D k"), t1401))
+  valley_descent_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v\n    ==> ?k. k IN D /\\ interval_length k < interval_length v /\\\n            valley D k"), t1401))
 }
 
 ///|
@@ -2223,14 +2223,14 @@ fn step_27() -> Unit raise {
   let t1409 = @tactics.x_gen_tac(@parser.parse_term("v':real^3->bool"))
   let t1408 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t1407 = @tactics.match_mp_tac(@arith.num_wf())
-  let t1406 = @tactics.subgoal_then(@parser.parse_term("!n (v:real^3->bool).\n       CARD {k:real^3->bool | k IN (D:(real^3->bool)->bool) /\\\n             interval_length k < interval_length v}\n       = n /\\ valley D v ==> F"), fn(x1404 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1406 = @tactics.subgoal_then(@parser.parse_term("forall n (v:real^3->bool).\n       CARD {k:real^3->bool | k IN (D:(real^3->bool)->bool) /\\\n             interval_length k < interval_length v}\n       = n /\\ valley D v ==> F"), fn(x1404 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1404
     @meson.asm_meson_tac(@list.List([th]))
   })
   let t1403 = meson_assume_tac(@list.List([@integration.division_of()]), @parser.parse_term("FINITE(D:(real^3->bool)->bool)"))
   let t1402 = meson_assume_tac(@list.List([cube_dissection()]), @parser.parse_term("(D:(real^3->bool)->bool) division_of UNIONS D"))
   let t1459 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1402), t1403), t1406), t1407), t1408), @tactics.disch_tac), t1409), @tactics.strip_tac), t1413), t1414), t1415), t1422), @tactics.ants_tac), t1458)
-  valley_impossible_c.set(@tactics.prove(@parser.parse_term("!D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v ==> F"), t1459))
+  valley_impossible_c.set(@tactics.prove(@parser.parse_term("forall D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v ==> F"), t1459))
 }
 
 ///|
@@ -2256,7 +2256,7 @@ fn step_28() -> Unit raise {
   let t1461 = @simp.asm_rewrite_tac(@list.List([]))
   let t1460 = @class.asm_cases_tac(@parser.parse_term("D = {interval[a:real^3, a + d % vec 1]}"))
   let t1470 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1460), t1461), t1465), @tactics.ants_tac), t1469)
-  only_trivial_cube_dissection_cube_c.set(@tactics.prove(@parser.parse_term("!(a:real^3) d D.\n        &0 < d /\\\n        cube_dissection D /\\\n        UNIONS D = interval[a, a + d % vec 1]\n        ==> D = {interval[a, a + d % vec 1]}"), t1470))
+  only_trivial_cube_dissection_cube_c.set(@tactics.prove(@parser.parse_term("forall(a:real^3) d D.\n        &0 < d /\\\n        cube_dissection D /\\\n        UNIONS D = interval[a, a + d % vec 1]\n        ==> D = {interval[a, a + d % vec 1]}"), t1470))
 }
 
 ///|
@@ -2282,7 +2282,7 @@ fn step_29() -> Unit raise {
     }
   }, @tactics.x_choose_then(@parser.parse_term("a:real^3"))(t1474)))
   let t1479 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([cube()]))), t1475), t1476), t1477), t1478)
-  only_trivial_cube_dissection_c.set(@tactics.prove(@parser.parse_term("!D:(real^3->bool)->bool.\n        cube_dissection D /\\ cube(UNIONS D) ==> D = {UNIONS D}"), t1479))
+  only_trivial_cube_dissection_c.set(@tactics.prove(@parser.parse_term("forall D:(real^3->bool)->bool.\n        cube_dissection D /\\ cube(UNIONS D) ==> D = {UNIONS D}"), t1479))
 }
 
 ///|

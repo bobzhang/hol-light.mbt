@@ -307,7 +307,7 @@ fn number(inp : ArrayView[Lexcode]) -> (Int, ArrayView[Lexcode]) raise {
 
 ///|
 fn pa_prefix(inp : ArrayView[Lexcode]) -> (List[Tactic], ArrayView[Lexcode]) raise {
-  let pa_fix = @parser.map(@parser.seq(tok(Ident("!")), fix_parser), p => p.1)
+  let pa_fix = @parser.map(@parser.seq(tok(Ident("forall")), fix_parser), p => p.1)
   let pa_dest = @parser.map(destruct, ttac => @tactics.disch_then(ttac))
   @parser.elistof(
     @parser.alt(pa_fix, pa_dest),

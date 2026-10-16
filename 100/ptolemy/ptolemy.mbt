@@ -38,7 +38,7 @@ fn step_2() -> Unit raise {
   let t3 = @tactics.match_mp_tac(@real.sqrt_unique())
   let t2 = @simp.rewrite_tac(@list.List([@vectors.dist(), @vectors.vector_norm()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2), t3), @tactics.conj_tac), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18)
-  dist_segment_lemma_c.set(@tactics.prove(@parser.parse_term("!a1 a2. &0 <= a1 /\\ a1 <= a2 /\\ a2 <= &2 * pi /\\ &0 <= radius\n           ==> dist(centre + radius % vector [cos(a1);sin(a1)] :real^2,\n                    centre + radius % vector [cos(a2);sin(a2)]) =\n               &2 * radius *  sin((a2 - a1) / &2)"), t19))
+  dist_segment_lemma_c.set(@tactics.prove(@parser.parse_term("forall a1 a2. &0 <= a1 /\\ a1 <= a2 /\\ a2 <= &2 * pi /\\ &0 <= radius\n           ==> dist(centre + radius % vector [cos(a1);sin(a1)] :real^2,\n                    centre + radius % vector [cos(a2);sin(a2)]) =\n               &2 * radius *  sin((a2 - a1) / &2)"), t19))
 }
 
 ///|
@@ -100,7 +100,7 @@ fn step_3() -> Unit raise {
     }, x27))(x28))
   }))
   let t50 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), t40), t41), t47), t48), t49)
-  ptolemy_c.set(@tactics.prove(@parser.parse_term("!A B C D:real^2 a b c d centre radius.\n        A = centre + radius % vector [cos(a);sin(a)] /\\\n        B = centre + radius % vector [cos(b);sin(b)] /\\\n        C = centre + radius % vector [cos(c);sin(c)] /\\\n        D = centre + radius % vector [cos(d);sin(d)] /\\\n        &0 <= radius /\\\n        &0 <= a /\\ a <= b /\\ b <= c /\\ c <= d /\\ d <= &2 * pi\n        ==> dist(A,C) * dist(B,D) =\n            dist(A,B) * dist(C,D) + dist(A,D) * dist(B,C)"), t50))
+  ptolemy_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^2 a b c d centre radius.\n        A = centre + radius % vector [cos(a);sin(a)] /\\\n        B = centre + radius % vector [cos(b);sin(b)] /\\\n        C = centre + radius % vector [cos(c);sin(c)] /\\\n        D = centre + radius % vector [cos(d);sin(d)] /\\\n        &0 <= radius /\\\n        &0 <= a /\\ a <= b /\\ b <= c /\\ c <= d /\\ d <= &2 * pi\n        ==> dist(A,C) * dist(B,D) =\n            dist(A,B) * dist(C,D) + dist(A,D) * dist(B,C)"), t50))
 }
 
 ///|

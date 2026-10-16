@@ -105,7 +105,7 @@ fn step_2() -> Unit raise {
   let t2 = @class.asm_cases_tac(@parser.parse_term("v * s = &0"))
   let t1 = @tactics.repeat_tac(@tactics.gen_tac)
   let t70 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1), t2), t4), @tactics.strip_tac), t8), t10), t14), t20), t21), t22), t26), t55), t56), t57), t68), t69)
-  step_lemma_c.set(@tactics.prove(@parser.parse_term("!P. (!n. P(&n)) /\\\n       (!x. P x ==> P(--x)) /\\\n       (!x. P x /\\ ~(x = &0) ==> P(inv x)) /\\\n       (!x y. P x /\\ P y ==> P(x + y)) /\\\n       (!x y. P x /\\ P y ==> P(x * y))\n       ==> !a b c z u v s.\n               P a /\\ P b /\\ P c /\\\n               z pow 3 + a * z pow 2 + b * z + c = &0 /\\\n               P u /\\ P v /\\ P(s * s) /\\ z = u + v * s\n               ==> ?w. P w /\\ w pow 3 + a * w pow 2 + b * w + c = &0"), t70))
+  step_lemma_c.set(@tactics.prove(@parser.parse_term("forall P. (forall n. P(&n)) /\\\n       (forall x. P x ==> P(--x)) /\\\n       (forall x. P x /\\ ~(x = &0) ==> P(inv x)) /\\\n       (forall x y. P x /\\ P y ==> P(x + y)) /\\\n       (forall x y. P x /\\ P y ==> P(x * y))\n       ==> forall a b c z u v s.\n               P a /\\ P b /\\ P c /\\\n               z pow 3 + a * z pow 2 + b * z + c = &0 /\\\n               P u /\\ P v /\\ P(s * s) /\\ z = u + v * s\n               ==> ?w. P w /\\ w pow 3 + a * w pow 2 + b * w + c = &0"), t70))
 }
 
 ///|
@@ -132,7 +132,7 @@ fn step_3() -> Unit raise {
       }
     })(t74(x75))
   })), t76), t77), t78)
-  step_lemma_sqrt_c.set(@tactics.prove(@parser.parse_term("!P. (!n. P(&n)) /\\\n       (!x. P x ==> P(--x)) /\\\n       (!x. P x /\\ ~(x = &0) ==> P(inv x)) /\\\n       (!x y. P x /\\ P y ==> P(x + y)) /\\\n       (!x y. P x /\\ P y ==> P(x * y))\n       ==> !a b c z u v s.\n               P a /\\ P b /\\ P c /\\\n               z pow 3 + a * z pow 2 + b * z + c = &0 /\\\n               P u /\\ P v /\\ P(s) /\\ &0 <= s /\\ z = u + v * sqrt(s)\n               ==> ?w. P w /\\ w pow 3 + a * w pow 2 + b * w + c = &0"), t79))
+  step_lemma_sqrt_c.set(@tactics.prove(@parser.parse_term("forall P. (forall n. P(&n)) /\\\n       (forall x. P x ==> P(--x)) /\\\n       (forall x. P x /\\ ~(x = &0) ==> P(inv x)) /\\\n       (forall x y. P x /\\ P y ==> P(x + y)) /\\\n       (forall x y. P x /\\ P y ==> P(x * y))\n       ==> forall a b c z u v s.\n               P a /\\ P b /\\ P c /\\\n               z pow 3 + a * z pow 2 + b * z + c = &0 /\\\n               P u /\\ P v /\\ P(s) /\\ &0 <= s /\\ z = u + v * sqrt(s)\n               ==> ?w. P w /\\ w pow 3 + a * w pow 2 + b * w + c = &0"), t79))
 }
 
 ///|
@@ -174,7 +174,7 @@ pub fn radical_cases() -> @kernel.Thm {
 ///|
 /// radical_RULES, radical_INDUCT, radical_CASES
 fn step_4() -> Unit raise {
-  let (radical_rules, radical_induct, radical_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!x. rational x ==> radical x) /\\\n  (!x. radical x ==> radical (--x)) /\\\n  (!x. radical x /\\ ~(x = &0) ==> radical (inv x)) /\\\n  (!x y. radical x /\\ radical y ==> radical (x + y)) /\\\n  (!x y. radical x /\\ radical y ==> radical (x * y)) /\\\n  (!x. radical x /\\ &0 <= x ==> radical (sqrt x))"))
+  let (radical_rules, radical_induct, radical_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall x. rational x ==> radical x) /\\\n  (forall x. radical x ==> radical (--x)) /\\\n  (forall x. radical x /\\ ~(x = &0) ==> radical (inv x)) /\\\n  (forall x y. radical x /\\ radical y ==> radical (x + y)) /\\\n  (forall x y. radical x /\\ radical y ==> radical (x * y)) /\\\n  (forall x. radical x /\\ &0 <= x ==> radical (sqrt x))"))
   radical_rules_c.set(radical_rules)
   radical_induct_c.set(radical_induct)
   radical_cases_c.set(radical_cases)
@@ -185,7 +185,7 @@ fn step_4() -> Unit raise {
 fn step_5() -> Unit raise {
   let t80 = @simp.asm_simp_tac(@list.List([radical_rules(), @realax.real_pow(), @floor.rational_num()]))
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@realax.real_div(), @realax.real_sub(), radical_rules(), @floor.rational_num()])), @tactics.gen_tac), @nums.induct_tac), t80)
-  radical_rules_v1_c.set(@tactics.prove(@parser.parse_term("(!n. radical(&n)) /\\\n   (!x. rational x ==> radical x) /\\\n   (!x. radical x ==> radical (--x)) /\\\n   (!x. radical x /\\ ~(x = &0) ==> radical (inv x)) /\\\n   (!x y. radical x /\\ radical y ==> radical (x + y)) /\\\n   (!x y. radical x /\\ radical y ==> radical (x - y)) /\\\n   (!x y. radical x /\\ radical y ==> radical (x * y)) /\\\n   (!x y. radical x /\\ radical y /\\ ~(y = &0) ==> radical (x / y)) /\\\n   (!x n. radical x ==> radical(x pow n)) /\\\n   (!x. radical x /\\ &0 <= x ==> radical (sqrt x))"), t81))
+  radical_rules_v1_c.set(@tactics.prove(@parser.parse_term("(forall n. radical(&n)) /\\\n   (forall x. rational x ==> radical x) /\\\n   (forall x. radical x ==> radical (--x)) /\\\n   (forall x. radical x /\\ ~(x = &0) ==> radical (inv x)) /\\\n   (forall x y. radical x /\\ radical y ==> radical (x + y)) /\\\n   (forall x y. radical x /\\ radical y ==> radical (x - y)) /\\\n   (forall x y. radical x /\\ radical y ==> radical (x * y)) /\\\n   (forall x y. radical x /\\ radical y /\\ ~(y = &0) ==> radical (x / y)) /\\\n   (forall x n. radical x ==> radical(x pow n)) /\\\n   (forall x. radical x /\\ &0 <= x ==> radical (sqrt x))"), t81))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn radicals() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t84 = @simp.simp_tac(@list.List([radicals(), @sets.finite_rules(), @sets.finite_union()]))
   let t85 = @tactics.then_tac(@tactics.match_mp_tac(expression_induct()), t84)
-  finite_radicals_c.set(@tactics.prove(@parser.parse_term("!e. FINITE(radicals e)"), t85))
+  finite_radicals_c.set(@tactics.prove(@parser.parse_term("forall e. FINITE(radicals e)"), t85))
 }
 
 ///|
@@ -308,7 +308,7 @@ fn step_12() -> Unit raise {
   let t87 = @meson.meson_tac(@list.List([]))
   let t86 = @simp.rewrite_tac(@list.List([radicals(), wellformed(), @sets.not_in_empty(), @sets.in_union(), @sets.in_insert()]))
   let t88 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(expression_induct()), t86), t87)
-  wellformed_radicals_c.set(@tactics.prove(@parser.parse_term("!e. wellformed e ==> !r. r IN radicals(e) ==> &0 <= value r"), t88))
+  wellformed_radicals_c.set(@tactics.prove(@parser.parse_term("forall e. wellformed e ==> forall r. r IN radicals(e) ==> &0 <= value r"), t88))
 }
 
 ///|
@@ -326,7 +326,7 @@ fn step_13() -> Unit raise {
   let t90 = @meson.meson_tac(@list.List([]))
   let t89 = @simp.rewrite_tac(@list.List([radicals(), wellformed(), @sets.not_in_empty(), @sets.in_union(), @sets.in_insert()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(expression_induct()), t89), t90)
-  radicals_wellformed_c.set(@tactics.prove(@parser.parse_term("!e. wellformed e ==> !r. r IN radicals e ==> wellformed r"), t91))
+  radicals_wellformed_c.set(@tactics.prove(@parser.parse_term("forall e. wellformed e ==> forall r. r IN radicals e ==> wellformed r"), t91))
 }
 
 ///|
@@ -344,7 +344,7 @@ fn step_14() -> Unit raise {
   let t93 = @meson.meson_tac(@list.List([]))
   let t92 = @simp.rewrite_tac(@list.List([radicals(), @sets.in_union(), @sets.not_in_empty(), @sets.in_insert(), @sets.subset()]))
   let t94 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(expression_induct()), t92), t93)
-  radicals_subset_c.set(@tactics.prove(@parser.parse_term("!e r. r IN radicals e ==> radicals(r) SUBSET radicals(e)"), t94))
+  radicals_subset_c.set(@tactics.prove(@parser.parse_term("forall e r. r IN radicals e ==> radicals(r) SUBSET radicals(e)"), t94))
 }
 
 ///|
@@ -378,7 +378,7 @@ fn step_15() -> Unit raise {
   let t95 = @parser.parse_term("x:real")
   let t96 = @tactics.spec_tac(@parser.parse_term("x:real"), t95)
   let t111 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t96), t110)
-  radical_expression_c.set(@tactics.prove(@parser.parse_term("!x. radical x <=> ?e. wellformed e /\\ x = value e"), t111))
+  radical_expression_c.set(@tactics.prove(@parser.parse_term("forall x. radical x <=> ?e. wellformed e /\\ x = value e"), t111))
 }
 
 ///|
@@ -393,7 +393,7 @@ pub fn radical_expression() -> @kernel.Thm {
 ///|
 /// LT_MAX
 fn step_16() -> Unit raise {
-  lt_max_c.set(@tactics.prove(@parser.parse_term("!a b c. a < MAX b c <=> a < b \\/ a < c"), @int.arith_tac))
+  lt_max_c.set(@tactics.prove(@parser.parse_term("forall a b c. a < MAX b c <=> a < b \\/ a < c"), @int.arith_tac))
 }
 
 ///|
@@ -427,7 +427,7 @@ fn step_18() -> Unit raise {
   let t113 = @simp.rewrite_tac(@list.List([@sets.in_union(), @sets.not_in_empty(), @sets.in_insert(), lt_max()]))
   let t112 = @simp.rewrite_tac(@list.List([radicals(), depth()]))
   let t115 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(expression_induct()), t112), t113), t114)
-  in_radicals_smaller_c.set(@tactics.prove(@parser.parse_term("!r s. s IN radicals(r) ==> depth(s) < depth(r)"), t115))
+  in_radicals_smaller_c.set(@tactics.prove(@parser.parse_term("forall r s. s IN radicals(r) ==> depth(s) < depth(r)"), t115))
 }
 
 ///|
@@ -443,7 +443,7 @@ pub fn in_radicals_smaller() -> @kernel.Thm {
 /// NOT_IN_OWN_RADICALS
 fn step_19() -> Unit raise {
   let t116 = @meson.meson_tac(@list.List([in_radicals_smaller(), @arith.lt_refl()]))
-  not_in_own_radicals_c.set(@tactics.prove(@parser.parse_term("!r. ~(r IN radicals r)"), t116))
+  not_in_own_radicals_c.set(@tactics.prove(@parser.parse_term("forall r. ~(r IN radicals r)"), t116))
 }
 
 ///|
@@ -467,7 +467,7 @@ fn step_20() -> Unit raise {
   let t118 = @tactics.repeat_tac(@tactics.conj_tac)
   let t117 = @simp.rewrite_tac(@list.List([wellformed(), value(), radicals(), @sets.empty_union(), @sets.not_insert_empty()]))
   let t124 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(expression_induct()), t117), t118), t119), t122), t123)
-  radicals_empty_rational_c.set(@tactics.prove(@parser.parse_term("!e. wellformed e /\\ radicals e = {} ==> rational(value e)"), t124))
+  radicals_empty_rational_c.set(@tactics.prove(@parser.parse_term("forall e. wellformed e /\\ radicals e = {} ==> rational(value e)"), t124))
 }
 
 ///|
@@ -489,7 +489,7 @@ fn step_21() -> Unit raise {
   let t126 = @tactics.repeat_tac(@tactics.gen_tac)
   let t125 = @simp.rewrite_tac(@list.List([@sets.not_insert_empty(), @sets.in_insert()]))
   let t131 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_induct_strong()), t125), t126), t127), t128), t129), t130)
-  finite_max_c.set(@tactics.prove(@parser.parse_term("!s. FINITE s ==> ~(s = {}) ==> ?b:num. b IN s /\\ !a. a IN s ==> a <= b"), t131))
+  finite_max_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s ==> ~(s = {}) ==> ?b:num. b IN s /\\ forall a. a IN s ==> a <= b"), t131))
 }
 
 ///|
@@ -509,7 +509,7 @@ fn step_22() -> Unit raise {
   let t133 = @simp.asm_simp_tac(@list.List([@sets.image_eq_empty(), @sets.finite_image(), finite_radicals()]))
   let t132 = @tactics.mp_tac(@bool.spec(@parser.parse_term("IMAGE depth (radicals e)"), finite_max()))
   let t136 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t132), t133), t134), t135)
-  radical_top_c.set(@tactics.prove(@parser.parse_term("!e. ~(radicals e = {})\n       ==> ?r. r IN radicals e /\\\n               !s. s IN radicals(e) ==> ~(r IN radicals s)"), t136))
+  radical_top_c.set(@tactics.prove(@parser.parse_term("forall e. ~(radicals e = {})\n       ==> ?r. r IN radicals e /\\\n               forall s. s IN radicals(e) ==> ~(r IN radicals s)"), t136))
 }
 
 ///|
@@ -545,7 +545,7 @@ fn step_23() -> Unit raise {
   let t138 = @simp.asm_simp_tac(@list.List([]))
   let t137 = @class.asm_cases_tac(@parser.parse_term("r IN radicals e"))
   let t154 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t137), t138), t153)
-  radical_canonical_trivial_c.set(@tactics.prove(@parser.parse_term("!e r.\n     (r IN radicals e\n            ==> (?a b.\n                   wellformed a /\\\n                   wellformed b /\\\n                   value e = value a + value b * sqrt (value r) /\\\n                   radicals a SUBSET radicals e DELETE r /\\\n                   radicals b SUBSET radicals e DELETE r /\\\n                   radicals r SUBSET radicals e DELETE r))\n     ==> wellformed e\n         ==> ?a b. wellformed a /\\\n                   wellformed b /\\\n                   value e = value a + value b * sqrt (value r) /\\\n                   radicals a SUBSET (radicals e UNION radicals r) DELETE r /\\\n                   radicals b SUBSET (radicals e UNION radicals r) DELETE r /\\\n                   radicals r SUBSET (radicals e UNION radicals r) DELETE r"), t154))
+  radical_canonical_trivial_c.set(@tactics.prove(@parser.parse_term("forall e r.\n     (r IN radicals e\n            ==> (?a b.\n                   wellformed a /\\\n                   wellformed b /\\\n                   value e = value a + value b * sqrt (value r) /\\\n                   radicals a SUBSET radicals e DELETE r /\\\n                   radicals b SUBSET radicals e DELETE r /\\\n                   radicals r SUBSET radicals e DELETE r))\n     ==> wellformed e\n         ==> ?a b. wellformed a /\\\n                   wellformed b /\\\n                   value e = value a + value b * sqrt (value r) /\\\n                   radicals a SUBSET (radicals e UNION radicals r) DELETE r /\\\n                   radicals b SUBSET (radicals e UNION radicals r) DELETE r /\\\n                   radicals r SUBSET (radicals e UNION radicals r) DELETE r"), t154))
 }
 
 ///|
@@ -809,7 +809,7 @@ fn step_24() -> Unit raise {
     })(t158(x159))
   })
   let t350 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t160), t161), t162), t169), t170), t171), t172), t177), t178), t180), t181), t182), t183), t184), t185), t186), t349)
-  radical_canonical_c.set(@tactics.prove(@parser.parse_term("!e. wellformed e /\\ ~(radicals e = {})\n       ==> ?r. r IN radicals(e) /\\\n               ?a b. wellformed(Addition a (Multiplication b (Sqrt r))) /\\\n                     value e = value(Addition a (Multiplication b (Sqrt r))) /\\\n                     (radicals a) SUBSET (radicals(e) DELETE r) /\\\n                     (radicals b) SUBSET (radicals(e) DELETE r) /\\\n                     (radicals r) SUBSET (radicals(e) DELETE r)"), t350))
+  radical_canonical_c.set(@tactics.prove(@parser.parse_term("forall e. wellformed e /\\ ~(radicals e = {})\n       ==> ?r. r IN radicals(e) /\\\n               ?a b. wellformed(Addition a (Multiplication b (Sqrt r))) /\\\n                     value e = value(Addition a (Multiplication b (Sqrt r))) /\\\n                     (radicals a) SUBSET (radicals(e) DELETE r) /\\\n                     (radicals b) SUBSET (radicals(e) DELETE r) /\\\n                     (radicals r) SUBSET (radicals(e) DELETE r)"), t350))
 }
 
 ///|
@@ -918,7 +918,7 @@ fn step_25() -> Unit raise {
   let t352 = @simp.asm_rewrite_tac(@list.List([]))
   let t351 = @tactics.mp_tac(@bool.spec(@parser.parse_term("e:expression"), radical_canonical()))
   let t430 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t351), t352), t360), t361), t363), @tactics.strip_tac), t364), t365), @tactics.ants_tac), t396), t409), @tactics.ants_tac), t418), t425), t426), t427), t428), t429)
-  cubic_root_step_c.set(@tactics.prove(@parser.parse_term("!a b c. rational a /\\ rational b /\\ rational c\n           ==> !e. wellformed e /\\\n                   ~(radicals e = {}) /\\\n                   (value e) pow 3 + a * (value e) pow 2 +\n                                     b * (value e) + c = &0\n                   ==> ?e'. wellformed e' /\\\n                            (radicals e') PSUBSET (radicals e) /\\\n                            (value e') pow 3 + a * (value e') pow 2 +\n                                     b * (value e') + c = &0"), t430))
+  cubic_root_step_c.set(@tactics.prove(@parser.parse_term("forall a b c. rational a /\\ rational b /\\ rational c\n           ==> forall e. wellformed e /\\\n                   ~(radicals e = {}) /\\\n                   (value e) pow 3 + a * (value e) pow 2 +\n                                     b * (value e) + c = &0\n                   ==> ?e'. wellformed e' /\\\n                            (radicals e') PSUBSET (radicals e) /\\\n                            (value e') pow 3 + a * (value e') pow 2 +\n                                     b * (value e') + c = &0"), t430))
 }
 
 ///|
@@ -969,7 +969,7 @@ fn step_26() -> Unit raise {
   let t432 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t431 = @tactics.match_mp_tac(@arith.num_wf())
   let t462 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t431), t432), @tactics.disch_tac), t433), @tactics.strip_tac), t434), t435), t438), t439), t446), t447), t448), t455), @tactics.ants_tac), t461)
-  cubic_root_radical_induct_c.set(@tactics.prove(@parser.parse_term("!a b c. rational a /\\ rational b /\\ rational c\n           ==> !n e. wellformed e /\\ CARD (radicals e) = n /\\\n                     (value e) pow 3 + a * (value e) pow 2 +\n                                b * (value e) + c = &0\n                 ==> ?x. rational x /\\\n                         x pow 3 + a * x pow 2 + b * x + c = &0"), t462))
+  cubic_root_radical_induct_c.set(@tactics.prove(@parser.parse_term("forall a b c. rational a /\\ rational b /\\ rational c\n           ==> forall n e. wellformed e /\\ CARD (radicals e) = n /\\\n                     (value e) pow 3 + a * (value e) pow 2 +\n                                b * (value e) + c = &0\n                 ==> ?x. rational x /\\\n                         x pow 3 + a * x pow 2 + b * x + c = &0"), t462))
 }
 
 ///|
@@ -999,7 +999,7 @@ fn step_27() -> Unit raise {
   let t466 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:real"), t465, t464]), cubic_root_radical_induct()))
   let t463 = @tactics.repeat_tac(@tactics.strip_tac)
   let t475 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([radical_expression()])), t463), t466), t467), t468), t473), t474)
-  cubic_root_rational_c.set(@tactics.prove(@parser.parse_term("!a b c. rational a /\\ rational b /\\ rational c /\\\n           (?x. radical x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)\n           ==> (?x. rational x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)"), t475))
+  cubic_root_rational_c.set(@tactics.prove(@parser.parse_term("forall a b c. rational a /\\ rational b /\\ rational c /\\\n           (?x. radical x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)\n           ==> (?x. rational x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)"), t475))
 }
 
 ///|
@@ -1097,7 +1097,7 @@ fn step_29() -> Unit raise {
   let t477 = @tactics.x_gen_tac(@parser.parse_term("q:num"))
   let t476 = @tactics.match_mp_tac(@arith.num_wf())
   let t534 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()])), t476), t477), @tactics.disch_tac), t478), @tactics.disch_tac), t479), t480), t489), t490), t494), t495), t496), t497), t508), t515), t516), t521), t522), t523), t530), t531), t532), t533)
-  rational_lowest_lemma_c.set(@tactics.prove(@parser.parse_term("!p q. ~(q = 0) ==> ?p' q'. ~(q' = 0) /\\ coprime(p',q') /\\ p * q' = p' * q"), t534))
+  rational_lowest_lemma_c.set(@tactics.prove(@parser.parse_term("forall p q. ~(q = 0) ==> ?p' q'. ~(q' = 0) /\\ coprime(p',q') /\\ p * q' = p' * q"), t534))
 }
 
 ///|
@@ -1128,7 +1128,7 @@ fn step_31() -> Unit raise {
   let t537 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p:num"), t536]), rational_lowest_lemma()))
   let t535 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t544 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@floor.rational_alt()]))), @tactics.eq_tac), t535), @tactics.strip_tac), t537), t538), t539), t540), t541), t542), t543)
-  rational_lowest_c.set(@tactics.prove(@parser.parse_term("!x. rational x <=> ?p q. ~(q = 0) /\\ coprime(p,q) /\\ abs(x) = &p / &q"), t544))
+  rational_lowest_c.set(@tactics.prove(@parser.parse_term("forall x. rational x <=> ?p q. ~(q = 0) /\\ coprime(p,q) /\\ abs(x) = &p / &q"), t544))
 }
 
 ///|
@@ -1240,7 +1240,7 @@ fn step_32() -> Unit raise {
       }), t574)
     })(x575)(x575)
   }), t576), t579), t586), t587), t588), t589), t596), t605), t606), t613), t614), t615), t616)
-  rational_root_integer_c.set(@tactics.prove(@parser.parse_term("!a b c x. integer a /\\ integer b /\\ integer c /\\ rational x /\\\n             x pow 3 + a * x pow 2 + b * x + c = &0\n             ==> integer x"), t617))
+  rational_root_integer_c.set(@tactics.prove(@parser.parse_term("forall a b c x. integer a /\\ integer b /\\ integer c /\\ rational x /\\\n             x pow 3 + a * x pow 2 + b * x + c = &0\n             ==> integer x"), t617))
 }
 
 ///|
@@ -1261,7 +1261,7 @@ fn step_33() -> Unit raise {
   let t619 = @parser.parse_term("b:real")
   let t620 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("a:real"), t619, t618]), cubic_root_rational()))
   let t623 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t620), t621), t622)
-  cubic_root_integer_c.set(@tactics.prove(@parser.parse_term("!a b c. integer a /\\ integer b /\\ integer c /\\\n           (?x. radical x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)\n           ==> (?x. integer x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)"), t623))
+  cubic_root_integer_c.set(@tactics.prove(@parser.parse_term("forall a b c. integer a /\\ integer b /\\ integer c /\\\n           (?x. radical x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)\n           ==> (?x. integer x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)"), t623))
 }
 
 ///|
@@ -1366,7 +1366,7 @@ fn step_39() -> Unit raise {
     })(@equal.sym(x627))
   })
   let t635 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t628), t629), t631), t633), t634), @calc_rat.real_arith_tac)
-  sqrt_cases_lemma_c.set(@tactics.prove(@parser.parse_term("!x y. y pow 2 = x ==> &0 <= x /\\ (sqrt(x) = y \\/ sqrt(x) = --y)"), t635))
+  sqrt_cases_lemma_c.set(@tactics.prove(@parser.parse_term("forall x y. y pow 2 = x ==> &0 <= x /\\ (sqrt(x) = y \\/ sqrt(x) = --y)"), t635))
 }
 
 ///|
@@ -1393,7 +1393,7 @@ fn step_40() -> Unit raise {
     @simp.asm_simp_tac(@list.List([th, radical_rules_v1()]))
   })
   let t644 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t638), t642), t643)
-  radical_linear_equation_c.set(@tactics.prove(@parser.parse_term("!a b x. radical a /\\ radical b /\\ ~(a = &0 /\\ b = &0) /\\ a * x + b = &0\n           ==> radical x"), t644))
+  radical_linear_equation_c.set(@tactics.prove(@parser.parse_term("forall a b x. radical a /\\ radical b /\\ ~(a = &0 /\\ b = &0) /\\ a * x + b = &0\n           ==> radical x"), t644))
 }
 
 ///|
@@ -1418,7 +1418,7 @@ fn step_41() -> Unit raise {
   })), t649), t650])
   let t645 = @tactics.subgoal_then(@parser.parse_term("~(a * e - b * d = &0) /\\\n    x = (e * c - b * f) / (a * e - b * d) /\\\n    y = (a * f - d * c) / (a * e - b * d)"), @tactics.strip_assume_tac)
   let t652 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t645), t651)
-  radical_simultaneous_linear_equation_c.set(@tactics.prove(@parser.parse_term("!a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(a * e = b * d /\\ a * f = c * d /\\ e * c = b * f) /\\\n        a * x + b * y = c /\\ d * x + e * y = f\n        ==> radical(x) /\\ radical(y)"), t652))
+  radical_simultaneous_linear_equation_c.set(@tactics.prove(@parser.parse_term("forall a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(a * e = b * d /\\ a * f = c * d /\\ e * c = b * f) /\\\n        a * x + b * y = c /\\ d * x + e * y = f\n        ==> radical(x) /\\ radical(y)"), t652))
 }
 
 ///|
@@ -1463,7 +1463,7 @@ fn step_42() -> Unit raise {
   let t654 = @simp.asm_rewrite_tac(@list.List([]))
   let t653 = @class.asm_cases_tac(@parser.parse_term("a = &0"))
   let t677 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t653), t654), t656), @tactics.strip_tac), t657), t658), t659), t663), t676)
-  radical_quadratic_equation_c.set(@tactics.prove(@parser.parse_term("!a b c x. radical a /\\ radical b /\\ radical c /\\\n             a * x pow 2 + b * x + c = &0 /\\\n             ~(a = &0 /\\ b = &0 /\\ c = &0)\n             ==> radical x"), t677))
+  radical_quadratic_equation_c.set(@tactics.prove(@parser.parse_term("forall a b c x. radical a /\\ radical b /\\ radical c /\\\n             a * x pow 2 + b * x + c = &0 /\\\n             ~(a = &0 /\\ b = &0 /\\ c = &0)\n             ==> radical x"), t677))
 }
 
 ///|
@@ -1501,7 +1501,7 @@ fn step_43() -> Unit raise {
   let t679 = @tactics.disch_then(@tactics.match_mp_tac)
   let t678 = @tactics.mp_tac(@bool.spec(@parser.parse_term("d pow 2 + e pow 2"), radical_quadratic_equation()))
   let t696 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t678), t679), t683), t695)
-  radical_simultaneous_linear_quadratic_c.set(@tactics.prove(@parser.parse_term("!a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(d = &0 /\\ e = &0 /\\ f = &0) /\\\n        (x - a) pow 2 + (y - b) pow 2 = c /\\ d * x + e * y = f\n        ==> radical x /\\ radical y"), t696))
+  radical_simultaneous_linear_quadratic_c.set(@tactics.prove(@parser.parse_term("forall a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(d = &0 /\\ e = &0 /\\ f = &0) /\\\n        (x - a) pow 2 + (y - b) pow 2 = c /\\ d * x + e * y = f\n        ==> radical x /\\ radical y"), t696))
 }
 
 ///|
@@ -1538,7 +1538,7 @@ fn step_44() -> Unit raise {
   }, @list.List([@parser.parse_term("a:real"), t705, t704, t703, t702, t701]))
   let t697 = @tactics.match_mp_tac(radical_simultaneous_linear_quadratic())
   let t714 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t697), t706), t707), t708), t712), t713)
-  radical_simultaneous_quadratic_quadratic_c.set(@tactics.prove(@parser.parse_term("!a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(a = d /\\ b = e /\\ c = f) /\\\n        (x - a) pow 2 + (y - b) pow 2 = c /\\\n        (x - d) pow 2 + (y - e) pow 2 = f\n        ==> radical x /\\ radical y"), t714))
+  radical_simultaneous_quadratic_quadratic_c.set(@tactics.prove(@parser.parse_term("forall a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(a = d /\\ b = e /\\ c = f) /\\\n        (x - a) pow 2 + (y - b) pow 2 = c /\\\n        (x - d) pow 2 + (y - e) pow 2 = f\n        ==> radical x /\\ radical y"), t714))
 }
 
 ///|
@@ -1580,7 +1580,7 @@ pub fn constructible_cases() -> @kernel.Thm {
 ///|
 /// constructible_RULES, constructible_INDUCT, constructible_CASES
 fn step_45() -> Unit raise {
-  let (constructible_rules, constructible_induct, constructible_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(!x:real^2. rational(x$1) /\\ rational(x$2) ==> constructible x) /\\\n// Intersection of two non-parallel lines AB and CD\n  (!a b c d x. constructible a /\\ constructible b /\\\n               constructible c /\\ constructible d /\\\n               ~parallel (a,b) (c,d) /\\ is_intersection x (a,b) (c,d)\n               ==> constructible x) /\\\n// Intersection of a nontrivial line AB and circle with centre C, radius DE\n  (!a b c d e x. constructible a /\\ constructible b /\\\n                 constructible c /\\ constructible d /\\\n                 constructible e /\\\n                 ~(a = b) /\\ collinear3 a x b /\\ length (c,x) = length(d,e)\n                 ==> constructible x) /\\\n// Intersection of distinct circles with centres A and D, radii BD and EF\n  (!a b c d e f x. constructible a /\\ constructible b /\\\n                   constructible c /\\ constructible d /\\\n                   constructible e /\\ constructible f /\\\n                   ~(a = d /\\ length (b,c) = length (e,f)) /\\\n                   length (a,x) = length (b,c) /\\ length (d,x) = length (e,f)\n                   ==> constructible x)"))
+  let (constructible_rules, constructible_induct, constructible_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall x:real^2. rational(x$1) /\\ rational(x$2) ==> constructible x) /\\\n// Intersection of two non-parallel lines AB and CD\n  (forall a b c d x. constructible a /\\ constructible b /\\\n               constructible c /\\ constructible d /\\\n               ~parallel (a,b) (c,d) /\\ is_intersection x (a,b) (c,d)\n               ==> constructible x) /\\\n// Intersection of a nontrivial line AB and circle with centre C, radius DE\n  (forall a b c d e x. constructible a /\\ constructible b /\\\n                 constructible c /\\ constructible d /\\\n                 constructible e /\\\n                 ~(a = b) /\\ collinear3 a x b /\\ length (c,x) = length(d,e)\n                 ==> constructible x) /\\\n// Intersection of distinct circles with centres A and D, radii BD and EF\n  (forall a b c d e f x. constructible a /\\ constructible b /\\\n                   constructible c /\\ constructible d /\\\n                   constructible e /\\ constructible f /\\\n                   ~(a = d /\\ length (b,c) = length (e,f)) /\\\n                   length (a,x) = length (b,c) /\\ length (d,x) = length (e,f)\n                   ==> constructible x)"))
   constructible_rules_c.set(constructible_rules)
   constructible_induct_c.set(constructible_induct)
   constructible_cases_c.set(constructible_cases)
@@ -1611,7 +1611,7 @@ fn step_46() -> Unit raise {
   let t716 = @tactics.match_mp_tac(radical_simultaneous_linear_equation())
   let t715 = @simp.rewrite_tac(@list.List([parallel(), collinear3(), is_intersection()]))
   let t732 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t715), @tactics.strip_tac), t716), t725), t726), t730), t731)
-  radical_line_line_intersection_c.set(@tactics.prove(@parser.parse_term("!a b c d x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        ~(parallel (a,b) (c,d)) /\\ is_intersection x (a,b) (c,d)\n        ==> radical(x$1) /\\ radical(x$2)"), t732))
+  radical_line_line_intersection_c.set(@tactics.prove(@parser.parse_term("forall a b c d x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        ~(parallel (a,b) (c,d)) /\\ is_intersection x (a,b) (c,d)\n        ==> radical(x$1) /\\ radical(x$2)"), t732))
 }
 
 ///|
@@ -1649,7 +1649,7 @@ fn step_47() -> Unit raise {
   let t734 = @simp.simp_tac(@list.List([@cart.cart_eq(), @vectors.forall_2(), @vectors.dot(), @vectors.sum_2(), @cart.dimindex_2(), @vectors.vector_sub_component(), @equal.gsym(@realarith.real_pow_2())]))
   let t733 = @simp.rewrite_tac(@list.List([length(), @vectors.norm_eq(), collinear3(), parallel()]))
   let t751 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t733), t734), @tactics.strip_tac), t735), t744), t745), t749), t750)
-  radical_line_circle_intersection_c.set(@tactics.prove(@parser.parse_term("!a b c d e x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        radical(e$1) /\\ radical(e$2) /\\\n        ~(a = b) /\\ collinear3 a x b /\\ length(c,x) = length(d,e)\n        ==> radical(x$1) /\\ radical(x$2)"), t751))
+  radical_line_circle_intersection_c.set(@tactics.prove(@parser.parse_term("forall a b c d e x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        radical(e$1) /\\ radical(e$2) /\\\n        ~(a = b) /\\ collinear3 a x b /\\ length(c,x) = length(d,e)\n        ==> radical(x$1) /\\ radical(x$2)"), t751))
 }
 
 ///|
@@ -1687,7 +1687,7 @@ fn step_48() -> Unit raise {
   let t753 = @simp.simp_tac(@list.List([@cart.cart_eq(), @vectors.forall_2(), @vectors.dot(), @vectors.sum_2(), @cart.dimindex_2(), @vectors.vector_sub_component(), @equal.gsym(@realarith.real_pow_2())]))
   let t752 = @simp.rewrite_tac(@list.List([length(), @vectors.norm_eq(), collinear3(), parallel()]))
   let t770 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t752), t753), @tactics.strip_tac), t754), t763), t764), t768), t769)
-  radical_circle_circle_intersection_c.set(@tactics.prove(@parser.parse_term("!a b c d e f x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        radical(e$1) /\\ radical(e$2) /\\\n        radical(f$1) /\\ radical(f$2) /\\\n        length(a,x) = length(b,c) /\\\n        length(d,x) = length(e,f) /\\\n        ~(a = d /\\ length(b,c) = length(e,f))\n        ==> radical(x$1) /\\ radical(x$2)"), t770))
+  radical_circle_circle_intersection_c.set(@tactics.prove(@parser.parse_term("forall a b c d e f x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        radical(e$1) /\\ radical(e$2) /\\\n        radical(f$1) /\\ radical(f$2) /\\\n        length(a,x) = length(b,c) /\\\n        length(d,x) = length(e,f) /\\\n        ~(a = d /\\ length(b,c) = length(e,f))\n        ==> radical(x$1) /\\ radical(x$2)"), t770))
 }
 
 ///|
@@ -1712,7 +1712,7 @@ fn step_49() -> Unit raise {
   let t772 = @tactics.repeat_tac(@tactics.gen_tac)
   let t771 = @tactics.repeat_tac(@tactics.conj_tac)
   let t780 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(constructible_induct()), t771), t772), @tactics.strip_tac), t779)
-  constructible_radical_c.set(@tactics.prove(@parser.parse_term("!x. constructible x ==> radical(x$1) /\\ radical(x$2)"), t780))
+  constructible_radical_c.set(@tactics.prove(@parser.parse_term("forall x. constructible x ==> radical(x$1) /\\ radical(x$2)"), t780))
 }
 
 ///|
@@ -1787,7 +1787,7 @@ fn step_51() -> Unit raise {
     })(t811(x812))
   })
   let t816 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t813), t814), t815)
-  double_the_cube_c.set(@tactics.prove(@parser.parse_term("!x. x pow 3 = &2 ==> ~(constructible(vector[x; &0]))"), t816))
+  double_the_cube_c.set(@tactics.prove(@parser.parse_term("forall x. x pow 3 = &2 ==> ~(constructible(vector[x; &0]))"), t816))
 }
 
 ///|
@@ -1805,7 +1805,7 @@ fn step_52() -> Unit raise {
   let t818 = @tactics.conv_tac(@calc_rat.real_ring)
   let t817 = @tactics.mp_tac(@bool.spec(@parser.parse_term("x:real"), @transcendentals.sin_circle()))
   let t819 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("&3 * x = x + x + x")), @transcendentals.sin_add(), @transcendentals.cos_add()]))), t817), t818)
-  cos_triple_c.set(@tactics.prove(@parser.parse_term("!x. cos(&3 * x) = &4 * cos(x) pow 3 - &3 * cos(x)"), t819))
+  cos_triple_c.set(@tactics.prove(@parser.parse_term("forall x. cos(&3 * x) = &4 * cos(x) pow 3 - &3 * cos(x)"), t819))
 }
 
 ///|
@@ -1931,7 +1931,7 @@ fn step_55() -> Unit raise {
       }
     })(t870(x871))
   })), t876), t877), @tactics.disch_tac), t878), t879), t880), t881)
-  trisect_60_degrees_c.set(@tactics.prove(@parser.parse_term("!y. ~(constructible(vector[cos(pi / &9); y]))"), t882))
+  trisect_60_degrees_c.set(@tactics.prove(@parser.parse_term("forall y. ~(constructible(vector[cos(pi / &9); y]))"), t882))
 }
 
 ///|

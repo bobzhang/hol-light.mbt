@@ -158,7 +158,7 @@ fn step_5() -> Unit raise {
     t11,
   )
   let th = @tactics.prove(
-    @parser.parse_term("?x:num#(num->bool). !a. SND x a ==> a < 2 EXP FST x"),
+    @parser.parse_term("?x:num#(num->bool). forall a. SND x a ==> a < 2 EXP FST x"),
     t12,
   )
   bitpat_c.set(
@@ -215,7 +215,7 @@ fn step_8() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([pat_set(), pat_size(), bitpat()]))
   pat_set_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("!p s. pat_set p s ==> s < 2 EXP pat_size p"),
+      @parser.parse_term("forall p s. pat_set p s ==> s < 2 EXP pat_size p"),
       t13,
     ),
   )
@@ -342,7 +342,7 @@ fn step_9() -> Unit raise {
   pat_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "p = mk_bitpat (n, f) /\\ (!a. f a ==> a < 2 EXP n) ==>\n  pat_size p = n /\\ !s. pat_set p s = f s",
+        "p = mk_bitpat (n, f) /\\ (forall a. f a ==> a < 2 EXP n) ==>\n  pat_size p = n /\\ forall s. pat_set p s = f s",
       ),
       t24,
     ),
@@ -458,7 +458,7 @@ fn step_11() -> Unit raise {
     @int.arith_tac,
   )
   let t32 = (
-    @parser.parse_term("pat_size NILPAT = 0 /\\ !s. pat_set NILPAT s <=> s = 0"),
+    @parser.parse_term("pat_size NILPAT = 0 /\\ forall s. pat_set NILPAT s <=> s = 0"),
     t31,
   )
   let (nilpat_pat_size, nilpat_pat_set) = @bool.conj_pair(
@@ -650,7 +650,7 @@ fn step_13() -> Unit raise {
   )
   let t47 = (
     @parser.parse_term(
-      "pat_size (CONSPAT p (a:N word)) = dimindex(:N) + pat_size p /\\\n   !s. pat_set (CONSPAT p (a:N word)) s <=>\n     ?t. pat_set p t /\\ s = val a + 2 EXP dimindex(:N) * t",
+      "pat_size (CONSPAT p (a:N word)) = dimindex(:N) + pat_size p /\\\n   forall s. pat_set (CONSPAT p (a:N word)) s <=>\n     ?t. pat_set p t /\\ s = val a + 2 EXP dimindex(:N) * t",
     ),
     t46,
   )
@@ -1825,7 +1825,7 @@ fn step_37() -> Unit raise {
   pat_extract_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "pat_extract p i b <=>\n  (!n. pat_set p n ==> numbit i n = b)",
+        "pat_extract p i b <=>\n  (forall n. pat_set p n ==> numbit i n = b)",
       ),
     ),
   )
@@ -3665,7 +3665,7 @@ fn step_44() -> Unit raise {
   bitpat_inverts_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "bitpat_inverts p f (x:A) <=> (!y. pat_set p y ==> f y = x)",
+        "bitpat_inverts p f (x:A) <=> (forall y. pat_set p y ==> f y = x)",
       ),
     ),
   )

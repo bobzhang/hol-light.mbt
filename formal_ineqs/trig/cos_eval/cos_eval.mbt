@@ -231,7 +231,7 @@ fn step_12() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([@transcendentals.cos_periodic_pi()]))
   let t20 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a - b + &2 * b = a + b"))]))
   let t22 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@bool.spec(@parser.parse_term("x - pi"), @transcendentals.cos_periodic()))])), t20), t21)
-  cos_minus_pi_c.set(@tactics.prove(@parser.parse_term("!x. cos (x - pi) = -- cos x"), t22))
+  cos_minus_pi_c.set(@tactics.prove(@parser.parse_term("forall x. cos (x - pi) = -- cos x"), t22))
 }
 
 ///|
@@ -248,7 +248,7 @@ pub fn cos_minus_pi() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t23 = @simp.rewrite_tac(@list.List([@transcendentals.cos_neg(), cos_minus_pi()]))
   let t24 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a - b = --(b - a)"))])), t23)
-  cos_pi_minus_c.set(@tactics.prove(@parser.parse_term("!x. cos (pi - x) = -- cos x"), t24))
+  cos_pi_minus_c.set(@tactics.prove(@parser.parse_term("forall x. cos (pi - x) = -- cos x"), t24))
 }
 
 ///|
@@ -282,7 +282,7 @@ pub fn cos_2pi_minus() -> @kernel.Thm {
 /// cos_full_interval
 fn step_15() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), @transcendentals.cos_bounds()]))
-  cos_full_interval_c.set(@tactics.prove(@parser.parse_term("!x. interval_arith (cos x) (-- &1, &1)"), t28))
+  cos_full_interval_c.set(@tactics.prove(@parser.parse_term("forall x. interval_arith (cos x) (-- &1, &1)"), t28))
 }
 
 ///|

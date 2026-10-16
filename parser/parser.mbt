@@ -500,7 +500,7 @@ fn lmk_decimal(p : ((Lexcode, String), List[String])) -> Preterm raise {
 ///|
 fn any_identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), .. rest] => (s, rest)
+    [Ident(s), .. rest] if s != "!" => (s, rest)
     _ => raise Noparse
   }
 }
@@ -508,7 +508,7 @@ fn any_identifier(inp : Toks) -> (String, Toks) raise {
 ///|
 fn identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), .. rest] =>
+    [Ident(s), .. rest] if s != "!" =>
       if @lib.can(@printer.get_infix_status, s) ||
         @printer.is_prefix(s) ||
         @printer.parses_as_binder(s) {
@@ -798,7 +798,7 @@ fn clauses(i : Toks) -> (Preterm, Toks) raise {
 /// Parse a preterm from tokens.
 pub fn parse_preterm(inp : Toks) -> (Preterm, Toks) raise {
   match inp {
-    [Ident(s)] if !is_quoted(s) => (pv(s), inp[1:])
+    [Ident(s)] if !is_quoted(s) && s != "!" => (pv(s), inp[1:])
     _ => preterm(inp)
   }
 }

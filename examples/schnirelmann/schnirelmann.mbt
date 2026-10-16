@@ -50,7 +50,7 @@ fn step_4() -> Unit raise {
     }
   }, @list.List([@equal.gsym(@iterate.card_numseg_1())]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([count()]))), t4), t5), t6), t7)
-  count_bound_c.set(@tactics.prove(@parser.parse_term("!s. count s n <= n"), t8))
+  count_bound_c.set(@tactics.prove(@parser.parse_term("forall s. count s n <= n"), t8))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn count_bound() -> @kernel.Thm {
 /// COUNT_UNIV
 fn step_5() -> Unit raise {
   let t9 = @simp.rewrite_tac(@list.List([count(), @sets.inter_univ(), @iterate.card_numseg_1()]))
-  count_univ_c.set(@tactics.prove(@parser.parse_term("!n. count (:num) n = n"), t9))
+  count_univ_c.set(@tactics.prove(@parser.parse_term("forall n. count (:num) n = n"), t9))
 }
 
 ///|
@@ -86,7 +86,7 @@ fn step_6() -> Unit raise {
   let t11 = @tactics.match_mp_tac(@sets.card_subset())
   let t10 = @simp.rewrite_tac(@list.List([count()]))
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t10), t11), t12), t13)
-  count_mono_c.set(@tactics.prove(@parser.parse_term("!s t n. s SUBSET t ==> count s n <= count t n"), t14))
+  count_mono_c.set(@tactics.prove(@parser.parse_term("forall s t n. s SUBSET t ==> count s n <= count t n"), t14))
 }
 
 ///|
@@ -105,7 +105,7 @@ fn step_7() -> Unit raise {
   let t16 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_inter(), @iterate.in_numseg()]))
   let t15 = @simp.rewrite_tac(@list.List([count()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t15), @tactics.ap_term_tac), t16), t17)
-  count_insensitive_c.set(@tactics.prove(@parser.parse_term("!s t n. (!m. 1 <= m ==> (m IN s <=> m IN t))\n         ==> count s n = count t n"), t18))
+  count_insensitive_c.set(@tactics.prove(@parser.parse_term("forall s t n. (forall m. 1 <= m ==> (m IN s <=> m IN t))\n         ==> count s n = count t n"), t18))
 }
 
 ///|
@@ -143,9 +143,9 @@ fn step_8() -> Unit raise {
   let t22 = @tactics.exists_tac(@parser.parse_term("&0"))
   let t25 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@sets.set_tac(@list.List([@arith.le_refl()])), @tactics.all_tac])), t22), t23), t24])
   let t20 = @equal.gsym(schnirelmann())
-  let t21 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(!x. x IN {f x | P x} ==> Q x) <=> !x. P x ==> Q(f x)")), t20]))
+  let t21 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)")), t20]))
   let t26 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("{ &(count s n) / &n | 1 <= n}"), @sets.inf_v1())), t21), @tactics.ants_tac), t25)
-  let t27 = (@parser.parse_term("(!n. 1 <= n ==> schnirelmann s <= &(count s n) / &n) /\\\n   (!b. (!n. 1 <= n ==> b <= &(count s n) / &n) ==> b <= schnirelmann s)"), t26)
+  let t27 = (@parser.parse_term("(forall n. 1 <= n ==> schnirelmann s <= &(count s n) / &n) /\\\n   (forall b. (forall n. 1 <= n ==> b <= &(count s n) / &n) ==> b <= schnirelmann s)"), t26)
   let (schnirelmann_ubound, schnirelmann_lbound) = @bool.conj_pair((fn(x19 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x19.0, x19.1)
   })(t27))
@@ -160,7 +160,7 @@ fn step_9() -> Unit raise {
   let t29 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_mul_rzero(), @realarith.real_pos()]))
   let t28 = @tactics.disj_cases_tac(@int.arith_rule(@parser.parse_term("n = 0 \\/ 1 <= n")))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t28), t29), t30)
-  schnirelmann_ubound_mul_c.set(@tactics.prove(@parser.parse_term("!n s. schnirelmann s * &n <= &(count s n)"), t31))
+  schnirelmann_ubound_mul_c.set(@tactics.prove(@parser.parse_term("forall n s. schnirelmann s * &n <= &(count s n)"), t31))
 }
 
 ///|
@@ -176,11 +176,11 @@ pub fn schnirelmann_ubound_mul() -> @kernel.Thm {
 /// SCHNIRELMANN_BOUNDS
 fn step_10() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([@realax.real_mul_lid(), @realax.real_of_num_le(), count_bound()]))
-  let t34 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(!x. x IN {f x | P x} ==> Q x) <=> !x. P x ==> Q(f x)")), @real.real_le_div(), @realarith.real_pos(), @real.real_le_ldiv_eq(), @real.real_of_num_lt(), @arith.le_1()]))
+  let t34 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)")), @real.real_le_div(), @realarith.real_pos(), @real.real_le_ldiv_eq(), @real.real_of_num_lt(), @arith.le_1()]))
   let t33 = @list.List([@sets.set_tac(@list.List([@arith.le_refl()])), @tactics.all_tac])
   let t32 = @tactics.match_mp_tac(@sets.real_inf_bounds())
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([schnirelmann()]))), t32), @tactics.conj_tac), t33), t34), t35)
-  schnirelmann_bounds_c.set(@tactics.prove(@parser.parse_term("!s. &0 <= schnirelmann s /\\ schnirelmann s <= &1"), t36))
+  schnirelmann_bounds_c.set(@tactics.prove(@parser.parse_term("forall s. &0 <= schnirelmann s /\\ schnirelmann s <= &1"), t36))
 }
 
 ///|
@@ -203,7 +203,7 @@ fn step_11() -> Unit raise {
   let t38 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t37 = @tactics.match_mp_tac(schnirelmann_lbound())
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t37), t38), @tactics.disch_tac), t39), t40), t41), t42), t43)
-  schnirelmann_mono_c.set(@tactics.prove(@parser.parse_term("!s t. s SUBSET t ==> schnirelmann s <= schnirelmann t"), t44))
+  schnirelmann_mono_c.set(@tactics.prove(@parser.parse_term("forall s t. s SUBSET t ==> schnirelmann s <= schnirelmann t"), t44))
 }
 
 ///|
@@ -229,7 +229,7 @@ fn step_12() -> Unit raise {
     })(t48(x49))
   })
   let t52 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t50), t51)
-  schnirelmann_insensitive_c.set(@tactics.prove(@parser.parse_term("!s t. (!n. 1 <= n ==> (n IN s <=> n IN t))\n         ==> schnirelmann s = schnirelmann t"), t52))
+  schnirelmann_insensitive_c.set(@tactics.prove(@parser.parse_term("forall s t. (forall n. 1 <= n ==> (n IN s <=> n IN t))\n         ==> schnirelmann s = schnirelmann t"), t52))
 }
 
 ///|
@@ -260,7 +260,7 @@ fn step_13() -> Unit raise {
   let t54 = @tactics.exists_tac(@parser.parse_term("&(count s k) / &k"))
   let t53 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t66 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t53), t54), t55), t56), t57), t61), t62), t63), t64), t65)
-  schnirelmann_sensitive_c.set(@tactics.prove(@parser.parse_term("!s k. 1 <= k /\\ ~(k IN s) ==> schnirelmann s <= &1 - &1 / &k"), t66))
+  schnirelmann_sensitive_c.set(@tactics.prove(@parser.parse_term("forall s k. 1 <= k /\\ ~(k IN s) ==> schnirelmann s <= &1 - &1 / &k"), t66))
 }
 
 ///|
@@ -280,7 +280,7 @@ fn step_14() -> Unit raise {
   let t67 = @parser.parse_term("1")
   let t68 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("s:num->bool"), t67]), schnirelmann_sensitive()))
   let t71 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t68), t69), t70), @calc_rat.real_arith_tac)
-  schnirelmann_sensitive_1_c.set(@tactics.prove(@parser.parse_term("!s. ~(1 IN s) ==> schnirelmann s = &0"), t71))
+  schnirelmann_sensitive_1_c.set(@tactics.prove(@parser.parse_term("forall s. ~(1 IN s) ==> schnirelmann s = &0"), t71))
 }
 
 ///|
@@ -342,7 +342,7 @@ fn step_16() -> Unit raise {
   let t75 = @simp.rewrite_tac(@list.List([@sets.extension(), @class.not_forall_thm(), @sets.in_univ(), @class.not_imp()]))
   let t95 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@class.contrapos_thm())])), t75), t79), t85), t86), t87), t94])
   let t96 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t95)
-  schnirelmann_eq_1_c.set(@tactics.prove(@parser.parse_term("!s. schnirelmann s = &1 <=> !n. 1 <= n ==> n IN s"), t96))
+  schnirelmann_eq_1_c.set(@tactics.prove(@parser.parse_term("forall s. schnirelmann s = &1 <=> forall n. 1 <= n ==> n IN s"), t96))
 }
 
 ///|
@@ -380,7 +380,7 @@ pub fn sumset() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t97 = @meson.meson_tac(@list.List([@arith.add_clauses()]))
   let t98 = @tactics.then_tac(@simp.simp_tac(@list.List([sumset(), @sets.in_elim_thm()])), t97)
-  sumset_0_c.set(@tactics.prove(@parser.parse_term("!s t. 0 IN s /\\ 0 IN t ==> 0 IN (s +++ t)"), t98))
+  sumset_0_c.set(@tactics.prove(@parser.parse_term("forall s t. 0 IN s /\\ 0 IN t ==> 0 IN (s +++ t)"), t98))
 }
 
 ///|
@@ -406,7 +406,7 @@ fn step_20() -> Unit raise {
   let t100 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t99 = @simp.rewrite_tac(@list.List([@sets.subset(), sumset(), @sets.in_elim_thm()]))
   let t107 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t99), t100), @tactics.disch_tac), t105), t106)
-  sumset_superset_lzero_c.set(@tactics.prove(@parser.parse_term("!s t. 0 IN s ==> t SUBSET (s +++ t)"), t107))
+  sumset_superset_lzero_c.set(@tactics.prove(@parser.parse_term("forall s t. 0 IN s ==> t SUBSET (s +++ t)"), t107))
 }
 
 ///|
@@ -432,7 +432,7 @@ fn step_21() -> Unit raise {
   let t109 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t108 = @simp.rewrite_tac(@list.List([@sets.subset(), sumset(), @sets.in_elim_thm()]))
   let t116 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t108), t109), @tactics.disch_tac), t114), t115)
-  sumset_superset_rzero_c.set(@tactics.prove(@parser.parse_term("!s t. 0 IN t ==> s SUBSET (s +++ t)"), t116))
+  sumset_superset_rzero_c.set(@tactics.prove(@parser.parse_term("forall s t. 0 IN t ==> s SUBSET (s +++ t)"), t116))
 }
 
 ///|
@@ -449,7 +449,7 @@ pub fn sumset_superset_rzero() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t117 = @meson.meson_tac(@list.List([@arith.add_sym()]))
   let t118 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), sumset()])), t117)
-  sumset_sym_c.set(@tactics.prove(@parser.parse_term("!s t. s +++ t = t +++ s"), t118))
+  sumset_sym_c.set(@tactics.prove(@parser.parse_term("forall s t. s +++ t = t +++ s"), t118))
 }
 
 ///|
@@ -466,7 +466,7 @@ pub fn sumset_sym() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t119 = @meson.meson_tac(@list.List([@arith.add_assoc()]))
   let t120 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), sumset()])), t119)
-  sumset_assoc_c.set(@tactics.prove(@parser.parse_term("!s t u. s +++ (t +++ u) = (s +++ t) +++ u"), t120))
+  sumset_assoc_c.set(@tactics.prove(@parser.parse_term("forall s t u. s +++ (t +++ u) = (s +++ t) +++ u"), t120))
 }
 
 ///|
@@ -534,7 +534,7 @@ fn step_26() -> Unit raise {
   let t139 = @simp.simp_tac(@list.List([@iterate.iterate_clauses(), monoidal_sumset(), neutral_sumset(), @sets.in_sing()]))
   let t138 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t141 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))), t138), t139), t140)
-  sumset_0_iter_c.set(@tactics.prove(@parser.parse_term("!a s. FINITE s /\\ (!k. k IN s ==> 0 IN a k) ==> 0 IN iterate(+++) s a"), t141))
+  sumset_0_iter_c.set(@tactics.prove(@parser.parse_term("forall a s. FINITE s /\\ (forall k. k IN s ==> 0 IN a k) ==> 0 IN iterate(+++) s a"), t141))
 }
 
 ///|
@@ -611,7 +611,7 @@ fn step_27() -> Unit raise {
   let t143 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(~p ==> F) ==> p")))
   let t142 = @tactics.repeat_tac(@tactics.strip_tac)
   let t195 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_inter()])), t142), t143), @tactics.disch_tac), t144), t145), t146), t147), t148), t149), t153), t194)
-  schnirelman_lemma_c.set(@tactics.prove(@parser.parse_term("!s t n. 0 IN (s INTER t) /\\ count s n + count t n >= n ==> n IN (s +++ t)"), t195))
+  schnirelman_lemma_c.set(@tactics.prove(@parser.parse_term("forall s t n. 0 IN (s INTER t) /\\ count s n + count t n >= n ==> n IN (s +++ t)"), t195))
 }
 
 ///|
@@ -650,7 +650,7 @@ fn step_28() -> Unit raise {
   let t197 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_univ()]))
   let t196 = @tactics.repeat_tac(@tactics.strip_tac)
   let t216 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_inter()])), t196), t197), t198), t199), t200), t201), t202), t204), t208), t209), t210), t211), t214), @tactics.conj_tac), t215), @int.asm_arith_tac)
-  schnirelmann_theorem_c.set(@tactics.prove(@parser.parse_term("!s t. 0 IN (s INTER t) /\\ schnirelmann s + schnirelmann t >= &1\n         ==> s +++ t = (:num)"), t216))
+  schnirelmann_theorem_c.set(@tactics.prove(@parser.parse_term("forall s t. 0 IN (s INTER t) /\\ schnirelmann s + schnirelmann t >= &1\n         ==> s +++ t = (:num)"), t216))
 }
 
 ///|
@@ -668,7 +668,7 @@ fn step_29() -> Unit raise {
   let t218 = @simp.asm_rewrite_tac(@list.List([@sets.in_inter()]))
   let t217 = @tactics.match_mp_tac(schnirelmann_theorem())
   let t219 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t217), t218), @calc_rat.asm_real_arith_tac)
-  schnirelmann_theorem_2_c.set(@tactics.prove(@parser.parse_term("!s. 0 IN s /\\ schnirelmann s >= &1 / &2 ==> s +++ s = (:num)"), t219))
+  schnirelmann_theorem_2_c.set(@tactics.prove(@parser.parse_term("forall s. 0 IN s /\\ schnirelmann s >= &1 / &2 ==> s +++ s = (:num)"), t219))
 }
 
 ///|
@@ -706,7 +706,7 @@ fn step_30() -> Unit raise {
   let t243 = @simp.asm_rewrite_tac(@list.List([@sets.in_image(), @iterate.in_numseg()]))
   let t242 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t245 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t242), t243), t244), @tactics.all_tac])
-  let t241 = @tactics.subgoal_then(@parser.parse_term("!k. 1 <= k /\\ k <= n ==> 1 <= f(k) /\\ f(k) <= p"), fn(x238 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t241 = @tactics.subgoal_then(@parser.parse_term("forall k. 1 <= k /\\ k <= n ==> 1 <= f(k) /\\ f(k) <= p"), fn(x238 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s239 = @tactics.assume_tac(x238)
     fn(x240 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s239(x240)
@@ -733,7 +733,7 @@ fn step_30() -> Unit raise {
   let t221 = @simp.rewrite_tac(@list.List([@arith.le_trans(), @arith.le_antisym()]))
   let t220 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("(<=):num->num->bool"), @iterate.topological_sort()))
   let t262 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t220), t221), t229), t230), t231), t232), t233), @tactics.conj_tac), t235), t236), @tactics.conj_tac), t237), t241), t245), t247), @tactics.strip_tac), t255), t256), t257), t261), @int.asm_arith_tac)
-  enumeration_lemma_c.set(@tactics.prove(@parser.parse_term("!n s p. s HAS_SIZE n /\\ (!k. k IN s ==> 1 <= k /\\ k <= p)\n           ==> ?a:num->num.\n                 a(0) = 0 /\\\n                 a(n + 1) = p + 1 /\\\n                 s = IMAGE a (1..n) /\\\n                 (!j k. j <= n /\\ k <= n + 1 /\\ j < k ==> a(j) < a(k)) /\\\n                 (!j k. j <= n /\\ k <= n + 1 /\\ j <= k ==> a(j) <= a(k))"), t262))
+  enumeration_lemma_c.set(@tactics.prove(@parser.parse_term("forall n s p. s HAS_SIZE n /\\ (forall k. k IN s ==> 1 <= k /\\ k <= p)\n           ==> ?a:num->num.\n                 a(0) = 0 /\\\n                 a(n + 1) = p + 1 /\\\n                 s = IMAGE a (1..n) /\\\n                 (forall j k. j <= n /\\ k <= n + 1 /\\ j < k ==> a(j) < a(k)) /\\\n                 (forall j k. j <= n /\\ k <= n + 1 /\\ j <= k ==> a(j) <= a(k))"), t262))
 }
 
 ///|
@@ -758,7 +758,7 @@ fn step_31() -> Unit raise {
     }
   })
   let t270 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t266), t269)
-  card_inter_0_1_c.set(@tactics.prove(@parser.parse_term("!n s. 0 IN s ==> CARD(s INTER (0..n)) = SUC(CARD(s INTER (1..n)))"), t270))
+  card_inter_0_1_c.set(@tactics.prove(@parser.parse_term("forall n s. 0 IN s ==> CARD(s INTER (0..n)) = SUC(CARD(s INTER (1..n)))"), t270))
 }
 
 ///|
@@ -862,10 +862,10 @@ fn step_32() -> Unit raise {
   let t359 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("l:num"))(@tactics.strip_assume_tac))
   let t358 = @simp.rewrite_tac(@list.List([@sets.in_image()]))
   let t357 = @tactics.x_gen_tac(@parser.parse_term("k:num"))
-  let t356 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("IMAGE f s INTER t = {} <=> !x. x IN s ==> ~(f x IN t)"))]))
+  let t356 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("IMAGE f s INTER t = {} <=> forall x. x IN s ==> ~(f x IN t)"))]))
   let t355 = @parser.parse_term("j:num")
   let t371 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("i:num"), t355])), @tactics.strip_tac), t356), t357), @tactics.disch_tac), t358), t359), t360), t364), t368), t369), t370), @int.asm_arith_tac), @tactics.all_tac])
-  let t354 = @tactics.subgoal_then(@parser.parse_term("!i j. i IN 0..A /\\ j IN 0..A /\\ ~(i = j)\n               ==> IMAGE (\\b. a i + b) (t INTER (0..a (i + 1) - a i - 1)) INTER\n                   IMAGE (\\b. a j + b) (t INTER (0..a (j + 1) - a j - 1)) = {}"), fn(x351 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t354 = @tactics.subgoal_then(@parser.parse_term("forall i j. i IN 0..A /\\ j IN 0..A /\\ ~(i = j)\n               ==> IMAGE (\\b. a i + b) (t INTER (0..a (i + 1) - a i - 1)) INTER\n                   IMAGE (\\b. a j + b) (t INTER (0..a (j + 1) - a j - 1)) = {}"), fn(x351 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s352 = ((x350 : @kernel.Thm) => @tactics.label_tac("*", x350))(x351)
     fn(x353 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s352(x353)
@@ -934,7 +934,7 @@ fn step_32() -> Unit raise {
     })(t291(x292))
   })
   let t306 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t293), t300), t301), t302), t303), t304), t305), @tactics.all_tac])
-  let t286 = @tactics.subgoal_then(@parser.parse_term("!k. k <= A ==> (a:num->num)(k) IN s /\\ a(k) <= n"), fn(x283 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t286 = @tactics.subgoal_then(@parser.parse_term("forall k. k <= A ==> (a:num->num)(k) IN s /\\ a(k) <= n"), fn(x283 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s284 = @tactics.assume_tac(x283)
     fn(x285 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s284(x285)
@@ -987,7 +987,7 @@ fn step_32() -> Unit raise {
       })(x390))
     })(x391)(x391)
   }), t392), @tactics.ants_tac), t405), t409), t410), t411), t412), t413), t414), @tactics.conj_tac), t418), t419), t420), t421), t422), t423), @tactics.conj_tac), t432), t433), t434), t435), t436), t437), t438), t439), t440), t441), t442), t443)
-  schnirelmann_sumset_c.set(@tactics.prove(@parser.parse_term("!s t. 0 IN (s INTER t)\n         ==> schnirelmann(s +++ t)\n                >= (schnirelmann s + schnirelmann t) -\n                   schnirelmann s * schnirelmann t"), t444))
+  schnirelmann_sumset_c.set(@tactics.prove(@parser.parse_term("forall s t. 0 IN (s INTER t)\n         ==> schnirelmann(s +++ t)\n                >= (schnirelmann s + schnirelmann t) -\n                   schnirelmann s * schnirelmann t"), t444))
 }
 
 ///|
@@ -1031,7 +1031,7 @@ fn step_33() -> Unit raise {
   let t446 = @simp.simp_tac(@list.List([@iterate.product_clauses(), @realax.real_ge(), @real.real_sub_refl(), schnirelmann_bounds()]))
   let t445 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t468 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))), t445), t446), t448), @tactics.strip_tac), @tactics.disch_tac), t457), @tactics.ants_tac), t458), t459), t460), t461), @tactics.conj_tac), t467)
-  schnirelmann_sumset_gen_c.set(@tactics.prove(@parser.parse_term("!a s. FINITE s /\\ (!i:A. i IN s ==> 0 IN a i)\n         ==> schnirelmann(iterate(+++) s a)\n             >= &1 - product s (\\i. &1 - schnirelmann(a i))"), t468))
+  schnirelmann_sumset_gen_c.set(@tactics.prove(@parser.parse_term("forall a s. FINITE s /\\ (forall i:A. i IN s ==> 0 IN a i)\n         ==> schnirelmann(iterate(+++) s a)\n             >= &1 - product s (\\i. &1 - schnirelmann(a i))"), t468))
 }
 
 ///|
@@ -1050,7 +1050,7 @@ fn step_34() -> Unit raise {
   let t469 = @parser.parse_term("i:A->bool")
   let t470 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\i:A. (s:num->bool)"), t469]), schnirelmann_sumset_gen()))
   let t472 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t470), t471)
-  schnirelmann_sumset_pow_c.set(@tactics.prove(@parser.parse_term("!i s. FINITE i /\\ 0 IN s\n         ==> schnirelmann(iterate(+++) i (\\k:A. s))\n             >= &1 - (&1 - schnirelmann s) pow (CARD i)"), t472))
+  schnirelmann_sumset_pow_c.set(@tactics.prove(@parser.parse_term("forall i s. FINITE i /\\ 0 IN s\n         ==> schnirelmann(iterate(+++) i (\\k:A. s))\n             >= &1 - (&1 - schnirelmann s) pow (CARD i)"), t472))
 }
 
 ///|
@@ -1118,7 +1118,7 @@ fn step_35() -> Unit raise {
   let t475 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("&1 - schnirelmann s"), t474]), @real.real_arch_pow_inv()))
   let t473 = @simp.rewrite_tac(@list.List([@sets.has_size()]))
   let t519 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t473), t475), @tactics.ants_tac), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t478), t479), t480), @tactics.strip_tac), t486), t507), t508), t509), t510), t511), t513), t515), t516), t517), t518)
-  schnirelmann_v1_c.set(@tactics.prove(@parser.parse_term("!s. 0 IN s /\\ schnirelmann s > &0\n       ==> ?k. !i. i HAS_SIZE k ==> iterate(+++) i (\\a:A. s) = (:num)"), t519))
+  schnirelmann_v1_c.set(@tactics.prove(@parser.parse_term("forall s. 0 IN s /\\ schnirelmann s > &0\n       ==> ?k. forall i. i HAS_SIZE k ==> iterate(+++) i (\\a:A. s) = (:num)"), t519))
 }
 
 ///|
@@ -1218,14 +1218,14 @@ fn step_36() -> Unit raise {
   })
   let t524 = @simp.rewrite_tac(@list.List([@sets.in_insert()]))
   let t532 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(schnirelmann_v1()), t524), t528), t529), @tactics.ap_thm_tac), @tactics.ap_term_tac), t530), t531), @tactics.all_tac])
-  let t523 = @tactics.subgoal_then(@parser.parse_term("?k. !i:num->bool.\n           i HAS_SIZE k ==> iterate (+++) i (\\a. 0 INSERT s) = (:num)"), fn(x520 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t523 = @tactics.subgoal_then(@parser.parse_term("?k. forall i:num->bool.\n           i HAS_SIZE k ==> iterate (+++) i (\\a. 0 INSERT s) = (:num)"), fn(x520 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s521 = @tactics.mp_tac(x520)
     fn(x522 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s521(x522)
     }
   })
   let t594 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t523), t532), t533), t534), t541), t542), t543), t545), t547), @nums.induct_tac), t548), t549), t557), t558), t559), t560), t561), t565), t566), t567), t568), t569), t576), t577), t579), @tactics.strip_tac), t584), t585), @tactics.conj_tac), t586), t587), t591), @tactics.ap_term_tac), t592), t593)
-  schnirelmann_direct_c.set(@tactics.prove(@parser.parse_term("!s. schnirelmann s > &0\n       ==> ?k. !n. ?m f. m <= k /\\ (!i. i IN 1..m ==> f(i) IN s) /\\\n                         n = nsum (1..m) f"), t594))
+  schnirelmann_direct_c.set(@tactics.prove(@parser.parse_term("forall s. schnirelmann s > &0\n       ==> ?k. forall n. ?m f. m <= k /\\ (forall i. i IN 1..m ==> f(i) IN s) /\\\n                         n = nsum (1..m) f"), t594))
 }
 
 ///|

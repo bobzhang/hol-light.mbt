@@ -21,7 +21,7 @@ imp_chain = p ==> q ==> r \/ p /\ q
 neg = ~ ~(p /\ q)
 neg_atom = ~p
 eq = x + y = 42
-forall = !x y. x = y
+forall = forall x y. x = y
 exists = ?p. p \/ ~p
 lambda = \x y. x + y
 app_lambda = (\x. x + x) 3
@@ -73,7 +73,7 @@ wrap_imp = hypothesis_1 = 1
 invented = (v:?7) = (v:?7)
 types_all = (x:num) + 1
 infix_atom = (+)
-binder_atom = (!) P
+binder_atom = (forall) P
 interface = x ++ y
 thm = p /\ q
 |- p /\ q

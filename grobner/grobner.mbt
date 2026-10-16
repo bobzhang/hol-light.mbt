@@ -935,7 +935,7 @@ fn step_1() -> Unit raise {
   )
   let pth_step = @tactics.prove(
     @parser.parse_term(
-      "!(add:A->A->A) (mul:A->A->A) (n0:A).\n          (!x. mul n0 x = n0) /\\\n          (!x y z. (add x y = add x z) <=> (y = z)) /\\\n          (!w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (!a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (!n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))",
+      "forall(add:A->A->A) (mul:A->A->A) (n0:A).\n          (forall x. mul n0 x = n0) /\\\n          (forall x y z. (add x y = add x z) <=> (y = z)) /\\\n          (forall w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (forall a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (forall n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))",
     ),
     t204,
   )
@@ -2685,7 +2685,7 @@ fn step_2() -> Unit raise {
   )
   let pth_evenodd = @tactics.prove(
     @parser.parse_term(
-      "(EVEN(x) <=> (!y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (!y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (!y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (!y. ~(x = SUC(2 * y))))",
+      "(EVEN(x) <=> (forall y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (forall y. ~(x = SUC(2 * y))))",
     ),
     t390,
   )
@@ -3043,7 +3043,7 @@ fn step_3() -> Unit raise {
   )
   let num_integral = @tactics.prove(
     @parser.parse_term(
-      "(!x. 0 * x = 0) /\\\n     (!x y z. (x + y = x + z) <=> (y = z)) /\\\n     (!w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))",
+      "(forall x. 0 * x = 0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))",
     ),
     t436,
   )

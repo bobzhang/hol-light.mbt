@@ -194,7 +194,7 @@ fn step_13() -> Unit raise {
 /// NO_ROOTS_192K1
 fn step_14() -> Unit raise {
   let t25 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p192k1(), @list.List([p_192k1()]))
-  no_roots_192k1_c.set(@tactics.prove(@parser.parse_term("!x:int. ~((x pow 3 + &3 == &0) (mod &p_192k1))"), t25))
+  no_roots_192k1_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 + &3 == &0) (mod &p_192k1))"), t25))
 }
 
 ///|
@@ -382,7 +382,7 @@ pub fn p192k1_group_order() -> @kernel.Thm {
 /// P192K1_GROUP_ELEMENT_ORDER
 fn step_20() -> Unit raise {
   let t103 = @meson.meson_tac(@list.List([size_p192k1_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n192k1()]))
-  p192k1_group_element_order_c.set(@tactics.prove(@parser.parse_term("!P. P IN group_carrier p192k1_group\n       ==> group_element_order p192k1_group P =\n           if P = group_id p192k1_group then 1 else n_192k1"), t103))
+  p192k1_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p192k1_group\n       ==> group_element_order p192k1_group P =\n           if P = group_id p192k1_group then 1 else n_192k1"), t103))
 }
 
 ///|

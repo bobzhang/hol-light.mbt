@@ -27,7 +27,7 @@ pub fn complex_measurable() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([@sets.in_elim_thm()]))
   let t2 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("{f| f complex_measurable_on (:real) /\\\n  (\\x. norm (f x) pow 2) real_integrable_on (:real)}")), t1)
-  let t3 = @tactics.prove(@parser.parse_term("?s. !f. f IN s <=> f complex_measurable_on (:real) /\\ (\\x. norm (f x) pow 2)\n  real_integrable_on (:real)"), t2)
+  let t3 = @tactics.prove(@parser.parse_term("?s. forall f. f IN s <=> f complex_measurable_on (:real) /\\ (\\x. norm (f x) pow 2)\n  real_integrable_on (:real)"), t2)
   sq_integrable_c.set(@nums.new_specification(@list.List(["sq_integrable"]))(t3))
 }
 
@@ -98,7 +98,7 @@ fn step_5() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("A/\\B/\\C ==> Q <=> C ==> A /\\ B ==> Q ")), @topology.image_lift_real_interval()]))
   let t4 = @simp.rewrite_tac(@list.List([@realanalysis.has_real_frechet_derivative_within()]))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4), t5), t11), t17), t29), t30)
-  frechet_real_derivative_unique_within_closed_interval_c.set(@tactics.prove(@parser.parse_term("!f f' f'' x a b.\n     a < b /\\ x IN real_interval[a,b] /\\\n     (f has_real_derivative f') (atreal x within (real_interval[a,b])) /\\\n     (f has_real_derivative f'') (atreal x within (real_interval[a,b]))\n     ==> f' = f''"), t31))
+  frechet_real_derivative_unique_within_closed_interval_c.set(@tactics.prove(@parser.parse_term("forall f f' f'' x a b.\n     a < b /\\ x IN real_interval[a,b] /\\\n     (f has_real_derivative f') (atreal x within (real_interval[a,b])) /\\\n     (f has_real_derivative f'') (atreal x within (real_interval[a,b]))\n     ==> f' = f''"), t31))
 }
 
 ///|
@@ -115,7 +115,7 @@ pub fn frechet_real_derivative_unique_within_closed_interval() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@realanalysis.real_negligible_empty()]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x32 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @q.exists_tac("cfun_zero", x32), @simp.rewrite_tac(@list.List([@cfunspace.cfun_zero(), @cfunspace.k_thm()]))), (x33 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @q.exists_tac("{}", x33)), t34)
-  let t36 = @tactics.prove(@parser.parse_term("?f.(?k. real_negligible k /\\ !x. ~(x IN k) ==> f x = Cx(&0))"), t35)
+  let t36 = @tactics.prove(@parser.parse_term("?f.(?k. real_negligible k /\\ forall x. ~(x IN k) ==> f x = Cx(&0))"), t35)
   cfun_almost_zero_c.set(@nums.new_specification(@list.List(["cfun_almost_zero"]))(t36))
 }
 
@@ -131,7 +131,7 @@ pub fn cfun_almost_zero() -> @kernel.Thm {
 ///|
 /// is_almost_zero
 fn step_7() -> Unit raise {
-  is_almost_zero_c.set(@pair.new_definition(@parser.parse_term("is_almost_zero1 f = !a b. (?k. real_negligible k /\\ !x. x IN real_interval[a,b]\n  DIFF k ==> f x = Cx(&0))")))
+  is_almost_zero_c.set(@pair.new_definition(@parser.parse_term("is_almost_zero1 f = forall a b. (?k. real_negligible k /\\ forall x. x IN real_interval[a,b]\n  DIFF k ==> f x = Cx(&0))")))
 }
 
 ///|
@@ -148,14 +148,14 @@ pub fn is_almost_zero() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t51 = @simp.asm_simp_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("~(b <= a) ==> a <= b"))]))
   let t49 = @equal.gsym(@realax.real_le_antisym())
-  let t50 = @impconv.imp_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("!s. ~(s={}) ==> s SUBSET (:real)")), @misc.real_interval_ne_empty(), t49, @realanalysis.has_real_integral_integrable_integral()]))
+  let t50 = @impconv.imp_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("forall s. ~(s={}) ==> s SUBSET (:real)")), @misc.real_interval_ne_empty(), t49, @realanalysis.has_real_integral_integrable_integral()]))
   let t48 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@realanalysis.has_real_integral_integrable_integral()])))
   let t47 = @tactics.mp_tac(@q.specl(@list.List(["f", "real_interval[a,b]", "(:real)"]), @realanalysis.real_integral_subset_le()))
   let t46 = @simp.asm_simp_tac(@list.List([]))
   let t45 = @tactics.mp_tac(@q.specl(@list.List(["f", "real_interval[a,b]"]), @realanalysis.real_integral_pos()))
   let t43 = @simp.asm_rewrite_tac(@list.List([]))
   let t44 = @list.List([@tactics.then_tac(@tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@realanalysis.has_real_integral_alt(), @sets.set_rule(@parser.parse_term("x IN (:real)")), @class.eta_ax()]))), t43), @tactics.all_tac])
-  let t42 = @q.subgoal_then("!a b. f real_integrable_on (real_interval[a,b])", fn(x39 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t42 = @q.subgoal_then("forall a b. f real_integrable_on (real_interval[a,b])", fn(x39 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s40 = @tactics.assume_tac(x39)
     fn(x41 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s40(x41)
@@ -164,7 +164,7 @@ fn step_8() -> Unit raise {
   let t38 = @list.List([@simp.asm_simp_tac(@list.List([@realanalysis.has_real_integral_null()])), @tactics.all_tac])
   let t37 = @q.asm_cases_tac("b<=a")
   let t52 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t37), t38), t42), t44), t45), t46), t47), t48), t50), t51)
-  real_integra_zero_subintervals_c.set(@tactics.prove(@parser.parse_term("!f. (!x. &0 <= f x) /\\ (f has_real_integral &0) (:real) ==>\n   !a b. (f has_real_integral &0) (real_interval[a,b])"), t52))
+  real_integra_zero_subintervals_c.set(@tactics.prove(@parser.parse_term("forall f. (forall x. &0 <= f x) /\\ (f has_real_integral &0) (:real) ==>\n   forall a b. (f has_real_integral &0) (real_interval[a,b])"), t52))
 }
 
 ///|
@@ -204,7 +204,7 @@ fn step_10() -> Unit raise {
   let t127 = @list.List([@meson.asm_meson_tac(@list.List([@realanalysis.has_real_integral_integrable()])), t126])
   let t120 = @tactics.repeat_tac(@tactics.strip_tac)
   let t119 = @list.List([@impconv.imp_rewrite_tac(@list.List([@realanalysis.has_real_integral_negligible(), real_pow2_0(), @complexes.complex_norm_zero()])), @tactics.all_tac])
-  let t118 = @q.subgoal_then("!a b. ((\\x. norm (f x) pow 2) has_real_integral &0)\n     (real_interval [a,b])", fn(x115 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t118 = @q.subgoal_then("forall a b. ((\\x. norm (f x) pow 2) has_real_integral &0)\n     (real_interval [a,b])", fn(x115 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s116 = @tactics.assume_tac(x115)
     fn(x117 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s116(x117)
@@ -249,7 +249,7 @@ fn step_10() -> Unit raise {
     })(((x84 : @kernel.Thm) => @bool.specl(t83, x84))(x85))
   })
   let t102 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t86), t87), t88), t101), @tactics.all_tac])
-  let t78 = @tactics.subgoal_then(@parser.parse_term("(!a b. ?k. real_negligible k /\\\n          (!x. x IN real_interval [a,b] DIFF k\n               ==> ((\\x. &0) has_real_derivative norm ((f:real->complex) x) pow 2)\n                   (atreal x within real_interval [a,b]))) ==>\n                (!a b.\n      ?k. real_negligible k /\\\n          (!x. x IN real_interval [a,b] DIFF k ==> norm (f x) pow 2 = &0))"), fn(x75 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t78 = @tactics.subgoal_then(@parser.parse_term("(forall a b. ?k. real_negligible k /\\\n          (forall x. x IN real_interval [a,b] DIFF k\n               ==> ((\\x. &0) has_real_derivative norm ((f:real->complex) x) pow 2)\n                   (atreal x within real_interval [a,b]))) ==>\n                (forall a b.\n      ?k. real_negligible k /\\\n          (forall x. x IN real_interval [a,b] DIFF k ==> norm (f x) pow 2 = &0))"), fn(x75 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s76 = @tactics.assume_tac(x75)
     fn(x77 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s76(x77)
@@ -262,7 +262,7 @@ fn step_10() -> Unit raise {
   let t70 = @tactics.mp_tac(@q.spec("(\\x. norm ((f:real->complex) x) pow 2)", @realanalysis.has_real_derivative_indefinite_integral()))
   let t68 = @simp.asm_rewrite_tac(@list.List([]))
   let t69 = @list.List([@tactics.then_tac(@tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@realanalysis.has_real_integral_alt(), @sets.set_rule(@parser.parse_term("x IN (:real)")), @class.eta_ax()]))), t68), @tactics.all_tac])
-  let t67 = @q.subgoal_then("!a b. (\\x. norm (f x) pow 2) real_integrable_on (real_interval[a,b])", fn(x64 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t67 = @q.subgoal_then("forall a b. (\\x. norm (f x) pow 2) real_integrable_on (real_interval[a,b])", fn(x64 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s65 = @tactics.assume_tac(x64)
     fn(x66 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s65(x66)
@@ -283,7 +283,7 @@ fn step_10() -> Unit raise {
   let t55 = @tactics.repeat_tac(@tactics.strip_tac)
   let t54 = @equal.gsym(@complexes.cx_pow())
   let t128 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sq_integrable(), r_inprod(), r_inprod(), @complexes.re_cx(), @complexes.im_cx(), @equal.gsym(@complexes.cx_def()), @complexes.complex_mul_cnj(), t54, @realanalysis.real_integral_0(), @complexes.cx_inj()])), t55), @tactics.eq_tac), t110), t111), t112), t113), t114), t118), t119), t120), t127)
-  rinprod_almost_zero_c.set(@tactics.prove(@parser.parse_term("!f. f IN sq_integrable ==> (r_inprod f f = Cx (&0) <=> is_almost_zero1  f)"), t128))
+  rinprod_almost_zero_c.set(@tactics.prove(@parser.parse_term("forall f. f IN sq_integrable ==> (r_inprod f f = Cx (&0) <=> is_almost_zero1  f)"), t128))
 }
 
 ///|
@@ -306,7 +306,7 @@ fn step_11() -> Unit raise {
   })
   let t147 = @tactics.match_mp_tac(@realanalysis.has_real_integral_negligible())
   let t154 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t147), t151), (x152 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @q.exists_tac("s", x152)), t153), @tactics.all_tac])
-  let t155 = @tactics.thenl(@q.subgoal_then("!a b.  ((\\x. Im (cnj (g x) * f x)) has_real_integral &0)\n     (real_interval [a,b])", fn(x144 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t155 = @tactics.thenl(@q.subgoal_then("forall a b.  ((\\x. Im (cnj (g x) * f x)) has_real_integral &0)\n     (real_interval [a,b])", fn(x144 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s145 = @tactics.assume_tac(x144)
     fn(x146 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s145(x146)
@@ -319,7 +319,7 @@ fn step_11() -> Unit raise {
   })
   let t136 = @tactics.match_mp_tac(@realanalysis.has_real_integral_negligible())
   let t143 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t136), t140), (x141 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @q.exists_tac("s", x141)), t142), @tactics.all_tac])
-  let t156 = @list.List([@tactics.thenl(@q.subgoal_then("!a b.  ((\\x. Re (cnj (g x) * f x)) has_real_integral &0)\n     (real_interval [a,b])", fn(x133 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t156 = @list.List([@tactics.thenl(@q.subgoal_then("forall a b.  ((\\x. Re (cnj (g x) * f x)) has_real_integral &0)\n     (real_interval [a,b])", fn(x133 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s134 = @tactics.assume_tac(x133)
     fn(x135 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s134(x135)
@@ -330,7 +330,7 @@ fn step_11() -> Unit raise {
   let t130 = @tactics.match_mp_tac(@realanalysis.real_integral_unique())
   let t129 = @tactics.repeat_tac(@tactics.strip_tac)
   let t158 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([r_inprod(), @complexes.complex_eq(), @complexes.cx_def(), @complexes.re(), @complexes.im()])), t129), t130), t131), t132), t156), t157)
-  alomst_zero_zero_c.set(@tactics.prove(@parser.parse_term("!f g. is_almost_zero1 f ==> r_inprod g f = Cx(&0)"), t158))
+  alomst_zero_zero_c.set(@tactics.prove(@parser.parse_term("forall f g. is_almost_zero1 f ==> r_inprod g f = Cx(&0)"), t158))
 }
 
 ///|
@@ -346,7 +346,7 @@ pub fn alomst_zero_zero() -> @kernel.Thm {
 /// RINPROD_ZERO_EQ
 fn step_12() -> Unit raise {
   let t159 = @meson.meson_tac(@list.List([alomst_zero_zero(), rinprod_almost_zero()]))
-  rinprod_zero_eq_c.set(@tactics.prove(@parser.parse_term("!x y. x IN sq_integrable  /\\ r_inprod x x = Cx(&0)\n     ==> r_inprod y x = Cx(&0)"), t159))
+  rinprod_zero_eq_c.set(@tactics.prove(@parser.parse_term("forall x y. x IN sq_integrable  /\\ r_inprod x x = Cx(&0)\n     ==> r_inprod y x = Cx(&0)"), t159))
 }
 
 ///|
@@ -391,7 +391,7 @@ pub fn sq_rule_sub() -> @kernel.Thm {
 ///|
 /// ABS_POW_2
 fn step_15() -> Unit raise {
-  abs_pow_2_c.set(@meson.meson(@list.List([@real.real_abs_refl(), @real.real_le_pow_2()]), @parser.parse_term("!x. abs (x pow 2) = x pow 2")))
+  abs_pow_2_c.set(@meson.meson(@list.List([@real.real_abs_refl(), @real.real_le_pow_2()]), @parser.parse_term("forall x. abs (x pow 2) = x pow 2")))
 }
 
 ///|
@@ -455,7 +455,7 @@ fn step_17() -> Unit raise {
   let t192 = @tactics.repeat_tac(@tactics.strip_tac)
   let t191 = @equal.gsym(@complexes.cx_def())
   let t195 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sq_integrable(), @complexes.real_v1(), r_inprod(), @complexes.complex_mul_cnj(), @complexes.re_cx(), @complexes.im_cx(), @equal.gsym(@complexes.cx_pow()), @complexes.re(), @complexes.im(), @realanalysis.real_integral_0(), t191, @cfunspace.real_of_complex_cx()])), t192), t193), t194)
-  rinprod_self_pos_c.set(@tactics.prove(@parser.parse_term("!f. f IN sq_integrable\n       ==> real (r_inprod f f) /\\\n                &0 <= real_of_complex (r_inprod f f)"), t195))
+  rinprod_self_pos_c.set(@tactics.prove(@parser.parse_term("forall f. f IN sq_integrable\n       ==> real (r_inprod f f) /\\\n                &0 <= real_of_complex (r_inprod f f)"), t195))
 }
 
 ///|
@@ -504,7 +504,7 @@ fn step_18() -> Unit raise {
   let t197 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t196 = @tactics.repeat_tac(@tactics.strip_tac)
   let t227 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sq_integrable(), complex_measurable(), @complexes.re(), @complexes.im(), @complexes.cnj(), @complexes.complex_sqnorm(), r_inprod(), @complexes.complex_mul()])), t196), @tactics.ap_term_tac), t197), t198), t199), t203), t211), t215), t223), t225), @tactics.ap_term_tac), t226), @calc_rat.real_arith_tac)
-  rinprod_cnj_c.set(@tactics.prove(@parser.parse_term("!f g. f IN sq_integrable /\\ g IN sq_integrable\n    ==> cnj (r_inprod f g) = r_inprod g f"), t227))
+  rinprod_cnj_c.set(@tactics.prove(@parser.parse_term("forall f g. f IN sq_integrable /\\ g IN sq_integrable\n    ==> cnj (r_inprod f g) = r_inprod g f"), t227))
 }
 
 ///|
@@ -584,7 +584,7 @@ fn step_19() -> Unit raise {
   let t229 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t228 = @tactics.repeat_tac(@tactics.strip_tac)
   let t288 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sq_integrable(), complex_measurable(), @cfunspace.cfun_smul_v1(), @complexes.re(), @complexes.im(), @complexes.cnj(), @complexes.complex_sqnorm(), r_inprod(), @complexes.complex_mul()])), t228), @tactics.ap_term_tac), t229), t233), t241), t245), t253), t257), t265), t269), t277), t281), t282), t284), t286), t287)
-  rinprod_rsmul_c.set(@tactics.prove(@parser.parse_term("!f g a. f IN sq_integrable /\\ g IN sq_integrable\n    ==> r_inprod f (a%g) = a * r_inprod f g"), t288))
+  rinprod_rsmul_c.set(@tactics.prove(@parser.parse_term("forall f g a. f IN sq_integrable /\\ g IN sq_integrable\n    ==> r_inprod f (a%g) = a * r_inprod f g"), t288))
 }
 
 ///|
@@ -717,7 +717,7 @@ fn step_20() -> Unit raise {
   let t290 = @tactics.repeat_tac(@tactics.strip_tac)
   let t289 = @equal.gsym(@realax.real_sub())
   let t398 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sq_integrable(), complex_measurable(), @cfunspace.cfun_add_thm(), @complexes.re(), @complexes.im(), @complexes.cnj(), @complexes.complex_sqnorm(), r_inprod(), @complexes.complex_mul(), @complexes.re_add(), @complexes.im_add(), @equal.gsym(@real.real_neg_lmul()), @real.real_sub_rneg(), @real.real_add_rdistrib(), t289, @complexes.complex_add()])), t290), @tactics.ap_term_tac), t291), t295), t303), t307), t315), t319), t327), t331), t339), t343), t351), t355), t363), t367), t375), t379), t387), t391), t392), t394), t396), t397)
-  rinprod_ladd_c.set(@tactics.prove(@parser.parse_term("!f g z. f IN sq_integrable /\\ g IN sq_integrable /\\ z IN sq_integrable\n    ==> r_inprod (f+g) z= r_inprod f z + r_inprod g z"), t398))
+  rinprod_ladd_c.set(@tactics.prove(@parser.parse_term("forall f g z. f IN sq_integrable /\\ g IN sq_integrable /\\ z IN sq_integrable\n    ==> r_inprod (f+g) z= r_inprod f z + r_inprod g z"), t398))
 }
 
 ///|

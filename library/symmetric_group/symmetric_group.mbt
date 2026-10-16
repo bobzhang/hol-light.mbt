@@ -73,7 +73,7 @@ fn step_2() -> Unit raise {
   symmetric_group_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(!s:A->bool.\n     group_carrier(symmetric_group s) = {p | p permutes s}) /\\\n   (!s:A->bool. group_id(symmetric_group s) = I) /\\\n   (!s:A->bool. group_inv(symmetric_group s) = (inverse:(A->A)->A->A)) /\\\n   (!s:A->bool. group_mul(symmetric_group s) = (o))",
+        "(forall s:A->bool.\n     group_carrier(symmetric_group s) = {p | p permutes s}) /\\\n   (forall s:A->bool. group_id(symmetric_group s) = I) /\\\n   (forall s:A->bool. group_inv(symmetric_group s) = (inverse:(A->A)->A->A)) /\\\n   (forall s:A->bool. group_mul(symmetric_group s) = (o))",
       ),
       t5,
     ),
@@ -100,7 +100,7 @@ fn step_3() -> Unit raise {
   finite_symmetric_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s ==> FINITE(group_carrier(symmetric_group s))",
+        "forall s:A->bool. FINITE s ==> FINITE(group_carrier(symmetric_group s))",
       ),
       t6,
     ),
@@ -127,7 +127,7 @@ fn step_4() -> Unit raise {
   card_symmetric_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s\n    ==> CARD(group_carrier(symmetric_group s)) = FACT(CARD s)",
+        "forall s:A->bool. FINITE s\n    ==> CARD(group_carrier(symmetric_group s)) = FACT(CARD s)",
       ),
       t7,
     ),
@@ -152,7 +152,7 @@ fn step_5() -> Unit raise {
   symmetric_group_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (p:A->A) q. group_mul (symmetric_group s) p q = p o q",
+        "forall s (p:A->A) q. group_mul (symmetric_group s) p q = p o q",
       ),
       t8,
     ),
@@ -177,7 +177,7 @@ fn step_6() -> Unit raise {
   symmetric_group_inv_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (p:A->A). group_inv (symmetric_group s) p = inverse p",
+        "forall s (p:A->A). group_inv (symmetric_group s) p = inverse p",
       ),
       t9,
     ),
@@ -201,7 +201,7 @@ fn step_7() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([symmetric_group_v1()]))
   symmetric_group_id_c.set(
     @tactics.prove(
-      @parser.parse_term("!s:A->bool. group_id (symmetric_group s) = I"),
+      @parser.parse_term("forall s:A->bool. group_id (symmetric_group s) = I"),
       t10,
     ),
   )
@@ -231,7 +231,7 @@ fn step_8() -> Unit raise {
   swap_in_symmetric_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s a b:A. a IN s /\\ b IN s\n             ==> swap(a,b) IN group_carrier(symmetric_group s)",
+        "forall s a b:A. a IN s /\\ b IN s\n             ==> swap(a,b) IN group_carrier(symmetric_group s)",
       ),
       t11,
     ),
@@ -262,7 +262,7 @@ fn step_9() -> Unit raise {
   three_cycle_in_symmetric_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s a b c:A. a IN s /\\ b IN s /\\ c IN s /\\\n               ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n               ==> three_cycle a b c IN\n                   group_carrier(symmetric_group s)",
+        "forall s a b c:A. a IN s /\\ b IN s /\\ c IN s /\\\n               ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n               ==> three_cycle a b c IN\n                   group_carrier(symmetric_group s)",
       ),
       t12,
     ),
@@ -440,7 +440,7 @@ fn step_10() -> Unit raise {
   cayley_theorem_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!G:A group.\n        group_monomorphism (G,symmetric_group(group_carrier G))\n                           (\\a x. if x IN group_carrier G\n                                  then group_mul G a x else x)",
+        "forall G:A group.\n        group_monomorphism (G,symmetric_group(group_carrier G))\n                           (\\a x. if x IN group_carrier G\n                                  then group_mul G a x else x)",
       ),
       t26,
     ),
@@ -516,7 +516,7 @@ fn step_11() -> Unit raise {
   cayley_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!G:A group.\n        ?h. h subgroup_of symmetric_group(group_carrier G) /\\\n            subgroup_generated (symmetric_group(group_carrier G)) h\n            isomorphic_group G",
+        "forall G:A group.\n        ?h. h subgroup_of symmetric_group(group_carrier G) /\\\n            subgroup_generated (symmetric_group(group_carrier G)) h\n            isomorphic_group G",
       ),
       t34,
     ),
@@ -570,7 +570,7 @@ fn step_12() -> Unit raise {
   symmetric_group_action_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. group_action (symmetric_group s) s (\\f x. (f:A->A) x)",
+        "forall s:A->bool. group_action (symmetric_group s) s (\\f x. (f:A->A) x)",
       ),
       t41,
     ),
@@ -918,7 +918,7 @@ fn step_13() -> Unit raise {
   chain_step_three_cycles_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool (H:(A->A) group) (n:(A->A)->bool).\n     5 <= CARD s /\\ FINITE s /\\\n     n normal_subgroup_of H /\\\n     abelian_group(quotient_group H n) /\\\n     group_mul H = (o) /\\ group_inv H = (inverse:(A->A)->A->A) /\\\n     (!a b c. a IN s /\\ b IN s /\\ c IN s /\\\n              ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n              ==> three_cycle a b c IN group_carrier H)\n     ==> (!a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                   ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n                   ==> three_cycle a b c IN n)",
+        "forall s:A->bool (H:(A->A) group) (n:(A->A)->bool).\n     5 <= CARD s /\\ FINITE s /\\\n     n normal_subgroup_of H /\\\n     abelian_group(quotient_group H n) /\\\n     group_mul H = (o) /\\ group_inv H = (inverse:(A->A)->A->A) /\\\n     (forall a b c. a IN s /\\ b IN s /\\ c IN s /\\\n              ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n              ==> three_cycle a b c IN group_carrier H)\n     ==> (forall a b c. a IN s /\\ b IN s /\\ c IN s /\\\n                   ~(a = b) /\\ ~(b = c) /\\ ~(a = c)\n                   ==> three_cycle a b c IN n)",
       ),
       t80,
     ),
@@ -1968,7 +1968,7 @@ fn step_14() -> Unit raise {
   ])
   let t94 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!i. i <= k\n         ==> (c:num->(A->A)->bool) i subgroup_of symmetric_group (s:A->bool) /\\\n             (!a b c'. a IN s /\\ b IN s /\\ c' IN s /\\\n                       ~(a = b) /\\ ~(b = c') /\\ ~(a = c')\n                       ==> three_cycle a b c' IN c i)",
+      "forall i. i <= k\n         ==> (c:num->(A->A)->bool) i subgroup_of symmetric_group (s:A->bool) /\\\n             (forall a b c'. a IN s /\\ b IN s /\\ c' IN s /\\\n                       ~(a = b) /\\ ~(b = c') /\\ ~(a = c')\n                       ==> three_cycle a b c' IN c i)",
     ),
     fn(
       x91 : @kernel.Thm,
@@ -2116,7 +2116,7 @@ fn step_14() -> Unit raise {
   not_solvable_symmetric_group_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s:A->bool. FINITE s /\\ 5 <= CARD s\n               ==> ~(solvable_group(symmetric_group s))",
+        "forall s:A->bool. FINITE s /\\ 5 <= CARD s\n               ==> ~(solvable_group(symmetric_group s))",
       ),
       t195,
     ),
@@ -2236,7 +2236,7 @@ fn step_15() -> Unit raise {
   point_transpositions_generate_all_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (a:A) h.\n    a IN s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (!x. x IN s /\\ ~(x = a) ==> swap(a,x) IN h)\n    ==> (!x y. x IN s /\\ y IN s /\\ ~(x = y) ==> swap(x,y) IN h)",
+        "forall s (a:A) h.\n    a IN s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (forall x. x IN s /\\ ~(x = a) ==> swap(a,x) IN h)\n    ==> (forall x y. x IN s /\\ y IN s /\\ ~(x = y) ==> swap(x,y) IN h)",
       ),
       t208,
     ),
@@ -2364,7 +2364,7 @@ fn step_16() -> Unit raise {
     @tactics.all_tac,
   ])
   let t217 = @tactics.subgoal_then(
-    @parser.parse_term("!f:A->A. f IN h ==> f permutes s"),
+    @parser.parse_term("forall f:A->A. f IN h ==> f permutes s"),
     fn(
       x214 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2503,7 +2503,7 @@ fn step_16() -> Unit raise {
   restrict_symmetric_group_homomorphism_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (h:(A->A)->bool).\n    FINITE t /\\ t SUBSET s /\\\n    h subgroup_of symmetric_group s /\\\n    (!f. f IN h ==> IMAGE f t = t)\n    ==> group_homomorphism\n         (subgroup_generated (symmetric_group s) h,\n          symmetric_group t)\n         (\\f:A->A. \\x:A. if x IN t then f x else x)",
+        "forall s t (h:(A->A)->bool).\n    FINITE t /\\ t SUBSET s /\\\n    h subgroup_of symmetric_group s /\\\n    (forall f. f IN h ==> IMAGE f t = t)\n    ==> group_homomorphism\n         (subgroup_generated (symmetric_group s) h,\n          symmetric_group t)\n         (\\f:A->A. \\x:A. if x IN t then f x else x)",
       ),
       t245,
     ),
@@ -2833,7 +2833,7 @@ fn step_17() -> Unit raise {
   subgroup_restrict_permutes_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (h:(A->A)->bool).\n    t SUBSET s /\\\n    h subgroup_of (symmetric_group s)\n    ==> (h INTER group_carrier(symmetric_group t)) subgroup_of\n        (symmetric_group t)",
+        "forall s t (h:(A->A)->bool).\n    t SUBSET s /\\\n    h subgroup_of (symmetric_group s)\n    ==> (h INTER group_carrier(symmetric_group t)) subgroup_of\n        (symmetric_group t)",
       ),
       t284,
     ),
@@ -2952,7 +2952,7 @@ fn step_18() -> Unit raise {
   all_transpositions_generate_symmetric_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (h:(A->A)->bool).\n    FINITE s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (!a b. a IN s /\\ b IN s /\\ ~(a = b) ==> swap(a,b) IN h)\n    ==> group_carrier(symmetric_group s) SUBSET h",
+        "forall s (h:(A->A)->bool).\n    FINITE s /\\\n    h subgroup_of (symmetric_group s) /\\\n    (forall a b. a IN s /\\ b IN s /\\ ~(a = b) ==> swap(a,b) IN h)\n    ==> group_carrier(symmetric_group s) SUBSET h",
       ),
       t296,
     ),
@@ -2989,7 +2989,7 @@ fn step_19() -> Unit raise {
   symmetric_group_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s t (sigma:A->A) n.\n     group_pow (symmetric_group s) sigma n =\n     group_pow (symmetric_group t) sigma n",
+        "forall s t (sigma:A->A) n.\n     group_pow (symmetric_group s) sigma n =\n     group_pow (symmetric_group t) sigma n",
       ),
       t298,
     ),
@@ -3035,7 +3035,7 @@ fn step_20() -> Unit raise {
   symmetric_group_pow_in_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (sigma:A->A) n a.\n     sigma permutes s /\\ a IN s\n     ==> group_pow (symmetric_group s) sigma n a IN s",
+        "forall s (sigma:A->A) n a.\n     sigma permutes s /\\ a IN s\n     ==> group_pow (symmetric_group s) sigma n a IN s",
       ),
       t302,
     ),
@@ -3659,7 +3659,7 @@ fn step_21() -> Unit raise {
   prime_order_perm_no_fixpoint_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (sigma:A->A) a.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s\n     ==> ~(sigma a = a)",
+        "forall s (sigma:A->A) a.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s\n     ==> ~(sigma a = a)",
       ),
       t363,
     ),
@@ -3788,7 +3788,7 @@ fn step_22() -> Unit raise {
   prime_order_pow_perm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (sigma:A->A) d.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     0 < d /\\ d < CARD s\n     ==> group_element_order (symmetric_group s)\n           (group_pow (symmetric_group s) sigma d) = CARD s",
+        "forall s (sigma:A->A) d.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     0 < d /\\ d < CARD s\n     ==> group_element_order (symmetric_group s)\n           (group_pow (symmetric_group s) sigma d) = CARD s",
       ),
       t379,
     ),
@@ -4669,7 +4669,7 @@ fn step_23() -> Unit raise {
   prime_order_perm_orbit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (sigma:A->A) a x.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s /\\ x IN s\n     ==> ?k. k < CARD s /\\\n             group_pow (symmetric_group s) sigma k a = x",
+        "forall s (sigma:A->A) a x.\n     FINITE s /\\ prime(CARD s) /\\\n     sigma permutes s /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     a IN s /\\ x IN s\n     ==> ?k. k < CARD s /\\\n             group_pow (symmetric_group s) sigma k a = x",
       ),
       t485,
     ),
@@ -4906,7 +4906,7 @@ fn step_24() -> Unit raise {
   swap_conjugate_in_subgroup_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (sigma:A->A) a b h k.\n     FINITE s /\\\n     h subgroup_of symmetric_group s /\\\n     sigma permutes s /\\\n     sigma IN h /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s\n     ==> swap(group_pow (symmetric_group s) sigma k a,\n              group_pow (symmetric_group s) sigma k b) IN h",
+        "forall s (sigma:A->A) a b h k.\n     FINITE s /\\\n     h subgroup_of symmetric_group s /\\\n     sigma permutes s /\\\n     sigma IN h /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s\n     ==> swap(group_pow (symmetric_group s) sigma k a,\n              group_pow (symmetric_group s) sigma k b) IN h",
       ),
       t512,
     ),
@@ -5917,7 +5917,7 @@ fn step_25() -> Unit raise {
   let t636 = @class.asm_cases_tac(@parser.parse_term("k = 0"))
   let t635 = @tactics.subgoal_then(
     @parser.parse_term(
-      "!k. 0 < k /\\ k < CARD(s:A->bool)\n         ==> swap(a:A, group_pow (symmetric_group s) (tau:A->A) k a) IN h",
+      "forall k. 0 < k /\\ k < CARD(s:A->bool)\n         ==> swap(a:A, group_pow (symmetric_group s) (tau:A->A) k a) IN h",
     ),
     fn(
       x632 : @kernel.Thm,
@@ -6585,7 +6585,7 @@ fn step_25() -> Unit raise {
     ),
   ])
   let t533 = @tactics.subgoal_then(
-    @parser.parse_term("!x:A. x IN s /\\ ~(x = a) ==> swap(a,x) IN h"),
+    @parser.parse_term("forall x:A. x IN s /\\ ~(x = a) ==> swap(a,x) IN h"),
     fn(
       x530 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6961,7 +6961,7 @@ fn step_25() -> Unit raise {
   transposition_pcycle_generates_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (sigma:A->A) a b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     sigma IN h /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h",
+        "forall s (sigma:A->A) a b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     sigma IN h /\\\n     group_element_order (symmetric_group s) sigma = CARD s /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h",
       ),
       t754,
     ),
@@ -7740,7 +7740,7 @@ fn step_26() -> Unit raise {
   transitive_transposition_generates_symmetric_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "!s (a:A) b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     (!x y. x IN s /\\ y IN s ==> ?sigma. sigma IN h /\\ sigma x = y) /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h",
+        "forall s (a:A) b h.\n     FINITE s /\\ prime(CARD s) /\\\n     h subgroup_of symmetric_group s /\\\n     (forall x y. x IN s /\\ y IN s ==> ?sigma. sigma IN h /\\ sigma x = y) /\\\n     swap(a,b) IN h /\\\n     a IN s /\\ b IN s /\\ ~(a = b)\n     ==> group_carrier(symmetric_group s) SUBSET h",
       ),
       t841,
     ),

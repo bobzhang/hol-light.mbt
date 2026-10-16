@@ -15,7 +15,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.simp_tac(@list.List([@clifford.geom_mbasis(), @sets.diff_empty(), @sets.empty_diff(), @sets.union_empty(), @sets.empty_subset()]))
   let t1 = @simp.simp_tac(@list.List([@clifford.geom_rmul(), @clifford.geom_radd()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@clifford.mbasis_extension()), t1), t2), t3), t4)
-  geom_mbasis_lid_c.set(@tactics.prove(@parser.parse_term("!x. mbasis{} * x = x"), t5))
+  geom_mbasis_lid_c.set(@tactics.prove(@parser.parse_term("forall x. mbasis{} * x = x"), t5))
 }
 
 ///|
@@ -35,7 +35,7 @@ fn step_3() -> Unit raise {
   let t7 = @simp.simp_tac(@list.List([@clifford.geom_mbasis(), @sets.diff_empty(), @sets.empty_diff(), @sets.union_empty(), @sets.empty_subset()]))
   let t6 = @simp.simp_tac(@list.List([@clifford.geom_lmul(), @clifford.geom_ladd()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@clifford.mbasis_extension()), t6), t7), t8), t9)
-  geom_mbasis_rid_c.set(@tactics.prove(@parser.parse_term("!x. x * mbasis{} = x"), t10))
+  geom_mbasis_rid_c.set(@tactics.prove(@parser.parse_term("forall x. x * mbasis{} = x"), t10))
 }
 
 ///|
@@ -60,7 +60,7 @@ fn step_4() -> Unit raise {
   })
   let t11 = @simp.asm_rewrite_tac(@list.List([@clifford.geom_mbasis_sing()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @class.cond_cases_tac), t11), t14), t15), @class.cond_cases_tac), t16), t17), t18)
-  geom_mbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("!i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})"), t19))
+  geom_mbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})"), t19))
 }
 
 ///|
@@ -76,7 +76,7 @@ pub fn geom_mbasis_skewsym() -> @kernel.Thm {
 /// GEOM_MBASIS_REFL
 fn step_5() -> Unit raise {
   let t20 = @tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@clifford.geom_mbasis_sing()])))
-  geom_mbasis_refl_c.set(@tactics.prove(@parser.parse_term("!i. mbasis{i}:real^(N)multivector * mbasis{i} =\n       if i IN 1..dimindex (:N) then mbasis {}\n       else vec 0"), t20))
+  geom_mbasis_refl_c.set(@tactics.prove(@parser.parse_term("forall i. mbasis{i}:real^(N)multivector * mbasis{i} =\n       if i IN 1..dimindex (:N) then mbasis {}\n       else vec 0"), t20))
 }
 
 ///|
@@ -219,7 +219,7 @@ fn step_6() -> Unit raise {
     })(x31))
   }, @list.List([geom_mbasis_skewsym()]))
   let t102 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t32), t33), t34), @tactics.ap_term_tac), t46), t58), t59), t60), t80), t81), t82), t83), t84), t85), t97), t98), t99), t100), t101)
-  let lemma = @tactics.prove(@parser.parse_term("!i. 2 < i /\\ i<= dimindex(:N) ==>\n     (mbasis {i-2} * mbasis {i-1} * (mbasis {i}:real^(N)multivector)) * (mbasis {i-2} * mbasis {i-1} * mbasis {i}) = --mbasis {}"), t102)
+  let lemma = @tactics.prove(@parser.parse_term("forall i. 2 < i /\\ i<= dimindex(:N) ==>\n     (mbasis {i-2} * mbasis {i-1} * (mbasis {i}:real^(N)multivector)) * (mbasis {i-2} * mbasis {i-1} * mbasis {i}) = --mbasis {}"), t102)
   let t158 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("p + q + 1<= i ==> ~(4 * i - 3 * p - q - 1 = i - q:num)"))]))
   let t157 = @simp.gen_rewrite_tac(fn(x156 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x150 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -301,7 +301,7 @@ fn step_6() -> Unit raise {
   }), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t107), @tactics.all_tac])
   let t103 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([geom_mbasis_refl(), @iterate.in_numseg()])), @int.asm_arith_tac), @tactics.all_tac])
   let t159 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t103), @class.cond_cases_tac), t108), t109), @class.cond_cases_tac), t110), t111), t119), @tactics.binop_tac), t120), t126), t127), t135), t136), t137), @tactics.ap_term_tac), t138), @tactics.ap_thm_tac), @tactics.ap_term_tac), t146), t147), t148), t149), @tactics.ap_term_tac), t157), t158)
-  g_p_q_r_with_g_n_c.set(@tactics.prove(@parser.parse_term("!p q r i e.\n    1 <= p + q + r /\\ p + 3 * q + 4 * r <= dimindex(:N) /\\\n    (e i = if 1 <= i /\\ i <= p then (mbasis {i}:real^(N)multivector)\n           else if p + 1 <= i /\\ i <= p + q then\n                 (mbasis {(3 * i - 2 * p + r) - 2} * mbasis {(3 * i - 2 * p + r) - 1} * mbasis {3 * i - 2 * p + r })\n           else if p + q + 1 <= i /\\ i <= p + q + r then\n                 (mbasis {i - q} + mbasis {(4 * i - 3 * p - q) - 2} * mbasis {(4 * i - 3 * p - q) - 1} * mbasis {(4 * i - 3 * p) - q })\n           else vec 0) ==>\n     e i * e i = if 1 <= i /\\ i <= p then mbasis {}\n                 else if p + 1 <= i /\\ i <= p + q then -- mbasis {}\n                 else vec 0"), t159))
+  g_p_q_r_with_g_n_c.set(@tactics.prove(@parser.parse_term("forall p q r i e.\n    1 <= p + q + r /\\ p + 3 * q + 4 * r <= dimindex(:N) /\\\n    (e i = if 1 <= i /\\ i <= p then (mbasis {i}:real^(N)multivector)\n           else if p + 1 <= i /\\ i <= p + q then\n                 (mbasis {(3 * i - 2 * p + r) - 2} * mbasis {(3 * i - 2 * p + r) - 1} * mbasis {3 * i - 2 * p + r })\n           else if p + q + 1 <= i /\\ i <= p + q + r then\n                 (mbasis {i - q} + mbasis {(4 * i - 3 * p - q) - 2} * mbasis {(4 * i - 3 * p - q) - 1} * mbasis {(4 * i - 3 * p) - q })\n           else vec 0) ==>\n     e i * e i = if 1 <= i /\\ i <= p then mbasis {}\n                 else if p + 1 <= i /\\ i <= p + q then -- mbasis {}\n                 else vec 0"), t159))
 }
 
 ///|
@@ -321,7 +321,7 @@ fn step_7() -> Unit raise {
   let t161 = @tactics.exists_tac(@parser.parse_term("{i,j | i IN {s | s SUBSET 1..m} /\\ j IN {s | s SUBSET 1..n}}"))
   let t160 = @tactics.match_mp_tac(@sets.finite_subset())
   let t164 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t160), t161), t162), t163)
-  finite_powerset_cart_subset_lemma_c.set(@tactics.prove(@parser.parse_term("!P m n. FINITE {i,j | i IN {s | s SUBSET 1..m} /\\ j IN {s | s SUBSET 1..n} /\\ P i j}"), t164))
+  finite_powerset_cart_subset_lemma_c.set(@tactics.prove(@parser.parse_term("forall P m n. FINITE {i,j | i IN {s | s SUBSET 1..m} /\\ j IN {s | s SUBSET 1..n} /\\ P i j}"), t164))
 }
 
 ///|
@@ -341,7 +341,7 @@ fn step_8() -> Unit raise {
   let t166 = @tactics.exists_tac(@parser.parse_term("{i,j | i IN m..n /\\ j IN m'..n'}"))
   let t165 = @tactics.match_mp_tac(@sets.finite_subset())
   let t169 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t165), t166), t167), t168)
-  finite_cart_subset_lemma1_c.set(@tactics.prove(@parser.parse_term("!P m n m' n'. FINITE {i,j | i IN m..n /\\ j IN m'..n' /\\ P i j}"), t169))
+  finite_cart_subset_lemma1_c.set(@tactics.prove(@parser.parse_term("forall P m n m' n'. FINITE {i,j | i IN m..n /\\ j IN m'..n' /\\ P i j}"), t169))
 }
 
 ///|
@@ -404,7 +404,7 @@ pub fn pdimindex_lt_dimindex() -> @kernel.Thm {
 /// PDIMINDEX_LE_IMP_DIMINDEX_LE
 fn step_12() -> Unit raise {
   let t172 = @meson.meson_tac(@list.List([pdimindex_lt_dimindex(), @arith.let_trans(), @arith.lt_imp_le()]))
-  pdimindex_le_imp_dimindex_le_c.set(@tactics.prove(@parser.parse_term("!x. x <= pdimindex s ==> x <= dimindex s"), t172))
+  pdimindex_le_imp_dimindex_le_c.set(@tactics.prove(@parser.parse_term("forall x. x <= pdimindex s ==> x <= dimindex s"), t172))
 }
 
 ///|
@@ -448,7 +448,7 @@ fn step_14() -> Unit raise {
     }
   })
   let t183 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t179), t181), t182)
-  let lemma_post = @tactics.prove(@parser.parse_term("(!a:A. mk(dest a) = a) /\\ (!r. r IN 1..n+1 <=> dest(mk r) = r)\n     ==> (:A) HAS_SIZE n+1"), t183)
+  let lemma_post = @tactics.prove(@parser.parse_term("(forall a:A. mk(dest a) = a) /\\ (forall r. r IN 1..n+1 <=> dest(mk r) = r)\n     ==> (:A) HAS_SIZE n+1"), t183)
   let post_rule : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(lemma_post)
   let n_tm = @parser.parse_term("n:num")
   define_pseudo_finite_type_c.set(fn(x184 : Int64) -> @kernel.Thm raise {
@@ -803,7 +803,7 @@ fn step_35() -> Unit raise {
     x208
   }, @list.List([@equal.gsym(geomalg_tybij())]))
   let t211 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t209), t210)
-  dest_mk_geomalg_c.set(@tactics.prove(@parser.parse_term("!s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> dest_geomalg(mk_geomalg s:(P,Q,R)geomalg) = s"), t211))
+  dest_mk_geomalg_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> dest_geomalg(mk_geomalg s:(P,Q,R)geomalg) = s"), t211))
 }
 
 ///|
@@ -823,7 +823,7 @@ fn step_36() -> Unit raise {
   let t212 = @simp.rewrite_rule(@list.List([@sets.extension()]))(geomalg_image())
   let t213 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("m:(P,Q,R)geomalg"), t212))
   let t216 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.eq_tac, @list.List([@tactics.all_tac, @simp.simp_tac(@list.List([]))])), @tactics.disch_tac), @tactics.gen_tac), t213), t214), t215)
-  forall_geomalg_c.set(@tactics.prove(@parser.parse_term("(!s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> P(mk_geomalg s)) <=>\n   (!m:(P,Q,R)geomalg. P m)"), t216))
+  forall_geomalg_c.set(@tactics.prove(@parser.parse_term("(forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> P(mk_geomalg s)) <=>\n   (forall m:(P,Q,R)geomalg. P m)"), t216))
 }
 
 ///|
@@ -893,7 +893,7 @@ pub fn lambdaset() -> @kernel.Thm {
 /// GEOMALG_EQ
 fn step_43() -> Unit raise {
   let t217 = @simp.simp_tac(@list.List([@cart.cart_eq(), setindex(), @clifford.forall_setcode(), @equal.gsym(@iterate.in_numseg()), dimindex_geomalg()]))
-  geomalg_eq_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P,Q,R)geomalg.\n        x = y <=> !s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> x$$s = y$$s"), t217))
+  geomalg_eq_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P,Q,R)geomalg.\n        x = y <=> forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> x$$s = y$$s"), t217))
 }
 
 ///|
@@ -910,7 +910,7 @@ pub fn geomalg_eq() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t218 = @meson.meson_tac(@list.List([@clifford.codeset_setcode_bijections()]))
   let t219 = @tactics.then_tac(@simp.simp_tac(@list.List([setindex(), lambdaset(), @cart.lambda_beta(), @clifford.setcode_bounds(), dimindex_geomalg(), @equal.gsym(@iterate.in_numseg())])), t218)
-  geomalg_beta_c.set(@tactics.prove(@parser.parse_term("!s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n         ==> ((lambdas) g :real^(P,Q,R)geomalg)$$s = g s"), t219))
+  geomalg_beta_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n         ==> ((lambdas) g :real^(P,Q,R)geomalg)$$s = g s"), t219))
 }
 
 ///|
@@ -927,7 +927,7 @@ pub fn geomalg_beta() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t220 = @meson.meson_tac(@list.List([]))
   let t221 = @tactics.then_tac(@simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta()])), t220)
-  geomalg_unique_c.set(@tactics.prove(@parser.parse_term("!m:real^(P,Q,R)geomalg g.\n        (!s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> m$$s = g s)\n        ==> (lambdas) g = m"), t221))
+  geomalg_unique_c.set(@tactics.prove(@parser.parse_term("forall m:real^(P,Q,R)geomalg g.\n        (forall s. s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) ==> m$$s = g s)\n        ==> (lambdas) g = m"), t221))
 }
 
 ///|
@@ -959,7 +959,7 @@ pub fn geomalg_eta() -> @kernel.Thm {
 /// GEOMALG_ADD_COMPONENT
 fn step_47() -> Unit raise {
   let t223 = @simp.simp_tac(@list.List([setindex(), @clifford.setcode_bounds(), dimindex_geomalg(), @equal.gsym(@iterate.in_numseg()), @vectors.vector_add_component()]))
-  geomalg_add_component_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (x + y)$$s = x$$s + y$$s"), t223))
+  geomalg_add_component_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (x + y)$$s = x$$s + y$$s"), t223))
 }
 
 ///|
@@ -975,7 +975,7 @@ pub fn geomalg_add_component() -> @kernel.Thm {
 /// GEOMALG_MUL_COMPONENT
 fn step_48() -> Unit raise {
   let t224 = @simp.simp_tac(@list.List([setindex(), @clifford.setcode_bounds(), dimindex_geomalg(), @equal.gsym(@iterate.in_numseg()), @vectors.vector_mul_component()]))
-  geomalg_mul_component_c.set(@tactics.prove(@parser.parse_term("!c x:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (c % x)$$s = c * x$$s"), t224))
+  geomalg_mul_component_c.set(@tactics.prove(@parser.parse_term("forall c x:real^(P,Q,R)geomalg s.\n      s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (c % x)$$s = c * x$$s"), t224))
 }
 
 ///|
@@ -991,7 +991,7 @@ pub fn geomalg_mul_component() -> @kernel.Thm {
 /// GEOMALG_VEC_COMPONENT
 fn step_49() -> Unit raise {
   let t225 = @simp.simp_tac(@list.List([setindex(), @clifford.setcode_bounds(), dimindex_geomalg(), @equal.gsym(@iterate.in_numseg()), @vectors.vec_component()]))
-  geomalg_vec_component_c.set(@tactics.prove(@parser.parse_term("!k s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (vec k :real^(P,Q,R)geomalg)$$s = &k"), t225))
+  geomalg_vec_component_c.set(@tactics.prove(@parser.parse_term("forall k s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> (vec k :real^(P,Q,R)geomalg)$$s = &k"), t225))
 }
 
 ///|
@@ -1007,7 +1007,7 @@ pub fn geomalg_vec_component() -> @kernel.Thm {
 /// GEOMALG_VSUM_COMPONENT
 fn step_50() -> Unit raise {
   let t226 = @simp.simp_tac(@list.List([@vectors.vsum(), setindex(), @cart.lambda_beta(), @clifford.setcode_bounds(), @equal.gsym(@iterate.in_numseg()), dimindex_geomalg()]))
-  geomalg_vsum_component_c.set(@tactics.prove(@parser.parse_term("!f:A->real^(P,Q,R)geomalg t s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)"), t226))
+  geomalg_vsum_component_c.set(@tactics.prove(@parser.parse_term("forall f:A->real^(P,Q,R)geomalg t s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> (vsum t f)$$s = sum t (\\x. (f x)$$s)"), t226))
 }
 
 ///|
@@ -1023,7 +1023,7 @@ pub fn geomalg_vsum_component() -> @kernel.Thm {
 /// GEOMALG_VSUM
 fn step_51() -> Unit raise {
   let t227 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta(), geomalg_vsum_component()]))
-  geomalg_vsum_c.set(@tactics.prove(@parser.parse_term("!t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)"), t227))
+  geomalg_vsum_c.set(@tactics.prove(@parser.parse_term("forall t f. vsum t f = lambdas s. sum t (\\x. (f x)$$s)"), t227))
 }
 
 ///|
@@ -1067,7 +1067,7 @@ pub fn mvbasis() -> @kernel.Thm {
 fn step_55() -> Unit raise {
   let t228 = @meson.meson_tac(@list.List([]))
   let t229 = @tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), @sets.in_elim_thm(), geomalg_beta()])), t228)
-  mvbasis_component_c.set(@tactics.prove(@parser.parse_term("!s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis t :real^(P,Q,R)geomalg)$$s = if s = t then &1 else &0"), t229))
+  mvbasis_component_c.set(@tactics.prove(@parser.parse_term("forall s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis t :real^(P,Q,R)geomalg)$$s = if s = t then &1 else &0"), t229))
 }
 
 ///|
@@ -1084,7 +1084,7 @@ pub fn mvbasis_component() -> @kernel.Thm {
 fn step_56() -> Unit raise {
   let t230 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("~(&1 = &0)"))]))
   let t231 = @tactics.then_tac(@simp.simp_tac(@list.List([geomalg_eq(), mvbasis_component(), geomalg_vec_component()])), t230)
-  mvbasis_eq_0_c.set(@tactics.prove(@parser.parse_term("!s. (mbasis s :real^(P,Q,R)geomalg = vec 0) <=>\n       ~(s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))"), t231))
+  mvbasis_eq_0_c.set(@tactics.prove(@parser.parse_term("forall s. (mbasis s :real^(P,Q,R)geomalg = vec 0) <=>\n       ~(s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))"), t231))
 }
 
 ///|
@@ -1100,7 +1100,7 @@ pub fn mvbasis_eq_0() -> @kernel.Thm {
 /// MVBASIS_NONZERO
 fn step_57() -> Unit raise {
   let t232 = @simp.rewrite_tac(@list.List([mvbasis_eq_0()]))
-  mvbasis_nonzero_c.set(@tactics.prove(@parser.parse_term("!s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> ~(mbasis s :real^(P,Q,R)geomalg = vec 0)"), t232))
+  mvbasis_nonzero_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> ~(mbasis s :real^(P,Q,R)geomalg = vec 0)"), t232))
 }
 
 ///|
@@ -1131,7 +1131,7 @@ fn step_58() -> Unit raise {
   }, @list.List([@theorems.eq_sym_eq()]))
   let t233 = @tactics.repeat_tac(@tactics.strip_tac)
   let t243 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([geomalg_eq(), geomalg_vsum_component(), geomalg_mul_component(), mvbasis_component()])), t233), t241), t242)
-  mvbasis_expansion_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)geomalg.\n        vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} (\\s. x$$s % mbasis s) = x"), t243))
+  mvbasis_expansion_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)geomalg.\n        vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)} (\\s. x$$s % mbasis s) = x"), t243))
 }
 
 ///|
@@ -1208,7 +1208,7 @@ fn step_61() -> Unit raise {
   })
   let t261 = @tactics.repeat_tac(@tactics.strip_tac)
   let t271 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), geomalg_eq(), geomalg_beta()])), t261), t268), t269), t270)
-  mvbasis_inj_c.set(@tactics.prove(@parser.parse_term("!s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis s :real^(P,Q,R)geomalg = mbasis t)\n         ==> (s = t)"), t271))
+  mvbasis_inj_c.set(@tactics.prove(@parser.parse_term("forall s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis s :real^(P,Q,R)geomalg = mbasis t)\n         ==> (s = t)"), t271))
 }
 
 ///|
@@ -1237,7 +1237,7 @@ fn step_62() -> Unit raise {
   })
   let t272 = @tactics.repeat_tac(@tactics.strip_tac)
   let t283 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), geomalg_eq(), geomalg_beta()])), t272), t279), t280), t281), t282)
-  mvbasis_inj_sing_c.set(@tactics.prove(@parser.parse_term("!i j. i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis {i}:real^(P,Q,R)geomalg) = mbasis {j}\n         ==> i = j"), t283))
+  mvbasis_inj_sing_c.set(@tactics.prove(@parser.parse_term("forall i j. i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         (mbasis {i}:real^(P,Q,R)geomalg) = mbasis {j}\n         ==> i = j"), t283))
 }
 
 ///|
@@ -1256,7 +1256,7 @@ fn step_63() -> Unit raise {
   let t285 = @simp.rewrite_tac(@list.List([setindex()]))
   let t284 = @simp.simp_tac(@list.List([mvbasis_basis()]))
   let t287 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t284), t285), t286)
-  dot_mvbasis_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)geomalg s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> ((mbasis s) dot x = x$$s) /\\ (x dot (mbasis s) = x$$s)"), t287))
+  dot_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)geomalg s.\n        s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n        ==> ((mbasis s) dot x = x$$s) /\\ (x dot (mbasis s) = x$$s)"), t287))
 }
 
 ///|
@@ -1272,7 +1272,7 @@ pub fn dot_mvbasis() -> @kernel.Thm {
 /// DOT_MVBASIS_MVBASIS
 fn step_64() -> Unit raise {
   let t288 = @simp.simp_tac(@list.List([dot_mvbasis(), mvbasis_component()]))
-  dot_mvbasis_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis s:real^(P,Q,R)geomalg) dot (mbasis t) = if s = t then &1 else &0"), t288))
+  dot_mvbasis_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s t. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n         ==> (mbasis s:real^(P,Q,R)geomalg) dot (mbasis t) = if s = t then &1 else &0"), t288))
 }
 
 ///|
@@ -1294,7 +1294,7 @@ fn step_65() -> Unit raise {
   let t290 = @tactics.repeat_tac(@tactics.strip_tac)
   let t289 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t295 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([mvbasis(), @vectors.dot(), lambdaset(), @cart.lambda_beta()])), t289), t290), t291), t292), t293), t294)
-  dot_mvbasis_mvbasis_unequal_c.set(@tactics.prove(@parser.parse_term("!s t. ~(s = t) ==> (mbasis s) dot (mbasis t) = &0"), t295))
+  dot_mvbasis_mvbasis_unequal_c.set(@tactics.prove(@parser.parse_term("forall s t. ~(s = t) ==> (mbasis s) dot (mbasis t) = &0"), t295))
 }
 
 ///|
@@ -1355,7 +1355,7 @@ fn step_66() -> Unit raise {
       })(x316))
     })(x317)(x317)
   }), @tactics.ants_tac), t320), t324), t325), t326), t327), t328), t329), t330)
-  in_span_image_mvbasis_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)geomalg s.\n        x IN span(IMAGE mbasis s) <=>\n          !t. t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\ ~(t IN s) ==> x$$t = &0"), t331))
+  in_span_image_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)geomalg s.\n        x IN span(IMAGE mbasis s) <=>\n          forall t. t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\ ~(t IN s) ==> x$$t = &0"), t331))
 }
 
 ///|
@@ -1436,7 +1436,7 @@ fn step_69() -> Unit raise {
     }
   })
   let t361 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t354), t359), t360)
-  norm_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n       ==>   (norm(mbasis s :real^(P,Q,R)geomalg) = &1)"), t361))
+  norm_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n       ==>   (norm(mbasis s :real^(P,Q,R)geomalg) = &1)"), t361))
 }
 
 ///|
@@ -1455,13 +1455,13 @@ fn step_70() -> Unit raise {
   let t368 = @simp.asm_rewrite_tac(@list.List([span_mvbasis(), @sets.subset_refl(), @sets.in_elim_thm()]))
   let t367 = @tactics.exists_tac(@parser.parse_term("{mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}"))
   let t366 = @tactics.match_mp_tac(@vectors.linear_eq())
-  let t365 = @tactics.subgoal_then(@parser.parse_term("!x. x IN UNIV ==> (f:real^(P,Q,R)geomalg->real^N) x = g x"), fn(x362 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t365 = @tactics.subgoal_then(@parser.parse_term("forall x. x IN UNIV ==> (f:real^(P,Q,R)geomalg->real^N) x = g x"), fn(x362 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x362
     let t364 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @sets.in_univ()]))
     @tactics.then_tac(@tactics.mp_tac(th), t364)
   })
   let t370 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t365), t366), t367), t368), t369)
-  linear_eq_mvbasis_c.set(@tactics.prove(@parser.parse_term("!f:real^(P,Q,R)geomalg->real^N g b s.\n        linear f /\\ linear g /\\\n        (!s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g"), t370))
+  linear_eq_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(P,Q,R)geomalg->real^N g b s.\n        linear f /\\ linear g /\\\n        (forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g"), t370))
 }
 
 ///|
@@ -1481,13 +1481,13 @@ fn step_71() -> Unit raise {
   let t377 = @tactics.exists_tac(@parser.parse_term("{mbasis t :real^(P',Q',R')geomalg | t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')}"))
   let t376 = @tactics.exists_tac(@parser.parse_term("{mbasis s :real^(P,Q,R)geomalg | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}"))
   let t375 = @tactics.match_mp_tac(@vectors.bilinear_eq())
-  let t374 = @tactics.subgoal_then(@parser.parse_term("!x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N) x y = g x y"), fn(x371 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t374 = @tactics.subgoal_then(@parser.parse_term("forall x y. x IN UNIV /\\ y IN UNIV\n          ==> (f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N) x y = g x y"), fn(x371 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x371
     let t373 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @sets.in_univ()]))
     @tactics.then_tac(@tactics.mp_tac(th), t373)
   })
   let t380 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t374), t375), t376), t377), t378), t379)
-  bilinear_eq_mvbasis_c.set(@tactics.prove(@parser.parse_term("!f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N g b s.\n        bilinear f /\\ bilinear g /\\\n        (!s t.  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g"), t380))
+  bilinear_eq_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N g b s.\n        bilinear f /\\ bilinear g /\\\n        (forall s t.  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g"), t380))
 }
 
 ///|
@@ -1512,7 +1512,7 @@ fn step_72() -> Unit raise {
     }
   }, @list.List([@equal.gsym(mvbasis_expansion())]))
   let t388 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t384), t385), t386), t387)
-  mvbasis_extension_c.set(@tactics.prove(@parser.parse_term("!P. (!s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> P(mbasis s)) /\\\n       (!c x. P x ==> P(c % x)) /\\ (!x y. P x /\\ P y ==> P(x + y))\n       ==> !x:real^(P,Q,R)geomalg. P x"), t388))
+  mvbasis_extension_c.set(@tactics.prove(@parser.parse_term("forall P. (forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> P(mbasis s)) /\\\n       (forall c x. P x ==> P(c % x)) /\\ (forall x y. P x /\\ P y ==> P(x + y))\n       ==> forall x:real^(P,Q,R)geomalg. P x"), t388))
 }
 
 ///|
@@ -1635,7 +1635,7 @@ fn step_80() -> Unit raise {
     }
   })
   let t407 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([multivect()]))), t397), t400), t401), t402), t403), t404), @list.List([@tactics.all_tac, @int.asm_arith_tac])), t405), @class.cond_cases_tac), t406)
-  multivect_basis_c.set(@tactics.prove(@parser.parse_term("!i. multivec (basis i:real^(P,Q,R)trip_fin_sum) = mbasis {i}"), t407))
+  multivect_basis_c.set(@tactics.prove(@parser.parse_term("forall i. multivec (basis i:real^(P,Q,R)trip_fin_sum) = mbasis {i}"), t407))
 }
 
 ///|
@@ -1719,7 +1719,7 @@ fn step_81() -> Unit raise {
   let t409 = @simp.rewrite_tac(@list.List([multivect()]))
   let t408 = @list.List([@tactics.then_tac(@tactics.disch_tac, @simp.asm_rewrite_tac(@list.List([multivect_0()]))), @tactics.all_tac])
   let t458 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t408), t409), t410), t411), t412), t413), t420), t423), t424), t425), t426), @tactics.strip_tac), t427), @tactics.conj_tac), t450), t454), t455), t456), t457)
-  multivect_eq_0_c.set(@tactics.prove(@parser.parse_term("!x:real^(P, Q, R)trip_fin_sum.\n   1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==> (x = vec 0 <=> multivec x = vec 0)"), t458))
+  multivect_eq_0_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P, Q, R)trip_fin_sum.\n   1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==> (x = vec 0 <=> multivec x = vec 0)"), t458))
 }
 
 ///|
@@ -1740,7 +1740,7 @@ fn step_82() -> Unit raise {
   let t459 = @equal.gsym(@realarith.real_sub_0())
   let t460 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@vectors.vector_sub_eq()), t459]))
   let t464 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t460), t462), t463)
-  multivect_eq_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P, Q, R)trip_fin_sum.\n     1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==>\n       (x = y <=> multivec x = multivec y)"), t464))
+  multivect_eq_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P, Q, R)trip_fin_sum.\n     1 <= pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) ==>\n       (x = y <=> multivec x = multivec y)"), t464))
 }
 
 ///|
@@ -1767,7 +1767,7 @@ fn step_84() -> Unit raise {
 ///|
 /// multivectorga
 fn step_85() -> Unit raise {
-  multivectorga_c.set(@pair.new_definition(@parser.parse_term("k multivector (p:real^(P,Q,R)geomalg) <=>\n        !s. s SUBSET (1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(p$$s = &0)\n               ==> s HAS_SIZE k")))
+  multivectorga_c.set(@pair.new_definition(@parser.parse_term("k multivector (p:real^(P,Q,R)geomalg) <=>\n        forall s. s SUBSET (1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(p$$s = &0)\n               ==> s HAS_SIZE k")))
 }
 
 ///|
@@ -1783,7 +1783,7 @@ pub fn multivectorga() -> @kernel.Thm {
 /// FORALL_MULTIVECTORGA_VEC0
 fn step_86() -> Unit raise {
   let t465 = @meson.meson_tac(@list.List([multivectorga(), geomalg_vec_component()]))
-  forall_multivectorga_vec0_c.set(@tactics.prove(@parser.parse_term("!k. k multivector (vec 0:real^(P,Q,R)geomalg)"), t465))
+  forall_multivectorga_vec0_c.set(@tactics.prove(@parser.parse_term("forall k. k multivector (vec 0:real^(P,Q,R)geomalg)"), t465))
 }
 
 ///|
@@ -1827,7 +1827,7 @@ pub fn grade_geomalg() -> @kernel.Thm {
 fn step_90() -> Unit raise {
   let t466 = @meson.meson_tac(@list.List([]))
   let t467 = @tactics.then_tac(@simp.simp_tac(@list.List([multivectorga(), grade_geomalg(), geomalg_beta(), @theorems.imp_conj()])), t466)
-  geomalg_grade_c.set(@tactics.prove(@parser.parse_term("!k x. k multivector (k grade x)"), t467))
+  geomalg_grade_c.set(@tactics.prove(@parser.parse_term("forall k x. k multivector (k grade x)"), t467))
 }
 
 ///|
@@ -1843,7 +1843,7 @@ pub fn geomalg_grade() -> @kernel.Thm {
 /// GRADE_ADD_GEOMALG
 fn step_91() -> Unit raise {
   let t468 = @tactics.then_tac(@simp.simp_tac(@list.List([grade_geomalg(), geomalg_eq(), geomalg_add_component(), geomalg_beta(), @vectors.cond_component()])), @calc_rat.real_arith_tac)
-  grade_add_geomalg_c.set(@tactics.prove(@parser.parse_term("!x y k. k grade (x + y) = (k grade x) + (k grade y)"), t468))
+  grade_add_geomalg_c.set(@tactics.prove(@parser.parse_term("forall x y k. k grade (x + y) = (k grade x) + (k grade y)"), t468))
 }
 
 ///|
@@ -1859,7 +1859,7 @@ pub fn grade_add_geomalg() -> @kernel.Thm {
 /// GRADE_CMUL_GEOMALG
 fn step_92() -> Unit raise {
   let t469 = @tactics.then_tac(@simp.simp_tac(@list.List([grade_geomalg(), geomalg_eq(), geomalg_mul_component(), geomalg_beta(), @vectors.cond_component()])), @calc_rat.real_arith_tac)
-  grade_cmul_geomalg_c.set(@tactics.prove(@parser.parse_term("!c x k. k grade (c % x) = c % (k grade x)"), t469))
+  grade_cmul_geomalg_c.set(@tactics.prove(@parser.parse_term("forall c x k. k grade (c % x) = c % (k grade x)"), t469))
 }
 
 ///|
@@ -1896,7 +1896,7 @@ pub fn symdiff() -> @kernel.Thm {
 /// SYMDIFF_EMPTY
 fn step_95() -> Unit raise {
   let t470 = @simp.rewrite_tac(@list.List([symdiff(), @sets.diff_empty(), @sets.empty_diff(), @sets.union_empty()]))
-  symdiff_empty_c.set(@tactics.prove(@parser.parse_term("(!s. s SYMDIFF {} = s) /\\  (!s. {} SYMDIFF s = s)"), t470))
+  symdiff_empty_c.set(@tactics.prove(@parser.parse_term("(forall s. s SYMDIFF {} = s) /\\  (forall s. {} SYMDIFF s = s)"), t470))
 }
 
 ///|
@@ -1912,7 +1912,7 @@ pub fn symdiff_empty() -> @kernel.Thm {
 /// SYMDIFF_COMM
 fn step_96() -> Unit raise {
   let t471 = @simp.rewrite_tac(@list.List([symdiff(), @sets.union_comm()]))
-  symdiff_comm_c.set(@tactics.prove(@parser.parse_term("(!s t. s SYMDIFF t = t SYMDIFF s)"), t471))
+  symdiff_comm_c.set(@tactics.prove(@parser.parse_term("(forall s t. s SYMDIFF t = t SYMDIFF s)"), t471))
 }
 
 ///|
@@ -1929,7 +1929,7 @@ pub fn symdiff_comm() -> @kernel.Thm {
 fn step_97() -> Unit raise {
   let t472 = @sets.set_tac(@list.List([]))
   let t473 = @tactics.then_tac(@simp.rewrite_tac(@list.List([symdiff()])), t472)
-  symdiff_subset_c.set(@tactics.prove(@parser.parse_term("!s t u. s SUBSET u /\\ t SUBSET u ==> (s SYMDIFF t) SUBSET u"), t473))
+  symdiff_subset_c.set(@tactics.prove(@parser.parse_term("forall s t u. s SUBSET u /\\ t SUBSET u ==> (s SYMDIFF t) SUBSET u"), t473))
 }
 
 ///|
@@ -1946,7 +1946,7 @@ pub fn symdiff_subset() -> @kernel.Thm {
 fn step_98() -> Unit raise {
   let t474 = @sets.set_tac(@list.List([]))
   let t475 = @tactics.then_tac(@simp.rewrite_tac(@list.List([symdiff()])), t474)
-  symdiff_assoc_c.set(@tactics.prove(@parser.parse_term("!s t u. s SYMDIFF (t SYMDIFF u) = (s SYMDIFF t) SYMDIFF u"), t475))
+  symdiff_assoc_c.set(@tactics.prove(@parser.parse_term("forall s t u. s SYMDIFF (t SYMDIFF u) = (s SYMDIFF t) SYMDIFF u"), t475))
 }
 
 ///|
@@ -1985,7 +1985,7 @@ fn step_100() -> Unit raise {
   let t477 = @simp.rewrite_tac(@list.List([@vectors.vector_mul_assoc(), @real.real_mul_ac()]))
   let t476 = @simp.simp_tac(@list.List([@equal.gsym(@vectors.vsum_lmul()), geomalg_mul_component()]))
   let t484 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.bilinear(), @vectors.linear(), productga_def()])), t476), t477), t478), t479), t482), t483), @vectors.vector_arith_tac)
-  bilinear_productga_c.set(@tactics.prove(@parser.parse_term("!sgn. bilinear(Productga sgn)"), t484))
+  bilinear_productga_c.set(@tactics.prove(@parser.parse_term("forall sgn. bilinear(Productga sgn)"), t484))
 }
 
 ///|
@@ -2209,7 +2209,7 @@ fn step_109() -> Unit raise {
   let t515 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_vsum_component(), mvbasis_component(), geomalg_mul_component()]))
   let t514 = @tactics.repeat_tac(@tactics.strip_tac)
   let t551 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([productga_def()])), t514), t515), t517), t518), @tactics.strip_tac), t523), t527), t532), t536), t541), t544), t545), t546), @class.cond_cases_tac), t547), t548), t549), t550)
-  productga_associative_c.set(@tactics.prove(@parser.parse_term("!sgn1 sgn2.\n       (!s t u. sgn1 t u * sgn2 s (t SYMDIFF u) = sgn2 s t * sgn1 (s SYMDIFF t) u)\n             ==> !x y z:real^(P,Q,R)geomalg.\n                        Productga sgn2 x (Productga sgn1 y z) =\n                        Productga sgn1 (Productga sgn2 x y) z"), t551))
+  productga_associative_c.set(@tactics.prove(@parser.parse_term("forall sgn1 sgn2.\n       (forall s t u. sgn1 t u * sgn2 s (t SYMDIFF u) = sgn2 s t * sgn1 (s SYMDIFF t) u)\n             ==> forall x y z:real^(P,Q,R)geomalg.\n                        Productga sgn2 x (Productga sgn1 y z) =\n                        Productga sgn1 (Productga sgn2 x y) z"), t551))
 }
 
 ///|
@@ -2422,7 +2422,7 @@ fn step_121() -> Unit raise {
       @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t579)
     })(x580)(x580)
   }), @tactics.conj_tac), t584), t585), t586), t587), t588)
-  geomga_assoc_c.set(@tactics.prove(@parser.parse_term("!x y z:real^(P,Q,R)geomalg. x * (y * z) = (x * y) * z"), t589))
+  geomga_assoc_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^(P,Q,R)geomalg. x * (y * z) = (x * y) * z"), t589))
 }
 
 ///|
@@ -2626,7 +2626,7 @@ fn step_134() -> Unit raise {
   let t601 = @tactics.repeat_tac(@tactics.gen_tac)
   let t600 = @tactics.match_mp_tac(productga_associative())
   let t616 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outerga()])), t600), t601), t604), t607), t608), t609), t610), @tactics.ap_term_tac), t611), t612), t613), t614), t615)
-  outerga_assoc_c.set(@tactics.prove(@parser.parse_term("!x y z:real^(P,Q,R)geomalg. x outer (y outer z) = (x outer y) outer z"), t616))
+  outerga_assoc_c.set(@tactics.prove(@parser.parse_term("forall x y z:real^(P,Q,R)geomalg. x outer (y outer z) = (x outer y) outer z"), t616))
 }
 
 ///|
@@ -2674,7 +2674,7 @@ fn step_138() -> Unit raise {
 ///|
 /// lcinner
 fn step_139() -> Unit raise {
-  lcinner_c.set(@pair.new_definition(@parser.parse_term("!x y:real^(P,Q,R)geomalg.\n    x lcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s SUBSET t)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   i IN s /\\ j IN t /\\ i > j}*\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y")))
+  lcinner_c.set(@pair.new_definition(@parser.parse_term("forall x y:real^(P,Q,R)geomalg.\n    x lcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s SUBSET t)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   i IN s /\\ j IN t /\\ i > j}*\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y")))
 }
 
 ///|
@@ -2695,7 +2695,7 @@ fn step_140() -> Unit raise {
 ///|
 /// rcinner
 fn step_141() -> Unit raise {
-  rcinner_c.set(@pair.new_definition(@parser.parse_term("!x y:real^(P,Q,R)geomalg.\n    x rcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(t SUBSET s)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n\n                                                   i IN s /\\ j IN t /\\ i > j}*\n\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y")))
+  rcinner_c.set(@pair.new_definition(@parser.parse_term("forall x y:real^(P,Q,R)geomalg.\n    x rcinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(t SUBSET s)\n                       then &0\n                       else --(&1) pow CARD {i,j | i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                                                   j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n\n                                                   i IN s /\\ j IN t /\\ i > j}*\n\n                            --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y")))
 }
 
 ///|
@@ -2716,7 +2716,7 @@ fn step_142() -> Unit raise {
 ///|
 /// scalarinner
 fn step_143() -> Unit raise {
-  scalarinner_c.set(@pair.new_definition(@parser.parse_term("!x y:real^(P,Q,R)geomalg.\n    x scalarinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s = t)\n                       then &0\n                       else --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y")))
+  scalarinner_c.set(@pair.new_definition(@parser.parse_term("forall x y:real^(P,Q,R)geomalg.\n    x scalarinner y =\n        Productga (\\s t. if s = {} \\/ t = {} \\/ ~(s = t)\n                       then &0\n                       else --(&1) pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n                                &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t))\n                 x y")))
 }
 
 ///|
@@ -3344,7 +3344,7 @@ fn step_180() -> Unit raise {
   let t658 = @simp.simp_tac(@list.List([geomalg_mul_component(), mvbasis_component()]))
   let t657 = @simp.rewrite_tac(@list.List([productga_def()]))
   let t679 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t657), t658), t659), t678)
-  productga_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s t. Productga sgn (mbasis s) (mbasis t) :real^(P,Q,R)geomalg =\n            if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n               t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n            then sgn s t % mbasis(s SYMDIFF t)\n            else vec 0"), t679))
+  productga_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s t. Productga sgn (mbasis s) (mbasis t) :real^(P,Q,R)geomalg =\n            if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n               t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n            then sgn s t % mbasis(s SYMDIFF t)\n            else vec 0"), t679))
 }
 
 ///|
@@ -3360,7 +3360,7 @@ pub fn productga_mvbasis() -> @kernel.Thm {
 /// PRODUCTGA_MVBASIS_SING
 fn step_181() -> Unit raise {
   let t680 = @simp.rewrite_tac(@list.List([productga_mvbasis(), @sets.set_rule(@parser.parse_term("{x} SUBSET s <=> x IN s"))]))
-  productga_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("!i j. Productga sgn (mbasis{i}) (mbasis{j}) :real^(P,Q,R)geomalg =\n            if i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n               j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n            then sgn {i} {j} % mbasis({i} SYMDIFF {j})\n            else vec 0"), t680))
+  productga_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j. Productga sgn (mbasis{i}) (mbasis{j}) :real^(P,Q,R)geomalg =\n            if i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n               j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n            then sgn {i} {j} % mbasis({i} SYMDIFF {j})\n            else vec 0"), t680))
 }
 
 ///|
@@ -3381,7 +3381,7 @@ fn step_182() -> Unit raise {
   let t682 = @simp.asm_rewrite_tac(@list.List([]))
   let t681 = @simp.rewrite_tac(@list.List([geomga_mul(), productga_mvbasis()]))
   let t686 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t681), @class.cond_cases_tac), t682), t683), @tactics.ap_term_tac), @tactics.ap_term_tac), t684), t685)
-  geom_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s t.\n     mbasis s * mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)"), t686))
+  geom_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s t.\n     mbasis s * mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)"), t686))
 }
 
 ///|
@@ -3403,7 +3403,7 @@ fn step_183() -> Unit raise {
   let t688 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
   let t687 = @simp.rewrite_tac(@list.List([innerga(), productga_mvbasis()]))
   let t693 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t687), @class.cond_cases_tac), t688), @class.cond_cases_tac), t689), t690), @tactics.ap_term_tac), @tactics.ap_term_tac), t691), t692)
-  inner_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s t.\n     mbasis s inner mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)"), t693))
+  inner_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s t.\n     mbasis s inner mbasis t:real^(P,Q,R)geomalg =\n     (if s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         t SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n         ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s)\n      then (-- &1 pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} *\n            -- &1 pow CARD ((pdimindex(:P) + 1..pdimindex(:P) + pdimindex(:Q)) INTER s INTER t) *\n               &0 pow CARD ((pdimindex(:P) + pdimindex(:Q) + 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) INTER s INTER t)) %\n           mbasis (s SYMDIFF t)\n      else vec 0)"), t693))
 }
 
 ///|
@@ -3711,7 +3711,7 @@ fn step_184() -> Unit raise {
   let t695 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t694 = @simp.rewrite_tac(@list.List([geomga_mul(), productga_mvbasis_sing(), @iterate.in_numseg()]))
   let t886 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t694), @class.cond_cases_tac), t695), t699), t702), t703), t704), t711), t713), t714), t715), t757), @tactics.ap_thm_tac), @tactics.ap_term_tac), t805), @tactics.binop_tac), t857), @tactics.ap_term_tac), t883), t884), t885)
-  geom_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("!i j.\n     mbasis {i} * mbasis {j} :real^(P,Q,R)geomalg=\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n      then if i = j\n           then if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n           else if i < j then mbasis {i, j} else --mbasis {i, j}\n      else vec 0)"), t886))
+  geom_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j.\n     mbasis {i} * mbasis {j} :real^(P,Q,R)geomalg=\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n      then if i = j\n           then if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n           else if i < j then mbasis {i, j} else --mbasis {i, j}\n      else vec 0)"), t886))
 }
 
 ///|
@@ -3909,7 +3909,7 @@ fn step_185() -> Unit raise {
   let t888 = @simp.asm_rewrite_tac(@list.List([@theorems.conj_assoc(), @theorems.and_clauses(), @sets.in_sing(), @sets.set_rule(@parser.parse_term("~({i} = {})"))]))
   let t887 = @simp.rewrite_tac(@list.List([innerga(), productga_mvbasis_sing(), @iterate.in_numseg()]))
   let t1007 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t887), @class.cond_cases_tac), t888), t889), t890), t894), t897), t898), @class.cond_cases_tac), @list.List([@tactics.all_tac, @class.cond_cases_tac])), t899), t924), @tactics.ap_thm_tac), @tactics.ap_term_tac), t948), @tactics.binop_tac), t982), @tactics.ap_term_tac), t1004), t1005), t1006)
-  inner_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("!i j.\n     mbasis {i} inner mbasis {j} :real^(P,Q,R)geomalg =\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         i = j\n       then if i IN 1..pdimindex (:P)\n             then mbasis {}\n             else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n        else vec 0)"), t1007))
+  inner_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j.\n     mbasis {i} inner mbasis {j} :real^(P,Q,R)geomalg =\n     (if i IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         j IN 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R) /\\\n         i = j\n       then if i IN 1..pdimindex (:P)\n             then mbasis {}\n             else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0\n        else vec 0)"), t1007))
 }
 
 ///|
@@ -3931,7 +3931,7 @@ fn step_186() -> Unit raise {
   let t1009 = @class.asm_cases_tac(@parser.parse_term("(s:num->bool) INTER t = {}"))
   let t1008 = @simp.rewrite_tac(@list.List([outerga(), productga_mvbasis()]))
   let t1014 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1008), t1009), t1010), @class.cond_cases_tac), t1011), @tactics.ap_thm_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t1012), t1013)
-  outer_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n                if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0"), t1014))
+  outer_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n                if s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ t SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\\n                   s INTER t = {}\n                then --(&1) pow CARD {i,j | i IN s /\\ j IN t /\\ i > j} %\n                     mbasis(s UNION t)\n                else vec 0"), t1014))
 }
 
 ///|
@@ -3974,7 +3974,7 @@ fn step_187() -> Unit raise {
   let t1016 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{i} INTER {j} = {} <=> ~(i = j)"))]))
   let t1015 = @simp.rewrite_tac(@list.List([outerga(), productga_mvbasis_sing()]))
   let t1037 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1015), t1016), t1017), t1018), @class.cond_cases_tac), t1019), t1023), t1026), t1027), t1033), t1034), t1035), t1036), @vectors.vector_arith_tac)
-  outer_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("!i j. mbasis{i} outer mbasis{j} :real^(P,Q,R)geomalg =\n                if i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0"), t1037))
+  outer_mvbasis_sing_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} outer mbasis{j} :real^(P,Q,R)geomalg =\n                if i IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ j IN 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)) /\\ ~(i = j)\n                then if i < j then mbasis{i,j} else --(mbasis{i,j})\n                else vec 0"), t1037))
 }
 
 ///|
@@ -3992,7 +3992,7 @@ fn step_188() -> Unit raise {
   let t1039 = @simp.asm_simp_tac(@list.List([symdiff(), @sets.set_rule(@parser.parse_term("s INTER t = {} ==> s DIFF t UNION t DIFF s = s UNION t"))]))
   let t1038 = @simp.asm_rewrite_tac(@list.List([geom_mvbasis(), outer_mvbasis(), @sets.inter_empty(), @sets.card_clauses(), @realax.real_pow(), @realarith.real_mul_rid()]))
   let t1040 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1038), t1039)
-  geom_outer_mvbasis_eq_c.set(@tactics.prove(@parser.parse_term("!s t. s INTER t = {} ==>\n  (mbasis s) * (mbasis t) :real^(P,Q,R)geomalg = (mbasis s) outer (mbasis t)"), t1040))
+  geom_outer_mvbasis_eq_c.set(@tactics.prove(@parser.parse_term("forall s t. s INTER t = {} ==>\n  (mbasis s) * (mbasis t) :real^(P,Q,R)geomalg = (mbasis s) outer (mbasis t)"), t1040))
 }
 
 ///|
@@ -4010,7 +4010,7 @@ fn step_189() -> Unit raise {
   let t1042 = @simp.asm_simp_tac(@list.List([symdiff(), @sets.set_rule(@parser.parse_term("s INTER t = {} ==> s DIFF t UNION t DIFF s = s UNION t"))]))
   let t1041 = @simp.asm_rewrite_tac(@list.List([geom_mvbasis(), outer_mvbasis(), @sets.inter_empty(), @sets.card_clauses(), @realax.real_pow(), @realarith.real_mul_rid()]))
   let t1043 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t1041), t1042)
-  mvbasis_outer_geom_c.set(@tactics.prove(@parser.parse_term("!s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n    if s INTER t = {} then mbasis s * mbasis t else vec 0"), t1043))
+  mvbasis_outer_geom_c.set(@tactics.prove(@parser.parse_term("forall s t. (mbasis s) outer (mbasis t) :real^(P,Q,R)geomalg =\n    if s INTER t = {} then mbasis s * mbasis t else vec 0"), t1043))
 }
 
 ///|
@@ -4028,7 +4028,7 @@ fn step_190() -> Unit raise {
   let t1045 = @meson.asm_meson_tac(@list.List([]))
   let t1044 = @simp.asm_rewrite_tac(@list.List([geom_mvbasis(), inner_mvbasis()]))
   let t1046 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @class.cond_cases_tac), t1044), t1045)
-  mvbasis_inner_geom_c.set(@tactics.prove(@parser.parse_term("!s t. (mbasis s) inner (mbasis t) :real^(P,Q,R)geomalg =\n    if  ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s) then mbasis s * mbasis t else vec 0"), t1046))
+  mvbasis_inner_geom_c.set(@tactics.prove(@parser.parse_term("forall s t. (mbasis s) inner (mbasis t) :real^(P,Q,R)geomalg =\n    if  ~(s = {}) /\\ ~(t = {}) /\\ (s SUBSET t \\/ t SUBSET s) then mbasis s * mbasis t else vec 0"), t1046))
 }
 
 ///|
@@ -4084,7 +4084,7 @@ fn step_191() -> Unit raise {
       @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t1071)
     })(x1072)(x1072)
   }), @tactics.conj_tac), t1074), t1075), @tactics.conj_tac), t1079), t1080), t1081), t1082)
-  outer_geom_mvbasis_lassoc_c.set(@tactics.prove(@parser.parse_term("!s t u.\n     s INTER u = {} ==>\n       (mbasis s):real^(P,Q,R)geomalg * (mbasis t outer mbasis u) =\n       (mbasis s * mbasis t) outer mbasis u"), t1083))
+  outer_geom_mvbasis_lassoc_c.set(@tactics.prove(@parser.parse_term("forall s t u.\n     s INTER u = {} ==>\n       (mbasis s):real^(P,Q,R)geomalg * (mbasis t outer mbasis u) =\n       (mbasis s * mbasis t) outer mbasis u"), t1083))
 }
 
 ///|
@@ -4140,7 +4140,7 @@ fn step_192() -> Unit raise {
       @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t1108)
     })(x1109)(x1109)
   }), @tactics.conj_tac), t1111), t1112), @tactics.conj_tac), t1116), t1117), t1118), t1119)
-  outer_geom_mvbasis_rassoc_c.set(@tactics.prove(@parser.parse_term("!s t u.\n     s INTER u = {} ==>\n       (mbasis s outer mbasis t) * (mbasis u):real^(P,Q,R)geomalg =\n       mbasis s outer (mbasis t * mbasis u)"), t1120))
+  outer_geom_mvbasis_rassoc_c.set(@tactics.prove(@parser.parse_term("forall s t u.\n     s INTER u = {} ==>\n       (mbasis s outer mbasis t) * (mbasis u):real^(P,Q,R)geomalg =\n       mbasis s outer (mbasis t * mbasis u)"), t1120))
 }
 
 ///|
@@ -4167,7 +4167,7 @@ fn step_193() -> Unit raise {
   let t1122 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
   let t1121 = @simp.rewrite_tac(@list.List([outer_mvbasis_sing()]))
   let t1131 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1121), t1122), t1123), t1126), t1127), @class.cond_cases_tac), t1128), t1129), t1130)
-  outer_mvbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("!i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})"), t1131))
+  outer_mvbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} outer mbasis{j} = --(mbasis{j} outer mbasis{i})"), t1131))
 }
 
 ///|
@@ -4183,8 +4183,8 @@ pub fn outer_mvbasis_skewsym() -> @kernel.Thm {
 /// OUTER_MVBASIS_REFL
 fn step_194() -> Unit raise {
   let t1132 = @tactics.match_accept_tac(outer_mvbasis_skewsym())
-  let t1133 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@vectors.vector_arith(@parser.parse_term("!x:real^N. x = --x ==> x = vec 0")))), t1132)
-  outer_mvbasis_refl_c.set(@tactics.prove(@parser.parse_term("!i. mbasis{i} outer mbasis{i} = vec 0"), t1133))
+  let t1133 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@vectors.vector_arith(@parser.parse_term("forall x:real^N. x = --x ==> x = vec 0")))), t1132)
+  outer_mvbasis_refl_c.set(@tactics.prove(@parser.parse_term("forall i. mbasis{i} outer mbasis{i} = vec 0"), t1133))
 }
 
 ///|
@@ -4204,7 +4204,7 @@ fn step_195() -> Unit raise {
   let t1135 = @simp.simp_tac(@list.List([outer_mvbasis(), @sets.empty_subset(), @sets.inter_empty(), @sets.union_empty()]))
   let t1134 = @simp.simp_tac(@list.List([outerga_rmul(), outerga_radd()]))
   let t1138 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(mvbasis_extension()), t1134), t1135), t1136), t1137)
-  outer_mvbasis_lscalar_c.set(@tactics.prove(@parser.parse_term("!x. mbasis{} outer x = x"), t1138))
+  outer_mvbasis_lscalar_c.set(@tactics.prove(@parser.parse_term("forall x. mbasis{} outer x = x"), t1138))
 }
 
 ///|
@@ -4224,7 +4224,7 @@ fn step_196() -> Unit raise {
   let t1140 = @simp.simp_tac(@list.List([outer_mvbasis(), @sets.empty_subset(), @sets.inter_empty(), @sets.union_empty()]))
   let t1139 = @simp.simp_tac(@list.List([outerga_lmul(), outerga_ladd()]))
   let t1143 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(mvbasis_extension()), t1139), t1140), t1141), t1142)
-  outer_mvbasis_rscalar_c.set(@tactics.prove(@parser.parse_term("!x. x outer mbasis{} = x"), t1143))
+  outer_mvbasis_rscalar_c.set(@tactics.prove(@parser.parse_term("forall x. x outer mbasis{} = x"), t1143))
 }
 
 ///|
@@ -4245,7 +4245,7 @@ fn step_197() -> Unit raise {
   let t1145 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t1144 = @simp.rewrite_tac(@list.List([outer_mvbasis_sing()]))
   let t1149 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1144), t1145), t1146), t1147), t1148)
-  outer_mvbasis_sing_eq_0_c.set(@tactics.prove(@parser.parse_term("!i j.\n   mbasis{i} outer (mbasis{j}:real^(P,Q,R)geomalg) = vec 0\n       <=> ~(i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ ~(i = j))"), t1149))
+  outer_mvbasis_sing_eq_0_c.set(@tactics.prove(@parser.parse_term("forall i j.\n   mbasis{i} outer (mbasis{j}:real^(P,Q,R)geomalg) = vec 0\n       <=> ~(i IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ j IN 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)\n          /\\ ~(i = j))"), t1149))
 }
 
 ///|
@@ -4278,7 +4278,7 @@ fn step_198() -> Unit raise {
   })
   let t1150 = @simp.rewrite_tac(@list.List([outer_mvbasis()]))
   let t1164 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1150), t1154), t1155), t1156), @class.cond_cases_tac), t1157), t1158), t1161), t1162), t1163)
-  mvbasis_split_c.set(@tactics.prove(@parser.parse_term("!a s. (!x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s"), t1164))
+  mvbasis_split_c.set(@tactics.prove(@parser.parse_term("forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} outer mbasis s"), t1164))
 }
 
 ///|
@@ -4303,7 +4303,7 @@ fn step_199() -> Unit raise {
   })
   let t1165 = @simp.asm_rewrite_tac(@list.List([geom_mvbasis_sing()]))
   let t1173 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @class.cond_cases_tac), t1165), t1168), t1169), @class.cond_cases_tac), t1170), t1171), t1172)
-  geom_mvbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("!i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})"), t1173))
+  geom_mvbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} * mbasis{j} =\n  if i = j then mbasis{j} * mbasis{i} else --(mbasis{j} * mbasis{i})"), t1173))
 }
 
 ///|
@@ -4326,7 +4326,7 @@ fn step_200() -> Unit raise {
     }
   })
   let t1179 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([geom_mvbasis_sing()]))), @class.cond_cases_tac), t1177), t1178), @int.arith_tac)
-  geom_mvbasis_refl_c.set(@tactics.prove(@parser.parse_term("!i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0"), t1179))
+  geom_mvbasis_refl_c.set(@tactics.prove(@parser.parse_term("forall i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0"), t1179))
 }
 
 ///|
@@ -4346,7 +4346,7 @@ fn step_201() -> Unit raise {
   let t1181 = @simp.simp_tac(@list.List([geom_mvbasis(), symdiff_empty(), @sets.empty_subset(), @sets.inter_empty()]))
   let t1180 = @simp.simp_tac(@list.List([geomga_rmul(), geomga_radd()]))
   let t1184 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(mvbasis_extension()), t1180), t1181), t1182), t1183)
-  geom_mvbasis_lid_c.set(@tactics.prove(@parser.parse_term("!x. mbasis{} * x = x"), t1184))
+  geom_mvbasis_lid_c.set(@tactics.prove(@parser.parse_term("forall x. mbasis{} * x = x"), t1184))
 }
 
 ///|
@@ -4366,7 +4366,7 @@ fn step_202() -> Unit raise {
   let t1186 = @simp.simp_tac(@list.List([geom_mvbasis(), symdiff_empty(), @sets.empty_subset(), @sets.inter_empty()]))
   let t1185 = @simp.simp_tac(@list.List([geomga_lmul(), geomga_ladd()]))
   let t1189 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(mvbasis_extension()), t1185), t1186), t1187), t1188)
-  geom_mvbasis_rid_c.set(@tactics.prove(@parser.parse_term("!x. x * mbasis{} = x"), t1189))
+  geom_mvbasis_rid_c.set(@tactics.prove(@parser.parse_term("forall x. x * mbasis{} = x"), t1189))
 }
 
 ///|
@@ -4390,7 +4390,7 @@ fn step_203() -> Unit raise {
     }
   })
   let t1196 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1193), t1194), t1195)
-  mvbasis_split_geom_c.set(@tactics.prove(@parser.parse_term("!a s. (!x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} * mbasis s"), t1196))
+  mvbasis_split_geom_c.set(@tactics.prove(@parser.parse_term("forall a s. (forall x. x IN s ==> a < x)\n         ==> mbasis (a INSERT s) = mbasis{a} * mbasis s"), t1196))
 }
 
 ///|
@@ -4409,7 +4409,7 @@ fn step_204() -> Unit raise {
   let t1198 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
   let t1197 = @simp.asm_rewrite_tac(@list.List([inner_mvbasis_sing()]))
   let t1200 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1197), t1198), t1199)
-  inner_mvbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("!i j. mbasis{i} inner mbasis{j} = mbasis{j} inner mbasis{i}"), t1200))
+  inner_mvbasis_skewsym_c.set(@tactics.prove(@parser.parse_term("forall i j. mbasis{i} inner mbasis{j} = mbasis{j} inner mbasis{i}"), t1200))
 }
 
 ///|
@@ -4432,7 +4432,7 @@ fn step_205() -> Unit raise {
     }
   })
   let t1206 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([inner_mvbasis_sing()]))), @class.cond_cases_tac), t1204), t1205), @int.arith_tac)
-  inner_mvbasis_refl_c.set(@tactics.prove(@parser.parse_term("!i. mbasis{i}:real^(P,Q,R)geomalg inner mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0"), t1206))
+  inner_mvbasis_refl_c.set(@tactics.prove(@parser.parse_term("forall i. mbasis{i}:real^(P,Q,R)geomalg inner mbasis{i} =\n       if i IN 1..pdimindex (:P)\n                then mbasis {}\n                else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n                     then --mbasis {}\n                     else vec 0"), t1206))
 }
 
 ///|
@@ -4473,7 +4473,7 @@ fn step_207() -> Unit raise {
   let t1208 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), @sets.finite_cross(), @equal.gsym(@vectors.vsum_add())]))
   let t1207 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), bilinear_innerga(), bilinear_outerga(), bilinear_geomga(), @vectors.bilinear_vsum()]))
   let t1217 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([multivect()])), t1207), t1208), t1209), t1210), t1211), t1212), t1213), t1214), @tactics.ap_term_tac), t1215), @class.cond_cases_tac), t1216)
-  vector_geom_eq_outer_add_inner_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P,Q,R)trip_fin_sum.\n  (multivec x) * (multivec y) = (multivec x) outer (multivec y) + (multivec x) inner (multivec y)"), t1217))
+  vector_geom_eq_outer_add_inner_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P,Q,R)trip_fin_sum.\n  (multivec x) * (multivec y) = (multivec x) outer (multivec y) + (multivec x) inner (multivec y)"), t1217))
 }
 
 ///|
@@ -4521,7 +4521,7 @@ fn step_208() -> Unit raise {
         s1245(x1246)
       }
     })(x1247))
-  }, @list.List([@tactics.prove(@parser.parse_term("!s. {x,y | x IN s /\\ y IN s} = IMAGE swappair {x,y | x IN s /\\ y IN s}"), t1249)]))
+  }, @list.List([@tactics.prove(@parser.parse_term("forall s. {x,y | x IN s /\\ y IN s} = IMAGE swappair {x,y | x IN s /\\ y IN s}"), t1249)]))
   let t1240 = @simp.rewrite_tac(@list.List([@vectors.vector_mul_assoc()]))
   let t1238 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_thm(), @pair.forall_pair_thm(), swappair()]))
   let t1239 = @simp.gen_rewrite_tac(fn(x1237 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -4536,7 +4536,7 @@ fn step_208() -> Unit raise {
         s1235(x1236)
       }
     })(x1237))
-  }, @list.List([@tactics.prove(@parser.parse_term("!P. (\\(x,y). P x y) = (\\(x,y). P y x) o swappair"), t1238)]))
+  }, @list.List([@tactics.prove(@parser.parse_term("forall P. (\\(x,y). P x y) = (\\(x,y). P y x) o swappair"), t1238)]))
   let t1230 = @simp.rewrite_tac(@list.List([@vectors.vector_neg_neg(), @equal.gsym(@pair.lambda_pair())]))
   let t1229 = @simp.rewrite_tac(@list.List([@vectors.vector_mul_rneg(), @pair.lambda_pair(), @vectors.vsum_neg()]))
   let t1228 = @simp.gen_rewrite_tac(fn(x1227 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -4556,7 +4556,7 @@ fn step_208() -> Unit raise {
   let t1219 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), bilinear_outerga(), @vectors.bilinear_vsum()]))
   let t1218 = @simp.rewrite_tac(@list.List([multivect()]))
   let t1265 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1218), t1219), t1220), t1228), t1229), t1230), t1239), t1240), t1250), t1258), t1259), t1261), t1262), t1263), t1264)
-  vector_outerga_skewsym_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec y) = --((multivec y) outer (multivec x))"), t1265))
+  vector_outerga_skewsym_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec y) = --((multivec y) outer (multivec x))"), t1265))
 }
 
 ///|
@@ -4573,7 +4573,7 @@ pub fn vector_outerga_skewsym() -> @kernel.Thm {
 fn step_209() -> Unit raise {
   let t1266 = @tactics.match_accept_tac(vector_outerga_skewsym())
   let t1267 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@vectors.vector_arith(@parser.parse_term("x = --x ==> x = vec 0:real^N")))), t1266)
-  vector_outerga_refl_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec x) = vec 0"), t1267))
+  vector_outerga_refl_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)trip_fin_sum. (multivec x) outer (multivec x) = vec 0"), t1267))
 }
 
 ///|
@@ -4641,7 +4641,7 @@ fn step_210() -> Unit raise {
   let t1269 = @simp.rewrite_tac(@list.List([@sets.cross()]))
   let t1268 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), bilinear_innerga(), @vectors.bilinear_vsum()]))
   let t1310 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([multivect()]))), t1268), t1269), t1270), t1271), t1272), @tactics.conj_tac), t1286), t1287), t1288), @tactics.binop_tac), t1291), t1299), t1300), t1302), t1303), t1304), @tactics.conj_tac), t1305), t1306), @tactics.conj_tac), t1307), t1308), t1309)
-  vector_innerga_refl_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)trip_fin_sum.\n     multivec x inner multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}"), t1310))
+  vector_innerga_refl_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)trip_fin_sum.\n     multivec x inner multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}"), t1310))
 }
 
 ///|
@@ -4657,7 +4657,7 @@ pub fn vector_innerga_refl() -> @kernel.Thm {
 /// VECTOR_GEOMGA_INNER_REFL_EQ
 fn step_211() -> Unit raise {
   let t1311 = @simp.rewrite_tac(@list.List([vector_geom_eq_outer_add_inner(), vector_outerga_refl(), @vectors.vector_add_lid()]))
-  vector_geomga_inner_refl_eq_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x = multivec x inner multivec x"), t1311))
+  vector_geomga_inner_refl_eq_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x = multivec x inner multivec x"), t1311))
 }
 
 ///|
@@ -4673,7 +4673,7 @@ pub fn vector_geomga_inner_refl_eq() -> @kernel.Thm {
 /// VECTOR_GEOMGA_REFL
 fn step_212() -> Unit raise {
   let t1312 = @simp.rewrite_tac(@list.List([vector_geom_eq_outer_add_inner(), vector_outerga_refl(), vector_innerga_refl(), @vectors.vector_add_lid()]))
-  vector_geomga_refl_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}"), t1312))
+  vector_geomga_refl_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)trip_fin_sum.\n     multivec x * multivec x =\n        (sum(1..pdimindex (:P))(\\i. x$i * x$i) - sum(1..pdimindex (:Q)) (\\i. x$(i+pdimindex (:P)) * x$(i+pdimindex (:P)))) % mbasis {}"), t1312))
 }
 
 ///|
@@ -4706,7 +4706,7 @@ pub fn mvbasis_merge_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// MVBASIS_SPLIT_CONV, MVBASIS_MERGE_CONV
 fn step_213() -> Unit raise {
-  let setlemma = @sets.set_rule(@parser.parse_term("((!x:num. x IN {} ==> a < x) <=> T) /\\\n    ((!x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (!x. x IN s ==> a < x))"))
+  let setlemma = @sets.set_rule(@parser.parse_term("((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))"))
   let set_check_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@simp.gen_rewrite_conv(fn(x1313 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s1314 = @equal.top_sweep_conv(x1313)
     fn(x1315 : @kernel.Term) -> @kernel.Thm raise {
@@ -4783,7 +4783,7 @@ pub fn geom_mvbasis_merge_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// GEOM_MVBASIS_SPLIT_CONV, GEOM_MVBASIS_MERGE_CONV
 fn step_215() -> Unit raise {
-  let setlemma = @sets.set_rule(@parser.parse_term("((!x:num. x IN {} ==> a < x) <=> T) /\\\n    ((!x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (!x. x IN s ==> a < x))"))
+  let setlemma = @sets.set_rule(@parser.parse_term("((forall x:num. x IN {} ==> a < x) <=> T) /\\\n    ((forall x:num. x IN (y INSERT s) ==> a < x) <=>\n              a < y /\\ (forall x. x IN s ==> a < x))"))
   let set_check_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@simp.gen_rewrite_conv(fn(x1322 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s1323 = @equal.top_sweep_conv(x1322)
     fn(x1324 : @kernel.Term) -> @kernel.Thm raise {
@@ -4848,7 +4848,7 @@ fn step_217() -> Unit raise {
   let t1332 = @simp.rewrite_tac(@list.List([outer_mvbasis_lscalar(), outer_mvbasis_rscalar()]))
   let t1331 = @simp.rewrite_tac(@list.List([outer_mvbasis_refl(), outerga_lzero()]))
   let t1336 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outerga_assoc(), outerga_lzero(), outerga_rzero(), outerga_ladd(), outerga_radd(), outerga_lmul(), outerga_rmul(), outerga_lzero(), outerga_rzero()])), t1331), t1332), t1334), t1335)
-  outerga_aci_c.set(@tactics.prove(@parser.parse_term("(!x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (!i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (!i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (!i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (!i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (!x. mbasis{} outer x = x) /\\\n   (!x. x outer mbasis{} = x)"), t1336))
+  outerga_aci_c.set(@tactics.prove(@parser.parse_term("(forall x y z. (x outer y) outer z = x outer (y outer z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i} outer mbasis{j} =\n              --(&1) % (mbasis{j} outer mbasis{i})) /\\\n   (forall i j x. i > j\n            ==> mbasis{i} outer mbasis{j} outer x =\n                --(&1) % (mbasis{j} outer mbasis{i} outer x)) /\\\n   (forall i. mbasis{i} outer mbasis{i} = vec 0) /\\\n   (forall i x. mbasis{i} outer mbasis{i} outer x = vec 0) /\\\n   (forall x. mbasis{} outer x = x) /\\\n   (forall x. x outer mbasis{} = x)"), t1336))
 }
 
 ///|
@@ -4866,7 +4866,7 @@ fn step_218() -> Unit raise {
   let t1338 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("i:num > j ==> ~(i = j)")), geom_mvbasis_skewsym(), geomga_lneg(), geom_mvbasis_lid(), geomga_lzero(), @class.cond_rand()]))
   let t1337 = @simp.simp_tac(@list.List([@equal.gsym(@vectors.vector_neg_minus1())]))
   let t1339 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([geomga_assoc(), geom_mvbasis_refl(), geom_mvbasis_lid(), geom_mvbasis_rid()])), t1337), t1338)
-  geom_aci_c.set(@tactics.prove(@parser.parse_term("(!x y z:real^(P,Q,R)geomalg. (x * y) * z = x * (y * z)) /\\\n   (!i j. i > j\n          ==> mbasis{i}:real^(P,Q,R)geomalg * mbasis{j} =\n              --(&1) % (mbasis{j} * mbasis{i})) /\\\n   (!i j x:real^(P,Q,R)geomalg. i > j\n            ==> mbasis{i} * mbasis{j} * x =\n                --(&1) % (mbasis{j} * mbasis{i} * x)) /\\\n   (!i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} = (if i IN 1..pdimindex (:P)\n          then mbasis{}\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % mbasis{}\n               else vec 0)) /\\\n   (!i x:real^(P,Q,R)geomalg. mbasis{i} * mbasis{i} * x = if i IN 1..pdimindex (:P)\n          then x\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % x\n               else vec 0) /\\\n   (!x:real^(P,Q,R)geomalg. mbasis{} * x = x) /\\\n   (!x:real^(P,Q,R)geomalg. x * mbasis{} = x) /\\\n   (!p x y z:real^(P,Q,R)geomalg. x * (if p then y else z) =\n       if p then x * y else x * z)"), t1339))
+  geom_aci_c.set(@tactics.prove(@parser.parse_term("(forall x y z:real^(P,Q,R)geomalg. (x * y) * z = x * (y * z)) /\\\n   (forall i j. i > j\n          ==> mbasis{i}:real^(P,Q,R)geomalg * mbasis{j} =\n              --(&1) % (mbasis{j} * mbasis{i})) /\\\n   (forall i j x:real^(P,Q,R)geomalg. i > j\n            ==> mbasis{i} * mbasis{j} * x =\n                --(&1) % (mbasis{j} * mbasis{i} * x)) /\\\n   (forall i. mbasis{i}:real^(P,Q,R)geomalg * mbasis{i} = (if i IN 1..pdimindex (:P)\n          then mbasis{}\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % mbasis{}\n               else vec 0)) /\\\n   (forall i x:real^(P,Q,R)geomalg. mbasis{i} * mbasis{i} * x = if i IN 1..pdimindex (:P)\n          then x\n          else if i IN pdimindex (:P) + 1..pdimindex (:P) + pdimindex (:Q)\n               then --(&1) % x\n               else vec 0) /\\\n   (forall x:real^(P,Q,R)geomalg. mbasis{} * x = x) /\\\n   (forall x:real^(P,Q,R)geomalg. x * mbasis{} = x) /\\\n   (forall p x y z:real^(P,Q,R)geomalg. x * (if p then y else z) =\n       if p then x * y else x * z)"), t1339))
 }
 
 ///|
@@ -4965,7 +4965,7 @@ fn step_222() -> Unit raise {
 ///|
 /// GA_GEOM_CONV
 fn step_223() -> Unit raise {
-  let t1372 = @int.arith_rule(@parser.parse_term("!a b x:num. ~(a=b) ==> ~(x=a /\\ x=b)"))
+  let t1372 = @int.arith_rule(@parser.parse_term("forall a b x:num. ~(a=b) ==> ~(x=a /\\ x=b)"))
   let t1373 = @simp.simp_conv(@list.List([@sets.extension(), @sets.in_inter(), @sets.in_insert(), @sets.subset(), @sets.not_in_empty(), @class.not_forall_thm(), @equal.gsym(@class.not_exists_thm()), @theorems.exists_refl(), t1372, @theorems.exists_or_thm(), @calc_num.arith_eq()]))
   ga_geom_conv_c.set(@equal.thenc(@simp.pure_rewrite_conv(@list.List([mvbasis_outer_geom(), mvbasis_inner_geom()])), t1373))
 }
@@ -5064,7 +5064,7 @@ pub fn mvinverse() -> @kernel.Thm {
 /// MVINVERTIBLE_MVINVERSE
 fn step_231() -> Unit raise {
   let t1378 = @meson.meson_tac(@list.List([mvinvertible(), mvinverse()]))
-  mvinvertible_mvinverse_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)geomalg.\n    mvinvertible x <=> mvinverse x * x = mbasis {} /\\ x * mvinverse x = mbasis {}"), t1378))
+  mvinvertible_mvinverse_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)geomalg.\n    mvinvertible x <=> mvinverse x * x = mbasis {} /\\ x * mvinverse x = mbasis {}"), t1378))
 }
 
 ///|
@@ -5145,11 +5145,11 @@ fn step_232() -> Unit raise {
   let t1383 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@vectors.bilinear()]))(bilinear_geomga())]))
   let t1382 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\z:real^(P,Q,R)geomalg. x:(real^(P,Q,R)geomalg) * z"), @vectors.linear_surjective_isomorphism()))
   let t1381 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t1425 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("!x y:real^(P,Q,R)geomalg. (x * y = mbasis {}) ==> (y * x = mbasis {})"), fn(x1379 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1425 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall x y:real^(P,Q,R)geomalg. (x * y = mbasis {}) ==> (y * x = mbasis {})"), fn(x1379 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1379
     @meson.meson_tac(@list.List([th]))
   }), t1381), t1382), t1383), @tactics.ants_tac), t1386), t1387), t1391), t1404), t1420), t1423), t1424)
-  mv_left_right_inverse_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P,Q,R)geomalg. x * y = mbasis {} <=> y * x = mbasis {}"), t1425))
+  mv_left_right_inverse_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P,Q,R)geomalg. x * y = mbasis {} <=> y * x = mbasis {}"), t1425))
 }
 
 ///|
@@ -5236,7 +5236,7 @@ fn step_236() -> Unit raise {
   })
   let t1436 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.exists_tac(@parser.parse_term("inv(sum (1..pdimindex (:P)) (\\i. x$i * x$i) -\n           sum (1..pdimindex (:Q))\n              (\\i. x$(i + pdimindex (:P)) * x$(i + pdimindex (:P)))) % multivec (x:real^(P, Q, R)trip_fin_sum)"))), t1431), t1432), t1433), t1434), t1435), @tactics.all_tac])
   let t1449 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([is_null(), mvinvertible_left_inverse(), @equal.gsym(vector_geomga_inner_refl_eq())]))), @tactics.eq_tac), t1436), t1439), t1446), t1447), t1448)
-  mvinvertible_vector_eq_c.set(@tactics.prove(@parser.parse_term("!x:real^(P, Q, R)trip_fin_sum. ~(is_null(multivec x)) <=> mvinvertible (multivec x)"), t1449))
+  mvinvertible_vector_eq_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P, Q, R)trip_fin_sum. ~(is_null(multivec x)) <=> mvinvertible (multivec x)"), t1449))
 }
 
 ///|
@@ -5290,7 +5290,7 @@ fn step_237() -> Unit raise {
   let t1452 = @simp.rewrite_tac(@list.List([@equal.gsym(@theorems.right_exists_and_thm()), t1451]))
   let t1450 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1476 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mvinvertible_left_inverse()])), t1450), t1452), t1456), t1460), @tactics.strip_tac), t1461), t1462), t1474), t1475)
-  mvinvertible_geom_c.set(@tactics.prove(@parser.parse_term("!a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b==> mvinvertible (a * b)"), t1476))
+  mvinvertible_geom_c.set(@tactics.prove(@parser.parse_term("forall a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b==> mvinvertible (a * b)"), t1476))
 }
 
 ///|
@@ -5308,7 +5308,7 @@ fn step_238() -> Unit raise {
   let t1478 = @meson.asm_meson_tac(@list.List([geomga_assoc(), geom_mvbasis_lid()]))
   let t1477 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1479 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([mvinvertible_mvinverse()])), t1477), t1478)
-  mvinvertible_lmul_eq_c.set(@tactics.prove(@parser.parse_term("!a b x:real^(P,Q,R)geomalg. mvinvertible x ==> (a = b <=> (x * a = x * b))"), t1479))
+  mvinvertible_lmul_eq_c.set(@tactics.prove(@parser.parse_term("forall a b x:real^(P,Q,R)geomalg. mvinvertible x ==> (a = b <=> (x * a = x * b))"), t1479))
 }
 
 ///|
@@ -5324,7 +5324,7 @@ pub fn mvinvertible_lmul_eq() -> @kernel.Thm {
 /// MVINVERTIBLE_EQ_LMUL
 fn step_239() -> Unit raise {
   let t1480 = @meson.meson_tac(@list.List([mvinvertible_lmul_eq()]))
-  mvinvertible_eq_lmul_c.set(@tactics.prove(@parser.parse_term("!a b x:real^(P,Q,R)geomalg. mvinvertible x /\\ x * a = x * b ==> a = b"), t1480))
+  mvinvertible_eq_lmul_c.set(@tactics.prove(@parser.parse_term("forall a b x:real^(P,Q,R)geomalg. mvinvertible x /\\ x * a = x * b ==> a = b"), t1480))
 }
 
 ///|
@@ -5410,7 +5410,7 @@ fn step_240() -> Unit raise {
   let t1481 = @parser.parse_term("b:real^(P,Q,R)geomalg")
   let t1482 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("a:real^(P,Q,R)geomalg"), t1481]), mvinvertible_geom()))
   let t1530 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1482), t1486), t1487), @tactics.strip_tac), t1488), t1489), t1490), t1498), t1510), t1514), t1515), @tactics.strip_tac), t1516), t1520), t1521), t1522), t1526), t1527), t1528), t1529)
-  mvinverse_geom_c.set(@tactics.prove(@parser.parse_term("!a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b ==> mvinverse b * mvinverse a = mvinverse (a * b)"), t1530))
+  mvinverse_geom_c.set(@tactics.prove(@parser.parse_term("forall a b:real^(P,Q,R)geomalg. mvinvertible a /\\ mvinvertible b ==> mvinverse b * mvinverse a = mvinverse (a * b)"), t1530))
 }
 
 ///|
@@ -5493,7 +5493,7 @@ fn step_246() -> Unit raise {
   let t1538 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t1537 = @simp.simp_tac(@list.List([mvbasis_component()]))
   let t1541 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([outergamorphism()])), t1537), t1538), t1539), t1540)
-  outermorphism_mvbasis_c.set(@tactics.prove(@parser.parse_term("!f:real^(P,Q,R)trip_fin_sum->real^(S,T,U)trip_fin_sum s t.\n        s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)"), t1541))
+  outermorphism_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(P,Q,R)trip_fin_sum->real^(S,T,U)trip_fin_sum s t.\n        s SUBSET 1..(pdimindex(:P) + pdimindex(:Q) + pdimindex(:R))\n        ==> outermorphism f (mbasis s) =\n            seqiterate(outer) s (multivec o f o basis)"), t1541))
 }
 
 ///|
@@ -5510,7 +5510,7 @@ pub fn outermorphism_mvbasis() -> @kernel.Thm {
 fn step_247() -> Unit raise {
   let t1542 = @simp.rewrite_tac(@list.List([neutral_outerga()]))
   let t1543 = @tactics.then_tac(@simp.simp_tac(@list.List([outermorphism_mvbasis(), @sets.empty_subset(), @clifford.seqiterate_clauses()])), t1542)
-  outermorphism_mvbasis_empty_c.set(@tactics.prove(@parser.parse_term("!f. outermorphism f (mbasis {}) = mbasis {}"), t1543))
+  outermorphism_mvbasis_empty_c.set(@tactics.prove(@parser.parse_term("forall f. outermorphism f (mbasis {}) = mbasis {}"), t1543))
 }
 
 ///|
@@ -5595,7 +5595,7 @@ fn step_248() -> Unit raise {
   }), t1550), t1554)])
   let t1544 = @class.asm_cases_tac(@parser.parse_term("m = 0:num"))
   let t1601 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1544), t1555), t1556), @tactics.all_tac])), t1557), t1558), t1588), t1592), t1595), t1599), t1600)
-  seqiterate_numseg_image_c.set(@tactics.prove(@parser.parse_term("!n op m p f:num->real^(P,Q,R)geomalg.\n   seqiterate op (IMAGE (\\i. i + p) (m..n)) f = seqiterate op (m..n) (f o (\\i. i + p))"), t1601))
+  seqiterate_numseg_image_c.set(@tactics.prove(@parser.parse_term("forall n op m p f:num->real^(P,Q,R)geomalg.\n   seqiterate op (IMAGE (\\i. i + p) (m..n)) f = seqiterate op (m..n) (f o (\\i. i + p))"), t1601))
 }
 
 ///|
@@ -5722,7 +5722,7 @@ fn step_249() -> Unit raise {
   let t1603 = @simp.rewrite_tac(@list.List([@arith.le_lt()]))
   let t1602 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1688 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.simp_tac(@list.List([@equal.gsym(@iterate.numseg_lrec())]))), t1602), @tactics.disch_tac), t1603), t1604), @tactics.strip_tac), t1687)
-  seqiterate_numseg_suc_c.set(@tactics.prove(@parser.parse_term("!n m op f:num->real^(P,Q,R)geomalg.\n    (!x y z. op (op x y) z = op x (op y z) /\\ op (neutral op) x = x) ==>\n       m <= SUC n ==>\n          seqiterate op (m..SUC n) f = op (seqiterate op (m..n) f) (f (SUC n))"), t1688))
+  seqiterate_numseg_suc_c.set(@tactics.prove(@parser.parse_term("forall n m op f:num->real^(P,Q,R)geomalg.\n    (forall x y z. op (op x y) z = op x (op y z) /\\ op (neutral op) x = x) ==>\n       m <= SUC n ==>\n          seqiterate op (m..SUC n) f = op (seqiterate op (m..n) f) (f (SUC n))"), t1688))
 }
 
 ///|
@@ -5762,7 +5762,7 @@ fn step_250() -> Unit raise {
   })
   let t1689 = @simp.asm_simp_tac(@list.List([@equal.gsym(@iterate.numseg_lrec())]))
   let t1710 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1689), t1693), t1694), @tactics.strip_tac), t1705), t1708), t1709)
-  seqiterate_outerga_lrec_c.set(@tactics.prove(@parser.parse_term("!n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate (outer) (m..n) f = (f m) outer (seqiterate (outer) (m + 1..n) f)"), t1710))
+  seqiterate_outerga_lrec_c.set(@tactics.prove(@parser.parse_term("forall n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate (outer) (m..n) f = (f m) outer (seqiterate (outer) (m + 1..n) f)"), t1710))
 }
 
 ///|
@@ -5822,7 +5822,7 @@ fn step_252() -> Unit raise {
   })
   let t1716 = @simp.asm_simp_tac(@list.List([@equal.gsym(@iterate.numseg_lrec())]))
   let t1737 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1716), t1720), t1721), @tactics.strip_tac), t1732), t1735), t1736)
-  seqiterate_geomga_lrec_c.set(@tactics.prove(@parser.parse_term("!n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate ( * ) (m..n) f = (f m) * (seqiterate ( * ) (m + 1..n) f)"), t1737))
+  seqiterate_geomga_lrec_c.set(@tactics.prove(@parser.parse_term("forall n m f:num->real^(P,Q,R)geomalg.\n       m <= n ==>\n            seqiterate ( * ) (m..n) f = (f m) * (seqiterate ( * ) (m + 1..n) f)"), t1737))
 }
 
 ///|
@@ -5878,7 +5878,7 @@ fn step_254() -> Unit raise {
   let t1744 = @simp.asm_simp_tac(@list.List([@iterate.numseg_sing(), @clifford.seqiterate_clauses(), @calc_num.arith(), @trivia.o_thm(), @int.arith_rule(@parser.parse_term("m <= n ==> m <= SUC n")), seqiterate_outerga_rrec()]))
   let t1743 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1758 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.le()]))), t1743), t1744), t1745), t1746), t1754), t1755), @tactics.ap_thm_tac), @tactics.ap_term_tac), t1756), t1757), @calc_rat.real_arith_tac)
-  outer_seqiterate_sym_c.set(@tactics.prove(@parser.parse_term("!n m x:real^(P, Q, R)trip_fin_sum f.\n   m <= n ==>\n   (multivec x) outer seqiterate (outer) (m..n) (multivec o f) =\n      (--(&1)) pow (n - m + 1) % (seqiterate (outer) (m..n) (multivec o f) outer (multivec x))"), t1758))
+  outer_seqiterate_sym_c.set(@tactics.prove(@parser.parse_term("forall n m x:real^(P, Q, R)trip_fin_sum f.\n   m <= n ==>\n   (multivec x) outer seqiterate (outer) (m..n) (multivec o f) =\n      (--(&1)) pow (n - m + 1) % (seqiterate (outer) (m..n) (multivec o f) outer (multivec x))"), t1758))
 }
 
 ///|
@@ -5920,7 +5920,7 @@ fn step_255() -> Unit raise {
   let t1775 = @list.List([@simp.asm_rewrite_tac(@list.List([@iterate.numseg_sing(), @clifford.seqiterate_clauses()])), t1774, t1773])
   let t1759 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1778 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.le()]))), t1759), t1775), t1776), t1777)
-  seqiterate_split_numseg_outerga_c.set(@tactics.prove(@parser.parse_term("!i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i) f outer\n                    seqiterate (outer) (i + 1..n) f"), t1778))
+  seqiterate_split_numseg_outerga_c.set(@tactics.prove(@parser.parse_term("forall i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i) f outer\n                    seqiterate (outer) (i + 1..n) f"), t1778))
 }
 
 ///|
@@ -5962,7 +5962,7 @@ fn step_256() -> Unit raise {
   let t1795 = @list.List([@simp.asm_rewrite_tac(@list.List([@iterate.numseg_sing(), @clifford.seqiterate_clauses()])), t1794, t1793])
   let t1779 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1798 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.le()]))), t1779), t1795), t1796), t1797)
-  seqiterate_split_numseg_geomga_c.set(@tactics.prove(@parser.parse_term("!i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate ( * ) (m..n) f =\n       seqiterate ( * ) (m..i) f *\n                    seqiterate ( * ) (i + 1..n) f"), t1798))
+  seqiterate_split_numseg_geomga_c.set(@tactics.prove(@parser.parse_term("forall i m n f:num->real^(P,Q,R)geomalg.\n       m <= i /\\  i <= n\n       ==> seqiterate ( * ) (m..n) f =\n       seqiterate ( * ) (m..i) f *\n                    seqiterate ( * ) (i + 1..n) f"), t1798))
 }
 
 ///|
@@ -6077,7 +6077,7 @@ fn step_257() -> Unit raise {
   })
   let t1799 = @simp.asm_simp_tac(@list.List([seqiterate_split_numseg_outerga()]))
   let t1863 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1799), t1803), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1817), t1821), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1822), t1823), @tactics.ap_term_tac), t1828), @tactics.ap_term_tac), t1832), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1850), t1851), t1855), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1856), t1861), t1862), @int.asm_arith_tac)
-  seqiterate_outerga_split3_c.set(@tactics.prove(@parser.parse_term("!i j m n f:num->real^(P,Q,R)geomalg.\n       0 < i /\\ m <= i /\\  i <= n /\\\n       m <= j /\\ j <= n /\\ i < j\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i-1) f outer\n       f i outer\n       seqiterate (outer) (i+1..j-1) f outer\n       f j outer\n       seqiterate (outer) (j + 1..n) f"), t1863))
+  seqiterate_outerga_split3_c.set(@tactics.prove(@parser.parse_term("forall i j m n f:num->real^(P,Q,R)geomalg.\n       0 < i /\\ m <= i /\\  i <= n /\\\n       m <= j /\\ j <= n /\\ i < j\n       ==> seqiterate (outer) (m..n) f =\n       seqiterate (outer) (m..i-1) f outer\n       f i outer\n       seqiterate (outer) (i+1..j-1) f outer\n       f j outer\n       seqiterate (outer) (j + 1..n) f"), t1863))
 }
 
 ///|
@@ -6117,7 +6117,7 @@ fn step_258() -> Unit raise {
   let t1868 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@arith.le()])), t1865), t1866), t1867), @tactics.all_tac])
   let t1864 = @class.asm_cases_tac(@parser.parse_term("i:num = 0"))
   let t1883 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1864), t1868), t1874), t1875), t1876), t1880), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1881), t1882)
-  seqiterate_zero_outerga_c.set(@tactics.prove(@parser.parse_term("!a:num->real^(P,Q,R)geomalg i m n.\n       m <= i /\\ i <= n /\\ a i = vec 0  ==> seqiterate (outer) (m..n) a = vec 0"), t1883))
+  seqiterate_zero_outerga_c.set(@tactics.prove(@parser.parse_term("forall a:num->real^(P,Q,R)geomalg i m n.\n       m <= i /\\ i <= n /\\ a i = vec 0  ==> seqiterate (outer) (m..n) a = vec 0"), t1883))
 }
 
 ///|
@@ -6147,7 +6147,7 @@ fn step_259() -> Unit raise {
   let t1884 = @parser.parse_term("n:num")
   let t1885 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:num"), t1884]), @arith.let_cases()))
   let t1896 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1885), @tactics.strip_tac), t1889), t1894), t1895)
-  seqiterate_outerga_numseg_eq_c.set(@tactics.prove(@parser.parse_term("!n m f:num->real^(P,Q,R)geomalg g.\n     (!x. m <= x /\\ x <= n ==> f x = g x) ==>\n         seqiterate (outer) (m..n) f = seqiterate (outer) (m..n) g"), t1896))
+  seqiterate_outerga_numseg_eq_c.set(@tactics.prove(@parser.parse_term("forall n m f:num->real^(P,Q,R)geomalg g.\n     (forall x. m <= x /\\ x <= n ==> f x = g x) ==>\n         seqiterate (outer) (m..n) f = seqiterate (outer) (m..n) g"), t1896))
 }
 
 ///|
@@ -6320,12 +6320,12 @@ fn step_260() -> Unit raise {
   let t1939 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@arith.le()])), t1902), t1903), t1904), t1905), t1906), @tactics.strip_tac), t1912), t1916), t1917), t1921), t1925), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1926), t1932), t1933), t1934), t1935), t1936), t1937), t1938), @tactics.all_tac])
   let t1901 = @class.asm_cases_tac(@parser.parse_term("i:num = 0"))
   let t1900 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t1899 = @tactics.subgoal_then(@parser.parse_term("!a:num->real^(P, Q, R)trip_fin_sum i j m n.\n        m <= i /\\ i <= n /\\\n        m <= j /\\ j <= n /\\\n        i < j /\\  a i = a j\n        ==> seqiterate (outer) (m..n) (multivec o a) = vec 0"), fn(x1897 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1899 = @tactics.subgoal_then(@parser.parse_term("forall a:num->real^(P, Q, R)trip_fin_sum i j m n.\n        m <= i /\\ i <= n /\\\n        m <= j /\\ j <= n /\\\n        i < j /\\  a i = a j\n        ==> seqiterate (outer) (m..n) (multivec o a) = vec 0"), fn(x1897 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1897
     @meson.meson_tac(@list.List([th]))
   })
   let t2010 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("~(i = j:num) <=> i < j \\/ j < i"))])), t1899), t1900), t1901), t1939), t1945), t1946), t1947), t1959), t1960), t1982), t1986), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t1987), t1988), t2008), t2009)
-  seqiterate_identical_outerga_c.set(@tactics.prove(@parser.parse_term("!a:num->real^(P, Q, R)trip_fin_sum i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\\n       ~(i = j) /\\ a i = a j\n       ==> seqiterate (outer) (m..n) (multivec o a) = vec 0"), t2010))
+  seqiterate_identical_outerga_c.set(@tactics.prove(@parser.parse_term("forall a:num->real^(P, Q, R)trip_fin_sum i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\\n       ~(i = j) /\\ a i = a j\n       ==> seqiterate (outer) (m..n) (multivec o a) = vec 0"), t2010))
 }
 
 ///|
@@ -6383,7 +6383,7 @@ fn step_261() -> Unit raise {
   let t2013 = @parser.parse_term("m:num")
   let t2014 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("k:num"), t2013, t2012, t2011]), seqiterate_split_numseg_outerga()))
   let t2047 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2014), t2018), t2022), t2023), t2027), t2028), t2037), t2041), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t2042), t2043), @tactics.binop_tac), @tactics.binop_tac), t2045), t2046), @int.asm_arith_tac)
-  seqiterate_add_outerga_c.set(@tactics.prove(@parser.parse_term("!a b c:num->real^(P,Q,R)geomalg k m n.\n    m <= k /\\ k <= n ==>\n       seqiterate (outer) (m..n) (\\i. if i = k then a + b else c i) =\n         seqiterate (outer) (m..n) (\\i. if i = k then a else c i) +\n         seqiterate (outer) (m..n) (\\i. if i = k then b else c i)"), t2047))
+  seqiterate_add_outerga_c.set(@tactics.prove(@parser.parse_term("forall a b c:num->real^(P,Q,R)geomalg k m n.\n    m <= k /\\ k <= n ==>\n       seqiterate (outer) (m..n) (\\i. if i = k then a + b else c i) =\n         seqiterate (outer) (m..n) (\\i. if i = k then a else c i) +\n         seqiterate (outer) (m..n) (\\i. if i = k then b else c i)"), t2047))
 }
 
 ///|
@@ -6436,7 +6436,7 @@ fn step_262() -> Unit raise {
   let t2050 = @parser.parse_term("m:num")
   let t2051 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("k:num"), t2050, t2049, t2048]), seqiterate_split_numseg_outerga()))
   let t2079 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2051), t2055), t2056), t2060), t2061), t2070), t2074), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t2075), t2076), @tactics.ap_term_tac), @tactics.binop_tac), t2077), t2078), @int.asm_arith_tac)
-  seqiterate_mul_outerga_c.set(@tactics.prove(@parser.parse_term("!a b:num->real^(P,Q,R)geomalg c k m n.\n       m <= k /\\ k <= n\n       ==> seqiterate (outer) (m..n) (\\i. if i = k then c % a else b i) =\n            c % seqiterate (outer) (m..n) (\\i. if i = k then a else b i)"), t2079))
+  seqiterate_mul_outerga_c.set(@tactics.prove(@parser.parse_term("forall a b:num->real^(P,Q,R)geomalg c k m n.\n       m <= k /\\ k <= n\n       ==> seqiterate (outer) (m..n) (\\i. if i = k then c % a else b i) =\n            c % seqiterate (outer) (m..n) (\\i. if i = k then a else b i)"), t2079))
 }
 
 ///|
@@ -6482,7 +6482,7 @@ fn step_263() -> Unit raise {
   }, @list.List([@equal.gsym(@vectors.vector_add_rid())]))
   let t2080 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2103 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([seqiterate_add_outerga(), seqiterate_mul_outerga()])), t2080), t2088), @tactics.binop_tac), t2090), t2092), t2095), t2096), t2101), t2102)
-  seqiterate_operation_outerga_c.set(@tactics.prove(@parser.parse_term("!a:num->real^(P, Q, R)trip_fin_sum c i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\ ~(i = j)\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + c % (multivec o a) j else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)"), t2103))
+  seqiterate_operation_outerga_c.set(@tactics.prove(@parser.parse_term("forall a:num->real^(P, Q, R)trip_fin_sum c i j m n.\n       m <= i /\\ i <= n /\\\n       m <= j /\\ j <= n /\\ ~(i = j)\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + c % (multivec o a) j else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)"), t2103))
 }
 
 ///|
@@ -6531,7 +6531,7 @@ fn step_264() -> Unit raise {
   let t2105 = @tactics.repeat_tac(@tactics.disch_tac)
   let t2104 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t2133 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), t2104), t2105), t2106), @tactics.conj_tac), t2108), t2109), t2110), t2117), t2118), t2119), t2120), t2122), t2125), t2126), t2131), t2132)
-  seqiterate_span_outerga_c.set(@tactics.prove(@parser.parse_term("!a:num->real^(P, Q, R)trip_fin_sum i m n x.\n        m <= i /\\ i <= n /\\\n        x IN span {a j| m <= j /\\ j <= n /\\ ~(j = i)}\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + multivec x else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)"), t2133))
+  seqiterate_span_outerga_c.set(@tactics.prove(@parser.parse_term("forall a:num->real^(P, Q, R)trip_fin_sum i m n x.\n        m <= i /\\ i <= n /\\\n        x IN span {a j| m <= j /\\ j <= n /\\ ~(j = i)}\n        ==> seqiterate (outer) (m..n) (\\k. if k = i then (multivec o a) i + multivec x else (multivec o a) k) =\n            seqiterate (outer) (m..n) (multivec o a)"), t2133))
 }
 
 ///|
@@ -6591,7 +6591,7 @@ fn step_265() -> Unit raise {
   let t2135 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t2134 = @simp.rewrite_tac(@list.List([@vectors.dependent(), @sets.in_elim_thm(), @theorems.left_and_exists_thm(), @iterate.in_numseg()]))
   let t2169 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2134), t2135), @tactics.gen_tac), t2136), @tactics.strip_tac), t2140), t2141), t2142), t2147), @tactics.ants_tac), t2168)
-  seqiterate_dependent_outerga_c.set(@tactics.prove(@parser.parse_term("!a:num->real^(P,Q,R)trip_fin_sum m n.\n  dependent {a i | i IN m..n} ==>\n           seqiterate (outer) (m..n) (multivec o a) = vec 0"), t2169))
+  seqiterate_dependent_outerga_c.set(@tactics.prove(@parser.parse_term("forall a:num->real^(P,Q,R)trip_fin_sum m n.\n  dependent {a i | i IN m..n} ==>\n           seqiterate (outer) (m..n) (multivec o a) = vec 0"), t2169))
 }
 
 ///|
@@ -6714,7 +6714,7 @@ fn step_266() -> Unit raise {
   })
   let t2170 = @class.asm_cases_tac(@parser.parse_term("n < m:num"))
   let t2254 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2170), t2174), t2192), t2193), t2200), t2201), @tactics.conj_tac), t2222), t2223), t2231), t2232), t2233), t2234), @class.cond_cases_tac), t2235), @tactics.disch_tac), t2237), t2241), t2242), t2243), t2244), t2245), t2246), t2247), t2248), t2249), t2250), @class.cond_cases_tac), t2251), @class.cond_cases_tac), t2252), t2253)
-  seqiterate_outerga_vsum_c.set(@tactics.prove(@parser.parse_term("!m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) =\n       vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}\n        (\\s.\n          if CARD s = (n + 1) - m\n          then (seqiterate (outer) (m..n) (multivec o a))$$s % mbasis s\n          else vec 0)"), t2254))
+  seqiterate_outerga_vsum_c.set(@tactics.prove(@parser.parse_term("forall m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) =\n       vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R)}\n        (\\s.\n          if CARD s = (n + 1) - m\n          then (seqiterate (outer) (m..n) (multivec o a))$$s % mbasis s\n          else vec 0)"), t2254))
 }
 
 ///|
@@ -6736,7 +6736,7 @@ fn step_267() -> Unit raise {
   let t2256 = @simp.once_rewrite_tac(@list.List([seqiterate_outerga_vsum()]))
   let t2255 = @list.List([@simp.simp_tac(@list.List([geomalg_eq(), geomalg_vec_component()])), @tactics.all_tac])
   let t2261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t2255), @tactics.disch_tac), t2256), t2257), t2258), t2259), t2260)
-  seqiterate_outerga_eq_0_c.set(@tactics.prove(@parser.parse_term("!m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) = vec 0\n     <=> !s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n          /\\ CARD s = (n + 1) - m\n          ==> (seqiterate (outer) (m..n) (multivec o a))$$s = &0"), t2261))
+  seqiterate_outerga_eq_0_c.set(@tactics.prove(@parser.parse_term("forall m n a:num->real^(P, Q, R)trip_fin_sum.\n     seqiterate (outer) (m..n) (multivec o a) = vec 0\n     <=> forall s. s SUBSET 1..pdimindex (:P) + pdimindex (:Q) + pdimindex (:R)\n          /\\ CARD s = (n + 1) - m\n          ==> (seqiterate (outer) (m..n) (multivec o a))$$s = &0"), t2261))
 }
 
 ///|
@@ -6783,7 +6783,7 @@ fn step_271() -> Unit raise {
   let t2263 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2262 = @simp.simp_tac(@list.List([geomalg_beta(), geomalg_eq()]))
   let t2266 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([reversionga()])), t2262), t2263), t2264), @class.cond_cases_tac), t2265)
-  reversion_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s. reversion (mbasis s) = --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s"), t2266))
+  reversion_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s. reversion (mbasis s) = --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s"), t2266))
 }
 
 ///|
@@ -6801,7 +6801,7 @@ fn step_272() -> Unit raise {
   let t2268 = @simp.simp_tac(@list.List([geomalg_add_component(), geomalg_mul_component(), geomalg_beta()]))
   let t2267 = @simp.simp_tac(@list.List([geomalg_beta(), geomalg_eq()]))
   let t2269 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([reversionga()])), t2267), t2268), @calc_rat.real_arith_tac)
-  reversionga_linear_c.set(@tactics.prove(@parser.parse_term("(!x y. reversion (x + y) = reversion x + reversion y) /\\\n  (!c x. reversion (c % x) = c % (reversion x))"), t2269))
+  reversionga_linear_c.set(@tactics.prove(@parser.parse_term("(forall x y. reversion (x + y) = reversion x + reversion y) /\\\n  (forall c x. reversion (c % x) = c % (reversion x))"), t2269))
 }
 
 ///|
@@ -6854,7 +6854,7 @@ fn step_275() -> Unit raise {
   let t2271 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.vsum_lmul())]))
   let t2270 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta(), @equal.gsym(geomalg_mul_component())]))
   let t2284 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([reversionga(), multivect()])), t2270), t2271), t2272), t2273), t2274), t2275), t2276), t2277), @class.cond_cases_tac), t2283), @calc_rat.real_arith_tac)
-  reversion_vector_c.set(@tactics.prove(@parser.parse_term("!x:real^(P, Q, R)trip_fin_sum. multivec x = reversion (multivec x)"), t2284))
+  reversion_vector_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P, Q, R)trip_fin_sum. multivec x = reversion (multivec x)"), t2284))
 }
 
 ///|
@@ -6903,7 +6903,7 @@ fn step_276() -> Unit raise {
     })(x2291))
   }, @list.List([vector_outerga_skewsym()]))
   let t2313 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2292), t2293), t2294), t2295), t2296), t2297), t2298), t2299), t2300), t2301), t2302), t2303), t2304), @class.cond_cases_tac), t2312)
-  reversion_vector_outer_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P, Q, R)trip_fin_sum.\n  reversion( multivec x outer multivec y) = multivec y outer multivec x"), t2313))
+  reversion_vector_outer_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P, Q, R)trip_fin_sum.\n  reversion( multivec x outer multivec y) = multivec y outer multivec x"), t2313))
 }
 
 ///|
@@ -6923,7 +6923,7 @@ fn step_277() -> Unit raise {
   let t2315 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2314 = @simp.simp_tac(@list.List([geomalg_eq(), geomalg_beta()]))
   let t2318 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([reversionga()]))), t2314), t2315), t2316), @class.cond_cases_tac), t2317)
-  reversion_mbasis_c.set(@tactics.prove(@parser.parse_term("!s. reversion (mbasis s):real^(P, Q, R)geomalg =\n          --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s"), t2318))
+  reversion_mbasis_c.set(@tactics.prove(@parser.parse_term("forall s. reversion (mbasis s):real^(P, Q, R)geomalg =\n          --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2) % mbasis s"), t2318))
 }
 
 ///|
@@ -6943,11 +6943,11 @@ fn step_278() -> Unit raise {
   let t2324 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@arith.mult_2())]))
   let t2323 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2322 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_pow_add())]))
-  let t2319 = @calc_rat.real_field(@parser.parse_term("!z:real. ~(z = &0) ==> (x = y <=> x * z = y * z)"))
+  let t2319 = @calc_rat.real_field(@parser.parse_term("forall z:real. ~(z = &0) ==> (x = y <=> x * z = y * z)"))
   let t2320 = @bool.spec(@parser.parse_term("--(&1) pow m"), t2319)
   let t2321 = @simp.once_rewrite_tac(@list.List([@simp.simp_rule(@list.List([@real.real_pow_nz(), @calc_rat.real_arith(@parser.parse_term("~(--(&1) = &0)"))]))(t2320)]))
   let t2327 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@arith.even_add()), @arith.even_exists()])), t2321), t2322), t2323), t2324), t2325), t2326)
-  even_pow_eq_c.set(@tactics.prove(@parser.parse_term("!m n.(EVEN(n) <=> EVEN(m))  ==>\n      --(&1) pow n = --(&1) pow m"), t2327))
+  even_pow_eq_c.set(@tactics.prove(@parser.parse_term("forall m n.(EVEN(n) <=> EVEN(m))  ==>\n      --(&1) pow n = --(&1) pow m"), t2327))
 }
 
 ///|
@@ -6977,7 +6977,7 @@ fn step_279() -> Unit raise {
   let t2399 = @tactics.match_mp_tac(@sets.card_image_inj())
   let t2397 = @meson.meson_tac(@list.List([@pair.pair_eq(), @arith.gt()]))
   let t2398 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_image(), @pair.forall_pair_thm(), @pair.exists_pair_thm(), @sets.in_elim_pair_thm(), swappair()])), t2397)
-  let t2407 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@tactics.prove(@parser.parse_term("!s t:num->bool.\n                        {x,y | x IN t /\\ y IN s /\\ x > y} =\n                        IMAGE swappair {x,y | x IN s /\\ y IN t /\\  x < y}"), t2398)])), t2399), @tactics.conj_tac), t2401), t2402), t2403), @tactics.conj_tac), t2405), t2406), @tactics.all_tac])
+  let t2407 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@tactics.prove(@parser.parse_term("forall s t:num->bool.\n                        {x,y | x IN t /\\ y IN s /\\ x > y} =\n                        IMAGE swappair {x,y | x IN s /\\ y IN t /\\  x < y}"), t2398)])), t2399), @tactics.conj_tac), t2401), t2402), t2403), @tactics.conj_tac), t2405), t2406), @tactics.all_tac])
   let t2396 = @tactics.subgoal_then(@parser.parse_term("CARD {i,j| i IN (t:num->bool) /\\ j IN (s:num->bool) /\\ i > j} =\n     CARD {i,j | i IN s /\\ j IN t /\\ i < j}"), fn(x2393 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2394 = @tactics.subst1_tac(x2393)
     fn(x2395 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -7013,7 +7013,7 @@ fn step_279() -> Unit raise {
   let t2372 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("s:num->bool"), t2371]), @sets.card_union()))
   let t2370 = @simp.asm_simp_tac(@list.List([]))
   let t2369 = @list.List([@meson.meson_tac(@list.List([@arith.even_mult(), @arith.even_sub(), @arith.le_lt(), @arith.even(), @arith.one()])), @tactics.all_tac])
-  let t2368 = @tactics.subgoal_then(@parser.parse_term("!n. EVEN (n * (n - 1))"), fn(x2365 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2368 = @tactics.subgoal_then(@parser.parse_term("forall n. EVEN (n * (n - 1))"), fn(x2365 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2366 = @tactics.assume_tac(x2365)
     fn(x2367 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2366(x2367)
@@ -7043,7 +7043,7 @@ fn step_279() -> Unit raise {
   }, @list.List([@equal.gsym(@arith.add_0())]))
   let t2349 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2364 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.even_mod()])), t2349), t2357), t2362), t2363), @tactics.all_tac])
-  let t2348 = @tactics.subgoal_then(@parser.parse_term("!m. EVEN m==> (m DIV 2) * 2 = m"), fn(x2345 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2348 = @tactics.subgoal_then(@parser.parse_term("forall m. EVEN m==> (m DIV 2) * 2 = m"), fn(x2345 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2346 = @tactics.assume_tac(x2345)
     fn(x2347 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2346(x2347)
@@ -7067,7 +7067,7 @@ fn step_279() -> Unit raise {
   let t2329 = @simp.rewrite_tac(@list.List([@vectors.bilinear(), @vectors.linear(), outerga_radd(), outerga_ladd(), outerga_lmul(), outerga_rmul(), reversionga_linear(), reversion_mbasis()]))
   let t2328 = @tactics.match_mp_tac(bilinear_eq_mvbasis())
   let t2413 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@class.fun_eq_thm())])), t2328), t2329), t2330), t2331), t2332), @class.cond_cases_tac), t2333), t2334), @class.cond_cases_tac), t2335), t2336), t2338), t2339), @tactics.ap_term_tac), t2343), t2344), t2348), t2364), t2368), t2369), t2370), t2372), @tactics.ants_tac), t2373), t2377), t2378), t2379), t2380), t2382), t2383), @tactics.ap_thm_tac), @tactics.ap_term_tac), t2385), @tactics.ants_tac), t2386), t2391), t2392), t2396), t2407), t2408), @tactics.conj_tac), t2410), t2411), t2412)
-  reversion_outerga_c.set(@tactics.prove(@parser.parse_term("!x y:real^(P, Q, R)geomalg.\n  reversion( x outer y) = reversion y outer reversion x"), t2413))
+  reversion_outerga_c.set(@tactics.prove(@parser.parse_term("forall x y:real^(P, Q, R)geomalg.\n  reversion( x outer y) = reversion y outer reversion x"), t2413))
 }
 
 ///|
@@ -7115,7 +7115,7 @@ fn step_280() -> Unit raise {
   let t2415 = @equal.gsym(@bool.specl(@list.List([@parser.parse_term("1:num"), t2414]), @iterate.numseg_empty()))
   let t2419 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@int.arith_rule(@parser.parse_term("0 < 1"))]))(t2415)])), t2416), t2417), t2418), @tactics.all_tac])
   let t2439 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t2419), t2427), t2428), t2429), t2430), t2434), t2435), @tactics.ap_term_tac), t2436), t2437), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t2438), @int.arith_tac)
-  reversion_seqiterate_outerga_c.set(@tactics.prove(@parser.parse_term("!a:num->real^(P, Q, R)trip_fin_sum k.\n     reversion(seqiterate (outer) (1..k) (multivec o a)) =\n     seqiterate (outer) (1..k) (multivec o a o (\\i. SUC k -i))"), t2439))
+  reversion_seqiterate_outerga_c.set(@tactics.prove(@parser.parse_term("forall a:num->real^(P, Q, R)trip_fin_sum k.\n     reversion(seqiterate (outer) (1..k) (multivec o a)) =\n     seqiterate (outer) (1..k) (multivec o a o (\\i. SUC k -i))"), t2439))
 }
 
 ///|
@@ -7150,7 +7150,7 @@ fn step_282() -> Unit raise {
   let t2441 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2440 = @simp.simp_tac(@list.List([geomalg_beta(), geomalg_eq()]))
   let t2444 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([conjugation()])), t2440), t2441), t2442), @class.cond_cases_tac), t2443)
-  conjugation_mvbasis_c.set(@tactics.prove(@parser.parse_term("!s. conjugation (mbasis s:real^(P,Q,R)geomalg) =  --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2 +\n                        CARD(s INTER (pdimindex(:P)+1..pdimindex(:P)+pdimindex(:Q)))) % mbasis s"), t2444))
+  conjugation_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall s. conjugation (mbasis s:real^(P,Q,R)geomalg) =  --(&1) pow ((CARD(s) * (CARD(s) - 1)) DIV 2 +\n                        CARD(s INTER (pdimindex(:P)+1..pdimindex(:P)+pdimindex(:Q)))) % mbasis s"), t2444))
 }
 
 ///|
@@ -7168,7 +7168,7 @@ fn step_283() -> Unit raise {
   let t2446 = @simp.simp_tac(@list.List([geomalg_add_component(), geomalg_mul_component(), geomalg_beta()]))
   let t2445 = @simp.simp_tac(@list.List([geomalg_beta(), geomalg_eq()]))
   let t2447 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([conjugation()])), t2445), t2446), @calc_rat.real_arith_tac)
-  conjugation_linear_c.set(@tactics.prove(@parser.parse_term("(!x y. conjugation (x + y) = conjugation x + conjugation y) /\\\n  (!c x. conjugation (c % x) = c % (conjugation x))"), t2447))
+  conjugation_linear_c.set(@tactics.prove(@parser.parse_term("(forall x y. conjugation (x + y) = conjugation x + conjugation y) /\\\n  (forall c x. conjugation (c % x) = c % (conjugation x))"), t2447))
 }
 
 ///|
@@ -7234,7 +7234,7 @@ pub fn pseudoscalar() -> @kernel.Thm {
 ///|
 /// is_versor
 fn step_288() -> Unit raise {
-  is_versor_c.set(@pair.new_definition(@parser.parse_term("is_versor (A:real^(P,Q,R)geomalg) <=>\n      ?k a:num->real^(P, Q, R)trip_fin_sum.\n         (!i. i IN 1..k ==> ~(is_null(multivec (a i)))) /\\\n         (A = seqiterate( * ) (1..k) (multivec o a))")))
+  is_versor_c.set(@pair.new_definition(@parser.parse_term("is_versor (A:real^(P,Q,R)geomalg) <=>\n      ?k a:num->real^(P, Q, R)trip_fin_sum.\n         (forall i. i IN 1..k ==> ~(is_null(multivec (a i)))) /\\\n         (A = seqiterate( * ) (1..k) (multivec o a))")))
 }
 
 ///|
@@ -7285,7 +7285,7 @@ fn step_289() -> Unit raise {
   })
   let t2448 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2477 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([is_versor()])), t2448), t2452), t2456), t2458), @nums.induct_tac), t2463), @tactics.disch_tac), t2464), t2465), t2466), @tactics.conj_tac), t2473), t2474), t2475), t2476), @int.arith_tac)
-  mvinvertible_versor_c.set(@tactics.prove(@parser.parse_term("!x:real^(P,Q,R)geomalg. is_versor x ==> mvinvertible x"), t2477))
+  mvinvertible_versor_c.set(@tactics.prove(@parser.parse_term("forall x:real^(P,Q,R)geomalg. is_versor x ==> mvinvertible x"), t2477))
 }
 
 ///|
@@ -7381,7 +7381,7 @@ fn step_295() -> Unit raise {
   let t2479 = @simp.once_rewrite_tac(@list.List([geomga_assoc()]))
   let t2478 = @simp.rewrite_tac(@list.List([@equal.gsym(geomga_assoc())]))
   let t2483 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2478), t2479), t2480), @tactics.ap_term_tac), t2481), t2482)
-  superpose_transform_c.set(@tactics.prove(@parser.parse_term("!x a b. is_versor a /\\ is_versor b ==>\n   a *(b * x * mvinverse b) * mvinverse a =\n   (a * b) * x * mvinverse (a *b)"), t2483))
+  superpose_transform_c.set(@tactics.prove(@parser.parse_term("forall x a b. is_versor a /\\ is_versor b ==>\n   a *(b * x * mvinverse b) * mvinverse a =\n   (a * b) * x * mvinverse (a *b)"), t2483))
 }
 
 ///|
