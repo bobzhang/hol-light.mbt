@@ -41,4 +41,5 @@ jobs:
       - name: Core tier
         run: |
           python3 tools/test_hol_notation.py
+          python3 tools/test_runner_test.py
           python3 tools/test.py core --build-jobs 4 -j 4
