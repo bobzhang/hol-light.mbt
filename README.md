@@ -9,7 +9,7 @@ constructs theorems only through its API.
 ## Status
 
 - **Core**: everything `hol.ml` loads. `lib`, `fusion` (`kernel/`), `basics`,
-  `nets`, `printer`, `preterm`, `parser`, `equal`, `bool`, `drule`, `tactics`,
+  `nets`, `printer`, `preterm`, `lexer`, `parser`, `equal`, `bool`, `drule`, `tactics`,
   `itab` and `simp` are ported by hand; the theory files (`theorems` ..
   `define`) are translated.
 - **Library/**: every file but `tactician_light.ml` (`library/<name>`).
@@ -59,6 +59,10 @@ Library and Multivariate packages load on demand, after what they need:
 @prime.load()      // Library/prime.ml and its needs
 let th = @prime.prime_2()
 ```
+
+The `lexer` package owns `Lexcode`, `lex`, `lex_list`, and `comment_token`.
+The `parser` package consumes lexer tokens and owns parser combinators and
+type/term parsing. Both packages use the syntax tables in `printer`.
 
 ## Develop
 

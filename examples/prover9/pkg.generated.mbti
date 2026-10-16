@@ -3,8 +3,8 @@ package "bobzhang/hol_light/examples/prover9"
 
 import {
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/lib",
-  "bobzhang/hol_light/parser",
   "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/core/ref",
@@ -15,7 +15,7 @@ pub fn aci_correct(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
 
 pub fn ap_imp(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
-pub fn atom(@list.List[@parser.Lexcode]) -> (Sexp, @list.List[@parser.Lexcode]) raise
+pub fn atom(@list.List[@lexer.Lexcode]) -> (Sexp, @list.List[@lexer.Lexcode]) raise
 
 pub fn conway_1() -> @kernel.Thm
 
@@ -101,7 +101,7 @@ pub fn prover9_v1(@kernel.Term) -> @kernel.Thm raise
 
 pub fn resolve(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
-pub fn sexpression(@list.List[@parser.Lexcode]) -> (Sexp, @list.List[@parser.Lexcode]) raise
+pub fn sexpression(@list.List[@lexer.Lexcode]) -> (Sexp, @list.List[@lexer.Lexcode]) raise
 
 pub fn signature(@list.List[@kernel.Term], @kernel.Term, (@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term])) -> (@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term]) raise
 

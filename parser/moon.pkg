@@ -1,4 +1,5 @@
 import {
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/lib",
   "bobzhang/hol_light/num",
@@ -7,6 +8,8 @@ import {
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/list",
   "moonbitlang/core/debug",
-  "moonbitlang/core/string",
-  "moonbitlang/core/encoding/utf8",
 }
+
+import {
+  "moonbitlang/core/string",
+} for "test"

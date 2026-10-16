@@ -193,12 +193,12 @@ fn step_8() -> Unit raise {
 /// `lexe`
 pub fn lexe(x24 : String) -> @list.List[String] raise {
   let s = x24
-  @lib.map(fn(x25 : @parser.Lexcode) -> String raise {
+  @lib.map(fn(x25 : @lexer.Lexcode) -> String raise {
     match x25 {
-      @parser.Lexcode::Resword(s_1) => s_1
-      @parser.Lexcode::Ident(s_2) => s_2
+      @lexer.Lexcode::Resword(s_1) => s_1
+      @lexer.Lexcode::Ident(s_2) => s_2
     }
-  }, @parser.lex_list(@lib.explode(s)))
+  }, @lexer.lex_list(@lib.explode(s)))
 }
 
 ///|

@@ -293,8 +293,8 @@ pub fn make_env(x25 : @list.List[(String, @kernel.Thm)], x26 : @kernel.Term) -> 
 pub fn parse_env_string(x32 : @list.List[(String, @preterm.Pretype)], x33 : String) -> @kernel.Term raise {
   let env = x32
   let s = x33
-  let (ptm, l) = (fn(x34 : @list.List[String]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise {
-    @parser.parse_preterm(@parser.lex_list(x34))
+  let (ptm, l) = (fn(x34 : @list.List[String]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+    @parser.parse_preterm(@lexer.lex_list(x34))
   })((fn(x35 : String) -> @list.List[String] raise {
     @lib.explode(x35)
   })(s))

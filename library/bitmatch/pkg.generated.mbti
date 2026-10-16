@@ -3,9 +3,9 @@ package "bobzhang/hol_light/library/bitmatch"
 
 import {
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/lib",
   "bobzhang/hol_light/num",
-  "bobzhang/hol_light/parser",
   "bobzhang/hol_light/pp",
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/debug",
@@ -133,9 +133,9 @@ pub fn pp_print_colored_bitmatch(@pp.Formatter) -> ((@kernel.Term) -> Unit raise
 
 pub fn pp_print_colored_bitpat(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
 
-pub fn preparse_bitmatch(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+pub fn preparse_bitmatch(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
 
-pub fn preparse_bitpat(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+pub fn preparse_bitpat(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
 
 pub fn print_bitmatch(@kernel.Term) -> Unit raise
 

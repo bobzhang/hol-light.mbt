@@ -3,8 +3,8 @@ package "bobzhang/hol_light/examples/mizar"
 
 import {
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/nets",
-  "bobzhang/hol_light/parser",
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/list",
   "moonbitlang/core/ref",
@@ -85,21 +85,21 @@ pub fn mklabel(String) -> String raise
 
 pub fn old_parse_term(String) -> @kernel.Term raise
 
-pub fn parse_fulltype(@list.List[@parser.Lexcode]) -> (@kernel.HolType, @list.List[@parser.Lexcode]) raise
+pub fn parse_fulltype(@list.List[@lexer.Lexcode]) -> (@kernel.HolType, @list.List[@lexer.Lexcode]) raise
 
-pub fn parse_ident(@list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise
+pub fn parse_ident(@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise
 
-pub fn parse_just(Bool, @list.List[@parser.Lexcode]) -> ((String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]), @list.List[@parser.Lexcode]) raise
+pub fn parse_just(Bool, @list.List[@lexer.Lexcode]) -> ((String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]), @list.List[@lexer.Lexcode]) raise
 
-pub fn parse_lform(String, @list.List[@parser.Lexcode]) -> ((String, @preterm.Preterm), @list.List[@parser.Lexcode]) raise
+pub fn parse_lform(String, @list.List[@lexer.Lexcode]) -> ((String, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise
 
-pub fn parse_lforms(String) -> ((@list.List[@parser.Lexcode]) -> (@list.List[(String, @preterm.Preterm)], @list.List[@parser.Lexcode]) raise) raise
+pub fn parse_lforms(String) -> ((@list.List[@lexer.Lexcode]) -> (@list.List[(String, @preterm.Preterm)], @list.List[@lexer.Lexcode]) raise) raise
 
-pub fn parse_preform(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+pub fn parse_preform(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
 
-pub fn parse_step(Bool, @list.List[@parser.Lexcode]) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, @list.List[@parser.Lexcode]) raise
+pub fn parse_step(Bool, @list.List[@lexer.Lexcode]) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, @list.List[@lexer.Lexcode]) raise
 
-pub fn parse_string(@list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise
+pub fn parse_string(@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise
 
 pub fn parse_term(String) -> @kernel.Term raise
 
@@ -111,7 +111,7 @@ pub fn pmk_exists(@preterm.Preterm, @preterm.Preterm) -> @preterm.Preterm raise
 
 pub fn prover_list() -> @ref.Ref[@list.List[(String, (@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise)]]
 
-pub fn run_steps(@list.List[@parser.Lexcode]) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+pub fn run_steps(@list.List[@lexer.Lexcode]) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
 
 pub fn split_ppair(@preterm.Preterm) -> @list.List[@preterm.Preterm] raise
 

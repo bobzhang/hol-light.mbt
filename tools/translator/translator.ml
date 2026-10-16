@@ -651,6 +651,7 @@ module Names = struct
     | None -> []
     | Some "kernel" -> [ "kernel"; "basics" ]
     | Some "lib" -> [ "lib"; "num" ] (* lib.ml's num functions *)
+    | Some "parser" -> [ "parser"; "lexer" ]
     | Some p -> [ p ]
 
   (* The MoonBit package and declaration for an upstream value (a module

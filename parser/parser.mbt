@@ -11,13 +11,15 @@ using @kernel {type Term, type HolType}
 using @preterm {type Preterm, type Pretype}
 
 ///|
+using @lexer {type Lexcode}
+
+///|
 type Toks = @list.List[Lexcode]
 
 ///|
 fn init {
   // "," is needed for set enumerations and is not a reserved word.
   @printer.parse_as_infix(",", (14, "right"))
-  @printer.reserve_words(@list.singleton("//"))
 }
 
 ///|
@@ -878,7 +880,7 @@ fn trace(s : String) -> Unit {
 /// Parse a HOL type.
 pub fn parse_type(s : String) -> HolType raise {
   trace(":" + s)
-  let (pty, l) = parse_pretype(lex(s))
+  let (pty, l) = parse_pretype(@lexer.lex(s))
   if l.is_empty() {
     @preterm.type_of_pretype(pty)
   } else {
@@ -890,7 +892,7 @@ pub fn parse_type(s : String) -> HolType raise {
 /// Parse and typecheck a HOL term.
 pub fn parse_term(s : String) -> Term raise {
   trace(s)
-  let (ptm, l) = parse_preterm(lex(s))
+  let (ptm, l) = parse_preterm(@lexer.lex(s))
   if l.is_empty() {
     @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
   } else {

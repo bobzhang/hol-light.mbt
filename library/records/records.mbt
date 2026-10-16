@@ -4,27 +4,27 @@
 ///|
 /// parse_record_specification
 fn step_1() -> Unit raise {
-  let ptype : (@list.List[@parser.Lexcode]) -> (
+  let ptype : (@list.List[@lexer.Lexcode]) -> (
     @kernel.HolType,
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = fn(
-    x1 : @list.List[@parser.Lexcode],
-  ) -> (@kernel.HolType, @list.List[@parser.Lexcode]) raise {
+    x1 : @list.List[@lexer.Lexcode],
+  ) -> (@kernel.HolType, @list.List[@lexer.Lexcode]) raise {
     let src = x1
     let (pty, rst) = @parser.parse_pretype(src)
     (@preterm.type_of_pretype(pty), rst)
   }
-  let recordelement : (@list.List[@parser.Lexcode]) -> (
+  let recordelement : (@list.List[@lexer.Lexcode]) -> (
     (String, @kernel.HolType),
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = fn(
-    x2 : @list.List[@parser.Lexcode],
-  ) -> ((String, @kernel.HolType), @list.List[@parser.Lexcode]) raise {
+    x2 : @list.List[@lexer.Lexcode],
+  ) -> ((String, @kernel.HolType), @list.List[@lexer.Lexcode]) raise {
     let src_1 = x2
     match src_1 {
       More(
-        @parser.Lexcode::Ident(t),
-        tail=More(@parser.Lexcode::Resword(":"), tail=rst_1)
+        @lexer.Lexcode::Ident(t),
+        tail=More(@lexer.Lexcode::Resword(":"), tail=rst_1)
       ) => {
         let (ty, ors) = ptype(rst_1)
         ((t, ty), ors)
@@ -32,27 +32,27 @@ fn step_1() -> Unit raise {
       _ => raise @parser.Noparse
     }
   }
-  let recordelements : (@list.List[@parser.Lexcode]) -> (
+  let recordelements : (@list.List[@lexer.Lexcode]) -> (
     @list.List[(String, @kernel.HolType)],
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = @parser.listof(
     recordelement,
-    @parser.a(@parser.Lexcode::Resword(";")),
+    @parser.a(@lexer.Lexcode::Resword(";")),
     "';' or '}'",
   )
-  let t3 = @parser.a(@parser.Lexcode::Resword("}"))
-  let recspec : (@list.List[@parser.Lexcode]) -> (
+  let t3 = @parser.a(@lexer.Lexcode::Resword("}"))
+  let recspec : (@list.List[@lexer.Lexcode]) -> (
     @list.List[(String, @kernel.HolType)],
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = @parser.map(
     @parser.seq(
-      @parser.seq(@parser.a(@parser.Lexcode::Resword("{")), recordelements),
+      @parser.seq(@parser.a(@lexer.Lexcode::Resword("{")), recordelements),
       t3,
     ),
     fn(
       x4 : (
-        (@parser.Lexcode, @list.List[(String, @kernel.HolType)]),
-        @parser.Lexcode,
+        (@lexer.Lexcode, @list.List[(String, @kernel.HolType)]),
+        @lexer.Lexcode,
       ),
     ) -> @list.List[(String, @kernel.HolType)] raise {
       let ((_, s), _) = x4
@@ -63,10 +63,10 @@ fn step_1() -> Unit raise {
     x5 : String,
   ) -> (String, @list.List[(String, @kernel.HolType)]) raise {
     let s_1 = x5
-    match @parser.lex_list(@lib.explode(s_1)) {
+    match @lexer.lex_list(@lib.explode(s_1)) {
       More(
-        @parser.Lexcode::Ident(tyname),
-        tail=More(@parser.Lexcode::Ident("="), tail=rst_2)
+        @lexer.Lexcode::Ident(tyname),
+        tail=More(@lexer.Lexcode::Ident("="), tail=rst_2)
       ) => {
         let (rs, er) = recspec(rst_2)
         if er != @list.List([]) {

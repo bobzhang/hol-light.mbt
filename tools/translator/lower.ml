@@ -209,7 +209,7 @@ module Lower = struct
       (fun (c, p) -> Hashtbl.replace own_ctors c p)
       [ ("Varp", "preterm"); ("Constp", "preterm"); ("Combp", "preterm"); ("Absp", "preterm");
         ("Typing", "preterm"); ("Utv", "preterm"); ("Ptycon", "preterm"); ("Stv", "preterm");
-        ("Ident", "parser"); ("Resword", "parser") ]
+        ("Ident", "lexer"); ("Resword", "lexer") ]
   let current_pkg = ref ""
 
   (* a package's import alias: its directory's last component
@@ -279,7 +279,7 @@ module Lower = struct
     | "option" -> Some "Option"
     | "ref" -> Some "Ref"
     | "num" | "Num.num" -> Some "@num.Num"
-    | "lexcode" -> Some "@parser.Lexcode"
+    | "lexcode" -> Some "@lexer.Lexcode"
     | "func" -> Some "@lib.Func"
     | "float" -> Some "Double"
     | "Stdlib.ref" -> Some "Ref"
