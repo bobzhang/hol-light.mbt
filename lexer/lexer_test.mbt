@@ -34,8 +34,15 @@ test "∀ spelling leaves strings and other symbolic tokens unchanged" {
 ///|
 test "Unicode binder has token boundaries and literals retain bytes" {
   assert_eq(@lexer.lex("∀x.∀y.P x y"), [
-    Ident("∀"), Ident("x"), Resword("."), Ident("∀"), Ident("y"),
-    Resword("."), Ident("P"), Ident("x"), Ident("y"),
+    Ident("∀"),
+    Ident("x"),
+    Resword("."),
+    Ident("∀"),
+    Ident("y"),
+    Resword("."),
+    Ident("P"),
+    Ident("x"),
+    Ident("y"),
   ])
   assert_eq(@lexer.lex("\"∀\""), [Ident("\"\u00e2\u0088\u0080\"")])
 }
