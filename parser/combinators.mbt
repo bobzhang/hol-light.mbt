@@ -156,11 +156,13 @@ pub fn[X, A] possibly(p : (X) -> (A, X) raise) -> (X) -> (List[A], X) raise {
 
 ///|
 /// An item satisfying `pred`.
-pub fn[I] some(pred : (I) -> Bool raise?) -> (ArrayView[I]) -> (I, ArrayView[I]) raise {
+pub fn[I] some(
+  pred : (I) -> Bool raise?,
+) -> (ArrayView[I]) -> (I, ArrayView[I]) raise {
   input => {
     match input {
       [] => raise Noparse
-      [h, ..t] => if pred(h) { (h, t) } else { raise Noparse }
+      [h, .. t] => if pred(h) { (h, t) } else { raise Noparse }
     }
   }
 }
@@ -172,8 +174,10 @@ pub fn[I : Eq] a(tok : I) -> (ArrayView[I]) -> (I, ArrayView[I]) raise {
 }
 
 ///|
-/// An item satisfying `pred`.
-pub fn[I] some_list(pred : (I) -> Bool raise?) -> (List[I]) -> (I, List[I]) raise {
+/// An item satisfying `pred` in a linked-list input (used by character parsers).
+pub fn[I] some_list(
+  pred : (I) -> Bool raise?,
+) -> (List[I]) -> (I, List[I]) raise {
   input => {
     match input {
       Empty => raise Noparse
@@ -183,7 +187,7 @@ pub fn[I] some_list(pred : (I) -> Bool raise?) -> (List[I]) -> (I, List[I]) rais
 }
 
 ///|
-/// The item `tok`.
+/// The item `tok` in a linked-list input.
 pub fn[I : Eq] a_list(tok : I) -> (List[I]) -> (I, List[I]) raise {
   some_list(item => item == tok)
 }
@@ -218,7 +222,7 @@ pub fn[I] finished(input : ArrayView[I]) -> (Int, ArrayView[I]) raise {
 }
 
 ///|
-/// Succeeds only at the end of the input.
+/// Succeeds only at the end of a linked-list input.
 pub fn[I] finished_list(input : List[I]) -> (Int, List[I]) raise {
   if input.is_empty() {
     (0, input)

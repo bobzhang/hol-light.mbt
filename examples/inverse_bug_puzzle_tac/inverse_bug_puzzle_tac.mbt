@@ -76,7 +76,7 @@ pub fn consider(x14 : String, x15 : @kernel.Term, x16 : @list.List[((@list.List[
   let lab = x17
   let ident : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise = fn(x19 : ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise {
     match x19 {
-      More(@lexer.Lexcode::Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
+      [@lexer.Lexcode::Ident(s), ..rest] if @printer.isalnum(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }

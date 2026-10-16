@@ -85,21 +85,21 @@ pub fn mklabel(String) -> String raise
 
 pub fn old_parse_term(String) -> @kernel.Term raise
 
-pub fn parse_fulltype(@list.List[@lexer.Lexcode]) -> (@kernel.HolType, @list.List[@lexer.Lexcode]) raise
+pub fn parse_fulltype(ArrayView[@lexer.Lexcode]) -> (@kernel.HolType, ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_ident(@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise
+pub fn parse_ident(ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_just(Bool, @list.List[@lexer.Lexcode]) -> ((String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]), @list.List[@lexer.Lexcode]) raise
+pub fn parse_just(Bool, ArrayView[@lexer.Lexcode]) -> ((String, @list.List[(@list.List[(String, @kernel.Thm)]) -> @kernel.Thm raise]), ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_lform(String, @list.List[@lexer.Lexcode]) -> ((String, @preterm.Preterm), @list.List[@lexer.Lexcode]) raise
+pub fn parse_lform(String, ArrayView[@lexer.Lexcode]) -> ((String, @preterm.Preterm), ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_lforms(String) -> ((@list.List[@lexer.Lexcode]) -> (@list.List[(String, @preterm.Preterm)], @list.List[@lexer.Lexcode]) raise) raise
+pub fn parse_lforms(String) -> ((ArrayView[@lexer.Lexcode]) -> (@list.List[(String, @preterm.Preterm)], ArrayView[@lexer.Lexcode]) raise) raise
 
-pub fn parse_preform(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
+pub fn parse_preform(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_step(Bool, @list.List[@lexer.Lexcode]) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, @list.List[@lexer.Lexcode]) raise
+pub fn parse_step(Bool, ArrayView[@lexer.Lexcode]) -> ((((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_string(@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise
+pub fn parse_string(ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise
 
 pub fn parse_term(String) -> @kernel.Term raise
 
@@ -111,7 +111,7 @@ pub fn pmk_exists(@preterm.Preterm, @preterm.Preterm) -> @preterm.Preterm raise
 
 pub fn prover_list() -> @ref.Ref[@list.List[(String, (@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise)]]
 
-pub fn run_steps(@list.List[@lexer.Lexcode]) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+pub fn run_steps(ArrayView[@lexer.Lexcode]) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
 
 pub fn split_ppair(@preterm.Preterm) -> @list.List[@preterm.Preterm] raise
 

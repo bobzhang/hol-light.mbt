@@ -81,7 +81,7 @@ fn mk_apptype(p : (List[Pretype], List[String])) -> Pretype raise {
 ///|
 fn type_atom(input : Toks) -> (Pretype, Toks) raise {
   match input {
-    [Ident(s), ..rest] => {
+    [Ident(s), .. rest] => {
       let pty = @preterm.pretype_of_type(@lib.assoc(s, @preterm.type_abbrevs())) catch {
         Failure(_) =>
           mk_prefinty(@num.num_of_string(s)) catch {
@@ -109,7 +109,7 @@ fn type_atom(input : Toks) -> (Pretype, Toks) raise {
 ///|
 fn type_constructor(input : Toks) -> (String, Toks) raise {
   match input {
-    [Ident(s), ..rest] => {
+    [Ident(s), .. rest] => {
       let ok = try @kernel.get_type_arity(s) > 0 catch {
         Failure(_) => false
         e => raise e
@@ -464,8 +464,7 @@ fn is_quoted(s : String) -> Bool {
 ///|
 fn string_tok(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), ..rst] if is_quoted(s) =>
-      (s[1:s.length() - 1].to_owned(), rst)
+    [Ident(s), .. rst] if is_quoted(s) => (s[1:s.length() - 1].to_owned(), rst)
     _ => raise Noparse
   }
 }
@@ -501,7 +500,7 @@ fn lmk_decimal(p : ((Lexcode, String), List[String])) -> Preterm raise {
 ///|
 fn any_identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), ..rest] => (s, rest)
+    [Ident(s), .. rest] => (s, rest)
     _ => raise Noparse
   }
 }
@@ -509,7 +508,7 @@ fn any_identifier(inp : Toks) -> (String, Toks) raise {
 ///|
 fn identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), ..rest] =>
+    [Ident(s), .. rest] =>
       if @lib.can(@printer.get_infix_status, s) ||
         @printer.is_prefix(s) ||
         @printer.parses_as_binder(s) {
@@ -524,7 +523,7 @@ fn identifier(inp : Toks) -> (String, Toks) raise {
 ///|
 fn binder(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), ..rest] if @printer.parses_as_binder(s) => (s, rest)
+    [Ident(s), .. rest] if @printer.parses_as_binder(s) => (s, rest)
     _ => raise Noparse
   }
 }
@@ -532,7 +531,7 @@ fn binder(inp : Toks) -> (String, Toks) raise {
 ///|
 fn pre_fix(inp : Toks) -> (String, Toks) raise {
   match inp {
-    [Ident(s), ..rest] if @printer.is_prefix(s) => (s, rest)
+    [Ident(s), .. rest] if @printer.is_prefix(s) => (s, rest)
     _ => raise Noparse
   }
 }

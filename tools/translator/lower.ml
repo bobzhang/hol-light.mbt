@@ -956,6 +956,8 @@ module Lower = struct
      one is expected (MoonBit does not convert function values). *)
   let rec needs_eta have want =
     match have, want with
+    | M.Named (("Array" | "ArrayView" | "@list.List") as h, [ _ ]),
+      M.Named (("Array" | "ArrayView" | "@list.List") as w, [ _ ]) when h <> w -> true
     | M.Fun (ps1, r1, raises1), M.Fun (ps2, r2, raises2) ->
         (raises2 && not raises1) || not (same_shape have want)
         || List.exists2 (fun p1 p2 -> needs_eta p2 p1) ps1 ps2
@@ -982,6 +984,19 @@ module Lower = struct
     if not (needs_eta have want) then (stmts, e)
     else
     match have, want with
+    (* Upstream lists can cross a hand-ported array/view API boundary.
+       Keep the source-side representation in generated code and adapt at
+       that boundary, including callback parameters and tuple remainders. *)
+    | M.Named ("Array", [ _ ]), M.Named ("ArrayView", [ _ ]) ->
+        (stmts, Call (Atom "Array::exact_view", [ e ]))
+    | M.Named (("Array" | "ArrayView"), [ _ ]), M.Named ("@list.List", [ _ ]) ->
+        (stmts, Call (Atom "@list.List::from_array", [ e ]))
+    | M.Named ("@list.List", [ _ ]), M.Named ("Array", [ _ ]) ->
+        (stmts, Call (Atom "@list.List::to_array", [ e ]))
+    | M.Named ("@list.List", [ _ ]), M.Named ("ArrayView", [ _ ]) ->
+        (stmts, Call (Atom "Array::exact_view", [ Call (Atom "@list.List::to_array", [ e ]) ]))
+    | M.Named ("ArrayView", [ _ ]), M.Named ("Array", [ _ ]) ->
+        (stmts, Call (Atom "ArrayView::to_owned", [ e ]))
     (* an OCaml int (Int64) through a hand-ported `Int` *)
     | M.Named ("Int", []), M.Named ("Int64", []) -> (stmts, widen e)
     | M.Named ("Int64", []), M.Named ("Int", []) -> (stmts, narrow e)
@@ -1372,7 +1387,7 @@ module Lower = struct
   let string_lexer_head = {
     hstmts = []; hexp = Atom "@lexer.lex";
     hmty = M.Fun ([ M.Named ("String", []) ],
-      M.Named ("@list.List", [ M.Named ("@lexer.Lexcode", []) ]), true);
+      M.Named ("Array", [ M.Named ("@lexer.Lexcode", []) ]), true);
     hoty = None;
   }
 
@@ -1617,8 +1632,10 @@ module Lower = struct
              let cs = fresh "cs" in
              let hmty = mty_of f.exp_type in
              let ps, ret = match hmty with M.Fun (ps, ret, _) -> (ps, ret) | _ -> assert false in
-             let hexp = typed_lam [ param cs (List.hd ps) ] ret
-               ([], Call (Atom "@lexer.lex", [ Call (Atom "@lib.implode", [ Atom cs ]) ])) in
+             let body = adapt
+               ([], Call (Atom "@lexer.lex", [ Call (Atom "@lib.implode", [ Atom cs ]) ]))
+               (M.Named ("Array", [ M.Named ("@lexer.Lexcode", []) ])) ret in
+             let hexp = typed_lam [ param cs (List.hd ps) ] ret body in
              apply_head ?expect ~res:whole.exp_type loc
                { hstmts = []; hexp; hmty; hoty = Some f.exp_type } args)
     | Texp_ident (p, _, vd) when list_alias p vd <> None ->

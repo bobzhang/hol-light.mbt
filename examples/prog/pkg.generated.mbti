@@ -83,9 +83,9 @@ pub fn or() -> @kernel.Thm
 
 pub fn ors() -> @kernel.Thm
 
-pub fn parse_program(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
+pub fn parse_program(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
-pub fn parse_program_assertion(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
+pub fn parse_program_assertion(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
 pub fn pred_taut(@kernel.Term) -> @kernel.Thm raise
 
