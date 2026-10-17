@@ -110,7 +110,7 @@ pub fn[X, A, S] elistof(
 
 ///|
 /// Left-associated binary operators.
-pub fn[X, A, S] leftbin(
+fn[X, A, S] leftbin(
   p : (X) -> (A, X) raise,
   sep : (X) -> (S, X) raise,
   cons : (S, A, A) -> A raise?,
@@ -125,7 +125,7 @@ pub fn[X, A, S] leftbin(
 
 ///|
 /// Right-associated binary operators.
-pub fn[X, A, S] rightbin(
+fn[X, A, S] rightbin(
   p : (X) -> (A, X) raise,
   sep : (X) -> (S, X) raise,
   cons : (S, A, A) -> A raise?,
@@ -156,7 +156,7 @@ pub fn[X, A] possibly(p : (X) -> (A, X) raise) -> (X) -> (List[A], X) raise {
 
 ///|
 /// An item satisfying `pred`.
-pub fn[I] some(
+fn[I] some(
   pred : (I) -> Bool raise?,
 ) -> (ArrayView[I]) -> (I, ArrayView[I]) raise {
   input => {
@@ -208,16 +208,6 @@ pub fn[X, A] atleast(
     }
     let (more, rest1) = many(p)(rest)
     (@list.List(first).concat(more), rest1)
-  }
-}
-
-///|
-/// Succeeds only at the end of the input.
-pub fn[I] finished(input : ArrayView[I]) -> (Int, ArrayView[I]) raise {
-  if input.is_empty() {
-    (0, input)
-  } else {
-    raise Failure("Unparsed input")
   }
 }
 

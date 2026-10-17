@@ -184,7 +184,7 @@ fn typelist(i : Toks) -> (List[Pretype], Toks) raise {
 // ---------------------------------------------------------------------------
 
 ///|
-pub type UserParser = (String, (Toks) -> (Preterm, Toks) raise)
+type UserParser = (String, (Toks) -> (Preterm, Toks) raise)
 
 ///|
 let parser_list : Ref[List[UserParser]] = Ref::{ val: @list.List([]), }
@@ -204,11 +204,6 @@ pub fn delete_parser(key : String) -> Unit raise {
     e => raise e
   }
   parser_list.val = rest
-}
-
-///|
-pub fn installed_parsers() -> List[UserParser] {
-  parser_list.val
 }
 
 ///|
@@ -897,17 +892,4 @@ pub fn parse_term(s : String) -> Term raise {
   } else {
     raise Failure("Unparsed input following term")
   }
-}
-
-///|
-/// The `GEN%PVAR` counter (for differential tests of load order).
-pub fn pgenvar_counter() -> Int {
-  pgen_counter.val
-}
-
-///|
-/// The theories loaded so far, in the order they were loaded (MoonBit
-/// initializes packages in its own order where the imports allow several).
-pub fn loaded_theories() -> Array[String] {
-  theory_traces.keys().collect()
 }
