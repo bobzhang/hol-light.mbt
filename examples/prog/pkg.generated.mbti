@@ -87,9 +87,11 @@ pub fn parse_program(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[
 
 pub fn parse_program_assertion(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
-pub fn pred_taut(@kernel.Term) -> @kernel.Thm raise
+pub fn parse_program_assertion_term(String) -> @kernel.Term raise
 
-pub fn reserve_program_words(Unit) -> Unit raise
+pub fn parse_program_term(String) -> @kernel.Term raise
+
+pub fn pred_taut(@kernel.Term) -> @kernel.Thm raise
 
 pub fn sem_abort() -> @kernel.Thm
 
@@ -124,8 +126,6 @@ pub fn state_gen_tac_p((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@
 pub fn terminates() -> @kernel.Thm
 
 pub fn true_() -> @kernel.Thm
-
-pub fn unreserve_program_words(Unit) -> Unit raise
 
 pub fn vc_abort() -> @kernel.Thm
 

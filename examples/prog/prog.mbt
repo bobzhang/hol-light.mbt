@@ -1437,45 +1437,6 @@ pub fn dive_to_var(x183 : @preterm.Preterm) -> @preterm.Preterm raise {
 }
 
 ///|
-let reserve_program_words_c : @lib.Cell[(Unit) -> Unit raise] = @lib.Cell::new("reserve_program_words")
-
-///|
-/// `reserve_program_words`
-pub fn reserve_program_words(x : Unit) -> Unit raise {
-  (reserve_program_words_c.get())(x)
-}
-
-///|
-let unreserve_program_words_c : @lib.Cell[(Unit) -> Unit raise] = @lib.Cell::new("unreserve_program_words")
-
-///|
-/// `unreserve_program_words`
-pub fn unreserve_program_words(x : Unit) -> Unit raise {
-  (unreserve_program_words_c.get())(x)
-}
-
-///|
-/// reserve_program_words, unreserve_program_words
-fn step_84() -> Unit raise {
-  let words = @list.List(["var", "end", "skip", "abort", ":=", "if", "then", "else", "while", "do"])
-  let (reserve_program_words, unreserve_program_words) = (fn(x184 : Unit) -> Unit raise {
-    let _ = x184
-    @printer.reserve_words(words)
-  }, fn(x185 : Unit) -> Unit raise {
-    let _ = x185
-    @printer.unreserve_words(words)
-  })
-  reserve_program_words_c.set(reserve_program_words)
-  unreserve_program_words_c.set(unreserve_program_words)
-}
-
-///|
-/// Examples/prog.ml:490
-fn step_85() -> Unit raise {
-  reserve_program_words(())
-}
-
-///|
 let parse_program_c : @lib.Cell[(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise] = @lib.Cell::new("parse_program")
 
 ///|
@@ -2133,12 +2094,6 @@ pub fn vc_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 }
 
 ///|
-/// Examples/prog.ml:752
-fn step_94() -> Unit raise {
-  @parser.install_parser("correct", parse_program_assertion)
-}
-
-///|
 /// EXAMPLE_FACTORIAL
 fn step_95() -> Unit raise {
   let t393 = @tactics.undisch_tac(@parser.parse_term("x < n"))
@@ -2147,7 +2102,7 @@ fn step_95() -> Unit raise {
   let t391 = @meson.meson_tac(@list.List([]))
   let t395 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.conj_assoc(), @arith.not_lt(), @arith.le_antisym()])), t391)
   let t396 = @tactics.thenl(vc_tac, @list.List([@tactics.then_tac(@tactics.strip_tac, @simp.asm_rewrite_tac(@list.List([@arith.fact(), @arith.le_0()]))), t395, t394]))
-  example_factorial_c.set(@tactics.prove(@parser.parse_term("correct\n   T\n     var x,y,n;\n       x := 0;\n       y := 1;\n       while x < n do [invariant x <= n /\\ (y = FACT x); measure n - x]\n        (x := x + 1;\n         y := y * x)\n     end\n   y = FACT n"), t396))
+  example_factorial_c.set(@tactics.prove(parse_program_assertion_term("correct\n   T\n     var x,y,n;\n       x := 0;\n       y := 1;\n       while x < n do [invariant x <= n /\\ (y = FACT x); measure n - x]\n        (x := x + 1;\n         y := y * x)\n     end\n   y = FACT n"), t396))
 }
 
 ///|
@@ -2157,12 +2112,6 @@ let example_factorial_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXAMPLE_FACTO
 /// `EXAMPLE_FACTORIAL`
 pub fn example_factorial() -> @kernel.Thm {
   example_factorial_c.get()
-}
-
-///|
-/// Examples/prog.ml:771
-fn step_96() -> Unit raise {
-  @parser.delete_parser("correct")
 }
 
 ///|
@@ -2250,8 +2199,6 @@ fn load_steps() -> Unit raise {
   step_81()
   step_82()
   step_83()
-  step_84()
-  step_85()
   step_86()
   step_87()
   step_88()
@@ -2260,7 +2207,5 @@ fn load_steps() -> Unit raise {
   step_91()
   step_92()
   step_93()
-  step_94()
   step_95()
-  step_96()
 }
