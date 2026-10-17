@@ -77,10 +77,10 @@ pub fn consider(x14 : String, x15 : @kernel.Term, x16 : @list.List[((@list.List[
   let ident : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise = fn(x19 : ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise {
     match x19 {
       [@lexer.Lexcode::Ident(s), ..rest] if @printer.isalnum(s) => (s, rest)
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   }
-  let parse_using : (ArrayView[@lexer.Lexcode]) -> (@list.List[String], ArrayView[@lexer.Lexcode]) raise = @parser.many(ident)
+  let parse_using : (ArrayView[@lexer.Lexcode]) -> (@list.List[String], ArrayView[@lexer.Lexcode]) raise = @parserutil.many(ident)
   fn findsuchthat(x20 : Int64) -> Int64 raise {
     let n = x20
     if (@lib.string_sub(vars_suchthat, @lib.int63_to_int(n), 9) == "such that") {

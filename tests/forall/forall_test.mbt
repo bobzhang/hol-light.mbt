@@ -27,7 +27,7 @@ test "legacy universal notation is rejected" {
     }
   }
   try @parser.parse_preterm([Ident("!")]) catch {
-    @parser.Noparse => ()
+    @parserutil.Noparse => ()
     error => raise error
   } noraise {
     _ => fail("legacy token was accepted")

@@ -28,48 +28,28 @@ test "parser returns a remainder view into the original token array" {
 }
 
 ///|
-test "view alternatives backtrack without undoing parser actions" {
-  let tokens : Array[@lexer.Lexcode] = [Ident("a"), Ident("b"), Ident("c")]
-  let actions : Array[String] = []
-  let first = @parser.seq(
-    @parser.map(@parser.a(@lexer.Ident("a")), token => {
-      actions.push("first")
-      token
-    }),
-    @parser.a(@lexer.Ident("missing")),
-  )
-  let second = @parser.seq(
-    @parser.map(@parser.a(@lexer.Ident("a")), token => {
-      actions.push("second")
-      token
-    }),
-    @parser.a(@lexer.Ident("b")),
-  )
-  let (parsed, rest) = @parser.alt(first, second)(tokens[:])
-  assert_eq(parsed, (Ident("a"), Ident("b")))
-  assert_eq(rest, tokens[2:])
-  assert_eq(rest.start_offset(), 2)
-  assert_eq(actions, ["first", "second"])
-  assert_eq(tokens, [Ident("a"), Ident("b"), Ident("c")])
-}
-
-///|
-test "view alternatives propagate hard errors" {
-  let mut tried_alternative = false
-  let parser = @parser.alt(@parser.fix("b", @parser.a(@lexer.Ident("b"))), input => {
-    tried_alternative = true
-    @parser.a(@lexer.Ident("a"))(input)
-  })
-  let failed = try {
-    ignore(parser([Ident("a")]))
-    false
-  } catch {
-    Failure(message) => {
-      assert_eq(message, "b expected")
-      true
+test "custom parser backtracks on parserutil Noparse and propagates hard errors" {
+  let name = "parserutil error integration"
+  let mut called = false
+  let mut hard_error = false
+  @parser.install_parser(name, _ => {
+    called = true
+    if hard_error {
+      raise Failure("custom parser failed")
     }
+    raise @parserutil.Noparse
+  })
+  errdefer @parser.delete_parser(name)
+  let (term, rest) = @parser.parse_preterm(@lexer.lex("f x"))
+  assert_true(called)
+  assert_true(term is @preterm.Combp(Varp("f", _), Varp("x", _)))
+  assert_true(rest.is_empty())
+  hard_error = true
+  try @parser.parse_preterm(@lexer.lex("f x")) catch {
+    Failure(message) => assert_eq(message, "custom parser failed")
     e => raise e
+  } noraise {
+    _ => fail("expected a hard error from the custom parser")
   }
-  assert_true(failed)
-  assert_false(tried_alternative)
+  @parser.delete_parser(name)
 }

@@ -26,24 +26,24 @@ fn step_1() -> Unit raise {
         let (ty, ors) = ptype(rst_1)
         ((t, ty), ors)
       }
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   }
   let recordelements : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[(String, @kernel.HolType)],
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.listof(
+  ) raise = @parserutil.listof(
     recordelement,
-    @parser.a(@lexer.Lexcode::Resword(";")),
+    @parserutil.a(@lexer.Lexcode::Resword(";")),
     "';' or '}'",
   )
-  let t3 = @parser.a(@lexer.Lexcode::Resword("}"))
+  let t3 = @parserutil.a(@lexer.Lexcode::Resword("}"))
   let recspec : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[(String, @kernel.HolType)],
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.map(
-    @parser.seq(
-      @parser.seq(@parser.a(@lexer.Lexcode::Resword("{")), recordelements),
+  ) raise = @parserutil.map(
+    @parserutil.seq(
+      @parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("{")), recordelements),
       t3,
     ),
     fn(
@@ -69,7 +69,7 @@ fn step_1() -> Unit raise {
           (tyname, rs)
         }
       }
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   })
 }

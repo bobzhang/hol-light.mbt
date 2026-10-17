@@ -1,0 +1,46 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/parserutil"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[I : Eq] a(I) -> (ArrayView[I]) -> (I, ArrayView[I]) raise
+
+pub fn[I : Eq] a_list(I) -> (@list.List[I]) -> (I, @list.List[I]) raise
+
+pub fn[X, R] alt((X) -> R raise, (X) -> R raise) -> (X) -> R raise
+
+pub fn[X, A] atleast(Int, (X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
+
+pub fn[X, A, S] elistof((X) -> (A, X) raise, (X) -> (S, X) raise, String) -> (X) -> (@list.List[A], X) raise
+
+pub fn[I] finished_list(@list.List[I]) -> (Int, @list.List[I]) raise
+
+pub fn[X, R] fix(String, (X) -> R raise) -> (X) -> R raise
+
+pub fn[X, A, S] listof((X) -> (A, X) raise, (X) -> (S, X) raise, String) -> (X) -> (@list.List[A], X) raise
+
+pub fn[X, A] many((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
+
+pub fn[X, A, B, Y] map((X) -> (A, Y) raise, (A) -> B raise?) -> (X) -> (B, Y) raise
+
+pub fn[X, A] nothing(X) -> (@list.List[A], X)
+
+pub fn[X, A] possibly((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
+
+pub fn[X, A, Y, B, Z] seq((X) -> (A, Y) raise, (Y) -> (B, Z) raise) -> (X) -> ((A, B), Z) raise
+
+pub fn[I] some_list((I) -> Bool raise?) -> (@list.List[I]) -> (I, @list.List[I]) raise
+
+// Errors
+pub(all) suberror Noparse derive(@debug.Debug)
+pub fn Noparse::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+
+// Type aliases
+
+// Traits

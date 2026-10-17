@@ -817,18 +817,18 @@ fn step_29() -> Unit raise {
         let n_3 = try {
           @num.num_of_string(s_1)
         } catch {
-          Failure(_) => raise @parser.Noparse
+          Failure(_) => raise @parserutil.Noparse
           e => raise e
         }
         (n_3, rest)
       }
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   }
-  let parse_ints : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parser.map(@parser.many(parse_int), pmk_ntrie)
-  let t107 = @parser.a(@lexer.Lexcode::Resword(")"))
-  let t105 = @parser.a(@lexer.Lexcode::Resword("("))
-  let preparse_ntrie : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parser.map(@parser.seq(@parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("%%")), t105), parse_ints), fn(x106 : ((@lexer.Lexcode, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
+  let parse_ints : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.many(parse_int), pmk_ntrie)
+  let t107 = @parserutil.a(@lexer.Lexcode::Resword(")"))
+  let t105 = @parserutil.a(@lexer.Lexcode::Resword("("))
+  let preparse_ntrie : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.seq(@parserutil.map(@parserutil.seq(@parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("%%")), t105), parse_ints), fn(x106 : ((@lexer.Lexcode, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
     x106.1
   }), t107), fn(x108 : (@preterm.Preterm, @lexer.Lexcode)) -> @preterm.Preterm raise {
     x108.0

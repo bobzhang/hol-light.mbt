@@ -1,6 +1,6 @@
 ///|
 test "view item parser rejects empty input" {
-  let empty : ArrayView[@lexer.Lexcode] = []
+  let empty : ArrayView[String] = []
   let no_parse = try {
     ignore(some(_ => true)(empty))
     false
