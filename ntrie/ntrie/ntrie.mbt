@@ -452,7 +452,8 @@ fn step_21() -> Unit raise {
 let mk_small_ntrie_c : @lib.Cell[(@list.List[Int64]) -> @kernel.Term raise] = @lib.Cell::new("mk_small_ntrie")
 
 ///|
-/// `mk_small_ntrie`
+/// Build a trie term from nonnegative machine integers after `load()`.
+/// Fixed terms can also use ordinary HOL syntax, e.g. `NTRIE NZERO`.
 pub fn mk_small_ntrie(x : @list.List[Int64]) -> @kernel.Term raise {
   (mk_small_ntrie_c.get())(x)
 }
@@ -513,7 +514,8 @@ fn step_22() -> Unit raise {
 let mk_ntrie_c : @lib.Cell[(@list.List[@num.Num]) -> @kernel.Term raise] = @lib.Cell::new("mk_ntrie")
 
 ///|
-/// `mk_ntrie`
+/// Build a trie term from nonnegative integer `Num` values after `load()`.
+/// This constructs checked kernel terms directly, without parsing text.
 pub fn mk_ntrie(x : @list.List[@num.Num]) -> @kernel.Term raise {
   (mk_ntrie_c.get())(x)
 }
@@ -712,147 +714,11 @@ fn step_26() -> Unit raise {
 let string_of_ntrie_c : @lib.Cell[(@kernel.Term) -> String raise] = @lib.Cell::new("string_of_ntrie")
 
 ///|
-/// `string_of_ntrie`
+/// Format a trie using compact `%%(...)` display notation.
+/// This notation is not accepted as trie syntax by the HOL parser.
+/// Use `@printer.string_of_term` for ordinary HOL constructor syntax.
 pub fn string_of_ntrie(x : @kernel.Term) -> String raise {
   (string_of_ntrie_c.get())(x)
-}
-
-///|
-/// Ntrie/ntrie.ml:355
-fn step_27() -> Unit raise {
-  @printer.install_user_printer("ntrie", fn(x91 : @pp.Formatter, x92 : @kernel.Term) -> Unit raise {
-    let s93 = pp_print_ntrie(x91)
-    s93(x92)
-  })
-}
-
-///|
-/// Ntrie/ntrie.ml:361
-fn step_28() -> Unit raise {
-  @printer.reserve_words(@list.List(["%%"]))
-}
-
-///|
-let preparse_ntrie_c : @lib.Cell[(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise] = @lib.Cell::new("preparse_ntrie")
-
-///|
-/// `preparse_ntrie`
-pub fn preparse_ntrie(x : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
-  (preparse_ntrie_c.get())(x)
-}
-
-///|
-let parse_ntrie_c : @lib.Cell[(String) -> @kernel.Term raise] = @lib.Cell::new("parse_ntrie")
-
-///|
-/// `parse_ntrie`
-pub fn parse_ntrie(x : String) -> @kernel.Term raise {
-  (parse_ntrie_c.get())(x)
-}
-
-///|
-/// preparse_ntrie, parse_ntrie
-fn step_29() -> Unit raise {
-  let ntrie_ptm = @preterm.Preterm::Varp("NTRIE", @preterm.dpty)
-  let nempty_ptm = @preterm.Preterm::Varp("NEMPTY", @preterm.dpty)
-  let nzero_ptm = @preterm.Preterm::Varp("NZERO", @preterm.dpty)
-  let nnode_ptm = @preterm.Preterm::Varp("NNODE", @preterm.dpty)
-  let pmk_nnode : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise = fn(x94 : @preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise {
-    let ptm1 = x94
-    fn(x95 : @preterm.Preterm) -> @preterm.Preterm raise {
-      let ptm2 = x95
-      @preterm.Preterm::Combp(@preterm.Preterm::Combp(nnode_ptm, ptm1), ptm2)
-    }
-  }
-  fn pmk_sing(x96 : @num.Num) -> @preterm.Preterm raise {
-    let n = x96
-    if @num.eq_num(n, @num.num_0) {
-      nzero_ptm
-    } else {
-      let t97 = @num.quo_num(n, @num.num_2)
-      let (r, d) = (@num.mod_num(n, @num.num_2), t97)
-      let tm = pmk_sing(d)
-      if @num.eq_num(r, @num.num_0) {
-        pmk_nnode(tm)(nempty_ptm)
-      } else {
-        pmk_nnode(nempty_ptm)(tm)
-      }
-    }
-  }
-  fn part(x98 : (@list.List[@num.Num], @list.List[@num.Num]), x99 : @list.List[@num.Num]) -> ((@list.List[@num.Num], @list.List[@num.Num])) raise {
-    let (el, ol) as acc = x98
-    match x99 {
-      Empty => acc
-      More(h, tail=t) => {
-        let t100 = @num.quo_num(h, @num.num_2)
-        let (r_1, d_1) = (@num.mod_num(h, @num.num_2), t100)
-        let acc_1 = if (r_1 == @num.num_0) {
-          (el.prepend(d_1), ol)
-        } else {
-          (el, ol.prepend(d_1))
-        }
-        part(acc_1, t)
-      }
-    }
-  }
-  fn recur_(x101 : @list.List[@num.Num]) -> @preterm.Preterm raise {
-    match x101 {
-      Empty => nempty_ptm
-      More(n_1, tail=Empty) => pmk_sing(n_1)
-      More(m, tail=More(n_2, tail=_) as t_1) if @num.eq_num(n_2, m) => recur_(t_1)
-      s => {
-        let (evens, odds) = part((@list.List([]), @list.List([])), s)
-        let t102 = recur_(odds)
-        pmk_nnode(recur_(evens))(t102)
-      }
-    }
-  }
-  let pmk_ntrie : (@list.List[@num.Num]) -> @preterm.Preterm raise = fn(x103 : @list.List[@num.Num]) -> @preterm.Preterm raise {
-    let tm_1 = x103
-    @preterm.Preterm::Combp(ntrie_ptm, recur_(tm_1))
-  }
-  let parse_int : (ArrayView[@lexer.Lexcode]) -> (@num.Num, ArrayView[@lexer.Lexcode]) raise = fn(x104 : ArrayView[@lexer.Lexcode]) -> (@num.Num, ArrayView[@lexer.Lexcode]) raise {
-    match x104 {
-      [@lexer.Lexcode::Ident(s_1), ..rest] => {
-        let n_3 = try {
-          @num.num_of_string(s_1)
-        } catch {
-          Failure(_) => raise @parserutil.Noparse
-          e => raise e
-        }
-        (n_3, rest)
-      }
-      _ => raise @parserutil.Noparse
-    }
-  }
-  let parse_ints : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.many(parse_int), pmk_ntrie)
-  let t107 = @parserutil.a(@lexer.Lexcode::Resword(")"))
-  let t105 = @parserutil.a(@lexer.Lexcode::Resword("("))
-  let preparse_ntrie : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.seq(@parserutil.map(@parserutil.seq(@parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("%%")), t105), parse_ints), fn(x106 : ((@lexer.Lexcode, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
-    x106.1
-  }), t107), fn(x108 : (@preterm.Preterm, @lexer.Lexcode)) -> @preterm.Preterm raise {
-    x108.0
-  })
-  let parse_ntrie : (String) -> @kernel.Term raise = fn(x109 : String) -> @kernel.Term raise {
-    let s_2 = x109
-    let (ptm, l) = (fn(x110 : String) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise {
-      preparse_ntrie(@lexer.lex(x110))
-    })(s_2)
-    if l.is_empty() {
-      @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
-    } else {
-      raise Failure("Unparsed input following term")
-    }
-  }
-  let (preparse_ntrie_1, parse_ntrie_1) = (preparse_ntrie, parse_ntrie)
-  preparse_ntrie_c.set(preparse_ntrie_1)
-  parse_ntrie_c.set(parse_ntrie_1)
-}
-
-///|
-/// Ntrie/ntrie.ml:407
-fn step_30() -> Unit raise {
-  @parser.install_parser("ntrie", preparse_ntrie)
 }
 
 ///|
@@ -2748,10 +2614,6 @@ fn load_steps() -> Unit raise {
   step_24()
   step_25()
   step_26()
-  step_27()
-  step_28()
-  step_29()
-  step_30()
   step_31()
   step_32()
   step_33()
