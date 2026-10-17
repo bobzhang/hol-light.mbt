@@ -17,8 +17,8 @@ let prelude = {|
   let o f g x = f (g x)
   type pretype = Utv of string
   let parse_pretype (xs : lexcode list) = (Utv "", xs)
+  exception Noparse
   let a x xs = match xs with h :: t when h = x -> (h, t) | _ -> failwith "no parse"
-  let finished xs = if xs = [] then (0, xs) else failwith "unparsed"
 |};;
 let lower source =
   let ast = Parse.implementation (Lexing.from_string (prelude ^ "\nlet result = (" ^ source ^ ");;")) in
@@ -30,7 +30,7 @@ let lower source =
           let name = Ident.name id in
           if name = "result" then result := Some vb.Typedtree.vb_expr
           else Hashtbl.replace Prov.table (Ident.unique_name id)
-            ((if List.mem name ["lex"; "parse_pretype"; "a"; "finished"] then "parser.ml" else "lib.ml"), name))
+            ((if List.mem name ["lex"; "parse_pretype"; "a"] then "parser.ml" else "lib.ml"), name))
           (Typedtree.pat_bound_idents vb.Typedtree.vb_pat)
     | _ -> ()) items;
   let ss, e, _ = Lower.lower (Option.get !result) in
@@ -81,9 +81,16 @@ ignore (check "parse_pretype (lex (explode \"A\"))"
 ignore (check "(fun p -> p (lex (explode \"A\"))) parse_pretype"
   ["@list.List::to_array"; "@list.List("] []);
 ignore (check "a \"x\" [\"x\"; \"y\"]"
-  ["Array::exact_view"; "@list.List::to_array"] []);
-ignore (check "finished ([] : string list)"
-  ["Array::exact_view"; "@list.List::to_array"] []);
+  ["@parserutil.a"; "Array::exact_view"; "@list.List::to_array"] ["@parser.a"]);
+ignore (check "try raise Noparse with Noparse -> ()"
+  ["raise @parserutil.Noparse"; "@parserutil.Noparse =>"] ["@parser.Noparse"]);
+List.iter (fun (source, target) ->
+  match Names.resolve "parser.ml" source with
+  | Some ("parserutil", name, _) when name = target -> ()
+  | _ -> failwith ("parserutil mapping missing for " ^ source))
+  ["many", "many"; "|||", "alt"; "++", "seq"; ">>", "map";
+   "fix", "fix"; "listof", "listof"; "elistof", "elistof";
+   "nothing", "nothing"; "possibly", "possibly"; "atleast", "atleast"];
 ignore (check "match snd (parse_pretype (lex (explode \"A\"))) with [] -> true | _ -> false"
   ["@list.List("] []);
 print_endline "Lexer translator regression tests passed.";;

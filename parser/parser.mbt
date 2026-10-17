@@ -5,6 +5,20 @@
 // ===========================================================================
 
 ///|
+using @parserutil {
+  alt,
+  seq,
+  many,
+  map,
+  fix,
+  listof,
+  nothing,
+  elistof,
+  possibly,
+  a,
+}
+
+///|
 using @kernel {type Term, type HolType}
 
 ///|
@@ -102,7 +116,7 @@ fn type_atom(input : Toks) -> (Pretype, Toks) raise {
       }
       (pty, rest)
     }
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -117,10 +131,10 @@ fn type_constructor(input : Toks) -> (String, Toks) raise {
       if ok {
         (s, rest)
       } else {
-        raise Noparse
+        raise @parserutil.Noparse
       }
     }
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -210,13 +224,13 @@ pub fn delete_parser(key : String) -> Unit raise {
 fn try_user_parser(i : Toks) -> (Preterm, Toks) raise {
   for p in parser_list.val {
     try (p.1)(i) catch {
-      Noparse => continue
+      @parserutil.Noparse => continue
       e => raise e
     } noraise {
       r => return r
     }
   }
-  raise Noparse
+  raise @parserutil.Noparse
 }
 
 // ---------------------------------------------------------------------------
@@ -460,7 +474,7 @@ fn is_quoted(s : String) -> Bool {
 fn string_tok(inp : Toks) -> (String, Toks) raise {
   match inp {
     [Ident(s), .. rst] if is_quoted(s) => (s[1:s.length() - 1].to_owned(), rst)
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -496,7 +510,7 @@ fn lmk_decimal(p : ((Lexcode, String), List[String])) -> Preterm raise {
 fn any_identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
     [Ident(s), .. rest] if s != "!" => (s, rest)
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -507,11 +521,11 @@ fn identifier(inp : Toks) -> (String, Toks) raise {
       if @lib.can(@printer.get_infix_status, s) ||
         @printer.is_prefix(s) ||
         @printer.parses_as_binder(s) {
-        raise Noparse
+        raise @parserutil.Noparse
       } else {
         (s, rest)
       }
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -519,7 +533,7 @@ fn identifier(inp : Toks) -> (String, Toks) raise {
 fn binder(inp : Toks) -> (String, Toks) raise {
   match inp {
     [Ident(s), .. rest] if @printer.parses_as_binder(s) => (s, rest)
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -527,7 +541,7 @@ fn binder(inp : Toks) -> (String, Toks) raise {
 fn pre_fix(inp : Toks) -> (String, Toks) raise {
   match inp {
     [Ident(s), .. rest] if @printer.is_prefix(s) => (s, rest)
-    _ => raise Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -754,13 +768,13 @@ fn atomic_preterm(i : Toks) -> (Preterm, Toks) raise {
   // in order is equivalent.
   for p in alts {
     try p(i) catch {
-      Noparse => continue
+      @parserutil.Noparse => continue
       e => raise e
     } noraise {
       r => return r
     }
   }
-  raise Noparse
+  raise @parserutil.Noparse
 }
 
 ///|

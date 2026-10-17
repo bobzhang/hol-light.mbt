@@ -6149,7 +6149,7 @@ fn step_34() -> Unit raise {
       [@lexer.Lexcode::Ident(cn), ..sps] => (cn, sps)
       _ => @lib.failure()
     }
-    let (tys, rst_1) = @parser.many(parse_type_loc)(sps_1)
+    let (tys, rst_1) = @parserutil.many(parse_type_loc)(sps_1)
     ((cn_1, tys), rst_1)
   }
   let parse_type_clause : (ArrayView[@lexer.Lexcode]) -> (
@@ -6166,13 +6166,13 @@ fn step_34() -> Unit raise {
       [@lexer.Lexcode::Ident(tn), ..sps_2] => (tn, sps_2)
       _ => @lib.failure()
     }
-    let t731 = @parser.listof(
+    let t731 = @parserutil.listof(
       parse_type_conapp,
-      @parser.a(@lexer.Lexcode::Resword("|")),
+      @parserutil.a(@lexer.Lexcode::Resword("|")),
       "type definition clauses",
     )
-    let (tys_1, rst_2) = @parser.map(
-      @parser.seq(@parser.a(@lexer.Lexcode::Ident("=")), t731),
+    let (tys_1, rst_2) = @parserutil.map(
+      @parserutil.seq(@parserutil.a(@lexer.Lexcode::Ident("=")), t731),
       fn(
         x732 : (
           @lexer.Lexcode,
@@ -6189,9 +6189,9 @@ fn step_34() -> Unit raise {
       (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
     ],
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.listof(
+  ) raise = @parserutil.listof(
     parse_type_clause,
-    @parser.a(@lexer.Lexcode::Resword(";")),
+    @parserutil.a(@lexer.Lexcode::Resword(";")),
     "type definition",
   )
   parse_inductive_type_specification_c.set(fn(

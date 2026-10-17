@@ -944,16 +944,16 @@ fn step_19() -> Unit raise {
           e_2,
         )
       }
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   }
   let bitpat_1 : (ArrayView[@lexer.Lexcode]) -> (
     @preterm.Preterm,
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.map(@parser.parse_preterm, (x80 : @preterm.Preterm) => {
+  ) raise = @parserutil.map(@parser.parse_preterm, (x80 : @preterm.Preterm) => {
     to_bitpat(nilpat_ptm, x80)
   })
-  let t83 = @parser.map(bitpat_1, fn(
+  let t83 = @parserutil.map(bitpat_1, fn(
     x82 : @preterm.Preterm,
   ) -> @preterm.Preterm? raise {
     let x_1 = x82
@@ -962,8 +962,8 @@ fn step_19() -> Unit raise {
   let pattern : (ArrayView[@lexer.Lexcode]) -> (
     @preterm.Preterm?,
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.alt(
-    @parser.map(@parser.a(@lexer.Lexcode::Ident("_")), fn(
+  ) raise = @parserutil.alt(
+    @parserutil.map(@parserutil.a(@lexer.Lexcode::Ident("_")), fn(
       x81 : @lexer.Lexcode,
     ) -> @preterm.Preterm? raise {
       None
@@ -973,11 +973,11 @@ fn step_19() -> Unit raise {
   let clause : (ArrayView[@lexer.Lexcode]) -> (
     (@preterm.Preterm?, @preterm.Preterm),
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.seq(
+  ) raise = @parserutil.seq(
     pattern,
-    @parser.map(
-      @parser.seq(
-        @parser.a(@lexer.Lexcode::Resword("->")),
+    @parserutil.map(
+      @parserutil.seq(
+        @parserutil.a(@lexer.Lexcode::Resword("->")),
         @parser.parse_preterm,
       ),
       fn(x84 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
@@ -985,16 +985,16 @@ fn step_19() -> Unit raise {
       },
     ),
   )
-  let t85 = @parser.listof(
+  let t85 = @parserutil.listof(
     clause,
-    @parser.a(@lexer.Lexcode::Resword("|")),
+    @parserutil.a(@lexer.Lexcode::Resword("|")),
     "pattern-match clause",
   )
   let clauses : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[(@preterm.Preterm?, @preterm.Preterm)],
     ArrayView[@lexer.Lexcode],
-  ) raise = @parser.map(
-    @parser.seq(@parser.possibly(@parser.a(@lexer.Lexcode::Resword("|"))), t85),
+  ) raise = @parserutil.map(
+    @parserutil.seq(@parserutil.possibly(@parserutil.a(@lexer.Lexcode::Resword("|"))), t85),
     fn(
       x86 : (
         @list.List[@lexer.Lexcode],
@@ -1004,12 +1004,12 @@ fn step_19() -> Unit raise {
       x86.1
     },
   )
-  let t88 = @parser.a(@lexer.Lexcode::Resword("with"))
-  let t90 = @parser.map(
-    @parser.seq(
-      @parser.seq(
-        @parser.seq(
-          @parser.a(@lexer.Lexcode::Resword("bitmatch")),
+  let t88 = @parserutil.a(@lexer.Lexcode::Resword("with"))
+  let t90 = @parserutil.map(
+    @parserutil.seq(
+      @parserutil.seq(
+        @parserutil.seq(
+          @parserutil.a(@lexer.Lexcode::Resword("bitmatch")),
           @parser.parse_preterm,
         ),
         t88,
@@ -1031,8 +1031,8 @@ fn step_19() -> Unit raise {
     },
   )
   let (preparse_bitpat, preparse_bitmatch) = (
-    @parser.map(
-      @parser.seq(@parser.a(@lexer.Lexcode::Resword("BITPAT")), bitpat_1),
+    @parserutil.map(
+      @parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("BITPAT")), bitpat_1),
       fn(x87 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
         x87.1
       },

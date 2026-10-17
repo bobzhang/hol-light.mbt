@@ -175,13 +175,13 @@ pub fn thmlist_term_thm_ref() -> Ref[(@list.List[@kernel.Thm]) -> ((@kernel.Term
 pub fn exec_thm(x10 : String) -> @kernel.Thm raise {
   let s = x10
   if @lib.str_string_match(@lib.str_regexp("[^;]*;"), s, 0L) {
-    raise @parser.Noparse
+    raise @parserutil.Noparse
   } else {
     try {
       exec(("thm_ref := ((" + (s + "): thm);;")))
       thm_ref().val
     } catch {
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   }
 }
@@ -194,7 +194,7 @@ pub fn exec_tactic(x11 : String) -> @tactics.Tactic raise {
     exec(("tactic_ref := ((" + (s + "): tactic);;")))
     tactic_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -206,7 +206,7 @@ pub fn exec_thmlist_tactic(x13 : String) -> ((@list.List[@kernel.Thm]) -> @tacti
     exec(("thmlist_tactic_ref := ((" + (s + "): thm list -> tactic);;")))
     thmlist_tactic_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -218,7 +218,7 @@ pub fn exec_thmtactic(x15 : String) -> @tactics.ThmTactic raise {
     exec(("thmtactic_ref := ((" + (s + "): thm -> tactic);;")))
     thmtactic_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -230,7 +230,7 @@ pub fn exec_termlist_thm_thm(x17 : String) -> ((@list.List[@kernel.Term]) -> ((@
     exec(("termlist_thm_thm_ref := ((" + (s + "): (term list -> thm -> thm));;")))
     termlist_thm_thm_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -242,7 +242,7 @@ pub fn exec_thm_thm(x19 : String) -> ((@kernel.Thm) -> @kernel.Thm raise) raise 
     exec(("thm_thm_ref := ((" + (s + "): (thm -> thm));;")))
     thm_thm_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -254,7 +254,7 @@ pub fn exec_term_thm(x21 : String) -> ((@kernel.Term) -> @kernel.Thm raise) rais
     exec(("term_thm_ref := ((" + (s + "): (term -> thm));;")))
     term_thm_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -266,7 +266,7 @@ pub fn exec_thmlist_term_thm(x23 : String) -> ((@list.List[@kernel.Thm]) -> ((@k
     exec(("thmlist_term_thm_ref := ((" + (s + "): (thm list ->term -> thm));;")))
     thmlist_term_thm_ref().val
   } catch {
-    _ => raise @parser.Noparse
+    _ => raise @parserutil.Noparse
   }
 }
 
@@ -908,15 +908,15 @@ pub fn theoremify(x152 : String, x153 : (@list.List[(String, @kernel.Thm)], @ker
                   try {
                     combtermthm_term(word, rest, gl)
                   } catch {
-                    @parser.Noparse => {
+                    @parserutil.Noparse => {
                       try {
                         combthmlisttermthm_thmlist_term(word, rest, gl)
                       } catch {
-                        @parser.Noparse => {
+                        @parserutil.Noparse => {
                           try {
                             combtermlistthmthm_termlist(word, rest, gl)
                           } catch {
-                            @parser.Noparse => raise Readable_fail::Readable_fail(("Not a theorem:\n" + string))
+                            @parserutil.Noparse => raise Readable_fail::Readable_fail(("Not a theorem:\n" + string))
                             e => raise e
                           }
                         }

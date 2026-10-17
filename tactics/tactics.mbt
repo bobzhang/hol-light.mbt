@@ -643,11 +643,11 @@ pub fn hyp_tac(
   let ident : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise = inp => {
     match inp {
       [Ident(s), ..rest] if @printer.isalnum(s) => (s, rest)
-      _ => raise @parser.Noparse
+      _ => raise @parserutil.Noparse
     }
   }
-  let parse_using = @parser.many(ident)
-  let (l, rest) = @parser.fix("Using pattern", parse_using)(@lexer.lex(s))
+  let parse_using = @parserutil.many(ident)
+  let (l, rest) = @parserutil.fix("Using pattern", parse_using)(@lexer.lex(s))
   if !rest.is_empty() {
     raise Failure("Invalid using pattern")
   }

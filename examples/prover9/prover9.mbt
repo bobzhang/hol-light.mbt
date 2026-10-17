@@ -398,11 +398,11 @@ pub impl @lib.OHash for Sexp with fn ohash_visit(self, h) {
 pub fn atom(x36 : ArrayView[@lexer.Lexcode]) -> ((Sexp, ArrayView[@lexer.Lexcode])) raise {
   let inp = x36
   match inp {
-    [@lexer.Lexcode::Resword("("), ..rst] => raise @parser.Noparse
-    [@lexer.Lexcode::Resword(")"), ..rst_1] => raise @parser.Noparse
+    [@lexer.Lexcode::Resword("("), ..rst] => raise @parserutil.Noparse
+    [@lexer.Lexcode::Resword(")"), ..rst_1] => raise @parserutil.Noparse
     [@lexer.Lexcode::Resword(s), ..rst_2] => (Sexp::Atom(s), rst_2)
     [@lexer.Lexcode::Ident(s_1), ..rst_3] => (Sexp::Atom(s_1), rst_3)
-    [] => raise @parser.Noparse
+    [] => raise @parserutil.Noparse
   }
 }
 
@@ -410,9 +410,9 @@ pub fn atom(x36 : ArrayView[@lexer.Lexcode]) -> ((Sexp, ArrayView[@lexer.Lexcode
 /// `sexpression`
 pub fn sexpression(x37 : ArrayView[@lexer.Lexcode]) -> ((Sexp, ArrayView[@lexer.Lexcode])) raise {
   let inp = x37
-  let t39 = @parser.a(@lexer.Lexcode::Resword(")"))
-  let t38 = @parser.many(sexpression)
-  @parser.alt(atom, @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("(")), t38), t39), fn(x40 : ((@lexer.Lexcode, @list.List[Sexp]), @lexer.Lexcode)) -> Sexp raise {
+  let t39 = @parserutil.a(@lexer.Lexcode::Resword(")"))
+  let t38 = @parserutil.many(sexpression)
+  @parserutil.alt(atom, @parserutil.map(@parserutil.seq(@parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("(")), t38), t39), fn(x40 : ((@lexer.Lexcode, @list.List[Sexp]), @lexer.Lexcode)) -> Sexp raise {
     let ((_, l), _) = x40
     Sexp::List(l)
   }))(inp)

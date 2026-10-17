@@ -5,41 +5,17 @@ import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/preterm",
-  "moonbitlang/core/debug",
-  "moonbitlang/core/list",
   "moonbitlang/core/ref",
 }
 
 // Values
-pub fn[I : Eq] a(I) -> (ArrayView[I]) -> (I, ArrayView[I]) raise
-
-pub fn[I : Eq] a_list(I) -> (@list.List[I]) -> (I, @list.List[I]) raise
-
-pub fn[X, R] alt((X) -> R raise, (X) -> R raise) -> (X) -> R raise
-
-pub fn[X, A] atleast(Int, (X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
-
 pub fn begin_theory(String) -> Unit
 
 pub fn delete_parser(String) -> Unit raise
 
-pub fn[X, A, S] elistof((X) -> (A, X) raise, (X) -> (S, X) raise, String) -> (X) -> (@list.List[A], X) raise
-
 pub fn end_theory() -> Unit
 
-pub fn[I] finished_list(@list.List[I]) -> (Int, @list.List[I]) raise
-
-pub fn[X, R] fix(String, (X) -> R raise) -> (X) -> R raise
-
 pub fn install_parser(String, (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) -> Unit
-
-pub fn[X, A, S] listof((X) -> (A, X) raise, (X) -> (S, X) raise, String) -> (X) -> (@list.List[A], X) raise
-
-pub fn[X, A] many((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
-
-pub fn[X, A, B, Y] map((X) -> (A, Y) raise, (A) -> B raise?) -> (X) -> (B, Y) raise
-
-pub fn[X, A] nothing(X) -> (@list.List[A], X)
 
 pub fn parse_preterm(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
@@ -49,21 +25,13 @@ pub fn parse_term(String) -> @kernel.Term raise
 
 pub fn parse_type(String) -> @kernel.HolType raise
 
-pub fn[X, A] possibly((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
-
 pub let quotation_trace : @ref.Ref[Array[String]?]
-
-pub fn[X, A, Y, B, Z] seq((X) -> (A, Y) raise, (Y) -> (B, Z) raise) -> (X) -> ((A, B), Z) raise
-
-pub fn[I] some_list((I) -> Bool raise?) -> (@list.List[I]) -> (I, @list.List[I]) raise
 
 pub fn theory_output(String) -> Array[String]
 
 pub fn theory_trace(String) -> Array[String]
 
 // Errors
-pub(all) suberror Noparse derive(@debug.Debug)
-pub fn Noparse::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 

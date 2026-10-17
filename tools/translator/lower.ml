@@ -2552,7 +2552,7 @@ module Lower = struct
     | "Some", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Some", [ x ]), mty_of e.exp_type)
     | "Failure", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "Failure", [ x ]), mty_of e.exp_type)
     | "Invalid_argument", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "@num.InvalidArgument", [ x ]), mty_of e.exp_type)
-    | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
+    | "Noparse", [] -> ([], Atom "@parserutil.Noparse", mty_of e.exp_type)
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] when predef_exn cd -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
     | "End_of_file", [] when predef_exn cd -> ([], Atom "@lib.EndOfFile", mty_of e.exp_type)
@@ -3152,7 +3152,7 @@ module Lower = struct
           (match cd.Types.cstr_name, args with
            | "Failure", [ a ] when predef_exn cd -> "Failure(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
            | "Invalid_argument", [ a ] when predef_exn cd -> "@num.InvalidArgument(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
-           | "Noparse", [] -> "@parser.Noparse"
+           | "Noparse", [] -> "@parserutil.Noparse"
            | "Unchanged", [] -> "@lib.Unchanged"
            | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
            | "End_of_file", [] when predef_exn cd -> "@lib.EndOfFile"

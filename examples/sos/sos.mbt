@@ -1373,12 +1373,12 @@ pub fn word(x330 : String) -> ((@list.List[String]) -> (String, @list.List[Strin
   @lib.end_itlist(fn(x332 : (@list.List[String]) -> (String, @list.List[String]) raise, x333 : (@list.List[String]) -> (String, @list.List[String]) raise) -> ((@list.List[String]) -> (String, @list.List[String]) raise) raise {
     let p1 = x332
     let p2 = x333
-    @parser.map(@parser.seq(p1, p2), fn(x335 : (String, String)) -> String raise {
+    @parserutil.map(@parserutil.seq(p1, p2), fn(x335 : (String, String)) -> String raise {
       let (s_1, t) = x335
       (s_1 + t)
     })
   }, @lib.map(fn(x336 : String) -> ((@list.List[String]) -> (String, @list.List[String]) raise) raise {
-    let s337 = @parser.a_list(x336)
+    let s337 = @parserutil.a_list(x336)
     fn(x338 : @list.List[String]) -> (String, @list.List[String]) raise {
       s337(x338)
     }
@@ -1389,11 +1389,11 @@ pub fn word(x330 : String) -> ((@list.List[String]) -> (String, @list.List[Strin
 /// `token`
 pub fn token(x339 : String) -> ((@list.List[String]) -> (String, @list.List[String]) raise) raise {
   let s = x339
-  let t344 = @parser.many(@parser.some_list(fn(x343 : String) -> Bool raise {
+  let t344 = @parserutil.many(@parserutil.some_list(fn(x343 : String) -> Bool raise {
     @printer.isspace(x343)
   }))
   let t342 = word(s)
-  @parser.map(@parser.seq(@parser.seq(@parser.many(@parser.some_list(fn(x341 : String) -> Bool raise {
+  @parserutil.map(@parserutil.seq(@parserutil.seq(@parserutil.many(@parserutil.some_list(fn(x341 : String) -> Bool raise {
     @printer.isspace(x341)
   })), t342), t344), fn(x345 : ((@list.List[String], String), @list.List[String])) -> String raise {
     let ((_, t), _) = x345
@@ -1404,20 +1404,20 @@ pub fn token(x339 : String) -> ((@list.List[String]) -> (String, @list.List[Stri
 ///|
 /// decimal
 fn step_10() -> Unit raise {
-  let numeral : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.some_list(fn(x346 : String) -> Bool raise {
+  let numeral : (@list.List[String]) -> (String, @list.List[String]) raise = @parserutil.some_list(fn(x346 : String) -> Bool raise {
     @printer.isnum(x346)
   })
-  let decimalint : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parser.map(@parser.atleast(1, numeral), fn(x348 : @list.List[String]) -> @num.Num raise {
+  let decimalint : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parserutil.map(@parserutil.atleast(1, numeral), fn(x348 : @list.List[String]) -> @num.Num raise {
     @num.nums_num_of_string((fn(x347 : @list.List[String]) -> String raise {
       @lib.implode(x347)
     })(x348))
   })
-  let decimalfrac : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parser.map(@parser.atleast(1, numeral), fn(x349 : @list.List[String]) -> @num.Num raise {
+  let decimalfrac : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parserutil.map(@parserutil.atleast(1, numeral), fn(x349 : @list.List[String]) -> @num.Num raise {
     let s = x349
     let t350 = @num.pow10(@lib.length(s))
     @num.div_num(@num.nums_num_of_string(@lib.implode(s)), t350)
   })
-  let decimalsig : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parser.map(@parser.seq(decimalint, @parser.possibly(@parser.map(@parser.seq(@parser.a_list("."), decimalfrac), fn(x351 : (String, @num.Num)) -> @num.Num raise {
+  let decimalsig : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parserutil.map(@parserutil.seq(decimalint, @parserutil.possibly(@parserutil.map(@parserutil.seq(@parserutil.a_list("."), decimalfrac), fn(x351 : (String, @num.Num)) -> @num.Num raise {
     x351.1
   }))), fn(x352 : (@num.Num, @list.List[@num.Num])) -> @num.Num raise {
     match x352 {
@@ -1427,12 +1427,12 @@ fn step_10() -> Unit raise {
     }
   })
   let t361 = signed_l(decimalint)
-  let t360 = @parser.a_list("E")
-  let exponent : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parser.map(@parser.seq(@parser.alt(@parser.a_list("e"), t360), t361), fn(x362 : (String, @num.Num)) -> @num.Num raise {
+  let t360 = @parserutil.a_list("E")
+  let exponent : (@list.List[String]) -> (@num.Num, @list.List[String]) raise = @parserutil.map(@parserutil.seq(@parserutil.alt(@parserutil.a_list("e"), t360), t361), fn(x362 : (String, @num.Num)) -> @num.Num raise {
     x362.1
   })
-  let t363 = @parser.possibly(exponent)
-  decimal_c.set(@parser.map(@parser.seq(signed_l(decimalsig), t363), fn(x364 : (@num.Num, @list.List[@num.Num])) -> @num.Num raise {
+  let t363 = @parserutil.possibly(exponent)
+  decimal_c.set(@parserutil.map(@parserutil.seq(signed_l(decimalsig), t363), fn(x364 : (@num.Num, @list.List[@num.Num])) -> @num.Num raise {
     match x364 {
       (h_2, Empty) => h_2
       (h_3, More(x_1, tail=Empty)) => @num.mult_num(h_3, @num.power_num(@num.num_of_int64(10L), x_1))
@@ -1453,10 +1453,10 @@ pub fn decimal(x : @list.List[String]) -> ((@num.Num, @list.List[String])) raise
 ///|
 fn[TA] signed_l(x353 : (@list.List[String]) -> (@num.Num, TA) raise) -> ((@list.List[String]) -> (@num.Num, TA) raise) raise {
   let prs = x353
-  let t359 = @parser.map(@parser.seq(@parser.a_list("+"), prs), fn(x358 : (String, @num.Num)) -> @num.Num raise {
+  let t359 = @parserutil.map(@parserutil.seq(@parserutil.a_list("+"), prs), fn(x358 : (String, @num.Num)) -> @num.Num raise {
     x358.1
   })
-  @parser.alt(@parser.alt(@parser.map(@parser.seq(@parser.a_list("-"), prs), fn(x357 : (String, @num.Num)) -> @num.Num raise {
+  @parserutil.alt(@parserutil.alt(@parserutil.map(@parserutil.seq(@parserutil.a_list("-"), prs), fn(x357 : (String, @num.Num)) -> @num.Num raise {
     (fn(x355 : @num.Num) -> @num.Num raise {
       @num.minus_num(x355)
     })((fn(x356 : (String, @num.Num)) -> @num.Num raise {
@@ -1515,21 +1515,21 @@ pub fn parse_csdpoutput(x : String) -> Vector raise {
 /// parse_sdpaoutput, parse_csdpoutput
 fn step_12() -> Unit raise {
   let t369 = token("}")
-  let t368 = @parser.listof(decimal, token(","), "decimal")
-  let vector : (@list.List[String]) -> ((Int64, @lib.Func[Int64, @num.Num]), @list.List[String]) raise = @parser.map(@parser.seq(@parser.seq(token("{"), t368), t369), fn(x370 : ((String, @list.List[@num.Num]), String)) -> (Int64, @lib.Func[Int64, @num.Num]) raise {
+  let t368 = @parserutil.listof(decimal, token(","), "decimal")
+  let vector : (@list.List[String]) -> ((Int64, @lib.Func[Int64, @num.Num]), @list.List[String]) raise = @parserutil.map(@parserutil.seq(@parserutil.seq(token("{"), t368), t369), fn(x370 : ((String, @list.List[@num.Num]), String)) -> (Int64, @lib.Func[Int64, @num.Num]) raise {
     let ((_, v), _) = x370
     vec_of_list(v)
   })
   let parse_vector : (String) -> (Int64, @lib.Func[Int64, @num.Num]) raise = (x371 : String) => mkparser(vector, x371)
-  let t383 = @parser.map(@parser.seq(vector, ignore__l), fn(x382 : ((Int64, @lib.Func[Int64, @num.Num]), Unit)) -> (Int64, @lib.Func[Int64, @num.Num]) raise {
+  let t383 = @parserutil.map(@parserutil.seq(vector, ignore__l), fn(x382 : ((Int64, @lib.Func[Int64, @num.Num]), Unit)) -> (Int64, @lib.Func[Int64, @num.Num]) raise {
     x382.0
   })
   let t381 = token("=")
-  let t384 = @parser.seq(word("xVec"), t381)
+  let t384 = @parserutil.seq(word("xVec"), t381)
   let sdpaoutput : (@list.List[String]) -> ((Int64, @lib.Func[Int64, @num.Num]), @list.List[_]) raise = (x385 : @list.List[String]) => skipupto_l(t384, t383, x385)
-  let t388 = @parser.a_list("\n")
-  let t389 = @parser.seq(@parser.seq(@parser.a_list(" "), t388), ignore__l)
-  let csdpoutput : (@list.List[String]) -> ((Int64, @lib.Func[Int64, @num.Num]), @list.List[_]) raise = @parser.map(@parser.seq(@parser.map(@parser.seq(decimal, @parser.many(@parser.map(@parser.seq(@parser.a_list(" "), decimal), fn(x386 : (String, @num.Num)) -> @num.Num raise {
+  let t388 = @parserutil.a_list("\n")
+  let t389 = @parserutil.seq(@parserutil.seq(@parserutil.a_list(" "), t388), ignore__l)
+  let csdpoutput : (@list.List[String]) -> ((Int64, @lib.Func[Int64, @num.Num]), @list.List[_]) raise = @parserutil.map(@parserutil.seq(@parserutil.map(@parserutil.seq(decimal, @parserutil.many(@parserutil.map(@parserutil.seq(@parserutil.a_list(" "), decimal), fn(x386 : (String, @num.Num)) -> @num.Num raise {
     x386.1
   }))), fn(x387 : (@num.Num, @list.List[@num.Num])) -> @list.List[@num.Num] raise {
     let (h, t) = x387
@@ -1549,13 +1549,13 @@ fn[TA, TB, TC, TD, TE] skipupto_l(x372 : (@list.List[TE]) -> (TC, TD) raise, x37
   let dscr = x372
   let prs = x373
   let inp = x374
-  let t379 = @parser.map(@parser.seq(@parser.some_list(fn(x376 : TE) -> Bool raise {
+  let t379 = @parserutil.map(@parserutil.seq(@parserutil.some_list(fn(x376 : TE) -> Bool raise {
     let c = x376
     true
   }), (x377 : @list.List[TE]) => skipupto_l(dscr, prs, x377)), fn(x378 : (TE, TA)) -> TA raise {
     x378.1
   })
-  @parser.alt(@parser.map(@parser.seq(dscr, prs), fn(x375 : (TC, TA)) -> TA raise {
+  @parserutil.alt(@parserutil.map(@parserutil.seq(dscr, prs), fn(x375 : (TC, TA)) -> TA raise {
     x375.1
   }), t379)(inp)
 }
@@ -1570,11 +1570,11 @@ fn[TF, TG] ignore__l(x380 : TG) -> ((Unit, @list.List[TF])) raise {
 /// sdpa_run_succeeded
 fn step_13() -> Unit raise {
   let t404 = word("FEAS")
-  let t405 = @parser.alt(word("OPT"), t404)
-  let t403 = @parser.possibly(@parser.a_list("d"))
-  let t406 = @parser.seq(@parser.seq(@parser.possibly(@parser.a_list("p")), t403), t405)
+  let t405 = @parserutil.alt(word("OPT"), t404)
+  let t403 = @parserutil.possibly(@parserutil.a_list("d"))
+  let t406 = @parserutil.seq(@parserutil.seq(@parserutil.possibly(@parserutil.a_list("p")), t403), t405)
   let t402 = token("=")
-  let t407 = @parser.seq(word("phase.value"), t402)
+  let t407 = @parserutil.seq(word("phase.value"), t402)
   let prs_1 : (@list.List[String]) -> (((@list.List[String], @list.List[String]), String), @list.List[String]) raise = (x408 : @list.List[String]) => skipupto_l_1(t407, t406, x408)
   sdpa_run_succeeded_c.set(fn(x409 : String) -> Bool raise {
     let s = x409
@@ -1582,7 +1582,7 @@ fn step_13() -> Unit raise {
       ignore(prs_1(@lib.explode(s)))
       true
     } catch {
-      @parser.Noparse => false
+      @parserutil.Noparse => false
       e => raise e
     }
   })
@@ -1602,13 +1602,13 @@ fn[TA, TB, TC, TD, TE] skipupto_l_1(x394 : (@list.List[TE]) -> (TC, TD) raise, x
   let dscr = x394
   let prs = x395
   let inp = x396
-  let t401 = @parser.map(@parser.seq(@parser.some_list(fn(x398 : TE) -> Bool raise {
+  let t401 = @parserutil.map(@parserutil.seq(@parserutil.some_list(fn(x398 : TE) -> Bool raise {
     let c = x398
     true
   }), (x399 : @list.List[TE]) => skipupto_l_1(dscr, prs, x399)), fn(x400 : (TE, TA)) -> TA raise {
     x400.1
   })
-  @parser.alt(@parser.map(@parser.seq(dscr, prs), fn(x397 : (TC, TA)) -> TA raise {
+  @parserutil.alt(@parserutil.map(@parserutil.seq(dscr, prs), fn(x397 : (TC, TA)) -> TA raise {
     x397.1
   }), t401)(inp)
 }
