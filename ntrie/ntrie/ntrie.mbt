@@ -727,12 +727,6 @@ fn step_27() -> Unit raise {
 }
 
 ///|
-/// Ntrie/ntrie.ml:361
-fn step_28() -> Unit raise {
-  @printer.reserve_words(@list.List(["%%"]))
-}
-
-///|
 let preparse_ntrie_c : @lib.Cell[(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise] = @lib.Cell::new("preparse_ntrie")
 
 ///|
@@ -745,7 +739,7 @@ pub fn preparse_ntrie(x : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, Arra
 let parse_ntrie_c : @lib.Cell[(String) -> @kernel.Term raise] = @lib.Cell::new("parse_ntrie")
 
 ///|
-/// `parse_ntrie`
+/// Parse `%%(n ...)` explicitly, without installing syntax in the HOL parser.
 pub fn parse_ntrie(x : String) -> @kernel.Term raise {
   (parse_ntrie_c.get())(x)
 }
@@ -828,7 +822,7 @@ fn step_29() -> Unit raise {
   let parse_ints : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.many(parse_int), pmk_ntrie)
   let t107 = @parserutil.a(@lexer.Lexcode::Resword(")"))
   let t105 = @parserutil.a(@lexer.Lexcode::Resword("("))
-  let preparse_ntrie : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.seq(@parserutil.map(@parserutil.seq(@parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("%%")), t105), parse_ints), fn(x106 : ((@lexer.Lexcode, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
+  let preparse_ntrie : (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise = @parserutil.map(@parserutil.seq(@parserutil.map(@parserutil.seq(@parserutil.seq(@parserutil.alt(@parserutil.a(@lexer.Lexcode::Ident("%%")), @parserutil.a(@lexer.Lexcode::Resword("%%"))), t105), parse_ints), fn(x106 : ((@lexer.Lexcode, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
     x106.1
   }), t107), fn(x108 : (@preterm.Preterm, @lexer.Lexcode)) -> @preterm.Preterm raise {
     x108.0
@@ -847,12 +841,6 @@ fn step_29() -> Unit raise {
   let (preparse_ntrie_1, parse_ntrie_1) = (preparse_ntrie, parse_ntrie)
   preparse_ntrie_c.set(preparse_ntrie_1)
   parse_ntrie_c.set(parse_ntrie_1)
-}
-
-///|
-/// Ntrie/ntrie.ml:407
-fn step_30() -> Unit raise {
-  @parser.install_parser("ntrie", preparse_ntrie)
 }
 
 ///|
@@ -2749,9 +2737,7 @@ fn load_steps() -> Unit raise {
   step_25()
   step_26()
   step_27()
-  step_28()
   step_29()
-  step_30()
   step_31()
   step_32()
   step_33()
