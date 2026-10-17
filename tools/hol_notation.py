@@ -163,6 +163,11 @@ def rewrite_moonbit(source):
             '    More("∀", tail=rest) => ("∀", rest)\n'
             '    _ => (rawtoken_c.get())(' + m[2] + ')\n  }\n}',
         migrated)
+    # Checking a two-byte prefix by slicing can split a Unicode token.
+    migrated = re.sub(
+        r'\(\(Int::to_int64\(@lib.string_length\((\w+)\)\) >= 2L\) && '
+        r'\(@lib.string_sub\(\1, 0, 2\) == "::"\)\)',
+        lambda m: m[1] + '.has_prefix("::")', migrated)
     # Rqe/util's suppressed constants are names, not proof labels or messages.
     migrated = re.sub(r'(suppress\(\)\.val = @list.List\(\[)([^\]]*)(\]\))',
                   lambda m: m[1] + m[2].replace('"!"', '"∀"') + m[3], migrated)

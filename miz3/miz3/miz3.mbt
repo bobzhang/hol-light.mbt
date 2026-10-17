@@ -557,7 +557,7 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
           (t_2 + x_1)
         })(rst_2)
       } else {
-        if ((Int::to_int64(@lib.string_length(t_2)) >= 2L) && (@lib.string_sub(t_2, 0, 2) == "::")) {
+        if t_2.has_prefix("::") {
           @parser.map(rest_of_line, fn(x55 : String) -> String raise {
             let x_2 = x55
             if e {

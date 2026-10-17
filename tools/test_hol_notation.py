@@ -74,6 +74,10 @@ let bytes = "!x. unclassified string data"
         variable = source.replace('Term::Const', 'Term::Var')
         self.assertEqual(rewrite_moonbit(variable), variable)
 
+    def test_miz3_comment_prefix_does_not_slice_unicode(self):
+        source = 'if ((Int::to_int64(@lib.string_length(token)) >= 2L) && (@lib.string_sub(token, 0, 2) == "::")) {'
+        self.assertEqual(rewrite_moonbit(source), 'if token.has_prefix("::") {')
+
     def test_embedded_exec_key(self):
         source = r'''@lib.register_phrase("parse_term \"!x. P x\"", fn() { () })'''
         self.assertEqual(rewrite_moonbit(source), source.replace('!x.', '∀ x.'))
