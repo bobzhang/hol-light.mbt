@@ -94,8 +94,6 @@ mk_nnode mk_nnode
 mk_ntrie mk_ntrie
 mk_numset mk_numset
 mk_small_ntrie mk_small_ntrie
-parse_ntrie parse_ntrie
 pp_print_ntrie pp_print_ntrie
-preparse_ntrie preparse_ntrie
 print_ntrie print_ntrie
 string_of_ntrie string_of_ntrie
