@@ -153,7 +153,7 @@ pub fn vec2_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// COLLINEAR_3_2Dzero
 fn step_3() -> Unit raise {
   let t40 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.collinear_3_2d()])), vec2_tac)
-  collinear_3_2dzero_c.set(@tactics.prove(@parser.parse_term("forall y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2"), t40))
+  collinear_3_2dzero_c.set(@tactics.prove(@parser.parse_term("∀ y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2"), t40))
 }
 
 ///|
@@ -213,13 +213,13 @@ fn step_6() -> Unit raise {
   let t49 = @list.List([so(@meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("~(r < n)  /\\  r <= MIN n n  ==>  r = n")), @determinants.det_eq_0_rank(), @vectors.rank_bound(), @vectors.matrix_full_linear_equations()])))])
   let t50 = consider("x such that", @parser.parse_term("(M:real^2^2) ** (x:real^2) = u"), t49, "xDef")
   let t47 = @list.List([@tactics.then_tac(@tactics.hyp_tac(@simp.simp_tac, "H1' Mexists")(@list.List([@vectors.matrix_vector_mul(), @cart.dimindex_2(), @vectors.sum_2(), @vectors.transp_component(), @vectors.vector_2(), @cart.lambda_beta(), @calc_num.arith(), @cart.cart_eq(), @vectors.forall_2(), @determinants.det_2()])), vec2_tac)])
-  let t48 = @tactics.subgoal_tac("MatMult", @parser.parse_term("~(det (M:real^2^2) = &0) /\\\n  (forall x. (M ** x)$1 = (v:real^2)$1 * x$1 + (w:real^2)$1 * x$2  /\\\n  (M ** x)$2 = v$2 * x$1 + w$2 * x$2)"), t47)
+  let t48 = @tactics.subgoal_tac("MatMult", @parser.parse_term("~(det (M:real^2^2) = &0) /\\\n  (∀ x. (M ** x)$1 = (v:real^2)$1 * x$1 + (w:real^2)$1 * x$2  /\\\n  (M ** x)$2 = v$2 * x$1 + w$2 * x$2)"), t47)
   let t45 = @list.List([@meson.meson_tac(@list.List([]))])
   let t46 = consider("M such that", @parser.parse_term("M = transp(vector[v:real^2;w:real^2]):real^2^2"), t45, "Mexists")
   let t43 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H1")(@list.List([collinear_3_2dzero(), @realarith.real_sub_0()]))])
   let t44 = @tactics.subgoal_tac("H1'", @parser.parse_term("~(v$1 * w$2 - (w:real^2)$1 * (v:real^2)$2 = &0)"), t43)
-  let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall u v w; H1"), t44), t46), t48), t50), t55), t57), t58)
-  noncollinear_2span_c.set(@tactics.prove(@parser.parse_term("forall u v w:real^2. ~collinear  {vec 0,v,w} ==> ? s t. s % v + t % w = u"), t59))
+  let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ u v w; H1"), t44), t46), t48), t50), t55), t57), t58)
+  noncollinear_2span_c.set(@tactics.prove(@parser.parse_term("∀ u v w:real^2. ~collinear  {vec 0,v,w} ==> ? s t. s % v + t % w = u"), t59))
 }
 
 ///|
@@ -265,7 +265,7 @@ pub fn oriented_areasymmetry() -> @kernel.Thm {
 ///|
 /// move
 fn step_9() -> Unit raise {
-  move__c.set(@pair.new_definition(@parser.parse_term("forall A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})")))
+  move__c.set(@pair.new_definition(@parser.parse_term("∀ A B C A' B' C':real^2. move (A,B,C) (A',B',C') <=>\n  (B = B' /\\ C = C' /\\ collinear {vec 0,C - B,A' - A} \\/\n  A = A' /\\ C = C' /\\ collinear {vec 0,C - A,B' - B} \\/\n  A = A' /\\ B = B' /\\ collinear {vec 0,B - A,C' - C})")))
 }
 
 ///|
@@ -281,7 +281,7 @@ pub fn move_() -> @kernel.Thm {
 /// moveInvariant
 fn step_10() -> Unit raise {
   let t61 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), move_(), oriented_area(), @vectors.collinear_lemma(), @vectors.vector_mul()])), vec2_tac)
-  moveinvariant_c.set(@tactics.prove(@parser.parse_term("forall p p'. move p p' ==> oriented_area p = oriented_area p'"), t61))
+  moveinvariant_c.set(@tactics.prove(@parser.parse_term("∀ p p'. move p p' ==> oriented_area p = oriented_area p'"), t61))
 }
 
 ///|
@@ -296,7 +296,7 @@ pub fn moveinvariant() -> @kernel.Thm {
 ///|
 /// reachable
 fn step_11() -> Unit raise {
-  reachable_c.set(@pair.new_definition(@parser.parse_term("forall p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
+  reachable_c.set(@pair.new_definition(@parser.parse_term("∀ p p'.\n  reachable p p' <=> ?n. ?s.\n  s 0 = p /\\ s n = p' /\\\n  (∀ m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
 }
 
 ///|
@@ -311,7 +311,7 @@ pub fn reachable() -> @kernel.Thm {
 ///|
 /// reachableN
 fn step_12() -> Unit raise {
-  reachablen_c.set(@pair.new_definition(@parser.parse_term("forall p p'. forall n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (forall m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
+  reachablen_c.set(@pair.new_definition(@parser.parse_term("∀ p p'. ∀ n.\n  reachableN p p' n <=> ?s.\n  s 0 = p /\\ s n = p' /\\\n  (∀ m. 0 <= m /\\ m < n ==> move (s m) (s (SUC m)))")))
 }
 
 ///|
@@ -327,7 +327,7 @@ pub fn reachablen() -> @kernel.Thm {
 /// ReachLemma
 fn step_13() -> Unit raise {
   let t62 = @simp.rewrite_tac(@list.List([reachable(), reachablen()]))
-  reachlemma_c.set(@tactics.prove(@parser.parse_term("forall p p'. reachable p p'  <=>  ?n.  reachableN p p' n"), t62))
+  reachlemma_c.set(@tactics.prove(@parser.parse_term("∀ p p'. reachable p p'  <=>  ?n.  reachableN p p' n"), t62))
 }
 
 ///|
@@ -347,24 +347,24 @@ fn step_14() -> Unit raise {
   let t79 = @tactics.exists_tac(@parser.parse_term("\\m. if m < SUC n then s m else p':triple"))
   let t78 = @simp.rewrite_tac(@list.List([reachablen(), @arith.lt(), @arith.le_0()]))
   let t76 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "nReach")(@list.List([reachablen(), @arith.lt(), @arith.le_0()]))])
-  let t77 = consider("s such that", @parser.parse_term("s 0 = p /\\ s n = q /\\ forall m. m < n ==> move (s m) (s (SUC m))"), t76, "sDef")
-  let t75 = @theorems.intro_tac("forall q; nReach; move_qp'")
+  let t77 = consider("s such that", @parser.parse_term("s 0 = p /\\ s n = q /\\ ∀ m. m < n ==> move (s m) (s (SUC m))"), t76, "sDef")
+  let t75 = @theorems.intro_tac("∀ q; nReach; move_qp'")
   let t74 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.left_imp_exists_thm()]))
-  let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall n"), t74), t75), t77), t78), t79), t80)])
-  let t82 = @tactics.subgoal_tac("Imp2", @parser.parse_term("forall n. (? q. reachableN p q n  /\\ move q p')  ==>  reachableN p p' (SUC n)"), t81)
+  let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ n"), t74), t75), t77), t78), t79), t80)])
+  let t82 = @tactics.subgoal_tac("Imp2", @parser.parse_term("∀ n. (? q. reachableN p q n  /\\ move q p')  ==>  reachableN p p' (SUC n)"), t81)
   let t71 = @tactics.hyp_tac(@meson.meson_tac, "sDef qDef")(@list.List([@arith.le_0(), reachablen(), @arith.lt()]))
   let t69 = @list.List([@meson.meson_tac(@list.List([]))])
   let t70 = consider("q such that", @parser.parse_term("q:triple = s n"), t69, "qDef")
   let t67 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H1")(@list.List([@arith.le_0(), reachablen()]))])
-  let t68 = consider("s such that", @parser.parse_term("s 0 = p /\\ s (SUC n) = p' /\\ forall m. m < SUC n ==> move (s m) (s (SUC m))"), t67, "sDef")
-  let t72 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall n; H1"), t68), t70), t71)])
-  let t73 = @tactics.subgoal_tac("Imp1", @parser.parse_term("forall n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\ move q p'"), t72)
+  let t68 = consider("s such that", @parser.parse_term("s 0 = p /\\ s (SUC n) = p' /\\ ∀ m. m < SUC n ==> move (s m) (s (SUC m))"), t67, "sDef")
+  let t72 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ n; H1"), t68), t70), t71)])
+  let t73 = @tactics.subgoal_tac("Imp1", @parser.parse_term("∀ n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\ move q p'"), t72)
   let t65 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "s0exists")(@list.List([@arith.le_0(), reachablen(), @arith.lt()]))])
   let t66 = @tactics.subgoal_tac("0CLAUSE", @parser.parse_term("reachableN p p' 0  <=>  p = p'"), t65)
   let t63 = @list.List([@meson.meson_tac(@list.List([]))])
   let t64 = consider("s0 such that", @parser.parse_term("s0 =  \\m:num. p':triple"), t63, "s0exists")
-  let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall p p'"), t64), t66), t73), t82), t83)
-  reachablen_clauses_c.set(@tactics.prove(@parser.parse_term("forall p p'. (reachableN p p' 0  <=>  p = p') /\\\n  forall n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\ move q p'"), t84))
+  let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ p p'"), t64), t66), t73), t82), t83)
+  reachablen_clauses_c.set(@tactics.prove(@parser.parse_term("∀ p p'. (reachableN p p' 0  <=>  p = p') /\\\n  ∀ n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\ move q p'"), t84))
 }
 
 ///|
@@ -381,7 +381,7 @@ pub fn reachablen_clauses() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t85 = @meson.asm_meson_tac(@list.List([reachablen_clauses(), moveinvariant()]))
   let t86 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([reachlemma(), @theorems.left_imp_exists_thm(), @theorems.swap_forall_thm()])), @nums.induct_tac), t85)
-  reachableinvariant_c.set(@tactics.prove(@parser.parse_term("forall p p'. reachable p p'  ==>  oriented_area p = oriented_area p'"), t86))
+  reachableinvariant_c.set(@tactics.prove(@parser.parse_term("∀ p p'. reachable p p'  ==>  oriented_area p = oriented_area p'"), t86))
 }
 
 ///|
@@ -396,7 +396,7 @@ pub fn reachableinvariant() -> @kernel.Thm {
 ///|
 /// move2Cond
 fn step_16() -> Unit raise {
-  move2cond_c.set(@pair.new_definition(@parser.parse_term("forall A B A' B':real^2. move2Cond A B A' B'  <=>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'}   \\/\n  ~collinear {A,B,B'} /\\ ~collinear {B',A,A'}")))
+  move2cond_c.set(@pair.new_definition(@parser.parse_term("∀ A B A' B':real^2. move2Cond A B A' B'  <=>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'}   \\/\n  ~collinear {A,B,B'} /\\ ~collinear {B',A,A'}")))
 }
 
 ///|
@@ -495,7 +495,7 @@ fn step_22() -> Unit raise {
   let t95 = @meson.meson_tac(@list.List([]))
   let t94 = so(@simp.rewrite_tac(@list.List([move_()])))
   let t93 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([collinear_3_2dzero()])), vec2_tac)])
-  let t96 = @tactics.then_tac(@tactics.then_tac(@tactics.subgoal_tac("", @parser.parse_term("forall A B C A':real^2. collinear {vec 0, C - B, A' - A}\n  ==> collinear {vec 0, B - C, A' - A}"), t93), t94), t95)
+  let t96 = @tactics.then_tac(@tactics.then_tac(@tactics.subgoal_tac("", @parser.parse_term("∀ A B C A':real^2. collinear {vec 0, C - B, A' - A}\n  ==> collinear {vec 0, B - C, A' - A}"), t93), t94), t95)
   movesymmetry_c.set(@tactics.prove(@parser.parse_term("move (A,B,C) (A',B',C') ==>\n  move (B,C,A) (B',C',A') /\\ move (C,A,B) (C',A',B') /\\\n  move (A,C,B) (A',C',B') /\\ move (B,A,C) (B',A',C') /\\ move (C,B,A) (C',B',A')"), t96))
 }
 
@@ -528,11 +528,11 @@ fn step_23() -> Unit raise {
   let t102 = @parser.parse_term("Y:real^2")
   let t103 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("X:real^2"), t102, t101]))
   let t100 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm(), @pair.forall_pair_thm()]))
-  let t99 = @theorems.intro_tac("forall n;nStep; forall A B C A' B' C'")
+  let t99 = @theorems.intro_tac("∀ n;nStep; ∀ A B C A' B' C'")
   let t98 = @simp.simp_tac(@list.List([@pair.pair_eq()]))
   let t97 = @simp.rewrite_tac(@list.List([reachablen_clauses()]))
   let t115 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@nums.num_induction()), t97), t98), t99), t100), t103), t104), t105), t113), t114)
-  reachablensymmetry_c.set(@tactics.prove(@parser.parse_term("forall n. forall A B C A' B' C'. reachableN (A,B,C) (A',B',C') n  ==>\nreachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\nreachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\nreachableN (C,B,A) (C',B',A') n"), t115))
+  reachablensymmetry_c.set(@tactics.prove(@parser.parse_term("∀ n. ∀ A B C A' B' C'. reachableN (A,B,C) (A',B',C') n  ==>\nreachableN (B,C,A) (B',C',A') n  /\\  reachableN (C,A,B) (C',A',B') n /\\\nreachableN (A,C,B) (A',C',B') n  /\\  reachableN (B,A,C) (B',A',C') n /\\\nreachableN (C,B,A) (C',B',A') n"), t115))
 }
 
 ///|
@@ -549,7 +549,7 @@ pub fn reachablensymmetry() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t116 = @tactics.conv_tac(@calc_rat.real_ring)
   let t117 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.collinear_3_2d(), oriented_area()])), t116)
-  oriented_area_collinear_cong_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C.\n        oriented_area (A,B,C) = oriented_area (A',B',C')\n        ==> (collinear {A,B,C} <=> collinear {A',B',C'})"), t117))
+  oriented_area_collinear_cong_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C.\n        oriented_area (A,B,C) = oriented_area (A',B',C')\n        ==> (collinear {A,B,C} <=> collinear {A',B',C'})"), t117))
 }
 
 ///|
@@ -579,9 +579,9 @@ fn step_25() -> Unit raise {
   let t122 = consider("r t such that", @parser.parse_term("A' - (A:real^2) = r % (A - B) + t % (C - B)"), t121, "rExists")
   let t119 = @list.List([so(@tactics.hyp_tac(@meson.meson_tac, "H2")(@list.List([@vectors.collinear_3(), @vectors.collinear_lemma()])))])
   let t120 = @tactics.subgoal_tac("H2'", @parser.parse_term("~ ? r. A' - (A:real^2) = r % (A - B)"), t119)
-  let t118 = @tactics.subgoal_tac("add0vector_mul", @parser.parse_term("forall r. r % ((A:real^2) - B) = (--r) % (B - A)  /\\\n  r % (A - B) = r % (A - B) + &0 % (C - B)"), @list.List([vec2_tac]))
-  let t134 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A'; H1 H2"), t118), t120), t122), t124), t126), t128), t130), t132), t133)
-  basic2move_thm_c.set(@tactics.prove(@parser.parse_term("forall A B C A'. ~collinear {A,B,C} /\\ ~collinear {B,A,A'} ==>\n  ?X. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)"), t134))
+  let t118 = @tactics.subgoal_tac("add0vector_mul", @parser.parse_term("∀ r. r % ((A:real^2) - B) = (--r) % (B - A)  /\\\n  r % (A - B) = r % (A - B) + &0 % (C - B)"), @list.List([vec2_tac]))
+  let t134 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A'; H1 H2"), t118), t120), t122), t124), t126), t128), t130), t132), t133)
+  basic2move_thm_c.set(@tactics.prove(@parser.parse_term("∀ A B C A'. ~collinear {A,B,C} /\\ ~collinear {B,A,A'} ==>\n  ?X. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)"), t134))
 }
 
 ///|
@@ -607,8 +607,8 @@ fn step_26() -> Unit raise {
   let t138 = @tactics.subgoal_tac("", @parser.parse_term("~collinear {(A:real^2),B,X} /\\ ~collinear {A',B,X}"), t137)
   let t135 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H1 H2")(@list.List([basic2move_thm()]))])
   let t136 = consider("X such that", @parser.parse_term("move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)"), t135, "ABX")
-  let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B'; H1; H2"), t136), t138), t140), t142), t144), t145)
-  fourstepmoveab_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B'. ~collinear {A,B,C} ==>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'} ==>\n  ? X Y. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)  /\\\n  move (A',B,X) (A',B,Y)  /\\  move (A',B,Y) (A',B',Y)"), t146))
+  let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B'; H1; H2"), t136), t138), t140), t142), t144), t145)
+  fourstepmoveab_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B'. ~collinear {A,B,C} ==>\n  ~collinear {B,A,A'} /\\ ~collinear {A',B,B'} ==>\n  ? X Y. move (A,B,C) (A,B,X)  /\\  move (A,B,X) (A',B,X)  /\\\n  move (A',B,X) (A',B,Y)  /\\  move (A',B,Y) (A',B',Y)"), t146))
 }
 
 ///|
@@ -633,8 +633,8 @@ fn step_27() -> Unit raise {
   let t151 = @list.List([so(@tactics.hyp_tac(@meson.meson_tac, "H1")(@list.List([fourstepmoveab(), reachablen_four()]))), t150])
   let t147 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H2")(@list.List([move2cond()]))])
   let t148 = cases("Case1 | Case2", @parser.parse_term("~collinear {B,(A:real^2),A'} /\\ ~collinear {A',B,B'}  \\/\n  ~collinear {A,B,B'} /\\ ~collinear {B',A,A'}"), t147)
-  let t157 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B'; H1 H2"), t148), t151), t153), t155), t156)
-  fourstepmoveabbareach_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B'. ~collinear {A,B,C} /\\ move2Cond A B A' B' ==>\n  ? Y. reachableN (A,B,C) (A',B',Y) 4"), t157))
+  let t157 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B'; H1 H2"), t148), t151), t153), t155), t156)
+  fourstepmoveabbareach_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B'. ~collinear {A,B,C} /\\ move2Cond A B A' B' ==>\n  ? Y. reachableN (A,B,C) (A',B',Y) 4"), t157))
 }
 
 ///|
@@ -656,8 +656,8 @@ fn step_28() -> Unit raise {
   let t161 = @tactics.subgoal_tac("set4symmetry", @parser.parse_term("{(A:real^2),B,A',B'} SUBSET {A,A',B,B'}  /\\\n  {A,B,A',B'} SUBSET {B,B',A',A}  /\\  {A,B,A',B'} SUBSET {A',B',B,A}"), t160)
   let t158 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H1 H1'")(@list.List([noncollinear_3impliesdistinct()]))])
   let t159 = @tactics.subgoal_tac("Distinct", @parser.parse_term("~((A:real^2) = B) /\\ ~((A':real^2) = B')"), t158)
-  let t165 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B' C'; H1 H1' H2 H2' H3"), t159), t161), t163), t164)
-  notmove2impliescollinear_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~move2Cond A B A' B' ==>\n  collinear {A,B,A',B'}"), t165))
+  let t165 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B' C'; H1 H1' H2 H2' H3"), t159), t161), t163), t164)
+  notmove2impliescollinear_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~move2Cond A B A' B' ==>\n  collinear {A,B,A',B'}"), t165))
 }
 
 ///|
@@ -681,8 +681,8 @@ fn step_29() -> Unit raise {
   let t169 = raa("Con", @parser.parse_term("~move2Cond A B A' B'  /\\\n  ~move2Cond B C B' C'"), t168)
   let t166 = @list.List([@sets.set_tac(@list.List([]))])
   let t167 = @tactics.subgoal_tac("3subset4", @parser.parse_term("{(A:real^2),B,B'} SUBSET {A,B,A',B'} /\\ {B,B',C} SUBSET {B,C,B',C'}"), t166)
-  let t175 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B' C'; H1 H1' H2a H2b H2c"), t167), t169), t171), t173), t174)
-  distinctimplies2moveable_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~(C = C')  ==>\n  move2Cond A B A' B' \\/ move2Cond B C B' C'"), t175))
+  let t175 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B' C'; H1 H1' H2a H2b H2c"), t167), t169), t171), t173), t174)
+  distinctimplies2moveable_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} /\\\n  ~(A = A') /\\ ~(B = B') /\\ ~(C = C')  ==>\n  move2Cond A B A' B' \\/ move2Cond B C B' C'"), t175))
 }
 
 ///|
@@ -708,8 +708,8 @@ fn step_30() -> Unit raise {
   let t179 = cases("Ncol | move | col_Nmove", @parser.parse_term("~collinear {C,B,B'}  \\/\n  move2Cond A B A' B'  \\/\n  collinear {C,B,B'} /\\ ~move2Cond A B A' B'"), t178)
   let t176 = @list.List([@sets.set_tac(@list.List([]))])
   let t177 = @tactics.subgoal_tac("easy_set", @parser.parse_term("{B,B',(A:real^2)} SUBSET {A,B,A',B'}  /\\  {A,B,C} SUBSET {B,B',A,C}"), t176)
-  let t187 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B' C'; H1; H2"), t177), t179), t186)
-  samecdiffab_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'.  ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n C = C' /\\ ~(A = A') /\\ ~(B = B') ==>\n  ? Y. reachableN (A,B,C) (Y,B',C') 2  \\/ reachableN (A,B,C) (A',B',Y) 4"), t187))
+  let t187 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B' C'; H1; H2"), t177), t179), t186)
+  samecdiffab_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C'.  ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n C = C' /\\ ~(A = A') /\\ ~(B = B') ==>\n  ? Y. reachableN (A,B,C) (Y,B',C') 2  \\/ reachableN (A,B,C) (A',B',Y) 4"), t187))
 }
 
 ///|
@@ -734,8 +734,8 @@ fn step_31() -> Unit raise {
   let t190 = @tactics.subgoal_tac("easy_arith", @parser.parse_term("0 < 5 /\\ 2 < 5 /\\ 3 < 5 /\\ 4 < 5"), @list.List([@int.arith_tac]))
   let t188 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H1")(@list.List([collinearsymmetry()]))])
   let t189 = @tactics.subgoal_tac("H1'", @parser.parse_term("~collinear {B,C,(A:real^2)} /\\\n  ~collinear{B',C',(A':real^2)} /\\ ~collinear {C,A,B} /\\ ~collinear {C',A',B'}"), t188)
-  let t198 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B' C'; H1"), t189), t190), t192), t197)
-  fourmovestocorrecttwo_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n  ? n. n < 5 /\\ ? Y. reachableN (A,B,C) (A',B',Y) n  \\/\n  reachableN (A,B,C) (A',Y,C') n  \\/ reachableN (A,B,C) (Y,B',C') n"), t198))
+  let t198 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B' C'; H1"), t189), t190), t192), t197)
+  fourmovestocorrecttwo_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C'. ~collinear {A,B,C} /\\ ~collinear {A',B',C'} ==>\n  ? n. n < 5 /\\ ? Y. reachableN (A,B,C) (A',B',Y) n  \\/\n  reachableN (A,B,C) (A',Y,C') n  \\/ reachableN (A,B,C) (Y,B',C') n"), t198))
 }
 
 ///|
@@ -789,8 +789,8 @@ fn step_33() -> Unit raise {
   let t203 = @tactics.subgoal_tac("Distinct", @parser.parse_term("~((A:real^2) = B) /\\ ~(A = C) /\\ ~(B = C) /\\\n  ~((A':real^2) = B') /\\ ~(A' = C') /\\ ~(B' = C')"), t202)
   let t200 = @list.List([@tactics.hyp_tac(@meson.meson_tac, "H1 H2")(@list.List([oriented_area_collinear_cong()]))])
   let t201 = @tactics.subgoal_tac("H1'", @parser.parse_term("~collinear {(A':real^2),B',C'}"), t200)
-  let t223 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B' C'; H1; H2"), t201), t203), t205), t207), t222)
-  fivemovesorless_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'. ~collinear {A,B,C} ==>\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ? n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n"), t223))
+  let t223 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B' C'; H1; H2"), t201), t203), t205), t207), t222)
+  fivemovesorless_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C'. ~collinear {A,B,C} ==>\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ? n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n"), t223))
 }
 
 ///|
@@ -838,9 +838,9 @@ fn step_35() -> Unit raise {
   let t233 = @list.List([@meson.meson_tac(@list.List([]))])
   let t234 = cases("ABCncol | ABCcol", @parser.parse_term("~collinear {(A:real^2),B,C}  \\/  collinear {A,B,C}"), t233)
   let t231 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([move_(), @vectors.collinear_3_2d()])), vec2_tac)])
-  let t232 = @tactics.subgoal_tac("EZcollinear", @parser.parse_term("(forall X Y:real^2. collinear {X,Y,Y}) /\\\n  (forall A B A'. move (A,B,B) (A',B,B))  /\\\n  forall A B C B'. (collinear {A,B,C} /\\ collinear {A,B',C}  ==>\n  move (A,B,C) (A,B',C))"), t231)
-  let t243 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall A B C A' B' C'; H1"), t232), t234), t242)
-  fivemovesorless_strong_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C'.\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ?n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n"), t243))
+  let t232 = @tactics.subgoal_tac("EZcollinear", @parser.parse_term("(∀ X Y:real^2. collinear {X,Y,Y}) /\\\n  (∀ A B A'. move (A,B,B) (A',B,B))  /\\\n  ∀ A B C B'. (collinear {A,B,C} /\\ collinear {A,B',C}  ==>\n  move (A,B,C) (A,B',C))"), t231)
+  let t243 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ A B C A' B' C'; H1"), t232), t234), t242)
+  fivemovesorless_strong_c.set(@tactics.prove(@parser.parse_term("∀ A B C A' B' C'.\n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n  ?n. n <= 5 /\\ reachableN (A,B,C) (A',B',C') n"), t243))
 }
 
 ///|

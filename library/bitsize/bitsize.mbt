@@ -55,7 +55,7 @@ fn step_3() -> Unit raise {
     @int.arith_tac,
   )
   bitsize_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall k. bitsize (2 EXP k) = k + 1"), t4),
+    @tactics.prove(@parser.parse_term("∀ k. bitsize (2 EXP k) = k + 1"), t4),
   )
 }
 
@@ -251,7 +251,7 @@ fn step_6() -> Unit raise {
   )
   bitsize_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. bitsize n <= k <=> n < 2 EXP k"),
+      @parser.parse_term("∀ n k. bitsize n <= k <=> n < 2 EXP k"),
       t22,
     ),
   )
@@ -273,7 +273,7 @@ fn step_7() -> Unit raise {
     @list.List([@equal.gsym(bitsize_le()), @arith.le_refl()]),
   )
   bitsize_v1_c.set(
-    @tactics.prove(@parser.parse_term("forall n. n < 2 EXP bitsize n"), t23),
+    @tactics.prove(@parser.parse_term("∀ n. n < 2 EXP bitsize n"), t23),
   )
 }
 
@@ -300,7 +300,7 @@ fn step_8() -> Unit raise {
   bitsize_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. bitsize n = k <=> n < 2 EXP k /\\ forall j. j < k ==> 2 EXP j <= n",
+        "∀ n k. bitsize n = k <=> n < 2 EXP k /\\ ∀ j. j < k ==> 2 EXP j <= n",
       ),
       t26,
     ),
@@ -334,7 +334,7 @@ fn step_9() -> Unit raise {
   )
   bitsize_unique_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. bitsize n = k <=> forall j. n < 2 EXP j <=> k <= j"),
+      @parser.parse_term("∀ n k. bitsize n = k <=> ∀ j. n < 2 EXP j <=> k <= j"),
       t28,
     ),
   )
@@ -359,7 +359,7 @@ fn step_10() -> Unit raise {
     @int.arith_tac,
   )
   bitsize_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall n. bitsize n = 0 <=> n = 0"), t29),
+    @tactics.prove(@parser.parse_term("∀ n. bitsize n = 0 <=> n = 0"), t29),
   )
 }
 
@@ -388,7 +388,7 @@ fn step_11() -> Unit raise {
   )
   bitsize_mono_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. m <= n ==> bitsize m <= bitsize n"),
+      @parser.parse_term("∀ m n. m <= n ==> bitsize m <= bitsize n"),
       t34,
     ),
   )
@@ -423,7 +423,7 @@ fn step_12() -> Unit raise {
   )
   bitsize_max_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitsize(MAX m n) = MAX (bitsize m) (bitsize n)"),
+      @parser.parse_term("∀ m n. bitsize(MAX m n) = MAX (bitsize m) (bitsize n)"),
       t38,
     ),
   )
@@ -458,7 +458,7 @@ fn step_13() -> Unit raise {
   )
   bitsize_min_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitsize(MIN m n) = MIN (bitsize m) (bitsize n)"),
+      @parser.parse_term("∀ m n. bitsize(MIN m n) = MIN (bitsize m) (bitsize n)"),
       t42,
     ),
   )
@@ -488,7 +488,7 @@ fn step_14() -> Unit raise {
   )
   bitsize_mult_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitsize(m * n) <= bitsize m + bitsize n"),
+      @parser.parse_term("∀ m n. bitsize(m * n) <= bitsize m + bitsize n"),
       t46,
     ),
   )
@@ -521,7 +521,7 @@ fn step_15() -> Unit raise {
   )
   bitsize_rev_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. 2 EXP (bitsize n - 1) <= n <=> ~(n = 0)"),
+      @parser.parse_term("∀ n. 2 EXP (bitsize n - 1) <= n <=> ~(n = 0)"),
       t49,
     ),
   )
@@ -542,7 +542,7 @@ fn step_16() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([bitsize_rev_eq()]))
   bitsize_rev_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. ~(n = 0) ==> 2 EXP (bitsize n - 1) <= n"),
+      @parser.parse_term("∀ n. ~(n = 0) ==> 2 EXP (bitsize n - 1) <= n"),
       t50,
     ),
   )
@@ -603,7 +603,7 @@ fn step_17() -> Unit raise {
   )
   bitsize_rev_eq_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. 2 EXP (bitsize n) <= 2 * n <=> ~(n = 0)"),
+      @parser.parse_term("∀ n. 2 EXP (bitsize n) <= 2 * n <=> ~(n = 0)"),
       t58,
     ),
   )
@@ -626,7 +626,7 @@ fn step_18() -> Unit raise {
   let t59 = @simp.rewrite_tac(@list.List([bitsize_rev_eq_alt()]))
   bitsize_rev_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. ~(n = 0) ==> 2 EXP bitsize n <= 2 * n"),
+      @parser.parse_term("∀ n. ~(n = 0) ==> 2 EXP bitsize n <= 2 * n"),
       t59,
     ),
   )
@@ -665,7 +665,7 @@ fn step_19() -> Unit raise {
   le_bitsize_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP (k - 1) <= n",
+        "∀ n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP (k - 1) <= n",
       ),
       t64,
     ),
@@ -715,7 +715,7 @@ fn step_20() -> Unit raise {
   le_bitsize_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP k <= 2 * n",
+        "∀ n k. k <= bitsize n <=> ~(k = 0) ==> 2 EXP k <= 2 * n",
       ),
       t70,
     ),
@@ -756,7 +756,7 @@ fn step_21() -> Unit raise {
   bitsize_unique_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. bitsize n = k <=>\n         n < 2 EXP k /\\ (~(k = 0) ==> 2 EXP k <= 2 * n)",
+        "∀ n k. bitsize n = k <=>\n         n < 2 EXP k /\\ (~(k = 0) ==> 2 EXP k <= 2 * n)",
       ),
       t76,
     ),
@@ -842,7 +842,7 @@ fn step_22() -> Unit raise {
   bitsize_mult_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall k n. bitsize (2 EXP k * n) = if n = 0 then 0 else k + bitsize n) /\\\n   (forall k n. bitsize (n * 2 EXP k) = if n = 0 then 0 else bitsize n + k)",
+        "(∀ k n. bitsize (2 EXP k * n) = if n = 0 then 0 else k + bitsize n) /\\\n   (∀ k n. bitsize (n * 2 EXP k) = if n = 0 then 0 else bitsize n + k)",
       ),
       t84,
     ),
@@ -935,7 +935,7 @@ fn step_23() -> Unit raise {
   bitsize_mult_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (2 EXP k * m + n) = k + bitsize m) /\\\n   (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (m * 2 EXP k + n) = k + bitsize m) /\\\n   (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + 2 EXP k * m) = k + bitsize m) /\\\n   (forall k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + m * 2 EXP k) = k + bitsize m)",
+        "(∀ k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (2 EXP k * m + n) = k + bitsize m) /\\\n   (∀ k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (m * 2 EXP k + n) = k + bitsize m) /\\\n   (∀ k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + 2 EXP k * m) = k + bitsize m) /\\\n   (∀ k m n. ~(m = 0) /\\ n < 2 EXP k\n            ==> bitsize (n + m * 2 EXP k) = k + bitsize m)",
       ),
       t97,
     ),
@@ -1039,7 +1039,7 @@ fn step_24() -> Unit raise {
   )
   bitsize_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. bitsize(n DIV 2 EXP k) = bitsize n - k"),
+      @parser.parse_term("∀ n k. bitsize(n DIV 2 EXP k) = bitsize n - k"),
       t111,
     ),
   )

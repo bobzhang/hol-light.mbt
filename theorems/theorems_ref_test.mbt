@@ -134,8 +134,8 @@ test "theorems matches theorems.ml" {
   st("DESTRUCT_garbage", () => (tm("p ==> s"), dt("hp )")))
   st("DESTRUCT_bad", () => (tm("p ==> s"), dt("(")))
   st("INTRO_fix_dest", () => {
-    let w = tm("forall x:A. P x ==> Q x")
-    (w, @theorems.intro_tac("forall x; hp"))
+    let w = tm("∀ x:A. P x ==> Q x")
+    (w, @theorems.intro_tac("∀ x; hp"))
   })
   st("INTRO_conj", () => {
     let w = tm("(p ==> q) /\\ (r ==> s)")
@@ -147,11 +147,11 @@ test "theorems matches theorems.ml" {
   })
   st("INTRO_zero", () => (tm("p \\/ q"), @theorems.intro_tac("#0")))
   st("INTRO_garbage", () => (tm("p ==> q"), @theorems.intro_tac("hp }")))
-  st("FIX_vars", () => (tm("forall x y z:A. P x y z"), @theorems.fix_tac("x y")))
-  st("FIX_rename", () => (tm("forall x y:A. P x y"), @theorems.fix_tac("[a/y] *")))
-  st("FIX_star", () => (tm("forall x y:A. P x y"), @theorems.fix_tac("*")))
-  st("FIX_missing", () => (tm("forall x:A. P x"), @theorems.fix_tac("y")))
-  st("FIX_bad", () => (tm("forall x:A. P x"), @theorems.fix_tac("x ]")))
+  st("FIX_vars", () => (tm("∀ x y z:A. P x y z"), @theorems.fix_tac("x y")))
+  st("FIX_rename", () => (tm("∀ x y:A. P x y"), @theorems.fix_tac("[a/y] *")))
+  st("FIX_star", () => (tm("∀ x y:A. P x y"), @theorems.fix_tac("*")))
+  st("FIX_missing", () => (tm("∀ x:A. P x"), @theorems.fix_tac("y")))
+  st("FIX_bad", () => (tm("∀ x:A. P x"), @theorems.fix_tac("x ]")))
   st("HYP_destruct", () => {
     let w = tm("a /\\ b ==> c")
     let h = @theorems.hyp_tac("h: ha hb", th => th)
@@ -374,150 +374,150 @@ test "theorems matches theorems.ml" {
       #|Searching with limit 1
       #|Searching with limit 2
       #|theorems quotations (77):
-      #|  forall x:A. x = x
-      #|  forall x:A. (x = x) <=> T
-      #|  forall(x:A) y. (x = y) ==> (y = x)
-      #|  forall(x:A) y. (x = y) <=> (y = x)
-      #|  forall(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)
-      #|  forall(f:A->B) y. (\\x. (f:A->B) x) y = f y
-      #|  forall(t1:A) (t2:B). (\\x. t1) t2 = t1
-      #|  forall t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3
-      #|  forall t1 t2. t1 /\\ t2 <=> t2 /\\ t1
+      #|  \226\136\128 x:A. x = x
+      #|  \226\136\128 x:A. (x = x) <=> T
+      #|  \226\136\128(x:A) y. (x = y) ==> (y = x)
+      #|  \226\136\128(x:A) y. (x = y) <=> (y = x)
+      #|  \226\136\128(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)
+      #|  \226\136\128(f:A->B) y. (\\x. (f:A->B) x) y = f y
+      #|  \226\136\128(t1:A) (t2:B). (\\x. t1) t2 = t1
+      #|  \226\136\128 t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3
+      #|  \226\136\128 t1 t2. t1 /\\ t2 <=> t2 /\\ t1
       #|  (p /\\ q <=> q /\\ p) /\\\n   ((p /\\ q) /\\ r <=> p /\\ (q /\\ r)) /\\\n   (p /\\ (q /\\ r) <=> q /\\ (p /\\ r)) /\\\n   (p /\\ p <=> p) /\\\n   (p /\\ (p /\\ q) <=> p /\\ q)
-      #|  forall t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3
-      #|  forall t1 t2. t1 \\/ t2 <=> t2 \\/ t1
+      #|  \226\136\128 t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3
+      #|  \226\136\128 t1 t2. t1 \\/ t2 <=> t2 \\/ t1
       #|  (p \\/ q <=> q \\/ p) /\\\n   ((p \\/ q) \\/ r <=> p \\/ (q \\/ r)) /\\\n   (p \\/ (q \\/ r) <=> q \\/ (p \\/ r)) /\\\n   (p \\/ p <=> p) /\\\n   (p \\/ (p \\/ q) <=> p \\/ q)
       #|  p /\\ q ==> r <=> p ==> q ==> r
       #|  p /\\ q ==> r <=> q ==> p ==> r
-      #|  forall p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r
-      #|  forall p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r
-      #|  forall t. (forall x:A. t) = t
-      #|  forall t. (?x:A. t) = t
+      #|  \226\136\128 p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r
+      #|  \226\136\128 p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r
+      #|  \226\136\128 t. (\226\136\128 x:A. t) = t
+      #|  \226\136\128 t. (?x:A. t) = t
       #|  (a <=> b) ==> a ==> b
-      #|  forall t. ((T <=> t) <=> t) /\\ ((t <=> T) <=> t) /\\\n       ((F <=> t) <=> ~t) /\\ ((t <=> F) <=> ~t)
+      #|  \226\136\128 t. ((T <=> t) <=> t) /\\ ((t <=> T) <=> t) /\\\n       ((F <=> t) <=> ~t) /\\ ((t <=> F) <=> ~t)
       #|  (~T <=> F) /\\ (~F <=> T)
-      #|  forall t. (T /\\ t <=> t) /\\ (t /\\ T <=> t) /\\ (F /\\ t <=> F) /\\\n       (t /\\ F <=> F) /\\ (t /\\ t <=> t)
-      #|  forall t. (T \\/ t <=> T) /\\ (t \\/ T <=> T) /\\ (F \\/ t <=> t) /\\\n       (t \\/ F <=> t) /\\ (t \\/ t <=> t)
-      #|  forall t. (T ==> t <=> t) /\\ (t ==> T <=> T) /\\ (F ==> t <=> T) /\\\n       (t ==> t <=> T) /\\ (t ==> F <=> ~t)
+      #|  \226\136\128 t. (T /\\ t <=> t) /\\ (t /\\ T <=> t) /\\ (F /\\ t <=> F) /\\\n       (t /\\ F <=> F) /\\ (t /\\ t <=> t)
+      #|  \226\136\128 t. (T \\/ t <=> T) /\\ (t \\/ T <=> T) /\\ (F \\/ t <=> t) /\\\n       (t \\/ F <=> t) /\\ (t \\/ t <=> t)
+      #|  \226\136\128 t. (T ==> t <=> t) /\\ (t ==> T <=> T) /\\ (F ==> t <=> T) /\\\n       (t ==> t <=> T) /\\ (t ==> F <=> ~t)
       #|  ((x = x) ==> p) <=> p
       #|  (p <=> p') ==> (p' ==> (q <=> q')) ==> (p ==> q <=> p' ==> q')
-      #|  forall P. (?!x:A. P x) <=> (?x. P x) /\\ (forall x x'. P x /\\ P x' ==> (x = x'))
+      #|  \226\136\128 P. (?!x:A. P x) <=> (?x. P x) /\\ (\226\136\128 x x'. P x /\\ P x' ==> (x = x'))
       #|  a:A
-      #|  forall a:A. ?x. x = a
+      #|  \226\136\128 a:A. ?x. x = a
       #|  a:A
-      #|  forall a:A. ?!x. x = a
+      #|  \226\136\128 a:A. ?!x. x = a
       #|  a:A
-      #|  forall P (a:A). (?x. a = x /\\ P x) <=> P a
-      #|  forall P (a:A). (?x. x = a /\\ P x) <=> P a
+      #|  \226\136\128 P (a:A). (?x. a = x /\\ P x) <=> P a
+      #|  \226\136\128 P (a:A). (?x. x = a /\\ P x) <=> P a
       #|  a:A
-      #|  forall P (a:A). (forall x. x = a ==> P x) <=> P a
-      #|  forall P (a:A). (forall x. a = x ==> P x) <=> P a
-      #|  forall P:A->B->bool. (forall x y. P x y) <=> (forall y x. P x y)
-      #|  forall P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)
-      #|  forall P Q. (forall x:A. P x /\\ Q x) <=> (forall x. P x) /\\ (forall x. Q x)
-      #|  forall P Q. (forall x. P x) /\\ (forall x. Q x) <=> (forall x:A. P x /\\ Q x)
-      #|  forall P Q. (forall x:A. P x) /\\ Q <=> (forall x:A. P x /\\ Q)
-      #|  forall P Q. P /\\ (forall x:A. Q x) <=> (forall x. P /\\ Q x)
-      #|  forall P Q. (?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x)
-      #|  forall P Q. (?x. P x) \\/ (?x. Q x) <=> (?x:A. P x \\/ Q x)
-      #|  forall P Q. (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)
-      #|  forall P Q. P \\/ (?x. Q x) <=> (?x:A. P \\/ Q x)
-      #|  forall P Q. (?x:A. P x /\\ Q) <=> (?x:A. P x) /\\ Q
-      #|  forall P Q. (?x:A. P /\\ Q x) <=> P /\\ (?x:A. Q x)
-      #|  forall P Q. (?x:A. P /\\ Q) <=> (?x:A. P) /\\ (?x:A. Q)
-      #|  forall P Q. (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)
-      #|  forall P Q. P /\\ (?x:A. Q x) <=> (?x:A. P /\\ Q x)
-      #|  forall P Q. (?x:A. P) /\\ (?x:A. Q) <=> (?x:A. P /\\ Q)
-      #|  forall P Q. (forall x:A. P \\/ Q) <=> (forall x:A. P) \\/ (forall x:A. Q)
-      #|  forall P Q. (forall x:A. P) \\/ (forall x:A. Q) <=> (forall x:A. P \\/ Q)
-      #|  forall P Q. (P ==> forall x:A. Q x) <=> (forall x. P ==> Q x)
-      #|  forall P Q. (forall x. P ==> Q x) <=> (P ==> forall x:A. Q x)
-      #|  forall P Q. ((?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)
-      #|  forall P Q. (forall x. P x ==> Q) <=> ((?x:A. P x) ==> Q)
-      #|  forall P Q. (forall x:A. P ==> Q) <=> ((?x:A. P) ==> (forall x:A. Q))
-      #|  forall P Q. (?x:A. P ==> Q) <=> ((forall x:A. P) ==> (?x:A. Q))
+      #|  \226\136\128 P (a:A). (\226\136\128 x. x = a ==> P x) <=> P a
+      #|  \226\136\128 P (a:A). (\226\136\128 x. a = x ==> P x) <=> P a
+      #|  \226\136\128 P:A->B->bool. (\226\136\128 x y. P x y) <=> (\226\136\128 y x. P x y)
+      #|  \226\136\128 P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)
+      #|  \226\136\128 P Q. (\226\136\128 x:A. P x /\\ Q x) <=> (\226\136\128 x. P x) /\\ (\226\136\128 x. Q x)
+      #|  \226\136\128 P Q. (\226\136\128 x. P x) /\\ (\226\136\128 x. Q x) <=> (\226\136\128 x:A. P x /\\ Q x)
+      #|  \226\136\128 P Q. (\226\136\128 x:A. P x) /\\ Q <=> (\226\136\128 x:A. P x /\\ Q)
+      #|  \226\136\128 P Q. P /\\ (\226\136\128 x:A. Q x) <=> (\226\136\128 x. P /\\ Q x)
+      #|  \226\136\128 P Q. (?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x)
+      #|  \226\136\128 P Q. (?x. P x) \\/ (?x. Q x) <=> (?x:A. P x \\/ Q x)
+      #|  \226\136\128 P Q. (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)
+      #|  \226\136\128 P Q. P \\/ (?x. Q x) <=> (?x:A. P \\/ Q x)
+      #|  \226\136\128 P Q. (?x:A. P x /\\ Q) <=> (?x:A. P x) /\\ Q
+      #|  \226\136\128 P Q. (?x:A. P /\\ Q x) <=> P /\\ (?x:A. Q x)
+      #|  \226\136\128 P Q. (?x:A. P /\\ Q) <=> (?x:A. P) /\\ (?x:A. Q)
+      #|  \226\136\128 P Q. (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)
+      #|  \226\136\128 P Q. P /\\ (?x:A. Q x) <=> (?x:A. P /\\ Q x)
+      #|  \226\136\128 P Q. (?x:A. P) /\\ (?x:A. Q) <=> (?x:A. P /\\ Q)
+      #|  \226\136\128 P Q. (\226\136\128 x:A. P \\/ Q) <=> (\226\136\128 x:A. P) \\/ (\226\136\128 x:A. Q)
+      #|  \226\136\128 P Q. (\226\136\128 x:A. P) \\/ (\226\136\128 x:A. Q) <=> (\226\136\128 x:A. P \\/ Q)
+      #|  \226\136\128 P Q. (P ==> \226\136\128 x:A. Q x) <=> (\226\136\128 x. P ==> Q x)
+      #|  \226\136\128 P Q. (\226\136\128 x. P ==> Q x) <=> (P ==> \226\136\128 x:A. Q x)
+      #|  \226\136\128 P Q. ((?x:A. P x) ==> Q) <=> (\226\136\128 x. P x ==> Q)
+      #|  \226\136\128 P Q. (\226\136\128 x. P x ==> Q) <=> ((?x:A. P x) ==> Q)
+      #|  \226\136\128 P Q. (\226\136\128 x:A. P ==> Q) <=> ((?x:A. P) ==> (\226\136\128 x:A. Q))
+      #|  \226\136\128 P Q. (?x:A. P ==> Q) <=> ((\226\136\128 x:A. P) ==> (?x:A. Q))
       #|  (A ==> B) /\\ (C ==> D) ==> (A /\\ C ==> B /\\ D)
       #|  (A ==> B) /\\ (C ==> D) ==> (A \\/ C ==> B \\/ D)
       #|  (B ==> A) /\\ (C ==> D) ==> ((A ==> C) ==> (B ==> D))
       #|  (B ==> A) ==> (~A ==> ~B)
-      #|  (forall x:A. P x ==> Q x) ==> ((forall x. P x) ==> (forall x. Q x))
+      #|  (\226\136\128 x:A. P x ==> Q x) ==> ((\226\136\128 x. P x) ==> (\226\136\128 x. Q x))
       #|  x:A
       #|  x:A
-      #|  (forall x:A. P x ==> Q x) ==> ((?x. P x) ==> (?x. Q x))
-      #|  forall R P. (forall x y. P x y ==> P y x) /\\\n         (forall x y. R x y \\/ R y x) /\\\n         (forall x y. R x y ==> P x y)\n         ==> forall x y:A. P x y
+      #|  (\226\136\128 x:A. P x ==> Q x) ==> ((?x. P x) ==> (?x. Q x))
+      #|  \226\136\128 R P. (\226\136\128 x y. P x y ==> P y x) /\\\n         (\226\136\128 x y. R x y \\/ R y x) /\\\n         (\226\136\128 x y. R x y ==> P x y)\n         ==> \226\136\128 x y:A. P x y
       #|  x:A
       #|  x:A
       #|  x:A
-      #|  forall P:A->bool. (?!x. P x) <=> (?x. forall y. P y <=> (x = y))
+      #|  \226\136\128 P:A->bool. (?!x. P x) <=> (?x. \226\136\128 y. P y <=> (x = y))
       #|  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-      #|  forall P:A->bool. (?!x. P x) <=> (?x. P x /\\ forall y. P y ==> (y = x))
-      #|EQ_REFL =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) x:'A)))
-      #|REFL_CLAUSE =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) x:'A)) #T:bool)))
-      #|EQ_SYM =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))
-      #|EQ_SYM_EQ =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))
-      #|EQ_TRANS =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) z:'A))) ((#=:fun('A,fun('A,bool)) x:'A) z:'A))))))))
-      #|BETA_THM =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('B,fun('B,bool)) ((\x:'A. (f:fun('A,'B) x:'A)) y:'A)) (f:fun('A,'B) y:'A))))))
-      #|ABS_SIMP =  |- (#forall:fun(fun('A,bool),bool) (\t1:'A. (#forall:fun(fun('B,bool),bool) (\t2:'B. ((#=:fun('A,fun('A,bool)) ((\x:'B. t1:'A) t2:'B)) t1:'A)))))
-      #|CONJ_ASSOC =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
-      #|CONJ_SYM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t1:bool))))))
+      #|  \226\136\128 P:A->bool. (?!x. P x) <=> (?x. P x /\\ \226\136\128 y. P y ==> (y = x))
+      #|EQ_REFL =  |- (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) x:'A)))
+      #|REFL_CLAUSE =  |- (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) x:'A)) #T:bool)))
+      #|EQ_SYM =  |- (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))
+      #|EQ_SYM_EQ =  |- (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))
+      #|EQ_TRANS =  |- (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. (#∀:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) z:'A))) ((#=:fun('A,fun('A,bool)) x:'A) z:'A))))))))
+      #|BETA_THM =  |- (#∀:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#∀:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('B,fun('B,bool)) ((\x:'A. (f:fun('A,'B) x:'A)) y:'A)) (f:fun('A,'B) y:'A))))))
+      #|ABS_SIMP =  |- (#∀:fun(fun('A,bool),bool) (\t1:'A. (#∀:fun(fun('B,bool),bool) (\t2:'B. ((#=:fun('A,fun('A,bool)) ((\x:'B. t1:'A) t2:'B)) t1:'A)))))
+      #|CONJ_ASSOC =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
+      #|CONJ_SYM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t1:bool))))))
       #|CONJ_ACI =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) q:bool) r:bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#/\:fun(bool,fun(bool,bool)) q:bool) ((#/\:fun(bool,fun(bool,bool)) p:bool) r:bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) p:bool)) p:bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool))))))
-      #|DISJ_ASSOC =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
-      #|DISJ_SYM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool))))))
+      #|DISJ_ASSOC =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
+      #|DISJ_SYM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool))))))
       #|DISJ_ACI =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#\/:fun(bool,fun(bool,bool)) q:bool) p:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#\/:fun(bool,fun(bool,bool)) q:bool) ((#\/:fun(bool,fun(bool,bool)) p:bool) r:bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) p:bool)) p:bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool))))))
       #|IMP_CONJ =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool)))
       #|IMP_IMP =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool))
       #|IMP_CONJ_ALT =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#==>:fun(bool,fun(bool,bool)) q:bool) ((#==>:fun(bool,fun(bool,bool)) p:bool) r:bool)))
-      #|LEFT_OR_DISTRIB =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. (#forall:fun(fun(bool,bool),bool) (\r:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) r:bool)))))))))
-      #|RIGHT_OR_DISTRIB =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. (#forall:fun(fun(bool,bool),bool) (\r:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) r:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) r:bool)))))))))
-      #|FORALL_SIMP =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool)))
-      #|EXISTS_SIMP =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool)))
+      #|LEFT_OR_DISTRIB =  |- (#∀:fun(fun(bool,bool),bool) (\p:bool. (#∀:fun(fun(bool,bool),bool) (\q:bool. (#∀:fun(fun(bool,bool),bool) (\r:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) r:bool)))))))))
+      #|RIGHT_OR_DISTRIB =  |- (#∀:fun(fun(bool,bool),bool) (\p:bool. (#∀:fun(fun(bool,bool),bool) (\q:bool. (#∀:fun(fun(bool,bool),bool) (\r:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) r:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) r:bool)))))))))
+      #|FORALL_SIMP =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool)))
+      #|EXISTS_SIMP =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool)))
       #|EQ_IMP =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) a:bool) b:bool))
-      #|EQ_CLAUSES =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #F:bool) t:bool)) (#~:fun(bool,bool) t:bool))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool)))))))
+      #|EQ_CLAUSES =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #F:bool) t:bool)) (#~:fun(bool,bool) t:bool))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool)))))))
       #|NOT_CLAUSES_WEAK =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) #T:bool)) #F:bool)) ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) #F:bool)) #T:bool))
-      #|AND_CLAUSES =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #F:bool)) #F:bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool)))))))
-      #|OR_CLAUSES =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #T:bool) t:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #F:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #F:bool)) t:bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool)))))))
-      #|IMP_CLAUSES =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) t:bool)) #T:bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool))))))))
-      #|EXISTS_UNIQUE_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\x':'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x':'A))) ((#=:fun('A,fun('A,bool)) x:'A) x':'A))))))))))
-      #|EXISTS_REFL =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) a:'A)))))
-      #|EXISTS_UNIQUE_REFL =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#?!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) a:'A)))))
-      #|UNWIND_THM1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) a:'A) x:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
-      #|UNWIND_THM2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) a:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
-      #|FORALL_UNWIND_THM2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) a:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
-      #|FORALL_UNWIND_THM1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) a:'A) x:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
-      #|SWAP_FORALL_THM =  |- (#forall:fun(fun(fun('A,fun('B,bool)),bool),bool) (\P:fun('A,fun('B,bool)). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('B,bool),bool) (\y:'B. ((P:fun('A,fun('B,bool)) x:'A) y:'B)))))) (#forall:fun(fun('B,bool),bool) (\y:'B. (#forall:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) y:'B))))))))
-      #|SWAP_EXISTS_THM =  |- (#forall:fun(fun(fun('A,fun('B,bool)),bool),bool) (\P:fun('A,fun('B,bool)). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('B,bool),bool) (\y:'B. ((P:fun('A,fun('B,bool)) x:'A) y:'B)))))) (#?:fun(fun('B,bool),bool) (\y:'B. (#?:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) y:'B))))))))
-      #|FORALL_AND_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
-      #|AND_FORALL_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))))))))
-      #|LEFT_AND_FORALL_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
-      #|RIGHT_AND_FORALL_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) P:bool) (#forall:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
-      #|EXISTS_OR_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
-      #|OR_EXISTS_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))))))))
-      #|LEFT_OR_EXISTS_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
-      #|RIGHT_OR_EXISTS_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) P:bool) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
-      #|LEFT_EXISTS_AND_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool))))))
-      #|RIGHT_EXISTS_AND_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A))))) ((#/\:fun(bool,fun(bool,bool)) P:bool) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
-      #|TRIV_EXISTS_AND_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#?:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
-      #|LEFT_AND_EXISTS_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
-      #|RIGHT_AND_EXISTS_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) P:bool) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
-      #|TRIV_AND_EXISTS_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#?:fun(fun('A,bool),bool) (\x:'A. Q:bool)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))))
-      #|TRIV_FORALL_OR_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#\/:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#forall:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
-      #|TRIV_OR_FORALL_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#forall:fun(fun('A,bool),bool) (\x:'A. Q:bool)))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))))
-      #|RIGHT_IMP_FORALL_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) P:bool) (#forall:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
-      #|RIGHT_FORALL_IMP_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) P:bool) (#forall:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
-      #|LEFT_IMP_EXISTS_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
-      #|LEFT_FORALL_IMP_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool)))) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool))))))
-      #|TRIV_FORALL_IMP_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#forall:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
-      #|TRIV_EXISTS_IMP_THM =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#?:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
+      #|AND_CLAUSES =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #F:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #F:bool)) #F:bool)) ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool)))))))
+      #|OR_CLAUSES =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #T:bool) t:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #F:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #F:bool)) t:bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool)))))))
+      #|IMP_CLAUSES =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #T:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) t:bool)) #T:bool)) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool))))))))
+      #|EXISTS_UNIQUE_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\x':'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x':'A))) ((#=:fun('A,fun('A,bool)) x:'A) x':'A))))))))))
+      #|EXISTS_REFL =  |- (#∀:fun(fun('A,bool),bool) (\a:'A. (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) a:'A)))))
+      #|EXISTS_UNIQUE_REFL =  |- (#∀:fun(fun('A,bool),bool) (\a:'A. (#?!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) x:'A) a:'A)))))
+      #|UNWIND_THM1 =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) a:'A) x:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
+      #|UNWIND_THM2 =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) a:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
+      #|FORALL_UNWIND_THM2 =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) a:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
+      #|FORALL_UNWIND_THM1 =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun('A,bool),bool) (\a:'A. ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) a:'A) x:'A)) (P:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))))))
+      #|SWAP_FORALL_THM =  |- (#∀:fun(fun(fun('A,fun('B,bool)),bool),bool) (\P:fun('A,fun('B,bool)). ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('B,bool),bool) (\y:'B. ((P:fun('A,fun('B,bool)) x:'A) y:'B)))))) (#∀:fun(fun('B,bool),bool) (\y:'B. (#∀:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) y:'B))))))))
+      #|SWAP_EXISTS_THM =  |- (#∀:fun(fun(fun('A,fun('B,bool)),bool),bool) (\P:fun('A,fun('B,bool)). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('B,bool),bool) (\y:'B. ((P:fun('A,fun('B,bool)) x:'A) y:'B)))))) (#?:fun(fun('B,bool),bool) (\y:'B. (#?:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) y:'B))))))))
+      #|FORALL_AND_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#∀:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
+      #|AND_FORALL_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#∀:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))))))))
+      #|LEFT_AND_FORALL_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
+      #|RIGHT_AND_FORALL_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) P:bool) (#∀:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
+      #|EXISTS_OR_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
+      #|OR_EXISTS_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))))))))
+      #|LEFT_OR_EXISTS_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
+      #|RIGHT_OR_EXISTS_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) P:bool) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
+      #|LEFT_EXISTS_AND_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool))))))
+      #|RIGHT_EXISTS_AND_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A))))) ((#/\:fun(bool,fun(bool,bool)) P:bool) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
+      #|TRIV_EXISTS_AND_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#?:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
+      #|LEFT_AND_EXISTS_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
+      #|RIGHT_AND_EXISTS_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) P:bool) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
+      #|TRIV_AND_EXISTS_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#?:fun(fun('A,bool),bool) (\x:'A. Q:bool)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))))
+      #|TRIV_FORALL_OR_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#\/:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#∀:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
+      #|TRIV_OR_FORALL_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#∀:fun(fun('A,bool),bool) (\x:'A. Q:bool)))) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))))
+      #|RIGHT_IMP_FORALL_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) P:bool) (#∀:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A))))) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A)))))))))
+      #|RIGHT_FORALL_IMP_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) P:bool) (#∀:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))))))
+      #|LEFT_IMP_EXISTS_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool))))))))
+      #|LEFT_FORALL_IMP_THM =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) Q:bool)))) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool))))))
+      #|TRIV_FORALL_IMP_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#∀:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
+      #|TRIV_EXISTS_IMP_THM =  |- (#∀:fun(fun(bool,bool),bool) (\P:bool. (#∀:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool)))) ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. P:bool))) (#?:fun(fun('A,bool),bool) (\x:'A. Q:bool))))))))
       #|MONO_AND =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) A:bool) B:bool)) ((#==>:fun(bool,fun(bool,bool)) C:bool) D:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) A:bool) C:bool)) ((#/\:fun(bool,fun(bool,bool)) B:bool) D:bool)))
       #|MONO_OR =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) A:bool) B:bool)) ((#==>:fun(bool,fun(bool,bool)) C:bool) D:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) A:bool) C:bool)) ((#\/:fun(bool,fun(bool,bool)) B:bool) D:bool)))
       #|MONO_IMP =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) B:bool) A:bool)) ((#==>:fun(bool,fun(bool,bool)) C:bool) D:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) A:bool) C:bool)) ((#==>:fun(bool,fun(bool,bool)) B:bool) D:bool)))
       #|MONO_NOT =  |- ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) B:bool) A:bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) A:bool)) (#~:fun(bool,bool) B:bool)))
-      #|MONO_FORALL =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#forall:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))
-      #|MONO_EXISTS =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))
-      #|WLOG_RELATION =  |- (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\P:fun('A,fun('A,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun('A,fun('A,bool)) x:'A) y:'A)) ((P:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#\/:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((P:fun('A,fun('A,bool)) x:'A) y:'A))))))))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((P:fun('A,fun('A,bool)) x:'A) y:'A))))))))))
-      #|EXISTS_UNIQUE_ALT =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) y:'A)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)))))))))
-      #|EXISTS_UNIQUE =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))))))
-      #|basic_rewrites =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) x:'A)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #F:bool) t:bool)) (#~:fun(bool,bool) t:bool)) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool)) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) #T:bool)) #F:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) #F:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #F:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #F:bool)) #F:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #T:bool) t:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #F:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #F:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) t:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool)) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool) ;;  |- ((#=:fun('B,fun('B,bool)) ((\x:'A. (f:fun('A,'B) x:'A)) y:'A)) (f:fun('A,'B) y:'A)) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?849,fun('?849,bool)) x:'?849) x:'?849)) p:bool)) p:bool)
+      #|MONO_FORALL =  |- ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#∀:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))
+      #|MONO_EXISTS =  |- ((#==>:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (Q:fun('A,bool) x:'A)))))
+      #|WLOG_RELATION =  |- (#∀:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). (#∀:fun(fun(fun('A,fun('A,bool)),bool),bool) (\P:fun('A,fun('A,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun('A,fun('A,bool)) x:'A) y:'A)) ((P:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#\/:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((P:fun('A,fun('A,bool)) x:'A) y:'A))))))))) (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((P:fun('A,fun('A,bool)) x:'A) y:'A))))))))))
+      #|EXISTS_UNIQUE_ALT =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) y:'A)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)))))))))
+      #|EXISTS_UNIQUE =  |- (#∀:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#∀:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) y:'A)) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))))))))))
+      #|basic_rewrites =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) x:'A)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) #F:bool) t:bool)) (#~:fun(bool,bool) t:bool)) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool)) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) #T:bool)) #F:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) #F:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #T:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #F:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) #F:bool)) #F:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #T:bool) t:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) #F:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) #F:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #T:bool) t:bool)) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #T:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #F:bool) t:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) t:bool)) #T:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool)) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#∀:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. t:bool))) t:bool) ;;  |- ((#=:fun('B,fun('B,bool)) ((\x:'A. (f:fun('A,'B) x:'A)) y:'A)) (f:fun('A,'B) y:'A)) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?849,fun('?849,bool)) x:'?849) x:'?849)) p:bool)) p:bool)
       #|basic_congs =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) p:bool) p':bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p':bool) ((#=:fun(bool,fun(bool,bool)) q:bool) q':bool))) ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#==>:fun(bool,fun(bool,bool)) p':bool) q':bool))))
       #|AC =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#/\:fun(bool,fun(bool,bool)) r:bool) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool)))
       #|AC_bad ! EQT_ELIM
@@ -533,7 +533,7 @@ test "theorems matches theorems.ml" {
       #|INTRO_zero ! Garbage after intro pattern
       #|INTRO_garbage ! Garbage after intro pattern
       #|Warning: inventing type variables
-      #|FIX_vars = [\n`forall z. (P:?1997->?1996->A->bool) (x:?1997) (y:?1996) z`\n]
+      #|FIX_vars = [\n`\226\136\128z. (P:?1997->?1996->A->bool) (x:?1997) (y:?1996) z`\n]
       #|Warning: inventing type variables
       #|FIX_rename = [\n`(P:?2008->A->bool) (x:?2008) a`\n]
       #|Warning: inventing type variables
@@ -545,7 +545,7 @@ test "theorems matches theorems.ml" {
       #|HYP_rule = [\n  0 [`b`] (h)\n\n`c`\n]
       #|HYP_bad ! HYP_TAC: invalid pattern
       #|CLAIM_TAC = [\n`p /\\ q`\n; \n  0 [`p`] (hp)\n  1 [`q`] (hq)\n\n`c`\n]
-      #|constants = _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
+      #|constants = _FALSITY_ ?! ~ F \/ ? ∀ ==> /\ T =
       #|axioms = 0
       #|Warning: inventing type variables
       #|counter_tyvar = zz_counter:'?2054

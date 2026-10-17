@@ -63,7 +63,7 @@ test "basics matches basics.ml" {
     ("\\/", bb),
     ("==>", bb),
     ("~", fn_(@kernel.bool_ty, @kernel.bool_ty)),
-    ("forall", fn_(fn_(a, @kernel.bool_ty), @kernel.bool_ty)),
+    ("∀", fn_(fn_(a, @kernel.bool_ty), @kernel.bool_ty)),
     ("?", fn_(fn_(a, @kernel.bool_ty), @kernel.bool_ty)),
     ("NUMERAL", fn_(num_ty, num_ty)),
     ("BIT0", fn_(num_ty, num_ty)),
@@ -106,7 +106,7 @@ test "basics matches basics.ml" {
   let conj = (l, r) => @basics.mk_binary("/\\", l, r)
   let imp = (l, r) => @basics.mk_binary("==>", l, r)
   let disj = (l, r) => @basics.mk_binary("\\/", l, r)
-  let forall = (v, t) => @basics.mk_binder("forall", v, t)
+  let forall = (v, t) => @basics.mk_binder("∀", v, t)
   let exists = (v, t) => @basics.mk_binder("?", v, t)
   let neg = t => mk_comb(mk_const("~"), t)
   log.attempt("genvar", () => {
@@ -201,14 +201,14 @@ test "basics matches basics.ml" {
   })
   log.attempt("mk_mconst", () => {
     stm(
-      @basics.mk_mconst("forall", fn_(fn_(num_ty, @kernel.bool_ty), @kernel.bool_ty)),
+      @basics.mk_mconst("∀", fn_(fn_(num_ty, @kernel.bool_ty), @kernel.bool_ty)),
     )
   })
   log.attempt("mk_mconst_bad", () => {
-    stm(@basics.mk_mconst("forall", fn_(num_ty, @kernel.bool_ty)))
+    stm(@basics.mk_mconst("∀", fn_(num_ty, @kernel.bool_ty)))
   })
   log.attempt("mk_icomb", () => {
-    stm(@basics.mk_icomb(mk_const("forall"), mk_abs(n, neg(p))))
+    stm(@basics.mk_icomb(mk_const("∀"), mk_abs(n, neg(p))))
   })
   log.attempt("mk_icomb_nonfun", () => stm(@basics.mk_icomb(mk_const("_0"), n)))
   let nil_num = @kernel.inst(@list.List([(num_ty, a)]), mk_const("NIL"))
@@ -406,9 +406,9 @@ test "basics matches basics.ml" {
       #|type_match = [bool/'B; num/'A]
       #|type_match_bad ! type_match
       #|type_match_bad2 ! type_match
-      #|mk_mconst = #forall:fun(fun(num,bool),bool)
+      #|mk_mconst = #∀:fun(fun(num,bool),bool)
       #|mk_mconst_bad ! mk_const: generic type cannot be instantiated
-      #|mk_icomb = (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) p:bool)))
+      #|mk_icomb = (#∀:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) p:bool)))
       #|mk_icomb_nonfun !! Match_failure
       #|list_mk_icomb = ((#CONS:fun(num,fun(fun(num,num),fun(num,num))) n:num) #NIL:fun(num,num))
       #|thm_frees = [g:fun('A,'A); x:'A; y:'A]
@@ -432,7 +432,7 @@ test "basics matches basics.ml" {
       #|dest_list_bad ! dest_list
       #|is_list = truefalse
       #|mk_gabs_var = (\x:'A. ((f:fun('A,fun('A,'A)) x:'A) y:'A))
-      #|mk_gabs = (#GABS:fun(fun(fun('A,'A),bool),fun('A,'A)) (\f:fun('A,'A). (#forall:fun(fun(fun('A,'A),bool),bool) (\g:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#GEQ:fun('A,fun('A,bool)) (f:fun('A,'A) (g:fun('A,'A) x:'A))) ((f:fun('A,fun('A,'A)) x:'A) y:'A))))))))
+      #|mk_gabs = (#GABS:fun(fun(fun('A,'A),bool),fun('A,'A)) (\f:fun('A,'A). (#∀:fun(fun(fun('A,'A),bool),bool) (\g:fun('A,'A). (#∀:fun(fun('A,bool),bool) (\x:'A. ((#GEQ:fun('A,fun('A,bool)) (f:fun('A,'A) (g:fun('A,'A) x:'A))) ((f:fun('A,fun('A,'A)) x:'A) y:'A))))))))
       #|dest_gabs = (g:fun('A,'A) x:'A) | ((f:fun('A,fun('A,'A)) x:'A) y:'A)
       #|dest_gabs_bad ! dest_gabs: Not a generalized abstraction
       #|strip_gabs = [(g:fun('A,'A) x:'A); y:'A] | ((f:fun('A,fun('A,'A)) x:'A) y:'A)

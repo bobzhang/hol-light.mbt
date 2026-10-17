@@ -71,7 +71,7 @@ pub fn poly_f_odd() -> @kernel.Thm {
 /// poly_f_empty
 fn step_6() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([poly_f(), @lists.itlist()]))
-  poly_f_empty_c.set(@tactics.prove(@parser.parse_term("forall x. poly_f [] x = &0"), t1))
+  poly_f_empty_c.set(@tactics.prove(@parser.parse_term("∀ x. poly_f [] x = &0"), t1))
 }
 
 ///|
@@ -87,7 +87,7 @@ pub fn poly_f_empty() -> @kernel.Thm {
 /// poly_f_cons
 fn step_7() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([poly_f(), @lists.itlist()]))
-  poly_f_cons_c.set(@tactics.prove(@parser.parse_term("forall x h t. poly_f (CONS h t) x = h + x * poly_f t x"), t2))
+  poly_f_cons_c.set(@tactics.prove(@parser.parse_term("∀ x h t. poly_f (CONS h t) x = h + x * poly_f t x"), t2))
 }
 
 ///|
@@ -103,7 +103,7 @@ pub fn poly_f_cons() -> @kernel.Thm {
 /// poly_f_even_empty
 fn step_8() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([poly_f_even(), poly_f_empty()]))
-  poly_f_even_empty_c.set(@tactics.prove(@parser.parse_term("forall x. poly_f_even [] x = &0"), t3))
+  poly_f_even_empty_c.set(@tactics.prove(@parser.parse_term("∀ x. poly_f_even [] x = &0"), t3))
 }
 
 ///|
@@ -119,7 +119,7 @@ pub fn poly_f_even_empty() -> @kernel.Thm {
 /// poly_f_even_cons
 fn step_9() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([poly_f_even(), poly_f_cons()]))
-  poly_f_even_cons_c.set(@tactics.prove(@parser.parse_term("forall x h t. poly_f_even (CONS h t) x = h + (x * x) * poly_f_even t x"), t4))
+  poly_f_even_cons_c.set(@tactics.prove(@parser.parse_term("∀ x h t. poly_f_even (CONS h t) x = h + (x * x) * poly_f_even t x"), t4))
 }
 
 ///|
@@ -135,7 +135,7 @@ pub fn poly_f_even_cons() -> @kernel.Thm {
 /// poly_f_odd_empty
 fn step_10() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([poly_f_odd(), poly_f_even_empty(), @calc_int.real_mul_rzero()]))
-  poly_f_odd_empty_c.set(@tactics.prove(@parser.parse_term("forall x. poly_f_odd [] x = &0"), t5))
+  poly_f_odd_empty_c.set(@tactics.prove(@parser.parse_term("∀ x. poly_f_odd [] x = &0"), t5))
 }
 
 ///|
@@ -158,7 +158,7 @@ fn step_11() -> Unit raise {
   let t7 = @tactics.repeat_tac(@tactics.strip_tac)
   let t6 = @tactics.match_mp_tac(@ind_types.list_induct())
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t6), t7), t9), t10), t11), t12), @calc_rat.real_arith_tac)
-  poly_f_append_c.set(@tactics.prove(@parser.parse_term("forall x b a. poly_f (APPEND a b) x = poly_f a x + x pow (LENGTH a) * poly_f b x"), t13))
+  poly_f_append_c.set(@tactics.prove(@parser.parse_term("∀ x b a. poly_f (APPEND a b) x = poly_f a x + x pow (LENGTH a) * poly_f b x"), t13))
 }
 
 ///|
@@ -175,7 +175,7 @@ pub fn poly_f_append() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t14 = @simp.rewrite_tac(@list.List([@equal.gsym(@realarith.real_pow_2()), @real.real_pow_pow()]))
   let t15 = @tactics.then_tac(@simp.rewrite_tac(@list.List([poly_f_even(), poly_f_append()])), t14)
-  poly_f_even_append_c.set(@tactics.prove(@parser.parse_term("forall x b a. poly_f_even (APPEND a b) x \n\t\t\t       = poly_f_even a x + x pow (2 * LENGTH a) * poly_f_even b x"), t15))
+  poly_f_even_append_c.set(@tactics.prove(@parser.parse_term("∀ x b a. poly_f_even (APPEND a b) x \n\t\t\t       = poly_f_even a x + x pow (2 * LENGTH a) * poly_f_even b x"), t15))
 }
 
 ///|
@@ -193,7 +193,7 @@ fn step_13() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([poly_f_even_append()]))
   let t16 = @simp.rewrite_tac(@list.List([poly_f_odd()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t16), t17), @calc_rat.real_arith_tac)
-  poly_f_odd_append_c.set(@tactics.prove(@parser.parse_term("forall x b a. poly_f_odd (APPEND a b) x \n\t\t\t      = poly_f_odd a x + x pow (2 * LENGTH a) * poly_f_odd b x"), t18))
+  poly_f_odd_append_c.set(@tactics.prove(@parser.parse_term("∀ x b a. poly_f_odd (APPEND a b) x \n\t\t\t      = poly_f_odd a x + x pow (2 * LENGTH a) * poly_f_odd b x"), t18))
 }
 
 ///|
@@ -209,7 +209,7 @@ pub fn poly_f_odd_append() -> @kernel.Thm {
 /// poly_f_empty_interval
 fn step_14() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith(), poly_f_empty(), @realax.real_le_refl()]))
-  poly_f_empty_interval_c.set(@tactics.prove(@parser.parse_term("forall x. interval_arith (poly_f [] x) (&0, &0)"), t19))
+  poly_f_empty_interval_c.set(@tactics.prove(@parser.parse_term("∀ x. interval_arith (poly_f [] x) (&0, &0)"), t19))
 }
 
 ///|
@@ -225,7 +225,7 @@ pub fn poly_f_empty_interval() -> @kernel.Thm {
 /// poly_f_sing
 fn step_15() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([poly_f(), @lists.itlist(), @calc_int.real_mul_rzero(), @calc_int.real_add_rid()]))
-  poly_f_sing_c.set(@tactics.prove(@parser.parse_term("forall c x. poly_f [c] x = c"), t20))
+  poly_f_sing_c.set(@tactics.prove(@parser.parse_term("∀ c x. poly_f [c] x = c"), t20))
 }
 
 ///|
@@ -241,7 +241,7 @@ pub fn poly_f_sing() -> @kernel.Thm {
 /// poly_f_even_sing
 fn step_16() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([poly_f_even(), poly_f_sing()]))
-  poly_f_even_sing_c.set(@tactics.prove(@parser.parse_term("forall c x. poly_f_even [c] x = c"), t21))
+  poly_f_even_sing_c.set(@tactics.prove(@parser.parse_term("∀ c x. poly_f_even [c] x = c"), t21))
 }
 
 ///|
@@ -257,7 +257,7 @@ pub fn poly_f_even_sing() -> @kernel.Thm {
 /// poly_f_odd_sing
 fn step_17() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([poly_f_odd(), poly_f_even_sing(), @real.real_mul_ac()]))
-  poly_f_odd_sing_c.set(@tactics.prove(@parser.parse_term("forall c x. poly_f_odd [c] x = c * x"), t22))
+  poly_f_odd_sing_c.set(@tactics.prove(@parser.parse_term("∀ c x. poly_f_odd [c] x = c * x"), t22))
 }
 
 ///|
@@ -273,7 +273,7 @@ pub fn poly_f_odd_sing() -> @kernel.Thm {
 /// poly_f_empty_high_pos
 fn step_18() -> Unit raise {
   let t23 = @simp.rewrite_tac(@list.List([real_zero(), @interval_arith.interval_arith(), poly_f_empty(), @realax.real_le_refl()]))
-  poly_f_empty_high_pos_c.set(@tactics.prove(@parser.parse_term("forall x. interval_arith (poly_f [] x) (real_zero, &0)"), t23))
+  poly_f_empty_high_pos_c.set(@tactics.prove(@parser.parse_term("∀ x. interval_arith (poly_f [] x) (real_zero, &0)"), t23))
 }
 
 ///|
@@ -289,7 +289,7 @@ pub fn poly_f_empty_high_pos() -> @kernel.Thm {
 /// poly_f_sing_high_pos
 fn step_19() -> Unit raise {
   let t24 = @simp.simp_tac(@list.List([poly_f_sing()]))
-  poly_f_sing_high_pos_c.set(@tactics.prove(@parser.parse_term("forall c x bounds. interval_arith c bounds\n\t\t\t\t ==> interval_arith (poly_f [c] x) bounds"), t24))
+  poly_f_sing_high_pos_c.set(@tactics.prove(@parser.parse_term("∀ c x bounds. interval_arith c bounds\n\t\t\t\t ==> interval_arith (poly_f [c] x) bounds"), t24))
 }
 
 ///|
@@ -320,7 +320,7 @@ fn step_20() -> Unit raise {
   let t29 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realarith.real_le_add()), t26), t27), t28), @tactics.all_tac])
   let t25 = @tactics.repeat_tac(@tactics.strip_tac)
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([poly_f_cons(), @interval_arith.interval_arith(), real_zero()])), t25), t29), t30), t31), t32), t33), t34), t35), t36), t37), t38), t39)
-  poly_f_cons_high_pos_pos_c.set(@tactics.prove(@parser.parse_term("forall x h t a b c m r.  \n\t\t\t\t       interval_arith (poly_f t x) (real_zero, a) /\\\n\t\t\t\t       interval_arith h (real_zero, b) /\\\n\t\t\t\t       interval_arith x (real_zero, c) /\\\n\t\t\t\t       c * a <= m /\\\n\t\t\t\t       b + m <= r\n\t\t\t\t       ==> interval_arith (poly_f (CONS h t) x) (real_zero, r)"), t40))
+  poly_f_cons_high_pos_pos_c.set(@tactics.prove(@parser.parse_term("∀ x h t a b c m r.  \n\t\t\t\t       interval_arith (poly_f t x) (real_zero, a) /\\\n\t\t\t\t       interval_arith h (real_zero, b) /\\\n\t\t\t\t       interval_arith x (real_zero, c) /\\\n\t\t\t\t       c * a <= m /\\\n\t\t\t\t       b + m <= r\n\t\t\t\t       ==> interval_arith (poly_f (CONS h t) x) (real_zero, r)"), t40))
 }
 
 ///|
@@ -336,7 +336,7 @@ pub fn poly_f_cons_high_pos_pos() -> @kernel.Thm {
 /// poly_f_empty_low_pos
 fn step_21() -> Unit raise {
   let t41 = @simp.rewrite_tac(@list.List([real_zero(), @interval_arith.interval_arith(), poly_f_empty(), @realax.real_le_refl()]))
-  poly_f_empty_low_pos_c.set(@tactics.prove(@parser.parse_term("forall x. interval_arith (&0) (real_zero, poly_f [] x)"), t41))
+  poly_f_empty_low_pos_c.set(@tactics.prove(@parser.parse_term("∀ x. interval_arith (&0) (real_zero, poly_f [] x)"), t41))
 }
 
 ///|
@@ -352,7 +352,7 @@ pub fn poly_f_empty_low_pos() -> @kernel.Thm {
 /// poly_f_sing_low_pos
 fn step_22() -> Unit raise {
   let t42 = @simp.simp_tac(@list.List([poly_f_sing()]))
-  poly_f_sing_low_pos_c.set(@tactics.prove(@parser.parse_term("forall c b x. interval_arith b (real_zero, c)\n\t\t\t\t==> interval_arith b (real_zero, poly_f [c] x)"), t42))
+  poly_f_sing_low_pos_c.set(@tactics.prove(@parser.parse_term("∀ c b x. interval_arith b (real_zero, c)\n\t\t\t\t==> interval_arith b (real_zero, poly_f [c] x)"), t42))
 }
 
 ///|
@@ -380,7 +380,7 @@ fn step_23() -> Unit raise {
   let t44 = @simp.asm_rewrite_tac(@list.List([]))
   let t43 = @tactics.repeat_tac(@tactics.strip_tac)
   let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([poly_f_cons(), @interval_arith.interval_arith(), real_zero()])), t43), t44), t45), t46), t47), t48), t49), t50), t51), t52), t53), t54)
-  poly_f_cons_low_pos_pos_c.set(@tactics.prove(@parser.parse_term("forall x h t a b c m r.  \n\t\t\t\t      interval_arith a (real_zero, poly_f t x) /\\\n\t\t\t\t      interval_arith b (real_zero, h) /\\\n\t\t\t\t      interval_arith c (real_zero, x) /\\\n\t\t\t\t      m <= c * a /\\\n\t\t\t\t      r <= b + m /\\\n\t\t\t\t      real_zero <= r\n\t\t\t\t       ==> interval_arith r (real_zero, poly_f (CONS h t) x)"), t55))
+  poly_f_cons_low_pos_pos_c.set(@tactics.prove(@parser.parse_term("∀ x h t a b c m r.  \n\t\t\t\t      interval_arith a (real_zero, poly_f t x) /\\\n\t\t\t\t      interval_arith b (real_zero, h) /\\\n\t\t\t\t      interval_arith c (real_zero, x) /\\\n\t\t\t\t      m <= c * a /\\\n\t\t\t\t      r <= b + m /\\\n\t\t\t\t      real_zero <= r\n\t\t\t\t       ==> interval_arith r (real_zero, poly_f (CONS h t) x)"), t55))
 }
 
 ///|
@@ -400,7 +400,7 @@ fn step_24() -> Unit raise {
   let t57 = @list.List([@simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @more_list.table_suc(), @more_list.table_0(), @lists.append(), poly_f_sing(), @realax.real_pow(), @realarith.real_mul_rid()])), @tactics.all_tac])
   let t56 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @arith.le_0()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t56), t57), t58), t59)
-  sum_eq_poly_f_c.set(@tactics.prove(@parser.parse_term("forall a x n. sum (0..n) (\\i. a i * x pow i) = poly_f (TABLE a (SUC n)) x"), t60))
+  sum_eq_poly_f_c.set(@tactics.prove(@parser.parse_term("∀ a x n. sum (0..n) (\\i. a i * x pow i) = poly_f (TABLE a (SUC n)) x"), t60))
 }
 
 ///|
@@ -416,7 +416,7 @@ pub fn sum_eq_poly_f() -> @kernel.Thm {
 /// sum_eq_poly_f_even
 fn step_25() -> Unit raise {
   let t61 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_pow_pow()), sum_eq_poly_f(), poly_f_even(), @realarith.real_pow_2()]))
-  sum_eq_poly_f_even_c.set(@tactics.prove(@parser.parse_term("forall a x n. sum (0..n) (\\i. a i * x pow (2 * i)) \n\t\t\t       = poly_f_even (TABLE a (SUC n)) x"), t61))
+  sum_eq_poly_f_even_c.set(@tactics.prove(@parser.parse_term("∀ a x n. sum (0..n) (\\i. a i * x pow (2 * i)) \n\t\t\t       = poly_f_even (TABLE a (SUC n)) x"), t61))
 }
 
 ///|
@@ -434,7 +434,7 @@ fn step_26() -> Unit raise {
   let t63 = @simp.rewrite_tac(@list.List([@realarith.real_pow_2(), @real.real_mul_ac()]))
   let t62 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_pow_pow()), sum_eq_poly_f(), poly_f_odd(), poly_f_even()]))
   let t64 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@real.real_pow_add(), @realax.real_mul_assoc(), @iterate.sum_rmul(), @real.real_pow_1()])), t62), t63)
-  sum_eq_poly_f_odd_c.set(@tactics.prove(@parser.parse_term("forall a x n. sum (0..n) (\\i. a i * x pow (2 * i + 1)) \n\t\t\t       = poly_f_odd (TABLE a (SUC n)) x"), t64))
+  sum_eq_poly_f_odd_c.set(@tactics.prove(@parser.parse_term("∀ a x n. sum (0..n) (\\i. a i * x pow (2 * i + 1)) \n\t\t\t       = poly_f_odd (TABLE a (SUC n)) x"), t64))
 }
 
 ///|
@@ -452,12 +452,12 @@ fn step_27() -> Unit raise {
   let t70 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("(k + 1) + 1 = k + 2"))]))
   let t69 = @simp.asm_rewrite_tac(@list.List([@arith.add1()]))
   let t68 = @tactics.conv_tac(@calc_num.num_reduce_conv)
-  let t67 = @tactics.subgoal_then(@parser.parse_term("forall k. P k /\\ P (k + 1)"), fn(x65 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t67 = @tactics.subgoal_then(@parser.parse_term("∀ k. P k /\\ P (k + 1)"), fn(x65 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x65
     @simp.rewrite_tac(@list.List([th]))
   })
   let t71 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t67), @nums.induct_tac), t68), t69), t70)
-  two_induct_c.set(@tactics.prove(@parser.parse_term("forall P. P 0 /\\ P 1 /\\ (forall k. P k /\\ P (k + 1) ==> P (k + 2)) ==> (forall k. P k)"), t71))
+  two_induct_c.set(@tactics.prove(@parser.parse_term("∀ P. P 0 /\\ P 1 /\\ (∀ k. P k /\\ P (k + 1) ==> P (k + 2)) ==> (∀ k. P k)"), t71))
 }
 
 ///|
@@ -520,7 +520,7 @@ fn step_28() -> Unit raise {
       s102(x103)
     }
   }), @list.List([@int.arith_tac, @tactics.all_tac])), t104), @int.arith_tac), @tactics.all_tac])
-  let t100 = @tactics.subgoal_then(@parser.parse_term("~(2 = 0) /\\ (forall m. (2 * m) DIV 2 = m) /\\ (forall m. (2 * m + 1) DIV 2 = m)"), fn(x97 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t100 = @tactics.subgoal_then(@parser.parse_term("~(2 = 0) /\\ (∀ m. (2 * m) DIV 2 = m) /\\ (∀ m. (2 * m + 1) DIV 2 = m)"), fn(x97 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s98 = @tactics.assume_tac(x97)
     fn(x99 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s98(x99)
@@ -554,7 +554,7 @@ fn step_28() -> Unit raise {
   let t73 = @tactics.repeat_tac(@tactics.strip_tac)
   let t72 = @tactics.match_mp_tac(two_induct())
   let t141 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t72), t73), t82), t83), t84), t87), t89), t92), t94), t95), t96), t100), t105), t106), t124), t128), t129), @tactics.strip_tac), t130), t131), t132), t135), t137), t138), t139), t140), @calc_rat.real_arith_tac)
-  alt_sum_eq_poly_f_c.set(@tactics.prove(@parser.parse_term("forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow i)\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) x\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) x"), t141))
+  alt_sum_eq_poly_f_c.set(@tactics.prove(@parser.parse_term("∀ a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow i)\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) x\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) x"), t141))
 }
 
 ///|
@@ -570,7 +570,7 @@ pub fn alt_sum_eq_poly_f() -> @kernel.Thm {
 /// alt_sum_eq_poly_f_even
 fn step_29() -> Unit raise {
   let t142 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_pow_pow()), alt_sum_eq_poly_f(), @realarith.real_pow_2()]))
-  alt_sum_eq_poly_f_even_c.set(@tactics.prove(@parser.parse_term("forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i))\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x)"), t142))
+  alt_sum_eq_poly_f_even_c.set(@tactics.prove(@parser.parse_term("∀ a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i))\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x)"), t142))
 }
 
 ///|
@@ -586,7 +586,7 @@ pub fn alt_sum_eq_poly_f_even() -> @kernel.Thm {
 /// alt_sum_eq_poly_f_odd
 fn step_30() -> Unit raise {
   let t143 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@real.real_pow_add(), @realax.real_mul_assoc(), @iterate.sum_rmul(), alt_sum_eq_poly_f_even()])), @calc_rat.real_arith_tac)
-  alt_sum_eq_poly_f_odd_c.set(@tactics.prove(@parser.parse_term("forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i + 1))\n\t\t\t\t= x * (poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x))"), t143))
+  alt_sum_eq_poly_f_odd_c.set(@tactics.prove(@parser.parse_term("∀ a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i + 1))\n\t\t\t\t= x * (poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x))"), t143))
 }
 
 ///|

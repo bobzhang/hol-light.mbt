@@ -5,7 +5,7 @@
 /// ARITHMETIC_PROGRESSION_SIMPLE
 fn step_1() -> Unit raise {
   let t1 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  arithmetic_progression_simple_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i) = (n*(n + 1)) DIV 2"), t1))
+  arithmetic_progression_simple_c.set(@tactics.prove(@parser.parse_term("∀ n. nsum(1..n) (\\i. i) = (n*(n + 1)) DIV 2"), t1))
 }
 
 ///|
@@ -29,7 +29,7 @@ fn step_2() -> Unit raise {
 ///|
 /// miz3/Samples/talk.ml:8
 fn step_3() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\nforall n. nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2\nproof\n  nsum(0..0) (\\i. i) = 0 by NSUM_CLAUSES_NUMSEG;\n    .= (0*(0 + 1)) DIV 2 [A1] by ARITH_TAC;\n  now let n be num;\n    assume nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2;\n    nsum(0..SUC n) (\\i. i) = (n*(n + 1)) DIV 2 + SUC n\n      by NSUM_CLAUSES_NUMSEG,ARITH_RULE (parse_term \"0 <= SUC n\");\n    thus .= ((SUC n)*(SUC n + 1)) DIV 2 by ARITH_TAC;\n  end;\nqed by INDUCT_TAC,A1")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\n∀ n. nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2\nproof\n  nsum(0..0) (\\i. i) = 0 by NSUM_CLAUSES_NUMSEG;\n    .= (0*(0 + 1)) DIV 2 [A1] by ARITH_TAC;\n  now let n be num;\n    assume nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2;\n    nsum(0..SUC n) (\\i. i) = (n*(n + 1)) DIV 2 + SUC n\n      by NSUM_CLAUSES_NUMSEG,ARITH_RULE (parse_term \"0 <= SUC n\");\n    thus .= ((SUC n)*(SUC n + 1)) DIV 2 by ARITH_TAC;\n  end;\nqed by INDUCT_TAC,A1")))
 }
 
 ///|
@@ -99,7 +99,7 @@ fn step_7() -> Unit raise {
 ///|
 /// miz3/Samples/talk.ml:21
 fn step_8() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\nnow\n  (if 1 = 0 then 0 else 0) = (0 * (0 + 1)) DIV 2 [A1] by ARITH_TAC;\n  nsum (1..0) (\\i. i) = (0 * (0 + 1)) DIV 2 [A2]\n    by REWRITE_TAC,NSUM_CLAUSES_NUMSEG,A1;\n  now [A3]\n    let n be num;\n    assume nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2 [A4];\n    (if 1 <= SUC n then (n * (n + 1)) DIV 2 + SUC n else (n * (n + 1)) DIV 2) =\n      (SUC n * (SUC n + 1)) DIV 2 [A5] by ARITH_TAC;\n    thus nsum (1..SUC n) (\\i. i) = (SUC n * (SUC n + 1)) DIV 2 [A6]\n      by REWRITE_TAC,NSUM_CLAUSES_NUMSEG,A4,A5;\n  end;\n  thus forall n. nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2 [A7] by INDUCT_TAC,A2,A3;\nend")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\nnow\n  (if 1 = 0 then 0 else 0) = (0 * (0 + 1)) DIV 2 [A1] by ARITH_TAC;\n  nsum (1..0) (\\i. i) = (0 * (0 + 1)) DIV 2 [A2]\n    by REWRITE_TAC,NSUM_CLAUSES_NUMSEG,A1;\n  now [A3]\n    let n be num;\n    assume nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2 [A4];\n    (if 1 <= SUC n then (n * (n + 1)) DIV 2 + SUC n else (n * (n + 1)) DIV 2) =\n      (SUC n * (SUC n + 1)) DIV 2 [A5] by ARITH_TAC;\n    thus nsum (1..SUC n) (\\i. i) = (SUC n * (SUC n + 1)) DIV 2 [A6]\n      by REWRITE_TAC,NSUM_CLAUSES_NUMSEG,A4,A5;\n  end;\n  thus ∀ n. nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2 [A7] by INDUCT_TAC,A2,A3;\nend")))
 }
 
 ///|
@@ -137,7 +137,7 @@ pub fn example() -> Ref[@list.List[@miz3.Step]?] {
 /// miz3/Samples/talk.ml:39
 fn step_11() -> Unit raise {
   {
-    example().val = Some(@miz3.parse_qproof(";\nforall n. nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2\nproof\n  nsum(0..0) (\\i. i) = (0*(0 + 1)) DIV 2;\n  now let n be nat;\n    assume nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2;\n    thus nsum(0..SUC n) (\\i. i) = ((SUC n)*(SUC n + 1)) DIV 2 by #;\n  end;\nqed"))
+    example().val = Some(@miz3.parse_qproof(";\n∀ n. nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2\nproof\n  nsum(0..0) (\\i. i) = (0*(0 + 1)) DIV 2;\n  now let n be nat;\n    assume nsum(0..n) (\\i. i) = (n*(n + 1)) DIV 2;\n    thus nsum(0..SUC n) (\\i. i) = ((SUC n)*(SUC n + 1)) DIV 2 by #;\n  end;\nqed"))
     ()
   }
 }
@@ -145,7 +145,7 @@ fn step_11() -> Unit raise {
 ///|
 /// miz3/Samples/talk.ml:49
 fn step_12() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\nforall n. nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2\nproof\n  (if 1 = 0 then 0 else 0) = (0 * (0 + 1)) DIV 2 by ARITH_TAC;\n  nsum (1..0) (\\i. i) = (0 * (0 + 1)) DIV 2 [A1]\n    by ASM_REWRITE_TAC[NSUM_CLAUSES_NUMSEG];\n  forall n. nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2\n      ==> nsum (1..SUC n) (\\i .i) = (SUC n * (SUC n + 1)) DIV 2\n  proof\n    let n be num;\n    assume nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2 [A2];\n    (if 1 <= SUC n then (n * (n + 1)) DIV 2 + SUC n else (n * (n + 1)) DIV 2) =\n      (SUC n * (SUC n + 1)) DIV 2 by ARITH_TAC;\n  qed by ASM_REWRITE_TAC[NSUM_CLAUSES_NUMSEG],A2;\nqed by INDUCT_TAC,A1")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\n∀ n. nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2\nproof\n  (if 1 = 0 then 0 else 0) = (0 * (0 + 1)) DIV 2 by ARITH_TAC;\n  nsum (1..0) (\\i. i) = (0 * (0 + 1)) DIV 2 [A1]\n    by ASM_REWRITE_TAC[NSUM_CLAUSES_NUMSEG];\n  ∀ n. nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2\n      ==> nsum (1..SUC n) (\\i .i) = (SUC n * (SUC n + 1)) DIV 2\n  proof\n    let n be num;\n    assume nsum (1..n) (\\i. i) = (n * (n + 1)) DIV 2 [A2];\n    (if 1 <= SUC n then (n * (n + 1)) DIV 2 + SUC n else (n * (n + 1)) DIV 2) =\n      (SUC n * (SUC n + 1)) DIV 2 by ARITH_TAC;\n  qed by ASM_REWRITE_TAC[NSUM_CLAUSES_NUMSEG],A2;\nqed by INDUCT_TAC,A1")))
 }
 
 ///|
@@ -167,7 +167,7 @@ fn step_13() -> Unit raise {
 ///|
 /// NSUM_CLAUSES_NUMSEG'
 fn step_14() -> Unit raise {
-  nsum_clauses_numseg_p_c.set(@miz3.thm(@miz3.parse_qproof(";\nforall s. nsum(0..0) s = s 0 /\\ forall n. nsum(0..n + 1) s = nsum(0..n) s + s (n + 1)\nproof\n  forall n. 0 <= SUC n by ARITH_TAC;\nqed by NSUM_CLAUSES_NUMSEG,ADD1")))
+  nsum_clauses_numseg_p_c.set(@miz3.thm(@miz3.parse_qproof(";\n∀ s. nsum(0..0) s = s 0 /\\ ∀ n. nsum(0..n + 1) s = nsum(0..n) s + s (n + 1)\nproof\n  ∀ n. 0 <= SUC n by ARITH_TAC;\nqed by NSUM_CLAUSES_NUMSEG,ADD1")))
 }
 
 ///|
@@ -213,7 +213,7 @@ pub fn num_induction_p() -> @kernel.Thm {
 ///|
 /// miz3/Samples/talk.ml:73
 fn step_17() -> Unit raise {
-  ignore(@miz3.thm(@miz3.parse_qproof(";\nforall s. (forall i. s i = i) ==> forall n. nsum(0..n) s = (n*(n + 1)) DIV 2\nproof\n  let s be num->num;\n  assume forall i. s i = i [A1];\n  set X = \\n. (nsum(0..n) s = (n*(n + 1)) DIV 2);\n  nsum(0..0) s = s 0 by NSUM_CLAUSES_NUMSEG';\n    .= 0 by A1;\n    .= (0*(0 + 1)) DIV 2 by ARITH_TAC;\n  X 0 [A2];\n  now [A3] let n be num;\n    assume X n;\n    nsum(0..n + 1) s = (n*(n + 1)) DIV 2 + s (n + 1) by NSUM_CLAUSES_NUMSEG';\n      .= (n*(n + 1)) DIV 2 + (n + 1) by A1;\n    thus X (n + 1) by ARITH_TAC;\n  end;\n  forall n. X n by MATCH_MP_TAC,num_INDUCTION',A2,A3;\nqed")))
+  ignore(@miz3.thm(@miz3.parse_qproof(";\n∀ s. (∀ i. s i = i) ==> ∀ n. nsum(0..n) s = (n*(n + 1)) DIV 2\nproof\n  let s be num->num;\n  assume ∀ i. s i = i [A1];\n  set X = \\n. (nsum(0..n) s = (n*(n + 1)) DIV 2);\n  nsum(0..0) s = s 0 by NSUM_CLAUSES_NUMSEG';\n    .= 0 by A1;\n    .= (0*(0 + 1)) DIV 2 by ARITH_TAC;\n  X 0 [A2];\n  now [A3] let n be num;\n    assume X n;\n    nsum(0..n + 1) s = (n*(n + 1)) DIV 2 + s (n + 1) by NSUM_CLAUSES_NUMSEG';\n      .= (n*(n + 1)) DIV 2 + (n + 1) by A1;\n    thus X (n + 1) by ARITH_TAC;\n  end;\n  ∀ n. X n by MATCH_MP_TAC,num_INDUCTION',A2,A3;\nqed")))
 }
 
 ///|

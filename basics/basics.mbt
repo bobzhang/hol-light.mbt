@@ -508,12 +508,12 @@ pub fn dest_imp(tm : Term) -> (Term, Term) raise {
 
 ///|
 pub fn is_forall(tm : Term) -> Bool {
-  is_binder("forall", tm)
+  is_binder("∀", tm)
 }
 
 ///|
 pub fn dest_forall(tm : Term) -> (Term, Term) raise {
-  dest_binder("forall", tm)
+  dest_binder("∀", tm)
 }
 
 ///|
@@ -682,7 +682,7 @@ pub fn mk_gabs(tm1 : Term, tm2 : Term) -> Term raise {
   }
   let mk_forall = (v : Term, t : Term) => {
     let cop = @kernel.mk_const(
-      "forall",
+      "∀",
       @list.List([(@kernel.type_of(v), @kernel.aty)]),
     )
     @kernel.mk_comb(cop, @kernel.mk_abs(v, t))

@@ -6,7 +6,7 @@ test "recursive Fibonacci equals iterative Fibonacci for every natural number" {
       (
         #|(fib_rec 0 = 0) /\
         #|(fib_rec (SUC 0) = 1) /\
-        #|(forall n. fib_rec (SUC (SUC n)) = fib_rec n + fib_rec (SUC n))
+        #|(∀ n. fib_rec (SUC (SUC n)) = fib_rec n + fib_rec (SUC n))
       ),
     ),
   )
@@ -14,8 +14,8 @@ test "recursive Fibonacci equals iterative Fibonacci for every natural number" {
   let loop_def = @recursion.new_recursive_definition(@nums.num_recursion())(
     @parser.parse_term(
       (
-        #|(forall a b:num. fib_loop 0 a b = a) /\
-        #|(forall n a b. fib_loop (SUC n) a b = fib_loop n b (a + b))
+        #|(∀ a b:num. fib_loop 0 a b = a) /\
+        #|(∀ n a b. fib_loop (SUC n) a b = fib_loop n b (a + b))
       ),
     ),
   )
@@ -26,7 +26,7 @@ test "recursive Fibonacci equals iterative Fibonacci for every natural number" {
   let recurrence = @bool.conjunct2(@bool.conjunct2(recursive))
   let invariant = @tactics.prove(
     @parser.parse_term(
-      "forall n k. fib_loop n (fib_rec k) (fib_rec (SUC k)) = fib_rec (n + k)",
+      "∀ n k. fib_loop n (fib_rec k) (fib_rec (SUC k)) = fib_rec (n + k)",
     ),
     @tactics.then_tac(
       @nums.induct_tac,
@@ -45,14 +45,14 @@ test "recursive Fibonacci equals iterative Fibonacci for every natural number" {
     ),
   )
   let equivalence = @tactics.prove(
-    @parser.parse_term("forall n. fib_iter n = fib_rec n"),
+    @parser.parse_term("∀ n. fib_iter n = fib_rec n"),
     @simp.rewrite_tac(@list.List([iterative, at_zero])),
   )
   assert_true(@kernel.hyp(invariant).is_empty())
   assert_true(@kernel.hyp(equivalence).is_empty())
   assert_eq(
     @kernel.concl(equivalence),
-    @parser.parse_term("forall n. fib_iter n = fib_rec n"),
+    @parser.parse_term("∀ n. fib_iter n = fib_rec n"),
   )
   @testkit.check_axioms()
   println(@printer.string_of_thm(invariant))

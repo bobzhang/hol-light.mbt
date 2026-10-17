@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   binom_c.set(
     @define.define_(
       @parser.parse_term(
-        "(forall n. binom(n,0) = 1) /\\\n   (forall k. binom(0,SUC(k)) = 0) /\\\n   (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))",
+        "(∀ n. binom(n,0) = 1) /\\\n   (∀ k. binom(0,SUC(k)) = 0) /\\\n   (∀ n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))",
       ),
     ),
   )
@@ -31,7 +31,7 @@ fn step_2() -> Unit raise {
   )
   binom_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. binom(0,n) = if n = 0 then 1 else 0"),
+      @parser.parse_term("∀ n. binom(0,n) = if n = 0 then 1 else 0"),
       t1,
     ),
   )
@@ -63,7 +63,7 @@ fn step_3() -> Unit raise {
     t3,
   )
   binom_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall n k. n < k ==> binom(n,k) = 0"), t4),
+    @tactics.prove(@parser.parse_term("∀ n k. n < k ==> binom(n,k) = 0"), t4),
   )
 }
 
@@ -85,7 +85,7 @@ fn step_4() -> Unit raise {
       @list.List([binom(), binom_lt(), @arith.lt(), @calc_num.arith()]),
     ),
   )
-  binom_refl_c.set(@tactics.prove(@parser.parse_term("forall n. binom(n,n) = 1"), t5))
+  binom_refl_c.set(@tactics.prove(@parser.parse_term("∀ n. binom(n,n) = 1"), t5))
 }
 
 ///|
@@ -113,7 +113,7 @@ fn step_5() -> Unit raise {
     ),
     @int.arith_tac,
   )
-  binom_1_c.set(@tactics.prove(@parser.parse_term("forall n. binom(n,1) = n"), t7))
+  binom_1_c.set(@tactics.prove(@parser.parse_term("∀ n. binom(n,1) = n"), t7))
 }
 
 ///|
@@ -286,7 +286,7 @@ fn step_6() -> Unit raise {
   )
   binom_fact_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)"),
+      @parser.parse_term("∀ n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)"),
       t22,
     ),
   )
@@ -403,7 +403,7 @@ fn step_7() -> Unit raise {
     t33,
   )
   binom_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall n k. binom(n,k) = 0 <=> n < k"), t34),
+    @tactics.prove(@parser.parse_term("∀ n k. binom(n,k) = 0 <=> n < k"), t34),
   )
 }
 
@@ -483,7 +483,7 @@ fn step_8() -> Unit raise {
     t40,
   )
   binom_penult_c.set(
-    @tactics.prove(@parser.parse_term("forall n. binom(SUC n,n) = SUC n"), t41),
+    @tactics.prove(@parser.parse_term("∀ n. binom(SUC n,n) = SUC n"), t41),
   )
 }
 
@@ -620,7 +620,7 @@ fn step_9() -> Unit raise {
   )
   binom_ge_top_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. 1 <= m /\\ m < n ==> n <= binom(n,m)"),
+      @parser.parse_term("∀ m n. 1 <= m /\\ m < n ==> n <= binom(n,m)"),
       t56,
     ),
   )
@@ -883,7 +883,7 @@ fn step_10() -> Unit raise {
   binom_top_step_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. ((n + 1) - k) * binom(n + 1,k) = (n + 1) * binom(n,k)",
+        "∀ n k. ((n + 1) - k) * binom(n + 1,k) = (n + 1) * binom(n,k)",
       ),
       t84,
     ),
@@ -1147,7 +1147,7 @@ fn step_11() -> Unit raise {
   binom_bottom_step_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. (k + 1) * binom(n,k + 1) = (n - k) * binom(n,k)",
+        "∀ n k. (k + 1) * binom(n,k + 1) = (n - k) * binom(n,k)",
       ),
       t112,
     ),
@@ -1179,7 +1179,7 @@ fn step_12() -> Unit raise {
   )
   let binom_induct = @tactics.prove(
     @parser.parse_term(
-      "forall P. (forall n. P n 0) /\\\n         (forall k. P 0 (SUC k)) /\\\n         (forall n k. P n (SUC k) /\\ P n k ==> P (SUC n) (SUC k))\n         ==> forall m n. P m n",
+      "∀ P. (∀ n. P n 0) /\\\n         (∀ k. P 0 (SUC k)) /\\\n         (∀ n k. P n (SUC k) /\\ P n k ==> P (SUC n) (SUC k))\n         ==> ∀ m n. P m n",
     ),
     t115,
   )
@@ -1446,7 +1446,7 @@ fn step_12() -> Unit raise {
   has_size_restricted_powerset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n m s:A->bool.\n        s HAS_SIZE n ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)",
+        "∀ n m s:A->bool.\n        s HAS_SIZE n ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)",
       ),
       t158,
     ),
@@ -1571,7 +1571,7 @@ fn step_13() -> Unit raise {
   card_restricted_powerset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s k. FINITE s ==> CARD {t | t SUBSET s /\\ t HAS_SIZE k} = binom(CARD s,k)",
+        "∀ s k. FINITE s ==> CARD {t | t SUBSET s /\\ t HAS_SIZE k} = binom(CARD s,k)",
       ),
       t170,
     ),
@@ -1718,7 +1718,7 @@ fn step_14() -> Unit raise {
   binomial_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x y.\n      (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))",
+        "∀ n x y.\n      (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))",
       ),
       t187,
     ),
@@ -1868,7 +1868,7 @@ fn step_15() -> Unit raise {
   real_binomial_theorem_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n x y.\n     (x + y) pow n = sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k))",
+        "∀ n x y.\n     (x + y) pow n = sum(0..n) (\\k. &(binom(n,k)) * x pow k * y pow (n - k))",
       ),
       t204,
     ),
@@ -1972,7 +1972,7 @@ fn step_16() -> Unit raise {
   binom_top_step_real_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. &(binom(n + 1,k)):real =\n           if k = n + 1 then &1\n           else (&n + &1) / (&n + &1 - &k) * &(binom(n,k))",
+        "∀ n k. &(binom(n + 1,k)):real =\n           if k = n + 1 then &1\n           else (&n + &1) / (&n + &1 - &k) * &(binom(n,k))",
       ),
       t219,
     ),
@@ -2033,7 +2033,7 @@ fn step_17() -> Unit raise {
   binom_bottom_step_real_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. &(binom(n,k+1)):real = (&n - &k) / (&k + &1) * &(binom(n,k))",
+        "∀ n k. &(binom(n,k+1)):real = (&n - &k) / (&k + &1) * &(binom(n,k))",
       ),
       t229,
     ),
@@ -2169,7 +2169,7 @@ fn step_18() -> Unit raise {
   real_of_num_binom_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. &(binom(n,k)):real =\n             if k <= n then &(FACT n) / (&(FACT(n - k)) * &(FACT k))\n             else &0",
+        "∀ n k. &(binom(n,k)):real =\n             if k <= n then &(FACT n) / (&(FACT(n - k)) * &(FACT k))\n             else &0",
       ),
       t243,
     ),
@@ -2271,7 +2271,7 @@ fn step_19() -> Unit raise {
   binom_both_step_real_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p k. &(binom(p + 1,k + 1)):real = (&p + &1) / (&k + &1) * &(binom(p,k))",
+        "∀ p k. &(binom(p + 1,k + 1)):real = (&p + &1) / (&k + &1) * &(binom(p,k))",
       ),
       t254,
     ),
@@ -2309,7 +2309,7 @@ fn step_20() -> Unit raise {
   binom_both_step_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p k. (k + 1) * binom(p + 1,k + 1) = (p + 1) * binom(p,k)",
+        "∀ p k. (k + 1) * binom(p + 1,k + 1) = (p + 1) * binom(p,k)",
       ),
       t258,
     ),
@@ -2347,7 +2347,7 @@ fn step_21() -> Unit raise {
   binom_both_step_down_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p k. (k = 0 ==> p = 0) ==> k * binom(p,k) = p * binom(p - 1,k - 1)",
+        "∀ p k. (k = 0 ==> p = 0) ==> k * binom(p,k) = p * binom(p - 1,k - 1)",
       ),
       t262,
     ),
@@ -2493,7 +2493,7 @@ fn step_22() -> Unit raise {
   binom_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. binom(n,k) =\n            if k <= n then FACT(n) DIV (FACT(n - k) * FACT(k))\n            else 0",
+        "∀ n k. binom(n,k) =\n            if k <= n then FACT(n) DIV (FACT(n - k) * FACT(k))\n            else 0",
       ),
       t279,
     ),
@@ -2759,7 +2759,7 @@ fn step_23() -> Unit raise {
   )
   divides_gcd_binom_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. n divides gcd(n,k) * binom(n,k)"),
+      @parser.parse_term("∀ n k. n divides gcd(n,k) * binom(n,k)"),
       t301,
     ),
   )
@@ -2788,7 +2788,7 @@ fn step_24() -> Unit raise {
   )
   divides_coprime_binom_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. coprime(n,k) ==> n divides binom (n,k)"),
+      @parser.parse_term("∀ n k. coprime(n,k) ==> n divides binom (n,k)"),
       t302,
     ),
   )
@@ -2898,7 +2898,7 @@ fn step_25() -> Unit raise {
   divides_prime_binom_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)",
+        "∀ n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)",
       ),
       t312,
     ),
@@ -2961,7 +2961,7 @@ fn step_26() -> Unit raise {
   binom_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n k. binom(n,n-k) = if k <= n then binom(n,k) else 1",
+        "∀ n k. binom(n,n-k) = if k <= n then binom(n,k) else 1",
       ),
       t318,
     ),
@@ -3148,7 +3148,7 @@ fn step_27() -> Unit raise {
   binom_mul_shift_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m n k. k <= m\n           ==> binom(n,m) * binom(m,k) = binom(n,k) * binom(n - k,m - k)",
+        "∀ m n k. k <= m\n           ==> binom(n,m) * binom(m,k) = binom(n,k) * binom(n - k,m - k)",
       ),
       t341,
     ),
@@ -3269,7 +3269,7 @@ fn step_28() -> Unit raise {
   appell_sequence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c n x y. sum (0..n)\n               (\\k.  &(binom(n,k)) *\n                     sum(0..k)\n                        (\\l. &(binom(k,l)) * c l * x pow (k - l)) *\n                     y pow (n - k)) =\n           sum (0..n) (\\k. &(binom(n,k)) * c k * (x + y) pow (n - k))",
+        "∀ c n x y. sum (0..n)\n               (\\k.  &(binom(n,k)) *\n                     sum(0..k)\n                        (\\l. &(binom(k,l)) * c l * x pow (k - l)) *\n                     y pow (n - k)) =\n           sum (0..n) (\\k. &(binom(n,k)) * c k * (x + y) pow (n - k))",
       ),
       t356,
     ),

@@ -115,7 +115,7 @@ pub fn or() -> @kernel.Thm {
 ///|
 /// ANDS
 fn step_12() -> Unit raise {
-  ands_c.set(@pair.new_definition(@parser.parse_term("ANDS P = \\x:S. forall p. P p ==> p x")))
+  ands_c.set(@pair.new_definition(@parser.parse_term("ANDS P = \\x:S. ∀ p. P p ==> p x")))
 }
 
 ///|
@@ -160,7 +160,7 @@ pub fn imp() -> @kernel.Thm {
 ///|
 /// IMPLIES
 fn step_15() -> Unit raise {
-  implies_c.set(@pair.new_definition(@parser.parse_term("p IMPLIES q <=> forall x:S. p x ==> q x")))
+  implies_c.set(@pair.new_definition(@parser.parse_term("p IMPLIES q <=> ∀ x:S. p x ==> q x")))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn pred_taut(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// IMPLIES_TRANS
 fn step_17() -> Unit raise {
-  implies_trans_c.set(pred_taut(@parser.parse_term("forall p q r. p IMPLIES q /\\ q IMPLIES r ==> p IMPLIES r")))
+  implies_trans_c.set(pred_taut(@parser.parse_term("∀ p q r. p IMPLIES q /\\ q IMPLIES r ==> p IMPLIES r")))
 }
 
 ///|
@@ -404,7 +404,7 @@ pub fn sem_cases() -> @kernel.Thm {
 ///|
 /// sem_RULES, sem_INDUCT, sem_CASES
 fn step_29() -> Unit raise {
-  let (sem_rules, sem_induct, sem_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall f s. sem(Assign f) s (f s)) /\\\n   (forall c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s''\n                     ==> sem(c1 Seq c2) s s'') /\\\n   (forall e c1 c2 s s'. e s /\\ sem(c1) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (forall e c1 c2 s s'. ~(e s) /\\ sem(c2) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (forall e c s. ~(e s) ==> sem(While e c) s s) /\\\n   (forall e c s s' s''. e s /\\ sem(c) s s' /\\ sem(While e c) s' s''\n               ==> sem(While e c) s s'')"))
+  let (sem_rules, sem_induct, sem_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ f s. sem(Assign f) s (f s)) /\\\n   (∀ c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s''\n                     ==> sem(c1 Seq c2) s s'') /\\\n   (∀ e c1 c2 s s'. e s /\\ sem(c1) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (∀ e c1 c2 s s'. ~(e s) /\\ sem(c2) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (∀ e c s. ~(e s) ==> sem(While e c) s s) /\\\n   (∀ e c s s' s''. e s /\\ sem(c) s s' /\\ sem(While e c) s' s''\n               ==> sem(While e c) s s'')"))
   sem_rules_c.set(sem_rules)
   sem_induct_c.set(sem_induct)
   sem_cases_c.set(sem_cases)
@@ -543,7 +543,7 @@ fn step_36() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), true_()]))
   let t31 = @simp.rewrite_tac(@list.List([command_distinct(), command_injective(), abort_()]))
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(sem_induct()), t31), t32), t33)
-  let lemma = @tactics.prove(@parser.parse_term("forall c s s'. sem c s s' ==> ~(c = ABORT)"), t34)
+  let lemma = @tactics.prove(@parser.parse_term("∀ c s s'. sem c s s' ==> ~(c = ABORT)"), t34)
   let t35 = @meson.meson_tac(@list.List([lemma]))
   sem_abort_c.set(@tactics.prove(@parser.parse_term("sem(ABORT) s s' <=> F"), t35))
 }
@@ -592,7 +592,7 @@ pub fn sem_assert() -> @kernel.Thm {
 ///|
 /// deterministic
 fn step_39() -> Unit raise {
-  deterministic_c.set(@pair.new_definition(@parser.parse_term("deterministic r <=> forall s s1 s2. r s s1 /\\ r s s2 ==> (s1 = s2)")))
+  deterministic_c.set(@pair.new_definition(@parser.parse_term("deterministic r <=> ∀ s s1 s2. r s s1 /\\ r s s2 ==> (s1 = s2)")))
 }
 
 ///|
@@ -614,12 +614,12 @@ fn step_40() -> Unit raise {
   let t42 = @tactics.repeat_tac(@tactics.gen_tac)
   let t43 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t42), @tactics.disch_tac)])
   let t41 = @tactics.match_mp_tac(sem_induct())
-  let t40 = @tactics.subgoal_then(@parser.parse_term("forall c s s1. sem c s s1 ==> forall s2:S. sem c s s2 ==> (s1 = s2)"), fn(x38 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t40 = @tactics.subgoal_then(@parser.parse_term("∀ c s s1. sem c s s1 ==> ∀ s2:S. sem c s s2 ==> (s1 = s2)"), fn(x38 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x38
     @meson.meson_tac(@list.List([th]))
   })
   let t48 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([deterministic()])), t40), t41), @tactics.conj_tac), t43), t44), t45), t46), t47)
-  determinism_c.set(@tactics.prove(@parser.parse_term("forall c:(S)command. deterministic(sem c)"), t48))
+  determinism_c.set(@tactics.prove(@parser.parse_term("∀ c:(S)command. deterministic(sem c)"), t48))
 }
 
 ///|
@@ -649,7 +649,7 @@ pub fn terminates() -> @kernel.Thm {
 ///|
 /// wlp
 fn step_42() -> Unit raise {
-  wlp_c.set(@pair.new_definition(@parser.parse_term("wlp c q s <=> forall s'. sem c s s' ==> q s'")))
+  wlp_c.set(@pair.new_definition(@parser.parse_term("wlp c q s <=> ∀ s'. sem c s s' ==> q s'")))
 }
 
 ///|
@@ -681,7 +681,7 @@ pub fn wp() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t49 = @meson.meson_tac(@list.List([]))
   let t50 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), false_()])), t49)
-  wp_total_c.set(@tactics.prove(@parser.parse_term("forall c. (wp c FALSE = FALSE)"), t50))
+  wp_total_c.set(@tactics.prove(@parser.parse_term("∀ c. (wp c FALSE = FALSE)"), t50))
 }
 
 ///|
@@ -749,7 +749,7 @@ pub fn wp_disjunctive() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t57 = @meson.meson_tac(@list.List([]))
   let t58 = @tactics.then_tac(@simp.rewrite_tac(@list.List([wp(), wlp(), terminates(), @trivia.o_thm(), @class.fun_eq_thm(), sem_assign()])), t57)
-  wp_assign_c.set(@tactics.prove(@parser.parse_term("forall f q. wp (Assign f) q = q o f"), t58))
+  wp_assign_c.set(@tactics.prove(@parser.parse_term("∀ f q. wp (Assign f) q = q o f"), t58))
 }
 
 ///|
@@ -766,7 +766,7 @@ pub fn wp_assign() -> @kernel.Thm {
 fn step_49() -> Unit raise {
   let t59 = @meson.meson_tac(@list.List([@simp.rewrite_rule(@list.List([deterministic()]))(determinism())]))
   let t60 = @tactics.then_tac(@simp.rewrite_tac(@list.List([wp(), wlp(), terminates(), sem_seq(), @class.fun_eq_thm()])), t59)
-  wp_seq_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 q. wp (c1 Seq c2) q = wp c1 (wp c2 q)"), t60))
+  wp_seq_c.set(@tactics.prove(@parser.parse_term("∀ c1 c2 q. wp (c1 Seq c2) q = wp c1 (wp c2 q)"), t60))
 }
 
 ///|
@@ -783,7 +783,7 @@ pub fn wp_seq() -> @kernel.Thm {
 fn step_50() -> Unit raise {
   let t61 = @meson.meson_tac(@list.List([]))
   let t62 = @tactics.then_tac(@simp.rewrite_tac(@list.List([wp(), wlp(), terminates(), sem_ite(), @class.fun_eq_thm(), and_(), or(), not_()])), t61)
-  wp_ite_c.set(@tactics.prove(@parser.parse_term("forall e c1 c2 q. wp (Ite e c1 c2) q = (e AND wp c1 q) OR (NOT e AND wp c2 q)"), t62))
+  wp_ite_c.set(@tactics.prove(@parser.parse_term("∀ e c1 c2 q. wp (Ite e c1 c2) q = (e AND wp c1 q) OR (NOT e AND wp c2 q)"), t62))
 }
 
 ///|
@@ -799,7 +799,7 @@ pub fn wp_ite() -> @kernel.Thm {
 /// WP_WHILE
 fn step_51() -> Unit raise {
   let t63 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), @equal.gsym(sem_while())]))
-  wp_while_c.set(@tactics.prove(@parser.parse_term("forall e c. wp (IF e (c Seq While e c)) q = wp (While e c) q"), t63))
+  wp_while_c.set(@tactics.prove(@parser.parse_term("∀ e c. wp (IF e (c Seq While e c)) q = wp (While e c) q"), t63))
 }
 
 ///|
@@ -815,7 +815,7 @@ pub fn wp_while() -> @kernel.Thm {
 /// WP_SKIP
 fn step_52() -> Unit raise {
   let t64 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), skip(), wp_assign(), @trivia.i_thm(), @trivia.o_thm()]))
-  wp_skip_c.set(@tactics.prove(@parser.parse_term("forall q. wp SKIP q = q"), t64))
+  wp_skip_c.set(@tactics.prove(@parser.parse_term("∀ q. wp SKIP q = q"), t64))
 }
 
 ///|
@@ -831,7 +831,7 @@ pub fn wp_skip() -> @kernel.Thm {
 /// WP_ABORT
 fn step_53() -> Unit raise {
   let t65 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), sem_abort(), false_()]))
-  wp_abort_c.set(@tactics.prove(@parser.parse_term("forall q. wp ABORT q = FALSE"), t65))
+  wp_abort_c.set(@tactics.prove(@parser.parse_term("∀ q. wp ABORT q = FALSE"), t65))
 }
 
 ///|
@@ -847,7 +847,7 @@ pub fn wp_abort() -> @kernel.Thm {
 /// WP_IF
 fn step_54() -> Unit raise {
   let t66 = @simp.rewrite_tac(@list.List([if_(), wp_ite(), wp_skip()]))
-  wp_if_c.set(@tactics.prove(@parser.parse_term("forall e c q. wp (IF e c) q = (e AND wp c q) OR (NOT e AND q)"), t66))
+  wp_if_c.set(@tactics.prove(@parser.parse_term("∀ e c q. wp (IF e c) q = (e AND wp c q) OR (NOT e AND q)"), t66))
 }
 
 ///|
@@ -863,7 +863,7 @@ pub fn wp_if() -> @kernel.Thm {
 /// WP_DO
 fn step_55() -> Unit raise {
   let t67 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), @equal.gsym(sem_do())]))
-  wp_do_c.set(@tactics.prove(@parser.parse_term("forall e c. wp (c Seq IF e (DO c e)) q = wp (DO c e) q"), t67))
+  wp_do_c.set(@tactics.prove(@parser.parse_term("∀ e c. wp (c Seq IF e (DO c e)) q = wp (DO c e) q"), t67))
 }
 
 ///|
@@ -880,7 +880,7 @@ pub fn wp_do() -> @kernel.Thm {
 fn step_56() -> Unit raise {
   let t68 = @meson.meson_tac(@list.List([]))
   let t69 = @tactics.then_tac(@simp.rewrite_tac(@list.List([wp(), wlp(), terminates(), sem_assert(), @class.fun_eq_thm(), and_()])), t68)
-  wp_assert_c.set(@tactics.prove(@parser.parse_term("forall g q. wp (ASSERT g) q = g AND q"), t69))
+  wp_assert_c.set(@tactics.prove(@parser.parse_term("∀ g q. wp (ASSERT g) q = g AND q"), t69))
 }
 
 ///|
@@ -911,7 +911,7 @@ pub fn correct() -> @kernel.Thm {
 /// CORRECT_PRESTRENGTH
 fn step_58() -> Unit raise {
   let t70 = @simp.rewrite_tac(@list.List([correct(), implies_trans()]))
-  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("forall p p' c q. p IMPLIES p' /\\ correct p' c q ==> correct p c q"), t70))
+  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("∀ p p' c q. p IMPLIES p' /\\ correct p' c q ==> correct p c q"), t70))
 }
 
 ///|
@@ -928,7 +928,7 @@ pub fn correct_prestrength() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   let t71 = @meson.meson_tac(@list.List([wp_monotonic(), implies_trans()]))
   let t72 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct()])), t71)
-  correct_postweak_c.set(@tactics.prove(@parser.parse_term("forall p c q q'. correct p c q' /\\ q' IMPLIES q ==> correct p c q"), t72))
+  correct_postweak_c.set(@tactics.prove(@parser.parse_term("∀ p c q q'. correct p c q' /\\ q' IMPLIES q ==> correct p c q"), t72))
 }
 
 ///|
@@ -944,7 +944,7 @@ pub fn correct_postweak() -> @kernel.Thm {
 /// CORRECT_ASSIGN
 fn step_60() -> Unit raise {
   let t73 = @simp.rewrite_tac(@list.List([correct(), wp_assign(), implies(), @trivia.o_thm()]))
-  correct_assign_c.set(@tactics.prove(@parser.parse_term("forall p f q. (p IMPLIES (\\s. q(f s))) ==> correct p (Assign f) q"), t73))
+  correct_assign_c.set(@tactics.prove(@parser.parse_term("∀ p f q. (p IMPLIES (\\s. q(f s))) ==> correct p (Assign f) q"), t73))
 }
 
 ///|
@@ -961,7 +961,7 @@ pub fn correct_assign() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([wp_monotonic(), implies_trans()]))
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), wp_seq(), @trivia.o_thm()])), t74)
-  correct_seq_c.set(@tactics.prove(@parser.parse_term("forall p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 Seq c2) q"), t75))
+  correct_seq_c.set(@tactics.prove(@parser.parse_term("∀ p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 Seq c2) q"), t75))
 }
 
 ///|
@@ -978,7 +978,7 @@ pub fn correct_seq() -> @kernel.Thm {
 fn step_62() -> Unit raise {
   let t76 = @meson.meson_tac(@list.List([]))
   let t77 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), wp_ite(), and_(), not_(), implies(), or()])), t76)
-  correct_ite_c.set(@tactics.prove(@parser.parse_term("forall p e c1 c2 q.\n       correct (p AND e) c1 q /\\ correct (p AND (NOT e)) c2 q\n       ==> correct p (Ite e c1 c2) q"), t77))
+  correct_ite_c.set(@tactics.prove(@parser.parse_term("∀ p e c1 c2 q.\n       correct (p AND e) c1 q /\\ correct (p AND (NOT e)) c2 q\n       ==> correct p (Ite e c1 c2) q"), t77))
 }
 
 ///|
@@ -1022,7 +1022,7 @@ fn step_63() -> Unit raise {
     @tactics.match_mp_tac(t84(x85))
   })
   let t83 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
-  let t82 = @tactics.subgoal_then(@parser.parse_term("forall s:S. invariant s ==> wp (While e c) q s"), fn(x79 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t82 = @tactics.subgoal_then(@parser.parse_term("∀ s:S. invariant s ==> wp (While e c) q s"), fn(x79 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s80 = @tactics.mp_tac(x79)
     fn(x81 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s80(x81)
@@ -1030,7 +1030,7 @@ fn step_63() -> Unit raise {
   })
   let t78 = @tactics.repeat_tac(@tactics.strip_tac)
   let t107 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), implies(), @sets.in_(), and_(), not_()])), t78), t82), t83), t86), t87), t88), t89), t90), t91), t92), t93), t97), t99), t103), t105), t106)
-  correct_while_c.set(@tactics.prove(@parser.parse_term("forall (<<) p c q e invariant.\n       WF(<<) /\\\n       p IMPLIES invariant /\\\n       (NOT e) AND invariant IMPLIES q /\\\n       (forall X:S. correct\n              (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n       ==> correct p (While e c) q"), t107))
+  correct_while_c.set(@tactics.prove(@parser.parse_term("∀ (<<) p c q e invariant.\n       WF(<<) /\\\n       p IMPLIES invariant /\\\n       (NOT e) AND invariant IMPLIES q /\\\n       (∀ X:S. correct\n              (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n       ==> correct p (While e c) q"), t107))
 }
 
 ///|
@@ -1046,7 +1046,7 @@ pub fn correct_while() -> @kernel.Thm {
 /// CORRECT_SKIP
 fn step_64() -> Unit raise {
   let t108 = @simp.rewrite_tac(@list.List([correct(), wp_skip()]))
-  correct_skip_c.set(@tactics.prove(@parser.parse_term("forall p q. (p IMPLIES q) ==> correct p SKIP q"), t108))
+  correct_skip_c.set(@tactics.prove(@parser.parse_term("∀ p q. (p IMPLIES q) ==> correct p SKIP q"), t108))
 }
 
 ///|
@@ -1062,7 +1062,7 @@ pub fn correct_skip() -> @kernel.Thm {
 /// CORRECT_ABORT
 fn step_65() -> Unit raise {
   let t109 = @simp.rewrite_tac(@list.List([]))
-  correct_abort_c.set(@tactics.prove(@parser.parse_term("forall p q. F ==> correct p ABORT q"), t109))
+  correct_abort_c.set(@tactics.prove(@parser.parse_term("∀ p q. F ==> correct p ABORT q"), t109))
 }
 
 ///|
@@ -1079,7 +1079,7 @@ pub fn correct_abort() -> @kernel.Thm {
 fn step_66() -> Unit raise {
   let t110 = @meson.meson_tac(@list.List([]))
   let t111 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), wp_if(), and_(), not_(), implies(), or()])), t110)
-  correct_if_c.set(@tactics.prove(@parser.parse_term("forall p e c q.\n        correct (p AND e) c q /\\ (p AND (NOT e)) IMPLIES q\n        ==> correct p (IF e c) q"), t111))
+  correct_if_c.set(@tactics.prove(@parser.parse_term("∀ p e c q.\n        correct (p AND e) c q /\\ (p AND (NOT e)) IMPLIES q\n        ==> correct p (IF e c) q"), t111))
 }
 
 ///|
@@ -1126,7 +1126,7 @@ fn step_67() -> Unit raise {
   let t113 = @tactics.match_mp_tac(correct_seq())
   let t112 = @simp.rewrite_tac(@list.List([do_()]))
   let t139 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t112), t113), t114), t115), @tactics.conj_tac), t138)
-  correct_do_c.set(@tactics.prove(@parser.parse_term("forall (<<) p q c invariant.\n        WF(<<) /\\\n        (e AND invariant) IMPLIES p /\\\n        ((NOT e) AND invariant) IMPLIES q /\\\n        (forall X:S. correct\n               (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n        ==> correct p (DO c e) q"), t139))
+  correct_do_c.set(@tactics.prove(@parser.parse_term("∀ (<<) p q c invariant.\n        WF(<<) /\\\n        (e AND invariant) IMPLIES p /\\\n        ((NOT e) AND invariant) IMPLIES q /\\\n        (∀ X:S. correct\n               (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n        ==> correct p (DO c e) q"), t139))
 }
 
 ///|
@@ -1142,7 +1142,7 @@ pub fn correct_do() -> @kernel.Thm {
 /// CORRECT_ASSERT
 fn step_68() -> Unit raise {
   let t140 = @simp.rewrite_tac(@list.List([correct(), wp_assert()]))
-  correct_assert_c.set(@tactics.prove(@parser.parse_term("forall p g q. p IMPLIES (g AND q) ==> correct p (ASSERT g) q"), t140))
+  correct_assert_c.set(@tactics.prove(@parser.parse_term("∀ p g q. p IMPLIES (g AND q) ==> correct p (ASSERT g) q"), t140))
 }
 
 ///|
@@ -1254,7 +1254,7 @@ pub fn vc_if() -> @kernel.Thm {
 /// VC_AWHILE_VARIANT
 fn step_75() -> Unit raise {
   let t147 = @simp.rewrite_tac(@list.List([awhile(), correct_while()]))
-  vc_awhile_variant_c.set(@tactics.prove(@parser.parse_term("WF(<<) /\\\n   p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (forall X. correct\n        (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (AWHILE invariant (<<) e c) q"), t147))
+  vc_awhile_variant_c.set(@tactics.prove(@parser.parse_term("WF(<<) /\\\n   p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (∀ X. correct\n        (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (AWHILE invariant (<<) e c) q"), t147))
 }
 
 ///|
@@ -1283,7 +1283,7 @@ fn step_76() -> Unit raise {
   let t149 = @tactics.x_gen_tac(@parser.parse_term("X:S"))
   let t148 = @simp.asm_rewrite_tac(@list.List([@wf.wf_measure()]))
   let t159 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(vc_awhile_variant())), t148), t149), t156), t157), t158)
-  vc_awhile_measure_c.set(@tactics.prove(@parser.parse_term("p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (forall X. correct\n          (invariant AND e AND (\\s:S. X = m(s)))\n          c\n          (invariant AND (\\s. m(s) < X)))\n   ==> correct p (AWHILE invariant (MEASURE m) e c) q"), t159))
+  vc_awhile_measure_c.set(@tactics.prove(@parser.parse_term("p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (∀ X. correct\n          (invariant AND e AND (\\s:S. X = m(s)))\n          c\n          (invariant AND (\\s. m(s) < X)))\n   ==> correct p (AWHILE invariant (MEASURE m) e c) q"), t159))
 }
 
 ///|
@@ -1299,7 +1299,7 @@ pub fn vc_awhile_measure() -> @kernel.Thm {
 /// VC_ADO_VARIANT
 fn step_77() -> Unit raise {
   let t160 = @simp.rewrite_tac(@list.List([ado(), correct_do()]))
-  vc_ado_variant_c.set(@tactics.prove(@parser.parse_term("WF(<<) /\\\n   (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (forall X. correct\n          (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (ADO invariant (<<) c e) q"), t160))
+  vc_ado_variant_c.set(@tactics.prove(@parser.parse_term("WF(<<) /\\\n   (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (∀ X. correct\n          (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (ADO invariant (<<) c e) q"), t160))
 }
 
 ///|
@@ -1328,7 +1328,7 @@ fn step_78() -> Unit raise {
   let t162 = @tactics.x_gen_tac(@parser.parse_term("X:S"))
   let t161 = @simp.asm_rewrite_tac(@list.List([@wf.wf_measure()]))
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(vc_ado_variant())), t161), t162), t169), t170), t171)
-  vc_ado_measure_c.set(@tactics.prove(@parser.parse_term("(e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (forall X. correct\n          (p AND (\\s:S. X = m(s))) c (invariant AND (\\s. m(s) < X)))\n   ==> correct p (ADO invariant (MEASURE m) c e) q"), t172))
+  vc_ado_measure_c.set(@tactics.prove(@parser.parse_term("(e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (∀ X. correct\n          (p AND (\\s:S. X = m(s))) c (invariant AND (\\s. m(s) < X)))\n   ==> correct p (ADO invariant (MEASURE m) c e) q"), t172))
 }
 
 ///|

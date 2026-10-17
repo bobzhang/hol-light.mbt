@@ -289,7 +289,7 @@ pub fn ecgroup_mul_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// ECGROUP_POW_CONV
 fn step_10() -> Unit raise {
   let t44 = @simp.simp_tac(@list.List([@equal.gsym(@grouptheory.group_pow_2()), @grouptheory.group_pow_pow()]))
-  let pth = @tactics.prove(@parser.parse_term("forall G x m n.\n        x IN group_carrier G\n        ==> group_pow G x (2 * n) = group_pow G (group_mul G x x) n"), t44)
+  let pth = @tactics.prove(@parser.parse_term("∀ G x m n.\n        x IN group_carrier G\n        ==> group_pow G x (2 * n) = group_pow G (group_mul G x x) n"), t44)
   let t46 = @simp.rewrite_tac(@list.List([@nums.numeral()]))
   let t45 = @simp.rewrite_tac(@list.List([@arith.bit0()]))
   let t47 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.mult_2()])), t45), t46)

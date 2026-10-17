@@ -55,7 +55,7 @@ pub fn num_exp() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([num_exp(), @arith.exp_add()]))
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5), @int.arith_tac)
-  num_exp_exp_c.set(@tactics.prove(@parser.parse_term("forall n e1 e2. num_exp (num_exp n e1) e2 = num_exp n (e1 + e2)"), t6))
+  num_exp_exp_c.set(@tactics.prove(@parser.parse_term("∀ n e1 e2. num_exp (num_exp n e1) e2 = num_exp n (e1 + e2)"), t6))
 }
 
 ///|
@@ -72,7 +72,7 @@ pub fn num_exp_exp() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([num_exp(), @arith.exp_add()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7), @int.arith_tac)
-  num_exp_sum_c.set(@tactics.prove(@parser.parse_term("forall n e1 e2. num_exp n (e1 + e2) = num_exp n e1 * num_exp 1 e2"), t8))
+  num_exp_sum_c.set(@tactics.prove(@parser.parse_term("∀ n e1 e2. num_exp n (e1 + e2) = num_exp n e1 * num_exp 1 e2"), t8))
 }
 
 ///|
@@ -89,7 +89,7 @@ pub fn num_exp_sum() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t9 = @simp.rewrite_tac(@list.List([num_exp(), @arith.exp_add()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9), @int.arith_tac)
-  num_exp_sum1_c.set(@tactics.prove(@parser.parse_term("forall n e1 e2. num_exp n (e1 + e2) = num_exp 1 e1 * num_exp n e2"), t10))
+  num_exp_sum1_c.set(@tactics.prove(@parser.parse_term("∀ n e1 e2. num_exp n (e1 + e2) = num_exp 1 e1 * num_exp n e2"), t10))
 }
 
 ///|
@@ -105,7 +105,7 @@ pub fn num_exp_sum1() -> @kernel.Thm {
 /// NUM_EXP_0
 fn step_7() -> Unit raise {
   let t11 = @tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([num_exp(), @arith.exp(), @arith.mult_clauses()])))
-  num_exp_0_c.set(@tactics.prove(@parser.parse_term("forall n. n = num_exp n 0"), t11))
+  num_exp_0_c.set(@tactics.prove(@parser.parse_term("∀ n. n = num_exp n 0"), t11))
 }
 
 ///|
@@ -121,7 +121,7 @@ pub fn num_exp_0() -> @kernel.Thm {
 /// NUM_EXP_LE
 fn step_8() -> Unit raise {
   let t12 = @simp.simp_tac(@list.List([num_exp(), @arith.le_mult_rcancel()]))
-  num_exp_le_c.set(@tactics.prove(@parser.parse_term("forall m n e. m <= n ==> num_exp m e <= num_exp n e"), t12))
+  num_exp_le_c.set(@tactics.prove(@parser.parse_term("∀ m n e. m <= n ==> num_exp m e <= num_exp n e"), t12))
 }
 
 ///|
@@ -137,7 +137,7 @@ pub fn num_exp_le() -> @kernel.Thm {
 /// NUM_EXP_LT
 fn step_9() -> Unit raise {
   let t13 = @tactics.then_tac(@simp.simp_tac(@list.List([num_exp(), @arith.lt_mult_rcancel(), @arith.exp_eq_0()])), @int.arith_tac)
-  num_exp_lt_c.set(@tactics.prove(@parser.parse_term("forall m n e. m < n ==> num_exp m e < num_exp n e"), t13))
+  num_exp_lt_c.set(@tactics.prove(@parser.parse_term("∀ m n e. m < n ==> num_exp m e < num_exp n e"), t13))
 }
 
 ///|
@@ -154,7 +154,7 @@ pub fn num_exp_lt() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t14 = @simp.asm_rewrite_tac(@list.List([num_exp(), @arith.mult_eq_0(), @arith.exp_eq_0()]))
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t14), @int.arith_tac)
-  num_exp_eq_0_c.set(@tactics.prove(@parser.parse_term("forall n e. num_exp n e = 0 <=> n = 0"), t15))
+  num_exp_eq_0_c.set(@tactics.prove(@parser.parse_term("∀ n e. num_exp n e = 0 <=> n = 0"), t15))
 }
 
 ///|
@@ -170,7 +170,7 @@ pub fn num_exp_eq_0() -> @kernel.Thm {
 /// NUM_EXP_MUL
 fn step_11() -> Unit raise {
   let t16 = @tactics.then_tac(@simp.rewrite_tac(@list.List([num_exp(), @arith.exp_add()])), @int.arith_tac)
-  num_exp_mul_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2. num_exp n1 e1 * num_exp n2 e2 = num_exp (n1 * n2) (e1 + e2)"), t16))
+  num_exp_mul_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2. num_exp n1 e1 * num_exp n2 e2 = num_exp (n1 * n2) (e1 + e2)"), t16))
 }
 
 ///|
@@ -190,7 +190,7 @@ fn step_12() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(a + b * c) * d = a * d + b * (c * d):num"))]))
   let t17 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), t18), t19), t20)
-  num_exp_add_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2. e1 <= e2 ==>\n                          num_exp n1 e1 + num_exp n2 e2 = num_exp (n1 + num_exp n2 (e2 - e1)) e1"), t21))
+  num_exp_add_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2. e1 <= e2 ==>\n                          num_exp n1 e1 + num_exp n2 e2 = num_exp (n1 + num_exp n2 (e2 - e1)) e1"), t21))
 }
 
 ///|
@@ -231,7 +231,7 @@ fn step_13() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.sym(th)]))
   })
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t24), t25), t26), t27), t37), t38), t39)
-  num_exp_sub2_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r ==>\n\t\t\t   num_exp n1 e1 - num_exp n2 e2 = num_exp (n1 - num_exp n2 r) e1"), t40))
+  num_exp_sub2_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r ==>\n\t\t\t   num_exp n1 e1 - num_exp n2 e2 = num_exp (n1 - num_exp n2 r) e1"), t40))
 }
 
 ///|
@@ -272,7 +272,7 @@ fn step_14() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.sym(th)]))
   })
   let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t43), t44), t45), t46), t56), t57), t58)
-  num_exp_sub1_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r ==>\n\t\t\t   num_exp n1 e1 - num_exp n2 e2 = num_exp (num_exp n1 r - n2) e2"), t59))
+  num_exp_sub1_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r ==>\n\t\t\t   num_exp n1 e1 - num_exp n2 e2 = num_exp (num_exp n1 r - n2) e2"), t59))
 }
 
 ///|
@@ -307,7 +307,7 @@ fn step_15() -> Unit raise {
   })
   let t60 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t75 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t60), @tactics.strip_tac), t64), t67), @tactics.disch_tac), t68), t69), t72), t73), t74)
-  num_exp_le1_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r /\\ n2 <= num_exp n1 r\n\t\t\t      ==> num_exp n2 e2 <= num_exp n1 e1"), t75))
+  num_exp_le1_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r /\\ n2 <= num_exp n1 r\n\t\t\t      ==> num_exp n2 e2 <= num_exp n1 e1"), t75))
 }
 
 ///|
@@ -342,7 +342,7 @@ fn step_16() -> Unit raise {
   })
   let t76 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t76), @tactics.strip_tac), t80), t83), @tactics.disch_tac), t84), t85), t88), t89), t90)
-  num_exp_le2_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r <= n1\n\t\t\t      ==> num_exp n2 e2 <= num_exp n1 e1"), t91))
+  num_exp_le2_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r <= n1\n\t\t\t      ==> num_exp n2 e2 <= num_exp n1 e1"), t91))
 }
 
 ///|
@@ -383,7 +383,7 @@ fn step_17() -> Unit raise {
   }))
   let t92 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t110 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t92), @tactics.strip_tac), t95), t96), t97), t107), t108), t109)
-  num_exp_le1_eq_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r x. e2 <= e1 /\\ e1 - e2 = r /\\ num_exp n1 r = x ==>\n\t\t\t       (num_exp n1 e1 <= num_exp n2 e2 <=> x <= n2)"), t110))
+  num_exp_le1_eq_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r x. e2 <= e1 /\\ e1 - e2 = r /\\ num_exp n1 r = x ==>\n\t\t\t       (num_exp n1 e1 <= num_exp n2 e2 <=> x <= n2)"), t110))
 }
 
 ///|
@@ -424,7 +424,7 @@ fn step_18() -> Unit raise {
   }))
   let t111 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t129 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t111), @tactics.strip_tac), t114), t115), t116), t126), t127), t128)
-  num_exp_le2_eq_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r x. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r = x ==>\n\t\t\t       (num_exp n1 e1 <= num_exp n2 e2 <=> n1 <= x)"), t129))
+  num_exp_le2_eq_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r x. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r = x ==>\n\t\t\t       (num_exp n1 e1 <= num_exp n2 e2 <=> n1 <= x)"), t129))
 }
 
 ///|
@@ -459,7 +459,7 @@ fn step_19() -> Unit raise {
   })
   let t130 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t145 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t130), @tactics.strip_tac), t134), t137), @tactics.disch_tac), t138), t139), t142), t143), t144)
-  num_exp_lt1_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r /\\ n2 < num_exp n1 r\n\t\t\t    ==> num_exp n2 e2 < num_exp n1 e1"), t145))
+  num_exp_lt1_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r /\\ n2 < num_exp n1 r\n\t\t\t    ==> num_exp n2 e2 < num_exp n1 e1"), t145))
 }
 
 ///|
@@ -494,7 +494,7 @@ fn step_20() -> Unit raise {
   })
   let t146 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t161 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t146), @tactics.strip_tac), t150), t153), @tactics.disch_tac), t154), t155), t158), t159), t160)
-  num_exp_lt2_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r < n1\n\t\t\t    ==> num_exp n2 e2 < num_exp n1 e1"), t161))
+  num_exp_lt2_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r < n1\n\t\t\t    ==> num_exp n2 e2 < num_exp n1 e1"), t161))
 }
 
 ///|
@@ -535,7 +535,7 @@ fn step_21() -> Unit raise {
   }))
   let t162 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t180 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t162), @tactics.strip_tac), t165), t166), t167), t177), t178), t179)
-  num_exp_lt1_eq_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r x. e2 <= e1 /\\ e1 - e2 = r /\\ num_exp n1 r = x ==>\n\t\t\t       (num_exp n1 e1 < num_exp n2 e2 <=> x < n2)"), t180))
+  num_exp_lt1_eq_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r x. e2 <= e1 /\\ e1 - e2 = r /\\ num_exp n1 r = x ==>\n\t\t\t       (num_exp n1 e1 < num_exp n2 e2 <=> x < n2)"), t180))
 }
 
 ///|
@@ -576,7 +576,7 @@ fn step_22() -> Unit raise {
   }))
   let t181 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t199 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t181), @tactics.strip_tac), t184), t185), t186), t196), t197), t198)
-  num_exp_lt2_eq_c.set(@tactics.prove(@parser.parse_term("forall n1 e1 n2 e2 r x. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r = x ==>\n\t\t\t       (num_exp n1 e1 < num_exp n2 e2 <=> n1 < x)"), t199))
+  num_exp_lt2_eq_c.set(@tactics.prove(@parser.parse_term("∀ n1 e1 n2 e2 r x. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r = x ==>\n\t\t\t       (num_exp n1 e1 < num_exp n2 e2 <=> n1 < x)"), t199))
 }
 
 ///|
@@ -708,7 +708,7 @@ fn step_26() -> Unit raise {
   let t257 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("&n"), t256, t255]), @real.real_pow_sub()))
   let t254 = @simp.rewrite_tac(@list.List([@equal.gsym(@calc_int.real_of_num_pow())]))
   let t259 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t254), t257), t258)
-  exp_inv_lemma_c.set(@tactics.prove(@parser.parse_term("forall n e1 e2. ~(n = 0) /\\ e2 <= e1 ==> &(n EXP (e1 - e2)) =\n                              &(n EXP e1) * inv(&(n EXP e2))"), t259))
+  exp_inv_lemma_c.set(@tactics.prove(@parser.parse_term("∀ n e1 e2. ~(n = 0) /\\ e2 <= e1 ==> &(n EXP (e1 - e2)) =\n                              &(n EXP e1) * inv(&(n EXP e2))"), t259))
 }
 
 ///|
@@ -733,7 +733,7 @@ fn step_27() -> Unit raise {
   let t261 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_mul())]))
   let t260 = @simp.rewrite_tac(@list.List([num_exp()]))
   let t268 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t260), t261), t263), @tactics.ants_tac), t264), t267), @calc_rat.real_arith_tac)
-  num_exp_sub_lemma_c.set(@tactics.prove(@parser.parse_term("forall n e1 e2. e2 <= e1 ==> &(num_exp n (e1 - e2)) =\n                                  &(num_exp n e1) * inv(&(num_exp 1 e2))"), t268))
+  num_exp_sub_lemma_c.set(@tactics.prove(@parser.parse_term("∀ n e1 e2. e2 <= e1 ==> &(num_exp n (e1 - e2)) =\n                                  &(num_exp n e1) * inv(&(num_exp 1 e2))"), t268))
 }
 
 ///|

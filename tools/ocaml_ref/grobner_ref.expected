@@ -611,7 +611,7 @@ grobner quotations (29):
   d:A
   n:A
   n0:A
-  forall(add:A->A->A) (mul:A->A->A) (n0:A).\n          (forall x. mul n0 x = n0) /\\\n          (forall x y z. (add x y = add x z) <=> (y = z)) /\\\n          (forall w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (forall a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (forall n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
+  \226\136\128(add:A->A->A) (mul:A->A->A) (n0:A).\n          (\226\136\128 x. mul n0 x = n0) /\\\n          (\226\136\128 x y z. (add x y = add x z) <=> (y = z)) /\\\n          (\226\136\128 w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (\226\136\128 a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (\226\136\128 n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
   (p ==> F) ==> (~q = p) ==> q
   F
   PRE
@@ -624,20 +624,20 @@ grobner quotations (29):
   a:num
   b:num
   (-):num->num->num
-  (EVEN(x) <=> (forall y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (forall y. ~(x = SUC(2 * y))))
+  (EVEN(x) <=> (\226\136\128 y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (\226\136\128 y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (\226\136\128 y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (\226\136\128 y. ~(x = SUC(2 * y))))
   a + b + c + d + e = a + c + e + b + d
   (w = x + d) /\\ (y = z + e)\n     ==> ((w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
   z:num
   y:num
   x:num
   w:num
-  (forall x. 0 * x = 0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
+  (\226\136\128 x. 0 * x = 0) /\\\n     (\226\136\128 x y z. (x + y = x + z) <=> (y = z)) /\\\n     (\226\136\128 w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
   (EXP):num->num->num
   (*):num->num->num
   (+):num->num->num
   T
 types = num/0 ind/0 prod/2 1/0 bool/0 fun/2
-constants = MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
+constants = MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ∀ ==> /\ T =
 definitions = 60
 ring_sq =  |- ((#=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#*:fun(num,fun(num,num)) x:num) y:num))) ((#EXP:fun(num,fun(num,num)) y:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
 ring_comm =  |- ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) a:num) b:num)) c:num)) ((#+:fun(num,fun(num,num)) c:num) ((#*:fun(num,fun(num,num)) b:num) a:num)))

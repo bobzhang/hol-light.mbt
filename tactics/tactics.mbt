@@ -1234,7 +1234,7 @@ pub fn match_accept_tac(th : Thm) -> Tactic {
 }
 
 ///|
-/// `MATCH_MP_TAC th`: reduce a goal `q` to `p` using `|- !x. p ==> q`.
+/// `MATCH_MP_TAC th`: reduce a goal `q` to `p` using `|- ∀x. p ==> q`.
 pub fn match_mp_tac(th : Thm) -> Tactic raise {
   let sth = try {
     let tm = @kernel.concl(th)

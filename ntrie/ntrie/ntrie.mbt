@@ -83,7 +83,7 @@ pub fn ntrie_relations() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t3 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t3)
-  ntrie_in_c.set(@tactics.prove(@parser.parse_term("(forall s n. NUMERAL n IN NTRIE s <=> n IN s) /\\\n   (forall n. ~(n IN NEMPTY)) /\\\n   (forall n. n IN NZERO <=> n = _0) /\\\n   (forall s t. _0 IN NNODE s t <=> _0 IN s) /\\\n   (forall s t n. BIT0 n IN NNODE s t <=> n IN s) /\\\n   (forall s t n. BIT1 n IN NNODE s t <=> n IN t)"), t4))
+  ntrie_in_c.set(@tactics.prove(@parser.parse_term("(∀ s n. NUMERAL n IN NTRIE s <=> n IN s) /\\\n   (∀ n. ~(n IN NEMPTY)) /\\\n   (∀ n. n IN NZERO <=> n = _0) /\\\n   (∀ s t. _0 IN NNODE s t <=> _0 IN s) /\\\n   (∀ s t n. BIT0 n IN NNODE s t <=> n IN s) /\\\n   (∀ s t n. BIT1 n IN NNODE s t <=> n IN t)"), t4))
 }
 
 ///|
@@ -101,7 +101,7 @@ fn step_7() -> Unit raise {
   let t6 = @sets.set_tac(@list.List([]))
   let t5 = @simp.rewrite_tac(@list.List([@sets.in_union(), @sets.in_image(), @sets.in_insert(), @sets.not_in_empty(), @calc_num.arith_eq()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode(), @sets.subset(), @sets.forall_in_union(), @sets.forall_in_image(), @sets.forall_in_insert()])), t5), t6)
-  ntrie_subset_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s SUBSET NTRIE t <=> s SUBSET t) /\\\n   (forall s. NEMPTY SUBSET s) /\\\n   (forall s:num->bool. s SUBSET s) /\\\n   ~(NZERO SUBSET NEMPTY) /\\\n   (forall s t. NNODE s t SUBSET NEMPTY <=> s SUBSET NEMPTY /\\ t SUBSET NEMPTY) /\\\n   (forall s t. NNODE s t SUBSET NZERO <=> s SUBSET NZERO /\\ t SUBSET NEMPTY) /\\\n   (forall s t. NZERO SUBSET NNODE s t <=> NZERO SUBSET s) /\\\n   (forall s1 s2 t1 t2.\n      NNODE s1 t1 SUBSET NNODE s2 t2 <=> s1 SUBSET s2 /\\ t1 SUBSET t2)"), t7))
+  ntrie_subset_c.set(@tactics.prove(@parser.parse_term("(∀ s t. NTRIE s SUBSET NTRIE t <=> s SUBSET t) /\\\n   (∀ s. NEMPTY SUBSET s) /\\\n   (∀ s:num->bool. s SUBSET s) /\\\n   ~(NZERO SUBSET NEMPTY) /\\\n   (∀ s t. NNODE s t SUBSET NEMPTY <=> s SUBSET NEMPTY /\\ t SUBSET NEMPTY) /\\\n   (∀ s t. NNODE s t SUBSET NZERO <=> s SUBSET NZERO /\\ t SUBSET NEMPTY) /\\\n   (∀ s t. NZERO SUBSET NNODE s t <=> NZERO SUBSET s) /\\\n   (∀ s1 s2 t1 t2.\n      NNODE s1 t1 SUBSET NNODE s2 t2 <=> s1 SUBSET s2 /\\ t1 SUBSET t2)"), t7))
 }
 
 ///|
@@ -118,7 +118,7 @@ pub fn ntrie_subset() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t8 = @sets.set_tac(@list.List([]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset_antisym_eq()), ntrie_subset(), nempty(), nzero()])), t8)
-  ntrie_eq_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s = NTRIE t <=> s = t) /\\\n   ~(NZERO = NEMPTY) /\\\n   ~(NEMPTY = NZERO) /\\\n   (forall s t. NNODE s t = NEMPTY <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (forall s t. NEMPTY = NNODE s t <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (forall s t. NNODE s t = NZERO <=> s = NZERO /\\ t = NEMPTY) /\\\n   (forall s t. NZERO = NNODE s t <=> s = NZERO /\\ t = NEMPTY) /\\\n   (forall s1 s2 t1 t2. NNODE s1 t1 = NNODE s2 t2 <=> s1 = s2 /\\ t1 = t2)"), t9))
+  ntrie_eq_c.set(@tactics.prove(@parser.parse_term("(∀ s t. NTRIE s = NTRIE t <=> s = t) /\\\n   ~(NZERO = NEMPTY) /\\\n   ~(NEMPTY = NZERO) /\\\n   (∀ s t. NNODE s t = NEMPTY <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (∀ s t. NEMPTY = NNODE s t <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (∀ s t. NNODE s t = NZERO <=> s = NZERO /\\ t = NEMPTY) /\\\n   (∀ s t. NZERO = NNODE s t <=> s = NZERO /\\ t = NEMPTY) /\\\n   (∀ s1 s2 t1 t2. NNODE s1 t1 = NNODE s2 t2 <=> s1 = s2 /\\ t1 = t2)"), t9))
 }
 
 ///|
@@ -138,7 +138,7 @@ fn step_9() -> Unit raise {
   let t11 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t10 = @tactics.repeat_tac(@tactics.strip_tac)
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t10), t11), t12), t13)
-  ntrie_sing_c.set(@tactics.prove(@parser.parse_term("(forall n. {NUMERAL n} = NTRIE {n}) /\\\n   {_0} = NZERO /\\\n   (forall n. {BIT0 n} = if n = _0 then NZERO else NNODE {n} NEMPTY) /\\\n   (forall n. {BIT1 n} = NNODE NEMPTY {n})"), t14))
+  ntrie_sing_c.set(@tactics.prove(@parser.parse_term("(∀ n. {NUMERAL n} = NTRIE {n}) /\\\n   {_0} = NZERO /\\\n   (∀ n. {BIT0 n} = if n = _0 then NZERO else NNODE {n} NEMPTY) /\\\n   (∀ n. {BIT1 n} = NNODE NEMPTY {n})"), t14))
 }
 
 ///|
@@ -158,7 +158,7 @@ fn step_10() -> Unit raise {
   let t16 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t15 = @tactics.repeat_tac(@tactics.strip_tac)
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t15), t16), t17), t18)
-  ntrie_insert_c.set(@tactics.prove(@parser.parse_term("(forall s n. NUMERAL n INSERT NTRIE s = NTRIE (n INSERT s)) /\\\n   _0 INSERT NEMPTY = NZERO /\\\n   _0 INSERT NZERO = NZERO /\\\n   (forall s t. _0 INSERT NNODE s t = NNODE (_0 INSERT s) t) /\\\n   (forall n. BIT0 n INSERT NZERO = if n = _0 then NZERO else\n                              NNODE (n INSERT NZERO) NEMPTY) /\\\n   (forall n. BIT1 n INSERT NZERO = NNODE NZERO {n}) /\\\n   (forall s t n. BIT0 n INSERT NNODE s t = NNODE (n INSERT s) t) /\\\n   (forall s t n. BIT1 n INSERT NNODE s t = NNODE s (n INSERT t))"), t19))
+  ntrie_insert_c.set(@tactics.prove(@parser.parse_term("(∀ s n. NUMERAL n INSERT NTRIE s = NTRIE (n INSERT s)) /\\\n   _0 INSERT NEMPTY = NZERO /\\\n   _0 INSERT NZERO = NZERO /\\\n   (∀ s t. _0 INSERT NNODE s t = NNODE (_0 INSERT s) t) /\\\n   (∀ n. BIT0 n INSERT NZERO = if n = _0 then NZERO else\n                              NNODE (n INSERT NZERO) NEMPTY) /\\\n   (∀ n. BIT1 n INSERT NZERO = NNODE NZERO {n}) /\\\n   (∀ s t n. BIT0 n INSERT NNODE s t = NNODE (n INSERT s) t) /\\\n   (∀ s t n. BIT1 n INSERT NNODE s t = NNODE s (n INSERT t))"), t19))
 }
 
 ///|
@@ -175,7 +175,7 @@ pub fn ntrie_insert() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t20 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t21 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t20)
-  ntrie_union_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s UNION NTRIE t = NTRIE (s UNION t)) /\\\n   (forall s. s UNION NEMPTY = s) /\\\n   (forall s. NEMPTY UNION s = s) /\\\n   NZERO UNION NZERO = NZERO /\\\n   (forall s t. NNODE s t UNION NZERO = NNODE (s UNION NZERO) t) /\\\n   (forall s t. NZERO UNION NNODE s t = NNODE (s UNION NZERO) t) /\\\n   (forall s t r q. NNODE s t UNION NNODE r q = NNODE (s UNION r) (t UNION q))"), t21))
+  ntrie_union_c.set(@tactics.prove(@parser.parse_term("(∀ s t. NTRIE s UNION NTRIE t = NTRIE (s UNION t)) /\\\n   (∀ s. s UNION NEMPTY = s) /\\\n   (∀ s. NEMPTY UNION s = s) /\\\n   NZERO UNION NZERO = NZERO /\\\n   (∀ s t. NNODE s t UNION NZERO = NNODE (s UNION NZERO) t) /\\\n   (∀ s t. NZERO UNION NNODE s t = NNODE (s UNION NZERO) t) /\\\n   (∀ s t r q. NNODE s t UNION NNODE r q = NNODE (s UNION r) (t UNION q))"), t21))
 }
 
 ///|
@@ -192,7 +192,7 @@ pub fn ntrie_union() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t22 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t23 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode()])), t22)
-  ntrie_inter_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s INTER NTRIE t = NTRIE (s INTER t)) /\\\n   (forall s. NEMPTY INTER s = NEMPTY) /\\\n   (forall s. s INTER NEMPTY = NEMPTY) /\\\n   NZERO INTER NZERO = NZERO /\\\n   (forall s t. NZERO INTER NNODE s t = NZERO INTER s) /\\\n   (forall s t. NNODE s t INTER NZERO = NZERO INTER s) /\\\n   (forall s1 s2 t1 t2.\n      NNODE s1 t1 INTER NNODE s2 t2 = NNODE (s1 INTER s2) (t1 INTER t2))"), t23))
+  ntrie_inter_c.set(@tactics.prove(@parser.parse_term("(∀ s t. NTRIE s INTER NTRIE t = NTRIE (s INTER t)) /\\\n   (∀ s. NEMPTY INTER s = NEMPTY) /\\\n   (∀ s. s INTER NEMPTY = NEMPTY) /\\\n   NZERO INTER NZERO = NZERO /\\\n   (∀ s t. NZERO INTER NNODE s t = NZERO INTER s) /\\\n   (∀ s t. NNODE s t INTER NZERO = NZERO INTER s) /\\\n   (∀ s1 s2 t1 t2.\n      NNODE s1 t1 INTER NNODE s2 t2 = NNODE (s1 INTER s2) (t1 INTER t2))"), t23))
 }
 
 ///|
@@ -212,7 +212,7 @@ fn step_13() -> Unit raise {
   let t25 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t24 = @tactics.repeat_tac(@tactics.strip_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t24), t25), t26), t27)
-  ntrie_delete_c.set(@tactics.prove(@parser.parse_term("(forall s n. NTRIE s DELETE NUMERAL n = NTRIE (s DELETE n)) /\\\n   (forall n. NEMPTY DELETE n = NEMPTY) /\\\n   (forall n. NZERO DELETE n = if n = _0 then NEMPTY else NZERO) /\\\n   (forall s t. NNODE s t DELETE _0 = NNODE (s DELETE _0) t) /\\\n   (forall s t n. NNODE s t DELETE BIT0 n = NNODE (s DELETE n) t) /\\\n   (forall s t n. NNODE s t DELETE BIT1 n = NNODE s (t DELETE n))"), t28))
+  ntrie_delete_c.set(@tactics.prove(@parser.parse_term("(∀ s n. NTRIE s DELETE NUMERAL n = NTRIE (s DELETE n)) /\\\n   (∀ n. NEMPTY DELETE n = NEMPTY) /\\\n   (∀ n. NZERO DELETE n = if n = _0 then NEMPTY else NZERO) /\\\n   (∀ s t. NNODE s t DELETE _0 = NNODE (s DELETE _0) t) /\\\n   (∀ s t n. NNODE s t DELETE BIT0 n = NNODE (s DELETE n) t) /\\\n   (∀ s t n. NNODE s t DELETE BIT1 n = NNODE s (t DELETE n))"), t28))
 }
 
 ///|
@@ -228,7 +228,7 @@ pub fn ntrie_delete() -> @kernel.Thm {
 /// NTRIE_DISJOINT
 fn step_14() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([ntrie(), @sets.disjoint(), @equal.gsym(nempty()), ntrie_inter(), @sets.inter_aci(), ntrie_eq()]))
-  ntrie_disjoint_c.set(@tactics.prove(@parser.parse_term("(forall s t. DISJOINT (NTRIE s) (NTRIE t) <=> DISJOINT s t) /\\\n   (forall s. DISJOINT s NEMPTY) /\\\n   (forall s. DISJOINT NEMPTY s) /\\\n   ~DISJOINT NZERO NZERO /\\\n   (forall s t. DISJOINT NZERO (NNODE s t) <=> DISJOINT s NZERO) /\\\n   (forall s t. DISJOINT (NNODE s t) NZERO <=> DISJOINT s NZERO) /\\\n   (forall s1 s2 t1 t2. DISJOINT (NNODE s1 t1) (NNODE s2 t2) <=>\n                  DISJOINT s1 s2 /\\ DISJOINT t1 t2)"), t29))
+  ntrie_disjoint_c.set(@tactics.prove(@parser.parse_term("(∀ s t. DISJOINT (NTRIE s) (NTRIE t) <=> DISJOINT s t) /\\\n   (∀ s. DISJOINT s NEMPTY) /\\\n   (∀ s. DISJOINT NEMPTY s) /\\\n   ~DISJOINT NZERO NZERO /\\\n   (∀ s t. DISJOINT NZERO (NNODE s t) <=> DISJOINT s NZERO) /\\\n   (∀ s t. DISJOINT (NNODE s t) NZERO <=> DISJOINT s NZERO) /\\\n   (∀ s1 s2 t1 t2. DISJOINT (NNODE s1 t1) (NNODE s2 t2) <=>\n                  DISJOINT s1 s2 /\\ DISJOINT t1 t2)"), t29))
 }
 
 ///|
@@ -245,7 +245,7 @@ pub fn ntrie_disjoint() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t30 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode()])), t30)
-  ntrie_diff_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s DIFF NTRIE t = NTRIE (s DIFF t)) /\\\n   (forall s. NEMPTY DIFF s = NEMPTY) /\\\n   (forall s. s DIFF NEMPTY = s) /\\\n   NZERO DIFF NZERO = NEMPTY /\\\n   (forall s t. NZERO DIFF NNODE s t = NZERO DIFF s) /\\\n   (forall s t. NNODE s t DIFF NZERO = NNODE (s DIFF NZERO) t) /\\\n   (forall s1 t1 s2 t2. NNODE s1 t1 DIFF NNODE s2 t2 =\n                  NNODE (s1 DIFF s2) (t1 DIFF t2))"), t31))
+  ntrie_diff_c.set(@tactics.prove(@parser.parse_term("(∀ s t. NTRIE s DIFF NTRIE t = NTRIE (s DIFF t)) /\\\n   (∀ s. NEMPTY DIFF s = NEMPTY) /\\\n   (∀ s. s DIFF NEMPTY = s) /\\\n   NZERO DIFF NZERO = NEMPTY /\\\n   (∀ s t. NZERO DIFF NNODE s t = NZERO DIFF s) /\\\n   (∀ s t. NNODE s t DIFF NZERO = NNODE (s DIFF NZERO) t) /\\\n   (∀ s1 t1 s2 t2. NNODE s1 t1 DIFF NNODE s2 t2 =\n                  NNODE (s1 DIFF s2) (t1 DIFF t2))"), t31))
 }
 
 ///|
@@ -260,7 +260,7 @@ pub fn ntrie_diff() -> @kernel.Thm {
 ///|
 /// NTRIE_IMAGE_DEF
 fn step_16() -> Unit raise {
-  ntrie_image_def_c.set(@pair.new_definition(@parser.parse_term("forall f:num->A acc s. NTRIE_IMAGE f acc s = IMAGE f s UNION acc")))
+  ntrie_image_def_c.set(@pair.new_definition(@parser.parse_term("∀ f:num->A acc s. NTRIE_IMAGE f acc s = IMAGE f s UNION acc")))
 }
 
 ///|
@@ -277,7 +277,7 @@ pub fn ntrie_image_def() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t32 = @sets.set_tac(@list.List([]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode(), ntrie_image_def()])), t32)
-  ntrie_image_c.set(@tactics.prove(@parser.parse_term("(forall f:num->A acc. NTRIE_IMAGE f acc NEMPTY = acc) /\\\n   (forall f:num->A acc. NTRIE_IMAGE f acc NZERO = f _0 INSERT acc) /\\\n   (forall f:num->A acc s t.\n      NTRIE_IMAGE f acc (NNODE s t) =\n      NTRIE_IMAGE (\\n. f (BIT1 n)) (NTRIE_IMAGE (\\n. f (BIT0 n)) acc s) t)"), t33))
+  ntrie_image_c.set(@tactics.prove(@parser.parse_term("(∀ f:num->A acc. NTRIE_IMAGE f acc NEMPTY = acc) /\\\n   (∀ f:num->A acc. NTRIE_IMAGE f acc NZERO = f _0 INSERT acc) /\\\n   (∀ f:num->A acc s t.\n      NTRIE_IMAGE f acc (NNODE s t) =\n      NTRIE_IMAGE (\\n. f (BIT1 n)) (NTRIE_IMAGE (\\n. f (BIT0 n)) acc s) t)"), t33))
 }
 
 ///|
@@ -293,7 +293,7 @@ pub fn ntrie_image() -> @kernel.Thm {
 /// IMAGE_EQ_NTRIE_IMAGE
 fn step_18() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), @class.eta_ax(), ntrie_image_def(), @sets.union_empty()]))
-  image_eq_ntrie_image_c.set(@tactics.prove(@parser.parse_term("forall f:num->A s. IMAGE f (NTRIE s) = NTRIE_IMAGE (\\n. f (NUMERAL n)) {} s"), t34))
+  image_eq_ntrie_image_c.set(@tactics.prove(@parser.parse_term("∀ f:num->A s. IMAGE f (NTRIE s) = NTRIE_IMAGE (\\n. f (NUMERAL n)) {} s"), t34))
 }
 
 ///|

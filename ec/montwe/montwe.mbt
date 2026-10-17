@@ -21,7 +21,7 @@ pub fn wcurve_of_mcurve() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_nonsingular(), @weierstrass.weierstrass_nonsingular(), wcurve_of_mcurve()]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23()])), t1), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  wcurve_of_mcurve_nonsingular_eq_c.set(@tactics.prove(@parser.parse_term("forall f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n        ==> (weierstrass_nonsingular(wcurve_of_mcurve(f,a,b)) <=>\n             ~(ring_pow f a 2 = ring_of_num f 4))"), t2))
+  wcurve_of_mcurve_nonsingular_eq_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f)\n        ==> (weierstrass_nonsingular(wcurve_of_mcurve(f,a,b)) <=>\n             ~(ring_pow f a 2 = ring_of_num f 4))"), t2))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn wcurve_of_mcurve_nonsingular_eq() -> @kernel.Thm {
 /// WCURVE_OF_MCURVE_NONSINGULAR
 fn step_3() -> Unit raise {
   let t3 = @simp.simp_tac(@list.List([@montgomery.montgomery_nonsingular(), @class.de_morgan_thm(), wcurve_of_mcurve_nonsingular_eq()]))
-  wcurve_of_mcurve_nonsingular_c.set(@tactics.prove(@parser.parse_term("forall f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b)\n        ==> weierstrass_nonsingular(wcurve_of_mcurve(f,a,b))"), t3))
+  wcurve_of_mcurve_nonsingular_c.set(@tactics.prove(@parser.parse_term("∀ f a b:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b)\n        ==> weierstrass_nonsingular(wcurve_of_mcurve(f,a,b))"), t3))
 }
 
 ///|
@@ -87,7 +87,7 @@ fn step_6() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([montgomery_of_weierstrass(), weierstrass_of_montgomery()]))
   let t4 = @simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not3()])), t4), t5), t6), t7), @ringtheory.field_tac)
-  montgomery_of_weierstrass_of_montgomery_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_point f p\n        ==> montgomery_of_weierstrass(f,a,b)\n              (weierstrass_of_montgomery(f,a,b) p) = p"), t8))
+  montgomery_of_weierstrass_of_montgomery_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_point f p\n        ==> montgomery_of_weierstrass(f,a,b)\n              (weierstrass_of_montgomery(f,a,b) p) = p"), t8))
 }
 
 ///|
@@ -107,7 +107,7 @@ fn step_7() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([montgomery_of_weierstrass(), weierstrass_of_montgomery()]))
   let t9 = @simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not3()])), t9), t10), t11), t12), @ringtheory.field_tac)
-  weierstrass_of_montgomery_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_point f p\n        ==> weierstrass_of_montgomery(f,a,b)\n              (montgomery_of_weierstrass(f,a,b) p) = p"), t13))
+  weierstrass_of_montgomery_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A) p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_point f p\n        ==> weierstrass_of_montgomery(f,a,b)\n              (montgomery_of_weierstrass(f,a,b) p) = p"), t13))
 }
 
 ///|
@@ -128,7 +128,7 @@ fn step_8() -> Unit raise {
   let t15 = @tactics.repeat_tac(@tactics.gen_tac)
   let t14 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), @weierstrass.weierstrass_curve(), weierstrass_of_montgomery(), wcurve_of_mcurve()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t14), t15), t16), t17), t18), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_montgomery_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_curve (wcurve_of_mcurve(f,a,b))\n                              (weierstrass_of_montgomery(f,a,b) p)"), t19))
+  weierstrass_of_montgomery_v1_c.set(@tactics.prove(@parser.parse_term("∀ f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_curve (wcurve_of_mcurve(f,a,b))\n                              (weierstrass_of_montgomery(f,a,b) p)"), t19))
 }
 
 ///|
@@ -149,7 +149,7 @@ fn step_9() -> Unit raise {
   let t21 = @tactics.repeat_tac(@tactics.gen_tac)
   let t20 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), @weierstrass.weierstrass_curve(), montgomery_of_weierstrass(), wcurve_of_mcurve()]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t20), t21), t22), t23), t24), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_of_weierstrass_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_curve (wcurve_of_mcurve(f,a,b)) p\n        ==> montgomery_curve(f,a,b) (montgomery_of_weierstrass(f,a,b) p)"), t25))
+  montgomery_of_weierstrass_v1_c.set(@tactics.prove(@parser.parse_term("∀ f (a:A) b p.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        weierstrass_curve (wcurve_of_mcurve(f,a,b)) p\n        ==> montgomery_curve(f,a,b) (montgomery_of_weierstrass(f,a,b) p)"), t25))
 }
 
 ///|
@@ -170,7 +170,7 @@ fn step_10() -> Unit raise {
   let t27 = @tactics.repeat_tac(@tactics.gen_tac)
   let t26 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), weierstrass_of_montgomery(), montgomery_of_weierstrass(), wcurve_of_mcurve(), @montgomery.montgomery_neg(), @weierstrass.weierstrass_neg()]))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t26), t27), t28), t29), t30), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_montgomery_neg_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_neg(f,a,b) p) =\n            weierstrass_neg (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)"), t31))
+  weierstrass_of_montgomery_neg_c.set(@tactics.prove(@parser.parse_term("∀ f (a:A) b p.\n        field f /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_neg(f,a,b) p) =\n            weierstrass_neg (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)"), t31))
 }
 
 ///|
@@ -197,7 +197,7 @@ fn step_11() -> Unit raise {
   let t33 = @tactics.repeat_tac(@tactics.gen_tac)
   let t32 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), weierstrass_of_montgomery(), montgomery_of_weierstrass(), wcurve_of_mcurve(), @montgomery.montgomery_add(), @weierstrass.weierstrass_add()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t32), t33), t34), t35), t36), t37), t38), t39), t40), t41), t42), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_montgomery_add_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_add(f,a,b) p q) =\n            weierstrass_add (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)\n                            (weierstrass_of_montgomery(f,a,b) q)"), t43))
+  weierstrass_of_montgomery_add_c.set(@tactics.prove(@parser.parse_term("∀ f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        ~(b = ring_0 f) /\\\n        montgomery_curve(f,a,b) p /\\ montgomery_curve(f,a,b) q\n        ==> weierstrass_of_montgomery(f,a,b) (montgomery_add(f,a,b) p q) =\n            weierstrass_add (wcurve_of_mcurve(f,a,b))\n                            (weierstrass_of_montgomery(f,a,b) p)\n                            (weierstrass_of_montgomery(f,a,b) q)"), t43))
 }
 
 ///|
@@ -215,7 +215,7 @@ fn step_12() -> Unit raise {
   let t59 = @simp.asm_simp_tac(@list.List([weierstrass_of_montgomery_v1(), weierstrass_of_montgomery_add(), montgomery_of_weierstrass_v1(), montgomery_of_weierstrass_of_montgomery(), weierstrass_of_montgomery_of_weierstrass()]))
   let t57 = @simp.simp_tac(@list.List([@weierstrass.weierstrass_curve(), @weierstrass.weierstrass_point(), wcurve_of_mcurve(), @montgomery.montgomery_curve(), @montgomery.montgomery_point()]))
   let t58 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @ind_types.forall_option_thm()])), t57), @tactics.all_tac])
-  let t56 = @tactics.subgoal_then(@parser.parse_term("(forall x. weierstrass_curve (wcurve_of_mcurve (f,(a:A),b)) x\n         ==> weierstrass_point f x) /\\\n    (forall y. montgomery_curve (f,a,b) y ==> montgomery_point f y)"), @tactics.strip_assume_tac)
+  let t56 = @tactics.subgoal_then(@parser.parse_term("(∀ x. weierstrass_curve (wcurve_of_mcurve (f,(a:A),b)) x\n         ==> weierstrass_point f x) /\\\n    (∀ y. montgomery_curve (f,a,b) y ==> montgomery_point f y)"), @tactics.strip_assume_tac)
   let t55 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@montgomery.montgomery_nonsingular()])))
   let t54 = @simp.asm_rewrite_tac(@list.List([@sets.in_()]))
   let t53 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image()]))
@@ -229,7 +229,7 @@ fn step_12() -> Unit raise {
   let t45 = @simp.rewrite_tac(@list.List([@equal.gsym(wcurve_of_mcurve())]))
   let t44 = @tactics.mp_tac(@bool.ispecl(@lib.striplist(@pair.dest_pair, @kernel.rand(@kernel.concl(wcurve_of_mcurve()))), @weierstrass.weierstrass_group_v1()))
   let t60 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t44), t45), @tactics.ants_tac), t47), t50), t51), @tactics.strip_tac), t52), t53), t54), t55), t56), t58), t59)
-  group_isomorphisms_montgomery_weierstrass_group_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (montgomery_group(f,a,b),weierstrass_group(wcurve_of_mcurve(f,a,b)))\n           (weierstrass_of_montgomery(f,a,b),\n            montgomery_of_weierstrass(f,a,b))"), t60))
+  group_isomorphisms_montgomery_weierstrass_group_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (montgomery_group(f,a,b),weierstrass_group(wcurve_of_mcurve(f,a,b)))\n           (weierstrass_of_montgomery(f,a,b),\n            montgomery_of_weierstrass(f,a,b))"), t60))
 }
 
 ///|
@@ -246,7 +246,7 @@ pub fn group_isomorphisms_montgomery_weierstrass_group() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t61 = @tactics.accept_tac(group_isomorphisms_montgomery_weierstrass_group())
   let t62 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@grouptheory.group_isomorphisms_sym()])), t61)
-  group_isomorphisms_weierstrass_montgomery_group_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (weierstrass_group(wcurve_of_mcurve(f,a,b)),montgomery_group(f,a,b))\n           (montgomery_of_weierstrass(f,a,b),\n            weierstrass_of_montgomery(f,a,b))"), t62))
+  group_isomorphisms_weierstrass_montgomery_group_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> group_isomorphisms\n           (weierstrass_group(wcurve_of_mcurve(f,a,b)),montgomery_group(f,a,b))\n           (montgomery_of_weierstrass(f,a,b),\n            weierstrass_of_montgomery(f,a,b))"), t62))
 }
 
 ///|
@@ -272,7 +272,7 @@ fn step_14() -> Unit raise {
     })(t66(x67))
   })
   let t70 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t68), t69)
-  isomorphic_montgomery_weierstrass_group_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (montgomery_group(f,a,b)) isomorphic_group\n          (weierstrass_group(wcurve_of_mcurve(f,a,b)))"), t70))
+  isomorphic_montgomery_weierstrass_group_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (montgomery_group(f,a,b)) isomorphic_group\n          (weierstrass_group(wcurve_of_mcurve(f,a,b)))"), t70))
 }
 
 ///|
@@ -289,7 +289,7 @@ pub fn isomorphic_montgomery_weierstrass_group() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t71 = @tactics.accept_tac(isomorphic_montgomery_weierstrass_group())
   let t72 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@grouptheory.isomorphic_group_sym()])), t71)
-  isomorphic_weierstrass_montgomery_group_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (weierstrass_group(wcurve_of_mcurve(f,a,b))) isomorphic_group\n          (montgomery_group(f,a,b))"), t72))
+  isomorphic_weierstrass_montgomery_group_c.set(@tactics.prove(@parser.parse_term("∀ f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular(f,a,b)\n      ==> (weierstrass_group(wcurve_of_mcurve(f,a,b))) isomorphic_group\n          (montgomery_group(f,a,b))"), t72))
 }
 
 ///|

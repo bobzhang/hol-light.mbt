@@ -27,7 +27,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.simp_tac(@list.List([zolotarev(), @sets.in_elim_thm(), @arith.mod_lt_eq_lt(), @equal.gsym(@int.cong_v1())]))
   let t1 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@permutations.permutes_finite_injective(), @sets.finite_numseg_lt()])), t1), t2), t3), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t4), t5), t6), t7)
-  permutes_zolotarev_c.set(@tactics.prove(@parser.parse_term("forall a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | m < n}"), t8))
+  permutes_zolotarev_c.set(@tactics.prove(@parser.parse_term("∀ a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | m < n}"), t8))
 }
 
 ///|
@@ -50,7 +50,7 @@ fn step_3() -> Unit raise {
   let t10 = @tactics.exists_tac(@parser.parse_term("{m:num | m < n}"))
   let t9 = @tactics.match_mp_tac(@permutations.permutes_superset())
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9), t10), t11), t12), t13), t14), t15), @int.arith_tac)
-  permutes_zolotarev_alt_c.set(@tactics.prove(@parser.parse_term("forall a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | 0 < m /\\ m < n}"), t16))
+  permutes_zolotarev_alt_c.set(@tactics.prove(@parser.parse_term("∀ a n. coprime(a,n) ==> (zolotarev(a,n)) permutes {m | 0 < m /\\ m < n}"), t16))
 }
 
 ///|
@@ -69,7 +69,7 @@ fn step_4() -> Unit raise {
   let t18 = @tactics.exists_tac(@parser.parse_term("{m:num | m < n}"))
   let t17 = @simp.rewrite_tac(@list.List([@permutations.permutation_permutes()]))
   let t20 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), t18), t19)
-  permutation_zolotarev_c.set(@tactics.prove(@parser.parse_term("forall a n. coprime(a,n) ==> permutation (zolotarev(a,n))"), t20))
+  permutation_zolotarev_c.set(@tactics.prove(@parser.parse_term("∀ a n. coprime(a,n) ==> permutation (zolotarev(a,n))"), t20))
 }
 
 ///|
@@ -86,7 +86,7 @@ pub fn permutation_zolotarev() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t21 = @meson.meson_tac(@list.List([@arith.mod_mult_mod2(), @arith.mod_mod_refl()]))
   let t22 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), zolotarev()])), t21)
-  zolatarev_mod_c.set(@tactics.prove(@parser.parse_term("forall a n. zolotarev(a MOD n,n) = zolotarev(a,n)"), t22))
+  zolatarev_mod_c.set(@tactics.prove(@parser.parse_term("∀ a n. zolotarev(a MOD n,n) = zolotarev(a,n)"), t22))
 }
 
 ///|
@@ -102,7 +102,7 @@ pub fn zolatarev_mod() -> @kernel.Thm {
 /// ZOLOTAREV_CONG
 fn step_6() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([@int.cong_v1(), zolatarev_mod()]))
-  zolotarev_cong_c.set(@tactics.prove(@parser.parse_term("forall a b n. (a == b) (mod n) ==> zolotarev(a,n) = zolotarev(b,n)"), t23))
+  zolotarev_cong_c.set(@tactics.prove(@parser.parse_term("∀ a b n. (a == b) (mod n) ==> zolotarev(a,n) = zolotarev(b,n)"), t23))
 }
 
 ///|
@@ -143,7 +143,7 @@ fn step_8() -> Unit raise {
   let t25 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec()]))
   let t24 = @simp.simp_tac(@list.List([@permutations.permutes_finite_injective(), @sets.finite_restrict(), @sets.finite_numseg_lt()]))
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | x IN {y | Q y} /\\ P x}"))])), t24), t25), t26), t27), t28), t29), t30), t31), t32), t33)
-  permutes_zolotarevu_c.set(@tactics.prove(@parser.parse_term("forall a n. coprime(a,n)\n         ==> (zolotarevu(a,n)) permutes {m | coprime(m,n) /\\ m < n}"), t34))
+  permutes_zolotarevu_c.set(@tactics.prove(@parser.parse_term("∀ a n. coprime(a,n)\n         ==> (zolotarevu(a,n)) permutes {m | coprime(m,n) /\\ m < n}"), t34))
 }
 
 ///|
@@ -164,7 +164,7 @@ fn step_9() -> Unit raise {
   let t36 = @tactics.exists_tac(@parser.parse_term("{m:num | m IN {m | m < n} /\\ coprime(m,n)}"))
   let t35 = @simp.rewrite_tac(@list.List([@permutations.permutation_permutes()]))
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t35), t36), t37), t38), t39)
-  permutation_zolotarevu_c.set(@tactics.prove(@parser.parse_term("forall a n. coprime(a,n) ==> permutation (zolotarevu(a,n))"), t40))
+  permutation_zolotarevu_c.set(@tactics.prove(@parser.parse_term("∀ a n. coprime(a,n) ==> permutation (zolotarevu(a,n))"), t40))
 }
 
 ///|
@@ -181,7 +181,7 @@ pub fn permutation_zolotarevu() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t41 = @meson.meson_tac(@list.List([@arith.mod_mult_mod2(), @arith.mod_mod_refl()]))
   let t42 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), zolotarevu()])), t41)
-  zolatarevu_mod_c.set(@tactics.prove(@parser.parse_term("forall a n. zolotarevu(a MOD n,n) = zolotarevu(a,n)"), t42))
+  zolatarevu_mod_c.set(@tactics.prove(@parser.parse_term("∀ a n. zolotarevu(a MOD n,n) = zolotarevu(a,n)"), t42))
 }
 
 ///|
@@ -248,7 +248,7 @@ fn step_11() -> Unit raise {
   let t44 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith()]))
   let t43 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
   let t90 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t43), t44), t45), t48), t49), t50), t51), t55), t56), t57), t58), t59), t61), @tactics.conj_tac), t63), t64), t69), t70), t71), t72), t73), t89)
-  zolotarevu_primitive_c.set(@tactics.prove(@parser.parse_term("forall a n. 3 <= n /\\ coprime(a,n) /\\ (?g. order n g = phi n)\n         ==> (evenperm(zolotarevu(a,n)) <=> ?x. (x EXP 2 == a) (mod n))"), t90))
+  zolotarevu_primitive_c.set(@tactics.prove(@parser.parse_term("∀ a n. 3 <= n /\\ coprime(a,n) /\\ (?g. order n g = phi n)\n         ==> (evenperm(zolotarevu(a,n)) <=> ?x. (x EXP 2 == a) (mod n))"), t90))
 }
 
 ///|
@@ -282,7 +282,7 @@ fn step_12() -> Unit raise {
   let t92 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t91 = @simp.rewrite_tac(@list.List([zolotarev(), zolotarevu(), @class.fun_eq_thm()]))
   let t106 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t91), t92), t93), t94), t95), t96), t97), @class.cond_cases_tac), t98), t104), @tactics.strip_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t105)
-  zolatarev_eq_zolatarevu_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p ==> zolotarev(a,p) = zolotarevu(a,p)"), t106))
+  zolatarev_eq_zolatarevu_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p ==> zolotarev(a,p) = zolotarevu(a,p)"), t106))
 }
 
 ///|
@@ -301,7 +301,7 @@ fn step_13() -> Unit raise {
   let t108 = @simp.simp_tac(@list.List([zolotarev(), @int.arith_rule(@parser.parse_term("m < 1 <=> m = 0")), @arith.mult_clauses(), @arith.mod_0()]))
   let t107 = @tactics.repeat_tac(@tactics.gen_tac)
   let t110 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.i_def()])), t107), t108), t109)
-  zolotarev_1_c.set(@tactics.prove(@parser.parse_term("forall a. zolotarev(a,1) = I"), t110))
+  zolotarev_1_c.set(@tactics.prove(@parser.parse_term("∀ a. zolotarev(a,1) = I"), t110))
 }
 
 ///|
@@ -438,7 +438,7 @@ fn step_14() -> Unit raise {
       })(x144))
     })(x145)(x145)
   }), t146), @tactics.ants_tac), t160), @tactics.binop_tac), t208)
-  jacobi_eq_zolotarev_primepow_c.set(@tactics.prove(@parser.parse_term("forall a p k.\n        prime p /\\ ODD p /\\ coprime(a,p)\n        ==> real_of_int(jacobi(a,p EXP k)) = sign(zolotarev(a,p EXP k))"), t209))
+  jacobi_eq_zolotarev_primepow_c.set(@tactics.prove(@parser.parse_term("∀ a p k.\n        prime p /\\ ODD p /\\ coprime(a,p)\n        ==> real_of_int(jacobi(a,p EXP k)) = sign(zolotarev(a,p EXP k))"), t209))
 }
 
 ///|
@@ -525,7 +525,7 @@ fn step_15() -> Unit raise {
   let t216 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:num"), t211])), t212), t213), t214), t215)])
   let t210 = @simp.rewrite_tac(@list.List([@calc_num.arith()]))
   let t275 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@prime.induct_coprime_alt())), t210), @tactics.conj_tac), t216), t218), t219), t220), t221), t222), t223), t226), t227), @tactics.strip_tac), t228), t232), t234), @tactics.conj_tac), t238), t239), t240), t241), t242), t243), t244), t274)
-  jacobi_eq_zolotarev_c.set(@tactics.prove(@parser.parse_term("forall a n. ODD n /\\ coprime(a,n)\n         ==> real_of_int(jacobi(a,n)) = sign(zolotarev(a,n))"), t275))
+  jacobi_eq_zolotarev_c.set(@tactics.prove(@parser.parse_term("∀ a n. ODD n /\\ coprime(a,n)\n         ==> real_of_int(jacobi(a,n)) = sign(zolotarev(a,n))"), t275))
 }
 
 ///|

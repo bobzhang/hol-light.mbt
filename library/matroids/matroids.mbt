@@ -11,7 +11,7 @@ fn step_1() -> Unit raise {
   )
   let eth = @tactics.prove(
     @parser.parse_term(
-      "?m. (forall s:A->bool. s SUBSET FST m ==> SND m s SUBSET FST m) /\\\n         (forall s:A->bool. s SUBSET FST m ==> s SUBSET SND m s) /\\\n         (forall s t. s SUBSET t /\\ t SUBSET FST m ==> SND m s SUBSET SND m t) /\\\n         (forall s. s SUBSET FST m ==> SND m (SND m s) = SND m s) /\\\n         (forall s x. s SUBSET FST m /\\ x IN SND m s\n                ==> ?s'. FINITE s' /\\ s' SUBSET s /\\ x IN SND m (s')) /\\\n         (forall s x y. s SUBSET FST m /\\ x IN FST m /\\\n                  y IN SND m (x INSERT s) /\\ ~(y IN SND m s)\n                  ==> x IN SND m (y INSERT s))",
+      "?m. (∀ s:A->bool. s SUBSET FST m ==> SND m s SUBSET FST m) /\\\n         (∀ s:A->bool. s SUBSET FST m ==> s SUBSET SND m s) /\\\n         (∀ s t. s SUBSET t /\\ t SUBSET FST m ==> SND m s SUBSET SND m t) /\\\n         (∀ s. s SUBSET FST m ==> SND m (SND m s) = SND m s) /\\\n         (∀ s x. s SUBSET FST m /\\ x IN SND m s\n                ==> ?s'. FINITE s' /\\ s' SUBSET s /\\ x IN SND m (s')) /\\\n         (∀ s x y. s SUBSET FST m /\\ x IN FST m /\\\n                  y IN SND m (x INSERT s) /\\ ~(y IN SND m s)\n                  ==> x IN SND m (y INSERT s))",
     ),
     t2,
   )
@@ -193,7 +193,7 @@ fn step_5() -> Unit raise {
   matroid_span_inc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN s ==> x IN matroid_span m s",
+        "∀(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN s ==> x IN matroid_span m s",
       ),
       t14,
     ),
@@ -226,7 +226,7 @@ fn step_6() -> Unit raise {
   subset_matroid_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s SUBSET matroid_span m t <=>\n             s SUBSET matroid_span m t)",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s SUBSET matroid_span m t <=>\n             s SUBSET matroid_span m t)",
       ),
       t15,
     ),
@@ -257,7 +257,7 @@ fn step_7() -> Unit raise {
   matroid_span_minimal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> matroid_span m s SUBSET matroid_span m t",
+        "∀(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> matroid_span m s SUBSET matroid_span m t",
       ),
       t16,
     ),
@@ -292,7 +292,7 @@ fn step_8() -> Unit raise {
   matroid_span_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid). matroid_span m (matroid_set m) = matroid_set m",
+        "∀(m:A matroid). matroid_span m (matroid_set m) = matroid_set m",
       ),
       t18,
     ),
@@ -319,7 +319,7 @@ fn step_9() -> Unit raise {
   matroid_span_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             s SUBSET matroid_span m t /\\ t SUBSET matroid_span m s)",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             s SUBSET matroid_span m t /\\ t SUBSET matroid_span m s)",
       ),
       t19,
     ),
@@ -346,7 +346,7 @@ fn step_10() -> Unit raise {
   matroid_span_eq_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_set m <=>\n             matroid_set m SUBSET matroid_span m s)",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_set m <=>\n             matroid_set m SUBSET matroid_span m s)",
       ),
       t20,
     ),
@@ -377,7 +377,7 @@ fn step_11() -> Unit raise {
   matroid_span_subset_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             t SUBSET matroid_span m s)",
+        "∀(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m\n        ==> (matroid_span m s = matroid_span m t <=>\n             t SUBSET matroid_span m s)",
       ),
       t21,
     ),
@@ -414,7 +414,7 @@ fn step_12() -> Unit raise {
   matroid_span_inter_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s INTER t) SUBSET\n            matroid_span m s INTER matroid_span m t",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s INTER t) SUBSET\n            matroid_span m s INTER matroid_span m t",
       ),
       t25,
     ),
@@ -472,7 +472,7 @@ fn step_13() -> Unit raise {
   matroid_span_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION matroid_span m t)",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION matroid_span m t)",
       ),
       t31,
     ),
@@ -503,7 +503,7 @@ fn step_14() -> Unit raise {
   matroid_span_union_left_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION t)",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (matroid_span m s UNION t)",
       ),
       t32,
     ),
@@ -534,7 +534,7 @@ fn step_15() -> Unit raise {
   matroid_span_union_right_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (s UNION matroid_span m t)",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (s UNION t) =\n            matroid_span m (s UNION matroid_span m t)",
       ),
       t33,
     ),
@@ -571,7 +571,7 @@ fn step_16() -> Unit raise {
   matroid_span_union_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m s UNION matroid_span m t SUBSET\n            matroid_span m (s UNION t)",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m s UNION matroid_span m t SUBSET\n            matroid_span m (s UNION t)",
       ),
       t37,
     ),
@@ -648,7 +648,7 @@ fn step_17() -> Unit raise {
   matroid_span_exchange_delete_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) a b s.\n        s SUBSET matroid_set m /\\\n        b IN matroid_set m /\\\n        a IN matroid_span m s /\\\n        ~(a IN matroid_span m (s DELETE b))\n        ==> b IN matroid_span m (a INSERT (s DELETE b))",
+        "∀(m:A matroid) a b s.\n        s SUBSET matroid_set m /\\\n        b IN matroid_set m /\\\n        a IN matroid_span m s /\\\n        ~(a IN matroid_span m (s DELETE b))\n        ==> b IN matroid_span m (a INSERT (s DELETE b))",
       ),
       t46,
     ),
@@ -691,7 +691,7 @@ fn step_18() -> Unit raise {
   matroid_span_union_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m (s UNION t) = matroid_span m t <=>\n             s SUBSET matroid_span m t)",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> (matroid_span m (s UNION t) = matroid_span m t <=>\n             s SUBSET matroid_span m t)",
       ),
       t52,
     ),
@@ -726,7 +726,7 @@ fn step_19() -> Unit raise {
   matroid_span_insert_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN matroid_set m\n        ==> (matroid_span m (x INSERT s) = matroid_span m s <=>\n             x IN matroid_span m s)",
+        "∀(m:A matroid) s x.\n        s SUBSET matroid_set m /\\ x IN matroid_set m\n        ==> (matroid_span m (x INSERT s) = matroid_span m s <=>\n             x IN matroid_span m s)",
       ),
       t54,
     ),
@@ -766,7 +766,7 @@ fn step_20() -> Unit raise {
   matroid_span_delete_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s x.\n        x IN s /\\ s SUBSET matroid_set m\n        ==> (matroid_span m (s DELETE x) = matroid_span m s <=>\n             x IN matroid_span m (s DELETE x))",
+        "∀(m:A matroid) s x.\n        x IN s /\\ s SUBSET matroid_set m\n        ==> (matroid_span m (s DELETE x) = matroid_span m s <=>\n             x IN matroid_span m (s DELETE x))",
       ),
       t56,
     ),
@@ -793,7 +793,7 @@ fn step_21() -> Unit raise {
   matroid_span_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) x y s.\n        s SUBSET matroid_set m /\\\n        x IN matroid_span m s /\\\n        y IN matroid_span m (x INSERT s)\n        ==> y IN matroid_span m s",
+        "∀(m:A matroid) x y s.\n        s SUBSET matroid_set m /\\\n        x IN matroid_span m s /\\\n        y IN matroid_span m (x INSERT s)\n        ==> y IN matroid_span m s",
       ),
       t57,
     ),
@@ -1028,7 +1028,7 @@ fn step_22() -> Unit raise {
   matroid_span_finitary_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s k.\n        s SUBSET matroid_set m /\\\n        FINITE k /\\ k SUBSET matroid_span m s\n        ==> exists s'. FINITE s' /\\ s' SUBSET s /\\ k SUBSET matroid_span m s'",
+        "∀(m:A matroid) s k.\n        s SUBSET matroid_set m /\\\n        FINITE k /\\ k SUBSET matroid_span m s\n        ==> exists s'. FINITE s' /\\ s' SUBSET s /\\ k SUBSET matroid_span m s'",
       ),
       t85,
     ),
@@ -1256,7 +1256,7 @@ fn step_23() -> Unit raise {
   matroid_span_finitary_minimal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s x.\n         s SUBSET matroid_set m /\\\n         x IN matroid_span m s\n         ==> ?t. FINITE t /\\ t SUBSET s /\\ x IN matroid_span m t /\\\n                 forall t'. t' PSUBSET t ==> ~(x IN matroid_span m t')",
+        "∀(m:A matroid) s x.\n         s SUBSET matroid_set m /\\\n         x IN matroid_span m s\n         ==> ?t. FINITE t /\\ t SUBSET s /\\ x IN matroid_span m t /\\\n                 ∀ t'. t' PSUBSET t ==> ~(x IN matroid_span m t')",
       ),
       t110,
     ),
@@ -1303,7 +1303,7 @@ fn step_25() -> Unit raise {
   matroid_independent_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "matroid_independent (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\\n        forall x. x IN s ==> ~(x IN matroid_span m (s DELETE x))",
+        "matroid_independent (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\\n        ∀ x. x IN s ==> ~(x IN matroid_span m (s DELETE x))",
       ),
     ),
   )
@@ -1371,7 +1371,7 @@ fn step_28() -> Unit raise {
   matroid_spanning_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s. matroid_spanning m s ==> s SUBSET matroid_set m",
+        "∀(m:A matroid) s. matroid_spanning m s ==> s SUBSET matroid_set m",
       ),
       t111,
     ),
@@ -1396,7 +1396,7 @@ fn step_29() -> Unit raise {
   matroid_independent_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s. matroid_independent m s ==> s SUBSET matroid_set m",
+        "∀(m:A matroid) s. matroid_independent m s ==> s SUBSET matroid_set m",
       ),
       t112,
     ),
@@ -1421,7 +1421,7 @@ fn step_30() -> Unit raise {
   matroid_dependent_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s. matroid_dependent m s ==> s SUBSET matroid_set m",
+        "∀(m:A matroid) s. matroid_dependent m s ==> s SUBSET matroid_set m",
       ),
       t113,
     ),
@@ -1446,7 +1446,7 @@ fn step_31() -> Unit raise {
   matroid_basis_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s. matroid_basis m s ==> s SUBSET matroid_set m",
+        "∀(m:A matroid) s. matroid_basis m s ==> s SUBSET matroid_set m",
       ),
       t114,
     ),
@@ -1475,7 +1475,7 @@ fn step_32() -> Unit raise {
   matroid_spanning_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_spanning m s <=>\n        s SUBSET matroid_set m /\\\n        matroid_set m SUBSET matroid_span m s",
+        "∀(m:A matroid) s.\n        matroid_spanning m s <=>\n        s SUBSET matroid_set m /\\\n        matroid_set m SUBSET matroid_span m s",
       ),
       t116,
     ),
@@ -1502,7 +1502,7 @@ fn step_33() -> Unit raise {
   matroid_spanning_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid).\n        matroid_spanning m (matroid_set m)",
+        "∀(m:A matroid).\n        matroid_spanning m (matroid_set m)",
       ),
       t117,
     ),
@@ -1531,7 +1531,7 @@ fn step_34() -> Unit raise {
   matroid_independent_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\ ~matroid_dependent m s",
+        "∀(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\ ~matroid_dependent m s",
       ),
       t119,
     ),
@@ -1560,7 +1560,7 @@ fn step_35() -> Unit raise {
   matroid_dependent_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_dependent m s <=>\n        s SUBSET matroid_set m /\\\n        ?x. x IN s /\\ x IN matroid_span m (s DELETE x)",
+        "∀(m:A matroid) s.\n        matroid_dependent m s <=>\n        s SUBSET matroid_set m /\\\n        ?x. x IN s /\\ x IN matroid_span m (s DELETE x)",
       ),
       t121,
     ),
@@ -1590,7 +1590,7 @@ fn step_36() -> Unit raise {
   )
   matroid_independent_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_independent m {}"),
+      @parser.parse_term("∀ m:A matroid. matroid_independent m {}"),
       t122,
     ),
   )
@@ -1722,7 +1722,7 @@ fn step_37() -> Unit raise {
   matroid_independent_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m t /\\ s SUBSET t ==> matroid_independent m s",
+        "∀(m:A matroid) s t.\n        matroid_independent m t /\\ s SUBSET t ==> matroid_independent m s",
       ),
       t137,
     ),
@@ -2096,7 +2096,7 @@ fn step_38() -> Unit raise {
   matroid_independent_finitary_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\\n        forall t. FINITE t /\\ t SUBSET s ==> matroid_independent m t",
+        "∀(m:A matroid) s.\n        matroid_independent m s <=>\n        s SUBSET matroid_set m /\\\n        ∀ t. FINITE t /\\ t SUBSET s ==> matroid_independent m t",
       ),
       t176,
     ),
@@ -2149,7 +2149,7 @@ fn step_39() -> Unit raise {
   matroid_dependent_finitary_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n         matroid_dependent m s <=>\n         s SUBSET matroid_set m /\\\n         ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t",
+        "∀(m:A matroid) s.\n         matroid_dependent m s <=>\n         s SUBSET matroid_set m /\\\n         ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t",
       ),
       t187,
     ),
@@ -2220,7 +2220,7 @@ fn step_40() -> Unit raise {
   let t196 = @tactics.match_mp_tac(
     @sets.set_rule(
       @parser.parse_term(
-        "(forall x. p x ==> (q x <=> r x))\n    ==> ((forall x. p x ==> ~q x) <=> (forall x. p x ==> ~r x))",
+        "(∀ x. p x ==> (q x <=> r x))\n    ==> ((∀ x. p x ==> ~q x) <=> (∀ x. p x ==> ~r x))",
       ),
     ),
   )
@@ -2323,7 +2323,7 @@ fn step_40() -> Unit raise {
   matroid_independent_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s a.\n        matroid_independent m (a INSERT s) <=>\n        if a IN s then matroid_independent m s\n        else a IN matroid_set m /\\\n             matroid_independent m s /\\\n             ~(a IN matroid_span m s)",
+        "∀(m:A matroid) s a.\n        matroid_independent m (a INSERT s) <=>\n        if a IN s then matroid_independent m s\n        else a IN matroid_set m /\\\n             matroid_independent m s /\\\n             ~(a IN matroid_span m s)",
       ),
       t210,
     ),
@@ -2659,7 +2659,7 @@ fn step_41() -> Unit raise {
   matroid_span_psubset_independent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> matroid_span m s PSUBSET matroid_span m t",
+        "∀(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> matroid_span m s PSUBSET matroid_span m t",
       ),
       t242,
     ),
@@ -2779,7 +2779,7 @@ fn step_42() -> Unit raise {
   matroid_span_psubset_explicit_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> ?a. a IN t /\\ ~(a IN matroid_span m s)",
+        "∀(m:A matroid) s t.\n        s PSUBSET t /\\ matroid_independent m t\n        ==> ?a. a IN t /\\ ~(a IN matroid_span m s)",
       ),
       t256,
     ),
@@ -3037,7 +3037,7 @@ fn step_43() -> Unit raise {
   matroid_spanning_subset_independent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        t SUBSET s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s = t",
+        "∀(m:A matroid) s t.\n        t SUBSET s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s = t",
       ),
       t281,
     ),
@@ -3090,7 +3090,7 @@ fn step_44() -> Unit raise {
   matroid_spanning_psubset_independent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        ~(s PSUBSET t /\\ matroid_spanning m s /\\ matroid_independent m t)",
+        "∀(m:A matroid) s t.\n        ~(s PSUBSET t /\\ matroid_spanning m s /\\ matroid_independent m t)",
       ),
       t288,
     ),
@@ -3303,7 +3303,7 @@ fn step_45() -> Unit raise {
   matroid_maximal_independent_subset_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\\n        (forall s'. s PSUBSET s' /\\ s' SUBSET t ==> ~matroid_independent m s')\n        ==> matroid_span m s = matroid_span m t",
+        "∀(m:A matroid) s t.\n        s SUBSET t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\\n        (∀ s'. s PSUBSET s' /\\ s' SUBSET t ==> ~matroid_independent m s')\n        ==> matroid_span m s = matroid_span m t",
       ),
       t310,
     ),
@@ -3434,7 +3434,7 @@ fn step_46() -> Unit raise {
   matroid_basis_eq_maximal_independent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_independent m s /\\\n        forall s'. s PSUBSET s' ==> ~matroid_independent m s'",
+        "∀(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_independent m s /\\\n        ∀ s'. s PSUBSET s' ==> ~matroid_independent m s'",
       ),
       t323,
     ),
@@ -3655,7 +3655,7 @@ fn step_47() -> Unit raise {
   matroid_basis_eq_minimal_spanning_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_spanning m s /\\\n        forall s'. s' PSUBSET s ==> ~matroid_spanning m s'",
+        "∀(m:A matroid) s.\n        matroid_basis m s <=>\n        matroid_spanning m s /\\\n        ∀ s'. s' PSUBSET s ==> ~matroid_spanning m s'",
       ),
       t345,
     ),
@@ -3727,7 +3727,7 @@ fn step_48() -> Unit raise {
   matroid_independent_chain_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) c.\n        (forall s. s IN c ==> matroid_independent m s) /\\\n        (forall s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_independent m (UNIONS c)",
+        "∀(m:A matroid) c.\n        (∀ s. s IN c ==> matroid_independent m s) /\\\n        (∀ s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_independent m (UNIONS c)",
       ),
       t355,
     ),
@@ -3884,7 +3884,7 @@ fn step_49() -> Unit raise {
   matroid_span_chain_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) c.\n        ~(c = {}) /\\\n        (forall s. s IN c ==> s SUBSET matroid_set m) /\\\n        (forall s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_span m (UNIONS c) = UNIONS {matroid_span m s | s IN c}",
+        "∀(m:A matroid) c.\n        ~(c = {}) /\\\n        (∀ s. s IN c ==> s SUBSET matroid_set m) /\\\n        (∀ s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_span m (UNIONS c) = UNIONS {matroid_span m s | s IN c}",
       ),
       t374,
     ),
@@ -4178,7 +4178,7 @@ fn step_50() -> Unit raise {
   matroid_intermediate_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m s /\\\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m t",
+        "∀(m:A matroid) s t.\n        matroid_independent m s /\\\n        t SUBSET matroid_set m /\\\n        s SUBSET matroid_span m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m t",
       ),
       t411,
     ),
@@ -4222,7 +4222,7 @@ fn step_51() -> Unit raise {
   matroid_intermediate_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\ matroid_basis m b",
+        "∀(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> ?b. s SUBSET b /\\ b SUBSET (s UNION t) /\\ matroid_basis m b",
       ),
       t417,
     ),
@@ -4263,7 +4263,7 @@ fn step_52() -> Unit raise {
   matroid_independent_extends_to_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_independent m s ==> ?b. s SUBSET b /\\ matroid_basis m b",
+        "∀(m:A matroid) s.\n        matroid_independent m s ==> ?b. s SUBSET b /\\ matroid_basis m b",
       ),
       t423,
     ),
@@ -4292,7 +4292,7 @@ fn step_53() -> Unit raise {
   )
   matroid_basis_exists_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(m:A matroid). ?b. matroid_basis m b"),
+      @parser.parse_term("∀(m:A matroid). ?b. matroid_basis m b"),
       t424,
     ),
   )
@@ -4334,7 +4334,7 @@ fn step_54() -> Unit raise {
   matroid_spanning_contains_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_spanning m s ==> ?b. b SUBSET s /\\ matroid_basis m b",
+        "∀(m:A matroid) s.\n        matroid_spanning m s ==> ?b. b SUBSET s /\\ matroid_basis m b",
       ),
       t430,
     ),
@@ -4443,7 +4443,7 @@ fn step_55() -> Unit raise {
   matroid_span_dependence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s x.\n        x IN matroid_set m /\\ s SUBSET matroid_set m\n        ==> (x IN matroid_span m s <=>\n             x IN s \\/\n             ?t. t SUBSET s /\\\n                 matroid_independent m t /\\\n                 matroid_dependent m (x INSERT t))",
+        "∀(m:A matroid) s x.\n        x IN matroid_set m /\\ s SUBSET matroid_set m\n        ==> (x IN matroid_span m s <=>\n             x IN s \\/\n             ?t. t SUBSET s /\\\n                 matroid_independent m t /\\\n                 matroid_dependent m (x INSERT t))",
       ),
       t445,
     ),
@@ -5062,7 +5062,7 @@ fn step_56() -> Unit raise {
   matroid_steinitz_exchange_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n      t SUBSET matroid_set m /\\\n      FINITE s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n      ==> ?t'. t' SUBSET t /\\ t' HAS_SIZE (CARD s) /\\\n               matroid_span m ((t DIFF t') UNION s) = matroid_span m t",
+        "∀(m:A matroid) s t.\n      t SUBSET matroid_set m /\\\n      FINITE s /\\ matroid_independent m s /\\ s SUBSET matroid_span m t\n      ==> ?t'. t' SUBSET t /\\ t' HAS_SIZE (CARD s) /\\\n               matroid_span m ((t DIFF t') UNION s) = matroid_span m t",
       ),
       t526,
     ),
@@ -5195,7 +5195,7 @@ fn step_57() -> Unit raise {
   matroid_independent_card_le_span_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> FINITE s /\\ CARD s <= CARD t",
+        "∀(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> FINITE s /\\ CARD s <= CARD t",
       ),
       t543,
     ),
@@ -5227,7 +5227,7 @@ fn step_58() -> Unit raise {
   matroid_eq_spans_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (FINITE s <=> FINITE t)",
+        "∀(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (FINITE s <=> FINITE t)",
       ),
       t544,
     ),
@@ -5264,7 +5264,7 @@ fn step_59() -> Unit raise {
   matroid_eq_spans_size_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t n.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)",
+        "∀(m:A matroid) s t n.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)",
       ),
       t546,
     ),
@@ -5293,7 +5293,7 @@ fn step_60() -> Unit raise {
   matroid_bases_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> (FINITE s <=> FINITE t)",
+        "∀(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> (FINITE s <=> FINITE t)",
       ),
       t548,
     ),
@@ -5322,7 +5322,7 @@ fn step_61() -> Unit raise {
   matroid_bases_size_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t n.\n        matroid_basis m s /\\ matroid_basis m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)",
+        "∀(m:A matroid) s t n.\n        matroid_basis m s /\\ matroid_basis m t\n        ==> (s HAS_SIZE n <=> t HAS_SIZE n)",
       ),
       t550,
     ),
@@ -5744,7 +5744,7 @@ fn step_62() -> Unit raise {
   ])
   let t554 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x:A. x IN t\n            ==> ?k. FINITE k /\\ k SUBSET s /\\ x IN matroid_span m k",
+      "∀ x:A. x IN t\n            ==> ?k. FINITE k /\\ k SUBSET s /\\ x IN matroid_span m k",
     ),
     fn(
       x551 : @kernel.Thm,
@@ -5826,7 +5826,7 @@ fn step_62() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall(m:A matroid) s t.\n          matroid_independent m s /\\\n          INFINITE t /\\ t SUBSET matroid_set m /\\\n          matroid_span m t = matroid_span m s\n          ==> s <=_c t",
+      "∀(m:A matroid) s t.\n          matroid_independent m s /\\\n          INFINITE t /\\ t SUBSET matroid_set m /\\\n          matroid_span m t = matroid_span m s\n          ==> s <=_c t",
     ),
     t602,
   )
@@ -5894,7 +5894,7 @@ fn step_62() -> Unit raise {
   matroid_independent_card_le_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s <=_c t",
+        "∀(m:A matroid) s t.\n        t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> s <=_c t",
       ),
       t616,
     ),
@@ -5931,7 +5931,7 @@ fn step_63() -> Unit raise {
   matroid_independent_card_le_spanning_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> s <=_c t",
+        "∀(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t\n        ==> s <=_c t",
       ),
       t620,
     ),
@@ -5969,7 +5969,7 @@ fn step_64() -> Unit raise {
   matroid_eq_spans_card_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> s =_c t",
+        "∀(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_independent m t /\\\n        matroid_span m s = matroid_span m t\n        ==> s =_c t",
       ),
       t622,
     ),
@@ -5998,7 +5998,7 @@ fn step_65() -> Unit raise {
   matroid_bases_card_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> s =_c t",
+        "∀(m:A matroid) s t.\n        matroid_basis m s /\\ matroid_basis m t ==> s =_c t",
       ),
       t624,
     ),
@@ -6025,7 +6025,7 @@ fn step_66() -> Unit raise {
   matroid_independent_spanning_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t /\\ FINITE t\n        ==> FINITE s",
+        "∀(m:A matroid) s t.\n        matroid_independent m s /\\ matroid_spanning m t /\\ FINITE t\n        ==> FINITE s",
       ),
       t625,
     ),
@@ -6392,7 +6392,7 @@ fn step_67() -> Unit raise {
   matroid_dependent_finitary_minimal_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t /\\\n                forall t'. t' PSUBSET t ==> matroid_independent m t'",
+        "∀(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\ matroid_dependent m t /\\\n                ∀ t'. t' PSUBSET t ==> matroid_independent m t'",
       ),
       t661,
     ),
@@ -6682,7 +6682,7 @@ fn step_68() -> Unit raise {
   matroid_minimally_dependent_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        (forall t. t PSUBSET s ==> matroid_independent m t)\n        ==> (matroid_dependent m s <=>\n             ~(s = {}) /\\ s SUBSET matroid_set m /\\\n             forall a. a IN s ==> a IN matroid_span m (s DELETE a))",
+        "∀(m:A matroid) s.\n        (∀ t. t PSUBSET s ==> matroid_independent m t)\n        ==> (matroid_dependent m s <=>\n             ~(s = {}) /\\ s SUBSET matroid_set m /\\\n             ∀ a. a IN s ==> a IN matroid_span m (s DELETE a))",
       ),
       t695,
     ),
@@ -6780,7 +6780,7 @@ fn step_69() -> Unit raise {
   matroid_minimally_dependent_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\\n                matroid_dependent m t /\\ ~(t = {}) /\\\n                forall a. a IN t ==> a IN matroid_span m (t DELETE a)",
+        "∀(m:A matroid) s.\n        matroid_dependent m s\n        ==> ?t. FINITE t /\\ t SUBSET s /\\\n                matroid_dependent m t /\\ ~(t = {}) /\\\n                ∀ a. a IN t ==> a IN matroid_span m (t DELETE a)",
       ),
       t703,
     ),
@@ -6828,7 +6828,7 @@ fn step_71() -> Unit raise {
   matroid_subspace_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s. matroid_subspace m s ==> s SUBSET matroid_set m",
+        "∀(m:A matroid) s. matroid_subspace m s ==> s SUBSET matroid_set m",
       ),
       t704,
     ),
@@ -6854,7 +6854,7 @@ fn step_72() -> Unit raise {
   )
   matroid_subspace_set_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_subspace m (matroid_set m)"),
+      @parser.parse_term("∀ m:A matroid. matroid_subspace m (matroid_set m)"),
       t705,
     ),
   )
@@ -6880,7 +6880,7 @@ fn step_73() -> Unit raise {
   matroid_subspace_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_subspace m (matroid_span m s)",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_subspace m (matroid_span m s)",
       ),
       t706,
     ),
@@ -6911,7 +6911,7 @@ fn step_74() -> Unit raise {
   matroid_subspace_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_subspace m s <=>\n        s SUBSET matroid_set m /\\ matroid_span m s SUBSET s",
+        "∀(m:A matroid) s.\n        matroid_subspace m s <=>\n        s SUBSET matroid_set m /\\ matroid_span m s SUBSET s",
       ),
       t708,
     ),
@@ -7164,7 +7164,7 @@ fn step_75() -> Unit raise {
   matroid_subspace_inters_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) f.\n        ~(f = {}) /\\ (forall s. s IN f ==> matroid_subspace m s)\n        ==> matroid_subspace m (INTERS f)",
+        "∀(m:A matroid) f.\n        ~(f = {}) /\\ (∀ s. s IN f ==> matroid_subspace m s)\n        ==> matroid_subspace m (INTERS f)",
       ),
       t731,
     ),
@@ -7198,7 +7198,7 @@ fn step_76() -> Unit raise {
   matroid_subspace_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_subspace m s /\\ matroid_subspace m t\n        ==> matroid_subspace m (s INTER t)",
+        "∀(m:A matroid) s t.\n        matroid_subspace m s /\\ matroid_subspace m t\n        ==> matroid_subspace m (s INTER t)",
       ),
       t735,
     ),
@@ -7230,7 +7230,7 @@ fn step_77() -> Unit raise {
   matroid_span_inter_spans_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (matroid_span m s INTER matroid_span m t) =\n            matroid_span m s INTER matroid_span m t",
+        "∀(m:A matroid) s t.\n        s SUBSET matroid_set m /\\ t SUBSET matroid_set m\n        ==> matroid_span m (matroid_span m s INTER matroid_span m t) =\n            matroid_span m s INTER matroid_span m t",
       ),
       t736,
     ),
@@ -7260,7 +7260,7 @@ fn step_78() -> Unit raise {
   matroid_subspace_chain_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) c.\n        ~(c = {}) /\\\n        (forall s. s IN c ==> matroid_subspace m s) /\\\n        (forall s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_subspace m (UNIONS c)",
+        "∀(m:A matroid) c.\n        ~(c = {}) /\\\n        (∀ s. s IN c ==> matroid_subspace m s) /\\\n        (∀ s t. s IN c /\\ t IN c ==> s SUBSET t \\/ t SUBSET s)\n        ==> matroid_subspace m (UNIONS c)",
       ),
       t739,
     ),
@@ -7291,7 +7291,7 @@ fn step_79() -> Unit raise {
   matroid_span_subspace_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n        b SUBSET s /\\ s SUBSET matroid_span m b /\\ matroid_subspace m s\n        ==> matroid_span m b = s",
+        "∀(m:A matroid) s b.\n        b SUBSET s /\\ s SUBSET matroid_span m b /\\ matroid_subspace m s\n        ==> matroid_span m b = s",
       ),
       t741,
     ),
@@ -7316,7 +7316,7 @@ fn step_80() -> Unit raise {
   matroid_span_eq_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = s <=> matroid_subspace m s)",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_span m s = s <=> matroid_subspace m s)",
       ),
       t742,
     ),
@@ -7341,7 +7341,7 @@ fn step_81() -> Unit raise {
   matroid_span_of_subspace_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_subspace m s ==> matroid_span m s = s",
+        "∀(m:A matroid) s.\n        matroid_subspace m s ==> matroid_span m s = s",
       ),
       t743,
     ),
@@ -7368,7 +7368,7 @@ fn step_82() -> Unit raise {
   matroid_span_subset_subspace_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        s SUBSET t /\\ matroid_subspace m t ==> matroid_span m s SUBSET t",
+        "∀(m:A matroid) s t.\n        s SUBSET t /\\ matroid_subspace m t ==> matroid_span m s SUBSET t",
       ),
       t744,
     ),
@@ -7502,7 +7502,7 @@ fn step_84() -> Unit raise {
   submatroid_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall m s:A->bool. matroid_set (submatroid m s) =\n                  matroid_span m (matroid_set m INTER s)) /\\\n   (forall m s:A->bool. matroid_span (submatroid m s) = matroid_span m)",
+        "(∀ m s:A->bool. matroid_set (submatroid m s) =\n                  matroid_span m (matroid_set m INTER s)) /\\\n   (∀ m s:A->bool. matroid_span (submatroid m s) = matroid_span m)",
       ),
       t771,
     ),
@@ -7534,7 +7534,7 @@ fn step_85() -> Unit raise {
   submatroid_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall m s:A->bool.\n        matroid_subspace m s ==> matroid_set (submatroid m s) = s) /\\\n   (forall m s:A->bool. matroid_span (submatroid m s) = matroid_span m)",
+        "(∀ m s:A->bool.\n        matroid_subspace m s ==> matroid_set (submatroid m s) = s) /\\\n   (∀ m s:A->bool. matroid_span (submatroid m s) = matroid_span m)",
       ),
       t773,
     ),
@@ -7564,7 +7564,7 @@ fn step_86() -> Unit raise {
   submatroid_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s:A->bool.\n        s SUBSET matroid_set m\n        ==> submatroid m (matroid_span m s) = submatroid m s",
+        "∀ m s:A->bool.\n        s SUBSET matroid_set m\n        ==> submatroid m (matroid_span m s) = submatroid m s",
       ),
       t774,
     ),
@@ -7591,7 +7591,7 @@ fn step_87() -> Unit raise {
   submatroid_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall m s:A->bool.\n        s SUBSET matroid_set m\n        ==> matroid_set (submatroid m s) = matroid_span m s) /\\\n   (forall m s:A->bool. matroid_span (submatroid m s) = matroid_span m)",
+        "(∀ m s:A->bool.\n        s SUBSET matroid_set m\n        ==> matroid_set (submatroid m s) = matroid_span m s) /\\\n   (∀ m s:A->bool. matroid_span (submatroid m s) = matroid_span m)",
       ),
       t775,
     ),
@@ -7628,7 +7628,7 @@ fn step_88() -> Unit raise {
   )
   submatroid_set_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. submatroid m (matroid_set m) = m"),
+      @parser.parse_term("∀ m:A matroid. submatroid m (matroid_set m) = m"),
       t777,
     ),
   )
@@ -7656,7 +7656,7 @@ fn step_89() -> Unit raise {
   matroid_independent_submatroid_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n        s SUBSET matroid_set m\n        ==> (matroid_independent (submatroid m s) b <=>\n             b SUBSET matroid_span m s /\\ matroid_independent m b)",
+        "∀(m:A matroid) s b.\n        s SUBSET matroid_set m\n        ==> (matroid_independent (submatroid m s) b <=>\n             b SUBSET matroid_span m s /\\ matroid_independent m b)",
       ),
       t779,
     ),
@@ -7683,7 +7683,7 @@ fn step_90() -> Unit raise {
   matroid_spanning_submatroid_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_spanning (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\ matroid_span m b = matroid_span m s)",
+        "∀(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_spanning (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\ matroid_span m b = matroid_span m s)",
       ),
       t780,
     ),
@@ -7710,7 +7710,7 @@ fn step_91() -> Unit raise {
   matroid_spanning_submatroid_self_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n       s SUBSET matroid_set m ==> matroid_spanning (submatroid m s) s",
+        "∀(m:A matroid) s.\n       s SUBSET matroid_set m ==> matroid_spanning (submatroid m s) s",
       ),
       t781,
     ),
@@ -7742,7 +7742,7 @@ fn step_92() -> Unit raise {
   matroid_basis_submatroid_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_basis (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)",
+        "∀(m:A matroid) s b.\n       s SUBSET matroid_set m\n       ==> (matroid_basis (submatroid m s) b <=>\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)",
       ),
       t784,
     ),
@@ -7916,7 +7916,7 @@ fn step_93() -> Unit raise {
   matroid_subset_contains_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> ?b. b SUBSET s /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m s",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> ?b. b SUBSET s /\\\n                matroid_independent m b /\\\n                matroid_span m b = matroid_span m s",
       ),
       t799,
     ),
@@ -8158,7 +8158,7 @@ fn step_94() -> Unit raise {
   matroid_steinitz_exchange_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' HAS_SIZE (CARD t) /\\\n                 s SUBSET t' /\\\n                 t' SUBSET (s UNION t) /\\\n                 matroid_span m t' = matroid_span m t",
+        "∀(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' HAS_SIZE (CARD t) /\\\n                 s SUBSET t' /\\\n                 t' SUBSET (s UNION t) /\\\n                 matroid_span m t' = matroid_span m t",
       ),
       t832,
     ),
@@ -8239,7 +8239,7 @@ fn step_95() -> Unit raise {
   matroid_steinitz_exchange_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' SUBSET t /\\ CARD(t') + CARD s = CARD t /\\\n                 matroid_span m (s UNION t') = matroid_span m t",
+        "∀(m:A matroid) s t.\n        FINITE t /\\ t SUBSET matroid_set m /\\\n        matroid_independent m s /\\ s SUBSET matroid_span m t\n        ==> ?t'. t' SUBSET t /\\ CARD(t') + CARD s = CARD t /\\\n                 matroid_span m (s UNION t') = matroid_span m t",
       ),
       t844,
     ),
@@ -8286,7 +8286,7 @@ fn step_97() -> Unit raise {
   matroid_dimension_c.set(
     @define.define_(
       @parser.parse_term(
-        "matroid_dimension (m:A matroid) =\n        @n. forall b. matroid_basis m b ==> b HAS_SIZE n",
+        "matroid_dimension (m:A matroid) =\n        @n. ∀ b. matroid_basis m b ==> b HAS_SIZE n",
       ),
     ),
   )
@@ -8354,7 +8354,7 @@ fn step_100() -> Unit raise {
   matroid_finite_dim_imp_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s. matroid_finite_dim m s ==> s SUBSET matroid_set m",
+        "∀(m:A matroid) s. matroid_finite_dim m s ==> s SUBSET matroid_set m",
       ),
       t845,
     ),
@@ -8381,7 +8381,7 @@ fn step_101() -> Unit raise {
   matroid_finite_dim_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid).\n    matroid_finite_dim m (matroid_set m) = matroid_finite_dimensional m",
+        "∀(m:A matroid).\n    matroid_finite_dim m (matroid_set m) = matroid_finite_dimensional m",
       ),
       t846,
     ),
@@ -8406,7 +8406,7 @@ fn step_102() -> Unit raise {
   matroid_dim_set_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid).\n      matroid_dim m (matroid_set m) = matroid_dimension m",
+        "∀(m:A matroid).\n      matroid_dim m (matroid_set m) = matroid_dimension m",
       ),
       t847,
     ),
@@ -8437,7 +8437,7 @@ fn step_103() -> Unit raise {
   matroid_finite_dim_span_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\ matroid_finite_dim m (matroid_span m s)",
+        "∀(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\ matroid_finite_dim m (matroid_span m s)",
       ),
       t849,
     ),
@@ -8462,7 +8462,7 @@ fn step_104() -> Unit raise {
   matroid_finite_dim_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_finite_dim m (matroid_span m s) <=>\n             matroid_finite_dim m s)",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_finite_dim m (matroid_span m s) <=>\n             matroid_finite_dim m s)",
       ),
       t850,
     ),
@@ -8487,7 +8487,7 @@ fn step_105() -> Unit raise {
   matroid_dim_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_dim m (matroid_span m s) = matroid_dim m s",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> matroid_dim m (matroid_span m s) = matroid_dim m s",
       ),
       t851,
     ),
@@ -8518,7 +8518,7 @@ fn step_106() -> Unit raise {
   matroid_finite_dimensional_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\\n            b SUBSET matroid_set m /\\\n            matroid_set m SUBSET matroid_span m b",
+        "∀(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\\n            b SUBSET matroid_set m /\\\n            matroid_set m SUBSET matroid_span m b",
       ),
       t853,
     ),
@@ -8553,7 +8553,7 @@ fn step_107() -> Unit raise {
   matroid_finite_dimensional_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\ matroid_basis m b",
+        "∀(m:A matroid).\n        matroid_finite_dimensional m <=>\n        ?b. FINITE b /\\ matroid_basis m b",
       ),
       t855,
     ),
@@ -8657,7 +8657,7 @@ fn step_108() -> Unit raise {
   matroid_finite_dimensional_contains_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_finite_dimensional m /\\ matroid_spanning m s\n        ==> ?b. FINITE b /\\ b SUBSET s /\\ matroid_basis m b",
+        "∀(m:A matroid) s.\n        matroid_finite_dimensional m /\\ matroid_spanning m s\n        ==> ?b. FINITE b /\\ b SUBSET s /\\ matroid_basis m b",
       ),
       t864,
     ),
@@ -8688,7 +8688,7 @@ fn step_109() -> Unit raise {
   matroid_finite_dimensional_any_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b.\n        matroid_basis m b\n        ==> (matroid_finite_dimensional (m:A matroid) <=> FINITE b)",
+        "∀(m:A matroid) b.\n        matroid_basis m b\n        ==> (matroid_finite_dimensional (m:A matroid) <=> FINITE b)",
       ),
       t865,
     ),
@@ -8942,7 +8942,7 @@ fn step_110() -> Unit raise {
   )
   let t894 = (
     @parser.parse_term(
-      "(forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        ?b. FINITE b /\\ b SUBSET matroid_set m /\\ s SUBSET matroid_span m b) /\\\n   (forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\ b SUBSET s /\\ s SUBSET matroid_span m b) /\\\n   (forall(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)",
+      "(∀(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        ?b. FINITE b /\\ b SUBSET matroid_set m /\\ s SUBSET matroid_span m b) /\\\n   (∀(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\ b SUBSET s /\\ s SUBSET matroid_span m b) /\\\n   (∀(m:A matroid) s.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. FINITE b /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s)",
     ),
     t893,
   )
@@ -9008,7 +9008,7 @@ fn step_111() -> Unit raise {
   matroid_finite_dimensional_dim_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_finite_dimensional m /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m s",
+        "∀(m:A matroid) s.\n        matroid_finite_dimensional m /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m s",
       ),
       t896,
     ),
@@ -9037,7 +9037,7 @@ fn step_112() -> Unit raise {
   finite_imp_matroid_finite_dim_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_finite_dim m s",
+        "∀(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_finite_dim m s",
       ),
       t898,
     ),
@@ -9064,7 +9064,7 @@ fn step_113() -> Unit raise {
   matroid_finite_dim_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s:A->bool.\n        FINITE s ==> (matroid_finite_dim m s <=> s SUBSET matroid_set m)",
+        "∀ m s:A->bool.\n        FINITE s ==> (matroid_finite_dim m s <=> s SUBSET matroid_set m)",
       ),
       t899,
     ),
@@ -9094,7 +9094,7 @@ fn step_114() -> Unit raise {
   )
   matroid_finite_dim_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_finite_dim m {}"),
+      @parser.parse_term("∀ m:A matroid. matroid_finite_dim m {}"),
       t900,
     ),
   )
@@ -9122,7 +9122,7 @@ fn step_115() -> Unit raise {
   matroid_finite_dim_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s t.\n        matroid_finite_dim m t /\\ s SUBSET t ==> matroid_finite_dim m s",
+        "∀(m:A matroid) s t.\n        matroid_finite_dim m t /\\ s SUBSET t ==> matroid_finite_dim m s",
       ),
       t902,
     ),
@@ -9198,7 +9198,7 @@ fn step_116() -> Unit raise {
   matroid_finite_dim_union_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        matroid_finite_dim m (s UNION t) <=>\n        matroid_finite_dim m s /\\ matroid_finite_dim m t",
+        "∀ m s t:A->bool.\n        matroid_finite_dim m (s UNION t) <=>\n        matroid_finite_dim m s /\\ matroid_finite_dim m t",
       ),
       t910,
     ),
@@ -9237,7 +9237,7 @@ fn step_117() -> Unit raise {
   matroid_finite_dim_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s x:A.\n        matroid_finite_dim m (x INSERT s) <=>\n        x IN matroid_set m /\\ matroid_finite_dim m s",
+        "∀ m s x:A.\n        matroid_finite_dim m (x INSERT s) <=>\n        x IN matroid_set m /\\ matroid_finite_dim m s",
       ),
       t913,
     ),
@@ -9285,7 +9285,7 @@ fn step_118() -> Unit raise {
   matroid_dimension_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:A matroid.\n        matroid_dimension m = @n. ?b. matroid_basis m b /\\ b HAS_SIZE n",
+        "∀ m:A matroid.\n        matroid_dimension m = @n. ?b. matroid_basis m b /\\ b HAS_SIZE n",
       ),
       t917,
     ),
@@ -9416,7 +9416,7 @@ fn step_119() -> Unit raise {
   matroid_dim_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     matroid_span m b = matroid_span m s /\\\n                     b HAS_SIZE n)",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     matroid_span m b = matroid_span m s /\\\n                     b HAS_SIZE n)",
       ),
       t929,
     ),
@@ -9455,7 +9455,7 @@ fn step_120() -> Unit raise {
   matroid_dim_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     s SUBSET matroid_span m b /\\\n                     b HAS_SIZE n)",
+        "∀(m:A matroid) s.\n        s SUBSET matroid_set m\n        ==> (matroid_dim m s =\n             @n. ?b. b SUBSET s /\\\n                     matroid_independent m b /\\\n                     s SUBSET matroid_span m b /\\\n                     b HAS_SIZE n)",
       ),
       t933,
     ),
@@ -9486,7 +9486,7 @@ fn step_121() -> Unit raise {
   matroid_dimension_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b n.\n        matroid_basis m b /\\ b HAS_SIZE n ==> matroid_dimension m = n",
+        "∀(m:A matroid) b n.\n        matroid_basis m b /\\ b HAS_SIZE n ==> matroid_dimension m = n",
       ),
       t935,
     ),
@@ -9513,7 +9513,7 @@ fn step_122() -> Unit raise {
   matroid_dimension_eq_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b.\n        matroid_basis m b /\\ FINITE b ==> matroid_dimension m = CARD b",
+        "∀(m:A matroid) b.\n        matroid_basis m b /\\ FINITE b ==> matroid_dimension m = CARD b",
       ),
       t936,
     ),
@@ -9613,7 +9613,7 @@ fn step_123() -> Unit raise {
   matroid_dim_unique_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b n.\n        s SUBSET matroid_set m /\\ b SUBSET matroid_set m /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ matroid_span m b = matroid_span m s\n        ==> matroid_dim m s = n",
+        "∀(m:A matroid) s b n.\n        s SUBSET matroid_set m /\\ b SUBSET matroid_set m /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ matroid_span m b = matroid_span m s\n        ==> matroid_dim m s = n",
       ),
       t947,
     ),
@@ -9725,7 +9725,7 @@ fn step_124() -> Unit raise {
   matroid_dim_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b n.\n        b SUBSET s /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = n",
+        "∀(m:A matroid) s b n.\n        b SUBSET s /\\ b HAS_SIZE n /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = n",
       ),
       t958,
     ),
@@ -9750,7 +9750,7 @@ fn step_125() -> Unit raise {
   matroid_span_dim_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        t SUBSET matroid_set m /\\\n        matroid_span m s = matroid_span m t\n        ==> matroid_dim m s = matroid_dim m t",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        t SUBSET matroid_set m /\\\n        matroid_span m s = matroid_span m t\n        ==> matroid_dim m s = matroid_dim m t",
       ),
       t959,
     ),
@@ -9777,7 +9777,7 @@ fn step_126() -> Unit raise {
   matroid_span_insert_refl_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s x:A.\n        s SUBSET matroid_set m /\\ x IN matroid_span m s\n        ==> matroid_span m (x INSERT s) = matroid_span m s",
+        "∀ m s x:A.\n        s SUBSET matroid_set m /\\ x IN matroid_span m s\n        ==> matroid_span m (x INSERT s) = matroid_span m s",
       ),
       t960,
     ),
@@ -9810,7 +9810,7 @@ fn step_127() -> Unit raise {
   matroid_basis_exists_dimension_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m:A matroid.\n        matroid_finite_dimensional m <=>\n        ?b. b HAS_SIZE matroid_dimension m /\\ matroid_basis m b",
+        "∀ m:A matroid.\n        matroid_finite_dimensional m <=>\n        ?b. b HAS_SIZE matroid_dimension m /\\ matroid_basis m b",
       ),
       t962,
     ),
@@ -9856,7 +9856,7 @@ fn step_128() -> Unit raise {
   matroid_basis_exists_dim_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s",
+        "∀ m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET matroid_span m s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s",
       ),
       t968,
     ),
@@ -9900,7 +9900,7 @@ fn step_129() -> Unit raise {
   matroid_contains_basis_dim_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s",
+        "∀ m s:A->bool.\n        matroid_finite_dim m s <=>\n        s SUBSET matroid_set m /\\\n        ?b. b HAS_SIZE matroid_dim m s /\\\n            b SUBSET s /\\\n            matroid_independent m b /\\\n            matroid_span m b = matroid_span m s",
       ),
       t973,
     ),
@@ -9927,7 +9927,7 @@ fn step_130() -> Unit raise {
   matroid_dim_eq_card_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n        b SUBSET s /\\ FINITE b /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = CARD b",
+        "∀(m:A matroid) s b.\n        b SUBSET s /\\ FINITE b /\\\n        matroid_independent m b /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s = CARD b",
       ),
       t974,
     ),
@@ -9959,7 +9959,7 @@ fn step_131() -> Unit raise {
   matroid_dim_eq_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b.\n        FINITE b /\\ matroid_independent m b\n        ==> matroid_dim m b = CARD b",
+        "∀(m:A matroid) b.\n        FINITE b /\\ matroid_independent m b\n        ==> matroid_dim m b = CARD b",
       ),
       t975,
     ),
@@ -10103,7 +10103,7 @@ fn step_132() -> Unit raise {
   matroid_dimension_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_dimension m <= n",
+        "∀(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_dimension m <= n",
       ),
       t992,
     ),
@@ -10130,7 +10130,7 @@ fn step_133() -> Unit raise {
   matroid_dimension_finite_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_finite_dimensional m /\\ matroid_dimension m <= n",
+        "∀(m:A matroid) b n.\n        b SUBSET matroid_set m /\\ matroid_set m SUBSET matroid_span m b /\\\n        FINITE b /\\ CARD b <= n\n        ==> matroid_finite_dimensional m /\\ matroid_dimension m <= n",
       ),
       t993,
     ),
@@ -10332,7 +10332,7 @@ fn step_134() -> Unit raise {
   matroid_dim_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= n",
+        "∀(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= n",
       ),
       t1014,
     ),
@@ -10357,7 +10357,7 @@ fn step_135() -> Unit raise {
   matroid_dim_finite_le_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_finite_dim m s /\\ matroid_dim m s <= n",
+        "∀(m:A matroid) s b n.\n        FINITE b /\\ CARD b <= n /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_finite_dim m s /\\ matroid_dim m s <= n",
       ),
       t1015,
     ),
@@ -10384,7 +10384,7 @@ fn step_136() -> Unit raise {
   matroid_dim_le_card_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n        FINITE b /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= CARD b",
+        "∀(m:A matroid) s b.\n        FINITE b /\\\n        b SUBSET matroid_set m /\\ s SUBSET matroid_span m b\n        ==> matroid_dim m s <= CARD b",
       ),
       t1016,
     ),
@@ -10411,7 +10411,7 @@ fn step_137() -> Unit raise {
   matroid_dim_le_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_dim m s <= CARD s",
+        "∀(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m ==> matroid_dim m s <= CARD s",
       ),
       t1017,
     ),
@@ -10445,7 +10445,7 @@ fn step_138() -> Unit raise {
   matroid_dimension_ge_finite_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b\n        ==> FINITE b /\\ CARD b <= matroid_dimension m",
+        "∀(m:A matroid) b.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b\n        ==> FINITE b /\\ CARD b <= matroid_dimension m",
       ),
       t1018,
     ),
@@ -10472,7 +10472,7 @@ fn step_139() -> Unit raise {
   matroid_dimension_ge_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b n.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b /\\\n        n <= CARD b\n        ==> n <= matroid_dimension m",
+        "∀(m:A matroid) b n.\n        matroid_finite_dimensional m /\\\n        matroid_independent m b /\\\n        n <= CARD b\n        ==> n <= matroid_dimension m",
       ),
       t1019,
     ),
@@ -10497,7 +10497,7 @@ fn step_140() -> Unit raise {
   matroid_dimension_ge_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) b.\n        matroid_finite_dimensional m /\\ matroid_independent m b\n        ==> CARD b <= matroid_dimension m",
+        "∀(m:A matroid) b.\n        matroid_finite_dimensional m /\\ matroid_independent m b\n        ==> CARD b <= matroid_dimension m",
       ),
       t1020,
     ),
@@ -10544,7 +10544,7 @@ fn step_141() -> Unit raise {
   matroid_dim_ge_finite_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> FINITE b /\\ CARD b <= matroid_dim m s",
+        "∀(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> FINITE b /\\ CARD b <= matroid_dim m s",
       ),
       t1024,
     ),
@@ -10571,7 +10571,7 @@ fn step_142() -> Unit raise {
   matroid_dim_ge_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b n.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\\n        b SUBSET s /\\ n <= CARD b\n        ==> n <= matroid_dim m s",
+        "∀(m:A matroid) s b n.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\\n        b SUBSET s /\\ n <= CARD b\n        ==> n <= matroid_dim m s",
       ),
       t1025,
     ),
@@ -10596,7 +10596,7 @@ fn step_143() -> Unit raise {
   matroid_dim_ge_card_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> CARD b <= matroid_dim m s",
+        "∀(m:A matroid) s b.\n        matroid_finite_dim m s /\\ matroid_independent m b /\\ b SUBSET s\n        ==> CARD b <= matroid_dim m s",
       ),
       t1026,
     ),
@@ -10623,7 +10623,7 @@ fn step_144() -> Unit raise {
   matroid_dim_ge_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> CARD s <= matroid_dim m s",
+        "∀(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> CARD s <= matroid_dim m s",
       ),
       t1027,
     ),
@@ -10650,7 +10650,7 @@ fn step_145() -> Unit raise {
   finite_imp_matroid_finite_dim_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m (matroid_span m s)",
+        "∀(m:A matroid) s.\n        FINITE s /\\ s SUBSET matroid_set m\n        ==> matroid_finite_dim m (matroid_span m s)",
       ),
       t1028,
     ),
@@ -10677,7 +10677,7 @@ fn step_146() -> Unit raise {
   matroid_independent_imp_finite_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> FINITE s",
+        "∀(m:A matroid) s.\n        matroid_finite_dim m s /\\ matroid_independent m s\n        ==> FINITE s",
       ),
       t1029,
     ),
@@ -10843,7 +10843,7 @@ fn step_147() -> Unit raise {
   )
   let t1048 = (
     @parser.parse_term(
-      "(forall m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ matroid_dim m s = CARD s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s) /\\\n   (forall m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ CARD s <= matroid_dim m s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s)",
+      "(∀ m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ matroid_dim m s = CARD s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s) /\\\n   (∀ m s:A->bool.\n        s SUBSET matroid_set m /\\ FINITE s /\\ CARD s <= matroid_dim m s <=>\n        matroid_finite_dim m s /\\ matroid_independent m s)",
     ),
     t1047,
   )
@@ -10904,7 +10904,7 @@ fn step_148() -> Unit raise {
   )
   matroid_dim_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m:A matroid. matroid_dim m {} = 0"),
+      @parser.parse_term("∀ m:A matroid. matroid_dim m {} = 0"),
       t1051,
     ),
   )
@@ -11189,7 +11189,7 @@ fn step_149() -> Unit raise {
   matroid_dim_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s x:A.\n        matroid_finite_dim m s /\\ x IN matroid_set m\n        ==> matroid_dim m (x INSERT s) =\n            if x IN matroid_span m s then matroid_dim m s\n            else matroid_dim m s + 1",
+        "∀ m s x:A.\n        matroid_finite_dim m s /\\ x IN matroid_set m\n        ==> matroid_dim m (x INSERT s) =\n            if x IN matroid_span m s then matroid_dim m s\n            else matroid_dim m s + 1",
       ),
       t1083,
     ),
@@ -11408,7 +11408,7 @@ fn step_150() -> Unit raise {
   matroid_dim_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t",
+        "∀ m s t:A->bool.\n        s SUBSET t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t",
       ),
       t1106,
     ),
@@ -11440,7 +11440,7 @@ fn step_151() -> Unit raise {
   matroid_dim_subset_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_span m t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_span m t /\\ matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t",
       ),
       t1107,
     ),
@@ -11472,7 +11472,7 @@ fn step_152() -> Unit raise {
   matroid_dim_span_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s <= matroid_dim m t",
       ),
       t1108,
     ),
@@ -11827,7 +11827,7 @@ fn step_153() -> Unit raise {
   matroid_dim_span_psubset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s PSUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s < matroid_dim m t",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_set m /\\\n        matroid_span m s PSUBSET matroid_span m t /\\\n        matroid_finite_dim m t\n        ==> matroid_dim m s < matroid_dim m t",
       ),
       t1142,
     ),
@@ -11854,7 +11854,7 @@ fn step_154() -> Unit raise {
   matroid_dim_span_eq_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m t <= matroid_dim m s\n        ==> matroid_span m s = matroid_span m t",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m t <= matroid_dim m s\n        ==> matroid_span m s = matroid_span m t",
       ),
       t1143,
     ),
@@ -11881,7 +11881,7 @@ fn step_155() -> Unit raise {
   matroid_dim_span_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m s = matroid_dim m t\n        ==> matroid_span m s = matroid_span m t",
+        "∀ m s t:A->bool.\n        s SUBSET matroid_set m /\\ matroid_finite_dim m t /\\\n        matroid_span m s SUBSET matroid_span m t /\\\n        matroid_dim m s = matroid_dim m t\n        ==> matroid_span m s = matroid_span m t",
       ),
       t1144,
     ),
@@ -11917,7 +11917,7 @@ fn step_156() -> Unit raise {
   matroid_dim_eq_span_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m s t:A->bool.\n     matroid_finite_dim m t /\\ s SUBSET t /\\ matroid_dim m t <= matroid_dim m s\n     ==> matroid_span m s = matroid_span m t",
+        "∀ m s t:A->bool.\n     matroid_finite_dim m t /\\ s SUBSET t /\\ matroid_dim m t <= matroid_dim m s\n     ==> matroid_span m s = matroid_span m t",
       ),
       t1147,
     ),
@@ -12007,7 +12007,7 @@ fn step_157() -> Unit raise {
   matroid_choose_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. t SUBSET s /\\ matroid_independent m t /\\ t HAS_SIZE n",
+        "∀(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. t SUBSET s /\\ matroid_independent m t /\\ t HAS_SIZE n",
       ),
       t1157,
     ),
@@ -12166,7 +12166,7 @@ fn step_158() -> Unit raise {
   matroid_choose_subspace_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. matroid_subspace m t /\\ t SUBSET matroid_span m s /\\\n                matroid_finite_dim m t /\\ matroid_dim m t = n",
+        "∀(m:A matroid) s n.\n        s SUBSET matroid_set m /\\\n        (matroid_finite_dim m s ==> n <= matroid_dim m s)\n        ==> ?t. matroid_subspace m t /\\ t SUBSET matroid_span m s /\\\n                matroid_finite_dim m t /\\ matroid_dim m t = n",
       ),
       t1171,
     ),
@@ -12517,7 +12517,7 @@ fn step_159() -> Unit raise {
   matroid_lowdim_expand_basis_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?b. b HAS_SIZE n /\\ matroid_independent m b /\\\n                matroid_span m s SUBSET matroid_span m b",
+        "∀ m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?b. b HAS_SIZE n /\\ matroid_independent m b /\\\n                matroid_span m s SUBSET matroid_span m b",
       ),
       t1209,
     ),
@@ -12642,7 +12642,7 @@ fn step_160() -> Unit raise {
   matroid_lowdim_expand_dimension_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?t. matroid_finite_dim m t /\\ matroid_dim m t = n /\\\n                matroid_span m s SUBSET matroid_span m t",
+        "∀ m (s:A->bool) n.\n        matroid_finite_dim m s /\\ matroid_dim m s <= n /\\\n        (matroid_finite_dimensional m ==> n <= matroid_dimension m)\n        ==> ?t. matroid_finite_dim m t /\\ matroid_dim m t = n /\\\n                matroid_span m s SUBSET matroid_span m t",
       ),
       t1220,
     ),

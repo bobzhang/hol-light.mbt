@@ -22,7 +22,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.asm_rewrite_tac(@list.List([]))
   let t1 = @simp.rewrite_tac(@list.List([exprojective()]))
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), @tactics.eq_tac), @tactics.strip_tac), t2), @ringtheory.field_tac)
-  exprojective_alt_c.set(@tactics.prove(@parser.parse_term("forall f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y /\\\n             ring_mul f W Z = ring_mul f X Y)"), t3))
+  exprojective_alt_c.set(@tactics.prove(@parser.parse_term("∀ f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y /\\\n             ring_mul f W Z = ring_mul f X Y)"), t3))
 }
 
 ///|
@@ -55,7 +55,7 @@ fn step_4() -> Unit raise {
   let t5 = @simp.asm_rewrite_tac(@list.List([]))
   let t4 = @simp.rewrite_tac(@list.List([projective()]))
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4), @tactics.eq_tac), @tactics.strip_tac), t5), @ringtheory.field_tac)
-  projective_alt_c.set(@tactics.prove(@parser.parse_term("forall f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y)"), t6))
+  projective_alt_c.set(@tactics.prove(@parser.parse_term("∀ f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y)"), t6))
 }
 
 ///|
@@ -75,7 +75,7 @@ fn step_5() -> Unit raise {
   let t8 = @simp.asm_rewrite_tac(@list.List([]))
   let t7 = @simp.simp_tac(@list.List([projective(), exprojective()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7), @tactics.eq_tac), @tactics.strip_tac), t8), t9), t10), @ringtheory.field_tac)
-  projective_exprojective_c.set(@tactics.prove(@parser.parse_term("forall f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             exprojective f (x,y)\n              (X,Y,Z,ring_div f (ring_mul f X Y) Z))"), t11))
+  projective_exprojective_c.set(@tactics.prove(@parser.parse_term("∀ f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             exprojective f (x,y)\n              (X,Y,Z,ring_div f (ring_mul f X Y) Z))"), t11))
 }
 
 ///|
@@ -95,7 +95,7 @@ fn step_6() -> Unit raise {
   let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @simp.simp_tac(@list.List([projective(), exprojective()]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t12), @tactics.eq_tac), @tactics.strip_tac), t13), t14), t15), @ringtheory.field_tac)
-  exprojective_projective_c.set(@tactics.prove(@parser.parse_term("forall f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             ring_div f (ring_mul f X Y) Z = W)"), t16))
+  exprojective_projective_c.set(@tactics.prove(@parser.parse_term("∀ f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             ring_div f (ring_mul f X Y) Z = W)"), t16))
 }
 
 ///|
@@ -115,7 +115,7 @@ fn step_7() -> Unit raise {
   let t18 = @simp.asm_rewrite_tac(@list.List([]))
   let t17 = @simp.simp_tac(@list.List([projective(), exprojective()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), @tactics.eq_tac), @tactics.strip_tac), t18), t19), t20), @ringtheory.field_tac)
-  exprojective_projective_alt_c.set(@tactics.prove(@parser.parse_term("forall f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             W IN ring_carrier f /\\\n             ring_mul f X Y = ring_mul f W Z)"), t21))
+  exprojective_projective_alt_c.set(@tactics.prove(@parser.parse_term("∀ f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             W IN ring_carrier f /\\\n             ring_mul f X Y = ring_mul f W Z)"), t21))
 }
 
 ///|
@@ -148,7 +148,7 @@ fn step_9() -> Unit raise {
   let t23 = @simp.asm_rewrite_tac(@list.List([]))
   let t22 = @tactics.repeat_tac(@tactics.strip_tac)
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), exprojective(), @edwards.edwards_curve(), edwards_excurve()])), t22), t23), @ringtheory.field_tac)
-  edwards_excurve_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        exprojective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_excurve (f,a,d) Q)"), t24))
+  edwards_excurve_v1_c.set(@tactics.prove(@parser.parse_term("∀ f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        exprojective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_excurve (f,a,d) Q)"), t24))
 }
 
 ///|
@@ -181,7 +181,7 @@ fn step_11() -> Unit raise {
   let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @tactics.repeat_tac(@tactics.strip_tac)
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), projective(), @edwards.edwards_curve(), edwards_pcurve()])), t25), t26), @ringtheory.field_tac)
-  edwards_pcurve_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        projective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_pcurve (f,a,d) Q)"), t27))
+  edwards_pcurve_v1_c.set(@tactics.prove(@parser.parse_term("∀ f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        projective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_pcurve (f,a,d) Q)"), t27))
 }
 
 ///|
@@ -251,7 +251,7 @@ fn step_13() -> Unit raise {
   }), t54), fn(x55 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x55.0, x55.1)
   }), @ringtheory.field_tac)
-  edwards_exprojadd_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojadd (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))"), t56))
+  edwards_exprojadd_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojadd (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))"), t56))
 }
 
 ///|
@@ -322,7 +322,7 @@ fn step_15() -> Unit raise {
   }), t84), fn(x85 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x85.0, x85.1)
   }), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  edwards_exprojadd4_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojadd4 (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))"), t86))
+  edwards_exprojadd4_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojadd4 (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))"), t86))
 }
 
 ///|
@@ -392,7 +392,7 @@ fn step_17() -> Unit raise {
   }), t113), fn(x114 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x114.0, x114.1)
   }), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  edwards_exprojaddn_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojaddn (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))"), t115))
+  edwards_exprojaddn_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojaddn (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))"), t115))
 }
 
 ///|
@@ -424,7 +424,7 @@ pub fn edwards_prexprojdouble() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t116 = @tactics.repeat_tac(@tactics.strip_tac)
   let t117 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), exprojective(), @pair.let_def(), @pair.let_end_def(), edwards_excurve(), edwards_exprojadd(), edwards_prexprojdouble(), @pair.pair_eq()])), t116), @ringtheory.field_tac)
-  edwards_prexprojdouble_exprojadd_c.set(@tactics.prove(@parser.parse_term("forall f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) =\n         edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)"), t117))
+  edwards_prexprojdouble_exprojadd_c.set(@tactics.prove(@parser.parse_term("∀ f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) =\n         edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)"), t117))
 }
 
 ///|
@@ -466,7 +466,7 @@ fn step_20() -> Unit raise {
     }
   })))
   let t140 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t124), t125), t126), t133), t138), t139)
-  edwards_prexprojdouble_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_prexprojdouble (f,a,d) (X1,Y1,Z1))"), t140))
+  edwards_prexprojdouble_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_prexprojdouble (f,a,d) (X1,Y1,Z1))"), t140))
 }
 
 ///|
@@ -498,7 +498,7 @@ pub fn edwards_exprojdouble() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t141 = @tactics.repeat_tac(@tactics.strip_tac)
   let t142 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), exprojective(), @pair.let_def(), @pair.let_end_def(), edwards_excurve(), edwards_exprojadd(), edwards_exprojdouble(), edwards_prexprojdouble(), @pair.pair_eq()])), t141), @ringtheory.field_tac)
-  edwards_exprojdouble_exprojadd_c.set(@tactics.prove(@parser.parse_term("forall f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_exprojdouble (f,a,d) (X1,Y1,Z1,T1) =\n         edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)"), t142))
+  edwards_exprojdouble_exprojadd_c.set(@tactics.prove(@parser.parse_term("∀ f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_exprojdouble (f,a,d) (X1,Y1,Z1,T1) =\n         edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)"), t142))
 }
 
 ///|
@@ -514,7 +514,7 @@ pub fn edwards_exprojdouble_exprojadd() -> @kernel.Thm {
 /// EDWARDS_EXPROJDOUBLE
 fn step_23() -> Unit raise {
   let t143 = @simp.simp_tac(@list.List([@theorems.imp_conj(), exprojective_projective(), edwards_exprojdouble(), edwards_prexprojdouble_v1()]))
-  edwards_exprojdouble_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_exprojdouble (f,a,d) (X1,Y1,Z1,T1))"), t143))
+  edwards_exprojdouble_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1 T1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_exprojdouble (f,a,d) (X1,Y1,Z1,T1))"), t143))
 }
 
 ///|
@@ -556,7 +556,7 @@ fn step_25() -> Unit raise {
     })(t147(x148))
   })
   let t152 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t149), t150), t151)
-  edwards_projdouble_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> projective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                         (edwards_projdouble (f,a,d) (X1,Y1,Z1))"), t152))
+  edwards_projdouble_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> projective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                         (edwards_projdouble (f,a,d) (X1,Y1,Z1))"), t152))
 }
 
 ///|
@@ -588,7 +588,7 @@ pub fn edwards_prexprojdoublen() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t153 = @simp.asm_simp_tac(@list.List([@equal.gsym(edwards_prexprojdouble_exprojadd())]))
   let t154 = @tactics.then_tac(@simp.rewrite_tac(@list.List([edwards_prexprojdoublen(), edwards_exprojaddn()])), t153)
-  edwards_prexprojdoublen_exprojaddn_c.set(@tactics.prove(@parser.parse_term("forall f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_prexprojdoublen (f,a,d) (X1,Y1,Z1) =\n         edwards_exprojaddn (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)"), t154))
+  edwards_prexprojdoublen_exprojaddn_c.set(@tactics.prove(@parser.parse_term("∀ f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_prexprojdoublen (f,a,d) (X1,Y1,Z1) =\n         edwards_exprojaddn (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)"), t154))
 }
 
 ///|
@@ -630,7 +630,7 @@ fn step_28() -> Unit raise {
     }
   })))
   let t177 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t161), t162), t163), t170), t175), t176)
-  edwards_prexprojdoublen_v1_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_prexprojdoublen (f,a,d) (X1,Y1,Z1))"), t177))
+  edwards_prexprojdoublen_v1_c.set(@tactics.prove(@parser.parse_term("∀(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_prexprojdoublen (f,a,d) (X1,Y1,Z1))"), t177))
 }
 
 ///|

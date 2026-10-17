@@ -332,7 +332,7 @@ fn step_1() -> Unit raise {
   ring_divides_pow_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall r (p:A) x m k. integral_domain r /\\\n     p IN ring_carrier r /\\ x IN ring_carrier r /\\\n     ring_divides r p (ring_sub r (ring_pow r x m) x) /\\ ~(k = 0) /\\ 1 <= m\n     ==> ring_divides r p (ring_sub r (ring_pow r x (m EXP k)) x)",
+        "∀ r (p:A) x m k. integral_domain r /\\\n     p IN ring_carrier r /\\ x IN ring_carrier r /\\\n     ring_divides r p (ring_sub r (ring_pow r x m) x) /\\ ~(k = 0) /\\ 1 <= m\n     ==> ring_divides r p (ring_sub r (ring_pow r x (m EXP k)) x)",
       ),
       t37,
     ),
@@ -377,7 +377,7 @@ fn step_2() -> Unit raise {
   poly_nonunit_degree_ge_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p (s:V->bool).\n     field f /\\\n     p IN ring_carrier(poly_ring f s) /\\\n     ~(p = ring_0(poly_ring f s)) /\\\n     ~(ring_unit (poly_ring f s) p)\n     ==> 1 <= poly_deg f p",
+        "∀ f:A ring p (s:V->bool).\n     field f /\\\n     p IN ring_carrier(poly_ring f s) /\\\n     ~(p = ring_0(poly_ring f s)) /\\\n     ~(ring_unit (poly_ring f s) p)\n     ==> 1 <= poly_deg f p",
       ),
       t40,
     ),
@@ -653,7 +653,7 @@ fn step_3() -> Unit raise {
   ring_divides_reduce_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall r (p:A) u x m.\n    u IN ring_carrier r /\\ x IN ring_carrier r /\\\n    ring_divides r p (ring_sub r u x) /\\\n    ring_divides r p (ring_sub r (ring_pow r u m) x) /\\ ~(m = 0)\n    ==> ring_divides r p (ring_sub r (ring_pow r x m) x)",
+        "∀ r (p:A) u x m.\n    u IN ring_carrier r /\\ x IN ring_carrier r /\\\n    ring_divides r p (ring_sub r u x) /\\\n    ring_divides r p (ring_sub r (ring_pow r u m) x) /\\ ~(m = 0)\n    ==> ring_divides r p (ring_sub r (ring_pow r x m) x)",
       ),
       t65,
     ),
@@ -766,7 +766,7 @@ fn step_4() -> Unit raise {
   field_nonzero_product_permute_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring x. field f /\\ FINITE(ring_carrier f) /\\\n    x IN ring_carrier f /\\ ~(x = ring_0 f)\n    ==> ring_product f (ring_carrier f DELETE ring_0 f) (\\y. ring_mul f x y) =\n        ring_product f (ring_carrier f DELETE ring_0 f) (\\y. y)",
+        "∀ f:A ring x. field f /\\ FINITE(ring_carrier f) /\\\n    x IN ring_carrier f /\\ ~(x = ring_0 f)\n    ==> ring_product f (ring_carrier f DELETE ring_0 f) (\\y. ring_mul f x y) =\n        ring_product f (ring_carrier f DELETE ring_0 f) (\\y. y)",
       ),
       t81,
     ),
@@ -1022,7 +1022,7 @@ fn step_5() -> Unit raise {
   ])
   let t109 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall y:A. y IN s ==> y IN ring_carrier f /\\ ~(y = ring_0 f)",
+      "∀ y:A. y IN s ==> y IN ring_carrier f /\\ ~(y = ring_0 f)",
     ),
     fn(
       x106 : @kernel.Thm,
@@ -1343,7 +1343,7 @@ fn step_5() -> Unit raise {
   finite_field_element_pow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring. field f /\\ FINITE(ring_carrier f) ==> forall x. x IN ring_carrier f\n       ==> ring_pow f x (CARD(ring_carrier f)) = x",
+        "∀ f:A ring. field f /\\ FINITE(ring_carrier f) ==> ∀ x. x IN ring_carrier f\n       ==> ring_pow f x (CARD(ring_carrier f)) = x",
       ),
       t141,
     ),
@@ -4048,7 +4048,7 @@ fn step_6() -> Unit raise {
   ])
   let t203 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall g. g IN ring_carrier R\n         ==> poly_extend (f:A ring,K:(((1->num)->A)->bool)ring) h (\\v:1. a) g =\n             ring_coset R (J:((1->num)->A)->bool) g",
+      "∀ g. g IN ring_carrier R\n         ==> poly_extend (f:A ring,K:(((1->num)->A)->bool)ring) h (\\v:1. a) g =\n             ring_coset R (J:((1->num)->A)->bool) g",
     ),
     fn(
       x200 : @kernel.Thm,
@@ -4761,7 +4761,7 @@ fn step_6() -> Unit raise {
   quotient_poly_ring_finite_card_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> field(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p})) /\\\n       FINITE(ring_carrier(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p}))) /\\\n       CARD(ring_carrier(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p}))) =\n       CARD(ring_carrier f) EXP (poly_deg f p)",
+        "∀ f:A ring p. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> field(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p})) /\\\n       FINITE(ring_carrier(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p}))) /\\\n       CARD(ring_carrier(quotient_ring (poly_ring f (:1))\n              (ideal_generated (poly_ring f (:1)) {p}))) =\n       CARD(ring_carrier f) EXP (poly_deg f p)",
       ),
       t494,
     ),
@@ -6484,7 +6484,7 @@ fn step_7() -> Unit raise {
   irreducible_divides_xq_minus_x_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ (poly_deg f p) divides n\n   ==> ring_divides (poly_ring f (:1)) p (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP n))\n            (poly_var f one))",
+        "∀ f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ (poly_deg f p) divides n\n   ==> ring_divides (poly_ring f (:1)) p (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP n))\n            (poly_var f one))",
       ),
       t665,
     ),
@@ -6537,7 +6537,7 @@ fn step_8() -> Unit raise {
   irreducible_divides_xq_minus_x_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> ring_divides (poly_ring f (:1)) p (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP (poly_deg f p)))\n            (poly_var f one))",
+        "∀ f:A ring p. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> ring_divides (poly_ring f (:1)) p (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP (poly_deg f p)))\n            (poly_var f one))",
       ),
       t672,
     ),
@@ -6590,7 +6590,7 @@ fn step_9() -> Unit raise {
   finite_field_pow_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring x r. field f /\\ FINITE(ring_carrier f) /\\ x IN ring_carrier f\n     ==> ring_pow f x (CARD(ring_carrier f) EXP r) = x",
+        "∀ f:A ring x r. field f /\\ FINITE(ring_carrier f) /\\ x IN ring_carrier f\n     ==> ring_pow f x (CARD(ring_carrier f) EXP r) = x",
       ),
       t678,
     ),
@@ -6784,7 +6784,7 @@ fn step_10() -> Unit raise {
   ring_endomorphism_frobenius_iterate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall r:A ring k. prime(ring_char r)\n     ==> ring_endomorphism r (\\x. ring_pow r x (ring_char r EXP k))",
+        "∀ r:A ring k. prime(ring_char r)\n     ==> ring_endomorphism r (\\x. ring_pow r x (ring_char r EXP k))",
       ),
       t704,
     ),
@@ -7504,7 +7504,7 @@ fn step_11() -> Unit raise {
   field_roots_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall r:A ring n. field r /\\ FINITE(ring_carrier r) /\\ 2 <= n /\\\n     (forall a. a IN ring_carrier r ==> ring_pow r a n = a)\n     ==> CARD(ring_carrier r) <= n",
+        "∀ r:A ring n. field r /\\ FINITE(ring_carrier r) /\\ 2 <= n /\\\n     (∀ a. a IN ring_carrier r ==> ring_pow r a n = a)\n     ==> CARD(ring_carrier r) <= n",
       ),
       t778,
     ),
@@ -7704,7 +7704,7 @@ fn step_12() -> Unit raise {
   finite_field_card_char_power_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring. field f /\\ FINITE(ring_carrier f)\n   ==> ?e. ~(e = 0) /\\ CARD(ring_carrier f) = ring_char f EXP e",
+        "∀ f:A ring. field f /\\ FINITE(ring_carrier f)\n   ==> ?e. ~(e = 0) /\\ CARD(ring_carrier f) = ring_char f EXP e",
       ),
       t801,
     ),
@@ -8229,7 +8229,7 @@ fn step_13() -> Unit raise {
   ])
   let t1015 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall y:(((1->num)->A)->bool). y IN ring_carrier K\n     ==> ring_pow K y (q EXP n) = y",
+      "∀ y:(((1->num)->A)->bool). y IN ring_carrier K\n     ==> ring_pow K y (q EXP n) = y",
     ),
     fn(
       x1012 : @kernel.Thm,
@@ -9166,7 +9166,7 @@ fn step_13() -> Unit raise {
   ])
   let t915 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall c:A. c IN ring_carrier f\n     ==> ((frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o\n          (proj:((1->num)->A) -> ((1->num)->A)->bool)) (poly_const f c) =\n          proj (poly_const f c)",
+      "∀ c:A. c IN ring_carrier f\n     ==> ((frob:(((1->num)->A)->bool) -> ((1->num)->A)->bool) o\n          (proj:((1->num)->A) -> ((1->num)->A)->bool)) (poly_const f c) =\n          proj (poly_const f c)",
     ),
     fn(
       x912 : @kernel.Thm,
@@ -10352,7 +10352,7 @@ fn step_13() -> Unit raise {
   irreducible_divides_degree_bound_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1)) (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one)) /\\\n   1 <= n ==> poly_deg f p <= n",
+        "∀ f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1)) (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one)) /\\\n   1 <= n ==> poly_deg f p <= n",
       ),
       t1068,
     ),
@@ -11565,7 +11565,7 @@ fn step_14() -> Unit raise {
   irreducible_divides_degree_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1)) (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one))\n   ==> (poly_deg f p) divides n",
+        "∀ f:A ring p n. field f /\\ FINITE(ring_carrier f) /\\\n   ring_irreducible (poly_ring f (:1)) p /\\ ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1)) (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n)) (poly_var f one))\n   ==> (poly_deg f p) divides n",
       ),
       t1198,
     ),
@@ -11848,7 +11848,7 @@ fn step_15() -> Unit raise {
   )
   let divides_div_prime_absurd = @tactics.prove(
     @parser.parse_term(
-      "forall n q. prime q /\\ q divides n /\\ ~(n = 0) /\\ n divides (n DIV q) ==> F",
+      "∀ n q. prime q /\\ q divides n /\\ ~(n = 0) /\\ n divides (n DIV q) ==> F",
     ),
     t1228,
   )
@@ -11964,7 +11964,7 @@ fn step_15() -> Unit raise {
   rabin_irreducibility_necessary_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   poly_deg f p = n /\\ ~(n = 0) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> ring_divides (poly_ring f (:1)) p\n         (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP n))\n            (poly_var f one)) /\\\n       forall q. prime q /\\ q divides n\n           ==> ring_coprime (poly_ring f (:1))\n                 (p, ring_sub (poly_ring f (:1))\n                       (ring_pow (poly_ring f (:1)) (poly_var f one)\n                                 (CARD(ring_carrier f) EXP (n DIV q)))\n                       (poly_var f one))",
+        "∀ f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   poly_deg f p = n /\\ ~(n = 0) /\\\n   ring_irreducible (poly_ring f (:1)) p\n   ==> ring_divides (poly_ring f (:1)) p\n         (ring_sub (poly_ring f (:1))\n            (ring_pow (poly_ring f (:1)) (poly_var f one)\n                      (CARD(ring_carrier f) EXP n))\n            (poly_var f one)) /\\\n       ∀ q. prime q /\\ q divides n\n           ==> ring_coprime (poly_ring f (:1))\n                 (p, ring_sub (poly_ring f (:1))\n                       (ring_pow (poly_ring f (:1)) (poly_var f one)\n                                 (CARD(ring_carrier f) EXP (n DIV q)))\n                       (poly_var f one))",
       ),
       t1249,
     ),
@@ -12292,7 +12292,7 @@ fn step_16() -> Unit raise {
   )
   let proper_divisor_prime_factor = @tactics.prove(
     @parser.parse_term(
-      "forall d n. d divides n /\\ 1 <= d /\\ d < n\n           ==> ?q. prime q /\\ q divides n /\\ d divides (n DIV q)",
+      "∀ d n. d divides n /\\ 1 <= d /\\ d < n\n           ==> ?q. prime q /\\ q divides n /\\ d divides (n DIV q)",
     ),
     t1283,
   )
@@ -14493,7 +14493,7 @@ fn step_16() -> Unit raise {
   rabin_irreducibility_sufficient_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   ~(p = ring_0(poly_ring f (:1))) /\\\n   poly_deg f p = n /\\ ~(n = 0) /\\\n   ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1))\n        (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n))\n        (poly_var f one)) /\\\n   (forall q. prime q /\\ q divides n\n        ==> ring_coprime (poly_ring f (:1))\n              (p, ring_sub (poly_ring f (:1))\n                    (ring_pow (poly_ring f (:1)) (poly_var f one)\n                              (CARD(ring_carrier f) EXP (n DIV q)))\n                    (poly_var f one)))\n   ==> ring_irreducible (poly_ring f (:1)) p",
+        "∀ f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   ~(p = ring_0(poly_ring f (:1))) /\\\n   poly_deg f p = n /\\ ~(n = 0) /\\\n   ring_divides (poly_ring f (:1)) p\n     (ring_sub (poly_ring f (:1))\n        (ring_pow (poly_ring f (:1)) (poly_var f one)\n                  (CARD(ring_carrier f) EXP n))\n        (poly_var f one)) /\\\n   (∀ q. prime q /\\ q divides n\n        ==> ring_coprime (poly_ring f (:1))\n              (p, ring_sub (poly_ring f (:1))\n                    (ring_pow (poly_ring f (:1)) (poly_var f one)\n                              (CARD(ring_carrier f) EXP (n DIV q)))\n                    (poly_var f one)))\n   ==> ring_irreducible (poly_ring f (:1)) p",
       ),
       t1508,
     ),
@@ -14560,7 +14560,7 @@ fn step_17() -> Unit raise {
   rabin_irreducibility_test_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   ~(p = ring_0(poly_ring f (:1))) /\\\n   ~(ring_unit (poly_ring f (:1)) p) /\\\n   poly_deg f p = n /\\ ~(n = 0)\n   ==> (ring_irreducible (poly_ring f (:1)) p <=>\n        ring_divides (poly_ring f (:1)) p\n          (ring_sub (poly_ring f (:1))\n             (ring_pow (poly_ring f (:1)) (poly_var f one)\n                       (CARD(ring_carrier f) EXP n))\n             (poly_var f one)) /\\\n        forall q. prime q /\\ q divides n\n            ==> ring_coprime (poly_ring f (:1))\n                  (p, ring_sub (poly_ring f (:1))\n                        (ring_pow (poly_ring f (:1)) (poly_var f one)\n                                  (CARD(ring_carrier f) EXP (n DIV q)))\n                        (poly_var f one)))",
+        "∀ f:A ring p n.\n   field f /\\ FINITE(ring_carrier f) /\\\n   p IN ring_carrier(poly_ring f (:1)) /\\\n   ~(p = ring_0(poly_ring f (:1))) /\\\n   ~(ring_unit (poly_ring f (:1)) p) /\\\n   poly_deg f p = n /\\ ~(n = 0)\n   ==> (ring_irreducible (poly_ring f (:1)) p <=>\n        ring_divides (poly_ring f (:1)) p\n          (ring_sub (poly_ring f (:1))\n             (ring_pow (poly_ring f (:1)) (poly_var f one)\n                       (CARD(ring_carrier f) EXP n))\n             (poly_var f one)) /\\\n        ∀ q. prime q /\\ q divides n\n            ==> ring_coprime (poly_ring f (:1))\n                  (p, ring_sub (poly_ring f (:1))\n                        (ring_pow (poly_ring f (:1)) (poly_var f one)\n                                  (CARD(ring_carrier f) EXP (n DIV q)))\n                        (poly_var f one)))",
       ),
       t1517,
     ),

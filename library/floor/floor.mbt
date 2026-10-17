@@ -206,7 +206,7 @@ fn step_3() -> Unit raise {
   )
   real_abs_integer_lemma_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. integer(x) /\\ ~(x = &0) ==> &1 <= abs(x)"),
+      @parser.parse_term("∀ x. integer(x) /\\ ~(x = &0) ==> &1 <= abs(x)"),
       t15,
     ),
   )
@@ -346,7 +346,7 @@ fn step_4() -> Unit raise {
   integer_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall n. integer(&n)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(x + y)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(x - y)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(x * y)) /\\\n   (forall x r. integer(x) ==> integer(x pow r)) /\\\n   (forall x. integer(x) ==> integer(--x)) /\\\n   (forall x. integer(x) ==> integer(abs x)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(max x y)) /\\\n   (forall x y. integer(x) /\\ integer(y) ==> integer(min x y))",
+        "(∀ n. integer(&n)) /\\\n   (∀ x y. integer(x) /\\ integer(y) ==> integer(x + y)) /\\\n   (∀ x y. integer(x) /\\ integer(y) ==> integer(x - y)) /\\\n   (∀ x y. integer(x) /\\ integer(y) ==> integer(x * y)) /\\\n   (∀ x r. integer(x) ==> integer(x pow r)) /\\\n   (∀ x. integer(x) ==> integer(--x)) /\\\n   (∀ x. integer(x) ==> integer(abs x)) /\\\n   (∀ x y. integer(x) /\\ integer(y) ==> integer(max x y)) /\\\n   (∀ x y. integer(x) /\\ integer(y) ==> integer(min x y))",
       ),
       t41,
     ),
@@ -368,7 +368,7 @@ fn step_5() -> Unit raise {
   let t42 = @simp.rewrite_tac(@list.List([integer_closed()]))
   integer_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. integer(x) /\\ integer(y) ==> integer(x + y)"),
+      @parser.parse_term("∀ x y. integer(x) /\\ integer(y) ==> integer(x + y)"),
       t42,
     ),
   )
@@ -389,7 +389,7 @@ fn step_6() -> Unit raise {
   let t43 = @simp.rewrite_tac(@list.List([integer_closed()]))
   integer_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. integer(x) /\\ integer(y) ==> integer(x - y)"),
+      @parser.parse_term("∀ x y. integer(x) /\\ integer(y) ==> integer(x - y)"),
       t43,
     ),
   )
@@ -410,7 +410,7 @@ fn step_7() -> Unit raise {
   let t44 = @simp.rewrite_tac(@list.List([integer_closed()]))
   integer_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. integer(x) /\\ integer(y) ==> integer(x * y)"),
+      @parser.parse_term("∀ x y. integer(x) /\\ integer(y) ==> integer(x * y)"),
       t44,
     ),
   )
@@ -431,7 +431,7 @@ fn step_8() -> Unit raise {
   let t45 = @simp.rewrite_tac(@list.List([integer_closed()]))
   integer_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. integer(x) ==> integer(x pow n)"),
+      @parser.parse_term("∀ x n. integer(x) ==> integer(x pow n)"),
       t45,
     ),
   )
@@ -463,7 +463,7 @@ fn step_9() -> Unit raise {
   real_le_integers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer(x) /\\ integer(y) ==> (x <= y <=> (x = y) \\/ x + &1 <= y)",
+        "∀ x y. integer(x) /\\ integer(y) ==> (x <= y <=> (x = y) \\/ x + &1 <= y)",
       ),
       t48,
     ),
@@ -498,7 +498,7 @@ fn step_10() -> Unit raise {
   real_le_cases_integers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer(x) /\\ integer(y) ==> x <= y \\/ y + &1 <= x",
+        "∀ x y. integer(x) /\\ integer(y) ==> x <= y \\/ y + &1 <= x",
       ),
       t51,
     ),
@@ -523,7 +523,7 @@ fn step_11() -> Unit raise {
   real_le_reverse_integers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer(x) /\\ integer(y) /\\ ~(y + &1 <= x) ==> x <= y",
+        "∀ x y. integer(x) /\\ integer(y) /\\ ~(y + &1 <= x) ==> x <= y",
       ),
       t52,
     ),
@@ -554,7 +554,7 @@ fn step_12() -> Unit raise {
   real_lt_integers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer(x) /\\ integer(y) ==> (x < y <=> x + &1 <= y)",
+        "∀ x y. integer(x) /\\ integer(y) ==> (x < y <=> x + &1 <= y)",
       ),
       t53,
     ),
@@ -592,7 +592,7 @@ fn step_13() -> Unit raise {
   real_eq_integers_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer x /\\ integer y ==> (x = y <=> abs(x - y) < &1)",
+        "∀ x y. integer x /\\ integer y ==> (x = y <=> abs(x - y) < &1)",
       ),
       t55,
     ),
@@ -617,7 +617,7 @@ fn step_14() -> Unit raise {
   real_eq_integers_imp_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer x /\\ integer y /\\ abs(x - y) < &1 ==> x = y",
+        "∀ x y. integer x /\\ integer y /\\ abs(x - y) < &1 ==> x = y",
       ),
       t56,
     ),
@@ -642,7 +642,7 @@ fn step_15() -> Unit raise {
     @list.List([integer_closed(), @calc_int.real_neg_neg()]),
   )
   integer_neg_c.set(
-    @tactics.prove(@parser.parse_term("forall x. integer(--x) <=> integer(x)"), t57),
+    @tactics.prove(@parser.parse_term("∀ x. integer(--x) <=> integer(x)"), t57),
   )
 }
 
@@ -670,7 +670,7 @@ fn step_16() -> Unit raise {
     t58,
   )
   integer_abs_c.set(
-    @tactics.prove(@parser.parse_term("forall x. integer(abs x) <=> integer(x)"), t59),
+    @tactics.prove(@parser.parse_term("∀ x. integer(abs x) <=> integer(x)"), t59),
   )
 }
 
@@ -689,7 +689,7 @@ fn step_17() -> Unit raise {
   let t60 = @simp.simp_tac(@list.List([@int.integer(), @realax.real_abs()]))
   integer_pos_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x ==> (integer(x) <=> ?n. x = &n)"),
+      @parser.parse_term("∀ x. &0 <= x ==> (integer(x) <=> ?n. x = &n)"),
       t60,
     ),
   )
@@ -712,7 +712,7 @@ fn step_18() -> Unit raise {
   )
   nonnegative_integer_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. integer x /\\ &0 <= x <=> ?n. x = &n"),
+      @parser.parse_term("∀ x. integer x /\\ &0 <= x <=> ?n. x = &n"),
       t61,
     ),
   )
@@ -756,7 +756,7 @@ fn step_19() -> Unit raise {
   )
   nonpositive_integer_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. integer x /\\ x <= &0 <=> ?n. x = -- &n"),
+      @parser.parse_term("∀ x. integer x /\\ x <= &0 <=> ?n. x = -- &n"),
       t63,
     ),
   )
@@ -791,7 +791,7 @@ fn step_20() -> Unit raise {
   )
   nonpositive_integer_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. integer x /\\ x <= &0 <=> ?n. x + &n = &0"),
+      @parser.parse_term("∀ x. integer x /\\ x <= &0 <=> ?n. x + &n = &0"),
       t64,
     ),
   )
@@ -817,7 +817,7 @@ fn step_21() -> Unit raise {
   integer_add_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall x y. integer(x) ==> (integer(x + y) <=> integer(y))) /\\\n   (forall x y. integer(y) ==> (integer(x + y) <=> integer(x)))",
+        "(∀ x y. integer(x) ==> (integer(x + y) <=> integer(y))) /\\\n   (∀ x y. integer(y) ==> (integer(x + y) <=> integer(x)))",
       ),
       t65,
     ),
@@ -846,7 +846,7 @@ fn step_22() -> Unit raise {
   integer_sub_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall x y. integer(x) ==> (integer(x - y) <=> integer(y))) /\\\n   (forall x y. integer(y) ==> (integer(x - y) <=> integer(x)))",
+        "(∀ x y. integer(x) ==> (integer(x - y) <=> integer(y))) /\\\n   (∀ x y. integer(y) ==> (integer(x - y) <=> integer(x)))",
       ),
       t66,
     ),
@@ -869,7 +869,7 @@ fn step_23() -> Unit raise {
   forall_integer_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. (forall n. P(&n)) /\\ (forall x. P x ==> P(--x)) ==> forall x. integer x ==> P x",
+        "∀ P. (∀ n. P(&n)) /\\ (∀ x. P x ==> P(--x)) ==> ∀ x. integer x ==> P x",
       ),
       t67,
     ),
@@ -897,7 +897,7 @@ fn step_24() -> Unit raise {
   integer_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->real s. (forall x. x IN s ==> integer(f x)) ==> integer(sum s f)",
+        "∀ f:A->real s. (∀ x. x IN s ==> integer(f x)) ==> integer(sum s f)",
       ),
       t70,
     ),
@@ -935,7 +935,7 @@ fn step_25() -> Unit raise {
   integer_abs_mul_eq_1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. integer x /\\ integer y\n         ==> (abs(x * y) = &1 <=> abs x = &1 /\\ abs y = &1)",
+        "∀ x y. integer x /\\ integer y\n         ==> (abs(x * y) = &1 <=> abs x = &1 /\\ abs y = &1)",
       ),
       t74,
     ),
@@ -999,7 +999,7 @@ fn step_26() -> Unit raise {
   )
   integer_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. integer(&m / &n) <=> n = 0 \\/ n divides m"),
+      @parser.parse_term("∀ m n. integer(&m / &n) <=> n = 0 \\/ n divides m"),
       t80,
     ),
   )
@@ -1105,7 +1105,7 @@ fn step_28() -> Unit raise {
     t88,
   )
   rational_integer_c.set(
-    @tactics.prove(@parser.parse_term("forall x. integer x ==> rational x"), t89),
+    @tactics.prove(@parser.parse_term("∀ x. integer x ==> rational x"), t89),
   )
 }
 
@@ -1125,7 +1125,7 @@ pub fn rational_integer() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let t90 = @simp.simp_tac(@list.List([rational_integer(), integer_closed()]))
   rational_num_c.set(
-    @tactics.prove(@parser.parse_term("forall n. rational(&n)"), t90),
+    @tactics.prove(@parser.parse_term("∀ n. rational(&n)"), t90),
   )
 }
 
@@ -1219,7 +1219,7 @@ fn step_30() -> Unit raise {
   )
   rational_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. rational(x) ==> rational(--x)"),
+      @parser.parse_term("∀ x. rational(x) ==> rational(--x)"),
       t101,
     ),
   )
@@ -1244,7 +1244,7 @@ fn step_31() -> Unit raise {
   )
   rational_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. rational(x) ==> rational(abs x)"),
+      @parser.parse_term("∀ x. rational(x) ==> rational(abs x)"),
       t103,
     ),
   )
@@ -1403,7 +1403,7 @@ fn step_32() -> Unit raise {
   )
   rational_inv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. rational(x) ==> rational(inv x)"),
+      @parser.parse_term("∀ x. rational(x) ==> rational(inv x)"),
       t119,
     ),
   )
@@ -1562,7 +1562,7 @@ fn step_33() -> Unit raise {
   rational_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. rational(x) /\\ rational(y) ==> rational(x + y)",
+        "∀ x y. rational(x) /\\ rational(y) ==> rational(x + y)",
       ),
       t137,
     ),
@@ -1587,7 +1587,7 @@ fn step_34() -> Unit raise {
   rational_sub_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. rational(x) /\\ rational(y) ==> rational(x - y)",
+        "∀ x y. rational(x) /\\ rational(y) ==> rational(x - y)",
       ),
       t138,
     ),
@@ -1747,7 +1747,7 @@ fn step_35() -> Unit raise {
   rational_mul_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. rational(x) /\\ rational(y) ==> rational(x * y)",
+        "∀ x y. rational(x) /\\ rational(y) ==> rational(x * y)",
       ),
       t156,
     ),
@@ -1772,7 +1772,7 @@ fn step_36() -> Unit raise {
   rational_div_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. rational(x) /\\ rational(y) ==> rational(x / y)",
+        "∀ x y. rational(x) /\\ rational(y) ==> rational(x / y)",
       ),
       t157,
     ),
@@ -1800,7 +1800,7 @@ fn step_37() -> Unit raise {
   )
   rational_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. rational(x) ==> rational(x pow n)"),
+      @parser.parse_term("∀ x n. rational(x) ==> rational(x pow n)"),
       t159,
     ),
   )
@@ -1835,7 +1835,7 @@ fn step_38() -> Unit raise {
   rational_closed_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall n. rational(&n)) /\\\n   (forall x. integer x ==> rational x) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x + y)) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x - y)) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x * y)) /\\\n   (forall x y. rational(x) /\\ rational(y) ==> rational(x / y)) /\\\n   (forall x r. rational(x) ==> rational(x pow r)) /\\\n   (forall x. rational(x) ==> rational(--x)) /\\\n   (forall x. rational(x) ==> rational(inv x)) /\\\n   (forall x. rational(x) ==> rational(abs x))",
+        "(∀ n. rational(&n)) /\\\n   (∀ x. integer x ==> rational x) /\\\n   (∀ x y. rational(x) /\\ rational(y) ==> rational(x + y)) /\\\n   (∀ x y. rational(x) /\\ rational(y) ==> rational(x - y)) /\\\n   (∀ x y. rational(x) /\\ rational(y) ==> rational(x * y)) /\\\n   (∀ x y. rational(x) /\\ rational(y) ==> rational(x / y)) /\\\n   (∀ x r. rational(x) ==> rational(x pow r)) /\\\n   (∀ x. rational(x) ==> rational(--x)) /\\\n   (∀ x. rational(x) ==> rational(inv x)) /\\\n   (∀ x. rational(x) ==> rational(abs x))",
       ),
       t160,
     ),
@@ -1860,7 +1860,7 @@ fn step_39() -> Unit raise {
     @list.List([@calc_int.real_neg_neg(), rational_neg()]),
   )
   rational_neg_eq_c.set(
-    @tactics.prove(@parser.parse_term("forall x. rational(--x) <=> rational x"), t161),
+    @tactics.prove(@parser.parse_term("∀ x. rational(--x) <=> rational x"), t161),
   )
 }
 
@@ -1885,7 +1885,7 @@ fn step_40() -> Unit raise {
   )
   rational_abs_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. rational(abs x) <=> rational x"),
+      @parser.parse_term("∀ x. rational(abs x) <=> rational x"),
       t163,
     ),
   )
@@ -1910,7 +1910,7 @@ fn step_41() -> Unit raise {
   )
   rational_inv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. rational(inv x) <=> rational x"),
+      @parser.parse_term("∀ x. rational(inv x) <=> rational x"),
       t164,
     ),
   )
@@ -1939,7 +1939,7 @@ fn step_42() -> Unit raise {
   rational_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall s x. (forall i. i IN s ==> rational(x i)) ==> rational(sum s x)",
+        "∀ s x. (∀ i. i IN s ==> rational(x i)) ==> rational(sum s x)",
       ),
       t167,
     ),
@@ -2081,7 +2081,7 @@ fn step_43() -> Unit raise {
   rational_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. rational(x) <=> ?p q. ~(q = 0) /\\ abs x = &p / &q",
+        "∀ x. rational(x) <=> ?p q. ~(q = 0) /\\ abs x = &p / &q",
       ),
       t181,
     ),
@@ -2503,7 +2503,7 @@ fn step_44() -> Unit raise {
   real_truncate_pos_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. &0 <= x ==> ?n r. &0 <= r /\\ r < &1 /\\ (x = &n + r)",
+        "∀ x. &0 <= x ==> ?n r. &0 <= r /\\ r < &1 /\\ (x = &n + r)",
       ),
       t223,
     ),
@@ -2644,7 +2644,7 @@ fn step_45() -> Unit raise {
   real_truncate_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. ?n r. integer(n) /\\ &0 <= r /\\ r < &1 /\\ (x = n + r)",
+        "∀ x. ?n r. integer(n) /\\ &0 <= r /\\ r < &1 /\\ (x = n + r)",
       ),
       t235,
     ),
@@ -2860,7 +2860,7 @@ fn step_47() -> Unit raise {
   floor_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x a. integer(a) /\\ a <= x /\\ x < a + &1 <=> (floor x = a)",
+        "∀ x a. integer(a) /\\ a <= x /\\ x < a + &1 <=> (floor x = a)",
       ),
       t253,
     ),
@@ -2891,7 +2891,7 @@ fn step_48() -> Unit raise {
   )
   floor_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (floor x = &0) <=> &0 <= x /\\ x < &1"),
+      @parser.parse_term("∀ x. (floor x = &0) <=> &0 <= x /\\ x < &1"),
       t255,
     ),
   )
@@ -3024,7 +3024,7 @@ fn step_49() -> Unit raise {
   floor_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. integer(floor x) /\\ floor(x) <= x /\\ x < floor(x) + &1",
+        "∀ x. integer(floor x) /\\ floor(x) <= x /\\ x < floor(x) + &1",
       ),
       t264,
     ),
@@ -3063,7 +3063,7 @@ fn step_50() -> Unit raise {
   floor_double_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall u. &2 * floor(u) <= floor(&2 * u) /\\ floor(&2 * u) <= &2 * floor(u) + &1",
+        "∀ u. &2 * floor(u) <= floor(&2 * u) /\\ floor(&2 * u) <= &2 * floor(u) + &1",
       ),
       t269,
     ),
@@ -3088,7 +3088,7 @@ fn step_51() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   frac_floor_c.set(
-    @tactics.prove(@parser.parse_term("forall x. frac(x) = x - floor(x)"), t271),
+    @tactics.prove(@parser.parse_term("∀ x. frac(x) = x - floor(x)"), t271),
   )
 }
 
@@ -3111,7 +3111,7 @@ fn step_52() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   floor_num_c.set(
-    @tactics.prove(@parser.parse_term("forall n. floor(&n) = &n"), t272),
+    @tactics.prove(@parser.parse_term("∀ n. floor(&n) = &n"), t272),
   )
 }
 
@@ -3157,7 +3157,7 @@ fn step_53() -> Unit raise {
   )
   real_le_floor_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. integer(n) ==> (n <= floor x <=> n <= x)"),
+      @parser.parse_term("∀ x n. integer(n) ==> (n <= floor x <=> n <= x)"),
       t277,
     ),
   )
@@ -3204,7 +3204,7 @@ fn step_54() -> Unit raise {
   )
   real_floor_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. integer n ==> (floor x <= n <=> x - &1 < n)"),
+      @parser.parse_term("∀ x n. integer n ==> (floor x <= n <=> x - &1 < n)"),
       t282,
     ),
   )
@@ -3227,7 +3227,7 @@ fn step_55() -> Unit raise {
   )
   real_floor_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. integer n ==> (floor x < n <=> x < n)"),
+      @parser.parse_term("∀ x n. integer n ==> (floor x < n <=> x < n)"),
       t283,
     ),
   )
@@ -3250,7 +3250,7 @@ fn step_56() -> Unit raise {
   )
   real_lt_floor_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. integer n ==> (n < floor x <=> n <= x - &1)"),
+      @parser.parse_term("∀ x n. integer n ==> (n < floor x <=> n <= x - &1)"),
       t284,
     ),
   )
@@ -3284,7 +3284,7 @@ fn step_57() -> Unit raise {
   )
   floor_pos_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x ==> ?n. floor(x) = &n"),
+      @parser.parse_term("∀ x. &0 <= x ==> ?n. floor(x) = &n"),
       t288,
     ),
   )
@@ -3420,7 +3420,7 @@ fn step_58() -> Unit raise {
   )
   floor_div_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. ~(m = 0) ==> floor(&n / &m) = &(n DIV m)"),
+      @parser.parse_term("∀ m n. ~(m = 0) ==> floor(&n / &m) = &(n DIV m)"),
       t300,
     ),
   )
@@ -3536,7 +3536,7 @@ fn step_59() -> Unit raise {
   )
   floor_mono_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x <= y ==> floor x <= floor y"),
+      @parser.parse_term("∀ x y. x <= y ==> floor x <= floor y"),
       t312,
     ),
   )
@@ -3559,7 +3559,7 @@ fn step_60() -> Unit raise {
     @list.List([@equal.gsym(floor_unique()), @realax.real_le_refl(), t313]),
   )
   real_floor_eq_c.set(
-    @tactics.prove(@parser.parse_term("forall x. floor x = x <=> integer x"), t314),
+    @tactics.prove(@parser.parse_term("∀ x. floor x = x <=> integer x"), t314),
   )
 }
 
@@ -3579,7 +3579,7 @@ fn step_61() -> Unit raise {
     @list.List([@realarith.real_lt_le(), real_floor_eq(), floor()]),
   )
   real_floor_lt_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. floor x < x <=> ~(integer x)"), t315),
+    @tactics.prove(@parser.parse_term("∀ x. floor x < x <=> ~(integer x)"), t315),
   )
 }
 
@@ -3603,7 +3603,7 @@ fn step_62() -> Unit raise {
     t316,
   )
   real_frac_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. frac x = &0 <=> integer x"), t317),
+    @tactics.prove(@parser.parse_term("∀ x. frac x = &0 <=> integer x"), t317),
   )
 }
 
@@ -3623,7 +3623,7 @@ fn step_63() -> Unit raise {
     @list.List([frac_floor(), @realarith.real_sub_lt(), real_floor_lt_refl()]),
   )
   real_frac_pos_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < frac x <=> ~(integer x)"), t318),
+    @tactics.prove(@parser.parse_term("∀ x. &0 < frac x <=> ~(integer x)"), t318),
   )
 }
 
@@ -3642,7 +3642,7 @@ pub fn real_frac_pos_lt() -> @kernel.Thm {
 /// FRAC_NUM
 fn step_64() -> Unit raise {
   let t319 = @simp.rewrite_tac(@list.List([real_frac_eq_0(), integer_closed()]))
-  frac_num_c.set(@tactics.prove(@parser.parse_term("forall n. frac(&n) = &0"), t319))
+  frac_num_c.set(@tactics.prove(@parser.parse_term("∀ n. frac(&n) = &0"), t319))
 }
 
 ///|
@@ -3659,7 +3659,7 @@ pub fn frac_num() -> @kernel.Thm {
 fn step_65() -> Unit raise {
   let t320 = @simp.rewrite_tac(@list.List([real_floor_eq()]))
   real_floor_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. integer x ==> floor x = x"), t320),
+    @tactics.prove(@parser.parse_term("∀ x. integer x ==> floor x = x"), t320),
   )
 }
 
@@ -3679,7 +3679,7 @@ pub fn real_floor_refl() -> @kernel.Thm {
 fn step_66() -> Unit raise {
   let t321 = @simp.rewrite_tac(@list.List([real_frac_eq_0()]))
   real_frac_zero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. integer x ==> frac x = &0"), t321),
+    @tactics.prove(@parser.parse_term("∀ x. integer x ==> frac x = &0"), t321),
   )
 }
 
@@ -3799,7 +3799,7 @@ fn step_67() -> Unit raise {
   real_floor_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. floor(x + y) = if frac x + frac y < &1 then floor(x) + floor(y)\n                        else (floor(x) + floor(y)) + &1",
+        "∀ x y. floor(x + y) = if frac x + frac y < &1 then floor(x) + floor(y)\n                        else (floor(x) + floor(y)) + &1",
       ),
       t334,
     ),
@@ -3833,7 +3833,7 @@ fn step_68() -> Unit raise {
   real_floor_triangle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. floor(x) + floor(y) <= floor(x + y) /\\\n         floor(x + y) <= (floor x + floor y) + &1",
+        "∀ x y. floor(x) + floor(y) <= floor(x + y) /\\\n         floor(x + y) <= (floor x + floor y) + &1",
       ),
       t337,
     ),
@@ -3879,7 +3879,7 @@ fn step_69() -> Unit raise {
   real_floor_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. floor(--x) = if integer x then --x else --(floor x + &1)",
+        "∀ x. floor(--x) = if integer x then --x else --(floor x + &1)",
       ),
       t342,
     ),
@@ -3905,7 +3905,7 @@ fn step_70() -> Unit raise {
   real_frac_add_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. frac(x + y) = if frac x + frac y < &1 then frac(x) + frac(y)\n                       else (frac(x) + frac(y)) - &1",
+        "∀ x y. frac(x + y) = if frac x + frac y < &1 then frac(x) + frac(y)\n                       else (frac(x) + frac(y)) - &1",
       ),
       t343,
     ),
@@ -3926,7 +3926,7 @@ pub fn real_frac_add() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   let t344 = @simp.simp_tac(@list.List([real_le_floor(), integer_closed()]))
   floor_pos_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= floor x <=> &0 <= x"), t344),
+    @tactics.prove(@parser.parse_term("∀ x. &0 <= floor x <=> &0 <= x"), t344),
   )
 }
 
@@ -3967,7 +3967,7 @@ fn step_72() -> Unit raise {
   frac_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x a. integer(x - a) /\\ &0 <= a /\\ a < &1 <=> frac x = a",
+        "∀ x a. integer(x - a) /\\ &0 <= a /\\ a < &1 <=> frac x = a",
       ),
       t347,
     ),
@@ -3995,7 +3995,7 @@ fn step_73() -> Unit raise {
   )
   real_frac_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. frac x = x <=> &0 <= x /\\ x < &1"),
+      @parser.parse_term("∀ x. frac x = x <=> &0 <= x /\\ x < &1"),
       t348,
     ),
   )
@@ -4025,7 +4025,7 @@ fn step_74() -> Unit raise {
             @tactics.match_mp_tac(
               @meson.meson(
                 @list.List([]),
-                @parser.parse_term("forall a. P a \\/ P(a + &1) ==> ?x. P x"),
+                @parser.parse_term("∀ a. P a \\/ P(a + &1) ==> ?x. P x"),
               ),
             ),
           ),
@@ -4039,7 +4039,7 @@ fn step_74() -> Unit raise {
   )
   integer_round_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ?n. integer n /\\ abs(x - n) <= &1 / &2"),
+      @parser.parse_term("∀ x. ?n. integer n /\\ abs(x - n) <= &1 / &2"),
       t352,
     ),
   )
@@ -4184,7 +4184,7 @@ fn step_75() -> Unit raise {
   )
   frac_div_mod_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. ~(n = 0) ==> frac(&m / &n) = &(m MOD n) / &n"),
+      @parser.parse_term("∀ m n. ~(n = 0) ==> frac(&m / &n) = &(m MOD n) / &n"),
       t379,
     ),
   )
@@ -4215,7 +4215,7 @@ fn step_76() -> Unit raise {
   frac_neg_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x. frac(--x) = if integer x then &0 else &1 - frac x",
+        "∀ x. frac(--x) = if integer x then &0 else &1 - frac x",
       ),
       t380,
     ),
@@ -4285,7 +4285,7 @@ fn step_77() -> Unit raise {
   )
   real_floor_floor_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. floor(floor x / &n) = floor(x / &n)"),
+      @parser.parse_term("∀ x n. floor(floor x / &n) = floor(x / &n)"),
       t389,
     ),
   )
@@ -4321,7 +4321,7 @@ fn step_78() -> Unit raise {
   integer_exists_between_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. x + &1 <= y ==> ?n. integer n /\\ x < n /\\ n <= y",
+        "∀ x y. x + &1 <= y ==> ?n. integer n /\\ x < n /\\ n <= y",
       ),
       t393,
     ),
@@ -4469,7 +4469,7 @@ fn step_79() -> Unit raise {
   integer_exists_between_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. x + &1 < y ==> ?n. integer n /\\ x < n /\\ n < y",
+        "∀ x y. x + &1 < y ==> ?n. integer n /\\ x < n /\\ n < y",
       ),
       t409,
     ),
@@ -4597,7 +4597,7 @@ fn step_80() -> Unit raise {
   integer_exists_between_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. x + &1 <= y ==> ?n. integer n /\\ x <= n /\\ n < y",
+        "∀ x y. x + &1 <= y ==> ?n. integer n /\\ x <= n /\\ n < y",
       ),
       t423,
     ),
@@ -4671,7 +4671,7 @@ fn step_81() -> Unit raise {
   integer_exists_between_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. &1 <= abs(x - y)\n         ==> ?n. integer n /\\ (x <= n /\\ n < y \\/ y <= n /\\ n < x)",
+        "∀ x y. &1 <= abs(x - y)\n         ==> ?n. integer n /\\ (x <= n /\\ n < y \\/ y <= n /\\ n < x)",
       ),
       t433,
     ),
@@ -4745,7 +4745,7 @@ fn step_82() -> Unit raise {
   integer_exists_between_abs_lt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x y. &1 < abs(x - y)\n         ==> ?n. integer n /\\ (x < n /\\ n < y \\/ y < n /\\ n < x)",
+        "∀ x y. &1 < abs(x - y)\n         ==> ?n. integer n /\\ (x < n /\\ n < y \\/ y < n /\\ n < x)",
       ),
       t443,
     ),
@@ -4769,7 +4769,7 @@ fn step_83() -> Unit raise {
   let t444 = @simp.simp_tac(@list.List([@int.int_rep()]))
   real_of_int_of_real_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. integer(x) ==> real_of_int(int_of_real x) = x"),
+      @parser.parse_term("∀ x. integer(x) ==> real_of_int(int_of_real x) = x"),
       t444,
     ),
   )
@@ -4980,7 +4980,7 @@ fn step_85() -> Unit raise {
   has_size_intseg_num_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall m n. {x | integer(x) /\\ &m <= x /\\ x <= &n} HAS_SIZE ((n + 1) - m)",
+        "∀ m n. {x | integer(x) /\\ &m <= x /\\ x <= &n} HAS_SIZE ((n + 1) - m)",
       ),
       t465,
     ),
@@ -5156,7 +5156,7 @@ fn step_86() -> Unit raise {
   )
   finite_intseg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. FINITE {x | integer(x) /\\ a <= x /\\ x <= b}"),
+      @parser.parse_term("∀ a b. FINITE {x | integer(x) /\\ a <= x /\\ x <= b}"),
       t484,
     ),
   )
@@ -5368,7 +5368,7 @@ fn step_87() -> Unit raise {
   has_size_intseg_int_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b. integer a /\\ integer b\n         ==> {x | integer(x) /\\ a <= x /\\ x <= b} HAS_SIZE\n             if b < a then 0 else num_of_int(int_of_real(b - a + &1))",
+        "∀ a b. integer a /\\ integer b\n         ==> {x | integer(x) /\\ a <= x /\\ x <= b} HAS_SIZE\n             if b < a then 0 else num_of_int(int_of_real(b - a + &1))",
       ),
       t506,
     ),
@@ -5466,7 +5466,7 @@ fn step_88() -> Unit raise {
   card_intseg_int_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b. integer a /\\ integer b\n         ==> CARD {x | integer(x) /\\ a <= x /\\ x <= b} =\n             if b < a then 0 else num_of_int(int_of_real(b - a + &1))",
+        "∀ a b. integer a /\\ integer b\n         ==> CARD {x | integer(x) /\\ a <= x /\\ x <= b} =\n             if b < a then 0 else num_of_int(int_of_real(b - a + &1))",
       ),
       t514,
     ),
@@ -5770,7 +5770,7 @@ fn step_89() -> Unit raise {
   real_card_intseg_int_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b. integer a /\\ integer b\n         ==> &(CARD {x | integer(x) /\\ a <= x /\\ x <= b}) =\n             if b < a then &0 else b - a + &1",
+        "∀ a b. integer a /\\ integer b\n         ==> &(CARD {x | integer(x) /\\ a <= x /\\ x <= b}) =\n             if b < a then &0 else b - a + &1",
       ),
       t543,
     ),
@@ -6095,7 +6095,7 @@ fn step_92() -> Unit raise {
   padic_rational_approximation_straddle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p x e. &0 < e /\\ &1 < p\n           ==> ?n q r. integer q /\\ integer r /\\\n                       q / p pow n < x /\\ x < r / p pow n /\\\n                       abs(q / p pow n - r / p pow n) < e",
+        "∀ p x e. &0 < e /\\ &1 < p\n           ==> ?n q r. integer q /\\ integer r /\\\n                       q / p pow n < x /\\ x < r / p pow n /\\\n                       abs(q / p pow n - r / p pow n) < e",
       ),
       t582,
     ),
@@ -6518,7 +6518,7 @@ fn step_93() -> Unit raise {
   let t631 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t630)
   let t632 = (
     @parser.parse_term(
-      "(forall p x e. &0 < e /\\ &1 < p /\\ &0 < x\n            ==> ?n q r. &q / p pow n < x /\\ x < &r / p pow n /\\\n                        abs(&q / p pow n - &r / p pow n) < e) /\\\n   (forall p x e. &0 < e /\\ &1 < p /\\ &0 <= x\n           ==> ?n q r. &q / p pow n <= x /\\ x < &r / p pow n /\\\n                       abs(&q / p pow n - &r / p pow n) < e)",
+      "(∀ p x e. &0 < e /\\ &1 < p /\\ &0 < x\n            ==> ?n q r. &q / p pow n < x /\\ x < &r / p pow n /\\\n                        abs(&q / p pow n - &r / p pow n) < e) /\\\n   (∀ p x e. &0 < e /\\ &1 < p /\\ &0 <= x\n           ==> ?n q r. &q / p pow n <= x /\\ x < &r / p pow n /\\\n                       abs(&q / p pow n - &r / p pow n) < e)",
     ),
     t631,
   )
@@ -6608,7 +6608,7 @@ fn step_94() -> Unit raise {
   )
   rational_approximation_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x e. &0 < e ==> ?r. rational r /\\ abs(r - x) < e"),
+      @parser.parse_term("∀ x e. &0 < e ==> ?r. rational r /\\ abs(r - x) < e"),
       t642,
     ),
   )
@@ -6652,7 +6652,7 @@ fn step_95() -> Unit raise {
   )
   rational_between_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. a < b ==> ?q. rational q /\\ a < q /\\ q < b"),
+      @parser.parse_term("∀ a b. a < b ==> ?q. rational q /\\ a < q /\\ q < b"),
       t647,
     ),
   )
@@ -6677,7 +6677,7 @@ fn step_96() -> Unit raise {
   )
   rational_between_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. (?q. rational q /\\ a < q /\\ q < b) <=> a < b"),
+      @parser.parse_term("∀ a b. (?q. rational q /\\ a < q /\\ q < b) <=> a < b"),
       t648,
     ),
   )
@@ -6757,7 +6757,7 @@ fn step_97() -> Unit raise {
   rational_approximation_straddle_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x e. &0 < e\n         ==> ?a b. rational a /\\ rational b /\\\n                   a < x /\\ x < b /\\ abs(b - a) < e",
+        "∀ x e. &0 < e\n         ==> ?a b. rational a /\\ rational b /\\\n                   a < x /\\ x < b /\\ abs(b - a) < e",
       ),
       t656,
     ),
@@ -6812,7 +6812,7 @@ fn step_98() -> Unit raise {
   rational_approximation_above_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x e. &0 < e ==> ?q. rational q /\\ x < q /\\ q < x + e",
+        "∀ x e. &0 < e ==> ?q. rational q /\\ x < q /\\ q < x + e",
       ),
       t664,
     ),
@@ -6863,7 +6863,7 @@ fn step_99() -> Unit raise {
   rational_approximation_below_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall x e. &0 < e ==> ?q. rational q /\\ x - e < q /\\ q < x",
+        "∀ x e. &0 < e ==> ?q. rational q /\\ x - e < q /\\ q < x",
       ),
       t671,
     ),
@@ -6887,7 +6887,7 @@ fn step_100() -> Unit raise {
   let t686 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans()]))
   let t685 = @tactics.match_mp_tac(@arith.transitive_stepwise_lt())
   let t684 = @tactics.subgoal_then(
-    @parser.parse_term("forall m n. m < n ==> (q:num->real) n < q m"),
+    @parser.parse_term("∀ m n. m < n ==> (q:num->real) n < q m"),
     fn(
       x682 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6976,7 +6976,7 @@ fn step_100() -> Unit raise {
   ])
   let t672 = @tactics.subgoal_then(
     @parser.parse_term(
-      "?q. (forall n. rational(q n) /\\ a < q n /\\ q n < b) /\\ (forall n. q(SUC n) < q n)",
+      "?q. (∀ n. rational(q n) /\\ a < q n /\\ q n < b) /\\ (∀ n. q(SUC n) < q n)",
     ),
     @tactics.strip_assume_tac,
   )
@@ -6987,7 +6987,7 @@ fn step_100() -> Unit raise {
   infinite_rational_in_range_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b. a < b ==> INFINITE {q | rational q /\\ a < q /\\ q < b}",
+        "∀ a b. a < b ==> INFINITE {q | rational q /\\ a < q /\\ q < b}",
       ),
       t689,
     ),
@@ -7078,7 +7078,7 @@ fn step_101() -> Unit raise {
   real_congruence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b n. (a == b) (mod n) <=>\n           if n = 0 then &a:real = &b\n           else integer((&a - &b) / &n)",
+        "∀ a b n. (a == b) (mod n) <=>\n           if n = 0 then &a:real = &b\n           else integer((&a - &b) / &n)",
       ),
       t705,
     ),
@@ -7158,7 +7158,7 @@ fn step_102() -> Unit raise {
   real_int_congruence_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b n. (a == b) (mod n) <=>\n           if n = &0 then real_of_int a = real_of_int b\n           else integer((real_of_int a - real_of_int b) / real_of_int n)",
+        "∀ a b n. (a == b) (mod n) <=>\n           if n = &0 then real_of_int a = real_of_int b\n           else integer((real_of_int a - real_of_int b) / real_of_int n)",
       ),
       t721,
     ),

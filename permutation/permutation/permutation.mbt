@@ -20,7 +20,7 @@ pub fn revperm() -> @kernel.Thm {
 /// MEM_REVPERM
 fn step_2() -> Unit raise {
   let t1 = @tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([revperm(), @lists.mem(), @arith.lt()])))
-  mem_revperm_c.set(@tactics.prove(@parser.parse_term("forall n m. MEM m (REVPERM n) <=> m < n"), t1))
+  mem_revperm_c.set(@tactics.prove(@parser.parse_term("∀ n m. MEM m (REVPERM n) <=> m < n"), t1))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn mem_revperm() -> @kernel.Thm {
 /// LIST_UNIQ_REVPERM
 fn step_3() -> Unit raise {
   let t2 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([revperm(), @morelist.list_uniq(), mem_revperm()]))), @int.arith_tac)
-  list_uniq_revperm_c.set(@tactics.prove(@parser.parse_term("forall n. LIST_UNIQ (REVPERM n)"), t2))
+  list_uniq_revperm_c.set(@tactics.prove(@parser.parse_term("∀ n. LIST_UNIQ (REVPERM n)"), t2))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn list_uniq_revperm() -> @kernel.Thm {
 /// DELETE1_REVPERM
 fn step_4() -> Unit raise {
   let t3 = @tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([revperm(), @morelist.delete1(), @lists.mem()])))
-  delete1_revperm_c.set(@tactics.prove(@parser.parse_term("forall n. DELETE1 n (REVPERM (SUC n)) = REVPERM n"), t3))
+  delete1_revperm_c.set(@tactics.prove(@parser.parse_term("∀ n. DELETE1 n (REVPERM (SUC n)) = REVPERM n"), t3))
 }
 
 ///|
@@ -68,7 +68,7 @@ pub fn delete1_revperm() -> @kernel.Thm {
 /// COUNT_REVPERM
 fn step_5() -> Unit raise {
   let t4 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([revperm(), @morelist.count()]))), @int.arith_tac)
-  count_revperm_c.set(@tactics.prove(@parser.parse_term("forall n i. COUNT i (REVPERM n) = if i < n then 1 else 0"), t4))
+  count_revperm_c.set(@tactics.prove(@parser.parse_term("∀ n i. COUNT i (REVPERM n) = if i < n then 1 else 0"), t4))
 }
 
 ///|
@@ -84,7 +84,7 @@ pub fn count_revperm() -> @kernel.Thm {
 /// SET_OF_LIST_REVPERM
 fn step_6() -> Unit raise {
   let t5 = @tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([revperm(), @sets.set_of_list(), @arith.lt(), @sets.empty_gspec(), @sets.extension(), @sets.in_insert(), @sets.in_elim_thm(), @sets.not_in_empty()])))
-  set_of_list_revperm_c.set(@tactics.prove(@parser.parse_term("forall n. set_of_list (REVPERM n) = {m | m < n}"), t5))
+  set_of_list_revperm_c.set(@tactics.prove(@parser.parse_term("∀ n. set_of_list (REVPERM n) = {m | m < n}"), t5))
 }
 
 ///|
@@ -99,7 +99,7 @@ pub fn set_of_list_revperm() -> @kernel.Thm {
 ///|
 /// PERMUTATION
 fn step_7() -> Unit raise {
-  permutation_c.set(@pair.new_definition(@parser.parse_term("forall l. PERMUTATION l <=> REVPERM (LENGTH l) PERMUTED l")))
+  permutation_c.set(@pair.new_definition(@parser.parse_term("∀ l. PERMUTATION l <=> REVPERM (LENGTH l) PERMUTED l")))
 }
 
 ///|
@@ -131,7 +131,7 @@ pub fn permutation_nil() -> @kernel.Thm {
 /// PERMUTATION_LIST_UNIQ
 fn step_9() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([permutation(), @permuted.permuted_list_uniq(), list_uniq_revperm()]))
-  permutation_list_uniq_c.set(@tactics.prove(@parser.parse_term("forall l. PERMUTATION l ==> LIST_UNIQ l"), t7))
+  permutation_list_uniq_c.set(@tactics.prove(@parser.parse_term("∀ l. PERMUTATION l ==> LIST_UNIQ l"), t7))
 }
 
 ///|
@@ -148,7 +148,7 @@ pub fn permutation_list_uniq() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t8 = @meson.meson_tac(@list.List([mem_revperm(), @permuted.permuted_mem()]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutation()])), t8)
-  permutation_mem_c.set(@tactics.prove(@parser.parse_term("forall l. PERMUTATION l ==> (forall i. MEM i l <=> i < LENGTH l)"), t9))
+  permutation_mem_c.set(@tactics.prove(@parser.parse_term("∀ l. PERMUTATION l ==> (∀ i. MEM i l <=> i < LENGTH l)"), t9))
 }
 
 ///|
@@ -165,7 +165,7 @@ pub fn permutation_mem() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutation(), @permuted.permuted_count(), count_revperm()])), t10)
-  permutation_count_c.set(@tactics.prove(@parser.parse_term("forall l. PERMUTATION l <=> (forall x. COUNT x l = if x < LENGTH l then 1 else 0)"), t11))
+  permutation_count_c.set(@tactics.prove(@parser.parse_term("∀ l. PERMUTATION l <=> (∀ x. COUNT x l = if x < LENGTH l then 1 else 0)"), t11))
 }
 
 ///|
@@ -185,7 +185,7 @@ fn step_12() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_set_of_list(), @permuted.permuted_count(), @morelist.mem_count()]))
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@morelist.list_uniq_count()])), t12), t13), t14), t15)
-  list_uniq_permuted_set_of_list_c.set(@tactics.prove(@parser.parse_term("forall l1 l2. LIST_UNIQ l1 /\\ LIST_UNIQ l2\n           ==> (l1 PERMUTED l2 <=> set_of_list l1 = set_of_list l2)"), t16))
+  list_uniq_permuted_set_of_list_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2. LIST_UNIQ l1 /\\ LIST_UNIQ l2\n           ==> (l1 PERMUTED l2 <=> set_of_list l1 = set_of_list l2)"), t16))
 }
 
 ///|
@@ -203,7 +203,7 @@ fn step_13() -> Unit raise {
   let t18 = @meson.asm_meson_tac(@list.List([@morelist.list_uniq_card_length(), list_uniq_permuted_set_of_list()]))
   let t17 = @equal.gsym(@sets.extension())
   let t19 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@sets.in_set_of_list()), t17])), t18)
-  permuted_length_mem_c.set(@tactics.prove(@parser.parse_term("forall l l':A list.\n        LIST_UNIQ l /\\ LENGTH l = LENGTH l' /\\ (forall x. MEM x l <=> MEM x l')\n        ==> l PERMUTED l'"), t19))
+  permuted_length_mem_c.set(@tactics.prove(@parser.parse_term("∀ l l':A list.\n        LIST_UNIQ l /\\ LENGTH l = LENGTH l' /\\ (∀ x. MEM x l <=> MEM x l')\n        ==> l PERMUTED l'"), t19))
 }
 
 ///|
@@ -232,7 +232,7 @@ fn step_14() -> Unit raise {
   let t20 = @meson.asm_meson_tac(@list.List([list_uniq_permuted_set_of_list(), permutation(), @permuted.permuted_list_uniq(), list_uniq_revperm()]))
   let t30 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(set_of_list_revperm())])), t20), t29])
   let t31 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), @tactics.disch_tac), t30)
-  permutation_set_of_list_c.set(@tactics.prove(@parser.parse_term("forall l. PERMUTATION l <=> set_of_list l = {n | n < LENGTH l}"), t31))
+  permutation_set_of_list_c.set(@tactics.prove(@parser.parse_term("∀ l. PERMUTATION l <=> set_of_list l = {n | n < LENGTH l}"), t31))
 }
 
 ///|
@@ -252,7 +252,7 @@ fn step_15() -> Unit raise {
   let t33 = @tactics.match_mp_tac(@equal.gsym(@sets.card_subset_le()))
   let t32 = @simp.rewrite_tac(@list.List([permutation_set_of_list()]))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t32), t33), t34), t35)
-  mem_permutation_c.set(@tactics.prove(@parser.parse_term("forall l. (forall n. n < LENGTH l ==> MEM n l) ==> PERMUTATION l"), t36))
+  mem_permutation_c.set(@tactics.prove(@parser.parse_term("∀ l. (∀ n. n < LENGTH l ==> MEM n l) ==> PERMUTATION l"), t36))
 }
 
 ///|
@@ -271,7 +271,7 @@ fn step_16() -> Unit raise {
   let t38 = @tactics.match_mp_tac(@sets.card_subset_le())
   let t37 = @tactics.repeat_tac(@tactics.strip_tac)
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@morelist.list_uniq_card_length(), permutation_set_of_list()])), t37), t38), t39)
-  list_uniq_mem_permutation_c.set(@tactics.prove(@parser.parse_term("forall l. LIST_UNIQ l /\\ (forall n. MEM n l ==> n < LENGTH l) ==> PERMUTATION l"), t40))
+  list_uniq_mem_permutation_c.set(@tactics.prove(@parser.parse_term("∀ l. LIST_UNIQ l /\\ (∀ n. MEM n l ==> n < LENGTH l) ==> PERMUTATION l"), t40))
 }
 
 ///|
@@ -287,7 +287,7 @@ pub fn list_uniq_mem_permutation() -> @kernel.Thm {
 /// PERMUTATION_UNIQ_LT
 fn step_17() -> Unit raise {
   let t41 = @meson.meson_tac(@list.List([permutation_list_uniq(), permutation_mem(), list_uniq_mem_permutation()]))
-  permutation_uniq_lt_c.set(@tactics.prove(@parser.parse_term("forall l. PERMUTATION l <=> LIST_UNIQ l /\\ (forall n. MEM n l ==> n < LENGTH l)"), t41))
+  permutation_uniq_lt_c.set(@tactics.prove(@parser.parse_term("∀ l. PERMUTATION l <=> LIST_UNIQ l /\\ (∀ n. MEM n l ==> n < LENGTH l)"), t41))
 }
 
 ///|

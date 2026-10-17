@@ -55,7 +55,7 @@ fn step_1() -> Unit raise {
   }), t9), @tactics.gen_tac), t10), t11), t12), t14), t15), t16), @tactics.all_tac])
   let t7 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(p /\\ q ==> r) /\\ p /\\ q ==> p /\\ q /\\ r")))
   let t6 = @list.List([@tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([@real.real_lt_01(), @arith.add1(), @real.real_lt_mul()]))), @tactics.all_tac])
-  let t5 = @tactics.subgoal_then(@parser.parse_term("forall i:num. &0 < B i"), fn(x2 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5 = @tactics.subgoal_then(@parser.parse_term("∀ i:num. &0 < B i"), fn(x2 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s3 = @tactics.assume_tac(x2)
     fn(x4 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s3(x4)
@@ -63,7 +63,7 @@ fn step_1() -> Unit raise {
   })
   let t1 = @simp.rewrite_tac(@list.List([@arith.ge(), @realax.real_gt(), @realax.real_gt(), @arith.le_0()]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @tactics.strip_tac), t5), t6), t7), @tactics.conj_tac), t17), t18), @nums.induct_tac), t19), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), @tactics.conj_tac), t26), t31), t32), t34), @tactics.conj_tac), t35), t37), @tactics.conj_tac), t41), t42), t43), t44), t45), t46), t48), t49), t50)
-  theorem_v_1_c.set(@tactics.prove(@parser.parse_term("forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 <= V /\\\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1))\n\n        // Conclude loop invariant and bounds.\n        ==> (forall i. V = H i + Tl i / B i) /\\\n            (forall i. i >= 0 ==> abs(Tl i) <= tau i V) /\\\n            (forall i. i >= 0 ==> abs(Tp i) <= taup i V)"), t51))
+  theorem_v_1_c.set(@tactics.prove(@parser.parse_term("∀(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 <= V /\\\n        (∀ i. i >= 0 ==> beta i > &0) /\\\n        (∀ i. i >= 1 ==> (∀ x. abs (x - DSF i x) <= omega i)) /\\\n        (∀ i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (∀ i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (∀ u. tau 0 u = u) /\\\n        (∀ i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (∀ i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (∀ i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (∀ i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (∀ i. B (i + 1) = beta (i + 1) * B i) /\\\n        (∀ i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (∀ i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1))\n\n        // Conclude loop invariant and bounds.\n        ==> (∀ i. V = H i + Tl i / B i) /\\\n            (∀ i. i >= 0 ==> abs(Tl i) <= tau i V) /\\\n            (∀ i. i >= 0 ==> abs(Tp i) <= taup i V)"), t51))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn theorem_v_1() -> @kernel.Thm {
 ///|
 /// posynomial
 fn step_2() -> Unit raise {
-  posynomial_c.set(@pair.new_definition(@parser.parse_term("posynomial p <=>\n  ?c (n:num->real) k.\n        (forall i. 1 <= i /\\ i <= k ==> c i > &0 /\\ integer(n i)) /\\\n        (forall v. &0 < v ==> sum (1..k) (\\i. c i * v rpow (n i)) = p v)")))
+  posynomial_c.set(@pair.new_definition(@parser.parse_term("posynomial p <=>\n  ?c (n:num->real) k.\n        (∀ i. 1 <= i /\\ i <= k ==> c i > &0 /\\ integer(n i)) /\\\n        (∀ v. &0 < v ==> sum (1..k) (\\i. c i * v rpow (n i)) = p v)")))
 }
 
 ///|
@@ -164,7 +164,7 @@ fn step_5() -> Unit raise {
     }
   }))
   let t83 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t79), t80), t81), t82)
-  posynomial_cmul_c.set(@tactics.prove(@parser.parse_term("forall p c. posynomial p /\\ &0 < c ==> posynomial(\\v. c * p(v))"), t83))
+  posynomial_cmul_c.set(@tactics.prove(@parser.parse_term("∀ p c. posynomial p /\\ &0 < c ==> posynomial(\\v. c * p(v))"), t83))
 }
 
 ///|
@@ -197,7 +197,7 @@ fn step_6() -> Unit raise {
   let t85 = @simp.asm_rewrite_tac(@list.List([posynomial_0()]))
   let t84 = @tactics.repeat_tac(@tactics.strip_tac)
   let t96 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("&0 <= c <=> c = &0 \\/ &0 < c"))])), t84), t85), t93), t94), t95)
-  posynomial_const_c.set(@tactics.prove(@parser.parse_term("forall c. &0 <= c ==> posynomial (\\v. c)"), t96))
+  posynomial_const_c.set(@tactics.prove(@parser.parse_term("∀ c. &0 <= c ==> posynomial (\\v. c)"), t96))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_7() -> Unit raise {
     }
   }))
   let t116 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t103), t104), t105), t106), t110), t111), t112), t113), t114), t115)
-  posynomial_vpowmul_c.set(@tactics.prove(@parser.parse_term("forall p n. posynomial p /\\ integer n ==> posynomial(\\v. p(v) * v rpow n)"), t116))
+  posynomial_vpowmul_c.set(@tactics.prove(@parser.parse_term("∀ p n. posynomial p /\\ integer n ==> posynomial(\\v. p(v) * v rpow n)"), t116))
 }
 
 ///|
@@ -257,7 +257,7 @@ fn step_8() -> Unit raise {
   let t117 = @parser.parse_term("&1:real")
   let t118 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real->real"), t117]), posynomial_vpowmul()))
   let t120 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t118), t119)
-  posynomial_vmul_c.set(@tactics.prove(@parser.parse_term("forall p. posynomial p ==> posynomial(\\v. p(v) * v)"), t120))
+  posynomial_vmul_c.set(@tactics.prove(@parser.parse_term("∀ p. posynomial p ==> posynomial(\\v. p(v) * v)"), t120))
 }
 
 ///|
@@ -276,7 +276,7 @@ fn step_9() -> Unit raise {
   let t121 = @parser.parse_term("-- &1:real")
   let t122 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("p:real->real"), t121]), posynomial_vpowmul()))
   let t124 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t122), t123)
-  posynomial_vdiv_c.set(@tactics.prove(@parser.parse_term("forall p. posynomial p ==> posynomial(\\v. p(v) / v)"), t124))
+  posynomial_vdiv_c.set(@tactics.prove(@parser.parse_term("∀ p. posynomial p ==> posynomial(\\v. p(v) / v)"), t124))
 }
 
 ///|
@@ -343,7 +343,7 @@ fn step_11() -> Unit raise {
   let t138 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("c1:num->real"), t137, t136]))
   let t135 = @simp.rewrite_tac(@list.List([posynomial(), @theorems.imp_conj(), @theorems.left_imp_exists_thm()]))
   let t156 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t135), t138), @tactics.disch_tac), @tactics.disch_tac), t141), @tactics.disch_tac), @tactics.disch_tac), t142), t143), t144), t145), @tactics.conj_tac), t155)
-  posynomial_add_c.set(@tactics.prove(@parser.parse_term("forall p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v + q v)"), t156))
+  posynomial_add_c.set(@tactics.prove(@parser.parse_term("∀ p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v + q v)"), t156))
 }
 
 ///|
@@ -361,7 +361,7 @@ fn step_12() -> Unit raise {
   let t158 = @simp.simp_tac(@list.List([@iterate.sum_clauses(), posynomial_0(), posynomial_add(), @sets.forall_in_insert(), @class.eta_ax()]))
   let t157 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t159 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()])), t157), t158)
-  posynomial_sum_c.set(@tactics.prove(@parser.parse_term("forall k:A->bool p.\n        FINITE k /\\ (forall i. i IN k ==> posynomial(\\v. p v i))\n        ==> posynomial (\\v. sum k (p v))"), t159))
+  posynomial_sum_c.set(@tactics.prove(@parser.parse_term("∀ k:A->bool p.\n        FINITE k /\\ (∀ i. i IN k ==> posynomial(\\v. p v i))\n        ==> posynomial (\\v. sum k (p v))"), t159))
 }
 
 ///|
@@ -407,7 +407,7 @@ fn step_13() -> Unit raise {
     })(x166))
   }, @list.List([@equal.conv_rule(@equal.rand_conv(@equal.once_depth_conv(@equal.sym_conv)), t167)]))
   let t185 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t168), @tactics.strip_tac), t169), t170), t171), t172), t173), t174), t175), t176), t177), t178), t179), t180), t181), t182), t183), t184)
-  posynomial_mul_c.set(@tactics.prove(@parser.parse_term("forall p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v * q v)"), t185))
+  posynomial_mul_c.set(@tactics.prove(@parser.parse_term("∀ p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v * q v)"), t185))
 }
 
 ///|
@@ -430,7 +430,7 @@ fn step_14() -> Unit raise {
   let t207 = @simp.rewrite_tac(@list.List([@iterate.finite_numseg(), @iterate.in_numseg()]))
   let t206 = @tactics.match_mp_tac(@realanalysis.real_convex_on_sum())
   let t205 = @simp.rewrite_tac(@list.List([@realanalysis.is_realinterval_clauses()]))
-  let t204 = @tactics.match_mp_tac(@meson.meson(@list.List([@realanalysis.real_convex_on_eq()]), @parser.parse_term("is_realinterval s /\\ f real_convex_on s\n    ==> (forall x. x IN s ==> f x = g x) ==> g real_convex_on s")))
+  let t204 = @tactics.match_mp_tac(@meson.meson(@list.List([@realanalysis.real_convex_on_eq()]), @parser.parse_term("is_realinterval s /\\ f real_convex_on s\n    ==> (∀ x. x IN s ==> f x = g x) ==> g real_convex_on s")))
   let t203 = @simp.gen_rewrite_tac(fn(x202 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x196 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s197 = @equal.land_conv(x196)
@@ -459,7 +459,7 @@ fn step_14() -> Unit raise {
   let t187 = @parser.parse_term("n:num->real")
   let t188 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("c:num->real"), t187, t186]))
   let t213 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([posynomial(), @theorems.left_imp_exists_thm(), @realax.real_gt()]))), t188), t195), t203), t204), t205), t206), t207), t208), @tactics.strip_tac), t209), t210), t211), t212)
-  real_convex_on_posynomial_c.set(@tactics.prove(@parser.parse_term("forall p. posynomial p ==> p real_convex_on {x | x > &0}"), t213))
+  real_convex_on_posynomial_c.set(@tactics.prove(@parser.parse_term("∀ p. posynomial p ==> p real_convex_on {x | x > &0}"), t213))
 }
 
 ///|
@@ -515,7 +515,7 @@ fn step_15() -> Unit raise {
       s243(x244)
     }
   }, @list.List([@equal.gsym(@class.eta_ax())]))), t245), t246), t247), t248), t252), t253), t254), t255), t256), t260), @tactics.all_tac])
-  let t241 = @tactics.subgoal_then(@parser.parse_term("forall i:num. posynomial (taup i)"), fn(x238 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t241 = @tactics.subgoal_then(@parser.parse_term("∀ i:num. posynomial (taup i)"), fn(x238 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s239 = @tactics.assume_tac(x238)
     fn(x240 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s239(x240)
@@ -535,7 +535,7 @@ fn step_15() -> Unit raise {
       s227(x228)
     }
   }, @list.List([@equal.gsym(@class.eta_ax())]))), t229), t230), @tactics.conj_tac), t236), @tactics.all_tac])
-  let t225 = @tactics.subgoal_then(@parser.parse_term("forall i:num. posynomial (tau i)"), fn(x222 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t225 = @tactics.subgoal_then(@parser.parse_term("∀ i:num. posynomial (tau i)"), fn(x222 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s223 = @tactics.assume_tac(x222)
     fn(x224 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s223(x224)
@@ -553,7 +553,7 @@ fn step_15() -> Unit raise {
   })
   let t214 = @tactics.repeat_tac(@tactics.gen_tac)
   let t274 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_gt(), @realax.real_ge(), @arith.gt(), @arith.ge(), @arith.le_0()])), t214), @tactics.strip_tac), t220), t221), @tactics.disch_tac), t225), t237), t241), t261), t262), t263), t264), t267), t268), t269), t273)
-  corollary_v_3_c.set(@tactics.prove(@parser.parse_term("forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 < V /\\\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (forall i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude our bounds\n        ==> forall a b. real_interval[a,b] SUBSET {x | x > &0}\n                  ==> forall i u. u IN real_interval[a,b]\n                            ==> tau i u <= max (tau i a) (tau i b) /\\\n                                taup i u <= max (taup i a) (taup i b)"), t274))
+  corollary_v_3_c.set(@tactics.prove(@parser.parse_term("∀(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 < V /\\\n        (∀ i. i >= 0 ==> beta i > &0) /\\\n        (∀ i. i >= 1 ==> (∀ x. abs (x - DSF i x) <= omega i)) /\\\n        (∀ i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (∀ i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (∀ u. tau 0 u = u) /\\\n        (∀ i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (∀ i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (∀ i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (∀ i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (∀ i. B (i + 1) = beta (i + 1) * B i) /\\\n        (∀ i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (∀ i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (∀ i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude our bounds\n        ==> ∀ a b. real_interval[a,b] SUBSET {x | x > &0}\n                  ==> ∀ i u. u IN real_interval[a,b]\n                            ==> tau i u <= max (tau i a) (tau i b) /\\\n                                taup i u <= max (taup i a) (taup i b)"), t274))
 }
 
 ///|
@@ -611,7 +611,7 @@ fn step_16() -> Unit raise {
   })
   let t275 = @tactics.repeat_tac(@tactics.gen_tac)
   let t310 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_gt(), @realax.real_ge(), @arith.gt(), @arith.ge(), @arith.le_0()])), t275), @tactics.strip_tac), t281), t282), @tactics.conj_tac), t309)
-  full_corollary_c.set(@tactics.prove(@parser.parse_term("forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Not stated explicitly in the theorem itself but higher up.\n        &0 < V /\\\n\n        // Environmental assumptions including nondecreasing property\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (forall i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude invariant and all bounds.\n        ==> (forall i. V = H i + Tl i / B i) /\\\n            (forall i. abs(Tl i) <= tau i V) /\\\n            (forall i. abs(Tp i) <= taup i V) /\\\n            (forall a b. real_interval[a,b] SUBSET {x | x > &0}\n                   ==> forall i u. u IN real_interval[a,b]\n                             ==> tau i u <= max (tau i a) (tau i b) /\\\n                                 taup i u <= max (taup i a) (taup i b))"), t310))
+  full_corollary_c.set(@tactics.prove(@parser.parse_term("∀(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Not stated explicitly in the theorem itself but higher up.\n        &0 < V /\\\n\n        // Environmental assumptions including nondecreasing property\n        (∀ i. i >= 0 ==> beta i > &0) /\\\n        (∀ i. i >= 1 ==> (∀ x. abs (x - DSF i x) <= omega i)) /\\\n        (∀ i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (∀ i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (∀ u. tau 0 u = u) /\\\n        (∀ i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (∀ i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (∀ i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (∀ i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (∀ i. B (i + 1) = beta (i + 1) * B i) /\\\n        (∀ i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (∀ i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (∀ i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude invariant and all bounds.\n        ==> (∀ i. V = H i + Tl i / B i) /\\\n            (∀ i. abs(Tl i) <= tau i V) /\\\n            (∀ i. abs(Tp i) <= taup i V) /\\\n            (∀ a b. real_interval[a,b] SUBSET {x | x > &0}\n                   ==> ∀ i u. u IN real_interval[a,b]\n                             ==> tau i u <= max (tau i a) (tau i b) /\\\n                                 taup i u <= max (taup i a) (taup i b))"), t310))
 }
 
 ///|
@@ -776,14 +776,14 @@ fn step_17() -> Unit raise {
   let t360 = @parser.parse_term("beta:num->real")
   let t361 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("X / Y:real"), t360, t359, t358, t357, t356, t355, t354, t353, t352, t351, t350, t349]), full_corollary()))
   let t348 = @simp.abbrev_tac(@parser.parse_term("taup:num->real->real = \\i u. (&1 + PSI i (u,tau i u)) * tau i u"))
-  let t344 = @parser.parse_term("Tl 0 :real = X / Y /\\\n    forall i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)")
+  let t344 = @parser.parse_term("Tl 0 :real = X / Y /\\\n    ∀ i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)")
   let t345 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t342 = @simp.rewrite_rule(@list.List([@arith.add1()]))
   let t346 = @tactics.x_choose_then(@parser.parse_term("Tl:num->real"))(fn(x343 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.strip_assume_tac(t342(x343))
   })
   let t347 = t346(t345(t344))
-  let t338 = @parser.parse_term("(forall u:real. tau 0 u = u) /\\\n     (forall i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))")
+  let t338 = @parser.parse_term("(∀ u:real. tau 0 u = u) /\\\n     (∀ i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))")
   let t339 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t336 = @simp.rewrite_rule(@list.List([@arith.add1()]))
   let t340 = @tactics.x_choose_then(@parser.parse_term("tau:num->real->real"))(fn(x337 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -801,7 +801,7 @@ fn step_17() -> Unit raise {
   })
   let t328 = @tactics.subgoal_then(@parser.parse_term("&0 < X /\\ &0 < Y"), @tactics.strip_assume_tac)
   let t327 = @list.List([@tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([@real.real_lt_mul(), @arith.add1(), @real.real_lt_01()]))), @tactics.all_tac])
-  let t326 = @tactics.subgoal_then(@parser.parse_term("forall i. &0 < (B:num->real) i"), fn(x323 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t326 = @tactics.subgoal_then(@parser.parse_term("∀ i. &0 < (B:num->real) i"), fn(x323 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s324 = @tactics.assume_tac(x323)
     fn(x325 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s324(x325)
@@ -824,7 +824,7 @@ fn step_17() -> Unit raise {
   })
   let t311 = @simp.rewrite_tac(@list.List([@arith.ge(), @arith.le_0(), @realax.real_gt()]))
   let t467 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t311), @tactics.strip_tac), t315), t322), t326), t327), t328), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t332), t333), t335), t341), t347), t348), t361), t362), @tactics.ants_tac), t466)
-  bound_theorem_div_c.set(@tactics.prove(@parser.parse_term("forall beta Sigma omega B DSF H R Tp X Y g sigma v.\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        &1 / &2 <= X /\\ X < &1 /\\\n        &1 <= Y /\\ Y < &2 /\\\n        (forall y. &1 <= y /\\ y < &2\n             ==> g y = (&1 + sigma y) / y /\\ abs(sigma y) <= Sigma) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X /\\\n        (forall i. Tp i = g(Y) * R i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. R (i + 1) = beta (i + 1) * R i -  v(i + 1) * Y)\n        ==> ?tau. (forall u. tau 0 u = u) /\\\n                  (forall i u. tau (i + 1) u =\n                         beta (i + 1) * Sigma * tau i u + omega (i + 1)) /\\\n                  (forall i. abs(X / Y - H i)\n                       <= max (tau i (&1 / &4)) (tau i (&1)) / B i)"), t467))
+  bound_theorem_div_c.set(@tactics.prove(@parser.parse_term("∀ beta Sigma omega B DSF H R Tp X Y g sigma v.\n        (∀ i. i >= 0 ==> beta i > &0) /\\\n        &1 / &2 <= X /\\ X < &1 /\\\n        &1 <= Y /\\ Y < &2 /\\\n        (∀ y. &1 <= y /\\ y < &2\n             ==> g y = (&1 + sigma y) / y /\\ abs(sigma y) <= Sigma) /\\\n        (∀ i. i >= 1 ==> (∀ x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X /\\\n        (∀ i. Tp i = g(Y) * R i) /\\\n        (∀ i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (∀ i. B (i + 1) = beta (i + 1) * B i) /\\\n        (∀ i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (∀ i. R (i + 1) = beta (i + 1) * R i -  v(i + 1) * Y)\n        ==> ?tau. (∀ u. tau 0 u = u) /\\\n                  (∀ i u. tau (i + 1) u =\n                         beta (i + 1) * Sigma * tau i u + omega (i + 1)) /\\\n                  (∀ i. abs(X / Y - H i)\n                       <= max (tau i (&1 / &4)) (tau i (&1)) / B i)"), t467))
 }
 
 ///|
@@ -917,11 +917,11 @@ fn step_18() -> Unit raise {
       s614(x615)
     }
   })
-  let t612 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("forall i. B (i + 1):real = beta (i + 1) * B i"))]))
-  let t611 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("forall i. H (i + 1):real = H i + v (i + 1) / B (i + 1)"))]))
+  let t612 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("∀ i. B (i + 1):real = beta (i + 1) * B i"))]))
+  let t611 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("∀ i. H (i + 1):real = H i + v (i + 1) / B (i + 1)"))]))
   let t610 = @simp.simp_tac(@list.List([]))
   let t609 = @tactics.x_gen_tac(@parser.parse_term("j:num"))
-  let t608 = @simp.once_rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("forall i. R (i + 1) =\n           beta (i + 1) * R i - v (i + 1) * (H (i + 1) + H i) / &2"))]))
+  let t608 = @simp.once_rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("∀ i. R (i + 1) =\n           beta (i + 1) * R i - v (i + 1) * (H (i + 1) + H i) / &2"))]))
   let t606 = @simp.rewrite_tac(@list.List([@arith.add1()]))
   let t607 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @calc_rat.real_arith_tac), t606])
   let t605 = @tactics.match_mp_tac(@nums.num_induction())
@@ -931,7 +931,7 @@ fn step_18() -> Unit raise {
   let t601 = @simp.asm_simp_tac(@list.List([@real.sqrt_pow_2(), @realarith.real_lt_imp_le()]))
   let t600 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(x + h) / &2 * (x - h) = (x pow 2 - h pow 2) / &2"))]))
   let t599 = @tactics.exists_tac(@parser.parse_term("(B:num->real) i"))
-  let t598 = @tactics.match_mp_tac(@calc_rat.real_field(@parser.parse_term("forall b. &0 < b /\\ x / b = y / &2 * z / b ==> x = y / &2 * z")))
+  let t598 = @tactics.match_mp_tac(@calc_rat.real_field(@parser.parse_term("∀ b. &0 < b /\\ x / b = y / &2 * z / b ==> x = y / &2 * z")))
   let t596 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("s - (s - h) / &2 = (s + h) / &2"))]))
   let t594 = @tactics.conv_tac(@calc_rat.real_field)
   let t595 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t594])
@@ -943,7 +943,7 @@ fn step_18() -> Unit raise {
   })
   let t589 = @tactics.undisch_tac(@parser.parse_term("Tl(j:num) / B j = sqrt X - H j"))
   let t597 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@real.real_sub_rzero(), @real.real_div_1(), @arith.add1()]))), t589), t593), t595), t596])
-  let t588 = @tactics.subgoal_then(@parser.parse_term("forall j:num. Tl j / B j = sqrt X - H j"), fn(x585 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t588 = @tactics.subgoal_then(@parser.parse_term("∀ j:num. Tl j / B j = sqrt X - H j"), fn(x585 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s586 = @tactics.assume_tac(x585)
     fn(x587 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s586(x587)
@@ -1058,14 +1058,14 @@ fn step_18() -> Unit raise {
   let t520 = @parser.parse_term("beta:num->real")
   let t521 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("sqrt X"), t520, t519, t518, t517, t516, t515, t514, t513, t512, t511, t510, t509]), full_corollary()))
   let t508 = @simp.abbrev_tac(@parser.parse_term("taup:num->real->real = \\i u. (&1 + PSI i (u,tau i u)) * tau i u"))
-  let t504 = @parser.parse_term("Tl 0 = sqrt(X) /\\\n    forall i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)")
+  let t504 = @parser.parse_term("Tl 0 = sqrt(X) /\\\n    ∀ i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)")
   let t505 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t502 = @simp.rewrite_rule(@list.List([@arith.add1()]))
   let t506 = @tactics.x_choose_then(@parser.parse_term("Tl:num->real"))(fn(x503 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.strip_assume_tac(t502(x503))
   })
   let t507 = t506(t505(t504))
-  let t498 = @parser.parse_term("(forall u:real. tau 0 u = u) /\\\n     (forall i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))")
+  let t498 = @parser.parse_term("(∀ u:real. tau 0 u = u) /\\\n     (∀ i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))")
   let t499 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t496 = @simp.rewrite_rule(@list.List([@arith.add1()]))
   let t500 = @tactics.x_choose_then(@parser.parse_term("tau:num->real->real"))(fn(x497 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1088,7 +1088,7 @@ fn step_18() -> Unit raise {
     }
   })
   let t484 = @list.List([@tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([@real.real_lt_mul(), @arith.add1(), @real.real_lt_01()]))), @tactics.all_tac])
-  let t483 = @tactics.subgoal_then(@parser.parse_term("forall i. &0 < (B:num->real) i"), fn(x480 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t483 = @tactics.subgoal_then(@parser.parse_term("∀ i. &0 < (B:num->real) i"), fn(x480 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s481 = @tactics.assume_tac(x480)
     fn(x482 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s481(x482)
@@ -1111,7 +1111,7 @@ fn step_18() -> Unit raise {
   })
   let t468 = @simp.rewrite_tac(@list.List([@arith.ge(), @arith.le_0(), @realax.real_gt()]))
   let t690 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t468), @tactics.strip_tac), t472), t479), t483), t484), t488), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t492), t493), t495), t501), t507), t508), t521), t522), @tactics.ants_tac), t689)
-  bound_theorem_sqrt_c.set(@tactics.prove(@parser.parse_term("forall beta Sigma omega B DSF H R Tp X g sigma v.\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        &1 / &4 <= X /\\ X < &1 /\\\n        (forall x. &1 / &4 <= x /\\ x < &1\n             ==> g x = (&1 + sigma x) / sqrt x /\\\n                 abs(sigma x) <= Sigma) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X / &2 /\\\n        (forall i. Tp i = (if i = 0 then &2 else &1) * g(X) * R i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. R (i + 1) =\n             beta (i + 1) * R i -  v(i + 1) * (H(i + 1) + H i) / &2)\n        ==> ?tau.\n                  (forall u. tau 0 u = u) /\\\n                  (forall i u. tau (i + 1) u =\n                         beta (i + 1) *\n                         (if i = 0 then Sigma\n                          else Sigma + (&1 + Sigma) * tau i u / (&2 * u * B i))\n                          * tau i u +\n                         omega (i + 1)) /\\\n                  (forall i. abs(sqrt X - H i)\n                       <= max (tau i (&1 / &2)) (tau i (&1)) / B i)"), t690))
+  bound_theorem_sqrt_c.set(@tactics.prove(@parser.parse_term("∀ beta Sigma omega B DSF H R Tp X g sigma v.\n        (∀ i. i >= 0 ==> beta i > &0) /\\\n        &1 / &4 <= X /\\ X < &1 /\\\n        (∀ x. &1 / &4 <= x /\\ x < &1\n             ==> g x = (&1 + sigma x) / sqrt x /\\\n                 abs(sigma x) <= Sigma) /\\\n        (∀ i. i >= 1 ==> (∀ x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X / &2 /\\\n        (∀ i. Tp i = (if i = 0 then &2 else &1) * g(X) * R i) /\\\n        (∀ i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (∀ i. B (i + 1) = beta (i + 1) * B i) /\\\n        (∀ i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (∀ i. R (i + 1) =\n             beta (i + 1) * R i -  v(i + 1) * (H(i + 1) + H i) / &2)\n        ==> ?tau.\n                  (∀ u. tau 0 u = u) /\\\n                  (∀ i u. tau (i + 1) u =\n                         beta (i + 1) *\n                         (if i = 0 then Sigma\n                          else Sigma + (&1 + Sigma) * tau i u / (&2 * u * B i))\n                          * tau i u +\n                         omega (i + 1)) /\\\n                  (∀ i. abs(sqrt X - H i)\n                       <= max (tau i (&1 / &2)) (tau i (&1)) / B i)"), t690))
 }
 
 ///|
@@ -1133,7 +1133,7 @@ fn step_19() -> Unit raise {
   let t691 = @parser.parse_term("a / b:real")
   let t692 = @tactics.trans_tac(@realax.real_le_trans())(t691)
   let t697 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t692), t693), t694), t695), t696)
-  let pth = @tactics.prove(@parser.parse_term("x <= a / b ==> &0 <= b ==> forall a'. a <= a' ==> x <= a' / b"), t697)
+  let pth = @tactics.prove(@parser.parse_term("x <= a / b ==> &0 <= b ==> ∀ a'. a <= a' ==> x <= a' / b"), t697)
   fn calc(x698 : @list.List[@kernel.Thm], x699 : (@kernel.Thm, @kernel.Thm), x700 : Int64) -> @list.List[@kernel.Thm] raise {
     let rews = x698
     let (thb, ths) = x699

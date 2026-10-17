@@ -11,7 +11,7 @@ fn step_1() -> Unit raise {
 /// IN_NUMSEG_1
 fn step_2() -> Unit raise {
   let t1 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.in_numseg()])), @int.arith_tac)
-  in_numseg_1_c.set(@tactics.prove(@parser.parse_term("forall p i. i IN 1..p - 1 <=> 0 < i /\\ i < p"), t1))
+  in_numseg_1_c.set(@tactics.prove(@parser.parse_term("∀ p i. i IN 1..p - 1 <=> 0 < i /\\ i < p"), t1))
 }
 
 ///|
@@ -30,7 +30,7 @@ fn step_3() -> Unit raise {
   let t3 = @drule.match_mp(@arith.division())(t2)
   let t4 = @tactics.mp_tac(@bool.spec(@parser.parse_term("n:num"), t3))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@arith.even_mod()]))), t4), @int.arith_tac)
-  even_div_c.set(@tactics.prove(@parser.parse_term("forall n. EVEN n <=> n = 2 * (n DIV 2)"), t5))
+  even_div_c.set(@tactics.prove(@parser.parse_term("∀ n. EVEN n <=> n = 2 * (n DIV 2)"), t5))
 }
 
 ///|
@@ -77,7 +77,7 @@ fn step_5() -> Unit raise {
   let t15 = @tactics.match_mp_tac(@pocklington.cong_trans())
   let t14 = @simp.rewrite_tac(@list.List([@arith.exp(), @calc_num.arith(), @pocklington.cong_refl()]))
   let t20 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), @tactics.gen_tac), @tactics.disch_tac), @nums.induct_tac), t14), t15), t16), t17), t18), t19)
-  cong_exp_minus1_c.set(@tactics.prove(@parser.parse_term("forall p n. 2 <= p ==> ((p - 1) EXP n == if EVEN n then 1 else p - 1) (mod p)"), t20))
+  cong_exp_minus1_c.set(@tactics.prove(@parser.parse_term("∀ p n. 2 <= p ==> ((p - 1) EXP n == if EVEN n then 1 else p - 1) (mod p)"), t20))
 }
 
 ///|
@@ -118,7 +118,7 @@ fn step_6() -> Unit raise {
     }
   })
   let t41 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t24), t40)
-  not_cong_minus1_c.set(@tactics.prove(@parser.parse_term("forall p. 3 <= p ==> ~(p - 1 == 1) (mod p)"), t41))
+  not_cong_minus1_c.set(@tactics.prove(@parser.parse_term("∀ p. 3 <= p ==> ~(p - 1 == 1) (mod p)"), t41))
 }
 
 ///|
@@ -136,7 +136,7 @@ fn step_7() -> Unit raise {
   let t43 = @meson.asm_meson_tac(@list.List([@pocklington.cong_sym(), not_cong_minus1()]))
   let t42 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t42), t43)
-  cong_cond_lemma_c.set(@tactics.prove(@parser.parse_term("forall p x y. 3 <= p /\\\n           ((if x then 1 else p - 1) == (if y then 1 else p - 1)) (mod p)\n           ==> (x <=> y)"), t44))
+  cong_cond_lemma_c.set(@tactics.prove(@parser.parse_term("∀ p x y. 3 <= p /\\\n           ((if x then 1 else p - 1) == (if y then 1 else p - 1)) (mod p)\n           ==> (x <=> y)"), t44))
 }
 
 ///|
@@ -155,7 +155,7 @@ fn step_8() -> Unit raise {
   let t46 = @tactics.exists_tac(@parser.parse_term("(s:A->bool) CROSS (t:B->bool)"))
   let t45 = @tactics.match_mp_tac(@sets.finite_subset())
   let t48 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t45), t46), t47)
-  finite_subcross_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:B->bool.\n       FINITE s /\\ FINITE t ==> FINITE {x,y | x IN s /\\ y IN t /\\ P x y}"), t48))
+  finite_subcross_c.set(@tactics.prove(@parser.parse_term("∀ s:A->bool t:B->bool.\n       FINITE s /\\ FINITE t ==> FINITE {x,y | x IN s /\\ y IN t /\\ P x y}"), t48))
 }
 
 ///|
@@ -178,7 +178,7 @@ fn step_9() -> Unit raise {
   let t50 = @tactics.match_mp_tac(@sets.card_image_inj_eq())
   let t49 = @tactics.conv_tac(@equal.sym_conv)
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t49), t50), t51), t52), t53), t54), t55)
-  card_subcross_determinate_c.set(@tactics.prove(@parser.parse_term("FINITE s /\\ FINITE t /\\ (forall x. x IN s /\\ p(x) ==> f(x) IN t)\n   ==> CARD {(x:A),(y:B) | x IN s /\\ y IN t /\\ y = f x /\\ p x} =\n       CARD {x | x IN s /\\ p(x)}"), t56))
+  card_subcross_determinate_c.set(@tactics.prove(@parser.parse_term("FINITE s /\\ FINITE t /\\ (∀ x. x IN s /\\ p(x) ==> f(x) IN t)\n   ==> CARD {(x:A),(y:B) | x IN s /\\ y IN t /\\ y = f x /\\ p x} =\n       CARD {x | x IN s /\\ p(x)}"), t56))
 }
 
 ///|
@@ -246,7 +246,7 @@ fn step_13() -> Unit raise {
   let t65 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t64 = @simp.rewrite_tac(@list.List([is_quadratic_residue(), @arith.exp_2()]))
   let t74 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), @tactics.disch_tac), @tactics.eq_tac), t65), t68), t69), t70), @tactics.conj_tac), t73)
-  is_quadratic_residue_v1_c.set(@tactics.prove(@parser.parse_term("forall a p. ~(p = 0) /\\ ~(p divides a)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))"), t74))
+  is_quadratic_residue_v1_c.set(@tactics.prove(@parser.parse_term("∀ a p. ~(p = 0) /\\ ~(p divides a)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))"), t74))
 }
 
 ///|
@@ -264,7 +264,7 @@ fn step_14() -> Unit raise {
   let t76 = @meson.asm_meson_tac(@list.List([@prime.coprime_prime(), @prime.divides_refl(), @prime.prime_0()]))
   let t75 = @tactics.match_mp_tac(is_quadratic_residue_v1())
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t75), t76)
-  is_quadratic_residue_common_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))"), t77))
+  is_quadratic_residue_common_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))"), t77))
 }
 
 ///|
@@ -281,7 +281,7 @@ pub fn is_quadratic_residue_common() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t78 = @simp.simp_tac(@list.List([@pocklington.cong_add_rcancel_eq_0(), @pocklington.cong_0(), @prime.prime_divprod_eq(), @arith.add_sym()]))
   let t79 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@grobner.num_ring(@parser.parse_term("(x + y) EXP 2 = y * (y + 2 * x) + x EXP 2"))])), t78)
-  quadratic_residue_pair_add_c.set(@tactics.prove(@parser.parse_term("forall p x y. prime p\n           ==> (((x + y) EXP 2 == x EXP 2) (mod p) <=>\n                 p divides y \\/ p divides (2 * x + y))"), t79))
+  quadratic_residue_pair_add_c.set(@tactics.prove(@parser.parse_term("∀ p x y. prime p\n           ==> (((x + y) EXP 2 == x EXP 2) (mod p) <=>\n                 p divides y \\/ p divides (2 * x + y))"), t79))
 }
 
 ///|
@@ -304,7 +304,7 @@ fn step_16() -> Unit raise {
   let t81 = @simp.rewrite_tac(@list.List([@arith.le_exists()]))
   let t80 = @list.List([@meson.meson_tac(@list.List([@realax.dist_sym(), @pocklington.cong_sym(), @arith.add_sym()])), @tactics.all_tac])
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@arith.wlog_le())), @tactics.conj_tac), t80), t81), t82), t83), t84), t85), t86)
-  quadratic_residue_pair_c.set(@tactics.prove(@parser.parse_term("forall p x y. prime p\n           ==> ((x EXP 2 == y EXP 2) (mod p) <=>\n                 p divides (x + y) \\/ p divides (dist(x,y)))"), t87))
+  quadratic_residue_pair_c.set(@tactics.prove(@parser.parse_term("∀ p x y. prime p\n           ==> ((x EXP 2 == y EXP 2) (mod p) <=>\n                 p divides (x + y) \\/ p divides (dist(x,y)))"), t87))
 }
 
 ///|
@@ -379,7 +379,7 @@ fn step_17() -> Unit raise {
   let t89 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t88 = @tactics.repeat_tac(@tactics.strip_tac)
   let t134 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([is_quadratic_residue_common()])), t88), @tactics.eq_tac), t89), t90), t95), t96), t97), t103), t133)
-  is_quadratic_residue_pair_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x y. 0 < x /\\ x < p /\\ 0 < y /\\ y < p /\\ x + y = p /\\\n                       (x EXP 2 == a) (mod p) /\\ (y EXP 2 == a) (mod p) /\\\n                       forall z. 0 < z /\\ z < p /\\ (z EXP 2 == a) (mod p)\n                           ==> z = x \\/ z = y)"), t134))
+  is_quadratic_residue_pair_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x y. 0 < x /\\ x < p /\\ 0 < y /\\ y < p /\\ x + y = p /\\\n                       (x EXP 2 == a) (mod p) /\\ (y EXP 2 == a) (mod p) /\\\n                       ∀ z. 0 < z /\\ z < p /\\ (z EXP 2 == a) (mod p)\n                           ==> z = x \\/ z = y)"), t134))
 }
 
 ///|
@@ -415,7 +415,7 @@ fn step_18() -> Unit raise {
     })(((x139 : @kernel.Thm) => @bool.mp(t138, x139))(x140))
   })
   let t151 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t141), t145), t150)
-  quadratic_residue_pair_product_c.set(@tactics.prove(@parser.parse_term("forall p x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p)\n         ==> (x * (p - x) == (p - 1) * a) (mod p)"), t151))
+  quadratic_residue_pair_product_c.set(@tactics.prove(@parser.parse_term("∀ p x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p)\n         ==> (x * (p - x) == (p - 1) * a) (mod p)"), t151))
 }
 
 ///|
@@ -463,7 +463,7 @@ fn step_21() -> Unit raise {
   let t153 = @simp.simp_tac(@list.List([@pocklington.cong_refl(), @pocklington.cong_mult()]))
   let t152 = @tactics.match_mp_tac(@drule.match_mp(@iterate.iterate_related())(@iterate.monoidal_mul()))
   let t154 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([nproduct()])), t152), t153)
-  cong_nproduct_c.set(@tactics.prove(@parser.parse_term("forall f g s. FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n           ==> (nproduct s f == nproduct s g) (mod n)"), t154))
+  cong_nproduct_c.set(@tactics.prove(@parser.parse_term("∀ f g s. FINITE s /\\ (∀ x. x IN s ==> (f x == g x) (mod n))\n           ==> (nproduct s f == nproduct s g) (mod n)"), t154))
 }
 
 ///|
@@ -488,7 +488,7 @@ fn step_22() -> Unit raise {
   let t160 = @tactics.repeat_tac(@tactics.strip_tac)
   let t159 = @simp.simp_tac(@list.List([@iterate.nproduct_clauses(), @sets.card_clauses(), @arith.exp(), @sets.not_in_empty(), @sets.set_rule(@parser.parse_term("{x | F} = {}")), lemma1]))
   let t162 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@sets.finite_induct_strong())), t159), t160), @class.cond_cases_tac), t161)
-  nproduct_delta_const_c.set(@tactics.prove(@parser.parse_term("forall c s. FINITE s\n         ==> nproduct s (\\x. if p(x) then c else 1) =\n             c EXP (CARD {x | x IN s /\\ p(x)})"), t162))
+  nproduct_delta_const_c.set(@tactics.prove(@parser.parse_term("∀ c s. FINITE s\n         ==> nproduct s (\\x. if p(x) then c else 1) =\n             c EXP (CARD {x | x IN s /\\ p(x)})"), t162))
 }
 
 ///|
@@ -507,7 +507,7 @@ fn step_23() -> Unit raise {
   let t164 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t163 = @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t166 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t163), t164), t165)
-  coprime_nproduct_c.set(@tactics.prove(@parser.parse_term("forall f p s. FINITE s /\\ (forall x. x IN s ==> coprime(p,f x))\n           ==> coprime(p,nproduct s f)"), t166))
+  coprime_nproduct_c.set(@tactics.prove(@parser.parse_term("∀ f p s. FINITE s /\\ (∀ x. x IN s ==> coprime(p,f x))\n           ==> coprime(p,nproduct s f)"), t166))
 }
 
 ///|
@@ -525,7 +525,7 @@ fn step_24() -> Unit raise {
   let t168 = @simp.rewrite_tac(@list.List([@iterate.in_numseg()]))
   let t167 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n")), @iterate.nproduct_clauses(), @iterate.finite_numseg()]))
   let t169 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.fact(), @iterate.numseg_clauses(), @calc_num.arith(), @iterate.nproduct_clauses()]))), t167), t168), @int.arith_tac)
-  fact_nproduct_c.set(@tactics.prove(@parser.parse_term("forall n. FACT(n) = nproduct(1..n) (\\i. i)"), t169))
+  fact_nproduct_c.set(@tactics.prove(@parser.parse_term("∀ n. FACT(n) = nproduct(1..n) (\\i. i)"), t169))
 }
 
 ///|
@@ -691,7 +691,7 @@ fn step_25() -> Unit raise {
   let t171 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t170 = @tactics.match_mp_tac(@arith.num_wf())
   let t284 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t170), t171), @tactics.disch_tac), t172), @tactics.gen_tac), t173), t174), t175), t176), @tactics.strip_tac), t182), t189), t190), t197), t198), t199), t200), t208), t213), t214), @tactics.ants_tac), t264), @tactics.disch_tac), t265), t272), t273), t274), t280), t281), @tactics.disch_tac), t282), t283)
-  nproduct_pairup_induct_c.set(@tactics.prove(@parser.parse_term("forall f r n s k. s HAS_SIZE (2 * n) /\\\n               (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                      (f(x) * f(y) == k) (mod r))\n               ==> (nproduct s f == k EXP n) (mod r)"), t284))
+  nproduct_pairup_induct_c.set(@tactics.prove(@parser.parse_term("∀ f r n s k. s HAS_SIZE (2 * n) /\\\n               (∀ x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                      (f(x) * f(y) == k) (mod r))\n               ==> (nproduct s f == k EXP n) (mod r)"), t284))
 }
 
 ///|
@@ -737,7 +737,7 @@ fn step_26() -> Unit raise {
   let t286 = @simp.once_rewrite_tac(@list.List([@pocklington.cong_sym()]))
   let t285 = @simp.rewrite_tac(@list.List([fact_nproduct()]))
   let t311 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t285), t286), t287), @tactics.conj_tac), t297), t298), t299), t301), t302), t305), t306), t307), t308), @tactics.ap_term_tac), t309), t310)
-  quadratic_nonresidue_fact_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ ~(a is_quadratic_residue (mod p))\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 1)) (mod p)"), t311))
+  quadratic_nonresidue_fact_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ ~(a is_quadratic_residue (mod p))\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 1)) (mod p)"), t311))
 }
 
 ///|
@@ -824,7 +824,7 @@ fn step_27() -> Unit raise {
   let t313 = @tactics.subgoal_then(@parser.parse_term("3 <= p /\\ ~(p = 0)"), @tactics.strip_assume_tac)
   let t312 = @simp.once_rewrite_tac(@list.List([@pocklington.cong_sym()]))
   let t373 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t312), t313), t323), t324), t325), t327), @tactics.strip_tac), t331), t332), t337), @tactics.ants_tac), t356), t358), t359), t365), t366), t369), t370), t371), t372)
-  quadratic_residue_fact_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ a is_quadratic_residue (mod p)\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 2)) (mod p)"), t373))
+  quadratic_residue_fact_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ a is_quadratic_residue (mod p)\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 2)) (mod p)"), t373))
 }
 
 ///|
@@ -861,7 +861,7 @@ fn step_28() -> Unit raise {
   })
   let t374 = @simp.once_rewrite_tac(@list.List([@pocklington.cong_sym()]))
   let t390 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t374), t384), t386), t388), t389)
-  wilson_lemma_c.set(@tactics.prove(@parser.parse_term("forall p. prime(p) ==> (FACT(p - 2) == 1) (mod p)"), t390))
+  wilson_lemma_c.set(@tactics.prove(@parser.parse_term("∀ p. prime(p) ==> (FACT(p - 2) == 1) (mod p)"), t390))
 }
 
 ///|
@@ -878,7 +878,7 @@ pub fn wilson_lemma() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let t391 = @meson.meson_tac(@list.List([@pocklington.cong_mult(), @arith.mult_clauses(), wilson_lemma(), @pocklington.cong_refl()]))
   let t392 = @tactics.then_tac(@simp.simp_tac(@list.List([@arith.fact(), @prime.prime_ge_2(), @int.arith_rule(@parser.parse_term("2 <= p ==> p - 1 = SUC(p - 2)"))])), t391)
-  wilson_imp_c.set(@tactics.prove(@parser.parse_term("forall p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)"), t392))
+  wilson_imp_c.set(@tactics.prove(@parser.parse_term("∀ p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)"), t392))
 }
 
 ///|
@@ -956,7 +956,7 @@ fn step_30() -> Unit raise {
   })
   let t393 = @simp.simp_tac(@list.List([wilson_imp()]))
   let t441 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("n:num")), @tactics.disch_tac), @tactics.eq_tac), t393), t399), t400), t406), t407), t408), t410), t411), t412), t413), t419), t420), t423), t427), t431), @tactics.disch_tac), t435), t440)
-  wilson_c.set(@tactics.prove(@parser.parse_term("forall p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))"), t441))
+  wilson_c.set(@tactics.prove(@parser.parse_term("∀ p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))"), t441))
 }
 
 ///|
@@ -990,7 +990,7 @@ fn step_31() -> Unit raise {
     t449(t448(x450))
   })
   let t455 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t451), t452), t453), t454)
-  euler_criterion_c.set(@tactics.prove(@parser.parse_term("forall a p. prime p /\\ coprime(a,p)\n         ==> (a EXP ((p - 1) DIV 2) ==\n              (if a is_quadratic_residue (mod p) then 1 else p - 1)) (mod p)"), t455))
+  euler_criterion_c.set(@tactics.prove(@parser.parse_term("∀ a p. prime p /\\ coprime(a,p)\n         ==> (a EXP ((p - 1) DIV 2) ==\n              (if a is_quadratic_residue (mod p) then 1 else p - 1)) (mod p)"), t455))
 }
 
 ///|
@@ -1298,7 +1298,7 @@ fn step_36() -> Unit raise {
   let t627 = @tactics.exists_tac(@parser.parse_term("p:num"))
   let t626 = @tactics.match_mp_tac(cong_cond_lemma())
   let t645 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t626), t627), @tactics.conj_tac), t644)
-  gauss_lemma_c.set(@tactics.prove(@parser.parse_term("forall a p r. prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n           ==> (a is_quadratic_residue (mod p) <=>\n                EVEN(CARD {x | x IN 1..r /\\ r < (a * x) MOD p}))"), t645))
+  gauss_lemma_c.set(@tactics.prove(@parser.parse_term("∀ a p r. prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n           ==> (a is_quadratic_residue (mod p) <=>\n                EVEN(CARD {x | x IN 1..r /\\ r < (a * x) MOD p}))"), t645))
 }
 
 ///|
@@ -1351,7 +1351,7 @@ fn step_37() -> Unit raise {
       s710(x711)
     }
   }, @list.List([@parser.parse_term("p:num"), t712]))
-  let t708 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r ==> r < m")))
+  let t708 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("∀ p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r ==> r < m")))
   let t715 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(fn(x705 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s706 = @tactics.subst_all_tac(x705)
     fn(x707 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1442,7 +1442,7 @@ fn step_37() -> Unit raise {
   let t649 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("q:num"), t648, t647]), gauss_lemma()))
   let t646 = @tactics.repeat_tac(@tactics.strip_tac)
   let t743 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@prime.coprime_sym()])), t646), t649), t650), t652), @tactics.ap_term_tac), t653), t654), @tactics.conj_tac), t742)
-  gauss_lemma_sym_c.set(@tactics.prove(@parser.parse_term("forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (q is_quadratic_residue (mod p) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   q * x < p * y /\\ p * y <= q * x + r}))"), t743))
+  gauss_lemma_sym_c.set(@tactics.prove(@parser.parse_term("∀ p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (q is_quadratic_residue (mod p) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   q * x < p * y /\\ p * y <= q * x + r}))"), t743))
 }
 
 ///|
@@ -1478,7 +1478,7 @@ fn step_38() -> Unit raise {
   let t746 = @parser.parse_term("p:num")
   let t747 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("q:num"), t746, t745, t744]), gauss_lemma_sym()))
   let t760 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t747), t748), t749), t753), @tactics.ap_term_tac), t757), @tactics.ap_term_tac), t758), t759)
-  gauss_lemma_sym_p_c.set(@tactics.prove(@parser.parse_term("forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (p is_quadratic_residue (mod q) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   p * y < q * x /\\ q * x <= p * y + s}))"), t760))
+  gauss_lemma_sym_p_c.set(@tactics.prove(@parser.parse_term("∀ p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (p is_quadratic_residue (mod q) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   p * y < q * x /\\ q * x <= p * y + s}))"), t760))
 }
 
 ///|
@@ -1545,7 +1545,7 @@ fn step_39() -> Unit raise {
     @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@equal.ap_term(@parser.parse_term("EVEN"), th)), t763), t764)
   })
   let t799 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t765), t766), t776), t783), t784), t789), t796), t797), t798)
-  reciprocity_set_lemma_c.set(@tactics.prove(@parser.parse_term("forall a b c d r s.\n        a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n        PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n        ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))"), t799))
+  reciprocity_set_lemma_c.set(@tactics.prove(@parser.parse_term("∀ a b c d r s.\n        a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n        PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n        ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))"), t799))
 }
 
 ///|
@@ -1636,7 +1636,7 @@ fn step_40() -> Unit raise {
   let t802 = @parser.parse_term("q:num")
   let t803 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p:num"), t802, t801, t800]), gauss_lemma_sym()))
   let t864 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t803), t807), t808), t809), t810), t814), t815), t816), t817), t818), t819), t863)
-  reciprocity_simple_c.set(@tactics.prove(@parser.parse_term("forall p q r s.\n        prime p /\\\n        prime q /\\\n        coprime (p,q) /\\\n        2 * r + 1 = p /\\\n        2 * s + 1 = q\n        ==> ((q is_quadratic_residue (mod p) <=>\n              p is_quadratic_residue (mod q)) <=>\n             ~(ODD r /\\ ODD s))"), t864))
+  reciprocity_simple_c.set(@tactics.prove(@parser.parse_term("∀ p q r s.\n        prime p /\\\n        prime q /\\\n        coprime (p,q) /\\\n        2 * r + 1 = p /\\\n        2 * s + 1 = q\n        ==> ((q is_quadratic_residue (mod p) <=>\n              p is_quadratic_residue (mod q)) <=>\n             ~(ODD r /\\ ODD s))"), t864))
 }
 
 ///|
@@ -1684,7 +1684,7 @@ fn step_41() -> Unit raise {
     }
   }, @list.List([@parser.parse_term("ODD q"), t868]))
   let t893 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t869), t870), t872), t873), t877), t878), t882), t883), t884), t886), t887), t888), t890), t891), t892)
-  reciprocity_legendre_c.set(@tactics.prove(@parser.parse_term("forall p q. prime p /\\ prime q /\\ ODD p /\\ ODD q /\\ ~(p = q)\n         ==> legendre(p,q) * legendre(q,p) =\n             --(&1) pow ((p - 1) DIV 2 * (q - 1) DIV 2)"), t893))
+  reciprocity_legendre_c.set(@tactics.prove(@parser.parse_term("∀ p q. prime p /\\ prime q /\\ ODD p /\\ ODD q /\\ ~(p = q)\n         ==> legendre(p,q) * legendre(q,p) =\n             --(&1) pow ((p - 1) DIV 2 * (q - 1) DIV 2)"), t893))
 }
 
 ///|

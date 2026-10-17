@@ -179,7 +179,7 @@ pub fn has_type_cases() -> @kernel.Thm {
 ///|
 /// has_type_RULES, has_type_INDUCT, has_type_CASES
 fn step_10() -> Unit raise {
-  let (has_type_rules, has_type_induct, has_type_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall n ty. (Var n ty) has_type ty) /\\\n   (forall ty. (Equal ty) has_type (Fun ty (Fun ty Bool))) /\\\n   (forall ty. (Select ty) has_type (Fun (Fun ty Bool) ty)) /\\\n   (forall s t dty rty. s has_type (Fun dty rty) /\\ t has_type dty\n                  ==> (Comb s t) has_type rty) /\\\n   (forall n dty t rty. t has_type rty ==> (Abs n dty t) has_type (Fun dty rty))"))
+  let (has_type_rules, has_type_induct, has_type_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ n ty. (Var n ty) has_type ty) /\\\n   (∀ ty. (Equal ty) has_type (Fun ty (Fun ty Bool))) /\\\n   (∀ ty. (Select ty) has_type (Fun (Fun ty Bool) ty)) /\\\n   (∀ s t dty rty. s has_type (Fun dty rty) /\\ t has_type dty\n                  ==> (Comb s t) has_type rty) /\\\n   (∀ n dty t rty. t has_type rty ==> (Abs n dty t) has_type (Fun dty rty))"))
   has_type_rules_c.set(has_type_rules)
   has_type_induct_c.set(has_type_induct)
   has_type_cases_c.set(has_type_cases)
@@ -220,7 +220,7 @@ pub fn typeof_() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([typeof_(), has_type_rules(), codomain()]))
   let t2 = @tactics.then_tac(@tactics.match_mp_tac(has_type_induct()), t1)
-  welltyped_lemma_c.set(@tactics.prove(@parser.parse_term("forall tm ty. tm has_type ty ==> (typeof tm = ty)"), t2))
+  welltyped_lemma_c.set(@tactics.prove(@parser.parse_term("∀ tm ty. tm has_type ty ==> (typeof tm = ty)"), t2))
 }
 
 ///|
@@ -237,7 +237,7 @@ pub fn welltyped_lemma() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([welltyped_lemma()]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([welltyped()])), t3)
-  welltyped_v1_c.set(@tactics.prove(@parser.parse_term("forall tm. welltyped tm <=> tm has_type (typeof tm)"), t4))
+  welltyped_v1_c.set(@tactics.prove(@parser.parse_term("∀ tm. welltyped tm <=> tm has_type (typeof tm)"), t4))
 }
 
 ///|
@@ -275,7 +275,7 @@ fn step_15() -> Unit raise {
   }, @list.List([has_type_cases()])), t16)
   let t5 = @simp.rewrite_tac(@list.List([welltyped()]))
   let t20 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5), t17), t18), t19)
-  welltyped_clauses_c.set(@tactics.prove(@parser.parse_term("(forall n ty. welltyped(Var n ty)) /\\\n   (forall ty. welltyped(Equal ty)) /\\\n   (forall ty. welltyped(Select ty)) /\\\n   (forall s t. welltyped (Comb s t) <=>\n            welltyped s /\\ welltyped t /\\\n            ?rty. typeof s = Fun (typeof t) rty) /\\\n   (forall n ty t. welltyped (Abs n ty t) = welltyped t)"), t20))
+  welltyped_clauses_c.set(@tactics.prove(@parser.parse_term("(∀ n ty. welltyped(Var n ty)) /\\\n   (∀ ty. welltyped(Equal ty)) /\\\n   (∀ ty. welltyped(Select ty)) /\\\n   (∀ s t. welltyped (Comb s t) <=>\n            welltyped s /\\ welltyped t /\\\n            ?rty. typeof s = Fun (typeof t) rty) /\\\n   (∀ n ty t. welltyped (Abs n ty t) = welltyped t)"), t20))
 }
 
 ///|
@@ -362,7 +362,7 @@ fn step_18() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([term_distinct(), term_inj()]))
   let t21 = @simp.once_rewrite_tac(@list.List([has_type_cases()]))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([equation()])), t21), t22), t23), t24), t25), t37), t38), t39), t40), t53), t54), t55)
-  equation_has_type_bool_c.set(@tactics.prove(@parser.parse_term("forall s t. (s === t) has_type Bool\n         <=> welltyped s /\\ welltyped t /\\ (typeof s = typeof t)"), t56))
+  equation_has_type_bool_c.set(@tactics.prove(@parser.parse_term("∀ s t. (s === t) has_type Bool\n         <=> welltyped s /\\ welltyped t /\\ (typeof s = typeof t)"), t56))
 }
 
 ///|
@@ -419,7 +419,7 @@ pub fn raconv_cases() -> @kernel.Thm {
 ///|
 /// RACONV_RULES, RACONV_INDUCT, RACONV_CASES
 fn step_20() -> Unit raise {
-  let (raconv_rules, raconv_induct, raconv_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall env x1 ty1 x2 ty2.\n       ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n       ==> RACONV env (Var x1 ty1,Var x2 ty2)) /\\\n  (forall env ty. RACONV env (Equal ty,Equal ty)) /\\\n  (forall env ty. RACONV env (Select ty,Select ty)) /\\\n  (forall env s1 t1 s2 t2.\n       RACONV env (s1,s2) /\\ RACONV env (t1,t2)\n       ==> RACONV env (Comb s1 t1,Comb s2 t2)) /\\\n  (forall env x1 ty1 t1 x2 ty2 t2.\n       (ty1 = ty2) /\\ RACONV (CONS ((Var x1 ty1),(Var x2 ty2)) env) (t1,t2)\n       ==> RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2))"))
+  let (raconv_rules, raconv_induct, raconv_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ env x1 ty1 x2 ty2.\n       ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n       ==> RACONV env (Var x1 ty1,Var x2 ty2)) /\\\n  (∀ env ty. RACONV env (Equal ty,Equal ty)) /\\\n  (∀ env ty. RACONV env (Select ty,Select ty)) /\\\n  (∀ env s1 t1 s2 t2.\n       RACONV env (s1,s2) /\\ RACONV env (t1,t2)\n       ==> RACONV env (Comb s1 t1,Comb s2 t2)) /\\\n  (∀ env x1 ty1 t1 x2 ty2 t2.\n       (ty1 = ty2) /\\ RACONV (CONS ((Var x1 ty1),(Var x2 ty2)) env) (t1,t2)\n       ==> RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2))"))
   raconv_rules_c.set(raconv_rules)
   raconv_induct_c.set(raconv_induct)
   raconv_cases_c.set(raconv_cases)
@@ -472,7 +472,7 @@ fn step_23() -> Unit raise {
   let t65 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t64 = @simp.rewrite_tac(@list.List([@lists.all(), alphavars()]))
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t64), t65), t66), t67)
-  alphavars_refl_c.set(@tactics.prove(@parser.parse_term("forall env t. ALL (\\(s,t). s = t) env ==> ALPHAVARS env (t,t)"), t68))
+  alphavars_refl_c.set(@tactics.prove(@parser.parse_term("∀ env t. ALL (\\(s,t). s = t) env ==> ALPHAVARS env (t,t)"), t68))
 }
 
 ///|
@@ -497,7 +497,7 @@ fn step_24() -> Unit raise {
   let t70 = @tactics.repeat_tac(@tactics.strip_tac)
   let t69 = @simp.rewrite_tac(@list.List([raconv()]))
   let t78 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t69), t70), t77)
-  raconv_refl_c.set(@tactics.prove(@parser.parse_term("forall t env. ALL (\\(s,t). s = t) env ==> RACONV env (t,t)"), t78))
+  raconv_refl_c.set(@tactics.prove(@parser.parse_term("∀ t env. ALL (\\(s,t). s = t) env ==> RACONV env (t,t)"), t78))
 }
 
 ///|
@@ -514,7 +514,7 @@ pub fn raconv_refl() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t79 = @simp.simp_tac(@list.List([raconv_refl(), @lists.all()]))
   let t80 = @tactics.then_tac(@simp.rewrite_tac(@list.List([aconv()])), t79)
-  aconv_refl_c.set(@tactics.prove(@parser.parse_term("forall t. ACONV t t"), t80))
+  aconv_refl_c.set(@tactics.prove(@parser.parse_term("∀ t. ACONV t t"), t80))
 }
 
 ///|
@@ -535,7 +535,7 @@ fn step_26() -> Unit raise {
   let t82 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t81 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), alphavars(), @lists.all(), @pair.pair_eq()]))
   let t86 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t81), t82), @tactics.conj_tac), t83), t84), t85)
-  alphavars_type_c.set(@tactics.prove(@parser.parse_term("forall env s t. ALPHAVARS env (s,t) /\\\n             ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                          (typeof x = typeof y)) env /\\\n             welltyped s /\\ welltyped t\n           ==> (typeof s = typeof t)"), t86))
+  alphavars_type_c.set(@tactics.prove(@parser.parse_term("∀ env s t. ALPHAVARS env (s,t) /\\\n             ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                          (typeof x = typeof y)) env /\\\n             welltyped s /\\ welltyped t\n           ==> (typeof s = typeof t)"), t86))
 }
 
 ///|
@@ -563,7 +563,7 @@ fn step_27() -> Unit raise {
   let t88 = @tactics.repeat_tac(@tactics.strip_tac)
   let t87 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), typeof_()]))
   let t99 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(raconv_induct()), t87), t88), t98)
-  raconv_type_c.set(@tactics.prove(@parser.parse_term("forall env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))"), t99))
+  raconv_type_c.set(@tactics.prove(@parser.parse_term("∀ env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))"), t99))
 }
 
 ///|
@@ -583,7 +583,7 @@ fn step_28() -> Unit raise {
   let t100 = @parser.parse_term("(s:term,t:term)")
   let t101 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("[]:(term#term)list"), t100]), raconv_type()))
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t101), t102), t103)
-  aconv_type_c.set(@tactics.prove(@parser.parse_term("forall s t. ACONV s t ==> welltyped s /\\ welltyped t ==> (typeof s = typeof t)"), t104))
+  aconv_type_c.set(@tactics.prove(@parser.parse_term("∀ s t. ACONV s t ==> welltyped s /\\ welltyped t ==> (typeof s = typeof t)"), t104))
 }
 
 ///|
@@ -617,7 +617,7 @@ fn step_30() -> Unit raise {
   let t106 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t105 = @tactics.repeat_tac(@tactics.gen_tac)
   let t108 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([term_union(), @lists.mem()]))), @pair.let_tac), t105), @class.cond_cases_tac), t106), t107)
-  term_union_nonew_c.set(@tactics.prove(@parser.parse_term("forall l1 l2 x. MEM x (TERM_UNION l1 l2) ==> MEM x l1 \\/ MEM x l2"), t108))
+  term_union_nonew_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2 x. MEM x (TERM_UNION l1 l2) ==> MEM x l1 \\/ MEM x l2"), t108))
 }
 
 ///|
@@ -637,7 +637,7 @@ fn step_31() -> Unit raise {
   let t110 = @tactics.repeat_tac(@tactics.gen_tac)
   let t109 = @list.List([@meson.meson_tac(@list.List([aconv_refl()])), @tactics.all_tac])
   let t113 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([term_union(), @lists.mem(), @equal.gsym(@lists.ex_mem())]))), t109), t110), @pair.let_tac), @class.cond_cases_tac), @tactics.strip_tac), t111), t112)
-  term_union_thm_c.set(@tactics.prove(@parser.parse_term("forall l1 l2 x. MEM x l1 \\/ MEM x l2\n             ==> ?y. MEM y (TERM_UNION l1 l2) /\\ ACONV x y"), t113))
+  term_union_thm_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2 x. MEM x l1 \\/ MEM x l2\n             ==> ?y. MEM y (TERM_UNION l1 l2) /\\ ACONV x y"), t113))
 }
 
 ///|
@@ -695,7 +695,7 @@ fn step_34() -> Unit raise {
   let t117 = @simp.rewrite_tac(@list.List([@pair.pair_eq(), term_inj(), @lists.mem()]))
   let t116 = @simp.rewrite_tac(@list.List([vfree_in(), term_distinct()]))
   let t126 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(raconv_induct()), t116), t117), @tactics.conj_tac), t118), t119), t120), t121), @tactics.conj_tac), t122), t123), t124), t125)
-  vfree_in_raconv_c.set(@tactics.prove(@parser.parse_term("forall env p. RACONV env p\n           ==> forall x ty. VFREE_IN (Var x ty) (FST p) /\\\n                      ~(?y. MEM (Var x ty,y) env) <=>\n                      VFREE_IN (Var x ty) (SND p) /\\\n                      ~(?y. MEM (y,Var x ty) env)"), t126))
+  vfree_in_raconv_c.set(@tactics.prove(@parser.parse_term("∀ env p. RACONV env p\n           ==> ∀ x ty. VFREE_IN (Var x ty) (FST p) /\\\n                      ~(?y. MEM (Var x ty,y) env) <=>\n                      VFREE_IN (Var x ty) (SND p) /\\\n                      ~(?y. MEM (y,Var x ty) env)"), t126))
 }
 
 ///|
@@ -722,7 +722,7 @@ fn step_35() -> Unit raise {
   })
   let t127 = @simp.rewrite_tac(@list.List([aconv()]))
   let t135 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t127), t133), t134)
-  vfree_in_aconv_c.set(@tactics.prove(@parser.parse_term("forall s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)"), t135))
+  vfree_in_aconv_c.set(@tactics.prove(@parser.parse_term("∀ s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)"), t135))
 }
 
 ///|
@@ -773,7 +773,7 @@ fn step_38() -> Unit raise {
   let t139 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | a = x} = {a}")), t138, t137]))
   let t136 = @simp.rewrite_tac(@list.List([vfree_in()]))
   let t141 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t136), t139), t140)
-  vfree_in_finite_c.set(@tactics.prove(@parser.parse_term("forall t. FINITE {x | VFREE_IN x t}"), t141))
+  vfree_in_finite_c.set(@tactics.prove(@parser.parse_term("∀ t. FINITE {x | VFREE_IN x t}"), t141))
 }
 
 ///|
@@ -797,7 +797,7 @@ fn step_39() -> Unit raise {
   let t143 = @tactics.exists_tac(@parser.parse_term("IMAGE (\\(Var x ty). x) {x | VFREE_IN x t}"))
   let t142 = @tactics.match_mp_tac(@sets.finite_subset())
   let t150 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t142), t143), t144), t145), t146), @tactics.disch_tac), t147), t148), t149)
-  vfree_in_finite_alt_c.set(@tactics.prove(@parser.parse_term("forall t ty. FINITE {x | VFREE_IN (Var x ty) t}"), t150))
+  vfree_in_finite_alt_c.set(@tactics.prove(@parser.parse_term("∀ t ty. FINITE {x | VFREE_IN (Var x ty) t}"), t150))
 }
 
 ///|
@@ -842,7 +842,7 @@ fn step_40() -> Unit raise {
   let t151 = @parser.parse_term("ty:type")
   let t152 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("t:term"), t151]), vfree_in_finite_alt()))
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t152), t158), t164), t170), t171)
-  variant_exists_c.set(@tactics.prove(@parser.parse_term("forall t x:string ty. ?x'. ~(VFREE_IN (Var x' ty) t)"), t172))
+  variant_exists_c.set(@tactics.prove(@parser.parse_term("∀ t x:string ty. ?x'. ~(VFREE_IN (Var x' ty) t)"), t172))
 }
 
 ///|
@@ -1029,7 +1029,7 @@ fn step_43() -> Unit raise {
   let t175 = @tactics.repeat_tac(@tactics.conj_tac)
   let t174 = @simp.rewrite_tac(@list.List([vsubst()]))
   let t281 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t174), t175), t241), t244), @tactics.disch_tac), t246), @tactics.strip_tac), @pair.let_tac), @pair.let_tac), t253), t254), t255), t259), t266), @tactics.disch_tac), @class.cond_cases_tac), t267), t268), t269), t270), t271), t276), t277), t278), t279), t280)
-  vsubst_has_type_c.set(@tactics.prove(@parser.parse_term("forall tm ty ilist.\n        tm has_type ty /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> (VSUBST ilist tm) has_type ty"), t281))
+  vsubst_has_type_c.set(@tactics.prove(@parser.parse_term("∀ tm ty ilist.\n        tm has_type ty /\\\n        (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> (VSUBST ilist tm) has_type ty"), t281))
 }
 
 ///|
@@ -1045,7 +1045,7 @@ pub fn vsubst_has_type() -> @kernel.Thm {
 /// VSUBST_WELLTYPED
 fn step_44() -> Unit raise {
   let t282 = @meson.meson_tac(@list.List([vsubst_has_type(), welltyped()]))
-  vsubst_welltyped_c.set(@tactics.prove(@parser.parse_term("forall tm ty ilist.\n        welltyped tm /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)"), t282))
+  vsubst_welltyped_c.set(@tactics.prove(@parser.parse_term("∀ tm ty ilist.\n        welltyped tm /\\\n        (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)"), t282))
 }
 
 ///|
@@ -1072,7 +1072,7 @@ fn step_45() -> Unit raise {
   let t284 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t283 = @simp.rewrite_tac(@list.List([rev_assocd(), @lists.filter(), @class.cond_id()]))
   let t294 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t283), t284), t285), t288), t289), t290), t291), t292), t293)
-  rev_assocd_filter_c.set(@tactics.prove(@parser.parse_term("forall l:(B#A)list a b d.\n        REV_ASSOCD a (FILTER (\\(y,x). P x) l) b =\n            if P a then REV_ASSOCD a l b else b"), t294))
+  rev_assocd_filter_c.set(@tactics.prove(@parser.parse_term("∀ l:(B#A)list a b d.\n        REV_ASSOCD a (FILTER (\\(y,x). P x) l) b =\n            if P a then REV_ASSOCD a l b else b"), t294))
 }
 
 ///|
@@ -1160,7 +1160,7 @@ fn step_46() -> Unit raise {
   let t296 = @tactics.repeat_tac(@tactics.conj_tac)
   let t295 = @simp.rewrite_tac(@list.List([vfree_in(), vsubst(), term_distinct()]))
   let t356 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t295), t296), t300), t303), @tactics.disch_tac), t304), @pair.let_tac), @pair.let_tac), @class.cond_cases_tac), t305), t306), t313), t314), t315), t316), t317), t318), t319), t320), t321), t325), t330), t331), t338), t345), t346), t348), t349), t350), t351), t352), t353), t354), t355)
-  vfree_in_vsubst_c.set(@tactics.prove(@parser.parse_term("forall tm u uty ilist.\n      VFREE_IN (Var u uty) (VSUBST ilist tm) <=>\n        ?y ty. VFREE_IN (Var y ty) tm /\\\n               VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty))"), t356))
+  vfree_in_vsubst_c.set(@tactics.prove(@parser.parse_term("∀ tm u uty ilist.\n      VFREE_IN (Var u uty) (VSUBST ilist tm) <=>\n        ?y ty. VFREE_IN (Var y ty) tm /\\\n               VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty))"), t356))
 }
 
 ///|
@@ -1332,7 +1332,7 @@ fn step_55() -> Unit raise {
   let t368 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t358])), t359), t360), t363), t364), t365), @class.cond_cases_tac), t366), t367), @tactics.all_tac])
   let t357 = @simp.rewrite_tac(@list.List([vsubst(), sizeof_()]))
   let t381 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t357), @tactics.conj_tac), t368), @tactics.conj_tac), t369), t372), @tactics.disch_tac), t373), @tactics.disch_tac), @pair.let_tac), @pair.let_tac), @class.cond_cases_tac), t374), t375), t376), t377), t378), t379), t380)
-  sizeof_vsubst_c.set(@tactics.prove(@parser.parse_term("forall t ilist. (forall s' s. MEM (s',s) ilist ==> ?x ty. s' = Var x ty)\n             ==> (sizeof (VSUBST ilist t) = sizeof t)"), t381))
+  sizeof_vsubst_c.set(@tactics.prove(@parser.parse_term("∀ t ilist. (∀ s' s. MEM (s',s) ilist ==> ?x ty. s' = Var x ty)\n             ==> (sizeof (VSUBST ilist t) = sizeof t)"), t381))
 }
 
 ///|
@@ -1357,7 +1357,7 @@ fn step_56() -> Unit raise {
       @tactics.match_mp_tac(@bool.disch_all(@define.pure_prove_recursive_function_exists(w)))
     })(x384)(x384)
   }, @tactics.exists_tac(@parser.parse_term("MEASURE(\\(env:(term#term)list,tyin:(type#type)list,t).\n                        sizeof t)"))), t385), t386), t387), t388), @int.arith_tac)
-  inst_core_exists_c.set(@tactics.prove(@parser.parse_term("?INST_CORE.\n  (forall env tyin x ty.\n        INST_CORE env tyin (Var x ty) =\n          let tm = Var x ty\n          and tm' = Var x (TYPE_SUBST tyin ty) in\n         if REV_ASSOCD tm' env tm = tm then Result tm' else Clash tm') /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Equal ty) = Result(Equal(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Select ty) = Result(Select(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin s t.\n        INST_CORE env tyin (Comb s t) =\n            let sres = INST_CORE env tyin s in\n            if IS_CLASH sres then sres else\n            let tres = INST_CORE env tyin t in\n            if IS_CLASH tres then tres else\n            let s' = RESULT sres and t' = RESULT tres in\n            Result (Comb s' t')) /\\\n  (forall env tyin x ty t.\n        INST_CORE env tyin (Abs x ty t) =\n            let ty' = TYPE_SUBST tyin ty in\n            let env' = CONS (Var x ty,Var x ty') env in\n            let tres = INST_CORE env' tyin t in\n            if IS_RESULT tres then Result(Abs x ty' (RESULT tres)) else\n            let w = CLASH tres in\n            if ~(w = Var x ty') then tres else\n            let x' = VARIANT (RESULT(INST_CORE [] tyin t)) x ty' in\n            INST_CORE env tyin (Abs x' ty (VSUBST [Var x' ty,Var x ty] t)))"), t389))
+  inst_core_exists_c.set(@tactics.prove(@parser.parse_term("?INST_CORE.\n  (∀ env tyin x ty.\n        INST_CORE env tyin (Var x ty) =\n          let tm = Var x ty\n          and tm' = Var x (TYPE_SUBST tyin ty) in\n         if REV_ASSOCD tm' env tm = tm then Result tm' else Clash tm') /\\\n  (∀ env tyin ty.\n        INST_CORE env tyin (Equal ty) = Result(Equal(TYPE_SUBST tyin ty))) /\\\n  (∀ env tyin ty.\n        INST_CORE env tyin (Select ty) = Result(Select(TYPE_SUBST tyin ty))) /\\\n  (∀ env tyin s t.\n        INST_CORE env tyin (Comb s t) =\n            let sres = INST_CORE env tyin s in\n            if IS_CLASH sres then sres else\n            let tres = INST_CORE env tyin t in\n            if IS_CLASH tres then tres else\n            let s' = RESULT sres and t' = RESULT tres in\n            Result (Comb s' t')) /\\\n  (∀ env tyin x ty t.\n        INST_CORE env tyin (Abs x ty t) =\n            let ty' = TYPE_SUBST tyin ty in\n            let env' = CONS (Var x ty,Var x ty') env in\n            let tres = INST_CORE env' tyin t in\n            if IS_RESULT tres then Result(Abs x ty' (RESULT tres)) else\n            let w = CLASH tres in\n            if ~(w = Var x ty') then tres else\n            let x' = VARIANT (RESULT(INST_CORE [] tyin t)) x ty' in\n            INST_CORE env tyin (Abs x' ty (VSUBST [Var x' ty,Var x ty] t)))"), t389))
 }
 
 ///|
@@ -1404,7 +1404,7 @@ pub fn inst_def() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   let t390 = @simp.rewrite_tac(@list.List([is_result(), is_clash()]))
   let t391 = @tactics.then_tac(@tactics.match_mp_tac(result_induct()), t390)
-  not_is_result_c.set(@tactics.prove(@parser.parse_term("forall r. ~(IS_RESULT r) <=> IS_CLASH r"), t391))
+  not_is_result_c.set(@tactics.prove(@parser.parse_term("∀ r. ~(IS_RESULT r) <=> IS_CLASH r"), t391))
 }
 
 ///|
@@ -1468,7 +1468,7 @@ pub fn proves_cases() -> @kernel.Thm {
 ///|
 /// prove_RULES, proves_INDUCT, proves_CASES
 fn step_62() -> Unit raise {
-  let (prove_rules, proves_induct, proves_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall t. welltyped t ==> [] |- t === t) /\\\n  (forall asl1 asl2 l m1 m2 r.\n        asl1 |- l === m1 /\\ asl2 |- m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |- l === r) /\\\n  (forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |- l1 === r1 /\\ asl2 |- l2 === r2 /\\ welltyped(Comb l1 l2)\n        ==> TERM_UNION asl1 asl2 |- Comb l1 l2 === Comb r1 r2) /\\\n  (forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |- l === r\n        ==> asl |- (Abs x ty l) === (Abs x ty r)) /\\\n  (forall x ty t. welltyped t ==> [] |- Comb (Abs x ty t) (Var x ty) === t) /\\\n  (forall p. p has_type Bool ==> [p] |- p) /\\\n  (forall asl1 asl2 p q p'.\n        asl1 |- p === q /\\ asl2 |- p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |- q) /\\\n  (forall asl1 asl2 c1 c2.\n        asl1 |- c1 /\\ asl2 |- c2\n        ==> TERM_UNION (FILTER((~) o ACONV c2) asl1)\n                       (FILTER((~) o ACONV c1) asl2)\n               |- c1 === c2) /\\\n  (forall tyin asl p. asl |- p ==> MAP (INST tyin) asl |- INST tyin p) /\\\n  (forall ilist asl p.\n      (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty) /\\\n      asl |- p ==> MAP (VSUBST ilist) asl |- VSUBST ilist p)"))
+  let (prove_rules, proves_induct, proves_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ t. welltyped t ==> [] |- t === t) /\\\n  (∀ asl1 asl2 l m1 m2 r.\n        asl1 |- l === m1 /\\ asl2 |- m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |- l === r) /\\\n  (∀ asl1 l1 r1 asl2 l2 r2.\n        asl1 |- l1 === r1 /\\ asl2 |- l2 === r2 /\\ welltyped(Comb l1 l2)\n        ==> TERM_UNION asl1 asl2 |- Comb l1 l2 === Comb r1 r2) /\\\n  (∀ asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |- l === r\n        ==> asl |- (Abs x ty l) === (Abs x ty r)) /\\\n  (∀ x ty t. welltyped t ==> [] |- Comb (Abs x ty t) (Var x ty) === t) /\\\n  (∀ p. p has_type Bool ==> [p] |- p) /\\\n  (∀ asl1 asl2 p q p'.\n        asl1 |- p === q /\\ asl2 |- p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |- q) /\\\n  (∀ asl1 asl2 c1 c2.\n        asl1 |- c1 /\\ asl2 |- c2\n        ==> TERM_UNION (FILTER((~) o ACONV c2) asl1)\n                       (FILTER((~) o ACONV c1) asl2)\n               |- c1 === c2) /\\\n  (∀ tyin asl p. asl |- p ==> MAP (INST tyin) asl |- INST tyin p) /\\\n  (∀ ilist asl p.\n      (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty) /\\\n      asl |- p ==> MAP (VSUBST ilist) asl |- VSUBST ilist p)"))
   prove_rules_c.set(prove_rules)
   proves_induct_c.set(proves_induct)
   proves_cases_c.set(proves_cases)

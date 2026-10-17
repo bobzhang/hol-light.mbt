@@ -482,7 +482,7 @@ fn step_18() -> Unit raise {
 /// FCT1_WEAK
 fn step_19() -> Unit raise {
   let t91 = @meson.meson_tac(@list.List([@transc.ftc1()]))
-  fct1_weak_c.set(@tactics.prove(@parser.parse_term("(forall x. (f diffl f'(x)) x) ==> forall x. &0 <= x ==> defint(&0,x) f' (f x - f(&0))"), t91))
+  fct1_weak_c.set(@tactics.prove(@parser.parse_term("(∀ x. (f diffl f'(x)) x) ==> ∀ x. &0 <= x ==> defint(&0,x) f' (f x - f(&0))"), t91))
 }
 
 ///|

@@ -36,7 +36,7 @@ fn step_1() -> Unit raise {
   let t2 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1 = @simp.rewrite_tac(@list.List([@theorems.right_imp_forall_thm()]))
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), t1), t2), t9), t10), t11), t15), t23), t24), t25)
-  nsqrt_2_c.set(@tactics.prove(@parser.parse_term("forall p q. p * p = 2 * q * q ==> q = 0"), t26))
+  nsqrt_2_c.set(@tactics.prove(@parser.parse_term("∀ p q. p * p = 2 * q * q ==> q = 0"), t26))
 }
 
 ///|

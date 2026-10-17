@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   multiplicative_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "multiplicative f <=>\n     f(1) = 1 /\\ forall m n. coprime(m,n) ==> f(m * n) = f(m) * f(n)",
+        "multiplicative f <=>\n     f(1) = 1 /\\ ∀ m n. coprime(m,n) ==> f(m * n) = f(m) * f(n)",
       ),
     ),
   )
@@ -27,7 +27,7 @@ pub fn multiplicative() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([multiplicative()]))
   multiplicative_1_c.set(
-    @tactics.prove(@parser.parse_term("forall f. multiplicative f ==> f(1) = 1"), t1),
+    @tactics.prove(@parser.parse_term("∀ f. multiplicative f ==> f(1) = 1"), t1),
   )
 }
 
@@ -98,7 +98,7 @@ fn step_3() -> Unit raise {
   multiplicative_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "multiplicative f <=>\n        f(1) = 1 /\\\n        forall m n. ~(m = 0) /\\ ~(n = 0) /\\ coprime(m,n) ==> f(m * n) = f(m) * f(n)",
+        "multiplicative f <=>\n        f(1) = 1 /\\\n        ∀ m n. ~(m = 0) /\\ ~(n = 0) /\\ coprime(m,n) ==> f(m * n) = f(m) * f(n)",
       ),
       t11,
     ),
@@ -271,7 +271,7 @@ fn step_4() -> Unit raise {
   multiplicative_ignorezero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. ~(n = 0) ==> g(n) = f(n)) /\\ multiplicative f\n         ==> multiplicative g",
+        "∀ f g. (∀ n. ~(n = 0) ==> g(n) = f(n)) /\\ multiplicative f\n         ==> multiplicative g",
       ),
       t26,
     ),
@@ -1066,7 +1066,7 @@ fn step_5() -> Unit raise {
   multiplicative_expand_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f n.\n       multiplicative f /\\ ~(n = 0)\n       ==> f n = nproduct {p | prime p /\\ p divides n}\n                          (\\p. f(p EXP index p n))",
+        "∀ f n.\n       multiplicative f /\\ ~(n = 0)\n       ==> f n = nproduct {p | prime p /\\ p divides n}\n                          (\\p. f(p EXP index p n))",
       ),
       t86,
     ),
@@ -1734,7 +1734,7 @@ fn step_6() -> Unit raise {
   multiplicative_convolution_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. multiplicative f /\\ multiplicative g\n         ==> multiplicative (\\n. nsum {d | d divides n}\n                                      (\\d. f(d) * g(n DIV d)))",
+        "∀ f g. multiplicative f /\\ multiplicative g\n         ==> multiplicative (\\n. nsum {d | d divides n}\n                                      (\\d. f(d) * g(n DIV d)))",
       ),
       t169,
     ),
@@ -1769,7 +1769,7 @@ fn step_7() -> Unit raise {
   )
   multiplicative_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c. multiplicative(\\n. c) <=> c = 1"),
+      @parser.parse_term("∀ c. multiplicative(\\n. c) <=> c = 1"),
       t172,
     ),
   )
@@ -1832,7 +1832,7 @@ fn step_9() -> Unit raise {
   multiplicative_divisorsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. multiplicative f ==> multiplicative (\\n. nsum {d | d divides n} f)",
+        "∀ f. multiplicative f ==> multiplicative (\\n. nsum {d | d divides n} f)",
       ),
       t177,
     ),
@@ -1886,7 +1886,7 @@ fn step_11() -> Unit raise {
   multiplicative_powersum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall k. multiplicative(\\n. nsum {d | d divides n} (\\d. d EXP k))",
+        "∀ k. multiplicative(\\n. nsum {d | d divides n} (\\d. d EXP k))",
       ),
       t180,
     ),
@@ -2068,7 +2068,7 @@ fn step_17() -> Unit raise {
   )
   multiplicative_gcd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. multiplicative(\\m. gcd(n,m))"),
+      @parser.parse_term("∀ n. multiplicative(\\m. gcd(n,m))"),
       t189,
     ),
   )
@@ -2177,7 +2177,7 @@ fn step_18() -> Unit raise {
   phi_expand_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. phi n = if n = 0 then 0\n               else nproduct {p | prime p /\\ p divides n}\n                             (\\p. p EXP (index p n - 1) * (p - 1))",
+        "∀ n. phi n = if n = 0 then 0\n               else nproduct {p | prime p /\\ p divides n}\n                             (\\p. p EXP (index p n - 1) * (p - 1))",
       ),
       t202,
     ),
@@ -2358,7 +2358,7 @@ fn step_19() -> Unit raise {
   multiplicative_unique_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. multiplicative f /\\ multiplicative g /\\\n         (forall p k. prime p ==> f(p EXP k) = g(p EXP k))\n         ==> forall n. ~(n = 0) ==> f n = g n",
+        "∀ f g. multiplicative f /\\ multiplicative g /\\\n         (∀ p k. prime p ==> f(p EXP k) = g(p EXP k))\n         ==> ∀ n. ~(n = 0) ==> f n = g n",
       ),
       t221,
     ),
@@ -2490,7 +2490,7 @@ fn step_20() -> Unit raise {
   phi_divisorsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. ~(n = 0) ==> nsum {d | d divides n} (\\d. phi(d)) = n",
+        "∀ n. ~(n = 0) ==> nsum {d | d divides n} (\\d. phi(d)) = n",
       ),
       t235,
     ),
@@ -2512,7 +2512,7 @@ fn step_21() -> Unit raise {
   real_multiplicative_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "real_multiplicative (f:num->real) <=>\n     f(1) = &1 /\\ forall m n. coprime(m,n) ==> f(m * n) = f(m) * f(n)",
+        "real_multiplicative (f:num->real) <=>\n     f(1) = &1 /\\ ∀ m n. coprime(m,n) ==> f(m * n) = f(m) * f(n)",
       ),
     ),
   )
@@ -2597,7 +2597,7 @@ fn step_22() -> Unit raise {
   real_multiplicative_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "real_multiplicative f <=>\n        f(1) = &1 /\\\n        forall m n. ~(m = 0) /\\ ~(n = 0) /\\ coprime(m,n) ==> f(m * n) = f(m) * f(n)",
+        "real_multiplicative f <=>\n        f(1) = &1 /\\\n        ∀ m n. ~(m = 0) /\\ ~(n = 0) /\\ coprime(m,n) ==> f(m * n) = f(m) * f(n)",
       ),
       t245,
     ),
@@ -2632,7 +2632,7 @@ fn step_23() -> Unit raise {
   )
   real_multiplicative_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c. real_multiplicative(\\n. c) <=> c = &1"),
+      @parser.parse_term("∀ c. real_multiplicative(\\n. c) <=> c = &1"),
       t248,
     ),
   )
@@ -2832,7 +2832,7 @@ fn step_25() -> Unit raise {
   real_multiplicative_ignorezero_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. ~(n = 0) ==> g(n) = f(n)) /\\ real_multiplicative f\n         ==> real_multiplicative g",
+        "∀ f g. (∀ n. ~(n = 0) ==> g(n) = f(n)) /\\ real_multiplicative f\n         ==> real_multiplicative g",
       ),
       t264,
     ),
@@ -3494,7 +3494,7 @@ fn step_26() -> Unit raise {
   real_multiplicative_convolution_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. real_multiplicative f /\\ real_multiplicative g\n         ==> real_multiplicative (\\n. sum {d | d divides n}\n                                          (\\d. f(d) * g(n DIV d)))",
+        "∀ f g. real_multiplicative f /\\ real_multiplicative g\n         ==> real_multiplicative (\\n. sum {d | d divides n}\n                                          (\\d. f(d) * g(n DIV d)))",
       ),
       t345,
     ),
@@ -3536,7 +3536,7 @@ fn step_27() -> Unit raise {
   real_multiplicative_divisorsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f. real_multiplicative f\n       ==> real_multiplicative (\\n. sum {d | d divides n} f)",
+        "∀ f. real_multiplicative f\n       ==> real_multiplicative (\\n. sum {d | d divides n} f)",
       ),
       t349,
     ),
@@ -3592,7 +3592,7 @@ fn step_30() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("~(?x. P x /\\ Q x) <=> forall x. P x ==> ~Q x"),
+        @parser.parse_term("~(?x. P x /\\ Q x) <=> ∀ x. P x ==> ~Q x"),
       ),
     ]),
   )
@@ -3606,7 +3606,7 @@ fn step_30() -> Unit raise {
   mobius_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. mobius(n) = if ?p. prime p /\\ (p EXP 2) divides n then &0\n                   else --(&1) pow CARD {p | prime p /\\ p divides n}",
+        "∀ n. mobius(n) = if ?p. prime p /\\ (p EXP 2) divides n then &0\n                   else --(&1) pow CARD {p | prime p /\\ p divides n}",
       ),
       t353,
     ),
@@ -3718,7 +3718,7 @@ fn step_33() -> Unit raise {
     t361,
   )
   real_abs_mobius_c.set(
-    @tactics.prove(@parser.parse_term("forall n. abs(mobius n) <= &1"), t362),
+    @tactics.prove(@parser.parse_term("∀ n. abs(mobius n) <= &1"), t362),
   )
 }
 
@@ -3887,7 +3887,7 @@ fn step_34() -> Unit raise {
   mobius_mult_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall a b. coprime(a,b) ==> mobius(a * b) = mobius a * mobius b",
+        "∀ a b. coprime(a,b) ==> mobius(a * b) = mobius a * mobius b",
       ),
       t384,
     ),
@@ -4001,7 +4001,7 @@ fn step_36() -> Unit raise {
   )
   mobius_prime_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. prime p ==> mobius(p) = -- &1"),
+      @parser.parse_term("∀ p. prime p ==> mobius(p) = -- &1"),
       t394,
     ),
   )
@@ -4047,7 +4047,7 @@ fn step_37() -> Unit raise {
   mobius_primepow_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall p k. prime p ==> mobius(p EXP k) = if k = 0 then &1\n                                       else if k = 1 then -- &1\n                                       else &0",
+        "∀ p k. prime p ==> mobius(p EXP k) = if k = 0 then &1\n                                       else if k = 1 then -- &1\n                                       else &0",
       ),
       t399,
     ),
@@ -4223,7 +4223,7 @@ fn step_38() -> Unit raise {
   divisorsum_mobius_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n. 1 <= n\n       ==> sum {d | d divides n} (\\d. mobius d) = if n = 1 then &1 else &0",
+        "∀ n. 1 <= n\n       ==> sum {d | d divides n} (\\d. mobius d) = if n = 1 then &1 else &0",
       ),
       t421,
     ),
@@ -4664,7 +4664,7 @@ fn step_39() -> Unit raise {
     @tactics.all_tac,
   ])
   let t425 = @tactics.subgoal_then(
-    @parser.parse_term("forall d. d divides n ==> ~(n DIV d = 0)"),
+    @parser.parse_term("∀ d. d divides n ==> ~(n DIV d = 0)"),
     fn(
       x422 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4734,7 +4734,7 @@ fn step_39() -> Unit raise {
   mobius_inversion_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f g. (forall n. 1 <= n ==> g(n) = sum {d | d divides n} f)\n         ==> forall n. 1 <= n\n                 ==> f(n) = sum {d | d divides n} (\\d. mobius(d) * g(n DIV d))",
+        "∀ f g. (∀ n. 1 <= n ==> g(n) = sum {d | d divides n} f)\n         ==> ∀ n. 1 <= n\n                 ==> f(n) = sum {d | d divides n} (\\d. mobius(d) * g(n DIV d))",
       ),
       t470,
     ),

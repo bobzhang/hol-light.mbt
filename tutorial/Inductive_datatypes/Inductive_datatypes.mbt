@@ -178,7 +178,7 @@ pub fn on_clauses() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t16 = @simp.rewrite_tac(@list.List([point_induct()]))
   let t17 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.List([])), t16]))
-  forall_point_c.set(@tactics.prove(@parser.parse_term("(forall p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t17))
+  forall_point_c.set(@tactics.prove(@parser.parse_term("(∀ p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t17))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn forall_point() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([line_induct()]))
   let t19 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.List([])), t18]))
-  forall_line_c.set(@tactics.prove(@parser.parse_term("(forall p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t19))
+  forall_line_c.set(@tactics.prove(@parser.parse_term("(∀ p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t19))
 }
 
 ///|
@@ -279,7 +279,7 @@ pub fn fano_rule(x33 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// AXIOM_1
 fn step_14() -> Unit raise {
-  axiom_1_c.set(fano_rule(@parser.parse_term("forall p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                          forall l'. p ON l' /\\ p' ON l' ==> l' = l")))
+  axiom_1_c.set(fano_rule(@parser.parse_term("∀ p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                          ∀ l'. p ON l' /\\ p' ON l' ==> l' = l")))
 }
 
 ///|
@@ -294,7 +294,7 @@ pub fn axiom_1() -> @kernel.Thm {
 ///|
 /// AXIOM_2
 fn step_15() -> Unit raise {
-  axiom_2_c.set(fano_rule(@parser.parse_term("forall l l'. ?p. p ON l /\\ p ON l'")))
+  axiom_2_c.set(fano_rule(@parser.parse_term("∀ l l'. ?p. p ON l /\\ p ON l'")))
 }
 
 ///|
@@ -324,7 +324,7 @@ pub fn axiom_3() -> @kernel.Thm {
 ///|
 /// AXIOM_4
 fn step_17() -> Unit raise {
-  axiom_4_c.set(fano_rule(@parser.parse_term("forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                  p ON l /\\ p' ON l /\\ p'' ON l")))
+  axiom_4_c.set(fano_rule(@parser.parse_term("∀ l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                  p ON l /\\ p' ON l /\\ p'' ON l")))
 }
 
 ///|

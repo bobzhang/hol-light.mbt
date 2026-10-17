@@ -85,7 +85,7 @@ pub fn mk_disj_rule(eq1 : Thm, eq2 : Thm) -> Thm raise {
 let mk_forall_atm : Cell[Term] = Cell::new("MK_FORALL")
 
 ///|
-/// `MK_FORALL`: from `|- p = q` derive `|- (!v. p) = (!v. q)`.
+/// `MK_FORALL`: from `|- p = q` derive `|- (∀v. p) = (∀v. q)`.
 pub fn mk_forall_rule(v : Term, th : Thm) -> Thm raise {
   let abs = @kernel.abs_rule(v, th)
   @equal.ap_term(
@@ -1216,7 +1216,7 @@ pub fn higher_rewrite_conv(ths : List[Thm]) -> ((Bool) -> Conv) raise {
 // ---------------------------------------------------------------------------
 
 ///|
-/// `new_definition`: define a constant by `|- !x1..xn. c x1 .. xn = t`.
+/// `new_definition`: define a constant by `|- ∀x1..xn. c x1 .. xn = t`.
 pub fn new_definition(tm : Term) -> Thm raise {
   let (avs, bod) = @basics.strip_forall(tm)
   let (l, r) = @kernel.dest_eq(bod) catch {
@@ -1246,7 +1246,7 @@ pub fn new_definition(tm : Term) -> Thm raise {
 fn load_steps() -> Unit raise {
   mk_conj_andtm.set(q("(/\\)"))
   mk_disj_ortm.set(q("(\\/)"))
-  mk_forall_atm.set(@kernel.mk_const("forall", @list.List([])))
+  mk_forall_atm.set(@kernel.mk_const("∀", @list.List([])))
   mk_exists_atm.set(@kernel.mk_const("?", @list.List([])))
   // `term_match`'s dummy variable name.
   dummy_name.set(@kernel.dest_var(@basics.genvar(@kernel.aty)).0)

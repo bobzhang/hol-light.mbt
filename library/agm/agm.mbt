@@ -19,7 +19,7 @@ fn step_2() -> Unit raise {
   )
   forall_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (forall i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2"),
+      @parser.parse_term("∀ P. (∀ i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2"),
       t1,
     ),
   )
@@ -75,7 +75,7 @@ fn step_4() -> Unit raise {
   )
   agm_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x * y <= ((x + y) / &2) pow 2"),
+      @parser.parse_term("∀ x y. x * y <= ((x + y) / &2) pow 2"),
       t3,
     ),
   )
@@ -373,7 +373,7 @@ fn step_7() -> Unit raise {
   cauchy_induct_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P. P 2 /\\ (forall n. P n ==> P(2 * n)) /\\ (forall n. P(n + 1) ==> P n) ==> forall n. P n",
+        "∀ P. P 2 /\\ (∀ n. P n ==> P(2 * n)) /\\ (∀ n. P(n + 1) ==> P n) ==> ∀ n. P n",
       ),
       t29,
     ),
@@ -1262,7 +1262,7 @@ fn step_8() -> Unit raise {
   agm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n",
+        "∀ n a. 1 <= n /\\ (∀ i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n",
       ),
       t145,
     ),

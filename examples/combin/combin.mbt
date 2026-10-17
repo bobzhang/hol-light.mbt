@@ -4,7 +4,7 @@
 ///|
 /// confluent
 fn step_1() -> Unit raise {
-  confluent_c.set(@define.define_(@parser.parse_term("confluent R <=>\n        forall x y z. RTC R x y /\\ RTC R x z ==> ?u. RTC R y u /\\ RTC R z u")))
+  confluent_c.set(@define.define_(@parser.parse_term("confluent R <=>\n        ∀ x y z. RTC R x y /\\ RTC R x z ==> ?u. RTC R y u /\\ RTC R z u")))
 }
 
 ///|
@@ -20,7 +20,7 @@ pub fn confluent() -> @kernel.Thm {
 /// confluent_diamond_RTC
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([confluent(), @reduct.cr()]))
-  confluent_diamond_rtc_c.set(@tactics.prove(@parser.parse_term("forall R. confluent R <=> CR(RTC R)"), t1))
+  confluent_diamond_rtc_c.set(@tactics.prove(@parser.parse_term("∀ R. confluent R <=> CR(RTC R)"), t1))
 }
 
 ///|
@@ -100,7 +100,7 @@ pub fn redn_cases() -> @kernel.Thm {
 ///|
 /// redn_rules, redn_ind, redn_cases
 fn step_6() -> Unit raise {
-  let (redn_rules, redn_ind, redn_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall x y f. x --> y   ==>    f % x --> f % y) /\\\n  (forall f g x. f --> g   ==>    f % x --> g % x) /\\\n  (forall x y.   K % x % y --> x) /\\\n  (forall f g x. S % f % g % x --> (f % x) % (g % x))"))
+  let (redn_rules, redn_ind, redn_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ x y f. x --> y   ==>    f % x --> f % y) /\\\n  (∀ f g x. f --> g   ==>    f % x --> g % x) /\\\n  (∀ x y.   K % x % y --> x) /\\\n  (∀ f g x. S % f % g % x --> (f % x) % (g % x))"))
   redn_rules_c.set(redn_rules)
   redn_ind_c.set(redn_ind)
   redn_cases_c.set(redn_cases)
@@ -142,7 +142,7 @@ pub fn predn_cases() -> @kernel.Thm {
 ///|
 /// predn_rules, predn_ind, predn_cases
 fn step_8() -> Unit raise {
-  let (predn_rules, predn_ind, predn_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall x. x -||-> x) /\\\n  (forall x y u v. x -||-> y /\\ u -||-> v ==> x % u -||-> y % v) /\\\n  (forall x y. K % x % y -||-> x) /\\\n  (forall f g x. S % f % g % x -||-> (f % x) % (g % x))"))
+  let (predn_rules, predn_ind, predn_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ x. x -||-> x) /\\\n  (∀ x y u v. x -||-> y /\\ u -||-> v ==> x % u -||-> y % v) /\\\n  (∀ x y. K % x % y -||-> x) /\\\n  (∀ f g x. S % f % g % x -||-> (f % x) % (g % x))"))
   predn_rules_c.set(predn_rules)
   predn_ind_c.set(predn_ind)
   predn_cases_c.set(predn_cases)
@@ -261,7 +261,7 @@ fn step_17() -> Unit raise {
   let t7 = @tactics.match_mp_tac(redn_ind())
   let t6 = @tactics.match_mp_tac(@rstc.rtc_mono())
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([rtcredn(), rtcpredn()])), t6), t7), t8)
-  rtcredn_rtcpredn_c.set(@tactics.prove(@parser.parse_term("forall x y. x -->* y ==> x -||->* y"), t9))
+  rtcredn_rtcpredn_c.set(@tactics.prove(@parser.parse_term("∀ x y. x -->* y ==> x -||->* y"), t9))
 }
 
 ///|
@@ -278,7 +278,7 @@ pub fn rtcredn_rtcpredn() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([rtcredn_rules(), redn_rules()]))
   let t11 = @tactics.then_tac(@tactics.match_mp_tac(rtcredn_ind()), t10)
-  rtcredn_ap_monotonic_c.set(@tactics.prove(@parser.parse_term("forall x y. x -->* y ==> forall z. x % z -->* y % z /\\ z % x -->* z % y"), t11))
+  rtcredn_ap_monotonic_c.set(@tactics.prove(@parser.parse_term("∀ x y. x -->* y ==> ∀ z. x % z -->* y % z /\\ z % x -->* z % y"), t11))
 }
 
 ///|
@@ -295,7 +295,7 @@ pub fn rtcredn_ap_monotonic() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t12 = @meson.meson_tac(@list.List([rtcredn_rules(), redn_rules(), rtcredn_ap_monotonic()]))
   let t13 = @tactics.then_tac(@tactics.match_mp_tac(predn_ind()), t12)
-  predn_rtcredn_c.set(@tactics.prove(@parser.parse_term("forall x y. x -||-> y ==> x -->* y"), t13))
+  predn_rtcredn_c.set(@tactics.prove(@parser.parse_term("∀ x y. x -||-> y ==> x -->* y"), t13))
 }
 
 ///|
@@ -312,7 +312,7 @@ pub fn predn_rtcredn() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([predn_rtcredn(), rtcredn_rules()]))
   let t15 = @tactics.then_tac(@tactics.match_mp_tac(rtcpredn_ind()), t14)
-  rtcpredn_rtcredn_c.set(@tactics.prove(@parser.parse_term("forall x y. x -||->* y ==> x -->* y"), t15))
+  rtcpredn_rtcredn_c.set(@tactics.prove(@parser.parse_term("∀ x y. x -||->* y ==> x -->* y"), t15))
 }
 
 ///|
@@ -357,7 +357,7 @@ pub fn characterise(x18 : @kernel.Term) -> @kernel.Thm raise {
 fn step_22() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([predn_rules(), characterise(@parser.parse_term("S"))]))
   let t24 = @tactics.then_tac(@simp.rewrite_tac(@list.List([characterise(@parser.parse_term("S % x"))])), t23)
-  sx_predn_c.set(@tactics.prove(@parser.parse_term("forall x y. S % x -||-> y <=> ?z. y = S % z /\\ x -||-> z"), t24))
+  sx_predn_c.set(@tactics.prove(@parser.parse_term("∀ x y. S % x -||-> y <=> ?z. y = S % z /\\ x -||-> z"), t24))
 }
 
 ///|
@@ -374,7 +374,7 @@ pub fn sx_predn() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t25 = @meson.meson_tac(@list.List([predn_rules(), characterise(@parser.parse_term("K"))]))
   let t26 = @tactics.then_tac(@simp.rewrite_tac(@list.List([characterise(@parser.parse_term("K % x"))])), t25)
-  kx_predn_c.set(@tactics.prove(@parser.parse_term("forall x y. K % x -||-> y <=> ?z. y = K % z /\\ x -||-> z"), t26))
+  kx_predn_c.set(@tactics.prove(@parser.parse_term("∀ x y. K % x -||-> y <=> ?z. y = K % z /\\ x -||-> z"), t26))
 }
 
 ///|
@@ -391,7 +391,7 @@ pub fn kx_predn() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t27 = @meson.meson_tac(@list.List([predn_rules(), kx_predn()]))
   let t28 = @tactics.then_tac(@simp.rewrite_tac(@list.List([characterise(@parser.parse_term("K % x % y"))])), t27)
-  kxy_predn_c.set(@tactics.prove(@parser.parse_term("forall x y z. K % x % y -||-> z <=>\n            (?u v. z = K % u % v /\\ x -||-> u /\\ y -||-> v) \\/ z = x"), t28))
+  kxy_predn_c.set(@tactics.prove(@parser.parse_term("∀ x y z. K % x % y -||-> z <=>\n            (?u v. z = K % u % v /\\ x -||-> u /\\ y -||-> v) \\/ z = x"), t28))
 }
 
 ///|
@@ -408,7 +408,7 @@ pub fn kxy_predn() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t29 = @meson.meson_tac(@list.List([predn_rules(), characterise(@parser.parse_term("S")), sx_predn()]))
   let t30 = @tactics.then_tac(@simp.rewrite_tac(@list.List([characterise(@parser.parse_term("S % x % y"))])), t29)
-  sxy_predn_c.set(@tactics.prove(@parser.parse_term("forall x y z. S % x % y -||-> z <=>\n            ?u v. z = S % u % v /\\ x -||-> u /\\ y -||-> v"), t30))
+  sxy_predn_c.set(@tactics.prove(@parser.parse_term("∀ x y z. S % x % y -||-> z <=>\n            ?u v. z = S % u % v /\\ x -||-> u /\\ y -||-> v"), t30))
 }
 
 ///|
@@ -425,7 +425,7 @@ pub fn sxy_predn() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t31 = @meson.meson_tac(@list.List([predn_rules(), sxy_predn()]))
   let t32 = @tactics.then_tac(@simp.rewrite_tac(@list.List([characterise(@parser.parse_term("S % w % x % y"))])), t31)
-  sxyz_predn_c.set(@tactics.prove(@parser.parse_term("forall w x y z. S % w % x % y -||-> z <=>\n              (?p q r. z = S % p % q % r /\\\n                       w -||-> p /\\ x -||-> q /\\ y -||-> r) \\/\n              z = (w % y) % (x % y)"), t32))
+  sxyz_predn_c.set(@tactics.prove(@parser.parse_term("∀ w x y z. S % w % x % y -||-> z <=>\n              (?p q r. z = S % p % q % r /\\\n                       w -||-> p /\\ x -||-> q /\\ y -||-> r) \\/\n              z = (w % y) % (x % y)"), t32))
 }
 
 ///|
@@ -469,7 +469,7 @@ fn step_27() -> Unit raise {
   let t34 = @simp.simp_tac(@list.List([predn_rules()]))
   let t33 = @tactics.match_mp_tac(predn_ind())
   let t56 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a ==> b <=> a ==> a /\\ b"))])), t33), t34), t35), t55)
-  predn_diamond_lemma_c.set(@tactics.prove(@parser.parse_term("forall x y. x -||-> y ==> forall z. x -||-> z ==> ?u. y -||-> u /\\ z -||-> u"), t56))
+  predn_diamond_lemma_c.set(@tactics.prove(@parser.parse_term("∀ x y. x -||-> y ==> ∀ z. x -||-> z ==> ?u. y -||-> u /\\ z -||-> u"), t56))
 }
 
 ///|

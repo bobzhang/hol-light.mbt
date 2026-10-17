@@ -70,7 +70,7 @@ fn step_3() -> Unit raise {
   casewise_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall clauses c x.\n    (?s t a. MEM (s,t) clauses /\\ (s a = x) /\\\n             (CASEWISE clauses c x = t c a)) \\/\n    ~(?s t a. MEM (s,t) clauses /\\ (s a = x)) /\\\n    (CASEWISE clauses c x = @y. T)",
+        "∀ clauses c x.\n    (?s t a. MEM (s,t) clauses /\\ (s a = x) /\\\n             (CASEWISE clauses c x = t c a)) \\/\n    ~(?s t a. MEM (s,t) clauses /\\ (s a = x)) /\\\n    (CASEWISE clauses c x = @y. T)",
       ),
       t6,
     ),
@@ -99,7 +99,7 @@ fn step_4() -> Unit raise {
   casewise_works_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall clauses c:C.\n     (forall s t s' t' x y. MEM (s,t) clauses /\\ MEM (s',t') clauses /\\ (s x = s' y)\n                      ==> (t c x = t' c y))\n     ==> ALL (\\(s:P->A,t). forall x. CASEWISE clauses c (s x) :B = t c x) clauses",
+        "∀ clauses c:C.\n     (∀ s t s' t' x y. MEM (s,t) clauses /\\ MEM (s',t') clauses /\\ (s x = s' y)\n                      ==> (t c x = t' c y))\n     ==> ALL (\\(s:P->A,t). ∀ x. CASEWISE clauses c (s x) :B = t c x) clauses",
       ),
       t8,
     ),
@@ -121,7 +121,7 @@ fn step_5() -> Unit raise {
   admissible_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "admissible(<<) p s t <=>\n        forall f g a. p f a /\\ p g a /\\ (forall z. z << s(a) ==> (f z = g z))\n                ==> (t f a = t g a)",
+        "admissible(<<) p s t <=>\n        ∀ f g a. p f a /\\ p g a /\\ (∀ z. z << s(a) ==> (f z = g z))\n                ==> (t f a = t g a)",
       ),
     ),
   )
@@ -142,7 +142,7 @@ fn step_6() -> Unit raise {
   tailadmissible_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "tailadmissible(<<) p s t <=>\n        ?P G H. (forall f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                (forall f g a. (forall z. z << s(a) ==> (f z = g z))\n                         ==> (P f a = P g a) /\\\n                             (G f a = G g a) /\\ (H f a = H g a)) /\\\n                (forall f a:P. p f a ==> (t (f:A->B) a =\n                                    if P f a then f(G f a) else H f a))",
+        "tailadmissible(<<) p s t <=>\n        ?P G H. (∀ f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                (∀ f g a. (∀ z. z << s(a) ==> (f z = g z))\n                         ==> (P f a = P g a) /\\\n                             (G f a = G g a) /\\ (H f a = H g a)) /\\\n                (∀ f a:P. p f a ==> (t (f:A->B) a =\n                                    if P f a then f(G f a) else H f a))",
       ),
     ),
   )
@@ -215,7 +215,7 @@ fn step_9() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([admissible()]))
   admissible_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s c. admissible(<<) p s (\\f. c)"),
+      @parser.parse_term("∀ p s c. admissible(<<) p s (\\f. c)"),
       t11,
     ),
   )
@@ -243,7 +243,7 @@ fn step_10() -> Unit raise {
   admissible_base_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s t.\n        (forall f a. p f a ==> t a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t x))",
+        "∀(<<) p s t.\n        (∀ f a. p f a ==> t a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t x))",
       ),
       t13,
     ),
@@ -269,7 +269,7 @@ fn step_11() -> Unit raise {
   admissible_comb_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s:P->A g:(A->B)->P->C->D y:(A->B)->P->C.\n        admissible(<<) p s g /\\ admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g f x) (y f x))",
+        "∀(<<) p s:P->A g:(A->B)->P->C->D y:(A->B)->P->C.\n        admissible(<<) p s g /\\ admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g f x) (y f x))",
       ),
       t15,
     ),
@@ -295,7 +295,7 @@ fn step_12() -> Unit raise {
   admissible_rand_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s:P->A g:P->C->D y:(A->B)->P->C.\n        admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g x) (y f x))",
+        "∀(<<) p s:P->A g:P->C->D y:(A->B)->P->C.\n        admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g x) (y f x))",
       ),
       t17,
     ),
@@ -326,7 +326,7 @@ fn step_13() -> Unit raise {
   admissible_lambda_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s:P->A t:(A->B)->C->P->bool.\n     admissible(<<) (\\f (u,x). p f x) (\\(u,x). s x) (\\f (u,x). t f u x)\n     ==> admissible(<<) p s (\\f x. \\u. t f u x)",
+        "∀(<<) p s:P->A t:(A->B)->C->P->bool.\n     admissible(<<) (\\f (u,x). p f x) (\\(u,x). s x) (\\f (u,x). t f u x)\n     ==> admissible(<<) p s (\\f x. \\u. t f u x)",
       ),
       t19,
     ),
@@ -355,7 +355,7 @@ fn step_14() -> Unit raise {
   admissible_nest_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s t.\n        admissible(<<) p s t /\\\n        (forall f a. p f a ==> t f a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t f x))",
+        "∀(<<) p s t.\n        admissible(<<) p s t /\\\n        (∀ f a. p f a ==> t f a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t f x))",
       ),
       t21,
     ),
@@ -427,7 +427,7 @@ fn step_15() -> Unit raise {
   admissible_cond_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p P s h k.\n        admissible(<<) p s P /\\\n        admissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        admissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> admissible(<<) p s (\\f x:P. if P f x then h f x else k f x)",
+        "∀(<<) p P s h k.\n        admissible(<<) p s P /\\\n        admissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        admissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> admissible(<<) p s (\\f x:P. if P f x then h f x else k f x)",
       ),
       t29,
     ),
@@ -464,7 +464,7 @@ fn step_16() -> Unit raise {
   admissible_match_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s e c.\n        admissible(<<) p s e /\\ admissible(<<) p s (\\f x. c f x (e f x))\n        ==> admissible(<<) p s (\\f x:P. _MATCH (e f x) (c f x))",
+        "∀(<<) p s e c.\n        admissible(<<) p s e /\\ admissible(<<) p s (\\f x. c f x (e f x))\n        ==> admissible(<<) p s (\\f x:P. _MATCH (e f x) (c f x))",
       ),
       t33,
     ),
@@ -493,7 +493,7 @@ fn step_17() -> Unit raise {
   admissible_seqpattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x:P. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. c1 f x (e f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. c2 f x (e f x))\n        ==> admissible(<<) p s (\\f x. _SEQPATTERN (c1 f x) (c2 f x) (e f x))",
+        "∀(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x:P. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. c1 f x (e f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. c2 f x (e f x))\n        ==> admissible(<<) p s (\\f x. _SEQPATTERN (c1 f x) (c2 f x) (e f x))",
       ),
       t35,
     ),
@@ -547,7 +547,7 @@ fn step_18() -> Unit raise {
   admissible_unguarded_pattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s pat e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _UNGUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                         (GEQ (t f x) (y f x)))",
+        "∀(<<) p s pat e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _UNGUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                         (GEQ (t f x) (y f x)))",
       ),
       t41,
     ),
@@ -614,7 +614,7 @@ fn step_19() -> Unit raise {
   admissible_guarded_pattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s pat q e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s q /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _GUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                       (q f x)\n                                       (GEQ (t f x) (y f x)))",
+        "∀(<<) p s pat q e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s q /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _GUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                       (q f x)\n                                       (GEQ (t f x) (y f x)))",
       ),
       t49,
     ),
@@ -651,7 +651,7 @@ fn step_20() -> Unit raise {
   admissible_nsum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. nsum(a(x)..b(x)) (h f x))",
+        "∀(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. nsum(a(x)..b(x)) (h f x))",
       ),
       t53,
     ),
@@ -688,7 +688,7 @@ fn step_21() -> Unit raise {
   admissible_sum_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. sum(a(x)..b(x)) (h f x))",
+        "∀(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. sum(a(x)..b(x)) (h f x))",
       ),
       t57,
     ),
@@ -757,7 +757,7 @@ fn step_22() -> Unit raise {
   admissible_map_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s h l.\n        admissible(<<) p s l /\\\n        admissible (<<) (\\f (y,x). p f x /\\ MEM y (l f x))\n                        (\\(y,x). s x) (\\f (y,x). h f x y)\n   ==> admissible (<<) p s (\\f:A->B x:P. MAP (h f x) (l f x))",
+        "∀(<<) p s h l.\n        admissible(<<) p s l /\\\n        admissible (<<) (\\f (y,x). p f x /\\ MEM y (l f x))\n                        (\\(y,x). s x) (\\f (y,x). h f x y)\n   ==> admissible (<<) p s (\\f:A->B x:P. MAP (h f x) (l f x))",
       ),
       t67,
     ),
@@ -782,7 +782,7 @@ fn step_23() -> Unit raise {
   admissible_match_seqpattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. _MATCH (e f x) (c2 f x))\n        ==> admissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))",
+        "∀(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. _MATCH (e f x) (c2 f x))\n        ==> admissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))",
       ),
       t68,
     ),
@@ -877,7 +877,7 @@ fn step_24() -> Unit raise {
   admissible_imp_superadmissible_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s t:(A->B)->P->B.\n      admissible(<<) p s t ==> superadmissible(<<) p s t",
+        "∀(<<) p s t:(A->B)->P->B.\n      admissible(<<) p s t ==> superadmissible(<<) p s t",
       ),
       t78,
     ),
@@ -906,7 +906,7 @@ fn step_25() -> Unit raise {
   )
   superadmissible_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s c. superadmissible(<<) p s (\\f. c)"),
+      @parser.parse_term("∀ p s c. superadmissible(<<) p s (\\f. c)"),
       t81,
     ),
   )
@@ -998,7 +998,7 @@ fn step_26() -> Unit raise {
   superadmissible_tail_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s t:(A->B)->P->A.\n      admissible(<<) p s t /\\\n      (forall f a. p f a ==> forall y. y << t f a ==> y << s a)\n      ==> superadmissible(<<) p s (\\f x. f(t f x))",
+        "∀(<<) p s t:(A->B)->P->A.\n      admissible(<<) p s t /\\\n      (∀ f a. p f a ==> ∀ y. y << t f a ==> y << s a)\n      ==> superadmissible(<<) p s (\\f x. f(t f x))",
       ),
       t91,
     ),
@@ -1522,7 +1522,7 @@ fn step_27() -> Unit raise {
   superadmissible_cond_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p P s h k:(A->B)->P->B.\n        admissible(<<) p s P /\\\n        superadmissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> superadmissible(<<) p s (\\f x. if P f x then h f x else k f x)",
+        "∀(<<) p P s h k:(A->B)->P->B.\n        admissible(<<) p s P /\\\n        superadmissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> superadmissible(<<) p s (\\f x. if P f x then h f x else k f x)",
       ),
       t145,
     ),
@@ -1549,7 +1549,7 @@ fn step_28() -> Unit raise {
   superadmissible_match_seqpattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                            (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                            (\\f x. _MATCH (e f x) (c2 f x))\n        ==> superadmissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))",
+        "∀(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                            (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                            (\\f x. _MATCH (e f x) (c2 f x))\n        ==> superadmissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))",
       ),
       t146,
     ),
@@ -1635,7 +1635,7 @@ fn step_29() -> Unit raise {
   let t153 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t152 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x)",
+      "∀ f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x)",
     ),
     fn(
       x150 : @kernel.Thm,
@@ -1704,7 +1704,7 @@ fn step_29() -> Unit raise {
   superadmissible_match_unguarded_pattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s e:P->D pat:Q->D arg.\n      (forall f a t u. p f a /\\ pat t = e a /\\ pat u = e a ==> arg a t = arg a u) /\\\n      (forall f a t. p f a /\\ pat t = e a ==> forall y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _UNGUARDED_PATTERN (GEQ (pat t) u)\n                                                  (GEQ (f(arg x t)) v)))",
+        "∀(<<) p s e:P->D pat:Q->D arg.\n      (∀ f a t u. p f a /\\ pat t = e a /\\ pat u = e a ==> arg a t = arg a u) /\\\n      (∀ f a t. p f a /\\ pat t = e a ==> ∀ y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _UNGUARDED_PATTERN (GEQ (pat t) u)\n                                                  (GEQ (f(arg x t)) v)))",
       ),
       t163,
     ),
@@ -1792,7 +1792,7 @@ fn step_30() -> Unit raise {
   let t170 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t169 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ q x t /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x /\\ q x t)",
+      "∀ f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ q x t /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x /\\ q x t)",
     ),
     fn(
       x167 : @kernel.Thm,
@@ -1861,7 +1861,7 @@ fn step_30() -> Unit raise {
   superadmissible_match_guarded_pattern_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) p s e:P->D pat:Q->D q arg.\n      (forall f a t u. p f a /\\ pat t = e a /\\ q a t /\\ pat u = e a /\\ q a u\n                 ==> arg a t = arg a u) /\\\n      (forall f a t. p f a /\\ q a t /\\ pat t = e a ==> forall y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _GUARDED_PATTERN (GEQ (pat t) u)\n                                                (q x t)\n                                                (GEQ (f(arg x t)) v)))",
+        "∀(<<) p s e:P->D pat:Q->D q arg.\n      (∀ f a t u. p f a /\\ pat t = e a /\\ q a t /\\ pat u = e a /\\ q a u\n                 ==> arg a t = arg a u) /\\\n      (∀ f a t. p f a /\\ q a t /\\ pat t = e a ==> ∀ y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _GUARDED_PATTERN (GEQ (pat t) u)\n                                                (q x t)\n                                                (GEQ (f(arg x t)) v)))",
       ),
       t180,
     ),
@@ -1895,7 +1895,7 @@ fn step_31() -> Unit raise {
   wf_rec_tail_general_p_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P G H H'.\n         WF (<<) /\\\n         (forall f g x. (forall z. z << x ==> (f z = g z))\n                  ==> (P f x <=> P g x) /\\\n                      (G f x = G g x) /\\ (H' f x = H' g x)) /\\\n         (forall f x y. P f x /\\ y << G f x ==> y << x) /\\\n         (forall f x. H f x = if P f x then f(G f x) else H' f x)\n         ==> ?f. forall x. f x = H f x",
+        "∀ P G H H'.\n         WF (<<) /\\\n         (∀ f g x. (∀ z. z << x ==> (f z = g z))\n                  ==> (P f x <=> P g x) /\\\n                      (G f x = G g x) /\\ (H' f x = H' g x)) /\\\n         (∀ f x y. P f x /\\ y << G f x ==> y << x) /\\\n         (∀ f x. H f x = if P f x then f(G f x) else H' f x)\n         ==> ?f. ∀ x. f x = H f x",
       ),
       t184,
     ),
@@ -2352,7 +2352,7 @@ fn step_32() -> Unit raise {
   wf_rec_cases_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). ?P G H.\n                     (forall f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                     (forall f g a. (forall z. z << s(a) ==> (f z = g z))\n                              ==> (P f a = P g a) /\\\n                                  (G f a = G g a) /\\ (H f a = H g a)) /\\\n                     (forall f a:P. t f a = if P f a then f(G f a) else H f a))\n            clauses\n        ==> ?f:A->B. forall x. f x = CASEWISE clauses f x",
+        "∀(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). ?P G H.\n                     (∀ f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                     (∀ f g a. (∀ z. z << s(a) ==> (f z = g z))\n                              ==> (P f a = P g a) /\\\n                                  (G f a = G g a) /\\ (H f a = H g a)) /\\\n                     (∀ f a:P. t f a = if P f a then f(G f a) else H f a))\n            clauses\n        ==> ?f:A->B. ∀ x. f x = CASEWISE clauses f x",
       ),
       t240,
     ),
@@ -2375,7 +2375,7 @@ fn step_33() -> Unit raise {
   wf_rec_cases_p_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses\n        ==> ?f:A->B. forall x. f x = CASEWISE clauses f x",
+        "∀(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses\n        ==> ?f:A->B. ∀ x. f x = CASEWISE clauses f x",
       ),
       t241,
     ),
@@ -2590,7 +2590,7 @@ fn step_34() -> Unit raise {
   recursion_casewise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall clauses.\n   (?(<<). WF(<<) /\\\n           ALL (\\(s:P->A,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n   (forall s t s' t' f x y. MEM (s,t) clauses /\\ MEM (s',t') clauses\n                      ==> (s x = s' y) ==> (t f x = t' f y))\n   ==> ?f:A->B. ALL (\\(s,t). forall x. f (s x) = t f x) clauses",
+        "∀ clauses.\n   (?(<<). WF(<<) /\\\n           ALL (\\(s:P->A,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n   (∀ s t s' t' f x y. MEM (s,t) clauses /\\ MEM (s',t') clauses\n                      ==> (s x = s' y) ==> (t f x = t' f y))\n   ==> ?f:A->B. ALL (\\(s,t). ∀ x. f (s x) = t f x) clauses",
       ),
       t260,
     ),
@@ -2640,7 +2640,7 @@ fn step_35() -> Unit raise {
   )
   let lemma = @tactics.prove(
     @parser.parse_term(
-      "forall P. (forall x y. P x y ==> P y x)\n         ==> forall l. (forall x y. MEM x l /\\ MEM y l ==> P x y) <=>\n                 ALL (\\x. P x x) l /\\ PAIRWISE P l",
+      "∀ P. (∀ x y. P x y ==> P y x)\n         ==> ∀ l. (∀ x y. MEM x l /\\ MEM y l ==> P x y) <=>\n                 ALL (\\x. P x x) l /\\ PAIRWISE P l",
     ),
     t264,
   )
@@ -2653,7 +2653,7 @@ fn step_35() -> Unit raise {
   )
   let t266 = @bool.ispec(
     @parser.parse_term(
-      "\\(s,t) (s',t'). forall c x:A y:A. (s x = s' y) ==> (t c x = t' c y)",
+      "\\(s,t) (s',t'). ∀ c x:A y:A. (s x = s' y) ==> (t c x = t' c y)",
     ),
     lemma,
   )
@@ -2675,7 +2675,7 @@ fn step_35() -> Unit raise {
   recursion_casewise_pairwise_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall clauses.\n        (?(<<). WF (<<) /\\\n                ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n        ALL (\\(s,t). forall f x y. (s x = s y) ==> (t f x = t f y)) clauses /\\\n        PAIRWISE (\\(s,t) (s',t'). forall f x y. (s x = s' y) ==> (t f x = t' f y))\n                 clauses\n        ==> (?f. ALL (\\(s,t). forall x. f (s x) = t f x) clauses)",
+        "∀ clauses.\n        (?(<<). WF (<<) /\\\n                ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n        ALL (\\(s,t). ∀ f x y. (s x = s y) ==> (t f x = t f y)) clauses /\\\n        PAIRWISE (\\(s,t) (s',t'). ∀ f x y. (s x = s' y) ==> (t f x = t' f y))\n                 clauses\n        ==> (?f. ALL (\\(s,t). ∀ x. f (s x) = t f x) clauses)",
       ),
       t269,
     ),
@@ -3063,7 +3063,7 @@ fn step_38() -> Unit raise {
   )
   let elemma0 = @tactics.prove(
     @parser.parse_term(
-      "((forall z. GEQ (f z) (g z)) <=> (forall x y. GEQ (f(x,y)) (g(x,y)))) /\\\n       ((\\p. P p) = (\\(x,y). P(x,y)))",
+      "((∀ z. GEQ (f z) (g z)) <=> (∀ x y. GEQ (f(x,y)) (g(x,y)))) /\\\n       ((\\p. P p) = (\\(x,y). P(x,y)))",
     ),
     t312,
   )
@@ -3308,7 +3308,7 @@ fn step_38() -> Unit raise {
   )
   let elemma1 = @tactics.prove(
     @parser.parse_term(
-      "(forall P. (forall t:A->B->C#D->E. P t) <=> (forall t. P (\\a b (c,d). t a b d c))) /\\\n       (forall P. (forall t:B->C#D->E. P t) <=> (forall t. P (\\b (c,d). t b d c))) /\\\n       (forall P. (forall t:C#D->E. P t) <=> (forall t. P (\\(c,d). t d c)))",
+      "(∀ P. (∀ t:A->B->C#D->E. P t) <=> (∀ t. P (\\a b (c,d). t a b d c))) /\\\n       (∀ P. (∀ t:B->C#D->E. P t) <=> (∀ t. P (\\b (c,d). t b d c))) /\\\n       (∀ P. (∀ t:C#D->E. P t) <=> (∀ t. P (\\(c,d). t d c)))",
     ),
     t338,
   )

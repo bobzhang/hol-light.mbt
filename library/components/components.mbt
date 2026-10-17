@@ -223,7 +223,7 @@ fn step_9() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([component_tybij()]))
   component_inj_c.set(
     @tactics.prove(
-      @parser.parse_term("forall rw rw'. component rw = component rw' <=> rw = rw'"),
+      @parser.parse_term("∀ rw rw'. component rw = component rw' <=> rw = rw'"),
       t9,
     ),
   )
@@ -244,7 +244,7 @@ fn step_10() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([component_tybij(), @pair.pair()]))
   forall_component_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall c:(S,V)component. P c) <=> forall r w. P(component(r,w))"),
+      @parser.parse_term("(∀ c:(S,V)component. P c) <=> ∀ r w. P(component(r,w))"),
       t10,
     ),
   )
@@ -328,7 +328,7 @@ fn step_14() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([read_def(), component_tybij()]))
   read_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(r:S->V) w. read(component(r,w)) = r"),
+      @parser.parse_term("∀(r:S->V) w. read(component(r,w)) = r"),
       t12,
     ),
   )
@@ -349,7 +349,7 @@ fn step_15() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([write_def(), component_tybij()]))
   write_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(r:S->V) w. write(component(r,w)) = w"),
+      @parser.parse_term("∀(r:S->V) w. write(component(r,w)) = w"),
       t13,
     ),
   )
@@ -379,7 +379,7 @@ fn step_16() -> Unit raise {
   component_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c1 c2. c1 = c2 <=> read c1 = read c2 /\\ write c1 = write c2",
+        "∀ c1 c2. c1 = c2 <=> read c1 = read c2 /\\ write c1 = write c2",
       ),
       t14,
     ),
@@ -422,7 +422,7 @@ fn step_18() -> Unit raise {
   )
   read_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("read entirety = I /\\ (forall s. read entirety s = s)"),
+      @parser.parse_term("read entirety = I /\\ (∀ s. read entirety s = s)"),
       t15,
     ),
   )
@@ -446,7 +446,7 @@ fn step_19() -> Unit raise {
   write_entirety_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall y. write entirety y = \\s. y) /\\ (forall s y. write entirety y s = y)",
+        "(∀ y. write entirety y = \\s. y) /\\ (∀ s y. write entirety y s = y)",
       ),
       t16,
     ),
@@ -470,7 +470,7 @@ fn step_20() -> Unit raise {
   )
   read_write_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("forall y s. read entirety (write entirety y s) = y"),
+      @parser.parse_term("∀ y s. read entirety (write entirety y s) = y"),
       t17,
     ),
   )
@@ -537,7 +537,7 @@ fn step_24() -> Unit raise {
   component_compose_assoc_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall sc1 sc2 sc3. sc1 :> (sc2 :> sc3) = (sc1 :> sc2) :> sc3",
+        "∀ sc1 sc2 sc3. sc1 :> (sc2 :> sc3) = (sc1 :> sc2) :> sc3",
       ),
       t18,
     ),
@@ -571,7 +571,7 @@ fn step_25() -> Unit raise {
   read_component_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall sc1 sc2 s. read (sc1 :> sc2) s = read sc2 (read sc1 s)",
+        "∀ sc1 sc2 s. read (sc1 :> sc2) s = read sc2 (read sc1 s)",
       ),
       t19,
     ),
@@ -598,7 +598,7 @@ fn step_26() -> Unit raise {
   write_component_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall sc1 sc2 s x. write (sc1 :> sc2) x s =\n                 write sc1 (write sc2 x (read sc1 s)) s",
+        "∀ sc1 sc2 s x. write (sc1 :> sc2) x s =\n                 write sc1 (write sc2 x (read sc1 s)) s",
       ),
       t20,
     ),
@@ -633,7 +633,7 @@ fn step_27() -> Unit raise {
   )
   compose_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall c. c :> entirety = c) /\\ (forall c. entirety :> c = c)"),
+      @parser.parse_term("(∀ c. c :> entirety = c) /\\ (∀ c. entirety :> c = c)"),
       t21,
     ),
   )
@@ -659,7 +659,7 @@ fn step_28() -> Unit raise {
   read_write_component_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall sc1 sc2.\n        (forall y s. read sc1 (write sc1 y s) = y) /\\\n        (forall y s. read sc2 (write sc2 y s) = y)\n        ==> forall y s. read (sc1 :> sc2) (write (sc1 :> sc2) y s) = y",
+        "∀ sc1 sc2.\n        (∀ y s. read sc1 (write sc1 y s) = y) /\\\n        (∀ y s. read sc2 (write sc2 y s) = y)\n        ==> ∀ y s. read (sc1 :> sc2) (write (sc1 :> sc2) y s) = y",
       ),
       t22,
     ),
@@ -683,7 +683,7 @@ fn step_29() -> Unit raise {
   read_over_write_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "read_over_write (c:(S,A)component) <=>\n        forall y s. read c (write c y s) = y",
+        "read_over_write (c:(S,A)component) <=>\n        ∀ y s. read c (write c y s) = y",
       ),
     ),
   )
@@ -706,7 +706,7 @@ fn step_30() -> Unit raise {
   write_over_write_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "write_over_write (c:(S,A)component) <=>\n        forall y z s. write c z (write c y s) = write c z s",
+        "write_over_write (c:(S,A)component) <=>\n        ∀ y z s. write c z (write c y s) = write c z s",
       ),
     ),
   )
@@ -729,7 +729,7 @@ fn step_31() -> Unit raise {
   write_over_read_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "write_over_read (c:(S,A)component) <=>\n     forall s. write c (read c s) s = s",
+        "write_over_read (c:(S,A)component) <=>\n     ∀ s. write c (read c s) s = s",
       ),
     ),
   )
@@ -752,7 +752,7 @@ fn step_32() -> Unit raise {
   weak_read_over_write_c.set(
     @pair.new_definition(
       @parser.parse_term(
-        "weak_read_over_write (c:(S,A)component) <=>\n        ?f. forall y s. read c (write c y s) = f y",
+        "weak_read_over_write (c:(S,A)component) <=>\n        ?f. ∀ y s. read c (write c y s) = f y",
       ),
     ),
   )
@@ -775,7 +775,7 @@ fn step_33() -> Unit raise {
   valid_component_c.set(
     @define.define_(
       @parser.parse_term(
-        "valid_component c <=>\n        (forall y s. read c (write c y s) = y) /\\\n        (forall y z s. write c z (write c y s) = write c z s)",
+        "valid_component c <=>\n        (∀ y s. read c (write c y s) = y) /\\\n        (∀ y z s. write c z (write c y s) = write c z s)",
       ),
     ),
   )
@@ -809,7 +809,7 @@ fn step_34() -> Unit raise {
   valid_component_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c1 c2. valid_component c1 /\\ valid_component c2\n           ==> valid_component(c1 :> c2)",
+        "∀ c1 c2. valid_component c1 /\\ valid_component c2\n           ==> valid_component(c1 :> c2)",
       ),
       t25,
     ),
@@ -866,7 +866,7 @@ fn step_37() -> Unit raise {
   weakly_valid_component_c.set(
     @define.define_(
       @parser.parse_term(
-        "weakly_valid_component c <=>\n        (?f. forall y s. read c (write c y s) = f y) /\\\n        (forall y z s. write c z (write c y s) = write c z s)",
+        "weakly_valid_component c <=>\n        (?f. ∀ y s. read c (write c y s) = f y) /\\\n        (∀ y z s. write c z (write c y s) = write c z s)",
       ),
     ),
   )
@@ -908,7 +908,7 @@ fn step_38() -> Unit raise {
   valid_imp_weakly_valid_component_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c:(S,V)component. valid_component c ==> weakly_valid_component c",
+        "∀ c:(S,V)component. valid_component c ==> weakly_valid_component c",
       ),
       t31,
     ),
@@ -962,7 +962,7 @@ fn step_41() -> Unit raise {
   strongly_valid_component_c.set(
     @define.define_(
       @parser.parse_term(
-        "strongly_valid_component c <=>\n        (forall y s. read c (write c y s) = y) /\\\n        (forall s. write c (read c s) s = s) /\\\n        (forall y z s. write c z (write c y s) = write c z s)",
+        "strongly_valid_component c <=>\n        (∀ y s. read c (write c y s) = y) /\\\n        (∀ s. write c (read c s) s = s) /\\\n        (∀ y z s. write c z (write c y s) = write c z s)",
       ),
     ),
   )
@@ -988,7 +988,7 @@ fn step_42() -> Unit raise {
   strongly_valid_imp_valid_component_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c:(S,V)component. strongly_valid_component c ==> valid_component c",
+        "∀ c:(S,V)component. strongly_valid_component c ==> valid_component c",
       ),
       t33,
     ),
@@ -1023,7 +1023,7 @@ fn step_43() -> Unit raise {
   strongly_valid_component_compose_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c1 c2. strongly_valid_component c1 /\\ strongly_valid_component c2\n           ==> strongly_valid_component(c1 :> c2)",
+        "∀ c1 c2. strongly_valid_component c1 /\\ strongly_valid_component c2\n           ==> strongly_valid_component(c1 :> c2)",
       ),
       t36,
     ),
@@ -1077,7 +1077,7 @@ fn step_46() -> Unit raise {
   extensionally_valid_component_c.set(
     @define.define_(
       @parser.parse_term(
-        "extensionally_valid_component (c:(S,A)component) <=>\n        (?f. forall y s. read c (write c y s) = f y) /\\\n        (forall s. write c (read c s) s = s) /\\\n        (forall y z s. write c z (write c y s) = write c z s)",
+        "extensionally_valid_component (c:(S,A)component) <=>\n        (?f. ∀ y s. read c (write c y s) = f y) /\\\n        (∀ s. write c (read c s) s = s) /\\\n        (∀ y z s. write c z (write c y s) = write c z s)",
       ),
     ),
   )
@@ -1122,7 +1122,7 @@ fn step_47() -> Unit raise {
   strongly_valid_imp_extensionally_valid_component_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall c:(S,V)component.\n        strongly_valid_component c ==> extensionally_valid_component c",
+        "∀ c:(S,V)component.\n        strongly_valid_component c ==> extensionally_valid_component c",
       ),
       t42,
     ),
@@ -1182,7 +1182,7 @@ fn step_50() -> Unit raise {
   orthogonal_components_c.set(
     @define.define_(
       @parser.parse_term(
-        "orthogonal_components sc1 sc2 <=>\n        (forall y z s. write sc1 y (write sc2 z s) =\n                 write sc2 z (write sc1 y s)) /\\\n        (forall y s. read sc2 (write sc1 y s) = read sc2 s) /\\\n        (forall z s. read sc1 (write sc2 z s) = read sc1 s)",
+        "orthogonal_components sc1 sc2 <=>\n        (∀ y z s. write sc1 y (write sc2 z s) =\n                 write sc2 z (write sc1 y s)) /\\\n        (∀ y s. read sc2 (write sc1 y s) = read sc2 s) /\\\n        (∀ z s. read sc1 (write sc2 z s) = read sc1 s)",
       ),
     ),
   )
@@ -1210,7 +1210,7 @@ fn step_51() -> Unit raise {
   orthogonal_components_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall sc1 sc2. orthogonal_components sc1 sc2 <=> orthogonal_components sc2 sc1",
+        "∀ sc1 sc2. orthogonal_components sc1 sc2 <=> orthogonal_components sc2 sc1",
       ),
       t45,
     ),

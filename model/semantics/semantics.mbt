@@ -36,7 +36,7 @@ pub fn semantics() -> @kernel.Thm {
 ///|
 /// type_valuation
 fn step_3() -> Unit raise {
-  type_valuation_c.set(@pair.new_definition(@parser.parse_term("type_valuation tau <=> forall x. (?y. y <: tau x)")))
+  type_valuation_c.set(@pair.new_definition(@parser.parse_term("type_valuation tau <=> ∀ x. (?y. y <: tau x)")))
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn type_valuation() -> @kernel.Thm {
 ///|
 /// term_valuation
 fn step_4() -> Unit raise {
-  term_valuation_c.set(@pair.new_definition(@parser.parse_term("term_valuation tau sigma <=> forall n ty. sigma(n,ty) <: typeset tau ty")))
+  term_valuation_c.set(@pair.new_definition(@parser.parse_term("term_valuation tau sigma <=> ∀ n ty. sigma(n,ty) <: typeset tau ty")))
 }
 
 ///|
@@ -68,7 +68,7 @@ pub fn term_valuation() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([term_valuation(), @modelset.valmod(), @pair.pair_eq()])), t3)
-  term_valuation_valmod_c.set(@tactics.prove(@parser.parse_term("forall sigma taut n ty x.\n        term_valuation tau sigma /\\ x <: typeset tau ty\n        ==> term_valuation tau (((n,ty) |-> x) sigma)"), t4))
+  term_valuation_valmod_c.set(@tactics.prove(@parser.parse_term("∀ sigma taut n ty x.\n        term_valuation tau sigma /\\ x <: typeset tau ty\n        ==> term_valuation tau (((n,ty) |-> x) sigma)"), t4))
 }
 
 ///|
@@ -88,7 +88,7 @@ fn step_6() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([typeset()]))
   let t5 = @tactics.match_mp_tac(@syntax.type_induct())
   let t9 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), @tactics.gen_tac), @tactics.disch_tac), t5), t6), @tactics.conj_tac), t8)
-  typeset_inhabited_c.set(@tactics.prove(@parser.parse_term("forall tau ty. type_valuation tau ==> ?x. x <: typeset tau ty"), t9))
+  typeset_inhabited_c.set(@tactics.prove(@parser.parse_term("∀ tau ty. type_valuation tau ==> ?x. x <: typeset tau ty"), t9))
 }
 
 ///|
@@ -131,7 +131,7 @@ fn step_7() -> Unit raise {
   let t11 = @list.List([@meson.meson_tac(@list.List([term_valuation()])), @tactics.all_tac])
   let t10 = @simp.asm_simp_tac(@list.List([semantics(), typeset(), @syntax.has_type_rules()]))
   let t34 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@syntax.has_type_induct()), t10), @tactics.conj_tac), t11), t12), t13), t33)
-  semantics_typeset_induct_c.set(@tactics.prove(@parser.parse_term("forall tm ty. tm has_type ty\n           ==> tm has_type ty /\\\n               forall sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                           ==> (semantics sigma tau tm) <: (typeset tau ty)"), t34))
+  semantics_typeset_induct_c.set(@tactics.prove(@parser.parse_term("∀ tm ty. tm has_type ty\n           ==> tm has_type ty /\\\n               ∀ sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                           ==> (semantics sigma tau tm) <: (typeset tau ty)"), t34))
 }
 
 ///|
@@ -147,7 +147,7 @@ pub fn semantics_typeset_induct() -> @kernel.Thm {
 /// SEMANTICS_TYPESET
 fn step_8() -> Unit raise {
   let t35 = @meson.meson_tac(@list.List([semantics_typeset_induct()]))
-  semantics_typeset_c.set(@tactics.prove(@parser.parse_term("forall sigma tau tm ty.\n        type_valuation tau /\\ term_valuation tau sigma /\\ tm has_type ty\n        ==> (semantics sigma tau tm) <: (typeset tau ty)"), t35))
+  semantics_typeset_c.set(@tactics.prove(@parser.parse_term("∀ sigma tau tm ty.\n        type_valuation tau /\\ term_valuation tau sigma /\\ tm has_type ty\n        ==> (semantics sigma tau tm) <: (typeset tau ty)"), t35))
 }
 
 ///|
@@ -165,7 +165,7 @@ fn step_9() -> Unit raise {
   let t37 = @simp.asm_simp_tac(@list.List([@modelset.apply_abstract(), typeset(), semantics_typeset(), @modelset.abstract_in_funspace(), @modelset.boolean_in_boolset()]))
   let t36 = @simp.rewrite_tac(@list.List([@syntax.equation(), semantics()]))
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t36), t37)
-  semantics_equation_c.set(@tactics.prove(@parser.parse_term("forall sigma tau s t.\n        s has_type (typeof s) /\\ t has_type (typeof s) /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))"), t38))
+  semantics_equation_c.set(@tactics.prove(@parser.parse_term("∀ sigma tau s t.\n        s has_type (typeof s) /\\ t has_type (typeof s) /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))"), t38))
 }
 
 ///|
@@ -192,7 +192,7 @@ fn step_10() -> Unit raise {
   let t40 = @simp.asm_rewrite_tac(@list.List([]))
   let t39 = @tactics.match_mp_tac(semantics_equation())
   let t48 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t39), t40), t44), t45), t46), t47)
-  semantics_equation_alt_c.set(@tactics.prove(@parser.parse_term("forall sigma tau s t.\n        (s === t) has_type Bool /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))"), t48))
+  semantics_equation_alt_c.set(@tactics.prove(@parser.parse_term("∀ sigma tau s t.\n        (s === t) has_type Bool /\\\n        type_valuation tau /\\ term_valuation tau sigma\n        ==> (semantics sigma tau (s === t) =\n             boolean(semantics sigma tau s = semantics sigma tau t))"), t48))
 }
 
 ///|
@@ -253,7 +253,7 @@ fn step_12() -> Unit raise {
 ///|
 /// sequent
 fn step_13() -> Unit raise {
-  sequent_c.set(@pair.new_definition(@parser.parse_term("asms |= p <=> ALL (\\a. a has_type Bool) (CONS p asms) /\\\n                 forall sigma tau. type_valuation tau /\\\n                             term_valuation tau sigma /\\\n                              ALL (\\a. semantics sigma tau a = True) asms\n                              ==> (semantics sigma tau p = True)")))
+  sequent_c.set(@pair.new_definition(@parser.parse_term("asms |= p <=> ALL (\\a. a has_type Bool) (CONS p asms) /\\\n                 ∀ sigma tau. type_valuation tau /\\\n                             term_valuation tau sigma /\\\n                              ALL (\\a. semantics sigma tau a = True) asms\n                              ==> (semantics sigma tau p = True)")))
 }
 
 ///|
@@ -298,7 +298,7 @@ fn step_14() -> Unit raise {
   let t66 = @simp.rewrite_tac(@list.List([semantics(), @syntax.welltyped_clauses()]))
   let t65 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@syntax.raconv_induct()), t65), t66), t67), t69), t73), t74), t75), t76), @tactics.disch_tac), t77), t81), t82), t85), t86), t87), t88), t89), t90)
-  semantics_raconv_c.set(@tactics.prove(@parser.parse_term("forall env tp.\n        RACONV env tp\n        ==> forall sigma1 sigma2 tau.\n                type_valuation tau /\\\n                term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n                (forall x1 ty1 x2 ty2.\n                        ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n                        ==> (semantics sigma1 tau (Var x1 ty1) =\n                             semantics sigma2 tau (Var x2 ty2)))\n                ==> welltyped(FST tp) /\\ welltyped(SND tp)\n                    ==> (semantics sigma1 tau (FST tp) =\n                         semantics sigma2 tau (SND tp))"), t91))
+  semantics_raconv_c.set(@tactics.prove(@parser.parse_term("∀ env tp.\n        RACONV env tp\n        ==> ∀ sigma1 sigma2 tau.\n                type_valuation tau /\\\n                term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n                (∀ x1 ty1 x2 ty2.\n                        ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n                        ==> (semantics sigma1 tau (Var x1 ty1) =\n                             semantics sigma2 tau (Var x2 ty2)))\n                ==> welltyped(FST tp) /\\ welltyped(SND tp)\n                    ==> (semantics sigma1 tau (FST tp) =\n                         semantics sigma2 tau (SND tp))"), t91))
 }
 
 ///|
@@ -318,7 +318,7 @@ fn step_15() -> Unit raise {
   let t93 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_imp(), @theorems.right_imp_forall_thm(), @pair.forall_pair_thm()]))(semantics_raconv()))
   let t92 = @tactics.repeat_tac(@tactics.strip_tac)
   let t96 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@syntax.aconv()])), t92), t93), t94), t95)
-  semantics_aconv_c.set(@tactics.prove(@parser.parse_term("forall sigma tau s t.\n        type_valuation tau /\\ term_valuation tau sigma /\\\n         welltyped s /\\ welltyped t /\\ ACONV s t\n        ==> (semantics sigma tau s = semantics sigma tau t)"), t96))
+  semantics_aconv_c.set(@tactics.prove(@parser.parse_term("∀ sigma tau s t.\n        type_valuation tau /\\ term_valuation tau sigma /\\\n         welltyped s /\\ welltyped t /\\ ACONV s t\n        ==> (semantics sigma tau s = semantics sigma tau t)"), t96))
 }
 
 ///|
@@ -396,7 +396,7 @@ fn step_16() -> Unit raise {
   let t98 = @tactics.repeat_tac(@tactics.strip_tac)
   let t97 = @simp.asm_simp_tac(@list.List([@syntax.all_bool_term_union()]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([sequent(), @lists.all()])), @tactics.strip_tac), @tactics.strip_tac), t97), t98), t107), t108), t112), t113), @tactics.conj_tac), t114), t115), t116), t117), t124), t125), @tactics.strip_tac), @tactics.strip_tac), t129), t132), t133), t136), t143), t144), t145)
-  binary_inference_rule_c.set(@tactics.prove(@parser.parse_term("(p1 has_type Bool /\\ p2 has_type Bool\n   ==> q has_type Bool /\\\n       forall sigma tau. type_valuation tau /\\ term_valuation tau sigma /\\\n                   (semantics sigma tau p1 = True) /\\\n                   (semantics sigma tau p2 = True)\n                  ==> (semantics sigma tau q = True))\n   ==> (asl1 |= p1 /\\ asl2 |= p2 ==> TERM_UNION asl1 asl2 |= q)"), t146))
+  binary_inference_rule_c.set(@tactics.prove(@parser.parse_term("(p1 has_type Bool /\\ p2 has_type Bool\n   ==> q has_type Bool /\\\n       ∀ sigma tau. type_valuation tau /\\ term_valuation tau sigma /\\\n                   (semantics sigma tau p1 = True) /\\\n                   (semantics sigma tau p2 = True)\n                  ==> (semantics sigma tau q = True))\n   ==> (asl1 |= p1 /\\ asl2 |= p2 ==> TERM_UNION asl1 asl2 |= q)"), t146))
 }
 
 ///|
@@ -436,7 +436,7 @@ fn step_17() -> Unit raise {
       s148(x149)
     }
   }, @list.List([@theorems.swap_forall_thm()]))), t151), t152), t153), t154), t156), t157), t158), t159), @tactics.disch_tac), t160), t161), t162), @tactics.conj_tac), t163), t165), @tactics.disch_tac), t166), t167)
-  term_valuation_vfree_in_c.set(@tactics.prove(@parser.parse_term("forall tau sigma1 sigma2 t.\n        type_valuation tau /\\\n        term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n        welltyped t /\\\n        (forall x ty. VFREE_IN (Var x ty) t ==> (sigma1(x,ty) = sigma2(x,ty)))\n        ==> (semantics sigma1 tau t = semantics sigma2 tau t)"), t168))
+  term_valuation_vfree_in_c.set(@tactics.prove(@parser.parse_term("∀ tau sigma1 sigma2 t.\n        type_valuation tau /\\\n        term_valuation tau sigma1 /\\ term_valuation tau sigma2 /\\\n        welltyped t /\\\n        (∀ x ty. VFREE_IN (Var x ty) t ==> (sigma1(x,ty) = sigma2(x,ty)))\n        ==> (semantics sigma1 tau t = semantics sigma2 tau t)"), t168))
 }
 
 ///|
@@ -452,7 +452,7 @@ pub fn term_valuation_vfree_in() -> @kernel.Thm {
 /// ASSUME_correct
 fn step_18() -> Unit raise {
   let t169 = @simp.simp_tac(@list.List([sequent(), @lists.all()]))
-  assume_correct_c.set(@tactics.prove(@parser.parse_term("forall p. p has_type Bool ==> [p] |= p"), t169))
+  assume_correct_c.set(@tactics.prove(@parser.parse_term("∀ p. p has_type Bool ==> [p] |= p"), t169))
 }
 
 ///|
@@ -470,7 +470,7 @@ fn step_19() -> Unit raise {
   let t171 = @meson.meson_tac(@list.List([@syntax.has_type_rules()]))
   let t170 = @simp.rewrite_tac(@list.List([@modelset.boolean(), @syntax.equation()]))
   let t172 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([sequent(), semantics_equation(), @lists.all(), @syntax.welltyped_v1()])), t170), t171)
-  refl_correct_c.set(@tactics.prove(@parser.parse_term("forall t. welltyped t ==> [] |= t === t"), t172))
+  refl_correct_c.set(@tactics.prove(@parser.parse_term("∀ t. welltyped t ==> [] |= t === t"), t172))
 }
 
 ///|
@@ -503,7 +503,7 @@ fn step_20() -> Unit raise {
   }))
   let t173 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
   let t186 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t173), t180), t181), @tactics.strip_tac), t182), @tactics.conj_tac), t185)
-  trans_correct_c.set(@tactics.prove(@parser.parse_term("forall asl1 asl2 l m1 m2 r.\n        asl1 |= l === m1 /\\ asl2 |= m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |= l === r"), t186))
+  trans_correct_c.set(@tactics.prove(@parser.parse_term("∀ asl1 asl2 l m1 m2 r.\n        asl1 |= l === m1 /\\ asl2 |= m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |= l === r"), t186))
 }
 
 ///|
@@ -546,7 +546,7 @@ fn step_21() -> Unit raise {
   }))
   let t187 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
   let t208 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t187), t194), t195), @tactics.strip_tac), t196), @tactics.conj_tac), t207)
-  mk_comb_correct_c.set(@tactics.prove(@parser.parse_term("forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |= l1 === r1 /\\ asl2 |= l2 === r2 /\\\n        (?rty. typeof l1 = Fun (typeof l2) rty)\n        ==> TERM_UNION asl1 asl2 |= Comb l1 l2 === Comb r1 r2"), t208))
+  mk_comb_correct_c.set(@tactics.prove(@parser.parse_term("∀ asl1 l1 r1 asl2 l2 r2.\n        asl1 |= l1 === r1 /\\ asl2 |= l2 === r2 /\\\n        (?rty. typeof l1 = Fun (typeof l2) rty)\n        ==> TERM_UNION asl1 asl2 |= Comb l1 l2 === Comb r1 r2"), t208))
 }
 
 ///|
@@ -579,7 +579,7 @@ fn step_22() -> Unit raise {
   }))
   let t209 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
   let t222 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t209), t216), t217), @tactics.strip_tac), t218), @tactics.conj_tac), t221)
-  eq_mp_correct_c.set(@tactics.prove(@parser.parse_term("forall asl1 asl2 p q p'.\n        asl1 |= p === q /\\ asl2 |= p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |= q"), t222))
+  eq_mp_correct_c.set(@tactics.prove(@parser.parse_term("∀ asl1 asl2 p q p'.\n        asl1 |= p === q /\\ asl2 |= p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |= q"), t222))
 }
 
 ///|
@@ -608,7 +608,7 @@ fn step_23() -> Unit raise {
   let t224 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("a /\\ (a ==> b) ==> a /\\ b")))
   let t223 = @simp.rewrite_tac(@list.List([sequent(), @lists.all()]))
   let t236 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t223), t224), @tactics.conj_tac), t227), t228), @tactics.disch_tac), t229), @tactics.strip_tac), t230), t231), t232), @tactics.conj_tac), t233), t234), t235)
-  beta_correct_c.set(@tactics.prove(@parser.parse_term("forall x ty t. welltyped t ==> [] |= Comb (Abs x ty t) (Var x ty) === t"), t236))
+  beta_correct_c.set(@tactics.prove(@parser.parse_term("∀ x ty t. welltyped t ==> [] |= Comb (Abs x ty t) (Var x ty) === t"), t236))
 }
 
 ///|
@@ -701,7 +701,7 @@ fn step_24() -> Unit raise {
   let t238 = @simp.asm_rewrite_tac(@list.List([]))
   let t237 = @simp.rewrite_tac(@list.List([sequent(), @lists.all()]))
   let t296 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t237), @tactics.strip_tac), t238), t239), @tactics.conj_tac), t241), @tactics.disch_tac), t242), t243), t244), t248), t249), t250), t251), t252), @tactics.disch_tac), t253), t262), t263), t264), t265), t269), t270), t271), t272), t273), @tactics.disch_tac), t274), t281), t289), t290), t291), @tactics.conj_tac), t292), t293), t294), t295)
-  abs_correct_c.set(@tactics.prove(@parser.parse_term("forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |= l === r\n        ==> asl |= (Abs x ty l) === (Abs x ty r)"), t296))
+  abs_correct_c.set(@tactics.prove(@parser.parse_term("∀ asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |= l === r\n        ==> asl |= (Abs x ty l) === (Abs x ty r)"), t296))
 }
 
 ///|
@@ -758,7 +758,7 @@ fn step_25() -> Unit raise {
   let t298 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("\n    (a1 /\\ b1 ==> c1) /\\ (a1 /\\ b1 /\\ c1 ==> a2 /\\ b2 ==> c2)\n    ==> a1 /\\ a2 /\\ b1 /\\ b2 ==> c1 /\\ c2")))
   let t297 = @simp.rewrite_tac(@list.List([sequent(), @trivia.o_def(), @pair.let_def(), @pair.let_end_def(), @equal.gsym(@theorems.conj_assoc())]))
   let t332 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t297), t298), @tactics.conj_tac), t302), t303), t304), @tactics.strip_tac), t305), t308), t309), t310), t311), t312), @tactics.eq_tac), @tactics.disch_tac), t313), t314), @tactics.disch_tac), t318), t331)
-  deduct_antisym_rule_correct_c.set(@tactics.prove(@parser.parse_term("forall asl1 asl2 p q.\n        asl1 |= c1 /\\ asl2 |= c2\n        ==> let asl1' = FILTER((~) o ACONV c2) asl1\n            and asl2' = FILTER((~) o ACONV c1) asl2 in\n            (TERM_UNION asl1' asl2') |= c1 === c2"), t332))
+  deduct_antisym_rule_correct_c.set(@tactics.prove(@parser.parse_term("∀ asl1 asl2 p q.\n        asl1 |= c1 /\\ asl2 |= c2\n        ==> let asl1' = FILTER((~) o ACONV c2) asl1\n            and asl2' = FILTER((~) o ACONV c1) asl2 in\n            (TERM_UNION asl1' asl2') |= c1 === c2"), t332))
 }
 
 ///|
@@ -799,7 +799,7 @@ fn step_27() -> Unit raise {
   let t335 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @lists.mem(), @pair.pair_eq()]))
   let t334 = @simp.simp_tac(@list.List([@lists.itlist()]))
   let t343 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t334), t335), t336), t337), t338), t339), t340), t341), t342)
-  term_valuation_itlist_c.set(@tactics.prove(@parser.parse_term("forall ilist sigma tau.\n    type_valuation tau /\\ term_valuation tau sigma /\\\n    (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n    ==> term_valuation tau\n         (ITLIST (\\(t,x). DEST_VAR x |-> semantics sigma tau t) ilist sigma)"), t343))
+  term_valuation_itlist_c.set(@tactics.prove(@parser.parse_term("∀ ilist sigma tau.\n    type_valuation tau /\\ term_valuation tau sigma /\\\n    (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n    ==> term_valuation tau\n         (ITLIST (\\(t,x). DEST_VAR x |-> semantics sigma tau t) ilist sigma)"), t343))
 }
 
 ///|
@@ -906,7 +906,7 @@ fn step_28() -> Unit raise {
   let t345 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t344 = @simp.rewrite_tac(@list.List([@lists.filter(), @lists.itlist(), @class.cond_id()]))
   let t408 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t344), t345), t346), t347), t348), t349), t352), @tactics.disch_tac), t353), t360), t364), t368), t375), t383), t391), t392), t393), t394), t402), t403), t404), t405), t406), @class.cond_cases_tac), t407)
-  itlist_valmod_filter_c.set(@tactics.prove(@parser.parse_term("forall ilist sigma sem x ty y yty.\n     (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n     ==> (ITLIST (\\(t,x). DEST_VAR x |-> sem x t)\n           (FILTER (\\(s',s). ~(s = Var x ty)) ilist) sigma (y,yty) =\n          if (y = x) /\\ (yty = ty) then sigma(y,yty)\n          else ITLIST (\\(t,x). DEST_VAR x |-> sem x t) ilist sigma (y,yty))"), t408))
+  itlist_valmod_filter_c.set(@tactics.prove(@parser.parse_term("∀ ilist sigma sem x ty y yty.\n     (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n     ==> (ITLIST (\\(t,x). DEST_VAR x |-> sem x t)\n           (FILTER (\\(s',s). ~(s = Var x ty)) ilist) sigma (y,yty) =\n          if (y = x) /\\ (yty = ty) then sigma(y,yty)\n          else ITLIST (\\(t,x). DEST_VAR x |-> sem x t) ilist sigma (y,yty))"), t408))
 }
 
 ///|
@@ -926,7 +926,7 @@ fn step_29() -> Unit raise {
   let t410 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t409 = @simp.simp_tac(@list.List([@lists.mem(), @lists.itlist(), @pair.forall_pair_thm()]))
   let t413 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t409), t410), t411), t412)
-  itlist_valmod_eq_c.set(@tactics.prove(@parser.parse_term("forall l. (forall t x. MEM (t,x) l /\\ (f x = a) ==> (g x t = h x t)) /\\ (i a = j a)\n       ==> (ITLIST (\\(t,x). f(x) |-> g x t) l i a =\n            ITLIST (\\(t,x). f(x) |-> h x t) l j a)"), t413))
+  itlist_valmod_eq_c.set(@tactics.prove(@parser.parse_term("∀ l. (∀ t x. MEM (t,x) l /\\ (f x = a) ==> (g x t = h x t)) /\\ (i a = j a)\n       ==> (ITLIST (\\(t,x). f(x) |-> g x t) l i a =\n            ITLIST (\\(t,x). f(x) |-> h x t) l j a)"), t413))
 }
 
 ///|
@@ -1002,7 +1002,7 @@ fn step_30() -> Unit raise {
   let t589 = @tactics.match_mp_tac(@ind_types.list_induct())
   let t587 = @parser.parse_term("l:(term#term)list")
   let t588 = @tactics.spec_tac(@parser.parse_term("ilist:(term#term)list"), t587)
-  let t586 = @tactics.undisch_tac(@parser.parse_term("forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty"))
+  let t586 = @tactics.undisch_tac(@parser.parse_term("∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty"))
   let t584 = @simp.asm_rewrite_tac(@list.List([@syntax.term_inj()]))
   let t583 = @simp.rewrite_tac(@list.List([@syntax.rev_assocd_filter()]))
   let t585 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("ilist'"), t583), t584), @tactics.all_tac])
@@ -1143,7 +1143,7 @@ fn step_30() -> Unit raise {
   let t472 = @meson.asm_meson_tac(@list.List([@syntax.has_type_rules()]))
   let t471 = @simp.rewrite_tac(@list.List([@lists.mem(), @pair.pair_eq()]))
   let t473 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("ilist''"), t471), t472), @tactics.all_tac])
-  let t470 = @tactics.subgoal_then(@parser.parse_term("forall s s'. MEM (s',s) ilist'' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)"), fn(x467 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t470 = @tactics.subgoal_then(@parser.parse_term("∀ s s'. MEM (s',s) ilist'' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)"), fn(x467 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s468 = @tactics.assume_tac(x467)
     fn(x469 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s468(x469)
@@ -1152,7 +1152,7 @@ fn step_30() -> Unit raise {
   let t474 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@pair.let_tac), t470), t473), @tactics.all_tac])
   let t465 = @simp.asm_simp_tac(@list.List([@lists.mem_filter()]))
   let t466 = @list.List([@tactics.then_tac(@simp.expand_tac("ilist'"), t465), @tactics.all_tac])
-  let t464 = @tactics.subgoal_then(@parser.parse_term("forall s s'. MEM (s',s) ilist' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)"), fn(x461 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t464 = @tactics.subgoal_then(@parser.parse_term("∀ s s'. MEM (s',s) ilist' ==> (?x ty. (s = Var x ty) /\\ s' has_type ty)"), fn(x461 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s462 = @tactics.assume_tac(x461)
     fn(x463 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s462(x463)
@@ -1217,7 +1217,7 @@ fn step_30() -> Unit raise {
   let t450 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t415])), t416), t417), t420), t421), t422), t423), t430), t431), t435), t439), t446), t447), t448), t449), @tactics.all_tac])
   let t414 = @simp.rewrite_tac(@list.List([@syntax.vsubst(), semantics()]))
   let t635 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@syntax.term_induct()), t414), @tactics.conj_tac), t450), @tactics.conj_tac), t453), t456), t457), t458), t459), t460), @pair.let_tac), @pair.let_tac), t464), t466), @class.cond_cases_tac), t474), t475), t476), t477), t478), @tactics.disch_tac), t479), t480), t481), t482), t483), t484), t485), t487), @tactics.disch_tac), t492), t493), t494), t495), t562), t565), t566), t567), t568), t569), t577), t578), t582), t585), t586), t588), t589), t590), t591), t592), t593), t594), t595), t596), t597), t600), t607), t611), t615), t622), t623), t627), t628), @class.cond_cases_tac), t629), t630), t631), t632), t633), t634)
-  semantics_vsubst_c.set(@tactics.prove(@parser.parse_term("forall tm sigma tau ilist.\n       welltyped tm /\\\n       (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n       ==> forall sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau (VSUBST ilist tm) =\n                            semantics\n                             (ITLIST\n                                (\\(t,x). DEST_VAR x |-> semantics sigma tau t)\n                                ilist sigma)\n                             tau tm)"), t635))
+  semantics_vsubst_c.set(@tactics.prove(@parser.parse_term("∀ tm sigma tau ilist.\n       welltyped tm /\\\n       (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n       ==> ∀ sigma tau. type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau (VSUBST ilist tm) =\n                            semantics\n                             (ITLIST\n                                (\\(t,x). DEST_VAR x |-> semantics sigma tau t)\n                                ilist sigma)\n                             tau tm)"), t635))
 }
 
 ///|
@@ -1272,7 +1272,7 @@ fn step_31() -> Unit raise {
   let t643 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("ALL (\\a. a has_type Bool) (CONS p asl)")), t637), t638), @tactics.conj_tac), t640), @tactics.disch_tac), t641), t642), @tactics.all_tac])
   let t636 = @tactics.repeat_tac(@tactics.strip_tac)
   let t667 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([sequent()])), t636), t643), t647), t648), t649), t650), t651), t658), t659), t660), @tactics.disch_tac), t664), t665), t666)
-  inst_correct_c.set(@tactics.prove(@parser.parse_term("forall ilist asl p.\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> asl |= p ==> MAP (VSUBST ilist) asl |= VSUBST ilist p"), t667))
+  inst_correct_c.set(@tactics.prove(@parser.parse_term("∀ ilist asl p.\n        (∀ s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> asl |= p ==> MAP (VSUBST ilist) asl |= VSUBST ilist p"), t667))
 }
 
 ///|
@@ -1289,7 +1289,7 @@ pub fn inst_correct() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   let t668 = @simp.simp_tac(@list.List([typeset(), @syntax.type_subst()]))
   let t669 = @tactics.then_tac(@tactics.match_mp_tac(@syntax.type_induct()), t668)
-  typeset_lemma_c.set(@tactics.prove(@parser.parse_term("forall ty tau tyin.\n      typeset (\\s. typeset tau (REV_ASSOCD (Tyvar s) tyin (Tyvar s))) ty =\n      typeset tau (TYPE_SUBST tyin ty)"), t669))
+  typeset_lemma_c.set(@tactics.prove(@parser.parse_term("∀ ty tau tyin.\n      typeset (\\s. typeset tau (REV_ASSOCD (Tyvar s) tyin (Tyvar s))) ty =\n      typeset tau (TYPE_SUBST tyin ty)"), t669))
 }
 
 ///|
@@ -1419,7 +1419,7 @@ fn step_33() -> Unit raise {
       }
     })(((x1169 : @kernel.Thm) => @bool.specl(t1168, x1169))(x1170))
   })
-  let t1163 = @tactics.undisch_tac(@parser.parse_term("forall x'' ty'.\n           VFREE_IN (Var x'' ty') (VSUBST [Var x' ty,Var x ty] t)\n           ==> (REV_ASSOCD (Var x'' (TYPE_SUBST tyin ty')) env''\n                           (Var x'' ty') = Var x'' ty')"))
+  let t1163 = @tactics.undisch_tac(@parser.parse_term("∀ x'' ty'.\n           VFREE_IN (Var x'' ty') (VSUBST [Var x' ty,Var x ty] t)\n           ==> (REV_ASSOCD (Var x'' (TYPE_SUBST tyin ty')) env''\n                           (Var x'' ty') = Var x'' ty')"))
   let t1162 = @simp.rewrite_tac(@list.List([@syntax.vfree_in()]))
   let t1161 = @parser.parse_term("kty:type")
   let t1187 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("k:string"), t1161])), t1162), @tactics.strip_tac), t1163), t1171), t1172), t1173), t1174), t1175), t1176), t1177), t1178), t1179), t1180), t1181), t1182), @tactics.disch_tac), t1183), t1184), t1185), t1186), @tactics.all_tac])
@@ -1703,7 +1703,7 @@ fn step_33() -> Unit raise {
   let t936 = @parser.parse_term("yty:type")
   let t937 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("y:string"), t936]))
   let t935 = @simp.asm_rewrite_tac(@list.List([]))
-  let t934 = @tactics.undisch_then(@parser.parse_term("forall u uty.\n         VFREE_IN (Var u uty) t' <=>\n         (?oty. VFREE_IN (Var u oty) t /\\ (uty = TYPE_SUBST tyin oty))"), fn(x933 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t934 = @tactics.undisch_then(@parser.parse_term("∀ u uty.\n         VFREE_IN (Var u uty) t' <=>\n         (?oty. VFREE_IN (Var u oty) t /\\ (uty = TYPE_SUBST tyin oty))"), fn(x933 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
   let t931 = @meson.asm_meson_tac(@list.List([term_valuation()]))
@@ -2043,7 +2043,7 @@ fn step_33() -> Unit raise {
       })
     })(x1220)(x1220)
   }), t1221), @tactics.disch_tac), t1222), t1223), t1224), t1232), @tactics.ants_tac), t1244), t1248), t1249), t1250), @tactics.conj_tac), t1252), t1253), t1254), t1255), t1256), @tactics.conj_tac), t1267), t1269), @tactics.disch_tac), t1270), t1271), t1272), t1273), t1274)
-  semantics_inst_core_c.set(@tactics.prove(@parser.parse_term("forall n tm env tyin.\n        welltyped tm /\\ (sizeof tm = n) /\\\n        (forall s s'. MEM (s,s') env\n                ==> ?x ty. (s = Var x ty) /\\\n                           (s' = Var x (TYPE_SUBST tyin ty)))\n        ==> (?x ty. (INST_CORE env tyin tm =\n                     Clash(Var x (TYPE_SUBST tyin ty))) /\\\n                    VFREE_IN (Var x ty) tm /\\\n                    ~(REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) \\/\n            (forall x ty. VFREE_IN (Var x ty) tm\n                    ==> (REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) /\\\n            (?tm'. (INST_CORE env tyin tm = Result tm') /\\\n                   tm' has_type (TYPE_SUBST tyin (typeof tm)) /\\\n                   (forall u uty. VFREE_IN (Var u uty) tm' <=>\n                                ?oty. VFREE_IN (Var u oty) tm /\\\n                                      (uty = TYPE_SUBST tyin oty)) /\\\n                   forall sigma tau.\n                       type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau tm' =\n                            semantics\n                               (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                               (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s)))\n                               tm))"), t1275))
+  semantics_inst_core_c.set(@tactics.prove(@parser.parse_term("∀ n tm env tyin.\n        welltyped tm /\\ (sizeof tm = n) /\\\n        (∀ s s'. MEM (s,s') env\n                ==> ?x ty. (s = Var x ty) /\\\n                           (s' = Var x (TYPE_SUBST tyin ty)))\n        ==> (?x ty. (INST_CORE env tyin tm =\n                     Clash(Var x (TYPE_SUBST tyin ty))) /\\\n                    VFREE_IN (Var x ty) tm /\\\n                    ~(REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) \\/\n            (∀ x ty. VFREE_IN (Var x ty) tm\n                    ==> (REV_ASSOCD (Var x (TYPE_SUBST tyin ty))\n                                 env (Var x ty) = Var x ty)) /\\\n            (?tm'. (INST_CORE env tyin tm = Result tm') /\\\n                   tm' has_type (TYPE_SUBST tyin (typeof tm)) /\\\n                   (∀ u uty. VFREE_IN (Var u uty) tm' <=>\n                                ?oty. VFREE_IN (Var u oty) tm /\\\n                                      (uty = TYPE_SUBST tyin oty)) /\\\n                   ∀ sigma tau.\n                       type_valuation tau /\\ term_valuation tau sigma\n                       ==> (semantics sigma tau tm' =\n                            semantics\n                               (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                               (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s)))\n                               tm))"), t1275))
 }
 
 ///|
@@ -2065,7 +2065,7 @@ fn step_34() -> Unit raise {
   let t1278 = @parser.parse_term("tm:term")
   let t1279 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("sizeof tm"), t1278, t1277, t1276]), semantics_inst_core()))
   let t1282 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1279), t1280), t1281)
-  semantics_inst_c.set(@tactics.prove(@parser.parse_term("forall tyin tm.\n        welltyped tm\n        ==> (INST tyin tm) has_type (TYPE_SUBST tyin (typeof tm)) /\\\n            (forall u uty. VFREE_IN (Var u uty) (INST tyin tm) <=>\n                         ?oty. VFREE_IN (Var u oty) tm /\\\n                               (uty = TYPE_SUBST tyin oty)) /\\\n            forall sigma tau.\n                type_valuation tau /\\ term_valuation tau sigma\n                ==> (semantics sigma tau (INST tyin tm) =\n                     semantics\n                        (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                        (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s))) tm)"), t1282))
+  semantics_inst_c.set(@tactics.prove(@parser.parse_term("∀ tyin tm.\n        welltyped tm\n        ==> (INST tyin tm) has_type (TYPE_SUBST tyin (typeof tm)) /\\\n            (∀ u uty. VFREE_IN (Var u uty) (INST tyin tm) <=>\n                         ?oty. VFREE_IN (Var u oty) tm /\\\n                               (uty = TYPE_SUBST tyin oty)) /\\\n            ∀ sigma tau.\n                type_valuation tau /\\ term_valuation tau sigma\n                ==> (semantics sigma tau (INST tyin tm) =\n                     semantics\n                        (\\(x,ty). sigma(x,TYPE_SUBST tyin ty))\n                        (\\s. typeset tau (TYPE_SUBST tyin (Tyvar s))) tm)"), t1282))
 }
 
 ///|
@@ -2123,7 +2123,7 @@ fn step_35() -> Unit raise {
   let t1289 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("ALL (\\a. a has_type Bool) (CONS p asl)")), t1284), t1285), @tactics.conj_tac), t1287), t1288), @tactics.all_tac])
   let t1283 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1317 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([sequent()])), t1283), t1289), t1293), t1294), t1295), t1296), @tactics.conj_tac), t1298), @tactics.conj_tac), t1301), t1308), t1309), t1310), @tactics.disch_tac), t1314), t1315), t1316)
-  inst_type_correct_c.set(@tactics.prove(@parser.parse_term("forall tyin asl p. asl |= p ==> MAP (INST tyin) asl |= INST tyin p"), t1317))
+  inst_type_correct_c.set(@tactics.prove(@parser.parse_term("∀ tyin asl p. asl |= p ==> MAP (INST tyin) asl |= INST tyin p"), t1317))
 }
 
 ///|
@@ -2144,7 +2144,7 @@ fn step_36() -> Unit raise {
   let t1318 = @simp.rewrite_rule(@list.List([@theorems.imp_imp()]))(inst_correct())
   let t1319 = @simp.rewrite_tac(@list.List([refl_correct(), trans_correct(), abs_correct(), beta_correct(), assume_correct(), eq_mp_correct(), inst_type_correct(), @simp.rewrite_rule(@list.List([@pair.let_def(), @pair.let_end_def()]))(deduct_antisym_rule_correct()), t1318]))
   let t1323 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@syntax.proves_induct()), t1319), t1320), t1321), t1322)
-  hol_is_sound_c.set(@tactics.prove(@parser.parse_term("forall asl p. asl |- p ==> asl |= p"), t1323))
+  hol_is_sound_c.set(@tactics.prove(@parser.parse_term("∀ asl p. asl |- p ==> asl |= p"), t1323))
 }
 
 ///|

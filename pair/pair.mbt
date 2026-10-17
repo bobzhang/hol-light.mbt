@@ -241,7 +241,7 @@ fn step_13() -> Unit raise {
   rep_abs_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y",
+        "∀(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y",
       ),
       t2,
     ),
@@ -411,7 +411,7 @@ fn step_18() -> Unit raise {
   pair_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\\ (y = b)",
+        "∀(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\\ (y = b)",
       ),
       t14,
     ),
@@ -679,7 +679,7 @@ fn step_19() -> Unit raise {
     @tactics.refl_tac,
   )
   pair_surjective_c.set(
-    @tactics.prove(@parser.parse_term("forall p:A#B. ?x y. p = x,y"), t40),
+    @tactics.prove(@parser.parse_term("∀ p:A#B. ?x y. p = x,y"), t40),
   )
 }
 
@@ -735,7 +735,7 @@ fn step_20() -> Unit raise {
     t46,
   )
   fst_c.set(
-    @tactics.prove(@parser.parse_term("forall(x:A) (y:B). FST(x,y) = x"), t47),
+    @tactics.prove(@parser.parse_term("∀(x:A) (y:B). FST(x,y) = x"), t47),
   )
 }
 
@@ -789,7 +789,7 @@ fn step_21() -> Unit raise {
     t53,
   )
   snd_c.set(
-    @tactics.prove(@parser.parse_term("forall(x:A) (y:B). SND(x,y) = y"), t54),
+    @tactics.prove(@parser.parse_term("∀(x:A) (y:B). SND(x,y) = y"), t54),
   )
 }
 
@@ -860,7 +860,7 @@ fn step_22() -> Unit raise {
     ),
     t60,
   )
-  pair_c.set(@tactics.prove(@parser.parse_term("forall x:A#B. FST x,SND x = x"), t61))
+  pair_c.set(@tactics.prove(@parser.parse_term("∀ x:A#B. FST x,SND x = x"), t61))
 }
 
 ///|
@@ -936,7 +936,7 @@ fn step_23() -> Unit raise {
   )
   pair_induct_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A#B->bool. (forall x y. P (x,y)) ==> forall p. P p"),
+      @parser.parse_term("∀ P:A#B->bool. (∀ x y. P (x,y)) ==> ∀ p. P p"),
       t70,
     ),
   )
@@ -966,7 +966,7 @@ fn step_24() -> Unit raise {
   )
   pair_recursion_c.set(
     @tactics.prove(
-      @parser.parse_term("forall PAIR'. ?fn:A#B->C. forall a0 a1. fn (a0,a1) = PAIR' a0 a1"),
+      @parser.parse_term("∀ PAIR'. ?fn:A#B->C. ∀ a0 a1. fn (a0,a1) = PAIR' a0 a1"),
       t72,
     ),
   )
@@ -1231,7 +1231,7 @@ pub fn curry_def() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   uncurry_def_c.set(
     new_definition(
-      @parser.parse_term("forall f x y. UNCURRY(f:A->B->C)(x,y) = f x y"),
+      @parser.parse_term("∀ f x y. UNCURRY(f:A->B->C)(x,y) = f x y"),
     ),
   )
 }
@@ -1251,7 +1251,7 @@ fn step_33() -> Unit raise {
   passoc_def_c.set(
     new_definition(
       @parser.parse_term(
-        "forall f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)",
+        "∀ f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)",
       ),
     ),
   )
@@ -1615,7 +1615,7 @@ fn step_37() -> Unit raise {
   let t144 = @meson.meson_tac(@list.List([pair()]))
   forall_pair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A#B->bool. (forall p. P p) <=> (forall p1 p2. P(p1,p2))"),
+      @parser.parse_term("∀ P:A#B->bool. (∀ p. P p) <=> (∀ p1 p2. P(p1,p2))"),
       t144,
     ),
   )
@@ -1638,7 +1638,7 @@ fn step_38() -> Unit raise {
   let t145 = @meson.meson_tac(@list.List([pair()]))
   exists_pair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A#B->bool. (?p. P p) <=> ?p1 p2. P(p1,p2)"),
+      @parser.parse_term("∀ P:A#B->bool. (?p. P p) <=> ?p1 p2. P(p1,p2)"),
       t145,
     ),
   )
@@ -1663,7 +1663,7 @@ fn step_39() -> Unit raise {
   )
   lambda_pair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t:A#B->C. (\\p. t p) = (\\(x,y). t(x,y))"),
+      @parser.parse_term("∀ t:A#B->C. (\\p. t p) = (\\(x,y). t(x,y))"),
       t146,
     ),
   )
@@ -1687,7 +1687,7 @@ fn step_40() -> Unit raise {
   lambda_pair_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B->C. (\\(x,y). f x y) = (\\p. f (FST p) (SND p))",
+        "∀ f:A->B->C. (\\(x,y). f x y) = (\\p. f (FST p) (SND p))",
       ),
       t147,
     ),
@@ -1711,7 +1711,7 @@ fn step_41() -> Unit raise {
   )
   lambda_triple_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A#B#C->D. (\\t. f t) = (\\(x,y,z). f(x,y,z))"),
+      @parser.parse_term("∀ f:A#B#C->D. (\\t. f t) = (\\(x,y,z). f(x,y,z))"),
       t148,
     ),
   )
@@ -1735,7 +1735,7 @@ fn step_42() -> Unit raise {
   lambda_triple_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall f:A->B->C->D.\n   (\\(x,y,z). f x y z) = (\\t. f (FST t) (FST(SND t)) (SND(SND t)))",
+        "∀ f:A->B->C->D.\n   (\\(x,y,z). f x y z) = (\\t. f (FST t) (FST(SND t)) (SND(SND t)))",
       ),
       t149,
     ),
@@ -1761,7 +1761,7 @@ fn step_43() -> Unit raise {
   paired_eta_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "(forall f:A#B->C. (\\(x,y). f (x,y)) = f) /\\\n   (forall f:A#B#C->D. (\\(x,y,z). f (x,y,z)) = f) /\\\n   (forall f:A#B#C#D->E. (\\(w,x,y,z). f (w,x,y,z)) = f)",
+        "(∀ f:A#B->C. (\\(x,y). f (x,y)) = f) /\\\n   (∀ f:A#B#C->D. (\\(x,y,z). f (x,y,z)) = f) /\\\n   (∀ f:A#B#C#D->E. (\\(w,x,y,z). f (w,x,y,z)) = f)",
       ),
       t151,
     ),
@@ -1870,7 +1870,7 @@ fn step_44() -> Unit raise {
   )
   forall_uncurry_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (forall f:A->B->C. P f) <=> (forall f. P (\\a b. f(a,b)))"),
+      @parser.parse_term("∀ P. (∀ f:A->B->C. P f) <=> (∀ f. P (\\a b. f(a,b)))"),
       t162,
     ),
   )
@@ -1894,7 +1894,7 @@ fn step_45() -> Unit raise {
       @list.List([
         @meson.meson(
           @list.List([]),
-          @parser.parse_term("(?x. P x) <=> ~(forall x. ~P x)"),
+          @parser.parse_term("(?x. P x) <=> ~(∀ x. ~P x)"),
         ),
       ]),
     ),
@@ -1902,7 +1902,7 @@ fn step_45() -> Unit raise {
   )
   exists_uncurry_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (?f:A->B->C. P f) <=> (?f. P (\\a b. f(a,b)))"),
+      @parser.parse_term("∀ P. (?f:A->B->C. P f) <=> (?f. P (\\a b. f(a,b)))"),
       t164,
     ),
   )
@@ -1924,7 +1924,7 @@ fn step_46() -> Unit raise {
   exists_curry_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:(A#B->C)->bool. (?f. P f) <=> (?f. P (\\(a,b). f a b))",
+        "∀ P:(A#B->C)->bool. (?f. P f) <=> (?f. P (\\(a,b). f a b))",
       ),
       t165,
     ),
@@ -1947,7 +1947,7 @@ fn step_47() -> Unit raise {
   forall_curry_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:(A#B->C)->bool. (forall f. P f) <=> (forall f. P (\\(a,b). f a b))",
+        "∀ P:(A#B->C)->bool. (∀ f. P f) <=> (∀ f. P (\\(a,b). f a b))",
       ),
       t166,
     ),
@@ -1974,7 +1974,7 @@ fn step_48() -> Unit raise {
   forall_unpair_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->B->bool. (forall x y. P x y) <=> forall z. P (FST z) (SND z)",
+        "∀ P:A->B->bool. (∀ x y. P x y) <=> ∀ z. P (FST z) (SND z)",
       ),
       t168,
     ),
@@ -2003,7 +2003,7 @@ fn step_49() -> Unit raise {
   exists_unpair_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->B->bool. (?x y. P x y) <=> ?z. P (FST z) (SND z)",
+        "∀ P:A->B->bool. (?x y. P x y) <=> ?z. P (FST z) (SND z)",
       ),
       t170,
     ),
@@ -2065,7 +2065,7 @@ fn step_50() -> Unit raise {
   )
   forall_pair_fun_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (forall f:A->B#C. P f) <=> (forall g h. P(\\a. g a,h a))"),
+      @parser.parse_term("∀ P. (∀ f:A->B#C. P f) <=> (∀ g h. P(\\a. g a,h a))"),
       t181,
     ),
   )
@@ -2091,7 +2091,7 @@ fn step_51() -> Unit raise {
       @list.List([
         @meson.meson(
           @list.List([]),
-          @parser.parse_term("(?x. P x) <=> ~(forall x. ~P x)"),
+          @parser.parse_term("(?x. P x) <=> ~(∀ x. ~P x)"),
         ),
       ]),
     ),
@@ -2099,7 +2099,7 @@ fn step_51() -> Unit raise {
   )
   exists_pair_fun_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (?f:A->B#C. P f) <=> (?g h. P(\\a. g a,h a))"),
+      @parser.parse_term("∀ P. (?f:A->B#C. P f) <=> (?g h. P(\\a. g a,h a))"),
       t183,
     ),
   )
@@ -2125,7 +2125,7 @@ fn step_52() -> Unit raise {
   forall_unpair_fun_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:(A->B)->(A->C)->bool. (forall f g. P f g) <=> (forall h. P (FST o h) (SND o h))",
+        "∀ P:(A->B)->(A->C)->bool. (∀ f g. P f g) <=> (∀ h. P (FST o h) (SND o h))",
       ),
       t184,
     ),
@@ -2152,7 +2152,7 @@ fn step_53() -> Unit raise {
   exists_unpair_fun_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:(A->B)->(A->C)->bool. (?f g. P f g) <=> (?h. P (FST o h) (SND o h))",
+        "∀ P:(A->B)->(A->C)->bool. (?f g. P f g) <=> (?h. P (FST o h) (SND o h))",
       ),
       t185,
     ),
@@ -2203,7 +2203,7 @@ fn step_54() -> Unit raise {
   exists_swap_fun_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:(A->B->C)->bool. (?f. P f) <=> (?f. P (\\a b. f b a))",
+        "∀ P:(A->B->C)->bool. (?f. P f) <=> (?f. P (\\a b. f b a))",
       ),
       t195,
     ),
@@ -2255,7 +2255,7 @@ fn step_55() -> Unit raise {
   )
   forall_paired_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->B->bool. (forall(x,y). P x y) <=> (forall x y. P x y)"),
+      @parser.parse_term("∀ P:A->B->bool. (∀(x,y). P x y) <=> (∀ x y. P x y)"),
       t204,
     ),
   )
@@ -2292,7 +2292,7 @@ fn step_56() -> Unit raise {
   )
   exists_paired_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->B->bool. (?(x,y). P x y) <=> (?x y. P x y)"),
+      @parser.parse_term("∀ P:A->B->bool. (?(x,y). P x y) <=> (?x y. P x y)"),
       t206,
     ),
   )
@@ -2344,7 +2344,7 @@ fn step_57() -> Unit raise {
   forall_tripled_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->B->C->bool. (forall(x,y,z). P x y z) <=> (forall x y z. P x y z)",
+        "∀ P:A->B->C->bool. (∀(x,y,z). P x y z) <=> (∀ x y z. P x y z)",
       ),
       t215,
     ),
@@ -2383,7 +2383,7 @@ fn step_58() -> Unit raise {
   exists_tripled_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P:A->B->C->bool. (?(x,y,z). P x y z) <=> (?x y z. P x y z)",
+        "∀ P:A->B->C->bool. (?(x,y,z). P x y z) <=> (?x y z. P x y z)",
       ),
       t217,
     ),
@@ -2407,7 +2407,7 @@ fn step_59() -> Unit raise {
   let t218 = @simp.rewrite_tac(@list.List([lambda_pair()]))
   choice_unpair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))"),
+      @parser.parse_term("∀ P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))"),
       t218,
     ),
   )
@@ -2432,7 +2432,7 @@ fn step_60() -> Unit raise {
   let t227 = @tactics.remove_then("c", @tactics.match_mp_tac)
   let t226 = @tactics.remove_then("PQ", @tactics.match_mp_tac)
   let t225 = @simp.once_rewrite_tac(@list.List([@equal.gsym(pair())]))
-  let t224 = @theorems.intro_tac("forall[c]; c")
+  let t224 = @theorems.intro_tac("∀[c]; c")
   let t223 = @list.List([
     @simp.rewrite_tac(@list.List([lambda_pair_thm()])),
     @canon.select_elim_tac,
@@ -2494,7 +2494,7 @@ fn step_60() -> Unit raise {
             @tactics.then_tac(
               @tactics.thenl(
                 @tactics.then_tac(
-                  @theorems.intro_tac("forall P Q; (@x0 y0. P0) PQ"),
+                  @theorems.intro_tac("∀ P Q; (@x0 y0. P0) PQ"),
                   t222,
                 ),
                 t223,
@@ -2514,7 +2514,7 @@ fn step_60() -> Unit raise {
   choice_paired_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
-        "forall P Q. (?x:A y:B. P x y) /\\ (forall x y. P x y ==> Q(x,y)) ==> Q (@(x,y). P x y)",
+        "∀ P Q. (?x:A y:B. P x y) /\\ (∀ x y. P x y ==> Q(x,y)) ==> Q (@(x,y). P x y)",
       ),
       t230,
     ),

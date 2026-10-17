@@ -22,7 +22,7 @@ fn step_3() -> Unit raise {
 ///|
 /// Tutorial/Vectors.ml:11
 fn step_4() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("forall x y:real^N. x dot y <= norm x * norm y")))
+  ignore(@tactics.g(@parser.parse_term("∀ x y:real^N. x dot y <= norm x * norm y")))
 }
 
 ///|
@@ -35,7 +35,7 @@ fn step_5() -> Unit raise {
 /// FORALL_3
 fn step_6() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= i /\\ i <= 3 <=> (i = 1) \\/ (i = 2) \\/ (i = 3)"))]))
-  forall_3_c.set(@tactics.prove(@parser.parse_term("(forall i. 1 <= i /\\ i <= 3 ==> P i) <=> P 1 /\\ P 2 /\\ P 3"), t1))
+  forall_3_c.set(@tactics.prove(@parser.parse_term("(∀ i. 1 <= i /\\ i <= 3 ==> P i) <=> P 1 /\\ P 2 /\\ P 3"), t1))
 }
 
 ///|
@@ -53,7 +53,7 @@ fn step_7() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@iterate.sum_sing_numseg(), @calc_num.arith(), @realax.real_add_assoc()]))
   let t2 = @calc_num.num_conv(@parser.parse_term("2"))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("3")), t2, @iterate.sum_clauses_numseg()])), t3)
-  sum_3_c.set(@tactics.prove(@parser.parse_term("forall t. sum(1..3) t = t(1) + t(2) + t(3)"), t4))
+  sum_3_c.set(@tactics.prove(@parser.parse_term("∀ t. sum(1..3) t = t(1) + t(2) + t(3)"), t4))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn vec3_rule(x12 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// ORTHOGONAL_CROSS
 fn step_15() -> Unit raise {
-  orthogonal_cross_c.set(vec3_rule(@parser.parse_term("forall x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n        orthogonal x (x cross y) /\\ orthogonal y (x cross y)")))
+  orthogonal_cross_c.set(vec3_rule(@parser.parse_term("∀ x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n        orthogonal x (x cross y) /\\ orthogonal y (x cross y)")))
 }
 
 ///|
@@ -208,7 +208,7 @@ pub fn lemma_0() -> @kernel.Thm {
 ///|
 /// LEMMA_1
 fn step_17() -> Unit raise {
-  lemma_1_c.set(vec3_rule(@parser.parse_term("forall u v. u dot (u cross v) = &0")))
+  lemma_1_c.set(vec3_rule(@parser.parse_term("∀ u v. u dot (u cross v) = &0")))
 }
 
 ///|
@@ -223,7 +223,7 @@ pub fn lemma_1() -> @kernel.Thm {
 ///|
 /// LEMMA_2
 fn step_18() -> Unit raise {
-  lemma_2_c.set(vec3_rule(@parser.parse_term("forall u v. v dot (u cross v) = &0")))
+  lemma_2_c.set(vec3_rule(@parser.parse_term("∀ u v. v dot (u cross v) = &0")))
 }
 
 ///|
@@ -238,7 +238,7 @@ pub fn lemma_2() -> @kernel.Thm {
 ///|
 /// LEMMA_3
 fn step_19() -> Unit raise {
-  lemma_3_c.set(vec3_rule(@parser.parse_term("forall u:real^3. vec 0 dot u = &0")))
+  lemma_3_c.set(vec3_rule(@parser.parse_term("∀ u:real^3. vec 0 dot u = &0")))
 }
 
 ///|
@@ -253,7 +253,7 @@ pub fn lemma_3() -> @kernel.Thm {
 ///|
 /// LEMMA_4
 fn step_20() -> Unit raise {
-  lemma_4_c.set(vec3_rule(@parser.parse_term("forall u:real^3. u dot vec 0 = &0")))
+  lemma_4_c.set(vec3_rule(@parser.parse_term("∀ u:real^3. u dot vec 0 = &0")))
 }
 
 ///|
@@ -268,7 +268,7 @@ pub fn lemma_4() -> @kernel.Thm {
 ///|
 /// LEMMA_5
 fn step_21() -> Unit raise {
-  lemma_5_c.set(vec3_rule(@parser.parse_term("forall x. x cross x = vec 0")))
+  lemma_5_c.set(vec3_rule(@parser.parse_term("∀ x. x cross x = vec 0")))
 }
 
 ///|
@@ -283,7 +283,7 @@ pub fn lemma_5() -> @kernel.Thm {
 ///|
 /// LEMMA_6
 fn step_22() -> Unit raise {
-  lemma_6_c.set(vec3_rule(@parser.parse_term("forall u. ~(u = vec 0)\n      ==> ~(u cross basis 1 = vec 0) \\/\n          ~(u cross basis 2 = vec 0) \\/\n          ~(u cross basis 3 = vec 0)")))
+  lemma_6_c.set(vec3_rule(@parser.parse_term("∀ u. ~(u = vec 0)\n      ==> ~(u cross basis 1 = vec 0) \\/\n          ~(u cross basis 2 = vec 0) \\/\n          ~(u cross basis 3 = vec 0)")))
 }
 
 ///|
@@ -298,7 +298,7 @@ pub fn lemma_6() -> @kernel.Thm {
 ///|
 /// LEMMA_7
 fn step_23() -> Unit raise {
-  lemma_7_c.set(vec3_rule(@parser.parse_term("forall u v w. (u cross v = vec 0) ==> (u dot (v cross w) = &0)")))
+  lemma_7_c.set(vec3_rule(@parser.parse_term("∀ u v w. (u cross v = vec 0) ==> (u dot (v cross w) = &0)")))
 }
 
 ///|
@@ -319,7 +319,7 @@ fn step_24() -> Unit raise {
   let t14 = @parser.parse_term("v:real^3 = vec 0")
   let t15 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("u:real^3 = vec 0"), t14, t13]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t15), t16), t17)
-  normal_exists_c.set(@tactics.prove(@parser.parse_term("forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w"), t18))
+  normal_exists_c.set(@tactics.prove(@parser.parse_term("∀ u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w"), t18))
 }
 
 ///|

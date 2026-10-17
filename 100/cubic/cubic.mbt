@@ -32,7 +32,7 @@ fn step_3() -> Unit raise {
   let t2 = @list.List([@tactics.conv_tac(@complexnumbers.complex_ring), @tactics.all_tac])
   let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([ccbrt()]))), @class.cond_cases_tac), t1), t2), t4), t5), t6)
-  ccbrt_v1_c.set(@tactics.prove(@parser.parse_term("forall z. ccbrt(z) pow 3 = z"), t7))
+  ccbrt_v1_c.set(@tactics.prove(@parser.parse_term("∀ z. ccbrt(z) pow 3 = z"), t7))
 }
 
 ///|
@@ -62,7 +62,7 @@ pub fn cubic_reduction() -> @kernel.Thm {
 ///|
 /// CUBIC_BASIC
 fn step_5() -> Unit raise {
-  cubic_basic_c.set(@complexnumbers.complex_field(@parser.parse_term("forall i t s.\n    s pow 2 = q pow 2 + p pow 3 /\\\n    (s1 pow 3 = if p = Cx(&0) then Cx(&2) * q else q + s) /\\\n    s2 = --s1 * (Cx(&1) + i * t) / Cx(&2) /\\\n    s3 = --s1 * (Cx(&1) - i * t) / Cx(&2) /\\\n    i pow 2 + Cx(&1) = Cx(&0) /\\\n    t pow 2 = Cx(&3)\n    ==> if p = Cx(&0) then\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n           y = s1 \\/ y = s2 \\/ y = s3)\n        else\n          ~(s1 = Cx(&0)) /\\\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n               (y = s1 - p / s1 \\/ y = s2 - p / s2 \\/ y = s3 - p / s3))")))
+  cubic_basic_c.set(@complexnumbers.complex_field(@parser.parse_term("∀ i t s.\n    s pow 2 = q pow 2 + p pow 3 /\\\n    (s1 pow 3 = if p = Cx(&0) then Cx(&2) * q else q + s) /\\\n    s2 = --s1 * (Cx(&1) + i * t) / Cx(&2) /\\\n    s3 = --s1 * (Cx(&1) - i * t) / Cx(&2) /\\\n    i pow 2 + Cx(&1) = Cx(&0) /\\\n    t pow 2 = Cx(&3)\n    ==> if p = Cx(&0) then\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n           y = s1 \\/ y = s2 \\/ y = s3)\n        else\n          ~(s1 = Cx(&0)) /\\\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n               (y = s1 - p / s1 \\/ y = s2 - p / s2 \\/ y = s3 - p / s3))")))
 }
 
 ///|

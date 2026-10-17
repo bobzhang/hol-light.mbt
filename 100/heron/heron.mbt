@@ -73,7 +73,7 @@ fn step_3() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@measure.measure_triangle()]))
   let t18 = @simp.rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def()]))
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t18), t19), t20), t21), t22), t23), t24), t25), t26), sqrt_elim_tac), t27), t28)
-  heron_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^2.\n        let a = dist(C,B)\n        and b = dist(A,C)\n        and c = dist(B,A) in\n        let s = (a + b + c) / &2 in\n        measure(convex hull {A,B,C}) = sqrt(s * (s - a) * (s - b) * (s - c))"), t29))
+  heron_c.set(@tactics.prove(@parser.parse_term("∀ A B C:real^2.\n        let a = dist(C,B)\n        and b = dist(A,C)\n        and c = dist(B,A) in\n        let s = (a + b + c) / &2 in\n        measure(convex hull {A,B,C}) = sqrt(s * (s - a) * (s - b) * (s - c))"), t29))
 }
 
 ///|

@@ -173,7 +173,7 @@ fn step_3() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([]))
   let t31 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t31), t32)
-  cond_left_c.set(@tactics.prove(@parser.parse_term("forall b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))"), t33))
+  cond_left_c.set(@tactics.prove(@parser.parse_term("∀ b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))"), t33))
 }
 
 ///|
@@ -191,7 +191,7 @@ fn step_4() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([]))
   let t34 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t34), t35)
-  cond_right_c.set(@tactics.prove(@parser.parse_term("forall b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))"), t36))
+  cond_right_c.set(@tactics.prove(@parser.parse_term("∀ b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))"), t36))
 }
 
 ///|

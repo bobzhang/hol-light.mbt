@@ -1385,7 +1385,7 @@ pub fn follow_rel() -> @kernel.Thm {
 ///|
 /// RESTRICTED_UNLESS_STMT
 fn step_92() -> Unit raise {
-  restricted_unless_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_UNLESS_STMT v p q st =\n       (forall s:'state. p s /\\ v s /\\ ~(q s) ==> p (st s) \\/ q (st s))")))
+  restricted_unless_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_UNLESS_STMT v p q st =\n       (∀ s:'state. p s /\\ v s /\\ ~(q s) ==> p (st s) \\/ q (st s))")))
 }
 
 ///|
@@ -1430,7 +1430,7 @@ pub fn restricted_unless() -> @kernel.Thm {
 ///|
 /// RESTRICTED_STABLE_STMT
 fn step_95() -> Unit raise {
-  restricted_stable_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_STABLE_STMT v p st =\n       (forall s:'state. p s /\\ v s ==> p (st s))")))
+  restricted_stable_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_STABLE_STMT v p st =\n       (∀ s:'state. p s /\\ v s ==> p (st s))")))
 }
 
 ///|
@@ -1475,7 +1475,7 @@ pub fn restricted_stable() -> @kernel.Thm {
 ///|
 /// RESTRICTED_EXISTS_TRANSITION_STMT
 fn step_98() -> Unit raise {
-  restricted_exists_transition_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_EXISTS_TRANSITION_STMT v p q st =\n       (forall s:'state. p s /\\ v s /\\ ~(q s) ==> q (st s))")))
+  restricted_exists_transition_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_EXISTS_TRANSITION_STMT v p q st =\n       (∀ s:'state. p s /\\ v s /\\ ~(q s) ==> q (st s))")))
 }
 
 ///|
@@ -1550,7 +1550,7 @@ pub fn restricted_leadsto() -> @kernel.Thm {
 ///|
 /// VALID
 fn step_103() -> Unit raise {
-  valid_c.set(@pair.new_definition(@parser.parse_term("VALID (p:'state->bool) = forall s. p s")))
+  valid_c.set(@pair.new_definition(@parser.parse_term("VALID (p:'state->bool) = ∀ s. p s")))
 }
 
 ///|
@@ -1565,7 +1565,7 @@ pub fn valid() -> @kernel.Thm {
 ///|
 /// TRIPLE_term
 fn step_104() -> Unit raise {
-  triple_term_c.set(@parser.parse_term("(TRIPLE (p:'state->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:'state->'state) Pr) =\n     ((forall s. p s ==> q(st s)) /\\ TRIPLE p q Pr))"))
+  triple_term_c.set(@parser.parse_term("(TRIPLE (p:'state->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:'state->'state) Pr) =\n     ((∀ s. p s ==> q(st s)) /\\ TRIPLE p q Pr))"))
 }
 
 ///|

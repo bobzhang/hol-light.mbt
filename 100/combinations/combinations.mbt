@@ -5,7 +5,7 @@
 /// NUMBER_OF_COMBINATIONS
 fn step_1() -> Unit raise {
   let t1 = @tactics.match_accept_tac(@binomial.has_size_restricted_powerset())
-  number_of_combinations_c.set(@tactics.prove(@parser.parse_term("forall n m s:A->bool.\n        s HAS_SIZE n\n        ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)"), t1))
+  number_of_combinations_c.set(@tactics.prove(@parser.parse_term("∀ n m s:A->bool.\n        s HAS_SIZE n\n        ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)"), t1))
 }
 
 ///|
@@ -34,7 +34,7 @@ fn step_2() -> Unit raise {
     })(t8(x9))
   })
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t10), t11)
-  number_of_combinations_explicit_c.set(@tactics.prove(@parser.parse_term("forall n m s:A->bool.\n        s HAS_SIZE n\n        ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE\n            (if n < m then 0 else FACT(n) DIV (FACT(m) * FACT(n - m)))"), t12))
+  number_of_combinations_explicit_c.set(@tactics.prove(@parser.parse_term("∀ n m s:A->bool.\n        s HAS_SIZE n\n        ==> {t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE\n            (if n < m then 0 else FACT(n) DIV (FACT(m) * FACT(n - m)))"), t12))
 }
 
 ///|

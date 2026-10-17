@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@modal.holds()])), t1)
-  holds_nnfc_unfold_c.set(@tactics.prove(@parser.parse_term("(forall V w:W. ~holds (W,R) V False w) /\\\n   (forall V w. holds (W,R) V True w) /\\\n   (forall V s w. holds (W,R) V (Atom s) w <=> V s w) /\\\n   (forall V p w. holds (W,R) V (Not p) w <=> ~holds (W,R) V p w) /\\\n   (forall p V q w.\n      holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p --> q) w <=>\n      ~holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p <-> q) w <=>\n      (holds (W,R) V p w \\/ ~holds (W,R) V q w) /\\\n      (~holds (W,R) V p w \\/ holds (W,R) V q w))"), t2))
+  holds_nnfc_unfold_c.set(@tactics.prove(@parser.parse_term("(∀ V w:W. ~holds (W,R) V False w) /\\\n   (∀ V w. holds (W,R) V True w) /\\\n   (∀ V s w. holds (W,R) V (Atom s) w <=> V s w) /\\\n   (∀ V p w. holds (W,R) V (Not p) w <=> ~holds (W,R) V p w) /\\\n   (∀ p V q w.\n      holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n   (∀ p V q w.\n      holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (∀ p V q w.\n      holds (W,R) V (p --> q) w <=>\n      ~holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (∀ p V q w.\n      holds (W,R) V (p <-> q) w <=>\n      (holds (W,R) V p w \\/ ~holds (W,R) V q w) /\\\n      (~holds (W,R) V p w \\/ holds (W,R) V q w))"), t2))
 }
 
 ///|
@@ -35,8 +35,8 @@ fn step_2() -> Unit raise {
   let t7 = @theorems.claim_tac("tnt", @parser.parse_term("TRANSNT(W:A->bool,R)"))
   let t6 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t5 = @simp.rewrite_tac(@list.List([@modal.holds()]))
-  let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall W R p w; WR w"), t5), @tactics.eq_tac), t6), t7), t9), t10), t11), t12), t13), t14), t15)
-  let holds_box_eq = @tactics.prove(@parser.parse_term("forall W R p w:A.\n       ITF (W,R) /\\ w IN W\n       ==> (holds (W,R) V (Box p) w <=>\n            (forall y. y IN W /\\ R w y ==> holds (W,R) V (Box p --> p) y))"), t16)
+  let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("∀ W R p w; WR w"), t5), @tactics.eq_tac), t6), t7), t9), t10), t11), t12), t13), t14), t15)
+  let holds_box_eq = @tactics.prove(@parser.parse_term("∀ W R p w:A.\n       ITF (W,R) /\\ w IN W\n       ==> (holds (W,R) V (Box p) w <=>\n            (∀ y. y IN W /\\ R w y ==> holds (W,R) V (Box p --> p) y))"), t16)
   let t36 = @meson.asm_meson_tac(@list.List([@gl.itf()]))
   let t35 = @simp.once_rewrite_tac(@list.List([@modal.holds()]))
   let t33 = @meson.meson_tac(@list.List([]))
@@ -60,7 +60,7 @@ fn step_2() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([@modal.valid(), @pair.forall_pair_thm(), @modal.holds_in()]))
   let t17 = @tactics.match_mp_tac(completeness_theorem_num)
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_imp()]))), @tactics.disch_tac), t17), t18), t19), t20), t21), t22), t23), @tactics.conj_tac), t24), t25), @tactics.conj_tac), t29), @tactics.disch_tac), @tactics.conj_tac), t34), t35), t36)
-  completeness_num_c.set(@tactics.prove(@parser.parse_term("forall p. (forall W R V w:num.\n          (forall x y z:num. R y z ==> R x y ==> R x z) /\\\n          (forall p w. w IN W /\\\n                 (forall y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                      ==> holds (W,R) V p y)\n                 ==> holds (W,R) V (Box p) w) /\\\n          (forall Q p w. w IN W /\\\n                   (forall y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                        ==> holds (W,R) V p y \\/ Q)\n                   ==> holds (W,R) V (Box p) w \\/ Q) /\\\n          (forall w w'. R w w'\n                  ==> forall p. holds (W,R) V (Box p) w ==> holds (W,R) V p w') /\\\n          (forall p w. holds (W,R) V (Box p) w\n                 ==> forall w'. R w w' ==> holds (W,R) V p w') /\\\n          w IN W\n          ==> holds (W,R) V p w)\n       ==> |-- p"), t37))
+  completeness_num_c.set(@tactics.prove(@parser.parse_term("∀ p. (∀ W R V w:num.\n          (∀ x y z:num. R y z ==> R x y ==> R x z) /\\\n          (∀ p w. w IN W /\\\n                 (∀ y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                      ==> holds (W,R) V p y)\n                 ==> holds (W,R) V (Box p) w) /\\\n          (∀ Q p w. w IN W /\\\n                   (∀ y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                        ==> holds (W,R) V p y \\/ Q)\n                   ==> holds (W,R) V (Box p) w \\/ Q) /\\\n          (∀ w w'. R w w'\n                  ==> ∀ p. holds (W,R) V (Box p) w ==> holds (W,R) V p w') /\\\n          (∀ p w. holds (W,R) V (Box p) w\n                 ==> ∀ w'. R w w' ==> holds (W,R) V p w') /\\\n          w IN W\n          ==> holds (W,R) V p w)\n       ==> |-- p"), t37))
 }
 
 ///|
@@ -660,7 +660,7 @@ pub fn gl_second_incompleteness_theorem() -> @kernel.Thm {
 ///|
 /// GL_PA_ignorance
 fn step_20() -> Unit raise {
-  gl_pa_ignorance_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ((Box False) <-> Box (Diam p))")))
+  gl_pa_ignorance_c.set(@lib.time(gl_rule, @parser.parse_term("∀ p. |-- ((Box False) <-> Box (Diam p))")))
 }
 
 ///|
@@ -690,7 +690,7 @@ pub fn gl_pa_undecidability_of_consistency() -> @kernel.Thm {
 ///|
 /// GL_undecidability_of_Godels_formula
 fn step_22() -> Unit raise {
-  gl_undecidability_of_godels_formula_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ( Box (p <-> Not (Box p)) && Not (Box (Box False))\n             --> Not (Box p) && Not (Box (Not p)) )")))
+  gl_undecidability_of_godels_formula_c.set(@lib.time(gl_rule, @parser.parse_term("∀ p. |-- ( Box (p <-> Not (Box p)) && Not (Box (Box False))\n             --> Not (Box p) && Not (Box (Not p)) )")))
 }
 
 ///|
@@ -705,7 +705,7 @@ pub fn gl_undecidability_of_godels_formula() -> @kernel.Thm {
 ///|
 /// GL_reflection_and_iterated_consistency
 fn step_23() -> Unit raise {
-  gl_reflection_and_iterated_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ( Box ((Box p --> p) --> Diam (Diam True))\n             --> (Diam (Diam True) --> (Box p --> p)) )")))
+  gl_reflection_and_iterated_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("∀ p. |-- ( Box ((Box p --> p) --> Diam (Diam True))\n             --> (Diam (Diam True) --> (Box p --> p)) )")))
 }
 
 ///|
@@ -720,7 +720,7 @@ pub fn gl_reflection_and_iterated_consistency() -> @kernel.Thm {
 ///|
 /// GL_Godel_sentence_equiconsistent_consistency
 fn step_24() -> Unit raise {
-  gl_godel_sentence_equiconsistent_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ( Box (p <-> Not (Box p)) <-> Box (p <-> Not (Box False)) )")))
+  gl_godel_sentence_equiconsistent_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("∀ p. |-- ( Box (p <-> Not (Box p)) <-> Box (p <-> Not (Box False)) )")))
 }
 
 ///|
@@ -735,7 +735,7 @@ pub fn gl_godel_sentence_equiconsistent_consistency() -> @kernel.Thm {
 ///|
 /// GL_arithmetical_fixpoint
 fn step_25() -> Unit raise {
-  gl_arithmetical_fixpoint_c.set(@lib.time(gl_rule, @parser.parse_term("forall p q. |-- ( Dotbox (p <-> Not (Box (q --> p))) <->\n               Dotbox (p <-> Diam q) )")))
+  gl_arithmetical_fixpoint_c.set(@lib.time(gl_rule, @parser.parse_term("∀ p q. |-- ( Dotbox (p <-> Not (Box (q --> p))) <->\n               Dotbox (p <-> Diam q) )")))
 }
 
 ///|

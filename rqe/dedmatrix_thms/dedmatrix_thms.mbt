@@ -19,7 +19,7 @@ fn step_1() -> Unit raise {
   }), @calc_rat.real_arith_tac)
   let t10 = @tactics.first_assum(@tactics.match_mp_tac)
   let t11 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t10, t9, t8, t7])
-  le_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall y. y <= Y ==> P y) ==>\n  (forall y. y < Y ==> P y) /\\\n  (forall y. (y = Y) ==> P y)"), t11))
+  le_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(∀ y. y <= Y ==> P y) ==>\n  (∀ y. y < Y ==> P y) /\\\n  (∀ y. (y = Y) ==> P y)"), t11))
 }
 
 ///|
@@ -42,7 +42,7 @@ fn step_2() -> Unit raise {
   })
   let t16 = @tactics.first_assum(@tactics.match_mp_tac)
   let t17 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t16, t15])
-  lt_int_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall y. y < Y ==> P y) ==> X < Y ==>\n  (forall y. X < y /\\ y < Y ==> P y)"), t17))
+  lt_int_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(∀ y. y < Y ==> P y) ==> X < Y ==>\n  (∀ y. X < y /\\ y < Y ==> P y)"), t17))
 }
 
 ///|
@@ -72,7 +72,7 @@ fn step_3() -> Unit raise {
   }), @calc_rat.real_arith_tac)
   let t27 = @tactics.first_assum(@tactics.match_mp_tac)
   let t28 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t27, t26, t25, t24])
-  ge_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall y. Y <= y ==> P y) ==>\n  (forall y. Y < y ==> P y) /\\\n  (forall y. (y = Y) ==> P y)"), t28))
+  ge_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(∀ y. Y <= y ==> P y) ==>\n  (∀ y. Y < y ==> P y) /\\\n  (∀ y. (y = Y) ==> P y)"), t28))
 }
 
 ///|
@@ -95,7 +95,7 @@ fn step_4() -> Unit raise {
   })
   let t33 = @tactics.first_assum(@tactics.match_mp_tac)
   let t34 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t33, t32])
-  gt_int_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(forall y. Y < y ==> P y) ==> Y < X ==>\n  (forall y. Y < y /\\ y < X ==> P y)"), t34))
+  gt_int_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(∀ y. Y < y ==> P y) ==> Y < X ==>\n  (∀ y. Y < y /\\ y < X ==> P y)"), t34))
 }
 
 ///|
@@ -113,7 +113,7 @@ fn step_5() -> Unit raise {
   let t35 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans(), @realax.real_gt()]))
   let t36 = @tactics.first_assum(@tactics.match_mp_tac)
   let t37 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t36, t35])
-  rest_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("Y < X ==> (forall x. x < X ==> P x) ==> (forall x. x < Y ==> P x)"), t37))
+  rest_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("Y < X ==> (∀ x. x < X ==> P x) ==> (∀ x. x < Y ==> P x)"), t37))
 }
 
 ///|
@@ -131,7 +131,7 @@ fn step_6() -> Unit raise {
   let t38 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans(), @realax.real_gt()]))
   let t39 = @tactics.first_assum(@tactics.match_mp_tac)
   let t40 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t39, t38])
-  rest_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("X < Y ==> (forall x. X < x ==> P x) ==> (forall x. Y < x ==> P x)"), t40))
+  rest_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("X < Y ==> (∀ x. X < x ==> P x) ==> (∀ x. Y < x ==> P x)"), t40))
 }
 
 ///|
@@ -149,7 +149,7 @@ fn step_7() -> Unit raise {
   let t41 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans()]))
   let t42 = @tactics.first_assum(@tactics.match_mp_tac)
   let t43 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t42, t41])
-  rest_eq_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("Y < X ==> (forall x. x < X ==> P x) ==> (forall x. (x = Y) ==> P x)"), t43))
+  rest_eq_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("Y < X ==> (∀ x. x < X ==> P x) ==> (∀ x. (x = Y) ==> P x)"), t43))
 }
 
 ///|
@@ -167,7 +167,7 @@ fn step_8() -> Unit raise {
   let t44 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans()]))
   let t45 = @tactics.first_assum(@tactics.match_mp_tac)
   let t46 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t45, t44])
-  rest_eq_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("X < Y ==> (forall x. X < x ==> P x) ==> (forall x. (x = Y) ==> P x)"), t46))
+  rest_eq_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("X < Y ==> (∀ x. X < x ==> P x) ==> (∀ x. (x = Y) ==> P x)"), t46))
 }
 
 ///|
@@ -185,7 +185,7 @@ fn step_9() -> Unit raise {
   let t47 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans()]))
   let t48 = @tactics.first_assum(@tactics.match_mp_tac)
   let t49 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t48, t47])
-  rest_int_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("Y < X ==> (forall x. x < X ==> P x) ==> (forall x. Y < x /\\ x < X ==> P x)"), t49))
+  rest_int_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("Y < X ==> (∀ x. x < X ==> P x) ==> (∀ x. Y < x /\\ x < X ==> P x)"), t49))
 }
 
 ///|
@@ -203,7 +203,7 @@ fn step_10() -> Unit raise {
   let t50 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans()]))
   let t51 = @tactics.first_assum(@tactics.match_mp_tac)
   let t52 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t51, t50])
-  rest_int_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("X < Y ==> (forall x. X < x ==> P x) ==> (forall x. X < x /\\ x < Y ==> P x)"), t52))
+  rest_int_gt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("X < Y ==> (∀ x. X < x ==> P x) ==> (∀ x. X < x /\\ x < Y ==> P x)"), t52))
 }
 
 ///|
@@ -223,7 +223,7 @@ fn step_11() -> Unit raise {
   let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.struct_cases_tac(@bool.ispec(@parser.parse_term("s:sign"), @defs.sign_cases())), t53), t54)
   let t56 = @rqe_tactics_ext.repeat_n(4L, @tactics.strip_tac)
   let t57 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()])), t56, t55])
-  interpsign_subset_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P Q p s. interpsign P p s  /\\ Q SUBSET P ==> interpsign Q p s"), t57))
+  interpsign_subset_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P Q p s. interpsign P p s  /\\ Q SUBSET P ==> interpsign Q p s"), t57))
 }
 
 ///|
@@ -250,7 +250,7 @@ fn step_12() -> Unit raise {
   let t67 = @simp.rewrite_tac(@list.List([@lists.all2(), @defs.interpsigns(), @defs.interpsign()]))
   let t68 = @rqe_tactics_ext.repeat_n(2L, @tactics.strip_tac)
   let t69 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()])), t68, @lists.list_induct_tac, @lists.list_induct_tac, t67, t66, @lists.list_induct_tac, t65, t64, t63, t62, t61, t60, t59, t58])
-  interpsigns_subset_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P Q ps ss. interpsigns ps P ss  /\\ Q SUBSET P ==> interpsigns ps Q ss"), t69))
+  interpsigns_subset_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P Q ps ss. interpsigns ps P ss  /\\ Q SUBSET P ==> interpsigns ps Q ss"), t69))
 }
 
 ///|
@@ -268,7 +268,7 @@ fn step_13() -> Unit raise {
   let t71 = @meson.asm_meson_tac(@list.List([@sets.subset(), @sets.in_()]))
   let t70 = @tactics.match_mp_tac(interpsigns_subset())
   let t72 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t70), t71)])
-  nopoint_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pl sl. interpsigns pl (\\x. T) sl  ==>\n   (interpsigns pl (\\x. x < &0) sl  /\\\n    interpsigns pl (\\x. x = &0) sl  /\\\n    interpsigns pl (\\x. &0 < x) sl)"), t72))
+  nopoint_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pl sl. interpsigns pl (\\x. T) sl  ==>\n   (interpsigns pl (\\x. x < &0) sl  /\\\n    interpsigns pl (\\x. x = &0) sl  /\\\n    interpsigns pl (\\x. &0 < x) sl)"), t72))
 }
 
 ///|

@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// mpow
 fn step_2() -> Unit raise {
-  mpow_c.set(@define.define_(@parser.parse_term("(forall A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (forall A:real^N^N n. A mpow (SUC n) = A ** A mpow n)")))
+  mpow_c.set(@define.define_(@parser.parse_term("(∀ A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (∀ A:real^N^N n. A mpow (SUC n) = A ** A mpow n)")))
 }
 
 ///|
@@ -28,7 +28,7 @@ fn step_3() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@vectors.matrix_mul_assoc()]))
   let t1 = @simp.asm_rewrite_tac(@list.List([@arith.add_clauses(), mpow(), @vectors.matrix_mul_lid()]))
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1), t2)
-  mpow_add_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N m n. A mpow (m + n) = A mpow m ** A mpow n"), t3))
+  mpow_add_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N m n. A mpow (m + n) = A mpow m ** A mpow n"), t3))
 }
 
 ///|
@@ -45,7 +45,7 @@ pub fn mpow_add() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([@equal.sym(@calc_num.num_conv(@parser.parse_term("1"))), @vectors.matrix_mul_rid()]))
   let t5 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("1")), mpow()])), t4)
-  mpow_1_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N. A mpow 1 = A"), t5))
+  mpow_1_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N. A mpow 1 = A"), t5))
 }
 
 ///|
@@ -61,7 +61,7 @@ pub fn mpow_1() -> @kernel.Thm {
 /// MPOW_SUC
 fn step_5() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([@arith.add1(), mpow_add(), mpow_1()]))
-  mpow_suc_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N n. A mpow (SUC n) = A mpow n ** A"), t6))
+  mpow_suc_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N n. A mpow (SUC n) = A mpow n ** A"), t6))
 }
 
 ///|
@@ -78,9 +78,9 @@ pub fn mpow_suc() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([]))
   let t8 = @simp.rewrite_tac(@list.List([@iterate.real_polyfun_eq_0()]))
-  let t7 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(forall x i. P i ==> forall j. Q j ==> R x i j) <=>\n    (forall i. P i ==> forall j. Q j ==> forall x. R x i j)"))]))
+  let t7 = @simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(∀ x i. P i ==> ∀ j. Q j ==> R x i j) <=>\n    (∀ i. P i ==> ∀ j. Q j ==> ∀ x. R x i j)"))]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @msum.msum_component(), @vectors.mat_component(), @cart.lambda_beta(), @iterate.finite_numseg(), @class.cond_id(), @simp.once_rewrite_rule(@list.List([@realax.real_mul_sym()]))(@vectors.matrix_cmul_component())])), t7), t8), t9)
-  matric_polyfun_eq_0_c.set(@tactics.prove(@parser.parse_term("forall n A:num->real^N^M.\n        (forall x. msum(0..n) (\\i. x pow i %% A i) = mat 0) <=>\n        (forall i. i IN 0..n ==> A i = mat 0)"), t10))
+  matric_polyfun_eq_0_c.set(@tactics.prove(@parser.parse_term("∀ n A:num->real^N^M.\n        (∀ x. msum(0..n) (\\i. x pow i %% A i) = mat 0) <=>\n        (∀ i. i IN 0..n ==> A i = mat 0)"), t10))
 }
 
 ///|
@@ -146,7 +146,7 @@ fn step_7() -> Unit raise {
     })(((x51 : @kernel.Thm) => @bool.spec(t50, x51))(x52))
   }), t53), t54), t55), t70])
   let t89 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@nums.num_induction()), @tactics.conj_tac), t71), t88])
-  let t46 = @tactics.subgoal_then(@parser.parse_term("forall i:num. B(n - i) = (mat 0:real^N^N)"), fn(x43 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t46 = @tactics.subgoal_then(@parser.parse_term("∀ i:num. B(n - i) = (mat 0:real^N^N)"), fn(x43 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s44 = @tactics.mp_tac(x43)
     fn(x45 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s44(x45)
@@ -179,7 +179,7 @@ fn step_7() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([@vectors.matrix_cmul_rzero()]))
   let t21 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t91 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@vectors.matrix_cmul_sub_ldistrib(), @msum.msum_sub(), @iterate.finite_numseg(), @vectors.matrix_cmul_add_ldistrib(), @msum.msum_add()])), t21), t22), t23), t24), t27), t28), t29), t35), t36), t38), t39), t40), t41), t42), t90])
-  let t20 = @tactics.subgoal_then(@parser.parse_term("forall x. msum(0..SUC n)\n         (\\i. x pow i %% (((if i = 0 then (--C:real^N^N) else mat 0) +\n                           (if i <= n then B i ** (A:real^N^N) else mat 0)) -\n                          (if i = 0 then mat 0 else B(i - 1) ** mat 1))) =\n        mat 0"), fn(x17 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t20 = @tactics.subgoal_then(@parser.parse_term("∀ x. msum(0..SUC n)\n         (\\i. x pow i %% (((if i = 0 then (--C:real^N^N) else mat 0) +\n                           (if i <= n then B i ** (A:real^N^N) else mat 0)) -\n                          (if i = 0 then mat 0 else B(i - 1) ** mat 1))) =\n        mat 0"), fn(x17 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s18 = @tactics.mp_tac(x17)
     fn(x19 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s18(x19)
@@ -192,7 +192,7 @@ fn step_7() -> Unit raise {
   let t12 = @simp.once_rewrite_tac(@list.List([@vectors.matrix_mul_lmul()]))
   let t11 = @simp.rewrite_tac(@list.List([@vectors.matrix_mul_rmul()]))
   let t92 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@equal.gsym(@msum.msum_matrix_rmul()), @iterate.finite_numseg(), @vectors.matrix_sub_ldistrib()])), t11), t12), t13), t14), t15), t16), t20), t91)
-  matric_poly_lemma_c.set(@tactics.prove(@parser.parse_term("forall(A:real^N^N) B (C:real^N^N) n.\n        (forall x. msum (0..n) (\\i. (x pow i) %% B i) ** (A - x %% mat 1) = C)\n        ==> C = mat 0"), t92))
+  matric_poly_lemma_c.set(@tactics.prove(@parser.parse_term("∀(A:real^N^N) B (C:real^N^N) n.\n        (∀ x. msum (0..n) (\\i. (x pow i) %% B i) ** (A - x %% mat 1) = C)\n        ==> C = mat 0"), t92))
 }
 
 ///|
@@ -213,7 +213,7 @@ fn step_8() -> Unit raise {
   let t94 = @simp.rewrite_tac(@list.List([@class.cond_rand(), @class.cond_rator(), @calc_int.real_mul_lzero()]))
   let t93 = @tactics.exists_tac(@parser.parse_term("\\i. if i = 0 then c else &0"))
   let t98 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t93), t94), t95), t96), t97)
-  polyfun_n_const_c.set(@tactics.prove(@parser.parse_term("forall c n. ?b. forall x. c = sum(0..n) (\\i. b i * x pow i)"), t98))
+  polyfun_n_const_c.set(@tactics.prove(@parser.parse_term("∀ c n. ?b. ∀ x. c = sum(0..n) (\\i. b i * x pow i)"), t98))
 }
 
 ///|
@@ -231,7 +231,7 @@ fn step_9() -> Unit raise {
   let t100 = @simp.asm_rewrite_tac(@list.List([@iterate.sum_add_numseg(), @real.real_add_rdistrib()]))
   let t99 = @tactics.exists_tac(@parser.parse_term("\\i. (b:num->real) i + c i"))
   let t101 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t99), t100)
-  polyfun_n_add_c.set(@tactics.prove(@parser.parse_term("forall f g. (?b. forall x. f(x) = sum(0..n) (\\i. b i * x pow i)) /\\\n         (?c. forall x. g(x) = sum(0..n) (\\i. c i * x pow i))\n         ==> ?d. forall x. f(x) + g(x) = sum(0..n) (\\i. d i * x pow i)"), t101))
+  polyfun_n_add_c.set(@tactics.prove(@parser.parse_term("∀ f g. (?b. ∀ x. f(x) = sum(0..n) (\\i. b i * x pow i)) /\\\n         (?c. ∀ x. g(x) = sum(0..n) (\\i. c i * x pow i))\n         ==> ?d. ∀ x. f(x) + g(x) = sum(0..n) (\\i. d i * x pow i)"), t101))
 }
 
 ///|
@@ -249,7 +249,7 @@ fn step_10() -> Unit raise {
   let t103 = @simp.asm_rewrite_tac(@list.List([@iterate.sum_lmul(), @equal.gsym(@realax.real_mul_assoc())]))
   let t102 = @tactics.exists_tac(@parser.parse_term("\\i. c * (b:num->real) i"))
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t102), t103)
-  polyfun_n_cmul_c.set(@tactics.prove(@parser.parse_term("forall f c. (?b. forall x. f(x) = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. forall x. c * f(x) = sum(0..n) (\\i. b i * x pow i)"), t104))
+  polyfun_n_cmul_c.set(@tactics.prove(@parser.parse_term("∀ f c. (?b. ∀ x. f(x) = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. ∀ x. c * f(x) = sum(0..n) (\\i. b i * x pow i)"), t104))
 }
 
 ///|
@@ -271,7 +271,7 @@ fn step_11() -> Unit raise {
   let t106 = @simp.simp_tac(@list.List([@iterate.sum_clauses(), @sets.forall_in_insert(), @sets.not_in_empty(), polyfun_n_const()]))
   let t105 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))), t105), t106), t107), t108), t109), t110)
-  polyfun_n_sum_c.set(@tactics.prove(@parser.parse_term("forall f s. FINITE s /\\\n         (forall a. a IN s ==> ?b. forall x. f x a = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. forall x. sum s (f x) = sum(0..n) (\\i. b i * x pow i)"), t111))
+  polyfun_n_sum_c.set(@tactics.prove(@parser.parse_term("∀ f s. FINITE s /\\\n         (∀ a. a IN s ==> ?b. ∀ x. f x a = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. ∀ x. sum s (f x) = sum(0..n) (\\i. b i * x pow i)"), t111))
 }
 
 ///|
@@ -329,7 +329,7 @@ fn step_12() -> Unit raise {
   let t113 = @simp.simp_tac(@list.List([@iterate.product_clauses(), polyfun_n_const(), @sets.forall_in_insert()]))
   let t112 = @tactics.match_mp_tac(@sets.finite_induct_strong())
   let t151 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))), t112), t113), t114), t121), t122), @tactics.strip_tac), t123), @nums.induct_tac), t124), @tactics.disch_tac), t131), t132), t135), t138), t139), t140), t141), t142), t143), t144), t145), t146), t148), t149), @tactics.binop_tac), t150), @calc_rat.real_arith_tac)
-  polyfun_n_product_c.set(@tactics.prove(@parser.parse_term("forall f s n. FINITE s /\\\n           (forall a:A. a IN s ==> ?c d. forall x. f x a = c + d * x) /\\ CARD(s) <= n\n           ==> ?b. forall x. product s (f x) = sum(0..n) (\\i. b i * x pow i)"), t151))
+  polyfun_n_product_c.set(@tactics.prove(@parser.parse_term("∀ f s n. FINITE s /\\\n           (∀ a:A. a IN s ==> ?c d. ∀ x. f x a = c + d * x) /\\ CARD(s) <= n\n           ==> ?b. ∀ x. product s (f x) = sum(0..n) (\\i. b i * x pow i)"), t151))
 }
 
 ///|
@@ -378,7 +378,7 @@ fn step_13() -> Unit raise {
   let t153 = @tactics.match_mp_tac(polyfun_n_sum())
   let t152 = @simp.asm_simp_tac(@list.List([@determinants.cofactor(), @cart.lambda_beta(), @determinants.det()]))
   let t181 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t152), t153), t154), t155), @tactics.disch_tac), t156), t160), t162), t163), t164), t165), t166), t167), t168), @tactics.strip_tac), t172), t173), t174), @tactics.strip_tac), t175), t176), t177), t178), t179), t180)
-  cofactor_entry_as_polyfun_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N x i j.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> ?c. forall x. cofactor(A - x %% mat 1)$i$j =\n                    sum(0..dimindex(:N)-1) (\\i. c(i) * x pow i)"), t181))
+  cofactor_entry_as_polyfun_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N x i j.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> ?c. ∀ x. cofactor(A - x %% mat 1)$i$j =\n                    sum(0..dimindex(:N)-1) (\\i. c(i) * x pow i)"), t181))
 }
 
 ///|
@@ -412,7 +412,7 @@ fn step_14() -> Unit raise {
   let t183 = @simp.simp_tac(@list.List([@permutations.finite_permutations(), @iterate.finite_numseg(), @sets.forall_in_gspec()]))
   let t182 = @tactics.match_mp_tac(polyfun_n_sum())
   let t198 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@determinants.det()]))), t182), t183), t184), @tactics.disch_tac), t185), t186), t187), t188), @tactics.strip_tac), t192), t193), t194), @tactics.strip_tac), t195), t196), t197)
-  determinant_as_polyfun_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N.\n        ?c. forall x. det(A - x %% mat 1) =\n                sum(0..dimindex(:N)) (\\i. c(i) * x pow i)"), t198))
+  determinant_as_polyfun_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N.\n        ?c. ∀ x. det(A - x %% mat 1) =\n                sum(0..dimindex(:N)) (\\i. c(i) * x pow i)"), t198))
 }
 
 ///|
@@ -462,7 +462,7 @@ fn step_16() -> Unit raise {
   let t201 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t200 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("A:real^N^N"), cofactor_entry_as_polyfun()))
   let t216 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.simp_tac(@list.List([@cart.cart_eq(), @msum.msum_component(), @iterate.finite_numseg()]))), t200), t201), t202), t203), t207), t208), t210), @tactics.strip_tac), t211), @tactics.strip_tac), t212), t213), t214), t215), @calc_rat.real_arith_tac)
-  cofactor_as_matric_polynomial_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N. ?C.\n      forall x. cofactor(A - x %% mat 1) =\n          msum(0..dimindex(:N)-1) (\\i. x pow i %% C i)"), t216))
+  cofactor_as_matric_polynomial_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N. ?C.\n      ∀ x. cofactor(A - x %% mat 1) =\n          msum(0..dimindex(:N)-1) (\\i. x pow i %% C i)"), t216))
 }
 
 ///|
@@ -515,7 +515,7 @@ fn step_17() -> Unit raise {
   let t217 = @simp.rewrite_tac(@list.List([@vectors.matrix_mul_rid(), @vectors.matrix_cmul_lid(), @vectors.matrix_mul_lid()]))
   let t248 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@msum.msum_clauses_numseg(), @realax.real_pow(), @arith.sub_0(), mpow()])), t217), t218), t247])
   let t249 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t248)
-  matric_power_difference_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N x n.\n        A mpow (SUC n) - x pow (SUC n) %% mat 1 =\n        msum (0..n) (\\i. x pow i %% A mpow (n - i)) ** (A - x %% mat 1)"), t249))
+  matric_power_difference_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N x n.\n        A mpow (SUC n) - x pow (SUC n) %% mat 1 =\n        msum (0..n) (\\i. x pow i %% A mpow (n - i)) ** (A - x %% mat 1)"), t249))
 }
 
 ///|
@@ -558,7 +558,7 @@ fn step_18() -> Unit raise {
   let t252 = @tactics.spec_tac(@parser.parse_term("char_poly(A:real^N^N)"), t251)
   let t250 = @parser.parse_term("n:num")
   let t278 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.spec_tac(@parser.parse_term("dimindex(:N)"), t250)), t252), @tactics.gen_tac), @nums.induct_tac), t253), t277)
-  matric_charpoly_difference_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N. ?B.\n      forall x. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) -\n          sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1 =\n          msum(0..(dimindex(:N)-1)) (\\i. x pow i %% B i) ** (A - x %% mat 1)"), t278))
+  matric_charpoly_difference_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N. ?B.\n      ∀ x. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) -\n          sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1 =\n          msum(0..(dimindex(:N)-1)) (\\i. x pow i %% B i) ** (A - x %% mat 1)"), t278))
 }
 
 ///|
@@ -601,9 +601,9 @@ fn step_19() -> Unit raise {
   let t303 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.matrix_sub_v1(), @equal.gsym(@vectors.matrix_add_assoc()), @vectors.matrix_add_lneg()])), t282), t302])
   let t281 = @simp.rewrite_tac(@list.List([]))
   let t280 = @tactics.exists_tac(@parser.parse_term("\\x. (msum(0..dimindex(:N)) (\\i. char_poly A i %% (A:real^N^N) mpow i) -\n         sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1) +\n        sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1"))
-  let t279 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall g. (forall x. g x = k) /\\ (?a b c. forall x. f a b c x = g x)\n        ==> ?a b c. forall x. f a b c x = k")))
+  let t279 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("∀ g. (∀ x. g x = k) /\\ (?a b c. ∀ x. f a b c x = g x)\n        ==> ?a b c. ∀ x. f a b c x = k")))
   let t304 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(matric_poly_lemma())), t279), t280), t281), @tactics.conj_tac), t303)
-  cayley_hamilton_c.set(@tactics.prove(@parser.parse_term("forall A:real^N^N. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) = mat 0"), t304))
+  cayley_hamilton_c.set(@tactics.prove(@parser.parse_term("∀ A:real^N^N. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) = mat 0"), t304))
 }
 
 ///|

@@ -67,12 +67,13 @@ type/term parsing. `lex` returns an owned `Array[Lexcode]`; token parsers take
 Keep the token array unchanged while parsing. Both packages use the syntax tables
 in `printer`.
 
-Universal quantification uses `forall x. P x`, including `(forall)` when the
-quantifier is passed as a function. The old `!x. P x` and `(!)` spellings are
-rejected. Existential `?` and unique-existence `?!` notation are unchanged.
-The internal logical constant is also named `forall`; parser, printer, and
-term constructors use the same name without an alias.
-`tools/hol_notation.py` migrates HOL-input literals emitted by the OCaml
+Universal quantification uses `∀x. P x`, including `(∀)` when the
+quantifier is passed as a function. This is also the internal logical constant
+name, so the parser and printer need no spelling alias. Existential `?` and
+unique-existence `?!` notation are unchanged. String literals retain their
+byte semantics. Other Unicode operators and Unicode identifiers are not part
+of this migration.
+`tools/hol_notation.py` adapts upstream HOL-input literals emitted by the OCaml
 translator; it is not a runtime compatibility parser.
 
 ## Develop

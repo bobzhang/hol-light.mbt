@@ -1,24 +1,33 @@
 import unittest
-from hol_notation import forall_notation, upstream_notation, rewrite_moonbit
-from ocaml_ref.forall_reference import adapt_output, escaped_notation
+from hol_notation import universal_notation, upstream_notation, rewrite_moonbit
+from ocaml_ref.universal_reference import adapt_output, escaped_notation
 
 
 class NotationTests(unittest.TestCase):
     def test_only_complete_tokens(self):
         self.assertEqual(
-            forall_notation('!x. ?!y. !! x !* y !_x x_! ∃!z. P x y'),
-            'forall x. ?!y. !! x !* y !_x x_! ∃!z. P x y')
-        self.assertEqual(forall_notation('(!) ! x. P x'), '(forall) forall x. P x')
+            universal_notation('!x. ?!y. !! x !* y !_x x_! ∃!z. P x y'),
+            '∀ x. ?!y. !! x !* y !_x x_! ∃!z. P x y')
+        self.assertEqual(universal_notation('(!) ! x. P x'), '(∀) ∀ x. P x')
+
+    def test_word_spelling_and_unicode_boundaries(self):
+        self.assertEqual(universal_notation('forall x. forall_x x'), '∀ x. forall_x x')
+        self.assertEqual(universal_notation('"forall" // forall\nforall x. P x'),
+                         '"forall" // forall\n∀ x. P x')
+        self.assertEqual(upstream_notation('∀x.∀y.P x y'), '!x. !y.P x y')
+        self.assertEqual(upstream_notation('∀∀x'), '! !x')
+        self.assertEqual(rewrite_moonbit('@parser.parse_term("forall x. P x")'),
+                         '@parser.parse_term("∀ x. P x")')
 
     def test_strings_and_comments(self):
         text = '!x. "!y. \\"quoted\\"" // !z. comment\n!y. P'
-        self.assertEqual(forall_notation(text),
-                         'forall x. "!y. \\"quoted\\"" // !z. comment\nforall y. P')
-        self.assertEqual(forall_notation('"unterminated !x.'), '"unterminated !x.')
+        self.assertEqual(universal_notation(text),
+                         '∀ x. "!y. \\"quoted\\"" // !z. comment\n∀ y. P')
+        self.assertEqual(universal_notation('"unterminated !x.'), '"unterminated !x.')
 
     def test_round_trip_to_oracle(self):
-        text = 'forall x. (forall) P /\\ ?!y. "forall" = y'
-        self.assertEqual(forall_notation(upstream_notation(text)), text)
+        text = '∀ x. (∀) P /\\ ?!y. "∀" = y'
+        self.assertEqual(universal_notation(upstream_notation(text)), text)
 
     def test_emitted_literals_and_curried_proof_inputs(self):
         source = '''@parser.parse_term("!x. P x")
@@ -30,18 +39,18 @@ raise Failure("bad!")
 let bytes = "!x. unclassified string data"
 // @parser.parse_term("!x. comment")
 '''
-        expected = source.replace('"!x. P x"', '"forall x. P x"').replace(
-            '"!x. "', '"forall x. "').replace('"![x]; !y"', '"forall[x]; forall y"').replace(
-            '@kernel.mk_const("!",', '@kernel.mk_const("forall",')
+        expected = source.replace('"!x. P x"', '"∀ x. P x"').replace(
+            '"!x. "', '"∀ x. "').replace('"![x]; !y"', '"∀[x]; ∀ y"').replace(
+            '@kernel.mk_const("!",', '@kernel.mk_const("∀",')
         self.assertEqual(rewrite_moonbit(source), expected)
         self.assertEqual(rewrite_moonbit(expected), expected)
 
     def test_literal_strings_and_internal_names(self):
         source = r'''@parser.parse_term("\\\"!x. P x\\\"")'''
         self.assertEqual(rewrite_moonbit(source), source)
-        self.assertEqual(rewrite_moonbit('@lexer.Ident("!")'), '@lexer.Ident("forall")')
+        self.assertEqual(rewrite_moonbit('@lexer.Ident("!")'), '@lexer.Ident("∀")')
         self.assertEqual(rewrite_moonbit('@kernel.Term::Const("!", ty)'),
-                         '@kernel.Term::Const("forall", ty)')
+                         '@kernel.Term::Const("∀", ty)')
         self.assertEqual(rewrite_moonbit('@tactics.label_tac("!", th)'),
                          '@tactics.label_tac("!", th)')
 
@@ -51,7 +60,7 @@ let bytes = "!x. unclassified string data"
                 'universalname_c.set(fromstring("!"))',
                 'exclude_list_c.set(Ref::{ val: @list.List(["!", "?!"]) })',
                 'suppress().val = @list.List(["!", "?!"])']:
-            self.assertEqual(rewrite_moonbit(source), source.replace('"!"', '"forall"'))
+            self.assertEqual(rewrite_moonbit(source), source.replace('"!"', '"∀"'))
 
     def test_jordan_persistent_hash_labels(self):
         source = """      @kernel.Term::Const(name, ty) => {
@@ -59,27 +68,42 @@ let bytes = "!x. unclassified string data"
         @lib.mod63(@lib.add63(@lib.mul63(prime220, memhash_of_string(name)), type_hash), prime1220)
       }"""
         migrated = rewrite_moonbit(source)
-        self.assertIn('if name == "forall" { 33L }', migrated)
+        self.assertIn('if name == "∀" { 33L }', migrated)
         self.assertIn('else { memhash_of_string(name) }', migrated)
         self.assertEqual(rewrite_moonbit(migrated), migrated)
         variable = source.replace('Term::Const', 'Term::Var')
         self.assertEqual(rewrite_moonbit(variable), variable)
 
+    def test_miz3_comment_prefix_does_not_slice_unicode(self):
+        source = 'if ((Int::to_int64(@lib.string_length(token)) >= 2L) && (@lib.string_sub(token, 0, 2) == "::")) {'
+        self.assertEqual(rewrite_moonbit(source), 'if token.has_prefix("::") {')
+
     def test_embedded_exec_key(self):
         source = r'''@lib.register_phrase("parse_term \"!x. P x\"", fn() { () })'''
-        self.assertEqual(rewrite_moonbit(source), source.replace('!x.', 'forall x.'))
+        self.assertEqual(rewrite_moonbit(source), source.replace('!x.', '∀ x.'))
 
     def test_reference_terms_not_rewritten(self):
         lines = ['foo quotations (1):\n', '  !x. P x\n',
                  'th = (#!:fun(A,bool) x:A)\n', 'bad ! error\n',
                  'binders = \\ ! ? ?! forall exists\n']
         self.assertEqual(list(adapt_output(lines)),
-                         [lines[0], '  forall x. P x\n', lines[2], lines[3],
-                          'binders = \\ forall ? ?! exists\n'])
+                         [lines[0], '  \\226\\136\\128 x. P x\n', lines[2], lines[3],
+                          'binders = \\ ∀ ? ?! exists\n'])
 
     def test_reference_escaped_utf8(self):
         self.assertEqual(escaped_notation(r'!x. \226\136\131!y. P x y'),
-                         r'forall x. \226\136\131!y. P x y')
+                         r'\226\136\128 x. \226\136\131!y. P x y')
+        self.assertEqual(escaped_notation(r'P ==>\n\tforall x. P x'),
+                         r'P ==>\n\t\226\136\128 x. P x')
+
+    def test_miz3_layout_lexer(self):
+        source = '''pub fn rawtoken(x : @list.List[String]) -> ((String, @list.List[String])) raise {
+  (rawtoken_c.get())(x)
+}'''
+        migrated = rewrite_moonbit(source)
+        self.assertIn('More("∀", tail=rest) => ("∀", rest)', migrated)
+        self.assertIn('_ => (rawtoken_c.get())(x)', migrated)
+        self.assertEqual(rewrite_moonbit(migrated), migrated)
 
 
 if __name__ == '__main__':

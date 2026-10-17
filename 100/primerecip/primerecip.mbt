@@ -8,7 +8,7 @@ fn step_1() -> Unit raise {
   let t3 = @meson.asm_meson_tac(@list.List([@calc_num.num_conv(@parser.parse_term("1")), t2]))
   let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), @nums.induct_tac), t1), t3)
-  induction_from_1_c.set(@tactics.prove(@parser.parse_term("forall P. P 0 /\\ P 1 /\\ (forall n. 1 <= n /\\ P n ==> P(SUC n)) ==> forall n. P n"), t4))
+  induction_from_1_c.set(@tactics.prove(@parser.parse_term("∀ P. P 0 /\\ P 1 /\\ (∀ n. 1 <= n /\\ P n ==> P(SUC n)) ==> ∀ n. P n"), t4))
 }
 
 ///|
@@ -159,7 +159,7 @@ fn step_3() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([@prime.prime_1(), @analysis.real_le_refl()]))
   let t12 = @list.List([@tactics.then_tac(@simp.simp_tac(@list.List([@iterate.sum_triv_numseg(), @calc_num.arith(), @iterate.sum_sing_numseg(), @analysis.real_mul_rzero()])), t11), @tactics.all_tac])
   let t103 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(induction_from_1()), @tactics.conj_tac), t12), @tactics.conj_tac), t32), t33), t40), t41), t42), t43), t44), @tactics.ants_tac), t48), t49), @tactics.ants_tac), t53), t54), t60), t61), t62), t63), t64), t65), t66), @tactics.strip_tac), t67), t68), @tactics.conj_tac), t80), t84), t85), t88), t89), t90), t91), t92), t93), t94), t95), t96), t97), t101), t102), @calc_rat.real_arith_tac)
-  primerecip_harmonic_lbound_c.set(@tactics.prove(@parser.parse_term("forall n. (&3 / (&16 * ln(&32))) * sum(1..n) (\\i. &1 / &i) <=\n       sum(1..32 EXP n) (\\i. if prime(i) then &1 / &i else &0)"), t103))
+  primerecip_harmonic_lbound_c.set(@tactics.prove(@parser.parse_term("∀ n. (&3 / (&16 * ln(&32))) * sum(1..n) (\\i. &1 / &i) <=\n       sum(1..32 EXP n) (\\i. if prime(i) then &1 / &i else &0)"), t103))
 }
 
 ///|
@@ -181,7 +181,7 @@ fn step_4() -> Unit raise {
   let t105 = @simp.rewrite_tac(@list.List([primerecip_harmonic_lbound()]))
   let t104 = @tactics.exists_tac(@parser.parse_term("&3 / (&16 * ln(&32)) * sum (1 .. 2 EXP n) (\\i. &1 / &i)"))
   let t110 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@analysis.real_le_trans())), t104), t105), t106), t107), t108), t109)
-  primerecip_lbound_c.set(@tactics.prove(@parser.parse_term("forall n. &3 / (&32 * ln(&32)) * &n\n       <= sum (1 .. 32 EXP (2 EXP n)) (\\i. if prime i then &1 / &i else &0)"), t110))
+  primerecip_lbound_c.set(@tactics.prove(@parser.parse_term("∀ n. &3 / (&32 * ln(&32)) * &n\n       <= sum (1 .. 32 EXP (2 EXP n)) (\\i. if prime i then &1 / &i else &0)"), t110))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_5() -> Unit raise {
   })
   let t111 = @tactics.repeat_tac(@tactics.strip_tac)
   let t144 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@analysis.convergent(), @analysis.seq()])), t111), t118), t119), @tactics.strip_tac), t126), t127), t128), t135), t142), t143), @calc_rat.real_arith_tac)
-  unbounded_divergent_c.set(@tactics.prove(@parser.parse_term("forall s. (forall k. ?N. forall n. n >= N ==> sum(1..n) s >= k)\n       ==> ~(convergent(\\n. sum(1..n) s))"), t144))
+  unbounded_divergent_c.set(@tactics.prove(@parser.parse_term("∀ s. (∀ k. ?N. ∀ n. n >= N ==> sum(1..n) s >= k)\n       ==> ~(convergent(\\n. sum(1..n) s))"), t144))
 }
 
 ///|

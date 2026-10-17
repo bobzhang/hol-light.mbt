@@ -17,7 +17,7 @@ fn step_1() -> Unit raise {
   let t1 = @parser.parse_term("g:A->(A->bool)")
   let t2 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:(A->bool)->A"), t1]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.injective_left_inverse(), @class.not_exists_thm()])), t2), t9), t10)
-  cantor_thm_inj_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))"), t11))
+  cantor_thm_inj_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (∀ x y. f(x) = f(y) ==> x = y))"), t11))
 }
 
 ///|
@@ -45,7 +45,7 @@ fn step_2() -> Unit raise {
   let t12 = @parser.parse_term("f:(A->bool)->A")
   let t13 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("g:A->(A->bool)"), t12]))
   let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.surjective_right_inverse(), @class.not_exists_thm()])), t13), t20), t21)
-  cantor_thm_surj_c.set(@tactics.prove(@parser.parse_term("~(?f:A->(A->bool). forall s. ?x. f x = s)"), t22))
+  cantor_thm_surj_c.set(@tactics.prove(@parser.parse_term("~(?f:A->(A->bool). ∀ s. ?x. f x = s)"), t22))
 }
 
 ///|
@@ -79,7 +79,7 @@ fn step_3() -> Unit raise {
   let t23 = @tactics.exists_tac(@parser.parse_term("(=):A->A->bool"))
   let t38 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c()])), t23), t24), t25), t37])
   let t39 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.lt_c()]))), @tactics.conj_tac), t38)
-  cantor_v1_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool. s <_c {t | t SUBSET s}"), t39))
+  cantor_v1_c.set(@tactics.prove(@parser.parse_term("∀ s:A->bool. s <_c {t | t SUBSET s}"), t39))
 }
 
 ///|
@@ -106,8 +106,8 @@ fn step_4() -> Unit raise {
   })
   let t40 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor_thm_surj())
   let t41 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("g:A->A->bool"), t40))
-  let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.abbrev_tac(@parser.parse_term("(g:A->A->bool) = \\a. { b | forall s. f(s) = a ==> b IN s}"))), t41), t46), t47), t48)
-  cantor_thm_inj_p_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))"), t49))
+  let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.abbrev_tac(@parser.parse_term("(g:A->A->bool) = \\a. { b | ∀ s. f(s) = a ==> b IN s}"))), t41), t46), t47), t48)
+  cantor_thm_inj_p_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (∀ x y. f(x) = f(y) ==> x = y))"), t49))
 }
 
 ///|
@@ -126,7 +126,7 @@ fn step_5() -> Unit raise {
   let t51 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@class.fun_eq_thm()])))
   let t50 = @simp.abbrev_tac(@parser.parse_term("g:A->B = \\a. (n:B->B) (h a a)"))
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t50), t51), t52)
-  cantor_lawvere_c.set(@tactics.prove(@parser.parse_term("forall h:A->(A->B).\n        (forall f:A->B. ?x:A. h(x) = f) ==> forall n:B->B. ?x. n(x) = x"), t53))
+  cantor_lawvere_c.set(@tactics.prove(@parser.parse_term("∀ h:A->(A->B).\n        (∀ f:A->B. ?x:A. h(x) = f) ==> ∀ n:B->B. ?x. n(x) = x"), t53))
 }
 
 ///|
@@ -160,7 +160,7 @@ fn step_6() -> Unit raise {
       }
     })(t57(x58))
   })), t65), t66)
-  cantor_c.set(@tactics.prove(@parser.parse_term("forall f:A->(A->bool). ~(forall s. ?x. f x = s)"), t67))
+  cantor_c.set(@tactics.prove(@parser.parse_term("∀ f:A->(A->bool). ~(∀ s. ?x. f x = s)"), t67))
 }
 
 ///|
@@ -178,9 +178,9 @@ fn step_7() -> Unit raise {
   let t71 = @meson.asm_meson_tac(@list.List([]))
   let t70 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm()]))
   let t68 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor())
-  let t69 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\a:A.  { b:A | forall s. f(s) = a ==> b IN s}"), t68))
+  let t69 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\a:A.  { b:A | ∀ s. f(s) = a ==> b IN s}"), t68))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t69), t70), t71)
-  cantor_taylor_c.set(@tactics.prove(@parser.parse_term("forall f:(A->bool)->A. ~(forall x y. f(x) = f(y) ==> x = y)"), t72))
+  cantor_taylor_c.set(@tactics.prove(@parser.parse_term("∀ f:(A->bool)->A. ~(∀ x y. f(x) = f(y) ==> x = y)"), t72))
 }
 
 ///|
@@ -196,7 +196,7 @@ pub fn cantor_taylor() -> @kernel.Thm {
 /// SURJECTIVE_COMPOSE
 fn step_8() -> Unit raise {
   let t73 = @meson.meson_tac(@list.List([@trivia.o_thm()]))
-  surjective_compose_c.set(@tactics.prove(@parser.parse_term("(forall y. ?x. f(x) = y) /\\ (forall z. ?y. g(y) = z)\n   ==> (forall z. ?x. (g o f) x = z)"), t73))
+  surjective_compose_c.set(@tactics.prove(@parser.parse_term("(∀ y. ?x. f(x) = y) /\\ (∀ z. ?y. g(y) = z)\n   ==> (∀ z. ?x. (g o f) x = z)"), t73))
 }
 
 ///|
@@ -215,7 +215,7 @@ fn step_9() -> Unit raise {
   let t75 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_image()]))
   let t74 = @tactics.exists_tac(@parser.parse_term("IMAGE (f:A->B) t"))
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t74), t75), t76)
-  injective_surjective_preimage_c.set(@tactics.prove(@parser.parse_term("forall f:A->B. (forall x y. f(x) = f(y) ==> x = y) ==> forall t. ?s. {x | f(x) IN s} = t"), t77))
+  injective_surjective_preimage_c.set(@tactics.prove(@parser.parse_term("∀ f:A->B. (∀ x y. f(x) = f(y) ==> x = y) ==> ∀ t. ?s. {x | f(x) IN s} = t"), t77))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_10() -> Unit raise {
   let t78 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor())
   let t79 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("(IMAGE (f:B->S->bool)) o (\\s:S->bool. {x | i(x) IN s})"), t78))
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t79), t80), t81), t82), t83), t84)
-  cantor_johnstone_c.set(@tactics.prove(@parser.parse_term("forall i:B->S f:B->S->bool.\n        ~((forall x y. i(x) = i(y) ==> x = y) /\\ (forall s. ?z. f(z) = s))"), t85))
+  cantor_johnstone_c.set(@tactics.prove(@parser.parse_term("∀ i:B->S f:B->S->bool.\n        ~((∀ x y. i(x) = i(y) ==> x = y) /\\ (∀ s. ?z. f(z) = s))"), t85))
 }
 
 ///|

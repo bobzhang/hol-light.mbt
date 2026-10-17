@@ -25,7 +25,7 @@ fn step_1() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([@defs.interpsigns(), @lists.all2(), @defs.interpsign()]))
   let t13 = @tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t4)
   let t14 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), t13, t12, t11])
-  interpsigns_conj_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P Q eqs l.\n    interpsigns eqs (\\x. P x) l /\\\n    interpsigns eqs (\\x. Q x) l ==>\n    interpsigns eqs (\\x. P x \\/ Q x) l"), t14))
+  interpsigns_conj_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P Q eqs l.\n    interpsigns eqs (\\x. P x) l /\\\n    interpsigns eqs (\\x. Q x) l ==>\n    interpsigns eqs (\\x. P x \\/ Q x) l"), t14))
 }
 
 ///|
@@ -79,7 +79,7 @@ fn step_2() -> Unit raise {
   let t47 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("t:real list"), @lists.list_cases()))
   let t48 = @rqe_tactics_ext.repeat_n(6L, @tactics.strip_tac)
   let t49 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), @defs.partition_line(), @lists.not_cons_nil(), @lists.all2(), @lists.hd(), @lists.tl(), @lists.append()])), t48, t47, t46, t45, t44, t43, t42, @tactics.strip_tac, t41, t40, @tactics.strip_tac, t39, t38, t37, t36, t35, @calc_rat.real_arith_tac, t34, t33, t32, t31, t30, t29, t28, t27, t26, @tactics.strip_tac, t25, t24, t23, t22, t21, @calc_rat.real_arith_tac])
-  interpmat_trio_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall eqs x y l r t.\n    interpmat (CONS x (CONS y t)) eqs (CONS l (CONS l (CONS l r))) ==>\n    interpmat (CONS y t) eqs (CONS l r)"), t49))
+  interpmat_trio_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ eqs x y l r t.\n    interpmat (CONS x (CONS y t)) eqs (CONS l (CONS l (CONS l r))) ==>\n    interpmat (CONS y t) eqs (CONS l r)"), t49))
 }
 
 ///|
@@ -98,7 +98,7 @@ fn step_3() -> Unit raise {
   let t51 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil()]))
   let t52 = @simp.rewrite_tac(@list.List([@defs.partition_line()]))
   let t53 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@defs.partition_line(), @lists.not_cons_nil()])), t52, @class.cond_cases_tac, t51, t50])
-  partition_line_not_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(partition_line l = [])"), t53))
+  partition_line_not_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(partition_line l = [])"), t53))
 }
 
 ///|
@@ -116,7 +116,7 @@ fn step_4() -> Unit raise {
   let t55 = @meson.asm_meson_tac(@list.List([]))
   let t54 = @simp.rewrite_tac(@list.List([@lists.all2(), @lists.length()]))
   let t56 = @list.List([@tactics.strip_tac, @tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t54), t55])
-  all2_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P l1 l2. ALL2 P l1 l2 ==> (LENGTH l1 = LENGTH l2)"), t56))
+  all2_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P l1 l2. ALL2 P l1 l2 ==> (LENGTH l1 = LENGTH l2)"), t56))
 }
 
 ///|
@@ -133,7 +133,7 @@ pub fn all2_length() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t57 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil(), @lists.tl(), @lists.length()]))
   let t58 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t57, @int.arith_tac])
-  length_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l:A list. ~(l = []) ==> (LENGTH (TL l) = PRE (LENGTH l))"), t58))
+  length_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l:A list. ~(l = []) ==> (LENGTH (TL l) = PRE (LENGTH l))"), t58))
 }
 
 ///|
@@ -153,7 +153,7 @@ fn step_6() -> Unit raise {
   let t61 = @simp.asm_rewrite_tac(@list.List([@lists.length()]))
   let t62 = @simp.rewrite_tac(@list.List([@defs.partition_line(), @lists.length()]))
   let t63 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@defs.partition_line(), @lists.length()])), @int.arith_tac, t62, @class.cond_cases_tac, t61, @int.arith_tac, t60, t59, @int.arith_tac])
-  partition_line_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. LENGTH (partition_line l) = 2 * LENGTH l + 1"), t63))
+  partition_line_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. LENGTH (partition_line l) = 2 * LENGTH l + 1"), t63))
 }
 
 ///|
@@ -171,7 +171,7 @@ fn step_7() -> Unit raise {
   let t65 = @simp.rewrite_tac(@list.List([partition_line_length()]))
   let t64 = @bool.ispec(@parser.parse_term("l:real list"), partition_line_not_nil())
   let t66 = @list.List([@tactics.strip_tac, @simp.rewrite_tac(@list.List([@drule.match_mp(length_tl())(t64)])), t65, @int.arith_tac])
-  partition_line_length_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. LENGTH (TL (partition_line l)) = 2 * LENGTH l"), t66))
+  partition_line_length_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. LENGTH (TL (partition_line l)) = 2 * LENGTH l"), t66))
 }
 
 ///|
@@ -241,7 +241,7 @@ fn step_8() -> Unit raise {
   let t109 = @simp.asm_rewrite_tac(@list.List([@defs.interpmat(), @lists.length(), @rol.rol_nil(), @defs.partition_line()]))
   let t110 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("pts:real list"), @lists.list_cases()))
   let t111 = @list.List([@rqe_tactics_ext.repeat_n(3L, @tactics.strip_tac), t110, t109, t108, t107, t106, t105, t104, t103, t102, t101, t100, t99, t98, t97, t96, @class.cond_cases_tac, t95, t94, @tactics.strip_tac, t93, t92, t91, @int.arith_tac, t90, t89, t88, @tactics.strip_tac, t87, t86, t85, t84, t83, t82, @int.arith_tac])
-  pl_all2_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall eqs pts sgns. ALL2 (interpsigns eqs) (partition_line pts) sgns ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1)"), t111))
+  pl_all2_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ eqs pts sgns. ALL2 (interpsigns eqs) (partition_line pts) sgns ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1)"), t111))
 }
 
 ///|
@@ -311,7 +311,7 @@ fn step_9() -> Unit raise {
   let t154 = @simp.asm_rewrite_tac(@list.List([@defs.interpmat(), @lists.length(), @rol.rol_nil(), @defs.partition_line()]))
   let t155 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("pts:real list"), @lists.list_cases()))
   let t156 = @list.List([@rqe_tactics_ext.repeat_n(3L, @tactics.strip_tac), t155, t154, t153, t152, t151, t150, t149, t148, t147, t146, t145, t144, t143, t142, t141, @class.cond_cases_tac, t140, t139, @tactics.strip_tac, t138, t137, t136, @int.arith_tac, t135, t134, t133, @tactics.strip_tac, t132, t131, t130, t129, t128, t127, @int.arith_tac])
-  interpmat_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall eqs pts sgns. interpmat pts eqs sgns ==>\n    (LENGTH sgns = 2 * LENGTH pts + 1)"), t156))
+  interpmat_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ eqs pts sgns. interpmat pts eqs sgns ==>\n    (LENGTH sgns = 2 * LENGTH pts + 1)"), t156))
 }
 
 ///|
@@ -335,7 +335,7 @@ fn step_10() -> Unit raise {
   let t157 = @meson.meson_tac(@list.List([]))
   let t164 = @simp.once_rewrite_tac(@list.List([@tactics.prove(@parser.parse_term("(x = y) <=> (y = x)"), t157)]))
   let t165 = @list.List([@rqe_tactics_ext.repeat_n(2L, @tactics.strip_tac), @lists.list_induct_tac, t164, t163, t162, t161, @lists.list_induct_tac, t160, @int.arith_tac, t159, t158])
-  all2_hd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall b d a c. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P a c"), t165))
+  all2_hd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ b d a c. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P a c"), t165))
 }
 
 ///|
@@ -359,7 +359,7 @@ fn step_11() -> Unit raise {
   let t166 = @meson.meson_tac(@list.List([]))
   let t173 = @simp.once_rewrite_tac(@list.List([@tactics.prove(@parser.parse_term("(x = y) <=> (y = x)"), t166)]))
   let t174 = @list.List([@rqe_tactics_ext.repeat_n(2L, @tactics.strip_tac), @lists.list_induct_tac, t173, t172, t171, t170, @lists.list_induct_tac, t169, @int.arith_tac, t168, t167])
-  all2_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall b d a c. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P b d"), t174))
+  all2_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ b d a c. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P b d"), t174))
 }
 
 ///|
@@ -375,7 +375,7 @@ pub fn all2_tl() -> @kernel.Thm {
 /// ALL2_APPEND_LENGTH
 fn step_12() -> Unit raise {
   let t175 = @list.List([@meson.asm_meson_tac(@list.List([all2_hd(), all2_tl()]))])
-  all2_append_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P a c b d. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P a c /\\ ALL2 P b d"), t175))
+  all2_append_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P a c b d. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P a c /\\ ALL2 P b d"), t175))
 }
 
 ///|
@@ -397,7 +397,7 @@ fn step_13() -> Unit raise {
   let t181 = @tactics.repeat_tac(@tactics.strip_tac)
   let t176 = @rqe_tactics_ext.rewrite_all(@list.List([@lists.append(), @lists.all2(), @lists.length(), @int.arith_rule(@parser.parse_term("~(0 = SUC x)")), @lists.append_nil()]))
   let t182 = @list.List([@tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t176), t181, t180, t179, t178, t177])
-  all2_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a c b d. ALL2 P a c /\\ ALL2 P b d ==>\n      ALL2 P (APPEND a b) (APPEND c d)"), t182))
+  all2_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a c b d. ALL2 P a c /\\ ALL2 P b d ==>\n      ALL2 P (APPEND a b) (APPEND c d)"), t182))
 }
 
 ///|
@@ -413,7 +413,7 @@ pub fn all2_append() -> @kernel.Thm {
 /// ALL2_SPLIT
 fn step_14() -> Unit raise {
   let t183 = @list.List([@meson.asm_meson_tac(@list.List([all2_append(), all2_append_length()]))])
-  all2_split_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a c b d. (LENGTH a = LENGTH c) ==>\n    (ALL2 P (APPEND a b) (APPEND c d) <=> ALL2 P a c /\\ ALL2 P b d)"), t183))
+  all2_split_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a c b d. (LENGTH a = LENGTH c) ==>\n    (ALL2 P (APPEND a b) (APPEND c d) <=> ALL2 P a c /\\ ALL2 P b d)"), t183))
 }
 
 ///|
@@ -450,7 +450,7 @@ fn step_16() -> Unit raise {
   let t188 = @simp.asm_rewrite_tac(@list.List([]))
   let t189 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil(), @lists.hd(), @lists.butlast()]))
   let t190 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t189, @class.cond_cases_tac, t188, t187, t186, t185])
-  hd_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> (forall x. ~(l = [x])) ==> (HD (BUTLAST l) = HD l)"), t190))
+  hd_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> (∀ x. ~(l = [x])) ==> (HD (BUTLAST l) = HD l)"), t190))
 }
 
 ///|
@@ -482,7 +482,7 @@ pub fn sublist() -> @kernel.Thm {
 /// SUBLIST_NIL
 fn step_18() -> Unit raise {
   let t192 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.asm_meson_tac(@list.List([sublist()])))])
-  sublist_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. SUBLIST [] l"), t192))
+  sublist_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. SUBLIST [] l"), t192))
 }
 
 ///|
@@ -499,7 +499,7 @@ pub fn sublist_nil() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t193 = @meson.asm_meson_tac(@list.List([sublist()]))
   let t194 = @list.List([@tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t193)])
-  sublist_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2 h. SUBLIST l1 l2 ==> SUBLIST l1 (CONS h l2)"), t194))
+  sublist_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2 h. SUBLIST l1 l2 ==> SUBLIST l1 (CONS h l2)"), t194))
 }
 
 ///|
@@ -516,7 +516,7 @@ pub fn sublist_cons() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t195 = @meson.asm_meson_tac(@list.List([sublist()]))
   let t196 = @list.List([@tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t195)])
-  sublist_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2. SUBLIST l1 l2 ==> ~(l1 = []) ==> SUBLIST (TL l1) l2"), t196))
+  sublist_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2. SUBLIST l1 l2 ==> ~(l1 = []) ==> SUBLIST (TL l1) l2"), t196))
 }
 
 ///|
@@ -533,7 +533,7 @@ pub fn sublist_tl() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t197 = @meson.asm_meson_tac(@list.List([sublist(), @lists.not_cons_nil(), @lists.hd(), @lists.tl()]))
   let t198 = @list.List([@tactics.strip_tac, @tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t197)])
-  sublist_cons2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t l. SUBLIST (CONS h t) l ==> SUBLIST t l"), t198))
+  sublist_cons2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t l. SUBLIST (CONS h t) l ==> SUBLIST t l"), t198))
 }
 
 ///|
@@ -549,7 +549,7 @@ pub fn sublist_cons2() -> @kernel.Thm {
 /// SUBLIST_ID
 fn step_22() -> Unit raise {
   let t199 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.asm_meson_tac(@list.List([sublist(), sublist_nil(), @lists.not_cons_nil(), @lists.hd(), @lists.tl()])))])
-  sublist_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. SUBLIST l l"), t199))
+  sublist_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. SUBLIST l l"), t199))
 }
 
 ///|
@@ -570,7 +570,7 @@ fn step_23() -> Unit raise {
   let t203 = @meson.asm_meson_tac(@list.List([sublist(), sublist_nil(), sublist_id()]))
   let t204 = @meson.asm_meson_tac(@list.List([sublist(), sublist_nil(), sublist_id()]))
   let t205 = @list.List([@tactics.strip_tac, @tactics.repeat_tac(@lists.list_induct_tac), t204, t203, t202, t201, t200])
-  sublist_cons_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t1 t2. SUBLIST (CONS h t1) (CONS h t2) = SUBLIST t1 t2"), t205))
+  sublist_cons_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t1 t2. SUBLIST (CONS h t1) (CONS h t2) = SUBLIST t1 t2"), t205))
 }
 
 ///|
@@ -586,7 +586,7 @@ pub fn sublist_cons_cons() -> @kernel.Thm {
 /// SUBLIST_NEQ
 fn step_24() -> Unit raise {
   let t206 = @list.List([@meson.asm_meson_tac(@list.List([sublist(), @lists.not_cons_nil(), @lists.hd(), @lists.tl()]))])
-  sublist_neq_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h1 h2 t1 t2. SUBLIST (CONS h1 t1) (CONS h2 t2) ==> ~(h1 = h2) ==>\n     SUBLIST (CONS h1 t1) t2"), t206))
+  sublist_neq_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h1 h2 t1 t2. SUBLIST (CONS h1 t1) (CONS h2 t2) ==> ~(h1 = h2) ==>\n     SUBLIST (CONS h1 t1) t2"), t206))
 }
 
 ///|
@@ -654,7 +654,7 @@ fn step_25() -> Unit raise {
   let t248 = @meson.asm_meson_tac(@list.List([sublist()]))
   let t249 = @meson.asm_meson_tac(@list.List([sublist()]))
   let t250 = @list.List([@tactics.repeat_tac(@lists.list_induct_tac), t249, t248, t247, t246, t245, t244, t243, t242, t241, t240, @tactics.disj2_tac, t239, t238, t237, t236, t235, t234, t233, t232, t231, t230, @tactics.disj1_tac, t229, t228, t227, t226, t225, @tactics.strip_tac, t224, t223, t222, t221, t220, t219, t218, @tactics.strip_tac, t217, t216, @tactics.strip_tac, t215, t214, @tactics.strip_tac, t213])
-  sublist_trans_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2 l3. SUBLIST l1 l2 ==> SUBLIST l2 l3 ==> SUBLIST l1 l3"), t250))
+  sublist_trans_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2 l3. SUBLIST l1 l2 ==> SUBLIST l2 l3 ==> SUBLIST l1 l3"), t250))
 }
 
 ///|
@@ -683,7 +683,7 @@ fn step_26() -> Unit raise {
   let t260 = @rqe_tactics_ext.cases_on(@parser.parse_term("x = h'"))
   let t261 = @tactics.repeat_tac(@tactics.strip_tac)
   let t262 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.mem()])), t261, t260, t259, t258, t257, t256, t255, t254, t253])
-  rol_mem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. real_ordered_list (CONS h t) ==> forall x. MEM x t ==> h < x"), t262))
+  rol_mem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t. real_ordered_list (CONS h t) ==> ∀ x. MEM x t ==> h < x"), t262))
 }
 
 ///|
@@ -716,7 +716,7 @@ fn step_27() -> Unit raise {
   let t277 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t278 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t279 = @list.List([@tactics.strip_tac, @tactics.repeat_tac(@lists.list_induct_tac), t278, t277, t276, t275, t274, t273, t272, t271, t270, t269, t268, t267, t266, t265, t264])
-  sublist_mem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x l1 l2. SUBLIST l1 l2 ==> MEM x l1 ==> MEM x l2"), t279))
+  sublist_mem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x l1 l2. SUBLIST l1 l2 ==> MEM x l1 ==> MEM x l2"), t279))
 }
 
 ///|
@@ -740,7 +740,7 @@ fn step_28() -> Unit raise {
   let t286 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t287 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t288 = @list.List([@tactics.strip_tac, @tactics.repeat_tac(@lists.list_induct_tac), t287, t286, t285, t284, t283, t282, t281, @tactics.strip_tac, t280])
-  rol_sublist_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t1 t2. real_ordered_list (CONS h t2) ==>\n      SUBLIST (CONS h t1) (CONS h t2) ==> forall x. MEM x t1 ==> h < x"), t288))
+  rol_sublist_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t1 t2. real_ordered_list (CONS h t2) ==>\n      SUBLIST (CONS h t1) (CONS h t2) ==> ∀ x. MEM x t1 ==> h < x"), t288))
 }
 
 ///|
@@ -782,7 +782,7 @@ fn step_29() -> Unit raise {
   let t309 = @simp.rewrite_tac(@list.List([sublist(), @lists.not_cons_nil()]))
   let t310 = @tactics.repeat_tac(@lists.list_induct_tac)
   let t311 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), t310, t309, t308, t307, t306, @tactics.strip_tac, t305, t304, t303, t302, t301, t300, t299, t298, t297, @tactics.strip_tac, t296, t295, t294, t293])
-  sublist_delete_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h1 h2 t l. SUBLIST (CONS h1 (CONS h2 t)) l ==>\n    SUBLIST (CONS h1 t) l"), t311))
+  sublist_delete_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h1 h2 t l. SUBLIST (CONS h1 (CONS h2 t)) l ==>\n    SUBLIST (CONS h1 t) l"), t311))
 }
 
 ///|
@@ -848,7 +848,7 @@ fn step_30() -> Unit raise {
   let t352 = @rqe_tactics_ext.cases_on(@parser.parse_term("h = h'"))
   let t353 = @simp.rewrite_tac(@list.List([sublist(), @lists.not_cons_nil()]))
   let t354 = @list.List([@tactics.strip_tac, @tactics.repeat_tac(@lists.list_induct_tac), t353, t352, t351, @tactics.strip_tac, t350, t349, t348, t347, @tactics.strip_tac, t346, t345, t344, t343, t342, t341, t340, t339, @tactics.ap_term_tac, t338, t337, t336, t335, @tactics.strip_tac, t334, t333, t332, t331, @tactics.strip_tac, t330, t329, t328, t327, t326, t325, t324, t323])
-  sublist_match_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t l. SUBLIST (CONS h t) l ==>\n     ?(l1:A list) l2. (l = APPEND l1 (CONS h l2)) /\\ SUBLIST t l2"), t354))
+  sublist_match_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t l. SUBLIST (CONS h t) l ==>\n     ?(l1:A list) l2. (l = APPEND l1 (CONS h l2)) /\\ SUBLIST t l2"), t354))
 }
 
 ///|
@@ -908,7 +908,7 @@ fn step_31() -> Unit raise {
   let t389 = @tactics.repeat_tac(@tactics.strip_tac)
   let t390 = @simp.rewrite_tac(@list.List([@rol.real_ordered_list()]))
   let t391 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@rol.rol_nil()])), t390, t389, t388, t387, t386, t385, t384, t383, t382, t381, t380, t379, t378, t377, t376, t375, t374, t373, t372, t371, @tactics.strip_tac, t370, t369, @tactics.strip_tac, t368, t367, @tactics.strip_tac, t366])
-  rol_sublist_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2.  real_ordered_list l2 ==> SUBLIST l1 l2 ==> real_ordered_list l1"), t391))
+  rol_sublist_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2.  real_ordered_list l2 ==> SUBLIST l1 l2 ==> real_ordered_list l1"), t391))
 }
 
 ///|
@@ -928,7 +928,7 @@ fn step_32() -> Unit raise {
   let t394 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t395 = @simp.rewrite_tac(@list.List([@lists.butlast(), sublist_nil(), sublist()]))
   let t396 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.butlast(), sublist_nil()])), t395, t394, t393, t392])
-  sublist_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. SUBLIST (BUTLAST l) l"), t396))
+  sublist_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. SUBLIST (BUTLAST l) l"), t396))
 }
 
 ///|
@@ -946,7 +946,7 @@ fn step_33() -> Unit raise {
   let t397 = @simp.asm_rewrite_tac(@list.List([@lists.append(), sublist_cons_cons()]))
   let t398 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t399 = @list.List([@rqe_tactics_ext.repeat_n(2L, @tactics.strip_tac), @lists.list_induct_tac, t398, t397])
-  sublist_append_hd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l2 l3 l1. SUBLIST (APPEND l1 l2) (APPEND l1 l3) = SUBLIST l2 l3"), t399))
+  sublist_append_hd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l2 l3 l1. SUBLIST (APPEND l1 l2) (APPEND l1 l3) = SUBLIST l2 l3"), t399))
 }
 
 ///|
@@ -964,7 +964,7 @@ fn step_34() -> Unit raise {
   let t400 = @meson.asm_meson_tac(@list.List([sublist_delete()]))
   let t401 = @simp.asm_rewrite_tac(@list.List([sublist(), @lists.not_cons_nil(), @lists.hd(), @lists.tl()]))
   let t402 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([sublist(), @lists.not_cons_nil()])), t401, t400])
-  sublist_id_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h l. ~(SUBLIST (CONS h l) l)"), t402))
+  sublist_id_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h l. ~(SUBLIST (CONS h l) l)"), t402))
 }
 
 ///|
@@ -996,7 +996,7 @@ fn step_35() -> Unit raise {
   })
   let t415 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t416 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t415, t414, t413, t412, t411, t410, t409])
-  sublist_id_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall m l. ~(l = []) ==> ~(SUBLIST (APPEND l m) m)"), t416))
+  sublist_id_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ m l. ~(l = []) ==> ~(SUBLIST (APPEND l m) m)"), t416))
 }
 
 ///|
@@ -1033,7 +1033,7 @@ fn step_36() -> Unit raise {
   let t435 = @rqe_tactics_ext.rewrite_all(@list.List([sublist_nil(), @lists.append(), @lists.append_nil(), sublist(), sublist_id()]))
   let t436 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.append_nil(), sublist(), sublist_id()]))
   let t437 = @list.List([@tactics.strip_tac, @tactics.repeat_tac(@lists.list_induct_tac), t436, t435, t434, t433, t432, t431, t430, t429, @tactics.eq_tac, t428, @tactics.strip_tac, t427, t426, t425, t424, @tactics.eq_tac, @tactics.strip_tac, t423, t422, t421, @tactics.strip_tac, t420, t419, @tactics.strip_tac, t418])
-  sublist_append_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l3 l1 l2. SUBLIST (APPEND l1 l3) (APPEND l2 l3) = SUBLIST l1 l2"), t437))
+  sublist_append_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l3 l1 l2. SUBLIST (APPEND l1 l3) (APPEND l2 l3) = SUBLIST l1 l2"), t437))
 }
 
 ///|
@@ -1066,7 +1066,7 @@ fn step_38() -> Unit raise {
   let t439 = @meson.asm_meson_tac(@list.List([]))
   let t438 = @simp.rewrite_tac(@list.List([@lists.append_nil(), @lists.append()]))
   let t440 = @list.List([@tactics.strip_tac, @tactics.then_tac(@tactics.repeat_tac(@lists.list_induct_tac), t438), t439])
-  append_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h l1 l2. APPEND l1 (CONS h l2) = APPEND (APPEND l1 [h]) l2"), t440))
+  append_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h l1 l2. APPEND l1 (CONS h l2) = APPEND (APPEND l1 [h]) l2"), t440))
 }
 
 ///|
@@ -1120,7 +1120,7 @@ fn step_39() -> Unit raise {
   let t470 = @tactics.repeat_tac(@tactics.strip_tac)
   let t471 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t472 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([sublist_nil(), @lists.append()])), @lists.list_induct_tac, t471, t470, t469, t468, t467, @lists.list_induct_tac, t466, t465, t464, t463, t462, t461, t460, t459, t458, t457, t456, t455])
-  sublist_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2 m1 m2. SUBLIST l1 l2 ==> SUBLIST m1 m2 ==>\n    SUBLIST (APPEND l1 m1) (APPEND l2 m2)"), t472))
+  sublist_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2 m1 m2. SUBLIST l1 l2 ==> SUBLIST m1 m2 ==>\n    SUBLIST (APPEND l1 m1) (APPEND l2 m2)"), t472))
 }
 
 ///|
@@ -1154,7 +1154,7 @@ fn step_41() -> Unit raise {
   let t474 = @rqe_tactics_ext.exists_tac(@parser.parse_term("APPEND l1 l2"))
   let t475 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@basic.imp_and_thm()]))(rol_sublist()))
   let t476 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t475, t474, t473])
-  rol_append2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l2 l1. real_ordered_list (APPEND l1 l2) ==>\n           real_ordered_list (APPEND l1 (BUTLAST l2))"), t476))
+  rol_append2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l2 l1. real_ordered_list (APPEND l1 l2) ==>\n           real_ordered_list (APPEND l1 (BUTLAST l2))"), t476))
 }
 
 ///|
@@ -1172,7 +1172,7 @@ fn step_42() -> Unit raise {
   let t477 = @meson.asm_meson_tac(@list.List([@lists.not_cons_nil(), @lists.append(), @lists.tl()]))
   let t478 = @simp.rewrite_tac(@list.List([@defs.partition_line()]))
   let t479 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), @tactics.strip_tac, t478, t477])
-  pl_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> ~(TL (partition_line l) = [])"), t479))
+  pl_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> ~(TL (partition_line l) = [])"), t479))
 }
 
 ///|
@@ -1190,7 +1190,7 @@ fn step_43() -> Unit raise {
   let t480 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.hd()]))
   let t481 = @tactics.repeat_tac(@tactics.strip_tac)
   let t482 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t481, t480])
-  hd_append2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l m. ~(l = []) ==> (HD (APPEND l m) = HD l)"), t482))
+  hd_append2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l m. ~(l = []) ==> (HD (APPEND l m) = HD l)"), t482))
 }
 
 ///|
@@ -1224,7 +1224,7 @@ fn step_44() -> Unit raise {
   let t495 = @simp.rewrite_tac(@list.List([@lists.tl(), @lists.butlast()]))
   let t496 = @simp.rewrite_tac(@list.List([@lists.length()]))
   let t497 = @list.List([@lists.list_induct_tac, @tactics.then_tac(@simp.rewrite_tac(@list.List([@lists.length()])), @int.arith_tac), t496, @tactics.strip_tac, t495, @class.cond_cases_tac, t494, t493, t492, t491, t490])
-  butlast_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. LENGTH l > 1 ==> (BUTLAST (TL l) = TL (BUTLAST l))"), t497))
+  butlast_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. LENGTH l > 1 ==> (BUTLAST (TL l) = TL (BUTLAST l))"), t497))
 }
 
 ///|
@@ -1241,7 +1241,7 @@ pub fn butlast_tl() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t498 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl()]))
   let t499 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t498])
-  append_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall m l. ~(l = []) ==> (APPEND (TL l) m = TL (APPEND l m))"), t499))
+  append_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ m l. ~(l = []) ==> (APPEND (TL l) m = TL (APPEND l m))"), t499))
 }
 
 ///|
@@ -1258,7 +1258,7 @@ pub fn append_tl() -> @kernel.Thm {
 fn step_46() -> Unit raise {
   let t500 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.hd()]))
   let t501 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), @tactics.strip_tac, t500])
-  append_hd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall m l. ~(l = []) ==> (HD (APPEND l m) = HD l)"), t501))
+  append_hd_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ m l. ~(l = []) ==> (HD (APPEND l m) = HD l)"), t501))
 }
 
 ///|
@@ -1277,7 +1277,7 @@ fn step_47() -> Unit raise {
   let t503 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@lists.length()])), @int.arith_tac)
   let t504 = @simp.rewrite_tac(@list.List([@defs.partition_line()]))
   let t505 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([]))), t504, @tactics.strip_tac, @class.cond_cases_tac, t503, t502])
-  pl_lem2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> LENGTH (partition_line l) > 1"), t505))
+  pl_lem2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> LENGTH (partition_line l) > 1"), t505))
 }
 
 ///|
@@ -1296,7 +1296,7 @@ fn step_48() -> Unit raise {
   let t507 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.butlast()]))
   let t508 = @tactics.repeat_tac(@tactics.strip_tac)
   let t509 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.append()])), t508, t507, t506])
-  butlast_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l m. ~(m = []) ==>\n     (BUTLAST (APPEND l m) = APPEND l (BUTLAST m))"), t509))
+  butlast_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l m. ~(m = []) ==>\n     (BUTLAST (APPEND l m) = APPEND l (BUTLAST m))"), t509))
 }
 
 ///|
@@ -1324,7 +1324,7 @@ fn step_49() -> Unit raise {
   let t517 = @tactics.repeat_tac(@tactics.strip_tac)
   let t518 = @simp.rewrite_tac(@list.List([@lists.length(), @lists.tl()]))
   let t519 = @list.List([@lists.list_induct_tac, @tactics.then_tac(@simp.rewrite_tac(@list.List([@lists.length()])), @int.arith_tac), t518, t517, t516, t515, t514])
-  length_tl1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. LENGTH l > 1 ==> ~(TL l = [])"), t519))
+  length_tl1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. LENGTH l > 1 ==> ~(TL l = [])"), t519))
 }
 
 ///|
@@ -1343,7 +1343,7 @@ fn step_50() -> Unit raise {
   let t521 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.not_cons_nil(), @lists.butlast()]))
   let t522 = @simp.rewrite_tac(@list.List([@defs.partition_line()]))
   let t523 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t522, @class.cond_cases_tac, t521, t520])
-  pl_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> ~(BUTLAST (partition_line l) = [])"), t523))
+  pl_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> ~(BUTLAST (partition_line l) = [])"), t523))
 }
 
 ///|
@@ -1396,7 +1396,7 @@ fn step_51() -> Unit raise {
   })
   let t556 = @simp.rewrite_tac(@list.List([]))
   let t557 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), @lists.list_induct_tac, t556, t555, t554, t553, t552, t551, t550, t549, @class.cond_cases_tac, t548, t547, t546, t545, t544, t543, t542, t541, t540, @class.cond_cases_tac, t539, t538, @tactics.ap_term_tac, t537, t536, @tactics.strip_tac, t535, t534, t533, @tactics.strip_tac, t532])
-  partition_line_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t l. ~(l = []) ==>\n    (partition_line (APPEND l (CONS h t)) =\n      APPEND (BUTLAST (partition_line l))\n        (CONS (\\x. LAST l < x /\\ x < h)\n          (TL (partition_line (CONS h t)))))"), t557))
+  partition_line_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t l. ~(l = []) ==>\n    (partition_line (APPEND l (CONS h t)) =\n      APPEND (BUTLAST (partition_line l))\n        (CONS (\\x. LAST l < x /\\ x < h)\n          (TL (partition_line (CONS h t)))))"), t557))
 }
 
 ///|
@@ -1413,7 +1413,7 @@ pub fn partition_line_append() -> @kernel.Thm {
 fn step_52() -> Unit raise {
   let t558 = @simp.rewrite_tac(@list.List([@lists.hd(), @lists.tl()]))
   let t559 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t558])
-  hd_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> (l = CONS (HD l) (TL l))"), t559))
+  hd_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> (l = CONS (HD l) (TL l))"), t559))
 }
 
 ///|
@@ -1429,7 +1429,7 @@ pub fn hd_tl() -> @kernel.Thm {
 /// HD_LEM
 fn step_53() -> Unit raise {
   let t560 = @list.List([@meson.meson_tac(@list.List([@lists.cons_11()]))])
-  hd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2. (TL l1 = l2) <=> (CONS (HD l1) (TL l1) = CONS (HD l1) l2)"), t560))
+  hd_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2. (TL l1 = l2) <=> (CONS (HD l1) (TL l1) = CONS (HD l1) l2)"), t560))
 }
 
 ///|
@@ -1494,7 +1494,7 @@ fn step_54() -> Unit raise {
   let t573 = @simp.asm_rewrite_tac(@list.List([@lists.not_cons_nil(), @lists.length()]))
   let t574 = @simp.rewrite_tac(@list.List([@lists.butlast(), @lists.length()]))
   let t575 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([]))), t574, @class.cond_cases_tac, t573, @int.arith_tac, t572, t571, t570, t569])
-  butlast_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> (LENGTH (BUTLAST l) = PRE (LENGTH l))"), t575))
+  butlast_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> (LENGTH (BUTLAST l) = PRE (LENGTH l))"), t575))
 }
 
 ///|
@@ -1695,7 +1695,7 @@ fn step_55() -> Unit raise {
   })
   let t725 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("pts:real list"), @lists.list_cases()))
   let t726 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t725, t724, t723, t722, t721, t720, t719, @int.arith_tac, t718, t717, t716, t715, t714, t713, @tactics.strip_tac, t712, t711, t710, t709, t708, @calc_rat.real_arith_tac, t707, t706, t705, @tactics.strip_tac, t704, t703, t702, t701, t700, @tactics.strip_tac, t699, t698, @class.cond_cases_tac, t697, t696, t695, @tactics.strip_tac, t694, t693, t692, t691, t690, t689, t688, t687, t686, t685, t684, t683, @tactics.strip_tac, t682, t681, t680, t679, t678, @calc_rat.real_arith_tac, t677, t676, @class.cond_cases_tac, t675, t674, t673, t672, t671, t670, t669, t668, t667, @class.cond_cases_tac, t666, t665, @tactics.strip_tac, t664, @tactics.strip_tac, t663, @tactics.strip_tac, t662, t661, @tactics.strip_tac, t660, @tactics.strip_tac, t659, t658, @tactics.strip_tac, t657, t656, t655, t654, t653, t652, t651, t650, t649, t648, t647, t646, @int.arith_tac, t645, t644, t643, @tactics.strip_tac, t642, t641, t640, t639, t638, t637, @tactics.strip_tac, t636, t635, t634, t633, t632, @calc_rat.real_arith_tac])
-  all2_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b x y s eqs pts sgns.\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts [x; y])) (APPEND sgns [a; b; s; s; s]) ==>\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts [x])) (APPEND sgns [a; b; s])"), t726))
+  all2_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a b x y s eqs pts sgns.\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts [x; y])) (APPEND sgns [a; b; s; s; s]) ==>\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts [x])) (APPEND sgns [a; b; s])"), t726))
 }
 
 ///|
@@ -1717,7 +1717,7 @@ fn step_56() -> Unit raise {
   let t731 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@basic.imp_and_thm()]))(rol_sublist()))
   let t732 = @tactics.repeat_tac(@tactics.strip_tac)
   let t733 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t732, t731, t730, t729, t728, t727])
-  interpmat_trio_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b x y s eqs pts sgns.\n     interpmat (APPEND pts [x; y]) eqs\n        (APPEND sgns [a; b; s; s; s]) ==>\n     interpmat (APPEND pts [x]) eqs (APPEND sgns [a; b; s])"), t733))
+  interpmat_trio_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a b x y s eqs pts sgns.\n     interpmat (APPEND pts [x; y]) eqs\n        (APPEND sgns [a; b; s; s; s]) ==>\n     interpmat (APPEND pts [x]) eqs (APPEND sgns [a; b; s])"), t733))
 }
 
 ///|
@@ -1737,7 +1737,7 @@ fn step_57() -> Unit raise {
   let t736 = @tactics.repeat_tac(@tactics.strip_tac)
   let t737 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.last()]))
   let t738 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.append()])), t737, t736, t735, t734])
-  last_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2. ~(l2 = []) ==> (LAST (APPEND l1 l2) = LAST l2)"), t738))
+  last_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2. ~(l2 = []) ==> (LAST (APPEND l1 l2) = LAST l2)"), t738))
 }
 
 ///|
@@ -1755,7 +1755,7 @@ fn step_58() -> Unit raise {
   let t739 = @meson.asm_meson_tac(@list.List([]))
   let t740 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t741 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.append()])), t740, t739])
-  append_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2 l3. APPEND (APPEND l1 l2) l3 = APPEND l1 (APPEND l2 l3)"), t741))
+  append_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2 l3. APPEND (APPEND l1 l2) l3 = APPEND l1 (APPEND l2 l3)"), t741))
 }
 
 ///|
@@ -1876,7 +1876,7 @@ fn step_59() -> Unit raise {
   let t831 = @meson.asm_meson_tac(@list.List([all2_length()]))
   let t832 = @rqe_tactics_ext.claim(@parser.parse_term("LENGTH (partition_line\n    (APPEND pts (CONS x (CONS y qts)))) =\n    LENGTH (APPEND sgns (CONS (a:sign list) (CONS b\n      (CONS s (CONS s (CONS s rgns))))))"))
   let t833 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t832, t831, t830, @tactics.strip_tac, t829, t828, t827, @tactics.strip_tac, t826, t825, t824, t823, t822, t821, t820, t819, @class.cond_cases_tac, t818, t817, t816, t815, t814, t813, @tactics.strip_tac, t812, t811, t810, t809, t808, @calc_rat.real_arith_tac, t807, t806, t805, t804, t803, t802, @tactics.strip_tac, t801, t800, t799, t798, t797, @calc_rat.real_arith_tac, t796, t795, t794, t793, t792, t791, t790, t789, t788, @int.arith_tac, @tactics.strip_tac, t787, t786, t785, @class.cond_cases_tac, t784, t783, t782, t781, t780, @tactics.strip_tac, t779, t778, t777, t776, t775, @calc_rat.real_arith_tac, t774, t773, t772, t771, t770, @tactics.strip_tac, t769, t768, t767, t766, t765, @calc_rat.real_arith_tac])
-  all2_lem2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b x y s eqs pts sgns qts rgns.\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts (CONS x (CONS y qts))))\n    (APPEND sgns (CONS a (CONS b\n      (CONS s (CONS s (CONS s rgns)))))) ==>\n   (LENGTH sgns = 2 * LENGTH pts) ==>\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts (CONS x qts)))\n    (APPEND sgns (CONS a (CONS b (CONS s rgns))))"), t833))
+  all2_lem2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a b x y s eqs pts sgns qts rgns.\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts (CONS x (CONS y qts))))\n    (APPEND sgns (CONS a (CONS b\n      (CONS s (CONS s (CONS s rgns)))))) ==>\n   (LENGTH sgns = 2 * LENGTH pts) ==>\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts (CONS x qts)))\n    (APPEND sgns (CONS a (CONS b (CONS s rgns))))"), t833))
 }
 
 ///|
@@ -1898,7 +1898,7 @@ fn step_60() -> Unit raise {
   let t838 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@basic.imp_and_thm()]))(rol_sublist()))
   let t839 = @tactics.repeat_tac(@tactics.strip_tac)
   let t840 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t839, t838, t837, t836, t835, t834])
-  interpmat_trio_inner_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a b x y s eqs qts rgns pts sgns.\n     interpmat (APPEND pts (CONS x (CONS y qts))) eqs\n        (APPEND sgns (CONS a (CONS b\n          (CONS s (CONS s (CONS s rgns)))))) ==>\n        (LENGTH sgns = 2 * LENGTH pts) ==>\n       interpmat (APPEND pts (CONS x qts)) eqs\n        (APPEND sgns (CONS a (CONS b (CONS s rgns))))"), t840))
+  interpmat_trio_inner_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a b x y s eqs qts rgns pts sgns.\n     interpmat (APPEND pts (CONS x (CONS y qts))) eqs\n        (APPEND sgns (CONS a (CONS b\n          (CONS s (CONS s (CONS s rgns)))))) ==>\n        (LENGTH sgns = 2 * LENGTH pts) ==>\n       interpmat (APPEND pts (CONS x qts)) eqs\n        (APPEND sgns (CONS a (CONS b (CONS s rgns))))"), t840))
 }
 
 ///|
@@ -1923,7 +1923,7 @@ fn step_61() -> Unit raise {
   let t848 = @tactics.repeat_tac(@tactics.strip_tac)
   let t849 = @simp.rewrite_tac(@list.List([@rol.rol_sing(), @defs.partition_line(), @rol.rol_nil(), @lists.all2()]))
   let t850 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t849, t848, t847, t846, @tactics.strip_tac, t845, t844, t843, t842, t841, @calc_rat.real_arith_tac])
-  interpmat_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x l.  interpmat [x] eqs [l; l; l] ==> interpmat [] eqs [l]"), t850))
+  interpmat_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x l.  interpmat [x] eqs [l; l; l] ==> interpmat [] eqs [l]"), t850))
 }
 
 ///|
@@ -1984,7 +1984,7 @@ fn step_62() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t891)
   })
   let t928 = @meson.meson_tac(@list.List([@lists.append(), append_cons()]))
-  let t929 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t929 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t930 = @tactics.repeat_tac(@tactics.strip_tac)
   let t931 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t932 = @meson.asm_meson_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -2121,7 +2121,7 @@ fn step_62() -> Unit raise {
   let t1004 = @simp.asm_rewrite_tac(@list.List([]))
   let t1005 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1006 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t1005, t1004, t1003, t1002, t1001, t1000, @tactics.strip_tac, t999, t998, @tactics.strip_tac, t997, t996, t995, t994, t993, t992, t991, t990, t989, t988, t987, t986, t985, @class.cond_cases_tac, t984, t983, t982, t981, t980, t979, t978, t977, t976, t975, t974, t973, t972, t971, t970, t969, t968, t967, t966, t965, t964, t963, t962, t961, t960, t959, @class.cond_cases_tac, t958, t957, t956, t955, t954, t953, t952, t951, t950, @int.arith_tac, t949, t948, t947, t946, t945, t944, t943, t942, t941, t940, t939, t938, t937, t936, t935, t934, t933, t932, t931, t930, t929, t928, t927, t926, t925, t924, t923, @int.arith_tac, t922, t921, t920, t919, t918, t917, t916, t915, t914, t913, t912, t911, t910, t909, t908, t907, t906, t905, t904, t903])
-  inferisign_pos_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns))))"), t1006))
+  inferisign_pos_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns))))"), t1006))
 }
 
 ///|
@@ -2182,7 +2182,7 @@ fn step_63() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t1047)
   })
   let t1084 = @meson.meson_tac(@list.List([@lists.append(), append_cons()]))
-  let t1085 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t1085 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t1086 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1087 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t1088 = @meson.asm_meson_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -2319,7 +2319,7 @@ fn step_63() -> Unit raise {
   let t1160 = @simp.asm_rewrite_tac(@list.List([]))
   let t1161 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1162 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t1161, t1160, t1159, t1158, t1157, t1156, @tactics.strip_tac, t1155, t1154, @tactics.strip_tac, t1153, t1152, t1151, t1150, t1149, t1148, t1147, t1146, t1145, t1144, t1143, t1142, t1141, @class.cond_cases_tac, t1140, t1139, t1138, t1137, t1136, t1135, t1134, t1133, t1132, t1131, t1130, t1129, t1128, t1127, t1126, t1125, t1124, t1123, t1122, t1121, t1120, t1119, t1118, t1117, t1116, t1115, @class.cond_cases_tac, t1114, t1113, t1112, t1111, t1110, t1109, t1108, t1107, t1106, @int.arith_tac, t1105, t1104, t1103, t1102, t1101, t1100, t1099, t1098, t1097, t1096, t1095, t1094, t1093, t1092, t1091, t1090, t1089, t1088, t1087, t1086, t1085, t1084, t1083, t1082, t1081, t1080, t1079, @int.arith_tac, t1078, t1077, t1076, t1075, t1074, t1073, t1072, t1071, t1070, t1069, t1068, t1067, t1066, t1065, t1064, t1063, t1062, t1061, t1060, t1059])
-  inferisign_pos_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns))))"), t1162))
+  inferisign_pos_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns))))"), t1162))
 }
 
 ///|
@@ -2380,7 +2380,7 @@ fn step_64() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t1203)
   })
   let t1240 = @meson.meson_tac(@list.List([@lists.append(), append_cons()]))
-  let t1241 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t1241 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t1242 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1243 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t1244 = @meson.asm_meson_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -2517,7 +2517,7 @@ fn step_64() -> Unit raise {
   let t1316 = @simp.asm_rewrite_tac(@list.List([]))
   let t1317 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1318 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t1317, t1316, t1315, t1314, t1313, t1312, @tactics.strip_tac, t1311, t1310, @tactics.strip_tac, t1309, t1308, t1307, t1306, t1305, t1304, t1303, t1302, t1301, t1300, t1299, t1298, t1297, @class.cond_cases_tac, t1296, t1295, t1294, t1293, t1292, t1291, t1290, t1289, t1288, t1287, t1286, t1285, t1284, t1283, t1282, t1281, t1280, t1279, t1278, t1277, t1276, t1275, t1274, t1273, t1272, t1271, @class.cond_cases_tac, t1270, t1269, t1268, t1267, t1266, t1265, t1264, t1263, t1262, @int.arith_tac, t1261, t1260, t1259, t1258, t1257, t1256, t1255, t1254, t1253, t1252, t1251, t1250, t1249, t1248, t1247, t1246, t1245, t1244, t1243, t1242, t1241, t1240, t1239, t1238, t1237, t1236, t1235, @int.arith_tac, t1234, t1233, t1232, t1231, t1230, t1229, t1228, t1227, t1226, t1225, t1224, t1223, t1222, t1221, t1220, t1219, t1218, t1217, t1216, t1215])
-  inferisign_neg_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns))))"), t1318))
+  inferisign_neg_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns))))"), t1318))
 }
 
 ///|
@@ -2578,7 +2578,7 @@ fn step_65() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t1359)
   })
   let t1396 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t1397 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t1397 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t1398 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1399 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t1400 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -2715,7 +2715,7 @@ fn step_65() -> Unit raise {
   let t1472 = @simp.asm_rewrite_tac(@list.List([]))
   let t1473 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1474 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t1473, t1472, t1471, t1470, t1469, t1468, @tactics.strip_tac, t1467, t1466, @tactics.strip_tac, t1465, t1464, t1463, t1462, t1461, t1460, t1459, t1458, t1457, t1456, t1455, t1454, t1453, @class.cond_cases_tac, t1452, t1451, t1450, t1449, t1448, t1447, t1446, t1445, t1444, t1443, t1442, t1441, t1440, t1439, t1438, t1437, t1436, t1435, t1434, t1433, t1432, t1431, t1430, t1429, t1428, t1427, @class.cond_cases_tac, t1426, t1425, t1424, t1423, t1422, t1421, t1420, t1419, t1418, @int.arith_tac, t1417, t1416, t1415, t1414, t1413, t1412, t1411, t1410, t1409, t1408, t1407, t1406, t1405, t1404, t1403, t1402, t1401, t1400, t1399, t1398, t1397, t1396, t1395, t1394, t1393, t1392, t1391, @int.arith_tac, t1390, t1389, t1388, t1387, t1386, t1385, t1384, t1383, t1382, t1381, t1380, t1379, t1378, t1377, t1376, t1375, t1374, t1373, t1372, t1371])
-  inferisign_neg_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns))))"), t1474))
+  inferisign_neg_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns))))"), t1474))
 }
 
 ///|
@@ -2734,7 +2734,7 @@ fn step_66() -> Unit raise {
   let t1476 = @simp.rewrite_tac(@list.List([@lists.all2()]))
   let t1475 = @tactics.repeat_tac(@lists.list_induct_tac)
   let t1478 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), t1475), t1476), t1477])
-  all2_interpsign_subset_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P Q l1 l2. ALL2 (interpsign P) l1 l2 ==> Q SUBSET P ==>\n   ALL2 (interpsign Q) l1 l2"), t1478))
+  all2_interpsign_subset_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P Q l1 l2. ALL2 (interpsign P) l1 l2 ==> Q SUBSET P ==>\n   ALL2 (interpsign Q) l1 l2"), t1478))
 }
 
 ///|
@@ -2752,7 +2752,7 @@ fn step_67() -> Unit raise {
   let t1479 = @simp.asm_rewrite_tac(@list.List([@lists.hd(), @lists.append()]))
   let t1480 = @simp.asm_rewrite_tac(@list.List([@lists.hd(), @lists.append()]))
   let t1481 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), @lists.list_induct_tac, t1480, t1479])
-  hd_append1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h i l1 l2.\n  HD (APPEND l1 (CONS h l2)) = HD (APPEND l1 (CONS h (CONS i l2)))"), t1481))
+  hd_append1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h i l1 l2.\n  HD (APPEND l1 (CONS h l2)) = HD (APPEND l1 (CONS h (CONS i l2)))"), t1481))
 }
 
 ///|
@@ -2777,7 +2777,7 @@ fn step_68() -> Unit raise {
   let t1489 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1482)
   let t1490 = @simp.rewrite_tac(@list.List([@lists.append(), @rol.real_ordered_list(), @lists.hd(), @lists.tl(), @lists.not_cons_nil()]))
   let t1491 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.strip_tac), @lists.list_induct_tac, t1490, t1489, t1488, t1487, t1486, t1485, t1484, @tactics.disj2_tac, t1483])
-  rol_append_insert_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h j l1 l2.\n    real_ordered_list (APPEND l1 (CONS h (CONS i l2))) ==>\n    h < j ==> j < i ==>\n      real_ordered_list (APPEND l1 (CONS h (CONS j (CONS i l2))))"), t1491))
+  rol_append_insert_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h j l1 l2.\n    real_ordered_list (APPEND l1 (CONS h (CONS i l2))) ==>\n    h < j ==> j < i ==>\n      real_ordered_list (APPEND l1 (CONS h (CONS j (CONS i l2))))"), t1491))
 }
 
 ///|
@@ -2996,7 +2996,7 @@ fn step_69() -> Unit raise {
     @simp.once_rewrite_tac(@rqe_lib.list(x1547))
   })
   let t1719 = @meson.meson_tac(@list.List([@lists.append(), append_cons()]))
-  let t1720 = @rqe_tactics_ext.claim(@parser.parse_term("forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
+  let t1720 = @rqe_tactics_ext.claim(@parser.parse_term("∀ rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
   let t1721 = @simp.asm_simp_tac(@list.List([partition_line_append()]))
   let t1722 = @tactics.pop_assum(fn(x1541 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let x_1 = x1541
@@ -3195,7 +3195,7 @@ fn step_69() -> Unit raise {
   let t1837 = @rqe_tactics_ext.claim(@parser.parse_term("~(sgns = [])"))
   let t1838 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1839 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t1838, t1837, t1836, t1835, t1834, @tactics.strip_tac, t1833, t1832, @tactics.strip_tac, t1831, t1830, t1829, t1828, t1827, t1826, t1825, t1824, t1823, t1822, t1821, t1820, t1819, @class.cond_cases_tac, t1818, t1817, t1816, t1815, t1814, t1813, t1812, t1811, t1810, t1809, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x1510 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1510), t1808, t1807, t1806, t1805, t1804, t1803, t1802, t1801, t1800, t1799, t1798, t1797, t1796, t1795, t1794, t1793, t1792, t1791, t1790, t1789, t1788, t1787, t1786, t1785, t1784, t1783, t1782, t1781, t1780, t1779, t1778, t1777, t1776, t1775, t1774, t1773, t1772, t1771, t1770, t1769, t1768, t1767, t1766, t1765, t1764, t1763, t1762, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x1527 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1527), t1761, t1760, t1759, t1758, t1757, t1756, t1755, t1754, t1753, t1752, t1751, t1750, t1749, t1748, t1747, t1746, t1745, t1744, t1743, t1742, t1741, t1740, t1739, t1738, t1737, t1736, t1735, t1734, t1733, t1732, t1731, t1730, t1729, t1728, t1727, t1726, t1725, t1724, t1723, t1722, t1721, t1720, t1719, t1718, t1717, t1716, t1715, t1714, @int.arith_tac, t1713, t1712, t1711, t1710, t1709, t1708, t1707, t1706, @class.cond_cases_tac, t1705, t1704, t1703, t1702, t1701, @rqe_tactics_ext.label_all_tac, (x1563 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1563), t1700, t1699, t1698, t1697, t1696, t1695, t1694, t1693, t1692, t1691, t1690, t1689, t1688, t1687, t1686, @int.arith_tac, t1685, t1684, t1683, t1682, t1681, t1680, t1679, t1678, t1677, t1676, t1675, t1674, t1673, t1672, t1671, t1670, t1669, t1668, t1667, t1666, t1665, t1664, t1663, t1662, t1661, t1660, t1659, t1658, t1657, t1656, @rqe_tactics_ext.label_all_tac, (x1590 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1590), t1655, t1654, t1653, t1652, t1651, t1650, t1649, t1648, t1647, t1646, t1645, t1644, t1643, t1642, t1641, @int.arith_tac, t1640, t1639, t1638, t1637, t1636, t1635, t1634, t1633, t1632, t1631, t1630, t1629, t1628, t1627, t1626, t1625, t1624, t1623, t1622, t1621, t1620, t1619, t1618, t1617, t1616, t1615])
-  inferisign_pos_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n          (CONS (CONS Pos (CONS Pos r2))\n          (CONS (CONS Zero (CONS Pos r2))\n          (CONS (CONS Neg (CONS Pos r2))\n          (CONS (CONS Neg r3) rgns))))))"), t1839))
+  inferisign_pos_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n          (CONS (CONS Pos (CONS Pos r2))\n          (CONS (CONS Zero (CONS Pos r2))\n          (CONS (CONS Neg (CONS Pos r2))\n          (CONS (CONS Neg r3) rgns))))))"), t1839))
 }
 
 ///|
@@ -3414,7 +3414,7 @@ fn step_70() -> Unit raise {
     @simp.once_rewrite_tac(@rqe_lib.list(x1895))
   })
   let t2067 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t2068 = @rqe_tactics_ext.claim(@parser.parse_term("forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
+  let t2068 = @rqe_tactics_ext.claim(@parser.parse_term("∀ rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
   let t2069 = @simp.asm_simp_tac(@list.List([partition_line_append()]))
   let t2070 = @tactics.pop_assum(fn(x1889 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let x_1 = x1889
@@ -3613,7 +3613,7 @@ fn step_70() -> Unit raise {
   let t2185 = @rqe_tactics_ext.claim(@parser.parse_term("~(sgns = [])"))
   let t2186 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2187 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t2186, t2185, t2184, t2183, t2182, @tactics.strip_tac, t2181, t2180, @tactics.strip_tac, t2179, t2178, t2177, t2176, t2175, t2174, t2173, t2172, t2171, t2170, t2169, t2168, t2167, @class.cond_cases_tac, t2166, t2165, t2164, t2163, t2162, t2161, t2160, t2159, t2158, t2157, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x1858 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1858), t2156, t2155, t2154, t2153, t2152, t2151, t2150, t2149, t2148, t2147, t2146, t2145, t2144, t2143, t2142, t2141, t2140, t2139, t2138, t2137, t2136, t2135, t2134, t2133, t2132, t2131, t2130, t2129, t2128, t2127, t2126, t2125, t2124, t2123, t2122, t2121, t2120, t2119, t2118, t2117, t2116, t2115, t2114, t2113, t2112, t2111, t2110, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x1875 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1875), t2109, t2108, t2107, t2106, t2105, t2104, t2103, t2102, t2101, t2100, t2099, t2098, t2097, t2096, t2095, t2094, t2093, t2092, t2091, t2090, t2089, t2088, t2087, t2086, t2085, t2084, t2083, t2082, t2081, t2080, t2079, t2078, t2077, t2076, t2075, t2074, t2073, t2072, t2071, t2070, t2069, t2068, t2067, t2066, t2065, t2064, t2063, t2062, @int.arith_tac, t2061, t2060, t2059, t2058, t2057, t2056, t2055, t2054, @class.cond_cases_tac, t2053, t2052, t2051, t2050, t2049, @rqe_tactics_ext.label_all_tac, (x1911 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1911), t2048, t2047, t2046, t2045, t2044, t2043, t2042, t2041, t2040, t2039, t2038, t2037, t2036, t2035, t2034, @int.arith_tac, t2033, t2032, t2031, t2030, t2029, t2028, t2027, t2026, t2025, t2024, t2023, t2022, t2021, t2020, t2019, t2018, t2017, t2016, t2015, t2014, t2013, t2012, t2011, t2010, t2009, t2008, t2007, t2006, t2005, t2004, @rqe_tactics_ext.label_all_tac, (x1938 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x1938), t2003, t2002, t2001, t2000, t1999, t1998, t1997, t1996, t1995, t1994, t1993, t1992, t1991, t1990, t1989, @int.arith_tac, t1988, t1987, t1986, t1985, t1984, t1983, t1982, t1981, t1980, t1979, t1978, t1977, t1976, t1975, t1974, t1973, t1972, t1971, t1970, t1969, t1968, t1967, t1966, t1965, t1964, t1963])
-  inferisign_pos_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n          (CONS (CONS Pos (CONS Neg r2))\n          (CONS (CONS Zero (CONS Neg r2))\n          (CONS (CONS Neg (CONS Neg r2))\n          (CONS (CONS Neg r3) rgns))))))"), t2187))
+  inferisign_pos_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n          (CONS (CONS Pos (CONS Neg r2))\n          (CONS (CONS Zero (CONS Neg r2))\n          (CONS (CONS Neg (CONS Neg r2))\n          (CONS (CONS Neg r3) rgns))))))"), t2187))
 }
 
 ///|
@@ -3832,7 +3832,7 @@ fn step_71() -> Unit raise {
     @simp.once_rewrite_tac(@rqe_lib.list(x2243))
   })
   let t2415 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t2416 = @rqe_tactics_ext.claim(@parser.parse_term("forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
+  let t2416 = @rqe_tactics_ext.claim(@parser.parse_term("∀ rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
   let t2417 = @simp.asm_simp_tac(@list.List([partition_line_append()]))
   let t2418 = @tactics.pop_assum(fn(x2237 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let x_1 = x2237
@@ -4031,7 +4031,7 @@ fn step_71() -> Unit raise {
   let t2533 = @rqe_tactics_ext.claim(@parser.parse_term("~(sgns = [])"))
   let t2534 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2535 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t2534, t2533, t2532, t2531, t2530, @tactics.strip_tac, t2529, t2528, @tactics.strip_tac, t2527, t2526, t2525, t2524, t2523, t2522, t2521, t2520, t2519, t2518, t2517, t2516, t2515, @class.cond_cases_tac, t2514, t2513, t2512, t2511, t2510, t2509, t2508, t2507, t2506, t2505, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x2206 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2206), t2504, t2503, t2502, t2501, t2500, t2499, t2498, t2497, t2496, t2495, t2494, t2493, t2492, t2491, t2490, t2489, t2488, t2487, t2486, t2485, t2484, t2483, t2482, t2481, t2480, t2479, t2478, t2477, t2476, t2475, t2474, t2473, t2472, t2471, t2470, t2469, t2468, t2467, t2466, t2465, t2464, t2463, t2462, t2461, t2460, t2459, t2458, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x2223 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2223), t2457, t2456, t2455, t2454, t2453, t2452, t2451, t2450, t2449, t2448, t2447, t2446, t2445, t2444, t2443, t2442, t2441, t2440, t2439, t2438, t2437, t2436, t2435, t2434, t2433, t2432, t2431, t2430, t2429, t2428, t2427, t2426, t2425, t2424, t2423, t2422, t2421, t2420, t2419, t2418, t2417, t2416, t2415, t2414, t2413, t2412, t2411, t2410, @int.arith_tac, t2409, t2408, t2407, t2406, t2405, t2404, t2403, t2402, @class.cond_cases_tac, t2401, t2400, t2399, t2398, t2397, @rqe_tactics_ext.label_all_tac, (x2259 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2259), t2396, t2395, t2394, t2393, t2392, t2391, t2390, t2389, t2388, t2387, t2386, t2385, t2384, t2383, t2382, @int.arith_tac, t2381, t2380, t2379, t2378, t2377, t2376, t2375, t2374, t2373, t2372, t2371, t2370, t2369, t2368, t2367, t2366, t2365, t2364, t2363, t2362, t2361, t2360, t2359, t2358, t2357, t2356, t2355, t2354, t2353, t2352, @rqe_tactics_ext.label_all_tac, (x2286 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2286), t2351, t2350, t2349, t2348, t2347, t2346, t2345, t2344, t2343, t2342, t2341, t2340, t2339, t2338, t2337, @int.arith_tac, t2336, t2335, t2334, t2333, t2332, t2331, t2330, t2329, t2328, t2327, t2326, t2325, t2324, t2323, t2322, t2321, t2320, t2319, t2318, t2317, t2316, t2315, t2314, t2313, t2312, t2311])
-  inferisign_neg_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n          (CONS (CONS Neg (CONS Neg r2))\n          (CONS (CONS Zero (CONS Neg r2))\n          (CONS (CONS Pos (CONS Neg r2))\n          (CONS (CONS Pos r3) rgns))))))"), t2535))
+  inferisign_neg_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n          (CONS (CONS Neg (CONS Neg r2))\n          (CONS (CONS Zero (CONS Neg r2))\n          (CONS (CONS Pos (CONS Neg r2))\n          (CONS (CONS Pos r3) rgns))))))"), t2535))
 }
 
 ///|
@@ -4250,7 +4250,7 @@ fn step_72() -> Unit raise {
     @simp.once_rewrite_tac(@rqe_lib.list(x2591))
   })
   let t2763 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t2764 = @rqe_tactics_ext.claim(@parser.parse_term("forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
+  let t2764 = @rqe_tactics_ext.claim(@parser.parse_term("∀ rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts"))
   let t2765 = @simp.asm_simp_tac(@list.List([partition_line_append()]))
   let t2766 = @tactics.pop_assum(fn(x2585 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let x_1 = x2585
@@ -4449,7 +4449,7 @@ fn step_72() -> Unit raise {
   let t2881 = @rqe_tactics_ext.claim(@parser.parse_term("~(sgns = [])"))
   let t2882 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2883 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t2882, t2881, t2880, t2879, t2878, @tactics.strip_tac, t2877, t2876, @tactics.strip_tac, t2875, t2874, t2873, t2872, t2871, t2870, t2869, t2868, t2867, t2866, t2865, t2864, t2863, @class.cond_cases_tac, t2862, t2861, t2860, t2859, t2858, t2857, t2856, t2855, t2854, t2853, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x2554 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2554), t2852, t2851, t2850, t2849, t2848, t2847, t2846, t2845, t2844, t2843, t2842, t2841, t2840, t2839, t2838, t2837, t2836, t2835, t2834, t2833, t2832, t2831, t2830, t2829, t2828, t2827, t2826, t2825, t2824, t2823, t2822, t2821, t2820, t2819, t2818, t2817, t2816, t2815, t2814, t2813, t2812, t2811, t2810, t2809, t2808, t2807, t2806, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x2571 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2571), t2805, t2804, t2803, t2802, t2801, t2800, t2799, t2798, t2797, t2796, t2795, t2794, t2793, t2792, t2791, t2790, t2789, t2788, t2787, t2786, t2785, t2784, t2783, t2782, t2781, t2780, t2779, t2778, t2777, t2776, t2775, t2774, t2773, t2772, t2771, t2770, t2769, t2768, t2767, t2766, t2765, t2764, t2763, t2762, t2761, t2760, t2759, t2758, @int.arith_tac, t2757, t2756, t2755, t2754, t2753, t2752, t2751, t2750, @class.cond_cases_tac, t2749, t2748, t2747, t2746, t2745, @rqe_tactics_ext.label_all_tac, (x2607 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2607), t2744, t2743, t2742, t2741, t2740, t2739, t2738, t2737, t2736, t2735, t2734, t2733, t2732, t2731, t2730, @int.arith_tac, t2729, t2728, t2727, t2726, t2725, t2724, t2723, t2722, t2721, t2720, t2719, t2718, t2717, t2716, t2715, t2714, t2713, t2712, t2711, t2710, t2709, t2708, t2707, t2706, t2705, t2704, t2703, t2702, t2701, t2700, @rqe_tactics_ext.label_all_tac, (x2634 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x2634), t2699, t2698, t2697, t2696, t2695, t2694, t2693, t2692, t2691, t2690, t2689, t2688, t2687, t2686, t2685, @int.arith_tac, t2684, t2683, t2682, t2681, t2680, t2679, t2678, t2677, t2676, t2675, t2674, t2673, t2672, t2671, t2670, t2669, t2668, t2667, t2666, t2665, t2664, t2663, t2662, t2661, t2660, t2659])
-  inferisign_neg_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n          (CONS (CONS Neg (CONS Pos r2))\n          (CONS (CONS Zero (CONS Pos r2))\n          (CONS (CONS Pos (CONS Pos r2))\n          (CONS (CONS Pos r3) rgns))))))"), t2883))
+  inferisign_neg_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n          (CONS (CONS Neg (CONS Pos r2))\n          (CONS (CONS Zero (CONS Pos r2))\n          (CONS (CONS Pos (CONS Pos r2))\n          (CONS (CONS Pos r3) rgns))))))"), t2883))
 }
 
 ///|
@@ -4510,7 +4510,7 @@ fn step_73() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t2924)
   })
   let t2961 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t2962 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t2962 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t2963 = @tactics.repeat_tac(@tactics.strip_tac)
   let t2964 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t2965 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -4647,7 +4647,7 @@ fn step_73() -> Unit raise {
   let t3037 = @simp.asm_rewrite_tac(@list.List([]))
   let t3038 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3039 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3038, t3037, t3036, t3035, t3034, t3033, @tactics.strip_tac, t3032, t3031, @tactics.strip_tac, t3030, t3029, t3028, t3027, t3026, t3025, t3024, t3023, t3022, t3021, t3020, t3019, t3018, @class.cond_cases_tac, t3017, t3016, t3015, t3014, t3013, t3012, t3011, t3010, t3009, t3008, t3007, t3006, t3005, t3004, t3003, t3002, t3001, t3000, t2999, t2998, t2997, t2996, t2995, t2994, t2993, t2992, @class.cond_cases_tac, t2991, t2990, t2989, t2988, t2987, t2986, t2985, t2984, t2983, @int.arith_tac, t2982, t2981, t2980, t2979, t2978, t2977, t2976, t2975, t2974, t2973, t2972, t2971, t2970, t2969, t2968, t2967, t2966, t2965, t2964, t2963, t2962, t2961, t2960, t2959, t2958, t2957, t2956, @int.arith_tac, t2955, t2954, t2953, t2952, t2951, t2950, t2949, t2948, t2947, t2946, t2945, t2944, t2943, t2942, t2941, t2940, t2939, t2938, t2937, t2936])
-  inferisign_zero_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns))))"), t3039))
+  inferisign_zero_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns))))"), t3039))
 }
 
 ///|
@@ -4708,7 +4708,7 @@ fn step_74() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t3080)
   })
   let t3117 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t3118 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t3118 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t3119 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3120 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t3121 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -4845,7 +4845,7 @@ fn step_74() -> Unit raise {
   let t3193 = @simp.asm_rewrite_tac(@list.List([]))
   let t3194 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3195 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3194, t3193, t3192, t3191, t3190, t3189, @tactics.strip_tac, t3188, t3187, @tactics.strip_tac, t3186, t3185, t3184, t3183, t3182, t3181, t3180, t3179, t3178, t3177, t3176, t3175, t3174, @class.cond_cases_tac, t3173, t3172, t3171, t3170, t3169, t3168, t3167, t3166, t3165, t3164, t3163, t3162, t3161, t3160, t3159, t3158, t3157, t3156, t3155, t3154, t3153, t3152, t3151, t3150, t3149, t3148, @class.cond_cases_tac, t3147, t3146, t3145, t3144, t3143, t3142, t3141, t3140, t3139, @int.arith_tac, t3138, t3137, t3136, t3135, t3134, t3133, t3132, t3131, t3130, t3129, t3128, t3127, t3126, t3125, t3124, t3123, t3122, t3121, t3120, t3119, t3118, t3117, t3116, t3115, t3114, t3113, t3112, @int.arith_tac, t3111, t3110, t3109, t3108, t3107, t3106, t3105, t3104, t3103, t3102, t3101, t3100, t3099, t3098, t3097, t3096, t3095, t3094, t3093, t3092])
-  inferisign_zero_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns))))"), t3195))
+  inferisign_zero_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns))))"), t3195))
 }
 
 ///|
@@ -4906,7 +4906,7 @@ fn step_75() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t3236)
   })
   let t3273 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t3274 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t3274 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t3275 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3276 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t3277 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -5043,7 +5043,7 @@ fn step_75() -> Unit raise {
   let t3349 = @simp.asm_rewrite_tac(@list.List([]))
   let t3350 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3351 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3350, t3349, t3348, t3347, t3346, t3345, @tactics.strip_tac, t3344, t3343, @tactics.strip_tac, t3342, t3341, t3340, t3339, t3338, t3337, t3336, t3335, t3334, t3333, t3332, t3331, t3330, @class.cond_cases_tac, t3329, t3328, t3327, t3326, t3325, t3324, t3323, t3322, t3321, t3320, t3319, t3318, t3317, t3316, t3315, t3314, t3313, t3312, t3311, t3310, t3309, t3308, t3307, t3306, t3305, t3304, @class.cond_cases_tac, t3303, t3302, t3301, t3300, t3299, t3298, t3297, t3296, t3295, @int.arith_tac, t3294, t3293, t3292, t3291, t3290, t3289, t3288, t3287, t3286, t3285, t3284, t3283, t3282, t3281, t3280, t3279, t3278, t3277, t3276, t3275, t3274, t3273, t3272, t3271, t3270, t3269, t3268, @int.arith_tac, t3267, t3266, t3265, t3264, t3263, t3262, t3261, t3260, t3259, t3258, t3257, t3256, t3255, t3254, t3253, t3252, t3251, t3250, t3249, t3248])
-  inferisign_pos_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns))))"), t3351))
+  inferisign_pos_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns))))"), t3351))
 }
 
 ///|
@@ -5104,7 +5104,7 @@ fn step_76() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t3392)
   })
   let t3429 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t3430 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t3430 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t3431 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3432 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t3433 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -5241,7 +5241,7 @@ fn step_76() -> Unit raise {
   let t3505 = @simp.asm_rewrite_tac(@list.List([]))
   let t3506 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3507 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3506, t3505, t3504, t3503, t3502, t3501, @tactics.strip_tac, t3500, t3499, @tactics.strip_tac, t3498, t3497, t3496, t3495, t3494, t3493, t3492, t3491, t3490, t3489, t3488, t3487, t3486, @class.cond_cases_tac, t3485, t3484, t3483, t3482, t3481, t3480, t3479, t3478, t3477, t3476, t3475, t3474, t3473, t3472, t3471, t3470, t3469, t3468, t3467, t3466, t3465, t3464, t3463, t3462, t3461, t3460, @class.cond_cases_tac, t3459, t3458, t3457, t3456, t3455, t3454, t3453, t3452, t3451, @int.arith_tac, t3450, t3449, t3448, t3447, t3446, t3445, t3444, t3443, t3442, t3441, t3440, t3439, t3438, t3437, t3436, t3435, t3434, t3433, t3432, t3431, t3430, t3429, t3428, t3427, t3426, t3425, t3424, @int.arith_tac, t3423, t3422, t3421, t3420, t3419, t3418, t3417, t3416, t3415, t3414, t3413, t3412, t3411, t3410, t3409, t3408, t3407, t3406, t3405, t3404])
-  inferisign_pos_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns))))"), t3507))
+  inferisign_pos_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns))))"), t3507))
 }
 
 ///|
@@ -5302,7 +5302,7 @@ fn step_77() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t3548)
   })
   let t3585 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t3586 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t3586 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t3587 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3588 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t3589 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -5439,7 +5439,7 @@ fn step_77() -> Unit raise {
   let t3661 = @simp.asm_rewrite_tac(@list.List([]))
   let t3662 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3663 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3662, t3661, t3660, t3659, t3658, t3657, @tactics.strip_tac, t3656, t3655, @tactics.strip_tac, t3654, t3653, t3652, t3651, t3650, t3649, t3648, t3647, t3646, t3645, t3644, t3643, t3642, @class.cond_cases_tac, t3641, t3640, t3639, t3638, t3637, t3636, t3635, t3634, t3633, t3632, t3631, t3630, t3629, t3628, t3627, t3626, t3625, t3624, t3623, t3622, t3621, t3620, t3619, t3618, t3617, t3616, @class.cond_cases_tac, t3615, t3614, t3613, t3612, t3611, t3610, t3609, t3608, t3607, @int.arith_tac, t3606, t3605, t3604, t3603, t3602, t3601, t3600, t3599, t3598, t3597, t3596, t3595, t3594, t3593, t3592, t3591, t3590, t3589, t3588, t3587, t3586, t3585, t3584, t3583, t3582, t3581, t3580, @int.arith_tac, t3579, t3578, t3577, t3576, t3575, t3574, t3573, t3572, t3571, t3570, t3569, t3568, t3567, t3566, t3565, t3564, t3563, t3562, t3561, t3560])
-  inferisign_zero_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns))))"), t3663))
+  inferisign_zero_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns))))"), t3663))
 }
 
 ///|
@@ -5500,7 +5500,7 @@ fn step_78() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t3704)
   })
   let t3741 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t3742 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t3742 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t3743 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3744 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t3745 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -5637,7 +5637,7 @@ fn step_78() -> Unit raise {
   let t3817 = @simp.asm_rewrite_tac(@list.List([]))
   let t3818 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3819 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3818, t3817, t3816, t3815, t3814, t3813, @tactics.strip_tac, t3812, t3811, @tactics.strip_tac, t3810, t3809, t3808, t3807, t3806, t3805, t3804, t3803, t3802, t3801, t3800, t3799, t3798, @class.cond_cases_tac, t3797, t3796, t3795, t3794, t3793, t3792, t3791, t3790, t3789, t3788, t3787, t3786, t3785, t3784, t3783, t3782, t3781, t3780, t3779, t3778, t3777, t3776, t3775, t3774, t3773, t3772, @class.cond_cases_tac, t3771, t3770, t3769, t3768, t3767, t3766, t3765, t3764, t3763, @int.arith_tac, t3762, t3761, t3760, t3759, t3758, t3757, t3756, t3755, t3754, t3753, t3752, t3751, t3750, t3749, t3748, t3747, t3746, t3745, t3744, t3743, t3742, t3741, t3740, t3739, t3738, t3737, t3736, @int.arith_tac, t3735, t3734, t3733, t3732, t3731, t3730, t3729, t3728, t3727, t3726, t3725, t3724, t3723, t3722, t3721, t3720, t3719, t3718, t3717, t3716])
-  inferisign_zero_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns))))"), t3819))
+  inferisign_zero_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns))))"), t3819))
 }
 
 ///|
@@ -5698,7 +5698,7 @@ fn step_79() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t3860)
   })
   let t3897 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t3898 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t3898 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t3899 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3900 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t3901 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -5835,7 +5835,7 @@ fn step_79() -> Unit raise {
   let t3973 = @simp.asm_rewrite_tac(@list.List([]))
   let t3974 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3975 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t3974, t3973, t3972, t3971, t3970, t3969, @tactics.strip_tac, t3968, t3967, @tactics.strip_tac, t3966, t3965, t3964, t3963, t3962, t3961, t3960, t3959, t3958, t3957, t3956, t3955, t3954, @class.cond_cases_tac, t3953, t3952, t3951, t3950, t3949, t3948, t3947, t3946, t3945, t3944, t3943, t3942, t3941, t3940, t3939, t3938, t3937, t3936, t3935, t3934, t3933, t3932, t3931, t3930, t3929, t3928, @class.cond_cases_tac, t3927, t3926, t3925, t3924, t3923, t3922, t3921, t3920, t3919, @int.arith_tac, t3918, t3917, t3916, t3915, t3914, t3913, t3912, t3911, t3910, t3909, t3908, t3907, t3906, t3905, t3904, t3903, t3902, t3901, t3900, t3899, t3898, t3897, t3896, t3895, t3894, t3893, t3892, @int.arith_tac, t3891, t3890, t3889, t3888, t3887, t3886, t3885, t3884, t3883, t3882, t3881, t3880, t3879, t3878, t3877, t3876, t3875, t3874, t3873, t3872])
-  inferisign_neg_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns))))"), t3975))
+  inferisign_neg_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns))))"), t3975))
 }
 
 ///|
@@ -5896,7 +5896,7 @@ fn step_80() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t4016)
   })
   let t4053 = @meson.meson_tac(@list.List([@realax.real_gt(), @lists.append(), append_cons()]))
-  let t4054 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t4054 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t4055 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4056 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t4057 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x < y ==> ~(x = y)"))]))
@@ -6033,7 +6033,7 @@ fn step_80() -> Unit raise {
   let t4129 = @simp.asm_rewrite_tac(@list.List([]))
   let t4130 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4131 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t4130, t4129, t4128, t4127, t4126, t4125, @tactics.strip_tac, t4124, t4123, @tactics.strip_tac, t4122, t4121, t4120, t4119, t4118, t4117, t4116, t4115, t4114, t4113, t4112, t4111, t4110, @class.cond_cases_tac, t4109, t4108, t4107, t4106, t4105, t4104, t4103, t4102, t4101, t4100, t4099, t4098, t4097, t4096, t4095, t4094, t4093, t4092, t4091, t4090, t4089, t4088, t4087, t4086, t4085, t4084, @class.cond_cases_tac, t4083, t4082, t4081, t4080, t4079, t4078, t4077, t4076, t4075, @int.arith_tac, t4074, t4073, t4072, t4071, t4070, t4069, t4068, t4067, t4066, t4065, t4064, t4063, t4062, t4061, t4060, t4059, t4058, t4057, t4056, t4055, t4054, t4053, t4052, t4051, t4050, t4049, t4048, @int.arith_tac, t4047, t4046, t4045, t4044, t4043, t4042, t4041, t4040, t4039, t4038, t4037, t4036, t4035, t4034, t4033, t4032, t4031, t4030, t4029, t4028])
-  inferisign_neg_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns))))"), t4131))
+  inferisign_neg_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns))))"), t4131))
 }
 
 ///|
@@ -6095,7 +6095,7 @@ fn step_81() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t4171)
   })
   let t4209 = @meson.meson_tac(@list.List([@lists.append(), append_cons()]))
-  let t4210 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t4210 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t4211 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4212 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t4213 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x > y ==> ~(x = y)"))]))
@@ -6235,7 +6235,7 @@ fn step_81() -> Unit raise {
   let t4289 = @simp.asm_rewrite_tac(@list.List([]))
   let t4290 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4291 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t4290, t4289, t4288, t4287, t4286, t4285, @tactics.strip_tac, t4284, t4283, @tactics.strip_tac, t4282, t4281, t4280, t4279, t4278, t4277, t4276, t4275, t4274, t4273, t4272, t4271, t4270, @class.cond_cases_tac, t4269, t4268, t4267, t4266, t4265, t4264, t4263, t4262, t4261, t4260, t4259, t4258, t4257, t4256, t4255, t4254, t4253, t4252, t4251, t4250, t4249, t4248, t4247, t4246, t4245, t4244, t4243, t4242, t4241, t4240, t4239, t4238, @class.cond_cases_tac, t4237, t4236, t4235, t4234, t4233, t4232, t4231, t4230, t4229, @int.arith_tac, t4228, t4227, t4226, t4225, t4224, t4223, t4222, t4221, t4220, t4219, t4218, t4217, t4216, t4215, t4214, t4213, t4212, t4211, t4210, t4209, t4208, t4207, t4206, t4205, t4204, @int.arith_tac, t4203, t4202, t4201, t4200, t4199, t4198, t4197, t4196, t4195, t4194, t4193, t4192, t4191, t4190, t4189, t4188, t4187, t4186, @tactics.strip_tac, t4185, t4184, t4183])
-  inferisign_zero_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==> F"), t4291))
+  inferisign_zero_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==> F"), t4291))
 }
 
 ///|
@@ -6297,7 +6297,7 @@ fn step_82() -> Unit raise {
     @tactics.then_tac(@simp.once_rewrite_tac(@list.List([x_3])), t4331)
   })
   let t4369 = @meson.meson_tac(@list.List([@lists.append(), append_cons()]))
-  let t4370 = @rqe_tactics_ext.claim(@parser.parse_term("forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
+  let t4370 = @rqe_tactics_ext.claim(@parser.parse_term("∀ j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j"))
   let t4371 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4372 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.tl(), @lists.hd(), @lists.all2()]))
   let t4373 = @meson.asm_meson_tac(@list.List([@realax.real_gt(), @calc_rat.real_arith(@parser.parse_term("x > y ==> ~(x = y)"))]))
@@ -6437,7 +6437,7 @@ fn step_82() -> Unit raise {
   let t4449 = @simp.asm_rewrite_tac(@list.List([]))
   let t4450 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4451 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t4450, t4449, t4448, t4447, t4446, t4445, @tactics.strip_tac, t4444, t4443, @tactics.strip_tac, t4442, t4441, t4440, t4439, t4438, t4437, t4436, t4435, t4434, t4433, t4432, t4431, t4430, @class.cond_cases_tac, t4429, t4428, t4427, t4426, t4425, t4424, t4423, t4422, t4421, t4420, t4419, t4418, t4417, t4416, t4415, t4414, t4413, t4412, t4411, t4410, t4409, t4408, t4407, t4406, t4405, t4404, t4403, t4402, t4401, t4400, t4399, t4398, @class.cond_cases_tac, t4397, t4396, t4395, t4394, t4393, t4392, t4391, t4390, t4389, @int.arith_tac, t4388, t4387, t4386, t4385, t4384, t4383, t4382, t4381, t4380, t4379, t4378, t4377, t4376, t4375, t4374, t4373, t4372, t4371, t4370, t4369, t4368, t4367, t4366, t4365, t4364, @int.arith_tac, t4363, t4362, t4361, t4360, t4359, t4358, t4357, t4356, t4355, t4354, t4353, t4352, t4351, t4350, t4349, t4348, t4347, t4346, @tactics.strip_tac, t4345, t4344, t4343])
-  inferisign_zero_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==> F"), t4451))
+  inferisign_zero_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==> F"), t4451))
 }
 
 ///|
@@ -6461,7 +6461,7 @@ fn step_83() -> Unit raise {
     @tactics.all_tac
   })
   let t4459 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t4458, t4457, @class.cond_cases_tac, t4456, t4455, t4454])
-  butlast_id_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> (APPEND (BUTLAST l) [LAST l] = l)"), t4459))
+  butlast_id_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> (APPEND (BUTLAST l) [LAST l] = l)"), t4459))
 }
 
 ///|
@@ -6477,7 +6477,7 @@ pub fn butlast_id_v1() -> @kernel.Thm {
 /// BUTLAST_ID
 fn step_84() -> Unit raise {
   let t4460 = @list.List([@meson.meson_tac(@list.List([butlast_id_v1()]))])
-  butlast_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) ==> (l = APPEND (BUTLAST l) [LAST l])"), t4460))
+  butlast_id_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) ==> (l = APPEND (BUTLAST l) [LAST l])"), t4460))
 }
 
 ///|
@@ -6504,7 +6504,7 @@ fn step_85() -> Unit raise {
   let t4469 = @simp.asm_rewrite_tac(@list.List([]))
   let t4470 = @simp.rewrite_tac(@list.List([@lists.butlast(), @lists.not_cons_nil()]))
   let t4471 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.butlast()])), t4470, @class.cond_cases_tac, t4469, t4468, t4467, t4466, t4465, @tactics.strip_tac, t4464])
-  butlast_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. (BUTLAST l = []) <=> (l = []) \\/ (?x. l = [x])"), t4471))
+  butlast_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. (BUTLAST l = []) <=> (l = []) \\/ (?x. l = [x])"), t4471))
 }
 
 ///|
@@ -6665,7 +6665,7 @@ fn step_86() -> Unit raise {
   let t4592 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("pts:real list"), @lists.list_cases()))
   let t4593 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4594 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), @defs.partition_line()])), t4593, t4592, t4591, t4590, t4589, t4588, t4587, @tactics.strip_tac, t4586, t4585, t4584, t4583, t4582, t4581, t4580, t4579, t4578, t4577, t4576, t4575, t4574, t4573, t4572, t4571, t4570, t4569, t4568, @class.cond_cases_tac, t4567, t4566, t4565, t4564, t4563, @tactics.strip_tac, t4562, t4561, t4560, t4559, t4558, t4557, t4556, t4555, t4554, t4553, t4552, t4551, t4550, t4549, t4548, t4547, t4546, t4545, t4544, t4543, t4542, t4541, t4540, t4539, t4538, @tactics.strip_tac, t4537, t4536, t4535, t4534, t4533, t4532, t4531, t4530, t4529, t4528, t4527, t4526, t4525, t4524, t4523, t4522, t4521, t4520, t4519, t4518])
-  infin_hd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (CONS (CONS Unknown (CONS Pos r1)) sgns)  ==>\n   nonconstant p ==>\n  ?xminf.\n   interpmat (CONS xminf pts)\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))"), t4594))
+  infin_hd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (CONS (CONS Unknown (CONS Pos r1)) sgns)  ==>\n   nonconstant p ==>\n  ?xminf.\n   interpmat (CONS xminf pts)\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))"), t4594))
 }
 
 ///|
@@ -6860,7 +6860,7 @@ fn step_87() -> Unit raise {
   let t4745 = @rqe_tactics_ext.claim(@parser.parse_term("LENGTH (partition_line pts) = LENGTH (APPEND sgns [a; b; CONS Unknown (CONS Pos r2)])"))
   let t4746 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4747 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), @defs.partition_line()])), t4746, t4745, t4744, @tactics.strip_tac, t4743, t4742, t4741, @int.arith_tac, @tactics.strip_tac, t4740, t4739, t4738, t4737, @int.arith_tac, t4736, t4735, t4734, t4733, @tactics.strip_tac, t4732, t4731, t4730, t4729, t4728, @tactics.strip_tac, t4727, t4726, t4725, t4724, t4723, t4722, t4721, t4720, t4719, t4718, t4717, @tactics.strip_tac, t4716, t4715, t4714, t4713, t4712, t4711, t4710, t4709, t4708, t4707, t4706, t4705, t4704, t4703, t4702, t4701, t4700, t4699, t4698, t4697, t4696, t4695, t4694, t4693, t4692, t4691, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x4621 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x4621), t4690, t4689, t4688, t4687, @int.arith_tac, @tactics.strip_tac, t4686, @tactics.strip_tac, t4685, t4684, t4683, t4682, t4681, t4680, @tactics.strip_tac, t4679, t4678, t4677, t4676, t4675, t4674, t4673, t4672, t4671, t4670, t4669, t4668, t4667, t4666, t4665, t4664, t4663, t4662, t4661, t4660, t4659, t4658, t4657, t4656, t4655, t4654, t4653, t4652, t4651, t4650, t4649, t4648, t4647])
-  infin_tl_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xinf.\n   interpmat (APPEND pts [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])"), t4747))
+  infin_tl_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xinf.\n   interpmat (APPEND pts [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])"), t4747))
 }
 
 ///|
@@ -7021,7 +7021,7 @@ fn step_88() -> Unit raise {
   let t4868 = @tactics.disj_cases_tac(@bool.ispec(@parser.parse_term("pts:real list"), @lists.list_cases()))
   let t4869 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4870 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), @defs.partition_line()])), t4869, t4868, t4867, t4866, t4865, t4864, t4863, @tactics.strip_tac, t4862, t4861, t4860, t4859, t4858, t4857, t4856, t4855, t4854, t4853, t4852, t4851, t4850, t4849, t4848, t4847, t4846, t4845, t4844, @class.cond_cases_tac, t4843, t4842, t4841, t4840, t4839, @tactics.strip_tac, t4838, t4837, t4836, t4835, t4834, t4833, t4832, t4831, t4830, t4829, t4828, t4827, t4826, t4825, t4824, t4823, t4822, t4821, t4820, t4819, t4818, t4817, t4816, t4815, t4814, @tactics.strip_tac, t4813, t4812, t4811, t4810, t4809, t4808, t4807, t4806, t4805, t4804, t4803, t4802, t4801, t4800, t4799, t4798, t4797, t4796, t4795, t4794])
-  infin_hd_neg_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (CONS (CONS Unknown (CONS Neg r1)) sgns)  ==>\n   nonconstant p ==>\n  ?xminf.\n   interpmat (CONS xminf pts)\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))"), t4870))
+  infin_hd_neg_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (CONS (CONS Unknown (CONS Neg r1)) sgns)  ==>\n   nonconstant p ==>\n  ?xminf.\n   interpmat (CONS xminf pts)\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))"), t4870))
 }
 
 ///|
@@ -7215,7 +7215,7 @@ fn step_89() -> Unit raise {
   let t5020 = @rqe_tactics_ext.claim(@parser.parse_term("LENGTH (partition_line pts) = LENGTH (APPEND sgns [a; b; CONS Unknown (CONS Neg r2)])"))
   let t5021 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5022 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), @defs.partition_line()])), t5021, t5020, t5019, @tactics.strip_tac, t5018, t5017, t5016, @int.arith_tac, @tactics.strip_tac, t5015, t5014, t5013, t5012, @int.arith_tac, t5011, t5010, t5009, t5008, @tactics.strip_tac, t5007, t5006, t5005, t5004, t5003, @tactics.strip_tac, t5002, t5001, t5000, t4999, t4998, t4997, t4996, t4995, t4994, t4993, t4992, @tactics.strip_tac, t4991, t4990, t4989, t4988, t4987, t4986, t4985, t4984, t4983, t4982, t4981, t4980, t4979, t4978, t4977, t4976, t4975, t4974, t4973, t4972, t4971, t4970, t4969, t4968, t4967, @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x4897 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x4897), t4966, t4965, t4964, t4963, @int.arith_tac, @tactics.strip_tac, t4962, @tactics.strip_tac, t4961, t4960, t4959, t4958, t4957, t4956, @tactics.strip_tac, t4955, t4954, t4953, t4952, t4951, t4950, t4949, t4948, t4947, t4946, t4945, t4944, t4943, t4942, t4941, t4940, t4939, t4938, t4937, t4936, t4935, t4934, t4933, t4932, t4931, t4930, t4929, t4928, t4927, t4926, t4925, t4924, t4923])
-  infin_tl_neg_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xinf.\n   interpmat (APPEND pts [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])"), t5022))
+  infin_tl_neg_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xinf.\n   interpmat (APPEND pts [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])"), t5022))
 }
 
 ///|
@@ -7245,7 +7245,7 @@ fn step_90() -> Unit raise {
   })
   let t5033 = @rqe_tactics_ext.rewrite_assums(@list.List([@lists.append()]))
   let t5034 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5033, t5032, t5031, @tactics.strip_tac, t5030, t5029, t5028])
-  infin_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Pos r1)) sgns)\n     [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])"), t5034))
+  infin_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Pos r1)) sgns)\n     [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])"), t5034))
 }
 
 ///|
@@ -7275,7 +7275,7 @@ fn step_91() -> Unit raise {
   })
   let t5045 = @rqe_tactics_ext.rewrite_assums(@list.List([@lists.append()]))
   let t5046 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5045, t5044, t5043, @tactics.strip_tac, t5042, t5041, t5040])
-  infin_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Pos r1)) sgns)\n     [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])"), t5046))
+  infin_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Pos r1)) sgns)\n     [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])"), t5046))
 }
 
 ///|
@@ -7305,7 +7305,7 @@ fn step_92() -> Unit raise {
   })
   let t5057 = @rqe_tactics_ext.rewrite_assums(@list.List([@lists.append()]))
   let t5058 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5057, t5056, t5055, @tactics.strip_tac, t5054, t5053, t5052])
-  infin_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Neg r1)) sgns)\n     [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])"), t5058))
+  infin_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Neg r1)) sgns)\n     [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])"), t5058))
 }
 
 ///|
@@ -7335,7 +7335,7 @@ fn step_93() -> Unit raise {
   })
   let t5069 = @rqe_tactics_ext.rewrite_assums(@list.List([@lists.append()]))
   let t5070 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5069, t5068, t5067, @tactics.strip_tac, t5066, t5065, t5064])
-  infin_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Neg r1)) sgns)\n     [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])"), t5070))
+  infin_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Neg r1)) sgns)\n     [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])"), t5070))
 }
 
 ///|
@@ -7401,7 +7401,7 @@ fn step_94() -> Unit raise {
   })
   let t5114 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5115 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt(), @defs.interpmat(), @defs.partition_line(), @rol.rol_nil(), @lists.all2(), @defs.interpsigns(), @defs.interpsign()])), t5114, t5113, t5112, @tactics.strip_tac, t5111, t5110, @tactics.strip_tac, t5109, t5108, t5107, t5106, t5105, t5104, t5103, t5102, t5101, t5100, t5099, t5098, t5097, t5096, t5095, t5094, t5093, t5092, t5091, t5090, t5089, t5088, t5087, t5086, t5085])
-  infin_nil_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps r1.\n  interpmat []\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS Pos (CONS Pos r1);\n       CONS Pos (CONS Pos r1)]"), t5115))
+  infin_nil_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps r1.\n  interpmat []\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS Pos (CONS Pos r1);\n       CONS Pos (CONS Pos r1)]"), t5115))
 }
 
 ///|
@@ -7467,7 +7467,7 @@ fn step_95() -> Unit raise {
   })
   let t5159 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5160 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt(), @defs.interpmat(), @defs.partition_line(), @rol.rol_nil(), @lists.all2(), @defs.interpsigns(), @defs.interpsign()])), t5159, t5158, t5157, @tactics.strip_tac, t5156, t5155, @tactics.strip_tac, t5154, t5153, t5152, t5151, t5150, t5149, t5148, t5147, t5146, t5145, t5144, t5143, t5142, t5141, t5140, t5139, t5138, t5137, t5136, t5135, t5134, t5133, t5132, t5131, t5130])
-  infin_nil_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps r1.\n  interpmat []\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS Neg (CONS Neg r1);\n       CONS Neg (CONS Neg r1)]"), t5160))
+  infin_nil_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps r1.\n  interpmat []\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS Neg (CONS Neg r1);\n       CONS Neg (CONS Neg r1)]"), t5160))
 }
 
 ///|
@@ -7509,7 +7509,7 @@ fn step_96() -> Unit raise {
   let t5161 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t5180 = @rqe_tactics_ext.once_rewrite_assums(@list.List([@tactics.prove(@parser.parse_term("[x; y; z] = APPEND [] [x; y; z]"), t5161)]))
   let t5181 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5180, t5179, t5178, @tactics.strip_tac, t5177, t5176, t5175, t5174, t5173])
-  infin_sing_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1);CONS s2 r2;CONS Unknown (CONS Pos r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Pos r3);\n       CONS Pos (CONS Pos r3);\n       CONS Pos (CONS Pos r3)]"), t5181))
+  infin_sing_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1);CONS s2 r2;CONS Unknown (CONS Pos r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Pos r3);\n       CONS Pos (CONS Pos r3);\n       CONS Pos (CONS Pos r3)]"), t5181))
 }
 
 ///|
@@ -7551,7 +7551,7 @@ fn step_97() -> Unit raise {
   let t5182 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t5201 = @rqe_tactics_ext.once_rewrite_assums(@list.List([@tactics.prove(@parser.parse_term("[x; y; z] = APPEND [] [x; y; z]"), t5182)]))
   let t5202 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5201, t5200, t5199, @tactics.strip_tac, t5198, t5197, t5196, t5195, t5194])
-  infin_sing_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1);CONS s2 r2;CONS Unknown (CONS Neg r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Neg r3);\n       CONS Neg (CONS Neg r3);\n       CONS Neg (CONS Neg r3)]"), t5202))
+  infin_sing_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1);CONS s2 r2;CONS Unknown (CONS Neg r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Neg r3);\n       CONS Neg (CONS Neg r3);\n       CONS Neg (CONS Neg r3)]"), t5202))
 }
 
 ///|
@@ -7593,7 +7593,7 @@ fn step_98() -> Unit raise {
   let t5203 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t5222 = @rqe_tactics_ext.once_rewrite_assums(@list.List([@tactics.prove(@parser.parse_term("[x; y; z] = APPEND [] [x; y; z]"), t5203)]))
   let t5223 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5222, t5221, t5220, @tactics.strip_tac, t5219, t5218, t5217, t5216, t5215])
-  infin_sing_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1);CONS s2 r2;CONS Unknown (CONS Pos r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Pos r3);\n       CONS Pos (CONS Pos r3);\n       CONS Pos (CONS Pos r3)]"), t5223))
+  infin_sing_neg_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1);CONS s2 r2;CONS Unknown (CONS Pos r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Pos r3);\n       CONS Pos (CONS Pos r3);\n       CONS Pos (CONS Pos r3)]"), t5223))
 }
 
 ///|
@@ -7635,7 +7635,7 @@ fn step_99() -> Unit raise {
   let t5224 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t5243 = @rqe_tactics_ext.once_rewrite_assums(@list.List([@tactics.prove(@parser.parse_term("[x; y; z] = APPEND [] [x; y; z]"), t5224)]))
   let t5244 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t5243, t5242, t5241, @tactics.strip_tac, t5240, t5239, t5238, t5237, t5236])
-  infin_sing_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1);CONS s2 r2;CONS Unknown (CONS Neg r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Neg r3);\n       CONS Neg (CONS Neg r3);\n       CONS Neg (CONS Neg r3)]"), t5244))
+  infin_sing_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1);CONS s2 r2;CONS Unknown (CONS Neg r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Neg r3);\n       CONS Neg (CONS Neg r3);\n       CONS Neg (CONS Neg r3)]"), t5244))
 }
 
 ///|
@@ -7651,7 +7651,7 @@ pub fn infin_sing_neg_neg() -> @kernel.Thm {
 /// EL_SUC
 fn step_100() -> Unit raise {
   let t5245 = @list.List([@simp.rewrite_tac(@list.List([@lists.el(), @lists.tl()]))])
-  el_suc_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall i h t. EL (SUC i) (CONS h t) = EL i t"), t5245))
+  el_suc_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ i h t. EL (SUC i) (CONS h t) = EL i t"), t5245))
 }
 
 ///|
@@ -7669,7 +7669,7 @@ fn step_101() -> Unit raise {
   let t5246 = @simp.rewrite_tac(@list.List([@lists.el(), @lists.tl(), @arith.pre()]))
   let t5247 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5248 = @list.List([@nums.induct_tac, @simp.rewrite_tac(@list.List([])), t5247, t5246])
-  el_pre_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall i h t. ~(i = 0) ==> (EL i (CONS h t) = EL (PRE i) t)"), t5248))
+  el_pre_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ i h t. ~(i = 0) ==> (EL i (CONS h t) = EL (PRE i) t)"), t5248))
 }
 
 ///|
@@ -7774,7 +7774,7 @@ fn step_102() -> Unit raise {
     }
   }), @int.arith_tac)
   let t5314 = @list.List([@nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t5313, t5312, t5311, @tactics.strip_tac, t5310, t5309, t5308, t5307, t5306, @tactics.strip_tac, t5305, t5304, t5303, t5302, t5301, t5300, t5299, @tactics.strip_tac, t5298, t5297, t5296, t5295, t5294, t5293, t5292, t5291, t5290, t5289, t5288, t5287, t5286, t5285])
-  all2_el_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k P l1 l2 n.\n    (k = LENGTH l1) /\\ ALL2 P l1 l2 /\\ n < k ==>\n       P (EL n l1) (EL n l2)"), t5314))
+  all2_el_lt_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ k P l1 l2 n.\n    (k = LENGTH l1) /\\ ALL2 P l1 l2 /\\ n < k ==>\n       P (EL n l1) (EL n l2)"), t5314))
 }
 
 ///|
@@ -7790,7 +7790,7 @@ pub fn all2_el_lt_lem() -> @kernel.Thm {
 /// ALL2_EL_LT
 fn step_103() -> Unit raise {
   let t5315 = @list.List([@meson.meson_tac(@list.List([all2_el_lt_lem()]))])
-  all2_el_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P l1 l2 n. ALL2 P l1 l2 /\\ n < LENGTH l1 ==> P (EL n l1) (EL n l2)"), t5315))
+  all2_el_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P l1 l2 n. ALL2 P l1 l2 /\\ n < LENGTH l1 ==> P (EL n l1) (EL n l2)"), t5315))
 }
 
 ///|
@@ -7884,7 +7884,7 @@ fn step_104() -> Unit raise {
     })(@equal.gsym(x5319))
   })
   let t5376 = @list.List([@nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t5375, t5374, t5373, t5372, t5371, t5370, t5369, t5368, @tactics.strip_tac, t5367, t5366, t5365, t5364, t5363, @tactics.strip_tac, t5362, t5361, t5360, @tactics.strip_tac, t5359, t5358, t5357, @tactics.strip_tac, t5356, t5355, t5354, t5353, t5352, @tactics.strip_tac, t5351, t5350, t5349, t5348, t5347, t5346])
-  all2_el_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k P (l1:A list) (l2:B list).  (k = LENGTH l1) /\\ (k = LENGTH l2) /\\\n    ~(?i. i < LENGTH l1 /\\ ~(P (EL i l1) (EL i l2))) ==> ALL2 P l1 l2"), t5376))
+  all2_el_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ k P (l1:A list) (l2:B list).  (k = LENGTH l1) /\\ (k = LENGTH l2) /\\\n    ~(?i. i < LENGTH l1 /\\ ~(P (EL i l1) (EL i l2))) ==> ALL2 P l1 l2"), t5376))
 }
 
 ///|
@@ -7905,7 +7905,7 @@ fn step_105() -> Unit raise {
   let t5380 = @tactics.match_mp_tac(all2_length())
   let t5381 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5382 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac, t5381, t5380, t5379, t5378, t5377])
-  all2_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P (l1:A list) (l2:B list). ALL2 P l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\\n    ~(?i. i < LENGTH l1 /\\ ~(P (EL i l1) (EL i l2)))"), t5382))
+  all2_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P (l1:A list) (l2:B list). ALL2 P l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\\n    ~(?i. i < LENGTH l1 /\\ ~(P (EL i l1) (EL i l2)))"), t5382))
 }
 
 ///|
@@ -7925,7 +7925,7 @@ fn step_106() -> Unit raise {
   let t5385 = @simp.rewrite_tac(@list.List([@lists.map(), @lists.length(), @lists.el(), @lists.hd()]))
   let t5386 = @simp.rewrite_tac(@list.List([@lists.map(), @lists.length()]))
   let t5387 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length()])), @int.arith_tac, t5386, @nums.induct_tac, t5385, t5384, t5383])
-  el_map_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall f l n. n < LENGTH l ==> (EL n (MAP f l) = f (EL n l))"), t5387))
+  el_map_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ f l n. n < LENGTH l ==> (EL n (MAP f l) = f (EL n l))"), t5387))
 }
 
 ///|
@@ -8008,7 +8008,7 @@ fn step_107() -> Unit raise {
   let t5438 = @simp.asm_rewrite_tac(@list.List([]))
   let t5439 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5440 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), all2_el()])), t5439, t5438, t5437, t5436, t5435, t5434, t5433, t5432, t5431, t5430, t5429, t5428, t5427, @tactics.strip_tac, t5426, t5425, t5424, t5423, t5422, t5421, @int.arith_tac, t5420, t5419, t5418, t5417, t5416])
-  remove_hd_col_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps sgns pts.\n    interpmat pts (CONS p ps) sgns ==> interpmat pts ps (MAP TL sgns)"), t5440))
+  remove_hd_col_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps sgns pts.\n    interpmat pts (CONS p ps) sgns ==> interpmat pts ps (MAP TL sgns)"), t5440))
 }
 
 ///|
@@ -8119,7 +8119,7 @@ fn step_108() -> Unit raise {
   let t5512 = @simp.asm_rewrite_tac(@list.List([]))
   let t5513 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5514 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), all2_el()])), t5513, t5512, t5511, t5510, t5509, t5508, t5507, t5506, t5505, t5504, t5503, t5502, @tactics.strip_tac, t5501, t5500, t5499, t5498, t5497, t5496, @int.arith_tac, t5495, t5494, t5493, t5492, t5491, t5490, t5489, t5488, t5487, @int.arith_tac, t5486, t5485, t5484, t5483, t5482])
-  remove_col1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall sgns pts p1 p2 ps.\n   interpmat pts (CONS p1 (CONS p2 ps)) sgns ==>\n   interpmat pts (CONS p1 ps) (MAP (\\x. CONS (HD x) (TL (TL x))) sgns)"), t5514))
+  remove_col1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ sgns pts p1 p2 ps.\n   interpmat pts (CONS p1 (CONS p2 ps)) sgns ==>\n   interpmat pts (CONS p1 ps) (MAP (\\x. CONS (HD x) (TL (TL x))) sgns)"), t5514))
 }
 
 ///|
@@ -8204,7 +8204,7 @@ fn step_109() -> Unit raise {
   })
   let t5565 = @simp.asm_rewrite_tac(@list.List([@lists.all()]))
   let t5566 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.all(), @lists.length()])), @int.arith_tac, t5565, t5564, @tactics.eq_tac, t5563, t5562, t5561, t5560, t5559, t5558, t5557, t5556, t5555, t5554, t5553, t5552, t5551, t5550, t5549, t5548, t5547, t5546, t5545])
-  all_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P l. ALL P l <=> forall n. n < LENGTH l ==> P (EL n l)"), t5566))
+  all_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P l. ALL P l <=> ∀ n. n < LENGTH l ==> P (EL n l)"), t5566))
 }
 
 ///|
@@ -8251,7 +8251,7 @@ fn step_110() -> Unit raise {
   let t5591 = @meson.asm_meson_tac(@list.List([@lists.not_cons_nil(), @rqe_list.length_0(), all2_length()]))
   let t5592 = @rqe_tactics_ext.claim(@parser.parse_term("l2 = []"))
   let t5593 = @list.List([@nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t5592, t5591, t5590, t5589, t5588, t5587, t5586, t5585, t5584, t5583, t5582, t5581, t5580, t5579, @tactics.strip_tac, t5578, t5577, t5576, t5575, t5574, t5573])
-  interpmat_pol_length_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall k pols l1 l2. ALL2 (interpsigns pols) l1 l2 /\\ (k = LENGTH l2) ==>\n    ALL (\\x. LENGTH x = LENGTH pols) l2"), t5593))
+  interpmat_pol_length_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ k pols l1 l2. ALL2 (interpsigns pols) l1 l2 /\\ (k = LENGTH l2) ==>\n    ALL (\\x. LENGTH x = LENGTH pols) l2"), t5593))
 }
 
 ///|
@@ -8268,7 +8268,7 @@ pub fn interpmat_pol_length_lem() -> @kernel.Thm {
 fn step_111() -> Unit raise {
   let t5594 = @meson.meson_tac(@list.List([interpmat_pol_length_lem()]))
   let t5595 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t5594])
-  interpmat_pol_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts pols sgns. interpmat pts pols sgns ==>\n    ALL (\\x. LENGTH x = LENGTH pols) sgns"), t5595))
+  interpmat_pol_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts pols sgns. interpmat pts pols sgns ==>\n    ALL (\\x. LENGTH x = LENGTH pols) sgns"), t5595))
 }
 
 ///|
@@ -8337,7 +8337,7 @@ fn step_113() -> Unit raise {
   let t5624 = @simp.rewrite_tac(@list.List([@lists.all2(), @lists.butlast()]))
   let t5625 = @simp.rewrite_tac(@list.List([@lists.all2(), @lists.butlast()]))
   let t5626 = @list.List([@tactics.strip_tac, @tactics.repeat_tac(@lists.list_induct_tac), t5625, t5624, t5623, t5622, t5621, t5620, t5619, t5618, t5617, t5616, restrip_tac, t5615, t5614, t5613, t5612, t5611])
-  all2_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P l1 l2. ALL2 P l1 l2 ==> ALL2 P (BUTLAST l1) (BUTLAST l2)"), t5626))
+  all2_butlast_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ P l1 l2. ALL2 P l1 l2 ==> ALL2 P (BUTLAST l1) (BUTLAST l2)"), t5626))
 }
 
 ///|
@@ -8380,7 +8380,7 @@ fn step_114() -> Unit raise {
   let t5648 = @simp.asm_rewrite_tac(@list.List([]))
   let t5649 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5650 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), all2_el()])), t5649, t5648, t5647, t5646, t5645, t5644, t5643, t5642, t5641, t5640, t5639, t5638, @tactics.strip_tac, t5637, t5636])
-  remove_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts pols sgns .\n     interpmat pts pols sgns ==>\n     interpmat pts (BUTLAST pols) (MAP BUTLAST sgns)"), t5650))
+  remove_last_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts pols sgns .\n     interpmat pts pols sgns ==>\n     interpmat pts (BUTLAST pols) (MAP BUTLAST sgns)"), t5650))
 }
 
 ///|
@@ -8456,7 +8456,7 @@ fn step_116() -> Unit raise {
     }
   }), t5658), @int.arith_tac)
   let t5686 = @list.List([@tactics.strip_tac, @nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t5685, t5684, t5683, t5682, t5681, t5680, t5679, t5678, t5677, t5676, t5675, t5674, t5673, t5672, t5671, t5670, t5669, t5668, t5667, t5666])
-  map2_el_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall f k l1 l2 i. (LENGTH l1 = LENGTH l2) ==> i < LENGTH l1 ==>\n    (k = LENGTH l1) ==>\n     (EL i (MAP2 f l1 l2) = f (EL i l1) (EL i l2))"), t5686))
+  map2_el_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ f k l1 l2 i. (LENGTH l1 = LENGTH l2) ==> i < LENGTH l1 ==>\n    (k = LENGTH l1) ==>\n     (EL i (MAP2 f l1 l2) = f (EL i l1) (EL i l2))"), t5686))
 }
 
 ///|
@@ -8472,7 +8472,7 @@ pub fn map2_el_lem() -> @kernel.Thm {
 /// MAP2_EL
 fn step_117() -> Unit raise {
   let t5687 = @list.List([@meson.meson_tac(@list.List([map2_el_lem()]))])
-  map2_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall f i l1 l2. (LENGTH l1 = LENGTH l2) ==> i < LENGTH l1 ==>\n     (EL i (MAP2 f l1 l2) = f (EL i l1) (EL i l2))"), t5687))
+  map2_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ f i l1 l2. (LENGTH l1 = LENGTH l2) ==> i < LENGTH l1 ==>\n     (EL i (MAP2 f l1 l2) = f (EL i l1) (EL i l2))"), t5687))
 }
 
 ///|
@@ -8498,7 +8498,7 @@ fn step_118() -> Unit raise {
   let t5695 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5696 = @simp.rewrite_tac(@list.List([insertat(), @lists.length()]))
   let t5697 = @list.List([@tactics.strip_tac, @nums.induct_tac, @simp.rewrite_tac(@list.List([insertat(), @lists.length()])), t5696, t5695, @tactics.ap_term_tac, t5694, t5693, t5692, @tactics.strip_tac, t5691, t5690, t5689])
-  insertat_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x n l. n <= LENGTH l ==> (LENGTH (INSERTAT n x l) = SUC (LENGTH l))"), t5697))
+  insertat_length_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x n l. n <= LENGTH l ==> (LENGTH (INSERTAT n x l) = SUC (LENGTH l))"), t5697))
 }
 
 ///|
@@ -8547,7 +8547,7 @@ fn step_120() -> Unit raise {
   let t5711 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5712 = @simp.rewrite_tac(@list.List([insertat(), @lists.tl()]))
   let t5713 = @list.List([@tactics.strip_tac, @nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t5712, t5711, t5710, t5709, @tactics.strip_tac, t5708, t5707])
-  insertat_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x n l. n < LENGTH l ==> (INSERTAT n x (TL l) = TL (INSERTAT (SUC n) x l))"), t5713))
+  insertat_tl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x n l. n < LENGTH l ==> (INSERTAT n x (TL l) = TL (INSERTAT (SUC n) x l))"), t5713))
 }
 
 ///|
@@ -8689,7 +8689,7 @@ fn step_121() -> Unit raise {
     }
   }), @int.arith_tac)
   let t5812 = @list.List([@nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t5811, t5810, t5809, t5808, t5807, t5806, t5805, t5804, t5803, t5802, @tactics.strip_tac, t5801, t5800, t5799, t5798, t5797, @tactics.strip_tac, t5796, t5795, t5794, t5793, t5792, t5791, t5790, t5789, t5788, t5787, @tactics.strip_tac, t5786, t5785, t5784, t5783, t5782, t5781, t5780, t5779, t5778, t5777, t5776, t5775, t5774, t5773, t5772, @tactics.strip_tac, t5771, t5770, t5769, t5768, t5767, t5766, t5765, t5764, t5763])
-  insertat_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall n (x:A) i l. n <= LENGTH l ==> i <= LENGTH l ==>\n   ((i < n ==> (EL i (INSERTAT n x l) = EL i l)) /\\\n   ((i = n) ==> (EL i (INSERTAT n x l) = x)) /\\\n   (i > n ==> (EL i (INSERTAT n x l) = EL (PRE i) l)))"), t5812))
+  insertat_el_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ n (x:A) i l. n <= LENGTH l ==> i <= LENGTH l ==>\n   ((i < n ==> (EL i (INSERTAT n x l) = EL i l)) /\\\n   ((i = n) ==> (EL i (INSERTAT n x l) = x)) /\\\n   (i > n ==> (EL i (INSERTAT n x l) = EL (PRE i) l)))"), t5812))
 }
 
 ///|
@@ -8877,7 +8877,7 @@ fn step_122() -> Unit raise {
       })(((x5851 : @kernel.Thm) => @bool.ispec(x_2, x5851))(x5852))
     })
   }, t5853, x5854), t5891, @tactics.strip_tac, t5890, t5889, @tactics.strip_tac, t5888, @rqe_tactics_ext.label_all_tac, t5887, t5886, t5885, t5884, t5883, @tactics.strip_tac, t5882, t5881, t5880])
-  matinsert_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p pols n psgns sgns.\n     interpmat pts pols sgns ==>\n     ALL2 (\\x y. interpsign x p y) (partition_line pts) psgns ==>\n     n <= LENGTH pols ==>\n      interpmat pts (INSERTAT n p pols) (MAP2 (INSERTAT n) psgns sgns)"), t5951))
+  matinsert_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p pols n psgns sgns.\n     interpmat pts pols sgns ==>\n     ALL2 (\\x y. interpsign x p y) (partition_line pts) psgns ==>\n     n <= LENGTH pols ==>\n      interpmat pts (INSERTAT n p pols) (MAP2 (INSERTAT n) psgns sgns)"), t5951))
 }
 
 ///|
@@ -8901,7 +8901,7 @@ fn step_123() -> Unit raise {
   })
   let t5958 = @simp.rewrite_tac(@list.List([@lists.replicate(), @lists.length(), @lists.all2()]))
   let t5959 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), @tactics.strip_tac, @lists.list_induct_tac, t5958, t5957, t5956, t5955])
-  interp_const_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c l. c > &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Pos)"), t5959))
+  interp_const_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ c l. c > &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Pos)"), t5959))
 }
 
 ///|
@@ -8924,7 +8924,7 @@ fn step_124() -> Unit raise {
     @tactics.then_tac(@rqe_tactics_ext.rewrite_assums(@list.List([x])), t5962)
   })
   let t5966 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.replicate(), @lists.length(), @lists.all2()])), t5965, t5964, t5963])
-  interp_const_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c l. c < &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Neg)"), t5966))
+  interp_const_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ c l. c < &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Neg)"), t5966))
 }
 
 ///|
@@ -8947,7 +8947,7 @@ fn step_125() -> Unit raise {
     @tactics.then_tac(@rqe_tactics_ext.rewrite_assums(@list.List([x])), t5969)
   })
   let t5973 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.replicate(), @lists.length(), @lists.all2()])), t5972, t5971, t5970])
-  interp_const_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c l. (c = &0) ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Zero)"), t5973))
+  interp_const_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ c l. (c = &0) ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Zero)"), t5973))
 }
 
 ///|
@@ -9002,7 +9002,7 @@ fn step_126() -> Unit raise {
   let t5990 = num_cases_tac(@parser.parse_term("i"))
   let t5991 = @simp.rewrite_tac(@list.List([@lists.replicate()]))
   let t5992 = @list.List([@nums.induct_tac, @int.arith_tac, @tactics.repeat_tac(@tactics.strip_tac), t5991, t5990, t5989, t5988, t5987, t5986, t5985])
-  el_replicate_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall n x i. i < n ==> (EL i (REPLICATE n x) = x)"), t5992))
+  el_replicate_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ n x i. i < n ==> (EL i (REPLICATE n x) = x)"), t5992))
 }
 
 ///|
@@ -9024,7 +9024,7 @@ fn step_127() -> Unit raise {
   let t5997 = @tactics.repeat_tac(@tactics.strip_tac)
   let t5998 = @simp.rewrite_tac(@list.List([@class.not_exists_thm(), @class.de_morgan_thm()]))
   let t5999 = @list.List([@simp.rewrite_tac(@list.List([all2_el()])), t5998, t5997, t5996, @rqe_tactics_ext.disj_lcase, t5995, t5994, t5993])
-  all2_unknown_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p pts. ALL2 (\\x y. interpsign x p y) (partition_line pts)\n    (REPLICATE (LENGTH (partition_line pts)) Unknown)"), t5999))
+  all2_unknown_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p pts. ALL2 (\\x y. interpsign x p y) (partition_line pts)\n    (REPLICATE (LENGTH (partition_line pts)) Unknown)"), t5999))
 }
 
 ///|
@@ -9040,7 +9040,7 @@ pub fn all2_unknown() -> @kernel.Thm {
 /// MATINSERT_THM2
 fn step_128() -> Unit raise {
   let t6000 = @list.List([@meson.meson_tac(@list.List([matinsert_thm()]))])
-  matinsert_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p pols n psgns sgns.\n    ALL2 (\\x y. interpsign x p y) (partition_line pts) psgns ==>\n    n <= LENGTH pols ==>\n    interpmat pts pols sgns ==>\n     interpmat pts (INSERTAT n p pols) (MAP2 (INSERTAT n) psgns sgns)"), t6000))
+  matinsert_thm2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p pols n psgns sgns.\n    ALL2 (\\x y. interpsign x p y) (partition_line pts) psgns ==>\n    n <= LENGTH pols ==>\n    interpmat pts pols sgns ==>\n     interpmat pts (INSERTAT n p pols) (MAP2 (INSERTAT n) psgns sgns)"), t6000))
 }
 
 ///|
@@ -9098,7 +9098,7 @@ fn step_131() -> Unit raise {
     let l = x6002
     @tactics.mp_tac(@bool.ispecl(l, matinsert_thm()))
   }, t6009, x6010), t6012, t6011])
-  inferpsign_matinsert_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall pts p pols sgns.\n    interpmat pts pols sgns ==>\n     interpmat pts (CONS p pols)\n      (MAP2 CONS\n        (REPLICATE (2 * LENGTH pts + 1) Unknown) sgns)"), t6013))
+  inferpsign_matinsert_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ pts p pols sgns.\n    interpmat pts pols sgns ==>\n     interpmat pts (CONS p pols)\n      (MAP2 CONS\n        (REPLICATE (2 * LENGTH pts + 1) Unknown) sgns)"), t6013))
 }
 
 ///|
@@ -9567,7 +9567,7 @@ fn step_132() -> Unit raise {
   })
   let t6357 = @tactics.repeat_tac(@tactics.strip_tac)
   let t6358 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t6357, t6356, t6355, t6354, t6353, @class.cond_cases_tac, t6352, t6351, t6350, t6349, t6348, t6347, @tactics.strip_tac, t6346, t6345, t6344, t6343, t6342, t6341, t6340, t6339, t6338, t6337, t6336, t6335, t6334, t6333, t6332, t6331, t6330, t6329, t6328, t6327, t6326, t6325, t6324, t6323, t6322, t6321, t6320, t6319, t6318, t6317, t6316, t6315, t6314, @tactics.strip_tac, t6313, t6312, t6311, t6310, t6309, t6308, t6307, t6306, t6305, t6304, t6303, t6302, t6301, t6300, t6299, t6298, t6297, t6296, t6295, t6294, t6293, t6292, t6291, t6290, t6289, t6288, t6287, t6286, t6285, t6284, t6283, t6282, t6281, t6280, t6279, @class.cond_cases_tac, t6278, t6277, t6276, t6275, t6274, t6273, @int.arith_tac, @tactics.strip_tac, t6272, t6271, t6270, t6269, t6268, t6267, t6266, t6265, t6264, t6263, restrip_tac, t6262, t6261, t6260, t6259, t6258, t6257, t6256, t6255, t6254, t6253, t6252, t6251, t6250, t6249, t6248, t6247, t6246, t6245, t6244, t6243, t6242, t6241, t6240, t6239, t6238, @int.arith_tac, @tactics.strip_tac, t6237, t6236, t6235, t6234, t6233, t6232, t6231, t6230, t6229, t6228, t6227, t6226, t6225, t6224, t6223, t6222, t6221, t6220, t6219, t6218, t6217, t6216, t6215, t6214, t6213, t6212, t6211, t6210, t6209, t6208, t6207, t6206])
-  inferpsign_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. p x = s x * q x + r x) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t6358))
+  inferpsign_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. p x = s x * q x + r x) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t6358))
 }
 
 ///|
@@ -10036,7 +10036,7 @@ fn step_133() -> Unit raise {
   })
   let t6702 = @tactics.repeat_tac(@tactics.strip_tac)
   let t6703 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat()])), t6702, t6701, t6700, t6699, t6698, @class.cond_cases_tac, t6697, t6696, t6695, t6694, t6693, t6692, @tactics.strip_tac, t6691, t6690, t6689, t6688, t6687, t6686, t6685, t6684, t6683, t6682, t6681, t6680, t6679, t6678, t6677, t6676, t6675, t6674, t6673, t6672, t6671, t6670, t6669, t6668, t6667, t6666, t6665, t6664, t6663, t6662, t6661, t6660, t6659, @tactics.strip_tac, t6658, t6657, t6656, t6655, t6654, t6653, t6652, t6651, t6650, t6649, t6648, t6647, t6646, t6645, t6644, t6643, t6642, t6641, t6640, t6639, t6638, t6637, t6636, t6635, t6634, t6633, t6632, t6631, t6630, t6629, t6628, t6627, t6626, t6625, t6624, @class.cond_cases_tac, t6623, t6622, t6621, t6620, t6619, t6618, @int.arith_tac, @tactics.strip_tac, t6617, t6616, t6615, t6614, t6613, t6612, t6611, t6610, t6609, t6608, restrip_tac, t6607, t6606, t6605, t6604, t6603, t6602, t6601, t6600, t6599, t6598, t6597, t6596, t6595, t6594, t6593, t6592, t6591, t6590, t6589, t6588, t6587, t6586, t6585, t6584, t6583, @int.arith_tac, @tactics.strip_tac, t6582, t6581, t6580, t6579, t6578, t6577, t6576, t6575, t6574, t6573, t6572, t6571, t6570, t6569, t6568, t6567, t6566, t6565, t6564, t6563, t6562, t6561, t6560, t6559, t6558, t6557, t6556, t6555, t6554, t6553, t6552, t6551])
-  inferpsign_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. p x = s x * q x + r x) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t6703))
+  inferpsign_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. p x = s x * q x + r x) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t6703))
 }
 
 ///|
@@ -10612,7 +10612,7 @@ fn step_134() -> Unit raise {
   let t7124 = @meson.asm_meson_tac(@list.List([@rqe_real.even_odd_pow()]))
   let t7125 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t7126 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t7125, t7124, @tactics.strip_tac, t7123, t7122, t7121, t7120, t7119, t7118, t7117, @class.cond_cases_tac, t7116, t7115, t7114, t7113, t7112, @tactics.strip_tac, t7111, t7110, t7109, t7108, t7107, t7106, t7105, t7104, t7103, t7102, t7101, t7100, t7099, t7098, t7097, t7096, t7095, t7094, t7093, t7092, t7091, t7090, t7089, t7088, t7087, t7086, t7085, t7084, t7083, t7082, t7081, t7080, t7079, t7078, t7077, t7076, t7075, t7074, t7073, @tactics.strip_tac, t7072, t7071, t7070, t7069, t7068, t7067, t7066, t7065, t7064, t7063, t7062, t7061, t7060, t7059, t7058, t7057, t7056, t7055, t7054, t7053, t7052, t7051, t7050, t7049, t7048, t7047, t7046, t7045, t7044, t7043, t7042, t7041, t7040, t7039, t7038, t7037, t7036, t7035, t7034, t7033, t7032, @class.cond_cases_tac, t7031, t7030, t7029, t7028, t7027, t7026, @int.arith_tac, @tactics.strip_tac, t7025, t7024, t7023, t7022, t7021, t7020, t7019, t7018, t7017, t7016, restrip_tac, t7015, t7014, t7013, t7012, t7011, t7010, t7009, t7008, t7007, t7006, t7005, t7004, t7003, t7002, t7001, t7000, t6999, t6998, t6997, t6996, t6995, t6994, t6993, t6992, t6991, t6990, t6989, t6988, t6987, t6986, t6985, t6984, t6983, @int.arith_tac, @tactics.strip_tac, t6982, t6981, t6980, t6979, t6978, t6977, t6976, t6975, t6974, t6973, t6972, t6971, t6970, t6969, t6968, t6967, t6966, t6965, t6964, t6963, t6962, t6961, t6960, t6959, t6958, t6957, t6956, t6955, t6954, t6953, t6952, t6951, t6950, t6949, t6948, t6947, t6946, t6945, t6944])
-  inferpsign_pos_even_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t7126))
+  inferpsign_pos_even_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t7126))
 }
 
 ///|
@@ -10697,7 +10697,7 @@ fn step_135() -> Unit raise {
   let t7177 = @rqe_tactics_ext.exists_tac(@parser.parse_term("l"))
   let t7178 = @rqe_tactics_ext.exists_tac(@parser.parse_term("[]:A list"))
   let t7179 = @list.List([@nums.induct_tac, @tactics.repeat_tac(@tactics.strip_tac), t7178, t7177, t7176, t7175, t7174, t7173, t7172, @tactics.strip_tac, t7171, t7170, t7169, t7168, @tactics.strip_tac, t7167, t7166, t7165, t7164, t7163, t7162, t7161, t7160, @tactics.strip_tac, t7159, t7158, @tactics.strip_tac, t7157, @int.arith_tac])
-  split_list_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall n (l:A list). n < LENGTH l ==>\n    ?l1 l2. (l = APPEND l1 l2) /\\ (LENGTH l1 = n)"), t7179))
+  split_list_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ n (l:A list). n < LENGTH l ==>\n    ?l1 l2. (l = APPEND l1 l2) /\\ (LENGTH l1 = n)"), t7179))
 }
 
 ///|
@@ -10735,7 +10735,7 @@ fn step_136() -> Unit raise {
     let l = x7183
     @tactics.mp_tac(@bool.ispecl(l, @arith.division()))
   }, t7186, x7187), t7194, t7193, t7192, t7191, @tactics.strip_tac, t7190, t7189, t7188])
-  div_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. EVEN x ==> (2 * x DIV 2 = x)"), t7195))
+  div_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x. EVEN x ==> (2 * x DIV 2 = x)"), t7195))
 }
 
 ///|
@@ -10760,7 +10760,7 @@ fn step_137() -> Unit raise {
       s7197(x7198)
     }
   }), @tactics.strip_tac), t7202, t7201, t7200, t7199])
-  pre_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall n. (ODD n ==> EVEN (PRE n)) /\\\n       (~(n = 0) ==> (EVEN n ==> ODD (PRE n)))"), t7203))
+  pre_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ n. (ODD n ==> EVEN (PRE n)) /\\\n       (~(n = 0) ==> (EVEN n ==> ODD (PRE n)))"), t7203))
 }
 
 ///|
@@ -10919,7 +10919,7 @@ fn step_140() -> Unit raise {
     let l = x7204
     @tactics.mp_tac(@bool.ispecl(l, split_list_thm()))
   }, t7207, x7208), @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x7209 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x7209), t7285, t7284, t7283, t7282, t7281, t7280, @int.arith_tac, t7279, t7278, t7277, t7276, t7275, t7274, t7273, t7272, t7271, t7270, t7269, t7268, t7267, t7266, t7265, t7264, t7263, t7262, t7261, t7260, @tactics.strip_tac, t7259, @rqe_tactics_ext.label_all_tac, t7258, t7257, @tactics.strip_tac, t7256, t7255])
-  inferpsign_pos_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t7290))
+  inferpsign_pos_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t7290))
 }
 
 ///|
@@ -11495,7 +11495,7 @@ fn step_141() -> Unit raise {
   let t7711 = @meson.asm_meson_tac(@list.List([@rqe_real.even_odd_pow()]))
   let t7712 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t7713 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t7712, t7711, @tactics.strip_tac, t7710, t7709, t7708, t7707, t7706, t7705, t7704, @class.cond_cases_tac, t7703, t7702, t7701, t7700, t7699, @tactics.strip_tac, t7698, t7697, t7696, t7695, t7694, t7693, t7692, t7691, t7690, t7689, t7688, t7687, t7686, t7685, t7684, t7683, t7682, t7681, t7680, t7679, t7678, t7677, t7676, t7675, t7674, t7673, t7672, t7671, t7670, t7669, t7668, t7667, t7666, t7665, t7664, t7663, t7662, t7661, t7660, @tactics.strip_tac, t7659, t7658, t7657, t7656, t7655, t7654, t7653, t7652, t7651, t7650, t7649, t7648, t7647, t7646, t7645, t7644, t7643, t7642, t7641, t7640, t7639, t7638, t7637, t7636, t7635, t7634, t7633, t7632, t7631, t7630, t7629, t7628, t7627, t7626, t7625, t7624, t7623, t7622, t7621, t7620, t7619, @class.cond_cases_tac, t7618, t7617, t7616, t7615, t7614, t7613, @int.arith_tac, @tactics.strip_tac, t7612, t7611, t7610, t7609, t7608, t7607, t7606, t7605, t7604, t7603, restrip_tac, t7602, t7601, t7600, t7599, t7598, t7597, t7596, t7595, t7594, t7593, t7592, t7591, t7590, t7589, t7588, t7587, t7586, t7585, t7584, t7583, t7582, t7581, t7580, t7579, t7578, t7577, t7576, t7575, t7574, t7573, t7572, t7571, t7570, @int.arith_tac, @tactics.strip_tac, t7569, t7568, t7567, t7566, t7565, t7564, t7563, t7562, t7561, t7560, t7559, t7558, t7557, t7556, t7555, t7554, t7553, t7552, t7551, t7550, t7549, t7548, t7547, t7546, t7545, t7544, t7543, t7542, t7541, t7540, t7539, t7538, t7537, t7536, t7535, t7534, t7533, t7532, t7531])
-  inferpsign_neg_even_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t7713))
+  inferpsign_neg_even_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t7713))
 }
 
 ///|
@@ -11624,7 +11624,7 @@ fn step_142() -> Unit raise {
     let l = x7714
     @tactics.mp_tac(@bool.ispecl(l, split_list_thm()))
   }, t7717, x7718), @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x7719 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x7719), t7795, t7794, t7793, t7792, t7791, t7790, @int.arith_tac, t7789, t7788, t7787, t7786, t7785, t7784, t7783, t7782, t7781, t7780, t7779, t7778, t7777, t7776, t7775, t7774, t7773, t7772, t7771, t7770, @tactics.strip_tac, t7769, @rqe_tactics_ext.label_all_tac, t7768, t7767, @tactics.strip_tac, t7766, t7765])
-  inferpsign_neg_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t7800))
+  inferpsign_neg_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t7800))
 }
 
 ///|
@@ -12204,7 +12204,7 @@ fn step_143() -> Unit raise {
   let t8225 = @meson.asm_meson_tac(@list.List([@rqe_real.even_odd_pow()]))
   let t8226 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t8227 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t8226, t8225, @tactics.strip_tac, t8224, t8223, t8222, t8221, t8220, t8219, t8218, @class.cond_cases_tac, t8217, t8216, t8215, t8214, t8213, @tactics.strip_tac, t8212, t8211, t8210, t8209, t8208, t8207, t8206, t8205, t8204, t8203, t8202, t8201, t8200, t8199, t8198, t8197, t8196, t8195, t8194, t8193, t8192, t8191, t8190, t8189, t8188, t8187, t8186, t8185, t8184, t8183, t8182, t8181, t8180, t8179, t8178, t8177, t8176, t8175, t8174, @tactics.strip_tac, t8173, t8172, t8171, t8170, t8169, t8168, t8167, t8166, t8165, t8164, t8163, t8162, t8161, t8160, t8159, t8158, t8157, t8156, t8155, t8154, t8153, t8152, t8151, t8150, t8149, t8148, t8147, t8146, t8145, t8144, t8143, t8142, t8141, t8140, t8139, t8138, t8137, t8136, t8135, t8134, t8133, @class.cond_cases_tac, t8132, t8131, t8130, t8129, t8128, t8127, @int.arith_tac, @tactics.strip_tac, t8126, t8125, t8124, t8123, t8122, t8121, t8120, t8119, t8118, t8117, restrip_tac, t8116, t8115, t8114, t8113, t8112, t8111, t8110, t8109, t8108, t8107, t8106, t8105, t8104, t8103, t8102, t8101, t8100, t8099, t8098, t8097, t8096, t8095, t8094, t8093, t8092, t8091, t8090, t8089, t8088, t8087, t8086, t8085, t8084, @int.arith_tac, @tactics.strip_tac, t8083, t8082, t8081, t8080, t8079, t8078, t8077, t8076, t8075, t8074, t8073, t8072, t8071, t8070, t8069, t8068, t8067, t8066, t8065, t8064, t8063, t8062, t8061, t8060, t8059, t8058, t8057, t8056, t8055, t8054, t8053, t8052, t8051, t8050, t8049, t8048, t8047, t8046, t8045])
-  inferpsign_zero_even_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t8227))
+  inferpsign_zero_even_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t8227))
 }
 
 ///|
@@ -12333,7 +12333,7 @@ fn step_144() -> Unit raise {
     let l = x8228
     @tactics.mp_tac(@bool.ispecl(l, split_list_thm()))
   }, t8231, x8232), @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x8233 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x8233), t8309, t8308, t8307, t8306, t8305, t8304, @int.arith_tac, t8303, t8302, t8301, t8300, t8299, t8298, t8297, t8296, t8295, t8294, t8293, t8292, t8291, t8290, t8289, t8288, t8287, t8286, t8285, t8284, @tactics.strip_tac, t8283, @rqe_tactics_ext.label_all_tac, t8282, t8281, @tactics.strip_tac, t8280, t8279])
-  inferpsign_zero_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t8314))
+  inferpsign_zero_even_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t8314))
 }
 
 ///|
@@ -12913,7 +12913,7 @@ fn step_145() -> Unit raise {
   let t8739 = @meson.asm_meson_tac(@list.List([@real.real_pow_lt(), @realax.real_gt()]))
   let t8740 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t8741 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t8740, t8739, @tactics.strip_tac, t8738, t8737, t8736, t8735, t8734, t8733, t8732, @class.cond_cases_tac, t8731, t8730, t8729, t8728, t8727, @tactics.strip_tac, t8726, t8725, t8724, t8723, t8722, t8721, t8720, t8719, t8718, t8717, t8716, t8715, t8714, t8713, t8712, t8711, t8710, t8709, t8708, t8707, t8706, t8705, t8704, t8703, t8702, t8701, t8700, t8699, t8698, t8697, t8696, t8695, t8694, t8693, t8692, t8691, t8690, t8689, t8688, @tactics.strip_tac, t8687, t8686, t8685, t8684, t8683, t8682, t8681, t8680, t8679, t8678, t8677, t8676, t8675, t8674, t8673, t8672, t8671, t8670, t8669, t8668, t8667, t8666, t8665, t8664, t8663, t8662, t8661, t8660, t8659, t8658, t8657, t8656, t8655, t8654, t8653, t8652, t8651, t8650, t8649, t8648, t8647, @class.cond_cases_tac, t8646, t8645, t8644, t8643, t8642, t8641, @int.arith_tac, @tactics.strip_tac, t8640, t8639, t8638, t8637, t8636, t8635, t8634, t8633, t8632, t8631, restrip_tac, t8630, t8629, t8628, t8627, t8626, t8625, t8624, t8623, t8622, t8621, t8620, t8619, t8618, t8617, t8616, t8615, t8614, t8613, t8612, t8611, t8610, t8609, t8608, t8607, t8606, t8605, t8604, t8603, t8602, t8601, t8600, t8599, t8598, @int.arith_tac, @tactics.strip_tac, t8597, t8596, t8595, t8594, t8593, t8592, t8591, t8590, t8589, t8588, t8587, t8586, t8585, t8584, t8583, t8582, t8581, t8580, t8579, t8578, t8577, t8576, t8575, t8574, t8573, t8572, t8571, t8570, t8569, t8568, t8567, t8566, t8565, t8564, t8563, t8562, t8561, t8560, t8559])
-  inferpsign_pos_odd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t8741))
+  inferpsign_pos_odd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t8741))
 }
 
 ///|
@@ -13030,7 +13030,7 @@ fn step_146() -> Unit raise {
     let l = x8742
     @tactics.mp_tac(@bool.ispecl(l, split_list_thm()))
   }, t8745, x8746), @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x8747 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x8747), t8815, t8814, t8813, t8812, t8811, @int.arith_tac, t8810, t8809, t8808, t8807, t8806, t8805, t8804, t8803, t8802, t8801, t8800, t8799, t8798, t8797, t8796, t8795, t8794, t8793, t8792, @tactics.strip_tac, t8791, @rqe_tactics_ext.label_all_tac, t8790, t8789, @tactics.strip_tac, t8788, t8787])
-  inferpsign_pos_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t8820))
+  inferpsign_pos_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))"), t8820))
 }
 
 ///|
@@ -13610,7 +13610,7 @@ fn step_147() -> Unit raise {
   let t9245 = @meson.asm_meson_tac(@list.List([@real.real_pow_lt(), @realax.real_gt()]))
   let t9246 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t9247 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t9246, t9245, @tactics.strip_tac, t9244, t9243, t9242, t9241, t9240, t9239, t9238, @class.cond_cases_tac, t9237, t9236, t9235, t9234, t9233, @tactics.strip_tac, t9232, t9231, t9230, t9229, t9228, t9227, t9226, t9225, t9224, t9223, t9222, t9221, t9220, t9219, t9218, t9217, t9216, t9215, t9214, t9213, t9212, t9211, t9210, t9209, t9208, t9207, t9206, t9205, t9204, t9203, t9202, t9201, t9200, t9199, t9198, t9197, t9196, t9195, t9194, @tactics.strip_tac, t9193, t9192, t9191, t9190, t9189, t9188, t9187, t9186, t9185, t9184, t9183, t9182, t9181, t9180, t9179, t9178, t9177, t9176, t9175, t9174, t9173, t9172, t9171, t9170, t9169, t9168, t9167, t9166, t9165, t9164, t9163, t9162, t9161, t9160, t9159, t9158, t9157, t9156, t9155, t9154, t9153, @class.cond_cases_tac, t9152, t9151, t9150, t9149, t9148, t9147, @int.arith_tac, @tactics.strip_tac, t9146, t9145, t9144, t9143, t9142, t9141, t9140, t9139, t9138, t9137, restrip_tac, t9136, t9135, t9134, t9133, t9132, t9131, t9130, t9129, t9128, t9127, t9126, t9125, t9124, t9123, t9122, t9121, t9120, t9119, t9118, t9117, t9116, t9115, t9114, t9113, t9112, t9111, t9110, t9109, t9108, t9107, t9106, t9105, t9104, @int.arith_tac, @tactics.strip_tac, t9103, t9102, t9101, t9100, t9099, t9098, t9097, t9096, t9095, t9094, t9093, t9092, t9091, t9090, t9089, t9088, t9087, t9086, t9085, t9084, t9083, t9082, t9081, t9080, t9079, t9078, t9077, t9076, t9075, t9074, t9073, t9072, t9071, t9070, t9069, t9068, t9067, t9066, t9065])
-  inferpsign_neg_odd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t9247))
+  inferpsign_neg_odd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t9247))
 }
 
 ///|
@@ -13727,7 +13727,7 @@ fn step_148() -> Unit raise {
     let l = x9248
     @tactics.mp_tac(@bool.ispecl(l, split_list_thm()))
   }, t9251, x9252), @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x9253 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x9253), t9321, t9320, t9319, t9318, t9317, @int.arith_tac, t9316, t9315, t9314, t9313, t9312, t9311, t9310, t9309, t9308, t9307, t9306, t9305, t9304, t9303, t9302, t9301, t9300, t9299, t9298, @tactics.strip_tac, t9297, @rqe_tactics_ext.label_all_tac, t9296, t9295, @tactics.strip_tac, t9294, t9293])
-  inferpsign_neg_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t9326))
+  inferpsign_neg_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))"), t9326))
 }
 
 ///|
@@ -14307,7 +14307,7 @@ fn step_149() -> Unit raise {
   let t9751 = @meson.asm_meson_tac(@list.List([@real.real_pow_lt(), @realax.real_gt()]))
   let t9752 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n > &0"))
   let t9753 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t9752, t9751, @tactics.strip_tac, t9750, t9749, t9748, t9747, t9746, t9745, t9744, @class.cond_cases_tac, t9743, t9742, t9741, t9740, t9739, @tactics.strip_tac, t9738, t9737, t9736, t9735, t9734, t9733, t9732, t9731, t9730, t9729, t9728, t9727, t9726, t9725, t9724, t9723, t9722, t9721, t9720, t9719, t9718, t9717, t9716, t9715, t9714, t9713, t9712, t9711, t9710, t9709, t9708, t9707, t9706, t9705, t9704, t9703, t9702, t9701, t9700, @tactics.strip_tac, t9699, t9698, t9697, t9696, t9695, t9694, t9693, t9692, t9691, t9690, t9689, t9688, t9687, t9686, t9685, t9684, t9683, t9682, t9681, t9680, t9679, t9678, t9677, t9676, t9675, t9674, t9673, t9672, t9671, t9670, t9669, t9668, t9667, t9666, t9665, t9664, t9663, t9662, t9661, t9660, t9659, @class.cond_cases_tac, t9658, t9657, t9656, t9655, t9654, t9653, @int.arith_tac, @tactics.strip_tac, t9652, t9651, t9650, t9649, t9648, t9647, t9646, t9645, t9644, t9643, restrip_tac, t9642, t9641, t9640, t9639, t9638, t9637, t9636, t9635, t9634, t9633, t9632, t9631, t9630, t9629, t9628, t9627, t9626, t9625, t9624, t9623, t9622, t9621, t9620, t9619, t9618, t9617, t9616, t9615, t9614, t9613, t9612, t9611, t9610, @int.arith_tac, @tactics.strip_tac, t9609, t9608, t9607, t9606, t9605, t9604, t9603, t9602, t9601, t9600, t9599, t9598, t9597, t9596, t9595, t9594, t9593, t9592, t9591, t9590, t9589, t9588, t9587, t9586, t9585, t9584, t9583, t9582, t9581, t9580, t9579, t9578, t9577, t9576, t9575, t9574, t9573, t9572, t9571])
-  inferpsign_zero_odd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t9753))
+  inferpsign_zero_odd_pos_lem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t9753))
 }
 
 ///|
@@ -14424,7 +14424,7 @@ fn step_150() -> Unit raise {
     let l = x9754
     @tactics.mp_tac(@bool.ispecl(l, split_list_thm()))
   }, t9757, x9758), @tactics.strip_tac, @rqe_tactics_ext.label_all_tac, (x9759 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x9759), t9827, t9826, t9825, t9824, t9823, @int.arith_tac, t9822, t9821, t9820, t9819, t9818, t9817, t9816, t9815, t9814, t9813, t9812, t9811, t9810, t9809, t9808, t9807, t9806, t9805, t9804, @tactics.strip_tac, t9803, @rqe_tactics_ext.label_all_tac, t9802, t9801, @tactics.strip_tac, t9800, t9799])
-  inferpsign_zero_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t9832))
+  inferpsign_zero_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (∀ x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))"), t9832))
 }
 
 ///|

@@ -36,7 +36,7 @@ pub fn rol_empty() -> @kernel.Thm {
 /// ROL_SING
 fn step_3() -> Unit raise {
   let t2 = @list.List([@simp.rewrite_tac(@list.List([real_ordered_list()]))])
-  rol_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. real_ordered_list [x]"), t2))
+  rol_sing_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x. real_ordered_list [x]"), t2))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn rol_sing() -> @kernel.Thm {
 /// ROL_TAIL
 fn step_4() -> Unit raise {
   let t3 = @tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([real_ordered_list(), @lists.tl()])))
-  rol_tail_c.set(@tactics.prove(@parser.parse_term("forall l. ~(l = []) /\\ real_ordered_list l ==> real_ordered_list (TL l)"), t3))
+  rol_tail_c.set(@tactics.prove(@parser.parse_term("∀ l. ~(l = []) /\\ real_ordered_list l ==> real_ordered_list (TL l)"), t3))
 }
 
 ///|
@@ -68,7 +68,7 @@ pub fn rol_tail() -> @kernel.Thm {
 /// EL_CONS
 fn step_5() -> Unit raise {
   let t4 = @list.List([@meson.meson_tac(@list.List([@lists.tl(), @lists.el()]))])
-  el_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l h n. EL n t = EL (SUC n) (CONS h t)"), t4))
+  el_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l h n. EL n t = EL (SUC n) (CONS h t)"), t4))
 }
 
 ///|
@@ -102,7 +102,7 @@ fn step_6() -> Unit raise {
   })
   let t18 = @simp.rewrite_tac(@list.List([real_ordered_list(), @class.de_morgan_thm()]))
   let t19 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([real_ordered_list()])), t18, @tactics.strip_tac, t17, @tactics.strip_tac, t16, t15, t14, t13, t12])
-  not_rol_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(real_ordered_list l) ==> ?n. EL n l >= EL (SUC n) l"), t19))
+  not_rol_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(real_ordered_list l) ==> ?n. EL n l >= EL (SUC n) l"), t19))
 }
 
 ///|
@@ -119,7 +119,7 @@ pub fn not_rol() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t20 = @tactics.repeat_tac(@tactics.strip_tac)
   let t21 = @list.List([@simp.rewrite_tac(@list.List([real_ordered_list()])), t20])
-  rol_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. real_ordered_list (CONS h t) ==> real_ordered_list t"), t21))
+  rol_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t. real_ordered_list (CONS h t) ==> real_ordered_list t"), t21))
 }
 
 ///|
@@ -145,7 +145,7 @@ fn step_8() -> Unit raise {
   let t30 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t22)
   let t31 = @simp.rewrite_tac(@list.List([real_ordered_list()]))
   let t32 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac, t31, t30, t29, t28, t27, t26, t25, t24])
-  rol_cons_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h t. real_ordered_list (CONS h1 (CONS h2 t)) <=>\n     real_ordered_list (CONS h2 t) /\\ h1 < h2"), t32))
+  rol_cons_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h t. real_ordered_list (CONS h1 (CONS h2 t)) <=>\n     real_ordered_list (CONS h2 t) /\\ h1 < h2"), t32))
 }
 
 ///|
@@ -192,7 +192,7 @@ fn step_9() -> Unit raise {
   let t56 = @rqe_tactics_ext.claim(@parser.parse_term("real_ordered_list (APPEND t l2)"))
   let t57 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t58 = @list.List([@lists.list_induct_tac, @meson.meson_tac(@list.List([@lists.append(), real_ordered_list()])), @tactics.gen_tac, t57, @tactics.strip_tac, t56, t55, @tactics.strip_tac, t54, t53, @tactics.strip_tac, t52, t51, t50, t49, t48, @tactics.strip_tac, t47, @tactics.conj_tac, t46, @rqe_tactics_ext.label_all_tac, t45, t44, t43, t42])
-  rol_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l1 l2. real_ordered_list (APPEND l1 l2) ==>\n    real_ordered_list l1 /\\ real_ordered_list l2"), t58))
+  rol_append_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l1 l2. real_ordered_list (APPEND l1 l2) ==>\n    real_ordered_list l1 /\\ real_ordered_list l2"), t58))
 }
 
 ///|
@@ -210,7 +210,7 @@ fn step_10() -> Unit raise {
   let t59 = @meson.asm_meson_tac(@list.List([@lists.not_cons_nil(), @lists.hd()]))
   let t60 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t59)
   let t61 = @list.List([@simp.rewrite_tac(@list.List([real_ordered_list()])), t60])
-  rol_cons_cons_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==> h1 < h2"), t61))
+  rol_cons_cons_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==> h1 < h2"), t61))
 }
 
 ///|
@@ -277,7 +277,7 @@ fn step_11() -> Unit raise {
   let t100 = @simp.asm_rewrite_tac(@list.List([@lists.append(), @rqe_list.last_sing(), @lists.not_cons_nil()]))
   let t101 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t102 = @list.List([@tactics.gen_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.append()])), t101, t100, t99, t98, t97, t96, @tactics.strip_tac, t95, t94, t93, t92, t91, t90, t89, t88, t87, t86, t85, t84, t83, @rqe_tactics_ext.label_all_tac, t82, t81, @tactics.strip_tac, t80, @tactics.strip_tac, t79, t78])
-  rol_insert_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x l1 l2.\n    real_ordered_list l1 /\\ real_ordered_list l2 /\\\n    ~(l1 = []) /\\ ~(l2 = []) /\\ LAST l1 < x /\\ x < HD l2 ==>\n      real_ordered_list (APPEND l1 (CONS x l2))"), t102))
+  rol_insert_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x l1 l2.\n    real_ordered_list l1 /\\ real_ordered_list l2 /\\\n    ~(l1 = []) /\\ ~(l2 = []) /\\ LAST l1 < x /\\ x < HD l2 ==>\n      real_ordered_list (APPEND l1 (CONS x l2))"), t102))
 }
 
 ///|
@@ -296,7 +296,7 @@ fn step_12() -> Unit raise {
   let t104 = @simp.asm_rewrite_tac(@list.List([]))
   let t105 = @tactics.repeat_tac(@tactics.strip_tac)
   let t106 = @list.List([@simp.rewrite_tac(@list.List([@list_rewrites.not_nil(), @basic.and_imp_thm()])), t105, t104, t103])
-  rol_insert_front_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x l. real_ordered_list l /\\ ~(l = []) /\\ x < HD l ==>\n    real_ordered_list (CONS x l)"), t106))
+  rol_insert_front_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x l. real_ordered_list l /\\ ~(l = []) /\\ x < HD l ==>\n    real_ordered_list (CONS x l)"), t106))
 }
 
 ///|
@@ -317,7 +317,7 @@ fn step_13() -> Unit raise {
   let t107 = @simp.asm_rewrite_tac(@list.List([]))
   let t111 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t107)
   let t112 = @list.List([@simp.rewrite_tac(@list.List([real_ordered_list()])), t111, t110, t109, t108])
-  rol_cons_cons_delete_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==>\n     real_ordered_list (CONS h1 t)"), t112))
+  rol_cons_cons_delete_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==>\n     real_ordered_list (CONS h1 t)"), t112))
 }
 
 ///|
@@ -341,7 +341,7 @@ fn step_14() -> Unit raise {
   let t119 = @tactics.repeat_tac(@tactics.strip_tac)
   let t120 = @tactics.repeat_tac(@tactics.strip_tac)
   let t121 = @list.List([@tactics.gen_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.last()])), t120, t119, t118, @tactics.conj_tac, t117, t116, t115, t114, t113])
-  last_cons_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x t h. real_ordered_list (CONS h t) /\\ LAST (CONS h t) < x ==> h < x"), t121))
+  last_cons_lt_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x t h. real_ordered_list (CONS h t) /\\ LAST (CONS h t) < x ==> h < x"), t121))
 }
 
 ///|
@@ -382,7 +382,7 @@ fn step_15() -> Unit raise {
   let t142 = @simp.asm_rewrite_tac(@list.List([@lists.append(), rol_cons_cons(), rol_sing()]))
   let t143 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
   let t144 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.append(), rol_sing()])), @rqe_tactics_ext.label_all_tac, @tactics.strip_tac, t143, t142, t141, (x122 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @rqe_tactics_ext.prove_assum_antecedent_tac(0L, x122), t140, t139, t138, t137, t136, t135, t134, t133, @tactics.disj2_tac, t132, @rqe_tactics_ext.label_all_tac, t131, @tactics.strip_tac, t130, t129])
-  rol_insert_back_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x l. real_ordered_list l /\\ ~(l = []) /\\ LAST l < x ==>\n    real_ordered_list (APPEND l [x])"), t144))
+  rol_insert_back_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x l. real_ordered_list l /\\ ~(l = []) /\\ LAST l < x ==>\n    real_ordered_list (APPEND l [x])"), t144))
 }
 
 ///|
@@ -455,7 +455,7 @@ pub fn rol_chop_list(x152 : Int64, x153 : @kernel.Thm) -> ((@kernel.Thm, @kernel
 /// lem1
 fn step_17() -> Unit raise {
   let t154 = @meson.meson_tac(@list.List([]))
-  lem1_v1_c.set(@tactics.prove(@parser.parse_term("forall e x l. e < x /\\ (LAST l = e) ==> LAST l < x"), t154))
+  lem1_v1_c.set(@tactics.prove(@parser.parse_term("∀ e x l. e < x /\\ (LAST l = e) ==> LAST l < x"), t154))
 }
 
 ///|
@@ -574,7 +574,7 @@ pub fn rol_thms(x170 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
 /// lem
 fn step_18() -> Unit raise {
   let t171 = @meson.meson_tac(@list.List([]))
-  lem_v1_c.set(@tactics.prove(@parser.parse_term("forall x. ?y. y = x"), t171))
+  lem_v1_c.set(@tactics.prove(@parser.parse_term("∀ x. ?y. y = x"), t171))
 }
 
 ///|
@@ -625,7 +625,7 @@ fn step_20() -> Unit raise {
   let t176 = @meson.meson_tac(@list.List([]))
   let t177 = @rqe_tactics_ext.exists_tac(@parser.parse_term("x - &1"))
   let t178 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t177, @calc_rat.real_arith_tac, t176, t175, @calc_rat.real_arith_tac])
-  lem1_v2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x. (?y. y < x) /\\ (?y. y = x) /\\ (?y. x < y)"), t178))
+  lem1_v2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x. (?y. y < x) /\\ (?y. y = x) /\\ (?y. x < y)"), t178))
 }
 
 ///|
@@ -685,7 +685,7 @@ pub fn lem0() -> @kernel.Thm {
 /// lem1
 fn step_22() -> Unit raise {
   let t184 = @list.List([@simp.rewrite_tac(@list.List([real_ordered_list(), @lists.not_cons_nil(), @lists.hd()]))])
-  lem1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. x < y ==> real_ordered_list [x; y]"), t184))
+  lem1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y. x < y ==> real_ordered_list [x; y]"), t184))
 }
 
 ///|
@@ -701,7 +701,7 @@ pub fn lem1() -> @kernel.Thm {
 /// lem2
 fn step_23() -> Unit raise {
   let t185 = @list.List([@meson.asm_meson_tac(@list.List([real_ordered_list(), @lists.not_cons_nil(), @lists.hd(), @lists.tl()]))])
-  lem2_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall x y. x < y ==> real_ordered_list (CONS y t) ==>\n     real_ordered_list (CONS x (CONS y t))"), t185))
+  lem2_v1_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ x y. x < y ==> real_ordered_list (CONS y t) ==>\n     real_ordered_list (CONS x (CONS y t))"), t185))
 }
 
 ///|
@@ -839,7 +839,7 @@ pub fn rol_remove(x192 : @kernel.Term, x193 : @kernel.Thm) -> @kernel.Thm raise 
 ///|
 /// lem
 fn step_26() -> Unit raise {
-  lem_c.set(@tactics.prove(@parser.parse_term("forall y x. x < y \\/ (x = y) \\/ y < x"), @calc_rat.real_arith_tac))
+  lem_c.set(@tactics.prove(@parser.parse_term("∀ y x. x < y \\/ (x = y) \\/ y < x"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -854,7 +854,7 @@ pub fn lem() -> @kernel.Thm {
 ///|
 /// lem2
 fn step_27() -> Unit raise {
-  lem2_c.set(@tactics.prove(@parser.parse_term("forall x y z. y < z ==> (y < x <=> (y < x /\\ x < z) \\/ (x = z) \\/ z < x)"), @calc_rat.real_arith_tac))
+  lem2_c.set(@tactics.prove(@parser.parse_term("∀ x y z. y < z ==> (y < x <=> (y < x /\\ x < z) \\/ (x = z) \\/ z < x)"), @calc_rat.real_arith_tac))
 }
 
 ///|

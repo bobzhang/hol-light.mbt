@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_rat.real_ring)
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.norm_pow_2(), @vectors.orthogonal(), @vectors.dot_lsub(), @vectors.dot_rsub(), @vectors.dot_sym()])), t1)
-  pythagoras_v1_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^2.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t2))
+  pythagoras_v1_c.set(@tactics.prove(@parser.parse_term("∀ A B C:real^2.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t2))
 }
 
 ///|
@@ -23,7 +23,7 @@ pub fn pythagoras_v1() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t3 = @tactics.conv_tac(@calc_rat.real_ring)
   let t4 = @tactics.then_tac(@simp.simp_tac(@list.List([@vectors.norm_pow_2(), @vectors.orthogonal(), @vectors.dot(), @vectors.sum_2(), @cart.dimindex_2(), @vectors.vector_sub_component(), @calc_num.arith()])), t3)
-  pythagoras_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^2.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t4))
+  pythagoras_c.set(@tactics.prove(@parser.parse_term("∀ A B C:real^2.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2"), t4))
 }
 
 ///|

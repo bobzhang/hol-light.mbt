@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([@vectors.dist_sym(), @geom.angle_sym()]))
   let t1 = @parser.parse_type("M")
   let t3 = @tactics.then_tac(@tactics.mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("N"), t1)]), @geom.congruent_triangles_sss())), t2)
-  isosceles_triangle_theorem_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N. dist(A,C) = dist(B,C) ==> angle(C,A,B) = angle(A,B,C)"), t3))
+  isosceles_triangle_theorem_c.set(@tactics.prove(@parser.parse_term("∀ A B C:real^N. dist(A,C) = dist(B,C) ==> angle(C,A,B) = angle(A,B,C)"), t3))
 }
 
 ///|
@@ -25,7 +25,7 @@ fn step_2() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([@vectors.dist_sym(), @geom.angle_sym()]))
   let t4 = @parser.parse_type("M")
   let t6 = @tactics.then_tac(@tactics.mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("N"), t4)]), @geom.congruent_triangles_asa_full())), t5)
-  isosceles_triangle_converse_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^N. angle(C,A,B) = angle(A,B,C) /\\ ~(collinear {A,B,C})\n                  ==> dist(A,C) = dist(B,C)"), t6))
+  isosceles_triangle_converse_c.set(@tactics.prove(@parser.parse_term("∀ A B C:real^N. angle(C,A,B) = angle(A,B,C) /\\ ~(collinear {A,B,C})\n                  ==> dist(A,C) = dist(B,C)"), t6))
 }
 
 ///|
@@ -64,7 +64,7 @@ fn step_3() -> Unit raise {
   let t13 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @simp.asm_simp_tac(@list.List([@geom.angle_refl()]))), t11), t12), @tactics.all_tac])
   let t7 = @class.asm_cases_tac(@parser.parse_term("D:real^N = A"))
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7), t13), t14), t16), @tactics.disch_tac), t20), t21), t22), t23), t24), t25), t26), t27)
-  lemma_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        between D (A,B)\n        ==> (orthogonal (A - B) (C - D) <=>\n                angle(A,D,C) = pi / &2 /\\ angle(B,D,C) = pi / &2)"), t28))
+  lemma_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        between D (A,B)\n        ==> (orthogonal (A - B) (C - D) <=>\n                angle(A,D,C) = pi / &2 /\\ angle(B,D,C) = pi / &2)"), t28))
 }
 
 ///|
@@ -88,7 +88,7 @@ fn step_4() -> Unit raise {
   let t33 = @parser.parse_term("D:real^N")
   let t34 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("A:real^N"), t33, t32, t31, t30, t29]), @geom.congruent_triangles_sss_full()))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t34), t35), t36)
-  isosceles_triangle_1_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        dist(A,C) = dist(B,C) /\\ D = midpoint(A,B)\n        ==> angle(A,C,D) = angle(B,C,D)"), t37))
+  isosceles_triangle_1_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        dist(A,C) = dist(B,C) /\\ D = midpoint(A,B)\n        ==> angle(A,C,D) = angle(B,C,D)"), t37))
 }
 
 ///|
@@ -130,7 +130,7 @@ fn step_5() -> Unit raise {
     })(t41(x42))
   })
   let t61 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t43), t49), @tactics.ants_tac), t50), t51), t52), t53), t54), t55), t59), t60), @calc_rat.real_arith_tac)
-  isosceles_triangle_2_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        between D (A,B) /\\\n        dist(A,C) = dist(B,C) /\\ angle(A,C,D) = angle(B,C,D)\n        ==> orthogonal (A - B) (C - D)"), t61))
+  isosceles_triangle_2_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        between D (A,B) /\\\n        dist(A,C) = dist(B,C) /\\ angle(A,C,D) = angle(B,C,D)\n        ==> orthogonal (A - B) (C - D)"), t61))
 }
 
 ///|
@@ -217,7 +217,7 @@ fn step_6() -> Unit raise {
   let t63 = @simp.asm_simp_tac(@list.List([@vectors.between_refl_eq(), @vectors.midpoint_refl()]))
   let t62 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
   let t124 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t62), t63), t64), t72), t73), t81), t88), t89), @tactics.strip_tac), t95), t101), @tactics.ants_tac), t102), t103), t106), @tactics.ants_tac), t107), t110), @tactics.ants_tac), t111), t112), @tactics.conj_tac), t113), t114), t115), t116), @tactics.binop_tac), t122), t123)
-  isosceles_triangle_3_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        between D (A,B) /\\\n        dist(A,C) = dist(B,C) /\\ orthogonal (A - B) (C - D)\n        ==> D = midpoint(A,B)"), t124))
+  isosceles_triangle_3_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        between D (A,B) /\\\n        dist(A,C) = dist(B,C) /\\ orthogonal (A - B) (C - D)\n        ==> D = midpoint(A,B)"), t124))
 }
 
 ///|
@@ -255,7 +255,7 @@ fn step_7() -> Unit raise {
   })
   let t125 = @simp.asm_simp_tac(@list.List([@theorems.imp_conj(), @vectors.between_midpoint(), lemma()]))
   let t142 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t125), t130), t131), t132), t133), t138), t139), t140), t141)
-  isosceles_triangle_4_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        D = midpoint(A,B) /\\ orthogonal (A - B) (C - D)\n        ==> dist(A,C) = dist(B,C)"), t142))
+  isosceles_triangle_4_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        D = midpoint(A,B) /\\ orthogonal (A - B) (C - D)\n        ==> dist(A,C) = dist(B,C)"), t142))
 }
 
 ///|
@@ -378,7 +378,7 @@ fn step_8() -> Unit raise {
   let t144 = @list.List([@simp.asm_rewrite_tac(@list.List([@sets.insert_ac(), @vectors.collinear_2()])), @tactics.all_tac])
   let t143 = @class.asm_cases_tac(@parser.parse_term("C:real^N = D"))
   let t224 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t143), t144), t151), t152), t154), t155), t156), t157), t184), t185), t212), t213), t214), t220), @tactics.ants_tac), t221), t222), t223)
-  isosceles_triangle_5_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        ~collinear{D,C,A} /\\ between D (A,B) /\\\n        angle(A,C,D) = angle(B,C,D) /\\ orthogonal (A - B) (C - D)\n        ==> dist(A,C) = dist(B,C)"), t224))
+  isosceles_triangle_5_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        ~collinear{D,C,A} /\\ between D (A,B) /\\\n        angle(A,C,D) = angle(B,C,D) /\\ orthogonal (A - B) (C - D)\n        ==> dist(A,C) = dist(B,C)"), t224))
 }
 
 ///|
@@ -469,7 +469,7 @@ fn step_9() -> Unit raise {
     @tactics.strip_assume_tac(@equal.gsym(x225))
   })
   let t293 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t226), t227), t228), t231), t234), t235), t239), t240), t241), t242), @tactics.strip_tac), t292)
-  isosceles_triangle_6_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^N.\n        ~collinear{D,C,A} /\\ D = midpoint(A,B) /\\ angle(A,C,D) = angle(B,C,D)\n        ==> dist(A,C) = dist(B,C)"), t293))
+  isosceles_triangle_6_c.set(@tactics.prove(@parser.parse_term("∀ A B C D:real^N.\n        ~collinear{D,C,A} /\\ D = midpoint(A,B) /\\ angle(A,C,D) = angle(B,C,D)\n        ==> dist(A,C) = dist(B,C)"), t293))
 }
 
 ///|

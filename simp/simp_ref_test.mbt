@@ -57,7 +57,7 @@ test "simp matches simp.ml" {
     .map(sb)
     .join(" ")
   })
-  let big = "forall x:A. (P x /\\ (Q x = R x)) /\\ ~(a = b) /\\ ~c /\\ (p ==> (u:A) = v)"
+  let big = "∀ x:A. (P x /\\ (Q x = R x)) /\\ ~(a = b) /\\ ~c /\\ (p ==> (u:A) = v)"
   log.attempt("mk_rewrites_false", () => {
     let th = hyp(big)
     slist(@simp.mk_rewrites(false, th, @list.List([])))
@@ -67,16 +67,16 @@ test "simp matches simp.ml" {
     slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   log.attempt("mk_rewrites_exists", () => {
-    let th = hyp("forall x y:A. P x y ==> Q x y ==> (f:A->A) x = g x")
+    let th = hyp("∀ x y:A. P x y ==> Q x y ==> (f:A->A) x = g x")
     slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   cv("REWRITE_CONV", () => {
-    let th = hyp("forall x:A. (f:A->A) x = g x")
+    let th = hyp("∀ x:A. (f:A->A) x = g x")
     let t = tm("(h:A->A) (f a) = f (f b)")
     @simp.rewrite_conv(ths([th]))(t)
   })
   cv("REWRITE_CONV_fail", () => {
-    let th = hyp("forall x:A. (f:A->A) x = g x")
+    let th = hyp("∀ x:A. (f:A->A) x = g x")
     let t = tm("(h:A->A) a")
     @simp.rewrite_conv(ths([th]))(t)
   })
@@ -86,7 +86,7 @@ test "simp matches simp.ml" {
     @simp.rewrite_conv(ths([th]))(t)
   })
   cv("REWRITE_CONV_perm", () => {
-    let th = hyp("forall x y. (f:A->A->A) x y = f y x")
+    let th = hyp("∀ x y. (f:A->A->A) x y = f y x")
     let t = tm("(f:A->A->A) b a = f a b")
     @simp.rewrite_conv(ths([th]))(t)
   })
@@ -106,7 +106,7 @@ test "simp matches simp.ml" {
     @simp.pure_rewrite_conv(ths([th]))(t)
   })
   cv("ONCE_REWRITE_CONV", () => {
-    let th = hyp("forall x:A. (f:A->A) x = f (f x)")
+    let th = hyp("∀ x:A. (f:A->A) x = f (f x)")
     let t = tm("(f:A->A) a")
     @simp.once_rewrite_conv(ths([th]))(t)
   })
@@ -172,7 +172,7 @@ test "simp matches simp.ml" {
     @simp.rewrites_conv(@nets.empty_net())(t)
   })
   cv("SIMP_CONV_cond", () => {
-    let th1 = hyp("forall x:A. P x ==> (f:A->A) x = g x")
+    let th1 = hyp("∀ x:A. P x ==> (f:A->A) x = g x")
     let th2 = hyp("(P:A->bool) a")
     let t = tm("(h:A->A) ((f:A->A) a) = f b")
     @simp.simp_conv(ths([th1, th2]))(t)
@@ -188,7 +188,7 @@ test "simp matches simp.ml" {
     @simp.pure_simp_conv(ths([th]))(t)
   })
   cv("ONCE_SIMP_CONV", () => {
-    let th = hyp("forall x:A. (f:A->A) x = f (f x)")
+    let th = hyp("∀ x:A. (f:A->A) x = f (f x)")
     let t = tm("(f:A->A) a")
     @simp.once_simp_conv(ths([th]))(t)
   })
@@ -214,7 +214,7 @@ test "simp matches simp.ml" {
   })
   cv("SIMP_cong_deep", () => {
     let ss = @simp.ss_of_congs(ths([imp_cong]), @simp.empty_ss)
-    let th = hyp("forall x:A. P x ==> (f:A->A) x = g x")
+    let th = hyp("∀ x:A. P x ==> (f:A->A) x = g x")
     let t = tm("(P:A->bool) a ==> (f:A->A) a = b")
     @simp.simplify_conv(ss, ths([th]))(t)
   })
@@ -244,44 +244,44 @@ test "simp matches simp.ml" {
       ths([]).map(_ => pr).concat(@list.singleton(@simp.augment(pr, ths([qa])))),
       @simp.empty_ss,
     )
-    let th = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
+    let th = hyp("∀ x:A. Q x ==> (f:A->A) x = g x")
     let t = tm("(f:A->A) a")
     @simp.simplify_conv(ss, ths([th]))(t)
   })
   cv("prover_none", () => {
-    let th = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
+    let th = hyp("∀ x:A. Q x ==> (f:A->A) x = g x")
     let t = tm("(f:A->A) a")
     @simp.simplify_conv(@simp.empty_ss, ths([th]))(t)
   })
   cv("too_deep", () => {
-    let th1 = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
-    let th2 = hyp("forall x:A. R x ==> Q x")
+    let th1 = hyp("∀ x:A. Q x ==> (f:A->A) x = g x")
+    let th2 = hyp("∀ x:A. R x ==> Q x")
     let th3 = hyp("(R:A->bool) a")
     let t = tm("(f:A->A) a")
     @simp.once_simplify_conv(@simp.empty_ss, ths([th1, th2, th3]))(t)
   })
   cv("deep_ok", () => {
-    let th1 = hyp("forall x:A. Q x ==> (f:A->A) x = g x")
-    let th2 = hyp("forall x:A. R x ==> Q x")
+    let th1 = hyp("∀ x:A. Q x ==> (f:A->A) x = g x")
+    let th2 = hyp("∀ x:A. R x ==> Q x")
     let th3 = hyp("(R:A->bool) a")
     let t = tm("(f:A->A) a")
     @simp.simplify_conv(@simp.empty_ss, ths([th1, th2, th3]))(t)
   })
   cv("DEPTH_SQCONV", () => {
-    let th = hyp("forall x:A. (f:A->A) x = g x")
+    let th = hyp("∀ x:A. (f:A->A) x = g x")
     let ss = @simp.ss_of_thms(ths([th]), @simp.empty_ss)
     let t = tm("(f:A->A) (f a)")
     @simp.depth_sqconv(ss, 3, t)
   })
   cv("REDEPTH_SQCONV", () => {
-    let th1 = hyp("forall x:A. (f:A->A) x = g x")
-    let th2 = hyp("forall x:A. (h:A->A) (g x) = f x")
+    let th1 = hyp("∀ x:A. (f:A->A) x = g x")
+    let th2 = hyp("∀ x:A. (h:A->A) (g x) = f x")
     let ss = @simp.ss_of_thms(ths([th1, th2]), @simp.empty_ss)
     let t = tm("(h:A->A) (f a)")
     @simp.redepth_sqconv(ss, 3, t)
   })
   cv("TOP_SWEEP_SQCONV", () => {
-    let th = hyp("forall x:A. (f:A->A) x = g (f x)")
+    let th = hyp("∀ x:A. (f:A->A) x = g (f x)")
     let ss = @simp.ss_of_thms(ths([th]), @simp.empty_ss)
     let t = tm("(f:A->A) a")
     @simp.top_sweep_sqconv(ss, 3, t)
@@ -296,7 +296,7 @@ test "simp matches simp.ml" {
     @simp.simplify_conv(ss, @list.List([]))(t)
   })
   log.attempt("basic_rewrites", () => {
-    let th = hyp("forall x:A. (f:A->A) x = g x")
+    let th = hyp("∀ x:A. (f:A->A) x = g x")
     @simp.set_basic_rewrites(ths([th]))
     let th2 = hyp("(a:bool) = b")
     @simp.extend_basic_rewrites(ths([th2]))
@@ -400,21 +400,21 @@ test "simp matches simp.ml" {
       #|simp quotations (3):
       #|  T
       #|  p ==> q ==> r <=> p /\\ q ==> r
-      #|  (forall x. P x ==> Q) <=> (?x. P x) ==> Q
+      #|  (\226\136\128 x. P x ==> Q) <=> (?x. P x) ==> Q
       #|term_order = false true true false false true
       #|Warning: inventing type variables
-      #|mk_rewrites_false = [(#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) #T:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?354,fun('?354,bool)) b:'?354) a:'?354)) #F:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354)) #F:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) c:bool) #F:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))) #T:bool)]
+      #|mk_rewrites_false = [(#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) #T:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?354,fun('?354,bool)) b:'?354) a:'?354)) #F:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354)) #F:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) c:bool) #F:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?346,fun('?346,bool)) (Q:fun('A,'?346) x:'A)) (R:fun('A,'?346) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?354,fun('?354,bool)) a:'?354) b:'?354))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))) #T:bool)]
       #|Warning: inventing type variables
-      #|mk_rewrites_true = [(#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) #T:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?383,fun('?383,bool)) b:'?383) a:'?383)) #F:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383)) #F:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) c:bool) #F:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))]
-      #|mk_rewrites_exists = [(#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun('A,fun('A,bool)) x:'A) y:'A)) ((#==>:fun(bool,fun(bool,bool)) ((Q:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))))))) |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((P:fun('A,fun('A,bool)) x:'A) y:'A)) ((Q:fun('A,fun('A,bool)) x:'A) y:'A))))) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))]
-      #|REWRITE_CONV = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (f:fun('A,'A) a:'A))) (f:fun('A,'A) (f:fun('A,'A) b:'A)))) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (g:fun('A,'A) a:'A))) (g:fun('A,'A) (g:fun('A,'A) b:'A))))
+      #|mk_rewrites_true = [(#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) #T:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?383,fun('?383,bool)) b:'?383) a:'?383)) #F:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383)) #F:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#=:fun(bool,fun(bool,bool)) c:bool) #F:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('?375,fun('?375,bool)) (Q:fun('A,'?375) x:'A)) (R:fun('A,'?375) x:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('?383,fun('?383,bool)) a:'?383) b:'?383))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) c:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))))))) |- ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#=:fun('A,fun('A,bool)) u:'A) v:'A))]
+      #|mk_rewrites_exists = [(#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((P:fun('A,fun('A,bool)) x:'A) y:'A)) ((#==>:fun(bool,fun(bool,bool)) ((Q:fun('A,fun('A,bool)) x:'A) y:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))))))) |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((P:fun('A,fun('A,bool)) x:'A) y:'A)) ((Q:fun('A,fun('A,bool)) x:'A) y:'A))))) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))]
+      #|REWRITE_CONV = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (f:fun('A,'A) a:'A))) (f:fun('A,'A) (f:fun('A,'A) b:'A)))) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (g:fun('A,'A) a:'A))) (g:fun('A,'A) (g:fun('A,'A) b:'A))))
       #|REWRITE_CONV_fail =  |- ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) a:'A)) (h:fun('A,'A) a:'A))
       #|REWRITE_CONV_loop =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) a:bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) a:bool))
-      #|REWRITE_CONV_perm = (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) x:'A) y:'A)) ((f:fun('A,fun('A,'A)) y:'A) x:'A)))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) b:'A) a:'A)) ((f:fun('A,fun('A,'A)) a:'A) b:'A))) ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) a:'A) b:'A)) ((f:fun('A,fun('A,'A)) a:'A) b:'A)))
+      #|REWRITE_CONV_perm = (#∀:fun(fun('A,bool),bool) (\x:'A. (#∀:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) x:'A) y:'A)) ((f:fun('A,fun('A,'A)) y:'A) x:'A)))))) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) b:'A) a:'A)) ((f:fun('A,fun('A,'A)) a:'A) b:'A))) ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) a:'A) b:'A)) ((f:fun('A,fun('A,'A)) a:'A) b:'A)))
       #|REWRITE_CONV_eta =  |- ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\y:'A. (g:fun('A,'B) y:'A))) (\y:'A. (g:fun('A,'B) y:'A)))
       #|REWRITE_CONV_lconst = ((#=:fun(bool,fun(bool,bool)) x:bool) #T:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) x:bool) ((#/\:fun(bool,fun(bool,bool)) y:bool) ((\x:bool. x:bool) z:bool)))) ((#/\:fun(bool,fun(bool,bool)) #T:bool) ((#/\:fun(bool,fun(bool,bool)) y:bool) ((\x:bool. x:bool) z:bool))))
       #|PURE_REWRITE_CONV = ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) a:bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) b:bool))
-      #|ONCE_REWRITE_CONV = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (f:fun('A,'A) (f:fun('A,'A) x:'A))))) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) (f:fun('A,'A) a:'A)))
+      #|ONCE_REWRITE_CONV = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (f:fun('A,'A) (f:fun('A,'A) x:'A))))) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) (f:fun('A,'A) a:'A)))
       #|PURE_ONCE_REWRITE_CONV = ((#=:fun(bool,fun(bool,bool)) a:bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) a:bool)) |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) a:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) a:bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) a:bool)))
       #|GEN_REWRITE_CONV = ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) a:bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool))
       #|REWRITE_RULE = ((#/\:fun(bool,fun(bool,bool)) a:bool) c:bool), ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#/\:fun(bool,fun(bool,bool)) b:bool) c:bool)
@@ -423,7 +423,7 @@ test "simp matches simp.ml" {
       #|REWRITE_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) a:bool) b:bool))
       #|ASM_REWRITE_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) a:bool))
       #|REWRITES_CONV_fail ! REWRITES_CONV
-      #|SIMP_CONV_cond = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))), (P:fun('A,bool) a:'A) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (f:fun('A,'A) a:'A))) (f:fun('A,'A) b:'A))) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (g:fun('A,'A) a:'A))) (f:fun('A,'A) b:'A)))
+      #|SIMP_CONV_cond = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))), (P:fun('A,bool) a:'A) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (f:fun('A,'A) a:'A))) (f:fun('A,'A) b:'A))) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) (g:fun('A,'A) a:'A))) (f:fun('A,'A) b:'A)))
       #|SIMP_CONV_ctx_abs =  |- ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (\x:bool. ((#/\:fun(bool,fun(bool,bool)) x:bool) y:bool))) (\x:bool. ((#/\:fun(bool,fun(bool,bool)) x:bool) y:bool)))
       #|PURE_SIMP_CONV = ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) c:bool))
       #|ONCE_SIMP_CONV =  |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) a:'A))
@@ -435,27 +435,27 @@ test "simp matches simp.ml" {
       #|Searching with limit 4
       #|net_of_cong_bad ! net_of_cong: Non-implicational congruence
       #|SIMP_cong =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) a:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (f:fun('A,'A) a:'A)))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) a:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) a:'A))))
-      #|SIMP_cong_deep = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))) |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) a:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) b:'A))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) a:'A)) ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) a:'A)) b:'A)))
-      #|prover = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (Q:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))), (Q:fun('A,bool) a:'A) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (g:fun('A,'A) a:'A))
+      #|SIMP_cong_deep = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))) |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) a:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) b:'A))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) a:'A)) ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) a:'A)) b:'A)))
+      #|prover = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (Q:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))), (Q:fun('A,bool) a:'A) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (g:fun('A,'A) a:'A))
       #|prover_none =  |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) a:'A))
       #|too_deep =  |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) a:'A))
-      #|deep_ok = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (Q:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))), (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (R:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))), (R:fun('A,bool) a:'A) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (g:fun('A,'A) a:'A))
-      #|DEPTH_SQCONV = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) (f:fun('A,'A) a:'A))) (g:fun('A,'A) (g:fun('A,'A) a:'A)))
+      #|deep_ok = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (Q:fun('A,bool) x:'A)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))))), (#∀:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (R:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A)))), (R:fun('A,bool) a:'A) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (g:fun('A,'A) a:'A))
+      #|DEPTH_SQCONV = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) (f:fun('A,'A) a:'A))) (g:fun('A,'A) (g:fun('A,'A) a:'A)))
       #|Warning: inventing type variables
       #|REDEPTH_SQCONV ! tryfind
       #|TOP_SWEEP_SQCONV ! GEN_SUB_CONV
       #|ss_of_conv =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('B,fun('B,bool)) ((\x:'A. (f:fun('A,'B) x:'A)) c:'A)) ((\y:'A. (f:fun('A,'B) y:'A)) d:'A))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) c:'A)) (f:fun('A,'B) d:'A)))
-      #|basic_rewrites = [((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool); (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))]
-      #|REWRITE_CONV_basic = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))), ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) c:'A)) c:'A)) a:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) c:'A)) c:'A)) b:bool))
+      #|basic_rewrites = [((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool); (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A))]
+      #|REWRITE_CONV_basic = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))), ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool) |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) c:'A)) c:'A)) a:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) c:'A)) c:'A)) b:bool))
       #|PURE_REWRITE_CONV_basic =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) c:'A)) c:'A)) a:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) c:'A)) c:'A)) a:bool))
       #|basic_convs = BETA
-      #|REWRITE_CONV_conv = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) ((\x:'A. (f:fun('A,'A) x:'A)) c:'A)) (g:fun('A,'A) c:'A))
-      #|SIMP_CONV_basic = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) ((\x:'A. (f:fun('A,'A) x:'A)) c:'A)) (g:fun('A,'A) c:'A))
+      #|REWRITE_CONV_conv = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) ((\x:'A. (f:fun('A,'A) x:'A)) c:'A)) (g:fun('A,'A) c:'A))
+      #|SIMP_CONV_basic = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) ((\x:'A. (f:fun('A,'A) x:'A)) c:'A)) (g:fun('A,'A) c:'A))
       #|basic_congs = 1
       #|SIMP_CONV_congs =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) c:'A)) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) x:'A)) (h:fun('A,'A) c:'A)))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) c:'A)) ((#=:fun('A,fun('A,bool)) (h:fun('A,'A) c:'A)) (h:fun('A,'A) c:'A))))
       #|reset = 0
       #|ABBREV_TAC =  |- ((#\/:fun(bool,fun(bool,bool)) c:bool) (#~:fun(bool,bool) c:bool))
-      #|ABBREV_TAC_fun = (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) a:'A)) (g:fun('A,'A) b:'A))
+      #|ABBREV_TAC_fun = (#∀:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) x:'A)) (g:fun('A,'A) x:'A)))) |- ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) a:'A)) (g:fun('A,'A) b:'A))
       #|ABBREV_TAC_used ! ABBREV_TAC: variable already used
       #|ABBREV_EXPAND = ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool) |- ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)))
       #|EXPAND_TAC_none ! tryfind

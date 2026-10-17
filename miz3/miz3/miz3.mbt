@@ -481,7 +481,10 @@ let rawtoken_c : @lib.Cell[(@list.List[String]) -> (String, @list.List[String]) 
 ///|
 /// `rawtoken`
 pub fn rawtoken(x : @list.List[String]) -> ((String, @list.List[String])) raise {
-  (rawtoken_c.get())(x)
+  match x {
+    More("∀", tail=rest) => ("∀", rest)
+    _ => (rawtoken_c.get())(x)
+  }
 }
 
 ///|
@@ -554,7 +557,7 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
           (t_2 + x_1)
         })(rst_2)
       } else {
-        if ((Int::to_int64(@lib.string_length(t_2)) >= 2L) && (@lib.string_sub(t_2, 0, 2) == "::")) {
+        if t_2.has_prefix("::") {
           @parser.map(rest_of_line, fn(x55 : String) -> String raise {
             let x_2 = x55
             if e {
@@ -3383,7 +3386,7 @@ pub fn eqtf_intro(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// REWRITE_THESIS_TAC
 fn step_55() -> Unit raise {
-  let prop_rewrite_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @simp.pure_rewrite_tac(@list.List([@theorems.and_clauses(), @theorems.imp_clauses(), @class.not_clauses(), @theorems.or_clauses(), @holby.prop_2(), @class.taut(@parser.parse_term("forall t. (t <=> t) <=> T"))]))
+  let prop_rewrite_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @simp.pure_rewrite_tac(@list.List([@theorems.and_clauses(), @theorems.imp_clauses(), @class.not_clauses(), @theorems.or_clauses(), @holby.prop_2(), @class.taut(@parser.parse_term("∀ t. (t <=> t) <=> T"))]))
   rewrite_thesis_tac_c.set(fn(x589 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x589
     @tactics.then_tac(pure_exactly_once_rewrite_tac(@list.List([eqtf_intro(th)])), prop_rewrite_tac)

@@ -41,26 +41,33 @@ def _notation(text, old, new):
                 i = len(text) if end < 0 else end
                 result.append(text[start:i])
             elif word == old:
-                if new[0] in ALNUM and start and text[start - 1] in ALNUM:
+                if (new[0] in ALNUM or new == "∀") and start and text[start - 1] in ALNUM:
                     result.append(" ")
                 result.append(new)
-                if new[-1] in ALNUM and i < len(text) and text[i] in ALNUM:
+                if (new[-1] in ALNUM or new == "∀") and i < len(text) and text[i] in ALNUM:
                     result.append(" ")
             else:
                 result.append(word)
         else:
-            result.append(text[i])
+            if text[i] == old:
+                if start and text[start - 1] in SYMBOL:
+                    result.append(" ")
+                result.append(new)
+                if i + 1 < len(text) and (text[i + 1] in SYMBOL or text[i + 1] == old):
+                    result.append(" ")
+            else:
+                result.append(text[i])
             i += 1
     return "".join(result)
 
-def forall_notation(text):
+def universal_notation(text):
     """Replace the standalone HOL token !, preserving all other input."""
-    return _notation(text, "!", "forall")
+    return _notation(_notation(text, "!", "∀"), "forall", "∀")
 
 
 def upstream_notation(text):
     """Adapt input to the upstream oracle, which still uses ! notation."""
-    return _notation(text, "forall", "!")
+    return _notation(text, "∀", "!")
 
 
 # The translator emits ordinary calls, including quotations expanded by pa_j.
@@ -84,11 +91,11 @@ SOURCE_TOKEN = re.compile(r'//[^\n]*|^[ \t]*[#\$]\|[^\n]*|"(?:\\.|[^"\\])*"|(?:@
 
 def rewrite_embedded_terms(text):
     # Proof scripts/exec-phrase keys can contain OCaml calls with HOL strings.
-    # A HOL string literal by itself is still opaque to forall_notation.
+    # A HOL string literal by itself is still opaque to universal_notation.
     import json
     def term(match):
         value = json.loads(match[2])
-        return match[1] + json.dumps(forall_notation(value), ensure_ascii=False)
+        return match[1] + json.dumps(universal_notation(value), ensure_ascii=False)
     return re.sub(r'(\bparse_term\s+)("(?:\\.|[^"\\])*")', term, text)
 
 
@@ -116,7 +123,7 @@ def rewrite_moonbit(source):
                     result.extend((source[end:match.start()], token))
                     end = match.end()
                     continue
-        elif token.startswith('"') and '!' in token:
+        elif token.startswith('"') and ('!' in token or 'forall' in token):
             try:
                 text = json.loads(token)
             except ValueError:
@@ -124,21 +131,21 @@ def rewrite_moonbit(source):
             if text is not None:
                 migrated = text
                 if any(name in HOL_INPUTS for name in stack):
-                    migrated = forall_notation(text)
+                    migrated = universal_notation(text)
                     if any('parse_qproof' in name for name in stack):
                         migrated = rewrite_embedded_terms(migrated)
                 elif stack and stack[-1] == '@lib.register_phrase':
                     migrated = rewrite_embedded_terms(text)
                 elif text == '!' and (any(name in CONSTANT_NAMES for name in stack) or
                         re.match(r'\s*=>\s*forall_ctximpm?conv\b', source[match.end():])):
-                    migrated = 'forall'
+                    migrated = '∀'
                 elif text == '!' and stack and stack[-1] in {
                     '@printer.parse_as_binder', '@printer.unparse_as_binder',
                     '@lexer.Ident', '@lexer.Lexcode::Ident',
                 }:
-                    migrated = 'forall'
+                    migrated = '∀'
                 elif text == 'move: not (!) or (==>)':
-                    migrated = 'move: not (forall) or (==>)'
+                    migrated = 'move: not (∀) or (==>)'
                 if text != migrated:
                     replacement = json.dumps(migrated, ensure_ascii=False)
         result.extend((source[end:match.start()], replacement))
@@ -146,9 +153,24 @@ def rewrite_moonbit(source):
         previous = token
     result.append(source[end:])
     migrated = ''.join(result)
+    # Miz3 has a separate layout-preserving lexer over exploded characters.
+    # Recognize the canonical symbol there too, without changing literal or
+    # comment handling in its existing token parser.
+    migrated = re.sub(
+        r'(pub fn rawtoken\((\w+) : @list.List\[String\]\)[^\n]*\{\n)'
+        r'  \(rawtoken_c.get\(\)\)\(\2\)\n}',
+        lambda m: m[1] + '  match ' + m[2] + ' {\n'
+            '    More("∀", tail=rest) => ("∀", rest)\n'
+            '    _ => (rawtoken_c.get())(' + m[2] + ')\n  }\n}',
+        migrated)
+    # Checking a two-byte prefix by slicing can split a Unicode token.
+    migrated = re.sub(
+        r'\(\(Int::to_int64\(@lib.string_length\((\w+)\)\) >= 2L\) && '
+        r'\(@lib.string_sub\(\1, 0, 2\) == "::"\)\)',
+        lambda m: m[1] + '.has_prefix("::")', migrated)
     # Rqe/util's suppressed constants are names, not proof labels or messages.
     migrated = re.sub(r'(suppress\(\)\.val = @list.List\(\[)([^\]]*)(\]\))',
-                  lambda m: m[1] + m[2].replace('"!"', '"forall"') + m[3], migrated)
+                  lambda m: m[1] + m[2].replace('"!"', '"∀"') + m[3], migrated)
 
     # Jordan proof scripts select assumptions by precomputed term hashes. Keep
     # the universal constant's symbol code stable across its spelling change.
@@ -160,7 +182,7 @@ def rewrite_moonbit(source):
         lambda m: m[1] + m[4] +
             '        // Stable symbol code used by existing Jordan proof labels.\n' +
             '        let symbol_hash = if ' + m[2] +
-            ' == "forall" { 33L } else { memhash_of_string(' + m[2] + ') }\n' +
+            ' == "∀" { 33L } else { memhash_of_string(' + m[2] + ') }\n' +
             m[5] + 'symbol_hash', migrated)
 
 
@@ -172,7 +194,7 @@ if __name__ == '__main__':
         source = path.read_text()
         migrated = rewrite_moonbit(source)
         if path.name == 'readable.mbt':
-            migrated = migrated.replace('("∀", "!")', '("∀", "forall ")')
+            migrated = migrated.replace('("∀", "!"), ', '')
         if migrated != source:
             path.write_text(migrated)
 

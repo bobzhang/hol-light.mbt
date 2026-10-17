@@ -211,8 +211,8 @@ fn step_2() -> Unit raise {
       }
     }
   }
-  let t123 = action_fol_l(@parser.parse_term("(forall x. P x /\\ Q x) <=> (forall x. P x) /\\ (forall x. Q x)"))
-  let t124 = action_fol_l(@parser.parse_term("~(forall x. P x) <=> (?x. ~(P x))"))
+  let t123 = action_fol_l(@parser.parse_term("(∀ x. P x /\\ Q x) <=> (∀ x. P x) /\\ (∀ x. Q x)"))
+  let t124 = action_fol_l(@parser.parse_term("~(∀ x. P x) <=> (?x. ~(P x))"))
   let t125 = action_taut_l_1(@parser.parse_term("~(p \\/ q) <=> ~p /\\ ~q"))
   let t126 = action_taut_l_1(@parser.parse_term("~(p /\\ q) <=> ~p \\/ ~q"))
   let t127 = action_taut_l_1(@parser.parse_term("~(~p) <=> p"))
@@ -372,7 +372,7 @@ fn[TN, TO] action_fol_l(x101 : @kernel.Term) -> ((@kernel.Term, (@kernel.Thm) ->
 /// CORRELATE_RULE
 fn step_3() -> Unit raise {
   let t138 = @meson.meson_tac(@list.List([]))
-  let t139 = @tactics.prove(@parser.parse_term("(?x. P x) <=> ~(forall x. ~(P x))"), t138)
+  let t139 = @tactics.prove(@parser.parse_term("(?x. P x) <=> ~(∀ x. ~(P x))"), t138)
   let t140 = @equal.gsym(@theorems.disj_assoc())
   let t141 = @equal.gsym(@theorems.conj_assoc())
   let t142 = @class.taut(@parser.parse_term("p \\/ F <=> p"))
@@ -2029,25 +2029,25 @@ fn step_37() -> Unit raise {
 ///|
 /// Examples/holby.ml:821
 fn step_38() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a))) /\\\n   (forall x y. ~P (g x y))\n   ==> ~P(a)")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("(a = f a) /\\ ((g b (f a))=(f (f a))) /\\ ((g a b)=(f (g b a))) /\\\n   (∀ x y. ~P (g x y))\n   ==> ~P(a)")))
 }
 
 ///|
 /// Examples/holby.ml:826
 fn step_39() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x y. x + y = y + x) /\\ (1 + 2 = x) /\\ (x = 3) ==> (3 = 2 + 1)")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("(∀ x y. x + y = y + x) /\\ (1 + 2 = x) /\\ (x = 3) ==> (3 = 2 + 1)")))
 }
 
 ///|
 /// Examples/holby.ml:829
 fn step_40() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x:num y. x + y = y + x) ==> (1 + 2 = 2 + 1)")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("(∀ x:num y. x + y = y + x) ==> (1 + 2 = 2 + 1)")))
 }
 
 ///|
 /// Examples/holby.ml:832
 fn step_41() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x:num y. ~(x + y = y + x)) ==> ~(1 + 2 = 2 + 1)")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("(∀ x:num y. ~(x + y = y + x)) ==> ~(1 + 2 = 2 + 1)")))
 }
 
 ///|
@@ -2065,7 +2065,7 @@ fn step_43() -> Unit raise {
 ///|
 /// Examples/holby.ml:841
 fn step_44() -> Unit raise {
-  let t424 = @parser.parse_term("?x. P x ==> forall y. P y")
+  let t424 = @parser.parse_term("?x. P x ==> ∀ y. P y")
   ignore(@lib.time(hol_by(@list.List([])), t424))
 }
 
@@ -2084,7 +2084,7 @@ fn step_46() -> Unit raise {
 ///|
 /// Examples/holby.ml:851
 fn step_47() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("forall x. x < 2 ==> 2 * x <= 3")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("∀ x. x < 2 ==> 2 * x <= 3")))
 }
 
 ///|
@@ -2096,7 +2096,7 @@ fn step_48() -> Unit raise {
 ///|
 /// Examples/holby.ml:855
 fn step_49() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall x. (x = a) \\/ x > a) ==> (1 + x = a) \\/ 1 + x > a")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("(∀ x. (x = a) \\/ x > a) ==> (1 + x = a) \\/ 1 + x > a")))
 }
 
 ///|
@@ -2123,7 +2123,7 @@ fn step_52() -> Unit raise {
 ///|
 /// Examples/holby.ml:868
 fn step_53() -> Unit raise {
-  ignore(@lib.time(hol_rule, @parser.parse_term("(forall Y X Z. p(X,Y) /\\ p(Y,Z) ==> p(X,Z)) /\\\n               (forall Y X Z. q(X,Y) /\\ q(Y,Z) ==> q(X,Z)) /\\\n               (forall Y X. q(X,Y) ==> q(Y,X)) /\\\n               (forall X Y. p(X,Y) \\/ q(X,Y))\n               ==> p(a,b) \\/ q(c,d)")))
+  ignore(@lib.time(hol_rule, @parser.parse_term("(∀ Y X Z. p(X,Y) /\\ p(Y,Z) ==> p(X,Z)) /\\\n               (∀ Y X Z. q(X,Y) /\\ q(Y,Z) ==> q(X,Z)) /\\\n               (∀ Y X. q(X,Y) ==> q(Y,X)) /\\\n               (∀ X Y. p(X,Y) \\/ q(X,Y))\n               ==> p(a,b) \\/ q(c,d)")))
 }
 
 ///|
@@ -2136,7 +2136,7 @@ fn step_54() -> Unit raise {
 ///|
 /// Examples/holby.ml:876
 fn step_55() -> Unit raise {
-  let t426 = @parser.parse_term("?x. forall y. P x ==> P y")
+  let t426 = @parser.parse_term("?x. ∀ y. P x ==> P y")
   ignore(hol_by(@list.List([]))(t426))
 }
 

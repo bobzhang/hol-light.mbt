@@ -85,7 +85,7 @@ fn step_5() -> Unit raise {
   }))
   let t5 = @simp.rewrite_tac(@list.List([length_def(), between_thm(), is_midpoint()]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5), @tactics.strip_tac), t12), t13), t18), t19), t21), t22), t23)
-  thales_v1_c.set(@tactics.prove(@parser.parse_term("forall centre radius a b c.\n        length(a,centre) = radius /\\\n        length(b,centre) = radius /\\\n        length(c,centre) = radius /\\\n        is_midpoint centre (a,b)\n        ==> orthogonal (c - a) (c - b)"), t24))
+  thales_v1_c.set(@tactics.prove(@parser.parse_term("∀ centre radius a b c.\n        length(a,centre) = radius /\\\n        length(b,centre) = radius /\\\n        length(c,centre) = radius /\\\n        is_midpoint centre (a,b)\n        ==> orthogonal (c - a) (c - b)"), t24))
 }
 
 ///|
@@ -122,7 +122,7 @@ fn step_6() -> Unit raise {
   let t26 = @simp.simp_tac(@list.List([@vectors.dot(), @vectors.sum_2(), @vectors.vector_sub_component(), @cart.dimindex_2(), @vectors.vector_add_component(), @vectors.orthogonal(), @cart.cart_eq(), @vectors.forall_2(), @vectors.vector_mul_component(), @calc_num.arith()]))
   let t25 = @simp.rewrite_tac(@list.List([length_def(), between_thm(), is_midpoint(), @vectors.norm_eq()]))
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t25), t26), t30), t34), t38), t39)
-  midpoint_c.set(@tactics.prove(@parser.parse_term("forall m a b. between m (a,b) /\\ length(a,m) = length(b,m)\n           ==> is_midpoint m (a,b)"), t40))
+  midpoint_c.set(@tactics.prove(@parser.parse_term("∀ m a b. between m (a,b) /\\ length(a,m) = length(b,m)\n           ==> is_midpoint m (a,b)"), t40))
 }
 
 ///|
@@ -165,7 +165,7 @@ fn step_7() -> Unit raise {
     }
   })
   let t62 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t44), t46), t48), t55), t56), t57), t59), t60), t61)
-  thales_c.set(@tactics.prove(@parser.parse_term("forall centre radius a b c:real^2.\n        length(a,centre) = radius /\\\n        length(b,centre) = radius /\\\n        length(c,centre) = radius /\\\n        between centre (a,b)\n        ==> orthogonal (c - a) (c - b)"), t62))
+  thales_c.set(@tactics.prove(@parser.parse_term("∀ centre radius a b c:real^2.\n        length(a,centre) = radius /\\\n        length(b,centre) = radius /\\\n        length(c,centre) = radius /\\\n        between centre (a,b)\n        ==> orthogonal (c - a) (c - b)"), t62))
 }
 
 ///|

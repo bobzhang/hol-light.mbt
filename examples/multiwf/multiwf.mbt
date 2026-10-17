@@ -5,7 +5,7 @@
 /// EMPTY_IS_FINITE
 fn step_1() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([@sets.finite_rules()]))
-  empty_is_finite_c.set(@tactics.prove(@parser.parse_term("forall s. (s = EMPTY) ==> FINITE s"), t1))
+  empty_is_finite_c.set(@tactics.prove(@parser.parse_term("∀ s. (s = EMPTY) ==> FINITE s"), t1))
 }
 
 ///|
@@ -21,7 +21,7 @@ pub fn empty_is_finite() -> @kernel.Thm {
 /// SING_IS_FINITE
 fn step_2() -> Unit raise {
   let t2 = @simp.simp_tac(@list.List([@sets.finite_insert(), @sets.finite_rules()]))
-  sing_is_finite_c.set(@tactics.prove(@parser.parse_term("forall s a. (s = {a}) ==> FINITE s"), t2))
+  sing_is_finite_c.set(@tactics.prove(@parser.parse_term("∀ s a. (s = {a}) ==> FINITE s"), t2))
 }
 
 ///|
@@ -180,7 +180,7 @@ fn step_14() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([multiset_tybij()]))
   let t6 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t8 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@class.fun_eq_thm())])), t6), t7)
-  mextension_c.set(@tactics.prove(@parser.parse_term("(M = N) = forall a. multiplicity M a = multiplicity N a"), t8))
+  mextension_c.set(@tactics.prove(@parser.parse_term("(M = N) = ∀ a. multiplicity M a = multiplicity N a"), t8))
 }
 
 ///|
@@ -458,10 +458,10 @@ fn step_29() -> Unit raise {
   let t70 = @tactics.exists_tac(@parser.parse_term("{a:A | ~(multiplicity M a = 0)}"))
   let t69 = @tactics.match_mp_tac(@sets.subset_trans())
   let t68 = @simp.asm_rewrite_tac(@list.List([mdiff_v1(), msing_v1(), @int.arith_rule(@parser.parse_term("SUC n - 1 = n"))]))
-  let t66 = @parser.parse_term("forall M. (multiplicity M a = n) /\\\n           {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n           ==> P M")
+  let t66 = @parser.parse_term("∀ M. (multiplicity M a = n) /\\\n           {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n           ==> P M")
   let t67 = @tactics.map_every(fn(x65 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(@kernel.assume_rule(x65))
-  }, @list.List([@parser.parse_term("forall a:A M. P M ==> P (M munion msing a)"), t66]))
+  }, @list.List([@parser.parse_term("∀ a:A M. P M ==> P (M munion msing a)"), t66]))
   let t63 = @simp.asm_rewrite_tac(@list.List([mmember(), @nums.not_suc()]))
   let t64 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(mmember_mdiff()), t63), @tactics.all_tac])
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("M = (M mdiff (msing(a:A))) munion (msing a)"), fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -476,7 +476,7 @@ fn step_29() -> Unit raise {
   let t73 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t57), t58), t59), t72])
   let t56 = @tactics.repeat_tac(@tactics.strip_tac)
   let t74 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @nums.induct_tac), t56), t73)
-  multiset_induct_lemma1_c.set(@tactics.prove(@parser.parse_term("(forall M. ({a | ~(multiplicity M a = 0)} SUBSET s) ==> P M) /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall n M. (multiplicity M a = n) /\\\n             {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n             ==> P M"), t74))
+  multiset_induct_lemma1_c.set(@tactics.prove(@parser.parse_term("(∀ M. ({a | ~(multiplicity M a = 0)} SUBSET s) ==> P M) /\\\n   (∀ a:A M. P M ==> P (M munion (msing a)))\n   ==> ∀ n M. (multiplicity M a = n) /\\\n             {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n             ==> P M"), t74))
 }
 
 ///|
@@ -505,7 +505,7 @@ fn step_30() -> Unit raise {
   let t75 = @tactics.repeat_tac(@tactics.strip_tac)
   let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), @sets.not_in_empty()])), t75), t78), t79), t80])
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(@sets.finite_induct())), @tactics.conj_tac), t81), t82), t83), t84), t85), t86)
-  multiset_induct_lemma2_c.set(@tactics.prove(@parser.parse_term("P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall s. FINITE s ==> forall M. {a:A | ~(multiplicity M a = 0)} SUBSET s ==> P M"), t87))
+  multiset_induct_lemma2_c.set(@tactics.prove(@parser.parse_term("P mempty /\\\n   (∀ a:A M. P M ==> P (M munion (msing a)))\n   ==> ∀ s. FINITE s ==> ∀ M. {a:A | ~(multiplicity M a = 0)} SUBSET s ==> P M"), t87))
 }
 
 ///|
@@ -536,7 +536,7 @@ fn step_31() -> Unit raise {
       }
     })(t91(x92))
   }), t93), t94), @tactics.gen_tac), t95), t96), t97), t98), t99)
-  multiset_induct_c.set(@tactics.prove(@parser.parse_term("P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall M. P M"), t100))
+  multiset_induct_c.set(@tactics.prove(@parser.parse_term("P mempty /\\\n   (∀ a:A M. P M ==> P (M munion (msing a)))\n   ==> ∀ M. P M"), t100))
 }
 
 ///|
@@ -584,7 +584,7 @@ pub fn wfp_cases() -> @kernel.Thm {
 ///|
 /// WFP_RULES, WFP_INDUCT, WFP_CASES
 fn step_33() -> Unit raise {
-  let (wfp_rules, wfp_induct, wfp_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("forall x. (forall y. y << x ==> WFP(<<) y) ==> WFP(<<) x"))
+  let (wfp_rules, wfp_induct, wfp_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("∀ x. (∀ y. y << x ==> WFP(<<) y) ==> WFP(<<) x"))
   wfp_rules_c.set(wfp_rules)
   wfp_induct_c.set(wfp_induct)
   wfp_cases_c.set(wfp_cases)
@@ -597,7 +597,7 @@ fn step_34() -> Unit raise {
   let t102 = @tactics.match_mp_tac(wfp_induct())
   let t101 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("a ==> b <=> a ==> a /\\ b"))]))
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), @tactics.strip_tac), t101), t102), t103)
-  wfp_part_induct_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. x IN WFP(<<) /\\ (forall y. y << x ==> P(y)) ==> P(x))\n       ==> forall x:A. x IN WFP(<<) ==> P(x)"), t104))
+  wfp_part_induct_c.set(@tactics.prove(@parser.parse_term("∀ P. (∀ x. x IN WFP(<<) /\\ (∀ y. y << x ==> P(y)) ==> P(x))\n       ==> ∀ x:A. x IN WFP(<<) ==> P(x)"), t104))
 }
 
 ///|
@@ -681,7 +681,7 @@ fn step_36() -> Unit raise {
   let t110 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t109 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
   let t148 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.match_mp_tac(@sets.subset_antisym())), t109), t110), @tactics.conj_tac), t147)
-  wfp_dchain_c.set(@tactics.prove(@parser.parse_term("forall(<<):A->A->bool.\n        WFP(<<) = {a | forall x. (forall n. x(SUC n) << x n) ==> ~(x 0 = a)}"), t148))
+  wfp_dchain_c.set(@tactics.prove(@parser.parse_term("∀(<<):A->A->bool.\n        WFP(<<) = {a | ∀ x. (∀ n. x(SUC n) << x n) ==> ~(x 0 = a)}"), t148))
 }
 
 ///|
@@ -696,7 +696,7 @@ pub fn wfp_dchain() -> @kernel.Thm {
 ///|
 /// morder
 fn step_37() -> Unit raise {
-  morder_c.set(@pair.new_definition(@parser.parse_term("morder(<<) N M <=> ?M0 a K. (M = M0 munion (msing a)) /\\\n                               (N = M0 munion K) /\\\n                               (forall b. b mmember K ==> b << a)")))
+  morder_c.set(@pair.new_definition(@parser.parse_term("morder(<<) N M <=> ?M0 a K. (M = M0 munion (msing a)) /\\\n                               (N = M0 munion K) /\\\n                               (∀ b. b mmember K ==> b << a)")))
 }
 
 ///|
@@ -769,7 +769,7 @@ fn step_38() -> Unit raise {
       s150(x151)
     }
   }, @list.List([morder()])), t161), t162), t168), t169), t181), t182), t183), t184), t190), t191), t192), t193)
-  lemma_2_0_c.set(@tactics.prove(@parser.parse_term("morder(<<) N (M0 munion (msing a))\n   ==> (?M. morder(<<) M M0 /\\ (N = M munion (msing a))) \\/\n       (?K. (N = M0 munion K) /\\ (forall b:A. b mmember K ==> b << a))"), t194))
+  lemma_2_0_c.set(@tactics.prove(@parser.parse_term("morder(<<) N (M0 munion (msing a))\n   ==> (?M. morder(<<) M M0 /\\ (N = M munion (msing a))) \\/\n       (?K. (N = M0 munion K) /\\ (∀ b:A. b mmember K ==> b << a))"), t194))
 }
 
 ///|
@@ -806,7 +806,7 @@ fn step_39() -> Unit raise {
   let t196 = @tactics.x_gen_tac(@parser.parse_term("N:(A)multiset"))
   let t195 = @tactics.match_mp_tac(wfp_rules())
   let t213 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), t195), t196), t203), t205), t207), t208), t209), t210), t211), t212)
-  lemma_2_1_c.set(@tactics.prove(@parser.parse_term("(forall M b:A. b << a /\\ M IN WFP(morder(<<))\n            ==> (M munion (msing b)) IN WFP(morder(<<))) /\\\n   M0 IN WFP(morder(<<)) /\\\n   (forall M. morder(<<) M M0 ==> (M munion (msing a)) IN WFP(morder(<<)))\n   ==> (M0 munion (msing a)) IN WFP(morder(<<))"), t213))
+  lemma_2_1_c.set(@tactics.prove(@parser.parse_term("(∀ M b:A. b << a /\\ M IN WFP(morder(<<))\n            ==> (M munion (msing b)) IN WFP(morder(<<))) /\\\n   M0 IN WFP(morder(<<)) /\\\n   (∀ M. morder(<<) M M0 ==> (M munion (msing a)) IN WFP(morder(<<)))\n   ==> (M0 munion (msing a)) IN WFP(morder(<<))"), t213))
 }
 
 ///|
@@ -825,7 +825,7 @@ fn step_40() -> Unit raise {
   let t215 = @tactics.match_mp_tac(lemma_2_1())
   let t214 = @tactics.repeat_tac(@tactics.strip_tac)
   let t217 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(wfp_part_induct())), t214), t215), t216)
-  lemma_2_2_c.set(@tactics.prove(@parser.parse_term("(forall M b. b << a /\\ M IN WFP(morder(<<))\n          ==> (M munion (msing b)) IN WFP(morder(<<)))\n   ==> forall M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))"), t217))
+  lemma_2_2_c.set(@tactics.prove(@parser.parse_term("(∀ M b. b << a /\\ M IN WFP(morder(<<))\n          ==> (M munion (msing b)) IN WFP(morder(<<)))\n   ==> ∀ M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))"), t217))
 }
 
 ///|
@@ -843,7 +843,7 @@ fn step_41() -> Unit raise {
   let t219 = @meson.meson_tac(@list.List([lemma_2_2()]))
   let t218 = @tactics.disch_then(@tactics.match_mp_tac)
   let t220 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@wf.wf_ind()])), t218), t219)
-  lemma_2_3_c.set(@tactics.prove(@parser.parse_term("WF(<<)\n   ==> forall a M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))"), t220))
+  lemma_2_3_c.set(@tactics.prove(@parser.parse_term("WF(<<)\n   ==> ∀ a M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))"), t220))
 }
 
 ///|
@@ -863,7 +863,7 @@ fn step_42() -> Unit raise {
   let t221 = @tactics.match_mp_tac(wfp_rules())
   let t224 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_()])), t221), t222), t223])
   let t225 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(multiset_induct())), @tactics.conj_tac), t224)
-  lemma_2_4_c.set(@tactics.prove(@parser.parse_term("WF(<<) ==> forall M. M IN WFP(morder(<<))"), t225))
+  lemma_2_4_c.set(@tactics.prove(@parser.parse_term("WF(<<) ==> ∀ M. M IN WFP(morder(<<))"), t225))
 }
 
 ///|

@@ -21,7 +21,7 @@ pub fn dest_quat(x1 : @kernel.Term) -> ((@kernel.Term, @kernel.Term, @kernel.Ter
 /// CNJ_QUAT
 fn step_1() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), @quaternion.quat_cnj_components(), @quaternion.quat_components()]))
-  cnj_quat_c.set(@tactics.prove(@parser.parse_term("forall x y z w. cnj(quat(x,y,z,w)) = quat(x, --y, --z, --w)"), t2))
+  cnj_quat_c.set(@tactics.prove(@parser.parse_term("∀ x y z w. cnj(quat(x,y,z,w)) = quat(x, --y, --z, --w)"), t2))
 }
 
 ///|
@@ -46,7 +46,7 @@ pub fn quat_components_conv(x3 : (@kernel.Term) -> @kernel.Thm raise) -> @equal.
 /// RAT_QUAT_EQ_CONV
 fn step_2() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), @quaternion.quat_components()]))
-  let qth_eq = @tactics.prove(@parser.parse_term("forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) = quat(y1,y2,y3,y4) <=>\n       x1 = y1 /\\ x2 = y2 /\\ x3 = y3 /\\ x4 = y4"), t7)
+  let qth_eq = @tactics.prove(@parser.parse_term("∀ x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) = quat(y1,y2,y3,y4) <=>\n       x1 = y1 /\\ x2 = y2 /\\ x3 = y3 /\\ x4 = y4"), t7)
   let (th1, th2) = @bool.conj_pair(@class.taut(@parser.parse_term("(F /\\ p <=> F) /\\ (T /\\ p <=> p)")))
   let t8 = @simp.rewr_conv(th2)
   let (c1, c2) = (@simp.rewr_conv(th1), t8)
@@ -70,7 +70,7 @@ pub fn rat_quat_eq_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// RAT_QUAT_ADD_CONV
 fn step_3() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([@quaternion.quat_add(), @quaternion.quat_eq(), @quaternion.quat_components()]))
-  let qth_add = @tactics.prove(@parser.parse_term("forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) + quat(y1,y2,y3,y4) = quat(x1+y1,x2+y2,x3+y3,x4+y4)"), t13)
+  let qth_add = @tactics.prove(@parser.parse_term("∀ x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) + quat(y1,y2,y3,y4) = quat(x1+y1,x2+y2,x3+y3,x4+y4)"), t13)
   let t14 = quat_components_conv(@calc_rat.real_rat_add_conv)
   rat_quat_add_conv_c.set(@equal.thenc(@simp.rewr_conv(qth_add), t14))
 }
@@ -88,7 +88,7 @@ pub fn rat_quat_add_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// RAT_QUAT_NEG_CONV
 fn step_4() -> Unit raise {
   let t15 = @simp.rewrite_tac(@list.List([@quaternion.quat_neg(), @quaternion.quat_eq(), @quaternion.quat_components()]))
-  let qth_neg = @tactics.prove(@parser.parse_term("forall x1 x2 x3 x4. -- quat(x1,x2,x3,x4) = quat(--x1, --x2, --x3, --x4)"), t15)
+  let qth_neg = @tactics.prove(@parser.parse_term("∀ x1 x2 x3 x4. -- quat(x1,x2,x3,x4) = quat(--x1, --x2, --x3, --x4)"), t15)
   let t16 = quat_components_conv(@calc_rat.real_rat_neg_conv)
   rat_quat_neg_conv_c.set(@equal.thenc(@simp.rewr_conv(qth_neg), t16))
 }
@@ -106,7 +106,7 @@ pub fn rat_quat_neg_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// RAT_QUAT_SUB_CONV
 fn step_5() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([@quaternion.quat_sub(), @quaternion.quat_neg(), @quaternion.quat_add(), @realax.real_sub(), @quaternion.quat_eq(), @quaternion.quat_components()]))
-  let qth_sub = @tactics.prove(@parser.parse_term("forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) - quat(y1,y2,y3,y4) = quat(x1-y1,x2-y2,x3-y3,x4-y4)"), t17)
+  let qth_sub = @tactics.prove(@parser.parse_term("∀ x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) - quat(y1,y2,y3,y4) = quat(x1-y1,x2-y2,x3-y3,x4-y4)"), t17)
   let t18 = quat_components_conv(@calc_rat.real_rat_sub_conv)
   rat_quat_sub_conv_c.set(@equal.thenc(@simp.rewr_conv(qth_sub), t18))
 }
@@ -124,7 +124,7 @@ pub fn rat_quat_sub_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// RAT_QUAT_MUL_CONV
 fn step_6() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@quaternion.quat_mul(), @quaternion.quat_eq(), @quaternion.quat_components()]))
-  let qth_mul = @tactics.prove(@parser.parse_term("forall x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) * quat(y1,y2,y3,y4) =\n       quat(x1 * y1 - x2 * y2 - x3 * y3 - x4 * y4,\n            x1 * y2 + x2 * y1 + x3 * y4 - x4 * y3,\n            x1 * y3 - x2 * y4 + x3 * y1 + x4 * y2,\n            x1 * y4 + x2 * y3 - x3 * y2 + x4 * y1)"), t19)
+  let qth_mul = @tactics.prove(@parser.parse_term("∀ x1 x2 x3 x4 y1 y2 y3 y4.\n       quat(x1,x2,x3,x4) * quat(y1,y2,y3,y4) =\n       quat(x1 * y1 - x2 * y2 - x3 * y3 - x4 * y4,\n            x1 * y2 + x2 * y1 + x3 * y4 - x4 * y3,\n            x1 * y3 - x2 * y4 + x3 * y1 + x4 * y2,\n            x1 * y4 + x2 * y3 - x3 * y2 + x4 * y1)"), t19)
   let t20 = quat_components_conv(@calc_rat.real_rat_reduce_conv)
   rat_quat_mul_conv_c.set(@equal.thenc(@simp.rewr_conv(qth_mul), t20))
 }
@@ -142,7 +142,7 @@ pub fn rat_quat_mul_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// RAT_QUAT_INV_CONV
 fn step_7() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([@quaternion.quat_inv(), @quaternion.quat_eq(), @quaternion.quat_components()]))
-  let qth_inv = @tactics.prove(@parser.parse_term("forall x1 x2 x3 x4.\n       inv (quat(x1,x2,x3,x4)) =\n       quat(  x1 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x2 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x3 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x4 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2))"), t21)
+  let qth_inv = @tactics.prove(@parser.parse_term("∀ x1 x2 x3 x4.\n       inv (quat(x1,x2,x3,x4)) =\n       quat(  x1 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x2 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x3 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2),\n            --x4 / (x1 pow 2 + x2 pow 2 + x3 pow 2 + x4 pow 2))"), t21)
   let t22 = quat_components_conv(@calc_rat.real_rat_reduce_conv)
   rat_quat_inv_conv_c.set(@equal.thenc(@simp.rewr_conv(qth_inv), t22))
 }

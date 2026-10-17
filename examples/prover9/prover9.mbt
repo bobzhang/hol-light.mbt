@@ -698,7 +698,7 @@ pub fn front_disj_conv(x88 : @list.List[Sexp], x89 : @kernel.Term) -> @kernel.Th
 ///|
 /// AP_IMP
 fn step_5() -> Unit raise {
-  let pp : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(@class.taut(@parser.parse_term("(a ==> b) ==> forall x. x \\/ a ==> x \\/ b")))
+  let pp : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(@class.taut(@parser.parse_term("(a ==> b) ==> ∀ x. x \\/ a ==> x \\/ b")))
   ap_imp_c.set(fn(x91 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let t = x91
     fn(x94 : @kernel.Thm) -> @kernel.Thm raise {
@@ -1157,7 +1157,7 @@ pub fn prover9_v1(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// FRIEND_0
 fn step_8() -> Unit raise {
-  friend_0_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x:P. ~friend(x,x)) /\\ ~(a:P = b) /\\ (forall x y. friend(x,y) ==> friend(y,x))\n  ==> (forall x. ?y z. friend(x,y) /\\ ~friend(x,z)) \\/\n          (forall x. ?y z. ~(y = z) /\\ ~friend(x,y) /\\ ~friend(x,z))")))
+  friend_0_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x:P. ~friend(x,x)) /\\ ~(a:P = b) /\\ (∀ x y. friend(x,y) ==> friend(y,x))\n  ==> (∀ x. ?y z. friend(x,y) /\\ ~friend(x,z)) \\/\n          (∀ x. ?y z. ~(y = z) /\\ ~friend(x,y) /\\ ~friend(x,z))")))
 }
 
 ///|
@@ -1172,7 +1172,7 @@ pub fn friend_0() -> @kernel.Thm {
 ///|
 /// FRIEND_1
 fn step_9() -> Unit raise {
-  friend_1_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x:P. ~friend(x,x)) /\\ a IN s /\\ b IN s /\\ ~(a:P = b) /\\\n  (forall x y. friend(x,y) ==> friend(y,x))\n  ==> (forall x. x IN s ==> ?y z. y IN s /\\ z IN s /\\ friend(x,y) /\\ ~friend(x,z)) \\/\n      (forall x. x IN s ==> ?y z. y IN s /\\ z IN s /\\\n                      ~(y = z) /\\ ~friend(x,y) /\\ ~friend(x,z))")))
+  friend_1_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x:P. ~friend(x,x)) /\\ a IN s /\\ b IN s /\\ ~(a:P = b) /\\\n  (∀ x y. friend(x,y) ==> friend(y,x))\n  ==> (∀ x. x IN s ==> ?y z. y IN s /\\ z IN s /\\ friend(x,y) /\\ ~friend(x,z)) \\/\n      (∀ x. x IN s ==> ?y z. y IN s /\\ z IN s /\\\n                      ~(y = z) /\\ ~friend(x,y) /\\ ~friend(x,z))")))
 }
 
 ///|
@@ -1187,7 +1187,7 @@ pub fn friend_1() -> @kernel.Thm {
 ///|
 /// LOS
 fn step_10() -> Unit raise {
-  los_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x y z. P(x,y) /\\ P(y,z) ==> P(x,z)) /\\\n  (forall x y z. Q(x,y) /\\ Q(y,z) ==> Q(x,z)) /\\\n  (forall x y. Q(x,y) ==> Q(y,x)) /\\\n  (forall x y. P(x,y) \\/ Q(x,y)) /\\\n  ~P(a,b) /\\ ~Q(c,d)\n  ==> F")))
+  los_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x y z. P(x,y) /\\ P(y,z) ==> P(x,z)) /\\\n  (∀ x y z. Q(x,y) /\\ Q(y,z) ==> Q(x,z)) /\\\n  (∀ x y. Q(x,y) ==> Q(y,x)) /\\\n  (∀ x y. P(x,y) \\/ Q(x,y)) /\\\n  ~P(a,b) /\\ ~Q(c,d)\n  ==> F")))
 }
 
 ///|
@@ -1202,7 +1202,7 @@ pub fn los() -> @kernel.Thm {
 ///|
 /// CONWAY_1
 fn step_11() -> Unit raise {
-  conway_1_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x. 1 * x = x) /\\ (forall x. x * 1 = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x. 0 * x = 0) /\\ (forall x. x * 0 = 0) /\\\n   (forall x y z. x * (y + z) = (x * y) + (x * z)) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z)) /\\\n   (forall x y. star(x * y) = 1 + x * star(y * x) * y) /\\\n   (forall x y. star(x + y) = star(star(x) * y) * star(x))\n   ==> star(star(star(1))) = star(star(1))")))
+  conway_1_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x. 0 + x = x) /\\\n   (∀ x y. x + y = y + x) /\\\n   (∀ x y z. x + (y + z) = (x + y) + z) /\\\n   (∀ x. 1 * x = x) /\\ (∀ x. x * 1 = x) /\\\n   (∀ x y z. x * (y * z) = (x * y) * z) /\\\n   (∀ x. 0 * x = 0) /\\ (∀ x. x * 0 = 0) /\\\n   (∀ x y z. x * (y + z) = (x * y) + (x * z)) /\\\n   (∀ x y z. (x + y) * z = (x * z) + (y * z)) /\\\n   (∀ x y. star(x * y) = 1 + x * star(y * x) * y) /\\\n   (∀ x y. star(x + y) = star(star(x) * y) * star(x))\n   ==> star(star(star(1))) = star(star(1))")))
 }
 
 ///|
@@ -1217,7 +1217,7 @@ pub fn conway_1() -> @kernel.Thm {
 ///|
 /// CONWAY_2
 fn step_12() -> Unit raise {
-  conway_2_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x y. x + y = y + x) /\\\n   (forall x y z. x + (y + z) = (x + y) + z) /\\\n   (forall x. 1 * x = x) /\\ (forall x. x * 1 = x) /\\\n   (forall x y z. x * (y * z) = (x * y) * z) /\\\n   (forall x. 0 * x = 0) /\\ (forall x. x * 0 = 0) /\\\n   (forall x y z. x * (y + z) = (x * y) + (x * z)) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z)) /\\\n   (forall x y. star(x * y) = 1 + x * star(y * x) * y) /\\\n   (forall x y. star(x + y) = star(star(x) * y) * star(x))\n   ==> forall a. star(star(star(star(a)))) = star(star(star(a)))")))
+  conway_2_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x. 0 + x = x) /\\\n   (∀ x y. x + y = y + x) /\\\n   (∀ x y z. x + (y + z) = (x + y) + z) /\\\n   (∀ x. 1 * x = x) /\\ (∀ x. x * 1 = x) /\\\n   (∀ x y z. x * (y * z) = (x * y) * z) /\\\n   (∀ x. 0 * x = 0) /\\ (∀ x. x * 0 = 0) /\\\n   (∀ x y z. x * (y + z) = (x * y) + (x * z)) /\\\n   (∀ x y z. (x + y) * z = (x * z) + (y * z)) /\\\n   (∀ x y. star(x * y) = 1 + x * star(y * x) * y) /\\\n   (∀ x y. star(x + y) = star(star(x) * y) * star(x))\n   ==> ∀ a. star(star(star(star(a)))) = star(star(star(a)))")))
 }
 
 ///|
@@ -1232,7 +1232,7 @@ pub fn conway_2() -> @kernel.Thm {
 ///|
 /// ECKMAN_HILTON_1
 fn step_13() -> Unit raise {
-  eckman_hilton_1_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x. 1 * x = x) /\\\n  (forall x. x * 1 = x) /\\\n  (forall x. 1 + x = x) /\\\n  (forall x. x + 1 = x) /\\\n  (forall w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> forall a b. a * b = a + b")))
+  eckman_hilton_1_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x. 1 * x = x) /\\\n  (∀ x. x * 1 = x) /\\\n  (∀ x. 1 + x = x) /\\\n  (∀ x. x + 1 = x) /\\\n  (∀ w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> ∀ a b. a * b = a + b")))
 }
 
 ///|
@@ -1247,7 +1247,7 @@ pub fn eckman_hilton_1() -> @kernel.Thm {
 ///|
 /// ECKMAN_HILTON_2
 fn step_14() -> Unit raise {
-  eckman_hilton_2_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x. 1 * x = x) /\\\n  (forall x. x * 1 = x) /\\\n  (forall x. 1 + x = x) /\\\n  (forall x. x + 1 = x) /\\\n  (forall w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> forall a b. a * b = b * a")))
+  eckman_hilton_2_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x. 1 * x = x) /\\\n  (∀ x. x * 1 = x) /\\\n  (∀ x. 1 + x = x) /\\\n  (∀ x. x + 1 = x) /\\\n  (∀ w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> ∀ a b. a * b = b * a")))
 }
 
 ///|
@@ -1262,7 +1262,7 @@ pub fn eckman_hilton_2() -> @kernel.Thm {
 ///|
 /// ECKMAN_HILTON_3
 fn step_15() -> Unit raise {
-  eckman_hilton_3_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x. 1 * x = x) /\\\n  (forall x. x * 1 = x) /\\\n  (forall x. 0 + x = x) /\\\n  (forall x. x + 0 = x) /\\\n  (forall w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> forall a b. a * b = b * a")))
+  eckman_hilton_3_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x. 1 * x = x) /\\\n  (∀ x. x * 1 = x) /\\\n  (∀ x. 0 + x = x) /\\\n  (∀ x. x + 0 = x) /\\\n  (∀ w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> ∀ a b. a * b = b * a")))
 }
 
 ///|
@@ -1277,7 +1277,7 @@ pub fn eckman_hilton_3() -> @kernel.Thm {
 ///|
 /// ECKMAN_HILTON_4
 fn step_16() -> Unit raise {
-  eckman_hilton_4_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x. 1 * x = x) /\\\n  (forall x. x * 1 = x) /\\\n  (forall x. 0 + x = x) /\\\n  (forall x. x + 0 = x) /\\\n  (forall w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> forall a b. a + b = a * b")))
+  eckman_hilton_4_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x. 1 * x = x) /\\\n  (∀ x. x * 1 = x) /\\\n  (∀ x. 0 + x = x) /\\\n  (∀ x. x + 0 = x) /\\\n  (∀ w x y z. (w * x) + (y * z) = (w + y) * (x + z))\n  ==> ∀ a b. a + b = a * b")))
 }
 
 ///|
@@ -1292,7 +1292,7 @@ pub fn eckman_hilton_4() -> @kernel.Thm {
 ///|
 /// DOUBLE_DISTRIB
 fn step_17() -> Unit raise {
-  double_distrib_c.set(@lib.time(prover9_v1, @parser.parse_term("(forall x y z. (x * y) * z = (x * z) * (y * z)) /\\\n  (forall x y z. z * (x * y) = (z * x) * (z * y))\n  ==> forall a b c. (a * b) * (c * a) = (a * c) * (b * a)")))
+  double_distrib_c.set(@lib.time(prover9_v1, @parser.parse_term("(∀ x y z. (x * y) * z = (x * z) * (y * z)) /\\\n  (∀ x y z. z * (x * y) = (z * x) * (z * y))\n  ==> ∀ a b c. (a * b) * (c * a) = (a * c) * (b * a)")))
 }
 
 ///|
@@ -1307,7 +1307,7 @@ pub fn double_distrib() -> @kernel.Thm {
 ///|
 /// MOORE_PENROSE_PSEUDOINVERSE_UNIQUE
 fn step_18() -> Unit raise {
-  moore_penrose_pseudoinverse_unique_c.set(@lib.time(prover9_v1, @parser.parse_term("X * A * X = X /\\ transpose(A * X) = A * X /\\\n  A * X * A = A /\\ transpose(X * A) = X * A /\\\n  Y * A * Y = Y /\\ transpose(A * Y) = A * Y /\\\n  A * Y * A = A /\\ transpose(Y * A) = Y * A /\\\n  (forall x y z. (x * y) * z = x * (y * z)) /\\\n  (forall x y. transpose(x * y) = transpose(y) * transpose(x))\n  ==> X = Y")))
+  moore_penrose_pseudoinverse_unique_c.set(@lib.time(prover9_v1, @parser.parse_term("X * A * X = X /\\ transpose(A * X) = A * X /\\\n  A * X * A = A /\\ transpose(X * A) = X * A /\\\n  Y * A * Y = Y /\\ transpose(A * Y) = A * Y /\\\n  A * Y * A = A /\\ transpose(Y * A) = Y * A /\\\n  (∀ x y z. (x * y) * z = x * (y * z)) /\\\n  (∀ x y. transpose(x * y) = transpose(y) * transpose(x))\n  ==> X = Y")))
 }
 
 ///|

@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfies(), @sets.in_image()])), t1)
-  satisfies_image_c.set(@tactics.prove(@parser.parse_term("M satisfies (IMAGE f s) <=>\n   forall x v. valuation(M) v /\\ x IN s ==> holds M v (f x)"), t2))
+  satisfies_image_c.set(@tactics.prove(@parser.parse_term("M satisfies (IMAGE f s) <=>\n   ∀ x v. valuation(M) v /\\ x IN s ==> holds M v (f x)"), t2))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn horn() -> @kernel.Thm {
 /// DEFINITE_IMP_HORN
 fn step_4() -> Unit raise {
   let t3 = @simp.simp_tac(@list.List([definite(), horn(), @arith.le_refl()]))
-  definite_imp_horn_c.set(@tactics.prove(@parser.parse_term("forall cl. definite(cl) ==> horn(cl)"), t3))
+  definite_imp_horn_c.set(@tactics.prove(@parser.parse_term("∀ cl. definite(cl) ==> horn(cl)"), t3))
 }
 
 ///|
@@ -330,7 +330,7 @@ fn step_9() -> Unit raise {
   let t59 = @simp.rewrite_tac(@list.List([@class.not_exists_thm(), @equal.gsym(@sets.image_o())]))
   let t58 = @tactics.repeat_tac(@tactics.strip_tac)
   let t174 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfiable()])), t58), t59), t60), @tactics.eq_tac), t99), t103), t110), t111), @tactics.conj_tac), t114), t115), t117), t121), t122), @tactics.strip_tac), t133), t137), t138), t139), t140), t141), t142), t143), t144), t145), t146), t147), t149), t150), t151), t153), @class.cond_cases_tac), t154), t155), t159), t163), t164), t168), t169), t170), @tactics.strip_tac), t171), t172), t173)
-  reduce_horn_definite_c.set(@tactics.prove(@parser.parse_term("(forall c. c IN s ==> clause c) /\\\n   ~((Atom ff []) IN UNIONS s) /\\ ~(Not(Atom ff []) IN UNIONS s)\n   ==> (~(satisfiable (U:A->bool) (IMAGE interp s)) <=>\n        forall M. ~(Dom M = {}) /\\\n            M satisfies (IMAGE interp (IMAGE (falsify (Atom ff [])) s))\n            ==> forall v:num->A. valuation(M) v ==> holds M v (Atom ff []))"), t174))
+  reduce_horn_definite_c.set(@tactics.prove(@parser.parse_term("(∀ c. c IN s ==> clause c) /\\\n   ~((Atom ff []) IN UNIONS s) /\\ ~(Not(Atom ff []) IN UNIONS s)\n   ==> (~(satisfiable (U:A->bool) (IMAGE interp s)) <=>\n        ∀ M. ~(Dom M = {}) /\\\n            M satisfies (IMAGE interp (IMAGE (falsify (Atom ff [])) s))\n            ==> ∀ v:num->A. valuation(M) v ==> holds M v (Atom ff []))"), t174))
 }
 
 ///|
@@ -345,7 +345,7 @@ pub fn reduce_horn_definite() -> @kernel.Thm {
 ///|
 /// minmodel
 fn step_10() -> Unit raise {
-  minmodel_c.set(@pair.new_definition(@parser.parse_term("minmodel s =\n     herbase(functions s),\n     Fn,\n     (\\p zs. forall H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\\n                 H satisfies s\n                 ==> Pred(H) p zs)")))
+  minmodel_c.set(@pair.new_definition(@parser.parse_term("minmodel s =\n     herbase(functions s),\n     Fn,\n     (\\p zs. ∀ H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\\n                 H satisfies s\n                 ==> Pred(H) p zs)")))
 }
 
 ///|
@@ -372,7 +372,7 @@ fn step_11() -> Unit raise {
   let t192 = @simp.gen_rewrite_tac(fn(x191 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x191
   }, @list.List([@class.fun_eq_thm()]))
-  let t190 = @tactics.subgoal_then(@parser.parse_term("termval\n    (herbase (functions s),\n     Fn,\n     (\\p zs.\n          forall H. (Dom H = herbase (functions s)) /\\ (Fun H = Fn) /\\ H satisfies s\n              ==> Pred H p zs)) =\n    termval H"), fn(x188 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t190 = @tactics.subgoal_then(@parser.parse_term("termval\n    (herbase (functions s),\n     Fn,\n     (\\p zs.\n          ∀ H. (Dom H = herbase (functions s)) /\\ (Fun H = Fn) /\\ H satisfies s\n              ==> Pred H p zs)) =\n    termval H"), fn(x188 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x188
     @simp.rewrite_tac(@list.List([th]))
   })
@@ -393,7 +393,7 @@ fn step_11() -> Unit raise {
   let t177 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:num"), t176]))
   let t175 = @simp.rewrite_tac(@list.List([@resolution.atom_v1(), @theorems.left_imp_exists_thm()]))
   let t201 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t175), t177), t181), t182), @tactics.ap_term_tac), t184), t185), t186), t187), @tactics.strip_tac), t190), t192), t193), t195), t196), t198), t199), t200)
-  minmodel_minimal_c.set(@tactics.prove(@parser.parse_term("forall p v s.\n        atom p\n        ==> (holds (minmodel s) v p <=>\n             forall H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\ H satisfies s\n                 ==> holds H v p)"), t201))
+  minmodel_minimal_c.set(@tactics.prove(@parser.parse_term("∀ p v s.\n        atom p\n        ==> (holds (minmodel s) v p <=>\n             ∀ H. (Dom(H) = herbase(functions s)) /\\\n                 (Fun(H) = Fn) /\\ H satisfies s\n                 ==> holds H v p)"), t201))
 }
 
 ///|
@@ -412,7 +412,7 @@ fn step_12() -> Unit raise {
   let t203 = @simp.asm_rewrite_tac(@list.List([@lists.mem(), @lists.itlist(), @fol.holds_v1()]))
   let t202 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t205 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t202), @tactics.gen_tac), @lists.list_induct_tac), t203), t204)
-  holds_itlist_imp_c.set(@tactics.prove(@parser.parse_term("forall M v asm c.\n        holds M v (ITLIST (-->) asm c) <=>\n        (?p. MEM p asm /\\ ~(holds M v p)) \\/ holds M v c"), t205))
+  holds_itlist_imp_c.set(@tactics.prove(@parser.parse_term("∀ M v asm c.\n        holds M v (ITLIST (-->) asm c) <=>\n        (?p. MEM p asm /\\ ~(holds M v p)) \\/ holds M v c"), t205))
 }
 
 ///|
@@ -512,7 +512,7 @@ fn step_16() -> Unit raise {
   let t293 = @simp.rewrite_tac(@list.List([@lists.all_map()]))
   let t291 = @meson.asm_meson_tac(@list.List([]))
   let t290 = @simp.rewrite_tac(@list.List([@sets.in_delete()]))
-  let t289 = @tactics.subgoal_then(@parser.parse_term("forall q. q IN (cl DELETE p) ==> literal q /\\ ~(positive q)"), fn(x287 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t289 = @tactics.subgoal_then(@parser.parse_term("∀ q. q IN (cl DELETE p) ==> literal q /\\ ~(positive q)"), fn(x287 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x287
     @meson.meson_tac(@list.List([th, @resolution.positive()]))
   })
@@ -617,7 +617,7 @@ fn step_16() -> Unit raise {
   })
   let t206 = @simp.rewrite_tac(@list.List([horn()]))
   let t326 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t206), @tactics.strip_tac), t209), t210), t250), t254), t258), t262), t263), t264), @tactics.strip_tac), @pair.let_tac), t265), t266), t271), t272), t279), @tactics.ants_tac), t280), t281), t282), @tactics.disch_tac), @tactics.conj_tac), t309), @tactics.conj_tac), t318), t319), t320), t321), t322), t323), t324), t325)
-  holds_horn_c.set(@tactics.prove(@parser.parse_term("forall cl. horn(cl)\n        ==> ALL atom (hypotheses cl) /\\\n            (if definite(cl) then atom(conclusion cl)\n             else (conclusion cl = False)) /\\\n            forall M (v:num->A).\n                holds M v (interp cl) <=>\n                holds M v (ITLIST (-->) (hypotheses cl) (conclusion cl))"), t326))
+  holds_horn_c.set(@tactics.prove(@parser.parse_term("∀ cl. horn(cl)\n        ==> ALL atom (hypotheses cl) /\\\n            (if definite(cl) then atom(conclusion cl)\n             else (conclusion cl = False)) /\\\n            ∀ M (v:num->A).\n                holds M v (interp cl) <=>\n                holds M v (ITLIST (-->) (hypotheses cl) (conclusion cl))"), t326))
 }
 
 ///|
@@ -664,7 +664,7 @@ fn step_17() -> Unit raise {
   let t380 = @simp.asm_rewrite_tac(@list.List([]))
   let t379 = @tactics.exists_tac(@parser.parse_term("holds (minmodel (IMAGE interp s)) v"))
   let t382 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@lists.all_imp()), t379), t380), t381), @tactics.all_tac])
-  let t378 = @tactics.subgoal_then(@parser.parse_term("ALL (\\c. forall H. (Dom H = herbase (functions (IMAGE interp s))) /\\\n                 (Fun H = Fn) /\\\n                 H satisfies IMAGE interp s\n                 ==> holds H v c) asm"), fn(x375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t378 = @tactics.subgoal_then(@parser.parse_term("ALL (\\c. ∀ H. (Dom H = herbase (functions (IMAGE interp s))) /\\\n                 (Fun H = Fn) /\\\n                 H satisfies IMAGE interp s\n                 ==> holds H v c) asm"), fn(x375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s376 = @tactics.mp_tac(x375)
     fn(x377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s376(x377)
@@ -733,7 +733,7 @@ fn step_17() -> Unit raise {
   let t328 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t327 = @simp.rewrite_tac(@list.List([@fol.satisfies()]))
   let t406 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t327), t328), t329), @tactics.gen_tac), t330), t334), t341), t345), t346), t350), t351), t362), t364), t365), @tactics.strip_tac), t366), t367), @tactics.disch_tac), t368), t369), t370), t371), t372), t373), t374), @tactics.disch_tac), t378), t382), t383), t384), t385), t388), t389), t393), t402), t403), t404), t405)
-  minmodel_model_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN s ==> definite(cl))\n   ==> minmodel(IMAGE interp s) satisfies (IMAGE interp s)"), t406))
+  minmodel_model_c.set(@tactics.prove(@parser.parse_term("(∀ cl. cl IN s ==> definite(cl))\n   ==> minmodel(IMAGE interp s) satisfies (IMAGE interp s)"), t406))
 }
 
 ///|
@@ -781,7 +781,7 @@ fn step_18() -> Unit raise {
   let t408 = @tactics.conv_tac(@equal.once_depth_conv(@pair.let_conv))
   let t407 = @simp.asm_simp_tac(@list.List([conclusion(), breakhorn()]))
   let t435 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t407), t408), t409), t410), t411), t412), @tactics.eq_tac), t413), @tactics.strip_tac), t414), t415), t422), t423), @tactics.disch_tac), t424), t425), t426), @tactics.conj_tac), t427), t428), @tactics.conj_tac), t430), t431), t432), t433), t434)
-  conclusion_definite_c.set(@tactics.prove(@parser.parse_term("forall cl p. definite cl /\\ p IN cl /\\ positive p\n          ==> (conclusion cl = p)"), t435))
+  conclusion_definite_c.set(@tactics.prove(@parser.parse_term("∀ cl p. definite cl /\\ p IN cl /\\ positive p\n          ==> (conclusion cl = p)"), t435))
 }
 
 ///|
@@ -808,7 +808,7 @@ fn step_19() -> Unit raise {
   let t437 = @simp.asm_rewrite_tac(@list.List([definite()]))
   let t436 = @tactics.match_mp_tac(conclusion_definite())
   let t445 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t436), t437), t441), t444)
-  conclusion_definite_alt_c.set(@tactics.prove(@parser.parse_term("forall cl p. clause cl /\\ p IN cl /\\ positive p /\\\n          (forall q. q IN cl /\\ ~(q = p) ==> negative q)\n          ==> (conclusion cl = p)"), t445))
+  conclusion_definite_alt_c.set(@tactics.prove(@parser.parse_term("∀ cl p. clause cl /\\ p IN cl /\\ positive p /\\\n          (∀ q. q IN cl /\\ ~(q = p) ==> negative q)\n          ==> (conclusion cl = p)"), t445))
 }
 
 ///|
@@ -833,7 +833,7 @@ fn step_20() -> Unit raise {
   let t447 = @tactics.conv_tac(@equal.once_depth_conv(@pair.let_conv))
   let t446 = @simp.asm_simp_tac(@list.List([hypotheses(), breakhorn(), conclusion()]))
   let t455 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t446), t447), t448), t449), t450), t451), t452), t453), t454)
-  hypotheses_conclusion_c.set(@tactics.prove(@parser.parse_term("forall cl. definite cl\n        ==> (set_of_list(hypotheses cl) =\n             IMAGE (~~) (cl DELETE (conclusion cl)))"), t455))
+  hypotheses_conclusion_c.set(@tactics.prove(@parser.parse_term("∀ cl. definite cl\n        ==> (set_of_list(hypotheses cl) =\n             IMAGE (~~) (cl DELETE (conclusion cl)))"), t455))
 }
 
 ///|
@@ -875,7 +875,7 @@ pub fn gbackchain_cases() -> @kernel.Thm {
 ///|
 /// gbackchain_RULES, gbackchain_INDUCT, gbackchain_CASES
 fn step_21() -> Unit raise {
-  let (gbackchain_rules, gbackchain_induct, gbackchain_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("forall cl i ns. cl IN s /\\\n               (forall x. i(x) IN herbase(functions(IMAGE interp s))) /\\\n               ALL2 (gbackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> gbackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))"))
+  let (gbackchain_rules, gbackchain_induct, gbackchain_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("∀ cl i ns. cl IN s /\\\n               (∀ x. i(x) IN herbase(functions(IMAGE interp s))) /\\\n               ALL2 (gbackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> gbackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))"))
   gbackchain_rules_c.set(gbackchain_rules)
   gbackchain_induct_c.set(gbackchain_induct)
   gbackchain_cases_c.set(gbackchain_cases)
@@ -887,7 +887,7 @@ fn step_22() -> Unit raise {
   let t457 = @simp.rewrite_tac(@list.List([@theorems.conj_aci()]))
   let t456 = @simp.asm_rewrite_tac(@list.List([@lists.all2(), @lists.all(), @lists.length(), @nums.not_suc(), @nums.suc_inj()]))
   let t458 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @lists.list_induct_tac), t456), t457)
-  all2_triv_c.set(@tactics.prove(@parser.parse_term("forall l1 l2. ALL2 (\\n. P) l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\ ALL P l2"), t458))
+  all2_triv_c.set(@tactics.prove(@parser.parse_term("∀ l1 l2. ALL2 (\\n. P) l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\ ALL P l2"), t458))
 }
 
 ///|
@@ -1010,7 +1010,7 @@ fn step_23() -> Unit raise {
       })(x530))
     })(x531)(x531)
   }), t532), t536), t538), t539), t540)
-  gbackchain_sound_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN s ==> definite(cl)) /\\ valuation (minmodel (IMAGE interp s)) v\n   ==> forall n p. gbackchain s n p ==> holds (minmodel(IMAGE interp s)) v p"), t541))
+  gbackchain_sound_c.set(@tactics.prove(@parser.parse_term("(∀ cl. cl IN s ==> definite(cl)) /\\ valuation (minmodel (IMAGE interp s)) v\n   ==> ∀ n p. gbackchain s n p ==> holds (minmodel(IMAGE interp s)) v p"), t541))
 }
 
 ///|
@@ -1065,7 +1065,7 @@ fn step_24() -> Unit raise {
   let t698 = @parser.parse_term("l:form list")
   let t725 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.spec_tac(@parser.parse_term("hypotheses cl"), t698), t700), @lists.list_induct_tac), t701), t703), t709), t718), t719), t722), t723), t724), @tactics.all_tac])
   let t697 = @tactics.exists_tac(@parser.parse_term("?ns. ALL2 (gbackchain s) ns (MAP (formsubst v) (hypotheses cl))"))
-  let t696 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c")))
+  let t696 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("∀ b. (a ==> b) /\\ (b ==> c) ==> a ==> c")))
   let t694 = @meson.asm_meson_tac(@list.List([]))
   let t693 = @simp.rewrite_tac(@list.List([@equal.gsym(@lists.all_mem())]))
   let t695 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("ALL atom (hypotheses cl)")), t693), t694), @tactics.all_tac])
@@ -1111,7 +1111,7 @@ fn step_24() -> Unit raise {
   let t660 = @simp.rewrite_tac(@list.List([@fol.holds_v1()]))
   let t659 = @fol.expand_tac("gbmod")
   let t673 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@resolution.atom_v1(), @theorems.left_imp_exists_thm()])), t659), t660), t661), t662), @tactics.disch_tac), @tactics.ap_term_tac), @tactics.abs_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t663), t664), t665), @tactics.disch_tac), t666), t668), t670), t671), t672), @tactics.all_tac])
-  let t658 = @tactics.subgoal_then(@parser.parse_term("forall p. atom p ==> (holds gbmod v p <=>\n                    ?n. gbackchain s n (formsubst v p))"), fn(x655 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t658 = @tactics.subgoal_then(@parser.parse_term("∀ p. atom p ==> (holds gbmod v p <=>\n                    ?n. gbackchain s n (formsubst v p))"), fn(x655 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s656 = @tactics.assume_tac(x655)
     fn(x657 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s656(x657)
@@ -1268,7 +1268,7 @@ fn step_24() -> Unit raise {
     }
   }))
   let t732 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t548), t555), t558), t565), t572), t579), t580), t588), t592), t593), t594), @tactics.conj_tac), t611), t612), t613), t614), t621), t622), t630), t634), t635), t646), t647), @tactics.strip_tac), t648), t649), t650), t651), t652), t653), t654), t658), t673), t677), t688), t692), t695), t696), t697), @tactics.conj_tac), t725), t728), t729), t730), t731)
-  gbackchain_complete_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\ (FV p = {}) /\\ (forall v. holds (minmodel (IMAGE interp s)) v p)\n   ==> ?n. gbackchain s n p"), t732))
+  gbackchain_complete_c.set(@tactics.prove(@parser.parse_term("(∀ cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\ (FV p = {}) /\\ (∀ v. holds (minmodel (IMAGE interp s)) v p)\n   ==> ?n. gbackchain s n p"), t732))
 }
 
 ///|
@@ -1308,7 +1308,7 @@ fn step_25() -> Unit raise {
   let t733 = @simp.asm_rewrite_tac(@list.List([]))
   let t755 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(gbackchain_complete())), t733), @tactics.gen_tac), t734), t754])
   let t756 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t755)
-  gbackchain_minimal_c.set(@tactics.prove(@parser.parse_term("forall s p. (forall cl. cl IN s ==> definite cl) /\\ atom p /\\ (FV p = {})\n         ==> forall v. holds (minmodel (IMAGE interp s)) v p <=> ?n. gbackchain s n p"), t756))
+  gbackchain_minimal_c.set(@tactics.prove(@parser.parse_term("∀ s p. (∀ cl. cl IN s ==> definite cl) /\\ atom p /\\ (FV p = {})\n         ==> ∀ v. holds (minmodel (IMAGE interp s)) v p <=> ?n. gbackchain s n p"), t756))
 }
 
 ///|
@@ -1323,7 +1323,7 @@ pub fn gbackchain_minimal() -> @kernel.Thm {
 ///|
 /// iminmodel
 fn step_26() -> Unit raise {
-  iminmodel_c.set(@pair.new_definition(@parser.parse_term("iminmodel s =\n     terms(functions s),\n     Fn,\n     (\\p zs. forall C. (Dom(C) = terms(functions s)) /\\\n                 (Fun(C) = Fn) /\\\n                 (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n                 ==> Pred(C) p zs)")))
+  iminmodel_c.set(@pair.new_definition(@parser.parse_term("iminmodel s =\n     terms(functions s),\n     Fn,\n     (\\p zs. ∀ C. (Dom(C) = terms(functions s)) /\\\n                 (Fun(C) = Fn) /\\\n                 (∀ v p. p IN s /\\ valuation C v ==> holds C v p)\n                 ==> Pred(C) p zs)")))
 }
 
 ///|
@@ -1350,7 +1350,7 @@ fn step_27() -> Unit raise {
   let t774 = @simp.gen_rewrite_tac(fn(x773 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x773
   }, @list.List([@class.fun_eq_thm()]))
-  let t772 = @tactics.subgoal_then(@parser.parse_term("termval\n    (terms (functions s),\n     Fn,\n     (\\p zs.\n          forall C. (Dom C = terms (functions s)) /\\ (Fun C = Fn) /\\\n              (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n              ==> Pred C p zs)) =\n    termval C"), fn(x770 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t772 = @tactics.subgoal_then(@parser.parse_term("termval\n    (terms (functions s),\n     Fn,\n     (\\p zs.\n          ∀ C. (Dom C = terms (functions s)) /\\ (Fun C = Fn) /\\\n              (∀ v p. p IN s /\\ valuation C v ==> holds C v p)\n              ==> Pred C p zs)) =\n    termval C"), fn(x770 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x770
     @simp.rewrite_tac(@list.List([th]))
   })
@@ -1371,7 +1371,7 @@ fn step_27() -> Unit raise {
   let t759 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:num"), t758]))
   let t757 = @simp.rewrite_tac(@list.List([@resolution.atom_v1(), @theorems.left_imp_exists_thm()]))
   let t783 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t757), t759), t763), t764), @tactics.ap_term_tac), t766), t767), t768), t769), @tactics.strip_tac), t772), t774), t775), t777), t778), t780), t781), t782)
-  iminmodel_minimal_c.set(@tactics.prove(@parser.parse_term("forall p v s.\n      atom p\n      ==> (holds (iminmodel s) v p <=>\n           forall C. (Dom(C) = terms(functions s)) /\\\n               (Fun(C) = Fn) /\\\n               (forall v q. q IN s /\\ valuation C v ==> holds C v q)\n               ==> holds C v p)"), t783))
+  iminmodel_minimal_c.set(@tactics.prove(@parser.parse_term("∀ p v s.\n      atom p\n      ==> (holds (iminmodel s) v p <=>\n           ∀ C. (Dom(C) = terms(functions s)) /\\\n               (Fun(C) = Fn) /\\\n               (∀ v q. q IN s /\\ valuation C v ==> holds C v q)\n               ==> holds C v p)"), t783))
 }
 
 ///|
@@ -1432,7 +1432,7 @@ fn step_28() -> Unit raise {
   let t825 = @simp.asm_rewrite_tac(@list.List([]))
   let t824 = @tactics.exists_tac(@parser.parse_term("holds (iminmodel (IMAGE interp s)) v"))
   let t838 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@lists.all_imp()), t824), t825), t826), t833), t836), t837), @tactics.all_tac])
-  let t823 = @tactics.subgoal_then(@parser.parse_term("ALL (\\c. forall C. (Dom C = terms (functions (IMAGE interp s))) /\\\n                 (Fun C = Fn) /\\\n                 (forall v p. p IN (IMAGE interp s) /\\ valuation C v ==> holds C v p)\n                 ==> holds C v c) asm"), fn(x820 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t823 = @tactics.subgoal_then(@parser.parse_term("ALL (\\c. ∀ C. (Dom C = terms (functions (IMAGE interp s))) /\\\n                 (Fun C = Fn) /\\\n                 (∀ v p. p IN (IMAGE interp s) /\\ valuation C v ==> holds C v p)\n                 ==> holds C v c) asm"), fn(x820 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s821 = @tactics.mp_tac(x820)
     fn(x822 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s821(x822)
@@ -1483,7 +1483,7 @@ fn step_28() -> Unit raise {
   let t785 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t784 = @simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()]))
   let t860 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t784), t785), t786), @tactics.disch_tac), t790), t791), t795), t796), t807), t809), t810), @tactics.strip_tac), t811), t812), @tactics.disch_tac), t813), t814), t815), t816), t817), t818), t819), @tactics.disch_tac), t823), t838), t839), t840), t841), t844), t845), t849), t856), t857), t858), t859)
-  iminmodel_model_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN s ==> definite(cl))\n   ==> forall v p. p IN s /\\ (forall x. v(x) IN terms(functions(IMAGE interp s)))\n             ==> holds (iminmodel(IMAGE interp s)) v (interp p)"), t860))
+  iminmodel_model_c.set(@tactics.prove(@parser.parse_term("(∀ cl. cl IN s ==> definite(cl))\n   ==> ∀ v p. p IN s /\\ (∀ x. v(x) IN terms(functions(IMAGE interp s)))\n             ==> holds (iminmodel(IMAGE interp s)) v (interp p)"), t860))
 }
 
 ///|
@@ -1514,7 +1514,7 @@ fn step_29() -> Unit raise {
   }))
   let t861 = @tactics.repeat_tac(@tactics.gen_tac)
   let t872 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fol.interpretation(), iminmodel(), @fol.language(), @fol.dom_def()]))), t861), t868), t869), t870), t871)
-  iminmodel_interpretation_c.set(@tactics.prove(@parser.parse_term("forall s. interpretation(language s) (iminmodel s)"), t872))
+  iminmodel_interpretation_c.set(@tactics.prove(@parser.parse_term("∀ s. interpretation(language s) (iminmodel s)"), t872))
 }
 
 ///|
@@ -1556,7 +1556,7 @@ pub fn ibackchain_cases() -> @kernel.Thm {
 ///|
 /// ibackchain_RULES, ibackchain_INDUCT, ibackchain_CASES
 fn step_30() -> Unit raise {
-  let (ibackchain_rules, ibackchain_induct, ibackchain_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("forall cl i ns. cl IN s /\\ (forall x. i(x) IN terms(functions(IMAGE interp s))) /\\\n               ALL2 (ibackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> ibackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))"))
+  let (ibackchain_rules, ibackchain_induct, ibackchain_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("∀ cl i ns. cl IN s /\\ (∀ x. i(x) IN terms(functions(IMAGE interp s))) /\\\n               ALL2 (ibackchain s) ns (MAP (formsubst i) (hypotheses cl))\n               ==> ibackchain s (ITLIST (+) ns 1)\n                                (formsubst i (conclusion cl))"))
   ibackchain_rules_c.set(ibackchain_rules)
   ibackchain_induct_c.set(ibackchain_induct)
   ibackchain_cases_c.set(ibackchain_cases)
@@ -1570,7 +1570,7 @@ fn step_31() -> Unit raise {
   let t952 = @simp.rewrite_tac(@list.List([@equal.gsym(@lists.all_mem())]))
   let t951 = @simp.rewrite_tac(@list.List([@lists.all_map()]))
   let t950 = @simp.asm_rewrite_tac(@list.List([]))
-  let t949 = @tactics.undisch_tac(@parser.parse_term("ALL\n       (\\p. (forall x. v x IN terms (functions (IMAGE interp s)))\n            ==> holds (iminmodel (IMAGE interp s)) v p)\n       (MAP (formsubst i) (hypotheses cl))"))
+  let t949 = @tactics.undisch_tac(@parser.parse_term("ALL\n       (\\p. (∀ x. v x IN terms (functions (IMAGE interp s)))\n            ==> holds (iminmodel (IMAGE interp s)) v p)\n       (MAP (formsubst i) (hypotheses cl))"))
   let t946 = @simp.asm_rewrite_tac(@list.List([@fol.valuation(), iminmodel(), @fol.dom_def()]))
   let t945 = @simp.rewrite_tac(@list.List([@fol.language(), @pair.fst()]))
   let t942 = @drule.match_mp(@logic_canon.stupid_canondom_lemma())
@@ -1668,7 +1668,7 @@ fn step_31() -> Unit raise {
   let t874 = @tactics.match_mp_tac(ibackchain_induct())
   let t873 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t955 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), @tactics.gen_tac), t873), t874), t875), t878), t879), t880), @tactics.strip_tac), @tactics.disch_tac), t886), t893), t894), t901), t902), t906), t907), t918), t919), @tactics.strip_tac), t920), t921), t922), t923), @tactics.conj_tac), t948), t949), t950), t951), t952), t953), t954)
-  ibackchain_sound_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN s ==> definite(cl))\n   ==> forall v n p. ibackchain s n p /\\\n               (forall x. v(x) IN terms(functions(IMAGE interp s)))\n               ==> holds (iminmodel(IMAGE interp s)) v p"), t955))
+  ibackchain_sound_c.set(@tactics.prove(@parser.parse_term("(∀ cl. cl IN s ==> definite(cl))\n   ==> ∀ v n p. ibackchain s n p /\\\n               (∀ x. v(x) IN terms(functions(IMAGE interp s)))\n               ==> holds (iminmodel(IMAGE interp s)) v p"), t955))
 }
 
 ///|
@@ -1726,7 +1726,7 @@ fn step_32() -> Unit raise {
   let t1096 = @parser.parse_term("l:form list")
   let t1123 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.spec_tac(@parser.parse_term("hypotheses cl"), t1096), t1098), @lists.list_induct_tac), t1099), t1101), t1107), t1116), t1117), t1120), t1121), t1122), @tactics.all_tac])
   let t1095 = @tactics.exists_tac(@parser.parse_term("?ns. ALL2 (ibackchain s) ns (MAP (formsubst v) (hypotheses cl))"))
-  let t1094 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c")))
+  let t1094 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("∀ b. (a ==> b) /\\ (b ==> c) ==> a ==> c")))
   let t1092 = @meson.asm_meson_tac(@list.List([]))
   let t1091 = @simp.rewrite_tac(@list.List([@equal.gsym(@lists.all_mem())]))
   let t1093 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("ALL atom (hypotheses cl)")), t1091), t1092), @tactics.all_tac])
@@ -1772,7 +1772,7 @@ fn step_32() -> Unit raise {
   let t1058 = @simp.rewrite_tac(@list.List([@fol.holds_v1()]))
   let t1057 = @fol.expand_tac("gbmod")
   let t1071 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@resolution.atom_v1(), @theorems.left_imp_exists_thm()])), t1057), t1058), t1059), t1060), @tactics.disch_tac), @tactics.ap_term_tac), @tactics.abs_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t1061), t1062), t1063), @tactics.disch_tac), t1064), t1066), t1068), t1069), t1070), @tactics.all_tac])
-  let t1056 = @tactics.subgoal_then(@parser.parse_term("forall p. atom p ==> (holds gbmod v p <=>\n                    ?n. ibackchain s n (formsubst v p))"), fn(x1053 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1056 = @tactics.subgoal_then(@parser.parse_term("∀ p. atom p ==> (holds gbmod v p <=>\n                    ?n. ibackchain s n (formsubst v p))"), fn(x1053 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1054 = @tactics.assume_tac(x1053)
     fn(x1055 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1054(x1055)
@@ -1909,7 +1909,7 @@ fn step_32() -> Unit raise {
     }
   }))
   let t1133 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t962), t969), t972), t979), @tactics.ants_tac), t980), t987), t988), t996), t1000), t1001), t1002), @tactics.conj_tac), t1011), t1012), t1013), t1020), t1028), t1032), t1033), t1044), t1045), @tactics.strip_tac), t1046), t1047), t1048), t1049), t1050), t1051), t1052), t1056), t1071), t1075), t1086), t1090), t1093), t1094), t1095), @tactics.conj_tac), t1123), t1126), t1127), t1128), t1129), t1130), t1131), t1132)
-  ibackchain_complete_c.set(@tactics.prove(@parser.parse_term("(forall cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\\n   (forall v. (forall x. v(x) IN terms(functions(IMAGE interp s)))\n        ==> holds (iminmodel (IMAGE interp s)) v p)\n   ==> ?n. ibackchain s n p"), t1133))
+  ibackchain_complete_c.set(@tactics.prove(@parser.parse_term("(∀ cl. cl IN s ==> definite(cl)) /\\\n   atom(p) /\\\n   (∀ v. (∀ x. v(x) IN terms(functions(IMAGE interp s)))\n        ==> holds (iminmodel (IMAGE interp s)) v p)\n   ==> ?n. ibackchain s n p"), t1133))
 }
 
 ///|
@@ -1925,7 +1925,7 @@ pub fn ibackchain_complete() -> @kernel.Thm {
 /// IBACKCHAIN_MINIMAL
 fn step_33() -> Unit raise {
   let t1134 = @meson.meson_tac(@list.List([ibackchain_sound(), ibackchain_complete()]))
-  ibackchain_minimal_c.set(@tactics.prove(@parser.parse_term("forall s p. (forall cl. cl IN s ==> definite cl) /\\ atom p\n         ==> ((forall v. (forall x. v(x) IN terms(functions(IMAGE interp s)))\n                   ==> holds (iminmodel(IMAGE interp s)) v p) <=>\n              ?n. ibackchain s n p)"), t1134))
+  ibackchain_minimal_c.set(@tactics.prove(@parser.parse_term("∀ s p. (∀ cl. cl IN s ==> definite cl) /\\ atom p\n         ==> ((∀ v. (∀ x. v(x) IN terms(functions(IMAGE interp s)))\n                   ==> holds (iminmodel(IMAGE interp s)) v p) <=>\n              ?n. ibackchain s n p)"), t1134))
 }
 
 ///|

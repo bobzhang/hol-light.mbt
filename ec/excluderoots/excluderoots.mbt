@@ -146,8 +146,8 @@ fn step_2() -> Unit raise {
   let lemma_mulx = @tactics.prove(@parser.parse_term("((x:int) pow n == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (x pow (n + 1) == c2 * x pow 3 + c1 * x pow 2 + c0 * x + &0) (mod p)"), t78)
   let t79 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.mult_2(), @int.int_pow_add()])), @int.integer_tac)
   let lemma_sqr = @tactics.prove(@parser.parse_term("((x:int) pow n == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> (x pow (2 * n) ==\n          (c2 pow 2) * x pow 4 + (&2 * c1 * c2) * x pow 3 +\n          (c1 pow 2 + &2 * c0 * c2) * x pow 2 +\n          (&2 * c0 * c1) * x +\n          c0 pow 2) (mod p)"), t79)
-  let lemma_mulc = @tactics.prove(@parser.parse_term("(y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> forall c. (c * y == (c * c2) * x pow 2 + (c * c1) * x + c * c0) (mod p)"), @int.integer_tac)
-  let pth0 = @int.integer_rule(@parser.parse_term("forall p. ((x:int) pow 0 == &0 * x pow 2 + &0 * x + &1)\n                               (mod &p)"))
+  let lemma_mulc = @tactics.prove(@parser.parse_term("(y:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n     ==> ∀ c. (c * y == (c * c2) * x pow 2 + (c * c1) * x + c * c0) (mod p)"), @int.integer_tac)
+  let pth0 = @int.integer_rule(@parser.parse_term("∀ p. ((x:int) pow 0 == &0 * x pow 2 + &0 * x + &1)\n                               (mod &p)"))
   exclude_modular_cubic_roots_c.set(fn(x80 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let tm = x80
     fn(x81 : @kernel.Thm) -> @kernel.Thm raise {

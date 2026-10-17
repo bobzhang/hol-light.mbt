@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   let t1 = @meson.asm_meson_tac(@list.List([@lists.not_cons_nil()]))
   let t2 = @meson.meson_tac(@list.List([@lists.list_cases()]))
   let t3 = @list.List([@tactics.then_tac(@tactics.strip_tac, @tactics.eq_tac), t2, @tactics.strip_tac, t1])
-  not_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l. ~(l = []) <=> ?(h:A) t. l = CONS h t"), t3))
+  not_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("∀ l. ~(l = []) <=> ?(h:A) t. l = CONS h t"), t3))
 }
 
 ///|

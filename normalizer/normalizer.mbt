@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let t29 = @simp.asm_rewrite_tac(@list.List([@arith.mult_clauses()]))
   let t28 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A m:num n. pwr (pwr x m) n = pwr x (m * n)"),
+    @parser.parse_term("∀ x:A m:num n. pwr (pwr x m) n = pwr x (m * n)"),
     fn(
       x26 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -45,7 +45,7 @@ fn step_1() -> Unit raise {
   ])
   let t23 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall x:A y:A n:num. pwr (mul x y) n = mul (pwr x n) (pwr y n)",
+      "∀ x:A y:A n:num. pwr (mul x y) n = mul (pwr x n) (pwr y n)",
     ),
     fn(
       x20 : @kernel.Thm,
@@ -104,7 +104,7 @@ fn step_1() -> Unit raise {
   ])
   let t17 = @tactics.subgoal_then(
     @parser.parse_term(
-      "forall m n:num x:A. pwr x (m + n) :A = mul (pwr x m) (pwr x n)",
+      "∀ m n:num x:A. pwr x (m + n) :A = mul (pwr x m) (pwr x n)",
     ),
     fn(
       x14 : @kernel.Thm,
@@ -157,9 +157,9 @@ fn step_1() -> Unit raise {
   let t13 = @simp.asm_rewrite_tac(
     @list.List([@calc_num.num_conv(@parser.parse_term("2")), t12]),
   )
-  let t7 = @parser.parse_term("forall x:A y. mul x y :A = mul y x")
-  let t8 = @parser.parse_term("forall x:A y z. mul x (mul y z) = mul (mul x y) z")
-  let t9 = @parser.parse_term("forall x:A y. add x y :A = add y x")
+  let t7 = @parser.parse_term("∀ x:A y. mul x y :A = mul y x")
+  let t8 = @parser.parse_term("∀ x:A y z. mul x (mul y z) = mul (mul x y) z")
+  let t9 = @parser.parse_term("∀ x:A y. add x y :A = add y x")
   let t10 = @tactics.then_tac(
     @tactics.map_every(
       fn(
@@ -209,7 +209,7 @@ fn step_1() -> Unit raise {
         })
       },
       @list.List([
-        @parser.parse_term("forall x:A y z. add x (add y z) = add (add x y) z"),
+        @parser.parse_term("∀ x:A y z. add x (add y z) = add (add x y) z"),
         t9,
         t8,
         t7,
@@ -233,7 +233,7 @@ fn step_1() -> Unit raise {
                           @tactics.strip_tac,
                           @tactics.subgoal_then(
                             @parser.parse_term(
-                              "(forall m:A n. add m n = add n m) /\\\n      (forall m n p. add (add m n) p = add m (add n p)) /\\\n      (forall m n p. add m (add n p) = add n (add m p)) /\\\n      (forall x. add x r0 = x) /\\\n      (forall m n. mul m n = mul n m) /\\\n      (forall m n p. mul (mul m n) p = mul m (mul n p)) /\\\n      (forall m n p. mul m (mul n p) = mul n (mul m p)) /\\\n      (forall m n p. mul (add m n) p = add (mul m p) (mul n p)) /\\\n      (forall x. mul x r1 = x) /\\\n      (forall x. mul x r0 = r0)",
+                              "(∀ m:A n. add m n = add n m) /\\\n      (∀ m n p. add (add m n) p = add m (add n p)) /\\\n      (∀ m n p. add m (add n p) = add n (add m p)) /\\\n      (∀ x. add x r0 = x) /\\\n      (∀ m n. mul m n = mul n m) /\\\n      (∀ m n p. mul (mul m n) p = mul m (mul n p)) /\\\n      (∀ m n p. mul m (mul n p) = mul n (mul m p)) /\\\n      (∀ m n p. mul (add m n) p = add (mul m p) (mul n p)) /\\\n      (∀ x. mul x r1 = x) /\\\n      (∀ x. mul x r0 = r0)",
                             ),
                             fn(
                               x1 : @kernel.Thm,
@@ -326,7 +326,7 @@ fn step_1() -> Unit raise {
   )
   let semiring_pths = @tactics.prove(
     @parser.parse_term(
-      "(forall x:A y z. add x (add y z) = add (add x y) z) /\\\n     (forall x y. add x y = add y x) /\\\n     (forall x. add r0 x = x) /\\\n     (forall x y z. mul x (mul y z) = mul (mul x y) z) /\\\n     (forall x y. mul x y = mul y x) /\\\n     (forall x. mul r1 x = x) /\\\n     (forall x. mul r0 x = r0) /\\\n     (forall x y z. mul x (add y z) = add (mul x y) (mul x z)) /\\\n     (forall x. pwr x 0 = r1) /\\\n     (forall x n. pwr x (SUC n) = mul x (pwr x n))\n     ==> (mul r1 x = x) /\\\n         (add (mul a m) (mul b m) = mul (add a b) m) /\\\n         (add (mul a m) m = mul (add a r1) m) /\\\n         (add m (mul a m) = mul (add a r1) m) /\\\n         (add m m = mul (add r1 r1) m) /\\\n         (mul r0 m = r0) /\\\n         (add r0 a = a) /\\\n         (add a r0 = a) /\\\n         (mul a b = mul b a) /\\\n         (mul (add a b) c = add (mul a c) (mul b c)) /\\\n         (mul r0 a = r0) /\\\n         (mul a r0 = r0) /\\\n         (mul r1 a = a) /\\\n         (mul a r1 = a) /\\\n         (mul (mul lx ly) (mul rx ry) = mul (mul lx rx) (mul ly ry)) /\\\n         (mul (mul lx ly) (mul rx ry) = mul lx (mul ly (mul rx ry))) /\\\n         (mul (mul lx ly) (mul rx ry) = mul rx (mul (mul lx ly) ry)) /\\\n         (mul (mul lx ly) rx = mul (mul lx rx) ly) /\\\n         (mul (mul lx ly) rx = mul lx (mul ly rx)) /\\\n         (mul lx rx = mul rx lx) /\\\n         (mul lx (mul rx ry) = mul (mul lx rx) ry) /\\\n         (mul lx (mul rx ry) = mul rx (mul lx ry)) /\\\n         (add (add a b) (add c d) = add (add a c) (add b d)) /\\\n         (add (add a b) c = add a (add b c)) /\\\n         (add a (add c d) = add c (add a d)) /\\\n         (add (add a b) c = add (add a c) b) /\\\n         (add a c = add c a) /\\\n         (add a (add c d) = add (add a c) d) /\\\n         (mul (pwr x p) (pwr x q) = pwr x (p + q)) /\\\n         (mul x (pwr x q) = pwr x (SUC q)) /\\\n         (mul (pwr x q) x = pwr x (SUC q)) /\\\n         (mul x x = pwr x 2) /\\\n         (pwr (mul x y) q = mul (pwr x q) (pwr y q)) /\\\n         (pwr (pwr x p) q = pwr x (p * q)) /\\\n         (pwr x 0 = r1) /\\\n         (pwr x 1 = x) /\\\n         (mul x (add y z) = add (mul x y) (mul x z)) /\\\n         (pwr x (SUC q) = mul x (pwr x q))",
+      "(∀ x:A y z. add x (add y z) = add (add x y) z) /\\\n     (∀ x y. add x y = add y x) /\\\n     (∀ x. add r0 x = x) /\\\n     (∀ x y z. mul x (mul y z) = mul (mul x y) z) /\\\n     (∀ x y. mul x y = mul y x) /\\\n     (∀ x. mul r1 x = x) /\\\n     (∀ x. mul r0 x = r0) /\\\n     (∀ x y z. mul x (add y z) = add (mul x y) (mul x z)) /\\\n     (∀ x. pwr x 0 = r1) /\\\n     (∀ x n. pwr x (SUC n) = mul x (pwr x n))\n     ==> (mul r1 x = x) /\\\n         (add (mul a m) (mul b m) = mul (add a b) m) /\\\n         (add (mul a m) m = mul (add a r1) m) /\\\n         (add m (mul a m) = mul (add a r1) m) /\\\n         (add m m = mul (add r1 r1) m) /\\\n         (mul r0 m = r0) /\\\n         (add r0 a = a) /\\\n         (add a r0 = a) /\\\n         (mul a b = mul b a) /\\\n         (mul (add a b) c = add (mul a c) (mul b c)) /\\\n         (mul r0 a = r0) /\\\n         (mul a r0 = r0) /\\\n         (mul r1 a = a) /\\\n         (mul a r1 = a) /\\\n         (mul (mul lx ly) (mul rx ry) = mul (mul lx rx) (mul ly ry)) /\\\n         (mul (mul lx ly) (mul rx ry) = mul lx (mul ly (mul rx ry))) /\\\n         (mul (mul lx ly) (mul rx ry) = mul rx (mul (mul lx ly) ry)) /\\\n         (mul (mul lx ly) rx = mul (mul lx rx) ly) /\\\n         (mul (mul lx ly) rx = mul lx (mul ly rx)) /\\\n         (mul lx rx = mul rx lx) /\\\n         (mul lx (mul rx ry) = mul (mul lx rx) ry) /\\\n         (mul lx (mul rx ry) = mul rx (mul lx ry)) /\\\n         (add (add a b) (add c d) = add (add a c) (add b d)) /\\\n         (add (add a b) c = add a (add b c)) /\\\n         (add a (add c d) = add c (add a d)) /\\\n         (add (add a b) c = add (add a c) b) /\\\n         (add a c = add c a) /\\\n         (add a (add c d) = add (add a c) d) /\\\n         (mul (pwr x p) (pwr x q) = pwr x (p + q)) /\\\n         (mul x (pwr x q) = pwr x (SUC q)) /\\\n         (mul (pwr x q) x = pwr x (SUC q)) /\\\n         (mul x x = pwr x 2) /\\\n         (pwr (mul x y) q = mul (pwr x q) (pwr y q)) /\\\n         (pwr (pwr x p) q = pwr x (p * q)) /\\\n         (pwr x 0 = r1) /\\\n         (pwr x 1 = x) /\\\n         (mul x (add y z) = add (mul x y) (mul x z)) /\\\n         (pwr x (SUC q) = mul x (pwr x q))",
     ),
     t30,
   )
@@ -1604,7 +1604,7 @@ fn step_2() -> Unit raise {
   )
   let sth = @tactics.prove(
     @parser.parse_term(
-      "(forall x y z. x + (y + z) = (x + y) + z) /\\\n     (forall x y. x + y = y + x) /\\\n     (forall x. 0 + x = x) /\\\n     (forall x y z. x * (y * z) = (x * y) * z) /\\\n     (forall x y. x * y = y * x) /\\\n     (forall x. 1 * x = x) /\\\n     (forall x. 0 * x = 0) /\\\n     (forall x y z. x * (y + z) = x * y + x * z) /\\\n     (forall x. x EXP 0 = 1) /\\\n     (forall x n. x EXP (SUC n) = x * x EXP n)",
+      "(∀ x y z. x + (y + z) = (x + y) + z) /\\\n     (∀ x y. x + y = y + x) /\\\n     (∀ x. 0 + x = x) /\\\n     (∀ x y z. x * (y * z) = (x * y) * z) /\\\n     (∀ x y. x * y = y * x) /\\\n     (∀ x. 1 * x = x) /\\\n     (∀ x. 0 * x = 0) /\\\n     (∀ x y z. x * (y + z) = x * y + x * z) /\\\n     (∀ x. x EXP 0 = 1) /\\\n     (∀ x n. x EXP (SUC n) = x * x EXP n)",
     ),
     t93,
   )

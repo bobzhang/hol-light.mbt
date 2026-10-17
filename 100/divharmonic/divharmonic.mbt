@@ -62,7 +62,7 @@ fn step_2() -> Unit raise {
       }
     })(((x5 : @kernel.Thm) => @bool.spec(t4, x5))(x6))
   })), t7), @tactics.strip_tac), t14), t15), t22), @tactics.ants_tac), @list.List([@int.arith_tac, @tactics.all_tac])), t23), t24), t25), t26), t27), @tactics.conj_tac), t43)
-  harmonic_diverges_c.set(@tactics.prove(@parser.parse_term("~(?s. forall e. &0 < e\n             ==> ?N. forall n. N <= n ==> abs(sum(1..n) (\\i. &1 / &i) - s) < e)"), t44))
+  harmonic_diverges_c.set(@tactics.prove(@parser.parse_term("~(?s. ∀ e. &0 < e\n             ==> ?N. ∀ n. N <= n ==> abs(sum(1..n) (\\i. &1 / &i) - s) < e)"), t44))
 }
 
 ///|
@@ -126,7 +126,7 @@ fn step_4() -> Unit raise {
   let t47 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
   let t46 = @simp.rewrite_tac(@list.List([@arith.exp(), @arith.mult_2(), @iterate.sum_sing_numseg()]))
   let t75 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_ge()])), @nums.induct_tac), t46), t47), t48), t51), t54), t55), t56), @tactics.conj_tac), t74)
-  harmonic_lemma_c.set(@tactics.prove(@parser.parse_term("forall m. sum(1..2 EXP m) (\\n. &1 / &n) >= &m / &2"), t75))
+  harmonic_lemma_c.set(@tactics.prove(@parser.parse_term("∀ m. sum(1..2 EXP m) (\\n. &1 / &n) >= &m / &2"), t75))
 }
 
 ///|

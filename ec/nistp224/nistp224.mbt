@@ -240,7 +240,7 @@ fn step_16() -> Unit raise {
 /// NO_ROOTS_P224
 fn step_17() -> Unit raise {
   let t26 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p224(), @list.List([p_224(), b_224()]))
-  no_roots_p224_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 - &3 * x + &b_224 == &0) (mod &p_224))"), t26))
+  no_roots_p224_c.set(@tactics.prove(@parser.parse_term("∀ x:int. ~((x pow 3 - &3 * x + &b_224 == &0) (mod &p_224))"), t26))
 }
 
 ///|
@@ -428,7 +428,7 @@ pub fn p256_group_order() -> @kernel.Thm {
 /// P224_GROUP_ELEMENT_ORDER
 fn step_23() -> Unit raise {
   let t104 = @meson.meson_tac(@list.List([size_p224_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n224()]))
-  p224_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p224_group\n       ==> group_element_order p224_group P =\n           if P = group_id p224_group then 1 else n_224"), t104))
+  p224_group_element_order_c.set(@tactics.prove(@parser.parse_term("∀ P. P IN group_carrier p224_group\n       ==> group_element_order p224_group P =\n           if P = group_id p224_group then 1 else n_224"), t104))
 }
 
 ///|

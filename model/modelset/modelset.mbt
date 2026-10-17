@@ -5,7 +5,7 @@
 /// INJ_LEMMA
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
-  inj_lemma_c.set(@tactics.prove(@parser.parse_term("(forall x y. (f x = f y) ==> (x = y)) <=> (forall x y. (f x = f y) <=> (x = y))"), t1))
+  inj_lemma_c.set(@tactics.prove(@parser.parse_term("(∀ x y. (f x = f y) ==> (x = y)) <=> (∀ x y. (f x = f y) <=> (x = y))"), t1))
 }
 
 ///|
@@ -42,7 +42,7 @@ pub fn valmod() -> @kernel.Thm {
 /// VALMOD
 fn step_4() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([valmod()]))
-  valmod_v1_c.set(@tactics.prove(@parser.parse_term("forall v x y a. ((x |-> y) v) a = if a = x then y else v(a)"), t2))
+  valmod_v1_c.set(@tactics.prove(@parser.parse_term("∀ v x y a. ((x |-> y) v) a = if a = x then y else v(a)"), t2))
 }
 
 ///|
@@ -58,7 +58,7 @@ pub fn valmod_v1() -> @kernel.Thm {
 /// VALMOD_BASIC
 fn step_5() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([valmod()]))
-  valmod_basic_c.set(@tactics.prove(@parser.parse_term("forall v x y. (x |-> y) v x = y"), t3))
+  valmod_basic_c.set(@tactics.prove(@parser.parse_term("∀ v x y. (x |-> y) v x = y"), t3))
 }
 
 ///|
@@ -76,7 +76,7 @@ fn step_6() -> Unit raise {
   let t5 = @simp.asm_rewrite_tac(@list.List([]))
   let t4 = @tactics.repeat_tac(@tactics.gen_tac)
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([valmod(), @class.fun_eq_thm()])), t4), @class.cond_cases_tac), t5)
-  valmod_valmod_basic_c.set(@tactics.prove(@parser.parse_term("forall v a b x. (x |-> a) ((x |-> b) v) = (x |-> a) v"), t6))
+  valmod_valmod_basic_c.set(@tactics.prove(@parser.parse_term("∀ v a b x. (x |-> a) ((x |-> b) v) = (x |-> a) v"), t6))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn valmod_valmod_basic() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([]))
   let t8 = @tactics.then_tac(@simp.rewrite_tac(@list.List([valmod(), @class.fun_eq_thm()])), t7)
-  valmod_repeat_c.set(@tactics.prove(@parser.parse_term("forall v x. (x |-> v(x)) v = v"), t8))
+  valmod_repeat_c.set(@tactics.prove(@parser.parse_term("∀ v x. (x |-> v(x)) v = v"), t8))
 }
 
 ///|
@@ -109,7 +109,7 @@ pub fn valmod_repeat() -> @kernel.Thm {
 /// FORALL_VALMOD
 fn step_8() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([valmod_repeat()]))
-  forall_valmod_c.set(@tactics.prove(@parser.parse_term("forall x. (forall v a. P((x |-> a) v)) = (forall v. P v)"), t9))
+  forall_valmod_c.set(@tactics.prove(@parser.parse_term("∀ x. (∀ v a. P((x |-> a) v)) = (∀ v. P v)"), t9))
 }
 
 ///|
@@ -126,7 +126,7 @@ pub fn forall_valmod() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([valmod(), @class.fun_eq_thm()])), t10)
-  valmod_swap_c.set(@tactics.prove(@parser.parse_term("forall v x y a b.\n     ~(x = y) ==> ((x |-> a) ((y |-> b) v) = (y |-> b) ((x |-> a) v))"), t11))
+  valmod_swap_c.set(@tactics.prove(@parser.parse_term("∀ v x y a b.\n     ~(x = y) ==> ((x |-> a) ((y |-> b) v) = (y |-> b) ((x |-> a) v))"), t11))
 }
 
 ///|
@@ -208,7 +208,7 @@ fn step_14() -> Unit raise {
   let t15 = @simp.rewrite_tac(@list.List([@card.card_eq_refl()]))
   let t14 = @tactics.match_mp_tac(@card.card_lt_cong())
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@card.finite_card_lt()]))), t14), t15), t16), t17)
-  let lemma = @tactics.prove(@parser.parse_term("forall s. s <_c UNIV:I->bool <=> FINITE s"), t18)
+  let lemma = @tactics.prove(@parser.parse_term("∀ s. s <_c UNIV:I->bool <=> FINITE s"), t18)
   let t23 = @meson.meson_tac(@list.List([@sets.finite_image(), @sets.not_insert_empty(), @sets.finite_rules()]))
   let t24 = @list.List([@meson.meson_tac(@list.List([@sets.extension(), @sets.in_image(), @sets.in_univ(), ind_model_tybij()])), t23])
   let t22 = @tactics.subgoal_then(@parser.parse_term("UNIV = IMAGE mk_ind (@s. ~(s = {}) /\\ FINITE s)"), fn(x19 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -218,7 +218,7 @@ fn step_14() -> Unit raise {
     }
   })
   let t25 = @tactics.thenl(@tactics.then_tac(@simp.rewrite_tac(@list.List([lemma, @sets.finite_powerset()])), t22), t24)
-  i_axiom_c.set(@tactics.prove(@parser.parse_term("UNIV:ind_model->bool <_c UNIV:I->bool /\\\n   (forall s:A->bool. s <_c UNIV:I->bool ==> {t | t SUBSET s} <_c UNIV:I->bool)"), t25))
+  i_axiom_c.set(@tactics.prove(@parser.parse_term("UNIV:ind_model->bool <_c UNIV:I->bool /\\\n   (∀ s:A->bool. s <_c UNIV:I->bool ==> {t | t SUBSET s} <_c UNIV:I->bool)"), t25))
 }
 
 ///|
@@ -286,7 +286,7 @@ fn step_16() -> Unit raise {
       s48(x49)
     }
   }), t50), t51), t52), t53), @tactics.ap_thm_tac), @tactics.ap_term_tac), t54), t55)
-  i_pair_exists_c.set(@tactics.prove(@parser.parse_term("?f:I#I->I. forall x y. (f x = f y) ==> (x = y)"), t56))
+  i_pair_exists_c.set(@tactics.prove(@parser.parse_term("?f:I#I->I. ∀ x y. (f x = f y) ==> (x = y)"), t56))
 }
 
 ///|
@@ -350,7 +350,7 @@ pub fn card_bool_lt_i() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t71 = @simp.simp_tac(@list.List([@sets.lt_c(), @sets.le_c(), @sets.in_univ()]))
   let t72 = @tactics.then_tac(@tactics.mp_tac(@drule.match_mp(@card.card_lt_imp_le())(card_bool_lt_i())), t71)
-  i_bool_exists_c.set(@tactics.prove(@parser.parse_term("?f:bool->I. forall x y. (f x = f y) ==> (x = y)"), t72))
+  i_bool_exists_c.set(@tactics.prove(@parser.parse_term("?f:bool->I. ∀ x y. (f x = f y) ==> (x = y)"), t72))
 }
 
 ///|
@@ -383,7 +383,7 @@ pub fn i_bool() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t74 = @simp.simp_tac(@list.List([@sets.lt_c(), @sets.le_c(), @sets.in_univ()]))
   let t75 = @tactics.then_tac(@tactics.mp_tac(@bool.conjunct1(i_axiom())), t74)
-  i_ind_exists_c.set(@tactics.prove(@parser.parse_term("?f:ind_model->I. forall x y. (f x = f y) ==> (x = y)"), t75))
+  i_ind_exists_c.set(@tactics.prove(@parser.parse_term("?f:ind_model->I. ∀ x y. (f x = f y) ==> (x = y)"), t75))
 }
 
 ///|
@@ -433,7 +433,7 @@ fn step_23() -> Unit raise {
       }
     })(t80(x81))
   })), t87), t88)
-  i_set_exists_c.set(@tactics.prove(@parser.parse_term("forall s:I->bool.\n        s <_c UNIV:I->bool\n        ==> ?f:(I->bool)->I. forall t u. t SUBSET s /\\ u SUBSET s /\\ (f t = f u)\n                                   ==> (t = u)"), t89))
+  i_set_exists_c.set(@tactics.prove(@parser.parse_term("∀ s:I->bool.\n        s <_c UNIV:I->bool\n        ==> ?f:(I->bool)->I. ∀ t u. t SUBSET s /\\ u SUBSET s /\\ (f t = f u)\n                                   ==> (t = u)"), t89))
 }
 
 ///|
@@ -554,7 +554,7 @@ fn step_29() -> Unit raise {
   let t93 = @tactics.repeat_tac(@tactics.conj_tac)
   let t92 = @simp.rewrite_tac(@list.List([setlevel()]))
   let t109 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(setlevel_induct()), t92), t93), t103), t105), @tactics.strip_tac), t107), t108)
-  setlevel_card_c.set(@tactics.prove(@parser.parse_term("forall l. setlevel l <_c UNIV:I->bool"), t109))
+  setlevel_card_c.set(@tactics.prove(@parser.parse_term("∀ l. setlevel l <_c UNIV:I->bool"), t109))
 }
 
 ///|
@@ -570,7 +570,7 @@ pub fn setlevel_card() -> @kernel.Thm {
 /// I_SET_SETLEVEL
 fn step_30() -> Unit raise {
   let t110 = @meson.meson_tac(@list.List([setlevel_card(), i_set()]))
-  i_set_setlevel_c.set(@tactics.prove(@parser.parse_term("forall l s t. s SUBSET setlevel l /\\ t SUBSET setlevel l /\\\n          (I_SET (setlevel l) s = I_SET (setlevel l) t)\n          ==> (s = t)"), t110))
+  i_set_setlevel_c.set(@tactics.prove(@parser.parse_term("∀ l s t. s SUBSET setlevel l /\\ t SUBSET setlevel l /\\\n          (I_SET (setlevel l) s = I_SET (setlevel l) t)\n          ==> (s = t)"), t110))
 }
 
 ///|
@@ -636,7 +636,7 @@ fn step_34() -> Unit raise {
   let t115 = @meson.meson_tac(@list.List([]))
   let t114 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), universe(), @pair.forall_pair_thm(), @pair.pair_eq()]))
   let t116 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@bool.conjunct2(v_tybij()))])), t114), t115)
-  v_tybij_v1_c.set(@tactics.prove(@parser.parse_term("forall l e. e IN setlevel l <=> (dest_V(mk_V(l,e)) = (l,e))"), t116))
+  v_tybij_v1_c.set(@tactics.prove(@parser.parse_term("∀ l e. e IN setlevel l <=> (dest_V(mk_V(l,e)) = (l,e))"), t116))
 }
 
 ///|
@@ -714,7 +714,7 @@ pub fn element() -> @kernel.Thm {
 /// ELEMENT_IN_LEVEL
 fn step_39() -> Unit raise {
   let t119 = @simp.rewrite_tac(@list.List([v_tybij_v1(), v_tybij(), level(), element(), @pair.pair()]))
-  element_in_level_c.set(@tactics.prove(@parser.parse_term("forall x. (element x) IN setlevel(level x)"), t119))
+  element_in_level_c.set(@tactics.prove(@parser.parse_term("∀ x. (element x) IN setlevel(level x)"), t119))
 }
 
 ///|
@@ -730,7 +730,7 @@ pub fn element_in_level() -> @kernel.Thm {
 /// SET
 fn step_40() -> Unit raise {
   let t120 = @simp.rewrite_tac(@list.List([level(), element(), @pair.pair(), v_tybij()]))
-  set_c.set(@tactics.prove(@parser.parse_term("forall x. mk_V(level x,element x) = x"), t120))
+  set_c.set(@tactics.prove(@parser.parse_term("∀ x. mk_V(level x,element x) = x"), t120))
 }
 
 ///|
@@ -802,7 +802,7 @@ fn step_45() -> Unit raise {
 ///|
 /// subset_def
 fn step_46() -> Unit raise {
-  subset_def_c.set(@pair.new_definition(@parser.parse_term("s <=: t <=> (level s = level t) /\\ forall x. x <: s ==> x <: t")))
+  subset_def_c.set(@pair.new_definition(@parser.parse_term("s <=: t <=> (level s = level t) /\\ ∀ x. x <: s ==> x <: t")))
 }
 
 ///|
@@ -819,7 +819,7 @@ pub fn subset_def() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t121 = @meson.meson_tac(@list.List([]))
   let t122 = @tactics.then_tac(@simp.rewrite_tac(@list.List([inset(), isaset()])), t121)
-  members_isaset_c.set(@tactics.prove(@parser.parse_term("forall x s. x <: s ==> isaset s"), t122))
+  members_isaset_c.set(@tactics.prove(@parser.parse_term("∀ x s. x <: s ==> isaset s"), t122))
 }
 
 ///|
@@ -840,7 +840,7 @@ fn step_48() -> Unit raise {
   let t124 = @simp.rewrite_tac(@list.List([setlevel(), @sets.image_eq_empty()]))
   let t123 = @tactics.match_mp_tac(setlevel_induct())
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.member_not_empty()])), t123), t124), t125), t126), t127)
-  level_nonempty_c.set(@tactics.prove(@parser.parse_term("forall l. ?x. x IN setlevel l"), t128))
+  level_nonempty_c.set(@tactics.prove(@parser.parse_term("∀ l. ?x. x IN setlevel l"), t128))
 }
 
 ///|
@@ -859,7 +859,7 @@ fn step_49() -> Unit raise {
   let t130 = @simp.rewrite_tac(@list.List([level()]))
   let t129 = @tactics.match_mp_tac(@theorems.mono_forall())
   let t132 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(level_nonempty()), t129), t130), t131)
-  level_set_exists_c.set(@tactics.prove(@parser.parse_term("forall l. ?s. level s = l"), t132))
+  level_set_exists_c.set(@tactics.prove(@parser.parse_term("∀ l. ?s. level s = l"), t132))
 }
 
 ///|
@@ -936,7 +936,7 @@ fn step_52() -> Unit raise {
   let t157 = @list.List([@tactics.all_tac, @tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("l:setlevel")), t154), t155), t156), @tactics.all_tac])
   let t152 = @tactics.repeat_tac(@tactics.conj_tac)
   let t159 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(setlevel_induct()), t152), t157), t158)
-  empty_exists_c.set(@tactics.prove(@parser.parse_term("forall l. ?s. (level s = l) /\\ forall x. ~(x <: s)"), t159))
+  empty_exists_c.set(@tactics.prove(@parser.parse_term("∀ l. ?s. (level s = l) /\\ ∀ x. ~(x <: s)"), t159))
 }
 
 ///|
@@ -992,7 +992,7 @@ fn step_54() -> Unit raise {
   let t162 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([members_isaset()]))])
   let t161 = @class.asm_cases_tac(@parser.parse_term("isaset s"))
   let t183 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t161), t162), t167), t168), t169), t170), t171), t175), t177), t178), t179), t180), t181), t182)
-  comprehension_exists_c.set(@tactics.prove(@parser.parse_term("forall s p. ?t. (level t = level s) /\\ forall x. x <: t <=> x <: s /\\ p x"), t183))
+  comprehension_exists_c.set(@tactics.prove(@parser.parse_term("∀ s p. ?t. (level t = level s) /\\ ∀ x. x <: t <=> x <: s /\\ p x"), t183))
 }
 
 ///|
@@ -1032,7 +1032,7 @@ fn step_57() -> Unit raise {
   let t186 = @meson.meson_tac(@list.List([]))
   let t185 = @simp.simp_tac(@list.List([mk_v_set(), @sets.subset_refl(), inset(), setlevel_inj()]))
   let t187 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.exists_tac(@parser.parse_term("mk_V(Powerset l,I_SET (setlevel l) (setlevel l))"))), t185), t186)
-  setlevel_exists_c.set(@tactics.prove(@parser.parse_term("forall l. ?s. (level s = Powerset l) /\\\n           forall x. x <: s <=> (level x = l) /\\ element(x) IN setlevel l"), t187))
+  setlevel_exists_c.set(@tactics.prove(@parser.parse_term("∀ l. ?s. (level s = Powerset l) /\\\n           ∀ x. x <: s <=> (level x = l) /\\ element(x) IN setlevel l"), t187))
 }
 
 ///|
@@ -1057,7 +1057,7 @@ fn step_58() -> Unit raise {
   let t191 = @tactics.disch_then((x190 : @kernel.Thm) => @tactics.x_choose_tac(t189, x190))
   let t188 = @simp.rewrite_tac(@list.List([isaset()]))
   let t198 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t188), t191), t192), t193), t194), t195), t196), t197)
-  set_decomp_c.set(@tactics.prove(@parser.parse_term("forall s. isaset s\n       ==> (set s) SUBSET (setlevel(droplevel(level s))) /\\\n           (I_SET (setlevel(droplevel(level s))) (set s) = element s)"), t198))
+  set_decomp_c.set(@tactics.prove(@parser.parse_term("∀ s. isaset s\n       ==> (set s) SUBSET (setlevel(droplevel(level s))) /\\\n           (I_SET (setlevel(droplevel(level s))) (set s) = element s)"), t198))
 }
 
 ///|
@@ -1073,7 +1073,7 @@ pub fn set_decomp() -> @kernel.Thm {
 /// SET_SUBSET_SETLEVEL
 fn step_59() -> Unit raise {
   let t199 = @meson.meson_tac(@list.List([set_decomp()]))
-  set_subset_setlevel_c.set(@tactics.prove(@parser.parse_term("forall s. isaset s ==> set(s) SUBSET setlevel(droplevel(level s))"), t199))
+  set_subset_setlevel_c.set(@tactics.prove(@parser.parse_term("∀ s. isaset s ==> set(s) SUBSET setlevel(droplevel(level s))"), t199))
 }
 
 ///|
@@ -1097,7 +1097,7 @@ fn step_60() -> Unit raise {
   let t221 = @simp.asm_rewrite_tac(@list.List([subset_def()]))
   let t220 = @tactics.x_gen_tac(@parser.parse_term("u:V"))
   let t219 = @tactics.match_mp_tac(@theorems.mono_exists())
-  let t217 = @parser.parse_term("\\v. forall x. x <: v ==> x <: s")
+  let t217 = @parser.parse_term("\\v. ∀ x. x <: v ==> x <: s")
   let t218 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("t:V"), t217]), comprehension_exists()))
   let t215 = @bool.spec(@parser.parse_term("Powerset l"), setlevel_exists())
   let t216 = @tactics.x_choose_then(@parser.parse_term("t:V"))(@tactics.strip_assume_tac)(t215)
@@ -1126,7 +1126,7 @@ fn step_60() -> Unit raise {
     })(t204(x205))
   }), t212), t213), t214), @tactics.strip_tac), t216), t218), t219), t220), @tactics.strip_tac), t221), t222), t227])
   let t229 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("isaset s"))), t228)
-  powerset_exists_c.set(@tactics.prove(@parser.parse_term("forall s. ?t. (level t = Powerset(level s)) /\\ forall x. x <: t <=> x <=: s"), t229))
+  powerset_exists_c.set(@tactics.prove(@parser.parse_term("∀ s. ?t. (level t = Powerset(level s)) /\\ ∀ x. x <: t <=> x <=: s"), t229))
 }
 
 ///|
@@ -1174,7 +1174,7 @@ pub fn pair() -> @kernel.Thm {
 fn step_63() -> Unit raise {
   let t231 = @meson.meson_tac(@list.List([]))
   let t232 = @tactics.then_tac(@simp.rewrite_tac(@list.List([setlevel(), @sets.in_image(), @sets.in_elim_thm()])), t231)
-  pair_in_level_c.set(@tactics.prove(@parser.parse_term("forall x y l m. x IN setlevel l /\\ y IN setlevel m\n             ==> I_PAIR(x,y) IN setlevel (Cartprod l m)"), t232))
+  pair_in_level_c.set(@tactics.prove(@parser.parse_term("∀ x y l m. x IN setlevel l /\\ y IN setlevel m\n             ==> I_PAIR(x,y) IN setlevel (Cartprod l m)"), t232))
 }
 
 ///|
@@ -1222,7 +1222,7 @@ fn step_65() -> Unit raise {
   let t236 = @simp.rewrite_tac(@list.List([pair()]))
   let t235 = @list.List([@tactics.all_tac, @simp.simp_tac(@list.List([]))])
   let t248 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t235), t236), t243), t244), t245), t246), t247)
-  pair_inj_c.set(@tactics.prove(@parser.parse_term("forall x1 y1 x2 y2. (pair x1 y1 = pair x2 y2) <=> (x1 = x2) /\\ (y1 = y2)"), t248))
+  pair_inj_c.set(@tactics.prove(@parser.parse_term("∀ x1 y1 x2 y2. (pair x1 y1 = pair x2 y2) <=> (x1 = x2) /\\ (y1 = y2)"), t248))
 }
 
 ///|
@@ -1240,7 +1240,7 @@ fn step_66() -> Unit raise {
   let t249 = @bool.spec_all(pair())
   let t250 = @equal.ap_term(@parser.parse_term("dest_V"), t249)
   let t251 = @simp.rewrite_tac(@list.List([level(), @simp.rewrite_rule(@list.List([dest_mk_pair()]))(t250)]))
-  level_pair_c.set(@tactics.prove(@parser.parse_term("forall x y. level(pair x y) = Cartprod (level x) (level y)"), t251))
+  level_pair_c.set(@tactics.prove(@parser.parse_term("∀ x y. level(pair x y) = Cartprod (level x) (level y)"), t251))
 }
 
 ///|
@@ -1287,7 +1287,7 @@ pub fn snd_def() -> @kernel.Thm {
 fn step_69() -> Unit raise {
   let t252 = @meson.meson_tac(@list.List([pair_inj()]))
   let t253 = @tactics.then_tac(@simp.rewrite_tac(@list.List([fst_def(), snd_def()])), t252)
-  pair_clauses_c.set(@tactics.prove(@parser.parse_term("forall x y. (fst(pair x y) = x) /\\ (snd(pair x y) = y)"), t253))
+  pair_clauses_c.set(@tactics.prove(@parser.parse_term("∀ x y. (fst(pair x y) = x) /\\ (snd(pair x y) = y)"), t253))
 }
 
 ///|
@@ -1324,7 +1324,7 @@ fn step_70() -> Unit raise {
   let t255 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([empty_exists(), members_isaset()]))])
   let t254 = @class.asm_cases_tac(@parser.parse_term("isaset s"))
   let t275 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t254), t255), t256), t257), t258), t259), t260), t261), t262), t263), t264), t266), t267), t268), @tactics.strip_tac), t269), t270), t271), @tactics.conj_tac), t272), @tactics.strip_tac), t273), @tactics.binop_tac), t274)
-  cartesian_exists_c.set(@tactics.prove(@parser.parse_term("forall s t. ?u. (level u =\n                  Powerset(Cartprod (droplevel(level s))\n                                    (droplevel(level t)))) /\\\n                 forall z. z <: u <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t"), t275))
+  cartesian_exists_c.set(@tactics.prove(@parser.parse_term("∀ s t. ?u. (level u =\n                  Powerset(Cartprod (droplevel(level s))\n                                    (droplevel(level t)))) /\\\n                 ∀ z. z <: u <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t"), t275))
 }
 
 ///|
@@ -1368,7 +1368,7 @@ fn step_72() -> Unit raise {
     ((x278 : @kernel.Thm) => @tactics.x_choose_tac(t277, x278))(t279(x280))
   })
   let t288 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t281), t282), t283), t286), t287)
-  in_set_element_c.set(@tactics.prove(@parser.parse_term("forall s. isaset s /\\ e IN set(s)\n       ==> ?x. (e = element x) /\\ (level s = Powerset(level x)) /\\ x <: s"), t288))
+  in_set_element_c.set(@tactics.prove(@parser.parse_term("∀ s. isaset s /\\ e IN set(s)\n       ==> ?x. (e = element x) /\\ (level s = Powerset(level x)) /\\ x <: s"), t288))
 }
 
 ///|
@@ -1440,7 +1440,7 @@ fn step_74() -> Unit raise {
     }
   })))
   let t319 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t301), t302), t309), t310), t311), t312), t317), @tactics.ap_term_tac), @tactics.binop_tac), t318)
-  subset_antisym_level_c.set(@tactics.prove(@parser.parse_term("forall s t. isaset s /\\ isaset t /\\ s <=: t /\\ t <=: s ==> (s = t)"), t319))
+  subset_antisym_level_c.set(@tactics.prove(@parser.parse_term("∀ s t. isaset s /\\ isaset t /\\ s <=: t /\\ t <=: s ==> (s = t)"), t319))
 }
 
 ///|
@@ -1456,7 +1456,7 @@ pub fn subset_antisym_level() -> @kernel.Thm {
 /// EXTENSIONALITY_LEVEL
 fn step_75() -> Unit raise {
   let t320 = @meson.meson_tac(@list.List([subset_antisym_level(), subset_def()]))
-  extensionality_level_c.set(@tactics.prove(@parser.parse_term("forall s t. isaset s /\\ isaset t /\\ (level s = level t) /\\ (forall x. x <: s <=> x <: t)\n         ==> (s = t)"), t320))
+  extensionality_level_c.set(@tactics.prove(@parser.parse_term("∀ s t. isaset s /\\ isaset t /\\ (level s = level t) /\\ (∀ x. x <: s <=> x <: t)\n         ==> (s = t)"), t320))
 }
 
 ///|
@@ -1474,7 +1474,7 @@ fn step_76() -> Unit raise {
   let t322 = @meson.asm_meson_tac(@list.List([members_isaset(), inset()]))
   let t321 = @tactics.match_mp_tac(extensionality_level())
   let t323 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t321), t322)
-  extensionality_nonempty_c.set(@tactics.prove(@parser.parse_term("forall s t. (?x. x <: s) /\\ (?x. x <: t) /\\ (forall x. x <: s <=> x <: t)\n         ==> (s = t)"), t323))
+  extensionality_nonempty_c.set(@tactics.prove(@parser.parse_term("∀ s t. (?x. x <: s) /\\ (?x. x <: t) /\\ (∀ x. x <: s <=> x <: t)\n         ==> (s = t)"), t323))
 }
 
 ///|
@@ -1520,7 +1520,7 @@ fn step_77() -> Unit raise {
   let t324 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t326 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("droplevel(level s)"), empty_exists())), t324), t325)])
   let t352 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@parser.parse_term("isaset s"))), t326), t331), t332), t333), t339), t343), t344), t345), t346), t348), t349), @tactics.gen_tac), @tactics.strip_tac), t350), t351)
-  union_exists_c.set(@tactics.prove(@parser.parse_term("forall s. ?t. (level t = droplevel(level s)) /\\\n           forall x. x <: t <=> ?u. x <: u /\\ u <: s"), t352))
+  union_exists_c.set(@tactics.prove(@parser.parse_term("∀ s. ?t. (level t = droplevel(level s)) /\\\n           ∀ x. x <: t <=> ?u. x <: u /\\ u <: s"), t352))
 }
 
 ///|
@@ -1599,7 +1599,7 @@ fn step_82() -> Unit raise {
   let t380 = @meson.asm_meson_tac(@list.List([v_tybij_v1(), element_in_level(), @pair.pair_eq()]))
   let t379 = @meson.meson_tac(@list.List([]))
   let t381 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([setlevel(), @sets.in_image(), @sets.in_univ()])), t379), t380])
-  let t378 = @tactics.subgoal_then(@parser.parse_term("forall b. (I_BOOL b) IN setlevel Ur_bool"), fn(x375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t378 = @tactics.subgoal_then(@parser.parse_term("∀ b. (I_BOOL b) IN setlevel Ur_bool"), fn(x375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s376 = @tactics.assume_tac(x375)
     fn(x377 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s376(x377)
@@ -1637,7 +1637,7 @@ fn step_82() -> Unit raise {
   let t355 = @simp.rewrite_tac(@list.List([setlevel_inj(), setlevel()]))
   let t354 = @simp.simp_tac(@list.List([mk_v_set(), @sets.subset_refl()]))
   let t382 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([inset(), boolset(), true_def(), false_def()])), t354), t355), t359), t361), @tactics.gen_tac), t373), t374), t378), t381)
-  in_bool_c.set(@tactics.prove(@parser.parse_term("forall x. x <: boolset <=> (x = True) \\/ (x = False)"), t382))
+  in_bool_c.set(@tactics.prove(@parser.parse_term("∀ x. x <: boolset <=> (x = True) \\/ (x = False)"), t382))
 }
 
 ///|
@@ -1655,7 +1655,7 @@ fn step_83() -> Unit raise {
   let t395 = @meson.asm_meson_tac(@list.List([v_tybij_v1(), i_bool(), @pair.pair_eq()]))
   let t394 = @meson.meson_tac(@list.List([]))
   let t396 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([setlevel(), @sets.in_image(), @sets.in_univ()])), t394), t395])
-  let t393 = @tactics.subgoal_then(@parser.parse_term("forall b. (I_BOOL b) IN setlevel Ur_bool"), fn(x390 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t393 = @tactics.subgoal_then(@parser.parse_term("∀ b. (I_BOOL b) IN setlevel Ur_bool"), fn(x390 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s391 = @tactics.assume_tac(x390)
     fn(x392 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s391(x392)
@@ -1687,7 +1687,7 @@ pub fn true_ne_false() -> @kernel.Thm {
 /// BOOLEAN_EQ
 fn step_84() -> Unit raise {
   let t398 = @meson.meson_tac(@list.List([true_ne_false(), in_bool()]))
-  boolean_eq_c.set(@tactics.prove(@parser.parse_term("forall x y. x <: boolset /\\ y <: boolset /\\\n         ((x = True) <=> (y = True))\n         ==> (x = y)"), t398))
+  boolean_eq_c.set(@tactics.prove(@parser.parse_term("∀ x y. x <: boolset /\\ y <: boolset /\\\n         ((x = True) <=> (y = True))\n         ==> (x = y)"), t398))
 }
 
 ///|
@@ -1721,7 +1721,7 @@ fn step_86() -> Unit raise {
   let t406 = @simp.asm_simp_tac(@list.List([mk_v_set(), @sets.subset_refl(), inset(), indset(), mk_v_clauses()]))
   let t404 = @meson.meson_tac(@list.List([]))
   let t405 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([setlevel(), @sets.in_image(), @sets.in_univ()])), t404), @tactics.all_tac])
-  let t403 = @tactics.subgoal_then(@parser.parse_term("forall i. (I_IND i) IN setlevel Ur_ind"), fn(x400 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t403 = @tactics.subgoal_then(@parser.parse_term("∀ i. (I_IND i) IN setlevel Ur_ind"), fn(x400 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s401 = @tactics.assume_tac(x400)
     fn(x402 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s401(x402)
@@ -1729,7 +1729,7 @@ fn step_86() -> Unit raise {
   })
   let t399 = @simp.rewrite_tac(@list.List([]))
   let t408 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("\\i. mk_V(Ur_ind,I_IND i)")), t399), t403), t405), t406), t407)
-  indset_ind_model_c.set(@tactics.prove(@parser.parse_term("?f. (forall i:ind_model. f(i) <: indset) /\\ (forall i j. (f i = f j) ==> (i = j))"), t408))
+  indset_ind_model_c.set(@tactics.prove(@parser.parse_term("?f. (∀ i:ind_model. f(i) <: indset) /\\ (∀ i j. (f i = f j) ==> (i = j))"), t408))
 }
 
 ///|
@@ -1762,7 +1762,7 @@ pub fn indset_inhabited() -> @kernel.Thm {
 fn step_88() -> Unit raise {
   let t410 = @meson.meson_tac(@list.List([]))
   let t411 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@class.skolem_thm())])), t410)
-  let th = @tactics.prove(@parser.parse_term("?ch. forall s. (?x. x <: s) ==> ch(s) <: s"), t411)
+  let th = @tactics.prove(@parser.parse_term("?ch. ∀ s. (?x. x <: s) ==> ch(s) <: s"), t411)
   ch_c.set(@nums.new_specification(@list.List(["ch"]))(th))
 }
 
@@ -1779,7 +1779,7 @@ pub fn ch() -> @kernel.Thm {
 /// IN_POWERSET
 fn step_89() -> Unit raise {
   let t412 = @meson.meson_tac(@list.List([powerset()]))
-  in_powerset_c.set(@tactics.prove(@parser.parse_term("forall x s. x <: powerset s <=> x <=: s"), t412))
+  in_powerset_c.set(@tactics.prove(@parser.parse_term("∀ x s. x <: powerset s <=> x <=: s"), t412))
 }
 
 ///|
@@ -1795,7 +1795,7 @@ pub fn in_powerset() -> @kernel.Thm {
 /// IN_CARTPRODUCT
 fn step_90() -> Unit raise {
   let t413 = @meson.meson_tac(@list.List([cartproduct()]))
-  in_cartproduct_c.set(@tactics.prove(@parser.parse_term("forall z s t. z <: cartproduct s t <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t"), t413))
+  in_cartproduct_c.set(@tactics.prove(@parser.parse_term("∀ z s t. z <: cartproduct s t <=> ?x y. (z = pair x y) /\\ x <: s /\\ y <: t"), t413))
 }
 
 ///|
@@ -1811,7 +1811,7 @@ pub fn in_cartproduct() -> @kernel.Thm {
 /// IN_COMPREHENSION
 fn step_91() -> Unit raise {
   let t414 = @meson.meson_tac(@list.List([suchthat()]))
-  in_comprehension_c.set(@tactics.prove(@parser.parse_term("forall p s x. x <: s suchthat p <=> x <: s /\\ p x"), t414))
+  in_comprehension_c.set(@tactics.prove(@parser.parse_term("∀ p s x. x <: s suchthat p <=> x <: s /\\ p x"), t414))
 }
 
 ///|
@@ -1842,7 +1842,7 @@ pub fn cartproduct_inhabited() -> @kernel.Thm {
 ///|
 /// funspace
 fn step_93() -> Unit raise {
-  funspace_c.set(@pair.new_definition(@parser.parse_term("funspace s t =\n      powerset(cartproduct s t) suchthat\n      (\\u. forall x. x <: s ==> ?!y. pair x y <: u)")))
+  funspace_c.set(@pair.new_definition(@parser.parse_term("funspace s t =\n      powerset(cartproduct s t) suchthat\n      (\\u. ∀ x. x <: s ==> ?!y. pair x y <: u)")))
 }
 
 ///|
@@ -1872,7 +1872,7 @@ pub fn apply_def() -> @kernel.Thm {
 ///|
 /// abstract
 fn step_95() -> Unit raise {
-  abstract__c.set(@pair.new_definition(@parser.parse_term("abstract s t f =\n        (cartproduct s t) suchthat (\\z. forall x y. (pair x y = z) ==> (y = f x))")))
+  abstract__c.set(@pair.new_definition(@parser.parse_term("abstract s t f =\n        (cartproduct s t) suchthat (\\z. ∀ x y. (pair x y = z) ==> (y = f x))")))
 }
 
 ///|
@@ -1892,7 +1892,7 @@ fn step_96() -> Unit raise {
   let t417 = @tactics.match_mp_tac(@class.select_unique())
   let t416 = @simp.rewrite_tac(@list.List([apply_def(), abstract_(), in_cartproduct(), suchthat()]))
   let t420 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t416), t417), t418), t419)
-  apply_abstract_c.set(@tactics.prove(@parser.parse_term("forall x s t. x <: s /\\ f(x) <: t ==> (apply(abstract s t f) x = f(x))"), t420))
+  apply_abstract_c.set(@tactics.prove(@parser.parse_term("∀ x s t. x <: s /\\ f(x) <: t ==> (apply(abstract s t f) x = f(x))"), t420))
 }
 
 ///|
@@ -1910,7 +1910,7 @@ fn step_97() -> Unit raise {
   let t422 = @meson.meson_tac(@list.List([pair_inj()]))
   let t421 = @simp.rewrite_tac(@list.List([apply_def()]))
   let t423 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([funspace(), suchthat(), in_powerset(), in_cartproduct(), subset_def()])), t421), t422)
-  apply_in_ranspace_c.set(@tactics.prove(@parser.parse_term("forall f x s t. x <: s /\\ f <: funspace s t ==> apply f x <: t"), t423))
+  apply_in_ranspace_c.set(@tactics.prove(@parser.parse_term("∀ f x s t. x <: s /\\ f <: funspace s t ==> apply f x <: t"), t423))
 }
 
 ///|
@@ -1929,7 +1929,7 @@ fn step_98() -> Unit raise {
   let t425 = @simp.rewrite_tac(@list.List([@theorems.unwind_thm1(), @theorems.exists_refl()]))
   let t424 = @simp.simp_tac(@list.List([@theorems.left_forall_imp_thm(), @equal.gsym(@theorems.conj_assoc()), @theorems.right_exists_and_thm()]))
   let t427 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([funspace(), abstract_(), suchthat(), in_powerset(), in_cartproduct(), subset_def(), pair_inj()])), t424), t425), t426)
-  abstract_in_funspace_c.set(@tactics.prove(@parser.parse_term("forall f x s t. (forall x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t"), t427))
+  abstract_in_funspace_c.set(@tactics.prove(@parser.parse_term("∀ f x s t. (∀ x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t"), t427))
 }
 
 ///|
@@ -1948,7 +1948,7 @@ fn step_99() -> Unit raise {
   let t429 = @tactics.match_mp_tac(abstract_in_funspace())
   let t428 = @tactics.exists_tac(@parser.parse_term("abstract s t (\\x. @y. y <: t)"))
   let t431 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t428), t429), t430)
-  funspace_inhabited_c.set(@tactics.prove(@parser.parse_term("forall s t. ((?x. x <: s) ==> (?y. y <: t)) ==> ?f. f <: funspace s t"), t431))
+  funspace_inhabited_c.set(@tactics.prove(@parser.parse_term("∀ s t. ((?x. x <: s) ==> (?y. y <: t)) ==> ?f. f <: funspace s t"), t431))
 }
 
 ///|
@@ -1979,7 +1979,7 @@ fn step_100() -> Unit raise {
   let t433 = @tactics.match_mp_tac(extensionality_nonempty())
   let t432 = @tactics.repeat_tac(@tactics.strip_tac)
   let t447 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([abstract_()])), t432), t433), t434), t435), t436), t437), t438), t439), t441), t442), t443), t444), @tactics.gen_tac), @tactics.eq_tac), @tactics.strip_tac), t445), t446)
-  abstract_eq_c.set(@tactics.prove(@parser.parse_term("forall s t1 t2 f g.\n        (?x. x <: s) /\\\n        (forall x. x <: s ==> f(x) <: t1 /\\ g(x) <: t2 /\\ (f x = g x))\n        ==> (abstract s t1 f = abstract s t2 g)"), t447))
+  abstract_eq_c.set(@tactics.prove(@parser.parse_term("∀ s t1 t2 f g.\n        (?x. x <: s) /\\\n        (∀ x. x <: s ==> f(x) <: t1 /\\ g(x) <: t2 /\\ (f x = g x))\n        ==> (abstract s t1 f = abstract s t2 g)"), t447))
 }
 
 ///|
@@ -2026,7 +2026,7 @@ pub fn holds() -> @kernel.Thm {
 fn step_103() -> Unit raise {
   let t448 = @meson.meson_tac(@list.List([in_bool()]))
   let t449 = @tactics.then_tac(@simp.rewrite_tac(@list.List([boolean()])), t448)
-  boolean_in_boolset_c.set(@tactics.prove(@parser.parse_term("forall b. boolean b <: boolset"), t449))
+  boolean_in_boolset_c.set(@tactics.prove(@parser.parse_term("∀ b. boolean b <: boolset"), t449))
 }
 
 ///|
@@ -2043,7 +2043,7 @@ pub fn boolean_in_boolset() -> @kernel.Thm {
 fn step_104() -> Unit raise {
   let t450 = @meson.meson_tac(@list.List([true_ne_false()]))
   let t451 = @tactics.then_tac(@simp.rewrite_tac(@list.List([boolean()])), t450)
-  boolean_eq_true_c.set(@tactics.prove(@parser.parse_term("forall b. (boolean b = True) <=> b"), t451))
+  boolean_eq_true_c.set(@tactics.prove(@parser.parse_term("∀ b. (boolean b = True) <=> b"), t451))
 }
 
 ///|

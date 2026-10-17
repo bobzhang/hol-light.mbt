@@ -28,7 +28,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import theory  # noqa: E402
-import forall_reference
+import universal_reference
 
 ROOT, REF, HOL = theory.ROOT, theory.REF, theory.HOL
 # (another directory for a second batch in the same checkout)
@@ -235,14 +235,14 @@ def references(targets, refs):
         if os.path.exists(command_log_path(t)):
             os.remove(command_log_path(t))
         open(tails[t], "w").write(f"command_log := {ml_str(command_log_path(t))};;\n" +
-                                 forall_reference.reference_source(text[i:]))
+                                 universal_reference.reference_source(text[i:]))
     # plain OCaml, before pa_j (HOL Light's syntax) is loaded
     helpers = [
         "let batch_flush () = flush_all (); Format.pp_print_flush Format.std_formatter ();;\n",
         "let batch_redirect path = batch_flush ();\n"
         "  let fd = Unix.openfile path [Unix.O_WRONLY; Unix.O_CREAT; Unix.O_TRUNC] 0o644 in\n"
         "  Unix.dup2 fd Unix.stdout; Unix.close fd;;\n",
-        "let batch_use f = let f = if f = \"bool.ml\" then \"_build/bool_forall.ml\" else f in\n"
+        "let batch_use f = let f = if f = \"bool.ml\" then \"_build/bool_universal.ml\" else f in\n"
         "  if not (Toploop.use_silently Format.std_formatter (Toploop.File f)) then\n"
         "  (batch_flush (); prerr_endline (\"batch: loading \" ^ f ^ \" failed\"); exit 1);;\n",
         "let batch_load f out = batch_redirect out; batch_use f;;\n",
@@ -262,10 +262,10 @@ def references(targets, refs):
         "      | _, Unix.WEXITED 0 -> ()\n"
         "      | _ -> prerr_endline (\"batch: branch \" ^ file ^ \" failed\"); exit 1);;\n",
     ]
-    forall_reference.prepare()
+    universal_reference.prepare()
     lines = [
         f"let () = batch_redirect {ml_str(os.path.join(OUT, 'prelude.txt'))};;\n",
-        forall_reference.reference_source(open(os.path.join(REF, "prelude.ml")).read()), "\n",
+        universal_reference.reference_source(open(os.path.join(REF, "prelude.ml")).read()), "\n",
         # by its full name: where Mizarlight/make.ml looks for pa_f.cmo
         f"hol_dir := {ml_str(os.path.join(REF, '_build', 'hol_dir'))};;\n",
     ]
@@ -333,7 +333,7 @@ def references(targets, refs):
         # run.sh's filters, then theory.py's normalization
         s = "\n".join(l for l in s.splitlines() if "HOL-Light syntax in effect" not in l and l != "") + "\n"
         s = re.sub(r"(?m)^CPU time \(user\): .*$", "CPU time (user): <t>", s)
-        expected[t] = "".join(forall_reference.adapt_output(s.splitlines(keepends=True)))
+        expected[t] = "".join(universal_reference.adapt_output(s.splitlines(keepends=True)))
     return expected
 
 

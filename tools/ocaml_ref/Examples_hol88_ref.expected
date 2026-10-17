@@ -5533,37 +5533,37 @@ Examples/hol88 quotations (70):
   x:A
   f:A->B
   g:A->B
-  (forall x. (f:A->B) x = g x) ==> (f = g)
-  forall P:A->bool. (?) P ==> P((GABS) P)
-  forall t1 t2. t1 /\\ t2 ==> t1
-  forall t1 t2. t1 /\\ t2 ==> t2
-  forall t1 t2 t3. t1 ==> t2 ==> t3 <=> t1 /\\ t2 ==> t3
-  forall t1 t2. t1 ==> t2 ==> t1 /\\ t2
+  (\226\136\128 x. (f:A->B) x = g x) ==> (f = g)
+  \226\136\128 P:A->bool. (?) P ==> P((GABS) P)
+  \226\136\128 t1 t2. t1 /\\ t2 ==> t1
+  \226\136\128 t1 t2. t1 /\\ t2 ==> t2
+  \226\136\128 t1 t2 t3. t1 ==> t2 ==> t3 <=> t1 /\\ t2 ==> t3
+  \226\136\128 t1 t2. t1 ==> t2 ==> t1 /\\ t2
   ~(T <=> F) /\\ ~(F <=> T)
-  forall t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2
-  forall t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)
-  forall t. F ==> t
-  forall t. ~t ==> t ==> F
-  forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
-  forall t. (t ==> F) ==> ~t
-  forall t. t ==> F <=> (t <=> F)
-  forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
-  forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
+  \226\136\128 t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2
+  \226\136\128 t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)
+  \226\136\128 t. F ==> t
+  \226\136\128 t. ~t ==> t ==> F
+  \226\136\128 t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
+  \226\136\128 t. (t ==> F) ==> ~t
+  \226\136\128 t. t ==> F <=> (t <=> F)
+  \226\136\128 t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
+  \226\136\128 t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
   ~(t /\\ ~t)
-  forall t. ~t ==> (t <=> F)
-  forall t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t
-  forall t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1
-  forall t1 t2. t1 ==> t1 \\/ t2
-  forall t1 t2. t2 ==> t1 \\/ t2
-  forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
-  forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
+  \226\136\128 t. ~t ==> (t <=> F)
+  \226\136\128 t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t
+  \226\136\128 t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1
+  \226\136\128 t1 t2. t1 ==> t1 \\/ t2
+  \226\136\128 t1 t2. t2 ==> t1 \\/ t2
+  \226\136\128 t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
+  \226\136\128 t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
   a:A = b
   b:A
   a:A
   :A
-  forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2
-  forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2
-  forall t t1 t2. (t ==> (t1 = t2)) ==> (t /\\ t1 <=> t /\\ t2)
+  \226\136\128 t1 t2. t1 \\/ t2 ==> ~t1 ==> t2
+  \226\136\128 t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2
+  \226\136\128 t t1 t2. (t ==> (t1 = t2)) ==> (t /\\ t1 <=> t /\\ t2)
   :bool
   b:bool
   b:bool
@@ -5574,109 +5574,109 @@ Examples/hol88 quotations (70):
   :A
   :A
   T
-  forall n. n < SUC n
-  forall n. n <= SUC n
-  forall m n. m < n ==> m < (SUC n)
-  forall m. SUC m - 1 = m
-  forall m n. m < m + SUC n
-  forall n m. ~(SUC n <= m) <=> m <= n
-  forall m n:num. (m = n) \\/ m < n \\/ n < m
-  forall b c. c <= b ==> (forall a:num. a - (b - c) = (a + c) - b)
-  forall m n:num. ~(m < n) /\\ ~(m = n) ==> n < m
-  forall n m:num. (n - m) <= n
-  forall m n:num. (m - n = m) = (m = 0) \\/ (n = 0)
-  forall m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
-  forall m n p:num. m >= (n - p) <=> (m + p) >= n
-  forall m. (0 = m) \\/ 0 < m
-  forall m n. m < n ==> (SUC m) <= n
-  (forall m. 0 - m = 0) /\\\n    (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
-  forall m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i
-  forall m n p. m <= n ==> (m * p) <= (n * p)
-  forall m n. 0 < m /\\ 0 < n ==> 0 < (m * n)
-  forall s. FINITE s ==> (forall t. t SUBSET s ==> FINITE t)
-  forall n. m <= SUC n <=> (m = SUC n) \\/ m <= n
-AND1_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t1:bool)))))
-AND2_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t2:bool)))))
-AND_IMP_INTRO =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
-AND_INTRO_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)))))))
+  \226\136\128 n. n < SUC n
+  \226\136\128 n. n <= SUC n
+  \226\136\128 m n. m < n ==> m < (SUC n)
+  \226\136\128 m. SUC m - 1 = m
+  \226\136\128 m n. m < m + SUC n
+  \226\136\128 n m. ~(SUC n <= m) <=> m <= n
+  \226\136\128 m n:num. (m = n) \\/ m < n \\/ n < m
+  \226\136\128 b c. c <= b ==> (\226\136\128 a:num. a - (b - c) = (a + c) - b)
+  \226\136\128 m n:num. ~(m < n) /\\ ~(m = n) ==> n < m
+  \226\136\128 n m:num. (n - m) <= n
+  \226\136\128 m n:num. (m - n = m) = (m = 0) \\/ (n = 0)
+  \226\136\128 m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
+  \226\136\128 m n p:num. m >= (n - p) <=> (m + p) >= n
+  \226\136\128 m. (0 = m) \\/ 0 < m
+  \226\136\128 m n. m < n ==> (SUC m) <= n
+  (\226\136\128 m. 0 - m = 0) /\\\n    (\226\136\128 m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
+  \226\136\128 m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i
+  \226\136\128 m n p. m <= n ==> (m * p) <= (n * p)
+  \226\136\128 m n. 0 < m /\\ 0 < n ==> 0 < (m * n)
+  \226\136\128 s. FINITE s ==> (\226\136\128 t. t SUBSET s ==> FINITE t)
+  \226\136\128 n. m <= SUC n <=> (m = SUC n) \\/ m <= n
+AND1_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t1:bool)))))
+AND2_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t2:bool)))))
+AND_IMP_INTRO =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t3:bool))))))))
+AND_INTRO_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)))))))
 BOOL_EQ_DISTINCT =  |- ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) #T:bool) #F:bool))) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) #F:bool) #T:bool)))
-EQ_EXPAND =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t1:bool)) (#~:fun(bool,bool) t2:bool))))))))
-EQ_IMP_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t1:bool)))))))
-FALSITY =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) #F:bool) t:bool)))
-F_IMP =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t:bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
-IMP_DISJ_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t1:bool)) t2:bool))))))
-IMP_F =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool))))
-IMP_F_EQ_F =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
-LEFT_AND_OVER_OR =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t3:bool)))))))))
-LEFT_OR_OVER_AND =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t3:bool)))))))))
+EQ_EXPAND =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t1:bool)) (#~:fun(bool,bool) t2:bool))))))))
+EQ_IMP_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t1:bool)))))))
+FALSITY =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) #F:bool) t:bool)))
+F_IMP =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t:bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
+IMP_DISJ_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t1:bool)) t2:bool))))))
+IMP_F =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) (#~:fun(bool,bool) t:bool))))
+IMP_F_EQ_F =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t:bool) #F:bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
+LEFT_AND_OVER_OR =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t3:bool)))))))))
+LEFT_OR_OVER_AND =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t3:bool)))))))))
 NOT_AND =  |- (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) t:bool) (#~:fun(bool,bool) t:bool)))
-NOT_F =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t:bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
-OR_ELIM_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t:bool. (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t:bool)) t:bool)))))))))
-OR_IMP_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool))) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t1:bool))))))
-OR_INTRO_THM1 =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool))))))
-OR_INTRO_THM2 =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) t2:bool) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool))))))
-RIGHT_AND_OVER_OR =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool)) t1:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t1:bool)) ((#/\:fun(bool,fun(bool,bool)) t3:bool) t1:bool)))))))))
-RIGHT_OR_OVER_AND =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool)) t1:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool)) ((#\/:fun(bool,fun(bool,bool)) t3:bool) t1:bool)))))))))
-ZERO_LESS_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))
-LESS_EQ_MONO =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-NOT_LESS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) n:num))) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-LESS_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))))
-LESS_EQ_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) n:num)))
-LESS_EQUAL_ANTISYM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
-NOT_LESS_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))
-LESS_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
-LESS_LEMMA1 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
-LESS_SUC_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))
-FACT_LESS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#FACT:fun(num,num) n:num))))
-LESS_EQ_SUC_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))
-LESS_EQ_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))
-GREATER_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-LESS_EQUAL_ADD =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) d:num)))))))))
-LESS_EQ_IMP_LESS_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num)))))))
-LESS_IMP_LESS_OR_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-LESS_MONO_ADD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num)))))))))
-LESS_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num)))))))
-LESS_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-LESS_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num))))))
-LESS_OR_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
-LESS_ADD_1 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) d:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))
-SUC_SUB1 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))
-LESS_MONO_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
-LESS_ADD_SUC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num)))))))
-LESS_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) n:num) n:num))))
-INV_SUC_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
-LESS_EQ_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
-LESS_EQ_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<=:fun(num,fun(num,bool)) m:num) p:num))))))))
-LESS_THM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
-GREATER =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
-LESS_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))
-OR_LESS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
-SUB_EQUAL_0 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
-SUB_MONO_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))
-NOT_SUC_LESS_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) n:num)) m:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
-SUC_NOT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num)))))
-LESS_LESS_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num)))))))
-NOT_LESS_EQUAL =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
-LESS_EQ_EXISTS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) d:num)))))))))
-LESS_MONO_ADD_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))))
-LESS_LESS_EQ_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
-SUB_SUB =  |- (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\c:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) c:num) b:num)) (#forall:fun(fun(num,bool),bool) (\a:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) a:num) ((#-:fun(num,fun(num,num)) b:num) c:num))) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) c:num)) b:num)))))))))
-LESS_CASES_IMP =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) n:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) n:num)))) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
-SUB_LESS_EQ =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#<=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) m:num)) n:num)))))
-SUB_EQ_EQ_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))
-SUB_LEFT_LESS_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
-SUB_LEFT_GREATER_EQ =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#>=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
-LESS_EQ_LESS_TRANS =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
-LESS_0_CASES =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num))))
-LESS_OR =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num))))))
-SUB =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) (#NUMERAL:fun(num,num) #_0:num))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) ((#-:fun(num,fun(num,num)) m:num) n:num)))))))))
-LESS_MULT_MONO =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) m:num)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) i:num))) ((#<:fun(num,fun(num,bool)) m:num) i:num))))))))
-LESS_MONO_MULT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
-LESS_MULT2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) ((#*:fun(num,fun(num,num)) m:num) n:num)))))))
-SUBSET_FINITE =  |- (#forall:fun(fun(fun('?143815,bool),bool),bool) (\s:fun('?143815,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?143815,bool),bool) s:fun('?143815,bool))) (#forall:fun(fun(fun('?143815,bool),bool),bool) (\t:fun('?143815,bool). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('?143815,bool),fun(fun('?143815,bool),bool)) t:fun('?143815,bool)) s:fun('?143815,bool))) (#FINITE:fun(fun('?143815,bool),bool) t:fun('?143815,bool))))))))
-LESS_EQ_SUC =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)))))
+NOT_F =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t:bool)) ((#=:fun(bool,fun(bool,bool)) t:bool) #F:bool))))
+OR_ELIM_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t:bool. (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t:bool)) t:bool)))))))))
+OR_IMP_THM =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool))) ((#==>:fun(bool,fun(bool,bool)) t2:bool) t1:bool))))))
+OR_INTRO_THM1 =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool))))))
+OR_INTRO_THM2 =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) t2:bool) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool))))))
+RIGHT_AND_OVER_OR =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool)) t1:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t1:bool)) ((#/\:fun(bool,fun(bool,bool)) t3:bool) t1:bool)))))))))
+RIGHT_OR_OVER_AND =  |- (#∀:fun(fun(bool,bool),bool) (\t1:bool. (#∀:fun(fun(bool,bool),bool) (\t2:bool. (#∀:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool)) t1:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool)) ((#\/:fun(bool,fun(bool,bool)) t3:bool) t1:bool)))))))))
+ZERO_LESS_EQ =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)))
+LESS_EQ_MONO =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+NOT_LESS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) n:num))) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+LESS_0 =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num))))
+LESS_EQ_REFL =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) n:num)))
+LESS_EQUAL_ANTISYM =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
+NOT_LESS_0 =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))
+LESS_TRANS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
+LESS_LEMMA1 =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
+LESS_SUC_REFL =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))
+FACT_LESS =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#FACT:fun(num,num) n:num))))
+LESS_EQ_SUC_REFL =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) n:num) (#SUC:fun(num,num) n:num))))
+LESS_EQ_ADD =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#<=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))
+GREATER_EQ =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+LESS_EQUAL_ADD =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) d:num)))))))))
+LESS_EQ_IMP_LESS_SUC =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num)))))))
+LESS_IMP_LESS_OR_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+LESS_MONO_ADD =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num)))))))))
+LESS_SUC =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num)))))))
+LESS_CASES =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+LESS_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num))))))
+LESS_OR_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun(num,fun(num,bool)) m:num) n:num)))))))
+LESS_ADD_1 =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) ((#+:fun(num,fun(num,num)) d:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))
+SUC_SUB1 =  |- (#∀:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num)))
+LESS_MONO_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
+LESS_ADD_SUC =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#<:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) m:num) (#SUC:fun(num,num) n:num)))))))
+LESS_REFL =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) n:num) n:num))))
+INV_SUC_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#=:fun(num,fun(num,bool)) m:num) n:num))))))
+LESS_EQ_CASES =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) m:num))))))
+LESS_EQ_TRANS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<=:fun(num,fun(num,bool)) m:num) p:num))))))))
+LESS_THM =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num)))))))
+GREATER =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#>:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
+LESS_EQ_0 =  |- (#∀:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))))
+OR_LESS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
+SUB_EQUAL_0 =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) n:num)) (#NUMERAL:fun(num,num) #_0:num))))
+SUB_MONO_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) (#SUC:fun(num,num) n:num))) ((#-:fun(num,fun(num,num)) m:num) n:num))))))
+NOT_SUC_LESS_EQ =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) n:num)) m:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num))))))
+SUC_NOT =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) n:num)))))
+LESS_LESS_CASES =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) n:num)) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) m:num)))))))
+NOT_LESS_EQUAL =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
+LESS_EQ_EXISTS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#?:fun(fun(num,bool),bool) (\d:num. ((#=:fun(num,fun(num,bool)) n:num) ((#+:fun(num,fun(num,num)) m:num) d:num)))))))))
+LESS_MONO_ADD_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) ((#+:fun(num,fun(num,num)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))))
+LESS_LESS_EQ_TRANS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
+SUB_SUB =  |- (#∀:fun(fun(num,bool),bool) (\b:num. (#∀:fun(fun(num,bool),bool) (\c:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) c:num) b:num)) (#∀:fun(fun(num,bool),bool) (\a:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) a:num) ((#-:fun(num,fun(num,num)) b:num) c:num))) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) a:num) c:num)) b:num)))))))))
+LESS_CASES_IMP =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#<:fun(num,fun(num,bool)) m:num) n:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) m:num) n:num)))) ((#<:fun(num,fun(num,bool)) n:num) m:num))))))
+SUB_LESS_EQ =  |- (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\m:num. ((#<=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) n:num) m:num)) n:num)))))
+SUB_EQ_EQ_0 =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) m:num) n:num)) m:num)) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))))))
+SUB_LEFT_LESS_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))))))))))
+SUB_LEFT_GREATER_EQ =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) m:num) ((#-:fun(num,fun(num,num)) n:num) p:num))) ((#>=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) p:num)) n:num))))))))
+LESS_EQ_LESS_TRANS =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num))) ((#<:fun(num,fun(num,bool)) m:num) p:num))))))))
+LESS_0_CASES =  |- (#∀:fun(fun(num,bool),bool) (\m:num. ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num))))
+LESS_OR =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) (#SUC:fun(num,num) m:num)) n:num))))))
+SUB =  |- ((#/\:fun(bool,fun(bool,bool)) (#∀:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) (#NUMERAL:fun(num,num) #_0:num))))) (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<:fun(num,fun(num,bool)) m:num) n:num)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) ((#-:fun(num,fun(num,num)) m:num) n:num)))))))))
+LESS_MULT_MONO =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\i:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) m:num)) ((#*:fun(num,fun(num,num)) (#SUC:fun(num,num) n:num)) i:num))) ((#<:fun(num,fun(num,bool)) m:num) i:num))))))))
+LESS_MONO_MULT =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. (#∀:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#<=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) m:num) p:num)) ((#*:fun(num,fun(num,num)) n:num) p:num)))))))))
+LESS_MULT2 =  |- (#∀:fun(fun(num,bool),bool) (\m:num. (#∀:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) ((#*:fun(num,fun(num,num)) m:num) n:num)))))))
+SUBSET_FINITE =  |- (#∀:fun(fun(fun('?143815,bool),bool),bool) (\s:fun('?143815,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?143815,bool),bool) s:fun('?143815,bool))) (#∀:fun(fun(fun('?143815,bool),bool),bool) (\t:fun('?143815,bool). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('?143815,bool),fun(fun('?143815,bool),bool)) t:fun('?143815,bool)) s:fun('?143815,bool))) (#FINITE:fun(fun('?143815,bool),bool) t:fun('?143815,bool))))))))
+LESS_EQ_SUC =  |- (#∀:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) m:num) (#SUC:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)))))
 types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
-constants = superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
+constants = superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ∀ ==> /\ T =
 definitions = 263
 Warning: inventing type variables
 counter_tyvar = zz_counter:'?143847

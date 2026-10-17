@@ -8,7 +8,7 @@ fn step_1() -> Unit raise {
   let t56 = @simp.rewrite_tac(@list.List([@arith.le_mult_lcancel()]))
   let t54 = @tactics.exists_tac(@parser.parse_term("q:num"))
   let t55 = @list.List([@tactics.exists_tac(@parser.parse_term("p:num")), t54])
-  let t53 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("forall p. m <= e * q /\\ e * (q + 1) <= e * p /\\ e * p <= n\n         ==> m <= e * (q + 1) /\\ e * (q + 1) <= n")))
+  let t53 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("∀ p. m <= e * q /\\ e * (q + 1) <= e * p /\\ e * p <= n\n         ==> m <= e * (q + 1) /\\ e * (q + 1) <= n")))
   let t52 = @simp.asm_rewrite_tac(@list.List([@arith.add_eq_0(), @calc_num.arith(), @prime.divides_2(), @arith.even_add(), @arith.not_even()]))
   let t51 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("n * 1 + k <= n <=> k = 0")), @prime.index_eq_0()]))
   let t50 = @simp.asm_simp_tac(@list.List([@prime.index_mul(), @prime.prime_2(), @arith.exp_eq_0(), @arith.add_eq_0(), @calc_num.arith(), @class.not_imp(), @prime.index_exp(), @prime.index_refl()]))
@@ -72,7 +72,7 @@ fn step_1() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@sets.forall_in_image(), @sets.exists_in_image(), @iterate.in_numseg()]))
   let t1 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\x. x IN IMAGE (index 2) (m..n)"), @arith.num_max()))
   let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), t2), t3), t4), @tactics.conj_tac), t5), t6), t7), @tactics.strip_tac), t8), t9), @tactics.strip_tac), t11), t13), t14), t15), t16), t17), t18), t19), @tactics.strip_tac), t20), @tactics.strip_tac), t24), t25), t26), t30), t34), t35), @tactics.disch_tac), t49), t50), t51), t52), t53), t55), t56), t57), @int.asm_arith_tac)
-  numseg_maximal_index_2_c.set(@tactics.prove(@parser.parse_term("forall m n. 1 <= m /\\ m <= n\n         ==> ?k. k IN m..n /\\\n                 forall l. l IN m..n /\\ ~(l = k) ==> index 2 l < index 2 k"), t58))
+  numseg_maximal_index_2_c.set(@tactics.prove(@parser.parse_term("∀ m n. 1 <= m /\\ m <= n\n         ==> ?k. k IN m..n /\\\n                 ∀ l. l IN m..n /\\ ~(l = k) ==> index 2 l < index 2 k"), t58))
 }
 
 ///|
@@ -99,7 +99,7 @@ fn step_2() -> Unit raise {
   let t60 = @tactics.match_mp_tac(@iterate.sum_eq_numseg())
   let t59 = @simp.rewrite_tac(@list.List([@realax.real_div(), @equal.gsym(@iterate.sum_rmul())]))
   let t70 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t59), t60), t61), @tactics.strip_tac), t62), t63), t64), t65), t68), t69)
-  let lemma = @tactics.prove(@parser.parse_term("forall m n. 1 <= m\n           ==> sum(m..n) (\\k. inv(&k)) =\n               (sum(m..n) (\\k. product ((m..n) DELETE k) (\\i. &i))) /\n               product(m..n) (\\i. &i)"), t70)
+  let lemma = @tactics.prove(@parser.parse_term("∀ m n. 1 <= m\n           ==> sum(m..n) (\\k. inv(&k)) =\n               (sum(m..n) (\\k. product ((m..n) DELETE k) (\\i. &i))) /\n               product(m..n) (\\i. &i)"), t70)
   let t153 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @int.asm_arith_tac)
   let t149 = @parser.parse_term("l:num")
   let t152 = @tactics.first_x_assum(fn(x151 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -174,7 +174,7 @@ fn step_2() -> Unit raise {
   let t99 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@prime.divides_nsum()), t97), t98), @tactics.strip_tac), @tactics.all_tac])
   let t96 = @tactics.repeat_tac(@tactics.conj_tac)
   let t95 = @tactics.exists_tac(@parser.parse_term("2 EXP (i + 1)"))
-  let t93 = @parser.parse_term("forall p. p divides r /\\ p divides n /\\ ~(p divides m)\n       ==> ~(r divides (m + n))")
+  let t93 = @parser.parse_term("∀ p. p divides r /\\ p divides n /\\ ~(p divides m)\n       ==> ~(r divides (m + n))")
   let t94 = @tactics.match_mp_tac(@bool.eqt_elim(@equal.thenc(@simp.rewrite_conv(@list.List([@theorems.imp_conj(), @class.contrapos_thm()])), fn(x92 : @kernel.Term) -> @kernel.Thm raise {
     @bool.eqt_intro(@int.number_rule(x92))
   })(t93)))
@@ -203,7 +203,7 @@ fn step_2() -> Unit raise {
   let t73 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@iterate.sum_sing_numseg()])), t72), @int.asm_arith_tac), @tactics.all_tac])
   let t71 = @class.asm_cases_tac(@parser.parse_term("n:num = m"))
   let t156 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t71), t73), t74), t76), t77), @tactics.conj_tac), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t79), t80), t81), t84), t85), t90), t91), t94), t95), t96), t99), t100), t101), t155)
-  noninteger_harmonic_c.set(@tactics.prove(@parser.parse_term("forall m n. 1 <= m /\\ 1 < n /\\ m <= n ==> ~(integer (sum(m..n) (\\k. inv(&k))))"), t156))
+  noninteger_harmonic_c.set(@tactics.prove(@parser.parse_term("∀ m n. 1 <= m /\\ 1 < n /\\ m <= n ==> ~(integer (sum(m..n) (\\k. inv(&k))))"), t156))
 }
 
 ///|

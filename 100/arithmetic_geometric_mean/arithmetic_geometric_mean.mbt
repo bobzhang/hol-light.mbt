@@ -18,7 +18,7 @@ fn step_2() -> Unit raise {
   let t2 = @list.List([@calc_rat.real_arith_tac, @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n"))]))])
   let t1 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @calc_num.arith_eq(), @arith.add_clauses()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conv_tac(@equal.once_depth_conv(@equal.sym_conv)), @tactics.gen_tac), @nums.induct_tac), t1), t2), t3), t4), t5), t6), t7), @calc_rat.real_arith_tac)
-  lemma_1_c.set(@tactics.prove(@parser.parse_term("forall x n. x pow (n + 1) - (&n + &1) * x + &n =\n         (x - &1) pow 2 * sum(1..n) (\\k. &k * x pow (n - k))"), t8))
+  lemma_1_c.set(@tactics.prove(@parser.parse_term("∀ x n. x pow (n + 1) - (&n + &1) * x + &n =\n         (x - &1) pow 2 * sum(1..n) (\\k. &k * x pow (n - k))"), t8))
 }
 
 ///|
@@ -39,7 +39,7 @@ fn step_3() -> Unit raise {
   let t10 = @tactics.match_mp_tac(@analysis.real_le_mul())
   let t9 = @simp.rewrite_tac(@list.List([lemma_1()]))
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9), t10), t11), t12), t13)
-  lemma_2_c.set(@tactics.prove(@parser.parse_term("forall n x. &0 <= x ==> &0 <= x pow (n + 1) - (&n + &1) * x + &n"), t14))
+  lemma_2_c.set(@tactics.prove(@parser.parse_term("∀ n x. &0 <= x ==> &0 <= x pow (n + 1) - (&n + &1) * x + &n"), t14))
 }
 
 ///|
@@ -88,7 +88,7 @@ fn step_4() -> Unit raise {
   let t16 = @simp.abbrev_tac(@parser.parse_term("b = sum(1..n) x / &n"))
   let t15 = @simp.abbrev_tac(@parser.parse_term("a = sum(1..n+1) x / (&n + &1)"))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t15), t16), t20), t23), t24), t28), t29), t30), t32), t33), t34), t38), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t39), t40), @tactics.ap_thm_tac), @tactics.ap_term_tac), t41), t42), t43)
-  lemma_3_c.set(@tactics.prove(@parser.parse_term("forall n x. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n + 1 ==> &0 <= x i)\n         ==> x(n + 1) * (sum(1..n) x / &n) pow n\n                <= (sum(1..n+1) x / (&n + &1)) pow (n + 1)"), t44))
+  lemma_3_c.set(@tactics.prove(@parser.parse_term("∀ n x. 1 <= n /\\ (∀ i. 1 <= i /\\ i <= n + 1 ==> &0 <= x i)\n         ==> x(n + 1) * (sum(1..n) x / &n) pow n\n                <= (sum(1..n+1) x / (&n + &1)) pow (n + 1)"), t44))
 }
 
 ///|
@@ -121,7 +121,7 @@ fn step_5() -> Unit raise {
   let t46 = @tactics.x_gen_tac(@parser.parse_term("x:num->real"))
   let t45 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= SUC n"))]))
   let t60 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@calc_num.arith(), @products.product_clauses_numseg()]))), t45), t46), t47), t59)
-  agm_c.set(@tactics.prove(@parser.parse_term("forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n"), t60))
+  agm_c.set(@tactics.prove(@parser.parse_term("∀ n a. 1 <= n /\\ (∀ i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n"), t60))
 }
 
 ///|
@@ -147,7 +147,7 @@ fn step_6() -> Unit raise {
   let t62 = @tactics.match_mp_tac(@analysis.real_le_trans())
   let t61 = @tactics.repeat_tac(@tactics.strip_tac)
   let t71 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@calc_num.arith(), @int.arith_rule(@parser.parse_term("1 <= SUC n"))]))), t61), t62), t63), @tactics.conj_tac), t70)
-  agm_root_c.set(@tactics.prove(@parser.parse_term("forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> root n (product(1..n) a) <= sum(1..n) a / &n"), t71))
+  agm_root_c.set(@tactics.prove(@parser.parse_term("∀ n a. 1 <= n /\\ (∀ i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> root n (product(1..n) a) <= sum(1..n) a / &n"), t71))
 }
 
 ///|

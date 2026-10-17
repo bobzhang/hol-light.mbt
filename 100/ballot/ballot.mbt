@@ -16,7 +16,7 @@ fn step_2() -> Unit raise {
 ///|
 /// funspace
 fn step_3() -> Unit raise {
-  funspace_c.set(@pair.new_definition(@parser.parse_term("(s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}")))
+  funspace_c.set(@pair.new_definition(@parser.parse_term("(s --> t) = {f:A->B | (∀ x. x IN s ==> f(x) IN t) /\\\n                        (∀ x. ~(x IN s) ==> f(x) = @y. T)}")))
 }
 
 ///|
@@ -114,7 +114,7 @@ fn step_5() -> Unit raise {
   let t4 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
   let t3 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.has_size(), @equal.gsym(@theorems.conj_assoc())])), t3), t4), t5), @tactics.conj_tac), t10), t11), t12), t16), t37), t38), @tactics.conj_tac), t49), t54), t55), t56), t57)
-  has_size_funspace_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)"), t58))
+  has_size_funspace_c.set(@tactics.prove(@parser.parse_term("∀ s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)"), t58))
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn has_size_funspace() -> @kernel.Thm {
 /// FINITE_FUNSPACE
 fn step_6() -> Unit raise {
   let t59 = @meson.meson_tac(@list.List([has_size_funspace(), @sets.has_size()]))
-  finite_funspace_c.set(@tactics.prove(@parser.parse_term("forall s t. FINITE s /\\ FINITE t ==> FINITE(s --> t)"), t59))
+  finite_funspace_c.set(@tactics.prove(@parser.parse_term("∀ s t. FINITE s /\\ FINITE t ==> FINITE(s --> t)"), t59))
 }
 
 ///|
@@ -186,7 +186,7 @@ pub fn all_countings() -> @kernel.Thm {
 ///|
 /// valid_countings
 fn step_9() -> Unit raise {
-  valid_countings_c.set(@pair.new_definition(@parser.parse_term("valid_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b /\\\n                  forall m. 1 <= m /\\ m <= n\n                      ==> CARD { i | i IN 1..m /\\ f(i) = A} >\n                          CARD { i | i IN 1..m /\\ f(i) = B}}")))
+  valid_countings_c.set(@pair.new_definition(@parser.parse_term("valid_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b /\\\n                  ∀ m. 1 <= m /\\ m <= n\n                      ==> CARD { i | i IN 1..m /\\ f(i) = A} >\n                          CARD { i | i IN 1..m /\\ f(i) = B}}")))
 }
 
 ///|
@@ -266,7 +266,7 @@ pub fn univ_vote() -> @kernel.Thm {
 /// ADD1_NOT_IN_NUMSEG
 fn step_14() -> Unit raise {
   let t64 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.in_numseg()])), @int.arith_tac)
-  add1_not_in_numseg_c.set(@tactics.prove(@parser.parse_term("forall m n. ~((n + 1) IN m..n)"), t64))
+  add1_not_in_numseg_c.set(@tactics.prove(@parser.parse_term("∀ m n. ~((n + 1) IN m..n)"), t64))
 }
 
 ///|
@@ -283,7 +283,7 @@ pub fn add1_not_in_numseg() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t65 = @int.arith_rule(@parser.parse_term("1 <= SUC n"))
   let t66 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.add1()), @iterate.numseg_clauses(), t65]))
-  numseg_1_clauses_c.set(@tactics.prove(@parser.parse_term("forall n. 1..(n+1) = (n + 1) INSERT (1..n)"), t66))
+  numseg_1_clauses_c.set(@tactics.prove(@parser.parse_term("∀ n. 1..(n+1) = (n + 1) INSERT (1..n)"), t66))
 }
 
 ///|
@@ -337,7 +337,7 @@ pub fn card_numseg_restrict_suc() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= n + 1"))]))
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("i <= n + 1 <=> i <= n \\/ i = n + 1"))])), t74)
-  forall_range_suc_c.set(@tactics.prove(@parser.parse_term("(forall i. 1 <= i /\\ i <= n + 1 ==> P i) <=>\n      P(n + 1) /\\ (forall i. 1 <= i /\\ i <= n ==> P i)"), t75))
+  forall_range_suc_c.set(@tactics.prove(@parser.parse_term("(∀ i. 1 <= i /\\ i <= n + 1 ==> P i) <=>\n      P(n + 1) /\\ (∀ i. 1 <= i /\\ i <= n ==> P i)"), t75))
 }
 
 ///|
@@ -378,7 +378,7 @@ fn step_20() -> Unit raise {
   let t78 = @parser.parse_term("1..n")
   let t79 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("{i | i IN 1..n /\\ P i}"), t78]), @sets.subset_card_eq()))
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@sets.card_eq_0(), @sets.finite_restrict(), @iterate.finite_numseg()])), t79), t80), t82), t83), t84)
-  card_numseg_restrict_extrema_c.set(@tactics.prove(@parser.parse_term("(CARD {i | i IN 1..n /\\ P i} = n <=> forall i. 1 <= i /\\ i <= n ==> P i) /\\\n   (CARD {i | i IN 1..n /\\ P i} = 0 <=> forall i. 1 <= i /\\ i <= n ==> ~(P i))"), t85))
+  card_numseg_restrict_extrema_c.set(@tactics.prove(@parser.parse_term("(CARD {i | i IN 1..n /\\ P i} = n <=> ∀ i. 1 <= i /\\ i <= n ==> P i) /\\\n   (CARD {i | i IN 1..n /\\ P i} = 0 <=> ∀ i. 1 <= i /\\ i <= n ==> ~(P i))"), t85))
 }
 
 ///|
@@ -394,7 +394,7 @@ pub fn card_numseg_restrict_extrema() -> @kernel.Thm {
 /// VOTE_NOT_EQ
 fn step_21() -> Unit raise {
   let t86 = @meson.meson_tac(@list.List([vote_cases(), vote_distinct()]))
-  vote_not_eq_c.set(@tactics.prove(@parser.parse_term("(forall x. ~(x = A) <=> x = B) /\\\n   (forall x. ~(x = B) <=> x = A)"), t86))
+  vote_not_eq_c.set(@tactics.prove(@parser.parse_term("(∀ x. ~(x = A) <=> x = B) /\\\n   (∀ x. ~(x = B) <=> x = A)"), t86))
 }
 
 ///|
@@ -413,7 +413,7 @@ fn step_22() -> Unit raise {
   let t88 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t87 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm(), funspace(), @sets.not_in_empty(), @sets.in_sing()]))
   let t90 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.not_in_empty()])), @tactics.gen_tac), @class.cond_cases_tac), t87), t88), t89)
-  funspace_fixed_c.set(@tactics.prove(@parser.parse_term("{f | f IN (s --> t) /\\ (forall i. i IN s ==> f i = a)} =\n   if s = {} \\/ a IN t then {(\\i. if i IN s then a else @x. T)} else {}"), t90))
+  funspace_fixed_c.set(@tactics.prove(@parser.parse_term("{f | f IN (s --> t) /\\ (∀ i. i IN s ==> f i = a)} =\n   if s = {} \\/ a IN t then {(\\i. if i IN s then a else @x. T)} else {}"), t90))
 }
 
 ///|
@@ -469,7 +469,7 @@ fn step_24() -> Unit raise {
   let t113 = @simp.simp_tac(@list.List([@sets.card_clauses(), @sets.finite_rules(), @sets.not_in_empty(), @calc_num.arith_suc()]))
   let t112 = @simp.rewrite_tac(@list.List([funspace_fixed(), @sets.in_insert()]))
   let t114 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([all_countings(), card_numseg_restrict_extrema(), @equal.gsym(@iterate.in_numseg()), @pair.let_def(), @pair.let_end_def(), @arith.add_clauses(), vote_not_eq()])), t112), t113)
-  all_countings_0_c.set(@tactics.prove(@parser.parse_term("forall a. all_countings a 0 = 1 /\\ all_countings 0 a = 1"), t114))
+  all_countings_0_c.set(@tactics.prove(@parser.parse_term("∀ a. all_countings a 0 = 1 /\\ all_countings 0 a = 1"), t114))
 }
 
 ///|
@@ -509,7 +509,7 @@ fn step_25() -> Unit raise {
     })(((x150 : @kernel.Thm) => @bool.spec(t149, x150))(x151))
   })
   let t145 = @simp.asm_simp_tac(@list.List([@iterate.in_numseg(), vote_distinct()]))
-  let t142 = @drule.match_mp(@int.arith_rule(@parser.parse_term("1 <= k /\\ k <= a ==> 1 <= k /\\ forall i. i <= k ==> i <= a")))
+  let t142 = @drule.match_mp(@int.arith_rule(@parser.parse_term("1 <= k /\\ k <= a ==> 1 <= k /\\ ∀ i. i <= k ==> i <= a")))
   let t144 = @tactics.disch_then(fn(x143 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x139 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s140 = @tactics.assume_tac(x139)
@@ -549,7 +549,7 @@ fn step_25() -> Unit raise {
   let t117 = @simp.rewrite_tac(@list.List([@bool.conjunct1(@iterate.numseg_clauses()), @calc_num.arith_eq(), @sets.not_in_empty()]))
   let t116 = @class.taut(@parser.parse_term("a /\\ a /\\ b <=> a /\\ b"))
   let t165 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([valid_countings(), card_numseg_restrict_extrema(), @equal.gsym(@iterate.in_numseg()), @pair.let_def(), @pair.let_end_def(), @arith.add_clauses(), vote_not_eq(), t116])), t117), @tactics.conj_tac), t120), t121), t122), t123), @tactics.gen_tac), @tactics.conj_tac), @class.cond_cases_tac), t124), t128), t129), t164)
-  valid_countings_0_c.set(@tactics.prove(@parser.parse_term("valid_countings 0 0 = 1 /\\\n   forall a. valid_countings (SUC a) 0 = 1 /\\ valid_countings 0 (SUC a) = 0"), t165))
+  valid_countings_0_c.set(@tactics.prove(@parser.parse_term("valid_countings 0 0 = 1 /\\\n   ∀ a. valid_countings (SUC a) 0 = 1 /\\ valid_countings 0 (SUC a) = 0"), t165))
 }
 
 ///|
@@ -582,7 +582,7 @@ fn step_26() -> Unit raise {
   let t167 = @tactics.subst1_tac(@int.arith_rule(@parser.parse_term("(a + 1) + (b + 1) = (a + b + 1) + 1")))
   let t166 = @simp.rewrite_tac(@list.List([all_countings()]))
   let t181 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t166), t167), t168), t169), t170), t174), t175), @tactics.binop_tac), t176), t177), t178), t179), t180)
-  all_countings_suc_c.set(@tactics.prove(@parser.parse_term("forall a b. all_countings (a + 1) (b + 1) =\n                all_countings a (b + 1) + all_countings (a + 1) b"), t181))
+  all_countings_suc_c.set(@tactics.prove(@parser.parse_term("∀ a b. all_countings (a + 1) (b + 1) =\n                all_countings a (b + 1) + all_countings (a + 1) b"), t181))
 }
 
 ///|
@@ -621,7 +621,7 @@ fn step_27() -> Unit raise {
   let t183 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@arith.not_lt())]))
   let t182 = @class.asm_cases_tac(@parser.parse_term("b:num < a"))
   let t203 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t182), t183), t184), t185), t186), t187), t188), t192), t193), t194), t195), t196), t197), t198), t199), t200), t201), t202)
-  valid_countings_suc_c.set(@tactics.prove(@parser.parse_term("forall a b. valid_countings (a + 1) (b + 1) =\n                if a <= b then 0\n                else valid_countings a (b + 1) + valid_countings (a + 1) b"), t203))
+  valid_countings_suc_c.set(@tactics.prove(@parser.parse_term("∀ a b. valid_countings (a + 1) (b + 1) =\n                if a <= b then 0\n                else valid_countings a (b + 1) + valid_countings (a + 1) b"), t203))
 }
 
 ///|
@@ -643,7 +643,7 @@ fn step_28() -> Unit raise {
   let t206 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 = a + 1 <=> a = 0")), @binomial.binom_eq_0(), t205]))
   let t204 = @simp.rewrite_tac(@list.List([@arith.add_clauses(), @binomial.binom_refl(), @binomial.binom(), all_countings_0()]))
   let t210 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.add_clauses(), @binomial.binom_refl(), @binomial.binom(), all_countings_0()]))), @nums.induct_tac), t204), t206), t207), t208), t209)
-  all_countings_v1_c.set(@tactics.prove(@parser.parse_term("forall a b. all_countings a b = binom(a + b,a)"), t210))
+  all_countings_v1_c.set(@tactics.prove(@parser.parse_term("∀ a b. all_countings a b = binom(a + b,a)"), t210))
 }
 
 ///|
@@ -687,7 +687,7 @@ fn step_29() -> Unit raise {
   let t212 = @list.List([@simp.rewrite_tac(@list.List([valid_countings_0(), @arith.add_clauses(), @binomial.binom_refl(), @arith.sub_0()])), @tactics.all_tac])
   let t211 = @simp.asm_rewrite_tac(@list.List([valid_countings_0(), @arith.mult_clauses(), @arith.add_clauses()]))
   let t238 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@nums.induct_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([valid_countings_0(), @arith.sub_0(), @arith.mult_clauses()])), @nums.induct_tac), t211), @tactics.all_tac])), @nums.induct_tac), t212), t213), t214), @class.cond_cases_tac), t215), t216), t217), t219), t221), t223), t224), t225), t230), t236), t237)
-  valid_countings_v1_c.set(@tactics.prove(@parser.parse_term("forall a b. (a + b) * valid_countings a b = (a - b) * binom(a + b,a)"), t238))
+  valid_countings_v1_c.set(@tactics.prove(@parser.parse_term("∀ a b. (a + b) * valid_countings a b = (a - b) * binom(a + b,a)"), t238))
 }
 
 ///|
@@ -718,7 +718,7 @@ fn step_30() -> Unit raise {
   let t240 = @simp.rewrite_tac(@list.List([@arith.le_refl(), @realax.real_mul_lid(), @arith.le_0(), @nums.not_suc(), @bool.conjunct1(@arith.le())]))
   let t239 = @simp.rewrite_tac(@list.List([all_countings_0(), valid_countings_0()]))
   let t254 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@nums.induct_tac), t239), t240), t241), t243), t244), @class.cond_cases_tac), t245), t246), t252), t253)
-  ballot_c.set(@tactics.prove(@parser.parse_term("forall a b. &(valid_countings a b) =\n            if a <= b then if b = 0 then &1 else &0\n            else (&a - &b) / (&a + &b) *  &(all_countings a b)"), t254))
+  ballot_c.set(@tactics.prove(@parser.parse_term("∀ a b. &(valid_countings a b) =\n            if a <= b then if b = 0 then &1 else &0\n            else (&a - &b) / (&a + &b) *  &(all_countings a b)"), t254))
 }
 
 ///|

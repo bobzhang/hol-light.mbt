@@ -69,7 +69,7 @@ fn step_1() -> Unit raise {
       }
     })(((x162 : @kernel.Thm) => @bool.spec(t161, x162))(x163))
   })
-  let t157 = @tactics.undisch_tac(@parser.parse_term("forall x. (poly p x = Cx(&0)) ==> (poly([--a; Cx (&1)] ** r) x = Cx(&0))"))
+  let t157 = @tactics.undisch_tac(@parser.parse_term("∀ x. (poly p x = Cx(&0)) ==> (poly([--a; Cx (&1)] ** r) x = Cx(&0))"))
   let t187 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("z:complex")), @tactics.disch_tac), t157), t164), t165), t166), t167), t168), t169), t170), t174), t175), t176), @tactics.conj_tac), t177), t181), t182), t183), t184), t185), t186), @tactics.all_tac])
   let t156 = @simp.asm_rewrite_tac(@list.List([]))
   let t151 = @parser.parse_term("r:complex list")
@@ -268,7 +268,7 @@ fn step_1() -> Unit raise {
   let t3 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("p:complex list"), t2]))
   let t1 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t211 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.num_wf()), t1), @tactics.disch_tac), t3), t4), t20), t24), t28), t32), t33), t34), t36), @tactics.strip_tac), @tactics.strip_tac), t39), t40), @tactics.strip_tac), t49), t50), @tactics.disch_tac), t57), t58), t59), t60), t66), t67), t71), t72), t76), t80), t84), t86), t87), t125), t129), t139), t146), t147), t155), t156), @tactics.ants_tac), t187), t188), t192), t193), t194), t195), t197), t198), t199), @tactics.ap_term_tac), t207), t208), t209), t210)
-  nullstellensatz_lemma_c.set(@tactics.prove(@parser.parse_term("forall n p q. (forall x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) /\\\n           (degree p = n) /\\ ~(n = 0)\n           ==> p divides (q exp n)"), t211))
+  nullstellensatz_lemma_c.set(@tactics.prove(@parser.parse_term("∀ n p q. (∀ x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) /\\\n           (degree p = n) /\\ ~(n = 0)\n           ==> p divides (q exp n)"), t211))
 }
 
 ///|
@@ -364,7 +364,7 @@ fn step_2() -> Unit raise {
   let t222 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@cpoly.poly()])), t218), t219), t220), t221), @tactics.all_tac])
   let t212 = @class.asm_cases_tac(@parser.parse_term("poly p = poly []"))
   let t277 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t212), t222), t223), t241), t242), t246), t269), t270), t271), t272), t273), t274), t275), t276)
-  nullstellensatz_univariate_c.set(@tactics.prove(@parser.parse_term("forall p q. (forall x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) <=>\n         p divides (q exp (degree p)) \\/\n         ((poly p = poly []) /\\ (poly q = poly []))"), t277))
+  nullstellensatz_univariate_c.set(@tactics.prove(@parser.parse_term("∀ p q. (∀ x. (poly p x = Cx(&0)) ==> (poly q x = Cx(&0))) <=>\n         p divides (q exp (degree p)) \\/\n         ((poly p = poly []) /\\ (poly q = poly []))"), t277))
 }
 
 ///|
@@ -418,7 +418,7 @@ fn step_3() -> Unit raise {
     })(((x283 : @kernel.Thm) => @bool.spec(t282, x283))(x284))
   }), t288), t291), t292), t293), t294), t299), t306])
   let t308 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@fundamental.constant()]))), @tactics.eq_tac), t307)
-  constant_degree_c.set(@tactics.prove(@parser.parse_term("forall p. constant(poly p) <=> (degree p = 0)"), t308))
+  constant_degree_c.set(@tactics.prove(@parser.parse_term("∀ p. constant(poly p) <=> (degree p = 0)"), t308))
 }
 
 ///|
@@ -518,7 +518,7 @@ fn step_4() -> Unit raise {
   let t310 = @tactics.mp_tac(@bool.spec(@parser.parse_term("p:complex list"), @fundamental.fundamental_theorem_of_algebra()))
   let t309 = @tactics.repeat_tac(@tactics.strip_tac)
   let t374 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.le_0()]))), t309), t310), t311), t315), t319), t326), t327), t331), t335), t336), t342), t343), t345), t346), t350), t351), @tactics.disch_tac), t352), t356), t362), t364), @tactics.ants_tac), t367), t371), t372), t373), @int.arith_tac)
-  divides_degree_lemma_c.set(@tactics.prove(@parser.parse_term("forall n p q. (degree(p) = n)\n           ==> n <= degree(p ** q) \\/ (poly(p ** q) = poly [])"), t374))
+  divides_degree_lemma_c.set(@tactics.prove(@parser.parse_term("∀ n p q. (degree(p) = n)\n           ==> n <= degree(p ** q) \\/ (poly(p ** q) = poly [])"), t374))
 }
 
 ///|
@@ -547,7 +547,7 @@ fn step_5() -> Unit raise {
   let t376 = @tactics.x_gen_tac(@parser.parse_term("r:complex list"))
   let t375 = @simp.rewrite_tac(@list.List([@cpoly.divides(), @theorems.left_imp_exists_thm()]))
   let t385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t375), t376), @tactics.disch_tac), t382), t383), t384)
-  divides_degree_c.set(@tactics.prove(@parser.parse_term("forall p q. p divides q ==> degree(p) <= degree(q) \\/ (poly q = poly [])"), t385))
+  divides_degree_c.set(@tactics.prove(@parser.parse_term("∀ p q. p divides q ==> degree(p) <= degree(q) \\/ (poly q = poly [])"), t385))
 }
 
 ///|
@@ -1046,7 +1046,7 @@ pub fn poly_pad_rule(x : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.
 /// POLY_CANCEL_EQ_CONV
 fn step_14() -> Unit raise {
   let t519 = @simp.simp_tac(@list.List([@complexnumbers.complex_mul_rzero(), @complexnumbers.complex_sub_rzero(), @complexnumbers.complex_entire()]))
-  let pth_1 = @tactics.prove(@parser.parse_term("(p = Cx(&0)) /\\ ~(a = Cx(&0))\n     ==> forall q b. (q = Cx(&0)) <=> (a * q - b * p = Cx(&0))"), t519)
+  let pth_1 = @tactics.prove(@parser.parse_term("(p = Cx(&0)) /\\ ~(a = Cx(&0))\n     ==> ∀ q b. (q = Cx(&0)) <=> (a * q - b * p = Cx(&0))"), t519)
   let match_cancel_thm : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth_1)
   fn poly_cancel_eq_conv_1(x520 : @list.List[@kernel.Term], x521 : Int64, x522 : @kernel.Thm, x523 : @kernel.Thm, x524 : @kernel.Term) -> @kernel.Thm raise {
     let avs = x520
@@ -1402,7 +1402,7 @@ fn step_22() -> Unit raise {
     }
   }))
   let t591 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @cpoly.divides(), @cpoly.poly_cmul_v1(), @cpoly.poly_mul_v1()])), t587), t588), t589), t590), @complexnumbers.simple_complex_arith_tac)
-  let pth = @tactics.prove(@parser.parse_term("p divides q ==> forall a. p divides (a ## q)"), t591)
+  let pth = @tactics.prove(@parser.parse_term("p divides q ==> ∀ a. p divides (a ## q)"), t591)
   let apply_pth : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth)
   poly_divides_pad_const_rule_c.set(fn(x592 : @list.List[@kernel.Term]) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise {
     let avs = x592
@@ -1532,7 +1532,7 @@ fn step_23() -> Unit raise {
   })
   let t621 = @tactics.x_gen_tac(@parser.parse_term("t:complex list"))
   let t665 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @simp.rewrite_tac(@list.List([@cpoly.divides(), @theorems.left_imp_exists_thm()]))), t621), t625), t626), t629), @tactics.eq_tac), t633), t664)
-  let pth_1 = @tactics.prove(@parser.parse_term("~(a = Cx(&0))\n     ==> p divides p'\n         ==> (forall x. a * poly q x - poly p' x = poly r x)\n             ==> (p divides q <=> p divides r)"), t665)
+  let pth_1 = @tactics.prove(@parser.parse_term("~(a = Cx(&0))\n     ==> p divides p'\n         ==> (∀ x. a * poly q x - poly p' x = poly r x)\n             ==> (p divides q <=> p divides r)"), t665)
   let match_pth1 : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth_1)
   fn divide_step_conv(x666 : @list.List[@kernel.Term], x667 : (@kernel.Term) -> @kernel.Thm raise, x668 : Int64, x669 : @kernel.Term) -> @kernel.Thm raise {
     let avs = x666
@@ -1681,7 +1681,7 @@ fn step_24() -> Unit raise {
     @equal.lhand(@kernel.rand(x742))
   }, pth_3)
   let t743 = @simp.simp_tac(@list.List([@cpoly.divides(), @cpoly.poly_exp_v1(), @class.fun_eq_thm()]))
-  let pth_4 = @tactics.prove(@parser.parse_term("(forall x. (poly (q exp n) x = poly r x))\n       ==> (p divides (q exp n) <=> p divides r)"), t743)
+  let pth_4 = @tactics.prove(@parser.parse_term("(∀ x. (poly (q exp n) x = poly r x))\n       ==> (p divides (q exp n) <=> p divides r)"), t743)
   let apply_pth4 : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth_4)
   let poly_tm = @parser.parse_term("poly")
   let rewr_poly_exp_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(@cpoly.poly_exp_v1())
@@ -2165,7 +2165,7 @@ pub fn complex_quelim_conv(x : @list.List[@kernel.Thm]) -> ((@list.List[@kernel.
 fn step_29() -> Unit raise {
   let t847 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_imp(), @theorems.conj_assoc()]))
   let t848 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.exists_unique_thm(), @class.de_morgan_thm(), @class.not_exists_thm()])), t847)
-  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t848)
+  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (∀ x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t848)
   let t849 = @class.taut(@parser.parse_term("~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r"))
   let t850 = @class.taut(@parser.parse_term("(p <=> q) <=> (p /\\ q) \\/ (~p /\\ ~q)"))
   let t851 = @class.taut(@parser.parse_term("~(p <=> q) <=> (p /\\ ~q) \\/ (~p /\\ q)"))
@@ -2195,7 +2195,7 @@ pub fn nnf_cond_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// FULL_COMPLEX_QUELIM_CONV
 fn step_30() -> Unit raise {
   let t859 = @meson.meson_tac(@list.List([]))
-  let pth = @tactics.prove(@parser.parse_term("(forall x. P x) <=> ~(?x. ~(P x))"), t859)
+  let pth = @tactics.prove(@parser.parse_term("(∀ x. P x) <=> ~(?x. ~(P x))"), t859)
   let elim_forall_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(pth)
   let pth_1 = @cpoly.simple_complex_arith(@parser.parse_term("(x = y) <=> (x - y = Cx(&0))"))
   let zero_tm = @parser.parse_term("Cx(&0)")

@@ -31,7 +31,7 @@ pub fn trs_cases() -> @kernel.Thm {
 ///|
 /// TRS_RULES, TRS_INDUCT, TRS_CASES
 fn step_1() -> Unit raise {
-  let (trs_rules, trs_induct, trs_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall i l r.\n         (l,r) IN rws ==> TRS rws (termsubst i l) (termsubst i r)) /\\\n   (forall s t f largs rargs.\n         TRS rws s t ==> TRS rws (Fn f (APPEND largs (CONS s rargs)))\n                                 (Fn f (APPEND largs (CONS t rargs))))"))
+  let (trs_rules, trs_induct, trs_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(∀ i l r.\n         (l,r) IN rws ==> TRS rws (termsubst i l) (termsubst i r)) /\\\n   (∀ s t f largs rargs.\n         TRS rws s t ==> TRS rws (Fn f (APPEND largs (CONS s rargs)))\n                                 (Fn f (APPEND largs (CONS t rargs))))"))
   trs_rules_c.set(trs_rules)
   trs_induct_c.set(trs_induct)
   trs_cases_c.set(trs_cases)
@@ -96,7 +96,7 @@ fn step_2() -> Unit raise {
       }
     })(((x25 : @kernel.Thm) => @bool.specl(t24, x25))(x26))
   })
-  let t19 = @tactics.undisch_tac(@parser.parse_term("forall x:A y:A. R x y ==> (?y':A. S x y')"))
+  let t19 = @tactics.undisch_tac(@parser.parse_term("∀ x:A y:A. R x y ==> (?y':A. S x y')"))
   let t18 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("u:A"))(@tactics.strip_assume_tac))
   let t17 = @simp.rewrite_tac(@list.List([@rstc.rtc_refl()]))
   let t16 = @tactics.disch_then(@tactics.disj_cases_then2(fn(x10 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -122,7 +122,7 @@ fn step_2() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([@reduct.sn_noetherian()]))
   let t1 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@reduct.sn_tc())]))
   let t65 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), t2), @tactics.strip_tac), @tactics.gen_tac), t3), @tactics.disch_tac), t4), t5), @tactics.disch_tac), t9), t16), t17), t18), t19), t27), t28), t31), t39), t40), @tactics.disch_tac), t47), t56), t57), @tactics.ants_tac), t58), t59), t63), t64)
-  convergent_modify_lemma_v1_c.set(@tactics.prove(@parser.parse_term("forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> forall y:A. NORMAL(R) y ==> forall x. RTC R x y ==> RTC S x y"), t65))
+  convergent_modify_lemma_v1_c.set(@tactics.prove(@parser.parse_term("∀ R S. SN R /\\\n         CR(RTC R) /\\\n         (∀ x y. S x y ==> TC R x y) /\\\n         (∀ x y. R x y ==> ?y'. S x y')\n         ==> ∀ y:A. NORMAL(R) y ==> ∀ x. RTC R x y ==> RTC S x y"), t65))
 }
 
 ///|
@@ -191,7 +191,7 @@ fn step_3() -> Unit raise {
   let t72 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@reduct.sn_wf()])), t67), t68), t69), t70), t71), @tactics.all_tac])
   let t66 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("a /\\ (a ==> b) ==> a /\\ b")))
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t66), @tactics.conj_tac), t72), @tactics.disch_tac), t73), t74), t77), @tactics.strip_tac), t84), t93), @tactics.ants_tac), t94), t95), t97), t98), t105), t106), t108), t109), t110)
-  convergent_modify_c.set(@tactics.prove(@parser.parse_term("forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x:A y. S x y ==> TC R x y) /\\\n         (forall x:A y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S)"), t111))
+  convergent_modify_c.set(@tactics.prove(@parser.parse_term("∀ R S. SN R /\\\n         CR(RTC R) /\\\n         (∀ x:A y. S x y ==> TC R x y) /\\\n         (∀ x:A y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S)"), t111))
 }
 
 ///|
@@ -262,19 +262,19 @@ fn step_4() -> Unit raise {
       }
     })(x131))
   }, @list.List([@equal.gsym(@rstc.tc_idemp())]))
-  let t119 = @tactics.subgoal_then(@parser.parse_term("forall x:A y. TC S x y ==> TC R x y"), fn(x117 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t119 = @tactics.subgoal_then(@parser.parse_term("∀ x:A y. TC S x y ==> TC R x y"), fn(x117 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x117
     @meson.asm_meson_tac(@list.List([th_1]))
   })
   let t116 = @simp.rewrite_tac(@list.List([@rstc.rtc(), @rstc.rc_cases()]))
-  let t162 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall x:A y. RTC S x y ==> RTC R x y"), fn(x114 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t162 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("∀ x:A y. RTC S x y ==> RTC R x y"), fn(x114 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x114
     @meson.asm_meson_tac(@list.List([th]))
   }), t116), t119), t132), t133), t134), t161])
   let t113 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("z:A"))(@tactics.strip_assume_tac))
   let t112 = @simp.rewrite_tac(@list.List([@reduct.joinable()]))
   let t163 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t112), @tactics.eq_tac), t113), t162)
-  equivalent_joinable_modify_c.set(@tactics.prove(@parser.parse_term("forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> (forall x:A y. JOINABLE S x y = JOINABLE R x y)"), t163))
+  equivalent_joinable_modify_c.set(@tactics.prove(@parser.parse_term("∀ R S. SN R /\\\n         CR(RTC R) /\\\n         (∀ x y. S x y ==> TC R x y) /\\\n         (∀ x y. R x y ==> ?y'. S x y')\n         ==> (∀ x:A y. JOINABLE S x y = JOINABLE R x y)"), t163))
 }
 
 ///|
@@ -298,7 +298,7 @@ fn step_5() -> Unit raise {
   let t164 = @parser.parse_term("S:A->A->bool")
   let t165 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("R:A->A->bool"), t164]), convergent_modify()))
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t165), t166), t168), t169), t170), t171)
-  equivalent_rstc_modify_c.set(@tactics.prove(@parser.parse_term("forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> (forall x:A y. RSTC S x y = RSTC R x y)"), t172))
+  equivalent_rstc_modify_c.set(@tactics.prove(@parser.parse_term("∀ R S. SN R /\\\n         CR(RTC R) /\\\n         (∀ x y. S x y ==> TC R x y) /\\\n         (∀ x y. R x y ==> ?y'. S x y')\n         ==> (∀ x:A y. RSTC S x y = RSTC R x y)"), t172))
 }
 
 ///|
@@ -319,7 +319,7 @@ fn step_6() -> Unit raise {
   let t176 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(convergent_modify()), t174), t175])
   let t173 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
   let t178 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t173), @tactics.conj_tac), t176), t177)
-  equivalent_modify_c.set(@tactics.prove(@parser.parse_term("forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S) /\\ (forall x:A y. RSTC S x y = RSTC R x y)"), t178))
+  equivalent_modify_c.set(@tactics.prove(@parser.parse_term("∀ R S. SN R /\\\n         CR(RTC R) /\\\n         (∀ x y. S x y ==> TC R x y) /\\\n         (∀ x y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S) /\\ (∀ x:A y. RSTC S x y = RSTC R x y)"), t178))
 }
 
 ///|
@@ -360,7 +360,7 @@ fn step_7() -> Unit raise {
   let t180 = @simp.asm_rewrite_tac(@list.List([]))
   let t179 = @tactics.match_mp_tac(equivalent_modify())
   let t199 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t179), t180), @tactics.conj_tac), t182), @tactics.strip_tac), t198)
-  equivalent_modify_right_c.set(@tactics.prove(@parser.parse_term("forall R S S'.\n        SN(\\x y. R x y \\/ S x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (forall s:A t. S s t ==> ?t'. S' s t') /\\\n        (forall s t. S' s t ==> ?u. S s u /\\ RTC (\\x y. R x y \\/ S x y) u t)\n        ==> SN(\\x y. R x y \\/ S' x y) /\\\n            CR(RTC(\\x y. R x y \\/ S' x y)) /\\\n            (forall x y. RSTC(\\x y. R x y \\/ S' x y) x y =\n                   RSTC(\\x y. R x y \\/ S x y) x y)"), t199))
+  equivalent_modify_right_c.set(@tactics.prove(@parser.parse_term("∀ R S S'.\n        SN(\\x y. R x y \\/ S x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (∀ s:A t. S s t ==> ?t'. S' s t') /\\\n        (∀ s t. S' s t ==> ?u. S s u /\\ RTC (\\x y. R x y \\/ S x y) u t)\n        ==> SN(\\x y. R x y \\/ S' x y) /\\\n            CR(RTC(\\x y. R x y \\/ S' x y)) /\\\n            (∀ x y. RSTC(\\x y. R x y \\/ S' x y) x y =\n                   RSTC(\\x y. R x y \\/ S x y) x y)"), t199))
 }
 
 ///|
@@ -382,7 +382,7 @@ fn step_8() -> Unit raise {
   let t201 = @simp.asm_rewrite_tac(@list.List([]))
   let t200 = @tactics.match_mp_tac(equivalent_modify())
   let t206 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t200), t201), @tactics.conj_tac), t203), @tactics.disch_tac), t204), t205)
-  convergent_delete_left_c.set(@tactics.prove(@parser.parse_term("forall R S. SN(\\x y. R x y \\/ S x y) /\\\n         CR(RTC(\\x y. R x y \\/ S x y)) /\\\n         (forall x:A y. S x y ==> ?z. R x z)\n         ==> SN(R) /\\ CR(RTC R) /\\\n             (forall x y. RSTC(R) x y = RSTC(\\x y. R x y \\/ S x y) x y)"), t206))
+  convergent_delete_left_c.set(@tactics.prove(@parser.parse_term("∀ R S. SN(\\x y. R x y \\/ S x y) /\\\n         CR(RTC(\\x y. R x y \\/ S x y)) /\\\n         (∀ x:A y. S x y ==> ?z. R x z)\n         ==> SN(R) /\\ CR(RTC R) /\\\n             (∀ x y. RSTC(R) x y = RSTC(\\x y. R x y \\/ S x y) x y)"), t206))
 }
 
 ///|
@@ -670,7 +670,7 @@ fn step_9() -> Unit raise {
   let t208 = @simp.rewrite_tac(@list.List([@reduct.sn_noetherian()]))
   let t207 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@reduct.sn_tc())]))
   let t428 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t207), t208), @tactics.strip_tac), t209), t210), @tactics.disch_tac), t214), t221), t222), t223), t232), t240), t241), t242), t244), @tactics.strip_tac), t322), t323), t356), t363), @tactics.ants_tac), t372), t379), t388), @tactics.ants_tac), t398), t399), t403), t416), t417), @tactics.disch_tac), t418), @tactics.disj2_tac), t419), t420), t421), t425), t426), t427)
-  convergent_modify_lemma_c.set(@tactics.prove(@parser.parse_term("forall R S S' t.\n        SN(\\x y. R x y \\/ S x y \\/ S' x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (forall s t. S s t\n               ==> ?s' t'. RTC R s s' /\\ RTC R t t' /\\\n                           (S' s' t' \\/ S' t' s')) /\\\n        NORMAL(\\x y. R x y \\/ S x y) t\n        ==> forall s:A. RTC (\\x y. R x y \\/ S x y) s t\n                  ==> RTC (\\x y. R x y \\/ S' x y) s t"), t428))
+  convergent_modify_lemma_c.set(@tactics.prove(@parser.parse_term("∀ R S S' t.\n        SN(\\x y. R x y \\/ S x y \\/ S' x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (∀ s t. S s t\n               ==> ?s' t'. RTC R s s' /\\ RTC R t t' /\\\n                           (S' s' t' \\/ S' t' s')) /\\\n        NORMAL(\\x y. R x y \\/ S x y) t\n        ==> ∀ s:A. RTC (\\x y. R x y \\/ S x y) s t\n                  ==> RTC (\\x y. R x y \\/ S' x y) s t"), t428))
 }
 
 ///|
