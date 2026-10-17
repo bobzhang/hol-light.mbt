@@ -926,11 +926,11 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  nth_differentiable_on n s f <=>\n\tforall x. x IN s ==> nth_differentiable n f x
-      #|  nth_differentiable_on_int n int f <=>\n\tforall x. interval_arith x int ==> nth_differentiable n f x
+      #|  nth_differentiable_on n s f <=>\n\t\226\136\128 x. x IN s ==> nth_differentiable n f x
+      #|  nth_differentiable_on_int n int f <=>\n\t\226\136\128 x. interval_arith x int ==> nth_differentiable n f x
       #|  nth_diff_weak n f x <=> f real_continuous atreal x /\\ \n\t?F. F 0 = f /\\ \226\136\128 i. i < n ==> (F i has_real_derivative F (SUC i) x) (atreal x)
       #|  nth_diff_strong n f x <=> \n\t?s. real_open s /\\ x IN s /\\ nth_differentiable_on n s f
-      #|  nth_diff_strong_int n int f <=>\n\tforall x. interval_arith x int ==> nth_diff_strong n f x
+      #|  nth_diff_strong_int n int f <=>\n\t\226\136\128 x. interval_arith x int ==> nth_diff_strong n f x
       #|  derivative = real_derivative
       #|  derivative f x = d
       #|  (?d. (f has_real_derivative d) (atreal x)) ==>\n\t(f has_real_derivative (derivative f x)) (atreal x)
@@ -954,7 +954,7 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  2 = SUC 1
       #|  nth_derivative 2 f
       #|  derivative f
-      #|  nth_differentiable_on_int 2 int f ==>\n\t?f' f''. f' = derivative f /\\ f'' = nth_derivative 2 f /\\\n\t\tforall x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n\t\t\t\t\t(f' has_real_derivative f'' x) (atreal x)
+      #|  nth_differentiable_on_int 2 int f ==>\n\t?f' f''. f' = derivative f /\\ f'' = nth_derivative 2 f /\\\n\t\t\226\136\128 x. interval_arith x int ==> (f has_real_derivative f' x) (atreal x) /\\\n\t\t\t\t\t(f' has_real_derivative f'' x) (atreal x)
       #|  2
       #|  2
       #|  2
@@ -1073,11 +1073,11 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  s INTER t
       #|  \\y. c * nth_derivative i f y
       #|  s INTER t
-      #|  interval_arith x int ==> i <= n ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
+      #|  interval_arith x int ==> i <= n ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t\226\136\128 y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
       #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
       #|  \226\136\128 i. i <= n:num ==> P i ((@) (P i))
       #|  \\i s. real_open s /\\ x IN s /\\ \n\t(\226\136\128 y. y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y)
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
+      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t\226\136\128 i y. i <= n /\\ y IN s ==> nth_derivative i (\\y. c * f y) y = c * nth_derivative i f y
       #|  (@) (P i)
       #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. c * f x) x = c * nth_derivative i f x
       #|  (\\y. c * nth_derivative i f y)
@@ -1091,7 +1091,7 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
       #|  \226\136\128 i. i <= n:num ==> P i ((@) (P i))
       #|  \\i s. real_open s /\\ x IN s /\\ \n   (\226\136\128 y. y IN s ==> nth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y)
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
+      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t\226\136\128 i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y + g y) y = nth_derivative i f y + nth_derivative i g y
       #|  (@) (P i)
       #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x + g x) x = nth_derivative i f x + nth_derivative i g x
       #|  (\\y. nth_derivative i f y + nth_derivative i g y)
@@ -1104,7 +1104,7 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
       #|  \226\136\128 i. i <= n:num ==> P i ((@) (P i))
       #|  \\i s. real_open s /\\ x IN s /\\ \n   (\226\136\128 y. y IN s ==> nth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y)
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
+      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t\226\136\128 i y. i <= n /\\ y IN s ==> \n\t\tnth_derivative i (\\y. f y - g y) y = nth_derivative i f y - nth_derivative i g y
       #|  (@) (P i)
       #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x - g x) x = nth_derivative i f x - nth_derivative i g x
       #|  (\\y. nth_derivative i f y - nth_derivative i g y)
@@ -1128,7 +1128,7 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  INTERS (IMAGE (\\i. (@) (P i)) (0..n))
       #|  \226\136\128 i. i <= n:num ==> P i ((@) (P i))
       #|  \\i s. real_open s /\\ x IN s /\\ \n   (\226\136\128 y. y IN s ==> nth_derivative i (\\y. f y * g y) y = \n\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y))
-      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\tforall i y. i <= n /\\ y IN s ==> \n\t  nth_derivative i (\\y. f y * g y) y = \n\t\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
+      #|  interval_arith x int ==>\n\t?s. real_open s /\\ x IN s /\\ \n\t\226\136\128 i y. i <= n /\\ y IN s ==> \n\t  nth_derivative i (\\y. f y * g y) y = \n\t\tsum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f y * nth_derivative (i - k) g y)
       #|  (@) (P i)
       #|  interval_arith x int ==> i <= n ==>\n\tnth_derivative i (\\x. f x * g x) x = \n  \t  sum (0..i) (\\k. &(binom (i, k)) * nth_derivative k f x * nth_derivative (i - k) g x)
       #|  nth_derivative (SUC (i - k)) g y
@@ -1360,10 +1360,10 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  :real#real
       #|  derivative f y
       #|  i < 2 <=> i = 0 \\/ i = 1
-      #|  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\tforall y. y IN s ==> (f has_real_derivative derivative f y) (atreal y) /\\\n\t(derivative f has_real_derivative nth_derivative 2 f y) (atreal y)
+      #|  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\t\226\136\128 y. y IN s ==> (f has_real_derivative derivative f y) (atreal y) /\\\n\t(derivative f has_real_derivative nth_derivative 2 f y) (atreal y)
       #|  1
       #|  0
-      #|  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\tforall y. y IN s ==> f real_differentiable atreal y /\\ derivative f real_differentiable atreal y
+      #|  nth_diff_strong 2 f x <=> ?s. real_open s /\\ x IN s /\\\n\t\226\136\128 y. y IN s ==> f real_differentiable atreal y /\\ derivative f real_differentiable atreal y
       #|  f real_differentiable atreal (g y)
       #|  nth_diff_strong_int 2 g_bounds f ==>\n\t  g real_differentiable atreal y ==>\n\t  interval_arith (g y) g_bounds ==>\n\t  bounded_on_int f g_bounds f_bounds ==>\n\t  interval_arith (derivative g y * derivative f (g y)) d_bounds ==>\n\t  lin_approx (\\x. f (g x)) y f_bounds d_bounds
       #|  \\x. &1

@@ -89,6 +89,17 @@ let bytes = "!x. unclassified string data"
     def test_reference_escaped_utf8(self):
         self.assertEqual(escaped_notation(r'!x. \226\136\131!y. P x y'),
                          r'\226\136\128 x. \226\136\131!y. P x y')
+        self.assertEqual(escaped_notation(r'P ==>\n\tforall x. P x'),
+                         r'P ==>\n\t\226\136\128 x. P x')
+
+    def test_miz3_layout_lexer(self):
+        source = '''pub fn rawtoken(x : @list.List[String]) -> ((String, @list.List[String])) raise {
+  (rawtoken_c.get())(x)
+}'''
+        migrated = rewrite_moonbit(source)
+        self.assertIn('More("∀", tail=rest) => ("∀", rest)', migrated)
+        self.assertIn('_ => (rawtoken_c.get())(x)', migrated)
+        self.assertEqual(rewrite_moonbit(migrated), migrated)
 
 
 if __name__ == '__main__':

@@ -4,8 +4,8 @@ Warning: inventing type variables
 Warning: inventing type variables
 Formal_ineqs/arith/interval_arith quotations (13):
   interval_arith (x:real) (lo, hi) <=> lo <= x /\\ x <= hi
-  bounded_on f s f_bounds <=>\n\tforall x. x IN s ==> interval_arith (f x) f_bounds
-  bounded_on_int f int f_bounds <=>\n\tforall x. interval_arith x int ==> interval_arith (f x) f_bounds
+  bounded_on f s f_bounds <=>\n\t\226\136\128 x. x IN s ==> interval_arith (f x) f_bounds
+  bounded_on_int f int f_bounds <=>\n\t\226\136\128 x. interval_arith x int ==> interval_arith (f x) f_bounds
   iabs (x_lo, x_hi) = max x_hi (-- x_lo)
   interval_not_zero (lo, hi) <=> &0 < lo \\/ hi < &0
   interval_pos (lo, hi) <=> &0 < lo

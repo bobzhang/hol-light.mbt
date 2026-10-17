@@ -481,7 +481,10 @@ let rawtoken_c : @lib.Cell[(@list.List[String]) -> (String, @list.List[String]) 
 ///|
 /// `rawtoken`
 pub fn rawtoken(x : @list.List[String]) -> ((String, @list.List[String])) raise {
-  (rawtoken_c.get())(x)
+  match x {
+    More("∀", tail=rest) => ("∀", rest)
+    _ => (rawtoken_c.get())(x)
+  }
 }
 
 ///|

@@ -153,6 +153,16 @@ def rewrite_moonbit(source):
         previous = token
     result.append(source[end:])
     migrated = ''.join(result)
+    # Miz3 has a separate layout-preserving lexer over exploded characters.
+    # Recognize the canonical symbol there too, without changing literal or
+    # comment handling in its existing token parser.
+    migrated = re.sub(
+        r'(pub fn rawtoken\((\w+) : @list.List\[String\]\)[^\n]*\{\n)'
+        r'  \(rawtoken_c.get\(\)\)\(\2\)\n}',
+        lambda m: m[1] + '  match ' + m[2] + ' {\n'
+            '    More("∀", tail=rest) => ("∀", rest)\n'
+            '    _ => (rawtoken_c.get())(' + m[2] + ')\n  }\n}',
+        migrated)
     # Rqe/util's suppressed constants are names, not proof labels or messages.
     migrated = re.sub(r'(suppress\(\)\.val = @list.List\(\[)([^\]]*)(\]\))',
                   lambda m: m[1] + m[2].replace('"!"', '"∀"') + m[3], migrated)
