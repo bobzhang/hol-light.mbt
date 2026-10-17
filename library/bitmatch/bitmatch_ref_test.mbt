@@ -20,6 +20,7 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
     ] {
     log.show_theory_output(th)
   }
+  // Explicit domain parses are not part of the general HOL quotation trace.
   log.show_theory_trace("Library/bitmatch")
   log.capture_stdout()
   // BEGIN generated theorem list
@@ -77,14 +78,18 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
   log.attempt("bitmatch_conv_2^31", () => {
     sthm(
       @bitmatch.bitmatch_conv(
-        tm("bitmatch (word 2147483648:32 word) with [a:1; b:31] -> b"),
+        @bitmatch.parse_bitmatch(
+          "bitmatch (word 2147483648:32 word) with [a:1; b:31] -> b",
+        ),
       ),
     )
   })
   log.attempt("bitmatch_conv_2^32-1", () => {
     sthm(
       @bitmatch.bitmatch_conv(
-        tm("bitmatch (word 4294967295:32 word) with [a:16; b:16] -> a"),
+        @bitmatch.parse_bitmatch(
+          "bitmatch (word 4294967295:32 word) with [a:16; b:16] -> a",
+        ),
       ),
     )
   })
@@ -6727,7 +6732,7 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
       #|Warning: inventing type variables
       #|0..0..1..4..7..19..36..64..109..177..254..441..668..1205..1916..3823..solved at 5598
       #|0..0..solved at 2
-      #|Library/bitmatch quotations (197):
+      #|Library/bitmatch quotations (192):
       #|  P:A->bool
       #|  Q:bool
       #|  (/\\)
@@ -6920,11 +6925,6 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
       #|  e < 2 EXP 0 ==> pat_set NILPAT e
       #|  n + m = k ==>\n    e < 2 EXP k ==> e DIV 2 EXP n < 2 EXP m
       #|  dimindex(:N) = n ==> val (e:N word) < 2 EXP n
-      #|  bitmatch (x:(2)word) with | [0b00:2] -> T | [0b10:2] -> T
-      #|  bitmatch (x:(2)word) with | [T; x] -> T | [F; y] -> T
-      #|  bitmatch (x:(2)word) with | [0b00:2] -> T | [0b00:2] -> T
-      #|  bitmatch (x:(2)word) with | [T; x] -> T | [y; T] -> T
-      #|  bitmatch (x:(2)word) with | [0b11:2] -> T | [0b00:2] -> T | [0b00:2] -> T
       #|_BITMATCH =  |- (#forall:fun(fun(word('N),bool),bool) (\s:word('N). (#forall:fun(fun(fun(num,fun('?185674,bool)),bool),bool) (\c:fun(num,fun('?185674,bool)). ((#=:fun('?185674,fun('?185674,bool)) ((#_BITMATCH:fun(word('N),fun(fun(num,fun('?185674,bool)),'?185674)) s:word('N)) c:fun(num,fun('?185674,bool)))) ((#_MATCH:fun(num,fun(fun(num,fun('?185674,bool)),'?185674)) (#val:fun(word('N),num) s:word('N))) c:fun(num,fun('?185674,bool))))))))
       #|_ELSEPATTERN =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun('B,bool),bool) (\e:'B. ((#=:fun(fun('B,bool),fun(fun('B,bool),bool)) ((#_ELSEPATTERN:fun('B,fun('A,fun('B,bool))) e:'B) a:'A)) (\x:'B. ((#=:fun('B,fun('B,bool)) e:'B) x:'B)))))))
       #|bitpat =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(bitpat,bool),bool) (\a:bitpat. ((#=:fun(bitpat,fun(bitpat,bool)) (#mk_bitpat:fun(prod(num,fun(num,bool)),bitpat) (#dest_bitpat:fun(bitpat,prod(num,fun(num,bool))) a:bitpat))) a:bitpat)))) (#forall:fun(fun(prod(num,fun(num,bool)),bool),bool) (\r:prod(num,fun(num,bool)). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) ((#SND:fun(prod(num,fun(num,bool)),fun(num,bool)) r:prod(num,fun(num,bool))) a:num)) ((#<:fun(num,fun(num,bool)) a:num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#FST:fun(prod(num,fun(num,bool)),num) r:prod(num,fun(num,bool))))))))) ((#=:fun(prod(num,fun(num,bool)),fun(prod(num,fun(num,bool)),bool)) (#dest_bitpat:fun(bitpat,prod(num,fun(num,bool))) (#mk_bitpat:fun(prod(num,fun(num,bool)),bitpat) r:prod(num,fun(num,bool))))) r:prod(num,fun(num,bool)))))))
@@ -6966,4 +6966,6 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
       #|
     ),
   )
+  // Keep additional parsing after the upstream counter snapshot.
+  check_explicit_bitmatch_syntax()
 }

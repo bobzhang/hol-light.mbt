@@ -687,12 +687,6 @@ fn step_13() -> Unit raise {
 }
 
 ///|
-/// Library/bitmatch.ml:95
-fn step_14() -> Unit raise {
-  @printer.reserve_words(@list.List(["BITPAT", "bitmatch"]))
-}
-
-///|
 /// word1
 fn step_15() -> Unit raise {
   word1_c.set(
@@ -1164,18 +1158,6 @@ fn[TA, TB] pmk_bitmatch_l(
   }
   let t77 = pmk_clauses(cs)
   @preterm.Preterm::Combp(@preterm.Preterm::Combp(bitmatch_ptm, e), t77)
-}
-
-///|
-/// Library/bitmatch.ml:176
-fn step_20() -> Unit raise {
-  @parser.install_parser("bitpat", preparse_bitpat)
-}
-
-///|
-/// Library/bitmatch.ml:177
-fn step_21() -> Unit raise {
-  @parser.install_parser("bitmatch", preparse_bitmatch)
 }
 
 ///|
@@ -7151,7 +7133,7 @@ fn[TA] first_n_l(x681 : @list.List[TA], x682 : Int64) -> @list.List[TA] raise {
 /// Library/bitmatch.ml:1229
 fn step_57() -> Unit raise {
   bm_check_disjointness(
-    @parser.parse_term(
+    parse_bitmatch(
       "bitmatch (x:(2)word) with | [0b00:2] -> T | [0b10:2] -> T",
     ),
   )
@@ -7161,7 +7143,7 @@ fn step_57() -> Unit raise {
 /// Library/bitmatch.ml:1231
 fn step_58() -> Unit raise {
   bm_check_disjointness(
-    @parser.parse_term("bitmatch (x:(2)word) with | [T; x] -> T | [F; y] -> T"),
+    parse_bitmatch("bitmatch (x:(2)word) with | [T; x] -> T | [F; y] -> T"),
   )
 }
 
@@ -7170,7 +7152,7 @@ fn step_58() -> Unit raise {
 fn step_59() -> Unit raise {
   try {
     bm_check_disjointness(
-      @parser.parse_term(
+      parse_bitmatch(
         "bitmatch (x:(2)word) with | [0b00:2] -> T | [0b00:2] -> T",
       ),
     )
@@ -7186,7 +7168,7 @@ fn step_59() -> Unit raise {
 fn step_60() -> Unit raise {
   try {
     bm_check_disjointness(
-      @parser.parse_term(
+      parse_bitmatch(
         "bitmatch (x:(2)word) with | [T; x] -> T | [y; T] -> T",
       ),
     )
@@ -7202,7 +7184,7 @@ fn step_60() -> Unit raise {
 fn step_61() -> Unit raise {
   try {
     bm_check_disjointness(
-      @parser.parse_term(
+      parse_bitmatch(
         "bitmatch (x:(2)word) with | [0b11:2] -> T | [0b00:2] -> T | [0b00:2] -> T",
       ),
     )
@@ -7228,14 +7210,11 @@ fn load_steps() -> Unit raise {
   step_11()
   step_12()
   step_13()
-  step_14()
   step_15()
   step_16()
   step_17()
   step_18()
   step_19()
-  step_20()
-  step_21()
   step_22()
   step_23()
   step_24()
