@@ -54,7 +54,7 @@ test "view alternatives backtrack without undoing parser actions" {
 }
 
 ///|
-test "view alternatives propagate hard errors and reject empty input" {
+test "view alternatives propagate hard errors" {
   let mut tried_alternative = false
   let parser = @parser.alt(@parser.fix("b", @parser.a(@lexer.Ident("b"))), input => {
     tried_alternative = true
@@ -72,14 +72,4 @@ test "view alternatives propagate hard errors and reject empty input" {
   }
   assert_true(failed)
   assert_false(tried_alternative)
-  let empty : ArrayView[@lexer.Lexcode] = []
-  let no_parse = try {
-    ignore(@parser.some(_ => true)(empty))
-    false
-  } catch {
-    @parser.Noparse => true
-    e => raise e
-  }
-  assert_true(no_parse)
-  assert_eq(@parser.finished(empty), (0, empty))
 }

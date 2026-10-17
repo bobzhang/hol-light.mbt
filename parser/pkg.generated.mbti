@@ -27,21 +27,13 @@ pub fn[X, A, S] elistof((X) -> (A, X) raise, (X) -> (S, X) raise, String) -> (X)
 
 pub fn end_theory() -> Unit
 
-pub fn[I] finished(ArrayView[I]) -> (Int, ArrayView[I]) raise
-
 pub fn[I] finished_list(@list.List[I]) -> (Int, @list.List[I]) raise
 
 pub fn[X, R] fix(String, (X) -> R raise) -> (X) -> R raise
 
 pub fn install_parser(String, (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) -> Unit
 
-pub fn installed_parsers() -> @list.List[(String, (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise)]
-
-pub fn[X, A, S] leftbin((X) -> (A, X) raise, (X) -> (S, X) raise, (S, A, A) -> A raise?, String) -> (X) -> (A, X) raise
-
 pub fn[X, A, S] listof((X) -> (A, X) raise, (X) -> (S, X) raise, String) -> (X) -> (@list.List[A], X) raise
-
-pub fn loaded_theories() -> Array[String]
 
 pub fn[X, A] many((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
 
@@ -57,17 +49,11 @@ pub fn parse_term(String) -> @kernel.Term raise
 
 pub fn parse_type(String) -> @kernel.HolType raise
 
-pub fn pgenvar_counter() -> Int
-
 pub fn[X, A] possibly((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
 
 pub let quotation_trace : @ref.Ref[Array[String]?]
 
-pub fn[X, A, S] rightbin((X) -> (A, X) raise, (X) -> (S, X) raise, (S, A, A) -> A raise?, String) -> (X) -> (A, X) raise
-
 pub fn[X, A, Y, B, Z] seq((X) -> (A, Y) raise, (Y) -> (B, Z) raise) -> (X) -> ((A, B), Z) raise
-
-pub fn[I] some((I) -> Bool raise?) -> (ArrayView[I]) -> (I, ArrayView[I]) raise
 
 pub fn[I] some_list((I) -> Bool raise?) -> (@list.List[I]) -> (I, @list.List[I]) raise
 
@@ -82,6 +68,5 @@ pub fn Noparse::to_repr(Self) -> @debug.Repr
 // Types and methods
 
 // Type aliases
-pub type UserParser = (String, (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise)
 
 // Traits
