@@ -4,6 +4,7 @@ package "bobzhang/hol_light/term_syntax"
 import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/preterm",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -13,7 +14,15 @@ pub fn parse_term(String) -> @kernel.Term raise
 
 pub fn parse_type(String) -> @kernel.HolType raise
 
+pub fn print_term(@kernel.Term) -> String raise Unprintable
+
+pub fn print_type(@kernel.HolType) -> String raise Unprintable
+
 // Errors
+pub(all) suberror Unprintable {
+  Unprintable(String)
+} derive(@debug.Debug)
+pub fn Unprintable::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 

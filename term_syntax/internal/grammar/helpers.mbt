@@ -149,14 +149,27 @@ fn list(es : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
 
 ///|
 /// A MoonBit type name as a HOL type: `Bool`, `Num`, `List[A]` name the HOL
-/// types bool, num and list; any other name is a type variable.
+/// types bool, num and list (a type constant whose name is capitalised is
+/// written as it is); any other name is a type variable.
 fn named_type(
   name : String,
   args : @list.List[@preterm.Pretype],
 ) -> @preterm.Pretype {
+  // HOL's unit type is called 1
+  if name == "Unit" && (try @kernel.get_type_arity("unit") catch { _ => -1L }) < 0L {
+    return @preterm.Ptycon("1", check_arity("1", args))
+  }
   let chars = name.to_array()
   let lower = chars[0].to_string().to_lower() +
     String::from_array(chars[1:])
+  // `Num` is num; a type constant whose name is capitalised already is
+  // written as it is
+  let lower = if (try @kernel.get_type_arity(lower) catch { _ => -1L }) < 0L &&
+    (try @kernel.get_type_arity(name) catch { _ => -1L }) >= 0L {
+    name
+  } else {
+    lower
+  }
   let arity = @kernel.get_type_arity(lower) catch { _ => -1L }
   if arity >= 0L {
     if arity != args.length().to_int64() {
@@ -169,6 +182,17 @@ fn named_type(
     reject("unknown type " + name)
     @preterm.Utv(name)
   }
+}
+
+///|
+fn check_arity(
+  name : String,
+  args : @list.List[@preterm.Pretype],
+) -> @list.List[@preterm.Pretype] {
+  if !args.is_empty() {
+    abort("type " + name + " takes no arguments")
+  }
+  args
 }
 
 ///|
