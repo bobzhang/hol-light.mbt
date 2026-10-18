@@ -192,7 +192,21 @@ pub fn functioncomposition() -> @kernel.Thm {
 ///|
 /// IN_CartesianProduct
 fn step_16() -> Unit raise {
-  in_cartesianproduct_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀X Y x y. x,y ∈ X ∏ Y  ⇔  x ∈ X ∧ y ∈ Y\n\n  proof\n    rewrite IN_ELIM_THM CartesianProduct;     fol PAIR_EQ;     qed;\n")))
+  in_cartesianproduct_v1_c.set(@readable.prove(
+    "\n  forall X Y x y. x,y IN X prod Y  <=>  x IN X /\\  y IN Y",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+            @readable.Thm("CartesianProduct", () => cartesianproduct()),
+          ],
+        ),
+        @readable.by(@readable.fol, [@readable.Thm("PAIR_EQ", () => @pair.pair_eq())]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -205,89 +219,23 @@ pub fn in_cartesianproduct_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_1`
-pub fn exec_phrase_1(x1 : Unit) -> Unit raise {
-  let _ = x1
-  {
-    @readable.thmlist_tactic_ref().val = @readable.rewrite
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewrite): thm list -> tactic);;
-fn step_17() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewrite): thm list -> tactic);;", exec_phrase_1)
-}
-
-///|
-/// `exec_phrase_2`
-pub fn exec_phrase_2(x2 : Unit) -> Unit raise {
-  let _ = x2
-  {
-    @readable.thmlist_tactic_ref().val = @readable.fol
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((fol): thm list -> tactic);;
-fn step_18() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((fol): thm list -> tactic);;", exec_phrase_2)
-}
-
-///|
-/// `exec_phrase_3`
-pub fn exec_phrase_3(x3 : Unit) -> Unit raise {
-  let _ = x3
-  {
-    @readable.thm_ref().val = @sets.in_elim_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_ELIM_THM): thm);;
-fn step_19() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_ELIM_THM): thm);;", exec_phrase_3)
-}
-
-///|
-/// `exec_phrase_4`
-pub fn exec_phrase_4(x4 : Unit) -> Unit raise {
-  let _ = x4
-  {
-    @readable.thm_ref().val = cartesianproduct()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CartesianProduct): thm);;
-fn step_20() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CartesianProduct): thm);;", exec_phrase_4)
-}
-
-///|
-/// `exec_phrase_5`
-pub fn exec_phrase_5(x5 : Unit) -> Unit raise {
-  let _ = x5
-  {
-    @readable.thm_ref().val = @pair.pair_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((PAIR_EQ): thm);;
-fn step_21() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((PAIR_EQ): thm);;", exec_phrase_5)
-}
-
-///|
 /// IN_CartesianProduct
 fn step_22() -> Unit raise {
-  in_cartesianproduct_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀X Y x y. x,y ∈ X ∏ Y  ⇔  x ∈ X ∧ y ∈ Y\n\n  proof\n    rewrite IN_ELIM_THM CartesianProduct;     fol PAIR_EQ;     qed;\n")))
+  in_cartesianproduct_c.set(@readable.prove(
+    "\n  forall X Y x y. x,y IN X prod Y  <=>  x IN X /\\  y IN Y",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+            @readable.Thm("CartesianProduct", () => cartesianproduct()),
+          ],
+        ),
+        @readable.by(@readable.fol, [@readable.Thm("PAIR_EQ", () => @pair.pair_eq())]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -302,7 +250,17 @@ pub fn in_cartesianproduct() -> @kernel.Thm {
 ///|
 /// CartesianFstSnd
 fn step_23() -> Unit raise {
-  cartesianfstsnd_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀pair. pair ∈ X ∏ Y  ⇒  FST pair ∈ X ∧ SND pair ∈ Y\n  by rewrite FORALL_PAIR_THM PAIR_EQ IN_CartesianProduct")))
+  cartesianfstsnd_c.set(@readable.prove(
+    "\n  forall pair. pair IN X prod Y  ==>  FST pair IN X /\\  SND pair IN Y",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+        @readable.Thm("IN_CartesianProduct", () => in_cartesianproduct()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -315,41 +273,22 @@ pub fn cartesianfstsnd() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_6`
-pub fn exec_phrase_6(x6 : Unit) -> Unit raise {
-  let _ = x6
-  {
-    @readable.thm_ref().val = @pair.forall_pair_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_PAIR_THM): thm);;
-fn step_24() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_PAIR_THM): thm);;", exec_phrase_6)
-}
-
-///|
-/// `exec_phrase_7`
-pub fn exec_phrase_7(x7 : Unit) -> Unit raise {
-  let _ = x7
-  {
-    @readable.thm_ref().val = in_cartesianproduct()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_CartesianProduct): thm);;
-fn step_25() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_CartesianProduct): thm);;", exec_phrase_7)
-}
-
-///|
 /// FUNCTION_EQ
 fn step_26() -> Unit raise {
-  function_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β. FUNCTION α  ∧  FUNCTION β  ∧  SOURCE α = SOURCE β  ∧\n    FUN α = FUN β  ∧  TARGET α = TARGET β\n    ⇒ α = β\n  by simplify FORALL_PAIR_THM FUNCTION SOURCE TARGET FUN PAIR_EQ")))
+  function_eq_c.set(@readable.prove(
+    "\n  forall alpha beta. FUNCTION alpha  /\\   FUNCTION beta  /\\   SOURCE alpha = SOURCE beta  /\\ \n    FUN alpha = FUN beta  /\\   TARGET alpha = TARGET beta\n    ==> alpha = beta",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+        @readable.Thm("FUNCTION", () => function()),
+        @readable.Thm("SOURCE", () => source()),
+        @readable.Thm("TARGET", () => target()),
+        @readable.Thm("FUN", () => fun()),
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -362,89 +301,18 @@ pub fn function_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_8`
-pub fn exec_phrase_8(x8 : Unit) -> Unit raise {
-  let _ = x8
-  {
-    @readable.thmlist_tactic_ref().val = @readable.simplify
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((simplify): thm list -> tactic);;
-fn step_27() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((simplify): thm list -> tactic);;", exec_phrase_8)
-}
-
-///|
-/// `exec_phrase_9`
-pub fn exec_phrase_9(x9 : Unit) -> Unit raise {
-  let _ = x9
-  {
-    @readable.thm_ref().val = function()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FUNCTION): thm);;
-fn step_28() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FUNCTION): thm);;", exec_phrase_9)
-}
-
-///|
-/// `exec_phrase_10`
-pub fn exec_phrase_10(x10 : Unit) -> Unit raise {
-  let _ = x10
-  {
-    @readable.thm_ref().val = source()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SOURCE): thm);;
-fn step_29() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SOURCE): thm);;", exec_phrase_10)
-}
-
-///|
-/// `exec_phrase_11`
-pub fn exec_phrase_11(x11 : Unit) -> Unit raise {
-  let _ = x11
-  {
-    @readable.thm_ref().val = target()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TARGET): thm);;
-fn step_30() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TARGET): thm);;", exec_phrase_11)
-}
-
-///|
-/// `exec_phrase_12`
-pub fn exec_phrase_12(x12 : Unit) -> Unit raise {
-  let _ = x12
-  {
-    @readable.thm_ref().val = fun()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FUN): thm);;
-fn step_31() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FUN): thm);;", exec_phrase_12)
-}
-
-///|
 /// IN_FunctionSpace
 fn step_32() -> Unit raise {
-  in_functionspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t α. α ∈ s → t\n    ⇔  FUNCTION α  ∧  s = SOURCE α  ∧  t = TARGET α\n  by rewrite IN_ELIM_THM FunctionSpace")))
+  in_functionspace_c.set(@readable.prove(
+    "\n  forall s t alpha. alpha IN s ---> t\n    <=>  FUNCTION alpha  /\\   s = SOURCE alpha  /\\   t = TARGET alpha",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+        @readable.Thm("FunctionSpace", () => functionspace()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -457,25 +325,19 @@ pub fn in_functionspace() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_13`
-pub fn exec_phrase_13(x13 : Unit) -> Unit raise {
-  let _ = x13
-  {
-    @readable.thm_ref().val = functionspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FunctionSpace): thm);;
-fn step_33() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FunctionSpace): thm);;", exec_phrase_13)
-}
-
-///|
 /// makeFunction_EQ
 fn step_34() -> Unit raise {
-  makefunction_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f g s t.  (∀x. x ∈ s ⇒ f x = g x)\n    ⇒  makeFunction t f s = makeFunction t g s\n  by simplify makeFunction ∉ FUN_EQ_THM")))
+  makefunction_eq_c.set(@readable.prove(
+    "\n  forall f g s t.  (forall x. x IN s ==> f x = g x)\n    ==>  makeFunction t f s = makeFunction t g s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("makeFunction", () => makefunction()),
+        @readable.Thm("NOTIN", () => notin()),
+        @readable.Thm("FUN_EQ_THM", () => @class.fun_eq_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -488,57 +350,20 @@ pub fn makefunction_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_14`
-pub fn exec_phrase_14(x14 : Unit) -> Unit raise {
-  let _ = x14
-  {
-    @readable.thm_ref().val = makefunction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((makeFunction): thm);;
-fn step_35() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((makeFunction): thm);;", exec_phrase_14)
-}
-
-///|
-/// `exec_phrase_15`
-pub fn exec_phrase_15(x15 : Unit) -> Unit raise {
-  let _ = x15
-  {
-    @readable.thm_ref().val = notin()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOTIN): thm);;
-fn step_36() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOTIN): thm);;", exec_phrase_15)
-}
-
-///|
-/// `exec_phrase_16`
-pub fn exec_phrase_16(x16 : Unit) -> Unit raise {
-  let _ = x16
-  {
-    @readable.thm_ref().val = @class.fun_eq_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FUN_EQ_THM): thm);;
-fn step_37() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FUN_EQ_THM): thm);;", exec_phrase_16)
-}
-
-///|
 /// makeFunctionyieldsFUN
 fn step_38() -> Unit raise {
-  makefunctionyieldsfun_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α g t f s.  α = makeFunction t f s ∧ g = FUN α\n    ⇒ ∀x. x ∈ s ⇒ f x = g x\n  by simplify makeFunction FORALL_PAIR_THM FUN PAIR_EQ")))
+  makefunctionyieldsfun_c.set(@readable.prove(
+    "\n  forall alpha g t f s.  alpha = makeFunction t f s /\\  g = FUN alpha\n    ==> forall x. x IN s ==> f x = g x",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("makeFunction", () => makefunction()),
+        @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+        @readable.Thm("FUN", () => fun()),
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -553,7 +378,17 @@ pub fn makefunctionyieldsfun() -> @kernel.Thm {
 ///|
 /// makeFunctionEq
 fn step_39() -> Unit raise {
-  makefunctioneq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β f g s t.  α = makeFunction t f s  ∧ β = makeFunction t g s  ∧\n    (∀x. x ∈ s ⇒ f x = g x)  ⇒  α = β\n  by simplify FORALL_PAIR_THM makeFunction PAIR_EQ")))
+  makefunctioneq_c.set(@readable.prove(
+    "\n  forall alpha beta f g s t.  alpha = makeFunction t f s  /\\  beta = makeFunction t g s  /\\ \n    (forall x. x IN s ==> f x = g x)  ==>  alpha = beta",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+        @readable.Thm("makeFunction", () => makefunction()),
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -568,7 +403,26 @@ pub fn makefunctioneq() -> @kernel.Thm {
 ///|
 /// FunctionSpaceOnSource
 fn step_40() -> Unit raise {
-  functionspaceonsource_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f s t.  α ∈ s → t  ∧  f = FUN α\n    ⇒  ∀x. x ∈ s ⇒ f x ∈ t\n\n  proof\n    rewrite FORALL_PAIR_THM IN_FunctionSpace FUNCTION SOURCE TARGET PAIR_EQ FUN;\n    fol;     qed;\n")))
+  functionspaceonsource_c.set(@readable.prove(
+    "\n  forall alpha f s t.  alpha IN s ---> t  /\\   f = FUN alpha\n    ==>  forall x. x IN s ==> f x IN t",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+            @readable.Thm("IN_FunctionSpace", () => in_functionspace()),
+            @readable.Thm("FUNCTION", () => function()),
+            @readable.Thm("SOURCE", () => source()),
+            @readable.Thm("TARGET", () => target()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+            @readable.Thm("FUN", () => fun()),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -581,25 +435,28 @@ pub fn functionspaceonsource() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_17`
-pub fn exec_phrase_17(x17 : Unit) -> Unit raise {
-  let _ = x17
-  {
-    @readable.thm_ref().val = in_functionspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_FunctionSpace): thm);;
-fn step_41() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_FunctionSpace): thm);;", exec_phrase_17)
-}
-
-///|
 /// FunctionSpaceOnOffSource
 fn step_42() -> Unit raise {
-  functionspaceonoffsource_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f s t.  α ∈ s → t  ∧  f = FUN α\n    ⇒  (∀x. x ∈ s ⇒ f x ∈ t) ∧ ∀x. x ∉ s ⇒ f x = @y. T\n\n  proof\n    rewrite FORALL_PAIR_THM IN_FunctionSpace FUNCTION SOURCE TARGET PAIR_EQ FUN;\n    fol;     qed;\n")))
+  functionspaceonoffsource_c.set(@readable.prove(
+    "\n  forall alpha f s t.  alpha IN s ---> t  /\\   f = FUN alpha\n    ==>  (forall x. x IN s ==> f x IN t) /\\  forall x. x NOTIN s ==> f x = @y. T",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+            @readable.Thm("IN_FunctionSpace", () => in_functionspace()),
+            @readable.Thm("FUNCTION", () => function()),
+            @readable.Thm("SOURCE", () => source()),
+            @readable.Thm("TARGET", () => target()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+            @readable.Thm("FUN", () => fun()),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -614,7 +471,27 @@ pub fn functionspaceonoffsource() -> @kernel.Thm {
 ///|
 /// ImpliesTruncatedFunctionSpace
 fn step_43() -> Unit raise {
-  impliestruncatedfunctionspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t f.  α = makeFunction t f s  ∧  (∀x. x ∈ s ⇒ f x ∈ t)\n    ⇒ α ∈ s → t\n\n  proof\n    rewrite FORALL_PAIR_THM IN_FunctionSpace makeFunction FUNCTION SOURCE TARGET NOTIN PAIR_EQ;\n    fol;\n  qed;\n")))
+  impliestruncatedfunctionspace_c.set(@readable.prove(
+    "\n  forall alpha s t f.  alpha = makeFunction t f s  /\\   (forall x. x IN s ==> f x IN t)\n    ==> alpha IN s ---> t",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+            @readable.Thm("IN_FunctionSpace", () => in_functionspace()),
+            @readable.Thm("makeFunction", () => makefunction()),
+            @readable.Thm("FUNCTION", () => function()),
+            @readable.Thm("SOURCE", () => source()),
+            @readable.Thm("TARGET", () => target()),
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -629,7 +506,31 @@ pub fn impliestruncatedfunctionspace() -> @kernel.Thm {
 ///|
 /// FunFunctionSpaceImplyFunction
 fn step_44() -> Unit raise {
-  funfunctionspaceimplyfunction_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t f.  α ∈ s → t  ∧  f = FUN α  ⇒  α = makeFunction t f s\n\n  proof\n    rewrite FORALL_PAIR_THM IN_FunctionSpace makeFunction FUNCTION SOURCE TARGET FUN NOTIN PAIR_EQ;\n    fol FUN_EQ_THM;\n  qed;\n")))
+  funfunctionspaceimplyfunction_c.set(@readable.prove(
+    "\n  forall alpha s t f.  alpha IN s ---> t  /\\   f = FUN alpha  ==>  alpha = makeFunction t f s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+            @readable.Thm("IN_FunctionSpace", () => in_functionspace()),
+            @readable.Thm("makeFunction", () => makefunction()),
+            @readable.Thm("FUNCTION", () => function()),
+            @readable.Thm("SOURCE", () => source()),
+            @readable.Thm("TARGET", () => target()),
+            @readable.Thm("FUN", () => fun()),
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("FUN_EQ_THM", () => @class.fun_eq_thm())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -644,7 +545,52 @@ pub fn funfunctionspaceimplyfunction() -> @kernel.Thm {
 ///|
 /// UseFunctionComposition
 fn step_45() -> Unit raise {
-  usefunctioncomposition_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β u f t g s. α = makeFunction u f t  ∧\n    β = makeFunction t g s  ∧  β ∈ s → t\n    ⇒ α _o_ β = makeFunction u (f o g) s\n\n  proof\n    rewrite FORALL_PAIR_THM makeFunction FunctionComposition SOURCE TARGET FUN BETA_THM o_THM IN_FunctionSpace FUNCTION SOURCE TARGET NOTIN PAIR_EQ;\n    intro_TAC ∀[u'] [f'] [t'] [t1] [g1] [s1] [u] [f] [t] [g] [s],\n    Hα Hβ Hβ_st Hs Ht;\n    (∀x. x ∈ s ⇒ g x ∈ t)     [g_st] by fol Hβ_st Hβ;\n    simplify Hα GSYM Hs Hβ g_st;\n  qed;\n")))
+  usefunctioncomposition_c.set(@readable.prove(
+    "\n  forall alpha beta u f t g s. alpha = makeFunction u f t  /\\ \n    beta = makeFunction t g s  /\\   beta IN s ---> t\n    ==> alpha _o_ beta = makeFunction u (f o g) s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+            @readable.Thm("makeFunction", () => makefunction()),
+            @readable.Thm("FunctionComposition", () => functioncomposition()),
+            @readable.Thm("SOURCE", () => source()),
+            @readable.Thm("TARGET", () => target()),
+            @readable.Thm("FUN", () => fun()),
+            @readable.Thm("BETA_THM", () => @theorems.beta_thm()),
+            @readable.Thm("o_THM", () => @trivia.o_thm()),
+            @readable.Thm("IN_FunctionSpace", () => in_functionspace()),
+            @readable.Thm("FUNCTION", () => function()),
+            @readable.Thm("SOURCE", () => source()),
+            @readable.Thm("TARGET", () => target()),
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+          ],
+        ),
+        @readable.intro_tac(
+          "forall [u'] [f'] [t'] [t1] [g1] [s1] [u] [f] [t] [g] [s],\n    Halpha Hbeta Hbeta_st Hs Ht",
+        ),
+        @readable.have(
+          "\n    (forall x. x IN s ==> g x IN t)",
+          "g_st",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Hbeta_st"), @readable.Label("Hbeta")],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("Halpha"),
+            @readable.Rule(@equal.gsym, @readable.Label("Hs")),
+            @readable.Label("Hbeta"),
+            @readable.Label("g_st"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -657,73 +603,36 @@ pub fn usefunctioncomposition() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_18`
-pub fn exec_phrase_18(x18 : Unit) -> Unit raise {
-  let _ = x18
-  {
-    @readable.thm_ref().val = functioncomposition()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FunctionComposition): thm);;
-fn step_46() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FunctionComposition): thm);;", exec_phrase_18)
-}
-
-///|
-/// `exec_phrase_19`
-pub fn exec_phrase_19(x19 : Unit) -> Unit raise {
-  let _ = x19
-  {
-    @readable.thm_ref().val = @theorems.beta_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BETA_THM): thm);;
-fn step_47() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BETA_THM): thm);;", exec_phrase_19)
-}
-
-///|
-/// `exec_phrase_20`
-pub fn exec_phrase_20(x20 : Unit) -> Unit raise {
-  let _ = x20
-  {
-    @readable.thm_ref().val = @trivia.o_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((o_THM): thm);;
-fn step_48() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((o_THM): thm);;", exec_phrase_20)
-}
-
-///|
-/// `exec_phrase_21`
-pub fn exec_phrase_21(x21 : Unit) -> Unit raise {
-  let _ = x21
-  {
-    @readable.thm_thm_ref().val = @equal.gsym
-    ()
-  }
-}
-
-///|
-/// the phrase thm_thm_ref := ((GSYM): (thm -> thm));;
-fn step_49() -> Unit raise {
-  @lib.register_phrase("thm_thm_ref := ((GSYM): (thm -> thm));;", exec_phrase_21)
-}
-
-///|
 /// PairProjectionFunctions
 fn step_50() -> Unit raise {
-  pairprojectionfunctions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀X Y. Pi1 X Y ∈ X ∏ Y → X  ∧  Pi2 X Y ∈ X ∏ Y → Y\n\n  proof\n    intro_TAC ∀X Y;\n    ∀pair. pair ∈ X ∏ Y  ⇒  FST pair ∈ X  ∧ SND pair ∈ Y     [] by fol CartesianFstSnd;\n    fol Projection1Function Projection2Function - ImpliesTruncatedFunctionSpace;\n  qed;\n")))
+  pairprojectionfunctions_c.set(@readable.prove(
+    "\n  forall X Y. Pi1 X Y IN X prod Y ---> X  /\\   Pi2 X Y IN X prod Y ---> Y",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall X Y"),
+        @readable.have(
+          "\n    forall pair. pair IN X prod Y  ==>  FST pair IN X  /\\  SND pair IN Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("CartesianFstSnd", () => cartesianfstsnd())],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("Projection1Function", () => projection1function()),
+            @readable.Thm("Projection2Function", () => projection2function()),
+            @readable.Prev,
+            @readable.Thm(
+              "ImpliesTruncatedFunctionSpace",
+              () => impliestruncatedfunctionspace(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -736,73 +645,223 @@ pub fn pairprojectionfunctions() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_22`
-pub fn exec_phrase_22(x22 : Unit) -> Unit raise {
-  let _ = x22
-  {
-    @readable.thm_ref().val = cartesianfstsnd()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CartesianFstSnd): thm);;
-fn step_51() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CartesianFstSnd): thm);;", exec_phrase_22)
-}
-
-///|
-/// `exec_phrase_23`
-pub fn exec_phrase_23(x23 : Unit) -> Unit raise {
-  let _ = x23
-  {
-    @readable.thm_ref().val = projection1function()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Projection1Function): thm);;
-fn step_52() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Projection1Function): thm);;", exec_phrase_23)
-}
-
-///|
-/// `exec_phrase_24`
-pub fn exec_phrase_24(x24 : Unit) -> Unit raise {
-  let _ = x24
-  {
-    @readable.thm_ref().val = projection2function()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Projection2Function): thm);;
-fn step_53() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Projection2Function): thm);;", exec_phrase_24)
-}
-
-///|
-/// `exec_phrase_25`
-pub fn exec_phrase_25(x25 : Unit) -> Unit raise {
-  let _ = x25
-  {
-    @readable.thm_ref().val = impliestruncatedfunctionspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ImpliesTruncatedFunctionSpace): thm);;
-fn step_54() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ImpliesTruncatedFunctionSpace): thm);;", exec_phrase_25)
-}
-
-///|
 /// UniversalPropertyProduct
 fn step_55() -> Unit raise {
-  universalpropertyproduct_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀M A B α β.  α ∈ M → A  ∧  β ∈ M → B\n      ⇒  ∃!γ.  γ ∈ M → A ∏ B  ∧  Pi1 A B ∘ γ = α  ∧  Pi2 A B ∘ γ = β\n\n  proof\n    intro_TAC ∀M A B α β, H1;\n    consider f g such that f = FUN α ∧ g = FUN β     [fgExist] by fol;\n    consider h such that h = λx. (f x,g x)     [hExists] by fol;\n    ∀x. x ∈ M  ⇒  h x ∈ A ∏ B     [hProd] by fol hExists IN_CartesianProduct H1 fgExist FunctionSpaceOnSource;\n    consider γ such that γ = makeFunction (A ∏ B) h  M     [γExists] by fol;\n    γ ∈ M → A ∏ B     [γFunSpace] by fol - hProd ImpliesTruncatedFunctionSpace;\n    ∀x. x ∈ M  ⇒  (FST o h) x = f x  ∧  (SND o h) x = g x     [h_fg] by simplify hExists PAIR o_THM;\n    Pi1 A B ∘ γ = makeFunction A (FST o h) M  ∧\n    Pi2 A B ∘ γ = makeFunction B (SND o h) M     [] by fol Projection1Function Projection2Function γExists  γFunSpace UseFunctionComposition;\n    Pi1 A B ∘ γ = α  ∧  Pi2 A B ∘ γ = β     [γWorks] by fol - h_fg makeFunction_EQ H1 fgExist FunFunctionSpaceImplyFunction;\n   ∀θ.  θ ∈ M → A ∏ B  ∧  Pi1 A B ∘ θ = α  ∧  Pi2 A B ∘ θ = β  ⇒ θ = γ     []\n     proof\n      intro_TAC ∀θ, θWorks;\n      consider k such that k = FUN θ     [kExists] by fol;\n      θ = makeFunction (A ∏ B) k M     [θFUNk] by fol θWorks - FunFunctionSpaceImplyFunction;\n      α = makeFunction A (FST o k) M  ∧  β = makeFunction B (SND o k) M     [] by fol Projection1Function Projection2Function θFUNk θWorks UseFunctionComposition;\n      ∀x. x ∈ M  ⇒  f x = (FST o k) x ∧ g x = (SND o k) x     [fg_k] by fol ISPECL [α; f; A; (FST o k); M] makeFunctionyieldsFUN ISPECL [β; g; B; (SND o k); M] makeFunctionyieldsFUN - fgExist;\n      ∀x. x ∈ M ⇒ k x = ((FST o k) x, (SND o k) x)     [] by fol PAIR o_THM;\n      ∀x. x ∈ M ⇒ k x = (f x, g x)     [] by fol - fg_k PAIR_EQ;\n      fol hExists θFUNk γExists  - makeFunctionEq;\n     qed;\n     fol γFunSpace γWorks - EXISTS_UNIQUE_THM;\n  qed;\n")))
+  universalpropertyproduct_c.set(@readable.prove(
+    "\n  forall M A B alpha beta.  alpha IN M ---> A  /\\   beta IN M ---> B\n      ==>  ?!gamma.  gamma IN M ---> A prod B  /\\   Pi1 A B _o_ gamma = alpha  /\\   Pi2 A B _o_ gamma = beta",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall M A B alpha beta, H1"),
+        @readable.consider(
+          "f g",
+          "f = FUN alpha /\\  g = FUN beta    ",
+          "fgExist",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.consider(
+          "h",
+          "h = \\ x. (f x,g x)    ",
+          "hExists",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    forall x. x IN M  ==>  h x IN A prod B",
+          "hProd",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("hExists"),
+              @readable.Thm("IN_CartesianProduct", () => in_cartesianproduct()),
+              @readable.Label("H1"),
+              @readable.Label("fgExist"),
+              @readable.Thm("FunctionSpaceOnSource", () => functionspaceonsource()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "gamma",
+          "gamma = makeFunction (A prod B) h  M    ",
+          "gammaExists",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    gamma IN M ---> A prod B",
+          "gammaFunSpace",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("hProd"),
+              @readable.Thm(
+                "ImpliesTruncatedFunctionSpace",
+                () => impliestruncatedfunctionspace(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall x. x IN M  ==>  (FST o h) x = f x  /\\   (SND o h) x = g x",
+          "h_fg",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("hExists"),
+              @readable.Thm("PAIR", () => @pair.pair()),
+              @readable.Thm("o_THM", () => @trivia.o_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Pi1 A B _o_ gamma = makeFunction A (FST o h) M  /\\ \n    Pi2 A B _o_ gamma = makeFunction B (SND o h) M",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("Projection1Function", () => projection1function()),
+              @readable.Thm("Projection2Function", () => projection2function()),
+              @readable.Label("gammaExists"),
+              @readable.Label("gammaFunSpace"),
+              @readable.Thm("UseFunctionComposition", () => usefunctioncomposition()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Pi1 A B _o_ gamma = alpha  /\\   Pi2 A B _o_ gamma = beta",
+          "gammaWorks",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("h_fg"),
+              @readable.Thm("makeFunction_EQ", () => makefunction_eq()),
+              @readable.Label("H1"),
+              @readable.Label("fgExist"),
+              @readable.Thm(
+                "FunFunctionSpaceImplyFunction",
+                () => funfunctionspaceimplyfunction(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n   forall theta.  theta IN M ---> A prod B  /\\   Pi1 A B _o_ theta = alpha  /\\   Pi2 A B _o_ theta = beta  ==> theta = gamma",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall theta, thetaWorks"),
+              @readable.consider(
+                "k",
+                "k = FUN theta    ",
+                "kExists",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      theta = makeFunction (A prod B) k M",
+                "thetaFUNk",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("thetaWorks"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "FunFunctionSpaceImplyFunction",
+                      () => funfunctionspaceimplyfunction(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      alpha = makeFunction A (FST o k) M  /\\   beta = makeFunction B (SND o k) M",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Thm("Projection1Function", () => projection1function()),
+                    @readable.Thm("Projection2Function", () => projection2function()),
+                    @readable.Label("thetaFUNk"),
+                    @readable.Label("thetaWorks"),
+                    @readable.Thm(
+                      "UseFunctionComposition",
+                      () => usefunctioncomposition(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      forall x. x IN M  ==>  f x = (FST o k) x /\\  g x = (SND o k) x",
+                "fg_k",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.TermsRule(
+                      tms => th => @bool.ispecl(tms, th),
+                      ["alpha", " f", " A", " (FST o k)", " M"],
+                      @readable.Thm(
+                        "makeFunctionyieldsFUN",
+                        () => makefunctionyieldsfun(),
+                      ),
+                    ),
+                    @readable.TermsRule(
+                      tms => th => @bool.ispecl(tms, th),
+                      ["beta", " g", " B", " (SND o k)", " M"],
+                      @readable.Thm(
+                        "makeFunctionyieldsFUN",
+                        () => makefunctionyieldsfun(),
+                      ),
+                    ),
+                    @readable.Prev,
+                    @readable.Label("fgExist"),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      forall x. x IN M ==> k x = ((FST o k) x, (SND o k) x)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Thm("PAIR", () => @pair.pair()),
+                    @readable.Thm("o_THM", () => @trivia.o_thm()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      forall x. x IN M ==> k x = (f x, g x)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("fg_k"),
+                    @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("hExists"),
+                  @readable.Label("thetaFUNk"),
+                  @readable.Label("gammaExists"),
+                  @readable.Prev,
+                  @readable.Thm("makeFunctionEq", () => makefunctioneq()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("gammaFunSpace"),
+            @readable.Label("gammaWorks"),
+            @readable.Prev,
+            @readable.Thm("EXISTS_UNIQUE_THM", () => @theorems.exists_unique_thm()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -812,154 +871,6 @@ let universalpropertyproduct_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("Univer
 /// `UniversalPropertyProduct`
 pub fn universalpropertyproduct() -> @kernel.Thm {
   universalpropertyproduct_c.get()
-}
-
-///|
-/// `exec_phrase_26`
-pub fn exec_phrase_26(x26 : Unit) -> Unit raise {
-  let _ = x26
-  {
-    @readable.thm_ref().val = functionspaceonsource()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FunctionSpaceOnSource): thm);;
-fn step_56() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FunctionSpaceOnSource): thm);;", exec_phrase_26)
-}
-
-///|
-/// `exec_phrase_27`
-pub fn exec_phrase_27(x27 : Unit) -> Unit raise {
-  let _ = x27
-  {
-    @readable.thm_ref().val = @pair.pair()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((PAIR): thm);;
-fn step_57() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((PAIR): thm);;", exec_phrase_27)
-}
-
-///|
-/// `exec_phrase_28`
-pub fn exec_phrase_28(x28 : Unit) -> Unit raise {
-  let _ = x28
-  {
-    @readable.thm_ref().val = usefunctioncomposition()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UseFunctionComposition): thm);;
-fn step_58() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UseFunctionComposition): thm);;", exec_phrase_28)
-}
-
-///|
-/// `exec_phrase_29`
-pub fn exec_phrase_29(x29 : Unit) -> Unit raise {
-  let _ = x29
-  {
-    @readable.thm_ref().val = makefunction_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((makeFunction_EQ): thm);;
-fn step_59() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((makeFunction_EQ): thm);;", exec_phrase_29)
-}
-
-///|
-/// `exec_phrase_30`
-pub fn exec_phrase_30(x30 : Unit) -> Unit raise {
-  let _ = x30
-  {
-    @readable.thm_ref().val = funfunctionspaceimplyfunction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FunFunctionSpaceImplyFunction): thm);;
-fn step_60() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FunFunctionSpaceImplyFunction): thm);;", exec_phrase_30)
-}
-
-///|
-/// `exec_phrase_31`
-pub fn exec_phrase_31(x31 : Unit) -> Unit raise {
-  let _ = x31
-  {
-    @readable.termlist_thm_thm_ref().val = fn(x32 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-      fn(x33 : @kernel.Thm) -> @kernel.Thm raise {
-        @bool.ispecl(x32, x33)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase termlist_thm_thm_ref := ((ISPECL): (term list -> thm -> thm));;
-fn step_61() -> Unit raise {
-  @lib.register_phrase("termlist_thm_thm_ref := ((ISPECL): (term list -> thm -> thm));;", exec_phrase_31)
-}
-
-///|
-/// `exec_phrase_32`
-pub fn exec_phrase_32(x34 : Unit) -> Unit raise {
-  let _ = x34
-  {
-    @readable.thm_ref().val = makefunctionyieldsfun()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((makeFunctionyieldsFUN): thm);;
-fn step_62() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((makeFunctionyieldsFUN): thm);;", exec_phrase_32)
-}
-
-///|
-/// `exec_phrase_33`
-pub fn exec_phrase_33(x35 : Unit) -> Unit raise {
-  let _ = x35
-  {
-    @readable.thm_ref().val = makefunctioneq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((makeFunctionEq): thm);;
-fn step_63() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((makeFunctionEq): thm);;", exec_phrase_33)
-}
-
-///|
-/// `exec_phrase_34`
-pub fn exec_phrase_34(x36 : Unit) -> Unit raise {
-  let _ = x36
-  {
-    @readable.thm_ref().val = @theorems.exists_unique_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EXISTS_UNIQUE_THM): thm);;
-fn step_64() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EXISTS_UNIQUE_THM): thm);;", exec_phrase_34)
 }
 
 ///|
@@ -979,53 +890,19 @@ fn load_steps() -> Unit raise {
   step_13()
   step_14()
   step_15()
-  step_17()
-  step_18()
-  step_19()
-  step_20()
-  step_21()
   step_16()
   step_22()
-  step_24()
-  step_25()
   step_23()
-  step_27()
-  step_28()
-  step_29()
-  step_30()
-  step_31()
   step_26()
-  step_33()
   step_32()
-  step_35()
-  step_36()
-  step_37()
   step_34()
   step_38()
   step_39()
-  step_41()
   step_40()
   step_42()
   step_43()
   step_44()
-  step_46()
-  step_47()
-  step_48()
-  step_49()
   step_45()
-  step_51()
-  step_52()
-  step_53()
-  step_54()
   step_50()
-  step_56()
-  step_57()
-  step_58()
-  step_59()
-  step_60()
-  step_61()
-  step_62()
-  step_63()
-  step_64()
   step_55()
 }
