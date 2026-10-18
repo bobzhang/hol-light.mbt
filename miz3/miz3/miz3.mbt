@@ -339,12 +339,6 @@ pub fn mizar_skip_bracketed() -> @list.List[String] {
 }
 
 ///|
-/// miz3/miz3.ml:45
-fn step_23() -> Unit raise {
-  @printer.reserve_words(@lib.subtract(mizar_words(), @printer.reserved_words()))
-}
-
-///|
 /// `by_item`
 pub(all) enum ByItem {
   Label(String)
@@ -580,7 +574,7 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
 fn step_28() -> Unit raise {
   let reserve1 : (String) -> @lexer.Lexcode raise = fn(x56 : String) -> @lexer.Lexcode raise {
     let n = x56
-    if @printer.is_reserved_word(n) {
+    if @printer.is_reserved_word(n) || @lib.mem(n, mizar_words()) {
       @lexer.Lexcode::Resword(n)
     } else {
       @lexer.Lexcode::Ident(n)
@@ -4777,7 +4771,6 @@ fn load_steps() -> Unit raise {
   step_20()
   step_21()
   step_22()
-  step_23()
   step_24()
   step_25()
   step_26()
