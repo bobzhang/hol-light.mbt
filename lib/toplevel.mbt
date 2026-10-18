@@ -16,6 +16,12 @@ pub fn register_phrase(text : String, run : (Unit) -> Unit raise) -> Unit {
 }
 
 ///|
+/// Whether `text` is a phrase of the reference session.
+pub fn has_phrase(text : String) -> Bool {
+  phrases.contains(text)
+}
+
+///|
 /// Run the phrase `text`. One that upstream's load does not run, or that is
 /// not a well-typed expression there, fails.
 pub fn exec_phrase(text : String) -> Unit raise {
