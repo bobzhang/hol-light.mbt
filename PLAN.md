@@ -2,6 +2,10 @@
 
 Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this repo.
 
+This is the design and history of the port. The translator and the batch
+tools it describes were retired in October 2026 (TODO.md, "Porting is
+closed"); the `.mbt` files are now edited directly.
+
 ## Goals and decisions
 
 - **Scope:** everything, incrementally. First the full `hol.ml` load sequence

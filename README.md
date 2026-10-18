@@ -38,19 +38,21 @@ cadical, MiniSat, maxima for WZ/, cdd for LP_arith/, Prover9) load without
 it: the program's runs are recorded when the reference output is made and
 replayed (`<pkg>/commands.mbt`); the kernel checks the proofs they lead to.
 Files that give OCaml to the toplevel as strings (the proofs of readable.ml
-name their theorems and tactics so) run what the translator made of
+name their theorems and tactics so) run the MoonBit translation of
 each string the reference session ran (`@lib.exec_phrase`).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
-registry caps a module at 100 MB); Multivariate/, 100/ and the translation
+registry caps a module at 100 MB); Multivariate/, 100/ and the reference
 tooling are in the [GitHub repository](https://github.com/bobzhang/hol-light.mbt).
 
-Translated files are produced from upstream's OCaml by `tools/translator`,
-which reproduces OCaml's runtime behaviour exactly (63-bit ints, polymorphic
-compare and hashing, evaluation order, Hashtbl/Map/Random). Each translated
-file is checked against upstream: loading it must give the same theorems,
-constants and name counters as HOL Light itself (`*_ref_test.mbt`, golden
-outputs from `tools/ocaml_ref`).
+Most packages were machine-translated from upstream's OCaml by a
+translator that reproduced OCaml's runtime behaviour exactly (63-bit ints,
+polymorphic compare and hashing, evaluation order, Hashtbl/Map/Random). The
+translator has been retired: the `.mbt` files are now the source and are
+edited directly. Each translated file is still checked against upstream:
+loading it must give the same theorems, constants and name counters as HOL
+Light itself (`*_ref_test.mbt`, golden outputs from `tools/ocaml_ref`;
+`tools/ocaml_ref/refresh_ref.py` reruns one reference).
 
 ## Use
 
@@ -76,8 +78,8 @@ quantifier is passed as a function. The old `!x. P x` and `(!)` spellings are
 rejected. Existential `?` and unique-existence `?!` notation are unchanged.
 The internal logical constant is also named `forall`; parser, printer, and
 term constructors use the same name without an alias.
-`tools/hol_notation.py` migrates HOL-input literals emitted by the OCaml
-translator; it is not a runtime compatibility parser.
+`tools/hol_notation.py` migrated the HOL-input literals of the translated
+files; it is not a runtime compatibility parser.
 
 ## Develop
 
@@ -87,7 +89,7 @@ python3 tools/test.py core                 # everything hol.ml loads (20 s)
 python3 tools/test.py library              # or multivariate, 100, a package directory
 python3 tools/test.py all                  # the whole suite on wasm-gc
 python3 tools/test.py all --target wasm    # on the primary target (hours): before a release
-python3 tools/ocaml_ref/batch.py --files 100/x.ml ...   # translate and check
+python3 tools/ocaml_ref/refresh_ref.py 100_x_ref.ml    # rerun one OCaml reference
 ```
 
 A file's test loads everything before it in a fresh process and compares

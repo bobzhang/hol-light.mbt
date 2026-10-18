@@ -1,6 +1,6 @@
 # TODO
 
-State on 2026-10-06. PLAN.md has the design and the history; this file is
+State on 2026-10-18. PLAN.md has the design and the history; this file is
 what to do next.
 
 ## Done
@@ -18,132 +18,31 @@ what to do next.
   core, 10 s), `core`, `library`, `multivariate`, `100`.
 - OCaml `int` is exact 63-bit `Int64`; native (debug) passes too.
 
-## Resume
+## Porting is closed
 
-    python3 tools/ocaml_ref/batch.py --files 100/x.ml 100/y.ml ...
-    python3 tools/ocaml_ref/batch.py --resume --files ...   # after a failure
-    python3 tools/ocaml_ref/batch.py Multivariate/a.ml Multivariate/b.ml  # range
+The translator (tools/translator and its drivers) was retired in October
+2026: the `.mbt` files are the source and are edited directly. What was not
+ported stays unported unless done by hand: files that need a program that
+is not here (QBF: squolem; zChaff's half of Minisat/test.ml), the theorem
+search databases, the Proofrecording kernel, loaders and test scripts.
+`tools/ocaml_ref/refresh_ref.py <name>_ref.ml` reruns one upstream
+reference and re-embeds its golden.
 
-batch.py translates in one OCaml session and checks against one upstream
-session (forked children per file), then runs the new tests with
-`moon test --target wasm-gc`. Untranslated dependencies are added as targets. Progress:
-`tools/ocaml_ref/_build/batch/translate.log` and `ref.log`. Keep batches to
-~10-15 files: a failure late in a big batch costs hours.
+## Fixed syntax (issue #140)
 
-## Plan to finish
-
-Upstream has about 1.31M lines; 1.175M are ported (90%). Of the rest,
-23K are files that do not load upstream (from_topology.ml is 18K of
-them), 42K are the theorem search databases (database.ml, help.ml,
-Multivariate/*_database.ml) and 6K the Proofrecording kernel; the
-remainder is loaders, syntax extensions and test scripts (see step 8 and
-Open issues: not counted file by file). What is left to port needs a
-program that is not here (QBF: squolem; zChaff's half of Minisat/test.ml);
-then step 9. The steps, in the
-order to do it (dependencies first, cheap before expensive). Every step
-is the same loop: `batch.py --files ...` in batches of 10-15 files,
-`tools/test.py <tier>`, commit. Check a directory for external programs
-and file I/O before starting it.
-
-1. **Reference toolchain** (done): the opam switch `hol-light` (README.md)
-   reproduces the committed goldens byte for byte (theorems, class,
-   Library/prime, 100/fta). kernel_ref.ml no longer runs upstream (it
-   builds `Tyvar "Z"` directly; `hol_type` is private): rewrite it with
-   `mk_vartype`.
-2. **100/ chunk 2** (done): 34 files, taken from `wip/100-chunk2` and
-   checked in four batches.
-3. **Package aliases** (done): the rename table described under Open
-   issues.
-4. **Small directories that need only the core or Library/** (63K lines):
-   Complex, 100/cubic, Arithmetic (but pa.ml, which make.ml does not
-   load), Permutation, Ntrie, Model, GL, Divstep and Rqe (but
-   examples.ml, commented out of its make.ml) are done, EC too (edwards25519.ml alone takes two hours to translate: in a terminal). After a directory with a make.ml passes, fold its tests
-   into `<dir>/make` (tools/ocaml_ref/chain_test.py). Independent
-   directories can run side by side in scratch clones under `.port/`
-   (the OCaml sessions are the slow, single-threaded part). IsabelleLight and Boyer_Moore load their files from a computed
-   list (`map (load_on_path paths) [...]`), and Boyer_Moore has
-   `boyer-moore.ml` (no package can be named so) and a make.ml with
-   definitions: step 8. A directory
-   with a make.ml loads in that order (theory.make_plan). Expect translator
-   work per directory: Complex needed five additions (over-applied
-   primitives, unqualified Format functions, `Num.string_of_num`, weak type
-   variables in lifted local functions, rewrite nets with other payloads).
-5. **Examples/** (30K; 48 of 50 done) and Logic/ (done). Left:
-   inverse_bug_puzzle_miz3.ml (miz3, step 8) and update_database.ml (not a
-   theory).
-6. **Directories on top of Multivariate/**: Quaternions, Geometric_Algebra,
-   Functionspaces, Unity, Jordan and Probability are done. Mizarlight and
-   RichterHilbertAxiomGeometry (36K; needs miz3) wait for step 8.
-   A background job is stopped after two hours: split a long batch with
-   `--translate-only`, then `--resume` (and check finished files in a
-   second clone meanwhile); a single file that takes longer
-   (Autoformalization/fifteen_theorem.ml, EC/edwards25519.ml) has to run
-   in a terminal.
-7. **Autoformalization/** (205K): done, all 7 files. planar_graph loads
-   Multivariate/cauchy.ml part-way through (theory.MID_NEEDS) and is
-   loaded without Multivariate/clifford.ml (theory.CHAIN_SKIP);
-   fifteen_theorem takes 2.5 hours to check against upstream (run it in a
-   terminal) and parses `F` 2.4 million times (quotation traces collapse
-   such runs).
-   Also done on the way: IEEE, IsabelleLight, Boyer_Moore (the files
-   boyer-moore.ml loads; not make.ml's definitions and testset/) and 18
-   Tutorial/ files. Not ported from UnitTests/: basic_tests.ml needs the
-   zarith bignum backend (`pow`), printer_tests.ml and records.ml are test
-   scripts (`Format.set_margin`, `Printexc`, `exit`, `Assert_failure`).
-8. **External programs and other formats**.
-   - Done: a file's external commands are recorded in the reference session
-     (tools/ocaml_ref/prelude.ml wraps `Sys.command`) and replayed
-     (`@lib.sys_command`, `<pkg>/commands.mbt`), with in-memory files and
-     channels (lib/gp.mbt, lib/channels.mbt). With it: Cadical/ and its
-     test.ml (cadical, lrat-trim), Minisat/ (MiniSat-p 1.14; `readDimacs`
-     by hand: upstream uses Stream and Genlex), Examples/sos.ml and what
-     uses it (csdp): 100/thales, ceva, Examples/solovay, Tutorial/Vectors,
-     Custom_tactics, Defining_new_types. The reference toolchain needs
-     those programs on PATH (README).
-     Also done with it: WZ/ and Tutorial/Linking_external_tools.ml
-     (maxima), LP_arith/ (cddlib's `cdd_cert`), Examples/prover9.ml
-     (Prover9, prooftrans).
-   - Minisat/test.ml also runs zChaff (to download by hand from Princeton,
-     licence to accept: not installed); minisat_prove's test has three
-     SAT_PROVE checks instead.
-   - QBF/ needs squolem, which exists only as x86 Linux and Windows
-     binaries: not on this machine.
-   - Done: Formal_ineqs/, the 62 files of make.ml's closure (one linear
-     order, theory.ROOTS). Its files keep their theorems in modules: a
-     test lists what the module's signature exports. Its tests compare a
-     file's own output only (theory.OWN_OUTPUT: the output of what is
-     loaded before, 79K lines, is not repeated in each golden);
-     m_verifier_main's also runs the verifier on two of upstream's
-     examples. Not ported: the examples*.hl files (they set the
-     arithmetic base before loading the library) and tests/.
-   - OCaml run from strings: RichterHilbertAxiomGeometry/readable.ml (and
-     miz3) give the toplevel the theorem and tactic names of a proof as
-     OCaml (`exec`: `Toploop.execute_phrase` on `Lexing.from_string`).
-     Done for readable.ml: the translation session records every such
-     string (Loader.executed), Emit.exec_phrases translates each as a
-     function and registers it before the phrase that runs it, and the
-     file's `exec` (by hand) looks it up (lib/toplevel.mbt). Str is the
-     whole library now (lib/str.mbt, tools/ocaml_ref/str_ref.py), on
-     bytes, as String.sub.
-   - Done: RichterHilbertAxiomGeometry/: readable, UniversalPropCartProd,
-     HilbertAxiom_read, TarskiAxiomGeometry_read (these two assert axioms
-     upstream: theory.ASSERTS_AXIOMS compares the whole list),
-     inverse_bug_puzzle_read and Topology (loaded with upstream's own
-     closure, theory.UPSTREAM_CLOSURE: Topology.ml defines `istopology`).
-     Not ported, because they are not files that load: from_topology.ml
-     (18K lines; fails upstream in BOUNDED_INCREASING_CONVERGENT:
-     "MATCH_MP_TAC: No match"), error-checking.ml (raises on purpose),
-     thmFontHilbertAxiom.ml (a text of proof templates, not OCaml).
-   - Removed after porting (issue #140): miz3/ with its samples,
-     Examples/inverse_bug_puzzle_miz3.ml, Examples/mizar.ml, Mizarlight/
-     and IsabelleLight/. These proof-script languages add no logical power;
-     the MoonBit proof API (`proof`, `examples/proof_api`) replaces them.
-   - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
-     mcp, update_database, help.ml/database.ml, tactician_light.ml,
-     UnitTests/ (test scripts; basic_tests.ml needs the zarith backend).
-9. **Closing**: regenerate everything once (retranslate_all.py), the whole
-   suite on wasm (`tools/test.py all --target wasm`), CI with shards,
-   separate mooncakes modules per directory, README.
+1. Remove ambient syntax mutation (lexer, constant hiding, toggles, direct
+   interface writes): done (#141-#145). Proof-script languages (miz3,
+   Mizar, Mizar Light, Isabelle Light) removed; the MoonBit proof API is
+   `proof`. Left: overload priorities (`prioritize_*`,
+   `override_interface`) and type abbreviations, decided with step 2.
+2. A sub-MoonBit term syntax parsed by `moonbitlang/parser`
+   (`∀ x : _, body`, `∃ x : _, body`, `→`), with a printer, checked by
+   round-trip over the library's theorems, alongside the old parser.
+3. Migrate quotations package by package with a converter that parses with
+   the old parser at load time, prints in the new syntax and checks the
+   result is alpha-equal; remove each notation's registration after its
+   last user migrates. Normalize or preserve global counters first, so
+   parallel migrations do not all change downstream goldens.
 
 ## Open issues
 
@@ -152,26 +51,13 @@ and file I/O before starting it.
   core and Library/ with their tests (71 MB). Multivariate/ (166 MB: 73 MB
   source, 93 MB tests) and 100/ (which needs it) are on GitHub only. Publish
   them as separate modules (e.g. `bobzhang/hol_light_multivariate`, possibly
-  split further, tests trimmed): the translator and theory.py write import
-  paths `bobzhang/hol_light/<pkg>`, so they need a module prefix per
-  directory.
+  split further, tests trimmed): imports use the paths
+  `bobzhang/hol_light/<pkg>`, so they need a module prefix per directory.
 
-- **Package alias collisions** (done): MoonBit imports a package by its
-  last path component, so a file named like a package loaded with it gets
-  its directory's name too (`logic/logic_canon`,
-  `probability/probability_measure`, `quaternions/quaternions_misc`): the
-  table `RENAMED` in tools/ocaml_ref/theory.py, repeated in
-  `Names.package_of_file` (tools/translator/translator.ml). Add an entry
-  when a new directory collides.
 - **csdp**: Examples/sos.ml (REAL_SOS) runs the external SDP solver csdp
   (not in Homebrew; build from COIN-OR source, ask first). For wasm, replay
   recorded solver answers like lib/gp.mbt does for PARI/GP; the kernel
   checks the certificates.
-- **Parallel reference branches**: batch.py on `wip/100-chunk2` runs
-  reference branches in parallel (token pipe, 8 at a time); validate that
-  it reproduces committed goldens byte for byte (the first 100/ chunk)
-  before using it. The translation session is still serial (each
-  translation needs the previous interfaces from `moon info`).
 - **CI**: `.github/workflows/ci.yml` runs the core tier on every push
   and pull request (upstream's practice: its CI loads hol.ml), and
   `.github/workflows/full.yml` the whole suite on wasm-gc nightly and by
@@ -186,23 +72,17 @@ and file I/O before starting it.
   the core takes 20 s against 12 s on wasm-gc, three quarters of it in
   reference counting and allocation.
 - **Warnings**: `moon check` with moonc 0.10.15 gives 4 (deprecations in
-  num/). Translated packages carry a `warnings = "..."` line (theory.py)
+  num/). Translated packages carry a `warnings = "..."` line
   for what is a property of machine-made code; words the compiler
   reserves get `_` like keywords (`@define.define_`). CI is still pinned
   to moonc 0.10.14, which accepts all of it.
 - **Stale references**: tools/ocaml_ref/num_ref.expected has three lines
   the test no longer embeds (`int_big`, `int_too_big`, `max_min`), and
-  parser_ref.expected is not what parser_ref_test.mbt embeds; regenerate
-  or delete them.
+  Examples_prog_ref.expected differs from prog_ref_test.mbt since #133;
+  regenerate or delete them.
 - **Native release**: `moon test --release --target native` hits a moonc
   C-backend miscompile; repro in tools/moonbit_bugs/. Retry after a compiler
   update (debug native passes).
-- **Regenerate everything once** (`tools/ocaml_ref/retranslate_all.py`,
-  then the batch for Multivariate/100): later translator changes (`x = []`
-  as a constructor test, formatter-ignored output) are not yet applied to
-  older packages; equivalent, but the code differs.
-- **Codex review** of the last commits (frexp, `= []`, --resume, streamed
-  logs, alias table when added).
 - **Not ported**: Jordan/tactics_refine.ml's `dump_thm` and `load_thm`
   (theorems marshalled to a file and read back as proved: the port never
   deserializes theorems; the two functions exist and fail; upstream leaves
