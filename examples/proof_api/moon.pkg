@@ -1,0 +1,13 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/nums",
+  "bobzhang/hol_light/arith",
+  "bobzhang/hol_light/proof",
+  "moonbitlang/core/list",
+}
+
+import {
+  "bobzhang/hol_light/parser",
+} for "test"
