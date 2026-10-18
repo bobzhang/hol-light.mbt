@@ -176,8 +176,6 @@ T: if long_condition_name then first_branch_value else second_branch_value = (((
 T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa = (#forall:fun(fun(num,bool),bool) (\aaaaaaaaaaaaaaa:num. (#forall:fun(fun(num,bool),bool) (\bbbbbbbbbbbbbbbbbb:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) aaaaaaaaaaaaaaa:num) bbbbbbbbbbbbbbbbbb:num)) ((#+:fun(num,fun(num,num)) bbbbbbbbbbbbbbbbbb:num) aaaaaaaaaaaaaaa:num)))))) | forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb.
     aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb =
     bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
-Warning: inventing type variables
-T: SUC x = (SUC:fun('?958,'?957) x:'?958) | (SUC:?958->?957) (x:?958)
 T: x + y = ((#int_add:fun(int,fun(int,int)) x:int) y:int) | x + y
 T: x < y = ((#<:fun(num,fun(num,bool)) x:num) y:num) | x < y
 T: x + y = ((#+:fun(num,fun(num,num)) x:num) y:num) | x + y
