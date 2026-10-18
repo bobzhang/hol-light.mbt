@@ -1,0 +1,196 @@
+// HOL terms in a subset of MoonBit's expression syntax. Rule names, shapes
+// and precedences follow moonbitlang/parser's yacc_parser/parser.mbty, so a
+// term is also a MoonBit expression and parses the same way. Two documented
+// deviations: identifiers may end in primes (x'), and binders may be
+// capitalised (P), as HOL's variables are. Regenerate grammar.mbt with
+//   moonx moonbitlang/yacc@0.7.25 --no-comments grammar.mbty -o grammar.mbt
+%position<Int>
+%derive<Debug> Token
+%derive<Debug> ParseError
+
+%start term
+%start pretype
+
+%token<String> LIDENT
+%token<String> UIDENT
+%token<String> INT
+%token<String> INFIX1
+%token<String> INFIX3
+%token<String> DOT_LIDENT
+%token TRUE "true"
+%token FALSE "false"
+%token IF "if"
+%token ELSE "else"
+%token FORALL "∀"
+%token EXISTS "∃"
+%token IMPLIES "→"
+%token BARBAR "||"
+%token AMPERAMPER "&&"
+%token PLUS "+"
+%token MINUS "-"
+%token STAR "*"
+%token EXCLAMATION "!"
+%token LPAREN "("
+%token RPAREN ")"
+%token LBRACKET "["
+%token RBRACKET "]"
+%token LBRACE "{"
+%token RBRACE "}"
+%token COMMA ","
+%token COLON ":"
+%token FAT_ARROW "=>"
+%token THIN_ARROW "->"
+%token UNDERSCORE "_"
+%token EOF
+
+%right IMPLIES
+%right BARBAR
+%right AMPERAMPER
+%left INFIX1
+%left PLUS MINUS
+%left STAR INFIX3
+%nonassoc prec_apply_non_ident_fn
+%nonassoc ","
+%nonassoc ")"
+%nonassoc ":"
+
+%%
+
+term -> @preterm.Preterm
+  : expr EOF { $1 }
+  ;
+
+pretype -> @preterm.Pretype
+  : type_ EOF { $1 }
+  ;
+
+expr -> @preterm.Preterm
+  : if_expr { $1 }
+  | quantifier_expr { $1 }
+  | arrow_fn_expr { $1 }
+  | infix_expr { $1 }
+  ;
+
+block_expr -> @preterm.Preterm
+  : "{" expr "}" { $2 }
+  ;
+
+if_expr -> @preterm.Preterm
+  : "if" infix_expr block_expr "else" block_expr { cond($2, $3, $5) }
+  | "if" infix_expr block_expr "else" if_expr { cond($2, $3, $5) }
+  ;
+
+quantifier_expr -> @preterm.Preterm
+  : "∀" binder ":" type_ "," quantifier_body_expr { quantify("forall", $2, $4, $6) }
+  | "∃" binder ":" type_ "," quantifier_body_expr { quantify("?", $2, $4, $6) }
+  ;
+
+quantifier_body_expr -> @preterm.Preterm
+  : quantifier_expr { $1 }
+  | infix_expr { $1 }
+  ;
+
+arrow_fn_expr -> @preterm.Preterm
+  : "(" arrow_fn_prefix "=>" expr { lambdas($2, $4) }
+  | binder "=>" expr { lambdas(@list.singleton(($1, None)), $3) }
+  ;
+
+arrow_fn_prefix -> @list.List[(String, @preterm.Pretype?)]
+  : binder ioption(",") ")" { @list.singleton(($1, None)) }
+  | binder ":" type_ ioption(",") ")" { @list.singleton(($1, Some($3))) }
+  | binder "," arrow_fn_prefix { $3.prepend(($1, None)) }
+  | binder ":" type_ "," arrow_fn_prefix { $5.prepend(($1, Some($3))) }
+  ;
+
+arrow_fn_prefix_no_constraint -> @list.List[String]
+  : binder ioption(",") ")" { @list.singleton($1) }
+  | binder "," arrow_fn_prefix_no_constraint { $3.prepend($1) }
+  ;
+
+infix_expr -> @preterm.Preterm
+  : infix_expr "→" infix_expr { binary("==>", $1, $3) }
+  | infix_expr "||" infix_expr { binary("\\/", $1, $3) }
+  | infix_expr "&&" infix_expr { binary("/\\", $1, $3) }
+  | infix_expr INFIX1 infix_expr { comparison($2, $1, $3) }
+  | infix_expr "+" infix_expr { binary("+", $1, $3) }
+  | infix_expr "-" infix_expr { binary("-", $1, $3) }
+  | infix_expr "*" infix_expr { binary("*", $1, $3) }
+  | infix_expr INFIX3 infix_expr { infix3($2, $1, $3) }
+  | prefix_expr { $1 }
+  ;
+
+prefix_expr -> @preterm.Preterm
+  : "-" prefix_expr { apply(pvar("--"), $2) }
+  | "!" prefix_expr { apply(pvar("~"), $2) }
+  | simple_expr { $1 }
+  ;
+
+tuple_expr -> @preterm.Preterm
+  : "(" arrow_fn_prefix_no_constraint { tuple($2.map(pvar)) }
+  | "(" non_empty_tuple_elems_with_prefix { tuple($2) }
+  | "(" binder ":" type_ ")" { typed(pvar($2), $4) }
+  | "(" expr ":" type_ ")" { typed($2, $4) }
+  ;
+
+non_empty_tuple_elems -> @list.List[@preterm.Preterm]
+  : expr ioption(",") ")" { @list.singleton($1) }
+  | expr "," non_empty_tuple_elems { $3.prepend($1) }
+  ;
+
+non_empty_tuple_elems_with_prefix -> @list.List[@preterm.Preterm]
+  : binder "," non_empty_tuple_elems_with_prefix { $3.prepend(pvar($1)) }
+  | non_empty_tuple_elems { $1 }
+  ;
+
+simple_expr -> @preterm.Preterm
+  : atomic_expr { $1 }
+  | UIDENT %prec prec_apply_non_ident_fn { pvar($1) }
+  | LIDENT %prec prec_apply_non_ident_fn { pvar($1) }
+  | tuple_expr { $1 }
+  | "[" list_commas(expr) "]" { list($2) }
+  | simple_expr "(" non_empty_list_commas(expr) ")" { applies($1, $3) }
+  | simple_expr DOT_LIDENT "(" list_commas(expr) ")" { applies(pvar($2), $4.prepend($1)) }
+  ;
+
+atomic_expr -> @preterm.Preterm
+  : "true" { pvar("T") }
+  | "false" { pvar("F") }
+  | INT { pvar($1) }
+  ;
+
+%inline binder -> String
+  : LIDENT { $1 }
+  | UIDENT { $1 }
+  ;
+
+non_empty_list_commas_rev[T](X : T) -> @list.List[T]
+  : X { @list.singleton($1) }
+  | non_empty_list_commas_rev(X) "," X { $1.prepend($3) }
+  ;
+
+non_empty_list_commas[T](X : T) -> @list.List[T]
+  : non_empty_list_commas_rev(X) option(",") { $1.rev() }
+  ;
+
+list_commas[T](X : T) -> @list.List[T]
+  : { @list.List([]) }
+  | non_empty_list_commas(X) { $1 }
+  ;
+
+simple_type -> @preterm.Pretype
+  : "(" type_ "," non_empty_list_commas(type_) ")" { tuple_type($4.prepend($2)) }
+  | "(" type_ ")" { $2 }
+  | UIDENT optional_type_arguments { named_type($1, $2) }
+  | "_" { @preterm.dpty }
+  ;
+
+optional_type_arguments -> @list.List[@preterm.Pretype]
+  : "[" non_empty_list_commas(type_) "]" { $2 }
+  | { @list.List([]) }
+  ;
+
+type_ -> @preterm.Pretype
+  : simple_type { $1 }
+  | "(" type_ "," non_empty_list_commas(type_) ")" "->" type_ { fun_type($4.prepend($2), $7) }
+  | "(" type_ ")" "->" type_ { fun_type(@list.singleton($2), $5) }
+  ;
