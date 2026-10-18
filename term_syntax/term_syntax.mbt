@@ -48,8 +48,9 @@ fn names_constant(n : String) -> Bool {
 
 ///|
 /// Resolve names: a constant the syntax stands for (`true`, `&&`, ...)
-/// drops its mark, and an identifier a binder in scope binds is that
-/// variable. A binder named like a constant is renamed with primes, with the
+/// drops its mark; an identifier a binder in scope binds is that variable;
+/// any other identifier is read through the spellings of symbolic constants
+/// (`select`, `op_plus`, ...). A binder named like a constant is renamed with primes, with the
 /// identifiers it binds, so that the elaboration can neither read it as the
 /// constant nor capture a constant with it.
 fn resolve_names(
@@ -62,7 +63,8 @@ fn resolve_names(
     Varp(n, ty) =>
       match bound.iter().find_first(b => b.0 == n) {
         Some((_, renamed)) => Varp(renamed, ty)
-        None => t
+        // the spellings of symbolic constants: select, op_plus, ...
+        None => Varp(@grammar.unescape(n), ty)
       }
     Constp(_, _) => t
     Combp(f, x) => Combp(resolve_names(f, bound), resolve_names(x, bound))

@@ -1,0 +1,421 @@
+// Print terms and types in the term syntax, so that parsing the result
+// gives the term back. Constants are printed under their own names (or as
+// the operator the grammar reads as that name), binders always carry their
+// type, and a free variable carries its type where it first appears.
+
+///|
+/// A term or type that has no spelling in the syntax (a name that is not a
+/// MoonBit identifier, a type variable the elaborator invented, ...).
+pub(all) suberror Unprintable {
+  Unprintable(String)
+} derive(Debug)
+
+///|
+pub extend Unprintable with Debug::{to_repr}
+
+///|
+// precedence levels, loosest first, as in the grammar
+const EXPR = 0
+
+///|
+const IMPL = 1
+
+///|
+const OR = 2
+
+///|
+const AND = 3
+
+///|
+const CMP = 4
+
+///|
+const ADD = 5
+
+///|
+const MUL = 6
+
+///|
+const PREFIX = 7
+
+///|
+const SIMPLE = 8
+
+///|
+fn is_ident_char(c : Char) -> Bool {
+  c is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_')
+}
+
+///|
+/// Whether `name` lexes as one identifier (with optional trailing primes)
+/// that is not a keyword.
+fn is_ident(name : String) -> Bool {
+  let cs = name.to_array()
+  let mut n = cs.length()
+  while n > 0 && cs[n - 1] == '\'' {
+    n -= 1
+  }
+  if n == 0 || name is ("true" | "false" | "if" | "else" | "_") {
+    return false
+  }
+  let c0 = cs[0]
+  let start_ok = c0 is ('a'..='z' | 'A'..='Z') ||
+    (c0 == '_' && n > 1)
+  start_ok && cs[1:n].iter().all(is_ident_char)
+}
+
+///|
+fn is_type_constant(name : String) -> Bool {
+  (try @kernel.get_type_arity(name) catch { _ => -1L }) >= 0L
+}
+
+///|
+fn capitalised(name : String) -> String {
+  let cs = name.to_array()
+  cs[0].to_string().to_upper() + String::from_array(cs[1:])
+}
+
+///|
+fn lowered(name : String) -> String {
+  let cs = name.to_array()
+  cs[0].to_string().to_lower() + String::from_array(cs[1:])
+}
+
+///|
+fn type_name(name : String) -> String raise Unprintable {
+  // HOL's unit type is called 1
+  if name == "1" {
+    return "Unit"
+  }
+  let cs = name.to_array()
+  if !is_ident(name) {
+    raise Unprintable("type constant " + name)
+  }
+  if cs[0] is ('a'..='z') {
+    capitalised(name)
+  } else if !is_type_constant(lowered(name)) {
+    name
+  } else {
+    raise Unprintable("type constant " + name)
+  }
+}
+
+///|
+fn flatten(ty : @kernel.HolType, op : String) -> Array[@kernel.HolType] {
+  let out = []
+  let mut t = ty
+  while t is Tyapp(o, More(a, tail=More(b, tail=Empty))) && o == op {
+    out.push(a)
+    t = b
+  }
+  out.push(t)
+  out
+}
+
+///|
+fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintable {
+  match ty {
+    Tyvar(name) =>
+      if name.to_array() is [c, ..] &&
+        c is ('A'..='Z') &&
+        is_ident(name) &&
+        !is_type_constant(lowered(name)) {
+        name
+      } else {
+        raise Unprintable("type variable " + name)
+      }
+    Tyapp("fun", More(_, tail=More(_, tail=Empty))) => {
+      let parts = flatten(ty, "fun")
+      let res = parts.pop().unwrap()
+      let args = parts.map(a => print_type_at(a, false)).join(", ")
+      let s = "(" + args + ") -> " + print_type_at(res, false)
+      if simple {
+        "(" + s + ")"
+      } else {
+        s
+      }
+    }
+    Tyapp("prod", More(_, tail=More(_, tail=Empty))) =>
+      "(" + flatten(ty, "prod").map(a => print_type_at(a, false)).join(", ") + ")"
+    Tyapp(name, Empty) => type_name(name)
+    Tyapp(name, args) =>
+      type_name(name) +
+      "[" +
+      args.map(a => print_type_at(a, false)).to_array().join(", ") +
+      "]"
+  }
+}
+
+///|
+/// `ty` in the term syntax.
+pub fn print_type(ty : @kernel.HolType) -> String raise Unprintable {
+  print_type_at(ty, false)
+}
+
+///|
+priv struct Printer {
+  // free variables printed with their type so far
+  typed_free : Array[@kernel.Term]
+  // type variables some variable's type fixes; a constant whose type has
+  // another one is printed with its type
+  fixed : @list.List[@kernel.HolType]
+  // annotate every constant whose type has a type variable
+  all_constants : Bool
+  // names of every variable of the term, which a renamed binder avoids
+  names : Array[String]
+}
+
+///|
+fn wrap(s : String, level : Int, ctx : Int) -> String {
+  if level < ctx {
+    "(" + s + ")"
+  } else {
+    s
+  }
+}
+
+///|
+// operators of the grammar: HOL name -> (MoonBit operator, level, right-assoc)
+fn binary_op(name : String) -> (String, Int, Bool)? {
+  match name {
+    "==>" => Some(("→", IMPL, true))
+    "\\/" => Some(("||", OR, true))
+    "/\\" => Some(("&&", AND, true))
+    "=" => Some(("==", CMP, false))
+    "<" | "<=" | ">" | ">=" => Some((name, CMP, false))
+    "+" | "-" => Some((name, ADD, false))
+    "*" | "/" => Some((name, MUL, false))
+    _ => None
+  }
+}
+
+///|
+fn is_constant_name(name : String) -> Bool {
+  try {
+    ignore(@kernel.get_const_type(name))
+    true
+  } catch {
+    _ => false
+  }
+}
+
+///|
+fn Printer::name(_self : Printer, name : String) -> String raise Unprintable {
+  if is_ident(name) {
+    name
+  } else {
+    raise Unprintable("name " + name)
+  }
+}
+
+///|
+/// A constant's name, spelt as an identifier if it is not one.
+fn constant_name(name : String) -> String raise Unprintable {
+  if is_ident(name) && @grammar.unescape(name) == name {
+    name
+  } else {
+    match @grammar.escape(name) {
+      Some(s) => s
+      None => raise Unprintable("name " + name)
+    }
+  }
+}
+
+///|
+fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintable {
+  guard c is Const(name, ty) else { raise Unprintable("not a constant") }
+  let s = constant_name(name)
+  let tvs = @kernel.tyvars(ty)
+  if tvs.is_empty() ||
+    (!self.all_constants && tvs.iter().all(v => self.fixed.contains(v))) {
+    s
+  } else {
+    "(" + s + " : " + print_type(ty) + ")"
+  }
+}
+
+///|
+fn Printer::variable(
+  self : Printer,
+  v : @kernel.Term,
+  bound : Bound,
+) -> String raise Unprintable {
+  guard v is Var(name, ty) else { raise Unprintable("not a variable") }
+  match bound.iter().find_first(b => b.0 == v) {
+    Some((_, printed)) => return printed
+    None => ()
+  }
+  let s = self.name(name)
+  // a bound variable of the same name would capture it
+  if bound.iter().any(b => b.1 == name) {
+    raise Unprintable("free variable " + name + " captured by a binder")
+  }
+  if is_constant_name(name) {
+    raise Unprintable("free variable " + name + " named like a constant")
+  }
+  if self.typed_free.contains(v) {
+    s
+  } else {
+    self.typed_free.push(v)
+    "(" + s + " : " + print_type(ty) + ")"
+  }
+}
+
+///|
+type Bound = @list.List[(@kernel.Term, String)]
+
+///|
+/// The name `v` is printed under where it is bound over `body`: its own,
+/// unless that would capture another variable of the same name, which a
+/// fresh name with primes avoids.
+fn Printer::bind(
+  self : Printer,
+  v : @kernel.Term,
+  body : @kernel.Term,
+  bound : Bound,
+) -> (String, Bound) raise Unprintable {
+  guard v is Var(name, ty) else { raise Unprintable("binder is not a variable") }
+  let clash = @kernel.frees(body).iter().any(u => {
+    u is Var(n, _) && n == name && u != v
+  }) ||
+    bound.iter().any(b => b.1 == name && b.0 != v)
+  // a binder named like a constant would be read as that constant
+  let plain = is_ident(name) &&
+    @grammar.unescape(name) == name &&
+    !is_constant_name(name)
+  let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
+  if clash || !plain {
+    while self.names.contains(printed) || is_constant_name(printed) {
+      printed = printed + "'"
+    }
+    self.names.push(printed)
+  }
+  let s = self.name(printed) + " : " + print_type(ty)
+  (s, bound.prepend((v, printed)))
+}
+
+///|
+fn Printer::term(
+  self : Printer,
+  t : @kernel.Term,
+  ctx : Int,
+  bound : Bound,
+) -> String raise Unprintable {
+  match t {
+    Var(_, _) => self.variable(t, bound)
+    Const("T", _) => "true"
+    Const("F", _) => "false"
+    // an operator or binder that is not applied as the syntax spells it is
+    // named like any symbolic constant (op_plus, op_tilde, ...)
+    Const(_, _) => self.constant(t)
+    Abs(v, body) => {
+      let (b, inner) = self.bind(v, body, bound)
+      wrap("(" + b + ") => " + self.term(body, EXPR, inner), EXPR, ctx)
+    }
+    Comb(_, _) => self.comb(t, ctx, bound)
+  }
+}
+
+///|
+fn Printer::comb(
+  self : Printer,
+  t : @kernel.Term,
+  ctx : Int,
+  bound : Bound,
+) -> String raise Unprintable {
+  if (try @basics.dest_numeral(t) catch { _ => None } noraise { n => Some(n) })
+    is Some(n) {
+    return @num.string_of_num(n)
+  }
+  let (head, args) = @basics.strip_comb(t)
+  let args = args.to_array()
+  match (head, args) {
+    (Const(q, _), [Abs(v, body)]) if q is ("forall" | "?") => {
+      let sym = if q == "forall" { "∀" } else { "∃" }
+      let (b, inner) = self.bind(v, body, bound)
+      // the body is another quantifier or an infix expression
+      let body_s = match body {
+        Comb(Const(q2, _), Abs(_, _)) if q2 is ("forall" | "?") =>
+          self.term(body, EXPR, inner)
+        _ => self.term(body, IMPL, inner)
+      }
+      wrap(sym + " " + b + ", " + body_s, EXPR, ctx)
+    }
+    (Const("~", _), [x]) => wrap("!" + self.term(x, PREFIX, bound), PREFIX, ctx)
+    (Const("COND", _), [c, a, b]) => {
+      let s = "if " +
+        self.term(c, IMPL, bound) +
+        " { " +
+        self.term(a, EXPR, bound) +
+        " } else { " +
+        self.term(b, EXPR, bound) +
+        " }"
+      wrap(s, EXPR, ctx)
+    }
+    (Const(",", _), [_, _]) => {
+      let elems = []
+      let mut r = t
+      while r is Comb(Comb(Const(",", _), a), b) {
+        elems.push(self.term(a, EXPR, bound))
+        r = b
+      }
+      elems.push(self.term(r, EXPR, bound))
+      "(" + elems.join(", ") + ")"
+    }
+    (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
+          l => Some(l)
+        })
+      is Some(items) =>
+      "[" +
+      items.to_array().map(x => self.term(x, EXPR, bound)).join(", ") +
+      "]"
+    (Const(name, _), [a, b]) if binary_op(name) is Some((op, level, right)) => {
+      let (lctx, rctx) = if right { (level + 1, level) } else { (level, level + 1) }
+      let s = self.term(a, lctx, bound) + " " + op + " " + self.term(b, rctx, bound)
+      wrap(s, level, ctx)
+    }
+    _ => {
+      let h = self.term(head, SIMPLE, bound)
+      let s = h + "(" + args.map(a => self.term(a, EXPR, bound)).join(", ") + ")"
+      wrap(s, SIMPLE, ctx)
+    }
+  }
+}
+
+///|
+/// `t` in the term syntax: `parse_term(print_term(t))` is `t` again, up to
+/// the names of bound variables.
+pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
+  let vars = @basics.variables(t).to_array()
+  let fixed = vars
+    .map(v => @kernel.tyvars(@kernel.type_of(v)))
+    .fold(init=@list.List([]), (acc, l) => acc.concat(l))
+  fn print(all_constants : Bool) -> String raise Unprintable {
+    let names = vars.map(v => if v is Var(n, _) { n } else { "" })
+    { typed_free: [], fixed, all_constants, names }.term(
+      t,
+      EXPR,
+      @list.List([]),
+    )
+  }
+  // Type variables are fixed by the variables' types only where they are
+  // connected to them, so check the reading, and give every polymorphic
+  // constant its type if that is needed.
+  let s = print(false)
+  if reads_as(s, t) {
+    return s
+  }
+  let s = print(true)
+  if reads_as(s, t) {
+    s
+  } else {
+    raise Unprintable("term whose types the syntax cannot pin down")
+  }
+}
+
+///|
+fn reads_as(s : String, t : @kernel.Term) -> Bool {
+  try @basics.aconv(parse_term(s), t) catch {
+    _ => false
+  }
+}
