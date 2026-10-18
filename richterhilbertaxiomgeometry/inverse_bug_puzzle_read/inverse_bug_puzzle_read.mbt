@@ -100,7 +100,18 @@ pub fn move2cond() -> @kernel.Thm {
 ///|
 /// oriented_areaSymmetry
 fn step_8() -> Unit raise {
-  oriented_areasymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  oriented_area (A,B,C) = oriented_area(A',B',C')  ⇒\n  oriented_area (B,C,A) = oriented_area (B',C',A')  ∧\n  oriented_area (C,A,B) = oriented_area (C',A',B')  ∧\n  oriented_area (A,C,B) = oriented_area (A',C',B')  ∧\n  oriented_area (B,A,C) = oriented_area (B',A',C')  ∧\n  oriented_area (C,B,A) = oriented_area (C',B',A')\n  proof\n    rewrite oriented_area; VEC2_TAC;\n  qed;\n")))
+  oriented_areasymmetry_c.set(@readable.prove(
+    "\n  oriented_area (A,B,C) = oriented_area(A',B',C')  ==>\n  oriented_area (B,C,A) = oriented_area (B',C',A')  /\\ \n  oriented_area (C,A,B) = oriented_area (C',A',B')  /\\ \n  oriented_area (A,C,B) = oriented_area (A',C',B')  /\\ \n  oriented_area (B,A,C) = oriented_area (B',A',C')  /\\ \n  oriented_area (C,B,A) = oriented_area (C',B',A')",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("oriented_area", () => oriented_area())],
+        ),
+        vec2_tac,
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -113,57 +124,20 @@ pub fn oriented_areasymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_1`
-pub fn exec_phrase_1(x2 : Unit) -> Unit raise {
-  let _ = x2
-  {
-    @readable.thmlist_tactic_ref().val = @readable.rewrite
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewrite): thm list -> tactic);;
-fn step_9() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewrite): thm list -> tactic);;", exec_phrase_1)
-}
-
-///|
-/// `exec_phrase_2`
-pub fn exec_phrase_2(x3 : Unit) -> Unit raise {
-  let _ = x3
-  {
-    @readable.tactic_ref().val = vec2_tac
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((VEC2_TAC): tactic);;
-fn step_10() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((VEC2_TAC): tactic);;", exec_phrase_2)
-}
-
-///|
-/// `exec_phrase_3`
-pub fn exec_phrase_3(x4 : Unit) -> Unit raise {
-  let _ = x4
-  {
-    @readable.thm_ref().val = oriented_area()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((oriented_area): thm);;
-fn step_11() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((oriented_area): thm);;", exec_phrase_3)
-}
-
-///|
 /// COLLINEAR_3_2Dzero
 fn step_12() -> Unit raise {
-  collinear_3_2dzero_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀y z:real^2. collinear{vec 0,y,z} ⇔\n                  z$1 * y$2 = y$1 * z$2\n  proof\n    rewrite COLLINEAR_3_2D;     VEC2_TAC;     qed;\n")))
+  collinear_3_2dzero_c.set(@readable.prove(
+    "\n  forall y z:real^2. collinear{vec 0,y,z} <=>\n                  z$1 * y$2 = y$1 * z$2",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("COLLINEAR_3_2D", () => @vectors.collinear_3_2d())],
+        ),
+        vec2_tac,
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -176,25 +150,21 @@ pub fn collinear_3_2dzero() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_4`
-pub fn exec_phrase_4(x5 : Unit) -> Unit raise {
-  let _ = x5
-  {
-    @readable.thm_ref().val = @vectors.collinear_3_2d()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_3_2D): thm);;
-fn step_13() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_3_2D): thm);;", exec_phrase_4)
-}
-
-///|
 /// Noncollinear_3ImpliesDistinct
 fn step_14() -> Unit raise {
-  noncollinear_3impliesdistinct_c.set(@readable.theorem(@readable.parse_qproof(";\n  ¬collinear {a,b,c}  ⇒  ¬(a = b) ∧ ¬(a = c) ∧ ¬(b = c)\n  by fol COLLINEAR_BETWEEN_CASES BETWEEN_REFL")))
+  noncollinear_3impliesdistinct_c.set(@readable.prove(
+    "\n  ~collinear {a,b,c}  ==>  ~(a = b) /\\  ~(a = c) /\\  ~(b = c)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm(
+          "COLLINEAR_BETWEEN_CASES",
+          () => @vectors.collinear_between_cases(),
+        ),
+        @readable.Thm("BETWEEN_REFL", () => @vectors.between_refl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -207,57 +177,27 @@ pub fn noncollinear_3impliesdistinct() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_5`
-pub fn exec_phrase_5(x6 : Unit) -> Unit raise {
-  let _ = x6
-  {
-    @readable.thmlist_tactic_ref().val = @readable.fol
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((fol): thm list -> tactic);;
-fn step_15() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((fol): thm list -> tactic);;", exec_phrase_5)
-}
-
-///|
-/// `exec_phrase_6`
-pub fn exec_phrase_6(x7 : Unit) -> Unit raise {
-  let _ = x7
-  {
-    @readable.thm_ref().val = @vectors.collinear_between_cases()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_BETWEEN_CASES): thm);;
-fn step_16() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_BETWEEN_CASES): thm);;", exec_phrase_6)
-}
-
-///|
-/// `exec_phrase_7`
-pub fn exec_phrase_7(x8 : Unit) -> Unit raise {
-  let _ = x8
-  {
-    @readable.thm_ref().val = @vectors.between_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BETWEEN_REFL): thm);;
-fn step_17() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BETWEEN_REFL): thm);;", exec_phrase_7)
-}
-
-///|
 /// collinearSymmetry
 fn step_18() -> Unit raise {
-  collinearsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  collinear {A,B,C}\n         ⇒ collinear {A,C,B} ∧ collinear {B,A,C} ∧\n             collinear {B,C,A} ∧ collinear {C,A,B} ∧ collinear {C,B,A}\n  proof\n    {A,C,B} ⊂ {A,B,C} ∧  {B,A,C} ⊂ {A,B,C} ∧\n    {B,C,A} ⊂ {A,B,C} ∧  {C,A,B} ⊂ {A,B,C} ∧  {C,B,A} ⊂ {A,B,C}     [] by set;\n    fol - COLLINEAR_SUBSET;\n  qed;\n")))
+  collinearsymmetry_c.set(@readable.prove(
+    "\n  collinear {A,B,C}\n         ==> collinear {A,C,B} /\\  collinear {B,A,C} /\\ \n             collinear {B,C,A} /\\  collinear {C,A,B} /\\  collinear {C,B,A}",
+    @readable.steps(
+      [
+        @readable.have(
+          "\n    {A,C,B} SUBSET {A,B,C} /\\   {B,A,C} SUBSET {A,B,C} /\\ \n    {B,C,A} SUBSET {A,B,C} /\\   {C,A,B} SUBSET {A,B,C} /\\   {C,B,A} SUBSET {A,B,C}",
+          "",
+          @readable.by(@readable.set, []),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -270,41 +210,107 @@ pub fn collinearsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_8`
-pub fn exec_phrase_8(x9 : Unit) -> Unit raise {
-  let _ = x9
-  {
-    @readable.thmlist_tactic_ref().val = @readable.set
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((set): thm list -> tactic);;
-fn step_19() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((set): thm list -> tactic);;", exec_phrase_8)
-}
-
-///|
-/// `exec_phrase_9`
-pub fn exec_phrase_9(x10 : Unit) -> Unit raise {
-  let _ = x10
-  {
-    @readable.thm_ref().val = @vectors.collinear_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_SUBSET): thm);;
-fn step_20() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_SUBSET): thm);;", exec_phrase_9)
-}
-
-///|
 /// Noncollinear_2Span
 fn step_21() -> Unit raise {
-  noncollinear_2span_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u v w:real^2. ¬collinear  {vec 0,v,w} ⇒ ∃ s t. s % v + t % w = u\n\n  proof\n    intro_TAC ∀u v w, H1;\n    ¬(v$1 * w$2 - w$1 * v$2 = &0)     [H1'] by fol H1 COLLINEAR_3_2Dzero REAL_SUB_0;\n    consider M such that\n    M = transp(vector[v;w]):real^2^2     [Mexists] by fol -;\n    ¬(det M = &0) ∧\n    (∀ x. (M ** x)$1 = v$1 * x$1 + w$1 * x$2  ∧\n    (M ** x)$2 = v$2 * x$1 + w$2 * x$2)     [MatMult] by simplify H1' Mexists matrix_vector_mul DIMINDEX_2 SUM_2\n    TRANSP_COMPONENT VECTOR_2 LAMBDA_BETA ARITH CART_EQ FORALL_2 DET_2;\n    ∀ r n. ¬(r < n)  ∧  r <= MIN n n  ⇒  r = n     [] by arithmetic;\n    consider x such that M ** x = u     [xDef] by fol MatMult - DET_EQ_0_RANK RANK_BOUND MATRIX_FULL_LINEAR_EQUATIONS;\n    exists_TAC x$1;\n    exists_TAC x$2;\n    x$1 * v$1 + x$2 * w$1 = u$1  ∧\n    x$1 * v$2 + x$2 * w$2 = u$2     [xDef] by fol MatMult xDef REAL_MUL_SYM;\n    simplify - CART_EQ LAMBDA_BETA FORALL_2 SUM_2 DIMINDEX_2 VECTOR_2 vector_add vector_mul ARITH;\n  qed;\n")))
+  noncollinear_2span_c.set(@readable.prove(
+    "\n  forall u v w:real^2. ~collinear  {vec 0,v,w} ==> ? s t. s % v + t % w = u",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall u v w, H1"),
+        @readable.have(
+          "\n    ~(v$1 * w$2 - w$1 * v$2 = &0)",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("COLLINEAR_3_2Dzero", () => collinear_3_2dzero()),
+              @readable.Thm("REAL_SUB_0", () => @realarith.real_sub_0()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "M",
+          "M = transp(vector[v;w]):real^2^2    ",
+          "Mexists",
+          @readable.by(@readable.fol, [@readable.Prev]),
+        ),
+        @readable.have(
+          "\n    ~(det M = &0) /\\ \n    (forall  x. (M ** x)$1 = v$1 * x$1 + w$1 * x$2  /\\ \n    (M ** x)$2 = v$2 * x$1 + w$2 * x$2)",
+          "MatMult",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("H1'"),
+              @readable.Label("Mexists"),
+              @readable.Thm("matrix_vector_mul", () => @vectors.matrix_vector_mul()),
+              @readable.Thm("DIMINDEX_2", () => @cart.dimindex_2()),
+              @readable.Thm("SUM_2", () => @vectors.sum_2()),
+              @readable.Thm("TRANSP_COMPONENT", () => @vectors.transp_component()),
+              @readable.Thm("VECTOR_2", () => @vectors.vector_2()),
+              @readable.Thm("LAMBDA_BETA", () => @cart.lambda_beta()),
+              @readable.Thm("ARITH", () => @calc_num.arith()),
+              @readable.Thm("CART_EQ", () => @cart.cart_eq()),
+              @readable.Thm("FORALL_2", () => @vectors.forall_2()),
+              @readable.Thm("DET_2", () => @determinants.det_2()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall  r n. ~(r < n)  /\\   r <= MIN n n  ==>  r = n",
+          "",
+          @readable.by(@readable.arithmetic, []),
+        ),
+        @readable.consider(
+          "x",
+          "M ** x = u    ",
+          "xDef",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MatMult"),
+              @readable.Prev,
+              @readable.Thm("DET_EQ_0_RANK", () => @determinants.det_eq_0_rank()),
+              @readable.Thm("RANK_BOUND", () => @vectors.rank_bound()),
+              @readable.Thm(
+                "MATRIX_FULL_LINEAR_EQUATIONS",
+                () => @vectors.matrix_full_linear_equations(),
+              ),
+            ],
+          ),
+        ),
+        @readable.exists("x$1"),
+        @readable.exists("x$2"),
+        @readable.have(
+          "\n    x$1 * v$1 + x$2 * w$1 = u$1  /\\ \n    x$1 * v$2 + x$2 * w$2 = u$2",
+          "xDef",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MatMult"),
+              @readable.Label("xDef"),
+              @readable.Thm("REAL_MUL_SYM", () => @realax.real_mul_sym()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Prev,
+            @readable.Thm("CART_EQ", () => @cart.cart_eq()),
+            @readable.Thm("LAMBDA_BETA", () => @cart.lambda_beta()),
+            @readable.Thm("FORALL_2", () => @vectors.forall_2()),
+            @readable.Thm("SUM_2", () => @vectors.sum_2()),
+            @readable.Thm("DIMINDEX_2", () => @cart.dimindex_2()),
+            @readable.Thm("VECTOR_2", () => @vectors.vector_2()),
+            @readable.Thm("vector_add", () => @vectors.vector_add()),
+            @readable.Thm("vector_mul", () => @vectors.vector_mul()),
+            @readable.Thm("ARITH", () => @calc_num.arith()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -317,329 +323,26 @@ pub fn noncollinear_2span() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_10`
-pub fn exec_phrase_10(x11 : Unit) -> Unit raise {
-  let _ = x11
-  {
-    @readable.thmlist_tactic_ref().val = @readable.simplify
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((simplify): thm list -> tactic);;
-fn step_22() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((simplify): thm list -> tactic);;", exec_phrase_10)
-}
-
-///|
-/// `exec_phrase_11`
-pub fn exec_phrase_11(x12 : Unit) -> Unit raise {
-  let _ = x12
-  {
-    @readable.thmlist_tactic_ref().val = @readable.arithmetic
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((arithmetic): thm list -> tactic);;
-fn step_23() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((arithmetic): thm list -> tactic);;", exec_phrase_11)
-}
-
-///|
-/// `exec_phrase_12`
-pub fn exec_phrase_12(x13 : Unit) -> Unit raise {
-  let _ = x13
-  {
-    @readable.thm_ref().val = collinear_3_2dzero()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_3_2Dzero): thm);;
-fn step_24() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_3_2Dzero): thm);;", exec_phrase_12)
-}
-
-///|
-/// `exec_phrase_13`
-pub fn exec_phrase_13(x14 : Unit) -> Unit raise {
-  let _ = x14
-  {
-    @readable.thm_ref().val = @realarith.real_sub_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_SUB_0): thm);;
-fn step_25() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_SUB_0): thm);;", exec_phrase_13)
-}
-
-///|
-/// `exec_phrase_14`
-pub fn exec_phrase_14(x15 : Unit) -> Unit raise {
-  let _ = x15
-  {
-    @readable.thm_ref().val = @vectors.matrix_vector_mul()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((matrix_vector_mul): thm);;
-fn step_26() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((matrix_vector_mul): thm);;", exec_phrase_14)
-}
-
-///|
-/// `exec_phrase_15`
-pub fn exec_phrase_15(x16 : Unit) -> Unit raise {
-  let _ = x16
-  {
-    @readable.thm_ref().val = @cart.dimindex_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIMINDEX_2): thm);;
-fn step_27() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIMINDEX_2): thm);;", exec_phrase_15)
-}
-
-///|
-/// `exec_phrase_16`
-pub fn exec_phrase_16(x17 : Unit) -> Unit raise {
-  let _ = x17
-  {
-    @readable.thm_ref().val = @vectors.sum_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUM_2): thm);;
-fn step_28() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUM_2): thm);;", exec_phrase_16)
-}
-
-///|
-/// `exec_phrase_17`
-pub fn exec_phrase_17(x18 : Unit) -> Unit raise {
-  let _ = x18
-  {
-    @readable.thm_ref().val = @vectors.transp_component()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TRANSP_COMPONENT): thm);;
-fn step_29() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TRANSP_COMPONENT): thm);;", exec_phrase_17)
-}
-
-///|
-/// `exec_phrase_18`
-pub fn exec_phrase_18(x19 : Unit) -> Unit raise {
-  let _ = x19
-  {
-    @readable.thm_ref().val = @vectors.vector_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((VECTOR_2): thm);;
-fn step_30() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((VECTOR_2): thm);;", exec_phrase_18)
-}
-
-///|
-/// `exec_phrase_19`
-pub fn exec_phrase_19(x20 : Unit) -> Unit raise {
-  let _ = x20
-  {
-    @readable.thm_ref().val = @cart.lambda_beta()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LAMBDA_BETA): thm);;
-fn step_31() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LAMBDA_BETA): thm);;", exec_phrase_19)
-}
-
-///|
-/// `exec_phrase_20`
-pub fn exec_phrase_20(x21 : Unit) -> Unit raise {
-  let _ = x21
-  {
-    @readable.thm_ref().val = @calc_num.arith()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ARITH): thm);;
-fn step_32() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ARITH): thm);;", exec_phrase_20)
-}
-
-///|
-/// `exec_phrase_21`
-pub fn exec_phrase_21(x22 : Unit) -> Unit raise {
-  let _ = x22
-  {
-    @readable.thm_ref().val = @cart.cart_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CART_EQ): thm);;
-fn step_33() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CART_EQ): thm);;", exec_phrase_21)
-}
-
-///|
-/// `exec_phrase_22`
-pub fn exec_phrase_22(x23 : Unit) -> Unit raise {
-  let _ = x23
-  {
-    @readable.thm_ref().val = @vectors.forall_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_2): thm);;
-fn step_34() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_2): thm);;", exec_phrase_22)
-}
-
-///|
-/// `exec_phrase_23`
-pub fn exec_phrase_23(x24 : Unit) -> Unit raise {
-  let _ = x24
-  {
-    @readable.thm_ref().val = @determinants.det_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DET_2): thm);;
-fn step_35() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DET_2): thm);;", exec_phrase_23)
-}
-
-///|
-/// `exec_phrase_24`
-pub fn exec_phrase_24(x25 : Unit) -> Unit raise {
-  let _ = x25
-  {
-    @readable.thm_ref().val = @determinants.det_eq_0_rank()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DET_EQ_0_RANK): thm);;
-fn step_36() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DET_EQ_0_RANK): thm);;", exec_phrase_24)
-}
-
-///|
-/// `exec_phrase_25`
-pub fn exec_phrase_25(x26 : Unit) -> Unit raise {
-  let _ = x26
-  {
-    @readable.thm_ref().val = @vectors.rank_bound()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RANK_BOUND): thm);;
-fn step_37() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RANK_BOUND): thm);;", exec_phrase_25)
-}
-
-///|
-/// `exec_phrase_26`
-pub fn exec_phrase_26(x27 : Unit) -> Unit raise {
-  let _ = x27
-  {
-    @readable.thm_ref().val = @vectors.matrix_full_linear_equations()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MATRIX_FULL_LINEAR_EQUATIONS): thm);;
-fn step_38() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MATRIX_FULL_LINEAR_EQUATIONS): thm);;", exec_phrase_26)
-}
-
-///|
-/// `exec_phrase_27`
-pub fn exec_phrase_27(x28 : Unit) -> Unit raise {
-  let _ = x28
-  {
-    @readable.thm_ref().val = @realax.real_mul_sym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_MUL_SYM): thm);;
-fn step_39() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_MUL_SYM): thm);;", exec_phrase_27)
-}
-
-///|
-/// `exec_phrase_28`
-pub fn exec_phrase_28(x29 : Unit) -> Unit raise {
-  let _ = x29
-  {
-    @readable.thm_ref().val = @vectors.vector_add()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((vector_add): thm);;
-fn step_40() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((vector_add): thm);;", exec_phrase_28)
-}
-
-///|
-/// `exec_phrase_29`
-pub fn exec_phrase_29(x30 : Unit) -> Unit raise {
-  let _ = x30
-  {
-    @readable.thm_ref().val = @vectors.vector_mul()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((vector_mul): thm);;
-fn step_41() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((vector_mul): thm);;", exec_phrase_29)
-}
-
-///|
 /// moveInvariant
 fn step_42() -> Unit raise {
-  moveinvariant_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀p p'. move p p' ⇒ oriented_area p = oriented_area p'\n  proof\n    rewrite FORALL_PAIR_THM move oriented_area COLLINEAR_LEMMA  vector_mul; VEC2_TAC;\n  qed;\n")))
+  moveinvariant_c.set(@readable.prove(
+    "\n  forall p p'. move p p' ==> oriented_area p = oriented_area p'",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+            @readable.Thm("move", () => move_()),
+            @readable.Thm("oriented_area", () => oriented_area()),
+            @readable.Thm("COLLINEAR_LEMMA", () => @vectors.collinear_lemma()),
+            @readable.Thm("vector_mul", () => @vectors.vector_mul()),
+          ],
+        ),
+        vec2_tac,
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -652,57 +355,22 @@ pub fn moveinvariant() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_30`
-pub fn exec_phrase_30(x31 : Unit) -> Unit raise {
-  let _ = x31
-  {
-    @readable.thm_ref().val = @pair.forall_pair_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_PAIR_THM): thm);;
-fn step_43() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_PAIR_THM): thm);;", exec_phrase_30)
-}
-
-///|
-/// `exec_phrase_31`
-pub fn exec_phrase_31(x32 : Unit) -> Unit raise {
-  let _ = x32
-  {
-    @readable.thm_ref().val = move_()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((move): thm);;
-fn step_44() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((move): thm);;", exec_phrase_31)
-}
-
-///|
-/// `exec_phrase_32`
-pub fn exec_phrase_32(x33 : Unit) -> Unit raise {
-  let _ = x33
-  {
-    @readable.thm_ref().val = @vectors.collinear_lemma()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_LEMMA): thm);;
-fn step_45() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_LEMMA): thm);;", exec_phrase_32)
-}
-
-///|
 /// ReachLemma
 fn step_46() -> Unit raise {
-  reachlemma_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀p p'. reachable p p'  ⇔  ∃n.  reachableN p p' n\n  proof\n    rewrite reachable reachableN;\n  qed;\n")))
+  reachlemma_c.set(@readable.prove(
+    "\n  forall p p'. reachable p p'  <=>  ?n.  reachableN p p' n",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("reachable", () => reachable()),
+            @readable.Thm("reachableN", () => reachablen()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -715,41 +383,131 @@ pub fn reachlemma() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_33`
-pub fn exec_phrase_33(x34 : Unit) -> Unit raise {
-  let _ = x34
-  {
-    @readable.thm_ref().val = reachable()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachable): thm);;
-fn step_47() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachable): thm);;", exec_phrase_33)
-}
-
-///|
-/// `exec_phrase_34`
-pub fn exec_phrase_34(x35 : Unit) -> Unit raise {
-  let _ = x35
-  {
-    @readable.thm_ref().val = reachablen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN): thm);;
-fn step_48() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN): thm);;", exec_phrase_34)
-}
-
-///|
 /// reachableN_CLAUSES
 fn step_49() -> Unit raise {
-  reachablen_clauses_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀ p p'. (reachableN p p' 0  ⇔  p = p') ∧\n  ∀ n. reachableN p p' (SUC n)  ⇔  ∃ q. reachableN p q n  ∧ move q p'\n\n  proof\n    intro_TAC ∀p p';\n    consider s0 such that s0 =  λm:num. p:triple     [s0exists] by fol;\n    reachableN p p' 0  ⇔  p = p'     [0CLAUSE] by fol s0exists LE_0 reachableN LT;\n    ∀ n. reachableN p p' (SUC n)  ⇒  ∃ q. reachableN p q n  ∧ move q p'     [Imp1]\n    proof\n      intro_TAC ∀n, H1;\n      consider s such that\n      s 0 = p ∧ s (SUC n) = p' ∧ ∀m. m < SUC n ⇒ move (s m) (s (SUC m))     [sDef] by fol H1 LE_0 reachableN;\n      consider q such that q = s n     [qDef] by fol;\n      fol sDef qDef LE_0 reachableN LT;\n    qed;\n    ∀n. (∃ q. reachableN p q n  ∧ move q p')  ⇒  reachableN p p' (SUC n)     [Imp2]\n    proof\n      intro_TAC ∀n;\n      rewrite IMP_CONJ LEFT_IMP_EXISTS_THM;\n      intro_TAC ∀q, nReach, move_qp';\n      consider s such that\n      s 0 = p ∧ s n = q ∧ ∀m. m < n ⇒ move (s m) (s (SUC m))     [sDef] by fol nReach reachableN LT LE_0;\n      rewrite reachableN LT LE_0;\n      exists_TAC λm. if m < SUC n then s m else p';\n      fol sDef move_qp' LT_0 LT_REFL LT LT_SUC;\n    qed;\n    fol 0CLAUSE Imp1 Imp2;\n  qed;\n")))
+  reachablen_clauses_c.set(@readable.prove(
+    "\n  forall  p p'. (reachableN p p' 0  <=>  p = p') /\\ \n  forall  n. reachableN p p' (SUC n)  <=>  ? q. reachableN p q n  /\\  move q p'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall p p'"),
+        @readable.consider(
+          "s0",
+          "s0 =  \\ m:num. p:triple    ",
+          "s0exists",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    reachableN p p' 0  <=>  p = p'",
+          "0CLAUSE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("s0exists"),
+              @readable.Thm("LE_0", () => @arith.le_0()),
+              @readable.Thm("reachableN", () => reachablen()),
+              @readable.Thm("LT", () => @arith.lt()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall  n. reachableN p p' (SUC n)  ==>  ? q. reachableN p q n  /\\  move q p'",
+          "Imp1",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall n, H1"),
+              @readable.consider(
+                "s",
+                "s 0 = p /\\  s (SUC n) = p' /\\  forall m. m < SUC n ==> move (s m) (s (SUC m))    ",
+                "sDef",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Thm("LE_0", () => @arith.le_0()),
+                    @readable.Thm("reachableN", () => reachablen()),
+                  ],
+                ),
+              ),
+              @readable.consider(
+                "q",
+                "q = s n    ",
+                "qDef",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("sDef"),
+                  @readable.Label("qDef"),
+                  @readable.Thm("LE_0", () => @arith.le_0()),
+                  @readable.Thm("reachableN", () => reachablen()),
+                  @readable.Thm("LT", () => @arith.lt()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall n. (? q. reachableN p q n  /\\  move q p')  ==>  reachableN p p' (SUC n)",
+          "Imp2",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall n"),
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm("IMP_CONJ", () => @theorems.imp_conj()),
+                  @readable.Thm(
+                    "LEFT_IMP_EXISTS_THM",
+                    () => @theorems.left_imp_exists_thm(),
+                  ),
+                ],
+              ),
+              @readable.intro_tac("forall q, nReach, move_qp'"),
+              @readable.consider(
+                "s",
+                "s 0 = p /\\  s n = q /\\  forall m. m < n ==> move (s m) (s (SUC m))    ",
+                "sDef",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("nReach"),
+                    @readable.Thm("reachableN", () => reachablen()),
+                    @readable.Thm("LT", () => @arith.lt()),
+                    @readable.Thm("LE_0", () => @arith.le_0()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm("reachableN", () => reachablen()),
+                  @readable.Thm("LT", () => @arith.lt()),
+                  @readable.Thm("LE_0", () => @arith.le_0()),
+                ],
+              ),
+              @readable.exists("\\ m. if m < SUC n then s m else p'"),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("sDef"),
+                  @readable.Label("move_qp'"),
+                  @readable.Thm("LT_0", () => @arith.lt_0()),
+                  @readable.Thm("LT_REFL", () => @arith.lt_refl()),
+                  @readable.Thm("LT", () => @arith.lt()),
+                  @readable.Thm("LT_SUC", () => @arith.lt_suc()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("0CLAUSE"), @readable.Label("Imp1"), @readable.Label("Imp2")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -762,121 +520,39 @@ pub fn reachablen_clauses() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_35`
-pub fn exec_phrase_35(x36 : Unit) -> Unit raise {
-  let _ = x36
-  {
-    @readable.thm_ref().val = @arith.le_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LE_0): thm);;
-fn step_50() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LE_0): thm);;", exec_phrase_35)
-}
-
-///|
-/// `exec_phrase_36`
-pub fn exec_phrase_36(x37 : Unit) -> Unit raise {
-  let _ = x37
-  {
-    @readable.thm_ref().val = @arith.lt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LT): thm);;
-fn step_51() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LT): thm);;", exec_phrase_36)
-}
-
-///|
-/// `exec_phrase_37`
-pub fn exec_phrase_37(x38 : Unit) -> Unit raise {
-  let _ = x38
-  {
-    @readable.thm_ref().val = @theorems.imp_conj()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IMP_CONJ): thm);;
-fn step_52() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IMP_CONJ): thm);;", exec_phrase_37)
-}
-
-///|
-/// `exec_phrase_38`
-pub fn exec_phrase_38(x39 : Unit) -> Unit raise {
-  let _ = x39
-  {
-    @readable.thm_ref().val = @theorems.left_imp_exists_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LEFT_IMP_EXISTS_THM): thm);;
-fn step_53() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LEFT_IMP_EXISTS_THM): thm);;", exec_phrase_38)
-}
-
-///|
-/// `exec_phrase_39`
-pub fn exec_phrase_39(x40 : Unit) -> Unit raise {
-  let _ = x40
-  {
-    @readable.thm_ref().val = @arith.lt_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LT_0): thm);;
-fn step_54() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LT_0): thm);;", exec_phrase_39)
-}
-
-///|
-/// `exec_phrase_40`
-pub fn exec_phrase_40(x41 : Unit) -> Unit raise {
-  let _ = x41
-  {
-    @readable.thm_ref().val = @arith.lt_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LT_REFL): thm);;
-fn step_55() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LT_REFL): thm);;", exec_phrase_40)
-}
-
-///|
-/// `exec_phrase_41`
-pub fn exec_phrase_41(x42 : Unit) -> Unit raise {
-  let _ = x42
-  {
-    @readable.thm_ref().val = @arith.lt_suc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LT_SUC): thm);;
-fn step_56() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LT_SUC): thm);;", exec_phrase_41)
-}
-
-///|
 /// reachableInvariant
 fn step_57() -> Unit raise {
-  reachableinvariant_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀p p'. reachable p p'  ⇒  oriented_area p = oriented_area p'\n\n  proof\n    simplify ReachLemma LEFT_IMP_EXISTS_THM SWAP_FORALL_THM;\n    MATCH_MP_TAC num_INDUCTION;\n    simplify reachableN_CLAUSES;\n    intro_TAC ∀n, nStep;\n    fol nStep moveInvariant;\n  qed;\n")))
+  reachableinvariant_c.set(@readable.prove(
+    "\n  forall p p'. reachable p p'  ==>  oriented_area p = oriented_area p'",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("ReachLemma", () => reachlemma()),
+            @readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm()),
+            @readable.Thm("SWAP_FORALL_THM", () => @theorems.swap_forall_thm()),
+          ],
+        ),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("num_INDUCTION", () => @nums.num_induction()),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("reachableN_CLAUSES", () => reachablen_clauses())],
+        ),
+        @readable.intro_tac("forall n, nStep"),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("nStep"),
+            @readable.Thm("moveInvariant", () => moveinvariant()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -889,105 +565,19 @@ pub fn reachableinvariant() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_42`
-pub fn exec_phrase_42(x43 : Unit) -> Unit raise {
-  let _ = x43
-  {
-    @readable.thmtactic_ref().val = @tactics.match_mp_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmtactic_ref := ((MATCH_MP_TAC): thm -> tactic);;
-fn step_58() -> Unit raise {
-  @lib.register_phrase("thmtactic_ref := ((MATCH_MP_TAC): thm -> tactic);;", exec_phrase_42)
-}
-
-///|
-/// `exec_phrase_43`
-pub fn exec_phrase_43(x44 : Unit) -> Unit raise {
-  let _ = x44
-  {
-    @readable.thm_ref().val = reachlemma()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ReachLemma): thm);;
-fn step_59() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ReachLemma): thm);;", exec_phrase_43)
-}
-
-///|
-/// `exec_phrase_44`
-pub fn exec_phrase_44(x45 : Unit) -> Unit raise {
-  let _ = x45
-  {
-    @readable.thm_ref().val = @theorems.swap_forall_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SWAP_FORALL_THM): thm);;
-fn step_60() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SWAP_FORALL_THM): thm);;", exec_phrase_44)
-}
-
-///|
-/// `exec_phrase_45`
-pub fn exec_phrase_45(x46 : Unit) -> Unit raise {
-  let _ = x46
-  {
-    @readable.thm_ref().val = @nums.num_induction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((num_INDUCTION): thm);;
-fn step_61() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((num_INDUCTION): thm);;", exec_phrase_45)
-}
-
-///|
-/// `exec_phrase_46`
-pub fn exec_phrase_46(x47 : Unit) -> Unit raise {
-  let _ = x47
-  {
-    @readable.thm_ref().val = reachablen_clauses()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN_CLAUSES): thm);;
-fn step_62() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN_CLAUSES): thm);;", exec_phrase_46)
-}
-
-///|
-/// `exec_phrase_47`
-pub fn exec_phrase_47(x48 : Unit) -> Unit raise {
-  let _ = x48
-  {
-    @readable.thm_ref().val = moveinvariant()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((moveInvariant): thm);;
-fn step_63() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((moveInvariant): thm);;", exec_phrase_47)
-}
-
-///|
 /// reachableN_One
 fn step_64() -> Unit raise {
-  reachablen_one_c.set(@readable.theorem(@readable.parse_qproof(";\n  reachableN P0 P1 1 ⇔ move P0 P1\n  by fol ONE reachableN reachableN_CLAUSES")))
+  reachablen_one_c.set(@readable.prove(
+    "\n  reachableN P0 P1 1 <=> move P0 P1",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ONE", () => @arith.one()),
+        @readable.Thm("reachableN", () => reachablen()),
+        @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1000,25 +590,19 @@ pub fn reachablen_one() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_48`
-pub fn exec_phrase_48(x49 : Unit) -> Unit raise {
-  let _ = x49
-  {
-    @readable.thm_ref().val = @arith.one()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ONE): thm);;
-fn step_65() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ONE): thm);;", exec_phrase_48)
-}
-
-///|
 /// reachableN_Two
 fn step_66() -> Unit raise {
-  reachablen_two_c.set(@readable.theorem(@readable.parse_qproof(";\n  reachableN P0 P2 2 ⇔ ∃P1. move P0 P1 ∧ move P1 P2\n  by fol TWO reachableN_One reachableN_CLAUSES")))
+  reachablen_two_c.set(@readable.prove(
+    "\n  reachableN P0 P2 2 <=> ?P1. move P0 P1 /\\  move P1 P2",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("TWO", () => @arith.two()),
+        @readable.Thm("reachableN_One", () => reachablen_one()),
+        @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1031,41 +615,19 @@ pub fn reachablen_two() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_49`
-pub fn exec_phrase_49(x50 : Unit) -> Unit raise {
-  let _ = x50
-  {
-    @readable.thm_ref().val = @arith.two()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TWO): thm);;
-fn step_67() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TWO): thm);;", exec_phrase_49)
-}
-
-///|
-/// `exec_phrase_50`
-pub fn exec_phrase_50(x51 : Unit) -> Unit raise {
-  let _ = x51
-  {
-    @readable.thm_ref().val = reachablen_one()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN_One): thm);;
-fn step_68() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN_One): thm);;", exec_phrase_50)
-}
-
-///|
 /// reachableN_Three
 fn step_69() -> Unit raise {
-  reachablen_three_c.set(@readable.theorem(@readable.parse_qproof(";\n  reachableN P0 P3 3  ⇔  ∃P1 P2. move P0 P1 ∧ move P1 P2 ∧ move P2 P3\n  by fol ARITH_RULE [3 = SUC 2] reachableN_Two reachableN_CLAUSES")))
+  reachablen_three_c.set(@readable.prove(
+    "\n  reachableN P0 P3 3  <=>  ?P1 P2. move P0 P1 /\\  move P1 P2 /\\  move P2 P3",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.TermRule(@int.arith_rule, "3 = SUC 2"),
+        @readable.Thm("reachableN_Two", () => reachablen_two()),
+        @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1078,41 +640,19 @@ pub fn reachablen_three() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_51`
-pub fn exec_phrase_51(x52 : Unit) -> Unit raise {
-  let _ = x52
-  {
-    @readable.term_thm_ref().val = @int.arith_rule
-    ()
-  }
-}
-
-///|
-/// the phrase term_thm_ref := ((ARITH_RULE): (term -> thm));;
-fn step_70() -> Unit raise {
-  @lib.register_phrase("term_thm_ref := ((ARITH_RULE): (term -> thm));;", exec_phrase_51)
-}
-
-///|
-/// `exec_phrase_52`
-pub fn exec_phrase_52(x53 : Unit) -> Unit raise {
-  let _ = x53
-  {
-    @readable.thm_ref().val = reachablen_two()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN_Two): thm);;
-fn step_71() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN_Two): thm);;", exec_phrase_52)
-}
-
-///|
 /// reachableN_Four
 fn step_72() -> Unit raise {
-  reachablen_four_c.set(@readable.theorem(@readable.parse_qproof(";\n  reachableN P0 P4 4  ⇔  ∃P1 P2 P3. move P0 P1 ∧ move P1 P2 ∧\n  move P2 P3 ∧ move P3 P4\n  by fol ARITH_RULE [4 = SUC 3] reachableN_Three reachableN_CLAUSES")))
+  reachablen_four_c.set(@readable.prove(
+    "\n  reachableN P0 P4 4  <=>  ?P1 P2 P3. move P0 P1 /\\  move P1 P2 /\\ \n  move P2 P3 /\\  move P3 P4",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.TermRule(@int.arith_rule, "4 = SUC 3"),
+        @readable.Thm("reachableN_Three", () => reachablen_three()),
+        @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1125,25 +665,26 @@ pub fn reachablen_four() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_53`
-pub fn exec_phrase_53(x54 : Unit) -> Unit raise {
-  let _ = x54
-  {
-    @readable.thm_ref().val = reachablen_three()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN_Three): thm);;
-fn step_73() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN_Three): thm);;", exec_phrase_53)
-}
-
-///|
 /// reachableN_Five
 fn step_74() -> Unit raise {
-  reachablen_five_c.set(@readable.theorem(@readable.parse_qproof(";\n  reachableN P0 P5 5  ⇔  ∃P1 P2 P3 P4. move P0 P1 ∧ move P1 P2 ∧\n  move P2 P3 ∧ move P3 P4 ∧ move P4 P5\n  proof\n    rewrite ARITH_RULE [5 = SUC 4] reachableN_CLAUSES;\n    fol reachableN_Four;\n  qed;\n")))
+  reachablen_five_c.set(@readable.prove(
+    "\n  reachableN P0 P5 5  <=>  ?P1 P2 P3 P4. move P0 P1 /\\  move P1 P2 /\\ \n  move P2 P3 /\\  move P3 P4 /\\  move P4 P5",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.TermRule(@int.arith_rule, "5 = SUC 4"),
+            @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("reachableN_Four", () => reachablen_four())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1156,25 +697,46 @@ pub fn reachablen_five() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_54`
-pub fn exec_phrase_54(x55 : Unit) -> Unit raise {
-  let _ = x55
-  {
-    @readable.thm_ref().val = reachablen_four()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN_Four): thm);;
-fn step_75() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN_Four): thm);;", exec_phrase_54)
-}
-
-///|
 /// moveSymmetry
 fn step_76() -> Unit raise {
-  movesymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  move (A,B,C) (A',B',C') ⇒\n  move (B,C,A) (B',C',A') ∧ move (C,A,B) (C',A',B') ∧\n  move (A,C,B) (A',C',B') ∧ move (B,A,C) (B',A',C') ∧ move (C,B,A) (C',B',A')\n\n  proof\n    ∀X Y Z X':real^2. collinear {vec 0, Z - Y, X' - X}\n    ⇒ collinear {vec 0, Y - Z, X' - X}     []\n    proof     rewrite COLLINEAR_3_2Dzero;     VEC2_TAC;     qed;\n    MP_TAC -;\n    rewrite move;\n    ∀X Y Z X':real^2. collinear {vec 0, Z - Y, X' - X}\n      ⇒ collinear {vec 0, Y - Z, X' - X}     []\n    proof     rewrite COLLINEAR_3_2Dzero;     VEC2_TAC;     qed;\n    MP_TAC -;\n    rewrite move;\n    fol;\n  qed;\n")))
+  movesymmetry_c.set(@readable.prove(
+    "\n  move (A,B,C) (A',B',C') ==>\n  move (B,C,A) (B',C',A') /\\  move (C,A,B) (C',A',B') /\\ \n  move (A,C,B) (A',C',B') /\\  move (B,A,C) (B',A',C') /\\  move (C,B,A) (C',B',A')",
+    @readable.steps(
+      [
+        @readable.have(
+          "\n    forall X Y Z X':real^2. collinear {vec 0, Z - Y, X' - X}\n    ==> collinear {vec 0, Y - Z, X' - X}",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [@readable.Thm("COLLINEAR_3_2Dzero", () => collinear_3_2dzero())],
+              ),
+              vec2_tac,
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(@readable.rewrite, [@readable.Thm("move", () => move_())]),
+        @readable.have(
+          "\n    forall X Y Z X':real^2. collinear {vec 0, Z - Y, X' - X}\n      ==> collinear {vec 0, Y - Z, X' - X}",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [@readable.Thm("COLLINEAR_3_2Dzero", () => collinear_3_2dzero())],
+              ),
+              vec2_tac,
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(@readable.rewrite, [@readable.Thm("move", () => move_())]),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1187,30 +749,59 @@ pub fn movesymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_55`
-pub fn exec_phrase_55(x56 : Unit) -> Unit raise {
-  let _ = x56
-  {
-    @readable.thmtactic_ref().val = fn(x57 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
-      let s58 = @tactics.mp_tac(x57)
-      fn(x59 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        s58(x59)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase thmtactic_ref := ((MP_TAC): thm -> tactic);;
-fn step_77() -> Unit raise {
-  @lib.register_phrase("thmtactic_ref := ((MP_TAC): thm -> tactic);;", exec_phrase_55)
-}
-
-///|
 /// reachableNSymmetry
 fn step_78() -> Unit raise {
-  reachablensymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀ n. ∀ A B C A' B' C'. reachableN (A,B,C) (A',B',C') n  ⇒\n  reachableN (B,C,A) (B',C',A') n  ∧  reachableN (C,A,B) (C',A',B') n ∧\n  reachableN (A,C,B) (A',C',B') n  ∧  reachableN (B,A,C) (B',A',C') n ∧\n  reachableN (C,B,A) (C',B',A') n\n\n  proof\n    MATCH_MP_TAC num_INDUCTION;\n    rewrite reachableN_CLAUSES; simplify PAIR_EQ;\n    intro_TAC ∀n, nStep, ∀A B C A' B' C';\n    rewrite LEFT_IMP_EXISTS_THM FORALL_PAIR_THM;\n    intro_TAC ∀[X] [Y] [Z], XYZexists;\n    rewrite RIGHT_AND_EXISTS_THM LEFT_AND_EXISTS_THM;\n    exists_TAC (Y,Z,X);\n    exists_TAC (Z,X,Y);\n    exists_TAC (X,Z,Y);\n    exists_TAC (Y,X,Z);\n    exists_TAC (Z,Y,X);\n    simplify nStep XYZexists moveSymmetry;\n  qed;\n")))
+  reachablensymmetry_c.set(@readable.prove(
+    "\n  forall  n. forall  A B C A' B' C'. reachableN (A,B,C) (A',B',C') n  ==>\n  reachableN (B,C,A) (B',C',A') n  /\\   reachableN (C,A,B) (C',A',B') n /\\ \n  reachableN (A,C,B) (A',C',B') n  /\\   reachableN (B,A,C) (B',A',C') n /\\ \n  reachableN (C,B,A) (C',B',A') n",
+    @readable.steps(
+      [
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("num_INDUCTION", () => @nums.num_induction()),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("reachableN_CLAUSES", () => reachablen_clauses())],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("PAIR_EQ", () => @pair.pair_eq())],
+        ),
+        @readable.intro_tac("forall n, nStep, forall A B C A' B' C'"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm()),
+            @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+          ],
+        ),
+        @readable.intro_tac("forall [X] [Y] [Z], XYZexists"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm(
+              "RIGHT_AND_EXISTS_THM",
+              () => @theorems.right_and_exists_thm(),
+            ),
+            @readable.Thm("LEFT_AND_EXISTS_THM", () => @theorems.left_and_exists_thm()),
+          ],
+        ),
+        @readable.exists("(Y,Z,X)"),
+        @readable.exists("(Z,X,Y)"),
+        @readable.exists("(X,Z,Y)"),
+        @readable.exists("(Y,X,Z)"),
+        @readable.exists("(Z,Y,X)"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("nStep"),
+            @readable.Label("XYZexists"),
+            @readable.Thm("moveSymmetry", () => movesymmetry()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1223,73 +814,23 @@ pub fn reachablensymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_56`
-pub fn exec_phrase_56(x60 : Unit) -> Unit raise {
-  let _ = x60
-  {
-    @readable.thm_ref().val = @pair.pair_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((PAIR_EQ): thm);;
-fn step_79() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((PAIR_EQ): thm);;", exec_phrase_56)
-}
-
-///|
-/// `exec_phrase_57`
-pub fn exec_phrase_57(x61 : Unit) -> Unit raise {
-  let _ = x61
-  {
-    @readable.thm_ref().val = @theorems.right_and_exists_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RIGHT_AND_EXISTS_THM): thm);;
-fn step_80() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RIGHT_AND_EXISTS_THM): thm);;", exec_phrase_57)
-}
-
-///|
-/// `exec_phrase_58`
-pub fn exec_phrase_58(x62 : Unit) -> Unit raise {
-  let _ = x62
-  {
-    @readable.thm_ref().val = @theorems.left_and_exists_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LEFT_AND_EXISTS_THM): thm);;
-fn step_81() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LEFT_AND_EXISTS_THM): thm);;", exec_phrase_58)
-}
-
-///|
-/// `exec_phrase_59`
-pub fn exec_phrase_59(x63 : Unit) -> Unit raise {
-  let _ = x63
-  {
-    @readable.thm_ref().val = movesymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((moveSymmetry): thm);;
-fn step_82() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((moveSymmetry): thm);;", exec_phrase_59)
-}
-
-///|
 /// ORIENTED_AREA_COLLINEAR_CONG
 fn step_83() -> Unit raise {
-  oriented_area_collinear_cong_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀ A B C A' B' C.\n    oriented_area (A,B,C) = oriented_area (A',B',C')\n    ⇒ (collinear {A,B,C} ⇔ collinear {A',B',C'})\n  proof\n    rewrite COLLINEAR_3_2D oriented_area; real_ring;\n  qed;\n")))
+  oriented_area_collinear_cong_c.set(@readable.prove(
+    "\n  forall  A B C A' B' C.\n    oriented_area (A,B,C) = oriented_area (A',B',C')\n    ==> (collinear {A,B,C} <=> collinear {A',B',C'})",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("COLLINEAR_3_2D", () => @vectors.collinear_3_2d()),
+            @readable.Thm("oriented_area", () => oriented_area()),
+          ],
+        ),
+        @readable.by(@readable.real_ring, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1302,25 +843,103 @@ pub fn oriented_area_collinear_cong() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_60`
-pub fn exec_phrase_60(x64 : Unit) -> Unit raise {
-  let _ = x64
-  {
-    @readable.thmlist_tactic_ref().val = @readable.real_ring
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((real_ring): thm list -> tactic);;
-fn step_84() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((real_ring): thm list -> tactic);;", exec_phrase_60)
-}
-
-///|
 /// Basic2move_THM
 fn step_85() -> Unit raise {
-  basic2move_thm_c.set(@readable.theorem(@readable.parse_qproof(";\n ∀ A B C A'. ¬collinear {A,B,C} ∧ ¬collinear {B,A,A'} ⇒\n   ∃X. move (A,B,C) (A,B,X)  ∧  move (A,B,X) (A',B,X)\n\n  proof\n    intro_TAC ∀A B C A', H1 H2;\n    ∀r. r % (A - B) = (--r) % (B - A)  ∧\n      r % (A - B) = r % (A - B) + &0 % (C - B)     [add0vector_mul] by VEC2_TAC;\n    ¬ ∃ r. A' - A = r % (A - B)     [H2'] by fol - H2 COLLINEAR_3 COLLINEAR_LEMMA;\n    consider r t such that A' - A = r % (A - B) + t % (C - B)     [rExists] by fol - H1 COLLINEAR_3 Noncollinear_2Span;\n    ¬(t = &0)     [tNonzero] by fol - add0vector_mul H2';\n    consider s X such that s = r / t  ∧  X = C + s % (A - B)     [Xexists] by fol rExists;\n    A' - A = (t * s) % (A - B) + t % (C - B)     [] by fol - rExists tNonzero REAL_DIV_LMUL;\n    A' - A = t % (X - B) ∧ X - C = (-- s) % (B - A)     []\n    proof     rewrite - Xexists;     VEC2_TAC;     qed;\n    collinear {vec 0,B - A,X - C}  ∧  collinear {vec 0,X - B,A' - A}     [] by fol - COLLINEAR_LEMMA;\n    fol - move;\n  qed;\n")))
+  basic2move_thm_c.set(@readable.prove(
+    "\n forall  A B C A'. ~collinear {A,B,C} /\\  ~collinear {B,A,A'} ==>\n   ?X. move (A,B,C) (A,B,X)  /\\   move (A,B,X) (A',B,X)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A', H1 H2"),
+        @readable.have(
+          "\n    forall r. r % (A - B) = (--r) % (B - A)  /\\ \n      r % (A - B) = r % (A - B) + &0 % (C - B)",
+          "add0vector_mul",
+          vec2_tac,
+        ),
+        @readable.have(
+          "\n    ~ ? r. A' - A = r % (A - B)",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("COLLINEAR_3", () => @vectors.collinear_3()),
+              @readable.Thm("COLLINEAR_LEMMA", () => @vectors.collinear_lemma()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "r t",
+          "A' - A = r % (A - B) + t % (C - B)    ",
+          "rExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("COLLINEAR_3", () => @vectors.collinear_3()),
+              @readable.Thm("Noncollinear_2Span", () => noncollinear_2span()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(t = &0)",
+          "tNonzero",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Label("add0vector_mul"), @readable.Label("H2'")],
+          ),
+        ),
+        @readable.consider(
+          "s X",
+          "s = r / t  /\\   X = C + s % (A - B)    ",
+          "Xexists",
+          @readable.by(@readable.fol, [@readable.Label("rExists")]),
+        ),
+        @readable.have(
+          "\n    A' - A = (t * s) % (A - B) + t % (C - B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("rExists"),
+              @readable.Label("tNonzero"),
+              @readable.Thm("REAL_DIV_LMUL", () => @real.real_div_lmul()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A' - A = t % (X - B) /\\  X - C = (-- s) % (B - A)",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [@readable.Prev, @readable.Label("Xexists")],
+              ),
+              vec2_tac,
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    collinear {vec 0,B - A,X - C}  /\\   collinear {vec 0,X - B,A' - A}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("COLLINEAR_LEMMA", () => @vectors.collinear_lemma()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("move", () => move_())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1333,57 +952,82 @@ pub fn basic2move_thm() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_61`
-pub fn exec_phrase_61(x65 : Unit) -> Unit raise {
-  let _ = x65
-  {
-    @readable.thm_ref().val = @vectors.collinear_3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_3): thm);;
-fn step_86() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_3): thm);;", exec_phrase_61)
-}
-
-///|
-/// `exec_phrase_62`
-pub fn exec_phrase_62(x66 : Unit) -> Unit raise {
-  let _ = x66
-  {
-    @readable.thm_ref().val = noncollinear_2span()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Noncollinear_2Span): thm);;
-fn step_87() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Noncollinear_2Span): thm);;", exec_phrase_62)
-}
-
-///|
-/// `exec_phrase_63`
-pub fn exec_phrase_63(x67 : Unit) -> Unit raise {
-  let _ = x67
-  {
-    @readable.thm_ref().val = @real.real_div_lmul()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_DIV_LMUL): thm);;
-fn step_88() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_DIV_LMUL): thm);;", exec_phrase_63)
-}
-
-///|
 /// FourStepMoveAB
 fn step_89() -> Unit raise {
-  fourstepmoveab_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B'. ¬collinear {A,B,C} ⇒\n  ¬collinear {B,A,A'} ∧ ¬collinear {A',B,B'} ⇒\n  ∃ X Y. move (A,B,C) (A,B,X)  ∧  move (A,B,X) (A',B,X)  ∧\n  move (A',B,X) (A',B,Y)  ∧  move (A',B,Y) (A',B',Y)\n\n  proof\n    intro_TAC ∀A B C A' B', H1, H2;\n    consider X such that\n    move (A,B,C) (A,B,X)  ∧  move (A,B,X) (A',B,X)     [ABX] by fol H1 H2 Basic2move_THM;\n   ¬collinear {A,B,X} ∧ ¬collinear {A',B,X}     [] by fol - H1 moveInvariant ORIENTED_AREA_COLLINEAR_CONG;\n   ¬collinear {B,A',X}     [] by fol -  collinearSymmetry;\n    consider Y such that\n    move (B,A',X) (B,A',Y)  ∧  move (B,A',Y) (B',A',Y)     [BA'Y] by fol - H2 Basic2move_THM;\n    move (A',B,X) (A',B,Y)  ∧  move (A',B,Y) (A',B',Y)     [] by fol - BA'Y moveSymmetry;\n    fol - ABX;\n  qed;\n")))
+  fourstepmoveab_c.set(@readable.prove(
+    "\n  forall A B C A' B'. ~collinear {A,B,C} ==>\n  ~collinear {B,A,A'} /\\  ~collinear {A',B,B'} ==>\n  ? X Y. move (A,B,C) (A,B,X)  /\\   move (A,B,X) (A',B,X)  /\\ \n  move (A',B,X) (A',B,Y)  /\\   move (A',B,Y) (A',B',Y)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B', H1, H2"),
+        @readable.consider(
+          "X",
+          "move (A,B,C) (A,B,X)  /\\   move (A,B,X) (A',B,X)    ",
+          "ABX",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("Basic2move_THM", () => basic2move_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n   ~collinear {A,B,X} /\\  ~collinear {A',B,X}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("moveInvariant", () => moveinvariant()),
+              @readable.Thm(
+                "ORIENTED_AREA_COLLINEAR_CONG",
+                () => oriented_area_collinear_cong(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n   ~collinear {B,A',X}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Y",
+          "move (B,A',X) (B,A',Y)  /\\   move (B,A',Y) (B',A',Y)    ",
+          "BA'Y",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("Basic2move_THM", () => basic2move_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    move (A',B,X) (A',B,Y)  /\\   move (A',B,Y) (A',B',Y)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("BA'Y"),
+              @readable.Thm("moveSymmetry", () => movesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("ABX")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1396,57 +1040,84 @@ pub fn fourstepmoveab() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_64`
-pub fn exec_phrase_64(x68 : Unit) -> Unit raise {
-  let _ = x68
-  {
-    @readable.thm_ref().val = basic2move_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Basic2move_THM): thm);;
-fn step_90() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Basic2move_THM): thm);;", exec_phrase_64)
-}
-
-///|
-/// `exec_phrase_65`
-pub fn exec_phrase_65(x69 : Unit) -> Unit raise {
-  let _ = x69
-  {
-    @readable.thm_ref().val = oriented_area_collinear_cong()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ORIENTED_AREA_COLLINEAR_CONG): thm);;
-fn step_91() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ORIENTED_AREA_COLLINEAR_CONG): thm);;", exec_phrase_65)
-}
-
-///|
-/// `exec_phrase_66`
-pub fn exec_phrase_66(x70 : Unit) -> Unit raise {
-  let _ = x70
-  {
-    @readable.thm_ref().val = collinearsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((collinearSymmetry): thm);;
-fn step_92() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((collinearSymmetry): thm);;", exec_phrase_66)
-}
-
-///|
 /// FourStepMoveABBAreach
 fn step_93() -> Unit raise {
-  fourstepmoveabbareach_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B'. ¬collinear {A,B,C} ∧ move2Cond A B A' B' ⇒\n  ∃ Y. reachableN (A,B,C) (A',B',Y) 4\n\n  proof\n    intro_TAC ∀A B C A' B', H1 H2;\n    case_split Case1 | Case2     by fol - H2 move2Cond;\n    suppose ¬collinear {B,A,A'} ∧ ¬collinear {A',B,B'};\n      fol - H1 FourStepMoveAB reachableN_Four;\n    end;\n    suppose ¬collinear {A,B,B'} ∧ ¬collinear {B',A,A'};\n      ¬collinear {B,A,C}     [] by fol H1 collinearSymmetry;\n      consider X Y such that\n      move (B,A,C) (B,A,X)  ∧  move (B,A,X) (B',A,X) ∧\n      move (B',A,X) (B',A,Y)  ∧  move (B',A,Y) (B',A',Y)     [BAX] by fol Case2 - FourStepMoveAB;\n      fol - moveSymmetry reachableN_Four;\n    end;\n  qed;\n")))
+  fourstepmoveabbareach_c.set(@readable.prove(
+    "\n  forall A B C A' B'. ~collinear {A,B,C} /\\  move2Cond A B A' B' ==>\n  ? Y. reachableN (A,B,C) (A',B',Y) 4",
+    @readable.steps_then(
+      [@readable.intro_tac("forall A B C A' B', H1 H2")],
+      @readable.case_split(
+        "Case1 | Case2    ",
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H2"),
+            @readable.Thm("move2Cond", () => move2cond()),
+          ],
+        ),
+        @list.List(
+          [
+            "~collinear {B,A,A'} /\\  ~collinear {A',B,B'}",
+            "~collinear {A,B,B'} /\\  ~collinear {B',A,A'}",
+          ],
+        ),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H1"),
+                    @readable.Thm("FourStepMoveAB", () => fourstepmoveab()),
+                    @readable.Thm("reachableN_Four", () => reachablen_four()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ~collinear {B,A,C}",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "X Y",
+                  "move (B,A,C) (B,A,X)  /\\   move (B,A,X) (B',A,X) /\\ \n      move (B',A,X) (B',A,Y)  /\\   move (B',A,Y) (B',A',Y)    ",
+                  "BAX",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Case2"),
+                      @readable.Prev,
+                      @readable.Thm("FourStepMoveAB", () => fourstepmoveab()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("moveSymmetry", () => movesymmetry()),
+                    @readable.Thm("reachableN_Four", () => reachablen_four()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1459,41 +1130,123 @@ pub fn fourstepmoveabbareach() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_67`
-pub fn exec_phrase_67(x71 : Unit) -> Unit raise {
-  let _ = x71
-  {
-    @readable.thm_ref().val = move2cond()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((move2Cond): thm);;
-fn step_94() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((move2Cond): thm);;", exec_phrase_67)
-}
-
-///|
-/// `exec_phrase_68`
-pub fn exec_phrase_68(x72 : Unit) -> Unit raise {
-  let _ = x72
-  {
-    @readable.thm_ref().val = fourstepmoveab()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FourStepMoveAB): thm);;
-fn step_95() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FourStepMoveAB): thm);;", exec_phrase_68)
-}
-
-///|
 /// NotMove2ImpliesCollinear
 fn step_96() -> Unit raise {
-  notmove2impliescollinear_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬collinear {A,B,C} ∧ ¬collinear {A',B',C'} ∧\n  ¬(A = A') ∧ ¬(B = B') ∧ ¬move2Cond A B A' B' ⇒\n  collinear {A,B,A',B'}\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1 H1' H2 H2' H3;\n    ¬(A = B) ∧ ¬(A' = B')     [Distinct] by fol H1 H1' Noncollinear_3ImpliesDistinct;\n    {A,B,A',B'} ⊂ {A,A',B,B'}  ∧\n    {A,B,A',B'} ⊂ {B,B',A',A}  ∧  {A,B,A',B'} ⊂ {A',B',B,A}     [set4symmetry] by  SET_TAC;\n    case_split Case1 | Case2 | Case3 | Case4     by fol H3 move2Cond;\n    suppose collinear {B,A,A'} ∧ collinear {A,B,B'};\n      fol - Distinct H2 H2' set4symmetry collinearSymmetry COLLINEAR_4_3 COLLINEAR_SUBSET;\n    end;\n    suppose collinear {B,A,A'} ∧ collinear {B',A,A'};\n      fol - Distinct H2 H2' set4symmetry collinearSymmetry COLLINEAR_4_3 COLLINEAR_SUBSET;\n    end;\n    suppose collinear {A',B,B'} ∧ collinear {A,B,B'};\n      fol - Distinct H2 H2' set4symmetry collinearSymmetry COLLINEAR_4_3 COLLINEAR_SUBSET;\n    end;\n    suppose collinear {A',B,B'} ∧ collinear {B',A,A'};\n      fol - Distinct H2 H2' set4symmetry collinearSymmetry COLLINEAR_4_3 COLLINEAR_SUBSET;\n    end;\n  qed;\n")))
+  notmove2impliescollinear_v1_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~collinear {A,B,C} /\\  ~collinear {A',B',C'} /\\ \n  ~(A = A') /\\  ~(B = B') /\\  ~move2Cond A B A' B' ==>\n  collinear {A,B,A',B'}",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1 H1' H2 H2' H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A' = B')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H1'"),
+              @readable.Thm(
+                "Noncollinear_3ImpliesDistinct",
+                () => noncollinear_3impliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    {A,B,A',B'} SUBSET {A,A',B,B'}  /\\ \n    {A,B,A',B'} SUBSET {B,B',A',A}  /\\   {A,B,A',B'} SUBSET {A',B',B,A}",
+          "set4symmetry",
+          @readable.by(@sets.set_tac, []),
+        ),
+      ],
+      @readable.case_split(
+        "Case1 | Case2 | Case3 | Case4    ",
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("H3"), @readable.Thm("move2Cond", () => move2cond())],
+        ),
+        @list.List(
+          [
+            "collinear {B,A,A'} /\\  collinear {A,B,B'}",
+            "collinear {B,A,A'} /\\  collinear {B',A,A'}",
+            "collinear {A',B,B'} /\\  collinear {A,B,B'}",
+            "collinear {A',B,B'} /\\  collinear {B',A,A'}",
+          ],
+        ),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("Distinct"),
+                    @readable.Label("H2"),
+                    @readable.Label("H2'"),
+                    @readable.Label("set4symmetry"),
+                    @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                    @readable.Thm("COLLINEAR_4_3", () => @vectors.collinear_4_3()),
+                    @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("Distinct"),
+                    @readable.Label("H2"),
+                    @readable.Label("H2'"),
+                    @readable.Label("set4symmetry"),
+                    @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                    @readable.Thm("COLLINEAR_4_3", () => @vectors.collinear_4_3()),
+                    @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("Distinct"),
+                    @readable.Label("H2"),
+                    @readable.Label("H2'"),
+                    @readable.Label("set4symmetry"),
+                    @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                    @readable.Thm("COLLINEAR_4_3", () => @vectors.collinear_4_3()),
+                    @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("Distinct"),
+                    @readable.Label("H2"),
+                    @readable.Label("H2'"),
+                    @readable.Label("set4symmetry"),
+                    @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                    @readable.Thm("COLLINEAR_4_3", () => @vectors.collinear_4_3()),
+                    @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1506,57 +1259,57 @@ pub fn notmove2impliescollinear_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_69`
-pub fn exec_phrase_69(x73 : Unit) -> Unit raise {
-  let _ = x73
-  {
-    @readable.thmlist_tactic_ref().val = @sets.set_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((SET_TAC): thm list -> tactic);;
-fn step_97() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((SET_TAC): thm list -> tactic);;", exec_phrase_69)
-}
-
-///|
-/// `exec_phrase_70`
-pub fn exec_phrase_70(x74 : Unit) -> Unit raise {
-  let _ = x74
-  {
-    @readable.thm_ref().val = noncollinear_3impliesdistinct()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Noncollinear_3ImpliesDistinct): thm);;
-fn step_98() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Noncollinear_3ImpliesDistinct): thm);;", exec_phrase_70)
-}
-
-///|
-/// `exec_phrase_71`
-pub fn exec_phrase_71(x75 : Unit) -> Unit raise {
-  let _ = x75
-  {
-    @readable.thm_ref().val = @vectors.collinear_4_3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_4_3): thm);;
-fn step_99() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_4_3): thm);;", exec_phrase_71)
-}
-
-///|
 /// NotMove2ImpliesCollinear
 fn step_100() -> Unit raise {
-  notmove2impliescollinear_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬collinear {A,B,C} ∧ ¬collinear {A',B',C'} ∧\n  ¬(A = A') ∧ ¬(B = B') ∧ ¬move2Cond A B A' B' ⇒\n  collinear {A,B,A',B'}\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1 H1' H2 H2' H3;\n    ¬(A = B) ∧ ¬(A' = B')     [Distinct] by fol H1 H1' Noncollinear_3ImpliesDistinct;\n    {A,B,A',B'} ⊂ {A,A',B,B'}  ∧\n    {A,B,A',B'} ⊂ {B,B',A',A}  ∧  {A,B,A',B'} ⊂ {A',B',B,A}     [set4symmetry] by  SET_TAC;\n    collinear {B,A,A'} ∧ collinear {A,B,B'}  ∨\n    collinear {B,A,A'} ∧ collinear {B',A,A'}  ∨\n    collinear {A',B,B'} ∧ collinear {A,B,B'}  ∨\n    collinear {A',B,B'} ∧ collinear {B',A,A'} [] by fol H3 move2Cond;\n    fol - Distinct H2 H2' set4symmetry collinearSymmetry COLLINEAR_4_3 COLLINEAR_SUBSET;\n  qed;\n")))
+  notmove2impliescollinear_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~collinear {A,B,C} /\\  ~collinear {A',B',C'} /\\ \n  ~(A = A') /\\  ~(B = B') /\\  ~move2Cond A B A' B' ==>\n  collinear {A,B,A',B'}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1 H1' H2 H2' H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A' = B')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H1'"),
+              @readable.Thm(
+                "Noncollinear_3ImpliesDistinct",
+                () => noncollinear_3impliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    {A,B,A',B'} SUBSET {A,A',B,B'}  /\\ \n    {A,B,A',B'} SUBSET {B,B',A',A}  /\\   {A,B,A',B'} SUBSET {A',B',B,A}",
+          "set4symmetry",
+          @readable.by(@sets.set_tac, []),
+        ),
+        @readable.have(
+          "\n    collinear {B,A,A'} /\\  collinear {A,B,B'}  \\/\n    collinear {B,A,A'} /\\  collinear {B',A,A'}  \\/\n    collinear {A',B,B'} /\\  collinear {A,B,B'}  \\/\n    collinear {A',B,B'} /\\  collinear {B',A,A'}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H3"), @readable.Thm("move2Cond", () => move2cond())],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("Distinct"),
+            @readable.Label("H2"),
+            @readable.Label("H2'"),
+            @readable.Label("set4symmetry"),
+            @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+            @readable.Thm("COLLINEAR_4_3", () => @vectors.collinear_4_3()),
+            @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1571,7 +1324,64 @@ pub fn notmove2impliescollinear() -> @kernel.Thm {
 ///|
 /// DistinctImplies2moveable
 fn step_101() -> Unit raise {
-  distinctimplies2moveable_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬collinear {A,B,C} ∧ ¬collinear {A',B',C'} ∧\n  ¬(A = A') ∧ ¬(B = B') ∧ ¬(C = C')  ⇒\n  move2Cond A B A' B' ∨ move2Cond B C B' C'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1 H1' H2a H2b H2c;\n    {A,B,B'} ⊂ {A,B,A',B'} ∧ {B,B',C} ⊂ {B,C,B',C'}     [3subset4] by SET_TAC;\n    assume ¬move2Cond A B A' B'  ∧ ¬move2Cond B C B' C'     [Con] by fol;\n    collinear {A,B,A',B'} ∧ collinear {B,C,B',C'}     [] by fol - H1 H1' H2a H2b H2c collinearSymmetry NotMove2ImpliesCollinear;\n    collinear {A,B,C}     [] by fol - 3subset4 H2a H2b H2c COLLINEAR_SUBSET COLLINEAR_3_TRANS;\n    fol - H1 H1';\n  qed;\n")))
+  distinctimplies2moveable_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~collinear {A,B,C} /\\  ~collinear {A',B',C'} /\\ \n  ~(A = A') /\\  ~(B = B') /\\  ~(C = C')  ==>\n  move2Cond A B A' B' \\/ move2Cond B C B' C'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1 H1' H2a H2b H2c"),
+        @readable.have(
+          "\n    {A,B,B'} SUBSET {A,B,A',B'} /\\  {B,B',C} SUBSET {B,C,B',C'}",
+          "3subset4",
+          @readable.by(@sets.set_tac, []),
+        ),
+        @readable.assuming(
+          "~move2Cond A B A' B'  /\\  ~move2Cond B C B' C'",
+          "Con",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    collinear {A,B,A',B'} /\\  collinear {B,C,B',C'}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Label("H1'"),
+              @readable.Label("H2a"),
+              @readable.Label("H2b"),
+              @readable.Label("H2c"),
+              @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NotMove2ImpliesCollinear",
+                () => notmove2impliescollinear(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    collinear {A,B,C}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("3subset4"),
+              @readable.Label("H2a"),
+              @readable.Label("H2b"),
+              @readable.Label("H2c"),
+              @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+              @readable.Thm("COLLINEAR_3_TRANS", () => @vectors.collinear_3_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Label("H1"), @readable.Label("H1'")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1584,41 +1394,116 @@ pub fn distinctimplies2moveable() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_72`
-pub fn exec_phrase_72(x76 : Unit) -> Unit raise {
-  let _ = x76
-  {
-    @readable.thm_ref().val = notmove2impliescollinear()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NotMove2ImpliesCollinear): thm);;
-fn step_102() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NotMove2ImpliesCollinear): thm);;", exec_phrase_72)
-}
-
-///|
-/// `exec_phrase_73`
-pub fn exec_phrase_73(x77 : Unit) -> Unit raise {
-  let _ = x77
-  {
-    @readable.thm_ref().val = @vectors.collinear_3_trans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COLLINEAR_3_TRANS): thm);;
-fn step_103() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COLLINEAR_3_TRANS): thm);;", exec_phrase_73)
-}
-
-///|
 /// SameCdiffAB
 fn step_104() -> Unit raise {
-  samecdiffab_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'.  ¬collinear {A,B,C} ∧ ¬collinear {A',B',C'} ⇒\n  C = C' ∧ ¬(A = A') ∧ ¬(B = B') ⇒\n  ∃ Y. reachableN (A,B,C) (Y,B',C') 2  ∨ reachableN (A,B,C) (A',B',Y) 4\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1, H2;\n    {B,B',A} ⊂ {A,B,A',B'}  ∧  {A,B,C} ⊂ {B,B',A,C}     [easy_set] by SET_TAC;\n    case_split Ncol | move | col_Nmove     by fol;\n    suppose ¬collinear {C,B,B'};\n      consider X such that move (B,C,A) (B,C,X) ∧ move (B,C,X) (B',C',X)     [BCX] by fol - easy_set H1 H2 collinearSymmetry Basic2move_THM;\n      fol BCX reachableN_Two reachableNSymmetry;\n    end;\n    suppose move2Cond A B A' B';\n      fol - H1 FourStepMoveABBAreach;\n    end;\n    suppose collinear {C,B,B'}  ∧  ¬move2Cond A B A' B';\n      collinear {B,B',A} ∧ collinear {B,B',C}     [] by fol - H1 H2 easy_set NotMove2ImpliesCollinear COLLINEAR_SUBSET collinearSymmetry;\n      fol - H2 easy_set H1 COLLINEAR_4_3 COLLINEAR_SUBSET;\n    end;\n  qed;\n")))
+  samecdiffab_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'.  ~collinear {A,B,C} /\\  ~collinear {A',B',C'} ==>\n  C = C' /\\  ~(A = A') /\\  ~(B = B') ==>\n  ? Y. reachableN (A,B,C) (Y,B',C') 2  \\/ reachableN (A,B,C) (A',B',Y) 4",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1, H2"),
+        @readable.have(
+          "\n    {B,B',A} SUBSET {A,B,A',B'}  /\\   {A,B,C} SUBSET {B,B',A,C}",
+          "easy_set",
+          @readable.by(@sets.set_tac, []),
+        ),
+      ],
+      @readable.case_split(
+        "Ncol | move | col_Nmove    ",
+        @readable.by(@readable.fol, []),
+        @list.List(
+          [
+            "~collinear {C,B,B'}",
+            "move2Cond A B A' B'",
+            "collinear {C,B,B'}  /\\   ~move2Cond A B A' B'",
+          ],
+        ),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.consider(
+                  "X",
+                  "move (B,C,A) (B,C,X) /\\  move (B,C,X) (B',C',X)    ",
+                  "BCX",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("easy_set"),
+                      @readable.Label("H1"),
+                      @readable.Label("H2"),
+                      @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                      @readable.Thm("Basic2move_THM", () => basic2move_thm()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("BCX"),
+                    @readable.Thm("reachableN_Two", () => reachablen_two()),
+                    @readable.Thm("reachableNSymmetry", () => reachablensymmetry()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H1"),
+                    @readable.Thm(
+                      "FourStepMoveABBAreach",
+                      () => fourstepmoveabbareach(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      collinear {B,B',A} /\\  collinear {B,B',C}",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("H1"),
+                      @readable.Label("H2"),
+                      @readable.Label("easy_set"),
+                      @readable.Thm(
+                        "NotMove2ImpliesCollinear",
+                        () => notmove2impliescollinear(),
+                      ),
+                      @readable.Thm(
+                        "COLLINEAR_SUBSET",
+                        () => @vectors.collinear_subset(),
+                      ),
+                      @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H2"),
+                    @readable.Label("easy_set"),
+                    @readable.Label("H1"),
+                    @readable.Thm("COLLINEAR_4_3", () => @vectors.collinear_4_3()),
+                    @readable.Thm("COLLINEAR_SUBSET", () => @vectors.collinear_subset()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1631,41 +1516,104 @@ pub fn samecdiffab() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_74`
-pub fn exec_phrase_74(x78 : Unit) -> Unit raise {
-  let _ = x78
-  {
-    @readable.thm_ref().val = reachablensymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableNSymmetry): thm);;
-fn step_105() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableNSymmetry): thm);;", exec_phrase_74)
-}
-
-///|
-/// `exec_phrase_75`
-pub fn exec_phrase_75(x79 : Unit) -> Unit raise {
-  let _ = x79
-  {
-    @readable.thm_ref().val = fourstepmoveabbareach()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FourStepMoveABBAreach): thm);;
-fn step_106() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FourStepMoveABBAreach): thm);;", exec_phrase_75)
-}
-
-///|
 /// FourMovesToCorrectTwo
 fn step_107() -> Unit raise {
-  fourmovestocorrecttwo_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬collinear {A,B,C} ∧ ¬collinear {A',B',C'} ⇒\n  ∃ n. n < 5 ∧ ∃ Y. reachableN (A,B,C) (A',B',Y) n  ∨\n    reachableN (A,B,C) (A',Y,C') n  ∨ reachableN (A,B,C) (Y,B',C') n\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1;\n    ¬collinear {B,C,A} ∧\n    ¬collinear{B',C',A'} ∧ ¬collinear {C,A,B} ∧ ¬collinear {C',A',B'}     [H1'] by fol H1 collinearSymmetry;\n    0 < 5 ∧ 2 < 5 ∧ 3 < 5 ∧ 4 < 5     [easy_arith] by ARITH_TAC;\n    case_split case01 | case2 | case3     by fol;\n    suppose A = A' ∧ B = B' ∧ C = C'  ∨\n    A = A' ∧ B = B' ∧ ¬(C = C')  ∨  A = A' ∧ ¬(B = B') ∧ C = C' ∨\n    ¬(A = A') ∧ B = B' ∧ C = C';\n      fol - easy_arith reachableN_CLAUSES;\n    end;\n    suppose A = A' ∧ ¬(B = B') ∧ ¬(C = C')  ∨\n    ¬(A = A') ∧ B = B' ∧ ¬(C = C')  ∨  ¬(A = A') ∧ ¬(B = B') ∧ C = C';\n      fol - H1 H1' easy_arith SameCdiffAB reachableNSymmetry;\n    end;\n    suppose ¬(A = A') ∧ ¬(B = B') ∧ ¬(C = C');\n      exists_TAC 4;\n      simplify easy_arith reachableN_CLAUSES;\n      fol - H1  H1' DistinctImplies2moveable FourStepMoveABBAreach\n    reachableNSymmetry reachableN_Four;\n    end;\n  qed;\n")))
+  fourmovestocorrecttwo_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~collinear {A,B,C} /\\  ~collinear {A',B',C'} ==>\n  ? n. n < 5 /\\  ? Y. reachableN (A,B,C) (A',B',Y) n  \\/\n    reachableN (A,B,C) (A',Y,C') n  \\/ reachableN (A,B,C) (Y,B',C') n",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1"),
+        @readable.have(
+          "\n    ~collinear {B,C,A} /\\ \n    ~collinear{B',C',A'} /\\  ~collinear {C,A,B} /\\  ~collinear {C',A',B'}",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    0 < 5 /\\  2 < 5 /\\  3 < 5 /\\  4 < 5",
+          "easy_arith",
+          @int.arith_tac,
+        ),
+      ],
+      @readable.case_split(
+        "case01 | case2 | case3    ",
+        @readable.by(@readable.fol, []),
+        @list.List(
+          [
+            "A = A' /\\  B = B' /\\  C = C'  \\/\n    A = A' /\\  B = B' /\\  ~(C = C')  \\/  A = A' /\\  ~(B = B') /\\  C = C' \\/\n    ~(A = A') /\\  B = B' /\\  C = C'",
+            "A = A' /\\  ~(B = B') /\\  ~(C = C')  \\/\n    ~(A = A') /\\  B = B' /\\  ~(C = C')  \\/  ~(A = A') /\\  ~(B = B') /\\  C = C'",
+            "~(A = A') /\\  ~(B = B') /\\  ~(C = C')",
+          ],
+        ),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("easy_arith"),
+                    @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H1"),
+                    @readable.Label("H1'"),
+                    @readable.Label("easy_arith"),
+                    @readable.Thm("SameCdiffAB", () => samecdiffab()),
+                    @readable.Thm("reachableNSymmetry", () => reachablensymmetry()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.exists("4"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("easy_arith"),
+                    @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H1"),
+                    @readable.Label("H1'"),
+                    @readable.Thm(
+                      "DistinctImplies2moveable",
+                      () => distinctimplies2moveable(),
+                    ),
+                    @readable.Thm(
+                      "FourStepMoveABBAreach",
+                      () => fourstepmoveabbareach(),
+                    ),
+                    @readable.Thm("reachableNSymmetry", () => reachablensymmetry()),
+                    @readable.Thm("reachableN_Four", () => reachablen_four()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1678,57 +1626,24 @@ pub fn fourmovestocorrecttwo() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_76`
-pub fn exec_phrase_76(x80 : Unit) -> Unit raise {
-  let _ = x80
-  {
-    @readable.tactic_ref().val = @int.arith_tac
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((ARITH_TAC): tactic);;
-fn step_108() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((ARITH_TAC): tactic);;", exec_phrase_76)
-}
-
-///|
-/// `exec_phrase_77`
-pub fn exec_phrase_77(x81 : Unit) -> Unit raise {
-  let _ = x81
-  {
-    @readable.thm_ref().val = samecdiffab()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SameCdiffAB): thm);;
-fn step_109() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SameCdiffAB): thm);;", exec_phrase_77)
-}
-
-///|
-/// `exec_phrase_78`
-pub fn exec_phrase_78(x82 : Unit) -> Unit raise {
-  let _ = x82
-  {
-    @readable.thm_ref().val = distinctimplies2moveable()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DistinctImplies2moveable): thm);;
-fn step_110() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DistinctImplies2moveable): thm);;", exec_phrase_78)
-}
-
-///|
 /// CorrectFinalPoint
 fn step_111() -> Unit raise {
-  correctfinalpoint_c.set(@readable.theorem(@readable.parse_qproof(";\n oriented_area (A,B,C) = oriented_area (A,B,C') ⇒\n   move (A,B,C) (A,B,C')\n  proof\n    rewrite move oriented_area COLLINEAR_3_2Dzero; VEC2_TAC;\n  qed;\n")))
+  correctfinalpoint_c.set(@readable.prove(
+    "\n oriented_area (A,B,C) = oriented_area (A,B,C') ==>\n   move (A,B,C) (A,B,C')",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("move", () => move_()),
+            @readable.Thm("oriented_area", () => oriented_area()),
+            @readable.Thm("COLLINEAR_3_2Dzero", () => collinear_3_2dzero()),
+          ],
+        ),
+        vec2_tac,
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1743,7 +1658,199 @@ pub fn correctfinalpoint() -> @kernel.Thm {
 ///|
 /// FiveMovesOrLess
 fn step_112() -> Unit raise {
-  fivemovesorless_c.set(@readable.theorem(@readable.parse_qproof(";\n ∀A B C A' B' C'. ¬collinear {A,B,C}  ∧\n  oriented_area (A,B,C) = oriented_area (A',B',C') ⇒\n   ∃ n. n <= 5 ∧ reachableN (A,B,C) (A',B',C') n\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1 H2;\n    ¬collinear {A',B',C'}     [H1'] by fol H1 H2 ORIENTED_AREA_COLLINEAR_CONG;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧\n    ¬(A' = B') ∧ ¬(A' = C') ∧ ¬(B' = C')     [Distinct] by fol - H1 Noncollinear_3ImpliesDistinct;\n    consider n Y such that\n    n < 5 ∧ (reachableN (A,B,C) (A',B',Y) n ∨\n    reachableN (A,B,C) (A',Y,C') n ∨ reachableN (A,B,C) (Y,B',C') n)     [2Correct] by fol H1 H1' FourMovesToCorrectTwo;\n    case_split A'B'Y | A'YC' | YB'C'     by fol 2Correct;\n    suppose reachableN (A,B,C) (A',B',Y) n;\n      oriented_area (A',B',Y) = oriented_area (A',B',C')     [] by fol - H2 ReachLemma reachableInvariant;\n      move (A',B',Y) (A',B',C')     [] by fol - Distinct CorrectFinalPoint;\n      fol A'B'Y - 2Correct reachableN_CLAUSES LE_SUC_LT;\n    end;\n    suppose reachableN (A,B,C) (A',Y,C') n;\n      oriented_area (A',C',Y) = oriented_area (A',C',B')     [] by fol H2 - ReachLemma reachableInvariant oriented_areaSymmetry;\n      move (A',Y,C') (A',B',C')     [] by fol - Distinct CorrectFinalPoint moveSymmetry;\n      fol A'YC' - 2Correct reachableN_CLAUSES LE_SUC_LT;\n    end;\n    suppose reachableN (A,B,C) (Y,B',C') n;\n      oriented_area (B',C',Y) = oriented_area (B',C',A')     [] by fol H2 - ReachLemma reachableInvariant oriented_areaSymmetry;\n      move (Y,B',C') (A',B',C')     [] by fol - Distinct CorrectFinalPoint moveSymmetry;\n      fol YB'C' - 2Correct reachableN_CLAUSES LE_SUC_LT;\n    end;\n  qed;\n")))
+  fivemovesorless_c.set(@readable.prove(
+    "\n forall A B C A' B' C'. ~collinear {A,B,C}  /\\ \n  oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n   ? n. n <= 5 /\\  reachableN (A,B,C) (A',B',C') n",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1 H2"),
+        @readable.have(
+          "\n    ~collinear {A',B',C'}",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm(
+                "ORIENTED_AREA_COLLINEAR_CONG",
+                () => oriented_area_collinear_cong(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\ \n    ~(A' = B') /\\  ~(A' = C') /\\  ~(B' = C')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm(
+                "Noncollinear_3ImpliesDistinct",
+                () => noncollinear_3impliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "n Y",
+          "n < 5 /\\  (reachableN (A,B,C) (A',B',Y) n \\/\n    reachableN (A,B,C) (A',Y,C') n \\/ reachableN (A,B,C) (Y,B',C') n)    ",
+          "2Correct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H1'"),
+              @readable.Thm("FourMovesToCorrectTwo", () => fourmovestocorrecttwo()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "A'B'Y | A'YC' | YB'C'    ",
+        @readable.by(@readable.fol, [@readable.Label("2Correct")]),
+        @list.List(
+          [
+            "reachableN (A,B,C) (A',B',Y) n",
+            "reachableN (A,B,C) (A',Y,C') n",
+            "reachableN (A,B,C) (Y,B',C') n",
+          ],
+        ),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      oriented_area (A',B',Y) = oriented_area (A',B',C')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("H2"),
+                      @readable.Thm("ReachLemma", () => reachlemma()),
+                      @readable.Thm("reachableInvariant", () => reachableinvariant()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      move (A',B',Y) (A',B',C')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("Distinct"),
+                      @readable.Thm("CorrectFinalPoint", () => correctfinalpoint()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("A'B'Y"),
+                    @readable.Prev,
+                    @readable.Label("2Correct"),
+                    @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+                    @readable.Thm("LE_SUC_LT", () => @arith.le_suc_lt()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      oriented_area (A',C',Y) = oriented_area (A',C',B')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H2"),
+                      @readable.Prev,
+                      @readable.Thm("ReachLemma", () => reachlemma()),
+                      @readable.Thm("reachableInvariant", () => reachableinvariant()),
+                      @readable.Thm(
+                        "oriented_areaSymmetry",
+                        () => oriented_areasymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      move (A',Y,C') (A',B',C')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("Distinct"),
+                      @readable.Thm("CorrectFinalPoint", () => correctfinalpoint()),
+                      @readable.Thm("moveSymmetry", () => movesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("A'YC'"),
+                    @readable.Prev,
+                    @readable.Label("2Correct"),
+                    @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+                    @readable.Thm("LE_SUC_LT", () => @arith.le_suc_lt()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      oriented_area (B',C',Y) = oriented_area (B',C',A')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H2"),
+                      @readable.Prev,
+                      @readable.Thm("ReachLemma", () => reachlemma()),
+                      @readable.Thm("reachableInvariant", () => reachableinvariant()),
+                      @readable.Thm(
+                        "oriented_areaSymmetry",
+                        () => oriented_areasymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      move (Y,B',C') (A',B',C')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("Distinct"),
+                      @readable.Thm("CorrectFinalPoint", () => correctfinalpoint()),
+                      @readable.Thm("moveSymmetry", () => movesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("YB'C'"),
+                    @readable.Prev,
+                    @readable.Label("2Correct"),
+                    @readable.Thm("reachableN_CLAUSES", () => reachablen_clauses()),
+                    @readable.Thm("LE_SUC_LT", () => @arith.le_suc_lt()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1756,89 +1863,56 @@ pub fn fivemovesorless() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_79`
-pub fn exec_phrase_79(x83 : Unit) -> Unit raise {
-  let _ = x83
-  {
-    @readable.thm_ref().val = fourmovestocorrecttwo()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FourMovesToCorrectTwo): thm);;
-fn step_113() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FourMovesToCorrectTwo): thm);;", exec_phrase_79)
-}
-
-///|
-/// `exec_phrase_80`
-pub fn exec_phrase_80(x84 : Unit) -> Unit raise {
-  let _ = x84
-  {
-    @readable.thm_ref().val = reachableinvariant()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableInvariant): thm);;
-fn step_114() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableInvariant): thm);;", exec_phrase_80)
-}
-
-///|
-/// `exec_phrase_81`
-pub fn exec_phrase_81(x85 : Unit) -> Unit raise {
-  let _ = x85
-  {
-    @readable.thm_ref().val = correctfinalpoint()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CorrectFinalPoint): thm);;
-fn step_115() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CorrectFinalPoint): thm);;", exec_phrase_81)
-}
-
-///|
-/// `exec_phrase_82`
-pub fn exec_phrase_82(x86 : Unit) -> Unit raise {
-  let _ = x86
-  {
-    @readable.thm_ref().val = @arith.le_suc_lt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LE_SUC_LT): thm);;
-fn step_116() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LE_SUC_LT): thm);;", exec_phrase_82)
-}
-
-///|
-/// `exec_phrase_83`
-pub fn exec_phrase_83(x87 : Unit) -> Unit raise {
-  let _ = x87
-  {
-    @readable.thm_ref().val = oriented_areasymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((oriented_areaSymmetry): thm);;
-fn step_117() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((oriented_areaSymmetry): thm);;", exec_phrase_83)
-}
-
-///|
 /// NOTENOUGH_4
 fn step_118() -> Unit raise {
-  notenough_4_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∃p0 p4. oriented_area p0 = oriented_area p4 ∧ ¬reachableN p0 p4 4\n\n  proof\n    consider p0 p4 such that\n    p0:triple = vector [&0;&0],vector [&0;&1],vector [&1;&0]  ∧\n    p4:triple = vector [&1;&1],vector [&1;&2],vector [&2;&1]     [p04Def] by\n    fol;\n    oriented_area p0 = oriented_area p4     [equal_areas]\n    proof     rewrite - oriented_area;     VEC2_TAC;     qed;\n    ¬reachableN p0 p4 4     []\n    proof\n      rewrite p04Def reachableN_Four NOT_EXISTS_THM FORALL_PAIR_THM move COLLINEAR_3_2Dzero FORALL_VECTOR_2;\n      VEC2_TAC;\n    qed;\n    fol - equal_areas;\n  qed;\n")))
+  notenough_4_c.set(@readable.prove(
+    "\n  ?p0 p4. oriented_area p0 = oriented_area p4 /\\  ~reachableN p0 p4 4",
+    @readable.steps(
+      [
+        @readable.consider(
+          "p0 p4",
+          "p0:triple = vector [&0;&0],vector [&0;&1],vector [&1;&0]  /\\ \n    p4:triple = vector [&1;&1],vector [&1;&2],vector [&2;&1]    ",
+          "p04Def",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    oriented_area p0 = oriented_area p4",
+          "equal_areas",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [@readable.Prev, @readable.Thm("oriented_area", () => oriented_area())],
+              ),
+              vec2_tac,
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~reachableN p0 p4 4",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Label("p04Def"),
+                  @readable.Thm("reachableN_Four", () => reachablen_four()),
+                  @readable.Thm("NOT_EXISTS_THM", () => @class.not_exists_thm()),
+                  @readable.Thm("FORALL_PAIR_THM", () => @pair.forall_pair_thm()),
+                  @readable.Thm("move", () => move_()),
+                  @readable.Thm("COLLINEAR_3_2Dzero", () => collinear_3_2dzero()),
+                  @readable.Thm("FORALL_VECTOR_2", () => @vectors.forall_vector_2()),
+                ],
+              ),
+              vec2_tac,
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("equal_areas")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1851,41 +1925,101 @@ pub fn notenough_4() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_84`
-pub fn exec_phrase_84(x88 : Unit) -> Unit raise {
-  let _ = x88
-  {
-    @readable.thm_ref().val = @class.not_exists_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_EXISTS_THM): thm);;
-fn step_119() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_EXISTS_THM): thm);;", exec_phrase_84)
-}
-
-///|
-/// `exec_phrase_85`
-pub fn exec_phrase_85(x89 : Unit) -> Unit raise {
-  let _ = x89
-  {
-    @readable.thm_ref().val = @vectors.forall_vector_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_VECTOR_2): thm);;
-fn step_120() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_VECTOR_2): thm);;", exec_phrase_85)
-}
-
-///|
 /// FiveMovesOrLess_STRONG
 fn step_121() -> Unit raise {
-  fivemovesorless_strong_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'.\n    oriented_area (A,B,C) = oriented_area (A',B',C') ⇒\n    ∃n. n <= 5 ∧ reachableN (A,B,C) (A',B',C') n\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1;\n    (∀X Y:real^2. collinear {X,Y,Y}) ∧\n    (∀A B A'. move (A,B,B) (A',B,B))  ∧\n    ∀A B C B'. (collinear {A,B,C} ∧ collinear {A,B',C}  ⇒\n    move (A,B,C) (A,B',C))     [EZcollinear]\n    proof     rewrite move COLLINEAR_3_2D;     VEC2_TAC;     qed;\n    case_split ABCncol | ABCcol     by fol ;\n    suppose ¬collinear {A,B,C};\n      fol - H1 FiveMovesOrLess;\n    end;\n    suppose collinear {A,B,C};\n      collinear {A',B',C'}     [A'B'C'col] by fol - H1 ORIENTED_AREA_COLLINEAR_CONG;\n      consider P1 P2 P3 P4 such that\n      P1 = A,C,C  ∧  P2 = B',C,C  ∧  P3 = B',B',C  ∧  P4 = B',B',C'     [P1234exist] by fol;\n      move (A,B,C) P1  ∧  move P1 P2  ∧  move P2 P3  ∧  move P3 P4  ∧\n      move P4 (A',B',C')     [] by fol ABCcol A'B'C'col EZcollinear P1234exist\n      collinearSymmetry moveSymmetry;\n      fol -  reachableN_Five LE_REFL;\n    end;\n  qed;\n")))
+  fivemovesorless_strong_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'.\n    oriented_area (A,B,C) = oriented_area (A',B',C') ==>\n    ?n. n <= 5 /\\  reachableN (A,B,C) (A',B',C') n",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1"),
+        @readable.have(
+          "\n    (forall X Y:real^2. collinear {X,Y,Y}) /\\ \n    (forall A B A'. move (A,B,B) (A',B,B))  /\\ \n    forall A B C B'. (collinear {A,B,C} /\\  collinear {A,B',C}  ==>\n    move (A,B,C) (A,B',C))",
+          "EZcollinear",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm("move", () => move_()),
+                  @readable.Thm("COLLINEAR_3_2D", () => @vectors.collinear_3_2d()),
+                ],
+              ),
+              vec2_tac,
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "ABCncol | ABCcol    ",
+        @readable.by(@readable.fol, []),
+        @list.List(["~collinear {A,B,C}", "collinear {A,B,C}"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H1"),
+                    @readable.Thm("FiveMovesOrLess", () => fivemovesorless()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      collinear {A',B',C'}",
+                  "A'B'C'col",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("H1"),
+                      @readable.Thm(
+                        "ORIENTED_AREA_COLLINEAR_CONG",
+                        () => oriented_area_collinear_cong(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "P1 P2 P3 P4",
+                  "P1 = A,C,C  /\\   P2 = B',C,C  /\\   P3 = B',B',C  /\\   P4 = B',B',C'    ",
+                  "P1234exist",
+                  @readable.by(@readable.fol, []),
+                ),
+                @readable.have(
+                  "\n      move (A,B,C) P1  /\\   move P1 P2  /\\   move P2 P3  /\\   move P3 P4  /\\ \n      move P4 (A',B',C')",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ABCcol"),
+                      @readable.Label("A'B'C'col"),
+                      @readable.Label("EZcollinear"),
+                      @readable.Label("P1234exist"),
+                      @readable.Thm("collinearSymmetry", () => collinearsymmetry()),
+                      @readable.Thm("moveSymmetry", () => movesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("reachableN_Five", () => reachablen_five()),
+                    @readable.Thm("LE_REFL", () => @arith.le_refl()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1898,54 +2032,6 @@ pub fn fivemovesorless_strong() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_86`
-pub fn exec_phrase_86(x90 : Unit) -> Unit raise {
-  let _ = x90
-  {
-    @readable.thm_ref().val = fivemovesorless()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FiveMovesOrLess): thm);;
-fn step_122() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FiveMovesOrLess): thm);;", exec_phrase_86)
-}
-
-///|
-/// `exec_phrase_87`
-pub fn exec_phrase_87(x91 : Unit) -> Unit raise {
-  let _ = x91
-  {
-    @readable.thm_ref().val = reachablen_five()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((reachableN_Five): thm);;
-fn step_123() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((reachableN_Five): thm);;", exec_phrase_87)
-}
-
-///|
-/// `exec_phrase_88`
-pub fn exec_phrase_88(x92 : Unit) -> Unit raise {
-  let _ = x92
-  {
-    @readable.thm_ref().val = @arith.le_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LE_REFL): thm);;
-fn step_124() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LE_REFL): thm);;", exec_phrase_88)
-}
-
-///|
 fn load_steps() -> Unit raise {
   step_1()
   step_2()
@@ -1954,121 +2040,33 @@ fn load_steps() -> Unit raise {
   step_5()
   step_6()
   step_7()
-  step_9()
-  step_10()
-  step_11()
   step_8()
-  step_13()
   step_12()
-  step_15()
-  step_16()
-  step_17()
   step_14()
-  step_19()
-  step_20()
   step_18()
-  step_22()
-  step_23()
-  step_24()
-  step_25()
-  step_26()
-  step_27()
-  step_28()
-  step_29()
-  step_30()
-  step_31()
-  step_32()
-  step_33()
-  step_34()
-  step_35()
-  step_36()
-  step_37()
-  step_38()
-  step_39()
-  step_40()
-  step_41()
   step_21()
-  step_43()
-  step_44()
-  step_45()
   step_42()
-  step_47()
-  step_48()
   step_46()
-  step_50()
-  step_51()
-  step_52()
-  step_53()
-  step_54()
-  step_55()
-  step_56()
   step_49()
-  step_58()
-  step_59()
-  step_60()
-  step_61()
-  step_62()
-  step_63()
   step_57()
-  step_65()
   step_64()
-  step_67()
-  step_68()
   step_66()
-  step_70()
-  step_71()
   step_69()
-  step_73()
   step_72()
-  step_75()
   step_74()
-  step_77()
   step_76()
-  step_79()
-  step_80()
-  step_81()
-  step_82()
   step_78()
-  step_84()
   step_83()
-  step_86()
-  step_87()
-  step_88()
   step_85()
-  step_90()
-  step_91()
-  step_92()
   step_89()
-  step_94()
-  step_95()
   step_93()
-  step_97()
-  step_98()
-  step_99()
   step_96()
   step_100()
-  step_102()
-  step_103()
   step_101()
-  step_105()
-  step_106()
   step_104()
-  step_108()
-  step_109()
-  step_110()
   step_107()
   step_111()
-  step_113()
-  step_114()
-  step_115()
-  step_116()
-  step_117()
   step_112()
-  step_119()
-  step_120()
   step_118()
-  step_122()
-  step_123()
-  step_124()
   step_121()
 }
