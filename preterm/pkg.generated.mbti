@@ -56,6 +56,8 @@ pub fn type_var_counter() -> Int64
 
 pub fn unhide_constant(String) -> Unit
 
+pub fn[T] with_interface_restored(() -> T raise) -> T raise
+
 // Errors
 
 // Types and methods
