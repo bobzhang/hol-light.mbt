@@ -16,8 +16,8 @@ fn check_ntrie_disjointness_without_sugar() -> Unit raise {
 
   // For data supplied by MoonBit code, build the same trie terms directly.
   // This replaces the former quotation: DISJOINT %%(1 3) %%(2 4).
-  let left = @ntrie.mk_small_ntrie(@list.List([1L, 3L]))
-  let right = @ntrie.mk_small_ntrie(@list.List([2L, 4L]))
+  let left = @ntrie.mk_small_ntrie([1, 3])
+  let right = @ntrie.mk_small_ntrie([2, 4])
   let built_goal = @basics.mk_binop(@ntrie.disjoint_tm(), left, right)
   assert_eq(built_goal, trie_goal)
   let built_proof = @bool.eqt_elim(@ntrie.ntrie_disjoint_conv(built_goal))

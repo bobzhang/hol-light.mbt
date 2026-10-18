@@ -55,7 +55,7 @@ pub fn mk_ntrie(@list.List[@num.Num]) -> @kernel.Term raise
 
 pub fn mk_numset(@list.List[@kernel.Term]) -> @kernel.Term raise
 
-pub fn mk_small_ntrie(@list.List[Int64]) -> @kernel.Term raise
+pub fn mk_small_ntrie(ArrayView[Int64]) -> @kernel.Term raise
 
 pub fn neg_tm() -> @kernel.Term
 
