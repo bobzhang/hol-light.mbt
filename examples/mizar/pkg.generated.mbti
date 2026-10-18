@@ -13,8 +13,6 @@ import {
 // Values
 pub fn add_mizar_transitivity_theorem(@kernel.Thm) -> Unit raise
 
-pub fn add_mizar_words(Unit) -> Unit raise
-
 pub fn antecedent() -> @kernel.Thm
 
 pub fn augments(@list.List[String]) -> ((@kernel.Thm) -> ((@list.List[(String, @kernel.Thm)]) -> @list.List[(String, @kernel.Thm)] raise) raise) raise
@@ -114,8 +112,6 @@ pub fn prover_list() -> @ref.Ref[@list.List[(String, (@list.List[@kernel.Thm]) -
 pub fn run_steps(ArrayView[@lexer.Lexcode]) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
 
 pub fn split_ppair(@preterm.Preterm) -> @list.List[@preterm.Preterm] raise
-
-pub fn subtract_mizar_words(Unit) -> Unit raise
 
 pub fn thesis() -> @kernel.Thm
 
