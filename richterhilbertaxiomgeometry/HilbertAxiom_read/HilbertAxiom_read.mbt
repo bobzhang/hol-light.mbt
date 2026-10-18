@@ -90,7 +90,10 @@ pub fn notin() -> @kernel.Thm {
 ///|
 /// INTER_TENSOR
 fn step_14() -> Unit raise {
-  inter_tensor_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s s' t t'.  s ⊂ s' ∧ t ⊂ t'  ⇒  s ∩ t ⊂ s' ∩ t'\n  by set")))
+  inter_tensor_c.set(@readable.prove(
+    "\n  forall s s' t t'.  s SUBSET s' /\\  t SUBSET t'  ==>  s INTER t SUBSET s' INTER t'",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -100,22 +103,6 @@ let inter_tensor_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("INTER_TENSOR")
 /// `INTER_TENSOR`
 pub fn inter_tensor() -> @kernel.Thm {
   inter_tensor_c.get()
-}
-
-///|
-/// `exec_phrase_1`
-pub fn exec_phrase_1(x1 : Unit) -> Unit raise {
-  let _ = x1
-  {
-    @readable.thmlist_tactic_ref().val = @readable.set
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((set): thm list -> tactic);;
-fn step_15() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((set): thm list -> tactic);;", exec_phrase_1)
 }
 
 ///|
@@ -751,7 +738,16 @@ pub fn c6() -> @kernel.Thm {
 ///|
 /// IN_Interval
 fn step_58() -> Unit raise {
-  in_interval_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B X. X ∈ Open (A, B)  ⇔  Between A X B\n  by rewrite Interval_DEF IN_ELIM_THM")))
+  in_interval_c.set(@readable.prove(
+    "\n  forall A B X. X IN Open (A, B)  <=>  Between A X B",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("Interval_DEF", () => interval_def()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -764,57 +760,18 @@ pub fn in_interval() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_2`
-pub fn exec_phrase_2(x2 : Unit) -> Unit raise {
-  let _ = x2
-  {
-    @readable.thmlist_tactic_ref().val = @readable.rewrite
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewrite): thm list -> tactic);;
-fn step_59() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewrite): thm list -> tactic);;", exec_phrase_2)
-}
-
-///|
-/// `exec_phrase_3`
-pub fn exec_phrase_3(x3 : Unit) -> Unit raise {
-  let _ = x3
-  {
-    @readable.thm_ref().val = interval_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Interval_DEF): thm);;
-fn step_60() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Interval_DEF): thm);;", exec_phrase_3)
-}
-
-///|
-/// `exec_phrase_4`
-pub fn exec_phrase_4(x4 : Unit) -> Unit raise {
-  let _ = x4
-  {
-    @readable.thm_ref().val = @sets.in_elim_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_ELIM_THM): thm);;
-fn step_61() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_ELIM_THM): thm);;", exec_phrase_4)
-}
-
-///|
 /// IN_Ray
 fn step_62() -> Unit raise {
-  in_ray_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B X. X ∈ ray A B  ⇔  ¬(A = B) ∧ Collinear A B X ∧ A ∉ Open (X, B)\n  by rewrite Ray_DEF IN_ELIM_THM")))
+  in_ray_c.set(@readable.prove(
+    "\n  forall A B X. X IN ray A B  <=>  ~(A = B) /\\  Collinear A B X /\\  A NOTIN Open (X, B)",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("Ray_DEF", () => ray_def()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -827,25 +784,18 @@ pub fn in_ray() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_5`
-pub fn exec_phrase_5(x5 : Unit) -> Unit raise {
-  let _ = x5
-  {
-    @readable.thm_ref().val = ray_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Ray_DEF): thm);;
-fn step_63() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Ray_DEF): thm);;", exec_phrase_5)
-}
-
-///|
 /// IN_InteriorAngle
 fn step_64() -> Unit raise {
-  in_interiorangle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B P. P ∈ int_angle A O B  ⇔\n    ¬Collinear A O B ∧ ∃a b.\n    Line a ∧ O ∈ a ∧ A ∈ a ∧ Line b ∧ O ∈ b ∧ B ∈ b ∧\n    P ∉ a ∧ P ∉ b ∧ P,B same_side a ∧ P,A same_side b\n  by rewrite InteriorAngle_DEF IN_ELIM_THM")))
+  in_interiorangle_c.set(@readable.prove(
+    "\n  forall A O B P. P IN int_angle A O B  <=>\n    ~Collinear A O B /\\  ?a b.\n    Line a /\\  O IN a /\\  A IN a /\\  Line b /\\  O IN b /\\  B IN b /\\ \n    P NOTIN a /\\  P NOTIN b /\\  P,B same_side a /\\  P,A same_side b",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("InteriorAngle_DEF", () => interiorangle_def()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -858,25 +808,18 @@ pub fn in_interiorangle() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_6`
-pub fn exec_phrase_6(x6 : Unit) -> Unit raise {
-  let _ = x6
-  {
-    @readable.thm_ref().val = interiorangle_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorAngle_DEF): thm);;
-fn step_65() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorAngle_DEF): thm);;", exec_phrase_6)
-}
-
-///|
 /// IN_InteriorTriangle
 fn step_66() -> Unit raise {
-  in_interiortriangle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C P. P ∈ int_triangle A B C  ⇔\n    P ∈ int_angle A B C  ∧  P ∈ int_angle B C A  ∧  P ∈ int_angle C A B\n  by rewrite InteriorTriangle_DEF IN_ELIM_THM")))
+  in_interiortriangle_c.set(@readable.prove(
+    "\n  forall A B C P. P IN int_triangle A B C  <=>\n    P IN int_angle A B C  /\\   P IN int_angle B C A  /\\   P IN int_angle C A B",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("InteriorTriangle_DEF", () => interiortriangle_def()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -889,25 +832,18 @@ pub fn in_interiortriangle() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_7`
-pub fn exec_phrase_7(x7 : Unit) -> Unit raise {
-  let _ = x7
-  {
-    @readable.thm_ref().val = interiortriangle_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorTriangle_DEF): thm);;
-fn step_67() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorTriangle_DEF): thm);;", exec_phrase_7)
-}
-
-///|
 /// IN_PlaneComplement
 fn step_68() -> Unit raise {
-  in_planecomplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. ∀P. P ∈ complement α  ⇔  P ∉ α\n  by rewrite PlaneComplement_DEF IN_ELIM_THM")))
+  in_planecomplement_c.set(@readable.prove(
+    "\n  forall alpha. forall P. P IN complement alpha  <=>  P NOTIN alpha",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("PlaneComplement_DEF", () => planecomplement_def()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -920,25 +856,18 @@ pub fn in_planecomplement() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_8`
-pub fn exec_phrase_8(x8 : Unit) -> Unit raise {
-  let _ = x8
-  {
-    @readable.thm_ref().val = planecomplement_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((PlaneComplement_DEF): thm);;
-fn step_69() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((PlaneComplement_DEF): thm);;", exec_phrase_8)
-}
-
-///|
 /// IN_InteriorCircle
 fn step_70() -> Unit raise {
-  in_interiorcircle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O R P. P ∈ int_circle O R  ⇔\n    ¬(O = R) ∧ (P = O  ∨  seg O P <__ seg O R)\n  by rewrite InteriorCircle_DEF IN_ELIM_THM")))
+  in_interiorcircle_c.set(@readable.prove(
+    "\n  forall O R P. P IN int_circle O R  <=>\n    ~(O = R) /\\  (P = O  \\/  seg O P <__ seg O R)",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("InteriorCircle_DEF", () => interiorcircle_def()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -951,25 +880,18 @@ pub fn in_interiorcircle() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_9`
-pub fn exec_phrase_9(x9 : Unit) -> Unit raise {
-  let _ = x9
-  {
-    @readable.thm_ref().val = interiorcircle_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorCircle_DEF): thm);;
-fn step_71() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorCircle_DEF): thm);;", exec_phrase_9)
-}
-
-///|
 /// B1'
 fn step_72() -> Unit raise {
-  b1_p_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C.  B ∈ Open (A, C) ⇒ ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧\n            B ∈ Open (C, A) ∧ Collinear A B C\n  by fol IN_Interval B1")))
+  b1_p_c.set(@readable.prove(
+    "\n  forall A B C.  B IN Open (A, C) ==> ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\ \n            B IN Open (C, A) /\\  Collinear A B C",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("IN_Interval", () => in_interval()),
+        @readable.Thm("B1", () => b1()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -982,57 +904,18 @@ pub fn b1_p() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_10`
-pub fn exec_phrase_10(x10 : Unit) -> Unit raise {
-  let _ = x10
-  {
-    @readable.thmlist_tactic_ref().val = @readable.fol
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((fol): thm list -> tactic);;
-fn step_73() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((fol): thm list -> tactic);;", exec_phrase_10)
-}
-
-///|
-/// `exec_phrase_11`
-pub fn exec_phrase_11(x11 : Unit) -> Unit raise {
-  let _ = x11
-  {
-    @readable.thm_ref().val = in_interval()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_Interval): thm);;
-fn step_74() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_Interval): thm);;", exec_phrase_11)
-}
-
-///|
-/// `exec_phrase_12`
-pub fn exec_phrase_12(x12 : Unit) -> Unit raise {
-  let _ = x12
-  {
-    @readable.thm_ref().val = b1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B1): thm);;
-fn step_75() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B1): thm);;", exec_phrase_12)
-}
-
-///|
 /// B2'
 fn step_76() -> Unit raise {
-  b2_p_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B. ¬(A = B) ⇒ ∃C.  B ∈ Open (A, C)\n  by fol IN_Interval B2")))
+  b2_p_c.set(@readable.prove(
+    "\n  forall A B. ~(A = B) ==> ?C.  B IN Open (A, C)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("IN_Interval", () => in_interval()),
+        @readable.Thm("B2", () => b2()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1045,25 +928,18 @@ pub fn b2_p() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_13`
-pub fn exec_phrase_13(x13 : Unit) -> Unit raise {
-  let _ = x13
-  {
-    @readable.thm_ref().val = b2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B2): thm);;
-fn step_77() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B2): thm);;", exec_phrase_13)
-}
-
-///|
 /// B3'
 fn step_78() -> Unit raise {
-  b3_p_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ Collinear A B C\n    ⇒ (B ∈ Open (A, C) ∨ C ∈ Open (B, A) ∨ A ∈ Open (C, B)) ∧\n       ¬(B ∈ Open (A, C) ∧ C ∈ Open (B, A)) ∧\n       ¬(B ∈ Open (A, C) ∧ A ∈ Open (C, B)) ∧\n       ¬(C ∈ Open (B, A) ∧ A ∈ Open (C, B))\n  by fol IN_Interval B3")))
+  b3_p_c.set(@readable.prove(
+    "\n  forall A B C. ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  Collinear A B C\n    ==> (B IN Open (A, C) \\/ C IN Open (B, A) \\/ A IN Open (C, B)) /\\ \n       ~(B IN Open (A, C) /\\  C IN Open (B, A)) /\\ \n       ~(B IN Open (A, C) /\\  A IN Open (C, B)) /\\ \n       ~(C IN Open (B, A) /\\  A IN Open (C, B))",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("IN_Interval", () => in_interval()),
+        @readable.Thm("B3", () => b3()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1076,25 +952,18 @@ pub fn b3_p() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_14`
-pub fn exec_phrase_14(x14 : Unit) -> Unit raise {
-  let _ = x14
-  {
-    @readable.thm_ref().val = b3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B3): thm);;
-fn step_79() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B3): thm);;", exec_phrase_14)
-}
-
-///|
 /// B4'
 fn step_80() -> Unit raise {
-  b4_p_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l A B C. Line l ∧ ¬Collinear A B C ∧\n    A ∉ l ∧ B ∉ l ∧ C ∉ l ∧\n    (∃X. X ∈ l ∧  X ∈ Open (A, C)) ⇒\n    (∃Y. Y ∈ l ∧  Y ∈ Open (A, B)) ∨ (∃Y. Y ∈ l ∧  Y ∈ Open (B, C))\n  by rewrite IN_Interval B4")))
+  b4_p_c.set(@readable.prove(
+    "\n  forall l A B C. Line l /\\  ~Collinear A B C /\\ \n    A NOTIN l /\\  B NOTIN l /\\  C NOTIN l /\\ \n    (?X. X IN l /\\   X IN Open (A, C)) ==>\n    (?Y. Y IN l /\\   Y IN Open (A, B)) \\/ (?Y. Y IN l /\\   Y IN Open (B, C))",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("IN_Interval", () => in_interval()),
+        @readable.Thm("B4", () => b4()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1107,25 +976,20 @@ pub fn b4_p() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_15`
-pub fn exec_phrase_15(x15 : Unit) -> Unit raise {
-  let _ = x15
-  {
-    @readable.thm_ref().val = b4()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B4): thm);;
-fn step_81() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B4): thm);;", exec_phrase_15)
-}
-
-///|
 /// B4''
 fn step_82() -> Unit raise {
-  b4_p_p_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l A B C.\n  Line l ∧ ¬Collinear A B C ∧ A ∉ l ∧ B ∉ l ∧ C ∉ l  ∧\n  A,B same_side l  ∧  B,C same_side l  ⇒  A,C same_side l\n  proof\n    rewrite SameSide_DEF;\n    fol B4';\n  qed;\n")))
+  b4_p_p_c.set(@readable.prove(
+    "\n  forall l A B C.\n  Line l /\\  ~Collinear A B C /\\  A NOTIN l /\\  B NOTIN l /\\  C NOTIN l  /\\ \n  A,B same_side l  /\\   B,C same_side l  ==>  A,C same_side l",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("SameSide_DEF", () => sameside_def())],
+        ),
+        @readable.by(@readable.fol, [@readable.Thm("B4'", () => b4_p())]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1138,41 +1002,19 @@ pub fn b4_p_p() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_16`
-pub fn exec_phrase_16(x16 : Unit) -> Unit raise {
-  let _ = x16
-  {
-    @readable.thm_ref().val = sameside_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SameSide_DEF): thm);;
-fn step_83() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SameSide_DEF): thm);;", exec_phrase_16)
-}
-
-///|
-/// `exec_phrase_17`
-pub fn exec_phrase_17(x17 : Unit) -> Unit raise {
-  let _ = x17
-  {
-    @readable.thm_ref().val = b4_p()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B4'): thm);;
-fn step_84() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B4'): thm);;", exec_phrase_17)
-}
-
-///|
 /// DisjointOneNotOther
 fn step_85() -> Unit raise {
-  disjointonenotother_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l m. (∀x:A. x ∈ m  ⇒ x ∉ l)  ⇔  l ∩ m = ∅\n  by fol ∉ IN_INTER MEMBER_NOT_EMPTY")))
+  disjointonenotother_c.set(@readable.prove(
+    "\n  forall l m. (forall x:A. x IN m  ==> x NOTIN l)  <=>  l INTER m = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("NOTIN", () => notin()),
+        @readable.Thm("IN_INTER", () => @sets.in_inter()),
+        @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1185,57 +1027,20 @@ pub fn disjointonenotother() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_18`
-pub fn exec_phrase_18(x18 : Unit) -> Unit raise {
-  let _ = x18
-  {
-    @readable.thm_ref().val = notin()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOTIN): thm);;
-fn step_86() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOTIN): thm);;", exec_phrase_18)
-}
-
-///|
-/// `exec_phrase_19`
-pub fn exec_phrase_19(x19 : Unit) -> Unit raise {
-  let _ = x19
-  {
-    @readable.thm_ref().val = @sets.in_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_INTER): thm);;
-fn step_87() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_INTER): thm);;", exec_phrase_19)
-}
-
-///|
-/// `exec_phrase_20`
-pub fn exec_phrase_20(x20 : Unit) -> Unit raise {
-  let _ = x20
-  {
-    @readable.thm_ref().val = @sets.member_not_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MEMBER_NOT_EMPTY): thm);;
-fn step_88() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MEMBER_NOT_EMPTY): thm);;", exec_phrase_20)
-}
-
-///|
 /// EquivIntersectionHelp
 fn step_89() -> Unit raise {
-  equivintersectionhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀e x:A. ∀l m:A->bool.\n  (l ∩ m = {x}  ∨  m ∩ l = {x})  ∧  e ∈ m ━ {x}   ⇒  e ∉ l\n  by fol ∉ IN_INTER IN_SING IN_DIFF")))
+  equivintersectionhelp_c.set(@readable.prove(
+    "\n  forall e x:A. forall l m:A->bool.\n  (l INTER m = {x}  \\/  m INTER l = {x})  /\\   e IN m DIFF {x}   ==>  e NOTIN l",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("NOTIN", () => notin()),
+        @readable.Thm("IN_INTER", () => @sets.in_inter()),
+        @readable.Thm("IN_SING", () => @sets.in_sing()),
+        @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1248,41 +1053,32 @@ pub fn equivintersectionhelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_21`
-pub fn exec_phrase_21(x21 : Unit) -> Unit raise {
-  let _ = x21
-  {
-    @readable.thm_ref().val = @sets.in_sing()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_SING): thm);;
-fn step_90() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_SING): thm);;", exec_phrase_21)
-}
-
-///|
-/// `exec_phrase_22`
-pub fn exec_phrase_22(x22 : Unit) -> Unit raise {
-  let _ = x22
-  {
-    @readable.thm_ref().val = @sets.in_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_DIFF): thm);;
-fn step_91() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_DIFF): thm);;", exec_phrase_22)
-}
-
-///|
 /// CollinearSymmetry
 fn step_92() -> Unit raise {
-  collinearsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. Collinear A B C  ⇒\n    Collinear A C B ∧ Collinear B A C ∧ Collinear B C A ∧\n    Collinear C A B ∧ Collinear C B A\n\n  proof\n    intro_TAC ∀A B C, H1;\n    consider l such that\n    Line l ∧ A ∈ l ∧ B ∈ l ∧ C ∈ l     [l_line] by fol H1 Collinear_DEF;\n    fol - Collinear_DEF;\n  qed;\n")))
+  collinearsymmetry_c.set(@readable.prove(
+    "\n  forall A B C. Collinear A B C  ==>\n    Collinear A C B /\\  Collinear B A C /\\  Collinear B C A /\\ \n    Collinear C A B /\\  Collinear C B A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1"),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  B IN l /\\  C IN l    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("Collinear_DEF", () => collinear_def())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1295,25 +1091,26 @@ pub fn collinearsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_23`
-pub fn exec_phrase_23(x23 : Unit) -> Unit raise {
-  let _ = x23
-  {
-    @readable.thm_ref().val = collinear_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Collinear_DEF): thm);;
-fn step_93() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Collinear_DEF): thm);;", exec_phrase_23)
-}
-
-///|
 /// ExistsNewPointOnLine
 fn step_94() -> Unit raise {
-  existsnewpointonline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P. Line l ∧ P ∈ l  ⇒  ∃Q. Q ∈ l ∧ ¬(P = Q)\n\n  proof\n    intro_TAC ∀P, H1;\n    consider A B such that\n    A ∈ l ∧ B ∈ l ∧ ¬(A = B)     [l_line] by fol H1 I2;\n    fol - l_line;\n  qed;\n")))
+  existsnewpointonline_c.set(@readable.prove(
+    "\n  forall P. Line l /\\  P IN l  ==>  ?Q. Q IN l /\\  ~(P = Q)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P, H1"),
+        @readable.consider(
+          "A B",
+          "A IN l /\\  B IN l /\\  ~(A = B)    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("I2", () => i2())],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("l_line")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1326,25 +1123,40 @@ pub fn existsnewpointonline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_24`
-pub fn exec_phrase_24(x24 : Unit) -> Unit raise {
-  let _ = x24
-  {
-    @readable.thm_ref().val = i2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((I2): thm);;
-fn step_95() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((I2): thm);;", exec_phrase_24)
-}
-
-///|
 /// ExistsPointOffLine
 fn step_96() -> Unit raise {
-  existspointoffline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l. Line l  ⇒  ∃Q. Q ∉ l\n\n  proof\n    intro_TAC ∀l, H1;\n    consider A B C such that\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ ¬Collinear A B C     [Distinct] by fol I3;\n    assume (A ∈ l) ∧ (B ∈ l) ∧ (C ∈ l)     [all_on] by fol ∉;\n    Collinear A B C     [] by fol H1 - Collinear_DEF;\n    fol - Distinct;\n  qed;\n")))
+  existspointoffline_c.set(@readable.prove(
+    "\n  forall l. Line l  ==>  ?Q. Q NOTIN l",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall l, H1"),
+        @readable.consider(
+          "A B C",
+          "~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  ~Collinear A B C    ",
+          "Distinct",
+          @readable.by(@readable.fol, [@readable.Thm("I3", () => i3())]),
+        ),
+        @readable.assuming(
+          "(A IN l) /\\  (B IN l) /\\  (C IN l)",
+          "all_on",
+          @readable.by(@readable.fol, [@readable.Thm("NOTIN", () => notin())]),
+        ),
+        @readable.have(
+          "\n    Collinear A B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("Distinct")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1357,25 +1169,50 @@ pub fn existspointoffline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_25`
-pub fn exec_phrase_25(x25 : Unit) -> Unit raise {
-  let _ = x25
-  {
-    @readable.thm_ref().val = i3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((I3): thm);;
-fn step_97() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((I3): thm);;", exec_phrase_25)
-}
-
-///|
 /// BetweenLinear
 fn step_98() -> Unit raise {
-  betweenlinear_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C m. Line m ∧ A ∈ m ∧ C ∈ m  ∧\n    (B ∈ Open (A, C) ∨ C ∈ Open (B, A)  ∨ A ∈ Open (C, B))  ⇒  B ∈ m\n\n  proof\n    intro_TAC ∀A B C m, H1m H1A H1C H2;\n    ¬(A = C) ∧\n    (Collinear A B C ∨ Collinear B C A ∨ Collinear C A B)     [X1] by fol H2 B1';\n    consider l such that\n    Line l ∧ A ∈ l ∧ B ∈ l ∧ C ∈ l     [X2] by fol - Collinear_DEF;\n    l = m     [] by fol X1 - H2 H1m H1A H1C I1;\n    fol - X2;\n  qed;\n")))
+  betweenlinear_c.set(@readable.prove(
+    "\n  forall A B C m. Line m /\\  A IN m /\\  C IN m  /\\ \n    (B IN Open (A, C) \\/ C IN Open (B, A)  \\/ A IN Open (C, B))  ==>  B IN m",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C m, H1m H1A H1C H2"),
+        @readable.have(
+          "\n    ~(A = C) /\\ \n    (Collinear A B C \\/ Collinear B C A \\/ Collinear C A B)",
+          "X1",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H2"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  B IN l /\\  C IN l    ",
+          "X2",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("Collinear_DEF", () => collinear_def())],
+          ),
+        ),
+        @readable.have(
+          "\n    l = m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("X1"),
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Label("H1m"),
+              @readable.Label("H1A"),
+              @readable.Label("H1C"),
+              @readable.Thm("I1", () => i1()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("X2")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1388,41 +1225,44 @@ pub fn betweenlinear() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_26`
-pub fn exec_phrase_26(x26 : Unit) -> Unit raise {
-  let _ = x26
-  {
-    @readable.thm_ref().val = b1_p()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B1'): thm);;
-fn step_99() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B1'): thm);;", exec_phrase_26)
-}
-
-///|
-/// `exec_phrase_27`
-pub fn exec_phrase_27(x27 : Unit) -> Unit raise {
-  let _ = x27
-  {
-    @readable.thm_ref().val = i1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((I1): thm);;
-fn step_100() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((I1): thm);;", exec_phrase_27)
-}
-
-///|
 /// CollinearLinear
 fn step_101() -> Unit raise {
-  collinearlinear_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C m. Line m ∧ A ∈ m ∧ C ∈ m  ∧\n    (Collinear A B C ∨ Collinear B C A ∨ Collinear C A B)  ∧\n    ¬(A = C)  ⇒  B ∈ m\n\n  proof\n    intro_TAC ∀A B C m, H1m H1A H1C H2 H3;\n    consider l such that\n    Line l ∧ A ∈ l ∧ B ∈ l ∧ C ∈ l     [X1] by fol H2 Collinear_DEF;\n    l = m     [] by fol H3 - H1m H1A H1C I1;\n    fol - X1;\n  qed;\n")))
+  collinearlinear_c.set(@readable.prove(
+    "\n  forall A B C m. Line m /\\  A IN m /\\  C IN m  /\\ \n    (Collinear A B C \\/ Collinear B C A \\/ Collinear C A B)  /\\ \n    ~(A = C)  ==>  B IN m",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C m, H1m H1A H1C H2 H3"),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  B IN l /\\  C IN l    ",
+          "X1",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l = m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Prev,
+              @readable.Label("H1m"),
+              @readable.Label("H1A"),
+              @readable.Label("H1C"),
+              @readable.Thm("I1", () => i1()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("X1")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1437,7 +1277,42 @@ pub fn collinearlinear() -> @kernel.Thm {
 ///|
 /// NonCollinearImpliesDistinct
 fn step_102() -> Unit raise {
-  noncollinearimpliesdistinct_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. ¬Collinear A B C  ⇒  ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C)\n\n  proof\n    intro_TAC ∀A B C, H1;\n    assume A = B ∧ B = C     [equal] by fol H1 I1 Collinear_DEF;\n    consider Q such that\n    ¬(Q = A)     [notQA] by fol I3;\n    fol - equal H1 I1 Collinear_DEF;\n  qed;\n")))
+  noncollinearimpliesdistinct_c.set(@readable.prove(
+    "\n  forall A B C. ~Collinear A B C  ==>  ~(A = B) /\\  ~(A = C) /\\  ~(B = C)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1"),
+        @readable.assuming(
+          "A = B /\\  B = C",
+          "equal",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "~(Q = A)    ",
+          "notQA",
+          @readable.by(@readable.fol, [@readable.Thm("I3", () => i3())]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("equal"),
+            @readable.Label("H1"),
+            @readable.Thm("I1", () => i1()),
+            @readable.Thm("Collinear_DEF", () => collinear_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1452,7 +1327,50 @@ pub fn noncollinearimpliesdistinct() -> @kernel.Thm {
 ///|
 /// NonCollinearRaa
 fn step_103() -> Unit raise {
-  noncollinearraa_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C l.  ¬(A = C)  ⇒  Line l ∧ A ∈ l ∧ C ∈ l  ⇒  B ∉ l\n    ⇒  ¬Collinear A B C\n\n  proof\n    intro_TAC ∀A B C l, Distinct, l_line, notBl;\n    assume Collinear A B C     [ANCcol] by fol;\n    consider m such that Line m ∧ A ∈ m ∧ B ∈ m ∧ C ∈ m     [m_line] by fol - Collinear_DEF;\n    m = l     [] by fol - l_line Distinct I1;\n    B ∈ l     [] by fol m_line -;\n    fol - notBl ∉;\n  qed;\n")))
+  noncollinearraa_c.set(@readable.prove(
+    "\n  forall A B C l.  ~(A = C)  ==>  Line l /\\  A IN l /\\  C IN l  ==>  B NOTIN l\n    ==>  ~Collinear A B C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C l, Distinct, l_line, notBl"),
+        @readable.assuming("Collinear A B C", "ANCcol", @readable.by(@readable.fol, [])),
+        @readable.consider(
+          "m",
+          "Line m /\\  A IN m /\\  B IN m /\\  C IN m    ",
+          "m_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("Collinear_DEF", () => collinear_def())],
+          ),
+        ),
+        @readable.have(
+          "\n    m = l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN l",
+          "",
+          @readable.by(@readable.fol, [@readable.Label("m_line"), @readable.Prev]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("notBl"),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1467,7 +1385,45 @@ pub fn noncollinearraa() -> @kernel.Thm {
 ///|
 /// TwoSidesTriangle1Intersection
 fn step_104() -> Unit raise {
-  twosidestriangle1intersection_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C Y. ¬Collinear A B C  ∧  Collinear B C Y  ∧  Collinear A C Y\n     ⇒ Y = C\n\n  proof\n    intro_TAC ∀A B C Y, ABCcol BCYcol ACYcol;\n    assume ¬(C = Y)     [notCY] by fol;\n    consider l such that\n    Line l ∧ C ∈ l ∧ Y ∈ l     [l_line] by fol - I1;\n    B ∈ l ∧ A ∈ l     [] by fol - BCYcol ACYcol Collinear_DEF notCY I1;\n    fol - l_line Collinear_DEF ABCcol;\n  qed;\n")))
+  twosidestriangle1intersection_c.set(@readable.prove(
+    "\n  forall A B C Y. ~Collinear A B C  /\\   Collinear B C Y  /\\   Collinear A C Y\n     ==> Y = C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C Y, ABCcol BCYcol ACYcol"),
+        @readable.assuming("~(C = Y)", "notCY", @readable.by(@readable.fol, [])),
+        @readable.consider(
+          "l",
+          "Line l /\\  C IN l /\\  Y IN l    ",
+          "l_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.have(
+          "\n    B IN l /\\  A IN l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("BCYcol"),
+              @readable.Label("ACYcol"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("notCY"),
+              @readable.Thm("I1", () => i1()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("l_line"),
+            @readable.Thm("Collinear_DEF", () => collinear_def()),
+            @readable.Label("ABCcol"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1482,7 +1438,43 @@ pub fn twosidestriangle1intersection() -> @kernel.Thm {
 ///|
 /// OriginInRay
 fn step_105() -> Unit raise {
-  origininray_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O Q. ¬(Q = O)  ⇒  O ∈ ray O Q\n\n  proof\n    intro_TAC ∀O Q, H1;\n    O ∉ Open (O, Q)     [OOQ] by fol B1' ∉;\n    Collinear O Q O     [] by fol H1 I1 Collinear_DEF;\n    fol H1 - OOQ IN_Ray;\n  qed;\n")))
+  origininray_c.set(@readable.prove(
+    "\n  forall O Q. ~(Q = O)  ==>  O IN ray O Q",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O Q, H1"),
+        @readable.have(
+          "\n    O NOTIN Open (O, Q)",
+          "OOQ",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("B1'", () => b1_p()), @readable.Thm("NOTIN", () => notin())],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear O Q O",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Label("OOQ"),
+            @readable.Thm("IN_Ray", () => in_ray()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1495,25 +1487,45 @@ pub fn origininray() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_28`
-pub fn exec_phrase_28(x28 : Unit) -> Unit raise {
-  let _ = x28
-  {
-    @readable.thm_ref().val = in_ray()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_Ray): thm);;
-fn step_106() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_Ray): thm);;", exec_phrase_28)
-}
-
-///|
 /// EndpointInRay
 fn step_107() -> Unit raise {
-  endpointinray_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O Q. ¬(Q = O)  ⇒  Q ∈ ray O Q\n\n  proof\n    intro_TAC ∀O Q, H1;\n    O ∉ Open (Q, Q)     [notOQQ] by fol B1' ∉;\n    Collinear O Q Q     [] by fol H1 I1 Collinear_DEF;\n    fol H1 - notOQQ IN_Ray;\n  qed;\n")))
+  endpointinray_c.set(@readable.prove(
+    "\n  forall O Q. ~(Q = O)  ==>  Q IN ray O Q",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O Q, H1"),
+        @readable.have(
+          "\n    O NOTIN Open (Q, Q)",
+          "notOQQ",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("B1'", () => b1_p()), @readable.Thm("NOTIN", () => notin())],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear O Q Q",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Label("notOQQ"),
+            @readable.Thm("IN_Ray", () => in_ray()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1528,7 +1540,44 @@ pub fn endpointinray() -> @kernel.Thm {
 ///|
 /// I1Uniqueness
 fn step_108() -> Unit raise {
-  i1uniqueness_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀X l m. Line l  ∧  Line m  ∧  ¬(l = m)  ∧  X ∈ l  ∧  X ∈ m\n     ⇒ l ∩ m = {X}\n\n  proof\n    intro_TAC ∀X l m, H0l H0m H1 H2l H2m;\n    assume ¬(l ∩ m = {X})     [H3] by fol;\n    consider A such that\n    A ∈ l ∩ m  ∧ ¬(A = X)     [X1] by fol H2l H2m IN_INTER H3 EXTENSION IN_SING;\n    fol H0l H0m H2l H2m IN_INTER X1 I1 H1;\n  qed;\n")))
+  i1uniqueness_c.set(@readable.prove(
+    "\n  forall X l m. Line l  /\\   Line m  /\\   ~(l = m)  /\\   X IN l  /\\   X IN m\n     ==> l INTER m = {X}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall X l m, H0l H0m H1 H2l H2m"),
+        @readable.assuming("~(l INTER m = {X})", "H3", @readable.by(@readable.fol, [])),
+        @readable.consider(
+          "A",
+          "A IN l INTER m  /\\  ~(A = X)    ",
+          "X1",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2l"),
+              @readable.Label("H2m"),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Label("H3"),
+              @readable.Thm("EXTENSION", () => @sets.extension()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H0l"),
+            @readable.Label("H0m"),
+            @readable.Label("H2l"),
+            @readable.Label("H2m"),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Label("X1"),
+            @readable.Thm("I1", () => i1()),
+            @readable.Label("H1"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1541,25 +1590,45 @@ pub fn i1uniqueness() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_29`
-pub fn exec_phrase_29(x29 : Unit) -> Unit raise {
-  let _ = x29
-  {
-    @readable.thm_ref().val = @sets.extension()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EXTENSION): thm);;
-fn step_109() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EXTENSION): thm);;", exec_phrase_29)
-}
-
-///|
 /// DisjointLinesImplySameSide
 fn step_110() -> Unit raise {
-  disjointlinesimplysameside_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l m A B.  Line l ∧ Line m ∧ A ∈ m ∧ B ∈ m ∧ l ∩ m = ∅  ⇒  A,B same_side l\n\n  proof\n    intro_TAC ∀l m A B, l_line m_line Am Bm lm0;\n      l ∩ Open (A,B) = ∅     [] by fol Am Bm m_line BetweenLinear SUBSET lm0 SUBSET_REFL INTER_TENSOR SUBSET_EMPTY;\n      fol l_line - SameSide_DEF SUBSET IN_INTER MEMBER_NOT_EMPTY;\n  qed;\n")))
+  disjointlinesimplysameside_c.set(@readable.prove(
+    "\n  forall l m A B.  Line l /\\  Line m /\\  A IN m /\\  B IN m /\\  l INTER m = {}  ==>  A,B same_side l",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall l m A B, l_line m_line Am Bm lm0"),
+        @readable.have(
+          "\n      l INTER Open (A,B) = {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Am"),
+              @readable.Label("Bm"),
+              @readable.Label("m_line"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Label("lm0"),
+              @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+              @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+              @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("l_line"),
+            @readable.Prev,
+            @readable.Thm("SameSide_DEF", () => sameside_def()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1572,89 +1641,73 @@ pub fn disjointlinesimplysameside() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_30`
-pub fn exec_phrase_30(x30 : Unit) -> Unit raise {
-  let _ = x30
-  {
-    @readable.thm_ref().val = betweenlinear()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BetweenLinear): thm);;
-fn step_111() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BetweenLinear): thm);;", exec_phrase_30)
-}
-
-///|
-/// `exec_phrase_31`
-pub fn exec_phrase_31(x31 : Unit) -> Unit raise {
-  let _ = x31
-  {
-    @readable.thm_ref().val = @sets.subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET): thm);;
-fn step_112() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET): thm);;", exec_phrase_31)
-}
-
-///|
-/// `exec_phrase_32`
-pub fn exec_phrase_32(x32 : Unit) -> Unit raise {
-  let _ = x32
-  {
-    @readable.thm_ref().val = @sets.subset_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_REFL): thm);;
-fn step_113() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_REFL): thm);;", exec_phrase_32)
-}
-
-///|
-/// `exec_phrase_33`
-pub fn exec_phrase_33(x33 : Unit) -> Unit raise {
-  let _ = x33
-  {
-    @readable.thm_ref().val = inter_tensor()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_TENSOR): thm);;
-fn step_114() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_TENSOR): thm);;", exec_phrase_33)
-}
-
-///|
-/// `exec_phrase_34`
-pub fn exec_phrase_34(x34 : Unit) -> Unit raise {
-  let _ = x34
-  {
-    @readable.thm_ref().val = @sets.subset_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_EMPTY): thm);;
-fn step_115() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_EMPTY): thm);;", exec_phrase_34)
-}
-
-///|
 /// EquivIntersection
 fn step_116() -> Unit raise {
-  equivintersection_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B X l m.  Line l ∧ Line m ∧ l ∩ m = {X} ∧ A ∈ m ━ {X} ∧ B ∈ m ━ {X} ∧\n    X ∉ Open (A, B)  ⇒  A,B same_side l\n\n  proof\n    intro_TAC ∀A B X l m, l_line m_line H1 H2l H2m H3;\n    Open (A, B) ⊂ m     [] by fol l_line m_line SUBSET_DIFF IN_DIFF IN_SING  H2l H2m BetweenLinear SUBSET;\n    l ∩ Open (A, B) ⊂ {X}     [] by fol - H1 SUBSET_REFL INTER_TENSOR;\n    l ∩ Open (A, B) ⊂ ∅     [] by fol - SUBSET IN_SING IN_INTER H3 ∉;\n    fol l_line - SameSide_DEF SUBSET IN_INTER NOT_IN_EMPTY;\n  qed;\n")))
+  equivintersection_c.set(@readable.prove(
+    "\n  forall A B X l m.  Line l /\\  Line m /\\  l INTER m = {X} /\\  A IN m DIFF {X} /\\  B IN m DIFF {X} /\\ \n    X NOTIN Open (A, B)  ==>  A,B same_side l",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B X l m, l_line m_line H1 H2l H2m H3"),
+        @readable.have(
+          "\n    Open (A, B) SUBSET m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Label("H2l"),
+              @readable.Label("H2m"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l INTER Open (A, B) SUBSET {X}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+              @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l INTER Open (A, B) SUBSET {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Label("H3"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("l_line"),
+            @readable.Prev,
+            @readable.Thm("SameSide_DEF", () => sameside_def()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1667,41 +1720,19 @@ pub fn equivintersection() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_35`
-pub fn exec_phrase_35(x35 : Unit) -> Unit raise {
-  let _ = x35
-  {
-    @readable.thm_ref().val = @sets.subset_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_DIFF): thm);;
-fn step_117() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_DIFF): thm);;", exec_phrase_35)
-}
-
-///|
-/// `exec_phrase_36`
-pub fn exec_phrase_36(x36 : Unit) -> Unit raise {
-  let _ = x36
-  {
-    @readable.thm_ref().val = @sets.not_in_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_IN_EMPTY): thm);;
-fn step_118() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_IN_EMPTY): thm);;", exec_phrase_36)
-}
-
-///|
 /// RayLine
 fn step_119() -> Unit raise {
-  rayline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O P l. Line l ∧ O ∈ l ∧ P ∈ l  ⇒  ray O P  ⊂ l\n  by fol IN_Ray CollinearLinear SUBSET")))
+  rayline_c.set(@readable.prove(
+    "\n  forall O P l. Line l /\\  O IN l /\\  P IN l  ==>  ray O P  SUBSET l",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("IN_Ray", () => in_ray()),
+        @readable.Thm("CollinearLinear", () => collinearlinear()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1714,25 +1745,142 @@ pub fn rayline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_37`
-pub fn exec_phrase_37(x37 : Unit) -> Unit raise {
-  let _ = x37
-  {
-    @readable.thm_ref().val = collinearlinear()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CollinearLinear): thm);;
-fn step_120() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CollinearLinear): thm);;", exec_phrase_37)
-}
-
-///|
 /// RaySameSide
 fn step_121() -> Unit raise {
-  raysameside_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l O A P. Line l ∧ O ∈ l ∧ A ∉ l ∧ P ∈ ray O A ━ {O}\n     ⇒  P ∉ l  ∧  P,A same_side l\n\n  proof\n    intro_TAC ∀l O A P, l_line Ol notAl PrOA;\n    ¬(O = A)     [notOA] by fol l_line Ol notAl ∉;\n    consider d such that\n    Line d ∧ O ∈ d ∧ A ∈ d     [d_line] by fol notOA I1;\n    ¬(l = d)     [] by fol - notAl ∉;\n    l ∩ d = {O}     [ldO] by fol l_line Ol d_line - I1Uniqueness;\n    A ∈ d ━ {O}     [Ad_O] by fol d_line notOA IN_DIFF IN_SING;\n    ray O A ⊂ d     [] by fol d_line RayLine;\n    P ∈ d ━ {O}     [Pd_O] by fol PrOA - SUBSET IN_DIFF IN_SING;\n    P ∉ l     [notPl] by fol ldO - EquivIntersectionHelp;\n    O ∉ Open (P, A)     [] by fol PrOA IN_DIFF IN_SING IN_Ray;\n    P,A same_side l     [] by fol l_line Ol d_line ldO Ad_O Pd_O - EquivIntersection;\n    fol notPl -;\n  qed;\n")))
+  raysameside_c.set(@readable.prove(
+    "\n  forall l O A P. Line l /\\  O IN l /\\  A NOTIN l /\\  P IN ray O A DIFF {O}\n     ==>  P NOTIN l  /\\   P,A same_side l",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall l O A P, l_line Ol notAl PrOA"),
+        @readable.have(
+          "\n    ~(O = A)",
+          "notOA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Ol"),
+              @readable.Label("notAl"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "d",
+          "Line d /\\  O IN d /\\  A IN d    ",
+          "d_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("notOA"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(l = d)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("notAl"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l INTER d = {O}",
+          "ldO",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Ol"),
+              @readable.Label("d_line"),
+              @readable.Prev,
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN d DIFF {O}",
+          "Ad_O",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("d_line"),
+              @readable.Label("notOA"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O A SUBSET d",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("d_line"), @readable.Thm("RayLine", () => rayline())],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN d DIFF {O}",
+          "Pd_O",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("PrOA"),
+              @readable.Prev,
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P NOTIN l",
+          "notPl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ldO"),
+              @readable.Prev,
+              @readable.Thm("EquivIntersectionHelp", () => equivintersectionhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (P, A)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("PrOA"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P,A same_side l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Ol"),
+              @readable.Label("d_line"),
+              @readable.Label("ldO"),
+              @readable.Label("Ad_O"),
+              @readable.Label("Pd_O"),
+              @readable.Prev,
+              @readable.Thm("EquivIntersection", () => equivintersection()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("notPl"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1745,73 +1893,50 @@ pub fn raysameside() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_38`
-pub fn exec_phrase_38(x38 : Unit) -> Unit raise {
-  let _ = x38
-  {
-    @readable.thm_ref().val = i1uniqueness()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((I1Uniqueness): thm);;
-fn step_122() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((I1Uniqueness): thm);;", exec_phrase_38)
-}
-
-///|
-/// `exec_phrase_39`
-pub fn exec_phrase_39(x39 : Unit) -> Unit raise {
-  let _ = x39
-  {
-    @readable.thm_ref().val = rayline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RayLine): thm);;
-fn step_123() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RayLine): thm);;", exec_phrase_39)
-}
-
-///|
-/// `exec_phrase_40`
-pub fn exec_phrase_40(x40 : Unit) -> Unit raise {
-  let _ = x40
-  {
-    @readable.thm_ref().val = equivintersectionhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EquivIntersectionHelp): thm);;
-fn step_124() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EquivIntersectionHelp): thm);;", exec_phrase_40)
-}
-
-///|
-/// `exec_phrase_41`
-pub fn exec_phrase_41(x41 : Unit) -> Unit raise {
-  let _ = x41
-  {
-    @readable.thm_ref().val = equivintersection()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EquivIntersection): thm);;
-fn step_125() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EquivIntersection): thm);;", exec_phrase_41)
-}
-
-///|
 /// IntervalRayEZ
 fn step_126() -> Unit raise {
-  intervalrayez_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. B ∈ Open (A, C)  ⇒  B ∈ ray A C ━ {A}  ∧  C ∈ ray A B ━ {A}\n\n  proof\n    intro_TAC ∀A B C, H1;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ Collinear A B C     [ABC] by fol H1 B1';\n    A ∉ Open (B, C)  ∧  A ∉ Open (C, B)     [] by fol - H1 B3' B1' ∉;\n    fol ABC - CollinearSymmetry IN_Ray ∉ IN_DIFF IN_SING;\n  qed;\n")))
+  intervalrayez_c.set(@readable.prove(
+    "\n  forall A B C. B IN Open (A, C)  ==>  B IN ray A C DIFF {A}  /\\   C IN ray A B DIFF {A}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  Collinear A B C",
+          "ABC",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN Open (B, C)  /\\   A NOTIN Open (C, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("B3'", () => b3_p()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("ABC"),
+            @readable.Prev,
+            @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            @readable.Thm("IN_Ray", () => in_ray()),
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+            @readable.Thm("IN_SING", () => @sets.in_sing()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1824,41 +1949,78 @@ pub fn intervalrayez() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_42`
-pub fn exec_phrase_42(x42 : Unit) -> Unit raise {
-  let _ = x42
-  {
-    @readable.thm_ref().val = b3_p()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B3'): thm);;
-fn step_127() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B3'): thm);;", exec_phrase_42)
-}
-
-///|
-/// `exec_phrase_43`
-pub fn exec_phrase_43(x43 : Unit) -> Unit raise {
-  let _ = x43
-  {
-    @readable.thm_ref().val = collinearsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CollinearSymmetry): thm);;
-fn step_128() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CollinearSymmetry): thm);;", exec_phrase_43)
-}
-
-///|
 /// NoncollinearityExtendsToLine
 fn step_129() -> Unit raise {
-  noncollinearityextendstoline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B X. ¬Collinear A O B  ⇒  Collinear O B X  ∧ ¬(X = O)\n      ⇒  ¬Collinear A O X\n\n  proof\n    intro_TAC ∀A O B X, H1, H2;\n    ¬(A = O) ∧ ¬(A = B) ∧ ¬(O = B)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider b such that\n    Line b ∧ O ∈ b ∧ B ∈ b     [b_line] by fol Distinct I1;\n    A ∉ b     [notAb] by fol b_line H1 Collinear_DEF ∉;\n    X ∈ b     [] by fol H2 b_line Distinct I1 Collinear_DEF;\n    fol b_line - H2 notAb I1 Collinear_DEF ∉;\n  qed;\n")))
+  noncollinearityextendstoline_c.set(@readable.prove(
+    "\n  forall A O B X. ~Collinear A O B  ==>  Collinear O B X  /\\  ~(X = O)\n      ==>  ~Collinear A O X",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B X, H1, H2"),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(A = B) /\\  ~(O = B)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "b",
+          "Line b /\\  O IN b /\\  B IN b    ",
+          "b_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN b",
+          "notAb",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("b_line"),
+              @readable.Label("H1"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X IN b",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("b_line"),
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("b_line"),
+            @readable.Prev,
+            @readable.Label("H2"),
+            @readable.Label("notAb"),
+            @readable.Thm("I1", () => i1()),
+            @readable.Thm("Collinear_DEF", () => collinear_def()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1871,25 +2033,18 @@ pub fn noncollinearityextendstoline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_44`
-pub fn exec_phrase_44(x44 : Unit) -> Unit raise {
-  let _ = x44
-  {
-    @readable.thm_ref().val = noncollinearimpliesdistinct()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NonCollinearImpliesDistinct): thm);;
-fn step_130() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NonCollinearImpliesDistinct): thm);;", exec_phrase_44)
-}
-
-///|
 /// SameSideReflexive
 fn step_131() -> Unit raise {
-  samesidereflexive_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l A. Line l ∧  A ∉ l ⇒ A,A same_side l\n  by fol B1' SameSide_DEF")))
+  samesidereflexive_c.set(@readable.prove(
+    "\n  forall l A. Line l /\\   A NOTIN l ==> A,A same_side l",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("B1'", () => b1_p()),
+        @readable.Thm("SameSide_DEF", () => sameside_def()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1904,7 +2059,16 @@ pub fn samesidereflexive() -> @kernel.Thm {
 ///|
 /// SameSideSymmetric
 fn step_132() -> Unit raise {
-  samesidesymmetric_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l A B. Line l ∧  A ∉ l ∧ B ∉ l ⇒\n  A,B same_side l ⇒ B,A same_side l\n  by fol SameSide_DEF B1'")))
+  samesidesymmetric_c.set(@readable.prove(
+    "\n  forall l A B. Line l /\\   A NOTIN l /\\  B NOTIN l ==>\n  A,B same_side l ==> B,A same_side l",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SameSide_DEF", () => sameside_def()),
+        @readable.Thm("B1'", () => b1_p()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1919,7 +2083,235 @@ pub fn samesidesymmetric() -> @kernel.Thm {
 ///|
 /// SameSideTransitive
 fn step_133() -> Unit raise {
-  samesidetransitive_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l A B C. Line l  ⇒  A ∉ l ∧ B ∉ l ∧ C ∉ l  ⇒  A,B same_side l\n    ⇒  B,C same_side l  ⇒  A,C same_side l\n\n  proof\n    intro_TAC ∀l A B C, l_line, notABCl, Asim_lB, Bsim_lC;\n    assume Collinear A B C  ∧ ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C)     [Distinct] by fol l_line notABCl Asim_lB Bsim_lC B4'' SameSideReflexive;\n    consider m such that\n    Line m ∧ A ∈ m ∧ C ∈ m     [m_line] by fol Distinct I1;\n    B ∈ m     [Bm] by fol - Distinct CollinearLinear;\n    assume ¬(m ∩ l = ∅)     [Intersect] by fol m_line l_line BetweenLinear SameSide_DEF IN_INTER NOT_IN_EMPTY;\n    consider X such that\n    X ∈ l ∧ X ∈ m     [Xlm] by fol - MEMBER_NOT_EMPTY IN_INTER;\n    Collinear A X B  ∧  Collinear B A C  ∧  Collinear A B C     [ABXcol] by fol m_line Bm - Collinear_DEF;\n    consider E such that\n    E ∈ l ∧ ¬(E = X)     [El_X] by fol l_line Xlm ExistsNewPointOnLine;\n    ¬Collinear E A X     [EAXncol] by fol l_line El_X Xlm notABCl I1 Collinear_DEF ∉;\n    consider B' such that\n    ¬(B = E)  ∧  B ∈ Open (E, B')     [EBB'] by fol notABCl El_X ∉ B2';\n    ¬(B' = E) ∧ ¬(B' = B) ∧ Collinear B E B'     [EBB'col] by fol - B1' CollinearSymmetry;\n    ¬Collinear A B B'  ∧  ¬Collinear B' B A  ∧  ¬Collinear B' A B     [ABB'ncol] by fol EAXncol ABXcol Distinct - NoncollinearityExtendsToLine CollinearSymmetry;\n    ¬Collinear B' B C ∧  ¬Collinear B' A C ∧  ¬Collinear A B' C     [AB'Cncol] by fol ABB'ncol ABXcol Distinct NoncollinearityExtendsToLine CollinearSymmetry;\n    B' ∈ ray E B ━ {E}  ∧  B ∈ ray E B' ━ {E}     [] by fol EBB' IntervalRayEZ;\n    B' ∉ l  ∧  B',B same_side l  ∧  B,B' same_side l     [notB'l] by fol l_line El_X notABCl - RaySameSide;\n    A,B' same_side l ∧  B',C same_side l     [] by fol l_line ABB'ncol notABCl notB'l Asim_lB - AB'Cncol Bsim_lC B4'';\n    fol l_line AB'Cncol notABCl notB'l - B4'';\n  qed;\n")))
+  samesidetransitive_c.set(@readable.prove(
+    "\n  forall l A B C. Line l  ==>  A NOTIN l /\\  B NOTIN l /\\  C NOTIN l  ==>  A,B same_side l\n    ==>  B,C same_side l  ==>  A,C same_side l",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall l A B C, l_line, notABCl, Asim_lB, Bsim_lC"),
+        @readable.assuming(
+          "Collinear A B C  /\\  ~(A = B) /\\  ~(A = C) /\\  ~(B = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("notABCl"),
+              @readable.Label("Asim_lB"),
+              @readable.Label("Bsim_lC"),
+              @readable.Thm("B4''", () => b4_p_p()),
+              @readable.Thm("SameSideReflexive", () => samesidereflexive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  A IN m /\\  C IN m    ",
+          "m_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN m",
+          "Bm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Thm("CollinearLinear", () => collinearlinear()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(m INTER l = {})",
+          "Intersect",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("l_line"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X",
+          "X IN l /\\  X IN m    ",
+          "Xlm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear A X B  /\\   Collinear B A C  /\\   Collinear A B C",
+          "ABXcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("Bm"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN l /\\  ~(E = X)    ",
+          "El_X",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Xlm"),
+              @readable.Thm("ExistsNewPointOnLine", () => existsnewpointonline()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear E A X",
+          "EAXncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("El_X"),
+              @readable.Label("Xlm"),
+              @readable.Label("notABCl"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "B'",
+          "~(B = E)  /\\   B IN Open (E, B')    ",
+          "EBB'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notABCl"),
+              @readable.Label("El_X"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("B2'", () => b2_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B' = E) /\\  ~(B' = B) /\\  Collinear B E B'",
+          "EBB'col",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A B B'  /\\   ~Collinear B' B A  /\\   ~Collinear B' A B",
+          "ABB'ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EAXncol"),
+              @readable.Label("ABXcol"),
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B' B C /\\   ~Collinear B' A C /\\   ~Collinear A B' C",
+          "AB'Cncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABB'ncol"),
+              @readable.Label("ABXcol"),
+              @readable.Label("Distinct"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B' IN ray E B DIFF {E}  /\\   B IN ray E B' DIFF {E}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EBB'"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B' NOTIN l  /\\   B',B same_side l  /\\   B,B' same_side l",
+          "notB'l",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("El_X"),
+              @readable.Label("notABCl"),
+              @readable.Prev,
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,B' same_side l /\\   B',C same_side l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("ABB'ncol"),
+              @readable.Label("notABCl"),
+              @readable.Label("notB'l"),
+              @readable.Label("Asim_lB"),
+              @readable.Prev,
+              @readable.Label("AB'Cncol"),
+              @readable.Label("Bsim_lC"),
+              @readable.Thm("B4''", () => b4_p_p()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("l_line"),
+            @readable.Label("AB'Cncol"),
+            @readable.Label("notABCl"),
+            @readable.Label("notB'l"),
+            @readable.Prev,
+            @readable.Thm("B4''", () => b4_p_p()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1932,121 +2324,183 @@ pub fn samesidetransitive() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_45`
-pub fn exec_phrase_45(x45 : Unit) -> Unit raise {
-  let _ = x45
-  {
-    @readable.thm_ref().val = b4_p_p()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B4''): thm);;
-fn step_134() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B4''): thm);;", exec_phrase_45)
-}
-
-///|
-/// `exec_phrase_46`
-pub fn exec_phrase_46(x46 : Unit) -> Unit raise {
-  let _ = x46
-  {
-    @readable.thm_ref().val = samesidereflexive()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SameSideReflexive): thm);;
-fn step_135() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SameSideReflexive): thm);;", exec_phrase_46)
-}
-
-///|
-/// `exec_phrase_47`
-pub fn exec_phrase_47(x47 : Unit) -> Unit raise {
-  let _ = x47
-  {
-    @readable.thm_ref().val = existsnewpointonline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ExistsNewPointOnLine): thm);;
-fn step_136() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ExistsNewPointOnLine): thm);;", exec_phrase_47)
-}
-
-///|
-/// `exec_phrase_48`
-pub fn exec_phrase_48(x48 : Unit) -> Unit raise {
-  let _ = x48
-  {
-    @readable.thm_ref().val = b2_p()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((B2'): thm);;
-fn step_137() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((B2'): thm);;", exec_phrase_48)
-}
-
-///|
-/// `exec_phrase_49`
-pub fn exec_phrase_49(x49 : Unit) -> Unit raise {
-  let _ = x49
-  {
-    @readable.thm_ref().val = noncollinearityextendstoline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NoncollinearityExtendsToLine): thm);;
-fn step_138() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NoncollinearityExtendsToLine): thm);;", exec_phrase_49)
-}
-
-///|
-/// `exec_phrase_50`
-pub fn exec_phrase_50(x50 : Unit) -> Unit raise {
-  let _ = x50
-  {
-    @readable.thm_ref().val = intervalrayez()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IntervalRayEZ): thm);;
-fn step_139() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IntervalRayEZ): thm);;", exec_phrase_50)
-}
-
-///|
-/// `exec_phrase_51`
-pub fn exec_phrase_51(x51 : Unit) -> Unit raise {
-  let _ = x51
-  {
-    @readable.thm_ref().val = raysameside()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RaySameSide): thm);;
-fn step_140() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RaySameSide): thm);;", exec_phrase_51)
-}
-
-///|
 /// ConverseCrossbar
 fn step_141() -> Unit raise {
-  conversecrossbar_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A B G. ¬Collinear A O B  ∧  G ∈ Open (A, B)  ⇒  G ∈ int_angle A O B\n\n  proof\n    intro_TAC ∀O A B G, H1 H2;\n    ¬(A = O) ∧ ¬(A = B) ∧ ¬(O = B)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider a such that\n    Line a ∧ O ∈ a ∧ A ∈ a     [a_line] by fol - I1;\n    consider b such that\n    Line b ∧ O ∈ b ∧ B ∈ b     [b_line] by fol Distinct I1;\n    consider l such that\n    Line l ∧ A ∈ l ∧ B ∈ l     [l_line] by fol Distinct I1;\n    B ∉ a  ∧  A ∉ b     [] by fol H1 a_line  b_line Collinear_DEF ∉;\n    ¬(a = l)  ∧  ¬(b = l)     [] by fol - l_line ∉;\n    a ∩ l = {A}  ∧  b ∩ l = {B}     [alA] by fol - a_line l_line b_line I1Uniqueness;\n    ¬(A = G) ∧ ¬(A = B) ∧ ¬(G = B)     [AGB] by fol H2 B1';\n    A ∉ Open (G, B)  ∧  B ∉ Open (G, A)     [notGAB] by fol H2 B3' B1' ∉;\n    G ∈ l     [Gl] by fol l_line H2 BetweenLinear;\n    G ∉ a  ∧  G ∉ b     [notGa] by fol alA Gl AGB IN_DIFF IN_SING EquivIntersectionHelp;\n    G ∈ l ━ {A} ∧ B ∈ l ━ {A} ∧ G ∈ l ━ {B} ∧ A ∈ l ━ {B}      [] by fol Gl l_line AGB IN_DIFF IN_SING;\n    G,B same_side a  ∧  G,A same_side b     [] by fol a_line l_line alA - notGAB b_line EquivIntersection;\n    fol H1 a_line b_line notGa - IN_InteriorAngle;\n  qed;\n")))
+  conversecrossbar_c.set(@readable.prove(
+    "\n  forall O A B G. ~Collinear A O B  /\\   G IN Open (A, B)  ==>  G IN int_angle A O B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A B G, H1 H2"),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(A = B) /\\  ~(O = B)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a",
+          "Line a /\\  O IN a /\\  A IN a    ",
+          "a_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.consider(
+          "b",
+          "Line b /\\  O IN b /\\  B IN b    ",
+          "b_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  B IN l    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN a  /\\   A NOTIN b",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("a_line"),
+              @readable.Label("b_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(a = l)  /\\   ~(b = l)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    a INTER l = {A}  /\\   b INTER l = {B}",
+          "alA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("a_line"),
+              @readable.Label("l_line"),
+              @readable.Label("b_line"),
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = G) /\\  ~(A = B) /\\  ~(G = B)",
+          "AGB",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H2"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN Open (G, B)  /\\   B NOTIN Open (G, A)",
+          "notGAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("B3'", () => b3_p()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN l",
+          "Gl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("H2"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN a  /\\   G NOTIN b",
+          "notGa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("alA"),
+              @readable.Label("Gl"),
+              @readable.Label("AGB"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("EquivIntersectionHelp", () => equivintersectionhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN l DIFF {A} /\\  B IN l DIFF {A} /\\  G IN l DIFF {B} /\\  A IN l DIFF {B}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Gl"),
+              @readable.Label("l_line"),
+              @readable.Label("AGB"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G,B same_side a  /\\   G,A same_side b",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("l_line"),
+              @readable.Label("alA"),
+              @readable.Prev,
+              @readable.Label("notGAB"),
+              @readable.Label("b_line"),
+              @readable.Thm("EquivIntersection", () => equivintersection()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("a_line"),
+            @readable.Label("b_line"),
+            @readable.Label("notGa"),
+            @readable.Prev,
+            @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2059,25 +2513,56 @@ pub fn conversecrossbar() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_52`
-pub fn exec_phrase_52(x52 : Unit) -> Unit raise {
-  let _ = x52
-  {
-    @readable.thm_ref().val = in_interiorangle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_InteriorAngle): thm);;
-fn step_142() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_InteriorAngle): thm);;", exec_phrase_52)
-}
-
-///|
 /// InteriorUse
 fn step_143() -> Unit raise {
-  interioruse_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B P a b.\n    Line a ∧ O ∈ a ∧ A ∈ a ∧ Line b ∧ O ∈ b ∧ B ∈ b  ⇒\n    P  ∈ int_angle A O B  ⇒\n    P ∉ a ∧ P ∉ b ∧ P,B same_side a ∧ P,A same_side b\n\n  proof\n    intro_TAC ∀A O B P a b, aOAbOB, P_AOB;\n    consider α β such that ¬Collinear A O B ∧\n    Line α ∧ O ∈ α ∧ A ∈ α ∧\n    Line β ∧ O ∈ β ∧B ∈ β ∧\n    P ∉ α ∧ P ∉ β ∧\n    P,B same_side α ∧ P,A same_side β     [exists] by fol P_AOB IN_InteriorAngle;\n    ¬(A = O) ∧ ¬(A = B) ∧ ¬(O = B)     [] by fol - NonCollinearImpliesDistinct;\n    α = a ∧ β = b     [] by fol - aOAbOB exists I1;\n    fol - exists;\n  qed;\n")))
+  interioruse_c.set(@readable.prove(
+    "\n  forall A O B P a b.\n    Line a /\\  O IN a /\\  A IN a /\\  Line b /\\  O IN b /\\  B IN b  ==>\n    P  IN int_angle A O B  ==>\n    P NOTIN a /\\  P NOTIN b /\\  P,B same_side a /\\  P,A same_side b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B P a b, aOAbOB, P_AOB"),
+        @readable.consider(
+          "alpha beta",
+          "~Collinear A O B /\\ \n    Line alpha /\\  O IN alpha /\\  A IN alpha /\\ \n    Line beta /\\  O IN beta /\\ B IN beta /\\ \n    P NOTIN alpha /\\  P NOTIN beta /\\ \n    P,B same_side alpha /\\  P,A same_side beta    ",
+          "exists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("P_AOB"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(A = B) /\\  ~(O = B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha = a /\\  beta = b",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("aOAbOB"),
+              @readable.Label("exists"),
+              @readable.Thm("I1", () => i1()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("exists")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2092,7 +2577,62 @@ pub fn interioruse() -> @kernel.Thm {
 ///|
 /// InteriorEZHelp
 fn step_144() -> Unit raise {
-  interiorezhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B P. P ∈ int_angle A O B  ⇒\n  ¬(P = A) ∧ ¬(P = O) ∧ ¬(P = B) ∧ ¬Collinear A O P\n\n  proof\n    intro_TAC ∀A O B P, P_AOB;\n    consider a b such that\n    ¬Collinear A O B ∧\n    Line a ∧ O ∈ a ∧ A ∈ a ∧\n    Line b ∧ O ∈ b ∧B ∈ b ∧\n    P ∉ a ∧ P ∉ b     [def_int] by fol P_AOB IN_InteriorAngle;\n    ¬(P = A) ∧ ¬(P = O) ∧ ¬(P = B)     [PnotAOB] by fol - ∉;\n    ¬(A = O)     [] by fol def_int NonCollinearImpliesDistinct;\n    ¬Collinear A O P     [] by fol def_int - NonCollinearRaa CollinearSymmetry;\n    fol PnotAOB -;\n  qed;\n")))
+  interiorezhelp_c.set(@readable.prove(
+    "\n  forall A O B P. P IN int_angle A O B  ==>\n  ~(P = A) /\\  ~(P = O) /\\  ~(P = B) /\\  ~Collinear A O P",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B P, P_AOB"),
+        @readable.consider(
+          "a b",
+          "~Collinear A O B /\\ \n    Line a /\\  O IN a /\\  A IN a /\\ \n    Line b /\\  O IN b /\\ B IN b /\\ \n    P NOTIN a /\\  P NOTIN b    ",
+          "def_int",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("P_AOB"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(P = A) /\\  ~(P = O) /\\  ~(P = B)",
+          "PnotAOB",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("NOTIN", () => notin())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O P",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Prev,
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("PnotAOB"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2105,25 +2645,23 @@ pub fn interiorezhelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_53`
-pub fn exec_phrase_53(x53 : Unit) -> Unit raise {
-  let _ = x53
-  {
-    @readable.thm_ref().val = noncollinearraa()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NonCollinearRaa): thm);;
-fn step_145() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NonCollinearRaa): thm);;", exec_phrase_53)
-}
-
-///|
 /// InteriorAngleSymmetry
 fn step_146() -> Unit raise {
-  interioranglesymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B P: point. P ∈ int_angle A O B  ⇒  P ∈ int_angle B O A\n\n  proof     rewrite IN_InteriorAngle;     fol CollinearSymmetry;     qed;\n")))
+  interioranglesymmetry_c.set(@readable.prove(
+    "\n  forall A O B P: point. P IN int_angle A O B  ==>  P IN int_angle B O A",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("IN_InteriorAngle", () => in_interiorangle())],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("CollinearSymmetry", () => collinearsymmetry())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2138,7 +2676,115 @@ pub fn interioranglesymmetry() -> @kernel.Thm {
 ///|
 /// InteriorWellDefined
 fn step_147() -> Unit raise {
-  interiorwelldefined_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B X P. P ∈ int_angle A O B  ∧  X ∈ ray O B ━ {O}  ⇒  P ∈ int_angle A O X\n\n  proof\n    intro_TAC ∀A O B X P, H1 H2;\n    consider a b such that\n    ¬Collinear A O B ∧\n    Line a ∧ O ∈ a ∧ A ∈ a ∧ P ∉ a     ∧     Line b ∧ O ∈ b ∧ B ∈ b ∧ P ∉ b ∧\n    P,B same_side a ∧ P,A same_side b     [def_int] by fol H1 IN_InteriorAngle;\n    ¬(X = O) ∧ ¬(O = B) ∧ Collinear O B X     [H2'] by fol H2 IN_Ray IN_DIFF IN_SING;\n    B ∉ a     [notBa] by fol def_int Collinear_DEF ∉;\n    ¬Collinear A O X     [AOXnoncol] by fol def_int H2' NoncollinearityExtendsToLine;\n    X ∈ b     [Xb] by fol def_int H2' CollinearLinear;\n    X ∉ a  ∧  B,X same_side a     [] by fol def_int notBa H2 RaySameSide SameSideSymmetric;\n    P,X same_side a     [] by fol def_int - notBa SameSideTransitive;\n    fol AOXnoncol def_int Xb - IN_InteriorAngle;\n  qed;\n")))
+  interiorwelldefined_c.set(@readable.prove(
+    "\n  forall A O B X P. P IN int_angle A O B  /\\   X IN ray O B DIFF {O}  ==>  P IN int_angle A O X",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B X P, H1 H2"),
+        @readable.consider(
+          "a b",
+          "~Collinear A O B /\\ \n    Line a /\\  O IN a /\\  A IN a /\\  P NOTIN a     /\\      Line b /\\  O IN b /\\  B IN b /\\  P NOTIN b /\\ \n    P,B same_side a /\\  P,A same_side b    ",
+          "def_int",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(X = O) /\\  ~(O = B) /\\  Collinear O B X",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN a",
+          "notBa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O X",
+          "AOXnoncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Label("H2'"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X IN b",
+          "Xb",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Label("H2'"),
+              @readable.Thm("CollinearLinear", () => collinearlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X NOTIN a  /\\   B,X same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Label("notBa"),
+              @readable.Label("H2"),
+              @readable.Thm("RaySameSide", () => raysameside()),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P,X same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Prev,
+              @readable.Label("notBa"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("AOXnoncol"),
+            @readable.Label("def_int"),
+            @readable.Label("Xb"),
+            @readable.Prev,
+            @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2151,41 +2797,63 @@ pub fn interiorwelldefined() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_54`
-pub fn exec_phrase_54(x54 : Unit) -> Unit raise {
-  let _ = x54
-  {
-    @readable.thm_ref().val = samesidesymmetric()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SameSideSymmetric): thm);;
-fn step_148() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SameSideSymmetric): thm);;", exec_phrase_54)
-}
-
-///|
-/// `exec_phrase_55`
-pub fn exec_phrase_55(x55 : Unit) -> Unit raise {
-  let _ = x55
-  {
-    @readable.thm_ref().val = samesidetransitive()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SameSideTransitive): thm);;
-fn step_149() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SameSideTransitive): thm);;", exec_phrase_55)
-}
-
-///|
 /// WholeRayInterior
 fn step_150() -> Unit raise {
-  wholerayinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B X P. X ∈ int_angle A O B  ∧  P ∈ ray O X ━ {O}  ⇒  P ∈ int_angle A O B\n\n  proof\n    intro_TAC ∀A O B X P, XintAOB PrOX;\n    consider a b such that\n    ¬Collinear A O B ∧\n    Line a ∧ O ∈ a ∧ A ∈ a ∧ X ∉ a   ∧   Line b ∧ O ∈ b ∧ B ∈ b ∧ X ∉ b ∧\n    X,B same_side a ∧ X,A same_side b     [def_int] by fol XintAOB IN_InteriorAngle;\n    P ∉ a ∧ P,X same_side a ∧ P ∉ b ∧ P,X same_side b     [Psim_abX] by fol def_int PrOX RaySameSide;\n    P,B same_side a  ∧ P,A same_side b     [] by fol - def_int Collinear_DEF SameSideTransitive ∉;\n       fol def_int Psim_abX - IN_InteriorAngle;\n  qed;\n")))
+  wholerayinterior_c.set(@readable.prove(
+    "\n  forall A O B X P. X IN int_angle A O B  /\\   P IN ray O X DIFF {O}  ==>  P IN int_angle A O B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B X P, XintAOB PrOX"),
+        @readable.consider(
+          "a b",
+          "~Collinear A O B /\\ \n    Line a /\\  O IN a /\\  A IN a /\\  X NOTIN a   /\\    Line b /\\  O IN b /\\  B IN b /\\  X NOTIN b /\\ \n    X,B same_side a /\\  X,A same_side b    ",
+          "def_int",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XintAOB"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P NOTIN a /\\  P,X same_side a /\\  P NOTIN b /\\  P,X same_side b",
+          "Psim_abX",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_int"),
+              @readable.Label("PrOX"),
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P,B same_side a  /\\  P,A same_side b",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("def_int"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("def_int"),
+            @readable.Label("Psim_abX"),
+            @readable.Prev,
+            @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2200,7 +2868,191 @@ pub fn wholerayinterior() -> @kernel.Thm {
 ///|
 /// AngleOrdering
 fn step_151() -> Unit raise {
-  angleordering_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A P Q a. ¬(O = A)  ⇒  Line a ∧ O ∈ a ∧ A ∈ a  ⇒\n    P ∉ a ∧ Q ∉ a  ⇒  P,Q same_side a  ⇒  ¬Collinear P O Q  ⇒\n    P ∈ int_angle Q O A  ∨  Q ∈ int_angle P O A\n\n  proof\n    intro_TAC ∀O A P Q a, H1, H2, H3, H4, H5;\n    ¬(P = O) ∧ ¬(P = Q) ∧ ¬(O = Q)     [Distinct] by fol H5 NonCollinearImpliesDistinct;\n    consider q such that\n    Line q ∧ O ∈ q ∧ Q ∈ q     [q_line] by fol Distinct I1;\n    P ∉ q     [notPq] by fol - H5 Collinear_DEF ∉;\n    assume ¬(P ∈ int_angle Q O A)     [notPintQOA] by fol;\n    ¬Collinear Q O A  ∧  ¬Collinear P O A     [POAncol] by fol H1 H2 H3 I1 Collinear_DEF ∉;\n¬(P,A same_side q)     [] by fol - H2 q_line H3 notPq H4 notPintQOA IN_InteriorAngle;\n    consider G such that\n    G ∈ q ∧ G ∈ Open (P, A)     [existG] by fol q_line - SameSide_DEF;\n    G ∈ int_angle P O A     [G_POA] by fol POAncol existG ConverseCrossbar;\n    G ∉ a ∧ G,P same_side a ∧ ¬(G = O)     [Gsim_aP] by fol - H1 H2 IN_InteriorAngle I1 ∉;\n    G,Q same_side a     [] by fol H2 Gsim_aP H3 H4 SameSideTransitive;\n    O ∉ Open (Q, G)     [notQOG] by fol - H2 SameSide_DEF B1' ∉;\n    Collinear O G Q     [] by fol q_line existG Collinear_DEF;\n    Q ∈ ray O G ━ {O}     [] by fol Gsim_aP - notQOG Distinct IN_Ray IN_DIFF IN_SING;\n    fol G_POA - WholeRayInterior;\n  qed;\n")))
+  angleordering_c.set(@readable.prove(
+    "\n  forall O A P Q a. ~(O = A)  ==>  Line a /\\  O IN a /\\  A IN a  ==>\n    P NOTIN a /\\  Q NOTIN a  ==>  P,Q same_side a  ==>  ~Collinear P O Q  ==>\n    P IN int_angle Q O A  \\/  Q IN int_angle P O A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A P Q a, H1, H2, H3, H4, H5"),
+        @readable.have(
+          "\n    ~(P = O) /\\  ~(P = Q) /\\  ~(O = Q)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H5"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "q",
+          "Line q /\\  O IN q /\\  Q IN q    ",
+          "q_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    P NOTIN q",
+          "notPq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H5"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(P IN int_angle Q O A)",
+          "notPintQOA",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    ~Collinear Q O A  /\\   ~Collinear P O A",
+          "POAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Label("H3"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n~(P,A same_side q)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Label("q_line"),
+              @readable.Label("H3"),
+              @readable.Label("notPq"),
+              @readable.Label("H4"),
+              @readable.Label("notPintQOA"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN q /\\  G IN Open (P, A)    ",
+          "existG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("q_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN int_angle P O A",
+          "G_POA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("POAncol"),
+              @readable.Label("existG"),
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN a /\\  G,P same_side a /\\  ~(G = O)",
+          "Gsim_aP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G,Q same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("Gsim_aP"),
+              @readable.Label("H3"),
+              @readable.Label("H4"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (Q, G)",
+          "notQOG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear O G Q",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("q_line"),
+              @readable.Label("existG"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Q IN ray O G DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Gsim_aP"),
+              @readable.Prev,
+              @readable.Label("notQOG"),
+              @readable.Label("Distinct"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("G_POA"),
+            @readable.Prev,
+            @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2213,41 +3065,140 @@ pub fn angleordering() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_56`
-pub fn exec_phrase_56(x56 : Unit) -> Unit raise {
-  let _ = x56
-  {
-    @readable.thm_ref().val = conversecrossbar()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConverseCrossbar): thm);;
-fn step_152() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConverseCrossbar): thm);;", exec_phrase_56)
-}
-
-///|
-/// `exec_phrase_57`
-pub fn exec_phrase_57(x57 : Unit) -> Unit raise {
-  let _ = x57
-  {
-    @readable.thm_ref().val = wholerayinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((WholeRayInterior): thm);;
-fn step_153() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((WholeRayInterior): thm);;", exec_phrase_57)
-}
-
-///|
 /// InteriorsDisjointSupplement
 fn step_154() -> Unit raise {
-  interiorsdisjointsupplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A'. ¬Collinear A O B  ∧  O ∈ Open (A, A')  ⇒\n    int_angle B O A'  ∩  int_angle A O B = ∅\n\n  proof\n    intro_TAC ∀A O B A', H1 H2;\n    ∀D. D ∈ int_angle A O B  ⇒  D ∉ int_angle B O A'     []\n    proof\n      intro_TAC ∀D, H3;\n      ¬(A = O) ∧ ¬(O = B)     [] by fol H1 NonCollinearImpliesDistinct;\n      consider a b such that\n      Line a ∧ O ∈ a ∧ A ∈ a ∧ Line b ∧ O ∈ b ∧ B ∈ b ∧ A' ∈ a     [ab_line] by fol - H2 I1 BetweenLinear;\n      ¬Collinear B O A'     [] by fol H1 H2 CollinearSymmetry B1' NoncollinearityExtendsToLine;\n      A ∉ b  ∧  A' ∉ b     [notAb] by fol ab_line H1 - Collinear_DEF ∉;\n      ¬(A',A same_side b)     [A'nsim_bA] by fol ab_line H2 B1' SameSide_DEF;\n      D ∉ b  ∧  D,A same_side b     [DintAOB] by fol ab_line H3 InteriorUse;\n      ¬(D,A' same_side b)     [] by fol ab_line notAb DintAOB A'nsim_bA SameSideSymmetric SameSideTransitive;\n      fol ab_line - InteriorUse ∉;\n    qed;\n    fol - DisjointOneNotOther;\n  qed;\n")))
+  interiorsdisjointsupplement_c.set(@readable.prove(
+    "\n  forall A O B A'. ~Collinear A O B  /\\   O IN Open (A, A')  ==>\n    int_angle B O A'  INTER  int_angle A O B = {}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B A', H1 H2"),
+        @readable.have(
+          "\n    forall D. D IN int_angle A O B  ==>  D NOTIN int_angle B O A'",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall D, H3"),
+              @readable.have(
+                "\n      ~(A = O) /\\  ~(O = B)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Thm(
+                      "NonCollinearImpliesDistinct",
+                      () => noncollinearimpliesdistinct(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.consider(
+                "a b",
+                "Line a /\\  O IN a /\\  A IN a /\\  Line b /\\  O IN b /\\  B IN b /\\  A' IN a    ",
+                "ab_line",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H2"),
+                    @readable.Thm("I1", () => i1()),
+                    @readable.Thm("BetweenLinear", () => betweenlinear()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~Collinear B O A'",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("H2"),
+                    @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm(
+                      "NoncollinearityExtendsToLine",
+                      () => noncollinearityextendstoline(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      A NOTIN b  /\\   A' NOTIN b",
+                "notAb",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ab_line"),
+                    @readable.Label("H1"),
+                    @readable.Prev,
+                    @readable.Thm("Collinear_DEF", () => collinear_def()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(A',A same_side b)",
+                "A'nsim_bA",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ab_line"),
+                    @readable.Label("H2"),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm("SameSide_DEF", () => sameside_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      D NOTIN b  /\\   D,A same_side b",
+                "DintAOB",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ab_line"),
+                    @readable.Label("H3"),
+                    @readable.Thm("InteriorUse", () => interioruse()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(D,A' same_side b)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ab_line"),
+                    @readable.Label("notAb"),
+                    @readable.Label("DintAOB"),
+                    @readable.Label("A'nsim_bA"),
+                    @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("ab_line"),
+                  @readable.Prev,
+                  @readable.Thm("InteriorUse", () => interioruse()),
+                  @readable.Thm("NOTIN", () => notin()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("DisjointOneNotOther", () => disjointonenotother()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2260,41 +3211,100 @@ pub fn interiorsdisjointsupplement() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_58`
-pub fn exec_phrase_58(x58 : Unit) -> Unit raise {
-  let _ = x58
-  {
-    @readable.thm_ref().val = interioruse()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorUse): thm);;
-fn step_155() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorUse): thm);;", exec_phrase_58)
-}
-
-///|
-/// `exec_phrase_59`
-pub fn exec_phrase_59(x59 : Unit) -> Unit raise {
-  let _ = x59
-  {
-    @readable.thm_ref().val = disjointonenotother()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DisjointOneNotOther): thm);;
-fn step_156() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DisjointOneNotOther): thm);;", exec_phrase_59)
-}
-
-///|
 /// InteriorReflectionInterior
 fn step_157() -> Unit raise {
-  interiorreflectioninterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B D A'. O ∈ Open (A, A')  ∧  D ∈ int_angle A O B  ⇒\n    B  ∈ int_angle D O A'\n\n  proof\n    intro_TAC ∀A O B D A', H1 H2;\n    consider a b such that\n    ¬Collinear A O B ∧ Line a ∧ O ∈ a ∧ A ∈ a ∧ D ∉ a ∧\n    Line b ∧ O ∈ b ∧ B ∈ b ∧ D ∉ b ∧ D,B same_side a     [DintAOB] by fol H2 IN_InteriorAngle;\n    ¬(O = B) ∧ ¬(O = A') ∧ B ∉ a     [Distinct] by fol - H1 NonCollinearImpliesDistinct B1' Collinear_DEF ∉;\n    ¬Collinear D O B     [DOB_ncol] by fol DintAOB - NonCollinearRaa CollinearSymmetry;\n    A' ∈ a     [A'a] by fol H1 DintAOB BetweenLinear;\n    D ∉ int_angle B O A'     [] by fol DintAOB H1 H2 InteriorsDisjointSupplement DisjointOneNotOther;\n    fol Distinct DintAOB A'a DOB_ncol - AngleOrdering ∉;\n  qed;\n")))
+  interiorreflectioninterior_c.set(@readable.prove(
+    "\n  forall A O B D A'. O IN Open (A, A')  /\\   D IN int_angle A O B  ==>\n    B  IN int_angle D O A'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B D A', H1 H2"),
+        @readable.consider(
+          "a b",
+          "~Collinear A O B /\\  Line a /\\  O IN a /\\  A IN a /\\  D NOTIN a /\\ \n    Line b /\\  O IN b /\\  B IN b /\\  D NOTIN b /\\  D,B same_side a    ",
+          "DintAOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(O = B) /\\  ~(O = A') /\\  B NOTIN a",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D O B",
+          "DOB_ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Prev,
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A' IN a",
+          "A'a",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("DintAOB"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D NOTIN int_angle B O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm(
+                "InteriorsDisjointSupplement",
+                () => interiorsdisjointsupplement(),
+              ),
+              @readable.Thm("DisjointOneNotOther", () => disjointonenotother()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Distinct"),
+            @readable.Label("DintAOB"),
+            @readable.Label("A'a"),
+            @readable.Label("DOB_ncol"),
+            @readable.Prev,
+            @readable.Thm("AngleOrdering", () => angleordering()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2307,41 +3317,286 @@ pub fn interiorreflectioninterior() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_60`
-pub fn exec_phrase_60(x60 : Unit) -> Unit raise {
-  let _ = x60
-  {
-    @readable.thm_ref().val = interiorsdisjointsupplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorsDisjointSupplement): thm);;
-fn step_158() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorsDisjointSupplement): thm);;", exec_phrase_60)
-}
-
-///|
-/// `exec_phrase_61`
-pub fn exec_phrase_61(x61 : Unit) -> Unit raise {
-  let _ = x61
-  {
-    @readable.thm_ref().val = angleordering()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleOrdering): thm);;
-fn step_159() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleOrdering): thm);;", exec_phrase_61)
-}
-
-///|
 /// Crossbar_THM
 fn step_160() -> Unit raise {
-  crossbar_thm_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A B D. D ∈ int_angle A O B  ⇒  ∃G. G ∈ Open (A, B)  ∧  G ∈ ray O D ━ {O}\n\n  proof\n    intro_TAC ∀O A B D, H1;\n    consider a b such that\n    ¬Collinear A O B ∧\n    Line a ∧ O ∈ a ∧ A ∈ a ∧\n    Line b ∧ O ∈ b ∧ B ∈ b ∧\n    D ∉ a ∧ D ∉ b ∧ D,B same_side a ∧ D,A same_side b     [DintAOB] by fol H1 IN_InteriorAngle;\n    B ∉ a     [notBa] by fol DintAOB Collinear_DEF ∉;\n    ¬(A = O) ∧ ¬(A = B) ∧ ¬(O = B) ∧ ¬(D = O)     [Distinct] by fol DintAOB NonCollinearImpliesDistinct ∉;\n    consider l such that\n    Line l ∧ O ∈ l ∧ D ∈ l     [l_line] by fol - I1;\n    consider A' such that\n    O ∈ Open (A, A')     [AOA'] by fol Distinct B2';\n    A' ∈ a ∧ Collinear A O A' ∧ ¬(A' = O)      [A'a] by fol DintAOB - BetweenLinear B1';\n    ¬(A,A' same_side l)     [Ansim_lA'] by fol l_line AOA' SameSide_DEF;\n    B ∈ int_angle D O A'     [] by fol H1 AOA' InteriorReflectionInterior;\n    B,A' same_side l     [Bsim_lA'] by fol l_line DintAOB A'a - InteriorUse;\n    ¬Collinear A O D  ∧  ¬Collinear B O D      [AODncol] by fol H1 InteriorEZHelp InteriorAngleSymmetry;\n    ¬Collinear D O A'      [] by fol - A'a CollinearSymmetry NoncollinearityExtendsToLine;\n    A ∉ l ∧ B ∉ l ∧ A' ∉ l     [] by fol l_line AODncol - Collinear_DEF ∉;\n    ¬(A,B same_side l)     [] by fol l_line - Bsim_lA' Ansim_lA' SameSideTransitive;\n    consider G such that\n    G ∈ Open (A, B) ∧ G ∈ l     [AGB] by fol l_line - SameSide_DEF;\n    Collinear O D G     [ODGcol] by fol - l_line Collinear_DEF;\n    G ∈ int_angle A O B     [] by fol DintAOB AGB ConverseCrossbar;\n    G ∉ a  ∧  G,B same_side a  ∧  ¬(G = O)     [Gsim_aB] by fol DintAOB - InteriorUse ∉;\n    B,D same_side a     [] by fol DintAOB notBa SameSideSymmetric;\n    G,D same_side a     [Gsim_aD] by fol DintAOB Gsim_aB notBa - SameSideTransitive;\n    O ∉ Open (G, D)     [] by fol DintAOB - SameSide_DEF ∉;\n    G ∈ ray O D ━ {O}     [] by fol Distinct ODGcol - Gsim_aB IN_Ray IN_DIFF IN_SING;\n    fol AGB -;\n  qed;\n")))
+  crossbar_thm_c.set(@readable.prove(
+    "\n  forall O A B D. D IN int_angle A O B  ==>  ?G. G IN Open (A, B)  /\\   G IN ray O D DIFF {O}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A B D, H1"),
+        @readable.consider(
+          "a b",
+          "~Collinear A O B /\\ \n    Line a /\\  O IN a /\\  A IN a /\\ \n    Line b /\\  O IN b /\\  B IN b /\\ \n    D NOTIN a /\\  D NOTIN b /\\  D,B same_side a /\\  D,A same_side b    ",
+          "DintAOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN a",
+          "notBa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(A = B) /\\  ~(O = B) /\\  ~(D = O)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  O IN l /\\  D IN l    ",
+          "l_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.consider(
+          "A'",
+          "O IN Open (A, A')    ",
+          "AOA'",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    A' IN a /\\  Collinear A O A' /\\  ~(A' = O)",
+          "A'a",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Prev,
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A,A' same_side l)",
+          "Ansim_lA'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("AOA'"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN int_angle D O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("AOA'"),
+              @readable.Thm(
+                "InteriorReflectionInterior",
+                () => interiorreflectioninterior(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B,A' same_side l",
+          "Bsim_lA'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("DintAOB"),
+              @readable.Label("A'a"),
+              @readable.Prev,
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O D  /\\   ~Collinear B O D",
+          "AODncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("A'a"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN l /\\  B NOTIN l /\\  A' NOTIN l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("AODncol"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A,B same_side l)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Prev,
+              @readable.Label("Bsim_lA'"),
+              @readable.Label("Ansim_lA'"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN Open (A, B) /\\  G IN l    ",
+          "AGB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear O D G",
+          "ODGcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN int_angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Label("AGB"),
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN a  /\\   G,B same_side a  /\\   ~(G = O)",
+          "Gsim_aB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Prev,
+              @readable.Thm("InteriorUse", () => interioruse()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B,D same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Label("notBa"),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G,D same_side a",
+          "Gsim_aD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Label("Gsim_aB"),
+              @readable.Label("notBa"),
+              @readable.Prev,
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (G, D)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintAOB"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN ray O D DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("ODGcol"),
+              @readable.Prev,
+              @readable.Label("Gsim_aB"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("AGB"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2354,57 +3609,56 @@ pub fn crossbar_thm() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_62`
-pub fn exec_phrase_62(x62 : Unit) -> Unit raise {
-  let _ = x62
-  {
-    @readable.thm_ref().val = interiorreflectioninterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorReflectionInterior): thm);;
-fn step_161() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorReflectionInterior): thm);;", exec_phrase_62)
-}
-
-///|
-/// `exec_phrase_63`
-pub fn exec_phrase_63(x63 : Unit) -> Unit raise {
-  let _ = x63
-  {
-    @readable.thm_ref().val = interiorezhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorEZHelp): thm);;
-fn step_162() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorEZHelp): thm);;", exec_phrase_63)
-}
-
-///|
-/// `exec_phrase_64`
-pub fn exec_phrase_64(x64 : Unit) -> Unit raise {
-  let _ = x64
-  {
-    @readable.thm_ref().val = interioranglesymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorAngleSymmetry): thm);;
-fn step_163() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorAngleSymmetry): thm);;", exec_phrase_64)
-}
-
-///|
 /// AlternateConverseCrossbar
 fn step_164() -> Unit raise {
-  alternateconversecrossbar_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A B G. Collinear A G B  ∧  G ∈ int_angle A O B  ⇒  G ∈ Open (A, B)\n\n  proof\n    intro_TAC ∀O A B G, H1;\n    consider a b such that\n    ¬Collinear A O B  ∧  Line a ∧ O ∈ a ∧ A ∈ a  ∧  Line b ∧ O ∈ b ∧ B ∈ b  ∧\n    G,B same_side a  ∧  G,A same_side b     [GintAOB] by fol H1 IN_InteriorAngle;\n    ¬(A = B) ∧ ¬(G = A) ∧ ¬(G = B)  ∧  A ∉ Open (G, B)  ∧  B ∉ Open (G, A)     [] by fol - H1 NonCollinearImpliesDistinct InteriorEZHelp SameSide_DEF ∉;\n    fol - H1 B1' B3' ∉;\n  qed;\n")))
+  alternateconversecrossbar_c.set(@readable.prove(
+    "\n  forall O A B G. Collinear A G B  /\\   G IN int_angle A O B  ==>  G IN Open (A, B)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A B G, H1"),
+        @readable.consider(
+          "a b",
+          "~Collinear A O B  /\\   Line a /\\  O IN a /\\  A IN a  /\\   Line b /\\  O IN b /\\  B IN b  /\\ \n    G,B same_side a  /\\   G,A same_side b    ",
+          "GintAOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(G = A) /\\  ~(G = B)  /\\   A NOTIN Open (G, B)  /\\   B NOTIN Open (G, A)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H1"),
+            @readable.Thm("B1'", () => b1_p()),
+            @readable.Thm("B3'", () => b3_p()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2419,7 +3673,39 @@ pub fn alternateconversecrossbar() -> @kernel.Thm {
 ///|
 /// InteriorOpposite
 fn step_165() -> Unit raise {
-  interioropposite_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B P p. P ∈ int_angle A O B  ⇒  Line p ∧ O ∈ p ∧ P ∈ p\n    ⇒  ¬(A,B same_side p)\n\n  proof\n    intro_TAC ∀A O B P p, PintAOB, p_line;\n    consider G such that\n    G ∈ Open (A, B) ∧ G ∈ ray O P     [Gexists] by fol PintAOB Crossbar_THM IN_DIFF;\n    fol p_line p_line - RayLine SUBSET Gexists SameSide_DEF;\n  qed;\n")))
+  interioropposite_c.set(@readable.prove(
+    "\n  forall A O B P p. P IN int_angle A O B  ==>  Line p /\\  O IN p /\\  P IN p\n    ==>  ~(A,B same_side p)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B P p, PintAOB, p_line"),
+        @readable.consider(
+          "G",
+          "G IN Open (A, B) /\\  G IN ray O P    ",
+          "Gexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("PintAOB"),
+              @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("p_line"),
+            @readable.Label("p_line"),
+            @readable.Prev,
+            @readable.Thm("RayLine", () => rayline()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Label("Gexists"),
+            @readable.Thm("SameSide_DEF", () => sameside_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2432,25 +3718,110 @@ pub fn interioropposite() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_65`
-pub fn exec_phrase_65(x65 : Unit) -> Unit raise {
-  let _ = x65
-  {
-    @readable.thm_ref().val = crossbar_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Crossbar_THM): thm);;
-fn step_166() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Crossbar_THM): thm);;", exec_phrase_65)
-}
-
-///|
 /// IntervalTransitivity
 fn step_167() -> Unit raise {
-  intervaltransitivity_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O P Q R m. Line m  ∧ O ∈ m  ⇒  P ∈ m ━ {O} ∧ Q ∈ m ━ {O} ∧ R ∈ m ━ {O}  ⇒\n    O ∉ Open (P, Q) ∧ O ∉ Open (Q, R)  ⇒  O ∉ Open (P, R)\n\n  proof\n    intro_TAC ∀O P Q R m, H0, H2, H3;\n    consider E such that\n    E ∉ m ∧  ¬(O = E)     [notEm] by fol H0 ExistsPointOffLine ∉;\n    consider l such that\n    Line l ∧ O ∈ l ∧ E ∈ l     [l_line] by fol - I1;\n    ¬(m = l)     [] by fol notEm - ∉;\n    l ∩ m = {O}     [lmO] by fol l_line H0 - l_line I1Uniqueness;\n    P ∉ l ∧  Q ∉ l ∧ R ∉ l     [notPQRl] by fol - H2 EquivIntersectionHelp;\n    P,Q same_side l  ∧  Q,R same_side l     [] by fol l_line H0 lmO H2 H3 EquivIntersection;\n    P,R same_side l     [Psim_lR] by fol l_line notPQRl - SameSideTransitive;\n    fol l_line - SameSide_DEF ∉;\n  qed;\n")))
+  intervaltransitivity_c.set(@readable.prove(
+    "\n  forall O P Q R m. Line m  /\\  O IN m  ==>  P IN m DIFF {O} /\\  Q IN m DIFF {O} /\\  R IN m DIFF {O}  ==>\n    O NOTIN Open (P, Q) /\\  O NOTIN Open (Q, R)  ==>  O NOTIN Open (P, R)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O P Q R m, H0, H2, H3"),
+        @readable.consider(
+          "E",
+          "E NOTIN m /\\   ~(O = E)    ",
+          "notEm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H0"),
+              @readable.Thm("ExistsPointOffLine", () => existspointoffline()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  O IN l /\\  E IN l    ",
+          "l_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.have(
+          "\n    ~(m = l)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notEm"),
+              @readable.Prev,
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l INTER m = {O}",
+          "lmO",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("H0"),
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P NOTIN l /\\   Q NOTIN l /\\  R NOTIN l",
+          "notPQRl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("EquivIntersectionHelp", () => equivintersectionhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P,Q same_side l  /\\   Q,R same_side l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("H0"),
+              @readable.Label("lmO"),
+              @readable.Label("H2"),
+              @readable.Label("H3"),
+              @readable.Thm("EquivIntersection", () => equivintersection()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P,R same_side l",
+          "Psim_lR",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("notPQRl"),
+              @readable.Prev,
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("l_line"),
+            @readable.Prev,
+            @readable.Thm("SameSide_DEF", () => sameside_def()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2463,25 +3834,139 @@ pub fn intervaltransitivity() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_66`
-pub fn exec_phrase_66(x66 : Unit) -> Unit raise {
-  let _ = x66
-  {
-    @readable.thm_ref().val = existspointoffline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ExistsPointOffLine): thm);;
-fn step_168() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ExistsPointOffLine): thm);;", exec_phrase_66)
-}
-
-///|
 /// RayWellDefinedHalfway
 fn step_169() -> Unit raise {
-  raywelldefinedhalfway_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O P Q. ¬(Q = O)  ∧  P ∈ ray O Q ━ {O}  ⇒  ray O P ⊂ ray O Q\n\n  proof\n    intro_TAC ∀O P Q, H1 H2;\n    consider m such that\n    Line m ∧ O ∈ m ∧ Q ∈ m     [OQm] by fol H1 I1;\n    P ∈ ray O Q  ∧  ¬(P = O)  ∧  O ∉ Open (P, Q)     [H2'] by fol H2 IN_Ray IN_DIFF IN_SING;\n    P ∈ m  ∧  P ∈ m ━ {O}  ∧  Q ∈ m ━ {O}     [PQm_O] by fol OQm H2' RayLine SUBSET H2' OQm H1 IN_DIFF IN_SING;\n    O ∉ Open (P, Q)     [notPOQ] by fol H2' IN_Ray;\n    rewrite SUBSET;\n    intro_TAC ∀[X], XrayOP;\n    X ∈ m  ∧  O ∉ Open (X, P)     [XrOP] by fol - SUBSET OQm PQm_O H2' RayLine IN_Ray;\n    Collinear O Q X     [OQXcol] by fol OQm -  Collinear_DEF;\n    assume ¬(X = O)     [notXO] by fol H1 OriginInRay;\n    X ∈ m ━ {O}     [] by fol XrOP - IN_DIFF IN_SING;\n    O ∉ Open (X, Q)     [] by fol OQm - PQm_O XrOP H2' IntervalTransitivity;\n    fol H1 OQXcol - IN_Ray;\n  qed;\n")))
+  raywelldefinedhalfway_c.set(@readable.prove(
+    "\n  forall O P Q. ~(Q = O)  /\\   P IN ray O Q DIFF {O}  ==>  ray O P SUBSET ray O Q",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O P Q, H1 H2"),
+        @readable.consider(
+          "m",
+          "Line m /\\  O IN m /\\  Q IN m    ",
+          "OQm",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN ray O Q  /\\   ~(P = O)  /\\   O NOTIN Open (P, Q)",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN m  /\\   P IN m DIFF {O}  /\\   Q IN m DIFF {O}",
+          "PQm_O",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OQm"),
+              @readable.Label("H2'"),
+              @readable.Thm("RayLine", () => rayline()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Label("H2'"),
+              @readable.Label("OQm"),
+              @readable.Label("H1"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (P, Q)",
+          "notPOQ",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H2'"), @readable.Thm("IN_Ray", () => in_ray())],
+          ),
+        ),
+        @readable.by(@readable.rewrite, [@readable.Thm("SUBSET", () => @sets.subset())]),
+        @readable.intro_tac("forall [X], XrayOP"),
+        @readable.have(
+          "\n    X IN m  /\\   O NOTIN Open (X, P)",
+          "XrOP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Label("OQm"),
+              @readable.Label("PQm_O"),
+              @readable.Label("H2'"),
+              @readable.Thm("RayLine", () => rayline()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear O Q X",
+          "OQXcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OQm"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(X = O)",
+          "notXO",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("OriginInRay", () => origininray())],
+          ),
+        ),
+        @readable.have(
+          "\n    X IN m DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XrOP"),
+              @readable.Prev,
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (X, Q)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OQm"),
+              @readable.Prev,
+              @readable.Label("PQm_O"),
+              @readable.Label("XrOP"),
+              @readable.Label("H2'"),
+              @readable.Thm("IntervalTransitivity", () => intervaltransitivity()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("OQXcol"),
+            @readable.Prev,
+            @readable.Thm("IN_Ray", () => in_ray()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2494,41 +3979,78 @@ pub fn raywelldefinedhalfway() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_67`
-pub fn exec_phrase_67(x67 : Unit) -> Unit raise {
-  let _ = x67
-  {
-    @readable.thm_ref().val = origininray()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OriginInRay): thm);;
-fn step_170() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OriginInRay): thm);;", exec_phrase_67)
-}
-
-///|
-/// `exec_phrase_68`
-pub fn exec_phrase_68(x68 : Unit) -> Unit raise {
-  let _ = x68
-  {
-    @readable.thm_ref().val = intervaltransitivity()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IntervalTransitivity): thm);;
-fn step_171() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IntervalTransitivity): thm);;", exec_phrase_68)
-}
-
-///|
 /// RayWellDefined
 fn step_172() -> Unit raise {
-  raywelldefined_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O P Q. ¬(Q = O)  ∧  P ∈ ray O Q ━ {O}  ⇒  ray O P = ray O Q\n\n  proof\n    intro_TAC ∀O P Q, H1  H2;\n    ray O P ⊂ ray O Q     [PsubsetQ] by fol H1 H2 RayWellDefinedHalfway;\n    ¬(P = O)  ∧  Collinear O Q P  ∧  O ∉ Open (P, Q)     [H2'] by fol H2 IN_Ray IN_DIFF IN_SING;\n    Q ∈ ray O P ━ {O}     [] by fol H2' B1' ∉ CollinearSymmetry IN_Ray H1 IN_DIFF IN_SING;\n    ray O Q ⊂ ray O P     [QsubsetP] by fol H2' - RayWellDefinedHalfway;\n    fol PsubsetQ QsubsetP SUBSET_ANTISYM;\n  qed;\n")))
+  raywelldefined_c.set(@readable.prove(
+    "\n  forall O P Q. ~(Q = O)  /\\   P IN ray O Q DIFF {O}  ==>  ray O P = ray O Q",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O P Q, H1  H2"),
+        @readable.have(
+          "\n    ray O P SUBSET ray O Q",
+          "PsubsetQ",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("RayWellDefinedHalfway", () => raywelldefinedhalfway()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(P = O)  /\\   Collinear O Q P  /\\   O NOTIN Open (P, Q)",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Q IN ray O P DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2'"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("H1"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O Q SUBSET ray O P",
+          "QsubsetP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2'"),
+              @readable.Prev,
+              @readable.Thm("RayWellDefinedHalfway", () => raywelldefinedhalfway()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("PsubsetQ"),
+            @readable.Label("QsubsetP"),
+            @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2541,41 +4063,88 @@ pub fn raywelldefined() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_69`
-pub fn exec_phrase_69(x69 : Unit) -> Unit raise {
-  let _ = x69
-  {
-    @readable.thm_ref().val = raywelldefinedhalfway()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RayWellDefinedHalfway): thm);;
-fn step_173() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RayWellDefinedHalfway): thm);;", exec_phrase_69)
-}
-
-///|
-/// `exec_phrase_70`
-pub fn exec_phrase_70(x70 : Unit) -> Unit raise {
-  let _ = x70
-  {
-    @readable.thm_ref().val = @sets.subset_antisym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_ANTISYM): thm);;
-fn step_174() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_ANTISYM): thm);;", exec_phrase_70)
-}
-
-///|
 /// OppositeRaysIntersect1pointHelp
 fn step_175() -> Unit raise {
-  oppositeraysintersect1pointhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B X. O ∈ Open (A, B)  ∧  X ∈ ray O B ━ {O}\n    ⇒  X ∉ ray O A  ∧  O ∈ Open (X, A)\n\n  proof\n    intro_TAC ∀A O B X, H1 H2;\n    ¬(A = O) ∧ ¬(A = B) ∧ ¬(O = B) ∧ Collinear A O B     [AOB] by fol H1 B1';\n    ¬(X = O) ∧ Collinear O B X ∧ O ∉ Open (X, B)     [H2'] by fol H2 IN_Ray IN_DIFF IN_SING;\n    consider m such that\n    Line m ∧ A ∈ m ∧ B ∈ m     [m_line] by fol AOB I1;\n    O ∈ m  ∧ X ∈ m     [Om] by fol m_line H2' AOB CollinearLinear;\n    A ∈ m ━ {O}  ∧  X ∈ m ━ {O}  ∧  B ∈ m ━ {O}     [] by fol m_line - H2' AOB IN_DIFF IN_SING;\n    fol H1 m_line Om - H2' IntervalTransitivity ∉ B1' IN_Ray;\n  qed;\n")))
+  oppositeraysintersect1pointhelp_c.set(@readable.prove(
+    "\n  forall A O B X. O IN Open (A, B)  /\\   X IN ray O B DIFF {O}\n    ==>  X NOTIN ray O A  /\\   O IN Open (X, A)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B X, H1 H2"),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(A = B) /\\  ~(O = B) /\\  Collinear A O B",
+          "AOB",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(X = O) /\\  Collinear O B X /\\  O NOTIN Open (X, B)",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  A IN m /\\  B IN m    ",
+          "m_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("AOB"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    O IN m  /\\  X IN m",
+          "Om",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("H2'"),
+              @readable.Label("AOB"),
+              @readable.Thm("CollinearLinear", () => collinearlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN m DIFF {O}  /\\   X IN m DIFF {O}  /\\   B IN m DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Label("H2'"),
+              @readable.Label("AOB"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("m_line"),
+            @readable.Label("Om"),
+            @readable.Prev,
+            @readable.Label("H2'"),
+            @readable.Thm("IntervalTransitivity", () => intervaltransitivity()),
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("B1'", () => b1_p()),
+            @readable.Thm("IN_Ray", () => in_ray()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2590,7 +4159,57 @@ pub fn oppositeraysintersect1pointhelp() -> @kernel.Thm {
 ///|
 /// OppositeRaysIntersect1point
 fn step_176() -> Unit raise {
-  oppositeraysintersect1point_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B. O ∈ Open (A, B)  ⇒  ray O A ∩ ray O B  =  {O}\n\n  proof\n    intro_TAC ∀A O B, H1;\n    ¬(A = O) ∧ ¬(O = B)     [] by fol H1 B1';\n    rewrite GSYM SUBSET_ANTISYM_EQ SUBSET IN_INTER;\n    conj_tac     [Right] by fol - OriginInRay IN_SING;\n    fol H1 OppositeRaysIntersect1pointHelp IN_DIFF IN_SING ∉;\n  qed;\n")))
+  oppositeraysintersect1point_c.set(@readable.prove(
+    "\n  forall A O B. O IN Open (A, B)  ==>  ray O A INTER ray O B  =  {O}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B, H1"),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("SUBSET_ANTISYM_EQ", () => @sets.subset_antisym_eq()),
+            ),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+          ],
+        ),
+        @readable.conj_tac(
+          "Right",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("OriginInRay", () => origininray()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Thm(
+              "OppositeRaysIntersect1pointHelp",
+              () => oppositeraysintersect1pointhelp(),
+            ),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+            @readable.Thm("IN_SING", () => @sets.in_sing()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2603,57 +4222,19 @@ pub fn oppositeraysintersect1point() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_71`
-pub fn exec_phrase_71(x71 : Unit) -> Unit raise {
-  let _ = x71
-  {
-    @readable.thm_ref().val = @sets.subset_antisym_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_ANTISYM_EQ): thm);;
-fn step_177() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_ANTISYM_EQ): thm);;", exec_phrase_71)
-}
-
-///|
-/// `exec_phrase_72`
-pub fn exec_phrase_72(x72 : Unit) -> Unit raise {
-  let _ = x72
-  {
-    @readable.thm_thm_ref().val = @equal.gsym
-    ()
-  }
-}
-
-///|
-/// the phrase thm_thm_ref := ((GSYM): (thm -> thm));;
-fn step_178() -> Unit raise {
-  @lib.register_phrase("thm_thm_ref := ((GSYM): (thm -> thm));;", exec_phrase_72)
-}
-
-///|
-/// `exec_phrase_73`
-pub fn exec_phrase_73(x73 : Unit) -> Unit raise {
-  let _ = x73
-  {
-    @readable.thm_ref().val = oppositeraysintersect1pointhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OppositeRaysIntersect1pointHelp): thm);;
-fn step_179() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OppositeRaysIntersect1pointHelp): thm);;", exec_phrase_73)
-}
-
-///|
 /// IntervalRay
 fn step_180() -> Unit raise {
-  intervalray_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. B ∈ Open (A, C)  ⇒  ray A B = ray A C\n  by fol B1' IntervalRayEZ RayWellDefined")))
+  intervalray_c.set(@readable.prove(
+    "\n  forall A B C. B IN Open (A, C)  ==>  ray A B = ray A C",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("B1'", () => b1_p()),
+        @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+        @readable.Thm("RayWellDefined", () => raywelldefined()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2666,25 +4247,20 @@ pub fn intervalray() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_74`
-pub fn exec_phrase_74(x74 : Unit) -> Unit raise {
-  let _ = x74
-  {
-    @readable.thm_ref().val = raywelldefined()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RayWellDefined): thm);;
-fn step_181() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RayWellDefined): thm);;", exec_phrase_74)
-}
-
-///|
 /// Reverse4Order
 fn step_182() -> Unit raise {
-  reverse4order_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. ordered A B C D  ⇒  ordered D C B A\n  proof\n    rewrite Ordered_DEF;\n    fol B1';\n  qed;\n")))
+  reverse4order_c.set(@readable.prove(
+    "\n  forall A B C D. ordered A B C D  ==>  ordered D C B A",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("Ordered_DEF", () => ordered_def())],
+        ),
+        @readable.by(@readable.fol, [@readable.Thm("B1'", () => b1_p())]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2697,25 +4273,39 @@ pub fn reverse4order() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_75`
-pub fn exec_phrase_75(x75 : Unit) -> Unit raise {
-  let _ = x75
-  {
-    @readable.thm_ref().val = ordered_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Ordered_DEF): thm);;
-fn step_183() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Ordered_DEF): thm);;", exec_phrase_75)
-}
-
-///|
 /// TransitivityBetweennessHelp
 fn step_184() -> Unit raise {
-  transitivitybetweennesshelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. B ∈ Open (A, C)  ∧  C ∈ Open (B, D)\n   ⇒  B ∈ Open (A, D)\n\n  proof\n    intro_TAC ∀A B C D, H1;\n    D ∈ ray B C ━ {B}     [] by fol H1 IntervalRayEZ;\n    fol H1 - OppositeRaysIntersect1pointHelp B1';\n  qed;\n")))
+  transitivitybetweennesshelp_c.set(@readable.prove(
+    "\n  forall A B C D. B IN Open (A, C)  /\\   C IN Open (B, D)\n   ==>  B IN Open (A, D)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1"),
+        @readable.have(
+          "\n    D IN ray B C DIFF {B}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Thm(
+              "OppositeRaysIntersect1pointHelp",
+              () => oppositeraysintersect1pointhelp(),
+            ),
+            @readable.Thm("B1'", () => b1_p()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2730,7 +4320,60 @@ pub fn transitivitybetweennesshelp() -> @kernel.Thm {
 ///|
 /// TransitivityBetweenness
 fn step_185() -> Unit raise {
-  transitivitybetweenness_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. B ∈ Open (A, C)  ∧  C ∈ Open (B, D)  ⇒  ordered A B C D\n\n  proof\n    intro_TAC ∀A B C D, H1;\n    B ∈ Open (A, D)     [ABD] by fol H1 TransitivityBetweennessHelp;\n    C ∈ Open (D, B)  ∧  B ∈ Open (C, A)     [] by fol H1 B1';\n    C ∈ Open (D, A)     [] by fol - TransitivityBetweennessHelp;\n    fol H1 ABD - B1' Ordered_DEF;\n  qed;\n")))
+  transitivitybetweenness_c.set(@readable.prove(
+    "\n  forall A B C D. B IN Open (A, C)  /\\   C IN Open (B, D)  ==>  ordered A B C D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1"),
+        @readable.have(
+          "\n    B IN Open (A, D)",
+          "ABD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "TransitivityBetweennessHelp",
+                () => transitivitybetweennesshelp(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN Open (D, B)  /\\   B IN Open (C, A)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN Open (D, A)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "TransitivityBetweennessHelp",
+                () => transitivitybetweennesshelp(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("ABD"),
+            @readable.Prev,
+            @readable.Thm("B1'", () => b1_p()),
+            @readable.Thm("Ordered_DEF", () => ordered_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2743,25 +4386,68 @@ pub fn transitivitybetweenness() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_76`
-pub fn exec_phrase_76(x76 : Unit) -> Unit raise {
-  let _ = x76
-  {
-    @readable.thm_ref().val = transitivitybetweennesshelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TransitivityBetweennessHelp): thm);;
-fn step_186() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TransitivityBetweennessHelp): thm);;", exec_phrase_76)
-}
-
-///|
 /// IntervalsAreConvex
 fn step_187() -> Unit raise {
-  intervalsareconvex_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. B ∈ Open (A, C)  ⇒  Open (A, B)  ⊂  Open (A, C)\n\n  proof\n    intro_TAC ∀A B C, H1;\n    ∀X. X ∈ Open (A, B)  ⇒  X ∈ Open (A, C)     []\n    proof\n      intro_TAC ∀X, AXB;\n      X ∈ ray B A ━ {B}     [] by fol AXB B1' IntervalRayEZ;\n      B ∈ Open (X, C)     [] by fol H1 B1' - OppositeRaysIntersect1pointHelp;\n      fol AXB - TransitivityBetweennessHelp;\n    qed;\n    fol - SUBSET;\n  qed;\n")))
+  intervalsareconvex_c.set(@readable.prove(
+    "\n  forall A B C. B IN Open (A, C)  ==>  Open (A, B)  SUBSET  Open (A, C)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1"),
+        @readable.have(
+          "\n    forall X. X IN Open (A, B)  ==>  X IN Open (A, C)",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall X, AXB"),
+              @readable.have(
+                "\n      X IN ray B A DIFF {B}",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("AXB"),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      B IN Open (X, C)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "OppositeRaysIntersect1pointHelp",
+                      () => oppositeraysintersect1pointhelp(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("AXB"),
+                  @readable.Prev,
+                  @readable.Thm(
+                    "TransitivityBetweennessHelp",
+                    () => transitivitybetweennesshelp(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("SUBSET", () => @sets.subset())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2776,7 +4462,50 @@ pub fn intervalsareconvex() -> @kernel.Thm {
 ///|
 /// TransitivityBetweennessVariant
 fn step_188() -> Unit raise {
-  transitivitybetweennessvariant_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A X B C. X ∈ Open (A, B)  ∧  B ∈ Open (A, C)  ⇒  ordered A X B C\n\n  proof\n    intro_TAC ∀A X B C, H1;\n    X ∈ ray B A ━ {B}     [] by fol H1 B1' IntervalRayEZ;\n    B ∈ Open (X, C)     [] by fol H1 B1' - OppositeRaysIntersect1pointHelp;\n    fol H1 - TransitivityBetweenness;\n  qed;\n")))
+  transitivitybetweennessvariant_c.set(@readable.prove(
+    "\n  forall A X B C. X IN Open (A, B)  /\\   B IN Open (A, C)  ==>  ordered A X B C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A X B C, H1"),
+        @readable.have(
+          "\n    X IN ray B A DIFF {B}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN Open (X, C)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Prev,
+              @readable.Thm(
+                "OppositeRaysIntersect1pointHelp",
+                () => oppositeraysintersect1pointhelp(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Thm("TransitivityBetweenness", () => transitivitybetweenness()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2789,25 +4518,50 @@ pub fn transitivitybetweennessvariant() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_77`
-pub fn exec_phrase_77(x77 : Unit) -> Unit raise {
-  let _ = x77
-  {
-    @readable.thm_ref().val = transitivitybetweenness()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TransitivityBetweenness): thm);;
-fn step_189() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TransitivityBetweenness): thm);;", exec_phrase_77)
-}
-
-///|
 /// Interval2sides2aLineHelp
 fn step_190() -> Unit raise {
-  interval2sides2alinehelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C X. B ∈ Open (A, C)  ⇒  X ∉ Open (A, B) ∨ X ∉ Open (B, C)\n\n  proof\n    intro_TAC ∀A B C X, H1;\n    assume ¬(X ∉ Open (A, B))     [AXB] by fol;\n    ordered A X B C     [] by fol - ∉ H1 TransitivityBetweennessVariant;\n    fol MESON [-; Ordered_DEF] [B ∈ Open (X, C)] B1' B3' ∉;\n  qed;\n")))
+  interval2sides2alinehelp_c.set(@readable.prove(
+    "\n  forall A B C X. B IN Open (A, C)  ==>  X NOTIN Open (A, B) \\/ X NOTIN Open (B, C)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C X, H1"),
+        @readable.assuming(
+          "~(X NOTIN Open (A, B))",
+          "AXB",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    ordered A X B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("H1"),
+              @readable.Thm(
+                "TransitivityBetweennessVariant",
+                () => transitivitybetweennessvariant(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.ThmsTermRule(
+              ths => tm => @meson.meson(ths, tm),
+              [@readable.Prev, @readable.Thm("Ordered_DEF", () => ordered_def())],
+              "B IN Open (X, C)",
+            ),
+            @readable.Thm("B1'", () => b1_p()),
+            @readable.Thm("B3'", () => b3_p()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2820,45 +4574,41 @@ pub fn interval2sides2alinehelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_78`
-pub fn exec_phrase_78(x78 : Unit) -> Unit raise {
-  let _ = x78
-  {
-    @readable.thm_ref().val = transitivitybetweennessvariant()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TransitivityBetweennessVariant): thm);;
-fn step_191() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TransitivityBetweennessVariant): thm);;", exec_phrase_78)
-}
-
-///|
-/// `exec_phrase_79`
-pub fn exec_phrase_79(x79 : Unit) -> Unit raise {
-  let _ = x79
-  {
-    @readable.thmlist_term_thm_ref().val = fn(x80 : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-      fn(x81 : @kernel.Term) -> @kernel.Thm raise {
-        @meson.meson(x80, x81)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;
-fn step_192() -> Unit raise {
-  @lib.register_phrase("thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;", exec_phrase_79)
-}
-
-///|
 /// Interval2sides2aLine
 fn step_193() -> Unit raise {
-  interval2sides2aline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C X. Collinear A B C\n    ⇒  X ∉ Open (A, B)  ∨  X ∉ Open (A, C)  ∨  X ∉ Open (B, C)\n\n  proof\n    intro_TAC ∀A B C X, H1;\n    assume ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C)     [Distinct] by fol B1' ∉;\n    B ∈ Open (A, C)  ∨  C ∈ Open (B, A)  ∨  A ∈ Open (C, B)     [] by fol - H1 B3';\n    fol - Interval2sides2aLineHelp B1' ∉;\n  qed;\n")))
+  interval2sides2aline_c.set(@readable.prove(
+    "\n  forall A B C X. Collinear A B C\n    ==>  X NOTIN Open (A, B)  \\/  X NOTIN Open (A, C)  \\/  X NOTIN Open (B, C)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C X, H1"),
+        @readable.assuming(
+          "~(A = B) /\\  ~(A = C) /\\  ~(B = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("B1'", () => b1_p()), @readable.Thm("NOTIN", () => notin())],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN Open (A, C)  \\/  C IN Open (B, A)  \\/  A IN Open (C, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Label("H1"), @readable.Thm("B3'", () => b3_p())],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("Interval2sides2aLineHelp", () => interval2sides2alinehelp()),
+            @readable.Thm("B1'", () => b1_p()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2871,25 +4621,404 @@ pub fn interval2sides2aline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_80`
-pub fn exec_phrase_80(x82 : Unit) -> Unit raise {
-  let _ = x82
-  {
-    @readable.thm_ref().val = interval2sides2alinehelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Interval2sides2aLineHelp): thm);;
-fn step_194() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Interval2sides2aLineHelp): thm);;", exec_phrase_80)
-}
-
-///|
 /// TwosidesTriangle2aLine
 fn step_195() -> Unit raise {
-  twosidestriangle2aline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C l. Line l ∧ ¬Collinear A B C  ⇒  A ∉ l ∧ B ∉ l ∧ C ∉ l  ⇒\n    ¬(A,B same_side l) ∧ ¬(B,C same_side l)  ⇒  A,C same_side l\n\n  proof\n    intro_TAC ∀ A B C l, H1, off_l, H2;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C)     [ABCdistinct] by fol H1 NonCollinearImpliesDistinct;\n    consider m such that\n    Line m ∧ A ∈ m ∧ C ∈ m     [m_line] by fol - I1;\n    assume ¬(l ∩ m = ∅)     [lmIntersect] by fol H1 m_line DisjointLinesImplySameSide;\n    consider Y such that\n    Y ∈ l ∧ Y ∈ m     [Ylm] by fol lmIntersect MEMBER_NOT_EMPTY IN_INTER;\n    consider X Z such that\n    X ∈ l  ∧  X ∈ Open (A, B)  ∧  Z ∈ l  ∧  Z ∈ Open (C, B)     [H2'] by fol H1 H2 SameSide_DEF B1';\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ Y ∈ m ━ {A}  ∧  Y ∈ m ━ {C}  ∧  C ∈ m ━ {A}  ∧  A ∈ m ━ {C}     [Distinct] by fol H1 NonCollinearImpliesDistinct Ylm off_l ∉ m_line IN_DIFF IN_SING;\n    consider p such that\n    Line p ∧ B ∈ p ∧ A ∈ p     [p_line] by fol Distinct I1;\n    consider q such that\n    Line q ∧ B ∈ q ∧ C ∈ q     [q_line] by fol Distinct I1;\n    X ∈ p  ∧ Z ∈ q     [Xp] by fol p_line H2' BetweenLinear q_line H2';\n    A ∉ q ∧ B ∉ m ∧ C ∉ p     [vertex_off_line] by fol q_line m_line p_line H1 Collinear_DEF ∉;\n    X ∉ q  ∧  X,A same_side q  ∧  Z ∉ p  ∧  Z,C same_side p     [Xsim_qA] by fol q_line p_line - H2' B1' IntervalRayEZ RaySameSide;\n    ¬(m = p)  ∧  ¬(m = q)     [] by fol m_line vertex_off_line ∉;\n    p ∩ m = {A}  ∧  q ∩ m = {C}     [pmA] by fol p_line m_line q_line H1 - Xp H2' I1Uniqueness;\n    Y ∉ p  ∧  Y ∉ q     [notYpq] by fol - Distinct EquivIntersectionHelp;\n    X ∈ ray A B ━ {A}  ∧  Z ∈ ray C B ━ {C}     [] by fol H2' IntervalRayEZ H2' B1';\n    X ∉ m  ∧  Z ∉ m  ∧  X,B same_side m  ∧  B,Z same_side m     [notXZm] by fol m_line vertex_off_line - RaySameSide SameSideSymmetric;\n    X,Z same_side m     [] by fol m_line - vertex_off_line SameSideTransitive;\n    Collinear X Y Z ∧ Y ∉ Open (X, Z) ∧  ¬(Y = X) ∧ ¬(Y = Z) ∧ ¬(X = Z)     [] by fol H1 H2' Ylm Collinear_DEF m_line - SameSide_DEF notXZm Xsim_qA Xp ∉;\n    Z ∈ Open (X, Y)  ∨  X ∈ Open (Z, Y)     [] by fol - B3' ∉ B1';\n    case_split ZXY | XZY     by fol -;\n    suppose X ∈ Open (Z, Y);\n      ¬(Z,Y same_side p)     [] by fol p_line Xp - SameSide_DEF;\n      ¬(C,Y same_side p)     [] by fol p_line Xsim_qA vertex_off_line notYpq - SameSideTransitive;\n      A ∈ Open (C, Y)     [] by fol p_line m_line pmA Distinct - EquivIntersection ∉;\n      fol H1 Ylm off_l - B1' IntervalRayEZ RaySameSide;\n    end;\n    suppose Z ∈ Open (X, Y);\n      ¬(X,Y same_side q)     [] by fol q_line Xp - SameSide_DEF;\n      ¬(A,Y same_side q)     [] by fol q_line Xsim_qA vertex_off_line notYpq - SameSideTransitive;\n      C ∈ Open (Y, A)     [] by fol q_line m_line pmA Distinct - EquivIntersection ∉ B1';\n      fol H1 Ylm off_l - IntervalRayEZ RaySameSide;\n    end;\n  qed;\n")))
+  twosidestriangle2aline_c.set(@readable.prove(
+    "\n  forall A B C l. Line l /\\  ~Collinear A B C  ==>  A NOTIN l /\\  B NOTIN l /\\  C NOTIN l  ==>\n    ~(A,B same_side l) /\\  ~(B,C same_side l)  ==>  A,C same_side l",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall  A B C l, H1, off_l, H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C)",
+          "ABCdistinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  A IN m /\\  C IN m    ",
+          "m_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.assuming(
+          "~(l INTER m = {})",
+          "lmIntersect",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("m_line"),
+              @readable.Thm(
+                "DisjointLinesImplySameSide",
+                () => disjointlinesimplysameside(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Y",
+          "Y IN l /\\  Y IN m    ",
+          "Ylm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("lmIntersect"),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X Z",
+          "X IN l  /\\   X IN Open (A, B)  /\\   Z IN l  /\\   Z IN Open (C, B)    ",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  Y IN m DIFF {A}  /\\   Y IN m DIFF {C}  /\\   C IN m DIFF {A}  /\\   A IN m DIFF {C}",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Label("Ylm"),
+              @readable.Label("off_l"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("m_line"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "p",
+          "Line p /\\  B IN p /\\  A IN p    ",
+          "p_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "q",
+          "Line q /\\  B IN q /\\  C IN q    ",
+          "q_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    X IN p  /\\  Z IN q",
+          "Xp",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("p_line"),
+              @readable.Label("H2'"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Label("q_line"),
+              @readable.Label("H2'"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN q /\\  B NOTIN m /\\  C NOTIN p",
+          "vertex_off_line",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("q_line"),
+              @readable.Label("m_line"),
+              @readable.Label("p_line"),
+              @readable.Label("H1"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X NOTIN q  /\\   X,A same_side q  /\\   Z NOTIN p  /\\   Z,C same_side p",
+          "Xsim_qA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("q_line"),
+              @readable.Label("p_line"),
+              @readable.Prev,
+              @readable.Label("H2'"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(m = p)  /\\   ~(m = q)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("vertex_off_line"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    p INTER m = {A}  /\\   q INTER m = {C}",
+          "pmA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("p_line"),
+              @readable.Label("m_line"),
+              @readable.Label("q_line"),
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Label("Xp"),
+              @readable.Label("H2'"),
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Y NOTIN p  /\\   Y NOTIN q",
+          "notYpq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Thm("EquivIntersectionHelp", () => equivintersectionhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X IN ray A B DIFF {A}  /\\   Z IN ray C B DIFF {C}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2'"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+              @readable.Label("H2'"),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X NOTIN m  /\\   Z NOTIN m  /\\   X,B same_side m  /\\   B,Z same_side m",
+          "notXZm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("vertex_off_line"),
+              @readable.Prev,
+              @readable.Thm("RaySameSide", () => raysameside()),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X,Z same_side m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Label("vertex_off_line"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear X Y Z /\\  Y NOTIN Open (X, Z) /\\   ~(Y = X) /\\  ~(Y = Z) /\\  ~(X = Z)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2'"),
+              @readable.Label("Ylm"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Label("notXZm"),
+              @readable.Label("Xsim_qA"),
+              @readable.Label("Xp"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Z IN Open (X, Y)  \\/  X IN Open (Z, Y)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B3'", () => b3_p()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "ZXY | XZY    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["X IN Open (Z, Y)", "Z IN Open (X, Y)"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ~(Z,Y same_side p)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("p_line"),
+                      @readable.Label("Xp"),
+                      @readable.Prev,
+                      @readable.Thm("SameSide_DEF", () => sameside_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(C,Y same_side p)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("p_line"),
+                      @readable.Label("Xsim_qA"),
+                      @readable.Label("vertex_off_line"),
+                      @readable.Label("notYpq"),
+                      @readable.Prev,
+                      @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      A IN Open (C, Y)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("p_line"),
+                      @readable.Label("m_line"),
+                      @readable.Label("pmA"),
+                      @readable.Label("Distinct"),
+                      @readable.Prev,
+                      @readable.Thm("EquivIntersection", () => equivintersection()),
+                      @readable.Thm("NOTIN", () => notin()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("Ylm"),
+                    @readable.Label("off_l"),
+                    @readable.Prev,
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+                    @readable.Thm("RaySameSide", () => raysameside()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ~(X,Y same_side q)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("q_line"),
+                      @readable.Label("Xp"),
+                      @readable.Prev,
+                      @readable.Thm("SameSide_DEF", () => sameside_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(A,Y same_side q)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("q_line"),
+                      @readable.Label("Xsim_qA"),
+                      @readable.Label("vertex_off_line"),
+                      @readable.Label("notYpq"),
+                      @readable.Prev,
+                      @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      C IN Open (Y, A)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("q_line"),
+                      @readable.Label("m_line"),
+                      @readable.Label("pmA"),
+                      @readable.Label("Distinct"),
+                      @readable.Prev,
+                      @readable.Thm("EquivIntersection", () => equivintersection()),
+                      @readable.Thm("NOTIN", () => notin()),
+                      @readable.Thm("B1'", () => b1_p()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("Ylm"),
+                    @readable.Label("off_l"),
+                    @readable.Prev,
+                    @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+                    @readable.Thm("RaySameSide", () => raysameside()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -2902,25 +5031,127 @@ pub fn twosidestriangle2aline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_81`
-pub fn exec_phrase_81(x83 : Unit) -> Unit raise {
-  let _ = x83
-  {
-    @readable.thm_ref().val = disjointlinesimplysameside()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DisjointLinesImplySameSide): thm);;
-fn step_196() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DisjointLinesImplySameSide): thm);;", exec_phrase_81)
-}
-
-///|
 /// LineUnionOf2Rays
 fn step_197() -> Unit raise {
-  lineunionof2rays_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B l. Line l ∧ A ∈ l ∧ B ∈ l  ⇒  O ∈ Open (A, B)\n   ⇒  l = ray O A ∪ ray O B\n\n  proof\n    intro_TAC ∀A O B l, H1, H2;\n    ¬(A = O) ∧ ¬(O = B) ∧ O ∈ l     [Distinct] by fol H2 B1' H1 BetweenLinear;\n    ray O A ∪ ray O B  ⊂  l     [AOBsub_l] by fol H1 - RayLine UNION_SUBSET;\n    ∀X. X ∈ l  ⇒  X ∈ ray O A  ∨  X ∈ ray O B     []\n    proof\n      intro_TAC ∀X, Xl;\n      assume ¬(X ∈ ray O B)     [notXrOB] by fol;\n      Collinear O B X  ∧  Collinear X A B  ∧  Collinear O A X     [XABcol] by fol Distinct H1 Xl Collinear_DEF;\n      O ∈ Open (X, B)     [] by fol notXrOB Distinct - IN_Ray ∉;\n      O ∉ Open (X, A)     [] by fol ∉ B1' XABcol - H2 Interval2sides2aLine;\n      fol Distinct XABcol - IN_Ray;\n    qed;\n    l ⊂ ray O A ∪ ray O B     [] by fol - IN_UNION SUBSET;\n    fol - AOBsub_l SUBSET_ANTISYM;\n  qed;\n")))
+  lineunionof2rays_c.set(@readable.prove(
+    "\n  forall A O B l. Line l /\\  A IN l /\\  B IN l  ==>  O IN Open (A, B)\n   ==>  l = ray O A UNION ray O B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B l, H1, H2"),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B) /\\  O IN l",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("H1"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O A UNION ray O B  SUBSET  l",
+          "AOBsub_l",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("RayLine", () => rayline()),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall X. X IN l  ==>  X IN ray O A  \\/  X IN ray O B",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall X, Xl"),
+              @readable.assuming(
+                "~(X IN ray O B)",
+                "notXrOB",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      Collinear O B X  /\\   Collinear X A B  /\\   Collinear O A X",
+                "XABcol",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Label("H1"),
+                    @readable.Label("Xl"),
+                    @readable.Thm("Collinear_DEF", () => collinear_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      O IN Open (X, B)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("notXrOB"),
+                    @readable.Label("Distinct"),
+                    @readable.Prev,
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      O NOTIN Open (X, A)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Thm("NOTIN", () => notin()),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Label("XABcol"),
+                    @readable.Prev,
+                    @readable.Label("H2"),
+                    @readable.Thm("Interval2sides2aLine", () => interval2sides2aline()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("Distinct"),
+                  @readable.Label("XABcol"),
+                  @readable.Prev,
+                  @readable.Thm("IN_Ray", () => in_ray()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l SUBSET ray O A UNION ray O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_UNION", () => @sets.in_union()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("AOBsub_l"),
+            @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2933,57 +5164,123 @@ pub fn lineunionof2rays() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_82`
-pub fn exec_phrase_82(x84 : Unit) -> Unit raise {
-  let _ = x84
-  {
-    @readable.thm_ref().val = @sets.union_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNION_SUBSET): thm);;
-fn step_198() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNION_SUBSET): thm);;", exec_phrase_82)
-}
-
-///|
-/// `exec_phrase_83`
-pub fn exec_phrase_83(x85 : Unit) -> Unit raise {
-  let _ = x85
-  {
-    @readable.thm_ref().val = interval2sides2aline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Interval2sides2aLine): thm);;
-fn step_199() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Interval2sides2aLine): thm);;", exec_phrase_83)
-}
-
-///|
-/// `exec_phrase_84`
-pub fn exec_phrase_84(x86 : Unit) -> Unit raise {
-  let _ = x86
-  {
-    @readable.thm_ref().val = @sets.in_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_UNION): thm);;
-fn step_200() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_UNION): thm);;", exec_phrase_84)
-}
-
-///|
 /// AtMost2Sides
 fn step_201() -> Unit raise {
-  atmost2sides_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C l.  Line l  ⇒  A ∉ l ∧ B ∉ l ∧ C ∉ l\n   ⇒  A,B same_side l  ∨  A,C same_side l  ∨  B,C same_side l\n\n  proof\n    intro_TAC ∀A B C l, l_line, H2;\n    assume ¬(A = C)     [notAC] by fol l_line H2 SameSideReflexive;\n    assume Collinear A B C     [ABCcol] by fol l_line H2 TwosidesTriangle2aLine;\n    consider m such that\n    Line m ∧ A ∈ m ∧ B ∈ m ∧ C ∈ m     [m_line] by fol notAC - I1 Collinear_DEF;\n    assume ¬(m ∩ l = ∅)     [m_lNot0] by fol m_line l_line BetweenLinear SameSide_DEF IN_INTER NOT_IN_EMPTY;\n    consider X such that\n    X ∈ l ∧ X ∈ m     [Xlm] by fol - IN_INTER MEMBER_NOT_EMPTY;\n    A ∈ m ━ {X}  ∧  B ∈ m ━ {X}  ∧  C ∈ m ━ {X}     [ABCm_X] by fol m_line - H2 ∉ IN_DIFF IN_SING;\n    X ∉ Open (A, B)  ∨  X ∉ Open (A, C)  ∨  X ∉ Open (B, C)     [] by fol ABCcol Interval2sides2aLine;\n    fol l_line m_line m_line Xlm H2 ∉ I1Uniqueness ABCm_X - EquivIntersection;\n  qed;\n")))
+  atmost2sides_c.set(@readable.prove(
+    "\n  forall A B C l.  Line l  ==>  A NOTIN l /\\  B NOTIN l /\\  C NOTIN l\n   ==>  A,B same_side l  \\/  A,C same_side l  \\/  B,C same_side l",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C l, l_line, H2"),
+        @readable.assuming(
+          "~(A = C)",
+          "notAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("H2"),
+              @readable.Thm("SameSideReflexive", () => samesidereflexive()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "Collinear A B C",
+          "ABCcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("H2"),
+              @readable.Thm("TwosidesTriangle2aLine", () => twosidestriangle2aline()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  A IN m /\\  B IN m /\\  C IN m    ",
+          "m_line",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notAC"),
+              @readable.Prev,
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(m INTER l = {})",
+          "m_lNot0",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("l_line"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X",
+          "X IN l /\\  X IN m    ",
+          "Xlm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN m DIFF {X}  /\\   B IN m DIFF {X}  /\\   C IN m DIFF {X}",
+          "ABCm_X",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X NOTIN Open (A, B)  \\/  X NOTIN Open (A, C)  \\/  X NOTIN Open (B, C)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABCcol"),
+              @readable.Thm("Interval2sides2aLine", () => interval2sides2aline()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("l_line"),
+            @readable.Label("m_line"),
+            @readable.Label("m_line"),
+            @readable.Label("Xlm"),
+            @readable.Label("H2"),
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            @readable.Label("ABCm_X"),
+            @readable.Prev,
+            @readable.Thm("EquivIntersection", () => equivintersection()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2996,25 +5293,102 @@ pub fn atmost2sides() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_85`
-pub fn exec_phrase_85(x87 : Unit) -> Unit raise {
-  let _ = x87
-  {
-    @readable.thm_ref().val = twosidestriangle2aline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TwosidesTriangle2aLine): thm);;
-fn step_202() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TwosidesTriangle2aLine): thm);;", exec_phrase_85)
-}
-
-///|
 /// FourPointsOrder
 fn step_203() -> Unit raise {
-  fourpointsorder_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C X l.  Line l ∧ A ∈ l ∧ B ∈ l ∧ C ∈ l ∧ X ∈ l  ⇒\n    ¬(X = A) ∧ ¬(X = B) ∧ ¬(X = C)  ⇒  B ∈ Open (A, C)\n   ⇒  ordered X A B C  ∨  ordered A X B C  ∨\n       ordered A B X C  ∨  ordered A B C X\n\n  proof\n    intro_TAC ∀A B C X l, H1, H2, H3;\n    A ∈ Open (X, B)  ∨  X ∈ Open (A, B)  ∨  X ∈ Open (B, C)  ∨  C ∈ Open (B, X)     []\n    proof\n      ¬(A = B) ∧ ¬(B = C)     [ABCdistinct] by fol H3 B1';\n      Collinear A B X ∧ Collinear A C X ∧ Collinear C B X     [ACXcol] by fol H1 Collinear_DEF;\n      A ∈ Open (X, B)  ∨  X ∈ Open (A, B)  ∨  B ∈ Open (A, X)     [3pos] by fol H2 ABCdistinct - B3' B1';\n      assume B ∈ Open (A, X)     [ABX] by fol 3pos;\n      B ∉ Open (C, X)     [] by fol ACXcol H3 - Interval2sides2aLine ∉;\n      fol H2 ABCdistinct ACXcol - B3' B1' ∉;\n    qed;\n    fol - H3 B1' TransitivityBetweenness TransitivityBetweennessVariant Reverse4Order;\n  qed;\n")))
+  fourpointsorder_c.set(@readable.prove(
+    "\n  forall A B C X l.  Line l /\\  A IN l /\\  B IN l /\\  C IN l /\\  X IN l  ==>\n    ~(X = A) /\\  ~(X = B) /\\  ~(X = C)  ==>  B IN Open (A, C)\n   ==>  ordered X A B C  \\/  ordered A X B C  \\/\n       ordered A B X C  \\/  ordered A B C X",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C X l, H1, H2, H3"),
+        @readable.have(
+          "\n    A IN Open (X, B)  \\/  X IN Open (A, B)  \\/  X IN Open (B, C)  \\/  C IN Open (B, X)",
+          "",
+          @readable.steps(
+            [
+              @readable.have(
+                "\n      ~(A = B) /\\  ~(B = C)",
+                "ABCdistinct",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Label("H3"), @readable.Thm("B1'", () => b1_p())],
+                ),
+              ),
+              @readable.have(
+                "\n      Collinear A B X /\\  Collinear A C X /\\  Collinear C B X",
+                "ACXcol",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Thm("Collinear_DEF", () => collinear_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      A IN Open (X, B)  \\/  X IN Open (A, B)  \\/  B IN Open (A, X)",
+                "3pos",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H2"),
+                    @readable.Label("ABCdistinct"),
+                    @readable.Prev,
+                    @readable.Thm("B3'", () => b3_p()),
+                    @readable.Thm("B1'", () => b1_p()),
+                  ],
+                ),
+              ),
+              @readable.assuming(
+                "B IN Open (A, X)",
+                "ABX",
+                @readable.by(@readable.fol, [@readable.Label("3pos")]),
+              ),
+              @readable.have(
+                "\n      B NOTIN Open (C, X)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ACXcol"),
+                    @readable.Label("H3"),
+                    @readable.Prev,
+                    @readable.Thm("Interval2sides2aLine", () => interval2sides2aline()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("H2"),
+                  @readable.Label("ABCdistinct"),
+                  @readable.Label("ACXcol"),
+                  @readable.Prev,
+                  @readable.Thm("B3'", () => b3_p()),
+                  @readable.Thm("B1'", () => b1_p()),
+                  @readable.Thm("NOTIN", () => notin()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H3"),
+            @readable.Thm("B1'", () => b1_p()),
+            @readable.Thm("TransitivityBetweenness", () => transitivitybetweenness()),
+            @readable.Thm(
+              "TransitivityBetweennessVariant",
+              () => transitivitybetweennessvariant(),
+            ),
+            @readable.Thm("Reverse4Order", () => reverse4order()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3027,25 +5401,49 @@ pub fn fourpointsorder() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_86`
-pub fn exec_phrase_86(x88 : Unit) -> Unit raise {
-  let _ = x88
-  {
-    @readable.thm_ref().val = reverse4order()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Reverse4Order): thm);;
-fn step_204() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Reverse4Order): thm);;", exec_phrase_86)
-}
-
-///|
 /// HilbertAxiomRedundantByMoore
 fn step_205() -> Unit raise {
-  hilbertaxiomredundantbymoore_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D l.  Line l ∧ A ∈ l ∧ B ∈ l ∧ C ∈ l ∧ D ∈ l  ⇒\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(A = D) ∧ ¬(B = C) ∧ ¬(B = D) ∧ ¬(C = D)\n   ⇒  ordered D A B C ∨ ordered A D B C ∨ ordered A B D C ∨ ordered A B C D ∨\n       ordered D A C B ∨ ordered A D C B ∨ ordered A C D B ∨ ordered A C B D ∨\n       ordered D C A B ∨ ordered C D A B ∨ ordered C A D B ∨ ordered C A B D\n\n  proof\n    intro_TAC ∀A B C D l, H1, H2;\n    Collinear A B C     [] by fol H1 Collinear_DEF;\n    B ∈ Open (A, C)  ∨  C ∈ Open (A, B)  ∨  A ∈ Open (C, B)     [] by fol H2 - B3' B1';\n    fol - H1 H2 FourPointsOrder;\n  qed;\n")))
+  hilbertaxiomredundantbymoore_c.set(@readable.prove(
+    "\n  forall A B C D l.  Line l /\\  A IN l /\\  B IN l /\\  C IN l /\\  D IN l  ==>\n    ~(A = B) /\\  ~(A = C) /\\  ~(A = D) /\\  ~(B = C) /\\  ~(B = D) /\\  ~(C = D)\n   ==>  ordered D A B C \\/ ordered A D B C \\/ ordered A B D C \\/ ordered A B C D \\/\n       ordered D A C B \\/ ordered A D C B \\/ ordered A C D B \\/ ordered A C B D \\/\n       ordered D C A B \\/ ordered C D A B \\/ ordered C A D B \\/ ordered C A B D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D l, H1, H2"),
+        @readable.have(
+          "\n    Collinear A B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN Open (A, C)  \\/  C IN Open (A, B)  \\/  A IN Open (C, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("B3'", () => b3_p()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("FourPointsOrder", () => fourpointsorder()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3058,25 +5456,122 @@ pub fn hilbertaxiomredundantbymoore() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_87`
-pub fn exec_phrase_87(x89 : Unit) -> Unit raise {
-  let _ = x89
-  {
-    @readable.thm_ref().val = fourpointsorder()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FourPointsOrder): thm);;
-fn step_206() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FourPointsOrder): thm);;", exec_phrase_87)
-}
-
-///|
 /// InteriorTransitivity
 fn step_207() -> Unit raise {
-  interiortransitivity_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B M G.  G ∈ int_angle A O B  ∧  M ∈ int_angle A O G\n   ⇒  M ∈ int_angle A O B\n\n  proof\n    intro_TAC ∀A O B M G, GintAOB MintAOG;\n    ¬Collinear A O B     [AOBncol] by fol GintAOB IN_InteriorAngle;\n    consider G' such that\n    G' ∈ Open (A, B)  ∧  G' ∈ ray O G ━ {O}     [CrossG] by fol GintAOB Crossbar_THM;\n    M ∈ int_angle A O G'     [] by fol MintAOG - InteriorWellDefined;\n    consider M' such that\n    M' ∈ Open (A, G')  ∧  M' ∈ ray O M ━ {O}     [CrossM] by fol - Crossbar_THM;\n    ¬(M' = O) ∧ ¬(M = O) ∧ Collinear O M M' ∧ O ∉ Open (M', M)     [] by fol - IN_Ray IN_DIFF IN_SING;\n    M ∈ ray O M' ━ {O}     [MrOM'] by fol - CollinearSymmetry B1' ∉ IN_Ray IN_DIFF IN_SING;\n    Open (A, G') ⊂ Open (A, B)  ∧  M' ∈ Open (A, B)     [] by fol CrossG IntervalsAreConvex CrossM SUBSET;\n    M' ∈ int_angle A O B     [] by fol AOBncol - ConverseCrossbar;\n    fol - MrOM' WholeRayInterior;\n  qed;\n")))
+  interiortransitivity_c.set(@readable.prove(
+    "\n  forall A O B M G.  G IN int_angle A O B  /\\   M IN int_angle A O G\n   ==>  M IN int_angle A O B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B M G, GintAOB MintAOG"),
+        @readable.have(
+          "\n    ~Collinear A O B",
+          "AOBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintAOB"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G'",
+          "G' IN Open (A, B)  /\\   G' IN ray O G DIFF {O}    ",
+          "CrossG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintAOB"),
+              @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M IN int_angle A O G'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MintAOG"),
+              @readable.Prev,
+              @readable.Thm("InteriorWellDefined", () => interiorwelldefined()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "M'",
+          "M' IN Open (A, G')  /\\   M' IN ray O M DIFF {O}    ",
+          "CrossM",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("Crossbar_THM", () => crossbar_thm())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(M' = O) /\\  ~(M = O) /\\  Collinear O M M' /\\  O NOTIN Open (M', M)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M IN ray O M' DIFF {O}",
+          "MrOM'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Open (A, G') SUBSET Open (A, B)  /\\   M' IN Open (A, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CrossG"),
+              @readable.Thm("IntervalsAreConvex", () => intervalsareconvex()),
+              @readable.Label("CrossM"),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M' IN int_angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOBncol"),
+              @readable.Prev,
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("MrOM'"),
+            @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3089,41 +5584,159 @@ pub fn interiortransitivity() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_88`
-pub fn exec_phrase_88(x90 : Unit) -> Unit raise {
-  let _ = x90
-  {
-    @readable.thm_ref().val = interiorwelldefined()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorWellDefined): thm);;
-fn step_208() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorWellDefined): thm);;", exec_phrase_88)
-}
-
-///|
-/// `exec_phrase_89`
-pub fn exec_phrase_89(x91 : Unit) -> Unit raise {
-  let _ = x91
-  {
-    @readable.thm_ref().val = intervalsareconvex()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IntervalsAreConvex): thm);;
-fn step_209() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IntervalsAreConvex): thm);;", exec_phrase_89)
-}
-
-///|
 /// HalfPlaneConvexNonempty
 fn step_210() -> Unit raise {
-  halfplaneconvexnonempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l H A.  Line l ∧ A ∉ l  ⇒  H = {X | X ∉ l  ∧  X,A same_side l}\n    ⇒  ¬(H = ∅)  ∧  H ⊂ complement l  ∧  Convex H\n\n  proof\n    intro_TAC ∀l H A, l_line, HalfPlane;\n    ∀X. X ∈ H  ⇔  X ∉ l  ∧  X,A same_side l     [Hdef] by simplify HalfPlane IN_ELIM_THM;\n    H ⊂ complement l     [Hsub] by fol - IN_PlaneComplement SUBSET;\n    A,A same_side l  ∧  A ∈ H     [] by fol l_line SameSideReflexive Hdef;\n    ¬(H = ∅)     [Hnonempty] by fol - MEMBER_NOT_EMPTY;\n    ∀P Q X.  P ∈ H ∧ Q ∈ H ∧ X ∈ Open (P, Q)  ⇒  X ∈ H     []\n    proof\n      intro_TAC ∀P Q X, PXQ;\n      P ∉ l  ∧  P,A same_side l  ∧  Q ∉ l  ∧  Q,A same_side l     [PQinH] by fol - Hdef;\n      P,Q same_side l     [Psim_lQ] by fol l_line - SameSideSymmetric SameSideTransitive;\n      X ∉ l     [notXl] by fol - PXQ SameSide_DEF ∉;\n      Open (X, P) ⊂ Open (P, Q)     [] by fol PXQ IntervalsAreConvex B1' SUBSET;\n      X,P same_side l     [] by fol l_line - SUBSET Psim_lQ SameSide_DEF;\n      X,A same_side l     [] by fol l_line notXl PQinH - Psim_lQ PQinH SameSideTransitive;\n      fol - notXl Hdef;\n    qed;\n    fol Hnonempty Hsub - SUBSET CONVEX;\n  qed;\n")))
+  halfplaneconvexnonempty_c.set(@readable.prove(
+    "\n  forall l H A.  Line l /\\  A NOTIN l  ==>  H = {X | X NOTIN l  /\\   X,A same_side l}\n    ==>  ~(H = {})  /\\   H SUBSET complement l  /\\   Convex H",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall l H A, l_line, HalfPlane"),
+        @readable.have(
+          "\n    forall X. X IN H  <=>  X NOTIN l  /\\   X,A same_side l",
+          "Hdef",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("HalfPlane"),
+              @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    H SUBSET complement l",
+          "Hsub",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_PlaneComplement", () => in_planecomplement()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,A same_side l  /\\   A IN H",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Thm("SameSideReflexive", () => samesidereflexive()),
+              @readable.Label("Hdef"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(H = {})",
+          "Hnonempty",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall P Q X.  P IN H /\\  Q IN H /\\  X IN Open (P, Q)  ==>  X IN H",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall P Q X, PXQ"),
+              @readable.have(
+                "\n      P NOTIN l  /\\   P,A same_side l  /\\   Q NOTIN l  /\\   Q,A same_side l",
+                "PQinH",
+                @readable.by(@readable.fol, [@readable.Prev, @readable.Label("Hdef")]),
+              ),
+              @readable.have(
+                "\n      P,Q same_side l",
+                "Psim_lQ",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("l_line"),
+                    @readable.Prev,
+                    @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      X NOTIN l",
+                "notXl",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("PXQ"),
+                    @readable.Thm("SameSide_DEF", () => sameside_def()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Open (X, P) SUBSET Open (P, Q)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("PXQ"),
+                    @readable.Thm("IntervalsAreConvex", () => intervalsareconvex()),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm("SUBSET", () => @sets.subset()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      X,P same_side l",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("l_line"),
+                    @readable.Prev,
+                    @readable.Thm("SUBSET", () => @sets.subset()),
+                    @readable.Label("Psim_lQ"),
+                    @readable.Thm("SameSide_DEF", () => sameside_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      X,A same_side l",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("l_line"),
+                    @readable.Label("notXl"),
+                    @readable.Label("PQinH"),
+                    @readable.Prev,
+                    @readable.Label("Psim_lQ"),
+                    @readable.Label("PQinH"),
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [@readable.Prev, @readable.Label("notXl"), @readable.Label("Hdef")],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Hnonempty"),
+            @readable.Label("Hsub"),
+            @readable.Prev,
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("CONVEX", () => convex()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3136,57 +5749,276 @@ pub fn halfplaneconvexnonempty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_90`
-pub fn exec_phrase_90(x92 : Unit) -> Unit raise {
-  let _ = x92
-  {
-    @readable.thmlist_tactic_ref().val = @readable.simplify
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((simplify): thm list -> tactic);;
-fn step_211() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((simplify): thm list -> tactic);;", exec_phrase_90)
-}
-
-///|
-/// `exec_phrase_91`
-pub fn exec_phrase_91(x93 : Unit) -> Unit raise {
-  let _ = x93
-  {
-    @readable.thm_ref().val = in_planecomplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_PlaneComplement): thm);;
-fn step_212() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_PlaneComplement): thm);;", exec_phrase_91)
-}
-
-///|
-/// `exec_phrase_92`
-pub fn exec_phrase_92(x94 : Unit) -> Unit raise {
-  let _ = x94
-  {
-    @readable.thm_ref().val = convex()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CONVEX): thm);;
-fn step_213() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CONVEX): thm);;", exec_phrase_92)
-}
-
-///|
 /// PlaneSeparation
 fn step_214() -> Unit raise {
-  planeseparation_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l.  Line l\n   ⇒  ∃H1 H2. H1 ∩ H2 = ∅  ∧  ¬(H1 = ∅)  ∧  ¬(H2 = ∅)  ∧\n         Convex H1  ∧  Convex H2  ∧  complement l = H1 ∪ H2  ∧\n         ∀P Q. P ∈ H1 ∧ Q ∈ H2  ⇒  ¬(P,Q same_side l)\n\n  proof\n    intro_TAC ∀l, l_line;\n    consider A such that\n    A ∉ l     [notAl] by fol l_line ExistsPointOffLine;\n    consider E such that\n    E ∈ l  ∧  ¬(A = E)     [El] by fol l_line I2 - ∉;\n    consider B such that\n    E ∈ Open (A, B)  ∧  ¬(E = B)  ∧  Collinear A E B     [AEB] by fol - B2' B1';\n    B ∉ l     [notBl] by fol - l_line El ∉ notAl NonCollinearRaa CollinearSymmetry;\n    ¬(A,B same_side l)     [Ansim_lB] by fol l_line El AEB SameSide_DEF;\n    consider H1 H2 such that\n    H1 = {X | X ∉ l  ∧  X,A same_side l}  ∧\n    H2 = {X | X ∉ l  ∧  X,B same_side l}     [H12sets] by fol;\n    ∀X. (X ∈ H1  ⇔  X ∉ l ∧ X,A same_side l) ∧\n         (X ∈ H2  ⇔  X ∉ l ∧ X,B same_side l)     [H12def] by simplify IN_ELIM_THM -;\n    H1 ∩ H2 = ∅     [H12disjoint]\n    proof\n      assume ¬(H1 ∩ H2 = ∅)     [nonempty] by fol;\n      consider V such that\n      V ∈ H1 ∧ V ∈ H2     [VinH12] by fol - MEMBER_NOT_EMPTY IN_INTER;\n      V ∉ l  ∧  V,A same_side l  ∧  V ∉ l  ∧  V,B same_side l     [] by fol - H12def;\n      A,B same_side l     [] by fol l_line - notAl notBl SameSideSymmetric SameSideTransitive;\n      fol - Ansim_lB;\n    qed;\n    ¬(H1 = ∅) ∧ ¬(H2 = ∅) ∧ H1 ⊂ complement l ∧ H2 ⊂ complement l ∧\n    Convex H1 ∧ Convex H2     [H12convex_nonempty] by fol l_line notAl notBl H12sets HalfPlaneConvexNonempty;\n    H1 ∪ H2  ⊂  complement l     [H12sub] by fol H12convex_nonempty UNION_SUBSET;\n    ∀C. C ∈ complement l  ⇒  C ∈ H1 ∪ H2     []\n    proof\n      intro_TAC ∀C, compl;\n      C ∉ l     [notCl] by fol - IN_PlaneComplement;\n      C,A same_side l  ∨  C,B same_side l     [] by fol l_line notAl notBl - Ansim_lB AtMost2Sides;\n      fol notCl - H12def IN_UNION;\n    qed;\n    complement l  ⊂  H1 ∪ H2     [] by fol - SUBSET;\n    complement l  =  H1 ∪ H2     [compl_H1unionH2] by fol H12sub - SUBSET_ANTISYM;\n    ∀P Q. P ∈ H1 ∧ Q ∈ H2  ⇒  ¬(P,Q same_side l)     [opp_sides]\n    proof\n      intro_TAC ∀P Q, both;\n      P ∉ l  ∧  P,A same_side l  ∧   Q ∉ l  ∧  Q,B same_side l     [PH1_QH2] by fol - H12def IN;\n      fol l_line - notAl SameSideSymmetric notBl Ansim_lB SameSideTransitive;\n    qed;\n    fol H12disjoint H12convex_nonempty compl_H1unionH2 opp_sides;\n  qed;\n")))
+  planeseparation_c.set(@readable.prove(
+    "\n  forall l.  Line l\n   ==>  ?H1 H2. H1 INTER H2 = {}  /\\   ~(H1 = {})  /\\   ~(H2 = {})  /\\ \n         Convex H1  /\\   Convex H2  /\\   complement l = H1 UNION H2  /\\ \n         forall P Q. P IN H1 /\\  Q IN H2  ==>  ~(P,Q same_side l)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall l, l_line"),
+        @readable.consider(
+          "A",
+          "A NOTIN l    ",
+          "notAl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Thm("ExistsPointOffLine", () => existspointoffline()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN l  /\\   ~(A = E)    ",
+          "El",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Thm("I2", () => i2()),
+              @readable.Prev,
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "B",
+          "E IN Open (A, B)  /\\   ~(E = B)  /\\   Collinear A E B    ",
+          "AEB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B2'", () => b2_p()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN l",
+          "notBl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Label("El"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("notAl"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A,B same_side l)",
+          "Ansim_lB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("El"),
+              @readable.Label("AEB"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "H1 H2",
+          "H1 = {X | X NOTIN l  /\\   X,A same_side l}  /\\ \n    H2 = {X | X NOTIN l  /\\   X,B same_side l}    ",
+          "H12sets",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    forall X. (X IN H1  <=>  X NOTIN l /\\  X,A same_side l) /\\ \n         (X IN H2  <=>  X NOTIN l /\\  X,B same_side l)",
+          "H12def",
+          @readable.by(
+            @readable.simplify,
+            [@readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()), @readable.Prev],
+          ),
+        ),
+        @readable.have(
+          "\n    H1 INTER H2 = {}",
+          "H12disjoint",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "~(H1 INTER H2 = {})",
+                "nonempty",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.consider(
+                "V",
+                "V IN H1 /\\  V IN H2    ",
+                "VinH12",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      V NOTIN l  /\\   V,A same_side l  /\\   V NOTIN l  /\\   V,B same_side l",
+                "",
+                @readable.by(@readable.fol, [@readable.Prev, @readable.Label("H12def")]),
+              ),
+              @readable.have(
+                "\n      A,B same_side l",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("l_line"),
+                    @readable.Prev,
+                    @readable.Label("notAl"),
+                    @readable.Label("notBl"),
+                    @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.by(@readable.fol, [@readable.Prev, @readable.Label("Ansim_lB")]),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(H1 = {}) /\\  ~(H2 = {}) /\\  H1 SUBSET complement l /\\  H2 SUBSET complement l /\\ \n    Convex H1 /\\  Convex H2",
+          "H12convex_nonempty",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("notAl"),
+              @readable.Label("notBl"),
+              @readable.Label("H12sets"),
+              @readable.Thm("HalfPlaneConvexNonempty", () => halfplaneconvexnonempty()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    H1 UNION H2  SUBSET  complement l",
+          "H12sub",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H12convex_nonempty"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall C. C IN complement l  ==>  C IN H1 UNION H2",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall C, compl"),
+              @readable.have(
+                "\n      C NOTIN l",
+                "notCl",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("IN_PlaneComplement", () => in_planecomplement()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      C,A same_side l  \\/  C,B same_side l",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("l_line"),
+                    @readable.Label("notAl"),
+                    @readable.Label("notBl"),
+                    @readable.Prev,
+                    @readable.Label("Ansim_lB"),
+                    @readable.Thm("AtMost2Sides", () => atmost2sides()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("notCl"),
+                  @readable.Prev,
+                  @readable.Label("H12def"),
+                  @readable.Thm("IN_UNION", () => @sets.in_union()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    complement l  SUBSET  H1 UNION H2",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("SUBSET", () => @sets.subset())],
+          ),
+        ),
+        @readable.have(
+          "\n    complement l  =  H1 UNION H2",
+          "compl_H1unionH2",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H12sub"),
+              @readable.Prev,
+              @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall P Q. P IN H1 /\\  Q IN H2  ==>  ~(P,Q same_side l)",
+          "opp_sides",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall P Q, both"),
+              @readable.have(
+                "\n      P NOTIN l  /\\   P,A same_side l  /\\    Q NOTIN l  /\\   Q,B same_side l",
+                "PH1_QH2",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H12def"),
+                    @readable.Thm("IN", () => @sets.in_()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("l_line"),
+                  @readable.Prev,
+                  @readable.Label("notAl"),
+                  @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+                  @readable.Label("notBl"),
+                  @readable.Label("Ansim_lB"),
+                  @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H12disjoint"),
+            @readable.Label("H12convex_nonempty"),
+            @readable.Label("compl_H1unionH2"),
+            @readable.Label("opp_sides"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3199,57 +6031,43 @@ pub fn planeseparation() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_93`
-pub fn exec_phrase_93(x95 : Unit) -> Unit raise {
-  let _ = x95
-  {
-    @readable.thm_ref().val = halfplaneconvexnonempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((HalfPlaneConvexNonempty): thm);;
-fn step_215() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((HalfPlaneConvexNonempty): thm);;", exec_phrase_93)
-}
-
-///|
-/// `exec_phrase_94`
-pub fn exec_phrase_94(x96 : Unit) -> Unit raise {
-  let _ = x96
-  {
-    @readable.thm_ref().val = atmost2sides()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AtMost2Sides): thm);;
-fn step_216() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AtMost2Sides): thm);;", exec_phrase_94)
-}
-
-///|
-/// `exec_phrase_95`
-pub fn exec_phrase_95(x97 : Unit) -> Unit raise {
-  let _ = x97
-  {
-    @readable.thm_ref().val = @sets.in_()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN): thm);;
-fn step_217() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN): thm);;", exec_phrase_95)
-}
-
-///|
 /// TetralateralSymmetry
 fn step_218() -> Unit raise {
-  tetralateralsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D.  Tetralateral A B C D\n    ⇒  Tetralateral B C D A ∧ Tetralateral A B D C\n\n  proof\n    intro_TAC ∀A B C D, H1;\n    ¬Collinear A B D ∧ ¬Collinear B D C ∧ ¬Collinear D C A ∧ ¬Collinear C A B      [TetraABCD] by fol H1 Tetralateral_DEF CollinearSymmetry;\n    simplify H1 - Tetralateral_DEF;\n    fol H1 Tetralateral_DEF;\n  qed;\n")))
+  tetralateralsymmetry_c.set(@readable.prove(
+    "\n  forall A B C D.  Tetralateral A B C D\n    ==>  Tetralateral B C D A /\\  Tetralateral A B D C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1"),
+        @readable.have(
+          "\n    ~Collinear A B D /\\  ~Collinear B D C /\\  ~Collinear D C A /\\  ~Collinear C A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3262,25 +6080,69 @@ pub fn tetralateralsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_96`
-pub fn exec_phrase_96(x98 : Unit) -> Unit raise {
-  let _ = x98
-  {
-    @readable.thm_ref().val = tetralateral_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Tetralateral_DEF): thm);;
-fn step_219() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Tetralateral_DEF): thm);;", exec_phrase_96)
-}
-
-///|
 /// EasyEmptyIntersectionsTetralateralHelp
 fn step_220() -> Unit raise {
-  easyemptyintersectionstetralateralhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Tetralateral A B C D  ⇒  Open (A, B) ∩ Open (B, C) = ∅\n\n  proof\n    intro_TAC ∀A B C D, H1;\n    ∀X. X ∈ Open (B, C)  ⇒  X ∉ Open (A, B)     []\n    proof\n      intro_TAC ∀X, BXC;\n      ¬Collinear A B C ∧ Collinear B X C ∧ ¬(X = B)     [] by fol H1 Tetralateral_DEF - B1';\n      ¬Collinear A X B     [] by fol - CollinearSymmetry B1' NoncollinearityExtendsToLine;\n      fol - B1' ∉;\n    qed;\n    fol - DisjointOneNotOther;\n  qed;\n")))
+  easyemptyintersectionstetralateralhelp_c.set(@readable.prove(
+    "\n  forall A B C D. Tetralateral A B C D  ==>  Open (A, B) INTER Open (B, C) = {}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1"),
+        @readable.have(
+          "\n    forall X. X IN Open (B, C)  ==>  X NOTIN Open (A, B)",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall X, BXC"),
+              @readable.have(
+                "\n      ~Collinear A B C /\\  Collinear B X C /\\  ~(X = B)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+                    @readable.Prev,
+                    @readable.Thm("B1'", () => b1_p()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~Collinear A X B",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm(
+                      "NoncollinearityExtendsToLine",
+                      () => noncollinearityextendstoline(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Thm("B1'", () => b1_p()),
+                  @readable.Thm("NOTIN", () => notin()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("DisjointOneNotOther", () => disjointonenotother()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3295,7 +6157,36 @@ pub fn easyemptyintersectionstetralateralhelp() -> @kernel.Thm {
 ///|
 /// EasyEmptyIntersectionsTetralateral
 fn step_221() -> Unit raise {
-  easyemptyintersectionstetralateral_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Tetralateral A B C D\n   ⇒  Open (A, B) ∩ Open (B, C) = ∅  ∧  Open (B, C) ∩ Open (C, D) = ∅  ∧\n       Open (C, D) ∩ Open (D, A) = ∅  ∧  Open (D, A) ∩ Open (A, B) = ∅\n\n  proof\n    intro_TAC ∀A B C D, H1;\n    Tetralateral B C D A  ∧ Tetralateral C D A B  ∧ Tetralateral D A B C     [] by fol H1 TetralateralSymmetry;\n    fol H1 - EasyEmptyIntersectionsTetralateralHelp;\n  qed;\n")))
+  easyemptyintersectionstetralateral_c.set(@readable.prove(
+    "\n  forall A B C D. Tetralateral A B C D\n   ==>  Open (A, B) INTER Open (B, C) = {}  /\\   Open (B, C) INTER Open (C, D) = {}  /\\ \n       Open (C, D) INTER Open (D, A) = {}  /\\   Open (D, A) INTER Open (A, B) = {}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1"),
+        @readable.have(
+          "\n    Tetralateral B C D A  /\\  Tetralateral C D A B  /\\  Tetralateral D A B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("TetralateralSymmetry", () => tetralateralsymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Thm(
+              "EasyEmptyIntersectionsTetralateralHelp",
+              () => easyemptyintersectionstetralateralhelp(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3308,41 +6199,111 @@ pub fn easyemptyintersectionstetralateral() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_97`
-pub fn exec_phrase_97(x99 : Unit) -> Unit raise {
-  let _ = x99
-  {
-    @readable.thm_ref().val = tetralateralsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TetralateralSymmetry): thm);;
-fn step_222() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TetralateralSymmetry): thm);;", exec_phrase_97)
-}
-
-///|
-/// `exec_phrase_98`
-pub fn exec_phrase_98(x100 : Unit) -> Unit raise {
-  let _ = x100
-  {
-    @readable.thm_ref().val = easyemptyintersectionstetralateralhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EasyEmptyIntersectionsTetralateralHelp): thm);;
-fn step_223() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EasyEmptyIntersectionsTetralateralHelp): thm);;", exec_phrase_98)
-}
-
-///|
 /// SegmentSameSideOppositeLine
 fn step_224() -> Unit raise {
-  segmentsamesideoppositeline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D a c.  Quadrilateral A B C D  ⇒\n    Line a ∧ A ∈ a ∧ B ∈ a  ⇒  Line c ∧ C ∈ c ∧ D ∈ c\n    ⇒  A,B same_side c  ∨  C,D same_side a\n\n  proof\n    intro_TAC ∀A B C D a c, H1, a_line, c_line;\n    assume ¬(C,D same_side a)     [CDnsim_a] by fol;\n    consider G such that\n    G ∈ a ∧ G ∈ Open (C, D)     [CGD] by fol - a_line SameSide_DEF;\n    G ∈ c ∧ Collinear G B A     [Gc] by fol c_line - BetweenLinear a_line Collinear_DEF;\n    ¬Collinear B C D  ∧  ¬Collinear C D A  ∧  Open (A, B) ∩ Open (C, D) = ∅     [quadABCD] by fol H1 Quadrilateral_DEF Tetralateral_DEF;\n    A ∉ c ∧ B ∉ c ∧ ¬(A = G) ∧ ¬(B = G)     [Distinct] by fol - c_line Collinear_DEF ∉ Gc;\n    G ∉ Open (A, B)     [] by fol quadABCD CGD DisjointOneNotOther;\n    A ∈ ray G B ━ {G}      [] by fol Distinct Gc - IN_Ray IN_DIFF IN_SING;\n    fol c_line Gc Distinct - RaySameSide;\n  qed;\n")))
+  segmentsamesideoppositeline_c.set(@readable.prove(
+    "\n  forall A B C D a c.  Quadrilateral A B C D  ==>\n    Line a /\\  A IN a /\\  B IN a  ==>  Line c /\\  C IN c /\\  D IN c\n    ==>  A,B same_side c  \\/  C,D same_side a",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D a c, H1, a_line, c_line"),
+        @readable.assuming(
+          "~(C,D same_side a)",
+          "CDnsim_a",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.consider(
+          "G",
+          "G IN a /\\  G IN Open (C, D)    ",
+          "CGD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("a_line"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN c /\\  Collinear G B A",
+          "Gc",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("c_line"),
+              @readable.Prev,
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Label("a_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B C D  /\\   ~Collinear C D A  /\\   Open (A, B) INTER Open (C, D) = {}",
+          "quadABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN c /\\  B NOTIN c /\\  ~(A = G) /\\  ~(B = G)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("c_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("Gc"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN Open (A, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("quadABCD"),
+              @readable.Label("CGD"),
+              @readable.Thm("DisjointOneNotOther", () => disjointonenotother()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN ray G B DIFF {G}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("Gc"),
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("c_line"),
+            @readable.Label("Gc"),
+            @readable.Label("Distinct"),
+            @readable.Prev,
+            @readable.Thm("RaySameSide", () => raysameside()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3355,25 +6316,107 @@ pub fn segmentsamesideoppositeline() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_99`
-pub fn exec_phrase_99(x101 : Unit) -> Unit raise {
-  let _ = x101
-  {
-    @readable.thm_ref().val = quadrilateral_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Quadrilateral_DEF): thm);;
-fn step_225() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Quadrilateral_DEF): thm);;", exec_phrase_99)
-}
-
-///|
 /// ConvexImpliesQuad
 fn step_226() -> Unit raise {
-  conveximpliesquad_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Tetralateral A B C D  ⇒\n    C ∈ int_angle D A B  ∧  D ∈ int_angle A B C\n    ⇒  Quadrilateral A B C D\n\n  proof\n    intro_TAC ∀A B C D, H1, H2;\n    ¬(A = B) ∧ ¬(B = C) ∧ ¬(A = D)     [TetraABCD] by fol H1 Tetralateral_DEF;\n    consider a such that\n    Line a ∧ A ∈ a ∧ B ∈ a     [a_line] by fol TetraABCD I1;\n    consider b such that\n    Line b ∧ B ∈ b ∧ C ∈ b     [b_line] by fol TetraABCD I1;\n    consider d such that\n    Line d ∧ D ∈ d ∧ A ∈ d     [d_line] by fol TetraABCD I1;\n    Open (B, C) ⊂ b  ∧  Open (A, B) ⊂ a     [BCbABa] by fol b_line a_line BetweenLinear SUBSET;\n    D,A same_side b  ∧  C,D same_side a     [] by fol H2 a_line b_line d_line InteriorUse;\n    b ∩ Open (D, A) = ∅  ∧  a ∩ Open (C, D) = ∅     [] by fol - b_line SameSide_DEF IN_INTER MEMBER_NOT_EMPTY;\n    fol H1 BCbABa - INTER_TENSOR SUBSET_REFL SUBSET_EMPTY Quadrilateral_DEF;\n  qed;\n")))
+  conveximpliesquad_c.set(@readable.prove(
+    "\n  forall A B C D. Tetralateral A B C D  ==>\n    C IN int_angle D A B  /\\   D IN int_angle A B C\n    ==>  Quadrilateral A B C D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1, H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(B = C) /\\  ~(A = D)",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a",
+          "Line a /\\  A IN a /\\  B IN a    ",
+          "a_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "b",
+          "Line b /\\  B IN b /\\  C IN b    ",
+          "b_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "d",
+          "Line d /\\  D IN d /\\  A IN d    ",
+          "d_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    Open (B, C) SUBSET b  /\\   Open (A, B) SUBSET a",
+          "BCbABa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("b_line"),
+              @readable.Label("a_line"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D,A same_side b  /\\   C,D same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("a_line"),
+              @readable.Label("b_line"),
+              @readable.Label("d_line"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    b INTER Open (D, A) = {}  /\\   a INTER Open (C, D) = {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("b_line"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("BCbABa"),
+            @readable.Prev,
+            @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+            @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+            @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+            @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3388,7 +6431,186 @@ pub fn conveximpliesquad() -> @kernel.Thm {
 ///|
 /// DiagonalsIntersectImpliesConvexQuad
 fn step_227() -> Unit raise {
-  diagonalsintersectimpliesconvexquad_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D G. ¬Collinear B C D  ⇒\n    G ∈ Open (A, C)  ∧  G ∈ Open (B, D)\n    ⇒  ConvexQuadrilateral A B C D\n\n  proof\n    intro_TAC ∀A B C D G, BCDncol, DiagInt;\n    ¬(B = C) ∧ ¬(B = D) ∧ ¬(C = D) ∧ ¬(C = A) ∧ ¬(A = G) ∧ ¬(D = G) ∧ ¬(B = G)     [Distinct] by fol BCDncol NonCollinearImpliesDistinct DiagInt B1';\n    Collinear A G C ∧ Collinear B G D     [Gcols] by fol DiagInt B1';\n    ¬Collinear C D G ∧ ¬Collinear B C G     [Gncols] by fol BCDncol CollinearSymmetry Distinct Gcols  NoncollinearityExtendsToLine;\n    ¬Collinear C D A     [CDAncol] by fol - CollinearSymmetry Distinct Gcols  NoncollinearityExtendsToLine;\n    ¬Collinear A B C ∧ ¬Collinear D A G     [ABCncol] by fol Gncols - CollinearSymmetry Distinct Gcols NoncollinearityExtendsToLine;\n    ¬Collinear D A B     [DABncol] by fol - CollinearSymmetry Distinct Gcols NoncollinearityExtendsToLine;\n    ¬(A = B) ∧ ¬(A = D)     [] by fol DABncol NonCollinearImpliesDistinct;\n    Tetralateral A B C D     [TetraABCD] by fol Distinct - BCDncol CDAncol DABncol ABCncol Tetralateral_DEF;\n    A ∈ ray C G ━ {C}  ∧  B ∈ ray D G ━ {D}  ∧  C ∈ ray A G ━ {A}  ∧  D ∈ ray B G ━ {B}     [ArCG] by fol DiagInt B1' IntervalRayEZ;\n    G ∈ int_angle B C D ∧ G ∈ int_angle C D A ∧ G ∈ int_angle D A B ∧ G ∈ int_angle A B C     [] by fol BCDncol CDAncol DABncol ABCncol DiagInt B1' ConverseCrossbar;\n    A ∈ int_angle B C D ∧ B ∈ int_angle C D A ∧ C ∈ int_angle D A B ∧ D ∈ int_angle A B C     [] by fol - ArCG WholeRayInterior;\n    fol TetraABCD - ConvexImpliesQuad ConvexQuad_DEF;\n  qed;\n")))
+  diagonalsintersectimpliesconvexquad_c.set(@readable.prove(
+    "\n  forall A B C D G. ~Collinear B C D  ==>\n    G IN Open (A, C)  /\\   G IN Open (B, D)\n    ==>  ConvexQuadrilateral A B C D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D G, BCDncol, DiagInt"),
+        @readable.have(
+          "\n    ~(B = C) /\\  ~(B = D) /\\  ~(C = D) /\\  ~(C = A) /\\  ~(A = G) /\\  ~(D = G) /\\  ~(B = G)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BCDncol"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Label("DiagInt"),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear A G C /\\  Collinear B G D",
+          "Gcols",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("DiagInt"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C D G /\\  ~Collinear B C G",
+          "Gncols",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BCDncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("Distinct"),
+              @readable.Label("Gcols"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C D A",
+          "CDAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("Distinct"),
+              @readable.Label("Gcols"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A B C /\\  ~Collinear D A G",
+          "ABCncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Gncols"),
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("Distinct"),
+              @readable.Label("Gcols"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D A B",
+          "DABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("Distinct"),
+              @readable.Label("Gcols"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = D)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DABncol"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Tetralateral A B C D",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Label("BCDncol"),
+              @readable.Label("CDAncol"),
+              @readable.Label("DABncol"),
+              @readable.Label("ABCncol"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN ray C G DIFF {C}  /\\   B IN ray D G DIFF {D}  /\\   C IN ray A G DIFF {A}  /\\   D IN ray B G DIFF {B}",
+          "ArCG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DiagInt"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN int_angle B C D /\\  G IN int_angle C D A /\\  G IN int_angle D A B /\\  G IN int_angle A B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BCDncol"),
+              @readable.Label("CDAncol"),
+              @readable.Label("DABncol"),
+              @readable.Label("ABCncol"),
+              @readable.Label("DiagInt"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN int_angle B C D /\\  B IN int_angle C D A /\\  C IN int_angle D A B /\\  D IN int_angle A B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("ArCG"),
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("TetraABCD"),
+            @readable.Prev,
+            @readable.Thm("ConvexImpliesQuad", () => conveximpliesquad()),
+            @readable.Thm("ConvexQuad_DEF", () => convexquad_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3401,41 +6623,126 @@ pub fn diagonalsintersectimpliesconvexquad() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_100`
-pub fn exec_phrase_100(x102 : Unit) -> Unit raise {
-  let _ = x102
-  {
-    @readable.thm_ref().val = conveximpliesquad()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConvexImpliesQuad): thm);;
-fn step_228() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConvexImpliesQuad): thm);;", exec_phrase_100)
-}
-
-///|
-/// `exec_phrase_101`
-pub fn exec_phrase_101(x103 : Unit) -> Unit raise {
-  let _ = x103
-  {
-    @readable.thm_ref().val = convexquad_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConvexQuad_DEF): thm);;
-fn step_229() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConvexQuad_DEF): thm);;", exec_phrase_101)
-}
-
-///|
 /// DoubleNotSimImpliesDiagonalsIntersect
 fn step_230() -> Unit raise {
-  doublenotsimimpliesdiagonalsintersect_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D l m.  Line l ∧ A ∈ l ∧ C ∈ l  ⇒  Line m ∧ B ∈ m ∧ D ∈ m  ⇒\n    Tetralateral A B C D  ⇒  ¬(B,D same_side l)  ⇒  ¬(A,C same_side m)\n    ⇒  (∃G. G ∈ Open (A, C) ∩ Open (B, D)) ∧ ConvexQuadrilateral A B C D\n\n  proof\n    intro_TAC ∀A B C D l m, l_line, m_line, H1, H2, H3;\n    ¬Collinear A B C ∧ ¬Collinear B C D ∧ ¬Collinear C D A ∧ ¬Collinear D A B     [TetraABCD] by fol H1 Tetralateral_DEF;\n    consider G such that\n    G ∈ Open (A, C) ∧ G ∈ m     [AGC] by fol H3 m_line SameSide_DEF;\n    G ∈ l     [Gl] by fol l_line - BetweenLinear;\n    A ∉ m ∧ B ∉ l ∧ D ∉ l     [] by fol TetraABCD m_line l_line Collinear_DEF ∉;\n    ¬(l = m) ∧ B ∈ m ━ {G} ∧ D ∈ m ━ {G}     [BDm_G] by fol - l_line ∉ m_line Gl IN_DIFF IN_SING;\n    l ∩ m = {G}     [] by fol l_line m_line - Gl AGC I1Uniqueness;\n    G ∈ Open (B, D)     [] by fol l_line m_line - BDm_G H2 EquivIntersection ∉;\n    fol AGC - IN_INTER TetraABCD DiagonalsIntersectImpliesConvexQuad;\n  qed;\n")))
+  doublenotsimimpliesdiagonalsintersect_c.set(@readable.prove(
+    "\n  forall A B C D l m.  Line l /\\  A IN l /\\  C IN l  ==>  Line m /\\  B IN m /\\  D IN m  ==>\n    Tetralateral A B C D  ==>  ~(B,D same_side l)  ==>  ~(A,C same_side m)\n    ==>  (?G. G IN Open (A, C) INTER Open (B, D)) /\\  ConvexQuadrilateral A B C D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D l m, l_line, m_line, H1, H2, H3"),
+        @readable.have(
+          "\n    ~Collinear A B C /\\  ~Collinear B C D /\\  ~Collinear C D A /\\  ~Collinear D A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN Open (A, C) /\\  G IN m    ",
+          "AGC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Label("m_line"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN l",
+          "Gl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Prev,
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN m /\\  B NOTIN l /\\  D NOTIN l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Label("m_line"),
+              @readable.Label("l_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(l = m) /\\  B IN m DIFF {G} /\\  D IN m DIFF {G}",
+          "BDm_G",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("m_line"),
+              @readable.Label("Gl"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    l INTER m = {G}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Label("Gl"),
+              @readable.Label("AGC"),
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN Open (B, D)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Label("BDm_G"),
+              @readable.Label("H2"),
+              @readable.Thm("EquivIntersection", () => equivintersection()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("AGC"),
+            @readable.Prev,
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Label("TetraABCD"),
+            @readable.Thm(
+              "DiagonalsIntersectImpliesConvexQuad",
+              () => diagonalsintersectimpliesconvexquad(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3448,25 +6755,87 @@ pub fn doublenotsimimpliesdiagonalsintersect() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_102`
-pub fn exec_phrase_102(x104 : Unit) -> Unit raise {
-  let _ = x104
-  {
-    @readable.thm_ref().val = diagonalsintersectimpliesconvexquad()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DiagonalsIntersectImpliesConvexQuad): thm);;
-fn step_231() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DiagonalsIntersectImpliesConvexQuad): thm);;", exec_phrase_102)
-}
-
-///|
 /// ConvexQuadImpliesDiagonalsIntersect
 fn step_232() -> Unit raise {
-  convexquadimpliesdiagonalsintersect_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D l m.  Line l ∧ A ∈ l ∧ C ∈ l  ⇒  Line m ∧ B ∈ m ∧ D ∈ m  ⇒\n    ConvexQuadrilateral A B C D\n    ⇒  ¬(B,D same_side l) ∧ ¬(A,C same_side m) ∧\n       (∃G. G ∈ Open (A, C) ∩ Open (B, D)) ∧ ¬Quadrilateral A B D C\n\n  proof\n    intro_TAC ∀A B C D l m, l_line, m_line, ConvQuadABCD;\n    Tetralateral A B C D ∧ A ∈ int_angle B C D ∧ D ∈ int_angle A B C     [convquadABCD] by fol ConvQuadABCD ConvexQuad_DEF Quadrilateral_DEF;\n    ¬(B,D same_side l)  ∧  ¬(A,C same_side m)     [opp_sides] by fol convquadABCD l_line m_line InteriorOpposite;\n    consider G such that\n    G ∈ Open (A, C) ∩ Open (B, D)     [Gexists] by fol l_line m_line convquadABCD opp_sides DoubleNotSimImpliesDiagonalsIntersect;\n    ¬(Open (B, D) ∩ Open (C, A) = ∅)     [] by fol - IN_INTER B1' MEMBER_NOT_EMPTY;\n    ¬Quadrilateral A B D C     [] by fol - Quadrilateral_DEF;\n    fol opp_sides Gexists -;\n  qed;\n")))
+  convexquadimpliesdiagonalsintersect_c.set(@readable.prove(
+    "\n  forall A B C D l m.  Line l /\\  A IN l /\\  C IN l  ==>  Line m /\\  B IN m /\\  D IN m  ==>\n    ConvexQuadrilateral A B C D\n    ==>  ~(B,D same_side l) /\\  ~(A,C same_side m) /\\ \n       (?G. G IN Open (A, C) INTER Open (B, D)) /\\  ~Quadrilateral A B D C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D l m, l_line, m_line, ConvQuadABCD"),
+        @readable.have(
+          "\n    Tetralateral A B C D /\\  A IN int_angle B C D /\\  D IN int_angle A B C",
+          "convquadABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ConvQuadABCD"),
+              @readable.Thm("ConvexQuad_DEF", () => convexquad_def()),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B,D same_side l)  /\\   ~(A,C same_side m)",
+          "opp_sides",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("convquadABCD"),
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Thm("InteriorOpposite", () => interioropposite()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN Open (A, C) INTER Open (B, D)    ",
+          "Gexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Label("convquadABCD"),
+              @readable.Label("opp_sides"),
+              @readable.Thm(
+                "DoubleNotSimImpliesDiagonalsIntersect",
+                () => doublenotsimimpliesdiagonalsintersect(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(Open (B, D) INTER Open (C, A) = {})",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Quadrilateral A B D C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("opp_sides"), @readable.Label("Gexists"), @readable.Prev],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3479,41 +6848,138 @@ pub fn convexquadimpliesdiagonalsintersect() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_103`
-pub fn exec_phrase_103(x105 : Unit) -> Unit raise {
-  let _ = x105
-  {
-    @readable.thm_ref().val = interioropposite()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorOpposite): thm);;
-fn step_233() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorOpposite): thm);;", exec_phrase_103)
-}
-
-///|
-/// `exec_phrase_104`
-pub fn exec_phrase_104(x106 : Unit) -> Unit raise {
-  let _ = x106
-  {
-    @readable.thm_ref().val = doublenotsimimpliesdiagonalsintersect()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DoubleNotSimImpliesDiagonalsIntersect): thm);;
-fn step_234() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DoubleNotSimImpliesDiagonalsIntersect): thm);;", exec_phrase_104)
-}
-
-///|
 /// FourChoicesTetralateralHelp
 fn step_235() -> Unit raise {
-  fourchoicestetralateralhelp_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Tetralateral A B C D  ∧  C ∈ int_angle D A B\n    ⇒  ConvexQuadrilateral A B C D ∨ C ∈ int_triangle D A B\n\n  proof\n    intro_TAC ∀A B C D, H1 CintDAB;\n    ¬(A = B) ∧ ¬(D = A) ∧ ¬(A = C) ∧ ¬(B = D) ∧ ¬Collinear A B C ∧ ¬Collinear B C D ∧ ¬Collinear C D A ∧ ¬Collinear D A B     [TetraABCD] by fol H1 Tetralateral_DEF;\n    consider a d such that\n    Line a ∧ A ∈ a ∧ B ∈ a  ∧\n    Line d ∧ D ∈ d ∧ A ∈ d     [ad_line] by fol TetraABCD I1;\n    consider l m such that\n    Line l ∧ A ∈ l ∧ C ∈ l  ∧\n    Line m ∧ B ∈ m ∧ D ∈ m     [lm_line] by fol TetraABCD I1;\n    C ∉ a ∧ C ∉ d ∧ B ∉ l ∧ D ∉ l ∧ A ∉ m ∧ C ∉ m ∧ ¬Collinear A B D ∧ ¬Collinear B D A          [tetra'] by fol TetraABCD ad_line lm_line Collinear_DEF ∉ CollinearSymmetry;\n    ¬(B,D same_side l)     [Bsim_lD] by fol CintDAB lm_line InteriorOpposite - SameSideSymmetric;\n    assume A,C same_side m     [same] by fol lm_line H1 Bsim_lD DoubleNotSimImpliesDiagonalsIntersect;\n    C,A same_side m     [Csim_mA] by fol lm_line - tetra' SameSideSymmetric;\n    C,B same_side d  ∧  C,D same_side a     [] by fol ad_line CintDAB InteriorUse;\n    C ∈ int_angle A B D  ∧  C ∈ int_angle B D A     [] by fol tetra' ad_line lm_line Csim_mA - IN_InteriorAngle;\n    fol CintDAB - IN_InteriorTriangle;\n  qed;\n")))
+  fourchoicestetralateralhelp_v1_c.set(@readable.prove(
+    "\n  forall A B C D. Tetralateral A B C D  /\\   C IN int_angle D A B\n    ==>  ConvexQuadrilateral A B C D \\/ C IN int_triangle D A B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1 CintDAB"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(D = A) /\\  ~(A = C) /\\  ~(B = D) /\\  ~Collinear A B C /\\  ~Collinear B C D /\\  ~Collinear C D A /\\  ~Collinear D A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a d",
+          "Line a /\\  A IN a /\\  B IN a  /\\ \n    Line d /\\  D IN d /\\  A IN d    ",
+          "ad_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "l m",
+          "Line l /\\  A IN l /\\  C IN l  /\\ \n    Line m /\\  B IN m /\\  D IN m    ",
+          "lm_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    C NOTIN a /\\  C NOTIN d /\\  B NOTIN l /\\  D NOTIN l /\\  A NOTIN m /\\  C NOTIN m /\\  ~Collinear A B D /\\  ~Collinear B D A",
+          "tetra'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Label("ad_line"),
+              @readable.Label("lm_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B,D same_side l)",
+          "Bsim_lD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CintDAB"),
+              @readable.Label("lm_line"),
+              @readable.Thm("InteriorOpposite", () => interioropposite()),
+              @readable.Prev,
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "A,C same_side m",
+          "same",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("lm_line"),
+              @readable.Label("H1"),
+              @readable.Label("Bsim_lD"),
+              @readable.Thm(
+                "DoubleNotSimImpliesDiagonalsIntersect",
+                () => doublenotsimimpliesdiagonalsintersect(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,A same_side m",
+          "Csim_mA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("lm_line"),
+              @readable.Prev,
+              @readable.Label("tetra'"),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,B same_side d  /\\   C,D same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ad_line"),
+              @readable.Label("CintDAB"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN int_angle A B D  /\\   C IN int_angle B D A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tetra'"),
+              @readable.Label("ad_line"),
+              @readable.Label("lm_line"),
+              @readable.Label("Csim_mA"),
+              @readable.Prev,
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("CintDAB"),
+            @readable.Prev,
+            @readable.Thm("IN_InteriorTriangle", () => in_interiortriangle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3526,25 +6992,138 @@ pub fn fourchoicestetralateralhelp_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_105`
-pub fn exec_phrase_105(x107 : Unit) -> Unit raise {
-  let _ = x107
-  {
-    @readable.thm_ref().val = in_interiortriangle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_InteriorTriangle): thm);;
-fn step_236() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_InteriorTriangle): thm);;", exec_phrase_105)
-}
-
-///|
 /// FourChoicesTetralateralHelp
 fn step_237() -> Unit raise {
-  fourchoicestetralateralhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Tetralateral A B C D  ∧  C ∈ int_angle D A B\n    ⇒  ConvexQuadrilateral A B C D ∨ C ∈ int_triangle D A B\n\n  proof\n    intro_TAC ∀A B C D, H1 CintDAB;\n    ¬(A = B) ∧ ¬(D = A) ∧ ¬(A = C) ∧ ¬(B = D) ∧ ¬Collinear A B C ∧ ¬Collinear B C D ∧ ¬Collinear C D A ∧ ¬Collinear D A B     [TetraABCD] by fol H1 Tetralateral_DEF;\n    consider a d such that\n    Line a ∧ A ∈ a ∧ B ∈ a  ∧\n    Line d ∧ D ∈ d ∧ A ∈ d     [ad_line] by fol TetraABCD I1;\n    consider l m such that\n    Line l ∧ A ∈ l ∧ C ∈ l  ∧\n    Line m ∧ B ∈ m ∧ D ∈ m     [lm_line] by fol TetraABCD I1;\n    C ∉ a ∧ C ∉ d ∧ B ∉ l ∧ D ∉ l ∧ A ∉ m ∧ C ∉ m ∧ ¬Collinear A B D ∧ ¬Collinear B D A          [tetra'] by fol TetraABCD ad_line lm_line Collinear_DEF ∉ CollinearSymmetry;\n    ¬(B,D same_side l)     [Bsim_lD] by fol CintDAB lm_line InteriorOpposite - SameSideSymmetric;\n    assume A,C same_side m     [same] by fol lm_line H1 Bsim_lD  DoubleNotSimImpliesDiagonalsIntersect;\n    C,A same_side m     [Csim_mA] by fol lm_line - tetra' SameSideSymmetric;\n    C,B same_side d  ∧  C,D same_side a     [] by fol ad_line CintDAB InteriorUse;\n    C ∈ int_angle A B D  ∧  C ∈ int_angle B D A     [] by fol tetra' ad_line lm_line Csim_mA - IN_InteriorAngle;\n    fol CintDAB - IN_InteriorTriangle;\n  qed;\n")))
+  fourchoicestetralateralhelp_c.set(@readable.prove(
+    "\n  forall A B C D. Tetralateral A B C D  /\\   C IN int_angle D A B\n    ==>  ConvexQuadrilateral A B C D \\/ C IN int_triangle D A B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1 CintDAB"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(D = A) /\\  ~(A = C) /\\  ~(B = D) /\\  ~Collinear A B C /\\  ~Collinear B C D /\\  ~Collinear C D A /\\  ~Collinear D A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a d",
+          "Line a /\\  A IN a /\\  B IN a  /\\ \n    Line d /\\  D IN d /\\  A IN d    ",
+          "ad_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "l m",
+          "Line l /\\  A IN l /\\  C IN l  /\\ \n    Line m /\\  B IN m /\\  D IN m    ",
+          "lm_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    C NOTIN a /\\  C NOTIN d /\\  B NOTIN l /\\  D NOTIN l /\\  A NOTIN m /\\  C NOTIN m /\\  ~Collinear A B D /\\  ~Collinear B D A",
+          "tetra'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Label("ad_line"),
+              @readable.Label("lm_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B,D same_side l)",
+          "Bsim_lD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CintDAB"),
+              @readable.Label("lm_line"),
+              @readable.Thm("InteriorOpposite", () => interioropposite()),
+              @readable.Prev,
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "A,C same_side m",
+          "same",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("lm_line"),
+              @readable.Label("H1"),
+              @readable.Label("Bsim_lD"),
+              @readable.Thm(
+                "DoubleNotSimImpliesDiagonalsIntersect",
+                () => doublenotsimimpliesdiagonalsintersect(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,A same_side m",
+          "Csim_mA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("lm_line"),
+              @readable.Prev,
+              @readable.Label("tetra'"),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,B same_side d  /\\   C,D same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ad_line"),
+              @readable.Label("CintDAB"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN int_angle A B D  /\\   C IN int_angle B D A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tetra'"),
+              @readable.Label("ad_line"),
+              @readable.Label("lm_line"),
+              @readable.Label("Csim_mA"),
+              @readable.Prev,
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("CintDAB"),
+            @readable.Prev,
+            @readable.Thm("IN_InteriorTriangle", () => in_interiortriangle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3559,7 +7138,13 @@ pub fn fourchoicestetralateralhelp() -> @kernel.Thm {
 ///|
 /// InteriorTriangleSymmetry
 fn step_238() -> Unit raise {
-  interiortrianglesymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C P. P ∈ int_triangle A B C  ⇒ P ∈ int_triangle B C A\n  by fol IN_InteriorTriangle")))
+  interiortrianglesymmetry_c.set(@readable.prove(
+    "\n  forall A B C P. P IN int_triangle A B C  ==> P IN int_triangle B C A",
+    @readable.by(
+      @readable.fol,
+      [@readable.Thm("IN_InteriorTriangle", () => in_interiortriangle())],
+    ),
+  ))
 }
 
 ///|
@@ -3574,7 +7159,112 @@ pub fn interiortrianglesymmetry() -> @kernel.Thm {
 ///|
 /// FourChoicesTetralateral
 fn step_239() -> Unit raise {
-  fourchoicestetralateral_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D a. Tetralateral A B C D  ⇒\n    Line a ∧ A ∈ a ∧ B ∈ a  ⇒  C,D same_side a\n    ⇒  ConvexQuadrilateral A B C D  ∨  ConvexQuadrilateral A B D C  ∨\n       D ∈ int_triangle A B C  ∨  C ∈ int_triangle D A B\n\n  proof\n    intro_TAC ∀A B C D a, H1, a_line, Csim_aD;\n     ¬(A = B) ∧ ¬Collinear A B C ∧ ¬Collinear C D A ∧ ¬Collinear D A B ∧ Tetralateral A B D C     [TetraABCD] by fol H1 Tetralateral_DEF TetralateralSymmetry;\n    ¬Collinear C A D ∧ C ∉ a ∧ D ∉ a     [notCDa] by fol TetraABCD CollinearSymmetry a_line Collinear_DEF ∉;\n    C ∈ int_angle D A B  ∨  D ∈ int_angle C A B     [] by fol TetraABCD a_line - Csim_aD AngleOrdering;\n    case_split CintDAB | DintCAB     by fol -;\n    suppose C ∈ int_angle D A B;\n      ConvexQuadrilateral A B C D  ∨  C ∈ int_triangle D A B     [] by fol H1 - FourChoicesTetralateralHelp;\n      fol -;\n    end;\n    suppose D ∈ int_angle C A B;\n      ConvexQuadrilateral A B D C  ∨  D ∈ int_triangle C A B     [] by fol TetraABCD - FourChoicesTetralateralHelp;\n      fol - InteriorTriangleSymmetry;\n    end;\n  qed;\n")))
+  fourchoicestetralateral_c.set(@readable.prove(
+    "\n  forall A B C D a. Tetralateral A B C D  ==>\n    Line a /\\  A IN a /\\  B IN a  ==>  C,D same_side a\n    ==>  ConvexQuadrilateral A B C D  \\/  ConvexQuadrilateral A B D C  \\/\n       D IN int_triangle A B C  \\/  C IN int_triangle D A B",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C D a, H1, a_line, Csim_aD"),
+        @readable.have(
+          "\n     ~(A = B) /\\  ~Collinear A B C /\\  ~Collinear C D A /\\  ~Collinear D A B /\\  Tetralateral A B D C",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+              @readable.Thm("TetralateralSymmetry", () => tetralateralsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C A D /\\  C NOTIN a /\\  D NOTIN a",
+          "notCDa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("a_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN int_angle D A B  \\/  D IN int_angle C A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Label("a_line"),
+              @readable.Prev,
+              @readable.Label("Csim_aD"),
+              @readable.Thm("AngleOrdering", () => angleordering()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "CintDAB | DintCAB    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["C IN int_angle D A B", "D IN int_angle C A B"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ConvexQuadrilateral A B C D  \\/  C IN int_triangle D A B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "FourChoicesTetralateralHelp",
+                        () => fourchoicestetralateralhelp(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(@readable.fol, [@readable.Prev]),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ConvexQuadrilateral A B D C  \\/  D IN int_triangle C A B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("TetraABCD"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "FourChoicesTetralateralHelp",
+                        () => fourchoicestetralateralhelp(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm(
+                      "InteriorTriangleSymmetry",
+                      () => interiortrianglesymmetry(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -3587,41 +7277,20 @@ pub fn fourchoicestetralateral() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_106`
-pub fn exec_phrase_106(x108 : Unit) -> Unit raise {
-  let _ = x108
-  {
-    @readable.thm_ref().val = fourchoicestetralateralhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FourChoicesTetralateralHelp): thm);;
-fn step_240() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FourChoicesTetralateralHelp): thm);;", exec_phrase_106)
-}
-
-///|
-/// `exec_phrase_107`
-pub fn exec_phrase_107(x109 : Unit) -> Unit raise {
-  let _ = x109
-  {
-    @readable.thm_ref().val = interiortrianglesymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorTriangleSymmetry): thm);;
-fn step_241() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorTriangleSymmetry): thm);;", exec_phrase_107)
-}
-
-///|
 /// QuadrilateralSymmetry
 fn step_242() -> Unit raise {
-  quadrilateralsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Quadrilateral A B C D  ⇒\n    Quadrilateral B C D A  ∧  Quadrilateral C D A B  ∧  Quadrilateral D A B C\n  by fol Quadrilateral_DEF INTER_COMM TetralateralSymmetry Quadrilateral_DEF")))
+  quadrilateralsymmetry_c.set(@readable.prove(
+    "\n  forall A B C D. Quadrilateral A B C D  ==>\n    Quadrilateral B C D A  /\\   Quadrilateral C D A B  /\\   Quadrilateral D A B C",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+        @readable.Thm("TetralateralSymmetry", () => tetralateralsymmetry()),
+        @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3634,25 +7303,160 @@ pub fn quadrilateralsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_108`
-pub fn exec_phrase_108(x110 : Unit) -> Unit raise {
-  let _ = x110
-  {
-    @readable.thm_ref().val = @sets.inter_comm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_COMM): thm);;
-fn step_243() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_COMM): thm);;", exec_phrase_108)
-}
-
-///|
 /// FiveChoicesQuadrilateral
 fn step_244() -> Unit raise {
-  fivechoicesquadrilateral_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D l m.  Quadrilateral A B C D  ⇒\n    Line l ∧ A ∈ l ∧ C ∈ l  ∧  Line m ∧ B ∈ m ∧ D ∈ m\n    ⇒  (ConvexQuadrilateral A B C D  ∨  A ∈ int_triangle B C D  ∨\n       B ∈ int_triangle C D A  ∨  C ∈ int_triangle D A B  ∨\n       D ∈ int_triangle A B C)  ∧\n       (¬(B,D same_side l) ∨ ¬(A,C same_side m))\n\n  proof\n    intro_TAC ∀A B C D l m, H1, lm_line;\n    Tetralateral A B C D     [H1Tetra] by fol H1 Quadrilateral_DEF;\n    ¬(A = B) ∧ ¬(A = D) ∧ ¬(B = C) ∧ ¬(C = D)     [Distinct] by fol H1Tetra Tetralateral_DEF;\n    consider a c such that\n    Line a ∧ A ∈ a ∧ B ∈ a  ∧\n    Line c ∧ C ∈ c ∧ D ∈ c     [ac_line] by fol Distinct I1;\n    Quadrilateral C D A B  ∧  Tetralateral C D A B     [tetraCDAB] by fol H1 QuadrilateralSymmetry Quadrilateral_DEF;\n    ¬ConvexQuadrilateral A B D C  ∧  ¬ConvexQuadrilateral C D B A     [notconvquad] by fol Distinct I1 H1 - ConvexQuadImpliesDiagonalsIntersect;\n    ConvexQuadrilateral A B C D  ∨  A ∈ int_triangle B C D  ∨\n    B ∈ int_triangle C D A  ∨  C ∈ int_triangle D A B  ∨\n    D ∈ int_triangle A B C     [5choices]\n    proof\n      A,B same_side c  ∨  C,D same_side a     [2pos] by fol H1 ac_line SegmentSameSideOppositeLine;\n      assume A,B same_side c     [Asym_cB] by fol 2pos H1Tetra ac_line notconvquad FourChoicesTetralateral;\n      ConvexQuadrilateral C D A B  ∨  B ∈ int_triangle C D A  ∨\n      A ∈ int_triangle B C D     [X1] by fol tetraCDAB ac_line - notconvquad FourChoicesTetralateral;\n      fol - QuadrilateralSymmetry ConvexQuad_DEF;\n    qed;\n    ¬(B,D same_side l) ∨ ¬(A,C same_side m)     [] by fol - lm_line ConvexQuadImpliesDiagonalsIntersect IN_InteriorTriangle InteriorAngleSymmetry InteriorOpposite;\n    fol 5choices -;\n  qed;\n")))
+  fivechoicesquadrilateral_c.set(@readable.prove(
+    "\n  forall A B C D l m.  Quadrilateral A B C D  ==>\n    Line l /\\  A IN l /\\  C IN l  /\\   Line m /\\  B IN m /\\  D IN m\n    ==>  (ConvexQuadrilateral A B C D  \\/  A IN int_triangle B C D  \\/\n       B IN int_triangle C D A  \\/  C IN int_triangle D A B  \\/\n       D IN int_triangle A B C)  /\\ \n       (~(B,D same_side l) \\/ ~(A,C same_side m))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D l m, H1, lm_line"),
+        @readable.have(
+          "\n    Tetralateral A B C D",
+          "H1Tetra",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = D) /\\  ~(B = C) /\\  ~(C = D)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1Tetra"),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a c",
+          "Line a /\\  A IN a /\\  B IN a  /\\ \n    Line c /\\  C IN c /\\  D IN c    ",
+          "ac_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    Quadrilateral C D A B  /\\   Tetralateral C D A B",
+          "tetraCDAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("QuadrilateralSymmetry", () => quadrilateralsymmetry()),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~ConvexQuadrilateral A B D C  /\\   ~ConvexQuadrilateral C D B A",
+          "notconvquad",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm(
+                "ConvexQuadImpliesDiagonalsIntersect",
+                () => convexquadimpliesdiagonalsintersect(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ConvexQuadrilateral A B C D  \\/  A IN int_triangle B C D  \\/\n    B IN int_triangle C D A  \\/  C IN int_triangle D A B  \\/\n    D IN int_triangle A B C",
+          "5choices",
+          @readable.steps(
+            [
+              @readable.have(
+                "\n      A,B same_side c  \\/  C,D same_side a",
+                "2pos",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("ac_line"),
+                    @readable.Thm(
+                      "SegmentSameSideOppositeLine",
+                      () => segmentsamesideoppositeline(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.assuming(
+                "A,B same_side c",
+                "Asym_cB",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("2pos"),
+                    @readable.Label("H1Tetra"),
+                    @readable.Label("ac_line"),
+                    @readable.Label("notconvquad"),
+                    @readable.Thm(
+                      "FourChoicesTetralateral",
+                      () => fourchoicestetralateral(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ConvexQuadrilateral C D A B  \\/  B IN int_triangle C D A  \\/\n      A IN int_triangle B C D",
+                "X1",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("tetraCDAB"),
+                    @readable.Label("ac_line"),
+                    @readable.Prev,
+                    @readable.Label("notconvquad"),
+                    @readable.Thm(
+                      "FourChoicesTetralateral",
+                      () => fourchoicestetralateral(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Thm("QuadrilateralSymmetry", () => quadrilateralsymmetry()),
+                  @readable.Thm("ConvexQuad_DEF", () => convexquad_def()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B,D same_side l) \\/ ~(A,C same_side m)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("lm_line"),
+              @readable.Thm(
+                "ConvexQuadImpliesDiagonalsIntersect",
+                () => convexquadimpliesdiagonalsintersect(),
+              ),
+              @readable.Thm("IN_InteriorTriangle", () => in_interiortriangle()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm("InteriorOpposite", () => interioropposite()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("5choices"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3665,73 +7469,18 @@ pub fn fivechoicesquadrilateral() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_109`
-pub fn exec_phrase_109(x111 : Unit) -> Unit raise {
-  let _ = x111
-  {
-    @readable.thm_ref().val = quadrilateralsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((QuadrilateralSymmetry): thm);;
-fn step_245() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((QuadrilateralSymmetry): thm);;", exec_phrase_109)
-}
-
-///|
-/// `exec_phrase_110`
-pub fn exec_phrase_110(x112 : Unit) -> Unit raise {
-  let _ = x112
-  {
-    @readable.thm_ref().val = convexquadimpliesdiagonalsintersect()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConvexQuadImpliesDiagonalsIntersect): thm);;
-fn step_246() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConvexQuadImpliesDiagonalsIntersect): thm);;", exec_phrase_110)
-}
-
-///|
-/// `exec_phrase_111`
-pub fn exec_phrase_111(x113 : Unit) -> Unit raise {
-  let _ = x113
-  {
-    @readable.thm_ref().val = segmentsamesideoppositeline()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentSameSideOppositeLine): thm);;
-fn step_247() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentSameSideOppositeLine): thm);;", exec_phrase_111)
-}
-
-///|
-/// `exec_phrase_112`
-pub fn exec_phrase_112(x114 : Unit) -> Unit raise {
-  let _ = x114
-  {
-    @readable.thm_ref().val = fourchoicestetralateral()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FourChoicesTetralateral): thm);;
-fn step_248() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FourChoicesTetralateral): thm);;", exec_phrase_112)
-}
-
-///|
 /// IntervalSymmetry
 fn step_249() -> Unit raise {
-  intervalsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B. Open (A, B) = Open (B, A)\n  by fol B1' EXTENSION")))
+  intervalsymmetry_c.set(@readable.prove(
+    "\n  forall A B. Open (A, B) = Open (B, A)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("B1'", () => b1_p()),
+        @readable.Thm("EXTENSION", () => @sets.extension()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3746,7 +7495,17 @@ pub fn intervalsymmetry() -> @kernel.Thm {
 ///|
 /// SegmentSymmetry
 fn step_250() -> Unit raise {
-  segmentsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B. seg A B = seg B A\n  by fol Segment_DEF INSERT_COMM IntervalSymmetry")))
+  segmentsymmetry_c.set(@readable.prove(
+    "\n  forall A B. seg A B = seg B A",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("Segment_DEF", () => segment_def()),
+        @readable.Thm("INSERT_COMM", () => @sets.insert_comm()),
+        @readable.Thm("IntervalSymmetry", () => intervalsymmetry()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3759,57 +7518,57 @@ pub fn segmentsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_113`
-pub fn exec_phrase_113(x115 : Unit) -> Unit raise {
-  let _ = x115
-  {
-    @readable.thm_ref().val = segment_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Segment_DEF): thm);;
-fn step_251() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Segment_DEF): thm);;", exec_phrase_113)
-}
-
-///|
-/// `exec_phrase_114`
-pub fn exec_phrase_114(x116 : Unit) -> Unit raise {
-  let _ = x116
-  {
-    @readable.thm_ref().val = @sets.insert_comm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INSERT_COMM): thm);;
-fn step_252() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INSERT_COMM): thm);;", exec_phrase_114)
-}
-
-///|
-/// `exec_phrase_115`
-pub fn exec_phrase_115(x117 : Unit) -> Unit raise {
-  let _ = x117
-  {
-    @readable.thm_ref().val = intervalsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IntervalSymmetry): thm);;
-fn step_253() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IntervalSymmetry): thm);;", exec_phrase_115)
-}
-
-///|
 /// C1OppositeRay
 fn step_254() -> Unit raise {
-  c1oppositeray_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O P s.  Segment s ∧ ¬(O = P)  ⇒  ∃Q. P ∈ Open (O, Q)  ∧  seg P Q ≡ s\n\n  proof\n    intro_TAC ∀O P s, H1;\n    consider Z such that\n    P ∈ Open (O, Z)  ∧  ¬(P = Z)     [OPZ] by fol H1 B2' B1';\n    consider Q such that\n    Q ∈ ray P Z ━ {P} ∧ seg P Q ≡ s     [PQeq] by fol H1 - C1;\n    P ∈ Open (Q, O)     [] by fol OPZ - OppositeRaysIntersect1pointHelp;\n    fol - B1' PQeq;\n  qed;\n")))
+  c1oppositeray_c.set(@readable.prove(
+    "\n  forall O P s.  Segment s /\\  ~(O = P)  ==>  ?Q. P IN Open (O, Q)  /\\   seg P Q === s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O P s, H1"),
+        @readable.consider(
+          "Z",
+          "P IN Open (O, Z)  /\\   ~(P = Z)    ",
+          "OPZ",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("B2'", () => b2_p()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "Q IN ray P Z DIFF {P} /\\  seg P Q === s    ",
+          "PQeq",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Prev, @readable.Thm("C1", () => c1())],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN Open (Q, O)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OPZ"),
+              @readable.Prev,
+              @readable.Thm(
+                "OppositeRaysIntersect1pointHelp",
+                () => oppositeraysintersect1pointhelp(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("B1'", () => b1_p()), @readable.Label("PQeq")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3822,25 +7581,157 @@ pub fn c1oppositeray() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_116`
-pub fn exec_phrase_116(x118 : Unit) -> Unit raise {
-  let _ = x118
-  {
-    @readable.thm_ref().val = c1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C1): thm);;
-fn step_255() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C1): thm);;", exec_phrase_116)
-}
-
-///|
 /// OrderedCongruentSegments
 fn step_256() -> Unit raise {
-  orderedcongruentsegments_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D G.  ¬(A = C) ∧ ¬(D = G)  ⇒  seg A C ≡ seg D G  ⇒  B ∈ Open (A, C)\n    ⇒  ∃E. E ∈ Open (D, G)  ∧  seg A B ≡ seg D E\n\n  proof\n    intro_TAC ∀A B C D G, H1, H2, H3;\n    Segment (seg A B) ∧ Segment (seg A C) ∧ Segment (seg B C) ∧ Segment (seg D G)     [segs] by fol H3 B1' H1 SEGMENT;\n    seg D G ≡ seg A C     [DGeqAC] by fol - H2 C2Symmetric;\n    consider E such that\n    E ∈ ray D G ━ {D} ∧ seg D E ≡ seg A B     [DEeqAB] by fol segs H1 C1;\n    ¬(E = D) ∧ Collinear D E G ∧ D ∉ Open (G, E)     [ErDG] by fol - IN_DIFF IN_SING IN_Ray B1' CollinearSymmetry ∉;\n    consider G' such that\n    E ∈ Open (D, G') ∧ seg E G' ≡ seg B C     [DEG'] by fol segs - C1OppositeRay;\n    seg D G' ≡ seg A C     [DG'eqAC] by fol DEG' H3 DEeqAB C3;\n    Segment (seg D G') ∧ Segment (seg D E)     [] by fol DEG' B1' SEGMENT;\n    seg A C ≡ seg D G' ∧ seg A B ≡ seg D E     [ABeqDE] by fol segs - DG'eqAC C2Symmetric DEeqAB;\n    G' ∈ ray D E ━ {D}  ∧  G ∈ ray D E ━ {D}     [] by fol DEG' IntervalRayEZ ErDG IN_Ray H1 IN_DIFF IN_SING;\n    G' = G     [] by fol ErDG segs - DG'eqAC DGeqAC C1;\n    fol - DEG' ABeqDE;\n  qed;\n")))
+  orderedcongruentsegments_c.set(@readable.prove(
+    "\n  forall A B C D G.  ~(A = C) /\\  ~(D = G)  ==>  seg A C === seg D G  ==>  B IN Open (A, C)\n    ==>  ?E. E IN Open (D, G)  /\\   seg A B === seg D E",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D G, H1, H2, H3"),
+        @readable.have(
+          "\n    Segment (seg A B) /\\  Segment (seg A C) /\\  Segment (seg B C) /\\  Segment (seg D G)",
+          "segs",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("H1"),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg D G === seg A C",
+          "DGeqAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN ray D G DIFF {D} /\\  seg D E === seg A B    ",
+          "DEeqAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("segs"),
+              @readable.Label("H1"),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(E = D) /\\  Collinear D E G /\\  D NOTIN Open (G, E)",
+          "ErDG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G'",
+          "E IN Open (D, G') /\\  seg E G' === seg B C    ",
+          "DEG'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("segs"),
+              @readable.Prev,
+              @readable.Thm("C1OppositeRay", () => c1oppositeray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg D G' === seg A C",
+          "DG'eqAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DEG'"),
+              @readable.Label("H3"),
+              @readable.Label("DEeqAB"),
+              @readable.Thm("C3", () => c3()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Segment (seg D G') /\\  Segment (seg D E)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DEG'"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A C === seg D G' /\\  seg A B === seg D E",
+          "ABeqDE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("segs"),
+              @readable.Prev,
+              @readable.Label("DG'eqAC"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+              @readable.Label("DEeqAB"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G' IN ray D E DIFF {D}  /\\   G IN ray D E DIFF {D}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DEG'"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+              @readable.Label("ErDG"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("H1"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G' = G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ErDG"),
+              @readable.Label("segs"),
+              @readable.Prev,
+              @readable.Label("DG'eqAC"),
+              @readable.Label("DGeqAC"),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Label("DEG'"), @readable.Label("ABeqDE")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3853,73 +7744,100 @@ pub fn orderedcongruentsegments() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_117`
-pub fn exec_phrase_117(x119 : Unit) -> Unit raise {
-  let _ = x119
-  {
-    @readable.thm_ref().val = segment()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SEGMENT): thm);;
-fn step_257() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SEGMENT): thm);;", exec_phrase_117)
-}
-
-///|
-/// `exec_phrase_118`
-pub fn exec_phrase_118(x120 : Unit) -> Unit raise {
-  let _ = x120
-  {
-    @readable.thm_ref().val = c2symmetric()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C2Symmetric): thm);;
-fn step_258() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C2Symmetric): thm);;", exec_phrase_118)
-}
-
-///|
-/// `exec_phrase_119`
-pub fn exec_phrase_119(x121 : Unit) -> Unit raise {
-  let _ = x121
-  {
-    @readable.thm_ref().val = c1oppositeray()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C1OppositeRay): thm);;
-fn step_259() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C1OppositeRay): thm);;", exec_phrase_119)
-}
-
-///|
-/// `exec_phrase_120`
-pub fn exec_phrase_120(x122 : Unit) -> Unit raise {
-  let _ = x122
-  {
-    @readable.thm_ref().val = c3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C3): thm);;
-fn step_260() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C3): thm);;", exec_phrase_120)
-}
-
-///|
 /// SegmentSubtraction
 fn step_261() -> Unit raise {
-  segmentsubtraction_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. B ∈ Open (A, C)  ∧  B' ∈ Open (A', C')  ⇒\n    seg A B ≡ seg A' B'  ⇒  seg A C ≡ seg A' C'\n    ⇒  seg B C ≡ seg B' C'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1, H2, H3;\n    ¬(A = B) ∧ ¬(A = C) ∧ Collinear A B C ∧ Segment (seg A' C') ∧ Segment (seg B' C')     [Distinct] by fol H1 B1' SEGMENT;\n    consider Q such that\n    B ∈ Open (A, Q)  ∧  seg B Q ≡ seg B' C'     [defQ] by fol - C1OppositeRay;\n    seg A Q ≡ seg A' C'     [AQ_A'C'] by fol H1 H2 - C3;\n    ¬(A = Q)  ∧  Collinear A B Q  ∧  A ∉ Open (C, B)  ∧  A ∉ Open (Q, B)     []\n    proof     simplify defQ B1' ∉;     fol defQ B1' H1 B3';     qed;\n    C ∈ ray A B ━ {A}  ∧  Q ∈ ray A B ━ {A}     [] by fol Distinct - IN_Ray IN_DIFF IN_SING;\n    fol defQ Distinct - AQ_A'C' H3 C1;\n  qed;\n")))
+  segmentsubtraction_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. B IN Open (A, C)  /\\   B' IN Open (A', C')  ==>\n    seg A B === seg A' B'  ==>  seg A C === seg A' C'\n    ==>  seg B C === seg B' C'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1, H2, H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  Collinear A B C /\\  Segment (seg A' C') /\\  Segment (seg B' C')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "B IN Open (A, Q)  /\\   seg B Q === seg B' C'    ",
+          "defQ",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("C1OppositeRay", () => c1oppositeray())],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A Q === seg A' C'",
+          "AQ_A'C'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("C3", () => c3()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = Q)  /\\   Collinear A B Q  /\\   A NOTIN Open (C, B)  /\\   A NOTIN Open (Q, B)",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("defQ"),
+                  @readable.Thm("B1'", () => b1_p()),
+                  @readable.Thm("NOTIN", () => notin()),
+                ],
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("defQ"),
+                  @readable.Thm("B1'", () => b1_p()),
+                  @readable.Label("H1"),
+                  @readable.Thm("B3'", () => b3_p()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN ray A B DIFF {A}  /\\   Q IN ray A B DIFF {A}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("defQ"),
+            @readable.Label("Distinct"),
+            @readable.Prev,
+            @readable.Label("AQ_A'C'"),
+            @readable.Label("H3"),
+            @readable.Thm("C1", () => c1()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3934,7 +7852,75 @@ pub fn segmentsubtraction() -> @kernel.Thm {
 ///|
 /// SegmentOrderingUse
 fn step_262() -> Unit raise {
-  segmentorderinguse_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B s.  Segment s  ∧  ¬(A = B)  ⇒  s <__ seg A B\n    ⇒  ∃G. G ∈ Open (A, B)  ∧  s ≡ seg A G\n\n  proof\n    intro_TAC ∀A B s, H1, H2;\n    consider A' B' G' such that\n    seg A B = seg A' B'  ∧  G' ∈ Open (A', B')  ∧  s ≡ seg A' G'     [H2'] by fol H2 SegmentOrdering_DEF;\n    ¬(A' = G') ∧ ¬(A' = B')  ∧  seg A' B' ≡ seg A B     [A'notB'G'] by fol - B1' H1 SEGMENT C2Reflexive;\n    consider G such that\n    G ∈ Open (A, B)  ∧  seg A' G' ≡ seg A G     [AGB] by fol A'notB'G' H1 H2' -  OrderedCongruentSegments;\n    s ≡ seg A G     [] by fol H1 A'notB'G' - B1' SEGMENT H2' C2Transitive;\n    fol AGB -;\n  qed;\n")))
+  segmentorderinguse_c.set(@readable.prove(
+    "\n  forall A B s.  Segment s  /\\   ~(A = B)  ==>  s <__ seg A B\n    ==>  ?G. G IN Open (A, B)  /\\   s === seg A G",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B s, H1, H2"),
+        @readable.consider(
+          "A' B' G'",
+          "seg A B = seg A' B'  /\\   G' IN Open (A', B')  /\\   s === seg A' G'    ",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A' = G') /\\  ~(A' = B')  /\\   seg A' B' === seg A B",
+          "A'notB'G'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("H1"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN Open (A, B)  /\\   seg A' G' === seg A G    ",
+          "AGB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("A'notB'G'"),
+              @readable.Label("H1"),
+              @readable.Label("H2'"),
+              @readable.Prev,
+              @readable.Thm(
+                "OrderedCongruentSegments",
+                () => orderedcongruentsegments(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s === seg A G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("A'notB'G'"),
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("H2'"),
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("AGB"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3947,73 +7933,89 @@ pub fn segmentorderinguse() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_121`
-pub fn exec_phrase_121(x123 : Unit) -> Unit raise {
-  let _ = x123
-  {
-    @readable.thm_ref().val = segmentordering_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentOrdering_DEF): thm);;
-fn step_263() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentOrdering_DEF): thm);;", exec_phrase_121)
-}
-
-///|
-/// `exec_phrase_122`
-pub fn exec_phrase_122(x124 : Unit) -> Unit raise {
-  let _ = x124
-  {
-    @readable.thm_ref().val = c2reflexive()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C2Reflexive): thm);;
-fn step_264() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C2Reflexive): thm);;", exec_phrase_122)
-}
-
-///|
-/// `exec_phrase_123`
-pub fn exec_phrase_123(x125 : Unit) -> Unit raise {
-  let _ = x125
-  {
-    @readable.thm_ref().val = orderedcongruentsegments()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OrderedCongruentSegments): thm);;
-fn step_265() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OrderedCongruentSegments): thm);;", exec_phrase_123)
-}
-
-///|
-/// `exec_phrase_124`
-pub fn exec_phrase_124(x126 : Unit) -> Unit raise {
-  let _ = x126
-  {
-    @readable.thm_ref().val = c2transitive()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C2Transitive): thm);;
-fn step_266() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C2Transitive): thm);;", exec_phrase_124)
-}
-
-///|
 /// SegmentTrichotomy1
 fn step_267() -> Unit raise {
-  segmenttrichotomy1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s <__ t  ⇒  ¬(s ≡ t)\n\n  proof\n    intro_TAC ∀s t, H1;\n    consider A B G such that\n    Segment s ∧ t = seg A B ∧ G ∈ Open (A, B) ∧ s ≡ seg A G     [H1'] by fol H1 SegmentOrdering_DEF;\n    ¬(A = G) ∧ ¬(A = B) ∧ ¬(G = B)     [Distinct] by fol H1' B1';\n    seg A B ≡ seg A B     [ABrefl] by fol - SEGMENT C2Reflexive;\n    G ∈ ray A B ━ {A}  ∧  B ∈ ray A B ━ {A}     [] by fol H1' IntervalRay EndpointInRay Distinct IN_DIFF IN_SING;\n    ¬(seg A G ≡ seg A B)  ∧ seg A G ≡ s     [] by fol Distinct SEGMENT - ABrefl C1 H1' C2Symmetric;\n    fol Distinct H1' SEGMENT - C2Transitive;\n  qed;\n")))
+  segmenttrichotomy1_c.set(@readable.prove(
+    "\n  forall s t.  s <__ t  ==>  ~(s === t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t, H1"),
+        @readable.consider(
+          "A B G",
+          "Segment s /\\  t = seg A B /\\  G IN Open (A, B) /\\  s === seg A G    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = G) /\\  ~(A = B) /\\  ~(G = B)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1'"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A B === seg A B",
+          "ABrefl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN ray A B DIFF {A}  /\\   B IN ray A B DIFF {A}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("IntervalRay", () => intervalray()),
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Label("Distinct"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(seg A G === seg A B)  /\\  seg A G === s",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Prev,
+              @readable.Label("ABrefl"),
+              @readable.Thm("C1", () => c1()),
+              @readable.Label("H1'"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Distinct"),
+            @readable.Label("H1'"),
+            @readable.Thm("SEGMENT", () => segment()),
+            @readable.Prev,
+            @readable.Thm("C2Transitive", () => c2transitive()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4026,41 +8028,89 @@ pub fn segmenttrichotomy1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_125`
-pub fn exec_phrase_125(x127 : Unit) -> Unit raise {
-  let _ = x127
-  {
-    @readable.thm_ref().val = intervalray()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IntervalRay): thm);;
-fn step_268() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IntervalRay): thm);;", exec_phrase_125)
-}
-
-///|
-/// `exec_phrase_126`
-pub fn exec_phrase_126(x128 : Unit) -> Unit raise {
-  let _ = x128
-  {
-    @readable.thm_ref().val = endpointinray()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EndpointInRay): thm);;
-fn step_269() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EndpointInRay): thm);;", exec_phrase_126)
-}
-
-///|
 /// SegmentTrichotomy2
 fn step_270() -> Unit raise {
-  segmenttrichotomy2_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  s <__ t  ∧  Segment u  ∧  t ≡ u  ⇒  s <__ u\n\n  proof\n    intro_TAC ∀s t u, H1 H2;\n    consider A B P such that\n    Segment s  ∧  t = seg A B  ∧  P ∈ Open (A, B)  ∧  s ≡ seg A P     [H1'] by fol H1 SegmentOrdering_DEF;\n    ¬(A = B) ∧ ¬(A = P)     [Distinct] by fol - B1';\n    consider X Y such that\n    u = seg X Y ∧ ¬(X = Y)     [uXY] by fol H2 SEGMENT;\n    consider Q such that\n    Q ∈ Open (X, Y)  ∧  seg A P ≡ seg X Q     [XQY] by fol Distinct - H1' H2 OrderedCongruentSegments;\n    ¬(X = Q)  ∧  s ≡ seg X Q     [] by fol - B1' H1' Distinct SEGMENT XQY C2Transitive;\n    fol H1' uXY XQY - SegmentOrdering_DEF;\n  qed;\n")))
+  segmenttrichotomy2_c.set(@readable.prove(
+    "\n  forall s t u.  s <__ t  /\\   Segment u  /\\   t === u  ==>  s <__ u",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t u, H1 H2"),
+        @readable.consider(
+          "A B P",
+          "Segment s  /\\   t = seg A B  /\\   P IN Open (A, B)  /\\   s === seg A P    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = P)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.consider(
+          "X Y",
+          "u = seg X Y /\\  ~(X = Y)    ",
+          "uXY",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H2"), @readable.Thm("SEGMENT", () => segment())],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "Q IN Open (X, Y)  /\\   seg A P === seg X Q    ",
+          "XQY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Label("H1'"),
+              @readable.Label("H2"),
+              @readable.Thm(
+                "OrderedCongruentSegments",
+                () => orderedcongruentsegments(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(X = Q)  /\\   s === seg X Q",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("H1'"),
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("XQY"),
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1'"),
+            @readable.Label("uXY"),
+            @readable.Label("XQY"),
+            @readable.Prev,
+            @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4075,7 +8125,89 @@ pub fn segmenttrichotomy2() -> @kernel.Thm {
 ///|
 /// SegmentOrderTransitivity
 fn step_271() -> Unit raise {
-  segmentordertransitivity_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  s <__ t  ∧  t <__ u  ⇒  s <__ u\n\n  proof\n    intro_TAC ∀s t u, H1;\n    consider A B G such that\n    u = seg A B  ∧  G ∈ Open (A, B)  ∧  t ≡ seg A G     [H1'] by fol H1 SegmentOrdering_DEF;\n    ¬(A = B) ∧ ¬(A = G) ∧ Segment s     [Distinct] by fol H1'  B1' H1 SegmentOrdering_DEF;\n    s <__ seg A G     [] by fol H1 H1' Distinct SEGMENT SegmentTrichotomy2;\n    consider F such that\n    F ∈ Open (A, G) ∧ s ≡ seg A F     [AFG] by fol Distinct - SegmentOrderingUse;\n    F ∈ Open (A, B)     [] by fol H1' IntervalsAreConvex - SUBSET;\n    fol Distinct H1' - AFG SegmentOrdering_DEF;\n  qed;\n")))
+  segmentordertransitivity_c.set(@readable.prove(
+    "\n  forall s t u.  s <__ t  /\\   t <__ u  ==>  s <__ u",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t u, H1"),
+        @readable.consider(
+          "A B G",
+          "u = seg A B  /\\   G IN Open (A, B)  /\\   t === seg A G    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = G) /\\  Segment s",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("H1"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s <__ seg A G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H1'"),
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("SegmentTrichotomy2", () => segmenttrichotomy2()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "F",
+          "F IN Open (A, G) /\\  s === seg A F    ",
+          "AFG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("SegmentOrderingUse", () => segmentorderinguse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F IN Open (A, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("IntervalsAreConvex", () => intervalsareconvex()),
+              @readable.Prev,
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Distinct"),
+            @readable.Label("H1'"),
+            @readable.Prev,
+            @readable.Label("AFG"),
+            @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4088,41 +8220,170 @@ pub fn segmentordertransitivity() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_127`
-pub fn exec_phrase_127(x129 : Unit) -> Unit raise {
-  let _ = x129
-  {
-    @readable.thm_ref().val = segmenttrichotomy2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentTrichotomy2): thm);;
-fn step_272() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentTrichotomy2): thm);;", exec_phrase_127)
-}
-
-///|
-/// `exec_phrase_128`
-pub fn exec_phrase_128(x130 : Unit) -> Unit raise {
-  let _ = x130
-  {
-    @readable.thm_ref().val = segmentorderinguse()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentOrderingUse): thm);;
-fn step_273() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentOrderingUse): thm);;", exec_phrase_128)
-}
-
-///|
 /// SegmentTrichotomy
 fn step_274() -> Unit raise {
-  segmenttrichotomy_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  Segment s ∧ Segment t\n    ⇒  (s ≡ t  ∨  s <__ t  ∨  t <__ s)  ∧  ¬(s ≡ t ∧ s <__ t)  ∧\n       ¬(s ≡ t ∧ t <__ s)  ∧  ¬(s <__ t ∧ t <__ s)\n\n  proof\n    intro_TAC ∀s t, H1;\n    ¬(s ≡ t  ∧  s <__ t)     [Not12] by fol - SegmentTrichotomy1;\n    ¬(s ≡ t  ∧  t <__ s)     [Not13] by fol H1 - SegmentTrichotomy1 C2Symmetric;\n    ¬(s <__ t  ∧  t <__ s)     [Not23] by fol H1 - SegmentOrderTransitivity SegmentTrichotomy1 H1 C2Reflexive;\n    consider O P such that\n    s = seg O P  ∧  ¬(O = P)     [sOP] by fol H1 SEGMENT;\n    consider Q such that\n    Q ∈ ray O P ━ {O}  ∧  seg O Q ≡ t     [QrOP] by fol H1 - C1;\n    O ∉ Open (Q, P)  ∧  Collinear O P Q   ∧  ¬(O = Q)     [notQOP] by fol - IN_DIFF IN_SING IN_Ray;\n    s ≡ seg O P  ∧  t ≡ seg O Q  ∧  seg O Q ≡ t  ∧  seg O P ≡ s     [stOPQ] by fol H1 sOP - SEGMENT QrOP C2Reflexive C2Symmetric;\n    assume ¬(Q = P) [notQP] by fol stOPQ sOP QrOP Not12 Not13 Not23;\n    P ∈ Open (O, Q)  ∨  Q ∈ Open (O, P)     [] by fol sOP - notQOP B3' B1' ∉;\n    s <__ seg O Q  ∨  t <__ seg O P     [] by fol H1 - stOPQ SegmentOrdering_DEF;\n    s <__ t  ∨  t <__ s     [] by fol - H1 stOPQ SegmentTrichotomy2;\n    fol - Not12 Not13 Not23;\n  qed;\n")))
+  segmenttrichotomy_c.set(@readable.prove(
+    "\n  forall s t.  Segment s /\\  Segment t\n    ==>  (s === t  \\/  s <__ t  \\/  t <__ s)  /\\   ~(s === t /\\  s <__ t)  /\\ \n       ~(s === t /\\  t <__ s)  /\\   ~(s <__ t /\\  t <__ s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t, H1"),
+        @readable.have(
+          "\n    ~(s === t  /\\   s <__ t)",
+          "Not12",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SegmentTrichotomy1", () => segmenttrichotomy1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(s === t  /\\   t <__ s)",
+          "Not13",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("SegmentTrichotomy1", () => segmenttrichotomy1()),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(s <__ t  /\\   t <__ s)",
+          "Not23",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm(
+                "SegmentOrderTransitivity",
+                () => segmentordertransitivity(),
+              ),
+              @readable.Thm("SegmentTrichotomy1", () => segmenttrichotomy1()),
+              @readable.Label("H1"),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "O P",
+          "s = seg O P  /\\   ~(O = P)    ",
+          "sOP",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("SEGMENT", () => segment())],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "Q IN ray O P DIFF {O}  /\\   seg O Q === t    ",
+          "QrOP",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Prev, @readable.Thm("C1", () => c1())],
+          ),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (Q, P)  /\\   Collinear O P Q   /\\   ~(O = Q)",
+          "notQOP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s === seg O P  /\\   t === seg O Q  /\\   seg O Q === t  /\\   seg O P === s",
+          "stOPQ",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("sOP"),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("QrOP"),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(Q = P)",
+          "notQP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stOPQ"),
+              @readable.Label("sOP"),
+              @readable.Label("QrOP"),
+              @readable.Label("Not12"),
+              @readable.Label("Not13"),
+              @readable.Label("Not23"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN Open (O, Q)  \\/  Q IN Open (O, P)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sOP"),
+              @readable.Prev,
+              @readable.Label("notQOP"),
+              @readable.Thm("B3'", () => b3_p()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s <__ seg O Q  \\/  t <__ seg O P",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Label("stOPQ"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s <__ t  \\/  t <__ s",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Label("stOPQ"),
+              @readable.Thm("SegmentTrichotomy2", () => segmenttrichotomy2()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("Not12"),
+            @readable.Label("Not13"),
+            @readable.Label("Not23"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4135,41 +8396,68 @@ pub fn segmenttrichotomy() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_129`
-pub fn exec_phrase_129(x131 : Unit) -> Unit raise {
-  let _ = x131
-  {
-    @readable.thm_ref().val = segmenttrichotomy1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentTrichotomy1): thm);;
-fn step_275() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentTrichotomy1): thm);;", exec_phrase_129)
-}
-
-///|
-/// `exec_phrase_130`
-pub fn exec_phrase_130(x132 : Unit) -> Unit raise {
-  let _ = x132
-  {
-    @readable.thm_ref().val = segmentordertransitivity()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentOrderTransitivity): thm);;
-fn step_276() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentOrderTransitivity): thm);;", exec_phrase_130)
-}
-
-///|
 /// C4Uniqueness
 fn step_277() -> Unit raise {
-  c4uniqueness_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A B P l.  Line l ∧ O ∈ l ∧ A ∈ l ∧ ¬(O = A)  ⇒\n    B ∉ l ∧ P ∉ l ∧ P,B same_side l  ⇒  ∡ A O P ≡ ∡ A O B\n    ⇒  ray O B = ray O P\n\n  proof\n    intro_TAC ∀O A B P l, H1, H2, H3;\n    ¬(O = B) ∧ ¬(O = P) ∧ Ray (ray O B) ∧ Ray (ray O P)     [Distinct] by fol H2 H1 ∉ RAY;\n    ¬Collinear A O B  ∧  B,B same_side l     [Bsim_lB] by fol H1 H2 I1 Collinear_DEF ∉ SameSideReflexive;\n    Angle (∡ A O B)  ∧  ∡ A O B ≡ ∡ A O B     [] by fol - ANGLE C5Reflexive;\n    fol - H1 H2 Distinct Bsim_lB H3 C4;\n  qed;\n")))
+  c4uniqueness_c.set(@readable.prove(
+    "\n  forall O A B P l.  Line l /\\  O IN l /\\  A IN l /\\  ~(O = A)  ==>\n    B NOTIN l /\\  P NOTIN l /\\  P,B same_side l  ==>  angle A O P === angle A O B\n    ==>  ray O B = ray O P",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A B P l, H1, H2, H3"),
+        @readable.have(
+          "\n    ~(O = B) /\\  ~(O = P) /\\  Ray (ray O B) /\\  Ray (ray O P)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("H1"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("RAY", () => ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O B  /\\   B,B same_side l",
+          "Bsim_lB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("SameSideReflexive", () => samesidereflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A O B)  /\\   angle A O B === angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Label("Distinct"),
+            @readable.Label("Bsim_lB"),
+            @readable.Label("H3"),
+            @readable.Thm("C4", () => c4()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4182,73 +8470,18 @@ pub fn c4uniqueness() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_131`
-pub fn exec_phrase_131(x133 : Unit) -> Unit raise {
-  let _ = x133
-  {
-    @readable.thm_ref().val = ray()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RAY): thm);;
-fn step_278() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RAY): thm);;", exec_phrase_131)
-}
-
-///|
-/// `exec_phrase_132`
-pub fn exec_phrase_132(x134 : Unit) -> Unit raise {
-  let _ = x134
-  {
-    @readable.thm_ref().val = angle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ANGLE): thm);;
-fn step_279() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ANGLE): thm);;", exec_phrase_132)
-}
-
-///|
-/// `exec_phrase_133`
-pub fn exec_phrase_133(x135 : Unit) -> Unit raise {
-  let _ = x135
-  {
-    @readable.thm_ref().val = c5reflexive()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C5Reflexive): thm);;
-fn step_280() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C5Reflexive): thm);;", exec_phrase_133)
-}
-
-///|
-/// `exec_phrase_134`
-pub fn exec_phrase_134(x136 : Unit) -> Unit raise {
-  let _ = x136
-  {
-    @readable.thm_ref().val = c4()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C4): thm);;
-fn step_281() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C4): thm);;", exec_phrase_134)
-}
-
-///|
 /// AngleSymmetry
 fn step_282() -> Unit raise {
-  anglesymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B. ∡ A O B = ∡ B O A\n  by fol Angle_DEF UNION_COMM")))
+  anglesymmetry_c.set(@readable.prove(
+    "\n  forall A O B. angle A O B = angle B O A",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("Angle_DEF", () => angle_def()),
+        @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4261,41 +8494,59 @@ pub fn anglesymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_135`
-pub fn exec_phrase_135(x137 : Unit) -> Unit raise {
-  let _ = x137
-  {
-    @readable.thm_ref().val = angle_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Angle_DEF): thm);;
-fn step_283() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Angle_DEF): thm);;", exec_phrase_135)
-}
-
-///|
-/// `exec_phrase_136`
-pub fn exec_phrase_136(x138 : Unit) -> Unit raise {
-  let _ = x138
-  {
-    @readable.thm_ref().val = @sets.union_comm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNION_COMM): thm);;
-fn step_284() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNION_COMM): thm);;", exec_phrase_136)
-}
-
-///|
 /// TriangleCongSymmetry
 fn step_285() -> Unit raise {
-  trianglecongsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. A,B,C ≅ A',B',C'\n   ⇒  A,C,B ≅ A',C',B' ∧ B,A,C ≅ B',A',C' ∧\n       B,C,A ≅ B',C',A' ∧ C,A,B ≅ C',A',B' ∧ C,B,A ≅ C',B',A'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1;\n    ¬Collinear A B C ∧ ¬Collinear A' B' C' ∧\n    seg A B ≡ seg A' B' ∧ seg A C ≡ seg A' C' ∧ seg B C ≡ seg B' C' ∧\n    ∡ A B C ≡ ∡ A' B' C' ∧ ∡ B C A ≡ ∡ B' C' A' ∧ ∡ C A B ≡ ∡ C' A' B'     [H1'] by fol H1 TriangleCong_DEF;\n    seg B A ≡ seg B' A' ∧ seg C A ≡ seg C' A' ∧ seg C B ≡ seg C' B'     [segments] by fol H1' SegmentSymmetry;\n    ∡ C B A ≡ ∡ C' B' A' ∧ ∡ A C B ≡ ∡ A' C' B' ∧ ∡ B A C ≡ ∡ B' A' C'     [] by fol H1' AngleSymmetry;\n    fol CollinearSymmetry H1' segments - TriangleCong_DEF;\n  qed;\n")))
+  trianglecongsymmetry_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. A,B,C cong A',B',C'\n   ==>  A,C,B cong A',C',B' /\\  B,A,C cong B',A',C' /\\ \n       B,C,A cong B',C',A' /\\  C,A,B cong C',A',B' /\\  C,B,A cong C',B',A'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1"),
+        @readable.have(
+          "\n    ~Collinear A B C /\\  ~Collinear A' B' C' /\\ \n    seg A B === seg A' B' /\\  seg A C === seg A' C' /\\  seg B C === seg B' C' /\\ \n    angle A B C === angle A' B' C' /\\  angle B C A === angle B' C' A' /\\  angle C A B === angle C' A' B'",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg B A === seg B' A' /\\  seg C A === seg C' A' /\\  seg C B === seg C' B'",
+          "segments",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B A === angle C' B' A' /\\  angle A C B === angle A' C' B' /\\  angle B A C === angle B' A' C'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            @readable.Label("H1'"),
+            @readable.Label("segments"),
+            @readable.Prev,
+            @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4308,57 +8559,256 @@ pub fn trianglecongsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_137`
-pub fn exec_phrase_137(x139 : Unit) -> Unit raise {
-  let _ = x139
-  {
-    @readable.thm_ref().val = trianglecong_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TriangleCong_DEF): thm);;
-fn step_286() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TriangleCong_DEF): thm);;", exec_phrase_137)
-}
-
-///|
-/// `exec_phrase_138`
-pub fn exec_phrase_138(x140 : Unit) -> Unit raise {
-  let _ = x140
-  {
-    @readable.thm_ref().val = segmentsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentSymmetry): thm);;
-fn step_287() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentSymmetry): thm);;", exec_phrase_138)
-}
-
-///|
-/// `exec_phrase_139`
-pub fn exec_phrase_139(x141 : Unit) -> Unit raise {
-  let _ = x141
-  {
-    @readable.thm_ref().val = anglesymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleSymmetry): thm);;
-fn step_288() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleSymmetry): thm);;", exec_phrase_139)
-}
-
-///|
 /// SAS
 fn step_289() -> Unit raise {
-  sas_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬Collinear A B C ∧ ¬Collinear A' B' C'  ⇒\n    seg B A ≡ seg B' A'  ∧  seg B C ≡ seg B' C'  ⇒ ∡ A B C ≡ ∡ A' B' C'\n    ⇒  A,B,C ≅ A',B',C'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1, H2, H3;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(A' = C')     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider c such that\n    Line c ∧ A ∈ c ∧ B ∈ c     [c_line] by fol Distinct I1;\n    C ∉ c     [notCc] by fol H1 c_line Collinear_DEF ∉;\n    ∡ B C A ≡ ∡ B' C' A'     [BCAeq] by fol H1 H2 H3 C6;\n    ∡ B A C ≡ ∡ B' A' C'     [BACeq] by fol H1 CollinearSymmetry H2 H3 AngleSymmetry C6;\n    consider Y such that\n    Y ∈ ray A C ━ {A}  ∧  seg A Y ≡ seg A' C'     [YrAC] by fol Distinct SEGMENT C1;\n    Y ∉ c  ∧  Y,C same_side c     [Ysim_cC] by fol c_line notCc - RaySameSide;\n    ¬Collinear Y A B     [YABncol] by fol Distinct c_line - NonCollinearRaa CollinearSymmetry;\n    ray A Y = ray A C  ∧  ∡ Y A B = ∡ C A B     [] by fol Distinct YrAC RayWellDefined Angle_DEF;\n    ∡ Y A B ≡ ∡ C' A' B'     [] by fol BACeq - AngleSymmetry;\n    ∡ A B Y ≡ ∡ A' B' C'     [ABYeq] by fol YABncol H1 CollinearSymmetry H2 SegmentSymmetry YrAC - C6;\n    Angle (∡ A B C) ∧ Angle (∡ A' B' C') ∧ Angle (∡ A B Y)     [] by fol H1 CollinearSymmetry YABncol ANGLE;\n    ∡ A B Y ≡ ∡ A B C     [ABYeqABC] by fol - ABYeq - H3 C5Symmetric C5Transitive;\n    ray B C = ray B Y  ∧  ¬(Y = B)  ∧  Y ∈ ray B C     [] by fol c_line Distinct notCc Ysim_cC ABYeqABC C4Uniqueness ∉ - EndpointInRay;\n    Collinear B C Y  ∧  Collinear A C Y     [ABCYcol] by fol - YrAC IN_DIFF IN_SING IN_Ray;\n    C = Y     [] by fol H1 ABCYcol TwoSidesTriangle1Intersection;\n    seg A C ≡ seg A' C'     [] by fol - YrAC;\n    fol H1 H2 SegmentSymmetry - H3 BCAeq BACeq AngleSymmetry TriangleCong_DEF;\n  qed;\n")))
+  sas_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~Collinear A B C /\\  ~Collinear A' B' C'  ==>\n    seg B A === seg B' A'  /\\   seg B C === seg B' C'  ==> angle A B C === angle A' B' C'\n    ==>  A,B,C cong A',B',C'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1, H2, H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(A' = C')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "c",
+          "Line c /\\  A IN c /\\  B IN c    ",
+          "c_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    C NOTIN c",
+          "notCc",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("c_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C A === angle B' C' A'",
+          "BCAeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Label("H3"),
+              @readable.Thm("C6", () => c6()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A C === angle B' A' C'",
+          "BACeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2"),
+              @readable.Label("H3"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("C6", () => c6()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Y",
+          "Y IN ray A C DIFF {A}  /\\   seg A Y === seg A' C'    ",
+          "YrAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Y NOTIN c  /\\   Y,C same_side c",
+          "Ysim_cC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("c_line"),
+              @readable.Label("notCc"),
+              @readable.Prev,
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear Y A B",
+          "YABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("c_line"),
+              @readable.Prev,
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A Y = ray A C  /\\   angle Y A B = angle C A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("YrAC"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle Y A B === angle C' A' B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BACeq"),
+              @readable.Prev,
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B Y === angle A' B' C'",
+          "ABYeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("YABncol"),
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("YrAC"),
+              @readable.Prev,
+              @readable.Thm("C6", () => c6()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A B C) /\\  Angle (angle A' B' C') /\\  Angle (angle A B Y)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("YABncol"),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B Y === angle A B C",
+          "ABYeqABC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("ABYeq"),
+              @readable.Prev,
+              @readable.Label("H3"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray B C = ray B Y  /\\   ~(Y = B)  /\\   Y IN ray B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("c_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("notCc"),
+              @readable.Label("Ysim_cC"),
+              @readable.Label("ABYeqABC"),
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Prev,
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear B C Y  /\\   Collinear A C Y",
+          "ABCYcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("YrAC"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C = Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("ABCYcol"),
+              @readable.Thm(
+                "TwoSidesTriangle1Intersection",
+                () => twosidestriangle1intersection(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A C === seg A' C'",
+          "",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Label("YrAC")]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            @readable.Prev,
+            @readable.Label("H3"),
+            @readable.Label("BCAeq"),
+            @readable.Label("BACeq"),
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4371,89 +8821,253 @@ pub fn sas() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_140`
-pub fn exec_phrase_140(x142 : Unit) -> Unit raise {
-  let _ = x142
-  {
-    @readable.thm_ref().val = c6()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C6): thm);;
-fn step_290() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C6): thm);;", exec_phrase_140)
-}
-
-///|
-/// `exec_phrase_141`
-pub fn exec_phrase_141(x143 : Unit) -> Unit raise {
-  let _ = x143
-  {
-    @readable.thm_ref().val = c5symmetric()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C5Symmetric): thm);;
-fn step_291() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C5Symmetric): thm);;", exec_phrase_141)
-}
-
-///|
-/// `exec_phrase_142`
-pub fn exec_phrase_142(x144 : Unit) -> Unit raise {
-  let _ = x144
-  {
-    @readable.thm_ref().val = c5transitive()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C5Transitive): thm);;
-fn step_292() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C5Transitive): thm);;", exec_phrase_142)
-}
-
-///|
-/// `exec_phrase_143`
-pub fn exec_phrase_143(x145 : Unit) -> Unit raise {
-  let _ = x145
-  {
-    @readable.thm_ref().val = c4uniqueness()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C4Uniqueness): thm);;
-fn step_293() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C4Uniqueness): thm);;", exec_phrase_143)
-}
-
-///|
-/// `exec_phrase_144`
-pub fn exec_phrase_144(x146 : Unit) -> Unit raise {
-  let _ = x146
-  {
-    @readable.thm_ref().val = twosidestriangle1intersection()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TwoSidesTriangle1Intersection): thm);;
-fn step_294() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TwoSidesTriangle1Intersection): thm);;", exec_phrase_144)
-}
-
-///|
 /// ASA
 fn step_295() -> Unit raise {
-  asa_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬Collinear A B C ∧ ¬Collinear A' B' C'  ⇒\n    seg A C ≡ seg A' C'  ⇒  ∡ C A B ≡ ∡ C' A' B'  ∧  ∡ B C A ≡ ∡ B' C' A'\n    ⇒  A,B,C ≅ A',B',C'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1, H2, H3;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ ¬(A' = B') ∧ ¬(A' = C') ∧ ¬(B' = C') ∧\n    Segment (seg C' B')     [Distinct] by fol H1 NonCollinearImpliesDistinct SEGMENT;\n    consider D such that\n    D ∈ ray C B ━ {C}  ∧  seg C D ≡ seg C' B'  ∧  ¬(D = C)     [DrCB] by fol - C1 IN_DIFF IN_SING;\n    Collinear C B D     [CBDcol] by fol - IN_DIFF IN_SING IN_Ray;\n    ¬Collinear D C A ∧ Angle (∡ C A D) ∧ Angle (∡ C' A' B') ∧ Angle (∡ C A B)     [DCAncol] by fol H1 CollinearSymmetry - DrCB NoncollinearityExtendsToLine H1 ANGLE;\n    consider b such that\n    Line b ∧ A ∈ b ∧ C ∈ b     [b_line] by fol Distinct I1;\n    B ∉ b ∧ ¬(D = A)     [notBb] by fol H1 - Collinear_DEF ∉ DCAncol NonCollinearImpliesDistinct;\n    D ∉ b  ∧  D,B same_side b     [Dsim_bB] by fol b_line - DrCB RaySameSide;\n    ray C D = ray C B     [] by fol Distinct DrCB RayWellDefined;\n    ∡ D C A ≡ ∡ B' C' A'     [] by fol H3 - Angle_DEF;\n    D,C,A ≅ B',C',A'     [] by fol DCAncol H1 CollinearSymmetry DrCB H2 SegmentSymmetry - SAS;\n    ∡ C A D ≡ ∡ C' A' B'     [] by fol - TriangleCong_DEF;\n    ∡ C A D ≡ ∡ C A B     [] by fol DCAncol - H3 C5Symmetric C5Transitive;\n    ray A B = ray A D  ∧  D ∈ ray A B     [] by fol b_line Distinct notBb Dsim_bB - C4Uniqueness notBb EndpointInRay;\n    Collinear A B D     [ABDcol] by fol - IN_Ray;\n    D = B     [] by fol H1 CBDcol ABDcol CollinearSymmetry TwoSidesTriangle1Intersection;\n    seg C B ≡ seg C' B'     [] by fol - DrCB;\n    B,C,A ≅ B',C',A'     [] by fol H1 CollinearSymmetry - H2 SegmentSymmetry H3 SAS;\n    fol - TriangleCongSymmetry;\n  qed;\n")))
+  asa_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~Collinear A B C /\\  ~Collinear A' B' C'  ==>\n    seg A C === seg A' C'  ==>  angle C A B === angle C' A' B'  /\\   angle B C A === angle B' C' A'\n    ==>  A,B,C cong A',B',C'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1, H2, H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  ~(A' = B') /\\  ~(A' = C') /\\  ~(B' = C') /\\ \n    Segment (seg C' B')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "D",
+          "D IN ray C B DIFF {C}  /\\   seg C D === seg C' B'  /\\   ~(D = C)    ",
+          "DrCB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("C1", () => c1()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear C B D",
+          "CBDcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D C A /\\  Angle (angle C A D) /\\  Angle (angle C' A' B') /\\  Angle (angle C A B)",
+          "DCAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Label("DrCB"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+              @readable.Label("H1"),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "b",
+          "Line b /\\  A IN b /\\  C IN b    ",
+          "b_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN b /\\  ~(D = A)",
+          "notBb",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("DCAncol"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D NOTIN b  /\\   D,B same_side b",
+          "Dsim_bB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("b_line"),
+              @readable.Prev,
+              @readable.Label("DrCB"),
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray C D = ray C B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("DrCB"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle D C A === angle B' C' A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D,C,A cong B',C',A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DCAncol"),
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("DrCB"),
+              @readable.Label("H2"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Prev,
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C A D === angle C' A' B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C A D === angle C A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DCAncol"),
+              @readable.Prev,
+              @readable.Label("H3"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A B = ray A D  /\\   D IN ray A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("b_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("notBb"),
+              @readable.Label("Dsim_bB"),
+              @readable.Prev,
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+              @readable.Label("notBb"),
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear A B D",
+          "ABDcol",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("IN_Ray", () => in_ray())],
+          ),
+        ),
+        @readable.have(
+          "\n    D = B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("CBDcol"),
+              @readable.Label("ABDcol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "TwoSidesTriangle1Intersection",
+                () => twosidestriangle1intersection(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg C B === seg C' B'",
+          "",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Label("DrCB")]),
+        ),
+        @readable.have(
+          "\n    B,C,A cong B',C',A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("H3"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("TriangleCongSymmetry", () => trianglecongsymmetry()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4466,41 +9080,282 @@ pub fn asa() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_145`
-pub fn exec_phrase_145(x147 : Unit) -> Unit raise {
-  let _ = x147
-  {
-    @readable.thm_ref().val = sas()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SAS): thm);;
-fn step_296() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SAS): thm);;", exec_phrase_145)
-}
-
-///|
-/// `exec_phrase_146`
-pub fn exec_phrase_146(x148 : Unit) -> Unit raise {
-  let _ = x148
-  {
-    @readable.thm_ref().val = trianglecongsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TriangleCongSymmetry): thm);;
-fn step_297() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TriangleCongSymmetry): thm);;", exec_phrase_146)
-}
-
-///|
 /// AngleSubtraction
 fn step_298() -> Unit raise {
-  anglesubtraction_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A' O' B' G G'. G ∈ int_angle A O B  ∧  G' ∈ int_angle A' O' B'  ⇒\n    ∡ A O B ≡ ∡ A' O' B'  ∧  ∡ A O G ≡ ∡ A' O' G'\n    ⇒  ∡ G O B ≡ ∡ G' O' B'\n\n  proof\n    intro_TAC ∀A O B A' O' B' G G', H1, H2;\n    ¬Collinear A O B ∧ ¬Collinear A' O' B'     [A'O'B'ncol] by fol H1 IN_InteriorAngle;\n    ¬(A = O) ∧ ¬(O = B) ∧ ¬(G = O) ∧ ¬(G' = O') ∧ Segment (seg O' A') ∧ Segment (seg O' B')     [Distinct] by fol - NonCollinearImpliesDistinct H1 InteriorEZHelp SEGMENT;\n   consider X Y such that\n   X ∈ ray O A ━ {O}  ∧  seg O X ≡ seg O' A'  ∧  Y ∈ ray O B ━ {O}  ∧  seg O Y ≡ seg O' B'     [XYexists] by fol - C1;\n    G ∈ int_angle X O Y     [GintXOY] by fol H1 XYexists InteriorWellDefined InteriorAngleSymmetry;\n    consider H H' such that\n    H ∈ Open (X, Y)  ∧  H ∈ ray O G ━ {O}  ∧\n    H' ∈ Open (A', B')  ∧  H' ∈ ray O' G' ━ {O'}     [Hexists] by fol - H1 Crossbar_THM;\n    H ∈ int_angle X O Y  ∧  H' ∈ int_angle A' O' B'     [HintXOY] by fol GintXOY H1 - WholeRayInterior;\n    ray O X = ray O A  ∧  ray O Y = ray O B  ∧  ray O H = ray O G  ∧  ray O' H' = ray O' G'     [Orays] by fol Distinct XYexists Hexists RayWellDefined;\n    ∡ X O Y ≡ ∡ A' O' B'  ∧  ∡ X O H ≡ ∡ A' O' H'     [H2'] by fol H2 - Angle_DEF;\n    ¬Collinear X O Y     [] by fol GintXOY IN_InteriorAngle;\n    X,O,Y ≅ A',O',B'     [] by fol - A'O'B'ncol H2' XYexists SAS;\n    seg X Y ≡ seg A' B'  ∧  ∡ O Y X ≡ ∡ O' B' A'  ∧  ∡ Y X O ≡ ∡ B' A' O'     [XOYcong] by fol - TriangleCong_DEF;\n    ¬Collinear O H X ∧ ¬Collinear O' H' A' ∧ ¬Collinear O Y H ∧ ¬Collinear O' B' H'     [OHXncol] by fol HintXOY InteriorEZHelp InteriorAngleSymmetry CollinearSymmetry;\n    ray X H = ray X Y  ∧  ray A' H' = ray A' B'  ∧  ray Y H = ray Y X  ∧  ray B' H' = ray B' A'     [Hrays] by fol Hexists B1' IntervalRay;\n    ∡ H X O ≡ ∡ H' A' O'     [] by fol XOYcong - Angle_DEF;\n    O,H,X ≅ O',H',A'     [] by fol OHXncol XYexists - H2' ASA;\n    seg X H ≡ seg A' H'     [] by fol - TriangleCong_DEF SegmentSymmetry;\n    seg H Y ≡ seg H' B'     [] by fol Hexists XOYcong - SegmentSubtraction;\n    seg Y O  ≡ seg B' O'  ∧  seg Y H ≡ seg B' H'     [YHeq] by fol XYexists - SegmentSymmetry;\n    ∡ O Y H ≡ ∡ O' B' H'     [] by fol XOYcong Hrays Angle_DEF;\n    O,Y,H ≅ O',B',H'     [] by fol OHXncol YHeq - SAS;\n  ∡ H O Y ≡ ∡ H' O' B'     [] by fol - TriangleCong_DEF;\n  fol - Orays Angle_DEF;\n  qed;\n")))
+  anglesubtraction_c.set(@readable.prove(
+    "\n  forall A O B A' O' B' G G'. G IN int_angle A O B  /\\   G' IN int_angle A' O' B'  ==>\n    angle A O B === angle A' O' B'  /\\   angle A O G === angle A' O' G'\n    ==>  angle G O B === angle G' O' B'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B A' O' B' G G', H1, H2"),
+        @readable.have(
+          "\n    ~Collinear A O B /\\  ~Collinear A' O' B'",
+          "A'O'B'ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B) /\\  ~(G = O) /\\  ~(G' = O') /\\  Segment (seg O' A') /\\  Segment (seg O' B')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Label("H1"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X Y",
+          "X IN ray O A DIFF {O}  /\\   seg O X === seg O' A'  /\\   Y IN ray O B DIFF {O}  /\\   seg O Y === seg O' B'    ",
+          "XYexists",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("C1", () => c1())]),
+        ),
+        @readable.have(
+          "\n    G IN int_angle X O Y",
+          "GintXOY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("XYexists"),
+              @readable.Thm("InteriorWellDefined", () => interiorwelldefined()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "H H'",
+          "H IN Open (X, Y)  /\\   H IN ray O G DIFF {O}  /\\ \n    H' IN Open (A', B')  /\\   H' IN ray O' G' DIFF {O'}    ",
+          "Hexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    H IN int_angle X O Y  /\\   H' IN int_angle A' O' B'",
+          "HintXOY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintXOY"),
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O X = ray O A  /\\   ray O Y = ray O B  /\\   ray O H = ray O G  /\\   ray O' H' = ray O' G'",
+          "Orays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("XYexists"),
+              @readable.Label("Hexists"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle X O Y === angle A' O' B'  /\\   angle X O H === angle A' O' H'",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear X O Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintXOY"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X,O,Y cong A',O',B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("A'O'B'ncol"),
+              @readable.Label("H2'"),
+              @readable.Label("XYexists"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg X Y === seg A' B'  /\\   angle O Y X === angle O' B' A'  /\\   angle Y X O === angle B' A' O'",
+          "XOYcong",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear O H X /\\  ~Collinear O' H' A' /\\  ~Collinear O Y H /\\  ~Collinear O' B' H'",
+          "OHXncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("HintXOY"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray X H = ray X Y  /\\   ray A' H' = ray A' B'  /\\   ray Y H = ray Y X  /\\   ray B' H' = ray B' A'",
+          "Hrays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Hexists"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle H X O === angle H' A' O'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XOYcong"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O,H,X cong O',H',A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OHXncol"),
+              @readable.Label("XYexists"),
+              @readable.Prev,
+              @readable.Label("H2'"),
+              @readable.Thm("ASA", () => asa()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg X H === seg A' H'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg H Y === seg H' B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Hexists"),
+              @readable.Label("XOYcong"),
+              @readable.Prev,
+              @readable.Thm("SegmentSubtraction", () => segmentsubtraction()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg Y O  === seg B' O'  /\\   seg Y H === seg B' H'",
+          "YHeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XYexists"),
+              @readable.Prev,
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O Y H === angle O' B' H'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XOYcong"),
+              @readable.Label("Hrays"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O,Y,H cong O',B',H'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OHXncol"),
+              @readable.Label("YHeq"),
+              @readable.Prev,
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n  angle H O Y === angle H' O' B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("Orays"),
+            @readable.Thm("Angle_DEF", () => angle_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4513,41 +9368,257 @@ pub fn anglesubtraction() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_147`
-pub fn exec_phrase_147(x149 : Unit) -> Unit raise {
-  let _ = x149
-  {
-    @readable.thm_ref().val = asa()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ASA): thm);;
-fn step_299() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ASA): thm);;", exec_phrase_147)
-}
-
-///|
-/// `exec_phrase_148`
-pub fn exec_phrase_148(x150 : Unit) -> Unit raise {
-  let _ = x150
-  {
-    @readable.thm_ref().val = segmentsubtraction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentSubtraction): thm);;
-fn step_300() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentSubtraction): thm);;", exec_phrase_148)
-}
-
-///|
 /// OrderedCongruentAngles
 fn step_301() -> Unit raise {
-  orderedcongruentangles_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A' O' B' G. ¬Collinear A' O' B'  ∧  ∡ A O B ≡ ∡ A' O' B'  ∧ G ∈ int_angle A O B\n    ⇒  ∃G'. G' ∈ int_angle A' O' B'  ∧  ∡ A O G ≡ ∡ A' O' G'\n\n  proof\n    intro_TAC ∀A O B A' O' B' G, H1 H2 H3;\n    ¬Collinear A O B     [AOBncol] by fol H3 IN_InteriorAngle;\n    ¬(A = O) ∧ ¬(O = B) ∧ ¬(A' = B') ∧ ¬(O = G) ∧ Segment (seg O' A') ∧ Segment (seg O' B')     [Distinct] by fol AOBncol H1 NonCollinearImpliesDistinct H3 InteriorEZHelp SEGMENT;\n    consider X Y such that\n    X ∈ ray O A ━ {O}  ∧  seg O X ≡ seg O' A'  ∧  Y ∈ ray O B ━ {O}  ∧  seg O Y ≡ seg O' B'     [defXY] by fol - C1;\n    G ∈ int_angle X O Y     [GintXOY] by fol H3 - InteriorWellDefined InteriorAngleSymmetry;\n    ¬Collinear X O Y ∧ ¬(X = Y)     [XOYncol] by fol - IN_InteriorAngle NonCollinearImpliesDistinct;\n    consider H such that\n    H ∈ Open (X, Y)  ∧  H ∈ ray O G ━ {O}     [defH] by fol GintXOY Crossbar_THM;\n    ray O X = ray O A  ∧  ray O Y = ray O B  ∧  ray O H = ray O G     [Orays] by fol Distinct defXY - RayWellDefined;\n    ∡ X O Y ≡ ∡ A' O' B'     [] by fol H2 - Angle_DEF;\n    X,O,Y ≅ A',O',B'     [] by fol XOYncol H1 defXY - SAS;\n    seg X Y ≡ seg A' B'  ∧  ∡ O X Y ≡ ∡ O' A' B'     [YXOcong] by fol - TriangleCong_DEF AngleSymmetry;\n    consider G' such that\n    G' ∈ Open (A', B')  ∧  seg X H ≡ seg A' G'     [A'G'B'] by fol XOYncol Distinct - defH OrderedCongruentSegments;\n    G' ∈ int_angle A' O' B'     [G'intA'O'B'] by fol H1 - ConverseCrossbar;\n    ray X H = ray X Y  ∧  ray A' G' = ray A' B'     [] by fol defH A'G'B' IntervalRay;\n    ∡ O X H ≡ ∡ O' A' G'     [HXOeq] by fol - Angle_DEF YXOcong;\n    H ∈ int_angle X O Y     [] by fol GintXOY defH WholeRayInterior;\n    ¬Collinear O X H ∧ ¬Collinear O' A' G'     [] by fol - G'intA'O'B' InteriorEZHelp CollinearSymmetry;\n    O,X,H ≅ O',A',G'     [] by fol - A'G'B' defXY SegmentSymmetry HXOeq SAS;\n    ∡ X O H ≡ ∡ A' O' G'     [] by fol - TriangleCong_DEF AngleSymmetry;\n    fol G'intA'O'B' - Orays Angle_DEF;\n  qed;\n")))
+  orderedcongruentangles_c.set(@readable.prove(
+    "\n  forall A O B A' O' B' G. ~Collinear A' O' B'  /\\   angle A O B === angle A' O' B'  /\\  G IN int_angle A O B\n    ==>  ?G'. G' IN int_angle A' O' B'  /\\   angle A O G === angle A' O' G'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B A' O' B' G, H1 H2 H3"),
+        @readable.have(
+          "\n    ~Collinear A O B",
+          "AOBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B) /\\  ~(A' = B') /\\  ~(O = G) /\\  Segment (seg O' A') /\\  Segment (seg O' B')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOBncol"),
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Label("H3"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X Y",
+          "X IN ray O A DIFF {O}  /\\   seg O X === seg O' A'  /\\   Y IN ray O B DIFF {O}  /\\   seg O Y === seg O' B'    ",
+          "defXY",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("C1", () => c1())]),
+        ),
+        @readable.have(
+          "\n    G IN int_angle X O Y",
+          "GintXOY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Prev,
+              @readable.Thm("InteriorWellDefined", () => interiorwelldefined()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear X O Y /\\  ~(X = Y)",
+          "XOYncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "H",
+          "H IN Open (X, Y)  /\\   H IN ray O G DIFF {O}    ",
+          "defH",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintXOY"),
+              @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O X = ray O A  /\\   ray O Y = ray O B  /\\   ray O H = ray O G",
+          "Orays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("defXY"),
+              @readable.Prev,
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle X O Y === angle A' O' B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X,O,Y cong A',O',B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XOYncol"),
+              @readable.Label("H1"),
+              @readable.Label("defXY"),
+              @readable.Prev,
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg X Y === seg A' B'  /\\   angle O X Y === angle O' A' B'",
+          "YXOcong",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G'",
+          "G' IN Open (A', B')  /\\   seg X H === seg A' G'    ",
+          "A'G'B'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("XOYncol"),
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Label("defH"),
+              @readable.Thm(
+                "OrderedCongruentSegments",
+                () => orderedcongruentsegments(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G' IN int_angle A' O' B'",
+          "G'intA'O'B'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray X H = ray X Y  /\\   ray A' G' = ray A' B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("defH"),
+              @readable.Label("A'G'B'"),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O X H === angle O' A' G'",
+          "HXOeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+              @readable.Label("YXOcong"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    H IN int_angle X O Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintXOY"),
+              @readable.Label("defH"),
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear O X H /\\  ~Collinear O' A' G'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("G'intA'O'B'"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O,X,H cong O',A',G'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("A'G'B'"),
+              @readable.Label("defXY"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("HXOeq"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle X O H === angle A' O' G'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("G'intA'O'B'"),
+            @readable.Prev,
+            @readable.Label("Orays"),
+            @readable.Thm("Angle_DEF", () => angle_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4562,7 +9633,376 @@ pub fn orderedcongruentangles() -> @kernel.Thm {
 ///|
 /// AngleAddition
 fn step_302() -> Unit raise {
-  angleaddition_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A' O' B' G G'.  G ∈ int_angle A O B  ∧  G' ∈ int_angle A' O' B'  ⇒\n    ∡ A O G ≡ ∡ A' O' G'  ∧  ∡ G O B ≡ ∡ G' O' B'\n   ⇒  ∡ A O B ≡ ∡ A' O' B'\n\n  proof\n    intro_TAC ∀A O B A' O' B' G G', H1, H2;\n    ¬Collinear A O B ∧ ¬Collinear A' O' B'     [AOBncol] by fol H1 IN_InteriorAngle;\n    ¬(A = O) ∧ ¬(A = B) ∧ ¬(O = B) ∧ ¬(A' = O') ∧ ¬(A' = B') ∧ ¬(O' = B') ∧ ¬(G = O)     [Distinct] by fol - NonCollinearImpliesDistinct H1 InteriorEZHelp;\n    consider a b such that\n    Line a ∧ O ∈ a ∧ A ∈ a  ∧\n    Line b ∧ O ∈ b ∧ B ∈ b     [a_line] by fol Distinct I1;\n    consider g such that\n    Line g ∧ O ∈ g ∧ G ∈ g     [g_line] by fol  Distinct I1;\n    G ∉ a ∧ G,B same_side a     [H1'] by fol a_line H1 InteriorUse;\n    ¬Collinear A O G ∧ ¬Collinear A' O' G'     [AOGncol] by fol H1 InteriorEZHelp IN_InteriorAngle;\n    Angle (∡ A O B) ∧ Angle (∡ A' O' B') ∧ Angle (∡ A O G) ∧ Angle (∡ A' O' G')     [angles] by fol AOBncol - ANGLE;\n    ∃! r. Ray r ∧ ∃X. ¬(O = X) ∧ r = ray O X ∧ X ∉ a ∧ X,G same_side a ∧ ∡ A O X ≡ ∡ A' O' B'     [] by simplify C4 - angles Distinct a_line H1';\n    consider X such that\n    X ∉ a ∧ X,G same_side a ∧ ∡ A O X ≡ ∡ A' O' B'     [Xexists] by fol -;\n    ¬Collinear A O X     [AOXncol] by fol Distinct a_line Xexists NonCollinearRaa CollinearSymmetry;\n    ∡ A' O' B' ≡ ∡ A O X     [] by fol - AOBncol ANGLE Xexists C5Symmetric;\n    consider Y such that\n    Y ∈ int_angle A O X  ∧  ∡ A' O' G' ≡ ∡ A O Y     [YintAOX] by fol AOXncol - H1 OrderedCongruentAngles;\n    ¬Collinear A O Y     [] by fol - InteriorEZHelp;\n    ∡ A O Y  ≡ ∡ A O G     [AOGeq] by fol - angles - ANGLE YintAOX H2 C5Transitive C5Symmetric;\n    consider x such that\n    Line x ∧ O ∈ x ∧ X ∈ x     [x_line] by fol Distinct I1;\n    Y ∉ a ∧ Y,X same_side a     [] by fol a_line - YintAOX InteriorUse;\n    Y ∉ a ∧ Y,G same_side a     [] by fol  a_line - Xexists H1' SameSideTransitive;\n    ray O G = ray O Y     [] by fol a_line Distinct H1' - AOGeq C4Uniqueness;\n    G ∈ ray O Y ━ {O}     [] by fol Distinct - EndpointInRay IN_DIFF IN_SING;\n    G ∈ int_angle A O X     [GintAOX] by fol YintAOX - WholeRayInterior;\n    ∡ G O X ≡ ∡ G' O' B'     [GOXeq] by fol - H1 Xexists H2 AngleSubtraction;\n    ¬Collinear G O X ∧ ¬Collinear G O B ∧ ¬Collinear G' O' B'     [GOXncol] by fol GintAOX H1 InteriorAngleSymmetry InteriorEZHelp CollinearSymmetry;\n    Angle (∡ G O X) ∧ Angle (∡ G O B) ∧ Angle (∡ G' O' B')     [] by fol - ANGLE;\n    ∡ G O X ≡ ∡ G O B     [G'O'Xeq] by fol  angles - GOXeq C5Symmetric H2 C5Transitive;\n    ¬(A,X same_side g) ∧ ¬(A,B same_side g)     [Ansim_aXB] by fol g_line GintAOX H1 InteriorOpposite;\n    A ∉ g ∧ B ∉ g ∧ X ∉ g     [notABXg] by fol g_line AOGncol GOXncol Distinct I1 Collinear_DEF ∉;\n    X,B same_side g     [] by fol g_line - Ansim_aXB AtMost2Sides;\n    ray O X = ray O B     [] by fol g_line Distinct notABXg - G'O'Xeq C4Uniqueness;\n    fol - Xexists Angle_DEF;\n  qed;\n")))
+  angleaddition_c.set(@readable.prove(
+    "\n  forall A O B A' O' B' G G'.  G IN int_angle A O B  /\\   G' IN int_angle A' O' B'  ==>\n    angle A O G === angle A' O' G'  /\\   angle G O B === angle G' O' B'\n   ==>  angle A O B === angle A' O' B'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B A' O' B' G G', H1, H2"),
+        @readable.have(
+          "\n    ~Collinear A O B /\\  ~Collinear A' O' B'",
+          "AOBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(A = B) /\\  ~(O = B) /\\  ~(A' = O') /\\  ~(A' = B') /\\  ~(O' = B') /\\  ~(G = O)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Label("H1"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a b",
+          "Line a /\\  O IN a /\\  A IN a  /\\ \n    Line b /\\  O IN b /\\  B IN b    ",
+          "a_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "g",
+          "Line g /\\  O IN g /\\  G IN g    ",
+          "g_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN a /\\  G,B same_side a",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("H1"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O G /\\  ~Collinear A' O' G'",
+          "AOGncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A O B) /\\  Angle (angle A' O' B') /\\  Angle (angle A O G) /\\  Angle (angle A' O' G')",
+          "angles",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOBncol"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ?! r. Ray r /\\  ?X. ~(O = X) /\\  r = ray O X /\\  X NOTIN a /\\  X,G same_side a /\\  angle A O X === angle A' O' B'",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4", () => c4()),
+              @readable.Prev,
+              @readable.Label("angles"),
+              @readable.Label("Distinct"),
+              @readable.Label("a_line"),
+              @readable.Label("H1'"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X",
+          "X NOTIN a /\\  X,G same_side a /\\  angle A O X === angle A' O' B'    ",
+          "Xexists",
+          @readable.by(@readable.fol, [@readable.Prev]),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O X",
+          "AOXncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("a_line"),
+              @readable.Label("Xexists"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A' O' B' === angle A O X",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("AOBncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("Xexists"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Y",
+          "Y IN int_angle A O X  /\\   angle A' O' G' === angle A O Y    ",
+          "YintAOX",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOXncol"),
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("OrderedCongruentAngles", () => orderedcongruentangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("InteriorEZHelp", () => interiorezhelp())],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O Y  === angle A O G",
+          "AOGeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("angles"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("YintAOX"),
+              @readable.Label("H2"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "x",
+          "Line x /\\  O IN x /\\  X IN x    ",
+          "x_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    Y NOTIN a /\\  Y,X same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Prev,
+              @readable.Label("YintAOX"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Y NOTIN a /\\  Y,G same_side a",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Prev,
+              @readable.Label("Xexists"),
+              @readable.Label("H1'"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O G = ray O Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("H1'"),
+              @readable.Prev,
+              @readable.Label("AOGeq"),
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN ray O Y DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN int_angle A O X",
+          "GintAOX",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("YintAOX"),
+              @readable.Prev,
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle G O X === angle G' O' B'",
+          "GOXeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Label("Xexists"),
+              @readable.Label("H2"),
+              @readable.Thm("AngleSubtraction", () => anglesubtraction()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear G O X /\\  ~Collinear G O B /\\  ~Collinear G' O' B'",
+          "GOXncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintAOX"),
+              @readable.Label("H1"),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle G O X) /\\  Angle (angle G O B) /\\  Angle (angle G' O' B')",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("ANGLE", () => angle())],
+          ),
+        ),
+        @readable.have(
+          "\n    angle G O X === angle G O B",
+          "G'O'Xeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angles"),
+              @readable.Prev,
+              @readable.Label("GOXeq"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Label("H2"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A,X same_side g) /\\  ~(A,B same_side g)",
+          "Ansim_aXB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("g_line"),
+              @readable.Label("GintAOX"),
+              @readable.Label("H1"),
+              @readable.Thm("InteriorOpposite", () => interioropposite()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN g /\\  B NOTIN g /\\  X NOTIN g",
+          "notABXg",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("g_line"),
+              @readable.Label("AOGncol"),
+              @readable.Label("GOXncol"),
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    X,B same_side g",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("g_line"),
+              @readable.Prev,
+              @readable.Label("Ansim_aXB"),
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O X = ray O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("g_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("notABXg"),
+              @readable.Prev,
+              @readable.Label("G'O'Xeq"),
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("Xexists"),
+            @readable.Thm("Angle_DEF", () => angle_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4575,41 +10015,85 @@ pub fn angleaddition() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_149`
-pub fn exec_phrase_149(x151 : Unit) -> Unit raise {
-  let _ = x151
-  {
-    @readable.thm_ref().val = orderedcongruentangles()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OrderedCongruentAngles): thm);;
-fn step_303() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OrderedCongruentAngles): thm);;", exec_phrase_149)
-}
-
-///|
-/// `exec_phrase_150`
-pub fn exec_phrase_150(x152 : Unit) -> Unit raise {
-  let _ = x152
-  {
-    @readable.thm_ref().val = anglesubtraction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleSubtraction): thm);;
-fn step_304() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleSubtraction): thm);;", exec_phrase_150)
-}
-
-///|
 /// AngleOrderingUse
 fn step_305() -> Unit raise {
-  angleorderinguse_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B α.  Angle α  ∧  ¬Collinear A O B  ⇒  α <_ang ∡ A O B\n    ⇒  ∃G. G ∈ int_angle A O B ∧ α ≡ ∡ A O G\n\n  proof\n    intro_TAC ∀A O B α, H1, H3;\n    consider A' O' B' G' such that\n    ¬Collinear A' O' B'  ∧  ∡ A O B = ∡ A' O' B'  ∧  G' ∈ int_angle A' O' B'  ∧  α ≡ ∡ A' O' G'     [H3'] by fol H3 AngleOrdering_DEF;\n    Angle (∡ A O B) ∧ Angle (∡ A' O' B') ∧ Angle (∡ A' O' G')     [angles] by fol H1 - ANGLE InteriorEZHelp;\n    ∡ A' O' B' ≡ ∡ A O B     [] by fol - H3' C5Reflexive;\n    consider G such that\n    G ∈ int_angle A O B  ∧  ∡ A' O' G' ≡ ∡ A O G     [GintAOB] by fol H1 H3' -  OrderedCongruentAngles;\n    α ≡ ∡ A O G     [] by fol H1 angles - InteriorEZHelp ANGLE H3' GintAOB C5Transitive;\n    fol - GintAOB;\n  qed;\n")))
+  angleorderinguse_c.set(@readable.prove(
+    "\n  forall A O B alpha.  Angle alpha  /\\   ~Collinear A O B  ==>  alpha <_ang angle A O B\n    ==>  ?G. G IN int_angle A O B /\\  alpha === angle A O G",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B alpha, H1, H3"),
+        @readable.consider(
+          "A' O' B' G'",
+          "~Collinear A' O' B'  /\\   angle A O B = angle A' O' B'  /\\   G' IN int_angle A' O' B'  /\\   alpha === angle A' O' G'    ",
+          "H3'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A O B) /\\  Angle (angle A' O' B') /\\  Angle (angle A' O' G')",
+          "angles",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A' O' B' === angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H3'"),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN int_angle A O B  /\\   angle A' O' G' === angle A O G    ",
+          "GintAOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H3'"),
+              @readable.Prev,
+              @readable.Thm("OrderedCongruentAngles", () => orderedcongruentangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha === angle A O G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("angles"),
+              @readable.Prev,
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H3'"),
+              @readable.Label("GintAOB"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("GintAOB")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4622,25 +10106,154 @@ pub fn angleorderinguse() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_151`
-pub fn exec_phrase_151(x153 : Unit) -> Unit raise {
-  let _ = x153
-  {
-    @readable.thm_ref().val = angleordering_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleOrdering_DEF): thm);;
-fn step_306() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleOrdering_DEF): thm);;", exec_phrase_151)
-}
-
-///|
 /// AngleTrichotomy1
 fn step_307() -> Unit raise {
-  angletrichotomy1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β. α <_ang β  ⇒  ¬(α ≡ β)\n\n  proof\n    intro_TAC ∀α β, H1;\n    assume α ≡ β     [Con] by fol;\n    consider A O B G such that\n    Angle α ∧ ¬Collinear A O B ∧ β = ∡ A O B ∧ G ∈ int_angle A O B ∧ α ≡ ∡ A O G     [H1'] by fol H1 AngleOrdering_DEF;\n    ¬(A = O) ∧ ¬(O = B) ∧ ¬Collinear A O G     [Distinct] by fol H1' NonCollinearImpliesDistinct InteriorEZHelp;\n    consider a such that\n    Line a ∧ O ∈ a ∧ A ∈ a     [a_line] by fol Distinct I1;\n    consider b such that\n    Line b ∧ O ∈ b ∧ B ∈ b     [b_line] by fol Distinct I1;\n    B ∉ a     [notBa] by fol a_line H1' Collinear_DEF ∉;\n    G ∉ a ∧ G ∉ b ∧ G,B same_side a     [GintAOB] by fol a_line b_line H1' InteriorUse;\n    ∡ A O G ≡ α     [] by fol H1' Distinct ANGLE C5Symmetric;\n    ∡ A O G ≡ ∡ A O B     [] by fol H1' Distinct ANGLE - Con C5Transitive;\n    ray O B = ray O G     [] by fol a_line Distinct notBa GintAOB - C4Uniqueness;\n    G ∈ b     [] by fol Distinct - EndpointInRay b_line RayLine SUBSET;\n    fol - GintAOB ∉;\n  qed;\n")))
+  angletrichotomy1_c.set(@readable.prove(
+    "\n  forall alpha beta. alpha <_ang beta  ==>  ~(alpha === beta)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta, H1"),
+        @readable.assuming("alpha === beta", "Con", @readable.by(@readable.fol, [])),
+        @readable.consider(
+          "A O B G",
+          "Angle alpha /\\  ~Collinear A O B /\\  beta = angle A O B /\\  G IN int_angle A O B /\\  alpha === angle A O G    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B) /\\  ~Collinear A O G",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a",
+          "Line a /\\  O IN a /\\  A IN a    ",
+          "a_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "b",
+          "Line b /\\  O IN b /\\  B IN b    ",
+          "b_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN a",
+          "notBa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("H1'"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN a /\\  G NOTIN b /\\  G,B same_side a",
+          "GintAOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("b_line"),
+              @readable.Label("H1'"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O G === alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Label("Distinct"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O G === angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Label("Distinct"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Prev,
+              @readable.Label("Con"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O B = ray O G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("notBa"),
+              @readable.Label("GintAOB"),
+              @readable.Prev,
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN b",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Label("b_line"),
+              @readable.Thm("RayLine", () => rayline()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("GintAOB"),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4655,7 +10268,87 @@ pub fn angletrichotomy1() -> @kernel.Thm {
 ///|
 /// AngleTrichotomy2
 fn step_308() -> Unit raise {
-  angletrichotomy2_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β γ.  α <_ang β  ∧  Angle γ  ∧  β ≡ γ  ⇒  α <_ang γ\n\n  proof\n    intro_TAC ∀α β γ, H1 H2 H3;\n    consider A O B G such that\n    Angle α ∧ ¬Collinear A O B ∧ β = ∡ A O B ∧ G ∈ int_angle A O B ∧ α ≡ ∡ A O G     [H1'] by fol H1 AngleOrdering_DEF;\n    consider A' O' B' such that\n    γ = ∡ A' O' B' ∧ ¬Collinear A' O' B'     [γA'O'B'] by fol H2 ANGLE;\n    consider G' such that\n    G' ∈ int_angle A' O' B' ∧ ∡ A O G ≡ ∡ A' O' G'     [G'intA'O'B'] by fol γA'O'B' H1' H3  OrderedCongruentAngles;\n    ¬Collinear A O G ∧ ¬Collinear A' O' G'     [ncol] by fol H1' - InteriorEZHelp;\n    α ≡ ∡ A' O' G'     [] by fol H1' ANGLE - G'intA'O'B' C5Transitive;\n    fol H1' - ncol γA'O'B' G'intA'O'B' - AngleOrdering_DEF;\n  qed;\n")))
+  angletrichotomy2_c.set(@readable.prove(
+    "\n  forall alpha beta gamma.  alpha <_ang beta  /\\   Angle gamma  /\\   beta === gamma  ==>  alpha <_ang gamma",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta gamma, H1 H2 H3"),
+        @readable.consider(
+          "A O B G",
+          "Angle alpha /\\  ~Collinear A O B /\\  beta = angle A O B /\\  G IN int_angle A O B /\\  alpha === angle A O G    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "A' O' B'",
+          "gamma = angle A' O' B' /\\  ~Collinear A' O' B'    ",
+          "gammaA'O'B'",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H2"), @readable.Thm("ANGLE", () => angle())],
+          ),
+        ),
+        @readable.consider(
+          "G'",
+          "G' IN int_angle A' O' B' /\\  angle A O G === angle A' O' G'    ",
+          "G'intA'O'B'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("gammaA'O'B'"),
+              @readable.Label("H1'"),
+              @readable.Label("H3"),
+              @readable.Thm("OrderedCongruentAngles", () => orderedcongruentangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O G /\\  ~Collinear A' O' G'",
+          "ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Prev,
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha === angle A' O' G'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Prev,
+              @readable.Label("G'intA'O'B'"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1'"),
+            @readable.Prev,
+            @readable.Label("ncol"),
+            @readable.Label("gammaA'O'B'"),
+            @readable.Label("G'intA'O'B'"),
+            @readable.Prev,
+            @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4670,7 +10363,100 @@ pub fn angletrichotomy2() -> @kernel.Thm {
 ///|
 /// AngleOrderTransitivity
 fn step_309() -> Unit raise {
-  angleordertransitivity_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β γ. α <_ang β  ∧  β <_ang γ  ⇒  α <_ang γ\n\n  proof\n    intro_TAC ∀α β γ, H1 H2;\n    consider A O B G such that\n    Angle β ∧ ¬Collinear A O B ∧ γ = ∡ A O B ∧ G ∈ int_angle A O B ∧ β ≡ ∡ A O G     [H2'] by fol H2 AngleOrdering_DEF;\n    ¬Collinear A O G     [AOGncol] by fol H2'  InteriorEZHelp;\n    Angle α ∧ Angle (∡ A O G)  ∧ Angle γ     [angles] by fol H1 AngleOrdering_DEF H2' - ANGLE;\n    α <_ang ∡ A O G     [] by fol H1 H2' - AngleTrichotomy2;\n    consider F such that\n    F ∈ int_angle A O G ∧ α ≡ ∡ A O F     [FintAOG] by fol angles AOGncol - AngleOrderingUse;\n    F ∈ int_angle A O B     [] by fol H2' - InteriorTransitivity;\n    fol angles H2' - FintAOG AngleOrdering_DEF;\n  qed;\n")))
+  angleordertransitivity_c.set(@readable.prove(
+    "\n  forall alpha beta gamma. alpha <_ang beta  /\\   beta <_ang gamma  ==>  alpha <_ang gamma",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta gamma, H1 H2"),
+        @readable.consider(
+          "A O B G",
+          "Angle beta /\\  ~Collinear A O B /\\  gamma = angle A O B /\\  G IN int_angle A O B /\\  beta === angle A O G    ",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O G",
+          "AOGncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2'"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle alpha /\\  Angle (angle A O G)  /\\  Angle gamma",
+          "angles",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+              @readable.Label("H2'"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha <_ang angle A O G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2'"),
+              @readable.Prev,
+              @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "F",
+          "F IN int_angle A O G /\\  alpha === angle A O F    ",
+          "FintAOG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angles"),
+              @readable.Label("AOGncol"),
+              @readable.Prev,
+              @readable.Thm("AngleOrderingUse", () => angleorderinguse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F IN int_angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2'"),
+              @readable.Prev,
+              @readable.Thm("InteriorTransitivity", () => interiortransitivity()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("angles"),
+            @readable.Label("H2'"),
+            @readable.Prev,
+            @readable.Label("FintAOG"),
+            @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4683,57 +10469,326 @@ pub fn angleordertransitivity() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_152`
-pub fn exec_phrase_152(x154 : Unit) -> Unit raise {
-  let _ = x154
-  {
-    @readable.thm_ref().val = angletrichotomy2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleTrichotomy2): thm);;
-fn step_310() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleTrichotomy2): thm);;", exec_phrase_152)
-}
-
-///|
-/// `exec_phrase_153`
-pub fn exec_phrase_153(x155 : Unit) -> Unit raise {
-  let _ = x155
-  {
-    @readable.thm_ref().val = angleorderinguse()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleOrderingUse): thm);;
-fn step_311() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleOrderingUse): thm);;", exec_phrase_153)
-}
-
-///|
-/// `exec_phrase_154`
-pub fn exec_phrase_154(x156 : Unit) -> Unit raise {
-  let _ = x156
-  {
-    @readable.thm_ref().val = interiortransitivity()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorTransitivity): thm);;
-fn step_312() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorTransitivity): thm);;", exec_phrase_154)
-}
-
-///|
 /// AngleTrichotomy
 fn step_313() -> Unit raise {
-  angletrichotomy_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β.  Angle α ∧ Angle β\n   ⇒  (α ≡ β  ∨  α <_ang β  ∨  β <_ang α)  ∧\n       ¬(α ≡ β  ∧  α <_ang β)  ∧\n       ¬(α ≡ β  ∧  β <_ang α)  ∧\n       ¬(α <_ang β  ∧  β <_ang α)\n\n  proof\n    intro_TAC ∀α β, H1;\n    ¬(α ≡ β  ∧  α <_ang β)     [Not12] by fol AngleTrichotomy1;\n    ¬(α ≡ β  ∧  β <_ang α)     [Not13] by fol H1 C5Symmetric AngleTrichotomy1;\n    ¬(α <_ang β  ∧  β <_ang α)     [Not23] by fol H1 AngleOrderTransitivity AngleTrichotomy1 C5Reflexive;\n    consider P O A such that\n    α = ∡ P O A ∧ ¬Collinear P O A     [POA] by fol H1 ANGLE;\n    ¬(P = O) ∧ ¬(O = A)      [Distinct] by fol - NonCollinearImpliesDistinct;\n    consider a such that\n    Line a ∧ O ∈ a ∧ A ∈ a     [a_line] by fol - I1;\n    P ∉ a     [notPa] by fol - Distinct I1 POA Collinear_DEF ∉;\n    ∃! r. Ray r ∧ ∃Q. ¬(O = Q) ∧ r = ray O Q ∧ Q ∉ a ∧ Q,P same_side a ∧ ∡ A O Q ≡ β     [] by simplify H1 Distinct a_line C4 -;\n    consider Q such that\n    ¬(O = Q) ∧ Q ∉ a ∧ Q,P same_side a ∧ ∡ A O Q ≡ β     [Qexists] by fol -;\n    O ∉ Open (Q, P)     [notQOP] by fol a_line Qexists SameSide_DEF ∉;\n    ¬Collinear A O P     [AOPncol] by fol POA CollinearSymmetry;\n    ¬Collinear A O Q     [AOQncol] by fol a_line Distinct I1 Collinear_DEF Qexists ∉;\n    Angle (∡ A O P) ∧ Angle (∡ A O Q)     [] by fol AOPncol - ANGLE;\n    α ≡ ∡ A O P  ∧  β ≡ ∡ A O Q  ∧  ∡ A O P ≡ α     [flip] by fol H1 - POA AngleSymmetry C5Reflexive Qexists C5Symmetric;\n    case_split QOPcol | QOPcolncol     by fol -;\n    suppose Collinear Q O P;\n      Collinear O P Q     [] by fol - CollinearSymmetry;\n      Q ∈ ray O P ━ {O}     [] by fol Distinct - notQOP IN_Ray Qexists IN_DIFF IN_SING;\n      ray O Q = ray O P     [] by fol Distinct - RayWellDefined;\n      ∡ P O A = ∡ A O Q     [] by fol - Angle_DEF AngleSymmetry;\n      fol - POA Qexists Not12 Not13 Not23;\n    end;\n    suppose ¬Collinear Q O P;\n      P ∈ int_angle Q O A ∨ Q ∈ int_angle P O A     [] by fol Distinct a_line Qexists notPa - AngleOrdering;\n      P ∈ int_angle A O Q ∨ Q ∈ int_angle A O P     [] by fol - InteriorAngleSymmetry;\n      α <_ang ∡ A O Q  ∨  β <_ang ∡ A O P     [] by fol H1 AOQncol AOPncol - flip AngleOrdering_DEF;\n      α <_ang β  ∨  β <_ang α     [] by fol H1 - Qexists flip AngleTrichotomy2;\n      fol - Not12 Not13 Not23;\n    end;\n  qed;\n")))
+  angletrichotomy_c.set(@readable.prove(
+    "\n  forall alpha beta.  Angle alpha /\\  Angle beta\n   ==>  (alpha === beta  \\/  alpha <_ang beta  \\/  beta <_ang alpha)  /\\ \n       ~(alpha === beta  /\\   alpha <_ang beta)  /\\ \n       ~(alpha === beta  /\\   beta <_ang alpha)  /\\ \n       ~(alpha <_ang beta  /\\   beta <_ang alpha)",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall alpha beta, H1"),
+        @readable.have(
+          "\n    ~(alpha === beta  /\\   alpha <_ang beta)",
+          "Not12",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("AngleTrichotomy1", () => angletrichotomy1())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(alpha === beta  /\\   beta <_ang alpha)",
+          "Not13",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(alpha <_ang beta  /\\   beta <_ang alpha)",
+          "Not23",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+              @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "P O A",
+          "alpha = angle P O A /\\  ~Collinear P O A    ",
+          "POA",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("ANGLE", () => angle())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(P = O) /\\  ~(O = A)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a",
+          "Line a /\\  O IN a /\\  A IN a    ",
+          "a_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.have(
+          "\n    P NOTIN a",
+          "notPa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Label("POA"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ?! r. Ray r /\\  ?Q. ~(O = Q) /\\  r = ray O Q /\\  Q NOTIN a /\\  Q,P same_side a /\\  angle A O Q === beta",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("H1"),
+              @readable.Label("Distinct"),
+              @readable.Label("a_line"),
+              @readable.Thm("C4", () => c4()),
+              @readable.Prev,
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "~(O = Q) /\\  Q NOTIN a /\\  Q,P same_side a /\\  angle A O Q === beta    ",
+          "Qexists",
+          @readable.by(@readable.fol, [@readable.Prev]),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (Q, P)",
+          "notQOP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Qexists"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O P",
+          "AOPncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("POA"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O Q",
+          "AOQncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("Qexists"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A O P) /\\  Angle (angle A O Q)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOPncol"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha === angle A O P  /\\   beta === angle A O Q  /\\   angle A O P === alpha",
+          "flip",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Label("POA"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+              @readable.Label("Qexists"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "QOPcol | QOPcolncol    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["Collinear Q O P", "~Collinear Q O P"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      Collinear O P Q",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      Q IN ray O P DIFF {O}",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Prev,
+                      @readable.Label("notQOP"),
+                      @readable.Thm("IN_Ray", () => in_ray()),
+                      @readable.Label("Qexists"),
+                      @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                      @readable.Thm("IN_SING", () => @sets.in_sing()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ray O Q = ray O P",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Prev,
+                      @readable.Thm("RayWellDefined", () => raywelldefined()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle P O A = angle A O Q",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("Angle_DEF", () => angle_def()),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("POA"),
+                    @readable.Label("Qexists"),
+                    @readable.Label("Not12"),
+                    @readable.Label("Not13"),
+                    @readable.Label("Not23"),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      P IN int_angle Q O A \\/ Q IN int_angle P O A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Label("a_line"),
+                      @readable.Label("Qexists"),
+                      @readable.Label("notPa"),
+                      @readable.Prev,
+                      @readable.Thm("AngleOrdering", () => angleordering()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      P IN int_angle A O Q \\/ Q IN int_angle A O P",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm(
+                        "InteriorAngleSymmetry",
+                        () => interioranglesymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      alpha <_ang angle A O Q  \\/  beta <_ang angle A O P",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Label("AOQncol"),
+                      @readable.Label("AOPncol"),
+                      @readable.Prev,
+                      @readable.Label("flip"),
+                      @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      alpha <_ang beta  \\/  beta <_ang alpha",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Prev,
+                      @readable.Label("Qexists"),
+                      @readable.Label("flip"),
+                      @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("Not12"),
+                    @readable.Label("Not13"),
+                    @readable.Label("Not23"),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -4746,41 +10801,55 @@ pub fn angletrichotomy() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_155`
-pub fn exec_phrase_155(x157 : Unit) -> Unit raise {
-  let _ = x157
-  {
-    @readable.thm_ref().val = angletrichotomy1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleTrichotomy1): thm);;
-fn step_314() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleTrichotomy1): thm);;", exec_phrase_155)
-}
-
-///|
-/// `exec_phrase_156`
-pub fn exec_phrase_156(x158 : Unit) -> Unit raise {
-  let _ = x158
-  {
-    @readable.thm_ref().val = angleordertransitivity()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleOrderTransitivity): thm);;
-fn step_315() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleOrderTransitivity): thm);;", exec_phrase_156)
-}
-
-///|
 /// SupplementExists
 fn step_316() -> Unit raise {
-  supplementexists_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Angle α  ⇒  ∃α'. α suppl α'\n\n  proof\n    intro_TAC ∀α, H1;\n    consider A O B such that\n    α = ∡ A O B ∧ ¬Collinear A O B ∧ ¬(A = O)     [def_α] by fol H1 ANGLE NonCollinearImpliesDistinct;\n    consider A' such that\n    O ∈ Open (A, A')     [AOA'] by fol - B2';\n    ∡ A O B  suppl  ∡ A' O B     [AOBsup] by fol def_α - SupplementaryAngles_DEF AngleSymmetry;\n    fol - def_α;\n  qed;\n")))
+  supplementexists_c.set(@readable.prove(
+    "\n  forall alpha. Angle alpha  ==>  ?alpha'. alpha suppl alpha'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha, H1"),
+        @readable.consider(
+          "A O B",
+          "alpha = angle A O B /\\  ~Collinear A O B /\\  ~(A = O)    ",
+          "def_alpha",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "A'",
+          "O IN Open (A, A')    ",
+          "AOA'",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O B  suppl  angle A' O B",
+          "AOBsup",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Prev,
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("def_alpha")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4793,25 +10862,67 @@ pub fn supplementexists() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_157`
-pub fn exec_phrase_157(x159 : Unit) -> Unit raise {
-  let _ = x159
-  {
-    @readable.thm_ref().val = supplementaryangles_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SupplementaryAngles_DEF): thm);;
-fn step_317() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SupplementaryAngles_DEF): thm);;", exec_phrase_157)
-}
-
-///|
 /// SupplementImpliesAngle
 fn step_318() -> Unit raise {
-  supplementimpliesangle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β.  α suppl β  ⇒  Angle α ∧ Angle β\n\n  proof\n    intro_TAC ∀α β, H1;\n    consider A O B A' such that\n    ¬Collinear A O B  ∧  O ∈ Open (A, A')  ∧  α = ∡ A O B  ∧  β = ∡ B O A'     [H1'] by fol H1 SupplementaryAngles_DEF;\n    ¬(O = A') ∧ Collinear A O A'     [Distinct] by fol - NonCollinearImpliesDistinct B1';\n    ¬Collinear B O A'     [] by fol H1' CollinearSymmetry - NoncollinearityExtendsToLine;\n    fol H1' - ANGLE;\n  qed;\n")))
+  supplementimpliesangle_c.set(@readable.prove(
+    "\n  forall alpha beta.  alpha suppl beta  ==>  Angle alpha /\\  Angle beta",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta, H1"),
+        @readable.consider(
+          "A O B A'",
+          "~Collinear A O B  /\\   O IN Open (A, A')  /\\   alpha = angle A O B  /\\   beta = angle B O A'    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(O = A') /\\  Collinear A O A'",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1'"),
+            @readable.Prev,
+            @readable.Thm("ANGLE", () => angle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4826,7 +10937,16 @@ pub fn supplementimpliesangle() -> @kernel.Thm {
 ///|
 /// RightImpliesAngle
 fn step_319() -> Unit raise {
-  rightimpliesangle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Right α  ⇒  Angle α\n  by fol RightAngle_DEF SupplementImpliesAngle")))
+  rightimpliesangle_c.set(@readable.prove(
+    "\n  forall alpha. Right alpha  ==>  Angle alpha",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+        @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4839,41 +10959,79 @@ pub fn rightimpliesangle() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_158`
-pub fn exec_phrase_158(x160 : Unit) -> Unit raise {
-  let _ = x160
-  {
-    @readable.thm_ref().val = rightangle_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RightAngle_DEF): thm);;
-fn step_320() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RightAngle_DEF): thm);;", exec_phrase_158)
-}
-
-///|
-/// `exec_phrase_159`
-pub fn exec_phrase_159(x161 : Unit) -> Unit raise {
-  let _ = x161
-  {
-    @readable.thm_ref().val = supplementimpliesangle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SupplementImpliesAngle): thm);;
-fn step_321() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SupplementImpliesAngle): thm);;", exec_phrase_159)
-}
-
-///|
 /// SupplementSymmetry
 fn step_322() -> Unit raise {
-  supplementsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β. α suppl β  ⇒  β suppl α\n\n  proof\n    intro_TAC ∀α β, H1;\n  consider A O B A' such that\n  ¬Collinear A O B  ∧  O ∈ Open (A, A')  ∧  α = ∡ A O B  ∧  β = ∡ B O A'     [H1'] by fol H1 SupplementaryAngles_DEF;\n  ¬(O = A') ∧ Collinear A O A'     [] by fol - NonCollinearImpliesDistinct B1';\n  ¬Collinear A' O B     [A'OBncol] by fol H1' CollinearSymmetry - NoncollinearityExtendsToLine;\n  O ∈ Open (A', A)  ∧  β = ∡ A' O B  ∧  α = ∡ B O A     [] by fol H1' B1'  AngleSymmetry;\n  fol A'OBncol - SupplementaryAngles_DEF;\n  qed;\n")))
+  supplementsymmetry_c.set(@readable.prove(
+    "\n  forall alpha beta. alpha suppl beta  ==>  beta suppl alpha",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta, H1"),
+        @readable.consider(
+          "A O B A'",
+          "~Collinear A O B  /\\   O IN Open (A, A')  /\\   alpha = angle A O B  /\\   beta = angle B O A'    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n  ~(O = A') /\\  Collinear A O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n  ~Collinear A' O B",
+          "A'OBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n  O IN Open (A', A)  /\\   beta = angle A' O B  /\\   alpha = angle B O A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("A'OBncol"),
+            @readable.Prev,
+            @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4888,7 +11046,383 @@ pub fn supplementsymmetry() -> @kernel.Thm {
 ///|
 /// SupplementsCongAnglesCong
 fn step_323() -> Unit raise {
-  supplementsconganglescong_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β α' β'.  α suppl α'  ∧  β suppl β'  ⇒  α ≡ β\n    ⇒  α' ≡ β'\n\n  proof\n    intro_TAC ∀α β α' β', H1, H2;\n    consider A O B A' such that\n    ¬Collinear A O B  ∧  O ∈ Open (A, A')  ∧  α = ∡ A O B  ∧  α' = ∡ B O A'     [def_α] by fol H1 SupplementaryAngles_DEF;\n    ¬(A = O) ∧ ¬(O = B) ∧ ¬(A = A') ∧ ¬(O = A') ∧ Collinear A O A'     [Distinctα] by fol - NonCollinearImpliesDistinct B1';\n    ¬Collinear B A A' ∧ ¬Collinear O A' B     [BAA'ncol] by fol def_α CollinearSymmetry - NoncollinearityExtendsToLine;\n    Segment (seg O A) ∧ Segment (seg O B) ∧ Segment (seg O A')     [Osegments] by fol Distinctα SEGMENT;\n    consider C P D C' such that\n    ¬Collinear C P D  ∧  P ∈ Open (C, C')  ∧  β = ∡ C P D  ∧  β' = ∡ D P C'     [def_β] by fol H1 SupplementaryAngles_DEF;\n    ¬(C = P) ∧ ¬(P = D) ∧ ¬(P = C')     [Distinctβ] by fol def_β NonCollinearImpliesDistinct B1';\n    consider X such that\n    X ∈ ray P C ━ {P}  ∧  seg P X ≡ seg O A     [defX] by fol Osegments Distinctβ C1;\n    consider Y such that\n    Y ∈ ray P D ━ {P}  ∧  seg P Y ≡ seg O B  ∧  ¬(Y = P)     [defY] by fol Osegments Distinctβ C1 IN_DIFF IN_SING;\n    consider X' such that\n    X' ∈ ray P C' ━ {P}  ∧  seg P X' ≡ seg O A'     [defX'] by fol Osegments Distinctβ C1;\n    P ∈ Open (X', C)  ∧  P ∈ Open (X, X')       [XPX'] by fol def_β - OppositeRaysIntersect1pointHelp defX;\n    ¬(X = P) ∧ ¬(X' = P) ∧ Collinear X P X' ∧ ¬(X = X') ∧ ray A' O = ray A' A ∧ ray X' P = ray X' X     [XPX'line] by fol defX defX' IN_DIFF IN_SING - B1' def_α IntervalRay;\n     Collinear P D Y ∧ Collinear P C X     [] by fol defY defX IN_DIFF IN_SING IN_Ray;\n    ¬Collinear C P Y ∧ ¬Collinear X P Y     [XPYncol] by fol def_β - defY NoncollinearityExtendsToLine CollinearSymmetry XPX'line;\n    ¬Collinear Y X X' ∧ ¬Collinear P X' Y     [YXX'ncol] by fol - CollinearSymmetry XPX' XPX'line NoncollinearityExtendsToLine;\n    ray P X = ray P C  ∧  ray P Y = ray P D  ∧  ray P X' = ray P C'     [equalPrays] by fol Distinctβ defX defY defX' RayWellDefined;\n    β = ∡ X P Y  ∧  β' = ∡ Y P X'  ∧  ∡ A O B ≡ ∡ X P Y     [AOBeqXPY] by fol def_β - Angle_DEF H2 def_α;\n   seg O A ≡ seg P X  ∧  seg O B ≡ seg P Y  ∧  seg A' O ≡ seg X' P     [OAeq] by fol Osegments XPX'line SEGMENT defX defY defX' C2Symmetric SegmentSymmetry;\n    seg A A' ≡ seg X X'     [AA'eq] by fol def_α XPX'line XPX' - SegmentSymmetry C3;\n    A,O,B ≅ X,P,Y     [] by fol def_α XPYncol OAeq AOBeqXPY SAS;\n    seg A B ≡ seg X Y  ∧  ∡ B A O ≡ ∡ Y X P     [AOB≅] by fol - TriangleCong_DEF AngleSymmetry;\n    ray A O = ray A A'  ∧  ray X P = ray X  X'  ∧  ∡ B A A' ≡ ∡ Y X X'     [] by fol def_α XPX' IntervalRay - Angle_DEF;\n    B,A,A' ≅ Y,X,X'     [] by fol BAA'ncol YXX'ncol AOB≅ - AA'eq - SAS;\n    seg A' B ≡ seg X' Y  ∧  ∡ A A' B ≡ ∡ X X' Y     [] by fol - TriangleCong_DEF SegmentSymmetry;\n    O,A',B ≅ P,X',Y     [] by fol BAA'ncol YXX'ncol OAeq - XPX'line Angle_DEF SAS;\n    ∡ B O A' ≡ ∡ Y P X'     [] by fol - TriangleCong_DEF;\n    fol - equalPrays def_β Angle_DEF def_α;\n  qed;\n")))
+  supplementsconganglescong_c.set(@readable.prove(
+    "\n  forall alpha beta alpha' beta'.  alpha suppl alpha'  /\\   beta suppl beta'  ==>  alpha === beta\n    ==>  alpha' === beta'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta alpha' beta', H1, H2"),
+        @readable.consider(
+          "A O B A'",
+          "~Collinear A O B  /\\   O IN Open (A, A')  /\\   alpha = angle A O B  /\\   alpha' = angle B O A'    ",
+          "def_alpha",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B) /\\  ~(A = A') /\\  ~(O = A') /\\  Collinear A O A'",
+          "Distinctalpha",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B A A' /\\  ~Collinear O A' B",
+          "BAA'ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Segment (seg O A) /\\  Segment (seg O B) /\\  Segment (seg O A')",
+          "Osegments",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinctalpha"),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "C P D C'",
+          "~Collinear C P D  /\\   P IN Open (C, C')  /\\   beta = angle C P D  /\\   beta' = angle D P C'    ",
+          "def_beta",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(C = P) /\\  ~(P = D) /\\  ~(P = C')",
+          "Distinctbeta",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_beta"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X",
+          "X IN ray P C DIFF {P}  /\\   seg P X === seg O A    ",
+          "defX",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Osegments"),
+              @readable.Label("Distinctbeta"),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Y",
+          "Y IN ray P D DIFF {P}  /\\   seg P Y === seg O B  /\\   ~(Y = P)    ",
+          "defY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Osegments"),
+              @readable.Label("Distinctbeta"),
+              @readable.Thm("C1", () => c1()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "X'",
+          "X' IN ray P C' DIFF {P}  /\\   seg P X' === seg O A'    ",
+          "defX'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Osegments"),
+              @readable.Label("Distinctbeta"),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN Open (X', C)  /\\   P IN Open (X, X')",
+          "XPX'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_beta"),
+              @readable.Prev,
+              @readable.Thm(
+                "OppositeRaysIntersect1pointHelp",
+                () => oppositeraysintersect1pointhelp(),
+              ),
+              @readable.Label("defX"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(X = P) /\\  ~(X' = P) /\\  Collinear X P X' /\\  ~(X = X') /\\  ray A' O = ray A' A /\\  ray X' P = ray X' X",
+          "XPX'line",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("defX"),
+              @readable.Label("defX'"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("def_alpha"),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n     Collinear P D Y /\\  Collinear P C X",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("defY"),
+              @readable.Label("defX"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C P Y /\\  ~Collinear X P Y",
+          "XPYncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_beta"),
+              @readable.Prev,
+              @readable.Label("defY"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("XPX'line"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear Y X X' /\\  ~Collinear P X' Y",
+          "YXX'ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("XPX'"),
+              @readable.Label("XPX'line"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray P X = ray P C  /\\   ray P Y = ray P D  /\\   ray P X' = ray P C'",
+          "equalPrays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinctbeta"),
+              @readable.Label("defX"),
+              @readable.Label("defY"),
+              @readable.Label("defX'"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    beta = angle X P Y  /\\   beta' = angle Y P X'  /\\   angle A O B === angle X P Y",
+          "AOBeqXPY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_beta"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+              @readable.Label("H2"),
+              @readable.Label("def_alpha"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n   seg O A === seg P X  /\\   seg O B === seg P Y  /\\   seg A' O === seg X' P",
+          "OAeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Osegments"),
+              @readable.Label("XPX'line"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("defX"),
+              @readable.Label("defY"),
+              @readable.Label("defX'"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A A' === seg X X'",
+          "AA'eq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Label("XPX'line"),
+              @readable.Label("XPX'"),
+              @readable.Prev,
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Thm("C3", () => c3()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,O,B cong X,P,Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Label("XPYncol"),
+              @readable.Label("OAeq"),
+              @readable.Label("AOBeqXPY"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A B === seg X Y  /\\   angle B A O === angle Y X P",
+          "AOBcong",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A O = ray A A'  /\\   ray X P = ray X  X'  /\\   angle B A A' === angle Y X X'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Label("XPX'"),
+              @readable.Thm("IntervalRay", () => intervalray()),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B,A,A' cong Y,X,X'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BAA'ncol"),
+              @readable.Label("YXX'ncol"),
+              @readable.Label("AOBcong"),
+              @readable.Prev,
+              @readable.Label("AA'eq"),
+              @readable.Prev,
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A' B === seg X' Y  /\\   angle A A' B === angle X X' Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    O,A',B cong P,X',Y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BAA'ncol"),
+              @readable.Label("YXX'ncol"),
+              @readable.Label("OAeq"),
+              @readable.Prev,
+              @readable.Label("XPX'line"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B O A' === angle Y P X'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("equalPrays"),
+            @readable.Label("def_beta"),
+            @readable.Thm("Angle_DEF", () => angle_def()),
+            @readable.Label("def_alpha"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4903,7 +11437,18 @@ pub fn supplementsconganglescong() -> @kernel.Thm {
 ///|
 /// SupplementUnique
 fn step_324() -> Unit raise {
-  supplementunique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β β'.  α suppl β  ∧   α suppl β'  ⇒  β ≡ β'\n  by fol SupplementaryAngles_DEF ANGLE C5Reflexive SupplementsCongAnglesCong")))
+  supplementunique_c.set(@readable.prove(
+    "\n  forall alpha beta beta'.  alpha suppl beta  /\\    alpha suppl beta'  ==>  beta === beta'",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+        @readable.Thm("ANGLE", () => angle()),
+        @readable.Thm("C5Reflexive", () => c5reflexive()),
+        @readable.Thm("SupplementsCongAnglesCong", () => supplementsconganglescong()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4916,25 +11461,80 @@ pub fn supplementunique() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_160`
-pub fn exec_phrase_160(x162 : Unit) -> Unit raise {
-  let _ = x162
-  {
-    @readable.thm_ref().val = supplementsconganglescong()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SupplementsCongAnglesCong): thm);;
-fn step_325() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SupplementsCongAnglesCong): thm);;", exec_phrase_160)
-}
-
-///|
 /// CongRightImpliesRight
 fn step_326() -> Unit raise {
-  congrightimpliesright_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β. Angle α  ∧  Right β  ⇒  α ≡ β  ⇒  Right α\n\n  proof\n    intro_TAC ∀α β, H1, H2;\n    consider α' β' such that\n    α suppl α'  ∧  β suppl β'  ∧  β ≡ β'     [suppl] by fol H1 SupplementExists H1 RightAngle_DEF;\n    α' ≡ β'     [α'eqβ'] by fol suppl H2 SupplementsCongAnglesCong;\n    Angle β ∧ Angle α' ∧ Angle β'     [] by fol suppl SupplementImpliesAngle;\n    α ≡ α'     [] by fol     H1 - H2 suppl α'eqβ' C5Symmetric C5Transitive;\n    fol suppl - RightAngle_DEF;\n  qed;\n")))
+  congrightimpliesright_c.set(@readable.prove(
+    "\n  forall alpha beta. Angle alpha  /\\   Right beta  ==>  alpha === beta  ==>  Right alpha",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta, H1, H2"),
+        @readable.consider(
+          "alpha' beta'",
+          "alpha suppl alpha'  /\\   beta suppl beta'  /\\   beta === beta'    ",
+          "suppl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SupplementExists", () => supplementexists()),
+              @readable.Label("H1"),
+              @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha' === beta'",
+          "alpha'eqbeta'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("suppl"),
+              @readable.Label("H2"),
+              @readable.Thm(
+                "SupplementsCongAnglesCong",
+                () => supplementsconganglescong(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle beta /\\  Angle alpha' /\\  Angle beta'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("suppl"),
+              @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha === alpha'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Label("suppl"),
+              @readable.Label("alpha'eqbeta'"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("suppl"),
+            @readable.Prev,
+            @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4947,25 +11547,182 @@ pub fn congrightimpliesright() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_161`
-pub fn exec_phrase_161(x163 : Unit) -> Unit raise {
-  let _ = x163
-  {
-    @readable.thm_ref().val = supplementexists()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SupplementExists): thm);;
-fn step_327() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SupplementExists): thm);;", exec_phrase_161)
-}
-
-///|
 /// RightAnglesCongruentHelp
 fn step_328() -> Unit raise {
-  rightanglescongruenthelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A' P a.  ¬Collinear A O B  ∧  O ∈ Open (A, A')  ⇒\n    Right (∡ A O B)  ∧  Right (∡ A O P)\n    ⇒  P ∉ int_angle A O B\n\n  proof\n    intro_TAC ∀A O B A' P a, H1, H2;\n    assume ¬(P ∉ int_angle A O B)     [Con] by fol;\n    P ∈ int_angle A O B     [PintAOB] by fol - ∉;\n    B ∈ int_angle P O A'  ∧  B ∈ int_angle A' O P     [BintA'OP] by fol H1 - InteriorReflectionInterior InteriorAngleSymmetry ;\n    ¬Collinear A O P ∧ ¬Collinear P O A'     [AOPncol] by fol PintAOB InteriorEZHelp - IN_InteriorAngle;\n    ∡ A O B suppl ∡ B O A'  ∧  ∡ A O P suppl ∡ P O A'     [AOBsup] by fol H1 - SupplementaryAngles_DEF;\n    consider α' β' such that\n    ∡ A O B suppl α'  ∧  ∡ A O B ≡ α'  ∧  ∡ A O P suppl β'  ∧  ∡ A O P ≡ β'     [supplα'] by fol H2 RightAngle_DEF;\n    α' ≡ ∡ B O A'  ∧  β' ≡ ∡ P O A'     [α'eqA'OB] by fol - AOBsup SupplementUnique;\n    Angle (∡ A O B) ∧ Angle α' ∧ Angle (∡ B O A') ∧ Angle (∡ A O P) ∧ Angle β' ∧ Angle (∡ P O A')     [angles] by fol AOBsup supplα' SupplementImpliesAngle AngleSymmetry;\n    ∡ A O B ≡ ∡ B O A'  ∧  ∡ A O P ≡ ∡ P O A'     [H2'] by fol - supplα' α'eqA'OB C5Transitive;\n    ∡ A O P ≡ ∡ A O P  ∧  ∡ B O A' ≡ ∡ B O A'     [refl] by fol angles C5Reflexive;\n    ∡ A O P <_ang ∡ A O B  ∧  ∡ B O A' <_ang ∡ P O A'     [BOA'lessPOA'] by fol angles H1 PintAOB - AngleOrdering_DEF AOPncol CollinearSymmetry BintA'OP AngleSymmetry;\n    ∡ A O P <_ang ∡ B O A'     [] by fol - angles H2' AngleTrichotomy2;\n    ∡ A O P <_ang ∡ P O A'     [] by fol - BOA'lessPOA' AngleOrderTransitivity;\n    fol - H2' AngleTrichotomy1;\n  qed;\n")))
+  rightanglescongruenthelp_c.set(@readable.prove(
+    "\n  forall A O B A' P a.  ~Collinear A O B  /\\   O IN Open (A, A')  ==>\n    Right (angle A O B)  /\\   Right (angle A O P)\n    ==>  P NOTIN int_angle A O B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B A' P a, H1, H2"),
+        @readable.assuming(
+          "~(P NOTIN int_angle A O B)",
+          "Con",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    P IN int_angle A O B",
+          "PintAOB",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("NOTIN", () => notin())],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN int_angle P O A'  /\\   B IN int_angle A' O P",
+          "BintA'OP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm(
+                "InteriorReflectionInterior",
+                () => interiorreflectioninterior(),
+              ),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O P /\\  ~Collinear P O A'",
+          "AOPncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("PintAOB"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Prev,
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O B suppl angle B O A'  /\\   angle A O P suppl angle P O A'",
+          "AOBsup",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "alpha' beta'",
+          "angle A O B suppl alpha'  /\\   angle A O B === alpha'  /\\   angle A O P suppl beta'  /\\   angle A O P === beta'    ",
+          "supplalpha'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    alpha' === angle B O A'  /\\   beta' === angle P O A'",
+          "alpha'eqA'OB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("AOBsup"),
+              @readable.Thm("SupplementUnique", () => supplementunique()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A O B) /\\  Angle alpha' /\\  Angle (angle B O A') /\\  Angle (angle A O P) /\\  Angle beta' /\\  Angle (angle P O A')",
+          "angles",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOBsup"),
+              @readable.Label("supplalpha'"),
+              @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O B === angle B O A'  /\\   angle A O P === angle P O A'",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("supplalpha'"),
+              @readable.Label("alpha'eqA'OB"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O P === angle A O P  /\\   angle B O A' === angle B O A'",
+          "refl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angles"),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O P <_ang angle A O B  /\\   angle B O A' <_ang angle P O A'",
+          "BOA'lessPOA'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angles"),
+              @readable.Label("H1"),
+              @readable.Label("PintAOB"),
+              @readable.Prev,
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+              @readable.Label("AOPncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("BintA'OP"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O P <_ang angle B O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("angles"),
+              @readable.Label("H2'"),
+              @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O P <_ang angle P O A'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("BOA'lessPOA'"),
+              @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H2'"),
+            @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4978,25 +11735,218 @@ pub fn rightanglescongruenthelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_162`
-pub fn exec_phrase_162(x164 : Unit) -> Unit raise {
-  let _ = x164
-  {
-    @readable.thm_ref().val = supplementunique()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SupplementUnique): thm);;
-fn step_329() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SupplementUnique): thm);;", exec_phrase_162)
-}
-
-///|
 /// RightAnglesCongruent
 fn step_330() -> Unit raise {
-  rightanglescongruent_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β. Right α ∧ Right β  ⇒  α ≡ β\n\n  proof\n    intro_TAC ∀α β, H1;\n    consider α' such that\n    α suppl α'  ∧  α ≡ α'     [αright] by fol H1 RightAngle_DEF;\n    consider A O B A' such that\n    ¬Collinear A O B  ∧  O ∈ Open (A, A')  ∧  α = ∡ A O B  ∧  α' = ∡ B O A'     [def_α] by fol - SupplementaryAngles_DEF;\n    ¬(A = O) ∧ ¬(O = B)     [Distinct] by fol def_α NonCollinearImpliesDistinct B1';\n    consider a such that\n    Line a ∧ O ∈ a ∧ A ∈ a     [a_line] by fol Distinct I1;\n    B ∉ a     [notBa] by fol - def_α Collinear_DEF ∉;\n    Angle β     [] by fol H1 RightImpliesAngle;\n    ∃! r. Ray r ∧ ∃P. ¬(O = P) ∧ r = ray O P ∧ P ∉ a ∧ P,B same_side a ∧ ∡ A O P ≡ β     [] by simplify C4 - Distinct a_line notBa;\n    consider P such that\n    ¬(O = P) ∧ P ∉ a ∧ P,B same_side a ∧ ∡ A O P ≡ β     [defP] by fol -;\n    O ∉ Open (P, B)     [notPOB] by fol a_line - SameSide_DEF ∉;\n    ¬Collinear A O P     [AOPncol] by fol a_line Distinct defP NonCollinearRaa CollinearSymmetry;\n    Right (∡ A O P)     [AOPright] by fol - ANGLE H1 defP CongRightImpliesRight;\n    P ∉ int_angle A O B  ∧  B ∉ int_angle A O P     [] by fol def_α H1 - AOPncol AOPright RightAnglesCongruentHelp;\n    Collinear P O B     [] by fol Distinct a_line defP notBa - AngleOrdering InteriorAngleSymmetry ∉;\n    P ∈ ray O B ━ {O}     [] by fol Distinct - CollinearSymmetry notPOB IN_Ray defP IN_DIFF IN_SING;\n    ray O P = ray O B  ∧  ∡ A O P = ∡ A O B     [] by fol Distinct - RayWellDefined Angle_DEF;\n    fol - defP def_α;\n  qed;\n")))
+  rightanglescongruent_c.set(@readable.prove(
+    "\n  forall alpha beta. Right alpha /\\  Right beta  ==>  alpha === beta",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta, H1"),
+        @readable.consider(
+          "alpha'",
+          "alpha suppl alpha'  /\\   alpha === alpha'    ",
+          "alpharight",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "A O B A'",
+          "~Collinear A O B  /\\   O IN Open (A, A')  /\\   alpha = angle A O B  /\\   alpha' = angle B O A'    ",
+          "def_alpha",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = B)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a",
+          "Line a /\\  O IN a /\\  A IN a    ",
+          "a_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN a",
+          "notBa",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("def_alpha"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle beta",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("RightImpliesAngle", () => rightimpliesangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ?! r. Ray r /\\  ?P. ~(O = P) /\\  r = ray O P /\\  P NOTIN a /\\  P,B same_side a /\\  angle A O P === beta",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4", () => c4()),
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Label("a_line"),
+              @readable.Label("notBa"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "P",
+          "~(O = P) /\\  P NOTIN a /\\  P,B same_side a /\\  angle A O P === beta    ",
+          "defP",
+          @readable.by(@readable.fol, [@readable.Prev]),
+        ),
+        @readable.have(
+          "\n    O NOTIN Open (P, B)",
+          "notPOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O P",
+          "AOPncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("defP"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Right (angle A O P)",
+          "AOPright",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H1"),
+              @readable.Label("defP"),
+              @readable.Thm("CongRightImpliesRight", () => congrightimpliesright()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P NOTIN int_angle A O B  /\\   B NOTIN int_angle A O P",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("def_alpha"),
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Label("AOPncol"),
+              @readable.Label("AOPright"),
+              @readable.Thm(
+                "RightAnglesCongruentHelp",
+                () => rightanglescongruenthelp(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear P O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("a_line"),
+              @readable.Label("defP"),
+              @readable.Label("notBa"),
+              @readable.Prev,
+              @readable.Thm("AngleOrdering", () => angleordering()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    P IN ray O B DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("notPOB"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("defP"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O P = ray O B  /\\   angle A O P = angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Label("defP"), @readable.Label("def_alpha")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5009,57 +11959,204 @@ pub fn rightanglescongruent() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_163`
-pub fn exec_phrase_163(x165 : Unit) -> Unit raise {
-  let _ = x165
-  {
-    @readable.thm_ref().val = rightimpliesangle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RightImpliesAngle): thm);;
-fn step_331() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RightImpliesAngle): thm);;", exec_phrase_163)
-}
-
-///|
-/// `exec_phrase_164`
-pub fn exec_phrase_164(x166 : Unit) -> Unit raise {
-  let _ = x166
-  {
-    @readable.thm_ref().val = congrightimpliesright()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CongRightImpliesRight): thm);;
-fn step_332() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CongRightImpliesRight): thm);;", exec_phrase_164)
-}
-
-///|
-/// `exec_phrase_165`
-pub fn exec_phrase_165(x167 : Unit) -> Unit raise {
-  let _ = x167
-  {
-    @readable.thm_ref().val = rightanglescongruenthelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RightAnglesCongruentHelp): thm);;
-fn step_333() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RightAnglesCongruentHelp): thm);;", exec_phrase_165)
-}
-
-///|
 /// OppositeRightAnglesLinear
 fn step_334() -> Unit raise {
-  oppositerightangleslinear_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B O H h.  ¬Collinear A O H ∧ ¬Collinear H O B  ⇒\n    Right (∡ A O H) ∧ Right (∡ H O B)  ⇒\n    Line h ∧ O ∈ h ∧ H ∈ h  ∧  ¬(A,B same_side h)\n    ⇒  O ∈ Open (A, B)\n\n  proof\n    intro_TAC ∀A B O H h, H0, H1, H2;\n    ¬(A = O) ∧ ¬(O = H) ∧ ¬(O = B)     [Distinct] by fol  H0 NonCollinearImpliesDistinct;\n    A ∉ h ∧ B ∉ h     [notABh] by fol H0 H2 Collinear_DEF ∉;\n    consider E such that\n    O ∈ Open (A, E) ∧ ¬(E = O)     [AOE] by fol Distinct B2' B1';\n    ∡ A O H  suppl  ∡ H O E     [AOHsupplHOE] by fol H0 - SupplementaryAngles_DEF;\n    E ∉ h     [notEh] by fol H2 ∉ AOE BetweenLinear notABh;\n    ¬(A,E same_side  h)     [] by fol H2 AOE SameSide_DEF;\n    B,E same_side  h     [Bsim_hE] by fol H2 notABh notEh - H2 AtMost2Sides;\n    consider α' such that\n    ∡ A O H  suppl  α'  ∧  ∡ A O H ≡ α'     [AOHsupplα'] by fol H1 RightAngle_DEF;\n    Angle (∡ H O B) ∧ Angle (∡ A O H) ∧ Angle α' ∧ Angle (∡ H O E)     [angα'] by fol H1 RightImpliesAngle - AOHsupplHOE SupplementImpliesAngle;\n    ∡ H O B ≡ ∡ A O H  ∧  α' ≡ ∡ H O E     [] by fol H1 RightAnglesCongruent AOHsupplα' AOHsupplHOE SupplementUnique;\n    ∡ H O B ≡ ∡ H O E     [] by fol angα' - AOHsupplα' C5Transitive;\n    ray O B = ray O E     [] by fol H2 Distinct notABh notEh Bsim_hE - C4Uniqueness;\n    B ∈ ray O E ━ {O}     [] by fol Distinct EndpointInRay - IN_DIFF IN_SING;\n    fol AOE - OppositeRaysIntersect1pointHelp B1';\n  qed;\n")))
+  oppositerightangleslinear_c.set(@readable.prove(
+    "\n  forall A B O H h.  ~Collinear A O H /\\  ~Collinear H O B  ==>\n    Right (angle A O H) /\\  Right (angle H O B)  ==>\n    Line h /\\  O IN h /\\  H IN h  /\\   ~(A,B same_side h)\n    ==>  O IN Open (A, B)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B O H h, H0, H1, H2"),
+        @readable.have(
+          "\n    ~(A = O) /\\  ~(O = H) /\\  ~(O = B)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H0"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN h /\\  B NOTIN h",
+          "notABh",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H0"),
+              @readable.Label("H2"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "O IN Open (A, E) /\\  ~(E = O)    ",
+          "AOE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("B2'", () => b2_p()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O H  suppl  angle H O E",
+          "AOHsupplHOE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H0"),
+              @readable.Prev,
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E NOTIN h",
+          "notEh",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("AOE"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Label("notABh"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A,E same_side  h)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("AOE"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B,E same_side  h",
+          "Bsim_hE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("notABh"),
+              @readable.Label("notEh"),
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "alpha'",
+          "angle A O H  suppl  alpha'  /\\   angle A O H === alpha'    ",
+          "AOHsupplalpha'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle H O B) /\\  Angle (angle A O H) /\\  Angle alpha' /\\  Angle (angle H O E)",
+          "angalpha'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("RightImpliesAngle", () => rightimpliesangle()),
+              @readable.Prev,
+              @readable.Label("AOHsupplHOE"),
+              @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle H O B === angle A O H  /\\   alpha' === angle H O E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("RightAnglesCongruent", () => rightanglescongruent()),
+              @readable.Label("AOHsupplalpha'"),
+              @readable.Label("AOHsupplHOE"),
+              @readable.Thm("SupplementUnique", () => supplementunique()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle H O B === angle H O E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angalpha'"),
+              @readable.Prev,
+              @readable.Label("AOHsupplalpha'"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O B = ray O E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Label("Distinct"),
+              @readable.Label("notABh"),
+              @readable.Label("notEh"),
+              @readable.Label("Bsim_hE"),
+              @readable.Prev,
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN ray O E DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Prev,
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("AOE"),
+            @readable.Prev,
+            @readable.Thm(
+              "OppositeRaysIntersect1pointHelp",
+              () => oppositeraysintersect1pointhelp(),
+            ),
+            @readable.Thm("B1'", () => b1_p()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5072,25 +12169,88 @@ pub fn oppositerightangleslinear() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_166`
-pub fn exec_phrase_166(x168 : Unit) -> Unit raise {
-  let _ = x168
-  {
-    @readable.thm_ref().val = rightanglescongruent()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RightAnglesCongruent): thm);;
-fn step_335() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RightAnglesCongruent): thm);;", exec_phrase_166)
-}
-
-///|
 /// RightImpliesSupplRight
 fn step_336() -> Unit raise {
-  rightimpliessupplright_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A'.  ¬Collinear A O B  ∧  O ∈ Open (A, A')  ∧  Right (∡ A O B)\n    ⇒  Right (∡ B O A')\n\n  proof\n    intro_TAC ∀A O B A', H1 H2 H3;\n    ∡ A O B suppl ∡ B O A'  ∧  Angle (∡ A O B)  ∧  Angle (∡ B O A')     [AOBsuppl] by fol H1 H2 SupplementaryAngles_DEF SupplementImpliesAngle;\n    consider β such that\n    ∡ A O B suppl β ∧ ∡ A O B ≡ β     [βsuppl] by fol H3 RightAngle_DEF;\n    Angle β  ∧  β ≡ ∡ A O B     [angβ] by fol - SupplementImpliesAngle C5Symmetric;\n    ∡ B O A' ≡ β     [] by fol AOBsuppl βsuppl SupplementUnique;\n    ∡ B O A' ≡ ∡ A O B     [] by fol AOBsuppl angβ - βsuppl C5Transitive;\n    fol AOBsuppl H3 - CongRightImpliesRight;\n  qed;\n")))
+  rightimpliessupplright_c.set(@readable.prove(
+    "\n  forall A O B A'.  ~Collinear A O B  /\\   O IN Open (A, A')  /\\   Right (angle A O B)\n    ==>  Right (angle B O A')",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A O B A', H1 H2 H3"),
+        @readable.have(
+          "\n    angle A O B suppl angle B O A'  /\\   Angle (angle A O B)  /\\   Angle (angle B O A')",
+          "AOBsuppl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+              @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "beta",
+          "angle A O B suppl beta /\\  angle A O B === beta    ",
+          "betasuppl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle beta  /\\   beta === angle A O B",
+          "angbeta",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B O A' === beta",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOBsuppl"),
+              @readable.Label("betasuppl"),
+              @readable.Thm("SupplementUnique", () => supplementunique()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B O A' === angle A O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AOBsuppl"),
+              @readable.Label("angbeta"),
+              @readable.Prev,
+              @readable.Label("betasuppl"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("AOBsuppl"),
+            @readable.Label("H3"),
+            @readable.Prev,
+            @readable.Thm("CongRightImpliesRight", () => congrightimpliesright()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5105,7 +12265,57 @@ pub fn rightimpliessupplright() -> @kernel.Thm {
 ///|
 /// IsoscelesCongBaseAngles
 fn step_337() -> Unit raise {
-  isoscelescongbaseangles_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C.  ¬Collinear A B C  ∧  seg B A ≡ seg B C  ⇒   ∡ C A B  ≡ ∡ A C B\n\n  proof\n    intro_TAC ∀A B C, H1 H2;\n    ¬(A = B) ∧ ¬(B = C) ∧ ¬Collinear C B A     [CBAncol] by fol H1 NonCollinearImpliesDistinct CollinearSymmetry;\n    seg B C ≡ seg B A  ∧  ∡ A B C ≡ ∡ C B A     [] by fol - SEGMENT H2 C2Symmetric H1 ANGLE AngleSymmetry C5Reflexive;\n    fol H1 CBAncol H2 - SAS TriangleCong_DEF;\n  qed;\n")))
+  isoscelescongbaseangles_c.set(@readable.prove(
+    "\n  forall A B C.  ~Collinear A B C  /\\   seg B A === seg B C  ==>   angle C A B  === angle A C B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1 H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(B = C) /\\  ~Collinear C B A",
+          "CBAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg B C === seg B A  /\\   angle A B C === angle C B A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("H2"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+              @readable.Label("H1"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("CBAncol"),
+            @readable.Label("H2"),
+            @readable.Prev,
+            @readable.Thm("SAS", () => sas()),
+            @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5120,7 +12330,108 @@ pub fn isoscelescongbaseangles() -> @kernel.Thm {
 ///|
 /// C4withC1
 fn step_338() -> Unit raise {
-  c4withc1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α l O A Y P Q.  Angle α ∧ ¬(O = A) ∧ ¬(P = Q)  ⇒\n    Line l ∧ O ∈ l ∧ A ∈ l ∧ Y ∉ l  ⇒\n    ∃N. ¬(O = N) ∧ N ∉ l ∧ N,Y same_side l ∧ seg O N ≡ seg P Q ∧ ∡ A O N ≡ α\n\n  proof\n    intro_TAC ∀α l O A Y P Q, H1, l_line;\n    ∃! r. Ray r ∧ ∃B. ¬(O = B) ∧ r = ray O B ∧ B ∉ l ∧ B,Y same_side l ∧ ∡ A O B ≡ α     [] by simplify C4 H1 l_line;\n    consider B such that\n    ¬(O = B) ∧ B ∉ l ∧ B,Y same_side l ∧ ∡ A O B ≡ α     [Bexists] by fol -;\n    consider N such that\n    N ∈ ray O B ━ {O}  ∧  seg O N ≡ seg P Q     [Nexists] by fol H1 - SEGMENT C1;\n    N ∉ l ∧ N,B same_side l     [notNl] by fol l_line Bexists Nexists RaySameSide;\n    N,Y same_side l     [Nsim_lY] by fol l_line - Bexists SameSideTransitive;\n    ray O N = ray O B     [] by fol Bexists Nexists RayWellDefined;\n    ∡ A O N ≡ α     [] by fol - Bexists Angle_DEF;\n    fol Nexists IN_DIFF IN_SING notNl Nsim_lY Nexists -;\n  qed;\n")))
+  c4withc1_c.set(@readable.prove(
+    "\n  forall alpha l O A Y P Q.  Angle alpha /\\  ~(O = A) /\\  ~(P = Q)  ==>\n    Line l /\\  O IN l /\\  A IN l /\\  Y NOTIN l  ==>\n    ?N. ~(O = N) /\\  N NOTIN l /\\  N,Y same_side l /\\  seg O N === seg P Q /\\  angle A O N === alpha",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha l O A Y P Q, H1, l_line"),
+        @readable.have(
+          "\n    ?! r. Ray r /\\  ?B. ~(O = B) /\\  r = ray O B /\\  B NOTIN l /\\  B,Y same_side l /\\  angle A O B === alpha",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4", () => c4()),
+              @readable.Label("H1"),
+              @readable.Label("l_line"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "B",
+          "~(O = B) /\\  B NOTIN l /\\  B,Y same_side l /\\  angle A O B === alpha    ",
+          "Bexists",
+          @readable.by(@readable.fol, [@readable.Prev]),
+        ),
+        @readable.consider(
+          "N",
+          "N IN ray O B DIFF {O}  /\\   seg O N === seg P Q    ",
+          "Nexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    N NOTIN l /\\  N,B same_side l",
+          "notNl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Bexists"),
+              @readable.Label("Nexists"),
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    N,Y same_side l",
+          "Nsim_lY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Prev,
+              @readable.Label("Bexists"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O N = ray O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Bexists"),
+              @readable.Label("Nexists"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A O N === alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Bexists"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Nexists"),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+            @readable.Thm("IN_SING", () => @sets.in_sing()),
+            @readable.Label("notNl"),
+            @readable.Label("Nsim_lY"),
+            @readable.Label("Nexists"),
+            @readable.Prev,
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5135,7 +12446,97 @@ pub fn c4withc1() -> @kernel.Thm {
 ///|
 /// C4OppositeSide
 fn step_339() -> Unit raise {
-  c4oppositeside_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α l O A Z P Q.  Angle α ∧ ¬(O = A) ∧ ¬(P = Q)  ⇒\n    Line l ∧ O ∈ l ∧ A ∈ l ∧ Z ∉ l\n    ⇒  ∃N. ¬(O = N) ∧ N ∉ l ∧ ¬(Z,N same_side l) ∧\n    seg O N ≡ seg P Q ∧ ∡ A O N ≡ α\n\n  proof\n    intro_TAC ∀α l O A Z P Q, H1, l_line;\n    ¬(Z = O)     [] by fol l_line ∉;\n    consider Y such that\n    O ∈ Open (Z, Y)     [ZOY] by fol - B2';\n    ¬(O = Y) ∧ Collinear O Z Y     [notOY] by fol - B1' CollinearSymmetry;\n    Y ∉ l     [notYl] by fol notOY l_line NonCollinearRaa ∉;\n    consider N such that\n    ¬(O = N) ∧ N ∉ l  ∧  N,Y same_side l  ∧ seg O N ≡ seg P Q  ∧  ∡ A O N ≡ α     [Nexists] by simplify C4withC1 H1 l_line -;\n    ¬(Z,Y same_side l)     [] by fol l_line ZOY SameSide_DEF;\n    ¬(Z,N same_side l)     [] by fol l_line Nexists notYl - SameSideTransitive;\n    fol - Nexists;\n  qed;\n")))
+  c4oppositeside_c.set(@readable.prove(
+    "\n  forall alpha l O A Z P Q.  Angle alpha /\\  ~(O = A) /\\  ~(P = Q)  ==>\n    Line l /\\  O IN l /\\  A IN l /\\  Z NOTIN l\n    ==>  ?N. ~(O = N) /\\  N NOTIN l /\\  ~(Z,N same_side l) /\\ \n    seg O N === seg P Q /\\  angle A O N === alpha",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha l O A Z P Q, H1, l_line"),
+        @readable.have(
+          "\n    ~(Z = O)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("l_line"), @readable.Thm("NOTIN", () => notin())],
+          ),
+        ),
+        @readable.consider(
+          "Y",
+          "O IN Open (Z, Y)    ",
+          "ZOY",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(O = Y) /\\  Collinear O Z Y",
+          "notOY",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Y NOTIN l",
+          "notYl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notOY"),
+              @readable.Label("l_line"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "N",
+          "~(O = N) /\\  N NOTIN l  /\\   N,Y same_side l  /\\  seg O N === seg P Q  /\\   angle A O N === alpha    ",
+          "Nexists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4withC1", () => c4withc1()),
+              @readable.Label("H1"),
+              @readable.Label("l_line"),
+              @readable.Prev,
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(Z,Y same_side l)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("ZOY"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(Z,N same_side l)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Nexists"),
+              @readable.Label("notYl"),
+              @readable.Prev,
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("Nexists")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5148,25 +12549,588 @@ pub fn c4oppositeside() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_167`
-pub fn exec_phrase_167(x169 : Unit) -> Unit raise {
-  let _ = x169
-  {
-    @readable.thm_ref().val = c4withc1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C4withC1): thm);;
-fn step_340() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C4withC1): thm);;", exec_phrase_167)
-}
-
-///|
 /// SSS
 fn step_341() -> Unit raise {
-  sss_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'.  ¬Collinear A B C ∧ ¬Collinear A' B' C'  ⇒\n    seg A B ≡ seg A' B'  ∧  seg A C ≡ seg A' C'  ∧  seg B C ≡ seg B' C'\n    ⇒  A,B,C ≅ A',B',C'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1, H2;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ ¬(A' = B') ∧ ¬(B' = C')     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider h such that\n    Line h ∧ A ∈ h ∧ C ∈ h     [h_line] by fol Distinct I1;\n    B ∉ h     [notBh] by fol h_line H1 ∉ Collinear_DEF;\n    Segment (seg A B) ∧ Segment (seg C B) ∧ Segment (seg A' B') ∧ Segment (seg C' B')     [segments] by fol Distinct - SEGMENT;\n    Angle (∡ C' A' B')     [] by fol H1 CollinearSymmetry ANGLE;\n    consider N such that\n    ¬(A = N) ∧ N ∉ h ∧ ¬(B,N same_side h) ∧ seg A N ≡ seg A' B'  ∧  ∡ C A N ≡ ∡ C' A' B'     [Nexists] by simplify C4OppositeSide - Distinct h_line notBh;\n    ¬(C = N)     [] by fol h_line Nexists ∉;\n    Segment (seg A N) ∧ Segment (seg C N)     [segN] by fol Nexists - SEGMENT;\n    ¬Collinear A N C     [ANCncol] by fol Distinct h_line Nexists NonCollinearRaa;\n    Angle (∡ A B C) ∧ Angle (∡ A' B' C') ∧ Angle (∡ A N C)     [angles] by fol H1 - ANGLE;\n    seg A B ≡ seg A N     [ABeqAN] by fol segments segN Nexists H2 C2Symmetric C2Transitive;\n    C,A,N ≅ C',A',B'     [] by fol ANCncol H1 CollinearSymmetry H2 Nexists SAS;\n    ∡ A N C ≡ ∡ A' B' C'  ∧  seg C N ≡ seg C' B'     [ANCeq] by fol - TriangleCong_DEF;\n    seg C B ≡ seg C N     [CBeqCN] by fol segments segN - H2 SegmentSymmetry C2Symmetric C2Transitive;\n    consider G such that\n    G ∈ h ∧ G ∈ Open (B, N)     [BGN] by fol Nexists h_line SameSide_DEF;\n    ¬(B = N)     [notBN] by fol - B1';\n    ray B G = ray B N  ∧  ray N G = ray N B     [Grays] by fol BGN B1' IntervalRay;\n    consider v such that\n    Line v ∧ B ∈ v ∧ N ∈ v     [v_line] by fol notBN I1;\n    G ∈ v ∧ ¬(h = v)     [] by fol v_line BGN BetweenLinear notBh ∉;\n    h ∩ v = {G}     [hvG] by fol h_line v_line - BGN I1Uniqueness;\n    ¬(G = A)  ⇒  ∡ A B G ≡ ∡ A N G     [ABGeqANG]\n    proof\n      intro_TAC notGA;\n      A ∉ v     [] by fol hvG h_line - EquivIntersectionHelp IN_DIFF IN_SING;\n      ¬Collinear B A N     [] by fol v_line notBN I1 Collinear_DEF - ∉;\n      ∡ N B A ≡ ∡ B N A     [] by fol - ABeqAN IsoscelesCongBaseAngles;\n      ∡ G B A ≡ ∡ G N A     [] by fol - Grays Angle_DEF notGA;\n      fol - AngleSymmetry;\n    qed;\n    ¬(G = C)  ⇒  ∡ G B C ≡ ∡ G N C     [GBCeqGNC]\n    proof\n      intro_TAC notGC;\n      C ∉ v     [] by fol hvG h_line - EquivIntersectionHelp IN_DIFF IN_SING;\n      ¬Collinear B C N     [] by fol v_line notBN I1 Collinear_DEF - ∉;\n      ∡ N B C ≡ ∡ B N C     [] by fol - CBeqCN IsoscelesCongBaseAngles AngleSymmetry;\n      fol - Grays Angle_DEF;\n    qed;\n    ∡ A B C ≡ ∡ A N C     []\n    proof\n      assume ¬(G = A) ∧ ¬(G = C) [AGCdistinct] by fol Distinct GBCeqGNC ABGeqANG;\n      ∡ A B G ≡ ∡ A N G  ∧  ∡ G B C ≡ ∡ G N C     [Gequivs] by fol - ABGeqANG GBCeqGNC;\n      ¬Collinear G B C ∧ ¬Collinear G N C ∧ ¬Collinear G B A ∧ ¬Collinear G N A     [Gncols] by fol AGCdistinct h_line BGN notBh Nexists NonCollinearRaa;\n      Collinear A G C     [] by fol h_line BGN Collinear_DEF;\n      G ∈ Open (A, C) ∨ C ∈ Open (G, A) ∨ A ∈ Open (C, G)     [] by fol Distinct AGCdistinct - B3';\n      case_split AGC | GAC | CAG     by fol -;\n      suppose G ∈ Open (A, C);\n        G ∈ int_angle A B C  ∧  G ∈ int_angle A N C     [] by fol H1 ANCncol - ConverseCrossbar;\n        fol - Gequivs AngleAddition;\n      end;\n      suppose C ∈ Open (G, A);\n        C ∈ int_angle G B A  ∧  C ∈ int_angle G N A     [] by fol Gncols - B1' ConverseCrossbar;\n        fol - Gequivs AngleSubtraction AngleSymmetry;\n      end;\n      suppose A ∈ Open (C, G);\n        A ∈ int_angle G B C  ∧  A ∈ int_angle G N C     [] by fol Gncols - B1' ConverseCrossbar;\n        fol - Gequivs AngleSymmetry AngleSubtraction;\n      end;\n    qed;\n    ∡ A B C ≡ ∡ A' B' C'     [] by fol angles - ANCeq C5Transitive;\n    fol H1 H2 SegmentSymmetry - SAS;\n  qed;\n")))
+  sss_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'.  ~Collinear A B C /\\  ~Collinear A' B' C'  ==>\n    seg A B === seg A' B'  /\\   seg A C === seg A' C'  /\\   seg B C === seg B' C'\n    ==>  A,B,C cong A',B',C'",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1, H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  ~(A' = B') /\\  ~(B' = C')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "h",
+          "Line h /\\  A IN h /\\  C IN h    ",
+          "h_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN h",
+          "notBh",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("h_line"),
+              @readable.Label("H1"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Segment (seg A B) /\\  Segment (seg C B) /\\  Segment (seg A' B') /\\  Segment (seg C' B')",
+          "segments",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle C' A' B')",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "N",
+          "~(A = N) /\\  N NOTIN h /\\  ~(B,N same_side h) /\\  seg A N === seg A' B'  /\\   angle C A N === angle C' A' B'    ",
+          "Nexists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4OppositeSide", () => c4oppositeside()),
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Label("h_line"),
+              @readable.Label("notBh"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(C = N)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("h_line"),
+              @readable.Label("Nexists"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Segment (seg A N) /\\  Segment (seg C N)",
+          "segN",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Nexists"),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A N C",
+          "ANCncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("h_line"),
+              @readable.Label("Nexists"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle A B C) /\\  Angle (angle A' B' C') /\\  Angle (angle A N C)",
+          "angles",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A B === seg A N",
+          "ABeqAN",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("segments"),
+              @readable.Label("segN"),
+              @readable.Label("Nexists"),
+              @readable.Label("H2"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,A,N cong C',A',B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ANCncol"),
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2"),
+              @readable.Label("Nexists"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A N C === angle A' B' C'  /\\   seg C N === seg C' B'",
+          "ANCeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg C B === seg C N",
+          "CBeqCN",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("segments"),
+              @readable.Label("segN"),
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN h /\\  G IN Open (B, N)    ",
+          "BGN",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Nexists"),
+              @readable.Label("h_line"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B = N)",
+          "notBN",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ray B G = ray B N  /\\   ray N G = ray N B",
+          "Grays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BGN"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "v",
+          "Line v /\\  B IN v /\\  N IN v    ",
+          "v_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("notBN"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN v /\\  ~(h = v)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("v_line"),
+              @readable.Label("BGN"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Label("notBh"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    h INTER v = {G}",
+          "hvG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("h_line"),
+              @readable.Label("v_line"),
+              @readable.Prev,
+              @readable.Label("BGN"),
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G = A)  ==>  angle A B G === angle A N G",
+          "ABGeqANG",
+          @readable.steps(
+            [
+              @readable.intro_tac("notGA"),
+              @readable.have(
+                "\n      A NOTIN v",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("hvG"),
+                    @readable.Label("h_line"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "EquivIntersectionHelp",
+                      () => equivintersectionhelp(),
+                    ),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~Collinear B A N",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("v_line"),
+                    @readable.Label("notBN"),
+                    @readable.Thm("I1", () => i1()),
+                    @readable.Thm("Collinear_DEF", () => collinear_def()),
+                    @readable.Prev,
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle N B A === angle B N A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("ABeqAN"),
+                    @readable.Thm(
+                      "IsoscelesCongBaseAngles",
+                      () => isoscelescongbaseangles(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle G B A === angle G N A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("Grays"),
+                    @readable.Thm("Angle_DEF", () => angle_def()),
+                    @readable.Label("notGA"),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [@readable.Prev, @readable.Thm("AngleSymmetry", () => anglesymmetry())],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G = C)  ==>  angle G B C === angle G N C",
+          "GBCeqGNC",
+          @readable.steps(
+            [
+              @readable.intro_tac("notGC"),
+              @readable.have(
+                "\n      C NOTIN v",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("hvG"),
+                    @readable.Label("h_line"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "EquivIntersectionHelp",
+                      () => equivintersectionhelp(),
+                    ),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~Collinear B C N",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("v_line"),
+                    @readable.Label("notBN"),
+                    @readable.Thm("I1", () => i1()),
+                    @readable.Thm("Collinear_DEF", () => collinear_def()),
+                    @readable.Prev,
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle N B C === angle B N C",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("CBeqCN"),
+                    @readable.Thm(
+                      "IsoscelesCongBaseAngles",
+                      () => isoscelescongbaseangles(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Label("Grays"),
+                  @readable.Thm("Angle_DEF", () => angle_def()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B C === angle A N C",
+          "",
+          @readable.steps_then(
+            [
+              @readable.assuming(
+                "~(G = A) /\\  ~(G = C)",
+                "AGCdistinct",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Label("GBCeqGNC"),
+                    @readable.Label("ABGeqANG"),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle A B G === angle A N G  /\\   angle G B C === angle G N C",
+                "Gequivs",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("ABGeqANG"),
+                    @readable.Label("GBCeqGNC"),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~Collinear G B C /\\  ~Collinear G N C /\\  ~Collinear G B A /\\  ~Collinear G N A",
+                "Gncols",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("AGCdistinct"),
+                    @readable.Label("h_line"),
+                    @readable.Label("BGN"),
+                    @readable.Label("notBh"),
+                    @readable.Label("Nexists"),
+                    @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Collinear A G C",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("h_line"),
+                    @readable.Label("BGN"),
+                    @readable.Thm("Collinear_DEF", () => collinear_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      G IN Open (A, C) \\/ C IN Open (G, A) \\/ A IN Open (C, G)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Label("AGCdistinct"),
+                    @readable.Prev,
+                    @readable.Thm("B3'", () => b3_p()),
+                  ],
+                ),
+              ),
+            ],
+            @readable.case_split(
+              "AGC | GAC | CAG    ",
+              @readable.by(@readable.fol, [@readable.Prev]),
+              @list.List(["G IN Open (A, C)", "C IN Open (G, A)", "A IN Open (C, G)"]),
+              @list.List(
+                [
+                  @readable.steps(
+                    [
+                      @readable.have(
+                        "\n        G IN int_angle A B C  /\\   G IN int_angle A N C",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Label("H1"),
+                            @readable.Label("ANCncol"),
+                            @readable.Prev,
+                            @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+                          ],
+                        ),
+                      ),
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Prev,
+                          @readable.Label("Gequivs"),
+                          @readable.Thm("AngleAddition", () => angleaddition()),
+                        ],
+                      ),
+                    ],
+                  ),
+                  @readable.steps(
+                    [
+                      @readable.have(
+                        "\n        C IN int_angle G B A  /\\   C IN int_angle G N A",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Label("Gncols"),
+                            @readable.Prev,
+                            @readable.Thm("B1'", () => b1_p()),
+                            @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+                          ],
+                        ),
+                      ),
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Prev,
+                          @readable.Label("Gequivs"),
+                          @readable.Thm("AngleSubtraction", () => anglesubtraction()),
+                          @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                        ],
+                      ),
+                    ],
+                  ),
+                  @readable.steps(
+                    [
+                      @readable.have(
+                        "\n        A IN int_angle G B C  /\\   A IN int_angle G N C",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Label("Gncols"),
+                            @readable.Prev,
+                            @readable.Thm("B1'", () => b1_p()),
+                            @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+                          ],
+                        ),
+                      ),
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Prev,
+                          @readable.Label("Gequivs"),
+                          @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                          @readable.Thm("AngleSubtraction", () => anglesubtraction()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B C === angle A' B' C'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angles"),
+              @readable.Prev,
+              @readable.Label("ANCeq"),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            @readable.Prev,
+            @readable.Thm("SAS", () => sas()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5179,57 +13143,819 @@ pub fn sss() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_168`
-pub fn exec_phrase_168(x170 : Unit) -> Unit raise {
-  let _ = x170
-  {
-    @readable.thm_ref().val = c4oppositeside()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((C4OppositeSide): thm);;
-fn step_342() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((C4OppositeSide): thm);;", exec_phrase_168)
-}
-
-///|
-/// `exec_phrase_169`
-pub fn exec_phrase_169(x171 : Unit) -> Unit raise {
-  let _ = x171
-  {
-    @readable.thm_ref().val = isoscelescongbaseangles()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IsoscelesCongBaseAngles): thm);;
-fn step_343() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IsoscelesCongBaseAngles): thm);;", exec_phrase_169)
-}
-
-///|
-/// `exec_phrase_170`
-pub fn exec_phrase_170(x172 : Unit) -> Unit raise {
-  let _ = x172
-  {
-    @readable.thm_ref().val = angleaddition()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleAddition): thm);;
-fn step_344() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleAddition): thm);;", exec_phrase_170)
-}
-
-///|
 /// AngleBisector
 fn step_345() -> Unit raise {
-  anglebisector_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. ¬Collinear B A C  ⇒  ∃M. M ∈ int_angle B A C  ∧  ∡ B A M ≡ ∡ M A C\n\n  proof\n    intro_TAC ∀A B C, H1;\n    ¬(A = B) ∧ ¬(A = C)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider D such that\n    B ∈ Open (A, D)     [ABD] by fol Distinct B2';\n    ¬(A = D) ∧ Collinear A B D ∧ Segment (seg A D)     [ABD'] by fol - B1' SEGMENT;\n    consider E such that\n    E ∈ ray A C ━ {A}  ∧  seg A E ≡ seg A D  ∧  ¬(A = E)     [ErAC] by fol - Distinct C1 IN_Ray IN_DIFF IN_SING;\n    Collinear A C E  ∧  D ∈ ray A B ━ {A}     [notAE] by fol - IN_Ray ABD IntervalRayEZ IN_DIFF IN_SING;\n    ray A D = ray A B  ∧  ray A E =  ray A C     [equalrays] by fol Distinct notAE ErAC RayWellDefined;\n    ¬Collinear D A E ∧ ¬Collinear E A D ∧ ¬Collinear A E D     [EADncol] by fol H1 ABD' notAE ErAC CollinearSymmetry NoncollinearityExtendsToLine;\n    ∡ D E A ≡ ∡ E D A     [DEAeq] by fol EADncol ErAC IsoscelesCongBaseAngles;\n    ¬Collinear E D A ∧ Angle (∡ E D A) ∧ ¬Collinear A D E ∧ ¬Collinear D E A     [angEDA] by fol EADncol CollinearSymmetry ANGLE;\n    ¬(D = E)     [notDE] by fol EADncol NonCollinearImpliesDistinct;\n    consider h such that\n    Line h ∧ D ∈ h ∧ E ∈ h     [h_line] by fol - I1;\n    A ∉ h     [notAh] by fol - Collinear_DEF EADncol ∉;\n    consider M such that\n    ¬(D = M)  ∧  M ∉ h  ∧  ¬(A,M same_side h)  ∧  seg D M ≡ seg D A  ∧  ∡ E D M ≡ ∡ E D A     [Mexists] by simplify C4OppositeSide angEDA notDE ABD' h_line -;\n    ¬(A = M)     [notAM] by fol h_line - SameSideReflexive;\n    ¬Collinear E D M ∧ ¬Collinear D E M ∧ ¬Collinear M E D     [EDMncol] by fol  notDE h_line Mexists NonCollinearRaa CollinearSymmetry;\n    seg D E ≡ seg D E  ∧  seg M A ≡ seg M A     [MArefl] by fol notDE notAM SEGMENT C2Reflexive;\n    E,D,M ≅ E,D,A     [] by fol EDMncol angEDA - Mexists SAS;\n    seg M E ≡ seg A E ∧ ∡ M E D ≡ ∡ A E D ∧ ∡ D E M ≡ ∡ D E A     [MED≅] by fol - TriangleCong_DEF SegmentSymmetry AngleSymmetry;\n    ∡ E D A ≡ ∡ D E A  ∧  ∡ E D A ≡ ∡ E D M  ∧  ∡ D E A ≡ ∡ D E M     [EDAeqEDM] by fol EDMncol ANGLE angEDA Mexists MED≅ DEAeq C5Symmetric;\n    consider G such that\n    G ∈ h ∧ G ∈ Open (A, M)     [AGM] by fol Mexists h_line SameSide_DEF;\n    M ∈ ray A G ━ {A}     [MrAG] by fol - IntervalRayEZ;\n    consider v such that\n    Line v ∧ A ∈ v ∧ M ∈ v ∧ G ∈ v     [v_line] by fol notAM I1 AGM BetweenLinear;\n    ¬(v = h)  ∧  v ∩ h = {G}     [vhG] by fol - notAh ∉ h_line AGM I1Uniqueness;\n    D ∉ v     [notDv]\n    proof\n      assume ¬(D ∉ v)     [Con] by fol;\n      D ∈ v  ∧  D = G     [DG] by fol h_line - ∉ vhG IN_INTER IN_SING;\n      D ∈ Open (A, M)     [] by fol DG AGM;\n      ∡ E D A suppl ∡ E D M     [EDAsuppl] by fol angEDA - SupplementaryAngles_DEF AngleSymmetry;\n      Right (∡ E D A)     [] by fol EDAsuppl EDAeqEDM RightAngle_DEF;\n      Right (∡ A E D)     [RightAED] by fol angEDA ANGLE - DEAeq CongRightImpliesRight AngleSymmetry;\n      Right (∡ D E M)     [] by fol EDMncol ANGLE - MED≅ CongRightImpliesRight AngleSymmetry;\n      E ∈ Open (A, M)     [] by fol EADncol EDMncol RightAED - h_line Mexists  OppositeRightAnglesLinear;\n      E ∈ v  ∧  E = G     [] by fol v_line - BetweenLinear h_line vhG IN_INTER IN_SING;\n      fol - DG notDE;\n    qed;\n    E ∉ v     [notEv]\n    proof\n      assume ¬(E ∉ v)     [Con] by fol;\n      E ∈ v  ∧  E = G     [EG] by fol h_line - ∉ vhG IN_INTER IN_SING;\n      E ∈ Open (A, M)     [] by fol - AGM;\n      ∡ D E A suppl ∡ D E M     [DEAsuppl] by fol EADncol - SupplementaryAngles_DEF AngleSymmetry;\n      Right (∡ D E A)     [RightDEA] by fol DEAsuppl EDAeqEDM RightAngle_DEF;\n      Right (∡ E D A)     [RightEDA] by fol angEDA RightDEA EDAeqEDM CongRightImpliesRight;\n      Right (∡ E D M)     [] by fol EDMncol ANGLE RightEDA Mexists CongRightImpliesRight;\n      D ∈ Open (A, M)     [] by fol angEDA EDMncol RightEDA AngleSymmetry - h_line Mexists  OppositeRightAnglesLinear;\n      D ∈ v ∧ D = G     [] by fol v_line - BetweenLinear h_line vhG IN_INTER IN_SING;\n      fol - EG notDE;\n    qed;\n    ¬Collinear M A E ∧ ¬Collinear M A D  ∧  ¬(M = E)     [MAEncol] by fol notAM v_line notEv notDv NonCollinearRaa CollinearSymmetry NonCollinearImpliesDistinct;\n    seg M E ≡ seg A D     [MEeqAD] by fol - ErAC ABD' SEGMENT MED≅ ErAC C2Transitive;\n    seg A D ≡ seg M D     [] by fol SegmentSymmetry ABD' Mexists SEGMENT C2Symmetric;\n    seg M E ≡ seg M D     [] by fol MAEncol ABD' Mexists SEGMENT MEeqAD - C2Transitive;\n    M,A,E ≅ M,A,D     [] by fol MAEncol MArefl - ErAC SSS;\n    ∡ M A E ≡ ∡ M A D     [MAEeq] by fol - TriangleCong_DEF;\n    ∡ D A M ≡ ∡ M A E     [] by fol MAEncol ANGLE MAEeq C5Symmetric AngleSymmetry;\n    ∡ B A M ≡ ∡ M A C     [BAMeqMAC] by fol - equalrays Angle_DEF;\n    ¬(E,D same_side v)     []\n    proof\n      assume E,D same_side v     [Con] by fol;\n      ray A D = ray A E     [] by fol v_line notAM notDv notEv - MAEeq C4Uniqueness;\n      fol ABD' EndpointInRay - IN_Ray EADncol;\n    qed;\n    consider H such that\n    H ∈ v ∧ H ∈ Open (E, D)     [EHD] by fol v_line - SameSide_DEF;\n    H = G     [] by fol - h_line BetweenLinear IN_INTER vhG IN_SING;\n    G ∈ int_angle E A D     [GintEAD] by fol EADncol  - EHD ConverseCrossbar;\n    M ∈ int_angle E A D     [MintEAD] by fol GintEAD MrAG WholeRayInterior;\n    B ∈ ray A D ━ {A}   ∧   C ∈ ray A E ━ {A}     [] by fol equalrays Distinct EndpointInRay IN_DIFF IN_SING;\n    M ∈ int_angle B A C     [] by fol MintEAD - InteriorWellDefined InteriorAngleSymmetry;\n    fol - BAMeqMAC;\n  qed;\n")))
+  anglebisector_c.set(@readable.prove(
+    "\n  forall A B C. ~Collinear B A C  ==>  ?M. M IN int_angle B A C  /\\   angle B A M === angle M A C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "D",
+          "B IN Open (A, D)    ",
+          "ABD",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = D) /\\  Collinear A B D /\\  Segment (seg A D)",
+          "ABD'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN ray A C DIFF {A}  /\\   seg A E === seg A D  /\\   ~(A = E)    ",
+          "ErAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Thm("C1", () => c1()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear A C E  /\\   D IN ray A B DIFF {A}",
+          "notAE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("ABD"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A D = ray A B  /\\   ray A E =  ray A C",
+          "equalrays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("notAE"),
+              @readable.Label("ErAC"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D A E /\\  ~Collinear E A D /\\  ~Collinear A E D",
+          "EADncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("ABD'"),
+              @readable.Label("notAE"),
+              @readable.Label("ErAC"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle D E A === angle E D A",
+          "DEAeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EADncol"),
+              @readable.Label("ErAC"),
+              @readable.Thm("IsoscelesCongBaseAngles", () => isoscelescongbaseangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear E D A /\\  Angle (angle E D A) /\\  ~Collinear A D E /\\  ~Collinear D E A",
+          "angEDA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EADncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(D = E)",
+          "notDE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EADncol"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "h",
+          "Line h /\\  D IN h /\\  E IN h    ",
+          "h_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.have(
+          "\n    A NOTIN h",
+          "notAh",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("EADncol"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "M",
+          "~(D = M)  /\\   M NOTIN h  /\\   ~(A,M same_side h)  /\\   seg D M === seg D A  /\\   angle E D M === angle E D A    ",
+          "Mexists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4OppositeSide", () => c4oppositeside()),
+              @readable.Label("angEDA"),
+              @readable.Label("notDE"),
+              @readable.Label("ABD'"),
+              @readable.Label("h_line"),
+              @readable.Prev,
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = M)",
+          "notAM",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("h_line"),
+              @readable.Prev,
+              @readable.Thm("SameSideReflexive", () => samesidereflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear E D M /\\  ~Collinear D E M /\\  ~Collinear M E D",
+          "EDMncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notDE"),
+              @readable.Label("h_line"),
+              @readable.Label("Mexists"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg D E === seg D E  /\\   seg M A === seg M A",
+          "MArefl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notDE"),
+              @readable.Label("notAM"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E,D,M cong E,D,A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EDMncol"),
+              @readable.Label("angEDA"),
+              @readable.Prev,
+              @readable.Label("Mexists"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg M E === seg A E /\\  angle M E D === angle A E D /\\  angle D E M === angle D E A",
+          "MEDcong",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle E D A === angle D E A  /\\   angle E D A === angle E D M  /\\   angle D E A === angle D E M",
+          "EDAeqEDM",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EDMncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("angEDA"),
+              @readable.Label("Mexists"),
+              @readable.Label("MEDcong"),
+              @readable.Label("DEAeq"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN h /\\  G IN Open (A, M)    ",
+          "AGM",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Mexists"),
+              @readable.Label("h_line"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M IN ray A G DIFF {A}",
+          "MrAG",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("IntervalRayEZ", () => intervalrayez())],
+          ),
+        ),
+        @readable.consider(
+          "v",
+          "Line v /\\  A IN v /\\  M IN v /\\  G IN v    ",
+          "v_line",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notAM"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Label("AGM"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(v = h)  /\\   v INTER h = {G}",
+          "vhG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("notAh"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("h_line"),
+              @readable.Label("AGM"),
+              @readable.Thm("I1Uniqueness", () => i1uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D NOTIN v",
+          "notDv",
+          @readable.steps(
+            [
+              @readable.assuming("~(D NOTIN v)", "Con", @readable.by(@readable.fol, [])),
+              @readable.have(
+                "\n      D IN v  /\\   D = G",
+                "DG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("h_line"),
+                    @readable.Prev,
+                    @readable.Thm("NOTIN", () => notin()),
+                    @readable.Label("vhG"),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      D IN Open (A, M)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Label("DG"), @readable.Label("AGM")],
+                ),
+              ),
+              @readable.have(
+                "\n      angle E D A suppl angle E D M",
+                "EDAsuppl",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("angEDA"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "SupplementaryAngles_DEF",
+                      () => supplementaryangles_def(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Right (angle E D A)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("EDAsuppl"),
+                    @readable.Label("EDAeqEDM"),
+                    @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Right (angle A E D)",
+                "RightAED",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("angEDA"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Prev,
+                    @readable.Label("DEAeq"),
+                    @readable.Thm(
+                      "CongRightImpliesRight",
+                      () => congrightimpliesright(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Right (angle D E M)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("EDMncol"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Prev,
+                    @readable.Label("MEDcong"),
+                    @readable.Thm(
+                      "CongRightImpliesRight",
+                      () => congrightimpliesright(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      E IN Open (A, M)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("EADncol"),
+                    @readable.Label("EDMncol"),
+                    @readable.Label("RightAED"),
+                    @readable.Prev,
+                    @readable.Label("h_line"),
+                    @readable.Label("Mexists"),
+                    @readable.Thm(
+                      "OppositeRightAnglesLinear",
+                      () => oppositerightangleslinear(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      E IN v  /\\   E = G",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("v_line"),
+                    @readable.Prev,
+                    @readable.Thm("BetweenLinear", () => betweenlinear()),
+                    @readable.Label("h_line"),
+                    @readable.Label("vhG"),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [@readable.Prev, @readable.Label("DG"), @readable.Label("notDE")],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E NOTIN v",
+          "notEv",
+          @readable.steps(
+            [
+              @readable.assuming("~(E NOTIN v)", "Con", @readable.by(@readable.fol, [])),
+              @readable.have(
+                "\n      E IN v  /\\   E = G",
+                "EG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("h_line"),
+                    @readable.Prev,
+                    @readable.Thm("NOTIN", () => notin()),
+                    @readable.Label("vhG"),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      E IN Open (A, M)",
+                "",
+                @readable.by(@readable.fol, [@readable.Prev, @readable.Label("AGM")]),
+              ),
+              @readable.have(
+                "\n      angle D E A suppl angle D E M",
+                "DEAsuppl",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("EADncol"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "SupplementaryAngles_DEF",
+                      () => supplementaryangles_def(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Right (angle D E A)",
+                "RightDEA",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("DEAsuppl"),
+                    @readable.Label("EDAeqEDM"),
+                    @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Right (angle E D A)",
+                "RightEDA",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("angEDA"),
+                    @readable.Label("RightDEA"),
+                    @readable.Label("EDAeqEDM"),
+                    @readable.Thm(
+                      "CongRightImpliesRight",
+                      () => congrightimpliesright(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Right (angle E D M)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("EDMncol"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Label("RightEDA"),
+                    @readable.Label("Mexists"),
+                    @readable.Thm(
+                      "CongRightImpliesRight",
+                      () => congrightimpliesright(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      D IN Open (A, M)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("angEDA"),
+                    @readable.Label("EDMncol"),
+                    @readable.Label("RightEDA"),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    @readable.Prev,
+                    @readable.Label("h_line"),
+                    @readable.Label("Mexists"),
+                    @readable.Thm(
+                      "OppositeRightAnglesLinear",
+                      () => oppositerightangleslinear(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      D IN v /\\  D = G",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("v_line"),
+                    @readable.Prev,
+                    @readable.Thm("BetweenLinear", () => betweenlinear()),
+                    @readable.Label("h_line"),
+                    @readable.Label("vhG"),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [@readable.Prev, @readable.Label("EG"), @readable.Label("notDE")],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear M A E /\\  ~Collinear M A D  /\\   ~(M = E)",
+          "MAEncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notAM"),
+              @readable.Label("v_line"),
+              @readable.Label("notEv"),
+              @readable.Label("notDv"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg M E === seg A D",
+          "MEeqAD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("ErAC"),
+              @readable.Label("ABD'"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("MEDcong"),
+              @readable.Label("ErAC"),
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A D === seg M D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("ABD'"),
+              @readable.Label("Mexists"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg M E === seg M D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MAEncol"),
+              @readable.Label("ABD'"),
+              @readable.Label("Mexists"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("MEeqAD"),
+              @readable.Prev,
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M,A,E cong M,A,D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MAEncol"),
+              @readable.Label("MArefl"),
+              @readable.Prev,
+              @readable.Label("ErAC"),
+              @readable.Thm("SSS", () => sss()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle M A E === angle M A D",
+          "MAEeq",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle D A M === angle M A E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MAEncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("MAEeq"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A M === angle M A C",
+          "BAMeqMAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("equalrays"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(E,D same_side v)",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "E,D same_side v",
+                "Con",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      ray A D = ray A E",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("v_line"),
+                    @readable.Label("notAM"),
+                    @readable.Label("notDv"),
+                    @readable.Label("notEv"),
+                    @readable.Prev,
+                    @readable.Label("MAEeq"),
+                    @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("ABD'"),
+                  @readable.Thm("EndpointInRay", () => endpointinray()),
+                  @readable.Prev,
+                  @readable.Thm("IN_Ray", () => in_ray()),
+                  @readable.Label("EADncol"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "H",
+          "H IN v /\\  H IN Open (E, D)    ",
+          "EHD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("v_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    H = G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("h_line"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Label("vhG"),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN int_angle E A D",
+          "GintEAD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EADncol"),
+              @readable.Prev,
+              @readable.Label("EHD"),
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M IN int_angle E A D",
+          "MintEAD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("GintEAD"),
+              @readable.Label("MrAG"),
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN ray A D DIFF {A}   /\\    C IN ray A E DIFF {A}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("equalrays"),
+              @readable.Label("Distinct"),
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M IN int_angle B A C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("MintEAD"),
+              @readable.Prev,
+              @readable.Thm("InteriorWellDefined", () => interiorwelldefined()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("BAMeqMAC")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5242,41 +13968,87 @@ pub fn anglebisector() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_171`
-pub fn exec_phrase_171(x173 : Unit) -> Unit raise {
-  let _ = x173
-  {
-    @readable.thm_ref().val = oppositerightangleslinear()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OppositeRightAnglesLinear): thm);;
-fn step_346() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OppositeRightAnglesLinear): thm);;", exec_phrase_171)
-}
-
-///|
-/// `exec_phrase_172`
-pub fn exec_phrase_172(x174 : Unit) -> Unit raise {
-  let _ = x174
-  {
-    @readable.thm_ref().val = sss()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SSS): thm);;
-fn step_347() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SSS): thm);;", exec_phrase_172)
-}
-
-///|
 /// EuclidPropositionI_6
 fn step_348() -> Unit raise {
-  euclidpropositioni_6_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. ¬Collinear A B C  ∧  ∡ B A C ≡ ∡ B C A  ⇒  seg B A ≡ seg B C\n\n  proof\n    intro_TAC ∀A B C, H1 H2;\n    ¬(A = C)     [] by fol H1 NonCollinearImpliesDistinct;\n    seg C A ≡ seg A C     [CAeqAC] by fol SegmentSymmetry - SEGMENT C2Reflexive;\n    ¬Collinear B C A ∧ ¬Collinear C B A ∧ ¬Collinear B A C     [BCAncol] by fol H1 CollinearSymmetry;\n    ∡ A C B ≡ ∡ C A B     [] by fol - ANGLE H2 C5Symmetric AngleSymmetry;\n    C,B,A ≅ A,B,C     [] by fol H1 BCAncol CAeqAC H2 - ASA;\n    fol - TriangleCong_DEF;\n  qed;\n")))
+  euclidpropositioni_6_c.set(@readable.prove(
+    "\n  forall A B C. ~Collinear A B C  /\\   angle B A C === angle B C A  ==>  seg B A === seg B C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1 H2"),
+        @readable.have(
+          "\n    ~(A = C)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg C A === seg A C",
+          "CAeqAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B C A /\\  ~Collinear C B A /\\  ~Collinear B A C",
+          "BCAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A C B === angle C A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H2"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,B,A cong A,B,C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("BCAncol"),
+              @readable.Label("CAeqAC"),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("ASA", () => asa()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("TriangleCong_DEF", () => trianglecong_def())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5291,7 +14063,322 @@ pub fn euclidpropositioni_6() -> @kernel.Thm {
 ///|
 /// IsoscelesExists
 fn step_349() -> Unit raise {
-  isoscelesexists_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B. ¬(A = B)  ⇒  ∃D. ¬Collinear A D B  ∧  seg D A ≡ seg D B\n\n  proof\n    intro_TAC ∀A B, H1;\n    consider l such that\n    Line l ∧ A ∈ l ∧ B ∈ l     [l_line] by fol H1 I1;\n    consider C such that\n    C ∉ l     [notCl] by fol - ExistsPointOffLine;\n    ¬Collinear C A B ∧ ¬Collinear C B A ∧ ¬Collinear A B C ∧ ¬Collinear A C B ∧ ¬Collinear B A C     [CABncol] by fol l_line H1 I1 Collinear_DEF - ∉;\n    ∡ C A B ≡ ∡ C B A  ∨  ∡ C A B <_ang ∡ C B A  ∨  ∡ C B A <_ang ∡ C A B     [] by fol - ANGLE AngleTrichotomy;\n    case_split cong | less | greater     by fol -;\n    suppose ∡ C A B ≡ ∡ C B A;\n      fol - CABncol EuclidPropositionI_6;\n    end;\n    suppose ∡ C A B <_ang ∡ C B A;\n      ∡ C A B <_ang ∡ A B C     [] by fol - AngleSymmetry;\n      consider E such that\n      E ∈ int_angle A B C  ∧  ∡ C A B ≡ ∡ A B E     [Eexists] by fol CABncol ANGLE - AngleOrderingUse;\n      ¬(B = E)     [notBE] by fol - InteriorEZHelp;\n      consider D such that\n      D ∈ Open (A, C)  ∧  D ∈ ray B E ━ {B}     [Dexists] by fol Eexists Crossbar_THM;\n      D ∈ int_angle A B C     [] by fol Eexists - WholeRayInterior;\n      ¬Collinear A D B     [ADBncol] by fol - InteriorEZHelp CollinearSymmetry;\n      ray B D = ray B E  ∧  ray A D = ray A C     [] by fol notBE Dexists RayWellDefined IntervalRay;\n      ∡ D A B ≡ ∡ A B D     [] by fol Eexists - Angle_DEF;\n      fol ADBncol - AngleSymmetry EuclidPropositionI_6;\n    end;\n    suppose ∡ C B A <_ang ∡ C A B;\n      ∡ C B A <_ang ∡ B A C     [] by fol - AngleSymmetry;\n      consider E such that\n      E ∈ int_angle B A C  ∧  ∡ C B A ≡ ∡ B A E     [Eexists] by fol CABncol ANGLE - AngleOrderingUse;\n      ¬(A = E)     [notAE] by fol - InteriorEZHelp;\n      consider D such that\n      D ∈ Open (B, C) ∧ D ∈ ray A E ━ {A}     [Dexists] by fol Eexists Crossbar_THM;\n      D ∈ int_angle B A C     [] by fol Eexists - WholeRayInterior;\n      ¬Collinear A D B ∧ ¬Collinear D A B ∧ ¬Collinear D B A     [ADBncol] by fol - InteriorEZHelp CollinearSymmetry;\n      ray A D = ray A E  ∧  ray B D = ray B C     [] by fol notAE Dexists RayWellDefined IntervalRay;\n      ∡ D B A ≡ ∡ B A D     [] by fol Eexists - Angle_DEF;\n      ∡ D A B ≡ ∡ D B A     [] by fol AngleSymmetry  ADBncol ANGLE - C5Symmetric;\n      fol ADBncol - EuclidPropositionI_6;\n    end;\n  qed;\n")))
+  isoscelesexists_c.set(@readable.prove(
+    "\n  forall A B. ~(A = B)  ==>  ?D. ~Collinear A D B  /\\   seg D A === seg D B",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B, H1"),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  B IN l    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H1"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "C",
+          "C NOTIN l    ",
+          "notCl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ExistsPointOffLine", () => existspointoffline()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C A B /\\  ~Collinear C B A /\\  ~Collinear A B C /\\  ~Collinear A C B /\\  ~Collinear B A C",
+          "CABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("H1"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Prev,
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C A B === angle C B A  \\/  angle C A B <_ang angle C B A  \\/  angle C B A <_ang angle C A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("AngleTrichotomy", () => angletrichotomy()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "cong | less | greater    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(
+          [
+            "angle C A B === angle C B A",
+            "angle C A B <_ang angle C B A",
+            "angle C B A <_ang angle C A B",
+          ],
+        ),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("CABncol"),
+                    @readable.Thm("EuclidPropositionI_6", () => euclidpropositioni_6()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      angle C A B <_ang angle A B C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "E",
+                  "E IN int_angle A B C  /\\   angle C A B === angle A B E    ",
+                  "Eexists",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("CABncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Prev,
+                      @readable.Thm("AngleOrderingUse", () => angleorderinguse()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(B = E)",
+                  "notBE",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "D",
+                  "D IN Open (A, C)  /\\   D IN ray B E DIFF {B}    ",
+                  "Dexists",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Eexists"),
+                      @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      D IN int_angle A B C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Eexists"),
+                      @readable.Prev,
+                      @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear A D B",
+                  "ADBncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ray B D = ray B E  /\\   ray A D = ray A C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("notBE"),
+                      @readable.Label("Dexists"),
+                      @readable.Thm("RayWellDefined", () => raywelldefined()),
+                      @readable.Thm("IntervalRay", () => intervalray()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle D A B === angle A B D",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Eexists"),
+                      @readable.Prev,
+                      @readable.Thm("Angle_DEF", () => angle_def()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ADBncol"),
+                    @readable.Prev,
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    @readable.Thm("EuclidPropositionI_6", () => euclidpropositioni_6()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      angle C B A <_ang angle B A C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "E",
+                  "E IN int_angle B A C  /\\   angle C B A === angle B A E    ",
+                  "Eexists",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("CABncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Prev,
+                      @readable.Thm("AngleOrderingUse", () => angleorderinguse()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(A = E)",
+                  "notAE",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "D",
+                  "D IN Open (B, C) /\\  D IN ray A E DIFF {A}    ",
+                  "Dexists",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Eexists"),
+                      @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      D IN int_angle B A C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Eexists"),
+                      @readable.Prev,
+                      @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear A D B /\\  ~Collinear D A B /\\  ~Collinear D B A",
+                  "ADBncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ray A D = ray A E  /\\   ray B D = ray B C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("notAE"),
+                      @readable.Label("Dexists"),
+                      @readable.Thm("RayWellDefined", () => raywelldefined()),
+                      @readable.Thm("IntervalRay", () => intervalray()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle D B A === angle B A D",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Eexists"),
+                      @readable.Prev,
+                      @readable.Thm("Angle_DEF", () => angle_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle D A B === angle D B A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                      @readable.Label("ADBncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Prev,
+                      @readable.Thm("C5Symmetric", () => c5symmetric()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ADBncol"),
+                    @readable.Prev,
+                    @readable.Thm("EuclidPropositionI_6", () => euclidpropositioni_6()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5304,41 +14391,141 @@ pub fn isoscelesexists() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_173`
-pub fn exec_phrase_173(x175 : Unit) -> Unit raise {
-  let _ = x175
-  {
-    @readable.thm_ref().val = angletrichotomy()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleTrichotomy): thm);;
-fn step_350() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleTrichotomy): thm);;", exec_phrase_173)
-}
-
-///|
-/// `exec_phrase_174`
-pub fn exec_phrase_174(x176 : Unit) -> Unit raise {
-  let _ = x176
-  {
-    @readable.thm_ref().val = euclidpropositioni_6()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_6): thm);;
-fn step_351() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_6): thm);;", exec_phrase_174)
-}
-
-///|
 /// MidpointExists
 fn step_352() -> Unit raise {
-  midpointexists_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B. ¬(A = B)  ⇒  ∃M. M ∈ Open (A, B)  ∧  seg A M ≡ seg M B\n\n  proof\n    intro_TAC ∀A B, H1;\n    consider D such that\n    ¬Collinear A D B  ∧  seg D A ≡ seg D B     [Dexists] by fol H1 IsoscelesExists;\n    consider F such that\n    F ∈ int_angle A D B  ∧  ∡ A D F ≡ ∡ F D B     [Fexists] by fol - AngleBisector;\n    ¬(D = F)     [notDF] by fol - InteriorEZHelp;\n    consider M such that\n    M ∈ Open (A, B) ∧  M ∈ ray D F ━ {D}     [Mexists] by fol Fexists Crossbar_THM;\n    ray D M = ray D F     [] by fol notDF - RayWellDefined;\n    ∡ A D M ≡ ∡ M D B     [ADMeqMDB] by fol Fexists - Angle_DEF;\n    M ∈ int_angle A D B     [] by fol Fexists Mexists WholeRayInterior;\n    ¬(D = M) ∧ ¬Collinear A D M ∧ ¬Collinear B D M     [ADMncol] by fol - InteriorEZHelp InteriorAngleSymmetry;\n    seg D M ≡ seg D M     [] by fol - SEGMENT C2Reflexive;\n    A,D,M ≅ B,D,M     [] by fol ADMncol Dexists - ADMeqMDB AngleSymmetry SAS;\n    fol Mexists - TriangleCong_DEF SegmentSymmetry;\n  qed;\n")))
+  midpointexists_c.set(@readable.prove(
+    "\n  forall A B. ~(A = B)  ==>  ?M. M IN Open (A, B)  /\\   seg A M === seg M B",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B, H1"),
+        @readable.consider(
+          "D",
+          "~Collinear A D B  /\\   seg D A === seg D B    ",
+          "Dexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("IsoscelesExists", () => isoscelesexists()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "F",
+          "F IN int_angle A D B  /\\   angle A D F === angle F D B    ",
+          "Fexists",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("AngleBisector", () => anglebisector())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(D = F)",
+          "notDF",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("InteriorEZHelp", () => interiorezhelp())],
+          ),
+        ),
+        @readable.consider(
+          "M",
+          "M IN Open (A, B) /\\   M IN ray D F DIFF {D}    ",
+          "Mexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Fexists"),
+              @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray D M = ray D F",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notDF"),
+              @readable.Prev,
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A D M === angle M D B",
+          "ADMeqMDB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Fexists"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    M IN int_angle A D B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Fexists"),
+              @readable.Label("Mexists"),
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(D = M) /\\  ~Collinear A D M /\\  ~Collinear B D M",
+          "ADMncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg D M === seg D M",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,D,M cong B,D,M",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ADMncol"),
+              @readable.Label("Dexists"),
+              @readable.Prev,
+              @readable.Label("ADMeqMDB"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Mexists"),
+            @readable.Prev,
+            @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5351,41 +14538,129 @@ pub fn midpointexists() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_175`
-pub fn exec_phrase_175(x177 : Unit) -> Unit raise {
-  let _ = x177
-  {
-    @readable.thm_ref().val = isoscelesexists()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IsoscelesExists): thm);;
-fn step_353() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IsoscelesExists): thm);;", exec_phrase_175)
-}
-
-///|
-/// `exec_phrase_176`
-pub fn exec_phrase_176(x178 : Unit) -> Unit raise {
-  let _ = x178
-  {
-    @readable.thm_ref().val = anglebisector()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleBisector): thm);;
-fn step_354() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleBisector): thm);;", exec_phrase_176)
-}
-
-///|
 /// EuclidPropositionI_7short
 fn step_355() -> Unit raise {
-  euclidpropositioni_7short_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D a.  ¬(A = B) ∧ Line a ∧ A ∈ a ∧ B ∈ a  ⇒\n    ¬(C = D) ∧ C ∉ a ∧ D ∉ a ∧ C,D same_side a  ⇒  seg A C ≡ seg A D\n    ⇒  ¬(seg B C ≡ seg B D)\n\n  proof\n    intro_TAC ∀A B C D a, a_line, Csim_aD, ACeqAD;\n    ¬(A = C) ∧ ¬(A = D)     [AnotCD] by fol a_line Csim_aD ∉;\n    assume seg B C ≡ seg B D     [Con] by fol;\n    seg C B ≡ seg D B  ∧  seg A B ≡ seg A B  ∧  seg A D ≡ seg A D     [segeqs] by fol - SegmentSymmetry a_line AnotCD SEGMENT C2Reflexive;\n    ¬Collinear A C B  ∧ ¬Collinear A D B     [] by fol a_line I1 Csim_aD Collinear_DEF ∉;\n    A,C,B ≅ A,D,B     [] by fol - ACeqAD segeqs SSS;\n    ∡ B A C ≡ ∡ B A D     [] by fol - TriangleCong_DEF;\n    ray A D = ray A C     [] by fol a_line Csim_aD - C4Uniqueness;\n    C ∈ ray A D ━ {A}  ∧  D ∈ ray A D ━ {A}     [] by fol AnotCD - EndpointInRay IN_DIFF IN_SING;\n    C = D     [] by fol AnotCD SEGMENT - ACeqAD segeqs C1;\n    fol - Csim_aD;\n  qed;\n")))
+  euclidpropositioni_7short_c.set(@readable.prove(
+    "\n  forall A B C D a.  ~(A = B) /\\  Line a /\\  A IN a /\\  B IN a  ==>\n    ~(C = D) /\\  C NOTIN a /\\  D NOTIN a /\\  C,D same_side a  ==>  seg A C === seg A D\n    ==>  ~(seg B C === seg B D)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D a, a_line, Csim_aD, ACeqAD"),
+        @readable.have(
+          "\n    ~(A = C) /\\  ~(A = D)",
+          "AnotCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Csim_aD"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "seg B C === seg B D",
+          "Con",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    seg C B === seg D B  /\\   seg A B === seg A B  /\\   seg A D === seg A D",
+          "segeqs",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("a_line"),
+              @readable.Label("AnotCD"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A C B  /\\  ~Collinear A D B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Label("Csim_aD"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,C,B cong A,D,B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("ACeqAD"),
+              @readable.Label("segeqs"),
+              @readable.Thm("SSS", () => sss()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A C === angle B A D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A D = ray A C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Csim_aD"),
+              @readable.Prev,
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN ray A D DIFF {A}  /\\   D IN ray A D DIFF {A}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AnotCD"),
+              @readable.Prev,
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C = D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AnotCD"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Prev,
+              @readable.Label("ACeqAD"),
+              @readable.Label("segeqs"),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev, @readable.Label("Csim_aD")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5400,7 +14675,476 @@ pub fn euclidpropositioni_7short() -> @kernel.Thm {
 ///|
 /// EuclidPropositionI_7Help
 fn step_356() -> Unit raise {
-  euclidpropositioni_7help_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D a.  ¬(A = B)  ⇒  Line a ∧ A ∈ a ∧ B ∈ a  ⇒\n    ¬(C = D) ∧ C ∉ a ∧ D ∉ a ∧ C,D same_side a  ⇒  seg A C ≡ seg A D  ⇒\n    C ∈ int_triangle D A B  ∨  ConvexQuadrilateral A B C D\n    ⇒  ¬(seg B C ≡ seg B D)\n\n  proof\n    intro_TAC ∀A B C D a, notAB, a_line, Csim_aD, ACeqAD, Int_ConvQuad;\n    ¬(A = C) ∧ ¬(A = D) ∧ ¬(B = C) ∧ ¬(B = D)     [Distinct] by fol a_line Csim_aD ∉ SameSide_DEF;\n    case_split convex | CintDAB     by fol Int_ConvQuad;\n    suppose ConvexQuadrilateral A B C D;\n      A ∈ int_angle B C D  ∧  B ∈ int_angle C D A  ∧  Tetralateral A B C D     [ABint] by fol - ConvexQuad_DEF Quadrilateral_DEF;\n      ¬Collinear B C D ∧ ¬Collinear D C B ∧ ¬Collinear C B D ∧ ¬Collinear C D A ∧ ¬Collinear D A C ∧ Angle (∡ D C A) ∧ Angle (∡ C D B)     [angCDB] by fol - Tetralateral_DEF CollinearSymmetry ANGLE;\n      ∡ C D A ≡ ∡ D C A     [CDAeqDCA] by fol angCDB Distinct SEGMENT ACeqAD C2Symmetric IsoscelesCongBaseAngles;\n      A ∈ int_angle D C B  ∧  ∡ D C A ≡ ∡ D C A  ∧  ∡ C D B ≡ ∡ C D B     [] by fol ABint InteriorAngleSymmetry angCDB ANGLE C5Reflexive;\n      ∡ D C A <_ang ∡ D C B  ∧  ∡ C D B <_ang ∡ C D A     [] by fol angCDB ABint - AngleOrdering_DEF;\n      ∡ C D B <_ang ∡ D C B     [] by fol - angCDB CDAeqDCA AngleTrichotomy2 AngleOrderTransitivity;\n      ¬(∡ D C B ≡ ∡ C D B)     [] by fol - AngleTrichotomy1 angCDB ANGLE C5Symmetric;\n      fol angCDB - IsoscelesCongBaseAngles;\n    end;\n    suppose C ∈ int_triangle D A B;\n      C ∈ int_angle A D B  ∧  C ∈ int_angle D A B     [CintADB] by fol - IN_InteriorTriangle InteriorAngleSymmetry;\n      ¬Collinear A D C ∧ ¬Collinear B D C     [ADCncol] by fol CintADB InteriorEZHelp InteriorAngleSymmetry;\n      ¬Collinear D A C ∧ ¬Collinear C D A ∧ ¬Collinear A C D ∧ ¬Collinear A D C     [DACncol] by fol - CollinearSymmetry;\n      ¬Collinear B C D ∧ Angle (∡ D C A) ∧ Angle (∡ C D B) ∧ ¬Collinear D C B     [angCDB] by fol ADCncol - CollinearSymmetry ANGLE;\n      ∡ C D A ≡ ∡ D C A     [CDAeqDCA] by fol DACncol Distinct ADCncol SEGMENT ACeqAD C2Symmetric IsoscelesCongBaseAngles;\n      consider E such that\n      D ∈ Open (A, E) ∧ ¬(D = E) ∧ Collinear A D E     [ADE] by fol Distinct B2' B1';\n      B ∈ int_angle C D E ∧ Collinear D A E     [BintCDE] by fol CintADB - InteriorReflectionInterior CollinearSymmetry;\n      ¬Collinear C D E     [CDEncol] by fol DACncol - ADE NoncollinearityExtendsToLine;\n      consider F such that\n      F ∈ Open (B, D)  ∧  F ∈ ray A C ━ {A}     [Fexists] by fol CintADB Crossbar_THM B1';\n      F ∈ int_angle B C D     [FintBCD] by fol ADCncol CollinearSymmetry - ConverseCrossbar;\n      ¬Collinear D C F     [DCFncol] by fol Distinct ADCncol CollinearSymmetry Fexists B1' NoncollinearityExtendsToLine;\n      Collinear A C F  ∧  F ∈ ray D B ━ {D}  ∧  C ∈ int_angle A D F     [] by fol Fexists IN_DIFF IN_SING IN_Ray B1' IntervalRayEZ CintADB InteriorWellDefined;\n      C ∈ Open (A, F)     [] by fol - AlternateConverseCrossbar;\n      ∡ A D C suppl ∡ C D E  ∧  ∡ A C D suppl ∡ D C F     [] by fol ADE DACncol - SupplementaryAngles_DEF;\n      ∡ C D E ≡ ∡ D C F     [CDEeqDCF] by fol - CDAeqDCA AngleSymmetry SupplementsCongAnglesCong;\n      ∡ C D B <_ang ∡ C D E     [] by fol angCDB CDEncol BintCDE C5Reflexive AngleOrdering_DEF;\n      ∡ C D B <_ang ∡ D C F     [CDBlessDCF] by fol - DCFncol ANGLE CDEeqDCF AngleTrichotomy2;\n      ∡ D C F <_ang ∡ D C B     [] by fol DCFncol ANGLE angCDB FintBCD InteriorAngleSymmetry C5Reflexive AngleOrdering_DEF;\n      ∡ C D B <_ang ∡ D C B     [] by fol CDBlessDCF - AngleOrderTransitivity;\n      ¬(∡ D C B ≡ ∡ C D B)     [] by fol - AngleTrichotomy1 angCDB CollinearSymmetry ANGLE C5Symmetric;\n      fol Distinct ADCncol CollinearSymmetry - IsoscelesCongBaseAngles;\n    end;\n  qed;\n")))
+  euclidpropositioni_7help_c.set(@readable.prove(
+    "\n  forall A B C D a.  ~(A = B)  ==>  Line a /\\  A IN a /\\  B IN a  ==>\n    ~(C = D) /\\  C NOTIN a /\\  D NOTIN a /\\  C,D same_side a  ==>  seg A C === seg A D  ==>\n    C IN int_triangle D A B  \\/  ConvexQuadrilateral A B C D\n    ==>  ~(seg B C === seg B D)",
+    @readable.steps_then(
+      [
+        @readable.intro_tac(
+          "forall A B C D a, notAB, a_line, Csim_aD, ACeqAD, Int_ConvQuad",
+        ),
+        @readable.have(
+          "\n    ~(A = C) /\\  ~(A = D) /\\  ~(B = C) /\\  ~(B = D)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Csim_aD"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "convex | CintDAB    ",
+        @readable.by(@readable.fol, [@readable.Label("Int_ConvQuad")]),
+        @list.List(["ConvexQuadrilateral A B C D", "C IN int_triangle D A B"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      A IN int_angle B C D  /\\   B IN int_angle C D A  /\\   Tetralateral A B C D",
+                  "ABint",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("ConvexQuad_DEF", () => convexquad_def()),
+                      @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear B C D /\\  ~Collinear D C B /\\  ~Collinear C B D /\\  ~Collinear C D A /\\  ~Collinear D A C /\\  Angle (angle D C A) /\\  Angle (angle C D B)",
+                  "angCDB",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Thm("ANGLE", () => angle()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D A === angle D C A",
+                  "CDAeqDCA",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("angCDB"),
+                      @readable.Label("Distinct"),
+                      @readable.Thm("SEGMENT", () => segment()),
+                      @readable.Label("ACeqAD"),
+                      @readable.Thm("C2Symmetric", () => c2symmetric()),
+                      @readable.Thm(
+                        "IsoscelesCongBaseAngles",
+                        () => isoscelescongbaseangles(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      A IN int_angle D C B  /\\   angle D C A === angle D C A  /\\   angle C D B === angle C D B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ABint"),
+                      @readable.Thm(
+                        "InteriorAngleSymmetry",
+                        () => interioranglesymmetry(),
+                      ),
+                      @readable.Label("angCDB"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Thm("C5Reflexive", () => c5reflexive()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle D C A <_ang angle D C B  /\\   angle C D B <_ang angle C D A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("angCDB"),
+                      @readable.Label("ABint"),
+                      @readable.Prev,
+                      @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D B <_ang angle D C B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("angCDB"),
+                      @readable.Label("CDAeqDCA"),
+                      @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+                      @readable.Thm(
+                        "AngleOrderTransitivity",
+                        () => angleordertransitivity(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(angle D C B === angle C D B)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                      @readable.Label("angCDB"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Thm("C5Symmetric", () => c5symmetric()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("angCDB"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "IsoscelesCongBaseAngles",
+                      () => isoscelescongbaseangles(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      C IN int_angle A D B  /\\   C IN int_angle D A B",
+                  "CintADB",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("IN_InteriorTriangle", () => in_interiortriangle()),
+                      @readable.Thm(
+                        "InteriorAngleSymmetry",
+                        () => interioranglesymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear A D C /\\  ~Collinear B D C",
+                  "ADCncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("CintADB"),
+                      @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+                      @readable.Thm(
+                        "InteriorAngleSymmetry",
+                        () => interioranglesymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear D A C /\\  ~Collinear C D A /\\  ~Collinear A C D /\\  ~Collinear A D C",
+                  "DACncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear B C D /\\  Angle (angle D C A) /\\  Angle (angle C D B) /\\  ~Collinear D C B",
+                  "angCDB",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ADCncol"),
+                      @readable.Prev,
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Thm("ANGLE", () => angle()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D A === angle D C A",
+                  "CDAeqDCA",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("DACncol"),
+                      @readable.Label("Distinct"),
+                      @readable.Label("ADCncol"),
+                      @readable.Thm("SEGMENT", () => segment()),
+                      @readable.Label("ACeqAD"),
+                      @readable.Thm("C2Symmetric", () => c2symmetric()),
+                      @readable.Thm(
+                        "IsoscelesCongBaseAngles",
+                        () => isoscelescongbaseangles(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "E",
+                  "D IN Open (A, E) /\\  ~(D = E) /\\  Collinear A D E    ",
+                  "ADE",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Thm("B2'", () => b2_p()),
+                      @readable.Thm("B1'", () => b1_p()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      B IN int_angle C D E /\\  Collinear D A E",
+                  "BintCDE",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("CintADB"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "InteriorReflectionInterior",
+                        () => interiorreflectioninterior(),
+                      ),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear C D E",
+                  "CDEncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("DACncol"),
+                      @readable.Prev,
+                      @readable.Label("ADE"),
+                      @readable.Thm(
+                        "NoncollinearityExtendsToLine",
+                        () => noncollinearityextendstoline(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "F",
+                  "F IN Open (B, D)  /\\   F IN ray A C DIFF {A}    ",
+                  "Fexists",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("CintADB"),
+                      @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+                      @readable.Thm("B1'", () => b1_p()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      F IN int_angle B C D",
+                  "FintBCD",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ADCncol"),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Prev,
+                      @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear D C F",
+                  "DCFncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Label("ADCncol"),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Label("Fexists"),
+                      @readable.Thm("B1'", () => b1_p()),
+                      @readable.Thm(
+                        "NoncollinearityExtendsToLine",
+                        () => noncollinearityextendstoline(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      Collinear A C F  /\\   F IN ray D B DIFF {D}  /\\   C IN int_angle A D F",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Fexists"),
+                      @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                      @readable.Thm("IN_SING", () => @sets.in_sing()),
+                      @readable.Thm("IN_Ray", () => in_ray()),
+                      @readable.Thm("B1'", () => b1_p()),
+                      @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+                      @readable.Label("CintADB"),
+                      @readable.Thm("InteriorWellDefined", () => interiorwelldefined()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      C IN Open (A, F)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm(
+                        "AlternateConverseCrossbar",
+                        () => alternateconversecrossbar(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle A D C suppl angle C D E  /\\   angle A C D suppl angle D C F",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ADE"),
+                      @readable.Label("DACncol"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "SupplementaryAngles_DEF",
+                        () => supplementaryangles_def(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D E === angle D C F",
+                  "CDEeqDCF",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("CDAeqDCA"),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                      @readable.Thm(
+                        "SupplementsCongAnglesCong",
+                        () => supplementsconganglescong(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D B <_ang angle C D E",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("angCDB"),
+                      @readable.Label("CDEncol"),
+                      @readable.Label("BintCDE"),
+                      @readable.Thm("C5Reflexive", () => c5reflexive()),
+                      @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D B <_ang angle D C F",
+                  "CDBlessDCF",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("DCFncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Label("CDEeqDCF"),
+                      @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle D C F <_ang angle D C B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("DCFncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Label("angCDB"),
+                      @readable.Label("FintBCD"),
+                      @readable.Thm(
+                        "InteriorAngleSymmetry",
+                        () => interioranglesymmetry(),
+                      ),
+                      @readable.Thm("C5Reflexive", () => c5reflexive()),
+                      @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle C D B <_ang angle D C B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("CDBlessDCF"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "AngleOrderTransitivity",
+                        () => angleordertransitivity(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(angle D C B === angle C D B)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                      @readable.Label("angCDB"),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Thm("C5Symmetric", () => c5symmetric()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Label("ADCncol"),
+                    @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "IsoscelesCongBaseAngles",
+                      () => isoscelescongbaseangles(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5413,25 +15157,236 @@ pub fn euclidpropositioni_7help() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_177`
-pub fn exec_phrase_177(x179 : Unit) -> Unit raise {
-  let _ = x179
-  {
-    @readable.thm_ref().val = alternateconversecrossbar()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AlternateConverseCrossbar): thm);;
-fn step_357() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AlternateConverseCrossbar): thm);;", exec_phrase_177)
-}
-
-///|
 /// EuclidPropositionI_7
 fn step_358() -> Unit raise {
-  euclidpropositioni_7_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D a.  ¬(A = B)  ⇒  Line a ∧ A ∈ a ∧ B ∈ a  ⇒\n    ¬(C = D) ∧ C ∉ a ∧ D ∉ a ∧ C,D same_side a  ⇒\n    seg A C ≡ seg A D\n   ⇒  ¬(seg B C ≡ seg B D)\n\n  proof\n    intro_TAC ∀A B C D a, notAB, a_line, Csim_aD, ACeqAD;\n    ¬Collinear A B C ∧ ¬Collinear D A B     [ABCncol] by fol a_line notAB Csim_aD NonCollinearRaa CollinearSymmetry;\n    ¬(A = C) ∧ ¬(A = D) ∧ ¬(B = C) ∧ ¬(B = D) ∧ A ∉ Open (C, D)     [Distinct] by fol a_line Csim_aD ∉ SameSide_DEF;\n    ¬Collinear A D C      [ADCncol]\n    proof\n      assume Collinear A D C     [Con] by fol;\n      C ∈ ray A D ━ {A}  ∧  D ∈ ray A D ━ {A}  ∧  seg A D ≡ seg A D     [] by fol Distinct - IN_Ray EndpointInRay IN_DIFF IN_SING SEGMENT C2Reflexive;\n      fol Distinct SEGMENT - ACeqAD C1 Csim_aD;\n    qed;\n    D,C same_side a     [Dsim_aC] by fol a_line Csim_aD SameSideSymmetric;\n    seg A D ≡ seg A C  ∧  seg B D ≡ seg B D     [ADeqAC] by fol Distinct SEGMENT ACeqAD C2Symmetric C2Reflexive;\n    ¬Collinear D A C ∧ ¬Collinear C D A ∧ ¬Collinear A C D ∧ ¬Collinear A D C     [DACncol] by fol ADCncol CollinearSymmetry;\n    ¬(seg B D ≡ seg B C)  ⇒  ¬(seg B C ≡ seg B D)     [BswitchDC] by fol Distinct SEGMENT C2Symmetric;\n    case_split BDCcol | BDCncol     by fol -;\n    suppose Collinear B D C;\n      B ∉ Open (C, D)  ∧  C ∈ ray B D ━ {B}  ∧  D ∈ ray B D ━ {B}     [] by fol a_line Csim_aD SameSide_DEF ∉ Distinct - IN_Ray Distinct IN_DIFF IN_SING EndpointInRay;\n      fol Distinct SEGMENT - ACeqAD ADeqAC C1 Csim_aD;\n    end;\n    suppose ¬Collinear B D C;\n      Tetralateral A B C D     [] by fol notAB Distinct Csim_aD ABCncol - CollinearSymmetry DACncol Tetralateral_DEF;\n      ConvexQuadrilateral A B C D  ∨  C ∈ int_triangle D A B  ∨\n      ConvexQuadrilateral A B D C  ∨  D ∈ int_triangle C A B     [] by fol - a_line Csim_aD  FourChoicesTetralateral InteriorTriangleSymmetry;\n      fol notAB a_line Csim_aD Dsim_aC ACeqAD ADeqAC - EuclidPropositionI_7Help BswitchDC;\n    end;\n  qed;\n")))
+  euclidpropositioni_7_c.set(@readable.prove(
+    "\n  forall A B C D a.  ~(A = B)  ==>  Line a /\\  A IN a /\\  B IN a  ==>\n    ~(C = D) /\\  C NOTIN a /\\  D NOTIN a /\\  C,D same_side a  ==>\n    seg A C === seg A D\n   ==>  ~(seg B C === seg B D)",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C D a, notAB, a_line, Csim_aD, ACeqAD"),
+        @readable.have(
+          "\n    ~Collinear A B C /\\  ~Collinear D A B",
+          "ABCncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("notAB"),
+              @readable.Label("Csim_aD"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = C) /\\  ~(A = D) /\\  ~(B = C) /\\  ~(B = D) /\\  A NOTIN Open (C, D)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Csim_aD"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A D C",
+          "ADCncol",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "Collinear A D C",
+                "Con",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      C IN ray A D DIFF {A}  /\\   D IN ray A D DIFF {A}  /\\   seg A D === seg A D",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Prev,
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                    @readable.Thm("EndpointInRay", () => endpointinray()),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Thm("C2Reflexive", () => c2reflexive()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("Distinct"),
+                  @readable.Thm("SEGMENT", () => segment()),
+                  @readable.Prev,
+                  @readable.Label("ACeqAD"),
+                  @readable.Thm("C1", () => c1()),
+                  @readable.Label("Csim_aD"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D,C same_side a",
+          "Dsim_aC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Label("Csim_aD"),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A D === seg A C  /\\   seg B D === seg B D",
+          "ADeqAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("ACeqAD"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D A C /\\  ~Collinear C D A /\\  ~Collinear A C D /\\  ~Collinear A D C",
+          "DACncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ADCncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(seg B D === seg B C)  ==>  ~(seg B C === seg B D)",
+          "BswitchDC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "BDCcol | BDCncol    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["Collinear B D C", "~Collinear B D C"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      B NOTIN Open (C, D)  /\\   C IN ray B D DIFF {B}  /\\   D IN ray B D DIFF {B}",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("a_line"),
+                      @readable.Label("Csim_aD"),
+                      @readable.Thm("SameSide_DEF", () => sameside_def()),
+                      @readable.Thm("NOTIN", () => notin()),
+                      @readable.Label("Distinct"),
+                      @readable.Prev,
+                      @readable.Thm("IN_Ray", () => in_ray()),
+                      @readable.Label("Distinct"),
+                      @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                      @readable.Thm("IN_SING", () => @sets.in_sing()),
+                      @readable.Thm("EndpointInRay", () => endpointinray()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Prev,
+                    @readable.Label("ACeqAD"),
+                    @readable.Label("ADeqAC"),
+                    @readable.Thm("C1", () => c1()),
+                    @readable.Label("Csim_aD"),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      Tetralateral A B C D",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("notAB"),
+                      @readable.Label("Distinct"),
+                      @readable.Label("Csim_aD"),
+                      @readable.Label("ABCncol"),
+                      @readable.Prev,
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Label("DACncol"),
+                      @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ConvexQuadrilateral A B C D  \\/  C IN int_triangle D A B  \\/\n      ConvexQuadrilateral A B D C  \\/  D IN int_triangle C A B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("a_line"),
+                      @readable.Label("Csim_aD"),
+                      @readable.Thm(
+                        "FourChoicesTetralateral",
+                        () => fourchoicestetralateral(),
+                      ),
+                      @readable.Thm(
+                        "InteriorTriangleSymmetry",
+                        () => interiortrianglesymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("notAB"),
+                    @readable.Label("a_line"),
+                    @readable.Label("Csim_aD"),
+                    @readable.Label("Dsim_aC"),
+                    @readable.Label("ACeqAD"),
+                    @readable.Label("ADeqAC"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "EuclidPropositionI_7Help",
+                      () => euclidpropositioni_7help(),
+                    ),
+                    @readable.Label("BswitchDC"),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5444,25 +15399,153 @@ pub fn euclidpropositioni_7() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_178`
-pub fn exec_phrase_178(x180 : Unit) -> Unit raise {
-  let _ = x180
-  {
-    @readable.thm_ref().val = euclidpropositioni_7help()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_7Help): thm);;
-fn step_359() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_7Help): thm);;", exec_phrase_178)
-}
-
-///|
 /// EuclidPropositionI_11
 fn step_360() -> Unit raise {
-  euclidpropositioni_11_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B. ¬(A = B)  ⇒  ∃F. Right (∡ A B F)\n\n  proof\n    intro_TAC ∀A B, notAB;\n    consider C such that\n    B ∈ Open (A, C)  ∧  seg B C ≡ seg B A     [ABC] by fol notAB SEGMENT C1OppositeRay;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ Collinear A B C     [Distinct] by fol ABC B1';\n    seg B A ≡ seg B C     [BAeqBC] by fol - SEGMENT ABC C2Symmetric;\n    consider F such that\n    ¬Collinear A F C  ∧  seg F A  ≡ seg F C     [Fexists] by fol Distinct IsoscelesExists;\n    ¬Collinear B F A ∧ ¬Collinear B F C     [BFAncol] by fol - CollinearSymmetry Distinct NoncollinearityExtendsToLine;\n    ¬Collinear A B F ∧ Angle (∡ A B F)     [angABF] by fol BFAncol CollinearSymmetry ANGLE;\n    ∡ A B F suppl ∡ F B C     [ABFsuppl] by fol - ABC SupplementaryAngles_DEF;\n    ¬(B = F)  ∧  seg B F ≡ seg B F     [] by fol BFAncol NonCollinearImpliesDistinct SEGMENT C2Reflexive;\n    B,F,A ≅ B,F,C     [] by fol BFAncol - BAeqBC Fexists SSS;\n    ∡ A B F ≡ ∡ F B C     [] by fol - TriangleCong_DEF AngleSymmetry;\n    fol angABF ABFsuppl - RightAngle_DEF;\n  qed;\n")))
+  euclidpropositioni_11_c.set(@readable.prove(
+    "\n  forall A B. ~(A = B)  ==>  ?F. Right (angle A B F)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B, notAB"),
+        @readable.consider(
+          "C",
+          "B IN Open (A, C)  /\\   seg B C === seg B A    ",
+          "ABC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notAB"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C1OppositeRay", () => c1oppositeray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  Collinear A B C",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("ABC"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    seg B A === seg B C",
+          "BAeqBC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("ABC"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "F",
+          "~Collinear A F C  /\\   seg F A  === seg F C    ",
+          "Fexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("IsoscelesExists", () => isoscelesexists()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B F A /\\  ~Collinear B F C",
+          "BFAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("Distinct"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A B F /\\  Angle (angle A B F)",
+          "angABF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BFAncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B F suppl angle F B C",
+          "ABFsuppl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("ABC"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B = F)  /\\   seg B F === seg B F",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BFAncol"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B,F,A cong B,F,C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BFAncol"),
+              @readable.Prev,
+              @readable.Label("BAeqBC"),
+              @readable.Label("Fexists"),
+              @readable.Thm("SSS", () => sss()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B F === angle F B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("angABF"),
+            @readable.Label("ABFsuppl"),
+            @readable.Prev,
+            @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5477,7 +15560,298 @@ pub fn euclidpropositioni_11() -> @kernel.Thm {
 ///|
 /// DropPerpendicularToLine
 fn step_361() -> Unit raise {
-  dropperpendiculartoline_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P l.  Line l  ∧  P ∉ l  ⇒  ∃E Q. E ∈ l ∧ Q ∈ l ∧ Right (∡ P Q E)\n\n  proof\n    intro_TAC ∀P l, l_line;\n    consider A B such that\n    A ∈ l ∧ B ∈ l ∧ ¬(A = B)     [ABl] by fol l_line I2;\n    ¬Collinear B A P ∧ ¬Collinear P A B ∧ ¬(A = P)     [BAPncol] by fol ABl l_line NonCollinearRaa CollinearSymmetry ∉;\n    Angle (∡ B A P) ∧ Angle (∡ P A B)     [angBAP] by fol - ANGLE AngleSymmetry;\n    consider P' such that\n    ¬(A = P') ∧ P' ∉ l ∧ ¬(P,P' same_side l) ∧ seg A P' ≡ seg A P  ∧  ∡ B A P' ≡ ∡ B A P     [P'exists] by simplify C4OppositeSide - ABl BAPncol l_line;\n    consider Q such that\n    Q ∈ l ∧ Q ∈ Open (P, P') ∧ Collinear A B Q     [Qexists] by fol l_line - SameSide_DEF ABl Collinear_DEF;\n    ¬Collinear B A P'     [BAP'ncol] by fol l_line ABl I1 Collinear_DEF P'exists ∉;\n    ∡ B A P ≡ ∡ B A P'     [BAPeqBAP'] by fol - ANGLE angBAP P'exists C5Symmetric;\n    ∃E. E ∈ l  ∧  ¬Collinear P Q E  ∧  ∡ P Q E ≡ ∡ E Q P'     []\n    proof\n      assume ¬(A = Q) [notAQ] by fol ABl BAPncol BAPeqBAP' AngleSymmetry;\n      seg A Q  ≡ seg A Q  ∧  seg A P ≡ seg A P'     [APeqAP'] by fol - SEGMENT C2Reflexive BAPncol P'exists C2Symmetric;\n      ¬Collinear Q A P' ∧ ¬Collinear Q A P     [QAP'ncol] by fol notAQ l_line ABl Qexists P'exists NonCollinearRaa CollinearSymmetry;\n      ∡ Q A P ≡ ∡ Q A P'     []\n      proof\n        case_split QAB | notQAB     by fol - ∉;\n        suppose A ∈ Open (Q, B);\n          ∡ B A P suppl ∡ P A Q   ∧  ∡ B A P' suppl ∡ P' A Q     [] by fol BAPncol BAP'ncol - B1'  SupplementaryAngles_DEF;\n          fol - BAPeqBAP' SupplementsCongAnglesCong AngleSymmetry;\n        end;\n        suppose A ∉ Open (Q, B);\n          Q ∈ ray A B ━ {A}     [QrayAB_A] by fol ABl Qexists notQAB IN_Ray notAQ IN_DIFF IN_SING;\n          ray A Q = ray A B     [] by fol - ABl RayWellDefined;\n          fol notAQ QrayAB_A - BAPeqBAP' Angle_DEF;\n        end;\n      qed;\n      Q,A,P ≅ Q,A,P'     [] by fol QAP'ncol APeqAP' - SAS;\n      fol - TriangleCong_DEF AngleSymmetry ABl QAP'ncol CollinearSymmetry;\n    qed;\n    consider E such that\n    E ∈ l ∧ ¬Collinear P Q E ∧ ∡ P Q E ≡ ∡ E Q P'     [Eexists] by fol -;\n    ∡ P Q E suppl ∡ E Q P'  ∧  Right (∡ P Q E)     [] by fol - Qexists SupplementaryAngles_DEF RightAngle_DEF;\n    fol Eexists Qexists -;\n  qed;\n")))
+  dropperpendiculartoline_c.set(@readable.prove(
+    "\n  forall P l.  Line l  /\\   P NOTIN l  ==>  ?E Q. E IN l /\\  Q IN l /\\  Right (angle P Q E)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P l, l_line"),
+        @readable.consider(
+          "A B",
+          "A IN l /\\  B IN l /\\  ~(A = B)    ",
+          "ABl",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("l_line"), @readable.Thm("I2", () => i2())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B A P /\\  ~Collinear P A B /\\  ~(A = P)",
+          "BAPncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABl"),
+              @readable.Label("l_line"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle B A P) /\\  Angle (angle P A B)",
+          "angBAP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "P'",
+          "~(A = P') /\\  P' NOTIN l /\\  ~(P,P' same_side l) /\\  seg A P' === seg A P  /\\   angle B A P' === angle B A P    ",
+          "P'exists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4OppositeSide", () => c4oppositeside()),
+              @readable.Prev,
+              @readable.Label("ABl"),
+              @readable.Label("BAPncol"),
+              @readable.Label("l_line"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "Q",
+          "Q IN l /\\  Q IN Open (P, P') /\\  Collinear A B Q    ",
+          "Qexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Label("ABl"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B A P'",
+          "BAP'ncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("ABl"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("P'exists"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A P === angle B A P'",
+          "BAPeqBAP'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("angBAP"),
+              @readable.Label("P'exists"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ?E. E IN l  /\\   ~Collinear P Q E  /\\   angle P Q E === angle E Q P'",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "~(A = Q)",
+                "notAQ",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ABl"),
+                    @readable.Label("BAPncol"),
+                    @readable.Label("BAPeqBAP'"),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      seg A Q  === seg A Q  /\\   seg A P === seg A P'",
+                "APeqAP'",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Thm("C2Reflexive", () => c2reflexive()),
+                    @readable.Label("BAPncol"),
+                    @readable.Label("P'exists"),
+                    @readable.Thm("C2Symmetric", () => c2symmetric()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~Collinear Q A P' /\\  ~Collinear Q A P",
+                "QAP'ncol",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("notAQ"),
+                    @readable.Label("l_line"),
+                    @readable.Label("ABl"),
+                    @readable.Label("Qexists"),
+                    @readable.Label("P'exists"),
+                    @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+                    @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle Q A P === angle Q A P'",
+                "",
+                @readable.case_split(
+                  "QAB | notQAB    ",
+                  @readable.by(
+                    @readable.fol,
+                    [@readable.Prev, @readable.Thm("NOTIN", () => notin())],
+                  ),
+                  @list.List(["A IN Open (Q, B)", "A NOTIN Open (Q, B)"]),
+                  @list.List(
+                    [
+                      @readable.steps(
+                        [
+                          @readable.have(
+                            "\n          angle B A P suppl angle P A Q   /\\   angle B A P' suppl angle P' A Q",
+                            "",
+                            @readable.by(
+                              @readable.fol,
+                              [
+                                @readable.Label("BAPncol"),
+                                @readable.Label("BAP'ncol"),
+                                @readable.Prev,
+                                @readable.Thm("B1'", () => b1_p()),
+                                @readable.Thm(
+                                  "SupplementaryAngles_DEF",
+                                  () => supplementaryangles_def(),
+                                ),
+                              ],
+                            ),
+                          ),
+                          @readable.by(
+                            @readable.fol,
+                            [
+                              @readable.Prev,
+                              @readable.Label("BAPeqBAP'"),
+                              @readable.Thm(
+                                "SupplementsCongAnglesCong",
+                                () => supplementsconganglescong(),
+                              ),
+                              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                            ],
+                          ),
+                        ],
+                      ),
+                      @readable.steps(
+                        [
+                          @readable.have(
+                            "\n          Q IN ray A B DIFF {A}",
+                            "QrayAB_A",
+                            @readable.by(
+                              @readable.fol,
+                              [
+                                @readable.Label("ABl"),
+                                @readable.Label("Qexists"),
+                                @readable.Label("notQAB"),
+                                @readable.Thm("IN_Ray", () => in_ray()),
+                                @readable.Label("notAQ"),
+                                @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                                @readable.Thm("IN_SING", () => @sets.in_sing()),
+                              ],
+                            ),
+                          ),
+                          @readable.have(
+                            "\n          ray A Q = ray A B",
+                            "",
+                            @readable.by(
+                              @readable.fol,
+                              [
+                                @readable.Prev,
+                                @readable.Label("ABl"),
+                                @readable.Thm("RayWellDefined", () => raywelldefined()),
+                              ],
+                            ),
+                          ),
+                          @readable.by(
+                            @readable.fol,
+                            [
+                              @readable.Label("notAQ"),
+                              @readable.Label("QrayAB_A"),
+                              @readable.Prev,
+                              @readable.Label("BAPeqBAP'"),
+                              @readable.Thm("Angle_DEF", () => angle_def()),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              @readable.have(
+                "\n      Q,A,P cong Q,A,P'",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("QAP'ncol"),
+                    @readable.Label("APeqAP'"),
+                    @readable.Prev,
+                    @readable.Thm("SAS", () => sas()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+                  @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  @readable.Label("ABl"),
+                  @readable.Label("QAP'ncol"),
+                  @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN l /\\  ~Collinear P Q E /\\  angle P Q E === angle E Q P'    ",
+          "Eexists",
+          @readable.by(@readable.fol, [@readable.Prev]),
+        ),
+        @readable.have(
+          "\n    angle P Q E suppl angle E Q P'  /\\   Right (angle P Q E)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Qexists"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+              @readable.Thm("RightAngle_DEF", () => rightangle_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("Eexists"), @readable.Label("Qexists"), @readable.Prev],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5492,7 +15866,130 @@ pub fn dropperpendiculartoline() -> @kernel.Thm {
 ///|
 /// EuclidPropositionI_14
 fn step_362() -> Unit raise {
-  euclidpropositioni_14_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D l.  Line l ∧ A ∈ l ∧ B ∈ l ∧ ¬(A = B)  ⇒\n    C ∉ l ∧ D ∉ l ∧ ¬(C,D same_side l)  ⇒ ∡ C B A suppl ∡ A B D\n    ⇒  B ∈ Open (C, D)\n\n  proof\n    intro_TAC ∀A B C D l, l_line, Cnsim_lD, CBAsupplABD;\n    ¬(B = C) ∧ ¬(B = D) ∧ ¬Collinear C B A     [Distinct] by fol l_line Cnsim_lD ∉ I1 Collinear_DEF;\n    consider E such that\n    B ∈ Open (C, E)     [CBE] by fol Distinct B2';\n    E ∉ l ∧ ¬(C,E same_side l)     [Csim_lE] by fol l_line ∉ - BetweenLinear Cnsim_lD SameSide_DEF;\n    D,E same_side l     [Dsim_lE] by fol l_line Cnsim_lD - AtMost2Sides;\n    ∡ C B A suppl ∡ A B E     [] by fol Distinct CBE SupplementaryAngles_DEF;\n    ∡ A B D ≡ ∡ A B E     [] by fol CBAsupplABD - SupplementUnique;\n    ray B E = ray B D     [] by fol l_line Csim_lE Cnsim_lD Dsim_lE - C4Uniqueness;\n    D ∈ ray B E ━ {B}     [] by fol Distinct - EndpointInRay IN_DIFF IN_SING;\n    fol CBE - OppositeRaysIntersect1pointHelp B1';\n  qed;\n")))
+  euclidpropositioni_14_c.set(@readable.prove(
+    "\n  forall A B C D l.  Line l /\\  A IN l /\\  B IN l /\\  ~(A = B)  ==>\n    C NOTIN l /\\  D NOTIN l /\\  ~(C,D same_side l)  ==> angle C B A suppl angle A B D\n    ==>  B IN Open (C, D)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D l, l_line, Cnsim_lD, CBAsupplABD"),
+        @readable.have(
+          "\n    ~(B = C) /\\  ~(B = D) /\\  ~Collinear C B A",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Cnsim_lD"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "B IN Open (C, E)    ",
+          "CBE",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    E NOTIN l /\\  ~(C,E same_side l)",
+          "Csim_lE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Prev,
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Label("Cnsim_lD"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D,E same_side l",
+          "Dsim_lE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Cnsim_lD"),
+              @readable.Prev,
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B A suppl angle A B E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("CBE"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B D === angle A B E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CBAsupplABD"),
+              @readable.Prev,
+              @readable.Thm("SupplementUnique", () => supplementunique()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray B E = ray B D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Csim_lE"),
+              @readable.Label("Cnsim_lD"),
+              @readable.Label("Dsim_lE"),
+              @readable.Prev,
+              @readable.Thm("C4Uniqueness", () => c4uniqueness()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D IN ray B E DIFF {B}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("EndpointInRay", () => endpointinray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("CBE"),
+            @readable.Prev,
+            @readable.Thm(
+              "OppositeRaysIntersect1pointHelp",
+              () => oppositeraysintersect1pointhelp(),
+            ),
+            @readable.Thm("B1'", () => b1_p()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5507,7 +16004,48 @@ pub fn euclidpropositioni_14() -> @kernel.Thm {
 ///|
 /// VerticalAnglesCong
 fn step_363() -> Unit raise {
-  verticalanglescong_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B O A' B'.  ¬Collinear A O B  ⇒ O ∈ Open (A, A')  ∧  O ∈ Open (B, B')\n    ⇒  ∡ B O A' ≡ ∡ B' O A\n\n  proof\n    intro_TAC ∀A B O A' B', H1, H2;\n    ∡ A O B suppl ∡ B O A'     [AOBsupplBOA'] by fol H1 H2 SupplementaryAngles_DEF;\n    ∡ B O A suppl ∡ A O B'     [] by fol H1 CollinearSymmetry H2 SupplementaryAngles_DEF;\n    fol AOBsupplBOA' - AngleSymmetry SupplementUnique;\n  qed;\n")))
+  verticalanglescong_c.set(@readable.prove(
+    "\n  forall A B O A' B'.  ~Collinear A O B  ==> O IN Open (A, A')  /\\   O IN Open (B, B')\n    ==>  angle B O A' === angle B' O A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B O A' B', H1, H2"),
+        @readable.have(
+          "\n    angle A O B suppl angle B O A'",
+          "AOBsupplBOA'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B O A suppl angle A O B'",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("AOBsupplBOA'"),
+            @readable.Prev,
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Thm("SupplementUnique", () => supplementunique()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5522,7 +16060,373 @@ pub fn verticalanglescong() -> @kernel.Thm {
 ///|
 /// EuclidPropositionI_16
 fn step_364() -> Unit raise {
-  euclidpropositioni_16_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. ¬Collinear A B C  ∧  C ∈ Open (B, D)\n    ⇒  ∡ B A C <_ang ∡ D C A\n\n  proof\n    intro_TAC ∀A B C D, H1 H2;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider l such that\n    Line l ∧ A ∈ l ∧ C ∈ l     [l_line] by fol Distinct I1;\n    consider m such that\n    Line m ∧ B ∈ m ∧ C ∈ m     [m_line] by fol Distinct I1;\n    D ∈ m     [Dm] by fol m_line H2 BetweenLinear;\n    consider E such that\n    E ∈ Open (A, C) ∧ seg A E ≡ seg E C     [AEC] by fol Distinct MidpointExists;\n    ¬(A = E) ∧ ¬(E = C) ∧ Collinear A E C ∧ ¬(B = E)     [AECcol] by fol - B1' H1;\n    E ∈ l     [El] by fol l_line AEC BetweenLinear;\n    consider F such that\n    E ∈ Open (B, F) ∧ seg E F ≡ seg E B     [BEF] by fol AECcol SEGMENT C1OppositeRay;\n    ¬(B = E) ∧ ¬(B = F) ∧ ¬(E = F) ∧ Collinear B E F     [BEF'] by fol BEF B1';\n    B ∉ l     [notBl] by fol l_line Distinct I1 Collinear_DEF H1 ∉;\n    ¬Collinear A E B ∧ ¬Collinear C E B     [AEBncol] by fol AECcol l_line El notBl NonCollinearRaa CollinearSymmetry;\n    Angle (∡ B A E)     [angBAE] by fol - CollinearSymmetry ANGLE;\n    ¬Collinear C E F     [CEFncol] by fol AEBncol BEF' CollinearSymmetry NoncollinearityExtendsToLine;\n    ∡ B E A ≡ ∡ F E C     [BEAeqFEC] by fol AEBncol AEC B1' BEF VerticalAnglesCong;\n    seg E A ≡ seg E C  ∧  seg E B ≡ seg E F     [] by fol AEC SegmentSymmetry AECcol BEF'  SEGMENT BEF C2Symmetric;\n    A,E,B ≅ C,E,F     [] by fol AEBncol CEFncol - BEAeqFEC AngleSymmetry SAS;\n    ∡ B A E ≡ ∡ F C E     [BAEeqFCE] by fol - TriangleCong_DEF;\n    ¬Collinear E C D     [ECDncol] by fol AEBncol H2 B1' CollinearSymmetry NoncollinearityExtendsToLine;\n    F ∉ l ∧ D ∉ l     [notFl] by fol l_line El Collinear_DEF CEFncol - ∉;\n    F ∈ ray B E ━ {B}  ∧  E ∉ m     [] by fol BEF IntervalRayEZ m_line Collinear_DEF AEBncol ∉;\n    F ∉ m  ∧  F,E same_side m     [Fsim_mE] by fol m_line - RaySameSide;\n    ¬(B,F same_side l)  ∧  ¬(B,D same_side l)     [] by fol El l_line BEF H2 SameSide_DEF;\n    F,D same_side l     [] by fol l_line notBl notFl - AtMost2Sides;\n    F ∈ int_angle E C D     [] by fol ECDncol l_line El m_line Dm notFl Fsim_mE - IN_InteriorAngle;\n    ∡ B A E <_ang ∡ E C D     [BAElessECD] by fol angBAE ECDncol - BAEeqFCE AngleSymmetry AngleOrdering_DEF;\n    ray A E = ray A C  ∧  ray C E = ray C A     [] by fol AEC B1' IntervalRay;\n    ∡ B A C <_ang ∡ A C D     [] by fol BAElessECD - Angle_DEF;\n    fol - AngleSymmetry;\n  qed;\n")))
+  euclidpropositioni_16_c.set(@readable.prove(
+    "\n  forall A B C D. ~Collinear A B C  /\\   C IN Open (B, D)\n    ==>  angle B A C <_ang angle D C A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1 H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  C IN l    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  B IN m /\\  C IN m    ",
+          "m_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    D IN m",
+          "Dm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("H2"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN Open (A, C) /\\  seg A E === seg E C    ",
+          "AEC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("MidpointExists", () => midpointexists()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = E) /\\  ~(E = C) /\\  Collinear A E C /\\  ~(B = E)",
+          "AECcol",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B1'", () => b1_p()), @readable.Label("H1")],
+          ),
+        ),
+        @readable.have(
+          "\n    E IN l",
+          "El",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("AEC"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "F",
+          "E IN Open (B, F) /\\  seg E F === seg E B    ",
+          "BEF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AECcol"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C1OppositeRay", () => c1oppositeray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B = E) /\\  ~(B = F) /\\  ~(E = F) /\\  Collinear B E F",
+          "BEF'",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("BEF"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN l",
+          "notBl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Distinct"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("H1"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A E B /\\  ~Collinear C E B",
+          "AEBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AECcol"),
+              @readable.Label("l_line"),
+              @readable.Label("El"),
+              @readable.Label("notBl"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle B A E)",
+          "angBAE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C E F",
+          "CEFncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AEBncol"),
+              @readable.Label("BEF'"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B E A === angle F E C",
+          "BEAeqFEC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AEBncol"),
+              @readable.Label("AEC"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("BEF"),
+              @readable.Thm("VerticalAnglesCong", () => verticalanglescong()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg E A === seg E C  /\\   seg E B === seg E F",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AEC"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("AECcol"),
+              @readable.Label("BEF'"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("BEF"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,E,B cong C,E,F",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AEBncol"),
+              @readable.Label("CEFncol"),
+              @readable.Prev,
+              @readable.Label("BEAeqFEC"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A E === angle F C E",
+          "BAEeqFCE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear E C D",
+          "ECDncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AEBncol"),
+              @readable.Label("H2"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F NOTIN l /\\  D NOTIN l",
+          "notFl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("El"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("CEFncol"),
+              @readable.Prev,
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F IN ray B E DIFF {B}  /\\   E NOTIN m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BEF"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+              @readable.Label("m_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("AEBncol"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F NOTIN m  /\\   F,E same_side m",
+          "Fsim_mE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Thm("RaySameSide", () => raysameside()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B,F same_side l)  /\\   ~(B,D same_side l)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("El"),
+              @readable.Label("l_line"),
+              @readable.Label("BEF"),
+              @readable.Label("H2"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F,D same_side l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("notBl"),
+              @readable.Label("notFl"),
+              @readable.Prev,
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    F IN int_angle E C D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ECDncol"),
+              @readable.Label("l_line"),
+              @readable.Label("El"),
+              @readable.Label("m_line"),
+              @readable.Label("Dm"),
+              @readable.Label("notFl"),
+              @readable.Label("Fsim_mE"),
+              @readable.Prev,
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A E <_ang angle E C D",
+          "BAElessECD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angBAE"),
+              @readable.Label("ECDncol"),
+              @readable.Prev,
+              @readable.Label("BAEeqFCE"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A E = ray A C  /\\   ray C E = ray C A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AEC"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B A C <_ang angle A C D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BAElessECD"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("AngleSymmetry", () => anglesymmetry())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5535,41 +16439,112 @@ pub fn euclidpropositioni_16() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_179`
-pub fn exec_phrase_179(x181 : Unit) -> Unit raise {
-  let _ = x181
-  {
-    @readable.thm_ref().val = midpointexists()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MidpointExists): thm);;
-fn step_365() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MidpointExists): thm);;", exec_phrase_179)
-}
-
-///|
-/// `exec_phrase_180`
-pub fn exec_phrase_180(x182 : Unit) -> Unit raise {
-  let _ = x182
-  {
-    @readable.thm_ref().val = verticalanglescong()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((VerticalAnglesCong): thm);;
-fn step_366() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((VerticalAnglesCong): thm);;", exec_phrase_180)
-}
-
-///|
 /// ExteriorAngle
 fn step_367() -> Unit raise {
-  exteriorangle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D.  ¬Collinear A B C  ∧  C ∈ Open (B, D)\n    ⇒  ∡ A B C <_ang ∡ A C D\n\n  proof\n    intro_TAC ∀A B C D, H1 H2;\n    ¬(C = D) ∧ C ∈ Open (D, B) ∧ Collinear B C D     [H2'] by fol H2 BetweenLinear B1';\n    ¬Collinear B A C ∧ ¬(A = C)     [BACncol] by fol H1 CollinearSymmetry NonCollinearImpliesDistinct;\n    consider E such that\n    C ∈ Open (A, E)     [ACE] by fol - B2';\n    ¬(C = E) ∧ C ∈ Open (E, A) ∧ Collinear A C E     [ACE'] by fol - B1';\n    ¬Collinear A C D ∧ ¬Collinear D C E     [DCEncol] by fol H1 CollinearSymmetry H2' - NoncollinearityExtendsToLine;\n    ∡ A B C <_ang ∡ E C B     [ABClessECB] by fol BACncol ACE EuclidPropositionI_16;\n    ∡ E C B ≡ ∡ A C D     [] by fol DCEncol ACE' H2' VerticalAnglesCong;\n    fol ABClessECB DCEncol ANGLE - AngleTrichotomy2;\n  qed;\n")))
+  exteriorangle_c.set(@readable.prove(
+    "\n  forall A B C D.  ~Collinear A B C  /\\   C IN Open (B, D)\n    ==>  angle A B C <_ang angle A C D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1 H2"),
+        @readable.have(
+          "\n    ~(C = D) /\\  C IN Open (D, B) /\\  Collinear B C D",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B A C /\\  ~(A = C)",
+          "BACncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "C IN Open (A, E)    ",
+          "ACE",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(C = E) /\\  C IN Open (E, A) /\\  Collinear A C E",
+          "ACE'",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A C D /\\  ~Collinear D C E",
+          "DCEncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2'"),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B C <_ang angle E C B",
+          "ABClessECB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BACncol"),
+              @readable.Label("ACE"),
+              @readable.Thm("EuclidPropositionI_16", () => euclidpropositioni_16()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle E C B === angle A C D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DCEncol"),
+              @readable.Label("ACE'"),
+              @readable.Label("H2'"),
+              @readable.Thm("VerticalAnglesCong", () => verticalanglescong()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("ABClessECB"),
+            @readable.Label("DCEncol"),
+            @readable.Thm("ANGLE", () => angle()),
+            @readable.Prev,
+            @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5582,25 +16557,111 @@ pub fn exteriorangle() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_181`
-pub fn exec_phrase_181(x183 : Unit) -> Unit raise {
-  let _ = x183
-  {
-    @readable.thm_ref().val = euclidpropositioni_16()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_16): thm);;
-fn step_368() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_16): thm);;", exec_phrase_181)
-}
-
-///|
 /// EuclidPropositionI_17
 fn step_369() -> Unit raise {
-  euclidpropositioni_17_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C α β γ.  ¬Collinear A B C  ∧  α = ∡ A B C  ∧  β = ∡ B C A  ⇒\n    β suppl γ\n    ⇒  α <_ang γ\n\n  proof\n    intro_TAC ∀A B C α β γ, H1, H2;\n    Angle γ     [angγ] by fol H2 SupplementImpliesAngle;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    ¬Collinear B A C ∧ ¬Collinear A C B     [BACncol] by fol H1 CollinearSymmetry;\n    consider D such that\n    C ∈ Open (A, D)     [ACD] by fol Distinct B2';\n    ∡ A B C <_ang ∡ D C B     [ABClessDCB] by fol BACncol ACD EuclidPropositionI_16;\n    β suppl ∡ B C D     [] by fol - H1 AngleSymmetry BACncol ACD SupplementaryAngles_DEF;\n    ∡ B C D ≡ γ     [] by fol H2 - SupplementUnique;\n    fol ABClessDCB H1 AngleSymmetry angγ - AngleTrichotomy2;\n  qed;\n")))
+  euclidpropositioni_17_c.set(@readable.prove(
+    "\n  forall A B C alpha beta gamma.  ~Collinear A B C  /\\   alpha = angle A B C  /\\   beta = angle B C A  ==>\n    beta suppl gamma\n    ==>  alpha <_ang gamma",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C alpha beta gamma, H1, H2"),
+        @readable.have(
+          "\n    Angle gamma",
+          "anggamma",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("SupplementImpliesAngle", () => supplementimpliesangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B A C /\\  ~Collinear A C B",
+          "BACncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "D",
+          "C IN Open (A, D)    ",
+          "ACD",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B C <_ang angle D C B",
+          "ABClessDCB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BACncol"),
+              @readable.Label("ACD"),
+              @readable.Thm("EuclidPropositionI_16", () => euclidpropositioni_16()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    beta suppl angle B C D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Label("BACncol"),
+              @readable.Label("ACD"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C D === gamma",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("SupplementUnique", () => supplementunique()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("ABClessDCB"),
+            @readable.Label("H1"),
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Label("anggamma"),
+            @readable.Prev,
+            @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5615,7 +16676,171 @@ pub fn euclidpropositioni_17() -> @kernel.Thm {
 ///|
 /// EuclidPropositionI_18
 fn step_370() -> Unit raise {
-  euclidpropositioni_18_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C.  ¬Collinear A B C  ∧  seg A C <__ seg A B\n    ⇒  ∡ A B C <_ang ∡ B C A\n\n  proof\n    intro_TAC ∀A B C, H1 H2;\n    ¬(A = B) ∧ ¬(A = C)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider D such that\n    D ∈ Open (A, B) ∧ seg A C ≡ seg A D     [ADB] by fol Distinct SEGMENT H2 SegmentOrderingUse;\n    ¬(D = A) ∧ ¬(D = B) ∧ D ∈ Open (B, A) ∧ Collinear A D B ∧ ray B D = ray B A     [ADB'] by fol - B1' IntervalRay;\n    D ∈ int_angle A C B  ∧ ¬Collinear A C B      [DintACB] by fol H1 CollinearSymmetry ADB ConverseCrossbar;\n    ¬Collinear D A C ∧ ¬Collinear C B D ∧ ¬Collinear C D A     [DACncol] by fol H1 CollinearSymmetry ADB' NoncollinearityExtendsToLine;\n    seg A D ≡ seg A C     [] by fol ADB' Distinct SEGMENT ADB C2Symmetric;\n    ∡ C D A ≡ ∡ A C D     [] by fol DACncol - IsoscelesCongBaseAngles AngleSymmetry;\n    ∡ C D A <_ang ∡ A C B     [CDAlessACB] by fol DACncol ANGLE H1 DintACB - AngleOrdering_DEF;\n    ∡ B D C suppl ∡ C D A     [] by fol DACncol CollinearSymmetry ADB' SupplementaryAngles_DEF;\n    ∡ C B D <_ang ∡ C D A     [] by fol DACncol - EuclidPropositionI_17;\n    ∡ C B D <_ang ∡ A C B     [] by fol - CDAlessACB AngleOrderTransitivity;\n    fol - ADB' Angle_DEF AngleSymmetry;\n  qed;\n")))
+  euclidpropositioni_18_c.set(@readable.prove(
+    "\n  forall A B C.  ~Collinear A B C  /\\   seg A C <__ seg A B\n    ==>  angle A B C <_ang angle B C A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, H1 H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "D",
+          "D IN Open (A, B) /\\  seg A C === seg A D    ",
+          "ADB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("H2"),
+              @readable.Thm("SegmentOrderingUse", () => segmentorderinguse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(D = A) /\\  ~(D = B) /\\  D IN Open (B, A) /\\  Collinear A D B /\\  ray B D = ray B A",
+          "ADB'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D IN int_angle A C B  /\\  ~Collinear A C B",
+          "DintACB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("ADB"),
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D A C /\\  ~Collinear C B D /\\  ~Collinear C D A",
+          "DACncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("ADB'"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A D === seg A C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ADB'"),
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("ADB"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C D A === angle A C D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DACncol"),
+              @readable.Prev,
+              @readable.Thm("IsoscelesCongBaseAngles", () => isoscelescongbaseangles()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C D A <_ang angle A C B",
+          "CDAlessACB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DACncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H1"),
+              @readable.Label("DintACB"),
+              @readable.Prev,
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B D C suppl angle C D A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DACncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("ADB'"),
+              @readable.Thm("SupplementaryAngles_DEF", () => supplementaryangles_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B D <_ang angle C D A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DACncol"),
+              @readable.Prev,
+              @readable.Thm("EuclidPropositionI_17", () => euclidpropositioni_17()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B D <_ang angle A C B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("CDAlessACB"),
+              @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("ADB'"),
+            @readable.Thm("Angle_DEF", () => angle_def()),
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5628,25 +16853,127 @@ pub fn euclidpropositioni_18() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_182`
-pub fn exec_phrase_182(x184 : Unit) -> Unit raise {
-  let _ = x184
-  {
-    @readable.thm_ref().val = euclidpropositioni_17()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_17): thm);;
-fn step_371() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_17): thm);;", exec_phrase_182)
-}
-
-///|
 /// EuclidPropositionI_19
 fn step_372() -> Unit raise {
-  euclidpropositioni_19_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. ¬Collinear A B C  ∧  ∡ A B C <_ang ∡ B C A\n    ⇒  seg A C  <__ seg A B\n\n  proof\n    intro_TAC ∀A B C, H1 H2;\n    ¬Collinear B A C ∧ ¬Collinear B C A ∧ ¬Collinear A C B     [BACncol] by fol H1 CollinearSymmetry;\n    ¬(A = B) ∧ ¬(A = C)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    assume ¬(seg A C  <__ seg A B)     [Con] by fol;\n    seg A B ≡ seg A C   ∨  seg A B  <__ seg A C     [] by fol Distinct SEGMENT - SegmentTrichotomy;\n    case_split cong | less     by fol -;\n    suppose seg A B ≡ seg A C;\n      ∡ C B A ≡ ∡ B C A     [] by fol BACncol - IsoscelesCongBaseAngles;\n      fol - AngleSymmetry H2 AngleTrichotomy1;\n    end;\n    suppose seg A B  <__ seg A C;\n      ∡ A C B <_ang ∡ C B A     [] by fol BACncol - EuclidPropositionI_18;\n      fol H1 BACncol ANGLE - AngleSymmetry H2 AngleTrichotomy;\n    end;\n  qed;\n")))
+  euclidpropositioni_19_c.set(@readable.prove(
+    "\n  forall A B C. ~Collinear A B C  /\\   angle A B C <_ang angle B C A\n    ==>  seg A C  <__ seg A B",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C, H1 H2"),
+        @readable.have(
+          "\n    ~Collinear B A C /\\  ~Collinear B C A /\\  ~Collinear A C B",
+          "BACncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(seg A C  <__ seg A B)",
+          "Con",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    seg A B === seg A C   \\/  seg A B  <__ seg A C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Prev,
+              @readable.Thm("SegmentTrichotomy", () => segmenttrichotomy()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "cong | less    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["seg A B === seg A C", "seg A B  <__ seg A C"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      angle C B A === angle B C A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("BACncol"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "IsoscelesCongBaseAngles",
+                        () => isoscelescongbaseangles(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    @readable.Label("H2"),
+                    @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      angle A C B <_ang angle C B A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("BACncol"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "EuclidPropositionI_18",
+                        () => euclidpropositioni_18(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("BACncol"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Prev,
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    @readable.Label("H2"),
+                    @readable.Thm("AngleTrichotomy", () => angletrichotomy()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5659,41 +16986,132 @@ pub fn euclidpropositioni_19() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_183`
-pub fn exec_phrase_183(x185 : Unit) -> Unit raise {
-  let _ = x185
-  {
-    @readable.thm_ref().val = segmenttrichotomy()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentTrichotomy): thm);;
-fn step_373() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentTrichotomy): thm);;", exec_phrase_183)
-}
-
-///|
-/// `exec_phrase_184`
-pub fn exec_phrase_184(x186 : Unit) -> Unit raise {
-  let _ = x186
-  {
-    @readable.thm_ref().val = euclidpropositioni_18()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_18): thm);;
-fn step_374() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_18): thm);;", exec_phrase_184)
-}
-
-///|
 /// EuclidPropositionI_20
 fn step_375() -> Unit raise {
-  euclidpropositioni_20_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. ¬Collinear A B C  ⇒  A ∈ Open (B, D)  ∧  seg A D ≡ seg A C\n    ⇒  seg B C <__ seg B D\n\n  proof\n    intro_TAC ∀A B C D, H1, H2;\n    ¬(B = D) ∧ ¬(A = D) ∧ A ∈ Open (D, B) ∧ Collinear B A D ∧ ray D A = ray D B     [BAD'] by fol H2 B1' IntervalRay;\n    ¬Collinear C A D     [CADncol] by fol H1 CollinearSymmetry BAD' NoncollinearityExtendsToLine;\n    ¬Collinear D C B ∧ ¬Collinear B D C     [DCBncol] by fol H1 CollinearSymmetry BAD' NoncollinearityExtendsToLine;\n    Angle (∡ C D A)     [angCDA] by fol CADncol CollinearSymmetry ANGLE;\n    ∡ C D A ≡ ∡ D C A     [CDAeqDCA] by fol CADncol CollinearSymmetry H2 IsoscelesCongBaseAngles;\n    A ∈ int_angle D C B     [] by fol DCBncol BAD' ConverseCrossbar;\n    ∡ C D A <_ang ∡ D C B     [] by fol angCDA DCBncol - CDAeqDCA AngleOrdering_DEF;\n    ∡ B D C <_ang ∡ D C B     [] by fol - BAD' Angle_DEF AngleSymmetry;\n    fol DCBncol - EuclidPropositionI_19;\n  qed;\n")))
+  euclidpropositioni_20_c.set(@readable.prove(
+    "\n  forall A B C D. ~Collinear A B C  ==>  A IN Open (B, D)  /\\   seg A D === seg A C\n    ==>  seg B C <__ seg B D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1, H2"),
+        @readable.have(
+          "\n    ~(B = D) /\\  ~(A = D) /\\  A IN Open (D, B) /\\  Collinear B A D /\\  ray D A = ray D B",
+          "BAD'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C A D",
+          "CADncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("BAD'"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear D C B /\\  ~Collinear B D C",
+          "DCBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("BAD'"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle C D A)",
+          "angCDA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CADncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C D A === angle D C A",
+          "CDAeqDCA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CADncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2"),
+              @readable.Thm("IsoscelesCongBaseAngles", () => isoscelescongbaseangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN int_angle D C B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DCBncol"),
+              @readable.Label("BAD'"),
+              @readable.Thm("ConverseCrossbar", () => conversecrossbar()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C D A <_ang angle D C B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("angCDA"),
+              @readable.Label("DCBncol"),
+              @readable.Prev,
+              @readable.Label("CDAeqDCA"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B D C <_ang angle D C B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("BAD'"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("DCBncol"),
+            @readable.Prev,
+            @readable.Thm("EuclidPropositionI_19", () => euclidpropositioni_19()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5706,25 +17124,194 @@ pub fn euclidpropositioni_20() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_185`
-pub fn exec_phrase_185(x187 : Unit) -> Unit raise {
-  let _ = x187
-  {
-    @readable.thm_ref().val = euclidpropositioni_19()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_19): thm);;
-fn step_376() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_19): thm);;", exec_phrase_185)
-}
-
-///|
 /// EuclidPropositionI_21
 fn step_377() -> Unit raise {
-  euclidpropositioni_21_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. ¬Collinear A B C  ∧  D ∈ int_triangle A B C\n    ⇒  ∡ A B C <_ang ∡ C D A\n\n  proof\n    intro_TAC ∀A B C D, H1 H2;\n    ¬(B = A) ∧ ¬(B = C) ∧ ¬(A = C)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    D ∈ int_angle B A C  ∧  D ∈ int_angle C B A     [DintTri] by fol H2 IN_InteriorTriangle InteriorAngleSymmetry;\n    consider E such that\n    E ∈ Open (B, C) ∧ E ∈ ray A D ━ {A}     [BEC] by fol - Crossbar_THM;\n    ¬(B = E) ∧ ¬(E = C) ∧ Collinear B E C  ∧  Collinear A D E      [BEC'] by fol - B1' IN_Ray IN_DIFF IN_SING;\n    ray B E = ray B C  ∧  E ∈ ray B C ━ {B}     [rBErBC] by fol BEC IntervalRay IntervalRayEZ;\n    D ∈ int_angle A B E     [DintABE] by fol DintTri - InteriorAngleSymmetry InteriorWellDefined;\n    D ∈ Open (A, E)     [ADE] by fol BEC' - AlternateConverseCrossbar;\n    ray E D = ray E A     [rEDrEA] by fol - B1' IntervalRay;\n    ¬Collinear A B E ∧ ¬Collinear B E A  ∧ ¬Collinear C B D ∧ ¬(A = D)     [ABEncol] by fol DintABE IN_InteriorAngle CollinearSymmetry DintTri InteriorEZHelp;\n    ¬Collinear E D C ∧ ¬Collinear C E D     [EDCncol] by fol - CollinearSymmetry BEC'  NoncollinearityExtendsToLine;\n    ∡ A B E <_ang ∡ A E C  ∧  ∡ C E D = ∡ D E C     [] by fol ABEncol BEC ExteriorAngle AngleSymmetry;\n    ∡ A B C <_ang ∡ C E D     [ABClessAEC] by fol - rBErBC rEDrEA Angle_DEF;\n    ∡ C E D  <_ang  ∡ C D A     [] by fol EDCncol ADE B1' ExteriorAngle;\n    fol ABClessAEC - AngleOrderTransitivity;\n  qed;\n")))
+  euclidpropositioni_21_c.set(@readable.prove(
+    "\n  forall A B C D. ~Collinear A B C  /\\   D IN int_triangle A B C\n    ==>  angle A B C <_ang angle C D A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1 H2"),
+        @readable.have(
+          "\n    ~(B = A) /\\  ~(B = C) /\\  ~(A = C)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D IN int_angle B A C  /\\   D IN int_angle C B A",
+          "DintTri",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IN_InteriorTriangle", () => in_interiortriangle()),
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "E IN Open (B, C) /\\  E IN ray A D DIFF {A}    ",
+          "BEC",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("Crossbar_THM", () => crossbar_thm())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B = E) /\\  ~(E = C) /\\  Collinear B E C  /\\   Collinear A D E",
+          "BEC'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray B E = ray B C  /\\   E IN ray B C DIFF {B}",
+          "rBErBC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BEC"),
+              @readable.Thm("IntervalRay", () => intervalray()),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D IN int_angle A B E",
+          "DintABE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintTri"),
+              @readable.Prev,
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm("InteriorWellDefined", () => interiorwelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D IN Open (A, E)",
+          "ADE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BEC'"),
+              @readable.Prev,
+              @readable.Thm(
+                "AlternateConverseCrossbar",
+                () => alternateconversecrossbar(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray E D = ray E A",
+          "rEDrEA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IntervalRay", () => intervalray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A B E /\\  ~Collinear B E A  /\\  ~Collinear C B D /\\  ~(A = D)",
+          "ABEncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("DintABE"),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("DintTri"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear E D C /\\  ~Collinear C E D",
+          "EDCncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("BEC'"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B E <_ang angle A E C  /\\   angle C E D = angle D E C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABEncol"),
+              @readable.Label("BEC"),
+              @readable.Thm("ExteriorAngle", () => exteriorangle()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B C <_ang angle C E D",
+          "ABClessAEC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("rBErBC"),
+              @readable.Label("rEDrEA"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C E D  <_ang  angle C D A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EDCncol"),
+              @readable.Label("ADE"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("ExteriorAngle", () => exteriorangle()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("ABClessAEC"),
+            @readable.Prev,
+            @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5737,25 +17324,59 @@ pub fn euclidpropositioni_21() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_186`
-pub fn exec_phrase_186(x188 : Unit) -> Unit raise {
-  let _ = x188
-  {
-    @readable.thm_ref().val = exteriorangle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ExteriorAngle): thm);;
-fn step_378() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ExteriorAngle): thm);;", exec_phrase_186)
-}
-
-///|
 /// AngleTrichotomy3
 fn step_379() -> Unit raise {
-  angletrichotomy3_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β γ.  α <_ang β  ∧  Angle γ  ∧  γ ≡ α  ⇒  γ <_ang β\n\n  proof\n    intro_TAC ∀α β γ, H1;\n    consider A O B G such that\n    Angle α ∧ ¬Collinear A O B ∧ β = ∡ A O B ∧ G ∈ int_angle A O B ∧ α ≡ ∡ A O G     [H1'] by fol H1 AngleOrdering_DEF;\n    ¬Collinear A O G     [] by fol - InteriorEZHelp;\n    γ ≡ ∡ A O G     [] by fol H1 H1' - ANGLE C5Transitive;\n    fol H1 H1' - AngleOrdering_DEF;\n  qed;\n")))
+  angletrichotomy3_c.set(@readable.prove(
+    "\n  forall alpha beta gamma.  alpha <_ang beta  /\\   Angle gamma  /\\   gamma === alpha  ==>  gamma <_ang beta",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta gamma, H1"),
+        @readable.consider(
+          "A O B G",
+          "Angle alpha /\\  ~Collinear A O B /\\  beta = angle A O B /\\  G IN int_angle A O B /\\  alpha === angle A O G    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A O G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("InteriorEZHelp", () => interiorezhelp())],
+          ),
+        ),
+        @readable.have(
+          "\n    gamma === angle A O G",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H1'"),
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H1'"),
+            @readable.Prev,
+            @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5770,7 +17391,163 @@ pub fn angletrichotomy3() -> @kernel.Thm {
 ///|
 /// InteriorCircleConvexHelp
 fn step_380() -> Unit raise {
-  interiorcircleconvexhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A B C. ¬Collinear A O C  ⇒  B ∈ Open (A, C)  ⇒\n    seg O A <__ seg O C  ∨  seg O A ≡ seg O C\n    ⇒  seg O B <__ seg O C\n\n  proof\n    intro_TAC ∀O A B C, H1, H2, H3;\n    ¬Collinear O C A ∧ ¬Collinear C O A ∧ ¬(O = A) ∧ ¬(O = C)     [H1'] by fol H1 CollinearSymmetry NonCollinearImpliesDistinct;\n    ray A B = ray A C  ∧  ray C B = ray C A     [equal_rays] by fol H2 IntervalRay B1';\n    ∡ O C A <_ang ∡ C A O  ∨  ∡ O C A ≡ ∡ C A O     []\n    proof\n      assume seg O A ≡ seg O C [seg_eq] by fol H3 H1' EuclidPropositionI_18;\n      seg O C ≡ seg O A     [] by fol H1' SEGMENT - C2Symmetric;\n      fol H1' - IsoscelesCongBaseAngles AngleSymmetry;\n    qed;\n    ∡ O C B <_ang ∡ B A O  ∨  ∡ O C B ≡ ∡ B A O     [] by fol - equal_rays Angle_DEF;\n    ∡ B C O <_ang ∡ O A B  ∨  ∡ B C O ≡ ∡ O A B     [BCOlessOAB] by fol - AngleSymmetry;\n    ¬Collinear O A B ∧ ¬Collinear B C O ∧ ¬Collinear O C B     [OABncol] by fol H1 CollinearSymmetry H2 B1' NoncollinearityExtendsToLine;\n    ∡ O A B <_ang ∡ O B C     [] by fol - H2 ExteriorAngle;\n    ∡ B C O <_ang ∡ O B C     [] by fol BCOlessOAB - AngleOrderTransitivity OABncol ANGLE - AngleTrichotomy3;\n    fol OABncol - AngleSymmetry EuclidPropositionI_19;\n  qed;\n")))
+  interiorcircleconvexhelp_c.set(@readable.prove(
+    "\n  forall O A B C. ~Collinear A O C  ==>  B IN Open (A, C)  ==>\n    seg O A <__ seg O C  \\/  seg O A === seg O C\n    ==>  seg O B <__ seg O C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A B C, H1, H2, H3"),
+        @readable.have(
+          "\n    ~Collinear O C A /\\  ~Collinear C O A /\\  ~(O = A) /\\  ~(O = C)",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A B = ray A C  /\\   ray C B = ray C A",
+          "equal_rays",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("IntervalRay", () => intervalray()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O C A <_ang angle C A O  \\/  angle O C A === angle C A O",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "seg O A === seg O C",
+                "seg_eq",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H3"),
+                    @readable.Label("H1'"),
+                    @readable.Thm(
+                      "EuclidPropositionI_18",
+                      () => euclidpropositioni_18(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      seg O C === seg O A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1'"),
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Prev,
+                    @readable.Thm("C2Symmetric", () => c2symmetric()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("H1'"),
+                  @readable.Prev,
+                  @readable.Thm(
+                    "IsoscelesCongBaseAngles",
+                    () => isoscelescongbaseangles(),
+                  ),
+                  @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O C B <_ang angle B A O  \\/  angle O C B === angle B A O",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("equal_rays"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C O <_ang angle O A B  \\/  angle B C O === angle O A B",
+          "BCOlessOAB",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("AngleSymmetry", () => anglesymmetry())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear O A B /\\  ~Collinear B C O /\\  ~Collinear O C B",
+          "OABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Label("H2"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O A B <_ang angle O B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H2"),
+              @readable.Thm("ExteriorAngle", () => exteriorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C O <_ang angle O B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BCOlessOAB"),
+              @readable.Prev,
+              @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+              @readable.Label("OABncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Prev,
+              @readable.Thm("AngleTrichotomy3", () => angletrichotomy3()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("OABncol"),
+            @readable.Prev,
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Thm("EuclidPropositionI_19", () => euclidpropositioni_19()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5783,25 +17560,274 @@ pub fn interiorcircleconvexhelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_187`
-pub fn exec_phrase_187(x189 : Unit) -> Unit raise {
-  let _ = x189
-  {
-    @readable.thm_ref().val = angletrichotomy3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AngleTrichotomy3): thm);;
-fn step_381() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AngleTrichotomy3): thm);;", exec_phrase_187)
-}
-
-///|
 /// InteriorCircleConvex
 fn step_382() -> Unit raise {
-  interiorcircleconvex_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O R A B C.  ¬(O = R)  ⇒  B ∈ Open (A, C)  ⇒\n    A ∈ int_circle O R  ∧  C ∈ int_circle O R\n    ⇒  B ∈ int_circle O R\n\n  proof\n    intro_TAC ∀O R A B C, H1, H2, H3;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ B ∈ Open (C, A)     [H2'] by fol H2 B1';\n    (A = O  ∨  seg O A <__ seg O R)  ∧  (C = O  ∨  seg O C <__ seg O R)     [ACintOR] by fol H3 H1 IN_InteriorCircle;\n    case_split OAC | OnotAC     by fol -;\n    suppose O = A ∨ O = C;\n      B ∈ Open (O, C)  ∨  B ∈ Open (O, A)     [] by fol - H2 B1';\n      seg O B <__ seg O A ∧ ¬(O = A)  ∨  seg O B <__ seg O C ∧ ¬(O = C)     [] by fol - B1' SEGMENT C2Reflexive  SegmentOrdering_DEF;\n      seg O B <__ seg O R     [] by fol - ACintOR SegmentOrderTransitivity;\n      fol - H1 IN_InteriorCircle;\n    end;\n    suppose ¬(O = A) ∧ ¬(O = C);\n      case_split AOCncol | AOCcol     by fol -;\n      suppose ¬Collinear A O C;\n        seg O A <__ seg O C  ∨  seg O A ≡ seg O C  ∨  seg O C <__ seg O A     [] by fol OnotAC SEGMENT  SegmentTrichotomy;\n        seg O B <__ seg O C  ∨  seg O B <__ seg O A     [] by fol AOCncol H2 - InteriorCircleConvexHelp CollinearSymmetry B1';\n        fol OnotAC ACintOR - SegmentOrderTransitivity H1 IN_InteriorCircle;\n      end;\n      suppose Collinear A O C;\n        consider l such that\n        Line l ∧ A ∈ l ∧ C ∈ l     [l_line] by fol H2' I1;\n        Collinear B A O ∧ Collinear B C O     [OABCcol] by fol - H2 BetweenLinear H2' AOCcol CollinearLinear Collinear_DEF;\n        B ∉ Open (O, A) ∧ B ∉ Open (O, C)  ⇒  B = O     []\n        proof\n          intro_TAC Assumption;\n          O ∈ ray B A ∩ ray B C     [] by fol H2' OABCcol - IN_Ray IN_INTER;\n          fol - H2 OppositeRaysIntersect1point IN_SING;\n        qed;\n        B ∈ Open (O, A)  ∨  B ∈ Open (O, C)  ∨  B = O     [] by fol - ∉;\n        seg O B <__ seg O A  ∨  seg O B <__ seg O C  ∨  B = O     [] by fol - B1' SEGMENT C2Reflexive  SegmentOrdering_DEF;\n        seg O B <__ seg O R  ∨  B = O     [] by fol - ACintOR OnotAC SegmentOrderTransitivity;\n        fol - H1 IN_InteriorCircle;\n      end;\n    end;\n  qed;\n")))
+  interiorcircleconvex_c.set(@readable.prove(
+    "\n  forall O R A B C.  ~(O = R)  ==>  B IN Open (A, C)  ==>\n    A IN int_circle O R  /\\   C IN int_circle O R\n    ==>  B IN int_circle O R",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall O R A B C, H1, H2, H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  B IN Open (C, A)",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("H2"), @readable.Thm("B1'", () => b1_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    (A = O  \\/  seg O A <__ seg O R)  /\\   (C = O  \\/  seg O C <__ seg O R)",
+          "ACintOR",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Label("H1"),
+              @readable.Thm("IN_InteriorCircle", () => in_interiorcircle()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "OAC | OnotAC    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["O = A \\/ O = C", "~(O = A) /\\  ~(O = C)"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      B IN Open (O, C)  \\/  B IN Open (O, A)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("H2"),
+                      @readable.Thm("B1'", () => b1_p()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      seg O B <__ seg O A /\\  ~(O = A)  \\/  seg O B <__ seg O C /\\  ~(O = C)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("B1'", () => b1_p()),
+                      @readable.Thm("SEGMENT", () => segment()),
+                      @readable.Thm("C2Reflexive", () => c2reflexive()),
+                      @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      seg O B <__ seg O R",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("ACintOR"),
+                      @readable.Thm(
+                        "SegmentOrderTransitivity",
+                        () => segmentordertransitivity(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H1"),
+                    @readable.Thm("IN_InteriorCircle", () => in_interiorcircle()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.case_split(
+              "AOCncol | AOCcol    ",
+              @readable.by(@readable.fol, [@readable.Prev]),
+              @list.List(["~Collinear A O C", "Collinear A O C"]),
+              @list.List(
+                [
+                  @readable.steps(
+                    [
+                      @readable.have(
+                        "\n        seg O A <__ seg O C  \\/  seg O A === seg O C  \\/  seg O C <__ seg O A",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Label("OnotAC"),
+                            @readable.Thm("SEGMENT", () => segment()),
+                            @readable.Thm(
+                              "SegmentTrichotomy",
+                              () => segmenttrichotomy(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      @readable.have(
+                        "\n        seg O B <__ seg O C  \\/  seg O B <__ seg O A",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Label("AOCncol"),
+                            @readable.Label("H2"),
+                            @readable.Prev,
+                            @readable.Thm(
+                              "InteriorCircleConvexHelp",
+                              () => interiorcircleconvexhelp(),
+                            ),
+                            @readable.Thm(
+                              "CollinearSymmetry",
+                              () => collinearsymmetry(),
+                            ),
+                            @readable.Thm("B1'", () => b1_p()),
+                          ],
+                        ),
+                      ),
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Label("OnotAC"),
+                          @readable.Label("ACintOR"),
+                          @readable.Prev,
+                          @readable.Thm(
+                            "SegmentOrderTransitivity",
+                            () => segmentordertransitivity(),
+                          ),
+                          @readable.Label("H1"),
+                          @readable.Thm("IN_InteriorCircle", () => in_interiorcircle()),
+                        ],
+                      ),
+                    ],
+                  ),
+                  @readable.steps(
+                    [
+                      @readable.consider(
+                        "l",
+                        "Line l /\\  A IN l /\\  C IN l    ",
+                        "l_line",
+                        @readable.by(
+                          @readable.fol,
+                          [@readable.Label("H2'"), @readable.Thm("I1", () => i1())],
+                        ),
+                      ),
+                      @readable.have(
+                        "\n        Collinear B A O /\\  Collinear B C O",
+                        "OABCcol",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Prev,
+                            @readable.Label("H2"),
+                            @readable.Thm("BetweenLinear", () => betweenlinear()),
+                            @readable.Label("H2'"),
+                            @readable.Label("AOCcol"),
+                            @readable.Thm("CollinearLinear", () => collinearlinear()),
+                            @readable.Thm("Collinear_DEF", () => collinear_def()),
+                          ],
+                        ),
+                      ),
+                      @readable.have(
+                        "\n        B NOTIN Open (O, A) /\\  B NOTIN Open (O, C)  ==>  B = O",
+                        "",
+                        @readable.steps(
+                          [
+                            @readable.intro_tac("Assumption"),
+                            @readable.have(
+                              "\n          O IN ray B A INTER ray B C",
+                              "",
+                              @readable.by(
+                                @readable.fol,
+                                [
+                                  @readable.Label("H2'"),
+                                  @readable.Label("OABCcol"),
+                                  @readable.Prev,
+                                  @readable.Thm("IN_Ray", () => in_ray()),
+                                  @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                                ],
+                              ),
+                            ),
+                            @readable.by(
+                              @readable.fol,
+                              [
+                                @readable.Prev,
+                                @readable.Label("H2"),
+                                @readable.Thm(
+                                  "OppositeRaysIntersect1point",
+                                  () => oppositeraysintersect1point(),
+                                ),
+                                @readable.Thm("IN_SING", () => @sets.in_sing()),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      @readable.have(
+                        "\n        B IN Open (O, A)  \\/  B IN Open (O, C)  \\/  B = O",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [@readable.Prev, @readable.Thm("NOTIN", () => notin())],
+                        ),
+                      ),
+                      @readable.have(
+                        "\n        seg O B <__ seg O A  \\/  seg O B <__ seg O C  \\/  B = O",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Prev,
+                            @readable.Thm("B1'", () => b1_p()),
+                            @readable.Thm("SEGMENT", () => segment()),
+                            @readable.Thm("C2Reflexive", () => c2reflexive()),
+                            @readable.Thm(
+                              "SegmentOrdering_DEF",
+                              () => segmentordering_def(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      @readable.have(
+                        "\n        seg O B <__ seg O R  \\/  B = O",
+                        "",
+                        @readable.by(
+                          @readable.fol,
+                          [
+                            @readable.Prev,
+                            @readable.Label("ACintOR"),
+                            @readable.Label("OnotAC"),
+                            @readable.Thm(
+                              "SegmentOrderTransitivity",
+                              () => segmentordertransitivity(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Prev,
+                          @readable.Label("H1"),
+                          @readable.Thm("IN_InteriorCircle", () => in_interiorcircle()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5814,57 +17840,51 @@ pub fn interiorcircleconvex() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_188`
-pub fn exec_phrase_188(x190 : Unit) -> Unit raise {
-  let _ = x190
-  {
-    @readable.thm_ref().val = in_interiorcircle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_InteriorCircle): thm);;
-fn step_383() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_InteriorCircle): thm);;", exec_phrase_188)
-}
-
-///|
-/// `exec_phrase_189`
-pub fn exec_phrase_189(x191 : Unit) -> Unit raise {
-  let _ = x191
-  {
-    @readable.thm_ref().val = interiorcircleconvexhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorCircleConvexHelp): thm);;
-fn step_384() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorCircleConvexHelp): thm);;", exec_phrase_189)
-}
-
-///|
-/// `exec_phrase_190`
-pub fn exec_phrase_190(x192 : Unit) -> Unit raise {
-  let _ = x192
-  {
-    @readable.thm_ref().val = oppositeraysintersect1point()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OppositeRaysIntersect1point): thm);;
-fn step_385() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OppositeRaysIntersect1point): thm);;", exec_phrase_190)
-}
-
-///|
 /// SegmentTrichotomy3
 fn step_386() -> Unit raise {
-  segmenttrichotomy3_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  s <__ t  ∧  Segment u  ∧  u ≡ s  ⇒  u <__ t\n\n  proof\n    intro_TAC ∀s t u, H1;\n    consider C D X such that\n    Segment s ∧ t = seg C D ∧ X ∈ Open (C, D) ∧ s ≡ seg C X ∧ ¬(C = X)     [H1'] by fol H1 SegmentOrdering_DEF B1';\n    u ≡ seg C X     [] by fol H1 - SEGMENT C2Transitive;\n    fol H1 H1' - SegmentOrdering_DEF;\n  qed;\n")))
+  segmenttrichotomy3_c.set(@readable.prove(
+    "\n  forall s t u.  s <__ t  /\\   Segment u  /\\   u === s  ==>  u <__ t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t u, H1"),
+        @readable.consider(
+          "C D X",
+          "Segment s /\\  t = seg C D /\\  X IN Open (C, D) /\\  s === seg C X /\\  ~(C = X)    ",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    u === seg C X",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H1'"),
+            @readable.Prev,
+            @readable.Thm("SegmentOrdering_DEF", () => segmentordering_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5879,7 +17899,444 @@ pub fn segmenttrichotomy3() -> @kernel.Thm {
 ///|
 /// EuclidPropositionI_24Help
 fn step_387() -> Unit raise {
-  euclidpropositioni_24help_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A C O' D M.  ¬Collinear A O C ∧ ¬Collinear D O' M  ⇒\n    seg O' D ≡ seg O A  ∧  seg O' M ≡ seg O C  ⇒  ∡ D O' M <_ang ∡ A O C  ⇒\n    seg O A <__ seg O C  ∨  seg O A ≡ seg O C\n    ⇒  seg D M <__ seg A C\n\n  proof\n    intro_TAC ∀O A C O' D M, H1, H2, H3, H4;\n    consider K such that\n    K ∈ int_angle A O C ∧ ∡ D O' M ≡ ∡ A O K     [KintAOC] by fol H1 ANGLE H3 AngleOrderingUse;\n    ¬(O = C) ∧ ¬(D = M) ∧ ¬(O' = M) ∧ ¬(O = K)     [Distinct] by fol H1 NonCollinearImpliesDistinct - InteriorEZHelp;\n    consider B such that\n    B ∈ ray O K ━ {O}  ∧  seg O B ≡ seg O C     [BrOK] by fol Distinct SEGMENT - C1;\n    ray O B = ray O K     [] by fol Distinct - RayWellDefined;\n    ∡ D O' M ≡ ∡ A O B     [DO'MeqAOB] by fol KintAOC - Angle_DEF;\n    B ∈ int_angle A O C     [BintAOC] by fol KintAOC BrOK WholeRayInterior;\n    ¬(B = O) ∧ ¬Collinear A O B     [AOBncol] by fol - InteriorEZHelp;\n    seg O C ≡ seg O B     [OCeqOB] by fol Distinct - SEGMENT BrOK C2Symmetric;\n    seg O' M ≡ seg O B     [] by fol Distinct SEGMENT AOBncol H2 - C2Transitive;\n    D,O',M ≅ A,O,B     [] by fol H1 AOBncol H2 - DO'MeqAOB SAS;\n    seg D M ≡ seg A B     [DMeqAB] by fol - TriangleCong_DEF;\n    consider G such that\n    G ∈ Open (A, C)  ∧  G ∈ ray O B ━ {O}  ∧  ¬(G = O)     [AGC] by fol BintAOC Crossbar_THM B1' IN_DIFF IN_SING;\n    Segment (seg O G) ∧ ¬(O = B)     [notOB] by fol - SEGMENT BrOK IN_DIFF IN_SING;\n    seg O G <__ seg O C     [] by fol H1 AGC H4 InteriorCircleConvexHelp;\n    seg O G <__ seg O B     [] by fol - OCeqOB BrOK SEGMENT SegmentTrichotomy2 IN_DIFF IN_SING;\n    consider G' such that\n    G' ∈ Open (O, B)  ∧  seg O G ≡ seg O G'     [OG'B] by fol notOB - SegmentOrderingUse;\n    ¬(G' = O)  ∧  seg O G' ≡ seg O G'  ∧  Segment (seg O G')     [notG'O] by fol - B1' SEGMENT C2Reflexive SEGMENT;\n    G' ∈ ray O B ━ {O}     [] by fol OG'B IntervalRayEZ;\n    G' = G  ∧  G ∈ Open (B, O)     [] by fol notG'O notOB - AGC OG'B C1 B1';\n    ConvexQuadrilateral B A O C     [] by fol H1 - AGC DiagonalsIntersectImpliesConvexQuad;\n    A ∈ int_angle O C B  ∧  O ∈ int_angle C B A  ∧  Quadrilateral B A O C     [OintCBA] by fol - ConvexQuad_DEF;\n    A ∈ int_angle B C O     [AintBCO] by fol - InteriorAngleSymmetry;\n    Tetralateral B A O C     [] by fol OintCBA Quadrilateral_DEF;\n    ¬Collinear C B A  ∧ ¬Collinear B C O ∧ ¬Collinear C O B ∧ ¬Collinear C B O     [BCOncol] by fol - Tetralateral_DEF CollinearSymmetry;\n    ∡ B C O ≡ ∡ C B O     [BCOeqCBO] by fol - OCeqOB IsoscelesCongBaseAngles;\n    ¬Collinear B C A ∧ ¬Collinear A C B     [ACBncol] by fol AintBCO InteriorEZHelp CollinearSymmetry;\n    ∡ B C A ≡ ∡ B C A  ∧  Angle (∡ B C A)  ∧  ∡ C B O ≡ ∡ C B O     [CBOref] by fol - ANGLE BCOncol C5Reflexive;\n    ∡ B C A <_ang ∡ B C O     [] by fol - BCOncol ANGLE AintBCO AngleOrdering_DEF;\n    ∡ B C A <_ang ∡ C B O     [BCAlessCBO] by fol - BCOncol ANGLE BCOeqCBO AngleTrichotomy2;\n    ∡ C B O <_ang ∡ C B A     [] by fol BCOncol ANGLE OintCBA CBOref AngleOrdering_DEF;\n    ∡ A C B <_ang ∡ C B A     [] by fol BCAlessCBO - AngleOrderTransitivity AngleSymmetry;\n    seg A B <__ seg A C     [] by fol ACBncol - EuclidPropositionI_19;\n    fol - Distinct SEGMENT DMeqAB SegmentTrichotomy3;\n qed;\n")))
+  euclidpropositioni_24help_c.set(@readable.prove(
+    "\n  forall O A C O' D M.  ~Collinear A O C /\\  ~Collinear D O' M  ==>\n    seg O' D === seg O A  /\\   seg O' M === seg O C  ==>  angle D O' M <_ang angle A O C  ==>\n    seg O A <__ seg O C  \\/  seg O A === seg O C\n    ==>  seg D M <__ seg A C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A C O' D M, H1, H2, H3, H4"),
+        @readable.consider(
+          "K",
+          "K IN int_angle A O C /\\  angle D O' M === angle A O K    ",
+          "KintAOC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H3"),
+              @readable.Thm("AngleOrderingUse", () => angleorderinguse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(O = C) /\\  ~(D = M) /\\  ~(O' = M) /\\  ~(O = K)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Prev,
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "B",
+          "B IN ray O K DIFF {O}  /\\   seg O B === seg O C    ",
+          "BrOK",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Prev,
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray O B = ray O K",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle D O' M === angle A O B",
+          "DO'MeqAOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("KintAOC"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN int_angle A O C",
+          "BintAOC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("KintAOC"),
+              @readable.Label("BrOK"),
+              @readable.Thm("WholeRayInterior", () => wholerayinterior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B = O) /\\  ~Collinear A O B",
+          "AOBncol",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("InteriorEZHelp", () => interiorezhelp())],
+          ),
+        ),
+        @readable.have(
+          "\n    seg O C === seg O B",
+          "OCeqOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("BrOK"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg O' M === seg O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("AOBncol"),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("C2Transitive", () => c2transitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D,O',M cong A,O,B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("AOBncol"),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Label("DO'MeqAOB"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg D M === seg A B",
+          "DMeqAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN Open (A, C)  /\\   G IN ray O B DIFF {O}  /\\   ~(G = O)    ",
+          "AGC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BintAOC"),
+              @readable.Thm("Crossbar_THM", () => crossbar_thm()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Segment (seg O G) /\\  ~(O = B)",
+          "notOB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("BrOK"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg O G <__ seg O C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("AGC"),
+              @readable.Label("H4"),
+              @readable.Thm(
+                "InteriorCircleConvexHelp",
+                () => interiorcircleconvexhelp(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg O G <__ seg O B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("OCeqOB"),
+              @readable.Label("BrOK"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("SegmentTrichotomy2", () => segmenttrichotomy2()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G'",
+          "G' IN Open (O, B)  /\\   seg O G === seg O G'    ",
+          "OG'B",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notOB"),
+              @readable.Prev,
+              @readable.Thm("SegmentOrderingUse", () => segmentorderinguse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G' = O)  /\\   seg O G' === seg O G'  /\\   Segment (seg O G')",
+          "notG'O",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+              @readable.Thm("SEGMENT", () => segment()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G' IN ray O B DIFF {O}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OG'B"),
+              @readable.Thm("IntervalRayEZ", () => intervalrayez()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G' = G  /\\   G IN Open (B, O)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notG'O"),
+              @readable.Label("notOB"),
+              @readable.Prev,
+              @readable.Label("AGC"),
+              @readable.Label("OG'B"),
+              @readable.Thm("C1", () => c1()),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ConvexQuadrilateral B A O C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Label("AGC"),
+              @readable.Thm(
+                "DiagonalsIntersectImpliesConvexQuad",
+                () => diagonalsintersectimpliesconvexquad(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN int_angle O C B  /\\   O IN int_angle C B A  /\\   Quadrilateral B A O C",
+          "OintCBA",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("ConvexQuad_DEF", () => convexquad_def())],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN int_angle B C O",
+          "AintBCO",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Tetralateral B A O C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OintCBA"),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C B A  /\\  ~Collinear B C O /\\  ~Collinear C O B /\\  ~Collinear C B O",
+          "BCOncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C O === angle C B O",
+          "BCOeqCBO",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("OCeqOB"),
+              @readable.Thm("IsoscelesCongBaseAngles", () => isoscelescongbaseangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B C A /\\  ~Collinear A C B",
+          "ACBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AintBCO"),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C A === angle B C A  /\\   Angle (angle B C A)  /\\   angle C B O === angle C B O",
+          "CBOref",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("BCOncol"),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C A <_ang angle B C O",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("BCOncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("AintBCO"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C A <_ang angle C B O",
+          "BCAlessCBO",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("BCOncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("BCOeqCBO"),
+              @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B O <_ang angle C B A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BCOncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("OintCBA"),
+              @readable.Label("CBOref"),
+              @readable.Thm("AngleOrdering_DEF", () => angleordering_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A C B <_ang angle C B A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("BCAlessCBO"),
+              @readable.Prev,
+              @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A B <__ seg A C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ACBncol"),
+              @readable.Prev,
+              @readable.Thm("EuclidPropositionI_19", () => euclidpropositioni_19()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("Distinct"),
+            @readable.Thm("SEGMENT", () => segment()),
+            @readable.Label("DMeqAB"),
+            @readable.Thm("SegmentTrichotomy3", () => segmenttrichotomy3()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5892,25 +18349,86 @@ pub fn euclidpropositioni_24help() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_191`
-pub fn exec_phrase_191(x193 : Unit) -> Unit raise {
-  let _ = x193
-  {
-    @readable.thm_ref().val = segmenttrichotomy3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SegmentTrichotomy3): thm);;
-fn step_388() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SegmentTrichotomy3): thm);;", exec_phrase_191)
-}
-
-///|
 /// EuclidPropositionI_24
 fn step_389() -> Unit raise {
-  euclidpropositioni_24_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A C O' D M. ¬Collinear A O C ∧ ¬Collinear D O' M  ⇒\n    seg O' D ≡ seg O A ∧ seg O' M ≡ seg O C  ⇒  ∡ D O' M <_ang ∡ A O C\n    ⇒  seg D M <__ seg A C\n\n  proof\n    intro_TAC ∀O A C O' D M, H1, H2, H3;\n    ¬(O = A) ∧ ¬(O = C) ∧ ¬Collinear C O A ∧ ¬Collinear M O' D     [Distinct] by fol H1 NonCollinearImpliesDistinct CollinearSymmetry;\n    seg O A ≡ seg O C  ∨  seg O A <__ seg O C  ∨  seg O C <__ seg O A     [3pos] by fol  - SEGMENT SegmentTrichotomy;\n    assume seg O C <__ seg O A [H4] by fol 3pos H1 H2 H3 EuclidPropositionI_24Help;\n    ∡ M O' D <_ang ∡ C O A     [] by fol H3 AngleSymmetry;\n    fol Distinct H3 AngleSymmetry H2 H4 EuclidPropositionI_24Help SegmentSymmetry;\n  qed;\n")))
+  euclidpropositioni_24_c.set(@readable.prove(
+    "\n  forall O A C O' D M. ~Collinear A O C /\\  ~Collinear D O' M  ==>\n    seg O' D === seg O A /\\  seg O' M === seg O C  ==>  angle D O' M <_ang angle A O C\n    ==>  seg D M <__ seg A C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A C O' D M, H1, H2, H3"),
+        @readable.have(
+          "\n    ~(O = A) /\\  ~(O = C) /\\  ~Collinear C O A /\\  ~Collinear M O' D",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg O A === seg O C  \\/  seg O A <__ seg O C  \\/  seg O C <__ seg O A",
+          "3pos",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("SegmentTrichotomy", () => segmenttrichotomy()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "seg O C <__ seg O A",
+          "H4",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("3pos"),
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Label("H3"),
+              @readable.Thm(
+                "EuclidPropositionI_24Help",
+                () => euclidpropositioni_24help(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle M O' D <_ang angle C O A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H3"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Distinct"),
+            @readable.Label("H3"),
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Label("H2"),
+            @readable.Label("H4"),
+            @readable.Thm(
+              "EuclidPropositionI_24Help",
+              () => euclidpropositioni_24help(),
+            ),
+            @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5923,25 +18441,138 @@ pub fn euclidpropositioni_24() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_192`
-pub fn exec_phrase_192(x194 : Unit) -> Unit raise {
-  let _ = x194
-  {
-    @readable.thm_ref().val = euclidpropositioni_24help()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_24Help): thm);;
-fn step_390() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_24Help): thm);;", exec_phrase_192)
-}
-
-///|
 /// EuclidPropositionI_25
 fn step_391() -> Unit raise {
-  euclidpropositioni_25_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A C O' D M.  ¬Collinear A O C ∧ ¬Collinear D O' M  ⇒\n    seg O' D ≡ seg O A ∧ seg O' M ≡ seg O C  ⇒  seg D M <__ seg A C\n    ⇒  ∡ D O' M <_ang ∡ A O C\n\n  proof\n    intro_TAC ∀O A C O' D M, H1, H2, H3;\n    ¬(O = A) ∧ ¬(O = C) ∧ ¬(A = C) ∧ ¬(D = M) ∧ ¬(O' = D) ∧ ¬(O' = M)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    assume ¬(∡ D O' M <_ang ∡ A O C)     [Contradiction] by fol;\n    ∡ D O' M ≡ ∡ A O C  ∨  ∡ A O C <_ang ∡ D O' M     [] by fol H1 ANGLE - AngleTrichotomy;\n    case_split Cong | Con     by fol -;\n    suppose ∡ D O' M ≡ ∡ A O C;\n      D,O',M ≅ A,O,C     [] by fol H1 H2 - SAS;\n      seg D M ≡ seg A C     [] by fol - TriangleCong_DEF;\n      fol Distinct SEGMENT - H3 SegmentTrichotomy;\n    end;\n    suppose ∡ A O C <_ang ∡ D O' M;\n      seg O A ≡ seg O' D  ∧  seg O C  ≡ seg O' M     [H2'] by fol Distinct SEGMENT H2 C2Symmetric;\n      seg A C <__ seg D M     [] by fol H1 - Con EuclidPropositionI_24;\n      fol Distinct SEGMENT - H3 SegmentTrichotomy;\n    end;\n  qed;\n")))
+  euclidpropositioni_25_c.set(@readable.prove(
+    "\n  forall O A C O' D M.  ~Collinear A O C /\\  ~Collinear D O' M  ==>\n    seg O' D === seg O A /\\  seg O' M === seg O C  ==>  seg D M <__ seg A C\n    ==>  angle D O' M <_ang angle A O C",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall O A C O' D M, H1, H2, H3"),
+        @readable.have(
+          "\n    ~(O = A) /\\  ~(O = C) /\\  ~(A = C) /\\  ~(D = M) /\\  ~(O' = D) /\\  ~(O' = M)",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(angle D O' M <_ang angle A O C)",
+          "Contradiction",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    angle D O' M === angle A O C  \\/  angle A O C <_ang angle D O' M",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Prev,
+              @readable.Thm("AngleTrichotomy", () => angletrichotomy()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "Cong | Con    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["angle D O' M === angle A O C", "angle A O C <_ang angle D O' M"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      D,O',M cong A,O,C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Label("H2"),
+                      @readable.Prev,
+                      @readable.Thm("SAS", () => sas()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      seg D M === seg A C",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Prev,
+                    @readable.Label("H3"),
+                    @readable.Thm("SegmentTrichotomy", () => segmenttrichotomy()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      seg O A === seg O' D  /\\   seg O C  === seg O' M",
+                  "H2'",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Thm("SEGMENT", () => segment()),
+                      @readable.Label("H2"),
+                      @readable.Thm("C2Symmetric", () => c2symmetric()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      seg A C <__ seg D M",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Prev,
+                      @readable.Label("Con"),
+                      @readable.Thm(
+                        "EuclidPropositionI_24",
+                        () => euclidpropositioni_24(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Prev,
+                    @readable.Label("H3"),
+                    @readable.Thm("SegmentTrichotomy", () => segmenttrichotomy()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5954,25 +18585,319 @@ pub fn euclidpropositioni_25() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_193`
-pub fn exec_phrase_193(x195 : Unit) -> Unit raise {
-  let _ = x195
-  {
-    @readable.thm_ref().val = euclidpropositioni_24()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_24): thm);;
-fn step_392() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_24): thm);;", exec_phrase_193)
-}
-
-///|
 /// AAS
 fn step_393() -> Unit raise {
-  aas_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C A' B' C'. ¬Collinear A B C ∧ ¬Collinear A' B' C'  ⇒\n    ∡ A B C ≡ ∡ A' B' C'  ∧  ∡ B C A ≡ ∡ B' C' A'  ⇒  seg A B ≡ seg A' B'\n    ⇒  A,B,C ≅ A',B',C'\n\n  proof\n    intro_TAC ∀A B C A' B' C', H1, H2, H3;\n    ¬(A = B) ∧ ¬(B = C) ∧ ¬(B' = C')     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n    consider G such that\n    G ∈ ray B C ━ {B} ∧ seg B G ≡ seg B' C'     [Gexists] by fol Distinct SEGMENT C1;\n    ¬(G = B)  ∧  B ∉ Open (G, C)  ∧ Collinear G B C     [notGBC] by fol - IN_Ray CollinearSymmetry IN_DIFF IN_SING;\n    ¬Collinear A B G ∧ ¬Collinear B G A     [ABGncol] by fol H1 notGBC CollinearSymmetry NoncollinearityExtendsToLine;\n    ray B G = ray B C     [] by fol Distinct Gexists RayWellDefined;\n    ∡ A B G = ∡ A B C     [] by fol Distinct - Angle_DEF;\n    A,B,G ≅ A',B',C'     [ABG≅A'B'C'] by fol H1 ABGncol H3 SegmentSymmetry H2 - Gexists SAS;\n    ∡ B G A ≡ ∡ B' C' A'     [BGAeqB'C'A'] by fol - TriangleCong_DEF;\n    ¬Collinear B C A  ∧ ¬Collinear B' C' A'     [BCAncol] by fol H1 CollinearSymmetry;\n    ∡ B' C' A' ≡ ∡ B C A  ∧  ∡ B C A ≡ ∡ B C A     [BCArefl] by fol - ANGLE H2 C5Symmetric C5Reflexive;\n    ∡ B G A ≡ ∡ B C A     [BGAeqBCA] by fol ABGncol BCAncol ANGLE BGAeqB'C'A' - C5Transitive;\n    assume ¬(G = C)     [notGC] by fol BGAeqBCA ABG≅A'B'C';\n    ¬Collinear A C G ∧ ¬Collinear A G C     [ACGncol] by fol H1 notGBC - CollinearSymmetry NoncollinearityExtendsToLine;\n    C ∈ Open (B, G) ∨ G ∈ Open (C, B)     [] by fol notGBC notGC Distinct B3' ∉;\n    case_split BCG |  CGB by fol -;\n    suppose C ∈ Open (B, G) ;\n      C ∈ Open (G, B)  ∧ ray G C = ray G B     [rGCrBG] by fol - B1' IntervalRay;\n      ∡ A G C <_ang ∡ A C B     [] by fol ACGncol - ExteriorAngle;\n      ∡ B G A <_ang ∡ B C A     [] by fol - rGCrBG Angle_DEF AngleSymmetry AngleSymmetry;\n      fol ABGncol BCAncol ANGLE - AngleSymmetry BGAeqBCA AngleTrichotomy;\n    end;\n    suppose G ∈ Open (C, B);\n      ray C G = ray C B  ∧  ∡ A C G <_ang ∡ A G B     [] by fol - IntervalRay ACGncol ExteriorAngle;\n      ∡ A C B <_ang ∡ B G A     [] by fol - Angle_DEF AngleSymmetry;\n      ∡ B C A <_ang ∡ B C A     [] by fol - BCAncol ANGLE BGAeqBCA AngleTrichotomy2 AngleSymmetry;\n      fol - BCArefl AngleTrichotomy1;\n    end;\n  qed;\n")))
+  aas_c.set(@readable.prove(
+    "\n  forall A B C A' B' C'. ~Collinear A B C /\\  ~Collinear A' B' C'  ==>\n    angle A B C === angle A' B' C'  /\\   angle B C A === angle B' C' A'  ==>  seg A B === seg A' B'\n    ==>  A,B,C cong A',B',C'",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C A' B' C', H1, H2, H3"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(B = C) /\\  ~(B' = C')",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN ray B C DIFF {B} /\\  seg B G === seg B' C'    ",
+          "Gexists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C1", () => c1()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G = B)  /\\   B NOTIN Open (G, C)  /\\  Collinear G B C",
+          "notGBC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A B G /\\  ~Collinear B G A",
+          "ABGncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("notGBC"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray B G = ray B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("Gexists"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A B G = angle A B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,B,G cong A',B',C'",
+          "ABGcongA'B'C'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("ABGncol"),
+              @readable.Label("H3"),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Label("Gexists"),
+              @readable.Thm("SAS", () => sas()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B G A === angle B' C' A'",
+          "BGAeqB'C'A'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B C A  /\\  ~Collinear B' C' A'",
+          "BCAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B' C' A' === angle B C A  /\\   angle B C A === angle B C A",
+          "BCArefl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H2"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+              @readable.Thm("C5Reflexive", () => c5reflexive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B G A === angle B C A",
+          "BGAeqBCA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABGncol"),
+              @readable.Label("BCAncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("BGAeqB'C'A'"),
+              @readable.Prev,
+              @readable.Thm("C5Transitive", () => c5transitive()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(G = C)",
+          "notGC",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("BGAeqBCA"), @readable.Label("ABGcongA'B'C'")],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A C G /\\  ~Collinear A G C",
+          "ACGncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("notGBC"),
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN Open (B, G) \\/ G IN Open (C, B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("notGBC"),
+              @readable.Label("notGC"),
+              @readable.Label("Distinct"),
+              @readable.Thm("B3'", () => b3_p()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "BCG |  CGB",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["C IN Open (B, G) ", "G IN Open (C, B)"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      C IN Open (G, B)  /\\  ray G C = ray G B",
+                  "rGCrBG",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("B1'", () => b1_p()),
+                      @readable.Thm("IntervalRay", () => intervalray()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle A G C <_ang angle A C B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ACGncol"),
+                      @readable.Prev,
+                      @readable.Thm("ExteriorAngle", () => exteriorangle()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle B G A <_ang angle B C A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("rGCrBG"),
+                      @readable.Thm("Angle_DEF", () => angle_def()),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("ABGncol"),
+                    @readable.Label("BCAncol"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Prev,
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    @readable.Label("BGAeqBCA"),
+                    @readable.Thm("AngleTrichotomy", () => angletrichotomy()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ray C G = ray C B  /\\   angle A C G <_ang angle A G B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("IntervalRay", () => intervalray()),
+                      @readable.Label("ACGncol"),
+                      @readable.Thm("ExteriorAngle", () => exteriorangle()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle A C B <_ang angle B G A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("Angle_DEF", () => angle_def()),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      angle B C A <_ang angle B C A",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("BCAncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Label("BGAeqBCA"),
+                      @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("BCArefl"),
+                    @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -5987,7 +18912,16 @@ pub fn aas() -> @kernel.Thm {
 ///|
 /// ParallelSymmetry
 fn step_394() -> Unit raise {
-  parallelsymmetry_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀l k. l ∥ k  ⇒  k ∥ l\n  by fol PARALLEL INTER_COMM")))
+  parallelsymmetry_c.set(@readable.prove(
+    "\n  forall l k. l parallel k  ==>  k parallel l",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("PARALLEL", () => parallel()),
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6000,25 +18934,427 @@ pub fn parallelsymmetry() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_194`
-pub fn exec_phrase_194(x196 : Unit) -> Unit raise {
-  let _ = x196
-  {
-    @readable.thm_ref().val = parallel()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((PARALLEL): thm);;
-fn step_395() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((PARALLEL): thm);;", exec_phrase_194)
-}
-
-///|
 /// AlternateInteriorAngles
 fn step_396() -> Unit raise {
-  alternateinteriorangles_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C E l m t.  Line l ∧ A ∈ l ∧ E ∈ l  ⇒\n    Line m ∧ B ∈ m ∧ C ∈ m  ⇒  Line t ∧ A ∈ t ∧ B ∈ t  ⇒\n    ¬(A = E) ∧ ¬(B = C) ∧ ¬(A = B) ∧ E ∉ t ∧ C ∉ t  ⇒\n    ¬(C,E same_side t)  ⇒  ∡ E A B ≡ ∡ C B A\n    ⇒  l ∥ m\n\n  proof\n    intro_TAC ∀A B C E l m t, l_line, m_line, t_line, Distinct, Cnsim_tE, AltIntAngCong;\n    ¬Collinear E A B ∧ ¬Collinear C B A     [EABncol] by fol t_line Distinct NonCollinearRaa CollinearSymmetry;\n    B ∉ l ∧ A ∉ m     [notAmBl] by fol l_line m_line Collinear_DEF - ∉;\n    assume ¬(l ∥ m)     [Con] by fol;\n    ¬(l ∩ m = ∅)     [] by fol - l_line m_line PARALLEL;\n    consider G such that\n    G ∈ l ∧ G ∈ m     [Glm] by fol - MEMBER_NOT_EMPTY IN_INTER;\n    ¬(G = A) ∧ ¬(G = B) ∧ Collinear B G C ∧ Collinear B C G ∧ Collinear A E G ∧ Collinear A G E     [GnotAB] by fol - notAmBl ∉ m_line l_line Collinear_DEF;\n    ¬Collinear A G B ∧ ¬Collinear B G A ∧ G ∉ t      [AGBncol]  by fol EABncol CollinearSymmetry - NoncollinearityExtendsToLine t_line Collinear_DEF ∉;\n    ¬(E,C same_side t)     [Ensim_tC] by fol t_line - Distinct Cnsim_tE SameSideSymmetric;\n    E ∈ l ━ {A}  ∧  G ∈ l ━ {A}     [] by fol l_line Glm Distinct GnotAB IN_DIFF IN_SING;\n    ¬(G,E same_side t)     []\n    proof\n      assume G,E same_side t     [Gsim_tE] by fol;\n      A ∉ Open (G, E)     [notGAE] by fol t_line - SameSide_DEF ∉;\n      G ∈ ray A E ━ {A}     [] by fol Distinct GnotAB notGAE IN_Ray GnotAB IN_DIFF IN_SING;\n      ray A G = ray A E     [rAGrAE] by fol Distinct - RayWellDefined;\n      ¬(C,G same_side t)     [Cnsim_tG] by fol t_line AGBncol Distinct Gsim_tE Cnsim_tE SameSideTransitive;\n      C ∉ ray B G     [notCrBG] by fol - IN_Ray Distinct t_line AGBncol RaySameSide Cnsim_tG IN_DIFF IN_SING ∉;\n      B ∈ Open (C, G)     [] by fol - GnotAB ∉ IN_Ray;\n      ∡ G A B <_ang ∡ C B A     [] by fol AGBncol notCrBG - B1' EuclidPropositionI_16;\n      ∡ E A B <_ang ∡ C B A     [] by fol - rAGrAE Angle_DEF;\n      fol EABncol ANGLE AltIntAngCong - AngleTrichotomy1;\n    qed;\n    G,C same_side t     [Gsim_tC] by fol t_line AGBncol Distinct - Cnsim_tE AtMost2Sides;\n    B ∉ Open (G, C)     [notGBC] by fol t_line - SameSide_DEF ∉;\n    G ∈ ray B C ━ {B}     [] by fol Distinct GnotAB notGBC IN_Ray GnotAB IN_DIFF IN_SING;\n    ray B G = ray B C     [rBGrBC] by fol Distinct - RayWellDefined;\n    ∡ C B A ≡ ∡ E A B     [flipAltIntAngCong] by fol EABncol ANGLE AltIntAngCong C5Symmetric;\n    ¬(E,G same_side t)     [Ensim_tG] by fol t_line AGBncol Distinct Gsim_tC Ensim_tC SameSideTransitive;\n    E ∉ ray A G     [notErAG] by fol - IN_Ray Distinct t_line AGBncol RaySameSide Ensim_tG IN_DIFF IN_SING ∉;\n    A ∈ Open (E, G)     [] by fol - GnotAB ∉ IN_Ray;\n    ∡ G B A <_ang ∡ E A B     [] by fol AGBncol notErAG - B1' EuclidPropositionI_16;\n    ∡ C B A <_ang ∡ E A B     [] by fol - rBGrBC Angle_DEF;\n    fol EABncol ANGLE flipAltIntAngCong - AngleTrichotomy1;\n  qed;\n")))
+  alternateinteriorangles_c.set(@readable.prove(
+    "\n  forall A B C E l m t.  Line l /\\  A IN l /\\  E IN l  ==>\n    Line m /\\  B IN m /\\  C IN m  ==>  Line t /\\  A IN t /\\  B IN t  ==>\n    ~(A = E) /\\  ~(B = C) /\\  ~(A = B) /\\  E NOTIN t /\\  C NOTIN t  ==>\n    ~(C,E same_side t)  ==>  angle E A B === angle C B A\n    ==>  l parallel m",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall A B C E l m t, l_line, m_line, t_line, Distinct, Cnsim_tE, AltIntAngCong",
+        ),
+        @readable.have(
+          "\n    ~Collinear E A B /\\  ~Collinear C B A",
+          "EABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_line"),
+              @readable.Label("Distinct"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN l /\\  A NOTIN m",
+          "notAmBl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Prev,
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.assuming("~(l parallel m)", "Con", @readable.by(@readable.fol, [])),
+        @readable.have(
+          "\n    ~(l INTER m = {})",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Thm("PARALLEL", () => parallel()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "G",
+          "G IN l /\\  G IN m    ",
+          "Glm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G = A) /\\  ~(G = B) /\\  Collinear B G C /\\  Collinear B C G /\\  Collinear A E G /\\  Collinear A G E",
+          "GnotAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("notAmBl"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Label("m_line"),
+              @readable.Label("l_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A G B /\\  ~Collinear B G A /\\  G NOTIN t",
+          "AGBncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EABncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+              @readable.Label("t_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(E,C same_side t)",
+          "Ensim_tC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_line"),
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Label("Cnsim_tE"),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E IN l DIFF {A}  /\\   G IN l DIFF {A}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("Glm"),
+              @readable.Label("Distinct"),
+              @readable.Label("GnotAB"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G,E same_side t)",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "G,E same_side t",
+                "Gsim_tE",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      A NOTIN Open (G, E)",
+                "notGAE",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("t_line"),
+                    @readable.Prev,
+                    @readable.Thm("SameSide_DEF", () => sameside_def()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      G IN ray A E DIFF {A}",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Label("GnotAB"),
+                    @readable.Label("notGAE"),
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                    @readable.Label("GnotAB"),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ray A G = ray A E",
+                "rAGrAE",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Distinct"),
+                    @readable.Prev,
+                    @readable.Thm("RayWellDefined", () => raywelldefined()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(C,G same_side t)",
+                "Cnsim_tG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("t_line"),
+                    @readable.Label("AGBncol"),
+                    @readable.Label("Distinct"),
+                    @readable.Label("Gsim_tE"),
+                    @readable.Label("Cnsim_tE"),
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      C NOTIN ray B G",
+                "notCrBG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                    @readable.Label("Distinct"),
+                    @readable.Label("t_line"),
+                    @readable.Label("AGBncol"),
+                    @readable.Thm("RaySameSide", () => raysameside()),
+                    @readable.Label("Cnsim_tG"),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      B IN Open (C, G)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("GnotAB"),
+                    @readable.Thm("NOTIN", () => notin()),
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle G A B <_ang angle C B A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("AGBncol"),
+                    @readable.Label("notCrBG"),
+                    @readable.Prev,
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm(
+                      "EuclidPropositionI_16",
+                      () => euclidpropositioni_16(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle E A B <_ang angle C B A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("rAGrAE"),
+                    @readable.Thm("Angle_DEF", () => angle_def()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("EABncol"),
+                  @readable.Thm("ANGLE", () => angle()),
+                  @readable.Label("AltIntAngCong"),
+                  @readable.Prev,
+                  @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G,C same_side t",
+          "Gsim_tC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_line"),
+              @readable.Label("AGBncol"),
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Label("Cnsim_tE"),
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN Open (G, C)",
+          "notGBC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_line"),
+              @readable.Prev,
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G IN ray B C DIFF {B}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("GnotAB"),
+              @readable.Label("notGBC"),
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("GnotAB"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray B G = ray B C",
+          "rBGrBC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B A === angle E A B",
+          "flipAltIntAngCong",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EABncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("AltIntAngCong"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(E,G same_side t)",
+          "Ensim_tG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_line"),
+              @readable.Label("AGBncol"),
+              @readable.Label("Distinct"),
+              @readable.Label("Gsim_tC"),
+              @readable.Label("Ensim_tC"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E NOTIN ray A G",
+          "notErAG",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("Distinct"),
+              @readable.Label("t_line"),
+              @readable.Label("AGBncol"),
+              @readable.Thm("RaySameSide", () => raysameside()),
+              @readable.Label("Ensim_tG"),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN Open (E, G)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("GnotAB"),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("IN_Ray", () => in_ray()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle G B A <_ang angle E A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("AGBncol"),
+              @readable.Label("notErAG"),
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("EuclidPropositionI_16", () => euclidpropositioni_16()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C B A <_ang angle E A B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("rBGrBC"),
+              @readable.Thm("Angle_DEF", () => angle_def()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("EABncol"),
+            @readable.Thm("ANGLE", () => angle()),
+            @readable.Label("flipAltIntAngCong"),
+            @readable.Prev,
+            @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6033,7 +19369,171 @@ pub fn alternateinteriorangles() -> @kernel.Thm {
 ///|
 /// EuclidPropositionI_28
 fn step_397() -> Unit raise {
-  euclidpropositioni_28_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D E F G H l m t.  Line l ∧ A ∈ l ∧ B ∈ l ∧ G ∈ l  ⇒\n    Line m ∧ C ∈ m ∧ D ∈ m ∧ H ∈ m  ⇒\n    Line t ∧ G ∈ t ∧ H ∈ t  ⇒\n    G ∉ m ∧ H ∉ l  ⇒\n    G ∈ Open (A, B)  ∧ H ∈ Open (C, D)  ⇒\n    G ∈ Open (E, H)  ∧  H ∈ Open (F, G)  ⇒\n    ¬(D,A same_side t)  ⇒\n    ∡ E G B ≡ ∡ G H D  ∨  ∡ B G H suppl ∡ G H D\n    ⇒  l ∥ m\n\n  proof\n    intro_TAC ∀A B C D E F G H l m t, l_line, m_line, t_line, notGmHl, H1, H2, H3, H4;\n    ¬(A = G) ∧ ¬(G = B) ∧ ¬(H = D) ∧ ¬(E = G) ∧ ¬(G = H) ∧ Collinear A G B ∧ Collinear E G H     [Distinct] by fol H1 H2 B1';\n    ¬Collinear H G A ∧ ¬Collinear G H D ∧ A ∉ t ∧ D ∉ t     [HGAncol] by fol Distinct l_line m_line notGmHl NonCollinearRaa CollinearSymmetry Collinear_DEF t_line ∉;\n    ¬Collinear B G H ∧ ¬Collinear A G E ∧ ¬Collinear E G B     [BGHncol] by fol - Distinct CollinearSymmetry NoncollinearityExtendsToLine;\n    ∡ A G H ≡ ∡ D H G     []\n    proof\n      case_split EGBeqGHD | BGHeqGHD     by fol H4;\n      suppose ∡ E G B ≡ ∡ G H D;\n        ∡ E G B ≡ ∡ H G A  ∧\n        Angle (∡ E G B)  ∧  Angle (∡ H G A)  ∧  Angle (∡ G H D)      [boo] by fol BGHncol H1 H2 VerticalAnglesCong HGAncol ANGLE;\n        ∡ H G A ≡ ∡ E G B     [] by fol - C5Symmetric;\n        ∡ H G A ≡ ∡ G H D     [] by fol boo - EGBeqGHD C5Transitive;\n        fol - AngleSymmetry;\n      end;\n      suppose ∡ B G H suppl ∡ G H D;\n        ∡ B G H suppl ∡ H G A     [] by fol BGHncol H1 B1' SupplementaryAngles_DEF;\n        fol - BGHeqGHD AngleSymmetry SupplementUnique AngleSymmetry;\n      end;\n    qed;\n    fol l_line m_line t_line Distinct HGAncol H3 -  AlternateInteriorAngles;\n  qed;\n")))
+  euclidpropositioni_28_c.set(@readable.prove(
+    "\n  forall A B C D E F G H l m t.  Line l /\\  A IN l /\\  B IN l /\\  G IN l  ==>\n    Line m /\\  C IN m /\\  D IN m /\\  H IN m  ==>\n    Line t /\\  G IN t /\\  H IN t  ==>\n    G NOTIN m /\\  H NOTIN l  ==>\n    G IN Open (A, B)  /\\  H IN Open (C, D)  ==>\n    G IN Open (E, H)  /\\   H IN Open (F, G)  ==>\n    ~(D,A same_side t)  ==>\n    angle E G B === angle G H D  \\/  angle B G H suppl angle G H D\n    ==>  l parallel m",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall A B C D E F G H l m t, l_line, m_line, t_line, notGmHl, H1, H2, H3, H4",
+        ),
+        @readable.have(
+          "\n    ~(A = G) /\\  ~(G = B) /\\  ~(H = D) /\\  ~(E = G) /\\  ~(G = H) /\\  Collinear A G B /\\  Collinear E G H",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("B1'", () => b1_p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear H G A /\\  ~Collinear G H D /\\  A NOTIN t /\\  D NOTIN t",
+          "HGAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Label("notGmHl"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("t_line"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B G H /\\  ~Collinear A G E /\\  ~Collinear E G B",
+          "BGHncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle A G H === angle D H G",
+          "",
+          @readable.case_split(
+            "EGBeqGHD | BGHeqGHD    ",
+            @readable.by(@readable.fol, [@readable.Label("H4")]),
+            @list.List(["angle E G B === angle G H D", "angle B G H suppl angle G H D"]),
+            @list.List(
+              [
+                @readable.steps(
+                  [
+                    @readable.have(
+                      "\n        angle E G B === angle H G A  /\\ \n        Angle (angle E G B)  /\\   Angle (angle H G A)  /\\   Angle (angle G H D)",
+                      "boo",
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Label("BGHncol"),
+                          @readable.Label("H1"),
+                          @readable.Label("H2"),
+                          @readable.Thm(
+                            "VerticalAnglesCong",
+                            () => verticalanglescong(),
+                          ),
+                          @readable.Label("HGAncol"),
+                          @readable.Thm("ANGLE", () => angle()),
+                        ],
+                      ),
+                    ),
+                    @readable.have(
+                      "\n        angle H G A === angle E G B",
+                      "",
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Prev,
+                          @readable.Thm("C5Symmetric", () => c5symmetric()),
+                        ],
+                      ),
+                    ),
+                    @readable.have(
+                      "\n        angle H G A === angle G H D",
+                      "",
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Label("boo"),
+                          @readable.Prev,
+                          @readable.Label("EGBeqGHD"),
+                          @readable.Thm("C5Transitive", () => c5transitive()),
+                        ],
+                      ),
+                    ),
+                    @readable.by(
+                      @readable.fol,
+                      [
+                        @readable.Prev,
+                        @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                      ],
+                    ),
+                  ],
+                ),
+                @readable.steps(
+                  [
+                    @readable.have(
+                      "\n        angle B G H suppl angle H G A",
+                      "",
+                      @readable.by(
+                        @readable.fol,
+                        [
+                          @readable.Label("BGHncol"),
+                          @readable.Label("H1"),
+                          @readable.Thm("B1'", () => b1_p()),
+                          @readable.Thm(
+                            "SupplementaryAngles_DEF",
+                            () => supplementaryangles_def(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    @readable.by(
+                      @readable.fol,
+                      [
+                        @readable.Prev,
+                        @readable.Label("BGHeqGHD"),
+                        @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                        @readable.Thm("SupplementUnique", () => supplementunique()),
+                        @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("l_line"),
+            @readable.Label("m_line"),
+            @readable.Label("t_line"),
+            @readable.Label("Distinct"),
+            @readable.Label("HGAncol"),
+            @readable.Label("H3"),
+            @readable.Prev,
+            @readable.Thm("AlternateInteriorAngles", () => alternateinteriorangles()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6046,25 +19546,282 @@ pub fn euclidpropositioni_28() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_195`
-pub fn exec_phrase_195(x197 : Unit) -> Unit raise {
-  let _ = x197
-  {
-    @readable.thm_ref().val = alternateinteriorangles()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AlternateInteriorAngles): thm);;
-fn step_398() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AlternateInteriorAngles): thm);;", exec_phrase_195)
-}
-
-///|
 /// OppositeSidesCongImpliesParallelogram
 fn step_399() -> Unit raise {
-  oppositesidescongimpliesparallelogram_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D.  Quadrilateral A B C D  ⇒\n    seg A B ≡ seg C D  ∧  seg B C ≡ seg D A\n    ⇒  Parallelogram A B C D\n\n  proof\n    intro_TAC ∀A B C D, H1, H2;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(A = D) ∧ ¬(B = C) ∧ ¬(B = D) ∧ ¬(C = D) ∧\n    ¬Collinear A B C ∧ ¬Collinear B C D ∧ ¬Collinear C D A ∧ ¬Collinear D A B     [TetraABCD] by fol H1 Quadrilateral_DEF Tetralateral_DEF;\n    consider a c such that\n    Line a ∧ A ∈ a ∧ B ∈ a   ∧\n    Line c ∧ C ∈ c ∧ D ∈ c     [ac_line] by fol TetraABCD I1;\n    consider b d such that\n    Line b ∧ B ∈ b ∧ C ∈ b   ∧\n    Line d ∧ D ∈ d ∧ A ∈ d     [bd_line] by fol TetraABCD I1;\n    consider l such that\n    Line l ∧ A ∈ l ∧ C ∈ l     [l_line] by fol TetraABCD I1;\n    consider m such that\n    Line m ∧ B ∈ m ∧ D ∈ m     [m_line] by fol TetraABCD I1;\n    B ∉ l ∧ D ∉ l ∧ A ∉ m  ∧ C ∉ m     [notBDlACm] by fol l_line m_line TetraABCD Collinear_DEF ∉;\n    seg A C ≡ seg C A  ∧  seg B D ≡ seg D B     [seg_refl] by fol TetraABCD SEGMENT C2Reflexive SegmentSymmetry;\n    A,B,C ≅ C,D,A     [] by fol TetraABCD H2 - SSS;\n    ∡ B C A ≡ ∡ D A C  ∧  ∡ C A B ≡ ∡ A C D     [BCAeqDAC] by fol - TriangleCong_DEF;\n    seg C D ≡ seg A B     [CDeqAB] by fol TetraABCD SEGMENT H2 C2Symmetric;\n    B,C,D ≅ D,A,B     [] by fol TetraABCD H2 - seg_refl SSS;\n    ∡ C D B ≡ ∡ A B D  ∧  ∡ D B C ≡ ∡ B D A  ∧  ∡ C B D ≡ ∡ A D B     [CDBeqABD] by fol - TriangleCong_DEF AngleSymmetry;\n    ¬(B,D same_side l)  ∨  ¬(A,C same_side m)     [] by fol H1 l_line m_line FiveChoicesQuadrilateral;\n    case_split Case1 | Ansim_mC     by fol -;\n    suppose ¬(B,D same_side l);\n      ¬(D,B same_side l)     [] by fol l_line notBDlACm - SameSideSymmetric;\n      a ∥ c  ∧  b ∥ d     [] by fol ac_line l_line TetraABCD notBDlACm - BCAeqDAC AngleSymmetry AlternateInteriorAngles bd_line BCAeqDAC;\n      fol H1 ac_line bd_line - Parallelogram_DEF;\n    end;\n    suppose ¬(A,C same_side m);\n      b ∥ d     [b∥d] by fol bd_line m_line TetraABCD notBDlACm - CDBeqABD  AlternateInteriorAngles;\n      c ∥ a     [] by fol ac_line m_line TetraABCD notBDlACm Ansim_mC CDBeqABD AlternateInteriorAngles;\n      fol H1 ac_line bd_line b∥d - ParallelSymmetry Parallelogram_DEF;\n    end;\n  qed;\n")))
+  oppositesidescongimpliesparallelogram_c.set(@readable.prove(
+    "\n  forall A B C D.  Quadrilateral A B C D  ==>\n    seg A B === seg C D  /\\   seg B C === seg D A\n    ==>  Parallelogram A B C D",
+    @readable.steps_then(
+      [
+        @readable.intro_tac("forall A B C D, H1, H2"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(A = D) /\\  ~(B = C) /\\  ~(B = D) /\\  ~(C = D) /\\ \n    ~Collinear A B C /\\  ~Collinear B C D /\\  ~Collinear C D A /\\  ~Collinear D A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a c",
+          "Line a /\\  A IN a /\\  B IN a   /\\ \n    Line c /\\  C IN c /\\  D IN c    ",
+          "ac_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "b d",
+          "Line b /\\  B IN b /\\  C IN b   /\\ \n    Line d /\\  D IN d /\\  A IN d    ",
+          "bd_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  C IN l    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  B IN m /\\  D IN m    ",
+          "m_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN l /\\  D NOTIN l /\\  A NOTIN m  /\\  C NOTIN m",
+          "notBDlACm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Label("TetraABCD"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg A C === seg C A  /\\   seg B D === seg D B",
+          "seg_refl",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Thm("C2Reflexive", () => c2reflexive()),
+              @readable.Thm("SegmentSymmetry", () => segmentsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,B,C cong C,D,A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Thm("SSS", () => sss()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C A === angle D A C  /\\   angle C A B === angle A C D",
+          "BCAeqDAC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    seg C D === seg A B",
+          "CDeqAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Thm("SEGMENT", () => segment()),
+              @readable.Label("H2"),
+              @readable.Thm("C2Symmetric", () => c2symmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B,C,D cong D,A,B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Label("H2"),
+              @readable.Prev,
+              @readable.Label("seg_refl"),
+              @readable.Thm("SSS", () => sss()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C D B === angle A B D  /\\   angle D B C === angle B D A  /\\   angle C B D === angle A D B",
+          "CDBeqABD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("TriangleCong_DEF", () => trianglecong_def()),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B,D same_side l)  \\/  ~(A,C same_side m)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("l_line"),
+              @readable.Label("m_line"),
+              @readable.Thm(
+                "FiveChoicesQuadrilateral",
+                () => fivechoicesquadrilateral(),
+              ),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "Case1 | Ansim_mC    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["~(B,D same_side l)", "~(A,C same_side m)"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      ~(D,B same_side l)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("l_line"),
+                      @readable.Label("notBDlACm"),
+                      @readable.Prev,
+                      @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      a parallel c  /\\   b parallel d",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ac_line"),
+                      @readable.Label("l_line"),
+                      @readable.Label("TetraABCD"),
+                      @readable.Label("notBDlACm"),
+                      @readable.Prev,
+                      @readable.Label("BCAeqDAC"),
+                      @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                      @readable.Thm(
+                        "AlternateInteriorAngles",
+                        () => alternateinteriorangles(),
+                      ),
+                      @readable.Label("bd_line"),
+                      @readable.Label("BCAeqDAC"),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("ac_line"),
+                    @readable.Label("bd_line"),
+                    @readable.Prev,
+                    @readable.Thm("Parallelogram_DEF", () => parallelogram_def()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      b parallel d",
+                  "bparalleld",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("bd_line"),
+                      @readable.Label("m_line"),
+                      @readable.Label("TetraABCD"),
+                      @readable.Label("notBDlACm"),
+                      @readable.Prev,
+                      @readable.Label("CDBeqABD"),
+                      @readable.Thm(
+                        "AlternateInteriorAngles",
+                        () => alternateinteriorangles(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      c parallel a",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("ac_line"),
+                      @readable.Label("m_line"),
+                      @readable.Label("TetraABCD"),
+                      @readable.Label("notBDlACm"),
+                      @readable.Label("Ansim_mC"),
+                      @readable.Label("CDBeqABD"),
+                      @readable.Thm(
+                        "AlternateInteriorAngles",
+                        () => alternateinteriorangles(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1"),
+                    @readable.Label("ac_line"),
+                    @readable.Label("bd_line"),
+                    @readable.Label("bparalleld"),
+                    @readable.Prev,
+                    @readable.Thm("ParallelSymmetry", () => parallelsymmetry()),
+                    @readable.Thm("Parallelogram_DEF", () => parallelogram_def()),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -6077,57 +19834,675 @@ pub fn oppositesidescongimpliesparallelogram() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_196`
-pub fn exec_phrase_196(x198 : Unit) -> Unit raise {
-  let _ = x198
-  {
-    @readable.thm_ref().val = fivechoicesquadrilateral()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FiveChoicesQuadrilateral): thm);;
-fn step_400() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FiveChoicesQuadrilateral): thm);;", exec_phrase_196)
-}
-
-///|
-/// `exec_phrase_197`
-pub fn exec_phrase_197(x199 : Unit) -> Unit raise {
-  let _ = x199
-  {
-    @readable.thm_ref().val = parallelogram_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Parallelogram_DEF): thm);;
-fn step_401() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Parallelogram_DEF): thm);;", exec_phrase_197)
-}
-
-///|
-/// `exec_phrase_198`
-pub fn exec_phrase_198(x200 : Unit) -> Unit raise {
-  let _ = x200
-  {
-    @readable.thm_ref().val = parallelsymmetry()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ParallelSymmetry): thm);;
-fn step_402() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ParallelSymmetry): thm);;", exec_phrase_198)
-}
-
-///|
 /// OppositeAnglesCongImpliesParallelogramHelp
 fn step_403() -> Unit raise {
-  oppositeanglescongimpliesparallelogramhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D a c.  Quadrilateral A B C D  ⇒\n    ∡ A B C ≡ ∡ C D A  ∧  ∡ D A B ≡ ∡ B C D  ⇒\n    Line a ∧ A ∈ a ∧ B ∈ a  ⇒  Line c  ∧ C ∈ c ∧ D ∈ c\n    ⇒  a ∥ c\n\n  proof\n    intro_TAC ∀A B C D a c, H1, H2, a_line, c_line;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(A = D) ∧ ¬(B = C) ∧ ¬(B = D) ∧ ¬(C = D) ∧\n    ¬Collinear A B C ∧ ¬Collinear B C D ∧ ¬Collinear C D A ∧ ¬Collinear D A B     [TetraABCD] by fol H1 Quadrilateral_DEF Tetralateral_DEF;\n    ∡ C D A ≡ ∡ A B C  ∧  ∡ B C D ≡ ∡ D A B     [H2'] by fol TetraABCD ANGLE H2 C5Symmetric;\n    consider l m such that\n    Line l ∧ A ∈ l ∧ C ∈ l  ∧\n    Line m ∧ B ∈ m ∧ D ∈ m     [lm_line] by fol TetraABCD I1;\n    consider b d such that\n    Line b ∧ B ∈ b ∧ C ∈ b   ∧  Line d ∧ D ∈ d ∧ A ∈ d     [bd_line] by fol TetraABCD I1;\n    A ∉ c ∧ B ∉ c ∧ A ∉ b ∧ D ∉ b ∧ B ∉ d ∧ C ∉ d     [point_off_line] by fol c_line bd_line Collinear_DEF TetraABCD ∉;\n    ¬(A ∈ int_triangle B C D  ∨  B ∈ int_triangle C D A  ∨\n    C ∈ int_triangle D A B  ∨  D ∈ int_triangle A B C)     []\n    proof\n      assume A ∈ int_triangle B C D  ∨  B ∈ int_triangle C D A  ∨\n      C ∈ int_triangle D A B  ∨  D ∈ int_triangle A B C     [Con] by fol;\n      ∡ B C D <_ang ∡ D A B  ∨  ∡ C D A <_ang ∡ A B C  ∨\n      ∡ D A B <_ang ∡ B C D  ∨  ∡ A B C <_ang ∡ C D A     [] by fol TetraABCD - EuclidPropositionI_21;\n      fol - H2' H2 AngleTrichotomy1;\n    qed;\n    ConvexQuadrilateral A B C D     [] by fol H1 lm_line - FiveChoicesQuadrilateral;\n    A ∈ int_angle B C D  ∧  B ∈ int_angle C D A  ∧\n    C ∈ int_angle D A B  ∧  D ∈ int_angle A B C     [AintBCD] by fol - ConvexQuad_DEF;\n    B,A same_side c  ∧  B,C same_side d     [Bsim_cA] by fol c_line bd_line - InteriorUse;\n    A,D same_side b     [Asim_bD] by fol bd_line c_line AintBCD InteriorUse;\n    assume ¬(a ∥ c)     [Con] by fol;\n    consider G such that\n    G ∈ a ∧ G ∈ c     [Gac] by fol - a_line c_line PARALLEL MEMBER_NOT_EMPTY IN_INTER;\n    Collinear A B G ∧ Collinear D G C ∧ Collinear C G D     [ABGcol] by fol a_line - Collinear_DEF c_line;\n    ¬(G = A) ∧ ¬(G = B) ∧ ¬(G = C) ∧ ¬(G = D)     [GnotABCD] by fol Gac ABGcol TetraABCD CollinearSymmetry Collinear_DEF;\n    ¬Collinear B G C ∧ ¬Collinear A D G     [BGCncol] by fol c_line Gac GnotABCD point_off_line NonCollinearRaa CollinearSymmetry;\n    ¬Collinear B C G ∧ ¬Collinear G B C ∧ ¬Collinear G A D ∧ ¬Collinear A G D     [BCGncol] by fol - CollinearSymmetry;\n    G ∉ b ∧ G ∉ d     [notGb] by fol bd_line Collinear_DEF BGCncol ∉;\n    G ∉ Open (B, A)     [notBGA] by fol Bsim_cA Gac SameSide_DEF ∉;\n    B ∉ Open (A, G)     [notABG]\n    proof\n      assume ¬(B ∉ Open (A, G))     [Con] by fol;\n      B ∈ Open (A, G)     [ABG] by fol - ∉;\n      ray A B = ray A G     [rABrAG] by fol - IntervalRay;\n      ¬(A,G same_side b)     [] by fol bd_line ABG SameSide_DEF;\n      ¬(D,G same_side b)     [] by fol bd_line point_off_line notGb Asim_bD - SameSideTransitive;\n      D ∉ ray C G     [] by fol bd_line notGb - RaySameSide TetraABCD IN_DIFF IN_SING ∉;\n      C ∈ Open (D, G)     [DCG] by fol GnotABCD ABGcol - IN_Ray ∉;\n      consider M such that\n      D ∈ Open (C, M)     [CDM] by fol TetraABCD B2';\n      D ∈ Open (G, M)     [GDM] by fol - B1' DCG TransitivityBetweennessHelp;\n      ∡ C D A suppl ∡ A D M  ∧  ∡ A B C suppl ∡ C B G     [] by fol TetraABCD CDM ABG SupplementaryAngles_DEF;\n      ∡ M D A ≡ ∡ G B C     [MDAeqGBC] by fol - H2' SupplementsCongAnglesCong AngleSymmetry;\n      ∡ G A D <_ang ∡ M D A  ∧  ∡ G B C <_ang ∡ D C B     [] by fol BCGncol BGCncol GDM DCG B1' EuclidPropositionI_16;\n      ∡ G A D <_ang ∡ D C B     [] by fol  - BCGncol ANGLE MDAeqGBC AngleTrichotomy2 AngleOrderTransitivity;\n      ∡ D A B <_ang ∡ B C D     [] by fol - rABrAG Angle_DEF AngleSymmetry;\n      fol - H2 AngleTrichotomy1;\n    qed;\n    A ∉ Open (G, B)     []\n    proof\n      assume ¬(A ∉ Open (G, B))     [Con] by fol;\n      A ∈ Open (B, G)     [BAG] by fol - B1' ∉;\n      ray B A = ray B G     [rBArBG] by fol - IntervalRay;\n      ¬(B,G same_side d)     [] by fol bd_line BAG SameSide_DEF;\n      ¬(C,G same_side d)     [] by fol bd_line point_off_line notGb Bsim_cA -  SameSideTransitive;\n      C ∉ ray D G     [] by fol bd_line notGb - RaySameSide TetraABCD IN_DIFF IN_SING ∉;\n      D ∈ Open (C, G)     [CDG] by fol GnotABCD ABGcol - IN_Ray ∉;\n      consider M such that\n      C ∈ Open (D, M)     [DCM] by fol B2' TetraABCD;\n      C ∈ Open (G, M)     [GCM] by fol - B1' CDG TransitivityBetweennessHelp;\n      ∡ B C D suppl ∡ M C B  ∧  ∡ D A B suppl ∡ G A D     [] by fol TetraABCD CollinearSymmetry DCM BAG SupplementaryAngles_DEF AngleSymmetry;\n      ∡ M C B ≡ ∡ G A D     [GADeqMCB] by fol - H2' SupplementsCongAnglesCong;\n      ∡ G B C <_ang ∡ M C B  ∧  ∡ G A D <_ang ∡ C D A     [] by fol BGCncol GCM BCGncol CDG B1' EuclidPropositionI_16;\n      ∡ G B C <_ang ∡ C D A     [] by fol - BCGncol ANGLE GADeqMCB AngleTrichotomy2 AngleOrderTransitivity;\n      ∡ A B C <_ang ∡ C D A     [] by fol - rBArBG Angle_DEF;\n      fol - H2 AngleTrichotomy1;\n    qed;\n    fol TetraABCD GnotABCD ABGcol notABG notBGA - B3' ∉;\n  qed;\n")))
+  oppositeanglescongimpliesparallelogramhelp_c.set(@readable.prove(
+    "\n  forall A B C D a c.  Quadrilateral A B C D  ==>\n    angle A B C === angle C D A  /\\   angle D A B === angle B C D  ==>\n    Line a /\\  A IN a /\\  B IN a  ==>  Line c  /\\  C IN c /\\  D IN c\n    ==>  a parallel c",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D a c, H1, H2, a_line, c_line"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(A = D) /\\  ~(B = C) /\\  ~(B = D) /\\  ~(C = D) /\\ \n    ~Collinear A B C /\\  ~Collinear B C D /\\  ~Collinear C D A /\\  ~Collinear D A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle C D A === angle A B C  /\\   angle B C D === angle D A B",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H2"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "l m",
+          "Line l /\\  A IN l /\\  C IN l  /\\ \n    Line m /\\  B IN m /\\  D IN m    ",
+          "lm_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "b d",
+          "Line b /\\  B IN b /\\  C IN b   /\\   Line d /\\  D IN d /\\  A IN d    ",
+          "bd_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN c /\\  B NOTIN c /\\  A NOTIN b /\\  D NOTIN b /\\  B NOTIN d /\\  C NOTIN d",
+          "point_off_line",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("c_line"),
+              @readable.Label("bd_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("TetraABCD"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A IN int_triangle B C D  \\/  B IN int_triangle C D A  \\/\n    C IN int_triangle D A B  \\/  D IN int_triangle A B C)",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "A IN int_triangle B C D  \\/  B IN int_triangle C D A  \\/\n      C IN int_triangle D A B  \\/  D IN int_triangle A B C",
+                "Con",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      angle B C D <_ang angle D A B  \\/  angle C D A <_ang angle A B C  \\/\n      angle D A B <_ang angle B C D  \\/  angle A B C <_ang angle C D A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("TetraABCD"),
+                    @readable.Prev,
+                    @readable.Thm(
+                      "EuclidPropositionI_21",
+                      () => euclidpropositioni_21(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Label("H2'"),
+                  @readable.Label("H2"),
+                  @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ConvexQuadrilateral A B C D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("lm_line"),
+              @readable.Prev,
+              @readable.Thm(
+                "FiveChoicesQuadrilateral",
+                () => fivechoicesquadrilateral(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN int_angle B C D  /\\   B IN int_angle C D A  /\\ \n    C IN int_angle D A B  /\\   D IN int_angle A B C",
+          "AintBCD",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("ConvexQuad_DEF", () => convexquad_def())],
+          ),
+        ),
+        @readable.have(
+          "\n    B,A same_side c  /\\   B,C same_side d",
+          "Bsim_cA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("c_line"),
+              @readable.Label("bd_line"),
+              @readable.Prev,
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A,D same_side b",
+          "Asim_bD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("bd_line"),
+              @readable.Label("c_line"),
+              @readable.Label("AintBCD"),
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.assuming("~(a parallel c)", "Con", @readable.by(@readable.fol, [])),
+        @readable.consider(
+          "G",
+          "G IN a /\\  G IN c    ",
+          "Gac",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("a_line"),
+              @readable.Label("c_line"),
+              @readable.Thm("PARALLEL", () => parallel()),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Collinear A B G /\\  Collinear D G C /\\  Collinear C G D",
+          "ABGcol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("a_line"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("c_line"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(G = A) /\\  ~(G = B) /\\  ~(G = C) /\\  ~(G = D)",
+          "GnotABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Gac"),
+              @readable.Label("ABGcol"),
+              @readable.Label("TetraABCD"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B G C /\\  ~Collinear A D G",
+          "BGCncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("c_line"),
+              @readable.Label("Gac"),
+              @readable.Label("GnotABCD"),
+              @readable.Label("point_off_line"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear B C G /\\  ~Collinear G B C /\\  ~Collinear G A D /\\  ~Collinear A G D",
+          "BCGncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN b /\\  G NOTIN d",
+          "notGb",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("bd_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("BGCncol"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    G NOTIN Open (B, A)",
+          "notBGA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Bsim_cA"),
+              @readable.Label("Gac"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B NOTIN Open (A, G)",
+          "notABG",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "~(B NOTIN Open (A, G))",
+                "Con",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      B IN Open (A, G)",
+                "ABG",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Prev, @readable.Thm("NOTIN", () => notin())],
+                ),
+              ),
+              @readable.have(
+                "\n      ray A B = ray A G",
+                "rABrAG",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Prev, @readable.Thm("IntervalRay", () => intervalray())],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(A,G same_side b)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("bd_line"),
+                    @readable.Label("ABG"),
+                    @readable.Thm("SameSide_DEF", () => sameside_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(D,G same_side b)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("bd_line"),
+                    @readable.Label("point_off_line"),
+                    @readable.Label("notGb"),
+                    @readable.Label("Asim_bD"),
+                    @readable.Prev,
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      D NOTIN ray C G",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("bd_line"),
+                    @readable.Label("notGb"),
+                    @readable.Prev,
+                    @readable.Thm("RaySameSide", () => raysameside()),
+                    @readable.Label("TetraABCD"),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      C IN Open (D, G)",
+                "DCG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("GnotABCD"),
+                    @readable.Label("ABGcol"),
+                    @readable.Prev,
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.consider(
+                "M",
+                "D IN Open (C, M)    ",
+                "CDM",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Label("TetraABCD"), @readable.Thm("B2'", () => b2_p())],
+                ),
+              ),
+              @readable.have(
+                "\n      D IN Open (G, M)",
+                "GDM",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Label("DCG"),
+                    @readable.Thm(
+                      "TransitivityBetweennessHelp",
+                      () => transitivitybetweennesshelp(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle C D A suppl angle A D M  /\\   angle A B C suppl angle C B G",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("TetraABCD"),
+                    @readable.Label("CDM"),
+                    @readable.Label("ABG"),
+                    @readable.Thm(
+                      "SupplementaryAngles_DEF",
+                      () => supplementaryangles_def(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle M D A === angle G B C",
+                "MDAeqGBC",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H2'"),
+                    @readable.Thm(
+                      "SupplementsCongAnglesCong",
+                      () => supplementsconganglescong(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle G A D <_ang angle M D A  /\\   angle G B C <_ang angle D C B",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("BCGncol"),
+                    @readable.Label("BGCncol"),
+                    @readable.Label("GDM"),
+                    @readable.Label("DCG"),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm(
+                      "EuclidPropositionI_16",
+                      () => euclidpropositioni_16(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle G A D <_ang angle D C B",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("BCGncol"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Label("MDAeqGBC"),
+                    @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+                    @readable.Thm(
+                      "AngleOrderTransitivity",
+                      () => angleordertransitivity(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle D A B <_ang angle B C D",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("rABrAG"),
+                    @readable.Thm("Angle_DEF", () => angle_def()),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Label("H2"),
+                  @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN Open (G, B)",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "~(A NOTIN Open (G, B))",
+                "Con",
+                @readable.by(@readable.fol, []),
+              ),
+              @readable.have(
+                "\n      A IN Open (B, G)",
+                "BAG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ray B A = ray B G",
+                "rBArBG",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Prev, @readable.Thm("IntervalRay", () => intervalray())],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(B,G same_side d)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("bd_line"),
+                    @readable.Label("BAG"),
+                    @readable.Thm("SameSide_DEF", () => sameside_def()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      ~(C,G same_side d)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("bd_line"),
+                    @readable.Label("point_off_line"),
+                    @readable.Label("notGb"),
+                    @readable.Label("Bsim_cA"),
+                    @readable.Prev,
+                    @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      C NOTIN ray D G",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("bd_line"),
+                    @readable.Label("notGb"),
+                    @readable.Prev,
+                    @readable.Thm("RaySameSide", () => raysameside()),
+                    @readable.Label("TetraABCD"),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("IN_SING", () => @sets.in_sing()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      D IN Open (C, G)",
+                "CDG",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("GnotABCD"),
+                    @readable.Label("ABGcol"),
+                    @readable.Prev,
+                    @readable.Thm("IN_Ray", () => in_ray()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.consider(
+                "M",
+                "C IN Open (D, M)    ",
+                "DCM",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Thm("B2'", () => b2_p()), @readable.Label("TetraABCD")],
+                ),
+              ),
+              @readable.have(
+                "\n      C IN Open (G, M)",
+                "GCM",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Label("CDG"),
+                    @readable.Thm(
+                      "TransitivityBetweennessHelp",
+                      () => transitivitybetweennesshelp(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle B C D suppl angle M C B  /\\   angle D A B suppl angle G A D",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("TetraABCD"),
+                    @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    @readable.Label("DCM"),
+                    @readable.Label("BAG"),
+                    @readable.Thm(
+                      "SupplementaryAngles_DEF",
+                      () => supplementaryangles_def(),
+                    ),
+                    @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle M C B === angle G A D",
+                "GADeqMCB",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("H2'"),
+                    @readable.Thm(
+                      "SupplementsCongAnglesCong",
+                      () => supplementsconganglescong(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle G B C <_ang angle M C B  /\\   angle G A D <_ang angle C D A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("BGCncol"),
+                    @readable.Label("GCM"),
+                    @readable.Label("BCGncol"),
+                    @readable.Label("CDG"),
+                    @readable.Thm("B1'", () => b1_p()),
+                    @readable.Thm(
+                      "EuclidPropositionI_16",
+                      () => euclidpropositioni_16(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle G B C <_ang angle C D A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("BCGncol"),
+                    @readable.Thm("ANGLE", () => angle()),
+                    @readable.Label("GADeqMCB"),
+                    @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+                    @readable.Thm(
+                      "AngleOrderTransitivity",
+                      () => angleordertransitivity(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      angle A B C <_ang angle C D A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Prev,
+                    @readable.Label("rBArBG"),
+                    @readable.Thm("Angle_DEF", () => angle_def()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Prev,
+                  @readable.Label("H2"),
+                  @readable.Thm("AngleTrichotomy1", () => angletrichotomy1()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("TetraABCD"),
+            @readable.Label("GnotABCD"),
+            @readable.Label("ABGcol"),
+            @readable.Label("notABG"),
+            @readable.Label("notBGA"),
+            @readable.Prev,
+            @readable.Thm("B3'", () => b3_p()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6140,25 +20515,106 @@ pub fn oppositeanglescongimpliesparallelogramhelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_199`
-pub fn exec_phrase_199(x201 : Unit) -> Unit raise {
-  let _ = x201
-  {
-    @readable.thm_ref().val = euclidpropositioni_21()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_21): thm);;
-fn step_404() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_21): thm);;", exec_phrase_199)
-}
-
-///|
 /// OppositeAnglesCongImpliesParallelogram
 fn step_405() -> Unit raise {
-  oppositeanglescongimpliesparallelogram_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C D. Quadrilateral A B C D  ⇒\n    ∡ A B C ≡ ∡ C D A  ∧  ∡ D A B ≡ ∡ B C D\n    ⇒  Parallelogram A B C D\n\n  proof\n    intro_TAC ∀A B C D, H1, H2;\n    Quadrilateral B C D A     [QuadBCDA] by fol H1 QuadrilateralSymmetry;\n    ¬(A = B) ∧ ¬(B = C) ∧ ¬(C = D) ∧ ¬(D = A) ∧ ¬Collinear B C D ∧ ¬Collinear D A B     [TetraABCD] by fol H1 Quadrilateral_DEF Tetralateral_DEF;\n    ∡ B C D ≡ ∡ D A B     [H2'] by fol TetraABCD ANGLE H2 C5Symmetric;\n    consider a such that\n    Line a ∧ A ∈ a ∧ B ∈ a     [a_line] by fol TetraABCD I1;\n    consider b such that\n    Line b ∧ B ∈ b ∧ C ∈ b     [b_line] by fol TetraABCD I1;\n    consider c such that\n    Line c  ∧ C ∈ c ∧ D ∈ c     [c_line] by fol TetraABCD I1;\n    consider d such that\n    Line d ∧ D ∈ d ∧ A ∈ d     [d_line] by fol TetraABCD I1;\n    fol H1 QuadBCDA H2 H2' a_line b_line c_line d_line OppositeAnglesCongImpliesParallelogramHelp Parallelogram_DEF;\n  qed;\n")))
+  oppositeanglescongimpliesparallelogram_c.set(@readable.prove(
+    "\n  forall A B C D. Quadrilateral A B C D  ==>\n    angle A B C === angle C D A  /\\   angle D A B === angle B C D\n    ==>  Parallelogram A B C D",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C D, H1, H2"),
+        @readable.have(
+          "\n    Quadrilateral B C D A",
+          "QuadBCDA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("QuadrilateralSymmetry", () => quadrilateralsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(B = C) /\\  ~(C = D) /\\  ~(D = A) /\\  ~Collinear B C D /\\  ~Collinear D A B",
+          "TetraABCD",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("Quadrilateral_DEF", () => quadrilateral_def()),
+              @readable.Thm("Tetralateral_DEF", () => tetralateral_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle B C D === angle D A B",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("TetraABCD"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("H2"),
+              @readable.Thm("C5Symmetric", () => c5symmetric()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "a",
+          "Line a /\\  A IN a /\\  B IN a    ",
+          "a_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "b",
+          "Line b /\\  B IN b /\\  C IN b    ",
+          "b_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "c",
+          "Line c  /\\  C IN c /\\  D IN c    ",
+          "c_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "d",
+          "Line d /\\  D IN d /\\  A IN d    ",
+          "d_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("TetraABCD"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("QuadBCDA"),
+            @readable.Label("H2"),
+            @readable.Label("H2'"),
+            @readable.Label("a_line"),
+            @readable.Label("b_line"),
+            @readable.Label("c_line"),
+            @readable.Label("d_line"),
+            @readable.Thm(
+              "OppositeAnglesCongImpliesParallelogramHelp",
+              () => oppositeanglescongimpliesparallelogramhelp(),
+            ),
+            @readable.Thm("Parallelogram_DEF", () => parallelogram_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6168,22 +20624,6 @@ let oppositeanglescongimpliesparallelogram_c : @lib.Cell[@kernel.Thm] = @lib.Cel
 /// `OppositeAnglesCongImpliesParallelogram`
 pub fn oppositeanglescongimpliesparallelogram() -> @kernel.Thm {
   oppositeanglescongimpliesparallelogram_c.get()
-}
-
-///|
-/// `exec_phrase_200`
-pub fn exec_phrase_200(x202 : Unit) -> Unit raise {
-  let _ = x202
-  {
-    @readable.thm_ref().val = oppositeanglescongimpliesparallelogramhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OppositeAnglesCongImpliesParallelogramHelp): thm);;
-fn step_406() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OppositeAnglesCongImpliesParallelogramHelp): thm);;", exec_phrase_200)
 }
 
 ///|
@@ -6270,7 +20710,143 @@ pub fn amd() -> @kernel.Thm {
 ///|
 /// ConverseAlternateInteriorAngles
 fn step_413() -> Unit raise {
-  conversealternateinteriorangles_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C E l m.  Line l ∧ A ∈ l ∧ E ∈ l  ⇒\n    Line m ∧ B ∈ m ∧ C ∈ m  ⇒ Line t ∧ A ∈ t ∧ B ∈ t  ⇒\n    ¬(A = E) ∧ ¬(B = C) ∧ ¬(A = B) ∧ E ∉ t ∧ C ∉ t  ⇒\n    ¬(C,E same_side t)  ⇒  l ∥ m\n    ⇒  ∡ E A B ≡ ∡ C B A\n\n  proof\n    intro_TAC ∀A B C E l m, l_line, m_line, t_line, Distinct, Cnsim_tE, para_lm;\n    ¬Collinear C B A     [] by fol Distinct t_line NonCollinearRaa CollinearSymmetry;\n    A ∉ m ∧ Angle (∡ C B A)     [notAm] by fol m_line - Collinear_DEF ∉ ANGLE;\n    consider D such that\n    ¬(A = D) ∧ D ∉ t ∧ ¬(C,D same_side t) ∧ seg A D ≡ seg A E  ∧  ∡ B A D ≡ ∡ C B A     [Dexists] by simplify C4OppositeSide -  Distinct t_line;\n    consider k such that\n    Line k ∧ A ∈ k ∧ D ∈ k     [k_line] by fol Distinct I1;\n    k ∥ m     [] by fol - m_line t_line Dexists Distinct AngleSymmetry AlternateInteriorAngles;\n    k = l     [] by fol m_line notAm l_line k_line - para_lm P;\n    D,E same_side t  ∧  A ∉ Open (D, E)  ∧  Collinear A E D     [] by fol t_line Distinct Dexists Cnsim_tE AtMost2Sides SameSide_DEF ∉ - k_line l_line Collinear_DEF;\n    ray A D = ray A E     [] by fol Distinct - IN_Ray Dexists RayWellDefined IN_DIFF IN_SING;\n    fol - Dexists AngleSymmetry Angle_DEF;\n  qed;\n")))
+  conversealternateinteriorangles_c.set(@readable.prove(
+    "\n  forall A B C E l m.  Line l /\\  A IN l /\\  E IN l  ==>\n    Line m /\\  B IN m /\\  C IN m  ==> Line t /\\  A IN t /\\  B IN t  ==>\n    ~(A = E) /\\  ~(B = C) /\\  ~(A = B) /\\  E NOTIN t /\\  C NOTIN t  ==>\n    ~(C,E same_side t)  ==>  l parallel m\n    ==>  angle E A B === angle C B A",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall A B C E l m, l_line, m_line, t_line, Distinct, Cnsim_tE, para_lm",
+        ),
+        @readable.have(
+          "\n    ~Collinear C B A",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Label("t_line"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN m /\\  Angle (angle C B A)",
+          "notAm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "D",
+          "~(A = D) /\\  D NOTIN t /\\  ~(C,D same_side t) /\\  seg A D === seg A E  /\\   angle B A D === angle C B A    ",
+          "Dexists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4OppositeSide", () => c4oppositeside()),
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Label("t_line"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "k",
+          "Line k /\\  A IN k /\\  D IN k    ",
+          "k_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    k parallel m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("m_line"),
+              @readable.Label("t_line"),
+              @readable.Label("Dexists"),
+              @readable.Label("Distinct"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+              @readable.Thm("AlternateInteriorAngles", () => alternateinteriorangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    k = l",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("notAm"),
+              @readable.Label("l_line"),
+              @readable.Label("k_line"),
+              @readable.Prev,
+              @readable.Label("para_lm"),
+              @readable.Thm("P", () => p()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    D,E same_side t  /\\   A NOTIN Open (D, E)  /\\   Collinear A E D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_line"),
+              @readable.Label("Distinct"),
+              @readable.Label("Dexists"),
+              @readable.Label("Cnsim_tE"),
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+              @readable.Thm("NOTIN", () => notin()),
+              @readable.Prev,
+              @readable.Label("k_line"),
+              @readable.Label("l_line"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ray A D = ray A E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Distinct"),
+              @readable.Prev,
+              @readable.Thm("IN_Ray", () => in_ray()),
+              @readable.Label("Dexists"),
+              @readable.Thm("RayWellDefined", () => raywelldefined()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("IN_SING", () => @sets.in_sing()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("Dexists"),
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Thm("Angle_DEF", () => angle_def()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6283,25 +20859,364 @@ pub fn conversealternateinteriorangles() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_201`
-pub fn exec_phrase_201(x203 : Unit) -> Unit raise {
-  let _ = x203
-  {
-    @readable.thm_ref().val = p()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((P): thm);;
-fn step_414() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((P): thm);;", exec_phrase_201)
-}
-
-///|
 /// HilbertTriangleSum
 fn step_415() -> Unit raise {
-  hilberttrianglesum_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C.  ¬Collinear A B C\n    ⇒  ∃E F. B ∈ Open (E, F)  ∧  C ∈ int_angle A B F  ∧\n           ∡ E B A ≡ ∡ C A B  ∧  ∡ C B F ≡ ∡ B C A\n\n  proof\n    intro_TAC ∀A B C, ABCncol;\n    ¬(A = B) ∧ ¬(A = C) ∧ ¬(B = C) ∧ ¬Collinear C A B     [Distinct] by fol ABCncol NonCollinearImpliesDistinct CollinearSymmetry;\n    consider l such that\n    Line l ∧ A ∈ l ∧ C ∈ l     [l_line] by fol Distinct I1;\n    consider x such that\n    Line x ∧ A ∈ x ∧ B ∈ x     [x_line] by fol Distinct I1;\n    consider y such that\n    Line y ∧ B ∈ y ∧ C ∈ y     [y_line] by fol Distinct I1;\n    C ∉ x     [notCx] by fol x_line ABCncol Collinear_DEF ∉;\n    Angle (∡ C A B)     [] by fol ABCncol CollinearSymmetry ANGLE;\n    consider E such that\n    ¬(B = E) ∧ E ∉ x ∧ ¬(C,E same_side x) ∧ seg B E ≡ seg A B ∧ ∡ A B E ≡ ∡ C A B     [Eexists] by simplify C4OppositeSide - Distinct x_line notCx;\n    consider m such that\n    Line m ∧ B ∈ m ∧ E ∈ m     [m_line] by fol - I1;\n    ∡ E B A ≡ ∡ C A B     [EBAeqCAB] by fol Eexists AngleSymmetry;\n    m ∥ l     [para_lm] by fol m_line l_line x_line Eexists Distinct notCx - AlternateInteriorAngles;\n    m ∩ l = ∅     [ml0] by fol - PARALLEL;\n    C ∉ m ∧ A ∉ m     [notACm] by fol - l_line INTER_COMM DisjointOneNotOther;\n    consider F such that\n    B ∈ Open (E, F)     [EBF] by fol Eexists B2';\n    ¬(B = F) ∧ F ∈ m     [EBF'] by fol - B1' m_line BetweenLinear;\n    ¬Collinear A B F ∧ F ∉ x      [ABFncol] by fol EBF' m_line notACm NonCollinearRaa CollinearSymmetry Collinear_DEF x_line ∉;\n    ¬(E,F same_side x) ∧ ¬(E,F same_side y)     [Ensim_yF] by fol EBF x_line y_line SameSide_DEF;\n    C,F same_side x     [Csim_xF] by fol x_line notCx Eexists ABFncol Eexists - AtMost2Sides;\n    C,A same_side m     [] by fol m_line l_line ml0 DisjointLinesImplySameSide;\n    C ∈ int_angle A B F     [CintABF] by fol ABFncol x_line m_line EBF' notCx notACm Csim_xF - IN_InteriorAngle;\n    A ∈ int_angle C B E     [] by fol EBF B1' - InteriorAngleSymmetry InteriorReflectionInterior;\n    A ∉ y  ∧  A,E same_side y     [Asim_yE] by fol y_line m_line - InteriorUse;\n    E ∉ y ∧ F ∉ y     [notEFy] by fol y_line m_line EBF' Eexists EBF' I1 Collinear_DEF notACm ∉;\n    E,A same_side y     [] by fol y_line - Asim_yE SameSideSymmetric;\n    ¬(A,F same_side y)     [Ansim_yF] by fol y_line notEFy Asim_yE - Ensim_yF SameSideTransitive;\n    ∡ F B C ≡ ∡ A C B     [] by fol m_line EBF' l_line y_line EBF' Distinct notEFy Asim_yE Ansim_yF para_lm ConverseAlternateInteriorAngles;\n    fol EBF CintABF EBAeqCAB - AngleSymmetry;\n  qed;\n")))
+  hilberttrianglesum_c.set(@readable.prove(
+    "\n  forall A B C.  ~Collinear A B C\n    ==>  ?E F. B IN Open (E, F)  /\\   C IN int_angle A B F  /\\ \n           angle E B A === angle C A B  /\\   angle C B F === angle B C A",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, ABCncol"),
+        @readable.have(
+          "\n    ~(A = B) /\\  ~(A = C) /\\  ~(B = C) /\\  ~Collinear C A B",
+          "Distinct",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABCncol"),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "l",
+          "Line l /\\  A IN l /\\  C IN l    ",
+          "l_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "x",
+          "Line x /\\  A IN x /\\  B IN x    ",
+          "x_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.consider(
+          "y",
+          "Line y /\\  B IN y /\\  C IN y    ",
+          "y_line",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Distinct"), @readable.Thm("I1", () => i1())],
+          ),
+        ),
+        @readable.have(
+          "\n    C NOTIN x",
+          "notCx",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("x_line"),
+              @readable.Label("ABCncol"),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Angle (angle C A B)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABCncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("ANGLE", () => angle()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E",
+          "~(B = E) /\\  E NOTIN x /\\  ~(C,E same_side x) /\\  seg B E === seg A B /\\  angle A B E === angle C A B    ",
+          "Eexists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("C4OppositeSide", () => c4oppositeside()),
+              @readable.Prev,
+              @readable.Label("Distinct"),
+              @readable.Label("x_line"),
+              @readable.Label("notCx"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "m",
+          "Line m /\\  B IN m /\\  E IN m    ",
+          "m_line",
+          @readable.by(@readable.fol, [@readable.Prev, @readable.Thm("I1", () => i1())]),
+        ),
+        @readable.have(
+          "\n    angle E B A === angle C A B",
+          "EBAeqCAB",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Eexists"),
+              @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    m parallel l",
+          "para_lm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("l_line"),
+              @readable.Label("x_line"),
+              @readable.Label("Eexists"),
+              @readable.Label("Distinct"),
+              @readable.Label("notCx"),
+              @readable.Prev,
+              @readable.Thm("AlternateInteriorAngles", () => alternateinteriorangles()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    m INTER l = {}",
+          "ml0",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("PARALLEL", () => parallel())],
+          ),
+        ),
+        @readable.have(
+          "\n    C NOTIN m /\\  A NOTIN m",
+          "notACm",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("l_line"),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+              @readable.Thm("DisjointOneNotOther", () => disjointonenotother()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "F",
+          "B IN Open (E, F)    ",
+          "EBF",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("Eexists"), @readable.Thm("B2'", () => b2_p())],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(B = F) /\\  F IN m",
+          "EBF'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Label("m_line"),
+              @readable.Thm("BetweenLinear", () => betweenlinear()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear A B F /\\  F NOTIN x",
+          "ABFncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EBF'"),
+              @readable.Label("m_line"),
+              @readable.Label("notACm"),
+              @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("x_line"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(E,F same_side x) /\\  ~(E,F same_side y)",
+          "Ensim_yF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EBF"),
+              @readable.Label("x_line"),
+              @readable.Label("y_line"),
+              @readable.Thm("SameSide_DEF", () => sameside_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,F same_side x",
+          "Csim_xF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("x_line"),
+              @readable.Label("notCx"),
+              @readable.Label("Eexists"),
+              @readable.Label("ABFncol"),
+              @readable.Label("Eexists"),
+              @readable.Prev,
+              @readable.Thm("AtMost2Sides", () => atmost2sides()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C,A same_side m",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("l_line"),
+              @readable.Label("ml0"),
+              @readable.Thm(
+                "DisjointLinesImplySameSide",
+                () => disjointlinesimplysameside(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    C IN int_angle A B F",
+          "CintABF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABFncol"),
+              @readable.Label("x_line"),
+              @readable.Label("m_line"),
+              @readable.Label("EBF'"),
+              @readable.Label("notCx"),
+              @readable.Label("notACm"),
+              @readable.Label("Csim_xF"),
+              @readable.Prev,
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A IN int_angle C B E",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EBF"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Prev,
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm(
+                "InteriorReflectionInterior",
+                () => interiorreflectioninterior(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    A NOTIN y  /\\   A,E same_side y",
+          "Asim_yE",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("y_line"),
+              @readable.Label("m_line"),
+              @readable.Prev,
+              @readable.Thm("InteriorUse", () => interioruse()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E NOTIN y /\\  F NOTIN y",
+          "notEFy",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("y_line"),
+              @readable.Label("m_line"),
+              @readable.Label("EBF'"),
+              @readable.Label("Eexists"),
+              @readable.Label("EBF'"),
+              @readable.Thm("I1", () => i1()),
+              @readable.Thm("Collinear_DEF", () => collinear_def()),
+              @readable.Label("notACm"),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    E,A same_side y",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("y_line"),
+              @readable.Prev,
+              @readable.Label("Asim_yE"),
+              @readable.Thm("SameSideSymmetric", () => samesidesymmetric()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~(A,F same_side y)",
+          "Ansim_yF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("y_line"),
+              @readable.Label("notEFy"),
+              @readable.Label("Asim_yE"),
+              @readable.Prev,
+              @readable.Label("Ensim_yF"),
+              @readable.Thm("SameSideTransitive", () => samesidetransitive()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle F B C === angle A C B",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("m_line"),
+              @readable.Label("EBF'"),
+              @readable.Label("l_line"),
+              @readable.Label("y_line"),
+              @readable.Label("EBF'"),
+              @readable.Label("Distinct"),
+              @readable.Label("notEFy"),
+              @readable.Label("Asim_yE"),
+              @readable.Label("Ansim_yF"),
+              @readable.Label("para_lm"),
+              @readable.Thm(
+                "ConverseAlternateInteriorAngles",
+                () => conversealternateinteriorangles(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("EBF"),
+            @readable.Label("CintABF"),
+            @readable.Label("EBAeqCAB"),
+            @readable.Prev,
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6314,25 +21229,346 @@ pub fn hilberttrianglesum() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_202`
-pub fn exec_phrase_202(x204 : Unit) -> Unit raise {
-  let _ = x204
-  {
-    @readable.thm_ref().val = conversealternateinteriorangles()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConverseAlternateInteriorAngles): thm);;
-fn step_416() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConverseAlternateInteriorAngles): thm);;", exec_phrase_202)
-}
-
-///|
 /// EuclidPropositionI_13
 fn step_417() -> Unit raise {
-  euclidpropositioni_13_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A O B A'.  ¬Collinear A O B  ∧  O ∈ Open (A, A')\n    ⇒  μ (∡ A O B) + μ (∡ B O A') = &180\n\n  proof\n    intro_TAC ∀A O B A', H1 H2;\n    case_split RightAOB | notRightAOB     by fol -;\n    suppose Right (∡ A O B);\n      Right (∡ B O A')  ∧  μ (∡ A O B) = &90  ∧  μ (∡ B O A') = &90     [] by fol H1 H2 - RightImpliesSupplRight AMb;\n      real_arithmetic -;\n    end;\n    suppose ¬Right (∡ A O B);\n      ¬(A = O) ∧ ¬(O = B)     [Distinct] by fol H1 NonCollinearImpliesDistinct;\n      consider l such that\n      Line l ∧ O ∈ l ∧ A ∈ l ∧ A' ∈ l     [l_line] by fol - I1 H2 BetweenLinear;\n      B ∉ l     [notBl] by fol - Distinct I1 Collinear_DEF H1 ∉;\n      consider F such that\n      Right (∡ O A F)  ∧  Angle (∡ O A F)     [RightOAF] by fol Distinct EuclidPropositionI_11 RightImpliesAngle;\n      ∃! r. Ray r ∧ ∃E. ¬(O = E) ∧ r = ray O E ∧ E ∉ l ∧ E,B same_side l ∧ ∡ A O E ≡ ∡ O A F     [] by simplify C4 - Distinct l_line notBl;\n      consider E such that\n      ¬(O = E)  ∧  E ∉ l  ∧  E,B same_side l  ∧  ∡ A O E ≡ ∡ O A F     [Eexists] by fol -;\n      ¬Collinear A O E     [AOEncol] by fol Distinct l_line - NonCollinearRaa CollinearSymmetry;\n      Right (∡ A O E)     [RightAOE] by fol - ANGLE RightOAF Eexists CongRightImpliesRight;\n      Right (∡ E O A')  ∧  μ (∡ A O E) = &90  ∧  μ (∡ E O A') = &90     [RightEOA'] by fol AOEncol H2 -  RightImpliesSupplRight AMb;\n      ¬(∡ A O B ≡ ∡ A O E)     [] by fol notRightAOB H1 ANGLE RightAOE CongRightImpliesRight;\n      ¬(∡ A O B = ∡ A O E)     [] by fol H1 AOEncol ANGLE - C5Reflexive;\n      ¬(ray O B = ray O E)     [] by fol - Angle_DEF;\n      B ∉ ray O E  ∧  O ∉ Open (B, E)     [] by fol Distinct - Eexists RayWellDefined IN_DIFF IN_SING ∉ l_line B1' SameSide_DEF;\n      ¬Collinear O E B     [] by fol - Eexists IN_Ray ∉;\n      E ∈ int_angle A O B  ∨  B ∈ int_angle A O E     [] by fol Distinct l_line Eexists notBl AngleOrdering - CollinearSymmetry InteriorAngleSymmetry;\n      case_split EintAOB | BintAOE     by fol -;\n      suppose E ∈ int_angle A O B;\n        B ∈ int_angle E O A'     [] by fol H2 - InteriorReflectionInterior;\n        μ (∡ A O B) = μ (∡ A O E) + μ (∡ E O B)  ∧\n        μ (∡ E O A') = μ (∡ E O B) + μ (∡ B O A')     [] by fol EintAOB - AMd;\n        real_arithmetic - RightEOA';\n      end;\n      suppose B ∈ int_angle A O E;\n        E ∈ int_angle B O A'     [] by fol H2 - InteriorReflectionInterior;\n        μ (∡ A O E) = μ (∡ A O B) + μ (∡ B O E)  ∧\n        μ (∡ B O A') = μ (∡ B O E) + μ (∡ E O A')     [] by fol BintAOE - AMd;\n        real_arithmetic - RightEOA';\n      end;\n    end;\n  qed;\n")))
+  euclidpropositioni_13_c.set(@readable.prove(
+    "\n  forall A O B A'.  ~Collinear A O B  /\\   O IN Open (A, A')\n    ==>  mu (angle A O B) + mu (angle B O A') = &180",
+    @readable.steps_then(
+      [@readable.intro_tac("forall A O B A', H1 H2")],
+      @readable.case_split(
+        "RightAOB | notRightAOB    ",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["Right (angle A O B)", "~Right (angle A O B)"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      Right (angle B O A')  /\\   mu (angle A O B) = &90  /\\   mu (angle B O A') = &90",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Label("H2"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "RightImpliesSupplRight",
+                        () => rightimpliessupplright(),
+                      ),
+                      @readable.Thm("AMb", () => amb()),
+                    ],
+                  ),
+                ),
+                @readable.by(@readable.real_arithmetic, [@readable.Prev]),
+              ],
+            ),
+            @readable.steps_then(
+              [
+                @readable.have(
+                  "\n      ~(A = O) /\\  ~(O = B)",
+                  "Distinct",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Thm(
+                        "NonCollinearImpliesDistinct",
+                        () => noncollinearimpliesdistinct(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "l",
+                  "Line l /\\  O IN l /\\  A IN l /\\  A' IN l    ",
+                  "l_line",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("I1", () => i1()),
+                      @readable.Label("H2"),
+                      @readable.Thm("BetweenLinear", () => betweenlinear()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      B NOTIN l",
+                  "notBl",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("Distinct"),
+                      @readable.Thm("I1", () => i1()),
+                      @readable.Thm("Collinear_DEF", () => collinear_def()),
+                      @readable.Label("H1"),
+                      @readable.Thm("NOTIN", () => notin()),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "F",
+                  "Right (angle O A F)  /\\   Angle (angle O A F)    ",
+                  "RightOAF",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Thm(
+                        "EuclidPropositionI_11",
+                        () => euclidpropositioni_11(),
+                      ),
+                      @readable.Thm("RightImpliesAngle", () => rightimpliesangle()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ?! r. Ray r /\\  ?E. ~(O = E) /\\  r = ray O E /\\  E NOTIN l /\\  E,B same_side l /\\  angle A O E === angle O A F",
+                  "",
+                  @readable.by(
+                    @readable.simplify,
+                    [
+                      @readable.Thm("C4", () => c4()),
+                      @readable.Prev,
+                      @readable.Label("Distinct"),
+                      @readable.Label("l_line"),
+                      @readable.Label("notBl"),
+                    ],
+                  ),
+                ),
+                @readable.consider(
+                  "E",
+                  "~(O = E)  /\\   E NOTIN l  /\\   E,B same_side l  /\\   angle A O E === angle O A F    ",
+                  "Eexists",
+                  @readable.by(@readable.fol, [@readable.Prev]),
+                ),
+                @readable.have(
+                  "\n      ~Collinear A O E",
+                  "AOEncol",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Label("l_line"),
+                      @readable.Prev,
+                      @readable.Thm("NonCollinearRaa", () => noncollinearraa()),
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      Right (angle A O E)",
+                  "RightAOE",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Label("RightOAF"),
+                      @readable.Label("Eexists"),
+                      @readable.Thm(
+                        "CongRightImpliesRight",
+                        () => congrightimpliesright(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      Right (angle E O A')  /\\   mu (angle A O E) = &90  /\\   mu (angle E O A') = &90",
+                  "RightEOA'",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("AOEncol"),
+                      @readable.Label("H2"),
+                      @readable.Prev,
+                      @readable.Thm(
+                        "RightImpliesSupplRight",
+                        () => rightimpliessupplright(),
+                      ),
+                      @readable.Thm("AMb", () => amb()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(angle A O B === angle A O E)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("notRightAOB"),
+                      @readable.Label("H1"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Label("RightAOE"),
+                      @readable.Thm(
+                        "CongRightImpliesRight",
+                        () => congrightimpliesright(),
+                      ),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(angle A O B = angle A O E)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("H1"),
+                      @readable.Label("AOEncol"),
+                      @readable.Thm("ANGLE", () => angle()),
+                      @readable.Prev,
+                      @readable.Thm("C5Reflexive", () => c5reflexive()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~(ray O B = ray O E)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [@readable.Prev, @readable.Thm("Angle_DEF", () => angle_def())],
+                  ),
+                ),
+                @readable.have(
+                  "\n      B NOTIN ray O E  /\\   O NOTIN Open (B, E)",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Prev,
+                      @readable.Label("Eexists"),
+                      @readable.Thm("RayWellDefined", () => raywelldefined()),
+                      @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                      @readable.Thm("IN_SING", () => @sets.in_sing()),
+                      @readable.Thm("NOTIN", () => notin()),
+                      @readable.Label("l_line"),
+                      @readable.Thm("B1'", () => b1_p()),
+                      @readable.Thm("SameSide_DEF", () => sameside_def()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      ~Collinear O E B",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Prev,
+                      @readable.Label("Eexists"),
+                      @readable.Thm("IN_Ray", () => in_ray()),
+                      @readable.Thm("NOTIN", () => notin()),
+                    ],
+                  ),
+                ),
+                @readable.have(
+                  "\n      E IN int_angle A O B  \\/  B IN int_angle A O E",
+                  "",
+                  @readable.by(
+                    @readable.fol,
+                    [
+                      @readable.Label("Distinct"),
+                      @readable.Label("l_line"),
+                      @readable.Label("Eexists"),
+                      @readable.Label("notBl"),
+                      @readable.Thm("AngleOrdering", () => angleordering()),
+                      @readable.Prev,
+                      @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+                      @readable.Thm(
+                        "InteriorAngleSymmetry",
+                        () => interioranglesymmetry(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+              @readable.case_split(
+                "EintAOB | BintAOE    ",
+                @readable.by(@readable.fol, [@readable.Prev]),
+                @list.List(["E IN int_angle A O B", "B IN int_angle A O E"]),
+                @list.List(
+                  [
+                    @readable.steps(
+                      [
+                        @readable.have(
+                          "\n        B IN int_angle E O A'",
+                          "",
+                          @readable.by(
+                            @readable.fol,
+                            [
+                              @readable.Label("H2"),
+                              @readable.Prev,
+                              @readable.Thm(
+                                "InteriorReflectionInterior",
+                                () => interiorreflectioninterior(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        @readable.have(
+                          "\n        mu (angle A O B) = mu (angle A O E) + mu (angle E O B)  /\\ \n        mu (angle E O A') = mu (angle E O B) + mu (angle B O A')",
+                          "",
+                          @readable.by(
+                            @readable.fol,
+                            [
+                              @readable.Label("EintAOB"),
+                              @readable.Prev,
+                              @readable.Thm("AMd", () => amd()),
+                            ],
+                          ),
+                        ),
+                        @readable.by(
+                          @readable.real_arithmetic,
+                          [@readable.Prev, @readable.Label("RightEOA'")],
+                        ),
+                      ],
+                    ),
+                    @readable.steps(
+                      [
+                        @readable.have(
+                          "\n        E IN int_angle B O A'",
+                          "",
+                          @readable.by(
+                            @readable.fol,
+                            [
+                              @readable.Label("H2"),
+                              @readable.Prev,
+                              @readable.Thm(
+                                "InteriorReflectionInterior",
+                                () => interiorreflectioninterior(),
+                              ),
+                            ],
+                          ),
+                        ),
+                        @readable.have(
+                          "\n        mu (angle A O E) = mu (angle A O B) + mu (angle B O E)  /\\ \n        mu (angle B O A') = mu (angle B O E) + mu (angle E O A')",
+                          "",
+                          @readable.by(
+                            @readable.fol,
+                            [
+                              @readable.Label("BintAOE"),
+                              @readable.Prev,
+                              @readable.Thm("AMd", () => amd()),
+                            ],
+                          ),
+                        ),
+                        @readable.by(
+                          @readable.real_arithmetic,
+                          [@readable.Prev, @readable.Label("RightEOA'")],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -6345,89 +21581,108 @@ pub fn euclidpropositioni_13() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_203`
-pub fn exec_phrase_203(x205 : Unit) -> Unit raise {
-  let _ = x205
-  {
-    @readable.thmlist_tactic_ref().val = @readable.real_arithmetic
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((real_arithmetic): thm list -> tactic);;
-fn step_418() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((real_arithmetic): thm list -> tactic);;", exec_phrase_203)
-}
-
-///|
-/// `exec_phrase_204`
-pub fn exec_phrase_204(x206 : Unit) -> Unit raise {
-  let _ = x206
-  {
-    @readable.thm_ref().val = rightimpliessupplright()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RightImpliesSupplRight): thm);;
-fn step_419() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RightImpliesSupplRight): thm);;", exec_phrase_204)
-}
-
-///|
-/// `exec_phrase_205`
-pub fn exec_phrase_205(x207 : Unit) -> Unit raise {
-  let _ = x207
-  {
-    @readable.thm_ref().val = amb()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AMb): thm);;
-fn step_420() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AMb): thm);;", exec_phrase_205)
-}
-
-///|
-/// `exec_phrase_206`
-pub fn exec_phrase_206(x208 : Unit) -> Unit raise {
-  let _ = x208
-  {
-    @readable.thm_ref().val = euclidpropositioni_11()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_11): thm);;
-fn step_421() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_11): thm);;", exec_phrase_206)
-}
-
-///|
-/// `exec_phrase_207`
-pub fn exec_phrase_207(x209 : Unit) -> Unit raise {
-  let _ = x209
-  {
-    @readable.thm_ref().val = amd()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AMd): thm);;
-fn step_422() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AMd): thm);;", exec_phrase_207)
-}
-
-///|
 /// TriangleSum
 fn step_423() -> Unit raise {
-  trianglesum_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A B C. ¬Collinear A B C\n    ⇒  μ (∡ A B C) + μ (∡ B C A) + μ (∡ C A B) = &180\n\n  proof\n    intro_TAC ∀A B C, ABCncol;\n    ¬Collinear C A B  ∧  ¬Collinear B C A     [CABncol] by fol ABCncol CollinearSymmetry;\n    consider E F such that\n    B ∈ Open (E, F)  ∧  C ∈ int_angle A B F  ∧  ∡ E B A ≡ ∡ C A B  ∧  ∡ C B F ≡ ∡ B C A     [EBF] by fol ABCncol HilbertTriangleSum;\n    ¬Collinear C B F  ∧  ¬Collinear A B F  ∧  Collinear E B F  ∧  ¬(B = E)     [CBFncol] by fol - InteriorAngleSymmetry InteriorEZHelp IN_InteriorAngle B1' CollinearSymmetry;\n    ¬Collinear E B A     [EBAncol] by fol CollinearSymmetry - NoncollinearityExtendsToLine;\n    μ (∡ A B F) = μ (∡ A B C) + μ (∡ C B F)     [μCintABF] by fol EBF AMd;\n    μ (∡ E B A) + μ (∡ A B F) = &180     [suppl180] by fol EBAncol EBF EuclidPropositionI_13;\n    μ (∡ C A B) = μ (∡ E B A)  ∧  μ (∡ B C A) = μ (∡ C B F)     [] by fol CABncol EBAncol CBFncol ANGLE EBF AMc;\n    real_arithmetic suppl180 μCintABF -;\n  qed;\n")))
+  trianglesum_c.set(@readable.prove(
+    "\n  forall A B C. ~Collinear A B C\n    ==>  mu (angle A B C) + mu (angle B C A) + mu (angle C A B) = &180",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall A B C, ABCncol"),
+        @readable.have(
+          "\n    ~Collinear C A B  /\\   ~Collinear B C A",
+          "CABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABCncol"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "E F",
+          "B IN Open (E, F)  /\\   C IN int_angle A B F  /\\   angle E B A === angle C A B  /\\   angle C B F === angle B C A    ",
+          "EBF",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ABCncol"),
+              @readable.Thm("HilbertTriangleSum", () => hilberttrianglesum()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear C B F  /\\   ~Collinear A B F  /\\   Collinear E B F  /\\   ~(B = E)",
+          "CBFncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("InteriorAngleSymmetry", () => interioranglesymmetry()),
+              @readable.Thm("InteriorEZHelp", () => interiorezhelp()),
+              @readable.Thm("IN_InteriorAngle", () => in_interiorangle()),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear E B A",
+          "EBAncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    mu (angle A B F) = mu (angle A B C) + mu (angle C B F)",
+          "muCintABF",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("EBF"), @readable.Thm("AMd", () => amd())],
+          ),
+        ),
+        @readable.have(
+          "\n    mu (angle E B A) + mu (angle A B F) = &180",
+          "suppl180",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("EBAncol"),
+              @readable.Label("EBF"),
+              @readable.Thm("EuclidPropositionI_13", () => euclidpropositioni_13()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    mu (angle C A B) = mu (angle E B A)  /\\   mu (angle B C A) = mu (angle C B F)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CABncol"),
+              @readable.Label("EBAncol"),
+              @readable.Label("CBFncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Label("EBF"),
+              @readable.Thm("AMc", () => amc()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.real_arithmetic,
+          [@readable.Label("suppl180"), @readable.Label("muCintABF"), @readable.Prev],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6440,57 +21695,183 @@ pub fn trianglesum() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_208`
-pub fn exec_phrase_208(x210 : Unit) -> Unit raise {
-  let _ = x210
-  {
-    @readable.thm_ref().val = hilberttrianglesum()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((HilbertTriangleSum): thm);;
-fn step_424() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((HilbertTriangleSum): thm);;", exec_phrase_208)
-}
-
-///|
-/// `exec_phrase_209`
-pub fn exec_phrase_209(x211 : Unit) -> Unit raise {
-  let _ = x211
-  {
-    @readable.thm_ref().val = euclidpropositioni_13()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EuclidPropositionI_13): thm);;
-fn step_425() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EuclidPropositionI_13): thm);;", exec_phrase_209)
-}
-
-///|
-/// `exec_phrase_210`
-pub fn exec_phrase_210(x212 : Unit) -> Unit raise {
-  let _ = x212
-  {
-    @readable.thm_ref().val = amc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((AMc): thm);;
-fn step_426() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((AMc): thm);;", exec_phrase_210)
-}
-
-///|
 /// CircleConvex2_THM
 fn step_427() -> Unit raise {
-  circleconvex2_thm_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀O A B C. ¬Collinear A O B  ⇒  B ∈ Open (A, C)  ⇒\n    seg O A <__ seg O B  ∨  seg O A ≡ seg O B\n    ⇒  seg O B <__ seg O C\n\n  proof\n    intro_TAC ∀O A B C, H1, H2, H3;\n    ¬Collinear O B A ∧ ¬Collinear B O A ∧ ¬Collinear O A B ∧ ¬(O = A) ∧ ¬(O = B)     [H1'] by fol H1 CollinearSymmetry NonCollinearImpliesDistinct;\n    B ∈ Open (C, A) ∧ ¬(C = A) ∧ ¬(C = B) ∧ Collinear A B C ∧ Collinear B A C     [H2'] by fol H2 B1' CollinearSymmetry;\n    ¬Collinear O B C ∧ ¬Collinear O C B     [OBCncol] by fol H1' - NoncollinearityExtendsToLine CollinearSymmetry;\n    ¬Collinear O A C     [OABncol] by fol H1' H2' NoncollinearityExtendsToLine;\n    ∡ O C B <_ang ∡ O B A     [OCBlessOBA] by fol OBCncol H2' ExteriorAngle;\n    ∡ O A B <_ang ∡ O B C     [OABlessOBC] by fol H1' H2 ExteriorAngle;\n    ∡ O B A <_ang ∡ B A O  ∨  ∡ O B A ≡ ∡ B A O     []\n    proof\n      assume seg O A ≡ seg O B [Cong]     by fol H3 H1' EuclidPropositionI_18;\n      seg O B ≡ seg O A     [] by fol H1' SEGMENT - C2Symmetric;\n      fol H1' - IsoscelesCongBaseAngles AngleSymmetry;\n    qed;\n    ∡ O B A <_ang ∡ O A B  ∨  ∡ O B A ≡ ∡ O A B     [OBAlessOAB] by fol - AngleSymmetry;\n    ∡ O C B <_ang ∡ O B C     [] by fol OCBlessOBA - OABlessOBC OBCncol H1' OABncol OBCncol ANGLE - AngleOrderTransitivity AngleTrichotomy2;\n    fol OBCncol - AngleSymmetry EuclidPropositionI_19;\n  qed;\n")))
+  circleconvex2_thm_c.set(@readable.prove(
+    "\n  forall O A B C. ~Collinear A O B  ==>  B IN Open (A, C)  ==>\n    seg O A <__ seg O B  \\/  seg O A === seg O B\n    ==>  seg O B <__ seg O C",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall O A B C, H1, H2, H3"),
+        @readable.have(
+          "\n    ~Collinear O B A /\\  ~Collinear B O A /\\  ~Collinear O A B /\\  ~(O = A) /\\  ~(O = B)",
+          "H1'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+              @readable.Thm(
+                "NonCollinearImpliesDistinct",
+                () => noncollinearimpliesdistinct(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    B IN Open (C, A) /\\  ~(C = A) /\\  ~(C = B) /\\  Collinear A B C /\\  Collinear B A C",
+          "H2'",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("B1'", () => b1_p()),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear O B C /\\  ~Collinear O C B",
+          "OBCncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Prev,
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+              @readable.Thm("CollinearSymmetry", () => collinearsymmetry()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    ~Collinear O A C",
+          "OABncol",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Label("H2'"),
+              @readable.Thm(
+                "NoncollinearityExtendsToLine",
+                () => noncollinearityextendstoline(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O C B <_ang angle O B A",
+          "OCBlessOBA",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OBCncol"),
+              @readable.Label("H2'"),
+              @readable.Thm("ExteriorAngle", () => exteriorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O A B <_ang angle O B C",
+          "OABlessOBC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1'"),
+              @readable.Label("H2"),
+              @readable.Thm("ExteriorAngle", () => exteriorangle()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O B A <_ang angle B A O  \\/  angle O B A === angle B A O",
+          "",
+          @readable.steps(
+            [
+              @readable.assuming(
+                "seg O A === seg O B",
+                "Cong",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H3"),
+                    @readable.Label("H1'"),
+                    @readable.Thm(
+                      "EuclidPropositionI_18",
+                      () => euclidpropositioni_18(),
+                    ),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      seg O B === seg O A",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H1'"),
+                    @readable.Thm("SEGMENT", () => segment()),
+                    @readable.Prev,
+                    @readable.Thm("C2Symmetric", () => c2symmetric()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("H1'"),
+                  @readable.Prev,
+                  @readable.Thm(
+                    "IsoscelesCongBaseAngles",
+                    () => isoscelescongbaseangles(),
+                  ),
+                  @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O B A <_ang angle O A B  \\/  angle O B A === angle O A B",
+          "OBAlessOAB",
+          @readable.by(
+            @readable.fol,
+            [@readable.Prev, @readable.Thm("AngleSymmetry", () => anglesymmetry())],
+          ),
+        ),
+        @readable.have(
+          "\n    angle O C B <_ang angle O B C",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("OCBlessOBA"),
+              @readable.Prev,
+              @readable.Label("OABlessOBC"),
+              @readable.Label("OBCncol"),
+              @readable.Label("H1'"),
+              @readable.Label("OABncol"),
+              @readable.Label("OBCncol"),
+              @readable.Thm("ANGLE", () => angle()),
+              @readable.Prev,
+              @readable.Thm("AngleOrderTransitivity", () => angleordertransitivity()),
+              @readable.Thm("AngleTrichotomy2", () => angletrichotomy2()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("OBCncol"),
+            @readable.Prev,
+            @readable.Thm("AngleSymmetry", () => anglesymmetry()),
+            @readable.Thm("EuclidPropositionI_19", () => euclidpropositioni_19()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6517,7 +21898,6 @@ fn load_steps() -> Unit raise {
   step_11()
   step_12()
   step_13()
-  step_15()
   step_14()
   step_16()
   step_17()
@@ -6561,354 +21941,155 @@ fn load_steps() -> Unit raise {
   step_55()
   step_56()
   step_57()
-  step_59()
-  step_60()
-  step_61()
   step_58()
-  step_63()
   step_62()
-  step_65()
   step_64()
-  step_67()
   step_66()
-  step_69()
   step_68()
-  step_71()
   step_70()
-  step_73()
-  step_74()
-  step_75()
   step_72()
-  step_77()
   step_76()
-  step_79()
   step_78()
-  step_81()
   step_80()
-  step_83()
-  step_84()
   step_82()
-  step_86()
-  step_87()
-  step_88()
   step_85()
-  step_90()
-  step_91()
   step_89()
-  step_93()
   step_92()
-  step_95()
   step_94()
-  step_97()
   step_96()
-  step_99()
-  step_100()
   step_98()
   step_101()
   step_102()
   step_103()
   step_104()
-  step_106()
   step_105()
   step_107()
-  step_109()
   step_108()
-  step_111()
-  step_112()
-  step_113()
-  step_114()
-  step_115()
   step_110()
-  step_117()
-  step_118()
   step_116()
-  step_120()
   step_119()
-  step_122()
-  step_123()
-  step_124()
-  step_125()
   step_121()
-  step_127()
-  step_128()
   step_126()
-  step_130()
   step_129()
   step_131()
   step_132()
-  step_134()
-  step_135()
-  step_136()
-  step_137()
-  step_138()
-  step_139()
-  step_140()
   step_133()
-  step_142()
   step_141()
   step_143()
-  step_145()
   step_144()
   step_146()
-  step_148()
-  step_149()
   step_147()
   step_150()
-  step_152()
-  step_153()
   step_151()
-  step_155()
-  step_156()
   step_154()
-  step_158()
-  step_159()
   step_157()
-  step_161()
-  step_162()
-  step_163()
   step_160()
   step_164()
-  step_166()
   step_165()
-  step_168()
   step_167()
-  step_170()
-  step_171()
   step_169()
-  step_173()
-  step_174()
   step_172()
   step_175()
-  step_177()
-  step_178()
-  step_179()
   step_176()
-  step_181()
   step_180()
-  step_183()
   step_182()
   step_184()
-  step_186()
   step_185()
   step_187()
-  step_189()
   step_188()
-  step_191()
-  step_192()
   step_190()
-  step_194()
   step_193()
-  step_196()
   step_195()
-  step_198()
-  step_199()
-  step_200()
   step_197()
-  step_202()
   step_201()
-  step_204()
   step_203()
-  step_206()
   step_205()
-  step_208()
-  step_209()
   step_207()
-  step_211()
-  step_212()
-  step_213()
   step_210()
-  step_215()
-  step_216()
-  step_217()
   step_214()
-  step_219()
   step_218()
   step_220()
-  step_222()
-  step_223()
   step_221()
-  step_225()
   step_224()
   step_226()
-  step_228()
-  step_229()
   step_227()
-  step_231()
   step_230()
-  step_233()
-  step_234()
   step_232()
-  step_236()
   step_235()
   step_237()
   step_238()
-  step_240()
-  step_241()
   step_239()
-  step_243()
   step_242()
-  step_245()
-  step_246()
-  step_247()
-  step_248()
   step_244()
   step_249()
-  step_251()
-  step_252()
-  step_253()
   step_250()
-  step_255()
   step_254()
-  step_257()
-  step_258()
-  step_259()
-  step_260()
   step_256()
   step_261()
-  step_263()
-  step_264()
-  step_265()
-  step_266()
   step_262()
-  step_268()
-  step_269()
   step_267()
   step_270()
-  step_272()
-  step_273()
   step_271()
-  step_275()
-  step_276()
   step_274()
-  step_278()
-  step_279()
-  step_280()
-  step_281()
   step_277()
-  step_283()
-  step_284()
   step_282()
-  step_286()
-  step_287()
-  step_288()
   step_285()
-  step_290()
-  step_291()
-  step_292()
-  step_293()
-  step_294()
   step_289()
-  step_296()
-  step_297()
   step_295()
-  step_299()
-  step_300()
   step_298()
   step_301()
-  step_303()
-  step_304()
   step_302()
-  step_306()
   step_305()
   step_307()
   step_308()
-  step_310()
-  step_311()
-  step_312()
   step_309()
-  step_314()
-  step_315()
   step_313()
-  step_317()
   step_316()
   step_318()
-  step_320()
-  step_321()
   step_319()
   step_322()
   step_323()
-  step_325()
   step_324()
-  step_327()
   step_326()
-  step_329()
   step_328()
-  step_331()
-  step_332()
-  step_333()
   step_330()
-  step_335()
   step_334()
   step_336()
   step_337()
   step_338()
-  step_340()
   step_339()
-  step_342()
-  step_343()
-  step_344()
   step_341()
-  step_346()
-  step_347()
   step_345()
   step_348()
-  step_350()
-  step_351()
   step_349()
-  step_353()
-  step_354()
   step_352()
   step_355()
-  step_357()
   step_356()
-  step_359()
   step_358()
   step_360()
   step_361()
   step_362()
   step_363()
-  step_365()
-  step_366()
   step_364()
-  step_368()
   step_367()
   step_369()
-  step_371()
   step_370()
-  step_373()
-  step_374()
   step_372()
-  step_376()
   step_375()
-  step_378()
   step_377()
   step_379()
-  step_381()
   step_380()
-  step_383()
-  step_384()
-  step_385()
   step_382()
   step_386()
-  step_388()
   step_387()
-  step_390()
   step_389()
-  step_392()
   step_391()
   step_393()
-  step_395()
   step_394()
   step_396()
-  step_398()
   step_397()
-  step_400()
-  step_401()
-  step_402()
   step_399()
-  step_404()
   step_403()
-  step_406()
   step_405()
   step_407()
   step_408()
@@ -6916,19 +22097,9 @@ fn load_steps() -> Unit raise {
   step_410()
   step_411()
   step_412()
-  step_414()
   step_413()
-  step_416()
   step_415()
-  step_418()
-  step_419()
-  step_420()
-  step_421()
-  step_422()
   step_417()
-  step_424()
-  step_425()
-  step_426()
   step_423()
   step_427()
 }
