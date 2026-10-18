@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "miz3/miz3 matches miz3/miz3.ml" {
+  let reserved = @printer.reserved_words()
   @miz3.load()
   let log = @testkit.Log::new()
   log.capture_reports()
@@ -5656,4 +5657,6 @@ test "miz3/miz3 matches miz3/miz3.ml" {
       #|
     ),
   )
+  assert_eq(@printer.reserved_words(), reserved)
+  check_local_keywords()
 }
