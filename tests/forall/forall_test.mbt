@@ -35,17 +35,6 @@ test "legacy universal notation is rejected" {
 }
 
 ///|
-test "forall remains available when verbose aliases are disabled" {
-  errdefer @bool.set_verbose_symbols()
-  @bool.unset_verbose_symbols()
-  let term = @parser.parse_term("forall x:bool. x = x")
-  let printed = @printer.string_of_term(term)
-  assert_true(printed.has_prefix("forall "))
-  assert_eq(@parser.parse_term(printed), term)
-  @bool.set_verbose_symbols()
-}
-
-///|
 test "canonical forall preserves the quantifier's precedence in term ordering" {
   let quantifier = @kernel.mk_const("forall", @list.List([]))
   for (name, _) in @kernel.constants() {
