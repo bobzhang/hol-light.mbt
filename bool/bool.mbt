@@ -1080,9 +1080,10 @@ pub fn existence(th : Thm) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-/// Enable verbose aliases for existence and truth values.
-/// `forall` is the canonical constant name and needs no alias.
-pub fn set_verbose_symbols() -> Unit raise {
+/// Install the word spellings `exists`, `existsunique`, `true` and `false`
+/// of `?`, `?!`, `T` and `F`: fixed syntax, set once at load. `forall` is
+/// the canonical constant name and needs no alias.
+fn set_verbose_symbols() -> Unit raise {
   for b in ["exists", "existsunique"] {
     @printer.parse_as_binder(b)
   }
@@ -1090,16 +1091,6 @@ pub fn set_verbose_symbols() -> Unit raise {
   @preterm.override_interface("false", q("F"))
   @preterm.override_interface("exists", q("(?):(A->bool)->bool"))
   @preterm.override_interface("existsunique", q("(?!):(A->bool)->bool"))
-}
-
-///|
-pub fn unset_verbose_symbols() -> Unit {
-  for b in ["exists", "existsunique"] {
-    @printer.unparse_as_binder(b)
-  }
-  for s in ["true", "false", "exists", "existsunique"] {
-    @preterm.remove_interface(s)
-  }
 }
 
 // ---------------------------------------------------------------------------

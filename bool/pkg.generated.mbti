@@ -115,8 +115,6 @@ pub fn pinst(@list.List[(@kernel.HolType, @kernel.HolType)], @list.List[(@kernel
 
 pub fn prove_hyp(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
 
-pub fn set_verbose_symbols() -> Unit raise
-
 pub fn simple_choose(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
 
 pub fn simple_disj_cases(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
@@ -138,8 +136,6 @@ pub fn truth() -> @kernel.Thm
 pub fn undisch(@kernel.Thm) -> @kernel.Thm raise
 
 pub fn undisch_all(@kernel.Thm) -> @kernel.Thm raise
-
-pub fn unset_verbose_symbols() -> Unit
 
 // Errors
 
