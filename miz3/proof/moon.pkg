@@ -1,0 +1,12 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/equal",
+  "bobzhang/hol_light/tactics",
+  "bobzhang/hol_light/examples/holby",
+  "moonbitlang/core/list",
+}
+
+import {
+  "bobzhang/hol_light/bool",
+} for "test"
