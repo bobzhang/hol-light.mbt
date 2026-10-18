@@ -1,0 +1,94 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/term_syntax/internal/grammar"
+
+import {
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn pretype(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Pretype raise ParseError
+
+pub fn term(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Preterm raise ParseError
+
+// Errors
+pub suberror ParseError {
+  UnexpectedToken(Token, (Int, Int), Array[TokenKind])
+  UnexpectedEndOfInput(Int, Array[TokenKind])
+} derive(@debug.Debug)
+
+// Types and methods
+pub(all) enum Token {
+  LIDENT(String)
+  UIDENT(String)
+  INT(String)
+  INFIX1(String)
+  INFIX3(String)
+  DOT_LIDENT(String)
+  TRUE
+  FALSE
+  IF
+  ELSE
+  FORALL
+  EXISTS
+  IMPLIES
+  BARBAR
+  AMPERAMPER
+  PLUS
+  MINUS
+  STAR
+  EXCLAMATION
+  LPAREN
+  RPAREN
+  LBRACKET
+  RBRACKET
+  LBRACE
+  RBRACE
+  COMMA
+  COLON
+  FAT_ARROW
+  THIN_ARROW
+  UNDERSCORE
+  EOF
+} derive(@debug.Debug)
+pub fn Token::kind(Self) -> TokenKind
+
+pub(all) enum TokenKind {
+  TK_LIDENT
+  TK_UIDENT
+  TK_INT
+  TK_INFIX1
+  TK_INFIX3
+  TK_DOT_LIDENT
+  TK_TRUE
+  TK_FALSE
+  TK_IF
+  TK_ELSE
+  TK_FORALL
+  TK_EXISTS
+  TK_IMPLIES
+  TK_BARBAR
+  TK_AMPERAMPER
+  TK_PLUS
+  TK_MINUS
+  TK_STAR
+  TK_EXCLAMATION
+  TK_LPAREN
+  TK_RPAREN
+  TK_LBRACKET
+  TK_RBRACKET
+  TK_LBRACE
+  TK_RBRACE
+  TK_COMMA
+  TK_COLON
+  TK_FAT_ARROW
+  TK_THIN_ARROW
+  TK_UNDERSCORE
+  TK_EOF
+}
+pub impl Show for TokenKind
+pub impl @debug.Debug for TokenKind
+
+// Type aliases
+
+// Traits

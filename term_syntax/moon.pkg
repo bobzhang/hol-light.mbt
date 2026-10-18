@@ -1,0 +1,14 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/preterm",
+  "bobzhang/hol_light/term_syntax/internal/grammar",
+  "moonbitlang/core/list",
+  "moonbitlang/core/debug",
+}
+
+import {
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/nums",
+  "bobzhang/hol_light/lists",
+} for "test"

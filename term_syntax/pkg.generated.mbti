@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/term_syntax"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/preterm",
+}
+
+// Values
+pub fn parse_preterm(String) -> @preterm.Preterm raise
+
+pub fn parse_term(String) -> @kernel.Term raise
+
+pub fn parse_type(String) -> @kernel.HolType raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

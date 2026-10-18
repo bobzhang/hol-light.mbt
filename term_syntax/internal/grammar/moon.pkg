@@ -1,0 +1,7 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/list",
+}
+
+formatter(ignore: [ "grammar.mbt" ])
