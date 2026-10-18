@@ -16,22 +16,12 @@ using @kernel {type Term, type HolType}
 using @list {type List}
 
 ///|
-/// Treat the varstruct `\const. bod` as a variable.
-pub let ignore_constant_varstruct : Ref[Bool] = Ref::{ val: true, }
-
-///|
 /// Warn when type variables are invented in quotations.
 pub let type_invention_warning : Ref[Bool] = Ref::{ val: true, }
 
 ///|
 /// Fail when type variables are invented in quotations.
 pub let type_invention_error : Ref[Bool] = Ref::{ val: false, }
-
-///|
-/// Implicit types or type schemes for non-constants.
-pub let the_implicit_types : Ref[List[(String, HolType)]] = Ref::{
-  val: @list.List([]),
-}
 
 // ---------------------------------------------------------------------------
 // Overloading and interface mapping.
@@ -319,11 +309,6 @@ fn get_generic_type(cname : String) -> HolType raise {
 }
 
 ///|
-fn get_var_type(vname : String) -> HolType raise {
-  @lib.assoc(vname, the_implicit_types.val)
-}
-
-///|
 type Env = @lib.Func[Int64, Pretype]
 
 ///|
@@ -511,13 +496,7 @@ fn typify(
         let ptm = Constp(s, pty)
         (ptm, @list.List([]), unify(Some(ptm), uenv, pty, ty))
       } else {
-        let ptm = Varp(s, ty)
-        if !@lib.can(get_var_type, s) {
-          (ptm, @list.singleton((s, ty)), uenv)
-        } else {
-          let pty = pretype_instance(get_var_type(s))
-          (ptm, @list.singleton((s, ty)), unify(Some(ptm), uenv, pty, ty))
-        }
+        (Varp(s, ty), @list.singleton((s, ty)), uenv)
       }
     }
     Combp(f, x) => {
@@ -541,9 +520,9 @@ fn typify(
       let uenv0 = unify(Some(ptm), uenv, ty3, ty)
       let (v1, venv1, uenv1) = {
         let (v1, venv1, uenv1) = typify(ty1, v, @list.List([]), uenv0)
+        // A constant bound by a lambda is treated as a variable.
         match v1 {
-          Constp(s, _) if ignore_constant_varstruct.val =>
-            (Varp(s, ty1), @list.singleton((s, ty1)), uenv0)
+          Constp(s, _) => (Varp(s, ty1), @list.singleton((s, ty1)), uenv0)
           _ => (v1, venv1, uenv1)
         }
       }
