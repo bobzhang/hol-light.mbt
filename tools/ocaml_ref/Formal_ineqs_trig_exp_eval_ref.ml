@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/trig/exp_eval.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/trig/exp_eval/exp_eval_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/19_exp_eval_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

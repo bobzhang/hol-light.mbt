@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/tactics_ext.ml (translated by tools/translator). Keep
-   in sync with jordan/tactics_ext/tactics_ext_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/05_tactics_ext_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

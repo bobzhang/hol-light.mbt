@@ -1,5 +1,5 @@
 (* Load-fidelity test for Arithmetic/fol.ml (translated by tools/translator). Keep
-   in sync with arithmetic/fol/fol_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with arithmetic/make/01_fol_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

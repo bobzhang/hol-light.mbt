@@ -1,5 +1,5 @@
 (* Load-fidelity test for Complex/grobner_examples.ml (translated by tools/translator). Keep
-   in sync with complex/grobner_examples/grobner_examples_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with complex/make/09_grobner_examples_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for Arithmetic/sigmacomplete.ml (translated by tools/translator). Keep
-   in sync with arithmetic/sigmacomplete/sigmacomplete_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with arithmetic/make/07_sigmacomplete_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

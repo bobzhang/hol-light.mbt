@@ -1,5 +1,5 @@
 (* Load-fidelity test for Complex/quelim_examples.ml (translated by tools/translator). Keep
-   in sync with complex/quelim_examples/quelim_examples_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with complex/make/08_quelim_examples_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

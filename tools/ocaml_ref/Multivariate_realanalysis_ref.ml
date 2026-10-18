@@ -1,5 +1,5 @@
 (* Load-fidelity test for Multivariate/realanalysis.ml (translated by tools/translator). Keep
-   in sync with multivariate/realanalysis/realanalysis_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with multivariate/make/18_realanalysis_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

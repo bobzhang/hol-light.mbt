@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/trig/matan_eval.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/trig/matan_eval/matan_eval_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/29_matan_eval_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for Permutation/qsort.ml (translated by tools/translator). Keep
-   in sync with permutation/qsort/qsort_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with permutation/make/04_qsort_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/clausal_form.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/clausal_form/clausal_form_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/05_clausal_form_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

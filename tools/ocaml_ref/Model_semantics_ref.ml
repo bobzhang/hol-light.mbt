@@ -1,5 +1,5 @@
 (* Load-fidelity test for Model/semantics.ml (translated by tools/translator). Keep
-   in sync with model/semantics/semantics_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with model/make/03_semantics_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

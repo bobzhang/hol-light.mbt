@@ -1,5 +1,5 @@
 (* Load-fidelity test for Logic/resolution.ml (translated by tools/translator). Keep
-   in sync with logic/resolution/resolution_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with logic/make/09_resolution_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

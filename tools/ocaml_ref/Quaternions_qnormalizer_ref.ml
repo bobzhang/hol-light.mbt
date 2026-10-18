@@ -1,5 +1,5 @@
 (* Load-fidelity test for Quaternions/qnormalizer.ml (translated by tools/translator). Keep
-   in sync with quaternions/qnormalizer/qnormalizer_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with quaternions/make/04_qnormalizer_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

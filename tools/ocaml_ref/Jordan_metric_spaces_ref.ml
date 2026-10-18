@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/metric_spaces.ml (translated by tools/translator). Keep
-   in sync with jordan/metric_spaces/metric_spaces_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/13_metric_spaces_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

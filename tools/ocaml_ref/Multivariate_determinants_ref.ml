@@ -1,5 +1,5 @@
 (* Load-fidelity test for Multivariate/determinants.ml (translated by tools/translator). Keep
-   in sync with multivariate/determinants/determinants_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with multivariate/make/05_determinants_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

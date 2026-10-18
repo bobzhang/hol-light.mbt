@@ -1,5 +1,5 @@
 (* Load-fidelity test for Arithmetic/derived.ml (translated by tools/translator). Keep
-   in sync with arithmetic/derived/derived_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with arithmetic/make/06_derived_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/jordan_curve_theorem.ml (translated by tools/translator). Keep
-   in sync with jordan/jordan_curve_theorem/jordan_curve_theorem_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/14_jordan_curve_theorem_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

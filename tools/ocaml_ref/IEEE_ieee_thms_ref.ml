@@ -1,5 +1,5 @@
 (* Load-fidelity test for IEEE/ieee_thms.ml (translated by tools/translator). Keep
-   in sync with ieee/ieee_thms/ieee_thms_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with ieee/make/07_ieee_thms_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

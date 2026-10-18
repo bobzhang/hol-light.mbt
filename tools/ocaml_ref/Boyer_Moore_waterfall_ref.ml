@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/waterfall.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/waterfall/waterfall_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/06_waterfall_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

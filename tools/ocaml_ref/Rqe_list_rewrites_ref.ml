@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/list_rewrites.ml (translated by tools/translator). Keep
-   in sync with rqe/list_rewrites/list_rewrites_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/08_list_rewrites_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

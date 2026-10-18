@@ -1,5 +1,5 @@
 (* Load-fidelity test for Cadical/cadical.ml (translated by tools/translator). Keep
-   in sync with cadical/cadical/cadical_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with cadical/make/04_cadical_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

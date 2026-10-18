@@ -1,5 +1,5 @@
 (* Load-fidelity test for Multivariate/clifford.ml (translated by tools/translator). Keep
-   in sync with multivariate/clifford/clifford_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with multivariate/make/12_clifford_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

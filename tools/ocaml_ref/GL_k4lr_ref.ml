@@ -1,5 +1,5 @@
 (* Load-fidelity test for GL/k4lr.ml (translated by tools/translator). Keep
-   in sync with gl/k4lr/k4lr_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with gl/make/05_k4lr_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

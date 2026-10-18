@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/signs_thms.ml (translated by tools/translator). Keep
-   in sync with rqe/signs_thms/signs_thms_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/22_signs_thms_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

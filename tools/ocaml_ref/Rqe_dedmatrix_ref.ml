@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/dedmatrix.ml (translated by tools/translator). Keep
-   in sync with rqe/dedmatrix/dedmatrix_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/34_dedmatrix_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

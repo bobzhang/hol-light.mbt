@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/irrelevance.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/irrelevance/irrelevance_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/14_irrelevance_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/arith/arith_num.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/arith/arith_num/arith_num_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/04_arith_num_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

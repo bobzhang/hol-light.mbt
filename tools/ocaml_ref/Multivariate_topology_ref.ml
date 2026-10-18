@@ -1,5 +1,5 @@
 (* Load-fidelity test for Multivariate/topology.ml (translated by tools/translator). Keep
-   in sync with multivariate/topology/topology_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with multivariate/make/06_topology_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

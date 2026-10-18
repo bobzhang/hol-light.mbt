@@ -1,5 +1,5 @@
 (* Load-fidelity test for Permutation/permuted.ml (translated by tools/translator). Keep
-   in sync with permutation/permuted/permuted_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with permutation/make/02_permuted_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

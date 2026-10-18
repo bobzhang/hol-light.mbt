@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/num_ext_nabs.ml (translated by tools/translator). Keep
-   in sync with jordan/num_ext_nabs/num_ext_nabs_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/07_num_ext_nabs_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

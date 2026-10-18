@@ -1,5 +1,5 @@
 (* Load-fidelity test for Divstep/hull_light.ml (translated by tools/translator). Keep
-   in sync with divstep/hull_light/hull_light_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with divstep/make/03_hull_light_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

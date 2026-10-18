@@ -1,5 +1,5 @@
 (* Load-fidelity test for Logic/birkhoff.ml (translated by tools/translator). Keep
-   in sync with logic/birkhoff/birkhoff_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with logic/make/16_birkhoff_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for IEEE/float.ml (translated by tools/translator). Keep
-   in sync with ieee/float/float_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with ieee/make/04_float_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

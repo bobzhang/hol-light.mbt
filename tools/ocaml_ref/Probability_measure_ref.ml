@@ -1,5 +1,5 @@
 (* Load-fidelity test for Probability/measure.ml (translated by tools/translator). Keep
-   in sync with probability/probability_measure/probability_measure_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with probability/make/01_probability_measure_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

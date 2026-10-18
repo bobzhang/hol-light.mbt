@@ -1,5 +1,5 @@
 (* Load-fidelity test for GL/completeness.ml (translated by tools/translator). Keep
-   in sync with gl/completeness/completeness_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with gl/make/04_completeness_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

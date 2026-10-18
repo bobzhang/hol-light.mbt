@@ -1,5 +1,5 @@
 (* Load-fidelity test for Unity/mk_unity_prog.ml (translated by tools/translator). Keep
-   in sync with unity/mk_unity_prog/mk_unity_prog_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with unity/make/08_mk_unity_prog_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

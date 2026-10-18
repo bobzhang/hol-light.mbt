@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/parse_ext_override_interface.ml (translated by tools/translator). Keep
-   in sync with jordan/parse_ext_override_interface/parse_ext_override_interface_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/04_parse_ext_override_interface_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

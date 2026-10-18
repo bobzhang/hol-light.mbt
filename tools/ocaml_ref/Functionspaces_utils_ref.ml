@@ -1,5 +1,5 @@
 (* Load-fidelity test for Functionspaces/utils.ml (translated by tools/translator). Keep
-   in sync with functionspaces/utils/utils_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with functionspaces/make/01_utils_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

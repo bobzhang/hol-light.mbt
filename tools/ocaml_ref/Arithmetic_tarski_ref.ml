@@ -1,5 +1,5 @@
 (* Load-fidelity test for Arithmetic/tarski.ml (translated by tools/translator). Keep
-   in sync with arithmetic/tarski/tarski_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with arithmetic/make/03_tarski_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;
