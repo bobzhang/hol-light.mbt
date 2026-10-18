@@ -33,7 +33,8 @@ reference and re-embeds its golden.
 1. Remove ambient syntax mutation (lexer, constant hiding, toggles, direct
    interface writes): done (#141-#145). Proof-script languages (miz3,
    Mizar, Mizar Light, Isabelle Light) removed; the MoonBit proof API is
-   `proof`. Left: overload priorities (`prioritize_*`,
+   `proof`. RichterHilbertAxiomGeometry's readable-format proofs are MoonBit
+   programs (`@readable.prove`), and the text format's parser is gone. Left: overload priorities (`prioritize_*`,
    `override_interface`) and type abbreviations, decided with step 2.
 2. A sub-MoonBit term syntax parsed by `moonbitlang/parser`
    (`∀ x : _, body`, `∃ x : _, body`, `→`), with a printer, checked by

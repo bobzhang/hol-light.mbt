@@ -37,9 +37,9 @@ Files that run an external program (csdp for `Examples/sos.ml`'s REAL_SOS,
 cadical, MiniSat, maxima for WZ/, cdd for LP_arith/, Prover9) load without
 it: the program's runs are recorded when the reference output is made and
 replayed (`<pkg>/commands.mbt`); the kernel checks the proofs they lead to.
-Files that give OCaml to the toplevel as strings (the proofs of readable.ml
-name their theorems and tactics so) run the MoonBit translation of
-each string the reference session ran (`@lib.exec_phrase`).
+The proofs RichterHilbertAxiomGeometry/ wrote in readable.ml's text format
+are MoonBit programs (`@readable.prove`, `steps`, `have`, `by`, ...;
+richterhilbertaxiomgeometry/readable/script.mbt) that build the same tactics.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the reference
