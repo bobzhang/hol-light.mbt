@@ -13,8 +13,10 @@
 pub(all) enum Arg {
   /// `-`: the most recent assumption
   Prev
-  /// The theorem `name`. If it cannot be evaluated (it is defined later),
-  /// the assumption labelled `name`, as the text format does.
+  /// The theorem `name`; if evaluating it raises, the assumption labelled
+  /// `name`. A theorem whose theory is not loaded yet aborts instead
+  /// (`@lib.Cell::get`), so refer to an assumption that shares a theorem's
+  /// name with `Label`.
   Thm(String, () -> @kernel.Thm raise)
   /// The assumption labelled with the string.
   Label(String)
