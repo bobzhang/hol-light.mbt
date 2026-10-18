@@ -389,11 +389,11 @@ fn yy_action_3(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
 
 ///|
 // file:///./grammar.mbty
-// 124|    "!" prefix_expr { apply(pvar("~"), $2) }
+// 124|    "!" prefix_expr { apply(pconst("~"), $2) }
 fn yy_action_4(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   guard! _args[1].0 is YYObj__preterm_Preterm(_dollar2)
   YYObj__preterm_Preterm(
-    ({();  apply(pvar("~"), _dollar2) 
+    ({();  apply(pconst("~"), _dollar2) 
     })
   )
 }
@@ -1054,11 +1054,11 @@ fn yy_action_58(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj 
 
 ///|
 // file:///./grammar.mbty
-// 123|    "-" prefix_expr { apply(pvar("--"), $2) }
+// 123|    "-" prefix_expr { apply(pconst("--"), $2) }
 fn yy_action_59(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   guard! _args[1].0 is YYObj__preterm_Preterm(_dollar2)
   YYObj__preterm_Preterm(
-    ({();  apply(pvar("--"), _dollar2) 
+    ({();  apply(pconst("--"), _dollar2) 
     })
   )
 }
@@ -1245,20 +1245,20 @@ fn yy_action_73(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj 
 
 ///|
 // file:///./grammar.mbty
-// 156|    "true" { pvar("T") }
+// 156|    "true" { pconst("T") }
 fn yy_action_74(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   YYObj__preterm_Preterm(
-    ({();  pvar("T") 
+    ({();  pconst("T") 
     })
   )
 }
 
 ///|
 // file:///./grammar.mbty
-// 157|    "false" { pvar("F") }
+// 157|    "false" { pconst("F") }
 fn yy_action_75(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   YYObj__preterm_Preterm(
-    ({();  pvar("F") 
+    ({();  pconst("F") 
     })
   )
 }
