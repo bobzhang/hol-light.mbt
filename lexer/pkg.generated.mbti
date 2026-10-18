@@ -3,11 +3,10 @@ package "bobzhang/hol_light/lexer"
 
 import {
   "moonbitlang/core/debug",
-  "moonbitlang/core/ref",
 }
 
 // Values
-pub let comment_token : @ref.Ref[Lexcode]
+pub fn is_reserved_word(String) -> Bool
 
 pub fn lex(String) -> Array[Lexcode] raise
 

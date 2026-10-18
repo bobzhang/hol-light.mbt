@@ -6,15 +6,9 @@ test "parser consumes lexer tokens" {
 }
 
 ///|
-test "parser uses lexer comment configuration" {
-  let saved = @lexer.comment_token.val
-  fn restore() {
-    @lexer.comment_token.val = saved
-  }
-  errdefer restore()
-  @lexer.comment_token.val = Ident("!")
-  assert_eq(@parser.parse_type("A ! ignored"), @parser.parse_type("A"))
-  restore()
+test "line comments are fixed lexer syntax" {
+  assert_eq(@parser.parse_type("A // ignored"), @parser.parse_type("A"))
+  assert_true(@lexer.is_reserved_word("//"))
 }
 
 ///|

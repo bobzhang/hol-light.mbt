@@ -523,10 +523,8 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
       s53(x52)
     }, x, y)
   })
-  let comment_string = match @lexer.comment_token.val {
-    @lexer.Lexcode::Resword(t) => t
-    @lexer.Lexcode::Ident(t_1) => t_1
-  }
+  // HOL's fixed line-comment marker.
+  let comment_string = "//"
   match i {
     Empty => {
       if e {
@@ -574,7 +572,7 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
 fn step_28() -> Unit raise {
   let reserve1 : (String) -> @lexer.Lexcode raise = fn(x56 : String) -> @lexer.Lexcode raise {
     let n = x56
-    if @printer.is_reserved_word(n) || @lib.mem(n, mizar_words()) {
+    if @lexer.is_reserved_word(n) || @lib.mem(n, mizar_words()) {
       @lexer.Lexcode::Resword(n)
     } else {
       @lexer.Lexcode::Ident(n)

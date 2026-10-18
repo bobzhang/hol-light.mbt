@@ -53,6 +53,7 @@ import {
 }
 
 import {
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/testkit",
 } for "test"
 

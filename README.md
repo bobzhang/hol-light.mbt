@@ -60,12 +60,14 @@ Library and Multivariate packages load on demand, after what they need:
 let th = @prime.prime_2()
 ```
 
-The `lexer` package owns `Lexcode`, `lex`, and `comment_token`.
+The `lexer` package owns `Lexcode`, `lex`, and the fixed reserved words
+(`is_reserved_word`); `//` starts a line comment. Loading a theory cannot
+reserve words or change comment syntax.
 The `parser` package consumes lexer tokens and owns parser combinators and
 type/term parsing. `lex` returns an owned `Array[Lexcode]`; token parsers take
 `ArrayView[Lexcode]` and return the unconsumed suffix as a view into the same array.
-Keep the token array unchanged while parsing. Both packages use the syntax tables
-in `printer`.
+Keep the token array unchanged while parsing. Both packages use the character
+classes and operator tables in `printer`.
 
 Universal quantification uses `forall x. P x`, including `(forall)` when the
 quantifier is passed as a function. The old `!x. P x` and `(!)` spellings are
