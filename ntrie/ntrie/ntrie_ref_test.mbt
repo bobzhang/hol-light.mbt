@@ -5911,4 +5911,5 @@ test "Ntrie/ntrie matches Ntrie/ntrie.ml" {
   )
   // Run extra parsing after the upstream counter snapshot.
   check_ntrie_term_construction()
+  check_ntrie_disjointness_without_sugar()
 }
