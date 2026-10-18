@@ -79,15 +79,10 @@ command_INJECTIVE command_injective
 command_RECURSION command_recursion
 correct correct
 deterministic deterministic
-dive_to_var dive_to_var
 find_pwp find_pwp
-parse_program parse_program
-parse_program_assertion parse_program_assertion
-reserve_program_words reserve_program_words
 sem_CASES sem_cases
 sem_INDUCT sem_induct
 sem_RULES sem_rules
 terminates terminates
-unreserve_program_words unreserve_program_words
 wlp wlp
 wp wp

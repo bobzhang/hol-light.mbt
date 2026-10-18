@@ -20,8 +20,6 @@ test "Examples/prog matches Examples/prog.ml" {
     ] {
     log.show_theory_output(th)
   }
-  // The factorial assertion uses the explicit domain parser, so it is not
-  // included in the general HOL parser's quotation trace.
   log.show_theory_trace("Examples/prog")
   log.capture_stdout()
   // BEGIN generated theorem list
@@ -5840,7 +5838,7 @@ test "Examples/prog matches Examples/prog.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|0..0..solved at 2
-      #|Examples/prog quotations (107):
+      #|Examples/prog quotations (108):
       #|  FALSE = \\x:S. F
       #|  TRUE = \\x:S. T
       #|  NOT p = \\x:S. ~(p x)
@@ -5948,6 +5946,7 @@ test "Examples/prog matches Examples/prog.ml" {
       #|  correct p (ASSERT b) q
       #|  correct p SKIP q
       #|  x < n
+      #|  correct\n  (\\(x,y,n). T)\n  (Assign (\\(x,y,n). (0,y,n)) Seq\n   Assign (\\(x,y,n). (x,1,n)) Seq\n   AWHILE (\\(x,y,n). x <= n /\\ (y = FACT x))\n          (MEASURE (\\(x,y,n). n - x))\n          (\\(x,y,n). x < n)\n          (Assign (\\(x,y,n). (x + 1,y,n)) Seq\n           Assign (\\(x,y,n). (x,y * x,n))))\n  (\\(x,y,n). y = FACT n)
       #|FALSE =  |- ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) #FALSE:fun('S,bool)) (\x:'S. #F:bool))
       #|TRUE =  |- ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) #TRUE:fun('S,bool)) (\x:'S. #T:bool))
       #|NOT =  |- (#forall:fun(fun(fun('S,bool),bool),bool) (\p:fun('S,bool). ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) (#NOT:fun(fun('S,bool),fun('S,bool)) p:fun('S,bool))) (\x:'S. (#~:fun(bool,bool) (p:fun('S,bool) x:'S))))))
@@ -6037,5 +6036,5 @@ test "Examples/prog matches Examples/prog.ml" {
     ),
   )
   // Keep additional parsing after the upstream counter snapshot.
-  check_explicit_program_syntax()
+  check_program_terms()
 }
