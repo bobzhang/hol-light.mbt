@@ -8,25 +8,30 @@ fn check_ntrie_term_construction() -> Unit raise {
   assert_false(@printer.is_reserved_word("%%"))
   for
     (values, source) in [
-      (@list.List([]), "NTRIE NEMPTY"),
-      (@list.List([0L]), "NTRIE NZERO"),
-      (@list.List([1L]), "NTRIE (NNODE NEMPTY NZERO)"),
-      (@list.List([0L, 1L, 2L]), "NTRIE (NNODE (NNODE NZERO NZERO) NZERO)"),
+      ([], "NTRIE NEMPTY"),
+      ([0L], "NTRIE NZERO"),
+      ([1L], "NTRIE (NNODE NEMPTY NZERO)"),
+      ([0L, 1L, 2L], "NTRIE (NNODE (NNODE NZERO NZERO) NZERO)"),
     ] {
     let parsed = parse(source)
     assert_eq(@ntrie.mk_small_ntrie(values), parsed)
-    assert_eq(@ntrie.mk_ntrie(values.map(@num.num_of_int64)), parsed)
+    assert_eq(
+      @ntrie.mk_ntrie(@list.List(values).map(@num.num_of_int64)),
+      parsed,
+    )
     assert_eq(
       @lib.sort((a, b) => a < b, @ntrie.dest_small_ntrie(parsed)),
-      values,
+      @list.List(values),
     )
     assert_eq(parse(@printer.string_of_term(parsed)), parsed)
   }
-  let values = @list.List([0L, 1L, 2L])
+  let values = [0L, 1L, 2L]
   assert_eq(
-    @ntrie.mk_small_ntrie(@list.List([0L, 1L, 2L, 2L])),
+    @ntrie.mk_small_ntrie([0L, 1L, 2L, 2L]),
     @ntrie.mk_small_ntrie(values),
   )
+  let input = [99L, 1L, 3L, 99L]
+  assert_eq(@ntrie.mk_small_ntrie(input[1:3]), @ntrie.mk_small_ntrie([1L, 3L]))
   let large = @num.num_of_string("18446744073709551616")
   let term = @ntrie.mk_ntrie(@list.List([large]))
   assert_eq(@ntrie.dest_ntrie(term), @list.List([large]))
