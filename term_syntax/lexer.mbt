@@ -3,13 +3,33 @@
 // end in primes (x', s''), as HOL's variables do.
 
 ///|
-fn keyword(name : String) -> @grammar.Token {
+/// MoonBit's keywords and reserved words (moonbitlang/lexer), which are not
+/// identifiers.
+let moonbit_keywords : Array[String] = [
+  "as", "extern", "fn", "let", "var", "proof_assert", "proof_let", "const",
+  "match", "using", "mut", "type", "struct", "enum", "extenum", "trait", "derive",
+  "while", "break", "continue", "import", "return", "throw", "raise", "try",
+  "catch", "pub", "priv", "readonly", "test", "loop", "for", "in", "impl", "with",
+  "guard", "async", "is", "suberror", "and", "letrec", "enumview", "extend",
+  "noraise", "defer", "errdefer", "lexmatch", "lexscan", "where", "declare",
+  "nobreak", "nocancel", "package", "module", "move", "ref", "static", "super",
+  "unsafe", "use", "await", "dyn", "abstract", "do", "final", "macro", "override",
+  "typeof", "virtual", "yield", "local", "method", "alias", "assert", "assume",
+]
+
+///|
+fn keyword(name : String) -> @grammar.Token raise {
   match name {
     "true" => TRUE
     "false" => FALSE
     "if" => IF
     "else" => ELSE
-    _ => LIDENT(name)
+    _ =>
+      if moonbit_keywords.contains(name) {
+        raise Failure("term syntax: " + name + " is a MoonBit keyword")
+      } else {
+        LIDENT(name)
+      }
   }
 }
 

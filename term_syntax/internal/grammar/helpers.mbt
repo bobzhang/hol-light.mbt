@@ -3,8 +3,39 @@
 // usual elaboration (@preterm.retypecheck).
 
 ///|
+/// An identifier the term spells.
 fn pvar(name : String) -> @preterm.Preterm {
   @preterm.Varp(name, @preterm.dpty)
+}
+
+///|
+/// The prefix of a constant the syntax itself stands for (`true`, `&&`,
+/// `if`, ...): no binder captures it, and the name resolution
+/// (@term_syntax.parse_preterm) removes it.
+pub let generated_mark : String = "\u{1}"
+
+///|
+fn pconst(name : String) -> @preterm.Preterm {
+  @preterm.Varp(generated_mark + name, @preterm.dpty)
+}
+
+///|
+let semantic_error : Ref[String?] = Ref::{ val: None }
+
+///|
+/// Record that the input has no meaning; the parse reports the first one.
+fn reject(msg : String) -> Unit {
+  if semantic_error.val is None {
+    semantic_error.val = Some(msg)
+  }
+}
+
+///|
+/// The first error recorded since the last call, if any.
+pub fn take_error() -> String? {
+  let e = semantic_error.val
+  semantic_error.val = None
+  e
 }
 
 ///|
@@ -26,7 +57,7 @@ fn binary(
   lhs : @preterm.Preterm,
   rhs : @preterm.Preterm,
 ) -> @preterm.Preterm {
-  apply(apply(pvar(op), lhs), rhs)
+  apply(apply(pconst(op), lhs), rhs)
 }
 
 ///|
@@ -37,7 +68,7 @@ fn comparison(
 ) -> @preterm.Preterm {
   match op {
     "==" => binary("=", lhs, rhs)
-    "!=" => apply(pvar("~"), binary("=", lhs, rhs))
+    "!=" => apply(pconst("~"), binary("=", lhs, rhs))
     _ => binary(op, lhs, rhs)
   }
 }
@@ -50,7 +81,10 @@ fn infix3(
 ) -> @preterm.Preterm {
   match op {
     "/" => binary("/", lhs, rhs)
-    _ => abort("operator " + op + " has no HOL meaning")
+    _ => {
+      reject("operator " + op + " has no HOL meaning")
+      lhs
+    }
   }
 }
 
@@ -70,7 +104,7 @@ fn quantify(
   ty : @preterm.Pretype,
   body : @preterm.Preterm,
 ) -> @preterm.Preterm {
-  apply(pvar(q), @preterm.Absp(typed(pvar(name), ty), body))
+  apply(pconst(q), @preterm.Absp(typed(pvar(name), ty), body))
 }
 
 ///|
@@ -95,7 +129,7 @@ fn cond(
   a : @preterm.Preterm,
   b : @preterm.Preterm,
 ) -> @preterm.Preterm {
-  applies(pvar("COND"), @list.List([c, a, b]))
+  applies(pconst("COND"), @list.List([c, a, b]))
 }
 
 ///|
@@ -110,7 +144,7 @@ fn tuple(es : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
 
 ///|
 fn list(es : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
-  es.rev().fold(init=pvar("NIL"), (t, e) => binary("CONS", e, t))
+  es.rev().fold(init=pconst("NIL"), (t, e) => binary("CONS", e, t))
 }
 
 ///|
@@ -126,20 +160,21 @@ fn named_type(
   let arity = @kernel.get_type_arity(lower) catch { _ => -1L }
   if arity >= 0L {
     if arity != args.length().to_int64() {
-      abort("type " + name + " takes \{arity} arguments")
+      reject("type " + name + " takes \{arity} arguments")
     }
     @preterm.Ptycon(lower, args)
   } else if args.is_empty() {
     @preterm.Utv(name)
   } else {
-    abort("unknown type " + name)
+    reject("unknown type " + name)
+    @preterm.Utv(name)
   }
 }
 
 ///|
 fn check_no_hole(ty : @preterm.Pretype) -> @preterm.Pretype {
   if ty == @preterm.dpty {
-    abort("_ is only allowed as the whole type of a binder")
+    reject("_ is only allowed as the whole type of a binder")
   }
   ty
 }

@@ -120,8 +120,8 @@ infix_expr -> @preterm.Preterm
   ;
 
 prefix_expr -> @preterm.Preterm
-  : "-" prefix_expr { apply(pvar("--"), $2) }
-  | "!" prefix_expr { apply(pvar("~"), $2) }
+  : "-" prefix_expr { apply(pconst("--"), $2) }
+  | "!" prefix_expr { apply(pconst("~"), $2) }
   | simple_expr { $1 }
   ;
 
@@ -153,8 +153,8 @@ simple_expr -> @preterm.Preterm
   ;
 
 atomic_expr -> @preterm.Preterm
-  : "true" { pvar("T") }
-  | "false" { pvar("F") }
+  : "true" { pconst("T") }
+  | "false" { pconst("F") }
   | INT { pvar($1) }
   ;
 

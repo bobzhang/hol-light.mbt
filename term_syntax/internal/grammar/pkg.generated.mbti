@@ -7,7 +7,11 @@ import {
 }
 
 // Values
+pub let generated_mark : String
+
 pub fn pretype(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Pretype raise ParseError
+
+pub fn take_error() -> String?
 
 pub fn term(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Preterm raise ParseError
 

@@ -20,12 +20,85 @@ fn describe(e : @grammar.ParseError) -> String {
 }
 
 ///|
+fn binder_name(v : @preterm.Preterm) -> String {
+  match v {
+    Varp(n, _) => n
+    Typing(Varp(n, _), _) => n
+    _ => ""
+  }
+}
+
+///|
+fn rename_binder(v : @preterm.Preterm, n : String) -> @preterm.Preterm {
+  match v {
+    Varp(_, ty) => Varp(n, ty)
+    Typing(Varp(_, ty), pty) => Typing(Varp(n, ty), pty)
+    _ => v
+  }
+}
+
+///|
+/// Whether a variable named `n` would be read as a constant: the name of
+/// one, or an interface name (`exists`, `+`, ...).
+fn names_constant(n : String) -> Bool {
+  (try @kernel.get_const_type(n) catch { _ => None } noraise { _ => Some(()) })
+  is Some(_) ||
+  @printer.the_interface.val.iter().any(e => e.0 == n)
+}
+
+///|
+/// Resolve names: a constant the syntax stands for (`true`, `&&`, ...)
+/// drops its mark, and an identifier a binder in scope binds is that
+/// variable. A binder named like a constant is renamed with primes, with the
+/// identifiers it binds, so that the elaboration can neither read it as the
+/// constant nor capture a constant with it.
+fn resolve_names(
+  t : @preterm.Preterm,
+  bound : @list.List[(String, String)],
+) -> @preterm.Preterm {
+  match t {
+    Varp(n, ty) if n.has_prefix(@grammar.generated_mark) =>
+      Varp(n[@grammar.generated_mark.length():].to_owned(), ty)
+    Varp(n, ty) =>
+      match bound.iter().find_first(b => b.0 == n) {
+        Some((_, renamed)) => Varp(renamed, ty)
+        None => t
+      }
+    Constp(_, _) => t
+    Combp(f, x) => Combp(resolve_names(f, bound), resolve_names(x, bound))
+    Absp(v, b) => {
+      let n = binder_name(v)
+      let mut renamed = n
+      while names_constant(renamed) {
+        renamed = renamed + "'"
+      }
+      Absp(
+        rename_binder(v, renamed),
+        resolve_names(b, bound.prepend((n, renamed))),
+      )
+    }
+    Typing(x, ty) => Typing(resolve_names(x, bound), ty)
+  }
+}
+
+///|
+fn check_semantics() -> Unit raise {
+  match @grammar.take_error() {
+    Some(msg) => raise Failure("term syntax: " + msg)
+    None => ()
+  }
+}
+
+///|
 /// The preterm of `s`, before elaboration.
 pub fn parse_preterm(s : String) -> @preterm.Preterm raise {
   let toks = tokens(s)
-  @grammar.term(toks) catch {
+  ignore(@grammar.take_error())
+  let ptm = @grammar.term(toks) catch {
     e => raise Failure("term syntax: " + describe(e))
   }
+  check_semantics()
+  resolve_names(ptm, @list.List([]))
 }
 
 ///|
@@ -40,8 +113,10 @@ pub fn parse_term(s : String) -> @kernel.Term raise {
 /// The HOL type `s` denotes.
 pub fn parse_type(s : String) -> @kernel.HolType raise {
   let toks = tokens(s)
+  ignore(@grammar.take_error())
   let pty = @grammar.pretype(toks) catch {
     e => raise Failure("term syntax: " + describe(e))
   }
+  check_semantics()
   @preterm.type_of_pretype(pty)
 }

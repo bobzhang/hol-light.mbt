@@ -59,3 +59,37 @@ test "syntax errors name the offset" {
   }
   assert_true(msg.has_prefix("term syntax: unexpected"))
 }
+
+///|
+test "binders cannot capture what the syntax stands for" {
+  // true is the constant T even under a binder named T
+  same("(T : Bool) => true", "\\x:bool. T")
+  same("(T : Bool) => T", "\\x:bool. x")
+  same("(NIL : Num) => [NIL]", "\\x:num. [x]")
+  // a binder named like a constant or an interface name binds its uses
+  same("(SUC : Num) => SUC", "\\x:num. x")
+  same("(exists : Num) => exists", "\\x:num. x")
+}
+
+///|
+fn rejects(s : String, is_type? : Bool = false) -> String raise {
+  try {
+    if is_type {
+      ignore(@term_syntax.parse_type(s))
+    } else {
+      ignore(@term_syntax.parse_term(s))
+    }
+    fail("accepted: " + s)
+  } catch {
+    Failure(m) => m
+    e => raise e
+  }
+}
+
+///|
+test "input without a meaning is an error, not an abort" {
+  inspect(rejects("1 % 2"), content="term syntax: operator % has no HOL meaning")
+  inspect(rejects("Bool[Num]", is_type=true), content="term syntax: type Bool takes 0 arguments")
+  inspect(rejects("(_) -> Bool", is_type=true), content="term syntax: _ is only allowed as the whole type of a binder")
+  inspect(rejects("(let : Bool) => let"), content="term syntax: let is a MoonBit keyword")
+}
