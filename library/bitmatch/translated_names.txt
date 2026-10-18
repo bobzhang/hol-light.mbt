@@ -63,8 +63,6 @@ pp_print_bitmatch pp_print_bitmatch
 pp_print_bitpat pp_print_bitpat
 pp_print_colored_bitmatch pp_print_colored_bitmatch
 pp_print_colored_bitpat pp_print_colored_bitpat
-preparse_bitmatch preparse_bitmatch
-preparse_bitpat preparse_bitpat
 print_bitmatch print_bitmatch
 print_bitpat print_bitpat
 string_of_bitmatch string_of_bitmatch

@@ -3,11 +3,9 @@ package "bobzhang/hol_light/library/bitmatch"
 
 import {
   "bobzhang/hol_light/kernel",
-  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/lib",
   "bobzhang/hol_light/num",
   "bobzhang/hol_light/pp",
-  "bobzhang/hol_light/preterm",
   "moonbitlang/core/debug",
   "moonbitlang/core/list",
 }
@@ -103,6 +101,10 @@ pub fn match_eq() -> @kernel.Thm
 
 pub fn match_seqpattern() -> @kernel.Thm
 
+pub fn mk_bitmatch(@kernel.Term, ArrayView[(@kernel.Term, @kernel.Term)], default? : @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_bitpat(ArrayView[@kernel.Term]) -> @kernel.Term raise
+
 pub fn nilpat() -> @kernel.Thm
 
 pub fn nilpat_pat_set() -> @kernel.Thm
@@ -110,10 +112,6 @@ pub fn nilpat_pat_set() -> @kernel.Thm
 pub fn nilpat_pat_size() -> @kernel.Thm
 
 pub fn only_bitmatch_cases_then((@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
-
-pub fn parse_bitmatch(String) -> @kernel.Term raise
-
-pub fn parse_bitpat(String) -> @kernel.Term raise
 
 pub fn pat_extract() -> @kernel.Thm
 
@@ -136,10 +134,6 @@ pub fn pp_print_bitpat(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
 pub fn pp_print_colored_bitmatch(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
 
 pub fn pp_print_colored_bitpat(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
-
-pub fn preparse_bitmatch(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
-
-pub fn preparse_bitpat(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
 pub fn print_bitmatch(@kernel.Term) -> Unit raise
 

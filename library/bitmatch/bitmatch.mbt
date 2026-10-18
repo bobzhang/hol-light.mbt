@@ -811,356 +811,6 @@ pub fn word1_odd() -> @kernel.Thm {
 }
 
 ///|
-let preparse_bitpat_c : @lib.Cell[
-  (ArrayView[@lexer.Lexcode]) -> (
-    @preterm.Preterm,
-    ArrayView[@lexer.Lexcode],
-  ) raise,
-] = @lib.Cell::new("preparse_bitpat")
-
-///|
-/// `preparse_bitpat`
-pub fn preparse_bitpat(
-  x : ArrayView[@lexer.Lexcode],
-) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise {
-  preparse_bitpat_c.get()(x)
-}
-
-///|
-let preparse_bitmatch_c : @lib.Cell[
-  (ArrayView[@lexer.Lexcode]) -> (
-    @preterm.Preterm,
-    ArrayView[@lexer.Lexcode],
-  ) raise,
-] = @lib.Cell::new("preparse_bitmatch")
-
-///|
-/// `preparse_bitmatch`
-pub fn preparse_bitmatch(
-  x : ArrayView[@lexer.Lexcode],
-) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise {
-  preparse_bitmatch_c.get()(x)
-}
-
-///|
-/// preparse_bitpat, preparse_bitmatch
-fn step_19() -> Unit raise {
-  let bitmatch_ptm = @preterm.Preterm::Varp("_BITMATCH", @preterm.dpty)
-  let nilpat_ptm = @preterm.Preterm::Varp("NILPAT", @preterm.dpty)
-  let conspat_ptm = @preterm.Preterm::Varp("CONSPAT", @preterm.dpty)
-  let word_ptm = @preterm.Preterm::Varp("word", @preterm.dpty)
-  let word1_ptm = @preterm.Preterm::Varp("word1", @preterm.dpty)
-  let arb_ptm = @preterm.Preterm::Varp("ARB", @preterm.dpty)
-  let ung_ptm = @preterm.Preterm::Varp("_UNGUARDED_PATTERN", @preterm.dpty)
-  let seqp_ptm = @preterm.Preterm::Varp("_SEQPATTERN", @preterm.dpty)
-  let else_ptm = @preterm.Preterm::Varp("_ELSEPATTERN", @preterm.dpty)
-  fn pfrees(x60 : @preterm.Preterm) -> @list.List[@preterm.Preterm] raise {
-    let ptm = x60
-    match ptm {
-      @preterm.Preterm::Varp(v, pty) =>
-        if v == "" && pty == @preterm.dpty {
-          @list.List([])
-        } else if @lib.can(@kernel.get_const_type, v) ||
-          @lib.can(@num.num_of_string, v) ||
-          @lib.exists(
-            fn(x61 : (String, (String, @kernel.HolType))) -> Bool raise {
-              let (w, _) = x61
-              v == w
-            },
-            @printer.the_interface.val,
-          ) {
-          @list.List([])
-        } else {
-          @list.List([ptm])
-        }
-      @preterm.Preterm::Constp(_, _) => @list.List([])
-      @preterm.Preterm::Combp(p1, p2) => {
-        let t62 = pfrees(p2)
-        @lib.union(pfrees(p1), t62)
-      }
-      @preterm.Preterm::Absp(p1_1, p2_1) => {
-        let t63 = pfrees(p1_1)
-        @lib.subtract(pfrees(p2_1), t63)
-      }
-      @preterm.Preterm::Typing(p, _) => pfrees(p)
-    }
-  }
-  let gcounter = Ref::{ val: 0L, }
-  let pgenvar : (Unit) -> @preterm.Preterm raise = fn(
-    x64 : Unit,
-  ) -> @preterm.Preterm raise {
-    let _ = x64
-    let count = gcounter.val
-    {
-      gcounter.val = @lib.add63(count, 1L)
-      ()
-    }
-    @preterm.Preterm::Varp("BM%PVAR%" + Int64::to_string(count), @preterm.dpty)
-  }
-  let pmk_exists : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise = fn(
-    x65 : @preterm.Preterm,
-  ) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise {
-    let v_1 = x65
-    fn(x66 : @preterm.Preterm) -> @preterm.Preterm raise {
-      let ptm_1 = x66
-      let t67 = @preterm.Preterm::Absp(v_1, ptm_1)
-      @preterm.Preterm::Combp(@preterm.Preterm::Varp("?", @preterm.dpty), t67)
-    }
-  }
-  fn to_bitpat(
-    x78 : @preterm.Preterm,
-    x79 : @preterm.Preterm,
-  ) -> @preterm.Preterm raise {
-    let p_1 = x78
-    let e_1 = x79
-    match e_1 {
-      @preterm.Preterm::Varp("NIL", _) => p_1
-      @preterm.Preterm::Combp(
-        @preterm.Preterm::Combp(@preterm.Preterm::Varp("CONS", _), a),
-        e_2
-      ) => {
-        let e2 = match a {
-          @preterm.Preterm::Typing(a_1, i) => {
-            let a_2 = match a_1 {
-              @preterm.Preterm::Varp(s, _) if @lib.can(@num.num_of_string, s) =>
-                @preterm.Preterm::Combp(word_ptm, a_1)
-              _ => a_1
-            }
-            @preterm.Preterm::Typing(
-              a_2,
-              @preterm.Pretype::Ptycon("word", @list.List([i])),
-            )
-          }
-          a_3 => @preterm.Preterm::Combp(word1_ptm, a_3)
-        }
-        to_bitpat(
-          @preterm.Preterm::Combp(@preterm.Preterm::Combp(conspat_ptm, p_1), e2),
-          e_2,
-        )
-      }
-      _ => raise @parserutil.Noparse
-    }
-  }
-  let bitpat_1 : (ArrayView[@lexer.Lexcode]) -> (
-    @preterm.Preterm,
-    ArrayView[@lexer.Lexcode],
-  ) raise = @parserutil.map(@parser.parse_preterm, (x80 : @preterm.Preterm) => {
-    to_bitpat(nilpat_ptm, x80)
-  })
-  let t83 = @parserutil.map(bitpat_1, fn(
-    x82 : @preterm.Preterm,
-  ) -> @preterm.Preterm? raise {
-    let x_1 = x82
-    Some(x_1)
-  })
-  let pattern : (ArrayView[@lexer.Lexcode]) -> (
-    @preterm.Preterm?,
-    ArrayView[@lexer.Lexcode],
-  ) raise = @parserutil.alt(
-    @parserutil.map(@parserutil.a(@lexer.Lexcode::Ident("_")), fn(
-      x81 : @lexer.Lexcode,
-    ) -> @preterm.Preterm? raise {
-      None
-    }),
-    t83,
-  )
-  let clause : (ArrayView[@lexer.Lexcode]) -> (
-    (@preterm.Preterm?, @preterm.Preterm),
-    ArrayView[@lexer.Lexcode],
-  ) raise = @parserutil.seq(
-    pattern,
-    @parserutil.map(
-      @parserutil.seq(
-        @parserutil.a(@lexer.Lexcode::Resword("->")),
-        @parser.parse_preterm,
-      ),
-      fn(x84 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
-        x84.1
-      },
-    ),
-  )
-  let t85 = @parserutil.listof(
-    clause,
-    @parserutil.a(@lexer.Lexcode::Resword("|")),
-    "pattern-match clause",
-  )
-  let clauses : (ArrayView[@lexer.Lexcode]) -> (
-    @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-    ArrayView[@lexer.Lexcode],
-  ) raise = @parserutil.map(
-    @parserutil.seq(@parserutil.possibly(@parserutil.a(@lexer.Lexcode::Resword("|"))), t85),
-    fn(
-      x86 : (
-        @list.List[@lexer.Lexcode],
-        @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-      ),
-    ) -> @list.List[(@preterm.Preterm?, @preterm.Preterm)] raise {
-      x86.1
-    },
-  )
-  let t88 = @parserutil.a(@lexer.Lexcode::Resword("with"))
-  let t90 = @parserutil.map(
-    @parserutil.seq(
-      @parserutil.seq(
-        @parserutil.seq(
-          @parserutil.a(@lexer.Lexcode::Resword("bitmatch")),
-          @parser.parse_preterm,
-        ),
-        t88,
-      ),
-      clauses,
-    ),
-    fn(
-      x89 : (
-        ((@lexer.Lexcode, @preterm.Preterm), @lexer.Lexcode),
-        @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-      ),
-    ) -> @preterm.Preterm raise {
-      ((x68, x69) => {
-        pmk_bitmatch_l(
-          pgenvar, else_ptm, arb_ptm, pmk_exists, pfrees, ung_ptm, seqp_ptm, bitmatch_ptm,
-          x68, x69,
-        )
-      })(x89.0, x89.1)
-    },
-  )
-  let (preparse_bitpat, preparse_bitmatch) = (
-    @parserutil.map(
-      @parserutil.seq(@parserutil.a(@lexer.Lexcode::Resword("BITPAT")), bitpat_1),
-      fn(x87 : (@lexer.Lexcode, @preterm.Preterm)) -> @preterm.Preterm raise {
-        x87.1
-      },
-    ),
-    t90,
-  )
-  preparse_bitpat_c.set(preparse_bitpat)
-  preparse_bitmatch_c.set(preparse_bitmatch)
-}
-
-///|
-fn pmk_clauses_l(
-  else_ptm : @preterm.Preterm,
-  arb_ptm : @preterm.Preterm,
-  x : @preterm.Preterm,
-  y : @preterm.Preterm,
-  pmk_exists : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise,
-  pfrees : (@preterm.Preterm) -> @list.List[@preterm.Preterm] raise,
-  ung_ptm : @preterm.Preterm,
-  seqp_ptm : @preterm.Preterm,
-  x70 : @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-) -> @preterm.Preterm raise {
-  let pmk_clauses_opt = (
-    x71 : @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-  ) => {
-    pmk_clauses_opt_l(
-      else_ptm, arb_ptm, x, y, pmk_exists, pfrees, ung_ptm, seqp_ptm, x71,
-    )
-  }
-  let cs_1 = x70
-  match pmk_clauses_opt(cs_1) {
-    Some(t) => t
-    None => @preterm.Preterm::Combp(else_ptm, arb_ptm)
-  }
-}
-
-///|
-fn pmk_clauses_opt_l(
-  else_ptm : @preterm.Preterm,
-  arb_ptm : @preterm.Preterm,
-  x : @preterm.Preterm,
-  y : @preterm.Preterm,
-  pmk_exists : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise,
-  pfrees : (@preterm.Preterm) -> @list.List[@preterm.Preterm] raise,
-  ung_ptm : @preterm.Preterm,
-  seqp_ptm : @preterm.Preterm,
-  x71 : @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-) -> @preterm.Preterm? raise {
-  let pmk_clauses = (x70 : @list.List[(@preterm.Preterm?, @preterm.Preterm)]) => {
-    pmk_clauses_l(
-      else_ptm, arb_ptm, x, y, pmk_exists, pfrees, ung_ptm, seqp_ptm, x70,
-    )
-  }
-  let cs_2 = x71
-  match cs_2 {
-    Empty => None
-    More((None, res), tail=cs_3) => Some(@preterm.Preterm::Combp(else_ptm, res))
-    More((Some(pat), res_1), tail=cs_4) => {
-      let tx = @preterm.Preterm::Combp(
-        @preterm.Preterm::Combp(
-          @preterm.Preterm::Varp("pat_set", @preterm.dpty),
-          pat,
-        ),
-        x,
-      )
-      let ty = @preterm.Preterm::Combp(
-        @preterm.Preterm::Combp(
-          @preterm.Preterm::Varp("=", @preterm.dpty),
-          res_1,
-        ),
-        y,
-      )
-      let t75 = @preterm.Preterm::Combp(
-        @preterm.Preterm::Combp(ung_ptm, tx),
-        ty,
-      )
-      let t_1 = @lib.itlist(
-        fn(
-          x72 : @preterm.Preterm,
-          x73 : @preterm.Preterm,
-        ) -> @preterm.Preterm raise {
-          let s74 = pmk_exists(x72)
-          s74(x73)
-        },
-        pfrees(pat),
-        t75,
-      )
-      let t76 = pmk_clauses(cs_4)
-      Some(
-        @preterm.Preterm::Combp(
-          @preterm.Preterm::Combp(
-            seqp_ptm,
-            @preterm.Preterm::Absp(x, @preterm.Preterm::Absp(y, t_1)),
-          ),
-          t76,
-        ),
-      )
-    }
-  }
-}
-
-///|
-fn[TA, TB] pmk_bitmatch_l(
-  pgenvar : (Unit) -> @preterm.Preterm raise,
-  else_ptm : @preterm.Preterm,
-  arb_ptm : @preterm.Preterm,
-  pmk_exists : (@preterm.Preterm) -> ((@preterm.Preterm) -> @preterm.Preterm raise) raise,
-  pfrees : (@preterm.Preterm) -> @list.List[@preterm.Preterm] raise,
-  ung_ptm : @preterm.Preterm,
-  seqp_ptm : @preterm.Preterm,
-  bitmatch_ptm : @preterm.Preterm,
-  x68 : ((TA, @preterm.Preterm), TB),
-  x69 : @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-) -> @preterm.Preterm raise {
-  let (((_, e), _), cs) = (x68, x69)
-  let x = pgenvar(())
-  let y = pgenvar(())
-  let pmk_clauses = (x70 : @list.List[(@preterm.Preterm?, @preterm.Preterm)]) => {
-    pmk_clauses_l(
-      else_ptm, arb_ptm, x, y, pmk_exists, pfrees, ung_ptm, seqp_ptm, x70,
-    )
-  }
-  let pmk_clauses_opt = (
-    x71 : @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-  ) => {
-    pmk_clauses_opt_l(
-      else_ptm, arb_ptm, x, y, pmk_exists, pfrees, ung_ptm, seqp_ptm, x71,
-    )
-  }
-  let t77 = pmk_clauses(cs)
-  @preterm.Preterm::Combp(@preterm.Preterm::Combp(bitmatch_ptm, e), t77)
-}
-
-///|
 let pp_print_bitpat_c : @lib.Cell[
   (@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise,
 ] = @lib.Cell::new("pp_print_bitpat")
@@ -1514,7 +1164,7 @@ let string_of_bitpat_c : @lib.Cell[(@kernel.Term) -> String raise] = @lib.Cell::
 )
 
 ///|
-/// `string_of_bitpat`
+/// Compact display only. Use `@printer.string_of_term` for ordinary HOL syntax.
 pub fn string_of_bitpat(x : @kernel.Term) -> String raise {
   string_of_bitpat_c.get()(x)
 }
@@ -1548,57 +1198,9 @@ let string_of_bitmatch_c : @lib.Cell[(@kernel.Term) -> String raise] = @lib.Cell
 )
 
 ///|
-/// `string_of_bitmatch`
+/// Compact display only. Use `@printer.string_of_term` for ordinary HOL syntax.
 pub fn string_of_bitmatch(x : @kernel.Term) -> String raise {
   string_of_bitmatch_c.get()(x)
-}
-
-///|
-/// Library/bitmatch.ml:279
-fn step_27() -> Unit raise {
-  @printer.install_user_printer("bitpat", fn(
-    x128 : @pp.Formatter,
-    x129 : @kernel.Term,
-  ) -> Unit raise {
-    let s130 = pp_print_bitpat(x128)
-    s130(x129)
-  })
-}
-
-///|
-/// Library/bitmatch.ml:280
-fn step_28() -> Unit raise {
-  @printer.install_user_printer("bitmatch", fn(
-    x131 : @pp.Formatter,
-    x132 : @kernel.Term,
-  ) -> Unit raise {
-    let s133 = pp_print_bitmatch(x131)
-    s133(x132)
-  })
-}
-
-///|
-/// Library/bitmatch.ml:281
-fn step_29() -> Unit raise {
-  @printer.install_user_color_printer("bitpat", fn(
-    x134 : @pp.Formatter,
-    x135 : @kernel.Term,
-  ) -> Unit raise {
-    let s136 = pp_print_colored_bitpat(x134)
-    s136(x135)
-  })
-}
-
-///|
-/// Library/bitmatch.ml:282
-fn step_30() -> Unit raise {
-  @printer.install_user_color_printer("bitmatch", fn(
-    x137 : @pp.Formatter,
-    x138 : @kernel.Term,
-  ) -> Unit raise {
-    let s139 = pp_print_colored_bitmatch(x137)
-    s139(x138)
-  })
 }
 
 ///|
@@ -7133,9 +6735,7 @@ fn[TA] first_n_l(x681 : @list.List[TA], x682 : Int64) -> @list.List[TA] raise {
 /// Library/bitmatch.ml:1229
 fn step_57() -> Unit raise {
   bm_check_disjointness(
-    parse_bitmatch(
-      "bitmatch (x:(2)word) with | [0b00:2] -> T | [0b10:2] -> T",
-    ),
+    disjointness_example([mk_bitpat([example_word2(0L)]), mk_bitpat([example_word2(2L)])]),
   )
 }
 
@@ -7143,7 +6743,10 @@ fn step_57() -> Unit raise {
 /// Library/bitmatch.ml:1231
 fn step_58() -> Unit raise {
   bm_check_disjointness(
-    parse_bitmatch("bitmatch (x:(2)word) with | [T; x] -> T | [F; y] -> T"),
+    disjointness_example([
+      mk_bitpat([@kernel.mk_const("T", @list.List([])), @kernel.mk_var("x", @kernel.bool_ty)]),
+      mk_bitpat([@kernel.mk_const("F", @list.List([])), @kernel.mk_var("y", @kernel.bool_ty)]),
+    ]),
   )
 }
 
@@ -7152,9 +6755,7 @@ fn step_58() -> Unit raise {
 fn step_59() -> Unit raise {
   try {
     bm_check_disjointness(
-      parse_bitmatch(
-        "bitmatch (x:(2)word) with | [0b00:2] -> T | [0b00:2] -> T",
-      ),
+      disjointness_example([mk_bitpat([example_word2(0L)]), mk_bitpat([example_word2(0L)])]),
     )
     raise Failure("Must fail")
   } catch {
@@ -7168,9 +6769,10 @@ fn step_59() -> Unit raise {
 fn step_60() -> Unit raise {
   try {
     bm_check_disjointness(
-      parse_bitmatch(
-        "bitmatch (x:(2)word) with | [T; x] -> T | [y; T] -> T",
-      ),
+      disjointness_example([
+        mk_bitpat([@kernel.mk_const("T", @list.List([])), @kernel.mk_var("x", @kernel.bool_ty)]),
+        mk_bitpat([@kernel.mk_var("y", @kernel.bool_ty), @kernel.mk_const("T", @list.List([]))]),
+      ]),
     )
     raise Failure("Must fail")
   } catch {
@@ -7184,9 +6786,7 @@ fn step_60() -> Unit raise {
 fn step_61() -> Unit raise {
   try {
     bm_check_disjointness(
-      parse_bitmatch(
-        "bitmatch (x:(2)word) with | [0b11:2] -> T | [0b00:2] -> T | [0b00:2] -> T",
-      ),
+      disjointness_example([mk_bitpat([example_word2(3L)]), mk_bitpat([example_word2(0L)]), mk_bitpat([example_word2(0L)])]),
     )
     raise Failure("Must fail")
   } catch {
@@ -7214,16 +6814,11 @@ fn load_steps() -> Unit raise {
   step_16()
   step_17()
   step_18()
-  step_19()
   step_22()
   step_23()
   step_24()
   step_25()
   step_26()
-  step_27()
-  step_28()
-  step_29()
-  step_30()
   step_31()
   step_32()
   step_33()
