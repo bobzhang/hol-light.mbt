@@ -136,6 +136,15 @@ pub fn prioritize_overload(ty : HolType) -> Unit raise {
   }
 }
 
+///|
+/// Run `f`, then restore the interface map as it was before, also when `f`
+/// raises, so overload priorities set inside `f` do not leak.
+pub fn[T] with_interface_restored(f : () -> T raise) -> T raise {
+  let saved = @printer.the_interface.val
+  defer { @printer.the_interface.val = saved }
+  f()
+}
+
 // ---------------------------------------------------------------------------
 // Type abbreviations.
 // ---------------------------------------------------------------------------

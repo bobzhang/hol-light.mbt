@@ -799,14 +799,10 @@ pub fn[TA, TB] call_with_interface(
   let p = x102
   let f = x103
   let s = x104
-  let i = @printer.the_interface.val
-  ignore(p(()))
-  let res = f(@parser.parse_term(s))
-  {
-    @printer.the_interface.val = i
-    ()
-  }
-  res
+  @preterm.with_interface_restored(() => {
+    ignore(p(()))
+    f(@parser.parse_term(s))
+  })
 }
 
 ///|
