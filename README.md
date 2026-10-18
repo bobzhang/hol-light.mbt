@@ -23,7 +23,7 @@ constructs theorems only through its API.
   Minisat/, WZ/, LP_arith/**: their theory files (`complex/<name>`, ...).
 - **Formal_ineqs/**: the 62 files its make.ml loads (the verifier of
   nonlinear inequalities; `formal_ineqs/<dir>/<name>`).
-- **Examples/**: 49 of 50. **Tutorial/**: 23 of 24.
+- **Examples/**: 47 of 50. **Tutorial/**: 23 of 24.
 - **RichterHilbertAxiomGeometry/**: readable.ml and the six developments
   in its proof format that load upstream (`richterhilbertaxiomgeometry/<name>`).
 - Removed: the proof-script languages miz3/ (with its samples),
