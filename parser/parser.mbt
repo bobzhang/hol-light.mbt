@@ -194,46 +194,6 @@ fn typelist(i : Toks) -> (List[Pretype], Toks) raise {
 }
 
 // ---------------------------------------------------------------------------
-// User parsers.
-// ---------------------------------------------------------------------------
-
-///|
-type UserParser = (String, (Toks) -> (Preterm, Toks) raise)
-
-///|
-let parser_list : Ref[List[UserParser]] = Ref::{ val: @list.List([]), }
-
-///|
-pub fn install_parser(
-  name : String,
-  p : (Toks) -> (Preterm, Toks) raise,
-) -> Unit {
-  parser_list.val = parser_list.val.prepend((name, p))
-}
-
-///|
-pub fn delete_parser(key : String) -> Unit raise {
-  let (_, rest) = @lib.remove((p : UserParser) => p.0 == key, parser_list.val) catch {
-    Failure(_) => return
-    e => raise e
-  }
-  parser_list.val = rest
-}
-
-///|
-fn try_user_parser(i : Toks) -> (Preterm, Toks) raise {
-  for p in parser_list.val {
-    try (p.1)(i) catch {
-      @parserutil.Noparse => continue
-      e => raise e
-    } noraise {
-      r => return r
-    }
-  }
-  raise @parserutil.Noparse
-}
-
-// ---------------------------------------------------------------------------
 // Preterm construction helpers.
 // ---------------------------------------------------------------------------
 
@@ -646,7 +606,6 @@ fn[A] fail_with(msg : String) -> (A) -> Preterm raise {
 ///|
 fn atomic_preterm(i : Toks) -> (Preterm, Toks) raise {
   let alts : Array[(Toks) -> (Preterm, Toks) raise] = [
-    try_user_parser,
     map(seq(seq(seq(res("("), res(":")), parse_pretype), res(")")), r => {
       @preterm.Typing(
         pv("UNIV"),

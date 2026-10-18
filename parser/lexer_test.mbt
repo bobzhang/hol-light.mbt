@@ -26,30 +26,3 @@ test "parser returns a remainder view into the original token array" {
   assert_eq(rest.start_offset(), 3)
   assert_eq(tokens.length(), 5)
 }
-
-///|
-test "custom parser backtracks on parserutil Noparse and propagates hard errors" {
-  let name = "parserutil error integration"
-  let mut called = false
-  let mut hard_error = false
-  @parser.install_parser(name, _ => {
-    called = true
-    if hard_error {
-      raise Failure("custom parser failed")
-    }
-    raise @parserutil.Noparse
-  })
-  errdefer @parser.delete_parser(name)
-  let (term, rest) = @parser.parse_preterm(@lexer.lex("f x"))
-  assert_true(called)
-  assert_true(term is @preterm.Combp(Varp("f", _), Varp("x", _)))
-  assert_true(rest.is_empty())
-  hard_error = true
-  try @parser.parse_preterm(@lexer.lex("f x")) catch {
-    Failure(message) => assert_eq(message, "custom parser failed")
-    e => raise e
-  } noraise {
-    _ => fail("expected a hard error from the custom parser")
-  }
-  @parser.delete_parser(name)
-}
