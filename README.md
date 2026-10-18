@@ -19,15 +19,17 @@ constructs theorems only through its API.
 - **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/,
   Unity/, Logic/, Jordan/** (with the Jordan curve theorem),
   **Functionspaces/, Quaternions/, Geometric_Algebra/, Probability/, IEEE/,
-  IsabelleLight/, Boyer_Moore/, EC/, Autoformalization/, Cadical/,
+  Boyer_Moore/, EC/, Autoformalization/, Cadical/,
   Minisat/, WZ/, LP_arith/**: their theory files (`complex/<name>`, ...).
 - **Formal_ineqs/**: the 62 files its make.ml loads (the verifier of
   nonlinear inequalities; `formal_ineqs/<dir>/<name>`).
 - **Examples/**: 49 of 50. **Tutorial/**: 23 of 24.
 - **RichterHilbertAxiomGeometry/**: readable.ml and the six developments
   in its proof format that load upstream (`richterhilbertaxiomgeometry/<name>`).
-- **miz3/**: miz3.ml and its thirteen sample proofs (`miz3/miz3`,
-  `miz3/Samples/<name>`). **Mizarlight/**: its four files.
+- Removed: the proof-script languages miz3/ (with its samples),
+  Mizarlight/, IsabelleLight/ and Examples/mizar.ml. They add no logical
+  power over tactics; the MoonBit proof API (`proof`, example in
+  `examples/proof_api`) covers that style of proof.
 - Not ported: QBF/ (needs squolem, which has no build for this platform);
   see [TODO.md](TODO.md).
 
@@ -36,7 +38,7 @@ cadical, MiniSat, maxima for WZ/, cdd for LP_arith/, Prover9) load without
 it: the program's runs are recorded when the reference output is made and
 replayed (`<pkg>/commands.mbt`); the kernel checks the proofs they lead to.
 Files that give OCaml to the toplevel as strings (the proofs of readable.ml
-and miz3 name their theorems and tactics so) run what the translator made of
+name their theorems and tactics so) run what the translator made of
 each string the reference session ran (`@lib.exec_phrase`).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the

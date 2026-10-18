@@ -134,19 +134,10 @@ and file I/O before starting it.
      (18K lines; fails upstream in BOUNDED_INCREASING_CONVERGENT:
      "MATCH_MP_TAC: No match"), error-checking.ml (raises on purpose),
      thmFontHilbertAxiom.ml (a text of proof templates, not OCaml).
-   - Done: miz3/miz3.ml, the thirteen samples miz3/test.ml loads
-     (theory.AFTER) and Examples/inverse_bug_puzzle_miz3.ml. By hand
-     (miz3/miz3/hand.mbt): `exec_phrase`, `TIMED_TAC` (no timer: a step
-     is never timed out, where upstream gives it `!timeout` seconds),
-     `print_to_string1`, and the editor server's functions (nothing).
-     Not ported: miz3_of_hol.ml and Samples/wishes.ml (not loaded by
-     test.ml).
-   - Done: Mizarlight/ (make, miz2a, duality, duality_holby). Its camlp5
-     extension (pa_f.ml: infix `by`, `st`, ...) is built by
-     tools/ocaml_ref/ensure_pa_f.sh into _build/hol_dir, the sessions'
-     `hol_dir`; make.ml is a file of its own (theory.HEADS); the two
-     duality files use the sketch prover (CHEAT_TAC) upstream
-     (theory.ASSERTS_AXIOMS).
+   - Removed after porting (issue #140): miz3/ with its samples,
+     Examples/inverse_bug_puzzle_miz3.ml, Examples/mizar.ml, Mizarlight/
+     and IsabelleLight/. These proof-script languages add no logical power;
+     the MoonBit proof API (`proof`, `examples/proof_api`) replaces them.
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
      mcp, update_database, help.ml/database.ml, tactician_light.ml,
      UnitTests/ (test scripts; basic_tests.ml needs the zarith backend).
