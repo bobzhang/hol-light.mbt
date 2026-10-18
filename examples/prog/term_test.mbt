@@ -1,7 +1,7 @@
 ///|
 fn check_program_terms() -> Unit raise {
   for word in ["var", "end", "skip", "abort", ":=", "while", "do"] {
-    assert_false(@printer.is_reserved_word(word))
+    assert_false(@lexer.is_reserved_word(word))
     assert_eq(
       @parser.parse_term(word + " : bool"),
       @kernel.mk_var(word, @kernel.bool_ty),

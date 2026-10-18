@@ -5,7 +5,7 @@ fn check_ntrie_term_construction() -> Unit raise {
       _ => fail("could not parse ordinary HOL term: " + source)
     }
   }
-  assert_false(@printer.is_reserved_word("%%"))
+  assert_false(@lexer.is_reserved_word("%%"))
   for
     (values, source) in [
       ([], "NTRIE NEMPTY"),

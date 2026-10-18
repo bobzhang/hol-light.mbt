@@ -10,7 +10,6 @@ import {
 
 import {
   "bobzhang/hol_light/parser",
-  "bobzhang/hol_light/printer",
   "bobzhang/hol_light/miz3/miz3",
   "bobzhang/hol_light/miz3/Samples/sample",
 } for "test"

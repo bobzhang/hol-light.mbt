@@ -87,38 +87,6 @@ pub fn isalnum(s : String) -> Bool {
 }
 
 // ---------------------------------------------------------------------------
-// Reserved words.
-// ---------------------------------------------------------------------------
-
-///|
-let reswords : Ref[List[String]] = Ref::{
-  val: @list.List([
-    "(", ")", "[", "]", "{", "}", ":", ";", ".", "|", "let", "in", "and", "if", "then",
-    "else", "match", "with", "function", "->", "when",
-  ]),
-}
-
-///|
-pub fn reserve_words(ns : List[String]) -> Unit {
-  reswords.val = @lib.union(reswords.val, ns)
-}
-
-///|
-pub fn unreserve_words(ns : List[String]) -> Unit {
-  reswords.val = @lib.subtract(reswords.val, ns)
-}
-
-///|
-pub fn is_reserved_word(n : String) -> Bool {
-  @lib.mem(n, reswords.val)
-}
-
-///|
-pub fn reserved_words() -> List[String] {
-  reswords.val
-}
-
-// ---------------------------------------------------------------------------
 // Binders, prefixes and infixes. These tables are independent of
 // constant/variable status and of whether an identifier is symbolic.
 // ---------------------------------------------------------------------------

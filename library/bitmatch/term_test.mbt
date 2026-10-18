@@ -2,7 +2,7 @@
 fn check_bitmatch_terms() -> Unit raise {
   let tm = @parser.parse_term
   for word in ["BITPAT", "bitmatch"] {
-    assert_false(@printer.is_reserved_word(word))
+    assert_false(@lexer.is_reserved_word(word))
     assert_eq(tm(word + ":bool"), @kernel.mk_var(word, @kernel.bool_ty))
   }
   assert_eq(@bitmatch.mk_bitpat([]), tm("NILPAT"))

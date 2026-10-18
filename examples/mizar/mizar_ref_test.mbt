@@ -7,7 +7,6 @@ using @testkit {stm, sthm}
 
 ///|
 test "Examples/mizar matches Examples/mizar.ml" {
-  let reserved = @printer.reserved_words()
   @mizar.load()
   let log = @testkit.Log::new()
   log.capture_reports()
@@ -5605,6 +5604,5 @@ test "Examples/mizar matches Examples/mizar.ml" {
       #|
     ),
   )
-  assert_eq(@printer.reserved_words(), reserved)
   check_local_keywords()
 }

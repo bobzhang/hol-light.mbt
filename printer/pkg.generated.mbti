@@ -28,8 +28,6 @@ pub fn install_user_printer(String, (@pp.Formatter, @kernel.Term) -> Unit raise)
 
 pub fn is_prefix(String) -> Bool
 
-pub fn is_reserved_word(String) -> Bool
-
 pub fn isalnum(String) -> Bool
 
 pub fn isalpha(String) -> Bool
@@ -126,10 +124,6 @@ pub let printer_color_type : @ref.Ref[String?]
 
 pub let printer_color_typevar : @ref.Ref[String?]
 
-pub fn reserve_words(@list.List[String]) -> Unit
-
-pub fn reserved_words() -> @list.List[String]
-
 pub let reverse_interface_mapping : @ref.Ref[Bool]
 
 pub fn string_of_term(@kernel.Term) -> String raise
@@ -153,8 +147,6 @@ pub fn unparse_as_binder(String) -> Unit
 pub fn unparse_as_infix(String) -> Unit
 
 pub fn unparse_as_prefix(String) -> Unit
-
-pub fn unreserve_words(@list.List[String]) -> Unit
 
 pub let unspaced_binops : @ref.Ref[@list.List[String]]
 

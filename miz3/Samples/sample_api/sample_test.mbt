@@ -1,10 +1,8 @@
 ///|
 test "MoonBit relation proof agrees with the original Miz3 sample" {
-  let reserved = @printer.reserved_words()
   // Run the API proof before loading the DSL or its string-to-tactic registry.
   let theorem = @sample_api.relation_successors()
   assert_true(@kernel.hyp(theorem).is_empty())
-  assert_eq(@printer.reserved_words(), reserved)
   let expected = @parser.parse_term(
     (
       #|forall R:num->num->bool.

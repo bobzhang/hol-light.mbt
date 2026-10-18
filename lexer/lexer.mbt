@@ -8,11 +8,6 @@
 // ===========================================================================
 
 ///|
-fn init {
-  @printer.reserve_words(@list.singleton("//"))
-}
-
-///|
 pub(all) enum Lexcode {
   Ident(String)
   Resword(String)
@@ -25,8 +20,14 @@ pub extend Lexcode with Eq::{equal, not_equal}
 pub extend Lexcode with @debug.Debug::{to_repr}
 
 ///|
-/// The token that starts a comment running to the end of the line.
-pub let comment_token : Ref[Lexcode] = Ref::{ val: Resword("//"), }
+/// Whether `n` lexes as a reserved word. The set is fixed: loading a theory
+/// cannot reserve words. `//` starts a comment running to the end of the line.
+pub fn is_reserved_word(n : String) -> Bool {
+  n
+  is ("(" | ")" | "[" | "]" | "{" | "}" | ":" | ";" | "." | "|" | "let" | "in"
+  | "and" | "if" | "then" | "else" | "match" | "with" | "function" | "->"
+  | "when" | "//")
+}
 
 ///|
 fn char_str(c : Char) -> String {
@@ -191,7 +192,7 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
 ///|
 fn reserve(tok : Lexcode) -> Lexcode {
   match tok {
-    Ident(n) if @printer.is_reserved_word(n) => Resword(n)
+    Ident(n) if is_reserved_word(n) => Resword(n)
     t => t
   }
 }
@@ -221,7 +222,7 @@ pub fn lex(s : String) -> Array[Lexcode] raise {
       Some((tok, k)) => (reserve(tok), k)
       None => break
     }
-    if tok == comment_token.val {
+    if tok is Resword("//") {
       let mut m = k
       while m < chars.length() && chars[m] != '\n' {
         m += 1
