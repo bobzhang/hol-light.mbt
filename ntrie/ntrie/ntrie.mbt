@@ -453,9 +453,10 @@ let mk_small_ntrie_c : @lib.Cell[(@list.List[Int64]) -> @kernel.Term raise] = @l
 
 ///|
 /// Build a trie term from nonnegative machine integers after `load()`.
+/// Accepts array literals and slices, e.g. `mk_small_ntrie([1, 3])`.
 /// Fixed terms can also use ordinary HOL syntax, e.g. `NTRIE NZERO`.
-pub fn mk_small_ntrie(x : @list.List[Int64]) -> @kernel.Term raise {
-  (mk_small_ntrie_c.get())(x)
+pub fn mk_small_ntrie(values : ArrayView[Int64]) -> @kernel.Term raise {
+  (mk_small_ntrie_c.get())(@list.List(values))
 }
 
 ///|
