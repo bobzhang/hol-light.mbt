@@ -24,7 +24,6 @@ let run line =
   | "overload" :: s :: _ -> overload_interface(s, parse_term (after ("overload " ^ s ^ " ") line))
   | "override" :: s :: _ -> override_interface(s, parse_term (after ("override " ^ s ^ " ") line))
   | "abbrev" :: _ -> let n,t = split_colon (after "abbrev " line) in new_type_abbrev(n, parse_type t)
-  | ["hide"; n] -> hide_constant n
   | "prioritize" :: _ -> prioritize_overload (parse_type (after "prioritize " line))
   | ["margin"; n] -> set_margin (int_of_string n)
   | _ -> failwith ("bad command: " ^ line)
