@@ -14,4 +14,4 @@ H=../../.repos/hol-light
 python3 forall_reference.py --prepare
 python3 forall_reference.py --source prelude.ml "$1" > _build/body.ml
 { cat boot.ml; echo "let _ = Toploop.use_silently Format.std_formatter (Toploop.File \"$PWD/_build/body.ml\");;"; } > _build/script.ml
-ocaml -w -a -alert -all -I "$H" -I _build _build/script.ml | grep -v "HOL-Light syntax in effect" | sed "/^$/d" | python3 forall_reference.py
+ocaml -w -a -alert -all -I "$PWD" -I "$H" -I _build _build/script.ml | grep -v "HOL-Light syntax in effect" | sed "/^$/d" | python3 forall_reference.py
