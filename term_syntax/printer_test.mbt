@@ -47,3 +47,35 @@ test "types" {
   inspect(ty(@parser.parse_type("(A->B)->A#B")), content="((A) -> B) -> (A, B)")
   inspect(ty(@parser.parse_type("(num)list")), content="List[Num]")
 }
+
+///|
+fn round(t : @kernel.Term) -> String raise {
+  let s = @term_syntax.print_term(t)
+  assert_true(@basics.aconv(@term_syntax.parse_term(s), t))
+  s
+}
+
+///|
+test "spellings that would read back as something else" {
+  let num = @kernel.mk_type("num", @list.List([]))
+  // a type variable named like a type is not written as that type
+  let unit_var = @kernel.mk_vartype("Unit")
+  let r = try @term_syntax.print_type(unit_var) catch {
+    @term_syntax.Unprintable(_) => "unprintable"
+  }
+  inspect(r, content="unprintable")
+  // a numeral not in canonical form keeps its structure
+  let bit0 = @kernel.mk_comb(
+    @kernel.mk_const("BIT0", @list.List([])),
+    @kernel.mk_const("_0", @list.List([])),
+  )
+  inspect(
+    round(@kernel.mk_comb(@kernel.mk_const("NUMERAL", @list.List([])), bit0)),
+    content="NUMERAL(BIT0(_0))",
+  )
+  // binders named like an interface name or a keyword are renamed
+  let ex = @kernel.mk_var("exists", num)
+  inspect(round(@kernel.mk_abs(ex, ex)), content="(exists' : Num) => exists'")
+  let kw = @kernel.mk_var("let", num)
+  inspect(round(@kernel.mk_abs(kw, kw)), content="(v : Num) => v")
+}

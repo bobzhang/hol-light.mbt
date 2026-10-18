@@ -18,6 +18,12 @@ let moonbit_keywords : Array[String] = [
 ]
 
 ///|
+/// Whether `name` is one of MoonBit's keywords or reserved words.
+fn is_keyword(name : String) -> Bool {
+  name is ("true" | "false" | "if" | "else") || moonbit_keywords.contains(name)
+}
+
+///|
 fn keyword(name : String) -> @grammar.Token raise {
   match name {
     "true" => TRUE
