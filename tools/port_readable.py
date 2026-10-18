@@ -75,7 +75,7 @@ test "port readable proofs" {{
 
 # phrases whose translation is an eta-expanded closure, as the function itself
 SHORT = {
-    "thmtactic_ref := ((MP_TAC): thm -> tactic);;": "@tactics.mp_tac",
+    "thmtactic_ref := ((MP_TAC): thm -> tactic);;": "th => @tactics.mp_tac(th)",
     "termlist_thm_thm_ref := ((ISPECL): (term list -> thm -> thm));;": "tms => th => @bool.ispecl(tms, th)",
     "termlist_thm_thm_ref := ((SPECL): (term list -> thm -> thm));;": "tms => th => @bool.specl(tms, th)",
     "thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;": "ths => tm => @meson.meson(ths, tm)",
@@ -97,7 +97,7 @@ def phrase_table():
             text = json.loads(m.group(1))
             fn = re.search(r"pub fn " + m.group(2) + r"\(x\d+ : Unit\) -> Unit raise \{\n  let _ = x\d+\n  \{\n    @readable\.[a-z_]+\(\)\.val = (.*?)\n    \(\)\n  \}\n\}", src, re.S)
             if text in SHORT:
-                table[text] = (pkg, SHORT[text])
+                table[text] = (None, SHORT[text])
             elif fn and "\n" not in fn.group(1):
                 table[text] = (pkg, fn.group(1))
     return table
@@ -109,7 +109,7 @@ def resolve(code, pkg, table):
         if text not in table:
             sys.exit("no expression for phrase " + text)
         src, expr = table[text]
-        if src != pkg and not expr.startswith("@"):
+        if src is not None and src != pkg and not expr.startswith("@"):
             expr = "@" + os.path.basename(src) + "." + expr
         return expr
     return re.sub(r"⟦(.*?)⟧", sub, code)
