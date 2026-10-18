@@ -178,28 +178,6 @@ pub fn type_abbrevs() -> List[(String, HolType)] {
 }
 
 // ---------------------------------------------------------------------------
-// Constant hiding.
-// ---------------------------------------------------------------------------
-
-///|
-let hcs : Ref[List[String]] = Ref::{ val: @list.List([]), }
-
-///|
-pub fn hide_constant(c : String) -> Unit {
-  hcs.val = @lib.union(@list.singleton(c), hcs.val)
-}
-
-///|
-pub fn unhide_constant(c : String) -> Unit {
-  hcs.val = @lib.subtract(hcs.val, @list.singleton(c))
-}
-
-///|
-pub fn is_hidden(c : String) -> Bool {
-  @lib.mem(c, hcs.val)
-}
-
-// ---------------------------------------------------------------------------
 // Pretypes and preterms.
 // ---------------------------------------------------------------------------
 
@@ -528,7 +506,7 @@ fn typify(
     }
     Varp(s, _) => {
       @lib.warn(s != "" && @printer.isnum(s), "Non-numeral begins with a digit")
-      if !is_hidden(s) && @lib.can(get_generic_type, s) {
+      if @lib.can(get_generic_type, s) {
         let pty = pretype_instance(get_generic_type(s))
         let ptm = Constp(s, pty)
         (ptm, @list.List([]), unify(Some(ptm), uenv, pty, ty))

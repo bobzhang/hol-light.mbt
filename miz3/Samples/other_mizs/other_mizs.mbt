@@ -2,12 +2,6 @@
 // Regenerate with tools/ocaml_ref/translate.sh translate miz3/Samples/other_mizs.ml.
 
 ///|
-/// miz3/Samples/other_mizs.ml:3
-fn step_1() -> Unit raise {
-  @preterm.hide_constant("<=")
-}
-
-///|
 /// miz3/Samples/other_mizs.ml:5
 fn step_2() -> Unit raise {
   {
@@ -19,7 +13,7 @@ fn step_2() -> Unit raise {
 ///|
 /// KNASTER_TARSKI
 fn step_3() -> Unit raise {
-  knaster_tarski_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let (<=) be A->A->bool;\n  thus forall f. (forall x y. x <= y /\\ y <= x ==> (x = y)) /\\\n      (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n      (forall x y. x <= y ==> f x <= f y) /\\\n      (forall X. ?s. (forall x. x IN X ==> s <= x) /\\\n                 (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s))\n      ==> ?x. f x = x\n  proof\n    let f be A->A;\n    exec DISCH_THEN (LABEL_TAC \"L\");\n    forall x y. x <= y /\\ y <= x ==> (x = y) [antisymmetry] by L;\n    forall x y z. x <= y /\\ y <= z ==> x <= z [transitivity] by L;\n    forall x y. x <= y ==> f x <= f y [monotonicity] by L;\n    forall X. ?s:A. (forall x. x IN X ==> s <= x) /\\\n              (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s) [least_upper_bound]\n      by L;\n    set Y = {b | f b <= b} [Y_def];\n    forall b. b IN Y <=> f b <= b [Y_thm] by ALL_TAC,Y_def,IN_ELIM_THM,BETA_THM;\n    consider a such that\n      (forall x. x IN Y ==> a <= x) /\\\n      (forall a'. (forall x. x IN Y ==> a' <= x) ==> a' <= a) [lub] by least_upper_bound;\n    take a;\n    forall b. b IN Y ==> f a <= b\n    proof\n      let b be A;\n      assume b IN Y [b_in_Y];\n      f b <= b [L0] by -,Y_thm;\n      a <= b by b_in_Y,lub;\n      f a <= f b by -,monotonicity;\n      thus f a <= b by -,L0,transitivity;\n    end;\n    f(a) <= a [Part1] by -,lub;\n    f(f(a)) <= f(a) by -,monotonicity;\n    f(a) IN Y by -,Y_thm;\n    a <= f(a) by -,lub;\n  qed by -,Part1,antisymmetry")))
+  knaster_tarski_c.set(@miz3.thm(@miz3.parse_qproof(";\n  let (<<=) be A->A->bool;\n  thus forall f. (forall x y. x <<= y /\\ y <<= x ==> (x = y)) /\\\n      (forall x y z. x <<= y /\\ y <<= z ==> x <<= z) /\\\n      (forall x y. x <<= y ==> f x <<= f y) /\\\n      (forall X. ?s. (forall x. x IN X ==> s <<= x) /\\\n                 (forall s'. (forall x. x IN X ==> s' <<= x) ==> s' <<= s))\n      ==> ?x. f x = x\n  proof\n    let f be A->A;\n    exec DISCH_THEN (LABEL_TAC \"L\");\n    forall x y. x <<= y /\\ y <<= x ==> (x = y) [antisymmetry] by L;\n    forall x y z. x <<= y /\\ y <<= z ==> x <<= z [transitivity] by L;\n    forall x y. x <<= y ==> f x <<= f y [monotonicity] by L;\n    forall X. ?s:A. (forall x. x IN X ==> s <<= x) /\\\n              (forall s'. (forall x. x IN X ==> s' <<= x) ==> s' <<= s) [least_upper_bound]\n      by L;\n    set Y = {b | f b <<= b} [Y_def];\n    forall b. b IN Y <=> f b <<= b [Y_thm] by ALL_TAC,Y_def,IN_ELIM_THM,BETA_THM;\n    consider a such that\n      (forall x. x IN Y ==> a <<= x) /\\\n      (forall a'. (forall x. x IN Y ==> a' <<= x) ==> a' <<= a) [lub] by least_upper_bound;\n    take a;\n    forall b. b IN Y ==> f a <<= b\n    proof\n      let b be A;\n      assume b IN Y [b_in_Y];\n      f b <<= b [L0] by -,Y_thm;\n      a <<= b by b_in_Y,lub;\n      f a <<= f b by -,monotonicity;\n      thus f a <<= b by -,L0,transitivity;\n    end;\n    f(a) <<= a [Part1] by -,lub;\n    f(f(a)) <<= f(a) by -,monotonicity;\n    f(a) IN Y by -,Y_thm;\n    a <<= f(a) by -,lub;\n  qed by -,Part1,antisymmetry")))
 }
 
 ///|
@@ -101,21 +95,9 @@ fn step_7() -> Unit raise {
 }
 
 ///|
-/// miz3/Samples/other_mizs.ml:45
-fn step_8() -> Unit raise {
-  @preterm.unhide_constant("<=")
-}
-
-///|
 /// miz3/Samples/other_mizs.ml:49
 fn step_9() -> Unit raise {
   @printer.parse_as_infix("ON", (11L, "right"))
-}
-
-///|
-/// miz3/Samples/other_mizs.ml:51
-fn step_10() -> Unit raise {
-  @preterm.hide_constant("ON")
 }
 
 ///|
@@ -249,12 +231,6 @@ pub fn exec_phrase_8(x12 : Unit) -> Unit raise {
 /// the phrase exec_thmlist_tactic_out := ((REWRITE_TAC) : thm list -> tactic);;
 fn step_19() -> Unit raise {
   @lib.register_phrase("exec_thmlist_tactic_out := ((REWRITE_TAC) : thm list -> tactic);;", exec_phrase_8)
-}
-
-///|
-/// miz3/Samples/other_mizs.ml:200
-fn step_20() -> Unit raise {
-  @preterm.unhide_constant("ON")
 }
 
 ///|
@@ -1114,16 +1090,13 @@ fn step_71() -> Unit raise {
 
 ///|
 fn load_steps() -> Unit raise {
-  step_1()
   step_2()
   step_4()
   step_5()
   step_6()
   step_7()
   step_3()
-  step_8()
   step_9()
-  step_10()
   step_11()
   step_12()
   step_14()
@@ -1133,7 +1106,6 @@ fn load_steps() -> Unit raise {
   step_18()
   step_19()
   step_16()
-  step_20()
   step_21()
   step_22()
   step_23()

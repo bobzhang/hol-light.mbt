@@ -9,7 +9,7 @@ let cases : String =
   #|#   newtype NAME ARITY | const NAME : TYPE | infix NAME PREC ASSOC
   #|#   binder NAME | prefix NAME | overloadable SYM : TYPE
   #|#   overload SYM TERM | override SYM TERM | abbrev NAME : TYPE
-  #|#   hide NAME | prioritize TYPE | margin N | Y: TYPE | T: TERM
+  #|#   prioritize TYPE | margin N | Y: TYPE | T: TERM
   #|newtype num 0
   #|newtype prod 2
   #|newtype sum 2
@@ -246,8 +246,6 @@ let cases : String =
   #|T: if long_condition_name then first_branch_value else second_branch_value
   #|margin 78
   #|T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
-  #|hide SUC
-  #|T: SUC x
   #|prioritize int
   #|T: x + y
   #|T: x < y
@@ -374,7 +372,6 @@ fn run(log : Log, line : String) -> Unit raise {
         let (n, t) = split_colon(after("abbrev "))
         @preterm.new_type_abbrev(n, @parser.parse_type(t))
       }
-      ["hide", n] => @preterm.hide_constant(n)
       ["prioritize", ..] =>
         @preterm.prioritize_overload(@parser.parse_type(after("prioritize ")))
       ["margin", n] => @pp.std_formatter.set_margin(@string.parse_int(n))
@@ -574,8 +571,6 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa = (#forall:fun(fun(num,bool),bool) (\aaaaaaaaaaaaaaa:num. (#forall:fun(fun(num,bool),bool) (\bbbbbbbbbbbbbbbbbb:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) aaaaaaaaaaaaaaa:num) bbbbbbbbbbbbbbbbbb:num)) ((#+:fun(num,fun(num,num)) bbbbbbbbbbbbbbbbbb:num) aaaaaaaaaaaaaaa:num)))))) | forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb.
       #|    aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb =
       #|    bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
-      #|Warning: inventing type variables
-      #|T: SUC x = (SUC:fun('?958,'?957) x:'?958) | (SUC:?958->?957) (x:?958)
       #|T: x + y = ((#int_add:fun(int,fun(int,int)) x:int) y:int) | x + y
       #|T: x < y = ((#<:fun(num,fun(num,bool)) x:num) y:num) | x < y
       #|T: x + y = ((#+:fun(num,fun(num,num)) x:num) y:num) | x + y

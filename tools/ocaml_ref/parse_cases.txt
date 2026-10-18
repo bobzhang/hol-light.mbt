@@ -3,7 +3,7 @@
 #   newtype NAME ARITY | const NAME : TYPE | infix NAME PREC ASSOC
 #   binder NAME | prefix NAME | overloadable SYM : TYPE
 #   overload SYM TERM | override SYM TERM | abbrev NAME : TYPE
-#   hide NAME | prioritize TYPE | margin N | Y: TYPE | T: TERM
+#   prioritize TYPE | margin N | Y: TYPE | T: TERM
 newtype num 0
 newtype prod 2
 newtype sum 2
@@ -240,8 +240,6 @@ T: forall x y z. x + y + z = z + y + x /\ x * y * z = z * y * x
 T: if long_condition_name then first_branch_value else second_branch_value
 margin 78
 T: forall aaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbbb. aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbb = bbbbbbbbbbbbbbbbbb + aaaaaaaaaaaaaaa
-hide SUC
-T: SUC x
 prioritize int
 T: x + y
 T: x < y

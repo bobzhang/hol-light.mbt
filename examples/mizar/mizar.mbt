@@ -1434,15 +1434,9 @@ fn step_24() -> Unit raise {
 }
 
 ///|
-/// Examples/mizar.ml:621
-fn step_26() -> Unit raise {
-  @preterm.hide_constant("<=")
-}
-
-///|
 /// Examples/mizar.ml:625
 fn step_27() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("forall f. (forall x y. x <= y /\\ y <= x ==> (x = y)) /\\\n     (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n     (forall x y. x <= y ==> f x <= f y) /\\\n     (forall X. ?s:A. (forall x. x IN X ==> s <= x) /\\\n                (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s))\n     ==> ?x. f x = x")))
+  ignore(@tactics.g(@parser.parse_term("forall f. (forall x y. x <<= y /\\ y <<= x ==> (x = y)) /\\\n     (forall x y z. x <<= y /\\ y <<= z ==> x <<= z) /\\\n     (forall x y. x <<= y ==> f x <<= f y) /\\\n     (forall X. ?s:A. (forall x. x IN X ==> s <<= x) /\\\n                (forall s'. (forall x. x IN X ==> s' <<= x) ==> s' <<= s))\n     ==> ?x. f x = x")))
 }
 
 ///|
@@ -1479,7 +1473,7 @@ fn step_30() -> Unit raise {
 ///|
 /// Examples/mizar.ml:643
 fn step_31() -> Unit raise {
-  ignore(parse_term_v1("let f be A->A;\n  assume L:antecedent;\n  antisymmetry: (forall x y. x <= y /\\ y <= x ==> (x = y)) by L;\n  transitivity: (forall x y z. x <= y /\\ y <= z ==> x <= z) by L;\n  monotonicity: (forall x y. x <= y ==> f x <= f y) by L;\n  least_upper_bound:\n      (forall X. ?s:A. (forall x. x IN X ==> s <= x) /\\\n                 (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s)) by L;\n  set Y_def: Y = {b | f b <= b};\n  Y_thm: forall b. b IN Y <=> f b <= b by Y_def,IN_ELIM_THM,BETA_THM;\n  consider a such that\n      lub: (forall x. x IN Y ==> a <= x) /\\\n           (forall a'. (forall x. x IN Y ==> a' <= x) ==> a' <= a)\n      by least_upper_bound;\n  take a;\n  forall b. b IN Y ==> f a <= b\n  proof\n    let b be A;\n    assume b_in_Y: b IN Y;\n    then L0: f b <= b by Y_thm;\n    a <= b by b_in_Y, lub;\n    so f a <= f b by monotonicity;\n    hence f a <= b by L0, transitivity;\n    end;\n  so Part1: f(a) <= a by lub;\n  so f(f(a)) <= f(a) by monotonicity;\n  so f(a) IN Y by Y_thm;\n  so a <= f(a) by lub;\n  hence thesis by Part1, antisymmetry;\nend"))
+  ignore(parse_term_v1("let f be A->A;\n  assume L:antecedent;\n  antisymmetry: (forall x y. x <<= y /\\ y <<= x ==> (x = y)) by L;\n  transitivity: (forall x y z. x <<= y /\\ y <<= z ==> x <<= z) by L;\n  monotonicity: (forall x y. x <<= y ==> f x <<= f y) by L;\n  least_upper_bound:\n      (forall X. ?s:A. (forall x. x IN X ==> s <<= x) /\\\n                 (forall s'. (forall x. x IN X ==> s' <<= x) ==> s' <<= s)) by L;\n  set Y_def: Y = {b | f b <<= b};\n  Y_thm: forall b. b IN Y <=> f b <<= b by Y_def,IN_ELIM_THM,BETA_THM;\n  consider a such that\n      lub: (forall x. x IN Y ==> a <<= x) /\\\n           (forall a'. (forall x. x IN Y ==> a' <<= x) ==> a' <<= a)\n      by least_upper_bound;\n  take a;\n  forall b. b IN Y ==> f a <<= b\n  proof\n    let b be A;\n    assume b_in_Y: b IN Y;\n    then L0: f b <<= b by Y_thm;\n    a <<= b by b_in_Y, lub;\n    so f a <<= f b by monotonicity;\n    hence f a <<= b by L0, transitivity;\n    end;\n  so Part1: f(a) <<= a by lub;\n  so f(f(a)) <<= f(a) by monotonicity;\n  so f(a) IN Y by Y_thm;\n  so a <<= f(a) by lub;\n  hence thesis by Part1, antisymmetry;\nend"))
 }
 
 ///|
@@ -1528,7 +1522,6 @@ fn load_steps() -> Unit raise {
   step_22()
   step_23()
   step_24()
-  step_26()
   step_27()
   step_28()
   step_29()

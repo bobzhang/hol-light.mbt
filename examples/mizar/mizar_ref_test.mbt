@@ -5565,7 +5565,7 @@ test "Examples/mizar matches Examples/mizar.ml" {
       #|0..0..0..solved at 3
       #|Searching with limit 0
       #|Searching with limit 1
-      #|Warning: Free variables in goal: <=
+      #|Warning: Free variables in goal: <<=
       #|0..0..1..solved at 4
       #|0..0..1..solved at 4
       #|0..0..1..2..solved at 6
@@ -5590,7 +5590,7 @@ test "Examples/mizar matches Examples/mizar.ml" {
       #|  (~p ==> F) <=> p
       #|  F ==> p
       #|  p:bool
-      #|  forall f. (forall x y. x <= y /\\ y <= x ==> (x = y)) /\\\n     (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n     (forall x y. x <= y ==> f x <= f y) /\\\n     (forall X. ?s:A. (forall x. x IN X ==> s <= x) /\\\n                (forall s'. (forall x. x IN X ==> s' <= x) ==> s' <= s))\n     ==> ?x. f x = x
+      #|  forall f. (forall x y. x <<= y /\\ y <<= x ==> (x = y)) /\\\n     (forall x y z. x <<= y /\\ y <<= z ==> x <<= z) /\\\n     (forall x y. x <<= y ==> f x <<= f y) /\\\n     (forall X. ?s:A. (forall x. x IN X ==> s <<= x) /\\\n                (forall s'. (forall x. x IN X ==> s' <<= x) ==> s' <<= s))\n     ==> ?x. f x = x
       #|thesis =  |- ((#=:fun(bool,fun(bool,bool)) #thesis:bool) #F:bool)
       #|antecedent =  |- ((#=:fun(bool,fun(bool,bool)) #antecedent:bool) #F:bool)
       #|contradiction =  |- ((#=:fun(bool,fun(bool,bool)) #contradiction:bool) #F:bool)
