@@ -24,7 +24,6 @@ MIZAR_SUPPOSE_TAC mizar_suppose_tac
 MIZAR_TAKE_TAC mizar_take_tac
 TRANSITIVITY_CHAIN transitivity_chain
 add_mizar_transitivity_theorem add_mizar_transitivity_theorem
-add_mizar_words add_mizar_words
 antecedent antecedent
 augments augments
 contradiction contradiction
@@ -50,6 +49,5 @@ pmk_exists pmk_exists
 prover_list prover_list
 run_steps run_steps
 split_ppair split_ppair
-subtract_mizar_words subtract_mizar_words
 thesis thesis
 typecheck_in_env typecheck_in_env

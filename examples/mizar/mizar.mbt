@@ -1097,39 +1097,6 @@ pub fn mizar_endcase_ref(x : @tactics.Goalstate) -> @tactics.Goalstate raise {
 }
 
 ///|
-let add_mizar_words_c : @lib.Cell[(Unit) -> Unit raise] = @lib.Cell::new("add_mizar_words")
-
-///|
-/// `add_mizar_words`
-pub fn add_mizar_words(x : Unit) -> Unit raise {
-  (add_mizar_words_c.get())(x)
-}
-
-///|
-let subtract_mizar_words_c : @lib.Cell[(Unit) -> Unit raise] = @lib.Cell::new("subtract_mizar_words")
-
-///|
-/// `subtract_mizar_words`
-pub fn subtract_mizar_words(x : Unit) -> Unit raise {
-  (subtract_mizar_words_c.get())(x)
-}
-
-///|
-/// add_mizar_words, subtract_mizar_words
-fn step_20() -> Unit raise {
-  let l_1 = @list.List(["assume", "take", "set", "given", "such", "that", "proof", "end", "consider", "suffices", "to", "show", "per", "cases", "endcase", "suppose", "be", "then", "thus", "hence", "by", "so"])
-  let (add_mizar_words, subtract_mizar_words) = (fn(x284 : Unit) -> Unit raise {
-    let _ = x284
-    @printer.reserve_words(l_1)
-  }, fn(x285 : Unit) -> Unit raise {
-    let _ = x285
-    @printer.unreserve_words(l_1)
-  })
-  add_mizar_words_c.set(add_mizar_words)
-  subtract_mizar_words_c.set(subtract_mizar_words)
-}
-
-///|
 /// `parse_preform`
 pub fn parse_preform(x286 : ArrayView[@lexer.Lexcode]) -> ((@preterm.Preterm, ArrayView[@lexer.Lexcode])) raise {
   let l_1 = x286
@@ -1416,9 +1383,9 @@ pub fn parse_step(x313 : Bool, x314 : ArrayView[@lexer.Lexcode]) -> ((@tactics.R
 }
 
 ///|
-/// `run_steps`
+/// Run proof steps, classifying Mizar keywords locally.
 pub fn run_steps(x428 : ArrayView[@lexer.Lexcode]) -> @tactics.Goalstack raise {
-  let lexemes = x428
+  let lexemes = mizar_tokens(x428)
   fn compose_steps(x429 : ArrayView[@lexer.Lexcode], x430 : ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> @tactics.Goalstate raise {
     let lexemes_1 = x429
     let gs = x430
@@ -1464,12 +1431,6 @@ fn step_23() -> Unit raise {
 /// Examples/mizar.ml:612
 fn step_24() -> Unit raise {
   @lib.do_list(add_mizar_transitivity_theorem, @list.List([@sets.subset_trans(), @sets.psubset_trans(), @sets.psubset_subset_trans(), @sets.subset_psubset_trans()]))
-}
-
-///|
-/// Examples/mizar.ml:619
-fn step_25() -> Unit raise {
-  add_mizar_words(())
 }
 
 ///|
@@ -1563,12 +1524,10 @@ fn load_steps() -> Unit raise {
   step_17()
   step_18()
   step_19()
-  step_20()
   step_21()
   step_22()
   step_23()
   step_24()
-  step_25()
   step_26()
   step_27()
   step_28()
