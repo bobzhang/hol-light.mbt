@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/inferpsign_thms.ml (translated by tools/translator). Keep
-   in sync with rqe/inferpsign_thms/inferpsign_thms_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/23_inferpsign_thms_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

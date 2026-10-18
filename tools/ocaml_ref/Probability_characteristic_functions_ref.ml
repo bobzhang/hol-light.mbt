@@ -1,5 +1,5 @@
 (* Load-fidelity test for Probability/characteristic_functions.ml (translated by tools/translator). Keep
-   in sync with probability/characteristic_functions/characteristic_functions_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with probability/make/07_characteristic_functions_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

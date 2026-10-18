@@ -1,5 +1,5 @@
 (* Load-fidelity test for Cadical/cnf.ml (translated by tools/translator). Keep
-   in sync with cadical/cnf/cnf_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with cadical/make/02_cnf_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

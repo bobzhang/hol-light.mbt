@@ -1,5 +1,5 @@
 (* Load-fidelity test for Quaternions/qderivative.ml (translated by tools/translator). Keep
-   in sync with quaternions/qderivative/qderivative_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with quaternions/make/06_qderivative_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

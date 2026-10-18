@@ -1,5 +1,5 @@
 (* Load-fidelity test for Probability/ergodic.ml (translated by tools/translator). Keep
-   in sync with probability/ergodic/ergodic_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with probability/make/09_ergodic_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

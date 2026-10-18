@@ -1,5 +1,5 @@
 (* Load-fidelity test for WZ/maxima.ml (translated by tools/translator). Keep
-   in sync with wz/maxima/maxima_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with wz/make/02_maxima_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

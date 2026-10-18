@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/condense_thms.ml (translated by tools/translator). Keep
-   in sync with rqe/condense_thms/condense_thms_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/19_condense_thms_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

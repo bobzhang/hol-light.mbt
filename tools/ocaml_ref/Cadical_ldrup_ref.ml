@@ -1,5 +1,5 @@
 (* Load-fidelity test for Cadical/ldrup.ml (translated by tools/translator). Keep
-   in sync with cadical/ldrup/ldrup_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with cadical/make/03_ldrup_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

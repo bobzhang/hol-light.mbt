@@ -1,5 +1,5 @@
 (* Load-fidelity test for Minisat/sat_tools.ml (translated by tools/translator). Keep
-   in sync with minisat/sat_tools/sat_tools_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with minisat/make/05_sat_tools_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

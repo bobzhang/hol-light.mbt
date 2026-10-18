@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/struct_equal.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/struct_equal/struct_equal_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/02_struct_equal_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

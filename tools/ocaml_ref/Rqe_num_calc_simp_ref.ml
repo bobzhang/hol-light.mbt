@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/num_calc_simp.ml (translated by tools/translator). Keep
-   in sync with rqe/num_calc_simp/num_calc_simp_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/11_num_calc_simp_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

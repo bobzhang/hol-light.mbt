@@ -1,5 +1,5 @@
 (* Load-fidelity test for Complex/complex_real.ml (translated by tools/translator). Keep
-   in sync with complex/complex_real/complex_real_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with complex/make/07_complex_real_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

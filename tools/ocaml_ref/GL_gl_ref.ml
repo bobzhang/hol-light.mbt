@@ -1,5 +1,5 @@
 (* Load-fidelity test for GL/gl.ml (translated by tools/translator). Keep
-   in sync with gl/gl/gl_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with gl/make/03_gl_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

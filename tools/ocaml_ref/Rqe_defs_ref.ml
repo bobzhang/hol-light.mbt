@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/defs.ml (translated by tools/translator). Keep
-   in sync with rqe/defs/defs_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/17_defs_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

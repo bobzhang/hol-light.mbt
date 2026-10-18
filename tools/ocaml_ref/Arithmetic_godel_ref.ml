@@ -1,5 +1,5 @@
 (* Load-fidelity test for Arithmetic/godel.ml (translated by tools/translator). Keep
-   in sync with arithmetic/godel/godel_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with arithmetic/make/05_godel_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

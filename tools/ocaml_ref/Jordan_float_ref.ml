@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/float.ml (translated by tools/translator). Keep
-   in sync with jordan/float/float_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/10_float_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

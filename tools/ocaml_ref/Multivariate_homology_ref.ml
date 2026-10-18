@@ -1,5 +1,5 @@
 (* Load-fidelity test for Multivariate/homology.ml (translated by tools/translator). Keep
-   in sync with multivariate/homology/homology_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with multivariate/make/03_homology_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

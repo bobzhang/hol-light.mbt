@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/equalities.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/equalities/equalities_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/10_equalities_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

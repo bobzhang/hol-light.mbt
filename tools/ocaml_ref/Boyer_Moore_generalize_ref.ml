@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/generalize.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/generalize/generalize_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/13_generalize_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

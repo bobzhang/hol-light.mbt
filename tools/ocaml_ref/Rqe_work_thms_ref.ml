@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/work_thms.ml (translated by tools/translator). Keep
-   in sync with rqe/work_thms/work_thms_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/27_work_thms_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

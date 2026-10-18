@@ -1,5 +1,5 @@
 (* Load-fidelity test for WZ/wz.ml (translated by tools/translator). Keep
-   in sync with wz/wz/wz_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with wz/make/01_wz_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

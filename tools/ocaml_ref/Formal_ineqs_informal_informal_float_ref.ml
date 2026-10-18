@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/informal/informal_float.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/informal/informal_float/informal_float_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/45_informal_float_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

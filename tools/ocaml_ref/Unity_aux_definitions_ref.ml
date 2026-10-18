@@ -1,5 +1,5 @@
 (* Load-fidelity test for Unity/aux_definitions.ml (translated by tools/translator). Keep
-   in sync with unity/aux_definitions/aux_definitions_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with unity/make/01_aux_definitions_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

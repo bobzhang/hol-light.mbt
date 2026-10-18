@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/matinsert.ml (translated by tools/translator). Keep
-   in sync with rqe/matinsert/matinsert_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/31_matinsert_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

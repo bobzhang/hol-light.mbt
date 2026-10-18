@@ -1,5 +1,5 @@
 (* Load-fidelity test for Probability/martingale_convergence.ml (translated by tools/translator). Keep
-   in sync with probability/martingale_convergence/martingale_convergence_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with probability/make/06_martingale_convergence_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

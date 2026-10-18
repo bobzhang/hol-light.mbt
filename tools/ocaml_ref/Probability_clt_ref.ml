@@ -1,5 +1,5 @@
 (* Load-fidelity test for Probability/clt.ml (translated by tools/translator). Keep
-   in sync with probability/clt/clt_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with probability/make/08_clt_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

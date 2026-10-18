@@ -1,5 +1,5 @@
 (* Load-fidelity test for Unity/mk_leadsto.ml (translated by tools/translator). Keep
-   in sync with unity/mk_leadsto/mk_leadsto_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with unity/make/06_mk_leadsto_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

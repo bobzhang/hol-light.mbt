@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/definitions.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/definitions/definitions_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/08_definitions_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

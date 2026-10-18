@@ -1,5 +1,5 @@
 (* Load-fidelity test for Permutation/morelist.ml (translated by tools/translator). Keep
-   in sync with permutation/morelist/morelist_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with permutation/make/01_morelist_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

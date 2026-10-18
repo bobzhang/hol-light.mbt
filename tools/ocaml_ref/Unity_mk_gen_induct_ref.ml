@@ -1,5 +1,5 @@
 (* Load-fidelity test for Unity/mk_gen_induct.ml (translated by tools/translator). Keep
-   in sync with unity/mk_gen_induct/mk_gen_induct_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with unity/make/05_mk_gen_induct_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

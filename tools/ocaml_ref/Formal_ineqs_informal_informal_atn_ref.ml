@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/informal/informal_atn.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/informal/informal_atn/informal_atn_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/50_informal_atn_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

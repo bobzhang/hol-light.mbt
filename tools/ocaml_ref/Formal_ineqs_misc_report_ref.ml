@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/misc/report.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/misc/report/report_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/41_report_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

@@ -1,5 +1,5 @@
 (* Load-fidelity test for Jordan/num_ext_gcd.ml (translated by tools/translator). Keep
-   in sync with jordan/num_ext_gcd/num_ext_gcd_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with jordan/make/06_num_ext_gcd_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

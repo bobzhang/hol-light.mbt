@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/arith/num_exp_theory.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/arith/num_exp_theory/num_exp_theory_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/07_num_exp_theory_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

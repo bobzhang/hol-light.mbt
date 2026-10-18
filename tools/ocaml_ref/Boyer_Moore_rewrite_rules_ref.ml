@@ -1,5 +1,5 @@
 (* Load-fidelity test for Boyer_Moore/rewrite_rules.ml (translated by tools/translator). Keep
-   in sync with boyer_moore/rewrite_rules/rewrite_rules_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with boyer_moore/make/07_rewrite_rules_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

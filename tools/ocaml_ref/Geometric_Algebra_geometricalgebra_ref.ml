@@ -1,5 +1,5 @@
 (* Load-fidelity test for Geometric_Algebra/geometricalgebra.ml (translated by tools/translator). Keep
-   in sync with geometric_algebra/geometricalgebra/geometricalgebra_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with geometric_algebra/make/01_geometricalgebra_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

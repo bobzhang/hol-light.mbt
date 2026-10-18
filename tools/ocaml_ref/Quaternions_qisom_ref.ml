@@ -1,5 +1,5 @@
 (* Load-fidelity test for Quaternions/qisom.ml (translated by tools/translator). Keep
-   in sync with quaternions/qisom/qisom_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with quaternions/make/07_qisom_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

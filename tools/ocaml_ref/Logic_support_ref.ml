@@ -1,5 +1,5 @@
 (* Load-fidelity test for Logic/support.ml (translated by tools/translator). Keep
-   in sync with logic/support/support_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with logic/make/12_support_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

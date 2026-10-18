@@ -1,5 +1,5 @@
 (* Load-fidelity test for Divstep/idivstep.ml (translated by tools/translator). Keep
-   in sync with divstep/idivstep/idivstep_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with divstep/make/02_idivstep_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

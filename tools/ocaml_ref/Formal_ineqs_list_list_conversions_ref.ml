@@ -1,5 +1,5 @@
 (* Load-fidelity test for Formal_ineqs/list/list_conversions.ml (translated by tools/translator). Keep
-   in sync with formal_ineqs/list/list_conversions/list_conversions_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with formal_ineqs/make/31_list_conversions_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

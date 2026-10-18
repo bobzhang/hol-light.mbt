@@ -1,5 +1,5 @@
 (* Load-fidelity test for Geometric_Algebra/quaternions.ml (translated by tools/translator). Keep
-   in sync with geometric_algebra/quaternions/quaternions_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with geometric_algebra/make/02_quaternions_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;

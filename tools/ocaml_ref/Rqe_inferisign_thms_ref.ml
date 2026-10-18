@@ -1,5 +1,5 @@
 (* Load-fidelity test for Rqe/inferisign_thms.ml (translated by tools/translator). Keep
-   in sync with rqe/inferisign_thms/inferisign_thms_ref_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
+   in sync with rqe/make/20_inferisign_thms_test.mbt (refresh with tools/ocaml_ref/refresh_ref.py). *)
 #use "bool.ml";;
 #use "drule.ml";;
 #use "tactics.ml";;
