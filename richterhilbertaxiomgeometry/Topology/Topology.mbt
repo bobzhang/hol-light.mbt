@@ -24,7 +24,10 @@ pub fn notin() -> @kernel.Thm {
 ///|
 /// DIFF_UNION
 fn step_3() -> Unit raise {
-  diff_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s t.  u ━ (s ∪ t) = (u ━ s) ∩ (u ━ t)\n  by set")))
+  diff_union_c.set(@readable.prove(
+    "\n  forall u s t.  u DIFF (s UNION t) = (u DIFF s) INTER (u DIFF t)",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -37,25 +40,12 @@ pub fn diff_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_1`
-pub fn exec_phrase_1(x1 : Unit) -> Unit raise {
-  let _ = x1
-  {
-    @readable.thmlist_tactic_ref().val = @readable.set
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((set): thm list -> tactic);;
-fn step_4() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((set): thm list -> tactic);;", exec_phrase_1)
-}
-
-///|
 /// DIFF_INTER
 fn step_5() -> Unit raise {
-  diff_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s t.  u ━ (s ∩ t) = (u ━ s) ∪ (u ━ t)\n  by set")))
+  diff_inter_c.set(@readable.prove(
+    "\n  forall u s t.  u DIFF (s INTER t) = (u DIFF s) UNION (u DIFF t)",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -70,7 +60,10 @@ pub fn diff_inter() -> @kernel.Thm {
 ///|
 /// DIFF_REFL
 fn step_6() -> Unit raise {
-  diff_refl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u t.  t ⊂ u ⇒ u ━ (u ━ t) = t\n  by set")))
+  diff_refl_c.set(@readable.prove(
+    "\n  forall u t.  t SUBSET u ==> u DIFF (u DIFF t) = t",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -85,7 +78,10 @@ pub fn diff_refl() -> @kernel.Thm {
 ///|
 /// DIFF_SUBSET
 fn step_7() -> Unit raise {
-  diff_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s t.  s ⊂ t  ⇒  s ━ u ⊂ t ━ u\n  by set")))
+  diff_subset_c.set(@readable.prove(
+    "\n  forall u s t.  s SUBSET t  ==>  s DIFF u SUBSET t DIFF u",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -100,7 +96,10 @@ pub fn diff_subset() -> @kernel.Thm {
 ///|
 /// DOUBLE_DIFF_UNION
 fn step_8() -> Unit raise {
-  double_diff_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A s t. A ━ s ━ t = A ━ (s ∪ t)\n  by set")))
+  double_diff_union_c.set(@readable.prove(
+    "\n  forall A s t. A DIFF s DIFF t = A DIFF (s UNION t)",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -115,7 +114,10 @@ pub fn double_diff_union() -> @kernel.Thm {
 ///|
 /// SUBSET_COMPLEMENT
 fn step_9() -> Unit raise {
-  subset_complement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t A.  s ⊂ A  ⇒  (s ⊂ A ━ t ⇔ s ∩ t = ∅)\n  by set")))
+  subset_complement_c.set(@readable.prove(
+    "\n  forall s t A.  s SUBSET A  ==>  (s SUBSET A DIFF t <=> s INTER t = {})",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -130,7 +132,10 @@ pub fn subset_complement() -> @kernel.Thm {
 ///|
 /// COMPLEMENT_DISJOINT
 fn step_10() -> Unit raise {
-  complement_disjoint_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A s t.  s ⊂ A  ⇒  (s ⊂ t ⇔ s ∩ (A ━ t) = ∅)\n  by set")))
+  complement_disjoint_c.set(@readable.prove(
+    "\n  forall A s t.  s SUBSET A  ==>  (s SUBSET t <=> s INTER (A DIFF t) = {})",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -145,7 +150,10 @@ pub fn complement_disjoint() -> @kernel.Thm {
 ///|
 /// COMPLEMENT_DUALITY
 fn step_11() -> Unit raise {
-  complement_duality_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A s t. s ⊂ A ∧ t ⊂ A  ⇒  (s = t ⇔ A ━ s = A ━ t)\n  by set")))
+  complement_duality_c.set(@readable.prove(
+    "\n  forall A s t. s SUBSET A /\\  t SUBSET A  ==>  (s = t <=> A DIFF s = A DIFF t)",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -160,7 +168,10 @@ pub fn complement_duality() -> @kernel.Thm {
 ///|
 /// COMPLEMENT_DUALITY_UNION
 fn step_12() -> Unit raise {
-  complement_duality_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A s t.  s ⊂ A ∧ t ⊂ A ∧ u ⊂ A  ⇒  (s = t ∪ u ⇔ A ━ s = (A ━ t) ∩ (A ━ u))\n  by set")))
+  complement_duality_union_c.set(@readable.prove(
+    "\n  forall A s t.  s SUBSET A /\\  t SUBSET A /\\  u SUBSET A  ==>  (s = t UNION u <=> A DIFF s = (A DIFF t) INTER (A DIFF u))",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -175,7 +186,10 @@ pub fn complement_duality_union() -> @kernel.Thm {
 ///|
 /// SUBSET_DUALITY
 fn step_13() -> Unit raise {
-  subset_duality_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  t ⊂ u  ⇒  s ━ u ⊂ s ━ t\n  by set")))
+  subset_duality_c.set(@readable.prove(
+    "\n  forall s t u.  t SUBSET u  ==>  s DIFF u SUBSET s DIFF t",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -190,7 +204,10 @@ pub fn subset_duality() -> @kernel.Thm {
 ///|
 /// COMPLEMENT_INTER_DIFF
 fn step_14() -> Unit raise {
-  complement_inter_diff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀A s t. s ⊂ A  ⇒  s ━ t = s ∩ (A ━ t)\n  by set")))
+  complement_inter_diff_c.set(@readable.prove(
+    "\n  forall A s t. s SUBSET A  ==>  s DIFF t = s INTER (A DIFF t)",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -205,7 +222,10 @@ pub fn complement_inter_diff() -> @kernel.Thm {
 ///|
 /// INTERS_SUBSET
 fn step_15() -> Unit raise {
-  inters_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f t. ¬(f = ∅) ∧ (∀s. s ∈ f ⇒ s ⊂ t)  ⇒  INTERS f ⊂ t\n  by set")))
+  inters_subset_c.set(@readable.prove(
+    "\n  forall f t. ~(f = {}) /\\  (forall s. s IN f ==> s SUBSET t)  ==>  INTERS f SUBSET t",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -220,7 +240,10 @@ pub fn inters_subset() -> @kernel.Thm {
 ///|
 /// IN_SET_FUNCTION_PREDICATE
 fn step_16() -> Unit raise {
-  in_set_function_predicate_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x f P. x ∈ {f y | P y}  ⇔  ∃y. x = f y ∧ P y\n  by set")))
+  in_set_function_predicate_c.set(@readable.prove(
+    "\n  forall x f P. x IN {f y | P y}  <=>  ?y. x = f y /\\  P y",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -235,7 +258,10 @@ pub fn in_set_function_predicate() -> @kernel.Thm {
 ///|
 /// INTER_TENSOR
 fn step_17() -> Unit raise {
-  inter_tensor_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s s' t t'.  s ⊂ s' ∧ t ⊂ t'  ⇒  s ∩ t ⊂ s' ∩ t'\n  by set")))
+  inter_tensor_c.set(@readable.prove(
+    "\n  forall s s' t t'.  s SUBSET s' /\\  t SUBSET t'  ==>  s INTER t SUBSET s' INTER t'",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -250,7 +276,10 @@ pub fn inter_tensor() -> @kernel.Thm {
 ///|
 /// UNION_TENSOR
 fn step_18() -> Unit raise {
-  union_tensor_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s s' t t'.  s ⊂ s' ∧ t ⊂ t'  ⇒  s ∪ t ⊂ s' ∪ t'\n  by set")))
+  union_tensor_c.set(@readable.prove(
+    "\n  forall s s' t t'.  s SUBSET s' /\\  t SUBSET t'  ==>  s UNION t SUBSET s' UNION t'",
+    @readable.by(@readable.set, []),
+  ))
 }
 
 ///|
@@ -265,7 +294,10 @@ pub fn union_tensor() -> @kernel.Thm {
 ///|
 /// ExistsTensorInter
 fn step_19() -> Unit raise {
-  existstensorinter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀F G H.  (∀x y. F x ∧ G y  ⇒ H (x ∩ y))  ⇒\n    (∃x. F x) ∧ (∃y. G y) ⇒ (∃z. H z)\n  by fol")))
+  existstensorinter_c.set(@readable.prove(
+    "\n  forall F G H.  (forall x y. F x /\\  G y  ==> H (x INTER y))  ==>\n    (?x. F x) /\\  (?y. G y) ==> (?z. H z)",
+    @readable.by(@readable.fol, []),
+  ))
 }
 
 ///|
@@ -275,22 +307,6 @@ let existstensorinter_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("ExistsTensorI
 /// `ExistsTensorInter`
 pub fn existstensorinter() -> @kernel.Thm {
   existstensorinter_c.get()
-}
-
-///|
-/// `exec_phrase_2`
-pub fn exec_phrase_2(x2 : Unit) -> Unit raise {
-  let _ = x2
-  {
-    @readable.thmlist_tactic_ref().val = @readable.fol
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((fol): thm list -> tactic);;
-fn step_20() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((fol): thm list -> tactic);;", exec_phrase_2)
 }
 
 ///|
@@ -341,7 +357,31 @@ pub fn opensets() -> @kernel.Thm {
 ///|
 /// ExistsTopology
 fn step_24() -> Unit raise {
-  existstopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀X. ∃α. istopology α  ∧  UnderlyingSpace α = X\n\n  proof\n    intro_TAC ∀X;\n    consider L such that L = {U | U ⊂ X}     [Lexists] by fol;\n    exists_TAC (X, L);\n    rewrite istopology IN_ELIM_THM Lexists UnderlyingSpace;\n    set;\n  qed;\n")))
+  existstopology_c.set(@readable.prove(
+    "\n  forall X. ?alpha. istopology alpha  /\\   UnderlyingSpace alpha = X",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall X"),
+        @readable.consider(
+          "L",
+          "L = {U | U SUBSET X}    ",
+          "Lexists",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.exists("(X, L)"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("istopology", () => istopology()),
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+            @readable.Label("Lexists"),
+            @readable.Thm("UnderlyingSpace", () => underlyingspace()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -354,73 +394,15 @@ pub fn existstopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_3`
-pub fn exec_phrase_3(x3 : Unit) -> Unit raise {
-  let _ = x3
-  {
-    @readable.thmlist_tactic_ref().val = @readable.rewrite
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewrite): thm list -> tactic);;
-fn step_25() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewrite): thm list -> tactic);;", exec_phrase_3)
-}
-
-///|
-/// `exec_phrase_4`
-pub fn exec_phrase_4(x4 : Unit) -> Unit raise {
-  let _ = x4
-  {
-    @readable.thm_ref().val = istopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((istopology): thm);;
-fn step_26() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((istopology): thm);;", exec_phrase_4)
-}
-
-///|
-/// `exec_phrase_5`
-pub fn exec_phrase_5(x5 : Unit) -> Unit raise {
-  let _ = x5
-  {
-    @readable.thm_ref().val = @sets.in_elim_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_ELIM_THM): thm);;
-fn step_27() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_ELIM_THM): thm);;", exec_phrase_5)
-}
-
-///|
-/// `exec_phrase_6`
-pub fn exec_phrase_6(x6 : Unit) -> Unit raise {
-  let _ = x6
-  {
-    @readable.thm_ref().val = underlyingspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UnderlyingSpace): thm);;
-fn step_28() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UnderlyingSpace): thm);;", exec_phrase_6)
-}
-
-///|
 /// topology_tybij_th
 fn step_29() -> Unit raise {
-  topology_tybij_th_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∃t. istopology t\n  by fol ExistsTopology")))
+  topology_tybij_th_c.set(@readable.prove(
+    "\n  ?t. istopology t",
+    @readable.by(
+      @readable.fol,
+      [@readable.Thm("ExistsTopology", () => existstopology())],
+    ),
+  ))
 }
 
 ///|
@@ -430,22 +412,6 @@ let topology_tybij_th_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("topology_tybi
 /// `topology_tybij_th`
 pub fn topology_tybij_th() -> @kernel.Thm {
   topology_tybij_th_c.get()
-}
-
-///|
-/// `exec_phrase_7`
-pub fn exec_phrase_7(x7 : Unit) -> Unit raise {
-  let _ = x7
-  {
-    @readable.thm_ref().val = existstopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ExistsTopology): thm);;
-fn step_30() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ExistsTopology): thm);;", exec_phrase_7)
 }
 
 ///|
@@ -466,7 +432,13 @@ pub fn topology_tybij() -> @kernel.Thm {
 ///|
 /// ISTOPOLOGYdest_topology
 fn step_32() -> Unit raise {
-  istopologydest_topology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. istopology (dest_topology α)\n  by fol topology_tybij")))
+  istopologydest_topology_c.set(@readable.prove(
+    "\n  forall alpha. istopology (dest_topology alpha)",
+    @readable.by(
+      @readable.fol,
+      [@readable.Thm("topology_tybij", () => topology_tybij())],
+    ),
+  ))
 }
 
 ///|
@@ -476,22 +448,6 @@ let istopologydest_topology_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("ISTOPOL
 /// `ISTOPOLOGYdest_topology`
 pub fn istopologydest_topology() -> @kernel.Thm {
   istopologydest_topology_c.get()
-}
-
-///|
-/// `exec_phrase_8`
-pub fn exec_phrase_8(x8 : Unit) -> Unit raise {
-  let _ = x8
-  {
-    @readable.thm_ref().val = topology_tybij()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((topology_tybij): thm);;
-fn step_33() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((topology_tybij): thm);;", exec_phrase_8)
 }
 
 ///|
@@ -527,7 +483,19 @@ pub fn topspace() -> @kernel.Thm {
 ///|
 /// TopologyPAIR
 fn step_36() -> Unit raise {
-  topologypair_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α.  dest_topology α = (topspace α, open_in α)\n  by rewrite PAIR_EQ OpenIn topspace UnderlyingSpace OpenSets")))
+  topologypair_c.set(@readable.prove(
+    "\n  forall alpha.  dest_topology alpha = (topspace alpha, open_in alpha)",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+        @readable.Thm("OpenIn", () => openin()),
+        @readable.Thm("topspace", () => topspace()),
+        @readable.Thm("UnderlyingSpace", () => underlyingspace()),
+        @readable.Thm("OpenSets", () => opensets()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -540,73 +508,36 @@ pub fn topologypair() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_9`
-pub fn exec_phrase_9(x9 : Unit) -> Unit raise {
-  let _ = x9
-  {
-    @readable.thm_ref().val = @pair.pair_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((PAIR_EQ): thm);;
-fn step_37() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((PAIR_EQ): thm);;", exec_phrase_9)
-}
-
-///|
-/// `exec_phrase_10`
-pub fn exec_phrase_10(x10 : Unit) -> Unit raise {
-  let _ = x10
-  {
-    @readable.thm_ref().val = openin()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenIn): thm);;
-fn step_38() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenIn): thm);;", exec_phrase_10)
-}
-
-///|
-/// `exec_phrase_11`
-pub fn exec_phrase_11(x11 : Unit) -> Unit raise {
-  let _ = x11
-  {
-    @readable.thm_ref().val = topspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((topspace): thm);;
-fn step_39() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((topspace): thm);;", exec_phrase_11)
-}
-
-///|
-/// `exec_phrase_12`
-pub fn exec_phrase_12(x12 : Unit) -> Unit raise {
-  let _ = x12
-  {
-    @readable.thm_ref().val = opensets()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenSets): thm);;
-fn step_40() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenSets): thm);;", exec_phrase_12)
-}
-
-///|
 /// Topology_Eq
 fn step_41() -> Unit raise {
-  topology_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α β.  topspace α =  topspace β  ∧  (∀U. open_in α U ⇔ open_in β U)\n    ⇔ α = β\n\n  proof\n    intro_TAC ∀α β;\n    eq_tac     [Right] by fol;\n    intro_TAC H1 H2;\n    dest_topology α = dest_topology β     [] by simplify TopologyPAIR PAIR_EQ H1 H2 FUN_EQ_THM;\n    fol - topology_tybij;\n  qed;\n")))
+  topology_eq_c.set(@readable.prove(
+    "\n  forall alpha beta.  topspace alpha =  topspace beta  /\\   (forall U. open_in alpha U <=> open_in beta U)\n    <=> alpha = beta",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha beta"),
+        @readable.eq_tac("Right", @readable.by(@readable.fol, [])),
+        @readable.intro_tac("H1 H2"),
+        @readable.have(
+          "\n    dest_topology alpha = dest_topology beta",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("TopologyPAIR", () => topologypair()),
+              @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("FUN_EQ_THM", () => @class.fun_eq_thm()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("topology_tybij", () => topology_tybij())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -619,57 +550,46 @@ pub fn topology_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_13`
-pub fn exec_phrase_13(x13 : Unit) -> Unit raise {
-  let _ = x13
-  {
-    @readable.thmlist_tactic_ref().val = @readable.simplify
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((simplify): thm list -> tactic);;
-fn step_42() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((simplify): thm list -> tactic);;", exec_phrase_13)
-}
-
-///|
-/// `exec_phrase_14`
-pub fn exec_phrase_14(x14 : Unit) -> Unit raise {
-  let _ = x14
-  {
-    @readable.thm_ref().val = topologypair()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TopologyPAIR): thm);;
-fn step_43() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TopologyPAIR): thm);;", exec_phrase_14)
-}
-
-///|
-/// `exec_phrase_15`
-pub fn exec_phrase_15(x15 : Unit) -> Unit raise {
-  let _ = x15
-  {
-    @readable.thm_ref().val = @class.fun_eq_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FUN_EQ_THM): thm);;
-fn step_44() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FUN_EQ_THM): thm);;", exec_phrase_15)
-}
-
-///|
 /// OpenInCLAUSES
 fn step_45() -> Unit raise {
-  openinclauses_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α X. topspace α = X  ⇒\n    (∀U. open_in α U  ⇒  U ⊂ X)  ∧  open_in α ∅  ∧  open_in α X  ∧\n    (∀s t. open_in α s ∧ open_in α t  ⇒ open_in α (s ∩ t))  ∧\n    ∀k. (∀s. s ∈ k ⇒ open_in α s)  ⇒  open_in α (UNIONS k)\n\n  proof\n    intro_TAC ∀α X, H1;\n    consider L such that L = open_in α     [Ldef] by fol;\n    istopology (X, L)     [] by fol H1 Ldef TopologyPAIR PAIR_EQ ISTOPOLOGYdest_topology;\n    fol Ldef - istopology IN SUBSET;\n  qed;\n")))
+  openinclauses_c.set(@readable.prove(
+    "\n  forall alpha X. topspace alpha = X  ==>\n    (forall U. open_in alpha U  ==>  U SUBSET X)  /\\   open_in alpha {}  /\\   open_in alpha X  /\\ \n    (forall s t. open_in alpha s /\\  open_in alpha t  ==> open_in alpha (s INTER t))  /\\ \n    forall k. (forall s. s IN k ==> open_in alpha s)  ==>  open_in alpha (UNIONS k)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha X, H1"),
+        @readable.consider(
+          "L",
+          "L = open_in alpha    ",
+          "Ldef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    istopology (X, L)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("Ldef"),
+              @readable.Thm("TopologyPAIR", () => topologypair()),
+              @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+              @readable.Thm("ISTOPOLOGYdest_topology", () => istopologydest_topology()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Ldef"),
+            @readable.Prev,
+            @readable.Thm("istopology", () => istopology()),
+            @readable.Thm("IN", () => @sets.in_()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -682,57 +602,12 @@ pub fn openinclauses() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_16`
-pub fn exec_phrase_16(x16 : Unit) -> Unit raise {
-  let _ = x16
-  {
-    @readable.thm_ref().val = istopologydest_topology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ISTOPOLOGYdest_topology): thm);;
-fn step_46() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ISTOPOLOGYdest_topology): thm);;", exec_phrase_16)
-}
-
-///|
-/// `exec_phrase_17`
-pub fn exec_phrase_17(x17 : Unit) -> Unit raise {
-  let _ = x17
-  {
-    @readable.thm_ref().val = @sets.in_()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN): thm);;
-fn step_47() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN): thm);;", exec_phrase_17)
-}
-
-///|
-/// `exec_phrase_18`
-pub fn exec_phrase_18(x18 : Unit) -> Unit raise {
-  let _ = x18
-  {
-    @readable.thm_ref().val = @sets.subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET): thm);;
-fn step_48() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET): thm);;", exec_phrase_18)
-}
-
-///|
 /// OPEN_IN_SUBSET
 fn step_49() -> Unit raise {
-  open_in_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  open_in α s  ⇒  s ⊂ topspace α\n  by fol OpenInCLAUSES")))
+  open_in_subset_c.set(@readable.prove(
+    "\n  forall alpha s.  open_in alpha s  ==>  s SUBSET topspace alpha",
+    @readable.by(@readable.fol, [@readable.Thm("OpenInCLAUSES", () => openinclauses())]),
+  ))
 }
 
 ///|
@@ -745,25 +620,12 @@ pub fn open_in_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_19`
-pub fn exec_phrase_19(x19 : Unit) -> Unit raise {
-  let _ = x19
-  {
-    @readable.thm_ref().val = openinclauses()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInCLAUSES): thm);;
-fn step_50() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInCLAUSES): thm);;", exec_phrase_19)
-}
-
-///|
 /// OPEN_IN_EMPTY
 fn step_51() -> Unit raise {
-  open_in_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. open_in α ∅\n  by fol OpenInCLAUSES")))
+  open_in_empty_c.set(@readable.prove(
+    "\n  forall alpha. open_in alpha {}",
+    @readable.by(@readable.fol, [@readable.Thm("OpenInCLAUSES", () => openinclauses())]),
+  ))
 }
 
 ///|
@@ -778,7 +640,10 @@ pub fn open_in_empty() -> @kernel.Thm {
 ///|
 /// OPEN_IN_INTER
 fn step_52() -> Unit raise {
-  open_in_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t. open_in α s ∧ open_in α t  ⇒  open_in α (s ∩ t)\n  by fol OpenInCLAUSES")))
+  open_in_inter_c.set(@readable.prove(
+    "\n  forall alpha s t. open_in alpha s /\\  open_in alpha t  ==>  open_in alpha (s INTER t)",
+    @readable.by(@readable.fol, [@readable.Thm("OpenInCLAUSES", () => openinclauses())]),
+  ))
 }
 
 ///|
@@ -793,7 +658,10 @@ pub fn open_in_inter() -> @kernel.Thm {
 ///|
 /// OPEN_IN_UNIONS
 fn step_53() -> Unit raise {
-  open_in_unions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α k. (∀s. s ∈ k ⇒ open_in α s)  ⇒  open_in α (UNIONS k)\n  by fol OpenInCLAUSES")))
+  open_in_unions_c.set(@readable.prove(
+    "\n  forall alpha k. (forall s. s IN k ==> open_in alpha s)  ==>  open_in alpha (UNIONS k)",
+    @readable.by(@readable.fol, [@readable.Thm("OpenInCLAUSES", () => openinclauses())]),
+  ))
 }
 
 ///|
@@ -808,7 +676,10 @@ pub fn open_in_unions() -> @kernel.Thm {
 ///|
 /// OpenInTopspace
 fn step_54() -> Unit raise {
-  openintopspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α.  open_in α (topspace α)\n  by fol OpenInCLAUSES")))
+  openintopspace_c.set(@readable.prove(
+    "\n  forall alpha.  open_in alpha (topspace alpha)",
+    @readable.by(@readable.fol, [@readable.Thm("OpenInCLAUSES", () => openinclauses())]),
+  ))
 }
 
 ///|
@@ -823,7 +694,34 @@ pub fn openintopspace() -> @kernel.Thm {
 ///|
 /// OPEN_IN_UNION
 fn step_55() -> Unit raise {
-  open_in_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t. open_in α s ∧ open_in α t  ⇒  open_in α (s ∪ t)\n\n  proof\n    intro_TAC ∀α s t, H;\n    ∀x. x ∈ {s, t} ⇔ x = s ∨ x = t     [] by fol IN_INSERT NOT_IN_EMPTY;\n    fol - UNIONS_2 H OPEN_IN_UNIONS;\n  qed;\n")))
+  open_in_union_c.set(@readable.prove(
+    "\n  forall alpha s t. open_in alpha s /\\  open_in alpha t  ==>  open_in alpha (s UNION t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H"),
+        @readable.have(
+          "\n    forall x. x IN {s, t} <=> x = s \\/ x = t",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("IN_INSERT", () => @sets.in_insert()),
+              @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("UNIONS_2", () => @sets.unions_2()),
+            @readable.Label("H"),
+            @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -836,73 +734,12 @@ pub fn open_in_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_20`
-pub fn exec_phrase_20(x20 : Unit) -> Unit raise {
-  let _ = x20
-  {
-    @readable.thm_ref().val = @sets.in_insert()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_INSERT): thm);;
-fn step_56() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_INSERT): thm);;", exec_phrase_20)
-}
-
-///|
-/// `exec_phrase_21`
-pub fn exec_phrase_21(x21 : Unit) -> Unit raise {
-  let _ = x21
-  {
-    @readable.thm_ref().val = @sets.not_in_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_IN_EMPTY): thm);;
-fn step_57() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_IN_EMPTY): thm);;", exec_phrase_21)
-}
-
-///|
-/// `exec_phrase_22`
-pub fn exec_phrase_22(x22 : Unit) -> Unit raise {
-  let _ = x22
-  {
-    @readable.thm_ref().val = @sets.unions_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIONS_2): thm);;
-fn step_58() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIONS_2): thm);;", exec_phrase_22)
-}
-
-///|
-/// `exec_phrase_23`
-pub fn exec_phrase_23(x23 : Unit) -> Unit raise {
-  let _ = x23
-  {
-    @readable.thm_ref().val = open_in_unions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_UNIONS): thm);;
-fn step_59() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_UNIONS): thm);;", exec_phrase_23)
-}
-
-///|
 /// OPEN_IN_TOPSPACE
 fn step_60() -> Unit raise {
-  open_in_topspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. open_in α (topspace α)\n  by fol OpenInCLAUSES")))
+  open_in_topspace_c.set(@readable.prove(
+    "\n  forall alpha. open_in alpha (topspace alpha)",
+    @readable.by(@readable.fol, [@readable.Thm("OpenInCLAUSES", () => openinclauses())]),
+  ))
 }
 
 ///|
@@ -917,7 +754,53 @@ pub fn open_in_topspace() -> @kernel.Thm {
 ///|
 /// OPEN_IN_INTERS
 fn step_61() -> Unit raise {
-  open_in_inters_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. FINITE s ∧ ¬(s = ∅) ∧ (∀t. t ∈ s  ⇒  open_in α t)\n    ⇒ open_in α (INTERS s)\n\n  proof\n    intro_TAC ∀α;\n    rewrite IMP_CONJ;\n    MATCH_MP_TAC FINITE_INDUCT;\n    rewrite INTERS_INSERT NOT_INSERT_EMPTY FORALL_IN_INSERT;\n    intro_TAC ∀x s, H1, xWorks sWorks;\n    assume ¬(s = ∅)     [Nonempty] by simplify INTERS_0 INTER_UNIV xWorks;\n    fol xWorks Nonempty H1 sWorks OPEN_IN_INTER;\n  qed;\n")))
+  open_in_inters_c.set(@readable.prove(
+    "\n  forall alpha s. FINITE s /\\  ~(s = {}) /\\  (forall t. t IN s  ==>  open_in alpha t)\n    ==> open_in alpha (INTERS s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha"),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("IMP_CONJ", () => @theorems.imp_conj())],
+        ),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("FINITE_INDUCT", () => @sets.finite_induct()),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("INTERS_INSERT", () => @sets.inters_insert()),
+            @readable.Thm("NOT_INSERT_EMPTY", () => @sets.not_insert_empty()),
+            @readable.Thm("FORALL_IN_INSERT", () => @sets.forall_in_insert()),
+          ],
+        ),
+        @readable.intro_tac("forall x s, H1, xWorks sWorks"),
+        @readable.assuming(
+          "~(s = {})",
+          "Nonempty",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("INTERS_0", () => @sets.inters_0()),
+              @readable.Thm("INTER_UNIV", () => @sets.inter_univ()),
+              @readable.Label("xWorks"),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("xWorks"),
+            @readable.Label("Nonempty"),
+            @readable.Label("H1"),
+            @readable.Label("sWorks"),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -930,153 +813,44 @@ pub fn open_in_inters() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_24`
-pub fn exec_phrase_24(x24 : Unit) -> Unit raise {
-  let _ = x24
-  {
-    @readable.thmtactic_ref().val = @tactics.match_mp_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmtactic_ref := ((MATCH_MP_TAC): thm -> tactic);;
-fn step_62() -> Unit raise {
-  @lib.register_phrase("thmtactic_ref := ((MATCH_MP_TAC): thm -> tactic);;", exec_phrase_24)
-}
-
-///|
-/// `exec_phrase_25`
-pub fn exec_phrase_25(x25 : Unit) -> Unit raise {
-  let _ = x25
-  {
-    @readable.thm_ref().val = @theorems.imp_conj()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IMP_CONJ): thm);;
-fn step_63() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IMP_CONJ): thm);;", exec_phrase_25)
-}
-
-///|
-/// `exec_phrase_26`
-pub fn exec_phrase_26(x26 : Unit) -> Unit raise {
-  let _ = x26
-  {
-    @readable.thm_ref().val = @sets.finite_induct()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FINITE_INDUCT): thm);;
-fn step_64() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FINITE_INDUCT): thm);;", exec_phrase_26)
-}
-
-///|
-/// `exec_phrase_27`
-pub fn exec_phrase_27(x27 : Unit) -> Unit raise {
-  let _ = x27
-  {
-    @readable.thm_ref().val = @sets.inters_insert()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTERS_INSERT): thm);;
-fn step_65() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTERS_INSERT): thm);;", exec_phrase_27)
-}
-
-///|
-/// `exec_phrase_28`
-pub fn exec_phrase_28(x28 : Unit) -> Unit raise {
-  let _ = x28
-  {
-    @readable.thm_ref().val = @sets.not_insert_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_INSERT_EMPTY): thm);;
-fn step_66() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_INSERT_EMPTY): thm);;", exec_phrase_28)
-}
-
-///|
-/// `exec_phrase_29`
-pub fn exec_phrase_29(x29 : Unit) -> Unit raise {
-  let _ = x29
-  {
-    @readable.thm_ref().val = @sets.forall_in_insert()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_IN_INSERT): thm);;
-fn step_67() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_IN_INSERT): thm);;", exec_phrase_29)
-}
-
-///|
-/// `exec_phrase_30`
-pub fn exec_phrase_30(x30 : Unit) -> Unit raise {
-  let _ = x30
-  {
-    @readable.thm_ref().val = @sets.inters_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTERS_0): thm);;
-fn step_68() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTERS_0): thm);;", exec_phrase_30)
-}
-
-///|
-/// `exec_phrase_31`
-pub fn exec_phrase_31(x31 : Unit) -> Unit raise {
-  let _ = x31
-  {
-    @readable.thm_ref().val = @sets.inter_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_UNIV): thm);;
-fn step_69() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_UNIV): thm);;", exec_phrase_31)
-}
-
-///|
-/// `exec_phrase_32`
-pub fn exec_phrase_32(x32 : Unit) -> Unit raise {
-  let _ = x32
-  {
-    @readable.thm_ref().val = open_in_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_INTER): thm);;
-fn step_70() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_INTER): thm);;", exec_phrase_32)
-}
-
-///|
 /// OPEN_IN_SUBOPEN
 fn step_71() -> Unit raise {
-  open_in_subopen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  open_in α s ⇔ ∀x. x ∈ s ⇒ ∃t. open_in α t ∧ x ∈ t ∧ t ⊂ s\n\n  proof\n    intro_TAC ∀α s;\n    eq_tac     [Left] by set;\n    intro_TAC ALLtExist;\n    consider f such that\n    ∀x. x ∈ s  ⇒  open_in α (f x) ∧ x ∈ f x ∧ f x ⊂ s     [fExists] by fol ALLtExist SKOLEM_THM_GEN;\n    s = UNIONS (IMAGE f s)     [] by set -;\n    fol - fExists FORALL_IN_IMAGE OPEN_IN_UNIONS;\n  qed;\n")))
+  open_in_subopen_c.set(@readable.prove(
+    "\n  forall alpha s.  open_in alpha s <=> forall x. x IN s ==> ?t. open_in alpha t /\\  x IN t /\\  t SUBSET s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s"),
+        @readable.eq_tac("Left", @readable.by(@readable.set, [])),
+        @readable.intro_tac("ALLtExist"),
+        @readable.consider(
+          "f",
+          "forall x. x IN s  ==>  open_in alpha (f x) /\\  x IN f x /\\  f x SUBSET s    ",
+          "fExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ALLtExist"),
+              @readable.Thm("SKOLEM_THM_GEN", () => @readable.skolem_thm_gen()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s = UNIONS (IMAGE f s)",
+          "",
+          @readable.by(@readable.set, [@readable.Prev]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("fExists"),
+            @readable.Thm("FORALL_IN_IMAGE", () => @sets.forall_in_image()),
+            @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1086,38 +860,6 @@ let open_in_subopen_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("OPEN_IN_SUBOPEN
 /// `OPEN_IN_SUBOPEN`
 pub fn open_in_subopen() -> @kernel.Thm {
   open_in_subopen_c.get()
-}
-
-///|
-/// `exec_phrase_33`
-pub fn exec_phrase_33(x33 : Unit) -> Unit raise {
-  let _ = x33
-  {
-    @readable.thm_ref().val = @readable.skolem_thm_gen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SKOLEM_THM_GEN): thm);;
-fn step_72() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SKOLEM_THM_GEN): thm);;", exec_phrase_33)
-}
-
-///|
-/// `exec_phrase_34`
-pub fn exec_phrase_34(x34 : Unit) -> Unit raise {
-  let _ = x34
-  {
-    @readable.thm_ref().val = @sets.forall_in_image()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_IN_IMAGE): thm);;
-fn step_73() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_IN_IMAGE): thm);;", exec_phrase_34)
 }
 
 ///|
@@ -1138,7 +880,10 @@ pub fn closed_in() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_SUBSET
 fn step_75() -> Unit raise {
-  closed_in_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. closed_in α s   ⇒  s ⊂ topspace α\n  by fol closed_in")))
+  closed_in_subset_c.set(@readable.prove(
+    "\n  forall alpha s. closed_in alpha s   ==>  s SUBSET topspace alpha",
+    @readable.by(@readable.fol, [@readable.Thm("closed_in", () => closed_in())]),
+  ))
 }
 
 ///|
@@ -1151,25 +896,20 @@ pub fn closed_in_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_35`
-pub fn exec_phrase_35(x35 : Unit) -> Unit raise {
-  let _ = x35
-  {
-    @readable.thm_ref().val = closed_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((closed_in): thm);;
-fn step_76() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((closed_in): thm);;", exec_phrase_35)
-}
-
-///|
 /// CLOSED_IN_EMPTY
 fn step_77() -> Unit raise {
-  closed_in_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. closed_in α ∅\n  by fol closed_in EMPTY_SUBSET DIFF_EMPTY OPEN_IN_TOPSPACE")))
+  closed_in_empty_c.set(@readable.prove(
+    "\n  forall alpha. closed_in alpha {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+        @readable.Thm("DIFF_EMPTY", () => @sets.diff_empty()),
+        @readable.Thm("OPEN_IN_TOPSPACE", () => open_in_topspace()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1182,57 +922,20 @@ pub fn closed_in_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_36`
-pub fn exec_phrase_36(x36 : Unit) -> Unit raise {
-  let _ = x36
-  {
-    @readable.thm_ref().val = @sets.empty_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EMPTY_SUBSET): thm);;
-fn step_78() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EMPTY_SUBSET): thm);;", exec_phrase_36)
-}
-
-///|
-/// `exec_phrase_37`
-pub fn exec_phrase_37(x37 : Unit) -> Unit raise {
-  let _ = x37
-  {
-    @readable.thm_ref().val = @sets.diff_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_EMPTY): thm);;
-fn step_79() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_EMPTY): thm);;", exec_phrase_37)
-}
-
-///|
-/// `exec_phrase_38`
-pub fn exec_phrase_38(x38 : Unit) -> Unit raise {
-  let _ = x38
-  {
-    @readable.thm_ref().val = open_in_topspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_TOPSPACE): thm);;
-fn step_80() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_TOPSPACE): thm);;", exec_phrase_38)
-}
-
-///|
 /// CLOSED_IN_TOPSPACE
 fn step_81() -> Unit raise {
-  closed_in_topspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. closed_in α (topspace α)\n  by fol closed_in SUBSET_REFL DIFF_EQ_EMPTY OPEN_IN_EMPTY")))
+  closed_in_topspace_c.set(@readable.prove(
+    "\n  forall alpha. closed_in alpha (topspace alpha)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+        @readable.Thm("DIFF_EQ_EMPTY", () => @sets.diff_eq_empty()),
+        @readable.Thm("OPEN_IN_EMPTY", () => open_in_empty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1245,57 +948,26 @@ pub fn closed_in_topspace() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_39`
-pub fn exec_phrase_39(x39 : Unit) -> Unit raise {
-  let _ = x39
-  {
-    @readable.thm_ref().val = @sets.subset_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_REFL): thm);;
-fn step_82() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_REFL): thm);;", exec_phrase_39)
-}
-
-///|
-/// `exec_phrase_40`
-pub fn exec_phrase_40(x40 : Unit) -> Unit raise {
-  let _ = x40
-  {
-    @readable.thm_ref().val = @sets.diff_eq_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_EQ_EMPTY): thm);;
-fn step_83() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_EQ_EMPTY): thm);;", exec_phrase_40)
-}
-
-///|
-/// `exec_phrase_41`
-pub fn exec_phrase_41(x41 : Unit) -> Unit raise {
-  let _ = x41
-  {
-    @readable.thm_ref().val = open_in_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_EMPTY): thm);;
-fn step_84() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_EMPTY): thm);;", exec_phrase_41)
-}
-
-///|
 /// CLOSED_IN_UNION
 fn step_85() -> Unit raise {
-  closed_in_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t. closed_in α s ∧ closed_in α t  ⇒  closed_in α (s ∪ t)\n\n  proof\n    intro_TAC ∀α s t, Hst;\n    fol Hst closed_in DIFF_UNION UNION_SUBSET OPEN_IN_INTER;\n  qed;\n")))
+  closed_in_union_c.set(@readable.prove(
+    "\n  forall alpha s t. closed_in alpha s /\\  closed_in alpha t  ==>  closed_in alpha (s UNION t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, Hst"),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Hst"),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm("DIFF_UNION", () => diff_union()),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1308,41 +980,43 @@ pub fn closed_in_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_42`
-pub fn exec_phrase_42(x42 : Unit) -> Unit raise {
-  let _ = x42
-  {
-    @readable.thm_ref().val = diff_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_UNION): thm);;
-fn step_86() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_UNION): thm);;", exec_phrase_42)
-}
-
-///|
-/// `exec_phrase_43`
-pub fn exec_phrase_43(x43 : Unit) -> Unit raise {
-  let _ = x43
-  {
-    @readable.thm_ref().val = @sets.union_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNION_SUBSET): thm);;
-fn step_87() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNION_SUBSET): thm);;", exec_phrase_43)
-}
-
-///|
 /// CLOSED_IN_INTERS
 fn step_88() -> Unit raise {
-  closed_in_inters_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α k.  ¬(k = ∅) ∧ (∀s. s ∈ k ⇒ closed_in α s)  ⇒  closed_in α (INTERS k)\n\n  proof\n    intro_TAC ∀α k, H1 H2;\n    consider X such that X = topspace α     [Xdef] by fol;\n    simplify GSYM Xdef closed_in DIFF_INTERS SIMPLE_IMAGE;\n    fol H1 H2 Xdef INTERS_SUBSET closed_in FORALL_IN_IMAGE OPEN_IN_UNIONS;\n  qed;\n")))
+  closed_in_inters_c.set(@readable.prove(
+    "\n  forall alpha k.  ~(k = {}) /\\  (forall s. s IN k ==> closed_in alpha s)  ==>  closed_in alpha (INTERS k)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha k, H1 H2"),
+        @readable.consider(
+          "X",
+          "X = topspace alpha    ",
+          "Xdef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Rule(@equal.gsym, @readable.Label("Xdef")),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm("DIFF_INTERS", () => @sets.diff_inters()),
+            @readable.Thm("SIMPLE_IMAGE", () => @sets.simple_image()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Label("Xdef"),
+            @readable.Thm("INTERS_SUBSET", () => inters_subset()),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm("FORALL_IN_IMAGE", () => @sets.forall_in_image()),
+            @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1355,73 +1029,68 @@ pub fn closed_in_inters() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_44`
-pub fn exec_phrase_44(x44 : Unit) -> Unit raise {
-  let _ = x44
-  {
-    @readable.thm_thm_ref().val = @equal.gsym
-    ()
-  }
-}
-
-///|
-/// the phrase thm_thm_ref := ((GSYM): (thm -> thm));;
-fn step_89() -> Unit raise {
-  @lib.register_phrase("thm_thm_ref := ((GSYM): (thm -> thm));;", exec_phrase_44)
-}
-
-///|
-/// `exec_phrase_45`
-pub fn exec_phrase_45(x45 : Unit) -> Unit raise {
-  let _ = x45
-  {
-    @readable.thm_ref().val = @sets.diff_inters()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_INTERS): thm);;
-fn step_90() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_INTERS): thm);;", exec_phrase_45)
-}
-
-///|
-/// `exec_phrase_46`
-pub fn exec_phrase_46(x46 : Unit) -> Unit raise {
-  let _ = x46
-  {
-    @readable.thm_ref().val = @sets.simple_image()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SIMPLE_IMAGE): thm);;
-fn step_91() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SIMPLE_IMAGE): thm);;", exec_phrase_46)
-}
-
-///|
-/// `exec_phrase_47`
-pub fn exec_phrase_47(x47 : Unit) -> Unit raise {
-  let _ = x47
-  {
-    @readable.thm_ref().val = inters_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTERS_SUBSET): thm);;
-fn step_92() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTERS_SUBSET): thm);;", exec_phrase_47)
-}
-
-///|
 /// CLOSED_IN_FORALL_IN
 fn step_93() -> Unit raise {
-  closed_in_forall_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α P Q.  ¬(P = ∅) ∧ (∀a. P a ⇒ closed_in α {x | Q a x})  ⇒\n    closed_in α {x | ∀a. P a ⇒ Q a x}\n\n  proof\n    intro_TAC ∀α P Q, Pnonempty H1;\n    consider f such that f = {{x | Q a x} | P a}     [fDef] by fol;\n    ¬(f = ∅)     [fNonempty] by set fDef Pnonempty;\n    (∀a. P a ⇒ closed_in α {x | Q a x})  ⇔  (∀s. s ∈ f ⇒ closed_in α s)     [] by simplify fDef FORALL_IN_GSPEC;\n    closed_in α (INTERS f)     [] by fol fNonempty H1 - CLOSED_IN_INTERS;\n    MP_TAC -;\n    {x | ∀a. P a ⇒ x ∈ {x | Q a x}} = {x | ∀a. P a ⇒ Q a x}     [] by set;\n    simplify fDef INTERS_GSPEC -;\n  qed;\n")))
+  closed_in_forall_in_c.set(@readable.prove(
+    "\n  forall alpha P Q.  ~(P = {}) /\\  (forall a. P a ==> closed_in alpha {x | Q a x})  ==>\n    closed_in alpha {x | forall a. P a ==> Q a x}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha P Q, Pnonempty H1"),
+        @readable.consider(
+          "f",
+          "f = {{x | Q a x} | P a}    ",
+          "fDef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    ~(f = {})",
+          "fNonempty",
+          @readable.by(
+            @readable.set,
+            [@readable.Label("fDef"), @readable.Label("Pnonempty")],
+          ),
+        ),
+        @readable.have(
+          "\n    (forall a. P a ==> closed_in alpha {x | Q a x})  <=>  (forall s. s IN f ==> closed_in alpha s)",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("fDef"),
+              @readable.Thm("FORALL_IN_GSPEC", () => @sets.forall_in_gspec()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    closed_in alpha (INTERS f)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("fNonempty"),
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("CLOSED_IN_INTERS", () => closed_in_inters()),
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.have(
+          "\n    {x | forall a. P a ==> x IN {x | Q a x}} = {x | forall a. P a ==> Q a x}",
+          "",
+          @readable.by(@readable.set, []),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("fDef"),
+            @readable.Thm("INTERS_GSPEC", () => @sets.inters_gspec()),
+            @readable.Prev,
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1434,78 +1103,30 @@ pub fn closed_in_forall_in() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_48`
-pub fn exec_phrase_48(x48 : Unit) -> Unit raise {
-  let _ = x48
-  {
-    @readable.thmtactic_ref().val = fn(x49 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
-      let s50 = @tactics.mp_tac(x49)
-      fn(x51 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        s50(x51)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase thmtactic_ref := ((MP_TAC): thm -> tactic);;
-fn step_94() -> Unit raise {
-  @lib.register_phrase("thmtactic_ref := ((MP_TAC): thm -> tactic);;", exec_phrase_48)
-}
-
-///|
-/// `exec_phrase_49`
-pub fn exec_phrase_49(x52 : Unit) -> Unit raise {
-  let _ = x52
-  {
-    @readable.thm_ref().val = @sets.forall_in_gspec()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_IN_GSPEC): thm);;
-fn step_95() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_IN_GSPEC): thm);;", exec_phrase_49)
-}
-
-///|
-/// `exec_phrase_50`
-pub fn exec_phrase_50(x53 : Unit) -> Unit raise {
-  let _ = x53
-  {
-    @readable.thm_ref().val = closed_in_inters()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_INTERS): thm);;
-fn step_96() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_INTERS): thm);;", exec_phrase_50)
-}
-
-///|
-/// `exec_phrase_51`
-pub fn exec_phrase_51(x54 : Unit) -> Unit raise {
-  let _ = x54
-  {
-    @readable.thm_ref().val = @sets.inters_gspec()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTERS_GSPEC): thm);;
-fn step_97() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTERS_GSPEC): thm);;", exec_phrase_51)
-}
-
-///|
 /// CLOSED_IN_INTER
 fn step_98() -> Unit raise {
-  closed_in_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t. closed_in α s ∧ closed_in α t ⇒ closed_in α (s ∩ t)\n\n  proof\n    intro_TAC ∀α s t, Hs Ht;\n    rewrite GSYM INTERS_2;\n    MATCH_MP_TAC CLOSED_IN_INTERS;\n    set Hs Ht;\n  qed;\n")))
+  closed_in_inter_c.set(@readable.prove(
+    "\n  forall alpha s t. closed_in alpha s /\\  closed_in alpha t ==> closed_in alpha (s INTER t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, Hs Ht"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("INTERS_2", () => @sets.inters_2()),
+            ),
+          ],
+        ),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("CLOSED_IN_INTERS", () => closed_in_inters()),
+        ),
+        @readable.by(@readable.set, [@readable.Label("Hs"), @readable.Label("Ht")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1518,25 +1139,34 @@ pub fn closed_in_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_52`
-pub fn exec_phrase_52(x55 : Unit) -> Unit raise {
-  let _ = x55
-  {
-    @readable.thm_ref().val = @sets.inters_2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTERS_2): thm);;
-fn step_99() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTERS_2): thm);;", exec_phrase_52)
-}
-
-///|
 /// OPEN_IN_CLOSED_IN_EQ
 fn step_100() -> Unit raise {
-  open_in_closed_in_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. open_in α s  ⇔  s ⊂ topspace α ∧ closed_in α (topspace α ━ s)\n\n  proof\n    intro_TAC ∀α s;\n    simplify closed_in SUBSET_DIFF OPEN_IN_SUBSET;\n    fol SET_RULE [X ━ (X ━ s) = X ∩ s  ∧  (s ⊂ X ⇒ X ∩ s = s)] OPEN_IN_SUBSET;\n  qed;\n")))
+  open_in_closed_in_eq_c.set(@readable.prove(
+    "\n  forall alpha s. open_in alpha s  <=>  s SUBSET topspace alpha /\\  closed_in alpha (topspace alpha DIFF s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.TermRule(
+              @sets.set_rule,
+              "X DIFF (X DIFF s) = X INTER s  /\\   (s SUBSET X ==> X INTER s = s)",
+            ),
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1549,57 +1179,15 @@ pub fn open_in_closed_in_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_53`
-pub fn exec_phrase_53(x56 : Unit) -> Unit raise {
-  let _ = x56
-  {
-    @readable.thm_ref().val = @sets.subset_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_DIFF): thm);;
-fn step_101() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_DIFF): thm);;", exec_phrase_53)
-}
-
-///|
-/// `exec_phrase_54`
-pub fn exec_phrase_54(x57 : Unit) -> Unit raise {
-  let _ = x57
-  {
-    @readable.thm_ref().val = open_in_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_SUBSET): thm);;
-fn step_102() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_SUBSET): thm);;", exec_phrase_54)
-}
-
-///|
-/// `exec_phrase_55`
-pub fn exec_phrase_55(x58 : Unit) -> Unit raise {
-  let _ = x58
-  {
-    @readable.term_thm_ref().val = @sets.set_rule
-    ()
-  }
-}
-
-///|
-/// the phrase term_thm_ref := ((SET_RULE): (term -> thm));;
-fn step_103() -> Unit raise {
-  @lib.register_phrase("term_thm_ref := ((SET_RULE): (term -> thm));;", exec_phrase_55)
-}
-
-///|
 /// OPEN_IN_CLOSED_IN
 fn step_104() -> Unit raise {
-  open_in_closed_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. s ⊂ topspace α\n    ⇒ (open_in α s ⇔ closed_in α (topspace α ━ s))\n  by fol OPEN_IN_CLOSED_IN_EQ")))
+  open_in_closed_in_c.set(@readable.prove(
+    "\n  forall s. s SUBSET topspace alpha\n    ==> (open_in alpha s <=> closed_in alpha (topspace alpha DIFF s))",
+    @readable.by(
+      @readable.fol,
+      [@readable.Thm("OPEN_IN_CLOSED_IN_EQ", () => open_in_closed_in_eq())],
+    ),
+  ))
 }
 
 ///|
@@ -1612,25 +1200,34 @@ pub fn open_in_closed_in() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_56`
-pub fn exec_phrase_56(x59 : Unit) -> Unit raise {
-  let _ = x59
-  {
-    @readable.thm_ref().val = open_in_closed_in_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_CLOSED_IN_EQ): thm);;
-fn step_105() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_CLOSED_IN_EQ): thm);;", exec_phrase_56)
-}
-
-///|
 /// OPEN_IN_DIFF
 fn step_106() -> Unit raise {
-  open_in_diff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  open_in α s ∧ closed_in α t  ⇒  open_in α (s ━ t)\n\n  proof\n    intro_TAC ∀α s t, H1 H2;\n    consider X such that X = topspace α     [Xdef] by fol;\n    fol COMPLEMENT_INTER_DIFF OPEN_IN_SUBSET - H1 H2 closed_in OPEN_IN_INTER;\n  qed;\n")))
+  open_in_diff_c.set(@readable.prove(
+    "\n  forall alpha s t.  open_in alpha s /\\  closed_in alpha t  ==>  open_in alpha (s DIFF t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1 H2"),
+        @readable.consider(
+          "X",
+          "X = topspace alpha    ",
+          "Xdef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("COMPLEMENT_INTER_DIFF", () => complement_inter_diff()),
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Prev,
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1643,25 +1240,36 @@ pub fn open_in_diff() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_57`
-pub fn exec_phrase_57(x60 : Unit) -> Unit raise {
-  let _ = x60
-  {
-    @readable.thm_ref().val = complement_inter_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COMPLEMENT_INTER_DIFF): thm);;
-fn step_107() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COMPLEMENT_INTER_DIFF): thm);;", exec_phrase_57)
-}
-
-///|
 /// CLOSED_IN_DIFF
 fn step_108() -> Unit raise {
-  closed_in_diff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  closed_in α s ∧ open_in α t  ⇒  closed_in α (s ━ t)\n\n  proof\n    intro_TAC ∀α s t, H1 H2;\n    consider X such that X = topspace α     [Xdef] by fol;\n    fol COMPLEMENT_INTER_DIFF H1 - OPEN_IN_SUBSET SUBSET_DIFF DIFF_REFL H2 closed_in CLOSED_IN_INTER;\n  qed;\n")))
+  closed_in_diff_c.set(@readable.prove(
+    "\n  forall alpha s t.  closed_in alpha s /\\  open_in alpha t  ==>  closed_in alpha (s DIFF t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1 H2"),
+        @readable.consider(
+          "X",
+          "X = topspace alpha    ",
+          "Xdef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("COMPLEMENT_INTER_DIFF", () => complement_inter_diff()),
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("DIFF_REFL", () => diff_refl()),
+            @readable.Label("H2"),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1674,41 +1282,34 @@ pub fn closed_in_diff() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_58`
-pub fn exec_phrase_58(x61 : Unit) -> Unit raise {
-  let _ = x61
-  {
-    @readable.thm_ref().val = diff_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_REFL): thm);;
-fn step_109() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_REFL): thm);;", exec_phrase_58)
-}
-
-///|
-/// `exec_phrase_59`
-pub fn exec_phrase_59(x62 : Unit) -> Unit raise {
-  let _ = x62
-  {
-    @readable.thm_ref().val = closed_in_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_INTER): thm);;
-fn step_110() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_INTER): thm);;", exec_phrase_59)
-}
-
-///|
 /// CLOSED_IN_UNIONS
 fn step_111() -> Unit raise {
-  closed_in_unions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  FINITE s ∧ (∀t. t ∈ s ⇒ closed_in α t)\n    ⇒ closed_in α (UNIONS s)\n\n  proof\n    intro_TAC ∀α;\n    rewrite IMP_CONJ;\n    MATCH_MP_TAC FINITE_INDUCT;\n    fol UNIONS_INSERT UNIONS_0 CLOSED_IN_EMPTY IN_INSERT CLOSED_IN_UNION;\n  qed;\n")))
+  closed_in_unions_c.set(@readable.prove(
+    "\n  forall alpha s.  FINITE s /\\  (forall t. t IN s ==> closed_in alpha t)\n    ==> closed_in alpha (UNIONS s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha"),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("IMP_CONJ", () => @theorems.imp_conj())],
+        ),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("FINITE_INDUCT", () => @sets.finite_induct()),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("UNIONS_INSERT", () => @sets.unions_insert()),
+            @readable.Thm("UNIONS_0", () => @sets.unions_0()),
+            @readable.Thm("CLOSED_IN_EMPTY", () => closed_in_empty()),
+            @readable.Thm("IN_INSERT", () => @sets.in_insert()),
+            @readable.Thm("CLOSED_IN_UNION", () => closed_in_union()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1718,70 +1319,6 @@ let closed_in_unions_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CLOSED_IN_UNIO
 /// `CLOSED_IN_UNIONS`
 pub fn closed_in_unions() -> @kernel.Thm {
   closed_in_unions_c.get()
-}
-
-///|
-/// `exec_phrase_60`
-pub fn exec_phrase_60(x63 : Unit) -> Unit raise {
-  let _ = x63
-  {
-    @readable.thm_ref().val = @sets.unions_insert()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIONS_INSERT): thm);;
-fn step_112() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIONS_INSERT): thm);;", exec_phrase_60)
-}
-
-///|
-/// `exec_phrase_61`
-pub fn exec_phrase_61(x64 : Unit) -> Unit raise {
-  let _ = x64
-  {
-    @readable.thm_ref().val = @sets.unions_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIONS_0): thm);;
-fn step_113() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIONS_0): thm);;", exec_phrase_61)
-}
-
-///|
-/// `exec_phrase_62`
-pub fn exec_phrase_62(x65 : Unit) -> Unit raise {
-  let _ = x65
-  {
-    @readable.thm_ref().val = closed_in_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_EMPTY): thm);;
-fn step_114() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_EMPTY): thm);;", exec_phrase_62)
-}
-
-///|
-/// `exec_phrase_63`
-pub fn exec_phrase_63(x66 : Unit) -> Unit raise {
-  let _ = x66
-  {
-    @readable.thm_ref().val = closed_in_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_UNION): thm);;
-fn step_115() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_UNION): thm);;", exec_phrase_63)
 }
 
 ///|
@@ -1802,7 +1339,123 @@ pub fn subtopology() -> @kernel.Thm {
 ///|
 /// IstopologySubtopology
 fn step_117() -> Unit raise {
-  istopologysubtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u:A->bool. u ⊂ topspace α  ⇒  istopology (u, {s ∩ u | open_in α s})\n\n  proof\n    intro_TAC ∀α u, H1;\n    ∅ = ∅ ∩ u ∧ open_in α ∅     [emptysetOpen] by fol INTER_EMPTY OPEN_IN_EMPTY;\n    u = topspace α ∩ u ∧ open_in α (topspace α)     [uOpen] by fol OPEN_IN_TOPSPACE H1 INTER_COMM SUBSET_INTER_ABSORPTION;\n    ∀s' s. open_in α s' ∧ open_in α s  ⇒  open_in α (s' ∩ s)  ∧\n    (s' ∩ u) ∩ (s ∩ u) = (s' ∩ s) ∩ u     [interOpen]\n    proof\n      intro_TAC ∀s' s, H1 H2;\n      set MESON [H1; H2; OPEN_IN_INTER] [open_in α (s' ∩ s)];\n    qed;\n    ∀k. k ⊂ {s | open_in α s}  ⇒  open_in α (UNIONS k)  ∧\n    UNIONS (IMAGE (λs. s ∩ u) k) = (UNIONS k) ∩ u     [unionsOpen]\n    proof\n      intro_TAC ∀k, kProp;\n      open_in α (UNIONS k)     [] by fol kProp SUBSET IN_ELIM_THM OPEN_IN_UNIONS;\n      simplify - UNIONS_IMAGE UNIONS_GSPEC INTER_UNIONS;\n    qed;\n    {s ∩ u | open_in α s} = IMAGE (λs. s ∩ u) {s | open_in α s}     [] by set;\n    simplify istopology IN_SET_FUNCTION_PREDICATE LEFT_IMP_EXISTS_THM INTER_SUBSET - FORALL_SUBSET_IMAGE;\n    fol  emptysetOpen uOpen interOpen unionsOpen;\n  qed;\n")))
+  istopologysubtopology_c.set(@readable.prove(
+    "\n  forall alpha u:A->bool. u SUBSET topspace alpha  ==>  istopology (u, {s INTER u | open_in alpha s})",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha u, H1"),
+        @readable.have(
+          "\n    {} = {} INTER u /\\  open_in alpha {}",
+          "emptysetOpen",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("INTER_EMPTY", () => @sets.inter_empty()),
+              @readable.Thm("OPEN_IN_EMPTY", () => open_in_empty()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    u = topspace alpha INTER u /\\  open_in alpha (topspace alpha)",
+          "uOpen",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("OPEN_IN_TOPSPACE", () => open_in_topspace()),
+              @readable.Label("H1"),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+              @readable.Thm(
+                "SUBSET_INTER_ABSORPTION",
+                () => @sets.subset_inter_absorption(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall s' s. open_in alpha s' /\\  open_in alpha s  ==>  open_in alpha (s' INTER s)  /\\ \n    (s' INTER u) INTER (s INTER u) = (s' INTER s) INTER u",
+          "interOpen",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall s' s, H1 H2"),
+              @readable.by(
+                @readable.set,
+                [
+                  @readable.ThmsTermRule(
+                    ths => tm => @meson.meson(ths, tm),
+                    [
+                      @readable.Label("H1"),
+                      @readable.Label("H2"),
+                      @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+                    ],
+                    "open_in alpha (s' INTER s)",
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall k. k SUBSET {s | open_in alpha s}  ==>  open_in alpha (UNIONS k)  /\\ \n    UNIONS (IMAGE (\\ s. s INTER u) k) = (UNIONS k) INTER u",
+          "unionsOpen",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall k, kProp"),
+              @readable.have(
+                "\n      open_in alpha (UNIONS k)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("kProp"),
+                    @readable.Thm("SUBSET", () => @sets.subset()),
+                    @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+                    @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Prev,
+                  @readable.Thm("UNIONS_IMAGE", () => @sets.unions_image()),
+                  @readable.Thm("UNIONS_GSPEC", () => @sets.unions_gspec()),
+                  @readable.Thm("INTER_UNIONS", () => @sets.inter_unions()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    {s INTER u | open_in alpha s} = IMAGE (\\ s. s INTER u) {s | open_in alpha s}",
+          "",
+          @readable.by(@readable.set, []),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("istopology", () => istopology()),
+            @readable.Thm(
+              "IN_SET_FUNCTION_PREDICATE",
+              () => in_set_function_predicate(),
+            ),
+            @readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm()),
+            @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            @readable.Prev,
+            @readable.Thm("FORALL_SUBSET_IMAGE", () => @sets.forall_subset_image()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("emptysetOpen"),
+            @readable.Label("uOpen"),
+            @readable.Label("interOpen"),
+            @readable.Label("unionsOpen"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1815,189 +1468,41 @@ pub fn istopologysubtopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_64`
-pub fn exec_phrase_64(x67 : Unit) -> Unit raise {
-  let _ = x67
-  {
-    @readable.thm_ref().val = @sets.inter_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_EMPTY): thm);;
-fn step_118() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_EMPTY): thm);;", exec_phrase_64)
-}
-
-///|
-/// `exec_phrase_65`
-pub fn exec_phrase_65(x68 : Unit) -> Unit raise {
-  let _ = x68
-  {
-    @readable.thm_ref().val = @sets.inter_comm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_COMM): thm);;
-fn step_119() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_COMM): thm);;", exec_phrase_65)
-}
-
-///|
-/// `exec_phrase_66`
-pub fn exec_phrase_66(x69 : Unit) -> Unit raise {
-  let _ = x69
-  {
-    @readable.thm_ref().val = @sets.subset_inter_absorption()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_INTER_ABSORPTION): thm);;
-fn step_120() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_INTER_ABSORPTION): thm);;", exec_phrase_66)
-}
-
-///|
-/// `exec_phrase_67`
-pub fn exec_phrase_67(x70 : Unit) -> Unit raise {
-  let _ = x70
-  {
-    @readable.thmlist_term_thm_ref().val = fn(x71 : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-      fn(x72 : @kernel.Term) -> @kernel.Thm raise {
-        @meson.meson(x71, x72)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;
-fn step_121() -> Unit raise {
-  @lib.register_phrase("thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;", exec_phrase_67)
-}
-
-///|
-/// `exec_phrase_68`
-pub fn exec_phrase_68(x73 : Unit) -> Unit raise {
-  let _ = x73
-  {
-    @readable.thm_ref().val = @sets.unions_image()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIONS_IMAGE): thm);;
-fn step_122() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIONS_IMAGE): thm);;", exec_phrase_68)
-}
-
-///|
-/// `exec_phrase_69`
-pub fn exec_phrase_69(x74 : Unit) -> Unit raise {
-  let _ = x74
-  {
-    @readable.thm_ref().val = @sets.unions_gspec()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIONS_GSPEC): thm);;
-fn step_123() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIONS_GSPEC): thm);;", exec_phrase_69)
-}
-
-///|
-/// `exec_phrase_70`
-pub fn exec_phrase_70(x75 : Unit) -> Unit raise {
-  let _ = x75
-  {
-    @readable.thm_ref().val = @sets.inter_unions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_UNIONS): thm);;
-fn step_124() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_UNIONS): thm);;", exec_phrase_70)
-}
-
-///|
-/// `exec_phrase_71`
-pub fn exec_phrase_71(x76 : Unit) -> Unit raise {
-  let _ = x76
-  {
-    @readable.thm_ref().val = in_set_function_predicate()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_SET_FUNCTION_PREDICATE): thm);;
-fn step_125() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_SET_FUNCTION_PREDICATE): thm);;", exec_phrase_71)
-}
-
-///|
-/// `exec_phrase_72`
-pub fn exec_phrase_72(x77 : Unit) -> Unit raise {
-  let _ = x77
-  {
-    @readable.thm_ref().val = @theorems.left_imp_exists_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LEFT_IMP_EXISTS_THM): thm);;
-fn step_126() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LEFT_IMP_EXISTS_THM): thm);;", exec_phrase_72)
-}
-
-///|
-/// `exec_phrase_73`
-pub fn exec_phrase_73(x78 : Unit) -> Unit raise {
-  let _ = x78
-  {
-    @readable.thm_ref().val = @sets.inter_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_SUBSET): thm);;
-fn step_127() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_SUBSET): thm);;", exec_phrase_73)
-}
-
-///|
-/// `exec_phrase_74`
-pub fn exec_phrase_74(x79 : Unit) -> Unit raise {
-  let _ = x79
-  {
-    @readable.thm_ref().val = @sets.forall_subset_image()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FORALL_SUBSET_IMAGE): thm);;
-fn step_128() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FORALL_SUBSET_IMAGE): thm);;", exec_phrase_74)
-}
-
-///|
 /// OpenInSubtopology
 fn step_129() -> Unit raise {
-  openinsubtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s. u ⊂ topspace α ⇒\n    (open_in (subtopology α u) s  ⇔  ∃t. open_in α t ∧ s = t ∩ u)\n\n  proof\n    intro_TAC ∀α u s, H1;\n    open_in (subtopology α u) = OpenSets (u,{s ∩ u | open_in α s})     [] by fol subtopology H1 IstopologySubtopology topology_tybij OpenIn;\n    rewrite - OpenSets PAIR_EQ SND EXTENSION IN_ELIM_THM;\n  qed;\n")))
+  openinsubtopology_c.set(@readable.prove(
+    "\n  forall alpha u s. u SUBSET topspace alpha ==>\n    (open_in (subtopology alpha u) s  <=>  ?t. open_in alpha t /\\  s = t INTER u)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha u s, H1"),
+        @readable.have(
+          "\n    open_in (subtopology alpha u) = OpenSets (u,{s INTER u | open_in alpha s})",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("subtopology", () => subtopology()),
+              @readable.Label("H1"),
+              @readable.Thm("IstopologySubtopology", () => istopologysubtopology()),
+              @readable.Thm("topology_tybij", () => topology_tybij()),
+              @readable.Thm("OpenIn", () => openin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Prev,
+            @readable.Thm("OpenSets", () => opensets()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+            @readable.Thm("SND", () => @pair.snd()),
+            @readable.Thm("EXTENSION", () => @sets.extension()),
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2010,73 +1515,50 @@ pub fn openinsubtopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_75`
-pub fn exec_phrase_75(x80 : Unit) -> Unit raise {
-  let _ = x80
-  {
-    @readable.thm_ref().val = subtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((subtopology): thm);;
-fn step_130() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((subtopology): thm);;", exec_phrase_75)
-}
-
-///|
-/// `exec_phrase_76`
-pub fn exec_phrase_76(x81 : Unit) -> Unit raise {
-  let _ = x81
-  {
-    @readable.thm_ref().val = istopologysubtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IstopologySubtopology): thm);;
-fn step_131() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IstopologySubtopology): thm);;", exec_phrase_76)
-}
-
-///|
-/// `exec_phrase_77`
-pub fn exec_phrase_77(x82 : Unit) -> Unit raise {
-  let _ = x82
-  {
-    @readable.thm_ref().val = @pair.snd()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SND): thm);;
-fn step_132() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SND): thm);;", exec_phrase_77)
-}
-
-///|
-/// `exec_phrase_78`
-pub fn exec_phrase_78(x83 : Unit) -> Unit raise {
-  let _ = x83
-  {
-    @readable.thm_ref().val = @sets.extension()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EXTENSION): thm);;
-fn step_133() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EXTENSION): thm);;", exec_phrase_78)
-}
-
-///|
 /// TopspaceSubtopology
 fn step_134() -> Unit raise {
-  topspacesubtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u. u ⊂ topspace α  ⇒  topspace (subtopology α u) = u\n\n  proof\n    intro_TAC ∀α u , H1;\n    topspace (subtopology α u) = UnderlyingSpace (u,{s ∩ u | open_in α s})     [] by fol subtopology H1 IstopologySubtopology topology_tybij topspace;\n    rewrite - UnderlyingSpace PAIR_EQ FST;\n    fol  INTER_COMM H1 SUBSET_INTER_ABSORPTION;\n  qed;\n")))
+  topspacesubtopology_c.set(@readable.prove(
+    "\n  forall alpha u. u SUBSET topspace alpha  ==>  topspace (subtopology alpha u) = u",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha u , H1"),
+        @readable.have(
+          "\n    topspace (subtopology alpha u) = UnderlyingSpace (u,{s INTER u | open_in alpha s})",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("subtopology", () => subtopology()),
+              @readable.Label("H1"),
+              @readable.Thm("IstopologySubtopology", () => istopologysubtopology()),
+              @readable.Thm("topology_tybij", () => topology_tybij()),
+              @readable.Thm("topspace", () => topspace()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Prev,
+            @readable.Thm("UnderlyingSpace", () => underlyingspace()),
+            @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+            @readable.Thm("FST", () => @pair.fst()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+            @readable.Label("H1"),
+            @readable.Thm(
+              "SUBSET_INTER_ABSORPTION",
+              () => @sets.subset_inter_absorption(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2089,25 +1571,18 @@ pub fn topspacesubtopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_79`
-pub fn exec_phrase_79(x84 : Unit) -> Unit raise {
-  let _ = x84
-  {
-    @readable.thm_ref().val = @pair.fst()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FST): thm);;
-fn step_135() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FST): thm);;", exec_phrase_79)
-}
-
-///|
 /// OpenInRefl
 fn step_136() -> Unit raise {
-  openinrefl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  open_in (subtopology α s) s\n  by fol TopspaceSubtopology OPEN_IN_TOPSPACE")))
+  openinrefl_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  open_in (subtopology alpha s) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+        @readable.Thm("OPEN_IN_TOPSPACE", () => open_in_topspace()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2120,25 +1595,18 @@ pub fn openinrefl() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_80`
-pub fn exec_phrase_80(x85 : Unit) -> Unit raise {
-  let _ = x85
-  {
-    @readable.thm_ref().val = topspacesubtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TopspaceSubtopology): thm);;
-fn step_137() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TopspaceSubtopology): thm);;", exec_phrase_80)
-}
-
-///|
 /// ClosedInRefl
 fn step_138() -> Unit raise {
-  closedinrefl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  closed_in (subtopology α s) s\n  by fol TopspaceSubtopology CLOSED_IN_TOPSPACE")))
+  closedinrefl_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  closed_in (subtopology alpha s) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+        @readable.Thm("CLOSED_IN_TOPSPACE", () => closed_in_topspace()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2151,25 +1619,92 @@ pub fn closedinrefl() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_81`
-pub fn exec_phrase_81(x86 : Unit) -> Unit raise {
-  let _ = x86
-  {
-    @readable.thm_ref().val = closed_in_topspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_TOPSPACE): thm);;
-fn step_139() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_TOPSPACE): thm);;", exec_phrase_81)
-}
-
-///|
 /// ClosedInSubtopology
 fn step_140() -> Unit raise {
-  closedinsubtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u C.  u ⊂ topspace α  ⇒\n    (closed_in (subtopology α u) C  ⇔  ∃D. closed_in α D ∧ C = D ∩ u)\n\n  proof\n    intro_TAC ∀α u C, H1;\n    consider X such that\n    X = topspace α ∧ u ⊂ X     [Xdef] by fol H1;\n    closed_in (subtopology α u) C  ⇔\n    ∃t. C ⊂ u ∧ t ⊂ X ∧ open_in α t ∧ u ━ C = t ∩ u     [] by fol closed_in H1 Xdef OpenInSubtopology OPEN_IN_SUBSET TopspaceSubtopology;\n    closed_in (subtopology α u) C  ⇔\n    ∃D. C ⊂ u ∧ D ⊂ X ∧ open_in α (X ━ D) ∧ u ━ C = (X ━ D) ∩ u     []\n    proof\n      rewrite -;\n      eq_tac     [Left]\n      proof\n        STRIP_TAC;     exists_TAC X ━ t;\n        ASM_SIMP_TAC H1 OPEN_IN_SUBSET DIFF_REFL SUBSET_DIFF;\n      qed;\n      STRIP_TAC;     exists_TAC X ━ D;\n      ASM_SIMP_TAC SUBSET_DIFF;\n    qed;\n    simplify - GSYM Xdef H1 closed_in;\n    ∀D C. C ⊂ u ∧ u ━ C = (X ━ D) ∩ u  ⇔  C = D ∩ u     [] by set Xdef DIFF_REFL INTER_SUBSET;\n    fol -;\n  qed;\n")))
+  closedinsubtopology_c.set(@readable.prove(
+    "\n  forall alpha u C.  u SUBSET topspace alpha  ==>\n    (closed_in (subtopology alpha u) C  <=>  ?D. closed_in alpha D /\\  C = D INTER u)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha u C, H1"),
+        @readable.consider(
+          "X",
+          "X = topspace alpha /\\  u SUBSET X    ",
+          "Xdef",
+          @readable.by(@readable.fol, [@readable.Label("H1")]),
+        ),
+        @readable.have(
+          "\n    closed_in (subtopology alpha u) C  <=>\n    ?t. C SUBSET u /\\  t SUBSET X /\\  open_in alpha t /\\  u DIFF C = t INTER u",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("closed_in", () => closed_in()),
+              @readable.Label("H1"),
+              @readable.Label("Xdef"),
+              @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+              @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    closed_in (subtopology alpha u) C  <=>\n    ?D. C SUBSET u /\\  D SUBSET X /\\  open_in alpha (X DIFF D) /\\  u DIFF C = (X DIFF D) INTER u",
+          "",
+          @readable.steps(
+            [
+              @readable.by(@readable.rewrite, [@readable.Prev]),
+              @readable.eq_tac(
+                "Left",
+                @readable.steps(
+                  [
+                    @tactics.strip_tac,
+                    @readable.exists("X DIFF t"),
+                    @readable.by(
+                      @simp.asm_simp_tac,
+                      [
+                        @readable.Label("H1"),
+                        @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+                        @readable.Thm("DIFF_REFL", () => diff_refl()),
+                        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              @tactics.strip_tac,
+              @readable.exists("X DIFF D"),
+              @readable.by(
+                @simp.asm_simp_tac,
+                [@readable.Thm("SUBSET_DIFF", () => @sets.subset_diff())],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Prev,
+            @readable.Rule(@equal.gsym, @readable.Label("Xdef")),
+            @readable.Label("H1"),
+            @readable.Thm("closed_in", () => closed_in()),
+          ],
+        ),
+        @readable.have(
+          "\n    forall D C. C SUBSET u /\\  u DIFF C = (X DIFF D) INTER u  <=>  C = D INTER u",
+          "",
+          @readable.by(
+            @readable.set,
+            [
+              @readable.Label("Xdef"),
+              @readable.Thm("DIFF_REFL", () => diff_refl()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2182,57 +1717,27 @@ pub fn closedinsubtopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_82`
-pub fn exec_phrase_82(x87 : Unit) -> Unit raise {
-  let _ = x87
-  {
-    @readable.tactic_ref().val = @tactics.strip_tac
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((STRIP_TAC): tactic);;
-fn step_141() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((STRIP_TAC): tactic);;", exec_phrase_82)
-}
-
-///|
-/// `exec_phrase_83`
-pub fn exec_phrase_83(x88 : Unit) -> Unit raise {
-  let _ = x88
-  {
-    @readable.thmlist_tactic_ref().val = @simp.asm_simp_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((ASM_SIMP_TAC): thm list -> tactic);;
-fn step_142() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((ASM_SIMP_TAC): thm list -> tactic);;", exec_phrase_83)
-}
-
-///|
-/// `exec_phrase_84`
-pub fn exec_phrase_84(x89 : Unit) -> Unit raise {
-  let _ = x89
-  {
-    @readable.thm_ref().val = openinsubtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInSubtopology): thm);;
-fn step_143() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInSubtopology): thm);;", exec_phrase_84)
-}
-
-///|
 /// OPEN_IN_SUBTOPOLOGY_EMPTY
 fn step_144() -> Unit raise {
-  open_in_subtopology_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. open_in (subtopology α ∅) s  ⇔  s = ∅\n\n  proof\n    simplify EMPTY_SUBSET OpenInSubtopology INTER_EMPTY;\n    fol  OPEN_IN_EMPTY;\n  qed;\n")))
+  open_in_subtopology_empty_c.set(@readable.prove(
+    "\n  forall alpha s. open_in (subtopology alpha {}) s  <=>  s = {}",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+            @readable.Thm("INTER_EMPTY", () => @sets.inter_empty()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("OPEN_IN_EMPTY", () => open_in_empty())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2247,7 +1752,25 @@ pub fn open_in_subtopology_empty() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_SUBTOPOLOGY_EMPTY
 fn step_145() -> Unit raise {
-  closed_in_subtopology_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. closed_in (subtopology α ∅) s  ⇔  s = ∅\n\n  proof\n    simplify EMPTY_SUBSET ClosedInSubtopology INTER_EMPTY;\n    fol  CLOSED_IN_EMPTY;\n  qed;\n")))
+  closed_in_subtopology_empty_c.set(@readable.prove(
+    "\n  forall alpha s. closed_in (subtopology alpha {}) s  <=>  s = {}",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+            @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+            @readable.Thm("INTER_EMPTY", () => @sets.inter_empty()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("CLOSED_IN_EMPTY", () => closed_in_empty())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2260,25 +1783,53 @@ pub fn closed_in_subtopology_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_85`
-pub fn exec_phrase_85(x90 : Unit) -> Unit raise {
-  let _ = x90
-  {
-    @readable.thm_ref().val = closedinsubtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInSubtopology): thm);;
-fn step_146() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInSubtopology): thm);;", exec_phrase_85)
-}
-
-///|
 /// SUBTOPOLOGY_TOPSPACE
 fn step_147() -> Unit raise {
-  subtopology_topspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. subtopology α (topspace α) = α\n\n  proof\n    intro_TAC ∀α;\n    topspace (subtopology α (topspace α)) = topspace α     [topXsub] by simplify SUBSET_REFL TopspaceSubtopology;\n    simplify topXsub GSYM Topology_Eq;\n    fol MESON [SUBSET_REFL] [topspace α ⊂ topspace α] OpenInSubtopology OPEN_IN_SUBSET SUBSET_INTER_ABSORPTION;\n  qed;\n")))
+  subtopology_topspace_c.set(@readable.prove(
+    "\n  forall alpha. subtopology alpha (topspace alpha) = alpha",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha"),
+        @readable.have(
+          "\n    topspace (subtopology alpha (topspace alpha)) = topspace alpha",
+          "topXsub",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+              @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("topXsub"),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("Topology_Eq", () => topology_eq()),
+            ),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.ThmsTermRule(
+              ths => tm => @meson.meson(ths, tm),
+              [@readable.Thm("SUBSET_REFL", () => @sets.subset_refl())],
+              "topspace alpha SUBSET topspace alpha",
+            ),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Thm(
+              "SUBSET_INTER_ABSORPTION",
+              () => @sets.subset_inter_absorption(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2291,25 +1842,18 @@ pub fn subtopology_topspace() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_86`
-pub fn exec_phrase_86(x91 : Unit) -> Unit raise {
-  let _ = x91
-  {
-    @readable.thm_ref().val = topology_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Topology_Eq): thm);;
-fn step_148() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Topology_Eq): thm);;", exec_phrase_86)
-}
-
-///|
 /// OpenInImpSubset
 fn step_149() -> Unit raise {
-  openinimpsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    open_in (subtopology α s) t  ⇒  t ⊂ s\n  by fol OpenInSubtopology INTER_SUBSET")))
+  openinimpsubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    open_in (subtopology alpha s) t  ==>  t SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+        @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2324,7 +1868,16 @@ pub fn openinimpsubset() -> @kernel.Thm {
 ///|
 /// ClosedInImpSubset
 fn step_150() -> Unit raise {
-  closedinimpsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    closed_in (subtopology α s) t  ⇒  t ⊂ s\n  by fol ClosedInSubtopology INTER_SUBSET")))
+  closedinimpsubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    closed_in (subtopology alpha s) t  ==>  t SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+        @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2339,7 +1892,50 @@ pub fn closedinimpsubset() -> @kernel.Thm {
 ///|
 /// OpenInSubtopologyUnion
 fn step_151() -> Unit raise {
-  openinsubtopologyunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  t ⊂ topspace α  ∧  u ⊂ topspace α  ⇒\n    open_in (subtopology α t) s  ∧  open_in (subtopology α u) s\n    ⇒  open_in (subtopology α (t ∪ u)) s\n\n  proof\n    intro_TAC ∀α s t u, Ht Hu;\n    simplify Ht Hu Ht Hu UNION_SUBSET OpenInSubtopology;\n    intro_TAC sOpenSub_t sOpenSub_u;\n    consider a b such that\n    open_in α a  ∧  s = a ∩ t  ∧\n    open_in α b  ∧  s = b ∩ u     [abExist] by fol sOpenSub_t sOpenSub_u;\n    exists_TAC a ∩ b;\n    set MESON [abExist; OPEN_IN_INTER] [open_in α (a ∩ b)] abExist;\n  qed;\n")))
+  openinsubtopologyunion_c.set(@readable.prove(
+    "\n  forall alpha s t u.  t SUBSET topspace alpha  /\\   u SUBSET topspace alpha  ==>\n    open_in (subtopology alpha t) s  /\\   open_in (subtopology alpha u) s\n    ==>  open_in (subtopology alpha (t UNION u)) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, Ht Hu"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("Ht"),
+            @readable.Label("Hu"),
+            @readable.Label("Ht"),
+            @readable.Label("Hu"),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+          ],
+        ),
+        @readable.intro_tac("sOpenSub_t sOpenSub_u"),
+        @readable.consider(
+          "a b",
+          "open_in alpha a  /\\   s = a INTER t  /\\ \n    open_in alpha b  /\\   s = b INTER u    ",
+          "abExist",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("sOpenSub_t"), @readable.Label("sOpenSub_u")],
+          ),
+        ),
+        @readable.exists("a INTER b"),
+        @readable.by(
+          @readable.set,
+          [
+            @readable.ThmsTermRule(
+              ths => tm => @meson.meson(ths, tm),
+              [
+                @readable.Label("abExist"),
+                @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+              ],
+              "open_in alpha (a INTER b)",
+            ),
+            @readable.Label("abExist"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2354,7 +1950,50 @@ pub fn openinsubtopologyunion() -> @kernel.Thm {
 ///|
 /// ClosedInSubtopologyUnion
 fn step_152() -> Unit raise {
-  closedinsubtopologyunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  t ⊂ topspace α  ∧  u ⊂ topspace α  ⇒\n    closed_in (subtopology α t) s  ∧  closed_in (subtopology α u) s\n    ⇒  closed_in (subtopology α (t ∪ u)) s\n\n  proof\n    intro_TAC ∀α s t u, Ht Hu;\n    simplify Ht Hu Ht Hu UNION_SUBSET ClosedInSubtopology;\n    intro_TAC sClosedSub_t sClosedSub_u;\n    consider a b such that\n    closed_in α a  ∧  s = a ∩ t  ∧\n    closed_in α b  ∧  s = b ∩ u     [abExist] by fol sClosedSub_t sClosedSub_u;\n    exists_TAC a ∩ b;\n    set MESON [abExist; CLOSED_IN_INTER] [closed_in α (a ∩ b)] abExist;\n  qed;\n")))
+  closedinsubtopologyunion_c.set(@readable.prove(
+    "\n  forall alpha s t u.  t SUBSET topspace alpha  /\\   u SUBSET topspace alpha  ==>\n    closed_in (subtopology alpha t) s  /\\   closed_in (subtopology alpha u) s\n    ==>  closed_in (subtopology alpha (t UNION u)) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, Ht Hu"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("Ht"),
+            @readable.Label("Hu"),
+            @readable.Label("Ht"),
+            @readable.Label("Hu"),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+          ],
+        ),
+        @readable.intro_tac("sClosedSub_t sClosedSub_u"),
+        @readable.consider(
+          "a b",
+          "closed_in alpha a  /\\   s = a INTER t  /\\ \n    closed_in alpha b  /\\   s = b INTER u    ",
+          "abExist",
+          @readable.by(
+            @readable.fol,
+            [@readable.Label("sClosedSub_t"), @readable.Label("sClosedSub_u")],
+          ),
+        ),
+        @readable.exists("a INTER b"),
+        @readable.by(
+          @readable.set,
+          [
+            @readable.ThmsTermRule(
+              ths => tm => @meson.meson(ths, tm),
+              [
+                @readable.Label("abExist"),
+                @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+              ],
+              "closed_in alpha (a INTER b)",
+            ),
+            @readable.Label("abExist"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2369,7 +2008,38 @@ pub fn closedinsubtopologyunion() -> @kernel.Thm {
 ///|
 /// OpenInSubtopologyInterOpen
 fn step_153() -> Unit raise {
-  openinsubtopologyinteropen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  u ⊂ topspace α  ⇒\n    open_in (subtopology α u) s  ∧  open_in α t\n    ⇒ open_in (subtopology α u) (s ∩ t)\n\n  proof\n    intro_TAC ∀α s t u, H1, sOpenSub_t tOpen;\n    consider a b such that\n    open_in α a  ∧  s = a ∩ u  ∧  b = a ∩ t     [aExists] by fol sOpenSub_t H1 OpenInSubtopology;\n    fol - tOpen OPEN_IN_INTER INTER_ACI H1 OpenInSubtopology;\n  qed;\n")))
+  openinsubtopologyinteropen_c.set(@readable.prove(
+    "\n  forall alpha s t u.  u SUBSET topspace alpha  ==>\n    open_in (subtopology alpha u) s  /\\   open_in alpha t\n    ==> open_in (subtopology alpha u) (s INTER t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, H1, sOpenSub_t tOpen"),
+        @readable.consider(
+          "a b",
+          "open_in alpha a  /\\   s = a INTER u  /\\   b = a INTER t    ",
+          "aExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sOpenSub_t"),
+              @readable.Label("H1"),
+              @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("tOpen"),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+            @readable.Thm("INTER_ACI", () => @sets.inter_aci()),
+            @readable.Label("H1"),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2382,25 +2052,18 @@ pub fn openinsubtopologyinteropen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_87`
-pub fn exec_phrase_87(x92 : Unit) -> Unit raise {
-  let _ = x92
-  {
-    @readable.thm_ref().val = @sets.inter_aci()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_ACI): thm);;
-fn step_154() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_ACI): thm);;", exec_phrase_87)
-}
-
-///|
 /// OpenInOpenInter
 fn step_155() -> Unit raise {
-  openinopeninter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s.  u ⊂ topspace α  ⇒ open_in α s\n    ⇒  open_in (subtopology α u) (u ∩ s)\n  by fol INTER_COMM OpenInSubtopology")))
+  openinopeninter_c.set(@readable.prove(
+    "\n  forall alpha u s.  u SUBSET topspace alpha  ==> open_in alpha s\n    ==>  open_in (subtopology alpha u) (u INTER s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2415,7 +2078,17 @@ pub fn openinopeninter() -> @kernel.Thm {
 ///|
 /// OpenOpenInTrans
 fn step_156() -> Unit raise {
-  openopenintrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  open_in α s ∧ open_in α t ∧ t ⊂ s\n    ⇒ open_in (subtopology α s) t\n  by fol OPEN_IN_SUBSET SUBSET_INTER_ABSORPTION OpenInSubtopology")))
+  openopenintrans_c.set(@readable.prove(
+    "\n  forall alpha s t.  open_in alpha s /\\  open_in alpha t /\\  t SUBSET s\n    ==> open_in (subtopology alpha s) t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+        @readable.Thm("SUBSET_INTER_ABSORPTION", () => @sets.subset_inter_absorption()),
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2430,7 +2103,17 @@ pub fn openopenintrans() -> @kernel.Thm {
 ///|
 /// ClosedClosedInTrans
 fn step_157() -> Unit raise {
-  closedclosedintrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  closed_in α s ∧ closed_in α t ∧ t ⊂ s\n    ⇒ closed_in (subtopology α s) t\n  by fol CLOSED_IN_SUBSET SUBSET_INTER_ABSORPTION ClosedInSubtopology")))
+  closedclosedintrans_c.set(@readable.prove(
+    "\n  forall alpha s t.  closed_in alpha s /\\  closed_in alpha t /\\  t SUBSET s\n    ==> closed_in (subtopology alpha s) t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN_SUBSET", () => closed_in_subset()),
+        @readable.Thm("SUBSET_INTER_ABSORPTION", () => @sets.subset_inter_absorption()),
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2443,25 +2126,18 @@ pub fn closedclosedintrans() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_88`
-pub fn exec_phrase_88(x93 : Unit) -> Unit raise {
-  let _ = x93
-  {
-    @readable.thm_ref().val = closed_in_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_SUBSET): thm);;
-fn step_158() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_SUBSET): thm);;", exec_phrase_88)
-}
-
-///|
 /// OpenSubset
 fn step_159() -> Unit raise {
-  opensubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒\n    s ⊂ t  ∧  open_in α s ⇒ open_in (subtopology α t) s\n  by fol OpenInSubtopology SUBSET_INTER_ABSORPTION")))
+  opensubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>\n    s SUBSET t  /\\   open_in alpha s ==> open_in (subtopology alpha t) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+        @readable.Thm("SUBSET_INTER_ABSORPTION", () => @sets.subset_inter_absorption()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2476,7 +2152,17 @@ pub fn opensubset() -> @kernel.Thm {
 ///|
 /// ClosedSubsetEq
 fn step_160() -> Unit raise {
-  closedsubseteq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s.  u ⊂ topspace α  ⇒\n    closed_in α s  ⇒  (closed_in (subtopology α u) s  ⇔  s ⊂ u)\n  by fol ClosedInSubtopology INTER_SUBSET SUBSET_INTER_ABSORPTION")))
+  closedsubseteq_c.set(@readable.prove(
+    "\n  forall alpha u s.  u SUBSET topspace alpha  ==>\n    closed_in alpha s  ==>  (closed_in (subtopology alpha u) s  <=>  s SUBSET u)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+        @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+        @readable.Thm("SUBSET_INTER_ABSORPTION", () => @sets.subset_inter_absorption()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2491,7 +2177,38 @@ pub fn closedsubseteq() -> @kernel.Thm {
 ///|
 /// ClosedInInterClosed
 fn step_161() -> Unit raise {
-  closedininterclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  u ⊂ topspace α  ⇒\n        closed_in (subtopology α u) s ∧ closed_in α t\n        ⇒ closed_in (subtopology α u) (s ∩ t)\n\n  proof\n    intro_TAC ∀α s t u, H1, sClosedSub_t tClosed;\n    consider a b such that\n    closed_in α a  ∧  s = a ∩ u  ∧  b = a ∩ t     [aExists] by fol sClosedSub_t H1 ClosedInSubtopology;\n    fol - tClosed CLOSED_IN_INTER INTER_ACI H1 ClosedInSubtopology;\n  qed;\n")))
+  closedininterclosed_c.set(@readable.prove(
+    "\n  forall alpha s t u.  u SUBSET topspace alpha  ==>\n        closed_in (subtopology alpha u) s /\\  closed_in alpha t\n        ==> closed_in (subtopology alpha u) (s INTER t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, H1, sClosedSub_t tClosed"),
+        @readable.consider(
+          "a b",
+          "closed_in alpha a  /\\   s = a INTER u  /\\   b = a INTER t    ",
+          "aExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sClosedSub_t"),
+              @readable.Label("H1"),
+              @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("tClosed"),
+            @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+            @readable.Thm("INTER_ACI", () => @sets.inter_aci()),
+            @readable.Label("H1"),
+            @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2506,7 +2223,16 @@ pub fn closedininterclosed() -> @kernel.Thm {
 ///|
 /// ClosedInClosedInter
 fn step_162() -> Unit raise {
-  closedinclosedinter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s.  u ⊂ topspace α  ⇒\n    closed_in α s  ⇒  closed_in (subtopology α u) (u ∩ s)\n  by fol INTER_COMM ClosedInSubtopology")))
+  closedinclosedinter_c.set(@readable.prove(
+    "\n  forall alpha u s.  u SUBSET topspace alpha  ==>\n    closed_in alpha s  ==>  closed_in (subtopology alpha u) (u INTER s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2521,7 +2247,16 @@ pub fn closedinclosedinter() -> @kernel.Thm {
 ///|
 /// ClosedSubset
 fn step_163() -> Unit raise {
-  closedsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒\n    s ⊂ t  ∧  closed_in α s  ⇒  closed_in (subtopology α t) s\n  by fol ClosedInSubtopology SUBSET_INTER_ABSORPTION")))
+  closedsubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>\n    s SUBSET t  /\\   closed_in alpha s  ==>  closed_in (subtopology alpha t) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+        @readable.Thm("SUBSET_INTER_ABSORPTION", () => @sets.subset_inter_absorption()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2536,7 +2271,40 @@ pub fn closedsubset() -> @kernel.Thm {
 ///|
 /// OpenInSubsetTrans
 fn step_164() -> Unit raise {
-  openinsubsettrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  u ⊂ topspace α  ∧  t ⊂ topspace α  ⇒\n    open_in (subtopology α u) s  ∧  s ⊂ t  ∧  t ⊂ u\n    ⇒ open_in (subtopology α t) s\n\n  proof\n    intro_TAC ∀α s t u, uSubset tSubset;\n    simplify uSubset tSubset OpenInSubtopology;\n    intro_TAC sOpen_u s_t t_u;\n    consider a such that\n    open_in α a  ∧  s = a ∩ u     [aExists] by fol uSubset sOpen_u OpenInSubtopology;\n    set aExists s_t t_u;\n  qed;\n")))
+  openinsubsettrans_c.set(@readable.prove(
+    "\n  forall alpha s t u.  u SUBSET topspace alpha  /\\   t SUBSET topspace alpha  ==>\n    open_in (subtopology alpha u) s  /\\   s SUBSET t  /\\   t SUBSET u\n    ==> open_in (subtopology alpha t) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, uSubset tSubset"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("uSubset"),
+            @readable.Label("tSubset"),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+          ],
+        ),
+        @readable.intro_tac("sOpen_u s_t t_u"),
+        @readable.consider(
+          "a",
+          "open_in alpha a  /\\   s = a INTER u    ",
+          "aExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("uSubset"),
+              @readable.Label("sOpen_u"),
+              @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.set,
+          [@readable.Label("aExists"), @readable.Label("s_t"), @readable.Label("t_u")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2551,7 +2319,40 @@ pub fn openinsubsettrans() -> @kernel.Thm {
 ///|
 /// ClosedInSubsetTrans
 fn step_165() -> Unit raise {
-  closedinsubsettrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  u ⊂ topspace α  ∧  t ⊂ topspace α  ⇒\n        closed_in (subtopology α u) s  ∧  s ⊂ t  ∧  t ⊂ u\n        ⇒ closed_in (subtopology α t) s\n\n  proof\n    intro_TAC ∀α s t u, uSubset tSubset;\n    simplify uSubset tSubset ClosedInSubtopology;\n    intro_TAC sClosed_u s_t t_u;\n    consider a such that\n    closed_in α a  ∧  s = a ∩ u     [aExists] by fol uSubset sClosed_u ClosedInSubtopology;\n    set aExists s_t t_u;\n  qed;\n")))
+  closedinsubsettrans_c.set(@readable.prove(
+    "\n  forall alpha s t u.  u SUBSET topspace alpha  /\\   t SUBSET topspace alpha  ==>\n        closed_in (subtopology alpha u) s  /\\   s SUBSET t  /\\   t SUBSET u\n        ==> closed_in (subtopology alpha t) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, uSubset tSubset"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("uSubset"),
+            @readable.Label("tSubset"),
+            @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+          ],
+        ),
+        @readable.intro_tac("sClosed_u s_t t_u"),
+        @readable.consider(
+          "a",
+          "closed_in alpha a  /\\   s = a INTER u    ",
+          "aExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("uSubset"),
+              @readable.Label("sClosed_u"),
+              @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.set,
+          [@readable.Label("aExists"), @readable.Label("s_t"), @readable.Label("t_u")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2566,7 +2367,32 @@ pub fn closedinsubsettrans() -> @kernel.Thm {
 ///|
 /// OpenInTrans
 fn step_166() -> Unit raise {
-  openintrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  t ⊂ topspace α  ∧  u ⊂ topspace α  ⇒\n    open_in (subtopology α t) s   ∧  open_in (subtopology α u) t\n    ⇒ open_in (subtopology α u) s\n\n  proof\n    intro_TAC ∀α s t u, H1 H2;\n    simplify H1 H2 OpenInSubtopology;\n    fol H1 H2 OpenInSubtopology OPEN_IN_INTER INTER_ASSOC;\n  qed;\n")))
+  openintrans_c.set(@readable.prove(
+    "\n  forall alpha s t u.  t SUBSET topspace alpha  /\\   u SUBSET topspace alpha  ==>\n    open_in (subtopology alpha t) s   /\\   open_in (subtopology alpha u) t\n    ==> open_in (subtopology alpha u) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t u, H1 H2"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+            @readable.Thm("INTER_ASSOC", () => @sets.inter_assoc()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2579,25 +2405,18 @@ pub fn openintrans() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_89`
-pub fn exec_phrase_89(x94 : Unit) -> Unit raise {
-  let _ = x94
-  {
-    @readable.thm_ref().val = @sets.inter_assoc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_ASSOC): thm);;
-fn step_167() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_ASSOC): thm);;", exec_phrase_89)
-}
-
-///|
 /// OpenInTransEq
 fn step_168() -> Unit raise {
-  openintranseq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ∧  s ⊂ topspace α  ⇒\n    ((∀u. open_in (subtopology α t) u  ⇒  open_in (subtopology α s) t)\n    ⇔ open_in (subtopology α s) t)\n  by fol OpenInTrans OpenInRefl")))
+  openintranseq_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  /\\   s SUBSET topspace alpha  ==>\n    ((forall u. open_in (subtopology alpha t) u  ==>  open_in (subtopology alpha s) t)\n    <=> open_in (subtopology alpha s) t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenInTrans", () => openintrans()),
+        @readable.Thm("OpenInRefl", () => openinrefl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2610,41 +2429,18 @@ pub fn openintranseq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_90`
-pub fn exec_phrase_90(x95 : Unit) -> Unit raise {
-  let _ = x95
-  {
-    @readable.thm_ref().val = openintrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInTrans): thm);;
-fn step_169() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInTrans): thm);;", exec_phrase_90)
-}
-
-///|
-/// `exec_phrase_91`
-pub fn exec_phrase_91(x96 : Unit) -> Unit raise {
-  let _ = x96
-  {
-    @readable.thm_ref().val = openinrefl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInRefl): thm);;
-fn step_170() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInRefl): thm);;", exec_phrase_91)
-}
-
-///|
 /// OpenInOpenTrans
 fn step_171() -> Unit raise {
-  openinopentrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s.  u ⊂ topspace α  ⇒\n    open_in (subtopology α u) s ∧ open_in α u  ⇒  open_in α s\n  by fol OpenInSubtopology OPEN_IN_INTER")))
+  openinopentrans_c.set(@readable.prove(
+    "\n  forall alpha u s.  u SUBSET topspace alpha  ==>\n    open_in (subtopology alpha u) s /\\  open_in alpha u  ==>  open_in alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+        @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2659,7 +2455,24 @@ pub fn openinopentrans() -> @kernel.Thm {
 ///|
 /// OpenInSubtopologyTrans
 fn step_172() -> Unit raise {
-  openinsubtopologytrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  t ⊂ topspace α  ∧  u ⊂ topspace α  ⇒\n    open_in (subtopology α t) s  ∧  open_in (subtopology α u) t\n    ⇒ open_in (subtopology α u) s\n\n  proof\n    simplify OpenInSubtopology;\n    fol  OPEN_IN_INTER INTER_ASSOC;\n  qed;\n")))
+  openinsubtopologytrans_c.set(@readable.prove(
+    "\n  forall alpha s t u.  t SUBSET topspace alpha  /\\   u SUBSET topspace alpha  ==>\n    open_in (subtopology alpha t) s  /\\   open_in (subtopology alpha u) t\n    ==> open_in (subtopology alpha u) s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("OpenInSubtopology", () => openinsubtopology())],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+            @readable.Thm("INTER_ASSOC", () => @sets.inter_assoc()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2674,7 +2487,65 @@ pub fn openinsubtopologytrans() -> @kernel.Thm {
 ///|
 /// SubtopologyOpenInSubopen
 fn step_173() -> Unit raise {
-  subtopologyopeninsubopen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s.  u ⊂ topspace α ⇒\n    (open_in (subtopology α u) s  ⇔\n    s ⊂ u  ∧  ∀x. x ∈ s ⇒ ∃t. open_in α t  ∧  x ∈ t  ∧  t ∩ u ⊂ s)\n\n  proof\n    intro_TAC ∀α u s, H1;\n    rewriteL OPEN_IN_SUBOPEN;\n    simplify H1 OpenInSubtopology;\n    eq_tac     [Right] by fol SUBSET IN_INTER;\n    intro_TAC H2;\n    conj_tac     [Left]\n    proof     simplify SUBSET;     fol H2 IN_INTER;     qed;\n    intro_TAC ∀x, xs;\n    consider t such that\n    open_in α t ∧ x ∈ t ∩ u ∧ t ∩ u ⊂ s     [tExists] by fol H2 xs;\n    fol  - IN_INTER;\n  qed;\n")))
+  subtopologyopeninsubopen_c.set(@readable.prove(
+    "\n  forall alpha u s.  u SUBSET topspace alpha ==>\n    (open_in (subtopology alpha u) s  <=>\n    s SUBSET u  /\\   forall x. x IN s ==> ?t. open_in alpha t  /\\   x IN t  /\\   t INTER u SUBSET s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha u s, H1"),
+        @readable.by(
+          @readable.rewritel,
+          [@readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen())],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+          ],
+        ),
+        @readable.eq_tac(
+          "Right",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ],
+          ),
+        ),
+        @readable.intro_tac("H2"),
+        @readable.conj_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [@readable.Thm("SUBSET", () => @sets.subset())],
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("H2"),
+                  @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.intro_tac("forall x, xs"),
+        @readable.consider(
+          "t",
+          "open_in alpha t /\\  x IN t INTER u /\\  t INTER u SUBSET s    ",
+          "tExists",
+          @readable.by(@readable.fol, [@readable.Label("H2"), @readable.Label("xs")]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Prev, @readable.Thm("IN_INTER", () => @sets.in_inter())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2687,57 +2558,26 @@ pub fn subtopologyopeninsubopen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_92`
-pub fn exec_phrase_92(x97 : Unit) -> Unit raise {
-  let _ = x97
-  {
-    @readable.thmlist_tactic_ref().val = @readable.rewritel
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewriteL): thm list -> tactic);;
-fn step_174() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewriteL): thm list -> tactic);;", exec_phrase_92)
-}
-
-///|
-/// `exec_phrase_93`
-pub fn exec_phrase_93(x98 : Unit) -> Unit raise {
-  let _ = x98
-  {
-    @readable.thm_ref().val = open_in_subopen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_SUBOPEN): thm);;
-fn step_175() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_SUBOPEN): thm);;", exec_phrase_93)
-}
-
-///|
-/// `exec_phrase_94`
-pub fn exec_phrase_94(x99 : Unit) -> Unit raise {
-  let _ = x99
-  {
-    @readable.thm_ref().val = @sets.in_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_INTER): thm);;
-fn step_176() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_INTER): thm);;", exec_phrase_94)
-}
-
-///|
 /// ClosedInSubtopologyTrans
 fn step_177() -> Unit raise {
-  closedinsubtopologytrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  t ⊂ topspace α  ∧  u ⊂ topspace α  ⇒\n    closed_in (subtopology α t) s  ∧  closed_in (subtopology α u) t\n    ⇒ closed_in (subtopology α u) s\n\n  proof\n    simplify ClosedInSubtopology;\n    fol  CLOSED_IN_INTER INTER_ASSOC;\n  qed;\n")))
+  closedinsubtopologytrans_c.set(@readable.prove(
+    "\n  forall alpha s t u.  t SUBSET topspace alpha  /\\   u SUBSET topspace alpha  ==>\n    closed_in (subtopology alpha t) s  /\\   closed_in (subtopology alpha u) t\n    ==> closed_in (subtopology alpha u) s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("ClosedInSubtopology", () => closedinsubtopology())],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+            @readable.Thm("INTER_ASSOC", () => @sets.inter_assoc()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2752,7 +2592,23 @@ pub fn closedinsubtopologytrans() -> @kernel.Thm {
 ///|
 /// ClosedInSubtopologyTransEq
 fn step_178() -> Unit raise {
-  closedinsubtopologytranseq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ∧  s ⊂ topspace α  ⇒\n    ((∀u. closed_in (subtopology α t) u  ⇒  closed_in (subtopology α s) t)\n    ⇔ closed_in (subtopology α s) t)\n\n  proof\n    intro_TAC ∀α s t, H1 H2;\n    fol H1 H2 ClosedInSubtopologyTrans CLOSED_IN_TOPSPACE;\n  qed;\n")))
+  closedinsubtopologytranseq_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  /\\   s SUBSET topspace alpha  ==>\n    ((forall u. closed_in (subtopology alpha t) u  ==>  closed_in (subtopology alpha s) t)\n    <=> closed_in (subtopology alpha s) t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1 H2"),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("ClosedInSubtopologyTrans", () => closedinsubtopologytrans()),
+            @readable.Thm("CLOSED_IN_TOPSPACE", () => closed_in_topspace()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2765,25 +2621,18 @@ pub fn closedinsubtopologytranseq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_95`
-pub fn exec_phrase_95(x100 : Unit) -> Unit raise {
-  let _ = x100
-  {
-    @readable.thm_ref().val = closedinsubtopologytrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInSubtopologyTrans): thm);;
-fn step_179() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInSubtopologyTrans): thm);;", exec_phrase_95)
-}
-
-///|
 /// ClosedInClosedTrans
 fn step_180() -> Unit raise {
-  closedinclosedtrans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  u ⊂ topspace α  ⇒\n    closed_in (subtopology α u) s ∧ closed_in α u ⇒ closed_in α s\n  by fol ClosedInSubtopology CLOSED_IN_INTER")))
+  closedinclosedtrans_c.set(@readable.prove(
+    "\n  forall alpha s t.  u SUBSET topspace alpha  ==>\n    closed_in (subtopology alpha u) s /\\  closed_in alpha u ==> closed_in alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+        @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2798,7 +2647,18 @@ pub fn closedinclosedtrans() -> @kernel.Thm {
 ///|
 /// OpenInSubtopologyInterSubset
 fn step_181() -> Unit raise {
-  openinsubtopologyintersubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s u v.  u ⊂ topspace α  ∧  v ⊂ topspace α  ⇒\n    open_in (subtopology α u) (u ∩ s)  ∧  v ⊂ u\n    ⇒ open_in (subtopology α v) (v ∩ s)\n\n  proof\n    simplify OpenInSubtopology;\n    set;\n  qed;\n")))
+  openinsubtopologyintersubset_c.set(@readable.prove(
+    "\n  forall alpha s u v.  u SUBSET topspace alpha  /\\   v SUBSET topspace alpha  ==>\n    open_in (subtopology alpha u) (u INTER s)  /\\   v SUBSET u\n    ==> open_in (subtopology alpha v) (v INTER s)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("OpenInSubtopology", () => openinsubtopology())],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2813,7 +2673,18 @@ pub fn openinsubtopologyintersubset() -> @kernel.Thm {
 ///|
 /// OpenInOpenEq
 fn step_182() -> Unit raise {
-  openinopeneq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    open_in α s  ⇒  (open_in (subtopology α s) t  ⇔  open_in α t ∧ t ⊂ s)\n  by fol OpenOpenInTrans OPEN_IN_SUBSET TopspaceSubtopology OpenInOpenTrans")))
+  openinopeneq_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    open_in alpha s  ==>  (open_in (subtopology alpha s) t  <=>  open_in alpha t /\\  t SUBSET s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenOpenInTrans", () => openopenintrans()),
+        @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+        @readable.Thm("OpenInOpenTrans", () => openinopentrans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2826,41 +2697,20 @@ pub fn openinopeneq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_96`
-pub fn exec_phrase_96(x101 : Unit) -> Unit raise {
-  let _ = x101
-  {
-    @readable.thm_ref().val = openopenintrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenOpenInTrans): thm);;
-fn step_183() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenOpenInTrans): thm);;", exec_phrase_96)
-}
-
-///|
-/// `exec_phrase_97`
-pub fn exec_phrase_97(x102 : Unit) -> Unit raise {
-  let _ = x102
-  {
-    @readable.thm_ref().val = openinopentrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInOpenTrans): thm);;
-fn step_184() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInOpenTrans): thm);;", exec_phrase_97)
-}
-
-///|
 /// ClosedInClosedEq
 fn step_185() -> Unit raise {
-  closedinclosedeq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒  closed_in α s  ⇒\n    (closed_in (subtopology α s) t  ⇔  closed_in α t ∧ t ⊂ s)\n  by fol ClosedClosedInTrans CLOSED_IN_SUBSET TopspaceSubtopology ClosedInClosedTrans")))
+  closedinclosedeq_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>  closed_in alpha s  ==>\n    (closed_in (subtopology alpha s) t  <=>  closed_in alpha t /\\  t SUBSET s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedClosedInTrans", () => closedclosedintrans()),
+        @readable.Thm("CLOSED_IN_SUBSET", () => closed_in_subset()),
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+        @readable.Thm("ClosedInClosedTrans", () => closedinclosedtrans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2873,41 +2723,18 @@ pub fn closedinclosedeq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_98`
-pub fn exec_phrase_98(x103 : Unit) -> Unit raise {
-  let _ = x103
-  {
-    @readable.thm_ref().val = closedclosedintrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedClosedInTrans): thm);;
-fn step_186() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedClosedInTrans): thm);;", exec_phrase_98)
-}
-
-///|
-/// `exec_phrase_99`
-pub fn exec_phrase_99(x104 : Unit) -> Unit raise {
-  let _ = x104
-  {
-    @readable.thm_ref().val = closedinclosedtrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInClosedTrans): thm);;
-fn step_187() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInClosedTrans): thm);;", exec_phrase_99)
-}
-
-///|
 /// OpenImpliesSubtopologyInterOpen
 fn step_188() -> Unit raise {
-  openimpliessubtopologyinteropen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α u s.  u ⊂ topspace α  ⇒\n    open_in α s  ⇒  open_in (subtopology α u) (u ∩ s)\n    by fol OpenInSubtopology INTER_COMM")))
+  openimpliessubtopologyinteropen_c.set(@readable.prove(
+    "\n  forall alpha u s.  u SUBSET topspace alpha  ==>\n    open_in alpha s  ==>  open_in (subtopology alpha u) (u INTER s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2922,7 +2749,51 @@ pub fn openimpliessubtopologyinteropen() -> @kernel.Thm {
 ///|
 /// OPEN_IN_EXISTS_IN
 fn step_189() -> Unit raise {
-  open_in_exists_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α P Q.  (∀a. P a ⇒ open_in α {x | Q a x})  ⇒\n    open_in α {x | ∃a. P a ∧ Q a x}\n\n  proof\n    intro_TAC ∀α P Q, H1;\n    consider f such that f = {{x | Q a x} | P a}     [fDef] by fol;\n    (∀a. P a ⇒ open_in α {x | Q a x})  ⇔  (∀s. s ∈ f ⇒ open_in α s)     [] by simplify fDef FORALL_IN_GSPEC;\n    MP_TAC MESON [H1; -; OPEN_IN_UNIONS] [open_in α  (UNIONS f)];\n    simplify fDef UNIONS_GSPEC;\n    set;\n  qed;\n")))
+  open_in_exists_in_c.set(@readable.prove(
+    "\n  forall alpha P Q.  (forall a. P a ==> open_in alpha {x | Q a x})  ==>\n    open_in alpha {x | ?a. P a /\\  Q a x}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha P Q, H1"),
+        @readable.consider(
+          "f",
+          "f = {{x | Q a x} | P a}    ",
+          "fDef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    (forall a. P a ==> open_in alpha {x | Q a x})  <=>  (forall s. s IN f ==> open_in alpha s)",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("fDef"),
+              @readable.Thm("FORALL_IN_GSPEC", () => @sets.forall_in_gspec()),
+            ],
+          ),
+        ),
+        @readable.by_thm(
+          th => @tactics.mp_tac(th),
+          @readable.ThmsTermRule(
+            ths => tm => @meson.meson(ths, tm),
+            [
+              @readable.Label("H1"),
+              @readable.Prev,
+              @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+            ],
+            "open_in alpha  (UNIONS f)",
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("fDef"),
+            @readable.Thm("UNIONS_GSPEC", () => @sets.unions_gspec()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2952,7 +2823,28 @@ pub fn connected_def() -> @kernel.Thm {
 ///|
 /// ConnectedClosedHelp
 fn step_191() -> Unit raise {
-  connectedclosedhelp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α e1 e2. topspace α = e1 ∪ e2  ∧  e1 ∩ e2 = ∅  ⇒\n    (closed_in α e1  ∧  closed_in α e2  ⇔  open_in α e1  ∧  open_in α e2)\n\n  proof\n    intro_TAC ∀α e1 e2, H1 H2;\n    e1 = topspace α ━ e2  ∧  e2 = topspace α ━ e1     [e12Complements] by set H1 H2;\n    fol H1 SUBSET_UNION e12Complements OPEN_IN_CLOSED_IN_EQ;\n  qed;\n")))
+  connectedclosedhelp_c.set(@readable.prove(
+    "\n  forall alpha e1 e2. topspace alpha = e1 UNION e2  /\\   e1 INTER e2 = {}  ==>\n    (closed_in alpha e1  /\\   closed_in alpha e2  <=>  open_in alpha e1  /\\   open_in alpha e2)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha e1 e2, H1 H2"),
+        @readable.have(
+          "\n    e1 = topspace alpha DIFF e2  /\\   e2 = topspace alpha DIFF e1",
+          "e12Complements",
+          @readable.by(@readable.set, [@readable.Label("H1"), @readable.Label("H2")]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+            @readable.Label("e12Complements"),
+            @readable.Thm("OPEN_IN_CLOSED_IN_EQ", () => open_in_closed_in_eq()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2965,25 +2857,23 @@ pub fn connectedclosedhelp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_100`
-pub fn exec_phrase_100(x105 : Unit) -> Unit raise {
-  let _ = x105
-  {
-    @readable.thm_ref().val = @sets.subset_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_UNION): thm);;
-fn step_192() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_UNION): thm);;", exec_phrase_100)
-}
-
-///|
 /// ConnectedClosed
 fn step_193() -> Unit raise {
-  connectedclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Connected α  ⇔\n    ¬(∃e1 e2. closed_in α e1  ∧  closed_in α e2  ∧\n    topspace α = e1 ∪ e2  ∧  e1 ∩ e2 = ∅  ∧  ¬(e1 = ∅) ∧ ¬(e2 = ∅))\n\n  proof\n    rewrite Connected_DEF;\n    fol ConnectedClosedHelp;\n  qed;\n")))
+  connectedclosed_c.set(@readable.prove(
+    "\n  forall alpha. Connected alpha  <=>\n    ~(?e1 e2. closed_in alpha e1  /\\   closed_in alpha e2  /\\ \n    topspace alpha = e1 UNION e2  /\\   e1 INTER e2 = {}  /\\   ~(e1 = {}) /\\  ~(e2 = {}))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("Connected_DEF", () => connected_def())],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("ConnectedClosedHelp", () => connectedclosedhelp())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -2996,41 +2886,31 @@ pub fn connectedclosed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_101`
-pub fn exec_phrase_101(x106 : Unit) -> Unit raise {
-  let _ = x106
-  {
-    @readable.thm_ref().val = connected_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Connected_DEF): thm);;
-fn step_194() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Connected_DEF): thm);;", exec_phrase_101)
-}
-
-///|
-/// `exec_phrase_102`
-pub fn exec_phrase_102(x107 : Unit) -> Unit raise {
-  let _ = x107
-  {
-    @readable.thm_ref().val = connectedclosedhelp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosedHelp): thm);;
-fn step_195() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosedHelp): thm);;", exec_phrase_102)
-}
-
-///|
 /// ConnectedOpenIn
 fn step_196() -> Unit raise {
-  connectedopenin_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (Connected (subtopology α s)  ⇔  ¬(∃e1 e2.\n    open_in (subtopology α s) e1  ∧  open_in (subtopology α s) e2  ∧\n    s ⊂ e1 ∪ e2  ∧  e1 ∩ e2 = ∅  ∧  ¬(e1 = ∅)  ∧  ¬(e2 = ∅)))\n\n  proof\n    simplify Connected_DEF TopspaceSubtopology;\n    fol SUBSET_REFL OpenInImpSubset UNION_SUBSET SUBSET_ANTISYM;\n  qed;\n")))
+  connectedopenin_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (Connected (subtopology alpha s)  <=>  ~(?e1 e2.\n    open_in (subtopology alpha s) e1  /\\   open_in (subtopology alpha s) e2  /\\ \n    s SUBSET e1 UNION e2  /\\   e1 INTER e2 = {}  /\\   ~(e1 = {})  /\\   ~(e2 = {})))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("Connected_DEF", () => connected_def()),
+            @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+            @readable.Thm("OpenInImpSubset", () => openinimpsubset()),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3043,41 +2923,31 @@ pub fn connectedopenin() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_103`
-pub fn exec_phrase_103(x108 : Unit) -> Unit raise {
-  let _ = x108
-  {
-    @readable.thm_ref().val = openinimpsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInImpSubset): thm);;
-fn step_197() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInImpSubset): thm);;", exec_phrase_103)
-}
-
-///|
-/// `exec_phrase_104`
-pub fn exec_phrase_104(x109 : Unit) -> Unit raise {
-  let _ = x109
-  {
-    @readable.thm_ref().val = @sets.subset_antisym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_ANTISYM): thm);;
-fn step_198() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_ANTISYM): thm);;", exec_phrase_104)
-}
-
-///|
 /// ConnectedClosedIn
 fn step_199() -> Unit raise {
-  connectedclosedin_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (Connected (subtopology α s)  ⇔  ¬(∃e1 e2.\n    closed_in (subtopology α s) e1  ∧  closed_in (subtopology α s) e2  ∧\n    s ⊂ e1 ∪ e2  ∧  e1 ∩ e2 = ∅  ∧  ¬(e1 = ∅)  ∧  ¬(e2 = ∅)))\n\n  proof\n    simplify ConnectedClosed TopspaceSubtopology;\n    fol SUBSET_REFL ClosedInImpSubset UNION_SUBSET SUBSET_ANTISYM;\n  qed;\n")))
+  connectedclosedin_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (Connected (subtopology alpha s)  <=>  ~(?e1 e2.\n    closed_in (subtopology alpha s) e1  /\\   closed_in (subtopology alpha s) e2  /\\ \n    s SUBSET e1 UNION e2  /\\   e1 INTER e2 = {}  /\\   ~(e1 = {})  /\\   ~(e2 = {})))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("ConnectedClosed", () => connectedclosed()),
+            @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+            @readable.Thm("ClosedInImpSubset", () => closedinimpsubset()),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3090,41 +2960,54 @@ pub fn connectedclosedin() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_105`
-pub fn exec_phrase_105(x110 : Unit) -> Unit raise {
-  let _ = x110
-  {
-    @readable.thm_ref().val = connectedclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosed): thm);;
-fn step_200() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosed): thm);;", exec_phrase_105)
-}
-
-///|
-/// `exec_phrase_106`
-pub fn exec_phrase_106(x111 : Unit) -> Unit raise {
-  let _ = x111
-  {
-    @readable.thm_ref().val = closedinimpsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInImpSubset): thm);;
-fn step_201() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInImpSubset): thm);;", exec_phrase_106)
-}
-
-///|
 /// ConnectedSubtopology
 fn step_202() -> Unit raise {
-  connectedsubtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. s ⊂ topspace α  ⇒\n    (Connected (subtopology α s)  ⇔\n    ¬(∃e1 e2. open_in α e1  ∧  open_in α e2  ∧  s ⊂ e1 ∪ e2  ∧\n    e1 ∩ e2 ∩ s = ∅  ∧  ¬(e1 ∩ s = ∅)  ∧  ¬(e2 ∩ s = ∅)))\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify H1 Connected_DEF OpenInSubtopology TopspaceSubtopology;\n    AP_TERM_TAC;\n    eq_tac     [Left]\n    proof\n    intro_TAC H2;\n    consider t1 t2 such that\n    open_in α t1  ∧  open_in α t2  ∧  s = (t1 ∩ s) ∪ (t2 ∩ s)  ∧\n    (t1 ∩ s) ∩ (t2 ∩ s) = ∅  ∧  ¬(t1 ∩ s = ∅)  ∧  ¬(t2 ∩ s = ∅)     [t12Exist] by fol H2;\n    s ⊂ t1 ∪ t2  ∧  t1 ∩ t2 ∩ s = ∅     [] by set t12Exist;\n    fol t12Exist -;\n    qed;\n    rewrite LEFT_IMP_EXISTS_THM;\n    intro_TAC ∀e1 e2, e12Exist;\n    exists_TAC e1 ∩ s;\n    exists_TAC e2 ∩ s;\n    set e12Exist;\n  qed;\n")))
+  connectedsubtopology_c.set(@readable.prove(
+    "\n  forall alpha s. s SUBSET topspace alpha  ==>\n    (Connected (subtopology alpha s)  <=>\n    ~(?e1 e2. open_in alpha e1  /\\   open_in alpha e2  /\\   s SUBSET e1 UNION e2  /\\ \n    e1 INTER e2 INTER s = {}  /\\   ~(e1 INTER s = {})  /\\   ~(e2 INTER s = {})))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("Connected_DEF", () => connected_def()),
+            @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+            @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+          ],
+        ),
+        @tactics.ap_term_tac,
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.intro_tac("H2"),
+              @readable.consider(
+                "t1 t2",
+                "open_in alpha t1  /\\   open_in alpha t2  /\\   s = (t1 INTER s) UNION (t2 INTER s)  /\\ \n    (t1 INTER s) INTER (t2 INTER s) = {}  /\\   ~(t1 INTER s = {})  /\\   ~(t2 INTER s = {})    ",
+                "t12Exist",
+                @readable.by(@readable.fol, [@readable.Label("H2")]),
+              ),
+              @readable.have(
+                "\n    s SUBSET t1 UNION t2  /\\   t1 INTER t2 INTER s = {}",
+                "",
+                @readable.by(@readable.set, [@readable.Label("t12Exist")]),
+              ),
+              @readable.by(@readable.fol, [@readable.Label("t12Exist"), @readable.Prev]),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall e1 e2, e12Exist"),
+        @readable.exists("e1 INTER s"),
+        @readable.exists("e2 INTER s"),
+        @readable.by(@readable.set, [@readable.Label("e12Exist")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3137,25 +3020,20 @@ pub fn connectedsubtopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_107`
-pub fn exec_phrase_107(x112 : Unit) -> Unit raise {
-  let _ = x112
-  {
-    @readable.tactic_ref().val = @tactics.ap_term_tac
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((AP_TERM_TAC): tactic);;
-fn step_203() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((AP_TERM_TAC): tactic);;", exec_phrase_107)
-}
-
-///|
 /// ConnectedSubtopology_ALT
 fn step_204() -> Unit raise {
-  connectedsubtopology_alt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. s ⊂ topspace α  ⇒\n    (Connected (subtopology α s)  ⇔\n    ∀e1 e2. open_in α e1  ∧  open_in α e2  ∧\n    s ⊂ e1 ∪ e2  ∧  e1 ∩ e2 ∩ s = ∅\n    ⇒ e1 ∩ s = ∅  ∨  e2 ∩ s = ∅)\n\n  proof     simplify ConnectedSubtopology;     fol;     qed;\n")))
+  connectedsubtopology_alt_c.set(@readable.prove(
+    "\n  forall alpha s. s SUBSET topspace alpha  ==>\n    (Connected (subtopology alpha s)  <=>\n    forall e1 e2. open_in alpha e1  /\\   open_in alpha e2  /\\ \n    s SUBSET e1 UNION e2  /\\   e1 INTER e2 INTER s = {}\n    ==> e1 INTER s = {}  \\/  e2 INTER s = {})",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("ConnectedSubtopology", () => connectedsubtopology())],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3168,25 +3046,86 @@ pub fn connectedsubtopology_alt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_108`
-pub fn exec_phrase_108(x113 : Unit) -> Unit raise {
-  let _ = x113
-  {
-    @readable.thm_ref().val = connectedsubtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedSubtopology): thm);;
-fn step_205() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedSubtopology): thm);;", exec_phrase_108)
-}
-
-///|
 /// ConnectedClosedSubtopology
 fn step_206() -> Unit raise {
-  connectedclosedsubtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. s ⊂ topspace α  ⇒\n    (Connected (subtopology α s)  ⇔\n    ¬(∃e1 e2. closed_in α e1  ∧  closed_in α e2  ∧  s ⊂ e1 ∪ e2  ∧\n    e1 ∩ e2 ∩ s = ∅  ∧  ¬(e1 ∩ s = ∅)  ∧  ¬(e2 ∩ s = ∅)))\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify H1 ConnectedSubtopology;\n    AP_TERM_TAC;\n    eq_tac     [Left]\n    proof\n      rewrite LEFT_IMP_EXISTS_THM;\n      intro_TAC ∀e1 e2, e12Exist;\n      exists_TAC topspace α ━ e2;\n      exists_TAC topspace α ━ e1;\n      simplify OPEN_IN_SUBSET H1 SUBSET_DIFF DIFF_REFL closed_in e12Exist;\n      set H1 e12Exist;\n    qed;\n    rewrite LEFT_IMP_EXISTS_THM;\n    intro_TAC ∀e1 e2, e12Exist;\n    exists_TAC topspace α ━ e2;\n    exists_TAC topspace α ━ e1;\n    e1 ⊂ topspace α  ∧  e2 ⊂ topspace α     [e12Top] by fol closed_in e12Exist;\n    simplify DIFF_REFL SUBSET_DIFF e12Top OPEN_IN_CLOSED_IN;\n    set H1 e12Exist;\n  qed;\n")))
+  connectedclosedsubtopology_c.set(@readable.prove(
+    "\n  forall alpha s. s SUBSET topspace alpha  ==>\n    (Connected (subtopology alpha s)  <=>\n    ~(?e1 e2. closed_in alpha e1  /\\   closed_in alpha e2  /\\   s SUBSET e1 UNION e2  /\\ \n    e1 INTER e2 INTER s = {}  /\\   ~(e1 INTER s = {})  /\\   ~(e2 INTER s = {})))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+          ],
+        ),
+        @tactics.ap_term_tac,
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm(
+                    "LEFT_IMP_EXISTS_THM",
+                    () => @theorems.left_imp_exists_thm(),
+                  ),
+                ],
+              ),
+              @readable.intro_tac("forall e1 e2, e12Exist"),
+              @readable.exists("topspace alpha DIFF e2"),
+              @readable.exists("topspace alpha DIFF e1"),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+                  @readable.Label("H1"),
+                  @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+                  @readable.Thm("DIFF_REFL", () => diff_refl()),
+                  @readable.Thm("closed_in", () => closed_in()),
+                  @readable.Label("e12Exist"),
+                ],
+              ),
+              @readable.by(
+                @readable.set,
+                [@readable.Label("H1"), @readable.Label("e12Exist")],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall e1 e2, e12Exist"),
+        @readable.exists("topspace alpha DIFF e2"),
+        @readable.exists("topspace alpha DIFF e1"),
+        @readable.have(
+          "\n    e1 SUBSET topspace alpha  /\\   e2 SUBSET topspace alpha",
+          "e12Top",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("closed_in", () => closed_in()), @readable.Label("e12Exist")],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("DIFF_REFL", () => diff_refl()),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Label("e12Top"),
+            @readable.Thm("OPEN_IN_CLOSED_IN", () => open_in_closed_in()),
+          ],
+        ),
+        @readable.by(
+          @readable.set,
+          [@readable.Label("H1"), @readable.Label("e12Exist")],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3199,25 +3138,25 @@ pub fn connectedclosedsubtopology() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_109`
-pub fn exec_phrase_109(x114 : Unit) -> Unit raise {
-  let _ = x114
-  {
-    @readable.thm_ref().val = open_in_closed_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_CLOSED_IN): thm);;
-fn step_207() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_CLOSED_IN): thm);;", exec_phrase_109)
-}
-
-///|
 /// ConnectedClosedSubtopology_ALT
 fn step_208() -> Unit raise {
-  connectedclosedsubtopology_alt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. s ⊂ topspace α  ⇒\n    (Connected (subtopology α s)  ⇔\n    ∀e1 e2. closed_in α e1  ∧  closed_in α e2  ∧\n    s ⊂ e1 ∪ e2  ∧  e1 ∩ e2 ∩ s = ∅\n     ⇒ e1 ∩ s = ∅  ∨  e2 ∩ s = ∅)\n\n  proof     simplify ConnectedClosedSubtopology;     fol;     qed;\n")))
+  connectedclosedsubtopology_alt_c.set(@readable.prove(
+    "\n  forall alpha s. s SUBSET topspace alpha  ==>\n    (Connected (subtopology alpha s)  <=>\n    forall e1 e2. closed_in alpha e1  /\\   closed_in alpha e2  /\\ \n    s SUBSET e1 UNION e2  /\\   e1 INTER e2 INTER s = {}\n     ==> e1 INTER s = {}  \\/  e2 INTER s = {})",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm(
+              "ConnectedClosedSubtopology",
+              () => connectedclosedsubtopology(),
+            ),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3230,25 +3169,70 @@ pub fn connectedclosedsubtopology_alt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_110`
-pub fn exec_phrase_110(x115 : Unit) -> Unit raise {
-  let _ = x115
-  {
-    @readable.thm_ref().val = connectedclosedsubtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosedSubtopology): thm);;
-fn step_209() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosedSubtopology): thm);;", exec_phrase_110)
-}
-
-///|
 /// ConnectedClopen
 fn step_210() -> Unit raise {
-  connectedclopen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Connected α  ⇔\n    ∀t. open_in α t ∧ closed_in α t  ⇒  t = ∅ ∨ t = topspace α\n\n  proof\n    intro_TAC ∀α;\n    simplify Connected_DEF closed_in TAUT [(¬a ⇔ b) ⇔ (a ⇔ ¬b)] NOT_FORALL_THM NOT_IMP DE_MORGAN_THM;\n    eq_tac     [Left]\n    proof\n      rewrite LEFT_IMP_EXISTS_THM;     intro_TAC ∀e1 e2, H1 H2 H3 H4 H5 H6;\n      exists_TAC e1;\n      e1 ⊂ topspace α  ∧  e2 = topspace α ━ e1  ∧  ¬(e1 = topspace alpha)     [] by set H3 H4 H6;\n      fol H1 - H2 H5;\n    qed;\n    rewrite LEFT_IMP_EXISTS_THM;     intro_TAC ∀t, H1;\n    exists_TAC t;     exists_TAC topspace α ━ t;\n    set H1;\n  qed;\n")))
+  connectedclopen_c.set(@readable.prove(
+    "\n  forall alpha. Connected alpha  <=>\n    forall t. open_in alpha t /\\  closed_in alpha t  ==>  t = {} \\/ t = topspace alpha",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("Connected_DEF", () => connected_def()),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.TermRule(@class.taut, "(~a <=> b) <=> (a <=> ~b)"),
+            @readable.Thm("NOT_FORALL_THM", () => @class.not_forall_thm()),
+            @readable.Thm("NOT_IMP", () => @class.not_imp()),
+            @readable.Thm("DE_MORGAN_THM", () => @class.de_morgan_thm()),
+          ],
+        ),
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm(
+                    "LEFT_IMP_EXISTS_THM",
+                    () => @theorems.left_imp_exists_thm(),
+                  ),
+                ],
+              ),
+              @readable.intro_tac("forall e1 e2, H1 H2 H3 H4 H5 H6"),
+              @readable.exists("e1"),
+              @readable.have(
+                "\n      e1 SUBSET topspace alpha  /\\   e2 = topspace alpha DIFF e1  /\\   ~(e1 = topspace alpha)",
+                "",
+                @readable.by(
+                  @readable.set,
+                  [@readable.Label("H3"), @readable.Label("H4"), @readable.Label("H6")],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("H1"),
+                  @readable.Prev,
+                  @readable.Label("H2"),
+                  @readable.Label("H5"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall t, H1"),
+        @readable.exists("t"),
+        @readable.exists("topspace alpha DIFF t"),
+        @readable.by(@readable.set, [@readable.Label("H1")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3261,73 +3245,79 @@ pub fn connectedclopen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_111`
-pub fn exec_phrase_111(x116 : Unit) -> Unit raise {
-  let _ = x116
-  {
-    @readable.term_thm_ref().val = @class.taut
-    ()
-  }
-}
-
-///|
-/// the phrase term_thm_ref := ((TAUT): (term -> thm));;
-fn step_211() -> Unit raise {
-  @lib.register_phrase("term_thm_ref := ((TAUT): (term -> thm));;", exec_phrase_111)
-}
-
-///|
-/// `exec_phrase_112`
-pub fn exec_phrase_112(x117 : Unit) -> Unit raise {
-  let _ = x117
-  {
-    @readable.thm_ref().val = @class.not_forall_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_FORALL_THM): thm);;
-fn step_212() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_FORALL_THM): thm);;", exec_phrase_112)
-}
-
-///|
-/// `exec_phrase_113`
-pub fn exec_phrase_113(x118 : Unit) -> Unit raise {
-  let _ = x118
-  {
-    @readable.thm_ref().val = @class.not_imp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_IMP): thm);;
-fn step_213() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_IMP): thm);;", exec_phrase_113)
-}
-
-///|
-/// `exec_phrase_114`
-pub fn exec_phrase_114(x119 : Unit) -> Unit raise {
-  let _ = x119
-  {
-    @readable.thm_ref().val = @class.de_morgan_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DE_MORGAN_THM): thm);;
-fn step_214() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DE_MORGAN_THM): thm);;", exec_phrase_114)
-}
-
-///|
 /// ConnectedClosedSet
 fn step_215() -> Unit raise {
-  connectedclosedset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s. s ⊂ topspace α  ⇒  closed_in α s  ⇒\n    (Connected (subtopology α s)  ⇔  ¬(∃e1 e2.\n    closed_in α e1  ∧  closed_in α e2  ∧\n    ¬(e1 = ∅)  ∧  ¬(e2 = ∅)  ∧  e1 ∪ e2 = s  ∧  e1 ∩ e2 = ∅))\n\n  proof\n    intro_TAC ∀α s, H1, H2;\n    simplify H1 ConnectedClosedSubtopology;\n    AP_TERM_TAC;\n    eq_tac     [Left]\n    proof\n      rewrite LEFT_IMP_EXISTS_THM;     intro_TAC ∀e1 e2, H3 H4 H5 H6 H7 H8;\n      exists_TAC e1 ∩ s;     exists_TAC e2 ∩ s;\n      simplify H2 H3 H4 H7 H8 CLOSED_IN_INTER;\n      set H5 H6;\n    qed;\n    rewrite LEFT_IMP_EXISTS_THM;     intro_TAC ∀e1 e2, H3 H4 H5 H6 H7 H8;\n    exists_TAC e1;     exists_TAC e2;\n    set H3 H4 H7 H8 H5 H6;\n  qed;\n")))
+  connectedclosedset_c.set(@readable.prove(
+    "\n  forall alpha s. s SUBSET topspace alpha  ==>  closed_in alpha s  ==>\n    (Connected (subtopology alpha s)  <=>  ~(?e1 e2.\n    closed_in alpha e1  /\\   closed_in alpha e2  /\\ \n    ~(e1 = {})  /\\   ~(e2 = {})  /\\   e1 UNION e2 = s  /\\   e1 INTER e2 = {}))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1, H2"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm(
+              "ConnectedClosedSubtopology",
+              () => connectedclosedsubtopology(),
+            ),
+          ],
+        ),
+        @tactics.ap_term_tac,
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm(
+                    "LEFT_IMP_EXISTS_THM",
+                    () => @theorems.left_imp_exists_thm(),
+                  ),
+                ],
+              ),
+              @readable.intro_tac("forall e1 e2, H3 H4 H5 H6 H7 H8"),
+              @readable.exists("e1 INTER s"),
+              @readable.exists("e2 INTER s"),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("H2"),
+                  @readable.Label("H3"),
+                  @readable.Label("H4"),
+                  @readable.Label("H7"),
+                  @readable.Label("H8"),
+                  @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+                ],
+              ),
+              @readable.by(
+                @readable.set,
+                [@readable.Label("H5"), @readable.Label("H6")],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall e1 e2, H3 H4 H5 H6 H7 H8"),
+        @readable.exists("e1"),
+        @readable.exists("e2"),
+        @readable.by(
+          @readable.set,
+          [
+            @readable.Label("H3"),
+            @readable.Label("H4"),
+            @readable.Label("H7"),
+            @readable.Label("H8"),
+            @readable.Label("H5"),
+            @readable.Label("H6"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3342,7 +3332,91 @@ pub fn connectedclosedset() -> @kernel.Thm {
 ///|
 /// ConnectedOpenSet
 fn step_216() -> Unit raise {
-  connectedopenset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  open_in α s  ⇒\n    (Connected (subtopology α s) ⇔\n    ¬(∃e1 e2.  open_in α e1  ∧  open_in α e2  ∧\n    ¬(e1 = ∅)  ∧  ¬(e2 = ∅)  ∧  e1 ∪ e2 = s  ∧  e1 ∩ e2 = ∅))\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify H1 OPEN_IN_SUBSET ConnectedSubtopology;\n    AP_TERM_TAC;\n    eq_tac     [Left]\n    proof\n      rewrite LEFT_IMP_EXISTS_THM;     intro_TAC ∀e1 e2, H3 H4 H5 H6 H7 H8;\n      exists_TAC e1 ∩ s;     exists_TAC e2 ∩ s;\n      e1 ⊂ topspace α  ∧  e2 ⊂ topspace α     [e12Subsets] by fol H3 H4 OPEN_IN_SUBSET;\n      simplify H1 H3 H4 OPEN_IN_INTER H7 H8;\n      set e12Subsets H5 H6;\n    qed;\n    rewrite LEFT_IMP_EXISTS_THM;     intro_TAC ∀e1 e2, H3 H4 H5 H6 H7 H8;\n    exists_TAC e1;     exists_TAC e2;\n    set H3 H4 H7 H8 H5 H6;\n  qed;\n")))
+  connectedopenset_c.set(@readable.prove(
+    "\n  forall alpha s.  open_in alpha s  ==>\n    (Connected (subtopology alpha s) <=>\n    ~(?e1 e2.  open_in alpha e1  /\\   open_in alpha e2  /\\ \n    ~(e1 = {})  /\\   ~(e2 = {})  /\\   e1 UNION e2 = s  /\\   e1 INTER e2 = {}))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+          ],
+        ),
+        @tactics.ap_term_tac,
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm(
+                    "LEFT_IMP_EXISTS_THM",
+                    () => @theorems.left_imp_exists_thm(),
+                  ),
+                ],
+              ),
+              @readable.intro_tac("forall e1 e2, H3 H4 H5 H6 H7 H8"),
+              @readable.exists("e1 INTER s"),
+              @readable.exists("e2 INTER s"),
+              @readable.have(
+                "\n      e1 SUBSET topspace alpha  /\\   e2 SUBSET topspace alpha",
+                "e12Subsets",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("H3"),
+                    @readable.Label("H4"),
+                    @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("H1"),
+                  @readable.Label("H3"),
+                  @readable.Label("H4"),
+                  @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+                  @readable.Label("H7"),
+                  @readable.Label("H8"),
+                ],
+              ),
+              @readable.by(
+                @readable.set,
+                [
+                  @readable.Label("e12Subsets"),
+                  @readable.Label("H5"),
+                  @readable.Label("H6"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall e1 e2, H3 H4 H5 H6 H7 H8"),
+        @readable.exists("e1"),
+        @readable.exists("e2"),
+        @readable.by(
+          @readable.set,
+          [
+            @readable.Label("H3"),
+            @readable.Label("H4"),
+            @readable.Label("H7"),
+            @readable.Label("H8"),
+            @readable.Label("H5"),
+            @readable.Label("H6"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3357,7 +3431,29 @@ pub fn connectedopenset() -> @kernel.Thm {
 ///|
 /// ConnectedEmpty
 fn step_217() -> Unit raise {
-  connectedempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Connected (subtopology α ∅)\n\n  proof\n    simplify Connected_DEF INTER_EMPTY EMPTY_SUBSET TopspaceSubtopology;\n    fol UNION_SUBSET SUBSET_EMPTY;\n  qed;\n")))
+  connectedempty_c.set(@readable.prove(
+    "\n  forall alpha. Connected (subtopology alpha {})",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("Connected_DEF", () => connected_def()),
+            @readable.Thm("INTER_EMPTY", () => @sets.inter_empty()),
+            @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+            @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3370,25 +3466,24 @@ pub fn connectedempty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_115`
-pub fn exec_phrase_115(x120 : Unit) -> Unit raise {
-  let _ = x120
-  {
-    @readable.thm_ref().val = @sets.subset_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_EMPTY): thm);;
-fn step_218() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_EMPTY): thm);;", exec_phrase_115)
-}
-
-///|
 /// ConnectedSing
 fn step_219() -> Unit raise {
-  connectedsing_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α a. a ∈ topspace α  ⇒  Connected (subtopology α {a})\n\n  proof\n    simplify Connected_DEF SING_SUBSET TopspaceSubtopology;\n    set;\n  qed;\n")))
+  connectedsing_c.set(@readable.prove(
+    "\n  forall alpha a. a IN topspace alpha  ==>  Connected (subtopology alpha {a})",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("Connected_DEF", () => connected_def()),
+            @readable.Thm("SING_SUBSET", () => @sets.sing_subset()),
+            @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3401,25 +3496,94 @@ pub fn connectedsing() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_116`
-pub fn exec_phrase_116(x121 : Unit) -> Unit raise {
-  let _ = x121
-  {
-    @readable.thm_ref().val = @sets.sing_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SING_SUBSET): thm);;
-fn step_220() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SING_SUBSET): thm);;", exec_phrase_116)
-}
-
-///|
 /// ConnectedUnions
 fn step_221() -> Unit raise {
-  connectedunions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α P. (∀s. s ∈ P ⇒ s ⊂ topspace α)  ⇒\n    (∀s. s ∈ P ⇒ Connected (subtopology α s)) ∧ ¬(INTERS P = ∅)\n        ⇒ Connected (subtopology α (UNIONS P))\n\n  proof\n    intro_TAC ∀α P, H1;\n    simplify H1 ConnectedSubtopology UNIONS_SUBSET NOT_EXISTS_THM;\n    intro_TAC allConnected PnotDisjoint, ∀[d/e1] [e/e2];\n    consider a such that\n    ∀t. t ∈ P ⇒ a ∈ t     [aInterP] by fol PnotDisjoint MEMBER_NOT_EMPTY IN_INTERS;\n    ONCE_REWRITE_TAC TAUT [∀p. ¬p ⇔ p ⇒ F];\n    intro_TAC dOpen eOpen Pde deDisjoint dNonempty eNonempty;\n    a ∈ d ∨ a ∈ e     [adORae] by set aInterP Pde dNonempty;\n    consider s x t y such that\n    s ∈ P  ∧  x ∈ d ∩ s  ∧\n    t ∈ P  ∧  y ∈ e ∩ t     [xdsANDyet] by set dNonempty eNonempty;\n    d ∩ e ∩ s = ∅  ∧  d ∩ e ∩ t = ∅     [] by set - deDisjoint;\n    (d ∩ s = ∅  ∨  e ∩ s = ∅)  ∧\n    (d ∩ t = ∅  ∨  e ∩ t = ∅)     [] by fol xdsANDyet allConnected dOpen eOpen Pde -;\n    set adORae xdsANDyet aInterP -;\n  qed;\n")))
+  connectedunions_c.set(@readable.prove(
+    "\n  forall alpha P. (forall s. s IN P ==> s SUBSET topspace alpha)  ==>\n    (forall s. s IN P ==> Connected (subtopology alpha s)) /\\  ~(INTERS P = {})\n        ==> Connected (subtopology alpha (UNIONS P))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha P, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+            @readable.Thm("UNIONS_SUBSET", () => @sets.unions_subset()),
+            @readable.Thm("NOT_EXISTS_THM", () => @class.not_exists_thm()),
+          ],
+        ),
+        @readable.intro_tac("allConnected PnotDisjoint, forall [d/e1] [e/e2]"),
+        @readable.consider(
+          "a",
+          "forall t. t IN P ==> a IN t    ",
+          "aInterP",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("PnotDisjoint"),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+              @readable.Thm("IN_INTERS", () => @sets.in_inters()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [@readable.TermRule(@class.taut, "forall p. ~p <=> p ==> F")],
+        ),
+        @readable.intro_tac("dOpen eOpen Pde deDisjoint dNonempty eNonempty"),
+        @readable.have(
+          "\n    a IN d \\/ a IN e",
+          "adORae",
+          @readable.by(
+            @readable.set,
+            [
+              @readable.Label("aInterP"),
+              @readable.Label("Pde"),
+              @readable.Label("dNonempty"),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "s x t y",
+          "s IN P  /\\   x IN d INTER s  /\\ \n    t IN P  /\\   y IN e INTER t    ",
+          "xdsANDyet",
+          @readable.by(
+            @readable.set,
+            [@readable.Label("dNonempty"), @readable.Label("eNonempty")],
+          ),
+        ),
+        @readable.have(
+          "\n    d INTER e INTER s = {}  /\\   d INTER e INTER t = {}",
+          "",
+          @readable.by(@readable.set, [@readable.Prev, @readable.Label("deDisjoint")]),
+        ),
+        @readable.have(
+          "\n    (d INTER s = {}  \\/  e INTER s = {})  /\\ \n    (d INTER t = {}  \\/  e INTER t = {})",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("xdsANDyet"),
+              @readable.Label("allConnected"),
+              @readable.Label("dOpen"),
+              @readable.Label("eOpen"),
+              @readable.Label("Pde"),
+              @readable.Prev,
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.set,
+          [
+            @readable.Label("adORae"),
+            @readable.Label("xdsANDyet"),
+            @readable.Label("aInterP"),
+            @readable.Prev,
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3432,89 +3596,48 @@ pub fn connectedunions() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_117`
-pub fn exec_phrase_117(x122 : Unit) -> Unit raise {
-  let _ = x122
-  {
-    @readable.thmlist_tactic_ref().val = @simp.once_rewrite_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((ONCE_REWRITE_TAC): thm list -> tactic);;
-fn step_222() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((ONCE_REWRITE_TAC): thm list -> tactic);;", exec_phrase_117)
-}
-
-///|
-/// `exec_phrase_118`
-pub fn exec_phrase_118(x123 : Unit) -> Unit raise {
-  let _ = x123
-  {
-    @readable.thm_ref().val = @sets.unions_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIONS_SUBSET): thm);;
-fn step_223() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIONS_SUBSET): thm);;", exec_phrase_118)
-}
-
-///|
-/// `exec_phrase_119`
-pub fn exec_phrase_119(x124 : Unit) -> Unit raise {
-  let _ = x124
-  {
-    @readable.thm_ref().val = @class.not_exists_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_EXISTS_THM): thm);;
-fn step_224() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_EXISTS_THM): thm);;", exec_phrase_119)
-}
-
-///|
-/// `exec_phrase_120`
-pub fn exec_phrase_120(x125 : Unit) -> Unit raise {
-  let _ = x125
-  {
-    @readable.thm_ref().val = @sets.member_not_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MEMBER_NOT_EMPTY): thm);;
-fn step_225() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MEMBER_NOT_EMPTY): thm);;", exec_phrase_120)
-}
-
-///|
-/// `exec_phrase_121`
-pub fn exec_phrase_121(x126 : Unit) -> Unit raise {
-  let _ = x126
-  {
-    @readable.thm_ref().val = @sets.in_inters()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_INTERS): thm);;
-fn step_226() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_INTERS): thm);;", exec_phrase_121)
-}
-
-///|
 /// ConnectedUnion
 fn step_227() -> Unit raise {
-  connectedunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ∧  t ⊂ topspace α  ∧  ¬(s ∩ t = ∅)  ∧\n    Connected (subtopology α s) ∧ Connected (subtopology α t)\n    ⇒ Connected (subtopology α (s ∪ t))\n\n  proof\n    rewrite GSYM UNIONS_2 GSYM INTERS_2;\n    intro_TAC ∀α s t, H1 H2 H3 H4 H5;\n    ∀u. u ∈ {s, t}  ⇒  u ⊂ topspace α     [stEuclidean] by set H1 H2;\n    ∀u. u ∈ {s, t}  ⇒  Connected (subtopology α u)     [] by set H4 H5;\n    fol stEuclidean - H3 ConnectedUnions;\n  qed;\n")))
+  connectedunion_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  /\\   t SUBSET topspace alpha  /\\   ~(s INTER t = {})  /\\ \n    Connected (subtopology alpha s) /\\  Connected (subtopology alpha t)\n    ==> Connected (subtopology alpha (s UNION t))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("UNIONS_2", () => @sets.unions_2()),
+            ),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("INTERS_2", () => @sets.inters_2()),
+            ),
+          ],
+        ),
+        @readable.intro_tac("forall alpha s t, H1 H2 H3 H4 H5"),
+        @readable.have(
+          "\n    forall u. u IN {s, t}  ==>  u SUBSET topspace alpha",
+          "stEuclidean",
+          @readable.by(@readable.set, [@readable.Label("H1"), @readable.Label("H2")]),
+        ),
+        @readable.have(
+          "\n    forall u. u IN {s, t}  ==>  Connected (subtopology alpha u)",
+          "",
+          @readable.by(@readable.set, [@readable.Label("H4"), @readable.Label("H5")]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("stEuclidean"),
+            @readable.Prev,
+            @readable.Label("H3"),
+            @readable.Thm("ConnectedUnions", () => connectedunions()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3527,25 +3650,154 @@ pub fn connectedunion() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_122`
-pub fn exec_phrase_122(x127 : Unit) -> Unit raise {
-  let _ = x127
-  {
-    @readable.thm_ref().val = connectedunions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedUnions): thm);;
-fn step_228() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedUnions): thm);;", exec_phrase_122)
-}
-
-///|
 /// ConnectedDiffOpenFromClosed
 fn step_229() -> Unit raise {
-  connecteddiffopenfromclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t u.  u ⊂ topspace α  ⇒\n    s ⊂ t  ∧  t ⊂ u ∧ open_in α s  ∧  closed_in α t  ∧\n    Connected (subtopology α u)  ∧  Connected (subtopology α (t ━ s))\n    ⇒ Connected (subtopology α (u ━ s))\n\n  proof\n    ONCE_REWRITE_TAC TAUT\n    [∀a b c d e f g. (a ∧ b ∧ c ∧ d ∧ e ∧ f ⇒ g)  ⇔\n    (a ∧ b ∧ c ∧ d ⇒ ¬g ⇒ f ⇒ ¬e)];\n    intro_TAC ∀α s t u, uSubset, st tu sOpen tClosed;\n    t ━ s ⊂ topspace α  ∧  u ━ s ⊂ topspace α     [] by fol uSubset sOpen OPEN_IN_SUBSET tClosed closed_in SUBSET_DIFF SUBSET_TRANS;\n    simplify uSubset - ConnectedSubtopology;\n    rewrite LEFT_IMP_EXISTS_THM;\n    intro_TAC ∀[v/e1] [w/e2];\n    intro_TAC vOpen wOpen u_sDisconnected vwDisjoint vNonempty wNonempty;\n    rewrite NOT_EXISTS_THM;\n    intro_TAC t_sConnected;\n    t ━ s ⊂ v ∪ w  ∧  v ∩ w ∩ (t ━ s) = ∅     [] by set tu u_sDisconnected vwDisjoint;\n    v ∩ (t ━ s) = ∅  ∨  w ∩ (t ━ s) = ∅     [] by fol t_sConnected vOpen wOpen -;\n    case_split vEmpty | wEmpty by fol -;\n    suppose v ∩ (t ━ s) = ∅;\n      exists_TAC w ∪ s;     exists_TAC v ━ t;\n      simplify vOpen wOpen sOpen tClosed OPEN_IN_UNION OPEN_IN_DIFF;\n      set st tu u_sDisconnected vEmpty vwDisjoint wNonempty vNonempty;\n    end;\n    suppose w ∩ (t ━ s) = ∅;\n      exists_TAC v ∪ s;     exists_TAC w ━ t;\n      simplify vOpen wOpen sOpen tClosed OPEN_IN_UNION OPEN_IN_DIFF;\n      set st tu u_sDisconnected wEmpty vwDisjoint wNonempty vNonempty;\n    end;\n  qed;\n")))
+  connecteddiffopenfromclosed_c.set(@readable.prove(
+    "\n  forall alpha s t u.  u SUBSET topspace alpha  ==>\n    s SUBSET t  /\\   t SUBSET u /\\  open_in alpha s  /\\   closed_in alpha t  /\\ \n    Connected (subtopology alpha u)  /\\   Connected (subtopology alpha (t DIFF s))\n    ==> Connected (subtopology alpha (u DIFF s))",
+    @readable.steps_then(
+      [
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [
+            @readable.TermRule(
+              @class.taut,
+              "forall a b c d e f g. (a /\\  b /\\  c /\\  d /\\  e /\\  f ==> g)  <=>\n    (a /\\  b /\\  c /\\  d ==> ~g ==> f ==> ~e)",
+            ),
+          ],
+        ),
+        @readable.intro_tac("forall alpha s t u, uSubset, st tu sOpen tClosed"),
+        @readable.have(
+          "\n    t DIFF s SUBSET topspace alpha  /\\   u DIFF s SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("uSubset"),
+              @readable.Label("sOpen"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+              @readable.Label("tClosed"),
+              @readable.Thm("closed_in", () => closed_in()),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("uSubset"),
+            @readable.Prev,
+            @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+          ],
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall [v/e1] [w/e2]"),
+        @readable.intro_tac(
+          "vOpen wOpen u_sDisconnected vwDisjoint vNonempty wNonempty",
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("NOT_EXISTS_THM", () => @class.not_exists_thm())],
+        ),
+        @readable.intro_tac("t_sConnected"),
+        @readable.have(
+          "\n    t DIFF s SUBSET v UNION w  /\\   v INTER w INTER (t DIFF s) = {}",
+          "",
+          @readable.by(
+            @readable.set,
+            [
+              @readable.Label("tu"),
+              @readable.Label("u_sDisconnected"),
+              @readable.Label("vwDisjoint"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    v INTER (t DIFF s) = {}  \\/  w INTER (t DIFF s) = {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("t_sConnected"),
+              @readable.Label("vOpen"),
+              @readable.Label("wOpen"),
+              @readable.Prev,
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "vEmpty | wEmpty",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["v INTER (t DIFF s) = {}", "w INTER (t DIFF s) = {}"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.exists("w UNION s"),
+                @readable.exists("v DIFF t"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("vOpen"),
+                    @readable.Label("wOpen"),
+                    @readable.Label("sOpen"),
+                    @readable.Label("tClosed"),
+                    @readable.Thm("OPEN_IN_UNION", () => open_in_union()),
+                    @readable.Thm("OPEN_IN_DIFF", () => open_in_diff()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("st"),
+                    @readable.Label("tu"),
+                    @readable.Label("u_sDisconnected"),
+                    @readable.Label("vEmpty"),
+                    @readable.Label("vwDisjoint"),
+                    @readable.Label("wNonempty"),
+                    @readable.Label("vNonempty"),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.exists("v UNION s"),
+                @readable.exists("w DIFF t"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("vOpen"),
+                    @readable.Label("wOpen"),
+                    @readable.Label("sOpen"),
+                    @readable.Label("tClosed"),
+                    @readable.Thm("OPEN_IN_UNION", () => open_in_union()),
+                    @readable.Thm("OPEN_IN_DIFF", () => open_in_diff()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("st"),
+                    @readable.Label("tu"),
+                    @readable.Label("u_sDisconnected"),
+                    @readable.Label("wEmpty"),
+                    @readable.Label("vwDisjoint"),
+                    @readable.Label("wNonempty"),
+                    @readable.Label("vNonempty"),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -3558,57 +3810,124 @@ pub fn connecteddiffopenfromclosed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_123`
-pub fn exec_phrase_123(x128 : Unit) -> Unit raise {
-  let _ = x128
-  {
-    @readable.thm_ref().val = @sets.subset_trans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_TRANS): thm);;
-fn step_230() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_TRANS): thm);;", exec_phrase_123)
-}
-
-///|
-/// `exec_phrase_124`
-pub fn exec_phrase_124(x129 : Unit) -> Unit raise {
-  let _ = x129
-  {
-    @readable.thm_ref().val = open_in_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_UNION): thm);;
-fn step_231() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_UNION): thm);;", exec_phrase_124)
-}
-
-///|
-/// `exec_phrase_125`
-pub fn exec_phrase_125(x130 : Unit) -> Unit raise {
-  let _ = x130
-  {
-    @readable.thm_ref().val = open_in_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_DIFF): thm);;
-fn step_232() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_DIFF): thm);;", exec_phrase_125)
-}
-
-///|
 /// ConnectedDisjointUnionsOpenUniquePart1
 fn step_233() -> Unit raise {
-  connecteddisjointunionsopenuniquepart1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f f' s t a.  pairwise DISJOINT f ∧ pairwise DISJOINT f' ∧\n    (∀s. s ∈ f  ⇒  open_in α s ∧ Connected (subtopology α s) ∧ ¬(s = ∅)) ∧\n    (∀s. s ∈ f'  ⇒  open_in α s ∧ Connected (subtopology α s) ∧ ¬(s = ∅)) ∧\n    UNIONS f = UNIONS f' ∧ s ∈ f ∧ t ∈ f' ∧ a ∈ s ∧ a ∈ t\n     ⇒ s ⊂ t\n\n  proof\n    intro_TAC ∀α f f' s t a, pDISJf pDISJf' fConn f'Conn Uf_Uf' sf tf' a_s a_t;\n    ∀s.  s ∈ f ⇒ s ⊂ topspace α     [fTop] by fol fConn OPEN_IN_SUBSET;\n    ∀s.  s ∈ f' ⇒ s ⊂ topspace α     [f'Top] by fol f'Conn OPEN_IN_SUBSET;\n    rewrite SUBSET;\n    intro_TAC ∀[b], bs;\n    assume ¬(b ∈ t)     [Contradiction] by fol;\n    ∃e1 e2.  open_in α e1 ∧ open_in α e2 ∧ e1 ∩ e2 ∩ s = ∅ ∧\n     s ⊂ e1 ∪ e2 ∧ ¬(e1 ∩ s = ∅) ∧ ¬(e2 ∩ s = ∅)     []\n     proof\n       exists_TAC t;     exists_TAC UNIONS (f' DELETE t);\n       simplify tf' f'Conn IN_DELETE OPEN_IN_UNIONS;\n       conj_tac     [Right] by set sf Uf_Uf' a_s a_t sf bs Contradiction;\n       MATCH_MP_TAC SET_RULE [∀s t u. t ∩ u = ∅ ⇒ t ∩ u ∩ s = ∅];\n       rewrite INTER_UNIONS EMPTY_UNIONS FORALL_IN_GSPEC;\n       rewrite IN_DELETE GSYM DISJOINT;\n       fol pDISJf' tf' pairwise;\n     qed;\n     fol - sf fTop fConn ConnectedSubtopology;\n  qed;\n")))
+  connecteddisjointunionsopenuniquepart1_c.set(@readable.prove(
+    "\n  forall alpha f f' s t a.  pairwise DISJOINT f /\\  pairwise DISJOINT f' /\\ \n    (forall s. s IN f  ==>  open_in alpha s /\\  Connected (subtopology alpha s) /\\  ~(s = {})) /\\ \n    (forall s. s IN f'  ==>  open_in alpha s /\\  Connected (subtopology alpha s) /\\  ~(s = {})) /\\ \n    UNIONS f = UNIONS f' /\\  s IN f /\\  t IN f' /\\  a IN s /\\  a IN t\n     ==> s SUBSET t",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall alpha f f' s t a, pDISJf pDISJf' fConn f'Conn Uf_Uf' sf tf' a_s a_t",
+        ),
+        @readable.have(
+          "\n    forall s.  s IN f ==> s SUBSET topspace alpha",
+          "fTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("fConn"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall s.  s IN f' ==> s SUBSET topspace alpha",
+          "f'Top",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("f'Conn"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.rewrite, [@readable.Thm("SUBSET", () => @sets.subset())]),
+        @readable.intro_tac("forall [b], bs"),
+        @readable.assuming(
+          "~(b IN t)",
+          "Contradiction",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    ?e1 e2.  open_in alpha e1 /\\  open_in alpha e2 /\\  e1 INTER e2 INTER s = {} /\\ \n     s SUBSET e1 UNION e2 /\\  ~(e1 INTER s = {}) /\\  ~(e2 INTER s = {})",
+          "",
+          @readable.steps(
+            [
+              @readable.exists("t"),
+              @readable.exists("UNIONS (f' DELETE t)"),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("tf'"),
+                  @readable.Label("f'Conn"),
+                  @readable.Thm("IN_DELETE", () => @sets.in_delete()),
+                  @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+                ],
+              ),
+              @readable.conj_tac(
+                "Right",
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("sf"),
+                    @readable.Label("Uf_Uf'"),
+                    @readable.Label("a_s"),
+                    @readable.Label("a_t"),
+                    @readable.Label("sf"),
+                    @readable.Label("bs"),
+                    @readable.Label("Contradiction"),
+                  ],
+                ),
+              ),
+              @readable.by_thm(
+                @tactics.match_mp_tac,
+                @readable.TermRule(
+                  @sets.set_rule,
+                  "forall s t u. t INTER u = {} ==> t INTER u INTER s = {}",
+                ),
+              ),
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm("INTER_UNIONS", () => @sets.inter_unions()),
+                  @readable.Thm("EMPTY_UNIONS", () => @sets.empty_unions()),
+                  @readable.Thm("FORALL_IN_GSPEC", () => @sets.forall_in_gspec()),
+                ],
+              ),
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm("IN_DELETE", () => @sets.in_delete()),
+                  @readable.Rule(
+                    @equal.gsym,
+                    @readable.Thm("DISJOINT", () => @sets.disjoint()),
+                  ),
+                ],
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("pDISJf'"),
+                  @readable.Label("tf'"),
+                  @readable.Thm("pairwise", () => @sets.pairwise()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("sf"),
+            @readable.Label("fTop"),
+            @readable.Label("fConn"),
+            @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3621,73 +3940,72 @@ pub fn connecteddisjointunionsopenuniquepart1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_126`
-pub fn exec_phrase_126(x131 : Unit) -> Unit raise {
-  let _ = x131
-  {
-    @readable.thm_ref().val = @sets.in_delete()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_DELETE): thm);;
-fn step_234() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_DELETE): thm);;", exec_phrase_126)
-}
-
-///|
-/// `exec_phrase_127`
-pub fn exec_phrase_127(x132 : Unit) -> Unit raise {
-  let _ = x132
-  {
-    @readable.thm_ref().val = @sets.empty_unions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EMPTY_UNIONS): thm);;
-fn step_235() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EMPTY_UNIONS): thm);;", exec_phrase_127)
-}
-
-///|
-/// `exec_phrase_128`
-pub fn exec_phrase_128(x133 : Unit) -> Unit raise {
-  let _ = x133
-  {
-    @readable.thm_ref().val = @sets.disjoint()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DISJOINT): thm);;
-fn step_236() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DISJOINT): thm);;", exec_phrase_128)
-}
-
-///|
-/// `exec_phrase_129`
-pub fn exec_phrase_129(x134 : Unit) -> Unit raise {
-  let _ = x134
-  {
-    @readable.thm_ref().val = @sets.pairwise()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((pairwise): thm);;
-fn step_237() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((pairwise): thm);;", exec_phrase_129)
-}
-
-///|
 /// ConnectedDisjointUnionsOpenUnique
 fn step_238() -> Unit raise {
-  connecteddisjointunionsopenunique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f f'.  pairwise DISJOINT f ∧ pairwise DISJOINT f' ∧\n    (∀s. s ∈ f  ⇒  open_in α s ∧ Connected (subtopology α s) ∧ ¬(s = ∅)) ∧\n    (∀s. s ∈ f'  ⇒  open_in α s ∧ Connected (subtopology α s) ∧ ¬(s = ∅)) ∧\n    UNIONS f = UNIONS f'\n    ⇒ f = f'\n\n  proof\n    MATCH_MP_TAC MESON [SUBSET_ANTISYM]\n    [(∀α s t. P α s t ⇒ P α t s) ∧ (∀α s t. P α s t ⇒ s ⊂ t)\n    ⇒ (∀α s t. P α s t ⇒ s = t)];\n    conj_tac     [Left] by fol;\n    intro_TAC ∀α f f', pDISJf pDISJf' fConn f'Conn Uf_Uf';\n    rewrite SUBSET;\n    intro_TAC ∀[s], sf;\n    consider t a such that\n    t ∈ f' ∧ a ∈ s ∧ a ∈ t     [taExist] by set sf fConn Uf_Uf';\n    MP_TAC ISPECL [α; f; f'; s; t] ConnectedDisjointUnionsOpenUniquePart1;\n    MP_TAC ISPECL [α; f'; f; t; s] ConnectedDisjointUnionsOpenUniquePart1;\n    fol pDISJf pDISJf' fConn f'Conn Uf_Uf' sf taExist SUBSET_ANTISYM taExist;\n  qed;\n")))
+  connecteddisjointunionsopenunique_c.set(@readable.prove(
+    "\n  forall alpha f f'.  pairwise DISJOINT f /\\  pairwise DISJOINT f' /\\ \n    (forall s. s IN f  ==>  open_in alpha s /\\  Connected (subtopology alpha s) /\\  ~(s = {})) /\\ \n    (forall s. s IN f'  ==>  open_in alpha s /\\  Connected (subtopology alpha s) /\\  ~(s = {})) /\\ \n    UNIONS f = UNIONS f'\n    ==> f = f'",
+    @readable.steps(
+      [
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.ThmsTermRule(
+            ths => tm => @meson.meson(ths, tm),
+            [@readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym())],
+            "(forall alpha s t. P alpha s t ==> P alpha t s) /\\  (forall alpha s t. P alpha s t ==> s SUBSET t)\n    ==> (forall alpha s t. P alpha s t ==> s = t)",
+          ),
+        ),
+        @readable.conj_tac("Left", @readable.by(@readable.fol, [])),
+        @readable.intro_tac("forall alpha f f', pDISJf pDISJf' fConn f'Conn Uf_Uf'"),
+        @readable.by(@readable.rewrite, [@readable.Thm("SUBSET", () => @sets.subset())]),
+        @readable.intro_tac("forall [s], sf"),
+        @readable.consider(
+          "t a",
+          "t IN f' /\\  a IN s /\\  a IN t    ",
+          "taExist",
+          @readable.by(
+            @readable.set,
+            [@readable.Label("sf"), @readable.Label("fConn"), @readable.Label("Uf_Uf'")],
+          ),
+        ),
+        @readable.by_thm(
+          th => @tactics.mp_tac(th),
+          @readable.TermsRule(
+            tms => th => @bool.ispecl(tms, th),
+            ["alpha", " f", " f'", " s", " t"],
+            @readable.Thm(
+              "ConnectedDisjointUnionsOpenUniquePart1",
+              () => connecteddisjointunionsopenuniquepart1(),
+            ),
+          ),
+        ),
+        @readable.by_thm(
+          th => @tactics.mp_tac(th),
+          @readable.TermsRule(
+            tms => th => @bool.ispecl(tms, th),
+            ["alpha", " f'", " f", " t", " s"],
+            @readable.Thm(
+              "ConnectedDisjointUnionsOpenUniquePart1",
+              () => connecteddisjointunionsopenuniquepart1(),
+            ),
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("pDISJf"),
+            @readable.Label("pDISJf'"),
+            @readable.Label("fConn"),
+            @readable.Label("f'Conn"),
+            @readable.Label("Uf_Uf'"),
+            @readable.Label("sf"),
+            @readable.Label("taExist"),
+            @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+            @readable.Label("taExist"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3700,45 +4018,168 @@ pub fn connecteddisjointunionsopenunique() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_130`
-pub fn exec_phrase_130(x135 : Unit) -> Unit raise {
-  let _ = x135
-  {
-    @readable.termlist_thm_thm_ref().val = fn(x136 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-      fn(x137 : @kernel.Thm) -> @kernel.Thm raise {
-        @bool.ispecl(x136, x137)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase termlist_thm_thm_ref := ((ISPECL): (term list -> thm -> thm));;
-fn step_239() -> Unit raise {
-  @lib.register_phrase("termlist_thm_thm_ref := ((ISPECL): (term list -> thm -> thm));;", exec_phrase_130)
-}
-
-///|
-/// `exec_phrase_131`
-pub fn exec_phrase_131(x138 : Unit) -> Unit raise {
-  let _ = x138
-  {
-    @readable.thm_ref().val = connecteddisjointunionsopenuniquepart1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedDisjointUnionsOpenUniquePart1): thm);;
-fn step_240() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedDisjointUnionsOpenUniquePart1): thm);;", exec_phrase_131)
-}
-
-///|
 /// ConnectedFromClosedUnionAndInter
 fn step_241() -> Unit raise {
-  connectedfromclosedunionandinter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α ∧ closed_in α s ∧ closed_in α t ∧\n    Connected (subtopology α (s ∪ t)) ∧ Connected (subtopology α (s ∩ t))\n    ⇒ Connected (subtopology α s) ∧ Connected (subtopology α t)\n\n  proof\n    MATCH_MP_TAC MESON [] [(∀α s t. P α s t ⇒ P α t s) ∧\n    (∀α s t. P α s t ⇒ Q α s) ⇒ ∀α s t. P α s t ⇒ Q α s ∧ Q α t];\n    conj_tac     [Left] by fol UNION_COMM INTER_COMM;\n    ONCE_REWRITE_TAC TAUT\n    [∀a b c d e f.  a ∧ b ∧ c ∧ d ∧ e ⇒ f  ⇔  a ∧ b ∧ c ∧ e ∧ ¬f ⇒ ¬d];\n    intro_TAC ∀α s t, stUnionTop sClosed tClosed stInterConn  NOTsConn;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [stTop] by fol stUnionTop UNION_SUBSET INTER_SUBSET SUBSET_TRANS;\n    simplify stUnionTop ConnectedClosedSubtopology;\n    consider u v such that closed_in α u ∧ closed_in α v ∧\n    ¬(u = ∅) ∧ ¬(v = ∅) ∧ u ∪ v = s ∧ u ∩ v = ∅     [sDisConn]\n    proof\n      MP_TAC ISPECL [α; s] ConnectedClosedSet;\n      simplify stTop sClosed NOTsConn;\n    qed;\n    s ∩ t ⊂ u ∪ v  ∧  u ∩ v ∩ (s ∩ t) = ∅     [stuvProps] by set sDisConn;\n    u ∩ (s ∩ t) = ∅  ∨  v ∩ (s ∩ t) = ∅     [] by fol stTop stInterConn sDisConn - ConnectedClosedSubtopology_ALT;\n    case_split vstEmpty | ustEmpty by fol -;\n    suppose v ∩ (s ∩ t) = ∅;\n      exists_TAC t ∪ u;     exists_TAC v;\n      simplify tClosed sDisConn CLOSED_IN_UNION;\n      set stuvProps sDisConn vstEmpty;\n    end;\n    suppose u ∩ (s ∩ t) = ∅;\n      exists_TAC t ∪ v;     exists_TAC u;\n      simplify tClosed sDisConn CLOSED_IN_UNION;\n      set stuvProps sDisConn ustEmpty;\n    end;\n  qed;\n")))
+  connectedfromclosedunionandinter_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha /\\  closed_in alpha s /\\  closed_in alpha t /\\ \n    Connected (subtopology alpha (s UNION t)) /\\  Connected (subtopology alpha (s INTER t))\n    ==> Connected (subtopology alpha s) /\\  Connected (subtopology alpha t)",
+    @readable.steps_then(
+      [
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.ThmsTermRule(
+            ths => tm => @meson.meson(ths, tm),
+            [],
+            "(forall alpha s t. P alpha s t ==> P alpha t s) /\\ \n    (forall alpha s t. P alpha s t ==> Q alpha s) ==> forall alpha s t. P alpha s t ==> Q alpha s /\\  Q alpha t",
+          ),
+        ),
+        @readable.conj_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [
+            @readable.TermRule(
+              @class.taut,
+              "forall a b c d e f.  a /\\  b /\\  c /\\  d /\\  e ==> f  <=>  a /\\  b /\\  c /\\  e /\\  ~f ==> ~d",
+            ),
+          ],
+        ),
+        @readable.intro_tac(
+          "forall alpha s t, stUnionTop sClosed tClosed stInterConn  NOTsConn",
+        ),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stUnionTop"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("stUnionTop"),
+            @readable.Thm(
+              "ConnectedClosedSubtopology",
+              () => connectedclosedsubtopology(),
+            ),
+          ],
+        ),
+        @readable.consider(
+          "u v",
+          "closed_in alpha u /\\  closed_in alpha v /\\ \n    ~(u = {}) /\\  ~(v = {}) /\\  u UNION v = s /\\  u INTER v = {}    ",
+          "sDisConn",
+          @readable.steps(
+            [
+              @readable.by_thm(
+                th => @tactics.mp_tac(th),
+                @readable.TermsRule(
+                  tms => th => @bool.ispecl(tms, th),
+                  ["alpha", " s"],
+                  @readable.Thm("ConnectedClosedSet", () => connectedclosedset()),
+                ),
+              ),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("stTop"),
+                  @readable.Label("sClosed"),
+                  @readable.Label("NOTsConn"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s INTER t SUBSET u UNION v  /\\   u INTER v INTER (s INTER t) = {}",
+          "stuvProps",
+          @readable.by(@readable.set, [@readable.Label("sDisConn")]),
+        ),
+        @readable.have(
+          "\n    u INTER (s INTER t) = {}  \\/  v INTER (s INTER t) = {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Label("stInterConn"),
+              @readable.Label("sDisConn"),
+              @readable.Prev,
+              @readable.Thm(
+                "ConnectedClosedSubtopology_ALT",
+                () => connectedclosedsubtopology_alt(),
+              ),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "vstEmpty | ustEmpty",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["v INTER (s INTER t) = {}", "u INTER (s INTER t) = {}"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.exists("t UNION u"),
+                @readable.exists("v"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("tClosed"),
+                    @readable.Label("sDisConn"),
+                    @readable.Thm("CLOSED_IN_UNION", () => closed_in_union()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("stuvProps"),
+                    @readable.Label("sDisConn"),
+                    @readable.Label("vstEmpty"),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.exists("t UNION v"),
+                @readable.exists("u"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("tClosed"),
+                    @readable.Label("sDisConn"),
+                    @readable.Thm("CLOSED_IN_UNION", () => closed_in_union()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("stuvProps"),
+                    @readable.Label("sDisConn"),
+                    @readable.Label("ustEmpty"),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -3751,57 +4192,165 @@ pub fn connectedfromclosedunionandinter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_132`
-pub fn exec_phrase_132(x139 : Unit) -> Unit raise {
-  let _ = x139
-  {
-    @readable.thm_ref().val = @sets.union_comm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNION_COMM): thm);;
-fn step_242() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNION_COMM): thm);;", exec_phrase_132)
-}
-
-///|
-/// `exec_phrase_133`
-pub fn exec_phrase_133(x140 : Unit) -> Unit raise {
-  let _ = x140
-  {
-    @readable.thm_ref().val = connectedclosedset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosedSet): thm);;
-fn step_243() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosedSet): thm);;", exec_phrase_133)
-}
-
-///|
-/// `exec_phrase_134`
-pub fn exec_phrase_134(x141 : Unit) -> Unit raise {
-  let _ = x141
-  {
-    @readable.thm_ref().val = connectedclosedsubtopology_alt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosedSubtopology_ALT): thm);;
-fn step_244() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosedSubtopology_ALT): thm);;", exec_phrase_134)
-}
-
-///|
 /// ConnectedFromOpenUnionAndInter
 fn step_245() -> Unit raise {
-  connectedfromopenunionandinter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α ∧ open_in α s ∧ open_in α t ∧\n    Connected (subtopology α (s ∪ t)) ∧ Connected (subtopology α (s ∩ t))\n    ⇒ Connected (subtopology α s) ∧ Connected (subtopology α t)\n\n  proof\n    MATCH_MP_TAC MESON [] [(∀α s t. P α s t ⇒ P α t s) ∧\n    (∀α s t. P α s t ⇒ Q α s) ⇒ ∀α s t. P α s t ⇒ Q α s ∧ Q α t];\n    conj_tac     [Left] by fol UNION_COMM INTER_COMM;\n    ONCE_REWRITE_TAC TAUT\n    [∀a b c d e f.  a ∧ b ∧ c ∧ d ∧ e ⇒ f  ⇔  a ∧ b ∧ c ∧ e ∧ ¬f ⇒ ¬d];\n    intro_TAC ∀α s t, stUnionTop sOpen tOpen stInterConn  NOTsConn;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [stTop] by fol stUnionTop UNION_SUBSET INTER_SUBSET SUBSET_TRANS;\n    simplify stUnionTop ConnectedSubtopology;\n    consider u v such that open_in α u ∧ open_in α v ∧\n    ¬(u = ∅) ∧ ¬(v = ∅) ∧ u ∪ v = s ∧ u ∩ v = ∅     [sDisConn]\n    proof\n      MP_TAC ISPECL [α; s] ConnectedOpenSet;\n      simplify stTop sOpen NOTsConn;\n    qed;\n    s ∩ t ⊂ u ∪ v  ∧  u ∩ v ∩ (s ∩ t) = ∅     [stuvProps] by set sDisConn;\n    u ∩ (s ∩ t) = ∅  ∨  v ∩ (s ∩ t) = ∅     [] by fol stTop stInterConn sDisConn - ConnectedSubtopology_ALT;\n    case_split vstEmpty | ustEmpty by fol -;\n    suppose v ∩ (s ∩ t) = ∅;\n      exists_TAC t ∪ u;     exists_TAC v;\n      simplify tOpen sDisConn OPEN_IN_UNION;\n      set stuvProps sDisConn vstEmpty;\n    end;\n    suppose u ∩ (s ∩ t) = ∅;\n      exists_TAC t ∪ v;     exists_TAC u;\n      simplify tOpen sDisConn OPEN_IN_UNION;\n      set stuvProps sDisConn ustEmpty;\n    end;\n  qed;\n")))
+  connectedfromopenunionandinter_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha /\\  open_in alpha s /\\  open_in alpha t /\\ \n    Connected (subtopology alpha (s UNION t)) /\\  Connected (subtopology alpha (s INTER t))\n    ==> Connected (subtopology alpha s) /\\  Connected (subtopology alpha t)",
+    @readable.steps_then(
+      [
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.ThmsTermRule(
+            ths => tm => @meson.meson(ths, tm),
+            [],
+            "(forall alpha s t. P alpha s t ==> P alpha t s) /\\ \n    (forall alpha s t. P alpha s t ==> Q alpha s) ==> forall alpha s t. P alpha s t ==> Q alpha s /\\  Q alpha t",
+          ),
+        ),
+        @readable.conj_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [
+            @readable.TermRule(
+              @class.taut,
+              "forall a b c d e f.  a /\\  b /\\  c /\\  d /\\  e ==> f  <=>  a /\\  b /\\  c /\\  e /\\  ~f ==> ~d",
+            ),
+          ],
+        ),
+        @readable.intro_tac(
+          "forall alpha s t, stUnionTop sOpen tOpen stInterConn  NOTsConn",
+        ),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stUnionTop"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("stUnionTop"),
+            @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+          ],
+        ),
+        @readable.consider(
+          "u v",
+          "open_in alpha u /\\  open_in alpha v /\\ \n    ~(u = {}) /\\  ~(v = {}) /\\  u UNION v = s /\\  u INTER v = {}    ",
+          "sDisConn",
+          @readable.steps(
+            [
+              @readable.by_thm(
+                th => @tactics.mp_tac(th),
+                @readable.TermsRule(
+                  tms => th => @bool.ispecl(tms, th),
+                  ["alpha", " s"],
+                  @readable.Thm("ConnectedOpenSet", () => connectedopenset()),
+                ),
+              ),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("stTop"),
+                  @readable.Label("sOpen"),
+                  @readable.Label("NOTsConn"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s INTER t SUBSET u UNION v  /\\   u INTER v INTER (s INTER t) = {}",
+          "stuvProps",
+          @readable.by(@readable.set, [@readable.Label("sDisConn")]),
+        ),
+        @readable.have(
+          "\n    u INTER (s INTER t) = {}  \\/  v INTER (s INTER t) = {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Label("stInterConn"),
+              @readable.Label("sDisConn"),
+              @readable.Prev,
+              @readable.Thm(
+                "ConnectedSubtopology_ALT",
+                () => connectedsubtopology_alt(),
+              ),
+            ],
+          ),
+        ),
+      ],
+      @readable.case_split(
+        "vstEmpty | ustEmpty",
+        @readable.by(@readable.fol, [@readable.Prev]),
+        @list.List(["v INTER (s INTER t) = {}", "u INTER (s INTER t) = {}"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.exists("t UNION u"),
+                @readable.exists("v"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("tOpen"),
+                    @readable.Label("sDisConn"),
+                    @readable.Thm("OPEN_IN_UNION", () => open_in_union()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("stuvProps"),
+                    @readable.Label("sDisConn"),
+                    @readable.Label("vstEmpty"),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.exists("t UNION v"),
+                @readable.exists("u"),
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Label("tOpen"),
+                    @readable.Label("sDisConn"),
+                    @readable.Thm("OPEN_IN_UNION", () => open_in_union()),
+                  ],
+                ),
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("stuvProps"),
+                    @readable.Label("sDisConn"),
+                    @readable.Label("ustEmpty"),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -3814,41 +4363,170 @@ pub fn connectedfromopenunionandinter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_135`
-pub fn exec_phrase_135(x142 : Unit) -> Unit raise {
-  let _ = x142
-  {
-    @readable.thm_ref().val = connectedopenset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedOpenSet): thm);;
-fn step_246() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedOpenSet): thm);;", exec_phrase_135)
-}
-
-///|
-/// `exec_phrase_136`
-pub fn exec_phrase_136(x143 : Unit) -> Unit raise {
-  let _ = x143
-  {
-    @readable.thm_ref().val = connectedsubtopology_alt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedSubtopology_ALT): thm);;
-fn step_247() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedSubtopology_ALT): thm);;", exec_phrase_136)
-}
-
-///|
 /// ConnectedInduction
 fn step_248() -> Unit raise {
-  connectedinduction_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α P Q s.  s ⊂ topspace α  ⇒  Connected (subtopology α s) ∧\n    (∀t a. open_in (subtopology α s) t ∧ a ∈ t  ⇒  ∃z. z ∈ t ∧ P z) ∧\n    (∀a. a ∈ s  ⇒  ∃t. open_in (subtopology α s) t ∧ a ∈ t ∧\n    ∀x y. x ∈ t ∧ y ∈ t ∧ P x ∧ P y ∧ Q x ⇒ Q y)\n    ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ∧ P b ∧ Q a ⇒ Q b\n\n  proof\n    intro_TAC ∀α P Q s, sTop, sConn atOpenImplies_ztPz asImplies_atOpen_xytPxPyQxasImpliesQy, ∀a b, aINs bINs Pa Pb Qa;\n    assume ¬Q b     [NotQb] by fol;\n    ¬Connected (subtopology α s)     []\n    proof\n      simplify sTop ConnectedOpenIn;\n      exists_TAC\n      {b | ∃t. open_in (subtopology α s) t ∧ b ∈ t ∧ ∀x. x ∈ t ∧ P x ⇒ Q x};\n      exists_TAC\n      {b | ∃t. open_in (subtopology α s) t ∧ b ∈ t ∧ ∀x. x ∈ t ∧ P x ⇒ ¬(Q x)};\n      conj_tac     [Left]\n      proof\n        ONCE_REWRITE_TAC OPEN_IN_SUBOPEN;\n        intro_TAC ∀[c];\n        rewrite IN_ELIM_THM;\n        MATCH_MP_TAC MONO_EXISTS;\n        set atOpenImplies_ztPz;\n      qed;\n      conj_tac     [Left]\n      proof\n        ONCE_REWRITE_TAC OPEN_IN_SUBOPEN;\n        intro_TAC ∀[c];\n        rewrite IN_ELIM_THM;\n        MATCH_MP_TAC MONO_EXISTS;\n        set atOpenImplies_ztPz;\n      qed;\n      conj_tac     [Left]\n      proof\n        rewrite SUBSET IN_ELIM_THM IN_UNION;\n        intro_TAC ∀[c], cs;\n        MP_TAC SPECL [c] asImplies_atOpen_xytPxPyQxasImpliesQy;\n        set cs;\n      qed;\n      conj_tac     [Right] by set aINs bINs Qa NotQb asImplies_atOpen_xytPxPyQxasImpliesQy Pa Pb;\n      rewrite EXTENSION IN_INTER NOT_IN_EMPTY IN_ELIM_THM;\n      intro_TAC ∀[c];\n      ONCE_REWRITE_TAC TAUT [∀p. ¬p  ⇔  p ⇒ F];\n      intro_TAC Qx NotQx;\n      consider t such that\n      open_in (subtopology α s) t ∧ c ∈ t ∧ (∀x. x ∈ t ∧ P x ⇒ Q x)     [tExists] by fol Qx;\n      consider u such that\n      open_in (subtopology α s) u ∧ c ∈ u ∧ (∀x. x ∈ u ∧ P x ⇒ ¬Q x)     [uExists] by fol NotQx;\n      MP_TAC SPECL [t ∩ u; c] atOpenImplies_ztPz;\n      simplify tExists uExists OPEN_IN_INTER;\n      set tExists uExists;\n    qed;\n    fol sConn -;\n  qed;\n")))
+  connectedinduction_c.set(@readable.prove(
+    "\n  forall alpha P Q s.  s SUBSET topspace alpha  ==>  Connected (subtopology alpha s) /\\ \n    (forall t a. open_in (subtopology alpha s) t /\\  a IN t  ==>  ?z. z IN t /\\  P z) /\\ \n    (forall a. a IN s  ==>  ?t. open_in (subtopology alpha s) t /\\  a IN t /\\ \n    forall x y. x IN t /\\  y IN t /\\  P x /\\  P y /\\  Q x ==> Q y)\n    ==> forall a b. a IN s /\\  b IN s /\\  P a /\\  P b /\\  Q a ==> Q b",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall alpha P Q s, sTop, sConn atOpenImplies_ztPz asImplies_atOpen_xytPxPyQxasImpliesQy, forall a b, aINs bINs Pa Pb Qa",
+        ),
+        @readable.assuming("~Q b", "NotQb", @readable.by(@readable.fol, [])),
+        @readable.have(
+          "\n    ~Connected (subtopology alpha s)",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("sTop"),
+                  @readable.Thm("ConnectedOpenIn", () => connectedopenin()),
+                ],
+              ),
+              @readable.exists(
+                "{b | ?t. open_in (subtopology alpha s) t /\\  b IN t /\\  forall x. x IN t /\\  P x ==> Q x}",
+              ),
+              @readable.exists(
+                "{b | ?t. open_in (subtopology alpha s) t /\\  b IN t /\\  forall x. x IN t /\\  P x ==> ~(Q x)}",
+              ),
+              @readable.conj_tac(
+                "Left",
+                @readable.steps(
+                  [
+                    @readable.by(
+                      @simp.once_rewrite_tac,
+                      [@readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen())],
+                    ),
+                    @readable.intro_tac("forall [c]"),
+                    @readable.by(
+                      @readable.rewrite,
+                      [@readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm())],
+                    ),
+                    @readable.by_thm(
+                      @tactics.match_mp_tac,
+                      @readable.Thm("MONO_EXISTS", () => @theorems.mono_exists()),
+                    ),
+                    @readable.by(@readable.set, [@readable.Label("atOpenImplies_ztPz")]),
+                  ],
+                ),
+              ),
+              @readable.conj_tac(
+                "Left",
+                @readable.steps(
+                  [
+                    @readable.by(
+                      @simp.once_rewrite_tac,
+                      [@readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen())],
+                    ),
+                    @readable.intro_tac("forall [c]"),
+                    @readable.by(
+                      @readable.rewrite,
+                      [@readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm())],
+                    ),
+                    @readable.by_thm(
+                      @tactics.match_mp_tac,
+                      @readable.Thm("MONO_EXISTS", () => @theorems.mono_exists()),
+                    ),
+                    @readable.by(@readable.set, [@readable.Label("atOpenImplies_ztPz")]),
+                  ],
+                ),
+              ),
+              @readable.conj_tac(
+                "Left",
+                @readable.steps(
+                  [
+                    @readable.by(
+                      @readable.rewrite,
+                      [
+                        @readable.Thm("SUBSET", () => @sets.subset()),
+                        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+                        @readable.Thm("IN_UNION", () => @sets.in_union()),
+                      ],
+                    ),
+                    @readable.intro_tac("forall [c], cs"),
+                    @readable.by_thm(
+                      th => @tactics.mp_tac(th),
+                      @readable.TermsRule(
+                        tms => th => @bool.specl(tms, th),
+                        ["c"],
+                        @readable.Label("asImplies_atOpen_xytPxPyQxasImpliesQy"),
+                      ),
+                    ),
+                    @readable.by(@readable.set, [@readable.Label("cs")]),
+                  ],
+                ),
+              ),
+              @readable.conj_tac(
+                "Right",
+                @readable.by(
+                  @readable.set,
+                  [
+                    @readable.Label("aINs"),
+                    @readable.Label("bINs"),
+                    @readable.Label("Qa"),
+                    @readable.Label("NotQb"),
+                    @readable.Label("asImplies_atOpen_xytPxPyQxasImpliesQy"),
+                    @readable.Label("Pa"),
+                    @readable.Label("Pb"),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Thm("EXTENSION", () => @sets.extension()),
+                  @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                  @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+                  @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+                ],
+              ),
+              @readable.intro_tac("forall [c]"),
+              @readable.by(
+                @simp.once_rewrite_tac,
+                [@readable.TermRule(@class.taut, "forall p. ~p  <=>  p ==> F")],
+              ),
+              @readable.intro_tac("Qx NotQx"),
+              @readable.consider(
+                "t",
+                "open_in (subtopology alpha s) t /\\  c IN t /\\  (forall x. x IN t /\\  P x ==> Q x)    ",
+                "tExists",
+                @readable.by(@readable.fol, [@readable.Label("Qx")]),
+              ),
+              @readable.consider(
+                "u",
+                "open_in (subtopology alpha s) u /\\  c IN u /\\  (forall x. x IN u /\\  P x ==> ~Q x)    ",
+                "uExists",
+                @readable.by(@readable.fol, [@readable.Label("NotQx")]),
+              ),
+              @readable.by_thm(
+                th => @tactics.mp_tac(th),
+                @readable.TermsRule(
+                  tms => th => @bool.specl(tms, th),
+                  ["t INTER u", " c"],
+                  @readable.Label("atOpenImplies_ztPz"),
+                ),
+              ),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("tExists"),
+                  @readable.Label("uExists"),
+                  @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+                ],
+              ),
+              @readable.by(
+                @readable.set,
+                [@readable.Label("tExists"), @readable.Label("uExists")],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("sConn"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3861,77 +4539,61 @@ pub fn connectedinduction() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_137`
-pub fn exec_phrase_137(x144 : Unit) -> Unit raise {
-  let _ = x144
-  {
-    @readable.thm_ref().val = connectedopenin()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedOpenIn): thm);;
-fn step_249() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedOpenIn): thm);;", exec_phrase_137)
-}
-
-///|
-/// `exec_phrase_138`
-pub fn exec_phrase_138(x145 : Unit) -> Unit raise {
-  let _ = x145
-  {
-    @readable.thm_ref().val = @theorems.mono_exists()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MONO_EXISTS): thm);;
-fn step_250() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MONO_EXISTS): thm);;", exec_phrase_138)
-}
-
-///|
-/// `exec_phrase_139`
-pub fn exec_phrase_139(x146 : Unit) -> Unit raise {
-  let _ = x146
-  {
-    @readable.thm_ref().val = @sets.in_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_UNION): thm);;
-fn step_251() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_UNION): thm);;", exec_phrase_139)
-}
-
-///|
-/// `exec_phrase_140`
-pub fn exec_phrase_140(x147 : Unit) -> Unit raise {
-  let _ = x147
-  {
-    @readable.termlist_thm_thm_ref().val = fn(x148 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-      fn(x149 : @kernel.Thm) -> @kernel.Thm raise {
-        @bool.specl(x148, x149)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase termlist_thm_thm_ref := ((SPECL): (term list -> thm -> thm));;
-fn step_252() -> Unit raise {
-  @lib.register_phrase("termlist_thm_thm_ref := ((SPECL): (term list -> thm -> thm));;", exec_phrase_140)
-}
-
-///|
 /// ConnectedEquivalenceRelationGen
 fn step_253() -> Unit raise {
-  connectedequivalencerelationgen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α P R s.  s ⊂ topspace α  ⇒  Connected (subtopology α s) ∧\n        (∀x y z. R x y ∧ R y z ⇒ R x z) ∧\n        (∀t a. open_in (subtopology α s) t ∧ a ∈ t\n               ⇒ ∃z. z ∈ t ∧ P z) ∧\n        (∀a. a ∈ s\n             ⇒ ∃t. open_in (subtopology α s) t ∧ a ∈ t ∧\n                     ∀x y. x ∈ t ∧ y ∈ t ∧ P x ∧ P y ⇒ R x y)\n        ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ∧ P b ⇒ R a b\n\n  proof\n    intro_TAC ∀α P R s, sTop, sConn Rtrans atOpenImplies_ztPz asImplies_atOpen_xytPxPyImpliesRxy, ∀a b, aINs bINs Pa Pb;\n    ∀a.  a ∈ s ∧ P a  ⇒  ∀b c. b ∈ s ∧ c ∈ s ∧ P b ∧ P c ∧ R a b ⇒ R a c     []\n    proof\n      intro_TAC ∀[p/a], pINs Pp;\n      MP_TAC ISPECL [α; P; λx. R p x; s] ConnectedInduction;\n      rewrite sTop sConn atOpenImplies_ztPz;\n      fol asImplies_atOpen_xytPxPyImpliesRxy Rtrans;\n    qed;\n    fol aINs Pa bINs Pb asImplies_atOpen_xytPxPyImpliesRxy -;\n  qed;\n")))
+  connectedequivalencerelationgen_c.set(@readable.prove(
+    "\n  forall alpha P R s.  s SUBSET topspace alpha  ==>  Connected (subtopology alpha s) /\\ \n        (forall x y z. R x y /\\  R y z ==> R x z) /\\ \n        (forall t a. open_in (subtopology alpha s) t /\\  a IN t\n               ==> ?z. z IN t /\\  P z) /\\ \n        (forall a. a IN s\n             ==> ?t. open_in (subtopology alpha s) t /\\  a IN t /\\ \n                     forall x y. x IN t /\\  y IN t /\\  P x /\\  P y ==> R x y)\n        ==> forall a b. a IN s /\\  b IN s /\\  P a /\\  P b ==> R a b",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall alpha P R s, sTop, sConn Rtrans atOpenImplies_ztPz asImplies_atOpen_xytPxPyImpliesRxy, forall a b, aINs bINs Pa Pb",
+        ),
+        @readable.have(
+          "\n    forall a.  a IN s /\\  P a  ==>  forall b c. b IN s /\\  c IN s /\\  P b /\\  P c /\\  R a b ==> R a c",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall [p/a], pINs Pp"),
+              @readable.by_thm(
+                th => @tactics.mp_tac(th),
+                @readable.TermsRule(
+                  tms => th => @bool.ispecl(tms, th),
+                  ["alpha", " P", " \\ x. R p x", " s"],
+                  @readable.Thm("ConnectedInduction", () => connectedinduction()),
+                ),
+              ),
+              @readable.by(
+                @readable.rewrite,
+                [
+                  @readable.Label("sTop"),
+                  @readable.Label("sConn"),
+                  @readable.Label("atOpenImplies_ztPz"),
+                ],
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("asImplies_atOpen_xytPxPyImpliesRxy"),
+                  @readable.Label("Rtrans"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("aINs"),
+            @readable.Label("Pa"),
+            @readable.Label("bINs"),
+            @readable.Label("Pb"),
+            @readable.Label("asImplies_atOpen_xytPxPyImpliesRxy"),
+            @readable.Prev,
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3944,25 +4606,25 @@ pub fn connectedequivalencerelationgen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_141`
-pub fn exec_phrase_141(x150 : Unit) -> Unit raise {
-  let _ = x150
-  {
-    @readable.thm_ref().val = connectedinduction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedInduction): thm);;
-fn step_254() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedInduction): thm);;", exec_phrase_141)
-}
-
-///|
 /// ConnectedInductionSimple
 fn step_255() -> Unit raise {
-  connectedinductionsimple_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α P s.  s ⊂ topspace α  ⇒\n        Connected (subtopology α s) ∧\n        (∀a. a ∈ s\n             ⇒ ∃t. open_in (subtopology α s) t ∧ a ∈ t ∧\n                     ∀x y. x ∈ t ∧ y ∈ t ∧ P x ⇒ P y)\n        ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ⇒ P b\n\n  proof\n    intro_TAC ∀α P s, sTop;\n    MP_TAC ISPECL [α; (λx. T ∨ x ∈ s); P; s] ConnectedInduction;\n    fol sTop;\n  qed;\n")))
+  connectedinductionsimple_c.set(@readable.prove(
+    "\n  forall alpha P s.  s SUBSET topspace alpha  ==>\n        Connected (subtopology alpha s) /\\ \n        (forall a. a IN s\n             ==> ?t. open_in (subtopology alpha s) t /\\  a IN t /\\ \n                     forall x y. x IN t /\\  y IN t /\\  P x ==> P y)\n        ==> forall a b. a IN s /\\  b IN s /\\  P a ==> P b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha P s, sTop"),
+        @readable.by_thm(
+          th => @tactics.mp_tac(th),
+          @readable.TermsRule(
+            tms => th => @bool.ispecl(tms, th),
+            ["alpha", " (\\ x. T \\/ x IN s)", " P", " s"],
+            @readable.Thm("ConnectedInduction", () => connectedinduction()),
+          ),
+        ),
+        @readable.by(@readable.fol, [@readable.Label("sTop")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3977,7 +4639,52 @@ pub fn connectedinductionsimple() -> @kernel.Thm {
 ///|
 /// ConnectedEquivalenceRelation
 fn step_256() -> Unit raise {
-  connectedequivalencerelation_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α R s.  s ⊂ topspace α  ⇒  Connected (subtopology α s)∧\n    (∀x y. R x y ⇒ R y x) ∧ (∀x y z. R x y ∧ R y z ⇒ R x z) ∧\n    (∀a. a ∈ s ⇒\n    ∃t. open_in (subtopology α s) t ∧ a ∈ t ∧ ∀x. x ∈ t ⇒ R a x)\n    ⇒ ∀a b. a ∈ s ∧ b ∈ s ⇒ R a b\n\n  proof\n    intro_TAC ∀α R s, sTop, sConn Rcomm Rtrans asImplies_atOpen_xtImpliesRax;\n    ∀a. a ∈ s ⇒ ∀b c. b ∈ s ∧ c ∈ s ∧ R a b ⇒ R a c     []\n    proof\n      intro_TAC ∀[p/a], pINs;\n      MP_TAC ISPECL [α; λx. R p x; s] ConnectedInductionSimple;\n       rewrite sTop sConn;\n      fol asImplies_atOpen_xtImpliesRax Rcomm Rtrans;\n    qed;\n    fol asImplies_atOpen_xtImpliesRax -;\n  qed;\n")))
+  connectedequivalencerelation_c.set(@readable.prove(
+    "\n  forall alpha R s.  s SUBSET topspace alpha  ==>  Connected (subtopology alpha s)/\\ \n    (forall x y. R x y ==> R y x) /\\  (forall x y z. R x y /\\  R y z ==> R x z) /\\ \n    (forall a. a IN s ==>\n    ?t. open_in (subtopology alpha s) t /\\  a IN t /\\  forall x. x IN t ==> R a x)\n    ==> forall a b. a IN s /\\  b IN s ==> R a b",
+    @readable.steps(
+      [
+        @readable.intro_tac(
+          "forall alpha R s, sTop, sConn Rcomm Rtrans asImplies_atOpen_xtImpliesRax",
+        ),
+        @readable.have(
+          "\n    forall a. a IN s ==> forall b c. b IN s /\\  c IN s /\\  R a b ==> R a c",
+          "",
+          @readable.steps(
+            [
+              @readable.intro_tac("forall [p/a], pINs"),
+              @readable.by_thm(
+                th => @tactics.mp_tac(th),
+                @readable.TermsRule(
+                  tms => th => @bool.ispecl(tms, th),
+                  ["alpha", " \\ x. R p x", " s"],
+                  @readable.Thm(
+                    "ConnectedInductionSimple",
+                    () => connectedinductionsimple(),
+                  ),
+                ),
+              ),
+              @readable.by(
+                @readable.rewrite,
+                [@readable.Label("sTop"), @readable.Label("sConn")],
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("asImplies_atOpen_xtImpliesRax"),
+                  @readable.Label("Rcomm"),
+                  @readable.Label("Rtrans"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("asImplies_atOpen_xtImpliesRax"), @readable.Prev],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -3987,22 +4694,6 @@ let connectedequivalencerelation_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("Co
 /// `ConnectedEquivalenceRelation`
 pub fn connectedequivalencerelation() -> @kernel.Thm {
   connectedequivalencerelation_c.get()
-}
-
-///|
-/// `exec_phrase_142`
-pub fn exec_phrase_142(x151 : Unit) -> Unit raise {
-  let _ = x151
-  {
-    @readable.thm_ref().val = connectedinductionsimple()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedInductionSimple): thm);;
-fn step_257() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedInductionSimple): thm);;", exec_phrase_142)
 }
 
 ///|
@@ -4023,7 +4714,16 @@ pub fn limitpointof() -> @kernel.Thm {
 ///|
 /// IN_LimitPointOf
 fn step_259() -> Unit raise {
-  in_limitpointof_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s x.  s ⊂ topspace α  ⇒\n    (x ∈ LimitPointOf α s  ⇔  x ∈ topspace α ∧\n    ∀t. x ∈ t ∧ open_in α t  ⇒  ∃y. ¬(y = x) ∧ y ∈ s ∧ y ∈ t)\n  by simplify IN_ELIM_THM LimitPointOf")))
+  in_limitpointof_c.set(@readable.prove(
+    "\n  forall alpha s x.  s SUBSET topspace alpha  ==>\n    (x IN LimitPointOf alpha s  <=>  x IN topspace alpha /\\ \n    forall t. x IN t /\\  open_in alpha t  ==>  ?y. ~(y = x) /\\  y IN s /\\  y IN t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+        @readable.Thm("LimitPointOf", () => limitpointof()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4036,25 +4736,39 @@ pub fn in_limitpointof() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_143`
-pub fn exec_phrase_143(x152 : Unit) -> Unit raise {
-  let _ = x152
-  {
-    @readable.thm_ref().val = limitpointof()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LimitPointOf): thm);;
-fn step_260() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LimitPointOf): thm);;", exec_phrase_143)
-}
-
-///|
 /// NotLimitPointOf
 fn step_261() -> Unit raise {
-  notlimitpointof_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s x.  s ⊂ topspace α ∧ x ∈ topspace α  ⇒\n    (x ∉ LimitPointOf α s  ⇔\n    ∃t. x ∈ t  ∧  open_in α t  ∧  s ∩ (t ━ {x}) = ∅)\n\n  proof\n    ONCE_REWRITE_TAC TAUT [∀a b. (a ⇔ b)  ⇔  (¬a  ⇔ ¬b)];\n    simplify ∉ NOT_EXISTS_THM IN_LimitPointOf\n    TAUT [∀a b. ¬(a ∧ b ∧ c)  ⇔  a ∧ b ⇒ ¬c] GSYM MEMBER_NOT_EMPTY IN_INTER  IN_DIFF IN_SING;\n     fol;\n  qed;\n")))
+  notlimitpointof_c.set(@readable.prove(
+    "\n  forall alpha s x.  s SUBSET topspace alpha /\\  x IN topspace alpha  ==>\n    (x NOTIN LimitPointOf alpha s  <=>\n    ?t. x IN t  /\\   open_in alpha t  /\\   s INTER (t DIFF {x}) = {})",
+    @readable.steps(
+      [
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [@readable.TermRule(@class.taut, "forall a b. (a <=> b)  <=>  (~a  <=> ~b)")],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Thm("NOT_EXISTS_THM", () => @class.not_exists_thm()),
+            @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+            @readable.TermRule(
+              @class.taut,
+              "forall a b. ~(a /\\  b /\\  c)  <=>  a /\\  b ==> ~c",
+            ),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+            @readable.Thm("IN_SING", () => @sets.in_sing()),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4067,73 +4781,41 @@ pub fn notlimitpointof() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_144`
-pub fn exec_phrase_144(x153 : Unit) -> Unit raise {
-  let _ = x153
-  {
-    @readable.thm_ref().val = notin()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOTIN): thm);;
-fn step_262() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOTIN): thm);;", exec_phrase_144)
-}
-
-///|
-/// `exec_phrase_145`
-pub fn exec_phrase_145(x154 : Unit) -> Unit raise {
-  let _ = x154
-  {
-    @readable.thm_ref().val = in_limitpointof()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_LimitPointOf): thm);;
-fn step_263() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_LimitPointOf): thm);;", exec_phrase_145)
-}
-
-///|
-/// `exec_phrase_146`
-pub fn exec_phrase_146(x155 : Unit) -> Unit raise {
-  let _ = x155
-  {
-    @readable.thm_ref().val = @sets.in_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_DIFF): thm);;
-fn step_264() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_DIFF): thm);;", exec_phrase_146)
-}
-
-///|
-/// `exec_phrase_147`
-pub fn exec_phrase_147(x156 : Unit) -> Unit raise {
-  let _ = x156
-  {
-    @readable.thm_ref().val = @sets.in_sing()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_SING): thm);;
-fn step_265() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_SING): thm);;", exec_phrase_147)
-}
-
-///|
 /// LimptSubset
 fn step_266() -> Unit raise {
-  limptsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒\n    s ⊂ t  ⇒  LimitPointOf α s ⊂ LimitPointOf α t\n\n  proof\n    intro_TAC ∀α s t, tTop, st;\n    s ⊂ topspace α     [sTop] by fol tTop st SUBSET_TRANS;\n    simplify tTop sTop IN_LimitPointOf SUBSET;\n    fol st SUBSET;\n  qed;\n")))
+  limptsubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>\n    s SUBSET t  ==>  LimitPointOf alpha s SUBSET LimitPointOf alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, tTop, st"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha",
+          "sTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tTop"),
+              @readable.Label("st"),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("tTop"),
+            @readable.Label("sTop"),
+            @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("st"), @readable.Thm("SUBSET", () => @sets.subset())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4148,7 +4830,40 @@ pub fn limptsubset() -> @kernel.Thm {
 ///|
 /// ClosedLimpt
 fn step_267() -> Unit raise {
-  closedlimpt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (closed_in α s  ⇔  LimitPointOf α s ⊂ s)\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify H1 closed_in;\n    ONCE_REWRITE_TAC OPEN_IN_SUBOPEN;\n    simplify H1 IN_LimitPointOf SUBSET IN_DIFF;\n    AP_TERM_TAC;\n    ABS_TAC;\n    fol OPEN_IN_SUBSET SUBSET;\n  qed;\n")))
+  closedlimpt_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (closed_in alpha s  <=>  LimitPointOf alpha s SUBSET s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [@readable.Label("H1"), @readable.Thm("closed_in", () => closed_in())],
+        ),
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [@readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen())],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+          ],
+        ),
+        @tactics.ap_term_tac,
+        @tactics.abs_tac,
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4161,25 +4876,21 @@ pub fn closedlimpt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_148`
-pub fn exec_phrase_148(x157 : Unit) -> Unit raise {
-  let _ = x157
-  {
-    @readable.tactic_ref().val = @tactics.abs_tac
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((ABS_TAC): tactic);;
-fn step_268() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((ABS_TAC): tactic);;", exec_phrase_148)
-}
-
-///|
 /// LimptEmpty
 fn step_269() -> Unit raise {
-  limptempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α x.  x ∈ topspace α  ⇒  x ∉ LimitPointOf α ∅\n  by fol EMPTY_SUBSET IN_LimitPointOf OPEN_IN_TOPSPACE NOT_IN_EMPTY ∉")))
+  limptempty_c.set(@readable.prove(
+    "\n  forall alpha x.  x IN topspace alpha  ==>  x NOTIN LimitPointOf alpha {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+        @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+        @readable.Thm("OPEN_IN_TOPSPACE", () => open_in_topspace()),
+        @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+        @readable.Thm("NOTIN", () => notin()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4194,7 +4905,17 @@ pub fn limptempty() -> @kernel.Thm {
 ///|
 /// NoLimitPointImpClosed
 fn step_270() -> Unit raise {
-  nolimitpointimpclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  (∀x. x ∉ LimitPointOf α s)  ⇒  closed_in α s\n  by fol ClosedLimpt SUBSET ∉")))
+  nolimitpointimpclosed_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  (forall x. x NOTIN LimitPointOf alpha s)  ==>  closed_in alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedLimpt", () => closedlimpt()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("NOTIN", () => notin()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4207,25 +4928,75 @@ pub fn nolimitpointimpclosed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_149`
-pub fn exec_phrase_149(x158 : Unit) -> Unit raise {
-  let _ = x158
-  {
-    @readable.thm_ref().val = closedlimpt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedLimpt): thm);;
-fn step_271() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedLimpt): thm);;", exec_phrase_149)
-}
-
-///|
 /// LimitPointUnion
 fn step_272() -> Unit raise {
-  limitpointunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    LimitPointOf α (s ∪ t)  =  LimitPointOf α s  ∪  LimitPointOf α t\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [stTop] by fol H1 UNION_SUBSET;\n    rewrite EXTENSION IN_UNION;\n    intro_TAC ∀x;\n    assume x ∈ topspace α     [xTop] by fol H1 stTop IN_LimitPointOf;\n    ONCE_REWRITE_TAC TAUT [∀a b. (a ⇔ b)  ⇔  (¬a  ⇔ ¬b)];\n    simplify GSYM NOTIN DE_MORGAN_THM H1 stTop NotLimitPointOf xTop;\n    eq_tac     [Left] by set;\n    MATCH_MP_TAC ExistsTensorInter;\n    simplify IN_INTER OPEN_IN_INTER;\n    set;\n  qed;\n")))
+  limitpointunion_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    LimitPointOf alpha (s UNION t)  =  LimitPointOf alpha s  UNION  LimitPointOf alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("EXTENSION", () => @sets.extension()),
+            @readable.Thm("IN_UNION", () => @sets.in_union()),
+          ],
+        ),
+        @readable.intro_tac("forall x"),
+        @readable.assuming(
+          "x IN topspace alpha",
+          "xTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("stTop"),
+              @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [@readable.TermRule(@class.taut, "forall a b. (a <=> b)  <=>  (~a  <=> ~b)")],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Rule(@equal.gsym, @readable.Thm("NOTIN", () => notin())),
+            @readable.Thm("DE_MORGAN_THM", () => @class.de_morgan_thm()),
+            @readable.Label("H1"),
+            @readable.Label("stTop"),
+            @readable.Thm("NotLimitPointOf", () => notlimitpointof()),
+            @readable.Label("xTop"),
+          ],
+        ),
+        @readable.eq_tac("Left", @readable.by(@readable.set, [])),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("ExistsTensorInter", () => existstensorinter()),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4235,38 +5006,6 @@ let limitpointunion_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("LimitPointUnion
 /// `LimitPointUnion`
 pub fn limitpointunion() -> @kernel.Thm {
   limitpointunion_c.get()
-}
-
-///|
-/// `exec_phrase_150`
-pub fn exec_phrase_150(x159 : Unit) -> Unit raise {
-  let _ = x159
-  {
-    @readable.thm_ref().val = notlimitpointof()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NotLimitPointOf): thm);;
-fn step_273() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NotLimitPointOf): thm);;", exec_phrase_150)
-}
-
-///|
-/// `exec_phrase_151`
-pub fn exec_phrase_151(x160 : Unit) -> Unit raise {
-  let _ = x160
-  {
-    @readable.thm_ref().val = existstensorinter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ExistsTensorInter): thm);;
-fn step_274() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ExistsTensorInter): thm);;", exec_phrase_151)
 }
 
 ///|
@@ -4287,7 +5026,10 @@ pub fn interior_def() -> @kernel.Thm {
 ///|
 /// Interior_THM
 fn step_276() -> Unit raise {
-  interior_thm_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Interior α s =\n    {x | s ⊂ topspace α  ∧  ∃t. open_in α t ∧ x ∈ t ∧ t ⊂ s}\n  by fol Interior_DEF")))
+  interior_thm_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Interior alpha s =\n    {x | s SUBSET topspace alpha  /\\   ?t. open_in alpha t /\\  x IN t /\\  t SUBSET s}",
+    @readable.by(@readable.fol, [@readable.Thm("Interior_DEF", () => interior_def())]),
+  ))
 }
 
 ///|
@@ -4300,25 +5042,18 @@ pub fn interior_thm() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_152`
-pub fn exec_phrase_152(x161 : Unit) -> Unit raise {
-  let _ = x161
-  {
-    @readable.thm_ref().val = interior_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Interior_DEF): thm);;
-fn step_277() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Interior_DEF): thm);;", exec_phrase_152)
-}
-
-///|
 /// IN_Interior
 fn step_278() -> Unit raise {
-  in_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s x.  s ⊂ topspace α  ⇒\n    (x ∈ Interior α s  ⇔  ∃t. open_in α t ∧ x ∈ t ∧ t ⊂ s)\n  by simplify Interior_THM IN_ELIM_THM")))
+  in_interior_c.set(@readable.prove(
+    "\n  forall alpha s x.  s SUBSET topspace alpha  ==>\n    (x IN Interior alpha s  <=>  ?t. open_in alpha t /\\  x IN t /\\  t SUBSET s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("Interior_THM", () => interior_thm()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4331,25 +5066,29 @@ pub fn in_interior() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_153`
-pub fn exec_phrase_153(x162 : Unit) -> Unit raise {
-  let _ = x162
-  {
-    @readable.thm_ref().val = interior_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Interior_THM): thm);;
-fn step_279() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Interior_THM): thm);;", exec_phrase_153)
-}
-
-///|
 /// InteriorEq
 fn step_280() -> Unit raise {
-  interioreq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (open_in α s  ⇔  s = Interior α s)\n\n  proof\n    intro_TAC ∀α s, H1;\n    rewriteL OPEN_IN_SUBOPEN;\n    simplify EXTENSION H1 IN_Interior;\n    set;\n  qed;\n")))
+  interioreq_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (open_in alpha s  <=>  s = Interior alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.rewritel,
+          [@readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen())],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("EXTENSION", () => @sets.extension()),
+            @readable.Label("H1"),
+            @readable.Thm("IN_Interior", () => in_interior()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4362,25 +5101,18 @@ pub fn interioreq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_154`
-pub fn exec_phrase_154(x163 : Unit) -> Unit raise {
-  let _ = x163
-  {
-    @readable.thm_ref().val = in_interior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_Interior): thm);;
-fn step_281() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_Interior): thm);;", exec_phrase_154)
-}
-
-///|
 /// InteriorOpen
 fn step_282() -> Unit raise {
-  interioropen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  open_in α s  ⇒  Interior α s = s\n  by fol OPEN_IN_SUBSET InteriorEq")))
+  interioropen_c.set(@readable.prove(
+    "\n  forall alpha s.  open_in alpha s  ==>  Interior alpha s = s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+        @readable.Thm("InteriorEq", () => interioreq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4393,25 +5125,19 @@ pub fn interioropen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_155`
-pub fn exec_phrase_155(x164 : Unit) -> Unit raise {
-  let _ = x164
-  {
-    @readable.thm_ref().val = interioreq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorEq): thm);;
-fn step_283() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorEq): thm);;", exec_phrase_155)
-}
-
-///|
 /// InteriorEmpty
 fn step_284() -> Unit raise {
-  interiorempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Interior α ∅ = ∅\n  by fol OPEN_IN_EMPTY EMPTY_SUBSET InteriorOpen")))
+  interiorempty_c.set(@readable.prove(
+    "\n  forall alpha. Interior alpha {} = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN_EMPTY", () => open_in_empty()),
+        @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+        @readable.Thm("InteriorOpen", () => interioropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4424,25 +5150,18 @@ pub fn interiorempty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_156`
-pub fn exec_phrase_156(x165 : Unit) -> Unit raise {
-  let _ = x165
-  {
-    @readable.thm_ref().val = interioropen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorOpen): thm);;
-fn step_285() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorOpen): thm);;", exec_phrase_156)
-}
-
-///|
 /// InteriorUniv
 fn step_286() -> Unit raise {
-  interioruniv_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Interior α (topspace α) = topspace α\n  by simplify OpenInTopspace InteriorOpen")))
+  interioruniv_c.set(@readable.prove(
+    "\n  forall alpha. Interior alpha (topspace alpha) = topspace alpha",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("OpenInTopspace", () => openintopspace()),
+        @readable.Thm("InteriorOpen", () => interioropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4455,25 +5174,26 @@ pub fn interioruniv() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_157`
-pub fn exec_phrase_157(x166 : Unit) -> Unit raise {
-  let _ = x166
-  {
-    @readable.thm_ref().val = openintopspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInTopspace): thm);;
-fn step_287() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInTopspace): thm);;", exec_phrase_157)
-}
-
-///|
 /// OpenInterior
 fn step_288() -> Unit raise {
-  openinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  open_in α (Interior α s)\n\n  proof\n    ONCE_REWRITE_TAC OPEN_IN_SUBOPEN;\n    fol IN_Interior SUBSET;\n  qed;\n")))
+  openinterior_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  open_in alpha (Interior alpha s)",
+    @readable.steps(
+      [
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [@readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen())],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("IN_Interior", () => in_interior()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4488,7 +5208,16 @@ pub fn openinterior() -> @kernel.Thm {
 ///|
 /// InteriorInterior
 fn step_289() -> Unit raise {
-  interiorinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Interior α  (Interior α s) = Interior α s\n  by fol OpenInterior InteriorOpen")))
+  interiorinterior_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Interior alpha  (Interior alpha s) = Interior alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OpenInterior", () => openinterior()),
+        @readable.Thm("InteriorOpen", () => interioropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4501,25 +5230,28 @@ pub fn interiorinterior() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_158`
-pub fn exec_phrase_158(x167 : Unit) -> Unit raise {
-  let _ = x167
-  {
-    @readable.thm_ref().val = openinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInterior): thm);;
-fn step_290() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInterior): thm);;", exec_phrase_158)
-}
-
-///|
 /// InteriorSubset
 fn step_291() -> Unit raise {
-  interiorsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Interior α s ⊂ s\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify SUBSET Interior_DEF IN_ELIM_THM;\n    fol H1 SUBSET;\n  qed;\n")))
+  interiorsubset_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Interior alpha s SUBSET s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("Interior_DEF", () => interior_def()),
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("H1"), @readable.Thm("SUBSET", () => @sets.subset())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4534,7 +5266,16 @@ pub fn interiorsubset() -> @kernel.Thm {
 ///|
 /// InteriorTopspace
 fn step_292() -> Unit raise {
-  interiortopspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Interior α s ⊂ topspace α\n  by fol SUBSET_TRANS InteriorSubset")))
+  interiortopspace_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Interior alpha s SUBSET topspace alpha",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4547,25 +5288,20 @@ pub fn interiortopspace() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_159`
-pub fn exec_phrase_159(x168 : Unit) -> Unit raise {
-  let _ = x168
-  {
-    @readable.thm_ref().val = interiorsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorSubset): thm);;
-fn step_293() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorSubset): thm);;", exec_phrase_159)
-}
-
-///|
 /// SubsetInterior
 fn step_294() -> Unit raise {
-  subsetinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒  s ⊂ t  ⇒\n    Interior α s ⊂ Interior α t\n  by fol SUBSET_TRANS SUBSET IN_Interior SUBSET")))
+  subsetinterior_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>  s SUBSET t  ==>\n    Interior alpha s SUBSET Interior alpha t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_Interior", () => in_interior()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4580,7 +5316,17 @@ pub fn subsetinterior() -> @kernel.Thm {
 ///|
 /// InteriorMaximal
 fn step_295() -> Unit raise {
-  interiormaximal_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    t ⊂ s ∧ open_in α t  ⇒  t ⊂ Interior α s\n  by fol SUBSET IN_Interior SUBSET")))
+  interiormaximal_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    t SUBSET s /\\  open_in alpha t  ==>  t SUBSET Interior alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_Interior", () => in_interior()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4595,7 +5341,17 @@ pub fn interiormaximal() -> @kernel.Thm {
 ///|
 /// InteriorMaximalEq
 fn step_296() -> Unit raise {
-  interiormaximaleq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  t ⊂ topspace α  ⇒\n    open_in α s  ⇒  (s ⊂ Interior α t  ⇔  s ⊂ t)\n  by fol InteriorMaximal SUBSET_TRANS InteriorSubset")))
+  interiormaximaleq_c.set(@readable.prove(
+    "\n  forall s t.  t SUBSET topspace alpha  ==>\n    open_in alpha s  ==>  (s SUBSET Interior alpha t  <=>  s SUBSET t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorMaximal", () => interiormaximal()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4608,25 +5364,20 @@ pub fn interiormaximaleq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_160`
-pub fn exec_phrase_160(x169 : Unit) -> Unit raise {
-  let _ = x169
-  {
-    @readable.thm_ref().val = interiormaximal()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorMaximal): thm);;
-fn step_297() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorMaximal): thm);;", exec_phrase_160)
-}
-
-///|
 /// InteriorUnique
 fn step_298() -> Unit raise {
-  interiorunique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    t ⊂ s  ∧  open_in α t ∧  (∀t'. t' ⊂ s ∧ open_in α t' ⇒ t' ⊂ t)\n    ⇒ Interior α s = t\n  by fol SUBSET_ANTISYM InteriorSubset OpenInterior InteriorMaximal")))
+  interiorunique_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    t SUBSET s  /\\   open_in alpha t /\\   (forall t'. t' SUBSET s /\\  open_in alpha t' ==> t' SUBSET t)\n    ==> Interior alpha s = t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+        @readable.Thm("OpenInterior", () => openinterior()),
+        @readable.Thm("InteriorMaximal", () => interiormaximal()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4641,7 +5392,17 @@ pub fn interiorunique() -> @kernel.Thm {
 ///|
 /// OpenSubsetInterior
 fn step_299() -> Unit raise {
-  opensubsetinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒\n    open_in α s  ⇒  (s ⊂ Interior α t  ⇔  s ⊂ t)\n  by fol InteriorMaximal InteriorSubset SUBSET_TRANS")))
+  opensubsetinterior_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>\n    open_in alpha s  ==>  (s SUBSET Interior alpha t  <=>  s SUBSET t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorMaximal", () => interiormaximal()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4656,7 +5417,61 @@ pub fn opensubsetinterior() -> @kernel.Thm {
 ///|
 /// InteriorInter
 fn step_300() -> Unit raise {
-  interiorinter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ∧  t ⊂ topspace α  ⇒\n    Interior α (s ∩ t) = Interior α s ∩ Interior α t\n\n  proof\n    intro_TAC ∀α s t, sTop tTop;\n    rewrite GSYM SUBSET_ANTISYM_EQ SUBSET_INTER;\n    conj_tac     [Left] by fol sTop tTop SubsetInterior INTER_SUBSET;\n    s ∩ t ⊂ topspace α     [] by fol sTop INTER_SUBSET SUBSET_TRANS;\n    fol - sTop tTop OpenInterior OPEN_IN_INTER InteriorSubset InteriorMaximal INTER_TENSOR;\n  qed;\n")))
+  interiorinter_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  /\\   t SUBSET topspace alpha  ==>\n    Interior alpha (s INTER t) = Interior alpha s INTER Interior alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sTop tTop"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("SUBSET_ANTISYM_EQ", () => @sets.subset_antisym_eq()),
+            ),
+            @readable.Thm("SUBSET_INTER", () => @sets.subset_inter()),
+          ],
+        ),
+        @readable.conj_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Label("tTop"),
+              @readable.Thm("SubsetInterior", () => subsetinterior()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s INTER t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("sTop"),
+            @readable.Label("tTop"),
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+            @readable.Thm("InteriorSubset", () => interiorsubset()),
+            @readable.Thm("InteriorMaximal", () => interiormaximal()),
+            @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4669,73 +5484,52 @@ pub fn interiorinter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_161`
-pub fn exec_phrase_161(x170 : Unit) -> Unit raise {
-  let _ = x170
-  {
-    @readable.thm_ref().val = @sets.subset_antisym_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_ANTISYM_EQ): thm);;
-fn step_301() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_ANTISYM_EQ): thm);;", exec_phrase_161)
-}
-
-///|
-/// `exec_phrase_162`
-pub fn exec_phrase_162(x171 : Unit) -> Unit raise {
-  let _ = x171
-  {
-    @readable.thm_ref().val = @sets.subset_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_INTER): thm);;
-fn step_302() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_INTER): thm);;", exec_phrase_162)
-}
-
-///|
-/// `exec_phrase_163`
-pub fn exec_phrase_163(x172 : Unit) -> Unit raise {
-  let _ = x172
-  {
-    @readable.thm_ref().val = subsetinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SubsetInterior): thm);;
-fn step_303() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SubsetInterior): thm);;", exec_phrase_163)
-}
-
-///|
-/// `exec_phrase_164`
-pub fn exec_phrase_164(x173 : Unit) -> Unit raise {
-  let _ = x173
-  {
-    @readable.thm_ref().val = inter_tensor()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTER_TENSOR): thm);;
-fn step_304() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTER_TENSOR): thm);;", exec_phrase_164)
-}
-
-///|
 /// InteriorFiniteInters
 fn step_305() -> Unit raise {
-  interiorfiniteinters_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  FINITE s ⇒ ¬(s = ∅) ⇒ (∀t. t ∈ s ⇒ t ⊂ topspace α) ⇒\n    Interior α (INTERS s) = INTERS (IMAGE (Interior α) s)\n\n  proof\n    intro_TAC ∀α;\n    MATCH_MP_TAC FINITE_INDUCT;\n    rewrite INTERS_INSERT IMAGE_CLAUSES IN_INSERT;\n    intro_TAC ∀x s, sCase, xsNonempty, sSetOfSubsets;\n    assume ¬(s = ∅)     [sNonempty] by simplify INTERS_0 INTER_UNIV IMAGE_CLAUSES;\n    simplify INTERS_SUBSET  sSetOfSubsets InteriorInter sNonempty sSetOfSubsets sCase;\n  qed;\n")))
+  interiorfiniteinters_c.set(@readable.prove(
+    "\n  forall alpha s.  FINITE s ==> ~(s = {}) ==> (forall t. t IN s ==> t SUBSET topspace alpha) ==>\n    Interior alpha (INTERS s) = INTERS (IMAGE (Interior alpha) s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha"),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("FINITE_INDUCT", () => @sets.finite_induct()),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("INTERS_INSERT", () => @sets.inters_insert()),
+            @readable.Thm("IMAGE_CLAUSES", () => @sets.image_clauses()),
+            @readable.Thm("IN_INSERT", () => @sets.in_insert()),
+          ],
+        ),
+        @readable.intro_tac("forall x s, sCase, xsNonempty, sSetOfSubsets"),
+        @readable.assuming(
+          "~(s = {})",
+          "sNonempty",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("INTERS_0", () => @sets.inters_0()),
+              @readable.Thm("INTER_UNIV", () => @sets.inter_univ()),
+              @readable.Thm("IMAGE_CLAUSES", () => @sets.image_clauses()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("INTERS_SUBSET", () => inters_subset()),
+            @readable.Label("sSetOfSubsets"),
+            @readable.Thm("InteriorInter", () => interiorinter()),
+            @readable.Label("sNonempty"),
+            @readable.Label("sSetOfSubsets"),
+            @readable.Label("sCase"),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4748,41 +5542,33 @@ pub fn interiorfiniteinters() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_165`
-pub fn exec_phrase_165(x174 : Unit) -> Unit raise {
-  let _ = x174
-  {
-    @readable.thm_ref().val = @sets.image_clauses()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IMAGE_CLAUSES): thm);;
-fn step_306() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IMAGE_CLAUSES): thm);;", exec_phrase_165)
-}
-
-///|
-/// `exec_phrase_166`
-pub fn exec_phrase_166(x175 : Unit) -> Unit raise {
-  let _ = x175
-  {
-    @readable.thm_ref().val = interiorinter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorInter): thm);;
-fn step_307() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorInter): thm);;", exec_phrase_166)
-}
-
-///|
 /// InteriorIntersSubset
 fn step_308() -> Unit raise {
-  interiorinterssubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f.  ¬(f = ∅) ∧ (∀t. t ∈ f ⇒ t ⊂ topspace α) ⇒\n    Interior α (INTERS f)  ⊂  INTERS (IMAGE (Interior α) f)\n\n  proof\n    intro_TAC ∀α f, H1 H2;\n    INTERS f ⊂ topspace α     [] by set H1 H2;\n    simplify SUBSET IN_INTERS FORALL_IN_IMAGE - H2 IN_Interior;\n    fol;\n  qed;\n")))
+  interiorinterssubset_c.set(@readable.prove(
+    "\n  forall alpha f.  ~(f = {}) /\\  (forall t. t IN f ==> t SUBSET topspace alpha) ==>\n    Interior alpha (INTERS f)  SUBSET  INTERS (IMAGE (Interior alpha) f)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha f, H1 H2"),
+        @readable.have(
+          "\n    INTERS f SUBSET topspace alpha",
+          "",
+          @readable.by(@readable.set, [@readable.Label("H1"), @readable.Label("H2")]),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_INTERS", () => @sets.in_inters()),
+            @readable.Thm("FORALL_IN_IMAGE", () => @sets.forall_in_image()),
+            @readable.Prev,
+            @readable.Label("H2"),
+            @readable.Thm("IN_Interior", () => in_interior()),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4797,7 +5583,39 @@ pub fn interiorinterssubset() -> @kernel.Thm {
 ///|
 /// UnionInteriorSubset
 fn step_309() -> Unit raise {
-  unioninteriorsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ∧  t ⊂ topspace α  ⇒\n    Interior α s ∪ Interior α t  ⊂  Interior α (s ∪ t)\n\n  proof\n    intro_TAC ∀α s t, sTop tTop;\n    s ∪ t ⊂ topspace α     [] by fol sTop tTop UNION_SUBSET;\n    fol sTop tTop - OpenInterior OPEN_IN_UNION InteriorMaximal UNION_TENSOR InteriorSubset;\n  qed;\n")))
+  unioninteriorsubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  /\\   t SUBSET topspace alpha  ==>\n    Interior alpha s UNION Interior alpha t  SUBSET  Interior alpha (s UNION t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sTop tTop"),
+        @readable.have(
+          "\n    s UNION t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Label("tTop"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("sTop"),
+            @readable.Label("tTop"),
+            @readable.Prev,
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Thm("OPEN_IN_UNION", () => open_in_union()),
+            @readable.Thm("InteriorMaximal", () => interiormaximal()),
+            @readable.Thm("UNION_TENSOR", () => union_tensor()),
+            @readable.Thm("InteriorSubset", () => interiorsubset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4810,25 +5628,21 @@ pub fn unioninteriorsubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_167`
-pub fn exec_phrase_167(x176 : Unit) -> Unit raise {
-  let _ = x176
-  {
-    @readable.thm_ref().val = union_tensor()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNION_TENSOR): thm);;
-fn step_310() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNION_TENSOR): thm);;", exec_phrase_167)
-}
-
-///|
 /// InteriorEqEmpty
 fn step_311() -> Unit raise {
-  interioreqempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (Interior α s = ∅  ⇔  ∀t. open_in α t ∧ t ⊂ s  ⇒  t = ∅)\n  by fol InteriorMaximal SUBSET_EMPTY OpenInterior SUBSET_REFL InteriorSubset")))
+  interioreqempty_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (Interior alpha s = {}  <=>  forall t. open_in alpha t /\\  t SUBSET s  ==>  t = {})",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorMaximal", () => interiormaximal()),
+        @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+        @readable.Thm("OpenInterior", () => openinterior()),
+        @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4843,7 +5657,18 @@ pub fn interioreqempty() -> @kernel.Thm {
 ///|
 /// InteriorEqEmptyAlt
 fn step_312() -> Unit raise {
-  interioreqemptyalt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (Interior α s = ∅  ⇔  ∀t. open_in α t ∧ ¬(t = ∅) ⇒ ¬(t ━ s = ∅))\n\n  proof\n    simplify InteriorEqEmpty;\n    set;\n  qed;\n")))
+  interioreqemptyalt_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (Interior alpha s = {}  <=>  forall t. open_in alpha t /\\  ~(t = {}) ==> ~(t DIFF s = {}))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [@readable.Thm("InteriorEqEmpty", () => interioreqempty())],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4856,25 +5681,38 @@ pub fn interioreqemptyalt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_168`
-pub fn exec_phrase_168(x177 : Unit) -> Unit raise {
-  let _ = x177
-  {
-    @readable.thm_ref().val = interioreqempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorEqEmpty): thm);;
-fn step_313() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorEqEmpty): thm);;", exec_phrase_168)
-}
-
-///|
 /// InteriorUnionsOpenSubsets
 fn step_314() -> Unit raise {
-  interiorunionsopensubsets_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  UNIONS {t | open_in α t ∧ t ⊂ s} = Interior α s\n\n  proof\n    intro_TAC ∀α s, H1;\n    consider t such that\n    t = UNIONS {f | open_in α f ∧ f ⊂ s}     [tDef] by fol;\n    t ⊂ s  ∧  ∀f. f ⊂ s ∧ open_in α f ⇒ f ⊂ t     [] by set tDef;\n    simplify H1 tDef - OPEN_IN_UNIONS IN_ELIM_THM InteriorUnique;\n  qed;\n")))
+  interiorunionsopensubsets_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  UNIONS {t | open_in alpha t /\\  t SUBSET s} = Interior alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.consider(
+          "t",
+          "t = UNIONS {f | open_in alpha f /\\  f SUBSET s}    ",
+          "tDef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    t SUBSET s  /\\   forall f. f SUBSET s /\\  open_in alpha f ==> f SUBSET t",
+          "",
+          @readable.by(@readable.set, [@readable.Label("tDef")]),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Label("tDef"),
+            @readable.Prev,
+            @readable.Thm("OPEN_IN_UNIONS", () => open_in_unions()),
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+            @readable.Thm("InteriorUnique", () => interiorunique()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4887,25 +5725,127 @@ pub fn interiorunionsopensubsets() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_169`
-pub fn exec_phrase_169(x178 : Unit) -> Unit raise {
-  let _ = x178
-  {
-    @readable.thm_ref().val = interiorunique()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorUnique): thm);;
-fn step_315() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorUnique): thm);;", exec_phrase_169)
-}
-
-///|
 /// InteriorClosedUnionEmptyInterior
 fn step_316() -> Unit raise {
-  interiorclosedunionemptyinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    closed_in α s ∧ Interior α t = ∅  ⇒\n    Interior α (s ∪ t) = Interior α s\n\n  proof\n    intro_TAC ∀α s t, H1 H2, H3 H4;\n    s ∪ t ⊂ topspace α     [stTop] by fol H1 H2 UNION_SUBSET;\n    Interior α (s ∪ t) ⊂ s     []\n    proof\n      simplify SUBSET stTop IN_Interior LEFT_IMP_EXISTS_THM;\n      intro_TAC ∀[y] [O], openO yO Os_t;\n      consider O' such that O' = (topspace α ━ s) ∩ O     [O'def] by fol -;\n      O' ⊂ t     [O't] by set O'def Os_t;\n      assume y ∉ s     [yNOTs] by fol ∉;\n      y ∈ topspace α ━ s     [] by fol openO OPEN_IN_SUBSET yO SUBSET yNOTs IN_DIFF ∉;\n      y ∈ O'  ∧  open_in α O'     [] by fol O'def - yO IN_INTER H3 closed_in openO OPEN_IN_INTER;\n      fol O'def - O't H2 IN_Interior SUBSET MEMBER_NOT_EMPTY H4;\n    qed;\n    fol SUBSET_ANTISYM H1 stTop OpenInterior - InteriorMaximal SUBSET_UNION SubsetInterior;\n  qed;\n")))
+  interiorclosedunionemptyinterior_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    closed_in alpha s /\\  Interior alpha t = {}  ==>\n    Interior alpha (s UNION t) = Interior alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1 H2, H3 H4"),
+        @readable.have(
+          "\n    s UNION t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Interior alpha (s UNION t) SUBSET s",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Thm("SUBSET", () => @sets.subset()),
+                  @readable.Label("stTop"),
+                  @readable.Thm("IN_Interior", () => in_interior()),
+                  @readable.Thm(
+                    "LEFT_IMP_EXISTS_THM",
+                    () => @theorems.left_imp_exists_thm(),
+                  ),
+                ],
+              ),
+              @readable.intro_tac("forall [y] [O], openO yO Os_t"),
+              @readable.consider(
+                "O'",
+                "O' = (topspace alpha DIFF s) INTER O    ",
+                "O'def",
+                @readable.by(@readable.fol, [@readable.Prev]),
+              ),
+              @readable.have(
+                "\n      O' SUBSET t",
+                "O't",
+                @readable.by(
+                  @readable.set,
+                  [@readable.Label("O'def"), @readable.Label("Os_t")],
+                ),
+              ),
+              @readable.assuming(
+                "y NOTIN s",
+                "yNOTs",
+                @readable.by(@readable.fol, [@readable.Thm("NOTIN", () => notin())]),
+              ),
+              @readable.have(
+                "\n      y IN topspace alpha DIFF s",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("openO"),
+                    @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+                    @readable.Label("yO"),
+                    @readable.Thm("SUBSET", () => @sets.subset()),
+                    @readable.Label("yNOTs"),
+                    @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+                    @readable.Thm("NOTIN", () => notin()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      y IN O'  /\\   open_in alpha O'",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("O'def"),
+                    @readable.Prev,
+                    @readable.Label("yO"),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                    @readable.Label("H3"),
+                    @readable.Thm("closed_in", () => closed_in()),
+                    @readable.Label("openO"),
+                    @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("O'def"),
+                  @readable.Prev,
+                  @readable.Label("O't"),
+                  @readable.Label("H2"),
+                  @readable.Thm("IN_Interior", () => in_interior()),
+                  @readable.Thm("SUBSET", () => @sets.subset()),
+                  @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+                  @readable.Label("H4"),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+            @readable.Label("H1"),
+            @readable.Label("stTop"),
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Prev,
+            @readable.Thm("InteriorMaximal", () => interiormaximal()),
+            @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+            @readable.Thm("SubsetInterior", () => subsetinterior()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4920,7 +5860,50 @@ pub fn interiorclosedunionemptyinterior() -> @kernel.Thm {
 ///|
 /// InteriorUnionEqEmpty
 fn step_317() -> Unit raise {
-  interiorunioneqempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    closed_in α s ∨ closed_in α t\n    ⇒ (Interior α (s ∪ t) = ∅  ⇔  Interior α s = ∅ ∧ Interior α t = ∅)\n\n  proof\n    intro_TAC ∀α s t, H1, H2;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [] by fol H1 UNION_SUBSET;\n    eq_tac     [Left] by fol - H1 SUBSET_UNION SubsetInterior SUBSET_EMPTY;\n    fol UNION_COMM - H2 InteriorClosedUnionEmptyInterior;\n  qed;\n")))
+  interiorunioneqempty_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    closed_in alpha s \\/ closed_in alpha t\n    ==> (Interior alpha (s UNION t) = {}  <=>  Interior alpha s = {} /\\  Interior alpha t = {})",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1, H2"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.eq_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("SubsetInterior", () => subsetinterior()),
+              @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+            @readable.Prev,
+            @readable.Label("H2"),
+            @readable.Thm(
+              "InteriorClosedUnionEmptyInterior",
+              () => interiorclosedunionemptyinterior(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -4930,22 +5913,6 @@ let interiorunioneqempty_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("InteriorUn
 /// `InteriorUnionEqEmpty`
 pub fn interiorunioneqempty() -> @kernel.Thm {
   interiorunioneqempty_c.get()
-}
-
-///|
-/// `exec_phrase_170`
-pub fn exec_phrase_170(x179 : Unit) -> Unit raise {
-  let _ = x179
-  {
-    @readable.thm_ref().val = interiorclosedunionemptyinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosedUnionEmptyInterior): thm);;
-fn step_318() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosedUnionEmptyInterior): thm);;", exec_phrase_170)
 }
 
 ///|
@@ -4966,7 +5933,10 @@ pub fn closure_def() -> @kernel.Thm {
 ///|
 /// Closure_THM
 fn step_320() -> Unit raise {
-  closure_thm_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Closure α s  =  s ∪ LimitPointOf α s\n  by fol Closure_DEF")))
+  closure_thm_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Closure alpha s  =  s UNION LimitPointOf alpha s",
+    @readable.by(@readable.fol, [@readable.Thm("Closure_DEF", () => closure_def())]),
+  ))
 }
 
 ///|
@@ -4979,25 +5949,29 @@ pub fn closure_thm() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_171`
-pub fn exec_phrase_171(x180 : Unit) -> Unit raise {
-  let _ = x180
-  {
-    @readable.thm_ref().val = closure_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Closure_DEF): thm);;
-fn step_321() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Closure_DEF): thm);;", exec_phrase_171)
-}
-
-///|
 /// IN_Closure
 fn step_322() -> Unit raise {
-  in_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s x.  s ⊂ topspace α  ⇒\n    (x ∈ Closure α s  ⇔  x ∈ topspace α ∧\n    ∀t. x ∈ t ∧ open_in α t  ⇒  ∃y. y ∈ s ∧ y ∈ t)\n\n  proof\n    intro_TAC ∀α s x, H1;\n    simplify H1 Closure_THM IN_UNION IN_LimitPointOf;\n    fol H1 SUBSET;\n  qed;\n")))
+  in_closure_c.set(@readable.prove(
+    "\n  forall alpha s x.  s SUBSET topspace alpha  ==>\n    (x IN Closure alpha s  <=>  x IN topspace alpha /\\ \n    forall t. x IN t /\\  open_in alpha t  ==>  ?y. y IN s /\\  y IN t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s x, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("Closure_THM", () => closure_thm()),
+            @readable.Thm("IN_UNION", () => @sets.in_union()),
+            @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Label("H1"), @readable.Thm("SUBSET", () => @sets.subset())],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5010,25 +5984,18 @@ pub fn in_closure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_172`
-pub fn exec_phrase_172(x181 : Unit) -> Unit raise {
-  let _ = x181
-  {
-    @readable.thm_ref().val = closure_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Closure_THM): thm);;
-fn step_323() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Closure_THM): thm);;", exec_phrase_172)
-}
-
-///|
 /// ClosureSubset
 fn step_324() -> Unit raise {
-  closuresubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  s ⊂ Closure α s\n  by fol SUBSET IN_Closure")))
+  closuresubset_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  s SUBSET Closure alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_Closure", () => in_closure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5041,25 +6008,18 @@ pub fn closuresubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_173`
-pub fn exec_phrase_173(x182 : Unit) -> Unit raise {
-  let _ = x182
-  {
-    @readable.thm_ref().val = in_closure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_Closure): thm);;
-fn step_325() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_Closure): thm);;", exec_phrase_173)
-}
-
-///|
 /// ClosureTopspace
 fn step_326() -> Unit raise {
-  closuretopspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Closure α s ⊂ topspace α\n  by fol SUBSET IN_Closure")))
+  closuretopspace_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Closure alpha s SUBSET topspace alpha",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_Closure", () => in_closure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5074,7 +6034,32 @@ pub fn closuretopspace() -> @kernel.Thm {
 ///|
 /// ClosureInterior
 fn step_327() -> Unit raise {
-  closureinterior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Closure α s  =  topspace α ━ (Interior α (topspace α ━ s))\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify H1 EXTENSION IN_Closure IN_DIFF IN_Interior SUBSET;\n    fol OPEN_IN_SUBSET SUBSET;\n  qed;\n")))
+  closureinterior_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Closure alpha s  =  topspace alpha DIFF (Interior alpha (topspace alpha DIFF s))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("EXTENSION", () => @sets.extension()),
+            @readable.Thm("IN_Closure", () => in_closure()),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+            @readable.Thm("IN_Interior", () => in_interior()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5089,7 +6074,18 @@ pub fn closureinterior() -> @kernel.Thm {
 ///|
 /// InteriorClosure
 fn step_328() -> Unit raise {
-  interiorclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Interior α s = topspace α ━ (Closure α (topspace α ━ s))\n  by fol SUBSET_DIFF InteriorTopspace DIFF_REFL ClosureInterior")))
+  interiorclosure_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Interior alpha s = topspace alpha DIFF (Closure alpha (topspace alpha DIFF s))",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("DIFF_REFL", () => diff_refl()),
+        @readable.Thm("ClosureInterior", () => closureinterior()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5102,41 +6098,22 @@ pub fn interiorclosure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_174`
-pub fn exec_phrase_174(x183 : Unit) -> Unit raise {
-  let _ = x183
-  {
-    @readable.thm_ref().val = interiortopspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorTopspace): thm);;
-fn step_329() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorTopspace): thm);;", exec_phrase_174)
-}
-
-///|
-/// `exec_phrase_175`
-pub fn exec_phrase_175(x184 : Unit) -> Unit raise {
-  let _ = x184
-  {
-    @readable.thm_ref().val = closureinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureInterior): thm);;
-fn step_330() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureInterior): thm);;", exec_phrase_175)
-}
-
-///|
 /// ClosedClosure
 fn step_331() -> Unit raise {
-  closedclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  closed_in α (Closure α s)\n  by fol closed_in ClosureInterior DIFF_REFL SUBSET_DIFF InteriorTopspace OpenInterior")))
+  closedclosure_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  closed_in alpha (Closure alpha s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("ClosureInterior", () => closureinterior()),
+        @readable.Thm("DIFF_REFL", () => diff_refl()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("OpenInterior", () => openinterior()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5151,7 +6128,37 @@ pub fn closedclosure() -> @kernel.Thm {
 ///|
 /// SubsetClosure
 fn step_332() -> Unit raise {
-  subsetclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒  s ⊂ t  ⇒  Closure α s ⊂ Closure α t\n\n  proof\n    intro_TAC ∀α s t, tSubset, st;\n    s ⊂ topspace α     [] by fol tSubset st SUBSET_TRANS;\n    simplify tSubset - Closure_THM st LimptSubset UNION_TENSOR;\n  qed;\n")))
+  subsetclosure_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>  s SUBSET t  ==>  Closure alpha s SUBSET Closure alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, tSubset, st"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tSubset"),
+              @readable.Label("st"),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("tSubset"),
+            @readable.Prev,
+            @readable.Thm("Closure_THM", () => closure_thm()),
+            @readable.Label("st"),
+            @readable.Thm("LimptSubset", () => limptsubset()),
+            @readable.Thm("UNION_TENSOR", () => union_tensor()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5164,25 +6171,42 @@ pub fn subsetclosure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_176`
-pub fn exec_phrase_176(x185 : Unit) -> Unit raise {
-  let _ = x185
-  {
-    @readable.thm_ref().val = limptsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LimptSubset): thm);;
-fn step_333() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LimptSubset): thm);;", exec_phrase_176)
-}
-
-///|
 /// ClosureHull
 fn step_334() -> Unit raise {
-  closurehull_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Closure α s = (closed_in α) hull s\n\n  proof\n    intro_TAC ∀α s, H1;\n    MATCH_MP_TAC GSYM HULL_UNIQUE;\n    simplify H1 ClosureSubset ClosedClosure Closure_THM UNION_SUBSET;\n    fol LimptSubset CLOSED_IN_SUBSET ClosedLimpt SUBSET_TRANS;\n  qed;\n")))
+  closurehull_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Closure alpha s = (closed_in alpha) hull s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Rule(
+            @equal.gsym,
+            @readable.Thm("HULL_UNIQUE", () => @misc.hull_unique()),
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("ClosureSubset", () => closuresubset()),
+            @readable.Thm("ClosedClosure", () => closedclosure()),
+            @readable.Thm("Closure_THM", () => closure_thm()),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("LimptSubset", () => limptsubset()),
+            @readable.Thm("CLOSED_IN_SUBSET", () => closed_in_subset()),
+            @readable.Thm("ClosedLimpt", () => closedlimpt()),
+            @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5195,57 +6219,21 @@ pub fn closurehull() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_177`
-pub fn exec_phrase_177(x186 : Unit) -> Unit raise {
-  let _ = x186
-  {
-    @readable.thm_ref().val = @misc.hull_unique()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((HULL_UNIQUE): thm);;
-fn step_335() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((HULL_UNIQUE): thm);;", exec_phrase_177)
-}
-
-///|
-/// `exec_phrase_178`
-pub fn exec_phrase_178(x187 : Unit) -> Unit raise {
-  let _ = x187
-  {
-    @readable.thm_ref().val = closuresubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureSubset): thm);;
-fn step_336() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureSubset): thm);;", exec_phrase_178)
-}
-
-///|
-/// `exec_phrase_179`
-pub fn exec_phrase_179(x188 : Unit) -> Unit raise {
-  let _ = x188
-  {
-    @readable.thm_ref().val = closedclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedClosure): thm);;
-fn step_337() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedClosure): thm);;", exec_phrase_179)
-}
-
-///|
 /// ClosureEq
 fn step_338() -> Unit raise {
-  closureeq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  (Closure α s = s  ⇔  closed_in α s)\n  by fol ClosedClosure ClosedLimpt Closure_THM SUBSET_UNION_ABSORPTION UNION_COMM")))
+  closureeq_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  (Closure alpha s = s  <=>  closed_in alpha s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosedClosure", () => closedclosure()),
+        @readable.Thm("ClosedLimpt", () => closedlimpt()),
+        @readable.Thm("Closure_THM", () => closure_thm()),
+        @readable.Thm("SUBSET_UNION_ABSORPTION", () => @sets.subset_union_absorption()),
+        @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5258,25 +6246,18 @@ pub fn closureeq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_180`
-pub fn exec_phrase_180(x189 : Unit) -> Unit raise {
-  let _ = x189
-  {
-    @readable.thm_ref().val = @sets.subset_union_absorption()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_UNION_ABSORPTION): thm);;
-fn step_339() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_UNION_ABSORPTION): thm);;", exec_phrase_180)
-}
-
-///|
 /// ClosureClosed
 fn step_340() -> Unit raise {
-  closureclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  closed_in α s  ⇒  Closure α s = s\n  by fol closed_in ClosureEq")))
+  closureclosed_c.set(@readable.prove(
+    "\n  forall alpha s.  closed_in alpha s  ==>  Closure alpha s = s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("ClosureEq", () => closureeq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5289,25 +6270,19 @@ pub fn closureclosed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_181`
-pub fn exec_phrase_181(x190 : Unit) -> Unit raise {
-  let _ = x190
-  {
-    @readable.thm_ref().val = closureeq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureEq): thm);;
-fn step_341() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureEq): thm);;", exec_phrase_181)
-}
-
-///|
 /// ClosureClosure
 fn step_342() -> Unit raise {
-  closureclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Closure α (Closure α s) = Closure α s\n  by fol ClosureTopspace ClosureHull HULL_HULL")))
+  closureclosure_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Closure alpha (Closure alpha s) = Closure alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("ClosureHull", () => closurehull()),
+        @readable.Thm("HULL_HULL", () => @misc.hull_hull()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5320,57 +6295,37 @@ pub fn closureclosure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_182`
-pub fn exec_phrase_182(x191 : Unit) -> Unit raise {
-  let _ = x191
-  {
-    @readable.thm_ref().val = closuretopspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureTopspace): thm);;
-fn step_343() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureTopspace): thm);;", exec_phrase_182)
-}
-
-///|
-/// `exec_phrase_183`
-pub fn exec_phrase_183(x192 : Unit) -> Unit raise {
-  let _ = x192
-  {
-    @readable.thm_ref().val = closurehull()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureHull): thm);;
-fn step_344() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureHull): thm);;", exec_phrase_183)
-}
-
-///|
-/// `exec_phrase_184`
-pub fn exec_phrase_184(x193 : Unit) -> Unit raise {
-  let _ = x193
-  {
-    @readable.thm_ref().val = @misc.hull_hull()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((HULL_HULL): thm);;
-fn step_345() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((HULL_HULL): thm);;", exec_phrase_184)
-}
-
-///|
 /// ClosureUnion
 fn step_346() -> Unit raise {
-  closureunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α\n    ⇒ Closure α (s ∪ t)  =  Closure α s ∪ Closure α t\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [stTop] by fol H1 UNION_SUBSET;\n    simplify H1 stTop Closure_THM LimitPointUnion;\n    set;\n  qed;\n")))
+  closureunion_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha\n    ==> Closure alpha (s UNION t)  =  Closure alpha s UNION Closure alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Label("stTop"),
+            @readable.Thm("Closure_THM", () => closure_thm()),
+            @readable.Thm("LimitPointUnion", () => limitpointunion()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5383,25 +6338,19 @@ pub fn closureunion() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_185`
-pub fn exec_phrase_185(x194 : Unit) -> Unit raise {
-  let _ = x194
-  {
-    @readable.thm_ref().val = limitpointunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LimitPointUnion): thm);;
-fn step_347() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LimitPointUnion): thm);;", exec_phrase_185)
-}
-
-///|
 /// ClosureInterSubset
 fn step_348() -> Unit raise {
-  closureintersubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    Closure α (s ∩ t)  ⊂  Closure α s ∩ Closure α t\n  by fol SUBSET_INTER INTER_SUBSET SubsetClosure")))
+  closureintersubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    Closure alpha (s INTER t)  SUBSET  Closure alpha s INTER Closure alpha t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_INTER", () => @sets.subset_inter()),
+        @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+        @readable.Thm("SubsetClosure", () => subsetclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5414,25 +6363,36 @@ pub fn closureintersubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_186`
-pub fn exec_phrase_186(x195 : Unit) -> Unit raise {
-  let _ = x195
-  {
-    @readable.thm_ref().val = subsetclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SubsetClosure): thm);;
-fn step_349() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SubsetClosure): thm);;", exec_phrase_186)
-}
-
-///|
 /// ClosureIntersSubset
 fn step_350() -> Unit raise {
-  closureinterssubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f.  (∀s. s ∈ f ⇒ s ⊂ topspace α)  ⇒\n    Closure α (INTERS f)  ⊂  INTERS (IMAGE (Closure α) f)\n\n  proof\n    intro_TAC ∀α f, H1;\n    rewrite SET_RULE [s ⊂ INTERS f ⇔ ∀t. t ∈ f ⇒ s ⊂ t] FORALL_IN_IMAGE;\n    intro_TAC ∀[s], sf;\n    s ⊂ topspace α  ∧  INTERS f ⊂ s  ∧  INTERS f ⊂ topspace α     [] by set H1 sf;\n    fol SubsetClosure -;\n  qed;\n")))
+  closureinterssubset_c.set(@readable.prove(
+    "\n  forall alpha f.  (forall s. s IN f ==> s SUBSET topspace alpha)  ==>\n    Closure alpha (INTERS f)  SUBSET  INTERS (IMAGE (Closure alpha) f)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha f, H1"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.TermRule(
+              @sets.set_rule,
+              "s SUBSET INTERS f <=> forall t. t IN f ==> s SUBSET t",
+            ),
+            @readable.Thm("FORALL_IN_IMAGE", () => @sets.forall_in_image()),
+          ],
+        ),
+        @readable.intro_tac("forall [s], sf"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha  /\\   INTERS f SUBSET s  /\\   INTERS f SUBSET topspace alpha",
+          "",
+          @readable.by(@readable.set, [@readable.Label("H1"), @readable.Label("sf")]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [@readable.Thm("SubsetClosure", () => subsetclosure()), @readable.Prev],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5447,7 +6407,17 @@ pub fn closureinterssubset() -> @kernel.Thm {
 ///|
 /// ClosureMinimal
 fn step_351() -> Unit raise {
-  closureminimal_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ t ∧ closed_in α t  ⇒  Closure α s ⊂ t\n  by fol closed_in SubsetClosure ClosureClosed")))
+  closureminimal_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET t /\\  closed_in alpha t  ==>  Closure alpha s SUBSET t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("SubsetClosure", () => subsetclosure()),
+        @readable.Thm("ClosureClosed", () => closureclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5460,25 +6430,20 @@ pub fn closureminimal() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_187`
-pub fn exec_phrase_187(x196 : Unit) -> Unit raise {
-  let _ = x196
-  {
-    @readable.thm_ref().val = closureclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureClosed): thm);;
-fn step_352() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureClosed): thm);;", exec_phrase_187)
-}
-
-///|
 /// ClosureMinimalEq
 fn step_353() -> Unit raise {
-  closureminimaleq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    closed_in α t  ⇒  (Closure α s ⊂ t ⇔ s ⊂ t)\n  by fol closed_in SUBSET_TRANS ClosureSubset ClosureMinimal")))
+  closureminimaleq_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    closed_in alpha t  ==>  (Closure alpha s SUBSET t <=> s SUBSET t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+        @readable.Thm("ClosureMinimal", () => closureminimal()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5491,25 +6456,22 @@ pub fn closureminimaleq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_188`
-pub fn exec_phrase_188(x197 : Unit) -> Unit raise {
-  let _ = x197
-  {
-    @readable.thm_ref().val = closureminimal()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureMinimal): thm);;
-fn step_354() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureMinimal): thm);;", exec_phrase_188)
-}
-
-///|
 /// ClosureUnique
 fn step_355() -> Unit raise {
-  closureunique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ t ∧ closed_in α t ∧ (∀u. s ⊂ u ∧ closed_in α u  ⇒  t ⊂ u)\n    ⇒ Closure α s = t\n  by fol closed_in SUBSET_ANTISYM_EQ ClosureMinimal SUBSET_TRANS ClosureSubset ClosedClosure")))
+  closureunique_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET t /\\  closed_in alpha t /\\  (forall u. s SUBSET u /\\  closed_in alpha u  ==>  t SUBSET u)\n    ==> Closure alpha s = t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("SUBSET_ANTISYM_EQ", () => @sets.subset_antisym_eq()),
+        @readable.Thm("ClosureMinimal", () => closureminimal()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+        @readable.Thm("ClosedClosure", () => closedclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5524,7 +6486,17 @@ pub fn closureunique() -> @kernel.Thm {
 ///|
 /// ClosureUniv
 fn step_356() -> Unit raise {
-  closureuniv_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α.  Closure α (topspace α) =  topspace α\n  by simplify SUBSET_REFL CLOSED_IN_TOPSPACE ClosureEq")))
+  closureuniv_c.set(@readable.prove(
+    "\n  forall alpha.  Closure alpha (topspace alpha) =  topspace alpha",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+        @readable.Thm("CLOSED_IN_TOPSPACE", () => closed_in_topspace()),
+        @readable.Thm("ClosureEq", () => closureeq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5539,7 +6511,17 @@ pub fn closureuniv() -> @kernel.Thm {
 ///|
 /// ClosureEmpty
 fn step_357() -> Unit raise {
-  closureempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  Closure α ∅ = ∅\n  by fol EMPTY_SUBSET CLOSED_IN_EMPTY ClosureClosed")))
+  closureempty_c.set(@readable.prove(
+    "\n  Closure alpha {} = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+        @readable.Thm("CLOSED_IN_EMPTY", () => closed_in_empty()),
+        @readable.Thm("ClosureClosed", () => closureclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5554,7 +6536,41 @@ pub fn closureempty() -> @kernel.Thm {
 ///|
 /// ClosureUnions
 fn step_358() -> Unit raise {
-  closureunions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α f.  FINITE f  ⇒  (∀ t. t ∈ f ⇒ t ⊂ topspace α)  ⇒\n    Closure α (UNIONS f) = UNIONS {Closure α t | t ∈ f}\n\n  proof\n    intro_TAC ∀α;\n    MATCH_MP_TAC FINITE_INDUCT;\n    rewrite UNIONS_0 SET_RULE [{f x | x ∈ ∅} = ∅] ClosureEmpty UNIONS_INSERT\n    SET_RULE [{f x | x ∈ a INSERT t} = (f a) INSERT {f x | x ∈ t}] IN_INSERT;\n    fol UNION_SUBSET UNIONS_SUBSET IN_UNIONS ClosureUnion;\n  qed;\n")))
+  closureunions_c.set(@readable.prove(
+    "\n  forall alpha f.  FINITE f  ==>  (forall  t. t IN f ==> t SUBSET topspace alpha)  ==>\n    Closure alpha (UNIONS f) = UNIONS {Closure alpha t | t IN f}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha"),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("FINITE_INDUCT", () => @sets.finite_induct()),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("UNIONS_0", () => @sets.unions_0()),
+            @readable.TermRule(@sets.set_rule, "{f x | x IN {}} = {}"),
+            @readable.Thm("ClosureEmpty", () => closureempty()),
+            @readable.Thm("UNIONS_INSERT", () => @sets.unions_insert()),
+            @readable.TermRule(
+              @sets.set_rule,
+              "{f x | x IN a INSERT t} = (f a) INSERT {f x | x IN t}",
+            ),
+            @readable.Thm("IN_INSERT", () => @sets.in_insert()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("UNIONS_SUBSET", () => @sets.unions_subset()),
+            @readable.Thm("IN_UNIONS", () => @sets.in_unions()),
+            @readable.Thm("ClosureUnion", () => closureunion()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5567,57 +6583,19 @@ pub fn closureunions() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_189`
-pub fn exec_phrase_189(x198 : Unit) -> Unit raise {
-  let _ = x198
-  {
-    @readable.thm_ref().val = closureempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureEmpty): thm);;
-fn step_359() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureEmpty): thm);;", exec_phrase_189)
-}
-
-///|
-/// `exec_phrase_190`
-pub fn exec_phrase_190(x199 : Unit) -> Unit raise {
-  let _ = x199
-  {
-    @readable.thm_ref().val = @sets.in_unions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_UNIONS): thm);;
-fn step_360() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_UNIONS): thm);;", exec_phrase_190)
-}
-
-///|
-/// `exec_phrase_191`
-pub fn exec_phrase_191(x200 : Unit) -> Unit raise {
-  let _ = x200
-  {
-    @readable.thm_ref().val = closureunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureUnion): thm);;
-fn step_361() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureUnion): thm);;", exec_phrase_191)
-}
-
-///|
 /// ClosureEqEmpty
 fn step_362() -> Unit raise {
-  closureeqempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  (Closure α s = ∅  ⇔  s = ∅)\n  by fol ClosureEmpty ClosureSubset SUBSET_EMPTY")))
+  closureeqempty_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  (Closure alpha s = {}  <=>  s = {})",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureEmpty", () => closureempty()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+        @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5632,7 +6610,17 @@ pub fn closureeqempty() -> @kernel.Thm {
 ///|
 /// ClosureSubsetEq
 fn step_363() -> Unit raise {
-  closuresubseteq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  (Closure α s ⊂ s  ⇔  closed_in α s)\n  by fol ClosureEq ClosureSubset SUBSET_ANTISYM")))
+  closuresubseteq_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  (Closure alpha s SUBSET s  <=>  closed_in alpha s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureEq", () => closureeq()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+        @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5647,7 +6635,57 @@ pub fn closuresubseteq() -> @kernel.Thm {
 ///|
 /// OpenInterClosureEqEmpty
 fn step_364() -> Unit raise {
-  openinterclosureeqempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    open_in α s  ⇒  (s ∩ Closure α t = ∅  ⇔  s ∩ t = ∅)\n\n  proof\n    intro_TAC ∀α s t, H1 H2, H3;\n    eq_tac     [Left] by fol H2 ClosureSubset INTER_TENSOR SUBSET_REFL SUBSET_EMPTY;\n    intro_TAC stDisjoint;\n    s ⊂ Interior α (topspace α ━ t)     [] by fol H2 SUBSET_DIFF H3 H1 H2 stDisjoint SUBSET_COMPLEMENT OpenSubsetInterior;\n    fol H1 H2 InteriorTopspace - COMPLEMENT_DISJOINT H2 ClosureInterior;\n  qed;\n")))
+  openinterclosureeqempty_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    open_in alpha s  ==>  (s INTER Closure alpha t = {}  <=>  s INTER t = {})",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1 H2, H3"),
+        @readable.eq_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("ClosureSubset", () => closuresubset()),
+              @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+              @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+              @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+            ],
+          ),
+        ),
+        @readable.intro_tac("stDisjoint"),
+        @readable.have(
+          "\n    s SUBSET Interior alpha (topspace alpha DIFF t)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H2"),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Label("H3"),
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Label("stDisjoint"),
+              @readable.Thm("SUBSET_COMPLEMENT", () => subset_complement()),
+              @readable.Thm("OpenSubsetInterior", () => opensubsetinterior()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("H2"),
+            @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            @readable.Prev,
+            @readable.Thm("COMPLEMENT_DISJOINT", () => complement_disjoint()),
+            @readable.Label("H2"),
+            @readable.Thm("ClosureInterior", () => closureinterior()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5660,57 +6698,101 @@ pub fn openinterclosureeqempty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_192`
-pub fn exec_phrase_192(x201 : Unit) -> Unit raise {
-  let _ = x201
-  {
-    @readable.thm_ref().val = subset_complement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_COMPLEMENT): thm);;
-fn step_365() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_COMPLEMENT): thm);;", exec_phrase_192)
-}
-
-///|
-/// `exec_phrase_193`
-pub fn exec_phrase_193(x202 : Unit) -> Unit raise {
-  let _ = x202
-  {
-    @readable.thm_ref().val = opensubsetinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenSubsetInterior): thm);;
-fn step_366() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenSubsetInterior): thm);;", exec_phrase_193)
-}
-
-///|
-/// `exec_phrase_194`
-pub fn exec_phrase_194(x203 : Unit) -> Unit raise {
-  let _ = x203
-  {
-    @readable.thm_ref().val = complement_disjoint()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COMPLEMENT_DISJOINT): thm);;
-fn step_367() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COMPLEMENT_DISJOINT): thm);;", exec_phrase_194)
-}
-
-///|
 /// OpenInterClosureSubset
 fn step_368() -> Unit raise {
-  openinterclosuresubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  t ⊂ topspace α  ⇒\n    open_in α s  ⇒  s ∩ Closure α t ⊂ Closure α (s ∩ t)\n\n  proof\n    intro_TAC ∀α s t, tTop, sOpen;\n    s ⊂ topspace α     [sTop] by fol OPEN_IN_SUBSET sOpen;\n    s ∩ t ⊂ topspace α     [stTop] by fol sTop sTop INTER_SUBSET SUBSET_TRANS;\n    simplify tTop - Closure_THM UNION_OVER_INTER SUBSET_UNION SUBSET_UNION;\n    s ∩ LimitPointOf α t  ⊂  LimitPointOf α (s ∩ t)     []\n    proof\n      simplify SUBSET IN_INTER tTop stTop IN_LimitPointOf;\n      intro_TAC ∀[x], xs xTop xLIMt, ∀[O], xO Oopen;\n      x ∈ O ∩ s  ∧  open_in α (O ∩ s)     [xOsOpen] by fol xs xO IN_INTER Oopen sOpen OPEN_IN_INTER;\n      fol xOsOpen xLIMt IN_INTER;\n    qed;\n    simplify - UNION_TENSOR SUBSET_REFL;\n  qed;\n")))
+  openinterclosuresubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  t SUBSET topspace alpha  ==>\n    open_in alpha s  ==>  s INTER Closure alpha t SUBSET Closure alpha (s INTER t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, tTop, sOpen"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha",
+          "sTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+              @readable.Label("sOpen"),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Label("sTop"),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("tTop"),
+            @readable.Prev,
+            @readable.Thm("Closure_THM", () => closure_thm()),
+            @readable.Thm("UNION_OVER_INTER", () => @sets.union_over_inter()),
+            @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+            @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+          ],
+        ),
+        @readable.have(
+          "\n    s INTER LimitPointOf alpha t  SUBSET  LimitPointOf alpha (s INTER t)",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Thm("SUBSET", () => @sets.subset()),
+                  @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                  @readable.Label("tTop"),
+                  @readable.Label("stTop"),
+                  @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+                ],
+              ),
+              @readable.intro_tac("forall [x], xs xTop xLIMt, forall [O], xO Oopen"),
+              @readable.have(
+                "\n      x IN O INTER s  /\\   open_in alpha (O INTER s)",
+                "xOsOpen",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("xs"),
+                    @readable.Label("xO"),
+                    @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                    @readable.Label("Oopen"),
+                    @readable.Label("sOpen"),
+                    @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+                  ],
+                ),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("xOsOpen"),
+                  @readable.Label("xLIMt"),
+                  @readable.Thm("IN_INTER", () => @sets.in_inter()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Prev,
+            @readable.Thm("UNION_TENSOR", () => union_tensor()),
+            @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5723,25 +6805,68 @@ pub fn openinterclosuresubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_195`
-pub fn exec_phrase_195(x204 : Unit) -> Unit raise {
-  let _ = x204
-  {
-    @readable.thm_ref().val = @sets.union_over_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNION_OVER_INTER): thm);;
-fn step_369() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNION_OVER_INTER): thm);;", exec_phrase_195)
-}
-
-///|
 /// ClosureOpenInterSuperset
 fn step_370() -> Unit raise {
-  closureopenintersuperset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    open_in α s ∧ s ⊂ Closure α t  ⇒  Closure α (s ∩ t) = Closure α s\n\n  proof\n    intro_TAC ∀α s t, sTop tTop, sOpen sSUBtC;\n    s ∩ t ⊂ topspace α     [stTop] by fol INTER_SUBSET sTop SUBSET_TRANS;\n    MATCH_MP_TAC SUBSET_ANTISYM;\n    conj_tac     [Left] by fol sTop INTER_SUBSET SubsetClosure;\n    s  ⊂  Closure α (s ∩ t)     [] by fol tTop sOpen OpenInterClosureSubset SUBSET_REFL sSUBtC SUBSET_INTER SUBSET_TRANS;\n    fol stTop - ClosedClosure ClosureMinimal;\n  qed;\n")))
+  closureopenintersuperset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    open_in alpha s /\\  s SUBSET Closure alpha t  ==>  Closure alpha (s INTER t) = Closure alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sTop tTop, sOpen sSUBtC"),
+        @readable.have(
+          "\n    s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Label("sTop"),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+        ),
+        @readable.conj_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SubsetClosure", () => subsetclosure()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s  SUBSET  Closure alpha (s INTER t)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tTop"),
+              @readable.Label("sOpen"),
+              @readable.Thm("OpenInterClosureSubset", () => openinterclosuresubset()),
+              @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+              @readable.Label("sSUBtC"),
+              @readable.Thm("SUBSET_INTER", () => @sets.subset_inter()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("stTop"),
+            @readable.Prev,
+            @readable.Thm("ClosedClosure", () => closedclosure()),
+            @readable.Thm("ClosureMinimal", () => closureminimal()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5754,25 +6879,20 @@ pub fn closureopenintersuperset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_196`
-pub fn exec_phrase_196(x205 : Unit) -> Unit raise {
-  let _ = x205
-  {
-    @readable.thm_ref().val = openinterclosuresubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInterClosureSubset): thm);;
-fn step_371() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInterClosureSubset): thm);;", exec_phrase_196)
-}
-
-///|
 /// ClosureComplement
 fn step_372() -> Unit raise {
-  closurecomplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Closure α (topspace α ━ s) = topspace α ━ Interior α s\n  by fol InteriorClosure SUBSET_DIFF ClosureTopspace DIFF_REFL")))
+  closurecomplement_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Closure alpha (topspace alpha DIFF s) = topspace alpha DIFF Interior alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorClosure", () => interiorclosure()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("DIFF_REFL", () => diff_refl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5785,25 +6905,21 @@ pub fn closurecomplement() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_197`
-pub fn exec_phrase_197(x206 : Unit) -> Unit raise {
-  let _ = x206
-  {
-    @readable.thm_ref().val = interiorclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosure): thm);;
-fn step_373() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosure): thm);;", exec_phrase_197)
-}
-
-///|
 /// InteriorComplement
 fn step_374() -> Unit raise {
-  interiorcomplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Interior α (topspace α ━ s) = topspace α ━ Closure α s\n  by fol SUBSET_DIFF InteriorTopspace DIFF_REFL ClosureInterior DIFF_REFL")))
+  interiorcomplement_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Interior alpha (topspace alpha DIFF s) = topspace alpha DIFF Closure alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("DIFF_REFL", () => diff_refl()),
+        @readable.Thm("ClosureInterior", () => closureinterior()),
+        @readable.Thm("DIFF_REFL", () => diff_refl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5818,7 +6934,17 @@ pub fn interiorcomplement() -> @kernel.Thm {
 ///|
 /// ClosureInteriorComplement
 fn step_375() -> Unit raise {
-  closureinteriorcomplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    topspace α ━ Closure α (Interior α s)\n    = Interior α (Closure α (topspace α ━ s))\n  by fol InteriorTopspace InteriorComplement ClosureComplement")))
+  closureinteriorcomplement_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    topspace alpha DIFF Closure alpha (Interior alpha s)\n    = Interior alpha (Closure alpha (topspace alpha DIFF s))",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("InteriorComplement", () => interiorcomplement()),
+        @readable.Thm("ClosureComplement", () => closurecomplement()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5831,41 +6957,20 @@ pub fn closureinteriorcomplement() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_198`
-pub fn exec_phrase_198(x207 : Unit) -> Unit raise {
-  let _ = x207
-  {
-    @readable.thm_ref().val = interiorcomplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorComplement): thm);;
-fn step_376() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorComplement): thm);;", exec_phrase_198)
-}
-
-///|
-/// `exec_phrase_199`
-pub fn exec_phrase_199(x208 : Unit) -> Unit raise {
-  let _ = x208
-  {
-    @readable.thm_ref().val = closurecomplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureComplement): thm);;
-fn step_377() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureComplement): thm);;", exec_phrase_199)
-}
-
-///|
 /// InteriorClosureComplement
 fn step_378() -> Unit raise {
-  interiorclosurecomplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    topspace α ━ Interior α (Closure α s)\n    = Closure α (Interior α (topspace α ━ s))\n  by fol ClosureTopspace SUBSET_TRANS InteriorComplement ClosureComplement")))
+  interiorclosurecomplement_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    topspace alpha DIFF Interior alpha (Closure alpha s)\n    = Closure alpha (Interior alpha (topspace alpha DIFF s))",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+        @readable.Thm("InteriorComplement", () => interiorcomplement()),
+        @readable.Thm("ClosureComplement", () => closurecomplement()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5880,7 +6985,114 @@ pub fn interiorclosurecomplement() -> @kernel.Thm {
 ///|
 /// ConnectedIntermediateClosure
 fn step_379() -> Unit raise {
-  connectedintermediateclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α  ⇒\n    Connected (subtopology α s) ∧  s ⊂ t  ∧  t ⊂ Closure α s\n    ⇒ Connected (subtopology α t)\n\n  proof\n    intro_TAC ∀α s t, sTop, sCon st tCs;\n    t ⊂ topspace α     [tTop] by fol tCs sTop ClosureTopspace SUBSET_TRANS;\n    simplify tTop ConnectedSubtopology_ALT;\n    intro_TAC ∀[u] [v], uOpen vOpen t_uv uvtEmpty;\n    u ⊂ topspace α  ∧  v ⊂ topspace α     [uvTop] by fol uOpen vOpen OPEN_IN_SUBSET;\n    u ∩ s = ∅  ∨  v ∩ s = ∅     [] by fol sTop uvTop uOpen vOpen st t_uv uvtEmpty SUBSET_TRANS SUBSET_REFL INTER_TENSOR SUBSET_EMPTY sCon ConnectedSubtopology_ALT;\n    s ⊂ topspace α ━ u  ∨  s ⊂ topspace α ━ v     [] by fol - sTop uvTop INTER_COMM SUBSET_COMPLEMENT;\n    t ⊂ topspace α ━ u  ∨  t ⊂ topspace α ━ v     [] by fol SUBSET_DIFF - uvTop uOpen vOpen OPEN_IN_CLOSED_IN ClosureMinimal tCs SUBSET_TRANS;\n    fol tTop uvTop - SUBSET_COMPLEMENT INTER_COMM;\n  qed;\n")))
+  connectedintermediateclosure_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha  ==>\n    Connected (subtopology alpha s) /\\   s SUBSET t  /\\   t SUBSET Closure alpha s\n    ==> Connected (subtopology alpha t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sTop, sCon st tCs"),
+        @readable.have(
+          "\n    t SUBSET topspace alpha",
+          "tTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tCs"),
+              @readable.Label("sTop"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("tTop"),
+            @readable.Thm("ConnectedSubtopology_ALT", () => connectedsubtopology_alt()),
+          ],
+        ),
+        @readable.intro_tac("forall [u] [v], uOpen vOpen t_uv uvtEmpty"),
+        @readable.have(
+          "\n    u SUBSET topspace alpha  /\\   v SUBSET topspace alpha",
+          "uvTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("uOpen"),
+              @readable.Label("vOpen"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    u INTER s = {}  \\/  v INTER s = {}",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Label("uvTop"),
+              @readable.Label("uOpen"),
+              @readable.Label("vOpen"),
+              @readable.Label("st"),
+              @readable.Label("t_uv"),
+              @readable.Label("uvtEmpty"),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+              @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+              @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+              @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+              @readable.Label("sCon"),
+              @readable.Thm(
+                "ConnectedSubtopology_ALT",
+                () => connectedsubtopology_alt(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s SUBSET topspace alpha DIFF u  \\/  s SUBSET topspace alpha DIFF v",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("sTop"),
+              @readable.Label("uvTop"),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+              @readable.Thm("SUBSET_COMPLEMENT", () => subset_complement()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    t SUBSET topspace alpha DIFF u  \\/  t SUBSET topspace alpha DIFF v",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Prev,
+              @readable.Label("uvTop"),
+              @readable.Label("uOpen"),
+              @readable.Label("vOpen"),
+              @readable.Thm("OPEN_IN_CLOSED_IN", () => open_in_closed_in()),
+              @readable.Thm("ClosureMinimal", () => closureminimal()),
+              @readable.Label("tCs"),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("tTop"),
+            @readable.Label("uvTop"),
+            @readable.Prev,
+            @readable.Thm("SUBSET_COMPLEMENT", () => subset_complement()),
+            @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5895,7 +7107,21 @@ pub fn connectedintermediateclosure() -> @kernel.Thm {
 ///|
 /// ConnectedClosure
 fn step_380() -> Unit raise {
-  connectedclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Connected (subtopology α s) ⇒\n    Connected (subtopology α (Closure α s))\n  by fol ClosureTopspace ClosureSubset SUBSET_REFL ConnectedIntermediateClosure")))
+  connectedclosure_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Connected (subtopology alpha s) ==>\n    Connected (subtopology alpha (Closure alpha s))",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+        @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+        @readable.Thm(
+          "ConnectedIntermediateClosure",
+          () => connectedintermediateclosure(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5908,25 +7134,88 @@ pub fn connectedclosure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_200`
-pub fn exec_phrase_200(x209 : Unit) -> Unit raise {
-  let _ = x209
-  {
-    @readable.thm_ref().val = connectedintermediateclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedIntermediateClosure): thm);;
-fn step_381() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedIntermediateClosure): thm);;", exec_phrase_200)
-}
-
-///|
 /// ConnectedUnionStrong
 fn step_382() -> Unit raise {
-  connectedunionstrong_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    Connected (subtopology α s)  ∧  Connected (subtopology α t)  ∧\n    ¬(Closure α s ∩ t = ∅)\n    ⇒ Connected (subtopology α (s ∪ t))\n\n  proof\n    intro_TAC ∀α s t, sTop tTop, H2 H3 H4;\n    consider p s' such that\n    p ∈ Closure α s  ∧  p ∈ t  ∧  s' = p ╪ s     [pCst] by fol H4 MEMBER_NOT_EMPTY IN_INTER;\n    s ⊂ s'  ∧  s' ⊂ Closure α s     [s_ps_Cs] by fol IN_INSERT SUBSET pCst sTop ClosureSubset INSERT_SUBSET;\n    Connected (subtopology α (s'))     [s'Con] by fol sTop H2 s_ps_Cs ConnectedIntermediateClosure;\n    s ∪ t = s' ∪ t  ∧  ¬(s' ∩ t = ∅)     [] by fol pCst INSERT_UNION IN_INSERT IN_INTER MEMBER_NOT_EMPTY;\n    fol s_ps_Cs sTop ClosureTopspace SUBSET_TRANS tTop - s'Con H3 ConnectedUnion;\n  qed;\n")))
+  connectedunionstrong_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    Connected (subtopology alpha s)  /\\   Connected (subtopology alpha t)  /\\ \n    ~(Closure alpha s INTER t = {})\n    ==> Connected (subtopology alpha (s UNION t))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sTop tTop, H2 H3 H4"),
+        @readable.consider(
+          "p s'",
+          "p IN Closure alpha s  /\\   p IN t  /\\   s' = p INSERT s    ",
+          "pCst",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H4"),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s SUBSET s'  /\\   s' SUBSET Closure alpha s",
+          "s_ps_Cs",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("IN_INSERT", () => @sets.in_insert()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Label("pCst"),
+              @readable.Label("sTop"),
+              @readable.Thm("ClosureSubset", () => closuresubset()),
+              @readable.Thm("INSERT_SUBSET", () => @sets.insert_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Connected (subtopology alpha (s'))",
+          "s'Con",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Label("H2"),
+              @readable.Label("s_ps_Cs"),
+              @readable.Thm(
+                "ConnectedIntermediateClosure",
+                () => connectedintermediateclosure(),
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s UNION t = s' UNION t  /\\   ~(s' INTER t = {})",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("pCst"),
+              @readable.Thm("INSERT_UNION", () => @sets.insert_union()),
+              @readable.Thm("IN_INSERT", () => @sets.in_insert()),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("s_ps_Cs"),
+            @readable.Label("sTop"),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            @readable.Label("tTop"),
+            @readable.Prev,
+            @readable.Label("s'Con"),
+            @readable.Label("H3"),
+            @readable.Thm("ConnectedUnion", () => connectedunion()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -5939,57 +7228,22 @@ pub fn connectedunionstrong() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_201`
-pub fn exec_phrase_201(x210 : Unit) -> Unit raise {
-  let _ = x210
-  {
-    @readable.thm_ref().val = @sets.insert_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INSERT_SUBSET): thm);;
-fn step_383() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INSERT_SUBSET): thm);;", exec_phrase_201)
-}
-
-///|
-/// `exec_phrase_202`
-pub fn exec_phrase_202(x211 : Unit) -> Unit raise {
-  let _ = x211
-  {
-    @readable.thm_ref().val = @sets.insert_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INSERT_UNION): thm);;
-fn step_384() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INSERT_UNION): thm);;", exec_phrase_202)
-}
-
-///|
-/// `exec_phrase_203`
-pub fn exec_phrase_203(x212 : Unit) -> Unit raise {
-  let _ = x212
-  {
-    @readable.thm_ref().val = connectedunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedUnion): thm);;
-fn step_385() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedUnion): thm);;", exec_phrase_203)
-}
-
-///|
 /// InteriorDiff
 fn step_386() -> Unit raise {
-  interiordiff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.   s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    Interior α (s ━ t) = Interior α s ━ Closure α t\n  by fol ClosureTopspace InteriorTopspace COMPLEMENT_INTER_DIFF InteriorComplement SUBSET_DIFF InteriorInter")))
+  interiordiff_c.set(@readable.prove(
+    "\n  forall alpha s t.   s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    Interior alpha (s DIFF t) = Interior alpha s DIFF Closure alpha t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("COMPLEMENT_INTER_DIFF", () => complement_inter_diff()),
+        @readable.Thm("InteriorComplement", () => interiorcomplement()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+        @readable.Thm("InteriorInter", () => interiorinter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6004,7 +7258,74 @@ pub fn interiordiff() -> @kernel.Thm {
 ///|
 /// ClosedInLimpt
 fn step_387() -> Unit raise {
-  closedinlimpt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    (closed_in (subtopology α t) s  ⇔\n    s ⊂ t  ∧  LimitPointOf α s ∩ t ⊂ s)\n\n  proof\n    intro_TAC ∀α s t, H1 H2;\n    simplify H2 ClosedInSubtopology;\n    eq_tac     [Right]\n    proof\n      intro_TAC sSUBt LIMstSUBs;\n      exists_TAC Closure α s;\n      simplify H1 ClosedClosure Closure_THM INTER_COMM UNION_OVER_INTER;\n      set sSUBt LIMstSUBs;\n    qed;\n    rewrite LEFT_IMP_EXISTS_THM;\n    intro_TAC ∀[D], Dexists;\n    LimitPointOf α (D ∩ t) ⊂ D     [] by fol Dexists CLOSED_IN_SUBSET INTER_SUBSET LimptSubset ClosedLimpt SUBSET_TRANS;\n    fol Dexists INTER_SUBSET - SUBSET_REFL INTER_TENSOR;\n  qed;\n")))
+  closedinlimpt_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    (closed_in (subtopology alpha t) s  <=>\n    s SUBSET t  /\\   LimitPointOf alpha s INTER t SUBSET s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1 H2"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H2"),
+            @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+          ],
+        ),
+        @readable.eq_tac(
+          "Right",
+          @readable.steps(
+            [
+              @readable.intro_tac("sSUBt LIMstSUBs"),
+              @readable.exists("Closure alpha s"),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("H1"),
+                  @readable.Thm("ClosedClosure", () => closedclosure()),
+                  @readable.Thm("Closure_THM", () => closure_thm()),
+                  @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+                  @readable.Thm("UNION_OVER_INTER", () => @sets.union_over_inter()),
+                ],
+              ),
+              @readable.by(
+                @readable.set,
+                [@readable.Label("sSUBt"), @readable.Label("LIMstSUBs")],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [@readable.Thm("LEFT_IMP_EXISTS_THM", () => @theorems.left_imp_exists_thm())],
+        ),
+        @readable.intro_tac("forall [D], Dexists"),
+        @readable.have(
+          "\n    LimitPointOf alpha (D INTER t) SUBSET D",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("Dexists"),
+              @readable.Thm("CLOSED_IN_SUBSET", () => closed_in_subset()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("LimptSubset", () => limptsubset()),
+              @readable.Thm("ClosedLimpt", () => closedlimpt()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("Dexists"),
+            @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            @readable.Prev,
+            @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+            @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6019,7 +7340,17 @@ pub fn closedinlimpt() -> @kernel.Thm {
 ///|
 /// ClosedInLimpt_ALT
 fn step_388() -> Unit raise {
-  closedinlimpt_alt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    (closed_in (subtopology α t) s  ⇔\n    s ⊂ t  ∧  ∀x. x ∈ LimitPointOf α s ∧ x ∈ t ⇒ x ∈ s)\n  by simplify SUBSET IN_INTER ClosedInLimpt")))
+  closedinlimpt_alt_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    (closed_in (subtopology alpha t) s  <=>\n    s SUBSET t  /\\   forall x. x IN LimitPointOf alpha s /\\  x IN t ==> x IN s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_INTER", () => @sets.in_inter()),
+        @readable.Thm("ClosedInLimpt", () => closedinlimpt()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6032,25 +7363,23 @@ pub fn closedinlimpt_alt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_204`
-pub fn exec_phrase_204(x213 : Unit) -> Unit raise {
-  let _ = x213
-  {
-    @readable.thm_ref().val = closedinlimpt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInLimpt): thm);;
-fn step_389() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInLimpt): thm);;", exec_phrase_204)
-}
-
-///|
 /// ClosedInInterClosure
 fn step_390() -> Unit raise {
-  closedininterclosure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    (closed_in (subtopology α s) t  ⇔  s ∩ Closure α t = t)\n\n  proof     simplify Closure_THM ClosedInLimpt;     set;     qed;\n")))
+  closedininterclosure_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    (closed_in (subtopology alpha s) t  <=>  s INTER Closure alpha t = t)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("Closure_THM", () => closure_thm()),
+            @readable.Thm("ClosedInLimpt", () => closedinlimpt()),
+          ],
+        ),
+        @readable.by(@readable.set, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6065,7 +7394,97 @@ pub fn closedininterclosure() -> @kernel.Thm {
 ///|
 /// InteriorClosureIdemp
 fn step_391() -> Unit raise {
-  interiorclosureidemp_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Interior α (Closure α (Interior α (Closure α s)))\n    = Interior α (Closure α s)\n\n  proof\n    intro_TAC ∀α s, H1;\n    consider IC CIC such that\n    IC = Interior α (Closure α s)  ∧  CIC = Closure α IC     [CICdef] by fol;\n    Closure α s ⊂ topspace α     [Ctop] by fol H1 ClosureTopspace;\n    IC ⊂ topspace α     [ICtop] by fol CICdef - H1 InteriorTopspace;\n    CIC ⊂ topspace α     [CICtop] by fol CICdef - ClosureTopspace;\n    IC ⊂ CIC     [ICsubCIC] by fol CICdef ICtop ClosureSubset;\n    ∀u. u ⊂ CIC ∧ open_in α u ⇒ u ⊂ IC     [] by fol CICdef Ctop InteriorSubset SubsetClosure H1 ClosureClosure SUBSET_TRANS OpenSubsetInterior;\n    fol CICdef CICtop ICsubCIC Ctop OpenInterior - InteriorUnique;\n  qed;\n")))
+  interiorclosureidemp_v1_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Interior alpha (Closure alpha (Interior alpha (Closure alpha s)))\n    = Interior alpha (Closure alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.consider(
+          "IC CIC",
+          "IC = Interior alpha (Closure alpha s)  /\\   CIC = Closure alpha IC    ",
+          "CICdef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    Closure alpha s SUBSET topspace alpha",
+          "Ctop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    IC SUBSET topspace alpha",
+          "ICtop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CICdef"),
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    CIC SUBSET topspace alpha",
+          "CICtop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CICdef"),
+              @readable.Prev,
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    IC SUBSET CIC",
+          "ICsubCIC",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CICdef"),
+              @readable.Label("ICtop"),
+              @readable.Thm("ClosureSubset", () => closuresubset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    forall u. u SUBSET CIC /\\  open_in alpha u ==> u SUBSET IC",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CICdef"),
+              @readable.Label("Ctop"),
+              @readable.Thm("InteriorSubset", () => interiorsubset()),
+              @readable.Thm("SubsetClosure", () => subsetclosure()),
+              @readable.Label("H1"),
+              @readable.Thm("ClosureClosure", () => closureclosure()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+              @readable.Thm("OpenSubsetInterior", () => opensubsetinterior()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("CICdef"),
+            @readable.Label("CICtop"),
+            @readable.Label("ICsubCIC"),
+            @readable.Label("Ctop"),
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Prev,
+            @readable.Thm("InteriorUnique", () => interiorunique()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6078,25 +7497,76 @@ pub fn interiorclosureidemp_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_205`
-pub fn exec_phrase_205(x214 : Unit) -> Unit raise {
-  let _ = x214
-  {
-    @readable.thm_ref().val = closureclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureClosure): thm);;
-fn step_392() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureClosure): thm);;", exec_phrase_205)
-}
-
-///|
 /// InteriorClosureIdemp
 fn step_393() -> Unit raise {
-  interiorclosureidemp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Interior α (Closure α (Interior α (Closure α s)))\n    = Interior α (Closure α s)\n\n  proof\n    intro_TAC ∀α s, H1;\n    Closure α s ⊂ topspace α     [Ctop] by fol H1 ClosureTopspace;\n    consider IC CIC such that\n    IC = Interior α (Closure α s)  ∧  CIC = Closure α IC     [ICdefs] by fol;\n    IC ⊂ topspace α     [] by fol - Ctop H1 InteriorTopspace;\n    CIC ⊂ topspace α  ∧  IC ⊂ CIC  ∧  ∀u. u ⊂ CIC ∧ open_in α u ⇒ u ⊂ IC     [] by fol ICdefs Ctop - ClosureTopspace ClosureSubset InteriorSubset SubsetClosure H1 ClosureClosure SUBSET_TRANS OpenSubsetInterior;\n    fol ICdefs - Ctop OpenInterior InteriorUnique;\n  qed;\n")))
+  interiorclosureidemp_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Interior alpha (Closure alpha (Interior alpha (Closure alpha s)))\n    = Interior alpha (Closure alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.have(
+          "\n    Closure alpha s SUBSET topspace alpha",
+          "Ctop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "IC CIC",
+          "IC = Interior alpha (Closure alpha s)  /\\   CIC = Closure alpha IC    ",
+          "ICdefs",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    IC SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Ctop"),
+              @readable.Label("H1"),
+              @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    CIC SUBSET topspace alpha  /\\   IC SUBSET CIC  /\\   forall u. u SUBSET CIC /\\  open_in alpha u ==> u SUBSET IC",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("ICdefs"),
+              @readable.Label("Ctop"),
+              @readable.Prev,
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Thm("ClosureSubset", () => closuresubset()),
+              @readable.Thm("InteriorSubset", () => interiorsubset()),
+              @readable.Thm("SubsetClosure", () => subsetclosure()),
+              @readable.Label("H1"),
+              @readable.Thm("ClosureClosure", () => closureclosure()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+              @readable.Thm("OpenSubsetInterior", () => opensubsetinterior()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("ICdefs"),
+            @readable.Prev,
+            @readable.Label("Ctop"),
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Thm("InteriorUnique", () => interiorunique()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6111,7 +7581,60 @@ pub fn interiorclosureidemp() -> @kernel.Thm {
 ///|
 /// ClosureInteriorIdemp
 fn step_394() -> Unit raise {
-  closureinterioridemp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Closure α (Interior α (Closure α (Interior α s)))\n    = Closure α (Interior α s)\n\n  proof\n    intro_TAC ∀α s, H1;\n    consider t such that t = topspace α ━ s     [tDef] by fol;\n    t ⊂ topspace α  ∧  s = topspace α ━ t     [tProps] by fol - H1 SUBSET_DIFF DIFF_REFL;\n    Interior α (Closure α t) ⊂ topspace α     [] by fol - ClosureTopspace InteriorTopspace;\n    simplify tProps - GSYM InteriorClosureComplement InteriorClosureIdemp;\n  qed;\n")))
+  closureinterioridemp_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Closure alpha (Interior alpha (Closure alpha (Interior alpha s)))\n    = Closure alpha (Interior alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.consider(
+          "t",
+          "t = topspace alpha DIFF s    ",
+          "tDef",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.have(
+          "\n    t SUBSET topspace alpha  /\\   s = topspace alpha DIFF t",
+          "tProps",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("DIFF_REFL", () => diff_refl()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Interior alpha (Closure alpha t) SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("tProps"),
+            @readable.Prev,
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm(
+                "InteriorClosureComplement",
+                () => interiorclosurecomplement(),
+              ),
+            ),
+            @readable.Thm("InteriorClosureIdemp", () => interiorclosureidemp()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6124,41 +7647,91 @@ pub fn closureinterioridemp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_206`
-pub fn exec_phrase_206(x215 : Unit) -> Unit raise {
-  let _ = x215
-  {
-    @readable.thm_ref().val = interiorclosurecomplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosureComplement): thm);;
-fn step_395() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosureComplement): thm);;", exec_phrase_206)
-}
-
-///|
-/// `exec_phrase_207`
-pub fn exec_phrase_207(x216 : Unit) -> Unit raise {
-  let _ = x216
-  {
-    @readable.thm_ref().val = interiorclosureidemp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosureIdemp): thm);;
-fn step_396() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosureIdemp): thm);;", exec_phrase_207)
-}
-
-///|
 /// InteriorClosureDiffSpaceEmpty
 fn step_397() -> Unit raise {
-  interiorclosurediffspaceempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Interior α (Closure α s ━ s) = ∅\n\n  proof\n    intro_TAC ∀α s, H1;\n    Closure α s ━ s ⊂ topspace α     [Cs_sTop] by fol H1 ClosureTopspace SUBSET_DIFF SUBSET_TRANS;\n    assume ¬(Interior α (Closure α s ━ s) = ∅)     [Contradiction] by fol;\n    consider x such that\n    x ∈ (Interior α (Closure α s ━ s))     [xExists] by fol - MEMBER_NOT_EMPTY;\n    consider t such that\n    open_in α t ∧ x ∈ t ∧ t ⊂ (s ∪ LimitPointOf α s) ━ s     [tProps] by fol - Cs_sTop IN_Interior Closure_DEF;\n    t ⊂ LimitPointOf α s ∧ s ∩ (t ━ {x}) = ∅     [tSubLIMs] by set -;\n    x ∈ LimitPointOf α s ∧ x ∉ s     [xLims] by fol tProps - SUBSET IN_DIFF ∉;\n    fol H1 xLims IN_LimitPointOf tProps tSubLIMs NotLimitPointOf ∉;\n  qed;\n")))
+  interiorclosurediffspaceempty_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Interior alpha (Closure alpha s DIFF s) = {}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.have(
+          "\n    Closure alpha s DIFF s SUBSET topspace alpha",
+          "Cs_sTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.assuming(
+          "~(Interior alpha (Closure alpha s DIFF s) = {})",
+          "Contradiction",
+          @readable.by(@readable.fol, []),
+        ),
+        @readable.consider(
+          "x",
+          "x IN (Interior alpha (Closure alpha s DIFF s))    ",
+          "xExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("MEMBER_NOT_EMPTY", () => @sets.member_not_empty()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "t",
+          "open_in alpha t /\\  x IN t /\\  t SUBSET (s UNION LimitPointOf alpha s) DIFF s    ",
+          "tProps",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("Cs_sTop"),
+              @readable.Thm("IN_Interior", () => in_interior()),
+              @readable.Thm("Closure_DEF", () => closure_def()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    t SUBSET LimitPointOf alpha s /\\  s INTER (t DIFF {x}) = {}",
+          "tSubLIMs",
+          @readable.by(@readable.set, [@readable.Prev]),
+        ),
+        @readable.have(
+          "\n    x IN LimitPointOf alpha s /\\  x NOTIN s",
+          "xLims",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tProps"),
+              @readable.Prev,
+              @readable.Thm("SUBSET", () => @sets.subset()),
+              @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+              @readable.Thm("NOTIN", () => notin()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Label("xLims"),
+            @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+            @readable.Label("tProps"),
+            @readable.Label("tSubLIMs"),
+            @readable.Thm("NotLimitPointOf", () => notlimitpointof()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6173,7 +7746,37 @@ pub fn interiorclosurediffspaceempty() -> @kernel.Thm {
 ///|
 /// NowhereDenseUnion
 fn step_398() -> Unit raise {
-  nowheredenseunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    (Interior α (Closure α (s ∪ t)) = ∅  ⇔\n    Interior α (Closure α s) = ∅  ∧  Interior α (Closure α t) = ∅)\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [] by fol H1 UNION_SUBSET;\n    simplify H1 - ClosureUnion ClosureTopspace UNION_SUBSET ClosedClosure InteriorUnionEqEmpty;\n  qed;\n")))
+  nowheredenseunion_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    (Interior alpha (Closure alpha (s UNION t)) = {}  <=>\n    Interior alpha (Closure alpha s) = {}  /\\   Interior alpha (Closure alpha t) = {})",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Thm("ClosureUnion", () => closureunion()),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("ClosedClosure", () => closedclosure()),
+            @readable.Thm("InteriorUnionEqEmpty", () => interiorunioneqempty()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6186,25 +7789,83 @@ pub fn nowheredenseunion() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_208`
-pub fn exec_phrase_208(x217 : Unit) -> Unit raise {
-  let _ = x217
-  {
-    @readable.thm_ref().val = interiorunioneqempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorUnionEqEmpty): thm);;
-fn step_399() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorUnionEqEmpty): thm);;", exec_phrase_208)
-}
-
-///|
 /// NowhereDense
 fn step_400() -> Unit raise {
-  nowheredense_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (Interior α (Closure α s) = ∅ ⇔\n    ∀t. open_in α t ∧ ¬(t = ∅)  ⇒\n    ∃u. open_in α u ∧ ¬(u = ∅) ∧ u ⊂ t ∧ u ∩ s = ∅)\n\n  proof\n    intro_TAC ∀α s, H1;\n    simplify H1 ClosureTopspace InteriorEqEmptyAlt;\n    eq_tac     [Left]\n    proof\n      intro_TAC H2, ∀[t], tOpen tNonempty;\n      exists_TAC t ━ Closure α s;\n      fol tOpen H1 ClosedClosure OPEN_IN_DIFF tOpen tNonempty H2 SUBSET_DIFF H1 ClosureSubset\n      SET_RULE [∀s t A.  s ⊂ t  ⇒  (A ━ t) ∩ s = ∅];\n    qed;\n    intro_TAC H2, ∀[t], tOpen tNonempty;\n    consider u such that\n    open_in α u ∧ ¬(u = ∅) ∧ u ⊂ t ∧ u ∩ s = ∅     [uExists] by simplify tOpen tNonempty H2;\n    MP_TAC ISPECL [α; u; s] OpenInterClosureEqEmpty;\n    simplify uExists OPEN_IN_SUBSET H1;\n    set uExists;\n  qed;\n")))
+  nowheredense_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (Interior alpha (Closure alpha s) = {} <=>\n    forall t. open_in alpha t /\\  ~(t = {})  ==>\n    ?u. open_in alpha u /\\  ~(u = {}) /\\  u SUBSET t /\\  u INTER s = {})",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, H1"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("InteriorEqEmptyAlt", () => interioreqemptyalt()),
+          ],
+        ),
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.intro_tac("H2, forall [t], tOpen tNonempty"),
+              @readable.exists("t DIFF Closure alpha s"),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("tOpen"),
+                  @readable.Label("H1"),
+                  @readable.Thm("ClosedClosure", () => closedclosure()),
+                  @readable.Thm("OPEN_IN_DIFF", () => open_in_diff()),
+                  @readable.Label("tOpen"),
+                  @readable.Label("tNonempty"),
+                  @readable.Label("H2"),
+                  @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+                  @readable.Label("H1"),
+                  @readable.Thm("ClosureSubset", () => closuresubset()),
+                  @readable.TermRule(
+                    @sets.set_rule,
+                    "forall s t A.  s SUBSET t  ==>  (A DIFF t) INTER s = {}",
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.intro_tac("H2, forall [t], tOpen tNonempty"),
+        @readable.consider(
+          "u",
+          "open_in alpha u /\\  ~(u = {}) /\\  u SUBSET t /\\  u INTER s = {}    ",
+          "uExists",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Label("tOpen"),
+              @readable.Label("tNonempty"),
+              @readable.Label("H2"),
+            ],
+          ),
+        ),
+        @readable.by_thm(
+          th => @tactics.mp_tac(th),
+          @readable.TermsRule(
+            tms => th => @bool.ispecl(tms, th),
+            ["alpha", " u", " s"],
+            @readable.Thm("OpenInterClosureEqEmpty", () => openinterclosureeqempty()),
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("uExists"),
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Label("H1"),
+          ],
+        ),
+        @readable.by(@readable.set, [@readable.Label("uExists")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6217,41 +7878,213 @@ pub fn nowheredense() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_209`
-pub fn exec_phrase_209(x218 : Unit) -> Unit raise {
-  let _ = x218
-  {
-    @readable.thm_ref().val = interioreqemptyalt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorEqEmptyAlt): thm);;
-fn step_401() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorEqEmptyAlt): thm);;", exec_phrase_209)
-}
-
-///|
-/// `exec_phrase_210`
-pub fn exec_phrase_210(x219 : Unit) -> Unit raise {
-  let _ = x219
-  {
-    @readable.thm_ref().val = openinterclosureeqempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInterClosureEqEmpty): thm);;
-fn step_402() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInterClosureEqEmpty): thm);;", exec_phrase_210)
-}
-
-///|
 /// InteriorClosureInterOpen
 fn step_403() -> Unit raise {
-  interiorclosureinteropen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  open_in α s ∧ open_in α t  ⇒\n    Interior α (Closure α (s ∩ t)) =\n    Interior α (Closure α s) ∩ Interior α (Closure α t)\n\n  proof\n    intro_TAC ∀α s t, sOpen tOpen;\n    s ⊂ topspace α     [sTop] by fol sOpen OPEN_IN_SUBSET;\n    t ⊂ topspace α     [tTop] by fol tOpen OPEN_IN_SUBSET;\n    rewrite SET_RULE [∀s t u. u = s ∩ t  ⇔  s ∩ t ⊂ u ∧ u ⊂ s ∧ u ⊂ t];\n    simplify sTop tTop INTER_SUBSET SubsetClosure ClosureTopspace SubsetInterior;\n    s ∩ t ⊂ topspace α     [stTop] by fol INTER_SUBSET sTop SUBSET_TRANS;\n    Closure α s ⊂ topspace α  ∧  Closure α t ⊂ topspace α     [CsCtTop] by fol sTop tTop ClosureTopspace;\n    Closure α s ∩ Closure α t ⊂ topspace α     [CsIntCtTop] by fol - INTER_SUBSET SUBSET_TRANS;\n    Closure α s ━ s ∪ Closure α t ━ t  ⊂  topspace α     [Cs_sUNIONCt_tTop] by fol CsCtTop SUBSET_DIFF UNION_SUBSET SUBSET_TRANS;\n    simplify CsCtTop GSYM InteriorInter;\n    Interior α (Closure α s ∩ Closure α t) ⊂ Closure α (s ∩ t)     []\n    proof\n      simplify CsIntCtTop InteriorTopspace ISPECL [topspace α] COMPLEMENT_DISJOINT stTop ClosureTopspace GSYM ClosureComplement GSYM InteriorComplement CsIntCtTop SUBSET_DIFF GSYM InteriorInter;\n      closed_in α (Closure α s ━ s) ∧ closed_in α (Closure α t ━ t)     [] by fol sTop tTop ClosedClosure sOpen tOpen CLOSED_IN_DIFF;\n      Interior α (Closure α s ━ s ∪ Closure α t ━ t) = ∅     [IntEmpty] by fol Cs_sUNIONCt_tTop - sTop tTop InteriorClosureDiffSpaceEmpty InteriorUnionEqEmpty;\n      Closure α s ∩ Closure α t ∩ (topspace α ━ (s ∩ t))  ⊂\n      Closure α s ━ s ∪ Closure α t ━ t     [] by set;\n      fol Cs_sUNIONCt_tTop - SubsetInterior IntEmpty INTER_ACI SUBSET_EMPTY;\n    qed;\n    fol stTop ClosureTopspace - CsIntCtTop OpenInterior InteriorMaximal;\n  qed;\n")))
+  interiorclosureinteropen_c.set(@readable.prove(
+    "\n  forall alpha s t.  open_in alpha s /\\  open_in alpha t  ==>\n    Interior alpha (Closure alpha (s INTER t)) =\n    Interior alpha (Closure alpha s) INTER Interior alpha (Closure alpha t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sOpen tOpen"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha",
+          "sTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sOpen"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    t SUBSET topspace alpha",
+          "tTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tOpen"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.TermRule(
+              @sets.set_rule,
+              "forall s t u. u = s INTER t  <=>  s INTER t SUBSET u /\\  u SUBSET s /\\  u SUBSET t",
+            ),
+          ],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("sTop"),
+            @readable.Label("tTop"),
+            @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            @readable.Thm("SubsetClosure", () => subsetclosure()),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("SubsetInterior", () => subsetinterior()),
+          ],
+        ),
+        @readable.have(
+          "\n    s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Label("sTop"),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Closure alpha s SUBSET topspace alpha  /\\   Closure alpha t SUBSET topspace alpha",
+          "CsCtTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Label("tTop"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Closure alpha s INTER Closure alpha t SUBSET topspace alpha",
+          "CsIntCtTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Closure alpha s DIFF s UNION Closure alpha t DIFF t  SUBSET  topspace alpha",
+          "Cs_sUNIONCt_tTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("CsCtTop"),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("CsCtTop"),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("InteriorInter", () => interiorinter()),
+            ),
+          ],
+        ),
+        @readable.have(
+          "\n    Interior alpha (Closure alpha s INTER Closure alpha t) SUBSET Closure alpha (s INTER t)",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("CsIntCtTop"),
+                  @readable.Thm("InteriorTopspace", () => interiortopspace()),
+                  @readable.TermsRule(
+                    tms => th => @bool.ispecl(tms, th),
+                    ["topspace alpha"],
+                    @readable.Thm("COMPLEMENT_DISJOINT", () => complement_disjoint()),
+                  ),
+                  @readable.Label("stTop"),
+                  @readable.Thm("ClosureTopspace", () => closuretopspace()),
+                  @readable.Rule(
+                    @equal.gsym,
+                    @readable.Thm("ClosureComplement", () => closurecomplement()),
+                  ),
+                  @readable.Rule(
+                    @equal.gsym,
+                    @readable.Thm("InteriorComplement", () => interiorcomplement()),
+                  ),
+                  @readable.Label("CsIntCtTop"),
+                  @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+                  @readable.Rule(
+                    @equal.gsym,
+                    @readable.Thm("InteriorInter", () => interiorinter()),
+                  ),
+                ],
+              ),
+              @readable.have(
+                "\n      closed_in alpha (Closure alpha s DIFF s) /\\  closed_in alpha (Closure alpha t DIFF t)",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("sTop"),
+                    @readable.Label("tTop"),
+                    @readable.Thm("ClosedClosure", () => closedclosure()),
+                    @readable.Label("sOpen"),
+                    @readable.Label("tOpen"),
+                    @readable.Thm("CLOSED_IN_DIFF", () => closed_in_diff()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Interior alpha (Closure alpha s DIFF s UNION Closure alpha t DIFF t) = {}",
+                "IntEmpty",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.Label("Cs_sUNIONCt_tTop"),
+                    @readable.Prev,
+                    @readable.Label("sTop"),
+                    @readable.Label("tTop"),
+                    @readable.Thm(
+                      "InteriorClosureDiffSpaceEmpty",
+                      () => interiorclosurediffspaceempty(),
+                    ),
+                    @readable.Thm("InteriorUnionEqEmpty", () => interiorunioneqempty()),
+                  ],
+                ),
+              ),
+              @readable.have(
+                "\n      Closure alpha s INTER Closure alpha t INTER (topspace alpha DIFF (s INTER t))  SUBSET\n      Closure alpha s DIFF s UNION Closure alpha t DIFF t",
+                "",
+                @readable.by(@readable.set, []),
+              ),
+              @readable.by(
+                @readable.fol,
+                [
+                  @readable.Label("Cs_sUNIONCt_tTop"),
+                  @readable.Prev,
+                  @readable.Thm("SubsetInterior", () => subsetinterior()),
+                  @readable.Label("IntEmpty"),
+                  @readable.Thm("INTER_ACI", () => @sets.inter_aci()),
+                  @readable.Thm("SUBSET_EMPTY", () => @sets.subset_empty()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("stTop"),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Prev,
+            @readable.Label("CsIntCtTop"),
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Thm("InteriorMaximal", () => interiormaximal()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6264,41 +8097,52 @@ pub fn interiorclosureinteropen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_211`
-pub fn exec_phrase_211(x220 : Unit) -> Unit raise {
-  let _ = x220
-  {
-    @readable.thm_ref().val = closed_in_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_DIFF): thm);;
-fn step_404() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_DIFF): thm);;", exec_phrase_211)
-}
-
-///|
-/// `exec_phrase_212`
-pub fn exec_phrase_212(x221 : Unit) -> Unit raise {
-  let _ = x221
-  {
-    @readable.thm_ref().val = interiorclosurediffspaceempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosureDiffSpaceEmpty): thm);;
-fn step_405() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosureDiffSpaceEmpty): thm);;", exec_phrase_212)
-}
-
-///|
 /// ClosureInteriorUnionClosed
 fn step_406() -> Unit raise {
-  closureinteriorunionclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.   closed_in α s ∧ closed_in α t ⇒\n    Closure α (Interior α (s ∪ t))  =\n    Closure α (Interior α s) ∪ Closure α (Interior α t)\n\n  proof\n    rewrite closed_in;\n    intro_TAC ∀α s t, sClosed tClosed;\n    simplify sClosed tClosed ClosureTopspace UNION_SUBSET InteriorTopspace ISPECL [topspace α] COMPLEMENT_DUALITY_UNION;\n    simplify sClosed tClosed UNION_SUBSET ClosureTopspace InteriorTopspace ClosureInteriorComplement DIFF_UNION SUBSET_DIFF InteriorClosureInterOpen;\n  qed;\n")))
+  closureinteriorunionclosed_c.set(@readable.prove(
+    "\n  forall alpha s t.   closed_in alpha s /\\  closed_in alpha t ==>\n    Closure alpha (Interior alpha (s UNION t))  =\n    Closure alpha (Interior alpha s) UNION Closure alpha (Interior alpha t)",
+    @readable.steps(
+      [
+        @readable.by(@readable.rewrite, [@readable.Thm("closed_in", () => closed_in())]),
+        @readable.intro_tac("forall alpha s t, sClosed tClosed"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("sClosed"),
+            @readable.Label("tClosed"),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            @readable.TermsRule(
+              tms => th => @bool.ispecl(tms, th),
+              ["topspace alpha"],
+              @readable.Thm(
+                "COMPLEMENT_DUALITY_UNION",
+                () => complement_duality_union(),
+              ),
+            ),
+          ],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("sClosed"),
+            @readable.Label("tClosed"),
+            @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            @readable.Thm(
+              "ClosureInteriorComplement",
+              () => closureinteriorcomplement(),
+            ),
+            @readable.Thm("DIFF_UNION", () => diff_union()),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("InteriorClosureInterOpen", () => interiorclosureinteropen()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6311,57 +8155,19 @@ pub fn closureinteriorunionclosed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_213`
-pub fn exec_phrase_213(x222 : Unit) -> Unit raise {
-  let _ = x222
-  {
-    @readable.thm_ref().val = complement_duality_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((COMPLEMENT_DUALITY_UNION): thm);;
-fn step_407() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((COMPLEMENT_DUALITY_UNION): thm);;", exec_phrase_213)
-}
-
-///|
-/// `exec_phrase_214`
-pub fn exec_phrase_214(x223 : Unit) -> Unit raise {
-  let _ = x223
-  {
-    @readable.thm_ref().val = closureinteriorcomplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureInteriorComplement): thm);;
-fn step_408() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureInteriorComplement): thm);;", exec_phrase_214)
-}
-
-///|
-/// `exec_phrase_215`
-pub fn exec_phrase_215(x224 : Unit) -> Unit raise {
-  let _ = x224
-  {
-    @readable.thm_ref().val = interiorclosureinteropen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosureInterOpen): thm);;
-fn step_409() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosureInterOpen): thm);;", exec_phrase_215)
-}
-
-///|
 /// RegularOpenInter
 fn step_410() -> Unit raise {
-  regularopeninter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    Interior α (Closure α s) = s ∧ Interior α (Closure α t) = t\n    ⇒ Interior α (Closure α (s ∩ t)) = s ∩ t\n  by fol ClosureTopspace OpenInterior InteriorClosureInterOpen")))
+  regularopeninter_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    Interior alpha (Closure alpha s) = s /\\  Interior alpha (Closure alpha t) = t\n    ==> Interior alpha (Closure alpha (s INTER t)) = s INTER t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("OpenInterior", () => openinterior()),
+        @readable.Thm("InteriorClosureInterOpen", () => interiorclosureinteropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6376,7 +8182,17 @@ pub fn regularopeninter() -> @kernel.Thm {
 ///|
 /// RegularClosedUnion
 fn step_411() -> Unit raise {
-  regularclosedunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    Closure α (Interior α s) = s  ∧  Closure α (Interior α t) = t\n    ⇒ Closure α (Interior α (s ∪ t)) = s ∪ t\n  by fol InteriorTopspace ClosureInteriorUnionClosed ClosedClosure")))
+  regularclosedunion_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    Closure alpha (Interior alpha s) = s  /\\   Closure alpha (Interior alpha t) = t\n    ==> Closure alpha (Interior alpha (s UNION t)) = s UNION t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("ClosureInteriorUnionClosed", () => closureinteriorunionclosed()),
+        @readable.Thm("ClosedClosure", () => closedclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6389,25 +8205,47 @@ pub fn regularclosedunion() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_216`
-pub fn exec_phrase_216(x225 : Unit) -> Unit raise {
-  let _ = x225
-  {
-    @readable.thm_ref().val = closureinteriorunionclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureInteriorUnionClosed): thm);;
-fn step_412() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureInteriorUnionClosed): thm);;", exec_phrase_216)
-}
-
-///|
 /// DiffClosureSubset
 fn step_413() -> Unit raise {
-  diffclosuresubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ⊂ topspace α ∧ t ⊂ topspace α  ⇒\n    Closure α s ━ Closure α t ⊂ Closure α (s ━ t)\n\n  proof\n    intro_TAC ∀α s t, sTop tTop;\n    Closure α s ━ Closure α t ⊂ Closure α (s ━ Closure α t)     [] by fol sTop ClosureTopspace tTop ClosedClosure tTop closed_in OpenInterClosureSubset INTER_COMM COMPLEMENT_INTER_DIFF;\n    fol - tTop ClosureSubset SUBSET_DUALITY sTop SUBSET_DIFF SUBSET_TRANS SubsetClosure;\n  qed;\n")))
+  diffclosuresubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s SUBSET topspace alpha /\\  t SUBSET topspace alpha  ==>\n    Closure alpha s DIFF Closure alpha t SUBSET Closure alpha (s DIFF t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, sTop tTop"),
+        @readable.have(
+          "\n    Closure alpha s DIFF Closure alpha t SUBSET Closure alpha (s DIFF Closure alpha t)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Label("tTop"),
+              @readable.Thm("ClosedClosure", () => closedclosure()),
+              @readable.Label("tTop"),
+              @readable.Thm("closed_in", () => closed_in()),
+              @readable.Thm("OpenInterClosureSubset", () => openinterclosuresubset()),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+              @readable.Thm("COMPLEMENT_INTER_DIFF", () => complement_inter_diff()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("tTop"),
+            @readable.Thm("ClosureSubset", () => closuresubset()),
+            @readable.Thm("SUBSET_DUALITY", () => subset_duality()),
+            @readable.Label("sTop"),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            @readable.Thm("SubsetClosure", () => subsetclosure()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6417,22 +8255,6 @@ let diffclosuresubset_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("DiffClosureSu
 /// `DiffClosureSubset`
 pub fn diffclosuresubset() -> @kernel.Thm {
   diffclosuresubset_c.get()
-}
-
-///|
-/// `exec_phrase_217`
-pub fn exec_phrase_217(x226 : Unit) -> Unit raise {
-  let _ = x226
-  {
-    @readable.thm_ref().val = subset_duality()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_DUALITY): thm);;
-fn step_414() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_DUALITY): thm);;", exec_phrase_217)
 }
 
 ///|
@@ -6453,7 +8275,10 @@ pub fn frontier_def() -> @kernel.Thm {
 ///|
 /// Frontier_THM
 fn step_416() -> Unit raise {
-  frontier_thm_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α s = Closure α s ━ Interior α s\n  by fol Frontier_DEF")))
+  frontier_thm_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha s = Closure alpha s DIFF Interior alpha s",
+    @readable.by(@readable.fol, [@readable.Thm("Frontier_DEF", () => frontier_def())]),
+  ))
 }
 
 ///|
@@ -6466,25 +8291,20 @@ pub fn frontier_thm() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_218`
-pub fn exec_phrase_218(x227 : Unit) -> Unit raise {
-  let _ = x227
-  {
-    @readable.thm_ref().val = frontier_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Frontier_DEF): thm);;
-fn step_417() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Frontier_DEF): thm);;", exec_phrase_218)
-}
-
-///|
 /// FrontierTopspace
 fn step_418() -> Unit raise {
-  frontiertopspace_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α s ⊂ topspace α\n  by fol Frontier_THM SUBSET_DIFF ClosureTopspace SUBSET_TRANS")))
+  frontiertopspace_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha s SUBSET topspace alpha",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6497,25 +8317,20 @@ pub fn frontiertopspace() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_219`
-pub fn exec_phrase_219(x228 : Unit) -> Unit raise {
-  let _ = x228
-  {
-    @readable.thm_ref().val = frontier_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((Frontier_THM): thm);;
-fn step_419() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((Frontier_THM): thm);;", exec_phrase_219)
-}
-
-///|
 /// FrontierClosed
 fn step_420() -> Unit raise {
-  frontierclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  closed_in α (Frontier α s)\n  by simplify Frontier_THM ClosedClosure OpenInterior CLOSED_IN_DIFF")))
+  frontierclosed_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  closed_in alpha (Frontier alpha s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("ClosedClosure", () => closedclosure()),
+        @readable.Thm("OpenInterior", () => openinterior()),
+        @readable.Thm("CLOSED_IN_DIFF", () => closed_in_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6530,7 +8345,22 @@ pub fn frontierclosed() -> @kernel.Thm {
 ///|
 /// FrontierClosures
 fn step_421() -> Unit raise {
-  frontierclosures_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  s ⊂ topspace α  ⇒\n    Frontier α s  =  (Closure α s) ∩ (Closure α (topspace α ━ s))\n  by simplify SET_RULE [∀A s t.  s ⊂ A ∧ t ⊂ A   ⇒  s ━ (A ━ t) = s ∩ t] Frontier_THM InteriorClosure ClosureTopspace SUBSET_DIFF")))
+  frontierclosures_c.set(@readable.prove(
+    "\n  forall s.  s SUBSET topspace alpha  ==>\n    Frontier alpha s  =  (Closure alpha s) INTER (Closure alpha (topspace alpha DIFF s))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.TermRule(
+          @sets.set_rule,
+          "forall A s t.  s SUBSET A /\\  t SUBSET A   ==>  s DIFF (A DIFF t) = s INTER t",
+        ),
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("InteriorClosure", () => interiorclosure()),
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6545,7 +8375,31 @@ pub fn frontierclosures() -> @kernel.Thm {
 ///|
 /// FrontierStraddle
 fn step_422() -> Unit raise {
-  frontierstraddle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α a s.  s ⊂ topspace α  ⇒  (a ∈ Frontier α s  ⇔\n    a ∈ topspace α  ∧  ∀t. open_in α t ∧ a ∈ t  ⇒\n    (∃x. x ∈ s ∧ x ∈ t)  ∧  (∃x. ¬(x ∈ s) ∧ x ∈ t))\n\n  proof\n    simplify SUBSET_DIFF FrontierClosures IN_INTER SUBSET_DIFF IN_Closure IN_DIFF;\n    fol OPEN_IN_SUBSET SUBSET;\n  qed;\n")))
+  frontierstraddle_c.set(@readable.prove(
+    "\n  forall alpha a s.  s SUBSET topspace alpha  ==>  (a IN Frontier alpha s  <=>\n    a IN topspace alpha  /\\   forall t. open_in alpha t /\\  a IN t  ==>\n    (?x. x IN s /\\  x IN t)  /\\   (?x. ~(x IN s) /\\  x IN t))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("FrontierClosures", () => frontierclosures()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("IN_Closure", () => in_closure()),
+            @readable.Thm("IN_DIFF", () => @sets.in_diff()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6558,25 +8412,20 @@ pub fn frontierstraddle() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_220`
-pub fn exec_phrase_220(x229 : Unit) -> Unit raise {
-  let _ = x229
-  {
-    @readable.thm_ref().val = frontierclosures()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierClosures): thm);;
-fn step_423() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierClosures): thm);;", exec_phrase_220)
-}
-
-///|
 /// FrontierSubsetClosed
 fn step_424() -> Unit raise {
-  frontiersubsetclosed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  closed_in α s  ⇒  (Frontier α s) ⊂ s\n  by fol closed_in Frontier_THM ClosureClosed SUBSET_DIFF")))
+  frontiersubsetclosed_c.set(@readable.prove(
+    "\n  forall alpha s.  closed_in alpha s  ==>  (Frontier alpha s) SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("ClosureClosed", () => closureclosed()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6591,7 +8440,18 @@ pub fn frontiersubsetclosed() -> @kernel.Thm {
 ///|
 /// FrontierEmpty
 fn step_425() -> Unit raise {
-  frontierempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α.  Frontier α ∅ = ∅\n  by fol Frontier_THM EMPTY_SUBSET ClosureEmpty EMPTY_DIFF")))
+  frontierempty_c.set(@readable.prove(
+    "\n  forall alpha.  Frontier alpha {} = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("EMPTY_SUBSET", () => @sets.empty_subset()),
+        @readable.Thm("ClosureEmpty", () => closureempty()),
+        @readable.Thm("EMPTY_DIFF", () => @sets.empty_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6604,25 +8464,20 @@ pub fn frontierempty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_221`
-pub fn exec_phrase_221(x230 : Unit) -> Unit raise {
-  let _ = x230
-  {
-    @readable.thm_ref().val = @sets.empty_diff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EMPTY_DIFF): thm);;
-fn step_426() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EMPTY_DIFF): thm);;", exec_phrase_221)
-}
-
-///|
 /// FrontierUniv
 fn step_427() -> Unit raise {
-  frontieruniv_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α. Frontier α (topspace α) = ∅\n  by fol Frontier_DEF ClosureUniv InteriorUniv DIFF_EQ_EMPTY")))
+  frontieruniv_c.set(@readable.prove(
+    "\n  forall alpha. Frontier alpha (topspace alpha) = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("Frontier_DEF", () => frontier_def()),
+        @readable.Thm("ClosureUniv", () => closureuniv()),
+        @readable.Thm("InteriorUniv", () => interioruniv()),
+        @readable.Thm("DIFF_EQ_EMPTY", () => @sets.diff_eq_empty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6635,41 +8490,39 @@ pub fn frontieruniv() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_222`
-pub fn exec_phrase_222(x231 : Unit) -> Unit raise {
-  let _ = x231
-  {
-    @readable.thm_ref().val = closureuniv()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureUniv): thm);;
-fn step_428() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureUniv): thm);;", exec_phrase_222)
-}
-
-///|
-/// `exec_phrase_223`
-pub fn exec_phrase_223(x232 : Unit) -> Unit raise {
-  let _ = x232
-  {
-    @readable.thm_ref().val = interioruniv()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorUniv): thm);;
-fn step_429() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorUniv): thm);;", exec_phrase_223)
-}
-
-///|
 /// FrontierSubsetEq
 fn step_430() -> Unit raise {
-  frontiersubseteq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  ((Frontier α s) ⊂ s ⇔ closed_in α s)\n\n  proof\n    intro_TAC ∀α s, sTop;\n    eq_tac     [Right] by fol FrontierSubsetClosed;\n    simplify sTop Frontier_THM ;\n    fol sTop InteriorSubset SET_RULE [∀s t u. s ━ t ⊂ u ∧ t ⊂ u ⇒ s ⊂ u] ClosureSubsetEq;\n  qed;\n")))
+  frontiersubseteq_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  ((Frontier alpha s) SUBSET s <=> closed_in alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.eq_tac(
+          "Right",
+          @readable.by(
+            @readable.fol,
+            [@readable.Thm("FrontierSubsetClosed", () => frontiersubsetclosed())],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [@readable.Label("sTop"), @readable.Thm("Frontier_THM", () => frontier_thm())],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("sTop"),
+            @readable.Thm("InteriorSubset", () => interiorsubset()),
+            @readable.TermRule(
+              @sets.set_rule,
+              "forall s t u. s DIFF t SUBSET u /\\  t SUBSET u ==> s SUBSET u",
+            ),
+            @readable.Thm("ClosureSubsetEq", () => closuresubseteq()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6682,41 +8535,38 @@ pub fn frontiersubseteq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_224`
-pub fn exec_phrase_224(x233 : Unit) -> Unit raise {
-  let _ = x233
-  {
-    @readable.thm_ref().val = frontiersubsetclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierSubsetClosed): thm);;
-fn step_431() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierSubsetClosed): thm);;", exec_phrase_224)
-}
-
-///|
-/// `exec_phrase_225`
-pub fn exec_phrase_225(x234 : Unit) -> Unit raise {
-  let _ = x234
-  {
-    @readable.thm_ref().val = closuresubseteq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureSubsetEq): thm);;
-fn step_432() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureSubsetEq): thm);;", exec_phrase_225)
-}
-
-///|
 /// FrontierComplement
 fn step_433() -> Unit raise {
-  frontiercomplement_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α (topspace α ━ s) = Frontier α s\n\n  proof\n    intro_TAC ∀α s, sTop;\n    simplify sTop SUBSET_DIFF Frontier_THM ClosureComplement InteriorComplement;\n    fol sTop InteriorTopspace ClosureTopspace SET_RULE [∀ Top Int Clo.\n    Int ⊂ Top ∧ Clo ⊂ Top  ⇒  Top ━ Int ━ (Top ━ Clo) = Clo ━ Int];\n  qed;\n")))
+  frontiercomplement_v1_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha (topspace alpha DIFF s) = Frontier alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("sTop"),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+            @readable.Thm("ClosureComplement", () => closurecomplement()),
+            @readable.Thm("InteriorComplement", () => interiorcomplement()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("sTop"),
+            @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.TermRule(
+              @sets.set_rule,
+              "forall  Top Int Clo.\n    Int SUBSET Top /\\  Clo SUBSET Top  ==>  Top DIFF Int DIFF (Top DIFF Clo) = Clo DIFF Int",
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6731,7 +8581,36 @@ pub fn frontiercomplement_v1() -> @kernel.Thm {
 ///|
 /// FrontierComplement
 fn step_434() -> Unit raise {
-  frontiercomplement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α (topspace α ━ s) = Frontier α s\n\n  proof\n    intro_TAC ∀α s, sTop;\n    simplify sTop SUBSET_DIFF Frontier_THM ClosureComplement InteriorComplement;\n    fol sTop InteriorTopspace ClosureTopspace SET_RULE [∀ Top Int Clo.\n    Int ⊂ Top ∧ Clo ⊂ Top  ⇒  Top ━ Int ━ (Top ━ Clo) = Clo ━ Int];\n  qed;\n")))
+  frontiercomplement_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha (topspace alpha DIFF s) = Frontier alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("sTop"),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+            @readable.Thm("ClosureComplement", () => closurecomplement()),
+            @readable.Thm("InteriorComplement", () => interiorcomplement()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("sTop"),
+            @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.TermRule(
+              @sets.set_rule,
+              "forall  Top Int Clo.\n    Int SUBSET Top /\\  Clo SUBSET Top  ==>  Top DIFF Int DIFF (Top DIFF Clo) = Clo DIFF Int",
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6746,7 +8625,48 @@ pub fn frontiercomplement() -> @kernel.Thm {
 ///|
 /// FrontierDisjointEq
 fn step_435() -> Unit raise {
-  frontierdisjointeq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α   ⇒  ((Frontier α s) ∩ s = ∅  ⇔  open_in α s)\n\n  proof\n    intro_TAC ∀α s, sTop;\n    topspace α ━ s ⊂ topspace α     [COMPsTop] by fol sTop SUBSET_DIFF;\n    simplify sTop GSYM FrontierComplement OPEN_IN_CLOSED_IN;\n    fol COMPsTop GSYM FrontierSubsetEq FrontierTopspace SUBSET_COMPLEMENT;\n  qed;\n")))
+  frontierdisjointeq_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha   ==>  ((Frontier alpha s) INTER s = {}  <=>  open_in alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.have(
+          "\n    topspace alpha DIFF s SUBSET topspace alpha",
+          "COMPsTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("sTop"),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("FrontierComplement", () => frontiercomplement()),
+            ),
+            @readable.Thm("OPEN_IN_CLOSED_IN", () => open_in_closed_in()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("COMPsTop"),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("FrontierSubsetEq", () => frontiersubseteq()),
+            ),
+            @readable.Thm("FrontierTopspace", () => frontiertopspace()),
+            @readable.Thm("SUBSET_COMPLEMENT", () => subset_complement()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6759,57 +8679,42 @@ pub fn frontierdisjointeq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_226`
-pub fn exec_phrase_226(x235 : Unit) -> Unit raise {
-  let _ = x235
-  {
-    @readable.thm_ref().val = frontiercomplement()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierComplement): thm);;
-fn step_436() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierComplement): thm);;", exec_phrase_226)
-}
-
-///|
-/// `exec_phrase_227`
-pub fn exec_phrase_227(x236 : Unit) -> Unit raise {
-  let _ = x236
-  {
-    @readable.thm_ref().val = frontiersubseteq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierSubsetEq): thm);;
-fn step_437() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierSubsetEq): thm);;", exec_phrase_227)
-}
-
-///|
-/// `exec_phrase_228`
-pub fn exec_phrase_228(x237 : Unit) -> Unit raise {
-  let _ = x237
-  {
-    @readable.thm_ref().val = frontiertopspace()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierTopspace): thm);;
-fn step_438() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierTopspace): thm);;", exec_phrase_228)
-}
-
-///|
 /// FrontierInterSubset
 fn step_439() -> Unit raise {
-  frontierintersubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒  Frontier α (s ∩ t)  ⊂  Frontier α s ∪ Frontier α t\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [] by fol H1 SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    simplify - Frontier_THM InteriorInter DIFF_INTER INTER_SUBSET SubsetClosure DIFF_SUBSET UNION_TENSOR;\n  qed;\n")))
+  frontierintersubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>  Frontier alpha (s INTER t)  SUBSET  Frontier alpha s UNION Frontier alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Prev,
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+            @readable.Thm("InteriorInter", () => interiorinter()),
+            @readable.Thm("DIFF_INTER", () => diff_inter()),
+            @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            @readable.Thm("SubsetClosure", () => subsetclosure()),
+            @readable.Thm("DIFF_SUBSET", () => diff_subset()),
+            @readable.Thm("UNION_TENSOR", () => union_tensor()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6822,41 +8727,59 @@ pub fn frontierintersubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_229`
-pub fn exec_phrase_229(x238 : Unit) -> Unit raise {
-  let _ = x238
-  {
-    @readable.thm_ref().val = diff_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_INTER): thm);;
-fn step_440() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_INTER): thm);;", exec_phrase_229)
-}
-
-///|
-/// `exec_phrase_230`
-pub fn exec_phrase_230(x239 : Unit) -> Unit raise {
-  let _ = x239
-  {
-    @readable.thm_ref().val = diff_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIFF_SUBSET): thm);;
-fn step_441() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIFF_SUBSET): thm);;", exec_phrase_230)
-}
-
-///|
 /// FrontierUnionSubset
 fn step_442() -> Unit raise {
-  frontierunionsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    Frontier α (s ∪ t)  ⊂  Frontier α s ∪ Frontier α t\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION SUBSET_TRANS;\n    simplify H1 - GSYM FrontierComplement DIFF_UNION;\n    topspace α ━ s ∪ topspace α ━ t ⊂ topspace α     [] by fol SUBSET_DIFF UNION_SUBSET SUBSET_TRANS;\n    fol - FrontierInterSubset;\n  qed;\n")))
+  frontierunionsubset_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    Frontier alpha (s UNION t)  SUBSET  Frontier alpha s UNION Frontier alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Prev,
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("FrontierComplement", () => frontiercomplement()),
+            ),
+            @readable.Thm("DIFF_UNION", () => diff_union()),
+          ],
+        ),
+        @readable.have(
+          "\n    topspace alpha DIFF s UNION topspace alpha DIFF t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("FrontierInterSubset", () => frontierintersubset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6869,25 +8792,20 @@ pub fn frontierunionsubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_231`
-pub fn exec_phrase_231(x240 : Unit) -> Unit raise {
-  let _ = x240
-  {
-    @readable.thm_ref().val = frontierintersubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierInterSubset): thm);;
-fn step_443() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierInterSubset): thm);;", exec_phrase_231)
-}
-
-///|
 /// FrontierInteriors
 fn step_444() -> Unit raise {
-  frontierinteriors_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    Frontier α s = topspace α ━ Interior α s ━ Interior α (topspace α ━ s)\n  by simplify Frontier_THM ClosureInterior DOUBLE_DIFF_UNION UNION_COMM")))
+  frontierinteriors_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    Frontier alpha s = topspace alpha DIFF Interior alpha s DIFF Interior alpha (topspace alpha DIFF s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("ClosureInterior", () => closureinterior()),
+        @readable.Thm("DOUBLE_DIFF_UNION", () => double_diff_union()),
+        @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6900,25 +8818,21 @@ pub fn frontierinteriors() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_232`
-pub fn exec_phrase_232(x241 : Unit) -> Unit raise {
-  let _ = x241
-  {
-    @readable.thm_ref().val = double_diff_union()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DOUBLE_DIFF_UNION): thm);;
-fn step_445() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DOUBLE_DIFF_UNION): thm);;", exec_phrase_232)
-}
-
-///|
 /// FrontierFrontierSubset
 fn step_446() -> Unit raise {
-  frontierfrontiersubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α (Frontier α s) ⊂ Frontier α s\n  by fol FrontierTopspace Frontier_THM FrontierClosed ClosureClosed SUBSET_DIFF")))
+  frontierfrontiersubset_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha (Frontier alpha s) SUBSET Frontier alpha s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("FrontierTopspace", () => frontiertopspace()),
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("FrontierClosed", () => frontierclosed()),
+        @readable.Thm("ClosureClosed", () => closureclosed()),
+        @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6931,25 +8845,55 @@ pub fn frontierfrontiersubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_233`
-pub fn exec_phrase_233(x242 : Unit) -> Unit raise {
-  let _ = x242
-  {
-    @readable.thm_ref().val = frontierclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierClosed): thm);;
-fn step_447() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierClosed): thm);;", exec_phrase_233)
-}
-
-///|
 /// InteriorFrontier
 fn step_448() -> Unit raise {
-  interiorfrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Interior α (Frontier α s)  =\n    Interior α (Closure α s) ━ Closure α (Interior α s)\n\n  proof\n    intro_TAC ∀α s, sTop;\n    Frontier α s = Closure α s ∩ (topspace α ━ Interior α s)     [] by fol sTop Frontier_THM ClosureTopspace COMPLEMENT_INTER_DIFF;\n    Interior α (Frontier α s)  =\n    Interior α (Closure α s) ∩ (topspace α ━ Closure α (Interior α s))     [] by fol - sTop ClosureTopspace InteriorTopspace SUBSET_DIFF InteriorInter InteriorComplement;\n    fol - sTop ClosureTopspace InteriorTopspace COMPLEMENT_INTER_DIFF;\n  qed;\n")))
+  interiorfrontier_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Interior alpha (Frontier alpha s)  =\n    Interior alpha (Closure alpha s) DIFF Closure alpha (Interior alpha s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.have(
+          "\n    Frontier alpha s = Closure alpha s INTER (topspace alpha DIFF Interior alpha s)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("Frontier_THM", () => frontier_thm()),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Thm("COMPLEMENT_INTER_DIFF", () => complement_inter_diff()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Interior alpha (Frontier alpha s)  =\n    Interior alpha (Closure alpha s) INTER (topspace alpha DIFF Closure alpha (Interior alpha s))",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Label("sTop"),
+              @readable.Thm("ClosureTopspace", () => closuretopspace()),
+              @readable.Thm("InteriorTopspace", () => interiortopspace()),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("InteriorInter", () => interiorinter()),
+              @readable.Thm("InteriorComplement", () => interiorcomplement()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("sTop"),
+            @readable.Thm("ClosureTopspace", () => closuretopspace()),
+            @readable.Thm("InteriorTopspace", () => interiortopspace()),
+            @readable.Thm("COMPLEMENT_INTER_DIFF", () => complement_inter_diff()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6964,7 +8908,24 @@ pub fn interiorfrontier() -> @kernel.Thm {
 ///|
 /// InteriorFrontierEmpty
 fn step_449() -> Unit raise {
-  interiorfrontierempty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  open_in α s ∨ closed_in α s  ⇒  Interior α (Frontier α s) = ∅\n  by fol InteriorFrontier SET_RULE [∀s t. s ━ t = ∅ ⇔ s ⊂ t] OPEN_IN_SUBSET closed_in\n  InteriorOpen ClosureTopspace InteriorSubset\n  ClosureClosed InteriorTopspace ClosureSubset")))
+  interiorfrontierempty_c.set(@readable.prove(
+    "\n  forall alpha s.  open_in alpha s \\/ closed_in alpha s  ==>  Interior alpha (Frontier alpha s) = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("InteriorFrontier", () => interiorfrontier()),
+        @readable.TermRule(@sets.set_rule, "forall s t. s DIFF t = {} <=> s SUBSET t"),
+        @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("InteriorOpen", () => interioropen()),
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+        @readable.Thm("ClosureClosed", () => closureclosed()),
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -6977,25 +8938,52 @@ pub fn interiorfrontierempty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_234`
-pub fn exec_phrase_234(x243 : Unit) -> Unit raise {
-  let _ = x243
-  {
-    @readable.thm_ref().val = interiorfrontier()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorFrontier): thm);;
-fn step_450() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorFrontier): thm);;", exec_phrase_234)
-}
-
-///|
 /// FrontierFrontier
 fn step_451() -> Unit raise {
-  frontierfrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  open_in α s ∨ closed_in α s  ⇒\n    Frontier α (Frontier α s) = Frontier α s\n\n  proof\n    intro_TAC ∀α s, openORclosed;\n    s ⊂ topspace α     [sTop] by fol openORclosed OPEN_IN_SUBSET closed_in;\n    Frontier α (Frontier α s) = Closure α (Frontier α s)     [] by fol sTop FrontierTopspace Frontier_THM openORclosed InteriorFrontierEmpty DIFF_EMPTY;\n    fol - sTop FrontierClosed ClosureClosed;\n  qed;\n")))
+  frontierfrontier_c.set(@readable.prove(
+    "\n  forall alpha s.  open_in alpha s \\/ closed_in alpha s  ==>\n    Frontier alpha (Frontier alpha s) = Frontier alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, openORclosed"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha",
+          "sTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("openORclosed"),
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+              @readable.Thm("closed_in", () => closed_in()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha (Frontier alpha s) = Closure alpha (Frontier alpha s)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("FrontierTopspace", () => frontiertopspace()),
+              @readable.Thm("Frontier_THM", () => frontier_thm()),
+              @readable.Label("openORclosed"),
+              @readable.Thm("InteriorFrontierEmpty", () => interiorfrontierempty()),
+              @readable.Thm("DIFF_EMPTY", () => @sets.diff_empty()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("sTop"),
+            @readable.Thm("FrontierClosed", () => frontierclosed()),
+            @readable.Thm("ClosureClosed", () => closureclosed()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7008,25 +8996,112 @@ pub fn frontierfrontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_235`
-pub fn exec_phrase_235(x244 : Unit) -> Unit raise {
-  let _ = x244
-  {
-    @readable.thm_ref().val = interiorfrontierempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorFrontierEmpty): thm);;
-fn step_452() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorFrontierEmpty): thm);;", exec_phrase_235)
-}
-
-///|
 /// UnionFrontierPart1
 fn step_453() -> Unit raise {
-  unionfrontierpart1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    Frontier α s ∩ Interior α t  ⊂  Frontier  α (s ∩ t)\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    rewrite SUBSET IN_INTER;\n    intro_TAC ∀[a], aFs aIt;\n    consider O such that\n    open_in α O ∧ a ∈ O ∧ O ⊂ t     [aOs] by fol aIt stTop IN_Interior;\n    a ∈ topspace α     [] by fol stTop aFs FrontierTopspace SUBSET;\n    simplify stTop FrontierStraddle -;\n    intro_TAC ∀[P], Popen aP;\n    a ∈ O ∩ P ∧ open_in α (O ∩ P)     [aOPopen] by fol aOs aP IN_INTER Popen OPEN_IN_INTER;\n    consider x y such that\n    x ∈ s ∧ x ∈ O ∩ P ∧ ¬(y ∈ s) ∧ y ∈ O ∩ P     [xExists] by fol aOs Popen OPEN_IN_INTER aOPopen stTop aFs FrontierStraddle;\n    fol xExists aOs IN_INTER SUBSET;\n  qed;\n")))
+  unionfrontierpart1_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    Frontier alpha s INTER Interior alpha t  SUBSET  Frontier  alpha (s INTER t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+          ],
+        ),
+        @readable.intro_tac("forall [a], aFs aIt"),
+        @readable.consider(
+          "O",
+          "open_in alpha O /\\  a IN O /\\  O SUBSET t    ",
+          "aOs",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("aIt"),
+              @readable.Label("stTop"),
+              @readable.Thm("IN_Interior", () => in_interior()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    a IN topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Label("aFs"),
+              @readable.Thm("FrontierTopspace", () => frontiertopspace()),
+              @readable.Thm("SUBSET", () => @sets.subset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("stTop"),
+            @readable.Thm("FrontierStraddle", () => frontierstraddle()),
+            @readable.Prev,
+          ],
+        ),
+        @readable.intro_tac("forall [P], Popen aP"),
+        @readable.have(
+          "\n    a IN O INTER P /\\  open_in alpha (O INTER P)",
+          "aOPopen",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("aOs"),
+              @readable.Label("aP"),
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+              @readable.Label("Popen"),
+              @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "x y",
+          "x IN s /\\  x IN O INTER P /\\  ~(y IN s) /\\  y IN O INTER P    ",
+          "xExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("aOs"),
+              @readable.Label("Popen"),
+              @readable.Thm("OPEN_IN_INTER", () => open_in_inter()),
+              @readable.Label("aOPopen"),
+              @readable.Label("stTop"),
+              @readable.Label("aFs"),
+              @readable.Thm("FrontierStraddle", () => frontierstraddle()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("xExists"),
+            @readable.Label("aOs"),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7039,25 +9114,70 @@ pub fn unionfrontierpart1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_236`
-pub fn exec_phrase_236(x245 : Unit) -> Unit raise {
-  let _ = x245
-  {
-    @readable.thm_ref().val = frontierstraddle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierStraddle): thm);;
-fn step_454() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierStraddle): thm);;", exec_phrase_236)
-}
-
-///|
 /// UnionFrontierPart2
 fn step_455() -> Unit raise {
-  unionfrontierpart2_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    Frontier α s ━ Frontier α t  ⊂\n    Frontier α (s ∩ t) ∪ Frontier α (s ∪ t)\n\n  proof\n    intro_TAC ∀α s t, stTop;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [] by fol stTop SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    Frontier α s ━ Frontier α t = Frontier α s ∩ Interior α t  ∪\n    Frontier α (topspace α ━ s) ∩ Interior α (topspace α ━ t)     [] by fol - FrontierTopspace FrontierInteriors FrontierComplement\n    SET_RULE [∀A s t u. s ⊂ A  ⇒  s ━ (A ━ t ━ u) = s ∩ t ∪ s ∩ u];\n    Frontier α s ━ Frontier α t  ⊂\n    Frontier α (s ∩ t) ∪  Frontier α (topspace α ━ (s ∪ t))     [] by simplify - stTop UnionFrontierPart1 UNION_TENSOR SUBSET_DIFF UNION_SUBSET DIFF_UNION;\n    fol - stTop FrontierComplement;\n  qed;\n")))
+  unionfrontierpart2_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    Frontier alpha s DIFF Frontier alpha t  SUBSET\n    Frontier alpha (s INTER t) UNION Frontier alpha (s UNION t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, stTop"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha s DIFF Frontier alpha t = Frontier alpha s INTER Interior alpha t  UNION\n    Frontier alpha (topspace alpha DIFF s) INTER Interior alpha (topspace alpha DIFF t)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("FrontierTopspace", () => frontiertopspace()),
+              @readable.Thm("FrontierInteriors", () => frontierinteriors()),
+              @readable.Thm("FrontierComplement", () => frontiercomplement()),
+              @readable.TermRule(
+                @sets.set_rule,
+                "forall A s t u. s SUBSET A  ==>  s DIFF (A DIFF t DIFF u) = s INTER t UNION s INTER u",
+              ),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha s DIFF Frontier alpha t  SUBSET\n    Frontier alpha (s INTER t) UNION  Frontier alpha (topspace alpha DIFF (s UNION t))",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Prev,
+              @readable.Label("stTop"),
+              @readable.Thm("UnionFrontierPart1", () => unionfrontierpart1()),
+              @readable.Thm("UNION_TENSOR", () => union_tensor()),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+              @readable.Thm("DIFF_UNION", () => diff_union()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("stTop"),
+            @readable.Thm("FrontierComplement", () => frontiercomplement()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7070,41 +9190,39 @@ pub fn unionfrontierpart2() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_237`
-pub fn exec_phrase_237(x246 : Unit) -> Unit raise {
-  let _ = x246
-  {
-    @readable.thm_ref().val = frontierinteriors()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierInteriors): thm);;
-fn step_456() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierInteriors): thm);;", exec_phrase_237)
-}
-
-///|
-/// `exec_phrase_238`
-pub fn exec_phrase_238(x247 : Unit) -> Unit raise {
-  let _ = x247
-  {
-    @readable.thm_ref().val = unionfrontierpart1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UnionFrontierPart1): thm);;
-fn step_457() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UnionFrontierPart1): thm);;", exec_phrase_238)
-}
-
-///|
 /// UnionFrontierPart3
 fn step_458() -> Unit raise {
-  unionfrontierpart3_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t a.  s ∪ t ⊂ topspace α  ⇒\n    a ∈ Frontier α s ∧ a ∉ Frontier α t  ⇒\n    a ∈ Frontier α (s ∩ t)  ∨  a ∈ Frontier α (s ∪ t)\n\n  proof\n    intro_TAC ∀α s t a, H1;\n    rewrite ∉ GSYM IN_INTER GSYM IN_DIFF GSYM IN_UNION;\n    fol H1 UnionFrontierPart2 SUBSET;\n  qed;\n")))
+  unionfrontierpart3_c.set(@readable.prove(
+    "\n  forall alpha s t a.  s UNION t SUBSET topspace alpha  ==>\n    a IN Frontier alpha s /\\  a NOTIN Frontier alpha t  ==>\n    a IN Frontier alpha (s INTER t)  \\/  a IN Frontier alpha (s UNION t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t a, H1"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("NOTIN", () => notin()),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            ),
+            @readable.Rule(@equal.gsym, @readable.Thm("IN_DIFF", () => @sets.in_diff())),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("IN_UNION", () => @sets.in_union()),
+            ),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("UnionFrontierPart2", () => unionfrontierpart2()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7117,25 +9235,72 @@ pub fn unionfrontierpart3() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_239`
-pub fn exec_phrase_239(x248 : Unit) -> Unit raise {
-  let _ = x248
-  {
-    @readable.thm_ref().val = unionfrontierpart2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UnionFrontierPart2): thm);;
-fn step_459() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UnionFrontierPart2): thm);;", exec_phrase_239)
-}
-
-///|
 /// UnionFrontier
 fn step_460() -> Unit raise {
-  unionfrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    Frontier α s ∪ Frontier α t =\n    Frontier α (s ∪ t) ∪ Frontier α (s ∩ t) ∪ Frontier α s ∩ Frontier α t\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    rewrite GSYM SUBSET_ANTISYM_EQ;\n    conj_tac     [Right] by fol SET_RULE [∀s t. s ∩ t ⊂ s ∪ t] stTop FrontierUnionSubset UNION_SUBSET FrontierInterSubset;\n    rewrite SUBSET IN_INTER IN_UNION;\n    fol H1 UnionFrontierPart3 INTER_COMM UNION_COMM ∉;\n  qed;\n")))
+  unionfrontier_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    Frontier alpha s UNION Frontier alpha t =\n    Frontier alpha (s UNION t) UNION Frontier alpha (s INTER t) UNION Frontier alpha s INTER Frontier alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("SUBSET_ANTISYM_EQ", () => @sets.subset_antisym_eq()),
+            ),
+          ],
+        ),
+        @readable.conj_tac(
+          "Right",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.TermRule(
+                @sets.set_rule,
+                "forall s t. s INTER t SUBSET s UNION t",
+              ),
+              @readable.Label("stTop"),
+              @readable.Thm("FrontierUnionSubset", () => frontierunionsubset()),
+              @readable.Thm("UNION_SUBSET", () => @sets.union_subset()),
+              @readable.Thm("FrontierInterSubset", () => frontierintersubset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+            @readable.Thm("IN_UNION", () => @sets.in_union()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("UnionFrontierPart3", () => unionfrontierpart3()),
+            @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+            @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+            @readable.Thm("NOTIN", () => notin()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7148,41 +9313,91 @@ pub fn unionfrontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_240`
-pub fn exec_phrase_240(x249 : Unit) -> Unit raise {
-  let _ = x249
-  {
-    @readable.thm_ref().val = frontierunionsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierUnionSubset): thm);;
-fn step_461() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierUnionSubset): thm);;", exec_phrase_240)
-}
-
-///|
-/// `exec_phrase_241`
-pub fn exec_phrase_241(x250 : Unit) -> Unit raise {
-  let _ = x250
-  {
-    @readable.thm_ref().val = unionfrontierpart3()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UnionFrontierPart3): thm);;
-fn step_462() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UnionFrontierPart3): thm);;", exec_phrase_241)
-}
-
-///|
 /// ConnectedInterFrontier
 fn step_463() -> Unit raise {
-  connectedinterfrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    Connected (subtopology α s) ∧ ¬(s ∩ t = ∅) ∧ ¬(s ━ t = ∅)\n    ⇒ ¬(s ∩ Frontier α t = ∅)\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION SUBSET_TRANS;\n    ONCE_REWRITE_TAC TAUT [∀a b c d. a ∧ b ∧ c ⇒ ¬d  ⇔  b ∧ c ∧ d ⇒ ¬a];\n    intro_TAC sINTERtNonempty sDIFFtNonempty sInterFtEmpty;\n    simplify stTop ConnectedOpenIn;\n    exists_TAC s ∩ Interior α t;\n    exists_TAC s ∩ Interior α (topspace α  ━  t);\n    simplify stTop SUBSET_DIFF OpenInterior OpenInOpenInter;\n    Interior α t ⊂ t  ∧  Interior α (topspace α ━ t) ⊂ topspace α ━ t     [IntSubs] by fol stTop SUBSET_DIFF InteriorSubset;\n    s  ⊂  Interior α t ∪ Interior α (topspace α ━ t)     [] by fol stTop sInterFtEmpty FrontierInteriors DOUBLE_DIFF_UNION COMPLEMENT_DISJOINT;\n    set sDIFFtNonempty sINTERtNonempty IntSubs -;\n  qed;\n")))
+  connectedinterfrontier_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    Connected (subtopology alpha s) /\\  ~(s INTER t = {}) /\\  ~(s DIFF t = {})\n    ==> ~(s INTER Frontier alpha t = {})",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @simp.once_rewrite_tac,
+          [
+            @readable.TermRule(
+              @class.taut,
+              "forall a b c d. a /\\  b /\\  c ==> ~d  <=>  b /\\  c /\\  d ==> ~a",
+            ),
+          ],
+        ),
+        @readable.intro_tac("sINTERtNonempty sDIFFtNonempty sInterFtEmpty"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("stTop"),
+            @readable.Thm("ConnectedOpenIn", () => connectedopenin()),
+          ],
+        ),
+        @readable.exists("s INTER Interior alpha t"),
+        @readable.exists("s INTER Interior alpha (topspace alpha  DIFF  t)"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("stTop"),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Thm("OpenInterior", () => openinterior()),
+            @readable.Thm("OpenInOpenInter", () => openinopeninter()),
+          ],
+        ),
+        @readable.have(
+          "\n    Interior alpha t SUBSET t  /\\   Interior alpha (topspace alpha DIFF t) SUBSET topspace alpha DIFF t",
+          "IntSubs",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Thm("InteriorSubset", () => interiorsubset()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    s  SUBSET  Interior alpha t UNION Interior alpha (topspace alpha DIFF t)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Label("sInterFtEmpty"),
+              @readable.Thm("FrontierInteriors", () => frontierinteriors()),
+              @readable.Thm("DOUBLE_DIFF_UNION", () => double_diff_union()),
+              @readable.Thm("COMPLEMENT_DISJOINT", () => complement_disjoint()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.set,
+          [
+            @readable.Label("sDIFFtNonempty"),
+            @readable.Label("sINTERtNonempty"),
+            @readable.Label("IntSubs"),
+            @readable.Prev,
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7195,25 +9410,42 @@ pub fn connectedinterfrontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_242`
-pub fn exec_phrase_242(x251 : Unit) -> Unit raise {
-  let _ = x251
-  {
-    @readable.thm_ref().val = openinopeninter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInOpenInter): thm);;
-fn step_464() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInOpenInter): thm);;", exec_phrase_242)
-}
-
-///|
 /// InteriorClosedEqEmptyAsFrontier
 fn step_465() -> Unit raise {
-  interiorclosedeqemptyasfrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒\n    (closed_in α s ∧ Interior α s = ∅  ⇔  ∃t. open_in α t ∧ s = Frontier α t)\n\n  proof\n    intro_TAC ∀α s, sTop;\n    eq_tac     [Right] by fol OPEN_IN_SUBSET FrontierClosed InteriorFrontierEmpty;\n    intro_TAC sClosed sEmptyInt;\n    exists_TAC topspace α ━ s;\n    fol sClosed closed_in sTop FrontierComplement Frontier_THM sEmptyInt DIFF_EMPTY ClosureClosed;\n  qed;\n")))
+  interiorclosedeqemptyasfrontier_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>\n    (closed_in alpha s /\\  Interior alpha s = {}  <=>  ?t. open_in alpha t /\\  s = Frontier alpha t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.eq_tac(
+          "Right",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("OPEN_IN_SUBSET", () => open_in_subset()),
+              @readable.Thm("FrontierClosed", () => frontierclosed()),
+              @readable.Thm("InteriorFrontierEmpty", () => interiorfrontierempty()),
+            ],
+          ),
+        ),
+        @readable.intro_tac("sClosed sEmptyInt"),
+        @readable.exists("topspace alpha DIFF s"),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("sClosed"),
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Label("sTop"),
+            @readable.Thm("FrontierComplement", () => frontiercomplement()),
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+            @readable.Label("sEmptyInt"),
+            @readable.Thm("DIFF_EMPTY", () => @sets.diff_empty()),
+            @readable.Thm("ClosureClosed", () => closureclosed()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7228,7 +9460,31 @@ pub fn interiorclosedeqemptyasfrontier() -> @kernel.Thm {
 ///|
 /// ClosureUnionFrontier
 fn step_466() -> Unit raise {
-  closureunionfrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Closure α s = s ∪ Frontier α s\n\n  proof\n    intro_TAC ∀α s, sTop;\n    simplify sTop Frontier_THM;\n    s ⊂ Closure α s ∧ Interior α s ⊂ s     [] by fol sTop ClosureSubset InteriorSubset;\n    set -;\n  qed;\n")))
+  closureunionfrontier_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Closure alpha s = s UNION Frontier alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.by(
+          @readable.simplify,
+          [@readable.Label("sTop"), @readable.Thm("Frontier_THM", () => frontier_thm())],
+        ),
+        @readable.have(
+          "\n    s SUBSET Closure alpha s /\\  Interior alpha s SUBSET s",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("ClosureSubset", () => closuresubset()),
+              @readable.Thm("InteriorSubset", () => interiorsubset()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.set, [@readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7243,7 +9499,20 @@ pub fn closureunionfrontier() -> @kernel.Thm {
 ///|
 /// FrontierInteriorSubset
 fn step_467() -> Unit raise {
-  frontierinteriorsubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α (Interior α s) ⊂ Frontier α s\n  by simplify InteriorTopspace Frontier_THM InteriorInterior InteriorSubset SubsetClosure DIFF_SUBSET")))
+  frontierinteriorsubset_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha (Interior alpha s) SUBSET Frontier alpha s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("InteriorTopspace", () => interiortopspace()),
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("InteriorInterior", () => interiorinterior()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+        @readable.Thm("SubsetClosure", () => subsetclosure()),
+        @readable.Thm("DIFF_SUBSET", () => diff_subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7256,25 +9525,23 @@ pub fn frontierinteriorsubset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_243`
-pub fn exec_phrase_243(x252 : Unit) -> Unit raise {
-  let _ = x252
-  {
-    @readable.thm_ref().val = interiorinterior()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorInterior): thm);;
-fn step_468() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorInterior): thm);;", exec_phrase_243)
-}
-
-///|
 /// FrontierClosureSubset
 fn step_469() -> Unit raise {
-  frontierclosuresubset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  Frontier α (Closure α s) ⊂ Frontier α s\n  by simplify ClosureTopspace Frontier_THM ClosureClosure ClosureTopspace ClosureSubset SubsetInterior SUBSET_DUALITY")))
+  frontierclosuresubset_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  Frontier alpha (Closure alpha s) SUBSET Frontier alpha s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+        @readable.Thm("ClosureClosure", () => closureclosure()),
+        @readable.Thm("ClosureTopspace", () => closuretopspace()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+        @readable.Thm("SubsetInterior", () => subsetinterior()),
+        @readable.Thm("SUBSET_DUALITY", () => subset_duality()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7289,7 +9556,31 @@ pub fn frontierclosuresubset() -> @kernel.Thm {
 ///|
 /// SetDiffFrontier
 fn step_470() -> Unit raise {
-  setdifffrontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s.  s ⊂ topspace α  ⇒  s ━ Frontier α s = Interior α s\n\n  proof\n    intro_TAC ∀α s, sTop;\n    simplify sTop Frontier_THM;\n    s ⊂ Closure α s ∧ Interior α s ⊂ s     [] by fol sTop ClosureSubset InteriorSubset;\n    set -;\n  qed;\n")))
+  setdifffrontier_c.set(@readable.prove(
+    "\n  forall alpha s.  s SUBSET topspace alpha  ==>  s DIFF Frontier alpha s = Interior alpha s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s, sTop"),
+        @readable.by(
+          @readable.simplify,
+          [@readable.Label("sTop"), @readable.Thm("Frontier_THM", () => frontier_thm())],
+        ),
+        @readable.have(
+          "\n    s SUBSET Closure alpha s /\\  Interior alpha s SUBSET s",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sTop"),
+              @readable.Thm("ClosureSubset", () => closuresubset()),
+              @readable.Thm("InteriorSubset", () => interiorsubset()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.set, [@readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7304,7 +9595,48 @@ pub fn setdifffrontier() -> @kernel.Thm {
 ///|
 /// FrontierInterSubsetInter
 fn step_471() -> Unit raise {
-  frontierintersubsetinter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒\n    Frontier α (s ∩ t)  ⊂\n    Closure α s ∩ Frontier α t  ∪  Frontier α s ∩ Closure α t\n\n  proof\n    intro_TAC ∀α s t, H1;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    simplify H1 stTop Frontier_THM InteriorInter;\n    Closure α (s ∩ t) ⊂ Closure α s ∩ Closure α t     [] by fol stTop ClosureInterSubset;\n    set -;\n  qed;\n")))
+  frontierintersubsetinter_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>\n    Frontier alpha (s INTER t)  SUBSET\n    Closure alpha s INTER Frontier alpha t  UNION  Frontier alpha s INTER Closure alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Label("stTop"),
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+            @readable.Thm("InteriorInter", () => interiorinter()),
+          ],
+        ),
+        @readable.have(
+          "\n    Closure alpha (s INTER t) SUBSET Closure alpha s INTER Closure alpha t",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Thm("ClosureInterSubset", () => closureintersubset()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.set, [@readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7317,25 +9649,112 @@ pub fn frontierintersubsetinter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_244`
-pub fn exec_phrase_244(x253 : Unit) -> Unit raise {
-  let _ = x253
-  {
-    @readable.thm_ref().val = closureintersubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureInterSubset): thm);;
-fn step_472() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureInterSubset): thm);;", exec_phrase_244)
-}
-
-///|
 /// FrontierUnionPart1
 fn step_473() -> Unit raise {
-  frontierunionpart1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒  Closure α s ∩ Closure α t = ∅\n    ⇒ Frontier α s ∩ Interior α (s ∪ t) = ∅\n\n  proof\n    intro_TAC ∀α s t, H1, CsCtDisjoint;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    Frontier α s ∩ Interior α (s ∪ t)  ⊂ topspace α     [FIstTop] by fol stTop FrontierTopspace INTER_SUBSET SUBSET_TRANS;\n    Frontier α s ∩ Interior α (s ∪ t) ∩ (topspace α ━ Closure α t) = ∅     []\n    proof\n      simplify stTop GSYM InteriorComplement H1 SUBSET_DIFF InteriorInter Frontier_THM;\n      Interior α (s ∪ t) ∩ Interior α (topspace α ━ t)  ⊂ Interior α s     [] by\n      fol SET_RULE [∀A s t. s ⊂ A  ⇒  (s ∪ t) ∩ (A ━ t) = s ━ t] H1 SUBSET_DIFF InteriorInter stTop SubsetInterior;\n      set -;\n    qed;\n    Frontier α s ∩ Interior α (s ∪ t)  ⊂  Closure α t     [] by fol H1 CsCtDisjoint - FIstTop COMPLEMENT_DISJOINT INTER_ACI;\n    fol SET_RULE [∀ s t F I. s ∩ t = ∅ ∧ F ⊂ s ∧ F ∩ I ⊂ t  ⇒  F ∩ I = ∅] CsCtDisjoint stTop Frontier_THM SUBSET_DIFF  -;\n  qed;\n")))
+  frontierunionpart1_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>  Closure alpha s INTER Closure alpha t = {}\n    ==> Frontier alpha s INTER Interior alpha (s UNION t) = {}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1, CsCtDisjoint"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha s INTER Interior alpha (s UNION t)  SUBSET topspace alpha",
+          "FIstTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Thm("FrontierTopspace", () => frontiertopspace()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha s INTER Interior alpha (s UNION t) INTER (topspace alpha DIFF Closure alpha t) = {}",
+          "",
+          @readable.steps(
+            [
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("stTop"),
+                  @readable.Rule(
+                    @equal.gsym,
+                    @readable.Thm("InteriorComplement", () => interiorcomplement()),
+                  ),
+                  @readable.Label("H1"),
+                  @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+                  @readable.Thm("InteriorInter", () => interiorinter()),
+                  @readable.Thm("Frontier_THM", () => frontier_thm()),
+                ],
+              ),
+              @readable.have(
+                "\n      Interior alpha (s UNION t) INTER Interior alpha (topspace alpha DIFF t)  SUBSET Interior alpha s",
+                "",
+                @readable.by(
+                  @readable.fol,
+                  [
+                    @readable.TermRule(
+                      @sets.set_rule,
+                      "forall A s t. s SUBSET A  ==>  (s UNION t) INTER (A DIFF t) = s DIFF t",
+                    ),
+                    @readable.Label("H1"),
+                    @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+                    @readable.Thm("InteriorInter", () => interiorinter()),
+                    @readable.Label("stTop"),
+                    @readable.Thm("SubsetInterior", () => subsetinterior()),
+                  ],
+                ),
+              ),
+              @readable.by(@readable.set, [@readable.Prev]),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha s INTER Interior alpha (s UNION t)  SUBSET  Closure alpha t",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("CsCtDisjoint"),
+              @readable.Prev,
+              @readable.Label("FIstTop"),
+              @readable.Thm("COMPLEMENT_DISJOINT", () => complement_disjoint()),
+              @readable.Thm("INTER_ACI", () => @sets.inter_aci()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.TermRule(
+              @sets.set_rule,
+              "forall  s t F I. s INTER t = {} /\\  F SUBSET s /\\  F INTER I SUBSET t  ==>  F INTER I = {}",
+            ),
+            @readable.Label("CsCtDisjoint"),
+            @readable.Label("stTop"),
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+            @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+            @readable.Prev,
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7350,7 +9769,70 @@ pub fn frontierunionpart1() -> @kernel.Thm {
 ///|
 /// FrontierUnion
 fn step_474() -> Unit raise {
-  frontierunion_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀α s t.  s ∪ t ⊂ topspace α  ⇒  Closure α s ∩ Closure α t = ∅\n    ⇒ Frontier α (s ∪ t) = Frontier α s ∪ Frontier α t\n\n  proof\n    intro_TAC ∀α s t, H1, CsCtDisjoint;\n    s ⊂ topspace α ∧ t ⊂ topspace α ∧ s ∩ t ⊂ topspace α     [stTop] by fol H1 SUBSET_UNION INTER_SUBSET SUBSET_TRANS;\n    MATCH_MP_TAC SUBSET_ANTISYM;\n    simplify H1 FrontierUnionSubset Frontier_THM;\n    Frontier α s ∩ Interior α (s ∪ t)  =  ∅  ∧\n    Frontier α t ∩ Interior α (s ∪ t)  =  ∅     [usePart1] by fol H1 CsCtDisjoint FrontierUnionPart1 INTER_COMM UNION_COMM;\n    Frontier α s ⊂ Closure α (s ∪ t)  ∧  Frontier α t ⊂ Closure α (s ∪ t)     [] by fol stTop Frontier_THM SUBSET_DIFF H1 SUBSET_UNION SubsetClosure SUBSET_TRANS;\n    set usePart1 -;\n  qed;\n")))
+  frontierunion_c.set(@readable.prove(
+    "\n  forall alpha s t.  s UNION t SUBSET topspace alpha  ==>  Closure alpha s INTER Closure alpha t = {}\n    ==> Frontier alpha (s UNION t) = Frontier alpha s UNION Frontier alpha t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall alpha s t, H1, CsCtDisjoint"),
+        @readable.have(
+          "\n    s SUBSET topspace alpha /\\  t SUBSET topspace alpha /\\  s INTER t SUBSET topspace alpha",
+          "stTop",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by_thm(
+          @tactics.match_mp_tac,
+          @readable.Thm("SUBSET_ANTISYM", () => @sets.subset_antisym()),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("H1"),
+            @readable.Thm("FrontierUnionSubset", () => frontierunionsubset()),
+            @readable.Thm("Frontier_THM", () => frontier_thm()),
+          ],
+        ),
+        @readable.have(
+          "\n    Frontier alpha s INTER Interior alpha (s UNION t)  =  {}  /\\ \n    Frontier alpha t INTER Interior alpha (s UNION t)  =  {}",
+          "usePart1",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("CsCtDisjoint"),
+              @readable.Thm("FrontierUnionPart1", () => frontierunionpart1()),
+              @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+              @readable.Thm("UNION_COMM", () => @sets.union_comm()),
+            ],
+          ),
+        ),
+        @readable.have(
+          "\n    Frontier alpha s SUBSET Closure alpha (s UNION t)  /\\   Frontier alpha t SUBSET Closure alpha (s UNION t)",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("stTop"),
+              @readable.Thm("Frontier_THM", () => frontier_thm()),
+              @readable.Thm("SUBSET_DIFF", () => @sets.subset_diff()),
+              @readable.Label("H1"),
+              @readable.Thm("SUBSET_UNION", () => @sets.subset_union()),
+              @readable.Thm("SubsetClosure", () => subsetclosure()),
+              @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            ],
+          ),
+        ),
+        @readable.by(@readable.set, [@readable.Label("usePart1"), @readable.Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7360,22 +9842,6 @@ let frontierunion_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("FrontierUnion")
 /// `FrontierUnion`
 pub fn frontierunion() -> @kernel.Thm {
   frontierunion_c.get()
-}
-
-///|
-/// `exec_phrase_245`
-pub fn exec_phrase_245(x254 : Unit) -> Unit raise {
-  let _ = x254
-  {
-    @readable.thm_ref().val = frontierunionpart1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierUnionPart1): thm);;
-fn step_475() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierUnionPart1): thm);;", exec_phrase_245)
 }
 
 ///|
@@ -7426,7 +9892,16 @@ pub fn euclidean() -> @kernel.Thm {
 ///|
 /// OPEN_EMPTY
 fn step_479() -> Unit raise {
-  open_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  open ∅\n  by rewrite open_def NOT_IN_EMPTY")))
+  open_empty_c.set(@readable.prove(
+    "\n  open {}",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("open_def", () => open_def()),
+        @readable.Thm("NOT_IN_EMPTY", () => @sets.not_in_empty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7439,25 +9914,19 @@ pub fn open_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_246`
-pub fn exec_phrase_246(x255 : Unit) -> Unit raise {
-  let _ = x255
-  {
-    @readable.thm_ref().val = open_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((open_def): thm);;
-fn step_480() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((open_def): thm);;", exec_phrase_246)
-}
-
-///|
 /// OPEN_UNIV
 fn step_481() -> Unit raise {
-  open_univ_c.set(@readable.theorem(@readable.parse_qproof(";\n  open UNIV\n  by fol open_def IN_UNIV REAL_LT_01")))
+  open_univ_c.set(@readable.prove(
+    "\n  open UNIV",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("open_def", () => open_def()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("REAL_LT_01", () => @real.real_lt_01()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7470,41 +9939,72 @@ pub fn open_univ() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_247`
-pub fn exec_phrase_247(x256 : Unit) -> Unit raise {
-  let _ = x256
-  {
-    @readable.thm_ref().val = @sets.in_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_UNIV): thm);;
-fn step_482() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_UNIV): thm);;", exec_phrase_247)
-}
-
-///|
-/// `exec_phrase_248`
-pub fn exec_phrase_248(x257 : Unit) -> Unit raise {
-  let _ = x257
-  {
-    @readable.thm_ref().val = @real.real_lt_01()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_01): thm);;
-fn step_483() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_01): thm);;", exec_phrase_248)
-}
-
-///|
 /// OPEN_INTER
 fn step_484() -> Unit raise {
-  open_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t. open s ∧ open t ⇒ open (s ∩ t)\n\n  proof\n    intro_TAC ∀s t, sOpen tOpen;\n    rewrite open_def IN_INTER;\n    intro_TAC ∀x, xs xt;\n    consider d1 such that\n    &0 < d1 ∧ ∀x'. dist (x',x) < d1 ⇒ x' ∈ s     [d1Exists] by fol sOpen xs open_def;\n    consider d2 such that\n    &0 < d2 ∧ ∀x'. dist (x',x) < d2 ⇒ x' ∈ t     [d2Exists] by fol tOpen xt open_def;\n    consider e such that &0 < e /\\ e < d1 /\\ e < d2     [eExists] by fol d1Exists d2Exists REAL_DOWN2;\n    fol - d1Exists d2Exists REAL_LT_TRANS;\n  qed;\n")))
+  open_inter_c.set(@readable.prove(
+    "\n  forall s t. open s /\\  open t ==> open (s INTER t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t, sOpen tOpen"),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("open_def", () => open_def()),
+            @readable.Thm("IN_INTER", () => @sets.in_inter()),
+          ],
+        ),
+        @readable.intro_tac("forall x, xs xt"),
+        @readable.consider(
+          "d1",
+          "&0 < d1 /\\  forall x'. dist (x',x) < d1 ==> x' IN s    ",
+          "d1Exists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("sOpen"),
+              @readable.Label("xs"),
+              @readable.Thm("open_def", () => open_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "d2",
+          "&0 < d2 /\\  forall x'. dist (x',x) < d2 ==> x' IN t    ",
+          "d2Exists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("tOpen"),
+              @readable.Label("xt"),
+              @readable.Thm("open_def", () => open_def()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "e",
+          "&0 < e /\\ e < d1 /\\ e < d2    ",
+          "eExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("d1Exists"),
+              @readable.Label("d2Exists"),
+              @readable.Thm("REAL_DOWN2", () => @real.real_down2()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("d1Exists"),
+            @readable.Label("d2Exists"),
+            @readable.Thm("REAL_LT_TRANS", () => @realarith.real_lt_trans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7517,41 +10017,18 @@ pub fn open_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_249`
-pub fn exec_phrase_249(x258 : Unit) -> Unit raise {
-  let _ = x258
-  {
-    @readable.thm_ref().val = @real.real_down2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_DOWN2): thm);;
-fn step_485() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_DOWN2): thm);;", exec_phrase_249)
-}
-
-///|
-/// `exec_phrase_250`
-pub fn exec_phrase_250(x259 : Unit) -> Unit raise {
-  let _ = x259
-  {
-    @readable.thm_ref().val = @realarith.real_lt_trans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_TRANS): thm);;
-fn step_486() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_TRANS): thm);;", exec_phrase_250)
-}
-
-///|
 /// OPEN_UNIONS
 fn step_487() -> Unit raise {
-  open_unions_c.set(@readable.theorem(@readable.parse_qproof(";\n  (∀s. s ∈ f ⇒ open s)  ⇒  open (UNIONS f)\n  by fol open_def IN_UNIONS")))
+  open_unions_c.set(@readable.prove(
+    "\n  (forall s. s IN f ==> open s)  ==>  open (UNIONS f)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("open_def", () => open_def()),
+        @readable.Thm("IN_UNIONS", () => @sets.in_unions()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7566,7 +10043,22 @@ pub fn open_unions() -> @kernel.Thm {
 ///|
 /// IstopologyEuclidean
 fn step_488() -> Unit raise {
-  istopologyeuclidean_c.set(@readable.theorem(@readable.parse_qproof(";\n    istopology (UNIV, open)\n    by simplify istopology IN IN_UNIV SUBSET OPEN_EMPTY OPEN_UNIV OPEN_INTER OPEN_UNIONS")))
+  istopologyeuclidean_c.set(@readable.prove(
+    "\n    istopology (UNIV, open)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("istopology", () => istopology()),
+        @readable.Thm("IN", () => @sets.in_()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("OPEN_EMPTY", () => open_empty()),
+        @readable.Thm("OPEN_UNIV", () => open_univ()),
+        @readable.Thm("OPEN_INTER", () => open_inter()),
+        @readable.Thm("OPEN_UNIONS", () => open_unions()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7579,73 +10071,21 @@ pub fn istopologyeuclidean() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_251`
-pub fn exec_phrase_251(x260 : Unit) -> Unit raise {
-  let _ = x260
-  {
-    @readable.thm_ref().val = open_empty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_EMPTY): thm);;
-fn step_489() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_EMPTY): thm);;", exec_phrase_251)
-}
-
-///|
-/// `exec_phrase_252`
-pub fn exec_phrase_252(x261 : Unit) -> Unit raise {
-  let _ = x261
-  {
-    @readable.thm_ref().val = open_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_UNIV): thm);;
-fn step_490() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_UNIV): thm);;", exec_phrase_252)
-}
-
-///|
-/// `exec_phrase_253`
-pub fn exec_phrase_253(x262 : Unit) -> Unit raise {
-  let _ = x262
-  {
-    @readable.thm_ref().val = open_inter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_INTER): thm);;
-fn step_491() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_INTER): thm);;", exec_phrase_253)
-}
-
-///|
-/// `exec_phrase_254`
-pub fn exec_phrase_254(x263 : Unit) -> Unit raise {
-  let _ = x263
-  {
-    @readable.thm_ref().val = open_unions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_UNIONS): thm);;
-fn step_492() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_UNIONS): thm);;", exec_phrase_254)
-}
-
-///|
 /// OPEN_IN
 fn step_493() -> Unit raise {
-  open_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  open  =  open_in euclidean\n  by fol euclidean topology_tybij IstopologyEuclidean TopologyPAIR PAIR_EQ")))
+  open_in_c.set(@readable.prove(
+    "\n  open  =  open_in euclidean",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("euclidean", () => euclidean()),
+        @readable.Thm("topology_tybij", () => topology_tybij()),
+        @readable.Thm("IstopologyEuclidean", () => istopologyeuclidean()),
+        @readable.Thm("TopologyPAIR", () => topologypair()),
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7658,41 +10098,21 @@ pub fn open_in() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_255`
-pub fn exec_phrase_255(x264 : Unit) -> Unit raise {
-  let _ = x264
-  {
-    @readable.thm_ref().val = euclidean()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((euclidean): thm);;
-fn step_494() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((euclidean): thm);;", exec_phrase_255)
-}
-
-///|
-/// `exec_phrase_256`
-pub fn exec_phrase_256(x265 : Unit) -> Unit raise {
-  let _ = x265
-  {
-    @readable.thm_ref().val = istopologyeuclidean()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IstopologyEuclidean): thm);;
-fn step_495() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IstopologyEuclidean): thm);;", exec_phrase_256)
-}
-
-///|
 /// TOPSPACE_EUCLIDEAN
 fn step_496() -> Unit raise {
-  topspace_euclidean_c.set(@readable.theorem(@readable.parse_qproof(";\n  topspace euclidean = UNIV\n  by fol euclidean IstopologyEuclidean topology_tybij TopologyPAIR PAIR_EQ")))
+  topspace_euclidean_c.set(@readable.prove(
+    "\n  topspace euclidean = UNIV",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("euclidean", () => euclidean()),
+        @readable.Thm("IstopologyEuclidean", () => istopologyeuclidean()),
+        @readable.Thm("topology_tybij", () => topology_tybij()),
+        @readable.Thm("TopologyPAIR", () => topologypair()),
+        @readable.Thm("PAIR_EQ", () => @pair.pair_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7707,7 +10127,18 @@ pub fn topspace_euclidean() -> @kernel.Thm {
 ///|
 /// OPEN_EXISTS_IN
 fn step_497() -> Unit raise {
-  open_exists_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P Q.  (∀a. P a ⇒ open {x | Q a x})  ⇒  open {x | ∃a. P a ∧ Q a x}\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN OPEN_IN_EXISTS_IN")))
+  open_exists_in_c.set(@readable.prove(
+    "\n  forall P Q.  (forall a. P a ==> open {x | Q a x})  ==>  open {x | ?a. P a /\\  Q a x}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OPEN_IN_EXISTS_IN", () => open_in_exists_in()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7720,73 +10151,26 @@ pub fn open_exists_in() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_257`
-pub fn exec_phrase_257(x266 : Unit) -> Unit raise {
-  let _ = x266
-  {
-    @readable.thm_ref().val = @sets.subset_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBSET_UNIV): thm);;
-fn step_498() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBSET_UNIV): thm);;", exec_phrase_257)
-}
-
-///|
-/// `exec_phrase_258`
-pub fn exec_phrase_258(x267 : Unit) -> Unit raise {
-  let _ = x267
-  {
-    @readable.thm_ref().val = topspace_euclidean()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TOPSPACE_EUCLIDEAN): thm);;
-fn step_499() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TOPSPACE_EUCLIDEAN): thm);;", exec_phrase_258)
-}
-
-///|
-/// `exec_phrase_259`
-pub fn exec_phrase_259(x268 : Unit) -> Unit raise {
-  let _ = x268
-  {
-    @readable.thm_ref().val = open_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN): thm);;
-fn step_500() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN): thm);;", exec_phrase_259)
-}
-
-///|
-/// `exec_phrase_260`
-pub fn exec_phrase_260(x269 : Unit) -> Unit raise {
-  let _ = x269
-  {
-    @readable.thm_ref().val = open_in_exists_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_EXISTS_IN): thm);;
-fn step_501() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_EXISTS_IN): thm);;", exec_phrase_260)
-}
-
-///|
 /// OPEN_EXISTS
 fn step_502() -> Unit raise {
-  open_exists_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀Q.  (∀a. open {x | Q a x})  ⇒  open {x | ∃a. Q a x}\n\n  proof\n    intro_TAC ∀Q;\n    (∀a. T ⇒ open {x | Q a x}) ⇒ open {x | ∃a. T ∧ Q a x}     [] by simplify OPEN_EXISTS_IN;\n    MP_TAC -;\n    fol;\n  qed;\n")))
+  open_exists_c.set(@readable.prove(
+    "\n  forall Q.  (forall a. open {x | Q a x})  ==>  open {x | ?a. Q a x}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall Q"),
+        @readable.have(
+          "\n    (forall a. T ==> open {x | Q a x}) ==> open {x | ?a. T /\\  Q a x}",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [@readable.Thm("OPEN_EXISTS_IN", () => open_exists_in())],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7799,25 +10183,19 @@ pub fn open_exists() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_261`
-pub fn exec_phrase_261(x270 : Unit) -> Unit raise {
-  let _ = x270
-  {
-    @readable.thm_ref().val = open_exists_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_EXISTS_IN): thm);;
-fn step_503() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_EXISTS_IN): thm);;", exec_phrase_261)
-}
-
-///|
 /// TOPSPACE_EUCLIDEAN_SUBTOPOLOGY
 fn step_504() -> Unit raise {
-  topspace_euclidean_subtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n ∀s. topspace (subtopology euclidean s) = s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN TopspaceSubtopology")))
+  topspace_euclidean_subtopology_c.set(@readable.prove(
+    "\n forall s. topspace (subtopology euclidean s) = s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7832,7 +10210,17 @@ pub fn topspace_euclidean_subtopology() -> @kernel.Thm {
 ///|
 /// OPEN_IN_REFL
 fn step_505() -> Unit raise {
-  open_in_refl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. open_in (subtopology euclidean s) s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInRefl")))
+  open_in_refl_c.set(@readable.prove(
+    "\n  forall s. open_in (subtopology euclidean s) s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInRefl", () => openinrefl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7847,7 +10235,17 @@ pub fn open_in_refl() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_REFL
 fn step_506() -> Unit raise {
-  closed_in_refl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closed_in (subtopology euclidean s) s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosedInRefl")))
+  closed_in_refl_c.set(@readable.prove(
+    "\n  forall s. closed_in (subtopology euclidean s) s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("ClosedInRefl", () => closedinrefl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7860,25 +10258,23 @@ pub fn closed_in_refl() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_262`
-pub fn exec_phrase_262(x271 : Unit) -> Unit raise {
-  let _ = x271
-  {
-    @readable.thm_ref().val = closedinrefl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInRefl): thm);;
-fn step_507() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInRefl): thm);;", exec_phrase_262)
-}
-
-///|
 /// CLOSED_IN
 fn step_508() -> Unit raise {
-  closed_in_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closed  =  closed_in euclidean\n  by fol closed closed_in TOPSPACE_EUCLIDEAN OPEN_IN SUBSET_UNIV EXTENSION IN")))
+  closed_in_v1_c.set(@readable.prove(
+    "\n  forall s. closed  =  closed_in euclidean",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closed", () => closed()),
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("EXTENSION", () => @sets.extension()),
+        @readable.Thm("IN", () => @sets.in_()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7891,25 +10287,18 @@ pub fn closed_in_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_263`
-pub fn exec_phrase_263(x272 : Unit) -> Unit raise {
-  let _ = x272
-  {
-    @readable.thm_ref().val = closed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((closed): thm);;
-fn step_509() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((closed): thm);;", exec_phrase_263)
-}
-
-///|
 /// OPEN_UNION
 fn step_510() -> Unit raise {
-  open_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s ∧ open t  ⇒  open(s ∪ t)\n  by fol OPEN_IN OPEN_IN_UNION")))
+  open_union_c.set(@readable.prove(
+    "\n  forall s t.  open s /\\  open t  ==>  open(s UNION t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OPEN_IN_UNION", () => open_in_union()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7924,7 +10313,16 @@ pub fn open_union() -> @kernel.Thm {
 ///|
 /// OPEN_SUBOPEN
 fn step_511() -> Unit raise {
-  open_subopen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. open s ⇔ ∀x. x ∈ s ⇒ ∃t. open t ∧ x ∈ t ∧ t ⊂ s\n  by fol OPEN_IN OPEN_IN_SUBOPEN")))
+  open_subopen_c.set(@readable.prove(
+    "\n  forall s. open s <=> forall x. x IN s ==> ?t. open t /\\  x IN t /\\  t SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OPEN_IN_SUBOPEN", () => open_in_subopen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7939,7 +10337,16 @@ pub fn open_subopen() -> @kernel.Thm {
 ///|
 /// CLOSED_EMPTY
 fn step_512() -> Unit raise {
-  closed_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  closed ∅\n  by fol CLOSED_IN CLOSED_IN_EMPTY")))
+  closed_empty_c.set(@readable.prove(
+    "\n  closed {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("CLOSED_IN_EMPTY", () => closed_in_empty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7952,25 +10359,19 @@ pub fn closed_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_264`
-pub fn exec_phrase_264(x273 : Unit) -> Unit raise {
-  let _ = x273
-  {
-    @readable.thm_ref().val = closed_in_v1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN): thm);;
-fn step_513() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN): thm);;", exec_phrase_264)
-}
-
-///|
 /// CLOSED_UNIV
 fn step_514() -> Unit raise {
-  closed_univ_c.set(@readable.theorem(@readable.parse_qproof(";\n  closed UNIV\n  by fol CLOSED_IN TOPSPACE_EUCLIDEAN CLOSED_IN_TOPSPACE")))
+  closed_univ_c.set(@readable.prove(
+    "\n  closed UNIV",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN_TOPSPACE", () => closed_in_topspace()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -7985,7 +10386,16 @@ pub fn closed_univ() -> @kernel.Thm {
 ///|
 /// CLOSED_UNION
 fn step_515() -> Unit raise {
-  closed_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∧ closed t  ⇒  closed(s ∪ t)\n  by fol CLOSED_IN CLOSED_IN_UNION")))
+  closed_union_c.set(@readable.prove(
+    "\n  forall s t.  closed s /\\  closed t  ==>  closed(s UNION t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("CLOSED_IN_UNION", () => closed_in_union()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8000,7 +10410,16 @@ pub fn closed_union() -> @kernel.Thm {
 ///|
 /// CLOSED_INTER
 fn step_516() -> Unit raise {
-  closed_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∧ closed t  ⇒  closed(s ∩ t)\n  by fol CLOSED_IN CLOSED_IN_INTER")))
+  closed_inter_c.set(@readable.prove(
+    "\n  forall s t.  closed s /\\  closed t  ==>  closed(s INTER t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("CLOSED_IN_INTER", () => closed_in_inter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8015,7 +10434,18 @@ pub fn closed_inter() -> @kernel.Thm {
 ///|
 /// CLOSED_INTERS
 fn step_517() -> Unit raise {
-  closed_inters_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f. (∀s. s ∈ f ⇒ closed s)  ⇒  closed (INTERS f)\n  by fol CLOSED_IN CLOSED_IN_INTERS INTERS_0 CLOSED_UNIV")))
+  closed_inters_c.set(@readable.prove(
+    "\n  forall f. (forall s. s IN f ==> closed s)  ==>  closed (INTERS f)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("CLOSED_IN_INTERS", () => closed_in_inters()),
+        @readable.Thm("INTERS_0", () => @sets.inters_0()),
+        @readable.Thm("CLOSED_UNIV", () => closed_univ()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8028,25 +10458,48 @@ pub fn closed_inters() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_265`
-pub fn exec_phrase_265(x274 : Unit) -> Unit raise {
-  let _ = x274
-  {
-    @readable.thm_ref().val = closed_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_UNIV): thm);;
-fn step_518() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_UNIV): thm);;", exec_phrase_265)
-}
-
-///|
 /// CLOSED_FORALL_IN
 fn step_519() -> Unit raise {
-  closed_forall_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P Q.  (∀a. P a ⇒ closed {x | Q a x})\n    ⇒  closed {x | ∀a. P a ⇒ Q a x}\n\n  proof\n    intro_TAC ∀P Q;\n    case_split Pnonempty | Pempty by fol;\n    suppose ¬(P = ∅);\n      simplify CLOSED_IN Pnonempty CLOSED_IN_FORALL_IN;\n    end;\n    suppose P = ∅;\n      {x | ∀a. P a ⇒ Q a x} = UNIV     [] by set Pempty;\n      simplify - CLOSED_UNIV;\n    end;\n  qed;\n")))
+  closed_forall_in_c.set(@readable.prove(
+    "\n  forall P Q.  (forall a. P a ==> closed {x | Q a x})\n    ==>  closed {x | forall a. P a ==> Q a x}",
+    @readable.steps_then(
+      [@readable.intro_tac("forall P Q")],
+      @readable.case_split(
+        "Pnonempty | Pempty",
+        @readable.by(@readable.fol, []),
+        @list.List(["~(P = {})", "P = {}"]),
+        @list.List(
+          [
+            @readable.steps(
+              [
+                @readable.by(
+                  @readable.simplify,
+                  [
+                    @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+                    @readable.Label("Pnonempty"),
+                    @readable.Thm("CLOSED_IN_FORALL_IN", () => closed_in_forall_in()),
+                  ],
+                ),
+              ],
+            ),
+            @readable.steps(
+              [
+                @readable.have(
+                  "\n      {x | forall a. P a ==> Q a x} = UNIV",
+                  "",
+                  @readable.by(@readable.set, [@readable.Label("Pempty")]),
+                ),
+                @readable.by(
+                  @readable.simplify,
+                  [@readable.Prev, @readable.Thm("CLOSED_UNIV", () => closed_univ())],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -8059,25 +10512,26 @@ pub fn closed_forall_in() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_266`
-pub fn exec_phrase_266(x275 : Unit) -> Unit raise {
-  let _ = x275
-  {
-    @readable.thm_ref().val = closed_in_forall_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_FORALL_IN): thm);;
-fn step_520() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_FORALL_IN): thm);;", exec_phrase_266)
-}
-
-///|
 /// CLOSED_FORALL
 fn step_521() -> Unit raise {
-  closed_forall_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀Q. (∀a. closed {x | Q a x}) ⇒ closed {x | ∀a. Q a x}\n\n  proof\n    intro_TAC ∀Q;\n    (∀a. T ⇒ closed {x | Q a x}) ⇒ closed {x | ∀a. T ⇒ Q a x}     [] by simplify CLOSED_FORALL_IN;\n    MP_TAC -;\n    fol;\n  qed;\n")))
+  closed_forall_c.set(@readable.prove(
+    "\n  forall Q. (forall a. closed {x | Q a x}) ==> closed {x | forall a. Q a x}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall Q"),
+        @readable.have(
+          "\n    (forall a. T ==> closed {x | Q a x}) ==> closed {x | forall a. T ==> Q a x}",
+          "",
+          @readable.by(
+            @readable.simplify,
+            [@readable.Thm("CLOSED_FORALL_IN", () => closed_forall_in())],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8090,25 +10544,21 @@ pub fn closed_forall() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_267`
-pub fn exec_phrase_267(x276 : Unit) -> Unit raise {
-  let _ = x276
-  {
-    @readable.thm_ref().val = closed_forall_in()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_FORALL_IN): thm);;
-fn step_522() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_FORALL_IN): thm);;", exec_phrase_267)
-}
-
-///|
 /// OPEN_CLOSED
 fn step_523() -> Unit raise {
-  open_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  open s  ⇔  closed(UNIV ━ s)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN CLOSED_IN OPEN_IN_CLOSED_IN")))
+  open_closed_c.set(@readable.prove(
+    "\n  forall s.  open s  <=>  closed(UNIV DIFF s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("OPEN_IN_CLOSED_IN", () => open_in_closed_in()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8123,7 +10573,19 @@ pub fn open_closed() -> @kernel.Thm {
 ///|
 /// OPEN_DIFF
 fn step_524() -> Unit raise {
-  open_diff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s ∧ closed t  ⇒  open(s ━ t)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN CLOSED_IN OPEN_IN_DIFF")))
+  open_diff_c.set(@readable.prove(
+    "\n  forall s t.  open s /\\  closed t  ==>  open(s DIFF t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("OPEN_IN_DIFF", () => open_in_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8138,7 +10600,19 @@ pub fn open_diff() -> @kernel.Thm {
 ///|
 /// CLOSED_DIFF
 fn step_525() -> Unit raise {
-  closed_diff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∧ open t  ⇒  closed (s ━ t)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN CLOSED_IN CLOSED_IN_DIFF")))
+  closed_diff_c.set(@readable.prove(
+    "\n  forall s t.  closed s /\\  open t  ==>  closed (s DIFF t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("CLOSED_IN_DIFF", () => closed_in_diff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8153,7 +10627,18 @@ pub fn closed_diff() -> @kernel.Thm {
 ///|
 /// OPEN_INTERS
 fn step_526() -> Unit raise {
-  open_inters_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  FINITE s ∧ (∀t. t ∈ s ⇒ open t)  ⇒  open (INTERS s)\n  by fol OPEN_IN OPEN_IN_INTERS INTERS_0 OPEN_UNIV")))
+  open_inters_c.set(@readable.prove(
+    "\n  forall s.  FINITE s /\\  (forall t. t IN s ==> open t)  ==>  open (INTERS s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OPEN_IN_INTERS", () => open_in_inters()),
+        @readable.Thm("INTERS_0", () => @sets.inters_0()),
+        @readable.Thm("OPEN_UNIV", () => open_univ()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8166,25 +10651,18 @@ pub fn open_inters() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_268`
-pub fn exec_phrase_268(x277 : Unit) -> Unit raise {
-  let _ = x277
-  {
-    @readable.thm_ref().val = open_in_inters()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_INTERS): thm);;
-fn step_527() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_INTERS): thm);;", exec_phrase_268)
-}
-
-///|
 /// CLOSED_UNIONS
 fn step_528() -> Unit raise {
-  closed_unions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  FINITE s ∧ (∀t. t ∈ s ⇒ closed t)  ⇒  closed (UNIONS s)\n  by fol CLOSED_IN CLOSED_IN_UNIONS")))
+  closed_unions_c.set(@readable.prove(
+    "\n  forall s.  FINITE s /\\  (forall t. t IN s ==> closed t)  ==>  closed (UNIONS s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("CLOSED_IN_UNIONS", () => closed_in_unions()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8194,22 +10672,6 @@ let closed_unions_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CLOSED_UNIONS")
 /// `CLOSED_UNIONS`
 pub fn closed_unions() -> @kernel.Thm {
   closed_unions_c.get()
-}
-
-///|
-/// `exec_phrase_269`
-pub fn exec_phrase_269(x278 : Unit) -> Unit raise {
-  let _ = x278
-  {
-    @readable.thm_ref().val = closed_in_unions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_UNIONS): thm);;
-fn step_529() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_UNIONS): thm);;", exec_phrase_269)
 }
 
 ///|
@@ -8245,7 +10707,16 @@ pub fn cball() -> @kernel.Thm {
 ///|
 /// IN_BALL
 fn step_532() -> Unit raise {
-  in_ball_c.set(@readable.theorem(@readable.parse_qproof(";\n ∀x y e. y ∈ ball(x,e)  ⇔  dist(x,y) < e\n  by rewrite ball IN_ELIM_THM")))
+  in_ball_c.set(@readable.prove(
+    "\n forall x y e. y IN ball(x,e)  <=>  dist(x,y) < e",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("ball", () => ball()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8258,25 +10729,18 @@ pub fn in_ball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_270`
-pub fn exec_phrase_270(x279 : Unit) -> Unit raise {
-  let _ = x279
-  {
-    @readable.thm_ref().val = ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ball): thm);;
-fn step_533() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ball): thm);;", exec_phrase_270)
-}
-
-///|
 /// IN_CBALL
 fn step_534() -> Unit raise {
-  in_cball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x y e. y ∈ cball(x, e)  ⇔  dist(x, y) <= e\n  by rewrite cball IN_ELIM_THM")))
+  in_cball_c.set(@readable.prove(
+    "\n  forall x y e. y IN cball(x, e)  <=>  dist(x, y) <= e",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("cball", () => cball()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8289,25 +10753,24 @@ pub fn in_cball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_271`
-pub fn exec_phrase_271(x280 : Unit) -> Unit raise {
-  let _ = x280
-  {
-    @readable.thm_ref().val = cball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((cball): thm);;
-fn step_535() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((cball): thm);;", exec_phrase_271)
-}
-
-///|
 /// BALL_SUBSET_CBALL
 fn step_536() -> Unit raise {
-  ball_subset_cball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x e. ball (x,e) ⊂ cball (x, e)\n\n  proof\n     rewrite IN_BALL IN_CBALL SUBSET;\n     real_arithmetic;\n  qed;\n")))
+  ball_subset_cball_c.set(@readable.prove(
+    "\n  forall x e. ball (x,e) SUBSET cball (x, e)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("IN_BALL", () => in_ball()),
+            @readable.Thm("IN_CBALL", () => in_cball()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+        @readable.by(@readable.real_arithmetic, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8320,57 +10783,34 @@ pub fn ball_subset_cball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_272`
-pub fn exec_phrase_272(x281 : Unit) -> Unit raise {
-  let _ = x281
-  {
-    @readable.thmlist_tactic_ref().val = @readable.real_arithmetic
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((real_arithmetic): thm list -> tactic);;
-fn step_537() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((real_arithmetic): thm list -> tactic);;", exec_phrase_272)
-}
-
-///|
-/// `exec_phrase_273`
-pub fn exec_phrase_273(x282 : Unit) -> Unit raise {
-  let _ = x282
-  {
-    @readable.thm_ref().val = in_ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_BALL): thm);;
-fn step_538() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_BALL): thm);;", exec_phrase_273)
-}
-
-///|
-/// `exec_phrase_274`
-pub fn exec_phrase_274(x283 : Unit) -> Unit raise {
-  let _ = x283
-  {
-    @readable.thm_ref().val = in_cball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((IN_CBALL): thm);;
-fn step_539() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((IN_CBALL): thm);;", exec_phrase_274)
-}
-
-///|
 /// OPEN_BALL
 fn step_540() -> Unit raise {
-  open_ball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x e. open (ball (x,e))\n\n  proof\n    rewrite open_def ball IN_ELIM_THM;\n    fol DIST_SYM REAL_SUB_LT REAL_LT_SUB_LADD REAL_ADD_SYM REAL_LET_TRANS DIST_TRIANGLE;\n  qed;\n")))
+  open_ball_c.set(@readable.prove(
+    "\n  forall x e. open (ball (x,e))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("open_def", () => open_def()),
+            @readable.Thm("ball", () => ball()),
+            @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("DIST_SYM", () => @vectors.dist_sym()),
+            @readable.Thm("REAL_SUB_LT", () => @realarith.real_sub_lt()),
+            @readable.Thm("REAL_LT_SUB_LADD", () => @real.real_lt_sub_ladd()),
+            @readable.Thm("REAL_ADD_SYM", () => @realax.real_add_sym()),
+            @readable.Thm("REAL_LET_TRANS", () => @realarith.real_let_trans()),
+            @readable.Thm("DIST_TRIANGLE", () => @vectors.dist_triangle()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8383,105 +10823,18 @@ pub fn open_ball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_275`
-pub fn exec_phrase_275(x284 : Unit) -> Unit raise {
-  let _ = x284
-  {
-    @readable.thm_ref().val = @vectors.dist_sym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIST_SYM): thm);;
-fn step_541() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIST_SYM): thm);;", exec_phrase_275)
-}
-
-///|
-/// `exec_phrase_276`
-pub fn exec_phrase_276(x285 : Unit) -> Unit raise {
-  let _ = x285
-  {
-    @readable.thm_ref().val = @realarith.real_sub_lt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_SUB_LT): thm);;
-fn step_542() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_SUB_LT): thm);;", exec_phrase_276)
-}
-
-///|
-/// `exec_phrase_277`
-pub fn exec_phrase_277(x286 : Unit) -> Unit raise {
-  let _ = x286
-  {
-    @readable.thm_ref().val = @real.real_lt_sub_ladd()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_SUB_LADD): thm);;
-fn step_543() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_SUB_LADD): thm);;", exec_phrase_277)
-}
-
-///|
-/// `exec_phrase_278`
-pub fn exec_phrase_278(x287 : Unit) -> Unit raise {
-  let _ = x287
-  {
-    @readable.thm_ref().val = @realax.real_add_sym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_ADD_SYM): thm);;
-fn step_544() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_ADD_SYM): thm);;", exec_phrase_278)
-}
-
-///|
-/// `exec_phrase_279`
-pub fn exec_phrase_279(x288 : Unit) -> Unit raise {
-  let _ = x288
-  {
-    @readable.thm_ref().val = @realarith.real_let_trans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LET_TRANS): thm);;
-fn step_545() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LET_TRANS): thm);;", exec_phrase_279)
-}
-
-///|
-/// `exec_phrase_280`
-pub fn exec_phrase_280(x289 : Unit) -> Unit raise {
-  let _ = x289
-  {
-    @readable.thm_ref().val = @vectors.dist_triangle()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIST_TRIANGLE): thm);;
-fn step_546() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIST_TRIANGLE): thm);;", exec_phrase_280)
-}
-
-///|
 /// CENTRE_IN_BALL
 fn step_547() -> Unit raise {
-  centre_in_ball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x e. x ∈ ball(x,e)  ⇔  &0 < e\n  by fol IN_BALL DIST_REFL")))
+  centre_in_ball_c.set(@readable.prove(
+    "\n  forall x e. x IN ball(x,e)  <=>  &0 < e",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("IN_BALL", () => in_ball()),
+        @readable.Thm("DIST_REFL", () => @vectors.dist_refl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8494,25 +10847,20 @@ pub fn centre_in_ball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_281`
-pub fn exec_phrase_281(x290 : Unit) -> Unit raise {
-  let _ = x290
-  {
-    @readable.thm_ref().val = @vectors.dist_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DIST_REFL): thm);;
-fn step_548() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DIST_REFL): thm);;", exec_phrase_281)
-}
-
-///|
 /// OPEN_CONTAINS_BALL
 fn step_549() -> Unit raise {
-  open_contains_ball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. open s  ⇔  ∀x. x ∈ s ⇒ ∃e. &0 < e ∧ ball(x,e) ⊂ s\n  by rewrite open_def SUBSET IN_BALL DIST_SYM")))
+  open_contains_ball_c.set(@readable.prove(
+    "\n  forall s. open s  <=>  forall x. x IN s ==> ?e. &0 < e /\\  ball(x,e) SUBSET s",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("open_def", () => open_def()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_BALL", () => in_ball()),
+        @readable.Thm("DIST_SYM", () => @vectors.dist_sym()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8527,7 +10875,29 @@ pub fn open_contains_ball() -> @kernel.Thm {
 ///|
 /// HALF_CBALL_IN_BALL
 fn step_550() -> Unit raise {
-  half_cball_in_ball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀e. &0 < e  ⇒  &0 < e/ &2 ∧ e / &2 < e ∧ cball (x, e/ &2) ⊂ ball (x, e)\n\n  proof\n    intro_TAC ∀e, H1;\n     &0 < e/ &2  ∧  e / &2 < e     [] by real_arithmetic H1;\n     fol - SUBSET IN_CBALL IN_BALL REAL_LET_TRANS;\n  qed;\n")))
+  half_cball_in_ball_c.set(@readable.prove(
+    "\n  forall e. &0 < e  ==>  &0 < e/ &2 /\\  e / &2 < e /\\  cball (x, e/ &2) SUBSET ball (x, e)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall e, H1"),
+        @readable.have(
+          "\n     &0 < e/ &2  /\\   e / &2 < e",
+          "",
+          @readable.by(@readable.real_arithmetic, [@readable.Label("H1")]),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("IN_CBALL", () => in_cball()),
+            @readable.Thm("IN_BALL", () => in_ball()),
+            @readable.Thm("REAL_LET_TRANS", () => @realarith.real_let_trans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8542,7 +10912,19 @@ pub fn half_cball_in_ball() -> @kernel.Thm {
 ///|
 /// OPEN_IN_CONTAINS_CBALL_LEMMA
 fn step_551() -> Unit raise {
-  open_in_contains_cball_lemma_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀t s x.  x ∈ s  ⇒\n    ((∃e. &0 < e ∧ ball (x, e) ∩ t ⊂ s) ⇔\n    (∃e. &0 < e ∧ cball (x, e) ∩ t ⊂ s))\n  by fol BALL_SUBSET_CBALL HALF_CBALL_IN_BALL INTER_TENSOR SUBSET_REFL SUBSET_TRANS")))
+  open_in_contains_cball_lemma_c.set(@readable.prove(
+    "\n  forall t s x.  x IN s  ==>\n    ((?e. &0 < e /\\  ball (x, e) INTER t SUBSET s) <=>\n    (?e. &0 < e /\\  cball (x, e) INTER t SUBSET s))",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("BALL_SUBSET_CBALL", () => ball_subset_cball()),
+        @readable.Thm("HALF_CBALL_IN_BALL", () => half_cball_in_ball()),
+        @readable.Thm("INTER_TENSOR", () => inter_tensor()),
+        @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+        @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8555,41 +10937,21 @@ pub fn open_in_contains_cball_lemma() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_282`
-pub fn exec_phrase_282(x291 : Unit) -> Unit raise {
-  let _ = x291
-  {
-    @readable.thm_ref().val = ball_subset_cball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BALL_SUBSET_CBALL): thm);;
-fn step_552() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BALL_SUBSET_CBALL): thm);;", exec_phrase_282)
-}
-
-///|
-/// `exec_phrase_283`
-pub fn exec_phrase_283(x292 : Unit) -> Unit raise {
-  let _ = x292
-  {
-    @readable.thm_ref().val = half_cball_in_ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((HALF_CBALL_IN_BALL): thm);;
-fn step_553() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((HALF_CBALL_IN_BALL): thm);;", exec_phrase_283)
-}
-
-///|
 /// OPEN_IN_OPEN
 fn step_554() -> Unit raise {
-  open_in_open_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s u.  open_in (subtopology euclidean u) s  ⇔  ∃t. open t ∧ (s = u ∩ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN OpenInSubtopology INTER_COMM")))
+  open_in_open_c.set(@readable.prove(
+    "\n  forall s u.  open_in (subtopology euclidean u) s  <=>  ?t. open t /\\  (s = u INTER t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8604,7 +10966,18 @@ pub fn open_in_open() -> @kernel.Thm {
 ///|
 /// OPEN_IN_INTER_OPEN
 fn step_555() -> Unit raise {
-  open_in_inter_open_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  open_in (subtopology euclidean u) s  ∧  open t\n    ⇒ open_in (subtopology euclidean u) (s ∩ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN OpenInSubtopologyInterOpen")))
+  open_in_inter_open_c.set(@readable.prove(
+    "\n  forall s t u.  open_in (subtopology euclidean u) s  /\\   open t\n    ==> open_in (subtopology euclidean u) (s INTER t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenInSubtopologyInterOpen", () => openinsubtopologyinteropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8617,25 +10990,20 @@ pub fn open_in_inter_open() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_284`
-pub fn exec_phrase_284(x293 : Unit) -> Unit raise {
-  let _ = x293
-  {
-    @readable.thm_ref().val = openinsubtopologyinteropen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInSubtopologyInterOpen): thm);;
-fn step_556() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInSubtopologyInterOpen): thm);;", exec_phrase_284)
-}
-
-///|
 /// OPEN_IN_OPEN_INTER
 fn step_557() -> Unit raise {
-  open_in_open_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s.  open s  ⇒  open_in (subtopology euclidean u) (u ∩ s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN OpenInOpenInter")))
+  open_in_open_inter_c.set(@readable.prove(
+    "\n  forall u s.  open s  ==>  open_in (subtopology euclidean u) (u INTER s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenInOpenInter", () => openinopeninter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8650,7 +11018,16 @@ pub fn open_in_open_inter() -> @kernel.Thm {
 ///|
 /// OPEN_OPEN_IN_TRANS
 fn step_558() -> Unit raise {
-  open_open_in_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s  ∧  open t  ∧  t ⊂ s\n    ⇒ open_in (subtopology euclidean s) t\n  by fol OPEN_IN OpenOpenInTrans")))
+  open_open_in_trans_c.set(@readable.prove(
+    "\n  forall s t.  open s  /\\   open t  /\\   t SUBSET s\n    ==> open_in (subtopology euclidean s) t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenOpenInTrans", () => openopenintrans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8665,7 +11042,18 @@ pub fn open_open_in_trans() -> @kernel.Thm {
 ///|
 /// OPEN_SUBSET
 fn step_559() -> Unit raise {
-  open_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s ⊂ t  ∧  open s  ⇒  open_in (subtopology euclidean t) s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN OpenSubset")))
+  open_subset_c.set(@readable.prove(
+    "\n  forall s t.  s SUBSET t  /\\   open s  ==>  open_in (subtopology euclidean t) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenSubset", () => opensubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8678,25 +11066,21 @@ pub fn open_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_285`
-pub fn exec_phrase_285(x294 : Unit) -> Unit raise {
-  let _ = x294
-  {
-    @readable.thm_ref().val = opensubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenSubset): thm);;
-fn step_560() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenSubset): thm);;", exec_phrase_285)
-}
-
-///|
 /// CLOSED_IN_CLOSED
 fn step_561() -> Unit raise {
-  closed_in_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s u.\n    closed_in (subtopology euclidean u) s  ⇔  ∃t. closed t ∧ (s = u ∩ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN ClosedInSubtopology INTER_COMM")))
+  closed_in_closed_c.set(@readable.prove(
+    "\n  forall s u.\n    closed_in (subtopology euclidean u) s  <=>  ?t. closed t /\\  (s = u INTER t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+        @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8711,7 +11095,18 @@ pub fn closed_in_closed() -> @kernel.Thm {
 ///|
 /// CLOSED_SUBSET_EQ
 fn step_562() -> Unit raise {
-  closed_subset_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s.  closed s  ⇒  (closed_in (subtopology euclidean u) s  ⇔  s ⊂ u)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN ClosedSubsetEq")))
+  closed_subset_eq_c.set(@readable.prove(
+    "\n  forall u s.  closed s  ==>  (closed_in (subtopology euclidean u) s  <=>  s SUBSET u)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedSubsetEq", () => closedsubseteq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8724,25 +11119,20 @@ pub fn closed_subset_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_286`
-pub fn exec_phrase_286(x295 : Unit) -> Unit raise {
-  let _ = x295
-  {
-    @readable.thm_ref().val = closedsubseteq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedSubsetEq): thm);;
-fn step_563() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedSubsetEq): thm);;", exec_phrase_286)
-}
-
-///|
 /// CLOSED_IN_INTER_CLOSED
 fn step_564() -> Unit raise {
-  closed_in_inter_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  closed_in (subtopology euclidean u) s  ∧  closed t\n    ⇒ closed_in (subtopology euclidean u) (s ∩ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN ClosedInInterClosed")))
+  closed_in_inter_closed_c.set(@readable.prove(
+    "\n  forall s t u.  closed_in (subtopology euclidean u) s  /\\   closed t\n    ==> closed_in (subtopology euclidean u) (s INTER t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedInInterClosed", () => closedininterclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8755,25 +11145,20 @@ pub fn closed_in_inter_closed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_287`
-pub fn exec_phrase_287(x296 : Unit) -> Unit raise {
-  let _ = x296
-  {
-    @readable.thm_ref().val = closedininterclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInInterClosed): thm);;
-fn step_565() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInInterClosed): thm);;", exec_phrase_287)
-}
-
-///|
 /// CLOSED_IN_CLOSED_INTER
 fn step_566() -> Unit raise {
-  closed_in_closed_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s. closed s  ⇒  closed_in (subtopology euclidean u) (u ∩ s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN ClosedInClosedInter")))
+  closed_in_closed_inter_c.set(@readable.prove(
+    "\n  forall u s. closed s  ==>  closed_in (subtopology euclidean u) (u INTER s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedInClosedInter", () => closedinclosedinter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8786,25 +11171,20 @@ pub fn closed_in_closed_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_288`
-pub fn exec_phrase_288(x297 : Unit) -> Unit raise {
-  let _ = x297
-  {
-    @readable.thm_ref().val = closedinclosedinter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInClosedInter): thm);;
-fn step_567() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInClosedInter): thm);;", exec_phrase_288)
-}
-
-///|
 /// CLOSED_SUBSET
 fn step_568() -> Unit raise {
-  closed_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s ⊂ t ∧ closed s  ⇒  closed_in (subtopology euclidean t) s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN ClosedSubset")))
+  closed_subset_c.set(@readable.prove(
+    "\n  forall s t.  s SUBSET t /\\  closed s  ==>  closed_in (subtopology euclidean t) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedSubset", () => closedsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8817,25 +11197,20 @@ pub fn closed_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_289`
-pub fn exec_phrase_289(x298 : Unit) -> Unit raise {
-  let _ = x298
-  {
-    @readable.thm_ref().val = closedsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedSubset): thm);;
-fn step_569() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedSubset): thm);;", exec_phrase_289)
-}
-
-///|
 /// OPEN_IN_SUBSET_TRANS
 fn step_570() -> Unit raise {
-  open_in_subset_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  open_in (subtopology euclidean u) s  ∧  s ⊂ t  ∧  t ⊂ u\n    ⇒ open_in (subtopology euclidean t) s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN OpenInSubsetTrans")))
+  open_in_subset_trans_c.set(@readable.prove(
+    "\n  forall s t u.  open_in (subtopology euclidean u) s  /\\   s SUBSET t  /\\   t SUBSET u\n    ==> open_in (subtopology euclidean t) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("OpenInSubsetTrans", () => openinsubsettrans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8848,25 +11223,20 @@ pub fn open_in_subset_trans() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_290`
-pub fn exec_phrase_290(x299 : Unit) -> Unit raise {
-  let _ = x299
-  {
-    @readable.thm_ref().val = openinsubsettrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInSubsetTrans): thm);;
-fn step_571() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInSubsetTrans): thm);;", exec_phrase_290)
-}
-
-///|
 /// CLOSED_IN_SUBSET_TRANS
 fn step_572() -> Unit raise {
-  closed_in_subset_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  closed_in (subtopology euclidean u) s  ∧  s ⊂ t  ∧  t ⊂ u\n    ⇒ closed_in (subtopology euclidean t) s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN ClosedInSubsetTrans")))
+  closed_in_subset_trans_c.set(@readable.prove(
+    "\n  forall s t u.  closed_in (subtopology euclidean u) s  /\\   s SUBSET t  /\\   t SUBSET u\n    ==> closed_in (subtopology euclidean t) s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedInSubsetTrans", () => closedinsubsettrans()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8879,25 +11249,58 @@ pub fn closed_in_subset_trans() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_291`
-pub fn exec_phrase_291(x300 : Unit) -> Unit raise {
-  let _ = x300
-  {
-    @readable.thm_ref().val = closedinsubsettrans()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInSubsetTrans): thm);;
-fn step_573() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInSubsetTrans): thm);;", exec_phrase_291)
-}
-
-///|
 /// OPEN_IN_CONTAINS_BALL_LEMMA
 fn step_574() -> Unit raise {
-  open_in_contains_ball_lemma_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀t s x.  x ∈ s  ⇒\n    ((∃E. open E  ∧  x ∈ E  ∧  E ∩ t ⊂ s)  ⇔\n    (∃e. &0 < e  ∧  ball (x,e) ∩ t ⊂ s))\n\n  proof\n    intro_TAC ∀ t s x, xs;\n    eq_tac     [Right] by fol CENTRE_IN_BALL OPEN_BALL;\n    intro_TAC H2;\n    consider a such that\n    open a ∧ x ∈ a ∧ a ∩ t ⊂ s     [aExists] by fol H2;\n    consider e such that\n    &0 < e ∧ ball(x,e) ⊂ a     [eExists] by fol - OPEN_CONTAINS_BALL;\n    fol aExists - INTER_SUBSET GSYM SUBSET_INTER SUBSET_TRANS;\n  qed;\n")))
+  open_in_contains_ball_lemma_c.set(@readable.prove(
+    "\n  forall t s x.  x IN s  ==>\n    ((?E. open E  /\\   x IN E  /\\   E INTER t SUBSET s)  <=>\n    (?e. &0 < e  /\\   ball (x,e) INTER t SUBSET s))",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall  t s x, xs"),
+        @readable.eq_tac(
+          "Right",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("CENTRE_IN_BALL", () => centre_in_ball()),
+              @readable.Thm("OPEN_BALL", () => open_ball()),
+            ],
+          ),
+        ),
+        @readable.intro_tac("H2"),
+        @readable.consider(
+          "a",
+          "open a /\\  x IN a /\\  a INTER t SUBSET s    ",
+          "aExists",
+          @readable.by(@readable.fol, [@readable.Label("H2")]),
+        ),
+        @readable.consider(
+          "e",
+          "&0 < e /\\  ball(x,e) SUBSET a    ",
+          "eExists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Prev,
+              @readable.Thm("OPEN_CONTAINS_BALL", () => open_contains_ball()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Label("aExists"),
+            @readable.Prev,
+            @readable.Thm("INTER_SUBSET", () => @sets.inter_subset()),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("SUBSET_INTER", () => @sets.subset_inter()),
+            ),
+            @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8910,57 +11313,27 @@ pub fn open_in_contains_ball_lemma() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_292`
-pub fn exec_phrase_292(x301 : Unit) -> Unit raise {
-  let _ = x301
-  {
-    @readable.thm_ref().val = centre_in_ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CENTRE_IN_BALL): thm);;
-fn step_575() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CENTRE_IN_BALL): thm);;", exec_phrase_292)
-}
-
-///|
-/// `exec_phrase_293`
-pub fn exec_phrase_293(x302 : Unit) -> Unit raise {
-  let _ = x302
-  {
-    @readable.thm_ref().val = open_ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_BALL): thm);;
-fn step_576() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_BALL): thm);;", exec_phrase_293)
-}
-
-///|
-/// `exec_phrase_294`
-pub fn exec_phrase_294(x303 : Unit) -> Unit raise {
-  let _ = x303
-  {
-    @readable.thm_ref().val = open_contains_ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_CONTAINS_BALL): thm);;
-fn step_577() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_CONTAINS_BALL): thm);;", exec_phrase_294)
-}
-
-///|
 /// OPEN_IN_CONTAINS_BALL
 fn step_578() -> Unit raise {
-  open_in_contains_ball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open_in (subtopology euclidean t) s  ⇔\n    s ⊂ t  ∧  ∀x. x ∈ s ⇒ ∃e. &0 < e ∧ ball(x,e) ∩ t ⊂ s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN SubtopologyOpenInSubopen GSYM OPEN_IN GSYM OPEN_IN_CONTAINS_BALL_LEMMA")))
+  open_in_contains_ball_c.set(@readable.prove(
+    "\n  forall s t.  open_in (subtopology euclidean t) s  <=>\n    s SUBSET t  /\\   forall x. x IN s ==> ?e. &0 < e /\\  ball(x,e) INTER t SUBSET s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("SubtopologyOpenInSubopen", () => subtopologyopeninsubopen()),
+        @readable.Rule(@equal.gsym, @readable.Thm("OPEN_IN", () => open_in())),
+        @readable.Rule(
+          @equal.gsym,
+          @readable.Thm(
+            "OPEN_IN_CONTAINS_BALL_LEMMA",
+            () => open_in_contains_ball_lemma(),
+          ),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -8973,41 +11346,21 @@ pub fn open_in_contains_ball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_295`
-pub fn exec_phrase_295(x304 : Unit) -> Unit raise {
-  let _ = x304
-  {
-    @readable.thm_ref().val = subtopologyopeninsubopen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SubtopologyOpenInSubopen): thm);;
-fn step_579() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SubtopologyOpenInSubopen): thm);;", exec_phrase_295)
-}
-
-///|
-/// `exec_phrase_296`
-pub fn exec_phrase_296(x305 : Unit) -> Unit raise {
-  let _ = x305
-  {
-    @readable.thm_ref().val = open_in_contains_ball_lemma()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_CONTAINS_BALL_LEMMA): thm);;
-fn step_580() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_CONTAINS_BALL_LEMMA): thm);;", exec_phrase_296)
-}
-
-///|
 /// OPEN_IN_CONTAINS_CBALL
 fn step_581() -> Unit raise {
-  open_in_contains_cball_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open_in (subtopology euclidean t) s  ⇔\n    s ⊂ t  ∧  ∀x. x ∈ s ⇒ ∃e. &0 < e ∧ cball(x,e) ∩ t ⊂ s\n  by fol OPEN_IN_CONTAINS_BALL OPEN_IN_CONTAINS_CBALL_LEMMA")))
+  open_in_contains_cball_c.set(@readable.prove(
+    "\n  forall s t.  open_in (subtopology euclidean t) s  <=>\n    s SUBSET t  /\\   forall x. x IN s ==> ?e. &0 < e /\\  cball(x,e) INTER t SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN_CONTAINS_BALL", () => open_in_contains_ball()),
+        @readable.Thm(
+          "OPEN_IN_CONTAINS_CBALL_LEMMA",
+          () => open_in_contains_cball_lemma(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9020,41 +11373,22 @@ pub fn open_in_contains_cball() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_297`
-pub fn exec_phrase_297(x306 : Unit) -> Unit raise {
-  let _ = x306
-  {
-    @readable.thm_ref().val = open_in_contains_ball()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_CONTAINS_BALL): thm);;
-fn step_582() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_CONTAINS_BALL): thm);;", exec_phrase_297)
-}
-
-///|
-/// `exec_phrase_298`
-pub fn exec_phrase_298(x307 : Unit) -> Unit raise {
-  let _ = x307
-  {
-    @readable.thm_ref().val = open_in_contains_cball_lemma()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_CONTAINS_CBALL_LEMMA): thm);;
-fn step_583() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_CONTAINS_CBALL_LEMMA): thm);;", exec_phrase_298)
-}
-
-///|
 /// open_in
 fn step_584() -> Unit raise {
-  open_in_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s.  open_in (subtopology euclidean u) s   ⇔\n    s ⊂ u  ∧\n    ∀x. x ∈ s ⇒ ∃e. &0 < e ∧\n    ∀x'. x' ∈ u ∧ dist(x',x) < e ⇒ x' ∈ s\n  by rewrite OPEN_IN_CONTAINS_BALL IN_INTER SUBSET IN_BALL CONJ_SYM DIST_SYM")))
+  open_in_v1_c.set(@readable.prove(
+    "\n  forall u s.  open_in (subtopology euclidean u) s   <=>\n    s SUBSET u  /\\ \n    forall x. x IN s ==> ?e. &0 < e /\\ \n    forall x'. x' IN u /\\  dist(x',x) < e ==> x' IN s",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("OPEN_IN_CONTAINS_BALL", () => open_in_contains_ball()),
+        @readable.Thm("IN_INTER", () => @sets.in_inter()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+        @readable.Thm("IN_BALL", () => in_ball()),
+        @readable.Thm("CONJ_SYM", () => @theorems.conj_sym()),
+        @readable.Thm("DIST_SYM", () => @vectors.dist_sym()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9067,25 +11401,35 @@ pub fn open_in_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_299`
-pub fn exec_phrase_299(x308 : Unit) -> Unit raise {
-  let _ = x308
-  {
-    @readable.thm_ref().val = @theorems.conj_sym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CONJ_SYM): thm);;
-fn step_585() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CONJ_SYM): thm);;", exec_phrase_299)
-}
-
-///|
 /// OPEN_IN_TRANS
 fn step_586() -> Unit raise {
-  open_in_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u. open_in (subtopology euclidean t) s  ∧\n    open_in (subtopology euclidean u) t\n    ⇒ open_in (subtopology euclidean u) s\n\n  proof\n    intro_TAC ∀s t u;\n    t ⊂ topspace euclidean  ∧  u ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - OPEN_IN OpenInTrans;\n  qed;\n")))
+  open_in_trans_c.set(@readable.prove(
+    "\n  forall s t u. open_in (subtopology euclidean t) s  /\\ \n    open_in (subtopology euclidean u) t\n    ==> open_in (subtopology euclidean u) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t u"),
+        @readable.have(
+          "\n    t SUBSET topspace euclidean  /\\   u SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("OPEN_IN", () => open_in()),
+            @readable.Thm("OpenInTrans", () => openintrans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9100,7 +11444,17 @@ pub fn open_in_trans() -> @kernel.Thm {
 ///|
 /// OPEN_IN_TRANS_EQ
 fn step_587() -> Unit raise {
-  open_in_trans_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  (∀u. open_in (subtopology euclidean t) u\n    ⇒  open_in (subtopology euclidean s) t)\n    ⇔  open_in (subtopology euclidean s) t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInTransEq")))
+  open_in_trans_eq_c.set(@readable.prove(
+    "\n  forall s t.  (forall u. open_in (subtopology euclidean t) u\n    ==>  open_in (subtopology euclidean s) t)\n    <=>  open_in (subtopology euclidean s) t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInTransEq", () => openintranseq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9113,25 +11467,36 @@ pub fn open_in_trans_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_300`
-pub fn exec_phrase_300(x309 : Unit) -> Unit raise {
-  let _ = x309
-  {
-    @readable.thm_ref().val = openintranseq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInTransEq): thm);;
-fn step_588() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInTransEq): thm);;", exec_phrase_300)
-}
-
-///|
 /// OPEN_IN_OPEN_TRANS
 fn step_589() -> Unit raise {
-  open_in_open_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s.  open_in (subtopology euclidean u) s ∧ open u  ⇒  open s\n\n  proof\n    intro_TAC ∀u s, H1;\n    u ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - H1 OPEN_IN OpenInOpenTrans;\n  qed;\n")))
+  open_in_open_trans_c.set(@readable.prove(
+    "\n  forall u s.  open_in (subtopology euclidean u) s /\\  open u  ==>  open s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall u s, H1"),
+        @readable.have(
+          "\n    u SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Label("H1"),
+            @readable.Thm("OPEN_IN", () => open_in()),
+            @readable.Thm("OpenInOpenTrans", () => openinopentrans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9146,7 +11511,32 @@ pub fn open_in_open_trans() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_TRANS
 fn step_590() -> Unit raise {
-  closed_in_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  closed_in (subtopology euclidean t) s  ∧\n    closed_in (subtopology euclidean u) t\n    ⇒ closed_in (subtopology euclidean u) s\n\n  proof\n    intro_TAC ∀s t u;\n    t ⊂ topspace euclidean ∧ u ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - ClosedInSubtopologyTrans;\n  qed;\n")))
+  closed_in_trans_c.set(@readable.prove(
+    "\n  forall s t u.  closed_in (subtopology euclidean t) s  /\\ \n    closed_in (subtopology euclidean u) t\n    ==> closed_in (subtopology euclidean u) s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t u"),
+        @readable.have(
+          "\n    t SUBSET topspace euclidean /\\  u SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("ClosedInSubtopologyTrans", () => closedinsubtopologytrans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9161,7 +11551,17 @@ pub fn closed_in_trans() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_TRANS_EQ
 fn step_591() -> Unit raise {
-  closed_in_trans_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.\n    (∀u. closed_in (subtopology euclidean t) u ⇒ closed_in (subtopology euclidean s) t)\n    ⇔ closed_in (subtopology euclidean s) t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosedInSubtopologyTransEq")))
+  closed_in_trans_eq_c.set(@readable.prove(
+    "\n  forall s t.\n    (forall u. closed_in (subtopology euclidean t) u ==> closed_in (subtopology euclidean s) t)\n    <=> closed_in (subtopology euclidean s) t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("ClosedInSubtopologyTransEq", () => closedinsubtopologytranseq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9174,25 +11574,35 @@ pub fn closed_in_trans_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_301`
-pub fn exec_phrase_301(x310 : Unit) -> Unit raise {
-  let _ = x310
-  {
-    @readable.thm_ref().val = closedinsubtopologytranseq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInSubtopologyTransEq): thm);;
-fn step_592() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInSubtopologyTransEq): thm);;", exec_phrase_301)
-}
-
-///|
 /// CLOSED_IN_CLOSED_TRANS
 fn step_593() -> Unit raise {
-  closed_in_closed_trans_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s u. closed_in (subtopology euclidean u) s ∧ closed u ⇒ closed s\n\n  proof\n    intro_TAC ∀u s;\n    u ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - CLOSED_IN ClosedInClosedTrans;\n  qed;\n")))
+  closed_in_closed_trans_c.set(@readable.prove(
+    "\n  forall s u. closed_in (subtopology euclidean u) s /\\  closed u ==> closed s",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall u s"),
+        @readable.have(
+          "\n    u SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+            @readable.Thm("ClosedInClosedTrans", () => closedinclosedtrans()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9207,7 +11617,20 @@ pub fn closed_in_closed_trans() -> @kernel.Thm {
 ///|
 /// OPEN_IN_SUBTOPOLOGY_INTER_SUBSET
 fn step_594() -> Unit raise {
-  open_in_subtopology_inter_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s u v. open_in (subtopology euclidean u) (u ∩ s)  ∧  v ⊂ u\n    ⇒ open_in (subtopology euclidean v) (v ∩ s)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInSubtopologyInterSubset")))
+  open_in_subtopology_inter_subset_c.set(@readable.prove(
+    "\n  forall s u v. open_in (subtopology euclidean u) (u INTER s)  /\\   v SUBSET u\n    ==> open_in (subtopology euclidean v) (v INTER s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm(
+          "OpenInSubtopologyInterSubset",
+          () => openinsubtopologyintersubset(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9220,25 +11643,20 @@ pub fn open_in_subtopology_inter_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_302`
-pub fn exec_phrase_302(x311 : Unit) -> Unit raise {
-  let _ = x311
-  {
-    @readable.thm_ref().val = openinsubtopologyintersubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInSubtopologyInterSubset): thm);;
-fn step_595() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInSubtopologyInterSubset): thm);;", exec_phrase_302)
-}
-
-///|
 /// OPEN_IN_OPEN_EQ
 fn step_596() -> Unit raise {
-  open_in_open_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s  ⇒  (open_in (subtopology euclidean s) t ⇔ open t ∧ t ⊂ s)\n  by fol OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInOpenEq")))
+  open_in_open_eq_c.set(@readable.prove(
+    "\n  forall s t.  open s  ==>  (open_in (subtopology euclidean s) t <=> open t /\\  t SUBSET s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInOpenEq", () => openinopeneq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9251,25 +11669,20 @@ pub fn open_in_open_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_303`
-pub fn exec_phrase_303(x312 : Unit) -> Unit raise {
-  let _ = x312
-  {
-    @readable.thm_ref().val = openinopeneq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInOpenEq): thm);;
-fn step_597() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInOpenEq): thm);;", exec_phrase_303)
-}
-
-///|
 /// CLOSED_IN_CLOSED_EQ
 fn step_598() -> Unit raise {
-  closed_in_closed_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s  ⇒\n    (closed_in (subtopology euclidean s) t ⇔ closed t ∧ t ⊂ s)\n  by fol CLOSED_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosedInClosedEq")))
+  closed_in_closed_eq_c.set(@readable.prove(
+    "\n  forall s t.  closed s  ==>\n    (closed_in (subtopology euclidean s) t <=> closed t /\\  t SUBSET s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("ClosedInClosedEq", () => closedinclosedeq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9282,25 +11695,152 @@ pub fn closed_in_closed_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_304`
-pub fn exec_phrase_304(x313 : Unit) -> Unit raise {
-  let _ = x313
-  {
-    @readable.thm_ref().val = closedinclosedeq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInClosedEq): thm);;
-fn step_599() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInClosedEq): thm);;", exec_phrase_304)
-}
-
-///|
 /// OPEN_IN_INJECTIVE_LINEAR_IMAGE
 fn step_600() -> Unit raise {
-  open_in_injective_linear_image_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f s t.  linear f ∧ (∀x y. f x = f y ⇒ x = y) ⇒\n    (open_in (subtopology euclidean (IMAGE f t)) (IMAGE f s) ⇔\n    open_in (subtopology euclidean t) s)\n\n  proof\n    rewrite open_in FORALL_IN_IMAGE IMP_CONJ SUBSET;\n    intro_TAC ∀f s t, H1, H2;\n    ∀x s. f x ∈ IMAGE f s ⇔ x ∈ s     [fInjMap] by set H2;\n    rewrite -;\n    ∀x y. f x - f y = f (x - y)     [fSubLinear] by fol H1 LINEAR_SUB;\n    consider B1 such that\n    &0 < B1  ∧  ∀x. norm (f x) <= B1 * norm x     [B1exists] by fol H1 LINEAR_BOUNDED_POS;\n    consider B2 such that\n    &0 < B2  ∧  ∀x. norm x * B2 <= norm (f x)     [B2exists] by fol H1 H2 LINEAR_INJECTIVE_BOUNDED_BELOW_POS;\n    AP_TERM_TAC;\n    eq_tac     [Left]\n    proof\n      intro_TAC H3, ∀x, xs;\n      consider e such that\n      &0 < e  ∧  ∀x'. x' ∈ t ⇒ dist (f x',f x) < e ⇒ x' ∈ s     [eExists] by fol H3 xs;\n      exists_TAC e / B1;\n      simplify REAL_LT_DIV eExists B1exists;\n      intro_TAC ∀x', x't;\n      ∀x. norm(f x) <= B1 * norm(x)  ∧ norm(x) * B1 < e  ⇒  norm(f x) < e     [normB1] by real_arithmetic;\n      simplify fSubLinear B1exists H3 eExists x't normB1 dist REAL_LT_RDIV_EQ;\n    qed;\n    intro_TAC H3, ∀x, xs;\n    consider e such that\n    &0 < e  ∧  ∀x'. x' ∈ t ⇒ dist (x',x) < e ⇒ x' ∈ s     [eExists] by fol H3 xs;\n    exists_TAC e * B2;\n    simplify REAL_LT_MUL eExists B2exists;\n    intro_TAC ∀x', x't;\n    ∀x. norm x <= norm (f x) / B2 ∧ norm(f x) / B2 < e  ⇒  norm x < e     [normB2] by real_arithmetic;\n    simplify fSubLinear B2exists H3 eExists x't normB2 dist REAL_LE_RDIV_EQ REAL_LT_LDIV_EQ;\n  qed;\n")))
+  open_in_injective_linear_image_c.set(@readable.prove(
+    "\n  forall f s t.  linear f /\\  (forall x y. f x = f y ==> x = y) ==>\n    (open_in (subtopology euclidean (IMAGE f t)) (IMAGE f s) <=>\n    open_in (subtopology euclidean t) s)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("open_in", () => open_in_v1()),
+            @readable.Thm("FORALL_IN_IMAGE", () => @sets.forall_in_image()),
+            @readable.Thm("IMP_CONJ", () => @theorems.imp_conj()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+          ],
+        ),
+        @readable.intro_tac("forall f s t, H1, H2"),
+        @readable.have(
+          "\n    forall x s. f x IN IMAGE f s <=> x IN s",
+          "fInjMap",
+          @readable.by(@readable.set, [@readable.Label("H2")]),
+        ),
+        @readable.by(@readable.rewrite, [@readable.Prev]),
+        @readable.have(
+          "\n    forall x y. f x - f y = f (x - y)",
+          "fSubLinear",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("LINEAR_SUB", () => @vectors.linear_sub()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "B1",
+          "&0 < B1  /\\   forall x. norm (f x) <= B1 * norm x    ",
+          "B1exists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Thm("LINEAR_BOUNDED_POS", () => @vectors.linear_bounded_pos()),
+            ],
+          ),
+        ),
+        @readable.consider(
+          "B2",
+          "&0 < B2  /\\   forall x. norm x * B2 <= norm (f x)    ",
+          "B2exists",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Label("H1"),
+              @readable.Label("H2"),
+              @readable.Thm(
+                "LINEAR_INJECTIVE_BOUNDED_BELOW_POS",
+                () => @vectors.linear_injective_bounded_below_pos(),
+              ),
+            ],
+          ),
+        ),
+        @tactics.ap_term_tac,
+        @readable.eq_tac(
+          "Left",
+          @readable.steps(
+            [
+              @readable.intro_tac("H3, forall x, xs"),
+              @readable.consider(
+                "e",
+                "&0 < e  /\\   forall x'. x' IN t ==> dist (f x',f x) < e ==> x' IN s    ",
+                "eExists",
+                @readable.by(
+                  @readable.fol,
+                  [@readable.Label("H3"), @readable.Label("xs")],
+                ),
+              ),
+              @readable.exists("e / B1"),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Thm("REAL_LT_DIV", () => @real.real_lt_div()),
+                  @readable.Label("eExists"),
+                  @readable.Label("B1exists"),
+                ],
+              ),
+              @readable.intro_tac("forall x', x't"),
+              @readable.have(
+                "\n      forall x. norm(f x) <= B1 * norm(x)  /\\  norm(x) * B1 < e  ==>  norm(f x) < e",
+                "normB1",
+                @readable.by(@readable.real_arithmetic, []),
+              ),
+              @readable.by(
+                @readable.simplify,
+                [
+                  @readable.Label("fSubLinear"),
+                  @readable.Label("B1exists"),
+                  @readable.Label("H3"),
+                  @readable.Label("eExists"),
+                  @readable.Label("x't"),
+                  @readable.Label("normB1"),
+                  @readable.Thm("dist", () => @vectors.dist()),
+                  @readable.Thm("REAL_LT_RDIV_EQ", () => @real.real_lt_rdiv_eq()),
+                ],
+              ),
+            ],
+          ),
+        ),
+        @readable.intro_tac("H3, forall x, xs"),
+        @readable.consider(
+          "e",
+          "&0 < e  /\\   forall x'. x' IN t ==> dist (x',x) < e ==> x' IN s    ",
+          "eExists",
+          @readable.by(@readable.fol, [@readable.Label("H3"), @readable.Label("xs")]),
+        ),
+        @readable.exists("e * B2"),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("REAL_LT_MUL", () => @real.real_lt_mul()),
+            @readable.Label("eExists"),
+            @readable.Label("B2exists"),
+          ],
+        ),
+        @readable.intro_tac("forall x', x't"),
+        @readable.have(
+          "\n    forall x. norm x <= norm (f x) / B2 /\\  norm(f x) / B2 < e  ==>  norm x < e",
+          "normB2",
+          @readable.by(@readable.real_arithmetic, []),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Label("fSubLinear"),
+            @readable.Label("B2exists"),
+            @readable.Label("H3"),
+            @readable.Label("eExists"),
+            @readable.Label("x't"),
+            @readable.Label("normB2"),
+            @readable.Thm("dist", () => @vectors.dist()),
+            @readable.Thm("REAL_LE_RDIV_EQ", () => @real.real_le_rdiv_eq()),
+            @readable.Thm("REAL_LT_LDIV_EQ", () => @real.real_lt_ldiv_eq()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9313,166 +11853,6 @@ pub fn open_in_injective_linear_image() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_305`
-pub fn exec_phrase_305(x314 : Unit) -> Unit raise {
-  let _ = x314
-  {
-    @readable.thm_ref().val = open_in_v1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((open_in): thm);;
-fn step_601() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((open_in): thm);;", exec_phrase_305)
-}
-
-///|
-/// `exec_phrase_306`
-pub fn exec_phrase_306(x315 : Unit) -> Unit raise {
-  let _ = x315
-  {
-    @readable.thm_ref().val = @vectors.linear_sub()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LINEAR_SUB): thm);;
-fn step_602() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LINEAR_SUB): thm);;", exec_phrase_306)
-}
-
-///|
-/// `exec_phrase_307`
-pub fn exec_phrase_307(x316 : Unit) -> Unit raise {
-  let _ = x316
-  {
-    @readable.thm_ref().val = @vectors.linear_bounded_pos()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LINEAR_BOUNDED_POS): thm);;
-fn step_603() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LINEAR_BOUNDED_POS): thm);;", exec_phrase_307)
-}
-
-///|
-/// `exec_phrase_308`
-pub fn exec_phrase_308(x317 : Unit) -> Unit raise {
-  let _ = x317
-  {
-    @readable.thm_ref().val = @vectors.linear_injective_bounded_below_pos()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LINEAR_INJECTIVE_BOUNDED_BELOW_POS): thm);;
-fn step_604() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LINEAR_INJECTIVE_BOUNDED_BELOW_POS): thm);;", exec_phrase_308)
-}
-
-///|
-/// `exec_phrase_309`
-pub fn exec_phrase_309(x318 : Unit) -> Unit raise {
-  let _ = x318
-  {
-    @readable.thm_ref().val = @real.real_lt_div()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_DIV): thm);;
-fn step_605() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_DIV): thm);;", exec_phrase_309)
-}
-
-///|
-/// `exec_phrase_310`
-pub fn exec_phrase_310(x319 : Unit) -> Unit raise {
-  let _ = x319
-  {
-    @readable.thm_ref().val = @vectors.dist()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((dist): thm);;
-fn step_606() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((dist): thm);;", exec_phrase_310)
-}
-
-///|
-/// `exec_phrase_311`
-pub fn exec_phrase_311(x320 : Unit) -> Unit raise {
-  let _ = x320
-  {
-    @readable.thm_ref().val = @real.real_lt_rdiv_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_RDIV_EQ): thm);;
-fn step_607() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_RDIV_EQ): thm);;", exec_phrase_311)
-}
-
-///|
-/// `exec_phrase_312`
-pub fn exec_phrase_312(x321 : Unit) -> Unit raise {
-  let _ = x321
-  {
-    @readable.thm_ref().val = @real.real_lt_mul()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_MUL): thm);;
-fn step_608() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_MUL): thm);;", exec_phrase_312)
-}
-
-///|
-/// `exec_phrase_313`
-pub fn exec_phrase_313(x322 : Unit) -> Unit raise {
-  let _ = x322
-  {
-    @readable.thm_ref().val = @real.real_le_rdiv_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LE_RDIV_EQ): thm);;
-fn step_609() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LE_RDIV_EQ): thm);;", exec_phrase_313)
-}
-
-///|
-/// `exec_phrase_314`
-pub fn exec_phrase_314(x323 : Unit) -> Unit raise {
-  let _ = x323
-  {
-    @readable.thm_ref().val = @real.real_lt_ldiv_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((REAL_LT_LDIV_EQ): thm);;
-fn step_610() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((REAL_LT_LDIV_EQ): thm);;", exec_phrase_314)
-}
-
-///|
 /// RichterHilbertAxiomGeometry/Topology.ml:2740
 fn step_611() -> Unit raise {
   @vectors.add_linear_invariants(@list.List([open_in_injective_linear_image()]))
@@ -9481,7 +11861,24 @@ fn step_611() -> Unit raise {
 ///|
 /// CLOSED_IN_INJECTIVE_LINEAR_IMAGE
 fn step_612() -> Unit raise {
-  closed_in_injective_linear_image_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f s t. linear f ∧ (∀x y. f x = f y ⇒ x = y)  ⇒\n    (closed_in (subtopology euclidean (IMAGE f t)) (IMAGE f s)  ⇔\n    closed_in (subtopology euclidean t) s)\n\n  proof\n    rewrite closed_in TOPSPACE_EUCLIDEAN_SUBTOPOLOGY;\n    GEOM_TRANSFORM_TAC[];\n  qed;\n")))
+  closed_in_injective_linear_image_c.set(@readable.prove(
+    "\n  forall f s t. linear f /\\  (forall x y. f x = f y ==> x = y)  ==>\n    (closed_in (subtopology euclidean (IMAGE f t)) (IMAGE f s)  <=>\n    closed_in (subtopology euclidean t) s)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("closed_in", () => closed_in()),
+            @readable.Thm(
+              "TOPSPACE_EUCLIDEAN_SUBTOPOLOGY",
+              () => topspace_euclidean_subtopology(),
+            ),
+          ],
+        ),
+        @determinants.geom_transform_tac(@list.List([])),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9494,38 +11891,6 @@ pub fn closed_in_injective_linear_image() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_315`
-pub fn exec_phrase_315(x324 : Unit) -> Unit raise {
-  let _ = x324
-  {
-    @readable.tactic_ref().val = @determinants.geom_transform_tac(@list.List([]))
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((GEOM_TRANSFORM_TAC[]): tactic);;
-fn step_613() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((GEOM_TRANSFORM_TAC[]): tactic);;", exec_phrase_315)
-}
-
-///|
-/// `exec_phrase_316`
-pub fn exec_phrase_316(x325 : Unit) -> Unit raise {
-  let _ = x325
-  {
-    @readable.thm_ref().val = topspace_euclidean_subtopology()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((TOPSPACE_EUCLIDEAN_SUBTOPOLOGY): thm);;
-fn step_614() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((TOPSPACE_EUCLIDEAN_SUBTOPOLOGY): thm);;", exec_phrase_316)
-}
-
-///|
 /// RichterHilbertAxiomGeometry/Topology.ml:2753
 fn step_615() -> Unit raise {
   @vectors.add_linear_invariants(@list.List([closed_in_injective_linear_image()]))
@@ -9534,7 +11899,17 @@ fn step_615() -> Unit raise {
 ///|
 /// OPEN_IN_SUBTOPOLOGY
 fn step_616() -> Unit raise {
-  open_in_subtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s.  open_in (subtopology euclidean u) s  ⇔\n    ∃t. open_in euclidean t ∧ s = t ∩ u\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInSubtopology")))
+  open_in_subtopology_c.set(@readable.prove(
+    "\n  forall u s.  open_in (subtopology euclidean u) s  <=>\n    ?t. open_in euclidean t /\\  s = t INTER u",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInSubtopology", () => openinsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9549,7 +11924,37 @@ pub fn open_in_subtopology() -> @kernel.Thm {
 ///|
 /// TOPSPACE_SUBTOPOLOGY
 fn step_617() -> Unit raise {
-  topspace_subtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u.  topspace(subtopology euclidean u) = topspace euclidean ∩ u\n\n  proof\n    intro_TAC ∀u;\n    u ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - TopspaceSubtopology INTER_COMM SUBSET_INTER_ABSORPTION;\n  qed;\n")))
+  topspace_subtopology_c.set(@readable.prove(
+    "\n  forall u.  topspace(subtopology euclidean u) = topspace euclidean INTER u",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall u"),
+        @readable.have(
+          "\n    u SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+            @readable.Thm("INTER_COMM", () => @sets.inter_comm()),
+            @readable.Thm(
+              "SUBSET_INTER_ABSORPTION",
+              () => @sets.subset_inter_absorption(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9564,7 +11969,18 @@ pub fn topspace_subtopology() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_SUBTOPOLOGY
 fn step_618() -> Unit raise {
-  closed_in_subtopology_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u s. closed_in (subtopology euclidean u) s  ⇔\n  ∃t. closed_in euclidean t ∧ s = t ∩ u\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closed_in ClosedInSubtopology")))
+  closed_in_subtopology_c.set(@readable.prove(
+    "\n  forall u s. closed_in (subtopology euclidean u) s  <=>\n  ?t. closed_in euclidean t /\\  s = t INTER u",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("ClosedInSubtopology", () => closedinsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9579,7 +11995,17 @@ pub fn closed_in_subtopology() -> @kernel.Thm {
 ///|
 /// OPEN_IN_SUBTOPOLOGY_REFL
 fn step_619() -> Unit raise {
-  open_in_subtopology_refl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u. open_in (subtopology euclidean u) u  ⇔  u ⊂ topspace euclidean\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OPEN_IN_REFL")))
+  open_in_subtopology_refl_c.set(@readable.prove(
+    "\n  forall u. open_in (subtopology euclidean u) u  <=>  u SUBSET topspace euclidean",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OPEN_IN_REFL", () => open_in_refl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9592,25 +12018,19 @@ pub fn open_in_subtopology_refl() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_317`
-pub fn exec_phrase_317(x326 : Unit) -> Unit raise {
-  let _ = x326
-  {
-    @readable.thm_ref().val = open_in_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_REFL): thm);;
-fn step_620() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_REFL): thm);;", exec_phrase_317)
-}
-
-///|
 /// CLOSED_IN_SUBTOPOLOGY_REFL
 fn step_621() -> Unit raise {
-  closed_in_subtopology_refl_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀u. closed_in (subtopology euclidean u) u  ⇔  u ⊂ topspace euclidean\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN_REFL")))
+  closed_in_subtopology_refl_c.set(@readable.prove(
+    "\n  forall u. closed_in (subtopology euclidean u) u  <=>  u SUBSET topspace euclidean",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN_REFL", () => closed_in_refl()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9623,25 +12043,46 @@ pub fn closed_in_subtopology_refl() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_318`
-pub fn exec_phrase_318(x327 : Unit) -> Unit raise {
-  let _ = x327
-  {
-    @readable.thm_ref().val = closed_in_refl()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CLOSED_IN_REFL): thm);;
-fn step_622() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CLOSED_IN_REFL): thm);;", exec_phrase_318)
-}
-
-///|
 /// SUBTOPOLOGY_UNIV
 fn step_623() -> Unit raise {
-  subtopology_univ_c.set(@readable.theorem(@readable.parse_qproof(";\n  subtopology euclidean UNIV = euclidean\n\n  proof\n    rewrite GSYM Topology_Eq;\n    conj_tac     [Left] by fol TOPSPACE_EUCLIDEAN TOPSPACE_EUCLIDEAN_SUBTOPOLOGY;\n    rewrite GSYM OPEN_IN OPEN_IN_OPEN INTER_UNIV;\n    fol;\n  qed;\n")))
+  subtopology_univ_c.set(@readable.prove(
+    "\n  subtopology euclidean UNIV = euclidean",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("Topology_Eq", () => topology_eq()),
+            ),
+          ],
+        ),
+        @readable.conj_tac(
+          "Left",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+              @readable.Thm(
+                "TOPSPACE_EUCLIDEAN_SUBTOPOLOGY",
+                () => topspace_euclidean_subtopology(),
+              ),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Rule(@equal.gsym, @readable.Thm("OPEN_IN", () => open_in())),
+            @readable.Thm("OPEN_IN_OPEN", () => open_in_open()),
+            @readable.Thm("INTER_UNIV", () => @sets.inter_univ()),
+          ],
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9654,25 +12095,19 @@ pub fn subtopology_univ() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_319`
-pub fn exec_phrase_319(x328 : Unit) -> Unit raise {
-  let _ = x328
-  {
-    @readable.thm_ref().val = open_in_open()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OPEN_IN_OPEN): thm);;
-fn step_624() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OPEN_IN_OPEN): thm);;", exec_phrase_319)
-}
-
-///|
 /// SUBTOPOLOGY_SUPERSET
 fn step_625() -> Unit raise {
-  subtopology_superset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  topspace euclidean ⊂ s  ⇒  subtopology euclidean s = euclidean\n  by simplify TOPSPACE_EUCLIDEAN UNIV_SUBSET SUBTOPOLOGY_UNIV")))
+  subtopology_superset_c.set(@readable.prove(
+    "\n  forall s.  topspace euclidean SUBSET s  ==>  subtopology euclidean s = euclidean",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("UNIV_SUBSET", () => @sets.univ_subset()),
+        @readable.Thm("SUBTOPOLOGY_UNIV", () => subtopology_univ()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9685,41 +12120,19 @@ pub fn subtopology_superset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_320`
-pub fn exec_phrase_320(x329 : Unit) -> Unit raise {
-  let _ = x329
-  {
-    @readable.thm_ref().val = @sets.univ_subset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UNIV_SUBSET): thm);;
-fn step_626() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UNIV_SUBSET): thm);;", exec_phrase_320)
-}
-
-///|
-/// `exec_phrase_321`
-pub fn exec_phrase_321(x330 : Unit) -> Unit raise {
-  let _ = x330
-  {
-    @readable.thm_ref().val = subtopology_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUBTOPOLOGY_UNIV): thm);;
-fn step_627() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUBTOPOLOGY_UNIV): thm);;", exec_phrase_321)
-}
-
-///|
 /// OPEN_IN_IMP_SUBSET
 fn step_628() -> Unit raise {
-  open_in_imp_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open_in (subtopology euclidean s) t  ⇒  t ⊂ s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInImpSubset")))
+  open_in_imp_subset_c.set(@readable.prove(
+    "\n  forall s t.  open_in (subtopology euclidean s) t  ==>  t SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInImpSubset", () => openinimpsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9734,7 +12147,17 @@ pub fn open_in_imp_subset() -> @kernel.Thm {
 ///|
 /// CLOSED_IN_IMP_SUBSET
 fn step_629() -> Unit raise {
-  closed_in_imp_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed_in (subtopology euclidean s) t  ⇒  t ⊂ s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosedInImpSubset")))
+  closed_in_imp_subset_c.set(@readable.prove(
+    "\n  forall s t.  closed_in (subtopology euclidean s) t  ==>  t SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("ClosedInImpSubset", () => closedinimpsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9749,7 +12172,17 @@ pub fn closed_in_imp_subset() -> @kernel.Thm {
 ///|
 /// OPEN_IN_SUBTOPOLOGY_UNION
 fn step_630() -> Unit raise {
-  open_in_subtopology_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  open_in (subtopology euclidean t) s  ∧\n    open_in (subtopology euclidean u) s\n    ⇒  open_in (subtopology euclidean (t ∪ u)) s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenInSubtopologyUnion")))
+  open_in_subtopology_union_c.set(@readable.prove(
+    "\n  forall s t u.  open_in (subtopology euclidean t) s  /\\ \n    open_in (subtopology euclidean u) s\n    ==>  open_in (subtopology euclidean (t UNION u)) s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInSubtopologyUnion", () => openinsubtopologyunion()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9762,25 +12195,19 @@ pub fn open_in_subtopology_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_322`
-pub fn exec_phrase_322(x331 : Unit) -> Unit raise {
-  let _ = x331
-  {
-    @readable.thm_ref().val = openinsubtopologyunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((OpenInSubtopologyUnion): thm);;
-fn step_631() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((OpenInSubtopologyUnion): thm);;", exec_phrase_322)
-}
-
-///|
 /// CLOSED_IN_SUBTOPOLOGY_UNION
 fn step_632() -> Unit raise {
-  closed_in_subtopology_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  closed_in (subtopology euclidean t) s  ∧\n    closed_in (subtopology euclidean u) s\n    ⇒  closed_in (subtopology euclidean (t ∪ u)) s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosedInSubtopologyUnion")))
+  closed_in_subtopology_union_c.set(@readable.prove(
+    "\n  forall s t u.  closed_in (subtopology euclidean t) s  /\\ \n    closed_in (subtopology euclidean u) s\n    ==>  closed_in (subtopology euclidean (t UNION u)) s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("ClosedInSubtopologyUnion", () => closedinsubtopologyunion()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9790,22 +12217,6 @@ let closed_in_subtopology_union_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CLO
 /// `CLOSED_IN_SUBTOPOLOGY_UNION`
 pub fn closed_in_subtopology_union() -> @kernel.Thm {
   closed_in_subtopology_union_c.get()
-}
-
-///|
-/// `exec_phrase_323`
-pub fn exec_phrase_323(x332 : Unit) -> Unit raise {
-  let _ = x332
-  {
-    @readable.thm_ref().val = closedinsubtopologyunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInSubtopologyUnion): thm);;
-fn step_633() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInSubtopologyUnion): thm);;", exec_phrase_323)
 }
 
 ///|
@@ -9826,7 +12237,19 @@ pub fn connected_def_v1() -> @kernel.Thm {
 ///|
 /// connected
 fn step_635() -> Unit raise {
-  connected_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  connected s  ⇔  ¬(∃e1 e2.\n    open e1  ∧  open e2  ∧  s ⊂ e1 ∪ e2  ∧\n    e1 ∩ e2 ∩ s = ∅  ∧  ¬(e1 ∩ s = ∅)  ∧  ¬(e2 ∩ s = ∅))\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF OPEN_IN ConnectedSubtopology")))
+  connected_c.set(@readable.prove(
+    "\n  forall s.  connected s  <=>  ~(?e1 e2.\n    open e1  /\\   open e2  /\\   s SUBSET e1 UNION e2  /\\ \n    e1 INTER e2 INTER s = {}  /\\   ~(e1 INTER s = {})  /\\   ~(e2 INTER s = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("ConnectedSubtopology", () => connectedsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9839,25 +12262,23 @@ pub fn connected() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_324`
-pub fn exec_phrase_324(x333 : Unit) -> Unit raise {
-  let _ = x333
-  {
-    @readable.thm_ref().val = connected_def_v1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((connected_DEF): thm);;
-fn step_636() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((connected_DEF): thm);;", exec_phrase_324)
-}
-
-///|
 /// CONNECTED_CLOSED
 fn step_637() -> Unit raise {
-  connected_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  connected s ⇔\n    ¬(∃e1 e2. closed e1  ∧  closed e2  ∧  s ⊂ e1 ∪ e2  ∧\n    e1 ∩ e2 ∩ s = ∅  ∧  ¬(e1 ∩ s = ∅)  ∧  ¬(e2 ∩ s = ∅))\n  by simplify connected_DEF CLOSED_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF CLOSED_IN ConnectedClosedSubtopology")))
+  connected_closed_c.set(@readable.prove(
+    "\n  forall s.  connected s <=>\n    ~(?e1 e2. closed e1  /\\   closed e2  /\\   s SUBSET e1 UNION e2  /\\ \n    e1 INTER e2 INTER s = {}  /\\   ~(e1 INTER s = {})  /\\   ~(e2 INTER s = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ConnectedClosedSubtopology", () => connectedclosedsubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9872,7 +12293,19 @@ pub fn connected_closed() -> @kernel.Thm {
 ///|
 /// CONNECTED_OPEN_IN
 fn step_638() -> Unit raise {
-  connected_open_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. connected s  ⇔  ¬(∃e1 e2.\n    open_in (subtopology euclidean s) e1 ∧\n    open_in (subtopology euclidean s) e2 ∧\n    s ⊂ e1 ∪ e2  ∧  e1 ∩ e2 = ∅  ∧  ¬(e1 = ∅)  ∧  ¬(e2 = ∅))\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF OPEN_IN ConnectedOpenIn")))
+  connected_open_in_c.set(@readable.prove(
+    "\n  forall s. connected s  <=>  ~(?e1 e2.\n    open_in (subtopology euclidean s) e1 /\\ \n    open_in (subtopology euclidean s) e2 /\\ \n    s SUBSET e1 UNION e2  /\\   e1 INTER e2 = {}  /\\   ~(e1 = {})  /\\   ~(e2 = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("ConnectedOpenIn", () => connectedopenin()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9887,7 +12320,20 @@ pub fn connected_open_in() -> @kernel.Thm {
 ///|
 /// CONNECTED_OPEN_IN_EQ
 fn step_639() -> Unit raise {
-  connected_open_in_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. connected s  ⇔  ¬(∃e1 e2.\n    open_in (subtopology euclidean s) e1 ∧\n    open_in (subtopology euclidean s) e2 ∧\n    e1 ∪ e2 = s ∧ e1 ∩ e2 = ∅ ∧\n    ¬(e1 = ∅) ∧ ¬(e2 = ∅))\n  by simplify connected_DEF Connected_DEF SUBSET_UNIV TOPSPACE_EUCLIDEAN TopspaceSubtopology EQ_SYM_EQ")))
+  connected_open_in_eq_c.set(@readable.prove(
+    "\n  forall s. connected s  <=>  ~(?e1 e2.\n    open_in (subtopology euclidean s) e1 /\\ \n    open_in (subtopology euclidean s) e2 /\\ \n    e1 UNION e2 = s /\\  e1 INTER e2 = {} /\\ \n    ~(e1 = {}) /\\  ~(e2 = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("Connected_DEF", () => connected_def()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+        @readable.Thm("EQ_SYM_EQ", () => @theorems.eq_sym_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9900,25 +12346,21 @@ pub fn connected_open_in_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_325`
-pub fn exec_phrase_325(x334 : Unit) -> Unit raise {
-  let _ = x334
-  {
-    @readable.thm_ref().val = @theorems.eq_sym_eq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EQ_SYM_EQ): thm);;
-fn step_640() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EQ_SYM_EQ): thm);;", exec_phrase_325)
-}
-
-///|
 /// CONNECTED_CLOSED_IN
 fn step_641() -> Unit raise {
-  connected_closed_in_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. connected s  ⇔  ¬(∃e1 e2.\n    closed_in (subtopology euclidean s) e1 ∧\n    closed_in (subtopology euclidean s) e2 ∧\n    s ⊂ e1 ∪ e2  ∧  e1 ∩ e2 = ∅  ∧  ¬(e1 = ∅)  ∧  ¬(e2 = ∅))\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF CLOSED_IN ConnectedClosedIn")))
+  connected_closed_in_c.set(@readable.prove(
+    "\n  forall s. connected s  <=>  ~(?e1 e2.\n    closed_in (subtopology euclidean s) e1 /\\ \n    closed_in (subtopology euclidean s) e2 /\\ \n    s SUBSET e1 UNION e2  /\\   e1 INTER e2 = {}  /\\   ~(e1 = {})  /\\   ~(e2 = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ConnectedClosedIn", () => connectedclosedin()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9931,25 +12373,22 @@ pub fn connected_closed_in() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_326`
-pub fn exec_phrase_326(x335 : Unit) -> Unit raise {
-  let _ = x335
-  {
-    @readable.thm_ref().val = connectedclosedin()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosedIn): thm);;
-fn step_642() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosedIn): thm);;", exec_phrase_326)
-}
-
-///|
 /// CONNECTED_CLOSED_IN_EQ
 fn step_643() -> Unit raise {
-  connected_closed_in_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. connected s  ⇔  ¬(∃e1 e2.\n    closed_in (subtopology euclidean s) e1  ∧\n    closed_in (subtopology euclidean s) e2  ∧\n    e1 ∪ e2 = s  ∧  e1 ∩ e2 = ∅  ∧  ¬(e1 = ∅)  ∧  ¬(e2 = ∅))\n  by simplify connected_DEF ConnectedClosed SUBSET_UNIV TOPSPACE_EUCLIDEAN TopspaceSubtopology EQ_SYM_EQ")))
+  connected_closed_in_eq_c.set(@readable.prove(
+    "\n  forall s. connected s  <=>  ~(?e1 e2.\n    closed_in (subtopology euclidean s) e1  /\\ \n    closed_in (subtopology euclidean s) e2  /\\ \n    e1 UNION e2 = s  /\\   e1 INTER e2 = {}  /\\   ~(e1 = {})  /\\   ~(e2 = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("ConnectedClosed", () => connectedclosed()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+        @readable.Thm("EQ_SYM_EQ", () => @theorems.eq_sym_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9964,7 +12403,19 @@ pub fn connected_closed_in_eq() -> @kernel.Thm {
 ///|
 /// CONNECTED_CLOPEN
 fn step_644() -> Unit raise {
-  connected_clopen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. connected s  ⇔\n    ∀t. open_in (subtopology euclidean s) t  ∧\n      closed_in (subtopology euclidean s) t ⇒ t = ∅ ∨ t = s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF ConnectedClopen TopspaceSubtopology")))
+  connected_clopen_c.set(@readable.prove(
+    "\n  forall s. connected s  <=>\n    forall t. open_in (subtopology euclidean s) t  /\\ \n      closed_in (subtopology euclidean s) t ==> t = {} \\/ t = s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("ConnectedClopen", () => connectedclopen()),
+        @readable.Thm("TopspaceSubtopology", () => topspacesubtopology()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -9977,25 +12428,20 @@ pub fn connected_clopen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_327`
-pub fn exec_phrase_327(x336 : Unit) -> Unit raise {
-  let _ = x336
-  {
-    @readable.thm_ref().val = connectedclopen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClopen): thm);;
-fn step_645() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClopen): thm);;", exec_phrase_327)
-}
-
-///|
 /// CONNECTED_CLOSED_SET
 fn step_646() -> Unit raise {
-  connected_closed_set_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closed s ⇒\n    (connected s  ⇔\n    ¬(∃e1 e2. closed e1 ∧ closed e2 ∧\n    ¬(e1 = ∅)  ∧  ¬(e2 = ∅)  ∧  e1 ∪ e2 = s  ∧  e1 ∩ e2 = ∅))\n  by simplify connected_DEF CLOSED_IN  closed_in ConnectedClosedSet")))
+  connected_closed_set_c.set(@readable.prove(
+    "\n  forall s.  closed s ==>\n    (connected s  <=>\n    ~(?e1 e2. closed e1 /\\  closed e2 /\\ \n    ~(e1 = {})  /\\   ~(e2 = {})  /\\   e1 UNION e2 = s  /\\   e1 INTER e2 = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closed_in", () => closed_in()),
+        @readable.Thm("ConnectedClosedSet", () => connectedclosedset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10010,7 +12456,17 @@ pub fn connected_closed_set() -> @kernel.Thm {
 ///|
 /// CONNECTED_OPEN_SET
 fn step_647() -> Unit raise {
-  connected_open_set_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  open s  ⇒\n    (connected s ⇔\n    ¬(∃e1 e2.  open e1  ∧  open e2  ∧\n    ¬(e1 = ∅)  ∧  ¬(e2 = ∅)  ∧  e1 ∪ e2 = s  ∧  e1 ∩ e2 = ∅))\n  by simplify connected_DEF OPEN_IN ConnectedOpenSet")))
+  connected_open_set_c.set(@readable.prove(
+    "\n  forall s.  open s  ==>\n    (connected s <=>\n    ~(?e1 e2.  open e1  /\\   open e2  /\\ \n    ~(e1 = {})  /\\   ~(e2 = {})  /\\   e1 UNION e2 = s  /\\   e1 INTER e2 = {}))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("ConnectedOpenSet", () => connectedopenset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10025,7 +12481,16 @@ pub fn connected_open_set() -> @kernel.Thm {
 ///|
 /// CONNECTED_EMPTY
 fn step_648() -> Unit raise {
-  connected_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  connected ∅\n  by rewrite connected_DEF ConnectedEmpty")))
+  connected_empty_c.set(@readable.prove(
+    "\n  connected {}",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("ConnectedEmpty", () => connectedempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10038,25 +12503,35 @@ pub fn connected_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_328`
-pub fn exec_phrase_328(x337 : Unit) -> Unit raise {
-  let _ = x337
-  {
-    @readable.thm_ref().val = connectedempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedEmpty): thm);;
-fn step_649() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedEmpty): thm);;", exec_phrase_328)
-}
-
-///|
 /// CONNECTED_SING
 fn step_650() -> Unit raise {
-  connected_sing_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀a. connected {a}\n\n  proof\n    intro_TAC ∀a;\n    a ∈ topspace euclidean     [] by fol IN_UNIV TOPSPACE_EUCLIDEAN;\n    fol - ConnectedSing connected_DEF;\n  qed;\n")))
+  connected_sing_c.set(@readable.prove(
+    "\n  forall a. connected {a}",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall a"),
+        @readable.have(
+          "\n    a IN topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("ConnectedSing", () => connectedsing()),
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10069,25 +12544,35 @@ pub fn connected_sing() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_329`
-pub fn exec_phrase_329(x338 : Unit) -> Unit raise {
-  let _ = x338
-  {
-    @readable.thm_ref().val = connectedsing()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedSing): thm);;
-fn step_651() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedSing): thm);;", exec_phrase_329)
-}
-
-///|
 /// CONNECTED_UNIONS
 fn step_652() -> Unit raise {
-  connected_unions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P.  (∀s. s ∈ P ⇒ connected s) ∧ ¬(INTERS P = ∅)\n    ⇒ connected(UNIONS P)\n\n  proof\n    intro_TAC ∀P;\n    ∀s. s ∈ P ⇒ s ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - connected_DEF ConnectedUnions;\n  qed;\n")))
+  connected_unions_c.set(@readable.prove(
+    "\n  forall P.  (forall s. s IN P ==> connected s) /\\  ~(INTERS P = {})\n    ==> connected(UNIONS P)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P"),
+        @readable.have(
+          "\n    forall s. s IN P ==> s SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm("ConnectedUnions", () => connectedunions()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10102,7 +12587,33 @@ pub fn connected_unions() -> @kernel.Thm {
 ///|
 /// CONNECTED_UNION
 fn step_653() -> Unit raise {
-  connected_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  connected s  ∧  connected t  ∧  ¬(s ∩ t = ∅)\n    ⇒ connected (s ∪ t)\n\n  proof\n    intro_TAC ∀s t;\n    s ⊂ topspace euclidean  ∧  t ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol - connected_DEF ConnectedUnion;\n  qed;\n")))
+  connected_union_c.set(@readable.prove(
+    "\n  forall s t.  connected s  /\\   connected t  /\\   ~(s INTER t = {})\n    ==> connected (s UNION t)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t"),
+        @readable.have(
+          "\n    s SUBSET topspace euclidean  /\\   t SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm("ConnectedUnion", () => connectedunion()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10117,7 +12628,23 @@ pub fn connected_union() -> @kernel.Thm {
 ///|
 /// CONNECTED_DIFF_OPEN_FROM_CLOSED
 fn step_654() -> Unit raise {
-  connected_diff_open_from_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t u.  s ⊂ t  ∧  t ⊂ u  ∧  open s  ∧  closed t  ∧\n    connected u ∧ connected(t ━ s)\n    ⇒  connected(u ━ s)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF OPEN_IN CLOSED_IN ConnectedDiffOpenFromClosed")))
+  connected_diff_open_from_closed_c.set(@readable.prove(
+    "\n  forall s t u.  s SUBSET t  /\\   t SUBSET u  /\\   open s  /\\   closed t  /\\ \n    connected u /\\  connected(t DIFF s)\n    ==>  connected(u DIFF s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm(
+          "ConnectedDiffOpenFromClosed",
+          () => connecteddiffopenfromclosed(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10130,25 +12657,22 @@ pub fn connected_diff_open_from_closed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_330`
-pub fn exec_phrase_330(x339 : Unit) -> Unit raise {
-  let _ = x339
-  {
-    @readable.thm_ref().val = connecteddiffopenfromclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedDiffOpenFromClosed): thm);;
-fn step_655() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedDiffOpenFromClosed): thm);;", exec_phrase_330)
-}
-
-///|
 /// CONNECTED_DISJOINT_UNIONS_OPEN_UNIQUE
 fn step_656() -> Unit raise {
-  connected_disjoint_unions_open_unique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f f'.  pairwise DISJOINT f ∧ pairwise DISJOINT f' ∧\n    (∀s. s ∈ f ⇒ open s ∧ connected s ∧ ¬(s = ∅)) ∧\n    (∀s. s ∈ f' ⇒ open s ∧ connected s ∧ ¬(s = ∅)) ∧\n    UNIONS f = UNIONS f'\n    ⇒ f = f'\n  by rewrite connected_DEF OPEN_IN ConnectedDisjointUnionsOpenUnique")))
+  connected_disjoint_unions_open_unique_c.set(@readable.prove(
+    "\n  forall f f'.  pairwise DISJOINT f /\\  pairwise DISJOINT f' /\\ \n    (forall s. s IN f ==> open s /\\  connected s /\\  ~(s = {})) /\\ \n    (forall s. s IN f' ==> open s /\\  connected s /\\  ~(s = {})) /\\ \n    UNIONS f = UNIONS f'\n    ==> f = f'",
+    @readable.by(
+      @readable.rewrite,
+      [
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm(
+          "ConnectedDisjointUnionsOpenUnique",
+          () => connecteddisjointunionsopenunique(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10161,25 +12685,39 @@ pub fn connected_disjoint_unions_open_unique() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_331`
-pub fn exec_phrase_331(x340 : Unit) -> Unit raise {
-  let _ = x340
-  {
-    @readable.thm_ref().val = connecteddisjointunionsopenunique()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedDisjointUnionsOpenUnique): thm);;
-fn step_657() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedDisjointUnionsOpenUnique): thm);;", exec_phrase_331)
-}
-
-///|
 /// CONNECTED_FROM_CLOSED_UNION_AND_INTER
 fn step_658() -> Unit raise {
-  connected_from_closed_union_and_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∧ closed t ∧ connected (s ∪ t) ∧ connected (s ∩ t)\n    ⇒ connected s ∧ connected t\n\n  proof\n    intro_TAC ∀s t;\n    s ∪ t ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol -  connected_DEF CLOSED_IN ConnectedFromClosedUnionAndInter;\n  qed;\n")))
+  connected_from_closed_union_and_inter_c.set(@readable.prove(
+    "\n  forall s t.  closed s /\\  closed t /\\  connected (s UNION t) /\\  connected (s INTER t)\n    ==> connected s /\\  connected t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t"),
+        @readable.have(
+          "\n    s UNION t SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+            @readable.Thm(
+              "ConnectedFromClosedUnionAndInter",
+              () => connectedfromclosedunionandinter(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10192,25 +12730,39 @@ pub fn connected_from_closed_union_and_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_332`
-pub fn exec_phrase_332(x341 : Unit) -> Unit raise {
-  let _ = x341
-  {
-    @readable.thm_ref().val = connectedfromclosedunionandinter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedFromClosedUnionAndInter): thm);;
-fn step_659() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedFromClosedUnionAndInter): thm);;", exec_phrase_332)
-}
-
-///|
 /// CONNECTED_FROM_OPEN_UNION_AND_INTER
 fn step_660() -> Unit raise {
-  connected_from_open_union_and_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s ∧ open t ∧ connected (s ∪ t) ∧ connected (s ∩ t)\n    ⇒ connected s ∧ connected t\n\n  proof\n    intro_TAC ∀s t;\n    s ∪ t ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    fol -  connected_DEF OPEN_IN ConnectedFromOpenUnionAndInter;\n  qed;\n")))
+  connected_from_open_union_and_inter_c.set(@readable.prove(
+    "\n  forall s t.  open s /\\  open t /\\  connected (s UNION t) /\\  connected (s INTER t)\n    ==> connected s /\\  connected t",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s t"),
+        @readable.have(
+          "\n    s UNION t SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Prev,
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm("OPEN_IN", () => open_in()),
+            @readable.Thm(
+              "ConnectedFromOpenUnionAndInter",
+              () => connectedfromopenunionandinter(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10223,25 +12775,35 @@ pub fn connected_from_open_union_and_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_333`
-pub fn exec_phrase_333(x342 : Unit) -> Unit raise {
-  let _ = x342
-  {
-    @readable.thm_ref().val = connectedfromopenunionandinter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedFromOpenUnionAndInter): thm);;
-fn step_661() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedFromOpenUnionAndInter): thm);;", exec_phrase_333)
-}
-
-///|
 /// CONNECTED_INDUCTION
 fn step_662() -> Unit raise {
-  connected_induction_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P Q s.  connected s ∧\n    (∀t a. open_in (subtopology euclidean s) t ∧ a ∈ t  ⇒  ∃z. z ∈ t ∧ P z) ∧\n    (∀a. a ∈ s  ⇒  ∃t. open_in (subtopology euclidean s) t ∧ a ∈ t ∧\n    ∀x y. x ∈ t ∧ y ∈ t ∧ P x ∧ P y ∧ Q x ⇒ Q y)\n    ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ∧ P b ∧ Q a ⇒ Q b\n\n  proof\n    intro_TAC ∀P Q s;\n    s ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    MP_TAC -;\n    rewrite connected_DEF ConnectedInduction;\n  qed;\n")))
+  connected_induction_c.set(@readable.prove(
+    "\n  forall P Q s.  connected s /\\ \n    (forall t a. open_in (subtopology euclidean s) t /\\  a IN t  ==>  ?z. z IN t /\\  P z) /\\ \n    (forall a. a IN s  ==>  ?t. open_in (subtopology euclidean s) t /\\  a IN t /\\ \n    forall x y. x IN t /\\  y IN t /\\  P x /\\  P y /\\  Q x ==> Q y)\n    ==> forall a b. a IN s /\\  b IN s /\\  P a /\\  P b /\\  Q a ==> Q b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P Q s"),
+        @readable.have(
+          "\n    s SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm("ConnectedInduction", () => connectedinduction()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10256,7 +12818,36 @@ pub fn connected_induction() -> @kernel.Thm {
 ///|
 /// CONNECTED_EQUIVALENCE_RELATION_GEN_LEMMA
 fn step_663() -> Unit raise {
-  connected_equivalence_relation_gen_lemma_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P R s.\n        connected s ∧\n        (∀x y z. R x y ∧ R y z ⇒ R x z) ∧\n        (∀t a. open_in (subtopology euclidean s) t ∧ a ∈ t\n               ⇒ ∃z. z ∈ t ∧ P z) ∧\n        (∀a. a ∈ s\n             ⇒ ∃t. open_in (subtopology euclidean s) t ∧ a ∈ t ∧\n                     ∀x y. x ∈ t ∧ y ∈ t ∧ P x ∧ P y ⇒ R x y)\n        ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ∧ P b ⇒ R a b\n\n  proof\n    intro_TAC ∀P R s;\n    s ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    MP_TAC -;\n    rewrite connected_DEF ConnectedEquivalenceRelationGen;\n  qed;\n")))
+  connected_equivalence_relation_gen_lemma_c.set(@readable.prove(
+    "\n  forall P R s.\n        connected s /\\ \n        (forall x y z. R x y /\\  R y z ==> R x z) /\\ \n        (forall t a. open_in (subtopology euclidean s) t /\\  a IN t\n               ==> ?z. z IN t /\\  P z) /\\ \n        (forall a. a IN s\n             ==> ?t. open_in (subtopology euclidean s) t /\\  a IN t /\\ \n                     forall x y. x IN t /\\  y IN t /\\  P x /\\  P y ==> R x y)\n        ==> forall a b. a IN s /\\  b IN s /\\  P a /\\  P b ==> R a b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P R s"),
+        @readable.have(
+          "\n    s SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm(
+              "ConnectedEquivalenceRelationGen",
+              () => connectedequivalencerelationgen(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10269,25 +12860,28 @@ pub fn connected_equivalence_relation_gen_lemma() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_334`
-pub fn exec_phrase_334(x343 : Unit) -> Unit raise {
-  let _ = x343
-  {
-    @readable.thm_ref().val = connectedequivalencerelationgen()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedEquivalenceRelationGen): thm);;
-fn step_664() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedEquivalenceRelationGen): thm);;", exec_phrase_334)
-}
-
-///|
 /// CONNECTED_EQUIVALENCE_RELATION_GEN
 fn step_665() -> Unit raise {
-  connected_equivalence_relation_gen_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P R s.\n        connected s ∧\n        (∀x y. R x y ⇒ R y x) ∧\n        (∀x y z. R x y ∧ R y z ⇒ R x z) ∧\n        (∀t a. open_in (subtopology euclidean s) t ∧ a ∈ t\n               ⇒ ∃z. z ∈ t ∧ P z) ∧\n        (∀a. a ∈ s\n             ⇒ ∃t. open_in (subtopology euclidean s) t ∧ a ∈ t ∧\n                     ∀x y. x ∈ t ∧ y ∈ t ∧ P x ∧ P y ⇒ R x y)\n        ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ∧ P b ⇒ R a b\n\n  proof\n    intro_TAC ∀P R s;\n    MP_TAC ISPECL [P; R; s] CONNECTED_EQUIVALENCE_RELATION_GEN_LEMMA;\n    fol;\n  qed;\n")))
+  connected_equivalence_relation_gen_c.set(@readable.prove(
+    "\n  forall P R s.\n        connected s /\\ \n        (forall x y. R x y ==> R y x) /\\ \n        (forall x y z. R x y /\\  R y z ==> R x z) /\\ \n        (forall t a. open_in (subtopology euclidean s) t /\\  a IN t\n               ==> ?z. z IN t /\\  P z) /\\ \n        (forall a. a IN s\n             ==> ?t. open_in (subtopology euclidean s) t /\\  a IN t /\\ \n                     forall x y. x IN t /\\  y IN t /\\  P x /\\  P y ==> R x y)\n        ==> forall a b. a IN s /\\  b IN s /\\  P a /\\  P b ==> R a b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P R s"),
+        @readable.by_thm(
+          th => @tactics.mp_tac(th),
+          @readable.TermsRule(
+            tms => th => @bool.ispecl(tms, th),
+            ["P", " R", " s"],
+            @readable.Thm(
+              "CONNECTED_EQUIVALENCE_RELATION_GEN_LEMMA",
+              () => connected_equivalence_relation_gen_lemma(),
+            ),
+          ),
+        ),
+        @readable.by(@readable.fol, []),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10300,25 +12894,35 @@ pub fn connected_equivalence_relation_gen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_335`
-pub fn exec_phrase_335(x344 : Unit) -> Unit raise {
-  let _ = x344
-  {
-    @readable.thm_ref().val = connected_equivalence_relation_gen_lemma()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((CONNECTED_EQUIVALENCE_RELATION_GEN_LEMMA): thm);;
-fn step_666() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((CONNECTED_EQUIVALENCE_RELATION_GEN_LEMMA): thm);;", exec_phrase_335)
-}
-
-///|
 /// CONNECTED_INDUCTION_SIMPLE
 fn step_667() -> Unit raise {
-  connected_induction_simple_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀P s.  connected s ∧ (∀a. a ∈ s\n    ⇒ ∃t. open_in (subtopology euclidean s) t ∧ a ∈ t ∧\n    ∀x y. x ∈ t ∧ y ∈ t ∧ P x ⇒ P y)\n    ⇒ ∀a b. a ∈ s ∧ b ∈ s ∧ P a ⇒ P b\n\n  proof\n    intro_TAC ∀P s;\n    s ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    MP_TAC -;\n    rewrite connected_DEF ConnectedInductionSimple;\n  qed;\n")))
+  connected_induction_simple_c.set(@readable.prove(
+    "\n  forall P s.  connected s /\\  (forall a. a IN s\n    ==> ?t. open_in (subtopology euclidean s) t /\\  a IN t /\\ \n    forall x y. x IN t /\\  y IN t /\\  P x ==> P y)\n    ==> forall a b. a IN s /\\  b IN s /\\  P a ==> P b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall P s"),
+        @readable.have(
+          "\n    s SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm("ConnectedInductionSimple", () => connectedinductionsimple()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10333,7 +12937,36 @@ pub fn connected_induction_simple() -> @kernel.Thm {
 ///|
 /// CONNECTED_EQUIVALENCE_RELATION
 fn step_668() -> Unit raise {
-  connected_equivalence_relation_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀R s.  connected s ∧\n    (∀x y. R x y ⇒ R y x) ∧ (∀x y z. R x y ∧ R y z ⇒ R x z) ∧\n    (∀a. a ∈ s\n    ⇒ ∃t. open_in (subtopology euclidean s) t ∧ a ∈ t ∧ ∀x. x ∈ t ⇒ R a x)\n    ⇒ ∀a b. a ∈ s ∧ b ∈ s ⇒ R a b\n\n  proof\n    intro_TAC ∀R s;\n    s ⊂ topspace euclidean     [] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN;\n    MP_TAC -;\n    rewrite connected_DEF ConnectedEquivalenceRelation;\n  qed;\n")))
+  connected_equivalence_relation_c.set(@readable.prove(
+    "\n  forall R s.  connected s /\\ \n    (forall x y. R x y ==> R y x) /\\  (forall x y z. R x y /\\  R y z ==> R x z) /\\ \n    (forall a. a IN s\n    ==> ?t. open_in (subtopology euclidean s) t /\\  a IN t /\\  forall x. x IN t ==> R a x)\n    ==> forall a b. a IN s /\\  b IN s ==> R a b",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall R s"),
+        @readable.have(
+          "\n    s SUBSET topspace euclidean",
+          "",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ],
+          ),
+        ),
+        @readable.by_thm(th => @tactics.mp_tac(th), @readable.Prev),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("connected_DEF", () => connected_def_v1()),
+            @readable.Thm(
+              "ConnectedEquivalenceRelation",
+              () => connectedequivalencerelation(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10343,22 +12976,6 @@ let connected_equivalence_relation_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("
 /// `CONNECTED_EQUIVALENCE_RELATION`
 pub fn connected_equivalence_relation() -> @kernel.Thm {
   connected_equivalence_relation_c.get()
-}
-
-///|
-/// `exec_phrase_336`
-pub fn exec_phrase_336(x345 : Unit) -> Unit raise {
-  let _ = x345
-  {
-    @readable.thm_ref().val = connectedequivalencerelation()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedEquivalenceRelation): thm);;
-fn step_669() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedEquivalenceRelation): thm);;", exec_phrase_336)
 }
 
 ///|
@@ -10385,7 +13002,20 @@ pub fn limit_point_of_def() -> @kernel.Thm {
 ///|
 /// limit_point_of
 fn step_672() -> Unit raise {
-  limit_point_of_c.set(@readable.theorem(@readable.parse_qproof(";\n  x limit_point_of s  ⇔\n    ∀t. x ∈ t ∧ open t  ⇒  ∃y. ¬(y = x) ∧ y ∈ s ∧ y ∈ t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN IN_UNIV IN_LimitPointOf limit_point_of_DEF OPEN_IN")))
+  limit_point_of_c.set(@readable.prove(
+    "\n  x limit_point_of s  <=>\n    forall t. x IN t /\\  open t  ==>  ?y. ~(y = x) /\\  y IN s /\\  y IN t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("IN_LimitPointOf", () => in_limitpointof()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10398,25 +13028,21 @@ pub fn limit_point_of() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_337`
-pub fn exec_phrase_337(x346 : Unit) -> Unit raise {
-  let _ = x346
-  {
-    @readable.thm_ref().val = limit_point_of_def()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((limit_point_of_DEF): thm);;
-fn step_673() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((limit_point_of_DEF): thm);;", exec_phrase_337)
-}
-
-///|
 /// LIMPT_SUBSET
 fn step_674() -> Unit raise {
-  limpt_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x s t.  x limit_point_of s ∧ s ⊂ t  ⇒  x limit_point_of t\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN limit_point_of_DEF LimptSubset SUBSET")))
+  limpt_subset_c.set(@readable.prove(
+    "\n  forall x s t.  x limit_point_of s /\\  s SUBSET t  ==>  x limit_point_of t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("LimptSubset", () => limptsubset()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10431,7 +13057,21 @@ pub fn limpt_subset() -> @kernel.Thm {
 ///|
 /// CLOSED_LIMPT
 fn step_675() -> Unit raise {
-  closed_limpt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closed s  ⇔  ∀x. x limit_point_of s ⇒ x ∈ s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN IN_UNIV limit_point_of_DEF CLOSED_IN ClosedLimpt SUBSET")))
+  closed_limpt_c.set(@readable.prove(
+    "\n  forall s.  closed s  <=>  forall x. x limit_point_of s ==> x IN s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosedLimpt", () => closedlimpt()),
+        @readable.Thm("SUBSET", () => @sets.subset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10446,7 +13086,20 @@ pub fn closed_limpt() -> @kernel.Thm {
 ///|
 /// LIMPT_EMPTY
 fn step_676() -> Unit raise {
-  limpt_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x.  ¬(x limit_point_of ∅)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN IN_UNIV limit_point_of_DEF GSYM ∉ LimptEmpty")))
+  limpt_empty_c.set(@readable.prove(
+    "\n  forall x.  ~(x limit_point_of {})",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Rule(@equal.gsym, @readable.Thm("NOTIN", () => notin())),
+        @readable.Thm("LimptEmpty", () => limptempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10459,25 +13112,24 @@ pub fn limpt_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_338`
-pub fn exec_phrase_338(x347 : Unit) -> Unit raise {
-  let _ = x347
-  {
-    @readable.thm_ref().val = limptempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LimptEmpty): thm);;
-fn step_677() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LimptEmpty): thm);;", exec_phrase_338)
-}
-
-///|
 /// NO_LIMIT_POINT_IMP_CLOSED
 fn step_678() -> Unit raise {
-  no_limit_point_imp_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. ¬(∃x. x limit_point_of s) ⇒ closed s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN IN_UNIV limit_point_of_DEF CLOSED_IN NoLimitPointImpClosed NOT_EXISTS_THM ∉")))
+  no_limit_point_imp_closed_c.set(@readable.prove(
+    "\n  forall s. ~(?x. x limit_point_of s) ==> closed s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("NoLimitPointImpClosed", () => nolimitpointimpclosed()),
+        @readable.Thm("NOT_EXISTS_THM", () => @class.not_exists_thm()),
+        @readable.Thm("NOTIN", () => notin()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10490,25 +13142,23 @@ pub fn no_limit_point_imp_closed() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_339`
-pub fn exec_phrase_339(x348 : Unit) -> Unit raise {
-  let _ = x348
-  {
-    @readable.thm_ref().val = nolimitpointimpclosed()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NoLimitPointImpClosed): thm);;
-fn step_679() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NoLimitPointImpClosed): thm);;", exec_phrase_339)
-}
-
-///|
 /// LIMIT_POINT_UNION
 fn step_680() -> Unit raise {
-  limit_point_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t x.  x limit_point_of (s ∪ t)  ⇔\n    x limit_point_of s  ∨  x limit_point_of t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN IN_UNIV limit_point_of_DEF LimitPointUnion EXTENSION IN_UNION")))
+  limit_point_union_c.set(@readable.prove(
+    "\n  forall s t x.  x limit_point_of (s UNION t)  <=>\n    x limit_point_of s  \\/  x limit_point_of t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("LimitPointUnion", () => limitpointunion()),
+        @readable.Thm("EXTENSION", () => @sets.extension()),
+        @readable.Thm("IN_UNION", () => @sets.in_union()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10523,7 +13173,21 @@ pub fn limit_point_union() -> @kernel.Thm {
 ///|
 /// LimitPointOf_euclidean
 fn step_681() -> Unit raise {
-  limitpointof_euclidean_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  LimitPointOf euclidean s = {x | x limit_point_of s}\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN IN_UNIV limit_point_of_DEF LimitPointOf IN_ELIM_THM EXTENSION")))
+  limitpointof_euclidean_c.set(@readable.prove(
+    "\n  forall s.  LimitPointOf euclidean s = {x | x limit_point_of s}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("LimitPointOf", () => limitpointof()),
+        @readable.Thm("IN_ELIM_THM", () => @sets.in_elim_thm()),
+        @readable.Thm("EXTENSION", () => @sets.extension()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10553,7 +13217,19 @@ pub fn interior_def_v1() -> @kernel.Thm {
 ///|
 /// interior
 fn step_683() -> Unit raise {
-  interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. interior s = {x | ∃t. open t ∧ x ∈ t ∧ t ⊂ s}\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF Interior_DEF OPEN_IN")))
+  interior_c.set(@readable.prove(
+    "\n  forall s. interior s = {x | ?t. open t /\\  x IN t /\\  t SUBSET s}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("Interior_DEF", () => interior_def()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10566,25 +13242,22 @@ pub fn interior() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_340`
-pub fn exec_phrase_340(x349 : Unit) -> Unit raise {
-  let _ = x349
-  {
-    @readable.thm_ref().val = interior_def_v1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((interior_DEF): thm);;
-fn step_684() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((interior_DEF): thm);;", exec_phrase_340)
-}
-
-///|
 /// INTERIOR_EQ
 fn step_685() -> Unit raise {
-  interior_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior s = s  ⇔  open s\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorEq EQ_SYM_EQ")))
+  interior_eq_c.set(@readable.prove(
+    "\n  forall s.  interior s = s  <=>  open s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorEq", () => interioreq()),
+        @readable.Thm("EQ_SYM_EQ", () => @theorems.eq_sym_eq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10599,7 +13272,17 @@ pub fn interior_eq() -> @kernel.Thm {
 ///|
 /// INTERIOR_OPEN
 fn step_686() -> Unit raise {
-  interior_open_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  open s  ⇒  interior s = s\n  by fol interior_DEF OPEN_IN InteriorOpen")))
+  interior_open_c.set(@readable.prove(
+    "\n  forall s.  open s  ==>  interior s = s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("InteriorOpen", () => interioropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10614,7 +13297,17 @@ pub fn interior_open() -> @kernel.Thm {
 ///|
 /// INTERIOR_EMPTY
 fn step_687() -> Unit raise {
-  interior_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  interior ∅ = ∅\n  by fol interior_DEF OPEN_IN InteriorEmpty")))
+  interior_empty_c.set(@readable.prove(
+    "\n  interior {} = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("InteriorEmpty", () => interiorempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10627,25 +13320,20 @@ pub fn interior_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_341`
-pub fn exec_phrase_341(x350 : Unit) -> Unit raise {
-  let _ = x350
-  {
-    @readable.thm_ref().val = interiorempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorEmpty): thm);;
-fn step_688() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorEmpty): thm);;", exec_phrase_341)
-}
-
-///|
 /// INTERIOR_UNIV
 fn step_689() -> Unit raise {
-  interior_univ_c.set(@readable.theorem(@readable.parse_qproof(";\n  interior UNIV = UNIV\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF InteriorUniv")))
+  interior_univ_c.set(@readable.prove(
+    "\n  interior UNIV = UNIV",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("InteriorUniv", () => interioruniv()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10660,7 +13348,19 @@ pub fn interior_univ() -> @kernel.Thm {
 ///|
 /// OPEN_INTERIOR
 fn step_690() -> Unit raise {
-  open_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. open (interior s)\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN  OpenInterior")))
+  open_interior_c.set(@readable.prove(
+    "\n  forall s. open (interior s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenInterior", () => openinterior()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10675,7 +13375,19 @@ pub fn open_interior() -> @kernel.Thm {
 ///|
 /// INTERIOR_INTERIOR
 fn step_691() -> Unit raise {
-  interior_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. interior (interior s) = interior s\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN  InteriorInterior")))
+  interior_interior_c.set(@readable.prove(
+    "\n  forall s. interior (interior s) = interior s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorInterior", () => interiorinterior()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10690,7 +13402,19 @@ pub fn interior_interior() -> @kernel.Thm {
 ///|
 /// INTERIOR_SUBSET
 fn step_692() -> Unit raise {
-  interior_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. interior s ⊂ s\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN  InteriorSubset")))
+  interior_subset_c.set(@readable.prove(
+    "\n  forall s. interior s SUBSET s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorSubset", () => interiorsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10705,7 +13429,19 @@ pub fn interior_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_INTERIOR
 fn step_693() -> Unit raise {
-  subset_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s ⊂ t  ⇒  interior s ⊂ interior t\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN SubsetInterior")))
+  subset_interior_c.set(@readable.prove(
+    "\n  forall s t.  s SUBSET t  ==>  interior s SUBSET interior t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("SubsetInterior", () => subsetinterior()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10720,7 +13456,19 @@ pub fn subset_interior() -> @kernel.Thm {
 ///|
 /// INTERIOR_MAXIMAL
 fn step_694() -> Unit raise {
-  interior_maximal_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  t ⊂ s ∧ open t  ⇒  t ⊂ interior s\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorMaximal")))
+  interior_maximal_c.set(@readable.prove(
+    "\n  forall s t.  t SUBSET s /\\  open t  ==>  t SUBSET interior s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorMaximal", () => interiormaximal()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10735,7 +13483,19 @@ pub fn interior_maximal() -> @kernel.Thm {
 ///|
 /// INTERIOR_MAXIMAL_EQ
 fn step_695() -> Unit raise {
-  interior_maximal_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s  ⇒  (s ⊂ interior t ⇔ s ⊂ t)\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorMaximalEq")))
+  interior_maximal_eq_c.set(@readable.prove(
+    "\n  forall s t.  open s  ==>  (s SUBSET interior t <=> s SUBSET t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorMaximalEq", () => interiormaximaleq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10748,25 +13508,21 @@ pub fn interior_maximal_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_342`
-pub fn exec_phrase_342(x351 : Unit) -> Unit raise {
-  let _ = x351
-  {
-    @readable.thm_ref().val = interiormaximaleq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorMaximalEq): thm);;
-fn step_696() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorMaximalEq): thm);;", exec_phrase_342)
-}
-
-///|
 /// INTERIOR_UNIQUE
 fn step_697() -> Unit raise {
-  interior_unique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  t ⊂ s  ∧  open t ∧  (∀t'. t' ⊂ s ∧ open t' ⇒ t' ⊂ t)\n    ⇒ interior s = t\n  by simplify interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorUnique")))
+  interior_unique_c.set(@readable.prove(
+    "\n  forall s t.  t SUBSET s  /\\   open t /\\   (forall t'. t' SUBSET s /\\  open t' ==> t' SUBSET t)\n    ==> interior s = t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorUnique", () => interiorunique()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10781,7 +13537,32 @@ pub fn interior_unique() -> @kernel.Thm {
 ///|
 /// IN_INTERIOR
 fn step_698() -> Unit raise {
-  in_interior_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀x s.  x ∈ interior s  ⇔  ∃e. &0 < e ∧ ball(x,e) ⊂ s\n\n  proof\n    simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF IN_Interior GSYM OPEN_IN;\n    fol OPEN_CONTAINS_BALL SUBSET_TRANS CENTRE_IN_BALL OPEN_BALL;\n  qed;\n")))
+  in_interior_v1_c.set(@readable.prove(
+    "\n  forall x s.  x IN interior s  <=>  ?e. &0 < e /\\  ball(x,e) SUBSET s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Thm("interior_DEF", () => interior_def_v1()),
+            @readable.Thm("IN_Interior", () => in_interior()),
+            @readable.Rule(@equal.gsym, @readable.Thm("OPEN_IN", () => open_in())),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("OPEN_CONTAINS_BALL", () => open_contains_ball()),
+            @readable.Thm("SUBSET_TRANS", () => @sets.subset_trans()),
+            @readable.Thm("CENTRE_IN_BALL", () => centre_in_ball()),
+            @readable.Thm("OPEN_BALL", () => open_ball()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10796,7 +13577,19 @@ pub fn in_interior_v1() -> @kernel.Thm {
 ///|
 /// OPEN_SUBSET_INTERIOR
 fn step_699() -> Unit raise {
-  open_subset_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s  ⇒  (s ⊂ interior t  ⇔  s ⊂ t)\n  by fol interior_DEF OPEN_IN SUBSET_UNIV TOPSPACE_EUCLIDEAN OpenSubsetInterior")))
+  open_subset_interior_c.set(@readable.prove(
+    "\n  forall s t.  open s  ==>  (s SUBSET interior t  <=>  s SUBSET t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("OpenSubsetInterior", () => opensubsetinterior()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10811,7 +13604,18 @@ pub fn open_subset_interior() -> @kernel.Thm {
 ///|
 /// INTERIOR_INTER
 fn step_700() -> Unit raise {
-  interior_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t. interior (s ∩ t) = interior s ∩ interior t\n  by simplify interior_DEF SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorInter")))
+  interior_inter_c.set(@readable.prove(
+    "\n  forall s t. interior (s INTER t) = interior s INTER interior t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("InteriorInter", () => interiorinter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10826,7 +13630,37 @@ pub fn interior_inter() -> @kernel.Thm {
 ///|
 /// INTERIOR_FINITE_INTERS
 fn step_701() -> Unit raise {
-  interior_finite_inters_v1_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  FINITE s  ⇒  interior (INTERS s) = INTERS (IMAGE interior s)\n\n  proof\n  intro_TAC ∀s, H1;\n  assume ¬(s = ∅)     [sNonempty] by simplify INTERS_0 IMAGE_CLAUSES INTERIOR_UNIV;\n      simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN H1 sNonempty interior_DEF InteriorFiniteInters;\n  qed;\n")))
+  interior_finite_inters_v1_c.set(@readable.prove(
+    "\n  forall s.  FINITE s  ==>  interior (INTERS s) = INTERS (IMAGE interior s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s, H1"),
+        @readable.assuming(
+          "~(s = {})",
+          "sNonempty",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("INTERS_0", () => @sets.inters_0()),
+              @readable.Thm("IMAGE_CLAUSES", () => @sets.image_clauses()),
+              @readable.Thm("INTERIOR_UNIV", () => interior_univ()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Label("H1"),
+            @readable.Label("sNonempty"),
+            @readable.Thm("interior_DEF", () => interior_def_v1()),
+            @readable.Thm("InteriorFiniteInters", () => interiorfiniteinters()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10839,41 +13673,39 @@ pub fn interior_finite_inters_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_343`
-pub fn exec_phrase_343(x352 : Unit) -> Unit raise {
-  let _ = x352
-  {
-    @readable.thm_ref().val = interior_univ()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((INTERIOR_UNIV): thm);;
-fn step_702() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((INTERIOR_UNIV): thm);;", exec_phrase_343)
-}
-
-///|
-/// `exec_phrase_344`
-pub fn exec_phrase_344(x353 : Unit) -> Unit raise {
-  let _ = x353
-  {
-    @readable.thm_ref().val = interiorfiniteinters()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorFiniteInters): thm);;
-fn step_703() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorFiniteInters): thm);;", exec_phrase_344)
-}
-
-///|
 /// INTERIOR_FINITE_INTERS
 fn step_704() -> Unit raise {
-  interior_finite_inters_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  FINITE s  ⇒  interior (INTERS s) = INTERS (IMAGE interior s)\n\n  proof\n  intro_TAC ∀s, H1;\n  assume s = ∅     [sEmpty] by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN H1 interior_DEF InteriorFiniteInters;\n  rewrite INTERS_0 IMAGE_CLAUSES sEmpty INTERIOR_UNIV;\n  qed;\n")))
+  interior_finite_inters_c.set(@readable.prove(
+    "\n  forall s.  FINITE s  ==>  interior (INTERS s) = INTERS (IMAGE interior s)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall s, H1"),
+        @readable.assuming(
+          "s = {}",
+          "sEmpty",
+          @readable.by(
+            @readable.simplify,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+              @readable.Label("H1"),
+              @readable.Thm("interior_DEF", () => interior_def_v1()),
+              @readable.Thm("InteriorFiniteInters", () => interiorfiniteinters()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("INTERS_0", () => @sets.inters_0()),
+            @readable.Thm("IMAGE_CLAUSES", () => @sets.image_clauses()),
+            @readable.Label("sEmpty"),
+            @readable.Thm("INTERIOR_UNIV", () => interior_univ()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10888,7 +13720,37 @@ pub fn interior_finite_inters() -> @kernel.Thm {
 ///|
 /// INTERIOR_INTERS_SUBSET
 fn step_705() -> Unit raise {
-  interior_inters_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f.  interior (INTERS f) ⊂ INTERS (IMAGE interior f)\n\n  proof\n    intro_TAC ∀f;\n    assume f = ∅     [fEmpty] by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF InteriorIntersSubset;\n    rewrite INTERS_0 IMAGE_CLAUSES - INTERIOR_UNIV SUBSET_REFL;\n  qed;\n")))
+  interior_inters_subset_c.set(@readable.prove(
+    "\n  forall f.  interior (INTERS f) SUBSET INTERS (IMAGE interior f)",
+    @readable.steps(
+      [
+        @readable.intro_tac("forall f"),
+        @readable.assuming(
+          "f = {}",
+          "fEmpty",
+          @readable.by(
+            @readable.fol,
+            [
+              @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+              @readable.Thm("interior_DEF", () => interior_def_v1()),
+              @readable.Thm("InteriorIntersSubset", () => interiorinterssubset()),
+            ],
+          ),
+        ),
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("INTERS_0", () => @sets.inters_0()),
+            @readable.Thm("IMAGE_CLAUSES", () => @sets.image_clauses()),
+            @readable.Prev,
+            @readable.Thm("INTERIOR_UNIV", () => interior_univ()),
+            @readable.Thm("SUBSET_REFL", () => @sets.subset_refl()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10901,25 +13763,20 @@ pub fn interior_inters_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_345`
-pub fn exec_phrase_345(x354 : Unit) -> Unit raise {
-  let _ = x354
-  {
-    @readable.thm_ref().val = interiorinterssubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorIntersSubset): thm);;
-fn step_706() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorIntersSubset): thm);;", exec_phrase_345)
-}
-
-///|
 /// UNION_INTERIOR_SUBSET
 fn step_707() -> Unit raise {
-  union_interior_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  interior s ∪ interior t  ⊂  interior(s ∪ t)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF UnionInteriorSubset")))
+  union_interior_subset_c.set(@readable.prove(
+    "\n  forall s t.  interior s UNION interior t  SUBSET  interior(s UNION t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("UnionInteriorSubset", () => unioninteriorsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10932,25 +13789,21 @@ pub fn union_interior_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_346`
-pub fn exec_phrase_346(x355 : Unit) -> Unit raise {
-  let _ = x355
-  {
-    @readable.thm_ref().val = unioninteriorsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UnionInteriorSubset): thm);;
-fn step_708() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UnionInteriorSubset): thm);;", exec_phrase_346)
-}
-
-///|
 /// INTERIOR_EQ_EMPTY
 fn step_709() -> Unit raise {
-  interior_eq_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior s = ∅  ⇔  ∀t. open t ∧ t ⊂ s ⇒ t = ∅\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF OPEN_IN InteriorEqEmpty")))
+  interior_eq_empty_c.set(@readable.prove(
+    "\n  forall s.  interior s = {}  <=>  forall t. open t /\\  t SUBSET s ==> t = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("InteriorEqEmpty", () => interioreqempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10965,7 +13818,19 @@ pub fn interior_eq_empty() -> @kernel.Thm {
 ///|
 /// INTERIOR_EQ_EMPTY_ALT
 fn step_710() -> Unit raise {
-  interior_eq_empty_alt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior s = ∅  ⇔  ∀t. open t ∧ ¬(t = ∅) ⇒ ¬(t ━ s = ∅)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF OPEN_IN InteriorEqEmptyAlt")))
+  interior_eq_empty_alt_c.set(@readable.prove(
+    "\n  forall s.  interior s = {}  <=>  forall t. open t /\\  ~(t = {}) ==> ~(t DIFF s = {})",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("InteriorEqEmptyAlt", () => interioreqemptyalt()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10980,7 +13845,19 @@ pub fn interior_eq_empty_alt() -> @kernel.Thm {
 ///|
 /// INTERIOR_UNIONS_OPEN_SUBSETS
 fn step_711() -> Unit raise {
-  interior_unions_open_subsets_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  UNIONS {t | open t ∧ t ⊂ s} = interior s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF OPEN_IN InteriorUnionsOpenSubsets")))
+  interior_unions_open_subsets_c.set(@readable.prove(
+    "\n  forall s.  UNIONS {t | open t /\\  t SUBSET s} = interior s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("InteriorUnionsOpenSubsets", () => interiorunionsopensubsets()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -10990,22 +13867,6 @@ let interior_unions_open_subsets_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("IN
 /// `INTERIOR_UNIONS_OPEN_SUBSETS`
 pub fn interior_unions_open_subsets() -> @kernel.Thm {
   interior_unions_open_subsets_c.get()
-}
-
-///|
-/// `exec_phrase_347`
-pub fn exec_phrase_347(x356 : Unit) -> Unit raise {
-  let _ = x356
-  {
-    @readable.thm_ref().val = interiorunionsopensubsets()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorUnionsOpenSubsets): thm);;
-fn step_712() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorUnionsOpenSubsets): thm);;", exec_phrase_347)
 }
 
 ///|
@@ -11026,7 +13887,19 @@ pub fn closure_def_v1() -> @kernel.Thm {
 ///|
 /// closure
 fn step_714() -> Unit raise {
-  closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure s = s UNION {x | x limit_point_of s}\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF LimitPointOf_euclidean Closure_THM")))
+  closure_c.set(@readable.prove(
+    "\n  forall s.  closure s = s UNION {x | x limit_point_of s}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("LimitPointOf_euclidean", () => limitpointof_euclidean()),
+        @readable.Thm("Closure_THM", () => closure_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11039,41 +13912,34 @@ pub fn closure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_348`
-pub fn exec_phrase_348(x357 : Unit) -> Unit raise {
-  let _ = x357
-  {
-    @readable.thm_ref().val = closure_def_v1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((closure_DEF): thm);;
-fn step_715() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((closure_DEF): thm);;", exec_phrase_348)
-}
-
-///|
-/// `exec_phrase_349`
-pub fn exec_phrase_349(x358 : Unit) -> Unit raise {
-  let _ = x358
-  {
-    @readable.thm_ref().val = limitpointof_euclidean()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LimitPointOf_euclidean): thm);;
-fn step_716() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LimitPointOf_euclidean): thm);;", exec_phrase_349)
-}
-
-///|
 /// CLOSURE_INTERIOR
 fn step_717() -> Unit raise {
-  closure_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closure s = UNIV ━ interior (UNIV ━ s)\n\n  proof\n    rewrite closure_DEF GSYM TOPSPACE_EUCLIDEAN interior_DEF;\n    simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosureInterior;\n  qed;\n")))
+  closure_interior_c.set(@readable.prove(
+    "\n  forall s. closure s = UNIV DIFF interior (UNIV DIFF s)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("closure_DEF", () => closure_def_v1()),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ),
+            @readable.Thm("interior_DEF", () => interior_def_v1()),
+          ],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Thm("ClosureInterior", () => closureinterior()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11088,7 +13954,32 @@ pub fn closure_interior() -> @kernel.Thm {
 ///|
 /// INTERIOR_CLOSURE
 fn step_718() -> Unit raise {
-  interior_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior s = UNIV ━ (closure (UNIV ━ s))\n\n  proof\n    rewrite closure_DEF GSYM TOPSPACE_EUCLIDEAN  interior_DEF;\n    simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorClosure;\n  qed;\n")))
+  interior_closure_c.set(@readable.prove(
+    "\n  forall s.  interior s = UNIV DIFF (closure (UNIV DIFF s))",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("closure_DEF", () => closure_def_v1()),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ),
+            @readable.Thm("interior_DEF", () => interior_def_v1()),
+          ],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Thm("InteriorClosure", () => interiorclosure()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11103,7 +13994,19 @@ pub fn interior_closure() -> @kernel.Thm {
 ///|
 /// CLOSED_CLOSURE
 fn step_719() -> Unit raise {
-  closed_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closed (closure s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosedClosure")))
+  closed_closure_c.set(@readable.prove(
+    "\n  forall s.  closed (closure s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosedClosure", () => closedclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11118,7 +14021,19 @@ pub fn closed_closure() -> @kernel.Thm {
 ///|
 /// CLOSURE_SUBSET
 fn step_720() -> Unit raise {
-  closure_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  s ⊂ closure s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureSubset")))
+  closure_subset_c.set(@readable.prove(
+    "\n  forall s.  s SUBSET closure s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureSubset", () => closuresubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11133,7 +14048,18 @@ pub fn closure_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_CLOSURE
 fn step_721() -> Unit raise {
-  subset_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s ⊂ t  ⇒  closure s ⊂ closure t\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF SubsetClosure")))
+  subset_closure_c.set(@readable.prove(
+    "\n  forall s t.  s SUBSET t  ==>  closure s SUBSET closure t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("SubsetClosure", () => subsetclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11148,7 +14074,19 @@ pub fn subset_closure() -> @kernel.Thm {
 ///|
 /// CLOSURE_HULL
 fn step_722() -> Unit raise {
-  closure_hull_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closure s = closed hull s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureHull")))
+  closure_hull_c.set(@readable.prove(
+    "\n  forall s. closure s = closed hull s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureHull", () => closurehull()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11163,7 +14101,19 @@ pub fn closure_hull() -> @kernel.Thm {
 ///|
 /// CLOSURE_EQ
 fn step_723() -> Unit raise {
-  closure_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure s = s  ⇔  closed s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureEq")))
+  closure_eq_c.set(@readable.prove(
+    "\n  forall s.  closure s = s  <=>  closed s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureEq", () => closureeq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11178,7 +14128,17 @@ pub fn closure_eq() -> @kernel.Thm {
 ///|
 /// CLOSURE_CLOSED
 fn step_724() -> Unit raise {
-  closure_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closed s  ⇒  closure s = s\n  by fol CLOSED_IN closure_DEF ClosureClosed")))
+  closure_closed_c.set(@readable.prove(
+    "\n  forall s.  closed s  ==>  closure s = s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureClosed", () => closureclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11193,7 +14153,19 @@ pub fn closure_closed() -> @kernel.Thm {
 ///|
 /// CLOSURE_CLOSURE
 fn step_725() -> Unit raise {
-  closure_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure (closure s) = closure s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureClosure")))
+  closure_closure_c.set(@readable.prove(
+    "\n  forall s.  closure (closure s) = closure s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureClosure", () => closureclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11208,7 +14180,19 @@ pub fn closure_closure() -> @kernel.Thm {
 ///|
 /// CLOSURE_UNION
 fn step_726() -> Unit raise {
-  closure_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closure (s ∪ t)  =  closure s ∪ closure t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureUnion")))
+  closure_union_c.set(@readable.prove(
+    "\n  forall s t.  closure (s UNION t)  =  closure s UNION closure t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureUnion", () => closureunion()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11223,7 +14207,19 @@ pub fn closure_union() -> @kernel.Thm {
 ///|
 /// CLOSURE_INTER_SUBSET
 fn step_727() -> Unit raise {
-  closure_inter_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closure (s ∩ t)  ⊂  closure s ∩ closure t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureInterSubset")))
+  closure_inter_subset_c.set(@readable.prove(
+    "\n  forall s t.  closure (s INTER t)  SUBSET  closure s INTER closure t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureInterSubset", () => closureintersubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11238,7 +14234,19 @@ pub fn closure_inter_subset() -> @kernel.Thm {
 ///|
 /// CLOSURE_INTERS_SUBSET
 fn step_728() -> Unit raise {
-  closure_inters_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f.  closure (INTERS f)  ⊂  INTERS (IMAGE closure f)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureIntersSubset")))
+  closure_inters_subset_c.set(@readable.prove(
+    "\n  forall f.  closure (INTERS f)  SUBSET  INTERS (IMAGE closure f)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureIntersSubset", () => closureinterssubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11251,25 +14259,19 @@ pub fn closure_inters_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_350`
-pub fn exec_phrase_350(x359 : Unit) -> Unit raise {
-  let _ = x359
-  {
-    @readable.thm_ref().val = closureinterssubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureIntersSubset): thm);;
-fn step_729() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureIntersSubset): thm);;", exec_phrase_350)
-}
-
-///|
 /// CLOSURE_MINIMAL
 fn step_730() -> Unit raise {
-  closure_minimal_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s ⊂ t ∧ closed t  ⇒  closure s ⊂ t\n  by fol CLOSED_IN closure_DEF ClosureMinimal")))
+  closure_minimal_c.set(@readable.prove(
+    "\n  forall s t.  s SUBSET t /\\  closed t  ==>  closure s SUBSET t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureMinimal", () => closureminimal()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11284,7 +14286,19 @@ pub fn closure_minimal() -> @kernel.Thm {
 ///|
 /// CLOSURE_MINIMAL_EQ
 fn step_731() -> Unit raise {
-  closure_minimal_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed t  ⇒  (closure s ⊂ t ⇔ s ⊂ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN closure_DEF ClosureMinimalEq")))
+  closure_minimal_eq_c.set(@readable.prove(
+    "\n  forall s t.  closed t  ==>  (closure s SUBSET t <=> s SUBSET t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureMinimalEq", () => closureminimaleq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11297,25 +14311,19 @@ pub fn closure_minimal_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_351`
-pub fn exec_phrase_351(x360 : Unit) -> Unit raise {
-  let _ = x360
-  {
-    @readable.thm_ref().val = closureminimaleq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureMinimalEq): thm);;
-fn step_732() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureMinimalEq): thm);;", exec_phrase_351)
-}
-
-///|
 /// CLOSURE_UNIQUE
 fn step_733() -> Unit raise {
-  closure_unique_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  s ⊂ t ∧ closed t ∧ (∀t'. s ⊂ t' ∧ closed t' ⇒ t ⊂ t')\n    ⇒ closure s = t\n  by fol CLOSED_IN closure_DEF ClosureUnique")))
+  closure_unique_c.set(@readable.prove(
+    "\n  forall s t.  s SUBSET t /\\  closed t /\\  (forall t'. s SUBSET t' /\\  closed t' ==> t SUBSET t')\n    ==> closure s = t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureUnique", () => closureunique()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11328,25 +14336,18 @@ pub fn closure_unique() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_352`
-pub fn exec_phrase_352(x361 : Unit) -> Unit raise {
-  let _ = x361
-  {
-    @readable.thm_ref().val = closureunique()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureUnique): thm);;
-fn step_734() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureUnique): thm);;", exec_phrase_352)
-}
-
-///|
 /// CLOSURE_EMPTY
 fn step_735() -> Unit raise {
-  closure_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  closure ∅ = ∅\n  by fol closure_DEF ClosureEmpty")))
+  closure_empty_c.set(@readable.prove(
+    "\n  closure {} = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureEmpty", () => closureempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11361,7 +14362,17 @@ pub fn closure_empty() -> @kernel.Thm {
 ///|
 /// CLOSURE_UNIV
 fn step_736() -> Unit raise {
-  closure_univ_c.set(@readable.theorem(@readable.parse_qproof(";\n  closure UNIV = UNIV\n  by fol TOPSPACE_EUCLIDEAN closure_DEF ClosureUniv")))
+  closure_univ_c.set(@readable.prove(
+    "\n  closure UNIV = UNIV",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureUniv", () => closureuniv()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11376,7 +14387,18 @@ pub fn closure_univ() -> @kernel.Thm {
 ///|
 /// CLOSURE_UNIONS
 fn step_737() -> Unit raise {
-  closure_unions_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀f.  FINITE f  ⇒  closure (UNIONS f) = UNIONS {closure s | s ∈ f}\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF ClosureUnions")))
+  closure_unions_c.set(@readable.prove(
+    "\n  forall f.  FINITE f  ==>  closure (UNIONS f) = UNIONS {closure s | s IN f}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureUnions", () => closureunions()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11389,25 +14411,20 @@ pub fn closure_unions() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_353`
-pub fn exec_phrase_353(x362 : Unit) -> Unit raise {
-  let _ = x362
-  {
-    @readable.thm_ref().val = closureunions()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureUnions): thm);;
-fn step_738() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureUnions): thm);;", exec_phrase_353)
-}
-
-///|
 /// CLOSURE_EQ_EMPTY
 fn step_739() -> Unit raise {
-  closure_eq_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure s = ∅  ⇔  s = ∅\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF ClosureEqEmpty")))
+  closure_eq_empty_c.set(@readable.prove(
+    "\n  forall s.  closure s = {}  <=>  s = {}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("ClosureEqEmpty", () => closureeqempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11420,25 +14437,21 @@ pub fn closure_eq_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_354`
-pub fn exec_phrase_354(x363 : Unit) -> Unit raise {
-  let _ = x363
-  {
-    @readable.thm_ref().val = closureeqempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureEqEmpty): thm);;
-fn step_740() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureEqEmpty): thm);;", exec_phrase_354)
-}
-
-///|
 /// CLOSURE_SUBSET_EQ
 fn step_741() -> Unit raise {
-  closure_subset_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure s ⊂ s  ⇔  closed s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF CLOSED_IN ClosureSubsetEq")))
+  closure_subset_eq_c.set(@readable.prove(
+    "\n  forall s.  closure s SUBSET s  <=>  closed s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosureSubsetEq", () => closuresubseteq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11453,7 +14466,19 @@ pub fn closure_subset_eq() -> @kernel.Thm {
 ///|
 /// OPEN_INTER_CLOSURE_EQ_EMPTY
 fn step_742() -> Unit raise {
-  open_inter_closure_eq_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s  ⇒  (s ∩ closure t = ∅  ⇔  s ∩ t = ∅)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF OPEN_IN OpenInterClosureEqEmpty")))
+  open_inter_closure_eq_empty_c.set(@readable.prove(
+    "\n  forall s t.  open s  ==>  (s INTER closure t = {}  <=>  s INTER t = {})",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenInterClosureEqEmpty", () => openinterclosureeqempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11468,7 +14493,19 @@ pub fn open_inter_closure_eq_empty() -> @kernel.Thm {
 ///|
 /// OPEN_INTER_CLOSURE_SUBSET
 fn step_743() -> Unit raise {
-  open_inter_closure_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s  ⇒  s ∩ closure t ⊂ closure (s ∩ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF OPEN_IN OpenInterClosureSubset")))
+  open_inter_closure_subset_c.set(@readable.prove(
+    "\n  forall s t.  open s  ==>  s INTER closure t SUBSET closure (s INTER t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("OpenInterClosureSubset", () => openinterclosuresubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11483,7 +14520,19 @@ pub fn open_inter_closure_subset() -> @kernel.Thm {
 ///|
 /// CLOSURE_OPEN_INTER_SUPERSET
 fn step_744() -> Unit raise {
-  closure_open_inter_superset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s ∧ s ⊂ closure t  ⇒  closure (s ∩ t) = closure s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF OPEN_IN ClosureOpenInterSuperset")))
+  closure_open_inter_superset_c.set(@readable.prove(
+    "\n  forall s t.  open s /\\  s SUBSET closure t  ==>  closure (s INTER t) = closure s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("ClosureOpenInterSuperset", () => closureopenintersuperset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11496,25 +14545,34 @@ pub fn closure_open_inter_superset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_355`
-pub fn exec_phrase_355(x364 : Unit) -> Unit raise {
-  let _ = x364
-  {
-    @readable.thm_ref().val = closureopenintersuperset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureOpenInterSuperset): thm);;
-fn step_745() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureOpenInterSuperset): thm);;", exec_phrase_355)
-}
-
-///|
 /// CLOSURE_COMPLEMENT
 fn step_746() -> Unit raise {
-  closure_complement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure (UNIV ━ s) = UNIV ━ interior s\n\n  proof\n    rewrite closure_DEF GSYM TOPSPACE_EUCLIDEAN  interior_DEF;\n    simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN ClosureComplement;\n  qed;\n")))
+  closure_complement_c.set(@readable.prove(
+    "\n  forall s.  closure (UNIV DIFF s) = UNIV DIFF interior s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("closure_DEF", () => closure_def_v1()),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ),
+            @readable.Thm("interior_DEF", () => interior_def_v1()),
+          ],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Thm("ClosureComplement", () => closurecomplement()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11529,7 +14587,32 @@ pub fn closure_complement() -> @kernel.Thm {
 ///|
 /// INTERIOR_COMPLEMENT
 fn step_747() -> Unit raise {
-  interior_complement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior (UNIV ━ s) = UNIV ━ closure s\n\n  proof\n    rewrite closure_DEF GSYM TOPSPACE_EUCLIDEAN  interior_DEF;\n    simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN InteriorComplement;\n  qed;\n")))
+  interior_complement_c.set(@readable.prove(
+    "\n  forall s.  interior (UNIV DIFF s) = UNIV DIFF closure s",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.rewrite,
+          [
+            @readable.Thm("closure_DEF", () => closure_def_v1()),
+            @readable.Rule(
+              @equal.gsym,
+              @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            ),
+            @readable.Thm("interior_DEF", () => interior_def_v1()),
+          ],
+        ),
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Thm("InteriorComplement", () => interiorcomplement()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11544,7 +14627,22 @@ pub fn interior_complement() -> @kernel.Thm {
 ///|
 /// CONNECTED_INTERMEDIATE_CLOSURE
 fn step_748() -> Unit raise {
-  connected_intermediate_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  connected s ∧ s ⊂ t ∧ t ⊂ closure s  ⇒  connected t\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF connected_DEF ConnectedIntermediateClosure")))
+  connected_intermediate_closure_c.set(@readable.prove(
+    "\n  forall s t.  connected s /\\  s SUBSET t /\\  t SUBSET closure s  ==>  connected t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm(
+          "ConnectedIntermediateClosure",
+          () => connectedintermediateclosure(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11559,7 +14657,19 @@ pub fn connected_intermediate_closure() -> @kernel.Thm {
 ///|
 /// CONNECTED_CLOSURE
 fn step_749() -> Unit raise {
-  connected_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  connected s  ⇒  connected (closure s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF connected_DEF ConnectedClosure")))
+  connected_closure_c.set(@readable.prove(
+    "\n  forall s.  connected s  ==>  connected (closure s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("ConnectedClosure", () => connectedclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11572,25 +14682,21 @@ pub fn connected_closure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_356`
-pub fn exec_phrase_356(x365 : Unit) -> Unit raise {
-  let _ = x365
-  {
-    @readable.thm_ref().val = connectedclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedClosure): thm);;
-fn step_750() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedClosure): thm);;", exec_phrase_356)
-}
-
-///|
 /// CONNECTED_UNION_STRONG
 fn step_751() -> Unit raise {
-  connected_union_strong_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  connected s ∧ connected t ∧ ¬(closure s ∩ t = ∅)\n        ⇒ connected (s ∪ t)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF connected_DEF ConnectedUnionStrong")))
+  connected_union_strong_c.set(@readable.prove(
+    "\n  forall s t.  connected s /\\  connected t /\\  ~(closure s INTER t = {})\n        ==> connected (s UNION t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("ConnectedUnionStrong", () => connectedunionstrong()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11603,25 +14709,21 @@ pub fn connected_union_strong() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_357`
-pub fn exec_phrase_357(x366 : Unit) -> Unit raise {
-  let _ = x366
-  {
-    @readable.thm_ref().val = connectedunionstrong()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedUnionStrong): thm);;
-fn step_752() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedUnionStrong): thm);;", exec_phrase_357)
-}
-
-///|
 /// INTERIOR_DIFF
 fn step_753() -> Unit raise {
-  interior_diff_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  interior (s ━ t) = interior s ━ closure t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF interior_DEF InteriorDiff")))
+  interior_diff_c.set(@readable.prove(
+    "\n  forall s t.  interior (s DIFF t) = interior s DIFF closure t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("InteriorDiff", () => interiordiff()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11634,25 +14736,21 @@ pub fn interior_diff() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_358`
-pub fn exec_phrase_358(x367 : Unit) -> Unit raise {
-  let _ = x367
-  {
-    @readable.thm_ref().val = interiordiff()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorDiff): thm);;
-fn step_754() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorDiff): thm);;", exec_phrase_358)
-}
-
-///|
 /// CLOSED_IN_LIMPT
 fn step_755() -> Unit raise {
-  closed_in_limpt_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed_in (subtopology euclidean t) s  ⇔\n    s ⊂ t  ∧  ∀x. x limit_point_of s ∧ x ∈ t ⇒ x ∈ s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF limit_point_of_DEF ClosedInLimpt_ALT")))
+  closed_in_limpt_c.set(@readable.prove(
+    "\n  forall s t.  closed_in (subtopology euclidean t) s  <=>\n    s SUBSET t  /\\   forall x. x limit_point_of s /\\  x IN t ==> x IN s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("ClosedInLimpt_ALT", () => closedinlimpt_alt()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11665,25 +14763,21 @@ pub fn closed_in_limpt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_359`
-pub fn exec_phrase_359(x368 : Unit) -> Unit raise {
-  let _ = x368
-  {
-    @readable.thm_ref().val = closedinlimpt_alt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInLimpt_ALT): thm);;
-fn step_756() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInLimpt_ALT): thm);;", exec_phrase_359)
-}
-
-///|
 /// CLOSED_IN_INTER_CLOSURE
 fn step_757() -> Unit raise {
-  closed_in_inter_closure_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed_in (subtopology euclidean s) t  ⇔  s ∩ closure t = t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF limit_point_of_DEF ClosedInInterClosure")))
+  closed_in_inter_closure_c.set(@readable.prove(
+    "\n  forall s t.  closed_in (subtopology euclidean s) t  <=>  s INTER closure t = t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("limit_point_of_DEF", () => limit_point_of_def()),
+        @readable.Thm("ClosedInInterClosure", () => closedininterclosure()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11696,25 +14790,21 @@ pub fn closed_in_inter_closure() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_360`
-pub fn exec_phrase_360(x369 : Unit) -> Unit raise {
-  let _ = x369
-  {
-    @readable.thm_ref().val = closedininterclosure()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosedInInterClosure): thm);;
-fn step_758() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosedInInterClosure): thm);;", exec_phrase_360)
-}
-
-///|
 /// INTERIOR_CLOSURE_IDEMP
 fn step_759() -> Unit raise {
-  interior_closure_idemp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. interior (closure (interior (closure s))) = interior (closure s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF interior_DEF InteriorClosureIdemp")))
+  interior_closure_idemp_c.set(@readable.prove(
+    "\n  forall s. interior (closure (interior (closure s))) = interior (closure s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("InteriorClosureIdemp", () => interiorclosureidemp()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11729,7 +14819,19 @@ pub fn interior_closure_idemp() -> @kernel.Thm {
 ///|
 /// CLOSURE_INTERIOR_IDEMP
 fn step_760() -> Unit raise {
-  closure_interior_idemp_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closure (interior (closure (interior s))) = closure (interior s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF interior_DEF ClosureInteriorIdemp")))
+  closure_interior_idemp_c.set(@readable.prove(
+    "\n  forall s.  closure (interior (closure (interior s))) = closure (interior s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("ClosureInteriorIdemp", () => closureinterioridemp()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11742,25 +14844,24 @@ pub fn closure_interior_idemp() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_361`
-pub fn exec_phrase_361(x370 : Unit) -> Unit raise {
-  let _ = x370
-  {
-    @readable.thm_ref().val = closureinterioridemp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureInteriorIdemp): thm);;
-fn step_761() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureInteriorIdemp): thm);;", exec_phrase_361)
-}
-
-///|
 /// INTERIOR_CLOSED_UNION_EMPTY_INTERIOR
 fn step_762() -> Unit raise {
-  interior_closed_union_empty_interior_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∧ interior t = ∅  ⇒  interior (s ∪ t) = interior s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN interior_DEF InteriorClosedUnionEmptyInterior")))
+  interior_closed_union_empty_interior_c.set(@readable.prove(
+    "\n  forall s t.  closed s /\\  interior t = {}  ==>  interior (s UNION t) = interior s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm(
+          "InteriorClosedUnionEmptyInterior",
+          () => interiorclosedunionemptyinterior(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11775,7 +14876,19 @@ pub fn interior_closed_union_empty_interior() -> @kernel.Thm {
 ///|
 /// INTERIOR_UNION_EQ_EMPTY
 fn step_763() -> Unit raise {
-  interior_union_eq_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∨ closed t\n        ⇒ (interior (s ∪ t) = ∅  ⇔  interior s = ∅ ∧ interior t = ∅)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN interior_DEF InteriorUnionEqEmpty")))
+  interior_union_eq_empty_c.set(@readable.prove(
+    "\n  forall s t.  closed s \\/ closed t\n        ==> (interior (s UNION t) = {}  <=>  interior s = {} /\\  interior t = {})",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("InteriorUnionEqEmpty", () => interiorunioneqempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11790,7 +14903,19 @@ pub fn interior_union_eq_empty() -> @kernel.Thm {
 ///|
 /// NOWHERE_DENSE_UNION
 fn step_764() -> Unit raise {
-  nowhere_dense_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  interior (closure (s ∪ t)) = ∅  ⇔\n        interior (closure s) = ∅  ∧  interior (closure t) = ∅\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF interior_DEF NowhereDenseUnion")))
+  nowhere_dense_union_c.set(@readable.prove(
+    "\n  forall s t.  interior (closure (s UNION t)) = {}  <=>\n        interior (closure s) = {}  /\\   interior (closure t) = {}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("NowhereDenseUnion", () => nowheredenseunion()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11803,25 +14928,22 @@ pub fn nowhere_dense_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_362`
-pub fn exec_phrase_362(x371 : Unit) -> Unit raise {
-  let _ = x371
-  {
-    @readable.thm_ref().val = nowheredenseunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NowhereDenseUnion): thm);;
-fn step_765() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NowhereDenseUnion): thm);;", exec_phrase_362)
-}
-
-///|
 /// NOWHERE_DENSE
 fn step_766() -> Unit raise {
-  nowhere_dense_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior (closure s) = ∅ ⇔\n    ∀t. open t ∧ ¬(t = ∅)  ⇒  ∃u. open u ∧ ¬(u = ∅) ∧ u ⊂ t ∧ u ∩ s = ∅\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF closure_DEF OPEN_IN NowhereDense")))
+  nowhere_dense_c.set(@readable.prove(
+    "\n  forall s.  interior (closure s) = {} <=>\n    forall t. open t /\\  ~(t = {})  ==>  ?u. open u /\\  ~(u = {}) /\\  u SUBSET t /\\  u INTER s = {}",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("NowhereDense", () => nowheredense()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11834,25 +14956,20 @@ pub fn nowhere_dense() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_363`
-pub fn exec_phrase_363(x372 : Unit) -> Unit raise {
-  let _ = x372
-  {
-    @readable.thm_ref().val = nowheredense()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NowhereDense): thm);;
-fn step_767() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NowhereDense): thm);;", exec_phrase_363)
-}
-
-///|
 /// INTERIOR_CLOSURE_INTER_OPEN
 fn step_768() -> Unit raise {
-  interior_closure_inter_open_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  open s ∧ open t ⇒\n    interior (closure (s ∩ t))  =  interior(closure s) ∩ interior (closure t)\n  by simplify interior_DEF closure_DEF OPEN_IN InteriorClosureInterOpen")))
+  interior_closure_inter_open_c.set(@readable.prove(
+    "\n  forall s t.  open s /\\  open t ==>\n    interior (closure (s INTER t))  =  interior(closure s) INTER interior (closure t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("InteriorClosureInterOpen", () => interiorclosureinteropen()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11867,7 +14984,18 @@ pub fn interior_closure_inter_open() -> @kernel.Thm {
 ///|
 /// CLOSURE_INTERIOR_UNION_CLOSED
 fn step_769() -> Unit raise {
-  closure_interior_union_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closed s ∧ closed t  ⇒\n    closure (interior (s ∪ t))  = closure (interior s) ∪ closure (interior t)\n  by simplify interior_DEF closure_DEF CLOSED_IN ClosureInteriorUnionClosed")))
+  closure_interior_union_closed_c.set(@readable.prove(
+    "\n  forall s t.  closed s /\\  closed t  ==>\n    closure (interior (s UNION t))  = closure (interior s) UNION closure (interior t)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("ClosureInteriorUnionClosed", () => closureinteriorunionclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11882,7 +15010,19 @@ pub fn closure_interior_union_closed() -> @kernel.Thm {
 ///|
 /// REGULAR_OPEN_INTER
 fn step_770() -> Unit raise {
-  regular_open_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  interior (closure s) = s ∧ interior (closure t) = t\n    ⇒ interior (closure (s ∩ t)) = s ∩ t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF closure_DEF RegularOpenInter")))
+  regular_open_inter_c.set(@readable.prove(
+    "\n  forall s t.  interior (closure s) = s /\\  interior (closure t) = t\n    ==> interior (closure (s INTER t)) = s INTER t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("RegularOpenInter", () => regularopeninter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11895,25 +15035,21 @@ pub fn regular_open_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_364`
-pub fn exec_phrase_364(x373 : Unit) -> Unit raise {
-  let _ = x373
-  {
-    @readable.thm_ref().val = regularopeninter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RegularOpenInter): thm);;
-fn step_771() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RegularOpenInter): thm);;", exec_phrase_364)
-}
-
-///|
 /// REGULAR_CLOSED_UNION
 fn step_772() -> Unit raise {
-  regular_closed_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closure (interior s) = s  ∧  closure (interior t) = t\n    ⇒  closure (interior (s ∪ t)) = s ∪ t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF closure_DEF RegularClosedUnion")))
+  regular_closed_union_c.set(@readable.prove(
+    "\n  forall s t.  closure (interior s) = s  /\\   closure (interior t) = t\n    ==>  closure (interior (s UNION t)) = s UNION t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("RegularClosedUnion", () => regularclosedunion()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11926,25 +15062,20 @@ pub fn regular_closed_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_365`
-pub fn exec_phrase_365(x374 : Unit) -> Unit raise {
-  let _ = x374
-  {
-    @readable.thm_ref().val = regularclosedunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RegularClosedUnion): thm);;
-fn step_773() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RegularClosedUnion): thm);;", exec_phrase_365)
-}
-
-///|
 /// DIFF_CLOSURE_SUBSET
 fn step_774() -> Unit raise {
-  diff_closure_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closure s ━ closure t ⊂ closure (s ━ t)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF DiffClosureSubset")))
+  diff_closure_subset_c.set(@readable.prove(
+    "\n  forall s t.  closure s DIFF closure t SUBSET closure (s DIFF t)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("DiffClosureSubset", () => diffclosuresubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -11954,22 +15085,6 @@ let diff_closure_subset_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("DIFF_CLOSUR
 /// `DIFF_CLOSURE_SUBSET`
 pub fn diff_closure_subset() -> @kernel.Thm {
   diff_closure_subset_c.get()
-}
-
-///|
-/// `exec_phrase_366`
-pub fn exec_phrase_366(x375 : Unit) -> Unit raise {
-  let _ = x375
-  {
-    @readable.thm_ref().val = diffclosuresubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((DiffClosureSubset): thm);;
-fn step_775() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((DiffClosureSubset): thm);;", exec_phrase_366)
 }
 
 ///|
@@ -11990,7 +15105,20 @@ pub fn frontier_def_v1() -> @kernel.Thm {
 ///|
 /// frontier
 fn step_777() -> Unit raise {
-  frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  frontier s = (closure s) DIFF (interior s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF closure_DEF interior_DEF Frontier_THM")))
+  frontier_c.set(@readable.prove(
+    "\n  forall s.  frontier s = (closure s) DIFF (interior s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("Frontier_THM", () => frontier_thm()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12003,25 +15131,21 @@ pub fn frontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_367`
-pub fn exec_phrase_367(x376 : Unit) -> Unit raise {
-  let _ = x376
-  {
-    @readable.thm_ref().val = frontier_def_v1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((frontier_DEF): thm);;
-fn step_778() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((frontier_DEF): thm);;", exec_phrase_367)
-}
-
-///|
 /// FRONTIER_CLOSED
 fn step_779() -> Unit raise {
-  frontier_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closed (frontier s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF CLOSED_IN FrontierClosed")))
+  frontier_closed_c.set(@readable.prove(
+    "\n  forall s. closed (frontier s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("FrontierClosed", () => frontierclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12036,7 +15160,19 @@ pub fn frontier_closed() -> @kernel.Thm {
 ///|
 /// FRONTIER_CLOSURES
 fn step_780() -> Unit raise {
-  frontier_closures_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  frontier s  =  (closure s) ∩ (closure (UNIV ━ s))\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF closure_DEF FrontierClosures")))
+  frontier_closures_c.set(@readable.prove(
+    "\n  forall s.  frontier s  =  (closure s) INTER (closure (UNIV DIFF s))",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("FrontierClosures", () => frontierclosures()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12051,7 +15187,35 @@ pub fn frontier_closures() -> @kernel.Thm {
 ///|
 /// FRONTIER_STRADDLE
 fn step_781() -> Unit raise {
-  frontier_straddle_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀a s.  a ∈ frontier s ⇔  ∀e. &0 < e ⇒\n    (∃x. x ∈ s ∧ dist(a,x) < e)  ∧  (∃x. ¬(x ∈ s) ∧ dist(a,x) < e)\n\n  proof\n    simplify SUBSET_UNIV IN_UNIV TOPSPACE_EUCLIDEAN frontier_DEF closure_DEF FrontierStraddle GSYM OPEN_IN;\n    fol IN_BALL SUBSET OPEN_CONTAINS_BALL CENTRE_IN_BALL OPEN_BALL;\n  qed;\n")))
+  frontier_straddle_c.set(@readable.prove(
+    "\n  forall a s.  a IN frontier s <=>  forall e. &0 < e ==>\n    (?x. x IN s /\\  dist(a,x) < e)  /\\   (?x. ~(x IN s) /\\  dist(a,x) < e)",
+    @readable.steps(
+      [
+        @readable.by(
+          @readable.simplify,
+          [
+            @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+            @readable.Thm("IN_UNIV", () => @sets.in_univ()),
+            @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+            @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+            @readable.Thm("closure_DEF", () => closure_def_v1()),
+            @readable.Thm("FrontierStraddle", () => frontierstraddle()),
+            @readable.Rule(@equal.gsym, @readable.Thm("OPEN_IN", () => open_in())),
+          ],
+        ),
+        @readable.by(
+          @readable.fol,
+          [
+            @readable.Thm("IN_BALL", () => in_ball()),
+            @readable.Thm("SUBSET", () => @sets.subset()),
+            @readable.Thm("OPEN_CONTAINS_BALL", () => open_contains_ball()),
+            @readable.Thm("CENTRE_IN_BALL", () => centre_in_ball()),
+            @readable.Thm("OPEN_BALL", () => open_ball()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12066,7 +15230,17 @@ pub fn frontier_straddle() -> @kernel.Thm {
 ///|
 /// FRONTIER_SUBSET_CLOSED
 fn step_782() -> Unit raise {
-  frontier_subset_closed_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  closed s  ⇒  (frontier s) ⊂ s\n  by fol frontier_DEF CLOSED_IN FrontierSubsetClosed")))
+  frontier_subset_closed_c.set(@readable.prove(
+    "\n  forall s.  closed s  ==>  (frontier s) SUBSET s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("FrontierSubsetClosed", () => frontiersubsetclosed()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12081,7 +15255,16 @@ pub fn frontier_subset_closed() -> @kernel.Thm {
 ///|
 /// FRONTIER_EMPTY
 fn step_783() -> Unit raise {
-  frontier_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  frontier ∅ = ∅\n  by fol frontier_DEF FrontierEmpty")))
+  frontier_empty_c.set(@readable.prove(
+    "\n  frontier {} = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("FrontierEmpty", () => frontierempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12094,25 +15277,19 @@ pub fn frontier_empty() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_368`
-pub fn exec_phrase_368(x377 : Unit) -> Unit raise {
-  let _ = x377
-  {
-    @readable.thm_ref().val = frontierempty()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierEmpty): thm);;
-fn step_784() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierEmpty): thm);;", exec_phrase_368)
-}
-
-///|
 /// FRONTIER_UNIV
 fn step_785() -> Unit raise {
-  frontier_univ_c.set(@readable.theorem(@readable.parse_qproof(";\n  frontier UNIV = ∅\n  by fol frontier_DEF TOPSPACE_EUCLIDEAN FrontierUniv")))
+  frontier_univ_c.set(@readable.prove(
+    "\n  frontier UNIV = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("FrontierUniv", () => frontieruniv()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12125,25 +15302,21 @@ pub fn frontier_univ() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_369`
-pub fn exec_phrase_369(x378 : Unit) -> Unit raise {
-  let _ = x378
-  {
-    @readable.thm_ref().val = frontieruniv()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierUniv): thm);;
-fn step_786() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierUniv): thm);;", exec_phrase_369)
-}
-
-///|
 /// FRONTIER_SUBSET_EQ
 fn step_787() -> Unit raise {
-  frontier_subset_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. (frontier s) ⊂ s ⇔ closed s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF CLOSED_IN FrontierSubsetEq")))
+  frontier_subset_eq_c.set(@readable.prove(
+    "\n  forall s. (frontier s) SUBSET s <=> closed s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("FrontierSubsetEq", () => frontiersubseteq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12158,7 +15331,18 @@ pub fn frontier_subset_eq() -> @kernel.Thm {
 ///|
 /// FRONTIER_COMPLEMENT
 fn step_788() -> Unit raise {
-  frontier_complement_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. frontier (UNIV ━ s) = frontier s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF FrontierComplement")))
+  frontier_complement_c.set(@readable.prove(
+    "\n  forall s. frontier (UNIV DIFF s) = frontier s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("FrontierComplement", () => frontiercomplement()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12173,7 +15357,19 @@ pub fn frontier_complement() -> @kernel.Thm {
 ///|
 /// FRONTIER_DISJOINT_EQ
 fn step_789() -> Unit raise {
-  frontier_disjoint_eq_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  (frontier s) ∩ s = ∅  ⇔  open s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF OPEN_IN FrontierDisjointEq")))
+  frontier_disjoint_eq_c.set(@readable.prove(
+    "\n  forall s.  (frontier s) INTER s = {}  <=>  open s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("FrontierDisjointEq", () => frontierdisjointeq()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12186,25 +15382,20 @@ pub fn frontier_disjoint_eq() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_370`
-pub fn exec_phrase_370(x379 : Unit) -> Unit raise {
-  let _ = x379
-  {
-    @readable.thm_ref().val = frontierdisjointeq()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierDisjointEq): thm);;
-fn step_790() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierDisjointEq): thm);;", exec_phrase_370)
-}
-
-///|
 /// FRONTIER_INTER_SUBSET
 fn step_791() -> Unit raise {
-  frontier_inter_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  frontier (s ∩ t)  ⊂  frontier s ∪ frontier t\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF FrontierInterSubset")))
+  frontier_inter_subset_c.set(@readable.prove(
+    "\n  forall s t.  frontier (s INTER t)  SUBSET  frontier s UNION frontier t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("FrontierInterSubset", () => frontierintersubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12219,7 +15410,18 @@ pub fn frontier_inter_subset() -> @kernel.Thm {
 ///|
 /// FRONTIER_UNION_SUBSET
 fn step_792() -> Unit raise {
-  frontier_union_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  frontier (s ∪ t)  ⊂  frontier s ∪ frontier t\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF FrontierUnionSubset")))
+  frontier_union_subset_c.set(@readable.prove(
+    "\n  forall s t.  frontier (s UNION t)  SUBSET  frontier s UNION frontier t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("FrontierUnionSubset", () => frontierunionsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12234,7 +15436,19 @@ pub fn frontier_union_subset() -> @kernel.Thm {
 ///|
 /// FRONTIER_INTERIORS
 fn step_793() -> Unit raise {
-  frontier_interiors_c.set(@readable.theorem(@readable.parse_qproof(";\n  frontier s = UNIV ━ interior(s) ━ interior(UNIV ━ s)\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF interior_DEF FrontierInteriors")))
+  frontier_interiors_c.set(@readable.prove(
+    "\n  frontier s = UNIV DIFF interior(s) DIFF interior(UNIV DIFF s)",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("FrontierInteriors", () => frontierinteriors()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12249,7 +15463,18 @@ pub fn frontier_interiors() -> @kernel.Thm {
 ///|
 /// FRONTIER_FRONTIER_SUBSET
 fn step_794() -> Unit raise {
-  frontier_frontier_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  frontier (frontier s) ⊂ frontier s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF FrontierFrontierSubset")))
+  frontier_frontier_subset_c.set(@readable.prove(
+    "\n  forall s.  frontier (frontier s) SUBSET frontier s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("FrontierFrontierSubset", () => frontierfrontiersubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12262,25 +15487,22 @@ pub fn frontier_frontier_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_371`
-pub fn exec_phrase_371(x380 : Unit) -> Unit raise {
-  let _ = x380
-  {
-    @readable.thm_ref().val = frontierfrontiersubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierFrontierSubset): thm);;
-fn step_795() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierFrontierSubset): thm);;", exec_phrase_371)
-}
-
-///|
 /// INTERIOR_FRONTIER
 fn step_796() -> Unit raise {
-  interior_frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  interior (frontier s)  =  interior (closure s) ━ closure (interior s)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN interior_DEF frontier_DEF closure_DEF InteriorFrontier")))
+  interior_frontier_c.set(@readable.prove(
+    "\n  forall s.  interior (frontier s)  =  interior (closure s) DIFF closure (interior s)",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("InteriorFrontier", () => interiorfrontier()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12295,7 +15517,19 @@ pub fn interior_frontier() -> @kernel.Thm {
 ///|
 /// INTERIOR_FRONTIER_EMPTY
 fn step_797() -> Unit raise {
-  interior_frontier_empty_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  open s ∨ closed s  ⇒  interior (frontier s) = ∅\n  by fol OPEN_IN CLOSED_IN interior_DEF frontier_DEF InteriorFrontierEmpty")))
+  interior_frontier_empty_c.set(@readable.prove(
+    "\n  forall s.  open s \\/ closed s  ==>  interior (frontier s) = {}",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("InteriorFrontierEmpty", () => interiorfrontierempty()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12310,7 +15544,18 @@ pub fn interior_frontier_empty() -> @kernel.Thm {
 ///|
 /// UNION_FRONTIER
 fn step_798() -> Unit raise {
-  union_frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  frontier s ∪ frontier t =\n    frontier (s ∪ t) ∪ frontier (s ∩ t) ∪ frontier s ∩ frontier t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF UnionFrontier")))
+  union_frontier_c.set(@readable.prove(
+    "\n  forall s t.  frontier s UNION frontier t =\n    frontier (s UNION t) UNION frontier (s INTER t) UNION frontier s INTER frontier t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("UnionFrontier", () => unionfrontier()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12323,25 +15568,21 @@ pub fn union_frontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_372`
-pub fn exec_phrase_372(x381 : Unit) -> Unit raise {
-  let _ = x381
-  {
-    @readable.thm_ref().val = unionfrontier()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((UnionFrontier): thm);;
-fn step_799() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((UnionFrontier): thm);;", exec_phrase_372)
-}
-
-///|
 /// CONNECTED_INTER_FRONTIER
 fn step_800() -> Unit raise {
-  connected_inter_frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  connected s ∧ ¬(s ∩ t = ∅) ∧ ¬(s ━ t = ∅)\n    ⇒  ¬(s ∩ frontier t = ∅)\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN connected_DEF frontier_DEF ConnectedInterFrontier")))
+  connected_inter_frontier_c.set(@readable.prove(
+    "\n  forall s t.  connected s /\\  ~(s INTER t = {}) /\\  ~(s DIFF t = {})\n    ==>  ~(s INTER frontier t = {})",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("connected_DEF", () => connected_def_v1()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("ConnectedInterFrontier", () => connectedinterfrontier()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12354,25 +15595,26 @@ pub fn connected_inter_frontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_373`
-pub fn exec_phrase_373(x382 : Unit) -> Unit raise {
-  let _ = x382
-  {
-    @readable.thm_ref().val = connectedinterfrontier()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ConnectedInterFrontier): thm);;
-fn step_801() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ConnectedInterFrontier): thm);;", exec_phrase_373)
-}
-
-///|
 /// INTERIOR_CLOSED_EQ_EMPTY_AS_FRONTIER
 fn step_802() -> Unit raise {
-  interior_closed_eq_empty_as_frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closed s ∧ interior s = ∅  ⇔  ∃t. open t ∧ s = frontier t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN CLOSED_IN interior_DEF OPEN_IN frontier_DEF InteriorClosedEqEmptyAsFrontier")))
+  interior_closed_eq_empty_as_frontier_c.set(@readable.prove(
+    "\n  forall s. closed s /\\  interior s = {}  <=>  ?t. open t /\\  s = frontier t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("CLOSED_IN", () => closed_in_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("OPEN_IN", () => open_in()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm(
+          "InteriorClosedEqEmptyAsFrontier",
+          () => interiorclosedeqemptyasfrontier(),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12385,25 +15627,21 @@ pub fn interior_closed_eq_empty_as_frontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_374`
-pub fn exec_phrase_374(x383 : Unit) -> Unit raise {
-  let _ = x383
-  {
-    @readable.thm_ref().val = interiorclosedeqemptyasfrontier()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((InteriorClosedEqEmptyAsFrontier): thm);;
-fn step_803() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((InteriorClosedEqEmptyAsFrontier): thm);;", exec_phrase_374)
-}
-
-///|
 /// FRONTIER_UNION
 fn step_804() -> Unit raise {
-  frontier_union_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  closure s ∩ closure t = ∅\n    ⇒ frontier (s ∪ t) = frontier s ∪ frontier t\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF closure_DEF FrontierUnion")))
+  frontier_union_c.set(@readable.prove(
+    "\n  forall s t.  closure s INTER closure t = {}\n    ==> frontier (s UNION t) = frontier s UNION frontier t",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("FrontierUnion", () => frontierunion()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12416,25 +15654,21 @@ pub fn frontier_union() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_375`
-pub fn exec_phrase_375(x384 : Unit) -> Unit raise {
-  let _ = x384
-  {
-    @readable.thm_ref().val = frontierunion()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierUnion): thm);;
-fn step_805() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierUnion): thm);;", exec_phrase_375)
-}
-
-///|
 /// CLOSURE_UNION_FRONTIER
 fn step_806() -> Unit raise {
-  closure_union_frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s. closure s = s ∪ frontier s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN closure_DEF frontier_DEF ClosureUnionFrontier")))
+  closure_union_frontier_c.set(@readable.prove(
+    "\n  forall s. closure s = s UNION frontier s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("ClosureUnionFrontier", () => closureunionfrontier()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12447,25 +15681,21 @@ pub fn closure_union_frontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_376`
-pub fn exec_phrase_376(x385 : Unit) -> Unit raise {
-  let _ = x385
-  {
-    @readable.thm_ref().val = closureunionfrontier()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ClosureUnionFrontier): thm);;
-fn step_807() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ClosureUnionFrontier): thm);;", exec_phrase_376)
-}
-
-///|
 /// FRONTIER_INTERIOR_SUBSET
 fn step_808() -> Unit raise {
-  frontier_interior_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  frontier (interior s) ⊂ frontier s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF interior_DEF FrontierInteriorSubset")))
+  frontier_interior_subset_c.set(@readable.prove(
+    "\n  forall s.  frontier (interior s) SUBSET frontier s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("FrontierInteriorSubset", () => frontierinteriorsubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12478,25 +15708,21 @@ pub fn frontier_interior_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_377`
-pub fn exec_phrase_377(x386 : Unit) -> Unit raise {
-  let _ = x386
-  {
-    @readable.thm_ref().val = frontierinteriorsubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierInteriorSubset): thm);;
-fn step_809() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierInteriorSubset): thm);;", exec_phrase_377)
-}
-
-///|
 /// FRONTIER_CLOSURE_SUBSET
 fn step_810() -> Unit raise {
-  frontier_closure_subset_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  frontier (closure s) ⊂ frontier s\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF closure_DEF FrontierClosureSubset")))
+  frontier_closure_subset_c.set(@readable.prove(
+    "\n  forall s.  frontier (closure s) SUBSET frontier s",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("FrontierClosureSubset", () => frontierclosuresubset()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12509,25 +15735,21 @@ pub fn frontier_closure_subset() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_378`
-pub fn exec_phrase_378(x387 : Unit) -> Unit raise {
-  let _ = x387
-  {
-    @readable.thm_ref().val = frontierclosuresubset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierClosureSubset): thm);;
-fn step_811() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierClosureSubset): thm);;", exec_phrase_378)
-}
-
-///|
 /// SET_DIFF_FRONTIER
 fn step_812() -> Unit raise {
-  set_diff_frontier_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s.  s ━ frontier s = interior s\n  by simplify SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF interior_DEF SetDiffFrontier")))
+  set_diff_frontier_c.set(@readable.prove(
+    "\n  forall s.  s DIFF frontier s = interior s",
+    @readable.by(
+      @readable.simplify,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("interior_DEF", () => interior_def_v1()),
+        @readable.Thm("SetDiffFrontier", () => setdifffrontier()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12540,25 +15762,21 @@ pub fn set_diff_frontier() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_379`
-pub fn exec_phrase_379(x388 : Unit) -> Unit raise {
-  let _ = x388
-  {
-    @readable.thm_ref().val = setdifffrontier()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SetDiffFrontier): thm);;
-fn step_813() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SetDiffFrontier): thm);;", exec_phrase_379)
-}
-
-///|
 /// FRONTIER_INTER_SUBSET_INTER
 fn step_814() -> Unit raise {
-  frontier_inter_subset_inter_c.set(@readable.theorem(@readable.parse_qproof(";\n  ∀s t.  frontier (s ∩ t)  ⊂  closure s ∩ frontier t ∪ frontier s ∩ closure t\n  by fol SUBSET_UNIV TOPSPACE_EUCLIDEAN frontier_DEF closure_DEF FrontierInterSubsetInter")))
+  frontier_inter_subset_inter_c.set(@readable.prove(
+    "\n  forall s t.  frontier (s INTER t)  SUBSET  closure s INTER frontier t UNION frontier s INTER closure t",
+    @readable.by(
+      @readable.fol,
+      [
+        @readable.Thm("SUBSET_UNIV", () => @sets.subset_univ()),
+        @readable.Thm("TOPSPACE_EUCLIDEAN", () => topspace_euclidean()),
+        @readable.Thm("frontier_DEF", () => frontier_def_v1()),
+        @readable.Thm("closure_DEF", () => closure_def_v1()),
+        @readable.Thm("FrontierInterSubsetInter", () => frontierintersubsetinter()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -12571,26 +15789,9 @@ pub fn frontier_inter_subset_inter() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_380`
-pub fn exec_phrase_380(x389 : Unit) -> Unit raise {
-  let _ = x389
-  {
-    @readable.thm_ref().val = frontierintersubsetinter()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((FrontierInterSubsetInter): thm);;
-fn step_815() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((FrontierInterSubsetInter): thm);;", exec_phrase_380)
-}
-
-///|
 fn load_steps() -> Unit raise {
   step_1()
   step_2()
-  step_4()
   step_3()
   step_5()
   step_6()
@@ -12606,145 +15807,58 @@ fn load_steps() -> Unit raise {
   step_16()
   step_17()
   step_18()
-  step_20()
   step_19()
   step_21()
   step_22()
   step_23()
-  step_25()
-  step_26()
-  step_27()
-  step_28()
   step_24()
-  step_30()
   step_29()
   step_31()
-  step_33()
   step_32()
   step_34()
   step_35()
-  step_37()
-  step_38()
-  step_39()
-  step_40()
   step_36()
-  step_42()
-  step_43()
-  step_44()
   step_41()
-  step_46()
-  step_47()
-  step_48()
   step_45()
-  step_50()
   step_49()
   step_51()
   step_52()
   step_53()
   step_54()
-  step_56()
-  step_57()
-  step_58()
-  step_59()
   step_55()
   step_60()
-  step_62()
-  step_63()
-  step_64()
-  step_65()
-  step_66()
-  step_67()
-  step_68()
-  step_69()
-  step_70()
   step_61()
-  step_72()
-  step_73()
   step_71()
   step_74()
-  step_76()
   step_75()
-  step_78()
-  step_79()
-  step_80()
   step_77()
-  step_82()
-  step_83()
-  step_84()
   step_81()
-  step_86()
-  step_87()
   step_85()
-  step_89()
-  step_90()
-  step_91()
-  step_92()
   step_88()
-  step_94()
-  step_95()
-  step_96()
-  step_97()
   step_93()
-  step_99()
   step_98()
-  step_101()
-  step_102()
-  step_103()
   step_100()
-  step_105()
   step_104()
-  step_107()
   step_106()
-  step_109()
-  step_110()
   step_108()
-  step_112()
-  step_113()
-  step_114()
-  step_115()
   step_111()
   step_116()
-  step_118()
-  step_119()
-  step_120()
-  step_121()
-  step_122()
-  step_123()
-  step_124()
-  step_125()
-  step_126()
-  step_127()
-  step_128()
   step_117()
-  step_130()
-  step_131()
-  step_132()
-  step_133()
   step_129()
-  step_135()
   step_134()
-  step_137()
   step_136()
-  step_139()
   step_138()
-  step_141()
-  step_142()
-  step_143()
   step_140()
   step_144()
-  step_146()
   step_145()
-  step_148()
   step_147()
   step_149()
   step_150()
   step_151()
   step_152()
-  step_154()
   step_153()
   step_155()
   step_156()
-  step_158()
   step_157()
   step_159()
   step_160()
@@ -12753,528 +15867,275 @@ fn load_steps() -> Unit raise {
   step_163()
   step_164()
   step_165()
-  step_167()
   step_166()
-  step_169()
-  step_170()
   step_168()
   step_171()
   step_172()
-  step_174()
-  step_175()
-  step_176()
   step_173()
   step_177()
-  step_179()
   step_178()
   step_180()
   step_181()
-  step_183()
-  step_184()
   step_182()
-  step_186()
-  step_187()
   step_185()
   step_188()
   step_189()
   step_190()
-  step_192()
   step_191()
-  step_194()
-  step_195()
   step_193()
-  step_197()
-  step_198()
   step_196()
-  step_200()
-  step_201()
   step_199()
-  step_203()
   step_202()
-  step_205()
   step_204()
-  step_207()
   step_206()
-  step_209()
   step_208()
-  step_211()
-  step_212()
-  step_213()
-  step_214()
   step_210()
   step_215()
   step_216()
-  step_218()
   step_217()
-  step_220()
   step_219()
-  step_222()
-  step_223()
-  step_224()
-  step_225()
-  step_226()
   step_221()
-  step_228()
   step_227()
-  step_230()
-  step_231()
-  step_232()
   step_229()
-  step_234()
-  step_235()
-  step_236()
-  step_237()
   step_233()
-  step_239()
-  step_240()
   step_238()
-  step_242()
-  step_243()
-  step_244()
   step_241()
-  step_246()
-  step_247()
   step_245()
-  step_249()
-  step_250()
-  step_251()
-  step_252()
   step_248()
-  step_254()
   step_253()
   step_255()
-  step_257()
   step_256()
   step_258()
-  step_260()
   step_259()
-  step_262()
-  step_263()
-  step_264()
-  step_265()
   step_261()
   step_266()
-  step_268()
   step_267()
   step_269()
-  step_271()
   step_270()
-  step_273()
-  step_274()
   step_272()
   step_275()
-  step_277()
   step_276()
-  step_279()
   step_278()
-  step_281()
   step_280()
-  step_283()
   step_282()
-  step_285()
   step_284()
-  step_287()
   step_286()
   step_288()
-  step_290()
   step_289()
   step_291()
-  step_293()
   step_292()
   step_294()
   step_295()
-  step_297()
   step_296()
   step_298()
   step_299()
-  step_301()
-  step_302()
-  step_303()
-  step_304()
   step_300()
-  step_306()
-  step_307()
   step_305()
   step_308()
-  step_310()
   step_309()
   step_311()
-  step_313()
   step_312()
-  step_315()
   step_314()
   step_316()
-  step_318()
   step_317()
   step_319()
-  step_321()
   step_320()
-  step_323()
   step_322()
-  step_325()
   step_324()
   step_326()
   step_327()
-  step_329()
-  step_330()
   step_328()
   step_331()
-  step_333()
   step_332()
-  step_335()
-  step_336()
-  step_337()
   step_334()
-  step_339()
   step_338()
-  step_341()
   step_340()
-  step_343()
-  step_344()
-  step_345()
   step_342()
-  step_347()
   step_346()
-  step_349()
   step_348()
   step_350()
-  step_352()
   step_351()
-  step_354()
   step_353()
   step_355()
   step_356()
   step_357()
-  step_359()
-  step_360()
-  step_361()
   step_358()
   step_362()
   step_363()
-  step_365()
-  step_366()
-  step_367()
   step_364()
-  step_369()
   step_368()
-  step_371()
   step_370()
-  step_373()
   step_372()
   step_374()
-  step_376()
-  step_377()
   step_375()
   step_378()
   step_379()
-  step_381()
   step_380()
-  step_383()
-  step_384()
-  step_385()
   step_382()
   step_386()
   step_387()
-  step_389()
   step_388()
   step_390()
-  step_392()
   step_391()
   step_393()
-  step_395()
-  step_396()
   step_394()
   step_397()
-  step_399()
   step_398()
-  step_401()
-  step_402()
   step_400()
-  step_404()
-  step_405()
   step_403()
-  step_407()
-  step_408()
-  step_409()
   step_406()
   step_410()
-  step_412()
   step_411()
-  step_414()
   step_413()
   step_415()
-  step_417()
   step_416()
-  step_419()
   step_418()
   step_420()
   step_421()
-  step_423()
   step_422()
   step_424()
-  step_426()
   step_425()
-  step_428()
-  step_429()
   step_427()
-  step_431()
-  step_432()
   step_430()
   step_433()
   step_434()
-  step_436()
-  step_437()
-  step_438()
   step_435()
-  step_440()
-  step_441()
   step_439()
-  step_443()
   step_442()
-  step_445()
   step_444()
-  step_447()
   step_446()
   step_448()
-  step_450()
   step_449()
-  step_452()
   step_451()
-  step_454()
   step_453()
-  step_456()
-  step_457()
   step_455()
-  step_459()
   step_458()
-  step_461()
-  step_462()
   step_460()
-  step_464()
   step_463()
   step_465()
   step_466()
-  step_468()
   step_467()
   step_469()
   step_470()
-  step_472()
   step_471()
   step_473()
-  step_475()
   step_474()
   step_476()
   step_477()
   step_478()
-  step_480()
   step_479()
-  step_482()
-  step_483()
   step_481()
-  step_485()
-  step_486()
   step_484()
   step_487()
-  step_489()
-  step_490()
-  step_491()
-  step_492()
   step_488()
-  step_494()
-  step_495()
   step_493()
   step_496()
-  step_498()
-  step_499()
-  step_500()
-  step_501()
   step_497()
-  step_503()
   step_502()
   step_504()
   step_505()
-  step_507()
   step_506()
-  step_509()
   step_508()
   step_510()
   step_511()
-  step_513()
   step_512()
   step_514()
   step_515()
   step_516()
-  step_518()
   step_517()
-  step_520()
   step_519()
-  step_522()
   step_521()
   step_523()
   step_524()
   step_525()
-  step_527()
   step_526()
-  step_529()
   step_528()
   step_530()
   step_531()
-  step_533()
   step_532()
-  step_535()
   step_534()
-  step_537()
-  step_538()
-  step_539()
   step_536()
-  step_541()
-  step_542()
-  step_543()
-  step_544()
-  step_545()
-  step_546()
   step_540()
-  step_548()
   step_547()
   step_549()
   step_550()
-  step_552()
-  step_553()
   step_551()
   step_554()
-  step_556()
   step_555()
   step_557()
   step_558()
-  step_560()
   step_559()
   step_561()
-  step_563()
   step_562()
-  step_565()
   step_564()
-  step_567()
   step_566()
-  step_569()
   step_568()
-  step_571()
   step_570()
-  step_573()
   step_572()
-  step_575()
-  step_576()
-  step_577()
   step_574()
-  step_579()
-  step_580()
   step_578()
-  step_582()
-  step_583()
   step_581()
-  step_585()
   step_584()
   step_586()
-  step_588()
   step_587()
   step_589()
   step_590()
-  step_592()
   step_591()
   step_593()
-  step_595()
   step_594()
-  step_597()
   step_596()
-  step_599()
   step_598()
-  step_601()
-  step_602()
-  step_603()
-  step_604()
-  step_605()
-  step_606()
-  step_607()
-  step_608()
-  step_609()
-  step_610()
   step_600()
   step_611()
-  step_613()
-  step_614()
   step_612()
   step_615()
   step_616()
   step_617()
   step_618()
-  step_620()
   step_619()
-  step_622()
   step_621()
-  step_624()
   step_623()
-  step_626()
-  step_627()
   step_625()
   step_628()
   step_629()
-  step_631()
   step_630()
-  step_633()
   step_632()
   step_634()
-  step_636()
   step_635()
   step_637()
   step_638()
-  step_640()
   step_639()
-  step_642()
   step_641()
   step_643()
-  step_645()
   step_644()
   step_646()
   step_647()
-  step_649()
   step_648()
-  step_651()
   step_650()
   step_652()
   step_653()
-  step_655()
   step_654()
-  step_657()
   step_656()
-  step_659()
   step_658()
-  step_661()
   step_660()
   step_662()
-  step_664()
   step_663()
-  step_666()
   step_665()
   step_667()
-  step_669()
   step_668()
   step_670()
   step_671()
-  step_673()
   step_672()
   step_674()
   step_675()
-  step_677()
   step_676()
-  step_679()
   step_678()
   step_680()
   step_681()
   step_682()
-  step_684()
   step_683()
   step_685()
   step_686()
-  step_688()
   step_687()
   step_689()
   step_690()
@@ -13282,27 +16143,19 @@ fn load_steps() -> Unit raise {
   step_692()
   step_693()
   step_694()
-  step_696()
   step_695()
   step_697()
   step_698()
   step_699()
   step_700()
-  step_702()
-  step_703()
   step_701()
   step_704()
-  step_706()
   step_705()
-  step_708()
   step_707()
   step_709()
   step_710()
-  step_712()
   step_711()
   step_713()
-  step_715()
-  step_716()
   step_714()
   step_717()
   step_718()
@@ -13315,92 +16168,61 @@ fn load_steps() -> Unit raise {
   step_725()
   step_726()
   step_727()
-  step_729()
   step_728()
   step_730()
-  step_732()
   step_731()
-  step_734()
   step_733()
   step_735()
   step_736()
-  step_738()
   step_737()
-  step_740()
   step_739()
   step_741()
   step_742()
   step_743()
-  step_745()
   step_744()
   step_746()
   step_747()
   step_748()
-  step_750()
   step_749()
-  step_752()
   step_751()
-  step_754()
   step_753()
-  step_756()
   step_755()
-  step_758()
   step_757()
   step_759()
-  step_761()
   step_760()
   step_762()
   step_763()
-  step_765()
   step_764()
-  step_767()
   step_766()
   step_768()
   step_769()
-  step_771()
   step_770()
-  step_773()
   step_772()
-  step_775()
   step_774()
   step_776()
-  step_778()
   step_777()
   step_779()
   step_780()
   step_781()
   step_782()
-  step_784()
   step_783()
-  step_786()
   step_785()
   step_787()
   step_788()
-  step_790()
   step_789()
   step_791()
   step_792()
   step_793()
-  step_795()
   step_794()
   step_796()
   step_797()
-  step_799()
   step_798()
-  step_801()
   step_800()
-  step_803()
   step_802()
-  step_805()
   step_804()
-  step_807()
   step_806()
-  step_809()
   step_808()
-  step_811()
   step_810()
-  step_813()
   step_812()
-  step_815()
   step_814()
 }
