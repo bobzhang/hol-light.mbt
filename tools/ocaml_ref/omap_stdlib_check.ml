@@ -1,10 +1,10 @@
-(* Checks that tools/translator/stdlib/ocaml_{map,set}.ml build exactly the
+(* Checks that tools/ocaml_ref/stdlib/ocaml_{map,set}.ml build exactly the
    trees of OCaml's Stdlib Map.Make/Set.Make (same memory layout, so equal
    Marshal output) and call callbacks in the same order, over random
    operations. Run from the repository root:
      ocaml -I . tools/ocaml_ref/omap_stdlib_check.ml *)
-#use "tools/translator/stdlib/ocaml_map.ml";;
-#use "tools/translator/stdlib/ocaml_set.ml";;
+#use "tools/ocaml_ref/stdlib/ocaml_map.ml";;
+#use "tools/ocaml_ref/stdlib/ocaml_set.ml";;
 module M = Map.Make(Int)
 module S = Set.Make(Int)
 let same a b = Marshal.to_string (Obj.repr a) [] = Marshal.to_string (Obj.repr b) []

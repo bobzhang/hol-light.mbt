@@ -1,10 +1,10 @@
 (* Behaviour test for the generic OCaml 4.14 Map/Set code
-   (tools/translator/stdlib/ocaml_{map,set}.ml, translated to omap/ and
-   oset/). Plain OCaml; run with `ocaml tools/ocaml_ref/omap_ref.ml`.
+   (tools/ocaml_ref/stdlib/ocaml_{map,set}.ml, translated to omap/ and
+   oset/). Plain OCaml; run with `ocaml -I . tools/ocaml_ref/omap_ref.ml`.
    Stdlib Map.Make/Set.Make build the same trees (checked separately by
    Marshal equality). Keep in sync with omap/omap_ref_test.mbt. *)
-#use "tools/translator/stdlib/ocaml_map.ml";;
-#use "tools/translator/stdlib/ocaml_set.ml";;
+#use "tools/ocaml_ref/stdlib/ocaml_map.ml";;
+#use "tools/ocaml_ref/stdlib/ocaml_set.ml";;
 let ord (x : int) y = compare x y
 let rec dm = function
   | Ocaml_map.Empty -> "."

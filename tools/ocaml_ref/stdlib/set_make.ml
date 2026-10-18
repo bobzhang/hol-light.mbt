@@ -1,0 +1,41 @@
+(* The body of `Set.Make (Ord)` used by the translator's functor
+   specialization: OCaml 4.14's Set.S over Ocaml_set, passing Ord.compare.
+   Each function has the arity of the Stdlib definition (set.ml). *)
+type elt = Ord.t
+type t = elt Ocaml_set.t
+let empty = Ocaml_set.empty
+let is_empty s = Ocaml_set.is_empty s
+let mem x s = Ocaml_set.mem Ord.compare x s
+let add x s = Ocaml_set.add Ord.compare x s
+let singleton x = Ocaml_set.singleton x
+let remove x s = Ocaml_set.remove Ord.compare x s
+let union s1 s2 = Ocaml_set.union Ord.compare s1 s2
+let inter s1 s2 = Ocaml_set.inter Ord.compare s1 s2
+let disjoint s1 s2 = Ocaml_set.disjoint Ord.compare s1 s2
+let diff s1 s2 = Ocaml_set.diff Ord.compare s1 s2
+let compare s1 s2 = Ocaml_set.compare Ord.compare s1 s2
+let equal s1 s2 = Ocaml_set.equal Ord.compare s1 s2
+let subset s1 s2 = Ocaml_set.subset Ord.compare s1 s2
+let iter f s = Ocaml_set.iter f s
+let map f s = Ocaml_set.map Ord.compare f s
+let fold f s accu = Ocaml_set.fold f s accu
+let for_all p s = Ocaml_set.for_all p s
+let exists p s = Ocaml_set.exists p s
+let filter p s = Ocaml_set.filter p s
+let filter_map f s = Ocaml_set.filter_map Ord.compare f s
+let partition p s = Ocaml_set.partition p s
+let cardinal s = Ocaml_set.cardinal s
+let elements s = Ocaml_set.elements s
+let min_elt s = Ocaml_set.min_elt s
+let min_elt_opt s = Ocaml_set.min_elt_opt s
+let max_elt s = Ocaml_set.max_elt s
+let max_elt_opt s = Ocaml_set.max_elt_opt s
+let choose s = Ocaml_set.choose s
+let choose_opt s = Ocaml_set.choose_opt s
+let split x s = Ocaml_set.split Ord.compare x s
+let find x s = Ocaml_set.find Ord.compare x s
+let find_opt x s = Ocaml_set.find_opt Ord.compare x s
+let find_first f s = Ocaml_set.find_first f s
+let find_first_opt f s = Ocaml_set.find_first_opt f s
+let find_last f s = Ocaml_set.find_last f s
+let find_last_opt f s = Ocaml_set.find_last_opt f s
