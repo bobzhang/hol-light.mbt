@@ -1269,7 +1269,18 @@ pub fn interactive_proof(x204 : String) -> @tactics.Goalstack raise {
 ///|
 /// SKOLEM_THM_GEN
 fn step_23() -> Unit raise {
-  skolem_thm_gen_c.set(theorem(parse_qproof(";\n  ∀P R. (∀x. P x ⇒ ∃y. R x y)  ⇔  ∃f. ∀x. P x ⇒ R x (f x)\n\n  proof\n    intro_TAC ∀P R;\n    eq_tac     [Right] by fol;\n    intro_TAC H1;\n    exists_TAC λx. @y. R x y;\n    fol H1;\n  qed;\n")))
+  skolem_thm_gen_c.set(prove(
+    "\n  forall P R. (forall x. P x ==> ?y. R x y)  <=>  ?f. forall x. P x ==> R x (f x)",
+    steps(
+      [
+        intro_tac("forall P R"),
+        eq_tac("Right", by(fol, [])),
+        intro_tac("H1"),
+        exists("\\ x. @y. R x y"),
+        by(fol, [Label("H1")]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1282,25 +1293,34 @@ pub fn skolem_thm_gen() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_1`
-pub fn exec_phrase_1(x205 : Unit) -> Unit raise {
-  let _ = x205
-  {
-    thmlist_tactic_ref().val = fol
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((fol): thm list -> tactic);;
-fn step_24() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((fol): thm list -> tactic);;", exec_phrase_1)
-}
-
-///|
 /// MOD_MOD_REFL'
 fn step_25() -> Unit raise {
-  mod_mod_refl_p_c.set(theorem(parse_qproof(";\n  ∀m n. ¬(n = 0)  ⇒  ((m MOD n) MOD n = m MOD n)\n\n  proof\n    intro_TAC forall m n, H1;\n    MP_TAC SPECL [m; n; 1] MOD_MOD;\n    fol H1 MULT_CLAUSES MULT_EQ_0 ONE NOT_SUC;\n  qed;\n")))
+  mod_mod_refl_p_c.set(prove(
+    "\n  forall m n. ~(n = 0)  ==>  ((m MOD n) MOD n = m MOD n)",
+    steps(
+      [
+        intro_tac("forall m n, H1"),
+        by_thm(
+          th => @tactics.mp_tac(th),
+          TermsRule(
+            tms => th => @bool.specl(tms, th),
+            ["m", " n", " 1"],
+            Thm("MOD_MOD", () => @arith.mod_mod()),
+          ),
+        ),
+        by(
+          fol,
+          [
+            Label("H1"),
+            Thm("MULT_CLAUSES", () => @arith.mult_clauses()),
+            Thm("MULT_EQ_0", () => @arith.mult_eq_0()),
+            Thm("ONE", () => @arith.one()),
+            Thm("NOT_SUC", () => @nums.not_suc()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1313,130 +1333,66 @@ pub fn mod_mod_refl_p() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_2`
-pub fn exec_phrase_2(x206 : Unit) -> Unit raise {
-  let _ = x206
-  {
-    thmtactic_ref().val = fn(x207 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
-      let s208 = @tactics.mp_tac(x207)
-      fn(x209 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        s208(x209)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase thmtactic_ref := ((MP_TAC): thm -> tactic);;
-fn step_26() -> Unit raise {
-  @lib.register_phrase("thmtactic_ref := ((MP_TAC): thm -> tactic);;", exec_phrase_2)
-}
-
-///|
-/// `exec_phrase_3`
-pub fn exec_phrase_3(x210 : Unit) -> Unit raise {
-  let _ = x210
-  {
-    termlist_thm_thm_ref().val = fn(x211 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-      fn(x212 : @kernel.Thm) -> @kernel.Thm raise {
-        @bool.specl(x211, x212)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase termlist_thm_thm_ref := ((SPECL): (term list -> thm -> thm));;
-fn step_27() -> Unit raise {
-  @lib.register_phrase("termlist_thm_thm_ref := ((SPECL): (term list -> thm -> thm));;", exec_phrase_3)
-}
-
-///|
-/// `exec_phrase_4`
-pub fn exec_phrase_4(x213 : Unit) -> Unit raise {
-  let _ = x213
-  {
-    thm_ref().val = @arith.mod_mod()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MOD_MOD): thm);;
-fn step_28() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MOD_MOD): thm);;", exec_phrase_4)
-}
-
-///|
-/// `exec_phrase_5`
-pub fn exec_phrase_5(x214 : Unit) -> Unit raise {
-  let _ = x214
-  {
-    thm_ref().val = @arith.mult_clauses()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MULT_CLAUSES): thm);;
-fn step_29() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MULT_CLAUSES): thm);;", exec_phrase_5)
-}
-
-///|
-/// `exec_phrase_6`
-pub fn exec_phrase_6(x215 : Unit) -> Unit raise {
-  let _ = x215
-  {
-    thm_ref().val = @arith.mult_eq_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MULT_EQ_0): thm);;
-fn step_30() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MULT_EQ_0): thm);;", exec_phrase_6)
-}
-
-///|
-/// `exec_phrase_7`
-pub fn exec_phrase_7(x216 : Unit) -> Unit raise {
-  let _ = x216
-  {
-    thm_ref().val = @arith.one()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ONE): thm);;
-fn step_31() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ONE): thm);;", exec_phrase_7)
-}
-
-///|
-/// `exec_phrase_8`
-pub fn exec_phrase_8(x217 : Unit) -> Unit raise {
-  let _ = x217
-  {
-    thm_ref().val = @nums.not_suc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NOT_SUC): thm);;
-fn step_32() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NOT_SUC): thm);;", exec_phrase_8)
-}
-
-///|
 /// NSQRT_2
 fn step_33() -> Unit raise {
-  nsqrt_2_v1_c.set(theorem(parse_qproof(";\n  ∀p q. p * p = 2 * q * q  ⇒  q = 0\n\n  proof\n    MATCH_MP_TAC num_WF;\n    intro_TAC ∀p, A, ∀q, B;\n    EVEN(p * p) ⇔ EVEN(2 * q * q)     [] by fol B;\n    EVEN(p)     [] by fol - EVEN_DOUBLE EVEN_MULT;\n    consider m such that p = 2 * m     [C] by fol - EVEN_EXISTS;\n    case_split qp | pq by arithmetic;\n    suppose q < p;\n      q * q = 2 * m * m ⇒ m = 0     [] by fol qp A;\n      num_ring - B C;\n    end;\n    suppose p <= q;\n      p * p <= q * q     [] by fol - LE_MULT2;\n      q * q = 0     [] by arithmetic - B;\n    num_ring -;\n    end;\n  qed;\n")))
+  nsqrt_2_v1_c.set(prove(
+    "\n  forall p q. p * p = 2 * q * q  ==>  q = 0",
+    steps_then(
+      [
+        by_thm(@tactics.match_mp_tac, Thm("num_WF", () => @arith.num_wf())),
+        intro_tac("forall p, A, forall q, B"),
+        have("\n    EVEN(p * p) <=> EVEN(2 * q * q)", "", by(fol, [Label("B")])),
+        have(
+          "\n    EVEN(p)",
+          "",
+          by(
+            fol,
+            [
+              Prev,
+              Thm("EVEN_DOUBLE", () => @arith.even_double()),
+              Thm("EVEN_MULT", () => @arith.even_mult()),
+            ],
+          ),
+        ),
+        consider(
+          "m",
+          "p = 2 * m    ",
+          "C",
+          by(fol, [Prev, Thm("EVEN_EXISTS", () => @arith.even_exists())]),
+        ),
+      ],
+      case_split(
+        "qp | pq",
+        by(arithmetic, []),
+        @list.List(["q < p", "p <= q"]),
+        @list.List(
+          [
+            steps(
+              [
+                have(
+                  "\n      q * q = 2 * m * m ==> m = 0",
+                  "",
+                  by(fol, [Label("qp"), Label("A")]),
+                ),
+                by(num_ring, [Prev, Label("B"), Label("C")]),
+              ],
+            ),
+            steps(
+              [
+                have(
+                  "\n      p * p <= q * q",
+                  "",
+                  by(fol, [Prev, Thm("LE_MULT2", () => @arith.le_mult2())]),
+                ),
+                have("\n      q * q = 0", "", by(arithmetic, [Prev, Label("B")])),
+                by(num_ring, [Prev]),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  ))
 }
 
 ///|
@@ -1449,134 +1405,6 @@ pub fn nsqrt_2_v1() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_9`
-pub fn exec_phrase_9(x218 : Unit) -> Unit raise {
-  let _ = x218
-  {
-    thmtactic_ref().val = @tactics.match_mp_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmtactic_ref := ((MATCH_MP_TAC): thm -> tactic);;
-fn step_34() -> Unit raise {
-  @lib.register_phrase("thmtactic_ref := ((MATCH_MP_TAC): thm -> tactic);;", exec_phrase_9)
-}
-
-///|
-/// `exec_phrase_10`
-pub fn exec_phrase_10(x219 : Unit) -> Unit raise {
-  let _ = x219
-  {
-    thmlist_tactic_ref().val = arithmetic
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((arithmetic): thm list -> tactic);;
-fn step_35() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((arithmetic): thm list -> tactic);;", exec_phrase_10)
-}
-
-///|
-/// `exec_phrase_11`
-pub fn exec_phrase_11(x220 : Unit) -> Unit raise {
-  let _ = x220
-  {
-    thmlist_tactic_ref().val = num_ring
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((num_ring): thm list -> tactic);;
-fn step_36() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((num_ring): thm list -> tactic);;", exec_phrase_11)
-}
-
-///|
-/// `exec_phrase_12`
-pub fn exec_phrase_12(x221 : Unit) -> Unit raise {
-  let _ = x221
-  {
-    thm_ref().val = @arith.num_wf()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((num_WF): thm);;
-fn step_37() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((num_WF): thm);;", exec_phrase_12)
-}
-
-///|
-/// `exec_phrase_13`
-pub fn exec_phrase_13(x222 : Unit) -> Unit raise {
-  let _ = x222
-  {
-    thm_ref().val = @arith.even_double()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EVEN_DOUBLE): thm);;
-fn step_38() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EVEN_DOUBLE): thm);;", exec_phrase_13)
-}
-
-///|
-/// `exec_phrase_14`
-pub fn exec_phrase_14(x223 : Unit) -> Unit raise {
-  let _ = x223
-  {
-    thm_ref().val = @arith.even_mult()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EVEN_MULT): thm);;
-fn step_39() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EVEN_MULT): thm);;", exec_phrase_14)
-}
-
-///|
-/// `exec_phrase_15`
-pub fn exec_phrase_15(x224 : Unit) -> Unit raise {
-  let _ = x224
-  {
-    thm_ref().val = @arith.even_exists()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EVEN_EXISTS): thm);;
-fn step_40() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EVEN_EXISTS): thm);;", exec_phrase_15)
-}
-
-///|
-/// `exec_phrase_16`
-pub fn exec_phrase_16(x225 : Unit) -> Unit raise {
-  let _ = x225
-  {
-    thm_ref().val = @arith.le_mult2()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LE_MULT2): thm);;
-fn step_41() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LE_MULT2): thm);;", exec_phrase_16)
-}
-
-///|
 /// RichterHilbertAxiomGeometry/readable.ml:614
 fn step_42() -> Unit raise {
   ignore(interactive_goal(parse_qproof(";∀p q. p * p = 2 * q * q  ⇒  q = 0\n")))
@@ -1585,37 +1413,98 @@ fn step_42() -> Unit raise {
 ///|
 /// RichterHilbertAxiomGeometry/readable.ml:616
 fn step_43() -> Unit raise {
-  ignore(interactive_proof(parse_qproof(";\n    MATCH_MP_TAC num_WF;\n    intro_TAC ∀p, A, ∀q, B;\n    EVEN(p * p) ⇔ EVEN(2 * q * q)     [] proof  qed;\n")))
+  ignore(@tactics.e(
+    steps(
+      [
+        by_thm(@tactics.match_mp_tac, Thm("num_WF", () => @arith.num_wf())),
+        intro_tac("forall p, A, forall q, B"),
+        have("\n    EVEN(p * p) <=> EVEN(2 * q * q)", "", @tactics.all_tac),
+      ],
+    ),
+  ))
 }
 
 ///|
 /// RichterHilbertAxiomGeometry/readable.ml:621
 fn step_44() -> Unit raise {
-  ignore(interactive_proof(parse_qproof(";\n      fol B;\n")))
+  ignore(@tactics.e(steps([by(fol, [Label("B")])])))
 }
 
 ///|
 /// RichterHilbertAxiomGeometry/readable.ml:624
 fn step_45() -> Unit raise {
-  ignore(interactive_proof(parse_qproof(";\n    EVEN(p)     [] by fol - EVEN_DOUBLE EVEN_MULT;\n    consider m such that p = 2 * m     [C] proof fol - EVEN_EXISTS; qed;\n")))
+  ignore(@tactics.e(
+    steps(
+      [
+        have(
+          "\n    EVEN(p)",
+          "",
+          by(
+            fol,
+            [
+              Prev,
+              Thm("EVEN_DOUBLE", () => @arith.even_double()),
+              Thm("EVEN_MULT", () => @arith.even_mult()),
+            ],
+          ),
+        ),
+        consider(
+          "m",
+          "p = 2 * m    ",
+          "C",
+          steps([by(fol, [Prev, Thm("EVEN_EXISTS", () => @arith.even_exists())])]),
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
 /// RichterHilbertAxiomGeometry/readable.ml:628
 fn step_46() -> Unit raise {
-  ignore(interactive_proof(parse_qproof(";\n    case_split qp | pq by arithmetic;\n    suppose q < p;\n    end;\n    suppose p <= q;\n    end;\n")))
+  ignore(@tactics.e(
+    case_split(
+      "qp | pq",
+      by(arithmetic, []),
+      @list.List(["q < p", "p <= q"]),
+      @list.List([@tactics.all_tac, @tactics.all_tac]),
+    ),
+  ))
 }
 
 ///|
 /// RichterHilbertAxiomGeometry/readable.ml:635
 fn step_47() -> Unit raise {
-  ignore(interactive_proof(parse_qproof(";\n      q * q = 2 * m * m ⇒ m = 0     [] by fol qp A;\n      num_ring - B C;\n")))
+  ignore(@tactics.e(
+    steps(
+      [
+        have(
+          "\n      q * q = 2 * m * m ==> m = 0",
+          "",
+          by(fol, [Label("qp"), Label("A")]),
+        ),
+        by(num_ring, [Prev, Label("B"), Label("C")]),
+      ],
+    ),
+  ))
 }
 
 ///|
 /// RichterHilbertAxiomGeometry/readable.ml:639
 fn step_48() -> Unit raise {
-  ignore(interactive_proof(parse_qproof(";\n      p * p <= q * q     [] by fol - LE_MULT2;\n      q * q = 0     [] by arithmetic - B;\n      num_ring -;\n")))
+  ignore(@tactics.e(
+    steps(
+      [
+        have(
+          "\n      p * p <= q * q",
+          "",
+          by(fol, [Prev, Thm("LE_MULT2", () => @arith.le_mult2())]),
+        ),
+        have("\n      q * q = 0", "", by(arithmetic, [Prev, Label("B")])),
+        by(num_ring, [Prev]),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1636,7 +1525,20 @@ pub fn nsqrt_2() -> @kernel.Thm {
 ///|
 /// EXP_2
 fn step_50() -> Unit raise {
-  exp_2_c.set(theorem(parse_qproof(";\n  ∀n:num. n EXP 2 = n * n\n  by rewrite BIT0_THM BIT1_THM EXP EXP_ADD MULT_CLAUSES ADD_CLAUSES")))
+  exp_2_c.set(prove(
+    "\n  forall n:num. n EXP 2 = n * n",
+    by(
+      rewrite,
+      [
+        Thm("BIT0_THM", () => @arith.bit0_thm()),
+        Thm("BIT1_THM", () => @arith.bit1_thm()),
+        Thm("EXP", () => @arith.exp()),
+        Thm("EXP_ADD", () => @arith.exp_add()),
+        Thm("MULT_CLAUSES", () => @arith.mult_clauses()),
+        Thm("ADD_CLAUSES", () => @arith.add_clauses()),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1646,102 +1548,6 @@ let exp_2_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXP_2")
 /// `EXP_2`
 pub fn exp_2() -> @kernel.Thm {
   exp_2_c.get()
-}
-
-///|
-/// `exec_phrase_17`
-pub fn exec_phrase_17(x226 : Unit) -> Unit raise {
-  let _ = x226
-  {
-    thmlist_tactic_ref().val = rewrite
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewrite): thm list -> tactic);;
-fn step_51() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewrite): thm list -> tactic);;", exec_phrase_17)
-}
-
-///|
-/// `exec_phrase_18`
-pub fn exec_phrase_18(x227 : Unit) -> Unit raise {
-  let _ = x227
-  {
-    thm_ref().val = @arith.bit0_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BIT0_THM): thm);;
-fn step_52() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BIT0_THM): thm);;", exec_phrase_18)
-}
-
-///|
-/// `exec_phrase_19`
-pub fn exec_phrase_19(x228 : Unit) -> Unit raise {
-  let _ = x228
-  {
-    thm_ref().val = @arith.bit1_thm()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BIT1_THM): thm);;
-fn step_53() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BIT1_THM): thm);;", exec_phrase_19)
-}
-
-///|
-/// `exec_phrase_20`
-pub fn exec_phrase_20(x229 : Unit) -> Unit raise {
-  let _ = x229
-  {
-    thm_ref().val = @arith.exp()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EXP): thm);;
-fn step_54() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EXP): thm);;", exec_phrase_20)
-}
-
-///|
-/// `exec_phrase_21`
-pub fn exec_phrase_21(x230 : Unit) -> Unit raise {
-  let _ = x230
-  {
-    thm_ref().val = @arith.exp_add()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EXP_ADD): thm);;
-fn step_55() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EXP_ADD): thm);;", exec_phrase_21)
-}
-
-///|
-/// `exec_phrase_22`
-pub fn exec_phrase_22(x231 : Unit) -> Unit raise {
-  let _ = x231
-  {
-    thm_ref().val = @arith.add_clauses()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ADD_CLAUSES): thm);;
-fn step_56() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ADD_CLAUSES): thm);;", exec_phrase_22)
 }
 
 ///|
@@ -1762,7 +1568,31 @@ pub fn binom() -> @kernel.Thm {
 ///|
 /// BINOM_LT
 fn step_58() -> Unit raise {
-  binom_lt_c.set(theorem(parse_qproof(";\n  ∀n k. n < k  ⇒  binom(n,k) = 0\n\n  proof\n    INDUCT_TAC; INDUCT_TAC;\n    rewrite binom ARITH LT_SUC LT;\n    ASM_SIMP_TAC ARITH_RULE [n < k ==> n < SUC(k)] ARITH;\n  qed;\n")))
+  binom_lt_c.set(prove(
+    "\n  forall n k. n < k  ==>  binom(n,k) = 0",
+    steps(
+      [
+        @nums.induct_tac,
+        @nums.induct_tac,
+        by(
+          rewrite,
+          [
+            Thm("binom", () => binom()),
+            Thm("ARITH", () => @calc_num.arith()),
+            Thm("LT_SUC", () => @arith.lt_suc()),
+            Thm("LT", () => @arith.lt()),
+          ],
+        ),
+        by(
+          @simp.asm_simp_tac,
+          [
+            TermRule(@int.arith_rule, "n < k ==> n < SUC(k)"),
+            Thm("ARITH", () => @calc_num.arith()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1775,121 +1605,89 @@ pub fn binom_lt() -> @kernel.Thm {
 }
 
 ///|
-/// `exec_phrase_23`
-pub fn exec_phrase_23(x232 : Unit) -> Unit raise {
-  let _ = x232
-  {
-    tactic_ref().val = @nums.induct_tac
-    ()
-  }
-}
-
-///|
-/// the phrase tactic_ref := ((INDUCT_TAC): tactic);;
-fn step_59() -> Unit raise {
-  @lib.register_phrase("tactic_ref := ((INDUCT_TAC): tactic);;", exec_phrase_23)
-}
-
-///|
-/// `exec_phrase_24`
-pub fn exec_phrase_24(x233 : Unit) -> Unit raise {
-  let _ = x233
-  {
-    thmlist_tactic_ref().val = @simp.asm_simp_tac
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((ASM_SIMP_TAC): thm list -> tactic);;
-fn step_60() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((ASM_SIMP_TAC): thm list -> tactic);;", exec_phrase_24)
-}
-
-///|
-/// `exec_phrase_25`
-pub fn exec_phrase_25(x234 : Unit) -> Unit raise {
-  let _ = x234
-  {
-    thm_ref().val = binom()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((binom): thm);;
-fn step_61() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((binom): thm);;", exec_phrase_25)
-}
-
-///|
-/// `exec_phrase_26`
-pub fn exec_phrase_26(x235 : Unit) -> Unit raise {
-  let _ = x235
-  {
-    thm_ref().val = @calc_num.arith()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ARITH): thm);;
-fn step_62() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ARITH): thm);;", exec_phrase_26)
-}
-
-///|
-/// `exec_phrase_27`
-pub fn exec_phrase_27(x236 : Unit) -> Unit raise {
-  let _ = x236
-  {
-    thm_ref().val = @arith.lt_suc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LT_SUC): thm);;
-fn step_63() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LT_SUC): thm);;", exec_phrase_27)
-}
-
-///|
-/// `exec_phrase_28`
-pub fn exec_phrase_28(x237 : Unit) -> Unit raise {
-  let _ = x237
-  {
-    thm_ref().val = @arith.lt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LT): thm);;
-fn step_64() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LT): thm);;", exec_phrase_28)
-}
-
-///|
-/// `exec_phrase_29`
-pub fn exec_phrase_29(x238 : Unit) -> Unit raise {
-  let _ = x238
-  {
-    term_thm_ref().val = @int.arith_rule
-    ()
-  }
-}
-
-///|
-/// the phrase term_thm_ref := ((ARITH_RULE): (term -> thm));;
-fn step_65() -> Unit raise {
-  @lib.register_phrase("term_thm_ref := ((ARITH_RULE): (term -> thm));;", exec_phrase_29)
-}
-
-///|
 /// BINOMIAL_THEOREM
 fn step_66() -> Unit raise {
-  binomial_theorem_c.set(theorem(parse_qproof(";\n  ∀n. (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))\n\n  proof\n    ∀f n. nsum (0.. SUC n) f = f(0) + nsum (0..n) (λi. f (SUC i))     [Nsum0SUC] by simplify LE_0 ADD1 NSUM_CLAUSES_LEFT NSUM_OFFSET;\n    MATCH_MP_TAC num_INDUCTION;\n    simplify EXP NSUM_SING_NUMSEG binom SUB_0 MULT_CLAUSES;\n    intro_TAC ∀n, nThm;\n    rewrite Nsum0SUC binom RIGHT_ADD_DISTRIB NSUM_ADD_NUMSEG GSYM NSUM_LMUL ADD_ASSOC;\n    rewriteR ADD_SYM;\n    rewriteRLDepth SUB_SUC EXP;\n    rewrite MULT_AC EQ_ADD_LCANCEL MESON [binom] [1 = binom(n, 0)] GSYM Nsum0SUC;\n    simplify NSUM_CLAUSES_RIGHT ARITH_RULE [0 < SUC n  ∧  0 <= SUC n] LT BINOM_LT MULT_CLAUSES ADD_CLAUSES SUC_SUB1;\n    simplify ARITH_RULE [k <= n  ⇒  SUC n - k = SUC(n - k)] EXP MULT_AC;\n  qed;\n")))
+  binomial_theorem_c.set(prove(
+    "\n  forall n. (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))",
+    steps(
+      [
+        have(
+          "\n    forall f n. nsum (0.. SUC n) f = f(0) + nsum (0..n) (\\ i. f (SUC i))",
+          "Nsum0SUC",
+          by(
+            simplify,
+            [
+              Thm("LE_0", () => @arith.le_0()),
+              Thm("ADD1", () => @arith.add1()),
+              Thm("NSUM_CLAUSES_LEFT", () => @iterate.nsum_clauses_left()),
+              Thm("NSUM_OFFSET", () => @iterate.nsum_offset()),
+            ],
+          ),
+        ),
+        by_thm(@tactics.match_mp_tac, Thm("num_INDUCTION", () => @nums.num_induction())),
+        by(
+          simplify,
+          [
+            Thm("EXP", () => @arith.exp()),
+            Thm("NSUM_SING_NUMSEG", () => @iterate.nsum_sing_numseg()),
+            Thm("binom", () => binom()),
+            Thm("SUB_0", () => @arith.sub_0()),
+            Thm("MULT_CLAUSES", () => @arith.mult_clauses()),
+          ],
+        ),
+        intro_tac("forall n, nThm"),
+        by(
+          rewrite,
+          [
+            Label("Nsum0SUC"),
+            Thm("binom", () => binom()),
+            Thm("RIGHT_ADD_DISTRIB", () => @arith.right_add_distrib()),
+            Thm("NSUM_ADD_NUMSEG", () => @iterate.nsum_add_numseg()),
+            Rule(@equal.gsym, Thm("NSUM_LMUL", () => @iterate.nsum_lmul())),
+            Thm("ADD_ASSOC", () => @arith.add_assoc()),
+          ],
+        ),
+        by(rewriter, [Thm("ADD_SYM", () => @arith.add_sym())]),
+        by(
+          rewriterldepth,
+          [Thm("SUB_SUC", () => @arith.sub_suc()), Thm("EXP", () => @arith.exp())],
+        ),
+        by(
+          rewrite,
+          [
+            Thm("MULT_AC", () => @arith.mult_ac()),
+            Thm("EQ_ADD_LCANCEL", () => @arith.eq_add_lcancel()),
+            ThmsTermRule(
+              ths => tm => @meson.meson(ths, tm),
+              [Thm("binom", () => binom())],
+              "1 = binom(n, 0)",
+            ),
+            Rule(@equal.gsym, Label("Nsum0SUC")),
+          ],
+        ),
+        by(
+          simplify,
+          [
+            Thm("NSUM_CLAUSES_RIGHT", () => @iterate.nsum_clauses_right()),
+            TermRule(@int.arith_rule, "0 < SUC n  /\\   0 <= SUC n"),
+            Thm("LT", () => @arith.lt()),
+            Thm("BINOM_LT", () => binom_lt()),
+            Thm("MULT_CLAUSES", () => @arith.mult_clauses()),
+            Thm("ADD_CLAUSES", () => @arith.add_clauses()),
+            Thm("SUC_SUB1", () => @arith.suc_sub1()),
+          ],
+        ),
+        by(
+          simplify,
+          [
+            TermRule(@int.arith_rule, "k <= n  ==>  SUC n - k = SUC(n - k)"),
+            Thm("EXP", () => @arith.exp()),
+            Thm("MULT_AC", () => @arith.mult_ac()),
+          ],
+        ),
+      ],
+    ),
+  ))
 }
 
 ///|
@@ -1899,378 +1697,6 @@ let binomial_theorem_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("BINOMIAL_THEOR
 /// `BINOMIAL_THEOREM`
 pub fn binomial_theorem() -> @kernel.Thm {
   binomial_theorem_c.get()
-}
-
-///|
-/// `exec_phrase_30`
-pub fn exec_phrase_30(x239 : Unit) -> Unit raise {
-  let _ = x239
-  {
-    thmlist_tactic_ref().val = simplify
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((simplify): thm list -> tactic);;
-fn step_67() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((simplify): thm list -> tactic);;", exec_phrase_30)
-}
-
-///|
-/// `exec_phrase_31`
-pub fn exec_phrase_31(x240 : Unit) -> Unit raise {
-  let _ = x240
-  {
-    thmlist_tactic_ref().val = rewriter
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewriteR): thm list -> tactic);;
-fn step_68() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewriteR): thm list -> tactic);;", exec_phrase_31)
-}
-
-///|
-/// `exec_phrase_32`
-pub fn exec_phrase_32(x241 : Unit) -> Unit raise {
-  let _ = x241
-  {
-    thmlist_tactic_ref().val = rewriterldepth
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_tactic_ref := ((rewriteRLDepth): thm list -> tactic);;
-fn step_69() -> Unit raise {
-  @lib.register_phrase("thmlist_tactic_ref := ((rewriteRLDepth): thm list -> tactic);;", exec_phrase_32)
-}
-
-///|
-/// `exec_phrase_33`
-pub fn exec_phrase_33(x242 : Unit) -> Unit raise {
-  let _ = x242
-  {
-    thm_ref().val = @arith.le_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((LE_0): thm);;
-fn step_70() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((LE_0): thm);;", exec_phrase_33)
-}
-
-///|
-/// `exec_phrase_34`
-pub fn exec_phrase_34(x243 : Unit) -> Unit raise {
-  let _ = x243
-  {
-    thm_ref().val = @arith.add1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ADD1): thm);;
-fn step_71() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ADD1): thm);;", exec_phrase_34)
-}
-
-///|
-/// `exec_phrase_35`
-pub fn exec_phrase_35(x244 : Unit) -> Unit raise {
-  let _ = x244
-  {
-    thm_ref().val = @iterate.nsum_clauses_left()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NSUM_CLAUSES_LEFT): thm);;
-fn step_72() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NSUM_CLAUSES_LEFT): thm);;", exec_phrase_35)
-}
-
-///|
-/// `exec_phrase_36`
-pub fn exec_phrase_36(x245 : Unit) -> Unit raise {
-  let _ = x245
-  {
-    thm_ref().val = @iterate.nsum_offset()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NSUM_OFFSET): thm);;
-fn step_73() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NSUM_OFFSET): thm);;", exec_phrase_36)
-}
-
-///|
-/// `exec_phrase_37`
-pub fn exec_phrase_37(x246 : Unit) -> Unit raise {
-  let _ = x246
-  {
-    thm_ref().val = @nums.num_induction()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((num_INDUCTION): thm);;
-fn step_74() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((num_INDUCTION): thm);;", exec_phrase_37)
-}
-
-///|
-/// `exec_phrase_38`
-pub fn exec_phrase_38(x247 : Unit) -> Unit raise {
-  let _ = x247
-  {
-    thm_ref().val = @iterate.nsum_sing_numseg()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NSUM_SING_NUMSEG): thm);;
-fn step_75() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NSUM_SING_NUMSEG): thm);;", exec_phrase_38)
-}
-
-///|
-/// `exec_phrase_39`
-pub fn exec_phrase_39(x248 : Unit) -> Unit raise {
-  let _ = x248
-  {
-    thm_ref().val = @arith.sub_0()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUB_0): thm);;
-fn step_76() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUB_0): thm);;", exec_phrase_39)
-}
-
-///|
-/// `exec_phrase_40`
-pub fn exec_phrase_40(x249 : Unit) -> Unit raise {
-  let _ = x249
-  {
-    thm_ref().val = @arith.right_add_distrib()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((RIGHT_ADD_DISTRIB): thm);;
-fn step_77() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((RIGHT_ADD_DISTRIB): thm);;", exec_phrase_40)
-}
-
-///|
-/// `exec_phrase_41`
-pub fn exec_phrase_41(x250 : Unit) -> Unit raise {
-  let _ = x250
-  {
-    thm_ref().val = @iterate.nsum_add_numseg()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NSUM_ADD_NUMSEG): thm);;
-fn step_78() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NSUM_ADD_NUMSEG): thm);;", exec_phrase_41)
-}
-
-///|
-/// `exec_phrase_42`
-pub fn exec_phrase_42(x251 : Unit) -> Unit raise {
-  let _ = x251
-  {
-    thm_ref().val = @iterate.nsum_lmul()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NSUM_LMUL): thm);;
-fn step_79() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NSUM_LMUL): thm);;", exec_phrase_42)
-}
-
-///|
-/// `exec_phrase_43`
-pub fn exec_phrase_43(x252 : Unit) -> Unit raise {
-  let _ = x252
-  {
-    thm_thm_ref().val = @equal.gsym
-    ()
-  }
-}
-
-///|
-/// the phrase thm_thm_ref := ((GSYM): (thm -> thm));;
-fn step_80() -> Unit raise {
-  @lib.register_phrase("thm_thm_ref := ((GSYM): (thm -> thm));;", exec_phrase_43)
-}
-
-///|
-/// `exec_phrase_44`
-pub fn exec_phrase_44(x253 : Unit) -> Unit raise {
-  let _ = x253
-  {
-    thm_ref().val = @arith.add_assoc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ADD_ASSOC): thm);;
-fn step_81() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ADD_ASSOC): thm);;", exec_phrase_44)
-}
-
-///|
-/// `exec_phrase_45`
-pub fn exec_phrase_45(x254 : Unit) -> Unit raise {
-  let _ = x254
-  {
-    thm_ref().val = @arith.add_sym()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((ADD_SYM): thm);;
-fn step_82() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((ADD_SYM): thm);;", exec_phrase_45)
-}
-
-///|
-/// `exec_phrase_46`
-pub fn exec_phrase_46(x255 : Unit) -> Unit raise {
-  let _ = x255
-  {
-    thm_ref().val = @arith.sub_suc()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUB_SUC): thm);;
-fn step_83() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUB_SUC): thm);;", exec_phrase_46)
-}
-
-///|
-/// `exec_phrase_47`
-pub fn exec_phrase_47(x256 : Unit) -> Unit raise {
-  let _ = x256
-  {
-    thm_ref().val = @arith.mult_ac()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((MULT_AC): thm);;
-fn step_84() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((MULT_AC): thm);;", exec_phrase_47)
-}
-
-///|
-/// `exec_phrase_48`
-pub fn exec_phrase_48(x257 : Unit) -> Unit raise {
-  let _ = x257
-  {
-    thm_ref().val = @arith.eq_add_lcancel()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((EQ_ADD_LCANCEL): thm);;
-fn step_85() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((EQ_ADD_LCANCEL): thm);;", exec_phrase_48)
-}
-
-///|
-/// `exec_phrase_49`
-pub fn exec_phrase_49(x258 : Unit) -> Unit raise {
-  let _ = x258
-  {
-    thmlist_term_thm_ref().val = fn(x259 : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-      fn(x260 : @kernel.Term) -> @kernel.Thm raise {
-        @meson.meson(x259, x260)
-      }
-    }
-    ()
-  }
-}
-
-///|
-/// the phrase thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;
-fn step_86() -> Unit raise {
-  @lib.register_phrase("thmlist_term_thm_ref := ((MESON): (thm list ->term -> thm));;", exec_phrase_49)
-}
-
-///|
-/// `exec_phrase_50`
-pub fn exec_phrase_50(x261 : Unit) -> Unit raise {
-  let _ = x261
-  {
-    thm_ref().val = @iterate.nsum_clauses_right()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((NSUM_CLAUSES_RIGHT): thm);;
-fn step_87() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((NSUM_CLAUSES_RIGHT): thm);;", exec_phrase_50)
-}
-
-///|
-/// `exec_phrase_51`
-pub fn exec_phrase_51(x262 : Unit) -> Unit raise {
-  let _ = x262
-  {
-    thm_ref().val = binom_lt()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((BINOM_LT): thm);;
-fn step_88() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((BINOM_LT): thm);;", exec_phrase_51)
-}
-
-///|
-/// `exec_phrase_52`
-pub fn exec_phrase_52(x263 : Unit) -> Unit raise {
-  let _ = x263
-  {
-    thm_ref().val = @arith.suc_sub1()
-    ()
-  }
-}
-
-///|
-/// the phrase thm_ref := ((SUC_SUB1): thm);;
-fn step_89() -> Unit raise {
-  @lib.register_phrase("thm_ref := ((SUC_SUB1): thm);;", exec_phrase_52)
 }
 
 ///|
@@ -2297,24 +1723,8 @@ fn load_steps() -> Unit raise {
   step_20()
   step_21()
   step_22()
-  step_24()
   step_23()
-  step_26()
-  step_27()
-  step_28()
-  step_29()
-  step_30()
-  step_31()
-  step_32()
   step_25()
-  step_34()
-  step_35()
-  step_36()
-  step_37()
-  step_38()
-  step_39()
-  step_40()
-  step_41()
   step_33()
   step_42()
   step_43()
@@ -2324,44 +1734,8 @@ fn load_steps() -> Unit raise {
   step_47()
   step_48()
   step_49()
-  step_51()
-  step_52()
-  step_53()
-  step_54()
-  step_55()
-  step_56()
   step_50()
   step_57()
-  step_59()
-  step_60()
-  step_61()
-  step_62()
-  step_63()
-  step_64()
-  step_65()
   step_58()
-  step_67()
-  step_68()
-  step_69()
-  step_70()
-  step_71()
-  step_72()
-  step_73()
-  step_74()
-  step_75()
-  step_76()
-  step_77()
-  step_78()
-  step_79()
-  step_80()
-  step_81()
-  step_82()
-  step_83()
-  step_84()
-  step_85()
-  step_86()
-  step_87()
-  step_88()
-  step_89()
   step_66()
 }

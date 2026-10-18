@@ -443,3 +443,9 @@ pub fn port_theorem(s : String) -> String raise {
     e => raise e
   }
 }
+
+///|
+/// The MoonBit source of the tactic `interactive_proof(s)` applies.
+pub fn port_tactic(s : String) -> String raise {
+  render(port_stringtotactic(cleanmathfontsforhol_light(s)))
+}

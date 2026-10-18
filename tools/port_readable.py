@@ -23,7 +23,14 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CALL = re.compile(r'@readable\.theorem\(@readable\.parse_qproof\(("(?:[^"\\]|\\.)*")\)\)')
+LIT = r'("(?:[^"\\]|\\.)*")'
+# (call to replace, generator, what replaces it); the readable package itself
+# calls its functions unqualified
+CALLS = [
+    (re.compile(r"@readable\.theorem\(@readable\.parse_qproof\(" + LIT + r"\)\)"), "port_theorem", "{}"),
+    (re.compile(r"(?<![@.\w])theorem\(parse_qproof\(" + LIT + r"\)\)"), "port_theorem", "{}"),
+    (re.compile(r"(?<![@.\w])interactive_proof\(parse_qproof\(" + LIT + r"\)\)"), "port_tactic", "@tactics.e({})"),
+]
 GEN_TEST = "port_gen_test.mbt"
 
 
@@ -36,19 +43,26 @@ def main_file(pkg):
     return os.path.join(ROOT, pkg, name + ".mbt")
 
 
-def generate(pkg, literals):
+def generate(pkg, jobs):
+    """Run the generator on each (literal, generator) job after `pkg` loads."""
     alias = os.path.basename(pkg)
     test = os.path.join(ROOT, pkg, GEN_TEST)
-    body = ",\n    ".join(literals)
+    gens = sorted(set(g for _, g in jobs))
+    body = ",\n    ".join(f"({lit}, {gens.index(g)})" for lit, g in jobs)
+    arms = "\n".join(f"      {k} => println(@readable.{g}(@readable.parse_qproof(p.0)))"
+                     for k, g in enumerate(gens))
     open(test, "w").write(f'''///|
 test "port readable proofs" {{
   @{alias}.load()
-  let proofs : Array[String] = [
+  let proofs : Array[(String, Int)] = [
     {body},
   ]
   for i, p in proofs {{
     println("@@PORT \\{{i}}")
-    println(@readable.port_theorem(@readable.parse_qproof(p)))
+    match p.1 {{
+{arms}
+      _ => abort("generator")
+    }}
     println("@@END")
   }}
 }}
@@ -68,8 +82,8 @@ test "port readable proofs" {{
     out = r.stdout
     codes = re.findall(r"(?s)@@PORT (\d+)\n(.*?)\n@@END\n", out)
     fails = [l for l in out.splitlines() if l.startswith('{"type":"result"') and json.loads(l).get("message")]
-    if fails or len(codes) != len(literals):
-        sys.exit(f"generation failed ({len(codes)} of {len(literals)}):\n{out[-3000:]}\n{r.stderr[-3000:]}")
+    if fails or len(codes) != len(jobs):
+        sys.exit(f"generation failed ({len(codes)} of {len(jobs)}):\n{out[-3000:]}\n{r.stderr[-3000:]}")
     return [c for _, c in sorted(codes, key=lambda x: int(x[0]))]
 
 
@@ -95,7 +109,7 @@ def phrase_table():
         pkg = os.path.relpath(os.path.dirname(f), ROOT)
         for m in reg.finditer(src):
             text = json.loads(m.group(1))
-            fn = re.search(r"pub fn " + m.group(2) + r"\(x\d+ : Unit\) -> Unit raise \{\n  let _ = x\d+\n  \{\n    @readable\.[a-z_]+\(\)\.val = (.*?)\n    \(\)\n  \}\n\}", src, re.S)
+            fn = re.search(r"pub fn " + m.group(2) + r"\(x\d+ : Unit\) -> Unit raise \{\n  let _ = x\d+\n  \{\n    (?:@readable\.)?[a-z_]+\(\)\.val = (.*?)\n    \(\)\n  \}\n\}", src, re.S)
             if text in SHORT:
                 table[text] = (None, SHORT[text])
             elif fn and "\n" not in fn.group(1):
@@ -197,17 +211,21 @@ def main():
     pkg = sys.argv[1].rstrip("/")
     f = main_file(pkg)
     src = open(f).read()
-    literals = [m.group(1) for m in CALL.finditer(src)]
-    print(f"{pkg}: {len(literals)} proofs")
-    codes = generate(pkg, literals)
+    found = sorted(((m.start(), m.end(), m.group(1), gen, wrap)
+                    for rx, gen, wrap in CALLS for m in rx.finditer(src)), key=lambda x: x[0])
+    print(f"{pkg}: {len(found)} proofs")
+    codes = generate(pkg, [(lit, gen) for _, _, lit, gen, _ in found])
     table = phrase_table()
-    it = iter(codes)
-
-    def replace(m):
-        line_start = src.rfind("\n", 0, m.start()) + 1
-        indent = len(src[line_start:m.start()]) - len(src[line_start:m.start()].lstrip())
-        return layout(resolve(next(it), pkg, table), indent)
-    out = CALL.sub(replace, src)
+    out, last = [], 0
+    for (start, end, _, _, wrap), code in zip(found, codes):
+        line_start = src.rfind("\n", 0, start) + 1
+        indent = len(src[line_start:start]) - len(src[line_start:start].lstrip())
+        code = resolve(code, pkg, table)
+        if os.path.basename(pkg) == "readable":
+            code = code.replace("@readable.", "")
+        out += [src[last:start], layout(wrap.format(code), indent)]
+        last = end
+    out = "".join(out) + src[last:]
     if "--keep" not in sys.argv:
         out = remove_phrases(out)
     open(f, "w").write(out)
