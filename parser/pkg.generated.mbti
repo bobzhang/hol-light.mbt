@@ -11,11 +11,7 @@ import {
 // Values
 pub fn begin_theory(String) -> Unit
 
-pub fn delete_parser(String) -> Unit raise
-
 pub fn end_theory() -> Unit
-
-pub fn install_parser(String, (ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise) -> Unit
 
 pub fn parse_preterm(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
