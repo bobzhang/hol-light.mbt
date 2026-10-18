@@ -55,7 +55,7 @@ fn is_ident(name : String) -> Bool {
   while n > 0 && cs[n - 1] == '\'' {
     n -= 1
   }
-  if n == 0 || name is ("true" | "false" | "if" | "else" | "_") {
+  if n == 0 || name == "_" || is_keyword(name) {
     return false
   }
   let c0 = cs[0]
@@ -82,22 +82,29 @@ fn lowered(name : String) -> String {
 }
 
 ///|
-fn type_name(name : String) -> String raise Unprintable {
-  // HOL's unit type is called 1
-  if name == "1" {
-    return "Unit"
-  }
-  let cs = name.to_array()
-  if !is_ident(name) {
-    raise Unprintable("type constant " + name)
-  }
-  if cs[0] is ('a'..='z') {
-    capitalised(name)
-  } else if !is_type_constant(lowered(name)) {
-    name
+/// What the type name `s` reads as (the parser's rule, internal/grammar):
+/// Some(type constant), or None for a type variable.
+fn reads_as_type(s : String) -> String? {
+  if s == "Unit" && !is_type_constant("unit") {
+    Some("1")
+  } else if is_type_constant(lowered(s)) {
+    Some(lowered(s))
+  } else if is_type_constant(s) {
+    Some(s)
   } else {
-    raise Unprintable("type constant " + name)
+    None
   }
+}
+
+///|
+fn type_name(name : String) -> String raise Unprintable {
+  let candidates = if name == "1" { ["Unit"] } else { [capitalised(name), name] }
+  for s in candidates {
+    if is_ident(s) && s.to_array()[0] is ('A'..='Z') && reads_as_type(s) == Some(name) {
+      return s
+    }
+  }
+  raise Unprintable("type constant " + name)
 }
 
 ///|
@@ -119,7 +126,7 @@ fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintabl
       if name.to_array() is [c, ..] &&
         c is ('A'..='Z') &&
         is_ident(name) &&
-        !is_type_constant(lowered(name)) {
+        reads_as_type(name) is None {
         name
       } else {
         raise Unprintable("type variable " + name)
@@ -191,12 +198,7 @@ fn binary_op(name : String) -> (String, Int, Bool)? {
 
 ///|
 fn is_constant_name(name : String) -> Bool {
-  try {
-    ignore(@kernel.get_const_type(name))
-    true
-  } catch {
-    _ => false
-  }
+  names_constant(name)
 }
 
 ///|
@@ -323,8 +325,10 @@ fn Printer::comb(
   ctx : Int,
   bound : Bound,
 ) -> String raise Unprintable {
+  // only a numeral in canonical form is written in decimal
   if (try @basics.dest_numeral(t) catch { _ => None } noraise { n => Some(n) })
-    is Some(n) {
+    is Some(n) &&
+    (try @nums.mk_numeral(n) == t catch { _ => false }) {
     return @num.string_of_num(n)
   }
   let (head, args) = @basics.strip_comb(t)
