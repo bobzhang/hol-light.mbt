@@ -1,6 +1,6 @@
 // The external programs Cadical/test.ml ran upstream while it loaded, for
 // @lib.sys_command to replay (wasm has no processes; the answers only guide
-// proofs the kernel checks). Written by tools/ocaml_ref/batch.py; do not edit.
+// proofs the kernel checks). Recorded from the upstream reference run.
 
 ///|
 fn init {
