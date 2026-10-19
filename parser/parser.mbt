@@ -342,7 +342,14 @@ fn pmk_string(s : String) -> Preterm {
 }
 
 ///|
-fn pmk_setcompr(fabs : Preterm, bvs : List[Preterm], babs : Preterm) -> Preterm {
+/// `{fabs | bvs | babs}`: GSPEC (\GEN%PVAR%n. ?bvs. SETSPEC GEN%PVAR%n babs
+/// fabs). Also the term syntax's elaboration of set comprehensions, so that
+/// both number GEN%PVAR alike.
+pub fn pmk_setcompr(
+  fabs : Preterm,
+  bvs : List[Preterm],
+  babs : Preterm,
+) -> Preterm {
   let v = pgenvar()
   let bod = @lib.itlist(
     pmk_exists,
@@ -353,7 +360,9 @@ fn pmk_setcompr(fabs : Preterm, bvs : List[Preterm], babs : Preterm) -> Preterm 
 }
 
 ///|
-fn pmk_setabs(fabs : Preterm, babs : Preterm) -> Preterm raise {
+/// `{fabs | babs}`, binding the variables free in both (all those of `fabs`
+/// when it has at most one, or `babs` has none).
+pub fn pmk_setabs(fabs : Preterm, babs : Preterm) -> Preterm raise {
   let fvs = pfrees(fabs)
   let bvs = pfrees(babs)
   let evs = if fvs.length() <= 1 || bvs.is_empty() {
@@ -894,15 +903,47 @@ pub fn parse_term(s : String) -> Term raise {
   let site = quotation_site.val
   quotation_site.val = -1
   trace(s)
+  let tm = elaborate(s)
+  match quotation_hook.val {
+    Some(hook) => hook(site, s, tm)
+    None => ()
+  }
+  tm
+}
+
+///|
+fn elaborate(s : String) -> Term raise {
   let (ptm, l) = parse_preterm(@lexer.lex(s))
   if l.is_empty() {
-    let tm = @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
-    match quotation_hook.val {
-      Some(hook) => hook(site, s, tm)
-      None => ()
-    }
-    tm
+    @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
   } else {
     raise Failure("Unparsed input following term")
   }
+}
+
+///|
+/// The term `s` denotes, read as `parse_term` would read it now, with no
+/// trace or hook and without advancing the GEN%PVAR counter, and how many
+/// GEN%PVAR names it took: for comparing another reading of `s` with it.
+pub fn reread_term(s : String) -> (Term, Int) raise {
+  let start = pgen_counter.val
+  defer { pgen_counter.val = start }
+  let tm = elaborate(s)
+  (tm, pgen_counter.val - start)
+}
+
+///|
+/// Run `f` and restore the GEN%PVAR counter (which set comprehensions
+/// advance) to what it was: a reading that is only checked leaves later
+/// generated names as they were.
+pub fn[T] with_pgen_counter_restored(f : () -> T raise) -> T raise {
+  let start = pgen_counter.val
+  defer { pgen_counter.val = start }
+  f()
+}
+
+///|
+/// The GEN%PVAR counter.
+pub fn pgen_count() -> Int {
+  pgen_counter.val
 }

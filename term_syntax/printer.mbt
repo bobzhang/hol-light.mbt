@@ -189,6 +189,12 @@ priv struct Printer {
   overloads : Bool
   // names of every variable of the term, which a renamed binder avoids
   names : Array[String]
+  // write sets as {a, b} and {e | p} (else as INSERT, GSPEC, ...)
+  sets : Bool
+  // bindings of a set comprehension's implicit binders ({e | p}), each the
+  // variable and the depth of its binding in the scope: printed with their
+  // type where they first occur
+  untyped : Array[(@kernel.Term, Int)]
 }
 
 ///|
@@ -273,13 +279,29 @@ fn Printer::spelling(self : Printer, c : @kernel.Term) -> String {
 ///|
 fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintable {
   guard c is Const(_, ty) else { raise Unprintable("not a constant") }
-  let s = constant_name(self.spelling(c))
+  self.annotated(constant_name(self.spelling(c)), c)
+}
+
+///|
+/// `s` for the constant `c`, with `c`'s type where the reading may not pin
+/// it down: a type variable no variable fixes, or (annotating every
+/// constant) any instance of a polymorphic constant.
+fn Printer::annotated(self : Printer, s : String, c : @kernel.Term) -> String raise Unprintable {
+  guard c is Const(name, ty) else { raise Unprintable("not a constant") }
   let tvs = @kernel.tyvars(ty)
-  if tvs.is_empty() ||
-    (!self.all_constants && tvs.iter().all(v => self.fixed.contains(v))) {
-    s
-  } else {
+  let polymorphic = (try @kernel.get_const_type(name) catch { _ => ty })
+    |> @kernel.tyvars
+    |> fn(l) { !l.is_empty() }
+  if tvs.iter().any(v => !self.fixed.contains(v)) ||
+    (self.all_constants && !tvs.is_empty()) {
     "(" + s + " : " + print_type_in_term(ty) + ")"
+  } else if self.all_constants && polymorphic {
+    // a concrete instance: annotated where its type can be written
+    "(" + s + " : " + print_type_in_term(ty) + ")" catch {
+      _ => s
+    }
+  } else {
+    s
   }
 }
 
@@ -291,7 +313,23 @@ fn Printer::variable(
 ) -> String raise Unprintable {
   guard v is Var(name, ty) else { raise Unprintable("not a variable") }
   match bound.iter().find_first(b => b.0 == v) {
-    Some((_, printed)) => return printed
+    Some((_, printed)) => {
+      // the binding the occurrence refers to: the innermost of v
+      let mut i = 0
+      for b in bound {
+        if b.0 == v {
+          break
+        }
+        i += 1
+      }
+      match self.untyped.search((v, bound.length() - i)) {
+        Some(i) => {
+          self.untyped.remove(i) |> ignore
+          return "(" + printed + " : " + print_type_in_term(ty) + ")"
+        }
+        None => return printed
+      }
+    }
     None => ()
   }
   let s = self.name(name)
@@ -354,6 +392,7 @@ fn Printer::term(
     Var(_, _) => self.variable(t, bound)
     Const("T", _) => "true"
     Const("F", _) => "false"
+    Const("EMPTY", _) if self.sets => self.annotated("{}", t)
     // an operator or binder that is not applied as the syntax spells it is
     // named like any symbolic constant (op_plus, op_tilde, ...)
     Const(_, _) => self.constant(t)
@@ -417,6 +456,13 @@ fn Printer::comb(
       elems.push(self.term(r, EXPR, bound))
       "(" + elems.join(", ") + ")"
     }
+    (Const("INSERT", _), [_, _]) if self.sets && set_elements(t) is Some(items) =>
+      "{" + items.map(x => self.term(x, EXPR, bound)).join(", ") + "}"
+    // with no binders to list, only the implicit form can write it
+    (Const("GSPEC", _), [Abs(g, body)]) if self.sets &&
+      comprehension(g, body) is Some((scoped, p, e)) &&
+      (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) =>
+      self.comprehension(scoped, p, e, bound)
     (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
           l => Some(l)
         })
@@ -446,16 +492,159 @@ fn Printer::comb(
 }
 
 ///|
+/// The elements of `{a, b, ...}`: INSERT a (INSERT b ... EMPTY).
+fn set_elements(t : @kernel.Term) -> Array[@kernel.Term]? {
+  let items = []
+  let mut r = t
+  while r is Comb(Comb(Const("INSERT", _), a), rest) {
+    items.push(a)
+    r = rest
+  }
+  if r is Const("EMPTY", _) {
+    Some(items)
+  } else {
+    None
+  }
+}
+
+///|
+/// A set comprehension GSPEC (\g. ?xs. SETSPEC g p e): (each x with the
+/// body it scopes, p, e).
+fn comprehension(
+  g : @kernel.Term,
+  body : @kernel.Term,
+) -> (Array[(@kernel.Term, @kernel.Term)], @kernel.Term, @kernel.Term)? {
+  let xs = []
+  let mut b = body
+  while b is Comb(Const("?", _), Abs(x, inner)) {
+    xs.push((x, inner))
+    b = inner
+  }
+  guard b is Comb(Comb(Comb(Const("SETSPEC", _), g2), p), e) && g2 == g else {
+    return None
+  }
+  if xs.iter().any(x => x.0 == g) ||
+    @kernel.frees(p).contains(g) ||
+    @kernel.frees(e).contains(g) {
+    return None
+  }
+  Some((xs, p, e))
+}
+
+///|
+/// The variables HOL's `{e | p}` binds: those free in both, or all those of
+/// `e` when it has at most one or `p` has none (@parser.pmk_setabs; a
+/// variable named like a constant or a numeral reads as that).
+fn implicit_binders(
+  e : @kernel.Term,
+  p : @kernel.Term,
+  bound : Bound,
+) -> Array[@kernel.Term] {
+  // a variable reads as a constant or numeral by the name it is printed
+  // under (a binder in scope may be renamed)
+  fn printed(v : @kernel.Term) -> String {
+    match bound.iter().find_first(b => b.0 == v) {
+      Some((_, n)) => n
+      None => if v is Var(n, _) { n } else { "" }
+    }
+  }
+  fn vars(t : @kernel.Term) -> Array[@kernel.Term] {
+    @kernel.frees(t)
+    .to_array()
+    .filter(v => {
+      let n = printed(v)
+      !is_constant_name(n) && !n.to_array().iter().all(c => c is ('0'..='9'))
+    })
+  }
+  let fvs = vars(e)
+  let bvs = vars(p)
+  if fvs.length() <= 1 || bvs.is_empty() {
+    fvs
+  } else {
+    fvs.filter(v => bvs.contains(v))
+  }
+}
+
+///|
+/// `{e | p}` when HOL's rule binds exactly `xs` (in order), else
+/// `{e | x : A, y : B | p}`.
+fn Printer::comprehension(
+  self : Printer,
+  scoped : Array[(@kernel.Term, @kernel.Term)],
+  p : @kernel.Term,
+  e : @kernel.Term,
+  bound : Bound,
+) -> String raise Unprintable {
+  let xs = scoped.map(x => x.0)
+  let mut inner = bound
+  let binders = []
+  let mut renamed = false
+  for x in scoped {
+    let (b, next) = self.bind(x.0, x.1, inner)
+    if next.head() is Some((_, printed)) && x.0 is Var(n, _) && printed != n {
+      renamed = true
+    }
+    binders.push(b)
+    inner = next
+  }
+  if !renamed && implicit_binders(e, p, inner) == xs {
+    // each binder is written with its type where it first occurs in e
+    let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
+    let typed_before = self.typed_free.length()
+    self.untyped.append(marks)
+    let e_s = self.term(e, EXPR, inner)
+    let p_s = self.term(p, EXPR, inner)
+    let unused = marks.filter(m => self.untyped.contains(m))
+    for m in marks {
+      match self.untyped.search(m) {
+        Some(i) => self.untyped.remove(i) |> ignore
+        None => ()
+      }
+    }
+    // a binder that only an inner binding of the same variable shows would
+    // read back with no type: write the binders out instead
+    if !unused.is_empty() {
+      // the free variables that attempt wrote with their type are written
+      // with it again
+      while self.typed_free.length() > typed_before {
+        self.typed_free.pop() |> ignore
+      }
+      return "{" +
+        self.term(e, EXPR, inner) +
+        " | " +
+        binders.join(", ") +
+        " | " +
+        self.term(p, EXPR, inner) +
+        "}"
+    }
+    "{" + e_s + " | " + p_s + "}"
+  } else {
+    "{" +
+    self.term(e, EXPR, inner) +
+    " | " +
+    binders.join(", ") +
+    " | " +
+    self.term(p, EXPR, inner) +
+    "}"
+  }
+}
+
+///|
 /// `t` in the term syntax: `parse_term(print_term(t))` is `t` again, up to
 /// the names of bound variables and invented type variables (`same_term`).
 pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
+  print_term_with(t, sets=true)
+}
+
+///|
+fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
     .fold(init=@list.List([]), (acc, l) => acc.concat(l))
   fn print(overloads : Bool, all_constants : Bool) -> String raise Unprintable {
     let names = vars.map(v => if v is Var(n, _) { n } else { "" })
-    { typed_free: [], fixed, all_constants, overloads, names }.term(
+    { typed_free: [], fixed, all_constants, overloads, names, sets, untyped: [] }.term(
       t,
       EXPR,
       @list.List([]),
@@ -490,13 +679,28 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 }
 
 ///|
+/// n for an invented type variable `?n`.
+fn invented_number(name : String) -> Int64 {
+  let mut n = 0L
+  for c in name[1:] {
+    guard c is ('0'..='9') else { return -1L }
+    n = n * 10L + (c.to_int() - '0'.to_int()).to_int64()
+  }
+  n
+}
+
+///|
 /// `t` with its invented type variables (`?n`) renamed in the order
-/// `type_vars_in_term` lists them: holes in the text read back as fresh ones.
-fn canonical_invented(t : @kernel.Term) -> @kernel.Term {
+/// `type_vars_in_term` lists them (those numbered `from` or more): holes in
+/// the text read back as fresh ones.
+fn canonical_invented(t : @kernel.Term, from? : Int64 = 0L) -> @kernel.Term {
   let theta = []
   for ty in @kernel.type_vars_in_term(t) {
-    if ty is Tyvar(name) && name.has_prefix("?") {
-      theta.push((@kernel.mk_vartype("?\{theta.length()}"), ty))
+    if ty is Tyvar(name) &&
+      name.has_prefix("?") &&
+      invented_number(name) >= from {
+      // not of the form ?k, which a type variable kept as it is may have
+      theta.push((@kernel.mk_vartype("?\u{0}\{theta.length()}"), ty))
     }
   }
   @kernel.inst(@list.List(theta), t)
@@ -510,24 +714,64 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 }
 
 ///|
-/// `print_term(t)` when the text reads back as `t` with the same names for
-/// its bound variables too (theorems show them), up to invented type
-/// variables. tools/migrate.mbtx migrates only such quotations, so the
+/// The spelling of the quotation `old`, which denotes `t`, in the term
+/// syntax: `print_term(t)`, when it reads back as `old` does with nothing
+/// renamed, bound variables included (theorems show them), and takes as
+/// many GEN%PVAR names (both readings start from the same counter), so
+/// that later generated names do not move. Invented type variables may
+/// differ in name. tools/migrate.mbtx migrates only such quotations, so the
 /// theorems of a migrated package print as before.
-pub fn print_term_exact(t : @kernel.Term) -> String raise Unprintable {
-  let s = print_term(t)
-  let back = elaborate(s) catch {
-    _ => raise Unprintable("term that does not read back")
+pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintable {
+  // a type variable invented before (one the environment may share) must be
+  // the same in both readings; only those they invent may differ
+  let from = @preterm.type_var_counter()
+  let (a, na) = @parser.reread_term(old) catch {
+    _ => raise Unprintable("quotation that does not read back")
   }
-  if canonical_invented(back) != canonical_invented(t) {
-    raise Unprintable("term whose bound variables the syntax renames")
+  let a = canonical_invented(a, from~)
+  // set notation, else the sets as written (GSPEC(...)), which an old
+  // quotation may spell out
+  let mut error = Unprintable("term")
+  for sets in [true, false] {
+    let s = print_term_with(t, sets~) catch {
+      e => {
+        error = e
+        continue
+      }
+    }
+    let (b, nb) = reread(s) catch {
+      _ => {
+        error = Unprintable("term that does not read back")
+        continue
+      }
+    }
+    if canonical_invented(b, from~) != a {
+      error = Unprintable("term whose bound variables the syntax renames")
+    } else if na != nb {
+      error = Unprintable(
+        "term that takes \{nb} GEN%PVAR names where the quotation takes \{na}",
+      )
+    } else {
+      return s
+    }
   }
-  s
+  raise error
+}
+
+///|
+/// `s` read now, without advancing the GEN%PVAR counter, and how many
+/// GEN%PVAR names it took.
+fn reread(s : String) -> (@kernel.Term, Int) raise {
+  @parser.with_pgen_counter_restored(() => {
+    let start = @parser.pgen_count()
+    let t = elaborate(s)
+    (t, @parser.pgen_count() - start)
+  })
 }
 
 ///|
 fn reads_as(s : String, t : @kernel.Term) -> Bool {
-  try same_term(elaborate(s), t) catch {
+  try same_term(reread(s).0, t) catch {
     _ => false
   }
 }

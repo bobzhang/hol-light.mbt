@@ -25,6 +25,7 @@
 %token EXISTS "∃"
 %token IMPLIES "→"
 %token BARBAR "||"
+%token BAR "|"
 %token AMPERAMPER "&&"
 %token PLUS "+"
 %token MINUS "-"
@@ -148,6 +149,10 @@ simple_expr -> @preterm.Preterm
   | LIDENT %prec prec_apply_non_ident_fn { pvar($1) }
   | tuple_expr { $1 }
   | "[" list_commas(expr) "]" { list($2) }
+  | "{" "}" { pconst("EMPTY") }
+  | "{" non_empty_list_commas(expr) "}" { set_enum($2) }
+  | "{" expr "|" expr "}" { set_abs($2, $4) }
+  | "{" expr "|" non_empty_list_commas(set_binder) "|" expr "}" { set_compr($2, $4, $6) }
   | simple_expr "(" non_empty_list_commas(expr) ")" { applies($1, $3) }
   | simple_expr DOT_LIDENT "(" list_commas(expr) ")" { applies(pvar($2), $4.prepend($1)) }
   ;
@@ -156,6 +161,10 @@ atomic_expr -> @preterm.Preterm
   : "true" { pconst("T") }
   | "false" { pconst("F") }
   | INT { pvar($1) }
+  ;
+
+set_binder -> (String, @preterm.Pretype)
+  : binder ":" type_ { ($1, $3) }
   ;
 
 %inline binder -> String

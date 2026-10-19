@@ -111,7 +111,8 @@ test "invented type variables print as holes" {
   let s = @term_syntax.print_term(t)
   assert_true(@term_syntax.same_term(@term_syntax.parse_term(s), t))
   inspect(s, content=(
-    #|INTER(INSERT((x : _), EMPTY), (s : (_) -> Bool)) == (if IN(x, s) { INSERT(x, EMPTY) } else { EMPTY })
+    #|INTER({(x : _)}, (s : (_) -> Bool)) == (if IN(x, s) { {x} } else { {} })
+
   ))
 }
 
@@ -126,15 +127,138 @@ test "comparisons are not chained" {
 ///|
 test "exact printing keeps bound variable names" {
   let exact = fn(q : String) -> String raise {
-    try @term_syntax.print_term_exact(@parser.parse_term(q)) catch {
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
       @term_syntax.Unprintable(m) => "unprintable: " + m
       e => raise e
     }
   }
   inspect(exact("forall n. n + 0 = n"), content="∀ n : Num, n + 0 == n")
-  // a set comprehension binds a generated GEN%PVAR%n, which theorems show
+}
+
+///|
+test "set notation" {
+  let exact = fn(q : String) -> String raise {
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    }
+  }
+  inspect(exact("{1, 2}"), content=(
+    #|{1, 2}
+  ))
+  inspect(exact("{}:num->bool"), content=(
+    #|({} : (Num) -> Bool)
+
+  ))
+  inspect(exact("{n | n < 2}"), content=(
+    #|{(n : Num) | n < 2}
+  ))
+  inspect(exact("{x | x IN s /\\ P x}"), content=(
+    #|{(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)}
+  ))
+  inspect(exact("{f x | x IN s}"), content=(
+    #|{(f : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))}
+  ))
+  inspect(exact("{(x, y) | x < y}"), content=(
+    #|{((x : Num), (y : Num)) | x < y}
+  ))
+  inspect(exact("{t | t SUBSET (s:A->bool)}"), content=(
+    #|{(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}
+  ))
+  inspect(exact("\\a:A. { b:A | forall s. f(s) = a ==> b IN s}"), content=(
+    #|(a : A) => {(b : A) | ∀ s : (A) -> Bool, (f : ((A) -> Bool) -> A)(s) == a → IN(b, s)}
+  ))
+  inspect(exact("{f | x | x < 2}"), content=(
+    #|{(f : _) | x : Num | x < 2}
+  ))
+  inspect(exact("{x + y | x | x < 2}"), content=(
+    #|{(x : Num) + (y : Num) | x < 2}
+  ))
+  inspect(exact("{ {x | x < n} | n < 3}"), content=(
+    #|unprintable: term whose bound variables the syntax renames
+
+  ))
+  inspect(exact("{t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)"), content=(
+    #|HAS_SIZE({(t : (_) -> Bool) | SUBSET(t, (s : (_) -> Bool)) && HAS_SIZE(t, (m : Num))}, (binom : ((_, Num)) -> Num)(((n : _), m)))
+  ))
+}
+
+///|
+test "set notation reads as HOL's" {
+  // the same term, GEN%PVAR binders included, as the quotation syntax
+  for q in [
+    ("{(n : Num) | n < 2}", "{n:num | n < 2}"),
+    ("{f(x) | x : Num | x < 2}", "{f x | x:num | x < 2}"),
+    ("{1, 2}", "{1, 2}"),
+  ] {
+    let a = @term_syntax.parse_term(q.0)
+    let b = @parser.parse_term(q.1)
+    assert_true(@term_syntax.same_term(a, b), msg=q.0)
+  }
+}
+
+///|
+test "set notation: binders, counters, degenerate comprehensions" {
+  // a binder renamed because it is named like a constant (T) does not
+  // capture a variable of the new name
+  let t = @term_syntax.parse_term("{T' | T : Bool | T != T'}")
+  assert_true(@kernel.frees(t).contains(@kernel.mk_var("T'", @kernel.bool_ty)))
+  // checking a spelling leaves the GEN%PVAR counter as it was
+  let s = @parser.parse_term("{n | n < 2}")
+  let before = @parser.pgen_count()
+  ignore(@term_syntax.print_term(s))
+  ignore(@term_syntax.spell_quotation("{n | n < 2}", s))
+  assert_eq(@parser.pgen_count(), before)
+  // a comprehension with no binders to list is written as GSPEC
   inspect(
-    exact("{n | n < 2}"),
-    content="unprintable: term whose bound variables the syntax renames",
+    @term_syntax.print_term(
+      @parser.parse_term("GSPEC (\\g:num. SETSPEC g T (x:num))"),
+    ),
+    content=(
+      #|GSPEC((g : Num) => SETSPEC(g, true, (x : Num)))
+    ),
+  )
+}
+
+///|
+test "set notation: review cases" {
+  // two explicit binders named like constants get distinct names
+  let t = @term_syntax.parse_term("{T | T : Bool, F : Bool | T != F}")
+  inspect(@term_syntax.print_term(t), content=(
+    #|{T' | T' : Bool, F' : Bool | !(T' == F')}
+  ))
+  // an inner binding of the same variable does not take the outer
+  // binder's type annotation
+  let q = "{((\\x:A. x), (x:A)) | T}"
+  inspect(
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    },
+    content=(
+      #|{((x : A) => x, (x : A)) | true}
+    ),
+  )
+}
+
+///|
+test "set notation: spelled-out GSPEC and renamed binders" {
+  let spell = fn(q : String) -> String raise {
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    }
+  }
+  // a quotation that spells GSPEC out keeps its own binder
+  inspect(spell("GSPEC (\\g:num. ?x:num. SETSPEC g T x)"), content=(
+    #|GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x))
+  ))
+  // T is a constant, so {T | T} binds nothing: the lambda's T, renamed,
+  // is not bound by the comprehension (renaming it is not exact)
+  inspect(
+    @term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")),
+    content=(
+      #|(T' : Bool) => GSPEC((v : Bool) => SETSPEC(v, T', T'))
+    ),
   )
 }
