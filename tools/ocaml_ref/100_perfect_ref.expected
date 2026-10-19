@@ -12619,103 +12619,103 @@ Warning: inventing type variables
 0..0..solved at 4
 0..0..solved at 4
 100/perfect quotations (97):
-  sigma(n) = if n = 0 then 0 else nsum {d | d divides n} (\\i. i)
-  perfect n <=> ~(n = 0) /\\ sigma(n) = 2 * n
-  k = k - 1 + 1 <=> ~(k = 0)
-  EVEN(2 EXP k) <=> EVEN((2 EXP k - 1) + 1)
-  forall k. ~(k = 0) ==> ODD(2 EXP k - 1)
+  (sigma : (Num) -> Num)((n : Num)) == (if n == 0 { 0 } else { nsum({(d : Num) | divides(d, n)}, (i : Num) => i) })
+  (perfect : (Num) -> Bool)((n : Num)) == (!(n == 0) && sigma(n) == 2 * n)
+  ((k : Num) == k - 1 + 1) == !(k == 0)
+  EVEN(EXP(2, (k : Num))) == EVEN(EXP(2, k) - 1 + 1)
+  \226\136\128 k : Num, !(k == 0) \226\134\146 ODD(EXP(2, k) - 1)
   0
-  SUC r
-  r:num
-  s:num
-  m = 0
-  m < 2 * m <=> ~(m = 0)
-  m:num
-  m:num
-  n:num
-  n:num
-  forall n. ~(n = 0) ==> ?r s. ODD s /\\ n = 2 EXP r * s
-  {d | d <= n}
-  forall n. ~(n = 0) ==> FINITE {d | d divides n}
-  (a * x * u = x * a * v) <=> (a * x) * u = (a * x) * v
-  a * b = x * y
-  b:num
-  a:num
-  x:num
-  y:num
-  x:num
-  a:num
-  forall a b x y. a * b = x * y /\\ coprime(a,x)\n             ==> ?d. y = a * d /\\ b = x * d
-  ODD n
-  forall k n. ODD(n) ==> coprime(2 EXP k,n)
+  SUC((r : Num))
+  (r : Num)
+  (s : Num)
+  (m : Num) == 0
+  ((m : Num) < 2 * m) == !(m == 0)
+  (m : Num)
+  (m : Num)
+  (n : Num)
+  (n : Num)
+  \226\136\128 n : Num, !(n == 0) \226\134\146 (\226\136\131 r : Num, \226\136\131 s : Num, ODD(s) && n == EXP(2, r) * s)
+  {(d : Num) | d <= (n : Num)}
+  \226\136\128 n : Num, !(n == 0) \226\134\146 FINITE({(d : Num) | divides(d, n)})
+  ((a : Num) * ((x : Num) * (u : Num)) == x * (a * (v : Num))) == (a * x * u == a * x * v)
+  (a : Num) * (b : Num) == (x : Num) * (y : Num)
+  (b : Num)
+  (a : Num)
+  (x : Num)
+  (y : Num)
+  (x : Num)
+  (a : Num)
+  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 x : Num, \226\136\128 y : Num, a * b == x * y && coprime((a, x)) \226\134\146 (\226\136\131 d : Num, y == a * d && b == x * d)
+  ODD((n : Num))
+  \226\136\128 k : Num, \226\136\128 n : Num, ODD(n) \226\134\146 coprime((EXP(2, k), n))
   forall s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))
-  sigma 0 = 0
-  {d | d = 1} = {1}
-  sigma(1) = 1
-  nsum {1,n} (\\i. i)
-  1 < n ==> ~(n = 0)
-  forall n. 1 < n ==> n + 1 <= sigma(n)
-  x = a * b <=> a * b = 1 * x
-  nsum {1,b,a*b} (\\i. i)
-  1 < n ==> ~(n = 0)
-  forall a b. 1 < a /\\ 1 < b ==> 1 + b + a * b <= sigma(a * b)
-  nsum {1,p} (\\i. i)
-  p = 1
-  p = 0
-  forall p. prime(p) ==> sigma(p) = p + 1
-  a = a * b <=> a * b = a * 1
-  b = 0
-  a = 0
-  b:num
-  a:num
-  b:num
-  a:num
-  p = 1
-  forall p. prime(p) <=> sigma(p) = p + 1
-  ~(SUC k <= k)
-  {2 EXP i | i <= k} = IMAGE (\\i. 2 EXP i) {i | i <= k}
-  {2 EXP i | i = SUC k \\/ i <= k} =\n    (2 EXP (SUC k)) INSERT {2 EXP i | i <= k}
-  {2 EXP i | i = 0} = {2 EXP 0}
-  k:num
-  k:num
-  x + 1 = y ==> x = y - 1
-  nsum {2 EXP i | i <= k} (\\i. i)
-  forall k. sigma(2 EXP k) = 2 EXP (k + 1) - 1
-  z:num
-  y:num
-  x:num
-  w:num
-  n:num
-  (a /\\ b) /\\ c <=> c /\\ a /\\ b
-  nsum (IMAGE (\\(x,y). x * y)\n         {x,y | x divides a /\\ y divides b}) (\\i. i)
-  b = 0
-  a = 0
-  forall a b. coprime(a,b) ==> sigma(a * b) = sigma(a) * sigma(b)
-  ~(k = 0)
-  ~(k = 0) ==> k - 1 + 1 = k
-  coprime(2 EXP (k - 1),2 EXP k - 1)
-  k = 0
-  forall k. prime(2 EXP k - 1) ==> perfect(2 EXP (k - 1) * (2 EXP k - 1))
-  ~(r = 0)
-  2 EXP 0 < a ==> 1 < a
-  1 * d < x * d ==> x * d < 1 + d + x * d - d
-  ~(d = 1)
-  ~(d = 0)
-  ~(r = 0)
-  2 EXP 1 < a ==> 1 < a - 1
-  a /\\ ~b ==> (a ==> b) ==> c
-  d:num
-  2 EXP (r + 1) - 1
-  1 <= n <=> ~(n = 0)
-  d = 1
-  d = 0
-  d:num
-  r + 1
-  s:num
-  r:num
-  n = 0
-  n:num
-  forall n. EVEN(n) /\\ perfect(n)\n       ==> ?k. prime(2 EXP k - 1) /\\ n = 2 EXP (k - 1) * (2 EXP k - 1)
+  sigma(0) == 0
+  {(d : Num) | d == 1} == {1}
+  sigma(1) == 1
+  nsum({1, (n : Num)}, (i : Num) => i)
+  1 < (n : Num) \226\134\146 !(n == 0)
+  \226\136\128 n : Num, 1 < n \226\134\146 n + 1 <= sigma(n)
+  ((x : Num) == (a : Num) * (b : Num)) == (a * b == 1 * x)
+  nsum({1, (b : Num), (a : Num) * b}, (i : Num) => i)
+  1 < (n : Num) \226\134\146 !(n == 0)
+  \226\136\128 a : Num, \226\136\128 b : Num, 1 < a && 1 < b \226\134\146 1 + (b + a * b) <= sigma(a * b)
+  nsum({1, (p : Num)}, (i : Num) => i)
+  (p : Num) == 1
+  (p : Num) == 0
+  \226\136\128 p : Num, prime(p) \226\134\146 sigma(p) == p + 1
+  ((a : Num) == a * (b : Num)) == (a * b == a * 1)
+  (b : Num) == 0
+  (a : Num) == 0
+  (b : Num)
+  (a : Num)
+  (b : Num)
+  (a : Num)
+  (p : Num) == 1
+  \226\136\128 p : Num, prime(p) == (sigma(p) == p + 1)
+  !(SUC((k : Num)) <= k)
+  {EXP(2, (i : Num)) | i <= (k : Num)} == IMAGE((i : Num) => EXP(2, i), {(i : Num) | i <= k})
+  {EXP(2, (i : Num)) | i == SUC((k : Num)) || i <= k} == INSERT(EXP(2, SUC(k)), {EXP(2, (i : Num)) | i <= k})
+  {EXP(2, (i : Num)) | i == 0} == {EXP(2, 0)}
+  (k : Num)
+  (k : Num)
+  (x : Num) + 1 == (y : Num) \226\134\146 x == y - 1
+  nsum({EXP(2, (i : Num)) | i <= (k : Num)}, (i : Num) => i)
+  \226\136\128 k : Num, sigma(EXP(2, k)) == EXP(2, k + 1) - 1
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  (w : Num)
+  (n : Num)
+  (((a : Bool) && (b : Bool)) && (c : Bool)) == (c && a && b)
+  nsum(IMAGE(GABS((f : ((Num, Num)) -> Num) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), x * y)), {((x : Num), (y : Num)) | divides(x, (a : Num)) && divides(y, (b : Num))}), (i : Num) => i)
+  (b : Num) == 0
+  (a : Num) == 0
+  \226\136\128 a : Num, \226\136\128 b : Num, coprime((a, b)) \226\134\146 sigma(a * b) == sigma(a) * sigma(b)
+  !((k : Num) == 0)
+  !((k : Num) == 0) \226\134\146 k - 1 + 1 == k
+  coprime((EXP(2, (k : Num) - 1), EXP(2, k) - 1))
+  (k : Num) == 0
+  \226\136\128 k : Num, prime(EXP(2, k) - 1) \226\134\146 perfect(EXP(2, k - 1) * (EXP(2, k) - 1))
+  !((r : Num) == 0)
+  EXP(2, 0) < (a : Num) \226\134\146 1 < a
+  1 * (d : Num) < (x : Num) * d \226\134\146 x * d < 1 + (d + (x * d - d))
+  !((d : Num) == 1)
+  !((d : Num) == 0)
+  !((r : Num) == 0)
+  EXP(2, 1) < (a : Num) \226\134\146 1 < a - 1
+  (a : Bool) && !(b : Bool) \226\134\146 (a \226\134\146 b) \226\134\146 (c : Bool)
+  (d : Num)
+  EXP(2, (r : Num) + 1) - 1
+  (1 <= (n : Num)) == !(n == 0)
+  (d : Num) == 1
+  (d : Num) == 0
+  (d : Num)
+  (r : Num) + 1
+  (s : Num)
+  (r : Num)
+  (n : Num) == 0
+  (n : Num)
+  \226\136\128 n : Num, EVEN(n) && perfect(n) \226\134\146 (\226\136\131 k : Num, prime(EXP(2, k) - 1) && n == EXP(2, k - 1) * (EXP(2, k) - 1))
 sigma =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#sigma:fun(num,num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%1:num. (#?:fun(fun(num,bool),bool) (\d:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%1:num) ((#num_divides:fun(num,fun(num,bool)) d:num) n:num)) d:num)))))) (\i:num. i:num))))))
 perfect =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#perfect:fun(num,bool) n:num)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) (#sigma:fun(num,num) n:num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))))
 ODD_POW2_MINUS1 =  |- (#forall:fun(fun(num,bool),bool) (\k:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) k:num) (#NUMERAL:fun(num,num) #_0:num)))) (#ODD:fun(num,bool) ((#-:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) k:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
