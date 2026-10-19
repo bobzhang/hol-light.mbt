@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 /// QUARTIC_1
 fn step_2() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_rat.real_ring)
-  quartic_1_v1_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   R = &0 /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   D pow 2 = &3 * a pow 2 / &4 - &2 * b + &2 * s /\\\n   x = --a / &4 + R / &2 + D / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t1))
+  quartic_1_v1_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && R == real_of_num(0) && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s && (x : Real) == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t1))
 }
 
 ///|
@@ -26,7 +26,7 @@ pub fn quartic_1_v1() -> @kernel.Thm {
 /// QUARTIC_2
 fn step_3() -> Unit raise {
   let t2 = @tactics.conv_tac(@calc_rat.real_ring)
-  quartic_2_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   R = &0 /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   D pow 2 = &3 * a pow 2 / &4 - &2 * b + &2 * s /\\\n   x = --a / &4 + R / &2 - D / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t2))
+  quartic_2_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && R == real_of_num(0) && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s && (x : Real) == -a / real_of_num(4) + (R / real_of_num(2) - D / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t2))
 }
 
 ///|
@@ -42,7 +42,7 @@ pub fn quartic_2() -> @kernel.Thm {
 /// QUARTIC_3
 fn step_4() -> Unit raise {
   let t3 = @tactics.conv_tac(@calc_rat.real_ring)
-  quartic_3_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   R = &0 /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   E pow 2 = &3 * a pow 2 / &4 - &2 * b - &2 * s /\\\n   x = --a / &4 - R / &2 + E / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t3))
+  quartic_3_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && R == real_of_num(0) && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((E : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b - real_of_num(2) * s && (x : Real) == -a / real_of_num(4) - R / real_of_num(2) + E / real_of_num(2) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t3))
 }
 
 ///|
@@ -58,7 +58,7 @@ pub fn quartic_3() -> @kernel.Thm {
 /// QUARTIC_4
 fn step_5() -> Unit raise {
   let t4 = @tactics.conv_tac(@calc_rat.real_ring)
-  quartic_4_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   R = &0 /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   E pow 2 = &3 * a pow 2 / &4 - &2 * b - &2 * s /\\\n   x = --a / &4 - R / &2 - E / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t4))
+  quartic_4_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && R == real_of_num(0) && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((E : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b - real_of_num(2) * s && (x : Real) == -a / real_of_num(4) - R / real_of_num(2) - E / real_of_num(2) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t4))
 }
 
 ///|
@@ -74,7 +74,7 @@ pub fn quartic_4() -> @kernel.Thm {
 /// QUARTIC_1'
 fn step_6() -> Unit raise {
   let t5 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_1_p_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   ~(R = &0) /\\\n   D pow 2 = &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R) /\\\n   x = --a / &4 + R / &2 + D / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t5))
+  quartic_1_p_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && !(R == real_of_num(0)) && pow((D : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) && (x : Real) == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t5))
 }
 
 ///|
@@ -90,7 +90,7 @@ pub fn quartic_1_p() -> @kernel.Thm {
 /// QUARTIC_2'
 fn step_7() -> Unit raise {
   let t6 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_2_p_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   ~(R = &0) /\\\n   D pow 2 = &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R) /\\\n   x = --a / &4 + R / &2 - D / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t6))
+  quartic_2_p_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && !(R == real_of_num(0)) && pow((D : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) && (x : Real) == -a / real_of_num(4) + (R / real_of_num(2) - D / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t6))
 }
 
 ///|
@@ -106,7 +106,7 @@ pub fn quartic_2_p() -> @kernel.Thm {
 /// QUARTIC_3'
 fn step_8() -> Unit raise {
   let t7 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_3_p_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   ~(R = &0) /\\\n   E pow 2 = &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R) /\\\n   x = --a / &4 - R / &2 + E / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t7))
+  quartic_3_p_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && !(R == real_of_num(0)) && pow((E : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b - (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) && (x : Real) == -a / real_of_num(4) - R / real_of_num(2) + E / real_of_num(2) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t7))
 }
 
 ///|
@@ -122,7 +122,7 @@ pub fn quartic_3_p() -> @kernel.Thm {
 /// QUARTIC_4'
 fn step_9() -> Unit raise {
   let t8 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_4_p_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   ~(R = &0) /\\\n   E pow 2 = &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R) /\\\n   x = --a / &4 - R / &2 - E / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t8))
+  quartic_4_p_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && !(R == real_of_num(0)) && pow((E : Real), 2) == real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b - (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) && (x : Real) == -a / real_of_num(4) - R / real_of_num(2) - E / real_of_num(2) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t8))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn quartic_4_p() -> @kernel.Thm {
 /// QUARTIC_1
 fn step_10() -> Unit raise {
   let t9 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_1_v2_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   x = --a / &4 + R / &2 + D / &2\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t9))
+  quartic_1_v2_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && (x : Real) == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t9))
 }
 
 ///|
@@ -154,7 +154,7 @@ pub fn quartic_1_v2() -> @kernel.Thm {
 /// QUARTIC_1
 fn step_11() -> Unit raise {
   let t10 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_1_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (E pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b - &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (x = --a / &4 + R / &2 + D / &2 \\/\n    x = --a / &4 - R / &2 + E / &2)\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t10))
+  quartic_1_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && pow((E : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b - real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b - (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && ((x : Real) == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) || x == -a / real_of_num(4) - R / real_of_num(2) + E / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t10))
 }
 
 ///|
@@ -177,7 +177,7 @@ fn step_12() -> Unit raise {
     }
   })
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))), t14), t15)
-  quartic_cases_v1_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (E pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b - &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (x = --a / &4 + R / &2 + D / &2 \\/\n    x = --a / &4 + R / &2 - D / &2 \\/\n    x = --a / &4 - R / &2 + E / &2 \\/\n    x = --a / &4 - R / &2 - E / &2)\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t16))
+  quartic_cases_v1_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && pow((E : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b - real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b - (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && ((x : Real) == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) || x == -a / real_of_num(4) + (R / real_of_num(2) - D / real_of_num(2)) || x == -a / real_of_num(4) - R / real_of_num(2) + E / real_of_num(2) || x == -a / real_of_num(4) - R / real_of_num(2) - E / real_of_num(2)) → pow(x, 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)"), t16))
 }
 
 ///|
@@ -200,7 +200,7 @@ fn step_13() -> Unit raise {
     }
   })
   let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))), t20), t21)
-  quartic_cases_v2_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (E pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b - &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R))\n   ==> (x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0 <=>\n        x = --a / &4 + R / &2 + D / &2 \\/\n        x = --a / &4 + R / &2 - D / &2 \\/\n        x = --a / &4 - R / &2 + E / &2 \\/\n        x = --a / &4 - R / &2 - E / &2)"), t22))
+  quartic_cases_v2_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && pow((E : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b - real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b - (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) → (pow((x : Real), 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)) == (x == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) || x == -a / real_of_num(4) + (R / real_of_num(2) - D / real_of_num(2)) || x == -a / real_of_num(4) - R / real_of_num(2) + E / real_of_num(2) || x == -a / real_of_num(4) - R / real_of_num(2) - E / real_of_num(2))"), t22))
 }
 
 ///|
@@ -216,7 +216,7 @@ pub fn quartic_cases_v2() -> @kernel.Thm {
 /// QUARTIC_CASES
 fn step_14() -> Unit raise {
   let t23 = @tactics.conv_tac(@calc_rat.real_field)
-  quartic_cases_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (E pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b - &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R))\n   ==> (x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0 <=>\n        x = --a / &4 + R / &2 + D / &2 \\/\n        x = --a / &4 + R / &2 - D / &2 \\/\n        x = --a / &4 - R / &2 + E / &2 \\/\n        x = --a / &4 - R / &2 - E / &2)"), t23))
+  quartic_cases_c.set(@tactics.prove(@term_syntax.parse_term("pow((y : Real), 3) - (b : Real) * pow(y, 2) + (((a : Real) * (c : Real) - real_of_num(4) * (d : Real)) * y - pow(a, 2) * d + (real_of_num(4) * (b * d) - pow(c, 2))) == real_of_num(0) && pow((R : Real), 2) == pow(a, 2) / real_of_num(4) - b + y && pow((s : Real), 2) == pow(y, 2) - real_of_num(4) * d && pow((D : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b + real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b + (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) && pow((E : Real), 2) == (if R == real_of_num(0) { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - real_of_num(2) * b - real_of_num(2) * s } else { real_of_num(3) * (pow(a, 2) / real_of_num(4)) - pow(R, 2) - real_of_num(2) * b - (real_of_num(4) * (a * b) - real_of_num(8) * c - pow(a, 3)) / (real_of_num(4) * R) }) → (pow((x : Real), 4) + (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d))) == real_of_num(0)) == (x == -a / real_of_num(4) + (R / real_of_num(2) + D / real_of_num(2)) || x == -a / real_of_num(4) + (R / real_of_num(2) - D / real_of_num(2)) || x == -a / real_of_num(4) - R / real_of_num(2) + E / real_of_num(2) || x == -a / real_of_num(4) - R / real_of_num(2) - E / real_of_num(2))"), t23))
 }
 
 ///|
