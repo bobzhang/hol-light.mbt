@@ -22,7 +22,7 @@ test "core definitions and axioms round-trip" {
         continue
       }
     }
-    if @basics.aconv(t, u) {
+    if @term_syntax.same_term(t, u) {
       ok += 1
     } else {
       bad.push(s)
@@ -37,8 +37,9 @@ test "core definitions and axioms round-trip" {
     "\{terms.length()} terms, \{ok} round-trip, \{terms.length() - ok} unprintable\n" +
     summary.join("\n"),
     content=(
-      #|266 terms, 263 round-trip, 3 unprintable
-      #|type variable: 3
+      #|266 terms, 266 round-trip, 0 unprintable
+      #|
+
 
 
     ),

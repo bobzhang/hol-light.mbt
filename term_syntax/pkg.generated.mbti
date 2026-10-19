@@ -18,6 +18,8 @@ pub fn print_term(@kernel.Term) -> String raise Unprintable
 
 pub fn print_type(@kernel.HolType) -> String raise Unprintable
 
+pub fn same_term(@kernel.Term, @kernel.Term) -> Bool
+
 // Errors
 pub(all) suberror Unprintable {
   Unprintable(String)

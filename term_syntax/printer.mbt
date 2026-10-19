@@ -122,6 +122,9 @@ fn flatten(ty : @kernel.HolType, op : String) -> Array[@kernel.HolType] {
 ///|
 fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintable {
   match ty {
+    // a type variable the elaborator invented is written as a hole, which
+    // elaboration fills with a fresh one
+    Tyvar(name) if name.has_prefix("?") => "_"
     Tyvar(name) =>
       if name.to_array() is [c, ..] &&
         c is ('A'..='Z') &&
@@ -423,7 +426,7 @@ fn Printer::comb(
 
 ///|
 /// `t` in the term syntax: `parse_term(print_term(t))` is `t` again, up to
-/// the names of bound variables.
+/// the names of bound variables and invented type variables (`same_term`).
 pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
@@ -466,8 +469,28 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 }
 
 ///|
+/// `t` with its invented type variables (`?n`) renamed in order of first
+/// occurrence: holes in the text read back as fresh ones.
+fn canonical_invented(t : @kernel.Term) -> @kernel.Term {
+  let theta = []
+  for ty in @kernel.type_vars_in_term(t) {
+    if ty is Tyvar(name) && name.has_prefix("?") {
+      theta.push((@kernel.mk_vartype("?\{theta.length()}"), ty))
+    }
+  }
+  @kernel.inst(@list.List(theta), t)
+}
+
+///|
+/// Whether `a` and `b` are the same term up to the names of bound variables
+/// and of invented type variables (the round trip of `print_term`).
+pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
+  @basics.aconv(canonical_invented(a), canonical_invented(b))
+}
+
+///|
 fn reads_as(s : String, t : @kernel.Term) -> Bool {
-  try @basics.aconv(parse_term(s), t) catch {
+  try same_term(parse_term(s), t) catch {
     _ => false
   }
 }

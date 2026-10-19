@@ -16,6 +16,8 @@ pub fn make_overloadable(String, @kernel.HolType) -> Unit raise
 
 pub fn new_type_abbrev(String, @kernel.HolType) -> Unit
 
+pub fn new_type_var() -> Pretype
+
 pub fn overload_interface(String, @kernel.Term) -> Unit raise
 
 pub fn override_interface(String, @kernel.Term) -> Unit raise
