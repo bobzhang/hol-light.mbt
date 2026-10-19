@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// SQRT_ELIM_TAC
 fn step_2() -> Unit raise {
-  let sqrt_tm = @parser.parse_term("sqrt:real->real")
+  let sqrt_tm = @term_syntax.parse_term("sqrt")
   let is_sqrt : (@kernel.Term) -> Bool raise = fn(x1 : @kernel.Term) -> Bool raise {
     let tm = x1
     (@kernel.is_comb(tm) && (@kernel.rator(tm) == sqrt_tm))
@@ -72,7 +72,7 @@ fn step_3() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@measure.measure_triangle()]))
   let t18 = @simp.rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def()]))
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t18), t19), t20), t21), t22), t23), t24), t25), t26), sqrt_elim_tac), t27), t28)
-  heron_c.set(@tactics.prove(@parser.parse_term("forall A B C:real^2.\n        let a = dist(C,B)\n        and b = dist(A,C)\n        and c = dist(B,A) in\n        let s = (a + b + c) / &2 in\n        measure(convex hull {A,B,C}) = sqrt(s * (s - a) * (s - b) * (s - c))"), t29))
+  heron_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], LET((a : Real) => (b : Real) => (c : Real) => LET_END(LET((s : Real) => LET_END(measure(hull(convex, INSERT(A, INSERT(B, INSERT(C, EMPTY))))) == sqrt(s * ((s - a) * ((s - b) * (s - c))))), (a + (b + c)) / real_of_num(2))), dist((C, B)), dist((A, C)), dist((B, A)))"), t29))
 }
 
 ///|
