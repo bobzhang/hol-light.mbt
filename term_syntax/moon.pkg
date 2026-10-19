@@ -4,6 +4,7 @@ import {
   "bobzhang/hol_light/basics",
   "bobzhang/hol_light/nums",
   "bobzhang/hol_light/preterm",
+  "bobzhang/hol_light/parser",
   "bobzhang/hol_light/printer",
   "bobzhang/hol_light/term_syntax/internal/grammar",
   "moonbitlang/core/list",
@@ -11,7 +12,6 @@ import {
 }
 
 import {
-  "bobzhang/hol_light/parser",
   "bobzhang/hol_light/lists",
   "bobzhang/hol_light/define",
 } for "test"

@@ -114,3 +114,27 @@ test "invented type variables print as holes" {
     #|INTER(INSERT((x : _), EMPTY), (s : (_) -> Bool)) == (if IN(x, s) { INSERT(x, EMPTY) } else { EMPTY })
   ))
 }
+
+///|
+test "comparisons are not chained" {
+  inspect(
+    show("forall x y z:num. (x + y = x + z) <=> (y = z)"),
+    content="∀ x : Num, ∀ y : Num, ∀ z : Num, (x + y == x + z) == (y == z)",
+  )
+}
+
+///|
+test "exact printing keeps bound variable names" {
+  let exact = fn(q : String) -> String raise {
+    try @term_syntax.print_term_exact(@parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    }
+  }
+  inspect(exact("forall n. n + 0 = n"), content="∀ n : Num, n + 0 == n")
+  // a set comprehension binds a generated GEN%PVAR%n, which theorems show
+  inspect(
+    exact("{n | n < 2}"),
+    content="unprintable: term whose bound variables the syntax renames",
+  )
+}
