@@ -7751,82 +7751,82 @@ Warning: inventing type variables
 0..0..3..6..12..19..39..93..151..222..315..408..515..638..769..902..1058..1214..1370..1561..1768..1975..2288..2671..3066..3529..4018..4507..5048..5619..6210..6962..7828..8698..9603..10526..11449..12463..13535..14607..solved at 14999
 0..0..3..6..12..19..39..93..151..222..315..408..515..638..769..902..1058..1214..1370..1561..1768..1975..2288..2671..3066..3529..4018..4507..5048..5619..6210..6962..7828..8698..9603..10526..11449..12460..13529..14598..solved at 14937
 100/realsuncountable quotations (78):
-  countable s <=> s <=_c (UNIV:num->bool)
+  (countable : ((_) -> Bool) -> Bool)((s : (_) -> Bool)) == (op_lt_eq_us_c : ((_) -> Bool, (Num) -> Bool) -> Bool)(s, UNIV)
   repeating = {s:num->bool | ?n. forall m. m >= n ==> s m}
-  forall n. nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) < 2 EXP (n + 1)
-  forall n. (nsum(0..n) (\\i. if b(i) then 2 EXP i else 0)) DIV (2 EXP (SUC n)) = 0
-  forall a b. ~(b = 0) ==> (a + b) MOD b = a MOD b
-  nsum(0..n) (\\i. if b(i) then 2 EXP i else 0)
-  forall n. (nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) + 2 EXP (SUC n))\n       DIV (2 EXP (SUC n)) = 1
-  \\x. x MOD (2 EXP (SUC n))
-  \\x. x DIV (2 EXP (SUC n))
-  i = SUC n
-  forall n. nsum(0..n) (\\i. if b(i) then 2 EXP i else 0) =\n       nsum(0..n) (\\i. if c(i) then 2 EXP i else 0)\n       ==> forall i. i <= n ==> (b(i) <=> c(i))
-  l:num = k
-  l = minimal n. forall m. m >= n ==> t m
-  k = minimal n. forall m. m >= n ==> s m
-  t:num->bool
-  s:num->bool
-  \\s:num->bool. let n = minimal n. forall m. m >= n ==> s m in\n                  n,nsum(0..n) (\\i. if s(i) then 2 EXP i else 0)
+  \226\136\128 n : Num, nsum(op_dot_dot(0, n), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }) < EXP(2, n + 1)
+  \226\136\128 n : Num, DIV(nsum(op_dot_dot(0, n), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }), EXP(2, SUC(n))) == 0
+  \226\136\128 a : Num, \226\136\128 b : Num, !(b == 0) \226\134\146 MOD(a + b, b) == MOD(a, b)
+  nsum(op_dot_dot(0, (n : Num)), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 })
+  \226\136\128 n : Num, DIV(nsum(op_dot_dot(0, n), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }) + EXP(2, SUC(n)), EXP(2, SUC(n))) == 1
+  (x : Num) => MOD(x, EXP(2, SUC((n : Num))))
+  (x : Num) => DIV(x, EXP(2, SUC((n : Num))))
+  (i : Num) == SUC((n : Num))
+  \226\136\128 n : Num, nsum(op_dot_dot(0, n), (i : Num) => if (b : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }) == nsum(op_dot_dot(0, n), (i : Num) => if (c : (Num) -> Bool)(i) { EXP(2, i) } else { 0 }) \226\134\146 (\226\136\128 i : Num, i <= n \226\134\146 b(i) == c(i))
+  (l : Num) == (k : Num)
+  (l : Num) == minimal((n : Num) => \226\136\128 m : Num, m >= n \226\134\146 (t : (Num) -> Bool)(m))
+  (k : Num) == minimal((n : Num) => \226\136\128 m : Num, m >= n \226\134\146 (s : (Num) -> Bool)(m))
+  (t : (Num) -> Bool)
+  (s : (Num) -> Bool)
+  (s : (Num) -> Bool) => LET((n : Num) => LET_END((n, nsum(op_dot_dot(0, n), (i : Num) => if s(i) { EXP(2, i) } else { 0 }))), minimal((n : Num) => \226\136\128 m : Num, m >= n \226\134\146 s(m)))
   (UNIV:num->bool) *_c (UNIV:num->bool)
-  countable repeating
+  countable(repeating)
   canonical = {s:num->bool | forall n. ?m. m >= n /\\ ~(s m)}
   (UNIV:num->bool) +_c (UNIV:num->bool)
-  canonical +_c repeating
-  canonical UNION repeating = UNIV
+  op_plus_us_c(canonical, repeating)
+  UNION(canonical, repeating) == UNIV
   repeating
   canonical
   :A
   :num
-  ~countable canonical
-  forall m n. &0 <= sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0)
-  x <= a ==> a + y <= b ==> x + y <= b
-  &0 <= y /\\ x + y <= a ==> x + (if b then y else &0) <= a
-  forall s m n. sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0)\n             <= &2 / &2 pow m - &2 / &2 pow (m + n)
-  &0 <= x ==> a + x >= a
-  n:num
-  a - x < a <=> &0 < x
-  &0 <= x /\\ a < b ==> x <= a ==> abs x < b
-  n:num
+  !countable(canonical)
+  \226\136\128 m : Num, \226\136\128 n : Num, real_of_num(0) <= sum((m, n), (i : Num) => if (s : (Num) -> Bool)(i) { inv(pow(real_of_num(2), i)) } else { real_of_num(0) })
+  (x : Real) <= (a : Real) \226\134\146 a + (y : Real) <= (b : Real) \226\134\146 x + y <= b
+  real_of_num(0) <= (y : Real) && (x : Real) + y <= (a : Real) \226\134\146 x + (if (b : Bool) { y } else { real_of_num(0) }) <= a
+  \226\136\128 s : (Num) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, sum((m, n), (i : Num) => if s(i) { inv(pow(real_of_num(2), i)) } else { real_of_num(0) }) <= real_of_num(2) / pow(real_of_num(2), m) - real_of_num(2) / pow(real_of_num(2), m + n)
+  real_of_num(0) <= (x : Real) \226\134\146 (a : Real) + x >= a
+  (n : Num)
+  ((a : Real) - (x : Real) < a) == (real_of_num(0) < x)
+  real_of_num(0) <= (x : Real) && (a : Real) < (b : Real) \226\134\146 x <= a \226\134\146 abs(x) < b
+  (n : Num)
   0
-  s:num->bool
-  n:num
+  (s : (Num) -> Bool)
+  (n : Num)
   0
-  &2
-  forall s. summable (\\i. if s(i) then inv(&2 pow i) else &0)
-  forall s. (\\i. if s(i) then inv(&2 pow i) else &0) sums\n       (suminf (\\i. if s(i) then inv(&2 pow i) else &0))
-  &0 <= b ==> x <= a - b ==> x <= a
-  forall s m n. sum(m,n) (\\i. if s(i) then inv(&2 pow i) else &0) <= &2 / &2 pow m
-  &0 < inv(x) ==> inv(x) < &2 / x
-  a = b /\\ d < c ==> a - c < b - d
-  &2 / &2 pow (n + 1) - &2 / &2 pow ((n + 1) + r)
-  a = b /\\ c < e - d ==> (a + c) + d < b + e
-  r:num
-  &2 / &2 pow (m + 1)
-  p = 0 \\/ p = 1 + PRE p
-  p:num
-  r:num
-  m:num
-  \\k:num. sum(0,m) (\\n. if s n then inv(&2 pow n) else &0) +\n               inv(&2 pow m)
-  \\n:num. sum(0,n) (\\n. if s n then inv (&2 pow n) else &0)
-  sum(0,m) (\\n. if s n then inv (&2 pow n) else &0) + inv(&2 pow m)
-  m:num
-  n + 1
-  forall n:num. ?m. m >= n /\\ ~s m
-  m:num
-  n + 1
-  \\n:num. sum(0,n) (\\n. if t n then inv (&2 pow n) else &0)
-  \\k:num. sum(0,n+1) (\\n. if t n then inv (&2 pow n) else &0)
-  sum(0,n+1) (\\n. if t n then inv (&2 pow n) else &0)
-  forall s t n. ~(s n) /\\ t n /\\\n           (forall m. m < n ==> (s(m) <=> t(m))) /\\\n           (forall n. ?m. m >= n /\\ ~(s m))\n           ==> suminf(\\n. if s n then inv (&2 pow n) else &0)\n                < suminf(\\n. if t n then inv (&2 pow n) else &0)
-  a < b ==> a = b ==> F
-  b < a ==> a = b ==> F
-  (t:num->bool) n
-  n = minimal x. ~(s x <=> t x)
-  (forall x. P x) <=> ~(?x. ~P x)
-  t:num->bool
-  s:num->bool
-  \\s. suminf(\\n. if s(n) then inv(&2 pow n) else &0)
+  real_of_num(2)
+  \226\136\128 s : (Num) -> Bool, summable((i : Num) => if s(i) { inv(pow(real_of_num(2), i)) } else { real_of_num(0) })
+  \226\136\128 s : (Num) -> Bool, sums((i : Num) => if s(i) { inv(pow(real_of_num(2), i)) } else { real_of_num(0) }, suminf((i : Num) => if s(i) { inv(pow(real_of_num(2), i)) } else { real_of_num(0) }))
+  real_of_num(0) <= (b : Real) \226\134\146 (x : Real) <= (a : Real) - b \226\134\146 x <= a
+  \226\136\128 s : (Num) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, sum((m, n), (i : Num) => if s(i) { inv(pow(real_of_num(2), i)) } else { real_of_num(0) }) <= real_of_num(2) / pow(real_of_num(2), m)
+  real_of_num(0) < inv((x : Real)) \226\134\146 inv(x) < real_of_num(2) / x
+  (a : Real) == (b : Real) && (d : Real) < (c : Real) \226\134\146 a - c < b - d
+  real_of_num(2) / pow(real_of_num(2), (n : Num) + 1) - real_of_num(2) / pow(real_of_num(2), n + 1 + (r : Num))
+  (a : Real) == (b : Real) && (c : Real) < (e : Real) - (d : Real) \226\134\146 a + c + d < b + e
+  (r : Num)
+  real_of_num(2) / pow(real_of_num(2), (m : Num) + 1)
+  (p : Num) == 0 || p == 1 + PRE(p)
+  (p : Num)
+  (r : Num)
+  (m : Num)
+  (k : Num) => sum((0, (m : Num)), (n : Num) => if (s : (Num) -> Bool)(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) }) + inv(pow(real_of_num(2), m))
+  (n : Num) => sum((0, n), (n : Num) => if (s : (Num) -> Bool)(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
+  sum((0, (m : Num)), (n : Num) => if (s : (Num) -> Bool)(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) }) + inv(pow(real_of_num(2), m))
+  (m : Num)
+  (n : Num) + 1
+  \226\136\128 n : Num, \226\136\131 m : Num, m >= n && !(s : (Num) -> Bool)(m)
+  (m : Num)
+  (n : Num) + 1
+  (n : Num) => sum((0, n), (n : Num) => if (t : (Num) -> Bool)(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
+  (k : Num) => sum((0, (n : Num) + 1), (n : Num) => if (t : (Num) -> Bool)(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
+  sum((0, (n : Num) + 1), (n : Num) => if (t : (Num) -> Bool)(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
+  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 n : Num, !s(n) && t(n) && (\226\136\128 m : Num, m < n \226\134\146 s(m) == t(m)) && (\226\136\128 n : Num, \226\136\131 m : Num, m >= n && !s(m)) \226\134\146 suminf((n : Num) => if s(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) }) < suminf((n : Num) => if t(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
+  (a : Real) < (b : Real) \226\134\146 a == b \226\134\146 false
+  (b : Real) < (a : Real) \226\134\146 a == b \226\134\146 false
+  (t : (Num) -> Bool)((n : Num))
+  (n : Num) == minimal((x : Num) => !((s : (Num) -> Bool)(x) == (t : (Num) -> Bool)(x)))
+  (\226\136\128 x : _, (P : (_) -> Bool)(x)) == !(\226\136\131 x : _, !P(x))
+  (t : (Num) -> Bool)
+  (s : (Num) -> Bool)
+  (s : (Num) -> Bool) => suminf((n : Num) => if s(n) { inv(pow(real_of_num(2), n)) } else { real_of_num(0) })
   UNIV:real->bool
   ~countable(UNIV:real->bool)
 countable =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#=:fun(bool,fun(bool,bool)) (#countable:fun(fun('?1,bool),bool) s:fun('?1,bool))) ((#<=_c:fun(fun('?1,bool),fun(fun(num,bool),bool)) s:fun('?1,bool)) #UNIV:fun(num,bool)))))

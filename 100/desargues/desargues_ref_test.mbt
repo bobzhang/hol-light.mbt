@@ -106649,79 +106649,79 @@ test "100/desargues matches 100/desargues.ml" {
       #|6 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|100/desargues quotations (73):
-      #|  CARD {u:real^3,v}
-      #|  {u:real^3,v}
-      #|  forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
-      #|  ?x:real^3. ~(x = vec 0)
+      #|  CARD(INSERT((u : Cart[Real, Tybit1[Unit]]), INSERT((v : Cart[Real, Tybit1[Unit]]), EMPTY)))
+      #|  INSERT((u : Cart[Real, Tybit1[Unit]]), INSERT((v : Cart[Real, Tybit1[Unit]]), EMPTY))
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\131 w : Cart[Real, Tybit1[Unit]], !(w == vec(0)) && orthogonal(u, w) && orthogonal(v, w)
+      #|  \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0))
       #|  x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
       #|  x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
-      #|  ((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
-      #|  (forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)
-      #|  forall x y. ((||) x = (||) y) <=> x || y
-      #|  p':real^3
-      #|  p:real^3
-      #|  forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
-      #|  forall l l'. ?p. p _|_ l /\\ p _|_ l'
+      #|  (\226\136\128 x : Direction, (P : (Cart[Real, Tybit1[Unit]]) -> Bool)(dest_dir(x))) == (\226\136\128 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) \226\134\146 P(x)) && (\226\136\131 x : Direction, P(dest_dir(x))) == (\226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && P(x))
+      #|  (\226\136\128 x : Direction, op_bar_bar(x, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, op_bar_bar(x, y) == op_bar_bar(y, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 z : Direction, op_bar_bar(x, y) && op_bar_bar(y, z) \226\134\146 op_bar_bar(x, z))
+      #|  \226\136\128 x : Direction, \226\136\128 y : Direction, (op_bar_bar(x) == op_bar_bar(y)) == op_bar_bar(x, y)
+      #|  (p' : Cart[Real, Tybit1[Unit]])
+      #|  (p : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 p : Direction, \226\136\128 p' : Direction, !op_bar_bar(p, p') \226\134\146 (\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && (\226\136\128 l' : Direction, op_us_bar_us(p, l') && op_us_bar_us(p', l') \226\134\146 op_bar_bar(l', l)))
+      #|  \226\136\128 l : Direction, \226\136\128 l' : Direction, \226\136\131 p : Direction, op_us_bar_us(p, l) && op_us_bar_us(p, l')
       #|  basis 3 :real^3
       #|  basis 2 : real^3
       #|  basis 1 :real^3
-      #|  ?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)
-      #|  orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)
-      #|  forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
-      #|  a + b:real^3
-      #|  forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
-      #|  forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
-      #|  (||)
-      #|  forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
-      #|  ?x:line. T
-      #|  p on l <=> perpl (dest_point p) l
-      #|  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
-      #|  forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)
-      #|  forall l l'. ?p. p on l /\\ p on l'
-      #|  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)
-      #|  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
-      #|  projl x = mk_line((||) (mk_dir x))
-      #|  projp x = mk_point(projl x)
-      #|  dest_dir d
-      #|  ?d. l = mk_line((||) d)
-      #|  forall l. ?x. ~(x = vec 0) /\\ l = projl x
-      #|  forall p. ?x. ~(x = vec 0) /\\ p = projp x
-      #|  homop p = homol(dest_point p)
-      #|  p = mk_point l <=> dest_point p = l
-      #|  forall p. ~(homop p = vec 0) /\\ p = projp(homop p)
-      #|  parallel x y <=> x cross y = vec 0
-      #|  forall p l. p on l <=> orthogonal (homop p) (homol l)
-      #|  mk_line((||) l) = mk_line((||) l') <=> (||) l = (||) l'
-      #|  forall l l'. l = l' <=> parallel (homol l) (homol l')
-      #|  forall p p'. p = p' <=> parallel (homop p) (homop p')
-      #|  dest_line(mk_line((||) l)) = (||) l
+      #|  \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && !(\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l))
+      #|  orthogonal(cross((l : Cart[Real, Tybit1[Unit]]), basis(1)), l) && orthogonal(cross(l, basis(2)), l) && !(cross(cross(l, basis(1)), cross(l, basis(2))) == vec(0)) || orthogonal(cross(l, basis(1)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(1)), cross(l, basis(3))) == vec(0)) || orthogonal(cross(l, basis(2)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(2)), cross(l, basis(3))) == vec(0))
+      #|  \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, !op_bar_bar(p, p') && op_us_bar_us(p, l) && op_us_bar_us(p', l)
+      #|  (a : Cart[Real, Tybit1[Unit]]) + (b : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 x : Direction, \226\136\128 a : Direction, \226\136\128 b : Direction, op_us_bar_us(a, x) && op_us_bar_us(b, x) && !op_bar_bar(a, b) \226\134\146 (\226\136\131 c : Direction, op_us_bar_us(c, x) && !op_bar_bar(a, c) && !op_bar_bar(b, c))
+      #|  \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l)
+      #|  op_bar_bar
+      #|  \226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 x' : Direction, \226\136\128 y' : Direction, op_bar_bar(x, x') && op_bar_bar(y, y') \226\134\146 op_us_bar_us(x, y) == op_us_bar_us(x', y')
+      #|  \226\136\131 x : Line, true
+      #|  (on : (Point, Line) -> Bool)((p : Point), (l : Line)) == perpl(dest_point(p), l)
+      #|  ((p : Point) == (p' : Point)) == (dest_point(p) == dest_point(p')) && (\226\136\128 p : Point, (P : (Line) -> Bool)(dest_point(p))) == (\226\136\128 l : Line, P(l)) && (\226\136\131 p : Point, P(dest_point(p))) == (\226\136\131 l : Line, P(l))
+      #|  \226\136\128 p : Point, \226\136\128 p' : Point, !(p == p') \226\134\146 (\226\136\131 l : Line, on(p, l) && on(p', l) && (\226\136\128 l' : Line, on(p, l') && on(p', l') \226\134\146 l' == l))
+      #|  \226\136\128 l : Line, \226\136\128 l' : Line, \226\136\131 p : Point, on(p, l) && on(p, l')
+      #|  \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && !(\226\136\131 l : Line, on(p, l) && on(p', l) && on(p'', l))
+      #|  \226\136\128 l : Line, \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && on(p, l) && on(p', l) && on(p'', l)
+      #|  (projl : (Cart[Real, Tybit1[Unit]]) -> Line)((x : Cart[Real, Tybit1[Unit]])) == mk_line(op_bar_bar(mk_dir(x)))
+      #|  (projp : (Cart[Real, Tybit1[Unit]]) -> Point)((x : Cart[Real, Tybit1[Unit]])) == mk_point(projl(x))
+      #|  dest_dir((d : Direction))
+      #|  \226\136\131 d : Direction, (l : Line) == mk_line(op_bar_bar(d))
+      #|  \226\136\128 l : Line, \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && l == projl(x)
+      #|  \226\136\128 p : Point, \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && p == projp(x)
+      #|  (homop : (Point) -> Cart[Real, Tybit1[Unit]])((p : Point)) == homol(dest_point(p))
+      #|  ((p : Point) == mk_point((l : Line))) == (dest_point(p) == l)
+      #|  \226\136\128 p : Point, !(homop(p) == vec(0)) && p == projp(homop(p))
+      #|  (parallel : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]])) == (cross(x, y) == vec(0))
+      #|  \226\136\128 p : Point, \226\136\128 l : Line, on(p, l) == orthogonal(homop(p), homol(l))
+      #|  (mk_line(op_bar_bar((l : Direction))) == mk_line(op_bar_bar((l' : Direction)))) == (op_bar_bar(l) == op_bar_bar(l'))
+      #|  \226\136\128 l : Line, \226\136\128 l' : Line, (l == l') == parallel(homol(l), homol(l'))
+      #|  \226\136\128 p : Point, \226\136\128 p' : Point, (p == p') == parallel(homop(p), homop(p'))
+      #|  dest_line(mk_line(op_bar_bar((l : Direction)))) == op_bar_bar(l)
       #|  dest_line
-      #|  projl x
-      #|  x:real^3 = vec 0
-      #|  forall x. parallel x (homol(projl x))
-      #|  forall x. parallel x (homop(projp x))
-      #|  c = &0
-      #|  c:real
-      #|  x:real^3 = vec 0
-      #|  forall x. ~(x = vec 0) ==> ?a. ~(a = &0) /\\ homop(projp x) = a % x
-      #|  bracket[a;b;c] = det(vector[homop a;homop b;homop c])
-      #|  COLLINEAR s <=> ?l. forall p. p IN s ==> p on l
-      #|  forall a. COLLINEAR {a}
-      #|  a:point = b
-      #|  forall a b. COLLINEAR{a,b}
-      #|  forall a b c. COLLINEAR{a,b,c} <=> ?l. a on l /\\ b on l /\\ c on l
-      #|  forall a b c x y.\n          x cross y = vec 0 /\\ ~(x = vec 0) /\\\n          orthogonal a x /\\ orthogonal b x /\\ orthogonal c x\n          ==> orthogonal a y /\\ orthogonal b y /\\ orthogonal c y
-      #|  homop p1 cross homop p2
-      #|  mk_line((||) (mk_dir(homop p1 cross homop p2)))
-      #|  p1:point = p2
-      #|  forall p1 p2 p3. COLLINEAR {p1,p2,p3} <=> bracket[p1;p2;p3] = &0
-      #|  bracket[x;y;z] = --bracket[x;z;y] /\\\n   bracket[x;y;z] = bracket[y;z;x] /\\\n   bracket[x;y;z] = bracket[z;x;y]
-      #|  bracket[B;Q;S] * bracket[A';R;S] =\n              bracket[B;R;S] * bracket[A';Q;S]
-      #|  forall b. (a ==> b) /\\ (b ==> c) ==> a ==> c
-      #|  a = b /\\ x:real = y ==> a * x = b * y
-      #|  (c ==> d ==> b ==> e) ==> ((a ==> b) /\\ c ==> a /\\ d ==> e)
-      #|  (bracket[P;A';A] = &0\n     ==> bracket[P;A';R] * bracket[P;A;C] =\n         bracket[P;A';C] * bracket[P;A;R]) /\\\n    (bracket[P;B;B'] = &0\n     ==> bracket[P;B;Q] * bracket[P;B';C'] =\n         bracket[P;B;C'] * bracket[P;B';Q]) /\\\n    (bracket[P;C';C] = &0\n     ==> bracket[P;C';B] * bracket[P;C;A'] =\n         bracket[P;C';A'] * bracket[P;C;B]) /\\\n    (bracket[B;C;Q] = &0\n     ==> bracket[B;C;P] * bracket[B;Q;S] =\n         bracket[B;C;S] * bracket[B;Q;P]) /\\\n    (bracket[B';C';Q] = &0\n     ==> bracket[B';C';A'] * bracket[B';Q;P] =\n         bracket[B';C';P] * bracket[B';Q;A']) /\\\n    (bracket[A;R;C] = &0\n     ==> bracket[A;R;P] * bracket[A;C;B] =\n         bracket[A;R;B] * bracket[A;C;P]) /\\\n    (bracket[A';C';R] = &0\n     ==> bracket[A';C';P] * bracket[A';R;S] =\n         bracket[A';C';S] * bracket[A';R;P]) /\\\n    (bracket[B;S;A] = &0\n     ==> bracket[B;S;C] * bracket[B;A;R] =\n         bracket[B;S;R] * bracket[B;A;C]) /\\\n    (bracket[A';S;B'] = &0\n     ==> bracket[A';S;C'] * bracket[A';B';Q] =\n         bracket[A';S;Q] * bracket[A';B';C'])
-      #|  ~COLLINEAR {A',B,S} /\\\n   ~COLLINEAR {A,P,C} /\\\n   ~COLLINEAR {A,P,R} /\\\n   ~COLLINEAR {A,C,B} /\\\n   ~COLLINEAR {A,B,R} /\\\n   ~COLLINEAR {C',P,A'} /\\\n   ~COLLINEAR {C',P,B} /\\\n   ~COLLINEAR {C',P,B'} /\\\n   ~COLLINEAR {C',A',S} /\\\n   ~COLLINEAR {C',A',B'} /\\\n   ~COLLINEAR {P,C,A'} /\\\n   ~COLLINEAR {P,C,B} /\\\n   ~COLLINEAR {P,A',R} /\\\n   ~COLLINEAR {P,B,Q} /\\\n   ~COLLINEAR {P,Q,B'} /\\\n   ~COLLINEAR {C,B,S} /\\\n   ~COLLINEAR {A',Q,B'}\n   ==> COLLINEAR {P,A',A} /\\\n       COLLINEAR {P,B,B'} /\\\n       COLLINEAR {P,C',C} /\\\n       COLLINEAR {B,C,Q} /\\\n       COLLINEAR {B',C',Q} /\\\n       COLLINEAR {A,R,C} /\\\n       COLLINEAR {A',C',R} /\\\n       COLLINEAR {B,S,A} /\\\n       COLLINEAR {A',S,B'}\n       ==> COLLINEAR {Q,S,R}
+      #|  projl((x : Cart[Real, Tybit1[Unit]]))
+      #|  (x : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], parallel(x, homol(projl(x)))
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], parallel(x, homop(projp(x)))
+      #|  (c : Real) == real_of_num(0)
+      #|  (c : Real)
+      #|  (x : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) \226\134\146 (\226\136\131 a : Real, !(a == real_of_num(0)) && homop(projp(x)) == op_pct(a, x))
+      #|  (bracket : (List[Point]) -> Real)([(a : Point), (b : Point), (c : Point)]) == det(vector([homop(a), homop(b), homop(c)]))
+      #|  (COLLINEAR : ((Point) -> Bool) -> Bool)((s : (Point) -> Bool)) == (\226\136\131 l : Line, \226\136\128 p : Point, IN(p, s) \226\134\146 on(p, l))
+      #|  \226\136\128 a : Point, COLLINEAR(INSERT(a, EMPTY))
+      #|  (a : Point) == (b : Point)
+      #|  \226\136\128 a : Point, \226\136\128 b : Point, COLLINEAR(INSERT(a, INSERT(b, EMPTY)))
+      #|  \226\136\128 a : Point, \226\136\128 b : Point, \226\136\128 c : Point, COLLINEAR(INSERT(a, INSERT(b, INSERT(c, EMPTY)))) == (\226\136\131 l : Line, on(a, l) && on(b, l) && on(c, l))
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], \226\136\128 c : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], cross(x, y) == vec(0) && !(x == vec(0)) && orthogonal(a, x) && orthogonal(b, x) && orthogonal(c, x) \226\134\146 orthogonal(a, y) && orthogonal(b, y) && orthogonal(c, y)
+      #|  cross(homop((p1 : Point)), homop((p2 : Point)))
+      #|  mk_line(op_bar_bar(mk_dir(cross(homop((p1 : Point)), homop((p2 : Point))))))
+      #|  (p1 : Point) == (p2 : Point)
+      #|  \226\136\128 p1 : Point, \226\136\128 p2 : Point, \226\136\128 p3 : Point, COLLINEAR(INSERT(p1, INSERT(p2, INSERT(p3, EMPTY)))) == (bracket([p1, p2, p3]) == real_of_num(0))
+      #|  bracket([(x : Point), (y : Point), (z : Point)]) == -bracket([x, z, y]) && bracket([x, y, z]) == bracket([y, z, x]) && bracket([x, y, z]) == bracket([z, x, y])
+      #|  bracket([(B : Point), (Q : Point), (S : Point)]) * bracket([(A' : Point), (R : Point), S]) == bracket([B, R, S]) * bracket([A', Q, S])
+      #|  \226\136\128 b : Bool, ((a : Bool) \226\134\146 b) && (b \226\134\146 (c : Bool)) \226\134\146 a \226\134\146 c
+      #|  (a : Real) == (b : Real) && (x : Real) == (y : Real) \226\134\146 a * x == b * y
+      #|  ((c : Bool) \226\134\146 (d : Bool) \226\134\146 (b : Bool) \226\134\146 (e : Bool)) \226\134\146 ((a : Bool) \226\134\146 b) && c \226\134\146 a && d \226\134\146 e
+      #|  (bracket([(P : Point), (A' : Point), (A : Point)]) == real_of_num(0) \226\134\146 bracket([P, A', (R : Point)]) * bracket([P, A, (C : Point)]) == bracket([P, A', C]) * bracket([P, A, R])) && (bracket([P, (B : Point), (B' : Point)]) == real_of_num(0) \226\134\146 bracket([P, B, (Q : Point)]) * bracket([P, B', (C' : Point)]) == bracket([P, B, C']) * bracket([P, B', Q])) && (bracket([P, C', C]) == real_of_num(0) \226\134\146 bracket([P, C', B]) * bracket([P, C, A']) == bracket([P, C', A']) * bracket([P, C, B])) && (bracket([B, C, Q]) == real_of_num(0) \226\134\146 bracket([B, C, P]) * bracket([B, Q, (S : Point)]) == bracket([B, C, S]) * bracket([B, Q, P])) && (bracket([B', C', Q]) == real_of_num(0) \226\134\146 bracket([B', C', A']) * bracket([B', Q, P]) == bracket([B', C', P]) * bracket([B', Q, A'])) && (bracket([A, R, C]) == real_of_num(0) \226\134\146 bracket([A, R, P]) * bracket([A, C, B]) == bracket([A, R, B]) * bracket([A, C, P])) && (bracket([A', C', R]) == real_of_num(0) \226\134\146 bracket([A', C', P]) * bracket([A', R, S]) == bracket([A', C', S]) * bracket([A', R, P])) && (bracket([B, S, A]) == real_of_num(0) \226\134\146 bracket([B, S, C]) * bracket([B, A, R]) == bracket([B, S, R]) * bracket([B, A, C])) && (bracket([A', S, B']) == real_of_num(0) \226\134\146 bracket([A', S, C']) * bracket([A', B', Q]) == bracket([A', S, Q]) * bracket([A', B', C']))
+      #|  !COLLINEAR(INSERT((A' : Point), INSERT((B : Point), INSERT((S : Point), EMPTY)))) && !COLLINEAR(INSERT((A : Point), INSERT((P : Point), INSERT((C : Point), EMPTY)))) && !COLLINEAR(INSERT(A, INSERT(P, INSERT((R : Point), EMPTY)))) && !COLLINEAR(INSERT(A, INSERT(C, INSERT(B, EMPTY)))) && !COLLINEAR(INSERT(A, INSERT(B, INSERT(R, EMPTY)))) && !COLLINEAR(INSERT((C' : Point), INSERT(P, INSERT(A', EMPTY)))) && !COLLINEAR(INSERT(C', INSERT(P, INSERT(B, EMPTY)))) && !COLLINEAR(INSERT(C', INSERT(P, INSERT((B' : Point), EMPTY)))) && !COLLINEAR(INSERT(C', INSERT(A', INSERT(S, EMPTY)))) && !COLLINEAR(INSERT(C', INSERT(A', INSERT(B', EMPTY)))) && !COLLINEAR(INSERT(P, INSERT(C, INSERT(A', EMPTY)))) && !COLLINEAR(INSERT(P, INSERT(C, INSERT(B, EMPTY)))) && !COLLINEAR(INSERT(P, INSERT(A', INSERT(R, EMPTY)))) && !COLLINEAR(INSERT(P, INSERT(B, INSERT((Q : Point), EMPTY)))) && !COLLINEAR(INSERT(P, INSERT(Q, INSERT(B', EMPTY)))) && !COLLINEAR(INSERT(C, INSERT(B, INSERT(S, EMPTY)))) && !COLLINEAR(INSERT(A', INSERT(Q, INSERT(B', EMPTY)))) \226\134\146 COLLINEAR(INSERT(P, INSERT(A', INSERT(A, EMPTY)))) && COLLINEAR(INSERT(P, INSERT(B, INSERT(B', EMPTY)))) && COLLINEAR(INSERT(P, INSERT(C', INSERT(C, EMPTY)))) && COLLINEAR(INSERT(B, INSERT(C, INSERT(Q, EMPTY)))) && COLLINEAR(INSERT(B', INSERT(C', INSERT(Q, EMPTY)))) && COLLINEAR(INSERT(A, INSERT(R, INSERT(C, EMPTY)))) && COLLINEAR(INSERT(A', INSERT(C', INSERT(R, EMPTY)))) && COLLINEAR(INSERT(B, INSERT(S, INSERT(A, EMPTY)))) && COLLINEAR(INSERT(A', INSERT(S, INSERT(B', EMPTY)))) \226\134\146 COLLINEAR(INSERT(Q, INSERT(S, INSERT(R, EMPTY))))
       #|NORMAL_EXISTS =  |- (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\u:cart(real,tybit1(1)). (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\v:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\w:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) w:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) u:cart(real,tybit1(1))) w:cart(real,tybit1(1)))) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) v:cart(real,tybit1(1))) w:cart(real,tybit1(1)))))))))))
       #|direction_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(direction,bool),bool) (\a:direction. ((#=:fun(direction,fun(direction,bool)) (#mk_dir:fun(cart(real,tybit1(1)),direction) (#dest_dir:fun(direction,cart(real,tybit1(1))) a:direction))) a:direction)))) (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\r:cart(real,tybit1(1)). ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) r:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) (#mk_dir:fun(cart(real,tybit1(1)),direction) r:cart(real,tybit1(1))))) r:cart(real,tybit1(1)))))))
       #|perpdir =  |- (#forall:fun(fun(direction,bool),bool) (\x:direction. (#forall:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#_|_:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction)))))))
