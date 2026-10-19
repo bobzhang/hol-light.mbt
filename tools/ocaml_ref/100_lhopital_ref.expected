@@ -5662,88 +5662,88 @@ Generating HOL version of proof
 0..0..1..2..solved at 6
 0..0..0..0..solved at 4
 100/lhopital quotations (82):
-  (tends_real_real)
-  z:real
-  \\x:real. f(x) * (g(b) - g(a)) - g(x) * (f(b) - f(a))
-  g':real
-  f':real
-  g':real
-  f':real
-  z:real
-  forall x. a < x /\\ x < b ==> f differentiable x /\\ g differentiable x
-  l = &0
-  l:real
-  (fb * (gb - ga) - gb * (fb - fa)) -\n    (fa * (gb - ga) - ga * (fb - fa)) = y <=> y = &0
-  z:real
-  f' * (g(b:real) - g a) - g' * (f b - f a)
-  g':real
-  f':real
-  x:real
-  b:real
-  a:real
-  \\x:real. f(x) * (g(b) - g(a)) - g(x) * (f(b) - f(a))
-  forall f g a b.\n        a < b /\\\n        (forall x. a <= x /\\ x <= b ==> f contl x /\\ g contl x) /\\\n        (forall x. a < x /\\ x < b ==> f differentiable x /\\ g differentiable x)\n        ==> ?z f' g'. a < z /\\ z < b /\\ (f diffl f') z /\\ (g diffl g') z /\\\n                      (f b - f a) * g' = (g b - g a) * f'
-  w:real
-  w:real
-  x < z /\\ z < c /\\ abs(x - c) < d\n        ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  x <= z /\\ z < c /\\ z < c /\\ abs(x - c) < d\n        ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  c:real
-  x:real
-  g:real->real
-  w:real
-  w:real
-  c < z /\\ z < x /\\ abs(x - c) < d\n        ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  c < z /\\ z <= x /\\ abs(x - c) < d\n        ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  x:real
-  c:real
-  g:real->real
-  &0 < abs(x - c) ==> c < x \\/ x < c
-  &0 < abs(x - c)
-  ~(gz = &0) /\\ ~(gx = &0) /\\ fx * gz = fz * gx ==> fz / gz = fx / gx
-  x = y ==> abs(x - l) < e ==> abs(y - l) < e
-  z:real
-  z:real
-  x:real
-  forall x. &0 < abs(x - c) /\\ abs(x - c) < r ==> abs(f' x / g' x - L) < e
-  x:real
-  k:real
-  r:real
-  d:real
-  r:real
-  e:real
-  ((\\x. f' x / g' x) --> L) c
-  e:real
-  c - d < x /\\ x < z /\\ z < c\n          ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  c - d < x /\\ x <= z /\\ z < c ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  c:real
-  x:real
-  g:real->real
-  f:real->real
-  c < z /\\ z < x /\\ x < c + d ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  c < z /\\ z <= x /\\ x < c + d ==> &0 < abs(z - c) /\\ abs(z - c) < d
-  x:real
-  c:real
-  g:real->real
-  f:real->real
-  &0 < abs(x - c) /\\ abs(x - c) < d\n      ==> c < x /\\ x < c + d \\/ c - d < x /\\ x < c
-  x:real
-  forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n        ==> ?z. &0 < abs(z - c) /\\ abs(z - c) < abs(x - c) /\\\n                f(x) * g'(z) = f'(z) * g(x)
-  forall f g f' g' c L d.\n        &0 < d /\\\n        (forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f diffl f'(x)) x /\\ (g diffl g'(x)) x /\\ ~(g'(x) = &0)) /\\\n        f(c) = &0 /\\ g(c) = &0 /\\ (f --> &0) c /\\ (g --> &0) c /\\\n        ((\\x. f'(x) / g'(x)) --> L) c\n        ==> ((\\x. f(x) / g(x)) --> L) c
-  &0 < abs(x - c) /\\ &0 < abs z /\\ abs z < abs(x - c) ==> ~(x + z = c)
-  abs(x - c)
-  e:real
-  &0 < abs(x - c) ==> ~(x = c)
-  \\h. (g(x + h) - g x) / h
-  \\h. (f(x + h) - f x) / h
-  &0 < abs(x - c) ==> ~(x = c)
-  d:real
-  L:real
-  c:real
-  g':real->real
-  f':real->real
-  \\x:real. if x = c then &0 else g(x)
-  \\x:real. if x = c then &0 else f(x)
-  forall f g f' g' c L d.\n        &0 < d /\\\n        (forall x. &0 < abs(x - c) /\\ abs(x - c) < d\n             ==> (f diffl f'(x)) x /\\ (g diffl g'(x)) x /\\ ~(g'(x) = &0)) /\\\n        (f --> &0) c /\\ (g --> &0) c /\\ ((\\x. f'(x) / g'(x)) --> L) c\n        ==> ((\\x. f(x) / g(x)) --> L) c
+  tends_real_real
+  (z : Real)
+  (x : Real) => (f : (Real) -> Real)(x) * ((g : (Real) -> Real)((b : Real)) - g((a : Real))) - g(x) * (f(b) - f(a))
+  (g' : Real)
+  (f' : Real)
+  (g' : Real)
+  (f' : Real)
+  (z : Real)
+  \226\136\128 x : Real, (a : Real) < x && x < (b : Real) \226\134\146 differentiable((f : (Real) -> Real), x) && differentiable((g : (Real) -> Real), x)
+  (l : Real) == real_of_num(0)
+  (l : Real)
+  ((fb : Real) * ((gb : Real) - (ga : Real)) - gb * (fb - (fa : Real)) - (fa * (gb - ga) - ga * (fb - fa)) == (y : Real)) == (y == real_of_num(0))
+  (z : Real)
+  (f' : Real) * ((g : (Real) -> Real)((b : Real)) - g((a : Real))) - (g' : Real) * ((f : (Real) -> Real)(b) - f(a))
+  (g' : Real)
+  (f' : Real)
+  (x : Real)
+  (b : Real)
+  (a : Real)
+  (x : Real) => (f : (Real) -> Real)(x) * ((g : (Real) -> Real)((b : Real)) - g((a : Real))) - g(x) * (f(b) - f(a))
+  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a < b && (\226\136\128 x : Real, a <= x && x <= b \226\134\146 contl(f, x) && contl(g, x)) && (\226\136\128 x : Real, a < x && x < b \226\134\146 differentiable(f, x) && differentiable(g, x)) \226\134\146 (\226\136\131 z : Real, \226\136\131 f' : Real, \226\136\131 g' : Real, a < z && z < b && diffl(f, f', z) && diffl(g, g', z) && (f(b) - f(a)) * g' == (g(b) - g(a)) * f')
+  (w : Real)
+  (w : Real)
+  (x : Real) < (z : Real) && z < (c : Real) && abs(x - c) < (d : Real) \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (x : Real) <= (z : Real) && z < (c : Real) && z < c && abs(x - c) < (d : Real) \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (c : Real)
+  (x : Real)
+  (g : (Real) -> Real)
+  (w : Real)
+  (w : Real)
+  (c : Real) < (z : Real) && z < (x : Real) && abs(x - c) < (d : Real) \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (c : Real) < (z : Real) && z <= (x : Real) && abs(x - c) < (d : Real) \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (x : Real)
+  (c : Real)
+  (g : (Real) -> Real)
+  real_of_num(0) < abs((x : Real) - (c : Real)) \226\134\146 c < x || x < c
+  real_of_num(0) < abs((x : Real) - (c : Real))
+  !((gz : Real) == real_of_num(0)) && !((gx : Real) == real_of_num(0)) && (fx : Real) * gz == (fz : Real) * gx \226\134\146 fz / gz == fx / gx
+  (x : Real) == (y : Real) \226\134\146 abs(x - (l : Real)) < (e : Real) \226\134\146 abs(y - l) < e
+  (z : Real)
+  (z : Real)
+  (x : Real)
+  \226\136\128 x : Real, real_of_num(0) < abs(x - (c : Real)) && abs(x - c) < (r : Real) \226\134\146 abs((f' : (Real) -> Real)(x) / (g' : (Real) -> Real)(x) - (L : Real)) < (e : Real)
+  (x : Real)
+  (k : Real)
+  (r : Real)
+  (d : Real)
+  (r : Real)
+  (e : Real)
+  tends_real_real((x : Real) => (f' : (Real) -> Real)(x) / (g' : (Real) -> Real)(x), (L : Real), (c : Real))
+  (e : Real)
+  (c : Real) - (d : Real) < (x : Real) && x < (z : Real) && z < c \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (c : Real) - (d : Real) < (x : Real) && x <= (z : Real) && z < c \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (c : Real)
+  (x : Real)
+  (g : (Real) -> Real)
+  (f : (Real) -> Real)
+  (c : Real) < (z : Real) && z < (x : Real) && x < c + (d : Real) \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (c : Real) < (z : Real) && z <= (x : Real) && x < c + (d : Real) \226\134\146 real_of_num(0) < abs(z - c) && abs(z - c) < d
+  (x : Real)
+  (c : Real)
+  (g : (Real) -> Real)
+  (f : (Real) -> Real)
+  real_of_num(0) < abs((x : Real) - (c : Real)) && abs(x - c) < (d : Real) \226\134\146 c < x && x < c + d || c - d < x && x < c
+  (x : Real)
+  \226\136\128 x : Real, real_of_num(0) < abs(x - (c : Real)) && abs(x - c) < (d : Real) \226\134\146 (\226\136\131 z : Real, real_of_num(0) < abs(z - c) && abs(z - c) < abs(x - c) && (f : (Real) -> Real)(x) * (g' : (Real) -> Real)(z) == (f' : (Real) -> Real)(z) * (g : (Real) -> Real)(x))
+  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 c : Real, \226\136\128 L : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - c) && abs(x - c) < d \226\134\146 diffl(f, f'(x), x) && diffl(g, g'(x), x) && !(g'(x) == real_of_num(0))) && f(c) == real_of_num(0) && g(c) == real_of_num(0) && tends_real_real(f, real_of_num(0), c) && tends_real_real(g, real_of_num(0), c) && tends_real_real((x : Real) => f'(x) / g'(x), L, c) \226\134\146 tends_real_real((x : Real) => f(x) / g(x), L, c)
+  real_of_num(0) < abs((x : Real) - (c : Real)) && real_of_num(0) < abs((z : Real)) && abs(z) < abs(x - c) \226\134\146 !(x + z == c)
+  abs((x : Real) - (c : Real))
+  (e : Real)
+  real_of_num(0) < abs((x : Real) - (c : Real)) \226\134\146 !(x == c)
+  (h : Real) => ((g : (Real) -> Real)((x : Real) + h) - g(x)) / h
+  (h : Real) => ((f : (Real) -> Real)((x : Real) + h) - f(x)) / h
+  real_of_num(0) < abs((x : Real) - (c : Real)) \226\134\146 !(x == c)
+  (d : Real)
+  (L : Real)
+  (c : Real)
+  (g' : (Real) -> Real)
+  (f' : (Real) -> Real)
+  (x : Real) => if x == (c : Real) { real_of_num(0) } else { (g : (Real) -> Real)(x) }
+  (x : Real) => if x == (c : Real) { real_of_num(0) } else { (f : (Real) -> Real)(x) }
+  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 g' : (Real) -> Real, \226\136\128 c : Real, \226\136\128 L : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - c) && abs(x - c) < d \226\134\146 diffl(f, f'(x), x) && diffl(g, g'(x), x) && !(g'(x) == real_of_num(0))) && tends_real_real(f, real_of_num(0), c) && tends_real_real(g, real_of_num(0), c) && tends_real_real((x : Real) => f'(x) / g'(x), L, c) \226\134\146 tends_real_real((x : Real) => f(x) / g(x), L, c)
 MVT2 =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\g:fun(real,real). (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) b:real)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) a:real) x:real)) ((#real_le:fun(real,fun(real,bool)) x:real) b:real))) ((#/\:fun(bool,fun(bool,bool)) ((#contl:fun(fun(real,real),fun(real,bool)) f:fun(real,real)) x:real)) ((#contl:fun(fun(real,real),fun(real,bool)) g:fun(real,real)) x:real)))))) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) b:real))) ((#/\:fun(bool,fun(bool,bool)) ((#differentiable:fun(fun(real,real),fun(real,bool)) f:fun(real,real)) x:real)) ((#differentiable:fun(fun(real,real),fun(real,bool)) g:fun(real,real)) x:real)))))))) (#?:fun(fun(real,bool),bool) (\z:real. (#?:fun(fun(real,bool),bool) (\f':real. (#?:fun(fun(real,bool),bool) (\g':real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) z:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) z:real) b:real)) ((#/\:fun(bool,fun(bool,bool)) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) f:fun(real,real)) f':real) z:real)) ((#/\:fun(bool,fun(bool,bool)) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) g:fun(real,real)) g':real) z:real)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) (f:fun(real,real) b:real)) (f:fun(real,real) a:real))) g':real)) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) (g:fun(real,real) b:real)) (g:fun(real,real) a:real))) f':real)))))))))))))))))))))
 LHOPITAL_WEAK =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\g:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\f':fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\g':fun(real,real). (#forall:fun(fun(real,bool),bool) (\c:real. (#forall:fun(fun(real,bool),bool) (\L:real. (#forall:fun(fun(real,bool),bool) (\d:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) d:real)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) c:real)))) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) c:real))) d:real))) ((#/\:fun(bool,fun(bool,bool)) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) f:fun(real,real)) (f':fun(real,real) x:real)) x:real)) ((#/\:fun(bool,fun(bool,bool)) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) g:fun(real,real)) (g':fun(real,real) x:real)) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) (g':fun(real,real) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (f:fun(real,real) c:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (g:fun(real,real) c:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) f:fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) c:real)) ((#/\:fun(bool,fun(bool,bool)) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) g:fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) c:real)) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_div:fun(real,fun(real,real)) (f':fun(real,real) x:real)) (g':fun(real,real) x:real)))) L:real) c:real)))))))) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_div:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (g:fun(real,real) x:real)))) L:real) c:real))))))))))))))))
 LHOPITAL =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\f:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\g:fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\f':fun(real,real). (#forall:fun(fun(fun(real,real),bool),bool) (\g':fun(real,real). (#forall:fun(fun(real,bool),bool) (\c:real. (#forall:fun(fun(real,bool),bool) (\L:real. (#forall:fun(fun(real,bool),bool) (\d:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) d:real)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) c:real)))) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) c:real))) d:real))) ((#/\:fun(bool,fun(bool,bool)) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) f:fun(real,real)) (f':fun(real,real) x:real)) x:real)) ((#/\:fun(bool,fun(bool,bool)) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) g:fun(real,real)) (g':fun(real,real) x:real)) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) (g':fun(real,real) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))) ((#/\:fun(bool,fun(bool,bool)) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) f:fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) c:real)) ((#/\:fun(bool,fun(bool,bool)) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) g:fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) c:real)) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_div:fun(real,fun(real,real)) (f':fun(real,real) x:real)) (g':fun(real,real) x:real)))) L:real) c:real)))))) (((#tends_real_real:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_div:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (g:fun(real,real) x:real)))) L:real) c:real))))))))))))))))
