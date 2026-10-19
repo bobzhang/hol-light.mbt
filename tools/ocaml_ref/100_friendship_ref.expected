@@ -15480,239 +15480,239 @@ Translating certificate to HOL inferences
 0..0..solved at 2
 0..0..solved at 2
 100/friendship quotations (309):
-  d:num
-  n - m:num
-  m:num
-  n - m:num
-  m:num
-  forall m n:num. P m /\\ P (m + n) ==> P n
-  m = 0
-  m:num
-  n:num
-  m + n:num
-  forall P. (forall m n. P m /\\ P (m + n) ==> P n)\n       ==> forall m n. P m /\\ P n ==> P (gcd(m,n))
-  forall x m n. (forall i. x(i + m) = x(i)) /\\ (forall i. x(i + n) = x(i))\n           ==> forall i. x(i + gcd(m,n)) = x(i)
-  forall x m n. (forall i. x(i + m) = x(i)) /\\ (forall i. x(i + n) = x(i)) /\\ coprime(m,n)\n           ==> forall i. x i = x 0
-  CARD(s) = CARD {y | y IN s /\\ (R:A->A->bool) a y} +\n                          CARD {y | y IN s /\\ ~(R a y)}
-  {y:A | y IN s /\\ ~(R (a:A) y)}
-  a:A
-  s:A->bool = {}
-  CARD(s:A->bool)
-  forall R s k. FINITE s /\\\n           (forall x. x IN s ==> R x x) /\\\n           (forall x y. R x y ==> R y x) /\\\n           (forall x y z. R x y /\\ R y z ==> R x z) /\\\n           (forall x:A. x IN s ==> CARD {y | y IN s /\\ R x y} = k)\n           ==> k divides (CARD s)
-  \\x y:A. x IN s /\\ y IN s /\\ R x y
-  forall R s k. FINITE s /\\\n           (forall x. x IN s ==> R x x) /\\\n           (forall x y. x IN s /\\ y IN s /\\ R x y ==> R y x) /\\\n           (forall x y z. x IN s /\\ y IN s /\\ z IN s /\\ R x y /\\ R y z ==> R x z) /\\\n           (forall x:A. x IN s ==> CARD {y | y IN s /\\ R x y} = k)\n           ==> k divides (CARD s)
-  y:A
-  x:A IN s
-  x:A
-  forall x:A. x IN s ==> (?!y. y IN s /\\ r x y)
-  x:A
-  s = (a:A) INSERT b INSERT (s DELETE a DELETE b)
-  s DELETE (a:A) DELETE b
-  b:A
-  a:A IN s
-  a:A
-  forall x:A. x IN s ==> (?!y:A. y IN s /\\ r x y)
-  a:A
-  s:A->bool = {}
-  CARD(s:A->bool)
-  forall s r. FINITE s /\\\n         (forall x. x IN s ==> ~(r x x)) /\\\n         (forall x y. x IN s /\\ y IN s /\\ r x y ==> r y x) /\\\n         (forall x:A. x IN s ==> ?!y. y IN s /\\ r x y)\n         ==> EVEN(CARD s)
-  cycle r k x <=> (forall i. r (x i) (x(i + 1))) /\\ (forall i. x(i + k) = x(i))
-  path r k x <=> (forall i. i < k ==> r (x i) (x(i + 1))) /\\\n                 (forall i. k < i ==> x(i) = @x. T)
-  forall r k x:num->A. cycle r k x ==> forall i m. x(m * k + i) = x(i)
-  forall r k x:num->A. cycle r k x /\\ ~(k = 0) ==> forall i. x(i MOD k) = x(i)
-  (forall x y. r x y ==> s x y) ==> {x | path r k x} SUBSET {x | path s k x}
-  k < SUC k
-  i = SUC k
-  i:num
-  N * m * m EXP k = (N * m EXP k) * m
-  SUC k < i ==> ~(i = SUC k) /\\ k < i
-  i + 1 = SUC k <=> i = k
-  i = k \\/ i < k ==> ~(i = SUC k)
-  a:A
-  z:num->A
-  k < i /\\ ~(i = k + 1) ==> SUC k < i
-  i < k ==> ~(i + 1 = SUC k)
-  ~(k = SUC k) /\\ (i < k ==> ~(i = SUC k))
-  x(SUC k):A
-  \\i. if i = SUC k then @x. T else x(i):A
-  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-  x:num->A
-  {x:num->A | path r (SUC k) x} =\n    IMAGE (\\(x,a) i. if i = SUC k then a else x i)\n          {x,a | x IN {x | path r k x} /\\ a IN {u | r (x k) u}}
-  {x:num->A | path r 0 x} =\n                  IMAGE (\\a i. if i = 0 then a else @x. T) (:A)
-  forall N m r k. (:A) HAS_SIZE N /\\ (forall x. {y | r x y} HAS_SIZE m)\n             ==> {x:num->A | path r k x} HAS_SIZE (N * m EXP k)
-  {y | T} = (:A)
-  k:num
-  \\a:A b:A. T
-  CARD(:A)
-  CARD(:A)
-  {x:num->A | path (\\a b. T) k x}
-  forall r k. FINITE(:A) ==> FINITE {x:num->A | path r k x}
-  k:num
-  i:num
-  i:num
-  y:num->A
-  x:num->A
-  {x:num->A | path r k x}
-  ~(k = 0)
+  (d : Num)
+  (n : Num) - (m : Num)
+  (m : Num)
+  (n : Num) - (m : Num)
+  (m : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, (P : (Num) -> Bool)(m) && P(m + n) \226\134\146 P(n)
+  (m : Num) == 0
+  (m : Num)
+  (n : Num)
+  (m : Num) + (n : Num)
+  \226\136\128 P : (Num) -> Bool, (\226\136\128 m : Num, \226\136\128 n : Num, P(m) && P(m + n) \226\134\146 P(n)) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, P(m) && P(n) \226\134\146 P(gcd((m, n))))
+  \226\136\128 x : (Num) -> _, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 i : Num, x(i + m) == x(i)) && (\226\136\128 i : Num, x(i + n) == x(i)) \226\134\146 (\226\136\128 i : Num, x(i + gcd((m, n))) == x(i))
+  \226\136\128 x : (Num) -> _, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 i : Num, x(i + m) == x(i)) && (\226\136\128 i : Num, x(i + n) == x(i)) && coprime((m, n)) \226\134\146 (\226\136\128 i : Num, x(i) == x(0))
+  CARD((s : (A) -> Bool)) == CARD({(y : A) | IN(y, s) && (R : (A, A) -> Bool)((a : A), y)}) + CARD({(y : A) | IN(y, s) && !R(a, y)})
+  {(y : A) | IN(y, (s : (A) -> Bool)) && !(R : (A, A) -> Bool)((a : A), y)}
+  (a : A)
+  (s : (A) -> Bool) == {}
+  CARD((s : (A) -> Bool))
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 s : (A) -> Bool, \226\136\128 k : Num, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 R(x, x)) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 R(y, x)) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, R(x, y) && R(y, z) \226\134\146 R(x, z)) && (\226\136\128 x : A, IN(x, s) \226\134\146 CARD({(y : A) | IN(y, s) && R(x, y)}) == k) \226\134\146 divides(k, CARD(s))
+  (x : A) => (y : A) => IN(x, (s : (A) -> Bool)) && IN(y, s) && (R : (A, A) -> Bool)(x, y)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 s : (A) -> Bool, \226\136\128 k : Num, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 R(x, x)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && R(x, y) \226\134\146 R(y, x)) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, IN(x, s) && IN(y, s) && IN(z, s) && R(x, y) && R(y, z) \226\134\146 R(x, z)) && (\226\136\128 x : A, IN(x, s) \226\134\146 CARD({(y : A) | IN(y, s) && R(x, y)}) == k) \226\134\146 divides(k, CARD(s))
+  (y : A)
+  IN((x : A), (s : (A) -> Bool))
+  (x : A)
+  \226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 existsunique((y : A) => IN(y, s) && (r : (A, A) -> Bool)(x, y))
+  (x : A)
+  (s : (A) -> Bool) == INSERT((a : A), INSERT((b : A), DELETE(DELETE(s, a), b)))
+  DELETE(DELETE((s : (A) -> Bool), (a : A)), (b : A))
+  (b : A)
+  IN((a : A), (s : (A) -> Bool))
+  (a : A)
+  \226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 existsunique((y : A) => IN(y, s) && (r : (A, A) -> Bool)(x, y))
+  (a : A)
+  (s : (A) -> Bool) == {}
+  CARD((s : (A) -> Bool))
+  \226\136\128 s : (A) -> Bool, \226\136\128 r : (A, A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 !r(x, x)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && r(x, y) \226\134\146 r(y, x)) && (\226\136\128 x : A, IN(x, s) \226\134\146 existsunique((y : A) => IN(y, s) && r(x, y))) \226\134\146 EVEN(CARD(s))
+  (cycle : ((_, _) -> Bool, Num, (Num) -> _) -> Bool)((r : (_, _) -> Bool), (k : Num), (x : (Num) -> _)) == ((\226\136\128 i : Num, r(x(i), x(i + 1))) && (\226\136\128 i : Num, x(i + k) == x(i)))
+  (path : ((_, _) -> Bool, Num, (Num) -> _) -> Bool)((r : (_, _) -> Bool), (k : Num), (x : (Num) -> _)) == ((\226\136\128 i : Num, i < k \226\134\146 r(x(i), x(i + 1))) && (\226\136\128 i : Num, k < i \226\134\146 x(i) == select((x : _) => true)))
+  \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, \226\136\128 x : (Num) -> A, cycle(r, k, x) \226\134\146 (\226\136\128 i : Num, \226\136\128 m : Num, x(m * k + i) == x(i))
+  \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, \226\136\128 x : (Num) -> A, cycle(r, k, x) && !(k == 0) \226\134\146 (\226\136\128 i : Num, x(MOD(i, k)) == x(i))
+  (\226\136\128 x : _, \226\136\128 y : _, (r : (_, _) -> Bool)(x, y) \226\134\146 (s : (_, _) -> Bool)(x, y)) \226\134\146 SUBSET({(x : (Num) -> _) | path(r, (k : Num), x)}, {(x : (Num) -> _) | path(s, k, x)})
+  (k : Num) < SUC(k)
+  (i : Num) == SUC((k : Num))
+  (i : Num)
+  (N : Num) * ((m : Num) * EXP(m, (k : Num))) == N * EXP(m, k) * m
+  SUC((k : Num)) < (i : Num) \226\134\146 !(i == SUC(k)) && k < i
+  ((i : Num) + 1 == SUC((k : Num))) == (i == k)
+  (i : Num) == (k : Num) || i < k \226\134\146 !(i == SUC(k))
+  (a : A)
+  (z : (Num) -> A)
+  (k : Num) < (i : Num) && !(i == k + 1) \226\134\146 SUC(k) < i
+  (i : Num) < (k : Num) \226\134\146 !(i + 1 == SUC(k))
+  !((k : Num) == SUC(k)) && ((i : Num) < k \226\134\146 !(i == SUC(k)))
+  (x : (Num) -> A)(SUC((k : Num)))
+  (i : Num) => if i == SUC((k : Num)) { select((x : A) => true) } else { (x : (Num) -> A)(i) }
+  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+  (x : (Num) -> A)
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), SUC((k : Num)), x)} == IMAGE(GABS((f : (((Num) -> A, A), Num) -> A) => \226\136\128 x : (Num) -> A, \226\136\128 a : A, GEQ(f((x, a)), (i : Num) => if i == SUC(k) { a } else { x(i) })), {((x : (Num) -> A), (a : A)) | IN(x, {(x : (Num) -> A) | path(r, k, x)}) && IN(a, {(u : A) | r(x(k), u)})})
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), 0, x)} == IMAGE((a : A) => (i : Num) => if i == 0 { a } else { select((x : A) => true) }, UNIV)
+  \226\136\128 N : Num, \226\136\128 m : Num, \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, (HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool), N) && (\226\136\128 x : A, (HAS_SIZE : ((A) -> Bool, Num) -> Bool)({(y : A) | r(x, y)}, m)) \226\134\146 (HAS_SIZE : (((Num) -> A) -> Bool, Num) -> Bool)({(x : (Num) -> A) | (path : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x)}, N * EXP(m, k))
+  {(y : A) | true} == UNIV
+  (k : Num)
+  (a : A) => (b : A) => true
+  (CARD : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))
+  (CARD : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))
+  {(x : (Num) -> A) | path((a : A) => (b : A) => true, (k : Num), x)}
+  \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, (FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) \226\134\146 (FINITE : (((Num) -> A) -> Bool) -> Bool)({(x : (Num) -> A) | (path : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x)})
+  (k : Num)
+  (i : Num)
+  (i : Num)
+  (y : (Num) -> A)
+  (x : (Num) -> A)
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), (k : Num), x)}
+  !((k : Num) == 0)
   1
-  j < k <=> j + 1 < k \\/ j + 1 = k
-  j:num
-  i MOD k
-  i:num
-  i + 1 = (m + 1) + ik <=> i = ik + m
-  i DIV k
-  (i + 1) MOD k = (i MOD k + 1) MOD k
-  y((i + 1) MOD k):A = y(i MOD k + 1)
+  ((j : Num) < (k : Num)) == (j + 1 < k || j + 1 == k)
+  (j : Num)
+  MOD((i : Num), (k : Num))
+  (i : Num)
+  ((i : Num) + 1 == (m : Num) + 1 + (ik : Num)) == (i == ik + m)
+  DIV((i : Num), (k : Num))
+  MOD((i : Num) + 1, (k : Num)) == MOD(MOD(i, k) + 1, k)
+  (y : (Num) -> A)(MOD((i : Num) + 1, (k : Num))) == y(MOD(i, k) + 1)
   1
-  i:num
-  y:num->A
-  i < k ==> ~(k < i + 1)
-  \\i. if i <= k then x(i):A else @x. T
-  x:num->A
-  {x:num->A | cycle r k x} =\n    IMAGE (\\x i. x(i MOD k)) {x | path r k x /\\ x(k) = x(0)}
-  forall r k. FINITE(:A) /\\ ~(k = 0)\n         ==> {x:num->A | cycle r k x} HAS_SIZE\n             CARD{x:num->A | path r k x /\\ x(k) = x(0)}
-  forall r k. FINITE(:A) /\\ ~(k = 0) ==> FINITE {x:num->A | cycle r k x}
-  k + 2 < i ==> k < i
-  k + 2 < i ==> ~(i = k + 1) /\\ ~(i = k + 2)
-  i < k + 2
-  ~(i = k + 1)
-  ~(i:num = k)
-  path r k (y:num->A)
-  i < k + 2 ==> ~(i = k + 2)
-  (k + 1) + 1 = k + 1 <=> F
-  i = k + 1
-  i + 1 = k + 2 <=> i = k + 1
-  i:num
-  ~(k + 2 = k + 1) /\\ ~(0 = k + 1) /\\ ~(0 = k + 2) /\\ ~(k = k + 1) /\\\n    ~(k = k + 2)
-  y:num->A
-  ~(i <= k) /\\ ~(i = k + 1) /\\ ~(i = k + 2)\n                              ==> k + 2 < i
-  path r (k + 2) (x:num->A)
-  i = k + 2
-  k < k + 2 /\\ k + 1 < k + 2
-  path r (k + 2) (x:num->A)
-  i = k + 1
-  i:num
-  i < k ==> i < k + 2
-  i < k ==> i + 1 <= k
-  path r (k + 2) (x:num->A)
-  \\i. if i <= k then x(i):A else @x. T
-  x:num->A
-  k < k + 1 /\\ k < k + 2
-  i:num
-  k:num < i
-  i:num
-  y:num->A
-  x:num->A
-  {x:num->A | path r k x}
-  {x:num->A | path r (k + 2) x /\\ ~(x k = x 0) /\\ x (k + 2) = x 0} =\n    IMAGE (\\x i. if i = k + 1 then @z. r (x k) z /\\ r z (x 0)\n               else if i = k + 2 then x(0)\n               else x(i))\n        {x | path r k x /\\ ~(x(k) = x(0))}
-  i < k + 2 /\\ ~(i = k) /\\ ~(i = k + 1)\n                              ==> i < k
-  ~(x + 1 = x)
-  i = k + 1
-  i + 1 = k + 2 <=> i = k + 1
-  i < k + 2 ==> ~(i = k + 2)
-  i:num
-  k + 2 < i ==> k < i /\\ ~(i = k + 1) /\\ ~(i = k + 2)
-  path r k (z:num->A)
-  ~(k = k + 2) /\\ ~(k = k + 1)
-  k:num
-  ~(k + 2 = k + 1)
-  k + 2
-  ~(0 = k + 1)
-  b:A
-  z:num->A
-  k + 2 < i <=> ~(i <= k) /\\ ~(i = k + 1) /\\ ~(i = k + 2)
-  i:num
-  i = k + 2
-  i = k + 1
-  i:num
-  i < k ==> i < k + 2
-  i < k ==> i + 1 <= k
-  path r (k + 2) (x:num->A)
-  k < k + 2
-  (x:num->A) (k + 1)
-  \\i. if i <= k then x(i):A else @x. T
-  x:num->A
-  {x:num->A | path r k x}
-  k < k + 1 /\\ k < k + 2
-  i:num
-  k:num < i
-  ~(0 = k + 1) /\\ ~(0 = k + 2)
-  b:A
-  z:num->A
-  a:A
-  y:num->A
-  {x:num->A | path r (k + 2) x /\\ x k = x 0 /\\ x (k + 2) = x 0} =\n      IMAGE (\\(x,a) i. if i = k + 1 then a\n                     else if i = k + 2 then x(0)\n                     else x(i))\n            {x,a | x IN {x | path r k x /\\ x(k) = x(0)} /\\\n                   a IN {u | r (x k) u}}
-  {x | path r (k + 2) x /\\ x(k + 2) = x(0)} =\n    {x | path r (k + 2) x /\\ x k = x 0 /\\ x(k + 2) = x(0)} UNION\n    {x | path r (k + 2) x /\\ ~(x k = x 0) /\\ x(k + 2) = x(0)}
-  forall N m r k.\n     (:A) HAS_SIZE N /\\ ~(k = 0) /\\ ~(m = 0) /\\\n     (forall x:A. {y | r x y} HAS_SIZE m) /\\\n     (forall x y. r x y ==> r y x) /\\\n     (forall x y. ~(x = y) ==> ?!z. r x z /\\ r z y)\n     ==> {x | path r (k + 2) x /\\ x(k + 2) = x(0)} HAS_SIZE\n         (m * CARD {x | path r k x /\\ x(k) = x(0)} +\n          CARD {x | path r (k) x /\\ ~(x(k) = x(0))})
-  i:num
+  (i : Num)
+  (y : (Num) -> A)
+  (i : Num) < (k : Num) \226\134\146 !(k < i + 1)
+  (i : Num) => if i <= (k : Num) { (x : (Num) -> A)(i) } else { select((x : A) => true) }
+  (x : (Num) -> A)
+  {(x : (Num) -> A) | cycle((r : (A, A) -> Bool), (k : Num), x)} == IMAGE((x : (Num) -> A) => (i : Num) => x(MOD(i, k)), {(x : (Num) -> A) | path(r, k, x) && x(k) == x(0)})
+  \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, (FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) && !(k == 0) \226\134\146 (HAS_SIZE : (((Num) -> A) -> Bool, Num) -> Bool)({(x : (Num) -> A) | (cycle : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x)}, (CARD : (((Num) -> A) -> Bool) -> Num)({(x : (Num) -> A) | (path : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x) && x(k) == x(0)}))
+  \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, (FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) && !(k == 0) \226\134\146 (FINITE : (((Num) -> A) -> Bool) -> Bool)({(x : (Num) -> A) | (cycle : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x)})
+  (k : Num) + 2 < (i : Num) \226\134\146 k < i
+  (k : Num) + 2 < (i : Num) \226\134\146 !(i == k + 1) && !(i == k + 2)
+  (i : Num) < (k : Num) + 2
+  !((i : Num) == (k : Num) + 1)
+  !((i : Num) == (k : Num))
+  path((r : (A, A) -> Bool), (k : Num), (y : (Num) -> A))
+  (i : Num) < (k : Num) + 2 \226\134\146 !(i == k + 2)
+  ((k : Num) + 1 + 1 == k + 1) == false
+  (i : Num) == (k : Num) + 1
+  ((i : Num) + 1 == (k : Num) + 2) == (i == k + 1)
+  (i : Num)
+  !((k : Num) + 2 == k + 1) && !(0 == k + 1) && !(0 == k + 2) && !(k == k + 1) && !(k == k + 2)
+  (y : (Num) -> A)
+  !((i : Num) <= (k : Num)) && !(i == k + 1) && !(i == k + 2) \226\134\146 k + 2 < i
+  path((r : (A, A) -> Bool), (k : Num) + 2, (x : (Num) -> A))
+  (i : Num) == (k : Num) + 2
+  (k : Num) < k + 2 && k + 1 < k + 2
+  path((r : (A, A) -> Bool), (k : Num) + 2, (x : (Num) -> A))
+  (i : Num) == (k : Num) + 1
+  (i : Num)
+  (i : Num) < (k : Num) \226\134\146 i < k + 2
+  (i : Num) < (k : Num) \226\134\146 i + 1 <= k
+  path((r : (A, A) -> Bool), (k : Num) + 2, (x : (Num) -> A))
+  (i : Num) => if i <= (k : Num) { (x : (Num) -> A)(i) } else { select((x : A) => true) }
+  (x : (Num) -> A)
+  (k : Num) < k + 1 && k < k + 2
+  (i : Num)
+  (k : Num) < (i : Num)
+  (i : Num)
+  (y : (Num) -> A)
+  (x : (Num) -> A)
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), (k : Num), x)}
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), (k : Num) + 2, x) && !(x(k) == x(0)) && x(k + 2) == x(0)} == IMAGE((x : (Num) -> A) => (i : Num) => if i == k + 1 { select((z : A) => r(x(k), z) && r(z, x(0))) } else { if i == k + 2 { x(0) } else { x(i) } }, {(x : (Num) -> A) | path(r, k, x) && !(x(k) == x(0))})
+  (i : Num) < (k : Num) + 2 && !(i == k) && !(i == k + 1) \226\134\146 i < k
+  !((x : Num) + 1 == x)
+  (i : Num) == (k : Num) + 1
+  ((i : Num) + 1 == (k : Num) + 2) == (i == k + 1)
+  (i : Num) < (k : Num) + 2 \226\134\146 !(i == k + 2)
+  (i : Num)
+  (k : Num) + 2 < (i : Num) \226\134\146 k < i && !(i == k + 1) && !(i == k + 2)
+  path((r : (A, A) -> Bool), (k : Num), (z : (Num) -> A))
+  !((k : Num) == k + 2) && !(k == k + 1)
+  (k : Num)
+  !((k : Num) + 2 == k + 1)
+  (k : Num) + 2
+  !(0 == (k : Num) + 1)
+  (b : A)
+  (z : (Num) -> A)
+  ((k : Num) + 2 < (i : Num)) == (!(i <= k) && !(i == k + 1) && !(i == k + 2))
+  (i : Num)
+  (i : Num) == (k : Num) + 2
+  (i : Num) == (k : Num) + 1
+  (i : Num)
+  (i : Num) < (k : Num) \226\134\146 i < k + 2
+  (i : Num) < (k : Num) \226\134\146 i + 1 <= k
+  path((r : (A, A) -> Bool), (k : Num) + 2, (x : (Num) -> A))
+  (k : Num) < k + 2
+  (x : (Num) -> A)((k : Num) + 1)
+  (i : Num) => if i <= (k : Num) { (x : (Num) -> A)(i) } else { select((x : A) => true) }
+  (x : (Num) -> A)
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), (k : Num), x)}
+  (k : Num) < k + 1 && k < k + 2
+  (i : Num)
+  (k : Num) < (i : Num)
+  !(0 == (k : Num) + 1) && !(0 == k + 2)
+  (b : A)
+  (z : (Num) -> A)
+  (a : A)
+  (y : (Num) -> A)
+  {(x : (Num) -> A) | path((r : (A, A) -> Bool), (k : Num) + 2, x) && x(k) == x(0) && x(k + 2) == x(0)} == IMAGE(GABS((f : (((Num) -> A, A), Num) -> A) => \226\136\128 x : (Num) -> A, \226\136\128 a : A, GEQ(f((x, a)), (i : Num) => if i == k + 1 { a } else { if i == k + 2 { x(0) } else { x(i) } })), {((x : (Num) -> A), (a : A)) | IN(x, {(x : (Num) -> A) | path(r, k, x) && x(k) == x(0)}) && IN(a, {(u : A) | r(x(k), u)})})
+  {(x : (Num) -> _) | path((r : (_, _) -> Bool), (k : Num) + 2, x) && x(k + 2) == x(0)} == UNION({(x : (Num) -> _) | path(r, k + 2, x) && x(k) == x(0) && x(k + 2) == x(0)}, {(x : (Num) -> _) | path(r, k + 2, x) && !(x(k) == x(0)) && x(k + 2) == x(0)})
+  \226\136\128 N : Num, \226\136\128 m : Num, \226\136\128 r : (A, A) -> Bool, \226\136\128 k : Num, (HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool), N) && !(k == 0) && !(m == 0) && (\226\136\128 x : A, (HAS_SIZE : ((A) -> Bool, Num) -> Bool)({(y : A) | r(x, y)}, m)) && (\226\136\128 x : A, \226\136\128 y : A, r(x, y) \226\134\146 r(y, x)) && (\226\136\128 x : A, \226\136\128 y : A, !(x == y) \226\134\146 (existsunique : ((A) -> Bool) -> Bool)((z : A) => r(x, z) && r(z, y))) \226\134\146 (HAS_SIZE : (((Num) -> A) -> Bool, Num) -> Bool)({(x : (Num) -> A) | (path : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k + 2, x) && x(k + 2) == x(0)}, m * (CARD : (((Num) -> A) -> Bool) -> Num)({(x : (Num) -> A) | (path : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x) && x(k) == x(0)}) + (CARD : (((Num) -> A) -> Bool) -> Num)({(x : (Num) -> A) | (path : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, k, x) && !(x(k) == x(0))}))
+  (i : Num)
   0
   0
-  k + 1
-  k:num
-  shiftable x y <=> ?k. forall i. x(i) = y(i + k)
-  forall x. shiftable x x
-  forall x y z. shiftable x y /\\ shiftable y z ==> shiftable x z
-  k:num
-  k MOD p
-  k:num
-  forall x y p r. cycle r p x /\\ cycle r p y /\\ ~(p = 0)\n             ==> (shiftable x y <=> ?k. k < p /\\ forall i. x(i) = y(i + k))
-  k < p ==> (i + (p - k)) + k = i + p:num
-  p - k:num
-  k:num
-  a /\\ b /\\ c /\\ d <=> (a /\\ b /\\ c) /\\ d
-  forall x y p r. cycle r p x /\\ cycle r p y /\\ ~(p = 0) /\\ shiftable x y\n             ==> shiftable y x
-  coprime(p,p + d) <=> coprime(d,p)
-  k <= l:num
-  k < p:num
-  l + p - k = p + l - k:num
-  k < p:num
-  k < p ==> (i + p - k) + k = i + p:num
-  i + l + pk = (i + pk) + l:num
-  i:num
-  l + (p - k):num
-  p:num
-  forall i. x(i):A = x(0)
-  (~p ==> F) ==> p
-  l:num
-  k:num
-  r:A->A->bool
-  p:num
-  y:num->A
-  {y:num->A | cycle r p y /\\ shiftable x y} =\n                IMAGE (\\k i. x(i + k)) {k | k < p}
-  {y:num->A | cycle r p y /\\ shiftable x y} HAS_SIZE p
-  x:num->A
-  shiftable:(num->A)->(num->A)->bool
-  p = 0
+  (k : Num) + 1
+  (k : Num)
+  (shiftable : ((Num) -> _, (Num) -> _) -> Bool)((x : (Num) -> _), (y : (Num) -> _)) == (\226\136\131 k : Num, \226\136\128 i : Num, x(i) == y(i + k))
+  \226\136\128 x : (Num) -> _, shiftable(x, x)
+  \226\136\128 x : (Num) -> _, \226\136\128 y : (Num) -> _, \226\136\128 z : (Num) -> _, shiftable(x, y) && shiftable(y, z) \226\134\146 shiftable(x, z)
+  (k : Num)
+  MOD((k : Num), (p : Num))
+  (k : Num)
+  \226\136\128 x : (Num) -> _, \226\136\128 y : (Num) -> _, \226\136\128 p : Num, \226\136\128 r : (_, _) -> Bool, cycle(r, p, x) && cycle(r, p, y) && !(p == 0) \226\134\146 shiftable(x, y) == (\226\136\131 k : Num, k < p && (\226\136\128 i : Num, x(i) == y(i + k)))
+  (k : Num) < (p : Num) \226\134\146 (i : Num) + (p - k) + k == i + p
+  (p : Num) - (k : Num)
+  (k : Num)
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == ((a && b && c) && d)
+  \226\136\128 x : (Num) -> _, \226\136\128 y : (Num) -> _, \226\136\128 p : Num, \226\136\128 r : (_, _) -> Bool, cycle(r, p, x) && cycle(r, p, y) && !(p == 0) && shiftable(x, y) \226\134\146 shiftable(y, x)
+  coprime(((p : Num), p + (d : Num))) == coprime((d, p))
+  (k : Num) <= (l : Num)
+  (k : Num) < (p : Num)
+  (l : Num) + ((p : Num) - (k : Num)) == p + (l - k)
+  (k : Num) < (p : Num)
+  (k : Num) < (p : Num) \226\134\146 (i : Num) + (p - k) + k == i + p
+  (i : Num) + ((l : Num) + (pk : Num)) == i + pk + l
+  (i : Num)
+  (l : Num) + ((p : Num) - (k : Num))
+  (p : Num)
+  \226\136\128 i : Num, (x : (Num) -> A)(i) == x(0)
+  (!(p : Bool) \226\134\146 false) \226\134\146 p
+  (l : Num)
+  (k : Num)
+  (r : (A, A) -> Bool)
+  (p : Num)
+  (y : (Num) -> A)
+  {(y : (Num) -> A) | cycle((r : (A, A) -> Bool), (p : Num), y) && shiftable((x : (Num) -> A), y)} == IMAGE((k : Num) => (i : Num) => x(i + k), {(k : Num) | k < p})
+  HAS_SIZE({(y : (Num) -> A) | cycle((r : (A, A) -> Bool), (p : Num), y) && shiftable((x : (Num) -> A), y)}, p)
+  (x : (Num) -> A)
+  (shiftable : ((Num) -> A, (Num) -> A) -> Bool)
+  (p : Num) == 0
   forall r p x. FINITE(:A) /\\ prime p /\\ (forall x. ~(r x x))\n           ==> p divides CARD {x:num->A | cycle r p x}
-  p - 2
+  (p : Num) - 2
   friend:person->person->bool
-  m:num
-  N:num
-  3 <= p
-  N:num
-  p = (p - 2) + 2
-  p:num
+  (m : Num)
+  (N : Num)
+  3 <= (p : Num)
+  (N : Num)
+  (p : Num) == p - 2 + 2
+  (p : Num)
   friend:person->person->bool
-  ~(m = 0) ==> m - 1 + 1 = m
-  ~(m = 0)
-  m - 1
-  forall q. t divides q /\\ m = q + 1 ==> t divides m ==> t divides w
-  2 divides 1
-  2 <= p /\\ ~(p = 2) ==> 3 <= p
-  3 <= p
+  !((m : Num) == 0) \226\134\146 m - 1 + 1 == m
+  !((m : Num) == 0)
+  (m : Num) - 1
+  \226\136\128 q : Num, divides((t : Num), q) && (m : Num) == q + 1 \226\134\146 divides(t, m) \226\134\146 divides(t, (w : Num))
+  divides(2, 1)
+  2 <= (p : Num) && !(p == 2) \226\134\146 3 <= p
+  3 <= (p : Num)
   CARD {x:num->person | path friend (p-2) x /\\ ~(x (p-2) = x 0)}
   CARD {x:num->person | path friend (p-2) x /\\ x (p-2) = x 0}
   CARD {x:num->person | cycle friend p x}
-  m - 1
-  forall q c K1 K2.\n        p divides q /\\ p divides c /\\\n        c = (q + 1) * K1 + K2 /\\\n        K1 + K2 = ((q + 1) * q + 1) * nep2\n        ==> p divides nep2
-  p - 2
-  ~(m = 0) ==> m - 1 + 1 = m
-  m - 1
-  forall x. p divides (x + 1) /\\ p divides x ==> p divides 1
-  ~(p divides 1)
-  p:num
-  ~(m = 2)
-  m - 1
+  (m : Num) - 1
+  \226\136\128 q : Num, \226\136\128 c : Num, \226\136\128 K1 : Num, \226\136\128 K2 : Num, divides((p : Num), q) && divides(p, c) && c == (q + 1) * K1 + K2 && K1 + K2 == ((q + 1) * q + 1) * (nep2 : Num) \226\134\146 divides(p, nep2)
+  (p : Num) - 2
+  !((m : Num) == 0) \226\134\146 m - 1 + 1 == m
+  (m : Num) - 1
+  \226\136\128 x : Num, divides((p : Num), x + 1) && divides(p, x) \226\134\146 divides(p, 1)
+  !divides((p : Num), 1)
+  (p : Num)
+  !((m : Num) == 2)
+  (m : Num) - 1
   forall x:person. x = a \\/ x = b \\/ x = c
   z:person
   y:person
@@ -15725,9 +15725,9 @@ Translating certificate to HOL inferences
   b:person
   a:person
   (:person) HAS_SIZE 3
-  ~(m = 2)
-  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-  m - 1 - 1 = m - 2
+  !((m : Num) == 2)
+  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+  (m : Num) - 1 - 1 == m - 2
   {q:person | friend q (b:person)} = {q | friend b q}
   x:person
   (mutualfriend:person->person->person) a b
@@ -15738,38 +15738,38 @@ Translating certificate to HOL inferences
   (b:person) IN t
   UNIONS {u b :person->bool | (b:person) IN t} HAS_SIZE m * (m - 2)
   m + 1 = CARD((a:person) INSERT t)
-  ~(m = 1)
-  ~(m = 0)
-  m = 1
-  EVEN m
-  a + 1 = (m + 1) + m * c <=> a = m * (1 + c)
-  m * (m - 1) + 1 = (m + 1) + m * (m - 2)
+  !((m : Num) == 1)
+  !((m : Num) == 0)
+  (m : Num) == 1
+  EVEN((m : Num))
+  ((a : Num) + 1 == (m : Num) + 1 + m * (c : Num)) == (a == m * (1 + c))
+  (m : Num) * (m - 1) + 1 == m + 1 + m * (m - 2)
   mutualfriend (a:person) (x:person) :person
-  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-  (~a /\\ ~b ==> c) ==> (a \\/ b) \\/ c
+  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+  (!(a : Bool) && !(b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a || b) || c
   x:person
   (:person) = (a INSERT t) UNION UNIONS {u(b) | b IN t}
   u = \\b:person. {c:person | friend b c /\\ ~(c IN (a INSERT t))}
   FINITE(t:person->bool) /\\ CARD t = m
   t = {q:person | friend (a:person) q}
-  N = m * (m - 1) + 1
+  (N : Num) == (m : Num) * (m - 1) + 1
   N = CARD(:person)
   \\x y:person. friend a x /\\ friend a y /\\ friend x y
   a:person
   forall x:person. degree x = (m:num)
-  EVEN(m)
+  EVEN((m : Num))
   forall p:person. {q:person | friend p q} HAS_SIZE m
-  ~(m = 0)
+  !((m : Num) == 0)
   forall p:person. {q:person | friend p q} HAS_SIZE m
   forall x:person. ~(x = c) ==> degree x = (k:num)
   (degree:person->num)(b) = k /\\ ~(friend a b) /\\\n                  friend a c /\\ friend b c
-  k:num
+  (k : Num)
   k = (degree:person->num) a
   c = (mutualfriend:person->person->person) a b
   a:person
   b:person
   ?m:num. forall x:person. degree(x) = m
-  p <=> ~ ~ p
+  (p : Bool) == !!p
   forall x y:person. ~(friend x y) ==> degree x:num = degree y
   u2:person
   u1:person
@@ -15783,7 +15783,7 @@ Translating certificate to HOL inferences
   degree = \\p:person. CARD {q:person | friend p q}
   forall s:person->bool. FINITE s
   mutualfriend:person->person->person
-  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
+  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
   forall x y:person. ~(x = y) ==> ?!z:person. friend x z /\\ friend y z
   forall friend:person->person->bool.\n      FINITE(:person) /\\\n      (forall x. ~(friend x x)) /\\\n      (forall x y. friend x y ==> friend y x) /\\\n      (forall x y. ~(x = y) ==> ?!z. friend x z /\\ friend y z)\n      ==> ?u. forall v. ~(v = u) ==> friend u v
   z:person
