@@ -5817,25 +5817,25 @@ test "100/divharmonic matches 100/divharmonic.ml" {
       #|3 basis elements and 1 critical pairs
       #|3 basis elements and 0 critical pairs
       #|100/divharmonic quotations (19):
-      #|  n:num
-      #|  (2 * x + 1) - (x + 1) = x
-      #|  sum((N + 1) + 1 .. 2 * (N + 1)) (\\i. &1 / &(2 * (N + 1)))
-      #|  &1 / &2 <= y\n    ==> abs((x + y) - s) < &1 / &4 ==> ~(abs(x - s) < &1 / &4)
-      #|  1 <= (N + 1) + 1
-      #|  (N + 1) + (N + 1)
-      #|  N + 1
-      #|  &1 / &4
-      #|  ~(?s. forall e. &0 < e\n             ==> ?N. forall n. N <= n ==> abs(sum(1..n) (\\i. &1 / &i) - s) < e)
-      #|  ~(convergent (\\n. sum(1..n) (\\i. &1 / &i)))
-      #|  m:num
+      #|  (n : Num)
+      #|  2 * (x : Num) + 1 - (x + 1) == x
+      #|  sum(op_dot_dot((N : Num) + 1 + 1, 2 * (N + 1)), (i : Num) => real_of_num(1) / real_of_num(2 * (N + 1)))
+      #|  real_of_num(1) / real_of_num(2) <= (y : Real) \226\134\146 abs((x : Real) + y - (s : Real)) < real_of_num(1) / real_of_num(4) \226\134\146 !(abs(x - s) < real_of_num(1) / real_of_num(4))
+      #|  1 <= (N : Num) + 1 + 1
+      #|  (N : Num) + 1 + (N + 1)
+      #|  (N : Num) + 1
+      #|  real_of_num(1) / real_of_num(4)
+      #|  !(\226\136\131 s : Real, \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(sum(op_dot_dot(1, n), (i : Num) => real_of_num(1) / real_of_num(i)) - s) < e))
+      #|  !convergent((n : Num) => sum(op_dot_dot(1, n), (i : Num) => real_of_num(1) / real_of_num(i)))
+      #|  (m : Num)
       #|  2
-      #|  (2 * x + 1) - (x + 1) = x
-      #|  sum(2 EXP m + 1..2 EXP (SUC m))(\\n. &1 / &(2 EXP (SUC m)))
-      #|  a <= x ==> b - a <= y ==> b <= x + y
-      #|  1 <= 2 EXP m + 1
-      #|  forall m. sum(1..2 EXP m) (\\n. &1 / &n) >= &m / &2
-      #|  x / &2
-      #|  &0 < x /\\ x < &1 ==> ln(&1 + x) >= x / &2
+      #|  2 * (x : Num) + 1 - (x + 1) == x
+      #|  sum(op_dot_dot(EXP(2, (m : Num)) + 1, EXP(2, SUC(m))), (n : Num) => real_of_num(1) / real_of_num(EXP(2, SUC(m))))
+      #|  (a : Real) <= (x : Real) \226\134\146 (b : Real) - a <= (y : Real) \226\134\146 b <= x + y
+      #|  1 <= EXP(2, (m : Num)) + 1
+      #|  \226\136\128 m : Num, sum(op_dot_dot(1, EXP(2, m)), (n : Num) => real_of_num(1) / real_of_num(n)) >= real_of_num(m) / real_of_num(2)
+      #|  (x : Real) / real_of_num(2)
+      #|  real_of_num(0) < (x : Real) && x < real_of_num(1) \226\134\146 ln(real_of_num(1) + x) >= x / real_of_num(2)
       #|HARMONIC_DIVERGES =  |- (#~:fun(bool,bool) (#?:fun(fun(real,bool),bool) (\s:real. (#forall:fun(fun(real,bool),bool) (\e:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) e:real)) (#?:fun(fun(num,bool),bool) (\N:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) N:num) n:num)) ((#real_lt:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) i:num))))) s:real))) e:real))))))))))))
       #|HARMONIC_DIVERGES' =  |- (#~:fun(bool,bool) (#convergent:fun(fun(num,real),bool) (\n:num. ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) i:num)))))))
       #|HARMONIC_LEMMA =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#real_ge:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) m:num))) (\n:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) n:num))))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) m:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
