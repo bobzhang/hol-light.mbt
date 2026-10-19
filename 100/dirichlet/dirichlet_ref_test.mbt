@@ -81371,692 +81371,692 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  complex_div:complex->complex->complex
       #|  complex_pow:complex->num->complex
       #|  complex_inv:complex->complex
-      #|  forall f x. vsum (1..x) (\\n. vsum {d | d divides n} (f n)) =\n         vsum (1..x) (\\n. vsum (1..(x DIV n)) (\\k. f (k * n) n))
-      #|  &1 / &2
-      #|  &4 = &2 * &2
-      #|  &1 = &1 / &2 + &1 / &2
-      #|  exp(&1) <= &4
-      #|  &0 < u
-      #|  T
-      #|  ?u. z = Cx(u)
-      #|  &0 <= --x ==> a - b = x ==> a <= b
-      #|  &0 < &n /\\ &0 < &n + &1
-      #|  z:complex
-      #|  ~(w = Cx(&0))
-      #|  w = Cx(&0)
-      #|  &0 < Re w
-      #|  w:complex
-      #|  ~(n + &1 <= x /\\ x <= n)
-      #|  Cx(&n + &1)
-      #|  Cx(&n)
-      #|  \\z. (Cx(&1) - clog(z)) / z pow 2
-      #|  \\z. clog z / z
-      #|  forall n. 4 <= n ==> log(&n + &1) / (&n + &1) <= log(&n) / &n
+      #|  \226\136\128 f : (Num, Num) -> Cart[Real, _], \226\136\128 x : Num, vsum(op_dot_dot(1, x), (n : Num) => vsum({(d : Num) | divides(d, n)}, f(n))) == vsum(op_dot_dot(1, x), (n : Num) => vsum(op_dot_dot(1, DIV(x, n)), (k : Num) => f(k * n, n)))
+      #|  real_of_num(1) / real_of_num(2)
+      #|  real_of_num(4) == real_of_num(2) * real_of_num(2)
+      #|  real_of_num(1) == real_of_num(1) / real_of_num(2) + real_of_num(1) / real_of_num(2)
+      #|  exp(real_of_num(1)) <= real_of_num(4)
+      #|  real_of_num(0) < (u : Real)
+      #|  true
+      #|  \226\136\131 u : Real, (z : Cart[Real, Tybit0[Unit]]) == Cx(u)
+      #|  real_of_num(0) <= -(x : Real) \226\134\146 (a : Real) - (b : Real) == x \226\134\146 a <= b
+      #|  real_of_num(0) < real_of_num((n : Num)) && real_of_num(0) < real_of_num(n) + real_of_num(1)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  (w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  real_of_num(0) < Re((w : Cart[Real, Tybit0[Unit]]))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  !((n : Real) + real_of_num(1) <= (x : Real) && x <= n)
+      #|  Cx(real_of_num((n : Num)) + real_of_num(1))
+      #|  Cx(real_of_num((n : Num)))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (Cx(real_of_num(1)) - clog(z)) / pow(z, 2)
+      #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z) / z
+      #|  \226\136\128 n : Num, 4 <= n \226\134\146 log(real_of_num(n) + real_of_num(1)) / (real_of_num(n) + real_of_num(1)) <= log(real_of_num(n)) / real_of_num(n)
       #|  (f has_complex_derivative f') net
-      #|  cexp(clog a / Cx(&n))
-      #|  (forall x. ~Q x ==> ~P x) /\\ (?x. P x) ==> (?x. P x /\\ Q x)
-      #|  2 <= n ==> ~(n = 1)
-      #|  cexp(Cx(&2) * Cx pi * ii * Cx(&1 / &n))
-      #|  a = Cx(&1)
-      #|  Cx(&0)
-      #|  a = Cx(&0)
-      #|  2 <= n ==> ~(n = 0)
-      #|  forall a n. 2 <= n ==> ?z. z pow n = a /\\ ~(z = Cx(&1))
-      #|  dirichlet_character d (c:num->complex) <=>\n        (forall n. c(n + d) = c(n)) /\\\n        (forall n. c(n) = Cx(&0) <=> ~coprime(n,d)) /\\\n        (forall m n. c(m * n) = c(m) * c(n))
-      #|  forall d c n. dirichlet_character d c ==> c(n + d) = c(n)
-      #|  forall d c n. dirichlet_character d c ==> (c(n) = Cx(&0) <=> ~coprime(n,d))
-      #|  forall d c m n. dirichlet_character d c ==> c(m * n) = c(m) * c(n)
-      #|  a = a * a <=> a = Cx(&0) \\/ a = Cx(&1)
+      #|  cexp(clog((a : Cart[Real, Tybit0[Unit]])) / Cx(real_of_num((n : Num))))
+      #|  (\226\136\128 x : _, !(Q : (_) -> Bool)(x) \226\134\146 !(P : (_) -> Bool)(x)) && (\226\136\131 x : _, P(x)) \226\134\146 (\226\136\131 x : _, P(x) && Q(x))
+      #|  2 <= (n : Num) \226\134\146 !(n == 1)
+      #|  cexp(Cx(real_of_num(2)) * (Cx(pi) * (ii * Cx(real_of_num(1) / real_of_num((n : Num))))))
+      #|  (a : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))
+      #|  Cx(real_of_num(0))
+      #|  (a : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, 2 <= n \226\134\146 (\226\136\131 z : Cart[Real, Tybit0[Unit]], pow(z, n) == a && !(z == Cx(real_of_num(1))))
+      #|  (dirichlet_character : (Num, (Num) -> Cart[Real, Tybit0[Unit]]) -> Bool)((d : Num), (c : (Num) -> Cart[Real, Tybit0[Unit]])) == ((\226\136\128 n : Num, c(n + d) == c(n)) && (\226\136\128 n : Num, (c(n) == Cx(real_of_num(0))) == !coprime((n, d))) && (\226\136\128 m : Num, \226\136\128 n : Num, c(m * n) == c(m) * c(n)))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) \226\134\146 c(n + d) == c(n)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) \226\134\146 (c(n) == Cx(real_of_num(0))) == !coprime((n, d))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, dirichlet_character(d, c) \226\134\146 c(m * n) == c(m) * c(n)
+      #|  ((a : Cart[Real, Tybit0[Unit]]) == a * a) == (a == Cx(real_of_num(0)) || a == Cx(real_of_num(1)))
       #|  1
-      #|  forall d c. dirichlet_character d c ==> c(1) = Cx(&1)
-      #|  forall d c m n. dirichlet_character d c ==> c(m EXP n) = c(m) pow n
-      #|  (mk + d) + n:num = (mk + n) + d
-      #|  forall d c m n. dirichlet_character d c ==> c(m * d + n) = c(n)
-      #|  forall d c m n.\n        dirichlet_character d c /\\ (m == n) (mod d) ==> c(m) = c(n)
-      #|  d:num
-      #|  forall d c n. dirichlet_character d c /\\ coprime(d,n)\n           ==> c(n) pow phi(d) = Cx(&1)
-      #|  phi d
-      #|  norm((c:num->complex) n)
-      #|  norm:complex->real
-      #|  n:num
-      #|  c:num->complex
-      #|  d:num
-      #|  d = 0
-      #|  forall d c n. dirichlet_character d c\n           ==> norm(c n) = if coprime(d,n) then &1 else &0
-      #|  chi_0 d n = if coprime(n,d) then Cx(&1) else Cx(&0)
-      #|  coprime(m * n,d) <=> coprime(m,d) /\\ coprime(n,d)
-      #|  coprime(n + d,d) <=> coprime(n,d)
-      #|  dirichlet_character d (chi_0 d)
-      #|  forall d c. dirichlet_character d c\n         ==> (c = chi_0 d <=> forall n. coprime(n,d) ==> c(n) = Cx(&1))
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?n. coprime(n,d) /\\ ~(c n = Cx(&0)) /\\ ~(c n = Cx(&1))
-      #|  n:num
-      #|  forall c. dirichlet_character 0 c <=> c = chi_0 0
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) \226\134\146 c(1) == Cx(real_of_num(1))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, dirichlet_character(d, c) \226\134\146 c(EXP(m, n)) == pow(c(m), n)
+      #|  (mk : Num) + (d : Num) + (n : Num) == mk + n + d
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, dirichlet_character(d, c) \226\134\146 c(m * d + n) == c(n)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, dirichlet_character(d, c) && op_eq_eq(m, n, mod(d)) \226\134\146 c(m) == c(n)
+      #|  (d : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) && coprime((d, n)) \226\134\146 pow(c(n), phi(d)) == Cx(real_of_num(1))
+      #|  phi((d : Num))
+      #|  norm((c : (Num) -> Cart[Real, Tybit0[Unit]])((n : Num)))
+      #|  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)
+      #|  (n : Num)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (d : Num) == 0
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) \226\134\146 norm(c(n)) == (if coprime((d, n)) { real_of_num(1) } else { real_of_num(0) })
+      #|  (chi_0 : (Num, Num) -> Cart[Real, Tybit0[Unit]])((d : Num), (n : Num)) == (if coprime((n, d)) { Cx(real_of_num(1)) } else { Cx(real_of_num(0)) })
+      #|  coprime(((m : Num) * (n : Num), (d : Num))) == (coprime((m, d)) && coprime((n, d)))
+      #|  coprime(((n : Num) + (d : Num), d)) == coprime((n, d))
+      #|  dirichlet_character((d : Num), chi_0(d))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) \226\134\146 (c == chi_0(d)) == (\226\136\128 n : Num, coprime((n, d)) \226\134\146 c(n) == Cx(real_of_num(1)))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 (\226\136\131 n : Num, coprime((n, d)) && !(c(n) == Cx(real_of_num(0))) && !(c(n) == Cx(real_of_num(1))))
+      #|  (n : Num)
+      #|  \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(0, c) == (c == chi_0(0))
       #|  0
-      #|  x = x * x <=> x = Cx(&0) \\/ x = Cx(&1)
+      #|  ((x : Cart[Real, Tybit0[Unit]]) == x * x) == (x == Cx(real_of_num(0)) || x == Cx(real_of_num(1)))
       #|  1
       #|  1
-      #|  forall c. dirichlet_character 1 c <=> forall n. c n = Cx(&1)
-      #|  d = 1
-      #|  ~(p /\\ ~p)
-      #|  d = 0
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ~(d = 0) /\\ ~(d = 1)
-      #|  r:num = d
-      #|  coprime(r,d)
-      #|  r = 0
-      #|  r:num
-      #|  {n | coprime(n,d) /\\ n < d}
-      #|  forall t. vsum t f = vsum s f /\\ vsum t g = vsum s g /\\ vsum t f = vsum t g\n        ==> vsum s f = vsum s g
-      #|  (c:num->complex) m
-      #|  forall x. x * c = c /\\ ~(x = Cx(&1)) ==> c = Cx(&0)
-      #|  m:num
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> vsum(1..d) c = Cx(&0)
-      #|  d:num
-      #|  1 <= n + 1
-      #|  forall d c n. dirichlet_character d c /\\ ~(c = chi_0 d)\n           ==> vsum(1..d*n) c = Cx(&0)
-      #|  d:num
-      #|  1 <= n + 1
-      #|  n:num
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> vsum(1..n) c = vsum(1..(n MOD d)) c
-      #|  d:num
-      #|  m:num
-      #|  \\n:num. if n < d then c(n) else Cx(&0)
-      #|  c:num->complex
-      #|  IMAGE (\\c n. c(n MOD d))\n                    {c | (forall m. m IN {m | m < d}\n                             ==> c(m) IN (Cx(&0) INSERT\n                                          {z | z pow (phi d) = Cx(&1)})) /\\\n                         (forall m. ~(m IN {m | m < d})\n                              ==> c(m) = Cx(&0))}
-      #|  {x | x = a} = {a}
-      #|  d = 0
-      #|  forall d. FINITE {c | dirichlet_character d c}
-      #|  inv z = w /\\ ~(z = Cx(&0)) ==> w * z = Cx(&1) /\\ z * w = Cx(&1)
-      #|  forall d c n. dirichlet_character d c /\\ ~(c n = Cx(&0))\n           ==> cnj(c n) * c n = Cx(&1) /\\ c n * cnj(c n) = Cx(&1)
-      #|  forall d c. dirichlet_character d c ==> dirichlet_character d (\\n. cnj(c n))
-      #|  forall d c1 c2. dirichlet_character d c1 /\\ dirichlet_character d c2\n             ==> dirichlet_character d (\\n. c1(n) * c2(n))
-      #|  forall d c. dirichlet_character d c ==> (\\n. cnj(c n) * c n) = chi_0 d
-      #|  coprime(x,d)
-      #|  x:num
-      #|  forall d c. dirichlet_character d c\n         ==> vsum (1..d) c = if c = chi_0 d then Cx(&(phi d)) else Cx(&0)
-      #|  a * b = Cx(&1) ==> a * b * x = a * b * y ==> x = y
-      #|  m:num
-      #|  coprime(m,d)
-      #|  m:num
-      #|  (\\c n. cnj(c'(n:num)) * c n)
-      #|  a * x = x <=> a = Cx(&1) \\/ x = Cx(&0)
-      #|  forall c'. dirichlet_character d c'\n          ==> vsum {c | dirichlet_character d c}\n                   ((\\c. c(n)) o (\\c n. c'(n) * c(n))) =\n              vsum {c | dirichlet_character d c} (\\c. c(n))
-      #|  coprime(n,d)
-      #|  forall d n. vsum {c | dirichlet_character d c} (\\x. x n) = Cx(&0) \\/\n         coprime(n,d) /\\ forall c. dirichlet_character d c ==> c(n) = Cx(&1)
-      #|  forall d n. real(vsum {c | dirichlet_character d c} (\\c. c n)) /\\\n         &0 <= Re(vsum {c | dirichlet_character d c} (\\c. c n))
-      #|  g(((x * y) MOD d * a EXP (k + j)) MOD d):complex
-      #|  j:num
-      #|  y:num
-      #|  k:num
-      #|  x:num
-      #|  s:num
-      #|  r:num
-      #|  z pow m = f(am:num)
-      #|  am:num
-      #|  forall x:num. x IN h ==> ~(f x = Cx (&0))
-      #|  k:num
-      #|  k + a * k = (a + 1) * k
-      #|  k + (phi d - 1) * k = phi(d) * k
-      #|  1 = 1 * 1
-      #|  (x * a) * (z * ak):num = (x * z) * (a * ak)
-      #|  (x * a EXP k) * (z * a EXP ((phi d - 1) * k))
-      #|  (z * a EXP ((phi d - 1) * k)) MOD d
-      #|  z:num
-      #|  x:num
-      #|  forall x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
-      #|  k:num
-      #|  x:num
-      #|  y:num
-      #|  j + k:num
-      #|  (x * y) MOD d
-      #|  j:num
-      #|  y:num
-      #|  k:num
-      #|  x:num
-      #|  s:num
-      #|  r:num
+      #|  \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(1, c) == (\226\136\128 n : Num, c(n) == Cx(real_of_num(1)))
+      #|  (d : Num) == 1
+      #|  !((p : Bool) && !p)
+      #|  (d : Num) == 0
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 !(d == 0) && !(d == 1)
+      #|  (r : Num) == (d : Num)
+      #|  coprime(((r : Num), (d : Num)))
+      #|  (r : Num) == 0
+      #|  (r : Num)
+      #|  {(n : Num) | coprime((n, (d : Num))) && n < d}
+      #|  \226\136\128 t : (_) -> Bool, vsum(t, (f : (_) -> Cart[Real, _])) == vsum((s : (_) -> Bool), f) && vsum(t, (g : (_) -> Cart[Real, _])) == vsum(s, g) && vsum(t, f) == vsum(t, g) \226\134\146 vsum(s, f) == vsum(s, g)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])((m : Num))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], x * (c : Cart[Real, Tybit0[Unit]]) == c && !(x == Cx(real_of_num(1))) \226\134\146 c == Cx(real_of_num(0))
+      #|  (m : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 vsum(op_dot_dot(1, d), c) == Cx(real_of_num(0))
+      #|  (d : Num)
+      #|  1 <= (n : Num) + 1
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 vsum(op_dot_dot(1, d * n), c) == Cx(real_of_num(0))
+      #|  (d : Num)
+      #|  1 <= (n : Num) + 1
+      #|  (n : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 vsum(op_dot_dot(1, (n : Num)), c) == vsum(op_dot_dot(1, MOD(n, d)), c)
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  (n : Num) => if n < (d : Num) { (c : (Num) -> Cart[Real, Tybit0[Unit]])(n) } else { Cx(real_of_num(0)) }
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  IMAGE((c : (Num) -> Cart[Real, Tybit0[Unit]]) => (n : Num) => c(MOD(n, (d : Num))), {(c : (Num) -> Cart[Real, Tybit0[Unit]]) | (\226\136\128 m : Num, IN(m, {(m : Num) | m < d}) \226\134\146 IN(c(m), INSERT(Cx(real_of_num(0)), {(z : Cart[Real, Tybit0[Unit]]) | pow(z, phi(d)) == Cx(real_of_num(1))}))) && (\226\136\128 m : Num, !IN(m, {(m : Num) | m < d}) \226\134\146 c(m) == Cx(real_of_num(0)))})
+      #|  {(x : _) | x == (a : _)} == {a}
+      #|  (d : Num) == 0
+      #|  \226\136\128 d : Num, FINITE({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)})
+      #|  inv((z : Cart[Real, Tybit0[Unit]])) == (w : Cart[Real, Tybit0[Unit]]) && !(z == Cx(real_of_num(0))) \226\134\146 w * z == Cx(real_of_num(1)) && z * w == Cx(real_of_num(1))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) && !(c(n) == Cx(real_of_num(0))) \226\134\146 cnj(c(n)) * c(n) == Cx(real_of_num(1)) && c(n) * cnj(c(n)) == Cx(real_of_num(1))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) \226\134\146 dirichlet_character(d, (n : Num) => cnj(c(n)))
+      #|  \226\136\128 d : Num, \226\136\128 c1 : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 c2 : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c1) && dirichlet_character(d, c2) \226\134\146 dirichlet_character(d, (n : Num) => c1(n) * c2(n))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) \226\134\146 ((n : Num) => cnj(c(n)) * c(n)) == chi_0(d)
+      #|  coprime(((x : Num), (d : Num)))
+      #|  (x : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) \226\134\146 vsum(op_dot_dot(1, d), c) == (if c == chi_0(d) { Cx(real_of_num(phi(d))) } else { Cx(real_of_num(0)) })
+      #|  (a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1)) \226\134\146 a * (b * (x : Cart[Real, Tybit0[Unit]])) == a * (b * (y : Cart[Real, Tybit0[Unit]])) \226\134\146 x == y
+      #|  (m : Num)
+      #|  coprime(((m : Num), (d : Num)))
+      #|  (m : Num)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]]) => (n : Num) => cnj((c' : (Num) -> Cart[Real, Tybit0[Unit]])(n)) * c(n)
+      #|  ((a : Cart[Real, Tybit0[Unit]]) * (x : Cart[Real, Tybit0[Unit]]) == x) == (a == Cx(real_of_num(1)) || x == Cx(real_of_num(0)))
+      #|  \226\136\128 c' : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character((d : Num), c') \226\134\146 vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, o((c : (Num) -> Cart[Real, Tybit0[Unit]]) => c((n : Num)), (c : (Num) -> Cart[Real, Tybit0[Unit]]) => (n : Num) => c'(n) * c(n))) == vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(n))
+      #|  coprime(((n : Num), (d : Num)))
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (x : (Num) -> Cart[Real, Tybit0[Unit]]) => x(n)) == Cx(real_of_num(0)) || coprime((n, d)) && (\226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) \226\134\146 c(n) == Cx(real_of_num(1)))
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, real(vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(n))) && real_of_num(0) <= Re(vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(n)))
+      #|  (g : (Num) -> Cart[Real, Tybit0[Unit]])(MOD(MOD((x : Num) * (y : Num), (d : Num)) * EXP((a : Num), (k : Num) + (j : Num)), d))
+      #|  (j : Num)
+      #|  (y : Num)
+      #|  (k : Num)
+      #|  (x : Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  pow((z : Cart[Real, Tybit0[Unit]]), (m : Num)) == (f : (Num) -> Cart[Real, Tybit0[Unit]])((am : Num))
+      #|  (am : Num)
+      #|  \226\136\128 x : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 !((f : (Num) -> Cart[Real, Tybit0[Unit]])(x) == Cx(real_of_num(0)))
+      #|  (k : Num)
+      #|  (k : Num) + (a : Num) * k == (a + 1) * k
+      #|  (k : Num) + (phi((d : Num)) - 1) * k == phi(d) * k
+      #|  1 == 1 * 1
+      #|  (x : Num) * (a : Num) * ((z : Num) * (ak : Num)) == x * z * (a * ak)
+      #|  (x : Num) * EXP((a : Num), (k : Num)) * ((z : Num) * EXP(a, (phi((d : Num)) - 1) * k))
+      #|  MOD((z : Num) * EXP((a : Num), (phi((d : Num)) - 1) * (k : Num)), d)
+      #|  (z : Num)
+      #|  (x : Num)
+      #|  \226\136\128 x : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 (\226\136\131 y : Num, IN(y, h) && op_eq_eq(x * y, 1, mod((d : Num))))
+      #|  (k : Num)
+      #|  (x : Num)
+      #|  (y : Num)
+      #|  (j : Num) + (k : Num)
+      #|  MOD((x : Num) * (y : Num), (d : Num))
+      #|  (j : Num)
+      #|  (y : Num)
+      #|  (k : Num)
+      #|  (x : Num)
+      #|  (s : Num)
+      #|  (r : Num)
       #|  0
       #|  1
-      #|  ~(z = Cx(&1))
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1)))
       #|  1
       #|  1
-      #|  forall x y. x IN h /\\ y IN h ==> f ((x * y) MOD d) = f x * f y
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, IN(x, (h : (Num) -> Bool)) && IN(y, h) \226\134\146 (f : (Num) -> Cart[Real, Tybit0[Unit]])(MOD(x * y, (d : Num))) == f(x) * f(y)
       #|  1
       #|  1
       #|  0
-      #|  x:num
-      #|  x:num
-      #|  k:num
-      #|  x:num
-      #|  y:num
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (k : Num)
+      #|  (x : Num)
+      #|  (y : Num)
       #|  0
-      #|  x:num
+      #|  (x : Num)
       #|  1
       #|  1
-      #|  x:num
-      #|  {(x * a EXP k) MOD d | x IN h /\\ k IN (:num)}
-      #|  g:num->complex
-      #|  1 <= d
-      #|  f((am * (am EXP s) MOD d) MOD d):complex
+      #|  (x : Num)
+      #|  {MOD((x : Num) * EXP((a : Num), (k : Num)), (d : Num)) | IN(x, (h : (Num) -> Bool)) && IN(k, UNIV)}
+      #|  (g : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  1 <= (d : Num)
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])(MOD((am : Num) * MOD(EXP(am, (s : Num)), (d : Num)), d))
       #|  1
-      #|  forall x:num. x IN h ==> ~(f x = Cx (&0))
+      #|  \226\136\128 x : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 !((f : (Num) -> Cart[Real, Tybit0[Unit]])(x) == Cx(real_of_num(0)))
       #|  1
       #|  1
-      #|  forall x y. x IN h /\\ y IN h ==> f ((x * y) MOD d):complex = f x * f y
-      #|  s:num
-      #|  r:num
-      #|  (x * a EXP k == y * a EXP (k + m * r)) (mod d)
-      #|  a EXP k
-      #|  y * (a EXP m) EXP r
-      #|  f((y * (am EXP r) MOD d) MOD d):complex
-      #|  r:num
-      #|  (y * z == 1) (mod d)
-      #|  (x * a EXP k == y * a EXP (k + i)) (mod d)
-      #|  y * a EXP k
-      #|  (z * x) MOD d
-      #|  z:num
-      #|  y:num
-      #|  forall x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
-      #|  m divides i
-      #|  i:num
-      #|  k:num <= j
-      #|  y:num
-      #|  x:num
-      #|  j:num
-      #|  k:num
-      #|  (forall x k y j. P x k y j) <=> (forall k j x y. P x k y j)
-      #|  (forall y. ?z. forall x k. p x /\\ f x k = y ==> z = g x k) <=>\n      (forall x k x' k'. p x /\\ p x' /\\ f x k = f x' k' ==> g x k = g x' k')
-      #|  (?g. forall x a. p x ==> g(f a x) = h a x) <=>\n                         (?g. forall y x a. p x /\\ f a x = y ==> g y = h a x)
-      #|  ?g. forall x k. x IN h ==> g((x * a EXP k) MOD d) = f(x) * z pow k
-      #|  z:complex
-      #|  m:num
-      #|  (f:num->complex) am
-      #|  a EXP (m * r DIV m) MOD d * y
-      #|  (y * e * a == z) (mod n)\n      ==> (e * y == 1) (mod n) ==> (a == z) (mod n)
-      #|  forall a. (x:num == y) (mod n) ==> (a * x == a * y) (mod n)
-      #|  y:num
-      #|  m:num
-      #|  r:num
-      #|  (a EXP r == x) (mod d)
-      #|  y:num
-      #|  (a EXP m) EXP (r DIV m) MOD d = (am EXP (r DIV m)) MOD d
-      #|  (a EXP (m * r DIV m)) MOD d
-      #|  forall x. x IN h ==> (?y. y IN h /\\ (x * y == 1) (mod d))
-      #|  (a EXP (r MOD m)) MOD d
-      #|  n = 0 <=> ~(0 < n)
-      #|  forall r x. x IN h /\\ (a EXP r == x) (mod d) ==> m divides r
-      #|  ~(a /\\ b /\\ c) <=> b /\\ c ==> ~a
-      #|  r MOD m
-      #|  r:num
-      #|  (a EXP 1 == am) (mod d)
-      #|  0 < m ==> m = 1 \\/ 2 <= m
-      #|  am:num
-      #|  m:num
-      #|  1 <= d
-      #|  ((x * (x EXP s) MOD d) MOD d) IN h
-      #|  forall x s. x IN h ==> ((x EXP s) MOD d) IN h
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, IN(x, (h : (Num) -> Bool)) && IN(y, h) \226\134\146 (f : (Num) -> Cart[Real, Tybit0[Unit]])(MOD(x * y, (d : Num))) == f(x) * f(y)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  op_eq_eq((x : Num) * EXP((a : Num), (k : Num)), (y : Num) * EXP(a, k + (m : Num) * (r : Num)), mod((d : Num)))
+      #|  EXP((a : Num), (k : Num))
+      #|  (y : Num) * EXP(EXP((a : Num), (m : Num)), (r : Num))
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])(MOD((y : Num) * MOD(EXP((am : Num), (r : Num)), (d : Num)), d))
+      #|  (r : Num)
+      #|  op_eq_eq((y : Num) * (z : Num), 1, mod((d : Num)))
+      #|  op_eq_eq((x : Num) * EXP((a : Num), (k : Num)), (y : Num) * EXP(a, k + (i : Num)), mod((d : Num)))
+      #|  (y : Num) * EXP((a : Num), (k : Num))
+      #|  MOD((z : Num) * (x : Num), (d : Num))
+      #|  (z : Num)
+      #|  (y : Num)
+      #|  \226\136\128 x : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 (\226\136\131 y : Num, IN(y, h) && op_eq_eq(x * y, 1, mod((d : Num))))
+      #|  divides((m : Num), (i : Num))
+      #|  (i : Num)
+      #|  (k : Num) <= (j : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (j : Num)
+      #|  (k : Num)
+      #|  (\226\136\128 x : _, \226\136\128 k : _, \226\136\128 y : _, \226\136\128 j : _, (P : (_, _, _, _) -> Bool)(x, k, y, j)) == (\226\136\128 k : _, \226\136\128 j : _, \226\136\128 x : _, \226\136\128 y : _, P(x, k, y, j))
+      #|  (\226\136\128 y : _, \226\136\131 z : _, \226\136\128 x : _, \226\136\128 k : _, (p : (_) -> Bool)(x) && (f : (_, _) -> _)(x, k) == y \226\134\146 z == (g : (_, _) -> _)(x, k)) == (\226\136\128 x : _, \226\136\128 k : _, \226\136\128 x' : _, \226\136\128 k' : _, p(x) && p(x') && f(x, k) == f(x', k') \226\134\146 g(x, k) == g(x', k'))
+      #|  (\226\136\131 g : (_) -> _, \226\136\128 x : _, \226\136\128 a : _, (p : (_) -> Bool)(x) \226\134\146 g((f : (_, _) -> _)(a, x)) == (h : (_, _) -> _)(a, x)) == (\226\136\131 g : (_) -> _, \226\136\128 y : _, \226\136\128 x : _, \226\136\128 a : _, p(x) && f(a, x) == y \226\134\146 g(y) == h(a, x))
+      #|  \226\136\131 g : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Num, \226\136\128 k : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 g(MOD(x * EXP((a : Num), k), (d : Num))) == (f : (Num) -> Cart[Real, Tybit0[Unit]])(x) * pow((z : Cart[Real, Tybit0[Unit]]), k)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (m : Num)
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])((am : Num))
+      #|  MOD(EXP((a : Num), (m : Num) * DIV((r : Num), m)), (d : Num)) * (y : Num)
+      #|  op_eq_eq((y : Num) * ((e : Num) * (a : Num)), (z : Num), mod((n : Num))) \226\134\146 op_eq_eq(e * y, 1, mod(n)) \226\134\146 op_eq_eq(a, z, mod(n))
+      #|  \226\136\128 a : Num, op_eq_eq((x : Num), (y : Num), mod((n : Num))) \226\134\146 op_eq_eq(a * x, a * y, mod(n))
+      #|  (y : Num)
+      #|  (m : Num)
+      #|  (r : Num)
+      #|  op_eq_eq(EXP((a : Num), (r : Num)), (x : Num), mod((d : Num)))
+      #|  (y : Num)
+      #|  MOD(EXP(EXP((a : Num), (m : Num)), DIV((r : Num), m)), (d : Num)) == MOD(EXP((am : Num), DIV(r, m)), d)
+      #|  MOD(EXP((a : Num), (m : Num) * DIV((r : Num), m)), (d : Num))
+      #|  \226\136\128 x : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 (\226\136\131 y : Num, IN(y, h) && op_eq_eq(x * y, 1, mod((d : Num))))
+      #|  MOD(EXP((a : Num), MOD((r : Num), (m : Num))), (d : Num))
+      #|  ((n : Num) == 0) == !(0 < n)
+      #|  \226\136\128 r : Num, \226\136\128 x : Num, IN(x, (h : (Num) -> Bool)) && op_eq_eq(EXP((a : Num), r), x, mod((d : Num))) \226\134\146 divides((m : Num), r)
+      #|  !((a : Bool) && (b : Bool) && (c : Bool)) == (b && c \226\134\146 !a)
+      #|  MOD((r : Num), (m : Num))
+      #|  (r : Num)
+      #|  op_eq_eq(EXP((a : Num), 1), (am : Num), mod((d : Num)))
+      #|  0 < (m : Num) \226\134\146 m == 1 || 2 <= m
+      #|  (am : Num)
+      #|  (m : Num)
+      #|  1 <= (d : Num)
+      #|  IN(MOD((x : Num) * MOD(EXP(x, (s : Num)), (d : Num)), d), (h : (Num) -> Bool))
+      #|  \226\136\128 x : Num, \226\136\128 s : Num, IN(x, (h : (Num) -> Bool)) \226\134\146 IN(MOD(EXP(x, s), (d : Num)), h)
       #|  1
-      #|  phi d
-      #|  ?m x. 0 < m /\\ x IN h /\\ (a EXP m == x) (mod d)
-      #|  1 < d
-      #|  forall f h a d.\n        h SUBSET {x | x < d /\\ coprime(x,d)} /\\\n        (1 IN h) /\\\n        (forall x y. x IN h /\\ y IN h ==> ((x * y) MOD d) IN h) /\\\n        (forall x. x IN h ==> ?y. y IN h /\\ (x * y == 1) (mod d)) /\\\n        (forall x. x IN h ==> ~(f x = Cx(&0))) /\\\n        (forall x y. x IN h /\\ y IN h\n                 ==> f((x * y) MOD d) = f(x) * f(y)) /\\\n        a IN {x | x < d /\\ coprime(x,d)} DIFF h\n        ==> ?f' h'. (a INSERT h) SUBSET h' /\\\n                    h' SUBSET {x | x < d /\\ coprime(x,d)} /\\\n                    (forall x. x IN h ==> f'(x) = f(x)) /\\\n                    ~(f' a = Cx(&1)) /\\\n                    1 IN h' /\\\n                    (forall x y. x IN h' /\\ y IN h' ==> ((x * y) MOD d) IN h') /\\\n                    (forall x. x IN h' ==> ?y. y IN h' /\\ (x * y == 1) (mod d)) /\\\n                    (forall x. x IN h' ==> ~(f' x = Cx(&0))) /\\\n                    (forall x y. x IN h' /\\ y IN h'\n                           ==> f'((x * y) MOD d) = f'(x) * f'(y))
-      #|  f(((x MOD d) * (y MOD d)) MOD d):complex
-      #|  coprime(y,d)
-      #|  coprime(x,d)
-      #|  y:num
-      #|  coprime(x + d:num,d) <=> coprime(x,d)
-      #|  x:num
-      #|  \\n. if coprime(n,d) then f(n MOD d) else Cx(&0)
-      #|  {x:num | x < d}
-      #|  ~b ==> a /\\ b ==> c
-      #|  h = {x | x < d /\\ coprime (x,d)}
-      #|  h:num->bool
-      #|  f:num->complex
-      #|  CARD {x | x < d /\\ coprime(x,d)}
-      #|  {x | x IN {x | x < d} /\\ coprime(x,d)}
-      #|  m - 1 <= CARD(h:num->bool)
-      #|  {x | x IN {x | x < d} /\\ coprime(x,d)}
-      #|  FINITE(h:num->bool)
-      #|  CARD((a:num) INSERT h)
-      #|  hh:num->bool
-      #|  ff:num->complex
-      #|  d:num
-      #|  a:num
-      #|  h:num->bool
-      #|  f:num->complex
-      #|  a:num
-      #|  s SUBSET t ==> ~(s = t) ==> ?a. a IN t /\\ ~(a IN s)
-      #|  h SUBSET {x | x < d /\\ coprime (x,d)}
-      #|  h:num->bool
-      #|  f:num->complex
-      #|  m <= CARD(h:num->bool)
-      #|  h:num->bool
-      #|  f:num->complex
-      #|  x <= n ==> x - 1 <= n
-      #|  ~(m = 0)
-      #|  ~(m = 0) ==> m - 1 < m
-      #|  h0:num->bool
-      #|  f0:num->complex
-      #|  m = 0
-      #|  m:num
-      #|  forall m. m <= CARD {x | x < d /\\ coprime(x,d)}\n        ==> ?f h. h SUBSET {x | x < d /\\ coprime(x,d)} /\\\n                 (1 IN h) /\\ (n MOD d) IN h /\\\n                 (forall x y. x IN h /\\ y IN h ==> ((x * y) MOD d) IN h) /\\\n                 (forall x. x IN h ==> ?y. y IN h /\\ (x * y == 1) (mod d)) /\\\n                 ~(f(n MOD d) = Cx(&1)) /\\\n                 (forall x. x IN h ==> ~(f x = Cx(&0))) /\\\n                 (forall x y. x IN h /\\ y IN h\n                          ==> f((x * y) MOD d) = f(x) * f(y)) /\\\n                 m <= CARD h
-      #|  h0:num->bool
-      #|  f0:num->complex
-      #|  d:num
-      #|  n MOD d
+      #|  phi((d : Num))
+      #|  \226\136\131 m : Num, \226\136\131 x : Num, 0 < m && IN(x, (h : (Num) -> Bool)) && op_eq_eq(EXP((a : Num), m), x, mod((d : Num)))
+      #|  1 < (d : Num)
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 h : (Num) -> Bool, \226\136\128 a : Num, \226\136\128 d : Num, SUBSET(h, {(x : Num) | x < d && coprime((x, d))}) && IN(1, h) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, h) && IN(y, h) \226\134\146 IN(MOD(x * y, d), h)) && (\226\136\128 x : Num, IN(x, h) \226\134\146 (\226\136\131 y : Num, IN(y, h) && op_eq_eq(x * y, 1, mod(d)))) && (\226\136\128 x : Num, IN(x, h) \226\134\146 !(f(x) == Cx(real_of_num(0)))) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, h) && IN(y, h) \226\134\146 f(MOD(x * y, d)) == f(x) * f(y)) && IN(a, DIFF({(x : Num) | x < d && coprime((x, d))}, h)) \226\134\146 (\226\136\131 f' : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\131 h' : (Num) -> Bool, SUBSET(INSERT(a, h), h') && SUBSET(h', {(x : Num) | x < d && coprime((x, d))}) && (\226\136\128 x : Num, IN(x, h) \226\134\146 f'(x) == f(x)) && !(f'(a) == Cx(real_of_num(1))) && IN(1, h') && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, h') && IN(y, h') \226\134\146 IN(MOD(x * y, d), h')) && (\226\136\128 x : Num, IN(x, h') \226\134\146 (\226\136\131 y : Num, IN(y, h') && op_eq_eq(x * y, 1, mod(d)))) && (\226\136\128 x : Num, IN(x, h') \226\134\146 !(f'(x) == Cx(real_of_num(0)))) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, h') && IN(y, h') \226\134\146 f'(MOD(x * y, d)) == f'(x) * f'(y)))
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])(MOD(MOD((x : Num), (d : Num)) * MOD((y : Num), d), d))
+      #|  coprime(((y : Num), (d : Num)))
+      #|  coprime(((x : Num), (d : Num)))
+      #|  (y : Num)
+      #|  coprime(((x : Num) + (d : Num), d)) == coprime((x, d))
+      #|  (x : Num)
+      #|  (n : Num) => if coprime((n, (d : Num))) { (f : (Num) -> Cart[Real, Tybit0[Unit]])(MOD(n, d)) } else { Cx(real_of_num(0)) }
+      #|  {(x : Num) | x < (d : Num)}
+      #|  !(b : Bool) \226\134\146 (a : Bool) && b \226\134\146 (c : Bool)
+      #|  (h : (Num) -> Bool) == {(x : Num) | x < (d : Num) && coprime((x, d))}
+      #|  (h : (Num) -> Bool)
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  CARD({(x : Num) | x < (d : Num) && coprime((x, d))})
+      #|  {(x : Num) | IN(x, {(x : Num) | x < (d : Num)}) && coprime((x, d))}
+      #|  (m : Num) - 1 <= CARD((h : (Num) -> Bool))
+      #|  {(x : Num) | IN(x, {(x : Num) | x < (d : Num)}) && coprime((x, d))}
+      #|  FINITE((h : (Num) -> Bool))
+      #|  CARD(INSERT((a : Num), (h : (Num) -> Bool)))
+      #|  (hh : (Num) -> Bool)
+      #|  (ff : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (a : Num)
+      #|  (h : (Num) -> Bool)
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : Num)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == t) \226\134\146 (\226\136\131 a : _, IN(a, t) && !IN(a, s))
+      #|  SUBSET((h : (Num) -> Bool), {(x : Num) | x < (d : Num) && coprime((x, d))})
+      #|  (h : (Num) -> Bool)
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (m : Num) <= CARD((h : (Num) -> Bool))
+      #|  (h : (Num) -> Bool)
+      #|  (f : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : Num) <= (n : Num) \226\134\146 x - 1 <= n
+      #|  !((m : Num) == 0)
+      #|  !((m : Num) == 0) \226\134\146 m - 1 < m
+      #|  (h0 : (Num) -> Bool)
+      #|  (f0 : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (m : Num) == 0
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, m <= CARD({(x : Num) | x < (d : Num) && coprime((x, d))}) \226\134\146 (\226\136\131 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\131 h : (Num) -> Bool, SUBSET(h, {(x : Num) | x < d && coprime((x, d))}) && IN(1, h) && IN(MOD((n : Num), d), h) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, h) && IN(y, h) \226\134\146 IN(MOD(x * y, d), h)) && (\226\136\128 x : Num, IN(x, h) \226\134\146 (\226\136\131 y : Num, IN(y, h) && op_eq_eq(x * y, 1, mod(d)))) && !(f(MOD(n, d)) == Cx(real_of_num(1))) && (\226\136\128 x : Num, IN(x, h) \226\134\146 !(f(x) == Cx(real_of_num(0)))) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, h) && IN(y, h) \226\134\146 f(MOD(x * y, d)) == f(x) * f(y)) && m <= CARD(h))
+      #|  (h0 : (Num) -> Bool)
+      #|  (f0 : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  MOD((n : Num), (d : Num))
       #|  {1}
-      #|  \\n:num. Cx(&1)
-      #|  chi_0 d
-      #|  coprime(n,d)
-      #|  forall d n. 1 < d /\\ ~((n == 1) (mod d))\n          ==> ?c. dirichlet_character d c /\\ ~(c n = Cx(&1))
-      #|  ~(d = 0) /\\ ~(d = 1) ==> 1 < d
-      #|  n:num
-      #|  d:num
-      #|  vsum {c | dirichlet_character d c} (\\c. Cx(&1))
-      #|  {x | x = a} = {a}
-      #|  d = 1
-      #|  {x | x = a} = {a}
-      #|  d = 0
-      #|  forall d n. vsum {c | dirichlet_character d c} (\\c. c n) =\n                if (n == 1) (mod d)\n                then Cx(&(CARD {c | dirichlet_character d c}))\n                else Cx(&0)
-      #|  d:num
-      #|  (d == 1) (mod d) <=> d divides 1
-      #|  k:num = d
-      #|  d = 1
-      #|  k:num
-      #|  {j | j IN 1..d /\\ (j == 1) (mod d)} = {1}
-      #|  1..d
-      #|  {c | dirichlet_character d c}
-      #|  \\c n. (c:num->complex) n
-      #|  forall d n. 1 <= d\n         ==> vsum {c | dirichlet_character d c} (\\c. c(n)) =\n                if (n == 1) (mod d) then Cx(&(phi d)) else Cx(&0)
-      #|  Lfunction c = infsum (from 1) (\\n. c(n) / Cx(&n))
-      #|  n MOD d
-      #|  n:num
-      #|  IMAGE (\\n. vsum(1..n) c:complex) (0..d)
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded {vsum (1..n) c | n IN (:num)}
+      #|  (n : Num) => Cx(real_of_num(1))
+      #|  chi_0((d : Num))
+      #|  coprime(((n : Num), (d : Num)))
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, 1 < d && !op_eq_eq(n, 1, mod(d)) \226\134\146 (\226\136\131 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c(n) == Cx(real_of_num(1))))
+      #|  !((d : Num) == 0) && !(d == 1) \226\134\146 1 < d
+      #|  (n : Num)
+      #|  (d : Num)
+      #|  vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character((d : Num), c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)))
+      #|  {(x : _) | x == (a : _)} == {a}
+      #|  (d : Num) == 1
+      #|  {(x : _) | x == (a : _)} == {a}
+      #|  (d : Num) == 0
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(n)) == (if op_eq_eq(n, 1, mod(d)) { Cx(real_of_num(CARD({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}))) } else { Cx(real_of_num(0)) })
+      #|  (d : Num)
+      #|  op_eq_eq((d : Num), 1, mod(d)) == divides(d, 1)
+      #|  (k : Num) == (d : Num)
+      #|  (d : Num) == 1
+      #|  (k : Num)
+      #|  {(j : Num) | IN(j, op_dot_dot(1, (d : Num))) && op_eq_eq(j, 1, mod(d))} == {1}
+      #|  op_dot_dot(1, (d : Num))
+      #|  {(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character((d : Num), c)}
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]]) => (n : Num) => c(n)
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, 1 <= d \226\134\146 vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(n)) == (if op_eq_eq(n, 1, mod(d)) { Cx(real_of_num(phi(d))) } else { Cx(real_of_num(0)) })
+      #|  (Lfunction : ((Num) -> Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((c : (Num) -> Cart[Real, Tybit0[Unit]])) == infsum(from(1), (n : Num) => c(n) / Cx(real_of_num(n)))
+      #|  MOD((n : Num), (d : Num))
+      #|  (n : Num)
+      #|  IMAGE((n : Num) => vsum(op_dot_dot(1, n), (c : (Num) -> Cart[Real, Tybit0[Unit]])), op_dot_dot(0, (d : Num)))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 bounded({vsum(op_dot_dot(1, (n : Num)), c) | IN(n, UNIV)})
       #|  1
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ((\\n. c(n) / Cx(&n)) sums (Lfunction c)) (from 1)
-      #|  forall d n. cnj(chi_0 d n) = chi_0 d n
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> Lfunction (\\n. cnj(c n)) = cnj(Lfunction c)
-      #|  1 <= k + 1
-      #|  1 <= k ==> 1 <= k + 1
-      #|  k + 1 <= m ==> k <= m
-      #|  m:num
-      #|  k + 1
-      #|  vsum (1..k) (\\n. c n / Cx (&n))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 sums((n : Num) => c(n) / Cx(real_of_num(n)), Lfunction(c), from(1))
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, cnj(chi_0(d, n)) == chi_0(d, n)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 Lfunction((n : Num) => cnj(c(n))) == cnj(Lfunction(c))
+      #|  1 <= (k : Num) + 1
+      #|  1 <= (k : Num) \226\134\146 1 <= k + 1
+      #|  (k : Num) + 1 <= (m : Num) \226\134\146 k <= m
+      #|  (m : Num)
+      #|  (k : Num) + 1
+      #|  vsum(op_dot_dot(1, (k : Num)), (n : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(n) / Cx(real_of_num(n)))
       #|  sequentially
-      #|  \\n. vsum(k+1..n) (\\n. c(n) / Cx(&n))
+      #|  (n : Num) => vsum(op_dot_dot((k : Num) + 1, n), (n : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(n) / Cx(real_of_num(n)))
       #|  sequentially
-      #|  k:num
-      #|  B:real
+      #|  (k : Num)
+      #|  (B : Real)
       #|  1
       #|  1
-      #|  \\n. inv(Cx(&n))
-      #|  c:num->complex
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?B. &0 < B /\\\n                 forall n. 1 <= n\n                     ==> norm(Lfunction c - vsum(1..n) (\\n. c(n) / Cx(&n)))\n                          <= B / (&n + &1)
-      #|  &0 < &n + &1
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  n:num
-      #|  n = 0
-      #|  n:num
-      #|  max B (norm(Lfunction c))
-      #|  B:real
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ?B. &0 < B /\\\n                 forall n. norm(Lfunction c - vsum(1..n) (\\n. c(n) / Cx(&n)))\n                         <= B / (&n + &1)
-      #|  n:num
-      #|  x:num
-      #|  1 <= x
-      #|  B / (&(x DIV n) + &1)
-      #|  a * b * c <= d <=> (a * c) * b <= d
-      #|  n:num
-      #|  ~(x = &0) ==> B / x * &18 * x = &18 * B
-      #|  B / &x * &18 * &x
-      #|  sum(1..x) (\\n. B / &x * mangoldt n)
-      #|  x = 0
-      #|  x:num
-      #|  &18 * B
-      #|  B:real
-      #|  c:num->complex
-      #|  d:num
-      #|  (ck * cn) * cm * k * n:complex = (ck * k) * (cn * cm * n)
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded\n              { Lfunction(c) *\n                vsum(1..x) (\\n. c(n) * Cx(mangoldt n / &n)) -\n                vsum(1..x) (\\n. c(n) * Cx(log(&n) / &n)) | x IN (:num)}
+      #|  (n : Num) => inv(Cx(real_of_num(n)))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 n : Num, 1 <= n \226\134\146 norm(Lfunction(c) - vsum(op_dot_dot(1, n), (n : Num) => c(n) / Cx(real_of_num(n)))) <= B / (real_of_num(n) + real_of_num(1))))
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (n : Num)
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  max((B : Real), norm(Lfunction((c : (Num) -> Cart[Real, Tybit0[Unit]]))))
+      #|  (B : Real)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 n : Num, norm(Lfunction(c) - vsum(op_dot_dot(1, n), (n : Num) => c(n) / Cx(real_of_num(n)))) <= B / (real_of_num(n) + real_of_num(1))))
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  1 <= (x : Num)
+      #|  (B : Real) / (real_of_num(DIV((x : Num), (n : Num))) + real_of_num(1))
+      #|  ((a : Real) * ((b : Real) * (c : Real)) <= (d : Real)) == (a * c * b <= d)
+      #|  (n : Num)
+      #|  !((x : Real) == real_of_num(0)) \226\134\146 (B : Real) / x * (real_of_num(18) * x) == real_of_num(18) * B
+      #|  (B : Real) / real_of_num((x : Num)) * (real_of_num(18) * real_of_num(x))
+      #|  sum(op_dot_dot(1, (x : Num)), (n : Num) => (B : Real) / real_of_num(x) * mangoldt(n))
+      #|  (x : Num) == 0
+      #|  (x : Num)
+      #|  real_of_num(18) * (B : Real)
+      #|  (B : Real)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (ck : Cart[Real, Tybit0[Unit]]) * (cn : Cart[Real, Tybit0[Unit]]) * ((cm : Cart[Real, Tybit0[Unit]]) * ((k : Cart[Real, Tybit0[Unit]]) * (n : Cart[Real, Tybit0[Unit]]))) == ck * k * (cn * (cm * n))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 bounded({Lfunction(c) * vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) - vsum(op_dot_dot(1, x), (n : Num) => c(n) * Cx(log(real_of_num(n)) / real_of_num(n))) | IN(x, UNIV)})
       #|  1
       #|  1
       #|  4
-      #|  forall c d. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> summable (from 1) (\\n. c(n) * Cx(log(&n) / &n))
-      #|  n:num
-      #|  n:num
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> bounded\n              { Lfunction(c) *\n                vsum(1..x) (\\n. c(n) * Cx(mangoldt n / &n)) | x IN (:num)}
-      #|  forall d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d) /\\ ~(Lfunction c = Cx(&0))\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) | x IN (:num)}
-      #|  a = &0 ==> a - b = --b
-      #|  d = 0
-      #|  q = 0
-      #|  q = n DIV d
-      #|  d:num
-      #|  sum {d | d divides n} (\\x. mobius x * (log(&n) - log(&x)))
-      #|  \\n. log(&n)
-      #|  \\n. mangoldt n
-      #|  forall n. 1 <= n\n       ==> mangoldt(n) = --(sum {d | d divides n} (\\d. mobius(d) * log(&d)))
-      #|  c:num->complex
-      #|  d:num
-      #|  m = 0
-      #|  m:num
-      #|  n:num
-      #|  vsum (1..x)\n         (\\n. c n / Cx(&n) * vsum {d | d divides n}\n               (\\d. Cx(mobius d * log(&x))))
-      #|  c / d * x - c * --y / d:complex = c / d * (x + y)
-      #|  c - b = a ==> (a:complex) + b = c
-      #|  forall d c x.\n        dirichlet_character d c /\\ ~(c = chi_0 d) /\\ 1 <= x\n        ==> Cx(log(&x)) + vsum (1..x) (\\n. c(n) * Cx(mangoldt n / &n)) =\n            vsum (1..x) (\\n. c(n) / Cx(&n) *\n                             vsum {d | d divides n}\n                                  (\\d. Cx(mobius(d) * log(&x / &d))))
-      #|  &1 <= x /\\ l <= x ==> &2 * l + abs(x) + &1 <= &4 * x
-      #|  &2 * l + abs(x) + &1 <= b\n    ==> abs(lf - (xl - x + &1)) <= &2 * l\n        ==> xl - lf <= b
-      #|  sum (1..x) (\\n. abs(log(&x / &n)))
-      #|  x = 0
-      #|  x:num
-      #|  forall x. abs(sum(1..x) (\\n. log(&x / &n) / &x)) <= &4
-      #|  n:num
-      #|  x:num
-      #|  n:num
-      #|  abs x <= a ==> x <= a
-      #|  sum(1..x) (\\n. log(&x / &n) / &x)
-      #|  a * l * B * i:real = ((l * i) * a) * B
-      #|  abs x <= x <=> &0 <= x
-      #|  &1 <= n ==> inv(n) * n = &1
-      #|  n:num
-      #|  sum(1..x) (\\n. inv(&n) * log(&x / &n) * B / (&(x DIV n) + &1))
-      #|  x:num
-      #|  &4 * B
-      #|  ((ck * cn) * k' * n') * m * l = (cn * m * n') * l * (ck * k')
-      #|  c:num->complex
-      #|  d:num
-      #|  ~(n = 0) <=> 1 <= n
-      #|  {f x | x IN (:num)} = f 0 INSERT {f x | ~(x = 0)}
-      #|  B:real
-      #|  c:num->complex
-      #|  d:num
-      #|  forall d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d) /\\ Lfunction c = Cx(&0)\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) +\n                    Cx(log(&x)) | x IN (:num)}
-      #|  k = SUC(k - 1)
-      #|  q:num
-      #|  &0 <= y /\\ x = y ==> abs x = y
-      #|  k:num
-      #|  p:num
-      #|  j:num
-      #|  q:num
-      #|  ~(coprime(p EXP k,d))
-      #|  k:num
-      #|  p:num
-      #|  y:num
-      #|  \\(p,k). p EXP k
-      #|  (if a then &0 else if b then x else &0) =\n                      (if ~a /\\ b then x else &0)
-      #|  2 EXP k
-      #|  p EXP k
-      #|  k:num
-      #|  1..x
-      #|  p:num
-      #|  &0 <= x * y /\\ &2 * x <= &1\n                                ==> x pow 1 - x * y <= &1 - x
-      #|  2 EXP k
-      #|  p EXP k
-      #|  k:num
-      #|  2 <= p ==> 1 <= p
-      #|  sum(1..x) (\\k. log(&p) / &p pow k)
-      #|  2 <= p ==> 1 < p /\\ 1 <= p
-      #|  2 <= p /\\ 1 <= p /\\ 1 < p
-      #|  p:num
-      #|  sum {p | prime p /\\ p divides d}\n                  (\\p. sum {k | 1 <= k /\\ p EXP k <= x}\n                           (\\k. log(&p) / &p pow k))
-      #|  forall d. 1 <= d\n       ==> norm(vsum(1..x) (\\n. (chi_0 d n - Cx(&1)) * Cx(mangoldt n / &n)))\n            <= sum {p | prime p /\\ p divides d} (\\p. log(&p))
-      #|  c * x - (c - Cx(&1)) * x = x
-      #|  vsum(1..x) (\\n. (chi_0 d n - Cx(&1)) * Cx(mangoldt n / &n))
-      #|  forall s'. norm(s') <= p /\\ norm(s - s' - l) <= &21\n        ==> norm(s - l) <= abs p + &21
+      #|  \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : Num, dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 summable(from(1), (n : Num) => c(n) * Cx(log(real_of_num(n)) / real_of_num(n)))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 bounded({Lfunction(c) * vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) | IN(x, UNIV)})
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) && !(Lfunction(c) == Cx(real_of_num(0))) \226\134\146 bounded({vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) | IN(x, UNIV)})
+      #|  (a : Real) == real_of_num(0) \226\134\146 a - (b : Real) == -b
+      #|  (d : Num) == 0
+      #|  (q : Num) == 0
+      #|  (q : Num) == DIV((n : Num), (d : Num))
+      #|  (d : Num)
+      #|  sum({(d : Num) | divides(d, (n : Num))}, (x : Num) => mobius(x) * (log(real_of_num(n)) - log(real_of_num(x))))
+      #|  (n : Num) => log(real_of_num(n))
+      #|  (n : Num) => mangoldt(n)
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 mangoldt(n) == -sum({(d : Num) | divides(d, n)}, (d : Num) => mobius(d) * log(real_of_num(d)))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (m : Num) == 0
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  vsum(op_dot_dot(1, (x : Num)), (n : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(n) / Cx(real_of_num(n)) * vsum({(d : Num) | divides(d, n)}, (d : Num) => Cx(mobius(d) * log(real_of_num(x)))))
+      #|  (c : Cart[Real, Tybit0[Unit]]) / (d : Cart[Real, Tybit0[Unit]]) * (x : Cart[Real, Tybit0[Unit]]) - c * (-(y : Cart[Real, Tybit0[Unit]]) / d) == c / d * (x + y)
+      #|  (c : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]]) \226\134\146 a + b == c
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Num, dirichlet_character(d, c) && !(c == chi_0(d)) && 1 <= x \226\134\146 Cx(log(real_of_num(x))) + vsum(op_dot_dot(1, x), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) == vsum(op_dot_dot(1, x), (n : Num) => c(n) / Cx(real_of_num(n)) * vsum({(d : Num) | divides(d, n)}, (d : Num) => Cx(mobius(d) * log(real_of_num(x) / real_of_num(d)))))
+      #|  real_of_num(1) <= (x : Real) && (l : Real) <= x \226\134\146 real_of_num(2) * l + (abs(x) + real_of_num(1)) <= real_of_num(4) * x
+      #|  real_of_num(2) * (l : Real) + (abs((x : Real)) + real_of_num(1)) <= (b : Real) \226\134\146 abs((lf : Real) - ((xl : Real) - x + real_of_num(1))) <= real_of_num(2) * l \226\134\146 xl - lf <= b
+      #|  sum(op_dot_dot(1, (x : Num)), (n : Num) => abs(log(real_of_num(x) / real_of_num(n))))
+      #|  (x : Num) == 0
+      #|  (x : Num)
+      #|  \226\136\128 x : Num, abs(sum(op_dot_dot(1, x), (n : Num) => log(real_of_num(x) / real_of_num(n)) / real_of_num(x))) <= real_of_num(4)
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  (n : Num)
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  sum(op_dot_dot(1, (x : Num)), (n : Num) => log(real_of_num(x) / real_of_num(n)) / real_of_num(x))
+      #|  (a : Real) * ((l : Real) * ((B : Real) * (i : Real))) == l * i * a * B
+      #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
+      #|  real_of_num(1) <= (n : Real) \226\134\146 inv(n) * n == real_of_num(1)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(1, (x : Num)), (n : Num) => inv(real_of_num(n)) * (log(real_of_num(x) / real_of_num(n)) * ((B : Real) / (real_of_num(DIV(x, n)) + real_of_num(1)))))
+      #|  (x : Num)
+      #|  real_of_num(4) * (B : Real)
+      #|  (ck : Cart[Real, Tybit0[Unit]]) * (cn : Cart[Real, Tybit0[Unit]]) * ((k' : Cart[Real, Tybit0[Unit]]) * (n' : Cart[Real, Tybit0[Unit]])) * ((m : Cart[Real, Tybit0[Unit]]) * (l : Cart[Real, Tybit0[Unit]])) == cn * (m * n') * (l * (ck * k'))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  !((n : Num) == 0) == (1 <= n)
+      #|  {(f : (Num) -> _)((x : Num)) | IN(x, UNIV)} == INSERT(f(0), {f((x : Num)) | !(x == 0)})
+      #|  (B : Real)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) && Lfunction(c) == Cx(real_of_num(0)) \226\134\146 bounded({vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) + Cx(log(real_of_num(x))) | IN(x, UNIV)})
+      #|  (k : Num) == SUC(k - 1)
+      #|  (q : Num)
+      #|  real_of_num(0) <= (y : Real) && (x : Real) == y \226\134\146 abs(x) == y
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (j : Num)
+      #|  (q : Num)
+      #|  !coprime((EXP((p : Num), (k : Num)), (d : Num)))
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (y : Num)
+      #|  GABS((f : ((Num, Num)) -> Num) => \226\136\128 p : Num, \226\136\128 k : Num, GEQ(f((p, k)), EXP(p, k)))
+      #|  (if (a : Bool) { real_of_num(0) } else { if (b : Bool) { (x : Real) } else { real_of_num(0) } }) == (if !a && b { x } else { real_of_num(0) })
+      #|  EXP(2, (k : Num))
+      #|  EXP((p : Num), (k : Num))
+      #|  (k : Num)
+      #|  op_dot_dot(1, (x : Num))
+      #|  (p : Num)
+      #|  real_of_num(0) <= (x : Real) * (y : Real) && real_of_num(2) * x <= real_of_num(1) \226\134\146 pow(x, 1) - x * y <= real_of_num(1) - x
+      #|  EXP(2, (k : Num))
+      #|  EXP((p : Num), (k : Num))
+      #|  (k : Num)
+      #|  2 <= (p : Num) \226\134\146 1 <= p
+      #|  sum(op_dot_dot(1, (x : Num)), (k : Num) => log(real_of_num((p : Num))) / pow(real_of_num(p), k))
+      #|  2 <= (p : Num) \226\134\146 1 < p && 1 <= p
+      #|  2 <= (p : Num) && 1 <= p && 1 < p
+      #|  (p : Num)
+      #|  sum({(p : Num) | prime(p) && divides(p, (d : Num))}, (p : Num) => sum({(k : Num) | 1 <= k && EXP(p, k) <= (x : Num)}, (k : Num) => log(real_of_num(p)) / pow(real_of_num(p), k)))
+      #|  \226\136\128 d : Num, 1 <= d \226\134\146 norm(vsum(op_dot_dot(1, (x : Num)), (n : Num) => (chi_0(d, n) - Cx(real_of_num(1))) * Cx(mangoldt(n) / real_of_num(n)))) <= sum({(p : Num) | prime(p) && divides(p, d)}, (p : Num) => log(real_of_num(p)))
+      #|  (c : Cart[Real, Tybit0[Unit]]) * (x : Cart[Real, Tybit0[Unit]]) - (c - Cx(real_of_num(1))) * x == x
+      #|  vsum(op_dot_dot(1, (x : Num)), (n : Num) => (chi_0((d : Num), n) - Cx(real_of_num(1))) * Cx(mangoldt(n) / real_of_num(n)))
+      #|  \226\136\128 s' : Cart[Real, Tybit0[Unit]], norm(s') <= (p : Real) && norm((s : Cart[Real, Tybit0[Unit]]) - s' - (l : Cart[Real, Tybit0[Unit]])) <= real_of_num(21) \226\134\146 norm(s - l) <= abs(p) + real_of_num(21)
       #|  :real
       #|  :real
-      #|  x <= a + b ==> x <= a + abs y + b
-      #|  x = 0
-      #|  x:num
-      #|  abs(sum {p | prime p /\\ p divides d} (\\p. log(&p))) +\n    abs(log(&0)) + &21
-      #|  forall d. 1 <= d\n       ==> bounded { vsum(1..x) (\\n. chi_0 d n * Cx(mangoldt n / &n)) -\n                     Cx(log(&x)) | x IN (:num)}
-      #|  forall n. nsum(0..n) (\\i. i) = (n * (n + 1)) DIV 2
-      #|  forall s. FINITE s ==> product s (\\i. z pow (f i)) = z pow (nsum s f)
+      #|  (x : Real) <= (a : Real) + (b : Real) \226\134\146 x <= a + (abs((y : Real)) + b)
+      #|  (x : Num) == 0
+      #|  (x : Num)
+      #|  abs(sum({(p : Num) | prime(p) && divides(p, (d : Num))}, (p : Num) => log(real_of_num(p)))) + (abs(log(real_of_num(0))) + real_of_num(21))
+      #|  \226\136\128 d : Num, 1 <= d \226\134\146 bounded({vsum(op_dot_dot(1, (x : Num)), (n : Num) => chi_0(d, n) * Cx(mangoldt(n) / real_of_num(n))) - Cx(log(real_of_num(x))) | IN(x, UNIV)})
+      #|  \226\136\128 n : Num, nsum(op_dot_dot(0, n), (i : Num) => i) == DIV(n * (n + 1), 2)
+      #|  \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 product(s, (i : _) => pow((z : Real), (f : (_) -> Num)(i))) == pow(z, nsum(s, f))
       #|  forall z i. product (0..n) (\\i. z pow i) = z pow ((n * (n + 1)) DIV 2)
-      #|  &0 < &n + &1
-      #|  EVEN(n * (n + 1))
-      #|  2 * (n * (n + 1)) DIV 2 = n * (n + 1)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  EVEN((n : Num) * (n + 1))
+      #|  2 * DIV((n : Num) * (n + 1), 2) == n * (n + 1)
       #|  2
-      #|  1..n+1 = 0+1..n+1
-      #|  1 <= n + 1
-      #|  \\k. (t:real) pow (k - 1)
-      #|  n + 1
-      #|  forall n t. &0 <= t\n         ==> (&n + &1) pow 2 * t pow n <= (sum(0..n) (\\k. t pow k)) pow 2
-      #|  {m | ?i. P i /\\ m = f i} = IMAGE f {i | P i}
-      #|  forall f p k. prime p\n           ==> sum {m | m divides (p EXP k)} c = sum(0..k) (\\i. c(p EXP i))
-      #|  {m | ?i. P i /\\ m = f i} = IMAGE f {i | P i}
-      #|  forall f p k. prime p\n           ==> vsum {m | m divides (p EXP k)} c = vsum(0..k) (\\i. c(p EXP i))
-      #|  i = 0
-      #|  i:num
-      #|  y:num
-      #|  vsum {1} c : complex
-      #|  forall d c p k. dirichlet_character d c /\\ prime p /\\ p divides d\n             ==> vsum {m | m divides (p EXP k)} c = Cx(&1)
-      #|  t:real
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  forall d c. dirichlet_character d c /\\ (forall n. real(c n))\n         ==> forall n. c n = --Cx(&1) \\/ c n = Cx(&0) \\/ c n = Cx(&1)
-      #|  r:num
-      #|  k:num
-      #|  (s = if EVEN k then &1 else &0) ==> &0 <= s
-      #|  p:num
-      #|  c:num->complex
-      #|  d:num
-      #|  forall d c p k. dirichlet_character d c /\\ (forall n. real(c n)) /\\ prime p\n             ==> &0 <= Re(vsum {m | m divides (p EXP k)} c)
-      #|  1 < n ==> ~(n = 0)
-      #|  b:num
-      #|  a:num
-      #|  \\m:num. Re(c m)
-      #|  b:num
-      #|  a:num
-      #|  n:num
-      #|  n:num
-      #|  1 < n
-      #|  ~(n = 0) ==> n = 1 \\/ 1 < n
-      #|  forall d c n. dirichlet_character d c /\\ (forall n. real(c n)) /\\ ~(n = 0)\n           ==> &0 <= Re(vsum {m | m divides n} c)
-      #|  &0 <= n * x * x ==> &1 - (n + &1) * x <= (&1 - x) * (&1 - n * x)
-      #|  (&1 - x) * (&1 - &n * x)
-      #|  forall x n. &0 <= x /\\ x <= &1 ==> &1 - &n * x <= (&1 - x) pow n
-      #|  x = y /\\ a <= b ==> b <= x ==> a <= y
-      #|  &0 <= &n + &1
-      #|  a /\\ b /\\ c /\\ d ==> e <=> b /\\ d ==> a /\\ c ==> e
-      #|  &0 < &n + &1
-      #|  t:real
-      #|  n - 1
-      #|  t:real
-      #|  n:num
+      #|  op_dot_dot(1, (n : Num) + 1) == op_dot_dot(0 + 1, n + 1)
+      #|  1 <= (n : Num) + 1
+      #|  (k : Num) => pow((t : Real), k - 1)
+      #|  (n : Num) + 1
+      #|  \226\136\128 n : Num, \226\136\128 t : Real, real_of_num(0) <= t \226\134\146 pow(real_of_num(n) + real_of_num(1), 2) * pow(t, n) <= pow(sum(op_dot_dot(0, n), (k : Num) => pow(t, k)), 2)
+      #|  {(m : _) | \226\136\131 i : _, (P : (_) -> Bool)(i) && m == (f : (_) -> _)(i)} == IMAGE(f, {(i : _) | P(i)})
+      #|  \226\136\128 f : _, \226\136\128 p : Num, \226\136\128 k : Num, prime(p) \226\134\146 sum({(m : Num) | divides(m, EXP(p, k))}, (c : (Num) -> Real)) == sum(op_dot_dot(0, k), (i : Num) => c(EXP(p, i)))
+      #|  {(m : _) | \226\136\131 i : _, (P : (_) -> Bool)(i) && m == (f : (_) -> _)(i)} == IMAGE(f, {(i : _) | P(i)})
+      #|  \226\136\128 f : _, \226\136\128 p : Num, \226\136\128 k : Num, prime(p) \226\134\146 vsum({(m : Num) | divides(m, EXP(p, k))}, (c : (Num) -> Cart[Real, _])) == vsum(op_dot_dot(0, k), (i : Num) => c(EXP(p, i)))
+      #|  (i : Num) == 0
+      #|  (i : Num)
+      #|  (y : Num)
+      #|  vsum({1}, (c : (Num) -> Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 p : Num, \226\136\128 k : Num, dirichlet_character(d, c) && prime(p) && divides(p, d) \226\134\146 vsum({(m : Num) | divides(m, EXP(p, k))}, c) == Cx(real_of_num(1))
+      #|  (t : Real)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && (\226\136\128 n : Num, real(c(n))) \226\134\146 (\226\136\128 n : Num, c(n) == -Cx(real_of_num(1)) || c(n) == Cx(real_of_num(0)) || c(n) == Cx(real_of_num(1)))
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (s : Real) == (if EVEN((k : Num)) { real_of_num(1) } else { real_of_num(0) }) \226\134\146 real_of_num(0) <= s
+      #|  (p : Num)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 p : Num, \226\136\128 k : Num, dirichlet_character(d, c) && (\226\136\128 n : Num, real(c(n))) && prime(p) \226\134\146 real_of_num(0) <= Re(vsum({(m : Num) | divides(m, EXP(p, k))}, c))
+      #|  1 < (n : Num) \226\134\146 !(n == 0)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (m : Num) => Re((c : (Num) -> Cart[Real, Tybit0[Unit]])(m))
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  1 < (n : Num)
+      #|  !((n : Num) == 0) \226\134\146 n == 1 || 1 < n
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, dirichlet_character(d, c) && (\226\136\128 n : Num, real(c(n))) && !(n == 0) \226\134\146 real_of_num(0) <= Re(vsum({(m : Num) | divides(m, n)}, c))
+      #|  real_of_num(0) <= (n : Real) * ((x : Real) * x) \226\134\146 real_of_num(1) - (n + real_of_num(1)) * x <= (real_of_num(1) - x) * (real_of_num(1) - n * x)
+      #|  (real_of_num(1) - (x : Real)) * (real_of_num(1) - real_of_num((n : Num)) * x)
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && x <= real_of_num(1) \226\134\146 real_of_num(1) - real_of_num(n) * x <= pow(real_of_num(1) - x, n)
+      #|  (x : Real) == (y : Real) && (a : Real) <= (b : Real) \226\134\146 b <= x \226\134\146 a <= y
+      #|  real_of_num(0) <= real_of_num((n : Num)) + real_of_num(1)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (b && d \226\134\146 a && c \226\134\146 e)
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  (t : Real)
+      #|  (n : Num) - 1
+      #|  (t : Real)
+      #|  (n : Num)
       #|  2
-      #|  &1 <= n ==> inv(n) - inv(n + &1) = inv(n * (n + &1))
-      #|  (x + y) - y:real = x
+      #|  real_of_num(1) <= (n : Real) \226\134\146 inv(n) - inv(n + real_of_num(1)) == inv(n * (n + real_of_num(1)))
+      #|  (x : Real) + (y : Real) - y == x
       #|  1
-      #|  (n + 1) + x = n + x + 1
-      #|  t pow n * sum (0..n) (\\m. t pow m) -\n                t pow (n + 1) * sum (0..n - 1) (\\m. t pow m) = t pow n
-      #|  &0 < y /\\ &0 < z ==> x / y - w / z = (x * z - w * y) / (y * z)
-      #|  x * t - y * t * z <= u * t - v * t * w <=>\n                          t * (v * w - y * z) <= t * (u - x)
-      #|  1 <= n + 1
-      #|  1 <= n ==> n - 1 + 1 = n
-      #|  sum(0..n-1) (\\m. t pow n)
-      #|  x / y * &n = (&n * x) / y
-      #|  abs(t) < &1 ==> (x * inv(&1 - t) * y) * (&1 - t) = x * y
-      #|  abs t < &1 ==> &0 < &1 - t
-      #|  n:num
-      #|  &0 <= x ==> &0 < &1 + x
-      #|  forall n. &0 < sum(0..n) (\\m. t pow m)
-      #|  t:real
-      #|  norm(Cx(&1)) < &1
-      #|  (b:complex->num->complex) z 1 = Cx(&1)
+      #|  (n : Num) + 1 + (x : Num) == n + (x + 1)
+      #|  pow((t : Real), (n : Num)) * sum(op_dot_dot(0, n), (m : Num) => pow(t, m)) - pow(t, n + 1) * sum(op_dot_dot(0, n - 1), (m : Num) => pow(t, m)) == pow(t, n)
+      #|  real_of_num(0) < (y : Real) && real_of_num(0) < (z : Real) \226\134\146 (x : Real) / y - (w : Real) / z == (x * z - w * y) / (y * z)
+      #|  ((x : Real) * (t : Real) - (y : Real) * (t * (z : Real)) <= (u : Real) * t - (v : Real) * (t * (w : Real))) == (t * (v * w - y * z) <= t * (u - x))
+      #|  1 <= (n : Num) + 1
+      #|  1 <= (n : Num) \226\134\146 n - 1 + 1 == n
+      #|  sum(op_dot_dot(0, (n : Num) - 1), (m : Num) => pow((t : Real), n))
+      #|  (x : Real) / (y : Real) * real_of_num((n : Num)) == real_of_num(n) * x / y
+      #|  abs((t : Real)) < real_of_num(1) \226\134\146 (x : Real) * (inv(real_of_num(1) - t) * (y : Real)) * (real_of_num(1) - t) == x * y
+      #|  abs((t : Real)) < real_of_num(1) \226\134\146 real_of_num(0) < real_of_num(1) - t
+      #|  (n : Num)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+      #|  \226\136\128 n : Num, real_of_num(0) < sum(op_dot_dot(0, n), (m : Num) => pow((t : Real), m))
+      #|  (t : Real)
+      #|  norm(Cx(real_of_num(1))) < real_of_num(1)
+      #|  (b : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]]), 1) == Cx(real_of_num(1))
       #|  1
       #|  1
-      #|  B:real
-      #|  (b:complex->num->complex) z
-      #|  c:num->complex
-      #|  n:num
-      #|  \\n. vsum(from 1 INTER (0..n)) (\\k. c k * b (z:complex) k :complex)
+      #|  (B : Real)
+      #|  (b : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]]))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (n : Num) => vsum(INTER(from(1), op_dot_dot(0, n)), (k : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(k) * (b : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]]), k))
       #|  sequentially
-      #|  z:complex
-      #|  &2 * B
-      #|  B:real
-      #|  (forall x a b. x = f a b ==> p a b) <=> (forall a b. p a b)
-      #|  c:num->complex
-      #|  d:num
-      #|  x * y <= &1 ==> &1 / &2 <= &1 - x * y / &2
-      #|  b <= a ==> a <= x ==> b <= x
-      #|  1 <= n <=> ~(n = 0)
-      #|  p EXP k
-      #|  inv(&(p EXP N)) / &2
-      #|  k:num
-      #|  p:num
-      #|  c:num->complex
-      #|  d:num
-      #|  k:num
-      #|  sum (0..N) (\\k. &1 * &1 / &2)
-      #|  p EXP N
-      #|  k:num
-      #|  1 <= n <=> ~(n = 0)
-      #|  c:num->complex
-      #|  d:num
-      #|  sum (IMAGE (\\k. p EXP k) (0..N))\n                    (\\x. Re (vsum {d | d divides x} (\\d. c d)) * t pow x)
-      #|  a <= Re z /\\ abs(Re z) <= norm z ==> a <= norm z
-      #|  B + &1 <= norm(x) ==> norm(y) <= B ==> ~(dist(x,y) < &1)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2) * (B : Real)
+      #|  (B : Real)
+      #|  (\226\136\128 x : _, \226\136\128 a : _, \226\136\128 b : _, x == (f : (_, _) -> _)(a, b) \226\134\146 (p : (_, _) -> Bool)(a, b)) == (\226\136\128 a : _, \226\136\128 b : _, p(a, b))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (x : Real) * (y : Real) <= real_of_num(1) \226\134\146 real_of_num(1) / real_of_num(2) <= real_of_num(1) - x * (y / real_of_num(2))
+      #|  (b : Real) <= (a : Real) \226\134\146 a <= (x : Real) \226\134\146 b <= x
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  EXP((p : Num), (k : Num))
+      #|  inv(real_of_num(EXP((p : Num), (N : Num)))) / real_of_num(2)
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (N : Num)), (k : Num) => real_of_num(1) * (real_of_num(1) / real_of_num(2)))
+      #|  EXP((p : Num), (N : Num))
+      #|  (k : Num)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  sum(IMAGE((k : Num) => EXP((p : Num), k), op_dot_dot(0, (N : Num))), (x : Num) => Re(vsum({(d : Num) | divides(d, x)}, (d : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(d))) * pow((t : Real), x))
+      #|  (a : Real) <= Re((z : Cart[Real, Tybit0[Unit]])) && abs(Re(z)) <= norm(z) \226\134\146 a <= norm(z)
+      #|  (B : Real) + real_of_num(1) <= norm((x : Cart[Real, _])) \226\134\146 norm((y : Cart[Real, _])) <= B \226\134\146 !(dist((x, y)) < real_of_num(1))
       #|  :real
       #|  :real
-      #|  norm (f (Cx t):complex) <= B
-      #|  n:num
-      #|  p EXP N + M + 1
-      #|  ?n. M <= n /\\ 1 <= n /\\ p EXP N <= n
-      #|  M:num
-      #|  &1
-      #|  t:real
-      #|  Cx t
-      #|  &0 < y /\\ y <= &1 ==> &0 <= &1 - y / &2 /\\ &1 - y / &2 < &1
-      #|  &0 <= t /\\ t < &1
-      #|  t = &1 - inv(&(p EXP N)) / &2
-      #|  0 < N
-      #|  &2 * (B + &1)
-      #|  N:num
-      #|  p:num
-      #|  B:real
-      #|  &0 <= x /\\ abs x < &1 <=> &0 <= x /\\ x < &1
-      #|  ~(bounded\n       { (f:complex->complex)(t) | real t /\\ &0 <= Re t /\\ norm(t) < &1 })
-      #|  norm(w) = &1 /\\ norm(z) < &1 /\\ norm(zn) <= norm(z)\n        ==> abs(&1 - norm(z)) <= norm(w - zn)
-      #|  :real
-      #|  :real
-      #|  :real
+      #|  norm((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(Cx((t : Real)))) <= (B : Real)
+      #|  (n : Num)
+      #|  EXP((p : Num), (N : Num)) + ((M : Num) + 1)
+      #|  \226\136\131 n : Num, (M : Num) <= n && 1 <= n && EXP((p : Num), (N : Num)) <= n
+      #|  (M : Num)
+      #|  real_of_num(1)
+      #|  (t : Real)
+      #|  Cx((t : Real))
+      #|  real_of_num(0) < (y : Real) && y <= real_of_num(1) \226\134\146 real_of_num(0) <= real_of_num(1) - y / real_of_num(2) && real_of_num(1) - y / real_of_num(2) < real_of_num(1)
+      #|  real_of_num(0) <= (t : Real) && t < real_of_num(1)
+      #|  (t : Real) == real_of_num(1) - inv(real_of_num(EXP((p : Num), (N : Num)))) / real_of_num(2)
+      #|  0 < (N : Num)
+      #|  real_of_num(2) * ((B : Real) + real_of_num(1))
+      #|  (N : Num)
+      #|  (p : Num)
+      #|  (B : Real)
+      #|  (real_of_num(0) <= (x : Real) && abs(x) < real_of_num(1)) == (real_of_num(0) <= x && x < real_of_num(1))
+      #|  !bounded({(f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Tybit0[Unit]])) | real(t) && real_of_num(0) <= Re(t) && norm(t) < real_of_num(1)})
+      #|  norm((w : Cart[Real, Tybit0[Unit]])) == real_of_num(1) && norm((z : Cart[Real, _])) < real_of_num(1) && norm((zn : Cart[Real, Tybit0[Unit]])) <= norm(z) \226\134\146 abs(real_of_num(1) - norm(z)) <= norm(w - zn)
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  &0 < abs(x - a) <=> ~(a = x)
-      #|  m < r ==> 1 <= r - m
-      #|  n:num
-      #|  a * &x * b = &x * a * b
-      #|  x:num
-      #|  \\x. Cx(norm(z) / (&1 - norm z)) * Cx(&x) * z pow x
-      #|  n:num
-      #|  x:num
-      #|  (zx * cn) * zn = cn * zx * zn
-      #|  n:num
-      #|  x:num
-      #|  \\x. vsum (1..x)\n                       (\\n. z pow x * c n *\n                            z pow (n - x MOD n) / (Cx(&1) - z pow n))
-      #|  (zx * i - (zx - w) * i) = w * i
-      #|  forall k. 1 <= k ==> ~(z pow k = Cx(&1))
-      #|  n < 1 <=> n = 0
-      #|  z:complex
-      #|  forall z. norm(z) < &1\n                    ==> ((\\n. vsum {d | d divides n} (\\d. c d) * z pow n) sums\n                         f(z)) (from 1)
-      #|  c:num->complex
-      #|  d:num
-      #|  Cx(&0) = Cx(&0) * inv(Cx(&1) - z)
-      #|  forall z:complex. norm(z) < &1 ==> ((\\n. c(n) * b z n) sums --(f z)) (from 1)
-      #|  b = \\z n. inv(Cx(&n) * (Cx(&1) - z)) -\n                        z pow n / (Cx(&1) - z pow n)
-      #|  f:complex->complex
-      #|  norm(z:complex) pow N
-      #|  norm(z) <= norm(w) - h ==> h <= norm(w - z)
       #|  :real
       #|  :real
-      #|  &2 = inv(&1 / &2)
-      #|  n:num
-      #|  N:num
-      #|  &1 / &2
-      #|  norm(z:complex)
-      #|  (p ==> (if q then x else T)) <=> p /\\ q ==> x
-      #|  \\n. Cx(&2 * norm(z:complex) pow n)
-      #|  2 <= n ==> ~(n = 0)
-      #|  \\n:num. Cx(&0)
+      #|  :real
+      #|  (real_of_num(0) < abs((x : Real) - (a : Real))) == !(a == x)
+      #|  (m : Num) < (r : Num) \226\134\146 1 <= r - m
+      #|  (n : Num)
+      #|  (a : Real) * (real_of_num((x : Num)) * (b : Real)) == real_of_num(x) * (a * b)
+      #|  (x : Num)
+      #|  (x : Num) => Cx(norm((z : Cart[Real, Tybit0[Unit]])) / (real_of_num(1) - norm(z))) * (Cx(real_of_num(x)) * pow(z, x))
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  (zx : Cart[Real, Tybit0[Unit]]) * (cn : Cart[Real, Tybit0[Unit]]) * (zn : Cart[Real, Tybit0[Unit]]) == cn * (zx * zn)
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  (x : Num) => vsum(op_dot_dot(1, x), (n : Num) => pow((z : Cart[Real, Tybit0[Unit]]), x) * ((c : (Num) -> Cart[Real, Tybit0[Unit]])(n) * (pow(z, n - MOD(x, n)) / (Cx(real_of_num(1)) - pow(z, n)))))
+      #|  (zx : Cart[Real, Tybit0[Unit]]) * (i : Cart[Real, Tybit0[Unit]]) - (zx - (w : Cart[Real, Tybit0[Unit]])) * i == w * i
+      #|  \226\136\128 k : Num, 1 <= k \226\134\146 !(pow((z : Cart[Real, Tybit0[Unit]]), k) == Cx(real_of_num(1)))
+      #|  ((n : Num) < 1) == (n == 0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) < real_of_num(1) \226\134\146 sums((n : Num) => vsum({(d : Num) | divides(d, n)}, (d : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(d)) * pow(z, n), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z), from(1))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  Cx(real_of_num(0)) == Cx(real_of_num(0)) * inv(Cx(real_of_num(1)) - (z : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) < real_of_num(1) \226\134\146 sums((n : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(n) * (b : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])(z, n), -(f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z), from(1))
+      #|  (b : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => (n : Num) => inv(Cx(real_of_num(n)) * (Cx(real_of_num(1)) - z)) - pow(z, n) / (Cx(real_of_num(1)) - pow(z, n)))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  pow(norm((z : Cart[Real, Tybit0[Unit]])), (N : Num))
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) <= norm((w : Cart[Real, Tybit0[Unit]])) - (h : Real) \226\134\146 h <= norm(w - z)
+      #|  :real
+      #|  :real
+      #|  real_of_num(2) == inv(real_of_num(1) / real_of_num(2))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  norm((z : Cart[Real, Tybit0[Unit]]))
+      #|  ((p : Bool) \226\134\146 (if (q : Bool) { (x : Bool) } else { true })) == (p && q \226\134\146 x)
+      #|  (n : Num) => Cx(real_of_num(2) * pow(norm((z : Cart[Real, Tybit0[Unit]])), n))
+      #|  2 <= (n : Num) \226\134\146 !(n == 0)
+      #|  (n : Num) => Cx(real_of_num(0))
       #|  2
-      #|  z = Cx(&0)
-      #|  forall z. norm(z) < &1\n        ==> summable (from 1) (\\n. c(n) * z pow n / (Cx(&1) - z pow n))
-      #|  c:num->complex
-      #|  d:num
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d) /\\ (forall n. real(c n))\n         ==> ~(Lfunction c = Cx(&0))
-      #|  log(exp((B + &1) / --Re a))
-      #|  B < l * --a /\\ &0 <= f ==> B < abs(f - l * a)
-      #|  abs(Re(f n - Cx(log(&n)) * a)) <= B
-      #|  n:num
-      #|  exp((B + &1) / --(Re a))
-      #|  B:real
-      #|  forall f a. bounded {f x - Cx(log(&x)) * a | x IN (:num)}\n         ==> (forall x. &0 <= Re(f x)) ==> &0 <= Re a
-      #|  {a,b,c} SUBSET s\n     ==> FINITE s\n         ==> forall f. sum s f = sum (s DIFF {a,b,c}) f + sum {a,b,c} f
-      #|  c:num->complex
-      #|  d:num
-      #|  ~(c = \\n:num. cnj(c n))
-      #|  (\\c n:num. cnj(c n))
-      #|  ~(chi_0 d = (\\n. cnj (c n)))
-      #|  &0 <= --x ==> x <= &0
-      #|  s <= &0 /\\ t < &0 ==> s + t < &0
-      #|  {chi_0 d,c,(\\n. cnj(c n))} SUBSET {c | dirichlet_character d c}
-      #|  c:num->complex
-      #|  n:num
-      #|  x:num
-      #|  Lfunction c = Cx(&0)
-      #|  c = chi_0 d
-      #|  c:num->complex
-      #|  {c | dirichlet_character d c}
-      #|  (:num)
-      #|  \\x c. vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) -\n           Cx(log(&x)) *\n           (if c = chi_0 d then Cx(&1)\n            else if Lfunction c = Cx(&0) then --Cx(&1)\n            else Cx(&0))
-      #|  d = 0
-      #|  forall d c. dirichlet_character d c /\\ ~(c = chi_0 d)\n         ==> ~(Lfunction c = Cx(&0))
-      #|  d:num
-      #|  forall d c.\n      dirichlet_character d c /\\ ~(c = chi_0 d)\n      ==> bounded { vsum(1..x) (\\n. c n * Cx(mangoldt n / &n)) | x IN (:num)}
-      #|  c:num->complex
-      #|  d:num
-      #|  c = chi_0 d
-      #|  c:num->complex
-      #|  forall x. Cx(log(&x)) =\n                        vsum {c | dirichlet_character d c}\n                             (\\c. if c = chi_0 d then Cx(log(&x)) else Cx(&0))
+      #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) < real_of_num(1) \226\134\146 summable(from(1), (n : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(n) * (pow(z, n) / (Cx(real_of_num(1)) - pow(z, n))))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) && (\226\136\128 n : Num, real(c(n))) \226\134\146 !(Lfunction(c) == Cx(real_of_num(0)))
+      #|  log(exp(((B : Real) + real_of_num(1)) / -Re((a : Cart[Real, Tybit0[Unit]]))))
+      #|  (B : Real) < (l : Real) * -(a : Real) && real_of_num(0) <= (f : Real) \226\134\146 B < abs(f - l * a)
+      #|  abs(Re((f : (Num) -> Cart[Real, Tybit0[Unit]])((n : Num)) - Cx(log(real_of_num(n))) * (a : Cart[Real, Tybit0[Unit]]))) <= (B : Real)
+      #|  (n : Num)
+      #|  exp(((B : Real) + real_of_num(1)) / -Re((a : Cart[Real, Tybit0[Unit]])))
+      #|  (B : Real)
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], bounded({f((x : Num)) - Cx(log(real_of_num(x))) * a | IN(x, UNIV)}) \226\134\146 (\226\136\128 x : Num, real_of_num(0) <= Re(f(x))) \226\134\146 real_of_num(0) <= Re(a)
+      #|  SUBSET({(a : _), (b : _), (c : _)}, (s : (_) -> Bool)) \226\134\146 FINITE(s) \226\134\146 (\226\136\128 f : (_) -> Real, sum(s, f) == sum(DIFF(s, {a, b, c}), f) + sum({a, b, c}, f))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  !((c : (Num) -> Cart[Real, Tybit0[Unit]]) == ((n : Num) => cnj(c(n))))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]]) => (n : Num) => cnj(c(n))
+      #|  !(chi_0((d : Num)) == ((n : Num) => cnj((c : (Num) -> Cart[Real, Tybit0[Unit]])(n))))
+      #|  real_of_num(0) <= -(x : Real) \226\134\146 x <= real_of_num(0)
+      #|  (s : Real) <= real_of_num(0) && (t : Real) < real_of_num(0) \226\134\146 s + t < real_of_num(0)
+      #|  SUBSET({chi_0((d : Num)), (c : (Num) -> Cart[Real, Tybit0[Unit]]), (n : Num) => cnj(c(n))}, {(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)})
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  Lfunction((c : (Num) -> Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(0))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]]) == chi_0((d : Num))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  {(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character((d : Num), c)}
+      #|  (UNIV : (Num) -> Bool)
+      #|  (x : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]]) => vsum(op_dot_dot(1, x), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) - Cx(log(real_of_num(x))) * (if c == chi_0((d : Num)) { Cx(real_of_num(1)) } else { if Lfunction(c) == Cx(real_of_num(0)) { -Cx(real_of_num(1)) } else { Cx(real_of_num(0)) } })
+      #|  (d : Num) == 0
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 !(Lfunction(c) == Cx(real_of_num(0)))
+      #|  (d : Num)
+      #|  \226\136\128 d : Num, \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], dirichlet_character(d, c) && !(c == chi_0(d)) \226\134\146 bounded({vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n))) | IN(x, UNIV)})
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (d : Num)
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]]) == chi_0((d : Num))
+      #|  (c : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 x : Num, Cx(log(real_of_num(x))) == vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character((d : Num), c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => if c == chi_0(d) { Cx(log(real_of_num(x))) } else { Cx(real_of_num(0)) })
       #|  forall d l. 1 <= d /\\ coprime(l,d)\n         ==> bounded { vsum {c | dirichlet_character d c}\n                            (\\c. c(l) *\n                                 vsum(1..x) (\\n. c n * Cx (mangoldt n / &n))) -\n                       Cx(log(&x)) | x IN (:num)}
-      #|  (k * l == 1) (mod d)
-      #|  (l * n == 1) (mod d) <=> (n == k) (mod d)
-      #|  d:num
-      #|  n:num
-      #|  x:num
-      #|  (forall x. x IN s ==> f x = g x) ==> {f x | x IN s} = {g x | x IN s}
-      #|  (k * l == 1) (mod d)
-      #|  l:num
-      #|  d:num
-      #|  ?l. (k * l == 1) (mod d)
+      #|  op_eq_eq((k : Num) * (l : Num), 1, mod((d : Num)))
+      #|  op_eq_eq((l : Num) * (n : Num), 1, mod((d : Num))) == op_eq_eq(n, (k : Num), mod(d))
+      #|  (d : Num)
+      #|  (n : Num)
+      #|  (x : Num)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == (g : (_) -> _)(x)) \226\134\146 {f((x : _)) | IN(x, s)} == {g((x : _)) | IN(x, s)}
+      #|  op_eq_eq((k : Num) * (l : Num), 1, mod((d : Num)))
+      #|  (l : Num)
+      #|  (d : Num)
+      #|  \226\136\131 l : Num, op_eq_eq((k : Num) * l, 1, mod((d : Num)))
       #|  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> bounded { Cx(&(phi d)) * vsum {n | n IN 1..x /\\ (n == k) (mod d)}\n                                           (\\n. Cx(mangoldt n / &n)) -\n                       Cx(log(&x)) | x IN (:num)}
-      #|  n:num
-      #|  B / &(phi d)
-      #|  B:real
-      #|  forall d k. 1 <= d /\\ coprime (k,d)\n         ==> ?B. &0 < B /\\\n                 forall x. abs(sum {n | n IN 1..x /\\ (n == k) (mod d)}\n                             (\\n. mangoldt n / &n) -\n                         log(&x) / &(phi d)) <= B
-      #|  {n | n IN 1..x /\\ (n == k) (mod d)}
-      #|  x:num
-      #|  abs(x - y) <= a ==> abs(x - z) <= b ==> abs(y - z) <= b + a
-      #|  x:num
-      #|  x:num
-      #|  B + &3
-      #|  B:real
-      #|  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> ?B. &0 < B /\\\n                 forall x. abs(sum {p | p IN 1..x /\\ prime p /\\ (p == k) (mod d)}\n                             (\\p. log(&p) / &p) -\n                         log(&x) / &(phi d)) <= B
-      #|  x <= a ==> x = y ==> y <= a
-      #|  abs(x - y) <= b ==> y < &1 + b + x
-      #|  m:num
-      #|  m:num
-      #|  max (exp(&(phi d) *\n            (&1 + B + sum {p | p IN 1..n /\\ prime p /\\ (p == k) (mod d)}\n                          (\\p. log(&p) / &p))))\n        (max (&n) (&1))
-      #|  B:real
-      #|  k:num
-      #|  d:num
-      #|  n:num
-      #|  \\n:num. n
-      #|  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> INFINITE {p | prime p /\\ (p == k) (mod d)}
+      #|  (n : Num)
+      #|  (B : Real) / real_of_num(phi((d : Num)))
+      #|  (B : Real)
+      #|  \226\136\128 d : Num, \226\136\128 k : Num, 1 <= d && coprime((k, d)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Num, abs(sum({(n : Num) | IN(n, op_dot_dot(1, x)) && op_eq_eq(n, k, mod(d))}, (n : Num) => mangoldt(n) / real_of_num(n)) - log(real_of_num(x)) / real_of_num(phi(d))) <= B))
+      #|  {(n : Num) | IN(n, op_dot_dot(1, (x : Num))) && op_eq_eq(n, (k : Num), mod((d : Num)))}
+      #|  (x : Num)
+      #|  abs((x : Real) - (y : Real)) <= (a : Real) \226\134\146 abs(x - (z : Real)) <= (b : Real) \226\134\146 abs(y - z) <= b + a
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (B : Real) + real_of_num(3)
+      #|  (B : Real)
+      #|  \226\136\128 d : Num, \226\136\128 k : Num, 1 <= d && coprime((k, d)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Num, abs(sum({(p : Num) | IN(p, op_dot_dot(1, x)) && prime(p) && op_eq_eq(p, k, mod(d))}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) - log(real_of_num(x)) / real_of_num(phi(d))) <= B))
+      #|  (x : Real) <= (a : Real) \226\134\146 x == (y : Real) \226\134\146 y <= a
+      #|  abs((x : Real) - (y : Real)) <= (b : Real) \226\134\146 y < real_of_num(1) + (b + x)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  max(exp(real_of_num(phi((d : Num))) * (real_of_num(1) + ((B : Real) + sum({(p : Num) | IN(p, op_dot_dot(1, (n : Num))) && prime(p) && op_eq_eq(p, (k : Num), mod(d))}, (p : Num) => log(real_of_num(p)) / real_of_num(p))))), max(real_of_num(n), real_of_num(1)))
+      #|  (B : Real)
+      #|  (k : Num)
+      #|  (d : Num)
+      #|  (n : Num)
+      #|  (n : Num) => n
+      #|  \226\136\128 d : Num, \226\136\128 k : Num, 1 <= d && coprime((k, d)) \226\134\146 INFINITE({(p : Num) | prime(p) && op_eq_eq(p, k, mod(d))})
       #|VSUM_VSUM_DIVISORS =  |- (#forall:fun(fun(fun(num,fun(num,cart(real,'?1))),bool),bool) (\f:fun(num,fun(num,cart(real,'?1))). (#forall:fun(fun(num,bool),bool) (\x:num. ((#=:fun(cart(real,'?1),fun(cart(real,'?1),bool)) ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1)),cart(real,'?1))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) x:num)) (\n:num. ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1)),cart(real,'?1))) (#GSPEC:fun(fun(num,bool),fun(num,bool)) (\GEN%PVAR%1:num. (#?:fun(fun(num,bool),bool) (\d:num. (((#SETSPEC:fun(num,fun(bool,fun(num,bool))) GEN%PVAR%1:num) ((#num_divides:fun(num,fun(num,bool)) d:num) n:num)) d:num)))))) (f:fun(num,fun(num,cart(real,'?1))) n:num))))) ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1)),cart(real,'?1))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) x:num)) (\n:num. ((#vsum:fun(fun(num,bool),fun(fun(num,cart(real,'?1)),cart(real,'?1))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#DIV:fun(num,fun(num,num)) x:num) n:num))) (\k:num. ((f:fun(num,fun(num,cart(real,'?1))) ((#*:fun(num,fun(num,num)) k:num) n:num)) n:num))))))))))
       #|REAL_EXP_1_LE_4 =  |- ((#real_le:fun(real,fun(real,bool)) (#exp:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|DECREASING_LOG_OVER_N =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) ((#real_le:fun(real,fun(real,bool)) ((#real_div:fun(real,fun(real,real)) (#log:fun(real,real) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_div:fun(real,fun(real,real)) (#log:fun(real,real) (#real_of_num:fun(num,real) n:num))) (#real_of_num:fun(num,real) n:num))))))
