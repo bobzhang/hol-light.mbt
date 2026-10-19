@@ -227,3 +227,43 @@ fn fun_type(
     @preterm.Ptycon("fun", @list.List([fill_hole(a), t]))
   })
 }
+
+///|
+/// `{a, b, c}`: HOL's set enumeration, INSERT a (INSERT b (INSERT c EMPTY)).
+fn set_enum(es : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
+  es.rev().fold(init=pconst("EMPTY"), (t, e) => binary("INSERT", e, t))
+}
+
+///|
+/// The marks of set comprehensions, which the name resolution
+/// (@term_syntax.parse_preterm) elaborates as HOL's parser does, once the
+/// names in them are resolved.
+pub let set_abs_mark : String = generated_mark + "{|}"
+
+///|
+pub let set_compr_mark : String = generated_mark + "{||}"
+
+///|
+/// `{e | p}`: the set of the values of `e` for the variables free in both
+/// (HOL's rule).
+fn set_abs(e : @preterm.Preterm, p : @preterm.Preterm) -> @preterm.Preterm {
+  apply(apply(@preterm.Varp(set_abs_mark, @preterm.dpty), e), p)
+}
+
+///|
+/// `{e | x : A, y : B | p}`: the set of the values of `e` for the variables
+/// listed, marked as set_compr_mark applied to \x y. (e, p) (the pair as
+/// set_abs_mark e p), so that the name resolution scopes the binders.
+fn set_compr(
+  e : @preterm.Preterm,
+  vs : @list.List[(String, @preterm.Pretype)],
+  p : @preterm.Preterm,
+) -> @preterm.Preterm {
+  let inner = apply(apply(@preterm.Varp(set_abs_mark, @preterm.dpty), e), p)
+  apply(
+    @preterm.Varp(set_compr_mark, @preterm.dpty),
+    vs
+    .rev()
+    .fold(init=inner, (b, v) => @preterm.Absp(typed(pvar(v.0), v.1), b)),
+  )
+}

@@ -10,10 +10,10 @@
 //    outside comments and multiline strings temporarily becomes
 //    @parser.parse_term_at(k, "..."). Load the package once with
 //    @parser.quotation_hook set: each run of site k is printed with
-//    @term_syntax.print_term_exact in that environment (which checks that
-//    the text reads back as the same term, bound variable names included:
-//    theorems show them), together with its place in the theory's
-//    quotation trace.
+//    @term_syntax.spell_quotation in that environment (which checks that
+//    the text reads back as the quotation does, bound variable names
+//    included, since theorems show them), together with its place in the
+//    theory's quotation trace.
 // 2. Replace @parser.parse_term("old") by @term_syntax.parse_term("new") at
 //    each site that ran and read the same printable way every time. A site
 //    that did not run, is unprintable, or read differently on different
@@ -420,10 +420,10 @@ async fn record(
     (
       $|///|
       $|test "migrate quotations" {
-      $|  @parser.quotation_hook.val = Some(fn(site, _, tm) {
+      $|  @parser.quotation_hook.val = Some(fn(site, old, tm) {
       $|    if site >= 0 {
       $|      let at = if @parser.is_loading(\{t}) { @parser.theory_trace(\{t}).length() - 1 } else { -1 }
-      $|      let new = try @term_syntax.print_term_exact(tm) catch {
+      $|      let new = try @term_syntax.spell_quotation(old, tm) catch {
       $|        @term_syntax.Unprintable(m) => \{unprintable.to_json().stringify()} + ": " + m
       $|        _ => \{unprintable.to_json().stringify()}
       $|      }

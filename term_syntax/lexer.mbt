@@ -92,6 +92,10 @@ fn tokens(s : String) -> Array[(@grammar.Token, Int, Int)] raise {
         toks.push((BARBAR, at(input), at(rest)))
         continue rest
       }
+      (re"^\|", after=rest) => {
+        toks.push((BAR, at(input), at(rest)))
+        continue rest
+      }
       (re"^&&", after=rest) => {
         toks.push((AMPERAMPER, at(input), at(rest)))
         continue rest
