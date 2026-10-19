@@ -38,6 +38,12 @@ jobs:
       - name: Toolchain
         run: moon version --all
 
+      # type-checks every package and test of the repository with the pinned
+      # toolchain (no linking, so it is cheap): the tiers below only build
+      # the core, and the rest is otherwise compiled only by full.yml
+      - name: Check every package
+        run: moon check -j 4
+
       - name: Core tier
         run: |
           python3 tools/test_hol_notation.py
