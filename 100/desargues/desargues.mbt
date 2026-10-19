@@ -207,13 +207,13 @@ pub fn direction_axiom_2() -> @kernel.Thm {
 ///|
 /// DIRECTION_AXIOM_3
 fn step_12() -> Unit raise {
-  let t32 = @parser.parse_term("basis 3 :real^3")
-  let t33 = @parser.parse_term("basis 2 : real^3")
+  let t32 = @term_syntax.parse_term("(basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)")
+  let t33 = @term_syntax.parse_term("(basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)")
   let t34 = @tactics.map_every(fn(x29 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x29
     let t31 = @simp.simp_tac(@list.List([@vectors.basis_nonzero(), @cart.dimindex_3(), @calc_num.arith()]))
     @tactics.then_tac(@tactics.exists_tac(t), t31)
-  }, @list.List([@parser.parse_term("basis 1 :real^3"), t33, t32]))
+  }, @list.List([@term_syntax.parse_term("(basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)"), t33, t32]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([perpdir(), pardir(), direction_clauses()])), t34), @cross.vec3_tac)
   direction_axiom_3_c.set(@tactics.prove(@term_syntax.parse_term("∃ p : Direction, ∃ p' : Direction, ∃ p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && !(∃ l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l))"), t35))
 }
