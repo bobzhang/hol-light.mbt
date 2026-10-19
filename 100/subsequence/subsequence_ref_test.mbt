@@ -5590,14 +5590,14 @@ test "100/subsequence matches 100/subsequence.ml" {
       #|0..0..2..9..22..48..117..239..529..solved at 566
       #|0..0..2..9..22..solved at 31
       #|100/subsequence quotations (41):
-      #|  forall f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))
+      #|  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, s == UNIONS(IMAGE((a : _) => {(x : _) | IN(x, s) && f(x) == a}, IMAGE(f, s)))
       #|  (n : Num)
-      #|  {y | y IN s /\\ (f:A->B) y = f x}
+      #|  {(y : A) | IN(y, (s : (A) -> Bool)) && (f : (A) -> B)(y) == f((x : A))}
       #|  !((n : Num) <= (x : Num)) \226\134\146 x <= n - 1
       #|  (s : (A) -> Bool)
       #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
       #|  (x : A)
-      #|  {t x | x IN s} = IMAGE t s
+      #|  {(t : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))} == IMAGE(t, s)
       #|  (s : (A) -> Bool)
       #|  (f : (A) -> B)
       #|  \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, FINITE(s) && (n - 1) * CARD(IMAGE(f, s)) < CARD(s) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 a : B, SUBSET(t, s) && HAS_SIZE(t, n) && (\226\136\128 x : A, IN(x, t) \226\134\146 f(x) == a))
