@@ -126,8 +126,17 @@ fn resolve_names(
     Varp(n, ty) =>
       match bound.iter().find_first(b => b.0 == n) {
         Some((_, renamed)) => Varp(renamed, ty)
-        // the spellings of symbolic constants: select, op_plus, ...
-        None => Varp(@grammar.unescape(n), ty)
+        // the spellings of symbolic constants: select, op_plus, ...; an
+        // interface name means what the interface says
+        None =>
+          Varp(
+            if @printer.the_interface.val.iter().any(e => e.0 == n) {
+              n
+            } else {
+              @grammar.unescape(n)
+            },
+            ty,
+          )
       }
     Constp(_, _) => t
     Combp(f, x) => Combp(resolve_names(f, bound), resolve_names(x, bound))

@@ -3,7 +3,9 @@
 // other symbolic name is spelt op_ followed by the names of its characters
 // ($ is op_dollar, <=_c is op_lt_eq_us_c, + used as a value is op_plus). An
 // identifier that names a constant means that constant; otherwise these
-// spellings are read back.
+// spellings are read back, as a constant's name or, when the name is
+// symbolic, as a variable's (the --> a definition is about to make a
+// constant).
 
 ///|
 let readable : Array[(String, String)] = [("select", "@")]
@@ -55,6 +57,20 @@ pub fn escape(name : String) -> String? {
       return Some(p.0)
     }
   }
+  let ident = match escape_chars(name) {
+    Some(i) => i
+    None => return None
+  }
+  if unescape(ident) == name {
+    Some(ident)
+  } else {
+    None
+  }
+}
+
+///|
+/// op_ and the names of the characters of `name` (see `escape`).
+fn escape_chars(name : String) -> String? {
   let tokens = []
   let run = StringBuilder()
   for c in name {
@@ -78,12 +94,7 @@ pub fn escape(name : String) -> String? {
   if run.to_string() != "" {
     tokens.push(run.to_string())
   }
-  let ident = "op_" + tokens.join("_")
-  if unescape(ident) == name {
-    Some(ident)
-  } else {
-    None
-  }
+  Some("op_" + tokens.join("_"))
 }
 
 ///|
@@ -114,6 +125,17 @@ pub fn unescape(ident : String) -> String {
   }
   let decoded = out.to_string()
   if is_constant(decoded) {
+    return decoded
+  }
+  // a symbolic name that is not a constant yet (the --> a definition is
+  // about to make one): only in its own spelling, and never a name the
+  // elaboration generates
+  let symbolic = !decoded
+    .iter()
+    .all(c => c is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_' | '\''))
+  if symbolic &&
+    !decoded.has_prefix("GEN%PVAR%") &&
+    escape_chars(decoded) == Some(ident) {
     decoded
   } else {
     ident

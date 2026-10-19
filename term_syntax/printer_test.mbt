@@ -262,3 +262,37 @@ test "set notation: spelled-out GSPEC and renamed binders" {
     ),
   )
 }
+
+///|
+test "a symbolic variable, as the left side of a definition" {
+  let q = "(s --> t) = {f:A->B | forall x. x IN s ==> f(x) IN t}"
+  @printer.parse_as_infix("-->", (13L, "right"))
+  let t = @parser.parse_term(q)
+  let s = @term_syntax.spell_quotation(q, t)
+  inspect(s, content=(
+    #|(op_minus_minus_gt : ((A) -> Bool, (B) -> Bool, (A) -> B) -> Bool)((s : (A) -> Bool), (t : (B) -> Bool)) == {(f : (A) -> B) | ∀ x : A, IN(x, s) → IN(f(x), t)}
+  ))
+  // it reads back as the variable -->, not as op_minus_minus_gt
+  assert_true(
+    @kernel.frees(@term_syntax.parse_term(s)).iter().any(v => v is Var("-->", _)),
+  )
+}
+
+///|
+test "op_ names decode only in their own spelling" {
+  // a non-canonical op_ spelling stays an ordinary variable
+  let t = @term_syntax.parse_term("(op_left_dot_product : Bool) == op_left_dot_pro_duct")
+  inspect(@kernel.frees(t).length(), content="2")
+  // a generated name is never decoded
+  let g = @term_syntax.parse_term("(op_GEN_pct_PVAR_pct_0 : Num) == 0")
+  assert_true(
+    @kernel.frees(g).iter().all(v => !(v is Var(n, _) && n.has_prefix("GEN%PVAR%"))),
+  )
+  // a binder spelt op_ is kept as it is
+  inspect(
+    @term_syntax.print_term(@term_syntax.parse_term("(op_minus_minus_gt : Bool) => op_minus_minus_gt")),
+    content=(
+      #|(op_minus_minus_gt : Bool) => op_minus_minus_gt
+    ),
+  )
+}
