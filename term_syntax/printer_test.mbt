@@ -28,7 +28,7 @@ test "printing" {
 ///|
 test "symbolic constants and operators as values" {
   inspect(show("@x:num. x = 1"), content="select((x : Num) => x == 1)")
-  inspect(show("?!x:num. x = 1"), content="exists_unique((x : Num) => x == 1)")
+  inspect(show("?!x:num. x = 1"), content="existsunique((x : Num) => x == 1)")
   inspect(show("(+) 1"), content="op_plus(1)")
   // a binder named like a constant is renamed
   let v = @kernel.mk_var("SUC", @kernel.mk_type("num", @list.List([])))
@@ -78,4 +78,20 @@ test "spellings that would read back as something else" {
   inspect(round(@kernel.mk_abs(ex, ex)), content="(exists' : Num) => exists'")
   let kw = @kernel.mk_var("let", num)
   inspect(round(@kernel.mk_abs(kw, kw)), content="(v : Num) => v")
+}
+
+///|
+test "overloaded operators and names" {
+  inspect(
+    show("forall x y:real. x + y = y + x"),
+    content="∀ x : Real, ∀ y : Real, x + y == y + x",
+  )
+  inspect(
+    show("forall x:int. --x * x >= &0"),
+    content="∀ x : Int, -x * x >= int_of_num(0)",
+  )
+  inspect(
+    show("forall m n d. d divides m /\\ d divides n ==> d divides m + n"),
+    content="∀ m : Num, ∀ n : Num, ∀ d : Num, divides(d, m) && divides(d, n) → divides(d, m + n)",
+  )
 }

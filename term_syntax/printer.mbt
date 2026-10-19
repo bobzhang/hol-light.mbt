@@ -168,6 +168,9 @@ priv struct Printer {
   fixed : @list.List[@kernel.HolType]
   // annotate every constant whose type has a type variable
   all_constants : Bool
+  // write a constant under its overloaded name (+ for real_add, divides
+  // for num_divides) where the interface has one
+  overloads : Bool
   // names of every variable of the term, which a renamed binder avoids
   names : Array[String]
 }
@@ -224,9 +227,37 @@ fn constant_name(name : String) -> String raise Unprintable {
 }
 
 ///|
+/// The name a constant is written under: its overloaded name, when
+/// overloads are on and the interface maps one the syntax can write (an
+/// operator, ~, --, or an identifier) to this constant at an instance of its
+/// type; its own name otherwise.
+fn Printer::spelling(self : Printer, c : @kernel.Term) -> String {
+  guard c is Const(name, ty) else { return "" }
+  if !self.overloads {
+    return name
+  }
+  for e in @printer.the_interface.val {
+    let (iname, (cname, gty)) = e
+    if cname == name &&
+      iname != name &&
+      (binary_op(iname) is Some(_) ||
+      iname is ("~" | "--") ||
+      is_ident(iname)) &&
+      (try @basics.type_match(gty, ty, @list.List([])) is _ catch {
+        _ => false
+      } noraise {
+        _ => true
+      }) {
+      return iname
+    }
+  }
+  name
+}
+
+///|
 fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintable {
-  guard c is Const(name, ty) else { raise Unprintable("not a constant") }
-  let s = constant_name(name)
+  guard c is Const(_, ty) else { raise Unprintable("not a constant") }
+  let s = constant_name(self.spelling(c))
   let tvs = @kernel.tyvars(ty)
   if tvs.is_empty() ||
     (!self.all_constants && tvs.iter().all(v => self.fixed.contains(v))) {
@@ -333,6 +364,7 @@ fn Printer::comb(
   }
   let (head, args) = @basics.strip_comb(t)
   let args = args.to_array()
+  let spelled = self.spelling(head)
   match (head, args) {
     (Const(q, _), [Abs(v, body)]) if q is ("forall" | "?") => {
       let sym = if q == "forall" { "∀" } else { "∃" }
@@ -345,7 +377,10 @@ fn Printer::comb(
       }
       wrap(sym + " " + b + ", " + body_s, EXPR, ctx)
     }
-    (Const("~", _), [x]) => wrap("!" + self.term(x, PREFIX, bound), PREFIX, ctx)
+    (Const(_, _), [x]) if spelled is ("~" | "--") => {
+      let op = if spelled == "~" { "!" } else { "-" }
+      wrap(op + self.term(x, PREFIX, bound), PREFIX, ctx)
+    }
     (Const("COND", _), [c, a, b]) => {
       let s = "if " +
         self.term(c, IMPL, bound) +
@@ -373,7 +408,7 @@ fn Printer::comb(
       "[" +
       items.to_array().map(x => self.term(x, EXPR, bound)).join(", ") +
       "]"
-    (Const(name, _), [a, b]) if binary_op(name) is Some((op, level, right)) => {
+    (Const(_, _), [a, b]) if binary_op(spelled) is Some((op, level, right)) => {
       let (lctx, rctx) = if right { (level + 1, level) } else { (level, level + 1) }
       let s = self.term(a, lctx, bound) + " " + op + " " + self.term(b, rctx, bound)
       wrap(s, level, ctx)
@@ -394,26 +429,39 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
     .fold(init=@list.List([]), (acc, l) => acc.concat(l))
-  fn print(all_constants : Bool) -> String raise Unprintable {
+  fn print(overloads : Bool, all_constants : Bool) -> String raise Unprintable {
     let names = vars.map(v => if v is Var(n, _) { n } else { "" })
-    { typed_free: [], fixed, all_constants, names }.term(
+    { typed_free: [], fixed, all_constants, overloads, names }.term(
       t,
       EXPR,
       @list.List([]),
     )
   }
-  // Type variables are fixed by the variables' types only where they are
-  // connected to them, so check the reading, and give every polymorphic
-  // constant its type if that is needed.
-  let s = print(false)
-  if reads_as(s, t) {
-    return s
+  // The most readable spelling that reads back as `t`: overloaded names
+  // where they resolve to the same constants, and types only where the
+  // variables' types do not pin a constant's type down (they do only where
+  // they are connected to it, so the reading is checked).
+  let mut first_error : Unprintable? = None
+  let mut printed = false
+  for overloads in [true, false] {
+    for all_constants in [false, true] {
+      let s = print(overloads, all_constants) catch {
+        e => {
+          if first_error is None {
+            first_error = Some(e)
+          }
+          continue
+        }
+      }
+      printed = true
+      if reads_as(s, t) {
+        return s
+      }
+    }
   }
-  let s = print(true)
-  if reads_as(s, t) {
-    s
-  } else {
-    raise Unprintable("term whose types the syntax cannot pin down")
+  match first_error {
+    Some(e) if !printed => raise e
+    _ => raise Unprintable("term whose types the syntax cannot pin down")
   }
 }
 
