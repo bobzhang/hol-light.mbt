@@ -15449,252 +15449,252 @@ Warning: inventing type variables
 0..0..1..solved at 4
 0..0..1..2..5..10..19..solved at 38
 100/reciprocity quotations (246):
-  forall p i. i IN 1..p - 1 <=> 0 < i /\\ i < p
-  ~(2 = 0)
-  n:num
-  forall n. EVEN n <=> n = 2 * (n DIV 2)
-  d:num
+  \226\136\128 p : Num, \226\136\128 i : Num, IN(i, op_dot_dot(1, p - 1)) == (0 < i && i < p)
+  !(2 == 0)
+  (n : Num)
+  \226\136\128 n : Num, EVEN(n) == (n == 2 * DIV(n, 2))
+  (d : Num)
   0
-  (2 + x) - 1 = x + 1
-  2 <= p ==> ((p - 1) * (p - 1) == 1) (mod p)
-  EVEN n
-  (p - 1) * (if EVEN n then 1 else p - 1)
-  forall p n. 2 <= p ==> ((p - 1) EXP n == if EVEN n then 1 else p - 1) (mod p)
+  2 + (x : Num) - 1 == x + 1
+  2 <= (p : Num) \226\134\146 op_eq_eq((p - 1) * (p - 1), 1, mod(p))
+  EVEN((n : Num))
+  ((p : Num) - 1) * (if EVEN((n : Num)) { 1 } else { p - 1 })
+  \226\136\128 p : Num, \226\136\128 n : Num, 2 <= p \226\134\146 op_eq_eq(EXP(p - 1, n), if EVEN(n) { 1 } else { p - 1 }, mod(p))
   0 + 1
-  3 <= p ==> (p - 1) + 2 = p + 1
-  p - 1
-  (2 == 0) (mod p)
-  forall p. 3 <= p ==> ~(p - 1 == 1) (mod p)
-  forall p x y. 3 <= p /\\\n           ((if x then 1 else p - 1) == (if y then 1 else p - 1)) (mod p)\n           ==> (x <=> y)
-  (s:A->bool) CROSS (t:B->bool)
-  forall s:A->bool t:B->bool.\n       FINITE s /\\ FINITE t ==> FINITE {x,y | x IN s /\\ y IN t /\\ P x y}
-  \\(x:A,y:B). x
-  FINITE s /\\ FINITE t /\\ (forall x. x IN s /\\ p(x) ==> f(x) IN t)\n   ==> CARD {(x:A),(y:B) | x IN s /\\ y IN t /\\ y = f x /\\ p x} =\n       CARD {x | x IN s /\\ p(x)}
-  \\(x:num,y:num). (y,x)
-  CARD {y,x | y IN 1..m /\\ x IN 1..n /\\ P x y} =\n   CARD {x,y | x IN 1..n /\\ y IN 1..m /\\ P x y}
-  y is_quadratic_residue rel <=> ?x. (x EXP 2 == y) (rel)
-  (x * x == a) (mod p)
-  x MOD p
-  x:num
-  forall a p. ~(p = 0) /\\ ~(p divides a)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))
-  forall a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p))
-  (x + y) EXP 2 = y * (y + 2 * x) + x EXP 2
-  forall p x y. prime p\n           ==> (((x + y) EXP 2 == x EXP 2) (mod p) <=>\n                 p divides y \\/ p divides (2 * x + y))
-  x + x + d = 2 * x + d
-  forall p x y. prime p\n           ==> ((x EXP 2 == y EXP 2) (mod p) <=>\n                 p divides (x + y) \\/ p divides (dist(x,y)))
-  (x EXP 2 == z EXP 2) (mod p)
-  z:num
-  x:num
-  x < p ==> x + (p - x) = p
-  p - x:num
-  x:num
-  0 < x /\\ x < p ==> 0 < p - x /\\ p - x < p /\\ x + (p - x) = p
-  p - x:num
-  x:num
-  x:num
-  forall a p. prime p /\\ coprime(a,p)\n         ==> (a is_quadratic_residue (mod p) <=>\n                 ?x y. 0 < x /\\ x < p /\\ 0 < y /\\ y < p /\\ x + y = p /\\\n                       (x EXP 2 == a) (mod p) /\\ (y EXP 2 == a) (mod p) /\\\n                       forall z. 0 < z /\\ z < p /\\ (z EXP 2 == a) (mod p)\n                           ==> z = x \\/ z = y)
-  (x * (p - x) + x EXP 2 == a * (p - 1) + a * 1) (mod p)
-  x < p ==> 1 <= p
-  forall p x. 0 < x /\\ x < p /\\ (x EXP 2 == a) (mod p)\n         ==> (x * (p - x) == (p - 1) * a) (mod p)
-  (legendre:num#num->int)(a,p) =\n        if ~(coprime(a,p)) then &0\n        else if a is_quadratic_residue (mod p) then &1\n        else --(&1)
-  nproduct = iterate ( * )
-  forall f g s. FINITE s /\\ (forall x. x IN s ==> (f x == g x) (mod n))\n           ==> (nproduct s f == nproduct s g) (mod n)
-  {x | x IN a INSERT s /\\ p(x)} =\n     if p(a) then a INSERT {x | x IN s /\\ p(x)}\n     else {x | x IN s /\\ p(x)}
-  a /\\ b ==> c <=> b ==> a ==> c
-  FINITE s ==> FINITE {x | x IN s /\\ p(x)}
-  {x | F} = {}
-  forall c s. FINITE s\n         ==> nproduct s (\\x. if p(x) then c else 1) =\n             c EXP (CARD {x | x IN s /\\ p(x)})
-  forall f p s. FINITE s /\\ (forall x. x IN s ==> coprime(p,f x))\n           ==> coprime(p,nproduct s f)
-  1 <= SUC n
-  forall n. FACT(n) = nproduct(1..n) (\\i. i)
-  ~(n = 0) ==> n = SUC(n - 1)
-  x:A
-  a:A
-  (b:A) IN s
-  y:A
-  (x:A) IN s
-  x:A
-  (s:A->bool) HAS_SIZE 2 * n
-  s = (a:A) INSERT (b INSERT (s DELETE a DELETE b))
-  k:num
-  (s DELETE a) DELETE (b:A)
-  b:A
-  (a:A) IN s
-  a:A
-  ~(n = 0) ==> n - 1 < n
-  n - 1
-  a:A
-  2 * n = 0 <=> n = 0
-  s:A->bool = {}
-  n = 0
-  s:A->bool
-  n:num
-  forall f r n s k. s HAS_SIZE (2 * n) /\\\n               (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                      (f(x) * f(y) == k) (mod r))\n               ==> (nproduct s f == k EXP n) (mod r)
-  x:num
-  p:num
-  a:num
-  ~(p = 0) ==> (x <= p - 1 <=> x < p)
-  1 <= x <=> 0 < x
-  p = 0
-  forall a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ ~(a is_quadratic_residue (mod p))\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 1)) (mod p)
-  3 <= p ==> SUC(p - 2) = p - 1
-  3 <= p ==> p - 1 = SUC(p - 2)
-  3 <= p ==> SUC((p - 3) DIV 2) = (p - 1) DIV 2
-  x + y = p ==> p - x = y
-  x:num
-  p:num
-  u:num
-  p:num
-  a:num
-  u:num
-  p - 1 - 1 - 1 = p - 3
-  a:num
-  (1..p-1) DELETE x DELETE y
-  (p - 3) DIV 2
-  p:num
-  \\i:num. i
-  ~(x:num = y)
-  y:num
-  x:num
-  a is_quadratic_residue (mod p)
-  ~(p = 2)
-  p = 2
-  ODD(p)
-  3 <= p /\\ ~(p = 0)
-  forall a p. prime p /\\ ODD(p) /\\\n         coprime(a,p) /\\ a is_quadratic_residue (mod p)\n         ==> (a EXP ((p - 1) DIV 2) == FACT(p - 2)) (mod p)
-  p:num
+  3 <= (p : Num) \226\134\146 p - 1 + 2 == p + 1
+  (p : Num) - 1
+  op_eq_eq(2, 0, mod((p : Num)))
+  \226\136\128 p : Num, 3 <= p \226\134\146 !op_eq_eq(p - 1, 1, mod(p))
+  \226\136\128 p : Num, \226\136\128 x : Bool, \226\136\128 y : Bool, 3 <= p && op_eq_eq(if x { 1 } else { p - 1 }, if y { 1 } else { p - 1 }, mod(p)) \226\134\146 x == y
+  CROSS((s : (A) -> Bool), (t : (B) -> Bool))
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && FINITE(t) \226\134\146 FINITE({((x : A), (y : B)) | IN(x, s) && IN(y, t) && (P : (A, B) -> Bool)(x, y)})
+  GABS((f : ((A, B)) -> A) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), x))
+  FINITE((s : (A) -> Bool)) && FINITE((t : (B) -> Bool)) && (\226\136\128 x : A, IN(x, s) && (p : (A) -> Bool)(x) \226\134\146 IN((f : (A) -> B)(x), t)) \226\134\146 CARD({((x : A), (y : B)) | IN(x, s) && IN(y, t) && y == f(x) && p(x)}) == CARD({(x : A) | IN(x, s) && p(x)})
+  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), (y, x)))
+  CARD({((y : Num), (x : Num)) | IN(y, op_dot_dot(1, (m : Num))) && IN(x, op_dot_dot(1, (n : Num))) && (P : (Num, Num) -> Bool)(x, y)}) == CARD({((x : Num), (y : Num)) | IN(x, op_dot_dot(1, n)) && IN(y, op_dot_dot(1, m)) && P(x, y)})
+  (is_quadratic_residue : (Num, (Num, Num) -> Bool) -> Bool)((y : Num), (rel : (Num, Num) -> Bool)) == (\226\136\131 x : Num, op_eq_eq(EXP(x, 2), y, rel))
+  op_eq_eq((x : Num) * x, (a : Num), mod((p : Num)))
+  MOD((x : Num), (p : Num))
+  (x : Num)
+  \226\136\128 a : Num, \226\136\128 p : Num, !(p == 0) && !divides(p, a) \226\134\146 is_quadratic_residue(a, mod(p)) == (\226\136\131 x : Num, 0 < x && x < p && op_eq_eq(EXP(x, 2), a, mod(p)))
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) && coprime((a, p)) \226\134\146 is_quadratic_residue(a, mod(p)) == (\226\136\131 x : Num, 0 < x && x < p && op_eq_eq(EXP(x, 2), a, mod(p)))
+  EXP((x : Num) + (y : Num), 2) == y * (y + 2 * x) + EXP(x, 2)
+  \226\136\128 p : Num, \226\136\128 x : Num, \226\136\128 y : Num, prime(p) \226\134\146 op_eq_eq(EXP(x + y, 2), EXP(x, 2), mod(p)) == (divides(p, y) || divides(p, 2 * x + y))
+  (x : Num) + (x + (d : Num)) == 2 * x + d
+  \226\136\128 p : Num, \226\136\128 x : Num, \226\136\128 y : Num, prime(p) \226\134\146 op_eq_eq(EXP(x, 2), EXP(y, 2), mod(p)) == (divides(p, x + y) || divides(p, dist((x, y))))
+  op_eq_eq(EXP((x : Num), 2), EXP((z : Num), 2), mod((p : Num)))
+  (z : Num)
+  (x : Num)
+  (x : Num) < (p : Num) \226\134\146 x + (p - x) == p
+  (p : Num) - (x : Num)
+  (x : Num)
+  0 < (x : Num) && x < (p : Num) \226\134\146 0 < p - x && p - x < p && x + (p - x) == p
+  (p : Num) - (x : Num)
+  (x : Num)
+  (x : Num)
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) && coprime((a, p)) \226\134\146 is_quadratic_residue(a, mod(p)) == (\226\136\131 x : Num, \226\136\131 y : Num, 0 < x && x < p && 0 < y && y < p && x + y == p && op_eq_eq(EXP(x, 2), a, mod(p)) && op_eq_eq(EXP(y, 2), a, mod(p)) && (\226\136\128 z : Num, 0 < z && z < p && op_eq_eq(EXP(z, 2), a, mod(p)) \226\134\146 z == x || z == y))
+  op_eq_eq((x : Num) * ((p : Num) - x) + EXP(x, 2), (a : Num) * (p - 1) + a * 1, mod(p))
+  (x : Num) < (p : Num) \226\134\146 1 <= p
+  \226\136\128 p : Num, \226\136\128 x : Num, 0 < x && x < p && op_eq_eq(EXP(x, 2), (a : Num), mod(p)) \226\134\146 op_eq_eq(x * (p - x), (p - 1) * a, mod(p))
+  (legendre : ((Num, Num)) -> Int)(((a : Num), (p : Num))) == (if !coprime((a, p)) { int_of_num(0) } else { if is_quadratic_residue(a, mod(p)) { int_of_num(1) } else { -int_of_num(1) } })
+  (nproduct : ((_) -> Bool, (_) -> Num) -> Num) == (iterate : ((Num, Num) -> Num, (_) -> Bool, (_) -> Num) -> Num)(op_star)
+  \226\136\128 f : (_) -> Num, \226\136\128 g : (_) -> Num, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 x : _, IN(x, s) \226\134\146 op_eq_eq(f(x), g(x), mod((n : Num)))) \226\134\146 op_eq_eq(nproduct(s, f), nproduct(s, g), mod(n))
+  {(x : _) | IN(x, INSERT((a : _), (s : (_) -> Bool))) && (p : (_) -> Bool)(x)} == (if p(a) { INSERT(a, {(x : _) | IN(x, s) && p(x)}) } else { {(x : _) | IN(x, s) && p(x)} })
+  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+  FINITE((s : (_) -> Bool)) \226\134\146 FINITE({(x : _) | IN(x, s) && (p : (_) -> Bool)(x)})
+  {(x : _) | false} == {}
+  \226\136\128 c : Num, \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 nproduct(s, (x : _) => if (p : (_) -> Bool)(x) { c } else { 1 }) == EXP(c, CARD({(x : _) | IN(x, s) && p(x)}))
+  \226\136\128 f : (_) -> Num, \226\136\128 p : Num, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 x : _, IN(x, s) \226\134\146 coprime((p, f(x)))) \226\134\146 coprime((p, nproduct(s, f)))
+  1 <= SUC((n : Num))
+  \226\136\128 n : Num, FACT(n) == nproduct(op_dot_dot(1, n), (i : Num) => i)
+  !((n : Num) == 0) \226\134\146 n == SUC(n - 1)
+  (x : A)
+  (a : A)
+  IN((b : A), (s : (A) -> Bool))
+  (y : A)
+  IN((x : A), (s : (A) -> Bool))
+  (x : A)
+  HAS_SIZE((s : (A) -> Bool), 2 * (n : Num))
+  (s : (A) -> Bool) == INSERT((a : A), INSERT((b : A), DELETE(DELETE(s, a), b)))
+  (k : Num)
+  DELETE(DELETE((s : (A) -> Bool), (a : A)), (b : A))
+  (b : A)
+  IN((a : A), (s : (A) -> Bool))
+  (a : A)
+  !((n : Num) == 0) \226\134\146 n - 1 < n
+  (n : Num) - 1
+  (a : A)
+  (2 * (n : Num) == 0) == (n == 0)
+  (s : (A) -> Bool) == {}
+  (n : Num) == 0
+  (s : (A) -> Bool)
+  (n : Num)
+  \226\136\128 f : (A) -> Num, \226\136\128 r : Num, \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, \226\136\128 k : Num, HAS_SIZE(s, 2 * n) && (\226\136\128 x : A, IN(x, s) \226\134\146 existsunique((y : A) => IN(y, s) && !(y == x) && op_eq_eq(f(x) * f(y), k, mod(r)))) \226\134\146 op_eq_eq(nproduct(s, f), EXP(k, n), mod(r))
+  (x : Num)
+  (p : Num)
+  (a : Num)
+  !((p : Num) == 0) \226\134\146 ((x : Num) <= p - 1) == (x < p)
+  (1 <= (x : Num)) == (0 < x)
+  (p : Num) == 0
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) && ODD(p) && coprime((a, p)) && !is_quadratic_residue(a, mod(p)) \226\134\146 op_eq_eq(EXP(a, DIV(p - 1, 2)), FACT(p - 1), mod(p))
+  3 <= (p : Num) \226\134\146 SUC(p - 2) == p - 1
+  3 <= (p : Num) \226\134\146 p - 1 == SUC(p - 2)
+  3 <= (p : Num) \226\134\146 SUC(DIV(p - 3, 2)) == DIV(p - 1, 2)
+  (x : Num) + (y : Num) == (p : Num) \226\134\146 p - x == y
+  (x : Num)
+  (p : Num)
+  (u : Num)
+  (p : Num)
+  (a : Num)
+  (u : Num)
+  (p : Num) - 1 - 1 - 1 == p - 3
+  (a : Num)
+  DELETE(DELETE(op_dot_dot(1, (p : Num) - 1), (x : Num)), (y : Num))
+  DIV((p : Num) - 3, 2)
+  (p : Num)
+  (i : Num) => i
+  !((x : Num) == (y : Num))
+  (y : Num)
+  (x : Num)
+  is_quadratic_residue((a : Num), mod((p : Num)))
+  !((p : Num) == 2)
+  (p : Num) == 2
+  ODD((p : Num))
+  3 <= (p : Num) && !(p == 0)
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) && ODD(p) && coprime((a, p)) && is_quadratic_residue(a, mod(p)) \226\134\146 op_eq_eq(EXP(a, DIV(p - 1, 2)), FACT(p - 2), mod(p))
+  (p : Num)
   1
-  forall p. prime(p) ==> (FACT(p - 2) == 1) (mod p)
-  2 <= p ==> p - 1 = SUC(p - 2)
-  forall p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)
-  ~(n = 0) ==> n - 1 + 1 = n
-  n - 1
-  p divides 1
-  n:num
-  p divides FACT(n - 1) <=> p divides (n - 1)
-  x < y ==> x <= y - 1
-  n:num = p
-  n = 0
-  p:num
-  n:num
-  forall p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))
-  forall a p. prime p /\\ coprime(a,p)\n         ==> (a EXP ((p - 1) DIV 2) ==\n              (if a is_quadratic_residue (mod p) then 1 else p - 1)) (mod p)
-  2 * r + 1 = p
-  j <= r
-  i <= r
-  1 <= i ==> ~(i + j = 0)
-  (MOD)
-  p:num
-  (if a then x else p - x) = (if b then y else p - y) ==> x < p /\\ y < p\n    ==> x = y \\/ x + y = p
-  a:num
-  i <= r ==> i < 2 * r + 1
-  p:num
-  j:num
-  i:num
-  ~(2 * r + 1 <= i /\\ i <= r)
-  ~(1 <= 0)
-  1 <= x <=> ~(x = 0)
-  a /\\ (a ==> b) ==> a /\\ b
-  f = \\x. let b = (a * x) MOD p in\n                      if b <= r then b else p - b
-  prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n   ==> nproduct(1..r) (\\x. let b = (a * x) MOD p in\n                           if b <= r then b else p - b) =\n       nproduct(1..r) (\\x. x)
-  nproduct(1..r) (\\x. a * x)
+  \226\136\128 p : Num, prime(p) \226\134\146 op_eq_eq(FACT(p - 2), 1, mod(p))
+  2 <= (p : Num) \226\134\146 p - 1 == SUC(p - 2)
+  \226\136\128 p : Num, prime(p) \226\134\146 op_eq_eq(FACT(p - 1), p - 1, mod(p))
+  !((n : Num) == 0) \226\134\146 n - 1 + 1 == n
+  (n : Num) - 1
+  divides((p : Num), 1)
+  (n : Num)
+  divides((p : Num), FACT((n : Num) - 1)) == divides(p, n - 1)
+  (x : Num) < (y : Num) \226\134\146 x <= y - 1
+  (n : Num) == (p : Num)
+  (n : Num) == 0
+  (p : Num)
+  (n : Num)
+  \226\136\128 p : Num, !(p == 1) \226\134\146 prime(p) == op_eq_eq(FACT(p - 1), p - 1, mod(p))
+  \226\136\128 a : Num, \226\136\128 p : Num, prime(p) && coprime((a, p)) \226\134\146 op_eq_eq(EXP(a, DIV(p - 1, 2)), if is_quadratic_residue(a, mod(p)) { 1 } else { p - 1 }, mod(p))
+  2 * (r : Num) + 1 == (p : Num)
+  (j : Num) <= (r : Num)
+  (i : Num) <= (r : Num)
+  1 <= (i : Num) \226\134\146 !(i + (j : Num) == 0)
+  MOD
+  (p : Num)
+  (if (a : Bool) { (x : Num) } else { (p : Num) - x }) == (if (b : Bool) { (y : Num) } else { p - y }) \226\134\146 x < p && y < p \226\134\146 x == y || x + y == p
+  (a : Num)
+  (i : Num) <= (r : Num) \226\134\146 i < 2 * r + 1
+  (p : Num)
+  (j : Num)
+  (i : Num)
+  !(2 * (r : Num) + 1 <= (i : Num) && i <= r)
+  !(1 <= 0)
+  (1 <= (x : Num)) == !(x == 0)
+  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+  (f : (Num) -> Num) == ((x : Num) => LET((b : Num) => LET_END(if b <= (r : Num) { b } else { (p : Num) - b }), MOD((a : Num) * x, p)))
+  prime((p : Num)) && coprime(((a : Num), p)) && 2 * (r : Num) + 1 == p \226\134\146 nproduct(op_dot_dot(1, r), (x : Num) => LET((b : Num) => LET_END(if b <= r { b } else { p - b }), MOD(a * x, p))) == nproduct(op_dot_dot(1, r), (x : Num) => x)
+  nproduct(op_dot_dot(1, (r : Num)), (x : Num) => (a : Num) * x)
   1
-  b:num
-  2 <= p ==> ~(p = 0)
-  a * i:num
-  b <= p /\\ (1 <= p \\/ b = 0) <=> b <= p
-  i:num
-  nproduct(1..r) (\\x. (if x IN s then 1 else p - 1) * (a * x) MOD p)
-  s = {x | x IN 1..r /\\ (a * x) MOD p <= r}
-  prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n   ==> (nproduct(1..r) (\\x. let b = (a * x) MOD p in\n                            if b <= r then b else p - b) ==\n        (p - 1) EXP (CARD {x | x IN 1..r /\\ r < (a * x) MOD p}) *\n        a EXP r * nproduct(1..r) (\\x. x)) (mod p)
-  nproduct (1..r) (\\x. x)
-  r = (p - 1) DIV 2
-  (p - 1) EXP CARD {x | x IN 1..r /\\ r < (a * x) MOD p} * a EXP r
-  prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n   ==> ((p - 1) EXP CARD {x | x IN 1..r /\\ r < (a * x) MOD p} *\n        (if a is_quadratic_residue mod p then 1 else p - 1) == 1) (mod p)
-  (p - 1) EXP CARD {x | x IN 1..r /\\ r < (a * x) MOD p} *\n              (if a is_quadratic_residue mod p then 1 else p - 1)
-  prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n   ==> ((if EVEN(CARD{x | x IN 1..r /\\ r < (a * x) MOD p}) then 1 else p - 1) *\n        (if a is_quadratic_residue mod p then 1 else p - 1) == 1) (mod p)
-  ~(r = 0)
-  r = 0
-  r = 0
-  p:num
-  forall a p r. prime p /\\ coprime(a,p) /\\ 2 * r + 1 = p\n           ==> (a is_quadratic_residue (mod p) <=>\n                EVEN(CARD {x | x IN 1..r /\\ r < (a * x) MOD p}))
-  q * x
-  prime p
-  ((q * x) DIV p + 2) * p <= y * p
-  y * p <= ((q * x) DIV p) * p
-  ~(x <= y) /\\ ~(y + 2 <= x) ==> x = y + 1
-  (q * x) DIV p
-  p:num
-  forall p d. 2 * r + 1 = p /\\ p * (d + 1) <= (d * p + m) + r ==> r < m
-  a /\\ (a ==> b) ==> a /\\ b
-  2 * r + 1 = p
-  q * x
-  prime p
-  y:num
-  x:num
-  x < y ==> x + 1 <= y
-  (2 * r + 1) * d + r < (2 * s + 1) * r\n                    ==> (2 * r) * d < (2 * r) * s
-  q * x
-  p * (q * x) DIV p + r < q * r
-  x:num
-  1 <= x + 1
-  CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                y = (q * x) DIV p + 1 /\\ r < (q * x) MOD p}
-  r:num
-  p:num
-  q:num
-  forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (q is_quadratic_residue (mod p) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   q * x < p * y /\\ p * y <= q * x + r}))
-  r:num
-  s:num
-  p:num
-  q:num
-  forall p q r s. prime p /\\ prime q /\\ coprime(p,q) /\\\n             2 * r + 1 = p /\\ 2 * s + 1 = q\n             ==> (p is_quadratic_residue (mod q) <=>\n                  EVEN(CARD {x,y | x IN 1..r /\\ y IN 1..s /\\\n                                   p * y < q * x /\\ q * x <= p * y + s}))
-  a INTER (b UNION c) = {} <=> a INTER b = {} /\\ a INTER c = {}
-  CARD:(num#num->bool)->num
-  (1..r) CROSS (1..s)
-  FINITE(a:num#num->bool) /\\ FINITE(b:num#num->bool) /\\\n    FINITE(c:num#num->bool) /\\ FINITE(d:num#num->bool)
-  CARD(a:num#num->bool) + CARD(b:num#num->bool) +\n                CARD(c:num#num->bool) + CARD(d:num#num->bool) = r * s
-  forall a b c d r s.\n        a UNION b UNION c UNION d = (1..r) CROSS (1..s) /\\\n        PAIRWISE DISJOINT [a;b;c;d] /\\ CARD b = CARD c\n        ==> ((EVEN(CARD a) <=> EVEN(CARD d)) <=> ~(ODD r /\\ ODD s))
+  (b : Num)
+  2 <= (p : Num) \226\134\146 !(p == 0)
+  (a : Num) * (i : Num)
+  ((b : Num) <= (p : Num) && (1 <= p || b == 0)) == (b <= p)
+  (i : Num)
+  nproduct(op_dot_dot(1, (r : Num)), (x : Num) => (if IN(x, (s : (Num) -> Bool)) { 1 } else { (p : Num) - 1 }) * MOD((a : Num) * x, p))
+  (s : (Num) -> Bool) == {(x : Num) | IN(x, op_dot_dot(1, (r : Num))) && MOD((a : Num) * x, (p : Num)) <= r}
+  prime((p : Num)) && coprime(((a : Num), p)) && 2 * (r : Num) + 1 == p \226\134\146 op_eq_eq(nproduct(op_dot_dot(1, r), (x : Num) => LET((b : Num) => LET_END(if b <= r { b } else { p - b }), MOD(a * x, p))), EXP(p - 1, CARD({(x : Num) | IN(x, op_dot_dot(1, r)) && r < MOD(a * x, p)})) * (EXP(a, r) * nproduct(op_dot_dot(1, r), (x : Num) => x)), mod(p))
+  nproduct(op_dot_dot(1, (r : Num)), (x : Num) => x)
+  (r : Num) == DIV((p : Num) - 1, 2)
+  EXP((p : Num) - 1, CARD({(x : Num) | IN(x, op_dot_dot(1, (r : Num))) && r < MOD((a : Num) * x, p)})) * EXP(a, r)
+  prime((p : Num)) && coprime(((a : Num), p)) && 2 * (r : Num) + 1 == p \226\134\146 op_eq_eq(EXP(p - 1, CARD({(x : Num) | IN(x, op_dot_dot(1, r)) && r < MOD(a * x, p)})) * (if is_quadratic_residue(a, mod(p)) { 1 } else { p - 1 }), 1, mod(p))
+  EXP((p : Num) - 1, CARD({(x : Num) | IN(x, op_dot_dot(1, (r : Num))) && r < MOD((a : Num) * x, p)})) * (if is_quadratic_residue(a, mod(p)) { 1 } else { p - 1 })
+  prime((p : Num)) && coprime(((a : Num), p)) && 2 * (r : Num) + 1 == p \226\134\146 op_eq_eq((if EVEN(CARD({(x : Num) | IN(x, op_dot_dot(1, r)) && r < MOD(a * x, p)})) { 1 } else { p - 1 }) * (if is_quadratic_residue(a, mod(p)) { 1 } else { p - 1 }), 1, mod(p))
+  !((r : Num) == 0)
+  (r : Num) == 0
+  (r : Num) == 0
+  (p : Num)
+  \226\136\128 a : Num, \226\136\128 p : Num, \226\136\128 r : Num, prime(p) && coprime((a, p)) && 2 * r + 1 == p \226\134\146 is_quadratic_residue(a, mod(p)) == EVEN(CARD({(x : Num) | IN(x, op_dot_dot(1, r)) && r < MOD(a * x, p)}))
+  (q : Num) * (x : Num)
+  prime((p : Num))
+  (DIV((q : Num) * (x : Num), (p : Num)) + 2) * p <= (y : Num) * p
+  (y : Num) * (p : Num) <= DIV((q : Num) * (x : Num), p) * p
+  !((x : Num) <= (y : Num)) && !(y + 2 <= x) \226\134\146 x == y + 1
+  DIV((q : Num) * (x : Num), (p : Num))
+  (p : Num)
+  \226\136\128 p : Num, \226\136\128 d : Num, 2 * (r : Num) + 1 == p && p * (d + 1) <= d * p + (m : Num) + r \226\134\146 r < m
+  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+  2 * (r : Num) + 1 == (p : Num)
+  (q : Num) * (x : Num)
+  prime((p : Num))
+  (y : Num)
+  (x : Num)
+  (x : Num) < (y : Num) \226\134\146 x + 1 <= y
+  (2 * (r : Num) + 1) * (d : Num) + r < (2 * (s : Num) + 1) * r \226\134\146 2 * r * d < 2 * r * s
+  (q : Num) * (x : Num)
+  (p : Num) * DIV((q : Num) * (x : Num), p) + (r : Num) < q * r
+  (x : Num)
+  1 <= (x : Num) + 1
+  CARD({((x : Num), (y : Num)) | IN(x, op_dot_dot(1, (r : Num))) && IN(y, op_dot_dot(1, (s : Num))) && y == DIV((q : Num) * x, (p : Num)) + 1 && r < MOD(q * x, p)})
+  (r : Num)
+  (p : Num)
+  (q : Num)
+  \226\136\128 p : Num, \226\136\128 q : Num, \226\136\128 r : Num, \226\136\128 s : Num, prime(p) && prime(q) && coprime((p, q)) && 2 * r + 1 == p && 2 * s + 1 == q \226\134\146 is_quadratic_residue(q, mod(p)) == EVEN(CARD({((x : Num), (y : Num)) | IN(x, op_dot_dot(1, r)) && IN(y, op_dot_dot(1, s)) && q * x < p * y && p * y <= q * x + r}))
+  (r : Num)
+  (s : Num)
+  (p : Num)
+  (q : Num)
+  \226\136\128 p : Num, \226\136\128 q : Num, \226\136\128 r : Num, \226\136\128 s : Num, prime(p) && prime(q) && coprime((p, q)) && 2 * r + 1 == p && 2 * s + 1 == q \226\134\146 is_quadratic_residue(p, mod(q)) == EVEN(CARD({((x : Num), (y : Num)) | IN(x, op_dot_dot(1, r)) && IN(y, op_dot_dot(1, s)) && p * y < q * x && q * x <= p * y + s}))
+  (INTER((a : (_) -> Bool), UNION((b : (_) -> Bool), (c : (_) -> Bool))) == {}) == (INTER(a, b) == {} && INTER(a, c) == {})
+  (CARD : (((Num, Num)) -> Bool) -> Num)
+  CROSS(op_dot_dot(1, (r : Num)), op_dot_dot(1, (s : Num)))
+  FINITE((a : ((Num, Num)) -> Bool)) && FINITE((b : ((Num, Num)) -> Bool)) && FINITE((c : ((Num, Num)) -> Bool)) && FINITE((d : ((Num, Num)) -> Bool))
+  CARD((a : ((Num, Num)) -> Bool)) + (CARD((b : ((Num, Num)) -> Bool)) + (CARD((c : ((Num, Num)) -> Bool)) + CARD((d : ((Num, Num)) -> Bool)))) == (r : Num) * (s : Num)
+  \226\136\128 a : ((Num, Num)) -> Bool, \226\136\128 b : ((Num, Num)) -> Bool, \226\136\128 c : ((Num, Num)) -> Bool, \226\136\128 d : ((Num, Num)) -> Bool, \226\136\128 r : Num, \226\136\128 s : Num, UNION(a, UNION(b, UNION(c, d))) == CROSS(op_dot_dot(1, r), op_dot_dot(1, s)) && PAIRWISE(DISJOINT, [a, b, c, d]) && CARD(b) == CARD(c) \226\134\146 (EVEN(CARD(a)) == EVEN(CARD(d))) == !(ODD(r) && ODD(s))
   EVEN
-  a + x < y + a <=> x < y
-  x <= r ==> x <= r + 1
-  x <= y /\\ v + y + z < x + u ==> (y - x) + z < u - v
-  1 <= x /\\ x <= y ==> 1 <= (y + 1) - x /\\ (y + 1) - x <= y
-  x <= y ==> (y + 1) - ((y + 1) - x) = x
-  y:num
-  x:num
-  \\(x,y). (r + 1) - x,(s + 1) - y
-  x IN 1..r
-  (divides) p
-  ~(q * x = p * y)
-  y IN 1..s
-  x IN 1..r
-  y:num
-  x:num
-  {x,y | x IN 1..r /\\ y IN 1..s /\\ p * y + s < q * x}
-  {x,y | x IN 1..r /\\ y IN 1..s /\\ q * x + r < p * y}
-  s:num
-  r:num
-  q:num
-  p:num
-  s:num
-  r:num
-  q:num
-  p:num
-  forall p q r s.\n        prime p /\\\n        prime q /\\\n        coprime (p,q) /\\\n        2 * r + 1 = p /\\\n        2 * s + 1 = q\n        ==> ((q is_quadratic_residue (mod p) <=>\n              p is_quadratic_residue (mod q)) <=>\n             ~(ODD r /\\ ODD s))
-  p is_quadratic_residue (mod q)
-  ~(a <=> b) <=> (a <=> ~b)
-  EVEN s
-  EVEN r
-  s:num
-  r:num
-  q:num
-  p:num
-  ((2 * s + 1) - 1) DIV 2 = s
-  s:num
-  r:num
-  ODD p
-  ODD q
-  forall p q. prime p /\\ prime q /\\ ODD p /\\ ODD q /\\ ~(p = q)\n         ==> legendre(p,q) * legendre(q,p) =\n             --(&1) pow ((p - 1) DIV 2 * (q - 1) DIV 2)
+  ((a : Num) + (x : Num) < (y : Num) + a) == (x < y)
+  (x : Num) <= (r : Num) \226\134\146 x <= r + 1
+  (x : Num) <= (y : Num) && (v : Num) + (y + (z : Num)) < x + (u : Num) \226\134\146 y - x + z < u - v
+  1 <= (x : Num) && x <= (y : Num) \226\134\146 1 <= y + 1 - x && y + 1 - x <= y
+  (x : Num) <= (y : Num) \226\134\146 y + 1 - (y + 1 - x) == x
+  (y : Num)
+  (x : Num)
+  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), ((r : Num) + 1 - x, (s : Num) + 1 - y)))
+  IN((x : Num), op_dot_dot(1, (r : Num)))
+  divides((p : Num))
+  !((q : Num) * (x : Num) == (p : Num) * (y : Num))
+  IN((y : Num), op_dot_dot(1, (s : Num)))
+  IN((x : Num), op_dot_dot(1, (r : Num)))
+  (y : Num)
+  (x : Num)
+  {((x : Num), (y : Num)) | IN(x, op_dot_dot(1, (r : Num))) && IN(y, op_dot_dot(1, (s : Num))) && (p : Num) * y + s < (q : Num) * x}
+  {((x : Num), (y : Num)) | IN(x, op_dot_dot(1, (r : Num))) && IN(y, op_dot_dot(1, (s : Num))) && (q : Num) * x + r < (p : Num) * y}
+  (s : Num)
+  (r : Num)
+  (q : Num)
+  (p : Num)
+  (s : Num)
+  (r : Num)
+  (q : Num)
+  (p : Num)
+  \226\136\128 p : Num, \226\136\128 q : Num, \226\136\128 r : Num, \226\136\128 s : Num, prime(p) && prime(q) && coprime((p, q)) && 2 * r + 1 == p && 2 * s + 1 == q \226\134\146 (is_quadratic_residue(q, mod(p)) == is_quadratic_residue(p, mod(q))) == !(ODD(r) && ODD(s))
+  is_quadratic_residue((p : Num), mod((q : Num)))
+  !((a : Bool) == (b : Bool)) == (a == !b)
+  EVEN((s : Num))
+  EVEN((r : Num))
+  (s : Num)
+  (r : Num)
+  (q : Num)
+  (p : Num)
+  DIV(2 * (s : Num) + 1 - 1, 2) == s
+  (s : Num)
+  (r : Num)
+  ODD((p : Num))
+  ODD((q : Num))
+  \226\136\128 p : Num, \226\136\128 q : Num, prime(p) && prime(q) && ODD(p) && ODD(q) && !(p == q) \226\134\146 legendre((p, q)) * legendre((q, p)) == pow(-int_of_num(1), DIV(p - 1, 2) * DIV(q - 1, 2))
 IN_NUMSEG_1 =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) i:num)) ((#<:fun(num,fun(num,bool)) i:num) p:num)))))))
 EVEN_DIV =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) n:num)) ((#=:fun(num,fun(num,bool)) n:num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
 CONG_MINUS1_SQUARE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) p:num)) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#*:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) p:num)))
