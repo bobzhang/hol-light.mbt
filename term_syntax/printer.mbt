@@ -722,13 +722,6 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 /// differ in name. tools/migrate.mbtx migrates only such quotations, so the
 /// theorems of a migrated package print as before.
 pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintable {
-  // a type variable invented before (one the environment may share) must be
-  // the same in both readings; only those they invent may differ
-  let from = @preterm.type_var_counter()
-  let (a, na) = @parser.reread_term(old) catch {
-    _ => raise Unprintable("quotation that does not read back")
-  }
-  let a = canonical_invented(a, from~)
   // set notation, else the sets as written (GSPEC(...)), which an old
   // quotation may spell out
   let mut error = Unprintable("term")
@@ -739,23 +732,40 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
         continue
       }
     }
-    let (b, nb) = reread(s) catch {
-      _ => {
-        error = Unprintable("term that does not read back")
+    check_spelling(old, s) catch {
+      e => {
+        error = e
         continue
       }
     }
-    if canonical_invented(b, from~) != a {
-      error = Unprintable("term whose bound variables the syntax renames")
-    } else if na != nb {
-      error = Unprintable(
-        "term that takes \{nb} GEN%PVAR names where the quotation takes \{na}",
-      )
-    } else {
-      return s
-    }
+    return s
   }
   raise error
+}
+
+///|
+/// Check that the term syntax `s` reads now exactly as the quotation `old`
+/// does: the same term with nothing renamed, bound variables included, and
+/// as many GEN%PVAR names taken (both readings start from the same
+/// counter). Only type variables the readings themselves invent may
+/// differ in name; one invented before (which the environment may share)
+/// must be the same.
+pub fn check_spelling(old : String, s : String) -> Unit raise Unprintable {
+  let from = @preterm.type_var_counter()
+  let (a, na) = @parser.reread_term(old) catch {
+    _ => raise Unprintable("quotation that does not read back")
+  }
+  let (b, nb) = reread(s) catch {
+    _ => raise Unprintable("term that does not read back")
+  }
+  if canonical_invented(b, from~) != canonical_invented(a, from~) {
+    raise Unprintable("term whose bound variables the syntax renames")
+  }
+  if na != nb {
+    raise Unprintable(
+      "term that takes \{nb} GEN%PVAR names where the quotation takes \{na}",
+    )
+  }
 }
 
 ///|

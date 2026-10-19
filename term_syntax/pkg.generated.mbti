@@ -8,6 +8,8 @@ import {
 }
 
 // Values
+pub fn check_spelling(String, String) -> Unit raise Unprintable
+
 pub fn parse_preterm(String) -> @preterm.Preterm raise
 
 pub fn parse_term(String) -> @kernel.Term raise

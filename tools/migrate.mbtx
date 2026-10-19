@@ -145,8 +145,14 @@ fn ocaml_escaped(s : String) -> String {
 /// multiline strings: (start of the call, end after its `)`, the literal's
 /// body). A literal with interpolation is not a quotation the tool rewrites.
 fn calls(cs : Array[Char]) -> Array[(Int, Int, String)] {
+  calls_of(cs, call_prefix)
+}
+
+///|
+/// The calls `prefix"...")` of `cs`, as `calls` finds them.
+fn calls_of(cs : Array[Char], prefix : String) -> Array[(Int, Int, String)] {
   let out = []
-  let pre = call_prefix.to_array()
+  let pre = prefix.to_array()
   let n = cs.length()
   let mut i = 0
   let mut line_start = true
@@ -184,7 +190,7 @@ fn calls(cs : Array[Char]) -> Array[(Int, Int, String)] {
       }
       if j + 1 < n && cs[j] == '"' && cs[j + 1] == ')' {
         let body = String::from_array(cs[i + pre.length():j])
-        if !body.contains("\\{") {
+        if !interpolates(body) {
           out.push((i, j + 2, body))
         }
         i = j + 2
@@ -210,6 +216,25 @@ fn calls(cs : Array[Char]) -> Array[(Int, Int, String)] {
     i += 1
   }
   out
+}
+
+///|
+/// Whether the body of a string literal has an interpolation \{...} (a
+/// backslash that is not itself escaped, then {).
+fn interpolates(body : String) -> Bool {
+  let cs = body.to_array()
+  let mut i = 0
+  while i < cs.length() {
+    if cs[i] == '\\' {
+      if i + 1 < cs.length() && cs[i + 1] == '{' {
+        return true
+      }
+      i += 2
+    } else {
+      i += 1
+    }
+  }
+  false
 }
 
 ///|
@@ -409,25 +434,40 @@ async fn record(
   pkg : String,
   theory : String,
   sources : Array[(String, String)],
+  given? : Map[Int, String] = Map::new(),
 ) -> Recording {
   let pkg_alias = pkg.split("/").last().unwrap().to_owned()
   let pkg_file = pkg + "/moon.pkg"
   let pkg_src = read(pkg_file)
   let test_file = pkg + "/" + gen_test
   let t = theory.to_json().stringify()
+  let u = unprintable.to_json().stringify()
+  // with spellings given (written by hand), each is checked where its site
+  // runs instead of one printed
+  let given_src = "Map::from_array([" +
+    given.to_array().map(p => "(\{p.0}, \"" + quote(p.1) + "\")").join(", ") +
+    "])"
+  let spell = if given.is_empty() {
+    "Some(@term_syntax.spell_quotation(old, tm))"
+  } else {
+    "(match given.get(site) { Some(s) => { @term_syntax.check_spelling(old, s); Some(s) }; None => None })"
+  }
   @fs.write_file(
     test_file,
     (
       $|///|
       $|test "migrate quotations" {
+      $|  let given : Map[Int, String] = \{given_src}
       $|  @parser.quotation_hook.val = Some(fn(site, old, tm) {
       $|    if site >= 0 {
       $|      let at = if @parser.is_loading(\{t}) { @parser.theory_trace(\{t}).length() - 1 } else { -1 }
-      $|      let new = try @term_syntax.spell_quotation(old, tm) catch {
-      $|        @term_syntax.Unprintable(m) => \{unprintable.to_json().stringify()} + ": " + m
-      $|        _ => \{unprintable.to_json().stringify()}
+      $|      let new = try \{spell} catch {
+      $|        @term_syntax.Unprintable(m) => Some(\{u} + ": " + m)
+      $|        _ => Some(\{u})
       $|      }
-      $|      println("@@Q " + [site.to_json(), at.to_json(), new.to_json()].to_json().stringify())
+      $|      if new is Some(new) {
+      $|        println("@@Q " + [site.to_json(), at.to_json(), new.to_json()].to_json().stringify())
+      $|      }
       $|    }
       $|  })
       $|  @\{pkg_alias}.load()
@@ -619,10 +659,160 @@ async fn restore_others(keep : Array[String]) -> Unit {
 }
 
 ///|
+/// The quotation calls of `cs`, of either front end, in order: (start,
+/// end, body, whether it is @parser's).
+fn quotations(cs : Array[Char]) -> Array[(Int, Int, String, Bool)] {
+  let out = calls_of(cs, call_prefix).map(c => (c.0, c.1, c.2, true))
+  out.append(calls_of(cs, "@term_syntax.parse_term(\"").map(c => (c.0, c.1, c.2, false)))
+  out.sort_by_key(c => c.0)
+  out
+}
+
+///|
+/// `cs` with its quotation calls left out, for comparing the rest.
+fn without_quotations(cs : Array[Char]) -> String {
+  let out = StringBuilder()
+  let mut last = 0
+  for q in quotations(cs) {
+    out.write_string(String::from_array(cs[last:q.0]))
+    out.write_string("\u{0}")
+    last = q.1
+  }
+  out.write_string(String::from_array(cs[last:]))
+  out.to_string()
+}
+
+///|
+/// `--retrace <package dir>`: after quotations of the package were
+/// converted by hand (@parser.parse_term("old") replaced by
+/// @term_syntax.parse_term("new") and nothing else), check each where it
+/// runs while the package loads, exactly as the tool checks its own
+/// spellings (@term_syntax.check_spelling); rewrite the trace in the golden
+/// and .expected; run the reference test.
+async fn retrace(pkg : String) -> Unit {
+  let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
+  for line in status.split("\n") {
+    if line.length() < 4 {
+      continue
+    }
+    let path = line[3:].to_owned()
+    if !line.has_prefix(" M") ||
+      !path.has_prefix(pkg + "/") ||
+      path[pkg.length() + 1:].contains("/") ||
+      !path.has_suffix(".mbt") ||
+      path.has_suffix("_test.mbt") {
+      fail(
+        "--retrace: only the package's own .mbt source files may be modified (not added, renamed or staged; the tool adds the import itself); also changed:\n" +
+        line.to_owned(),
+      )
+    }
+  }
+  let theory = theory_of(pkg)
+  // each hand-converted call: the site of its @parser call in HEAD
+  let heads = []
+  let works = []
+  let given : Map[Int, String] = Map::new()
+  let mut site = 0
+  for f in mbt_files(pkg).filter(f => !f.has_suffix("_test.mbt")) {
+    let (code, head) = sh("git", ["show", "HEAD:" + f])
+    if code != 0 {
+      fail("--retrace: \{f} is not in HEAD")
+    }
+    let work = read(f)
+    let hcs = head.to_array()
+    let wcs = work.to_array()
+    if without_quotations(hcs) != without_quotations(wcs) {
+      fail("--retrace: \{f} changed outside quotation calls")
+    }
+    let hq = quotations(hcs)
+    let wq = quotations(wcs)
+    for k in 0..<hq.length() {
+      let (_, _, hbody, hparser) = hq[k]
+      let (_, _, wbody, wparser) = wq[k]
+      if hparser && !wparser {
+        given[site] = unquote(wbody)
+      } else if hparser != wparser || hbody != wbody {
+        fail("--retrace: \{f}: a quotation changed other than from @parser to @term_syntax: " + unquote(wbody))
+      }
+      if hparser {
+        site += 1
+      }
+    }
+    heads.push((f, head))
+    works.push((f, work))
+  }
+  if given.is_empty() {
+    fail("--retrace: no quotation was converted by hand")
+  }
+  // record with HEAD's sources, checking the given spellings where they run
+  for p in heads {
+    @fs.write_file(p.0, p.1)
+  }
+  let rec = record(pkg, theory, heads, given~) catch {
+    e => {
+      for p in works {
+        @fs.write_file(p.0, p.1)
+      }
+      raise e
+    }
+  }
+  for p in works {
+    @fs.write_file(p.0, p.1)
+  }
+  let new_trace = rec.trace.copy()
+  for s, new in given {
+    guard rec.runs.get(s) is Some(runs) else {
+      fail("--retrace: `\{new}` does not run while the package loads, so it cannot be checked")
+    }
+    for r in runs {
+      if r.1.has_prefix(unprintable) {
+        fail("--retrace: `\{new}` does not read as the quotation it replaces" + r.1[unprintable.length():].to_owned())
+      }
+      if r.0 >= 0 {
+        new_trace[r.0] = new
+      }
+    }
+  }
+  import_term_syntax(pkg)
+  let keep = [pkg + "/"]
+  let tests = golden_tests(pkg)
+  for t in tests {
+    keep.push(t)
+    rewrite_trace(t, theory, rec.trace, new_trace)
+    guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
+      fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
+    }
+    keep.push(e)
+    rewrite_trace(e, theory, rec.trace, new_trace)
+  }
+  println("\{pkg}: \{given.length()} converted by hand, checked")
+  let failures = match tests {
+    [] => run_tests(pkg, None)
+    tests => {
+      let tdir = tests[0].split("/").map(p => p.to_owned()).to_array()
+      run_tests(tdir[:tdir.length() - 1].join("/"), Some(tests))
+    }
+  }
+  restore_others(keep)
+  if failures.is_empty() {
+    println("test: pass")
+  } else {
+    println("test: FAILED")
+    for m in failures {
+      println(m[:min(3000, m.length())].to_owned())
+    }
+    fail("the reference test fails")
+  }
+}
+
+///|
 async fn main {
   let args = @env.args()
   guard args.length() >= 2 else {
-    fail("usage: moon run tools/migrate.mbtx -- <package dir>")
+    fail("usage: moon run tools/migrate.mbtx -- [--retrace] <package dir>")
+  }
+  if args[1] == "--retrace" && args.length() >= 3 {
+    return retrace(args[2].trim_end(chars="/").to_owned())
   }
   let pkg = args[1].trim_end(chars="/").to_owned()
   let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
