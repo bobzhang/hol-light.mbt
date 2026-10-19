@@ -6,10 +6,10 @@ fn step_1() -> Unit raise {
   let t5 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t4 = @simp.simp_tac(@list.List([@int.cong_v1(), @calc_num.arith()]))
   let t3 = @simp.asm_simp_tac(@list.List([@pocklington.cong_mult(), @pocklington.cong_refl()]))
-  let t2 = @tactics.exists_tac(@parser.parse_term("10 * 1"))
+  let t2 = @tactics.exists_tac(@term_syntax.parse_term("10 * 1"))
   let t1 = @tactics.match_mp_tac(@pocklington.cong_trans())
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@arith.exp(), @pocklington.cong_refl()]))), t1), t2), @tactics.conj_tac), t3), t4), t5)
-  exp_10_cong_3_c.set(@tactics.prove(@parser.parse_term("forall n. (10 EXP n == 1) (mod 3)"), t6))
+  exp_10_cong_3_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, op_eq_eq(EXP(10, n), 1, mod(3))"), t6))
 }
 
 ///|
@@ -31,14 +31,14 @@ fn step_2() -> Unit raise {
     fn(x14 : @kernel.Term) -> @kernel.Thm raise {
       s13(x14)
     }
-  }, @list.List([@int.arith_rule(@parser.parse_term("d = 1 * d"))]))
+  }, @list.List([@int.arith_rule(@term_syntax.parse_term("(d : Num) == 1 * d"))]))
   let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t10 = @tactics.match_mp_tac(@pocklington.cong_add())
   let t9 = @simp.rewrite_tac(@list.List([@arith.le_0()]))
   let t8 = @list.List([@simp.rewrite_tac(@list.List([@arith.exp(), @arith.mult_clauses(), @pocklington.cong_refl()])), @tactics.all_tac])
   let t7 = @simp.rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t7), t8), t9), t10), t11), t15), t16), t17)
-  sum_cong_3_c.set(@tactics.prove(@parser.parse_term("forall d n. (nsum(0..n) (\\i. 10 EXP i * d(i)) == nsum(0..n) (\\i. d i)) (mod 3)"), t18))
+  sum_cong_3_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : (Num) -> Num, ∀ n : Num, op_eq_eq(nsum(op_dot_dot(0, n), (i : Num) => EXP(10, i) * d(i)), nsum(op_dot_dot(0, n), (i : Num) => d(i)), mod(3))"), t18))
 }
 
 ///|
@@ -55,7 +55,7 @@ pub fn sum_cong_3() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([sum_cong_3()]))
   let t20 = @tactics.then_tac(@tactics.match_mp_tac(@pocklington.cong_divides()), t19)
-  divisibility_by_3_c.set(@tactics.prove(@parser.parse_term("3 divides (nsum(0..n) (\\i. 10 EXP i * d(i))) <=>\n   3 divides (nsum(0..n) (\\i. d i))"), t20))
+  divisibility_by_3_c.set(@tactics.prove(@term_syntax.parse_term("divides(3, nsum(op_dot_dot(0, (n : Num)), (i : Num) => EXP(10, i) * (d : (Num) -> Num)(i))) == divides(3, nsum(op_dot_dot(0, n), (i : Num) => d(i)))"), t20))
 }
 
 ///|

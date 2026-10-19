@@ -15236,10 +15236,10 @@ test "100/div3 matches 100/div3.ml" {
       #|CPU time (user): <t>
       #|100/div3 quotations (5):
       #|  10 * 1
-      #|  forall n. (10 EXP n == 1) (mod 3)
-      #|  d = 1 * d
-      #|  forall d n. (nsum(0..n) (\\i. 10 EXP i * d(i)) == nsum(0..n) (\\i. d i)) (mod 3)
-      #|  3 divides (nsum(0..n) (\\i. 10 EXP i * d(i))) <=>\n   3 divides (nsum(0..n) (\\i. d i))
+      #|  \226\136\128 n : Num, op_eq_eq(EXP(10, n), 1, mod(3))
+      #|  (d : Num) == 1 * d
+      #|  \226\136\128 d : (Num) -> Num, \226\136\128 n : Num, op_eq_eq(nsum(op_dot_dot(0, n), (i : Num) => EXP(10, i) * d(i)), nsum(op_dot_dot(0, n), (i : Num) => d(i)), mod(3))
+      #|  divides(3, nsum(op_dot_dot(0, (n : Num)), (i : Num) => EXP(10, i) * (d : (Num) -> Num)(i))) == divides(3, nsum(op_dot_dot(0, n), (i : Num) => d(i)))
       #|EXP_10_CONG_3 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|SUM_CONG_3 =  |- (#forall:fun(fun(fun(num,num),bool),bool) (\d:fun(num,num). (#forall:fun(fun(num,bool),bool) (\n:num. (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) i:num)) (d:fun(num,num) i:num))))) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. (d:fun(num,num) i:num)))) (#num_mod:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|DIVISIBILITY_BY_3 =  |- ((#=:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. ((#*:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) i:num)) (d:fun(num,num) i:num)))))) ((#num_divides:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\i:num. (d:fun(num,num) i:num)))))
