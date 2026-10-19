@@ -12681,7 +12681,7 @@ test "100/lagrange matches 100/lagrange.ml" {
       #|  subgroup h (g,( ** ),i,(e:A)) <=> h SUBSET g /\\ group(h,( ** ),i,e)
       #|  (g : (A) -> Bool)
       #|  (g : (A) -> Bool)
-      #|  CARD {(a:A,x:A) | a IN q /\\ x IN h}
+      #|  CARD({((a : A), (x : A)) | IN(a, (q : (A) -> Bool)) && IN(x, (h : (A) -> Bool))})
       #|  g = IMAGE (\\(a:A,x:A). (a ** x):A) {(a,x) | a IN q /\\ x IN h}
       #|  (**):A->A->A
       #|  (i : (A) -> A)((x' : A))
@@ -12707,7 +12707,7 @@ test "100/lagrange matches 100/lagrange.ml" {
       #|  (i : (A) -> A)((c : A))
       #|  (c : A)
       #|  \226\136\128 a : A, \226\136\128 b : A, IN(a, (g : (A) -> Bool)) && IN(b, g) && IN(a, (coset : (A, A) -> Bool)(b)) \226\134\146 IN(b, coset(a))
-      #|  q = {c:A | ?a:A. a IN g /\\ (c = (@)(coset a))}
+      #|  (q : (A) -> Bool) == {(c : A) | \226\136\131 a : A, IN(a, (g : (A) -> Bool)) && c == select((coset : (A, A) -> Bool)(a))}
       #|  (i : (A) -> A)((c : A))
       #|  (c : A)
       #|  (C : A) == select((coset : (A, A) -> Bool)((b : A)))
@@ -12716,7 +12716,7 @@ test "100/lagrange matches 100/lagrange.ml" {
       #|  select((coset : (A, A) -> Bool)((b : A)))
       #|  (b : A)
       #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 b && a
-      #|  {c:A | ?a:A. a IN g /\\ (c = (@)(coset a))}
+      #|  {(c : A) | \226\136\131 a : A, IN(a, (g : (A) -> Bool)) && c == select((coset : (A, A) -> Bool)(a))}
       #|  (i(b:A) ** a:A):A = z ** i(y)
       #|  (i(b:A) ** a:A) ** e = z ** i(y)
       #|  (i(b:A) ** a:A) ** (y ** i(y)) = z ** i(y)
