@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// rational
 fn step_2() -> Unit raise {
-  rational_c.set(@pair.new_definition(@parser.parse_term("rational(r) <=> ?p q. ~(q = 0) /\\ (abs(r) = &p / &q)")))
+  rational_c.set(@pair.new_definition(@term_syntax.parse_term("(rational : (Real) -> Bool)((r : Real)) == (∃ p : Num, ∃ q : Num, !(q == 0) && abs(r) == real_of_num(p) / real_of_num(q))")))
 }
 
 ///|
@@ -24,7 +24,7 @@ pub fn rational() -> @kernel.Thm {
 ///|
 /// countable
 fn step_3() -> Unit raise {
-  countable_c.set(@pair.new_definition(@parser.parse_term("countable s <=> s <=_c (UNIV:num->bool)")))
+  countable_c.set(@pair.new_definition(@term_syntax.parse_term("(countable : ((_) -> Bool) -> Bool)((s : (_) -> Bool)) == (op_lt_eq_us_c : ((_) -> Bool, (Num) -> Bool) -> Bool)(s, UNIV)")))
 }
 
 ///|
@@ -43,16 +43,16 @@ fn step_4() -> Unit raise {
   let t15 = @meson.meson_tac(@list.List([]))
   let t14 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), rational()]))
   let t13 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
-  let t12 = @tactics.exists_tac(@parser.parse_term("\\(p,q). &p / &q"))
+  let t12 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Num, Num)) -> Real) => ∀ p : Num, ∀ q : Num, GEQ(f((p, q)), real_of_num(p) / real_of_num(q)))"))
   let t17 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c_v1(), @pair.exists_pair_thm(), @card.mul_c(), @sets.in_univ()])), t12), t13), t14), t15), t16])
   let t10 = @parser.parse_term("(UNIV *_c UNIV):num#num->bool")
   let t11 = @tactics.trans_tac(@card.card_le_trans())(t10)
   let t9 = @simp.rewrite_tac(@list.List([@sets.num_infinite()]))
   let t8 = @tactics.match_mp_tac(@card.card_mul_absorb_le())
-  let t6 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(abs(x) = a) ==> (x = a) \\/ x = --a"))]))
+  let t6 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("abs((x : Real)) == (a : Real) → x == a || x == -a"))]))
   let t5 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), rational(), @sets.in_univ(), @pair.pair_eq()]))
   let t4 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
-  let t3 = @tactics.exists_tac(@parser.parse_term("\\(x,b). if b = 0 then x else --x"))
+  let t3 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Real, Num)) -> Real) => ∀ x : Real, ∀ b : Num, GEQ(f((x, b)), if b == 0 { x } else { -x }))"))
   let t7 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c_v1(), @pair.exists_pair_thm(), @card.mul_c()])), t3), t4), t5), t6), @tactics.all_tac])
   let t1 = @parser.parse_term("{ x:real | ?p q. x = &p / &q } *_c (UNIV:num->bool)")
   let t2 = @tactics.trans_tac(@card.card_le_trans())(t1)
@@ -72,7 +72,7 @@ pub fn countable_rationals() -> @kernel.Thm {
 ///|
 /// denumerable
 fn step_5() -> Unit raise {
-  denumerable_c.set(@pair.new_definition(@parser.parse_term("denumerable s <=> s =_c (UNIV:num->bool)")))
+  denumerable_c.set(@pair.new_definition(@term_syntax.parse_term("(denumerable : ((_) -> Bool) -> Bool)((s : (_) -> Bool)) == (op_eq_us_c : ((_) -> Bool, (Num) -> Bool) -> Bool)(s, UNIV)")))
 }
 
 ///|
@@ -88,16 +88,16 @@ pub fn denumerable() -> @kernel.Thm {
 /// DENUMERABLE_RATIONALS
 fn step_6() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([@real.real_div_1(), @calc_int.real_abs_num(), @calc_num.arith_eq()]))
-  let t27 = @parser.parse_term("1")
+  let t27 = @term_syntax.parse_term("1")
   let t28 = @tactics.map_every(fn(x24 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s25 = @tactics.exists_tac(x24)
     fn(x26 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s25(x26)
     }
-  }, @list.List([@parser.parse_term("p:num"), t27]))
-  let t23 = @tactics.x_gen_tac(@parser.parse_term("p:num"))
+  }, @list.List([@term_syntax.parse_term("(p : Num)"), t27]))
+  let t23 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : Num)"))
   let t22 = @simp.simp_tac(@list.List([@sets.in_elim_thm(), @sets.in_univ(), @realax.real_of_num_eq(), rational()]))
-  let t21 = @tactics.exists_tac(@parser.parse_term("&"))
+  let t21 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num"))
   let t20 = @simp.rewrite_tac(@list.List([@sets.le_c()]))
   let t19 = @simp.rewrite_tac(@list.List([@equal.gsym(countable()), countable_rationals()]))
   let t30 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([denumerable(), @equal.gsym(@card.card_le_antisym())])), t19), t20), t21), t22), t23), t28), t29)
@@ -123,7 +123,7 @@ fn step_7() -> Unit raise {
   let t32 = @simp.once_rewrite_tac(@list.List([@card.card_eq_sym()]))
   let t31 = @simp.rewrite_tac(@list.List([denumerable()]))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(denumerable_rationals()), t31), t32), t33), t34), t35), t36)
-  denumerable_rationals_expand_c.set(@tactics.prove(@parser.parse_term("?rat:num->real. (forall n. rational(rat n)) /\\\n                   (forall x. rational x ==> ?!n. x = rat n)"), t37))
+  denumerable_rationals_expand_c.set(@tactics.prove(@term_syntax.parse_term("∃ rat : (Num) -> Real, (∀ n : Num, rational(rat(n))) && (∀ x : Real, rational(x) → existsunique((n : Num) => x == rat(n)))"), t37))
 }
 
 ///|

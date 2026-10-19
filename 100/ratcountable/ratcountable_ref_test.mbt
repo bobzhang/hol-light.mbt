@@ -7677,21 +7677,21 @@ test "100/ratcountable matches 100/ratcountable.ml" {
       #|0..0..1..2..5..solved at 11
       #|0..0..1..2..5..solved at 14
       #|100/ratcountable quotations (15):
-      #|  rational(r) <=> ?p q. ~(q = 0) /\\ (abs(r) = &p / &q)
-      #|  countable s <=> s <=_c (UNIV:num->bool)
-      #|  \\(p,q). &p / &q
+      #|  (rational : (Real) -> Bool)((r : Real)) == (\226\136\131 p : Num, \226\136\131 q : Num, !(q == 0) && abs(r) == real_of_num(p) / real_of_num(q))
+      #|  (countable : ((_) -> Bool) -> Bool)((s : (_) -> Bool)) == (op_lt_eq_us_c : ((_) -> Bool, (Num) -> Bool) -> Bool)(s, UNIV)
+      #|  GABS((f : ((Num, Num)) -> Real) => \226\136\128 p : Num, \226\136\128 q : Num, GEQ(f((p, q)), real_of_num(p) / real_of_num(q)))
       #|  (UNIV *_c UNIV):num#num->bool
-      #|  (abs(x) = a) ==> (x = a) \\/ x = --a
-      #|  \\(x,b). if b = 0 then x else --x
+      #|  abs((x : Real)) == (a : Real) \226\134\146 x == a || x == -a
+      #|  GABS((f : ((Real, Num)) -> Real) => \226\136\128 x : Real, \226\136\128 b : Num, GEQ(f((x, b)), if b == 0 { x } else { -x }))
       #|  { x:real | ?p q. x = &p / &q } *_c (UNIV:num->bool)
       #|  countable { x:real | rational(x)}
-      #|  denumerable s <=> s =_c (UNIV:num->bool)
+      #|  (denumerable : ((_) -> Bool) -> Bool)((s : (_) -> Bool)) == (op_eq_us_c : ((_) -> Bool, (Num) -> Bool) -> Bool)(s, UNIV)
       #|  1
-      #|  p:num
-      #|  p:num
-      #|  &
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  real_of_num
       #|  denumerable { x:real | rational(x)}
-      #|  ?rat:num->real. (forall n. rational(rat n)) /\\\n                   (forall x. rational x ==> ?!n. x = rat n)
+      #|  \226\136\131 rat : (Num) -> Real, (\226\136\128 n : Num, rational(rat(n))) && (\226\136\128 x : Real, rational(x) \226\134\146 existsunique((n : Num) => x == rat(n)))
       #|rational =  |- (#forall:fun(fun(real,bool),bool) (\r:real. ((#=:fun(bool,fun(bool,bool)) (#rational:fun(real,bool) r:real)) (#?:fun(fun(num,bool),bool) (\p:num. (#?:fun(fun(num,bool),bool) (\q:num. ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) r:real)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) p:num)) (#real_of_num:fun(num,real) q:num)))))))))))
       #|countable =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#=:fun(bool,fun(bool,bool)) (#countable:fun(fun('?1,bool),bool) s:fun('?1,bool))) ((#<=_c:fun(fun('?1,bool),fun(fun(num,bool),bool)) s:fun('?1,bool)) #UNIV:fun(num,bool)))))
       #|COUNTABLE_RATIONALS =  |- (#countable:fun(fun(real,bool),bool) (#GSPEC:fun(fun(real,bool),fun(real,bool)) (\GEN%PVAR%1:real. (#?:fun(fun(real,bool),bool) (\x:real. (((#SETSPEC:fun(real,fun(bool,fun(real,bool))) GEN%PVAR%1:real) (#rational:fun(real,bool) x:real)) x:real))))))
