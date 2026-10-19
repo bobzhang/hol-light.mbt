@@ -221,7 +221,7 @@ fn step_11() -> Unit raise {
   }), t182), t183), t184)
   let t186 = @meson.asm_meson_tac(@list.List([@arith.sub_0()]))
   let t179 = @simp.asm_rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
-  let t178 = @tactics.exists_tac(@parser.parse_term("{p:num | ~(k p = 0)}"))
+  let t178 = @tactics.exists_tac(@term_syntax.parse_term("{(p : Num) | !((k : (Num) -> Num)(p) == 0)}"))
   let t187 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t178), t179), @int.arith_tac)
   let t177 = @simp.simp_tac(@list.List([@sets.in_delete(), @sets.in_elim_thm()]))
   let t176 = @simp.asm_rewrite_tac(@list.List([@sets.finite_delete()]))
@@ -232,7 +232,7 @@ fn step_11() -> Unit raise {
   }), t175), t176), t177)
   let t189 = @meson.asm_meson_tac(@list.List([@arith.sub_0()]))
   let t172 = @simp.asm_rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
-  let t171 = @tactics.exists_tac(@parser.parse_term("{p:num | ~(j p = 0)}"))
+  let t171 = @tactics.exists_tac(@term_syntax.parse_term("{(p : Num) | !((j : (Num) -> Num)(p) == 0)}"))
   let t190 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t171), t172), @int.arith_tac), t189, t188, t187, t186, t185])
   let t170 = @tactics.repeat_tac(@tactics.conj_tac)
   let t169 = @simp.once_rewrite_tac(@list.List([@class.cond_rator()]))
@@ -246,7 +246,7 @@ fn step_11() -> Unit raise {
   }, @list.List([@term_syntax.parse_term("!((j : (Num) -> Num)((p : Num)) == 0)"), t165]))
   let t161 = @simp.asm_rewrite_tac(@list.List([]))
   let t167 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac), @class.cond_cases_tac), t161), t166), @int.arith_tac)])
-  let t160 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("forall j k. {q | ~((if q = p then j q else k q) = 0)} DELETE p =\n          {q | ~(k q = 0)} DELETE p"))]))
+  let t160 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("∀ j : (_) -> Num, ∀ k : (_) -> Num, DELETE({(q : _) | !((if q == (p : _) { j(q) } else { k(q) }) == 0)}, p) == DELETE({(q : _) | !(k(q) == 0)}, p)"))]))
   let t159 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t156 = @drule.match_mp(nproduct_cancel_prime())
   let t158 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x157 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -307,7 +307,7 @@ fn step_11() -> Unit raise {
   let t111 = @simp.asm_rewrite_tac(@list.List([]))
   let t109 = @meson.meson_tac(@list.List([]))
   let t108 = @simp.asm_simp_tac(@list.List([@sets.subset(), @sets.finite_insert(), @sets.in_insert(), @sets.in_elim_thm()]))
-  let t107 = @tactics.exists_tac(@parser.parse_term("p INSERT {p:num | ~(i p = 0)}"))
+  let t107 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((p : Num), {(p : Num) | !((i : (Num) -> Num)(p) == 0)})"))
   let t110 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t107), t108), t109), @tactics.all_tac])
   let t106 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(a : Bool) && (a → (b : Bool)) → a && b")))
   let t105 = @simp.asm_rewrite_tac(@list.List([]))
@@ -360,7 +360,7 @@ fn step_11() -> Unit raise {
   let t67 = @class.asm_cases_tac(@term_syntax.parse_term("(q : Num) == 1"))
   let t66 = @tactics.x_gen_tac(@term_syntax.parse_term("(q : Num)"))
   let t70 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t66), t67), t68), t69)
-  let t65 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{p | F} = {}")), @sets.finite_rules()]))
+  let t65 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{(p : _) | false} == {}")), @sets.finite_rules()]))
   let t71 = @list.List([@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(n : Num) => 0")), t65), t70])
   let t64 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @class.not_imp(), @equal.gsym(@theorems.conj_assoc())]))
   let t63 = @simp.simp_tac(@list.List([nproduct_eq_1_eq(), @arith.exp_eq_1(), @sets.in_elim_thm()]))
@@ -371,7 +371,7 @@ fn step_11() -> Unit raise {
   let t59 = @tactics.match_mp_tac(@arith.num_wf())
   let t58 = @simp.rewrite_tac(@list.List([@theorems.exists_unique_thm()]))
   let t191 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((n : Num) == nproduct((s : (_) -> Bool), (f : (_) -> Num))) == (nproduct(s, f) == n)"))])), t58), t59), t60), t61), t62), t72), t78), t79), t81), t88), t95), @tactics.ants_tac), t96), t97), t101), t102), t103), @tactics.conj_tac), t133), t134), t137), t138), t139), t140), t141), @tactics.disch_tac), t143), @tactics.strip_tac), t151), t152), t158), t159), @tactics.strip_tac), @tactics.strip_tac), t160), @tactics.ants_tac), t167), t168), t169), t170), t190)
-  fta_c.set(@tactics.prove(@parser.parse_term("forall n. ~(n = 0)\n       ==> ?!i. FINITE {p | ~(i p = 0)} /\\\n                (forall p. ~(i p = 0) ==> prime p) /\\\n                n = nproduct {p | ~(i p = 0)} (\\p. p EXP (i p))"), t191))
+  fta_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, !(n == 0) → existsunique((i : (Num) -> Num) => FINITE({(p : Num) | !(i(p) == 0)}) && (∀ p : Num, !(i(p) == 0) → prime(p)) && n == nproduct({(p : Num) | !(i(p) == 0)}, (p : Num) => EXP(p, i(p))))"), t191))
 }
 
 ///|

@@ -12646,11 +12646,11 @@ Warning: inventing type variables
   !((j : Num) == 0) \226\134\146 j == SUC(j - 1)
   (j : Num) == 0
   \226\136\128 s : (Num) -> Bool, \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 f : (Num) -> Num, \226\136\128 j : Num, EXP(p, j) * nproduct(DELETE(s, p), (p : Num) => EXP(p, f(p))) == p * m \226\134\146 prime(p) && FINITE(s) && (\226\136\128 x : Num, IN(x, s) \226\134\146 prime(x)) \226\134\146 !(j == 0) && EXP(p, j - 1) * nproduct(DELETE(s, p), (p : Num) => EXP(p, f(p))) == m
-  {p:num | ~(k p = 0)}
-  {p:num | ~(j p = 0)}
+  {(p : Num) | !((k : (Num) -> Num)(p) == 0)}
+  {(p : Num) | !((j : (Num) -> Num)(p) == 0)}
   !((k : (Num) -> Num)((p : Num)) == 0)
   !((j : (Num) -> Num)((p : Num)) == 0)
-  forall j k. {q | ~((if q = p then j q else k q) = 0)} DELETE p =\n          {q | ~(k q = 0)} DELETE p
+  \226\136\128 j : (_) -> Num, \226\136\128 k : (_) -> Num, DELETE({(q : _) | !((if q == (p : _) { j(q) } else { k(q) }) == 0)}, p) == DELETE({(q : _) | !(k(q) == 0)}, p)
   (i : Num) => if i == (p : Num) { (k : (Num) -> Num)(i) - 1 } else { k(i) }
   (i : Num) => if i == (p : Num) { (j : (Num) -> Num)(i) - 1 } else { j(i) }
   (k : (Num) -> Num)
@@ -12660,7 +12660,7 @@ Warning: inventing type variables
   (p : Num)
   (i : (Num) -> Num)((p : Num)) == 0
   (p : Num)
-  p INSERT {p:num | ~(i p = 0)}
+  INSERT((p : Num), {(p : Num) | !((i : (Num) -> Num)(p) == 0)})
   (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
   (q : Num) => if q == (p : Num) { (i : (Num) -> Num)(q) + 1 } else { i(q) }
   (i : (Num) -> Num)
@@ -12669,13 +12669,13 @@ Warning: inventing type variables
   (p : Num)
   (q : Num) == 1
   (q : Num)
-  {p | F} = {}
+  {(p : _) | false} == {}
   (n : Num) => 0
   ((a : Bool) && (b : Bool)) == !(a \226\134\146 !b)
   (n : Num) == 1
   (n : Num)
   ((n : Num) == nproduct((s : (_) -> Bool), (f : (_) -> Num))) == (nproduct(s, f) == n)
-  forall n. ~(n = 0)\n       ==> ?!i. FINITE {p | ~(i p = 0)} /\\\n                (forall p. ~(i p = 0) ==> prime p) /\\\n                n = nproduct {p | ~(i p = 0)} (\\p. p EXP (i p))
+  \226\136\128 n : Num, !(n == 0) \226\134\146 existsunique((i : (Num) -> Num) => FINITE({(p : Num) | !(i(p) == 0)}) && (\226\136\128 p : Num, !(i(p) == 0) \226\134\146 prime(p)) && n == nproduct({(p : Num) | !(i(p) == 0)}, (p : Num) => EXP(p, i(p))))
 nproduct =  |- ((#=:fun(fun(fun('?1,bool),fun(fun('?1,num),num)),fun(fun(fun('?1,bool),fun(fun('?1,num),num)),bool)) #nproduct:fun(fun('?1,bool),fun(fun('?1,num),num))) (#iterate:fun(fun(num,fun(num,num)),fun(fun('?1,bool),fun(fun('?1,num),num))) #*:fun(num,fun(num,num))))
 NPRODUCT_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('?2,num),bool),bool) (\f:fun('?2,num). ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?2,bool),fun(fun('?2,num),num)) #EMPTY:fun('?2,bool)) f:fun('?2,num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#forall:fun(fun('?3,bool),bool) (\x:'?3. (#forall:fun(fun(fun('?3,num),bool),bool) (\f:fun('?3,num). (#forall:fun(fun(fun('?3,bool),bool),bool) (\s:fun('?3,bool). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?3,bool),bool) s:fun('?3,bool))) ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?3,bool),fun(fun('?3,num),num)) ((#INSERT:fun('?3,fun(fun('?3,bool),fun('?3,bool))) x:'?3) s:fun('?3,bool))) f:fun('?3,num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#IN:fun('?3,fun(fun('?3,bool),bool)) x:'?3) s:fun('?3,bool))) ((#nproduct:fun(fun('?3,bool),fun(fun('?3,num),num)) s:fun('?3,bool)) f:fun('?3,num))) ((#*:fun(num,fun(num,num)) (f:fun('?3,num) x:'?3)) ((#nproduct:fun(fun('?3,bool),fun(fun('?3,num),num)) s:fun('?3,bool)) f:fun('?3,num)))))))))))))
 NPRODUCT_EQ_1_EQ =  |- (#forall:fun(fun(fun('?4,bool),bool),bool) (\s:fun('?4,bool). (#forall:fun(fun(fun('?4,num),bool),bool) (\f:fun('?4,num). ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?4,bool),bool) s:fun('?4,bool))) ((#=:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#nproduct:fun(fun('?4,bool),fun(fun('?4,num),num)) s:fun('?4,bool)) f:fun('?4,num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#forall:fun(fun('?4,bool),bool) (\x:'?4. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?4,fun(fun('?4,bool),bool)) x:'?4) s:fun('?4,bool))) ((#=:fun(num,fun(num,bool)) (f:fun('?4,num) x:'?4)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))
