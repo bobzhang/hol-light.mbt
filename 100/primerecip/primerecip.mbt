@@ -319,7 +319,7 @@ fn step_7() -> Unit raise {
   let t208 = @simp.simp_tac(@list.List([@iterate.finite_numseg(), @iterate.in_numseg(), @sets.in_elim_thm(), @sets.subset()]))
   let t207 = @tactics.exists_tac(@term_syntax.parse_term("op_dot_dot(1, (n : Num))"))
   let t211 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t207), t208), t209), t210])
-  let t206 = @tactics.subgoal_then(@parser.parse_term("FINITE {p | prime p /\\ p <= n}"), fn(x204 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t206 = @tactics.subgoal_then(@term_syntax.parse_term("FINITE({(p : Num) | prime(p) && p <= (n : Num)})"), fn(x204 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x204
     @simp.simp_tac(@list.List([@iterate.sum_clauses(), th_1]))
   })
@@ -327,7 +327,7 @@ fn step_7() -> Unit raise {
   let t201 = @meson.asm_meson_tac(@list.List([]))
   let t200 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_insert(), @arith.le()]))
   let t202 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_insert()])), @tactics.gen_tac), @class.cond_cases_tac), t200), t201), @tactics.all_tac])
-  let t199 = @tactics.subgoal_then(@parser.parse_term("{p | prime p /\\ p <= SUC n} =\n        if prime(SUC n) then (SUC n) INSERT {p | prime p /\\ p <= n}\n        else {p | prime p /\\ p <= n}"), fn(x196 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t199 = @tactics.subgoal_then(@term_syntax.parse_term("{(p : Num) | prime(p) && p <= SUC((n : Num))} == (if prime(SUC(n)) { INSERT(SUC(n), {(p : Num) | prime(p) && p <= n}) } else { {(p : Num) | prime(p) && p <= n} })"), fn(x196 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s197 = @tactics.subst1_tac(x196)
     fn(x198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s197(x198)
@@ -336,7 +336,7 @@ fn step_7() -> Unit raise {
   let t195 = @simp.asm_simp_tac(@list.List([@iterate.sum_clauses_numseg(), @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))"))]))
   let t193 = @meson.meson_tac(@list.List([@prime.prime_0()]))
   let t192 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.not_in_empty(), @arith.le()]))
-  let t194 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("{p | prime p /\\ p <= 0} = {}"), fn(x190 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t194 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@term_syntax.parse_term("{(p : Num) | prime(p) && p <= 0} == {}"), fn(x190 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x190
     @simp.simp_tac(@list.List([@iterate.sum_clauses(), @iterate.sum_triv_numseg(), th, @calc_num.arith()]))
   }), t192), t193), @tactics.all_tac])
@@ -346,7 +346,7 @@ fn step_7() -> Unit raise {
   let t186 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t185 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(a : Bool) == (b : Bool) → !a → !b")))
   let t212 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(primerecip_diverges_numseg()), t185), @tactics.ap_term_tac), t186), t187), t189), @nums.induct_tac), t194), t195), t199), t202), @class.cond_cases_tac), t203), t206), t211)
-  primerecip_diverges_c.set(@tactics.prove(@parser.parse_term("~(convergent (\\n. sum {p | prime p /\\ p <= n} (\\p. &1 / &p)))"), t212))
+  primerecip_diverges_c.set(@tactics.prove(@term_syntax.parse_term("!convergent((n : Num) => sum({(p : Num) | prime(p) && p <= n}, (p : Num) => real_of_num(1) / real_of_num(p)))"), t212))
 }
 
 ///|
