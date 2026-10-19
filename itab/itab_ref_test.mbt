@@ -144,7 +144,7 @@ test "itab matches itab.ml" {
       #|refl6_noteq ! dest_eq
       #|accept_bad ! dest_comb: not a combination
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?448
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _8:bool
       #|
 

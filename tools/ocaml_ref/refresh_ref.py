@@ -27,6 +27,20 @@ OWN_OUTPUT = ("Formal_ineqs/",)
 MARKER = "@@refresh_ref: own output follows@@"
 
 
+def normalize_counters(s):
+    """testkit's normalize_counters: invented type variables and pattern
+    variables renumbered by order of first appearance."""
+    seen, counts = {}, {}
+
+    def sub(m):
+        name, prefix = m.group(0), m.group(1)
+        if name not in seen:
+            counts[prefix] = counts.get(prefix, 0) + 1
+            seen[name] = counts[prefix]
+        return prefix + str(seen[name])
+    return re.sub(r"(\?|GEN%PVAR%)[0-9]+", sub, s)
+
+
 def find_test(ref, text):
     m = re.search(r"in\s+sync\s+with\s+(\S+_test\.mbt)", text[:2000])
     if not m:
@@ -78,6 +92,11 @@ def main():
         if not sep:
             sys.exit("own-output marker missing from the output; nothing written")
     s = re.sub(r"(?m)^CPU time \(user\): .*$", "CPU time (user): <t>", s)
+    # fresh-name counters, as testkit's normalize_counters does for the
+    # tests that read a Log (others, such as the parser's and printer's,
+    # compare their own output exactly)
+    if "contents()" in open(os.path.join(ROOT, test)).read():
+        s = normalize_counters(s)
     expected = ref[:-3] + ".expected"
     open(expected, "w").write(s)
     subprocess.run(["python3", os.path.join(REF, "embed_golden.py"), expected,

@@ -286,7 +286,7 @@ test "trivia matches trivia.ml" {
       #|definitions = 14
       #|inductive_type_store = 1 bool
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?3369
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _510:bool
       #|
     ),

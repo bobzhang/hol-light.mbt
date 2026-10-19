@@ -931,7 +931,7 @@ test "tactics matches tactics.ml" {
       #|axioms =  |- #F:bool
       #|constants = _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?878
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _22:bool
       #|
 

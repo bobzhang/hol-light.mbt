@@ -673,7 +673,7 @@ test "normalizer matches normalizer.ml" {
       #|norm_const =  |- ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|norm_poly =  |- ((#=:fun(num,fun(num,bool)) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) ((#+:fun(num,fun(num,num)) x:num) y:num))) ((#*:fun(num,fun(num,num)) x:num) x:num))) ((#-:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) x:num) y:num)) ((#+:fun(num,fun(num,num)) x:num) y:num))) ((#*:fun(num,fun(num,num)) x:num) x:num)))
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?32061
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _17247:bool
       #|
     ),

@@ -87,7 +87,58 @@ pub fn Log::contents(self : Log) -> String {
   if self.via_stdout && stdout_owner.val == self.id {
     @pp.flush_stdout_partial()
   }
-  self.buf.to_string()
+  normalize_counters(self.buf.to_string())
+}
+
+///|
+/// Numbers that only say how many fresh names were made before: invented
+/// type variables (`?157053`) and pattern variables (`GEN%PVAR%42`) are
+/// renumbered by order of first appearance in `s` (`?1`, `?2`, ...,
+/// `GEN%PVAR%1`, ...), so distinct names stay distinct. Parsing allocates
+/// them, so their numbers change whenever a quotation is written
+/// differently (issue #140), in every file loaded after it; the reference
+/// outputs are normalized alike (tools/ocaml_ref/refresh_ref.py).
+pub fn normalize_counters(s : String) -> String {
+  let out = StringBuilder()
+  let cs = s.to_array()
+  let pvar = "GEN%PVAR%".to_array()
+  let seen : Map[String, Int] = {}
+  let counts : Map[String, Int] = {}
+  let mut i = 0
+  while i < cs.length() {
+    let prefix_len = if cs[i] == '?' {
+      1
+    } else if i + pvar.length() <= cs.length() &&
+      cs[i:i + pvar.length()] == pvar[:] {
+      pvar.length()
+    } else {
+      0
+    }
+    let j = i + prefix_len
+    if prefix_len > 0 && j < cs.length() && cs[j] is ('0'..='9') {
+      let prefix = String::from_array(cs[i:j])
+      let mut k = j
+      while k < cs.length() && cs[k] is ('0'..='9') {
+        k += 1
+      }
+      let name = String::from_array(cs[i:k])
+      let n = match seen.get(name) {
+        Some(n) => n
+        None => {
+          let n = counts.get(prefix).unwrap_or(0) + 1
+          counts[prefix] = n
+          seen[name] = n
+          n
+        }
+      }
+      out.write_string(prefix + n.to_string())
+      i = k
+    } else {
+      out.write_char(cs[i])
+      i += 1
+    }
+  }
+  out.to_string()
 }
 
 ///|

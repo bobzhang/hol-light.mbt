@@ -1808,7 +1808,7 @@ test "arith matches arith.ml" {
       #|constants = minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 58
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?24002
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _6923:bool
       #|
     ),

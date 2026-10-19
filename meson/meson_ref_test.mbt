@@ -283,7 +283,7 @@ test "meson matches meson.ml" {
       #|0..0..0..depth_limit ! solve_goal: Too deep
       #|inferences = 0
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?4062
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _651:bool
       #|
     ),

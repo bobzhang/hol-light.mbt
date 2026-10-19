@@ -306,9 +306,9 @@ test "firstorder matches firstorder.ml" {
       #|exists_unique = true
       #|Warning: inventing type variables
       #|Warning: inventing type variables
-      #|roundtrip = ((R:fun('A,fun('A,bool)) (g:fun('?3921,'A) _638:'?3921)) _639:'A) / 0
+      #|roundtrip = ((R:fun('A,fun('A,bool)) (g:fun('?1,'A) _638:'?1)) _639:'A) / 0
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?3922
+      #|counter_tyvar = zz_counter:'?2
       #|counter_genvar = _640:bool
       #|
     ),
