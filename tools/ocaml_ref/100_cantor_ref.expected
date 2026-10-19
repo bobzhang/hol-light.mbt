@@ -5531,32 +5531,32 @@ Warning: inventing type variables
 0..0..1..2..3..7..14..23..solved at 35
 0..0..0..solved at 3
 100/cantor quotations (26):
-  \\x:A. ~(g x x)
-  g:A->(A->bool)
-  f:(A->bool)->A
-  ~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))
-  \\x:A. ~(g x x)
-  f:(A->bool)->A
-  g:A->(A->bool)
-  ~(?f:A->(A->bool). forall s. ?x. f x = s)
-  \\x:A. s(x) /\\ ~(g x x)
-  g:A->(A->bool)
-  (=):A->A->bool
+  (x : A) => !(g : (A, A) -> Bool)(x, x)
+  (g : (A, A) -> Bool)
+  (f : ((A) -> Bool) -> A)
+  !(\226\136\131 f : ((A) -> Bool) -> A, \226\136\128 x : (A) -> Bool, \226\136\128 y : (A) -> Bool, f(x) == f(y) \226\134\146 x == y)
+  (x : A) => !(g : (A, A) -> Bool)(x, x)
+  (f : ((A) -> Bool) -> A)
+  (g : (A, A) -> Bool)
+  !(\226\136\131 f : (A, A) -> Bool, \226\136\128 s : (A) -> Bool, \226\136\131 x : A, f(x) == s)
+  (x : A) => (s : (A) -> Bool)(x) && !(g : (A, A) -> Bool)(x, x)
+  (g : (A, A) -> Bool)
+  (op_eq : (A, A) -> Bool)
   forall s:A->bool. s <_c {t | t SUBSET s}
-  g:A->A->bool
+  (g : (A, A) -> Bool)
   (g:A->A->bool) = \\a. { b | forall s. f(s) = a ==> b IN s}
-  ~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))
-  g:A->B = \\a. (n:B->B) (h a a)
-  forall h:A->(A->B).\n        (forall f:A->B. ?x:A. h(x) = f) ==> forall n:B->B. ?x. n(x) = x
-  (~)
-  forall f:A->(A->bool). ~(forall s. ?x. f x = s)
+  !(\226\136\131 f : ((A) -> Bool) -> A, \226\136\128 x : (A) -> Bool, \226\136\128 y : (A) -> Bool, f(x) == f(y) \226\134\146 x == y)
+  (g : (A) -> B) == ((a : A) => (n : (B) -> B)((h : (A, A) -> B)(a, a)))
+  \226\136\128 h : (A, A) -> B, (\226\136\128 f : (A) -> B, \226\136\131 x : A, h(x) == f) \226\134\146 (\226\136\128 n : (B) -> B, \226\136\131 x : B, n(x) == x)
+  op_tilde
+  \226\136\128 f : (A, A) -> Bool, !(\226\136\128 s : (A) -> Bool, \226\136\131 x : A, f(x) == s)
   \\a:A.  { b:A | forall s. f(s) = a ==> b IN s}
-  forall f:(A->bool)->A. ~(forall x y. f(x) = f(y) ==> x = y)
-  (forall y. ?x. f(x) = y) /\\ (forall z. ?y. g(y) = z)\n   ==> (forall z. ?x. (g o f) x = z)
-  IMAGE (f:A->B) t
+  \226\136\128 f : ((A) -> Bool) -> A, !(\226\136\128 x : (A) -> Bool, \226\136\128 y : (A) -> Bool, f(x) == f(y) \226\134\146 x == y)
+  (\226\136\128 y : _, \226\136\131 x : _, (f : (_) -> _)(x) == y) && (\226\136\128 z : _, \226\136\131 y : _, (g : (_) -> _)(y) == z) \226\134\146 (\226\136\128 z : _, \226\136\131 x : _, o(g, f, x) == z)
+  IMAGE((f : (A) -> B), (t : (A) -> Bool))
   forall f:A->B. (forall x y. f(x) = f(y) ==> x = y) ==> forall t. ?s. {x | f(x) IN s} = t
   (IMAGE (f:B->S->bool)) o (\\s:S->bool. {x | i(x) IN s})
-  forall i:B->S f:B->S->bool.\n        ~((forall x y. i(x) = i(y) ==> x = y) /\\ (forall s. ?z. f(z) = s))
+  \226\136\128 i : (B) -> S, \226\136\128 f : (B, S) -> Bool, !((\226\136\128 x : B, \226\136\128 y : B, i(x) == i(y) \226\134\146 x == y) && (\226\136\128 s : (S) -> Bool, \226\136\131 z : B, f(z) == s))
 CANTOR_THM_INJ =  |- (#~:fun(bool,bool) (#?:fun(fun(fun(fun('A,bool),'A),bool),bool) (\f:fun(fun('A,bool),'A). (#forall:fun(fun(fun('A,bool),bool),bool) (\x:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\y:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(fun('A,bool),'A) x:fun('A,bool))) (f:fun(fun('A,bool),'A) y:fun('A,bool)))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) x:fun('A,bool)) y:fun('A,bool))))))))))
 CANTOR_THM_SURJ =  |- (#~:fun(bool,bool) (#?:fun(fun(fun('A,fun('A,bool)),bool),bool) (\f:fun('A,fun('A,bool)). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (f:fun('A,fun('A,bool)) x:'A)) s:fun('A,bool)))))))))
 CANTOR_THM_INJ' =  |- (#~:fun(bool,bool) (#?:fun(fun(fun(fun('A,bool),'A),bool),bool) (\f:fun(fun('A,bool),'A). (#forall:fun(fun(fun('A,bool),bool),bool) (\x:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\y:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (f:fun(fun('A,bool),'A) x:fun('A,bool))) (f:fun(fun('A,bool),'A) y:fun('A,bool)))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) x:fun('A,bool)) y:fun('A,bool))))))))))
