@@ -120,5 +120,8 @@ pub fn parse_type(s : String) -> @kernel.HolType raise {
     e => raise Failure("term syntax: " + describe(e))
   }
   check_semantics()
+  if pty == @preterm.dpty {
+    raise Failure("term syntax: _ alone is not a type")
+  }
   @preterm.type_of_pretype(pty)
 }

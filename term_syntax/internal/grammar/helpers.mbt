@@ -175,7 +175,7 @@ fn named_type(
     if arity != args.length().to_int64() {
       reject("type " + name + " takes \{arity} arguments")
     }
-    @preterm.Ptycon(lower, args)
+    @preterm.Ptycon(lower, args.map(fill_hole))
   } else if args.is_empty() {
     @preterm.Utv(name)
   } else {
@@ -196,16 +196,19 @@ fn check_arity(
 }
 
 ///|
-fn check_no_hole(ty : @preterm.Pretype) -> @preterm.Pretype {
+/// `_` inside a type is a fresh type variable for elaboration to solve (one
+/// it cannot solve becomes an invented `?n`, as in quotations).
+fn fill_hole(ty : @preterm.Pretype) -> @preterm.Pretype {
   if ty == @preterm.dpty {
-    reject("_ is only allowed as the whole type of a binder")
+    @preterm.new_type_var()
+  } else {
+    ty
   }
-  ty
 }
 
 ///|
 fn tuple_type(tys : @list.List[@preterm.Pretype]) -> @preterm.Pretype {
-  let tys = tys.to_array().map(check_no_hole)
+  let tys = tys.to_array().map(fill_hole)
   let mut t = tys[tys.length() - 1]
   for i = tys.length() - 2; i >= 0; i = i - 1 {
     t = @preterm.Ptycon("prod", @list.List([tys[i], t]))
@@ -220,7 +223,7 @@ fn fun_type(
 ) -> @preterm.Pretype {
   args
   .rev()
-  .fold(init=check_no_hole(res), (t, a) => {
-    @preterm.Ptycon("fun", @list.List([check_no_hole(a), t]))
+  .fold(init=fill_hole(res), (t, a) => {
+    @preterm.Ptycon("fun", @list.List([fill_hole(a), t]))
   })
 }

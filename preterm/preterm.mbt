@@ -229,7 +229,8 @@ pub fn preterm_of_term(tm : Term) -> Preterm {
 let tyv_num : Ref[Int64] = Ref::{ val: 0, }
 
 ///|
-fn new_type_var() -> Pretype {
+/// A fresh type variable of elaboration (`?n` if nothing solves it).
+pub fn new_type_var() -> Pretype {
   let n = tyv_num.val
   tyv_num.val = @lib.add63(n, 1L)
   Stv(n)

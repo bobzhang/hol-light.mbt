@@ -2,7 +2,7 @@
 fn show(quotation : String) -> String raise {
   let t = @parser.parse_term(quotation)
   let s = @term_syntax.print_term(t)
-  assert_true(@basics.aconv(@term_syntax.parse_term(s), t))
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(s), t))
   s
 }
 
@@ -64,6 +64,13 @@ test "spellings that would read back as something else" {
     @term_syntax.Unprintable(_) => "unprintable"
   }
   inspect(r, content="unprintable")
+  // nor is an invented one, which a hole would not bring back
+  let invented = @kernel.mk_vartype("?123")
+  let endo = @basics.mk_fun_ty(invented, invented)
+  let r = try @term_syntax.print_type(endo) catch {
+    @term_syntax.Unprintable(_) => "unprintable"
+  }
+  inspect(r, content="unprintable")
   // a numeral not in canonical form keeps its structure
   let bit0 = @kernel.mk_comb(
     @kernel.mk_const("BIT0", @list.List([])),
@@ -94,4 +101,16 @@ test "overloaded operators and names" {
     show("forall m n d. d divides m /\\ d divides n ==> d divides m + n"),
     content="∀ m : Num, ∀ n : Num, ∀ d : Num, divides(d, m) && divides(d, n) → divides(d, m + n)",
   )
+}
+
+///|
+test "invented type variables print as holes" {
+  // `{x} INTER s = ...` with nothing to fix the element type: elaboration
+  // invents a type variable ?n
+  let t = @parser.parse_term("{x} INTER s = if x IN s then {x} else {}")
+  let s = @term_syntax.print_term(t)
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(s), t))
+  inspect(s, content=(
+    #|INTER(INSERT((x : _), EMPTY), (s : (_) -> Bool)) == (if IN(x, s) { INSERT(x, EMPTY) } else { EMPTY })
+  ))
 }

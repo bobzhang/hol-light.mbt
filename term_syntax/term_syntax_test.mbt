@@ -90,6 +90,14 @@ fn rejects(s : String, is_type? : Bool = false) -> String raise {
 test "input without a meaning is an error, not an abort" {
   inspect(rejects("1 % 2"), content="term syntax: operator % has no HOL meaning")
   inspect(rejects("Bool[Num]", is_type=true), content="term syntax: type Bool takes 0 arguments")
-  inspect(rejects("(_) -> Bool", is_type=true), content="term syntax: _ is only allowed as the whole type of a binder")
+  inspect(rejects("_", is_type=true), content="term syntax: _ alone is not a type")
   inspect(rejects("(let : Bool) => let"), content="term syntax: let is a MoonBit keyword")
+}
+
+///|
+test "a hole inside a type is a fresh type variable" {
+  let t = @term_syntax.parse_term("(xs : List[_]) => xs == xs")
+  let elem = @kernel.type_of(@kernel.dest_abs(t).0)
+  assert_true(elem is Tyapp("list", More(Tyvar(_), tail=Empty)))
+  assert_true(@kernel.is_vartype(@basics.dest_fun_ty(@term_syntax.parse_type("(_) -> Bool")).0))
 }
