@@ -5938,36 +5938,36 @@ test "100/arithmetic_geometric_mean matches 100/arithmetic_geometric_mean.ml" {
       #|3 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|100/arithmetic_geometric_mean quotations (30):
-      #|  k * x * x pow n = (k * x pow n) * x
-      #|  k <= n ==> SUC n - k = SUC(n - k)
-      #|  1 <= SUC n
-      #|  forall x n. x pow (n + 1) - (&n + &1) * x + &n =\n         (x - &1) pow 2 * sum(1..n) (\\k. &k * x pow (n - k))
-      #|  forall n x. &0 <= x ==> &0 <= x pow (n + 1) - (&n + &1) * x + &n
-      #|  ~(b = &0)
-      #|  &0 < b
-      #|  &0 <= x - a + b <=> a - b <= x
-      #|  a / b
-      #|  n:num
-      #|  b = &0
-      #|  p <= n ==> p <= n + 1
-      #|  &0 <= a /\\ &0 <= b
-      #|  1 <= n + 1
-      #|  ~(&n + &1 = &0)
-      #|  x(n + 1) = (&n + &1) * a - &n * b
-      #|  b = sum(1..n) x / &n
-      #|  a = sum(1..n+1) x / (&n + &1)
-      #|  forall n x. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n + 1 ==> &0 <= x i)\n         ==> x(n + 1) * (sum(1..n) x / &n) pow n\n                <= (sum(1..n+1) x / (&n + &1)) pow (n + 1)
-      #|  i <= n ==> i <= n + 1
-      #|  i <= n ==> i <= n + 1
-      #|  x(n + 1) * (sum(1..n) x / &n) pow n
-      #|  n = 0
-      #|  x:num->real
-      #|  1 <= SUC n
-      #|  forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n
-      #|  1 <= SUC n
-      #|  root(SUC n) ((sum(1..SUC n) a / &(SUC n)) pow (SUC n))
-      #|  1 <= SUC n
-      #|  forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> root n (product(1..n) a) <= sum(1..n) a / &n
+      #|  (k : Real) * ((x : Real) * pow(x, (n : Num))) == k * pow(x, n) * x
+      #|  (k : Num) <= (n : Num) \226\134\146 SUC(n) - k == SUC(n - k)
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, pow(x, n + 1) - (real_of_num(n) + real_of_num(1)) * x + real_of_num(n) == pow(x - real_of_num(1), 2) * sum(op_dot_dot(1, n), (k : Num) => real_of_num(k) * pow(x, n - k))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 real_of_num(0) <= pow(x, n + 1) - (real_of_num(n) + real_of_num(1)) * x + real_of_num(n)
+      #|  !((b : Real) == real_of_num(0))
+      #|  real_of_num(0) < (b : Real)
+      #|  (real_of_num(0) <= (x : Real) - (a : Real) + (b : Real)) == (a - b <= x)
+      #|  (a : Real) / (b : Real)
+      #|  (n : Num)
+      #|  (b : Real) == real_of_num(0)
+      #|  (p : Num) <= (n : Num) \226\134\146 p <= n + 1
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real)
+      #|  1 <= (n : Num) + 1
+      #|  !(real_of_num((n : Num)) + real_of_num(1) == real_of_num(0))
+      #|  (x : (Num) -> Real)((n : Num) + 1) == (real_of_num(n) + real_of_num(1)) * (a : Real) - real_of_num(n) * (b : Real)
+      #|  (b : Real) == sum(op_dot_dot(1, (n : Num)), (x : (Num) -> Real)) / real_of_num(n)
+      #|  (a : Real) == sum(op_dot_dot(1, (n : Num) + 1), (x : (Num) -> Real)) / (real_of_num(n) + real_of_num(1))
+      #|  \226\136\128 n : Num, \226\136\128 x : (Num) -> Real, 1 <= n && (\226\136\128 i : Num, 1 <= i && i <= n + 1 \226\134\146 real_of_num(0) <= x(i)) \226\134\146 x(n + 1) * pow(sum(op_dot_dot(1, n), x) / real_of_num(n), n) <= pow(sum(op_dot_dot(1, n + 1), x) / (real_of_num(n) + real_of_num(1)), n + 1)
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= n + 1
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= n + 1
+      #|  (x : (Num) -> Real)((n : Num) + 1) * pow(sum(op_dot_dot(1, n), x) / real_of_num(n), n)
+      #|  (n : Num) == 0
+      #|  (x : (Num) -> Real)
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, 1 <= n && (\226\136\128 i : Num, 1 <= i && i <= n \226\134\146 real_of_num(0) <= a(i)) \226\134\146 product(op_dot_dot(1, n), a) <= pow(sum(op_dot_dot(1, n), a) / real_of_num(n), n)
+      #|  1 <= SUC((n : Num))
+      #|  root(SUC((n : Num)), pow(sum(op_dot_dot(1, SUC(n)), (a : (Num) -> Real)) / real_of_num(SUC(n)), SUC(n)))
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, 1 <= n && (\226\136\128 i : Num, 1 <= i && i <= n \226\134\146 real_of_num(0) <= a(i)) \226\134\146 root(n, product(op_dot_dot(1, n), a)) <= sum(op_dot_dot(1, n), a) / real_of_num(n)
       #|LEMMA_1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real))) (#real_of_num:fun(num,real) n:num))) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) ((#real_sub:fun(real,fun(real,real)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\k:num. ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) k:num)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#-:fun(num,fun(num,num)) n:num) k:num)))))))))))
       #|LEMMA_2 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_add:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real))) (#real_of_num:fun(num,real) n:num))))))))
       #|LEMMA_3 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun(num,real),bool),bool) (\x:fun(num,real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (x:fun(num,real) i:num))))))) ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (x:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) ((#real_div:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) x:fun(num,real))) (#real_of_num:fun(num,real) n:num))) n:num))) ((#real_pow:fun(real,fun(num,real)) ((#real_div:fun(real,fun(real,real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:fun(num,real))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
