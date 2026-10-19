@@ -6039,93 +6039,93 @@ Generating HOL version of proof
 Generating HOL version of proof
 100/ballot quotations (88):
   (s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}
-  ({} --> t) = {(\\x. @y. T)}
-  u:A = x
-  u:A
-  (a /\\ b) /\\ d <=> d /\\ a /\\ b
-  g:A->B
-  y:B
-  \\u. if u = x then @y. T else (f:A->B) u
-  (f:A->B) x
-  f:A->B
-  (a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c
-  (x INSERT s) --> t =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\ g IN s --> t}
-  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)
-  forall s t. FINITE s /\\ FINITE t ==> FINITE(s --> t)
-  all_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b}
-  valid_countings a b =\n        let n = a + b in\n        CARD {f | f IN (1..n --> {A,B}) /\\\n                  CARD { i | i IN 1..n /\\ f(i) = A} = a /\\\n                  CARD { i | i IN 1..n /\\ f(i) = B} = b /\\\n                  forall m. 1 <= m /\\ m <= n\n                      ==> CARD { i | i IN 1..m /\\ f(i) = A} >\n                          CARD { i | i IN 1..m /\\ f(i) = B}}
-  FINITE {f | f IN (1..n --> {A,B}) /\\ P f}
-  (:vote) = {A,B}
-  forall m n. ~((n + 1) IN m..n)
-  1 <= SUC n
-  forall n. 1..(n+1) = (n + 1) INSERT (1..n)
-  {i | i IN 1..(n+1) /\\ P i} =\n        if P(n + 1) then (n + 1) INSERT {i | i IN 1..n /\\ P i}\n        else {i | i IN 1..n /\\ P i}
-  CARD {i | i IN 1..(n+1) /\\ P i} =\n        if P(n + 1) then CARD {i | i IN 1..n /\\ P i} + 1\n        else CARD {i | i IN 1..n /\\ P i}
-  1 <= n + 1
-  i <= n + 1 <=> i <= n \\/ i = n + 1
-  (forall i. 1 <= i /\\ i <= n + 1 ==> P i) <=>\n      P(n + 1) /\\ (forall i. 1 <= i /\\ i <= n ==> P i)
-  i <= m /\\ m <= n ==> ~(i = n + 1)
-  m <= n\n   ==> (i IN 1..m /\\ (if i = n + 1 then p i else q i) <=> i IN 1..m /\\ q i)
-  1..n
-  {i | i IN 1..n /\\ P i}
-  (CARD {i | i IN 1..n /\\ P i} = n <=> forall i. 1 <= i /\\ i <= n ==> P i) /\\\n   (CARD {i | i IN 1..n /\\ P i} = 0 <=> forall i. 1 <= i /\\ i <= n ==> ~(P i))
-  (forall x. ~(x = A) <=> x = B) /\\\n   (forall x. ~(x = B) <=> x = A)
-  {f | f IN (s --> t) /\\ (forall i. i IN s ==> f i = a)} =\n   if s = {} \\/ a IN t then {(\\i. if i IN s then a else @x. T)} else {}
-  P x ==> x = y ==> P y
-  \\f i. if i = n + 1 then B else f i
-  \\f i. if i = n + 1 then A else f i
-  \\f i. if i = n + 1 then @x:vote. T else f i
-  CARD {f | f IN (1..(n+1) --> {A,B}) /\\ f(n+1) = A /\\ P f} +\n              CARD {f | f IN (1..(n+1) --> {A,B}) /\\ f(n+1) = B /\\ P f}
-  CARD {f | f IN (1..(n+1) --> {A,B}) /\\ P f} =\n   CARD {f | f IN (1..n --> {A,B}) /\\ P (\\i. if i = n + 1 then A else f i)} +\n   CARD {f | f IN (1..n --> {A,B}) /\\ P (\\i. if i = n + 1 then B else f i)}
-  forall a. all_countings a 0 = 1 /\\ all_countings 0 a = 1
-  {x} INTER s = if x IN s then {x} else {}
-  {x | F} = {} /\\ {x | x = a} = {a}
-  1 <= SUC n
-  {x | x = a /\\ P x} = {x | x = a /\\ P a}
-  b = 0 /\\ ~(a = 0) ==> ~(b > a)
-  1 <= SUC n
+  op_minus_minus_gt({}, (t : (_) -> Bool)) == {(x : _) => select((y : _) => true)}
+  (u : A) == (x : A)
+  (u : A)
+  (((a : Bool) && (b : Bool)) && (d : Bool)) == (d && a && b)
+  (g : (A) -> B)
+  (y : B)
+  (u : A) => if u == (x : A) { select((y : B) => true) } else { (f : (A) -> B)(u) }
+  (f : (A) -> B)((x : A))
+  (f : (A) -> B)
+  (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == (d && a && b && c)
+  op_minus_minus_gt(INSERT((x : A), (s : (A) -> Bool)), (t : (B) -> Bool)) == IMAGE(GABS((f : ((B, (A) -> B), A) -> B) => \226\136\128 y : B, \226\136\128 g : (A) -> B, GEQ(f((y, g)), (u : A) => if u == x { y } else { g(u) })), {((y : B), (g : (A) -> B)) | IN(y, t) && IN(g, op_minus_minus_gt(s, t))})
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE(op_minus_minus_gt(s, t), EXP(n, m))
+  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, FINITE(s) && FINITE(t) \226\134\146 FINITE(op_minus_minus_gt(s, t))
+  (all_countings : (Num, Num) -> Num)((a : Num), (b : Num)) == LET((n : Num) => LET_END(CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, n), {A, B})) && CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && f(i) == A}) == a && CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && f(i) == B}) == b})), a + b)
+  (valid_countings : (Num, Num) -> Num)((a : Num), (b : Num)) == LET((n : Num) => LET_END(CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, n), {A, B})) && CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && f(i) == A}) == a && CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && f(i) == B}) == b && (\226\136\128 m : Num, 1 <= m && m <= n \226\134\146 CARD({(i : Num) | IN(i, op_dot_dot(1, m)) && f(i) == A}) > CARD({(i : Num) | IN(i, op_dot_dot(1, m)) && f(i) == B}))})), a + b)
+  FINITE({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, (n : Num)), {A, B})) && (P : ((Num) -> Vote) -> Bool)(f)})
+  UNIV == {A, B}
+  \226\136\128 m : Num, \226\136\128 n : Num, !IN(n + 1, op_dot_dot(m, n))
+  1 <= SUC((n : Num))
+  \226\136\128 n : Num, op_dot_dot(1, n + 1) == INSERT(n + 1, op_dot_dot(1, n))
+  {(i : Num) | IN(i, op_dot_dot(1, (n : Num) + 1)) && (P : (Num) -> Bool)(i)} == (if P(n + 1) { INSERT(n + 1, {(i : Num) | IN(i, op_dot_dot(1, n)) && P(i)}) } else { {(i : Num) | IN(i, op_dot_dot(1, n)) && P(i)} })
+  CARD({(i : Num) | IN(i, op_dot_dot(1, (n : Num) + 1)) && (P : (Num) -> Bool)(i)}) == (if P(n + 1) { CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && P(i)}) + 1 } else { CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && P(i)}) })
+  1 <= (n : Num) + 1
+  ((i : Num) <= (n : Num) + 1) == (i <= n || i == n + 1)
+  (\226\136\128 i : Num, 1 <= i && i <= (n : Num) + 1 \226\134\146 (P : (Num) -> Bool)(i)) == (P(n + 1) && (\226\136\128 i : Num, 1 <= i && i <= n \226\134\146 P(i)))
+  (i : Num) <= (m : Num) && m <= (n : Num) \226\134\146 !(i == n + 1)
+  (m : Num) <= (n : Num) \226\134\146 (IN((i : Num), op_dot_dot(1, m)) && (if i == n + 1 { (p : (Num) -> Bool)(i) } else { (q : (Num) -> Bool)(i) })) == (IN(i, op_dot_dot(1, m)) && q(i))
+  op_dot_dot(1, (n : Num))
+  {(i : Num) | IN(i, op_dot_dot(1, (n : Num))) && (P : (Num) -> Bool)(i)}
+  (CARD({(i : Num) | IN(i, op_dot_dot(1, (n : Num))) && (P : (Num) -> Bool)(i)}) == n) == (\226\136\128 i : Num, 1 <= i && i <= n \226\134\146 P(i)) && (CARD({(i : Num) | IN(i, op_dot_dot(1, n)) && P(i)}) == 0) == (\226\136\128 i : Num, 1 <= i && i <= n \226\134\146 !P(i))
+  (\226\136\128 x : Vote, !(x == A) == (x == B)) && (\226\136\128 x : Vote, !(x == B) == (x == A))
+  {(f : (_) -> _) | IN(f, op_minus_minus_gt((s : (_) -> Bool), (t : (_) -> Bool))) && (\226\136\128 i : _, IN(i, s) \226\134\146 f(i) == (a : _))} == (if s == {} || IN(a, t) { {(i : _) => if IN(i, s) { a } else { select((x : _) => true) }} } else { {} })
+  (P : (_) -> Bool)((x : _)) \226\134\146 x == (y : _) \226\134\146 P(y)
+  (f : (Num) -> Vote) => (i : Num) => if i == (n : Num) + 1 { B } else { f(i) }
+  (f : (Num) -> Vote) => (i : Num) => if i == (n : Num) + 1 { A } else { f(i) }
+  (f : (Num) -> Vote) => (i : Num) => if i == (n : Num) + 1 { select((x : Vote) => true) } else { f(i) }
+  CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, (n : Num) + 1), {A, B})) && f(n + 1) == A && (P : ((Num) -> Vote) -> Bool)(f)}) + CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, n + 1), {A, B})) && f(n + 1) == B && P(f)})
+  CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, (n : Num) + 1), {A, B})) && (P : ((Num) -> Vote) -> Bool)(f)}) == CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, n), {A, B})) && P((i : Num) => if i == n + 1 { A } else { f(i) })}) + CARD({(f : (Num) -> Vote) | IN(f, op_minus_minus_gt(op_dot_dot(1, n), {A, B})) && P((i : Num) => if i == n + 1 { B } else { f(i) })})
+  \226\136\128 a : Num, all_countings(a, 0) == 1 && all_countings(0, a) == 1
+  INTER({(x : _)}, (s : (_) -> Bool)) == (if IN(x, s) { {x} } else { {} })
+  {(x : _) | false} == {} && {(x : _) | x == (a : _)} == {a}
+  1 <= SUC((n : Num))
+  {(x : _) | x == (a : _) && (P : (_) -> Bool)(x)} == {(x : _) | x == a && P(a)}
+  (b : Num) == 0 && !((a : Num) == 0) \226\134\146 !(b > a)
+  1 <= SUC((n : Num))
   1
   1
-  1 <= k /\\ k <= a ==> 1 <= k /\\ forall i. i <= k ==> i <= a
-  b = 0 /\\ ~(a = 0) ==> a > b
-  k:num
-  {x | P x /\\ Q x /\\ R x} =\n                             {x | P x /\\ Q x} INTER {x | R x}
-  {x | x = a} = {a}
-  a /\\ a /\\ b <=> a /\\ b
-  valid_countings 0 0 = 1 /\\\n   forall a. valid_countings (SUC a) 0 = 1 /\\ valid_countings 0 (SUC a) = 0
-  n = a + b + 1
-  (a + 1) + b = a + b + 1
-  (a + 1) + (b + 1) = (a + b + 1) + 1
-  forall a b. all_countings (a + 1) (b + 1) =\n                all_countings a (b + 1) + all_countings (a + 1) b
-  {x | F} = EMPTY
-  x = a /\\ y = b /\\ P x y <=> x = a /\\ y = b /\\ P a b
-  n = a + b + 1
-  (a + 1) + b = a + b + 1
-  (a + 1) + (b + 1) = (a + b + 1) + 1
-  b:num < a
-  forall a b. valid_countings (a + 1) (b + 1) =\n                if a <= b then 0\n                else valid_countings a (b + 1) + valid_countings (a + 1) b
-  a < SUC a
-  1 = a + 1 <=> a = 0
-  forall a b. all_countings a b = binom(a + b,a)
-  ~(a <= b) ==> b <= SUC a /\\ SUC b <= a /\\ SUC b <= SUC a
-  a + b:num
-  b:num
-  a:num
-  b + a:num = a + b
-  SUC a
-  SUC b
-  SUC a
-  b:num
-  a:num
-  SUC b
-  ~(a + b + 1 = 0) /\\\n    (SUC a + SUC b) *\n    ((SUC a + b) * (a + SUC b) * y + (a + SUC b) * (SUC a + b) * z) =\n    (SUC a + b) * (a + SUC b) * w\n    ==> (SUC a + SUC b) * (y + z) = w
-  a <= b ==> SUC a - SUC b = 0
-  forall a b. (a + b) * valid_countings a b = (a - b) * binom(a + b,a)
-  ~(a <= b) ==> SUC b <= SUC a
-  a <= b ==> (SUC a - SUC b) = 0
-  SUC b
-  SUC a
-  forall a b. &(valid_countings a b) =\n            if a <= b then if b = 0 then &1 else &0\n            else (&a - &b) / (&a + &b) *  &(all_countings a b)
+  1 <= (k : Num) && k <= (a : Num) \226\134\146 1 <= k && (\226\136\128 i : Num, i <= k \226\134\146 i <= a)
+  (b : Num) == 0 && !((a : Num) == 0) \226\134\146 a > b
+  (k : Num)
+  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)} == INTER({(x : _) | P(x) && Q(x)}, {(x : _) | R(x)})
+  {(x : _) | x == (a : _)} == {a}
+  ((a : Bool) && a && (b : Bool)) == (a && b)
+  valid_countings(0, 0) == 1 && (\226\136\128 a : Num, valid_countings(SUC(a), 0) == 1 && valid_countings(0, SUC(a)) == 0)
+  (n : Num) == (a : Num) + ((b : Num) + 1)
+  (a : Num) + 1 + (b : Num) == a + (b + 1)
+  (a : Num) + 1 + ((b : Num) + 1) == a + (b + 1) + 1
+  \226\136\128 a : Num, \226\136\128 b : Num, all_countings(a + 1, b + 1) == all_countings(a, b + 1) + all_countings(a + 1, b)
+  {(x : _) | false} == {}
+  ((x : _) == (a : _) && (y : _) == (b : _) && (P : (_, _) -> Bool)(x, y)) == (x == a && y == b && P(a, b))
+  (n : Num) == (a : Num) + ((b : Num) + 1)
+  (a : Num) + 1 + (b : Num) == a + (b + 1)
+  (a : Num) + 1 + ((b : Num) + 1) == a + (b + 1) + 1
+  (b : Num) < (a : Num)
+  \226\136\128 a : Num, \226\136\128 b : Num, valid_countings(a + 1, b + 1) == (if a <= b { 0 } else { valid_countings(a, b + 1) + valid_countings(a + 1, b) })
+  (a : Num) < SUC(a)
+  (1 == (a : Num) + 1) == (a == 0)
+  \226\136\128 a : Num, \226\136\128 b : Num, all_countings(a, b) == binom((a + b, a))
+  !((a : Num) <= (b : Num)) \226\134\146 b <= SUC(a) && SUC(b) <= a && SUC(b) <= SUC(a)
+  (a : Num) + (b : Num)
+  (b : Num)
+  (a : Num)
+  (b : Num) + (a : Num) == a + b
+  SUC((a : Num))
+  SUC((b : Num))
+  SUC((a : Num))
+  (b : Num)
+  (a : Num)
+  SUC((b : Num))
+  !((a : Num) + ((b : Num) + 1) == 0) && (SUC(a) + SUC(b)) * ((SUC(a) + b) * ((a + SUC(b)) * (y : Num)) + (a + SUC(b)) * ((SUC(a) + b) * (z : Num))) == (SUC(a) + b) * ((a + SUC(b)) * (w : Num)) \226\134\146 (SUC(a) + SUC(b)) * (y + z) == w
+  (a : Num) <= (b : Num) \226\134\146 SUC(a) - SUC(b) == 0
+  \226\136\128 a : Num, \226\136\128 b : Num, (a + b) * valid_countings(a, b) == (a - b) * binom((a + b, a))
+  !((a : Num) <= (b : Num)) \226\134\146 SUC(b) <= SUC(a)
+  (a : Num) <= (b : Num) \226\134\146 SUC(a) - SUC(b) == 0
+  SUC((b : Num))
+  SUC((a : Num))
+  \226\136\128 a : Num, \226\136\128 b : Num, real_of_num(valid_countings(a, b)) == (if a <= b { if b == 0 { real_of_num(1) } else { real_of_num(0) } } else { (real_of_num(a) - real_of_num(b)) / (real_of_num(a) + real_of_num(b)) * real_of_num(all_countings(a, b)) })
 funspace =  |- (#forall:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'B),bool),fun(fun(fun('A,'B),bool),bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) (#GSPEC:fun(fun(fun('A,'B),bool),fun(fun('A,'B),bool)) (\GEN%PVAR%1:fun('A,'B). (#?:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (((#SETSPEC:fun(fun('A,'B),fun(bool,fun(fun('A,'B),bool))) GEN%PVAR%1:fun('A,'B)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#IN:fun('B,fun(fun('B,bool),bool)) (f:fun('A,'B) x:'A)) t:fun('B,bool)))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool)))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (#@:fun(fun('B,bool),'B) (\y:'B. #T:bool)))))))) f:fun('A,'B)))))))))))
 FUNSPACE_EMPTY =  |- ((#=:fun(fun(fun('?1,'?2),bool),fun(fun(fun('?1,'?2),bool),bool)) ((#-->:fun(fun('?1,bool),fun(fun('?2,bool),fun(fun('?1,'?2),bool))) #EMPTY:fun('?1,bool)) t:fun('?2,bool))) ((#INSERT:fun(fun('?1,'?2),fun(fun(fun('?1,'?2),bool),fun(fun('?1,'?2),bool))) (\x:'?1. (#@:fun(fun('?2,bool),'?2) (\y:'?2. #T:bool)))) #EMPTY:fun(fun('?1,'?2),bool)))
 HAS_SIZE_FUNSPACE =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun('A,bool),fun(num,bool)) s:fun('A,bool)) m:num)) ((#HAS_SIZE:fun(fun('B,bool),fun(num,bool)) t:fun('B,bool)) n:num))) ((#HAS_SIZE:fun(fun(fun('A,'B),bool),fun(num,bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) ((#EXP:fun(num,fun(num,num)) n:num) m:num)))))))))))

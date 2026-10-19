@@ -5770,95 +5770,95 @@ Warning: inventing type variables
 Generating HOL version of proof
 0..0..1..solved at 4
 100/leibniz quotations (89):
-  p:num
-  p:num
-  p:num
-  p:num
-  EVEN m
-  m:num
-  forall n. abs(a(n + 1)) <= abs(a n)
-  SUC m
-  SUC n = 1 + n
-  m:num
-  forall a. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n)))\n       ==> forall m n. (EVEN m ==> &0 <= sum(m,n) a /\\ sum(m,n) a <= a(m)) /\\\n                 (ODD m ==> a(m) <= sum(m,n) a /\\ sum(m,n) a <= &0)
-  EVEN m
-  forall a. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n)))\n       ==> forall m n. abs(sum(m,n) a) <= abs(a m)
-  N:num
-  e:real
-  e:real
-  forall v. (forall n. a(2 * n + 1) <= &0 /\\ &0 <= a(2 * n)) /\\\n       (forall n. abs(a(n + 1)) <= abs(a(n))) /\\ a tends_num_real &0\n       ==> summable a
-  n * 2 = 2 * n
+  (p : Num)
+  (p : Num)
+  (p : Num)
+  (p : Num)
+  EVEN((m : Num))
+  (m : Num)
+  \226\136\128 n : Num, abs((a : (Num) -> Real)(n + 1)) <= abs(a(n))
+  SUC((m : Num))
+  SUC((n : Num)) == 1 + n
+  (m : Num)
+  \226\136\128 a : (Num) -> Real, (\226\136\128 n : Num, a(2 * n + 1) <= real_of_num(0) && real_of_num(0) <= a(2 * n)) && (\226\136\128 n : Num, abs(a(n + 1)) <= abs(a(n))) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, (EVEN(m) \226\134\146 real_of_num(0) <= sum((m, n), a) && sum((m, n), a) <= a(m)) && (ODD(m) \226\134\146 a(m) <= sum((m, n), a) && sum((m, n), a) <= real_of_num(0)))
+  EVEN((m : Num))
+  \226\136\128 a : (Num) -> Real, (\226\136\128 n : Num, a(2 * n + 1) <= real_of_num(0) && real_of_num(0) <= a(2 * n)) && (\226\136\128 n : Num, abs(a(n + 1)) <= abs(a(n))) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, abs(sum((m, n), a)) <= abs(a(m)))
+  (N : Num)
+  (e : Real)
+  (e : Real)
+  \226\136\128 v : _, (\226\136\128 n : Num, (a : (Num) -> Real)(2 * n + 1) <= real_of_num(0) && real_of_num(0) <= a(2 * n)) && (\226\136\128 n : Num, abs(a(n + 1)) <= abs(a(n))) && tends_num_real(a, real_of_num(0)) \226\134\146 summable(a)
+  (n : Num) * 2 == 2 * n
   0 < 2
-  forall x. abs(x) < &1\n       ==> (\\n. (-- &1) pow n / &(2 * n + 1) * x pow (2 * n + 1))\n           sums (atn x)
-  &1 < x * e ==> e * x <= y ==> &1 < y
-  &1
-  0 < n + 1
-  summable (\\n. (-- &1) pow n / &(2 * n + 1))
-  m <= n + 1 ==> m <= SUC n /\\ m <= SUC n + 1
-  n < n + 1
-  m <= SUC n + 1 <=> m <= n + 1 \\/ m = SUC n + 1
-  m <= 0 + 1 <=> m = 0 \\/ m = 1
-  forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i) - a(i+1)) = a(m) - a(n + 1)
-  (s1 * (v - w) + x) + (s2 + y) * w =\n    (x + y * w) + (v - w) * s1 + w * s2
-  m <= SUC(n + 1) /\\ ~(m = SUC(n + 1)) ==> m <= SUC n
-  m <= SUC n <=> m <= SUC(n + 1) /\\ ~(m = SUC(n + 1))
-  n < SUC n /\\ n < SUC(n + 1)
-  ~(n + 1 <= n)
-  m = SUC(n + 1)
-  m = 0
+  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 sums((n : Num) => pow(-real_of_num(1), n) / real_of_num(2 * n + 1) * pow(x, 2 * n + 1), atn(x))
+  real_of_num(1) < (x : Real) * (e : Real) \226\134\146 e * x <= (y : Real) \226\134\146 real_of_num(1) < y
+  real_of_num(1)
+  0 < (n : Num) + 1
+  summable((n : Num) => pow(-real_of_num(1), n) / real_of_num(2 * n + 1))
+  (m : Num) <= (n : Num) + 1 \226\134\146 m <= SUC(n) && m <= SUC(n) + 1
+  (n : Num) < n + 1
+  ((m : Num) <= SUC((n : Num)) + 1) == (m <= n + 1 || m == SUC(n) + 1)
+  ((m : Num) <= 0 + 1) == (m == 0 || m == 1)
+  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n + 1 \226\134\146 sum(op_dot_dot(m, n), (i : Num) => a(i) - a(i + 1)) == a(m) - a(n + 1)
+  (s1 : Real) * ((v : Real) - (w : Real)) + (x : Real) + ((s2 : Real) + (y : Real)) * w == x + y * w + ((v - w) * s1 + w * s2)
+  (m : Num) <= SUC((n : Num) + 1) && !(m == SUC(n + 1)) \226\134\146 m <= SUC(n)
+  ((m : Num) <= SUC((n : Num))) == (m <= SUC(n + 1) && !(m == SUC(n + 1)))
+  (n : Num) < SUC(n) && n < SUC(n + 1)
+  !((n : Num) + 1 <= n)
+  (m : Num) == SUC((n : Num) + 1)
+  (m : Num) == 0
   1
-  forall a v m n.\n        m <= n + 1\n        ==> sum(m..n+1) (\\i. a i * v i) =\n            sum(m..n) (\\k. sum(m..k) a * (v(k) - v(k+1))) +\n            sum(m..n+1) a * v(n+1)
-  k <= n ==> k <= n + 1
-  k:num
-  sum(m..n) (\\k. u * (v(k) - v(k + 1))) + u * v(n+1)
-  sum(m..n) (\\k. l * (v(k) - v(k + 1))) + l * v(n+1)
-  m = 0
-  m <= i /\\ i = 0 <=> m = 0 /\\ i = 0
-  forall a v l u m n.\n        m <= n /\\\n        (forall i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (forall k. m <= k /\\ k <= n ==> l <= sum(m..k) a /\\ sum(m..k) a <= u)\n        ==> l * v(m) <= sum(m..n) (\\i. a(i) * v(i)) /\\\n            sum(m..n) (\\i. a(i) * v(i)) <= u * v(m)
-  --b * k <= a /\\ a <= b * k ==> abs(a) <= b * k
-  forall a v b m n.\n        m <= n /\\\n        (forall i. m <= i /\\ i <= n ==> &0 <= v(i) /\\ v(i+1) <= v(i)) /\\\n        (forall k. m <= k /\\ k <= n ==> abs(sum(m..k) a) <= b)\n        ==> abs(sum(m..n) (\\i. a(i) * v(i))) <= b * abs(v m)
-  abs(s1 - sx) < e / &6\n    ==> ~(abs(sx - s) < e / &2) ==> ~(abs(s1 - s) < e / &3)
-  abs((slo + shi) - s) < e / &6\n    ==> ~(abs(slo - s) < e / &3) ==> ~(abs(shi) < e / &7)
-  N1 + N2:num
-  N:num
-  N <= k ==> (N + (k - N) + 1) - 1 = k
-  (k - N:num) + 1
-  N:num
-  2 * (m + 1) + 1 = (2 * m + 1) + 2
-  ~(N1 + N2 = 0)
-  x < &1
-  &0 < x
-  e / &7 * abs(x pow (2 * N + 1))
-  x <= e / &7 /\\ &0 < e ==> x < e / &6
-  N1 + N2 = 0
-  abs(sum(N,N1+N2) (\\n. -- &1 pow n / &(2 * n + 1) * x pow (2 * n + 1)))\n     < e / &6
-  N + N1 + N2:num
-  N2:num
-  e / &6
-  N1:num
-  e / &6
-  &0 < x /\\ x < &1 /\\ abs x < &1
-  x:real
-  x = &1 - min (min (d1 / &2) (d2 / &2)) (&1 / &2)
-  d2:real
-  d1:real
-  e / &6
-  a ==> ~b <=> ~(a /\\ b)
-  atn contl (&1)
-  a = b ==> a ==> b
-  inv(&(2 * k + 1))
-  &1
-  2 * k + 1
-  k:num
-  sum(0,N) (\\n. (-- &1) pow n * &1 pow (2 * n))
-  (\\x. sum(0,N) (\\n. (-- &1) pow n / &(2 * n + 1) * x pow (2 * n + 1)))\n    contl (&1)
-  N:num
-  e / &7
-  e = abs(s - atn(&1))
-  ~(&0 < abs(x - y)) ==> x = y
-  s = atn(&1)
-  s = suminf(\\n. (-- &1) pow n / &(2 * n + 1))
-  (\\n. (-- &1) pow n / &(2 * n + 1)) sums (pi / &4)
+  \226\136\128 a : (Num) -> Real, \226\136\128 v : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n + 1 \226\134\146 sum(op_dot_dot(m, n + 1), (i : Num) => a(i) * v(i)) == sum(op_dot_dot(m, n), (k : Num) => sum(op_dot_dot(m, k), a) * (v(k) - v(k + 1))) + sum(op_dot_dot(m, n + 1), a) * v(n + 1)
+  (k : Num) <= (n : Num) \226\134\146 k <= n + 1
+  (k : Num)
+  sum(op_dot_dot((m : Num), (n : Num)), (k : Num) => (u : Real) * ((v : (Num) -> Real)(k) - v(k + 1))) + u * v(n + 1)
+  sum(op_dot_dot((m : Num), (n : Num)), (k : Num) => (l : Real) * ((v : (Num) -> Real)(k) - v(k + 1))) + l * v(n + 1)
+  (m : Num) == 0
+  ((m : Num) <= (i : Num) && i == 0) == (m == 0 && i == 0)
+  \226\136\128 a : (Num) -> Real, \226\136\128 v : (Num) -> Real, \226\136\128 l : Real, \226\136\128 u : Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 i : Num, m <= i && i <= n \226\134\146 real_of_num(0) <= v(i) && v(i + 1) <= v(i)) && (\226\136\128 k : Num, m <= k && k <= n \226\134\146 l <= sum(op_dot_dot(m, k), a) && sum(op_dot_dot(m, k), a) <= u) \226\134\146 l * v(m) <= sum(op_dot_dot(m, n), (i : Num) => a(i) * v(i)) && sum(op_dot_dot(m, n), (i : Num) => a(i) * v(i)) <= u * v(m)
+  -(b : Real) * (k : Real) <= (a : Real) && a <= b * k \226\134\146 abs(a) <= b * k
+  \226\136\128 a : (Num) -> Real, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && (\226\136\128 i : Num, m <= i && i <= n \226\134\146 real_of_num(0) <= v(i) && v(i + 1) <= v(i)) && (\226\136\128 k : Num, m <= k && k <= n \226\134\146 abs(sum(op_dot_dot(m, k), a)) <= b) \226\134\146 abs(sum(op_dot_dot(m, n), (i : Num) => a(i) * v(i))) <= b * abs(v(m))
+  abs((s1 : Real) - (sx : Real)) < (e : Real) / real_of_num(6) \226\134\146 !(abs(sx - (s : Real)) < e / real_of_num(2)) \226\134\146 !(abs(s1 - s) < e / real_of_num(3))
+  abs((slo : Real) + (shi : Real) - (s : Real)) < (e : Real) / real_of_num(6) \226\134\146 !(abs(slo - s) < e / real_of_num(3)) \226\134\146 !(abs(shi) < e / real_of_num(7))
+  (N1 : Num) + (N2 : Num)
+  (N : Num)
+  (N : Num) <= (k : Num) \226\134\146 N + (k - N + 1) - 1 == k
+  (k : Num) - (N : Num) + 1
+  (N : Num)
+  2 * ((m : Num) + 1) + 1 == 2 * m + 1 + 2
+  !((N1 : Num) + (N2 : Num) == 0)
+  (x : Real) < real_of_num(1)
+  real_of_num(0) < (x : Real)
+  (e : Real) / real_of_num(7) * abs(pow((x : Real), 2 * (N : Num) + 1))
+  (x : Real) <= (e : Real) / real_of_num(7) && real_of_num(0) < e \226\134\146 x < e / real_of_num(6)
+  (N1 : Num) + (N2 : Num) == 0
+  abs(sum(((N : Num), (N1 : Num) + (N2 : Num)), (n : Num) => pow(-real_of_num(1), n) / real_of_num(2 * n + 1) * pow((x : Real), 2 * n + 1))) < (e : Real) / real_of_num(6)
+  (N : Num) + ((N1 : Num) + (N2 : Num))
+  (N2 : Num)
+  (e : Real) / real_of_num(6)
+  (N1 : Num)
+  (e : Real) / real_of_num(6)
+  real_of_num(0) < (x : Real) && x < real_of_num(1) && abs(x) < real_of_num(1)
+  (x : Real)
+  (x : Real) == real_of_num(1) - min(min((d1 : Real) / real_of_num(2), (d2 : Real) / real_of_num(2)), real_of_num(1) / real_of_num(2))
+  (d2 : Real)
+  (d1 : Real)
+  (e : Real) / real_of_num(6)
+  ((a : Bool) \226\134\146 !(b : Bool)) == !(a && b)
+  contl(atn, real_of_num(1))
+  (a : Bool) == (b : Bool) \226\134\146 a \226\134\146 b
+  inv(real_of_num(2 * (k : Num) + 1))
+  real_of_num(1)
+  2 * (k : Num) + 1
+  (k : Num)
+  sum((0, (N : Num)), (n : Num) => pow(-real_of_num(1), n) * pow(real_of_num(1), 2 * n))
+  contl((x : Real) => sum((0, (N : Num)), (n : Num) => pow(-real_of_num(1), n) / real_of_num(2 * n + 1) * pow(x, 2 * n + 1)), real_of_num(1))
+  (N : Num)
+  (e : Real) / real_of_num(7)
+  (e : Real) == abs((s : Real) - atn(real_of_num(1)))
+  !(real_of_num(0) < abs((x : Real) - (y : Real))) \226\134\146 x == y
+  (s : Real) == atn(real_of_num(1))
+  (s : Real) == suminf((n : Num) => pow(-real_of_num(1), n) / real_of_num(2 * n + 1))
+  sums((n : Num) => pow(-real_of_num(1), n) / real_of_num(2 * n + 1), pi / real_of_num(4))
 ALTERNATING_SUM_BOUNDS =  |- (#forall:fun(fun(fun(num,real),bool),bool) (\a:fun(num,real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (a:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (a:fun(num,real) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (a:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_abs:fun(real,real) (a:fun(num,real) n:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)) a:fun(num,real)))) ((#real_le:fun(real,fun(real,bool)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)) a:fun(num,real))) (a:fun(num,real) m:num))))) ((#==>:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (a:fun(num,real) m:num)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)) a:fun(num,real)))) ((#real_le:fun(real,fun(real,bool)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)) a:fun(num,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))))))
 ALTERNATING_SUM_BOUND =  |- (#forall:fun(fun(fun(num,real),bool),bool) (\a:fun(num,real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (a:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (a:fun(num,real) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (a:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_abs:fun(real,real) (a:fun(num,real) n:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)) a:fun(num,real)))) (#real_abs:fun(real,real) (a:fun(num,real) m:num))))))))))
 SUMMABLE_ALTERNATING =  |- (#forall:fun(fun('?1,bool),bool) (\v:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (a:fun(num,real) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (a:fun(num,real) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (a:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_abs:fun(real,real) (a:fun(num,real) n:num)))))) ((#tends_num_real:fun(fun(num,real),fun(real,bool)) a:fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) (#summable:fun(fun(num,real),bool) a:fun(num,real)))))

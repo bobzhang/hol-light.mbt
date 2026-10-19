@@ -73776,101 +73776,101 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..1..2..5..10..solved at 17
 100/cayley_hamilton quotations (95):
-  (forall A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (forall A:real^N^N n. A mpow (SUC n) = A ** A mpow n)
+  (\226\136\128 A : Cart[Cart[Real, N], N], (mpow : (Cart[Cart[Real, N], N], Num) -> Cart[Cart[Real, N], N])(A, 0) == mat(1)) && (\226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 n : Num, mpow(A, SUC(n)) == matrix_mul(A, mpow(A, n)))
   :P
   :P
   \\n. n + 1
   \\n. n + 1
   \\n. n + 1
-  forall A:real^N^N m n. A mpow (m + n) = A mpow m ** A mpow n
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 m : Num, \226\136\128 n : Num, mpow(A, m + n) == matrix_mul(mpow(A, m), mpow(A, n))
   1
   1
-  forall A:real^N^N. A mpow 1 = A
-  forall A:real^N^N n. A mpow (SUC n) = A mpow n ** A
-  (forall x i. P i ==> forall j. Q j ==> R x i j) <=>\n    (forall i. P i ==> forall j. Q j ==> forall x. R x i j)
-  forall n A:num->real^N^M.\n        (forall x. msum(0..n) (\\i. x pow i %% A i) = mat 0) <=>\n        (forall i. i IN 0..n ==> A i = mat 0)
+  \226\136\128 A : Cart[Cart[Real, N], N], mpow(A, 1) == A
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 n : Num, mpow(A, SUC(n)) == matrix_mul(mpow(A, n), A)
+  (\226\136\128 x : _, \226\136\128 i : _, (P : (_) -> Bool)(i) \226\134\146 (\226\136\128 j : _, (Q : (_) -> Bool)(j) \226\134\146 (R : (_, _, _) -> Bool)(x, i, j))) == (\226\136\128 i : _, P(i) \226\134\146 (\226\136\128 j : _, Q(j) \226\134\146 (\226\136\128 x : _, R(x, i, j))))
+  \226\136\128 n : Num, \226\136\128 A : (Num) -> Cart[Cart[Real, N], M], (\226\136\128 x : Real, msum(op_dot_dot(0, n), (i : Num) => op_pct_pct(pow(x, i), A(i))) == mat(0)) == (\226\136\128 i : Num, IN(i, op_dot_dot(0, n)) \226\134\146 A(i) == mat(0))
   0
-  n:num
-  n - m - 1 = n - SUC m
-  n - m <= SUC n /\\ n - m <= n
-  m < n ==> ~(n - m = 0)
-  n - m:num
-  n - SUC m = n - m \\/ m < n
-  m:num
-  ~(SUC n <= n)
-  SUC n
-  forall i:num. B(n - i) = (mat 0:real^N^N)
+  (n : Num)
+  (n : Num) - (m : Num) - 1 == n - SUC(m)
+  (n : Num) - (m : Num) <= SUC(n) && n - m <= n
+  (m : Num) < (n : Num) \226\134\146 !(n - m == 0)
+  (n : Num) - (m : Num)
+  (n : Num) - SUC((m : Num)) == n - m || m < n
+  (m : Num)
+  !(SUC((n : Num)) <= n)
+  SUC((n : Num))
+  \226\136\128 i : Num, (B : (Num) -> Cart[Cart[Real, N], N])((n : Num) - i) == mat(0)
   1
-  (((A:real^N^N) + --B) + B) + C = (--B + B) + A + C
-  (0 <= i /\\ i <= SUC n) /\\ ~(i = 0) <=>\n                  1 <= i /\\ i <= SUC n
-  (0 <= i /\\ i <= SUC n) /\\ i <= n <=> 0 <= i /\\ i <= n
-  (0 <= i /\\ i <= SUC n) /\\ i = 0 <=> i = 0
-  (if p then mat 0 else x) = (if ~p then x else mat 0)
-  forall x. msum(0..SUC n)\n         (\\i. x pow i %% (((if i = 0 then (--C:real^N^N) else mat 0) +\n                           (if i <= n then B i ** (A:real^N^N) else mat 0)) -\n                          (if i = 0 then mat 0 else B(i - 1) ** mat 1))) =\n        mat 0
-  forall(A:real^N^N) B (C:real^N^N) n.\n        (forall x. msum (0..n) (\\i. (x pow i) %% B i) ** (A - x %% mat 1) = C)\n        ==> C = mat 0
-  (0 <= i /\\ i <= n) /\\ i = 0 <=> i = 0
-  \\i. if i = 0 then c else &0
-  forall c n. ?b. forall x. c = sum(0..n) (\\i. b i * x pow i)
-  \\i. (b:num->real) i + c i
-  forall f g. (?b. forall x. f(x) = sum(0..n) (\\i. b i * x pow i)) /\\\n         (?c. forall x. g(x) = sum(0..n) (\\i. c i * x pow i))\n         ==> ?d. forall x. f(x) + g(x) = sum(0..n) (\\i. d i * x pow i)
-  \\i. c * (b:num->real) i
-  forall f c. (?b. forall x. f(x) = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. forall x. c * f(x) = sum(0..n) (\\i. b i * x pow i)
-  forall f s. FINITE s /\\\n         (forall a. a IN s ==> ?b. forall x. f x a = sum(0..n) (\\i. b i * x pow i))\n         ==> ?b. forall x. sum s (f x) = sum(0..n) (\\i. b i * x pow i)
-  1..SUC n = 0+1..n+1
+  (A : Cart[Cart[Real, N], N]) + -(B : Cart[Cart[Real, N], N]) + B + (C : Cart[Cart[Real, N], N]) == -B + B + (A + C)
+  ((0 <= (i : Num) && i <= SUC((n : Num))) && !(i == 0)) == (1 <= i && i <= SUC(n))
+  ((0 <= (i : Num) && i <= SUC((n : Num))) && i <= n) == (0 <= i && i <= n)
+  ((0 <= (i : Num) && i <= SUC((n : Num))) && i == 0) == (i == 0)
+  (if (p : Bool) { mat(0) } else { (x : Cart[Cart[Real, _], _]) }) == (if !p { x } else { mat(0) })
+  \226\136\128 x : Real, msum(op_dot_dot(0, SUC((n : Num))), (i : Num) => op_pct_pct(pow(x, i), (if i == 0 { -(C : Cart[Cart[Real, N], N]) } else { mat(0) }) + (if i <= n { matrix_mul((B : (Num) -> Cart[Cart[Real, N], N])(i), (A : Cart[Cart[Real, N], N])) } else { mat(0) }) - (if i == 0 { mat(0) } else { matrix_mul(B(i - 1), mat(1)) }))) == mat(0)
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 B : (Num) -> Cart[Cart[Real, N], N], \226\136\128 C : Cart[Cart[Real, N], N], \226\136\128 n : Num, (\226\136\128 x : Real, matrix_mul(msum(op_dot_dot(0, n), (i : Num) => op_pct_pct(pow(x, i), B(i))), A - op_pct_pct(x, mat(1))) == C) \226\134\146 C == mat(0)
+  ((0 <= (i : Num) && i <= (n : Num)) && i == 0) == (i == 0)
+  (i : Num) => if i == 0 { (c : Real) } else { real_of_num(0) }
+  \226\136\128 c : Real, \226\136\128 n : Num, \226\136\131 b : (Num) -> Real, \226\136\128 x : Real, c == sum(op_dot_dot(0, n), (i : Num) => b(i) * pow(x, i))
+  (i : Num) => (b : (Num) -> Real)(i) + (c : (Num) -> Real)(i)
+  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, (\226\136\131 b : (Num) -> Real, \226\136\128 x : Real, f(x) == sum(op_dot_dot(0, (n : Num)), (i : Num) => b(i) * pow(x, i))) && (\226\136\131 c : (Num) -> Real, \226\136\128 x : Real, g(x) == sum(op_dot_dot(0, n), (i : Num) => c(i) * pow(x, i))) \226\134\146 (\226\136\131 d : (Num) -> Real, \226\136\128 x : Real, f(x) + g(x) == sum(op_dot_dot(0, n), (i : Num) => d(i) * pow(x, i)))
+  (i : Num) => (c : Real) * (b : (Num) -> Real)(i)
+  \226\136\128 f : (Real) -> Real, \226\136\128 c : Real, (\226\136\131 b : (Num) -> Real, \226\136\128 x : Real, f(x) == sum(op_dot_dot(0, (n : Num)), (i : Num) => b(i) * pow(x, i))) \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\128 x : Real, c * f(x) == sum(op_dot_dot(0, n), (i : Num) => b(i) * pow(x, i)))
+  \226\136\128 f : (Real, _) -> Real, \226\136\128 s : (_) -> Bool, FINITE(s) && (\226\136\128 a : _, IN(a, s) \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\128 x : Real, f(x, a) == sum(op_dot_dot(0, (n : Num)), (i : Num) => b(i) * pow(x, i)))) \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\128 x : Real, sum(s, f(x)) == sum(op_dot_dot(0, n), (i : Num) => b(i) * pow(x, i)))
+  op_dot_dot(1, SUC((n : Num))) == op_dot_dot(0 + 1, n + 1)
   1
-  ((0 <= i /\\ i <= SUC n) /\\ i <= n <=> 0 <= i /\\ i <= n) /\\\n    ((0 <= i /\\ i <= SUC n) /\\ ~(i = 0) <=> 1 <= i /\\ i <= SUC n)
-  x:real
-  \\i. (if i <= n then c * b i else &0) +\n                  (if ~(i = 0) then d * b(i - 1) else &0)
-  d:real
-  c:real
-  b:num->real
-  n:num
-  forall f s n. FINITE s /\\\n           (forall a:A. a IN s ==> ?c d. forall x. f x a = c + d * x) /\\ CARD(s) <= n\n           ==> ?b. forall x. product s (f x) = sum(0..n) (\\i. b i * x pow i)
-  a - x * d:real = a + (--d) * x
-  &0
-  (p:num->num) k = j
-  (p:num->num) k IN 1..dimindex(:N)
-  k:num
-  1..dimindex(:N) = i INSERT ((1..dimindex(:N)) DELETE i)
-  p:num->num
+  ((0 <= (i : Num) && i <= SUC((n : Num))) && i <= n) == (0 <= i && i <= n) && ((0 <= i && i <= SUC(n)) && !(i == 0)) == (1 <= i && i <= SUC(n))
+  (x : Real)
+  (i : Num) => (if i <= (n : Num) { (c : Real) * (b : (Num) -> Real)(i) } else { real_of_num(0) }) + (if !(i == 0) { (d : Real) * b(i - 1) } else { real_of_num(0) })
+  (d : Real)
+  (c : Real)
+  (b : (Num) -> Real)
+  (n : Num)
+  \226\136\128 f : (Real, A) -> Real, \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, FINITE(s) && (\226\136\128 a : A, IN(a, s) \226\134\146 (\226\136\131 c : Real, \226\136\131 d : Real, \226\136\128 x : Real, f(x, a) == c + d * x)) && CARD(s) <= n \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\128 x : Real, product(s, f(x)) == sum(op_dot_dot(0, n), (i : Num) => b(i) * pow(x, i)))
+  (a : Real) - (x : Real) * (d : Real) == a + -d * x
+  real_of_num(0)
+  (p : (Num) -> Num)((k : Num)) == (j : Num)
+  IN((p : (Num) -> Num)((k : Num)), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  (k : Num)
+  op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == INSERT((i : Num), DELETE(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), i))
+  (p : (Num) -> Num)
   forall A:real^N^N x i j.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> ?c. forall x. cofactor(A - x %% mat 1)$i$j =\n                    sum(0..dimindex(:N)-1) (\\i. c(i) * x pow i)
-  a - x * d:real = a + (--d) * x
-  (p:num->num) k IN 1..dimindex(:N)
-  k:num
-  p:num->num
-  forall A:real^N^N.\n        ?c. forall x. det(A - x %% mat 1) =\n                sum(0..dimindex(:N)) (\\i. c(i) * x pow i)
-  j:num
-  i:num
-  x:real
-  (\\i. lambda j k. ((c:(num->real)^N^N)$j$k) i):num->real^N^N
-  c:(num->real)^N^N
-  A:real^N^N
-  forall A:real^N^N. ?C.\n      forall x. cofactor(A - x %% mat 1) =\n          msum(0..dimindex(:N)-1) (\\i. x pow i %% C i)
-  i <= n ==> SUC n - i = SUC(n - i)
-  i:num
-  (A mpow SUC n - x pow SUC n %% mat 1) ** A +\n      (x pow (SUC n) %% mat 1 :real^N^N) ** (A - x %% mat 1:real^N^N)
-  forall A:real^N^N x n.\n        A mpow (SUC n) - x pow (SUC n) %% mat 1 =\n        msum (0..n) (\\i. x pow i %% A mpow (n - i)) ** (A - x %% mat 1)
-  (0 <= i /\\ i <= n) /\\ i <= n - 1 <=> 0 <= i /\\ i <= n - 1
-  x:real
-  (\\i. (if i <= n - 1 then B i else mat 0) +\n                     c(SUC n) %% A mpow (n - i)):num->real^N^N
-  (A + B) + (C + D):real^N^N = (A + C) + (B + D)
-  B:num->real^N^N
-  (\\i. mat 0):num->real^N^N
-  c:num->real
-  char_poly(A:real^N^N)
-  n:num
-  dimindex(:N)
-  forall A:real^N^N. ?B.\n      forall x. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) -\n          sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1 =\n          msum(0..(dimindex(:N)-1)) (\\i. x pow i %% B i) ** (A - x %% mat 1)
-  dimindex(:N)-1
-  (\\i. B i + C i):num->real^N^N
-  A:real^N^N
-  transp A:real^N^N
-  C:num->real^N^N
-  A:real^N^N
-  B:num->real^N^N
-  \\x. (msum(0..dimindex(:N)) (\\i. char_poly A i %% (A:real^N^N) mpow i) -\n         sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1) +\n        sum(0..dimindex(:N)) (\\i. char_poly A i * x pow i) %% mat 1
-  forall g. (forall x. g x = k) /\\ (?a b c. forall x. f a b c x = g x)\n        ==> ?a b c. forall x. f a b c x = k
-  forall A:real^N^N. msum(0..dimindex(:N)) (\\i. char_poly A i %% A mpow i) = mat 0
+  (a : Real) - (x : Real) * (d : Real) == a + -d * x
+  IN((p : (Num) -> Num)((k : Num)), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  (k : Num)
+  (p : (Num) -> Num)
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\131 c : (Num) -> Real, \226\136\128 x : Real, (det : (Cart[Cart[Real, N], N]) -> Real)(A - (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(x, (mat : (Num) -> Cart[Cart[Real, N], N])(1))) == (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => c(i) * pow(x, i))
+  (j : Num)
+  (i : Num)
+  (x : Real)
+  (i : Num) => (lambda : ((Num) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((j : Num) => (lambda : ((Num) -> Real) -> Cart[Real, N])((k : Num) => (op_dollar : (Cart[(Num) -> Real, N], Num, Num) -> Real)((op_dollar : (Cart[Cart[(Num) -> Real, N], N], Num) -> Cart[(Num) -> Real, N])((c : Cart[Cart[(Num) -> Real, N], N]), j), k, i)))
+  (c : Cart[Cart[(Num) -> Real, N], N])
+  (A : Cart[Cart[Real, N], N])
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\131 C : (Num) -> Cart[Cart[Real, N], N], \226\136\128 x : Real, (cofactor : (Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(A - (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(x, (mat : (Num) -> Cart[Cart[Real, N], N])(1))) == (msum : ((Num) -> Bool, (Num) -> Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1), (i : Num) => (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(pow(x, i), C(i)))
+  (i : Num) <= (n : Num) \226\134\146 SUC(n) - i == SUC(n - i)
+  (i : Num)
+  matrix_mul(mpow((A : Cart[Cart[Real, N], N]), SUC((n : Num))) - op_pct_pct(pow((x : Real), SUC(n)), mat(1)), A) + matrix_mul(op_pct_pct(pow(x, SUC(n)), mat(1)), A - op_pct_pct(x, mat(1)))
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 x : Real, \226\136\128 n : Num, mpow(A, SUC(n)) - op_pct_pct(pow(x, SUC(n)), mat(1)) == matrix_mul(msum(op_dot_dot(0, n), (i : Num) => op_pct_pct(pow(x, i), mpow(A, n - i))), A - op_pct_pct(x, mat(1)))
+  ((0 <= (i : Num) && i <= (n : Num)) && i <= n - 1) == (0 <= i && i <= n - 1)
+  (x : Real)
+  (i : Num) => (if i <= (n : Num) - 1 { (B : (Num) -> Cart[Cart[Real, N], N])(i) } else { mat(0) }) + op_pct_pct((c : (Num) -> Real)(SUC(n)), mpow((A : Cart[Cart[Real, N], N]), n - i))
+  (A : Cart[Cart[Real, N], N]) + (B : Cart[Cart[Real, N], N]) + ((C : Cart[Cart[Real, N], N]) + (D : Cart[Cart[Real, N], N])) == A + C + (B + D)
+  (B : (Num) -> Cart[Cart[Real, N], N])
+  (i : Num) => (mat : (Num) -> Cart[Cart[Real, N], N])(0)
+  (c : (Num) -> Real)
+  char_poly((A : Cart[Cart[Real, N], N]))
+  (n : Num)
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\131 B : (Num) -> Cart[Cart[Real, N], N], \226\136\128 x : Real, (msum : ((Num) -> Bool, (Num) -> Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((char_poly : (Cart[Cart[Real, N], N], Num) -> Real)(A, i), (mpow : (Cart[Cart[Real, N], N], Num) -> Cart[Cart[Real, N], N])(A, i))) - (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (char_poly : (Cart[Cart[Real, N], N], Num) -> Real)(A, i) * pow(x, i)), (mat : (Num) -> Cart[Cart[Real, N], N])(1)) == (matrix_mul : (Cart[Cart[Real, N], N], Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((msum : ((Num) -> Bool, (Num) -> Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1), (i : Num) => (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(pow(x, i), B(i))), A - (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(x, (mat : (Num) -> Cart[Cart[Real, N], N])(1)))
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1
+  (i : Num) => (B : (Num) -> Cart[Cart[Real, N], N])(i) + (C : (Num) -> Cart[Cart[Real, N], N])(i)
+  (A : Cart[Cart[Real, N], N])
+  transp((A : Cart[Cart[Real, N], N]))
+  (C : (Num) -> Cart[Cart[Real, N], N])
+  (A : Cart[Cart[Real, N], N])
+  (B : (Num) -> Cart[Cart[Real, N], N])
+  (x : Real) => (msum : ((Num) -> Bool, (Num) -> Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((char_poly : (Cart[Cart[Real, N], N], Num) -> Real)((A : Cart[Cart[Real, N], N]), i), (mpow : (Cart[Cart[Real, N], N], Num) -> Cart[Cart[Real, N], N])(A, i))) - (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (char_poly : (Cart[Cart[Real, N], N], Num) -> Real)(A, i) * pow(x, i)), (mat : (Num) -> Cart[Cart[Real, N], N])(1)) + (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (char_poly : (Cart[Cart[Real, N], N], Num) -> Real)(A, i) * pow(x, i)), (mat : (Num) -> Cart[Cart[Real, N], N])(1))
+  \226\136\128 g : (_) -> _, (\226\136\128 x : _, g(x) == (k : _)) && (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\128 x : _, (f : (_, _, _, _) -> _)(a, b, c, x) == g(x)) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\128 x : _, f(a, b, c, x) == k)
+  \226\136\128 A : Cart[Cart[Real, N], N], (msum : ((Num) -> Bool, (Num) -> Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])((char_poly : (Cart[Cart[Real, N], N], Num) -> Real)(A, i), (mpow : (Cart[Cart[Real, N], N], Num) -> Cart[Cart[Real, N], N])(A, i))) == (mat : (Num) -> Cart[Cart[Real, N], N])(0)
 mpow =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) #_0:num))) (#mat:fun(num,cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#forall:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) (#SUC:fun(num,num) n:num))) ((#matrix_mul:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) n:num))))))))
 MPOW_ADD =  |- (#forall:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) ((#+:fun(num,fun(num,num)) m:num) n:num))) ((#matrix_mul:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),cart(cart(real,'N),'N))) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) m:num)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) n:num)))))))))
 MPOW_1 =  |- (#forall:fun(fun(cart(cart(real,'N),'N),bool),bool) (\A:cart(cart(real,'N),'N). ((#=:fun(cart(cart(real,'N),'N),fun(cart(cart(real,'N),'N),bool)) ((#mpow:fun(cart(cart(real,'N),'N),fun(num,cart(cart(real,'N),'N))) A:cart(cart(real,'N),'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) A:cart(cart(real,'N),'N))))
