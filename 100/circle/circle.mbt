@@ -76,7 +76,7 @@ fn step_1() -> Unit raise {
   let t1 = @parser.parse_type("M")
   let t4 = @tactics.match_mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("1"), t1), t3]), @realanalysis.fubini_simple_compact()))
   let t62 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4), t5), t6), t7), t8), t9), t12), t13), t14), t15), t16), @tactics.conj_tac), t33), t37), t38), t39), t40), t41), t42), @tactics.conj_tac), t61)
-  area_unit_cball_c.set(@tactics.prove(@parser.parse_term("measure(cball(vec 0:real^2,&1)) = pi"), t62))
+  area_unit_cball_c.set(@tactics.prove(@term_syntax.parse_term("(measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)((cball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), real_of_num(1)))) == pi"), t62))
 }
 
 ///|
@@ -141,7 +141,7 @@ fn step_2() -> Unit raise {
   let t71 = @term_syntax.parse_term("pi")
   let t72 = @term_syntax.parse_term("(z : Cart[Real, Tybit0[Unit]])")
   let t73 = @term_syntax.parse_term("(r : Real)")
-  let t74 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("cball(vec 0:real^2,&1)"), t73, t72, t71]), @measure.has_measure_affinity()))
+  let t74 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(cball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), real_of_num(1)))"), t73, t72, t71]), @measure.has_measure_affinity()))
   let t70 = @tactics.subgoal_then(@term_syntax.parse_term("real_of_num(0) < (r : Real)"), fn(x67 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s68 = @tactics.assume_tac(x67)
     fn(x69 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
