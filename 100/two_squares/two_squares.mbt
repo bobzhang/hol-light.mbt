@@ -77,7 +77,7 @@ pub fn involution_stepdown() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([]))
   let t8 = @tactics.then_tac(@simp.rewrite_tac(@list.List([involution(), @sets.in_elim_thm()])), t7)
-  involution_nofixes_c.set(@tactics.prove(@parser.parse_term("involution f s ==> involution f {x | x IN s /\\ ~(f x = x)}"), t8))
+  involution_nofixes_c.set(@tactics.prove(@term_syntax.parse_term("involution((f : (_) -> _), (s : (_) -> Bool)) → involution(f, {(x : _) | IN(x, s) && !(f(x) == x)})"), t8))
 }
 
 ///|
@@ -191,7 +191,7 @@ pub fn involution_fix_fix() -> @kernel.Thm {
 ///|
 /// zset
 fn step_12() -> Unit raise {
-  zset_c.set(@pair.new_definition(@parser.parse_term("zset(a) = {(x,y,z) | x EXP 2 + 4 * y * z = a}")))
+  zset_c.set(@pair.new_definition(@term_syntax.parse_term("(zset : (Num, (Num, Num, Num)) -> Bool)((a : Num)) == {((x : Num), (y : Num), (z : Num)) | EXP(x, 2) + 4 * (y * z) == a}")))
 }
 
 ///|
@@ -266,7 +266,7 @@ pub fn zag_involution_general() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t42 = @meson.meson_tac(@list.List([]))
   let t43 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @pair.pair_eq()])), t42)
-  in_triple_c.set(@tactics.prove(@parser.parse_term("(a,b,c) IN {(x,y,z) | P x y z} <=> P a b c"), t43))
+  in_triple_c.set(@tactics.prove(@term_syntax.parse_term("IN(((a : _), (b : _), (c : _)), {((x : _), (y : _), (z : _)) | (P : (_, _, _) -> Bool)(x, y, z)}) == P(a, b, c)"), t43))
 }
 
 ///|

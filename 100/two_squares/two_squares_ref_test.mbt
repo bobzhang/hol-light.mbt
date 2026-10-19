@@ -12707,18 +12707,18 @@ test "100/two_squares matches 100/two_squares.ml" {
       #|  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, involution(f, s) \226\134\146 IMAGE(f, s) == s
       #|  involution((f : (_) -> _), (s : (_) -> Bool)) && IN((a : _), s) && f(a) == a \226\134\146 involution(f, DELETE(s, a))
       #|  involution((f : (_) -> _), (s : (_) -> Bool)) && IN((a : _), s) \226\134\146 involution(f, DIFF(s, INSERT(a, INSERT(f(a), EMPTY))))
-      #|  involution f s ==> involution f {x | x IN s /\\ ~(f x = x)}
+      #|  involution((f : (_) -> _), (s : (_) -> Bool)) \226\134\146 involution(f, {(x : _) | IN(x, s) && !(f(x) == x)})
       #|  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, involution(f, s) && (\226\136\128 x : _, IN(x, t) \226\134\146 IN(f(x), t)) && SUBSET(t, s) \226\134\146 involution(f, t)
       #|  \226\136\128 s : (A) -> Bool, FINITE(s) && involution((f : (A) -> A), s) && (\226\136\128 x : A, IN(x, s) \226\134\146 !(f(x) == x)) \226\134\146 EVEN(CARD(s))
       #|  (s : (A) -> Bool) == INSERT((a : A), DELETE(s, a))
       #|  FINITE((s : (A) -> Bool)) && involution((f : (A) -> A), s) && existsunique((a : A) => IN(a, s) && f(a) == a) \226\134\146 ODD(CARD(s))
       #|  \226\136\128 n : _, \226\136\128 s : (_) -> Bool, FINITE(s) && involution((f : (_) -> _), s) && ODD(CARD(s)) \226\134\146 (\226\136\131 a : _, IN(a, s) && f(a) == a)
       #|  \226\136\128 f : (_) -> _, \226\136\128 g : (_) -> _, \226\136\128 s : (_) -> Bool, FINITE(s) && involution(f, s) && involution(g, s) && existsunique((x : _) => IN(x, s) && f(x) == x) \226\134\146 (\226\136\131 x : _, IN(x, s) && g(x) == x)
-      #|  zset(a) = {(x,y,z) | x EXP 2 + 4 * y * z = a}
+      #|  (zset : (Num, (Num, Num, Num)) -> Bool)((a : Num)) == {((x : Num), (y : Num), (z : Num)) | EXP(x, 2) + 4 * (y * z) == a}
       #|  (zag : ((Num, Num, Num)) -> (Num, Num, Num))(((x : Num), (y : Num), (z : Num))) == (if x + z < y { (x + 2 * z, z, y - (x + z)) } else { if x < 2 * y { (2 * y - x, y, x + z - y) } else { (x - 2 * y, x + z - y, y) } })
       #|  (tag : ((Num, Num, Num)) -> (Num, Num, Num))(((x : Num), (y : Num), (z : Num))) == (x, z, y)
       #|  0 < (x : Num) && 0 < (y : Num) && 0 < (z : Num) \226\134\146 zag(zag((x, y, z))) == (x, y, z)
-      #|  (a,b,c) IN {(x,y,z) | P x y z} <=> P a b c
+      #|  IN(((a : _), (b : _), (c : _)), {((x : _), (y : _), (z : _)) | (P : (_, _, _) -> Bool)(x, y, z)}) == P(a, b, c)
       #|  (n : Num) == n * 1
       #|  (n : Num)
       #|  (n : Num) == 1
