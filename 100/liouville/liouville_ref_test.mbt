@@ -6057,140 +6057,140 @@ test "100/liouville matches 100/liouville.ml" {
       #|0..0..2..5..10..22..38..60..88..120..158..solved at 195
       #|0..0..solved at 2
       #|100/liouville quotations (135):
-      #|  algebraic(x) <=> ?p. ALL integer p /\\ ~(poly p = poly []) /\\ poly p x = &0
-      #|  transcendental(x) <=> ~(algebraic x)
-      #|  forall x. integer x /\\ abs(x) < &1 ==> x = &0
-      #|  1 <= n <=> 0 < n
-      #|  x * 1 <= a ==> x <= a
-      #|  forall n. n <= FACT n
-      #|  n <= x ==> 1 * x < y ==> SUC n <= y
-      #|  forall a. 1 < a ==> forall n. n <= a EXP n
-      #|  d * abs(f'(z:real))
-      #|  x:real
-      #|  a:real
-      #|  f':real->real
-      #|  f:real->real
-      #|  a:real
-      #|  x:real
-      #|  f':real->real
-      #|  f:real->real
-      #|  x = a \\/ x < a \\/ a < x
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  forall f f' a d M.\n        &0 < M /\\ &0 < d /\\\n        (forall x. abs(x - a) <= d ==> (f diffl f'(x)) x /\\ abs(f' x) < M)\n        ==> forall x. abs(x - a) <= d ==> abs(f x - f a) < M * d
-      #|  (q * qp) * (h + pq * pol) = q * h * qp + (q * pq) * (qp * pol)
-      #|  q = 0
-      #|  forall p q l. ALL integer l ==> integer(&q pow (LENGTH l) * poly l (&p / &q))
-      #|  min d (abs(x - a))
-      #|  forall a s. FINITE s\n         ==> ~(a IN s) ==> ?d. &0 < d /\\ forall x. x IN s ==> d <= abs(x - a)
-      #|  {x | poly p x = &0} DELETE x
-      #|  x:real
-      #|  forall p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?d. &0 < d /\\\n                 forall x'. &0 < abs(x' - x) /\\ abs(x' - x) < d\n                      ==> ~(poly p x' = &0)
-      #|  &0 < d ==> &0 < d / &2 /\\ (x <= d / &2 ==> x < d)
-      #|  d / &2
-      #|  d:real
-      #|  forall p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?d. &0 < d /\\\n                 forall x'. &0 < abs(x' - x) /\\ abs(x' - x) <= d\n                      ==> ~(poly p x' = &0)
-      #|  M:real
-      #|  &1 + abs M
-      #|  M:real
-      #|  x + d
-      #|  x - d
-      #|  poly p
-      #|  forall p d x. ?M. &0 < M /\\ forall x'. abs(x' - x) <= d ==> abs(poly p x') < M
-      #|  M:real
-      #|  y:real
-      #|  min d (inv M)
-      #|  M:real
-      #|  x:real
-      #|  d:real
-      #|  poly_diff p
-      #|  d:real
-      #|  x:real
-      #|  p:real list
-      #|  forall p x. poly p x = &0 /\\ ~(poly p = poly [])\n         ==> ?c. &0 < c /\\\n                 (forall x'. abs(x' - x) <= c\n                       ==> abs(poly(poly_diff p) x') < &1 / c) /\\\n                 (forall x'. &0 < abs(x' - x) /\\ abs(x' - x) <= c\n                       ==> ~(poly p x' = &0))
-      #|  &p / &q
-      #|  ~(q = 0)
-      #|  x <= d ==> d <= e ==> x <= e
-      #|  &1 / c
-      #|  c / &q pow (LENGTH(l:real list))
-      #|  x:real
-      #|  poly(poly_diff l)
-      #|  poly l
-      #|  &q pow (LENGTH(l:real list)) * poly l (&p / &q) = &0
-      #|  ~(q = 0)
-      #|  abs(x - y) <= d ==> d <= e ==> abs(y - x) <= e
-      #|  &p / &q
-      #|  forall x'. &0 < abs(x' - x) /\\ abs(x' - x) <= c ==> ~(poly l x' = &0)
-      #|  &p / &q = x
-      #|  q:num
-      #|  p:num
-      #|  c:real
-      #|  x:real
-      #|  l:real list
-      #|  LENGTH(l:real list)
-      #|  l:real list
-      #|  forall x. algebraic x\n       ==> ?n c. c > &0 /\\\n                 forall p q. ~(q = 0) ==> &p / &q = x \\/\n                                    abs(x - &p / &q) > c / &q pow n
-      #|  forall x. algebraic x /\\ ~rational x\n       ==> ?n c. c > &0 /\\ forall p q. ~(q = 0) ==> abs(x - &p / &q) > c / &q pow n
-      #|  liouville = suminf (\\n. &1 / &10 pow (FACT n))
-      #|  1 * x <= SUC n * x /\\ ~(n * x = 0) ==> 1 <= SUC n * x - x
-      #|  &10 pow 1
-      #|  a <= b ==> x <= a ==> x <= b
-      #|  n + 1
-      #|  n + SUC d = (n + 1) + d
-      #|  y <= x ==> &1 * x + y <= &2 * x
-      #|  forall d n. ~(n = 0)\n         ==> sum(n..n+d) (\\k. &1 / &10 pow FACT k) <= &2 / &10 pow (FACT n)
-      #|  ~(d = 0) ==> (n + d) - 1 = n + (d - 1)
-      #|  d = 0
-      #|  forall n d. ~(n = 0)\n         ==> sum(n,d) (\\k. &1 / &10 pow FACT k) <= &2 / &10 pow (FACT n)
-      #|  10 EXP m
-      #|  m:num
-      #|  inv(e) <= &N
-      #|  &1 < (n + &1 / &2) * e ==> &2 < e * (&2 * n + &1)
-      #|  e * &(2 * N + 1)
-      #|  2 * N + 1 <= m
-      #|  &0 <= x /\\ x <= a ==> abs x <= a
-      #|  &2 / &10 pow (FACT m)
-      #|  2 * N + 1
-      #|  N:num
-      #|  inv(e)
-      #|  e:real
-      #|  (\\k. &1 / &10 pow FACT k) sums liouville
-      #|  d:num
-      #|  m:num
-      #|  n:num
-      #|  \\n:num. sum(0,n) (\\k. &1 / &10 pow FACT k)
-      #|  \\j:num. sum(0,n) (\\k. &1 / &10 pow FACT k)
-      #|  forall n. sum(0,n) (\\k. &1 / &10 pow FACT k) <= liouville
-      #|  &0 < e ==> x + e <= y ==> x < y
-      #|  SUC n
-      #|  forall n. sum(0,n) (\\k. &1 / &10 pow FACT k) < liouville
-      #|  d:num
-      #|  m:num
-      #|  n:num
-      #|  \\j:num. sum (0,n) (\\k. &1 / &10 pow FACT k) + &2 / &10 pow FACT n
-      #|  \\n. sum(0,n) (\\k. &1 / &10 pow FACT k)
-      #|  forall n. ~(n = 0)\n       ==> liouville\n             <= sum(0,n) (\\k. &1 / &10 pow FACT k) + &2 / &10 pow (FACT n)
-      #|  1 <= x <=> 0 < x
-      #|  k = k * 1
-      #|  k + f * m <= SUC(m + k) * f <=> k <= (k + 1) * f
+      #|  (algebraic : (Real) -> Bool)((x : Real)) == (\226\136\131 p : List[Real], ALL(integer, p) && !(poly(p) == poly(NIL)) && poly(p, x) == real_of_num(0))
+      #|  (transcendental : (Real) -> Bool)((x : Real)) == !algebraic(x)
+      #|  \226\136\128 x : Real, integer(x) && abs(x) < real_of_num(1) \226\134\146 x == real_of_num(0)
+      #|  (1 <= (n : Num)) == (0 < n)
+      #|  (x : Num) * 1 <= (a : Num) \226\134\146 x <= a
+      #|  \226\136\128 n : Num, n <= FACT(n)
+      #|  (n : Num) <= (x : Num) \226\134\146 1 * x < (y : Num) \226\134\146 SUC(n) <= y
+      #|  \226\136\128 a : Num, 1 < a \226\134\146 (\226\136\128 n : Num, n <= EXP(a, n))
+      #|  (d : Real) * abs((f' : (Real) -> Real)((z : Real)))
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  (f' : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (a : Real)
+      #|  (x : Real)
+      #|  (f' : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real) == (a : Real) || x < a || a < x
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, \226\136\128 d : Real, \226\136\128 M : Real, real_of_num(0) < M && real_of_num(0) < d && (\226\136\128 x : Real, abs(x - a) <= d \226\134\146 diffl(f, f'(x), x) && abs(f'(x)) < M) \226\134\146 (\226\136\128 x : Real, abs(x - a) <= d \226\134\146 abs(f(x) - f(a)) < M * d)
+      #|  (q : Real) * (qp : Real) * ((h : Real) + (pq : Real) * (pol : Real)) == q * (h * qp) + q * pq * (qp * pol)
+      #|  (q : Num) == 0
+      #|  \226\136\128 p : Num, \226\136\128 q : Num, \226\136\128 l : List[Real], ALL(integer, l) \226\134\146 integer(pow(real_of_num(q), LENGTH(l)) * poly(l, real_of_num(p) / real_of_num(q)))
+      #|  min((d : Real), abs((x : Real) - (a : Real)))
+      #|  \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, FINITE(s) \226\134\146 !IN(a, s) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) \226\134\146 d <= abs(x - a)))
+      #|  DELETE({(x : Real) | poly((p : List[Real]), x) == real_of_num(0)}, (x : Real))
+      #|  (x : Real)
+      #|  \226\136\128 p : List[Real], \226\136\128 x : Real, poly(p, x) == real_of_num(0) && !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, real_of_num(0) < abs(x' - x) && abs(x' - x) < d \226\134\146 !(poly(p, x') == real_of_num(0))))
+      #|  real_of_num(0) < (d : Real) \226\134\146 real_of_num(0) < d / real_of_num(2) && ((x : Real) <= d / real_of_num(2) \226\134\146 x < d)
+      #|  (d : Real) / real_of_num(2)
+      #|  (d : Real)
+      #|  \226\136\128 p : List[Real], \226\136\128 x : Real, poly(p, x) == real_of_num(0) && !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, real_of_num(0) < abs(x' - x) && abs(x' - x) <= d \226\134\146 !(poly(p, x') == real_of_num(0))))
+      #|  (M : Real)
+      #|  real_of_num(1) + abs((M : Real))
+      #|  (M : Real)
+      #|  (x : Real) + (d : Real)
+      #|  (x : Real) - (d : Real)
+      #|  poly((p : List[Real]))
+      #|  \226\136\128 p : List[Real], \226\136\128 d : Real, \226\136\128 x : Real, \226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 x' : Real, abs(x' - x) <= d \226\134\146 abs(poly(p, x')) < M)
+      #|  (M : Real)
+      #|  (y : Real)
+      #|  min((d : Real), inv((M : Real)))
+      #|  (M : Real)
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  poly_diff((p : List[Real]))
+      #|  (d : Real)
+      #|  (x : Real)
+      #|  (p : List[Real])
+      #|  \226\136\128 p : List[Real], \226\136\128 x : Real, poly(p, x) == real_of_num(0) && !(poly(p) == poly(NIL)) \226\134\146 (\226\136\131 c : Real, real_of_num(0) < c && (\226\136\128 x' : Real, abs(x' - x) <= c \226\134\146 abs(poly(poly_diff(p), x')) < real_of_num(1) / c) && (\226\136\128 x' : Real, real_of_num(0) < abs(x' - x) && abs(x' - x) <= c \226\134\146 !(poly(p, x') == real_of_num(0))))
+      #|  real_of_num((p : Num)) / real_of_num((q : Num))
+      #|  !((q : Num) == 0)
+      #|  (x : Real) <= (d : Real) \226\134\146 d <= (e : Real) \226\134\146 x <= e
+      #|  real_of_num(1) / (c : Real)
+      #|  (c : Real) / pow(real_of_num((q : Num)), LENGTH((l : List[Real])))
+      #|  (x : Real)
+      #|  poly(poly_diff((l : List[Real])))
+      #|  poly((l : List[Real]))
+      #|  pow(real_of_num((q : Num)), LENGTH((l : List[Real]))) * poly(l, real_of_num((p : Num)) / real_of_num(q)) == real_of_num(0)
+      #|  !((q : Num) == 0)
+      #|  abs((x : Real) - (y : Real)) <= (d : Real) \226\134\146 d <= (e : Real) \226\134\146 abs(y - x) <= e
+      #|  real_of_num((p : Num)) / real_of_num((q : Num))
+      #|  \226\136\128 x' : Real, real_of_num(0) < abs(x' - (x : Real)) && abs(x' - x) <= (c : Real) \226\134\146 !(poly((l : List[Real]), x') == real_of_num(0))
+      #|  real_of_num((p : Num)) / real_of_num((q : Num)) == (x : Real)
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (l : List[Real])
+      #|  LENGTH((l : List[Real]))
+      #|  (l : List[Real])
+      #|  \226\136\128 x : Real, algebraic(x) \226\134\146 (\226\136\131 n : Num, \226\136\131 c : Real, c > real_of_num(0) && (\226\136\128 p : Num, \226\136\128 q : Num, !(q == 0) \226\134\146 real_of_num(p) / real_of_num(q) == x || abs(x - real_of_num(p) / real_of_num(q)) > c / pow(real_of_num(q), n)))
+      #|  \226\136\128 x : Real, algebraic(x) && !rational(x) \226\134\146 (\226\136\131 n : Num, \226\136\131 c : Real, c > real_of_num(0) && (\226\136\128 p : Num, \226\136\128 q : Num, !(q == 0) \226\134\146 abs(x - real_of_num(p) / real_of_num(q)) > c / pow(real_of_num(q), n)))
+      #|  (liouville : Real) == suminf((n : Num) => real_of_num(1) / pow(real_of_num(10), FACT(n)))
+      #|  1 * (x : Num) <= SUC((n : Num)) * x && !(n * x == 0) \226\134\146 1 <= SUC(n) * x - x
+      #|  pow(real_of_num(10), 1)
+      #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+      #|  (n : Num) + 1
+      #|  (n : Num) + SUC((d : Num)) == n + 1 + d
+      #|  (y : Real) <= (x : Real) \226\134\146 real_of_num(1) * x + y <= real_of_num(2) * x
+      #|  \226\136\128 d : Num, \226\136\128 n : Num, !(n == 0) \226\134\146 sum(op_dot_dot(n, n + d), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k))) <= real_of_num(2) / pow(real_of_num(10), FACT(n))
+      #|  !((d : Num) == 0) \226\134\146 (n : Num) + d - 1 == n + (d - 1)
+      #|  (d : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 d : Num, !(n == 0) \226\134\146 sum((n, d), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k))) <= real_of_num(2) / pow(real_of_num(10), FACT(n))
+      #|  EXP(10, (m : Num))
+      #|  (m : Num)
+      #|  inv((e : Real)) <= real_of_num((N : Num))
+      #|  real_of_num(1) < ((n : Real) + real_of_num(1) / real_of_num(2)) * (e : Real) \226\134\146 real_of_num(2) < e * (real_of_num(2) * n + real_of_num(1))
+      #|  (e : Real) * real_of_num(2 * (N : Num) + 1)
+      #|  2 * (N : Num) + 1 <= (m : Num)
+      #|  real_of_num(0) <= (x : Real) && x <= (a : Real) \226\134\146 abs(x) <= a
+      #|  real_of_num(2) / pow(real_of_num(10), FACT((m : Num)))
+      #|  2 * (N : Num) + 1
+      #|  (N : Num)
+      #|  inv((e : Real))
+      #|  (e : Real)
+      #|  sums((k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k)), liouville)
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num) => sum((0, n), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k)))
+      #|  (j : Num) => sum((0, (n : Num)), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k)))
+      #|  \226\136\128 n : Num, sum((0, n), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k))) <= liouville
+      #|  real_of_num(0) < (e : Real) \226\134\146 (x : Real) + e <= (y : Real) \226\134\146 x < y
+      #|  SUC((n : Num))
+      #|  \226\136\128 n : Num, sum((0, n), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k))) < liouville
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (j : Num) => sum((0, (n : Num)), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k))) + real_of_num(2) / pow(real_of_num(10), FACT(n))
+      #|  (n : Num) => sum((0, n), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k)))
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 liouville <= sum((0, n), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k))) + real_of_num(2) / pow(real_of_num(10), FACT(n))
+      #|  (1 <= (x : Num)) == (0 < x)
+      #|  (k : Num) == k * 1
+      #|  ((k : Num) + (f : Num) * (m : Num) <= SUC(m + k) * f) == (k <= (k + 1) * f)
       #|  1
-      #|  (m + k + 1) - 1 = m + k
-      #|  &10 pow k
-      #|  &2 / &10 pow (FACT n)
-      #|  &0 <= x /\\ x <= y ==> abs x <= y
-      #|  m + k + 1
+      #|  (m : Num) + ((k : Num) + 1) - 1 == m + k
+      #|  pow(real_of_num(10), (k : Num))
+      #|  real_of_num(2) / pow(real_of_num(10), FACT((n : Num)))
+      #|  real_of_num(0) <= (x : Real) && x <= (y : Real) \226\134\146 abs(x) <= y
+      #|  (m : Num) + ((k : Num) + 1)
       #|  0
-      #|  f:num->real
-      #|  f:num->real
-      #|  &(nsum(0..n-1) (\\i. 10 EXP (FACT(n-1) - FACT i))) / &(10 EXP (FACT(n-1))) =\n    sum(0..n-1) (\\k. &1 / &10 pow (FACT k))
-      #|  10 EXP (FACT(n-1))
-      #|  nsum(0..n-1) (\\i. 10 EXP (FACT(n-1) - FACT i))
-      #|  n = m + k + 1
-      #|  k:num
-      #|  &2 / c
-      #|  &10
-      #|  c:real
-      #|  m:num
-      #|  ~(a /\\ b) <=> a ==> ~b
+      #|  (f : (Num) -> Real)
+      #|  (f : (Num) -> Real)
+      #|  real_of_num(nsum(op_dot_dot(0, (n : Num) - 1), (i : Num) => EXP(10, FACT(n - 1) - FACT(i)))) / real_of_num(EXP(10, FACT(n - 1))) == sum(op_dot_dot(0, n - 1), (k : Num) => real_of_num(1) / pow(real_of_num(10), FACT(k)))
+      #|  EXP(10, FACT((n : Num) - 1))
+      #|  nsum(op_dot_dot(0, (n : Num) - 1), (i : Num) => EXP(10, FACT(n - 1) - FACT(i)))
+      #|  (n : Num) == (m : Num) + ((k : Num) + 1)
+      #|  (k : Num)
+      #|  real_of_num(2) / (c : Real)
+      #|  real_of_num(10)
+      #|  (c : Real)
+      #|  (m : Num)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
       #|  transcendental(liouville)
       #|algebraic =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) (#algebraic:fun(real,bool) x:real)) (#?:fun(fun(list(real),bool),bool) (\p:list(real). ((#/\:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(real,bool),fun(list(real),bool)) #integer:fun(real,bool)) p:list(real))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun(real,real),fun(fun(real,real),bool)) (#poly:fun(list(real),fun(real,real)) p:list(real))) (#poly:fun(list(real),fun(real,real)) #NIL:list(real))))) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) p:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
       #|transcendental =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(bool,fun(bool,bool)) (#transcendental:fun(real,bool) x:real)) (#~:fun(bool,bool) (#algebraic:fun(real,bool) x:real)))))
