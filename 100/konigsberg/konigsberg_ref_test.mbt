@@ -5691,48 +5691,48 @@ test "100/konigsberg matches 100/konigsberg.ml" {
       #|0..0..0..0..0..solved at 47
       #|0..0..0..0..0..solved at 47
       #|100/konigsberg quotations (46):
-      #|  edges(E:E->bool,V:V->bool,Ter:E->V->bool) = E
-      #|  vertices(E:E->bool,V:V->bool,Ter:E->V->bool) = V
-      #|  termini(E:E->bool,V:V->bool,Ter:E->V->bool) = Ter
-      #|  graph G <=>\n        forall e. e IN edges(G)\n            ==> ?a b. a IN vertices(G) /\\ b IN vertices(G) /\\\n                      termini G e = {a,b}
-      #|  forall G e v. graph G /\\ e IN edges(G) /\\ v IN termini G e ==> v IN vertices G
-      #|  connects G e (a,b) <=> termini G e = {a,b}
-      #|  delete_edge e (E,V,Ter) = (E DELETE e,V,Ter)
-      #|  (forall G. edges(delete_edge e G) = (edges G) DELETE e) /\\\n   (forall G. vertices(delete_edge e G) = vertices G) /\\\n   (forall G. termini(delete_edge e G) = termini G)
-      #|  forall G e. graph G ==> graph(delete_edge e G)
+      #|  (edges : (((E) -> Bool, (V) -> Bool, (E, V) -> Bool), E) -> Bool)(((E : (E) -> Bool), (V : (V) -> Bool), (Ter : (E, V) -> Bool))) == E
+      #|  (vertices : (((E) -> Bool, (V) -> Bool, (E, V) -> Bool), V) -> Bool)(((E : (E) -> Bool), (V : (V) -> Bool), (Ter : (E, V) -> Bool))) == V
+      #|  (termini : (((E) -> Bool, (V) -> Bool, (E, V) -> Bool), E, V) -> Bool)(((E : (E) -> Bool), (V : (V) -> Bool), (Ter : (E, V) -> Bool))) == Ter
+      #|  (graph : (((_) -> Bool, (_) -> Bool, (_, _) -> Bool)) -> Bool)((G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool))) == (\226\136\128 e : _, IN(e, edges(G)) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, IN(a, vertices(G)) && IN(b, vertices(G)) && termini(G, e) == INSERT(a, INSERT(b, EMPTY))))
+      #|  \226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), \226\136\128 e : _, \226\136\128 v : _, graph(G) && IN(e, edges(G)) && IN(v, termini(G, e)) \226\134\146 IN(v, vertices(G))
+      #|  (connects : (((_) -> Bool, (_) -> Bool, (_, _) -> Bool), _, (_, _)) -> Bool)((G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool)), (e : _), ((a : _), (b : _))) == (termini(G, e) == INSERT(a, INSERT(b, EMPTY)))
+      #|  (delete_edge : (_, ((_) -> Bool, _, _)) -> ((_) -> Bool, _, _))((e : _), ((E : (_) -> Bool), (V : _), (Ter : _))) == (DELETE(E, e), V, Ter)
+      #|  (\226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), edges(delete_edge((e : _), G)) == DELETE(edges(G), e)) && (\226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), vertices(delete_edge(e, G)) == vertices(G)) && (\226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), termini(delete_edge(e, G)) == termini(G))
+      #|  \226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), \226\136\128 e : _, graph(G) \226\134\146 graph(delete_edge(e, G))
       #|  locally_finite G <=>\n     forall v. v IN vertices(G) ==> FINITE {e | e IN edges G /\\ v IN termini G e}
-      #|  localdegree G v e =\n        if termini G e = {v} then 2\n        else if v IN termini G e then 1\n        else 0
+      #|  (localdegree : (((_) -> Bool, (_) -> Bool, (_, _) -> Bool), _, _) -> Num)((G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool)), (v : _), (e : _)) == (if termini(G, e) == INSERT(v, EMPTY) { 2 } else { if IN(v, termini(G, e)) { 1 } else { 0 } })
       #|  degree G v = nsum {e | e IN edges G /\\ v IN termini G e} (localdegree G v)
       #|  nsum {e':E | (e' IN edges G /\\ ~(e' = e)) /\\ (v:V) IN termini G e'}\n         (localdegree (delete_edge e G) v) =\n    nsum {e' | (e' IN edges G /\\ ~(e' = e)) /\\ v IN termini G e'}\n         (localdegree G v)
       #|  {e:E | e IN edges G /\\ (v:V) IN termini G e}
       #|  FINITE {e':E | (e' IN edges G /\\ ~(e' = e)) /\\ (v:V) IN termini G e'}
-      #|  (v:V) IN termini G (e:E)
+      #|  IN((v : V), termini((G : ((E) -> Bool, (V) -> Bool, (E, V) -> Bool)), (e : E)))
       #|  {e:E | e IN edges G /\\ (v:V) IN termini G e} =\n        if v IN termini G e\n        then e INSERT {e' | (e' IN edges G /\\ ~(e' = e)) /\\ v IN termini G e'}\n        else {e' | (e' IN edges G /\\ ~(e' = e)) /\\ v IN termini G e'}
-      #|  forall G e:E v:V.\n        graph G /\\ locally_finite G /\\ e IN edges(G)\n        ==> degree G v =\n                if termini G e = {v} then degree (delete_edge e G) v + 2\n                else if v IN termini G e then degree (delete_edge e G) v + 1\n                else degree (delete_edge e G) v
-      #|  (forall G a. a IN vertices G /\\ edges G = {} ==> eulerian G [] (a,a)) /\\\n  (forall G a b c e es. e IN edges(G) /\\ connects G e (a,b) /\\\n                  eulerian (delete_edge e G) es (b,c)\n                  ==> eulerian G (CONS e es) (a,c))
-      #|  forall G es ab. eulerian G es ab ==> FINITE (edges G)
-      #|  {a,b} = {v} <=> a = b /\\ a = v
-      #|  {a,a} = {v} <=> v = a
-      #|  b:V = a
-      #|  e:E
-      #|  G:(E->bool)#(V->bool)#(E->V->bool)
-      #|  edges(G:(E->bool)#(V->bool)#(E->V->bool))
-      #|  v:V
-      #|  e:E
-      #|  G:(E->bool)#(V->bool)#(E->V->bool)
-      #|  v:V
+      #|  \226\136\128 G : ((E) -> Bool, (V) -> Bool, (E, V) -> Bool), \226\136\128 e : E, \226\136\128 v : V, graph(G) && locally_finite(G) && IN(e, edges(G)) \226\134\146 degree(G, v) == (if termini(G, e) == INSERT(v, EMPTY) { degree(delete_edge(e, G), v) + 2 } else { if IN(v, termini(G, e)) { degree(delete_edge(e, G), v) + 1 } else { degree(delete_edge(e, G), v) } })
+      #|  (\226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), \226\136\128 a : _, IN(a, vertices(G)) && edges(G) == EMPTY \226\134\146 (eulerian : (((_) -> Bool, (_) -> Bool, (_, _) -> Bool), List[_], (_, _)) -> Bool)(G, NIL, (a, a))) && (\226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), \226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 e : _, \226\136\128 es : List[_], IN(e, edges(G)) && connects(G, e, (a, b)) && eulerian(delete_edge(e, G), es, (b, c)) \226\134\146 eulerian(G, CONS(e, es), (a, c)))
+      #|  \226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), \226\136\128 es : List[_], \226\136\128 ab : (_, _), eulerian(G, es, ab) \226\134\146 FINITE(edges(G))
+      #|  (INSERT((a : _), INSERT((b : _), EMPTY)) == INSERT((v : _), EMPTY)) == (a == b && a == v)
+      #|  (INSERT((a : _), INSERT(a, EMPTY)) == INSERT((v : _), EMPTY)) == (v == a)
+      #|  (b : V) == (a : V)
+      #|  (e : E)
+      #|  (G : ((E) -> Bool, (V) -> Bool, (E, V) -> Bool))
+      #|  edges((G : ((E) -> Bool, (V) -> Bool, (E, V) -> Bool)))
+      #|  (v : V)
+      #|  (e : E)
+      #|  (G : ((E) -> Bool, (V) -> Bool, (E, V) -> Bool))
+      #|  (v : V)
       #|  {x | F} = {}
-      #|  forall G:(E->bool)#(V->bool)#(E->V->bool) es ab.\n        eulerian G es ab\n        ==> graph G\n            ==> FINITE(edges G) /\\\n                forall v. v IN vertices G\n                    ==> (ODD(degree G v) <=>\n                         ~(FST ab = SND ab) /\\ (v = FST ab \\/ v = SND ab))
-      #|  forall G es a b.\n        graph G /\\ eulerian G es (a,b)\n        ==> forall v. v IN vertices G\n                ==> (ODD(degree G v) <=> ~(a = b) /\\ (v = a \\/ v = b))
-      #|  {a,b} = {x} <=> x = a /\\ a = b
+      #|  \226\136\128 G : ((E) -> Bool, (V) -> Bool, (E, V) -> Bool), \226\136\128 es : List[E], \226\136\128 ab : (V, V), eulerian(G, es, ab) \226\134\146 graph(G) \226\134\146 FINITE(edges(G)) && (\226\136\128 v : V, IN(v, vertices(G)) \226\134\146 ODD(degree(G, v)) == (!(FST(ab) == SND(ab)) && (v == FST(ab) || v == SND(ab))))
+      #|  \226\136\128 G : ((_) -> Bool, (_) -> Bool, (_, _) -> Bool), \226\136\128 es : List[_], \226\136\128 a : _, \226\136\128 b : _, graph(G) && eulerian(G, es, (a, b)) \226\134\146 (\226\136\128 v : _, IN(v, vertices(G)) \226\134\146 ODD(degree(G, v)) == (!(a == b) && (v == a || v == b)))
+      #|  (INSERT((a : _), INSERT((b : _), EMPTY)) == INSERT((x : _), EMPTY)) == (x == a && a == b)
       #|  {x | x = a} = {a}
       #|  {x | x = a \\/ P(x)} = a INSERT {x | P(x)}
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  a IN s /\\ k IN t <=> ~(a IN s ==> ~(k IN t))
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  {a,b} = {x,y} <=> a = x /\\ b = y \\/ a = y /\\ b = x
-      #|  G:(num->bool)#(num->bool)#(num->num->bool)
-      #|  forall G. vertices(G) = {0,1,2,3} /\\\n       edges(G) = {10,20,30,40,50,60,70} /\\\n       termini G (10) = {0,1} /\\\n       termini G (20) = {0,2} /\\\n       termini G (30) = {0,3} /\\\n       termini G (40) = {1,2} /\\\n       termini G (50) = {1,2} /\\\n       termini G (60) = {2,3} /\\\n       termini G (70) = {2,3}\n       ==> ~(?es a b. eulerian G es (a,b))
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (IN((a : _), (s : (_) -> Bool)) && IN((k : _), (t : (_) -> Bool))) == !(IN(a, s) \226\134\146 !IN(k, t))
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (INSERT((a : _), INSERT((b : _), EMPTY)) == INSERT((x : _), INSERT((y : _), EMPTY))) == (a == x && b == y || a == y && b == x)
+      #|  (G : ((Num) -> Bool, (Num) -> Bool, (Num, Num) -> Bool))
+      #|  \226\136\128 G : ((Num) -> Bool, (Num) -> Bool, (Num, Num) -> Bool), vertices(G) == INSERT(0, INSERT(1, INSERT(2, INSERT(3, EMPTY)))) && edges(G) == INSERT(10, INSERT(20, INSERT(30, INSERT(40, INSERT(50, INSERT(60, INSERT(70, EMPTY))))))) && termini(G, 10) == INSERT(0, INSERT(1, EMPTY)) && termini(G, 20) == INSERT(0, INSERT(2, EMPTY)) && termini(G, 30) == INSERT(0, INSERT(3, EMPTY)) && termini(G, 40) == INSERT(1, INSERT(2, EMPTY)) && termini(G, 50) == INSERT(1, INSERT(2, EMPTY)) && termini(G, 60) == INSERT(2, INSERT(3, EMPTY)) && termini(G, 70) == INSERT(2, INSERT(3, EMPTY)) \226\134\146 !(\226\136\131 es : List[Num], \226\136\131 a : Num, \226\136\131 b : Num, eulerian(G, es, (a, b)))
       #|  3
       #|  2
       #|  1

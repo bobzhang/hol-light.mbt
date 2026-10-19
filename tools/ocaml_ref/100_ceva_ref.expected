@@ -50251,65 +50251,65 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 100/ceva quotations (59):
-  {a,b} = {b,a}
-  between x (a,b) <=>\n       ?u. &0 <= u /\\ u <= &1 /\\ x = u % a + (&1 - u) % b
-  y:real
-  x:real
-  forall x y. &0 <= x /\\ &0 <= y ==> (x pow 2 = y pow 2 <=> x = y)
-  norm(a) * norm(b) * norm(c) = norm(d) * norm(e) * norm(f) <=>\n   (a dot a) * (b dot b) * (c dot c) = (d dot d) * (e dot e) * (f dot f)
-  x1 / y1
-  ~(y1 = &0) /\\ x2 * y1 = x1 * y2 ==> ?c. x1 = c * y1 /\\ x2 = c * y2
-  a - b:real^2
-  a:real^2 = b
-  forall a b c:real^2.\n        collinear {a:real^2,b,c} <=>\n        ((a$1 - b$1) * (b$2 - c$2) = (a$2 - b$2) * (b$1 - c$1))
-  c:real^2
-  b:real^2
-  b:real^2
-  a:real^2
-  forall A B C X Y Z P:real^2.\n        ~(collinear {A,B,C}) /\\\n        between X (B,C) /\\ between Y (A,C) /\\ between Z (A,B) /\\\n        between P (A,X) /\\ between P (B,Y) /\\ between P (C,Z)\n        ==> dist(B,X) * dist(C,Y) * dist(A,Z) =\n            dist(X,C) * dist(Y,A) * dist(Z,B)
-  x <= &1 ==> &0 <= &1 - x
-  &1 * (&1 - x)
-  z = &0
-  z * (&1 - x) < &1 ==> ~(x + (&1 - x) * (&1 - z) = &0)
-  ~(x + (&1 - x) * (&1 - z) = &0)
-  &1 - (&1 - z) / (x + (&1 - x) * (&1 - z))
-  &1 - y / (&1 - x + x * y)
-  x = &0
-  (a ==> b /\\ c) /\\ (a /\\ b /\\ c ==> d)\n                              ==> a ==> b /\\ c /\\ d
-  (forall x. p x /\\ q x ==> r x) /\\ (?x. p x /\\ q x)\n    ==> (?x. p x /\\ q x /\\ r x)
-  w:real
-  v:real
-  u:real
-  u % A + v % B + w % C:real^2
-  ?u v w. w = (&1 - u) * (&1 - x) /\\\n            v = (&1 - u) * x /\\\n            u = (&1 - v) * (&1 - y) /\\\n            u = (&1 - w) * z /\\\n            v = (&1 - w) * (&1 - z) /\\\n            w = (&1 - v) * y /\\\n            &0 <= u /\\ u <= &1 /\\ &0 <= v /\\ v <= &1 /\\ &0 <= w /\\ w <= &1
-  &0 <= &1 - x <=> x <= &1
-  (a * a') * (b * b') * (c * c') =\n                          (a * b * c) * (a' * b' * c')
-  (x % B + (&1 - x) % C) - C = x % (B - C)
-  B - (x % B + (&1 - x) % C) = (&1 - x) % (B - C)
-  z:real
-  y:real
-  x:real
-  B:real^2 = C
-  A:real^2 = C
-  A:real^2 = B
-  forall A B C X Y Z:real^2.\n        ~(collinear {A,B,C}) /\\\n        between X (B,C) /\\ between Y (C,A) /\\ between Z (A,B)\n        ==> (dist(B,X) * dist(C,Y) * dist(A,Z) =\n             dist(X,C) * dist(Y,A) * dist(Z,B) <=>\n             (?P. between P (A,X) /\\ between P (B,Y) /\\ between P (C,Z)))
-  &1 - u
-  u:real
-  forall u v w. between v (u,w) <=> between v (w,u)
-  x % (y + z % v) = x % y + (x * z) % v
-  norm(u - v:real^N) + norm(v - w)
-  norm(u - v:real^N) / (norm(u - v) + norm(v - w))
-  &0
-  ~(&0 < x + y) ==> &0 <= x /\\ &0 <= y ==> x = &0 /\\ y = &0
-  &0 < norm(u - v:real^N) + norm(v - w)
-  &0 <= c ==> abs c = c
-  c <= &1 ==> abs(&1 - c) = &1 - c
-  a % --(c % (x - y)) = (a * c) % (y - x)
-  (u + c % (w - u)) - w = (&1 - c) % (u - w)
-  u - (u + x):real^N = --x
-  u - w:real^N = (u - v) + (v - w)
-  x % u + (&1 - x) % v = v + x % (u - v)
-  forall u v w:real^N. between v (u,w) <=> dist(u,v) + dist(v,w) = dist(u,w)
+  INSERT((a : _), INSERT((b : _), EMPTY)) == INSERT(b, INSERT(a, EMPTY))
+  between((x : Cart[Real, _]), ((a : Cart[Real, _]), (b : Cart[Real, _]))) == (\226\136\131 u : Real, real_of_num(0) <= u && u <= real_of_num(1) && x == op_pct(u, a) + op_pct(real_of_num(1) - u, b))
+  (y : Real)
+  (x : Real)
+  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 (pow(x, 2) == pow(y, 2)) == (x == y)
+  (norm((a : Cart[Real, _])) * (norm((b : Cart[Real, _])) * norm((c : Cart[Real, _]))) == norm((d : Cart[Real, _])) * (norm((e : Cart[Real, _])) * norm((f : Cart[Real, _])))) == (dot(a, a) * (dot(b, b) * dot(c, c)) == dot(d, d) * (dot(e, e) * dot(f, f)))
+  (x1 : Real) / (y1 : Real)
+  !((y1 : Real) == real_of_num(0)) && (x2 : Real) * y1 == (x1 : Real) * (y2 : Real) \226\134\146 (\226\136\131 c : Real, x1 == c * y1 && x2 == c * y2)
+  (a : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])
+  (a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], collinear(INSERT(a, INSERT(b, INSERT(c, EMPTY)))) == ((op_dollar(a, 1) - op_dollar(b, 1)) * (op_dollar(b, 2) - op_dollar(c, 2)) == (op_dollar(a, 2) - op_dollar(b, 2)) * (op_dollar(b, 1) - op_dollar(c, 1)))
+  (c : Cart[Real, Tybit0[Unit]])
+  (b : Cart[Real, Tybit0[Unit]])
+  (b : Cart[Real, Tybit0[Unit]])
+  (a : Cart[Real, Tybit0[Unit]])
+  \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], \226\136\128 X : Cart[Real, Tybit0[Unit]], \226\136\128 Y : Cart[Real, Tybit0[Unit]], \226\136\128 Z : Cart[Real, Tybit0[Unit]], \226\136\128 P : Cart[Real, Tybit0[Unit]], !collinear(INSERT(A, INSERT(B, INSERT(C, EMPTY)))) && between(X, (B, C)) && between(Y, (A, C)) && between(Z, (A, B)) && between(P, (A, X)) && between(P, (B, Y)) && between(P, (C, Z)) \226\134\146 dist((B, X)) * (dist((C, Y)) * dist((A, Z))) == dist((X, C)) * (dist((Y, A)) * dist((Z, B)))
+  (x : Real) <= real_of_num(1) \226\134\146 real_of_num(0) <= real_of_num(1) - x
+  real_of_num(1) * (real_of_num(1) - (x : Real))
+  (z : Real) == real_of_num(0)
+  (z : Real) * (real_of_num(1) - (x : Real)) < real_of_num(1) \226\134\146 !(x + (real_of_num(1) - x) * (real_of_num(1) - z) == real_of_num(0))
+  !((x : Real) + (real_of_num(1) - x) * (real_of_num(1) - (z : Real)) == real_of_num(0))
+  real_of_num(1) - (real_of_num(1) - (z : Real)) / ((x : Real) + (real_of_num(1) - x) * (real_of_num(1) - z))
+  real_of_num(1) - (y : Real) / (real_of_num(1) - (x : Real) + x * y)
+  (x : Real) == real_of_num(0)
+  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) && (a && b && c \226\134\146 (d : Bool)) \226\134\146 a \226\134\146 b && c && d
+  (\226\136\128 x : _, (p : (_) -> Bool)(x) && (q : (_) -> Bool)(x) \226\134\146 (r : (_) -> Bool)(x)) && (\226\136\131 x : _, p(x) && q(x)) \226\134\146 (\226\136\131 x : _, p(x) && q(x) && r(x))
+  (w : Real)
+  (v : Real)
+  (u : Real)
+  op_pct((u : Real), (A : Cart[Real, Tybit0[Unit]])) + (op_pct((v : Real), (B : Cart[Real, Tybit0[Unit]])) + op_pct((w : Real), (C : Cart[Real, Tybit0[Unit]])))
+  \226\136\131 u : Real, \226\136\131 v : Real, \226\136\131 w : Real, w == (real_of_num(1) - u) * (real_of_num(1) - (x : Real)) && v == (real_of_num(1) - u) * x && u == (real_of_num(1) - v) * (real_of_num(1) - (y : Real)) && u == (real_of_num(1) - w) * (z : Real) && v == (real_of_num(1) - w) * (real_of_num(1) - z) && w == (real_of_num(1) - v) * y && real_of_num(0) <= u && u <= real_of_num(1) && real_of_num(0) <= v && v <= real_of_num(1) && real_of_num(0) <= w && w <= real_of_num(1)
+  (real_of_num(0) <= real_of_num(1) - (x : Real)) == (x <= real_of_num(1))
+  (a : Real) * (a' : Real) * ((b : Real) * (b' : Real) * ((c : Real) * (c' : Real))) == a * (b * c) * (a' * (b' * c'))
+  op_pct((x : Real), (B : Cart[Real, _])) + op_pct(real_of_num(1) - x, (C : Cart[Real, _])) - C == op_pct(x, B - C)
+  (B : Cart[Real, _]) - (op_pct((x : Real), B) + op_pct(real_of_num(1) - x, (C : Cart[Real, _]))) == op_pct(real_of_num(1) - x, B - C)
+  (z : Real)
+  (y : Real)
+  (x : Real)
+  (B : Cart[Real, Tybit0[Unit]]) == (C : Cart[Real, Tybit0[Unit]])
+  (A : Cart[Real, Tybit0[Unit]]) == (C : Cart[Real, Tybit0[Unit]])
+  (A : Cart[Real, Tybit0[Unit]]) == (B : Cart[Real, Tybit0[Unit]])
+  \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], \226\136\128 X : Cart[Real, Tybit0[Unit]], \226\136\128 Y : Cart[Real, Tybit0[Unit]], \226\136\128 Z : Cart[Real, Tybit0[Unit]], !collinear(INSERT(A, INSERT(B, INSERT(C, EMPTY)))) && between(X, (B, C)) && between(Y, (C, A)) && between(Z, (A, B)) \226\134\146 (dist((B, X)) * (dist((C, Y)) * dist((A, Z))) == dist((X, C)) * (dist((Y, A)) * dist((Z, B)))) == (\226\136\131 P : Cart[Real, Tybit0[Unit]], between(P, (A, X)) && between(P, (B, Y)) && between(P, (C, Z)))
+  real_of_num(1) - (u : Real)
+  (u : Real)
+  \226\136\128 u : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], between(v, (u, w)) == between(v, (w, u))
+  op_pct((x : Real), (y : Cart[Real, _]) + op_pct((z : Real), (v : Cart[Real, _]))) == op_pct(x, y) + op_pct(x * z, v)
+  norm((u : Cart[Real, N]) - (v : Cart[Real, N])) + norm(v - (w : Cart[Real, N]))
+  norm((u : Cart[Real, N]) - (v : Cart[Real, N])) / (norm(u - v) + norm(v - (w : Cart[Real, N])))
+  real_of_num(0)
+  !(real_of_num(0) < (x : Real) + (y : Real)) \226\134\146 real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 x == real_of_num(0) && y == real_of_num(0)
+  real_of_num(0) < norm((u : Cart[Real, N]) - (v : Cart[Real, N])) + norm(v - (w : Cart[Real, N]))
+  real_of_num(0) <= (c : Real) \226\134\146 abs(c) == c
+  (c : Real) <= real_of_num(1) \226\134\146 abs(real_of_num(1) - c) == real_of_num(1) - c
+  op_pct((a : Real), -op_pct((c : Real), (x : Cart[Real, _]) - (y : Cart[Real, _]))) == op_pct(a * c, y - x)
+  (u : Cart[Real, _]) + op_pct((c : Real), (w : Cart[Real, _]) - u) - w == op_pct(real_of_num(1) - c, u - w)
+  (u : Cart[Real, N]) - (u + (x : Cart[Real, N])) == -x
+  (u : Cart[Real, N]) - (w : Cart[Real, N]) == u - (v : Cart[Real, N]) + (v - w)
+  op_pct((x : Real), (u : Cart[Real, _])) + op_pct(real_of_num(1) - x, (v : Cart[Real, _])) == v + op_pct(x, u - v)
+  \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], between(v, (u, w)) == (dist((u, v)) + dist((v, w)) == dist((u, w)))
 BETWEEN_THM =  |- ((#=:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'?1),fun(prod(cart(real,'?1),cart(real,'?1)),bool)) x:cart(real,'?1)) ((#,:fun(cart(real,'?1),fun(cart(real,'?1),prod(cart(real,'?1),cart(real,'?1)))) a:cart(real,'?1)) b:cart(real,'?1)))) (#?:fun(fun(real,bool),bool) (\u:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) u:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) u:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(cart(real,'?1),fun(cart(real,'?1),bool)) x:cart(real,'?1)) ((#vector_add:fun(cart(real,'?1),fun(cart(real,'?1),cart(real,'?1))) ((#%:fun(real,fun(cart(real,'?1),cart(real,'?1))) u:real) a:cart(real,'?1))) ((#%:fun(real,fun(cart(real,'?1),cart(real,'?1))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) u:real)) b:cart(real,'?1)))))))))
 NORM_CROSS =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'?2),real) a:cart(real,'?2))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'?3),real) b:cart(real,'?3))) (#vector_norm:fun(cart(real,'?4),real) c:cart(real,'?4))))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'?5),real) d:cart(real,'?5))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'?6),real) e:cart(real,'?6))) (#vector_norm:fun(cart(real,'?7),real) f:cart(real,'?7)))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#dot:fun(cart(real,'?2),fun(cart(real,'?2),real)) a:cart(real,'?2)) a:cart(real,'?2))) ((#real_mul:fun(real,fun(real,real)) ((#dot:fun(cart(real,'?3),fun(cart(real,'?3),real)) b:cart(real,'?3)) b:cart(real,'?3))) ((#dot:fun(cart(real,'?4),fun(cart(real,'?4),real)) c:cart(real,'?4)) c:cart(real,'?4))))) ((#real_mul:fun(real,fun(real,real)) ((#dot:fun(cart(real,'?5),fun(cart(real,'?5),real)) d:cart(real,'?5)) d:cart(real,'?5))) ((#real_mul:fun(real,fun(real,real)) ((#dot:fun(cart(real,'?6),fun(cart(real,'?6),real)) e:cart(real,'?6)) e:cart(real,'?6))) ((#dot:fun(cart(real,'?7),fun(cart(real,'?7),real)) f:cart(real,'?7)) f:cart(real,'?7))))))
 COLLINEAR =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\a:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\b:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\c:cart(real,tybit0(1)). ((#=:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,tybit0(1)),bool),bool) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) a:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) b:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) c:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool)))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) a:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) b:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_sub:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) b:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) c:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#real_mul:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) a:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) b:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_sub:fun(real,fun(real,real)) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) b:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#$:fun(cart(real,tybit0(1)),fun(num,real)) c:cart(real,tybit0(1))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))

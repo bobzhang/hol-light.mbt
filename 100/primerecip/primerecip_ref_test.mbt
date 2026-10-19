@@ -16840,62 +16840,62 @@ test "100/primerecip matches 100/primerecip.ml" {
       #|0..0..solved at 2
       #|0..0..2..6..16..solved at 31
       #|100/primerecip quotations (57):
-      #|  n = 0 \\/ 1 <= n
+      #|  (n : Num) == 0 || 1 <= n
       #|  1
-      #|  forall P. P 0 /\\ P 1 /\\ (forall n. 1 <= n /\\ P n ==> P(SUC n)) ==> forall n. P n
-      #|  1 <= SUC n
-      #|  sum(1..1) f = f 1 /\\ sum(1..SUC n) f = sum(1..n) f + f(SUC n)
-      #|  &6 * &1 * n1 <= &16 * n1 - &5 * n <=> n <= inv(inv(&2)) * n1
-      #|  (&3 / (&16 * l) * i) * &32 * n32 = (n32 / l) * (&6 * i)
-      #|  &1 / &2 * (&32 * n32) / (n1 * l) - &5 * n32 / (n * l) =\n    (n32 / l) * (&16 / n1 - &5 / n)
-      #|  a <= x ==> b <= a ==> b <= x
-      #|  ~(0 < i) <=> i = 0
-      #|  32 EXP n + 1 <= i
-      #|  i:num
-      #|  inv(&32 pow (SUC n)) *\n    sum(32 EXP n + 1 .. 32 EXP SUC n) (\\i. if prime i then &1 else &0)
-      #|  n + 31 * n = 32 * n
-      #|  1 <= n + 1
-      #|  32 * n = n + 31 * n
-      #|  a <= s1 /\\ s2 <= b ==> a - b <= s1 - s2
-      #|  32 EXP 1
-      #|  32 EXP (SUC n)
-      #|  32 EXP 1
-      #|  32 EXP n
-      #|  1 <= SUC n
-      #|  b - a <= s2 - s1 ==> a <= s1 ==> b <= s2
-      #|  n:num
-      #|  &2 pow 5
-      #|  forall n. (&3 / (&16 * ln(&32))) * sum(1..n) (\\i. &1 / &i) <=\n       sum(1..32 EXP n) (\\i. if prime(i) then &1 / &i else &0)
-      #|  &3 / (&32 * ln(&32)) * &n = &3 / (&16 * ln(&32)) * (&n / &2)
-      #|  &3 / (&16 * ln(&32)) * sum (1 .. 2 EXP n) (\\i. &1 / &i)
-      #|  forall n. &3 / (&32 * ln(&32)) * &n\n       <= sum (1 .. 32 EXP (2 EXP n)) (\\i. if prime i then &1 / &i else &0)
-      #|  M + N:num
-      #|  M + N:num
-      #|  M:num
-      #|  l + &1
-      #|  &1
-      #|  forall s. (forall k. ?N. forall n. n >= N ==> sum(1..n) s >= k)\n       ==> ~(convergent(\\n. sum(1..n) s))
-      #|  1 <= n + 1
-      #|  sum(1 .. 32 EXP (2 EXP N)) (\\i. if prime i then &1 / &i else &0)
-      #|  &N * &3 / (&32 * ln (&32))
-      #|  n:num
-      #|  32 EXP (2 EXP N)
-      #|  N:num
-      #|  k:real
-      #|  &3 / (&32 * ln(&32))
-      #|  k:real
-      #|  ~(convergent (\\n. sum (1..n) (\\i. if prime i then &1 / &i else &0)))
-      #|  ~(SUC n <= n)
-      #|  1 <= i <=> ~(i = 0)
-      #|  1..n
+      #|  \226\136\128 P : (Num) -> Bool, P(0) && P(1) && (\226\136\128 n : Num, 1 <= n && P(n) \226\134\146 P(SUC(n))) \226\134\146 (\226\136\128 n : Num, P(n))
+      #|  1 <= SUC((n : Num))
+      #|  sum(op_dot_dot(1, 1), (f : (Num) -> Real)) == f(1) && sum(op_dot_dot(1, SUC((n : Num))), f) == sum(op_dot_dot(1, n), f) + f(SUC(n))
+      #|  (real_of_num(6) * (real_of_num(1) * (n1 : Real)) <= real_of_num(16) * n1 - real_of_num(5) * (n : Real)) == (n <= inv(inv(real_of_num(2))) * n1)
+      #|  real_of_num(3) / (real_of_num(16) * (l : Real)) * (i : Real) * (real_of_num(32) * (n32 : Real)) == n32 / l * (real_of_num(6) * i)
+      #|  real_of_num(1) / real_of_num(2) * (real_of_num(32) * (n32 : Real) / ((n1 : Real) * (l : Real))) - real_of_num(5) * (n32 / ((n : Real) * l)) == n32 / l * (real_of_num(16) / n1 - real_of_num(5) / n)
+      #|  (a : Real) <= (x : Real) \226\134\146 (b : Real) <= a \226\134\146 b <= x
+      #|  !(0 < (i : Num)) == (i == 0)
+      #|  EXP(32, (n : Num)) + 1 <= (i : Num)
+      #|  (i : Num)
+      #|  inv(pow(real_of_num(32), SUC((n : Num)))) * sum(op_dot_dot(EXP(32, n) + 1, EXP(32, SUC(n))), (i : Num) => if prime(i) { real_of_num(1) } else { real_of_num(0) })
+      #|  (n : Num) + 31 * n == 32 * n
+      #|  1 <= (n : Num) + 1
+      #|  32 * (n : Num) == n + 31 * n
+      #|  (a : Real) <= (s1 : Real) && (s2 : Real) <= (b : Real) \226\134\146 a - b <= s1 - s2
+      #|  EXP(32, 1)
+      #|  EXP(32, SUC((n : Num)))
+      #|  EXP(32, 1)
+      #|  EXP(32, (n : Num))
+      #|  1 <= SUC((n : Num))
+      #|  (b : Real) - (a : Real) <= (s2 : Real) - (s1 : Real) \226\134\146 a <= s1 \226\134\146 b <= s2
+      #|  (n : Num)
+      #|  pow(real_of_num(2), 5)
+      #|  \226\136\128 n : Num, real_of_num(3) / (real_of_num(16) * ln(real_of_num(32))) * sum(op_dot_dot(1, n), (i : Num) => real_of_num(1) / real_of_num(i)) <= sum(op_dot_dot(1, EXP(32, n)), (i : Num) => if prime(i) { real_of_num(1) / real_of_num(i) } else { real_of_num(0) })
+      #|  real_of_num(3) / (real_of_num(32) * ln(real_of_num(32))) * real_of_num((n : Num)) == real_of_num(3) / (real_of_num(16) * ln(real_of_num(32))) * (real_of_num(n) / real_of_num(2))
+      #|  real_of_num(3) / (real_of_num(16) * ln(real_of_num(32))) * sum(op_dot_dot(1, EXP(2, (n : Num))), (i : Num) => real_of_num(1) / real_of_num(i))
+      #|  \226\136\128 n : Num, real_of_num(3) / (real_of_num(32) * ln(real_of_num(32))) * real_of_num(n) <= sum(op_dot_dot(1, EXP(32, EXP(2, n))), (i : Num) => if prime(i) { real_of_num(1) / real_of_num(i) } else { real_of_num(0) })
+      #|  (M : Num) + (N : Num)
+      #|  (M : Num) + (N : Num)
+      #|  (M : Num)
+      #|  (l : Real) + real_of_num(1)
+      #|  real_of_num(1)
+      #|  \226\136\128 s : (Num) -> Real, (\226\136\128 k : Real, \226\136\131 N : Num, \226\136\128 n : Num, n >= N \226\134\146 sum(op_dot_dot(1, n), s) >= k) \226\134\146 !convergent((n : Num) => sum(op_dot_dot(1, n), s))
+      #|  1 <= (n : Num) + 1
+      #|  sum(op_dot_dot(1, EXP(32, EXP(2, (N : Num)))), (i : Num) => if prime(i) { real_of_num(1) / real_of_num(i) } else { real_of_num(0) })
+      #|  real_of_num((N : Num)) * (real_of_num(3) / (real_of_num(32) * ln(real_of_num(32))))
+      #|  (n : Num)
+      #|  EXP(32, EXP(2, (N : Num)))
+      #|  (N : Num)
+      #|  (k : Real)
+      #|  real_of_num(3) / (real_of_num(32) * ln(real_of_num(32)))
+      #|  (k : Real)
+      #|  !convergent((n : Num) => sum(op_dot_dot(1, n), (i : Num) => if prime(i) { real_of_num(1) / real_of_num(i) } else { real_of_num(0) }))
+      #|  !(SUC((n : Num)) <= n)
+      #|  (1 <= (i : Num)) == !(i == 0)
+      #|  op_dot_dot(1, (n : Num))
       #|  FINITE {p | prime p /\\ p <= n}
       #|  {p | prime p /\\ p <= SUC n} =\n        if prime(SUC n) then (SUC n) INSERT {p | prime p /\\ p <= n}\n        else {p | prime p /\\ p <= n}
-      #|  1 <= SUC n
+      #|  1 <= SUC((n : Num))
       #|  {p | prime p /\\ p <= 0} = {}
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  (a <=> b) ==> ~a ==> ~b
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (a : Bool) == (b : Bool) \226\134\146 !a \226\134\146 !b
       #|  ~(convergent (\\n. sum {p | prime p /\\ p <= n} (\\p. &1 / &p)))
       #|INDUCTION_FROM_1 =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (P:fun(num,bool) n:num))) (P:fun(num,bool) (#SUC:fun(num,num) n:num)))))))) (#forall:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num))))))
       #|PRIMERECIP_HARMONIC_LBOUND =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#ln:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) i:num)))))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) n:num))) (\i:num. (((#COND:fun(bool,fun(real,fun(real,real))) (#prime:fun(num,bool) i:num)) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) i:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
