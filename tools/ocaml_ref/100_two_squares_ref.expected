@@ -12626,77 +12626,77 @@ Warning: inventing type variables
 0..0..1..2..3..10..18..26..solved at 35
 0..0..1..2..7..13..solved at 21
 100/two_squares quotations (71):
-  involution f s = forall x. x IN s ==> f(x) IN s /\\ (f(f(x)) = x)
-  forall f s. involution f s ==> (IMAGE f s = s)
-  involution f s /\\ a IN s /\\ (f a = a) ==> involution f (s DELETE a)
-  involution f s /\\ a IN s ==> involution f (s DIFF {a, (f a)})
+  (involution : ((_) -> _, (_) -> Bool) -> Bool)((f : (_) -> _), (s : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 IN(f(x), s) && f(f(x)) == x)
+  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, involution(f, s) \226\134\146 IMAGE(f, s) == s
+  involution((f : (_) -> _), (s : (_) -> Bool)) && IN((a : _), s) && f(a) == a \226\134\146 involution(f, DELETE(s, a))
+  involution((f : (_) -> _), (s : (_) -> Bool)) && IN((a : _), s) \226\134\146 involution(f, DIFF(s, INSERT(a, INSERT(f(a), EMPTY))))
   involution f s ==> involution f {x | x IN s /\\ ~(f x = x)}
-  forall f s t. involution f s /\\ (forall x. x IN t ==> f(x) IN t) /\\ t SUBSET s\n           ==> involution f t
-  forall s. FINITE(s) /\\ involution f s /\\ (forall x:A. x IN s ==> ~(f x = x))\n       ==> EVEN(CARD s)
-  s = (a:A) INSERT (s DELETE a)
-  FINITE(s) /\\ involution f s /\\ (?!a:A. a IN s /\\ (f a = a))\n   ==> ODD(CARD s)
-  forall n s. FINITE(s) /\\ involution f s /\\ ODD(CARD s)\n         ==> ?a. a IN s /\\ (f a = a)
-  forall f g s. FINITE(s) /\\ involution f s /\\ involution g s /\\\n           (?!x. x IN s /\\ (f x = x)) ==> ?x. x IN s /\\ (g x = x)
+  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, involution(f, s) && (\226\136\128 x : _, IN(x, t) \226\134\146 IN(f(x), t)) && SUBSET(t, s) \226\134\146 involution(f, t)
+  \226\136\128 s : (A) -> Bool, FINITE(s) && involution((f : (A) -> A), s) && (\226\136\128 x : A, IN(x, s) \226\134\146 !(f(x) == x)) \226\134\146 EVEN(CARD(s))
+  (s : (A) -> Bool) == INSERT((a : A), DELETE(s, a))
+  FINITE((s : (A) -> Bool)) && involution((f : (A) -> A), s) && existsunique((a : A) => IN(a, s) && f(a) == a) \226\134\146 ODD(CARD(s))
+  \226\136\128 n : _, \226\136\128 s : (_) -> Bool, FINITE(s) && involution((f : (_) -> _), s) && ODD(CARD(s)) \226\134\146 (\226\136\131 a : _, IN(a, s) && f(a) == a)
+  \226\136\128 f : (_) -> _, \226\136\128 g : (_) -> _, \226\136\128 s : (_) -> Bool, FINITE(s) && involution(f, s) && involution(g, s) && existsunique((x : _) => IN(x, s) && f(x) == x) \226\134\146 (\226\136\131 x : _, IN(x, s) && g(x) == x)
   zset(a) = {(x,y,z) | x EXP 2 + 4 * y * z = a}
-  zag(x,y,z) =\n        if x + z < y then (x + 2 * z,z,y - (x + z))\n        else if x < 2 * y then (2 * y - x, y, (x + z) - y)\n        else (x - 2 * y,(x + z) - y, y)
-  tag((x,y,z):num#num#num) = (x,z,y)
-  0 < x /\\ 0 < y /\\ 0 < z ==> (zag(zag(x,y,z)) = (x,y,z))
+  (zag : ((Num, Num, Num)) -> (Num, Num, Num))(((x : Num), (y : Num), (z : Num))) == (if x + z < y { (x + 2 * z, z, y - (x + z)) } else { if x < 2 * y { (2 * y - x, y, x + z - y) } else { (x - 2 * y, x + z - y, y) } })
+  (tag : ((Num, Num, Num)) -> (Num, Num, Num))(((x : Num), (y : Num), (z : Num))) == (x, z, y)
+  0 < (x : Num) && 0 < (y : Num) && 0 < (z : Num) \226\134\146 zag(zag((x, y, z))) == (x, y, z)
   (a,b,c) IN {(x,y,z) | P x y z} <=> P a b c
-  n = n * 1
-  n:num
-  n = 1
-  n = 0
-  forall n. ~prime(n * n)
-  n = 0
+  (n : Num) == n * 1
+  (n : Num)
+  (n : Num) == 1
+  (n : Num) == 0
+  \226\136\128 n : Num, !prime(n * n)
+  (n : Num) == 0
   2 * 2
   2
-  forall n. ~prime(4 * n)
-  ~(0 < x) = (x = 0)
-  prime(x EXP 2 + 4 * y * z) ==> 0 < x /\\ 0 < y /\\ 0 < z
-  z:num
-  y:num
-  x:num
-  forall p. prime(p) ==> involution zag (zset(p))
-  forall a. involution tag (zset a)
-  (zag(x,y,z) = (x,y,z)) ==> (y = x)
-  0 < a ==> 1 <= 4 * a
-  y <= 4 * a * y <=> 1 * y <= (4 * a) * y
-  y <= z ==> y <= x + z
-  (a <= b ==> a <= b + c)
-  0 < y /\\ 0 < z /\\ (x EXP 2 + 4 * y * z = p)\n   ==> x <= p /\\ y <= p /\\ z <= p
-  z:num
-  y:num
-  z:num
-  y:num
-  x:num
-  x < p + 1 <=> x <= p
-  z:num
-  y:num
-  x:num
-  a /\\ b ==> c <=> b ==> a ==> c
-  p + 1
-  forall p. prime(p) ==> FINITE(zset p)
-  x = 1
-  4 * k + 1 = x * (4 * z + x)
-  ~(z = 0)
-  z = 0
-  4 * z + x = 1
-  4 * k + 1 = x * (4 * z + x)
-  (a = a * b) = (a * b = a * 1)
-  4 * k + 1 = 1 * (4 * z + 1)
-  x:num
-  prime p
-  x * x + 4 * x * z = x * (4 * z + x)
-  x EXP 2 + 4 * x * z = 4 * k + 1
-  ~(1 + k < 1)
-  z:num
-  y:num
-  x:num
-  1,1,k:num
+  \226\136\128 n : Num, !prime(4 * n)
+  !(0 < (x : Num)) == (x == 0)
+  prime(EXP((x : Num), 2) + 4 * ((y : Num) * (z : Num))) \226\134\146 0 < x && 0 < y && 0 < z
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  \226\136\128 p : Num, prime(p) \226\134\146 involution(zag, zset(p))
+  \226\136\128 a : Num, involution(tag, zset(a))
+  zag(((x : Num), (y : Num), (z : Num))) == (x, y, z) \226\134\146 y == x
+  0 < (a : Num) \226\134\146 1 <= 4 * a
+  ((y : Num) <= 4 * ((a : Num) * y)) == (1 * y <= 4 * a * y)
+  (y : Num) <= (z : Num) \226\134\146 y <= (x : Num) + z
+  (a : Num) <= (b : Num) \226\134\146 a <= b + (c : Num)
+  0 < (y : Num) && 0 < (z : Num) && EXP((x : Num), 2) + 4 * (y * z) == (p : Num) \226\134\146 x <= p && y <= p && z <= p
+  (z : Num)
+  (y : Num)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  ((x : Num) < (p : Num) + 1) == (x <= p)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+  (p : Num) + 1
+  \226\136\128 p : Num, prime(p) \226\134\146 FINITE(zset(p))
+  (x : Num) == 1
+  4 * (k : Num) + 1 == (x : Num) * (4 * (z : Num) + x)
+  !((z : Num) == 0)
+  (z : Num) == 0
+  4 * (z : Num) + (x : Num) == 1
+  4 * (k : Num) + 1 == (x : Num) * (4 * (z : Num) + x)
+  ((a : Num) == a * (b : Num)) == (a * b == a * 1)
+  4 * (k : Num) + 1 == 1 * (4 * (z : Num) + 1)
+  (x : Num)
+  prime((p : Num))
+  (x : Num) * x + 4 * (x * (z : Num)) == x * (4 * z + x)
+  EXP((x : Num), 2) + 4 * (x * (z : Num)) == 4 * (k : Num) + 1
+  !(1 + (k : Num) < 1)
+  (z : Num)
+  (y : Num)
+  (x : Num)
+  (1, 1, (k : Num))
   zag
-  4 * x * y = (2 * x) * (2 * y)
-  ?t. t IN zset(p) /\\ (tag(t) = t)
-  forall p k. prime(p) /\\ (p = 4 * k + 1) ==> ?x y. p = x EXP 2 + y EXP 2
+  4 * ((x : Num) * (y : Num)) == 2 * x * (2 * y)
+  \226\136\131 t : (Num, Num, Num), IN(t, zset((p : Num))) && tag(t) == t
+  \226\136\128 p : Num, \226\136\128 k : Num, prime(p) && p == 4 * k + 1 \226\134\146 (\226\136\131 x : Num, \226\136\131 y : Num, p == EXP(x, 2) + EXP(y, 2))
 involution =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). (#forall:fun(fun(fun('?1,'?1),bool),bool) (\f:fun('?1,'?1). ((#=:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?1,'?1),fun(fun('?1,bool),bool)) f:fun('?1,'?1)) s:fun('?1,bool))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) x:'?1) s:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) (f:fun('?1,'?1) x:'?1)) s:fun('?1,bool))) ((#=:fun('?1,fun('?1,bool)) (f:fun('?1,'?1) (f:fun('?1,'?1) x:'?1))) x:'?1))))))))))
 INVOLUTION_IMAGE =  |- (#forall:fun(fun(fun('?2,'?2),bool),bool) (\f:fun('?2,'?2). (#forall:fun(fun(fun('?2,bool),bool),bool) (\s:fun('?2,bool). ((#==>:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?2,'?2),fun(fun('?2,bool),bool)) f:fun('?2,'?2)) s:fun('?2,bool))) ((#=:fun(fun('?2,bool),fun(fun('?2,bool),bool)) ((#IMAGE:fun(fun('?2,'?2),fun(fun('?2,bool),fun('?2,bool))) f:fun('?2,'?2)) s:fun('?2,bool))) s:fun('?2,bool)))))))
 INVOLUTION_DELETE =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#involution:fun(fun('?3,'?3),fun(fun('?3,bool),bool)) f:fun('?3,'?3)) s:fun('?3,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?3,fun(fun('?3,bool),bool)) a:'?3) s:fun('?3,bool))) ((#=:fun('?3,fun('?3,bool)) (f:fun('?3,'?3) a:'?3)) a:'?3)))) ((#involution:fun(fun('?3,'?3),fun(fun('?3,bool),bool)) f:fun('?3,'?3)) ((#DELETE:fun(fun('?3,bool),fun('?3,fun('?3,bool))) s:fun('?3,bool)) a:'?3)))
