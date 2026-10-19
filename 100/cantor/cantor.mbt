@@ -4,7 +4,7 @@
 /// CANTOR_THM_INJ
 fn step_1() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
-  let t6 = @parser.parse_term("\\x:A. ~(g x x)")
+  let t6 = @term_syntax.parse_term("(x : A) => !(g : (A, A) -> Bool)(x, x)")
   let t9 = @tactics.disch_then(fn(x8 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x3 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s4 = @tactics.mp_tac(x3)
@@ -13,10 +13,10 @@ fn step_1() -> Unit raise {
       }
     })(((x7 : @kernel.Thm) => @bool.spec(t6, x7))(x8))
   })
-  let t1 = @parser.parse_term("g:A->(A->bool)")
-  let t2 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:(A->bool)->A"), t1]))
+  let t1 = @term_syntax.parse_term("(g : (A, A) -> Bool)")
+  let t2 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : ((A) -> Bool) -> A)"), t1]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.injective_left_inverse(), @class.not_exists_thm()])), t2), t9), t10)
-  cantor_thm_inj_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))"), t11))
+  cantor_thm_inj_c.set(@tactics.prove(@term_syntax.parse_term("!(∃ f : ((A) -> Bool) -> A, ∀ x : (A) -> Bool, ∀ y : (A) -> Bool, f(x) == f(y) → x == y)"), t11))
 }
 
 ///|
@@ -32,7 +32,7 @@ pub fn cantor_thm_inj() -> @kernel.Thm {
 /// CANTOR_THM_SURJ
 fn step_2() -> Unit raise {
   let t21 = @meson.meson_tac(@list.List([]))
-  let t17 = @parser.parse_term("\\x:A. ~(g x x)")
+  let t17 = @term_syntax.parse_term("(x : A) => !(g : (A, A) -> Bool)(x, x)")
   let t20 = @tactics.disch_then(fn(x19 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s15 = @tactics.mp_tac(x14)
@@ -41,10 +41,10 @@ fn step_2() -> Unit raise {
       }
     })(((x18 : @kernel.Thm) => @bool.spec(t17, x18))(x19))
   })
-  let t12 = @parser.parse_term("f:(A->bool)->A")
-  let t13 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("g:A->(A->bool)"), t12]))
+  let t12 = @term_syntax.parse_term("(f : ((A) -> Bool) -> A)")
+  let t13 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(g : (A, A) -> Bool)"), t12]))
   let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.surjective_right_inverse(), @class.not_exists_thm()])), t13), t20), t21)
-  cantor_thm_surj_c.set(@tactics.prove(@parser.parse_term("~(?f:A->(A->bool). forall s. ?x. f x = s)"), t22))
+  cantor_thm_surj_c.set(@tactics.prove(@term_syntax.parse_term("!(∃ f : (A, A) -> Bool, ∀ s : (A) -> Bool, ∃ x : A, f(x) == s)"), t22))
 }
 
 ///|
@@ -61,7 +61,7 @@ pub fn cantor_thm_surj() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t36 = @meson.meson_tac(@list.List([]))
   let t35 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @class.fun_eq_thm()]))
-  let t31 = @parser.parse_term("\\x:A. s(x) /\\ ~(g x x)")
+  let t31 = @term_syntax.parse_term("(x : A) => (s : (A) -> Bool)(x) && !(g : (A, A) -> Bool)(x, x)")
   let t34 = @tactics.disch_then(fn(x33 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x28 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s29 = @tactics.mp_tac(x28)
@@ -70,12 +70,12 @@ fn step_3() -> Unit raise {
       }
     })(((x32 : @kernel.Thm) => @bool.spec(t31, x32))(x33))
   })
-  let t27 = @tactics.x_gen_tac(@parser.parse_term("g:A->(A->bool)"))
+  let t27 = @tactics.x_gen_tac(@term_syntax.parse_term("(g : (A, A) -> Bool)"))
   let t26 = @simp.rewrite_tac(@list.List([@class.not_exists_thm()]))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c_v1(), @sets.in_elim_thm(), @sets.surjective_right_inverse()])), t26), t27), t34), t35), t36)
   let t25 = @meson.meson_tac(@list.List([]))
   let t24 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @sets.in_elim_thm(), @sets.subset(), @sets.in_()]))
-  let t23 = @tactics.exists_tac(@parser.parse_term("(=):A->A->bool"))
+  let t23 = @tactics.exists_tac(@term_syntax.parse_term("(op_eq : (A, A) -> Bool)"))
   let t38 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.le_c()])), t23), t24), t25), t37])
   let t39 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.lt_c()]))), @tactics.conj_tac), t38)
   cantor_v1_c.set(@tactics.prove(@parser.parse_term("forall s:A->bool. s <_c {t | t SUBSET s}"), t39))
@@ -104,9 +104,9 @@ fn step_4() -> Unit raise {
     })(@equal.sym(x45))
   })
   let t40 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor_thm_surj())
-  let t41 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("g:A->A->bool"), t40))
+  let t41 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(g : (A, A) -> Bool)"), t40))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.abbrev_tac(@parser.parse_term("(g:A->A->bool) = \\a. { b | forall s. f(s) = a ==> b IN s}"))), t41), t46), t47), t48)
-  cantor_thm_inj_p_c.set(@tactics.prove(@parser.parse_term("~(?f:(A->bool)->A. (forall x y. f(x) = f(y) ==> x = y))"), t49))
+  cantor_thm_inj_p_c.set(@tactics.prove(@term_syntax.parse_term("!(∃ f : ((A) -> Bool) -> A, ∀ x : (A) -> Bool, ∀ y : (A) -> Bool, f(x) == f(y) → x == y)"), t49))
 }
 
 ///|
@@ -123,9 +123,9 @@ pub fn cantor_thm_inj_p() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t52 = @meson.asm_meson_tac(@list.List([]))
   let t51 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@class.fun_eq_thm()])))
-  let t50 = @simp.abbrev_tac(@parser.parse_term("g:A->B = \\a. (n:B->B) (h a a)"))
+  let t50 = @simp.abbrev_tac(@term_syntax.parse_term("(g : (A) -> B) == ((a : A) => (n : (B) -> B)((h : (A, A) -> B)(a, a)))"))
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t50), t51), t52)
-  cantor_lawvere_c.set(@tactics.prove(@parser.parse_term("forall h:A->(A->B).\n        (forall f:A->B. ?x:A. h(x) = f) ==> forall n:B->B. ?x. n(x) = x"), t53))
+  cantor_lawvere_c.set(@tactics.prove(@term_syntax.parse_term("∀ h : (A, A) -> B, (∀ f : (A) -> B, ∃ x : A, h(x) == f) → (∀ n : (B) -> B, ∃ x : B, n(x) == x)"), t53))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn cantor_lawvere() -> @kernel.Thm {
 /// CANTOR
 fn step_6() -> Unit raise {
   let t66 = @meson.meson_tac(@list.List([]))
-  let t62 = @parser.parse_term("(~)")
+  let t62 = @term_syntax.parse_term("op_tilde")
   let t65 = @tactics.disch_then(fn(x64 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x59 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s60 = @tactics.mp_tac(x59)
@@ -159,7 +159,7 @@ fn step_6() -> Unit raise {
       }
     })(t57(x58))
   })), t65), t66)
-  cantor_c.set(@tactics.prove(@parser.parse_term("forall f:A->(A->bool). ~(forall s. ?x. f x = s)"), t67))
+  cantor_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A, A) -> Bool, !(∀ s : (A) -> Bool, ∃ x : A, f(x) == s)"), t67))
 }
 
 ///|
@@ -179,7 +179,7 @@ fn step_7() -> Unit raise {
   let t68 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor())
   let t69 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("\\a:A.  { b:A | forall s. f(s) = a ==> b IN s}"), t68))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t69), t70), t71)
-  cantor_taylor_c.set(@tactics.prove(@parser.parse_term("forall f:(A->bool)->A. ~(forall x y. f(x) = f(y) ==> x = y)"), t72))
+  cantor_taylor_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : ((A) -> Bool) -> A, !(∀ x : (A) -> Bool, ∀ y : (A) -> Bool, f(x) == f(y) → x == y)"), t72))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn cantor_taylor() -> @kernel.Thm {
 /// SURJECTIVE_COMPOSE
 fn step_8() -> Unit raise {
   let t73 = @meson.meson_tac(@list.List([@trivia.o_thm()]))
-  surjective_compose_c.set(@tactics.prove(@parser.parse_term("(forall y. ?x. f(x) = y) /\\ (forall z. ?y. g(y) = z)\n   ==> (forall z. ?x. (g o f) x = z)"), t73))
+  surjective_compose_c.set(@tactics.prove(@term_syntax.parse_term("(∀ y : _, ∃ x : _, (f : (_) -> _)(x) == y) && (∀ z : _, ∃ y : _, (g : (_) -> _)(y) == z) → (∀ z : _, ∃ x : _, o(g, f, x) == z)"), t73))
 }
 
 ///|
@@ -212,7 +212,7 @@ pub fn surjective_compose() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t76 = @meson.asm_meson_tac(@list.List([]))
   let t75 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_image()]))
-  let t74 = @tactics.exists_tac(@parser.parse_term("IMAGE (f:A->B) t"))
+  let t74 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((f : (A) -> B), (t : (A) -> Bool))"))
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t74), t75), t76)
   injective_surjective_preimage_c.set(@tactics.prove(@parser.parse_term("forall f:A->B. (forall x y. f(x) = f(y) ==> x = y) ==> forall t. ?s. {x | f(x) IN s} = t"), t77))
 }
@@ -237,7 +237,7 @@ fn step_10() -> Unit raise {
   let t78 = @simp.rewrite_rule(@list.List([@class.not_exists_thm()]))(cantor())
   let t79 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("(IMAGE (f:B->S->bool)) o (\\s:S->bool. {x | i(x) IN s})"), t78))
   let t85 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t79), t80), t81), t82), t83), t84)
-  cantor_johnstone_c.set(@tactics.prove(@parser.parse_term("forall i:B->S f:B->S->bool.\n        ~((forall x y. i(x) = i(y) ==> x = y) /\\ (forall s. ?z. f(z) = s))"), t85))
+  cantor_johnstone_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : (B) -> S, ∀ f : (B, S) -> Bool, !((∀ x : B, ∀ y : B, i(x) == i(y) → x == y) && (∀ s : (S) -> Bool, ∃ z : B, f(z) == s))"), t85))
 }
 
 ///|
