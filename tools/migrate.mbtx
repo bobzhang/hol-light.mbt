@@ -548,7 +548,8 @@ async fn rewrite_trace(
 }
 
 ///|
-/// The tools/ocaml_ref/<name>_ref.expected file the test `src` compares with.
+/// The tools/ocaml_ref/<name>_ref.expected file the test `src` compares
+/// with: its header names that file, or the <name>_ref.ml it comes from.
 fn expected_file(src : String) -> String? {
   let cs = src.to_array()
   let pre = "tools/ocaml_ref/".to_array()
@@ -559,8 +560,10 @@ fn expected_file(src : String) -> String? {
         j += 1
       }
       let path = String::from_array(cs[i:j])
-      if path.has_suffix("_ref.expected") {
-        return Some(path)
+      for suffix in ["_ref.expected", "_ref.ml"] {
+        if path.has_suffix(suffix) {
+          return Some(path[:path.length() - suffix.length()].to_owned() + "_ref.expected")
+        }
       }
     }
   }
@@ -685,13 +688,12 @@ async fn main {
     for t in golden_tests(pkg) {
       keep.push(t)
       rewrite_trace(t, theory, rec.trace, new_trace)
-      match expected_file(read(t)) {
-        Some(e) => {
-          keep.push(e)
-          rewrite_trace(e, theory, rec.trace, new_trace)
-        }
-        None => ()
+      // the golden is embedded from the .expected file: both change alike
+      guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
+        fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
       }
+      keep.push(e)
+      rewrite_trace(e, theory, rec.trace, new_trace)
     }
   }
   let counts : Map[String, Int] = Map::new()
