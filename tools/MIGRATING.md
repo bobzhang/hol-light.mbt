@@ -26,13 +26,20 @@ Quotations written in HOL Light's extensible syntax (`@parser.parse_term("forall
    - `unprintable`: no spelling reads back as exactly the same term. Most are set comprehensions (`{x | P x}`): HOL binds a generated `GEN%PVAR%n` there, which theorems show and the term syntax has no way to write. Others: a free variable whose type repeats an invented type variable (holes cannot tie those together), or a name with no spelling.
    - `conflict`: the site read differently on different runs (a function called under different overload priorities).
    
-   Do not hand-convert a leftover unless a test exercises it.
+   A leftover may be converted by hand (step 4a).
+4a. **Hand-converting a leftover.** Replace `@parser.parse_term("old")` by `@term_syntax.parse_term("new")` in the package's source, and change nothing else. Then run, under the same large stack:
+
+   ```
+   moon run tools/migrate.mbtx -- --retrace <package dir>
+   ```
+
+   It accepts only that kind of change, in the package's own source files (compared with HEAD). Each hand-written quotation is checked where it runs while the package loads, exactly as the tool checks its own spellings: it must read as the old one does, giving the same term with the same bound variable names and taking as many generated names. A quotation that does not run while the package loads cannot be checked and is refused. The tool then rewrites the trace in the golden and the `.expected` file and runs the reference test. On `test: pass`, commit, and list the hand-written quotations in the commit message.
 5. Commit only the package's files, its golden(s) and its `.expected` file(s).
 6. Open a PR titled `Migrate <dir>/<name> to the term syntax`. In its body, give the converter summary, the test command and result, and the leftovers.
 
 ## Rules
 
-- **No hand edits of goldens.** A golden may change only in the trace lines the converter rewrote.
+- **No hand edits of goldens.** A golden may change only in the trace lines the converter (or `--retrace`) rewrote.
 - **One package per PR**, or a few small leaves together.
 - **Build with `--build-jobs 4` or less.** Each link of a long chain can take 14 GB or more.
 - **Never run `moon fmt` or `moon info` over the whole repository.** The pinned CI toolchain (0.10.14) is older than a typical local one.
