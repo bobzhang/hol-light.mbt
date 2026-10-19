@@ -61507,770 +61507,770 @@ Warning: inventing type variables
 0..0..1..solved at 4
 0..0..solved at 2
 100/polyhedron quotations (764):
-  hyperplane_side (a,b) (x:real^N) = real_sgn (a dot x - b)
-  hyperplane_equiv A x y <=>\n        forall h. h IN A ==> hyperplane_side h x = hyperplane_side h y
-  forall A x. hyperplane_equiv A x x
-  forall A x y. hyperplane_equiv A x y <=> hyperplane_equiv A y x
-  forall A x y z.\n        hyperplane_equiv A x y /\\ hyperplane_equiv A y z\n        ==> hyperplane_equiv A x z
-  forall A B x y. hyperplane_equiv (A UNION B) x y <=>\n                hyperplane_equiv A x y /\\ hyperplane_equiv B x y
-  hyperplane_cell A c <=> ?x. c = hyperplane_equiv A x
-  hyperplane_cell A c <=> ?x. c = {y | hyperplane_equiv A x y}
-  forall A. ~(hyperplane_cell A {})
-  forall A c. hyperplane_cell A c ==> ~(c = {})
-  forall A. UNIONS {c | hyperplane_cell A c} = (:real^N)
-  forall A c1 c2. hyperplane_cell A c1 /\\ hyperplane_cell A c2 /\\ ~(c1 = c2)\n             ==> DISJOINT c1 c2
-  DISJOINT s s <=> s = {}
-  forall A c1 c2. hyperplane_cell A c1 /\\ hyperplane_cell A c2\n             ==> (DISJOINT c1 c2 <=> ~(c1 = c2))
-  hyperplane_cell {} c <=> c = (:real^N)
-  x - y < &0 <=> x < y
-  (a:real^N) dot y - b
-  y:real^N
-  forall a b c:real^N->bool.\n        hyperplane_cell {(a,b)} c\n        ==>  c = {x | a dot x = b} \\/\n             c = {x | a dot x < b} \\/\n             c = {x | a dot x > b}
-  (b + &1) / (a dot a) % a:real^N
-  (b - &1) / (a dot a) % a:real^N
-  b / (a dot a) % a:real^N
-  (?x. f x = a) ==> (?x. forall y. f y = a <=> f x = f y)
-  a < b <=> a - b < &0
-  a > b <=> a - b > &0
-  a dot x = b <=> a dot x - b = &0
-  forall a b c.\n        hyperplane_cell {(a,b)} c <=>\n        if a = vec 0 then c = (:real^N)\n        else c = {x | a dot x = b} \\/\n             c = {x | a dot x < b} \\/\n             c = {x | a dot x > b}
-  x:real^N
-  b:real^N
-  a:real^N
-  (?c1 c2. (?x. c1 = f x) /\\ (?y. c2 = g y) /\\ P c1 c2) <=>\n    (?x y. P (f x) (g y))
-  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-  c:real^N->bool = {}
-  forall A B c:real^N->bool.\n        hyperplane_cell (A UNION B) c <=>\n        ~(c = {}) /\\\n        ?c1 c2. hyperplane_cell A c1 /\\\n                hyperplane_cell B c2 /\\\n                c = c1 INTER c2
-  {{x:real^N | a dot x = b},{x | a dot x < b},{x | a dot x > b}}
-  { c1 INTER c2:real^N->bool |\n                c1 IN {c | hyperplane_cell A c} /\\\n                c2 IN {c | hyperplane_cell {(a,b)} c}}
-  a INSERT s = {a} UNION s
-  A:(real^N#real)->bool
-  b:real
-  a:real^N
-  forall A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c}
-  {c:real^N->bool | hyperplane_cell A c}
-  forall P A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cell A c /\\ P c}
-  {c:real^N->bool | hyperplane_cell A c}
-  forall A C. FINITE A /\\ (forall c:real^N->bool. c IN C ==> hyperplane_cell A c)\n         ==> FINITE C
-  forall A C. (forall c. c IN C ==> hyperplane_cell A c)\n         ==> pairwise DISJOINT C
-  t:real^N->bool
-  {x:real^N | a dot x > b} INTER s
-  t:real^N->bool
-  {x:real^N | a dot x < b} INTER s
-  {x:real^N | a dot x = b} INTER t
-  s:real^N->bool
-  t:real^N->bool
-  s:real^N->bool
-  t:real^N->bool
-  s:real^N->bool
-  c:real^N->bool
-  c:real^N->bool
-  c1:real^N->bool
-  c':real^N->bool
-  a INSERT s = {a} UNION s
-  A:real^N#real->bool
-  b:real
-  a:real^N
-  (:real^N)
-  forall A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> ?s t. open s /\\ affine t /\\ c = s INTER t
-  affine hull t:real^N->bool
-  affine hull (s INTER t:real^N->bool) = t
-  s INTER t:real^N->bool = {}
-  t:real^N->bool
-  s:real^N->bool
-  forall A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> open_in (subtopology euclidean (affine hull c)) c
-  forall A c:real^N->bool.\n        FINITE A /\\ hyperplane_cell A c\n        ==> relative_interior c = c
-  a - b < &0 <=> a < b
-  a - b > &0 <=> a > b
-  (a:real^N) dot c - b
-  b:real
-  a:real^N
-  f x = f y <=> y IN {y | f x = f y}
-  c:real^N
-  forall A c:real^N->bool. hyperplane_cell A c ==> convex c
-  c:real^N->bool
-  c:real^N->bool
-  c:real^N->bool
-  x:real^N
-  z:real^N
-  forall A C. (forall c:real^N->bool. c IN C ==> hyperplane_cell A c) /\\\n         ~(C = {}) /\\ ~(INTERS C = {})\n         ==> hyperplane_cell A (INTERS C)
-  forall A s t:real^N->bool.\n        hyperplane_cell A s /\\ hyperplane_cell A t /\\ ~(s INTER t = {})\n        ==> hyperplane_cell A (s INTER t)
-  hyperplane_cellcomplex A s <=>\n        ?t. (forall c. c IN t ==> hyperplane_cell A c) /\\\n            s = UNIONS t
-  {}:(real^N->bool)->bool
-  forall A:real^N#real->bool. hyperplane_cellcomplex A {}
-  {c:real^N->bool}
-  forall A c:real^N->bool. hyperplane_cell A c ==> hyperplane_cellcomplex A c
-  UNIONS (IMAGE (f:(real^N->bool)->(real^N->bool)->bool) C)
-  f:(real^N->bool)->(real^N->bool)->bool
-  forall A C. (forall s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)\n         ==> hyperplane_cellcomplex A (UNIONS C)
-  forall A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s UNION t)
-  forall A. hyperplane_cellcomplex A (:real^N)
-  UNIONS s = UNIONS {t | t IN s /\\ ~(t = {})}
-  C = {UNIONS((f:(real^N->bool)->(real^N->bool)->bool) s) | s IN C}
-  f:(real^N->bool)->(real^N->bool)->bool
-  C:(real^N->bool)->bool = {}
-  forall A C. (forall s:real^N->bool. s IN C ==> hyperplane_cellcomplex A s)\n         ==> hyperplane_cellcomplex A (INTERS C)
-  forall A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s INTER t)
-  c':real^N->bool
-  c:real^N->bool
-  A:real^N#real->bool
-  c':real^N->bool
-  x:real^N
-  A:real^N#real->bool
-  (:real^N) DIFF c = UNIONS {c' | hyperplane_cell A c' /\\ ~(c' = c)}
-  c:real^N->bool
-  C:(real^N->bool)->bool
-  forall A s. hyperplane_cellcomplex A s\n         ==> hyperplane_cellcomplex A ((:real^N) DIFF s)
-  s DIFF t = s INTER (UNIV DIFF t)
-  forall A s t.\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex A t\n        ==> hyperplane_cellcomplex A (s DIFF t)
-  B DIFF A:(real^N#real)->bool
-  x:real^N
-  c':real^N->bool
-  c:real^N->bool
-  c':real^N->bool
-  {c' INTER c:real^N->bool |c'| hyperplane_cell (B DIFF A) c' /\\\n                                            ~(c' INTER c = {})}
-  B:(real^N#real)->bool = A UNION (B DIFF A)
-  c:real^N->bool
-  c:real^N->bool
-  C:(real^N->bool)->bool
-  forall A B s:real^N->bool.\n        hyperplane_cellcomplex A s /\\ A SUBSET B\n        ==> hyperplane_cellcomplex B s
-  IMAGE UNIONS {t | t SUBSET {c:real^N->bool | hyperplane_cell A c}}
-  forall A. FINITE A ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c}
-  {c:real^N->bool | hyperplane_cellcomplex A c}
-  forall P A. FINITE A\n         ==> FINITE {c:real^N->bool | hyperplane_cellcomplex A c /\\ P c}
-  {c:real^N->bool | hyperplane_cellcomplex A c}
-  forall A C. FINITE A /\\ (forall c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c)\n         ==> FINITE C
-  c IN C ==> c SUBSET UNIONS C
-  c':real^N->bool = c
-  c':real^N->bool
-  c:real^N->bool
-  A:(real^N#real)->bool
-  c':real^N->bool
-  x:real^N
-  c:real^N->bool = {}
-  C:(real^N->bool)->bool
-  forall A s c:real^N->bool.\n        hyperplane_cell A c /\\ hyperplane_cellcomplex A s\n        ==> (c SUBSET s <=> ~(DISJOINT c s))
-  euler_characteristic A (s:real^N->bool) =\n        sum {c | hyperplane_cell A c /\\ c SUBSET s}\n            (\\c. (-- &1) pow (num_of_int(aff_dim c)))
-  ~(?x. x IN s) ==> (forall x. x IN s ==> P x)
-  euler_characteristic A {} = &0
-  ~(DISJOINT (c:real^N->bool) c')
-  c':real^N->bool
-  x:real^N
-  x:real^N
-  ~(c:real^N->bool = {})
-  c:real^N->bool
-  s = t ==> sum s f = sum t f
-  forall A C. (forall c:real^N->bool. c IN C ==> hyperplane_cell A c)\n         ==> euler_characteristic A (UNIONS C) =\n             sum C (\\c. (-- &1) pow (num_of_int(aff_dim c)))
-  forall A c. hyperplane_cell A c\n         ==> euler_characteristic A c =  (-- &1) pow (num_of_int(aff_dim c))
-  A:(real^N#real)->bool
-  hyperplane_cell A (c:real^N->bool)
-  c:real^N->bool = {}
-  c:real^N->bool
-  forall A s t:real^N->bool.\n        FINITE A /\\\n        hyperplane_cellcomplex A s /\\\n        hyperplane_cellcomplex A t /\\\n        DISJOINT s t\n        ==> euler_characteristic A (s UNION t) =\n            euler_characteristic A s + euler_characteristic A t
-  C:(real^N->bool)->bool
-  C:(real^N->bool)->bool
-  FINITE(C:(real^N->bool)->bool)
-  FINITE(C:(real^N->bool)->bool)
-  forall A C. FINITE A /\\\n         (forall c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c) /\\\n         pairwise DISJOINT C\n         ==> euler_characteristic A (UNIONS C) =\n             sum C (\\c. euler_characteristic A c)
-  aff_dim(c:real^N->bool)
-  c:real^N->bool
-  IMAGE int_of_num (0..dimindex(:N))
-  {c:real^N->bool | hyperplane_cell A c /\\ c SUBSET s}
-  \\c:real^N->bool. (-- &1) pow (num_of_int(aff_dim c))
-  \\c:real^N->bool. aff_dim c
-  forall A s:real^N->bool.\n        FINITE A\n        ==> euler_characteristic A s =\n            sum (0..dimindex(:N))\n                (\\d. (-- &1) pow d *\n                     &(CARD {c | hyperplane_cell A c /\\ c SUBSET s /\\\n                                 aff_dim c = &d}))
-  forall a b. {x | a dot x = b} INTER {x | a dot x < b} = {} /\\\n         {x | a dot x = b} INTER {x | a dot x > b} = {} /\\\n         {x | a dot x < b} INTER {x | a dot x = b} = {} /\\\n         {x | a dot x < b} INTER {x | a dot x > b} = {} /\\\n         {x | a dot x > b} INTER {x | a dot x = b} = {} /\\\n         {x | a dot x > b} INTER {x | a dot x < b} = {}
-  i:int
-  aff_dim (c INTER {x:real^N | a dot x = b})
-  &0 <= aff_dim (c INTER {x:real^N | a dot x = b})
-  affine hull (s INTER t) = affine hull t /\\\n      affine hull ((s INTER t) INTER {x:real^N | a dot x = b}) =\n      affine hull (t INTER {x:real^N | a dot x = b})
-  t:real^N->bool
-  s:real^N->bool
-  c:real^N->bool
-  A:real^N#real->bool
-  aff_dim c = aff_dim(c INTER {x:real^N | a dot x = b}) + &1
-  aff_dim (c INTER {x:real^N | a dot x < b}) = aff_dim c /\\\n    aff_dim (c INTER {x:real^N | a dot x > b}) = aff_dim c
-  s INTER t = {} /\\ ~(c INTER s = {}) ==> ~(c INTER s = c INTER t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  c':real^N->bool
-  s = t ==> sum s f = sum t f
-  sum {{x | a dot x = b} INTER c,\n         {x | a dot x > b} INTER c,\n         {x | a dot x < b} INTER c}\n        (\\c:real^N->bool. (-- &1) pow (num_of_int(aff_dim c)))
-  b - x < b <=> &0 < x
-  b - x * y > b <=> &0 < x * --y
-  u - e / &2 / norm(v - u) % (v - u):real^N
-  b - x * y > b <=> &0 < x * --y
-  u - e / &2 / norm(v - u) % (v - u):real^N
-  (a:real^N) dot v < b \\/ a dot v > b
-  abs e / &2 < e <=> &0 < e
-  x - a % (y - z):real^N = x + a % (z - y)
-  dist(u - a:real^N,u) = norm a
+  (hyperplane_side : ((Cart[Real, N], Real), Cart[Real, N]) -> Real)(((a : Cart[Real, N]), (b : Real)), (x : Cart[Real, N])) == real_sgn(dot(a, x) - b)
+  (hyperplane_equiv : (((Cart[Real, _], Real)) -> Bool, Cart[Real, _], Cart[Real, _]) -> Bool)((A : ((Cart[Real, _], Real)) -> Bool), (x : Cart[Real, _]), (y : Cart[Real, _])) == (\226\136\128 h : (Cart[Real, _], Real), IN(h, A) \226\134\146 hyperplane_side(h, x) == hyperplane_side(h, y))
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 x : Cart[Real, _], hyperplane_equiv(A, x, x)
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], hyperplane_equiv(A, x, y) == hyperplane_equiv(A, y, x)
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], \226\136\128 z : Cart[Real, _], hyperplane_equiv(A, x, y) && hyperplane_equiv(A, y, z) \226\134\146 hyperplane_equiv(A, x, z)
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 B : ((Cart[Real, _], Real)) -> Bool, \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], hyperplane_equiv(UNION(A, B), x, y) == (hyperplane_equiv(A, x, y) && hyperplane_equiv(B, x, y))
+  (hyperplane_cell : (((Cart[Real, _], Real)) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((A : ((Cart[Real, _], Real)) -> Bool), (c : (Cart[Real, _]) -> Bool)) == (\226\136\131 x : Cart[Real, _], c == hyperplane_equiv(A, x))
+  hyperplane_cell((A : ((Cart[Real, _], Real)) -> Bool), (c : (Cart[Real, _]) -> Bool)) == (\226\136\131 x : Cart[Real, _], c == {(y : Cart[Real, _]) | hyperplane_equiv(A, x, y)})
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, !hyperplane_cell(A, {})
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 c : (Cart[Real, _]) -> Bool, hyperplane_cell(A, c) \226\134\146 !(c == {})
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, UNIONS({(c : (Cart[Real, N]) -> Bool) | hyperplane_cell(A, c)}) == UNIV
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 c1 : (Cart[Real, _]) -> Bool, \226\136\128 c2 : (Cart[Real, _]) -> Bool, hyperplane_cell(A, c1) && hyperplane_cell(A, c2) && !(c1 == c2) \226\134\146 DISJOINT(c1, c2)
+  DISJOINT((s : (_) -> Bool), s) == (s == {})
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 c1 : (Cart[Real, _]) -> Bool, \226\136\128 c2 : (Cart[Real, _]) -> Bool, hyperplane_cell(A, c1) && hyperplane_cell(A, c2) \226\134\146 DISJOINT(c1, c2) == !(c1 == c2)
+  hyperplane_cell({}, (c : (Cart[Real, N]) -> Bool)) == (c == UNIV)
+  ((x : Real) - (y : Real) < real_of_num(0)) == (x < y)
+  dot((a : Cart[Real, N]), (y : Cart[Real, N])) - (b : Real)
+  (y : Cart[Real, N])
+  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, \226\136\128 c : (Cart[Real, N]) -> Bool, hyperplane_cell({(a, b)}, c) \226\134\146 c == {(x : Cart[Real, N]) | dot(a, x) == b} || c == {(x : Cart[Real, N]) | dot(a, x) < b} || c == {(x : Cart[Real, N]) | dot(a, x) > b}
+  op_pct(((b : Real) + real_of_num(1)) / dot((a : Cart[Real, N]), a), a)
+  op_pct(((b : Real) - real_of_num(1)) / dot((a : Cart[Real, N]), a), a)
+  op_pct((b : Real) / dot((a : Cart[Real, N]), a), a)
+  (\226\136\131 x : _, (f : (_) -> _)(x) == (a : _)) \226\134\146 (\226\136\131 x : _, \226\136\128 y : _, (f(y) == a) == (f(x) == f(y)))
+  ((a : Real) < (b : Real)) == (a - b < real_of_num(0))
+  ((a : Real) > (b : Real)) == (a - b > real_of_num(0))
+  (dot((a : Cart[Real, _]), (x : Cart[Real, _])) == (b : Real)) == (dot(a, x) - b == real_of_num(0))
+  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, \226\136\128 c : (Cart[Real, N]) -> Bool, hyperplane_cell({(a, b)}, c) == (if a == vec(0) { c == UNIV } else { c == {(x : Cart[Real, N]) | dot(a, x) == b} || c == {(x : Cart[Real, N]) | dot(a, x) < b} || c == {(x : Cart[Real, N]) | dot(a, x) > b} })
+  (x : Cart[Real, N])
+  (b : Cart[Real, N])
+  (a : Cart[Real, N])
+  (\226\136\131 c1 : _, \226\136\131 c2 : _, (\226\136\131 x : _, c1 == (f : (_) -> _)(x)) && (\226\136\131 y : _, c2 == (g : (_) -> _)(y)) && (P : (_, _) -> Bool)(c1, c2)) == (\226\136\131 x : _, \226\136\131 y : _, P(f(x), g(y)))
+  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+  (c : (Cart[Real, N]) -> Bool) == {}
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 B : ((Cart[Real, N], Real)) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, hyperplane_cell(UNION(A, B), c) == (!(c == {}) && (\226\136\131 c1 : (Cart[Real, N]) -> Bool, \226\136\131 c2 : (Cart[Real, N]) -> Bool, hyperplane_cell(A, c1) && hyperplane_cell(B, c2) && c == INTER(c1, c2)))
+  {{(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)}, {(x : Cart[Real, N]) | dot(a, x) < b}, {(x : Cart[Real, N]) | dot(a, x) > b}}
+  {INTER((c1 : (Cart[Real, N]) -> Bool), (c2 : (Cart[Real, N]) -> Bool)) | IN(c1, {(c : (Cart[Real, N]) -> Bool) | hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), c)}) && IN(c2, {(c : (Cart[Real, N]) -> Bool) | hyperplane_cell({((a : Cart[Real, N]), (b : Real))}, c)})}
+  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  (b : Real)
+  (a : Cart[Real, N])
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, FINITE(A) \226\134\146 FINITE({(c : (Cart[Real, N]) -> Bool) | hyperplane_cell(A, c)})
+  {(c : (Cart[Real, N]) -> Bool) | hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), c)}
+  \226\136\128 P : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, FINITE(A) \226\134\146 FINITE({(c : (Cart[Real, N]) -> Bool) | hyperplane_cell(A, c) && P(c)})
+  {(c : (Cart[Real, N]) -> Bool) | hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), c)}
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(A) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, C) \226\134\146 hyperplane_cell(A, c)) \226\134\146 FINITE(C)
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 C : ((Cart[Real, _]) -> Bool) -> Bool, (\226\136\128 c : (Cart[Real, _]) -> Bool, IN(c, C) \226\134\146 hyperplane_cell(A, c)) \226\134\146 pairwise(DISJOINT, C)
+  (t : (Cart[Real, N]) -> Bool)
+  INTER({(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) > (b : Real)}, (s : (Cart[Real, N]) -> Bool))
+  (t : (Cart[Real, N]) -> Bool)
+  INTER({(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) < (b : Real)}, (s : (Cart[Real, N]) -> Bool))
+  INTER({(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)}, (t : (Cart[Real, N]) -> Bool))
+  (s : (Cart[Real, N]) -> Bool)
+  (t : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  (t : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (c1 : (Cart[Real, N]) -> Bool)
+  (c' : (Cart[Real, N]) -> Bool)
+  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  (b : Real)
+  (a : Cart[Real, N])
+  (UNIV : (Cart[Real, N]) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, FINITE(A) && hyperplane_cell(A, c) \226\134\146 (\226\136\131 s : (Cart[Real, N]) -> Bool, \226\136\131 t : (Cart[Real, N]) -> Bool, open(s) && affine(t) && c == INTER(s, t))
+  hull(affine, (t : (Cart[Real, N]) -> Bool))
+  hull(affine, INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) == t
+  INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) == {}
+  (t : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, FINITE(A) && hyperplane_cell(A, c) \226\134\146 open_in(subtopology(euclidean, hull(affine, c)), c)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, FINITE(A) && hyperplane_cell(A, c) \226\134\146 relative_interior(c) == c
+  ((a : Real) - (b : Real) < real_of_num(0)) == (a < b)
+  ((a : Real) - (b : Real) > real_of_num(0)) == (a > b)
+  dot((a : Cart[Real, N]), (c : Cart[Real, N])) - (b : Real)
+  (b : Real)
+  (a : Cart[Real, N])
+  ((f : (_) -> _)((x : _)) == f((y : _))) == IN(y, {(y : _) | f(x) == f(y)})
+  (c : Cart[Real, N])
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, hyperplane_cell(A, c) \226\134\146 convex(c)
+  (c : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
+  (z : Cart[Real, N])
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, C) \226\134\146 hyperplane_cell(A, c)) && !(C == {}) && !(INTERS(C) == {}) \226\134\146 hyperplane_cell(A, INTERS(C))
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hyperplane_cell(A, s) && hyperplane_cell(A, t) && !(INTER(s, t) == {}) \226\134\146 hyperplane_cell(A, INTER(s, t))
+  (hyperplane_cellcomplex : (((Cart[Real, _], Real)) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((A : ((Cart[Real, _], Real)) -> Bool), (s : (Cart[Real, _]) -> Bool)) == (\226\136\131 t : ((Cart[Real, _]) -> Bool) -> Bool, (\226\136\128 c : (Cart[Real, _]) -> Bool, IN(c, t) \226\134\146 hyperplane_cell(A, c)) && s == UNIONS(t))
+  ({} : ((Cart[Real, N]) -> Bool) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, hyperplane_cellcomplex(A, {})
+  {(c : (Cart[Real, N]) -> Bool)}
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, hyperplane_cell(A, c) \226\134\146 hyperplane_cellcomplex(A, c)
+  UNIONS(IMAGE((f : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool), (C : ((Cart[Real, N]) -> Bool) -> Bool)))
+  (f : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, C) \226\134\146 hyperplane_cellcomplex(A, s)) \226\134\146 hyperplane_cellcomplex(A, UNIONS(C))
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, hyperplane_cellcomplex(A, s) && hyperplane_cellcomplex(A, t) \226\134\146 hyperplane_cellcomplex(A, UNION(s, t))
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, hyperplane_cellcomplex(A, UNIV)
+  UNIONS((s : ((_) -> Bool) -> Bool)) == UNIONS({(t : (_) -> Bool) | IN(t, s) && !(t == {})})
+  (C : ((Cart[Real, N]) -> Bool) -> Bool) == {UNIONS((f : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((s : (Cart[Real, N]) -> Bool))) | IN(s, C)}
+  (f : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)
+  (C : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, C) \226\134\146 hyperplane_cellcomplex(A, s)) \226\134\146 hyperplane_cellcomplex(A, INTERS(C))
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, hyperplane_cellcomplex(A, s) && hyperplane_cellcomplex(A, t) \226\134\146 hyperplane_cellcomplex(A, INTER(s, t))
+  (c' : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  (c' : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  DIFF(UNIV, (c : (Cart[Real, N]) -> Bool)) == UNIONS({(c' : (Cart[Real, N]) -> Bool) | hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), c') && !(c' == c)})
+  (c : (Cart[Real, N]) -> Bool)
+  (C : ((Cart[Real, N]) -> Bool) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, hyperplane_cellcomplex(A, s) \226\134\146 hyperplane_cellcomplex(A, DIFF(UNIV, s))
+  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == INTER(s, DIFF(UNIV, t))
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, hyperplane_cellcomplex(A, s) && hyperplane_cellcomplex(A, t) \226\134\146 hyperplane_cellcomplex(A, DIFF(s, t))
+  DIFF((B : ((Cart[Real, N], Real)) -> Bool), (A : ((Cart[Real, N], Real)) -> Bool))
+  (x : Cart[Real, N])
+  (c' : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (c' : (Cart[Real, N]) -> Bool)
+  {INTER(c', (c : (Cart[Real, N]) -> Bool)) | c' : (Cart[Real, N]) -> Bool | hyperplane_cell(DIFF((B : ((Cart[Real, N], Real)) -> Bool), (A : ((Cart[Real, N], Real)) -> Bool)), c') && !(INTER(c', c) == {})}
+  (B : ((Cart[Real, N], Real)) -> Bool) == UNION((A : ((Cart[Real, N], Real)) -> Bool), DIFF(B, A))
+  (c : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (C : ((Cart[Real, N]) -> Bool) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 B : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, hyperplane_cellcomplex(A, s) && SUBSET(A, B) \226\134\146 hyperplane_cellcomplex(B, s)
+  IMAGE(UNIONS, {(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {(c : (Cart[Real, N]) -> Bool) | hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), c)})})
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, FINITE(A) \226\134\146 FINITE({(c : (Cart[Real, N]) -> Bool) | hyperplane_cellcomplex(A, c)})
+  {(c : (Cart[Real, N]) -> Bool) | hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool), c)}
+  \226\136\128 P : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, FINITE(A) \226\134\146 FINITE({(c : (Cart[Real, N]) -> Bool) | hyperplane_cellcomplex(A, c) && P(c)})
+  {(c : (Cart[Real, N]) -> Bool) | hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool), c)}
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(A) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, C) \226\134\146 hyperplane_cellcomplex(A, c)) \226\134\146 FINITE(C)
+  IN((c : (_) -> Bool), (C : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(c, UNIONS(C))
+  (c' : (Cart[Real, N]) -> Bool) == (c : (Cart[Real, N]) -> Bool)
+  (c' : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  (c' : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
+  (c : (Cart[Real, N]) -> Bool) == {}
+  (C : ((Cart[Real, N]) -> Bool) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, hyperplane_cell(A, c) && hyperplane_cellcomplex(A, s) \226\134\146 SUBSET(c, s) == !DISJOINT(c, s)
+  (euler_characteristic : (((Cart[Real, N], Real)) -> Bool, (Cart[Real, N]) -> Bool) -> Real)((A : ((Cart[Real, N], Real)) -> Bool), (s : (Cart[Real, N]) -> Bool)) == sum({(c : (Cart[Real, N]) -> Bool) | hyperplane_cell(A, c) && SUBSET(c, s)}, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  !(\226\136\131 x : _, IN(x, (s : (_) -> Bool))) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 (P : (_) -> Bool)(x))
+  euler_characteristic((A : ((Cart[Real, _], Real)) -> Bool), {}) == real_of_num(0)
+  !DISJOINT((c : (Cart[Real, N]) -> Bool), (c' : (Cart[Real, N]) -> Bool))
+  (c' : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  !((c : (Cart[Real, N]) -> Bool) == {})
+  (c : (Cart[Real, N]) -> Bool)
+  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, C) \226\134\146 hyperplane_cell(A, c)) \226\134\146 euler_characteristic(A, UNIONS(C)) == sum(C, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  \226\136\128 A : ((Cart[Real, _], Real)) -> Bool, \226\136\128 c : (Cart[Real, _]) -> Bool, hyperplane_cell(A, c) \226\134\146 euler_characteristic(A, c) == pow(-real_of_num(1), num_of_int(aff_dim(c)))
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), (c : (Cart[Real, N]) -> Bool))
+  (c : (Cart[Real, N]) -> Bool) == {}
+  (c : (Cart[Real, N]) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(A) && hyperplane_cellcomplex(A, s) && hyperplane_cellcomplex(A, t) && DISJOINT(s, t) \226\134\146 euler_characteristic(A, UNION(s, t)) == euler_characteristic(A, s) + euler_characteristic(A, t)
+  (C : ((Cart[Real, N]) -> Bool) -> Bool)
+  (C : ((Cart[Real, N]) -> Bool) -> Bool)
+  FINITE((C : ((Cart[Real, N]) -> Bool) -> Bool))
+  FINITE((C : ((Cart[Real, N]) -> Bool) -> Bool))
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 C : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(A) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, C) \226\134\146 hyperplane_cellcomplex(A, c)) && pairwise(DISJOINT, C) \226\134\146 euler_characteristic(A, UNIONS(C)) == sum(C, (c : (Cart[Real, N]) -> Bool) => euler_characteristic(A, c))
+  aff_dim((c : (Cart[Real, N]) -> Bool))
+  (c : (Cart[Real, N]) -> Bool)
+  IMAGE(int_of_num, op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  {(c : (Cart[Real, N]) -> Bool) | hyperplane_cell((A : ((Cart[Real, N], Real)) -> Bool), c) && SUBSET(c, (s : (Cart[Real, N]) -> Bool))}
+  (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c)))
+  (c : (Cart[Real, N]) -> Bool) => aff_dim(c)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, (FINITE : (((Cart[Real, N], Real)) -> Bool) -> Bool)(A) \226\134\146 (euler_characteristic : (((Cart[Real, N], Real)) -> Bool, (Cart[Real, N]) -> Bool) -> Real)(A, s) == (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (d : Num) => pow(-real_of_num(1), d) * real_of_num((CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)({(c : (Cart[Real, N]) -> Bool) | (hyperplane_cell : (((Cart[Real, N], Real)) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(A, c) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(c, s) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(c) == int_of_num(d)})))
+  \226\136\128 a : Cart[Real, _], \226\136\128 b : Real, INTER({(x : Cart[Real, _]) | dot(a, x) == b}, {(x : Cart[Real, _]) | dot(a, x) < b}) == {} && INTER({(x : Cart[Real, _]) | dot(a, x) == b}, {(x : Cart[Real, _]) | dot(a, x) > b}) == {} && INTER({(x : Cart[Real, _]) | dot(a, x) < b}, {(x : Cart[Real, _]) | dot(a, x) == b}) == {} && INTER({(x : Cart[Real, _]) | dot(a, x) < b}, {(x : Cart[Real, _]) | dot(a, x) > b}) == {} && INTER({(x : Cart[Real, _]) | dot(a, x) > b}, {(x : Cart[Real, _]) | dot(a, x) == b}) == {} && INTER({(x : Cart[Real, _]) | dot(a, x) > b}, {(x : Cart[Real, _]) | dot(a, x) < b}) == {}
+  (i : Int)
+  aff_dim(INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)}))
+  int_of_num(0) <= aff_dim(INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)}))
+  hull(affine, INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) == hull(affine, t) && hull(affine, INTER(INTER(s, t), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)})) == hull(affine, INTER(t, {(x : Cart[Real, N]) | dot(a, x) == b}))
+  (t : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  (c : (Cart[Real, N]) -> Bool)
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  aff_dim((c : (Cart[Real, N]) -> Bool)) == aff_dim(INTER(c, {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)})) + int_of_num(1)
+  aff_dim(INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) < (b : Real)})) == aff_dim(c) && aff_dim(INTER(c, {(x : Cart[Real, N]) | dot(a, x) > b})) == aff_dim(c)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {} && !(INTER((c : (_) -> Bool), s) == {}) \226\134\146 !(INTER(c, s) == INTER(c, t))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (c' : (Cart[Real, N]) -> Bool)
+  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+  sum({INTER({(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)}, (c : (Cart[Real, N]) -> Bool)), INTER({(x : Cart[Real, N]) | dot(a, x) > b}, c), INTER({(x : Cart[Real, N]) | dot(a, x) < b}, c)}, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  ((b : Real) - (x : Real) < b) == (real_of_num(0) < x)
+  ((b : Real) - (x : Real) * (y : Real) > b) == (real_of_num(0) < x * -y)
+  (u : Cart[Real, N]) - op_pct((e : Real) / real_of_num(2) / norm((v : Cart[Real, N]) - u), v - u)
+  ((b : Real) - (x : Real) * (y : Real) > b) == (real_of_num(0) < x * -y)
+  (u : Cart[Real, N]) - op_pct((e : Real) / real_of_num(2) / norm((v : Cart[Real, N]) - u), v - u)
+  dot((a : Cart[Real, N]), (v : Cart[Real, N])) < (b : Real) || dot(a, v) > b
+  (abs((e : Real)) / real_of_num(2) < e) == (real_of_num(0) < e)
+  (x : Cart[Real, N]) - op_pct((a : Real), (y : Cart[Real, N]) - (z : Cart[Real, N])) == x + op_pct(a, z - y)
+  dist(((u : Cart[Real, N]) - (a : Cart[Real, N]), u)) == norm(a)
   :real
   :real
-  u - e / &2 / norm(v - u) % (v - u):real^N
-  e:real
-  u:real^N
-  open_in (subtopology euclidean (affine hull c)) (c:real^N->bool)
-  ?u v:real^N.\n         u IN c /\\ a dot u = b /\\ v IN c /\\ ~(a dot v = b) /\\ ~(u = v)
-  ~(c INTER {x:real^N | a dot x < b} = {}) /\\\n                ~(c INTER {x:real^N | a dot x > b} = {})
-  v + a % (u - v):real^N = (&1 - a) % v + a % u
-  (a:real^N) dot v < a dot u
-  v + (b - a dot v) / (a dot u - a dot v) % (u - v):real^N
-  (a:real^N) dot v = b
-  (a:real^N) dot u = b
-  v:real^N
-  u:real^N
-  ?u v:real^N. u IN c /\\ ~(a dot u < b) /\\ v IN c /\\ ~(a dot v > b)
-  ~(c INTER {x:real^N | a dot x = b} = {})
-  c SUBSET {x:real^N | a dot x = b}
-  c SUBSET {x:real^N | a dot x > b}
-  c SUBSET {x:real^N | a dot x < b}
-  b:real
-  a:real^N
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  c':real^N->bool
-  s = t ==> sum s f = sum t f
-  sum {c} (\\c:real^N->bool. (-- &1) pow num_of_int (aff_dim c))
-  b:real
-  a:real^N
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  c':real^N->bool
-  s = t ==> sum s f = sum t f
-  sum {c} (\\c:real^N->bool. (-- &1) pow num_of_int (aff_dim c))
-  b:real
-  a:real^N
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  c':real^N->bool
-  s = t ==> sum s f = sum t f
-  sum {c} (\\c:real^N->bool. (-- &1) pow num_of_int (aff_dim c))
-  ~(c:real^N->bool = {})
-  c:real^N->bool
-  c1:real^N->bool
-  c1:real^N->bool
-  ~(DISJOINT c2 (c:real^N->bool))
-  c2:real^N->bool
-  c1:real^N->bool
-  c':real^N->bool
-  s = t ==> sum s f = sum t f
-  sum {c' INTER c |c'| hyperplane_cell {(a,b)} c' /\\ ~(c' INTER c = {})}\n        (\\c:real^N->bool. (-- &1) pow (num_of_int(aff_dim c)))
-  x INSERT s = {x} UNION s
-  x INSERT s = {x} UNION s
-  ~(a:real^N = vec 0)
-  hyperplane_cell ((a,b) INSERT A) (c:real^N->bool)
-  c:real^N->bool
-  pairwise DISJOINT (C:(real^N->bool)->bool)
-  A:(real^N#real)->bool
-  forall c:real^N->bool. c IN C ==> hyperplane_cellcomplex A c /\\\n                                hyperplane_cellcomplex ((a,b) INSERT A) c
-  C:(real^N->bool)->bool
-  s:real^N->bool
-  b:real
-  a:real^N
-  A:(real^N#real)->bool
-  forall A h s:real^N->bool.\n        FINITE A /\\ hyperplane_cellcomplex A s\n        ==> euler_characteristic (h INSERT A) s = euler_characteristic A s
-  euler_characteristic (A UNION B) (s:real^N->bool)
-  A:real^N#real->bool
-  s UNION (x INSERT t) = x INSERT (s UNION t)
-  B:real^N#real->bool
-  h:real^N#real
-  forall A s:real^N->bool.\n        FINITE A /\\ hyperplane_cellcomplex A s\n        ==> forall B. FINITE B\n                ==> euler_characteristic (A UNION B) s =\n                    euler_characteristic A s
-  forall A B h s:real^N->bool.\n        FINITE A /\\ FINITE B /\\\n        hyperplane_cellcomplex A s /\\ hyperplane_cellcomplex B s\n        ==> euler_characteristic A s = euler_characteristic B s
-  s:(real^N->bool)->bool
-  euler_characteristic A :(real^N->bool)->real
-  hyperplane_cellcomplex A :(real^N->bool)->bool
-  forall A s:(real^N->bool)->bool.\n        FINITE A /\\ FINITE s /\\ (forall k. k IN s ==> hyperplane_cellcomplex A k)\n        ==> euler_characteristic A (UNIONS s) =\n            sum {t | t SUBSET s /\\ ~(t = {})}\n                (\\t. (-- &1) pow (CARD t + 1) *\n                     euler_characteristic A (INTERS t))
-  CARD(H:(real^N->bool)->bool) = 0
-  x = &0 ==> x = &1 + y ==> --y = &1
-  (x * --(&1) pow 1) * y = --(y * x)
-  &1
-  --(&1)
-  CARD(H:(real^N->bool)->bool)
-  {(:real^N) DIFF t | t IN H}
-  n:num
-  CARD(H:(real^N->bool)->bool)
-  u:(real^N->bool)->bool
-  t:(real^N->bool)->bool
-  (p ==> r) ==> (p /\\ q <=> p /\\ r /\\ q)
-  t:(real^N->bool)->bool = {}
-  t:(real^N->bool)->bool
+  (u : Cart[Real, N]) - op_pct((e : Real) / real_of_num(2) / norm((v : Cart[Real, N]) - u), v - u)
+  (e : Real)
+  (u : Cart[Real, N])
+  open_in(subtopology(euclidean, hull(affine, (c : (Cart[Real, N]) -> Bool))), c)
+  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], IN(u, (c : (Cart[Real, N]) -> Bool)) && dot((a : Cart[Real, N]), u) == (b : Real) && IN(v, c) && !(dot(a, v) == b) && !(u == v)
+  !(INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) < (b : Real)}) == {}) && !(INTER(c, {(x : Cart[Real, N]) | dot(a, x) > b}) == {})
+  (v : Cart[Real, N]) + op_pct((a : Real), (u : Cart[Real, N]) - v) == op_pct(real_of_num(1) - a, v) + op_pct(a, u)
+  dot((a : Cart[Real, N]), (v : Cart[Real, N])) < dot(a, (u : Cart[Real, N]))
+  (v : Cart[Real, N]) + op_pct(((b : Real) - dot((a : Cart[Real, N]), v)) / (dot(a, (u : Cart[Real, N])) - dot(a, v)), u - v)
+  dot((a : Cart[Real, N]), (v : Cart[Real, N])) == (b : Real)
+  dot((a : Cart[Real, N]), (u : Cart[Real, N])) == (b : Real)
+  (v : Cart[Real, N])
+  (u : Cart[Real, N])
+  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], IN(u, (c : (Cart[Real, N]) -> Bool)) && !(dot((a : Cart[Real, N]), u) < (b : Real)) && IN(v, c) && !(dot(a, v) > b)
+  !(INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)}) == {})
+  SUBSET((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)})
+  SUBSET((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) > (b : Real)})
+  SUBSET((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) < (b : Real)})
+  (b : Real)
+  (a : Cart[Real, N])
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (c' : (Cart[Real, N]) -> Bool)
+  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+  sum({(c : (Cart[Real, N]) -> Bool)}, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  (b : Real)
+  (a : Cart[Real, N])
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (c' : (Cart[Real, N]) -> Bool)
+  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+  sum({(c : (Cart[Real, N]) -> Bool)}, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  (b : Real)
+  (a : Cart[Real, N])
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  (c' : (Cart[Real, N]) -> Bool)
+  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+  sum({(c : (Cart[Real, N]) -> Bool)}, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  !((c : (Cart[Real, N]) -> Bool) == {})
+  (c : (Cart[Real, N]) -> Bool)
+  (c1 : (Cart[Real, N]) -> Bool)
+  (c1 : (Cart[Real, N]) -> Bool)
+  !DISJOINT((c2 : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Bool))
+  (c2 : (Cart[Real, N]) -> Bool)
+  (c1 : (Cart[Real, N]) -> Bool)
+  (c' : (Cart[Real, N]) -> Bool)
+  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 sum(s, (f : (_) -> Real)) == sum(t, f)
+  sum({INTER(c', (c : (Cart[Real, N]) -> Bool)) | c' : (Cart[Real, N]) -> Bool | hyperplane_cell({((a : Cart[Real, N]), (b : Real))}, c') && !(INTER(c', c) == {})}, (c : (Cart[Real, N]) -> Bool) => pow(-real_of_num(1), num_of_int(aff_dim(c))))
+  INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)
+  INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)
+  !((a : Cart[Real, N]) == vec(0))
+  hyperplane_cell(INSERT(((a : Cart[Real, N]), (b : Real)), (A : ((Cart[Real, N], Real)) -> Bool)), (c : (Cart[Real, N]) -> Bool))
+  (c : (Cart[Real, N]) -> Bool)
+  pairwise(DISJOINT, (C : ((Cart[Real, N]) -> Bool) -> Bool))
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  \226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (C : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool), c) && hyperplane_cellcomplex(INSERT(((a : Cart[Real, N]), (b : Real)), A), c)
+  (C : ((Cart[Real, N]) -> Bool) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  (b : Real)
+  (a : Cart[Real, N])
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 h : (Cart[Real, N], Real), \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(A) && hyperplane_cellcomplex(A, s) \226\134\146 euler_characteristic(INSERT(h, A), s) == euler_characteristic(A, s)
+  euler_characteristic(UNION((A : ((Cart[Real, N], Real)) -> Bool), (B : ((Cart[Real, N], Real)) -> Bool)), (s : (Cart[Real, N]) -> Bool))
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  UNION((s : (_) -> Bool), INSERT((x : _), (t : (_) -> Bool))) == INSERT(x, UNION(s, t))
+  (B : ((Cart[Real, N], Real)) -> Bool)
+  (h : (Cart[Real, N], Real))
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(A) && hyperplane_cellcomplex(A, s) \226\134\146 (\226\136\128 B : ((Cart[Real, N], Real)) -> Bool, FINITE(B) \226\134\146 euler_characteristic(UNION(A, B), s) == euler_characteristic(A, s))
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 B : ((Cart[Real, N], Real)) -> Bool, \226\136\128 h : _, \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(A) && FINITE(B) && hyperplane_cellcomplex(A, s) && hyperplane_cellcomplex(B, s) \226\134\146 euler_characteristic(A, s) == euler_characteristic(B, s)
+  (s : ((Cart[Real, N]) -> Bool) -> Bool)
+  euler_characteristic((A : ((Cart[Real, N], Real)) -> Bool))
+  hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool))
+  \226\136\128 A : ((Cart[Real, N], Real)) -> Bool, \226\136\128 s : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(A) && FINITE(s) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, s) \226\134\146 hyperplane_cellcomplex(A, k)) \226\134\146 euler_characteristic(A, UNIONS(s)) == sum({(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, s) && !(t == {})}, (t : ((Cart[Real, N]) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(t) + 1) * euler_characteristic(A, INTERS(t)))
+  CARD((H : ((Cart[Real, N]) -> Bool) -> Bool)) == 0
+  (x : Real) == real_of_num(0) \226\134\146 x == real_of_num(1) + (y : Real) \226\134\146 -y == real_of_num(1)
+  (x : Real) * pow(-real_of_num(1), 1) * (y : Real) == -(y * x)
+  real_of_num(1)
+  -real_of_num(1)
+  CARD((H : ((Cart[Real, N]) -> Bool) -> Bool))
+  {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}
+  (n : Num)
+  CARD((H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (u : ((Cart[Real, N]) -> Bool) -> Bool)
+  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+  ((p : Bool) \226\134\146 (r : Bool)) \226\134\146 (p && (q : Bool)) == (p && r && q)
+  (t : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+  (t : ((Cart[Real, N]) -> Bool) -> Bool)
   CARD {t | t SUBSET {(:real^N) DIFF t | t IN H} /\\\n                          t HAS_SIZE n}
   {t |  t SUBSET {(:real^N) DIFF t | t IN H}}
-  n:num
-  sum (1..CARD(H:(real^N->bool)->bool))\n        (\\n. -- &1 pow (n + 1) * &(binom(CARD H,n)))
-  CARD(J:(real^N->bool)->bool)
-  1 <= n <=> ~(n = 0)
-  FINITE(J:(real^N->bool)->bool)
-  J:(real^N->bool)->bool
+  (n : Num)
+  sum(op_dot_dot(1, CARD((H : ((Cart[Real, N]) -> Bool) -> Bool))), (n : Num) => pow(-real_of_num(1), n + 1) * real_of_num(binom((CARD(H), n))))
+  CARD((J : ((Cart[Real, N]) -> Bool) -> Bool))
+  (1 <= (n : Num)) == !(n == 0)
+  FINITE((J : ((Cart[Real, N]) -> Bool) -> Bool))
+  (J : ((Cart[Real, N]) -> Bool) -> Bool)
   {t |  t SUBSET {(:real^N) DIFF t | t IN H}}
-  1..CARD(H:(real^N->bool)->bool)
+  op_dot_dot(1, CARD((H : ((Cart[Real, N]) -> Bool) -> Bool)))
   {t |  t SUBSET\n                     {(:real^N) DIFF t | t IN H} /\\ ~(t = {})}
-  \\t:(real^N->bool)->bool. (-- &1) pow (CARD t + 1)
-  \\t:(real^N->bool)->bool. CARD t
-  s = &1 ==> s * t = t
-  affine hull (INTERS (IMAGE (\\t. (:real^N) DIFF t) H))
-  forall t. t SUBSET s /\\ t = UNIV ==> s = UNIV
-  i = &n ==> num_of_int i = n
-  B:real^N#real->bool
-  euler_characteristic B (INTERS (IMAGE (\\t. (:real^N) DIFF t) J))
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN J
-  h:real^N->bool
-  (forall h. P h ==> (Q h <=> R h))\n        ==> (forall h. P h) ==> ((forall h. Q h) <=> (forall h. R h))
-  z:real^N
-  ~(INTERS (IMAGE (\\t. (:real^N) DIFF t) J) = {})
-  hyperplane_cell B (INTERS (IMAGE (\\t. (:real^N) DIFF t) J))
-  h:real^N->bool
-  (forall h. P h ==> (Q h <=> R h))\n          ==> ((forall h. P h ==> Q h) <=> (forall h. P h ==> R h))
-  (h:real^N->bool) IN H
-  h:real^N->bool
-  (c ==> b) /\\ (a <=> c) ==> (a <=> b /\\ c)
-  x:real^N
-  --x:real^N = y <=> x = --y
-  \\h:real^N->bool. &0
-  fa:(real^N->bool)->real^N
-  H:(real^N->bool)->bool
-  s:real^N->bool
-  INTERS (IMAGE (\\t. (:real^N) DIFF t) H) =\n      IMAGE (--) (interior s)
-  (B:real^N#real->bool) SUBSET A
-  B = IMAGE (\\h:real^N->bool. fa h:real^N,&0) J
-  J:(real^N->bool)->bool
+  (t : ((Cart[Real, N]) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(t) + 1)
+  (t : ((Cart[Real, N]) -> Bool) -> Bool) => CARD(t)
+  (s : Real) == real_of_num(1) \226\134\146 s * (t : Real) == t
+  hull(affine, INTERS(IMAGE((t : (Cart[Real, N]) -> Bool) => DIFF(UNIV, t), (H : ((Cart[Real, N]) -> Bool) -> Bool))))
+  \226\136\128 t : (_) -> Bool, SUBSET(t, (s : (_) -> Bool)) && t == UNIV \226\134\146 s == UNIV
+  (i : Int) == int_of_num((n : Num)) \226\134\146 num_of_int(i) == n
+  (B : ((Cart[Real, N], Real)) -> Bool)
+  euler_characteristic((B : ((Cart[Real, N], Real)) -> Bool), INTERS(IMAGE((t : (Cart[Real, N]) -> Bool) => DIFF(UNIV, t), (J : ((Cart[Real, N]) -> Bool) -> Bool))))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (J : ((Cart[Real, N]) -> Bool) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  (\226\136\128 h : _, (P : (_) -> Bool)(h) \226\134\146 (Q : (_) -> Bool)(h) == (R : (_) -> Bool)(h)) \226\134\146 (\226\136\128 h : _, P(h)) \226\134\146 (\226\136\128 h : _, Q(h)) == (\226\136\128 h : _, R(h))
+  (z : Cart[Real, N])
+  !(INTERS(IMAGE((t : (Cart[Real, N]) -> Bool) => DIFF(UNIV, t), (J : ((Cart[Real, N]) -> Bool) -> Bool))) == {})
+  hyperplane_cell((B : ((Cart[Real, N], Real)) -> Bool), INTERS(IMAGE((t : (Cart[Real, N]) -> Bool) => DIFF(UNIV, t), (J : ((Cart[Real, N]) -> Bool) -> Bool))))
+  (h : (Cart[Real, N]) -> Bool)
+  (\226\136\128 h : _, (P : (_) -> Bool)(h) \226\134\146 (Q : (_) -> Bool)(h) == (R : (_) -> Bool)(h)) \226\134\146 (\226\136\128 h : _, P(h) \226\134\146 Q(h)) == (\226\136\128 h : _, P(h) \226\134\146 R(h))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  ((c : Bool) \226\134\146 (b : Bool)) && (a : Bool) == c \226\134\146 a == (b && c)
+  (x : Cart[Real, N])
+  (-(x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == -y)
+  (h : (Cart[Real, N]) -> Bool) => real_of_num(0)
+  (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+  (H : ((Cart[Real, N]) -> Bool) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  INTERS(IMAGE((t : (Cart[Real, N]) -> Bool) => DIFF(UNIV, t), (H : ((Cart[Real, N]) -> Bool) -> Bool))) == IMAGE(op_minus_minus, interior((s : (Cart[Real, N]) -> Bool)))
+  SUBSET((B : ((Cart[Real, N], Real)) -> Bool), (A : ((Cart[Real, N], Real)) -> Bool))
+  (B : ((Cart[Real, N], Real)) -> Bool) == IMAGE((h : (Cart[Real, N]) -> Bool) => ((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), real_of_num(0)), (J : ((Cart[Real, N]) -> Bool) -> Bool))
+  (J : ((Cart[Real, N]) -> Bool) -> Bool)
   sum {t | t SUBSET {(:real^N) DIFF t | t IN H} /\\ ~(t = {})}\n             (\\t. -- &1 pow (CARD t + 1) * (--(&1)) pow (dimindex(:N)))
-  {}:real^N#real->bool
-  euler_characteristic {} (:real^N)
-  x = (--(&1)) pow (dimindex(:N)) /\\\n    y = (--(&1)) pow (dimindex(:N))\n    ==> x = s + y ==> s = &0
-  s UNION (UNIV DIFF s) = UNIV
-  DISJOINT s (UNIV DIFF s)
-  (:real^N) DIFF INTERS H
-  INTERS H:real^N->bool
-  A:real^N#real->bool
-  hyperplane_cellcomplex A (s:real^N->bool)
-  forall h:real^N->bool. h IN H ==> hyperplane_cellcomplex A h
-  h:real^N->bool
-  {((fa:(real^N->bool)->real^N) h,&0)}
-  forall h. h IN H ==> hyperplane_cellcomplex A ((:real^N) DIFF h)
-  h:real^N->bool
-  h:real^N->bool
-  y:real^N
-  h:real^N->bool
-  (h:real^N->bool) IN J
-  h:real^N->bool
-  h:real^N->bool
-  ~q /\\ (p ==> r) ==> ~r ==> (p <=> q)
-  ~((y:real^N) IN s)
-  h:real^N->bool
-  h:real^N->bool
-  (y:real^N) IN s
-  a ==> (a /\\ b <=> b)
-  (y:real^N) IN s
-  y:real^N
+  ({} : ((Cart[Real, N], Real)) -> Bool)
+  (euler_characteristic : (((Cart[Real, N], Real)) -> Bool, (Cart[Real, N]) -> Bool) -> Real)(({} : ((Cart[Real, N], Real)) -> Bool), (UNIV : (Cart[Real, N]) -> Bool))
+  (x : Real) == pow(-real_of_num(1), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (y : Real) == pow(-real_of_num(1), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 x == (s : Real) + y \226\134\146 s == real_of_num(0)
+  UNION((s : (_) -> Bool), DIFF(UNIV, s)) == UNIV
+  DISJOINT((s : (_) -> Bool), DIFF(UNIV, s))
+  DIFF(UNIV, INTERS((H : ((Cart[Real, N]) -> Bool) -> Bool)))
+  INTERS((H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (A : ((Cart[Real, N], Real)) -> Bool)
+  hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool), (s : (Cart[Real, N]) -> Bool))
+  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool), h)
+  (h : (Cart[Real, N]) -> Bool)
+  {((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), real_of_num(0))}
+  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 hyperplane_cellcomplex((A : ((Cart[Real, N], Real)) -> Bool), DIFF(UNIV, h))
+  (h : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  (y : Cart[Real, N])
+  (h : (Cart[Real, N]) -> Bool)
+  IN((h : (Cart[Real, N]) -> Bool), (J : ((Cart[Real, N]) -> Bool) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  !(q : Bool) && ((p : Bool) \226\134\146 (r : Bool)) \226\134\146 !r \226\134\146 p == q
+  !IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (a : Bool) \226\134\146 (a && (b : Bool)) == b
+  IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (y : Cart[Real, N])
   INTERS {{x | fa(h:real^N->bool) dot x <= &0} | h IN J} INTER\n        INTERS {{x:real^N | fa h dot x = &0} | h IN H DIFF J} =\n        INTERS {s INTER {x | fa h dot x = &0} | h IN H DIFF J}
-  (forall x. x IN s ==> f x = x) ==> s = {f x | x IN s}
-  {f x | x | F} = {}
-  J:(real^N->bool)->bool = H
+  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 s == {f((x : _)) | IN(x, s)}
+  {(f : (_) -> _)(x) | x : _ | false} == {}
+  (J : ((Cart[Real, N]) -> Bool) -> Bool) == (H : ((Cart[Real, N]) -> Bool) -> Bool)
   closure (INTERS {{x | fa h dot x = &0} | h IN H DIFF J}) =\n       INTERS {{x | (fa:(real^N->bool)->real^N) h dot x = &0} | h IN H DIFF J}
   IMAGE closure {{x | fa h dot x < &0} | h IN J} =\n        {{x | (fa:(real^N->bool)->real^N) h dot x <= &0} | h IN J}
-  s SUBSET topspace tp /\\ t = s\n            ==> open_in (subtopology tp t) s
-  h:real^N->bool
-  h:real^N->bool
-  x:real^N
-  ~p ==> p ==> q
-  ?x:real^N. x IN c /\\ x IN s
-  (fa:(real^N->bool)->real^N) h dot z
-  (h:real^N->bool) IN H
-  h:real^N->bool
-  a /\\ ~(a /\\ b) <=> a /\\ ~b
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  y:real^N
-  {x | x IN s /\\ P x} SUBSET s
-  {h:real^N->bool | h IN H /\\\n                            real_sgn(fa h dot (z:real^N)) = -- &1}
-  z:real^N
+  SUBSET((s : (_) -> Bool), topspace((tp : Topology[_]))) && (t : (_) -> Bool) == s \226\134\146 open_in(subtopology(tp, t), s)
+  (h : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
+  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+  \226\136\131 x : Cart[Real, N], IN(x, (c : (Cart[Real, N]) -> Bool)) && IN(x, (s : (Cart[Real, N]) -> Bool))
+  dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N]))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  ((a : Bool) && !(a && (b : Bool))) == (a && !b)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (y : Cart[Real, N])
+  SUBSET({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)}, s)
+  {(h : (Cart[Real, N]) -> Bool) | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && real_sgn(dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), (z : Cart[Real, N]))) == -real_of_num(1)}
+  (z : Cart[Real, N])
   ?J. J SUBSET H /\\\n            c = INTERS {{x | (fa(h:real^N->bool)) dot x < &0} | h IN J} INTER\n                INTERS {{x:real^N | (fa h) dot x = &0} | h IN (H DIFF J)}
-  relative_interior c:real^N->bool
-  c:real^N->bool
-  (h:real^N->bool) IN H
-  h:real^N->bool
-  (forall h. P h ==> (Q h <=> R h))\n        ==> (forall h. P h) ==> ((forall h. Q h) <=> (forall h. R h))
-  z:real^N
-  ~(relative_interior f:real^N->bool = {})
-  h:real^N->bool
-  (x + e / norm(y - x) % (x - y):real^N) IN s
-  dist(x:real^N,x + r) = norm r
+  relative_interior((c : (Cart[Real, N]) -> Bool))
+  (c : (Cart[Real, N]) -> Bool)
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  (\226\136\128 h : _, (P : (_) -> Bool)(h) \226\134\146 (Q : (_) -> Bool)(h) == (R : (_) -> Bool)(h)) \226\134\146 (\226\136\128 h : _, P(h)) \226\134\146 (\226\136\128 h : _, Q(h)) == (\226\136\128 h : _, R(h))
+  (z : Cart[Real, N])
+  !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
+  (h : (Cart[Real, N]) -> Bool)
+  IN((x : Cart[Real, N]) + op_pct((e : Real) / norm((y : Cart[Real, N]) - x), x - y), (s : (Cart[Real, N]) -> Bool))
+  dist(((x : Cart[Real, N]), x + (r : Cart[Real, N]))) == norm(r)
   :real
   :real
-  (x:real^N) IN affine hull f /\\ y IN affine hull f
-  x + e / norm(y - x) % (x - y):real^N
-  ~(y:real^N = x)
-  e:real
-  (x:real^N) IN relative_interior f
-  ~(x:real = &0) ==> ~(x <= &0) \\/ x < &0
-  y:real^N
-  ~(s SUBSET t) <=> ?y. y IN s /\\ ~(y IN t)
-  h:real^N->bool
-  x:real^N
-  (h:real^N->bool) IN K
-  (h:real^N->bool) IN J
-  (h:real^N->bool) IN H
-  h:real^N->bool
-  x:real^N
+  IN((x : Cart[Real, N]), hull(affine, (f : (Cart[Real, N]) -> Bool))) && IN((y : Cart[Real, N]), hull(affine, f))
+  (x : Cart[Real, N]) + op_pct((e : Real) / norm((y : Cart[Real, N]) - x), x - y)
+  !((y : Cart[Real, N]) == (x : Cart[Real, N]))
+  (e : Real)
+  IN((x : Cart[Real, N]), relative_interior((f : (Cart[Real, N]) -> Bool)))
+  !((x : Real) == real_of_num(0)) \226\134\146 !(x <= real_of_num(0)) || x < real_of_num(0)
+  (y : Cart[Real, N])
+  !SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\131 y : _, IN(y, s) && !IN(y, t))
+  (h : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
+  IN((h : (Cart[Real, N]) -> Bool), (K : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (J : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  (x : Cart[Real, N])
   relative_interior f =\n          INTERS {(if (h:real^N->bool) IN J then {x | fa h dot x < &0}\n                   else if h IN K then {x:real^N | fa h dot x = &0}\n                   else if relative_interior f SUBSET {x | fa h dot x = &0}\n                   then {x | fa h dot x = &0}\n                   else {x | fa h dot x < &0}) | h IN H}
-  ~(relative_interior f:real^N->bool = {})
-  DISJOINT (J:(real^N->bool)->bool) K
-  ~(relative_interior f:real^N->bool = {})
-  K:(real^N->bool)->bool
-  h':real^N->bool
-  h':real^N->bool
-  (z:real^N) IN s
-  h:real^N->bool
-  (z:real^N) IN relative_interior f
-  h':real^N->bool
-  h:real^N->bool
-  h:real^N->bool
-  (z:real^N) IN f /\\ z IN s
-  z:real^N
-  ~(relative_interior f:real^N->bool = {})
-  forall h:real^N->bool. h IN J ==> h IN H /\\ ga h:real^N = fa h
-  \\h:real^N->bool. &0
-  ga:(real^N->bool)->real^N
-  J:(real^N->bool)->bool
-  f:real^N->bool
-  ga:(real^N->bool)->real^N
-  --((fa:(real^N->bool)->real^N) h)
-  (fa:(real^N->bool)->real^N) h
-  h:real^N->bool
-  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-  h:real^N->bool
-  h:real^N->bool
-  (h:real^N->bool) IN J
-  (h:real^N->bool) IN (H UNION H')
-  h:real^N->bool
-  forall h:real^N->bool. h IN J\n          ==> ?a. {x | a dot x <= &0} = h /\\\n                  (h IN H /\\ a = fa h \\/ ?h'. h' IN H /\\ a = --(fa h'))
-  s SUBSET t ==> ~(s = t) ==> s PSUBSET t
-  a /\\ b /\\ (~c ==> d) ==> ~(a /\\ b /\\ c) ==> d
-  J':(real^N->bool)->bool
-  CARD(J':(real^N->bool)->bool)
-  forall J'. J' PSUBSET J\n             ==> (f:real^N->bool) PSUBSET (affine hull f INTER INTERS J')
-  J:(real^N->bool)->bool
-  nn:num
-  (?f. FINITE f /\\ P f) <=> (?n f. f HAS_SIZE n /\\ P f)
-  --x <= &0 <=> &0 <= x
-  y:real^N
-  (forall x. x IN s ==> f x = x) ==> {f x | x IN s} = s
-  s = s' /\\ (forall x. x IN s ==> (x IN t <=> x IN t'))\n            ==> s INTER t = s' INTER t'
-  s SUBSET f /\\ s = t ==> s = f INTER t
-  H UNION IMAGE (\\h:real^N->bool.\n             {x:real^N | --(fa h) dot x <= &0}) J
-  J:(real^N->bool)->bool
-  ?J. FINITE J /\\\n            J SUBSET (H UNION H') /\\\n            f:real^N->bool = affine hull f INTER INTERS J
-  H' = IMAGE (\\h:real^N->bool. {x:real^N | --(fa h) dot x <= &0}) H
-  (y:real^N) IN s
-  y:real^N
-  {h:real^N->bool | h IN H /\\\n                           f SUBSET s INTER {x:real^N | fa h dot x = &0}} =\n                       {}
-  (forall x. x IN s ==> f x = x) ==> {f x | x IN s} = s
+  !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
+  DISJOINT((J : ((Cart[Real, N]) -> Bool) -> Bool), (K : ((Cart[Real, N]) -> Bool) -> Bool))
+  !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
+  (K : ((Cart[Real, N]) -> Bool) -> Bool)
+  (h' : (Cart[Real, N]) -> Bool)
+  (h' : (Cart[Real, N]) -> Bool)
+  IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  IN((z : Cart[Real, N]), relative_interior((f : (Cart[Real, N]) -> Bool)))
+  (h' : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  IN((z : Cart[Real, N]), (f : (Cart[Real, N]) -> Bool)) && IN(z, (s : (Cart[Real, N]) -> Bool))
+  (z : Cart[Real, N])
+  !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
+  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (J : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && (ga : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h) == (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h)
+  (h : (Cart[Real, N]) -> Bool) => real_of_num(0)
+  (ga : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+  (J : ((Cart[Real, N]) -> Bool) -> Bool)
+  (f : (Cart[Real, N]) -> Bool)
+  (ga : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+  -(fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool))
+  (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (h : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool)
+  IN((h : (Cart[Real, N]) -> Bool), (J : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), UNION((H : ((Cart[Real, N]) -> Bool) -> Bool), (H' : ((Cart[Real, N]) -> Bool) -> Bool)))
+  (h : (Cart[Real, N]) -> Bool)
+  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (J : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 a : Cart[Real, N], {(x : Cart[Real, N]) | dot(a, x) <= real_of_num(0)} == h && (IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && a == (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h) || (\226\136\131 h' : (Cart[Real, N]) -> Bool, IN(h', H) && a == -fa(h'))))
+  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == t) \226\134\146 PSUBSET(s, t)
+  (a : Bool) && (b : Bool) && (!(c : Bool) \226\134\146 (d : Bool)) \226\134\146 !(a && b && c) \226\134\146 d
+  (J' : ((Cart[Real, N]) -> Bool) -> Bool)
+  CARD((J' : ((Cart[Real, N]) -> Bool) -> Bool))
+  \226\136\128 J' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(J', (J : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 PSUBSET((f : (Cart[Real, N]) -> Bool), INTER(hull(affine, f), INTERS(J')))
+  (J : ((Cart[Real, N]) -> Bool) -> Bool)
+  (nn : Num)
+  (\226\136\131 f : (_) -> Bool, FINITE(f) && (P : ((_) -> Bool) -> Bool)(f)) == (\226\136\131 n : Num, \226\136\131 f : (_) -> Bool, HAS_SIZE(f, n) && P(f))
+  (-(x : Real) <= real_of_num(0)) == (real_of_num(0) <= x)
+  (y : Cart[Real, N])
+  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 {f((x : _)) | IN(x, s)} == s
+  (s : (_) -> Bool) == (s' : (_) -> Bool) && (\226\136\128 x : _, IN(x, s) \226\134\146 IN(x, (t : (_) -> Bool)) == IN(x, (t' : (_) -> Bool))) \226\134\146 INTER(s, t) == INTER(s', t')
+  SUBSET((s : (_) -> Bool), (f : (_) -> Bool)) && s == (t : (_) -> Bool) \226\134\146 s == INTER(f, t)
+  UNION((H : ((Cart[Real, N]) -> Bool) -> Bool), IMAGE((h : (Cart[Real, N]) -> Bool) => {(x : Cart[Real, N]) | dot(-(fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= real_of_num(0)}, (J : ((Cart[Real, N]) -> Bool) -> Bool)))
+  (J : ((Cart[Real, N]) -> Bool) -> Bool)
+  \226\136\131 J : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(J) && SUBSET(J, UNION((H : ((Cart[Real, N]) -> Bool) -> Bool), (H' : ((Cart[Real, N]) -> Bool) -> Bool))) && (f : (Cart[Real, N]) -> Bool) == INTER(hull(affine, f), INTERS(J))
+  (H' : ((Cart[Real, N]) -> Bool) -> Bool) == IMAGE((h : (Cart[Real, N]) -> Bool) => {(x : Cart[Real, N]) | dot(-(fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= real_of_num(0)}, (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (y : Cart[Real, N])
+  {(h : (Cart[Real, N]) -> Bool) | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((f : (Cart[Real, N]) -> Bool), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == real_of_num(0)}))} == {}
+  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 {f((x : _)) | IN(x, s)} == s
   INTERS {{x:real^N | fa(h:real^N->bool) dot x <= &0} | h IN H} = s
-  f:real^N->bool
-  \\h:real^N->bool. &0
-  fa:(real^N->bool)->real^N
-  H:(real^N->bool)->bool
-  s:real^N->bool
-  {h:real^N->bool | h IN H /\\\n                     f SUBSET s INTER {x:real^N | fa h dot x = &0}}
-  (forall x. x IN s ==> f x = x) ==> s = {f x | x IN s}
-  INTERS H = (s:real^N->bool)
-  {f x | x | F} = {}
-  {}:(real^N->bool)->bool
-  f:real^N->bool = s
+  (f : (Cart[Real, N]) -> Bool)
+  (h : (Cart[Real, N]) -> Bool) => real_of_num(0)
+  (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+  (H : ((Cart[Real, N]) -> Bool) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  {(h : (Cart[Real, N]) -> Bool) | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((f : (Cart[Real, N]) -> Bool), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == real_of_num(0)}))}
+  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 s == {f((x : _)) | IN(x, s)}
+  INTERS((H : ((Cart[Real, N]) -> Bool) -> Bool)) == (s : (Cart[Real, N]) -> Bool)
+  {(f : (_) -> _)(x) | x : _ | false} == {}
+  ({} : ((Cart[Real, N]) -> Bool) -> Bool)
+  (f : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool)
   ?J. J SUBSET H /\\\n            f = INTERS {{x:real^N | fa h dot x <= &0} | h IN H} INTER\n                INTERS {{x | fa(h:real^N->bool) dot x = &0} | h IN J}
-  ~(f:real^N->bool = {})
-  closure f:real^N->bool
-  closure(relative_interior f):real^N->bool = f
-  f:real^N->bool
-  closure:(real^N->bool)->(real^N->bool)
-  relative_interior:(real^N->bool)->(real^N->bool)
-  d:num
-  euler_characteristic A (s:real^N->bool)
-  FINITE(A:real^N#real->bool)
-  A = IMAGE (\\h. (fa:(real^N->bool)->real^N) h,&0) H
-  fa:(real^N->bool)->real^N
-  h:real^N->bool
-  k:real^N->bool
-  (vec 0:real^N) IN INTERS H
-  e * x <= x <=> &0 <= x * (&1 - e)
-  (&0 <= x ==> y <= x) /\\ (&0 <= --x ==> &0 <= --y) /\\ &0 <= b\n          ==> x <= b ==> y <= b
-  b':real
-  a':real^N
-  k:real^N->bool
-  k:real^N->bool
-  (x:real^N) IN INTERS (H DELETE h)
-  H:(real^N->bool)->bool = h INSERT (H DELETE h)
-  x:real^N = inv e % e % x
-  ~((x:real^N) IN s)
-  H:(real^N->bool)->bool = h INSERT (H DELETE h)
-  ~((x:real^N) IN s)
-  b:real
-  &0 < (a:real^N) dot x
-  min (&1 / &2) (b / ((a:real^N) dot x))
-  ?e. &0 < e /\\ e < &1 /\\\n                        (e % x:real^N) IN h
-  x:real^N
-  H DELETE (h:real^N->bool)
-  h:real^N->bool
-  (vec 0:real^N) IN INTERS H
-  &0 <= b /\\ ~(&0 < b) ==> b = &0
-  b = &0
-  b:real
-  a:real^N
-  h:real^N->bool
-  forall h:real^N->bool. h IN H ==> ?a. ~(a = vec 0) /\\ h = {x | a dot x <= &0}
-  (vec 0:real^N) IN s
-  H:(real^N->bool)->bool
-  affine hull (interior s:real^N->bool)
-  forall s. s = UNIV /\\ s SUBSET t ==> t = UNIV
-  affine hull s = (:real^N)
-  forall s. polyhedron s /\\ conic s /\\ ~(interior s = {}) /\\ ~(s = (:real^N))\n       ==> sum (0..dimindex(:N))\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of s /\\ aff_dim f = &d })) = &0
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  x:real^N
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  (h:real^N->bool) IN H
-  x:real^N
-  c % x:real^N = vec 0 + c % (x - vec 0)
-  x:real^N
-  c:real
-  aff_dim((vec 0:real^N) INSERT (affine hull f))
-  x IN s /\\ s SUBSET P hull s ==> x IN P hull s
-  affine hull p:real^N->bool
-  forall t. ~(x IN t) /\\ s SUBSET t ==> ~(x IN s)
-  ~p /\\ q ==> ~(p <=> q)
-  vec 0:real^N
-  f < a /\\ a <= f + &1 ==> a:int = f + &1
-  f:real^N->bool
-  aff_dim(f:real^N->bool) = &d
-  f:real^N->bool
-  f:real^N->bool
-  s:real^N->bool
-  inv(y$1) % y:real^N
-  &0 < (y:real^N)$1
-  aff_dim(f:real^N->bool) = &d + &1
-  f:real^N->bool
-  s:real^N->bool
-  a IN s /\\ ~(s = {a}) ==> ?y. y IN s /\\ ~(y = a)
-  ?y:real^N. y IN f /\\ ~(y = vec 0)
-  &0:int < &d + &1
-  f INTER {x:real^N | x$1 = &1}
-  f:real^N->bool
-  forall f:real^N->bool. f face_of p /\\ ~(f = {})\n                     ==> aff_dim(conic hull f) = aff_dim f + &1
-  x:real^N
-  b:real^N
-  a:real^N
-  ~(cx = &0)
-  (&1 - u) * ca + u * cb = cx
-  a + b = cx ==> &0 <= a ==> b <= &1 * cx
-  inv(cx) * x:real = x / cx
-  inv(cx) * u * cb
-  (%) (inv cx) :real^N->real^N
-  (x:real^N) IN affine hull p /\\\n                    a IN affine hull p /\\ b IN affine hull p
+  !((f : (Cart[Real, N]) -> Bool) == {})
+  closure((f : (Cart[Real, N]) -> Bool))
+  closure(relative_interior((f : (Cart[Real, N]) -> Bool))) == f
+  (f : (Cart[Real, N]) -> Bool)
+  (closure : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)
+  (relative_interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)
+  (d : Num)
+  euler_characteristic((A : ((Cart[Real, N], Real)) -> Bool), (s : (Cart[Real, N]) -> Bool))
+  FINITE((A : ((Cart[Real, N], Real)) -> Bool))
+  (A : ((Cart[Real, N], Real)) -> Bool) == IMAGE((h : (Cart[Real, N]) -> Bool) => ((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), real_of_num(0)), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+  (h : (Cart[Real, N]) -> Bool)
+  (k : (Cart[Real, N]) -> Bool)
+  IN(vec(0), INTERS((H : ((Cart[Real, N]) -> Bool) -> Bool)))
+  ((e : Real) * (x : Real) <= x) == (real_of_num(0) <= x * (real_of_num(1) - e))
+  (real_of_num(0) <= (x : Real) \226\134\146 (y : Real) <= x) && (real_of_num(0) <= -x \226\134\146 real_of_num(0) <= -y) && real_of_num(0) <= (b : Real) \226\134\146 x <= b \226\134\146 y <= b
+  (b' : Real)
+  (a' : Cart[Real, N])
+  (k : (Cart[Real, N]) -> Bool)
+  (k : (Cart[Real, N]) -> Bool)
+  IN((x : Cart[Real, N]), INTERS(DELETE((H : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool))))
+  (H : ((Cart[Real, N]) -> Bool) -> Bool) == INSERT((h : (Cart[Real, N]) -> Bool), DELETE(H, h))
+  (x : Cart[Real, N]) == op_pct(inv((e : Real)), op_pct(e, x))
+  !IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (H : ((Cart[Real, N]) -> Bool) -> Bool) == INSERT((h : (Cart[Real, N]) -> Bool), DELETE(H, h))
+  !IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+  (b : Real)
+  real_of_num(0) < dot((a : Cart[Real, N]), (x : Cart[Real, N]))
+  min(real_of_num(1) / real_of_num(2), (b : Real) / dot((a : Cart[Real, N]), (x : Cart[Real, N])))
+  \226\136\131 e : Real, real_of_num(0) < e && e < real_of_num(1) && IN(op_pct(e, (x : Cart[Real, N])), (h : (Cart[Real, N]) -> Bool))
+  (x : Cart[Real, N])
+  DELETE((H : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool))
+  (h : (Cart[Real, N]) -> Bool)
+  IN(vec(0), INTERS((H : ((Cart[Real, N]) -> Bool) -> Bool)))
+  real_of_num(0) <= (b : Real) && !(real_of_num(0) < b) \226\134\146 b == real_of_num(0)
+  (b : Real) == real_of_num(0)
+  (b : Real)
+  (a : Cart[Real, N])
+  (h : (Cart[Real, N]) -> Bool)
+  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 a : Cart[Real, N], !(a == vec(0)) && h == {(x : Cart[Real, N]) | dot(a, x) <= real_of_num(0)})
+  IN(vec(0), (s : (Cart[Real, N]) -> Bool))
+  (H : ((Cart[Real, N]) -> Bool) -> Bool)
+  hull(affine, interior((s : (Cart[Real, N]) -> Bool)))
+  \226\136\128 s : (_) -> Bool, s == UNIV && SUBSET(s, (t : (_) -> Bool)) \226\134\146 t == UNIV
+  hull(affine, (s : (Cart[Real, N]) -> Bool)) == UNIV
+  \226\136\128 s : (Cart[Real, N]) -> Bool, (polyhedron : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (conic : ((Cart[Real, N]) -> Bool) -> Bool)(s) && !((interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == ({} : (Cart[Real, N]) -> Bool)) && !(s == (UNIV : (Cart[Real, N]) -> Bool)) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (d : Num) => pow(-real_of_num(1), d) * real_of_num((CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)({(f : (Cart[Real, N]) -> Bool) | (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, s) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(f) == int_of_num(d)}))) == real_of_num(0)
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (x : Cart[Real, N])
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+  (x : Cart[Real, N])
+  op_pct((c : Real), (x : Cart[Real, N])) == vec(0) + op_pct(c, x - vec(0))
+  (x : Cart[Real, N])
+  (c : Real)
+  aff_dim(INSERT(vec(0), hull(affine, (f : (Cart[Real, N]) -> Bool))))
+  IN((x : _), (s : (_) -> Bool)) && SUBSET(s, hull((P : ((_) -> Bool) -> Bool), s)) \226\134\146 IN(x, hull(P, s))
+  hull(affine, (p : (Cart[Real, N]) -> Bool))
+  \226\136\128 t : (_) -> Bool, !IN((x : _), t) && SUBSET((s : (_) -> Bool), t) \226\134\146 !IN(x, s)
+  !(p : Bool) && (q : Bool) \226\134\146 !(p == q)
+  (vec : (Num) -> Cart[Real, N])(0)
+  (f : Int) < (a : Int) && a <= f + int_of_num(1) \226\134\146 a == f + int_of_num(1)
+  (f : (Cart[Real, N]) -> Bool)
+  aff_dim((f : (Cart[Real, N]) -> Bool)) == int_of_num((d : Num))
+  (f : (Cart[Real, N]) -> Bool)
+  (f : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  op_pct(inv(op_dollar((y : Cart[Real, N]), 1)), y)
+  real_of_num(0) < op_dollar((y : Cart[Real, N]), 1)
+  aff_dim((f : (Cart[Real, N]) -> Bool)) == int_of_num((d : Num)) + int_of_num(1)
+  (f : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool)
+  IN((a : _), (s : (_) -> Bool)) && !(s == {a}) \226\134\146 (\226\136\131 y : _, IN(y, s) && !(y == a))
+  \226\136\131 y : Cart[Real, N], IN(y, (f : (Cart[Real, N]) -> Bool)) && !(y == vec(0))
+  int_of_num(0) < int_of_num((d : Num)) + int_of_num(1)
+  INTER((f : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)})
+  (f : (Cart[Real, N]) -> Bool)
+  \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, (p : (Cart[Real, N]) -> Bool)) && !(f == {}) \226\134\146 aff_dim(hull(conic, f)) == aff_dim(f) + int_of_num(1)
+  (x : Cart[Real, N])
+  (b : Cart[Real, N])
+  (a : Cart[Real, N])
+  !((cx : Real) == real_of_num(0))
+  (real_of_num(1) - (u : Real)) * (ca : Real) + u * (cb : Real) == (cx : Real)
+  (a : Real) + (b : Real) == (cx : Real) \226\134\146 real_of_num(0) <= a \226\134\146 b <= real_of_num(1) * cx
+  inv((cx : Real)) * (x : Real) == x / cx
+  inv((cx : Real)) * ((u : Real) * (cb : Real))
+  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((cx : Real)))
+  IN((x : Cart[Real, N]), hull(affine, (p : (Cart[Real, N]) -> Bool))) && IN((a : Cart[Real, N]), hull(affine, p)) && IN((b : Cart[Real, N]), hull(affine, p))
   1
-  u:real
-  (x:real^N) IN segment(a,b)
-  x:real^N
-  cb:real
-  ca:real
-  b:real^N
-  cb:real
-  x:real^N
-  &0
-  (a:real^N) IN affine hull p /\\ b IN affine hull p
+  (u : Real)
+  IN((x : Cart[Real, N]), segment(((a : Cart[Real, N]), (b : Cart[Real, N]))))
+  (x : Cart[Real, N])
+  (cb : Real)
+  (ca : Real)
+  (b : Cart[Real, N])
+  (cb : Real)
+  (x : Cart[Real, N])
+  real_of_num(0)
+  IN((a : Cart[Real, N]), hull(affine, (p : (Cart[Real, N]) -> Bool))) && IN((b : Cart[Real, N]), hull(affine, p))
   1
-  x % b:real^N = y % a + z % b <=> (x - z) % b = y % a
-  u:real
-  x:real^N = b
-  x:real^N
-  cb:real
-  ca:real
-  x:real^N
-  &0
-  a:real^N
-  ca:real
-  (a:real^N) IN affine hull p /\\ b IN affine hull p
+  (op_pct((x : Real), (b : Cart[Real, N])) == op_pct((y : Real), (a : Cart[Real, N])) + op_pct((z : Real), b)) == (op_pct(x - z, b) == op_pct(y, a))
+  (u : Real)
+  (x : Cart[Real, N]) == (b : Cart[Real, N])
+  (x : Cart[Real, N])
+  (cb : Real)
+  (ca : Real)
+  (x : Cart[Real, N])
+  real_of_num(0)
+  (a : Cart[Real, N])
+  (ca : Real)
+  IN((a : Cart[Real, N]), hull(affine, (p : (Cart[Real, N]) -> Bool))) && IN((b : Cart[Real, N]), hull(affine, p))
   1
-  x % a:real^N = y % a + z % b <=> (x - y) % a = z % b
-  u:real
-  x:real^N = a
-  ~(cx % x:real^N = vec 0)
-  &0 < b /\\ &0 <= a ==> ~(&0 = a + b)
-  &0 < a /\\ &0 <= b ==> ~(&0 = a + b)
-  (ca % a:real^N) IN s /\\ (cb % b:real^N) IN s
-  &0 < (ca % a:real^N)$1 \\/ &0 < (cb % b:real^N)$1
+  (op_pct((x : Real), (a : Cart[Real, N])) == op_pct((y : Real), a) + op_pct((z : Real), (b : Cart[Real, N]))) == (op_pct(x - y, a) == op_pct(z, b))
+  (u : Real)
+  (x : Cart[Real, N]) == (a : Cart[Real, N])
+  !(op_pct((cx : Real), (x : Cart[Real, N])) == vec(0))
+  real_of_num(0) < (b : Real) && real_of_num(0) <= (a : Real) \226\134\146 !(real_of_num(0) == a + b)
+  real_of_num(0) < (a : Real) && real_of_num(0) <= (b : Real) \226\134\146 !(real_of_num(0) == a + b)
+  IN(op_pct((ca : Real), (a : Cart[Real, N])), (s : (Cart[Real, N]) -> Bool)) && IN(op_pct((cb : Real), (b : Cart[Real, N])), s)
+  real_of_num(0) < op_dollar(op_pct((ca : Real), (a : Cart[Real, N])), 1) || real_of_num(0) < op_dollar(op_pct((cb : Real), (b : Cart[Real, N])), 1)
   1
-  u:real
-  (a ==> ~b) ==> a /\\ b ==> c
-  cx % x:real^N = vec 0
-  x:real^N
-  cx:real
-  b:real^N
-  cb:real
-  a:real^N
-  ca:real
-  f:real^N->bool = {}
-  forall f:real^N->bool. f face_of p ==> (conic hull f) face_of s
-  &0:int < &d + &1
-  inv(x$1) % x:real^N
-  (x:real^N)$1
-  &0 < (x:real^N)$1
-  inv(y$1) % y:real^N
-  &0
-  &0 < (y:real^N)$1
-  a IN s /\\ ~(s = {a}) ==> ?y. y IN s /\\ ~(y = a)
-  ?y:real^N. y IN f /\\ ~(y = vec 0)
-  x:real^N = vec 0
-  x:real^N
-  forall f. f face_of s  /\\ &0 < aff_dim f\n        ==> conic hull (f INTER {x:real^N | x$1 = &1}) = f
-  p = conic hull p INTER {x:real^N | x$1 = &1}
-  forall f:real^N->bool. f face_of s ==> f INTER {x | x$1 = &1} face_of p
-  affine hull p:real^N->bool
-  forall f:real^N->bool. f face_of p ==> conic hull f INTER {x | x$1 = &1} = f
-  {f:real^N->bool | f face_of s}
-  \\f:real^N->bool. conic hull f
-  \\f:real^N->bool. f INTER {x | x$1 = &1}
-  d:num
-  dimindex(:N) = (dimindex(:N)-1)+1
-  s = --t ==> (&0 + &1) + s = &0 ==> t = &1
-  &0 < b /\\ &0 <= a ==> ~(&0 = a + b)
-  &0 < a /\\ &0 <= b ==> ~(&0 = a + b)
-  &0 < (a:real^N)$1 \\/ &0 < (b:real^N)$1
+  (u : Real)
+  ((a : Bool) \226\134\146 !(b : Bool)) \226\134\146 a && b \226\134\146 (c : Bool)
+  op_pct((cx : Real), (x : Cart[Real, N])) == vec(0)
+  (x : Cart[Real, N])
+  (cx : Real)
+  (b : Cart[Real, N])
+  (cb : Real)
+  (a : Cart[Real, N])
+  (ca : Real)
+  (f : (Cart[Real, N]) -> Bool) == {}
+  \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, (p : (Cart[Real, N]) -> Bool)) \226\134\146 face_of(hull(conic, f), (s : (Cart[Real, N]) -> Bool))
+  int_of_num(0) < int_of_num((d : Num)) + int_of_num(1)
+  op_pct(inv(op_dollar((x : Cart[Real, N]), 1)), x)
+  op_dollar((x : Cart[Real, N]), 1)
+  real_of_num(0) < op_dollar((x : Cart[Real, N]), 1)
+  op_pct(inv(op_dollar((y : Cart[Real, N]), 1)), y)
+  real_of_num(0)
+  real_of_num(0) < op_dollar((y : Cart[Real, N]), 1)
+  IN((a : _), (s : (_) -> Bool)) && !(s == {a}) \226\134\146 (\226\136\131 y : _, IN(y, s) && !(y == a))
+  \226\136\131 y : Cart[Real, N], IN(y, (f : (Cart[Real, N]) -> Bool)) && !(y == vec(0))
+  (x : Cart[Real, N]) == vec(0)
+  (x : Cart[Real, N])
+  \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, (s : (Cart[Real, N]) -> Bool)) && int_of_num(0) < aff_dim(f) \226\134\146 hull(conic, INTER(f, {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)})) == f
+  (p : (Cart[Real, N]) -> Bool) == INTER(hull(conic, p), {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)})
+  \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, (s : (Cart[Real, N]) -> Bool)) \226\134\146 face_of(INTER(f, {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)}), (p : (Cart[Real, N]) -> Bool))
+  hull(affine, (p : (Cart[Real, N]) -> Bool))
+  \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, (p : (Cart[Real, N]) -> Bool)) \226\134\146 INTER(hull(conic, f), {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)}) == f
+  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (s : (Cart[Real, N]) -> Bool))}
+  (f : (Cart[Real, N]) -> Bool) => hull(conic, f)
+  (f : (Cart[Real, N]) -> Bool) => INTER(f, {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)})
+  (d : Num)
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1 + 1
+  (s : Real) == -(t : Real) \226\134\146 real_of_num(0) + real_of_num(1) + s == real_of_num(0) \226\134\146 t == real_of_num(1)
+  real_of_num(0) < (b : Real) && real_of_num(0) <= (a : Real) \226\134\146 !(real_of_num(0) == a + b)
+  real_of_num(0) < (a : Real) && real_of_num(0) <= (b : Real) \226\134\146 !(real_of_num(0) == a + b)
+  real_of_num(0) < op_dollar((a : Cart[Real, N]), 1) || real_of_num(0) < op_dollar((b : Cart[Real, N]), 1)
   1
-  u:real
-  b:real^N
-  a:real^N
-  a:real^N
-  f:real^N->bool
-  {f | f face_of s /\\ (?a:real^N. f = {a})} = {{vec 0}}
-  x:real^N = vec 0
-  x:real^N
-  forall x:real^N. x IN s ==> &0 <= x$1
-  (x:real^N) IN affine hull p
-  x:real^N
-  c:real
-  forall x:real^N. x IN s /\\ ~(x = vec 0) ==> &0 < x$1
-  vec 0:real^N
-  &1
-  basis 1:real^N
-  s PSUBSET t ==> s' = s /\\ t' = t ==> s' PSUBSET t'
-  a:int < b ==> a = n ==> ~(b = n)
-  &1
-  basis 1:real^N
-  b:real
-  a:real^N
-  s:real^N->bool
-  s SUBSET h' ==> h SUBSET h' /\\ ~(h PSUBSET h') ==> s SUBSET h
-  s SUBSET {x:real^N | x$1 = &1}
-  b:real
-  a:real^N
-  s:real^N->bool
-  ~(interior(s:real^N->bool) = {})
-  s:real^N->bool
-  ~(s:real^N->bool = {})
+  (u : Real)
+  (b : Cart[Real, N])
+  (a : Cart[Real, N])
+  (a : Cart[Real, N])
+  (f : (Cart[Real, N]) -> Bool)
+  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (s : (Cart[Real, N]) -> Bool)) && (\226\136\131 a : Cart[Real, N], f == {a})} == {{vec(0)}}
+  (x : Cart[Real, N]) == vec(0)
+  (x : Cart[Real, N])
+  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 real_of_num(0) <= op_dollar(x, 1)
+  IN((x : Cart[Real, N]), hull(affine, (p : (Cart[Real, N]) -> Bool)))
+  (x : Cart[Real, N])
+  (c : Real)
+  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) && !(x == vec(0)) \226\134\146 real_of_num(0) < op_dollar(x, 1)
+  (vec : (Num) -> Cart[Real, N])(0)
+  real_of_num(1)
+  (basis : (Num) -> Cart[Real, N])(1)
+  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (s' : (_) -> Bool) == s && (t' : (_) -> Bool) == t \226\134\146 PSUBSET(s', t')
+  (a : Int) < (b : Int) \226\134\146 a == (n : Int) \226\134\146 !(b == n)
+  real_of_num(1)
+  (basis : (Num) -> Cart[Real, N])(1)
+  (b : Real)
+  (a : Cart[Real, N])
+  (s : (Cart[Real, N]) -> Bool)
+  SUBSET((s : (_) -> Bool), (h' : (_) -> Bool)) \226\134\146 SUBSET((h : (_) -> Bool), h') && !PSUBSET(h, h') \226\134\146 SUBSET(s, h)
+  SUBSET((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)})
+  (b : Real)
+  (a : Cart[Real, N])
+  (s : (Cart[Real, N]) -> Bool)
+  !(interior((s : (Cart[Real, N]) -> Bool)) == {})
+  (s : (Cart[Real, N]) -> Bool)
+  !((s : (Cart[Real, N]) -> Bool) == {})
   2
-  (lambda i. if i = 1 then &1 else B + &1):real^N
-  (lambda i. if i = 1 then &1 else B + &1):real^N
-  B:real
-  polytope(p:real^N->bool)
-  p:real^N->bool
-  ~(s = (:real^N))
-  conic(s:real^N->bool)
-  k:real^N->bool
-  k:real^N->bool
-  polyhedron(s:real^N->bool)
-  x:real^N
-  x:real^N
-  c:real
-  forall f. f SUBSET {x:real^N | x$1 = &1}\n        ==> (conic hull f) INTER {x:real^N | x$1 = &1} = f
-  s:real^N->bool
-  s:real^N->bool = conic hull p
-  --(&1):int = x - &1 <=> x = &0
-  p:real^N->bool = {}
-  &1
-  basis 1:real^N
-  forall p:real^N->bool.\n        2 <= dimindex(:N) /\\ polytope p /\\ affine hull p = {x | x$1 = &1}\n        ==> sum (0..dimindex(:N)-1)\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
-  {f:real^N->bool | f face_of p}
-  (forall x y. Q x y ==> x = y)\n        ==> (forall x y. P x /\\ P y /\\ Q x y ==> x = y)
-  d:num
-  {y | y IN IMAGE f s /\\ P y} =\n                          {f x |x| x IN s /\\ P(f x)}
-  {f | f face_of s /\\ P f} =\n                          {f | f IN {f | f face_of s} /\\ P f}
-  a + x:real^N = y <=> x = y - a
-  IMAGE (\\x:real^N. basis 1 + x) p
-  forall p:real^N->bool.\n        2 <= dimindex(:N) /\\ polytope p /\\ affine hull p = {x | x$1 = &0}\n        ==> sum (0..dimindex(:N)-1)\n               (\\d. (-- &1) pow d *\n                    &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
-  {f:real^N->bool | f face_of p}
-  (forall x y. Q x y ==> x = y)\n        ==> (forall x y. P x /\\ P y /\\ Q x y ==> x = y)
-  {y | y IN IMAGE f s /\\ P y} =\n                              {f x |x| x IN s /\\ P(f x)}
-  {f | f face_of s /\\ P f} =\n                          {f | f IN {f | f face_of s} /\\ P f}
-  p:real^N->bool
-  f:real^N->real^(N,1)finite_sum
-  i + 1
-  i:num
-  1 <= n /\\ i <= n + 1 ==> i - 1 <= n
-  1 <= i /\\ ~(i = 1) ==> 1 <= i - 1
-  forall x y. (f:real^N->real^(N,1)finite_sum) x = f y <=> x = y
-  d:num
-  1 <= n /\\ i <= n + 1 ==> i - 1 <= n
-  1 <= i /\\ ~(i = 1) ==> 1 <= i - 1
-  i:num
-  (lambda i. (y:real^(N,1)finite_sum)$(i+1)):real^N
-  x:real^N
-  y:real^(N,1)finite_sum
-  linear(f:real^N->real^(N,1)finite_sum)
-  2 <= n + 1 <=> 1 <= n
-  s:real^(N,1)finite_sum->bool
-  s = IMAGE (f:real^N->real^(N,1)finite_sum) p
-  f:real^N->real^(N,1)finite_sum =\n          \\x. lambda i. if i = 1 then &0 else x$(i-1)
-  forall p:real^N->bool.\n        polytope p /\\ aff_dim p = &(dimindex(:N))\n        ==> sum (0..dimindex(:N))\n                (\\d. (-- &1) pow d *\n                     &(CARD {f | f face_of p /\\ aff_dim f = &d })) = &1
-  ((x + --y) + z) + -- &1:real = &1 <=>\n                            x + z = y + &2
-  p:real^3->bool
-  f:real^3->bool
-  f:real^3->bool
-  P a /\\ (forall x. P x ==> x = a) ==> {x | P x} = {a}
-  {f:real^3->bool | f face_of p /\\ aff_dim f = &3} = {p}
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == 1 { real_of_num(1) } else { (B : Real) + real_of_num(1) })
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == 1 { real_of_num(1) } else { (B : Real) + real_of_num(1) })
+  (B : Real)
+  polytope((p : (Cart[Real, N]) -> Bool))
+  (p : (Cart[Real, N]) -> Bool)
+  !((s : (Cart[Real, N]) -> Bool) == UNIV)
+  conic((s : (Cart[Real, N]) -> Bool))
+  (k : (Cart[Real, N]) -> Bool)
+  (k : (Cart[Real, N]) -> Bool)
+  polyhedron((s : (Cart[Real, N]) -> Bool))
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  (c : Real)
+  \226\136\128 f : (Cart[Real, N]) -> Bool, SUBSET(f, {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)}) \226\134\146 INTER(hull(conic, f), {(x : Cart[Real, N]) | op_dollar(x, 1) == real_of_num(1)}) == f
+  (s : (Cart[Real, N]) -> Bool)
+  (s : (Cart[Real, N]) -> Bool) == hull(conic, (p : (Cart[Real, N]) -> Bool))
+  (-int_of_num(1) == (x : Int) - int_of_num(1)) == (x == int_of_num(0))
+  (p : (Cart[Real, N]) -> Bool) == {}
+  real_of_num(1)
+  (basis : (Num) -> Cart[Real, N])(1)
+  \226\136\128 p : (Cart[Real, N]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (polytope : ((Cart[Real, N]) -> Bool) -> Bool)(p) && (hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((affine : ((Cart[Real, N]) -> Bool) -> Bool), p) == {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, 1) == real_of_num(1)} \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1), (d : Num) => pow(-real_of_num(1), d) * real_of_num((CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)({(f : (Cart[Real, N]) -> Bool) | (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, p) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(f) == int_of_num(d)}))) == real_of_num(1)
+  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (p : (Cart[Real, N]) -> Bool))}
+  (\226\136\128 x : _, \226\136\128 y : _, (Q : (_, _) -> Bool)(x, y) \226\134\146 x == y) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) && P(y) && Q(x, y) \226\134\146 x == y)
+  (d : Num)
+  {(y : _) | IN(y, IMAGE((f : (_) -> _), (s : (_) -> Bool))) && (P : (_) -> Bool)(y)} == {f(x) | x : _ | IN(x, s) && P(f(x))}
+  {(f : (Cart[Real, _]) -> Bool) | face_of(f, (s : (Cart[Real, _]) -> Bool)) && (P : ((Cart[Real, _]) -> Bool) -> Bool)(f)} == {(f : (Cart[Real, _]) -> Bool) | IN(f, {(f : (Cart[Real, _]) -> Bool) | face_of(f, s)}) && P(f)}
+  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == y - a)
+  IMAGE((x : Cart[Real, N]) => basis(1) + x, (p : (Cart[Real, N]) -> Bool))
+  \226\136\128 p : (Cart[Real, N]) -> Bool, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (polytope : ((Cart[Real, N]) -> Bool) -> Bool)(p) && (hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((affine : ((Cart[Real, N]) -> Bool) -> Bool), p) == {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, 1) == real_of_num(0)} \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1), (d : Num) => pow(-real_of_num(1), d) * real_of_num((CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)({(f : (Cart[Real, N]) -> Bool) | (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, p) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(f) == int_of_num(d)}))) == real_of_num(1)
+  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (p : (Cart[Real, N]) -> Bool))}
+  (\226\136\128 x : _, \226\136\128 y : _, (Q : (_, _) -> Bool)(x, y) \226\134\146 x == y) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) && P(y) && Q(x, y) \226\134\146 x == y)
+  {(y : _) | IN(y, IMAGE((f : (_) -> _), (s : (_) -> Bool))) && (P : (_) -> Bool)(y)} == {f(x) | x : _ | IN(x, s) && P(f(x))}
+  {(f : (Cart[Real, _]) -> Bool) | face_of(f, (s : (Cart[Real, _]) -> Bool)) && (P : ((Cart[Real, _]) -> Bool) -> Bool)(f)} == {(f : (Cart[Real, _]) -> Bool) | IN(f, {(f : (Cart[Real, _]) -> Bool) | face_of(f, s)}) && P(f)}
+  (p : (Cart[Real, N]) -> Bool)
+  (f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])
+  (i : Num) + 1
+  (i : Num)
+  1 <= (n : Num) && (i : Num) <= n + 1 \226\134\146 i - 1 <= n
+  1 <= (i : Num) && !(i == 1) \226\134\146 1 <= i - 1
+  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], ((f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]])(x) == f(y)) == (x == y)
+  (d : Num)
+  1 <= (n : Num) && (i : Num) <= n + 1 \226\134\146 i - 1 <= n
+  1 <= (i : Num) && !(i == 1) \226\134\146 1 <= i - 1
+  (i : Num)
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (op_dollar : (Cart[Real, Finite_sum[N, Unit]], Num) -> Real)((y : Cart[Real, Finite_sum[N, Unit]]), i + 1))
+  (x : Cart[Real, N])
+  (y : Cart[Real, Finite_sum[N, Unit]])
+  linear((f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]))
+  (2 <= (n : Num) + 1) == (1 <= n)
+  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+  (s : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == IMAGE((f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]), (p : (Cart[Real, N]) -> Bool))
+  (f : (Cart[Real, N]) -> Cart[Real, Finite_sum[N, Unit]]) == ((x : Cart[Real, N]) => lambda((i : Num) => if i == 1 { real_of_num(0) } else { op_dollar(x, i - 1) }))
+  \226\136\128 p : (Cart[Real, N]) -> Bool, (polytope : ((Cart[Real, N]) -> Bool) -> Bool)(p) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(p) == int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (d : Num) => pow(-real_of_num(1), d) * real_of_num((CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)({(f : (Cart[Real, N]) -> Bool) | (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, p) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(f) == int_of_num(d)}))) == real_of_num(1)
+  ((x : Real) + -(y : Real) + (z : Real) + -real_of_num(1) == real_of_num(1)) == (x + z == y + real_of_num(2))
+  (p : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (f : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (f : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (P : (_) -> Bool)((a : _)) && (\226\136\128 x : _, P(x) \226\134\146 x == a) \226\134\146 {(x : _) | P(x)} == {a}
+  {(f : (Cart[Real, Tybit1[Unit]]) -> Bool) | face_of(f, (p : (Cart[Real, Tybit1[Unit]]) -> Bool)) && aff_dim(f) == int_of_num(3)} == {p}
   3
-  p:real^3->bool
-  forall p:real^3->bool.\n        polytope p /\\ aff_dim p = &3\n        ==> (CARD {v | v face_of p /\\ aff_dim(v) = &0} +\n             CARD {f | f face_of p /\\ aff_dim(f) = &2}) -\n            CARD {e | e face_of p /\\ aff_dim(e) = &1} = 2
+  (p : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  \226\136\128 p : (Cart[Real, Tybit1[Unit]]) -> Bool, polytope(p) && aff_dim(p) == int_of_num(3) \226\134\146 CARD({(v : (Cart[Real, Tybit1[Unit]]) -> Bool) | face_of(v, p) && aff_dim(v) == int_of_num(0)}) + CARD({(f : (Cart[Real, Tybit1[Unit]]) -> Bool) | face_of(f, p) && aff_dim(f) == int_of_num(2)}) - CARD({(e : (Cart[Real, Tybit1[Unit]]) -> Bool) | face_of(e, p) && aff_dim(e) == int_of_num(1)}) == 2
 hyperplane_side =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(real,bool),bool) (\b:real. ((#=:fun(real,fun(real,bool)) ((#hyperplane_side:fun(prod(cart(real,'N),real),fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(real,prod(cart(real,'N),real))) a:cart(real,'N)) b:real)) x:cart(real,'N))) (#real_sgn:fun(real,real) ((#real_sub:fun(real,fun(real,real)) ((#dot:fun(cart(real,'N),fun(cart(real,'N),real)) a:cart(real,'N)) x:cart(real,'N))) b:real)))))))))
 hyperplane_equiv =  |- (#forall:fun(fun(fun(prod(cart(real,'?1),real),bool),bool),bool) (\A:fun(prod(cart(real,'?1),real),bool). (#forall:fun(fun(cart(real,'?1),bool),bool) (\x:cart(real,'?1). (#forall:fun(fun(cart(real,'?1),bool),bool) (\y:cart(real,'?1). ((#=:fun(bool,fun(bool,bool)) (((#hyperplane_equiv:fun(fun(prod(cart(real,'?1),real),bool),fun(cart(real,'?1),fun(cart(real,'?1),bool))) A:fun(prod(cart(real,'?1),real),bool)) x:cart(real,'?1)) y:cart(real,'?1))) (#forall:fun(fun(prod(cart(real,'?1),real),bool),bool) (\h:prod(cart(real,'?1),real). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(prod(cart(real,'?1),real),fun(fun(prod(cart(real,'?1),real),bool),bool)) h:prod(cart(real,'?1),real)) A:fun(prod(cart(real,'?1),real),bool))) ((#=:fun(real,fun(real,bool)) ((#hyperplane_side:fun(prod(cart(real,'?1),real),fun(cart(real,'?1),real)) h:prod(cart(real,'?1),real)) x:cart(real,'?1))) ((#hyperplane_side:fun(prod(cart(real,'?1),real),fun(cart(real,'?1),real)) h:prod(cart(real,'?1),real)) y:cart(real,'?1)))))))))))))
 HYPERPLANE_EQUIV_REFL =  |- (#forall:fun(fun(fun(prod(cart(real,'?2),real),bool),bool),bool) (\A:fun(prod(cart(real,'?2),real),bool). (#forall:fun(fun(cart(real,'?2),bool),bool) (\x:cart(real,'?2). (((#hyperplane_equiv:fun(fun(prod(cart(real,'?2),real),bool),fun(cart(real,'?2),fun(cart(real,'?2),bool))) A:fun(prod(cart(real,'?2),real),bool)) x:cart(real,'?2)) x:cart(real,'?2))))))
