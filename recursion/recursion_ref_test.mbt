@@ -295,9 +295,9 @@ test "recursion matches recursion.ml" {
       #|definitions = 41
       #|recdef =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#dbl:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#dbl:fun(num,num) (#SUC:fun(num,num) n:num))) (#SUC:fun(num,num) (#SUC:fun(num,num) (#dbl:fun(num,num) n:num)))))))
       #|Warning: inventing type variables
-      #|recdef_fail =  |- ((#=:fun('?6550,fun('?6550,bool)) (#bad:fun(num,'?6550) (#SUC:fun(num,num) n:num))) (#bad:fun(num,'?6550) n:num))
+      #|recdef_fail =  |- ((#=:fun('?1,fun('?1,bool)) (#bad:fun(num,'?1) (#SUC:fun(num,num) n:num))) (#bad:fun(num,'?1) n:num))
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?6556
+      #|counter_tyvar = zz_counter:'?2
       #|counter_genvar = _2156:bool
       #|
     ),

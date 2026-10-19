@@ -371,5 +371,5 @@ let_conv =  |- ((#=:fun(prod('B,'A),fun(prod('B,'A),bool)) ((#LET:fun(fun(prod('
 pair_def =  |- (#forall:fun(fun('B,bool),bool) (\y:'B. (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(prod('B,'A),fun(prod('B,'A),bool)) (#swapit:fun(prod('A,'B),prod('B,'A)) ((#,:fun('A,fun('B,prod('A,'B))) x:'A) y:'B))) ((#,:fun('B,fun('A,prod('B,'A))) y:'B) x:'A))))))
 pair_tac =  |- (#forall:fun(fun(prod('A,'B),bool),bool) (\p:prod('A,'B). ((#=:fun(prod('A,'B),fun(prod('A,'B),bool)) ((#,:fun('A,fun('B,prod('A,'B))) (#FST:fun(prod('A,'B),'A) p:prod('A,'B))) (#SND:fun(prod('A,'B),'B) p:prod('A,'B)))) p:prod('A,'B))))
 Warning: inventing type variables
-counter_tyvar = zz_counter:'?6207
+counter_tyvar = zz_counter:'?1
 counter_genvar = _2097:bool

@@ -366,5 +366,5 @@ constants = dest_unit' mk_unit' COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
 definitions = 11
 axioms =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool)))))))) ;;  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
 Warning: inventing type variables
-counter_tyvar = zz_counter:'?3251
+counter_tyvar = zz_counter:'?1
 counter_genvar = _542:bool

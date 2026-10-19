@@ -266,7 +266,7 @@ test "drule matches drule.ml" {
       #|INSTANTIATE_ALL_ty = ((#=:fun(bool,fun(bool,bool)) x:bool) x:bool) |- ((#=:fun(bool,fun(bool,bool)) x:bool) x:bool)
       #|Warning: inventing type variables
       #|Warning: inventing type variables
-      #|term_unify = [] [(g:fun('?472,'A) z:'?472)/x:'A; (g:fun('?468,'A) y:'?468)/y:'A] []
+      #|term_unify = [] [(g:fun('?1,'A) z:'?1)/x:'A; (g:fun('?2,'A) y:'?2)/y:'A] []
       #|term_unify_occurs ! augment_insts
       #|term_unify_abs = [] [c:'A/x:'A] []
       #|type_unify = bool/'A; 'C/'B
@@ -288,7 +288,7 @@ test "drule matches drule.ml" {
       #|axioms =  |- ((#==>:fun(bool,fun(bool,bool)) b:bool) ((#==>:fun(bool,fun(bool,bool)) a:bool) c:bool))
       #|constants = TWICE ?! ~ F \/ ? forall ==> /\ T =
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?616
+      #|counter_tyvar = zz_counter:'?3
       #|counter_genvar = _7:bool
       #|term_unify_abs_bad ! body: Not an abstraction
       #|term_type_unify_abs_bad ! body: Not an abstraction

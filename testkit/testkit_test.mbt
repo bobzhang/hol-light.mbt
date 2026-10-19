@@ -36,7 +36,7 @@ test "probe_counters prints what the probes that advance the counters print" {
     real.contents(),
     content=(
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?0
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _0:bool
       #|
     ),

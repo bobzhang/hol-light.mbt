@@ -354,14 +354,14 @@ test "bool matches bool.ml" {
       #|mk_neg = (#~:fun(bool,bool) a:bool)
       #|mk_neg_bad ! mk_neg
       #|Warning: inventing type variables
-      #|verbose = (#forall:fun(fun('?480,bool),bool) (\x:'?480. (#?:fun(fun('?480,bool),bool) (\y:'?480. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?480,fun('?480,bool)) x:'?480) y:'?480)) #T:bool)))))
+      #|verbose = (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#?:fun(fun('?1,bool),bool) (\y:'?1. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?1,fun('?1,bool)) x:'?1) y:'?1)) #T:bool)))))
       #|Warning: inventing type variables
-      #|print = forall (x:?498).
-      #|    exists (y:?498). (x:?498) = (y:?498) /\ (p <=> q) ==> ~r \/ false
+      #|print = forall (x:?2).
+      #|    exists (y:?2). (x:?2) = (y:?2) /\ (p <=> q) ==> ~r \/ false
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?506
+      #|counter_tyvar = zz_counter:'?3
       #|Warning: inventing type variables
-      #|counter_pgenvar = (GSPEC:fun(fun('?517,bool),'?507) (\GEN%PVAR%0:'?517. (#?:fun(fun('?515,bool),bool) (\x:'?515. (((SETSPEC:fun('?517,fun(bool,fun('?515,bool))) GEN%PVAR%0:'?517) #T:bool) x:'?515)))))
+      #|counter_pgenvar = (GSPEC:fun(fun('?4,bool),'?5) (\GEN%PVAR%1:'?4. (#?:fun(fun('?6,bool),bool) (\x:'?6. (((SETSPEC:fun('?4,fun(bool,fun('?6,bool))) GEN%PVAR%1:'?4) #T:bool) x:'?6)))))
       #|counter_genvar = _0:bool
       #|
 

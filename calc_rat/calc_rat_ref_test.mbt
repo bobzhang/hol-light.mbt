@@ -1310,7 +1310,7 @@ test "calc_rat matches calc_rat.ml" {
       #|field =  |- ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) x:real) (#real_inv:fun(real,real) x:real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))
       #|field2 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) b:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) (#real_inv:fun(real,real) ((#real_mul:fun(real,fun(real,real)) a:real) b:real))) ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) a:real)) (#real_inv:fun(real,real) b:real))))
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?65953
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _28801:bool
       #|
     ),

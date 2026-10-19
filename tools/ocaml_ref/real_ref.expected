@@ -1887,5 +1887,5 @@ arith_max =  |- ((#real_ge:fun(real,fun(real,bool)) ((#real_max:fun(real,fun(rea
 arith_chain =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) a:real) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) b:real) c:real)) ((#real_le:fun(real,fun(real,bool)) c:real) a:real)))) ((#=:fun(real,fun(real,bool)) a:real) c:real))
 arith_fail ! linear_ineqs: no contradiction
 Warning: inventing type variables
-counter_tyvar = zz_counter:'?63916
+counter_tyvar = zz_counter:'?1
 counter_genvar = _27914:bool

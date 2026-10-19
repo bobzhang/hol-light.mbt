@@ -700,7 +700,7 @@ test "grobner matches grobner.ml" {
       #|ring_cancel =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) a:num) b:num)) ((#+:fun(num,fun(num,num)) a:num) c:num))) ((#=:fun(num,fun(num,bool)) b:num) c:num))
       #|ring_false ! EQ_MP
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?32510
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _17487:bool
       #|
     ),

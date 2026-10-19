@@ -4260,7 +4260,7 @@ test "int matches int.ml" {
       #|int_reduce =  |- ((#=:fun(int,fun(int,bool)) ((#int_add:fun(int,fun(int,int)) ((#div:fun(int,fun(int,int)) (#int_neg:fun(int,int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#rem:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#int_neg:fun(int,int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|int_ring =  |- ((#=:fun(int,fun(int,bool)) ((#int_pow:fun(int,fun(num,int)) ((#int_add:fun(int,fun(int,int)) x:int) y:int)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#int_add:fun(int,fun(int,int)) ((#int_pow:fun(int,fun(num,int)) x:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#int_add:fun(int,fun(int,int)) ((#int_mul:fun(int,fun(int,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#int_mul:fun(int,fun(int,int)) x:int) y:int))) ((#int_pow:fun(int,fun(num,int)) y:int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?77442
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _32403:bool
       #|
     ),

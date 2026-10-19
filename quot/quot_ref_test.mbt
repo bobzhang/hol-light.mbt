@@ -295,7 +295,7 @@ test "quot matches quot.ml" {
       #|types = qbool 1 bool fun
       #|constants = qnot dest_qbool mk_qbool BEQ hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?4416
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _1077:bool
       #|
     ),
