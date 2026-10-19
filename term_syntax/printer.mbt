@@ -425,7 +425,15 @@ fn Printer::comb(
       items.to_array().map(x => self.term(x, EXPR, bound)).join(", ") +
       "]"
     (Const(_, _), [a, b]) if binary_op(spelled) is Some((op, level, right)) => {
-      let (lctx, rctx) = if right { (level + 1, level) } else { (level, level + 1) }
+      // comparisons associate to the left in MoonBit, but a chain such as
+      // a == b == c (for (a = b) <=> c) misreads easily: parenthesize them
+      let (lctx, rctx) = if level == CMP {
+        (level + 1, level + 1)
+      } else if right {
+        (level + 1, level)
+      } else {
+        (level, level + 1)
+      }
       let s = self.term(a, lctx, bound) + " " + op + " " + self.term(b, rctx, bound)
       wrap(s, level, ctx)
     }
@@ -502,8 +510,24 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 }
 
 ///|
+/// `print_term(t)` when the text reads back as `t` with the same names for
+/// its bound variables too (theorems show them), up to invented type
+/// variables. tools/migrate.mbtx migrates only such quotations, so the
+/// theorems of a migrated package print as before.
+pub fn print_term_exact(t : @kernel.Term) -> String raise Unprintable {
+  let s = print_term(t)
+  let back = elaborate(s) catch {
+    _ => raise Unprintable("term that does not read back")
+  }
+  if canonical_invented(back) != canonical_invented(t) {
+    raise Unprintable("term whose bound variables the syntax renames")
+  }
+  s
+}
+
+///|
 fn reads_as(s : String, t : @kernel.Term) -> Bool {
-  try same_term(parse_term(s), t) catch {
+  try same_term(elaborate(s), t) catch {
     _ => false
   }
 }

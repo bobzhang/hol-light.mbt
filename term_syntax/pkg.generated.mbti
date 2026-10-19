@@ -16,6 +16,8 @@ pub fn parse_type(String) -> @kernel.HolType raise
 
 pub fn print_term(@kernel.Term) -> String raise Unprintable
 
+pub fn print_term_exact(@kernel.Term) -> String raise Unprintable
+
 pub fn print_type(@kernel.HolType) -> String raise Unprintable
 
 pub fn same_term(@kernel.Term, @kernel.Term) -> Bool

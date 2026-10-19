@@ -799,6 +799,13 @@ pub fn begin_theory(name : String) -> Unit {
 }
 
 ///|
+/// Whether theory `name` is loading (innermost or not): what `parse_term`
+/// reads now goes into its trace.
+pub fn is_loading(name : String) -> Bool {
+  loading_theories.iter().any(th => th.0 == name)
+}
+
+///|
 pub fn end_theory() -> Unit {
   // OCaml's toplevel flushes the formatter after each phrase: what the
   // file's last phrase printed (Jordan/real_ext_geom_series.ml ends with
@@ -830,6 +837,32 @@ pub fn theory_trace(name : String) -> Array[String] {
 }
 
 ///|
+/// Called with each quotation `parse_term` reads, the site `parse_term_at`
+/// gave it (-1 for none) and the term it denotes; tools/migrate.mbtx
+/// records the term's new spelling with it.
+pub let quotation_hook : Ref[((Int, String, Term) -> Unit raise)?] = Ref::{
+  val: None,
+}
+
+///|
+let quotation_site : Ref[Int] = Ref::{ val: -1 }
+
+///|
+/// `parse_term(s)` reporting `site` to `quotation_hook`: tools/migrate.mbtx
+/// numbers a package's quotations with it while it records them.
+pub fn parse_term_at(site : Int, s : String) -> Term raise {
+  quotation_site.val = site
+  parse_term(s)
+}
+
+///|
+/// Record `s` in the quotation traces, as `parse_term` does: for the
+/// other front ends of terms (@term_syntax).
+pub fn record_quotation(s : String) -> Unit {
+  trace(s)
+}
+
+///|
 fn trace(s : String) -> Unit {
   match quotation_trace.val {
     Some(t) => t.push(s)
@@ -858,10 +891,17 @@ pub fn parse_type(s : String) -> HolType raise {
 ///|
 /// Parse and typecheck a HOL term.
 pub fn parse_term(s : String) -> Term raise {
+  let site = quotation_site.val
+  quotation_site.val = -1
   trace(s)
   let (ptm, l) = parse_preterm(@lexer.lex(s))
   if l.is_empty() {
-    @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
+    let tm = @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
+    match quotation_hook.val {
+      Some(hook) => hook(site, s, tm)
+      None => ()
+    }
+    tm
   } else {
     raise Failure("Unparsed input following term")
   }

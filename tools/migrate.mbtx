@@ -1,0 +1,733 @@
+// Migrate one package's quotations to the MoonBit term syntax (issue #140),
+// test it, and leave only the package's own changes in the working tree.
+//
+//   ulimit -s 65520
+//   moon run tools/migrate.mbtx -- <package dir>      e.g. 100/gcd
+//
+// A .mbtx script, so it runs where only moon, moonrun and git may start
+// (openseek's mbtx). It needs a clean working tree. Steps (tools/MIGRATING.md):
+// 1. Number the package's quotation sites: each @parser.parse_term("...")
+//    outside comments and multiline strings temporarily becomes
+//    @parser.parse_term_at(k, "..."). Load the package once with
+//    @parser.quotation_hook set: each run of site k is printed with
+//    @term_syntax.print_term_exact in that environment (which checks that
+//    the text reads back as the same term, bound variable names included:
+//    theorems show them), together with its place in the theory's
+//    quotation trace.
+// 2. Replace @parser.parse_term("old") by @term_syntax.parse_term("new") at
+//    each site that ran and read the same printable way every time. A site
+//    that did not run, is unprintable, or read differently on different
+//    runs (overload priorities) is left (listed at the end).
+// 3. Rewrite the trace in the package's reference test and its
+//    tools/ocaml_ref .expected file: the trace there must be this run's, and
+//    exactly the migrated sites' runs change.
+// 4. Run the reference test with a large stack (as tools/test.py does).
+// 5. Restore the files a newer local toolchain rewrites (pkg.generated.mbti
+//    elsewhere, */make/pkg.generated.mbti).
+// It exits non-zero if anything fails, in particular the test: the golden
+// then differs in more than the trace lines, which needs a look, not an
+// update.
+//
+// The stack: moonrun's wasm stack is its main thread's, so run this under a
+// raised `ulimit -s` (65520) for packages whose load recurses deeply.
+
+import {
+  "moonbitlang/async",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/shell",
+  "moonbitlang/core/env",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/json",
+}
+
+///|
+let unprintable : String = "\u{0}unprintable"
+
+///|
+let gen_test : String = "migrate_gen_test.mbt"
+
+///|
+let call_prefix : String = "@parser.parse_term(\""
+
+///|
+/// The string the body of a MoonBit string literal denotes.
+fn unquote(body : String) -> String raise {
+  let cs = body.to_array()
+  let out = StringBuilder()
+  let mut i = 0
+  while i < cs.length() {
+    let c = cs[i]
+    if c != '\\' {
+      out.write_char(c)
+      i += 1
+      continue
+    }
+    let e = cs[i + 1]
+    match e {
+      'n' => out.write_char('\n')
+      't' => out.write_char('\t')
+      'r' => out.write_char('\r')
+      'b' => out.write_char('\b')
+      '\\' | '"' | '\'' => out.write_char(e)
+      'u' if cs[i + 2] == '{' => {
+        let mut j = i + 3
+        while cs[j] != '}' {
+          j += 1
+        }
+        let mut code = 0
+        for h in cs[i + 3:j] {
+          code = code * 16 +
+            (match h {
+              '0'..='9' => h.to_int() - '0'.to_int()
+              'a'..='f' => h.to_int() - 'a'.to_int() + 10
+              'A'..='F' => h.to_int() - 'A'.to_int() + 10
+              _ => fail("bad \\u escape in a quotation")
+            })
+        }
+        out.write_char(code.unsafe_to_char())
+        i = j + 1
+        continue
+      }
+      _ => fail("escape \\\{e} in a quotation")
+    }
+    i += 2
+  }
+  out.to_string()
+}
+
+///|
+/// The body of a MoonBit string literal for `s`.
+fn quote(s : String) -> String {
+  let out = StringBuilder()
+  for c in s {
+    match c {
+      '\\' => out.write_string("\\\\")
+      '"' => out.write_string("\\\"")
+      '\n' => out.write_string("\\n")
+      '\t' => out.write_string("\\t")
+      '\r' => out.write_string("\\r")
+      c => out.write_char(c)
+    }
+  }
+  out.to_string()
+}
+
+///|
+/// testkit's ocaml_escaped: OCaml's String.escaped of the UTF-8 bytes, as
+/// the quotation traces print quotations.
+fn ocaml_escaped(s : String) -> String {
+  let out = StringBuilder()
+  for b in @utf8.encode(s) {
+    let c = b.to_int()
+    match c {
+      0x22 => out.write_string("\\\"")
+      0x5C => out.write_string("\\\\")
+      0x0A => out.write_string("\\n")
+      0x09 => out.write_string("\\t")
+      0x0D => out.write_string("\\r")
+      0x08 => out.write_string("\\b")
+      _ =>
+        if c >= 32 && c <= 126 {
+          out.write_char(c.unsafe_to_char())
+        } else {
+          out.write_string("\\")
+          out.write_string((c / 100).to_string())
+          out.write_string((c / 10 % 10).to_string())
+          out.write_string((c % 10).to_string())
+        }
+    }
+  }
+  out.to_string()
+}
+
+///|
+/// The quotation calls of `cs` outside comments, string literals and
+/// multiline strings: (start of the call, end after its `)`, the literal's
+/// body). A literal with interpolation is not a quotation the tool rewrites.
+fn calls(cs : Array[Char]) -> Array[(Int, Int, String)] {
+  let out = []
+  let pre = call_prefix.to_array()
+  let n = cs.length()
+  let mut i = 0
+  let mut line_start = true
+  fn skip_line(i : Int) -> Int {
+    let mut i = i
+    while i < n && cs[i] != '\n' {
+      i += 1
+    }
+    i
+  }
+  while i < n {
+    let c = cs[i]
+    if c == '\n' {
+      line_start = true
+      i += 1
+      continue
+    }
+    if line_start && (c == ' ' || c == '\t') {
+      i += 1
+      continue
+    }
+    if line_start && i + 1 < n && (c is ('#' | '$') && cs[i + 1] == '|') {
+      i = skip_line(i)
+      continue
+    }
+    line_start = false
+    if c == '/' && i + 1 < n && cs[i + 1] == '/' {
+      i = skip_line(i)
+      continue
+    }
+    if i + pre.length() <= n && cs[i:i + pre.length()] == pre[:] {
+      let mut j = i + pre.length()
+      while j < n && cs[j] != '"' && cs[j] != '\n' {
+        j += if cs[j] == '\\' { 2 } else { 1 }
+      }
+      if j + 1 < n && cs[j] == '"' && cs[j + 1] == ')' {
+        let body = String::from_array(cs[i + pre.length():j])
+        if !body.contains("\\{") {
+          out.push((i, j + 2, body))
+        }
+        i = j + 2
+        continue
+      }
+    }
+    if c == '\'' && i + 2 < n && cs[i + 1] != '\\' && cs[i + 2] == '\'' {
+      i += 3
+      continue
+    }
+    if c == '\'' && i + 3 < n && cs[i + 1] == '\\' && cs[i + 3] == '\'' {
+      i += 4
+      continue
+    }
+    if c == '"' {
+      let mut j = i + 1
+      while j < n && cs[j] != '"' && cs[j] != '\n' {
+        j += if cs[j] == '\\' { 2 } else { 1 }
+      }
+      i = j + 1
+      continue
+    }
+    i += 1
+  }
+  out
+}
+
+///|
+/// `cs` with call `k` of `calls(cs)` replaced by `by(k, body)`.
+fn rewrite_calls(
+  cs : Array[Char],
+  by : (Int, String) -> String?,
+) -> (String, Int) {
+  let out = StringBuilder()
+  let mut last = 0
+  let mut k = 0
+  let mut changed = 0
+  for c in calls(cs) {
+    let (start, end, body) = c
+    match by(k, body) {
+      Some(call) => {
+        out.write_string(String::from_array(cs[last:start]))
+        out.write_string(call)
+        last = end
+        changed += 1
+      }
+      None => ()
+    }
+    k += 1
+  }
+  out.write_string(String::from_array(cs[last:]))
+  (out.to_string(), changed)
+}
+
+///|
+fn between(s : String, before : String, after : String) -> String? {
+  match s.find(before) {
+    Some(i) => {
+      let rest = s[i + before.length():].to_owned()
+      match rest.find(after) {
+        Some(j) => Some(rest[:j].to_owned())
+        None => None
+      }
+    }
+    None => None
+  }
+}
+
+///|
+fn min(a : Int, b : Int) -> Int {
+  if a < b {
+    a
+  } else {
+    b
+  }
+}
+
+///|
+fn tail_of(s : String) -> String {
+  s[s.length() - min(s.length(), 2000):].to_owned()
+}
+
+///|
+async fn read(path : String) -> String {
+  @fs.read_file(path).text()
+}
+
+///|
+async fn sh(prog : String, args : Array[String]) -> (Int, String) {
+  let out = @shell.Cmd(prog, args).output(max_output_bytes=1 << 30)
+  (out.exit_code(), out.stdout() + out.stderr())
+}
+
+///|
+async fn mbt_files(dir : String) -> Array[String] {
+  @fs.readdir(dir, sort=true).filter(f => f.has_suffix(".mbt")).map(f => dir + "/" + f)
+}
+
+///|
+/// The theory the package's load begins (its init.mbt).
+async fn theory_of(pkg : String) -> String {
+  for f in mbt_files(pkg) {
+    match between(read(f), "@parser.begin_theory(\"", "\"") {
+      Some(t) => return t
+      None => ()
+    }
+  }
+  fail("no begin_theory in " + pkg)
+}
+
+///|
+/// The package's reference test, or its member of its directory's chain
+/// (<dir>/make/NN_<name>_test.mbt).
+async fn golden_tests(pkg : String) -> Array[String] {
+  let own = mbt_files(pkg).filter(f => f.has_suffix("_ref_test.mbt"))
+  if !own.is_empty() {
+    return own
+  }
+  let parts = pkg.split("/").map(p => p.to_owned()).to_array()
+  let make = parts[0] + "/make"
+  let name = parts[parts.length() - 1]
+  if !@fs.exists(make) {
+    return []
+  }
+  mbt_files(make).filter(f => f.has_suffix("_" + name + "_test.mbt"))
+}
+
+///|
+/// Build the tests of `tpkg` and the blackbox test executable's directory
+/// and name.
+async fn build_tests(tpkg : String) -> (String, String) {
+  let (code, log) = sh("moon", [
+    "test", "--target", "wasm-gc", "--build-only", "-j", "4", "-p", "bobzhang/hol_light/" +
+    tpkg,
+  ])
+  if code != 0 {
+    fail("build failed:\n" + log)
+  }
+  let dir = "_build/wasm-gc/debug/test/" + tpkg
+  let exe = @fs.readdir(dir).filter(f => f.has_suffix(".blackbox_test.wasm"))
+  if exe.is_empty() {
+    fail("no blackbox test executable in " + dir)
+  }
+  (dir, exe[0])
+}
+
+///|
+/// Run the tests `ranges` (file, count) of `tpkg` with a large stack, as
+/// tools/test.py does: (exit code, output, results).
+async fn run_wasm(
+  tpkg : String,
+  dir : String,
+  exe : String,
+  ranges : Array[(String, Int)],
+) -> (Int, String, Array[Json]) {
+  let args = {
+    "package": ("bobzhang/hol_light/" + tpkg).to_json(),
+    "file_and_index": ranges
+      .map(r => [r.0.to_json(), [{ "start": 0, "end": r.1 }.to_json()].to_json()].to_json())
+      .to_json(),
+  }.to_json()
+  let (code, out) = sh("moonrun", [
+    "--stack-size", "60000", "--test-args", args.stringify(), dir + "/" + exe, "--",
+  ])
+  let results = []
+  for line in out.split("\n") {
+    if line.has_prefix("{\"type\":\"result\"") {
+      results.push(@json.parse(line.to_owned()))
+    }
+  }
+  (code, out, results)
+}
+
+///|
+/// Run `files` of the test package `tpkg` (all its files for None): the
+/// failures' messages; a test that did not report is a failure too.
+async fn run_tests(tpkg : String, only : Array[String]?) -> Array[String] {
+  let (dir, exe) = build_tests(tpkg)
+  let info = @json.parse(read(dir + "/__blackbox_test_info.json"))
+  let ranges = []
+  if info is { "tests": Object(files), .. } {
+    for f, tests in files {
+      let n = if tests is Array(a) { a.length() } else { 0 }
+      if n > 0 && (only is None || only.unwrap().any(o => o.has_suffix("/" + f))) {
+        ranges.push((f, n))
+      }
+    }
+  }
+  if ranges.is_empty() {
+    fail("no test files to run in " + dir)
+  }
+  let expected = ranges.fold(init=0, (acc, r) => acc + r.1)
+  let (code, out, results) = run_wasm(tpkg, dir, exe, ranges)
+  let failures = []
+  for r in results {
+    if r is { "message": String(m), .. } && m != "" {
+      failures.push(m)
+    }
+  }
+  if code != 0 || results.length() != expected {
+    failures.push(
+      "the test executable exited with \{code} after \{results.length()} of \{expected} results (stack?):\n" +
+      tail_of(out),
+    )
+  }
+  failures
+}
+
+///|
+/// What loading the package showed: the theory's quotation trace, and the
+/// runs of each quotation site: (its index in the trace or -1, its new
+/// spelling or `unprintable`).
+struct Recording {
+  trace : Array[String]
+  runs : Map[Int, Array[(Int, String)]]
+}
+
+///|
+/// Load the package with its quotation sites numbered (parse_term_at) and
+/// the hook set.
+async fn record(
+  pkg : String,
+  theory : String,
+  sources : Array[(String, String)],
+) -> Recording {
+  let pkg_alias = pkg.split("/").last().unwrap().to_owned()
+  let pkg_file = pkg + "/moon.pkg"
+  let pkg_src = read(pkg_file)
+  let test_file = pkg + "/" + gen_test
+  let t = theory.to_json().stringify()
+  @fs.write_file(
+    test_file,
+    (
+      $|///|
+      $|test "migrate quotations" {
+      $|  @parser.quotation_hook.val = Some(fn(site, _, tm) {
+      $|    if site >= 0 {
+      $|      let at = if @parser.is_loading(\{t}) { @parser.theory_trace(\{t}).length() - 1 } else { -1 }
+      $|      let new = try @term_syntax.print_term_exact(tm) catch {
+      $|        @term_syntax.Unprintable(m) => \{unprintable.to_json().stringify()} + ": " + m
+      $|        _ => \{unprintable.to_json().stringify()}
+      $|      }
+      $|      println("@@Q " + [site.to_json(), at.to_json(), new.to_json()].to_json().stringify())
+      $|    }
+      $|  })
+      $|  @\{pkg_alias}.load()
+      $|  @parser.quotation_hook.val = None
+      $|  println("@@T " + @parser.theory_trace(\{t}).to_json().stringify())
+      $|}
+      $|
+    ),
+  )
+  let extra = "  \"bobzhang/hol_light/term_syntax\",\n  \"bobzhang/hol_light/parser\",\n"
+  let new_pkg = match pkg_src.find("} for \"test\"") {
+    Some(i) => pkg_src[:i].to_owned() + extra + pkg_src[i:].to_owned()
+    None => pkg_src + "\nimport {\n" + extra + "} for \"test\"\n"
+  }
+  @fs.write_file(pkg_file, new_pkg)
+  defer {
+    @fs.remove(test_file)
+    @fs.write_file(pkg_file, pkg_src)
+    for p in sources {
+      @fs.write_file(p.0, p.1)
+    }
+  }
+  let mut site = 0
+  for p in sources {
+    let (text, n) = rewrite_calls(p.1.to_array(), (k, body) => Some(
+      "@parser.parse_term_at(\{site + k}, \"" + body + "\")",
+    ))
+    if n > 0 {
+      @fs.write_file(p.0, text)
+    }
+    site += n
+  }
+  let (dir, exe) = build_tests(pkg)
+  let (code, out, results) = run_wasm(pkg, dir, exe, [(gen_test, 1)])
+  let runs : Map[Int, Array[(Int, String)]] = Map::new()
+  let mut trace = None
+  for line in out.split("\n") {
+    if line.has_prefix("@@Q ") &&
+      @json.parse(line[4:].to_owned()) is Array([Number(s, ..), Number(at, ..), String(new)]) {
+      let s = s.to_int()
+      match runs.get(s) {
+        Some(a) => a.push((at.to_int(), new))
+        None => runs[s] = [(at.to_int(), new)]
+      }
+    } else if line.has_prefix("@@T ") &&
+      @json.parse(line[4:].to_owned()) is Array(a) {
+      trace = Some(a.map(j => if j is String(s) { s } else { "" }))
+    }
+  }
+  let passed = results is [{ "message": String(""), .. }]
+  guard code == 0 && passed && trace is Some(trace) else {
+    fail("loading the package did not finish (exit \{code}):\n" + tail_of(out))
+  }
+  { trace, runs }
+}
+
+///|
+/// The lines testkit's show_theory_trace prints for `t` (a quotation parsed
+/// 10000 times or more in a row is shown once, with the count).
+fn render(t : Array[String]) -> Array[String] {
+  let out = []
+  let mut i = 0
+  while i < t.length() {
+    let mut j = i + 1
+    while j < t.length() && t[j] == t[i] {
+      j += 1
+    }
+    let n = j - i
+    if n >= 10000 {
+      out.push("  " + ocaml_escaped(t[i]))
+      out.push("  (" + (n - 1).to_string() + " more times)")
+    } else {
+      for _ in 0..<n {
+        out.push("  " + ocaml_escaped(t[i]))
+      }
+    }
+    i = j
+  }
+  out
+}
+
+///|
+/// Replace the theory's trace in `path` (`old` as it is now, `new` after
+/// the migration): the trace there must be this run's.
+async fn rewrite_trace(
+  path : String,
+  theory : String,
+  old : Array[String],
+  new : Array[String],
+) -> Unit {
+  let prefix = if path.has_suffix(".mbt") { "      #|" } else { "" }
+  let header = prefix + theory + " quotations (\{old.length()}):"
+  let old_lines = render(old).map(l => prefix + l)
+  let new_lines = render(new).map(l => prefix + l)
+  let lines = read(path).split("\n").map(l => l.to_owned()).to_array()
+  // the whole block is replaced: runs of 10000 or more collapse to two
+  // lines, so the old and new blocks can differ in length
+  let out = []
+  let mut found = 0
+  let mut i = 0
+  while i < lines.length() {
+    out.push(lines[i])
+    if lines[i] == header && i + old_lines.length() < lines.length() &&
+      lines[i + 1:i + 1 + old_lines.length()] == old_lines[:] {
+      out.append(new_lines)
+      i += 1 + old_lines.length()
+      found += 1
+    } else {
+      i += 1
+    }
+  }
+  if found == 0 {
+    fail(
+      "\{path} has no trace of \{theory} as this run parses it (header `\{header}`); the golden differs from the package before the migration",
+    )
+  }
+  @fs.write_file(path, out.join("\n"))
+}
+
+///|
+/// The tools/ocaml_ref/<name>_ref.expected file the test `src` compares with.
+fn expected_file(src : String) -> String? {
+  let cs = src.to_array()
+  let pre = "tools/ocaml_ref/".to_array()
+  for i in 0..<(cs.length() - pre.length()) {
+    if cs[i:i + pre.length()] == pre[:] {
+      let mut j = i + pre.length()
+      while j < cs.length() && cs[j] is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_' | '.' | '-') {
+        j += 1
+      }
+      let path = String::from_array(cs[i:j])
+      if path.has_suffix("_ref.expected") {
+        return Some(path)
+      }
+    }
+  }
+  None
+}
+
+///|
+/// Add `term_syntax` to the package's own imports (not its test imports).
+async fn import_term_syntax(pkg : String) -> Unit {
+  let pkg_file = pkg + "/moon.pkg"
+  let lines = read(pkg_file).split("\n").map(l => l.to_owned()).to_array()
+  let entry = "  \"bobzhang/hol_light/term_syntax\","
+  let mut i = 0
+  while i < lines.length() {
+    if lines[i] == "import {" {
+      let mut j = i + 1
+      while j < lines.length() && !lines[j].has_prefix("}") {
+        j += 1
+      }
+      if j < lines.length() && lines[j] == "}" {
+        if !lines[i + 1:j].contains(entry) {
+          lines.insert(i + 1, entry)
+          @fs.write_file(pkg_file, lines.join("\n"))
+        }
+        return
+      }
+      i = j
+    }
+    i += 1
+  }
+  @fs.write_file(pkg_file, "import {\n" + entry + "\n}\n\n" + lines.join("\n"))
+}
+
+///|
+/// Undo what a newer local toolchain rewrites outside `keep` (the tree was
+/// clean when the script started).
+async fn restore_others(keep : Array[String]) -> Unit {
+  let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
+  for line in status.split("\n") {
+    if line.length() < 4 {
+      continue
+    }
+    let path = line[3:].to_owned()
+    if keep.any(k => path.has_prefix(k)) {
+      continue
+    }
+    if line.has_prefix("??") && path.has_suffix("/make/pkg.generated.mbti") {
+      @fs.remove(path)
+    } else if line.has_prefix(" M") && path.has_suffix("pkg.generated.mbti") {
+      ignore(sh("git", ["checkout", "--", path]))
+    }
+  }
+}
+
+///|
+async fn main {
+  let args = @env.args()
+  guard args.length() >= 2 else {
+    fail("usage: moon run tools/migrate.mbtx -- <package dir>")
+  }
+  let pkg = args[1].trim_end(chars="/").to_owned()
+  let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
+  if status.trim() != "" {
+    fail("the working tree is not clean; commit or stash first:\n" + status)
+  }
+  let theory = theory_of(pkg)
+  let sources = []
+  for f in mbt_files(pkg).filter(f => !f.has_suffix("_test.mbt")) {
+    sources.push((f, read(f)))
+  }
+  let rec = record(pkg, theory, sources)
+  // a site is migrated when it ran, and read the same printable way each time
+  let new_spelling : Map[Int, String] = Map::new()
+  let left = []
+  let mut site = 0
+  for p in sources {
+    for c in calls(p.1.to_array()) {
+      let old = unquote(c.2)
+      let kind = match rec.runs.get(site) {
+        None => "not run"
+        Some(runs) =>
+          if runs.iter().any(r => r.1.has_prefix(unprintable)) {
+            "unprintable"
+          } else if runs.iter().all(r => r.1 == runs[0].1) {
+            new_spelling[site] = runs[0].1
+            "migrated"
+          } else {
+            "conflict"
+          }
+      }
+      if kind != "migrated" {
+        left.push(kind + ": " + old)
+      }
+      site += 1
+    }
+  }
+  let migrated = new_spelling.length()
+  let mut base = 0
+  for p in sources {
+    let b = base
+    let (text, n) = rewrite_calls(p.1.to_array(), (k, _) => match
+      new_spelling.get(b + k) {
+      Some(new) => Some("@term_syntax.parse_term(\"" + quote(new) + "\")")
+      None => None
+    })
+    if n > 0 {
+      @fs.write_file(p.0, text)
+    }
+    base += calls(p.1.to_array()).length()
+  }
+  let keep = [pkg + "/"]
+  if migrated > 0 {
+    import_term_syntax(pkg)
+    let new_trace = rec.trace.copy()
+    for s, new in new_spelling {
+      for r in rec.runs[s] {
+        if r.0 >= 0 {
+          new_trace[r.0] = new
+        }
+      }
+    }
+    for t in golden_tests(pkg) {
+      keep.push(t)
+      rewrite_trace(t, theory, rec.trace, new_trace)
+      match expected_file(read(t)) {
+        Some(e) => {
+          keep.push(e)
+          rewrite_trace(e, theory, rec.trace, new_trace)
+        }
+        None => ()
+      }
+    }
+  }
+  let counts : Map[String, Int] = Map::new()
+  for l in left {
+    let k = l.split(":").next().unwrap().to_owned()
+    counts[k] = counts.get(k).unwrap_or(0) + 1
+  }
+  println(
+    "\{pkg}: \{migrated} migrated, \{left.length()} left (" +
+    counts.to_array().map(p => "\{p.1} \{p.0}").join(", ") +
+    ")",
+  )
+  for l in left[:min(20, left.length())] {
+    println("  left " + l[:min(120, l.length())].to_owned())
+  }
+  if migrated == 0 {
+    restore_others(keep)
+    println("test: skipped (nothing migrated, nothing changed)")
+    return
+  }
+  // the test that holds the golden
+  let failures = match golden_tests(pkg) {
+    [] => run_tests(pkg, None)
+    tests => {
+      let tdir = tests[0].split("/").map(p => p.to_owned()).to_array()
+      run_tests(tdir[:tdir.length() - 1].join("/"), Some(tests))
+    }
+  }
+  restore_others(keep)
+  if failures.is_empty() {
+    println("test: pass")
+  } else {
+    println("test: FAILED")
+    for m in failures {
+      println(m[:min(3000, m.length())].to_owned())
+    }
+    fail("the reference test fails: the golden differs in more than the trace lines")
+  }
+}

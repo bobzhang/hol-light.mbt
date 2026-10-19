@@ -12640,18 +12640,18 @@ test "100/gcd matches 100/gcd.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..4..solved at 14
       #|100/gcd quotations (12):
-      #|  egcd(m,n) = if m = 0 then n\n              else if n = 0 then m\n              else if m <= n then egcd(m,n - m)\n              else egcd(m - n,n)
+      #|  (egcd : ((Num, Num)) -> Num)(((m : Num), (n : Num))) == (if m == 0 { n } else { if n == 0 { m } else { if m <= n { egcd((m, n - m)) } else { egcd((m - n, n)) } } })
       #|  :P
       #|  :P
       #|  :P
       #|  :P
       #|  :P
-      #|  n = 0
-      #|  m = 0
-      #|  m + n
-      #|  forall m n d. d divides egcd(m,n) <=> d divides m /\\ d divides n
-      #|  forall m n. egcd(m,n) = gcd(m,n)
-      #|  forall a b. (egcd (a,b) divides a /\\ egcd (a,b) divides b) /\\\n         (forall e. e divides a /\\ e divides b ==> e divides egcd (a,b))
+      #|  (n : Num) == 0
+      #|  (m : Num) == 0
+      #|  (m : Num) + (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 d : Num, divides(d, egcd((m, n))) == (divides(d, m) && divides(d, n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, egcd((m, n)) == gcd((m, n))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, (divides(egcd((a, b)), a) && divides(egcd((a, b)), b)) && (\226\136\128 e : Num, divides(e, a) && divides(e, b) \226\134\146 divides(e, egcd((a, b))))
       #|egcd =  |- ((#=:fun(num,fun(num,bool)) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) m:num) (#NUMERAL:fun(num,num) #_0:num))) n:num) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) m:num) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) ((#-:fun(num,fun(num,num)) n:num) m:num)))) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) ((#-:fun(num,fun(num,num)) m:num) n:num)) n:num))))))
       #|EGCD_INVARIANT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\d:num. ((#=:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) d:num) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) d:num) m:num)) ((#num_divides:fun(num,fun(num,bool)) d:num) n:num)))))))))
       #|EGCD_GCD =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#egcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))) (#num_gcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))))))

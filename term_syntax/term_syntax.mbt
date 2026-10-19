@@ -106,6 +106,13 @@ pub fn parse_preterm(s : String) -> @preterm.Preterm raise {
 ///|
 /// The HOL term `s` denotes.
 pub fn parse_term(s : String) -> @kernel.Term raise {
+  @parser.record_quotation(s)
+  elaborate(s)
+}
+
+///|
+/// The term `s` denotes, without recording it as a quotation.
+fn elaborate(s : String) -> @kernel.Term raise {
   @preterm.term_of_preterm(
     @preterm.retypecheck(@list.List([]), parse_preterm(s)),
   )
