@@ -6,7 +6,7 @@ fn step_1() -> Unit raise {
   let t24 = @meson.asm_meson_tac(@list.List([@prime.exp_mult_exists(), @real.real_abs_zero(), @realax.real_of_num_eq()]))
   let t23 = @simp.rewrite_tac(@list.List([@calc_int.real_of_num_pow(), @realax.real_of_num_mul(), @realax.real_of_num_eq()]))
   let t22 = @list.List([@meson.asm_meson_tac(@list.List([@real.real_abs_zero()])), @tactics.all_tac])
-  let t19 = @drule.match_mp(@calc_rat.real_field(@parser.parse_term("p = (n / m) pow 2 ==> ~(m = &0) ==> m pow 2 * p = n pow 2")))
+  let t19 = @drule.match_mp(@calc_rat.real_field(@term_syntax.parse_term("(p : Real) == pow((n : Real) / (m : Real), 2) → !(m == real_of_num(0)) → pow(m, 2) * p == pow(n, 2)")))
   let t21 = @tactics.disch_then(fn(x20 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x16 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s17 = @tactics.mp_tac(x16)
@@ -24,7 +24,7 @@ fn step_1() -> Unit raise {
   }))
   let t10 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@real.real_pow2_abs())]))
   let t9 = @simp.simp_tac(@list.List([@real.sqrt_pow_2(), @realarith.real_pos()]))
-  let t5 = @parser.parse_term("\\x:real. x pow 2")
+  let t5 = @term_syntax.parse_term("(x : Real) => pow(x, 2)")
   let t8 = @tactics.first_assum(fn(x7 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x2 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s3 = @tactics.mp_tac(x2)
@@ -35,7 +35,7 @@ fn step_1() -> Unit raise {
   })
   let t1 = @tactics.repeat_tac(@tactics.strip_tac)
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@floor.rational()])), t1), t8), t9), t10), t14), t15), t21), @tactics.ants_tac), t22), t23), t24)
-  irrational_sqrt_nonsquare_c.set(@tactics.prove(@parser.parse_term("forall n. rational(sqrt(&n)) ==> ?m. n = m EXP 2"), t25))
+  irrational_sqrt_nonsquare_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, rational(sqrt(real_of_num(n))) → (∃ m : Num, n == EXP(m, 2))"), t25))
 }
 
 ///|
@@ -63,7 +63,7 @@ fn step_2() -> Unit raise {
   })
   let t26 = @simp.rewrite_tac(@list.List([]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@class.contrapos_thm())]))), t26), t33), t34)
-  irrational_sqrt_prime_c.set(@tactics.prove(@parser.parse_term("forall p. prime p ==> ~rational(sqrt(&p))"), t35))
+  irrational_sqrt_prime_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Num, prime(p) → !rational(sqrt(real_of_num(p)))"), t35))
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn irrational_sqrt_prime() -> @kernel.Thm {
 /// IRRATIONAL_SQRT_2
 fn step_3() -> Unit raise {
   let t36 = @simp.simp_tac(@list.List([irrational_sqrt_prime(), @prime.prime_2()]))
-  irrational_sqrt_2_c.set(@tactics.prove(@parser.parse_term("~rational(sqrt(&2))"), t36))
+  irrational_sqrt_2_c.set(@tactics.prove(@term_syntax.parse_term("!rational(sqrt(real_of_num(2)))"), t36))
 }
 
 ///|

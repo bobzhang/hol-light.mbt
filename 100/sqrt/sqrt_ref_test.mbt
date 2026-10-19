@@ -12953,11 +12953,11 @@ test "100/sqrt matches 100/sqrt.ml" {
       #|0..0..1..3..8..18..39..solved at 57
       #|0..0..2..6..16..42..119..424..1865..10079..solved at 11348
       #|100/sqrt quotations (5):
-      #|  p = (n / m) pow 2 ==> ~(m = &0) ==> m pow 2 * p = n pow 2
-      #|  \\x:real. x pow 2
-      #|  forall n. rational(sqrt(&n)) ==> ?m. n = m EXP 2
-      #|  forall p. prime p ==> ~rational(sqrt(&p))
-      #|  ~rational(sqrt(&2))
+      #|  (p : Real) == pow((n : Real) / (m : Real), 2) \226\134\146 !(m == real_of_num(0)) \226\134\146 pow(m, 2) * p == pow(n, 2)
+      #|  (x : Real) => pow(x, 2)
+      #|  \226\136\128 n : Num, rational(sqrt(real_of_num(n))) \226\134\146 (\226\136\131 m : Num, n == EXP(m, 2))
+      #|  \226\136\128 p : Num, prime(p) \226\134\146 !rational(sqrt(real_of_num(p)))
+      #|  !rational(sqrt(real_of_num(2)))
       #|IRRATIONAL_SQRT_NONSQUARE =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#rational:fun(real,bool) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) n:num)))) (#?:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
       #|IRRATIONAL_SQRT_PRIME =  |- (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) (#~:fun(bool,bool) (#rational:fun(real,bool) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) p:num)))))))
       #|IRRATIONAL_SQRT_2 =  |- (#~:fun(bool,bool) (#rational:fun(real,bool) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
