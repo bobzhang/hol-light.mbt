@@ -6947,151 +6947,151 @@ test "100/derangements matches 100/derangements.ml" {
       #|Generating HOL version of proof
       #|Warning: inventing type variables
       #|100/derangements quotations (145):
-      #|  (\\(x,y). P x y) (a,b)
-      #|  domain r = {x | ?y. r(x,y)}
-      #|  range r = {y | ?x. r(x,y)}
+      #|  GABS((f : ((_, _)) -> _) => \226\136\128 x : _, \226\136\128 y : _, GEQ(f((x, y)), (P : (_, _) -> _)(x, y)), ((a : _), (b : _)))
+      #|  (domain : (((_, _)) -> Bool, _) -> Bool)((r : ((_, _)) -> Bool)) == {(x : _) | \226\136\131 y : _, r((x, y))}
+      #|  (range : (((_, _)) -> Bool, _) -> Bool)((r : ((_, _)) -> Bool)) == {(y : _) | \226\136\131 x : _, r((x, y))}
       #|  (r % s) (x,y) <=> ?z. r(x,z) /\\ s(z,y)
-      #|  id(s) (x,y) <=> x IN s /\\ x = y
-      #|  converse(r) (x,y) = r(y,x)
-      #|  swap(a,b) (x,y) <=> x = a /\\ y = b \\/ x = b /\\ y = a
-      #|  r pairsup (s,t) <=> (r % converse(r) = id(s)) /\\ (converse(r) % r = id(t))
-      #|  r permutes s <=> r pairsup (s,s)
-      #|  r deranges s <=> r permutes s /\\ forall x. ~(r(x,x))
-      #|  forall r s. converse(r % s) = converse(s) % converse(r)
-      #|  forall r. converse(converse r) = r
-      #|  forall p s t.\n        p pairsup (s,t) <=>\n        (forall x y. p(x,y) ==> x IN s /\\ y IN t) /\\\n        (forall x. x IN s ==> ?!y. y IN t /\\ p(x,y)) /\\\n        (forall y. y IN t ==> ?!x. x IN s /\\ p(x,y))
-      #|  forall p s. p permutes s <=>\n         (forall x y. p(x,y) ==> x IN s /\\ y IN s) /\\\n         (forall x. x IN s ==> ?!y. y IN s /\\ p(x,y)) /\\\n         (forall y. y IN s ==> ?!x. x IN s /\\ p(x,y))
-      #|  forall p s t. p pairsup (s,t) ==> domain p = s /\\ range p = t
-      #|  forall p s. p permutes s ==> domain p = s /\\ range p = s
-      #|  forall p s t. p pairsup (s,t) ==> forall x y y'. p(x,y) /\\ p(x,y') ==> y = y'
-      #|  forall p s. p permutes s ==> forall x y y'. p(x,y) /\\ p(x,y') ==> y = y'
-      #|  forall p s t. p pairsup (s,t) ==> forall x x' y. p(x,y) /\\ p(x',y) ==> x = x'
-      #|  forall p s. p permutes s ==> forall x x' y. p(x,y) /\\ p(x',y) ==> x = x'
-      #|  forall s. id(s) pairsup (s,s)
-      #|  forall s. id(s) permutes s
-      #|  forall p s t. p pairsup (s,t) ==> converse(p) pairsup (t,s)
-      #|  forall p s. p permutes s ==> converse(p) permutes s
-      #|  forall p p' s t u. p pairsup (s,t) /\\ p' pairsup (t,u) ==> (p % p') pairsup (s,u)
-      #|  forall p p' s. p permutes s /\\ p' permutes s ==> (p % p') permutes s
-      #|  swap(a,b) permutes {a,b}
-      #|  p pairsup ({},{}) <=> (p = {})
-      #|  p DELETE (x:A,y:B)
-      #|  y:B
-      #|  ?y. y IN t /\\ p(x:A,y:B)
-      #|  x IN s ==> x INSERT s = s
-      #|  forall x:A s t:B->bool p.\n        p pairsup (x INSERT s,t) <=>\n          if x IN s then p pairsup (s,t)\n          else ?y q. y IN t /\\ p = (x,y) INSERT q /\\ q pairsup (s,t DELETE y)
+      #|  (id : ((_) -> Bool, (_, _)) -> Bool)((s : (_) -> Bool), ((x : _), (y : _))) == (IN(x, s) && x == y)
+      #|  (converse : (((_, _)) -> _, (_, _)) -> _)((r : ((_, _)) -> _), ((x : _), (y : _))) == r((y, x))
+      #|  (swap : ((_, _), (_, _)) -> Bool)(((a : _), (b : _)), ((x : _), (y : _))) == (x == a && y == b || x == b && y == a)
+      #|  (pairsup : (((_, _)) -> Bool, ((_) -> Bool, (_) -> Bool)) -> Bool)((r : ((_, _)) -> Bool), ((s : (_) -> Bool), (t : (_) -> Bool))) == (op_pct(r, converse(r)) == id(s) && op_pct(converse(r), r) == id(t))
+      #|  (permutes : (((_, _)) -> Bool, (_) -> Bool) -> Bool)((r : ((_, _)) -> Bool), (s : (_) -> Bool)) == pairsup(r, (s, s))
+      #|  (deranges : (((_, _)) -> Bool, (_) -> Bool) -> Bool)((r : ((_, _)) -> Bool), (s : (_) -> Bool)) == (permutes(r, s) && (\226\136\128 x : _, !r((x, x))))
+      #|  \226\136\128 r : ((_, _)) -> Bool, \226\136\128 s : ((_, _)) -> Bool, converse(op_pct(r, s)) == op_pct(converse(s), converse(r))
+      #|  \226\136\128 r : ((_, _)) -> _, converse(converse(r)) == r
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, pairsup(p, (s, t)) == ((\226\136\128 x : _, \226\136\128 y : _, p((x, y)) \226\134\146 IN(x, s) && IN(y, t)) && (\226\136\128 x : _, IN(x, s) \226\134\146 existsunique((y : _) => IN(y, t) && p((x, y)))) && (\226\136\128 y : _, IN(y, t) \226\134\146 existsunique((x : _) => IN(x, s) && p((x, y)))))
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, permutes(p, s) == ((\226\136\128 x : _, \226\136\128 y : _, p((x, y)) \226\134\146 IN(x, s) && IN(y, s)) && (\226\136\128 x : _, IN(x, s) \226\134\146 existsunique((y : _) => IN(y, s) && p((x, y)))) && (\226\136\128 y : _, IN(y, s) \226\134\146 existsunique((x : _) => IN(x, s) && p((x, y)))))
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, pairsup(p, (s, t)) \226\134\146 domain(p) == s && range(p) == t
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, permutes(p, s) \226\134\146 domain(p) == s && range(p) == s
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, pairsup(p, (s, t)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 y' : _, p((x, y)) && p((x, y')) \226\134\146 y == y')
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, permutes(p, s) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 y' : _, p((x, y)) && p((x, y')) \226\134\146 y == y')
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, pairsup(p, (s, t)) \226\134\146 (\226\136\128 x : _, \226\136\128 x' : _, \226\136\128 y : _, p((x, y)) && p((x', y)) \226\134\146 x == x')
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, permutes(p, s) \226\134\146 (\226\136\128 x : _, \226\136\128 x' : _, \226\136\128 y : _, p((x, y)) && p((x', y)) \226\134\146 x == x')
+      #|  \226\136\128 s : (_) -> Bool, pairsup(id(s), (s, s))
+      #|  \226\136\128 s : (_) -> Bool, permutes(id(s), s)
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, pairsup(p, (s, t)) \226\134\146 pairsup(converse(p), (t, s))
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, permutes(p, s) \226\134\146 permutes(converse(p), s)
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 p' : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, \226\136\128 u : (_) -> Bool, pairsup(p, (s, t)) && pairsup(p', (t, u)) \226\134\146 pairsup(op_pct(p, p'), (s, u))
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 p' : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, permutes(p, s) && permutes(p', s) \226\134\146 permutes(op_pct(p, p'), s)
+      #|  permutes(swap(((a : _), (b : _))), {a, b})
+      #|  pairsup((p : ((_, _)) -> Bool), ({}, {})) == (p == {})
+      #|  DELETE((p : ((A, B)) -> Bool), ((x : A), (y : B)))
+      #|  (y : B)
+      #|  \226\136\131 y : B, IN(y, (t : (B) -> Bool)) && (p : ((A, B)) -> Bool)(((x : A), y))
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 INSERT(x, s) == s
+      #|  \226\136\128 x : A, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 p : ((A, B)) -> Bool, pairsup(p, (INSERT(x, s), t)) == (if IN(x, s) { pairsup(p, (s, t)) } else { \226\136\131 y : B, \226\136\131 q : ((A, B)) -> Bool, IN(y, t) && p == INSERT((x, y), q) && pairsup(q, (s, DELETE(t, y))) })
       #|  {p | ?y. y IN t /\\ A y p} = UNIONS {{p | A y p} | y IN t} /\\\n     {p | ?q. p = (a,y) INSERT q /\\ A y q} =\n           IMAGE (\\q. (a,y) INSERT q) {q | A y q}
-      #|  {x | x = a} = {a}
-      #|  forall n s:A->bool t:B->bool.\n        s HAS_SIZE n /\\ t HAS_SIZE n\n        ==> {p | p pairsup (s,t)} HAS_SIZE (FACT n)
-      #|  forall s n. s HAS_SIZE n ==> {p | p permutes s} HAS_SIZE (FACT n)
-      #|  (derangements 0 = 1) /\\\n  (derangements 1 = 0) /\\\n  (derangements(n + 2) = (n + 1) * (derangements n + derangements(n + 1)))
+      #|  {(x : _) | x == (a : _)} == {a}
+      #|  \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, HAS_SIZE(s, n) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE({(p : ((A, B)) -> Bool) | pairsup(p, (s, t))}, FACT(n))
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 n : Num, HAS_SIZE(s, n) \226\134\146 HAS_SIZE({(p : ((_, _)) -> Bool) | permutes(p, s)}, FACT(n))
+      #|  (derangements : (Num) -> Num)(0) == 1 && derangements(1) == 0 && derangements((n : Num) + 2) == (n + 1) * (derangements(n) + derangements(n + 1))
       #|  \\n. n + 1
-      #|  forall n. P n /\\ P(n + 1)
-      #|  forall P. P 0 /\\ P 1 /\\ (forall n. P n /\\ P(n + 1) ==> P(n + 2)) ==> forall n. P n
-      #|  forall p s x y.\n        p deranges s /\\ ~(x IN s) /\\ ~(y IN s) /\\ ~(x = y)\n        ==> ((x,y) INSERT (y,x) INSERT p) deranges (x INSERT y INSERT s)
-      #|  forall p s y x. p deranges s /\\ ~(y IN s) /\\ p(x,z)\n             ==> ((x,y) INSERT (y,z) INSERT (p DELETE (x,z)))\n                 deranges (y INSERT s)
-      #|  forall p. p deranges {} <=> p = {}
-      #|  forall x p. ~(p deranges {x})
-      #|  y:A = z
-      #|  w:A = y
-      #|  w:A = z
-      #|  w:A IN s
-      #|  (q:A#A->bool)(x:A,w:A)
-      #|  w = @w. q(x:A,w:A)
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  q:A#A->bool
-      #|  z:A
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  p:A#A->bool
-      #|  y:A
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  (s:A->bool) HAS_SIZE n + 1
-      #|  a INSERT b INSERT s = a INSERT b INSERT t\n        ==> ~(a IN s) /\\ ~(a IN t) /\\ ~(b IN s) /\\ ~(b IN t) ==> s = t
-      #|  (y:A,z:A)
-      #|  z':A = z
-      #|  a ==> b ==> c <=> b ==> a ==> c
-      #|  (x:A,y:A)
-      #|  z:A IN s /\\ z':A IN s
-      #|  p(x:A,z:A) /\\ p'(x:A,z':A)
-      #|  z' = @z. p'(x:A,z:A)
-      #|  z = @z. p(x:A,z:A)
-      #|  p':(A#A->bool)
-      #|  y':A
-      #|  p:(A#A)->bool
-      #|  y:A
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  (s:A->bool) HAS_SIZE (n + 1)
-      #|  ~(x:A IN s)
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  u:A = x
-      #|  v:A
-      #|  u:A
-      #|  (@w:A. ((x,z) INSERT (p DELETE (x,y) DELETE (y,z))) (x,w)) = z
-      #|  (x:A,z:A) INSERT ((p DELETE (x,y)) DELETE (y,z))
-      #|  y:A
-      #|  z:A IN s
-      #|  ?z. p(y:A,z:A)
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  (p:A#A->bool)(y,x)
-      #|  (p:A#A->bool)(x,y)
-      #|  y:A,(p DELETE (y,x)) DELETE (x:A,y:A)
-      #|  (p:A#A->bool)(y,x)
-      #|  ?y. y IN s /\\ p(x:A,y:A)
-      #|  p:A#A->bool
-      #|  (x:A) INSERT s = y INSERT (x INSERT (s DELETE y))
-      #|  z:A IN s
-      #|  (p:A#A->bool)(x:A,z:A)
-      #|  z = @z. p(x:A,z:A)
-      #|  y IN s ==> s = y INSERT (s DELETE y)
-      #|  p:A#A->bool
-      #|  y:A
-      #|  (a /\\ b) /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  (a <=> b) <=> (b ==> a) /\\ (a ==> b)
-      #|  {p | p deranges (x:A INSERT s)} =\n        (IMAGE (\\(y,p). (x,y) INSERT (y,x) INSERT p)\n               {(y,p) | y IN s /\\ p IN {p | p deranges (s DELETE y)}}) UNION\n        (IMAGE (\\(y,p). let z = @z. p(x,z) in\n                        (x,y) INSERT (y,z) INSERT (p DELETE (x,z)))\n               {(y,p) | y IN s /\\\n                        p IN {p | p deranges (x INSERT (s DELETE y))}})
-      #|  s:A->bool
-      #|  x:A
-      #|  n + 2 = SUC(n + 1)
-      #|  t:A->bool
-      #|  n:num
-      #|  {}:A#A->bool
-      #|  forall n s:A->bool. s HAS_SIZE n ==> {p | p deranges s} HAS_SIZE (derangements n)
-      #|  a /\\ (a ==> b) ==> a /\\ b
+      #|  \226\136\128 n : Num, (P : (Num) -> Bool)(n) && P(n + 1)
+      #|  \226\136\128 P : (Num) -> Bool, P(0) && P(1) && (\226\136\128 n : Num, P(n) && P(n + 1) \226\134\146 P(n + 2)) \226\134\146 (\226\136\128 n : Num, P(n))
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 x : _, \226\136\128 y : _, deranges(p, s) && !IN(x, s) && !IN(y, s) && !(x == y) \226\134\146 deranges(INSERT((x, y), INSERT((y, x), p)), INSERT(x, INSERT(y, s)))
+      #|  \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 y : _, \226\136\128 x : _, deranges(p, s) && !IN(y, s) && p((x, (z : _))) \226\134\146 deranges(INSERT((x, y), INSERT((y, z), DELETE(p, (x, z)))), INSERT(y, s))
+      #|  \226\136\128 p : ((_, _)) -> Bool, deranges(p, {}) == (p == {})
+      #|  \226\136\128 x : _, \226\136\128 p : ((_, _)) -> Bool, !deranges(p, {x})
+      #|  (y : A) == (z : A)
+      #|  (w : A) == (y : A)
+      #|  (w : A) == (z : A)
+      #|  IN((w : A), (s : (A) -> Bool))
+      #|  (q : ((A, A)) -> Bool)(((x : A), (w : A)))
+      #|  (w : A) == select((w : A) => (q : ((A, A)) -> Bool)(((x : A), w)))
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  (q : ((A, A)) -> Bool)
+      #|  (z : A)
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  (p : ((A, A)) -> Bool)
+      #|  (y : A)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  HAS_SIZE((s : (A) -> Bool), (n : Num) + 1)
+      #|  INSERT((a : _), INSERT((b : _), (s : (_) -> Bool))) == INSERT(a, INSERT(b, (t : (_) -> Bool))) \226\134\146 !IN(a, s) && !IN(a, t) && !IN(b, s) && !IN(b, t) \226\134\146 s == t
+      #|  ((y : A), (z : A))
+      #|  (z' : A) == (z : A)
+      #|  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+      #|  ((x : A), (y : A))
+      #|  IN((z : A), (s : (A) -> Bool)) && IN((z' : A), s)
+      #|  (p : ((A, A)) -> Bool)(((x : A), (z : A))) && (p' : ((A, A)) -> Bool)((x, (z' : A)))
+      #|  (z' : A) == select((z : A) => (p' : ((A, A)) -> Bool)(((x : A), z)))
+      #|  (z : A) == select((z : A) => (p : ((A, A)) -> Bool)(((x : A), z)))
+      #|  (p' : ((A, A)) -> Bool)
+      #|  (y' : A)
+      #|  (p : ((A, A)) -> Bool)
+      #|  (y : A)
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  HAS_SIZE((s : (A) -> Bool), (n : Num) + 1)
+      #|  !IN((x : A), (s : (A) -> Bool))
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  (u : A) == (x : A)
+      #|  (v : A)
+      #|  (u : A)
+      #|  select((w : A) => INSERT(((x : A), (z : A)), DELETE(DELETE((p : ((A, A)) -> Bool), (x, (y : A))), (y, z)), (x, w))) == z
+      #|  INSERT(((x : A), (z : A)), DELETE(DELETE((p : ((A, A)) -> Bool), (x, (y : A))), (y, z)))
+      #|  (y : A)
+      #|  IN((z : A), (s : (A) -> Bool))
+      #|  \226\136\131 z : A, (p : ((A, A)) -> Bool)(((y : A), z))
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  (p : ((A, A)) -> Bool)(((y : A), (x : A)))
+      #|  (p : ((A, A)) -> Bool)(((x : A), (y : A)))
+      #|  ((y : A), DELETE(DELETE((p : ((A, A)) -> Bool), (y, (x : A))), (x, y)))
+      #|  (p : ((A, A)) -> Bool)(((y : A), (x : A)))
+      #|  \226\136\131 y : A, IN(y, (s : (A) -> Bool)) && (p : ((A, A)) -> Bool)(((x : A), y))
+      #|  (p : ((A, A)) -> Bool)
+      #|  INSERT((x : A), (s : (A) -> Bool)) == INSERT((y : A), INSERT(x, DELETE(s, y)))
+      #|  IN((z : A), (s : (A) -> Bool))
+      #|  (p : ((A, A)) -> Bool)(((x : A), (z : A)))
+      #|  (z : A) == select((z : A) => (p : ((A, A)) -> Bool)(((x : A), z)))
+      #|  IN((y : _), (s : (_) -> Bool)) \226\134\146 s == INSERT(y, DELETE(s, y))
+      #|  (p : ((A, A)) -> Bool)
+      #|  (y : A)
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  ((a : Bool) == (b : Bool)) == ((b \226\134\146 a) && (a \226\134\146 b))
+      #|  {(p : ((A, A)) -> Bool) | deranges(p, INSERT((x : A), (s : (A) -> Bool)))} == UNION(IMAGE(GABS((f : ((A, ((A, A)) -> Bool), (A, A)) -> Bool) => \226\136\128 y : A, \226\136\128 p : ((A, A)) -> Bool, GEQ(f((y, p)), INSERT((x, y), INSERT((y, x), p)))), {((y : A), (p : ((A, A)) -> Bool)) | IN(y, s) && IN(p, {(p : ((A, A)) -> Bool) | deranges(p, DELETE(s, y))})}), IMAGE(GABS((f : ((A, ((A, A)) -> Bool), (A, A)) -> Bool) => \226\136\128 y : A, \226\136\128 p : ((A, A)) -> Bool, GEQ(f((y, p)), LET((z : A) => LET_END(INSERT((x, y), INSERT((y, z), DELETE(p, (x, z))))), select((z : A) => p((x, z)))))), {((y : A), (p : ((A, A)) -> Bool)) | IN(y, s) && IN(p, {(p : ((A, A)) -> Bool) | deranges(p, INSERT(x, DELETE(s, y)))})}))
+      #|  (s : (A) -> Bool)
+      #|  (x : A)
+      #|  (n : Num) + 2 == SUC(n + 1)
+      #|  (t : (A) -> Bool)
+      #|  (n : Num)
+      #|  ({} : ((A, A)) -> Bool)
+      #|  \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, HAS_SIZE(s, n) \226\134\146 HAS_SIZE({(p : ((A, A)) -> Bool) | deranges(p, s)}, derangements(n))
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
       #|  1
-      #|  sum(0..1) f = f 0 + f 1
+      #|  sum(op_dot_dot(0, 1), (f : (Num) -> Real)) == f(0) + f(1)
       #|  1
       #|  2
-      #|  sum(0..2) f = f 0 + f 1 + f 2
-      #|  ~(n = 0)
-      #|  n:num
-      #|  SUC(SUC n) = n + 2
-      #|  n + 2 = (n + 1) + 1
-      #|  n = 0
-      #|  n:num
-      #|  forall n. ~(n = 0)\n       ==> &(derangements n) =\n           &(FACT n) * sum(0..n) (\\k. --(&1) pow k / &(FACT k))
-      #|  ~(n < 5)
-      #|  &3
-      #|  abs(u) <= abs(-- &1)
-      #|  exp(&1)
-      #|  &0 < &n + &1
-      #|  &0 < a ==> a * b / ((&n + &1) * a) = b / (&n + &1)
-      #|  abs(a * b - a * (b + c)) = abs(a * c)
-      #|  u:real
-      #|  (0 + n + 1) - 1 = n
-      #|  n + 1
-      #|  -- &1
-      #|  abs x < a <=> --a < x /\\ x < a
-      #|  n < 5 ==> n = 0 \\/ n = 1 \\/ n = 2 \\/ n = 3 \\/ n = 4
-      #|  n < 5
-      #|  forall n. ~(n = 0)\n       ==> let e = exp(&1) in\n           abs(&(derangements n) - &(FACT n) / e) < &1 / &2
-      #|  round x = @n. integer(n) /\\ n - &1 / &2 <= x /\\ x < n + &1 / &2
-      #|  x + &1 / &2
-      #|  floor(x + &1 / &2)
-      #|  forall x. integer(round x) /\\ round x - &1 / &2 <= x /\\ x < round x + &1 / &2
-      #|  &(FACT n) / e
-      #|  forall n. ~(n = 0)\n       ==> let e = exp(&1) in &(derangements n) = round(&(FACT n) / e)
-      #|  forall n s. s HAS_SIZE n /\\ ~(n = 0)\n         ==> FINITE {p | p deranges s} /\\\n             let e = exp(&1) in\n             &(CARD {p | p deranges s}) = round(&(FACT n) / e)
+      #|  sum(op_dot_dot(0, 2), (f : (Num) -> Real)) == f(0) + (f(1) + f(2))
+      #|  !((n : Num) == 0)
+      #|  (n : Num)
+      #|  SUC(SUC((n : Num))) == n + 2
+      #|  (n : Num) + 2 == n + 1 + 1
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 real_of_num(derangements(n)) == real_of_num(FACT(n)) * sum(op_dot_dot(0, n), (k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)))
+      #|  !((n : Num) < 5)
+      #|  real_of_num(3)
+      #|  abs((u : Real)) <= abs(-real_of_num(1))
+      #|  exp(real_of_num(1))
+      #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+      #|  real_of_num(0) < (a : Real) \226\134\146 a * ((b : Real) / ((real_of_num((n : Num)) + real_of_num(1)) * a)) == b / (real_of_num(n) + real_of_num(1))
+      #|  abs((a : Real) * (b : Real) - a * (b + (c : Real))) == abs(a * c)
+      #|  (u : Real)
+      #|  0 + ((n : Num) + 1) - 1 == n
+      #|  (n : Num) + 1
+      #|  -real_of_num(1)
+      #|  (abs((x : Real)) < (a : Real)) == (-a < x && x < a)
+      #|  (n : Num) < 5 \226\134\146 n == 0 || n == 1 || n == 2 || n == 3 || n == 4
+      #|  (n : Num) < 5
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 LET((e : Real) => LET_END(abs(real_of_num(derangements(n)) - real_of_num(FACT(n)) / e) < real_of_num(1) / real_of_num(2)), exp(real_of_num(1)))
+      #|  (round : (Real) -> Real)((x : Real)) == select((n : Real) => integer(n) && n - real_of_num(1) / real_of_num(2) <= x && x < n + real_of_num(1) / real_of_num(2))
+      #|  (x : Real) + real_of_num(1) / real_of_num(2)
+      #|  floor((x : Real) + real_of_num(1) / real_of_num(2))
+      #|  \226\136\128 x : Real, integer(round(x)) && round(x) - real_of_num(1) / real_of_num(2) <= x && x < round(x) + real_of_num(1) / real_of_num(2)
+      #|  real_of_num(FACT((n : Num))) / (e : Real)
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 LET((e : Real) => LET_END(real_of_num(derangements(n)) == round(real_of_num(FACT(n)) / e)), exp(real_of_num(1)))
+      #|  \226\136\128 n : Num, \226\136\128 s : (_) -> Bool, HAS_SIZE(s, n) && !(n == 0) \226\134\146 FINITE({(p : ((_, _)) -> Bool) | deranges(p, s)}) && LET((e : Real) => LET_END(real_of_num(CARD({(p : ((_, _)) -> Bool) | deranges(p, s)})) == round(real_of_num(FACT(n)) / e)), exp(real_of_num(1)))
       #|PAIR_BETA_THM =  |- ((#=:fun('?1,fun('?1,bool)) ((#GABS:fun(fun(fun(prod('?2,'?3),'?1),bool),fun(prod('?2,'?3),'?1)) (\_132140:fun(prod('?2,'?3),'?1). (#forall:fun(fun('?2,bool),bool) (\x:'?2. (#forall:fun(fun('?3,bool),bool) (\y:'?3. ((#GEQ:fun('?1,fun('?1,bool)) (_132140:fun(prod('?2,'?3),'?1) ((#,:fun('?2,fun('?3,prod('?2,'?3))) x:'?2) y:'?3))) ((P:fun('?2,fun('?3,'?1)) x:'?2) y:'?3)))))))) ((#,:fun('?2,fun('?3,prod('?2,'?3))) a:'?2) b:'?3))) ((P:fun('?2,fun('?3,'?1)) a:'?2) b:'?3))
       #|domain =  |- (#forall:fun(fun(fun(prod('?4,'?5),bool),bool),bool) (\r:fun(prod('?4,'?5),bool). ((#=:fun(fun('?4,bool),fun(fun('?4,bool),bool)) (#domain:fun(fun(prod('?4,'?5),bool),fun('?4,bool)) r:fun(prod('?4,'?5),bool))) (#GSPEC:fun(fun('?4,bool),fun('?4,bool)) (\GEN%PVAR%1:'?4. (#?:fun(fun('?4,bool),bool) (\x:'?4. (((#SETSPEC:fun('?4,fun(bool,fun('?4,bool))) GEN%PVAR%1:'?4) (#?:fun(fun('?5,bool),bool) (\y:'?5. (r:fun(prod('?4,'?5),bool) ((#,:fun('?4,fun('?5,prod('?4,'?5))) x:'?4) y:'?5))))) x:'?4))))))))
       #|range =  |- (#forall:fun(fun(fun(prod('?6,'?7),bool),bool),bool) (\r:fun(prod('?6,'?7),bool). ((#=:fun(fun('?7,bool),fun(fun('?7,bool),bool)) (#range:fun(fun(prod('?6,'?7),bool),fun('?7,bool)) r:fun(prod('?6,'?7),bool))) (#GSPEC:fun(fun('?7,bool),fun('?7,bool)) (\GEN%PVAR%2:'?7. (#?:fun(fun('?7,bool),bool) (\y:'?7. (((#SETSPEC:fun('?7,fun(bool,fun('?7,bool))) GEN%PVAR%2:'?7) (#?:fun(fun('?6,bool),bool) (\x:'?6. (r:fun(prod('?6,'?7),bool) ((#,:fun('?6,fun('?7,prod('?6,'?7))) x:'?6) y:'?7))))) y:'?7))))))))

@@ -5525,194 +5525,194 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..1..2..solved at 6
 100/ramsey quotations (188):
-  forall t1 t2. t1 /\\ t2 ==> t1
-  forall t1 t2. t1 /\\ t2 ==> t2
-  forall t1 t2 t3. t1 ==> t2 ==> t3 = t1 /\\ t2 ==> t3
-  forall t1 t2. t1 ==> t2 ==> t1 /\\ t2
-  ~(T <=> F) /\\ ~(F <=> T)
-  forall t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2
-  forall t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)
-  forall t. F ==> t
-  forall t. ~t ==> t ==> F
-  forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
-  forall t. (t ==> F) ==> ~t
-  forall t. t ==> F <=> (t <=> F)
-  forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3
-  forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
-  ~(t /\\ ~t)
-  forall t. ~t ==> (t <=> F)
-  forall t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t
-  forall t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1
-  forall t1 t2. t1 ==> t1 \\/ t2
-  forall t1 t2. t2 ==> t1 \\/ t2
-  forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1
-  forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
-  a:A = b
-  b:A
-  a:A
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 && t2 \226\134\146 t1
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 && t2 \226\134\146 t2
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, t1 \226\134\146 t2 \226\134\146 t3 == t1 && t2 \226\134\146 t3
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 \226\134\146 t2 \226\134\146 t1 && t2
+  !(true == false) && !(false == true)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 == t2) == (t1 && t2 || !t1 && !t2)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 == t2) == ((t1 \226\134\146 t2) && (t2 \226\134\146 t1))
+  \226\136\128 t : Bool, false \226\134\146 t
+  \226\136\128 t : Bool, !t \226\134\146 t \226\134\146 false
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 \226\134\146 t2) == (!t1 || t2)
+  \226\136\128 t : Bool, (t \226\134\146 false) \226\134\146 !t
+  \226\136\128 t : Bool, (t \226\134\146 false) == (t == false)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 && (t2 || t3)) == (t1 && t2 || t1 && t3)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 || t2 && t3) == ((t1 || t2) && (t1 || t3))
+  !((t : Bool) && !t)
+  \226\136\128 t : Bool, !t \226\134\146 t == false
+  \226\136\128 t : Bool, \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 || t2 \226\134\146 (t1 \226\134\146 t) \226\134\146 (t2 \226\134\146 t) \226\134\146 t
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 == (t2 || t1)) == (t2 \226\134\146 t1)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 \226\134\146 t1 || t2
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t2 \226\134\146 t1 || t2
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, ((t2 || t3) && t1) == (t2 && t1 || t3 && t1)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t2 && t3 || t1) == ((t2 || t1) && (t3 || t1))
+  (a : A) == (b : A)
+  (b : A)
+  (a : A)
   :A
-  forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2
-  forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2
-  forall t t1 t2. (t ==> (t1 <=> t2)) ==> (t /\\ t1 <=> t /\\ t2)
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, t1 || t2 \226\134\146 !t1 \226\134\146 t2
+  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 \226\134\146 t2) \226\134\146 !t1 || t2
+  \226\136\128 t : Bool, \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t \226\134\146 t1 == t2) \226\134\146 (t && t1) == (t && t2)
   :bool
-  b:bool
-  b:bool
-  T
-  F
-  T
-  F
+  (b : Bool)
+  (b : Bool)
+  true
+  false
+  true
+  false
   :A
   :A
-  T
-  forall n. n < SUC n
-  forall n. n <= SUC n
-  forall m n. m < n ==> m < (SUC n)
+  true
+  \226\136\128 n : Num, n < SUC(n)
+  \226\136\128 n : Num, n <= SUC(n)
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 m < SUC(n)
   1
-  forall m. SUC m - 1 = m
-  forall m n. m < m + SUC n
-  forall n m. ~(SUC n <= m) <=> m <= n
-  forall m n:num. (m = n) \\/ m < n \\/ n < m
-  forall b c. c <= b ==> (forall a:num. a - (b - c) = (a + c) - b)
-  forall m n:num. ~(m < n) /\\ ~(m = n) ==> n < m
-  forall n m:num. (n - m) <= n
-  forall m n:num. (m - n = m) <=> (m = 0) \\/ (n = 0)
-  forall m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0
-  forall m n p:num. m >= (n - p) <=> (m + p) >= n
-  forall m. (0 = m) \\/ 0 < m
-  forall m n. m < n ==> (SUC m) <= n
-  (forall m. 0 - m = 0) /\\\n   (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))
-  forall m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i
-  forall m n p. m <= n ==> (m * p) <= (n * p)
-  forall m n. 0 < m /\\ 0 < n ==> 0 < (m * n)
-  forall s. FINITE s ==> (forall t. t SUBSET s ==> FINITE t)
-  forall n. m <= SUC n <=> (m = SUC n) \\/ m <= n
-  INFINITE (s:A->bool)
-  ~(s:A->bool = {})
-  forall s. INFINITE(s:A->bool) ==> ?x. x IN s
-  forall s:A->bool. INFINITE(s) ==> ((@) s) IN s
-  forall(t:A->bool) x. INFINITE (t DELETE x) = INFINITE(t)
-  forall(x:A) t. INFINITE(x INSERT t) = INFINITE(t)
-  forall(x:A) t. ~(x IN t) /\\ t HAS_SIZE n ==> (x INSERT t) HAS_SIZE (SUC n)
-  forall(x:A) t. x IN t /\\ t HAS_SIZE (SUC n) ==> (t DELETE x) HAS_SIZE n
-  forall s N. s HAS_SIZE (SUC N) ==> ?x:A. x IN s
-  s:A->bool
-  forall s t (x:A). s SUBSET t ==> (s DELETE x) SUBSET t
-  t SUBSET (s DELETE ((@) s:A))
-  ((@) s :A) INSERT t
-  t:A->bool
-  s DELETE ((@) s :A)
-  {}:A->bool
-  forall n (s:A->bool). INFINITE(s) ==> ?t. t SUBSET s /\\ t HAS_SIZE n
-  ~(z:A = x)
-  z:A
-  k:num
-  k:num
-  z:A
-  z:A
-  u DELETE (x:A)
-  m:num
-  x:A
-  m:num
-  y:A
-  n:num
-  n:num
-  y:A
-  y:A
-  \\n:num. ?y:A. y IN u /\\ (y = f n)
-  forall N (t:num->bool) (u:A->bool).\n        u SUBSET (IMAGE f t) /\\ u HAS_SIZE (SUC N) ==>\n        ?n v. (u = (f n) INSERT v) /\\\n              forall y. y IN v ==> ?m. (y = f m) /\\ n < m
-  { x:A | x IN s /\\ col x <= M }
-  t:A->bool
-  c:num
-  t:A->bool
-  c:num
-  (c ==> d) ==> (b ==> c) ==> b ==> d
-  { x:A | x IN s /\\ col x <= M}
-  col:A->num
-  forall n:A. n IN { x | x IN s /\\ col x <= M } ==> col(n) <= M
-  { x:A | x IN s /\\ (col x = SUC M)}
-  SUC M
-  INFINITE(s:A->bool)
-  INFINITE { x:A | x IN s /\\ (col x = SUC M) } \\/\n      INFINITE { x:A | x IN s /\\ col x <= M}
-  s:A->bool
+  \226\136\128 m : Num, SUC(m) - 1 == m
+  \226\136\128 m : Num, \226\136\128 n : Num, m < m + SUC(n)
+  \226\136\128 n : Num, \226\136\128 m : Num, !(SUC(n) <= m) == (m <= n)
+  \226\136\128 m : Num, \226\136\128 n : Num, m == n || m < n || n < m
+  \226\136\128 b : Num, \226\136\128 c : Num, c <= b \226\134\146 (\226\136\128 a : Num, a - (b - c) == a + c - b)
+  \226\136\128 m : Num, \226\136\128 n : Num, !(m < n) && !(m == n) \226\134\146 n < m
+  \226\136\128 n : Num, \226\136\128 m : Num, n - m <= n
+  \226\136\128 m : Num, \226\136\128 n : Num, (m - n == m) == (m == 0 || n == 0)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m <= n - p) == (m + p <= n || m <= 0)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m >= n - p) == (m + p >= n)
+  \226\136\128 m : Num, 0 == m || 0 < m
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 SUC(m) <= n
+  (\226\136\128 m : Num, 0 - m == 0) && (\226\136\128 m : Num, \226\136\128 n : Num, SUC(m) - n == (if m < n { 0 } else { SUC(m - n) }))
+  \226\136\128 m : Num, \226\136\128 i : Num, \226\136\128 n : Num, (SUC(n) * m < SUC(n) * i) == (m < i)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n \226\134\146 m * p <= n * p
+  \226\136\128 m : Num, \226\136\128 n : Num, 0 < m && 0 < n \226\134\146 0 < m * n
+  \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 (\226\136\128 t : (_) -> Bool, SUBSET(t, s) \226\134\146 FINITE(t))
+  \226\136\128 n : Num, ((m : Num) <= SUC(n)) == (m == SUC(n) || m <= n)
+  INFINITE((s : (A) -> Bool))
+  !((s : (A) -> Bool) == {})
+  \226\136\128 s : (A) -> Bool, INFINITE(s) \226\134\146 (\226\136\131 x : A, IN(x, s))
+  \226\136\128 s : (A) -> Bool, INFINITE(s) \226\134\146 IN(select(s), s)
+  \226\136\128 t : (A) -> Bool, \226\136\128 x : A, INFINITE(DELETE(t, x)) == INFINITE(t)
+  \226\136\128 x : A, \226\136\128 t : (A) -> Bool, INFINITE(INSERT(x, t)) == INFINITE(t)
+  \226\136\128 x : A, \226\136\128 t : (A) -> Bool, !IN(x, t) && HAS_SIZE(t, (n : Num)) \226\134\146 HAS_SIZE(INSERT(x, t), SUC(n))
+  \226\136\128 x : A, \226\136\128 t : (A) -> Bool, IN(x, t) && HAS_SIZE(t, SUC((n : Num))) \226\134\146 HAS_SIZE(DELETE(t, x), n)
+  \226\136\128 s : (A) -> Bool, \226\136\128 N : Num, HAS_SIZE(s, SUC(N)) \226\134\146 (\226\136\131 x : A, IN(x, s))
+  (s : (A) -> Bool)
+  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 x : A, SUBSET(s, t) \226\134\146 SUBSET(DELETE(s, x), t)
+  SUBSET((t : (A) -> Bool), DELETE((s : (A) -> Bool), select(s)))
+  INSERT(select((s : (A) -> Bool)), (t : (A) -> Bool))
+  (t : (A) -> Bool)
+  DELETE((s : (A) -> Bool), select(s))
+  ({} : (A) -> Bool)
+  \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, INFINITE(s) \226\134\146 (\226\136\131 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, n))
+  !((z : A) == (x : A))
+  (z : A)
+  (k : Num)
+  (k : Num)
+  (z : A)
+  (z : A)
+  DELETE((u : (A) -> Bool), (x : A))
+  (m : Num)
+  (x : A)
+  (m : Num)
+  (y : A)
+  (n : Num)
+  (n : Num)
+  (y : A)
+  (y : A)
+  (n : Num) => \226\136\131 y : A, IN(y, (u : (A) -> Bool)) && y == (f : (Num) -> A)(n)
+  \226\136\128 N : Num, \226\136\128 t : (Num) -> Bool, \226\136\128 u : (A) -> Bool, SUBSET(u, IMAGE((f : (Num) -> A), t)) && HAS_SIZE(u, SUC(N)) \226\134\146 (\226\136\131 n : Num, \226\136\131 v : (A) -> Bool, u == INSERT(f(n), v) && (\226\136\128 y : A, IN(y, v) \226\134\146 (\226\136\131 m : Num, y == f(m) && n < m)))
+  {(x : A) | IN(x, (s : (A) -> Bool)) && (col : (A) -> Num)(x) <= (M : Num)}
+  (t : (A) -> Bool)
+  (c : Num)
+  (t : (A) -> Bool)
+  (c : Num)
+  ((c : Bool) \226\134\146 (d : Bool)) \226\134\146 ((b : Bool) \226\134\146 c) \226\134\146 b \226\134\146 d
+  {(x : A) | IN(x, (s : (A) -> Bool)) && (col : (A) -> Num)(x) <= (M : Num)}
+  (col : (A) -> Num)
+  \226\136\128 n : A, IN(n, {(x : A) | IN(x, (s : (A) -> Bool)) && (col : (A) -> Num)(x) <= (M : Num)}) \226\134\146 col(n) <= M
+  {(x : A) | IN(x, (s : (A) -> Bool)) && (col : (A) -> Num)(x) == SUC((M : Num))}
+  SUC((M : Num))
+  INFINITE((s : (A) -> Bool))
+  INFINITE({(x : A) | IN(x, (s : (A) -> Bool)) && (col : (A) -> Num)(x) == SUC((M : Num))}) || INFINITE({(x : A) | IN(x, s) && col(x) <= M})
+  (s : (A) -> Bool)
   0
-  forall M col s. (INFINITE(s) /\\ forall n:A. n IN s ==> col(n) <= M) ==>\n          ?c t. t SUBSET s /\\ INFINITE(t) /\\ forall n:A. n IN t ==> (col(n) = c)
-  t:num->bool
-  c:num
-  t:num->bool
-  c:num
-  UNIV:num->bool
-  col:num->num
-  M:num
-  forall M col. (forall n. col n <= M) ==>\n           ?c s. INFINITE(s) /\\ forall n:num. n IN s ==> (col(n) = c)
-  c:num
-  t:A->bool
-  c:num
-  t:A->bool
-  (@)s:A
-  t SUBSET (s DELETE ((@) s :A))
-  t SUBSET (s DELETE ((@) s :A))
-  s DELETE ((@)s:A)
-  \\u. C (((@) s :A) INSERT u):num
-  (forall C s. INFINITE(s:A->bool) /\\\n         (forall t. t SUBSET s /\\ t HAS_SIZE N ==> C(t) <= M)\n         ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                   (forall u. u SUBSET t /\\ u HAS_SIZE N ==> (C(u) = c)))\n  ==> forall C s. INFINITE(s:A->bool) /\\\n            (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\ ~(((@) s) IN t) /\\\n                      (forall u. u SUBSET t /\\ u HAS_SIZE N\n                           ==> (C(((@) s) INSERT u) = c))
-  SUC n
-  n:num
-  forall n:num. ~(((@)(f n):A) IN (f(SUC n)))
-  f(SUC n):A->bool
-  n:num
-  n:num
-  n:num
-  N:num
-  n:num
-  n:num
-  col:num->num
-  \\n:num. (@)(f n):A
-  \\n:num. f(SUC n):A->bool
-  col:num->num
-  SUC n
-  f(n:num):A->bool
+  \226\136\128 M : Num, \226\136\128 col : (A) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 n : A, IN(n, s) \226\134\146 col(n) <= M) \226\134\146 (\226\136\131 c : Num, \226\136\131 t : (A) -> Bool, SUBSET(t, s) && INFINITE(t) && (\226\136\128 n : A, IN(n, t) \226\134\146 col(n) == c))
+  (t : (Num) -> Bool)
+  (c : Num)
+  (t : (Num) -> Bool)
+  (c : Num)
+  (UNIV : (Num) -> Bool)
+  (col : (Num) -> Num)
+  (M : Num)
+  \226\136\128 M : Num, \226\136\128 col : (Num) -> Num, (\226\136\128 n : Num, col(n) <= M) \226\134\146 (\226\136\131 c : Num, \226\136\131 s : (Num) -> Bool, INFINITE(s) && (\226\136\128 n : Num, IN(n, s) \226\134\146 col(n) == c))
+  (c : Num)
+  (t : (A) -> Bool)
+  (c : Num)
+  (t : (A) -> Bool)
+  select((s : (A) -> Bool))
+  SUBSET((t : (A) -> Bool), DELETE((s : (A) -> Bool), select(s)))
+  SUBSET((t : (A) -> Bool), DELETE((s : (A) -> Bool), select(s)))
+  DELETE((s : (A) -> Bool), select(s))
+  (u : (A) -> Bool) => (C : ((A) -> Bool) -> Num)(INSERT(select((s : (A) -> Bool)), u))
+  (\226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, (N : Num)) \226\134\146 C(t) <= (M : Num)) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 c : Num, INFINITE(t) && SUBSET(t, s) && (\226\136\128 u : (A) -> Bool, SUBSET(u, t) && HAS_SIZE(u, N) \226\134\146 C(u) == c))) \226\134\146 (\226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, SUC(N)) \226\134\146 C(t) <= M) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 c : Num, INFINITE(t) && SUBSET(t, s) && !IN(select(s), t) && (\226\136\128 u : (A) -> Bool, SUBSET(u, t) && HAS_SIZE(u, N) \226\134\146 C(INSERT(select(s), u)) == c)))
+  SUC((n : Num))
+  (n : Num)
+  \226\136\128 n : Num, !IN(select((f : (Num, A) -> Bool)(n)), f(SUC(n)))
+  (f : (Num, A) -> Bool)(SUC((n : Num)))
+  (n : Num)
+  (n : Num)
+  (n : Num)
+  (N : Num)
+  (n : Num)
+  (n : Num)
+  (col : (Num) -> Num)
+  (n : Num) => select((f : (Num, A) -> Bool)(n))
+  (n : Num) => (f : (Num, A) -> Bool)(SUC(n))
+  (col : (Num) -> Num)
+  SUC((n : Num))
+  (f : (Num, A) -> Bool)((n : Num))
   0
-  forall n:num. (f n) SUBSET (s:A->bool) /\\\n    ?c. INFINITE(f(SUC n)) /\\ f(SUC n) SUBSET (f n) /\\\n        ~(((@)(f n)) IN (f(SUC n))) /\\\n        forall u. u SUBSET (f(SUC n)) /\\ u HAS_SIZE N ==>\n          (C(((@)(f n)) INSERT u) = c:num)
-  f:num->(A->bool)
-  \\s (n:num). @t:A->bool. ?c:num.\n      INFINITE(t) /\\\n      t SUBSET s /\\\n      ~(((@) s) IN t) /\\\n      forall u. u SUBSET t /\\ u HAS_SIZE N ==> (C(((@) s) INSERT u) = c)
-  s:A->bool
-  (forall C s. INFINITE(s:A->bool) /\\\n         (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n        ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\ ~(((@) s) IN t) /\\\n                  (forall u. u SUBSET t /\\ u HAS_SIZE N\n                       ==> (C(((@) s) INSERT u) = c)))\n  ==> forall C s. INFINITE(s:A->bool) /\\\n            (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t x col. (forall n. col n <= M) /\\\n                          (forall n. (t n) SUBSET s) /\\\n                          (forall n. t(SUC n) SUBSET (t n)) /\\\n                          (forall n. ~((x n) IN (t n))) /\\\n                          (forall n. x(SUC n) IN (t n)) /\\\n                          (forall n. (x n) IN s) /\\\n                          (forall n u. u SUBSET (t n) /\\ u HAS_SIZE N\n                                 ==> (C((x n) INSERT u) = col n))
-  (a <=> a /\\ b) <=> a ==> b
-  v = u DELETE ((x:num->A) n)
-  m:num
-  (x:num->A) n
-  u SUBSET (IMAGE (x:num->A) t)
-  c = (col:num->num) n
-  v:A->bool
-  n:num
-  INFINITE(t:num->bool)
-  n:num
-  m:num
-  forall m n. ((x:num->A) m = x n) <=> (m = n)
-  m + d
-  m:num
-  d:num
-  forall m n. m < n ==> (x n:A) IN (t m)
-  t(m + d):A->bool
-  d:num
-  d:num
-  d:num
-  forall m n. m <= n ==> (t n:A->bool) SUBSET (t m)
-  c:num
-  IMAGE (x:num->A) t
-  t:num->bool
-  c:num
-  UNIV:num->bool
-  col:num->num
-  M:num
-  col:num->num
-  x:num->A
-  t:num->(A->bool)
-  s:A->bool
-  C:(A->bool)->num
-  (forall C s. INFINITE(s:A->bool) /\\\n             (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n             ==> ?t x col. (forall n. col n <= M) /\\\n                           (forall n. (t n) SUBSET s) /\\\n                           (forall n. t(SUC n) SUBSET (t n)) /\\\n                           (forall n. ~((x n) IN (t n))) /\\\n                           (forall n. x(SUC n) IN (t n)) /\\\n                           (forall n. (x n) IN s) /\\\n                           (forall n u. u SUBSET (t n) /\\ u HAS_SIZE N\n                                  ==> (C((x n) INSERT u) = col n)))\n  ==> forall C s. INFINITE(s:A->bool) /\\\n            (forall t. t SUBSET s /\\ t HAS_SIZE (SUC N) ==> C(t) <= M)\n            ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                      (forall u. u SUBSET t /\\ u HAS_SIZE (SUC N) ==> (C(u) = c))
-  (C:(A->bool)->num) {}
-  s:A->bool
-  forall M N C s.\n        INFINITE(s:A->bool) /\\\n        (forall t. t SUBSET s /\\ t HAS_SIZE N ==> C(t) <= M)\n        ==> ?t c. INFINITE(t) /\\ t SUBSET s /\\\n                  (forall u. u SUBSET t /\\ u HAS_SIZE N ==> (C(u) = c))
+  \226\136\128 n : Num, SUBSET((f : (Num, A) -> Bool)(n), (s : (A) -> Bool)) && (\226\136\131 c : Num, INFINITE(f(SUC(n))) && SUBSET(f(SUC(n)), f(n)) && !IN(select(f(n)), f(SUC(n))) && (\226\136\128 u : (A) -> Bool, SUBSET(u, f(SUC(n))) && HAS_SIZE(u, (N : Num)) \226\134\146 (C : ((A) -> Bool) -> Num)(INSERT(select(f(n)), u)) == c))
+  (f : (Num, A) -> Bool)
+  (s : (A) -> Bool) => (n : Num) => select((t : (A) -> Bool) => \226\136\131 c : Num, INFINITE(t) && SUBSET(t, s) && !IN(select(s), t) && (\226\136\128 u : (A) -> Bool, SUBSET(u, t) && HAS_SIZE(u, (N : Num)) \226\134\146 (C : ((A) -> Bool) -> Num)(INSERT(select(s), u)) == c))
+  (s : (A) -> Bool)
+  (\226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, SUC((N : Num))) \226\134\146 C(t) <= (M : Num)) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 c : Num, INFINITE(t) && SUBSET(t, s) && !IN(select(s), t) && (\226\136\128 u : (A) -> Bool, SUBSET(u, t) && HAS_SIZE(u, N) \226\134\146 C(INSERT(select(s), u)) == c))) \226\134\146 (\226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, SUC(N)) \226\134\146 C(t) <= M) \226\134\146 (\226\136\131 t : (Num, A) -> Bool, \226\136\131 x : (Num) -> A, \226\136\131 col : (Num) -> Num, (\226\136\128 n : Num, col(n) <= M) && (\226\136\128 n : Num, SUBSET(t(n), s)) && (\226\136\128 n : Num, SUBSET(t(SUC(n)), t(n))) && (\226\136\128 n : Num, !IN(x(n), t(n))) && (\226\136\128 n : Num, IN(x(SUC(n)), t(n))) && (\226\136\128 n : Num, IN(x(n), s)) && (\226\136\128 n : Num, \226\136\128 u : (A) -> Bool, SUBSET(u, t(n)) && HAS_SIZE(u, N) \226\134\146 C(INSERT(x(n), u)) == col(n))))
+  ((a : Bool) == (a && (b : Bool))) == (a \226\134\146 b)
+  (v : (A) -> Bool) == DELETE((u : (A) -> Bool), (x : (Num) -> A)((n : Num)))
+  (m : Num)
+  (x : (Num) -> A)((n : Num))
+  SUBSET((u : (A) -> Bool), IMAGE((x : (Num) -> A), (t : (Num) -> Bool)))
+  (c : Num) == (col : (Num) -> Num)((n : Num))
+  (v : (A) -> Bool)
+  (n : Num)
+  INFINITE((t : (Num) -> Bool))
+  (n : Num)
+  (m : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, ((x : (Num) -> A)(m) == x(n)) == (m == n)
+  (m : Num) + (d : Num)
+  (m : Num)
+  (d : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 IN((x : (Num) -> A)(n), (t : (Num, A) -> Bool)(m))
+  (t : (Num, A) -> Bool)((m : Num) + (d : Num))
+  (d : Num)
+  (d : Num)
+  (d : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET((t : (Num, A) -> Bool)(n), t(m))
+  (c : Num)
+  IMAGE((x : (Num) -> A), (t : (Num) -> Bool))
+  (t : (Num) -> Bool)
+  (c : Num)
+  (UNIV : (Num) -> Bool)
+  (col : (Num) -> Num)
+  (M : Num)
+  (col : (Num) -> Num)
+  (x : (Num) -> A)
+  (t : (Num, A) -> Bool)
+  (s : (A) -> Bool)
+  (C : ((A) -> Bool) -> Num)
+  (\226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, SUC((N : Num))) \226\134\146 C(t) <= (M : Num)) \226\134\146 (\226\136\131 t : (Num, A) -> Bool, \226\136\131 x : (Num) -> A, \226\136\131 col : (Num) -> Num, (\226\136\128 n : Num, col(n) <= M) && (\226\136\128 n : Num, SUBSET(t(n), s)) && (\226\136\128 n : Num, SUBSET(t(SUC(n)), t(n))) && (\226\136\128 n : Num, !IN(x(n), t(n))) && (\226\136\128 n : Num, IN(x(SUC(n)), t(n))) && (\226\136\128 n : Num, IN(x(n), s)) && (\226\136\128 n : Num, \226\136\128 u : (A) -> Bool, SUBSET(u, t(n)) && HAS_SIZE(u, N) \226\134\146 C(INSERT(x(n), u)) == col(n)))) \226\134\146 (\226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, SUC(N)) \226\134\146 C(t) <= M) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 c : Num, INFINITE(t) && SUBSET(t, s) && (\226\136\128 u : (A) -> Bool, SUBSET(u, t) && HAS_SIZE(u, SUC(N)) \226\134\146 C(u) == c)))
+  (C : ((A) -> Bool) -> Num)({})
+  (s : (A) -> Bool)
+  \226\136\128 M : Num, \226\136\128 N : Num, \226\136\128 C : ((A) -> Bool) -> Num, \226\136\128 s : (A) -> Bool, INFINITE(s) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && HAS_SIZE(t, N) \226\134\146 C(t) <= M) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 c : Num, INFINITE(t) && SUBSET(t, s) && (\226\136\128 u : (A) -> Bool, SUBSET(u, t) && HAS_SIZE(u, N) \226\134\146 C(u) == c))
 AND1_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t1:bool)))))
 AND2_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) t2:bool)))))
 AND_IMP_INTRO =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#==>:fun(bool,fun(bool,bool)) t1:bool) ((#==>:fun(bool,fun(bool,bool)) t2:bool) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) t3:bool) t1:bool)) t2:bool)) t3:bool)))))))))
