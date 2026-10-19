@@ -10,14 +10,14 @@ fn step_1() -> Unit raise {
 /// SUM_DIFFS
 fn step_2() -> Unit raise {
   let t5 = @tactics.match_mp_tac(@iterate.sum_triv_numseg())
-  let t4 = @simp.rewrite_tac(@list.List([@analysis.real_sub_refl(), @int.arith_rule(@parser.parse_term("~((n + 1) + 1 <= n + 1)"))]))
+  let t4 = @simp.rewrite_tac(@list.List([@analysis.real_sub_refl(), @int.arith_rule(@term_syntax.parse_term("!((n : Num) + 1 + 1 <= n + 1)"))]))
   let t3 = @simp.asm_simp_tac(@list.List([@arith.add1()]))
-  let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@int.arith_rule(@parser.parse_term("m <= SUC n + 1 <=> m <= n + 1 \\/ m = SUC n + 1"))])), @tactics.strip_tac), t3), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t4), t5), @int.arith_tac)
+  let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((m : Num) <= SUC((n : Num)) + 1) == (m <= n + 1 || m == SUC(n) + 1)"))])), @tactics.strip_tac), t3), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t4), t5), @int.arith_tac)
   let t2 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith(), @arith.add_clauses(), @analysis.real_sub_refl()]))
-  let t7 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("m <= 0 + 1 <=> m = 0 \\/ m = 1"))])), @tactics.strip_tac), t2), t6])
+  let t7 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((m : Num) <= 0 + 1) == (m == 0 || m == 1)"))])), @tactics.strip_tac), t2), t6])
   let t1 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg()]))
   let t8 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t1), t7)
-  sum_diffs_c.set(@tactics.prove(@parser.parse_term("forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i + 1) - a(i)) = a(n + 1) - a(m)"), t8))
+  sum_diffs_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : (Num) -> Real, ∀ m : Num, ∀ n : Num, m <= n + 1 → sum(op_dot_dot(m, n), (i : Num) => a(i + 1) - a(i)) == a(n + 1) - a(m)"), t8))
 }
 
 ///|
@@ -32,12 +32,12 @@ pub fn sum_diffs() -> @kernel.Thm {
 ///|
 /// DIFF_SUM
 fn step_3() -> Unit raise {
-  let t12 = @simp.asm_simp_tac(@list.List([@arith.le_refl(), @int.arith_rule(@parser.parse_term("k <= b ==> k <= SUC b"))]))
+  let t12 = @simp.asm_simp_tac(@list.List([@arith.le_refl(), @int.arith_rule(@term_syntax.parse_term("(k : Num) <= (b : Num) → k <= SUC(b)"))]))
   let t11 = @tactics.match_mp_tac(@analysis.diff_add())
-  let t10 = @simp.asm_simp_tac(@list.List([@calc_num.arith(), @analysis.diff_const(), @iterate.sum_triv_numseg(), @int.arith_rule(@parser.parse_term("~(a <= SUC b) ==> b < a"))]))
+  let t10 = @simp.asm_simp_tac(@list.List([@calc_num.arith(), @analysis.diff_const(), @iterate.sum_triv_numseg(), @int.arith_rule(@term_syntax.parse_term("!((a : Num) <= SUC((b : Num))) → b < a"))]))
   let t9 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), @nums.induct_tac), t9), @class.cond_cases_tac), t10), @tactics.disch_tac), t11), t12)
-  diff_sum_c.set(@tactics.prove(@parser.parse_term("forall f f' a b.\n        (forall k. a <= k /\\ k <= b ==> ((\\x. f x k) diffl f'(k)) x)\n        ==> ((\\x. sum(a..b) (f x)) diffl (sum(a..b) f')) x"), t13))
+  diff_sum_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real, Num) -> Real, ∀ f' : (Num) -> Real, ∀ a : Num, ∀ b : Num, (∀ k : Num, a <= k && k <= b → diffl((x : Real) => f(x, k), f'(k), (x : Real))) → diffl((x : Real) => sum(op_dot_dot(a, b), f(x)), sum(op_dot_dot(a, b), f'), x)"), t13))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn diff_sum() -> @kernel.Thm {
 ///|
 /// bernoulli
 fn step_4() -> Unit raise {
-  bernoulli_c.set(@define.define_(@parser.parse_term("(bernoulli 0 = &1) /\\\n  (forall n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))")))
+  bernoulli_c.set(@define.define_(@term_syntax.parse_term("(bernoulli : (Num) -> Real)(0) == real_of_num(1) && (∀ n : Num, bernoulli(SUC(n)) == -sum(op_dot_dot(0, n), (j : Num) => real_of_num(binom((n + 2, j))) * bernoulli(j)) / (real_of_num(n) + real_of_num(2)))")))
 }
 
 ///|
@@ -68,14 +68,14 @@ pub fn bernoulli() -> @kernel.Thm {
 /// BERNOULLI
 fn step_5() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@binomial.binom_refl()]))
-  let t19 = @simp.rewrite_tac(@list.List([@arith.add1(), @binomial.binom_top_step_real(), @int.arith_rule(@parser.parse_term("~(n = n + 1)"))]))
-  let t18 = @tactics.match_mp_tac(@calc_rat.real_field(@parser.parse_term("x = &n + &2 ==> s + x * --s / (&n + &2) = &0")))
-  let t17 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC(SUC n) = n + 2"))]))
+  let t19 = @simp.rewrite_tac(@list.List([@arith.add1(), @binomial.binom_top_step_real(), @int.arith_rule(@term_syntax.parse_term("!((n : Num) == n + 1)"))]))
+  let t18 = @tactics.match_mp_tac(@calc_rat.real_field(@term_syntax.parse_term("(x : Real) == real_of_num((n : Num)) + real_of_num(2) → (s : Real) + x * (-s / (real_of_num(n) + real_of_num(2))) == real_of_num(0)")))
+  let t17 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("SUC(SUC((n : Num))) == n + 2"))]))
   let t16 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_add())]))
   let t15 = @simp.rewrite_tac(@list.List([@arith.add_clauses()]))
-  let t14 = @simp.simp_tac(@list.List([@binomial.binom_lt(), @int.arith_rule(@parser.parse_term("n < SUC n")), @binomial.binom_refl(), @realax.real_add_lid()]))
+  let t14 = @simp.simp_tac(@list.List([@binomial.binom_lt(), @int.arith_rule(@term_syntax.parse_term("(n : Num) < SUC(n)")), @binomial.binom_refl(), @realax.real_add_lid()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([bernoulli(), @iterate.sum_clauses_numseg(), @equal.gsym(@arith.add1()), @arith.add_clauses(), @binomial.binom(), @realax.real_mul_lid(), @arith.le_0(), @nums.not_suc()]))), t14), t15), t16), t17), t18), t19), t20), @calc_rat.real_arith_tac)
-  bernoulli_v1_c.set(@tactics.prove(@parser.parse_term("forall n. sum(0..n) (\\j. &(binom(n + 1,j)) * bernoulli j) =\n       if n = 0 then &1 else &0"), t21))
+  bernoulli_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, sum(op_dot_dot(0, n), (j : Num) => real_of_num(binom((n + 1, j))) * bernoulli(j)) == (if n == 0 { real_of_num(1) } else { real_of_num(0) })"), t21))
 }
 
 ///|
@@ -90,7 +90,7 @@ pub fn bernoulli_v1() -> @kernel.Thm {
 ///|
 /// bernpoly
 fn step_6() -> Unit raise {
-  bernpoly_c.set(@pair.new_definition(@parser.parse_term("bernpoly n x = sum(0..n) (\\k. &(binom(n,k)) * bernoulli k * x pow (n - k))")))
+  bernpoly_c.set(@pair.new_definition(@term_syntax.parse_term("(bernpoly : (Num, Real) -> Real)((n : Num), (x : Real)) == sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * (bernoulli(k) * pow(x, n - k)))")))
 }
 
 ///|
@@ -106,15 +106,15 @@ pub fn bernpoly() -> @kernel.Thm {
 /// DIFF_BERNPOLY
 fn step_7() -> Unit raise {
   let t50 = @tactics.conv_tac(@calc_rat.real_field)
-  let t49 = @simp.abbrev_tac(@parser.parse_term("z = x pow (n - k)"))
+  let t49 = @simp.abbrev_tac(@term_syntax.parse_term("(z : Real) == pow((x : Real), (n : Num) - (k : Num))"))
   let t47 = @equal.gsym(@realax.real_of_num_le())
   let t48 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_add()), t47]))
-  let t46 = @tactics.undisch_tac(@parser.parse_term("k <= n:num"))
-  let t44 = @int.arith_rule(@parser.parse_term("k <= n ==> k <= n + 1"))
+  let t46 = @tactics.undisch_tac(@term_syntax.parse_term("(k : Num) <= (n : Num)"))
+  let t44 = @int.arith_rule(@term_syntax.parse_term("(k : Num) <= (n : Num) → k <= n + 1"))
   let t45 = @simp.asm_simp_tac(@list.List([@equal.gsym(@real.real_of_num_sub()), t44]))
-  let t43 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("k <= n ==> (n + 1) - k - 1 = n - k"))]))
+  let t43 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(k : Num) <= (n : Num) → n + 1 - k - 1 == n - k"))]))
   let t42 = @simp.rewrite_tac(@list.List([@analysis.real_mul_lzero(), @realax.real_add_lid()]))
-  let t41 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@parser.parse_term("k <= n ==> ~(k = n + 1)"))]))
+  let t41 = @simp.asm_simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(k : Num) <= (n : Num) → !(k == n + 1)"))]))
   let t40 = @simp.rewrite_tac(@list.List([@arith.add1(), @binomial.binom_top_step_real()]))
   let t39 = @tactics.repeat_tac(@tactics.strip_tac)
   let t38 = @tactics.match_mp_tac(diff_sum())
@@ -142,7 +142,7 @@ fn step_7() -> Unit raise {
     })(x28))
   }, @list.List([@equal.gsym(@class.eta_ax())]))
   let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t29), t30), t34), t35), t36), t37), t38), t39), t40), @transc.diff_tac), t41), t42), t43), t45), t46), t48), t49), t50)
-  diff_bernpoly_c.set(@tactics.prove(@parser.parse_term("forall n x. ((bernpoly (SUC n)) diffl (&(SUC n) * bernpoly n x)) x"), t51))
+  diff_bernpoly_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ x : Real, diffl(bernpoly(SUC(n)), real_of_num(SUC(n)) * bernpoly(n, x), x)"), t51))
 }
 
 ///|
@@ -158,11 +158,11 @@ pub fn diff_bernpoly() -> @kernel.Thm {
 /// INTEGRALS_EQ
 fn step_8() -> Unit raise {
   let t55 = @simp.asm_rewrite_tac(@list.List([]))
-  let t52 = @parser.parse_term("&0")
-  let t53 = @parser.parse_term("x:real")
-  let t54 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("\\x:real. f(x) - g(x)"), t53, t52]), @analysis.diff_isconst_all()))
+  let t52 = @term_syntax.parse_term("real_of_num(0)")
+  let t53 = @term_syntax.parse_term("(x : Real)")
+  let t54 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x)"), t53, t52]), @analysis.diff_isconst_all()))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t54), t55), @calc_rat.real_arith_tac)
-  integrals_eq_c.set(@tactics.prove(@parser.parse_term("forall f g. (forall x. ((\\x. f(x) - g(x)) diffl &0) x) /\\ f(&0) = g(&0)\n         ==> forall x. f(x) = g(x)"), t56))
+  integrals_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, ∀ g : (Real) -> Real, (∀ x : Real, diffl((x : Real) => f(x) - g(x), real_of_num(0), x)) && f(real_of_num(0)) == g(real_of_num(0)) → (∀ x : Real, f(x) == g(x))"), t56))
 }
 
 ///|
@@ -183,7 +183,7 @@ fn step_9() -> Unit raise {
   let t96 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith(), @realax.real_pow(), @realax.real_mul_lid()]))
   let t95 = @simp.rewrite_tac(@list.List([bernoulli_v1(), @arith.add1()]))
   let t94 = @simp.rewrite_tac(@list.List([@realax.real_pow(), @analysis.real_mul_lzero(), @analysis.real_sub_rzero(), @analysis.real_mul_rid()]))
-  let t93 = @simp.simp_tac(@list.List([@int.arith_rule(@parser.parse_term("i <= n ==> SUC n - i = SUC(n - i)"))]))
+  let t93 = @simp.simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(i : Num) <= (n : Num) → SUC(n) - i == SUC(n - i)"))]))
   let t92 = @simp.rewrite_tac(@list.List([@analysis.real_sub_refl(), @analysis.real_mul_rzero(), @calc_int.real_add_rid()]))
   let t91 = @simp.rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @arith.le_0(), @arith.sub_refl(), @realax.real_pow()]))
   let t90 = @simp.rewrite_tac(@list.List([@realax.real_add_lid(), @real.real_pow_one(), @equal.gsym(@analysis.real_sub_ldistrib())]))
@@ -208,7 +208,7 @@ fn step_9() -> Unit raise {
     })(@equal.sym(x77))
   })
   let t73 = @simp.rewrite_tac(@list.List([@analysis.real_mul_rzero()]))
-  let t69 = @parser.parse_term("(*) (&(SUC n))")
+  let t69 = @term_syntax.parse_term("op_star(real_of_num(SUC((n : Num))))")
   let t72 = @tactics.disch_then(fn(x71 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x66 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s67 = @tactics.mp_tac(x66)
@@ -218,7 +218,7 @@ fn step_9() -> Unit raise {
     })(((x70 : @kernel.Thm) => @equal.ap_term(t69, x70))(x71))
   })
   let t65 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@analysis.real_sub_0())]))
-  let t61 = @parser.parse_term("x:real")
+  let t61 = @term_syntax.parse_term("(x : Real)")
   let t64 = @tactics.first_x_assum(fn(x63 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x58 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s59 = @tactics.mp_tac(x58)
@@ -227,10 +227,10 @@ fn step_9() -> Unit raise {
       }
     })(((x62 : @kernel.Thm) => @bool.spec(t61, x62))(x63))
   })
-  let t88 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:real")), t64), t65), t72), t73), t78), t79), t80), t81), t85), t86), t87), @transc.diff_tac), @calc_rat.real_arith_tac), @tactics.all_tac])
+  let t88 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(x : Real)")), t64), t65), t72), t73), t78), t79), t80), t81), t85), t86), t87), @transc.diff_tac), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t57 = @tactics.match_mp_tac(integrals_eq())
   let t100 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@nums.induct_tac, @list.List([@simp.rewrite_tac(@list.List([bernpoly(), @iterate.sum_sing_numseg(), @analysis.real_sub_refl(), @arith.sub_refl(), @realax.real_pow(), @analysis.real_mul_lzero()])), @tactics.all_tac])), t57), @tactics.conj_tac), t88), t89), t90), t91), t92), t93), t94), t95), @class.cond_cases_tac), t96), t97), t98), t99)
-  recurrence_bernpoly_c.set(@tactics.prove(@parser.parse_term("forall n x. bernpoly n (x + &1) - bernpoly n x = &n * x pow (n - 1)"), t100))
+  recurrence_bernpoly_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ x : Real, bernpoly(n, x + real_of_num(1)) - bernpoly(n, x) == real_of_num(n) * pow(x, n - 1)"), t100))
 }
 
 ///|
@@ -249,12 +249,12 @@ fn step_10() -> Unit raise {
   let t107 = @tactics.then_tac(@simp.simp_tac(@list.List([sum_diffs(), @arith.le_0()])), t106)
   let t105 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_of_num_suc()), @analysis.suc_sub1()]))
   let t108 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([recurrence_bernpoly(), @equal.gsym(@realax.real_of_num_add())])), t105), t107])
-  let t104 = @tactics.exists_tac(@parser.parse_term("sum(0..n) (\\i. bernpoly (SUC m) (&(i + 1)) - bernpoly (SUC m) (&i))"))
+  let t104 = @tactics.exists_tac(@term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (i : Num) => bernpoly(SUC((m : Num)), real_of_num(i + 1)) - bernpoly(SUC(m), real_of_num(i)))"))
   let t103 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t102 = @simp.rewrite_tac(@list.List([@equal.gsym(@iterate.sum_lmul())]))
   let t101 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@realax.real_mul_sym())]))
-  let t109 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.asm_simp_tac(@list.List([@real.real_eq_rdiv_eq(), @calc_rat.real_arith(@parser.parse_term("&0 < &n + &1"))]))), t101), t102), t103), t104), @tactics.conj_tac), t108)
-  sum_of_powers_c.set(@tactics.prove(@parser.parse_term("forall n. sum(0..n) (\\k. &k pow m) =\n        (bernpoly(SUC m) (&n + &1) - bernpoly(SUC m) (&0)) / (&m + &1)"), t109))
+  let t109 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.asm_simp_tac(@list.List([@real.real_eq_rdiv_eq(), @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)"))]))), t101), t102), t103), t104), @tactics.conj_tac), t108)
+  sum_of_powers_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, sum(op_dot_dot(0, n), (k : Num) => pow(real_of_num(k), (m : Num))) == (bernpoly(SUC(m), real_of_num(n) + real_of_num(1)) - bernpoly(SUC(m), real_of_num(0))) / (real_of_num(m) + real_of_num(1))"), t109))
 }
 
 ///|
@@ -270,7 +270,7 @@ pub fn sum_of_powers() -> @kernel.Thm {
 /// SUM_CONV
 fn step_11() -> Unit raise {
   let t110 = @simp.simp_tac(@list.List([@iterate.sum_clauses_numseg(), @arith.le_0()]))
-  let pth = @tactics.prove(@parser.parse_term("sum(0..0) f = f 0 /\\ sum(0..SUC n) f = sum(0..n) f + f(SUC n)"), t110)
+  let pth = @tactics.prove(@term_syntax.parse_term("sum(op_dot_dot(0, 0), (f : (Num) -> Real)) == f(0) && sum(op_dot_dot(0, SUC((n : Num))), f) == sum(op_dot_dot(0, n), f) + f(SUC(n))"), t110)
   let econv_0 : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x111 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x111
   }, @list.List([@bool.conjunct1(pth)]))
@@ -313,13 +313,13 @@ fn step_12() -> Unit raise {
       s120(x121)
     }
   }), @int.arith_tac), t128])
-  let t118 = @tactics.exists_tac(@parser.parse_term("0"))
+  let t118 = @tactics.exists_tac(@term_syntax.parse_term("0"))
   let t117 = @tactics.match_mp_tac(@arith.div_uniq())
   let t116 = @tactics.conv_tac(@equal.sym_conv)
   let t130 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t116), t117), t118), @tactics.conj_tac), t129)
-  let pth = @tactics.prove(@parser.parse_term("a * b * x = FACT c ==> x = (FACT c) DIV (a * b)"), t130)
+  let pth = @tactics.prove(@term_syntax.parse_term("(a : Num) * ((b : Num) * (x : Num)) == FACT((c : Num)) → x == DIV(FACT(c), a * b)"), t130)
   let match_pth : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth)
-  let binom_tm = @parser.parse_term("binom")
+  let binom_tm = @term_syntax.parse_term("binom")
   binom_conv_c.set(fn(x131 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x131
     let (bop, lr) = @kernel.dest_comb(tm)
@@ -354,7 +354,7 @@ pub fn binom_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// BERNOULLIS
 fn step_13() -> Unit raise {
   let (th_0, th_1) = @bool.conj_pair(bernoulli())
-  let b_tm = @parser.parse_term("bernoulli")
+  let b_tm = @term_syntax.parse_term("bernoulli")
   let conv_1 : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x132 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x132
   }, @list.List([th_1]))
@@ -392,7 +392,7 @@ pub fn bernoullis(x : Int64) -> @list.List[@kernel.Thm] raise {
 ///|
 /// BERNOULLI_CONV
 fn step_14() -> Unit raise {
-  let b_tm = @parser.parse_term("bernoulli")
+  let b_tm = @term_syntax.parse_term("bernoulli")
   bernoulli_conv_c.set(fn(x141 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x141
     let (op, n) = @kernel.dest_comb(tm)
@@ -445,7 +445,7 @@ pub fn bernpoly_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// SOP_CONV
 fn step_16() -> Unit raise {
   let t147 = @simp.rewrite_tac(@list.List([sum_of_powers()]))
-  let pth = @tactics.prove(@parser.parse_term("sum(0..n) (\\k. &k pow m) =\n        (\\p. (p(&n + &1) - p(&0)) / (&m + &1))\n        (\\x. bernpoly (SUC m) x)"), t147)
+  let pth = @tactics.prove(@term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), (m : Num))) == ((p : (Real) -> Real) => (p(real_of_num(n) + real_of_num(1)) - p(real_of_num(0))) / (real_of_num(m) + real_of_num(1)))((x : Real) => bernpoly(SUC(m), x))"), t147)
   let conv_0 : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(pth)
   let t149 = @equal.top_depth_conv(@equal.beta_conv)
   let t148 = @equal.rand_conv(@equal.abs_conv(@equal.thenc(@equal.land_conv(@calc_num.num_suc_conv), bernpoly_conv)))
@@ -465,7 +465,7 @@ pub fn sop_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// SOP_NUM_CONV
 fn step_17() -> Unit raise {
   let t150 = @simp.rewrite_tac(@list.List([@calc_int.real_of_num_pow(), @equal.gsym(@iterate.real_of_num_sum_numseg()), @realax.real_of_num_eq()]))
-  let pth = @tactics.prove(@parser.parse_term("sum(0..n) (\\k. &k pow p) = &m ==> nsum(0..n) (\\k. k EXP p) = m"), t150)
+  let pth = @tactics.prove(@term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), (p : Num))) == real_of_num((m : Num)) → nsum(op_dot_dot(0, n), (k : Num) => EXP(k, p)) == m"), t150)
   let rule_1 : (@kernel.Term) -> @kernel.Thm raise = @drule.part_match(fn(x151 : @kernel.Term) -> @kernel.Term raise {
     @equal.lhs(@kernel.rand(x151))
   }, pth)
@@ -489,139 +489,139 @@ pub fn sop_num_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// 100/bernoulli.ml:247
 fn step_18() -> Unit raise {
-  ignore(@lib.time(sop_num_conv, @parser.parse_term("nsum(0..1000) (\\k. k EXP 10)")))
+  ignore(@lib.time(sop_num_conv, @term_syntax.parse_term("nsum(op_dot_dot(0, 1000), (k : Num) => EXP(k, 10))")))
 }
 
 ///|
 /// 100/bernoulli.ml:253
 fn step_19() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 0)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 0))")))
 }
 
 ///|
 /// 100/bernoulli.ml:254
 fn step_20() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 1)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 1))")))
 }
 
 ///|
 /// 100/bernoulli.ml:255
 fn step_21() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 2)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 2))")))
 }
 
 ///|
 /// 100/bernoulli.ml:256
 fn step_22() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 3)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 3))")))
 }
 
 ///|
 /// 100/bernoulli.ml:257
 fn step_23() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 4)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 4))")))
 }
 
 ///|
 /// 100/bernoulli.ml:258
 fn step_24() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 5)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 5))")))
 }
 
 ///|
 /// 100/bernoulli.ml:259
 fn step_25() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 6)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 6))")))
 }
 
 ///|
 /// 100/bernoulli.ml:260
 fn step_26() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 7)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 7))")))
 }
 
 ///|
 /// 100/bernoulli.ml:261
 fn step_27() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 8)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 8))")))
 }
 
 ///|
 /// 100/bernoulli.ml:262
 fn step_28() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 9)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 9))")))
 }
 
 ///|
 /// 100/bernoulli.ml:263
 fn step_29() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 10)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 10))")))
 }
 
 ///|
 /// 100/bernoulli.ml:264
 fn step_30() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 11)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 11))")))
 }
 
 ///|
 /// 100/bernoulli.ml:265
 fn step_31() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 12)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 12))")))
 }
 
 ///|
 /// 100/bernoulli.ml:266
 fn step_32() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 13)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 13))")))
 }
 
 ///|
 /// 100/bernoulli.ml:267
 fn step_33() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 14)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 14))")))
 }
 
 ///|
 /// 100/bernoulli.ml:268
 fn step_34() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 15)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 15))")))
 }
 
 ///|
 /// 100/bernoulli.ml:269
 fn step_35() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 16)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 16))")))
 }
 
 ///|
 /// 100/bernoulli.ml:270
 fn step_36() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 17)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 17))")))
 }
 
 ///|
 /// 100/bernoulli.ml:271
 fn step_37() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 18)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 18))")))
 }
 
 ///|
 /// 100/bernoulli.ml:272
 fn step_38() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 19)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 19))")))
 }
 
 ///|
 /// 100/bernoulli.ml:273
 fn step_39() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 20)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 20))")))
 }
 
 ///|
 /// 100/bernoulli.ml:274
 fn step_40() -> Unit raise {
-  ignore(@lib.time(sop_conv, @parser.parse_term("sum(0..n) (\\k. &k pow 21)")))
+  ignore(@lib.time(sop_conv, @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 21))")))
 }
 
 ///|

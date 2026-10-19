@@ -6018,72 +6018,72 @@ CPU time (user): <t>
 CPU time (user): <t>
 CPU time (user): <t>
 100/bernoulli quotations (66):
-  ~((n + 1) + 1 <= n + 1)
-  m <= SUC n + 1 <=> m <= n + 1 \\/ m = SUC n + 1
-  m <= 0 + 1 <=> m = 0 \\/ m = 1
-  forall a m n. m <= n + 1 ==> sum(m..n) (\\i. a(i + 1) - a(i)) = a(n + 1) - a(m)
-  k <= b ==> k <= SUC b
-  ~(a <= SUC b) ==> b < a
-  forall f f' a b.\n        (forall k. a <= k /\\ k <= b ==> ((\\x. f x k) diffl f'(k)) x)\n        ==> ((\\x. sum(a..b) (f x)) diffl (sum(a..b) f')) x
-  (bernoulli 0 = &1) /\\\n  (forall n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))
+  !((n : Num) + 1 + 1 <= n + 1)
+  ((m : Num) <= SUC((n : Num)) + 1) == (m <= n + 1 || m == SUC(n) + 1)
+  ((m : Num) <= 0 + 1) == (m == 0 || m == 1)
+  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n + 1 \226\134\146 sum(op_dot_dot(m, n), (i : Num) => a(i + 1) - a(i)) == a(n + 1) - a(m)
+  (k : Num) <= (b : Num) \226\134\146 k <= SUC(b)
+  !((a : Num) <= SUC((b : Num))) \226\134\146 b < a
+  \226\136\128 f : (Real, Num) -> Real, \226\136\128 f' : (Num) -> Real, \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 k : Num, a <= k && k <= b \226\134\146 diffl((x : Real) => f(x, k), f'(k), (x : Real))) \226\134\146 diffl((x : Real) => sum(op_dot_dot(a, b), f(x)), sum(op_dot_dot(a, b), f'), x)
+  (bernoulli : (Num) -> Real)(0) == real_of_num(1) && (\226\136\128 n : Num, bernoulli(SUC(n)) == -sum(op_dot_dot(0, n), (j : Num) => real_of_num(binom((n + 2, j))) * bernoulli(j)) / (real_of_num(n) + real_of_num(2)))
   :P
   :P
   \\n. n + 1
-  ~(n = n + 1)
-  x = &n + &2 ==> s + x * --s / (&n + &2) = &0
-  SUC(SUC n) = n + 2
-  n < SUC n
-  forall n. sum(0..n) (\\j. &(binom(n + 1,j)) * bernoulli j) =\n       if n = 0 then &1 else &0
-  bernpoly n x = sum(0..n) (\\k. &(binom(n,k)) * bernoulli k * x pow (n - k))
-  z = x pow (n - k)
-  k <= n:num
-  k <= n ==> k <= n + 1
-  k <= n ==> (n + 1) - k - 1 = n - k
-  k <= n ==> ~(k = n + 1)
-  forall n x. ((bernpoly (SUC n)) diffl (&(SUC n) * bernpoly n x)) x
-  &0
-  x:real
-  \\x:real. f(x) - g(x)
-  forall f g. (forall x. ((\\x. f(x) - g(x)) diffl &0) x) /\\ f(&0) = g(&0)\n         ==> forall x. f(x) = g(x)
-  i <= n ==> SUC n - i = SUC(n - i)
-  (*) (&(SUC n))
-  x:real
-  x:real
-  forall n x. bernpoly n (x + &1) - bernpoly n x = &n * x pow (n - 1)
-  sum(0..n) (\\i. bernpoly (SUC m) (&(i + 1)) - bernpoly (SUC m) (&i))
-  &0 < &n + &1
-  forall n. sum(0..n) (\\k. &k pow m) =\n        (bernpoly(SUC m) (&n + &1) - bernpoly(SUC m) (&0)) / (&m + &1)
-  sum(0..0) f = f 0 /\\ sum(0..SUC n) f = sum(0..n) f + f(SUC n)
+  !((n : Num) == n + 1)
+  (x : Real) == real_of_num((n : Num)) + real_of_num(2) \226\134\146 (s : Real) + x * (-s / (real_of_num(n) + real_of_num(2))) == real_of_num(0)
+  SUC(SUC((n : Num))) == n + 2
+  (n : Num) < SUC(n)
+  \226\136\128 n : Num, sum(op_dot_dot(0, n), (j : Num) => real_of_num(binom((n + 1, j))) * bernoulli(j)) == (if n == 0 { real_of_num(1) } else { real_of_num(0) })
+  (bernpoly : (Num, Real) -> Real)((n : Num), (x : Real)) == sum(op_dot_dot(0, n), (k : Num) => real_of_num(binom((n, k))) * (bernoulli(k) * pow(x, n - k)))
+  (z : Real) == pow((x : Real), (n : Num) - (k : Num))
+  (k : Num) <= (n : Num)
+  (k : Num) <= (n : Num) \226\134\146 k <= n + 1
+  (k : Num) <= (n : Num) \226\134\146 n + 1 - k - 1 == n - k
+  (k : Num) <= (n : Num) \226\134\146 !(k == n + 1)
+  \226\136\128 n : Num, \226\136\128 x : Real, diffl(bernpoly(SUC(n)), real_of_num(SUC(n)) * bernpoly(n, x), x)
+  real_of_num(0)
+  (x : Real)
+  (x : Real) => (f : (Real) -> Real)(x) - (g : (Real) -> Real)(x)
+  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, (\226\136\128 x : Real, diffl((x : Real) => f(x) - g(x), real_of_num(0), x)) && f(real_of_num(0)) == g(real_of_num(0)) \226\134\146 (\226\136\128 x : Real, f(x) == g(x))
+  (i : Num) <= (n : Num) \226\134\146 SUC(n) - i == SUC(n - i)
+  op_star(real_of_num(SUC((n : Num))))
+  (x : Real)
+  (x : Real)
+  \226\136\128 n : Num, \226\136\128 x : Real, bernpoly(n, x + real_of_num(1)) - bernpoly(n, x) == real_of_num(n) * pow(x, n - 1)
+  sum(op_dot_dot(0, (n : Num)), (i : Num) => bernpoly(SUC((m : Num)), real_of_num(i + 1)) - bernpoly(SUC(m), real_of_num(i)))
+  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
+  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => pow(real_of_num(k), (m : Num))) == (bernpoly(SUC(m), real_of_num(n) + real_of_num(1)) - bernpoly(SUC(m), real_of_num(0))) / (real_of_num(m) + real_of_num(1))
+  sum(op_dot_dot(0, 0), (f : (Num) -> Real)) == f(0) && sum(op_dot_dot(0, SUC((n : Num))), f) == sum(op_dot_dot(0, n), f) + f(SUC(n))
   0
-  a * b * x = FACT c ==> x = (FACT c) DIV (a * b)
+  (a : Num) * ((b : Num) * (x : Num)) == FACT((c : Num)) \226\134\146 x == DIV(FACT(c), a * b)
   binom
   bernoulli
   bernoulli
-  sum(0..n) (\\k. &k pow m) =\n        (\\p. (p(&n + &1) - p(&0)) / (&m + &1))\n        (\\x. bernpoly (SUC m) x)
-  sum(0..n) (\\k. &k pow p) = &m ==> nsum(0..n) (\\k. k EXP p) = m
-  nsum(0..1000) (\\k. k EXP 10)
-  sum(0..n) (\\k. &k pow 0)
-  sum(0..n) (\\k. &k pow 1)
-  sum(0..n) (\\k. &k pow 2)
-  sum(0..n) (\\k. &k pow 3)
-  sum(0..n) (\\k. &k pow 4)
-  sum(0..n) (\\k. &k pow 5)
-  sum(0..n) (\\k. &k pow 6)
-  sum(0..n) (\\k. &k pow 7)
-  sum(0..n) (\\k. &k pow 8)
-  sum(0..n) (\\k. &k pow 9)
-  sum(0..n) (\\k. &k pow 10)
-  sum(0..n) (\\k. &k pow 11)
-  sum(0..n) (\\k. &k pow 12)
-  sum(0..n) (\\k. &k pow 13)
-  sum(0..n) (\\k. &k pow 14)
-  sum(0..n) (\\k. &k pow 15)
-  sum(0..n) (\\k. &k pow 16)
-  sum(0..n) (\\k. &k pow 17)
-  sum(0..n) (\\k. &k pow 18)
-  sum(0..n) (\\k. &k pow 19)
-  sum(0..n) (\\k. &k pow 20)
-  sum(0..n) (\\k. &k pow 21)
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), (m : Num))) == ((p : (Real) -> Real) => (p(real_of_num(n) + real_of_num(1)) - p(real_of_num(0))) / (real_of_num(m) + real_of_num(1)))((x : Real) => bernpoly(SUC(m), x))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), (p : Num))) == real_of_num((m : Num)) \226\134\146 nsum(op_dot_dot(0, n), (k : Num) => EXP(k, p)) == m
+  nsum(op_dot_dot(0, 1000), (k : Num) => EXP(k, 10))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 0))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 1))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 2))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 3))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 4))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 5))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 6))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 7))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 8))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 9))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 10))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 11))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 12))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 13))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 14))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 15))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 16))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 17))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 18))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 19))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 20))
+  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(k), 21))
 SUM_DIFFS =  |- (#forall:fun(fun(fun(num,real),bool),bool) (\a:fun(num,real). (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num)) (\i:num. ((#real_sub:fun(real,fun(real,real)) (a:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (a:fun(num,real) i:num))))) ((#real_sub:fun(real,fun(real,real)) (a:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (a:fun(num,real) m:num))))))))))
 DIFF_SUM =  |- (#forall:fun(fun(fun(real,fun(num,real)),bool),bool) (\f:fun(real,fun(num,real)). (#forall:fun(fun(fun(num,real),bool),bool) (\f':fun(num,real). (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\k:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) a:num) k:num)) ((#<=:fun(num,fun(num,bool)) k:num) b:num))) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((f:fun(real,fun(num,real)) x:real) k:num))) (f':fun(num,real) k:num)) x:real))))) (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) a:num) b:num)) (f:fun(real,fun(num,real)) x:real)))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) a:num) b:num)) f':fun(num,real))) x:real))))))))))
 bernoulli =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#bernoulli:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) (#bernoulli:fun(num,real) (#SUC:fun(num,num) n:num))) ((#real_div:fun(real,fun(real,real)) (#real_neg:fun(real,real) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\j:num. ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) j:num)))) (#bernoulli:fun(num,real) j:num)))))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))
