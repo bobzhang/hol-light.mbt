@@ -5591,46 +5591,46 @@ test "100/subsequence matches 100/subsequence.ml" {
       #|0..0..2..9..22..solved at 31
       #|100/subsequence quotations (41):
       #|  forall f s. s = UNIONS (IMAGE (\\a. {x | x IN s /\\ f(x) = a}) (IMAGE f s))
-      #|  n:num
+      #|  (n : Num)
       #|  {y | y IN s /\\ (f:A->B) y = f x}
-      #|  ~(n <= x) ==> x <= n - 1
-      #|  s:A->bool
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  x:A
+      #|  !((n : Num) <= (x : Num)) \226\134\146 x <= n - 1
+      #|  (s : (A) -> Bool)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (x : A)
       #|  {t x | x IN s} = IMAGE t s
-      #|  s:A->bool
-      #|  f:A->B
-      #|  forall f:A->B s n.\n        FINITE s /\\ (n - 1) * CARD(IMAGE f s) < CARD s\n        ==> ?t a. t SUBSET s /\\ t HAS_SIZE n /\\ (forall x. x IN t ==> f(x) = a)
-      #|  mono_on (f:num->real) r s <=>\n    forall i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)
-      #|  forall s t. t SUBSET s /\\ mono_on f r s ==> mono_on f r t
-      #|  (i:num) INSERT s
-      #|  ~(k + 1 <= k)
-      #|  k + 1
-      #|  s:num->bool
-      #|  j:num
-      #|  i:num
-      #|  k:num
-      #|  u:num->bool
-      #|  n * CARD(1..m)
-      #|  ?s k:num. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\\n              forall i. i IN s ==> t(i) = k
-      #|  {i:num}
-      #|  ~(m + 1 <= n) ==> n <= m
+      #|  (s : (A) -> Bool)
+      #|  (f : (A) -> B)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, FINITE(s) && (n - 1) * CARD(IMAGE(f, s)) < CARD(s) \226\134\146 (\226\136\131 t : (A) -> Bool, \226\136\131 a : B, SUBSET(t, s) && HAS_SIZE(t, n) && (\226\136\128 x : A, IN(x, t) \226\134\146 f(x) == a))
+      #|  (mono_on : ((Num) -> Real, (Real, Real) -> Bool, (Num) -> Bool) -> Bool)((f : (Num) -> Real), (r : (Real, Real) -> Bool), (s : (Num) -> Bool)) == (\226\136\128 i : Num, \226\136\128 j : Num, IN(i, s) && IN(j, s) && i <= j \226\134\146 r(f(i), f(j)))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, SUBSET(t, s) && mono_on((f : (Num) -> Real), (r : (Real, Real) -> Bool), s) \226\134\146 mono_on(f, r, t)
+      #|  INSERT((i : Num), (s : (Num) -> Bool))
+      #|  !((k : Num) + 1 <= k)
+      #|  (k : Num) + 1
+      #|  (s : (Num) -> Bool)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (k : Num)
+      #|  (u : (Num) -> Bool)
+      #|  (n : Num) * CARD(op_dot_dot(1, (m : Num)))
+      #|  \226\136\131 s : (Num) -> Bool, \226\136\131 k : Num, SUBSET(s, op_dot_dot(1, (m : Num) * (n : Num) + 1)) && HAS_SIZE(s, n + 1) && (\226\136\128 i : Num, IN(i, s) \226\134\146 (t : (Num) -> Num)(i) == k)
+      #|  INSERT((i : Num), EMPTY)
+      #|  !((m : Num) + 1 <= (n : Num)) \226\134\146 n <= m
       #|  1
-      #|  i:num
-      #|  forall i. i IN (1..m*n+1) ==> 1 <= t i /\\ t i <= m
-      #|  s:num->bool
-      #|  s:num->bool
-      #|  i:num
-      #|  i:num
-      #|  ?i. i IN (1..m*n+1) /\\ m + 1 <= t(i)
-      #|  t:num->num
-      #|  CARD(1..m*n+1)
-      #|  {i:num}
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, (m : Num) * (n : Num) + 1)) \226\134\146 1 <= (t : (Num) -> Num)(i) && t(i) <= m
+      #|  (s : (Num) -> Bool)
+      #|  (s : (Num) -> Bool)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\131 i : Num, IN(i, op_dot_dot(1, (m : Num) * (n : Num) + 1)) && m + 1 <= (t : (Num) -> Num)(i)
+      #|  (t : (Num) -> Num)
+      #|  CARD(op_dot_dot(1, (m : Num) * (n : Num) + 1))
+      #|  INSERT((i : Num), EMPTY)
       #|  1
-      #|  forall i. i IN (1..m*n+1)\n        ==> ?k. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE k /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (forall j. j IN s ==> i <= j)) /\\\n                (forall l. (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE l /\\\n                     mono_on f (<=) s /\\ i IN s /\\ (forall j. j IN s ==> i <= j))\n                     ==> l <= k)
-      #|  forall f:num->real m n.\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (m + 1) /\\ mono_on f (<=) s) \\/\n        (?s. s SUBSET (1..m*n+1) /\\ s HAS_SIZE (n + 1) /\\ mono_on f (>=) s)
-      #|  j:num
-      #|  i:num
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, (m : Num) * (n : Num) + 1)) \226\134\146 (\226\136\131 k : Num, (\226\136\131 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, m * n + 1)) && HAS_SIZE(s, k) && mono_on((f : (Num) -> Real), op_lt_eq, s) && IN(i, s) && (\226\136\128 j : Num, IN(j, s) \226\134\146 i <= j)) && (\226\136\128 l : Num, (\226\136\131 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, m * n + 1)) && HAS_SIZE(s, l) && mono_on(f, op_lt_eq, s) && IN(i, s) && (\226\136\128 j : Num, IN(j, s) \226\134\146 i <= j)) \226\134\146 l <= k))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\131 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, m * n + 1)) && HAS_SIZE(s, m + 1) && mono_on(f, op_lt_eq, s)) || (\226\136\131 s : (Num) -> Bool, SUBSET(s, op_dot_dot(1, m * n + 1)) && HAS_SIZE(s, n + 1) && mono_on(f, op_gt_eq, s))
+      #|  (j : Num)
+      #|  (i : Num)
       #|lemma =  |- (#forall:fun(fun(fun('?1,'?2),bool),bool) (\f:fun('?1,'?2). (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) s:fun('?1,bool)) (#UNIONS:fun(fun(fun('?1,bool),bool),fun('?1,bool)) ((#IMAGE:fun(fun('?2,fun('?1,bool)),fun(fun('?2,bool),fun(fun('?1,bool),bool))) (\a:'?2. (#GSPEC:fun(fun('?1,bool),fun('?1,bool)) (\GEN%PVAR%1:'?1. (#?:fun(fun('?1,bool),bool) (\x:'?1. (((#SETSPEC:fun('?1,fun(bool,fun('?1,bool))) GEN%PVAR%1:'?1) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) x:'?1) s:fun('?1,bool))) ((#=:fun('?2,fun('?2,bool)) (f:fun('?1,'?2) x:'?1)) a:'?2))) x:'?1))))))) ((#IMAGE:fun(fun('?1,'?2),fun(fun('?1,bool),fun('?2,bool))) f:fun('?1,'?2)) s:fun('?1,bool)))))))))
       #|PIGEONHOLE_LEMMA =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) ((#<:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#CARD:fun(fun('B,bool),num) ((#IMAGE:fun(fun('A,'B),fun(fun('A,bool),fun('B,bool))) f:fun('A,'B)) s:fun('A,bool))))) (#CARD:fun(fun('A,bool),num) s:fun('A,bool))))) (#?:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). (#?:fun(fun('B,bool),bool) (\a:'B. ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) t:fun('A,bool)) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun('A,bool),fun(num,bool)) t:fun('A,bool)) n:num)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) t:fun('A,bool))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) a:'B)))))))))))))))))
       #|mono_on =  |- ((#=:fun(bool,fun(bool,bool)) (((#mono_on:fun(fun(num,real),fun(fun(real,fun(real,bool)),fun(fun(num,bool),bool))) f:fun(num,real)) r:fun(real,fun(real,bool))) s:fun(num,bool))) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(num,bool),bool) (\j:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) j:num) s:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) i:num) j:num)))) ((r:fun(real,fun(real,bool)) (f:fun(num,real) i:num)) (f:fun(num,real) j:num))))))))
