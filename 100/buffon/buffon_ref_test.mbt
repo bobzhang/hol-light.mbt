@@ -80721,499 +80721,499 @@ test "100/buffon matches 100/buffon.ml" {
       #|3 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|100/buffon quotations (689):
-      #|  uniform_rv (p:A prob_space) (X:A->real) (a:real) (b:real) <=>\n   random_variable p X /\\\n   a < b /\\\n   forall t. distribution_fn p X t =\n     if t < a then &0\n     else if b <= t then &1\n     else (t - a) / (b - a)
-      #|  forall p:A prob_space X a b. uniform_rv p X a b ==> random_variable p X
-      #|  forall p:A prob_space X a b. uniform_rv p X a b ==> a < b
-      #|  forall p:A prob_space X a b t.\n      uniform_rv p X a b /\\ a <= t /\\ t < b\n      ==> distribution_fn p X t = (t - a) / (b - a)
-      #|  forall p:A prob_space X a b t.\n      uniform_rv p X a b /\\ b <= t\n      ==> distribution_fn p X t = &1
-      #|  forall p:A prob_space X a b t.\n      uniform_rv p X a b /\\ t < a\n      ==> distribution_fn p X t = &0
-      #|  &0 < b
-      #|  t:real
-      #|  b:real
-      #|  &0
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space X b t.\n      uniform_rv p X (&0) b /\\ &0 <= t /\\ t < b\n      ==> distribution_fn p X t = t / b
-      #|  b:real
-      #|  &0:real
-      #|  &0 < b ==> ~(b = &0)
-      #|  b / b = &1
-      #|  &0 < b
-      #|  c = b:real
-      #|  c < b:real
-      #|  forall p:A prob_space X b c. uniform_rv p X (&0) b /\\ &0 <= c /\\ c <= b\n   ==> distribution_fn p X c = c / b
-      #|  x:real
-      #|  &2 = --(cos pi) - (--(cos(&0)))
-      #|  (sin has_real_integral (&2)) (real_interval [&0, pi])
-      #|  c:real
-      #|  forall c. ((\\t. c * sin t) has_real_integral (&2 * c))\n        (real_interval [&0, pi])
-      #|  x:real
-      #|  x:real
-      #|  a:real
-      #|  b:real
+      #|  (uniform_rv : (Prob_space[A], (A) -> Real, Real, Real) -> Bool)((p : Prob_space[A]), (X : (A) -> Real), (a : Real), (b : Real)) == (random_variable(p, X) && a < b && (\226\136\128 t : Real, distribution_fn(p, X, t) == (if t < a { real_of_num(0) } else { if b <= t { real_of_num(1) } else { (t - a) / (b - a) } })))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, uniform_rv(p, X, a, b) \226\134\146 random_variable(p, X)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, uniform_rv(p, X, a, b) \226\134\146 a < b
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, uniform_rv(p, X, a, b) && a <= t && t < b \226\134\146 distribution_fn(p, X, t) == (t - a) / (b - a)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, uniform_rv(p, X, a, b) && b <= t \226\134\146 distribution_fn(p, X, t) == real_of_num(1)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 t : Real, uniform_rv(p, X, a, b) && t < a \226\134\146 distribution_fn(p, X, t) == real_of_num(0)
+      #|  real_of_num(0) < (b : Real)
+      #|  (t : Real)
+      #|  (b : Real)
+      #|  real_of_num(0)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 b : Real, \226\136\128 t : Real, uniform_rv(p, X, real_of_num(0), b) && real_of_num(0) <= t && t < b \226\134\146 distribution_fn(p, X, t) == t / b
+      #|  (b : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(0) < (b : Real) \226\134\146 !(b == real_of_num(0))
+      #|  (b : Real) / b == real_of_num(1)
+      #|  real_of_num(0) < (b : Real)
+      #|  (c : Real) == (b : Real)
+      #|  (c : Real) < (b : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 b : Real, \226\136\128 c : Real, uniform_rv(p, X, real_of_num(0), b) && real_of_num(0) <= c && c <= b \226\134\146 distribution_fn(p, X, c) == c / b
+      #|  (x : Real)
+      #|  real_of_num(2) == -cos(pi) - -cos(real_of_num(0))
+      #|  has_real_integral(sin, real_of_num(2), real_interval([(real_of_num(0), pi)]))
+      #|  (c : Real)
+      #|  \226\136\128 c : Real, has_real_integral((t : Real) => c * sin(t), real_of_num(2) * c, real_interval([(real_of_num(0), pi)]))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  (b : Real)
       #|  cos
       #|  sin
-      #|  abs(x - y) = abs(y - x)
-      #|  x:real
-      #|  x:real
-      #|  b:real
-      #|  a:real
+      #|  abs((x : Real) - (y : Real)) == abs(y - x)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (a : Real)
       #|  cos
       #|  sin
-      #|  a:real < b
-      #|  a:real = b
-      #|  forall a b. abs(sin b - sin a) <= abs(b - a)
-      #|  abs(x - y:real)
-      #|  ~(&0 < abs(x - y)) ==> x = y
-      #|  forall x y:real. (forall e. &0 < e ==> abs(x - y) < e) ==> x = y
-      #|  forall a b l r. l <= a /\\ a <= r /\\ l <= b /\\ b <= r\n              ==> abs(a - b) <= r - l
-      #|  forall p:A prob_space X Y a b.\n      indep_rv p X Y\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= a /\\ Y x <= b} =\n          distribution_fn p X a * distribution_fn p Y b
-      #|  b:A->bool
-      #|  a:A->bool
-      #|  p:A prob_space
-      #|  forall p:A prob_space a b.\n      a IN prob_events p /\\ b IN prob_events p /\\ b SUBSET a\n      ==> prob p (a DIFF b) = prob p a - prob p b
-      #|  {x:A | x IN prob_carrier p /\\ X x <= c} INTER\n       {x | x IN prob_carrier p /\\ Theta x <= t} =\n       {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= t}
-      #|  forall t. prob p ({x:A | x IN prob_carrier p /\\ X x <= c} INTER\n                  {x | x IN prob_carrier p /\\ Theta x <= t}) =\n          distribution_fn p X c * distribution_fn p Theta t
-      #|  {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= a'} SUBSET\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= b'}
-      #|  {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= b'} IN prob_events p /\\\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= a'} IN prob_events p
-      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= t} =\n          {x | x IN prob_carrier p /\\ X x <= c} INTER\n          {x | x IN prob_carrier p /\\ Theta x <= t}
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\ X x <= c /\\ a' < Theta x /\\ Theta x <= b'} =\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= b'} DIFF\n      {x | x IN prob_carrier p /\\ X x <= c /\\ Theta x <= a'}
-      #|  random_variable p (X:A->real) /\\ random_variable p (Theta:A->real)
-      #|  forall p:A prob_space X Theta c a' b'.\n      indep_rv p X Theta /\\ a' <= b'\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= c /\\\n                      a' < Theta x /\\ Theta x <= b'} =\n          distribution_fn p X c *\n          (distribution_fn p Theta b' - distribution_fn p Theta a')
-      #|  ~(p = &0) ==> b / p - a / p = (b - a) / p
-      #|  ~(pi = &0)
-      #|  distribution_fn p (Theta:A->real) a' = a' / pi
-      #|  distribution_fn p (Theta:A->real) b' = b' / pi
-      #|  distribution_fn p (X:A->real) c = c / (d / &2)
-      #|  b':real
-      #|  a':real
-      #|  c:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space X Theta d c a' b'.\n       uniform_rv p X (&0) (d / &2) /\\\n       uniform_rv p Theta (&0) pi /\\\n       indep_rv p X Theta /\\\n       &0 <= c /\\ c <= d / &2 /\\\n       &0 <= a' /\\ a' <= b' /\\ b' <= pi\n       ==> prob p {x | x IN prob_carrier p /\\ X x <= c /\\\n                       a' < Theta x /\\ Theta x <= b'} =\n           c / (d / &2) * ((b' - a') / pi)
-      #|  (A:num->A->bool) (SUC n)
-      #|  UNIONS (IMAGE (A:num->A->bool) (0..n))
-      #|  p:A prob_space
-      #|  {SUC n}
-      #|  0..n
-      #|  \\k. prob p ((A:num->A->bool) k)
-      #|  (A:num->A->bool) (SUC n) IN prob_events p
-      #|  UNIONS (IMAGE (A:num->A->bool) (0..n)) IN prob_events p
-      #|  w:A
-      #|  SUC n
-      #|  j:num
-      #|  j:num
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  w:A
-      #|  DISJOINT (UNIONS (IMAGE (A:num->A->bool) (0..n))) (A (SUC n))
-      #|  0..SUC n = (0..n) UNION {SUC n}
-      #|  forall p:A prob_space A.\n      forall n. (forall k. k <= n ==> A k IN prob_events p) /\\\n          (forall i j. i <= n /\\ j <= n /\\ ~(i = j) ==> DISJOINT (A i) (A j))\n          ==> prob p (UNIONS (IMAGE A (0..n))) =\n              sum (0..n) (\\k. prob p (A k))
-      #|  (g:A->C) x
-      #|  (f:A->B) x
-      #|  x:A
-      #|  (\\x. SND((h:A->B#C) x))
-      #|  (\\x. FST((h:A->B#C) x))
-      #|  h:A->B#C
-      #|  (a:B),(b:C)
-      #|  x:A
-      #|  forall x:A. ?(p:B#C). P x (FST p) (SND p)
-      #|  (forall x:A. ?a:B b:C. P x a b) <=> (?f g. forall x. P x (f x) (g x))
-      #|  forall c x y. x <= y ==> min c y - min c x <= y - x
-      #|  y:real
-      #|  c:real
-      #|  x:real
-      #|  y:real
-      #|  c:real
-      #|  x:real
-      #|  c:real
-      #|  y:real
-      #|  x:real
-      #|  c:real
-      #|  x <= y \\/ y <= x
-      #|  forall c x y. abs(min c x - min c y) <= abs(x - y)
-      #|  t_min IN real_interval[a,b]
-      #|  t_max IN real_interval[a,b]
-      #|  t_min IN real_interval[a,b]
-      #|  &0 < x ==> abs x = x
-      #|  abs(l / &2) = l / &2
-      #|  abs(l / &2) * abs(t_max - t_min)
-      #|  abs(l / &2 * sin t_max - l / &2 * sin t_min)
-      #|  abs(min (d / &2) (l / &2 * sin t_max) -\n                    min (d / &2) (l / &2 * sin t_min))
-      #|  min (d / &2) (l / &2 * sin t_max)
-      #|  min (d / &2) (l / &2 * sin t_min)
-      #|  t_min:real
-      #|  real_interval[a:real,b]
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  t_max:real
-      #|  real_interval[a:real,b]
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  forall l d a b. &0 < l /\\ &0 < d /\\ a <= b /\\ &0 <= a /\\ b <= pi\n    ==> ?m M. (forall t. t IN real_interval[a,b]\n                 ==> m <= min (d / &2) (l / &2 * sin t) /\\\n                     min (d / &2) (l / &2 * sin t) <= M) /\\\n              M - m <= l / &2 * (b - a) /\\\n              &0 <= m /\\ m <= d / &2 /\\ M <= d / &2
-      #|  ~(d = &0)
-      #|  ~(&N = &0)
-      #|  a:real = b ==> a <= b
-      #|  1 <= N
-      #|  N - 1 + 1 = N
-      #|  1 <= N
-      #|  k <= N - 1
-      #|  k:num
-      #|  k:num
-      #|  &2 / (d * &N) * sum(0..N-1) (\\k. l / &2 * pi / &N)
-      #|  a * b - a * c = a * (b - c)
-      #|  1 <= N
-      #|  k <= N - 1
-      #|  k:num
-      #|  ~(&N = &0)
-      #|  ~(pi = &0)
-      #|  (M:num->real) k * inv(&N) =\n          (M k * pi * inv(&N)) * inv pi
-      #|  k:num
-      #|  ~(&N = &0) ==> &N * pi / &N = pi
-      #|  N - 1
-      #|  1 <= N
-      #|  SUC(N - 1) = N
-      #|  a = b ==> b <= a
-      #|  sum(0..N-1)\n         (\\k. real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n                (\\t. min (d * inv(&2)) ((l * inv(&2)) * sin t)) * inv pi)
-      #|  ~(d = &0) /\\ ~(pi = &0) ==>\n         &2 / (d * pi) * i = (&2 / d) * (i / pi)
-      #|  ~(d = &0) /\\ ~(&N = &0) ==>\n         &2 / (d * &N) * s = (&2 / d) * (s / &N)
-      #|  &0 < &2 / d
-      #|  ~(&N = &0) ==> &N * pi / &N = pi
-      #|  N - 1
-      #|  1 <= N
-      #|  SUC(N - 1) = N
-      #|  a:real = b ==> a <= b
-      #|  1 <= N
-      #|  k <= N - 1
-      #|  k:num
-      #|  ~(&N = &0)
-      #|  ~(pi = &0)
-      #|  (m:num->real) k * inv(&N) =\n          (m k * pi * inv(&N)) * inv pi
-      #|  k:num
-      #|  sum(0..N-1)\n         (\\k. real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n                (\\t. min (d * inv(&2)) ((l * inv(&2)) * sin t)) * inv pi)
-      #|  ~(d = &0) /\\ ~(pi = &0) ==>\n         &2 / (d * pi) * i = (&2 / d) * (i / pi)
-      #|  ~(d = &0) /\\ ~(&N = &0) ==>\n         &2 / (d * &N) * s = (&2 / d) * (s / &N)
-      #|  &0 < &2 / d
-      #|  prob p (UNIONS (IMAGE (\\k.\n           {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n                  &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n           (0..N-1))) +\n           prob p {x:A | x IN prob_carrier p /\\ Theta x <= &0}
-      #|  prob p (UNIONS (IMAGE (\\k.\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n                 &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n          (0..N-1)) UNION\n          {x:A | x IN prob_carrier p /\\ Theta x <= &0}) +\n          prob p (prob_carrier p DIFF\n            {x:A | x IN prob_carrier p /\\ Theta x <= pi})
-      #|  prob p (UNIONS (IMAGE (\\k.\n         {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n                &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n         (0..N-1)) UNION\n         {x:A | x IN prob_carrier p /\\ Theta x <= &0} UNION\n         (prob_carrier p DIFF\n           {x:A | x IN prob_carrier p /\\ Theta x <= pi})) +\n         prob p (prob_carrier p DIFF\n           {x:A | x IN prob_carrier p /\\ X x <= d / &2})
-      #|  Theta(w:A):real
-      #|  k:num
-      #|  min (d / &2) (l / &2 * sin(Theta(w:A)))
-      #|  1 <= N
-      #|  (k:num) < N
-      #|  k:num
-      #|  ~(j = 0)
-      #|  &(j - 1 + 1) = &j:real
-      #|  ~(j = 0)
-      #|  (j:num) < N
-      #|  j - 1 < N
-      #|  ~(j = 0)
-      #|  j - 1
-      #|  &0 < t ==> &0 / n < t
-      #|  j = 0
-      #|  j:num
-      #|  j:num
-      #|  k:num
-      #|  \\k. k < N /\\ Theta(w:A) <= &(k+1) * pi / &N
-      #|  ~(&N = &0) ==> &N * pi / &N = pi
-      #|  1 <= N
-      #|  &(N - 1 + 1) = &N
-      #|  1 <= N
-      #|  N - 1
-      #|  ?k. k < N /\\ Theta(w:A) <= &(k+1) * pi / &N
-      #|  ?k. k < N /\\ &k * pi / &N < Theta(w:A) /\\\n                          Theta w <= &(k+1) * pi / &N
-      #|  &0 < Theta(w:A)
-      #|  (X:A->real) w <= d / &2
-      #|  Theta(w:A) <= pi
-      #|  Theta(w:A) <= &0
-      #|  w:A
-      #|  prob p (UNIONS (IMAGE (\\k.\n        {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n               &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n        (0..N-1)) UNION\n        {x:A | x IN prob_carrier p /\\ Theta x <= &0} UNION\n        (prob_carrier p DIFF\n          {x:A | x IN prob_carrier p /\\ Theta x <= pi}) UNION\n        (prob_carrier p DIFF\n          {x:A | x IN prob_carrier p /\\ X x <= d / &2}))
-      #|  d / &2
-      #|  &0
-      #|  prob p {x:A | x IN prob_carrier p /\\ X x <= d / &2} =\n                      distribution_fn p (X:A->real) (d / &2)
-      #|  prob p {x:A | x IN prob_carrier p /\\ X x <= d / &2} = &1
-      #|  {x:A | x IN prob_carrier p /\\ X x <= d / &2}
-      #|  p:A prob_space
-      #|  prob p (prob_carrier p DIFF\n          {x:A | x IN prob_carrier p /\\ X x <= d / &2}) = &0
+      #|  (a : Real) < (b : Real)
+      #|  (a : Real) == (b : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, abs(sin(b) - sin(a)) <= abs(b - a)
+      #|  abs((x : Real) - (y : Real))
+      #|  !(real_of_num(0) < abs((x : Real) - (y : Real))) \226\134\146 x == y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 abs(x - y) < e) \226\134\146 x == y
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 l : Real, \226\136\128 r : Real, l <= a && a <= r && l <= b && b <= r \226\134\146 abs(a - b) <= r - l
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, indep_rv(p, X, Y) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a && Y(x) <= b}) == distribution_fn(p, X, a) * distribution_fn(p, Y, b)
+      #|  (b : (A) -> Bool)
+      #|  (a : (A) -> Bool)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && SUBSET(b, a) \226\134\146 prob(p, DIFF(a, b)) == prob(p, a) - prob(p, b)
+      #|  INTER({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (c : Real)}, {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= (t : Real)}) == {(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && Theta(x) <= t}
+      #|  \226\136\128 t : Real, prob((p : Prob_space[A]), INTER({(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (c : Real)}, {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= t})) == distribution_fn(p, X, c) * distribution_fn(p, Theta, t)
+      #|  SUBSET({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (c : Real) && (Theta : (A) -> Real)(x) <= (a' : Real)}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && Theta(x) <= (b' : Real)})
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (c : Real) && (Theta : (A) -> Real)(x) <= (b' : Real)}, prob_events(p)) && IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && Theta(x) <= (a' : Real)}, prob_events(p))
+      #|  \226\136\128 t : Real, {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (c : Real) && (Theta : (A) -> Real)(x) <= t} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) <= c}, {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= t})
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (c : Real) && (a' : Real) < (Theta : (A) -> Real)(x) && Theta(x) <= (b' : Real)} == DIFF({(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && Theta(x) <= b'}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && Theta(x) <= a'})
+      #|  random_variable((p : Prob_space[A]), (X : (A) -> Real)) && random_variable(p, (Theta : (A) -> Real))
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 c : Real, \226\136\128 a' : Real, \226\136\128 b' : Real, indep_rv(p, X, Theta) && a' <= b' \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && a' < Theta(x) && Theta(x) <= b'}) == distribution_fn(p, X, c) * (distribution_fn(p, Theta, b') - distribution_fn(p, Theta, a'))
+      #|  !((p : Real) == real_of_num(0)) \226\134\146 (b : Real) / p - (a : Real) / p == (b - a) / p
+      #|  !(pi == real_of_num(0))
+      #|  distribution_fn((p : Prob_space[A]), (Theta : (A) -> Real), (a' : Real)) == a' / pi
+      #|  distribution_fn((p : Prob_space[A]), (Theta : (A) -> Real), (b' : Real)) == b' / pi
+      #|  distribution_fn((p : Prob_space[A]), (X : (A) -> Real), (c : Real)) == c / ((d : Real) / real_of_num(2))
+      #|  (b' : Real)
+      #|  (a' : Real)
+      #|  (c : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 d : Real, \226\136\128 c : Real, \226\136\128 a' : Real, \226\136\128 b' : Real, uniform_rv(p, X, real_of_num(0), d / real_of_num(2)) && uniform_rv(p, Theta, real_of_num(0), pi) && indep_rv(p, X, Theta) && real_of_num(0) <= c && c <= d / real_of_num(2) && real_of_num(0) <= a' && a' <= b' && b' <= pi \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= c && a' < Theta(x) && Theta(x) <= b'}) == c / (d / real_of_num(2)) * ((b' - a') / pi)
+      #|  (A : (Num, A) -> Bool)(SUC((n : Num)))
+      #|  UNIONS(IMAGE((A : (Num, A) -> Bool), op_dot_dot(0, (n : Num))))
+      #|  (p : Prob_space[A])
+      #|  {SUC((n : Num))}
+      #|  op_dot_dot(0, (n : Num))
+      #|  (k : Num) => prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(k))
+      #|  IN((A : (Num, A) -> Bool)(SUC((n : Num))), prob_events((p : Prob_space[A])))
+      #|  IN(UNIONS(IMAGE((A : (Num, A) -> Bool), op_dot_dot(0, (n : Num)))), prob_events((p : Prob_space[A])))
+      #|  (w : A)
+      #|  SUC((n : Num))
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (w : A)
+      #|  DISJOINT(UNIONS(IMAGE((A : (Num, A) -> Bool), op_dot_dot(0, (n : Num)))), A(SUC(n)))
+      #|  op_dot_dot(0, SUC((n : Num))) == UNION(op_dot_dot(0, n), {SUC(n)})
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 n : Num, (\226\136\128 k : Num, k <= n \226\134\146 IN(A(k), prob_events(p))) && (\226\136\128 i : Num, \226\136\128 j : Num, i <= n && j <= n && !(i == j) \226\134\146 DISJOINT(A(i), A(j))) \226\134\146 prob(p, UNIONS(IMAGE(A, op_dot_dot(0, n)))) == sum(op_dot_dot(0, n), (k : Num) => prob(p, A(k)))
+      #|  (g : (A) -> C)((x : A))
+      #|  (f : (A) -> B)((x : A))
+      #|  (x : A)
+      #|  (x : A) => SND((h : (A) -> (B, C))(x))
+      #|  (x : A) => FST((h : (A) -> (B, C))(x))
+      #|  (h : (A) -> (B, C))
+      #|  ((a : B), (b : C))
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\131 p : (B, C), (P : (A, B, C) -> Bool)(x, FST(p), SND(p))
+      #|  (\226\136\128 x : A, \226\136\131 a : B, \226\136\131 b : C, (P : (A, B, C) -> Bool)(x, a, b)) == (\226\136\131 f : (A) -> B, \226\136\131 g : (A) -> C, \226\136\128 x : A, P(x, f(x), g(x)))
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 min(c, y) - min(c, x) <= y - x
+      #|  (y : Real)
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (c : Real)
+      #|  (x : Real)
+      #|  (c : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (c : Real)
+      #|  (x : Real) <= (y : Real) || y <= x
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 y : Real, abs(min(c, x) - min(c, y)) <= abs(x - y)
+      #|  IN((t_min : Real), real_interval([((a : Real), (b : Real))]))
+      #|  IN((t_max : Real), real_interval([((a : Real), (b : Real))]))
+      #|  IN((t_min : Real), real_interval([((a : Real), (b : Real))]))
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  abs((l : Real) / real_of_num(2)) == l / real_of_num(2)
+      #|  abs((l : Real) / real_of_num(2)) * abs((t_max : Real) - (t_min : Real))
+      #|  abs((l : Real) / real_of_num(2) * sin((t_max : Real)) - l / real_of_num(2) * sin((t_min : Real)))
+      #|  abs(min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin((t_max : Real))) - min(d / real_of_num(2), l / real_of_num(2) * sin((t_min : Real))))
+      #|  min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin((t_max : Real)))
+      #|  min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin((t_min : Real)))
+      #|  (t_min : Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  (t_max : Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  \226\136\128 l : Real, \226\136\128 d : Real, \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < l && real_of_num(0) < d && a <= b && real_of_num(0) <= a && b <= pi \226\134\146 (\226\136\131 m : Real, \226\136\131 M : Real, (\226\136\128 t : Real, IN(t, real_interval([(a, b)])) \226\134\146 m <= min(d / real_of_num(2), l / real_of_num(2) * sin(t)) && min(d / real_of_num(2), l / real_of_num(2) * sin(t)) <= M) && M - m <= l / real_of_num(2) * (b - a) && real_of_num(0) <= m && m <= d / real_of_num(2) && M <= d / real_of_num(2))
+      #|  !((d : Real) == real_of_num(0))
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  1 <= (N : Num)
+      #|  (N : Num) - 1 + 1 == N
+      #|  1 <= (N : Num)
+      #|  (k : Num) <= (N : Num) - 1
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  real_of_num(2) / ((d : Real) * real_of_num((N : Num))) * sum(op_dot_dot(0, N - 1), (k : Num) => (l : Real) / real_of_num(2) * (pi / real_of_num(N)))
+      #|  (a : Real) * (b : Real) - a * (c : Real) == a * (b - c)
+      #|  1 <= (N : Num)
+      #|  (k : Num) <= (N : Num) - 1
+      #|  (k : Num)
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  !(pi == real_of_num(0))
+      #|  (M : (Num) -> Real)((k : Num)) * inv(real_of_num((N : Num))) == M(k) * (pi * inv(real_of_num(N))) * inv(pi)
+      #|  (k : Num)
+      #|  !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 real_of_num(N) * (pi / real_of_num(N)) == pi
+      #|  (N : Num) - 1
+      #|  1 <= (N : Num)
+      #|  SUC((N : Num) - 1) == N
+      #|  (a : Real) == (b : Real) \226\134\146 b <= a
+      #|  sum(op_dot_dot(0, (N : Num) - 1), (k : Num) => real_integral(real_interval([(real_of_num(k) * (pi / real_of_num(N)), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) * inv(real_of_num(2)), (l : Real) * inv(real_of_num(2)) * sin(t))) * inv(pi))
+      #|  !((d : Real) == real_of_num(0)) && !(pi == real_of_num(0)) \226\134\146 real_of_num(2) / (d * pi) * (i : Real) == real_of_num(2) / d * (i / pi)
+      #|  !((d : Real) == real_of_num(0)) && !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 real_of_num(2) / (d * real_of_num(N)) * (s : Real) == real_of_num(2) / d * (s / real_of_num(N))
+      #|  real_of_num(0) < real_of_num(2) / (d : Real)
+      #|  !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 real_of_num(N) * (pi / real_of_num(N)) == pi
+      #|  (N : Num) - 1
+      #|  1 <= (N : Num)
+      #|  SUC((N : Num) - 1) == N
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  1 <= (N : Num)
+      #|  (k : Num) <= (N : Num) - 1
+      #|  (k : Num)
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  !(pi == real_of_num(0))
+      #|  (m : (Num) -> Real)((k : Num)) * inv(real_of_num((N : Num))) == m(k) * (pi * inv(real_of_num(N))) * inv(pi)
+      #|  (k : Num)
+      #|  sum(op_dot_dot(0, (N : Num) - 1), (k : Num) => real_integral(real_interval([(real_of_num(k) * (pi / real_of_num(N)), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) * inv(real_of_num(2)), (l : Real) * inv(real_of_num(2)) * sin(t))) * inv(pi))
+      #|  !((d : Real) == real_of_num(0)) && !(pi == real_of_num(0)) \226\134\146 real_of_num(2) / (d * pi) * (i : Real) == real_of_num(2) / d * (i / pi)
+      #|  !((d : Real) == real_of_num(0)) && !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 real_of_num(2) / (d * real_of_num(N)) * (s : Real) == real_of_num(2) / d * (s / real_of_num(N))
+      #|  real_of_num(0) < real_of_num(2) / (d : Real)
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1)))) + prob(p, {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= real_of_num(0)})
+      #|  prob((p : Prob_space[A]), UNION(UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1))), {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= real_of_num(0)})) + prob(p, DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= pi}))
+      #|  prob((p : Prob_space[A]), UNION(UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1))), UNION({(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= real_of_num(0)}, DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= pi})))) + prob(p, DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && X(x) <= (d : Real) / real_of_num(2)}))
+      #|  (Theta : (A) -> Real)((w : A))
+      #|  (k : Num)
+      #|  min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin((Theta : (A) -> Real)((w : A))))
+      #|  1 <= (N : Num)
+      #|  (k : Num) < (N : Num)
+      #|  (k : Num)
+      #|  !((j : Num) == 0)
+      #|  real_of_num((j : Num) - 1 + 1) == real_of_num(j)
+      #|  !((j : Num) == 0)
+      #|  (j : Num) < (N : Num)
+      #|  (j : Num) - 1 < (N : Num)
+      #|  !((j : Num) == 0)
+      #|  (j : Num) - 1
+      #|  real_of_num(0) < (t : Real) \226\134\146 real_of_num(0) / (n : Real) < t
+      #|  (j : Num) == 0
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (k : Num)
+      #|  (k : Num) => k < (N : Num) && (Theta : (A) -> Real)((w : A)) <= real_of_num(k + 1) * (pi / real_of_num(N))
+      #|  !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 real_of_num(N) * (pi / real_of_num(N)) == pi
+      #|  1 <= (N : Num)
+      #|  real_of_num((N : Num) - 1 + 1) == real_of_num(N)
+      #|  1 <= (N : Num)
+      #|  (N : Num) - 1
+      #|  \226\136\131 k : Num, k < (N : Num) && (Theta : (A) -> Real)((w : A)) <= real_of_num(k + 1) * (pi / real_of_num(N))
+      #|  \226\136\131 k : Num, k < (N : Num) && real_of_num(k) * (pi / real_of_num(N)) < (Theta : (A) -> Real)((w : A)) && Theta(w) <= real_of_num(k + 1) * (pi / real_of_num(N))
+      #|  real_of_num(0) < (Theta : (A) -> Real)((w : A))
+      #|  (X : (A) -> Real)((w : A)) <= (d : Real) / real_of_num(2)
+      #|  (Theta : (A) -> Real)((w : A)) <= pi
+      #|  (Theta : (A) -> Real)((w : A)) <= real_of_num(0)
+      #|  (w : A)
+      #|  prob((p : Prob_space[A]), UNION(UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1))), UNION({(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= real_of_num(0)}, UNION(DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= pi}), DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && X(x) <= (d : Real) / real_of_num(2)})))))
+      #|  (d : Real) / real_of_num(2)
+      #|  real_of_num(0)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (d : Real) / real_of_num(2)}) == distribution_fn(p, X, d / real_of_num(2))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (d : Real) / real_of_num(2)}) == real_of_num(1)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (d : Real) / real_of_num(2)}
+      #|  (p : Prob_space[A])
+      #|  prob((p : Prob_space[A]), DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (d : Real) / real_of_num(2)})) == real_of_num(0)
       #|  pi
-      #|  &0
-      #|  prob p {x:A | x IN prob_carrier p /\\ Theta x <= pi} =\n                      distribution_fn p (Theta:A->real) pi
-      #|  prob p {x:A | x IN prob_carrier p /\\ Theta x <= pi} = &1
-      #|  {x:A | x IN prob_carrier p /\\ Theta x <= pi}
-      #|  p:A prob_space
-      #|  prob p (prob_carrier p DIFF\n          {x:A | x IN prob_carrier p /\\ Theta x <= pi}) = &0
-      #|  &0
+      #|  real_of_num(0)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= pi}) == distribution_fn(p, Theta, pi)
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= pi}) == real_of_num(1)
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Theta : (A) -> Real)(x) <= pi}
+      #|  (p : Prob_space[A])
+      #|  prob((p : Prob_space[A]), DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= pi})) == real_of_num(0)
+      #|  real_of_num(0)
       #|  pi
-      #|  Theta:A->real
-      #|  p:A prob_space
-      #|  prob p {x:A | x IN prob_carrier p /\\ Theta x <= &0} =\n                      distribution_fn p (Theta:A->real) (&0)
-      #|  prob p {x:A | x IN prob_carrier p /\\ Theta x <= &0} = &0
-      #|  N - 1
-      #|  \\k. {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n          &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}
-      #|  p:A prob_space
-      #|  prob p (UNIONS (IMAGE (\\k.\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n          (0..N-1))) =\n         sum(0..N-1) (\\k. &2 / (d * &N) * (M:num->real) k)
-      #|  ~(d = &0) /\\ ~(pi = &0) /\\ ~(&N = &0) ==>\n           mk / (d / &2) * (pi / &N) / pi = &2 / (d * &N) * mk
-      #|  &(k+1) * pi / &N - &k * pi / &N = pi / &N
-      #|  &(k+1) * pi / &N
-      #|  &k * pi / &N
-      #|  (M:num->real) k
-      #|  d:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  &0 <= (m:num->real) k
-      #|  &k * pi / &N
-      #|  (k:num) < N
-      #|  k:num
-      #|  (m:num->real) k <= (M:num->real) k
-      #|  &0 <= (M:num->real) k
-      #|  (M:num->real) k <= d / &2
-      #|  1 <= N /\\ k <= N - 1 ==> k < N
-      #|  (k:num) < N
-      #|  k:num
-      #|  forall k. k <= N - 1 ==>\n          prob p {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          &2 / (d * &N) * M k
-      #|  ~(i:num = j)
-      #|  ~(i:num < j)
-      #|  &(j+1) <= &i
-      #|  i:num < j
-      #|  &(i+1) <= &j
-      #|  i:num < j
-      #|  c * x / y < d * x / y <=> (c - d) * x / y < &0
-      #|  a * x / y < b * x / y <=> (a - b) * x / y < &0
-      #|  ~(i:num = j)
-      #|  &i * pi / &N < &(j+1) * pi / &N /\\\n                      &j * pi / &N < &(i+1) * pi / &N
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  forall i j. i <= N - 1 /\\ j <= N - 1 /\\ ~(i = j) ==>\n          DISJOINT\n            ({x:A | x IN prob_carrier p /\\ X x <= (M:num->real) i /\\\n              &i * pi / &N < Theta x /\\ Theta x <= &(i+1) * pi / &N})\n            ({x | x IN prob_carrier p /\\ X x <= M j /\\\n              &j * pi / &N < Theta x /\\ Theta x <= &(j+1) * pi / &N})
-      #|  UNIONS (IMAGE (\\k.\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n          (0..N-1)) IN prob_events p
-      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= M k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          {x | x IN prob_carrier p /\\ X x <= M k /\\\n               Theta x <= &(k+1) * pi / &N} DIFF\n          {x | x IN prob_carrier p /\\ X x <= M k /\\\n               Theta x <= &k * pi / &N}
-      #|  k:num
-      #|  forall k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (M:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
-      #|  Theta(w:A):real
-      #|  1 <= N
-      #|  k <= N - 1
-      #|  k:num
-      #|  min (d / &2) (l / &2 * sin(Theta(w:A)))
-      #|  (m:num->real) k
-      #|  k:num
-      #|  w:A
-      #|  x:num
-      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= m k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &(k+1) * pi / &N} DIFF\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &k * pi / &N}
-      #|  k:num
-      #|  forall k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
-      #|  a:real = b ==> a <= b
-      #|  N - 1
-      #|  \\k. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n          &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}
-      #|  p:A prob_space
-      #|  ~(i:num = j)
-      #|  ~(i:num < j)
-      #|  &(j+1) <= &i
-      #|  i:num < j
-      #|  &(i+1) <= &j
-      #|  i:num < j
-      #|  c * x / y < d * x / y <=> (c - d) * x / y < &0
-      #|  a * x / y < b * x / y <=> (a - b) * x / y < &0
-      #|  ~(i:num = j)
-      #|  &i * pi / &N < &(j+1) * pi / &N /\\\n                      &j * pi / &N < &(i+1) * pi / &N
-      #|  (w:A) IN prob_carrier p
-      #|  w:A
-      #|  forall i j. i <= N - 1 /\\ j <= N - 1 /\\ ~(i = j) ==>\n          DISJOINT\n            ({x:A | x IN prob_carrier p /\\ X x <= (m:num->real) i /\\\n              &i * pi / &N < Theta x /\\ Theta x <= &(i+1) * pi / &N})\n            ({x | x IN prob_carrier p /\\ X x <= m j /\\\n              &j * pi / &N < Theta x /\\ Theta x <= &(j+1) * pi / &N})
-      #|  forall t. {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\ Theta x <= t} =\n           {x | x IN prob_carrier p /\\ X x <= m k} INTER\n           {x | x IN prob_carrier p /\\ Theta x <= t}
-      #|  (x:A) IN prob_carrier p
-      #|  {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n           &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &(k+1) * pi / &N} DIFF\n          {x | x IN prob_carrier p /\\ X x <= m k /\\\n               Theta x <= &k * pi / &N}
-      #|  k:num
-      #|  forall k. k <= N - 1 ==>\n          {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N}\n          IN prob_events p
-      #|  ~(d = &0) /\\ ~(pi = &0) /\\ ~(&N = &0) ==>\n           mk / (d / &2) * (pi / &N) / pi = &2 / (d * &N) * mk
-      #|  &(k+1) * pi / &N - &k * pi / &N = pi / &N
-      #|  &(k+1) * pi / &N
-      #|  &k * pi / &N
-      #|  (m:num->real) k
-      #|  d:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  1 <= N /\\ k <= N - 1 ==> k < N
-      #|  (k:num) < N
-      #|  k:num
-      #|  forall k. k <= N - 1 ==>\n          prob p {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n            &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N} =\n          &2 / (d * &N) * m k
-      #|  prob p (UNIONS (IMAGE (\\k.\n       {x:A | x IN prob_carrier p /\\ X x <= (m:num->real) k /\\\n              &k * pi / &N < Theta x /\\ Theta x <= &(k+1) * pi / &N})\n       (0..N-1)))
-      #|  sum(0..N-1) (\\k. &2 / (d * &N) * (M:num->real) k) -\n               sum(0..N-1) (\\k. &2 / (d * &N) * m k)
-      #|  &(SUC n) * pi / &N
-      #|  &(SUC(SUC n)) * pi / &N
-      #|  &0
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  SUC n + 1 = SUC(SUC n)
-      #|  SUC(SUC n) <= N
-      #|  SUC n <= N
-      #|  0 + 1 = 1
-      #|  forall n. SUC n <= N ==>\n       sum(0..n) (\\k. real_integral\n         (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n           (\\t. min (d / &2) (l / &2 * sin t))) =\n       real_integral (real_interval [&0, &(SUC n) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
-      #|  x:real
-      #|  k:num
-      #|  (M:num->real) k * (&(k+1) * pi / &N - &k * pi / &N)
-      #|  real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
-      #|  real_interval [&k * pi / &N, &(k+1) * pi / &N]
-      #|  \\t:real. (M:num->real) k
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  (M:num->real) k * pi / &N =\n       M k * (&(k+1) * pi / &N - &k * pi / &N)
-      #|  k:num
-      #|  forall k. k < N ==>\n       real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t)) <=\n       (M:num->real) k * pi / &N
-      #|  x:real
-      #|  k:num
-      #|  real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
-      #|  (m:num->real) k * (&(k+1) * pi / &N - &k * pi / &N)
-      #|  real_interval [&k * pi / &N, &(k+1) * pi / &N]
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  \\t:real. (m:num->real) k
-      #|  (m:num->real) k * pi / &N =\n       m k * (&(k+1) * pi / &N - &k * pi / &N)
-      #|  k:num
-      #|  forall k. k < N ==>\n       (m:num->real) k * pi / &N <=\n       real_integral (real_interval [&k * pi / &N, &(k+1) * pi / &N])\n         (\\t. min (d / &2) (l / &2 * sin t))
-      #|  (\\t. min (d / &2) (l / &2 * sin t))\n     real_integrable_on real_interval[&0, pi]
-      #|  (k:num) < N
-      #|  &(k+1) * pi / &N = &(k+1) / &N * pi
-      #|  forall k:num. k < N ==> &(k+1) * pi / &N <= pi
-      #|  forall k:num. k < N ==> &0 <= &k * pi / &N
-      #|  forall k:num. k < N ==> &(k+1) * pi / &N - &k * pi / &N = pi / &N
-      #|  forall k. k < N ==> &k * pi / &N <= &(k+1) * pi / &N
-      #|  &0
-      #|  &0
-      #|  a:real = b ==> a <= b
-      #|  l / &2 * (&(k + 1) * pi / &N - &k * pi / &N)
-      #|  t:real
-      #|  M0:real
-      #|  m0:real
-      #|  M0:real
-      #|  m0:real
-      #|  &(k+1) * pi / &N
-      #|  &k * pi / &N
-      #|  d:real
-      #|  l:real
-      #|  (k:num) < N
-      #|  &(k+1) * pi / &N = &(k+1) / &N * pi
-      #|  &(k+1) * pi / &N <= pi
-      #|  &0 <= &k * pi / &N
-      #|  &k * pi / &N <= &(k+1) * pi / &N
-      #|  (k:num) < N
-      #|  k:num
-      #|  forall k. ?a b. (k:num) < N ==>\n         (forall t. &k * pi / &N <= t /\\ t <= &(k+1) * pi / &N ==>\n              a <= min (d / &2) (l / &2 * sin t) /\\\n              min (d / &2) (l / &2 * sin t) <= b) /\\\n         b - a <= l / &2 * pi / &N /\\\n         &0 <= a /\\ a <= d / &2 /\\ b <= d / &2
-      #|  ?m M. forall k. (k:num) < N ==>\n        (forall t. &k * pi / &N <= t /\\ t <= &(k+1) * pi / &N ==>\n             (m:num->real) k <= min (d / &2) (l / &2 * sin t) /\\\n             min (d / &2) (l / &2 * sin t) <= M k) /\\\n        M k - m k <= l / &2 * pi / &N /\\\n        &0 <= m k /\\ m k <= d / &2 /\\ M k <= d / &2
-      #|  {x:A | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)}\n        IN prob_events p
-      #|  random_variable p (Theta:A->real)
-      #|  random_variable p (X:A->real)
-      #|  ~(pi = &0)
-      #|  ~(d = &0)
-      #|  ~(&N = &0)
-      #|  1 <= N
-      #|  &0 < &N
-      #|  &0 < pi
-      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> forall N. 1 <= N\n          ==> abs(prob p {x:A | x IN prob_carrier p /\\\n                     X x <= l / &2 * sin(Theta x)} -\n                  &2 / (d * pi) *\n                  real_integral (real_interval [&0,pi])\n                    (\\t. min (d / &2) (l / &2 * sin t)))\n              <= l * pi / (d * &N)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  ~(j - 1 < N)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
+      #|  (Theta : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= real_of_num(0)}) == distribution_fn(p, Theta, real_of_num(0))
+      #|  prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (Theta : (A) -> Real)(x) <= real_of_num(0)}) == real_of_num(0)
+      #|  (N : Num) - 1
+      #|  (k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}
+      #|  (p : Prob_space[A])
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1)))) == sum(op_dot_dot(0, N - 1), (k : Num) => real_of_num(2) / ((d : Real) * real_of_num(N)) * M(k))
+      #|  !((d : Real) == real_of_num(0)) && !(pi == real_of_num(0)) && !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 (mk : Real) / (d / real_of_num(2)) * (pi / real_of_num(N) / pi) == real_of_num(2) / (d * real_of_num(N)) * mk
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num))) - real_of_num(k) * (pi / real_of_num(N)) == pi / real_of_num(N)
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num)))
+      #|  real_of_num((k : Num)) * (pi / real_of_num((N : Num)))
+      #|  (M : (Num) -> Real)((k : Num))
+      #|  (d : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  real_of_num(0) <= (m : (Num) -> Real)((k : Num))
+      #|  real_of_num((k : Num)) * (pi / real_of_num((N : Num)))
+      #|  (k : Num) < (N : Num)
+      #|  (k : Num)
+      #|  (m : (Num) -> Real)((k : Num)) <= (M : (Num) -> Real)(k)
+      #|  real_of_num(0) <= (M : (Num) -> Real)((k : Num))
+      #|  (M : (Num) -> Real)((k : Num)) <= (d : Real) / real_of_num(2)
+      #|  1 <= (N : Num) && (k : Num) <= N - 1 \226\134\146 k < N
+      #|  (k : Num) < (N : Num)
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k <= (N : Num) - 1 \226\134\146 prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}) == real_of_num(2) / ((d : Real) * real_of_num(N)) * M(k)
+      #|  !((i : Num) == (j : Num))
+      #|  !((i : Num) < (j : Num))
+      #|  real_of_num((j : Num) + 1) <= real_of_num((i : Num))
+      #|  (i : Num) < (j : Num)
+      #|  real_of_num((i : Num) + 1) <= real_of_num((j : Num))
+      #|  (i : Num) < (j : Num)
+      #|  ((c : Real) * ((x : Real) / (y : Real)) < (d : Real) * (x / y)) == ((c - d) * (x / y) < real_of_num(0))
+      #|  ((a : Real) * ((x : Real) / (y : Real)) < (b : Real) * (x / y)) == ((a - b) * (x / y) < real_of_num(0))
+      #|  !((i : Num) == (j : Num))
+      #|  real_of_num((i : Num)) * (pi / real_of_num((N : Num))) < real_of_num((j : Num) + 1) * (pi / real_of_num(N)) && real_of_num(j) * (pi / real_of_num(N)) < real_of_num(i + 1) * (pi / real_of_num(N))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, i <= (N : Num) - 1 && j <= N - 1 && !(i == j) \226\134\146 DISJOINT({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(i) && real_of_num(i) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(i + 1) * (pi / real_of_num(N))}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= M(j) && real_of_num(j) * (pi / real_of_num(N)) < Theta(x) && Theta(x) <= real_of_num(j + 1) * (pi / real_of_num(N))})
+      #|  IN(UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1))), prob_events(p))
+      #|  \226\136\128 t : Real, {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)((k : Num)) && (Theta : (A) -> Real)(x) <= t} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) <= M(k)}, {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= t})
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)((k : Num)) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))} == DIFF({(x : A) | IN(x, prob_carrier(p)) && X(x) <= M(k) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= M(k) && Theta(x) <= real_of_num(k) * (pi / real_of_num(N))})
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k <= (N : Num) - 1 \226\134\146 IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (M : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, prob_events(p))
+      #|  (Theta : (A) -> Real)((w : A))
+      #|  1 <= (N : Num)
+      #|  (k : Num) <= (N : Num) - 1
+      #|  (k : Num)
+      #|  min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin((Theta : (A) -> Real)((w : A))))
+      #|  (m : (Num) -> Real)((k : Num))
+      #|  (k : Num)
+      #|  (w : A)
+      #|  (x : Num)
+      #|  \226\136\128 t : Real, {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)((k : Num)) && (Theta : (A) -> Real)(x) <= t} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(k)}, {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= t})
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)((k : Num)) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))} == DIFF({(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(k) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(k) && Theta(x) <= real_of_num(k) * (pi / real_of_num(N))})
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k <= (N : Num) - 1 \226\134\146 IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, prob_events(p))
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  (N : Num) - 1
+      #|  (k : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}
+      #|  (p : Prob_space[A])
+      #|  !((i : Num) == (j : Num))
+      #|  !((i : Num) < (j : Num))
+      #|  real_of_num((j : Num) + 1) <= real_of_num((i : Num))
+      #|  (i : Num) < (j : Num)
+      #|  real_of_num((i : Num) + 1) <= real_of_num((j : Num))
+      #|  (i : Num) < (j : Num)
+      #|  ((c : Real) * ((x : Real) / (y : Real)) < (d : Real) * (x / y)) == ((c - d) * (x / y) < real_of_num(0))
+      #|  ((a : Real) * ((x : Real) / (y : Real)) < (b : Real) * (x / y)) == ((a - b) * (x / y) < real_of_num(0))
+      #|  !((i : Num) == (j : Num))
+      #|  real_of_num((i : Num)) * (pi / real_of_num((N : Num))) < real_of_num((j : Num) + 1) * (pi / real_of_num(N)) && real_of_num(j) * (pi / real_of_num(N)) < real_of_num(i + 1) * (pi / real_of_num(N))
+      #|  IN((w : A), prob_carrier((p : Prob_space[A])))
+      #|  (w : A)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, i <= (N : Num) - 1 && j <= N - 1 && !(i == j) \226\134\146 DISJOINT({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)(i) && real_of_num(i) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(i + 1) * (pi / real_of_num(N))}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(j) && real_of_num(j) * (pi / real_of_num(N)) < Theta(x) && Theta(x) <= real_of_num(j + 1) * (pi / real_of_num(N))})
+      #|  \226\136\128 t : Real, {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)((k : Num)) && (Theta : (A) -> Real)(x) <= t} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(k)}, {(x : A) | IN(x, prob_carrier(p)) && Theta(x) <= t})
+      #|  IN((x : A), prob_carrier((p : Prob_space[A])))
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)((k : Num)) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))} == DIFF({(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(k) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= m(k) && Theta(x) <= real_of_num(k) * (pi / real_of_num(N))})
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k <= (N : Num) - 1 \226\134\146 IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, prob_events(p))
+      #|  !((d : Real) == real_of_num(0)) && !(pi == real_of_num(0)) && !(real_of_num((N : Num)) == real_of_num(0)) \226\134\146 (mk : Real) / (d / real_of_num(2)) * (pi / real_of_num(N) / pi) == real_of_num(2) / (d * real_of_num(N)) * mk
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num))) - real_of_num(k) * (pi / real_of_num(N)) == pi / real_of_num(N)
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num)))
+      #|  real_of_num((k : Num)) * (pi / real_of_num((N : Num)))
+      #|  (m : (Num) -> Real)((k : Num))
+      #|  (d : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  1 <= (N : Num) && (k : Num) <= N - 1 \226\134\146 k < N
+      #|  (k : Num) < (N : Num)
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k <= (N : Num) - 1 \226\134\146 prob((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num(N)) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}) == real_of_num(2) / ((d : Real) * real_of_num(N)) * m(k)
+      #|  prob((p : Prob_space[A]), UNIONS(IMAGE((k : Num) => {(x : A) | IN(x, prob_carrier(p)) && (X : (A) -> Real)(x) <= (m : (Num) -> Real)(k) && real_of_num(k) * (pi / real_of_num((N : Num))) < (Theta : (A) -> Real)(x) && Theta(x) <= real_of_num(k + 1) * (pi / real_of_num(N))}, op_dot_dot(0, N - 1))))
+      #|  sum(op_dot_dot(0, (N : Num) - 1), (k : Num) => real_of_num(2) / ((d : Real) * real_of_num(N)) * (M : (Num) -> Real)(k)) - sum(op_dot_dot(0, N - 1), (k : Num) => real_of_num(2) / (d * real_of_num(N)) * (m : (Num) -> Real)(k))
+      #|  real_of_num(SUC((n : Num))) * (pi / real_of_num((N : Num)))
+      #|  real_of_num(SUC(SUC((n : Num)))) * (pi / real_of_num((N : Num)))
+      #|  real_of_num(0)
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  SUC((n : Num)) + 1 == SUC(SUC(n))
+      #|  SUC(SUC((n : Num))) <= (N : Num)
+      #|  SUC((n : Num)) <= (N : Num)
+      #|  0 + 1 == 1
+      #|  \226\136\128 n : Num, SUC(n) <= (N : Num) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => real_integral(real_interval([(real_of_num(k) * (pi / real_of_num(N)), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)))) == real_integral(real_interval([(real_of_num(0), real_of_num(SUC(n)) * (pi / real_of_num(N)))]), (t : Real) => min(d / real_of_num(2), l / real_of_num(2) * sin(t)))
+      #|  (x : Real)
+      #|  (k : Num)
+      #|  (M : (Num) -> Real)((k : Num)) * (real_of_num(k + 1) * (pi / real_of_num((N : Num))) - real_of_num(k) * (pi / real_of_num(N)))
+      #|  real_integral(real_interval([(real_of_num((k : Num)) * (pi / real_of_num((N : Num))), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)))
+      #|  real_interval([(real_of_num((k : Num)) * (pi / real_of_num((N : Num))), real_of_num(k + 1) * (pi / real_of_num(N)))])
+      #|  (t : Real) => (M : (Num) -> Real)((k : Num))
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  (M : (Num) -> Real)((k : Num)) * (pi / real_of_num((N : Num))) == M(k) * (real_of_num(k + 1) * (pi / real_of_num(N)) - real_of_num(k) * (pi / real_of_num(N)))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k < (N : Num) \226\134\146 real_integral(real_interval([(real_of_num(k) * (pi / real_of_num(N)), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))) <= (M : (Num) -> Real)(k) * (pi / real_of_num(N))
+      #|  (x : Real)
+      #|  (k : Num)
+      #|  real_integral(real_interval([(real_of_num((k : Num)) * (pi / real_of_num((N : Num))), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)))
+      #|  (m : (Num) -> Real)((k : Num)) * (real_of_num(k + 1) * (pi / real_of_num((N : Num))) - real_of_num(k) * (pi / real_of_num(N)))
+      #|  real_interval([(real_of_num((k : Num)) * (pi / real_of_num((N : Num))), real_of_num(k + 1) * (pi / real_of_num(N)))])
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  (t : Real) => (m : (Num) -> Real)((k : Num))
+      #|  (m : (Num) -> Real)((k : Num)) * (pi / real_of_num((N : Num))) == m(k) * (real_of_num(k + 1) * (pi / real_of_num(N)) - real_of_num(k) * (pi / real_of_num(N)))
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, k < (N : Num) \226\134\146 (m : (Num) -> Real)(k) * (pi / real_of_num(N)) <= real_integral(real_interval([(real_of_num(k) * (pi / real_of_num(N)), real_of_num(k + 1) * (pi / real_of_num(N)))]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)))
+      #|  real_integrable_on((t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)), real_interval([(real_of_num(0), pi)]))
+      #|  (k : Num) < (N : Num)
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num))) == real_of_num(k + 1) / real_of_num(N) * pi
+      #|  \226\136\128 k : Num, k < (N : Num) \226\134\146 real_of_num(k + 1) * (pi / real_of_num(N)) <= pi
+      #|  \226\136\128 k : Num, k < (N : Num) \226\134\146 real_of_num(0) <= real_of_num(k) * (pi / real_of_num(N))
+      #|  \226\136\128 k : Num, k < (N : Num) \226\134\146 real_of_num(k + 1) * (pi / real_of_num(N)) - real_of_num(k) * (pi / real_of_num(N)) == pi / real_of_num(N)
+      #|  \226\136\128 k : Num, k < (N : Num) \226\134\146 real_of_num(k) * (pi / real_of_num(N)) <= real_of_num(k + 1) * (pi / real_of_num(N))
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  (a : Real) == (b : Real) \226\134\146 a <= b
+      #|  (l : Real) / real_of_num(2) * (real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num))) - real_of_num(k) * (pi / real_of_num(N)))
+      #|  (t : Real)
+      #|  (M0 : Real)
+      #|  (m0 : Real)
+      #|  (M0 : Real)
+      #|  (m0 : Real)
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num)))
+      #|  real_of_num((k : Num)) * (pi / real_of_num((N : Num)))
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (k : Num) < (N : Num)
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num))) == real_of_num(k + 1) / real_of_num(N) * pi
+      #|  real_of_num((k : Num) + 1) * (pi / real_of_num((N : Num))) <= pi
+      #|  real_of_num(0) <= real_of_num((k : Num)) * (pi / real_of_num((N : Num)))
+      #|  real_of_num((k : Num)) * (pi / real_of_num((N : Num))) <= real_of_num(k + 1) * (pi / real_of_num(N))
+      #|  (k : Num) < (N : Num)
+      #|  (k : Num)
+      #|  \226\136\128 k : Num, \226\136\131 a : Real, \226\136\131 b : Real, k < (N : Num) \226\134\146 (\226\136\128 t : Real, real_of_num(k) * (pi / real_of_num(N)) <= t && t <= real_of_num(k + 1) * (pi / real_of_num(N)) \226\134\146 a <= min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)) && min(d / real_of_num(2), l / real_of_num(2) * sin(t)) <= b) && b - a <= l / real_of_num(2) * (pi / real_of_num(N)) && real_of_num(0) <= a && a <= d / real_of_num(2) && b <= d / real_of_num(2)
+      #|  \226\136\131 m : (Num) -> Real, \226\136\131 M : (Num) -> Real, \226\136\128 k : Num, k < (N : Num) \226\134\146 (\226\136\128 t : Real, real_of_num(k) * (pi / real_of_num(N)) <= t && t <= real_of_num(k + 1) * (pi / real_of_num(N)) \226\134\146 m(k) <= min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)) && min(d / real_of_num(2), l / real_of_num(2) * sin(t)) <= M(k)) && M(k) - m(k) <= l / real_of_num(2) * (pi / real_of_num(N)) && real_of_num(0) <= m(k) && m(k) <= d / real_of_num(2) && M(k) <= d / real_of_num(2)
+      #|  IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (l : Real) / real_of_num(2) * sin((Theta : (A) -> Real)(x))}, prob_events(p))
+      #|  random_variable((p : Prob_space[A]), (Theta : (A) -> Real))
+      #|  random_variable((p : Prob_space[A]), (X : (A) -> Real))
+      #|  !(pi == real_of_num(0))
+      #|  !((d : Real) == real_of_num(0))
+      #|  !(real_of_num((N : Num)) == real_of_num(0))
+      #|  1 <= (N : Num)
+      #|  real_of_num(0) < real_of_num((N : Num))
+      #|  real_of_num(0) < pi
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && real_of_num(0) < d && uniform_rv(p, X, real_of_num(0), d / real_of_num(2)) && uniform_rv(p, Theta, real_of_num(0), pi) && indep_rv(p, X, Theta) \226\134\146 (\226\136\128 N : Num, 1 <= N \226\134\146 abs(prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= l / real_of_num(2) * sin(Theta(x))}) - real_of_num(2) / (d * pi) * real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => min(d / real_of_num(2), l / real_of_num(2) * sin(t)))) <= l * (pi / (d * real_of_num(N))))
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  !((j : Num) - 1 < (N : Num))
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
       #|  real_integral
       #|  real_integral
       #|  real_integral
       #|  real_integral
-      #|  (m:num->real)
+      #|  (m : (Num) -> Real)
       #|  real_integral
-      #|  (m:num->real)
+      #|  (m : (Num) -> Real)
       #|  real_integral
-      #|  (m:num->real)
-      #|  (M:num->real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
       #|  SUC
       #|  SUC
       #|  SUC
@@ -81224,192 +81224,192 @@ test "100/buffon matches 100/buffon.ml" {
       #|  real_integral
       #|  real_integral
       #|  real_integral
-      #|  (M:num->real)
+      #|  (M : (Num) -> Real)
       #|  real_integral
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (m:num->real)
-      #|  (M:num->real)
-      #|  l * pi / (d * e) < &N
-      #|  (l * pi) / (d * e) < &N
-      #|  l * pi / (d * &N) = (l * pi) / (d * &N)
-      #|  &0 < d * e
-      #|  N:num
-      #|  l * pi / (d * &N)
-      #|  &0 < d * &N
-      #|  1 <= N
-      #|  &0 < &N
-      #|  &0 <= x ==> x < &0 ==> F
-      #|  l * pi / (d * e) < &0
-      #|  1 <= N <=> ~(N = 0)
-      #|  1 <= N
-      #|  N:num
-      #|  l * pi / (d * e)
-      #|  d:real
-      #|  l:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  ~(d * pi = &0)
-      #|  ~(pi = &0)
-      #|  ~(d = &0)
-      #|  &0 < d * pi
-      #|  &0 < pi
-      #|  e:real
-      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (d * pi)) *\n          real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t))
-      #|  d:real
-      #|  l:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (pi * d)) *\n          real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t))
-      #|  l / &2
-      #|  real_integral (real_interval [&0, pi])\n        (\\t. min (d / &2) (l / &2 * sin t)) =\n      real_integral (real_interval [&0, pi])\n        (\\t. l / &2 * sin t)
-      #|  t:real
-      #|  l / &2 * &1
-      #|  l / &2 * sin t <= d / &2
-      #|  t:real
-      #|  forall t. t IN real_interval [&0, pi]\n       ==> min (d / &2) (l / &2 * sin t) = l / &2 * sin t
-      #|  forall l d. &0 < l /\\ &0 < d /\\ l <= d\n      ==> real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t)) = l
-      #|  ~(d = &0) /\\ ~(pi = &0)
-      #|  d:real
-      #|  l:real
-      #|  d:real
-      #|  l:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ l <= d /\\ &0 < d /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 * l) / (pi * d)
-      #|  forall x. sin(pi - x) = sin(x)
-      #|  forall x. cos(pi - x) = --(cos(x))
-      #|  x:real
-      #|  cos a - cos b = (--(cos b)) - (--(cos a))
-      #|  forall a b. a <= b\n     ==> (sin has_real_integral (cos(a) - cos(b))) (real_interval [a, b])
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  forall c a b. a <= b\n     ==> ((\\t. c * sin t) has_real_integral (c * (cos a - cos b)))\n          (real_interval [a, b])
-      #|  ~(l = &0)
-      #|  ~(l = &0)
-      #|  &1 - (d / l) pow 2 = (l pow 2 - d pow 2) / l pow 2
-      #|  sqrt(&1 - (d / l) pow 2) = sqrt(l pow 2 - d pow 2) / l
-      #|  d / l
-      #|  pi - &2 * alpha = &2 * acs(d / l)
-      #|  pi - alpha <= pi
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (m : (Num) -> Real)
+      #|  (M : (Num) -> Real)
+      #|  (l : Real) * (pi / ((d : Real) * (e : Real))) < real_of_num((N : Num))
+      #|  (l : Real) * pi / ((d : Real) * (e : Real)) < real_of_num((N : Num))
+      #|  (l : Real) * (pi / ((d : Real) * real_of_num((N : Num)))) == l * pi / (d * real_of_num(N))
+      #|  real_of_num(0) < (d : Real) * (e : Real)
+      #|  (N : Num)
+      #|  (l : Real) * (pi / ((d : Real) * real_of_num((N : Num))))
+      #|  real_of_num(0) < (d : Real) * real_of_num((N : Num))
+      #|  1 <= (N : Num)
+      #|  real_of_num(0) < real_of_num((N : Num))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x < real_of_num(0) \226\134\146 false
+      #|  (l : Real) * (pi / ((d : Real) * (e : Real))) < real_of_num(0)
+      #|  (1 <= (N : Num)) == !(N == 0)
+      #|  1 <= (N : Num)
+      #|  (N : Num)
+      #|  (l : Real) * (pi / ((d : Real) * (e : Real)))
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  !((d : Real) * pi == real_of_num(0))
+      #|  !(pi == real_of_num(0))
+      #|  !((d : Real) == real_of_num(0))
+      #|  real_of_num(0) < (d : Real) * pi
+      #|  real_of_num(0) < pi
+      #|  (e : Real)
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && real_of_num(0) < d && uniform_rv(p, X, real_of_num(0), d / real_of_num(2)) && uniform_rv(p, Theta, real_of_num(0), pi) && indep_rv(p, X, Theta) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= l / real_of_num(2) * sin(Theta(x))}) == real_of_num(2) / (d * pi) * real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => min(d / real_of_num(2), l / real_of_num(2) * sin(t)))
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && real_of_num(0) < d && uniform_rv(p, X, real_of_num(0), d / real_of_num(2)) && uniform_rv(p, Theta, real_of_num(0), pi) && indep_rv(p, X, Theta) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= l / real_of_num(2) * sin(Theta(x))}) == real_of_num(2) / (pi * d) * real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => min(d / real_of_num(2), l / real_of_num(2) * sin(t)))
+      #|  (l : Real) / real_of_num(2)
+      #|  real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))) == real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => l / real_of_num(2) * sin(t))
+      #|  (t : Real)
+      #|  (l : Real) / real_of_num(2) * real_of_num(1)
+      #|  (l : Real) / real_of_num(2) * sin((t : Real)) <= (d : Real) / real_of_num(2)
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, IN(t, real_interval([(real_of_num(0), pi)])) \226\134\146 min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)) == l / real_of_num(2) * sin(t)
+      #|  \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && real_of_num(0) < d && l <= d \226\134\146 real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => min(d / real_of_num(2), l / real_of_num(2) * sin(t))) == l
+      #|  !((d : Real) == real_of_num(0)) && !(pi == real_of_num(0))
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && l <= d && real_of_num(0) < d && uniform_rv(p, X, real_of_num(0), d / real_of_num(2)) && uniform_rv(p, Theta, real_of_num(0), pi) && indep_rv(p, X, Theta) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= l / real_of_num(2) * sin(Theta(x))}) == real_of_num(2) * l / (pi * d)
+      #|  \226\136\128 x : Real, sin(pi - x) == sin(x)
+      #|  \226\136\128 x : Real, cos(pi - x) == -cos(x)
+      #|  (x : Real)
+      #|  cos((a : Real)) - cos((b : Real)) == -cos(b) - -cos(a)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a <= b \226\134\146 has_real_integral(sin, cos(a) - cos(b), real_interval([(a, b)]))
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 c : Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b \226\134\146 has_real_integral((t : Real) => c * sin(t), c * (cos(a) - cos(b)), real_interval([(a, b)]))
+      #|  !((l : Real) == real_of_num(0))
+      #|  !((l : Real) == real_of_num(0))
+      #|  real_of_num(1) - pow((d : Real) / (l : Real), 2) == (pow(l, 2) - pow(d, 2)) / pow(l, 2)
+      #|  sqrt(real_of_num(1) - pow((d : Real) / (l : Real), 2)) == sqrt(pow(l, 2) - pow(d, 2)) / l
+      #|  (d : Real) / (l : Real)
+      #|  pi - real_of_num(2) * (alpha : Real) == real_of_num(2) * acs((d : Real) / (l : Real))
+      #|  pi - (alpha : Real) <= pi
       #|  pi
-      #|  pi - alpha
-      #|  l / &2
-      #|  real_integral (real_interval [pi - alpha, pi])\n        (\\t. l / &2 * sin t) = l / &2 * (&1 - cos alpha)
-      #|  alpha <= pi - alpha
-      #|  d / &2
-      #|  pi - alpha
-      #|  alpha:real
-      #|  real_integral (real_interval [alpha, pi - alpha])\n        (\\t. d / &2) = d / &2 * (pi - &2 * alpha)
-      #|  &0 <= alpha
-      #|  alpha:real
-      #|  &0
-      #|  l / &2
-      #|  real_integral (real_interval [&0, alpha])\n        (\\t. l / &2 * sin t) = l / &2 * (&1 - cos alpha)
-      #|  d / &2 <= l / &2 * sin t
-      #|  &0 < l
-      #|  ~(l = &0)
-      #|  l / &2 * (d / l) = d / &2
-      #|  alpha <= pi / &2
-      #|  t <= pi
-      #|  pi - alpha <= t
-      #|  sin(pi - t) <= sin alpha
-      #|  sin t <= sin alpha
-      #|  l / &2 * sin t <= d / &2
-      #|  t:real
-      #|  real_integral (real_interval [pi - alpha, pi])\n        (\\t. min (d / &2) (l / &2 * sin t)) =\n      real_integral (real_interval [pi - alpha, pi])\n        (\\t. l / &2 * sin t)
-      #|  &0 < l
-      #|  ~(l = &0)
-      #|  d / &2 = l / &2 * (d / l)
-      #|  pi / &2 <= t
-      #|  t <= pi - alpha
-      #|  &0 <= alpha
-      #|  sin alpha <= sin(pi - t)
-      #|  t <= pi / &2
-      #|  alpha <= t
-      #|  &0 <= alpha
-      #|  pi / &2
-      #|  t:real
-      #|  t <= pi - alpha ==> sin alpha <= sin t
-      #|  sin alpha <= sin t
-      #|  p ==> ~p ==> q
-      #|  ~(d / &2 <= l / &2 * sin t)
-      #|  t:real
-      #|  real_integral (real_interval [alpha, pi - alpha])\n        (\\t. min (d / &2) (l / &2 * sin t)) =\n      real_integral (real_interval [alpha, pi - alpha])\n        (\\t. d / &2)
-      #|  d / &2 <= l / &2 * sin t
-      #|  &0 < l
-      #|  ~(l = &0)
-      #|  l / &2 * (d / l) = d / &2
-      #|  alpha <= pi / &2
-      #|  t <= alpha
-      #|  &0 <= t
-      #|  sin t <= sin alpha
-      #|  l / &2 * sin t <= d / &2
-      #|  t:real
-      #|  real_integral (real_interval [&0, alpha])\n        (\\t. min (d / &2) (l / &2 * sin t)) =\n      real_integral (real_interval [&0, alpha])\n        (\\t. l / &2 * sin t)
-      #|  pi - alpha <= pi
-      #|  &0 <= alpha
+      #|  pi - (alpha : Real)
+      #|  (l : Real) / real_of_num(2)
+      #|  real_integral(real_interval([(pi - (alpha : Real), pi)]), (t : Real) => (l : Real) / real_of_num(2) * sin(t)) == l / real_of_num(2) * (real_of_num(1) - cos(alpha))
+      #|  (alpha : Real) <= pi - alpha
+      #|  (d : Real) / real_of_num(2)
+      #|  pi - (alpha : Real)
+      #|  (alpha : Real)
+      #|  real_integral(real_interval([((alpha : Real), pi - alpha)]), (t : Real) => (d : Real) / real_of_num(2)) == d / real_of_num(2) * (pi - real_of_num(2) * alpha)
+      #|  real_of_num(0) <= (alpha : Real)
+      #|  (alpha : Real)
+      #|  real_of_num(0)
+      #|  (l : Real) / real_of_num(2)
+      #|  real_integral(real_interval([(real_of_num(0), (alpha : Real))]), (t : Real) => (l : Real) / real_of_num(2) * sin(t)) == l / real_of_num(2) * (real_of_num(1) - cos(alpha))
+      #|  (d : Real) / real_of_num(2) <= (l : Real) / real_of_num(2) * sin((t : Real))
+      #|  real_of_num(0) < (l : Real)
+      #|  !((l : Real) == real_of_num(0))
+      #|  (l : Real) / real_of_num(2) * ((d : Real) / l) == d / real_of_num(2)
+      #|  (alpha : Real) <= pi / real_of_num(2)
+      #|  (t : Real) <= pi
+      #|  pi - (alpha : Real) <= (t : Real)
+      #|  sin(pi - (t : Real)) <= sin((alpha : Real))
+      #|  sin((t : Real)) <= sin((alpha : Real))
+      #|  (l : Real) / real_of_num(2) * sin((t : Real)) <= (d : Real) / real_of_num(2)
+      #|  (t : Real)
+      #|  real_integral(real_interval([(pi - (alpha : Real), pi)]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))) == real_integral(real_interval([(pi - alpha, pi)]), (t : Real) => l / real_of_num(2) * sin(t))
+      #|  real_of_num(0) < (l : Real)
+      #|  !((l : Real) == real_of_num(0))
+      #|  (d : Real) / real_of_num(2) == (l : Real) / real_of_num(2) * (d / l)
+      #|  pi / real_of_num(2) <= (t : Real)
+      #|  (t : Real) <= pi - (alpha : Real)
+      #|  real_of_num(0) <= (alpha : Real)
+      #|  sin((alpha : Real)) <= sin(pi - (t : Real))
+      #|  (t : Real) <= pi / real_of_num(2)
+      #|  (alpha : Real) <= (t : Real)
+      #|  real_of_num(0) <= (alpha : Real)
+      #|  pi / real_of_num(2)
+      #|  (t : Real)
+      #|  (t : Real) <= pi - (alpha : Real) \226\134\146 sin(alpha) <= sin(t)
+      #|  sin((alpha : Real)) <= sin((t : Real))
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  !((d : Real) / real_of_num(2) <= (l : Real) / real_of_num(2) * sin((t : Real)))
+      #|  (t : Real)
+      #|  real_integral(real_interval([((alpha : Real), pi - alpha)]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))) == real_integral(real_interval([(alpha, pi - alpha)]), (t : Real) => d / real_of_num(2))
+      #|  (d : Real) / real_of_num(2) <= (l : Real) / real_of_num(2) * sin((t : Real))
+      #|  real_of_num(0) < (l : Real)
+      #|  !((l : Real) == real_of_num(0))
+      #|  (l : Real) / real_of_num(2) * ((d : Real) / l) == d / real_of_num(2)
+      #|  (alpha : Real) <= pi / real_of_num(2)
+      #|  (t : Real) <= (alpha : Real)
+      #|  real_of_num(0) <= (t : Real)
+      #|  sin((t : Real)) <= sin((alpha : Real))
+      #|  (l : Real) / real_of_num(2) * sin((t : Real)) <= (d : Real) / real_of_num(2)
+      #|  (t : Real)
+      #|  real_integral(real_interval([(real_of_num(0), (alpha : Real))]), (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))) == real_integral(real_interval([(real_of_num(0), alpha)]), (t : Real) => l / real_of_num(2) * sin(t))
+      #|  pi - (alpha : Real) <= pi
+      #|  real_of_num(0) <= (alpha : Real)
       #|  pi
-      #|  &0
-      #|  pi - alpha <= pi
-      #|  alpha <= pi - alpha
-      #|  pi - alpha
+      #|  real_of_num(0)
+      #|  pi - (alpha : Real) <= pi
+      #|  (alpha : Real) <= pi - alpha
+      #|  pi - (alpha : Real)
       #|  pi
-      #|  alpha:real
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  alpha <= pi
-      #|  &0 <= alpha
-      #|  alpha:real
+      #|  (alpha : Real)
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  (alpha : Real) <= pi
+      #|  real_of_num(0) <= (alpha : Real)
+      #|  (alpha : Real)
       #|  pi
-      #|  &0
-      #|  \\t. min (d / &2) (l / &2 * sin t)
-      #|  (\\t. min (d / &2) (l / &2 * sin t))\n     real_integrable_on real_interval [&0, pi]
-      #|  alpha <= pi
-      #|  &0 <= pi - alpha
-      #|  &0 < pi
-      #|  alpha <= pi / &2
-      #|  alpha <= pi - alpha
-      #|  &0 <= alpha
-      #|  pi - alpha <= pi
-      #|  &0 < pi
-      #|  alpha <= pi / &2
-      #|  alpha <= pi
-      #|  &0 < d / l
-      #|  --(pi / &2) <= alpha
-      #|  alpha < &0
-      #|  sin alpha <= sin (&0)
-      #|  &0 <= alpha
-      #|  --(pi / &2) <= alpha /\\ alpha <= pi / &2
-      #|  cos(alpha) = sqrt(&1 - (d / l) pow 2)
-      #|  sin(alpha) = d / l
-      #|  -- &1 <= d / l /\\ d / l <= &1
-      #|  &0 < d / l /\\ d / l <= &1
-      #|  alpha = asn(d / l)
-      #|  ~(l = &0)
-      #|  &0 < pi
-      #|  forall l d. &0 < l /\\ &0 < d /\\ d <= l\n      ==> real_integral (real_interval [&0, pi])\n            (\\t. min (d / &2) (l / &2 * sin t)) =\n          l - sqrt(l pow 2 - d pow 2) + d * acs(d / l)
-      #|  d:real
-      #|  l:real
-      #|  d:real
-      #|  l:real
-      #|  Theta:A->real
-      #|  X:A->real
-      #|  p:A prob_space
-      #|  forall p:A prob_space X Theta l d.\n      &0 < l /\\ &0 < d /\\ d <= l /\\\n      uniform_rv p X (&0) (d / &2) /\\\n      uniform_rv p Theta (&0) pi /\\\n      indep_rv p X Theta\n      ==> prob p {x | x IN prob_carrier p /\\ X x <= (l / &2) * sin(Theta x)} =\n          (&2 / (pi * d)) *\n          (l - sqrt(l pow 2 - d pow 2) + d * acs(d / l))
+      #|  real_of_num(0)
+      #|  (t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t))
+      #|  real_integrable_on((t : Real) => min((d : Real) / real_of_num(2), (l : Real) / real_of_num(2) * sin(t)), real_interval([(real_of_num(0), pi)]))
+      #|  (alpha : Real) <= pi
+      #|  real_of_num(0) <= pi - (alpha : Real)
+      #|  real_of_num(0) < pi
+      #|  (alpha : Real) <= pi / real_of_num(2)
+      #|  (alpha : Real) <= pi - alpha
+      #|  real_of_num(0) <= (alpha : Real)
+      #|  pi - (alpha : Real) <= pi
+      #|  real_of_num(0) < pi
+      #|  (alpha : Real) <= pi / real_of_num(2)
+      #|  (alpha : Real) <= pi
+      #|  real_of_num(0) < (d : Real) / (l : Real)
+      #|  -(pi / real_of_num(2)) <= (alpha : Real)
+      #|  (alpha : Real) < real_of_num(0)
+      #|  sin((alpha : Real)) <= sin(real_of_num(0))
+      #|  real_of_num(0) <= (alpha : Real)
+      #|  -(pi / real_of_num(2)) <= (alpha : Real) && alpha <= pi / real_of_num(2)
+      #|  cos((alpha : Real)) == sqrt(real_of_num(1) - pow((d : Real) / (l : Real), 2))
+      #|  sin((alpha : Real)) == (d : Real) / (l : Real)
+      #|  -real_of_num(1) <= (d : Real) / (l : Real) && d / l <= real_of_num(1)
+      #|  real_of_num(0) < (d : Real) / (l : Real) && d / l <= real_of_num(1)
+      #|  (alpha : Real) == asn((d : Real) / (l : Real))
+      #|  !((l : Real) == real_of_num(0))
+      #|  real_of_num(0) < pi
+      #|  \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && real_of_num(0) < d && d <= l \226\134\146 real_integral(real_interval([(real_of_num(0), pi)]), (t : Real) => min(d / real_of_num(2), l / real_of_num(2) * sin(t))) == l - sqrt(pow(l, 2) - pow(d, 2)) + d * acs(d / l)
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (d : Real)
+      #|  (l : Real)
+      #|  (Theta : (A) -> Real)
+      #|  (X : (A) -> Real)
+      #|  (p : Prob_space[A])
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Theta : (A) -> Real, \226\136\128 l : Real, \226\136\128 d : Real, real_of_num(0) < l && real_of_num(0) < d && d <= l && uniform_rv(p, X, real_of_num(0), d / real_of_num(2)) && uniform_rv(p, Theta, real_of_num(0), pi) && indep_rv(p, X, Theta) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && X(x) <= l / real_of_num(2) * sin(Theta(x))}) == real_of_num(2) / (pi * d) * (l - sqrt(pow(l, 2) - pow(d, 2)) + d * acs(d / l))
       #|uniform_rv =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#forall:fun(fun(real,bool),bool) (\b:real. (#forall:fun(fun(real,bool),bool) (\a:real. ((#=:fun(bool,fun(bool,bool)) ((((#uniform_rv:fun(prob_space('A),fun(fun('A,real),fun(real,fun(real,bool)))) p:prob_space('A)) X:fun('A,real)) a:real) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) b:real)) (#forall:fun(fun(real,bool),bool) (\t:real. ((#=:fun(real,fun(real,bool)) (((#distribution_fn:fun(prob_space('A),fun(fun('A,real),fun(real,real))) p:prob_space('A)) X:fun('A,real)) t:real)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_lt:fun(real,fun(real,bool)) t:real) a:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_le:fun(real,fun(real,bool)) b:real) t:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) t:real) a:real)) ((#real_sub:fun(real,fun(real,real)) b:real) a:real))))))))))))))))))
       #|UNIFORM_RV_IMP_RV =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((((#uniform_rv:fun(prob_space('A),fun(fun('A,real),fun(real,fun(real,bool)))) p:prob_space('A)) X:fun('A,real)) a:real) b:real)) ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real)))))))))))
       #|UNIFORM_RV_BOUNDS =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((((#uniform_rv:fun(prob_space('A),fun(fun('A,real),fun(real,fun(real,bool)))) p:prob_space('A)) X:fun('A,real)) a:real) b:real)) ((#real_lt:fun(real,fun(real,bool)) a:real) b:real))))))))))
