@@ -1,14 +1,12 @@
-// Names for HOL constants that are not MoonBit identifiers. A few binders
-// have readable names; any other symbolic name is spelt `op_` followed by
-// the names of its characters (`$` is op_dollar, `<=_c` is op_lt_eq__c,
-// `+` used as a value is op_plus). An identifier that names a constant
-// means that constant; otherwise these spellings are read back.
+// Names for HOL constants that are not MoonBit identifiers. The choice
+// operator @ is `select` (?! needs none: bool spells it existsunique). Any
+// other symbolic name is spelt op_ followed by the names of its characters
+// ($ is op_dollar, <=_c is op_lt_eq_us_c, + used as a value is op_plus). An
+// identifier that names a constant means that constant; otherwise these
+// spellings are read back.
 
 ///|
-let readable : Array[(String, String)] = [
-  ("select", "@"),
-  ("exists_unique", "?!"),
-]
+let readable : Array[(String, String)] = [("select", "@")]
 
 ///|
 let char_names : Array[(Char, String)] = [
