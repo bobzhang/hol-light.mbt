@@ -64,6 +64,13 @@ test "spellings that would read back as something else" {
     @term_syntax.Unprintable(_) => "unprintable"
   }
   inspect(r, content="unprintable")
+  // nor is an invented one, which a hole would not bring back
+  let invented = @kernel.mk_vartype("?123")
+  let endo = @basics.mk_fun_ty(invented, invented)
+  let r = try @term_syntax.print_type(endo) catch {
+    @term_syntax.Unprintable(_) => "unprintable"
+  }
+  inspect(r, content="unprintable")
   // a numeral not in canonical form keeps its structure
   let bit0 = @kernel.mk_comb(
     @kernel.mk_const("BIT0", @list.List([])),

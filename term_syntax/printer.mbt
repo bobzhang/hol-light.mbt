@@ -157,8 +157,21 @@ fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintabl
 }
 
 ///|
+/// `ty` inside a term, where a hole stands for an invented type variable.
+fn print_type_in_term(ty : @kernel.HolType) -> String raise Unprintable {
+  print_type_at(ty, false)
+}
+
+///|
 /// `ty` in the term syntax.
 pub fn print_type(ty : @kernel.HolType) -> String raise Unprintable {
+  // holes stand for invented type variables only inside a term, whose
+  // elaboration recovers them; a type alone has nothing to recover them from
+  for v in @kernel.tyvars(ty) {
+    if v is Tyvar(name) && name.has_prefix("?") {
+      raise Unprintable("invented type variable " + name)
+    }
+  }
   print_type_at(ty, false)
 }
 
@@ -266,7 +279,7 @@ fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintab
     (!self.all_constants && tvs.iter().all(v => self.fixed.contains(v))) {
     s
   } else {
-    "(" + s + " : " + print_type(ty) + ")"
+    "(" + s + " : " + print_type_in_term(ty) + ")"
   }
 }
 
@@ -293,7 +306,7 @@ fn Printer::variable(
     s
   } else {
     self.typed_free.push(v)
-    "(" + s + " : " + print_type(ty) + ")"
+    "(" + s + " : " + print_type_in_term(ty) + ")"
   }
 }
 
@@ -326,7 +339,7 @@ fn Printer::bind(
     }
     self.names.push(printed)
   }
-  let s = self.name(printed) + " : " + print_type(ty)
+  let s = self.name(printed) + " : " + print_type_in_term(ty)
   (s, bound.prepend((v, printed)))
 }
 
@@ -469,8 +482,8 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 }
 
 ///|
-/// `t` with its invented type variables (`?n`) renamed in order of first
-/// occurrence: holes in the text read back as fresh ones.
+/// `t` with its invented type variables (`?n`) renamed in the order
+/// `type_vars_in_term` lists them: holes in the text read back as fresh ones.
 fn canonical_invented(t : @kernel.Term) -> @kernel.Term {
   let theta = []
   for ty in @kernel.type_vars_in_term(t) {

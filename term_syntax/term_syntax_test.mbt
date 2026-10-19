@@ -90,6 +90,7 @@ fn rejects(s : String, is_type? : Bool = false) -> String raise {
 test "input without a meaning is an error, not an abort" {
   inspect(rejects("1 % 2"), content="term syntax: operator % has no HOL meaning")
   inspect(rejects("Bool[Num]", is_type=true), content="term syntax: type Bool takes 0 arguments")
+  inspect(rejects("_", is_type=true), content="term syntax: _ alone is not a type")
   inspect(rejects("(let : Bool) => let"), content="term syntax: let is a MoonBit keyword")
 }
 
