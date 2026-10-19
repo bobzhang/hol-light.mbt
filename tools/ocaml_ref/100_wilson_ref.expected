@@ -15211,82 +15211,82 @@ CPU time (user): <t>
 0..0..1..solved at 4
 0..0..solved at 3
 100/wilson quotations (76):
-  1 <= SUC n
-  forall n. FACT(n) = nproduct(1..n) (\\i. i)
+  1 <= SUC((n : Num))
+  \226\136\128 n : Num, FACT(n) == nproduct(op_dot_dot(1, n), (i : Num) => i)
   1
-  n = 0 \\/ 1 <= n
-  forall n. FACT(n) = nproduct(2..n) (\\i. i)
+  (n : Num) == 0 || 1 <= n
+  \226\136\128 n : Num, FACT(n) == nproduct(op_dot_dot(2, n), (i : Num) => i)
   1 * 1
-  FINITE(s:A->bool)
-  s = (a:A) INSERT (b INSERT (s DELETE a DELETE b))
-  x:A
-  a:A
-  (b:A) IN s
-  y:A
-  (x:A) IN s
-  x:A
-  FINITE(s:A->bool)
-  (s DELETE a) DELETE (b:A)
-  b:A
-  (a:A) IN s
-  a:A
-  ~(n = 0) ==> n - 2 < n
-  n - 2
-  a:A
-  n = 0
-  s:A->bool = {}
-  s:A->bool
-  n:num
-  forall f r n s. FINITE s /\\ CARD s = n /\\\n             (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                    (f(x) * f(y) == 1) (mod r))\n             ==> (nproduct s f == 1) (mod r)
-  CARD(s:A->bool)
-  forall f r s. FINITE s /\\\n           (forall x:A. x IN s ==> ?!y. y IN s /\\ ~(y = x) /\\\n                                  (f(x) * f(y) == 1) (mod r))\n           ==> (nproduct s f == 1) (mod r)
-  2 <= x
-  (x + 1) * 1 <= (x + 1) * x\n      ==> 1 + (x + 1) * x - (x + 1) * 1 = x * x
-  1 + (x + 1) * (x - 1) = x * x
+  FINITE((s : (A) -> Bool))
+  (s : (A) -> Bool) == INSERT((a : A), INSERT((b : A), DELETE(DELETE(s, a), b)))
+  (x : A)
+  (a : A)
+  IN((b : A), (s : (A) -> Bool))
+  (y : A)
+  IN((x : A), (s : (A) -> Bool))
+  (x : A)
+  FINITE((s : (A) -> Bool))
+  DELETE(DELETE((s : (A) -> Bool), (a : A)), (b : A))
+  (b : A)
+  IN((a : A), (s : (A) -> Bool))
+  (a : A)
+  !((n : Num) == 0) \226\134\146 n - 2 < n
+  (n : Num) - 2
+  (a : A)
+  (n : Num) == 0
+  (s : (A) -> Bool) == EMPTY
+  (s : (A) -> Bool)
+  (n : Num)
+  \226\136\128 f : (A) -> Num, \226\136\128 r : Num, \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, FINITE(s) && CARD(s) == n && (\226\136\128 x : A, IN(x, s) \226\134\146 existsunique((y : A) => IN(y, s) && !(y == x) && op_eq_eq(f(x) * f(y), 1, mod(r)))) \226\134\146 op_eq_eq(nproduct(s, f), 1, mod(r))
+  CARD((s : (A) -> Bool))
+  \226\136\128 f : (A) -> Num, \226\136\128 r : Num, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 x : A, IN(x, s) \226\134\146 existsunique((y : A) => IN(y, s) && !(y == x) && op_eq_eq(f(x) * f(y), 1, mod(r)))) \226\134\146 op_eq_eq(nproduct(s, f), 1, mod(r))
+  2 <= (x : Num)
+  ((x : Num) + 1) * 1 <= (x + 1) * x \226\134\146 1 + ((x + 1) * x - (x + 1) * 1) == x * x
+  1 + ((x : Num) + 1) * (x - 1) == x * x
   1
-  ~(p = 0)
-  ~(p = 1)
-  x <= p - 2
-  2 <= x
-  prime p
-  ((x + 1) * (x - 1) == 0) (mod p)
-  ~(p = 0)
-  x = x * 1
-  x * p = x + x * (p - 1)
-  x * p:num
-  x <= p - 2
-  2 <= x
-  (x + 1 == 0) (mod p)
-  (x * y == 1) (mod p)
-  y < p /\\ ~(y = p - 1) ==> y <= p - 2
-  2 <= x
-  ~(p = 0) /\\ ~(p = 1) ==> 1 < p
-  x <= p - 2 /\\ ~(p = 0) ==> x < p
-  (x * y == 1) (mod p)
-  2 <= y <=> 0 < y /\\ ~(y = 1)
-  y = 1
-  y:num
-  x:num
-  p:num
-  x:num
-  x = 1 * x
-  p - 1 = SUC(p - 2)
-  FACT(p - 1) = FACT(p - 2) * (p - 1)
-  p = 2
-  p = 1
-  p = 0
-  forall p. prime(p) ==> (FACT(p - 1) == p - 1) (mod p)
-  ~(n = 0) ==> n - 1 + 1 = n
-  n - 1
-  p divides 1
-  n:num
-  p divides FACT(n - 1) <=> p divides (n - 1)
-  x < y ==> x <= y - 1
-  n:num = p
-  n = 0
-  p:num
-  n:num
-  forall p. ~(p = 1) ==> (prime p <=> (FACT(p - 1) == p - 1) (mod p))
+  !((p : Num) == 0)
+  !((p : Num) == 1)
+  (x : Num) <= (p : Num) - 2
+  2 <= (x : Num)
+  prime((p : Num))
+  op_eq_eq(((x : Num) + 1) * (x - 1), 0, mod((p : Num)))
+  !((p : Num) == 0)
+  (x : Num) == x * 1
+  (x : Num) * (p : Num) == x + x * (p - 1)
+  (x : Num) * (p : Num)
+  (x : Num) <= (p : Num) - 2
+  2 <= (x : Num)
+  op_eq_eq((x : Num) + 1, 0, mod((p : Num)))
+  op_eq_eq((x : Num) * (y : Num), 1, mod((p : Num)))
+  (y : Num) < (p : Num) && !(y == p - 1) \226\134\146 y <= p - 2
+  2 <= (x : Num)
+  !((p : Num) == 0) && !(p == 1) \226\134\146 1 < p
+  (x : Num) <= (p : Num) - 2 && !(p == 0) \226\134\146 x < p
+  op_eq_eq((x : Num) * (y : Num), 1, mod((p : Num)))
+  (2 <= (y : Num)) == (0 < y && !(y == 1))
+  (y : Num) == 1
+  (y : Num)
+  (x : Num)
+  (p : Num)
+  (x : Num)
+  (x : Num) == 1 * x
+  (p : Num) - 1 == SUC(p - 2)
+  FACT((p : Num) - 1) == FACT(p - 2) * (p - 1)
+  (p : Num) == 2
+  (p : Num) == 1
+  (p : Num) == 0
+  \226\136\128 p : Num, prime(p) \226\134\146 op_eq_eq(FACT(p - 1), p - 1, mod(p))
+  !((n : Num) == 0) \226\134\146 n - 1 + 1 == n
+  (n : Num) - 1
+  divides((p : Num), 1)
+  (n : Num)
+  divides((p : Num), FACT((n : Num) - 1)) == divides(p, n - 1)
+  (x : Num) < (y : Num) \226\134\146 x <= y - 1
+  (n : Num) == (p : Num)
+  (n : Num) == 0
+  (p : Num)
+  (n : Num)
+  \226\136\128 p : Num, !(p == 1) \226\134\146 prime(p) == op_eq_eq(FACT(p - 1), p - 1, mod(p))
 FACT_NPRODUCT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) n:num)) ((#nproduct:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. i:num)))))
 FACT_NPRODUCT_ALT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#FACT:fun(num,num) n:num)) ((#nproduct:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (\i:num. i:num)))))
 NPRODUCT_PAIRUP_INDUCT =  |- (#forall:fun(fun(fun('A,num),bool),bool) (\f:fun('A,num). (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun('A,bool),num) s:fun('A,bool))) n:num)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) (#?!:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) y:'A) x:'A))) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#*:fun(num,fun(num,num)) (f:fun('A,num) x:'A)) (f:fun('A,num) y:'A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) r:num)))))))))))) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) ((#nproduct:fun(fun('A,bool),fun(fun('A,num),num)) s:fun('A,bool)) f:fun('A,num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#num_mod:fun(num,fun(num,fun(num,bool))) r:num)))))))))))
