@@ -5633,53 +5633,53 @@ test "100/birthday matches 100/birthday.ml" {
       #|Warning: inventing type variables
       #|100/birthday quotations (49):
       #|  (s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}
-      #|  ({} --> t) = {(\\x. @y. T)}
-      #|  u:A = x
-      #|  u:A
-      #|  (a /\\ b) /\\ d <=> d /\\ a /\\ b
-      #|  g:A->B
-      #|  y:B
-      #|  \\u. if u = x then @y. T else (f:A->B) u
-      #|  (f:A->B) x
-      #|  f:A->B
-      #|  (a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c
+      #|  op_minus_minus_gt(EMPTY, (t : (_) -> Bool)) == INSERT((x : _) => select((y : _) => true), EMPTY)
+      #|  (u : A) == (x : A)
+      #|  (u : A)
+      #|  (((a : Bool) && (b : Bool)) && (d : Bool)) == (d && a && b)
+      #|  (g : (A) -> B)
+      #|  (y : B)
+      #|  (u : A) => if u == (x : A) { select((y : B) => true) } else { (f : (A) -> B)(u) }
+      #|  (f : (A) -> B)((x : A))
+      #|  (f : (A) -> B)
+      #|  (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == (d && a && b && c)
       #|  (x INSERT s) --> t =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\ g IN s --> t}
-      #|  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s --> t) HAS_SIZE (n EXP m)
-      #|  m:num
-      #|  forall m n. m <= n ==> ?d. FACT(n) = d * FACT(m)
-      #|  forall m n. m <= n ==> FACT n = (FACT(n) DIV FACT(m)) * FACT(m)
-      #|  y:B
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE(op_minus_minus_gt(s, t), EXP(n, m))
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 (\226\136\131 d : Num, FACT(n) == d * FACT(m))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 FACT(n) == DIV(FACT(n), FACT(m)) * FACT(m)
+      #|  (y : B)
       #|  0
-      #|  n:num
-      #|  n:num
-      #|  ~(n = 0)
-      #|  n - SUC(m) = n - 1 - m
-      #|  ~(n = 0) ==> (n - 1 < m <=> n < SUC m)
-      #|  n = 0
-      #|  (if n < SUC (CARD s) then 0 else FACT n DIV FACT (n - SUC (CARD s))) =\n    n * (if (n - 1) < CARD(s:A->bool) then 0\n         else FACT(n - 1) DIV FACT (n - 1 - CARD s))
-      #|  u:A = x
-      #|  u:A
-      #|  (a /\\ b) /\\ d <=> d /\\ a /\\ b
-      #|  g:A->B
-      #|  y:B
-      #|  \\u. if u = x then @y. T else (f:A->B) u
-      #|  (f:A->B) x
-      #|  f:A->B
-      #|  (a /\\ b /\\ c) /\\ d <=> d /\\ a /\\ b /\\ c
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  !((n : Num) == 0)
+      #|  (n : Num) - SUC((m : Num)) == n - 1 - m
+      #|  !((n : Num) == 0) \226\134\146 (n - 1 < (m : Num)) == (n < SUC(m))
+      #|  (n : Num) == 0
+      #|  (if (n : Num) < SUC(CARD((s : (A) -> Bool))) { 0 } else { DIV(FACT(n), FACT(n - SUC(CARD(s)))) }) == n * (if n - 1 < CARD(s) { 0 } else { DIV(FACT(n - 1), FACT(n - 1 - CARD(s))) })
+      #|  (u : A) == (x : A)
+      #|  (u : A)
+      #|  (((a : Bool) && (b : Bool)) && (d : Bool)) == (d && a && b)
+      #|  (g : (A) -> B)
+      #|  (y : B)
+      #|  (u : A) => if u == (x : A) { select((y : B) => true) } else { (f : (A) -> B)(u) }
+      #|  (f : (A) -> B)((x : A))
+      #|  (f : (A) -> B)
+      #|  (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == (d && a && b && c)
       #|  {f | f IN (x INSERT s) --> t /\\\n    (forall u v. u IN (x INSERT s) /\\ v IN (x INSERT s) /\\ f u = f v ==> u = v)} =\n        IMAGE (\\(y:B,g) u:A. if u = x then y else g(u))\n              {y,g | y IN t /\\\n                     g IN {f | f IN (s --> (t DELETE y)) /\\\n                               forall u v. u IN s /\\ v IN s /\\ f u = f v ==> u = v}}
       #|  {x | x IN s} = s
       #|  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}\n            HAS_SIZE (if n < m then 0 else (FACT n) DIV (FACT(n - m)))
-      #|  s INTER (t DIFF s) = {}
-      #|  s SUBSET t ==> t = s UNION (t DIFF s)
-      #|  forall s t:A->bool m n.\n        s SUBSET t /\\ s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> (t DIFF s) HAS_SIZE (n - m)
-      #|  (if a <= b then x - y else x) = x - (if b < a then 0 else y)
+      #|  INTER((s : (_) -> Bool), DIFF((t : (_) -> Bool), s)) == EMPTY
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 t == UNION(s, DIFF(t, s))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, SUBSET(s, t) && HAS_SIZE(s, m) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE(DIFF(t, s), n - m)
+      #|  (if (a : Num) <= (b : Num) { (x : Num) - (y : Num) } else { x }) == x - (if b < a { 0 } else { y })
       #|  {f:A->B | f IN (s --> t) /\\\n              ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)} =\n    (s --> t) DIFF\n    {f | f IN (s --> t) /\\\n                 (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)}
       #|  forall s:A->bool t:B->bool m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n\n        ==> {f | f IN (s --> t) /\\\n                 ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n            HAS_SIZE (if m <= n then (n EXP m) - (FACT n) DIV (FACT(n - m))\n                      else n EXP m)
-      #|  x + 0 = x
+      #|  (x : Num) + 0 == x
       #|  0
-      #|  (m + SUC d) - 1 = m + d
-      #|  (m + SUC d) - 1 - m = d
-      #|  forall m n. m < n\n         ==> (FACT n) DIV (FACT m) = n * FACT(n - 1) DIV FACT(m)
+      #|  (m : Num) + SUC((d : Num)) - 1 == m + d
+      #|  (m : Num) + SUC((d : Num)) - 1 - m == d
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 DIV(FACT(n), FACT(m)) == n * DIV(FACT(n - 1), FACT(m))
       #|  forall s t. s HAS_SIZE 23 /\\ t HAS_SIZE 365\n         ==> 2 * CARD {f | f IN (s --> t) /\\\n                           ?x y. x IN s /\\ y IN s /\\ ~(x = y) /\\ f(x) = f(y)}\n             >= CARD (s --> t)
       #|funspace =  |- (#forall:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(fun(fun('A,'B),bool),fun(fun(fun('A,'B),bool),bool)) ((#-->:fun(fun('A,bool),fun(fun('B,bool),fun(fun('A,'B),bool))) s:fun('A,bool)) t:fun('B,bool))) (#GSPEC:fun(fun(fun('A,'B),bool),fun(fun('A,'B),bool)) (\GEN%PVAR%1:fun('A,'B). (#?:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (((#SETSPEC:fun(fun('A,'B),fun(bool,fun(fun('A,'B),bool))) GEN%PVAR%1:fun('A,'B)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#IN:fun('B,fun(fun('B,bool),bool)) (f:fun('A,'B) x:'A)) t:fun('B,bool)))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool)))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (#@:fun(fun('B,bool),'B) (\y:'B. #T:bool)))))))) f:fun('A,'B)))))))))))
       #|FUNSPACE_EMPTY =  |- ((#=:fun(fun(fun('?1,'?2),bool),fun(fun(fun('?1,'?2),bool),bool)) ((#-->:fun(fun('?1,bool),fun(fun('?2,bool),fun(fun('?1,'?2),bool))) #EMPTY:fun('?1,bool)) t:fun('?2,bool))) ((#INSERT:fun(fun('?1,'?2),fun(fun(fun('?1,'?2),bool),fun(fun('?1,'?2),bool))) (\x:'?1. (#@:fun(fun('?2,bool),'?2) (\y:'?2. #T:bool)))) #EMPTY:fun(fun('?1,'?2),bool)))
