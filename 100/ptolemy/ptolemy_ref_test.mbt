@@ -77017,7 +77017,7 @@ test "100/ptolemy matches 100/ptolemy.ml" {
       #|1 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|100/ptolemy quotations (15):
-      #|  (vector [x1;y1] :real^2) dot (vector [x2;y2]) = x1 * x2 + y1 * y2
+      #|  (dot : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(x1 : Real), (y1 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(x2 : Real), (y2 : Real)])) == x1 * x2 + y1 * y2
       #|  (a2 : Real) / real_of_num(2)
       #|  (a1 : Real) / real_of_num(2)
       #|  (real_of_num(2) * (x : Real) - real_of_num(2) * (y : Real)) / real_of_num(2) == x - y

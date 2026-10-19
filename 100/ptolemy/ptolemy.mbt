@@ -4,7 +4,7 @@
 /// DOT_VECTOR
 fn step_1() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([@vectors.dot(), @cart.dimindex_2(), @vectors.sum_2(), @vectors.vector_2()]))
-  dot_vector_c.set(@tactics.prove(@parser.parse_term("(vector [x1;y1] :real^2) dot (vector [x2;y2]) = x1 * x2 + y1 * y2"), t1))
+  dot_vector_c.set(@tactics.prove(@term_syntax.parse_term("(dot : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(x1 : Real), (y1 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(x2 : Real), (y2 : Real)])) == x1 * x2 + y1 * y2"), t1))
 }
 
 ///|
