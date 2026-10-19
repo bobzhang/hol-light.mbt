@@ -5695,125 +5695,125 @@ test "100/euler matches 100/euler.ml" {
       #|0..0..2..5..13..solved at 18
       #|0..0..2..5..13..solved at 18
       #|100/euler quotations (119):
-      #|  forall f a b n. nsum(a..b) f = n ==> forall i. a <= i /\\ i <= b ==> f(i) <= n
-      #|  g:B->A
-      #|  forall f:A->B g s t.\n        FINITE s /\\ FINITE t /\\\n        (forall x. x IN s ==> f(x) IN t) /\\\n        (forall y. y IN t ==> g(y) IN s) /\\\n        (forall x. x IN s ==> g(f x) = x) /\\\n        (forall y. y IN t ==> f(g y) = y)\n        ==> FINITE s /\\ FINITE t /\\ CARD s = CARD t
-      #|  index n = if n = 0 then 0 else if ODD n then 0 else SUC(index(n DIV 2))
+      #|  \226\136\128 f : (Num) -> Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, nsum(op_dot_dot(a, b), f) == n \226\134\146 (\226\136\128 i : Num, a <= i && i <= b \226\134\146 f(i) <= n)
+      #|  (g : (B) -> A)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && FINITE(t) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), t)) && (\226\136\128 y : B, IN(y, t) \226\134\146 IN(g(y), s)) && (\226\136\128 x : A, IN(x, s) \226\134\146 g(f(x)) == x) && (\226\136\128 y : B, IN(y, t) \226\134\146 f(g(y)) == y) \226\134\146 FINITE(s) && FINITE(t) && CARD(s) == CARD(t)
+      #|  (index : (Num) -> Num)((n : Num)) == (if n == 0 { 0 } else { if ODD(n) { 0 } else { SUC(index(DIV(n, 2))) } })
       #|  \\n. n + 1
-      #|  oddpart n = if n = 0 then 0 else if ODD n then n else oddpart(n DIV 2)
-      #|  ~(n = 0) /\\ n = 2 * m ==> m < n /\\ ~(m = 0)
-      #|  (2 * x) DIV 2 = x
-      #|  n = 0
-      #|  forall n. n = 2 EXP (index n) * oddpart n /\\ (ODD(oddpart n) <=> ~(n = 0))
-      #|  forall n. n = 2 EXP (index n) * oddpart n
-      #|  forall n. ODD(oddpart n) <=> ~(n = 0)
-      #|  1 <= n <=> ~(n = 0)
-      #|  1 * x <= y * x ==> x <= y * x
-      #|  forall n. oddpart n <= n
-      #|  forall i m i' m'. ODD m /\\ ODD m'\n               ==> (2 EXP i * m = 2 EXP i' * m' <=> i = i' /\\ m = m')
-      #|  oddpart(2 EXP i * m)
-      #|  index(2 EXP i * m)
-      #|  m:num
-      #|  i:num
-      #|  forall i m. ODD m ==> index(2 EXP i * m) = i /\\ oddpart(2 EXP i * m) = m
-      #|  p partitions n <=> (forall i. ~(p i = 0) ==> 1 <= i /\\ i <= n) /\\\n                     nsum(1..n) (\\i. p(i) * i) = n
-      #|  n < p /\\ p * 1 <= p * k ==> n < p * k
-      #|  i:num
-      #|  nsum(1..n) (\\j. if j = i then n else 0)
-      #|  m = n ==> n < m ==> F
-      #|  m < n ==> ~(n = 0)
-      #|  1 <= i /\\ i <= n
-      #|  forall p n. p partitions n ==> forall i. p(i) <= n
-      #|  SUC m <= i ==> m <= i /\\ ~(i = m)
-      #|  q:num->num
-      #|  a:num
-      #|  m <= i /\\ ~(i = m) ==> SUC m <= i
-      #|  \\i:num. if i = m then 0 else p i
-      #|  (p:num->num) m
-      #|  p:num->num
-      #|  {p | (forall i. p i <= n) /\\ (forall i. SUC m <= i ==> p i = 0)} =\n    IMAGE (\\(a,p) j. if j = m then a else p(j))\n        {a,p | a IN 0..n /\\\n               p IN {p | (forall i. p i <= n) /\\ (forall i. m <= i ==> p i = 0)}}
-      #|  {p | forall i:num. p i = 0} = {(\\n. 0)}
-      #|  a /\\ b <=> ~(b ==> ~a)
-      #|  forall m n. FINITE {p | (forall i. p(i) <= n) /\\ forall i. m <= i ==> p(i) = 0}
-      #|  {p | (forall i. p(i) <= n) /\\ (forall i. SUC n <= i ==> p(i) = 0)}
-      #|  forall n. FINITE {p | p partitions n}
-      #|  {p | p partitions n}
-      #|  forall P n. FINITE {p | p partitions n /\\ P p}
-      #|  odd_of_distinct p =\n    \\i. if ODD i then nsum {j | p(2 EXP j * i) = 1} (\\j. 2 EXP j) else 0
-      #|  distinct_of_odd p = \\i. if (index i) IN bitset (p(oddpart i)) then 1 else 0
-      #|  forall p i. ~(odd_of_distinct p i = 0) ==> ODD i
-      #|  forall p i. distinct_of_odd p i <= 1
-      #|  1 <= i <=> ~(i = 0)
-      #|  i <= j * i <=> 1 * i <= j * i
-      #|  2 EXP j * i
-      #|  j:num
-      #|  ~((if p then x else 0) = 0) <=> p /\\ ~(x = 0)
-      #|  ~(i = 0)
-      #|  j < ej /\\ ej * 1 <= ej * i ==> j <= ej * i
-      #|  2 EXP j * i
-      #|  j:num
-      #|  0..n
-      #|  FINITE {j | p (2 EXP j * i) = 1}
-      #|  i = 0
-      #|  1 <= i <=> ~(i = 0)
-      #|  forall p. (forall i. ~(p i = 0) ==> i <= n)\n       ==> forall i. ~(odd_of_distinct p i = 0) ==> 1 <= i /\\ i <= n
-      #|  p(oddpart i) * oddpart i
+      #|  (oddpart : (Num) -> Num)((n : Num)) == (if n == 0 { 0 } else { if ODD(n) { n } else { oddpart(DIV(n, 2)) } })
+      #|  !((n : Num) == 0) && n == 2 * (m : Num) \226\134\146 m < n && !(m == 0)
+      #|  DIV(2 * (x : Num), 2) == x
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, n == EXP(2, index(n)) * oddpart(n) && ODD(oddpart(n)) == !(n == 0)
+      #|  \226\136\128 n : Num, n == EXP(2, index(n)) * oddpart(n)
+      #|  \226\136\128 n : Num, ODD(oddpart(n)) == !(n == 0)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  1 * (x : Num) <= (y : Num) * x \226\134\146 x <= y * x
+      #|  \226\136\128 n : Num, oddpart(n) <= n
+      #|  \226\136\128 i : Num, \226\136\128 m : Num, \226\136\128 i' : Num, \226\136\128 m' : Num, ODD(m) && ODD(m') \226\134\146 (EXP(2, i) * m == EXP(2, i') * m') == (i == i' && m == m')
+      #|  oddpart(EXP(2, (i : Num)) * (m : Num))
+      #|  index(EXP(2, (i : Num)) * (m : Num))
+      #|  (m : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, \226\136\128 m : Num, ODD(m) \226\134\146 index(EXP(2, i) * m) == i && oddpart(EXP(2, i) * m) == m
+      #|  (partitions : ((Num) -> Num, Num) -> Bool)((p : (Num) -> Num), (n : Num)) == ((\226\136\128 i : Num, !(p(i) == 0) \226\134\146 1 <= i && i <= n) && nsum(op_dot_dot(1, n), (i : Num) => p(i) * i) == n)
+      #|  (n : Num) < (p : Num) && p * 1 <= p * (k : Num) \226\134\146 n < p * k
+      #|  (i : Num)
+      #|  nsum(op_dot_dot(1, (n : Num)), (j : Num) => if j == (i : Num) { n } else { 0 })
+      #|  (m : Num) == (n : Num) \226\134\146 n < m \226\134\146 false
+      #|  (m : Num) < (n : Num) \226\134\146 !(n == 0)
+      #|  1 <= (i : Num) && i <= (n : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, partitions(p, n) \226\134\146 (\226\136\128 i : Num, p(i) <= n)
+      #|  SUC((m : Num)) <= (i : Num) \226\134\146 m <= i && !(i == m)
+      #|  (q : (Num) -> Num)
+      #|  (a : Num)
+      #|  (m : Num) <= (i : Num) && !(i == m) \226\134\146 SUC(m) <= i
+      #|  (i : Num) => if i == (m : Num) { 0 } else { (p : (Num) -> Num)(i) }
+      #|  (p : (Num) -> Num)((m : Num))
+      #|  (p : (Num) -> Num)
+      #|  {(p : (Num) -> Num) | (\226\136\128 i : Num, p(i) <= (n : Num)) && (\226\136\128 i : Num, SUC((m : Num)) <= i \226\134\146 p(i) == 0)} == IMAGE(GABS((f : ((Num, (Num) -> Num), Num) -> Num) => \226\136\128 a : Num, \226\136\128 p : (Num) -> Num, GEQ(f((a, p)), (j : Num) => if j == m { a } else { p(j) })), {((a : Num), (p : (Num) -> Num)) | IN(a, op_dot_dot(0, n)) && IN(p, {(p : (Num) -> Num) | (\226\136\128 i : Num, p(i) <= n) && (\226\136\128 i : Num, m <= i \226\134\146 p(i) == 0)})})
+      #|  {(p : (Num) -> Num) | \226\136\128 i : Num, p(i) == 0} == {(n : Num) => 0}
+      #|  ((a : Bool) && (b : Bool)) == !(b \226\134\146 !a)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, FINITE({(p : (Num) -> Num) | (\226\136\128 i : Num, p(i) <= n) && (\226\136\128 i : Num, m <= i \226\134\146 p(i) == 0)})
+      #|  {(p : (Num) -> Num) | (\226\136\128 i : Num, p(i) <= (n : Num)) && (\226\136\128 i : Num, SUC(n) <= i \226\134\146 p(i) == 0)}
+      #|  \226\136\128 n : Num, FINITE({(p : (Num) -> Num) | partitions(p, n)})
+      #|  {(p : (Num) -> Num) | partitions(p, (n : Num))}
+      #|  \226\136\128 P : ((Num) -> Num) -> Bool, \226\136\128 n : Num, FINITE({(p : (Num) -> Num) | partitions(p, n) && P(p)})
+      #|  (odd_of_distinct : ((Num) -> Num, Num) -> Num)((p : (Num) -> Num)) == ((i : Num) => if ODD(i) { nsum({(j : Num) | p(EXP(2, j) * i) == 1}, (j : Num) => EXP(2, j)) } else { 0 })
+      #|  (distinct_of_odd : ((Num) -> Num, Num) -> Num)((p : (Num) -> Num)) == ((i : Num) => if IN(index(i), bitset(p(oddpart(i)))) { 1 } else { 0 })
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 i : Num, !(odd_of_distinct(p, i) == 0) \226\134\146 ODD(i)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 i : Num, distinct_of_odd(p, i) <= 1
+      #|  (1 <= (i : Num)) == !(i == 0)
+      #|  ((i : Num) <= (j : Num) * i) == (1 * i <= j * i)
+      #|  EXP(2, (j : Num)) * (i : Num)
+      #|  (j : Num)
+      #|  !((if (p : Bool) { (x : Num) } else { 0 }) == 0) == (p && !(x == 0))
+      #|  !((i : Num) == 0)
+      #|  (j : Num) < (ej : Num) && ej * 1 <= ej * (i : Num) \226\134\146 j <= ej * i
+      #|  EXP(2, (j : Num)) * (i : Num)
+      #|  (j : Num)
+      #|  op_dot_dot(0, (n : Num))
+      #|  FINITE({(j : Num) | (p : (Num) -> Num)(EXP(2, j) * (i : Num)) == 1})
+      #|  (i : Num) == 0
+      #|  (1 <= (i : Num)) == !(i == 0)
+      #|  \226\136\128 p : (Num) -> Num, (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 i <= (n : Num)) \226\134\146 (\226\136\128 i : Num, !(odd_of_distinct(p, i) == 0) \226\134\146 1 <= i && i <= n)
+      #|  (p : (Num) -> Num)(oddpart((i : Num))) * oddpart(i)
       #|  0
-      #|  forall i. ~(p i = 0) ==> ODD i
-      #|  index 0 IN bitset (p (oddpart 0))
-      #|  1 <= i <=> ~(i = 0)
-      #|  i:num
-      #|  (if a then 1 else 0) = 0 <=> ~a
-      #|  forall p. (forall i. p(i) * i <= n) /\\\n       (forall i. ~(p i = 0) ==> ODD i)\n       ==> forall i. ~(distinct_of_odd p i = 0) ==> 1 <= i /\\ i <= n
-      #|  i:num
-      #|  forall p. (forall i. ~(p(i) = 0) ==> ODD i)\n       ==> odd_of_distinct (distinct_of_odd p) = p
-      #|  i <= 1 ==> i = 0 \\/ i = 1
-      #|  1 <= n <=> ~(n = 0)
-      #|  j < ej /\\ 1 * ej <= i * ej ==> j <= ej * i
-      #|  2 EXP j * oddpart i
-      #|  forall x. y <= x /\\ 1 <= x /\\ x <= n ==> y <= n
-      #|  j:num
-      #|  0..n
-      #|  FINITE {j | p (2 EXP j * oddpart i) = 1}
-      #|  ~(1 <= 0)
-      #|  i = 0
-      #|  i:num
-      #|  forall p. (forall i. ~(p i = 0) ==> 1 <= i /\\ i <= n) /\\ (forall i. p(i) <= 1)\n       ==> distinct_of_odd (odd_of_distinct p) = p
-      #|  1 <= x <=> ~(x = 0)
-      #|  1 <= x <=> ~(x = 0)
-      #|  i:num
-      #|  m:num
-      #|  1 <= x <=> ~(x = 0)
-      #|  index m
-      #|  oddpart m
-      #|  m:num
-      #|  forall i j. j IN bitset(p i) ==> ODD i
-      #|  (a /\\ b) /\\ c <=> a /\\ b /\\ (b ==> c)
-      #|  (if p then 1 else 0) * x * y = (if p then x * y else 0)
-      #|  \\(i,b). 2 EXP b * i
-      #|  ~(1 <= 0)
-      #|  (if p then 1 else 0) = 0 <=> ~p
-      #|  {x | x IN 1 .. n /\\\n         ~((if index x IN bitset (p (oddpart x)) then 1 else 0) * x = 0)} =\n    {i | i IN 1..n /\\ (index i) IN bitset (p(oddpart i))}
-      #|  ~(1 <= 0)
-      #|  {x | x IN {i,j | i IN 1..n /\\ j IN bitset(p i)} /\\\n         ~((\\(i,j). 2 EXP j * i) x = 0)} =\n    {i,j | i IN 1..n /\\ j IN bitset(p i)}
-      #|  forall p. (forall i. ~(p i = 0) ==> 1 <= i /\\ i <= n) /\\\n       (forall i. p(i) * i <= n) /\\\n       (forall i. ~(p(i) = 0) ==> ODD i)\n       ==> nsum(1..n) (\\i. distinct_of_odd p i * i) =\n           nsum(1..n) (\\i. p i * i)
-      #|  (p:num->num) i = 0
-      #|  i:num
-      #|  forall p. p IN {p | p partitions n /\\ forall i. ~(p(i) = 0) ==> ODD i}\n       ==> (distinct_of_odd p) IN {p | p partitions n /\\ forall i. p(i) <= 1}
-      #|  ~(1 = 0)
-      #|  nsum {i | p(i) = 1} (\\j. p(j) * j)
-      #|  nsum {i | p(i) = 1} (\\j. j)
-      #|  (\\j. j) o (\\j. 2 EXP j * i)
-      #|  ~(1 = 0)
-      #|  1..n
-      #|  FINITE {i:num | p(i) = 1}
-      #|  i:num
-      #|  nsum(1..n) (\\i. distinct_of_odd(odd_of_distinct p) i * i)
-      #|  forall p. p IN {p | p partitions n /\\ forall i. p(i) <= 1}\n       ==> (odd_of_distinct p) IN\n           {p | p partitions n /\\ forall i. ~(p(i) = 0) ==> ODD i}
-      #|  p:num->num
+      #|  \226\136\128 i : Num, !((p : (Num) -> Num)(i) == 0) \226\134\146 ODD(i)
+      #|  IN(index(0), bitset((p : (Num) -> Num)(oddpart(0))))
+      #|  (1 <= (i : Num)) == !(i == 0)
+      #|  (i : Num)
+      #|  ((if (a : Bool) { 1 } else { 0 }) == 0) == !a
+      #|  \226\136\128 p : (Num) -> Num, (\226\136\128 i : Num, p(i) * i <= (n : Num)) && (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i)) \226\134\146 (\226\136\128 i : Num, !(distinct_of_odd(p, i) == 0) \226\134\146 1 <= i && i <= n)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i)) \226\134\146 odd_of_distinct(distinct_of_odd(p)) == p
+      #|  (i : Num) <= 1 \226\134\146 i == 0 || i == 1
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (j : Num) < (ej : Num) && 1 * ej <= (i : Num) * ej \226\134\146 j <= ej * i
+      #|  EXP(2, (j : Num)) * oddpart((i : Num))
+      #|  \226\136\128 x : Num, (y : Num) <= x && 1 <= x && x <= (n : Num) \226\134\146 y <= n
+      #|  (j : Num)
+      #|  op_dot_dot(0, (n : Num))
+      #|  FINITE({(j : Num) | (p : (Num) -> Num)(EXP(2, j) * oddpart((i : Num))) == 1})
+      #|  !(1 <= 0)
+      #|  (i : Num) == 0
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 1 <= i && i <= (n : Num)) && (\226\136\128 i : Num, p(i) <= 1) \226\134\146 distinct_of_odd(odd_of_distinct(p)) == p
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  index((m : Num))
+      #|  oddpart((m : Num))
+      #|  (m : Num)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, IN(j, bitset((p : (Num) -> Num)(i))) \226\134\146 ODD(i)
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == (a && b && (b \226\134\146 c))
+      #|  (if (p : Bool) { 1 } else { 0 }) * ((x : Num) * (y : Num)) == (if p { x * y } else { 0 })
+      #|  GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 b : Num, GEQ(f((i, b)), EXP(2, b) * i))
+      #|  !(1 <= 0)
+      #|  ((if (p : Bool) { 1 } else { 0 }) == 0) == !p
+      #|  {(x : Num) | IN(x, op_dot_dot(1, (n : Num))) && !((if IN(index(x), bitset((p : (Num) -> Num)(oddpart(x)))) { 1 } else { 0 }) * x == 0)} == {(i : Num) | IN(i, op_dot_dot(1, n)) && IN(index(i), bitset(p(oddpart(i))))}
+      #|  !(1 <= 0)
+      #|  {(x : (Num, Num)) | IN(x, {((i : Num), (j : Num)) | IN(i, op_dot_dot(1, (n : Num))) && IN(j, bitset((p : (Num) -> Num)(i)))}) && !(GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), EXP(2, j) * i), x) == 0)} == {((i : Num), (j : Num)) | IN(i, op_dot_dot(1, n)) && IN(j, bitset(p(i)))}
+      #|  \226\136\128 p : (Num) -> Num, (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 1 <= i && i <= (n : Num)) && (\226\136\128 i : Num, p(i) * i <= n) && (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i)) \226\134\146 nsum(op_dot_dot(1, n), (i : Num) => distinct_of_odd(p, i) * i) == nsum(op_dot_dot(1, n), (i : Num) => p(i) * i)
+      #|  (p : (Num) -> Num)((i : Num)) == 0
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, IN(p, {(p : (Num) -> Num) | partitions(p, (n : Num)) && (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i))}) \226\134\146 IN(distinct_of_odd(p), {(p : (Num) -> Num) | partitions(p, n) && (\226\136\128 i : Num, p(i) <= 1)})
+      #|  !(1 == 0)
+      #|  nsum({(i : Num) | (p : (Num) -> Num)(i) == 1}, (j : Num) => p(j) * j)
+      #|  nsum({(i : Num) | (p : (Num) -> Num)(i) == 1}, (j : Num) => j)
+      #|  o((j : Num) => j, (j : Num) => EXP(2, j) * (i : Num))
+      #|  !(1 == 0)
+      #|  op_dot_dot(1, (n : Num))
+      #|  FINITE({(i : Num) | (p : (Num) -> Num)(i) == 1})
+      #|  (i : Num)
+      #|  nsum(op_dot_dot(1, (n : Num)), (i : Num) => distinct_of_odd(odd_of_distinct((p : (Num) -> Num)), i) * i)
+      #|  \226\136\128 p : (Num) -> Num, IN(p, {(p : (Num) -> Num) | partitions(p, (n : Num)) && (\226\136\128 i : Num, p(i) <= 1)}) \226\134\146 IN(odd_of_distinct(p), {(p : (Num) -> Num) | partitions(p, n) && (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i))})
+      #|  (p : (Num) -> Num)
       #|  distinct_of_odd
       #|  odd_of_distinct
-      #|  FINITE {p | p partitions n /\\ forall i. p(i) <= 1} /\\\n   FINITE {p | p partitions n /\\ forall i. ~(p(i) = 0) ==> ODD i} /\\\n   CARD {p | p partitions n /\\ forall i. p(i) <= 1} =\n   CARD {p | p partitions n /\\ forall i. ~(p(i) = 0) ==> ODD i}
+      #|  FINITE({(p : (Num) -> Num) | partitions(p, (n : Num)) && (\226\136\128 i : Num, p(i) <= 1)}) && FINITE({(p : (Num) -> Num) | partitions(p, n) && (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i))}) && CARD({(p : (Num) -> Num) | partitions(p, n) && (\226\136\128 i : Num, p(i) <= 1)}) == CARD({(p : (Num) -> Num) | partitions(p, n) && (\226\136\128 i : Num, !(p(i) == 0) \226\134\146 ODD(i))})
       #|NSUM_BOUND_LEMMA =  |- (#forall:fun(fun(fun(num,num),bool),bool) (\f:fun(num,num). (#forall:fun(fun(num,bool),bool) (\a:num. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) a:num) b:num)) f:fun(num,num))) n:num)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) a:num) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) b:num))) ((#<=:fun(num,fun(num,bool)) (f:fun(num,num) i:num)) n:num)))))))))))))
       #|CARD_EQ_LEMMA =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun(fun('B,'A),bool),bool) (\g:fun('B,'A). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('B,bool),bool),bool) (\t:fun('B,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('B,bool),bool) t:fun('B,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#IN:fun('B,fun(fun('B,bool),bool)) (f:fun('A,'B) x:'A)) t:fun('B,bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('B,bool),bool) (\y:'B. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('B,fun(fun('B,bool),bool)) y:'B) t:fun('B,bool))) ((#IN:fun('A,fun(fun('A,bool),bool)) (g:fun('B,'A) y:'B)) s:fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) s:fun('A,bool))) ((#=:fun('A,fun('A,bool)) (g:fun('B,'A) (f:fun('A,'B) x:'A))) x:'A))))) (#forall:fun(fun('B,bool),bool) (\y:'B. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('B,fun(fun('B,bool),bool)) y:'B) t:fun('B,bool))) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) (g:fun('B,'A) y:'B))) y:'B)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('B,bool),bool) t:fun('B,bool))) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun('A,bool),num) s:fun('A,bool))) (#CARD:fun(fun('B,bool),num) t:fun('B,bool))))))))))))))
       #|index =  |- ((#=:fun(num,fun(num,bool)) (#index:fun(num,num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num)) (((#COND:fun(bool,fun(num,fun(num,num))) (#ODD:fun(num,bool) n:num)) (#NUMERAL:fun(num,num) #_0:num)) (#SUC:fun(num,num) (#index:fun(num,num) ((#DIV:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
