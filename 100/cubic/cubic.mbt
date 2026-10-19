@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// ccbrt
 fn step_2() -> Unit raise {
-  ccbrt_c.set(@pair.new_definition(@parser.parse_term("ccbrt(z) = if z = Cx(&0) then Cx(&0) else cexp(clog(z) / Cx(&3))")))
+  ccbrt_c.set(@pair.new_definition(@term_syntax.parse_term("(ccbrt : (Complex) -> Complex)((z : Complex)) == (if z == Cx(real_of_num(0)) { Cx(real_of_num(0)) } else { cexp(clog(z) / Cx(real_of_num(3))) })")))
 }
 
 ///|
@@ -25,13 +25,13 @@ pub fn ccbrt() -> @kernel.Thm {
 /// CCBRT
 fn step_3() -> Unit raise {
   let t6 = @simp.asm_simp_tac(@list.List([@complex_transc.cexp_clog()]))
-  let t5 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_field(@parser.parse_term("z / Cx(&3) + z / Cx(&3) + z / Cx(&3) = z"))]))
+  let t5 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_field(@term_syntax.parse_term("(z : Complex) / Cx(real_of_num(3)) + (z / Cx(real_of_num(3)) + z / Cx(real_of_num(3))) == z"))]))
   let t3 = @equal.gsym(@complex_transc.cexp_add())
-  let t4 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_field(@parser.parse_term("z pow 3 = z * z * z:complex")), t3]))
+  let t4 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_field(@term_syntax.parse_term("pow((z : Complex), 3) == z * (z * z)")), t3]))
   let t2 = @list.List([@tactics.conv_tac(@complexnumbers.complex_ring), @tactics.all_tac])
   let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([ccbrt()]))), @class.cond_cases_tac), t1), t2), t4), t5), t6)
-  ccbrt_v1_c.set(@tactics.prove(@parser.parse_term("forall z. ccbrt(z) pow 3 = z"), t7))
+  ccbrt_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, pow(ccbrt(z), 3) == z"), t7))
 }
 
 ///|
@@ -46,7 +46,7 @@ pub fn ccbrt_v1() -> @kernel.Thm {
 ///|
 /// CUBIC_REDUCTION
 fn step_4() -> Unit raise {
-  cubic_reduction_c.set(@complexnumbers.complex_field(@parser.parse_term("~(a = Cx(&0)) /\\\n   x = y - b / (Cx(&3) * a) /\\\n   p = (Cx(&3) * a * c - b pow 2) / (Cx(&9) * a pow 2) /\\\n   q = (Cx(&9) * a * b * c - Cx(&2) * b pow 3 - Cx(&27) * a pow 2 * d) /\n       (Cx(&54) * a pow 3)\n   ==> (a * x pow 3 + b * x pow 2 + c * x + d = Cx(&0) <=>\n        y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0))")))
+  cubic_reduction_c.set(@complexnumbers.complex_field(@term_syntax.parse_term("!((a : Complex) == Cx(real_of_num(0))) && (x : Complex) == (y : Complex) - (b : Complex) / (Cx(real_of_num(3)) * a) && (p : Complex) == (Cx(real_of_num(3)) * (a * (c : Complex)) - pow(b, 2)) / (Cx(real_of_num(9)) * pow(a, 2)) && (q : Complex) == (Cx(real_of_num(9)) * (a * (b * c)) - Cx(real_of_num(2)) * pow(b, 3) - Cx(real_of_num(27)) * (pow(a, 2) * (d : Complex))) / (Cx(real_of_num(54)) * pow(a, 3)) → (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d)) == Cx(real_of_num(0))) == (pow(y, 3) + (Cx(real_of_num(3)) * (p * y) - Cx(real_of_num(2)) * q) == Cx(real_of_num(0)))")))
 }
 
 ///|
@@ -61,7 +61,7 @@ pub fn cubic_reduction() -> @kernel.Thm {
 ///|
 /// CUBIC_BASIC
 fn step_5() -> Unit raise {
-  cubic_basic_c.set(@complexnumbers.complex_field(@parser.parse_term("forall i t s.\n    s pow 2 = q pow 2 + p pow 3 /\\\n    (s1 pow 3 = if p = Cx(&0) then Cx(&2) * q else q + s) /\\\n    s2 = --s1 * (Cx(&1) + i * t) / Cx(&2) /\\\n    s3 = --s1 * (Cx(&1) - i * t) / Cx(&2) /\\\n    i pow 2 + Cx(&1) = Cx(&0) /\\\n    t pow 2 = Cx(&3)\n    ==> if p = Cx(&0) then\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n           y = s1 \\/ y = s2 \\/ y = s3)\n        else\n          ~(s1 = Cx(&0)) /\\\n          (y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0) <=>\n               (y = s1 - p / s1 \\/ y = s2 - p / s2 \\/ y = s3 - p / s3))")))
+  cubic_basic_c.set(@complexnumbers.complex_field(@term_syntax.parse_term("∀ i : Complex, ∀ t : Complex, ∀ s : Complex, pow(s, 2) == pow((q : Complex), 2) + pow((p : Complex), 3) && pow((s1 : Complex), 3) == (if p == Cx(real_of_num(0)) { Cx(real_of_num(2)) * q } else { q + s }) && (s2 : Complex) == -s1 * ((Cx(real_of_num(1)) + i * t) / Cx(real_of_num(2))) && (s3 : Complex) == -s1 * ((Cx(real_of_num(1)) - i * t) / Cx(real_of_num(2))) && pow(i, 2) + Cx(real_of_num(1)) == Cx(real_of_num(0)) && pow(t, 2) == Cx(real_of_num(3)) → (if p == Cx(real_of_num(0)) { (pow((y : Complex), 3) + (Cx(real_of_num(3)) * (p * y) - Cx(real_of_num(2)) * q) == Cx(real_of_num(0))) == (y == s1 || y == s2 || y == s3) } else { !(s1 == Cx(real_of_num(0))) && (pow(y, 3) + (Cx(real_of_num(3)) * (p * y) - Cx(real_of_num(2)) * q) == Cx(real_of_num(0))) == (y == s1 - p / s1 || y == s2 - p / s2 || y == s3 - p / s3) })")))
 }
 
 ///|
@@ -83,30 +83,30 @@ fn step_6() -> Unit raise {
   let t32 = @list.List([@meson.asm_meson_tac(@list.List([@complex_transc.csqrt_v1()])), t31, t30, t29])
   let t27 = @tactics.repeat_tac(@tactics.conj_tac)
   let t26 = @simp.asm_rewrite_tac(@list.List([]))
-  let t23 = @parser.parse_term("csqrt (q pow 2 + p pow 3)")
-  let t24 = @parser.parse_term("csqrt(Cx(&3))")
+  let t23 = @term_syntax.parse_term("csqrt(pow((q : Complex), 2) + pow((p : Complex), 3))")
+  let t24 = @term_syntax.parse_term("csqrt(Cx(real_of_num(3)))")
   let t25 = @tactics.map_every(fn(x20 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s21 = @tactics.exists_tac(x20)
     fn(x22 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s21(x22)
     }
-  }, @list.List([@parser.parse_term("ii"), t24, t23]))
+  }, @list.List([@term_syntax.parse_term("ii"), t24, t23]))
   let t19 = @tactics.match_mp_tac(cubic_basic())
   let t18 = @simp.asm_rewrite_tac(@list.List([]))
-  let t17 = @simp.once_rewrite_tac(@list.List([@complexnumbers.complex_ring(@parser.parse_term("x = a - b <=> x + b = (a:complex)"))]))
+  let t17 = @simp.once_rewrite_tac(@list.List([@complexnumbers.complex_ring(@term_syntax.parse_term("((x : Complex) == (a : Complex) - (b : Complex)) == (x + b == a)"))]))
   let t15 = @tactics.conv_tac(@complexnumbers.complex_ring)
   let t14 = @analysis.expand_tac("y")
   let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t16 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(cubic_reduction()), t13), t14), t15), @tactics.all_tac])
-  let t12 = @tactics.subgoal_then(@parser.parse_term("a * x pow 3 + b * x pow 2 + c * x + d = Cx(&0) <=>\n    y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0)"), fn(x9 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t12 = @tactics.subgoal_then(@term_syntax.parse_term("((a : Complex) * pow((x : Complex), 3) + ((b : Complex) * pow(x, 2) + ((c : Complex) * x + (d : Complex))) == Cx(real_of_num(0))) == (pow((y : Complex), 3) + (Cx(real_of_num(3)) * ((p : Complex) * y) - Cx(real_of_num(2)) * (q : Complex)) == Cx(real_of_num(0)))"), fn(x9 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10 = @tactics.subst1_tac(x9)
     fn(x11 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s10(x11)
     }
   })
-  let t8 = @simp.abbrev_tac(@parser.parse_term("y = x + b / (Cx(&3) * a)"))
+  let t8 = @simp.abbrev_tac(@term_syntax.parse_term("(y : Complex) == (x : Complex) + (b : Complex) / (Cx(real_of_num(3)) * (a : Complex))"))
   let t33 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.repeat_tac(@pair.let_tac)), t8), t12), t16), t17), t18), t19), t25), t26), t27), t32)
-  cubic_c.set(@tactics.prove(@parser.parse_term("~(a = Cx(&0))\n   ==> let p = (Cx(&3) * a * c - b pow 2) / (Cx(&9) * a pow 2)\n       and q = (Cx(&9) * a * b * c - Cx(&2) * b pow 3 - Cx(&27) * a pow 2 * d) /\n               (Cx(&54) * a pow 3) in\n       let s = csqrt(q pow 2 + p pow 3) in\n       let s1 = if p = Cx(&0) then ccbrt(Cx(&2) * q) else ccbrt(q + s) in\n       let s2 = --s1 * (Cx(&1) + ii * csqrt(Cx(&3))) / Cx(&2)\n       and s3 = --s1 * (Cx(&1) - ii * csqrt(Cx(&3))) / Cx(&2) in\n       if p = Cx(&0) then\n         a * x pow 3 + b * x pow 2 + c * x + d = Cx(&0) <=>\n            x = s1 - b / (Cx(&3) * a) \\/\n            x = s2 - b / (Cx(&3) * a) \\/\n            x = s3 - b / (Cx(&3) * a)\n       else\n         ~(s1 = Cx(&0)) /\\\n         (a * x pow 3 + b * x pow 2 + c * x + d = Cx(&0) <=>\n             x = s1 - p / s1 - b / (Cx(&3) * a) \\/\n             x = s2 - p / s2 - b / (Cx(&3) * a) \\/\n             x = s3 - p / s3 - b / (Cx(&3) * a))"), t33))
+  cubic_c.set(@tactics.prove(@term_syntax.parse_term("!((a : Complex) == Cx(real_of_num(0))) → LET((p : Complex) => (q : Complex) => LET_END(LET((s : Complex) => LET_END(LET((s1 : Complex) => LET_END(LET((s2 : Complex) => (s3 : Complex) => LET_END(if p == Cx(real_of_num(0)) { (a * pow((x : Complex), 3) + ((b : Complex) * pow(x, 2) + ((c : Complex) * x + (d : Complex))) == Cx(real_of_num(0))) == (x == s1 - b / (Cx(real_of_num(3)) * a) || x == s2 - b / (Cx(real_of_num(3)) * a) || x == s3 - b / (Cx(real_of_num(3)) * a)) } else { !(s1 == Cx(real_of_num(0))) && (a * pow(x, 3) + (b * pow(x, 2) + (c * x + d)) == Cx(real_of_num(0))) == (x == s1 - p / s1 - b / (Cx(real_of_num(3)) * a) || x == s2 - p / s2 - b / (Cx(real_of_num(3)) * a) || x == s3 - p / s3 - b / (Cx(real_of_num(3)) * a)) }), -s1 * ((Cx(real_of_num(1)) + ii * csqrt(Cx(real_of_num(3)))) / Cx(real_of_num(2))), -s1 * ((Cx(real_of_num(1)) - ii * csqrt(Cx(real_of_num(3)))) / Cx(real_of_num(2))))), if p == Cx(real_of_num(0)) { ccbrt(Cx(real_of_num(2)) * q) } else { ccbrt(q + s) })), csqrt(pow(q, 2) + pow(p, 3)))), (Cx(real_of_num(3)) * (a * c) - pow(b, 2)) / (Cx(real_of_num(9)) * pow(a, 2)), (Cx(real_of_num(9)) * (a * (b * c)) - Cx(real_of_num(2)) * pow(b, 3) - Cx(real_of_num(27)) * (pow(a, 2) * d)) / (Cx(real_of_num(54)) * pow(a, 3)))"), t33))
 }
 
 ///|

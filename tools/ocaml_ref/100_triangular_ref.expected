@@ -8998,20 +8998,20 @@ Generating HOL version of proof
 5 basis elements and 0 critical pairs
 Generating HOL version of proof
 100/triangular quotations (14):
-  triangle n = (n * (n + 1)) DIV 2
-  EVEN(n * (n + 1))
-  &2 * x = y ==> x = y / &2
-  &(triangle n) = (&n * (&n + &1)) / &2
-  1 <= SUC n
-  forall n. sum(1..n) (\\k. &1 / &(triangle k)) = &2 - &2 / (&n + &1)
-  abs(&n + &1) = &n + &1
-  inv(&N)
-  abs(x - y - x) = abs y
-  2 * N + 1
-  N:num
-  forall e. &0 < e\n       ==> ?N. forall n. n >= N\n                   ==> abs(sum(1..n) (\\k. &1 / &(triangle k)) - &2) < e
-  (tends_num_real)
-  (\\n. sum(1..n) (\\k. &1 / &(triangle k))) --> &2
+  (triangle : (Num) -> Num)((n : Num)) == DIV(n * (n + 1), 2)
+  EVEN((n : Num) * (n + 1))
+  real_of_num(2) * (x : Real) == (y : Real) \226\134\146 x == y / real_of_num(2)
+  real_of_num(triangle((n : Num))) == real_of_num(n) * (real_of_num(n) + real_of_num(1)) / real_of_num(2)
+  1 <= SUC((n : Num))
+  \226\136\128 n : Num, sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / real_of_num(triangle(k))) == real_of_num(2) - real_of_num(2) / (real_of_num(n) + real_of_num(1))
+  abs(real_of_num((n : Num)) + real_of_num(1)) == real_of_num(n) + real_of_num(1)
+  inv(real_of_num((N : Num)))
+  abs((x : Real) - (y : Real) - x) == abs(y)
+  2 * (N : Num) + 1
+  (N : Num)
+  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, n >= N \226\134\146 abs(sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / real_of_num(triangle(k))) - real_of_num(2)) < e)
+  tends_num_real
+  tends_num_real((n : Num) => sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / real_of_num(triangle(k))), real_of_num(2))
 triangle =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#triangle:fun(num,num) n:num)) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
 REAL_TRIANGLE =  |- ((#=:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#triangle:fun(num,num) n:num))) ((#real_div:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
 TRIANGLE_FINITE_SUM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\k:num. ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#triangle:fun(num,num) k:num)))))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

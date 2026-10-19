@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// triangle
 fn step_2() -> Unit raise {
-  triangle_c.set(@pair.new_definition(@parser.parse_term("triangle n = (n * (n + 1)) DIV 2")))
+  triangle_c.set(@pair.new_definition(@term_syntax.parse_term("(triangle : (Num) -> Num)((n : Num)) == DIV(n * (n + 1), 2)")))
 }
 
 ///|
@@ -30,15 +30,15 @@ fn step_3() -> Unit raise {
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.even_exists()])), @tactics.strip_tac), t7), @tactics.ap_term_tac), t8), t9)
   let t6 = @tactics.conv_tac(@class.taut)
   let t11 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.even_mult(), @arith.even_add(), @calc_num.arith()])), t6), t10])
-  let t5 = @tactics.subgoal_then(@parser.parse_term("EVEN(n * (n + 1))"), fn(x2 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5 = @tactics.subgoal_then(@term_syntax.parse_term("EVEN((n : Num) * (n + 1))"), fn(x2 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s3 = @tactics.mp_tac(x2)
     fn(x4 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s3(x4)
     }
   })
   let t1 = @simp.rewrite_tac(@list.List([triangle(), @realax.real_of_num_mul(), @realax.real_of_num_add(), @realax.real_of_num_eq()]))
-  let t12 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("&2 * x = y ==> x = y / &2"))), t1), t5), t11)
-  real_triangle_c.set(@tactics.prove(@parser.parse_term("&(triangle n) = (&n * (&n + &1)) / &2"), t12))
+  let t12 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(2) * (x : Real) == (y : Real) → x == y / real_of_num(2)"))), t1), t5), t11)
+  real_triangle_c.set(@tactics.prove(@term_syntax.parse_term("real_of_num(triangle((n : Num))) == real_of_num(n) * (real_of_num(n) + real_of_num(1)) / real_of_num(2)"), t12))
 }
 
 ///|
@@ -56,8 +56,8 @@ fn step_4() -> Unit raise {
   let t15 = @tactics.conv_tac(@calc_rat.real_field)
   let t14 = @simp.rewrite_tac(@list.List([real_triangle(), @equal.gsym(@real.real_of_num_suc())]))
   let t13 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
-  let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @calc_num.arith_eq(), @int.arith_rule(@parser.parse_term("1 <= SUC n"))]))), t13), t14), t15)
-  triangle_finite_sum_c.set(@tactics.prove(@parser.parse_term("forall n. sum(1..n) (\\k. &1 / &(triangle k)) = &2 - &2 / (&n + &1)"), t16))
+  let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.sum_clauses_numseg(), @calc_num.arith_eq(), @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))"))]))), t13), t14), t15)
+  triangle_finite_sum_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / real_of_num(triangle(k))) == real_of_num(2) - real_of_num(2) / (real_of_num(n) + real_of_num(1))"), t16))
 }
 
 ///|
@@ -81,25 +81,25 @@ fn step_5() -> Unit raise {
     })(((x36 : @list.List[@kernel.Thm]) => @lib.end_itlist(@bool.conj, x36))(x37))
   })
   let t32 = @simp.rewrite_tac(@list.List([@realax.real_of_num_add(), @realax.real_of_num_mul(), @realax.real_of_num_le()]))
-  let t31 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("abs(&n + &1) = &n + &1"))]))
+  let t31 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("abs(real_of_num((n : Num)) + real_of_num(1)) == real_of_num(n) + real_of_num(1)"))]))
   let t30 = @simp.simp_tac(@list.List([@real.real_le_rdiv_eq(), @real.real_of_num_lt(), @calc_num.arith()]))
   let t29 = @tactics.match_mp_tac(@real.real_le_inv2())
   let t28 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@real.real_inv_div())]))
   let t27 = @simp.asm_simp_tac(@list.List([@real.real_abs_div(), @calc_int.real_abs_num()]))
-  let t26 = @tactics.exists_tac(@parser.parse_term("inv(&N)"))
+  let t26 = @tactics.exists_tac(@term_syntax.parse_term("inv(real_of_num((N : Num)))"))
   let t25 = @tactics.match_mp_tac(@realarith.real_let_trans())
-  let t24 = @simp.rewrite_tac(@list.List([triangle_finite_sum(), @calc_rat.real_arith(@parser.parse_term("abs(x - y - x) = abs y"))]))
+  let t24 = @simp.rewrite_tac(@list.List([triangle_finite_sum(), @calc_rat.real_arith(@term_syntax.parse_term("abs((x : Real) - (y : Real) - x) == abs(y)"))]))
   let t23 = @tactics.repeat_tac(@tactics.strip_tac)
   let t22 = @simp.rewrite_tac(@list.List([@arith.ge()]))
-  let t21 = @tactics.exists_tac(@parser.parse_term("2 * N + 1"))
-  let t20 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("N:num"))(@tactics.strip_assume_tac))
+  let t21 = @tactics.exists_tac(@term_syntax.parse_term("2 * (N : Num) + 1"))
+  let t20 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(N : Num)"))(@tactics.strip_assume_tac))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.gen_rewrite_tac(fn(x17 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s18 = @equal.land_conv(x17)
     fn(x19 : @kernel.Term) -> @kernel.Thm raise {
       s18(x19)
     }
   }, @list.List([@real.real_arch_inv()]))), t20), t21), t22), t23), t24), t25), t26), t27), t28), t29), t30), t31), t32), t38), @int.arith_tac)
-  triangle_converges_c.set(@tactics.prove(@parser.parse_term("forall e. &0 < e\n       ==> ?N. forall n. n >= N\n                   ==> abs(sum(1..n) (\\k. &1 / &(triangle k)) - &2) < e"), t39))
+  triangle_converges_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Real, real_of_num(0) < e → (∃ N : Num, ∀ n : Num, n >= N → abs(sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / real_of_num(triangle(k))) - real_of_num(2)) < e)"), t39))
 }
 
 ///|
@@ -114,14 +114,14 @@ pub fn triangle_converges() -> @kernel.Thm {
 ///|
 /// 100/triangular.ml:66
 fn step_6() -> Unit raise {
-  @preterm.override_interface("-->", @parser.parse_term("(tends_num_real)"))
+  @preterm.override_interface("-->", @term_syntax.parse_term("tends_num_real"))
 }
 
 ///|
 /// TRIANGLE_CONVERGES'
 fn step_7() -> Unit raise {
   let t40 = @simp.rewrite_tac(@list.List([@analysis.seq(), triangle_converges()]))
-  triangle_converges_p_c.set(@tactics.prove(@parser.parse_term("(\\n. sum(1..n) (\\k. &1 / &(triangle k))) --> &2"), t40))
+  triangle_converges_p_c.set(@tactics.prove(@term_syntax.parse_term("tends_num_real((n : Num) => sum(op_dot_dot(1, n), (k : Num) => real_of_num(1) / real_of_num(triangle(k))), real_of_num(2))"), t40))
 }
 
 ///|
