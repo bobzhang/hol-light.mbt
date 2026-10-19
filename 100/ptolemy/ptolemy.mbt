@@ -20,15 +20,15 @@ pub fn dot_vector() -> @kernel.Thm {
 /// DIST_SEGMENT_LEMMA
 fn step_2() -> Unit raise {
   let t18 = @tactics.conv_tac(@calc_rat.real_ring)
-  let t17 = @tactics.mp_tac(@bool.spec(@parser.parse_term("a2 / &2"), @transcendentals.sin_circle()))
-  let t16 = @tactics.mp_tac(@bool.spec(@parser.parse_term("a1 / &2"), @transcendentals.sin_circle()))
+  let t17 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(a2 : Real) / real_of_num(2)"), @transcendentals.sin_circle()))
+  let t16 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(a1 : Real) / real_of_num(2)"), @transcendentals.sin_circle()))
   let t15 = @simp.rewrite_tac(@list.List([@transcendentals.sin_sub(), @transcendentals.sin_double(), @transcendentals.cos_double()]))
-  let t14 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(&2 * x - &2 * y) / &2 = x - y"))]))
-  let t13 = @tactics.subst1_tac(@calc_rat.real_arith(@parser.parse_term("a2 = &2 * a2 / &2")))
-  let t12 = @tactics.subst1_tac(@calc_rat.real_arith(@parser.parse_term("a1 = &2 * a1 / &2")))
+  let t14 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(real_of_num(2) * (x : Real) - real_of_num(2) * (y : Real)) / real_of_num(2) == x - y"))]))
+  let t13 = @tactics.subst1_tac(@calc_rat.real_arith(@term_syntax.parse_term("(a2 : Real) == real_of_num(2) * (a2 / real_of_num(2))")))
+  let t12 = @tactics.subst1_tac(@calc_rat.real_arith(@term_syntax.parse_term("(a1 : Real) == real_of_num(2) * (a1 / real_of_num(2))")))
   let t11 = @simp.rewrite_tac(@list.List([@vectors.dot_lsub(), @vectors.dot_rsub(), dot_vector()]))
-  let t10 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@parser.parse_term("(r % x) dot (r % x) = (r pow 2) * (x dot x)"))]))
-  let t9 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@parser.parse_term("(c + r % x) - (c + r % y) = r % (x - y)"))]))
+  let t10 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("dot(op_pct((r : Real), (x : Cart[Real, _])), op_pct(r, x)) == pow(r, 2) * dot(x, x)"))]))
+  let t9 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("(c : Cart[Real, Tybit0[Unit]]) + op_pct((r : Real), (x : Cart[Real, Tybit0[Unit]])) - (c + op_pct(r, (y : Cart[Real, Tybit0[Unit]]))) == op_pct(r, x - y)"))]))
   let t7 = @tactics.match_mp_tac(@transcendentals.sin_pos_pi_le())
   let t6 = @simp.asm_rewrite_tac(@list.List([]))
   let t5 = @tactics.match_mp_tac(@realax.real_le_mul())
@@ -37,7 +37,7 @@ fn step_2() -> Unit raise {
   let t3 = @tactics.match_mp_tac(@real.sqrt_unique())
   let t2 = @simp.rewrite_tac(@list.List([@vectors.dist(), @vectors.vector_norm()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2), t3), @tactics.conj_tac), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18)
-  dist_segment_lemma_c.set(@tactics.prove(@parser.parse_term("forall a1 a2. &0 <= a1 /\\ a1 <= a2 /\\ a2 <= &2 * pi /\\ &0 <= radius\n           ==> dist(centre + radius % vector [cos(a1);sin(a1)] :real^2,\n                    centre + radius % vector [cos(a2);sin(a2)]) =\n               &2 * radius *  sin((a2 - a1) / &2)"), t19))
+  dist_segment_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ a1 : Real, ∀ a2 : Real, real_of_num(0) <= a1 && a1 <= a2 && a2 <= real_of_num(2) * pi && real_of_num(0) <= (radius : Real) → dist(((centre : Cart[Real, Tybit0[Unit]]) + op_pct(radius, vector([cos(a1), sin(a1)])), centre + op_pct(radius, vector([cos(a2), sin(a2)])))) == real_of_num(2) * (radius * sin((a2 - a1) / real_of_num(2)))"), t19))
 }
 
 ///|
@@ -54,14 +54,14 @@ pub fn dist_segment_lemma() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t49 = @tactics.conv_tac(@calc_rat.real_ring)
   let t48 = @simp.rewrite_tac(@list.List([@transcendentals.sin_sub(), @transcendentals.sin_add(), @transcendentals.cos_add(), @transcendentals.sin_pi(), @transcendentals.cos_pi()]))
-  let t44 = @parser.parse_term("d / &2")
-  let t45 = @parser.parse_term("c / &2")
-  let t46 = @parser.parse_term("b / &2")
+  let t44 = @term_syntax.parse_term("(d : Real) / real_of_num(2)")
+  let t45 = @term_syntax.parse_term("(c : Real) / real_of_num(2)")
+  let t46 = @term_syntax.parse_term("(b : Real) / real_of_num(2)")
   let t47 = @tactics.map_every(fn(x42 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_2 = x42
     @tactics.mp_tac(@bool.spec(t_2, @transcendentals.sin_circle()))
-  }, @list.List([@parser.parse_term("a / &2"), t46, t45, t44]))
-  let t41 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(x - y) / &2 = x / &2 - y / &2"))]))
+  }, @list.List([@term_syntax.parse_term("(a : Real) / real_of_num(2)"), t46, t45, t44]))
+  let t41 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("((x : Real) - (y : Real)) / real_of_num(2) == x / real_of_num(2) - y / real_of_num(2)"))]))
   let t40 = @tactics.repeat_tac(fn(x39 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     (fn(x30 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let (asl, w) = x30
@@ -99,7 +99,7 @@ fn step_3() -> Unit raise {
     }, x27))(x28))
   }))
   let t50 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), t40), t41), t47), t48), t49)
-  ptolemy_c.set(@tactics.prove(@parser.parse_term("forall A B C D:real^2 a b c d centre radius.\n        A = centre + radius % vector [cos(a);sin(a)] /\\\n        B = centre + radius % vector [cos(b);sin(b)] /\\\n        C = centre + radius % vector [cos(c);sin(c)] /\\\n        D = centre + radius % vector [cos(d);sin(d)] /\\\n        &0 <= radius /\\\n        &0 <= a /\\ a <= b /\\ b <= c /\\ c <= d /\\ d <= &2 * pi\n        ==> dist(A,C) * dist(B,D) =\n            dist(A,B) * dist(C,D) + dist(A,D) * dist(B,C)"), t50))
+  ptolemy_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ D : Cart[Real, Tybit0[Unit]], ∀ a : Real, ∀ b : Real, ∀ c : Real, ∀ d : Real, ∀ centre : Cart[Real, Tybit0[Unit]], ∀ radius : Real, A == centre + op_pct(radius, vector([cos(a), sin(a)])) && B == centre + op_pct(radius, vector([cos(b), sin(b)])) && C == centre + op_pct(radius, vector([cos(c), sin(c)])) && D == centre + op_pct(radius, vector([cos(d), sin(d)])) && real_of_num(0) <= radius && real_of_num(0) <= a && a <= b && b <= c && c <= d && d <= real_of_num(2) * pi → dist((A, C)) * dist((B, D)) == dist((A, B)) * dist((C, D)) + dist((A, D)) * dist((B, C))"), t50))
 }
 
 ///|
