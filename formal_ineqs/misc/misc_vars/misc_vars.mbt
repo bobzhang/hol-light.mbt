@@ -125,7 +125,7 @@ fn step_1() -> Unit raise {
 ///|
 /// s_var_bool
 fn step_2() -> Unit raise {
-  s_var_bool_c.set(standardize_tm(@parser.parse_term("s:bool")))
+  s_var_bool_c.set(standardize_tm(@term_syntax.parse_term("(s : Bool)")))
 }
 
 ///|
@@ -140,7 +140,7 @@ pub fn s_var_bool() -> @kernel.Term {
 ///|
 /// s1_var_bool
 fn step_3() -> Unit raise {
-  s1_var_bool_c.set(standardize_tm(@parser.parse_term("s1:bool")))
+  s1_var_bool_c.set(standardize_tm(@term_syntax.parse_term("(s1 : Bool)")))
 }
 
 ///|
@@ -155,7 +155,7 @@ pub fn s1_var_bool() -> @kernel.Term {
 ///|
 /// s2_var_bool
 fn step_4() -> Unit raise {
-  s2_var_bool_c.set(standardize_tm(@parser.parse_term("s2:bool")))
+  s2_var_bool_c.set(standardize_tm(@term_syntax.parse_term("(s2 : Bool)")))
 }
 
 ///|
@@ -170,7 +170,7 @@ pub fn s2_var_bool() -> @kernel.Term {
 ///|
 /// n_var_num
 fn step_5() -> Unit raise {
-  n_var_num_c.set(standardize_tm(@parser.parse_term("n:num")))
+  n_var_num_c.set(standardize_tm(@term_syntax.parse_term("(n : Num)")))
 }
 
 ///|
@@ -185,7 +185,7 @@ pub fn n_var_num() -> @kernel.Term {
 ///|
 /// m_var_num
 fn step_6() -> Unit raise {
-  m_var_num_c.set(standardize_tm(@parser.parse_term("m:num")))
+  m_var_num_c.set(standardize_tm(@term_syntax.parse_term("(m : Num)")))
 }
 
 ///|
@@ -200,7 +200,7 @@ pub fn m_var_num() -> @kernel.Term {
 ///|
 /// t_var_num
 fn step_7() -> Unit raise {
-  t_var_num_c.set(standardize_tm(@parser.parse_term("t:num")))
+  t_var_num_c.set(standardize_tm(@term_syntax.parse_term("(t : Num)")))
 }
 
 ///|
@@ -215,7 +215,7 @@ pub fn t_var_num() -> @kernel.Term {
 ///|
 /// p_var_num
 fn step_8() -> Unit raise {
-  p_var_num_c.set(standardize_tm(@parser.parse_term("p:num")))
+  p_var_num_c.set(standardize_tm(@term_syntax.parse_term("(p : Num)")))
 }
 
 ///|
@@ -230,7 +230,7 @@ pub fn p_var_num() -> @kernel.Term {
 ///|
 /// q_var_num
 fn step_9() -> Unit raise {
-  q_var_num_c.set(standardize_tm(@parser.parse_term("q:num")))
+  q_var_num_c.set(standardize_tm(@term_syntax.parse_term("(q : Num)")))
 }
 
 ///|
@@ -245,7 +245,7 @@ pub fn q_var_num() -> @kernel.Term {
 ///|
 /// k_var_num
 fn step_10() -> Unit raise {
-  k_var_num_c.set(standardize_tm(@parser.parse_term("k:num")))
+  k_var_num_c.set(standardize_tm(@term_syntax.parse_term("(k : Num)")))
 }
 
 ///|
@@ -260,7 +260,7 @@ pub fn k_var_num() -> @kernel.Term {
 ///|
 /// e_var_num
 fn step_11() -> Unit raise {
-  e_var_num_c.set(standardize_tm(@parser.parse_term("e:num")))
+  e_var_num_c.set(standardize_tm(@term_syntax.parse_term("(e : Num)")))
 }
 
 ///|
@@ -275,7 +275,7 @@ pub fn e_var_num() -> @kernel.Term {
 ///|
 /// e1_var_num
 fn step_12() -> Unit raise {
-  e1_var_num_c.set(standardize_tm(@parser.parse_term("e1:num")))
+  e1_var_num_c.set(standardize_tm(@term_syntax.parse_term("(e1 : Num)")))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn e1_var_num() -> @kernel.Term {
 ///|
 /// e2_var_num
 fn step_13() -> Unit raise {
-  e2_var_num_c.set(standardize_tm(@parser.parse_term("e2:num")))
+  e2_var_num_c.set(standardize_tm(@term_syntax.parse_term("(e2 : Num)")))
 }
 
 ///|
@@ -305,7 +305,7 @@ pub fn e2_var_num() -> @kernel.Term {
 ///|
 /// r_var_num
 fn step_14() -> Unit raise {
-  r_var_num_c.set(standardize_tm(@parser.parse_term("r:num")))
+  r_var_num_c.set(standardize_tm(@term_syntax.parse_term("(r : Num)")))
 }
 
 ///|
@@ -320,7 +320,7 @@ pub fn r_var_num() -> @kernel.Term {
 ///|
 /// r1_var_num
 fn step_15() -> Unit raise {
-  r1_var_num_c.set(standardize_tm(@parser.parse_term("r1:num")))
+  r1_var_num_c.set(standardize_tm(@term_syntax.parse_term("(r1 : Num)")))
 }
 
 ///|
@@ -335,7 +335,7 @@ pub fn r1_var_num() -> @kernel.Term {
 ///|
 /// r2_var_num
 fn step_16() -> Unit raise {
-  r2_var_num_c.set(standardize_tm(@parser.parse_term("r2:num")))
+  r2_var_num_c.set(standardize_tm(@term_syntax.parse_term("(r2 : Num)")))
 }
 
 ///|
@@ -350,7 +350,7 @@ pub fn r2_var_num() -> @kernel.Term {
 ///|
 /// n1_var_num
 fn step_17() -> Unit raise {
-  n1_var_num_c.set(standardize_tm(@parser.parse_term("n1:num")))
+  n1_var_num_c.set(standardize_tm(@term_syntax.parse_term("(n1 : Num)")))
 }
 
 ///|
@@ -365,7 +365,7 @@ pub fn n1_var_num() -> @kernel.Term {
 ///|
 /// n2_var_num
 fn step_18() -> Unit raise {
-  n2_var_num_c.set(standardize_tm(@parser.parse_term("n2:num")))
+  n2_var_num_c.set(standardize_tm(@term_syntax.parse_term("(n2 : Num)")))
 }
 
 ///|
@@ -380,7 +380,7 @@ pub fn n2_var_num() -> @kernel.Term {
 ///|
 /// m1_var_num
 fn step_19() -> Unit raise {
-  m1_var_num_c.set(standardize_tm(@parser.parse_term("m1:num")))
+  m1_var_num_c.set(standardize_tm(@term_syntax.parse_term("(m1 : Num)")))
 }
 
 ///|
@@ -395,7 +395,7 @@ pub fn m1_var_num() -> @kernel.Term {
 ///|
 /// m2_var_num
 fn step_20() -> Unit raise {
-  m2_var_num_c.set(standardize_tm(@parser.parse_term("m2:num")))
+  m2_var_num_c.set(standardize_tm(@term_syntax.parse_term("(m2 : Num)")))
 }
 
 ///|
@@ -410,7 +410,7 @@ pub fn m2_var_num() -> @kernel.Term {
 ///|
 /// x_var_num
 fn step_21() -> Unit raise {
-  x_var_num_c.set(standardize_tm(@parser.parse_term("x:num")))
+  x_var_num_c.set(standardize_tm(@term_syntax.parse_term("(x : Num)")))
 }
 
 ///|
@@ -425,7 +425,7 @@ pub fn x_var_num() -> @kernel.Term {
 ///|
 /// y_var_num
 fn step_22() -> Unit raise {
-  y_var_num_c.set(standardize_tm(@parser.parse_term("y:num")))
+  y_var_num_c.set(standardize_tm(@term_syntax.parse_term("(y : Num)")))
 }
 
 ///|
@@ -440,7 +440,7 @@ pub fn y_var_num() -> @kernel.Term {
 ///|
 /// i_var_num
 fn step_23() -> Unit raise {
-  i_var_num_c.set(standardize_tm(@parser.parse_term("i:num")))
+  i_var_num_c.set(standardize_tm(@term_syntax.parse_term("(i : Num)")))
 }
 
 ///|
@@ -455,7 +455,7 @@ pub fn i_var_num() -> @kernel.Term {
 ///|
 /// j_var_num
 fn step_24() -> Unit raise {
-  j_var_num_c.set(standardize_tm(@parser.parse_term("j:num")))
+  j_var_num_c.set(standardize_tm(@term_syntax.parse_term("(j : Num)")))
 }
 
 ///|
@@ -470,7 +470,7 @@ pub fn j_var_num() -> @kernel.Term {
 ///|
 /// x_var_real
 fn step_25() -> Unit raise {
-  x_var_real_c.set(standardize_tm(@parser.parse_term("x : real")))
+  x_var_real_c.set(standardize_tm(@term_syntax.parse_term("(x : Real)")))
 }
 
 ///|
@@ -485,7 +485,7 @@ pub fn x_var_real() -> @kernel.Term {
 ///|
 /// y_var_real
 fn step_26() -> Unit raise {
-  y_var_real_c.set(standardize_tm(@parser.parse_term("y : real")))
+  y_var_real_c.set(standardize_tm(@term_syntax.parse_term("(y : Real)")))
 }
 
 ///|
@@ -500,7 +500,7 @@ pub fn y_var_real() -> @kernel.Term {
 ///|
 /// z_var_real
 fn step_27() -> Unit raise {
-  z_var_real_c.set(standardize_tm(@parser.parse_term("z : real")))
+  z_var_real_c.set(standardize_tm(@term_syntax.parse_term("(z : Real)")))
 }
 
 ///|
@@ -515,7 +515,7 @@ pub fn z_var_real() -> @kernel.Term {
 ///|
 /// w_var_real
 fn step_28() -> Unit raise {
-  w_var_real_c.set(standardize_tm(@parser.parse_term("w : real")))
+  w_var_real_c.set(standardize_tm(@term_syntax.parse_term("(w : Real)")))
 }
 
 ///|
@@ -530,7 +530,7 @@ pub fn w_var_real() -> @kernel.Term {
 ///|
 /// a_var_real
 fn step_29() -> Unit raise {
-  a_var_real_c.set(standardize_tm(@parser.parse_term("a : real")))
+  a_var_real_c.set(standardize_tm(@term_syntax.parse_term("(a : Real)")))
 }
 
 ///|
@@ -545,7 +545,7 @@ pub fn a_var_real() -> @kernel.Term {
 ///|
 /// b_var_real
 fn step_30() -> Unit raise {
-  b_var_real_c.set(standardize_tm(@parser.parse_term("b : real")))
+  b_var_real_c.set(standardize_tm(@term_syntax.parse_term("(b : Real)")))
 }
 
 ///|
@@ -560,7 +560,7 @@ pub fn b_var_real() -> @kernel.Term {
 ///|
 /// a1_var_real
 fn step_31() -> Unit raise {
-  a1_var_real_c.set(standardize_tm(@parser.parse_term("a1 : real")))
+  a1_var_real_c.set(standardize_tm(@term_syntax.parse_term("(a1 : Real)")))
 }
 
 ///|
@@ -575,7 +575,7 @@ pub fn a1_var_real() -> @kernel.Term {
 ///|
 /// a2_var_real
 fn step_32() -> Unit raise {
-  a2_var_real_c.set(standardize_tm(@parser.parse_term("a2 : real")))
+  a2_var_real_c.set(standardize_tm(@term_syntax.parse_term("(a2 : Real)")))
 }
 
 ///|
@@ -590,7 +590,7 @@ pub fn a2_var_real() -> @kernel.Term {
 ///|
 /// b1_var_real
 fn step_33() -> Unit raise {
-  b1_var_real_c.set(standardize_tm(@parser.parse_term("b1 : real")))
+  b1_var_real_c.set(standardize_tm(@term_syntax.parse_term("(b1 : Real)")))
 }
 
 ///|
@@ -605,7 +605,7 @@ pub fn b1_var_real() -> @kernel.Term {
 ///|
 /// b2_var_real
 fn step_34() -> Unit raise {
-  b2_var_real_c.set(standardize_tm(@parser.parse_term("b2 : real")))
+  b2_var_real_c.set(standardize_tm(@term_syntax.parse_term("(b2 : Real)")))
 }
 
 ///|
@@ -620,7 +620,7 @@ pub fn b2_var_real() -> @kernel.Term {
 ///|
 /// c_var_real
 fn step_35() -> Unit raise {
-  c_var_real_c.set(standardize_tm(@parser.parse_term("c : real")))
+  c_var_real_c.set(standardize_tm(@term_syntax.parse_term("(c : Real)")))
 }
 
 ///|
@@ -635,7 +635,7 @@ pub fn c_var_real() -> @kernel.Term {
 ///|
 /// d_var_real
 fn step_36() -> Unit raise {
-  d_var_real_c.set(standardize_tm(@parser.parse_term("d : real")))
+  d_var_real_c.set(standardize_tm(@term_syntax.parse_term("(d : Real)")))
 }
 
 ///|
@@ -650,7 +650,7 @@ pub fn d_var_real() -> @kernel.Term {
 ///|
 /// h_var_real
 fn step_37() -> Unit raise {
-  h_var_real_c.set(standardize_tm(@parser.parse_term("h : real")))
+  h_var_real_c.set(standardize_tm(@term_syntax.parse_term("(h : Real)")))
 }
 
 ///|
@@ -665,7 +665,7 @@ pub fn h_var_real() -> @kernel.Term {
 ///|
 /// m_var_real
 fn step_38() -> Unit raise {
-  m_var_real_c.set(standardize_tm(@parser.parse_term("m : real")))
+  m_var_real_c.set(standardize_tm(@term_syntax.parse_term("(m : Real)")))
 }
 
 ///|
@@ -680,7 +680,7 @@ pub fn m_var_real() -> @kernel.Term {
 ///|
 /// n_var_real
 fn step_39() -> Unit raise {
-  n_var_real_c.set(standardize_tm(@parser.parse_term("n : real")))
+  n_var_real_c.set(standardize_tm(@term_syntax.parse_term("(n : Real)")))
 }
 
 ///|
@@ -695,7 +695,7 @@ pub fn n_var_real() -> @kernel.Term {
 ///|
 /// r_var_real
 fn step_40() -> Unit raise {
-  r_var_real_c.set(standardize_tm(@parser.parse_term("r : real")))
+  r_var_real_c.set(standardize_tm(@term_syntax.parse_term("(r : Real)")))
 }
 
 ///|
@@ -710,7 +710,7 @@ pub fn r_var_real() -> @kernel.Term {
 ///|
 /// x1_var_real
 fn step_41() -> Unit raise {
-  x1_var_real_c.set(standardize_tm(@parser.parse_term("x1 : real")))
+  x1_var_real_c.set(standardize_tm(@term_syntax.parse_term("(x1 : Real)")))
 }
 
 ///|
@@ -725,7 +725,7 @@ pub fn x1_var_real() -> @kernel.Term {
 ///|
 /// x2_var_real
 fn step_42() -> Unit raise {
-  x2_var_real_c.set(standardize_tm(@parser.parse_term("x2 : real")))
+  x2_var_real_c.set(standardize_tm(@term_syntax.parse_term("(x2 : Real)")))
 }
 
 ///|
@@ -740,7 +740,7 @@ pub fn x2_var_real() -> @kernel.Term {
 ///|
 /// y1_var_real
 fn step_43() -> Unit raise {
-  y1_var_real_c.set(standardize_tm(@parser.parse_term("y1 : real")))
+  y1_var_real_c.set(standardize_tm(@term_syntax.parse_term("(y1 : Real)")))
 }
 
 ///|
@@ -755,7 +755,7 @@ pub fn y1_var_real() -> @kernel.Term {
 ///|
 /// y2_var_real
 fn step_44() -> Unit raise {
-  y2_var_real_c.set(standardize_tm(@parser.parse_term("y2 : real")))
+  y2_var_real_c.set(standardize_tm(@term_syntax.parse_term("(y2 : Real)")))
 }
 
 ///|
@@ -770,7 +770,7 @@ pub fn y2_var_real() -> @kernel.Term {
 ///|
 /// f1_var_real
 fn step_45() -> Unit raise {
-  f1_var_real_c.set(standardize_tm(@parser.parse_term("f1 : real")))
+  f1_var_real_c.set(standardize_tm(@term_syntax.parse_term("(f1 : Real)")))
 }
 
 ///|
@@ -785,7 +785,7 @@ pub fn f1_var_real() -> @kernel.Term {
 ///|
 /// f2_var_real
 fn step_46() -> Unit raise {
-  f2_var_real_c.set(standardize_tm(@parser.parse_term("f2 : real")))
+  f2_var_real_c.set(standardize_tm(@term_syntax.parse_term("(f2 : Real)")))
 }
 
 ///|
@@ -800,7 +800,7 @@ pub fn f2_var_real() -> @kernel.Term {
 ///|
 /// f_var_fun
 fn step_47() -> Unit raise {
-  f_var_fun_c.set(standardize_tm(@parser.parse_term("f : real->real")))
+  f_var_fun_c.set(standardize_tm(@term_syntax.parse_term("(f : (Real) -> Real)")))
 }
 
 ///|
@@ -815,7 +815,7 @@ pub fn f_var_fun() -> @kernel.Term {
 ///|
 /// g_var_fun
 fn step_48() -> Unit raise {
-  g_var_fun_c.set(standardize_tm(@parser.parse_term("g : real->real")))
+  g_var_fun_c.set(standardize_tm(@term_syntax.parse_term("(g : (Real) -> Real)")))
 }
 
 ///|
@@ -830,7 +830,7 @@ pub fn g_var_fun() -> @kernel.Term {
 ///|
 /// f1_var_fun
 fn step_49() -> Unit raise {
-  f1_var_fun_c.set(standardize_tm(@parser.parse_term("f1 : real->real")))
+  f1_var_fun_c.set(standardize_tm(@term_syntax.parse_term("(f1 : (Real) -> Real)")))
 }
 
 ///|
@@ -845,7 +845,7 @@ pub fn f1_var_fun() -> @kernel.Term {
 ///|
 /// f2_var_fun
 fn step_50() -> Unit raise {
-  f2_var_fun_c.set(standardize_tm(@parser.parse_term("f2 : real->real")))
+  f2_var_fun_c.set(standardize_tm(@term_syntax.parse_term("(f2 : (Real) -> Real)")))
 }
 
 ///|
@@ -860,7 +860,7 @@ pub fn f2_var_fun() -> @kernel.Term {
 ///|
 /// int_var
 fn step_51() -> Unit raise {
-  int_var_c.set(standardize_tm(@parser.parse_term("int : real#real")))
+  int_var_c.set(standardize_tm(@term_syntax.parse_term("(int : (Real, Real))")))
 }
 
 ///|
@@ -875,7 +875,7 @@ pub fn int_var() -> @kernel.Term {
 ///|
 /// f_bounds_var
 fn step_52() -> Unit raise {
-  f_bounds_var_c.set(standardize_tm(@parser.parse_term("f_bounds : real#real")))
+  f_bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(f_bounds : (Real, Real))")))
 }
 
 ///|
@@ -890,7 +890,7 @@ pub fn f_bounds_var() -> @kernel.Term {
 ///|
 /// df_bounds_var
 fn step_53() -> Unit raise {
-  df_bounds_var_c.set(standardize_tm(@parser.parse_term("df_bounds : real#real")))
+  df_bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(df_bounds : (Real, Real))")))
 }
 
 ///|
@@ -905,7 +905,7 @@ pub fn df_bounds_var() -> @kernel.Term {
 ///|
 /// dd_bounds_var
 fn step_54() -> Unit raise {
-  dd_bounds_var_c.set(standardize_tm(@parser.parse_term("dd_bounds : real#real")))
+  dd_bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(dd_bounds : (Real, Real))")))
 }
 
 ///|
@@ -920,7 +920,7 @@ pub fn dd_bounds_var() -> @kernel.Term {
 ///|
 /// x_lo_var
 fn step_55() -> Unit raise {
-  x_lo_var_c.set(standardize_tm(@parser.parse_term("x_lo : real")))
+  x_lo_var_c.set(standardize_tm(@term_syntax.parse_term("(x_lo : Real)")))
 }
 
 ///|
@@ -935,7 +935,7 @@ pub fn x_lo_var() -> @kernel.Term {
 ///|
 /// x_hi_var
 fn step_56() -> Unit raise {
-  x_hi_var_c.set(standardize_tm(@parser.parse_term("x_hi : real")))
+  x_hi_var_c.set(standardize_tm(@term_syntax.parse_term("(x_hi : Real)")))
 }
 
 ///|
@@ -950,7 +950,7 @@ pub fn x_hi_var() -> @kernel.Term {
 ///|
 /// low_var_real
 fn step_57() -> Unit raise {
-  low_var_real_c.set(standardize_tm(@parser.parse_term("low : real")))
+  low_var_real_c.set(standardize_tm(@term_syntax.parse_term("(low : Real)")))
 }
 
 ///|
@@ -965,7 +965,7 @@ pub fn low_var_real() -> @kernel.Term {
 ///|
 /// high_var_real
 fn step_58() -> Unit raise {
-  high_var_real_c.set(standardize_tm(@parser.parse_term("high : real")))
+  high_var_real_c.set(standardize_tm(@term_syntax.parse_term("(high : Real)")))
 }
 
 ///|
@@ -980,7 +980,7 @@ pub fn high_var_real() -> @kernel.Term {
 ///|
 /// lo_var_real
 fn step_59() -> Unit raise {
-  lo_var_real_c.set(standardize_tm(@parser.parse_term("lo : real")))
+  lo_var_real_c.set(standardize_tm(@term_syntax.parse_term("(lo : Real)")))
 }
 
 ///|
@@ -995,7 +995,7 @@ pub fn lo_var_real() -> @kernel.Term {
 ///|
 /// hi_var_real
 fn step_60() -> Unit raise {
-  hi_var_real_c.set(standardize_tm(@parser.parse_term("hi : real")))
+  hi_var_real_c.set(standardize_tm(@term_syntax.parse_term("(hi : Real)")))
 }
 
 ///|
@@ -1010,7 +1010,7 @@ pub fn hi_var_real() -> @kernel.Term {
 ///|
 /// dd_var_real
 fn step_61() -> Unit raise {
-  dd_var_real_c.set(standardize_tm(@parser.parse_term("dd : real")))
+  dd_var_real_c.set(standardize_tm(@term_syntax.parse_term("(dd : Real)")))
 }
 
 ///|
@@ -1025,7 +1025,7 @@ pub fn dd_var_real() -> @kernel.Term {
 ///|
 /// df_lo_var
 fn step_62() -> Unit raise {
-  df_lo_var_c.set(standardize_tm(@parser.parse_term("df_lo : real")))
+  df_lo_var_c.set(standardize_tm(@term_syntax.parse_term("(df_lo : Real)")))
 }
 
 ///|
@@ -1040,7 +1040,7 @@ pub fn df_lo_var() -> @kernel.Term {
 ///|
 /// df_hi_var
 fn step_63() -> Unit raise {
-  df_hi_var_c.set(standardize_tm(@parser.parse_term("df_hi : real")))
+  df_hi_var_c.set(standardize_tm(@term_syntax.parse_term("(df_hi : Real)")))
 }
 
 ///|
@@ -1055,7 +1055,7 @@ pub fn df_hi_var() -> @kernel.Term {
 ///|
 /// df_var_real
 fn step_64() -> Unit raise {
-  df_var_real_c.set(standardize_tm(@parser.parse_term("df : real")))
+  df_var_real_c.set(standardize_tm(@term_syntax.parse_term("(df : Real)")))
 }
 
 ///|
@@ -1070,7 +1070,7 @@ pub fn df_var_real() -> @kernel.Term {
 ///|
 /// f_lo_var
 fn step_65() -> Unit raise {
-  f_lo_var_c.set(standardize_tm(@parser.parse_term("f_lo : real")))
+  f_lo_var_c.set(standardize_tm(@term_syntax.parse_term("(f_lo : Real)")))
 }
 
 ///|
@@ -1085,7 +1085,7 @@ pub fn f_lo_var() -> @kernel.Term {
 ///|
 /// f_hi_var
 fn step_66() -> Unit raise {
-  f_hi_var_c.set(standardize_tm(@parser.parse_term("f_hi : real")))
+  f_hi_var_c.set(standardize_tm(@term_syntax.parse_term("(f_hi : Real)")))
 }
 
 ///|
@@ -1100,7 +1100,7 @@ pub fn f_hi_var() -> @kernel.Term {
 ///|
 /// w1_var_real
 fn step_67() -> Unit raise {
-  w1_var_real_c.set(standardize_tm(@parser.parse_term("w1 : real")))
+  w1_var_real_c.set(standardize_tm(@term_syntax.parse_term("(w1 : Real)")))
 }
 
 ///|
@@ -1115,7 +1115,7 @@ pub fn w1_var_real() -> @kernel.Term {
 ///|
 /// w2_var_real
 fn step_68() -> Unit raise {
-  w2_var_real_c.set(standardize_tm(@parser.parse_term("w2 : real")))
+  w2_var_real_c.set(standardize_tm(@term_syntax.parse_term("(w2 : Real)")))
 }
 
 ///|
@@ -1130,7 +1130,7 @@ pub fn w2_var_real() -> @kernel.Term {
 ///|
 /// t_var_real
 fn step_69() -> Unit raise {
-  t_var_real_c.set(standardize_tm(@parser.parse_term("t : real")))
+  t_var_real_c.set(standardize_tm(@term_syntax.parse_term("(t : Real)")))
 }
 
 ///|
@@ -1145,7 +1145,7 @@ pub fn t_var_real() -> @kernel.Term {
 ///|
 /// g_bounds_var
 fn step_70() -> Unit raise {
-  g_bounds_var_c.set(standardize_tm(@parser.parse_term("g_bounds : real#real")))
+  g_bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(g_bounds : (Real, Real))")))
 }
 
 ///|
@@ -1160,7 +1160,7 @@ pub fn g_bounds_var() -> @kernel.Term {
 ///|
 /// dg_bounds_var
 fn step_71() -> Unit raise {
-  dg_bounds_var_c.set(standardize_tm(@parser.parse_term("dg_bounds : real#real")))
+  dg_bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(dg_bounds : (Real, Real))")))
 }
 
 ///|
@@ -1175,7 +1175,7 @@ pub fn dg_bounds_var() -> @kernel.Term {
 ///|
 /// bounds_var
 fn step_72() -> Unit raise {
-  bounds_var_c.set(standardize_tm(@parser.parse_term("bounds : real#real")))
+  bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(bounds : (Real, Real))")))
 }
 
 ///|
@@ -1190,7 +1190,7 @@ pub fn bounds_var() -> @kernel.Term {
 ///|
 /// d_bounds_var
 fn step_73() -> Unit raise {
-  d_bounds_var_c.set(standardize_tm(@parser.parse_term("d_bounds : real#real")))
+  d_bounds_var_c.set(standardize_tm(@term_syntax.parse_term("(d_bounds : (Real, Real))")))
 }
 
 ///|
@@ -1205,7 +1205,7 @@ pub fn d_bounds_var() -> @kernel.Term {
 ///|
 /// x0_var_real
 fn step_74() -> Unit raise {
-  x0_var_real_c.set(standardize_tm(@parser.parse_term("x0 : real")))
+  x0_var_real_c.set(standardize_tm(@term_syntax.parse_term("(x0 : Real)")))
 }
 
 ///|
@@ -1220,7 +1220,7 @@ pub fn x0_var_real() -> @kernel.Term {
 ///|
 /// z0_var_real
 fn step_75() -> Unit raise {
-  z0_var_real_c.set(standardize_tm(@parser.parse_term("z0 : real")))
+  z0_var_real_c.set(standardize_tm(@term_syntax.parse_term("(z0 : Real)")))
 }
 
 ///|
@@ -1235,7 +1235,7 @@ pub fn z0_var_real() -> @kernel.Term {
 ///|
 /// w0_var_real
 fn step_76() -> Unit raise {
-  w0_var_real_c.set(standardize_tm(@parser.parse_term("w0 : real")))
+  w0_var_real_c.set(standardize_tm(@term_syntax.parse_term("(w0 : Real)")))
 }
 
 ///|
@@ -1250,7 +1250,7 @@ pub fn w0_var_real() -> @kernel.Term {
 ///|
 /// error_var
 fn step_77() -> Unit raise {
-  error_var_c.set(standardize_tm(@parser.parse_term("error : real")))
+  error_var_c.set(standardize_tm(@term_syntax.parse_term("(error : Real)")))
 }
 
 ///|
@@ -1265,7 +1265,7 @@ pub fn error_var() -> @kernel.Term {
 ///|
 /// d_bounds_list_var
 fn step_78() -> Unit raise {
-  d_bounds_list_var_c.set(standardize_tm(@parser.parse_term("d_bounds_list : (real#real)list")))
+  d_bounds_list_var_c.set(standardize_tm(@term_syntax.parse_term("(d_bounds_list : List[(Real, Real)])")))
 }
 
 ///|
@@ -1280,7 +1280,7 @@ pub fn d_bounds_list_var() -> @kernel.Term {
 ///|
 /// dd_bounds_list_var
 fn step_79() -> Unit raise {
-  dd_bounds_list_var_c.set(standardize_tm(@parser.parse_term("dd_bounds_list : ((real#real)list)list")))
+  dd_bounds_list_var_c.set(standardize_tm(@term_syntax.parse_term("(dd_bounds_list : List[List[(Real, Real)]])")))
 }
 
 ///|
@@ -1295,7 +1295,7 @@ pub fn dd_bounds_list_var() -> @kernel.Term {
 ///|
 /// df_bounds_list_var
 fn step_80() -> Unit raise {
-  df_bounds_list_var_c.set(standardize_tm(@parser.parse_term("df_bounds_list : (real#real)list")))
+  df_bounds_list_var_c.set(standardize_tm(@term_syntax.parse_term("(df_bounds_list : List[(Real, Real)])")))
 }
 
 ///|
@@ -1310,7 +1310,7 @@ pub fn df_bounds_list_var() -> @kernel.Term {
 ///|
 /// dd_list_var
 fn step_81() -> Unit raise {
-  dd_list_var_c.set(standardize_tm(@parser.parse_term("dd_list : (real#real)list")))
+  dd_list_var_c.set(standardize_tm(@term_syntax.parse_term("(dd_list : List[(Real, Real)])")))
 }
 
 ///|
@@ -1325,7 +1325,7 @@ pub fn dd_list_var() -> @kernel.Term {
 ///|
 /// t_var_real_list
 fn step_82() -> Unit raise {
-  t_var_real_list_c.set(standardize_tm(@parser.parse_term("t:(real)list")))
+  t_var_real_list_c.set(standardize_tm(@term_syntax.parse_term("(t : List[Real])")))
 }
 
 ///|
@@ -1340,7 +1340,7 @@ pub fn t_var_real_list() -> @kernel.Term {
 ///|
 /// x_var_real_list
 fn step_83() -> Unit raise {
-  x_var_real_list_c.set(standardize_tm(@parser.parse_term("x:(real)list")))
+  x_var_real_list_c.set(standardize_tm(@term_syntax.parse_term("(x : List[Real])")))
 }
 
 ///|
@@ -1355,7 +1355,7 @@ pub fn x_var_real_list() -> @kernel.Term {
 ///|
 /// y_var_real_list
 fn step_84() -> Unit raise {
-  y_var_real_list_c.set(standardize_tm(@parser.parse_term("y:(real)list")))
+  y_var_real_list_c.set(standardize_tm(@term_syntax.parse_term("(y : List[Real])")))
 }
 
 ///|
@@ -1370,7 +1370,7 @@ pub fn y_var_real_list() -> @kernel.Term {
 ///|
 /// z_var_real_list
 fn step_85() -> Unit raise {
-  z_var_real_list_c.set(standardize_tm(@parser.parse_term("z:(real)list")))
+  z_var_real_list_c.set(standardize_tm(@term_syntax.parse_term("(z : List[Real])")))
 }
 
 ///|
@@ -1385,7 +1385,7 @@ pub fn z_var_real_list() -> @kernel.Term {
 ///|
 /// w_var_real_list
 fn step_86() -> Unit raise {
-  w_var_real_list_c.set(standardize_tm(@parser.parse_term("w:(real)list")))
+  w_var_real_list_c.set(standardize_tm(@term_syntax.parse_term("(w : List[Real])")))
 }
 
 ///|
@@ -1400,7 +1400,7 @@ pub fn w_var_real_list() -> @kernel.Term {
 ///|
 /// yw_var
 fn step_87() -> Unit raise {
-  yw_var_c.set(standardize_tm(@parser.parse_term("yw : (real#real)list")))
+  yw_var_c.set(standardize_tm(@term_syntax.parse_term("(yw : List[(Real, Real)])")))
 }
 
 ///|
@@ -1415,7 +1415,7 @@ pub fn yw_var() -> @kernel.Term {
 ///|
 /// xz_var
 fn step_88() -> Unit raise {
-  xz_var_c.set(standardize_tm(@parser.parse_term("xz : (real#real)list")))
+  xz_var_c.set(standardize_tm(@term_syntax.parse_term("(xz : List[(Real, Real)])")))
 }
 
 ///|
@@ -1430,7 +1430,7 @@ pub fn xz_var() -> @kernel.Term {
 ///|
 /// xz_pair_var
 fn step_89() -> Unit raise {
-  xz_pair_var_c.set(standardize_tm(@parser.parse_term("xz : real#real")))
+  xz_pair_var_c.set(standardize_tm(@term_syntax.parse_term("(xz : (Real, Real))")))
 }
 
 ///|
@@ -1445,7 +1445,7 @@ pub fn xz_pair_var() -> @kernel.Term {
 ///|
 /// yw_pair_var
 fn step_90() -> Unit raise {
-  yw_pair_var_c.set(standardize_tm(@parser.parse_term("yw : real#real")))
+  yw_pair_var_c.set(standardize_tm(@term_syntax.parse_term("(yw : (Real, Real))")))
 }
 
 ///|
@@ -1460,7 +1460,7 @@ pub fn yw_pair_var() -> @kernel.Term {
 ///|
 /// list_var_real_pair
 fn step_91() -> Unit raise {
-  list_var_real_pair_c.set(standardize_tm(@parser.parse_term("list : (real#real)list")))
+  list_var_real_pair_c.set(standardize_tm(@term_syntax.parse_term("(list : List[(Real, Real)])")))
 }
 
 ///|
@@ -1475,7 +1475,7 @@ pub fn list_var_real_pair() -> @kernel.Term {
 ///|
 /// t_const
 fn step_92() -> Unit raise {
-  t_const_c.set(standardize_tm(@parser.parse_term("T")))
+  t_const_c.set(standardize_tm(@term_syntax.parse_term("true")))
 }
 
 ///|
@@ -1490,7 +1490,7 @@ pub fn t_const() -> @kernel.Term {
 ///|
 /// f_const
 fn step_93() -> Unit raise {
-  f_const_c.set(standardize_tm(@parser.parse_term("F")))
+  f_const_c.set(standardize_tm(@term_syntax.parse_term("false")))
 }
 
 ///|
@@ -1505,7 +1505,7 @@ pub fn f_const() -> @kernel.Term {
 ///|
 /// zero_const
 fn step_94() -> Unit raise {
-  zero_const_c.set(standardize_tm(@parser.parse_term("_0")))
+  zero_const_c.set(standardize_tm(@term_syntax.parse_term("_0")))
 }
 
 ///|
@@ -1520,7 +1520,7 @@ pub fn zero_const() -> @kernel.Term {
 ///|
 /// zero_num
 fn step_95() -> Unit raise {
-  zero_num_c.set(standardize_tm(@parser.parse_term("0")))
+  zero_num_c.set(standardize_tm(@term_syntax.parse_term("0")))
 }
 
 ///|
@@ -1580,7 +1580,7 @@ pub fn mul_op_num() -> @kernel.Term {
 ///|
 /// eq_op_num
 fn step_99() -> Unit raise {
-  eq_op_num_c.set(standardize_tm(@parser.parse_term("(=) : num->num->bool")))
+  eq_op_num_c.set(standardize_tm(@term_syntax.parse_term("(op_eq : (Num, Num) -> Bool)")))
 }
 
 ///|
@@ -1625,7 +1625,7 @@ pub fn lt_op_num() -> @kernel.Term {
 ///|
 /// div_op_num
 fn step_102() -> Unit raise {
-  div_op_num_c.set(standardize_tm(@parser.parse_term("(DIV): num->num->num")))
+  div_op_num_c.set(standardize_tm(@term_syntax.parse_term("DIV")))
 }
 
 ///|
@@ -1640,7 +1640,7 @@ pub fn div_op_num() -> @kernel.Term {
 ///|
 /// pre_op_num
 fn step_103() -> Unit raise {
-  pre_op_num_c.set(standardize_tm(@parser.parse_term("PRE: num->num")))
+  pre_op_num_c.set(standardize_tm(@term_syntax.parse_term("PRE")))
 }
 
 ///|
@@ -1655,7 +1655,7 @@ pub fn pre_op_num() -> @kernel.Term {
 ///|
 /// suc_op_num
 fn step_104() -> Unit raise {
-  suc_op_num_c.set(standardize_tm(@parser.parse_term("SUC : num->num")))
+  suc_op_num_c.set(standardize_tm(@term_syntax.parse_term("SUC")))
 }
 
 ///|
@@ -1670,7 +1670,7 @@ pub fn suc_op_num() -> @kernel.Term {
 ///|
 /// real_empty_list
 fn step_105() -> Unit raise {
-  real_empty_list_c.set(standardize_tm(@parser.parse_term("[]:(real)list")))
+  real_empty_list_c.set(standardize_tm(@term_syntax.parse_term("(NIL : List[Real])")))
 }
 
 ///|
@@ -1685,7 +1685,7 @@ pub fn real_empty_list() -> @kernel.Term {
 ///|
 /// add_op_real
 fn step_106() -> Unit raise {
-  add_op_real_c.set(standardize_tm(@parser.parse_term("(+) : real->real->real")))
+  add_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_add")))
 }
 
 ///|
@@ -1700,7 +1700,7 @@ pub fn add_op_real() -> @kernel.Term {
 ///|
 /// mul_op_real
 fn step_107() -> Unit raise {
-  mul_op_real_c.set(standardize_tm(@parser.parse_term("( * ) : real->real->real")))
+  mul_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_mul")))
 }
 
 ///|
@@ -1715,7 +1715,7 @@ pub fn mul_op_real() -> @kernel.Term {
 ///|
 /// sub_op_real
 fn step_108() -> Unit raise {
-  sub_op_real_c.set(standardize_tm(@parser.parse_term("(-) : real->real->real")))
+  sub_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_sub")))
 }
 
 ///|
@@ -1730,7 +1730,7 @@ pub fn sub_op_real() -> @kernel.Term {
 ///|
 /// div_op_real
 fn step_109() -> Unit raise {
-  div_op_real_c.set(standardize_tm(@parser.parse_term("(/) :real->real->real")))
+  div_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_div")))
 }
 
 ///|
@@ -1745,7 +1745,7 @@ pub fn div_op_real() -> @kernel.Term {
 ///|
 /// inv_op_real
 fn step_110() -> Unit raise {
-  inv_op_real_c.set(standardize_tm(@parser.parse_term("inv : real->real")))
+  inv_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_inv")))
 }
 
 ///|
@@ -1760,7 +1760,7 @@ pub fn inv_op_real() -> @kernel.Term {
 ///|
 /// neg_op_real
 fn step_111() -> Unit raise {
-  neg_op_real_c.set(standardize_tm(@parser.parse_term("(--) : real->real")))
+  neg_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_neg")))
 }
 
 ///|
@@ -1775,7 +1775,7 @@ pub fn neg_op_real() -> @kernel.Term {
 ///|
 /// eq_op_real
 fn step_112() -> Unit raise {
-  eq_op_real_c.set(standardize_tm(@parser.parse_term("(=) : real->real->bool")))
+  eq_op_real_c.set(standardize_tm(@term_syntax.parse_term("(op_eq : (Real, Real) -> Bool)")))
 }
 
 ///|
@@ -1790,7 +1790,7 @@ pub fn eq_op_real() -> @kernel.Term {
 ///|
 /// lt_op_real
 fn step_113() -> Unit raise {
-  lt_op_real_c.set(standardize_tm(@parser.parse_term("(<) : real->real->bool")))
+  lt_op_real_c.set(standardize_tm(@term_syntax.parse_term("op_lt")))
 }
 
 ///|
@@ -1805,7 +1805,7 @@ pub fn lt_op_real() -> @kernel.Term {
 ///|
 /// le_op_real
 fn step_114() -> Unit raise {
-  le_op_real_c.set(standardize_tm(@parser.parse_term("(<=):real->real->bool")))
+  le_op_real_c.set(standardize_tm(@term_syntax.parse_term("op_lt_eq")))
 }
 
 ///|
@@ -1820,7 +1820,7 @@ pub fn le_op_real() -> @kernel.Term {
 ///|
 /// ge_op_real
 fn step_115() -> Unit raise {
-  ge_op_real_c.set(standardize_tm(@parser.parse_term("(>=):real->real->bool")))
+  ge_op_real_c.set(standardize_tm(@term_syntax.parse_term("op_gt_eq")))
 }
 
 ///|
@@ -1835,7 +1835,7 @@ pub fn ge_op_real() -> @kernel.Term {
 ///|
 /// amp_op_real
 fn step_116() -> Unit raise {
-  amp_op_real_c.set(standardize_tm(@parser.parse_term("(&) : num->real")))
+  amp_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_of_num")))
 }
 
 ///|
@@ -1850,7 +1850,7 @@ pub fn amp_op_real() -> @kernel.Term {
 ///|
 /// pow_op_real
 fn step_117() -> Unit raise {
-  pow_op_real_c.set(standardize_tm(@parser.parse_term("(pow) : real->num->real")))
+  pow_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_pow")))
 }
 
 ///|
