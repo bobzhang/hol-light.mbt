@@ -6493,187 +6493,187 @@ test "Complex/complexnumbers matches Complex/complexnumbers.ml" {
       #|  (Cx : (Real) -> Complex)((a : Real)) == complex((a, real_of_num(0)))
       #|  (complex_neg : (Complex) -> Complex)((z : Complex)) == complex((-Re(z), -Im(z)))
       #|  (complex_add : (Complex, Complex) -> Complex)((w : Complex), (z : Complex)) == complex((Re(w) + Re(z), Im(w) + Im(z)))
-      #|  (complex_sub : (Complex, Complex) -> Complex)((w : Complex), (z : Complex)) == w + -z
+      #|  (complex_sub : (Complex, Complex) -> Complex)((w : Complex), (z : Complex)) == complex_add(w, complex_neg(z))
       #|  (complex_mul : (Complex, Complex) -> Complex)((w : Complex), (z : Complex)) == complex((Re(w) * Re(z) - Im(w) * Im(z), Re(w) * Im(z) + Im(w) * Re(z)))
       #|  (complex_inv : (Complex) -> Complex)((z : Complex)) == complex((Re(z) / (pow(Re(z), 2) + pow(Im(z), 2)), -Im(z) / (pow(Re(z), 2) + pow(Im(z), 2))))
-      #|  (complex_div : (Complex, Complex) -> Complex)((w : Complex), (z : Complex)) == w * inv(z)
-      #|  (complex_pow : (Complex, Num) -> Complex)((x : Complex), 0) == Cx(real_of_num(1)) && (\226\136\128 n : Num, complex_pow(x, SUC(n)) == x * complex_pow(x, n))
+      #|  (complex_div : (Complex, Complex) -> Complex)((w : Complex), (z : Complex)) == complex_mul(w, complex_inv(z))
+      #|  (complex_pow : (Complex, Num) -> Complex)((x : Complex), 0) == Cx(real_of_num(1)) && (\226\136\128 n : Num, complex_pow(x, SUC(n)) == complex_mul(x, complex_pow(x, n)))
       #|  Re(complex(((x : Real), (y : Real)))) == x
       #|  Im(complex(((x : Real), (y : Real)))) == y
       #|  complex((Re((z : Complex)), Im(z))) == z
       #|  \226\136\128 w : Complex, \226\136\128 z : Complex, (w == z) == (Re(w) == Re(z) && Im(w) == Im(z))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x + y == y + x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x + (y + z) == x + y + z
-      #|  \226\136\128 x : Complex, Cx(real_of_num(0)) + x == x
-      #|  \226\136\128 x : Complex, -x + x == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x * y == y * x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x * (y * z) == x * y * z
-      #|  \226\136\128 x : Complex, Cx(real_of_num(1)) * x == x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x * (y + z) == x * y + x * z
-      #|  (m : Complex) + (n : Complex) == n + m && m + n + (p : Complex) == m + (n + p) && m + (n + p) == n + (m + p)
-      #|  (m : Complex) * (n : Complex) == n * m && m * n * (p : Complex) == m * (n * p) && m * (n * p) == n * (m * p)
-      #|  \226\136\128 x : Complex, x + Cx(real_of_num(0)) == x
-      #|  \226\136\128 x : Complex, x * Cx(real_of_num(1)) == x
-      #|  \226\136\128 x : Complex, x + -x == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x + y) * z == x * z + y * z
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x + y == x + z) == (y == z)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x + z == y + z) == (x == y)
-      #|  \226\136\128 x : Complex, x * Cx(real_of_num(0)) == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, Cx(real_of_num(0)) * x == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, --x == x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x * -y == -(x * y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -x * y == -(x * y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -(x + y) == -x + -y
-      #|  -Cx(real_of_num(0)) == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x + y == x) == (y == Cx(real_of_num(0)))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x + y == y) == (x == Cx(real_of_num(0)))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x + y == Cx(real_of_num(0))) == (x == -y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x + y == Cx(real_of_num(0))) == (y == -x)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -(x * y) == -x * y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -(x * y) == x * -y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -x * -y == x * y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x - y + y == x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, y + (x - y) == x
-      #|  \226\136\128 x : Complex, x - x == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x - y == Cx(real_of_num(0))) == (x == y)
-      #|  \226\136\128 x : Complex, (-x == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -(x - y) == y - x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x + y - x == y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (-x == y) == (x == -y)
-      #|  \226\136\128 x : Complex, -x == -Cx(real_of_num(1)) * x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x - y - x == -y
-      #|  \226\136\128 a : Complex, \226\136\128 b : Complex, \226\136\128 c : Complex, \226\136\128 d : Complex, a + b - (c + d) == a - c + (b - d)
-      #|  \226\136\128 x : Complex, Cx(real_of_num(0)) - x == -x
-      #|  \226\136\128 x : Complex, x - Cx(real_of_num(0)) == x
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -x - y == -(x + y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x - -y == x + y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, -x - -y == y - x
-      #|  \226\136\128 a : Complex, \226\136\128 b : Complex, \226\136\128 c : Complex, a - b + (b - c) == a - c
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x == y - z) == (x + z == y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x - y == z) == (x == z + y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x - (x - y) == y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, x - (x + y) == -y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x + y) * (x - y) == x * x - y * y
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (-x == -y) == (x == y)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x * (y - z) == x * y - x * z
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x - y) * z == x * z - y * z
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_add(x, y) == complex_add(y, x)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_add(x, complex_add(y, z)) == complex_add(complex_add(x, y), z)
+      #|  \226\136\128 x : Complex, complex_add(Cx(real_of_num(0)), x) == x
+      #|  \226\136\128 x : Complex, complex_add(complex_neg(x), x) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(x, y) == complex_mul(y, x)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_mul(y, z)) == complex_mul(complex_mul(x, y), z)
+      #|  \226\136\128 x : Complex, complex_mul(Cx(real_of_num(1)), x) == x
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_add(y, z)) == complex_add(complex_mul(x, y), complex_mul(x, z))
+      #|  complex_add((m : Complex), (n : Complex)) == complex_add(n, m) && complex_add(complex_add(m, n), (p : Complex)) == complex_add(m, complex_add(n, p)) && complex_add(m, complex_add(n, p)) == complex_add(n, complex_add(m, p))
+      #|  complex_mul((m : Complex), (n : Complex)) == complex_mul(n, m) && complex_mul(complex_mul(m, n), (p : Complex)) == complex_mul(m, complex_mul(n, p)) && complex_mul(m, complex_mul(n, p)) == complex_mul(n, complex_mul(m, p))
+      #|  \226\136\128 x : Complex, complex_add(x, Cx(real_of_num(0))) == x
+      #|  \226\136\128 x : Complex, complex_mul(x, Cx(real_of_num(1))) == x
+      #|  \226\136\128 x : Complex, complex_add(x, complex_neg(x)) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(complex_add(x, y), z) == complex_add(complex_mul(x, z), complex_mul(y, z))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_add(x, y) == complex_add(x, z)) == (y == z)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_add(x, z) == complex_add(y, z)) == (x == y)
+      #|  \226\136\128 x : Complex, complex_mul(x, Cx(real_of_num(0))) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, complex_mul(Cx(real_of_num(0)), x) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, complex_neg(complex_neg(x)) == x
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(x, complex_neg(y)) == complex_neg(complex_mul(x, y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(complex_neg(x), y) == complex_neg(complex_mul(x, y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_neg(complex_add(x, y)) == complex_add(complex_neg(x), complex_neg(y))
+      #|  complex_neg(Cx(real_of_num(0))) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_add(x, y) == x) == (y == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_add(x, y) == y) == (x == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_add(x, y) == Cx(real_of_num(0))) == (x == complex_neg(y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_add(x, y) == Cx(real_of_num(0))) == (y == complex_neg(x))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_neg(complex_mul(x, y)) == complex_mul(complex_neg(x), y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_neg(complex_mul(x, y)) == complex_mul(x, complex_neg(y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(complex_neg(x), complex_neg(y)) == complex_mul(x, y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_add(complex_sub(x, y), y) == x
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_add(y, complex_sub(x, y)) == x
+      #|  \226\136\128 x : Complex, complex_sub(x, x) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_sub(x, y) == Cx(real_of_num(0))) == (x == y)
+      #|  \226\136\128 x : Complex, (complex_neg(x) == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_neg(complex_sub(x, y)) == complex_sub(y, x)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(complex_add(x, y), x) == y
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_neg(x) == y) == (x == complex_neg(y))
+      #|  \226\136\128 x : Complex, complex_neg(x) == complex_mul(complex_neg(Cx(real_of_num(1))), x)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(complex_sub(x, y), x) == complex_neg(y)
+      #|  \226\136\128 a : Complex, \226\136\128 b : Complex, \226\136\128 c : Complex, \226\136\128 d : Complex, complex_sub(complex_add(a, b), complex_add(c, d)) == complex_add(complex_sub(a, c), complex_sub(b, d))
+      #|  \226\136\128 x : Complex, complex_sub(Cx(real_of_num(0)), x) == complex_neg(x)
+      #|  \226\136\128 x : Complex, complex_sub(x, Cx(real_of_num(0))) == x
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(complex_neg(x), y) == complex_neg(complex_add(x, y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(x, complex_neg(y)) == complex_add(x, y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(complex_neg(x), complex_neg(y)) == complex_sub(y, x)
+      #|  \226\136\128 a : Complex, \226\136\128 b : Complex, \226\136\128 c : Complex, complex_add(complex_sub(a, b), complex_sub(b, c)) == complex_sub(a, c)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x == complex_sub(y, z)) == (complex_add(x, z) == y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_sub(x, y) == z) == (x == complex_add(z, y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(x, complex_sub(x, y)) == y
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(x, complex_add(x, y)) == complex_neg(y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(complex_add(x, y), complex_sub(x, y)) == complex_sub(complex_mul(x, x), complex_mul(y, y))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_neg(x) == complex_neg(y)) == (x == y)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_sub(y, z)) == complex_sub(complex_mul(x, y), complex_mul(x, z))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(complex_sub(x, y), z) == complex_sub(complex_mul(x, z), complex_mul(y, z))
       #|  \226\136\128 x : Real, real_of_num(2) * x == x + x
       #|  \226\136\128 x : Real, \226\136\128 y : Real, (Cx(x) == Cx(y)) == (x == y)
-      #|  \226\136\128 x : Real, Cx(-x) == -Cx(x)
+      #|  \226\136\128 x : Real, Cx(-x) == complex_neg(Cx(x))
       #|  (x : Real) == real_of_num(0)
-      #|  \226\136\128 x : Real, Cx(inv(x)) == inv(Cx(x))
-      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x + y) == Cx(x) + Cx(y)
-      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x - y) == Cx(x) - Cx(y)
-      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x * y) == Cx(x) * Cx(y)
-      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x / y) == Cx(x) / Cx(y)
-      #|  \226\136\128 x : Real, \226\136\128 n : Num, Cx(pow(x, n)) == pow(Cx(x), n)
-      #|  \226\136\128 x : Real, Cx(abs(x)) == Cx(norm(Cx(x)))
-      #|  \226\136\128 x : Real, norm(Cx(x)) == abs(x)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (x * y == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)) || y == Cx(real_of_num(0)))
-      #|  \226\136\128 x : Complex, \226\136\128 m : Num, \226\136\128 n : Num, pow(x, m + n) == pow(x, m) * pow(x, n)
-      #|  \226\136\128 x : Complex, \226\136\128 m : Num, \226\136\128 n : Num, pow(pow(x, m), n) == pow(x, m * n)
+      #|  \226\136\128 x : Real, Cx(inv(x)) == complex_inv(Cx(x))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x + y) == complex_add(Cx(x), Cx(y))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x - y) == complex_sub(Cx(x), Cx(y))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x * y) == complex_mul(Cx(x), Cx(y))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, Cx(x / y) == complex_div(Cx(x), Cx(y))
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, Cx(pow(x, n)) == complex_pow(Cx(x), n)
+      #|  \226\136\128 x : Real, Cx(abs(x)) == Cx(complex_norm(Cx(x)))
+      #|  \226\136\128 x : Real, complex_norm(Cx(x)) == abs(x)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, (complex_mul(x, y) == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)) || y == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Complex, \226\136\128 m : Num, \226\136\128 n : Num, complex_pow(x, m + n) == complex_mul(complex_pow(x, m), complex_pow(x, n))
+      #|  \226\136\128 x : Complex, \226\136\128 m : Num, \226\136\128 n : Num, complex_pow(complex_pow(x, m), n) == complex_pow(x, m * n)
       #|  1
-      #|  \226\136\128 x : Complex, pow(x, 1) == x
+      #|  \226\136\128 x : Complex, complex_pow(x, 1) == x
       #|  2
-      #|  \226\136\128 x : Complex, pow(x, 2) == x * x
+      #|  \226\136\128 x : Complex, complex_pow(x, 2) == complex_mul(x, x)
       #|  EVEN((n : Num))
-      #|  \226\136\128 x : Complex, \226\136\128 n : Num, pow(-x, n) == (if EVEN(n) { pow(x, n) } else { -pow(x, n) })
-      #|  \226\136\128 n : Num, pow(Cx(real_of_num(1)), n) == Cx(real_of_num(1))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 n : Num, pow(x * y, n) == pow(x, n) * pow(y, n)
-      #|  pow(ii, 2) == -Cx(real_of_num(1))
-      #|  \226\136\128 x : Complex, \226\136\128 n : Num, (pow(x, n) == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)) && !(n == 0))
-      #|  \226\136\128 x : Real, norm(Cx(x)) == abs(x)
-      #|  \226\136\128 z : Complex, real_of_num(0) <= norm(z)
-      #|  \226\136\128 z : Complex, abs(norm(z)) == norm(z)
+      #|  \226\136\128 x : Complex, \226\136\128 n : Num, complex_pow(complex_neg(x), n) == (if EVEN(n) { complex_pow(x, n) } else { complex_neg(complex_pow(x, n)) })
+      #|  \226\136\128 n : Num, complex_pow(Cx(real_of_num(1)), n) == Cx(real_of_num(1))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 n : Num, complex_pow(complex_mul(x, y), n) == complex_mul(complex_pow(x, n), complex_pow(y, n))
+      #|  complex_pow(ii, 2) == complex_neg(Cx(real_of_num(1)))
+      #|  \226\136\128 x : Complex, \226\136\128 n : Num, (complex_pow(x, n) == Cx(real_of_num(0))) == (x == Cx(real_of_num(0)) && !(n == 0))
+      #|  \226\136\128 x : Real, complex_norm(Cx(x)) == abs(x)
+      #|  \226\136\128 z : Complex, real_of_num(0) <= complex_norm(z)
+      #|  \226\136\128 z : Complex, abs(complex_norm(z)) == complex_norm(z)
       #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (x + y == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))
-      #|  \226\136\128 z : Complex, (norm(z) == real_of_num(0)) == (z == Cx(real_of_num(0)))
-      #|  norm(Cx(real_of_num((n : Num)))) == real_of_num(n)
-      #|  norm(Cx(real_of_num(0))) == real_of_num(0)
-      #|  \226\136\128 z : Complex, (real_of_num(0) < norm(z)) == !(z == Cx(real_of_num(0)))
-      #|  \226\136\128 z : Complex, norm(-z) == norm(z)
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, norm(w * z) == norm(w) * norm(z)
-      #|  \226\136\128 z : Complex, \226\136\128 n : Num, norm(pow(z, n)) == pow(norm(z), n)
+      #|  \226\136\128 z : Complex, (complex_norm(z) == real_of_num(0)) == (z == Cx(real_of_num(0)))
+      #|  complex_norm(Cx(real_of_num((n : Num)))) == real_of_num(n)
+      #|  complex_norm(Cx(real_of_num(0))) == real_of_num(0)
+      #|  \226\136\128 z : Complex, (real_of_num(0) < complex_norm(z)) == !(z == Cx(real_of_num(0)))
+      #|  \226\136\128 z : Complex, complex_norm(complex_neg(z)) == complex_norm(z)
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_norm(complex_mul(w, z)) == complex_norm(w) * complex_norm(z)
+      #|  \226\136\128 z : Complex, \226\136\128 n : Num, complex_norm(complex_pow(z, n)) == pow(complex_norm(z), n)
       #|  (a : Real) * (a * ((b : Real) * b)) == a * b * (a * b)
       #|  Re((z : Complex)) * Re(z) + Im(z) * Im(z) == real_of_num(0)
       #|  (r : Real) * (d : Real) * (r * d) + -(i : Real) * d * (-i * d) == (r * r + i * i) * (d * d)
-      #|  \226\136\128 z : Complex, norm(inv(z)) == inv(norm(z))
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, norm(w / z) == norm(w) / norm(z)
+      #|  \226\136\128 z : Complex, complex_norm(complex_inv(z)) == inv(complex_norm(z))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_norm(complex_div(w, z)) == complex_norm(w) / complex_norm(z)
       #|  (((rw : Real) * (rz : Real) + (iw : Real) * (iz : Real)) * (rw * rz + iw * iz) <= (rw * rw + iw * iw) * (rz * rz + iz * iz)) == (real_of_num(0) <= (rw * iz - rz * iw) * (rw * iz - rz * iw))
       #|  real_of_num(0) <= (y : Real) && abs((x : Real)) <= abs(y) \226\134\146 x <= y
       #|  (((rw : Real) + (rz : Real)) * (rw + rz) + ((iw : Real) + (iz : Real)) * (iw + iz) <= rw * rw + iw * iw + (rz * rz + iz * iz + real_of_num(2) * (other : Real))) == (rw * rz + iw * iz <= other)
       #|  ((a : Real) + (b : Real)) * (a + b) == a * a + (b * b + real_of_num(2) * (a * b))
       #|  real_of_num(0) <= (y : Real) && abs((x : Real)) <= abs(y) \226\134\146 x <= y
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, norm(w + z) <= norm(w) + norm(z)
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, norm(w) <= norm(w + z) + norm(z)
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_norm(complex_add(w, z)) <= complex_norm(w) + complex_norm(z)
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_norm(w) <= complex_norm(complex_add(w, z)) + complex_norm(z)
       #|  (a : Real) - (b : Real) <= (x : Real) && b - a <= x \226\134\146 abs(a - b) <= x
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, abs(norm(w) - norm(z)) <= norm(w - z)
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, abs(complex_norm(w) - complex_norm(z)) <= complex_norm(complex_sub(w, z))
       #|  (cnj : (Complex) -> Complex)((z : Complex)) == complex((Re(z), -Im(z)))
       #|  \226\136\128 w : Complex, \226\136\128 z : Complex, (cnj(w) == cnj(z)) == (w == z)
       #|  \226\136\128 z : Complex, cnj(cnj(z)) == z
       #|  \226\136\128 x : Real, cnj(Cx(x)) == Cx(x)
-      #|  \226\136\128 z : Complex, norm(cnj(z)) == norm(z)
-      #|  \226\136\128 z : Complex, cnj(-z) == -cnj(z)
-      #|  \226\136\128 z : Complex, cnj(inv(z)) == inv(cnj(z))
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(w + z) == cnj(w) + cnj(z)
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(w - z) == cnj(w) - cnj(z)
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(w * z) == cnj(w) * cnj(z)
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(w / z) == cnj(w) / cnj(z)
-      #|  \226\136\128 z : Complex, \226\136\128 n : Num, cnj(pow(z, n)) == pow(cnj(z), n)
+      #|  \226\136\128 z : Complex, complex_norm(cnj(z)) == complex_norm(z)
+      #|  \226\136\128 z : Complex, cnj(complex_neg(z)) == complex_neg(cnj(z))
+      #|  \226\136\128 z : Complex, cnj(complex_inv(z)) == complex_inv(cnj(z))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(complex_add(w, z)) == complex_add(cnj(w), cnj(z))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(complex_sub(w, z)) == complex_sub(cnj(w), cnj(z))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(complex_mul(w, z)) == complex_mul(cnj(w), cnj(z))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, cnj(complex_div(w, z)) == complex_div(cnj(w), cnj(z))
+      #|  \226\136\128 z : Complex, \226\136\128 n : Num, cnj(complex_pow(z, n)) == complex_pow(cnj(z), n)
       #|  Cx
       #|  Cx
       #|  Cx
       #|  (x : Real)
       #|  (n : Num)
-      #|  (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x + (y + z) == x + y + z) && (\226\136\128 x : Complex, \226\136\128 y : Complex, x + y == y + x) && (\226\136\128 x : Complex, Cx(real_of_num(0)) + x == x) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x * (y * z) == x * y * z) && (\226\136\128 x : Complex, \226\136\128 y : Complex, x * y == y * x) && (\226\136\128 x : Complex, Cx(real_of_num(1)) * x == x) && (\226\136\128 x : Complex, Cx(real_of_num(0)) * x == Cx(real_of_num(0))) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, x * (y + z) == x * y + x * z) && (\226\136\128 x : Complex, pow(x, 0) == Cx(real_of_num(1))) && (\226\136\128 x : Complex, \226\136\128 n : Num, pow(x, SUC(n)) == x * pow(x, n))
-      #|  (\226\136\128 x : Complex, -x == Cx(-real_of_num(1)) * x) && (\226\136\128 x : Complex, \226\136\128 y : Complex, x - y == x + Cx(-real_of_num(1)) * y)
+      #|  (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_add(x, complex_add(y, z)) == complex_add(complex_add(x, y), z)) && (\226\136\128 x : Complex, \226\136\128 y : Complex, complex_add(x, y) == complex_add(y, x)) && (\226\136\128 x : Complex, complex_add(Cx(real_of_num(0)), x) == x) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_mul(y, z)) == complex_mul(complex_mul(x, y), z)) && (\226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(x, y) == complex_mul(y, x)) && (\226\136\128 x : Complex, complex_mul(Cx(real_of_num(1)), x) == x) && (\226\136\128 x : Complex, complex_mul(Cx(real_of_num(0)), x) == Cx(real_of_num(0))) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_add(y, z)) == complex_add(complex_mul(x, y), complex_mul(x, z))) && (\226\136\128 x : Complex, complex_pow(x, 0) == Cx(real_of_num(1))) && (\226\136\128 x : Complex, \226\136\128 n : Num, complex_pow(x, SUC(n)) == complex_mul(x, complex_pow(x, n)))
+      #|  (\226\136\128 x : Complex, complex_neg(x) == complex_mul(Cx(-real_of_num(1)), x)) && (\226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(x, y) == complex_add(x, complex_mul(Cx(-real_of_num(1)), y)))
       #|  p:num
       #|  q:num
       #|  0
       #|  1
-      #|  op_minus_minus
-      #|  inv
-      #|  op_plus
-      #|  op_minus
-      #|  op_star
-      #|  op_slash
-      #|  pow
-      #|  \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 inv(z) * z == Cx(real_of_num(1))
-      #|  \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 z * inv(z) == Cx(real_of_num(1))
-      #|  pow
-      #|  ((w : Complex) * (y : Complex) + (x : Complex) * (z : Complex) == w * z + x * y) == ((w - x) * (y - z) == Cx(real_of_num(0)))
-      #|  (\226\136\128 x : Complex, Cx(real_of_num(0)) * x == Cx(real_of_num(0))) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x + y == x + z) == (y == z)) && (\226\136\128 w : Complex, \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (w * y + x * z == w * z + x * y) == (w == x || y == z))
+      #|  complex_neg
+      #|  complex_inv
+      #|  complex_add
+      #|  complex_sub
+      #|  complex_mul
+      #|  complex_div
+      #|  complex_pow
+      #|  \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 complex_mul(complex_inv(z), z) == Cx(real_of_num(1))
+      #|  \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 complex_mul(z, complex_inv(z)) == Cx(real_of_num(1))
+      #|  complex_pow
+      #|  (complex_add(complex_mul((w : Complex), (y : Complex)), complex_mul((x : Complex), (z : Complex))) == complex_add(complex_mul(w, z), complex_mul(x, y))) == (complex_mul(complex_sub(w, x), complex_sub(y, z)) == Cx(real_of_num(0)))
+      #|  (\226\136\128 x : Complex, complex_mul(Cx(real_of_num(0)), x) == Cx(real_of_num(0))) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_add(x, y) == complex_add(x, z)) == (y == z)) && (\226\136\128 w : Complex, \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_add(complex_mul(w, y), complex_mul(x, z)) == complex_add(complex_mul(w, z), complex_mul(x, y))) == (w == x || y == z))
       #|  !(Cx(real_of_num(1)) == Cx(real_of_num(0)))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, !(x == y) == (\226\136\131 z : Complex, (x - y) * z == Cx(real_of_num(1)))
-      #|  pow
-      #|  op_slash
-      #|  op_star
-      #|  inv
-      #|  op_minus
-      #|  op_plus
-      #|  op_minus_minus
-      #|  inv(Cx(real_of_num(0))) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, !(x == y) == (\226\136\131 z : Complex, complex_mul(complex_sub(x, y), z) == Cx(real_of_num(1)))
+      #|  complex_pow
+      #|  complex_div
+      #|  complex_mul
+      #|  complex_inv
+      #|  complex_sub
+      #|  complex_add
+      #|  complex_neg
+      #|  complex_inv(Cx(real_of_num(0))) == Cx(real_of_num(0))
       #|  (z : Complex) == Cx(real_of_num(0))
       #|  (w : Complex) == Cx(real_of_num(0))
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, inv(w * z) == inv(w) * inv(z)
-      #|  inv(Cx(real_of_num(1))) == Cx(real_of_num(1))
-      #|  \226\136\128 x : Complex, \226\136\128 n : Num, pow(inv(x), n) == inv(pow(x, n))
-      #|  inv((x : Complex))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_inv(complex_mul(w, z)) == complex_mul(complex_inv(w), complex_inv(z))
+      #|  complex_inv(Cx(real_of_num(1))) == Cx(real_of_num(1))
+      #|  \226\136\128 x : Complex, \226\136\128 n : Num, complex_pow(complex_inv(x), n) == complex_inv(complex_pow(x, n))
+      #|  complex_inv((x : Complex))
       #|  (x : Complex)
       #|  (x : Complex) == Cx(real_of_num(0))
-      #|  \226\136\128 x : Complex, inv(inv(x)) == x
+      #|  \226\136\128 x : Complex, complex_inv(complex_inv(x)) == x
       #|  op_slash_bslash
-      #|  inv
-      #|  op_slash
-      #|  \226\136\128 x : Complex, x == Cx(real_of_num(0)) || x * inv(x) == Cx(real_of_num(1))
+      #|  complex_inv
+      #|  complex_div
+      #|  \226\136\128 x : Complex, x == Cx(real_of_num(0)) || complex_mul(x, complex_inv(x)) == Cx(real_of_num(1))
       #|  ((p : Bool) || (q : Bool)) && ((r : Bool) || (s : Bool)) \226\134\146 (p || r) || q && s
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 n : Num, pow(x / y, n) == pow(x, n) / pow(y, n)
-      #|  \226\136\128 x : Complex, !(x == Cx(real_of_num(0))) \226\134\146 x / x == Cx(real_of_num(1))
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x * y == x * z) == (x == Cx(real_of_num(0)) || y == z)
-      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (x * z == y * z) == (x == y || z == Cx(real_of_num(0)))
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, w * z == Cx(real_of_num(1)) \226\134\146 inv(w) == z
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, w * z == Cx(real_of_num(1)) \226\134\146 inv(z) == w
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 z * (w / z) == w
-      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 w / z * z == w
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 n : Num, complex_pow(complex_div(x, y), n) == complex_div(complex_pow(x, n), complex_pow(y, n))
+      #|  \226\136\128 x : Complex, !(x == Cx(real_of_num(0))) \226\134\146 complex_div(x, x) == Cx(real_of_num(1))
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_mul(x, y) == complex_mul(x, z)) == (x == Cx(real_of_num(0)) || y == z)
+      #|  \226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, (complex_mul(x, z) == complex_mul(y, z)) == (x == y || z == Cx(real_of_num(0)))
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_mul(w, z) == Cx(real_of_num(1)) \226\134\146 complex_inv(w) == z
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, complex_mul(w, z) == Cx(real_of_num(1)) \226\134\146 complex_inv(z) == w
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 complex_mul(z, complex_div(w, z)) == w
+      #|  \226\136\128 w : Complex, \226\136\128 z : Complex, !(z == Cx(real_of_num(0))) \226\134\146 complex_mul(complex_div(w, z), z) == w
       #|complex_tybij_raw =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(complex,bool),bool) (\a:complex. ((#=:fun(complex,fun(complex,bool)) (#complex:fun(prod(real,real),complex) (#coords:fun(complex,prod(real,real)) a:complex))) a:complex)))) (#forall:fun(fun(prod(real,real),bool),bool) (\r:prod(real,real). ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(prod(real,real),fun(prod(real,real),bool)) (#coords:fun(complex,prod(real,real)) (#complex:fun(prod(real,real),complex) r:prod(real,real)))) r:prod(real,real))))))
       #|complex_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(complex,bool),bool) (\a:complex. ((#=:fun(complex,fun(complex,bool)) (#complex:fun(prod(real,real),complex) (#coords:fun(complex,prod(real,real)) a:complex))) a:complex)))) (#forall:fun(fun(prod(real,real),bool),bool) (\r:prod(real,real). ((#=:fun(prod(real,real),fun(prod(real,real),bool)) (#coords:fun(complex,prod(real,real)) (#complex:fun(prod(real,real),complex) r:prod(real,real)))) r:prod(real,real)))))
       #|RE_DEF =  |- (#forall:fun(fun(complex,bool),bool) (\z:complex. ((#=:fun(real,fun(real,bool)) (#Re:fun(complex,real) z:complex)) (#FST:fun(prod(real,real),real) (#coords:fun(complex,prod(real,real)) z:complex)))))
