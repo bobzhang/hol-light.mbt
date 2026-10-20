@@ -406,7 +406,7 @@ fn step_12() -> Unit raise {
   let t202 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(x : Real) => x"), t201]), @realanalysis.real_continuous_on_abs()))
   let t200 = @tactics.disch_then(@tactics.match_mp_tac)
   let t199 = @simp.asm_rewrite_tac(@list.List([]))
-  let t196 = @term_syntax.parse_term("abs")
+  let t196 = @term_syntax.parse_term("real_abs")
   let t197 = @term_syntax.parse_term("(X : (A) -> Real)")
   let t198 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(p : Prob_space[A])"), t197, t196]), random_variable_comp_continuous()))
   let t204 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t198), t199), t200), t202), t203)
