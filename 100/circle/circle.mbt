@@ -102,7 +102,7 @@ fn step_2() -> Unit raise {
   let t102 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : Cart[Real, Tybit0[Unit]])"))
   let t101 = @simp.asm_simp_tac(@list.List([@realax.real_abs(), @real.real_le_lmul(), @vectors.dist()]))
   let t100 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(abs((r : Real)) * (x : Real) <= r) == (abs(r) * x <= r * real_of_num(1))"))]))
-  let t99 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((z : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]) + z)) == norm(a)")), @vectors.norm_mul()]))
+  let t99 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((z : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]) + z)) == norm(a)")), @vectors.norm_mul()]))
   let t98 = @simp.rewrite_tac(@list.List([@topology.in_cball()]))
   let t97 = @simp.rewrite_tac(@list.List([@topology.in_cball_0(), @sets.in_image()]))
   let t96 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image()]))

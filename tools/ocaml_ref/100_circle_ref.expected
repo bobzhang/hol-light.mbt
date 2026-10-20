@@ -79045,7 +79045,7 @@ Generating HOL version of proof
   op_pct(inv((r : Real)), (w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]))
   (w : Cart[Real, Tybit0[Unit]])
   (abs((r : Real)) * (x : Real) <= r) == (abs(r) * x <= r * real_of_num(1))
-  dist(((z : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]) + z)) == norm(a)
+  distance(((z : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]) + z)) == norm(a)
   :real
   :real
   pi
