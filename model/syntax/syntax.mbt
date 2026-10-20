@@ -59,7 +59,7 @@ pub fn type_inj() -> @kernel.Thm {
 ///|
 /// domain
 fn step_4() -> Unit raise {
-  domain_c.set(@define.define_(@parser.parse_term("domain (Fun s t) = s")))
+  domain_c.set(@define.define_(@term_syntax.parse_term("(domain : (Type) -> Type)(Fun((s : Type), (t : Type))) == s")))
 }
 
 ///|
@@ -74,7 +74,7 @@ pub fn domain() -> @kernel.Thm {
 ///|
 /// codomain
 fn step_5() -> Unit raise {
-  codomain_c.set(@define.define_(@parser.parse_term("codomain (Fun s t) = t")))
+  codomain_c.set(@define.define_(@term_syntax.parse_term("(codomain : (Type) -> Type)(Fun((s : Type), (t : Type))) == t")))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn has_type_cases() -> @kernel.Thm {
 ///|
 /// has_type_RULES, has_type_INDUCT, has_type_CASES
 fn step_10() -> Unit raise {
-  let (has_type_rules, has_type_induct, has_type_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall n ty. (Var n ty) has_type ty) /\\\n   (forall ty. (Equal ty) has_type (Fun ty (Fun ty Bool))) /\\\n   (forall ty. (Select ty) has_type (Fun (Fun ty Bool) ty)) /\\\n   (forall s t dty rty. s has_type (Fun dty rty) /\\ t has_type dty\n                  ==> (Comb s t) has_type rty) /\\\n   (forall n dty t rty. t has_type rty ==> (Abs n dty t) has_type (Fun dty rty))"))
+  let (has_type_rules, has_type_induct, has_type_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ n : List[Char], ∀ ty : Type, (has_type : (Term, Type) -> Bool)(Var(n, ty), ty)) && (∀ ty : Type, has_type(Equal(ty), Fun(ty, Fun(ty, Bool)))) && (∀ ty : Type, has_type(Select(ty), Fun(Fun(ty, Bool), ty))) && (∀ s : Term, ∀ t : Term, ∀ dty : Type, ∀ rty : Type, has_type(s, Fun(dty, rty)) && has_type(t, dty) → has_type(Comb(s, t), rty)) && (∀ n : List[Char], ∀ dty : Type, ∀ t : Term, ∀ rty : Type, has_type(t, rty) → has_type(Abs(n, dty, t), Fun(dty, rty)))"))
   has_type_rules_c.set(has_type_rules)
   has_type_induct_c.set(has_type_induct)
   has_type_cases_c.set(has_type_cases)
@@ -187,7 +187,7 @@ fn step_10() -> Unit raise {
 ///|
 /// welltyped
 fn step_11() -> Unit raise {
-  welltyped_c.set(@pair.new_definition(@parser.parse_term("welltyped tm <=> ?ty. tm has_type ty")))
+  welltyped_c.set(@pair.new_definition(@term_syntax.parse_term("(welltyped : (Term) -> Bool)((tm : Term)) == (∃ ty : Type, has_type(tm, ty))")))
 }
 
 ///|
@@ -219,7 +219,7 @@ pub fn typeof_() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([typeof_(), has_type_rules(), codomain()]))
   let t2 = @tactics.then_tac(@tactics.match_mp_tac(has_type_induct()), t1)
-  welltyped_lemma_c.set(@tactics.prove(@parser.parse_term("forall tm ty. tm has_type ty ==> (typeof tm = ty)"), t2))
+  welltyped_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ tm : Term, ∀ ty : Type, has_type(tm, ty) → op_typeof(tm) == ty"), t2))
 }
 
 ///|
@@ -236,7 +236,7 @@ pub fn welltyped_lemma() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([welltyped_lemma()]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([welltyped()])), t3)
-  welltyped_v1_c.set(@tactics.prove(@parser.parse_term("forall tm. welltyped tm <=> tm has_type (typeof tm)"), t4))
+  welltyped_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ tm : Term, welltyped(tm) == has_type(tm, op_typeof(tm))"), t4))
 }
 
 ///|
@@ -274,7 +274,7 @@ fn step_15() -> Unit raise {
   }, @list.List([has_type_cases()])), t16)
   let t5 = @simp.rewrite_tac(@list.List([welltyped()]))
   let t20 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5), t17), t18), t19)
-  welltyped_clauses_c.set(@tactics.prove(@parser.parse_term("(forall n ty. welltyped(Var n ty)) /\\\n   (forall ty. welltyped(Equal ty)) /\\\n   (forall ty. welltyped(Select ty)) /\\\n   (forall s t. welltyped (Comb s t) <=>\n            welltyped s /\\ welltyped t /\\\n            ?rty. typeof s = Fun (typeof t) rty) /\\\n   (forall n ty t. welltyped (Abs n ty t) = welltyped t)"), t20))
+  welltyped_clauses_c.set(@tactics.prove(@term_syntax.parse_term("(∀ n : List[Char], ∀ ty : Type, welltyped(Var(n, ty))) && (∀ ty : Type, welltyped(Equal(ty))) && (∀ ty : Type, welltyped(Select(ty))) && (∀ s : Term, ∀ t : Term, welltyped(Comb(s, t)) == (welltyped(s) && welltyped(t) && (∃ rty : Type, op_typeof(s) == Fun(op_typeof(t), rty)))) && (∀ n : List[Char], ∀ ty : Type, ∀ t : Term, welltyped(Abs(n, ty, t)) == welltyped(t))"), t20))
 }
 
 ///|
@@ -295,7 +295,7 @@ fn step_16() -> Unit raise {
 ///|
 /// equation
 fn step_17() -> Unit raise {
-  equation_c.set(@pair.new_definition(@parser.parse_term("(s === t) = Comb (Comb (Equal(typeof s)) s) t")))
+  equation_c.set(@pair.new_definition(@term_syntax.parse_term("(op_eq_eq_eq : (Term, Term) -> Term)((s : Term), (t : Term)) == Comb(Comb(Equal(op_typeof(s)), s), t)")))
 }
 
 ///|
@@ -361,7 +361,7 @@ fn step_18() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([term_distinct(), term_inj()]))
   let t21 = @simp.once_rewrite_tac(@list.List([has_type_cases()]))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([equation()])), t21), t22), t23), t24), t25), t37), t38), t39), t40), t53), t54), t55)
-  equation_has_type_bool_c.set(@tactics.prove(@parser.parse_term("forall s t. (s === t) has_type Bool\n         <=> welltyped s /\\ welltyped t /\\ (typeof s = typeof t)"), t56))
+  equation_has_type_bool_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : Term, ∀ t : Term, has_type(op_eq_eq_eq(s, t), Bool) == (welltyped(s) && welltyped(t) && op_typeof(s) == op_typeof(t))"), t56))
 }
 
 ///|
@@ -376,7 +376,7 @@ pub fn equation_has_type_bool() -> @kernel.Thm {
 ///|
 /// ALPHAVARS
 fn step_19() -> Unit raise {
-  alphavars_c.set(@define.define_(@parser.parse_term("(ALPHAVARS [] tmp <=> (FST tmp = SND tmp)) /\\\n   (ALPHAVARS (CONS tp oenv) tmp <=>\n        (tmp = tp) \\/\n        ~(FST tp = FST tmp) /\\ ~(SND tp = SND tmp) /\\ ALPHAVARS oenv tmp)")))
+  alphavars_c.set(@define.define_(@term_syntax.parse_term("(ALPHAVARS : (List[(_, _)], (_, _)) -> Bool)(NIL, (tmp : (_, _))) == (FST(tmp) == SND(tmp)) && ALPHAVARS(CONS((tp : (_, _)), (oenv : List[(_, _)])), tmp) == (tmp == tp || !(FST(tp) == FST(tmp)) && !(SND(tp) == SND(tmp)) && ALPHAVARS(oenv, tmp))")))
 }
 
 ///|
@@ -418,7 +418,7 @@ pub fn raconv_cases() -> @kernel.Thm {
 ///|
 /// RACONV_RULES, RACONV_INDUCT, RACONV_CASES
 fn step_20() -> Unit raise {
-  let (raconv_rules, raconv_induct, raconv_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall env x1 ty1 x2 ty2.\n       ALPHAVARS env (Var x1 ty1,Var x2 ty2)\n       ==> RACONV env (Var x1 ty1,Var x2 ty2)) /\\\n  (forall env ty. RACONV env (Equal ty,Equal ty)) /\\\n  (forall env ty. RACONV env (Select ty,Select ty)) /\\\n  (forall env s1 t1 s2 t2.\n       RACONV env (s1,s2) /\\ RACONV env (t1,t2)\n       ==> RACONV env (Comb s1 t1,Comb s2 t2)) /\\\n  (forall env x1 ty1 t1 x2 ty2 t2.\n       (ty1 = ty2) /\\ RACONV (CONS ((Var x1 ty1),(Var x2 ty2)) env) (t1,t2)\n       ==> RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2))"))
+  let (raconv_rules, raconv_induct, raconv_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ env : List[(Term, Term)], ∀ x1 : List[Char], ∀ ty1 : Type, ∀ x2 : List[Char], ∀ ty2 : Type, ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) → (RACONV : (List[(Term, Term)], (Term, Term)) -> Bool)(env, (Var(x1, ty1), Var(x2, ty2)))) && (∀ env : List[(Term, Term)], ∀ ty : Type, RACONV(env, (Equal(ty), Equal(ty)))) && (∀ env : List[(Term, Term)], ∀ ty : Type, RACONV(env, (Select(ty), Select(ty)))) && (∀ env : List[(Term, Term)], ∀ s1 : Term, ∀ t1 : Term, ∀ s2 : Term, ∀ t2 : Term, RACONV(env, (s1, s2)) && RACONV(env, (t1, t2)) → RACONV(env, (Comb(s1, t1), Comb(s2, t2)))) && (∀ env : List[(Term, Term)], ∀ x1 : List[Char], ∀ ty1 : Type, ∀ t1 : Term, ∀ x2 : List[Char], ∀ ty2 : Type, ∀ t2 : Term, ty1 == ty2 && RACONV(CONS((Var(x1, ty1), Var(x2, ty2)), env), (t1, t2)) → RACONV(env, (Abs(x1, ty1, t1), Abs(x2, ty2, t2))))"))
   raconv_rules_c.set(raconv_rules)
   raconv_induct_c.set(raconv_induct)
   raconv_cases_c.set(raconv_cases)
@@ -436,7 +436,7 @@ fn step_21() -> Unit raise {
     }
   }, @list.List([raconv_cases()]))
   let t63 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t60), t61), t62)
-  raconv_c.set(@tactics.prove(@parser.parse_term("(RACONV env (Var x1 ty1,Var x2 ty2) <=>\n        ALPHAVARS env (Var x1 ty1,Var x2 ty2)) /\\\n   (RACONV env (Var x1 ty1,Equal ty2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Select ty2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Var x1 ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Equal ty1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Equal ty1,Equal ty2) <=> (ty1 = ty2)) /\\\n   (RACONV env (Equal ty1,Select ty2) <=> F) /\\\n   (RACONV env (Equal ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Equal ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Select ty1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Select ty1,Equal ty2) <=> F) /\\\n   (RACONV env (Select ty1,Select ty2) <=> (ty1 = ty2)) /\\\n   (RACONV env (Select ty1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Select ty1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Equal ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Select ty2) <=> F) /\\\n   (RACONV env (Comb l1 r1,Comb l2 r2) <=>\n        RACONV env (l1,l2) /\\ RACONV env (r1,r2)) /\\\n   (RACONV env (Comb l1 r1,Abs x2 ty2 t2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Var x2 ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Equal ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Select ty2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Comb l2 r2) <=> F) /\\\n   (RACONV env (Abs x1 ty1 t1,Abs x2 ty2 t2) <=>\n        (ty1 = ty2) /\\ RACONV (CONS (Var x1 ty1,Var x2 ty2) env) (t1,t2))"), t63))
+  raconv_c.set(@tactics.prove(@term_syntax.parse_term("RACONV((env : List[(Term, Term)]), (Var((x1 : List[Char]), (ty1 : Type)), Var((x2 : List[Char]), (ty2 : Type)))) == ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) && RACONV(env, (Var(x1, ty1), Equal(ty2))) == false && RACONV(env, (Var(x1, ty1), Select(ty2))) == false && RACONV(env, (Var(x1, ty1), Comb((l2 : Term), (r2 : Term)))) == false && RACONV(env, (Var(x1, ty1), Abs(x2, ty2, (t2 : Term)))) == false && RACONV(env, (Equal(ty1), Var(x2, ty2))) == false && RACONV(env, (Equal(ty1), Equal(ty2))) == (ty1 == ty2) && RACONV(env, (Equal(ty1), Select(ty2))) == false && RACONV(env, (Equal(ty1), Comb(l2, r2))) == false && RACONV(env, (Equal(ty1), Abs(x2, ty2, t2))) == false && RACONV(env, (Select(ty1), Var(x2, ty2))) == false && RACONV(env, (Select(ty1), Equal(ty2))) == false && RACONV(env, (Select(ty1), Select(ty2))) == (ty1 == ty2) && RACONV(env, (Select(ty1), Comb(l2, r2))) == false && RACONV(env, (Select(ty1), Abs(x2, ty2, t2))) == false && RACONV(env, (Comb((l1 : Term), (r1 : Term)), Var(x2, ty2))) == false && RACONV(env, (Comb(l1, r1), Equal(ty2))) == false && RACONV(env, (Comb(l1, r1), Select(ty2))) == false && RACONV(env, (Comb(l1, r1), Comb(l2, r2))) == (RACONV(env, (l1, l2)) && RACONV(env, (r1, r2))) && RACONV(env, (Comb(l1, r1), Abs(x2, ty2, t2))) == false && RACONV(env, (Abs(x1, ty1, (t1 : Term)), Var(x2, ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Equal(ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Select(ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Comb(l2, r2))) == false && RACONV(env, (Abs(x1, ty1, t1), Abs(x2, ty2, t2))) == (ty1 == ty2 && RACONV(CONS((Var(x1, ty1), Var(x2, ty2)), env), (t1, t2)))"), t63))
 }
 
 ///|
@@ -451,7 +451,7 @@ pub fn raconv() -> @kernel.Thm {
 ///|
 /// ACONV
 fn step_22() -> Unit raise {
-  aconv_c.set(@pair.new_definition(@parser.parse_term("ACONV t1 t2 <=> RACONV [] (t1,t2)")))
+  aconv_c.set(@pair.new_definition(@term_syntax.parse_term("(ACONV : (Term, Term) -> Bool)((t1 : Term), (t2 : Term)) == RACONV(NIL, (t1, t2))")))
 }
 
 ///|
@@ -471,7 +471,7 @@ fn step_23() -> Unit raise {
   let t65 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t64 = @simp.rewrite_tac(@list.List([@lists.all(), alphavars()]))
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t64), t65), t66), t67)
-  alphavars_refl_c.set(@tactics.prove(@parser.parse_term("forall env t. ALL (\\(s,t). s = t) env ==> ALPHAVARS env (t,t)"), t68))
+  alphavars_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ env : List[(_, _)], ∀ t : _, ALL(GABS((f : ((_, _)) -> Bool) => ∀ s : _, ∀ t : _, GEQ(f((s, t)), s == t)), env) → ALPHAVARS(env, (t, t))"), t68))
 }
 
 ///|
@@ -496,7 +496,7 @@ fn step_24() -> Unit raise {
   let t70 = @tactics.repeat_tac(@tactics.strip_tac)
   let t69 = @simp.rewrite_tac(@list.List([raconv()]))
   let t78 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t69), t70), t77)
-  raconv_refl_c.set(@tactics.prove(@parser.parse_term("forall t env. ALL (\\(s,t). s = t) env ==> RACONV env (t,t)"), t78))
+  raconv_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, ∀ env : List[(Term, Term)], ALL(GABS((f : ((Term, Term)) -> Bool) => ∀ s : Term, ∀ t : Term, GEQ(f((s, t)), s == t)), env) → RACONV(env, (t, t))"), t78))
 }
 
 ///|
@@ -513,7 +513,7 @@ pub fn raconv_refl() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t79 = @simp.simp_tac(@list.List([raconv_refl(), @lists.all()]))
   let t80 = @tactics.then_tac(@simp.rewrite_tac(@list.List([aconv()])), t79)
-  aconv_refl_c.set(@tactics.prove(@parser.parse_term("forall t. ACONV t t"), t80))
+  aconv_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, ACONV(t, t)"), t80))
 }
 
 ///|
@@ -534,7 +534,7 @@ fn step_26() -> Unit raise {
   let t82 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t81 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), alphavars(), @lists.all(), @pair.pair_eq()]))
   let t86 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t81), t82), @tactics.conj_tac), t83), t84), t85)
-  alphavars_type_c.set(@tactics.prove(@parser.parse_term("forall env s t. ALPHAVARS env (s,t) /\\\n             ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                          (typeof x = typeof y)) env /\\\n             welltyped s /\\ welltyped t\n           ==> (typeof s = typeof t)"), t86))
+  alphavars_type_c.set(@tactics.prove(@term_syntax.parse_term("∀ env : List[(Term, Term)], ∀ s : Term, ∀ t : Term, ALPHAVARS(env, (s, t)) && ALL(GABS((f : ((Term, Term)) -> Bool) => ∀ x : Term, ∀ y : Term, GEQ(f((x, y)), welltyped(x) && welltyped(y) && op_typeof(x) == op_typeof(y))), env) && welltyped(s) && welltyped(t) → op_typeof(s) == op_typeof(t)"), t86))
 }
 
 ///|
@@ -562,7 +562,7 @@ fn step_27() -> Unit raise {
   let t88 = @tactics.repeat_tac(@tactics.strip_tac)
   let t87 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), typeof_()]))
   let t99 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(raconv_induct()), t87), t88), t98)
-  raconv_type_c.set(@tactics.prove(@parser.parse_term("forall env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))"), t99))
+  raconv_type_c.set(@tactics.prove(@term_syntax.parse_term("∀ env : List[(Term, Term)], ∀ p : (Term, Term), RACONV(env, p) → ALL(GABS((f : ((Term, Term)) -> Bool) => ∀ x : Term, ∀ y : Term, GEQ(f((x, y)), welltyped(x) && welltyped(y) && op_typeof(x) == op_typeof(y))), env) && welltyped(FST(p)) && welltyped(SND(p)) → op_typeof(FST(p)) == op_typeof(SND(p))"), t99))
 }
 
 ///|
@@ -579,10 +579,10 @@ pub fn raconv_type() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   let t103 = @meson.meson_tac(@list.List([]))
   let t102 = @simp.rewrite_tac(@list.List([aconv(), @lists.all()]))
-  let t100 = @parser.parse_term("(s:term,t:term)")
-  let t101 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("[]:(term#term)list"), t100]), raconv_type()))
+  let t100 = @term_syntax.parse_term("((s : Term), (t : Term))")
+  let t101 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(NIL : List[(Term, Term)])"), t100]), raconv_type()))
   let t104 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t101), t102), t103)
-  aconv_type_c.set(@tactics.prove(@parser.parse_term("forall s t. ACONV s t ==> welltyped s /\\ welltyped t ==> (typeof s = typeof t)"), t104))
+  aconv_type_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : Term, ∀ t : Term, ACONV(s, t) → welltyped(s) && welltyped(t) → op_typeof(s) == op_typeof(t)"), t104))
 }
 
 ///|
@@ -597,7 +597,7 @@ pub fn aconv_type() -> @kernel.Thm {
 ///|
 /// TERM_UNION
 fn step_29() -> Unit raise {
-  term_union_c.set(@define.define_(@parser.parse_term("(TERM_UNION [] l2 = l2) /\\\n  (TERM_UNION (CONS h t) l2 =\n        let subun = TERM_UNION t l2 in\n        if EX (ACONV h) subun then subun else CONS h subun)")))
+  term_union_c.set(@define.define_(@term_syntax.parse_term("(TERM_UNION : (List[Term], List[Term]) -> List[Term])(NIL, (l2 : List[Term])) == l2 && TERM_UNION(CONS((h : Term), (t : List[Term])), l2) == LET((subun : List[Term]) => LET_END(if EX(ACONV(h), subun) { subun } else { CONS(h, subun) }), TERM_UNION(t, l2))")))
 }
 
 ///|
@@ -616,7 +616,7 @@ fn step_30() -> Unit raise {
   let t106 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t105 = @tactics.repeat_tac(@tactics.gen_tac)
   let t108 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([term_union(), @lists.mem()]))), @pair.let_tac), t105), @class.cond_cases_tac), t106), t107)
-  term_union_nonew_c.set(@tactics.prove(@parser.parse_term("forall l1 l2 x. MEM x (TERM_UNION l1 l2) ==> MEM x l1 \\/ MEM x l2"), t108))
+  term_union_nonew_c.set(@tactics.prove(@term_syntax.parse_term("∀ l1 : List[Term], ∀ l2 : List[Term], ∀ x : Term, MEM(x, TERM_UNION(l1, l2)) → MEM(x, l1) || MEM(x, l2)"), t108))
 }
 
 ///|
@@ -636,7 +636,7 @@ fn step_31() -> Unit raise {
   let t110 = @tactics.repeat_tac(@tactics.gen_tac)
   let t109 = @list.List([@meson.meson_tac(@list.List([aconv_refl()])), @tactics.all_tac])
   let t113 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([term_union(), @lists.mem(), @equal.gsym(@lists.ex_mem())]))), t109), t110), @pair.let_tac), @class.cond_cases_tac), @tactics.strip_tac), t111), t112)
-  term_union_thm_c.set(@tactics.prove(@parser.parse_term("forall l1 l2 x. MEM x l1 \\/ MEM x l2\n             ==> ?y. MEM y (TERM_UNION l1 l2) /\\ ACONV x y"), t113))
+  term_union_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ l1 : List[Term], ∀ l2 : List[Term], ∀ x : Term, MEM(x, l1) || MEM(x, l2) → (∃ y : Term, MEM(y, TERM_UNION(l1, l2)) && ACONV(x, y))"), t113))
 }
 
 ///|
@@ -653,7 +653,7 @@ pub fn term_union_thm() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   let t114 = @meson.meson_tac(@list.List([term_union_nonew()]))
   let t115 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@lists.all_mem())])), t114)
-  all_bool_term_union_c.set(@tactics.prove(@parser.parse_term("ALL (\\a. a has_type Bool) l1 /\\ ALL (\\a. a has_type Bool) l2\n   ==> ALL (\\a. a has_type Bool) (TERM_UNION l1 l2)"), t115))
+  all_bool_term_union_c.set(@tactics.prove(@term_syntax.parse_term("ALL((a : Term) => has_type(a, Bool), (l1 : List[Term])) && ALL((a : Term) => has_type(a, Bool), (l2 : List[Term])) → ALL((a : Term) => has_type(a, Bool), TERM_UNION(l1, l2))"), t115))
 }
 
 ///|
@@ -668,7 +668,7 @@ pub fn all_bool_term_union() -> @kernel.Thm {
 ///|
 /// VFREE_IN
 fn step_33() -> Unit raise {
-  vfree_in_c.set(@define.define_(@parser.parse_term("(VFREE_IN v (Var x ty) <=> (Var x ty = v)) /\\\n   (VFREE_IN v (Equal ty) <=> (Equal ty = v)) /\\\n   (VFREE_IN v (Select ty) <=> (Select ty = v)) /\\\n   (VFREE_IN v (Comb s t) <=> VFREE_IN v s \\/ VFREE_IN v t) /\\\n   (VFREE_IN v (Abs x ty t) <=> ~(Var x ty = v) /\\ VFREE_IN v t)")))
+  vfree_in_c.set(@define.define_(@term_syntax.parse_term("(VFREE_IN : (Term, Term) -> Bool)((v : Term), Var((x : List[Char]), (ty : Type))) == (Var(x, ty) == v) && VFREE_IN(v, Equal(ty)) == (Equal(ty) == v) && VFREE_IN(v, Select(ty)) == (Select(ty) == v) && VFREE_IN(v, Comb((s : Term), (t : Term))) == (VFREE_IN(v, s) || VFREE_IN(v, t)) && VFREE_IN(v, Abs(x, ty, t)) == (!(Var(x, ty) == v) && VFREE_IN(v, t))")))
 }
 
 ///|
@@ -694,7 +694,7 @@ fn step_34() -> Unit raise {
   let t117 = @simp.rewrite_tac(@list.List([@pair.pair_eq(), term_inj(), @lists.mem()]))
   let t116 = @simp.rewrite_tac(@list.List([vfree_in(), term_distinct()]))
   let t126 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(raconv_induct()), t116), t117), @tactics.conj_tac), t118), t119), t120), t121), @tactics.conj_tac), t122), t123), t124), t125)
-  vfree_in_raconv_c.set(@tactics.prove(@parser.parse_term("forall env p. RACONV env p\n           ==> forall x ty. VFREE_IN (Var x ty) (FST p) /\\\n                      ~(?y. MEM (Var x ty,y) env) <=>\n                      VFREE_IN (Var x ty) (SND p) /\\\n                      ~(?y. MEM (y,Var x ty) env)"), t126))
+  vfree_in_raconv_c.set(@tactics.prove(@term_syntax.parse_term("∀ env : List[(Term, Term)], ∀ p : (Term, Term), RACONV(env, p) → (∀ x : List[Char], ∀ ty : Type, (VFREE_IN(Var(x, ty), FST(p)) && !(∃ y : Term, MEM((Var(x, ty), y), env))) == (VFREE_IN(Var(x, ty), SND(p)) && !(∃ y : Term, MEM((y, Var(x, ty)), env))))"), t126))
 }
 
 ///|
@@ -736,7 +736,7 @@ pub fn vfree_in_aconv() -> @kernel.Thm {
 ///|
 /// REV_ASSOCD
 fn step_36() -> Unit raise {
-  rev_assocd_c.set(@define.define_(@parser.parse_term("(REV_ASSOCD a [] d = d) /\\\n   (REV_ASSOCD a (CONS (x,y) t) d =\n        if y = a then x else REV_ASSOCD a t d)")))
+  rev_assocd_c.set(@define.define_(@term_syntax.parse_term("(REV_ASSOCD : (_, List[(_, _)], _) -> _)((a : _), NIL, (d : _)) == d && REV_ASSOCD(a, CONS(((x : _), (y : _)), (t : List[(_, _)])), d) == (if y == a { x } else { REV_ASSOCD(a, t, d) })")))
 }
 
 ///|
@@ -751,7 +751,7 @@ pub fn rev_assocd() -> @kernel.Thm {
 ///|
 /// TYPE_SUBST
 fn step_37() -> Unit raise {
-  type_subst_c.set(@define.define_(@parser.parse_term("(TYPE_SUBST i (Tyvar v) = REV_ASSOCD (Tyvar v) i (Tyvar v)) /\\\n  (TYPE_SUBST i Bool = Bool) /\\\n  (TYPE_SUBST i Ind = Ind) /\\\n  (TYPE_SUBST i (Fun ty1 ty2) = Fun (TYPE_SUBST i ty1) (TYPE_SUBST i ty2))")))
+  type_subst_c.set(@define.define_(@term_syntax.parse_term("(TYPE_SUBST : (List[(Type, Type)], Type) -> Type)((i : List[(Type, Type)]), Tyvar((v : List[Char]))) == REV_ASSOCD(Tyvar(v), i, Tyvar(v)) && TYPE_SUBST(i, Bool) == Bool && TYPE_SUBST(i, Ind) == Ind && TYPE_SUBST(i, Fun((ty1 : Type), (ty2 : Type))) == Fun(TYPE_SUBST(i, ty1), TYPE_SUBST(i, ty2))")))
 }
 
 ///|
@@ -767,12 +767,12 @@ pub fn type_subst() -> @kernel.Thm {
 /// VFREE_IN_FINITE
 fn step_38() -> Unit raise {
   let t140 = @simp.simp_tac(@list.List([@sets.finite_insert(), @sets.finite_rules(), @sets.finite_union(), @sets.finite_inter()]))
-  let t137 = @sets.set_rule(@parser.parse_term("{x | P x /\\ Q x} = {x | P x} INTER {x | Q x}"))
-  let t138 = @sets.set_rule(@parser.parse_term("{x | P x \\/ Q x} = {x | P x} UNION {x | Q x}"))
-  let t139 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | a = x} = {a}")), t138, t137]))
+  let t137 = @sets.set_rule(@term_syntax.parse_term("{(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})"))
+  let t138 = @sets.set_rule(@term_syntax.parse_term("{(x : _) | (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)} == UNION({(x : _) | P(x)}, {(x : _) | Q(x)})"))
+  let t139 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{(x : _) | (a : _) == x} == {a}")), t138, t137]))
   let t136 = @simp.rewrite_tac(@list.List([vfree_in()]))
   let t141 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t136), t139), t140)
-  vfree_in_finite_c.set(@tactics.prove(@parser.parse_term("forall t. FINITE {x | VFREE_IN x t}"), t141))
+  vfree_in_finite_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, FINITE({(x : Term) | VFREE_IN(x, t)})"), t141))
 }
 
 ///|
@@ -789,14 +789,14 @@ pub fn vfree_in_finite() -> @kernel.Thm {
 fn step_39() -> Unit raise {
   let t149 = @simp.asm_rewrite_tac(@list.List([]))
   let t148 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
-  let t147 = @tactics.exists_tac(@parser.parse_term("Var x ty"))
-  let t146 = @tactics.x_gen_tac(@parser.parse_term("x:string"))
+  let t147 = @tactics.exists_tac(@term_syntax.parse_term("Var((x : List[Char]), (ty : Type))"))
+  let t146 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : List[Char])"))
   let t145 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), @sets.in_elim_thm()]))
   let t144 = @simp.simp_tac(@list.List([vfree_in_finite(), @sets.finite_image()]))
-  let t143 = @tactics.exists_tac(@parser.parse_term("IMAGE (\\(Var x ty). x) {x | VFREE_IN x t}"))
+  let t143 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE(GABS((f : (Term) -> List[Char]) => ∀ x : List[Char], ∀ ty : Type, GEQ(f(Var(x, ty)), x)), {(x : Term) | VFREE_IN(x, (t : Term))})"))
   let t142 = @tactics.match_mp_tac(@sets.finite_subset())
   let t150 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t142), t143), t144), t145), t146), @tactics.disch_tac), t147), t148), t149)
-  vfree_in_finite_alt_c.set(@tactics.prove(@parser.parse_term("forall t ty. FINITE {x | VFREE_IN (Var x ty) t}"), t150))
+  vfree_in_finite_alt_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, ∀ ty : Type, FINITE({(x : List[Char]) | VFREE_IN(Var(x, ty), t)})"), t150))
 }
 
 ///|
@@ -838,10 +838,10 @@ fn step_40() -> Unit raise {
       }
     })(((x156 : @kernel.Thm) => @bool.conj(@sets.string_infinite(), x156))(x157))
   })
-  let t151 = @parser.parse_term("ty:type")
-  let t152 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("t:term"), t151]), vfree_in_finite_alt()))
+  let t151 = @term_syntax.parse_term("(ty : Type)")
+  let t152 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(t : Term)"), t151]), vfree_in_finite_alt()))
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t152), t158), t164), t170), t171)
-  variant_exists_c.set(@tactics.prove(@parser.parse_term("forall t x:string ty. ?x'. ~(VFREE_IN (Var x' ty) t)"), t172))
+  variant_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, ∀ x : List[Char], ∀ ty : Type, ∃ x' : List[Char], !VFREE_IN(Var(x', ty), t)"), t172))
 }
 
 ///|
@@ -872,7 +872,7 @@ pub fn variant() -> @kernel.Thm {
 ///|
 /// VSUBST
 fn step_42() -> Unit raise {
-  vsubst_c.set(@define.define_(@parser.parse_term("(VSUBST ilist (Var x ty) = REV_ASSOCD (Var x ty) ilist (Var x ty)) /\\\n   (VSUBST ilist (Equal ty) = Equal ty) /\\\n   (VSUBST ilist (Select ty) = Select ty) /\\\n   (VSUBST ilist (Comb s t) = Comb (VSUBST ilist s) (VSUBST ilist t)) /\\\n   (VSUBST ilist (Abs x ty t) =\n        let ilist' = FILTER (\\(s',s). ~(s = Var x ty)) ilist in\n        let t' = VSUBST ilist' t in\n        if EX (\\(s',s). VFREE_IN (Var x ty) s' /\\ VFREE_IN s t) ilist'\n        then let z = VARIANT t' x ty in\n             let ilist'' = CONS (Var z ty,Var x ty) ilist' in\n             Abs z ty (VSUBST ilist'' t)\n        else Abs x ty t')")))
+  vsubst_c.set(@define.define_(@term_syntax.parse_term("(VSUBST : (List[(Term, Term)], Term) -> Term)((ilist : List[(Term, Term)]), Var((x : List[Char]), (ty : Type))) == REV_ASSOCD(Var(x, ty), ilist, Var(x, ty)) && VSUBST(ilist, Equal(ty)) == Equal(ty) && VSUBST(ilist, Select(ty)) == Select(ty) && VSUBST(ilist, Comb((s : Term), (t : Term))) == Comb(VSUBST(ilist, s), VSUBST(ilist, t)) && VSUBST(ilist, Abs(x, ty, t)) == LET((ilist' : List[(Term, Term)]) => LET_END(LET((t' : Term) => LET_END(if EX(GABS((f : ((Term, Term)) -> Bool) => ∀ s' : Term, ∀ s : Term, GEQ(f((s', s)), VFREE_IN(Var(x, ty), s') && VFREE_IN(s, t))), ilist') { LET((z : List[Char]) => LET_END(LET((ilist'' : List[(Term, Term)]) => LET_END(Abs(z, ty, VSUBST(ilist'', t))), CONS((Var(z, ty), Var(x, ty)), ilist'))), VARIANT(t', x, ty)) } else { Abs(x, ty, t') }), VSUBST(ilist', t))), FILTER(GABS((f : ((Term, Term)) -> Bool) => ∀ s' : Term, ∀ s : Term, GEQ(f((s', s)), !(s == Var(x, ty)))), ilist))")))
 }
 
 ///|
@@ -914,7 +914,7 @@ fn step_43() -> Unit raise {
       s264(x265)
     }
   }))
-  let t259 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("rty:type"))(fn(x256 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t259 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(rty : Type)"))(fn(x256 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s257 = @tactics.mp_tac(x256)
     fn(x258 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s257(x258)
@@ -933,16 +933,16 @@ fn step_43() -> Unit raise {
       }
     })(t251(x252))
   })
-  let t245 = @parser.parse_term("ilist:(term#term)list")
-  let t246 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("fty:type"), t245]))
-  let t242 = @parser.parse_term("t:term")
-  let t243 = @parser.parse_term("ty:type")
-  let t244 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t243, t242]))
+  let t245 = @term_syntax.parse_term("(ilist : List[(Term, Term)])")
+  let t246 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(fty : Type)"), t245]))
+  let t242 = @term_syntax.parse_term("(t : Term)")
+  let t243 = @term_syntax.parse_term("(ty : Type)")
+  let t244 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : List[Char])"), t243, t242]))
   let t237 = @simp.asm_rewrite_tac(@list.List([]))
   let t236 = @tactics.first_x_assum(@tactics.match_mp_tac)
-  let t235 = @tactics.exists_tac(@parser.parse_term("dty:type"))
+  let t235 = @tactics.exists_tac(@term_syntax.parse_term("(dty : Type)"))
   let t234 = @tactics.match_mp_tac(@lib.el(3, @bool.conjuncts_rule(has_type_rules())))
-  let t233 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("dty:type"))(@tactics.strip_assume_tac))
+  let t233 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(dty : Type)"))(@tactics.strip_assume_tac))
   let t232 = @simp.rewrite_tac(@list.List([@theorems.right_exists_and_thm(), @theorems.unwind_thm1()]))
   let t231 = @simp.rewrite_tac(@list.List([term_distinct(), term_inj(), @equal.gsym(@theorems.conj_assoc())]))
   let t228 = @simp.gen_rewrite_rule(fn(x227 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -957,8 +957,8 @@ fn step_43() -> Unit raise {
     })(t228(x229))
   })
   let t223 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t222 = @parser.parse_term("t:term")
-  let t238 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("s:term"), t222])), t223), t230), t231), t232), t233), t234), t235), @tactics.conj_tac), t236), t237)
+  let t222 = @term_syntax.parse_term("(t : Term)")
+  let t238 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(s : Term)"), t222])), t223), t230), t231), t232), t233), t234), t235), @tactics.conj_tac), t236), t237)
   let t239 = @simp.simp_tac(@list.List([]))
   let t240 = @simp.simp_tac(@list.List([]))
   let t221 = @meson.asm_meson_tac(@list.List([term_inj()]))
@@ -973,13 +973,13 @@ fn step_43() -> Unit raise {
       s218(x219)
     }
   }))
-  let t213 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("aty:type"))(fn(x210 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t213 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(aty : Type)"))(fn(x210 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s211 = @tactics.mp_tac(x210)
     fn(x212 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s211(x212)
     }
   }))
-  let t209 = @tactics.first_x_assum(@tactics.x_choose_then(@parser.parse_term("y:string"))(fn(x206 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t209 = @tactics.first_x_assum(@tactics.x_choose_then(@term_syntax.parse_term("(y : List[Char])"))(fn(x206 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s207 = @tactics.mp_tac(x206)
     fn(x208 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s207(x208)
@@ -991,9 +991,9 @@ fn step_43() -> Unit raise {
       s203(x204)
     }
   }))
-  let t199 = @parser.parse_term("ilist:(term#term)list")
-  let t200 = @parser.parse_term("u:term")
-  let t201 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("s:term"), t200, t199]))
+  let t199 = @term_syntax.parse_term("(ilist : List[(Term, Term)])")
+  let t200 = @term_syntax.parse_term("(u : Term)")
+  let t201 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(s : Term)"), t200, t199]))
   let t198 = @tactics.disch_then(fn(x197 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x194 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s195 = @tactics.subst_all_tac(x194)
@@ -1016,19 +1016,19 @@ fn step_43() -> Unit raise {
     })(t189(x190))
   })
   let t184 = @simp.asm_rewrite_tac(@list.List([]))
-  let t183 = @class.asm_cases_tac(@parser.parse_term("(Var x ty) has_type tty"))
+  let t183 = @class.asm_cases_tac(@term_syntax.parse_term("has_type(Var((x : List[Char]), (ty : Type)), (tty : Type))"))
   let t182 = @simp.rewrite_tac(@list.List([@theorems.left_exists_and_thm(), @theorems.exists_refl()]))
   let t181 = @simp.simp_tac(@list.List([@theorems.forall_and_thm(), @theorems.left_forall_imp_thm(), @pair.pair_eq()]))
-  let t180 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)"))]))
+  let t180 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((a : Bool) || (b : Bool) → (c : Bool)) == ((a → c) && (b → c))"))]))
   let t179 = @simp.simp_tac(@list.List([rev_assocd(), @lists.mem(), @pair.forall_pair_thm()]))
   let t178 = @tactics.match_mp_tac(@ind_types.list_induct())
-  let t176 = @parser.parse_term("tty:type")
-  let t177 = @parser.parse_term("ty:type")
-  let t241 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t177, t176])), t178), t179), t180), t181), t182), t183), t184), t191), t192), t193), t198), t201), @tactics.disch_tac), t205), t209), t213), t220), t221), t240, t239, t238, @tactics.all_tac])
+  let t176 = @term_syntax.parse_term("(tty : Type)")
+  let t177 = @term_syntax.parse_term("(ty : Type)")
+  let t241 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : List[Char])"), t177, t176])), t178), t179), t180), t181), t182), t183), t184), t191), t192), t193), t198), t201), @tactics.disch_tac), t205), t209), t213), t220), t221), t240, t239, t238, @tactics.all_tac])
   let t175 = @tactics.repeat_tac(@tactics.conj_tac)
   let t174 = @simp.rewrite_tac(@list.List([vsubst()]))
   let t281 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t174), t175), t241), t244), @tactics.disch_tac), t246), @tactics.strip_tac), @pair.let_tac), @pair.let_tac), t253), t254), t255), t259), t266), @tactics.disch_tac), @class.cond_cases_tac), t267), t268), t269), t270), t271), t276), t277), t278), t279), t280)
-  vsubst_has_type_c.set(@tactics.prove(@parser.parse_term("forall tm ty ilist.\n        tm has_type ty /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> (VSUBST ilist tm) has_type ty"), t281))
+  vsubst_has_type_c.set(@tactics.prove(@term_syntax.parse_term("∀ tm : Term, ∀ ty : Type, ∀ ilist : List[(Term, Term)], has_type(tm, ty) && (∀ s : Term, ∀ s' : Term, MEM((s', s), ilist) → (∃ x : List[Char], ∃ ty : Type, s == Var(x, ty) && has_type(s', ty))) → has_type(VSUBST(ilist, tm), ty)"), t281))
 }
 
 ///|
@@ -1061,17 +1061,17 @@ pub fn vsubst_welltyped() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t293 = @meson.asm_meson_tac(@list.List([]))
   let t292 = @simp.asm_rewrite_tac(@list.List([rev_assocd()]))
-  let t291 = @class.asm_cases_tac(@parser.parse_term("(P:A->bool) x"))
+  let t291 = @class.asm_cases_tac(@term_syntax.parse_term("(P : (A) -> Bool)((x : A))"))
   let t290 = @simp.asm_rewrite_tac(@list.List([rev_assocd()]))
   let t289 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t286 = @parser.parse_term("l:(B#A)list")
-  let t287 = @parser.parse_term("x:A")
-  let t288 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("y:B"), t287, t286]))
+  let t286 = @term_syntax.parse_term("(l : List[(B, A)])")
+  let t287 = @term_syntax.parse_term("(x : A)")
+  let t288 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(y : B)"), t287, t286]))
   let t285 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t284 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t283 = @simp.rewrite_tac(@list.List([rev_assocd(), @lists.filter(), @class.cond_id()]))
   let t294 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t283), t284), t285), t288), t289), t290), t291), t292), t293)
-  rev_assocd_filter_c.set(@tactics.prove(@parser.parse_term("forall l:(B#A)list a b d.\n        REV_ASSOCD a (FILTER (\\(y,x). P x) l) b =\n            if P a then REV_ASSOCD a l b else b"), t294))
+  rev_assocd_filter_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : List[(B, A)], ∀ a : A, ∀ b : B, ∀ d : _, REV_ASSOCD(a, FILTER(GABS((f : ((B, A)) -> Bool) => ∀ y : B, ∀ x : A, GEQ(f((y, x)), (P : (A) -> Bool)(x))), l), b) == (if P(a) { REV_ASSOCD(a, l, b) } else { b })"), t294))
 }
 
 ///|
@@ -1093,8 +1093,8 @@ fn step_46() -> Unit raise {
   let t351 = @simp.rewrite_tac(@list.List([rev_assocd(), @lists.filter(), @pair.forall_pair_thm()]))
   let t350 = @simp.rewrite_tac(@list.List([@lists.all(), rev_assocd(), vfree_in()]))
   let t349 = @tactics.match_mp_tac(@ind_types.list_induct())
-  let t347 = @parser.parse_term("l:(term#term)list")
-  let t348 = @tactics.spec_tac(@parser.parse_term("ilist:(term#term)list"), t347)
+  let t347 = @term_syntax.parse_term("(l : List[(Term, Term)])")
+  let t348 = @tactics.spec_tac(@term_syntax.parse_term("(ilist : List[(Term, Term)])"), t347)
   let t346 = @simp.expand_tac("ilist'")
   let t343 = @simp.gen_rewrite_rule(fn(x342 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x342
@@ -1111,9 +1111,9 @@ fn step_46() -> Unit raise {
   let t336 = @simp.asm_rewrite_tac(@list.List([rev_assocd_filter()]))
   let t335 = @simp.expand_tac("ilist'")
   let t334 = @simp.asm_rewrite_tac(@list.List([]))
-  let t332 = @parser.parse_term("ty:type")
-  let t333 = @parser.parse_term("x:string")
-  let t338 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("VSUBST ilist' t"), t333, t332]), variant())), t334), t335), t336), t337), @tactics.all_tac])
+  let t332 = @term_syntax.parse_term("(ty : Type)")
+  let t333 = @term_syntax.parse_term("(x : List[Char])")
+  let t338 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("VSUBST((ilist' : List[(Term, Term)]), (t : Term))"), t333, t332]), variant())), t334), t335), t336), t337), @tactics.all_tac])
   let t331 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t330 = @tactics.disch_then(@tactics.conjuncts_then(fn(x329 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x326 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1130,10 +1130,10 @@ fn step_46() -> Unit raise {
     }
   }, @list.List([term_inj()]))
   let t321 = @tactics.thenl(@tactics.conj_tac, @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))]))
-  let t320 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(a ==> ~c) /\\ (~a ==> (b <=> c)) ==> (~(~a ==> ~b) <=> c)")))
-  let t319 = @simp.simp_tac(@list.List([@class.taut(@parser.parse_term("(if b then F else c) <=> ~b /\\ c"))]))
-  let t318 = @simp.once_rewrite_tac(@list.List([@class.taut(@parser.parse_term("~a /\\ b <=> ~(~a ==> ~b)"))]))
-  let t317 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(if ~b then x:bool else y) <=> (if b then y else x)"))]))
+  let t320 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("((a : Bool) → !(c : Bool)) && (!a → (b : Bool) == c) → !(!a → !b) == c")))
+  let t319 = @simp.simp_tac(@list.List([@class.taut(@term_syntax.parse_term("(if (b : Bool) { false } else { (c : Bool) }) == (!b && c)"))]))
+  let t318 = @simp.once_rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(!(a : Bool) && (b : Bool)) == !(!a → !b)"))]))
+  let t317 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(if !(b : Bool) { (x : Bool) } else { (y : Bool) }) == (if b { y } else { x })"))]))
   let t316 = @simp.rewrite_tac(@list.List([vfree_in()]))
   let t315 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
   let t314 = @simp.simp_tac(@list.List([rev_assocd(), rev_assocd_filter()]))
@@ -1149,9 +1149,9 @@ fn step_46() -> Unit raise {
   let t306 = @simp.asm_rewrite_tac(@list.List([vfree_in()]))
   let t305 = @tactics.repeat_tac(@pair.let_tac)
   let t304 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t301 = @parser.parse_term("t:term")
-  let t302 = @parser.parse_term("ty:type")
-  let t303 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t302, t301]))
+  let t301 = @term_syntax.parse_term("(t : Term)")
+  let t302 = @term_syntax.parse_term("(ty : Type)")
+  let t303 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : List[Char])"), t302, t301]))
   let t298 = @meson.meson_tac(@list.List([]))
   let t297 = @simp.asm_rewrite_tac(@list.List([]))
   let t299 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t297), t298)
@@ -1159,7 +1159,7 @@ fn step_46() -> Unit raise {
   let t296 = @tactics.repeat_tac(@tactics.conj_tac)
   let t295 = @simp.rewrite_tac(@list.List([vfree_in(), vsubst(), term_distinct()]))
   let t356 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t295), t296), t300), t303), @tactics.disch_tac), t304), @pair.let_tac), @pair.let_tac), @class.cond_cases_tac), t305), t306), t313), t314), t315), t316), t317), t318), t319), t320), t321), t325), t330), t331), t338), t345), t346), t348), t349), t350), t351), t352), t353), t354), t355)
-  vfree_in_vsubst_c.set(@tactics.prove(@parser.parse_term("forall tm u uty ilist.\n      VFREE_IN (Var u uty) (VSUBST ilist tm) <=>\n        ?y ty. VFREE_IN (Var y ty) tm /\\\n               VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty))"), t356))
+  vfree_in_vsubst_c.set(@tactics.prove(@term_syntax.parse_term("∀ tm : Term, ∀ u : List[Char], ∀ uty : Type, ∀ ilist : List[(Term, Term)], VFREE_IN(Var(u, uty), VSUBST(ilist, tm)) == (∃ y : List[Char], ∃ ty : Type, VFREE_IN(Var(y, ty), tm) && VFREE_IN(Var(u, uty), REV_ASSOCD(Var(y, ty), ilist, Var(y, ty))))"), t356))
 }
 
 ///|
@@ -1230,7 +1230,7 @@ pub fn result_distinct() -> @kernel.Thm {
 ///|
 /// IS_RESULT
 fn step_50() -> Unit raise {
-  is_result_c.set(@define.define_(@parser.parse_term("(IS_RESULT(Clash t) = F) /\\\n  (IS_RESULT(Result t) = T)")))
+  is_result_c.set(@define.define_(@term_syntax.parse_term("(IS_RESULT : (Result) -> Bool)(Clash((t : Term))) == false && IS_RESULT(Result(t)) == true")))
 }
 
 ///|
@@ -1245,7 +1245,7 @@ pub fn is_result() -> @kernel.Thm {
 ///|
 /// IS_CLASH
 fn step_51() -> Unit raise {
-  is_clash_c.set(@define.define_(@parser.parse_term("(IS_CLASH(Clash t) = T) /\\\n  (IS_CLASH(Result t) = F)")))
+  is_clash_c.set(@define.define_(@term_syntax.parse_term("(IS_CLASH : (Result) -> Bool)(Clash((t : Term))) == true && IS_CLASH(Result(t)) == false")))
 }
 
 ///|
@@ -1260,7 +1260,7 @@ pub fn is_clash() -> @kernel.Thm {
 ///|
 /// RESULT
 fn step_52() -> Unit raise {
-  result_c.set(@define.define_(@parser.parse_term("RESULT(Result t) = t")))
+  result_c.set(@define.define_(@term_syntax.parse_term("(RESULT : (Result) -> Term)(Result((t : Term))) == t")))
 }
 
 ///|
@@ -1275,7 +1275,7 @@ pub fn result() -> @kernel.Thm {
 ///|
 /// CLASH
 fn step_53() -> Unit raise {
-  clash_c.set(@define.define_(@parser.parse_term("CLASH(Clash t) = t")))
+  clash_c.set(@define.define_(@term_syntax.parse_term("(CLASH : (Result) -> Term)(Clash((t : Term))) == t")))
 }
 
 ///|
@@ -1299,7 +1299,7 @@ pub fn sizeof_() -> @kernel.Thm {
 ///|
 /// sizeof
 fn step_54() -> Unit raise {
-  let sizeof_ = @define.define_(@parser.parse_term("(sizeof (Var x ty) = 1) /\\\n  (sizeof (Equal ty) = 1) /\\\n  (sizeof (Select ty) = 1) /\\\n  (sizeof (Comb s t) = 1 + sizeof s + sizeof t) /\\\n  (sizeof (Abs x ty t) = 2 + sizeof t)"))
+  let sizeof_ = @define.define_(@term_syntax.parse_term("(sizeof : (Term) -> Num)(Var((x : List[Char]), (ty : Type))) == 1 && sizeof(Equal(ty)) == 1 && sizeof(Select(ty)) == 1 && sizeof(Comb((s : Term), (t : Term))) == 1 + (sizeof(s) + sizeof(t)) && sizeof(Abs(x, ty, t)) == 2 + sizeof(t)"))
   sizeof__c.set(sizeof_)
 }
 
@@ -1313,25 +1313,25 @@ fn step_55() -> Unit raise {
   let t376 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([@lists.mem_filter()]))])
   let t375 = @simp.rewrite_tac(@list.List([sizeof_(), @arith.eq_add_lcancel()]))
   let t374 = @tactics.repeat_tac(@pair.let_tac)
-  let t373 = @tactics.x_gen_tac(@parser.parse_term("ilist:(term#term)list"))
-  let t370 = @parser.parse_term("t:term")
-  let t371 = @parser.parse_term("ty:type")
-  let t372 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t371, t370]))
+  let t373 = @tactics.x_gen_tac(@term_syntax.parse_term("(ilist : List[(Term, Term)])"))
+  let t370 = @term_syntax.parse_term("(t : Term)")
+  let t371 = @term_syntax.parse_term("(ty : Type)")
+  let t372 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : List[Char])"), t371, t370]))
   let t369 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t367 = @meson.asm_meson_tac(@list.List([sizeof_()]))
   let t366 = @simp.asm_simp_tac(@list.List([]))
   let t365 = @tactics.repeat_tac(@tactics.strip_tac)
   let t364 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
-  let t361 = @parser.parse_term("l:(term#term)list")
-  let t362 = @parser.parse_term("s:term")
-  let t363 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("s':term"), t362, t361]))
+  let t361 = @term_syntax.parse_term("(l : List[(Term, Term)])")
+  let t362 = @term_syntax.parse_term("(s : Term)")
+  let t363 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(s' : Term)"), t362, t361]))
   let t360 = @simp.rewrite_tac(@list.List([@lists.mem(), rev_assocd(), sizeof_(), @pair.forall_pair_thm()]))
   let t359 = @tactics.match_mp_tac(@ind_types.list_induct())
-  let t358 = @parser.parse_term("ty:type")
-  let t368 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:string"), t358])), t359), t360), t363), t364), t365), @class.cond_cases_tac), t366), t367), @tactics.all_tac])
+  let t358 = @term_syntax.parse_term("(ty : Type)")
+  let t368 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : List[Char])"), t358])), t359), t360), t363), t364), t365), @class.cond_cases_tac), t366), t367), @tactics.all_tac])
   let t357 = @simp.rewrite_tac(@list.List([vsubst(), sizeof_()]))
   let t381 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(term_induct()), t357), @tactics.conj_tac), t368), @tactics.conj_tac), t369), t372), @tactics.disch_tac), t373), @tactics.disch_tac), @pair.let_tac), @pair.let_tac), @class.cond_cases_tac), t374), t375), t376), t377), t378), t379), t380)
-  sizeof_vsubst_c.set(@tactics.prove(@parser.parse_term("forall t ilist. (forall s' s. MEM (s',s) ilist ==> ?x ty. s' = Var x ty)\n             ==> (sizeof (VSUBST ilist t) = sizeof t)"), t381))
+  sizeof_vsubst_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, ∀ ilist : List[(Term, Term)], (∀ s' : Term, ∀ s : Term, MEM((s', s), ilist) → (∃ x : List[Char], ∃ ty : Type, s' == Var(x, ty))) → sizeof(VSUBST(ilist, t)) == sizeof(t)"), t381))
 }
 
 ///|
@@ -1355,8 +1355,8 @@ fn step_56() -> Unit raise {
       let (asl, w) = x382
       @tactics.match_mp_tac(@bool.disch_all(@define.pure_prove_recursive_function_exists(w)))
     })(x384)(x384)
-  }, @tactics.exists_tac(@parser.parse_term("MEASURE(\\(env:(term#term)list,tyin:(type#type)list,t).\n                        sizeof t)"))), t385), t386), t387), t388), @int.arith_tac)
-  inst_core_exists_c.set(@tactics.prove(@parser.parse_term("?INST_CORE.\n  (forall env tyin x ty.\n        INST_CORE env tyin (Var x ty) =\n          let tm = Var x ty\n          and tm' = Var x (TYPE_SUBST tyin ty) in\n         if REV_ASSOCD tm' env tm = tm then Result tm' else Clash tm') /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Equal ty) = Result(Equal(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin ty.\n        INST_CORE env tyin (Select ty) = Result(Select(TYPE_SUBST tyin ty))) /\\\n  (forall env tyin s t.\n        INST_CORE env tyin (Comb s t) =\n            let sres = INST_CORE env tyin s in\n            if IS_CLASH sres then sres else\n            let tres = INST_CORE env tyin t in\n            if IS_CLASH tres then tres else\n            let s' = RESULT sres and t' = RESULT tres in\n            Result (Comb s' t')) /\\\n  (forall env tyin x ty t.\n        INST_CORE env tyin (Abs x ty t) =\n            let ty' = TYPE_SUBST tyin ty in\n            let env' = CONS (Var x ty,Var x ty') env in\n            let tres = INST_CORE env' tyin t in\n            if IS_RESULT tres then Result(Abs x ty' (RESULT tres)) else\n            let w = CLASH tres in\n            if ~(w = Var x ty') then tres else\n            let x' = VARIANT (RESULT(INST_CORE [] tyin t)) x ty' in\n            INST_CORE env tyin (Abs x' ty (VSUBST [Var x' ty,Var x ty] t)))"), t389))
+  }, @tactics.exists_tac(@term_syntax.parse_term("MEASURE(GABS((f : ((List[(Term, Term)], List[(Type, Type)], Term)) -> Num) => ∀ env : List[(Term, Term)], ∀ tyin : List[(Type, Type)], ∀ t : Term, GEQ(f((env, tyin, t)), sizeof(t))))"))), t385), t386), t387), t388), @int.arith_tac)
+  inst_core_exists_c.set(@tactics.prove(@term_syntax.parse_term("∃ INST_CORE : (List[(Term, Term)], List[(Type, Type)], Term) -> Result, (∀ env : List[(Term, Term)], ∀ tyin : List[(Type, Type)], ∀ x : List[Char], ∀ ty : Type, INST_CORE(env, tyin, Var(x, ty)) == LET((tm : Term) => (tm' : Term) => LET_END(if REV_ASSOCD(tm', env, tm) == tm { Result(tm') } else { Clash(tm') }), Var(x, ty), Var(x, TYPE_SUBST(tyin, ty)))) && (∀ env : List[(Term, Term)], ∀ tyin : List[(Type, Type)], ∀ ty : Type, INST_CORE(env, tyin, Equal(ty)) == Result(Equal(TYPE_SUBST(tyin, ty)))) && (∀ env : List[(Term, Term)], ∀ tyin : List[(Type, Type)], ∀ ty : Type, INST_CORE(env, tyin, Select(ty)) == Result(Select(TYPE_SUBST(tyin, ty)))) && (∀ env : List[(Term, Term)], ∀ tyin : List[(Type, Type)], ∀ s : Term, ∀ t : Term, INST_CORE(env, tyin, Comb(s, t)) == LET((sres : Result) => LET_END(if IS_CLASH(sres) { sres } else { LET((tres : Result) => LET_END(if IS_CLASH(tres) { tres } else { LET((s' : Term) => (t' : Term) => LET_END(Result(Comb(s', t'))), RESULT(sres), RESULT(tres)) }), INST_CORE(env, tyin, t)) }), INST_CORE(env, tyin, s))) && (∀ env : List[(Term, Term)], ∀ tyin : List[(Type, Type)], ∀ x : List[Char], ∀ ty : Type, ∀ t : Term, INST_CORE(env, tyin, Abs(x, ty, t)) == LET((ty' : Type) => LET_END(LET((env' : List[(Term, Term)]) => LET_END(LET((tres : Result) => LET_END(if IS_RESULT(tres) { Result(Abs(x, ty', RESULT(tres))) } else { LET((w : Term) => LET_END(if !(w == Var(x, ty')) { tres } else { LET((x' : List[Char]) => LET_END(INST_CORE(env, tyin, Abs(x', ty, VSUBST([(Var(x', ty), Var(x, ty))], t)))), VARIANT(RESULT(INST_CORE(NIL, tyin, t)), x, ty')) }), CLASH(tres)) }), INST_CORE(env', tyin, t))), CONS((Var(x, ty), Var(x, ty')), env))), TYPE_SUBST(tyin, ty)))"), t389))
 }
 
 ///|
@@ -1386,7 +1386,7 @@ pub fn inst_core() -> @kernel.Thm {
 ///|
 /// INST_DEF
 fn step_58() -> Unit raise {
-  inst_def_c.set(@pair.new_definition(@parser.parse_term("INST tyin tm = RESULT(INST_CORE [] tyin tm)")))
+  inst_def_c.set(@pair.new_definition(@term_syntax.parse_term("(INST : (List[(Type, Type)], Term) -> Term)((tyin : List[(Type, Type)]), (tm : Term)) == RESULT(INST_CORE(NIL, tyin, tm))")))
 }
 
 ///|
@@ -1403,7 +1403,7 @@ pub fn inst_def() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   let t390 = @simp.rewrite_tac(@list.List([is_result(), is_clash()]))
   let t391 = @tactics.then_tac(@tactics.match_mp_tac(result_induct()), t390)
-  not_is_result_c.set(@tactics.prove(@parser.parse_term("forall r. ~(IS_RESULT r) <=> IS_CLASH r"), t391))
+  not_is_result_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Result, !IS_RESULT(r) == IS_CLASH(r)"), t391))
 }
 
 ///|
@@ -1419,7 +1419,7 @@ pub fn not_is_result() -> @kernel.Thm {
 /// letlemma
 fn step_60() -> Unit raise {
   let t392 = @simp.rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def()]))
-  letlemma_c.set(@tactics.prove(@parser.parse_term("(let x = t in P x) = P t"), t392))
+  letlemma_c.set(@tactics.prove(@term_syntax.parse_term("LET((x : _) => LET_END((P : (_) -> _)(x)), (t : _)) == P(t)"), t392))
 }
 
 ///|
@@ -1467,7 +1467,7 @@ pub fn proves_cases() -> @kernel.Thm {
 ///|
 /// prove_RULES, proves_INDUCT, proves_CASES
 fn step_62() -> Unit raise {
-  let (prove_rules, proves_induct, proves_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall t. welltyped t ==> [] |- t === t) /\\\n  (forall asl1 asl2 l m1 m2 r.\n        asl1 |- l === m1 /\\ asl2 |- m2 === r /\\ ACONV m1 m2\n        ==> TERM_UNION asl1 asl2 |- l === r) /\\\n  (forall asl1 l1 r1 asl2 l2 r2.\n        asl1 |- l1 === r1 /\\ asl2 |- l2 === r2 /\\ welltyped(Comb l1 l2)\n        ==> TERM_UNION asl1 asl2 |- Comb l1 l2 === Comb r1 r2) /\\\n  (forall asl x ty l r.\n        ~(EX (VFREE_IN (Var x ty)) asl) /\\ asl |- l === r\n        ==> asl |- (Abs x ty l) === (Abs x ty r)) /\\\n  (forall x ty t. welltyped t ==> [] |- Comb (Abs x ty t) (Var x ty) === t) /\\\n  (forall p. p has_type Bool ==> [p] |- p) /\\\n  (forall asl1 asl2 p q p'.\n        asl1 |- p === q /\\ asl2 |- p' /\\ ACONV p p'\n        ==> TERM_UNION asl1 asl2 |- q) /\\\n  (forall asl1 asl2 c1 c2.\n        asl1 |- c1 /\\ asl2 |- c2\n        ==> TERM_UNION (FILTER((~) o ACONV c2) asl1)\n                       (FILTER((~) o ACONV c1) asl2)\n               |- c1 === c2) /\\\n  (forall tyin asl p. asl |- p ==> MAP (INST tyin) asl |- INST tyin p) /\\\n  (forall ilist asl p.\n      (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty) /\\\n      asl |- p ==> MAP (VSUBST ilist) asl |- VSUBST ilist p)"))
+  let (prove_rules, proves_induct, proves_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ t : Term, welltyped(t) → (op_bar_minus : (List[Term], Term) -> Bool)(NIL, op_eq_eq_eq(t, t))) && (∀ asl1 : List[Term], ∀ asl2 : List[Term], ∀ l : Term, ∀ m1 : Term, ∀ m2 : Term, ∀ r : Term, op_bar_minus(asl1, op_eq_eq_eq(l, m1)) && op_bar_minus(asl2, op_eq_eq_eq(m2, r)) && ACONV(m1, m2) → op_bar_minus(TERM_UNION(asl1, asl2), op_eq_eq_eq(l, r))) && (∀ asl1 : List[Term], ∀ l1 : Term, ∀ r1 : Term, ∀ asl2 : List[Term], ∀ l2 : Term, ∀ r2 : Term, op_bar_minus(asl1, op_eq_eq_eq(l1, r1)) && op_bar_minus(asl2, op_eq_eq_eq(l2, r2)) && welltyped(Comb(l1, l2)) → op_bar_minus(TERM_UNION(asl1, asl2), op_eq_eq_eq(Comb(l1, l2), Comb(r1, r2)))) && (∀ asl : List[Term], ∀ x : List[Char], ∀ ty : Type, ∀ l : Term, ∀ r : Term, !EX(VFREE_IN(Var(x, ty)), asl) && op_bar_minus(asl, op_eq_eq_eq(l, r)) → op_bar_minus(asl, op_eq_eq_eq(Abs(x, ty, l), Abs(x, ty, r)))) && (∀ x : List[Char], ∀ ty : Type, ∀ t : Term, welltyped(t) → op_bar_minus(NIL, op_eq_eq_eq(Comb(Abs(x, ty, t), Var(x, ty)), t))) && (∀ p : Term, has_type(p, Bool) → op_bar_minus([p], p)) && (∀ asl1 : List[Term], ∀ asl2 : List[Term], ∀ p : Term, ∀ q : Term, ∀ p' : Term, op_bar_minus(asl1, op_eq_eq_eq(p, q)) && op_bar_minus(asl2, p') && ACONV(p, p') → op_bar_minus(TERM_UNION(asl1, asl2), q)) && (∀ asl1 : List[Term], ∀ asl2 : List[Term], ∀ c1 : Term, ∀ c2 : Term, op_bar_minus(asl1, c1) && op_bar_minus(asl2, c2) → op_bar_minus(TERM_UNION(FILTER(o(op_tilde, ACONV(c2)), asl1), FILTER(o(op_tilde, ACONV(c1)), asl2)), op_eq_eq_eq(c1, c2))) && (∀ tyin : List[(Type, Type)], ∀ asl : List[Term], ∀ p : Term, op_bar_minus(asl, p) → op_bar_minus(MAP(INST(tyin), asl), INST(tyin, p))) && (∀ ilist : List[(Term, Term)], ∀ asl : List[Term], ∀ p : Term, (∀ s : Term, ∀ s' : Term, MEM((s', s), ilist) → (∃ x : List[Char], ∃ ty : Type, s == Var(x, ty) && has_type(s', ty))) && op_bar_minus(asl, p) → op_bar_minus(MAP(VSUBST(ilist), asl), VSUBST(ilist, p)))"))
   prove_rules_c.set(prove_rules)
   proves_induct_c.set(proves_induct)
   proves_cases_c.set(proves_cases)
