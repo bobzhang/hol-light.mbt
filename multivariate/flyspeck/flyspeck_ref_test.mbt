@@ -82867,2077 +82867,2077 @@ test "Multivariate/flyspeck matches Multivariate/flyspeck.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Multivariate/flyspeck quotations (2071):
-      #|  vector_angle (x:real^3) y
-      #|  y:real^3
-      #|  x:real^3
+      #|  vector_angle((x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]]))
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
       #|  2
-      #|  forall x y. norm(x cross y) = norm(x) * norm(y) * sin(vector_angle x y)
-      #|  a /\\ b /\\ c <=> ~(a ==> ~(b /\\ c))
-      #|  coplanar(vec 0 INSERT --x INSERT s) <=> coplanar(vec 0 INSERT x INSERT s)
-      #|  forall s:real^3->bool. coplanar s ==> negligible s
-      #|  a IN s ==> s SUBSET t ==> a IN t
-      #|  v2:real^N
-      #|  v1:real^N
-      #|  v3:real^N
-      #|  v1:real^N
-      #|  v3:real^N
-      #|  v2:real^N
-      #|  v3:real^N
-      #|  v2:real^N
-      #|  v1:real^N
-      #|  v1:real^N
-      #|  v1:real^N
-      #|  v3:real^N
-      #|  v2:real^N
-      #|  vec 0:real^N
-      #|  forall v1 v2 v3:real^N. v1 IN span {v2,v3} ==> coplanar{vec 0,v1,v2,v3}
-      #|  forall v1 v2 v3:real^N. ~coplanar {vec 0,v1,v2,v3} ==> independent {v1,v2,v3}
-      #|  affine hull {x:real^N,y}
-      #|  forall t. t SUBSET s /\\ x IN t ==> x IN s
-      #|  w:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall v1 v2 v3 w:real^N. ~coplanar {v1, v2, v3, w} ==> ~collinear {v1, v2, v3}
-      #|  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-      #|  forall a x s t.\n        ~(a = &0)\n        ==> (vec 0 INSERT (a % x) INSERT s SUBSET affine hull t <=>\n             vec 0 INSERT x INSERT s SUBSET affine hull t)
-      #|  forall a x y. ~(a = &0) ==> (collinear {vec 0,a % x,y} <=> collinear{vec 0,x,y})
-      #|  {a,b,c} = {a,c,b}
-      #|  forall a b v w. ~(a = &0) /\\ ~(b = &0)\n             ==> (collinear {vec 0,a % v,b % w} <=> collinear {vec 0,v,w})
-      #|  forall a x y z.\n    ~(a = &0) ==> (coplanar {vec 0,a % x,y,z} <=> coplanar {vec 0,x,y,z})
-      #|  {a,b,c,d} = {a,c,d,b}
-      #|  {a,b,c,d} = {a,c,d,b}
-      #|  forall a b c x y z.\n        ~(a = &0) /\\ ~(b = &0) /\\ ~(c = &0)\n        ==> (coplanar {vec 0,a % x,b % y,c % z} <=> coplanar {vec 0,x,y,z})
-      #|  1 <= i + 1
-      #|  i <= 2 ==> i + 1 <= 3
-      #|  (dropout 3:real^3->real^2) (basis 1) = basis 1 /\\\n   (dropout 3:real^3->real^2) (basis 2) = basis 2 /\\\n   (dropout 3:real^3->real^2) (basis 3) = vec 0
-      #|  collinear {vec 0,basis 3,x} <=> (dropout 3:real^3->real^2) x = vec 0
-      #|  {x:real^2 | P x}
-      #|  dropout 3:real^3->real^2
-      #|  forall P. open {x | P x} ==> open {x | P((dropout 3:real^3->real^2) x)}
-      #|  (pushin 3 t:real^2->real^3) y
-      #|  y:real^2
-      #|  forall P t. slice 3 t {x | P((dropout 3:real^3->real^2) x)} = {x | P x}
-      #|  x = a + b + c * &1 <=> c = x - a - b
-      #|  d:real
-      #|  c:real
-      #|  forall x. (dropout 3:real^3->real^2) x IN span {u,v}\n         ==> x IN span {vector [u$1; u$2; r], vector [v$1; v$2; s], basis 3}
-      #|  a / &2 + b / &2 + &1 / &2 = &1 <=> a + b = &1
-      #|  &1 / &2
-      #|  b / &2
-      #|  a / &2
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  basis 3:real^3
-      #|  vector[(v:real^2)$1; v$2; s]:real^3
-      #|  vector[(u:real^2)$1; u$2; r]:real^3
-      #|  ~(a = &0) ==> (a * r + x = y <=> r = (y - x) / a)
-      #|  a + b = &1
-      #|  a = &0
-      #|  ?r s. a * r + b * s = -- &1
-      #|  b:real
-      #|  a:real
-      #|  v:real^2
-      #|  u:real^2
-      #|  forall x y:real^3.\n        ~coplanar {vec 0,basis 3, x, y}\n        ==> ~collinear {vec 0,dropout 3 x:real^2,dropout 3 y}
-      #|  forall s:real^3->bool. slice 1 t s = {y:real^2 | vector[t;y$1;y$2] IN s}
-      #|  forall s:real^3->bool. slice 3 t s = {y:real^2 | vector[y$1;y$2;t] IN s}
-      #|  (pad2d3d:real^2->real^3) x = lambda i. if i < 3 then x$i else &0
-      #|  i <= 3 <=> i <= 2 \\/ i = 3
-      #|  i < 3 <=> i <= 2
-      #|  (lambda i. (y:real^3)$i):real^2
-      #|  forall P. (forall y:real^3. y$3 = &0 ==> P y) <=> (forall x. P(pad2d3d x))
-      #|  (?y. P y) <=> ~(forall x. ~P x)
-      #|  (forall P. (forall y:real^3. y$3 = &0 ==> P y) <=> (forall x. P(pad2d3d x))) /\\\n   (forall P. (?y:real^3. y$3 = &0 /\\ P y) <=> (?x. P(pad2d3d x)))
-      #|  i < 3 ==> i <= 2
-      #|  linear pad2d3d
-      #|  i <= 2 ==> i <= 3
-      #|  i < 3 <=> i <= 2
-      #|  forall x y. pad2d3d x = pad2d3d y ==> x = y
-      #|  forall x. norm(pad2d3d x) = norm x
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], norm(cross(x, y)) == norm(x) * (norm(y) * sin(vector_angle(x, y)))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == !(a \226\134\146 !(b && c))
+      #|  coplanar(INSERT(vec(0), INSERT(-(x : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool)))) == coplanar(INSERT(vec(0), INSERT(x, s)))
+      #|  \226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, coplanar(s) \226\134\146 negligible(s)
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(a, t)
+      #|  (v2 : Cart[Real, N])
+      #|  (v1 : Cart[Real, N])
+      #|  (v3 : Cart[Real, N])
+      #|  (v1 : Cart[Real, N])
+      #|  (v3 : Cart[Real, N])
+      #|  (v2 : Cart[Real, N])
+      #|  (v3 : Cart[Real, N])
+      #|  (v2 : Cart[Real, N])
+      #|  (v1 : Cart[Real, N])
+      #|  (v1 : Cart[Real, N])
+      #|  (v1 : Cart[Real, N])
+      #|  (v3 : Cart[Real, N])
+      #|  (v2 : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], \226\136\128 v3 : Cart[Real, N], IN(v1, span({v2, v3})) \226\134\146 coplanar({vec(0), v1, v2, v3})
+      #|  \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], \226\136\128 v3 : Cart[Real, N], !coplanar({vec(0), v1, v2, v3}) \226\134\146 independent({v1, v2, v3})
+      #|  hull(affine, {(x : Cart[Real, N]), (y : Cart[Real, N])})
+      #|  \226\136\128 t : (_) -> Bool, SUBSET(t, (s : (_) -> Bool)) && IN((x : _), t) \226\134\146 IN(x, s)
+      #|  (w : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], \226\136\128 v3 : Cart[Real, N], \226\136\128 w : Cart[Real, N], !coplanar({v1, v2, v3, w}) \226\134\146 !collinear({v1, v2, v3})
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, !(a == real_of_num(0)) \226\134\146 SUBSET(INSERT(vec(0), INSERT(op_pct(a, x), s)), hull(affine, t)) == SUBSET(INSERT(vec(0), INSERT(x, s)), hull(affine, t))
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], !(a == real_of_num(0)) \226\134\146 collinear({vec(0), op_pct(a, x), y}) == collinear({vec(0), x, y})
+      #|  {(a : _), (b : _), (c : _)} == {a, c, b}
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], !(a == real_of_num(0)) && !(b == real_of_num(0)) \226\134\146 collinear({vec(0), op_pct(a, v), op_pct(b, w)}) == collinear({vec(0), v, w})
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], \226\136\128 z : Cart[Real, _], !(a == real_of_num(0)) \226\134\146 coplanar({vec(0), op_pct(a, x), y, z}) == coplanar({vec(0), x, y, z})
+      #|  {(a : _), (b : _), (c : _), (d : _)} == {a, c, d, b}
+      #|  {(a : _), (b : _), (c : _), (d : _)} == {a, c, d, b}
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], \226\136\128 z : Cart[Real, _], !(a == real_of_num(0)) && !(b == real_of_num(0)) && !(c == real_of_num(0)) \226\134\146 coplanar({vec(0), op_pct(a, x), op_pct(b, y), op_pct(c, z)}) == coplanar({vec(0), x, y, z})
+      #|  1 <= (i : Num) + 1
+      #|  (i : Num) <= 2 \226\134\146 i + 1 <= 3
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)) == (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1) && (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)) == (basis : (Num) -> Cart[Real, Tybit0[Unit]])(2) && (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  (collinear : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)({(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3), (x : Cart[Real, Tybit1[Unit]])}) == ((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, x) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(x)}
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3)
+      #|  \226\136\128 P : (Cart[Real, Tybit0[Unit]]) -> Bool, open({(x : Cart[Real, Tybit0[Unit]]) | P(x)}) \226\134\146 open({(x : Cart[Real, Tybit1[Unit]]) | P(dropout(3, x))})
+      #|  (pushin : (Num, Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit1[Unit]])(3, (t : Real), (y : Cart[Real, Tybit0[Unit]]))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 P : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 t : Real, slice(3, t, {(x : Cart[Real, Tybit1[Unit]]) | P(dropout(3, x))}) == {(x : Cart[Real, Tybit0[Unit]]) | P(x)}
+      #|  ((x : Real) == (a : Real) + ((b : Real) + (c : Real) * real_of_num(1))) == (c == x - a - b)
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], IN(dropout(3, x), span({(u : Cart[Real, Tybit0[Unit]]), (v : Cart[Real, Tybit0[Unit]])})) \226\134\146 IN(x, span({vector([op_dollar(u, 1), op_dollar(u, 2), (r : Real)]), vector([op_dollar(v, 1), op_dollar(v, 2), (s : Real)]), basis(3)}))
+      #|  ((a : Real) / real_of_num(2) + ((b : Real) / real_of_num(2) + real_of_num(1) / real_of_num(2)) == real_of_num(1)) == (a + b == real_of_num(1))
+      #|  real_of_num(1) / real_of_num(2)
+      #|  (b : Real) / real_of_num(2)
+      #|  (a : Real) / real_of_num(2)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((v : Cart[Real, Tybit0[Unit]]), 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(v, 2), (s : Real)])
+      #|  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((u : Cart[Real, Tybit0[Unit]]), 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(u, 2), (r : Real)])
+      #|  !((a : Real) == real_of_num(0)) \226\134\146 (a * (r : Real) + (x : Real) == (y : Real)) == (r == (y - x) / a)
+      #|  (a : Real) + (b : Real) == real_of_num(1)
+      #|  (a : Real) == real_of_num(0)
+      #|  \226\136\131 r : Real, \226\136\131 s : Real, (a : Real) * r + (b : Real) * s == -real_of_num(1)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (u : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], !(coplanar : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)({(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3), x, y}) \226\134\146 !(collinear : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)({(vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, x), (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, y)})
+      #|  \226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, slice(1, (t : Real), s) == {(y : Cart[Real, Tybit0[Unit]]) | IN(vector([t, op_dollar(y, 1), op_dollar(y, 2)]), s)}
+      #|  \226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, slice(3, (t : Real), s) == {(y : Cart[Real, Tybit0[Unit]]) | IN(vector([op_dollar(y, 1), op_dollar(y, 2), t]), s)}
+      #|  (pad2d3d : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit1[Unit]])((x : Cart[Real, Tybit0[Unit]])) == lambda((i : Num) => if i < 3 { op_dollar(x, i) } else { real_of_num(0) })
+      #|  ((i : Num) <= 3) == (i <= 2 || i == 3)
+      #|  ((i : Num) < 3) == (i <= 2)
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, Tybit0[Unit]])((i : Num) => (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((y : Cart[Real, Tybit1[Unit]]), i))
+      #|  \226\136\128 P : (Cart[Real, Tybit1[Unit]]) -> Bool, (\226\136\128 y : Cart[Real, Tybit1[Unit]], op_dollar(y, 3) == real_of_num(0) \226\134\146 P(y)) == (\226\136\128 x : Cart[Real, Tybit0[Unit]], P(pad2d3d(x)))
+      #|  (\226\136\131 y : _, (P : (_) -> Bool)(y)) == !(\226\136\128 x : _, !P(x))
+      #|  (\226\136\128 P : (Cart[Real, Tybit1[Unit]]) -> Bool, (\226\136\128 y : Cart[Real, Tybit1[Unit]], op_dollar(y, 3) == real_of_num(0) \226\134\146 P(y)) == (\226\136\128 x : Cart[Real, Tybit0[Unit]], P(pad2d3d(x)))) && (\226\136\128 P : (Cart[Real, Tybit1[Unit]]) -> Bool, (\226\136\131 y : Cart[Real, Tybit1[Unit]], op_dollar(y, 3) == real_of_num(0) && P(y)) == (\226\136\131 x : Cart[Real, Tybit0[Unit]], P(pad2d3d(x))))
+      #|  (i : Num) < 3 \226\134\146 i <= 2
+      #|  linear(pad2d3d)
+      #|  (i : Num) <= 2 \226\134\146 i <= 3
+      #|  ((i : Num) < 3) == (i <= 2)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], pad2d3d(x) == pad2d3d(y) \226\134\146 x == y
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], norm(pad2d3d(x)) == norm(x)
       #|  :real^2
       #|  pad2d3d
-      #|  {} = IMAGE pad2d3d {} /\\\n     vec 0 = pad2d3d(vec 0)
-      #|  plane x = (?u v w. ~(collinear {u,v,w}) /\\ x = affine hull {u,v,w})
-      #|  forall a:real^N s. plane(IMAGE (\\x. a + x) s) <=> plane s
-      #|  forall a:real^N s. plane s ==> plane(IMAGE (\\x. a + x) s)
-      #|  {f a,f b,f c} = IMAGE f {a,b,c}
-      #|  {u,v,w} SUBSET IMAGE (f:real^M->real^N) p
-      #|  ?u. u IN IMAGE f (:real^M) /\\\n        ?v. v IN IMAGE f (:real^M) /\\\n            ?w. w IN IMAGE (f:real^M->real^N) (:real^M) /\\\n                ~collinear {u, v, w} /\\ IMAGE f p = affine hull {u, v, w}
-      #|  forall f:real^M->real^N p.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (plane(IMAGE f p) <=> plane p)
-      #|  forall f:real^M->real^N p.\n        linear f /\\ plane p /\\ (forall x y. f x = f y ==> x = y)\n        ==> plane(IMAGE f p)
-      #|  forall p. plane p ==> affine p
-      #|  span {z:real^3 | z$3 = &0} = {z:real^3 | z$3 = &0}
-      #|  b - a:real^3 = c - a <=> b = c
-      #|  ~(a = b) ==> {a,b} DELETE a = {b}
-      #|  ~(a = b) ==> {a,b} DELETE b = {a}
-      #|  {a,b,c} = {b,a,c}
-      #|  b - a:real^3 = c - a <=> b = c
-      #|  {b - a:real^3,c - a}
-      #|  dim {b - a:real^3,c - a}
-      #|  vector[&0;&0;&1]:real^3
-      #|  ~(x <= 2) <=> 3 <= x
-      #|  ~r /\\ (~p ==> q) ==> (q ==> r) ==> p
-      #|  (:real^3)
-      #|  {z:real^3 | z$3 = &0}
+      #|  {} == IMAGE(pad2d3d, {}) && vec(0) == pad2d3d(vec(0))
+      #|  (plane : ((Cart[Real, _]) -> Bool) -> Bool)((x : (Cart[Real, _]) -> Bool)) == (\226\136\131 u : Cart[Real, _], \226\136\131 v : Cart[Real, _], \226\136\131 w : Cart[Real, _], !collinear({u, v, w}) && x == hull(affine, {u, v, w}))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, plane(IMAGE((x : Cart[Real, N]) => a + x, s)) == plane(s)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, plane(s) \226\134\146 plane(IMAGE((x : Cart[Real, N]) => a + x, s))
+      #|  {(f : (_) -> _)((a : _)), f((b : _)), f((c : _))} == IMAGE(f, {a, b, c})
+      #|  SUBSET({(u : Cart[Real, N]), (v : Cart[Real, N]), (w : Cart[Real, N])}, IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (p : (Cart[Real, M]) -> Bool)))
+      #|  \226\136\131 u : Cart[Real, N], IN(u, IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), UNIV)) && (\226\136\131 v : Cart[Real, N], IN(v, IMAGE(f, UNIV)) && (\226\136\131 w : Cart[Real, N], IN(w, IMAGE(f, UNIV)) && !collinear({u, v, w}) && IMAGE(f, (p : (Cart[Real, M]) -> Bool)) == hull(affine, {u, v, w})))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 plane(IMAGE(f, p)) == plane(p)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : (Cart[Real, M]) -> Bool, linear(f) && plane(p) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 plane(IMAGE(f, p))
+      #|  \226\136\128 p : (Cart[Real, _]) -> Bool, plane(p) \226\134\146 affine(p)
+      #|  span({(z : Cart[Real, Tybit1[Unit]]) | op_dollar(z, 3) == real_of_num(0)}) == {(z : Cart[Real, Tybit1[Unit]]) | op_dollar(z, 3) == real_of_num(0)}
+      #|  ((b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]) == (c : Cart[Real, Tybit1[Unit]]) - a) == (b == c)
+      #|  !((a : _) == (b : _)) \226\134\146 DELETE({a, b}, a) == {b}
+      #|  !((a : _) == (b : _)) \226\134\146 DELETE({a, b}, b) == {a}
+      #|  {(a : _), (b : _), (c : _)} == {b, a, c}
+      #|  ((b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]) == (c : Cart[Real, Tybit1[Unit]]) - a) == (b == c)
+      #|  {(b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]), (c : Cart[Real, Tybit1[Unit]]) - a}
+      #|  dim({(b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]), (c : Cart[Real, Tybit1[Unit]]) - a})
+      #|  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([real_of_num(0), real_of_num(0), real_of_num(1)])
+      #|  !((x : Num) <= 2) == (3 <= x)
+      #|  !(r : Bool) && (!(p : Bool) \226\134\146 (q : Bool)) \226\134\146 (q \226\134\146 r) \226\134\146 p
+      #|  (UNIV : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  {(z : Cart[Real, Tybit1[Unit]]) | op_dollar(z, 3) == real_of_num(0)}
       #|  2
-      #|  f:real^3->real^3
-      #|  CARD{b - a:real^3,c - a}
-      #|  span{b - a:real^3,c - a}
+      #|  (f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])
+      #|  CARD({(b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]), (c : Cart[Real, Tybit1[Unit]]) - a})
+      #|  span({(b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]), (c : Cart[Real, Tybit1[Unit]]) - a})
       #|  {x - a:real^x | x = b \\/ x = c} = {b - a,c - a}
-      #|  --a + a + x:real^3 = x
-      #|  IMAGE (\\x:real^3. --a + x) {a + x | x | x IN s} =\n                        IMAGE (\\x. --a + a + x) s
-      #|  --a:real^3
-      #|  b:real^3 = c
-      #|  a:real^3 = c
-      #|  a:real^3 = b
-      #|  c:real^3
-      #|  b:real^3
-      #|  a:real^3
-      #|  forall s. plane s\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE f (IMAGE (\\x. a + x) s) = {z:real^3 | z$3 = &0}
-      #|  det(matrix(f:real^3->real^3))
-      #|  forall f. f * g = &1 /\\ f = &1 ==> g = &1
-      #|  --a + a + x:real^3 = x
-      #|  g:real^3->real^3
-      #|  --a:real^3
-      #|  g:real^3->real^3
-      #|  f:real^3->real^3
-      #|  a:real^3
-      #|  forall p. plane p\n       ==>  ?a f. orthogonal_transformation f /\\ det(matrix f) = &1 /\\\n                  IMAGE (\\x. a + x) (IMAGE f {z:real^3 | z$3 = &0}) = p
-      #|  \\x:real^N. u + x
-      #|  u = u + a <=> a = vec 0
-      #|  b:real^N
-      #|  \\x:real^N. if x = a then u - &1 else &1
-      #|  {a:real^N,b}
-      #|  u:real
-      #|  b - a = c % -- a <=> (c - &1) % a + &1 % b = vec 0
-      #|  (u + b) - (u + a):real^N = b - a
-      #|  u - (u + a):real^N = --a
-      #|  --x = vec 0 <=> x = vec 0
-      #|  u + b:real^N
-      #|  u + a:real^N
-      #|  u:real^N
-      #|  span {v - u, w - u} SUBSET span {a:real^N, b}
-      #|  b:real^N
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  CARD{v - u:real^N,w - u}
+      #|  -(a : Cart[Real, Tybit1[Unit]]) + (a + (x : Cart[Real, Tybit1[Unit]])) == x
+      #|  IMAGE((x : Cart[Real, Tybit1[Unit]]) => -(a : Cart[Real, Tybit1[Unit]]) + x, {a + (x : Cart[Real, Tybit1[Unit]]) | IN(x, (s : (Cart[Real, Tybit1[Unit]]) -> Bool))}) == IMAGE((x : Cart[Real, Tybit1[Unit]]) => -a + (a + x), s)
+      #|  -(a : Cart[Real, Tybit1[Unit]])
+      #|  (b : Cart[Real, Tybit1[Unit]]) == (c : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]]) == (c : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]]) == (b : Cart[Real, Tybit1[Unit]])
+      #|  (c : Cart[Real, Tybit1[Unit]])
+      #|  (b : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, plane(s) \226\134\146 (\226\136\131 a : Cart[Real, Tybit1[Unit]], \226\136\131 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], orthogonal_transformation(f) && det(matrix(f)) == real_of_num(1) && IMAGE(f, IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, s)) == {(z : Cart[Real, Tybit1[Unit]]) | op_dollar(z, 3) == real_of_num(0)})
+      #|  det(matrix((f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])))
+      #|  \226\136\128 f : Real, f * (g : Real) == real_of_num(1) && f == real_of_num(1) \226\134\146 g == real_of_num(1)
+      #|  -(a : Cart[Real, Tybit1[Unit]]) + (a + (x : Cart[Real, Tybit1[Unit]])) == x
+      #|  (g : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])
+      #|  -(a : Cart[Real, Tybit1[Unit]])
+      #|  (g : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])
+      #|  (f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 p : (Cart[Real, Tybit1[Unit]]) -> Bool, plane(p) \226\134\146 (\226\136\131 a : Cart[Real, Tybit1[Unit]], \226\136\131 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], orthogonal_transformation(f) && det(matrix(f)) == real_of_num(1) && IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, IMAGE(f, {(z : Cart[Real, Tybit1[Unit]]) | op_dollar(z, 3) == real_of_num(0)})) == p)
+      #|  (x : Cart[Real, N]) => (u : Cart[Real, N]) + x
+      #|  ((u : Cart[Real, _]) == u + (a : Cart[Real, _])) == (a == vec(0))
+      #|  (b : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => if x == (a : Cart[Real, N]) { (u : Real) - real_of_num(1) } else { real_of_num(1) }
+      #|  {(a : Cart[Real, N]), (b : Cart[Real, N])}
+      #|  (u : Real)
+      #|  ((b : Cart[Real, _]) - (a : Cart[Real, _]) == op_pct((c : Real), -a)) == (op_pct(c - real_of_num(1), a) + op_pct(real_of_num(1), b) == vec(0))
+      #|  (u : Cart[Real, N]) + (b : Cart[Real, N]) - (u + (a : Cart[Real, N])) == b - a
+      #|  (u : Cart[Real, N]) - (u + (a : Cart[Real, N])) == -a
+      #|  (-(x : Cart[Real, _]) == vec(0)) == (x == vec(0))
+      #|  (u : Cart[Real, N]) + (b : Cart[Real, N])
+      #|  (u : Cart[Real, N]) + (a : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  SUBSET(span({(v : Cart[Real, N]) - (u : Cart[Real, N]), (w : Cart[Real, N]) - u}), span({(a : Cart[Real, N]), (b : Cart[Real, N])}))
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  CARD({(v : Cart[Real, N]) - (u : Cart[Real, N]), (w : Cart[Real, N]) - u})
       #|  2
-      #|  {v - u:real^N,w - u}
-      #|  \\x:real^N. x - u
-      #|  s SUBSET {u + x:real^N | x | x IN span {y - u | y IN {v,w}}}
-      #|  w:real^N
-      #|  v:real^N
-      #|  u:real^N
-      #|  (?x u v w. p x u v w) <=> (?u v w x. p x u v w)
-      #|  2 <= dimindex(:N)\n   ==> forall s:real^N->bool. coplanar s <=> ?x. plane x /\\ s SUBSET x
-      #|  v1:real^N = v0 + x <=> x = v1 - v0
-      #|  vec 0:real^3
-      #|  IMAGE (\\v:real^3. v0 + v) (span{v1 - v0, v2 - v0, v3 - v0})
-      #|  u = u + a <=> a = vec 0
-      #|  v0 + b:real^3
-      #|  v0 + a:real^3
-      #|  v0:real^3
-      #|  b:real^3
-      #|  a:real^3
-      #|  t:real^3->bool
-      #|  n <= 2 <=> n < 3
+      #|  {(v : Cart[Real, N]) - (u : Cart[Real, N]), (w : Cart[Real, N]) - u}
+      #|  (x : Cart[Real, N]) => x - (u : Cart[Real, N])
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), {(u : Cart[Real, N]) + x | x : Cart[Real, N] | IN(x, span({(y : Cart[Real, N]) - u | IN(y, {(v : Cart[Real, N]), (w : Cart[Real, N])})}))})
+      #|  (w : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (\226\136\131 x : _, \226\136\131 u : _, \226\136\131 v : _, \226\136\131 w : _, (p : (_, _, _, _) -> Bool)(x, u, v, w)) == (\226\136\131 u : _, \226\136\131 v : _, \226\136\131 w : _, \226\136\131 x : _, p(x, u, v, w))
+      #|  2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\128 s : (Cart[Real, N]) -> Bool, (coplanar : ((Cart[Real, N]) -> Bool) -> Bool)(s) == (\226\136\131 x : (Cart[Real, N]) -> Bool, (plane : ((Cart[Real, N]) -> Bool) -> Bool)(x) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(s, x)))
+      #|  ((v1 : Cart[Real, N]) == (v0 : Cart[Real, N]) + (x : Cart[Real, N])) == (x == v1 - v0)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  IMAGE((v : Cart[Real, Tybit1[Unit]]) => (v0 : Cart[Real, Tybit1[Unit]]) + v, span({(v1 : Cart[Real, Tybit1[Unit]]) - v0, (v2 : Cart[Real, Tybit1[Unit]]) - v0, (v3 : Cart[Real, Tybit1[Unit]]) - v0}))
+      #|  ((u : Cart[Real, _]) == u + (a : Cart[Real, _])) == (a == vec(0))
+      #|  (v0 : Cart[Real, Tybit1[Unit]]) + (b : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]]) + (a : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (b : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]])
+      #|  (t : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  ((n : Num) <= 2) == (n < 3)
       #|  2
-      #|  {v1 - v0,v2 - v0,v3 - v0}:real^3->bool
-      #|  forall x y:real^3. x - y = (x - a) - (y - a)
-      #|  CARD {b - a:real^3,c - a}
-      #|  \\x:real^3. x - a
-      #|  c:real^3
-      #|  b:real^3
-      #|  a:real^3
-      #|  forall v0 v1 (v2: real^3) v3.\n        coplanar {v0,v1,v2,v3} <=>\n        det(vector[v1 - v0; v2 - v0; v3 - v0]) = &0
-      #|  forall v w x y. coplanar {v,w,x,y} <=> ((w - v) cross (x - v)) dot (y - v) = &0
-      #|  forall a b c:real^N. plane(affine hull {a,b,c}) <=> ~collinear{a,b,c}
-      #|  &2:int
-      #|  forall s u v w:real^N.\n        s SUBSET affine hull {u,v,w} /\\ ~collinear s\n        ==> affine hull {u,v,w} = affine hull s
-      #|  (p ==> (x <=> x')) /\\ (~p ==> (x <=> T)) ==> (x' ==> x)
-      #|  a + (x - a:real^N) = x
-      #|  (\\x. a + x) o (f:real^N->real^N)
-      #|  forall a f. orthogonal_transformation (f:real^N->real^N)\n           ==> ((forall P. (forall x. P x) <=> (forall x. P (a + f x))) /\\\n                (forall P. (?x. P x) <=> (?x. P (a + f x))) /\\\n                (forall Q. (forall s. Q s) <=> (forall s. Q (IMAGE (\\x. a + x) (IMAGE f s)))) /\\\n                (forall Q. (?s. Q s) <=> (?s. Q (IMAGE (\\x. a + x) (IMAGE f s))))) /\\\n               (forall P. {x | P x} =\n                    IMAGE (\\x. a + x) (IMAGE f {x | P(a + f x)}))
-      #|  forall a f. {} = IMAGE (\\x:real^3. a + x) (IMAGE f {})
-      #|  forall f:real^3->real^3.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (forall x y. f x = f y ==> x = y) /\\\n            (forall y. ?x. f x = y) /\\\n            (forall x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:3) ==> det(matrix f) = &1)
-      #|  (forall a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> forall a f. q a f ==> p' a f))
-      #|  lin_combo V f = vsum V (\\v. f v % (v:real^N))
-      #|  affsign sgn s t (v:real^A) <=>\n     (?f. (v = lin_combo (s UNION t) f) /\\\n          (forall w. t w ==> sgn (f w)) /\\\n          (sum (s UNION t) f = &1))
-      #|  sgn_gt = (\\t. (&0 < t))
-      #|  sgn_ge = (\\t. (&0 <= t))
-      #|  sgn_lt = (\\t. (t < &0))
-      #|  sgn_le = (\\t. (t <= &0))
-      #|  aff_gt = affsign sgn_gt
-      #|  aff_ge = affsign sgn_ge
-      #|  aff_lt = affsign sgn_lt
-      #|  aff_le = affsign sgn_le
-      #|  affsign sgn s t =\n        {y | ?f. y = vsum (s UNION t) (\\v. f v % v) /\\\n                (forall w. w IN t ==> sgn(f w)) /\\\n                sum (s UNION t) f = &1}
-      #|  (w IN (s UNION t) ==> w IN t ==> P w) <=>\n                        (w IN t ==> P w)
-      #|  affsign sgn s t =\n        {y | ?f. (forall w. w IN (s UNION t) ==> w IN t ==> sgn(f w)) /\\\n                 sum (s UNION t) f = &1 /\\\n                 vsum (s UNION t) (\\v. f v % v) = y}
-      #|  y IN affsign sgn s t <=>\n        ?u. (forall x. x IN t ==> sgn(u x)) /\\\n            sum (s UNION t) u = &1 /\\\n            vsum (s UNION t) (\\x. u(x) % x) = y
-      #|  (s DIFF t) UNION t = s UNION t
-      #|  forall s t. affsign sgn s t = affsign sgn (s DIFF t) t
-      #|  forall s t. aff_ge s t = aff_ge (s DIFF t) t
-      #|  p /\\ ~(p /\\ ~q) <=> p /\\ q
-      #|  vsum s (\\x. u x % x) = vsum {x | x IN s /\\ ~(u x = &0)} (\\x. u x % x)
-      #|  FINITE {x | x IN s /\\ ~(u((f:real^M->real^N) x) = &0)}
-      #|  {y | y IN IMAGE (f:real^M->real^N) s /\\ ~(u y = &0)} =\n      IMAGE f {x | x IN s /\\ ~(u(f x) = &0)}
-      #|  (p ==> z = x) ==> (p /\\ x = y <=> p /\\ z = y)
-      #|  forall f:real^M->real^N s.\n           linear f /\\ (forall x y. f x = f y ==> x = y)\n           ==> (sum(IMAGE f s) u = &1 /\\ vsum(IMAGE f s) (\\x. u x % x) = y <=>\n                sum s (u o f) = &1 /\\ f(vsum s (\\x. (u o f) x % x)) = y)
-      #|  (u:real^M->real) o (g:real^N->real^M)
-      #|  u:real^M->real
-      #|  x:real^M
-      #|  g:real^N->real^M
-      #|  f:real^M->real^N
-      #|  (u:real^N->real) o (f:real^M->real^N)
-      #|  vsum (s UNION t) (\\x. (u o (f:real^M->real^N)) x % x)
-      #|  u:real^N->real
-      #|  y:real^N
-      #|  forall f:real^M->real^N sgn s t v.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (affsign sgn (IMAGE f s) (IMAGE f t) =\n             IMAGE f (affsign sgn s t))
-      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_ge (IMAGE f s) (IMAGE f t) = IMAGE f (aff_ge s t)
-      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_gt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_gt s t)
-      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_le (IMAGE f s) (IMAGE f t) = IMAGE f (aff_le s t)
-      #|  forall f:real^M->real^N s t.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> aff_lt (IMAGE f s) (IMAGE f t) = IMAGE f (aff_lt s t)
-      #|  a + x:real^N = a + y <=> x = y
-      #|  FINITE {x:real^N | x IN s UNION t /\\ ~(f x = &0)}
-      #|  vsum (IMAGE (\\x:real^N. a + x)\n                          {x | x IN s UNION t /\\ ~(f x = &0)})\n                   (\\v. f(v - a) % v)
-      #|  a + vsum {x | x IN s UNION t /\\ ~(f x = &0)} (\\v:real^N. f v % v)
-      #|  a + x:real^N = a + y <=> x = y
-      #|  (a + x) - a:real^N = x
-      #|  \\x. (f:real^N->real)(x - a)
-      #|  f:real^N->real
-      #|  (forall x. s x ==> p x) <=> (forall x. x IN s ==> p x)
-      #|  forall sgn s t a v:real^N.\n        affsign sgn s t v\n        ==> affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) (a + v)
-      #|  a:real^N
-      #|  --a + x:real^N
-      #|  --a + a + x:real^N = x
-      #|  --a:real^N
-      #|  forall a:real^N sgn s t.\n        affsign sgn (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (affsign sgn s t)
-      #|  forall a:real^N s t.\n        aff_ge (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_ge s t)
-      #|  forall a:real^N s t.\n        aff_gt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_gt s t)
-      #|  forall a:real^N s t.\n        aff_le (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_le s t)
-      #|  forall a:real^N s t.\n        aff_lt (IMAGE (\\x. a + x) s) (IMAGE (\\x. a + x) t) =\n        IMAGE (\\x. a + x) (aff_lt s t)
-      #|  &1 = x <=> x = &1
-      #|  x - y:real^N = z <=> x = y + z
-      #|  x - y:real = z <=> x = y + z
-      #|  a < &0 /\\ b <= &0 ==> a + b <= &0
-      #|  a < &0 /\\ b < &0 ==> a + b < &0
-      #|  a / &2 < &0 <=> a < &0
-      #|  a / &2 <= &0 <=> a <= &0
-      #|  &0 < a / &2 <=> &0 < a
-      #|  &0 <= a / &2 <=> &0 <= a
-      #|  (x INSERT s) UNION t = x INSERT (s UNION t)
-      #|  forall x v w.\n        DISJOINT {x} {v}\n        ==> aff_ge {x} {v} =\n             {y | ?t1 t2.\n                     &0 <= t2 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v }
-      #|  forall x v w.\n        DISJOINT {x} {v,w}\n        ==> aff_ge {x} {v,w} =\n             {y | ?t1 t2 t3.\n\n                     &0 <= t2 /\\ &0 <= t3 /\\\n\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-      #|  forall x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_ge {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     &0 <= t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-      #|  forall x v w.\n        DISJOINT {x} {v}\n        ==> aff_gt {x} {v} =\n             {y | ?t1 t2.\n                     &0 < t2 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v}
-      #|  forall x v w.\n        DISJOINT {x} {v,w}\n        ==> aff_gt {x} {v,w} =\n             {y | ?t1 t2 t3.\n                     &0 < t2 /\\ &0 < t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-      #|  forall x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_gt {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     &0 < t3 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-      #|  forall v w x y.\n        DISJOINT {v,w,x} {y}\n        ==> aff_gt {v,w,x} {y} =\n             {z | ?t1 t2 t3 t4.\n                     &0 < t4 /\\\n                     t1 + t2 + t3 + t4 = &1 /\\\n                     z = t1 % v + t2 % w + t3 % x + t4 % y}
-      #|  forall x v.\n        DISJOINT {x} {v}\n        ==> aff_lt {x} {v} =\n             {y | ?t1 t2.\n                     t2 < &0 /\\\n                     t1 + t2 = &1 /\\\n                     y = t1 % x + t2 % v}
-      #|  forall x v w.\n        DISJOINT {x,v} {w}\n        ==> aff_lt {x,v} {w} =\n             {y | ?t1 t2 t3.\n                     t3 < &0 /\\\n                     t1 + t2 + t3 = &1 /\\\n                     y = t1 % x + t2 % v + t3 % w}
-      #|  t + s:real = &1 <=> t = &1 - s
-      #|  (?a b c. P b c /\\ Q b c /\\ R a b c /\\ S b c) <=>\n    (?b c. P b c /\\ Q b c /\\ S b c /\\ ?a. R a b c)
-      #|  DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
-      #|  forall v w.\n        ~(v = vec 0) /\\ ~(w = vec 0)\n        ==> aff_ge {vec 0} {v,w} = {a % v + b % w | &0 <= a /\\ &0 <= b}
-      #|  &0 <= a ==> &0 <= a / &2 /\\ a / &2 + a / &2 = a
-      #|  {a} = {a,a}
-      #|  forall v. ~(v = vec 0) ==> aff_ge {vec 0} {v} = {a % v | &0 <= a}
-      #|  t + u = &1 <=> t = &1 - u
-      #|  (?a b c. P a b c) <=> (?c b a. P a b c)
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
-      #|  forall v w. DISJOINT {vec 0, v} {w}\n         ==> aff_ge {vec 0, v} {w} = {s % v + t % w |s,t| &0 <= t}
-      #|  sum (s UNION t:real^N->bool) g = &1
-      #|  sum (s UNION t:real^N->bool) f = &1
-      #|  \\x:real^N. (&1 - u) * f x + u * g x
-      #|  g:real^N->real
-      #|  f:real^N->real
-      #|  u:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall sgn. (forall x y u. sgn(x) /\\ sgn(y) /\\ &0 <= u /\\ u <= &1\n                  ==> sgn((&1 - u) * x + u * y))\n         ==> forall s t:real^N->bool. convex(affsign sgn s t)
-      #|  forall s t. convex(aff_ge s t)
-      #|  x <= &0 <=> &0 <= --x
-      #|  forall s t. convex(aff_le s t)
-      #|  x <= &1 <=> x = &1 \\/ x < &1
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  forall s t. convex(aff_gt s t)
-      #|  x <= &1 <=> x = &1 \\/ x < &1
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  x < &0 <=> &0 < --x
-      #|  forall s t. convex(aff_lt s t)
-      #|  forall sgn s t. (affsign sgn s t) SUBSET (affine hull (s UNION t))
-      #|  forall s t. (aff_ge s t) SUBSET (affine hull (s UNION t))
-      #|  forall s t. (aff_le s t) SUBSET (affine hull (s UNION t))
-      #|  forall s t. (aff_gt s t) SUBSET (affine hull (s UNION t))
-      #|  forall s t. (aff_lt s t) SUBSET (affine hull (s UNION t))
-      #|  forall sgn s t. affsign sgn s {} = affine hull s
-      #|  forall s t. aff_ge s {} = affine hull s
-      #|  forall s t. aff_le s {} = affine hull s
-      #|  forall s t. aff_gt s {} = affine hull s
-      #|  forall s t. aff_lt s {} = affine hull s
-      #|  forall sgn1 sgn2 s t.\n        (forall x. sgn1 x ==> sgn2 x) ==> affsign sgn1 s t SUBSET affsign sgn2 s t
-      #|  forall s t. aff_gt s t SUBSET aff_ge s t
-      #|  s SUBSET s' ==> {x | x IN s' UNION t /\\ x IN s UNION t} = s UNION t
-      #|  \\x:real^N. if x IN s UNION t then u x else &0
-      #|  u:real^N->real
-      #|  y:real^N
-      #|  forall sgn s s' t:real^N->bool.\n        s SUBSET s' ==> affsign sgn s t SUBSET affsign sgn s' t
-      #|  forall sgn s t s' t'.\n        s' UNION t' = s UNION t /\\ t' SUBSET t\n        ==> affsign sgn s t SUBSET affsign sgn s' t'
-      #|  forall s s' t. s SUBSET s' ==> aff_gt s t SUBSET aff_gt s' t
-      #|  forall s s' t. s SUBSET s' ==> aff_ge s t SUBSET aff_ge s' t
-      #|  forall s s' t. s SUBSET s' ==> aff_lt s t SUBSET aff_lt s' t
-      #|  forall s s' t. s SUBSET s' ==> aff_le s t SUBSET aff_le s' t
-      #|  t SUBSET t' ==> {x | x IN s UNION t' /\\ x IN s UNION t} = s UNION t
-      #|  \\x:real^N. if x IN s UNION t then u x else &0
-      #|  u:real^N->real
-      #|  y:real^N
-      #|  forall sgn s t t':real^N->bool.\n        sgn(&0) /\\ t SUBSET t' /\\ DISJOINT s t'\n        ==> affsign sgn s t SUBSET affsign sgn s t'
-      #|  forall s t t'. t SUBSET t' /\\ DISJOINT s t' ==> aff_ge s t SUBSET aff_ge s t'
-      #|  forall s t t'. t SUBSET t' /\\ DISJOINT s t' ==> aff_le s t SUBSET aff_le s t'
-      #|  affsign sgn (s:real^N->bool) {}
-      #|  forall sgn s t:real^N->bool.\n        sgn(&0) /\\ DISJOINT s t\n        ==> affine hull s SUBSET affsign sgn s t
-      #|  forall s t. DISJOINT s t ==> affine hull s SUBSET aff_ge s t
-      #|  a IN t /\\ DISJOINT s t\n      ==> s UNION (t DELETE a) = (s UNION t) DELETE a
-      #|  u:real^N->real
-      #|  a:real^N
-      #|  &0 <= x ==> (&0 < x <=> ~(x = &0))
-      #|  u:real^N->real
-      #|  forall x:real^N. x IN t ==> &0 < u x
-      #|  u:real^N->real
-      #|  y:real^N
-      #|  t' SUBSET t /\\ (forall a. a IN s ==> f(a) SUBSET t) /\\\n    (forall y. y IN t ==> y IN t' \\/ ?a. a IN s /\\ y IN f(a))\n    ==> t = t' UNION UNIONS {f a | a IN s}
-      #|  forall s:real^N->bool.\n        FINITE s /\\ FINITE t /\\ DISJOINT s t\n        ==> aff_ge s t = aff_gt s t UNION\n                         UNIONS {aff_ge s (t DELETE a) | a | a IN t}
-      #|  forall a. &0 < a ==> (forall y. ?x. a * x = y)
-      #|  x = &1 - v - v' <=> v = &1 - (x + v')
-      #|  forall sgn s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        (forall x. sgn x ==> sgn(x / &2)) /\\\n        (forall x y. sgn x /\\ sgn y ==> sgn(x + y)) /\\\n        &0 < a\n        ==> affsign sgn (vec 0 INSERT (a % v) INSERT s) t =\n            affsign sgn (vec 0 INSERT v INSERT s) t
-      #|  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_ge (vec 0 INSERT (a % v) INSERT s) t =\n            aff_ge (vec 0 INSERT v INSERT s) t
-      #|  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_le (vec 0 INSERT (a % v) INSERT s) t =\n            aff_le (vec 0 INSERT v INSERT s) t
-      #|  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_gt (vec 0 INSERT (a % v) INSERT s) t =\n            aff_gt (vec 0 INSERT v INSERT s) t
-      #|  forall s t a v.\n        FINITE s /\\ FINITE t /\\\n        ~(vec 0 IN t) /\\ ~(v IN t) /\\ ~((a % v) IN t) /\\\n        &0 < a\n        ==> aff_lt (vec 0 INSERT (a % v) INSERT s) t =\n            aff_lt (vec 0 INSERT v INSERT s) t
-      #|  &0 < a
-      #|  c:real
-      #|  b / a:real
-      #|  a * b:real
-      #|  c:real
-      #|  b:real
-      #|  DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
-      #|  u:real^N = vec 0
-      #|  forall a u v:real^N.\n        &0 < a /\\ ~(v = vec 0)\n        ==> aff_ge {vec 0} {a % u,v} = aff_ge {vec 0} {u,v}
-      #|  forall x:real^N. x IN (s UNION t) DELETE vec 0 ==> ~(x = vec 0)
-      #|  \\x:real^N. if x = vec 0\n                 then &1 - sum ((s UNION t) DELETE vec 0) (\\x. f x)\n                 else f x
-      #|  f:real^N->real
-      #|  f:real^N->real
-      #|  f:real^N->real
-      #|  y:real^N
-      #|  x IN s DIFF t ==> s UNION t = x INSERT ((s UNION t) DELETE x)
-      #|  forall sgn s t.\n        FINITE s /\\ FINITE t /\\ (vec 0) IN (s DIFF t)\n        ==> affsign sgn s t =\n             { vsum (s UNION t) (\\v. f v % v) |f|\n               forall x:real^N. x IN t ==> sgn(f x)}
-      #|  (\\x. if x IN t then c * v x else u x):real^N->real
-      #|  v:real^N->real
-      #|  u:real^N->real
-      #|  y:real^N
-      #|  c:real
-      #|  x:real^N
-      #|  sum t (f:real^N->real) = &0
-      #|  x / y:real = inv y * x
-      #|  \\x:real^N. f x / sum t (f:real^N->real)
-      #|  f:real^N->real
-      #|  inv(sum t (f:real^N->real)) % vsum t (\\v. f v % v)
-      #|  sum t (f:real^N->real)
-      #|  \\x:real^N. if x = a then &1 else &0
-      #|  a:real^N
-      #|  f:real^N->real
-      #|  &0
-      #|  t:real^N->bool
-      #|  f:real^N->real
-      #|  sum t (f:real^N->real) = &0
-      #|  vsum (s DIFF t) (\\x:real^N. f x % x)
-      #|  f:real^N->real
-      #|  DISJOINT (s DIFF t) t
-      #|  s UNION t = (s DIFF t) UNION t
-      #|  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t) /\\ ~(t = {})\n        ==> aff_ge s t =\n               {x + c % y | x IN affine hull (s DIFF t) /\\\n                            y IN convex hull t /\\ &0 <= c}
-      #|  y:real^N
-      #|  c:real
-      #|  c % x:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  c:real
-      #|  y:real^N
-      #|  inv(c) % x:real^N
-      #|  c:real
-      #|  c = &0
-      #|  y:real^N
-      #|  c:real
-      #|  x:real^N
-      #|  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t) /\\ ~(t = {})\n        ==> aff_ge s t =\n               affine hull (s DIFF t) UNION\n               {c % (x + y) | x IN affine hull (s DIFF t) /\\\n                              y IN convex hull t /\\ &0 <= c}
-      #|  {x + y:real^N | P x /\\ y = a} = {x + a | P x}
-      #|  t:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t)\n        ==> aff_ge s t =\n               {x + y | x IN affine hull (s DIFF t) /\\\n                        y IN convex_cone hull t}
-      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s =\n                {y | ?u. (forall x. x IN s ==> &0 <= u x) /\\\n                         y = vsum s (\\x. u x % x)}
-      #|  ~(a IN s) ==> {a} DIFF s = {a}
-      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(s = {}) /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s = {t % y | &0 <= t /\\ y IN convex hull s}
-      #|  t = &0
-      #|  t:real
-      #|  &0
-      #|  y:real^N = vec 0
-      #|  y:real^N
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        FINITE s /\\ ~(vec 0 IN s)\n        ==> aff_ge {vec 0} s =\n            vec 0 INSERT {t % y | &0 < t /\\ y IN convex hull s}
-      #|  forall s t:real^N->bool.\n        FINITE s /\\ FINITE t /\\ vec 0 IN (s DIFF t)\n        ==> aff_ge s t =\n            convex_cone hull (s UNION t UNION IMAGE (--) (s DIFF t))
-      #|  forall s. convex hull s = aff_ge {} s
-      #|  (vec 0:real^N) IN ((vec 0 INSERT s) DIFF t)
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  s DIFF t:real^N->bool
-      #|  FINITE(s DIFF t) /\\ FINITE(t:real^N->bool) /\\\n                DISJOINT (s DIFF t) t
-      #|  forall s t:real^N->bool. FINITE s /\\ FINITE t ==> polyhedron(aff_ge s t)
-      #|  forall s t:real^N->bool. FINITE s /\\ FINITE t ==> closed(aff_ge s t)
-      #|  \\v. c * (u:real^N->real) v
-      #|  u:real^N->real
-      #|  c:real
-      #|  forall s:real^N->bool. FINITE s /\\ ~(vec 0 IN s) ==> conic(aff_ge {vec 0} s)
-      #|  &0 < a + b
-      #|  b / (a + b):real
-      #|  a / (a + b):real
-      #|  vec 0:real^N
-      #|  inv(a + b) % x:real^N
-      #|  w:real^N
-      #|  v:real^N
-      #|  a = &0 /\\ b = &0 \\/ &0 < a + b
-      #|  b:real
-      #|  a:real
-      #|  u:real^N
-      #|  forall u v w x:real^N.\n        ~(v = u) /\\ ~(w = u) /\\ ~(x = u) /\\ x IN aff_ge {u} {v,w}\n        ==> angle(v,u,x) + angle(x,u,w) = angle(v,u,w)
-      #|  (w:real^3)$3 - t * (z:real^3)$3
-      #|  t:real
-      #|  (forall t. ((?s. P s t) <=> Q t)) ==> ((?s t. P s t) <=> (?t. Q t))
-      #|  DISJOINT s {a} <=> ~(a IN s)
-      #|  z:real^3 = basis 3
-      #|  z:real^3 = vec 0
-      #|  forall w z:real^3.\n        ~collinear{vec 0,basis 3,z}\n        ==> (w IN aff_ge {vec 0,basis 3} {z} <=>\n             (dropout 3 w) IN aff_ge {vec 0:real^2} {dropout 3 z})
-      #|  ~(y = vec 0) ==> ((?s. x = s % y) <=> y cross x = vec 0)
-      #|  x:real^N = t % y
-      #|  t:real
-      #|  forall x y:real^N.\n          ~(y = vec 0)\n          ==> ((?t. &0 <= t /\\ x = t % y) <=>\n               (?t. x = t % y) /\\ &0 <= x dot y)
-      #|  a:real^N = b + c <=> a - c = b
-      #|  DISJOINT {a,b} {c} <=> ~(a = c) /\\ ~(b = c)
-      #|  y:real^3 = x
-      #|  y:real^3 = vec 0
-      #|  x:real^3 = vec 0
-      #|  forall x y z:real^3.\n        ~collinear {vec 0,x,y} /\\ ~collinear {vec 0,x,z}\n        ==> (z IN aff_ge {vec 0,x} {y} <=>\n             (x cross y) cross x cross z = vec 0 /\\\n             &0 <= (x cross z) dot (x cross y))
-      #|  forall x. aff_ge {x} {x} = {x}
-      #|  (?x y. P y /\\ x = f y /\\ Q x y) <=> (?y. P y /\\ Q (f y) y)
-      #|  (&1 - x) % v + x % v:real^N = v
-      #|  x + y = &1 <=> x = &1 - y
-      #|  x:real^N = y
-      #|  forall x y:real^N.\n        aff_ge {x} {y} =\n          {z | ?t1 t2. &0 <= t2 /\\ t1 + t2 = &1 /\\ z = t1 % x + t2 % y}
-      #|  x + y = &1 <=> x = &1 - y
-      #|  forall x y:real^N.\n        aff_ge {x} {y} =\n          {z | ?t. &0 <= t /\\ z = (&1 - t) % x + t % y}
-      #|  forall x y. closed(aff_ge {x} {y})
-      #|  forall x y. segment[x,y] SUBSET aff_ge {x} {y}
-      #|  (forall x y. x IN aff_ge {x} {y}) /\\ (forall x y. y IN aff_ge {x} {y})
-      #|  {x,y} = {x} UNION {y}
-      #|  forall x y. aff_ge {x} {y} SUBSET affine hull {x,y}
-      #|  &0 <= x /\\ &0 <= y ==> (x + y = &0 <=> x = &0 /\\ y = &0)
-      #|  a = (&1 - u) % ((&1 - s) % a + s % b) + u % ((&1 - t) % a + t % b) <=>\n      ((&1 - u) * s + u * t) % (b - a):real^N = vec 0
-      #|  u:real
-      #|  (a:real^N) IN segment[u,v]
-      #|  t = &0
-      #|  s = &0
-      #|  t:real
-      #|  s:real
-      #|  u IN aff_ge {a:real^N} {b} /\\ v IN aff_ge {a} {b}
-      #|  v:real^N = a
-      #|  u:real^N = a
-      #|  s SUBSET u ==> (s INTER t) SUBSET u
-      #|  affine hull {a:real^N,b}
-      #|  ?u v:real^N. aff_ge {a} {b} INTER s = segment[u,v]
-      #|  a:real^N
-      #|  b:real^N = a
-      #|  forall s a b:real^N.\n        compact s /\\ convex s /\\ a IN s\n        ==> ?c. aff_ge {a} {b} INTER s = segment[a,c]
-      #|  conv0 S:real^A->bool = affsign sgn_gt {} S
-      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> conv0(IMAGE f s) = IMAGE f (conv0 s)
-      #|  forall a s. conv0(IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (conv0 s)
-      #|  forall s. conv0 s SUBSET convex hull s
-      #|  forall s. conv0 s = aff_gt {} s
-      #|  forall s:real^N->bool.\n        FINITE s\n        ==> convex hull s = conv0 s UNION\n                            UNIONS {convex hull (s DELETE a) | a | a IN s}
-      #|  forall s. convex(conv0 s)
-      #|  convex hull s:real^N->bool
-      #|  forall s:real^N->bool. bounded s ==> bounded(conv0 s)
-      #|  forall s. bounded s ==> measurable(conv0 s)
-      #|  (s UNION t) DIFF s = t DIFF s
-      #|  forall s:real^N->bool.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1\n        ==> negligible(convex hull s DIFF conv0 s)
-      #|  s SUBSET t ==> s DIFF t = {}
-      #|  forall s:real^N->bool.\n        FINITE s /\\ CARD s <= dimindex(:N) + 1\n        ==> measure(conv0 s) = measure(convex hull s)
-      #|  orthonormal e1 e2 e3 <=>\n     e1 dot e1 = &1 /\\ e2 dot e2 = &1 /\\ e3 dot e3 = &1 /\\\n     e1 dot e2 = &0 /\\ e1 dot e3 = &0 /\\ e2 dot e3 = &0 /\\\n     &0 < (e1 cross e2) dot e3
-      #|  forall f. linear(f) /\\ (forall x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> forall e1 e2 e3. orthonormal (f e1) (f e2) (f e3) <=>\n                      orthonormal e1 e2 e3
-      #|  forall e1 e2 e3. orthonormal e1 e2 e3 ==> orthonormal e2 e3 e1
-      #|  &0 <= x * x /\\ &0 <= y * y ==> --x * x + y * -- y <= &0
-      #|  (u = &1 /\\ v = &1 /\\ w = &0 ==> a = b /\\ --c = d \\/ a = --b /\\ c = d) /\\\n    (a = --b /\\ c = d ==> x <= &0)\n    ==> (u = &1 /\\ v = &1 /\\ w = &0 /\\ &0 < x\n         ==> a:real = b /\\ --c:real = d)
-      #|  (e3:real^3)$1 = &0
-      #|  (e2:real^3)$1 = &0
-      #|  k = &1
-      #|  k = -- &1
-      #|  k * k = &1 <=> k = &1 \\/ k = -- &1
-      #|  k:real
-      #|  e1:real^3
-      #|  forall e1 e2 e3. orthonormal e1 e2 e3 ==> e3 cross e1 = e2
-      #|  forall e1 e2 e3.\n        orthonormal e1 e2 e3\n        ==> e2 cross e3 = e1 /\\ e3 cross e1 = e2 /\\ e1 cross e2 = e3
-      #|  forall e1 e2 e3. orthonormal e1 e2 e3\n              ==> ~(e1 = vec 0) /\\ ~(e2 = vec 0) /\\ ~(e3 = vec 0)
-      #|  forall e1 e2 e3. orthonormal e1 e2 e3 ==> ~(e1 = e2) /\\ ~(e1 = e3) /\\ ~(e2 = e3)
-      #|  forall e1 e2 e3. orthonormal e1 e2 e3 ==> independent {e1,e2,e3}
-      #|  {e1:real^3,e2,e3}
-      #|  (:real^3)
-      #|  forall e1 e2 e3. orthonormal e1 e2 e3 ==> span {e1,e2,e3} = (:real^3)
-      #|  forall e1 e2 e3 t1 t2 t3.\n        orthonormal e1 e2 e3\n        ==> (t1 % e1 + t2 % e2 + t3 % e3 = vec 0 <=>\n             t1 = &0 /\\ t2 = &0 /\\ t3 = &0)
-      #|  a % x + b % y + c % z:real^3 = a' % x + b' % y + c' % z <=>\n    (a - a') % x + (b - b') % y + (c - c') % z = vec 0
-      #|  forall e1 e2 e3 s1 s2 s3 t1 t2 t3.\n        orthonormal e1 e2 e3\n        ==> (s1 % e1 + s2 % e2 + s3 % e3 = t1 % e1 + t2 % e2 + t3 % e3 <=>\n             s1 = t1 /\\ s2 = t2 /\\ s3 = t3)
-      #|  arcV u v w = acs (( (v - u) dot (w - u))/((norm (v-u)) * (norm (w-u))))
-      #|  w:real^N = u
-      #|  v:real^N = u
-      #|  forall u v w:real^N. arcV u v w = angle(v,u,w)
-      #|  forall f a b c.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> arcV (f a) (f b) (f c) = arcV a b c
-      #|  forall a b c d. arcV (a + b) (a + c) (a + d) = arcV b c d
-      #|  cos(p) % e + sin(p) % rotate2d (pi / &2) e = rotate2d p e
-      #|  a % b % x:real^2 = b % a % x
-      #|  norm(v1:real^2)
-      #|  e2 = rotate2d (pi / &2) e1
-      #|  norm(e1:real^2) = &1 /\\ norm(e2:real^2) = &1
-      #|  norm(v2:real^2)
-      #|  norm(v1:real^2)
-      #|  p:real
-      #|  v1:real^2
-      #|  e1:real^2
-      #|  t:real
-      #|  v2:real^2
-      #|  v1:real^2
-      #|  a % b % x:real^2 = b % a % x
-      #|  norm(basis 1:real^2)
-      #|  e2 = rotate2d (pi / &2) e1
-      #|  norm(e1:real^2) = &1 /\\ norm(e2:real^2) = &1
-      #|  norm(v2:real^2)
-      #|  &0
-      #|  p:real
-      #|  basis 1:real^2
-      #|  e1:real^2
-      #|  t:real
-      #|  v2:real^2
-      #|  basis 1:real^2
-      #|  v1:real^2 = vec 0
-      #|  a /\\ b /\\ c /\\ d /\\ e /\\ f <=>\n                         d /\\ e /\\ a /\\ b /\\ c /\\ f
-      #|  v1:real^3
-      #|  v2:real^3
-      #|  (v1:real^3)$3 = &0 /\\ (v2:real^3)$3 = &0
-      #|  (collinear{vec 0, w % basis 3, w1} <=>\n     w1 - w1$3 % basis 3:real^3 = vec 0) /\\\n    (collinear{vec 0, w % basis 3, w2} <=>\n     w2 - w2$3 % basis 3:real^3 = vec 0)
-      #|  v2:real^3 = w2 - (w2$3) % basis 3
-      #|  v1:real^3 = w1 - (w1$3) % basis 3
-      #|  x:real^3 = a + b + c <=> x - c = a + b
-      #|  (forall e3. p e3 /\\ e3 = a ==> q e3) <=> p a ==> q a
-      #|  a % x:real^3 = a % y <=> a % (x - y) = vec 0
-      #|  &0 < w ==> abs w = w
-      #|  &0 < w ==> (w * x) / (w * w) * w = x
-      #|  &0
-      #|  &0 <= w <=> w = &0 \\/ &0 < w
-      #|  w:real
-      #|  w:real^3
-      #|  (w dot (w2:real^3)) / (w dot w)
-      #|  (w dot (w1:real^3)) / (w dot w)
-      #|  v:real^3
-      #|  forall v w w1 w2.\n          ?theta. &0 <= theta /\\ theta < &2 * pi /\\\n                  ?h1 h2.\n                     forall e1 e2 e3.\n                        orthonormal e1 e2 e3 /\\\n                        dist(w,v) % e3 = w - v /\\\n                        ~(w = v)\n                        ==> ?psi r1 r2.\n                                w1 - v = (r1 * cos psi) % e1 +\n                                         (r1 * sin psi) % e2 +\n                                         h1 % (w - v) /\\\n                                w2 - v = (r2 * cos (psi + theta)) % e1 +\n                                         (r2 * sin (psi + theta)) % e2 +\n                                         h2 % (w - v) /\\\n                                (~collinear {v, w, w1} ==> &0 < r1) /\\\n                                (~collinear {v, w, w2} ==> &0 < r2)
-      #|  azim v w w1 w2 =\n        if collinear {v,w,w1} \\/ collinear {v,w,w2} then &0\n        else @theta. &0 <= theta /\\ theta < &2 * pi /\\\n                     ?h1 h2.\n                         forall e1 e2 e3.\n                            orthonormal e1 e2 e3 /\\\n                            dist(w,v) % e3 = w - v /\\\n                            ~(w = v)\n                            ==> ?psi r1 r2.\n                                    w1 - v = (r1 * cos psi) % e1 +\n                                             (r1 * sin psi) % e2 +\n                                             h1 % (w - v) /\\\n                                    w2 - v = (r2 * cos (psi + theta)) % e1 +\n                                             (r2 * sin (psi + theta)) % e2 +\n                                             h2 % (w - v) /\\\n                                    &0 < r1 /\\ &0 < r2
-      #|  (d * h * d) pow 2 = (d * d) * (r * &1 + h * d * h * d) <=>\n    d = &0 \\/ r = &0
-      #|  r * c + r * s + f:real = r * (s + c) + f
-      #|  (r * c) * (r * c):real = r pow 2 * c pow 2
-      #|  dist(w:real^3,v) % e3 = w - v
-      #|  {v,w,x} = {w,v,x}
-      #|  &0
-      #|  r1:real
-      #|  r2:real
-      #|  r1:real
-      #|  psi:real
-      #|  e3:real^3
-      #|  e2:real^3
-      #|  e1:real^3
-      #|  e3:real^3
-      #|  e2:real^3
-      #|  e1:real^3
-      #|  h2:real
-      #|  h1:real
-      #|  h2:real
-      #|  h1:real
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w:real^3
-      #|  v:real^3
-      #|  r2:real
-      #|  &0
-      #|  r1:real
-      #|  r2:real
-      #|  psi:real
-      #|  e3:real^3
-      #|  e2:real^3
-      #|  e1:real^3
-      #|  e3:real^3
-      #|  e2:real^3
-      #|  e1:real^3
-      #|  h2:real
-      #|  h1:real
-      #|  h1:real
-      #|  h2:real
-      #|  w1:real^3
-      #|  w2:real^3
-      #|  w:real^3
-      #|  v:real^3
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w:real^3
-      #|  v:real^3
-      #|  forall v w w1 w2:real^3.\n        &0 <= azim v w w1 w2 /\\ azim v w w1 w2 < &2 * pi /\\\n        ?h1 h2.\n           forall e1 e2 e3.\n              orthonormal e1 e2 e3 /\\\n              dist(w,v) % e3 = w - v /\\\n              ~(w = v)\n              ==> ?psi r1 r2.\n                      w1 - v = (r1 * cos psi) % e1 +\n                               (r1 * sin psi) % e2 +\n                               h1 % (w - v) /\\\n                      w2 - v = (r2 * cos (psi + azim v w w1 w2)) % e1 +\n                               (r2 * sin (psi + azim v w w1 w2)) % e2 +\n                               h2 % (w - v) /\\\n                      (~collinear {v, w, w1} ==> &0 < r1) /\\\n                      (~collinear {v, w, w2} ==> &0 < r2)
-      #|  &0 < pi ==> (x * &2 * pi) / (&2 * pi) = x
-      #|  n:real
-      #|  &2 * m * pi + x = &2 * n * pi <=> x = (n - m) * &2 * pi
-      #|  m:real
-      #|  psi + theta = (phi + az) + x:real <=> psi = phi + x + (az - theta)
-      #|  &0 < x /\\ &0 < y ==> (abs x = abs y <=> x = y)
-      #|  r * c = r' * c' /\\ r * s = r' * s' /\\ u:real = v\n    ==> s pow 2 + c pow 2 = &1 /\\ s' pow 2 + c' pow 2 = &1 /\\\n        &0 < r /\\ (r pow 2 = r' pow 2 ==> r = r')\n        ==> s = s' /\\ c = c'
-      #|  a /\\ b /\\ c /\\ d <=> (c /\\ d) /\\ a /\\ b
-      #|  dist(w:real^3,v) % e3 = w - v
-      #|  s2:real
-      #|  s1:real
-      #|  phi:real
-      #|  e3:real^3
-      #|  e2:real^3
-      #|  e1:real^3
-      #|  k2:real
-      #|  k1:real
-      #|  &0 <= x /\\ x < k /\\ &0 <= y /\\ y < k ==> abs(x - y) < k
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w:real^3
-      #|  v:real^3
-      #|  (azim v w w1 w2 - theta) / (&2 * pi) = &0
-      #|  s pow 2 + c pow 2 = &1 ==> (r * c = &0 /\\ r * s = &0 <=> r = &0)
-      #|  a + b + c % x:real^N = d % x <=> a + b + (c - d) % x = vec 0
-      #|  dist(w:real^3,v) % e3 = w - v
-      #|  {a,b,c} = {b,a,c}
-      #|  ~collinear{v:real^3,w,w2} /\\ ~collinear {v,w,w1}
-      #|  forall v w w1 w2 h1 h2 r1 r2 e1 e2 e3 psi theta.\n        &0 <= theta /\\\n        theta < &2 * pi /\\\n        orthonormal e1 e2 e3 /\\\n        dist(w,v) % e3 = w - v /\\\n        ~(w = v) /\\\n        &0 < r1 /\\ &0 < r2 /\\\n        w1 - v = (r1 * cos psi) % e1 +\n                 (r1 * sin psi) % e2 +\n                 h1 % (w - v) /\\\n        w2 - v = (r2 * cos (psi + theta)) % e1 +\n                 (r2 * sin (psi + theta)) % e2 +\n                 h2 % (w - v)\n        ==> azim v w w1 w2 = theta
-      #|  {a + x,a + y,a + z} = IMAGE (\\x:real^3. a + x) {x,y,z}
-      #|  dist(a + v,a + w) = dist(v,w)
+      #|  {(v1 : Cart[Real, Tybit1[Unit]]) - (v0 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]) - v0, (v3 : Cart[Real, Tybit1[Unit]]) - v0}
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], x - y == x - (a : Cart[Real, Tybit1[Unit]]) - (y - a)
+      #|  CARD({(b : Cart[Real, Tybit1[Unit]]) - (a : Cart[Real, Tybit1[Unit]]), (c : Cart[Real, Tybit1[Unit]]) - a})
+      #|  (x : Cart[Real, Tybit1[Unit]]) => x - (a : Cart[Real, Tybit1[Unit]])
+      #|  (c : Cart[Real, Tybit1[Unit]])
+      #|  (b : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], coplanar({v0, v1, v2, v3}) == (det(vector([v1 - v0, v2 - v0, v3 - v0])) == real_of_num(0))
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], coplanar({v, w, x, y}) == (dot(cross(w - v, x - v), y - v) == real_of_num(0))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], plane(hull(affine, {a, b, c})) == !collinear({a, b, c})
+      #|  int_of_num(2)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], SUBSET(s, hull(affine, {u, v, w})) && !collinear(s) \226\134\146 hull(affine, {u, v, w}) == hull(affine, s)
+      #|  ((p : Bool) \226\134\146 (x : Bool) == (x' : Bool)) && (!p \226\134\146 x == true) \226\134\146 x' \226\134\146 x
+      #|  (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
+      #|  o((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, (f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) \226\134\146 ((\226\136\128 P : (Cart[Real, N]) -> Bool, (\226\136\128 x : Cart[Real, N], P(x)) == (\226\136\128 x : Cart[Real, N], P(a + f(x)))) && (\226\136\128 P : (Cart[Real, N]) -> Bool, (\226\136\131 x : Cart[Real, N], P(x)) == (\226\136\131 x : Cart[Real, N], P(a + f(x)))) && (\226\136\128 Q : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, Q(s)) == (\226\136\128 s : (Cart[Real, N]) -> Bool, Q(IMAGE((x : Cart[Real, N]) => a + x, IMAGE(f, s))))) && (\226\136\128 Q : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\131 s : (Cart[Real, N]) -> Bool, Q(s)) == (\226\136\131 s : (Cart[Real, N]) -> Bool, Q(IMAGE((x : Cart[Real, N]) => a + x, IMAGE(f, s)))))) && (\226\136\128 P : (Cart[Real, N]) -> Bool, {(x : Cart[Real, N]) | P(x)} == IMAGE((x : Cart[Real, N]) => a + x, IMAGE(f, {(x : Cart[Real, N]) | P(a + f(x))})))
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 f : (_) -> Cart[Real, Tybit1[Unit]], {} == IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, IMAGE(f, {}))
+      #|  \226\136\128 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], (orthogonal_transformation : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Bool)(f) && (det : (Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]]) -> Real)((matrix : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]])(f)) == real_of_num(1) \226\134\146 (linear : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Bool)(f) && (\226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, Tybit1[Unit]], \226\136\131 x : Cart[Real, Tybit1[Unit]], f(x) == y) && (\226\136\128 x : Cart[Real, Tybit1[Unit]], (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(f(x)) == (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(x)) && (2 <= (dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) \226\134\146 (det : (Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]]) -> Real)((matrix : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]])(f)) == real_of_num(1))
+      #|  (\226\136\128 a : _, \226\136\128 f : _, (q : (_, _) -> Bool)(a, f) \226\134\146 (p : Bool) == (p' : (_, _) -> Bool)(a, f)) \226\134\146 (\226\136\131 a : _, \226\136\131 f : _, q(a, f)) \226\134\146 p == (\226\136\128 a : _, \226\136\128 f : _, q(a, f) \226\134\146 p'(a, f))
+      #|  (lin_combo : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Real) -> Cart[Real, N])((V : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Real)) == vsum(V, (v : Cart[Real, N]) => op_pct(f(v), v))
+      #|  (affsign : ((Real) -> Bool, (Cart[Real, A]) -> Bool, (Cart[Real, A]) -> Bool, Cart[Real, A]) -> Bool)((sgn : (Real) -> Bool), (s : (Cart[Real, A]) -> Bool), (t : (Cart[Real, A]) -> Bool), (v : Cart[Real, A])) == (\226\136\131 f : (Cart[Real, A]) -> Real, v == lin_combo(UNION(s, t), f) && (\226\136\128 w : Cart[Real, A], t(w) \226\134\146 sgn(f(w))) && sum(UNION(s, t), f) == real_of_num(1))
+      #|  (sgn_gt : (Real) -> Bool) == ((t : Real) => real_of_num(0) < t)
+      #|  (sgn_ge : (Real) -> Bool) == ((t : Real) => real_of_num(0) <= t)
+      #|  (sgn_lt : (Real) -> Bool) == ((t : Real) => t < real_of_num(0))
+      #|  (sgn_le : (Real) -> Bool) == ((t : Real) => t <= real_of_num(0))
+      #|  (aff_gt : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool) == affsign(sgn_gt)
+      #|  (aff_ge : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool) == affsign(sgn_ge)
+      #|  (aff_lt : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool) == affsign(sgn_lt)
+      #|  (aff_le : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool, Cart[Real, _]) -> Bool) == affsign(sgn_le)
+      #|  affsign((sgn : (Real) -> Bool), (s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool)) == {(y : Cart[Real, _]) | \226\136\131 f : (Cart[Real, _]) -> Real, y == vsum(UNION(s, t), (v : Cart[Real, _]) => op_pct(f(v), v)) && (\226\136\128 w : Cart[Real, _], IN(w, t) \226\134\146 sgn(f(w))) && sum(UNION(s, t), f) == real_of_num(1)}
+      #|  (IN((w : _), UNION((s : (_) -> Bool), (t : (_) -> Bool))) \226\134\146 IN(w, t) \226\134\146 (P : (_) -> Bool)(w)) == (IN(w, t) \226\134\146 P(w))
+      #|  affsign((sgn : (Real) -> Bool), (s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool)) == {(y : Cart[Real, _]) | \226\136\131 f : (Cart[Real, _]) -> Real, (\226\136\128 w : Cart[Real, _], IN(w, UNION(s, t)) \226\134\146 IN(w, t) \226\134\146 sgn(f(w))) && sum(UNION(s, t), f) == real_of_num(1) && vsum(UNION(s, t), (v : Cart[Real, _]) => op_pct(f(v), v)) == y}
+      #|  IN((y : Cart[Real, _]), affsign((sgn : (Real) -> Bool), (s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool))) == (\226\136\131 u : (Cart[Real, _]) -> Real, (\226\136\128 x : Cart[Real, _], IN(x, t) \226\134\146 sgn(u(x))) && sum(UNION(s, t), u) == real_of_num(1) && vsum(UNION(s, t), (x : Cart[Real, _]) => op_pct(u(x), x)) == y)
+      #|  UNION(DIFF((s : (_) -> Bool), (t : (_) -> Bool)), t) == UNION(s, t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, affsign((sgn : (Real) -> Bool), s, t) == affsign(sgn, DIFF(s, t), t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, aff_ge(s, t) == aff_ge(DIFF(s, t), t)
+      #|  ((p : Bool) && !(p && !(q : Bool))) == (p && q)
+      #|  vsum((s : (Cart[Real, _]) -> Bool), (x : Cart[Real, _]) => op_pct((u : (Cart[Real, _]) -> Real)(x), x)) == vsum({(x : Cart[Real, _]) | IN(x, s) && !(u(x) == real_of_num(0))}, (x : Cart[Real, _]) => op_pct(u(x), x))
+      #|  FINITE({(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && !((u : (Cart[Real, N]) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x)) == real_of_num(0))})
+      #|  {(y : Cart[Real, N]) | IN(y, IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))) && !((u : (Cart[Real, N]) -> Real)(y) == real_of_num(0))} == IMAGE(f, {(x : Cart[Real, M]) | IN(x, s) && !(u(f(x)) == real_of_num(0))})
+      #|  ((p : Bool) \226\134\146 (z : _) == (x : _)) \226\134\146 (p && x == (y : _)) == (p && z == y)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 (sum(IMAGE(f, s), (u : (Cart[Real, N]) -> Real)) == real_of_num(1) && vsum(IMAGE(f, s), (x : Cart[Real, N]) => op_pct(u(x), x)) == (y : Cart[Real, N])) == (sum(s, o(u, f)) == real_of_num(1) && f(vsum(s, (x : Cart[Real, M]) => op_pct(o(u, f, x), x))) == y)
+      #|  o((u : (Cart[Real, M]) -> Real), (g : (Cart[Real, N]) -> Cart[Real, M]))
+      #|  (u : (Cart[Real, M]) -> Real)
+      #|  (x : Cart[Real, M])
+      #|  (g : (Cart[Real, N]) -> Cart[Real, M])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  o((u : (Cart[Real, N]) -> Real), (f : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  vsum(UNION((s : (Cart[Real, M]) -> Bool), (t : (Cart[Real, M]) -> Bool)), (x : Cart[Real, M]) => op_pct(o((u : (Cart[Real, N]) -> Real), (f : (Cart[Real, M]) -> Cart[Real, N]), x), x))
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 v : _, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 affsign(sgn, IMAGE(f, s), IMAGE(f, t)) == IMAGE(f, affsign(sgn, s, t))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 aff_ge(IMAGE(f, s), IMAGE(f, t)) == IMAGE(f, aff_ge(s, t))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 aff_gt(IMAGE(f, s), IMAGE(f, t)) == IMAGE(f, aff_gt(s, t))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 aff_le(IMAGE(f, s), IMAGE(f, t)) == IMAGE(f, aff_le(s, t))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 aff_lt(IMAGE(f, s), IMAGE(f, t)) == IMAGE(f, aff_lt(s, t))
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
+      #|  FINITE({(x : Cart[Real, N]) | IN(x, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) && !((f : (Cart[Real, N]) -> Real)(x) == real_of_num(0))})
+      #|  vsum(IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x, {(x : Cart[Real, N]) | IN(x, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) && !((f : (Cart[Real, N]) -> Real)(x) == real_of_num(0))}), (v : Cart[Real, N]) => op_pct(f(v - a), v))
+      #|  (a : Cart[Real, N]) + vsum({(x : Cart[Real, N]) | IN(x, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) && !((f : (Cart[Real, N]) -> Real)(x) == real_of_num(0))}, (v : Cart[Real, N]) => op_pct(f(v), v))
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
+      #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - a == x
+      #|  (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)(x - (a : Cart[Real, N]))
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (\226\136\128 x : _, (s : (_) -> Bool)(x) \226\134\146 (p : (_) -> Bool)(x)) == (\226\136\128 x : _, IN(x, s) \226\134\146 p(x))
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 v : Cart[Real, N], affsign(sgn, s, t, v) \226\134\146 affsign(sgn, IMAGE((x : Cart[Real, N]) => a + x, s), IMAGE((x : Cart[Real, N]) => a + x, t), a + v)
+      #|  (a : Cart[Real, N])
+      #|  -(a : Cart[Real, N]) + (x : Cart[Real, N])
+      #|  -(a : Cart[Real, N]) + (a + (x : Cart[Real, N])) == x
+      #|  -(a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, affsign(sgn, IMAGE((x : Cart[Real, N]) => a + x, s), IMAGE((x : Cart[Real, N]) => a + x, t)) == IMAGE((x : Cart[Real, N]) => a + x, affsign(sgn, s, t))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, aff_ge(IMAGE((x : Cart[Real, N]) => a + x, s), IMAGE((x : Cart[Real, N]) => a + x, t)) == IMAGE((x : Cart[Real, N]) => a + x, aff_ge(s, t))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, aff_gt(IMAGE((x : Cart[Real, N]) => a + x, s), IMAGE((x : Cart[Real, N]) => a + x, t)) == IMAGE((x : Cart[Real, N]) => a + x, aff_gt(s, t))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, aff_le(IMAGE((x : Cart[Real, N]) => a + x, s), IMAGE((x : Cart[Real, N]) => a + x, t)) == IMAGE((x : Cart[Real, N]) => a + x, aff_le(s, t))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, aff_lt(IMAGE((x : Cart[Real, N]) => a + x, s), IMAGE((x : Cart[Real, N]) => a + x, t)) == IMAGE((x : Cart[Real, N]) => a + x, aff_lt(s, t))
+      #|  (real_of_num(1) == (x : Real)) == (x == real_of_num(1))
+      #|  ((x : Cart[Real, N]) - (y : Cart[Real, N]) == (z : Cart[Real, N])) == (x == y + z)
+      #|  ((x : Real) - (y : Real) == (z : Real)) == (x == y + z)
+      #|  (a : Real) < real_of_num(0) && (b : Real) <= real_of_num(0) \226\134\146 a + b <= real_of_num(0)
+      #|  (a : Real) < real_of_num(0) && (b : Real) < real_of_num(0) \226\134\146 a + b < real_of_num(0)
+      #|  ((a : Real) / real_of_num(2) < real_of_num(0)) == (a < real_of_num(0))
+      #|  ((a : Real) / real_of_num(2) <= real_of_num(0)) == (a <= real_of_num(0))
+      #|  (real_of_num(0) < (a : Real) / real_of_num(2)) == (real_of_num(0) < a)
+      #|  (real_of_num(0) <= (a : Real) / real_of_num(2)) == (real_of_num(0) <= a)
+      #|  UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(x, UNION(s, t))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : _, DISJOINT({x}, {v}) \226\134\146 aff_ge({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_of_num(0) <= t2 && t1 + t2 == real_of_num(1) && y == op_pct(t1, x) + op_pct(t2, v)}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x}, {v, w}) \226\134\146 aff_ge({x}, {v, w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) <= t2 && real_of_num(0) <= t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_ge({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) <= t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : _, DISJOINT({x}, {v}) \226\134\146 aff_gt({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_of_num(0) < t2 && t1 + t2 == real_of_num(1) && y == op_pct(t1, x) + op_pct(t2, v)}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x}, {v, w}) \226\134\146 aff_gt({x}, {v, w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) < t2 && real_of_num(0) < t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_gt({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) < t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
+      #|  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], DISJOINT({v, w, x}, {y}) \226\134\146 aff_gt({v, w, x}, {y}) == {(z : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, \226\136\131 t4 : Real, real_of_num(0) < t4 && t1 + (t2 + (t3 + t4)) == real_of_num(1) && z == op_pct(t1, v) + (op_pct(t2, w) + (op_pct(t3, x) + op_pct(t4, y)))}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], DISJOINT({x}, {v}) \226\134\146 aff_lt({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, t2 < real_of_num(0) && t1 + t2 == real_of_num(1) && y == op_pct(t1, x) + op_pct(t2, v)}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_lt({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, t3 < real_of_num(0) && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
+      #|  ((t : Real) + (s : Real) == real_of_num(1)) == (t == real_of_num(1) - s)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _) -> Bool)(b, c) && (Q : (_, _) -> Bool)(b, c) && (R : (_, _, _) -> Bool)(a, b, c) && (S : (_, _) -> Bool)(b, c)) == (\226\136\131 b : _, \226\136\131 c : _, P(b, c) && Q(b, c) && S(b, c) && (\226\136\131 a : _, R(a, b, c)))
+      #|  DISJOINT({(a : _)}, {(b : _), (c : _)}) == (!(b == a) && !(c == a))
+      #|  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], !(v == vec(0)) && !(w == vec(0)) \226\134\146 aff_ge({vec(0)}, {v, w}) == {op_pct((a : Real), v) + op_pct((b : Real), w) | real_of_num(0) <= a && real_of_num(0) <= b}
+      #|  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) <= a / real_of_num(2) && a / real_of_num(2) + a / real_of_num(2) == a
+      #|  {(a : _)} == {a, a}
+      #|  \226\136\128 v : Cart[Real, _], !(v == vec(0)) \226\134\146 aff_ge({vec(0)}, {v}) == {op_pct((a : Real), v) | real_of_num(0) <= a}
+      #|  ((t : Real) + (u : Real) == real_of_num(1)) == (t == real_of_num(1) - u)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _, _) -> Bool)(a, b, c)) == (\226\136\131 c : _, \226\136\131 b : _, \226\136\131 a : _, P(a, b, c))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
+      #|  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({vec(0), v}, {w}) \226\134\146 aff_ge({vec(0), v}, {w}) == {op_pct(s, v) + op_pct(t, w) | s : Real, t : Real | real_of_num(0) <= t}
+      #|  sum(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (g : (Cart[Real, N]) -> Real)) == real_of_num(1)
+      #|  sum(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (f : (Cart[Real, N]) -> Real)) == real_of_num(1)
+      #|  (x : Cart[Real, N]) => (real_of_num(1) - (u : Real)) * (f : (Cart[Real, N]) -> Real)(x) + u * (g : (Cart[Real, N]) -> Real)(x)
+      #|  (g : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (u : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 sgn : (Real) -> Bool, (\226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 u : Real, sgn(x) && sgn(y) && real_of_num(0) <= u && u <= real_of_num(1) \226\134\146 sgn((real_of_num(1) - u) * x + u * y)) \226\134\146 (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(affsign(sgn, s, t)))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(aff_ge(s, t))
+      #|  ((x : Real) <= real_of_num(0)) == (real_of_num(0) <= -x)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(aff_le(s, t))
+      #|  ((x : Real) <= real_of_num(1)) == (x == real_of_num(1) || x < real_of_num(1))
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(aff_gt(s, t))
+      #|  ((x : Real) <= real_of_num(1)) == (x == real_of_num(1) || x < real_of_num(1))
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  ((x : Real) < real_of_num(0)) == (real_of_num(0) < -x)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(aff_lt(s, t))
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(affsign(sgn, s, t), hull(affine, UNION(s, t)))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(aff_ge(s, t), hull(affine, UNION(s, t)))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(aff_le(s, t), hull(affine, UNION(s, t)))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(aff_gt(s, t), hull(affine, UNION(s, t)))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(aff_lt(s, t), hull(affine, UNION(s, t)))
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : _, affsign(sgn, s, {}) == hull(affine, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : _, aff_ge(s, {}) == hull(affine, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : _, aff_le(s, {}) == hull(affine, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : _, aff_gt(s, {}) == hull(affine, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : _, aff_lt(s, {}) == hull(affine, s)
+      #|  \226\136\128 sgn1 : (Real) -> Bool, \226\136\128 sgn2 : (Real) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, (\226\136\128 x : Real, sgn1(x) \226\134\146 sgn2(x)) \226\134\146 SUBSET(affsign(sgn1, s, t), affsign(sgn2, s, t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(aff_gt(s, t), aff_ge(s, t))
+      #|  SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, UNION(s', (t : (_) -> Bool))) && IN(x, UNION(s, t))} == UNION(s, t)
+      #|  (x : Cart[Real, N]) => if IN(x, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) { (u : (Cart[Real, N]) -> Real)(x) } else { real_of_num(0) }
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, SUBSET(s, s') \226\134\146 SUBSET(affsign(sgn, s, t), affsign(sgn, s', t))
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t' : (Cart[Real, _]) -> Bool, UNION(s', t') == UNION(s, t) && SUBSET(t', t) \226\134\146 SUBSET(affsign(sgn, s, t), affsign(sgn, s', t'))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(s, s') \226\134\146 SUBSET(aff_gt(s, t), aff_gt(s', t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(s, s') \226\134\146 SUBSET(aff_ge(s, t), aff_ge(s', t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(s, s') \226\134\146 SUBSET(aff_lt(s, t), aff_lt(s', t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, SUBSET(s, s') \226\134\146 SUBSET(aff_le(s, t), aff_le(s', t))
+      #|  SUBSET((t : (_) -> Bool), (t' : (_) -> Bool)) \226\134\146 {(x : _) | IN(x, UNION((s : (_) -> Bool), t')) && IN(x, UNION(s, t))} == UNION(s, t)
+      #|  (x : Cart[Real, N]) => if IN(x, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) { (u : (Cart[Real, N]) -> Real)(x) } else { real_of_num(0) }
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, sgn(real_of_num(0)) && SUBSET(t, t') && DISJOINT(s, t') \226\134\146 SUBSET(affsign(sgn, s, t), affsign(sgn, s, t'))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 t' : (Cart[Real, _]) -> Bool, SUBSET(t, t') && DISJOINT(s, t') \226\134\146 SUBSET(aff_ge(s, t), aff_ge(s, t'))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 t' : (Cart[Real, _]) -> Bool, SUBSET(t, t') && DISJOINT(s, t') \226\134\146 SUBSET(aff_le(s, t), aff_le(s, t'))
+      #|  affsign((sgn : (Real) -> Bool), (s : (Cart[Real, N]) -> Bool), {})
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, sgn(real_of_num(0)) && DISJOINT(s, t) \226\134\146 SUBSET(hull(affine, s), affsign(sgn, s, t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, DISJOINT(s, t) \226\134\146 SUBSET(hull(affine, s), aff_ge(s, t))
+      #|  IN((a : _), (t : (_) -> Bool)) && DISJOINT((s : (_) -> Bool), t) \226\134\146 UNION(s, DELETE(t, a)) == DELETE(UNION(s, t), a)
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (a : Cart[Real, N])
+      #|  real_of_num(0) <= (x : Real) \226\134\146 (real_of_num(0) < x) == !(x == real_of_num(0))
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (t : (Cart[Real, N]) -> Bool)) \226\134\146 real_of_num(0) < (u : (Cart[Real, N]) -> Real)(x)
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  SUBSET((t' : (_) -> Bool), (t : (_) -> Bool)) && (\226\136\128 a : _, IN(a, (s : (_) -> Bool)) \226\134\146 SUBSET((f : (_, _) -> Bool)(a), t)) && (\226\136\128 y : _, IN(y, t) \226\134\146 IN(y, t') || (\226\136\131 a : _, IN(a, s) && IN(y, f(a)))) \226\134\146 t == UNION(t', UNIONS({f((a : _)) | IN(a, s)}))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE((t : (Cart[Real, N]) -> Bool)) && DISJOINT(s, t) \226\134\146 aff_ge(s, t) == UNION(aff_gt(s, t), UNIONS({aff_ge(s, DELETE(t, a)) | a : Cart[Real, N] | IN(a, t)}))
+      #|  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 (\226\136\128 y : Real, \226\136\131 x : Real, a * x == y)
+      #|  ((x : Real) == real_of_num(1) - (v : Real) - (v' : Real)) == (v == real_of_num(1) - (x + v'))
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 a : Real, \226\136\128 v : Cart[Real, _], FINITE(s) && FINITE(t) && !IN(vec(0), t) && !IN(v, t) && !IN(op_pct(a, v), t) && (\226\136\128 x : Real, sgn(x) \226\134\146 sgn(x / real_of_num(2))) && (\226\136\128 x : Real, \226\136\128 y : Real, sgn(x) && sgn(y) \226\134\146 sgn(x + y)) && real_of_num(0) < a \226\134\146 affsign(sgn, INSERT(vec(0), INSERT(op_pct(a, v), s)), t) == affsign(sgn, INSERT(vec(0), INSERT(v, s)), t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 a : Real, \226\136\128 v : Cart[Real, _], FINITE(s) && FINITE(t) && !IN(vec(0), t) && !IN(v, t) && !IN(op_pct(a, v), t) && real_of_num(0) < a \226\134\146 aff_ge(INSERT(vec(0), INSERT(op_pct(a, v), s)), t) == aff_ge(INSERT(vec(0), INSERT(v, s)), t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 a : Real, \226\136\128 v : Cart[Real, _], FINITE(s) && FINITE(t) && !IN(vec(0), t) && !IN(v, t) && !IN(op_pct(a, v), t) && real_of_num(0) < a \226\134\146 aff_le(INSERT(vec(0), INSERT(op_pct(a, v), s)), t) == aff_le(INSERT(vec(0), INSERT(v, s)), t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 a : Real, \226\136\128 v : Cart[Real, _], FINITE(s) && FINITE(t) && !IN(vec(0), t) && !IN(v, t) && !IN(op_pct(a, v), t) && real_of_num(0) < a \226\134\146 aff_gt(INSERT(vec(0), INSERT(op_pct(a, v), s)), t) == aff_gt(INSERT(vec(0), INSERT(v, s)), t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 a : Real, \226\136\128 v : Cart[Real, _], FINITE(s) && FINITE(t) && !IN(vec(0), t) && !IN(v, t) && !IN(op_pct(a, v), t) && real_of_num(0) < a \226\134\146 aff_lt(INSERT(vec(0), INSERT(op_pct(a, v), s)), t) == aff_lt(INSERT(vec(0), INSERT(v, s)), t)
+      #|  real_of_num(0) < (a : Real)
+      #|  (c : Real)
+      #|  (b : Real) / (a : Real)
+      #|  (a : Real) * (b : Real)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  DISJOINT({(a : _)}, {(b : _), (c : _)}) == (!(b == a) && !(c == a))
+      #|  (u : Cart[Real, N]) == vec(0)
+      #|  \226\136\128 a : Real, \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], real_of_num(0) < a && !(v == vec(0)) \226\134\146 aff_ge({vec(0)}, {op_pct(a, u), v}) == aff_ge({vec(0)}, {u, v})
+      #|  \226\136\128 x : Cart[Real, N], IN(x, DELETE(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), vec(0))) \226\134\146 !(x == vec(0))
+      #|  (x : Cart[Real, N]) => if x == vec(0) { real_of_num(1) - sum(DELETE(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), vec(0)), (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)(x)) } else { f(x) }
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  IN((x : _), DIFF((s : (_) -> Bool), (t : (_) -> Bool))) \226\134\146 UNION(s, t) == INSERT(x, DELETE(UNION(s, t), x))
+      #|  \226\136\128 sgn : (Real) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) && IN(vec(0), DIFF(s, t)) \226\134\146 affsign(sgn, s, t) == {vsum(UNION(s, t), (v : Cart[Real, N]) => op_pct(f(v), v)) | f : (Cart[Real, N]) -> Real | \226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 sgn(f(x))}
+      #|  (x : Cart[Real, N]) => if IN(x, (t : (Cart[Real, N]) -> Bool)) { (c : Real) * (v : (Cart[Real, N]) -> Real)(x) } else { (u : (Cart[Real, N]) -> Real)(x) }
+      #|  (v : (Cart[Real, N]) -> Real)
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (y : Cart[Real, N])
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  sum((t : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Real)) == real_of_num(0)
+      #|  (x : Real) / (y : Real) == inv(y) * x
+      #|  (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Real)(x) / sum((t : (Cart[Real, N]) -> Bool), f)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  op_pct(inv(sum((t : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Real))), vsum(t, (v : Cart[Real, N]) => op_pct(f(v), v)))
+      #|  sum((t : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Real))
+      #|  (x : Cart[Real, N]) => if x == (a : Cart[Real, N]) { real_of_num(1) } else { real_of_num(0) }
+      #|  (a : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  real_of_num(0)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  sum((t : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Real)) == real_of_num(0)
+      #|  vsum(DIFF((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (x : Cart[Real, N]) => op_pct((f : (Cart[Real, N]) -> Real)(x), x))
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  DISJOINT(DIFF((s : (_) -> Bool), (t : (_) -> Bool)), t)
+      #|  UNION((s : (_) -> Bool), (t : (_) -> Bool)) == UNION(DIFF(s, t), t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) && IN(vec(0), DIFF(s, t)) && !(t == {}) \226\134\146 aff_ge(s, t) == {(x : Cart[Real, N]) + op_pct((c : Real), (y : Cart[Real, N])) | IN(x, hull(affine, DIFF(s, t))) && IN(y, hull(convex, t)) && real_of_num(0) <= c}
+      #|  (y : Cart[Real, N])
+      #|  (c : Real)
+      #|  op_pct((c : Real), (x : Cart[Real, N]))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  (y : Cart[Real, N])
+      #|  op_pct(inv((c : Real)), (x : Cart[Real, N]))
+      #|  (c : Real)
+      #|  (c : Real) == real_of_num(0)
+      #|  (y : Cart[Real, N])
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) && IN(vec(0), DIFF(s, t)) && !(t == {}) \226\134\146 aff_ge(s, t) == UNION(hull(affine, DIFF(s, t)), {op_pct((c : Real), (x : Cart[Real, N]) + (y : Cart[Real, N])) | IN(x, hull(affine, DIFF(s, t))) && IN(y, hull(convex, t)) && real_of_num(0) <= c})
+      #|  {(x : Cart[Real, N]) + (y : Cart[Real, N]) | (P : (Cart[Real, N]) -> Bool)(x) && y == (a : Cart[Real, N])} == {(x : Cart[Real, N]) + a | P(x)}
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) && IN(vec(0), DIFF(s, t)) \226\134\146 aff_ge(s, t) == {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, hull(affine, DIFF(s, t))) && IN(y, hull(convex_cone, t))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) && !IN(vec(0), s) \226\134\146 aff_ge({vec(0)}, s) == {(y : Cart[Real, N]) | \226\136\131 u : (Cart[Real, N]) -> Real, (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 real_of_num(0) <= u(x)) && y == vsum(s, (x : Cart[Real, N]) => op_pct(u(x), x))}
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 DIFF({a}, s) == {a}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) && !(s == {}) && !IN(vec(0), s) \226\134\146 aff_ge({vec(0)}, s) == {op_pct((t : Real), (y : Cart[Real, N])) | real_of_num(0) <= t && IN(y, hull(convex, s))}
+      #|  (t : Real) == real_of_num(0)
+      #|  (t : Real)
+      #|  real_of_num(0)
+      #|  (y : Cart[Real, N]) == vec(0)
+      #|  (y : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) && !IN(vec(0), s) \226\134\146 aff_ge({vec(0)}, s) == INSERT(vec(0), {op_pct((t : Real), (y : Cart[Real, N])) | real_of_num(0) < t && IN(y, hull(convex, s))})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) && IN(vec(0), DIFF(s, t)) \226\134\146 aff_ge(s, t) == hull(convex_cone, UNION(s, UNION(t, IMAGE(op_minus_minus, DIFF(s, t)))))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, hull(convex, s) == aff_ge({}, s)
+      #|  IN(vec(0), DIFF(INSERT(vec(0), (s : (Cart[Real, N]) -> Bool)), (t : (Cart[Real, N]) -> Bool)))
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  DIFF((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  FINITE(DIFF((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) && FINITE(t) && DISJOINT(DIFF(s, t), t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) \226\134\146 polyhedron(aff_ge(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, FINITE(s) && FINITE(t) \226\134\146 closed(aff_ge(s, t))
+      #|  (v : Cart[Real, N]) => (c : Real) * (u : (Cart[Real, N]) -> Real)(v)
+      #|  (u : (Cart[Real, N]) -> Real)
+      #|  (c : Real)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) && !IN(vec(0), s) \226\134\146 conic(aff_ge({vec(0)}, s))
+      #|  real_of_num(0) < (a : Real) + (b : Real)
+      #|  (b : Real) / ((a : Real) + b)
+      #|  (a : Real) / (a + (b : Real))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  op_pct(inv((a : Real) + (b : Real)), (x : Cart[Real, N]))
+      #|  (w : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (a : Real) == real_of_num(0) && (b : Real) == real_of_num(0) || real_of_num(0) < a + b
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (u : Cart[Real, N])
+      #|  \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], \226\136\128 x : Cart[Real, N], !(v == u) && !(w == u) && !(x == u) && IN(x, aff_ge({u}, {v, w})) \226\134\146 angle((v, u, x)) + angle((x, u, w)) == angle((v, u, w))
+      #|  op_dollar((w : Cart[Real, Tybit1[Unit]]), 3) - (t : Real) * op_dollar((z : Cart[Real, Tybit1[Unit]]), 3)
+      #|  (t : Real)
+      #|  (\226\136\128 t : _, (\226\136\131 s : _, (P : (_, _) -> Bool)(s, t)) == (Q : (_) -> Bool)(t)) \226\134\146 (\226\136\131 s : _, \226\136\131 t : _, P(s, t)) == (\226\136\131 t : _, Q(t))
+      #|  DISJOINT((s : (_) -> Bool), {(a : _)}) == !IN(a, s)
+      #|  (z : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (z : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 z : Cart[Real, Tybit1[Unit]], !(collinear : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)({(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3), z}) \226\134\146 (IN : (Cart[Real, Tybit1[Unit]], (Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)(w, (aff_ge : ((Cart[Real, Tybit1[Unit]]) -> Bool, (Cart[Real, Tybit1[Unit]]) -> Bool, Cart[Real, Tybit1[Unit]]) -> Bool)({(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)}, {z})) == (IN : (Cart[Real, Tybit0[Unit]], (Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, w), (aff_ge : ((Cart[Real, Tybit0[Unit]]) -> Bool, (Cart[Real, Tybit0[Unit]]) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)({(vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)}, {(dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, z)}))
+      #|  !((y : Cart[Real, Tybit1[Unit]]) == vec(0)) \226\134\146 (\226\136\131 s : Real, (x : Cart[Real, Tybit1[Unit]]) == op_pct(s, y)) == (cross(y, x) == vec(0))
+      #|  (x : Cart[Real, N]) == op_pct((t : Real), (y : Cart[Real, N]))
+      #|  (t : Real)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], !(y == vec(0)) \226\134\146 (\226\136\131 t : Real, real_of_num(0) <= t && x == op_pct(t, y)) == ((\226\136\131 t : Real, x == op_pct(t, y)) && real_of_num(0) <= dot(x, y))
+      #|  ((a : Cart[Real, N]) == (b : Cart[Real, N]) + (c : Cart[Real, N])) == (a - c == b)
+      #|  DISJOINT({(a : _), (b : _)}, {(c : _)}) == (!(a == c) && !(b == c))
+      #|  (y : Cart[Real, Tybit1[Unit]]) == (x : Cart[Real, Tybit1[Unit]])
+      #|  (y : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (x : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], \226\136\128 z : Cart[Real, Tybit1[Unit]], !collinear({vec(0), x, y}) && !collinear({vec(0), x, z}) \226\134\146 IN(z, aff_ge({vec(0), x}, {y})) == (cross(cross(x, y), cross(x, z)) == vec(0) && real_of_num(0) <= dot(cross(x, z), cross(x, y)))
+      #|  \226\136\128 x : Cart[Real, _], aff_ge({x}, {x}) == {x}
+      #|  (\226\136\131 x : _, \226\136\131 y : _, (P : (_) -> Bool)(y) && x == (f : (_) -> _)(y) && (Q : (_, _) -> Bool)(x, y)) == (\226\136\131 y : _, P(y) && Q(f(y), y))
+      #|  op_pct(real_of_num(1) - (x : Real), (v : Cart[Real, N])) + op_pct(x, v) == v
+      #|  ((x : Real) + (y : Real) == real_of_num(1)) == (x == real_of_num(1) - y)
+      #|  (x : Cart[Real, N]) == (y : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], aff_ge({x}, {y}) == {(z : Cart[Real, N]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_of_num(0) <= t2 && t1 + t2 == real_of_num(1) && z == op_pct(t1, x) + op_pct(t2, y)}
+      #|  ((x : Real) + (y : Real) == real_of_num(1)) == (x == real_of_num(1) - y)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], aff_ge({x}, {y}) == {(z : Cart[Real, N]) | \226\136\131 t : Real, real_of_num(0) <= t && z == op_pct(real_of_num(1) - t, x) + op_pct(t, y)}
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], closed(aff_ge({x}, {y}))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], SUBSET(segment([(x, y)]), aff_ge({x}, {y}))
+      #|  (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], IN(x, aff_ge({x}, {y}))) && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], IN(y, aff_ge({x}, {y})))
+      #|  {(x : _), (y : _)} == UNION({x}, {y})
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], SUBSET(aff_ge({x}, {y}), hull(affine, {x, y}))
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (x + y == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))
+      #|  ((a : Cart[Real, N]) == op_pct(real_of_num(1) - (u : Real), op_pct(real_of_num(1) - (s : Real), a) + op_pct(s, (b : Cart[Real, N]))) + op_pct(u, op_pct(real_of_num(1) - (t : Real), a) + op_pct(t, b))) == (op_pct((real_of_num(1) - u) * s + u * t, b - a) == vec(0))
+      #|  (u : Real)
+      #|  IN((a : Cart[Real, N]), segment([((u : Cart[Real, N]), (v : Cart[Real, N]))]))
+      #|  (t : Real) == real_of_num(0)
+      #|  (s : Real) == real_of_num(0)
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  IN((u : Cart[Real, N]), aff_ge({(a : Cart[Real, N])}, {(b : Cart[Real, N])})) && IN((v : Cart[Real, N]), aff_ge({a}, {b}))
+      #|  (v : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  (u : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, (t : (_) -> Bool)), u)
+      #|  hull(affine, {(a : Cart[Real, N]), (b : Cart[Real, N])})
+      #|  \226\136\131 u : Cart[Real, N], \226\136\131 v : Cart[Real, N], INTER(aff_ge({(a : Cart[Real, N])}, {(b : Cart[Real, N])}), (s : (Cart[Real, N]) -> Bool)) == segment([(u, v)])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], compact(s) && convex(s) && IN(a, s) \226\134\146 (\226\136\131 c : Cart[Real, N], INTER(aff_ge({a}, {b}), s) == segment([(a, c)]))
+      #|  (conv0 : ((Cart[Real, A]) -> Bool, Cart[Real, A]) -> Bool)((S : (Cart[Real, A]) -> Bool)) == affsign(sgn_gt, {}, S)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], f(x) == f(y) \226\134\146 x == y) \226\134\146 conv0(IMAGE(f, s)) == IMAGE(f, conv0(s))
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, conv0(IMAGE((x : Cart[Real, _]) => a + x, s)) == IMAGE((x : Cart[Real, _]) => a + x, conv0(s))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, SUBSET(conv0(s), hull(convex, s))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, conv0(s) == aff_gt({}, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) \226\134\146 hull(convex, s) == UNION(conv0(s), UNIONS({hull(convex, DELETE(s, a)) | a : Cart[Real, N] | IN(a, s)}))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, convex(conv0(s))
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) \226\134\146 bounded(conv0(s))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, bounded(s) \226\134\146 measurable(conv0(s))
+      #|  DIFF(UNION((s : (_) -> Bool), (t : (_) -> Bool)), s) == DIFF(t, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (FINITE : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (CARD : ((Cart[Real, N]) -> Bool) -> Num)(s) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((convex : ((Cart[Real, N]) -> Bool) -> Bool), s), (conv0 : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s)))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 DIFF(s, t) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (FINITE : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (CARD : ((Cart[Real, N]) -> Bool) -> Num)(s) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)((conv0 : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s)) == (measure : ((Cart[Real, N]) -> Bool) -> Real)((hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((convex : ((Cart[Real, N]) -> Bool) -> Bool), s))
+      #|  (orthonormal : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((e1 : Cart[Real, Tybit1[Unit]]), (e2 : Cart[Real, Tybit1[Unit]]), (e3 : Cart[Real, Tybit1[Unit]])) == (dot(e1, e1) == real_of_num(1) && dot(e2, e2) == real_of_num(1) && dot(e3, e3) == real_of_num(1) && dot(e1, e2) == real_of_num(0) && dot(e1, e3) == real_of_num(0) && dot(e2, e3) == real_of_num(0) && real_of_num(0) < dot(cross(e1, e2), e3))
+      #|  \226\136\128 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], (linear : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Bool)(f) && (\226\136\128 x : Cart[Real, Tybit1[Unit]], (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(f(x)) == (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(x)) && (2 <= (dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) \226\134\146 (det : (Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]]) -> Real)((matrix : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]])(f)) == real_of_num(1)) \226\134\146 (\226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(f(e1), f(e2), f(e3)) == orthonormal(e1, e2, e3))
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 orthonormal(e2, e3, e1)
+      #|  real_of_num(0) <= (x : Real) * x && real_of_num(0) <= (y : Real) * y \226\134\146 -x * x + y * -y <= real_of_num(0)
+      #|  ((u : Real) == real_of_num(1) && (v : Real) == real_of_num(1) && (w : Real) == real_of_num(0) \226\134\146 (a : Real) == (b : Real) && -(c : Real) == (d : Real) || a == -b && c == d) && (a == -b && c == d \226\134\146 (x : Real) <= real_of_num(0)) \226\134\146 u == real_of_num(1) && v == real_of_num(1) && w == real_of_num(0) && real_of_num(0) < x \226\134\146 a == b && -c == d
+      #|  op_dollar((e3 : Cart[Real, Tybit1[Unit]]), 1) == real_of_num(0)
+      #|  op_dollar((e2 : Cart[Real, Tybit1[Unit]]), 1) == real_of_num(0)
+      #|  (k : Real) == real_of_num(1)
+      #|  (k : Real) == -real_of_num(1)
+      #|  ((k : Real) * k == real_of_num(1)) == (k == real_of_num(1) || k == -real_of_num(1))
+      #|  (k : Real)
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 cross(e3, e1) == e2
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 cross(e2, e3) == e1 && cross(e3, e1) == e2 && cross(e1, e2) == e3
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 !(e1 == vec(0)) && !(e2 == vec(0)) && !(e3 == vec(0))
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 !(e1 == e2) && !(e1 == e3) && !(e2 == e3)
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 independent({e1, e2, e3})
+      #|  {(e1 : Cart[Real, Tybit1[Unit]]), (e2 : Cart[Real, Tybit1[Unit]]), (e3 : Cart[Real, Tybit1[Unit]])}
+      #|  (UNIV : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) \226\134\146 span({e1, e2, e3}) == UNIV
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 t1 : Real, \226\136\128 t2 : Real, \226\136\128 t3 : Real, orthonormal(e1, e2, e3) \226\134\146 (op_pct(t1, e1) + (op_pct(t2, e2) + op_pct(t3, e3)) == vec(0)) == (t1 == real_of_num(0) && t2 == real_of_num(0) && t3 == real_of_num(0))
+      #|  (op_pct((a : Real), (x : Cart[Real, Tybit1[Unit]])) + (op_pct((b : Real), (y : Cart[Real, Tybit1[Unit]])) + op_pct((c : Real), (z : Cart[Real, Tybit1[Unit]]))) == op_pct((a' : Real), x) + (op_pct((b' : Real), y) + op_pct((c' : Real), z))) == (op_pct(a - a', x) + (op_pct(b - b', y) + op_pct(c - c', z)) == vec(0))
+      #|  \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 s1 : Real, \226\136\128 s2 : Real, \226\136\128 s3 : Real, \226\136\128 t1 : Real, \226\136\128 t2 : Real, \226\136\128 t3 : Real, orthonormal(e1, e2, e3) \226\134\146 (op_pct(s1, e1) + (op_pct(s2, e2) + op_pct(s3, e3)) == op_pct(t1, e1) + (op_pct(t2, e2) + op_pct(t3, e3))) == (s1 == t1 && s2 == t2 && s3 == t3)
+      #|  (arcV : (Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((u : Cart[Real, _]), (v : Cart[Real, _]), (w : Cart[Real, _])) == acs(dot(v - u, w - u) / (norm(v - u) * norm(w - u)))
+      #|  (w : Cart[Real, N]) == (u : Cart[Real, N])
+      #|  (v : Cart[Real, N]) == (u : Cart[Real, N])
+      #|  \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], arcV(u, v, w) == angle((v, u, w))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], linear(f) && (\226\136\128 x : Cart[Real, _], norm(f(x)) == norm(x)) \226\134\146 arcV(f(a), f(b), f(c)) == arcV(a, b, c)
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], \226\136\128 d : Cart[Real, _], arcV(a + b, a + c, a + d) == arcV(b, c, d)
+      #|  op_pct(cos((p : Real)), (e : Cart[Real, Tybit0[Unit]])) + op_pct(sin(p), rotate2d(pi / real_of_num(2), e)) == rotate2d(p, e)
+      #|  op_pct((a : Real), op_pct((b : Real), (x : Cart[Real, Tybit0[Unit]]))) == op_pct(b, op_pct(a, x))
+      #|  norm((v1 : Cart[Real, Tybit0[Unit]]))
+      #|  (e2 : Cart[Real, Tybit0[Unit]]) == rotate2d(pi / real_of_num(2), (e1 : Cart[Real, Tybit0[Unit]]))
+      #|  norm((e1 : Cart[Real, Tybit0[Unit]])) == real_of_num(1) && norm((e2 : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+      #|  norm((v2 : Cart[Real, Tybit0[Unit]]))
+      #|  norm((v1 : Cart[Real, Tybit0[Unit]]))
+      #|  (p : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (e1 : Cart[Real, Tybit0[Unit]])
+      #|  (t : Real)
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  op_pct((a : Real), op_pct((b : Real), (x : Cart[Real, Tybit0[Unit]]))) == op_pct(b, op_pct(a, x))
+      #|  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)((basis : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+      #|  (e2 : Cart[Real, Tybit0[Unit]]) == rotate2d(pi / real_of_num(2), (e1 : Cart[Real, Tybit0[Unit]]))
+      #|  norm((e1 : Cart[Real, Tybit0[Unit]])) == real_of_num(1) && norm((e2 : Cart[Real, Tybit0[Unit]])) == real_of_num(1)
+      #|  norm((v2 : Cart[Real, Tybit0[Unit]]))
+      #|  real_of_num(0)
+      #|  (p : Real)
+      #|  (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1)
+      #|  (e1 : Cart[Real, Tybit0[Unit]])
+      #|  (t : Real)
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1)
+      #|  (v1 : Cart[Real, Tybit0[Unit]]) == vec(0)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (f : Bool)) == (d && e && a && b && c && f)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  op_dollar((v1 : Cart[Real, Tybit1[Unit]]), 3) == real_of_num(0) && op_dollar((v2 : Cart[Real, Tybit1[Unit]]), 3) == real_of_num(0)
+      #|  collinear({vec(0), op_pct((w : Real), basis(3)), (w1 : Cart[Real, Tybit1[Unit]])}) == (w1 - op_pct(op_dollar(w1, 3), basis(3)) == vec(0)) && collinear({vec(0), op_pct(w, basis(3)), (w2 : Cart[Real, Tybit1[Unit]])}) == (w2 - op_pct(op_dollar(w2, 3), basis(3)) == vec(0))
+      #|  (v2 : Cart[Real, Tybit1[Unit]]) == (w2 : Cart[Real, Tybit1[Unit]]) - op_pct(op_dollar(w2, 3), basis(3))
+      #|  (v1 : Cart[Real, Tybit1[Unit]]) == (w1 : Cart[Real, Tybit1[Unit]]) - op_pct(op_dollar(w1, 3), basis(3))
+      #|  ((x : Cart[Real, Tybit1[Unit]]) == (a : Cart[Real, Tybit1[Unit]]) + ((b : Cart[Real, Tybit1[Unit]]) + (c : Cart[Real, Tybit1[Unit]]))) == (x - c == a + b)
+      #|  (\226\136\128 e3 : _, (p : (_) -> Bool)(e3) && e3 == (a : _) \226\134\146 (q : (_) -> Bool)(e3)) == (p(a) \226\134\146 q(a))
+      #|  (op_pct((a : Real), (x : Cart[Real, Tybit1[Unit]])) == op_pct(a, (y : Cart[Real, Tybit1[Unit]]))) == (op_pct(a, x - y) == vec(0))
+      #|  real_of_num(0) < (w : Real) \226\134\146 abs(w) == w
+      #|  real_of_num(0) < (w : Real) \226\134\146 w * (x : Real) / (w * w) * w == x
+      #|  real_of_num(0)
+      #|  (real_of_num(0) <= (w : Real)) == (w == real_of_num(0) || real_of_num(0) < w)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  dot((w : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) / dot(w, w)
+      #|  dot((w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]])) / dot(w, w)
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\131 theta : Real, real_of_num(0) <= theta && theta < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) && (!collinear({v, w, w1}) \226\134\146 real_of_num(0) < r1) && (!collinear({v, w, w2}) \226\134\146 real_of_num(0) < r2)))
+      #|  (azim : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == (if collinear({v, w, w1}) || collinear({v, w, w2}) { real_of_num(0) } else { select((theta : Real) => real_of_num(0) <= theta && theta < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) && real_of_num(0) < r1 && real_of_num(0) < r2))) })
+      #|  (pow((d : Real) * ((h : Real) * d), 2) == d * d * ((r : Real) * real_of_num(1) + h * (d * (h * d)))) == (d == real_of_num(0) || r == real_of_num(0))
+      #|  (r : Real) * (c : Real) + (r * (s : Real) + (f : Real)) == r * (s + c) + f
+      #|  (r : Real) * (c : Real) * (r * c) == pow(r, 2) * pow(c, 2)
+      #|  op_pct(dist(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
+      #|  {(v : _), (w : _), (x : _)} == {w, v, x}
+      #|  real_of_num(0)
+      #|  (r1 : Real)
+      #|  (r2 : Real)
+      #|  (r1 : Real)
+      #|  (psi : Real)
+      #|  (e3 : Cart[Real, Tybit1[Unit]])
+      #|  (e2 : Cart[Real, Tybit1[Unit]])
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (e3 : Cart[Real, Tybit1[Unit]])
+      #|  (e2 : Cart[Real, Tybit1[Unit]])
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (h2 : Real)
+      #|  (h1 : Real)
+      #|  (h2 : Real)
+      #|  (h1 : Real)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (r2 : Real)
+      #|  real_of_num(0)
+      #|  (r1 : Real)
+      #|  (r2 : Real)
+      #|  (psi : Real)
+      #|  (e3 : Cart[Real, Tybit1[Unit]])
+      #|  (e2 : Cart[Real, Tybit1[Unit]])
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (e3 : Cart[Real, Tybit1[Unit]])
+      #|  (e2 : Cart[Real, Tybit1[Unit]])
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (h2 : Real)
+      #|  (h1 : Real)
+      #|  (h1 : Real)
+      #|  (h2 : Real)
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= azim(v, w, w1, w2) && azim(v, w, w1, w2) < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + azim(v, w, w1, w2)), e1) + (op_pct(r2 * sin(psi + azim(v, w, w1, w2)), e2) + op_pct(h2, w - v)) && (!collinear({v, w, w1}) \226\134\146 real_of_num(0) < r1) && (!collinear({v, w, w2}) \226\134\146 real_of_num(0) < r2)))
+      #|  real_of_num(0) < pi \226\134\146 (x : Real) * (real_of_num(2) * pi) / (real_of_num(2) * pi) == x
+      #|  (n : Real)
+      #|  (real_of_num(2) * ((m : Real) * pi) + (x : Real) == real_of_num(2) * ((n : Real) * pi)) == (x == (n - m) * (real_of_num(2) * pi))
+      #|  (m : Real)
+      #|  ((psi : Real) + (theta : Real) == (phi : Real) + (az : Real) + (x : Real)) == (psi == phi + (x + (az - theta)))
+      #|  real_of_num(0) < (x : Real) && real_of_num(0) < (y : Real) \226\134\146 (abs(x) == abs(y)) == (x == y)
+      #|  (r : Real) * (c : Real) == (r' : Real) * (c' : Real) && r * (s : Real) == r' * (s' : Real) && (u : Real) == (v : Real) \226\134\146 pow(s, 2) + pow(c, 2) == real_of_num(1) && pow(s', 2) + pow(c', 2) == real_of_num(1) && real_of_num(0) < r && (pow(r, 2) == pow(r', 2) \226\134\146 r == r') \226\134\146 s == s' && c == c'
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == ((c && d) && a && b)
+      #|  op_pct(dist(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
+      #|  (s2 : Real)
+      #|  (s1 : Real)
+      #|  (phi : Real)
+      #|  (e3 : Cart[Real, Tybit1[Unit]])
+      #|  (e2 : Cart[Real, Tybit1[Unit]])
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (k2 : Real)
+      #|  (k1 : Real)
+      #|  real_of_num(0) <= (x : Real) && x < (k : Real) && real_of_num(0) <= (y : Real) && y < k \226\134\146 abs(x - y) < k
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (azim((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) - (theta : Real)) / (real_of_num(2) * pi) == real_of_num(0)
+      #|  pow((s : Real), 2) + pow((c : Real), 2) == real_of_num(1) \226\134\146 ((r : Real) * c == real_of_num(0) && r * s == real_of_num(0)) == (r == real_of_num(0))
+      #|  ((a : Cart[Real, N]) + ((b : Cart[Real, N]) + op_pct((c : Real), (x : Cart[Real, N]))) == op_pct((d : Real), x)) == (a + (b + op_pct(c - d, x)) == vec(0))
+      #|  op_pct(dist(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
+      #|  {(a : _), (b : _), (c : _)} == {b, a, c}
+      #|  !collinear({(v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])}) && !collinear({v, w, (w1 : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 h1 : Real, \226\136\128 h2 : Real, \226\136\128 r1 : Real, \226\136\128 r2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 psi : Real, \226\136\128 theta : Real, real_of_num(0) <= theta && theta < real_of_num(2) * pi && orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) && real_of_num(0) < r1 && real_of_num(0) < r2 && w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) \226\134\146 azim(v, w, w1, w2) == theta
+      #|  {(a : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]]), a + (y : Cart[Real, Tybit1[Unit]]), a + (z : Cart[Real, Tybit1[Unit]])} == IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, {x, y, z})
+      #|  dist(((a : Cart[Real, _]) + (v : Cart[Real, _]), a + (w : Cart[Real, _]))) == dist((v, w))
       #|  :real
       #|  :real
-      #|  a + w:real^3 = a + v <=> w = v
-      #|  (a + w) - (a + v):real^3 = w - v
-      #|  forall a v w w1 w2. azim (a + v) (a + w) (a + w1) (a + w2) = azim v w w1 w2
-      #|  {f x,f y,f z} = IMAGE f {x,y,z}
-      #|  forall x y. (f:real^3->real^3) x = f y <=> x = y
-      #|  f:real^3->real^3
-      #|  forall f. linear f /\\ (forall x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> forall v w w1 w2. azim (f v) (f w) (f w1) (f w2) = azim v w w1 w2
-      #|  (forall v w w1 w2. v = w ==> azim v w w1 w2 = &0) /\\\n   (forall v w w1 w2. collinear{v,w,w1} ==> azim v w w1 w2 = &0) /\\\n   (forall v w w1 w2. collinear{v,w,w2} ==> azim v w w1 w2 = &0)
-      #|  forall v x y. azim v v x y = &0
-      #|  a % x:real^3 = a % y <=> a % (x - y) = vec 0
-      #|  &0 < a ==> abs a = a
-      #|  forall a. &0 < a ==> (forall y. ?x. a * x = y)
-      #|  forall a v w1 w2.\n        &0 < a\n        ==> azim (vec 0) (a % v) w1 w2 = azim (vec 0) v w1 w2
-      #|  forall a. &0 < a ==> (forall y. ?x. a * x = y)
-      #|  &0 < c
-      #|  &0 < b
-      #|  &0 < a
-      #|  &0 < a ==> abs a = a
-      #|  forall a v w1 w2.\n        &0 < a /\\ &0 < b /\\ &0 < c\n        ==> azim (vec 0) (a % v) (b % w1) (c % w2) = azim (vec 0) v w1 w2
-      #|  (r * cos t) % basis 1 + (r * sin t) % basis 2 = Cx r * cexp(ii * Cx t)
-      #|  r2 / r1:real
-      #|  (a * b) * (c * d):complex = (a * c) * b * d
-      #|  r2:real
-      #|  r1:real
-      #|  psi:real
-      #|  basis 3:real^3
-      #|  basis 2:real^3
-      #|  basis 1:real^3
-      #|  h2:real
-      #|  h1:real
-      #|  a = azim (vec 0) (basis 3) x (y:real^3)
-      #|  y:real^3
-      #|  x:real^3
-      #|  basis 3:real^3
-      #|  vec 0:real^3
-      #|  collinear {vec 0:real^3,basis 3,y}
-      #|  collinear {vec 0:real^3,basis 3,x}
-      #|  forall x y:real^3. azim (vec 0) (basis 3) x y = Arg(dropout 3 y / dropout 3 x)
-      #|  Re z / w
-      #|  z:complex
-      #|  w = &0
-      #|  w:real
-      #|  v1:complex
-      #|  v1:real^2
-      #|  (dropout 3:real^3->real^2) w1
-      #|  v2:real^2
-      #|  (dropout 3:real^3->real^2) w2
-      #|  w1:real^3
-      #|  w2:real^3
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  v:real^3
-      #|  forall v w w1 w2.\n        ~collinear{v,w,w1} /\\ ~(w2 IN aff_ge {v,w} {w1})\n        ==> (azim v w w1) real_continuous at w2
-      #|  {a,b,c,d} SUBSET s <=> {a,b,c} SUBSET s /\\ d IN s
-      #|  w1:real^3
-      #|  w:real^3
-      #|  v:real^3
-      #|  {a,b} UNION {c} = {a,b,c}
-      #|  forall v w w1 w2. ~coplanar{v,w,w1,w2} ==> (azim v w w1) real_continuous at w2
-      #|  (dropout 3 :real^3->real^2) w = Cx(&0)
-      #|  w:real^3
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1 w. azim v0 v1 w w = &0
-      #|  y:real = t + z <=> t = y - z
-      #|  t:real
-      #|  a + b + c = &1 <=> a = &1 - b - c
-      #|  (?a b c. p c /\\ q a b c /\\ r b c) <=>\n    (?c. p c /\\ ?b. r b c /\\ ?a. q a b c)
-      #|  DISJOINT {a,b} {x} <=> ~(x = a) /\\ ~(x = b)
-      #|  ~(w = Cx(&0)) ==> (y / w = x * u / w <=> y = x * u)
-      #|  ~collinear {vec 0:real^3, basis 3, v1 % basis 3}
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1 w x y.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x} /\\ ~collinear{v0,v1,y}\n        ==> (azim v0 v1 w x = azim v0 v1 w y <=> y IN aff_gt {v0,v1} {x})
-      #|  forall v0 v1 w x y.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x} /\\ ~collinear{v0,v1,y}\n        ==> (azim v0 v1 w x = azim v0 v1 w y <=> x IN aff_gt {v0,v1} {y})
-      #|  azim v0 v1 w x = azim v0 v1 w w
-      #|  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> w IN aff_gt {v0,v1} {x})
-      #|  azim v0 v1 w x = azim v0 v1 w w
-      #|  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> x IN aff_gt {v0,v1} {w})
-      #|  {x} DELETE x = {}
-      #|  v1:real^3 = v0
-      #|  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> w IN aff_ge {v0,v1} {x})
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  z:real^3
-      #|  forall z w w1 w2.\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2} /\\ azim z w w1 w2 = &0\n        ==> azim z w w2 w1 = &0
-      #|  (dropout 3:real^3->real^2) w2 /\n                (dropout 3:real^3->real^2) w1
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  z:real^3
-      #|  forall z w w1 w2.\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2}\n        ==> azim z w w2 w1 = if azim z w w1 w2 = &0 then &0\n                             else &2 * pi - azim z w w1 w2
-      #|  forall z w w1 w2.\n        ~collinear {z, w, w1} /\\ ~collinear {z, w, w2}\n        ==> (azim z w w1 w2 = pi <=> azim z w w2 w1 = pi)
-      #|  forall z w w1 w2.\n        ~collinear {z, w, w1} /\\ ~collinear {z, w, w2}\n        ==> (azim z w w1 w2 = &0 <=> azim z w w2 w1 = &0)
-      #|  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = &0 <=> x IN aff_ge {v0,v1} {w})
-      #|  x:real = t + y <=> t = x - y
-      #|  t:real
-      #|  s + t = &1 <=> s = &1- t
-      #|  DISJOINT {a} {x} <=> ~(x = a)
-      #|  DISJOINT {a,b} {x} <=> ~(x = a) /\\ ~(x = b)
-      #|  x < &0 <=> &0 < --x
-      #|  ~(t = Cx(&0)) ==> (v = t * y <=> y = v / t)
-      #|  x < &0 ==> ~(x = &0)
-      #|  t:real
-      #|  v / Re y
-      #|  t1 + t2 = &1 <=> t1 = &1 - t2
-      #|  v = &0
-      #|  v:real
-      #|  v:complex
-      #|  v:complex
-      #|  (dropout 3:real^3->real^2) w
-      #|  y:complex
-      #|  (dropout 3:real^3->real^2) x
-      #|  (dropout 3 (w:real^3)) IN aff_lt {vec 0:real^2} {dropout 3 (x:real^3)}
-      #|  ~collinear {vec 0:real^3, basis 3, v1 % basis 3}
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = pi <=> w IN aff_lt {v0,v1} {x})
-      #|  forall v0 v1 w x.\n        ~collinear{v0,v1,w} /\\ ~collinear{v0,v1,x}\n        ==> (azim v0 v1 w x = pi <=> x IN aff_lt {v0,v1} {w})
-      #|  (w2:real^3)$1 / (w1:real^3)$1
-      #|  (w2:real^3)$2 / (w1:real^3)$2
-      #|  ~((w1:real^3)$2 = &0) \\/ ~((w2:real^3)$1 = &0)
-      #|  &0 < w ==> (x - k * w * &1 - y = &0 <=> k = (x - y) / w)
-      #|  {a,b,c,d} = d INSERT {a,b,c}
-      #|  w1:real^3
-      #|  w % basis 3:real^3
-      #|  vec 0:real^3
-      #|  x * --y + a * b = &0 <=> x * y = a * b
-      #|  w = &0
-      #|  w:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  v0:real^3
-      #|  v1:real^3
-      #|  w1:real^3
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w2:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  collinear {v0:real^3,v1,w2}
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  collinear {v0:real^3,v1,w1}
-      #|  forall v0 v1 w1 w2.\n        azim v0 v1 w1 w2 = &0 \\/ azim v0 v1 w1 w2 = pi\n        ==> coplanar {v0,v1,w1,w2}
-      #|  a * b * c:complex = b * a * c
-      #|  dropout 3:real^3->real^2
-      #|  b:real
-      #|  a:real
-      #|  DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
-      #|  w:real^3 = vec 0
-      #|  u = &0
-      #|  u:real
-      #|  u:real^3
-      #|  a:real^3
-      #|  forall a u v w z.\n        v IN aff_ge {a} {u,w} /\\ ~collinear{a,u,v} /\\ ~collinear{a,u,w}\n        ==> azim a u v z = azim a u w z
-      #|  collinear {a:real^3,u,z}
-      #|  forall a u v w z.\n        v IN aff_ge {a} {u,w} /\\ ~collinear{a,u,v} /\\ ~collinear{a,u,w}\n        ==> azim a u z v = azim a u z w
-      #|  c:real
-      #|  b:real
-      #|  DISJOINT {a} {b,c} <=> ~(b = a) /\\ ~(c = a)
-      #|  a:real
-      #|  {z,v,w} = {z,w,v}
-      #|  {z,v,w} = {z,w,v}
-      #|  {a} DIFF {a,b} = {}
-      #|  u:real^N = vec 0
-      #|  w:real^N = vec 0
-      #|  a:real^N
-      #|  forall a u v w:real^N.\n        v IN aff_ge {a} {u,w} /\\ collinear{a,u,w} ==> collinear{a,v,w}
-      #|  &0 < t ==> (inv t * a - inv t * b + inv t * c - inv t * d = &1 <=>\n                  (a + c) - (b + d) = t)
-      #|  inv t3 * s2 - inv t3 * t2:real
-      #|  inv t3 * s1 - inv t3 * t1:real
-      #|  x:real^N = y + z + &1 % w <=> w = x - (y + z)
-      #|  (%) (inv t3) :real^3->real^3
-      #|  s2:real
-      #|  s1:real
-      #|  t3:real
-      #|  t2:real
-      #|  t1:real
-      #|  DISJOINT {a,b} {c} <=> ~(c = a) /\\ ~(c = b)
-      #|  y:real^3 = v1
-      #|  y:real^3 = v0
-      #|  (s /\\ p ==> r) ==> p ==> ~q /\\ ~r /\\ s ==> t
-      #|  collinear {v0:real^3,v1,x}
-      #|  collinear {v0:real^3,v1,x}
-      #|  v1:real^3 = v0
-      #|  forall v0 v1 w x y.\n     ~collinear {v0, v1, w} /\\\n     ~collinear {v0, v1, y} /\\\n     x IN aff_gt {v0, v1} {y}\n     ==> azim v0 v1 w x = azim v0 v1 w y
-      #|  collinear {v0:real^3,v1,x}
-      #|  collinear {v0:real^3,v1,w}
-      #|  forall v0 v1 w x. x IN aff_ge {v0, v1} {w} ==> azim v0 v1 w x = &0
-      #|  z = Cx(&0)
-      #|  &0 < x
-      #|  x = &0
-      #|  z:complex
-      #|  x:real
-      #|  z:complex
-      #|  w:complex
-      #|  (dropout 3:real^3->real^2) y
-      #|  z:complex
-      #|  (dropout 3:real^3->real^2) x
-      #|  real_sgn(Im(dropout 3 (y:real^3) / dropout 3 (x:real^3)))
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  v:real^3
-      #|  forall v w x y. real_sgn(sin(azim v w x y)) =\n             real_sgn(((w - v) cross (x - v)) dot (y - v))
-      #|  x - pi < pi <=> x < &2 * pi
-      #|  azim v w x y - pi
-      #|  &0 <= sin(azim v w x y)
-      #|  forall v w x y. azim v w x y <= pi <=>\n             &0 <= ((w - v) cross (x - v)) dot (y - v)
-      #|  dihV w0 w1 w2 w3 =\n     let va = w2 - w0 in\n     let vb = w3 - w0 in\n     let vc = w1 - w0 in\n     let vap = ( vc dot vc) % va - ( va dot vc) % vc in\n     let vbp = ( vc dot vc) % vb - ( vb dot vc) % vc in\n     arcV (vec 0) vap vbp
-      #|  dihV (w0:real^N) w1 w2 w3 =\n     let va = w2 - w0 in\n     let vb = w3 - w0 in\n     let vc = w1 - w0 in\n     let vap = (vc dot vc) % va - (va dot vc) % vc in\n     let vbp = (vc dot vc) % vb - (vb dot vc) % vc in\n     angle(vap,vec 0,vbp)
-      #|  (a + x) - (a + y):real^N = x - y
-      #|  forall a w0 w1 w2 w3:real^N.\n        dihV (a + w0) (a + w1) (a + w2) (a + w3) = dihV w0 w1 w2 w3
-      #|  forall f:real^M->real^N w0 w1 w2 w3.\n        linear f /\\ (forall x. norm(f x) = norm x)\n        ==> dihV (f w0) (f w1) (f w2) (f w3) = dihV w0 w1 w2 w3
-      #|  a % a % x - a % b % a % y:real^N =\n                            (a * a) % (x - b % y)
-      #|  forall a v w1 w2:real^N.\n        ~(a = &0)\n        ==> dihV (vec 0) (a % v) w1 w2 = dihV (vec 0) v w1 w2
-      #|  forall w0 w1 w2 w3. &0 <= dihV w0 w1 w2 w3 /\\ dihV w0 w1 w2 w3 <= pi
-      #|  a:real = b + c * d <=> b - --c * d = a
-      #|  &0 < r1 /\\ &0 < r2 ==> ((r1 * r2) * x) / (r1 * r2) = x
-      #|  (r1 * c1) * (r2 * c2) + (r1 * s1) * (r2 * s2):real =\n                          (r1 * r2) * (c1 * c2 + s1 * s2)
-      #|  (r * c) * (r * c) + (r * s) * (r * s):real =\n                          r pow 2 * (s pow 2 + c pow 2)
-      #|  (a + b + c) - c:real^N = a + b
-      #|  r2:real
-      #|  r1:real
-      #|  psi:real
-      #|  basis 3:real^3
-      #|  basis 2:real^3
-      #|  basis 1:real^3
-      #|  h2:real
-      #|  h1:real
-      #|  a = azim (vec 0) (basis 3) w1 (w2:real^3)
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  basis 3:real^3
-      #|  vec 0:real^3
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  v:real^3
-      #|  w:real^3 = v
-      #|  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2}\n        ==> cos(azim v w v1 v2) = cos(dihV v w v1 v2)
-      #|  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        azim v w v1 v2 < pi\n        ==> azim v w v1 v2 = dihV v w v1 v2
-      #|  p <= x /\\ x < &2 * p ==> &0 <= &2 * p - x /\\ &2 * p - x <= p
-      #|  x = &2 * pi - y <=> y = &2 * pi - x
-      #|  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        pi <= azim v w v1 v2\n        ==> azim v w v1 v2 = &2 * pi - dihV v w v1 v2
-      #|  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2}\n        ==> azim v w v1 v2 = if azim v w v1 v2 < pi then dihV v w v1 v2\n                             else &2 * pi - dihV v w v1 v2
-      #|  a < &2 * pi /\\ ~(a < pi) ==> (a = &0 <=> &2 * pi - a = &0)
-      #|  &2 * p - (&2 * p - a) = &0 <=> a = &0
-      #|  a:real = p - b <=> b = p - a
-      #|  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = &0 <=> dihV v0 v1 w1 w2 = &0)
-      #|  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = pi <=> dihV v0 v1 w1 w2 = pi)
-      #|  v0:real^2
-      #|  p:real^3->bool
-      #|  p:real^3->bool
-      #|  v3:real^3
-      #|  v2:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-      #|  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (azim v0 v1 w1 w2 = &0 \\/ azim v0 v1 w1 w2 = pi <=>\n             coplanar {v0,v1,w1,w2})
-      #|  forall v0 v1 w1 w2:real^3.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n        ==> (dihV v0 v1 w1 w2 = &0 \\/ dihV v0 v1 w1 w2 = pi <=>\n             coplanar {v0,v1,w1,w2})
-      #|  forall v0 v1 v2 v3:real^N.\n        dihV v0 v1 v3 v2 = dihV v0 v1 v2 v3
-      #|  --a - --b:real^N = --(a - b)
-      #|  --a - --b:real^N = --(a - b)
-      #|  forall v0 v1 v2 v3. dihV (--v0) (--v1) (--v2) (--v3) = dihV v0 v1 v2 v3
-      #|  forall v1 v2 v3. dihV (vec 0) (--v1) (--v2) (--v3) = dihV (vec 0) v1 v2 v3
-      #|  u:real^N
-      #|  forall e u v w:real^N.\n      orthogonal (e - u) (v - u) /\\ orthogonal (e - u) (w - u) /\\ ~(e = u)\n      ==> dihV u e v w = arcV u v w
-      #|  forall v w v1 v2:real^3.\n        ~collinear {v,w,v1} /\\ ~collinear {v,w,v2} /\\\n        azim v w v1 v2 <= pi\n        ==> azim v w v1 v2 = dihV v w v1 v2
-      #|  u:real^3 = e
-      #|  forall e u v w:real^3.\n        orthogonal (e - u) (v - u) /\\ orthogonal (e - u) (w - u) /\\\n        ~collinear{u,e,v} /\\ ~collinear{u,e,w} /\\\n        azim u e v w <= pi\n        ==> azim u e v w = arcV u v w
-      #|  {u,e,v,w} = {u,v,w,e}
-      #|  collinear{u:real^3,e,w}
-      #|  collinear{u:real^3,e,v}
-      #|  forall u e v w. collinear {u,v,w} ==> azim u e v w = &0 \\/ azim u e v w = pi
-      #|  forall f:real^M->real^N g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (at x within s) /\\ g continuous (at x within s) /\\\n      h continuous (at x within s) /\\ k continuous (at x within s)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (at x within s)
-      #|  forall f:real^M->real^N g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (at x) /\\ g continuous (at x) /\\\n      h continuous (at x) /\\ k continuous (at x)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (at x)
-      #|  forall f:real->real^N g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (atreal x within s) /\\ g continuous (atreal x within s) /\\\n      h continuous (atreal x within s) /\\ k continuous (atreal x within s)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous\n          (atreal x within s)
-      #|  forall f:real->real^N g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      f continuous (atreal x) /\\ g continuous (atreal x) /\\\n      h continuous (atreal x) /\\ k continuous (atreal x)\n      ==> (\\x. dihV (f x) (g x) (h x) (k x)) real_continuous (atreal x)
-      #|  (%) (inv((w:real^N) dot w)):real^N->real^N
-      #|  w:real^N = vec 0
-      #|  w:real^N
-      #|  z:real^N
-      #|  v:real^N
-      #|  forall v w w1 w2:real^N.\n        ~collinear {v, w, w2} ==> dihV v w w1 real_continuous at w2
-      #|  t:real^M->bool
-      #|  s:real^M->bool
-      #|  u:real^M->bool = (u INTER s) UNION (u INTER t)
-      #|  forall s t u f:real^M->real^N g h.\n          (closed s /\\ closed t) /\\ s UNION t = UNIV /\\\n          (g continuous_on (u INTER s) /\\ h continuous_on (u INTER t)) /\\\n          (forall x. x IN u INTER s ==> g x = f x) /\\\n          (forall x. x IN u INTER t ==> h x = f x)\n          ==> f continuous_on u
-      #|  vec 0:real^3
-      #|  x <= &0 ==> (&0 <= x <=> x = &0)
-      #|  (x <= pi ==> x = pi) ==> pi <= x
-      #|  z:real^3
-      #|  y:real^3
-      #|  x:real^3
-      #|  z:real^3
-      #|  y:real^3
-      #|  x:real^3
-      #|  z:real^3
-      #|  y:real^3
-      #|  x:real^3
-      #|  \\z. Cx(&2 * pi - dihV (vec 0:real^3) (fstcart z)\n                             (fstcart(sndcart z)) (sndcart(sndcart z)))
-      #|  \\z. Cx(dihV (vec 0:real^3) (fstcart z)\n                   (fstcart(sndcart z)) (sndcart(sndcart z)))
-      #|  {z | z IN UNIV /\\ lift((fstcart z cross (fstcart(sndcart z))) dot\n                              (sndcart(sndcart z))) IN {x | x$1 <= &0}}
-      #|  {z | z IN UNIV /\\ lift((fstcart z cross (fstcart(sndcart z))) dot\n                              (sndcart(sndcart z))) IN {x | x$1 >= &0}}
-      #|  {z | f z = vec 0 /\\ drop(g z) >= &0} =\n        {z | z IN UNIV /\\ f z IN {vec 0}} INTER\n        {z | z IN UNIV /\\ g z IN {k | drop(k) >= &0}}
-      #|  &0 <= x <=> drop(lift x) >= &0
-      #|  {x | f x = a} = {x | x IN UNIV /\\ f x IN {a}}
-      #|  (forall x. ~(x IN s) ==> (x IN t <=> x IN t'))\n        ==> s UNION t = s UNION t'
-      #|  {z | (fstcart z cross fstcart(sndcart z)) cross\n             fstcart z cross sndcart(sndcart z) = vec 0 /\\\n            &0 <= (fstcart z cross sndcart(sndcart z)) dot\n                  (fstcart z cross fstcart(sndcart z))}
-      #|  forall t'. s UNION t = s UNION t' /\\ closed(s UNION t')\n           ==> closed(s UNION t)
-      #|  open s /\\ f continuous_on s ==> forall z. z IN s ==> f continuous at z
-      #|  (forall x. ~P x /\\ ~Q x /\\ ~R x ==> J x) <=>\n    (forall x. x IN UNIV DIFF (({x | P x} UNION {x | Q x}) UNION {x | R x})\n         ==> J x)
-      #|  {a} UNION {b} = {a,b}
-      #|  a + x:real^3 = b + x <=> a = b
-      #|  {a - b:real^3} = IMAGE (\\x. x - b) {a}
-      #|  {a,b} = {a} UNION {b}
-      #|  vec 0 = (f:real^M->real^3) x - f x
-      #|  forall z. ~collinear {vec 0,fstcart z,fstcart(sndcart z)} /\\\n        ~collinear {vec 0,fstcart z,sndcart(sndcart z)} /\\\n        ~(sndcart(sndcart z) IN aff_ge {vec 0,fstcart z} {fstcart(sndcart z)})\n        ==> (\\z. Cx(azim (vec 0) (fstcart z) (fstcart(sndcart z))\n                                             (sndcart(sndcart z))))\n            continuous (at z)
-      #|  vec 0 = (f:real^M->real^3) y - f y
-      #|  y:real^M
-      #|  (\\x:real^M. Cx(azim (f x) (g x) (h x) (k x))) =\n    (\\z. Cx(azim (vec 0) (fstcart z)\n                 (fstcart(sndcart z)) (sndcart(sndcart z)))) o\n    (\\x. pastecart (g x - f x) (pastecart (h x - f x) (k x - f x)))
-      #|  forall f:real^M->real^3 g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (at x within s) /\\ g continuous (at x within s) /\\\n      h continuous (at x within s) /\\ k continuous (at x within s)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (at x within s)
-      #|  forall f:real^M->real^3 g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (at x) /\\ g continuous (at x) /\\\n      h continuous (at x) /\\ k continuous (at x)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (at x)
-      #|  forall f:real->real^3 g h k x s.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (atreal x within s) /\\ g continuous (atreal x within s) /\\\n      h continuous (atreal x within s) /\\ k continuous (atreal x within s)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous\n          (atreal x within s)
-      #|  forall f:real->real^3 g h k x.\n      ~collinear {f x,g x,h x} /\\ ~collinear {f x,g x,k x} /\\\n      ~(k x IN aff_ge {f x,g x} {h x}) /\\\n      f continuous (atreal x) /\\ g continuous (atreal x) /\\\n      h continuous (atreal x) /\\ k continuous (atreal x)\n      ==> (\\x. azim (f x) (g x) (h x) (k x)) real_continuous (atreal x)
-      #|  u - u':real^3 = x <=> u' = u - x
-      #|  &0 < w ==> n * ((abs w) * x) * y = w * n * x * y
-      #|  w % basis 3:real^3
-      #|  u:real^3
-      #|  &0 < w ==> abs w * &1 = w
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  u:real^3 = u' + x <=> u - u' = x
-      #|  v:real^3
-      #|  u:real^3 = v + u' + x <=> u - v = u' + x
-      #|  forall u v w:real^3.\n       ~(u = v) /\\ ~(w = v)\n       ==> (?u' r phi e3.\n                phi = arcV v u w /\\\n                r = dist(u,v) /\\\n                dist(w,v) % e3 = w - v /\\\n                u' dot e3 = &0 /\\\n                u = v + u' + (r * cos phi) % e3)
-      #|  Im d1 = &0
-      #|  z:complex
-      #|  d1 = Cx(&1)
-      #|  k = &0
-      #|  k:real
-      #|  w:real^2
-      #|  w:real^2
-      #|  (dropout 3:real^3->real^2) u
-      #|  z:real^2
-      #|  (dropout 3:real^3->real^2) v
-      #|  d1:real^2
-      #|  (dropout 3:real^3->real^2) e1
-      #|  d2:real^2
-      #|  (dropout 3:real^3->real^2) e2
-      #|  ~(x = Cx(&0)) ==> (y / x = ii <=> y = ii * x)
-      #|  dropout 3 (e1:real^3) = Cx(&0)
-      #|  (a /\\ b) /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  norm((dropout 3:real^3->real^2) e1) = &1 /\\\n                norm((dropout 3:real^3->real^2) e2) = &1 /\\\n                dropout 3 (e2:real^3) / dropout 3 (e1:real^3) = ii
-      #|  norm(v:real^3) = r
-      #|  x + a pow 2 = y + b pow 2 ==> a:real = b ==> x = y
-      #|  (v:real^3)$3 = r * cos phi
-      #|  norm((dropout 3:real^3->real^2) v) = r * sin phi
-      #|  dropout 3 (v:real^3):real^2 =\n    norm(dropout 3 (v:real^3):real^2) %\n    (cos theta % (dropout 3 (e1:real^3)) +\n     sin theta % (dropout 3 (e2:real^3)))
-      #|  c = &0
-      #|  orthonormal e1 e2 (basis 3)
-      #|  e1:real^3
-      #|  u:real^3
-      #|  w % basis 3:real^3
-      #|  vec 0:real^3
-      #|  basis 3:real^3
-      #|  v:real^3
-      #|  v:real^3 = basis 3
-      #|  u:real^3 = basis 3
-      #|  v:real^3 = vec 0
-      #|  u:real^3 = vec 0
-      #|  e3:real^3 = basis 3
-      #|  &0 < w ==> abs w * &1 = w
-      #|  v:real^3 = w % basis 3
-      #|  u:real^3 = w % basis 3
-      #|  theta:real
-      #|  phi:real
-      #|  r:real
-      #|  e3:real^3
-      #|  e2:real^3
-      #|  e1:real^3
-      #|  v:real^3
-      #|  u:real^3
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  v:real^3
-      #|  v:real^3
-      #|  u':real^3 = u + v + w <=> u' - u = v + w
-      #|  forall u v w u' e1 e2 e3 r phi theta.\n       ~collinear {v, w, u} /\\\n       ~collinear {v, w, u'} /\\\n       orthonormal e1 e2 e3 /\\\n       dist(w,v) % e3 = w - v /\\\n       (v + e1) IN aff_gt {v, w} {u} /\\\n       r = dist(v,u') /\\\n       phi = arcV v u' w /\\\n       theta = azim v w u u'\n       ==> u' = v + (r * cos theta * sin phi) % e1 +\n                    (r * sin theta * sin phi) % e2 +\n                    (r * cos phi) % e3
-      #|  wedge v0 v1 w1 w2 = {y | ~collinear {v0,v1,y} /\\\n                         &0 < azim v0 v1 w1 y /\\\n                         azim v0 v1 w1 y < azim v0 v1 w1 w2}
-      #|  forall v0 v1 w1 w2.\n        ~(v0 = v1)\n        ==> wedge v0 v1 w1 w2 = {y | ~(y IN affine hull {v0,v1}) /\\\n                                     &0 < azim v0 v1 w1 y /\\\n                                     azim v0 v1 w1 y < azim v0 v1 w1 w2}
-      #|  {a + x,a + y,a + z} = IMAGE (\\x:real^N. a + x) {x,y,z}
-      #|  a + (x - a):real^3 = x
-      #|  forall a v w w1 w2. wedge (a + v) (a + w) (a + w1) (a + w2) =\n                 IMAGE (\\x. a + x) (wedge v w w1 w2)
-      #|  {f v,f w,f y} = IMAGE (f:real^3->real^3) {v,w,y}
-      #|  y:real^3
-      #|  forall f. linear f /\\ (forall x. norm(f x) = norm x) /\\\n       (2 <= dimindex(:3) ==> det(matrix f) = &1)\n       ==> forall v w w1 w2. wedge (f v) (f w) (f w1) (f w2) =\n                       IMAGE f (wedge v w w1 w2)
-      #|  forall a v w1 w2.\n        &0 < a /\\\n        ~collinear{vec 0,a % v,w1} /\\\n        ~collinear{vec 0,a % v,w2}\n        ==> wedge (vec 0) (a % v) w1 w2 = wedge (vec 0) v w1 w2
-      #|  (forall z w w1 w2. z = w ==> wedge z w w1 w2 = {}) /\\\n   (forall z w w1 w2. collinear{z,w,w1} ==> wedge z w w1 w2 = {}) /\\\n   (forall z w w1 w2. collinear{z,w,w2} ==> wedge z w w1 w2 = {})
-      #|  a / t1:real
-      #|  a * t1:real
-      #|  a:real
-      #|  y - a - b:real^N = vec 0 <=> y = a + b
-      #|  b:real
-      #|  (?a b c. P a b c) <=> (?b c a. P a b c)
-      #|  &1 - v - v' - v'' = &0 <=> v = &1 - v' - v''
-      #|  y:real^N
-      #|  vec 0 = a % x <=> a % x = vec 0
-      #|  x IN {a} <=> a = x
-      #|  {a} UNION {b,c} = {a,b,c}
-      #|  forall v1 v2:real^N.\n        &0 < t1 /\\ ~(v2 = vec 0)\n        ==> aff_gt {vec 0} {t1 % basis 1, v2} =\n                {a % basis 1 + b % v2 | &0 < a /\\ &0 < b}
+      #|  ((a : Cart[Real, Tybit1[Unit]]) + (w : Cart[Real, Tybit1[Unit]]) == a + (v : Cart[Real, Tybit1[Unit]])) == (w == v)
+      #|  (a : Cart[Real, Tybit1[Unit]]) + (w : Cart[Real, Tybit1[Unit]]) - (a + (v : Cart[Real, Tybit1[Unit]])) == w - v
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], azim(a + v, a + w, a + w1, a + w2) == azim(v, w, w1, w2)
+      #|  {(f : (_) -> _)((x : _)), f((y : _)), f((z : _))} == IMAGE(f, {x, y, z})
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], ((f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(x) == f(y)) == (x == y)
+      #|  (f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], (linear : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Bool)(f) && (\226\136\128 x : Cart[Real, Tybit1[Unit]], (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(f(x)) == (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(x)) && (2 <= (dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) \226\134\146 (det : (Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]]) -> Real)((matrix : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]])(f)) == real_of_num(1)) \226\134\146 (\226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], azim(f(v), f(w), f(w1), f(w2)) == azim(v, w, w1, w2))
+      #|  (\226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], v == w \226\134\146 azim(v, w, w1, w2) == real_of_num(0)) && (\226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], collinear({v, w, w1}) \226\134\146 azim(v, w, w1, w2) == real_of_num(0)) && (\226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], collinear({v, w, w2}) \226\134\146 azim(v, w, w1, w2) == real_of_num(0))
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], azim(v, v, x, y) == real_of_num(0)
+      #|  (op_pct((a : Real), (x : Cart[Real, Tybit1[Unit]])) == op_pct(a, (y : Cart[Real, Tybit1[Unit]]))) == (op_pct(a, x - y) == vec(0))
+      #|  real_of_num(0) < (a : Real) \226\134\146 abs(a) == a
+      #|  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 (\226\136\128 y : Real, \226\136\131 x : Real, a * x == y)
+      #|  \226\136\128 a : Real, \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) < a \226\134\146 azim(vec(0), op_pct(a, v), w1, w2) == azim(vec(0), v, w1, w2)
+      #|  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 (\226\136\128 y : Real, \226\136\131 x : Real, a * x == y)
+      #|  real_of_num(0) < (c : Real)
+      #|  real_of_num(0) < (b : Real)
+      #|  real_of_num(0) < (a : Real)
+      #|  real_of_num(0) < (a : Real) \226\134\146 abs(a) == a
+      #|  \226\136\128 a : Real, \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) < a && real_of_num(0) < (b : Real) && real_of_num(0) < (c : Real) \226\134\146 azim(vec(0), op_pct(a, v), op_pct(b, w1), op_pct(c, w2)) == azim(vec(0), v, w1, w2)
+      #|  op_pct((r : Real) * cos((t : Real)), basis(1)) + op_pct(r * sin(t), basis(2)) == Cx(r) * cexp(ii * Cx(t))
+      #|  (r2 : Real) / (r1 : Real)
+      #|  (a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]]) * ((c : Cart[Real, Tybit0[Unit]]) * (d : Cart[Real, Tybit0[Unit]])) == a * c * (b * d)
+      #|  (r2 : Real)
+      #|  (r1 : Real)
+      #|  (psi : Real)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
+      #|  (h2 : Real)
+      #|  (h1 : Real)
+      #|  (a : Real) == azim(vec(0), basis(3), (x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]]))
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  collinear({vec(0), basis(3), (y : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({vec(0), basis(3), (x : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], azim(vec(0), basis(3), x, y) == Arg(dropout(3, y) / dropout(3, x))
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) / (w : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, w1}) && !IN(w2, aff_ge({v, w}, {w1})) \226\134\146 real_continuous(azim(v, w, w1), at(w2))
+      #|  SUBSET({(a : _), (b : _), (c : _), (d : _)}, (s : (_) -> Bool)) == (SUBSET({a, b, c}, s) && IN(d, s))
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  UNION({(a : _), (b : _)}, {(c : _)}) == {a, b, c}
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !coplanar({v, w, w1, w2}) \226\134\146 real_continuous(azim(v, w, w1), at(w2))
+      #|  dropout(3, (w : Cart[Real, Tybit1[Unit]])) == Cx(real_of_num(0))
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], azim(v0, v1, w, w) == real_of_num(0)
+      #|  ((y : Real) == (t : Real) + (z : Real)) == (t == y - z)
+      #|  (t : Real)
+      #|  ((a : Real) + ((b : Real) + (c : Real)) == real_of_num(1)) == (a == real_of_num(1) - b - c)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (p : (_) -> Bool)(c) && (q : (_, _, _) -> Bool)(a, b, c) && (r : (_, _) -> Bool)(b, c)) == (\226\136\131 c : _, p(c) && (\226\136\131 b : _, r(b, c) && (\226\136\131 a : _, q(a, b, c))))
+      #|  DISJOINT({(a : _), (b : _)}, {(x : _)}) == (!(x == a) && !(x == b))
+      #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((y : Cart[Real, Tybit0[Unit]]) / w == (x : Cart[Real, Tybit0[Unit]]) * ((u : Cart[Real, Tybit0[Unit]]) / w)) == (y == x * u)
+      #|  !(collinear : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)({(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3), (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((v1 : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))})
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) && !collinear({v0, v1, y}) \226\134\146 (azim(v0, v1, w, x) == azim(v0, v1, w, y)) == IN(y, aff_gt({v0, v1}, {x}))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) && !collinear({v0, v1, y}) \226\134\146 (azim(v0, v1, w, x) == azim(v0, v1, w, y)) == IN(x, aff_gt({v0, v1}, {y}))
+      #|  azim((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]])) == azim(v0, v1, w, w)
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) \226\134\146 (azim(v0, v1, w, x) == real_of_num(0)) == IN(w, aff_gt({v0, v1}, {x}))
+      #|  azim((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]])) == azim(v0, v1, w, w)
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) \226\134\146 (azim(v0, v1, w, x) == real_of_num(0)) == IN(x, aff_gt({v0, v1}, {w}))
+      #|  DELETE({(x : _)}, x) == {}
+      #|  (v1 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) \226\134\146 (azim(v0, v1, w, x) == real_of_num(0)) == IN(w, aff_ge({v0, v1}, {x}))
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({z, w, w1}) && !collinear({z, w, w2}) && azim(z, w, w1, w2) == real_of_num(0) \226\134\146 azim(z, w, w2, w1) == real_of_num(0)
+      #|  dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({z, w, w1}) && !collinear({z, w, w2}) \226\134\146 azim(z, w, w2, w1) == (if azim(z, w, w1, w2) == real_of_num(0) { real_of_num(0) } else { real_of_num(2) * pi - azim(z, w, w1, w2) })
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({z, w, w1}) && !collinear({z, w, w2}) \226\134\146 (azim(z, w, w1, w2) == pi) == (azim(z, w, w2, w1) == pi)
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({z, w, w1}) && !collinear({z, w, w2}) \226\134\146 (azim(z, w, w1, w2) == real_of_num(0)) == (azim(z, w, w2, w1) == real_of_num(0))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) \226\134\146 (azim(v0, v1, w, x) == real_of_num(0)) == IN(x, aff_ge({v0, v1}, {w}))
+      #|  ((x : Real) == (t : Real) + (y : Real)) == (t == x - y)
+      #|  (t : Real)
+      #|  ((s : Real) + (t : Real) == real_of_num(1)) == (s == real_of_num(1) - t)
+      #|  DISJOINT({(a : _)}, {(x : _)}) == !(x == a)
+      #|  DISJOINT({(a : _), (b : _)}, {(x : _)}) == (!(x == a) && !(x == b))
+      #|  ((x : Real) < real_of_num(0)) == (real_of_num(0) < -x)
+      #|  !((t : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((v : Cart[Real, Tybit0[Unit]]) == t * (y : Cart[Real, Tybit0[Unit]])) == (y == v / t)
+      #|  (x : Real) < real_of_num(0) \226\134\146 !(x == real_of_num(0))
+      #|  (t : Real)
+      #|  (v : Real) / Re((y : Cart[Real, Tybit0[Unit]]))
+      #|  ((t1 : Real) + (t2 : Real) == real_of_num(1)) == (t1 == real_of_num(1) - t2)
+      #|  (v : Real) == real_of_num(0)
+      #|  (v : Real)
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (v : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w : Cart[Real, Tybit1[Unit]]))
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (x : Cart[Real, Tybit1[Unit]]))
+      #|  (IN : (Cart[Real, Tybit0[Unit]], (Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w : Cart[Real, Tybit1[Unit]])), (aff_lt : ((Cart[Real, Tybit0[Unit]]) -> Bool, (Cart[Real, Tybit0[Unit]]) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)({(vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)}, {(dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (x : Cart[Real, Tybit1[Unit]]))}))
+      #|  !(collinear : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)({(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3), (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((v1 : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))})
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) \226\134\146 (azim(v0, v1, w, x) == pi) == IN(w, aff_lt({v0, v1}, {x}))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, x}) \226\134\146 (azim(v0, v1, w, x) == pi) == IN(x, aff_lt({v0, v1}, {w}))
+      #|  op_dollar((w2 : Cart[Real, Tybit1[Unit]]), 1) / op_dollar((w1 : Cart[Real, Tybit1[Unit]]), 1)
+      #|  op_dollar((w2 : Cart[Real, Tybit1[Unit]]), 2) / op_dollar((w1 : Cart[Real, Tybit1[Unit]]), 2)
+      #|  !(op_dollar((w1 : Cart[Real, Tybit1[Unit]]), 2) == real_of_num(0)) || !(op_dollar((w2 : Cart[Real, Tybit1[Unit]]), 1) == real_of_num(0))
+      #|  real_of_num(0) < (w : Real) \226\134\146 ((x : Real) - (k : Real) * (w * real_of_num(1)) - (y : Real) == real_of_num(0)) == (k == (x - y) / w)
+      #|  {(a : _), (b : _), (c : _), (d : _)} == {d, a, b, c}
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((w : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  ((x : Real) * -(y : Real) + (a : Real) * (b : Real) == real_of_num(0)) == (x * y == a * b)
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])})
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], azim(v0, v1, w1, w2) == real_of_num(0) || azim(v0, v1, w1, w2) == pi \226\134\146 coplanar({v0, v1, w1, w2})
+      #|  (a : Cart[Real, Tybit0[Unit]]) * ((b : Cart[Real, Tybit0[Unit]]) * (c : Cart[Real, Tybit0[Unit]])) == b * (a * c)
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  DISJOINT({(a : _)}, {(b : _), (c : _)}) == (!(b == a) && !(c == a))
+      #|  (w : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (u : Real) == real_of_num(0)
+      #|  (u : Real)
+      #|  (u : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 z : Cart[Real, Tybit1[Unit]], IN(v, aff_ge({a}, {u, w})) && !collinear({a, u, v}) && !collinear({a, u, w}) \226\134\146 azim(a, u, v, z) == azim(a, u, w, z)
+      #|  collinear({(a : Cart[Real, Tybit1[Unit]]), (u : Cart[Real, Tybit1[Unit]]), (z : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 z : Cart[Real, Tybit1[Unit]], IN(v, aff_ge({a}, {u, w})) && !collinear({a, u, v}) && !collinear({a, u, w}) \226\134\146 azim(a, u, z, v) == azim(a, u, z, w)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  DISJOINT({(a : _)}, {(b : _), (c : _)}) == (!(b == a) && !(c == a))
+      #|  (a : Real)
+      #|  {(z : _), (v : _), (w : _)} == {z, w, v}
+      #|  {(z : _), (v : _), (w : _)} == {z, w, v}
+      #|  DIFF({(a : _)}, {a, (b : _)}) == {}
+      #|  (u : Cart[Real, N]) == vec(0)
+      #|  (w : Cart[Real, N]) == vec(0)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], IN(v, aff_ge({a}, {u, w})) && collinear({a, u, w}) \226\134\146 collinear({a, v, w})
+      #|  real_of_num(0) < (t : Real) \226\134\146 (inv(t) * (a : Real) - inv(t) * (b : Real) + (inv(t) * (c : Real) - inv(t) * (d : Real)) == real_of_num(1)) == (a + c - (b + d) == t)
+      #|  inv((t3 : Real)) * (s2 : Real) - inv(t3) * (t2 : Real)
+      #|  inv((t3 : Real)) * (s1 : Real) - inv(t3) * (t1 : Real)
+      #|  ((x : Cart[Real, N]) == (y : Cart[Real, N]) + ((z : Cart[Real, N]) + op_pct(real_of_num(1), (w : Cart[Real, N])))) == (w == x - (y + z))
+      #|  (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(inv((t3 : Real)))
+      #|  (s2 : Real)
+      #|  (s1 : Real)
+      #|  (t3 : Real)
+      #|  (t2 : Real)
+      #|  (t1 : Real)
+      #|  DISJOINT({(a : _), (b : _)}, {(c : _)}) == (!(c == a) && !(c == b))
+      #|  (y : Cart[Real, Tybit1[Unit]]) == (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (y : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  ((s : Bool) && (p : Bool) \226\134\146 (r : Bool)) \226\134\146 p \226\134\146 !(q : Bool) && !r && s \226\134\146 (t : Bool)
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]])})
+      #|  (v1 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w}) && !collinear({v0, v1, y}) && IN(x, aff_gt({v0, v1}, {y})) \226\134\146 azim(v0, v1, w, x) == azim(v0, v1, w, y)
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], IN(x, aff_ge({v0, v1}, {w})) \226\134\146 azim(v0, v1, w, x) == real_of_num(0)
+      #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  real_of_num(0) < (x : Real)
+      #|  (x : Real) == real_of_num(0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (y : Cart[Real, Tybit1[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (x : Cart[Real, Tybit1[Unit]]))
+      #|  real_sgn(Im(dropout(3, (y : Cart[Real, Tybit1[Unit]])) / dropout(3, (x : Cart[Real, Tybit1[Unit]]))))
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], real_sgn(sin(azim(v, w, x, y))) == real_sgn(dot(cross(w - v, x - v), y - v))
+      #|  ((x : Real) - pi < pi) == (x < real_of_num(2) * pi)
+      #|  azim((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]])) - pi
+      #|  real_of_num(0) <= sin(azim((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]])))
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], (azim(v, w, x, y) <= pi) == (real_of_num(0) <= dot(cross(w - v, x - v), y - v))
+      #|  (dihV : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((w0 : Cart[Real, _]), (w1 : Cart[Real, _]), (w2 : Cart[Real, _]), (w3 : Cart[Real, _])) == LET((va : Cart[Real, _]) => LET_END(LET((vb : Cart[Real, _]) => LET_END(LET((vc : Cart[Real, _]) => LET_END(LET((vap : Cart[Real, _]) => LET_END(LET((vbp : Cart[Real, _]) => LET_END(arcV(vec(0), vap, vbp)), op_pct(dot(vc, vc), vb) - op_pct(dot(vb, vc), vc))), op_pct(dot(vc, vc), va) - op_pct(dot(va, vc), vc))), w1 - w0)), w3 - w0)), w2 - w0)
+      #|  dihV((w0 : Cart[Real, N]), (w1 : Cart[Real, N]), (w2 : Cart[Real, N]), (w3 : Cart[Real, N])) == LET((va : Cart[Real, N]) => LET_END(LET((vb : Cart[Real, N]) => LET_END(LET((vc : Cart[Real, N]) => LET_END(LET((vap : Cart[Real, N]) => LET_END(LET((vbp : Cart[Real, N]) => LET_END(angle((vap, vec(0), vbp))), op_pct(dot(vc, vc), vb) - op_pct(dot(vb, vc), vc))), op_pct(dot(vc, vc), va) - op_pct(dot(va, vc), vc))), w1 - w0)), w3 - w0)), w2 - w0)
+      #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 w0 : Cart[Real, N], \226\136\128 w1 : Cart[Real, N], \226\136\128 w2 : Cart[Real, N], \226\136\128 w3 : Cart[Real, N], dihV(a + w0, a + w1, a + w2, a + w3) == dihV(w0, w1, w2, w3)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 w0 : Cart[Real, M], \226\136\128 w1 : Cart[Real, M], \226\136\128 w2 : Cart[Real, M], \226\136\128 w3 : Cart[Real, M], linear(f) && (\226\136\128 x : Cart[Real, M], norm(f(x)) == norm(x)) \226\134\146 dihV(f(w0), f(w1), f(w2), f(w3)) == dihV(w0, w1, w2, w3)
+      #|  op_pct((a : Real), op_pct(a, (x : Cart[Real, N]))) - op_pct(a, op_pct((b : Real), op_pct(a, (y : Cart[Real, N])))) == op_pct(a * a, x - op_pct(b, y))
+      #|  \226\136\128 a : Real, \226\136\128 v : Cart[Real, N], \226\136\128 w1 : Cart[Real, N], \226\136\128 w2 : Cart[Real, N], !(a == real_of_num(0)) \226\134\146 dihV(vec(0), op_pct(a, v), w1, w2) == dihV(vec(0), v, w1, w2)
+      #|  \226\136\128 w0 : Cart[Real, _], \226\136\128 w1 : Cart[Real, _], \226\136\128 w2 : Cart[Real, _], \226\136\128 w3 : Cart[Real, _], real_of_num(0) <= dihV(w0, w1, w2, w3) && dihV(w0, w1, w2, w3) <= pi
+      #|  ((a : Real) == (b : Real) + (c : Real) * (d : Real)) == (b - -c * d == a)
+      #|  real_of_num(0) < (r1 : Real) && real_of_num(0) < (r2 : Real) \226\134\146 r1 * r2 * (x : Real) / (r1 * r2) == x
+      #|  (r1 : Real) * (c1 : Real) * ((r2 : Real) * (c2 : Real)) + r1 * (s1 : Real) * (r2 * (s2 : Real)) == r1 * r2 * (c1 * c2 + s1 * s2)
+      #|  (r : Real) * (c : Real) * (r * c) + r * (s : Real) * (r * s) == pow(r, 2) * (pow(s, 2) + pow(c, 2))
+      #|  (a : Cart[Real, N]) + ((b : Cart[Real, N]) + (c : Cart[Real, N])) - c == a + b
+      #|  (r2 : Real)
+      #|  (r1 : Real)
+      #|  (psi : Real)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
+      #|  (h2 : Real)
+      #|  (h1 : Real)
+      #|  (a : Real) == azim(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]]) == (v : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, v1}) && !collinear({v, w, v2}) \226\134\146 cos(azim(v, w, v1, v2)) == cos(dihV(v, w, v1, v2))
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, v1}) && !collinear({v, w, v2}) && azim(v, w, v1, v2) < pi \226\134\146 azim(v, w, v1, v2) == dihV(v, w, v1, v2)
+      #|  (p : Real) <= (x : Real) && x < real_of_num(2) * p \226\134\146 real_of_num(0) <= real_of_num(2) * p - x && real_of_num(2) * p - x <= p
+      #|  ((x : Real) == real_of_num(2) * pi - (y : Real)) == (y == real_of_num(2) * pi - x)
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, v1}) && !collinear({v, w, v2}) && pi <= azim(v, w, v1, v2) \226\134\146 azim(v, w, v1, v2) == real_of_num(2) * pi - dihV(v, w, v1, v2)
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, v1}) && !collinear({v, w, v2}) \226\134\146 azim(v, w, v1, v2) == (if azim(v, w, v1, v2) < pi { dihV(v, w, v1, v2) } else { real_of_num(2) * pi - dihV(v, w, v1, v2) })
+      #|  (a : Real) < real_of_num(2) * pi && !(a < pi) \226\134\146 (a == real_of_num(0)) == (real_of_num(2) * pi - a == real_of_num(0))
+      #|  (real_of_num(2) * (p : Real) - (real_of_num(2) * p - (a : Real)) == real_of_num(0)) == (a == real_of_num(0))
+      #|  ((a : Real) == (p : Real) - (b : Real)) == (b == p - a)
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 (azim(v0, v1, w1, w2) == real_of_num(0)) == (dihV(v0, v1, w1, w2) == real_of_num(0))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 (azim(v0, v1, w1, w2) == pi) == (dihV(v0, v1, w1, w2) == pi)
+      #|  (v0 : Cart[Real, Tybit0[Unit]])
+      #|  (p : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (p : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (v3 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  ((a : Bool) == (b : Bool)) == ((a \226\134\146 b) && (b \226\134\146 a))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 (azim(v0, v1, w1, w2) == real_of_num(0) || azim(v0, v1, w1, w2) == pi) == coplanar({v0, v1, w1, w2})
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 (dihV(v0, v1, w1, w2) == real_of_num(0) || dihV(v0, v1, w1, w2) == pi) == coplanar({v0, v1, w1, w2})
+      #|  \226\136\128 v0 : Cart[Real, N], \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], \226\136\128 v3 : Cart[Real, N], dihV(v0, v1, v3, v2) == dihV(v0, v1, v2, v3)
+      #|  -(a : Cart[Real, N]) - -(b : Cart[Real, N]) == -(a - b)
+      #|  -(a : Cart[Real, N]) - -(b : Cart[Real, N]) == -(a - b)
+      #|  \226\136\128 v0 : Cart[Real, _], \226\136\128 v1 : Cart[Real, _], \226\136\128 v2 : Cart[Real, _], \226\136\128 v3 : Cart[Real, _], dihV(-v0, -v1, -v2, -v3) == dihV(v0, v1, v2, v3)
+      #|  \226\136\128 v1 : Cart[Real, _], \226\136\128 v2 : Cart[Real, _], \226\136\128 v3 : Cart[Real, _], dihV(vec(0), -v1, -v2, -v3) == dihV(vec(0), v1, v2, v3)
+      #|  (u : Cart[Real, N])
+      #|  \226\136\128 e : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], orthogonal(e - u, v - u) && orthogonal(e - u, w - u) && !(e == u) \226\134\146 dihV(u, e, v, w) == arcV(u, v, w)
+      #|  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, v1}) && !collinear({v, w, v2}) && azim(v, w, v1, v2) <= pi \226\134\146 azim(v, w, v1, v2) == dihV(v, w, v1, v2)
+      #|  (u : Cart[Real, Tybit1[Unit]]) == (e : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 e : Cart[Real, Tybit1[Unit]], \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], orthogonal(e - u, v - u) && orthogonal(e - u, w - u) && !collinear({u, e, v}) && !collinear({u, e, w}) && azim(u, e, v, w) <= pi \226\134\146 azim(u, e, v, w) == arcV(u, v, w)
+      #|  {(u : _), (e : _), (v : _), (w : _)} == {u, v, w, e}
+      #|  collinear({(u : Cart[Real, Tybit1[Unit]]), (e : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({(u : Cart[Real, Tybit1[Unit]]), (e : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 e : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], collinear({u, v, w}) \226\134\146 azim(u, e, v, w) == real_of_num(0) || azim(u, e, v, w) == pi
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 k : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && continuous(f, within(at(x), s)) && continuous(g, within(at(x), s)) && continuous(h, within(at(x), s)) && continuous(k, within(at(x), s)) \226\134\146 real_continuous((x : Cart[Real, M]) => dihV(f(x), g(x), h(x), k(x)), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 k : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 x : Cart[Real, M], !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && continuous(f, at(x)) && continuous(g, at(x)) && continuous(h, at(x)) && continuous(k, at(x)) \226\134\146 real_continuous((x : Cart[Real, M]) => dihV(f(x), g(x), h(x), k(x)), at(x))
+      #|  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 g : (Real) -> Cart[Real, N], \226\136\128 h : (Real) -> Cart[Real, N], \226\136\128 k : (Real) -> Cart[Real, N], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && continuous(f, within(atreal(x), s)) && continuous(g, within(atreal(x), s)) && continuous(h, within(atreal(x), s)) && continuous(k, within(atreal(x), s)) \226\134\146 real_continuous((x : Real) => dihV(f(x), g(x), h(x), k(x)), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 g : (Real) -> Cart[Real, N], \226\136\128 h : (Real) -> Cart[Real, N], \226\136\128 k : (Real) -> Cart[Real, N], \226\136\128 x : Real, !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && continuous(f, atreal(x)) && continuous(g, atreal(x)) && continuous(h, atreal(x)) && continuous(k, atreal(x)) \226\134\146 real_continuous((x : Real) => dihV(f(x), g(x), h(x), k(x)), atreal(x))
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((dot : (Cart[Real, N], Cart[Real, N]) -> Real)((w : Cart[Real, N]), w)))
+      #|  (w : Cart[Real, N]) == vec(0)
+      #|  (w : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], \226\136\128 w1 : Cart[Real, N], \226\136\128 w2 : Cart[Real, N], !collinear({v, w, w2}) \226\134\146 real_continuous(dihV(v, w, w1), at(w2))
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (u : (Cart[Real, M]) -> Bool) == UNION(INTER(u, (s : (Cart[Real, M]) -> Bool)), INTER(u, (t : (Cart[Real, M]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, M]) -> Bool, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, N], (closed(s) && closed(t)) && UNION(s, t) == UNIV && (continuous_on(g, INTER(u, s)) && continuous_on(h, INTER(u, t))) && (\226\136\128 x : Cart[Real, M], IN(x, INTER(u, s)) \226\134\146 g(x) == f(x)) && (\226\136\128 x : Cart[Real, M], IN(x, INTER(u, t)) \226\134\146 h(x) == f(x)) \226\134\146 continuous_on(f, u)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (x : Real) <= real_of_num(0) \226\134\146 (real_of_num(0) <= x) == (x == real_of_num(0))
+      #|  ((x : Real) <= pi \226\134\146 x == pi) \226\134\146 pi <= x
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) => Cx(real_of_num(2) * pi - dihV(vec(0), fstcart(z), fstcart(sndcart(z)), sndcart(sndcart(z))))
+      #|  (z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) => Cx(dihV(vec(0), fstcart(z), fstcart(sndcart(z)), sndcart(sndcart(z))))
+      #|  {(z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) | IN(z, UNIV) && IN(lift(dot(cross(fstcart(z), fstcart(sndcart(z))), sndcart(sndcart(z)))), {(x : Cart[Real, Unit]) | op_dollar(x, 1) <= real_of_num(0)})}
+      #|  {(z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) | IN(z, UNIV) && IN(lift(dot(cross(fstcart(z), fstcart(sndcart(z))), sndcart(sndcart(z)))), {(x : Cart[Real, Unit]) | op_dollar(x, 1) >= real_of_num(0)})}
+      #|  {(z : _) | (f : (_) -> Cart[Real, _])(z) == vec(0) && drop((g : (_) -> Cart[Real, Unit])(z)) >= real_of_num(0)} == INTER({(z : _) | IN(z, UNIV) && IN(f(z), {vec(0)})}, {(z : _) | IN(z, UNIV) && IN(g(z), {(k : Cart[Real, Unit]) | drop(k) >= real_of_num(0)})})
+      #|  (real_of_num(0) <= (x : Real)) == (drop(lift(x)) >= real_of_num(0))
+      #|  {(x : _) | (f : (_) -> _)(x) == (a : _)} == {(x : _) | IN(x, UNIV) && IN(f(x), {a})}
+      #|  (\226\136\128 x : _, !IN(x, (s : (_) -> Bool)) \226\134\146 IN(x, (t : (_) -> Bool)) == IN(x, (t' : (_) -> Bool))) \226\134\146 UNION(s, t) == UNION(s, t')
+      #|  {(z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) | cross(cross(fstcart(z), fstcart(sndcart(z))), cross(fstcart(z), sndcart(sndcart(z)))) == vec(0) && real_of_num(0) <= dot(cross(fstcart(z), sndcart(sndcart(z))), cross(fstcart(z), fstcart(sndcart(z))))}
+      #|  \226\136\128 t' : (Cart[Real, _]) -> Bool, UNION((s : (Cart[Real, _]) -> Bool), (t : (Cart[Real, _]) -> Bool)) == UNION(s, t') && closed(UNION(s, t')) \226\134\146 closed(UNION(s, t))
+      #|  open((s : (Cart[Real, _]) -> Bool)) && continuous_on((f : (Cart[Real, _]) -> Cart[Real, _]), s) \226\134\146 (\226\136\128 z : Cart[Real, _], IN(z, s) \226\134\146 continuous(f, at(z)))
+      #|  (\226\136\128 x : _, !(P : (_) -> Bool)(x) && !(Q : (_) -> Bool)(x) && !(R : (_) -> Bool)(x) \226\134\146 (J : (_) -> Bool)(x)) == (\226\136\128 x : _, IN(x, DIFF(UNIV, UNION(UNION({(x : _) | P(x)}, {(x : _) | Q(x)}), {(x : _) | R(x)}))) \226\134\146 J(x))
+      #|  UNION({(a : _)}, {(b : _)}) == {a, b}
+      #|  ((a : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]]) == (b : Cart[Real, Tybit1[Unit]]) + x) == (a == b)
+      #|  {(a : Cart[Real, Tybit1[Unit]]) - (b : Cart[Real, Tybit1[Unit]])} == IMAGE((x : Cart[Real, Tybit1[Unit]]) => x - b, {a})
+      #|  {(a : _), (b : _)} == UNION({a}, {b})
+      #|  vec(0) == (f : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]])((x : Cart[Real, M])) - f(x)
+      #|  \226\136\128 z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]], !collinear({vec(0), fstcart(z), fstcart(sndcart(z))}) && !collinear({vec(0), fstcart(z), sndcart(sndcart(z))}) && !IN(sndcart(sndcart(z)), aff_ge({vec(0), fstcart(z)}, {fstcart(sndcart(z))})) \226\134\146 continuous((z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) => Cx(azim(vec(0), fstcart(z), fstcart(sndcart(z)), sndcart(sndcart(z)))), at(z))
+      #|  vec(0) == (f : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]])((y : Cart[Real, M])) - f(y)
+      #|  (y : Cart[Real, M])
+      #|  ((x : Cart[Real, M]) => Cx(azim((f : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]])(x), (g : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]])(x), (h : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]])(x), (k : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]])(x)))) == o((z : Cart[Real, Finite_sum[Tybit1[Unit], Finite_sum[Tybit1[Unit], Tybit1[Unit]]]]) => Cx(azim(vec(0), fstcart(z), fstcart(sndcart(z)), sndcart(sndcart(z)))), (x : Cart[Real, M]) => pastecart(g(x) - f(x), pastecart(h(x) - f(x), k(x) - f(x))))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 k : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && !IN(k(x), aff_ge({f(x), g(x)}, {h(x)})) && continuous(f, within(at(x), s)) && continuous(g, within(at(x), s)) && continuous(h, within(at(x), s)) && continuous(k, within(at(x), s)) \226\134\146 real_continuous((x : Cart[Real, M]) => azim(f(x), g(x), h(x), k(x)), within(at(x), s))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 k : (Cart[Real, M]) -> Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, M], !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && !IN(k(x), aff_ge({f(x), g(x)}, {h(x)})) && continuous(f, at(x)) && continuous(g, at(x)) && continuous(h, at(x)) && continuous(k, at(x)) \226\134\146 real_continuous((x : Cart[Real, M]) => azim(f(x), g(x), h(x), k(x)), at(x))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 h : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 k : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && !IN(k(x), aff_ge({f(x), g(x)}, {h(x)})) && continuous(f, within(atreal(x), s)) && continuous(g, within(atreal(x), s)) && continuous(h, within(atreal(x), s)) && continuous(k, within(atreal(x), s)) \226\134\146 real_continuous((x : Real) => azim(f(x), g(x), h(x), k(x)), within(atreal(x), s))
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 h : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 k : (Real) -> Cart[Real, Tybit1[Unit]], \226\136\128 x : Real, !collinear({f(x), g(x), h(x)}) && !collinear({f(x), g(x), k(x)}) && !IN(k(x), aff_ge({f(x), g(x)}, {h(x)})) && continuous(f, atreal(x)) && continuous(g, atreal(x)) && continuous(h, atreal(x)) && continuous(k, atreal(x)) \226\134\146 real_continuous((x : Real) => azim(f(x), g(x), h(x), k(x)), atreal(x))
+      #|  ((u : Cart[Real, Tybit1[Unit]]) - (u' : Cart[Real, Tybit1[Unit]]) == (x : Cart[Real, Tybit1[Unit]])) == (u' == u - x)
+      #|  real_of_num(0) < (w : Real) \226\134\146 (n : Real) * (abs(w) * (x : Real) * (y : Real)) == w * (n * (x * y))
+      #|  (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((w : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))
+      #|  (u : Cart[Real, Tybit1[Unit]])
+      #|  real_of_num(0) < (w : Real) \226\134\146 abs(w) * real_of_num(1) == w
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  ((u : Cart[Real, Tybit1[Unit]]) == (u' : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]])) == (u - u' == x)
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  ((u : Cart[Real, Tybit1[Unit]]) == (v : Cart[Real, Tybit1[Unit]]) + ((u' : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]]))) == (u - v == u' + x)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], !(u == v) && !(w == v) \226\134\146 (\226\136\131 u' : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, \226\136\131 phi : Real, \226\136\131 e3 : Cart[Real, Tybit1[Unit]], phi == arcV(v, u, w) && r == dist((u, v)) && op_pct(dist((w, v)), e3) == w - v && dot(u', e3) == real_of_num(0) && u == v + (u' + op_pct(r * cos(phi), e3)))
+      #|  Im((d1 : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (d1 : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))
+      #|  (k : Real) == real_of_num(0)
+      #|  (k : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (u : Cart[Real, Tybit1[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (v : Cart[Real, Tybit1[Unit]]))
+      #|  (d1 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (e1 : Cart[Real, Tybit1[Unit]]))
+      #|  (d2 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (e2 : Cart[Real, Tybit1[Unit]]))
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((y : Cart[Real, Tybit0[Unit]]) / x == ii) == (y == ii * x)
+      #|  dropout(3, (e1 : Cart[Real, Tybit1[Unit]])) == Cx(real_of_num(0))
+      #|  ((a : Bool) && (b : Bool)) && (a && b \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (e1 : Cart[Real, Tybit1[Unit]]))) == real_of_num(1) && (norm : (Cart[Real, Tybit0[Unit]]) -> Real)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (e2 : Cart[Real, Tybit1[Unit]]))) == real_of_num(1) && (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, e2) / (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, e1) == ii
+      #|  norm((v : Cart[Real, Tybit1[Unit]])) == (r : Real)
+      #|  (x : Real) + pow((a : Real), 2) == (y : Real) + pow((b : Real), 2) \226\134\146 a == b \226\134\146 x == y
+      #|  op_dollar((v : Cart[Real, Tybit1[Unit]]), 3) == (r : Real) * cos((phi : Real))
+      #|  (norm : (Cart[Real, Tybit0[Unit]]) -> Real)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (v : Cart[Real, Tybit1[Unit]]))) == (r : Real) * sin((phi : Real))
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (v : Cart[Real, Tybit1[Unit]])) == (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((norm : (Cart[Real, Tybit0[Unit]]) -> Real)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, v)), (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(cos((theta : Real)), (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (e1 : Cart[Real, Tybit1[Unit]]))) + (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(sin(theta), (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (e2 : Cart[Real, Tybit1[Unit]]))))
+      #|  (c : Real) == real_of_num(0)
+      #|  orthonormal((e1 : Cart[Real, Tybit1[Unit]]), (e2 : Cart[Real, Tybit1[Unit]]), basis(3))
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (u : Cart[Real, Tybit1[Unit]])
+      #|  (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((w : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (u : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (v : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (u : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (e3 : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  real_of_num(0) < (w : Real) \226\134\146 abs(w) * real_of_num(1) == w
+      #|  (v : Cart[Real, Tybit1[Unit]]) == op_pct((w : Real), basis(3))
+      #|  (u : Cart[Real, Tybit1[Unit]]) == op_pct((w : Real), basis(3))
+      #|  (theta : Real)
+      #|  (phi : Real)
+      #|  (r : Real)
+      #|  (e3 : Cart[Real, Tybit1[Unit]])
+      #|  (e2 : Cart[Real, Tybit1[Unit]])
+      #|  (e1 : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (u : Cart[Real, Tybit1[Unit]])
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  ((u' : Cart[Real, Tybit1[Unit]]) == (u : Cart[Real, Tybit1[Unit]]) + ((v : Cart[Real, Tybit1[Unit]]) + (w : Cart[Real, Tybit1[Unit]]))) == (u' - u == v + w)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 u' : Cart[Real, Tybit1[Unit]], \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 phi : Real, \226\136\128 theta : Real, !collinear({v, w, u}) && !collinear({v, w, u'}) && orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && IN(v + e1, aff_gt({v, w}, {u})) && r == dist((v, u')) && phi == arcV(v, u', w) && theta == azim(v, w, u, u') \226\134\146 u' == v + (op_pct(r * (cos(theta) * sin(phi)), e1) + (op_pct(r * (sin(theta) * sin(phi)), e2) + op_pct(r * cos(phi), e3)))
+      #|  (wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == {(y : Cart[Real, Tybit1[Unit]]) | !collinear({v0, v1, y}) && real_of_num(0) < azim(v0, v1, w1, y) && azim(v0, v1, w1, y) < azim(v0, v1, w1, w2)}
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !(v0 == v1) \226\134\146 wedge(v0, v1, w1, w2) == {(y : Cart[Real, Tybit1[Unit]]) | !IN(y, hull(affine, {v0, v1})) && real_of_num(0) < azim(v0, v1, w1, y) && azim(v0, v1, w1, y) < azim(v0, v1, w1, w2)}
+      #|  {(a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]), a + (z : Cart[Real, N])} == IMAGE((x : Cart[Real, N]) => a + x, {x, y, z})
+      #|  (a : Cart[Real, Tybit1[Unit]]) + ((x : Cart[Real, Tybit1[Unit]]) - a) == x
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], wedge(a + v, a + w, a + w1, a + w2) == IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, wedge(v, w, w1, w2))
+      #|  {(f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((v : Cart[Real, Tybit1[Unit]])), f((w : Cart[Real, Tybit1[Unit]])), f((y : Cart[Real, Tybit1[Unit]]))} == IMAGE(f, {v, w, y})
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], (linear : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Bool)(f) && (\226\136\128 x : Cart[Real, Tybit1[Unit]], (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(f(x)) == (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(x)) && (2 <= (dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) \226\134\146 (det : (Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]]) -> Real)((matrix : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]]) -> Cart[Cart[Real, Tybit1[Unit]], Tybit1[Unit]])(f)) == real_of_num(1)) \226\134\146 (\226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], wedge(f(v), f(w), f(w1), f(w2)) == (IMAGE : ((Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], (Cart[Real, Tybit1[Unit]]) -> Bool, Cart[Real, Tybit1[Unit]]) -> Bool)(f, wedge(v, w, w1, w2)))
+      #|  \226\136\128 a : Real, \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) < a && !collinear({vec(0), op_pct(a, v), w1}) && !collinear({vec(0), op_pct(a, v), w2}) \226\134\146 wedge(vec(0), op_pct(a, v), w1, w2) == wedge(vec(0), v, w1, w2)
+      #|  (\226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], z == w \226\134\146 wedge(z, w, w1, w2) == {}) && (\226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], collinear({z, w, w1}) \226\134\146 wedge(z, w, w1, w2) == {}) && (\226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], collinear({z, w, w2}) \226\134\146 wedge(z, w, w1, w2) == {})
+      #|  (a : Real) / (t1 : Real)
+      #|  (a : Real) * (t1 : Real)
+      #|  (a : Real)
+      #|  ((y : Cart[Real, N]) - (a : Cart[Real, N]) - (b : Cart[Real, N]) == vec(0)) == (y == a + b)
+      #|  (b : Real)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _, _) -> Bool)(a, b, c)) == (\226\136\131 b : _, \226\136\131 c : _, \226\136\131 a : _, P(a, b, c))
+      #|  (real_of_num(1) - (v : Real) - (v' : Real) - (v'' : Real) == real_of_num(0)) == (v == real_of_num(1) - v' - v'')
+      #|  (y : Cart[Real, N])
+      #|  (vec(0) == op_pct((a : Real), (x : Cart[Real, _]))) == (op_pct(a, x) == vec(0))
+      #|  IN((x : _), {(a : _)}) == (a == x)
+      #|  UNION({(a : _)}, {(b : _), (c : _)}) == {a, b, c}
+      #|  \226\136\128 v1 : _, \226\136\128 v2 : Cart[Real, N], real_of_num(0) < (t1 : Real) && !(v2 == vec(0)) \226\134\146 aff_gt({vec(0)}, {op_pct(t1, basis(1)), v2}) == {op_pct((a : Real), basis(1)) + op_pct((b : Real), v2) | real_of_num(0) < a && real_of_num(0) < b}
       #|  forall a x:real^3. (?a. x = a % basis 3) <=> dropout 3 x:real^2 = vec 0
-      #|  &0 < z ==> w / z * b * z = b * w
-      #|  pi / &2 - x < pi / &2 - y <=> y < x
-      #|  &0 < Im z
-      #|  Cx a + Cx b * z = complex(a + b * Re z,b * Im z)
-      #|  b:real
-      #|  a:real
-      #|  ~(nu = Cx(&0)) ==> (w = nw / nu * u <=> nu * w = nw * u)
-      #|  norm(w:complex) / norm(u:complex) * (&1 - t)
-      #|  norm(w:complex) / norm(u:complex) * t
-      #|  u = Cx(&0)
-      #|  u = Cx t + Cx(&1 - t) * z
-      #|  t = &1
-      #|  t = &0
-      #|  t:real
+      #|  real_of_num(0) < (z : Real) \226\134\146 (w : Real) / z * ((b : Real) * z) == b * w
+      #|  (pi / real_of_num(2) - (x : Real) < pi / real_of_num(2) - (y : Real)) == (y < x)
+      #|  real_of_num(0) < Im((z : Cart[Real, Tybit0[Unit]]))
+      #|  Cx((a : Real)) + Cx((b : Real)) * (z : Cart[Real, Tybit0[Unit]]) == complex((a + b * Re(z), b * Im(z)))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  !((nu : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((w : Cart[Real, Tybit0[Unit]]) == (nw : Cart[Real, Tybit0[Unit]]) / nu * (u : Cart[Real, Tybit0[Unit]])) == (nu * w == nw * u)
+      #|  norm((w : Cart[Real, Tybit0[Unit]])) / norm((u : Cart[Real, Tybit0[Unit]])) * (real_of_num(1) - (t : Real))
+      #|  norm((w : Cart[Real, Tybit0[Unit]])) / norm((u : Cart[Real, Tybit0[Unit]])) * (t : Real)
+      #|  (u : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (u : Cart[Real, Tybit0[Unit]]) == Cx((t : Real)) + Cx(real_of_num(1) - t) * (z : Cart[Real, Tybit0[Unit]])
+      #|  (t : Real) == real_of_num(1)
+      #|  (t : Real) == real_of_num(0)
+      #|  (t : Real)
       #|  Im
-      #|  t = &1
-      #|  {z | &0 <= Im z}
-      #|  t:real
-      #|  Arg w
-      #|  &1
-      #|  &0
-      #|  \\t. Arg(Cx t + Cx(&1 - t) * z)
-      #|  w:complex
-      #|  z:complex
-      #|  v1 = &0
-      #|  v1:real
-      #|  v1:complex
-      #|  v1:complex
-      #|  (dropout 3:real^3->real^2) w1
-      #|  v2:complex
-      #|  (dropout 3:real^3->real^2) w2
-      #|  &0 < Arg(dropout 3 (w2:real^3) / dropout 3 (w1:real^3))
-      #|  Arg(dropout 3 (w2:real^3) / dropout 3 (w1:real^3)) < pi
-      #|  ~((dropout 3:real^3->real^2) w2 = vec 0)
-      #|  ~((dropout 3:real^3->real^2) w1 = vec 0)
-      #|  {x | P x} = s ==> {y | P(dropout 3 y)} = {y | dropout 3 y IN s}
-      #|  y - a - b:real^2 = vec 0 <=> y = a + b
-      #|  y - a - b - c:real^N = vec 0 <=> y - b - c = a
-      #|  (?a b c. P a b c) <=> (?c b a. P a b c)
-      #|  (?a b c d. P a b c d) <=> (?b c d a. P a b c d)
-      #|  a /\\ b /\\ c /\\ d <=> c /\\ d /\\ a /\\ b
-      #|  &1 = x + v <=> v = &1 - x
-      #|  x IN {a} <=> a = x
-      #|  {a} UNION {b,c} = {a,b,c}
-      #|  {y | (dropout 3:real^3->real^2) y IN\n                   aff_gt {vec 0}\n                   {dropout 3 (w1:real^3),dropout 3 (w2:real^3)}}
-      #|  x IN {a} <=> a = x
-      #|  {a,b} UNION {c,d} = {a,b,d,c}
-      #|  ~(w1:real^3 = vec 0) /\\ ~(w2:real^3 = vec 0) /\\\n    ~(w1 = basis 3) /\\ ~(w2 = basis 3)
-      #|  ~a /\\ b /\\ c <=> ~(~a ==> ~(b /\\ c))
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w = &0
-      #|  w:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2} /\\\n        &0 < azim v0 v1 w1 w2 /\\ azim v0 v1 w1 w2 < pi\n        ==> wedge v0 v1 w1 w2 = aff_gt {v0,v1} {w1,w2}
-      #|  {a} DELETE a = {}
-      #|  ~(w1 = w2) ==> {w1,w2} DELETE w2 = {w1}
-      #|  ~(w1 = w2) ==> {w1,w2} DELETE w1 = {w2}
-      #|  y:real^3
-      #|  (forall x. ~c x ==> (p x \\/ q x \\/ x IN t <=> x IN e))\n    ==> {x | ~c x /\\ p x} UNION {x | ~c x /\\ q x} UNION (t DIFF {x | c x}) =\n        e DIFF {x | c x}
-      #|  {x | x IN s} = s
-      #|  {x:real^3 | collinear {v0,v1,x}}
-      #|  forall c. c SUBSET {x | p x} /\\ c SUBSET s /\\\n        ({x | ~(~c x ==> ~p x)} UNION {x | ~(~c x ==> ~q x)} UNION\n         ({x | ~c x /\\ r x} DIFF c) = s DIFF c)\n        ==> {x | p x \\/ q x \\/ r x} = s
-      #|  &0 < a\n    ==> (&0 <= x /\\ x <= a <=> x = &0 \\/ x = a \\/ &0 < x /\\ x < a)
-      #|  w1:real^3 = w2
-      #|  w2:real^3 = v1
-      #|  w1:real^3 = v1
-      #|  w2:real^3 = v0
-      #|  w1:real^3 = v0
-      #|  v1:real^3 = v0
-      #|  forall v0 v1 w1 w2.\n        ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2} /\\\n        &0 < azim v0 v1 w1 w2 /\\ azim v0 v1 w1 w2 < pi\n        ==> {x | &0 <= azim v0 v1 w1 x /\\\n                 azim v0 v1 w1 x <= azim v0 v1 w1 w2} =\n            aff_ge {v0,v1} {w1,w2}
-      #|  {a,b,c,d} = {a,b,d,c}
-      #|  w1:real^3
-      #|  w2:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1 w1 w2.\n        ~coplanar{v0,v1,w1,w2} /\\ azim v0 v1 w1 w2 < pi\n        ==> wedge v0 v1 w1 w2 = aff_gt {v0,v1} {w1,w2}
-      #|  t = &0
-      #|  ~(x = Cx(&0)) ==> (z / x = t <=> z = t * x)
-      #|  z / x = Cx t
-      #|  Arg x < Arg z
-      #|  t = Re(z / x)
-      #|  &0 <= x /\\ ~(x = &0) /\\ y = k - z ==> k < y + x + z
-      #|  z:complex
-      #|  x:complex
-      #|  Arg z <= Arg x \\/ Arg x < Arg z
-      #|  &0 < pi ==> (~(z = &0) /\\ ~(z = pi) /\\ ~(z < pi) <=> pi < z)
-      #|  Arg x = &0
-      #|  w = &0
-      #|  w:real
-      #|  w:complex
-      #|  ~(z = Cx (&0))
-      #|  ~(w = Cx (&0))
-      #|  ~(x = Cx (&0))
-      #|  ~(Arg (z / w) = &0)
-      #|  ~(Arg (z / w) = pi)
-      #|  ~(Arg (z / w) < pi)
-      #|  x = Cx(&0)
-      #|  x:complex
-      #|  (dropout 3:real^3->real^2) x3
-      #|  x3:real^3
-      #|  z:complex
-      #|  (dropout 3:real^3->real^2) w2
-      #|  w:complex
-      #|  (dropout 3:real^3->real^2) w1
-      #|  {a,b} = {b,a}
-      #|  &0 < Im(dropout 3 (w2:real^3) / dropout 3 (w1:real^3))
-      #|  w1$2 * w2$1 < w1$1 * w2$2 <=>\n    Arg(dropout 3 (w2:real^3) / dropout 3 (w1:real^3)) < pi
-      #|  (v * --x2) * y1 + (v * x1) * y2 > &0 <=> &0 < v * (x1 * y2 - x2 * y1)
-      #|  t * v2:real
-      #|  t / v2:real
-      #|  t:real
-      #|  &0 < v ==> (x = a * v + b <=> a = (x - b) / v)
-      #|  s:real
-      #|  (?a b c. P a b c) <=> (?c b a. P a b c)
-      #|  s + t = &1 <=> s = &1 - t
-      #|  (?a b c d. P a b c d) <=> (?d c b a. P a b c d)
-      #|  ii * x = x <=> x = Cx(&0)
-      #|  DISJOINT {a,b} {x} <=> ~(x = a) /\\ ~(x = b)
-      #|  DISJOINT {a,b,c} {x} <=> ~(x = a) /\\ ~(x = b) /\\ ~(x = c)
-      #|  &0 < t
-      #|  &0 < v
-      #|  t:real
-      #|  s:real
-      #|  ~(v = &0)
-      #|  Im x / v
-      #|  Re x / v
-      #|  t1 + t2 = &1 <=> t1 = &1 - t2
-      #|  (?a b c. P a b c) <=> (?b c a. P a b c)
+      #|  (t : Real) == real_of_num(1)
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | real_of_num(0) <= Im(z)}
+      #|  (t : Real)
+      #|  Arg((w : Cart[Real, Tybit0[Unit]]))
+      #|  real_of_num(1)
+      #|  real_of_num(0)
+      #|  (t : Real) => Arg(Cx(t) + Cx(real_of_num(1) - t) * (z : Cart[Real, Tybit0[Unit]]))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Real) == real_of_num(0)
+      #|  (v1 : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  real_of_num(0) < Arg(dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]])))
+      #|  Arg(dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]]))) < pi
+      #|  !((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]])) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))
+      #|  !((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]])) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))
+      #|  {(x : Cart[Real, _]) | (P : (Cart[Real, _]) -> Bool)(x)} == (s : (Cart[Real, _]) -> Bool) \226\134\146 {(y : Cart[Real, _]) | P(dropout(3, y))} == {(y : Cart[Real, _]) | IN(dropout(3, y), s)}
+      #|  ((y : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]) == vec(0)) == (y == a + b)
+      #|  ((y : Cart[Real, N]) - (a : Cart[Real, N]) - (b : Cart[Real, N]) - (c : Cart[Real, N]) == vec(0)) == (y - b - c == a)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _, _) -> Bool)(a, b, c)) == (\226\136\131 c : _, \226\136\131 b : _, \226\136\131 a : _, P(a, b, c))
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\131 d : _, (P : (_, _, _, _) -> Bool)(a, b, c, d)) == (\226\136\131 b : _, \226\136\131 c : _, \226\136\131 d : _, \226\136\131 a : _, P(a, b, c, d))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == (c && d && a && b)
+      #|  (real_of_num(1) == (x : Real) + (v : Real)) == (v == real_of_num(1) - x)
+      #|  IN((x : _), {(a : _)}) == (a == x)
+      #|  UNION({(a : _)}, {(b : _), (c : _)}) == {a, b, c}
+      #|  {(y : Cart[Real, Tybit1[Unit]]) | (IN : (Cart[Real, Tybit0[Unit]], (Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, y), (aff_gt : ((Cart[Real, Tybit0[Unit]]) -> Bool, (Cart[Real, Tybit0[Unit]]) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)({(vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)}, {(dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]])), (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]]))}))}
+      #|  IN((x : _), {(a : _)}) == (a == x)
+      #|  UNION({(a : _), (b : _)}, {(c : _), (d : _)}) == {a, b, d, c}
+      #|  !((w1 : Cart[Real, Tybit1[Unit]]) == vec(0)) && !((w2 : Cart[Real, Tybit1[Unit]]) == vec(0)) && !(w1 == basis(3)) && !(w2 == basis(3))
+      #|  (!(a : Bool) && (b : Bool) && (c : Bool)) == !(!a \226\134\146 !(b && c))
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) && real_of_num(0) < azim(v0, v1, w1, w2) && azim(v0, v1, w1, w2) < pi \226\134\146 wedge(v0, v1, w1, w2) == aff_gt({v0, v1}, {w1, w2})
+      #|  DELETE({(a : _)}, a) == {}
+      #|  !((w1 : _) == (w2 : _)) \226\134\146 DELETE({w1, w2}, w2) == {w1}
+      #|  !((w1 : _) == (w2 : _)) \226\134\146 DELETE({w1, w2}, w1) == {w2}
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (\226\136\128 x : _, !(c : (_) -> Bool)(x) \226\134\146 ((p : (_) -> Bool)(x) || (q : (_) -> Bool)(x) || IN(x, (t : (_) -> Bool))) == IN(x, (e : (_) -> Bool))) \226\134\146 UNION({(x : _) | !c(x) && p(x)}, UNION({(x : _) | !c(x) && q(x)}, DIFF(t, {(x : _) | c(x)}))) == DIFF(e, {(x : _) | c(x)})
+      #|  {(x : _) | IN(x, (s : (_) -> Bool))} == s
+      #|  {(x : Cart[Real, Tybit1[Unit]]) | collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), x})}
+      #|  \226\136\128 c : (_) -> Bool, SUBSET(c, {(x : _) | (p : (_) -> Bool)(x)}) && SUBSET(c, (s : (_) -> Bool)) && UNION({(x : _) | !(!c(x) \226\134\146 !p(x))}, UNION({(x : _) | !(!c(x) \226\134\146 !(q : (_) -> Bool)(x))}, DIFF({(x : _) | !c(x) && (r : (_) -> Bool)(x)}, c))) == DIFF(s, c) \226\134\146 {(x : _) | p(x) || q(x) || r(x)} == s
+      #|  real_of_num(0) < (a : Real) \226\134\146 (real_of_num(0) <= (x : Real) && x <= a) == (x == real_of_num(0) || x == a || real_of_num(0) < x && x < a)
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) && real_of_num(0) < azim(v0, v1, w1, w2) && azim(v0, v1, w1, w2) < pi \226\134\146 {(x : Cart[Real, Tybit1[Unit]]) | real_of_num(0) <= azim(v0, v1, w1, x) && azim(v0, v1, w1, x) <= azim(v0, v1, w1, w2)} == aff_ge({v0, v1}, {w1, w2})
+      #|  {(a : _), (b : _), (c : _), (d : _)} == {a, b, d, c}
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !coplanar({v0, v1, w1, w2}) && azim(v0, v1, w1, w2) < pi \226\134\146 wedge(v0, v1, w1, w2) == aff_gt({v0, v1}, {w1, w2})
+      #|  (t : Real) == real_of_num(0)
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 ((z : Cart[Real, Tybit0[Unit]]) / x == (t : Cart[Real, Tybit0[Unit]])) == (z == t * x)
+      #|  (z : Cart[Real, Tybit0[Unit]]) / (x : Cart[Real, Tybit0[Unit]]) == Cx((t : Real))
+      #|  Arg((x : Cart[Real, Tybit0[Unit]])) < Arg((z : Cart[Real, Tybit0[Unit]]))
+      #|  (t : Real) == Re((z : Cart[Real, Tybit0[Unit]]) / (x : Cart[Real, Tybit0[Unit]]))
+      #|  real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) && (y : Real) == (k : Real) - (z : Real) \226\134\146 k < y + (x + z)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  Arg((z : Cart[Real, Tybit0[Unit]])) <= Arg((x : Cart[Real, Tybit0[Unit]])) || Arg(x) < Arg(z)
+      #|  real_of_num(0) < pi \226\134\146 (!((z : Real) == real_of_num(0)) && !(z == pi) && !(z < pi)) == (pi < z)
+      #|  Arg((x : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  !(Arg((z : Cart[Real, Tybit0[Unit]]) / (w : Cart[Real, Tybit0[Unit]])) == real_of_num(0))
+      #|  !(Arg((z : Cart[Real, Tybit0[Unit]]) / (w : Cart[Real, Tybit0[Unit]])) == pi)
+      #|  !(Arg((z : Cart[Real, Tybit0[Unit]]) / (w : Cart[Real, Tybit0[Unit]])) < pi)
+      #|  (x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (x3 : Cart[Real, Tybit1[Unit]]))
+      #|  (x3 : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  {(a : _), (b : _)} == {b, a}
+      #|  real_of_num(0) < Im(dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]])))
+      #|  (op_dollar((w1 : Cart[Real, Tybit1[Unit]]), 2) * op_dollar((w2 : Cart[Real, Tybit1[Unit]]), 1) < op_dollar(w1, 1) * op_dollar(w2, 2)) == (Arg(dropout(3, w2) / dropout(3, w1)) < pi)
+      #|  ((v : Real) * -(x2 : Real) * (y1 : Real) + v * (x1 : Real) * (y2 : Real) > real_of_num(0)) == (real_of_num(0) < v * (x1 * y2 - x2 * y1))
+      #|  (t : Real) * (v2 : Real)
+      #|  (t : Real) / (v2 : Real)
+      #|  (t : Real)
+      #|  real_of_num(0) < (v : Real) \226\134\146 ((x : Real) == (a : Real) * v + (b : Real)) == (a == (x - b) / v)
+      #|  (s : Real)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _, _) -> Bool)(a, b, c)) == (\226\136\131 c : _, \226\136\131 b : _, \226\136\131 a : _, P(a, b, c))
+      #|  ((s : Real) + (t : Real) == real_of_num(1)) == (s == real_of_num(1) - t)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, \226\136\131 d : _, (P : (_, _, _, _) -> Bool)(a, b, c, d)) == (\226\136\131 d : _, \226\136\131 c : _, \226\136\131 b : _, \226\136\131 a : _, P(a, b, c, d))
+      #|  (ii * (x : Cart[Real, Tybit0[Unit]]) == x) == (x == Cx(real_of_num(0)))
+      #|  DISJOINT({(a : _), (b : _)}, {(x : _)}) == (!(x == a) && !(x == b))
+      #|  DISJOINT({(a : _), (b : _), (c : _)}, {(x : _)}) == (!(x == a) && !(x == b) && !(x == c))
+      #|  real_of_num(0) < (t : Real)
+      #|  real_of_num(0) < (v : Real)
+      #|  (t : Real)
+      #|  (s : Real)
+      #|  !((v : Real) == real_of_num(0))
+      #|  Im((x : Cart[Real, Tybit0[Unit]])) / (v : Real)
+      #|  Re((x : Cart[Real, Tybit0[Unit]])) / (v : Real)
+      #|  ((t1 : Real) + (t2 : Real) == real_of_num(1)) == (t1 == real_of_num(1) - t2)
+      #|  (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _, _) -> Bool)(a, b, c)) == (\226\136\131 b : _, \226\136\131 c : _, \226\136\131 a : _, P(a, b, c))
       #|  Re
-      #|  v = &0
-      #|  v:real
-      #|  v1:complex
-      #|  v1:real^2
-      #|  (dropout 3:real^3->real^2) w1
-      #|  v2:real^2
-      #|  (dropout 3:real^3->real^2) w2
-      #|  x:real^2
-      #|  (dropout 3:real^3->real^2) y
-      #|  (dropout 3 (y:real^3)) IN\n      aff_gt {vec 0:real^2,dropout 3 (w1:real^3)}\n              {rotate2d (pi / &2) (dropout 3 (w1:real^3))}
-      #|  y:real^3
-      #|  w2:real^3 = v2 % basis 3
-      #|  w1:real^3 = v2 % basis 3
-      #|  w2:real^3 = basis 3
-      #|  w1:real^3 = basis 3
-      #|  w2:real^3 = vec 0
-      #|  w1:real^3 = vec 0
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  v2:real
-      #|  v2:real^3
-      #|  v1:real^3
-      #|  v1:real^3
-      #|  azim v1 v2 w1 w2 = pi
-      #|  azim v1 v2 w1 w2 = &0
-      #|  wedge v1 v2 w1 w2 =\n        if collinear{v1,v2,w1} \\/ collinear{v1,v2,w2} then {}\n        else\n          let z = v2 - v1 in\n          let u1 = w1 - v1 in\n          let u2 = w2 - v1 in\n          let n = z cross u1 in\n          let d =  n dot u2 in\n          if w2 IN (aff_ge {v1,v2} {w1}) then {}\n          else if w2 IN (aff_lt {v1,v2} {w1}) then aff_gt {v1,v2,w1} {v1 + n}\n          else if d > &0 then aff_gt {v1,v2} {w1,w2}\n          else (:real^3) DIFF aff_ge {v1,v2} {w1,w2}
-      #|  {x | ~(x = a) /\\ P x} = {x | P x} DIFF {a}
-      #|  v1 = &0
-      #|  v1:real
-      #|  v1:complex
-      #|  v1:complex
-      #|  (dropout 3:real^3->real^2) w1
-      #|  v2:complex
-      #|  (dropout 3:real^3->real^2) w2
-      #|  ~((dropout 3:real^3->real^2) w2 = vec 0)
-      #|  ~((dropout 3:real^3->real^2) w1 = vec 0)
-      #|  ~a /\\ b /\\ c <=> ~(~a ==> ~(b /\\ c))
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  z:real^3
-      #|  z:real^3 = w \\/  collinear{z,w,w1} \\/ collinear{z,w,w2}
-      #|  forall z:real^3 w w1 w2. open(wedge z w w1 w2)
-      #|  u:real
-      #|  &1 - u
-      #|  u:real
-      #|  x:complex = vec 0
-      #|  x:complex
-      #|  z:complex
-      #|  ~(s SUBSET {a}) ==> ?z. ~(a = z) /\\ z IN s
-      #|  basis 1:real^2
-      #|  {z | Arg z = a} SUBSET {vec 0}
-      #|  forall a. ?b. ~(b = vec 0) /\\ {z | Arg z = a} SUBSET aff_ge {vec 0} {b}
-      #|  a:real
-      #|  w = &0
-      #|  w:real
-      #|  w:complex
-      #|  forall w a. ~(w = vec 0)\n         ==> ?b. ~(b = vec 0) /\\\n                 {z | Arg(z / w) = a} SUBSET aff_ge {vec 0} {b}
-      #|  (x:real^3)$3
-      #|  v:real
-      #|  &1 - v - (x:real^3)$3
-      #|  v:real
-      #|  basis 3:real^3
-      #|  pushin 3 (&0) (b:real^2):real^3
-      #|  vec 0:real^3
-      #|  a:real
-      #|  b:real^2
-      #|  v1 = &0
-      #|  v1:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  collinear{v0:real^3,v1,w1}
-      #|  forall v0 v1 w1 a.\n     (collinear{v0,v1,w1} ==> ~(a = &0))\n     ==> coplanar {z | azim v0 v1 w1 z = a}
-      #|  (dropout 3:real^3->real^2) x
-      #|  x:real^3
-      #|  delta_x x1 x2 x3 x4 x5 x6 =\n        x1*x4*(--x1 + x2 + x3 -x4 + x5 + x6) +\n        x2*x5*(x1 - x2 + x3 + x4 -x5 + x6) +\n        x3*x6*(x1 + x2 - x3 + x4 + x5 - x6)\n        -x2*x3*x4 - x1*x3*x5 - x1*x2*x6 -x4*x5*x6:real
-      #|  x / &6 = y / &12 <=> y = &2 * x
-      #|  forall x1 x2 x3 x4:real^3.\n     measure(convex hull {x1,x2,x3,x4}) =\n     sqrt(delta_x (dist(x1,x2) pow 2) (dist(x1,x3) pow 2) (dist(x1,x4) pow 2)\n                  (dist(x3,x4) pow 2) (dist(x2,x4) pow 2) (dist(x2,x3) pow 2))\n      / &12
-      #|  forall v1 v2 v3 v4:real^3.\n        measure(conv0 {v1,v2,v3,v4}) =\n            let x12 = dist(v1,v2) pow 2 in\n            let x13 = dist(v1,v3) pow 2 in\n            let x14 = dist(v1,v4) pow 2 in\n            let x23 = dist(v2,v3) pow 2 in\n            let x24 = dist(v2,v4) pow 2 in\n            let x34 = dist(v3,v4) pow 2 in\n            sqrt(delta_x x12 x13 x14 x34 x24 x23)/(&12)
-      #|  s pow 2 = &1 - x pow 2 /\\ x pow 2 < &1\n      ==> (inv s + x * --(&2 * x) * inv (&2) * inv s + s) = &2 * s
-      #|  x / &2 - --(x / &2) = x
-      #|  &1
-      #|  -- &1
-      #|  \\x. &2 * sqrt(&1 - x pow 2)
-      #|  \\x.  asn(x) + x * sqrt(&1 - x pow 2)
-      #|  &0 <= x ==> --x <= x
-      #|  t:real
-      #|  \\t. &2 * sqrt(&1 - t pow 2)
-      #|  forall t. abs(t) <= &1 <=> t IN real_interval[-- &1,&1]
+      #|  (v : Real) == real_of_num(0)
+      #|  (v : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (y : Cart[Real, Tybit1[Unit]]))
+      #|  IN(dropout(3, (y : Cart[Real, Tybit1[Unit]])), aff_gt({vec(0), dropout(3, (w1 : Cart[Real, Tybit1[Unit]]))}, {rotate2d(pi / real_of_num(2), dropout(3, w1))}))
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == op_pct((v2 : Real), basis(3))
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == op_pct((v2 : Real), basis(3))
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  (v2 : Real)
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  azim((v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == pi
+      #|  azim((v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == real_of_num(0)
+      #|  wedge((v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == (if collinear({v1, v2, w1}) || collinear({v1, v2, w2}) { {} } else { LET((z : Cart[Real, Tybit1[Unit]]) => LET_END(LET((u1 : Cart[Real, Tybit1[Unit]]) => LET_END(LET((u2 : Cart[Real, Tybit1[Unit]]) => LET_END(LET((n : Cart[Real, Tybit1[Unit]]) => LET_END(LET((d : Real) => LET_END(if IN(w2, aff_ge({v1, v2}, {w1})) { {} } else { if IN(w2, aff_lt({v1, v2}, {w1})) { aff_gt({v1, v2, w1}, {v1 + n}) } else { if d > real_of_num(0) { aff_gt({v1, v2}, {w1, w2}) } else { DIFF(UNIV, aff_ge({v1, v2}, {w1, w2})) } } }), dot(n, u2))), cross(z, u1))), w2 - v1)), w1 - v1)), v2 - v1) })
+      #|  {(x : _) | !(x == (a : _)) && (P : (_) -> Bool)(x)} == DIFF({(x : _) | P(x)}, {a})
+      #|  (v1 : Real) == real_of_num(0)
+      #|  (v1 : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  !((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w2 : Cart[Real, Tybit1[Unit]])) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))
+      #|  !((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (w1 : Cart[Real, Tybit1[Unit]])) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))
+      #|  (!(a : Bool) && (b : Bool) && (c : Bool)) == !(!a \226\134\146 !(b && c))
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]]) == (w : Cart[Real, Tybit1[Unit]]) || collinear({z, w, (w1 : Cart[Real, Tybit1[Unit]])}) || collinear({z, w, (w2 : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], open(wedge(z, w, w1, w2))
+      #|  (u : Real)
+      #|  real_of_num(1) - (u : Real)
+      #|  (u : Real)
+      #|  (x : Cart[Real, Tybit0[Unit]]) == vec(0)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  !SUBSET((s : (_) -> Bool), {(a : _)}) \226\134\146 (\226\136\131 z : _, !(a == z) && IN(z, s))
+      #|  (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1)
+      #|  SUBSET({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (a : Real)}, {vec(0)})
+      #|  \226\136\128 a : Real, \226\136\131 b : Cart[Real, Tybit0[Unit]], !(b == vec(0)) && SUBSET({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == a}, aff_ge({vec(0)}, {b}))
+      #|  (a : Real)
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, !(w == vec(0)) \226\134\146 (\226\136\131 b : Cart[Real, Tybit0[Unit]], !(b == vec(0)) && SUBSET({(z : Cart[Real, Tybit0[Unit]]) | Arg(z / w) == a}, aff_ge({vec(0)}, {b})))
+      #|  op_dollar((x : Cart[Real, Tybit1[Unit]]), 3)
+      #|  (v : Real)
+      #|  real_of_num(1) - (v : Real) - op_dollar((x : Cart[Real, Tybit1[Unit]]), 3)
+      #|  (v : Real)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (pushin : (Num, Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit1[Unit]])(3, real_of_num(0), (b : Cart[Real, Tybit0[Unit]]))
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (a : Real)
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (v1 : Real) == real_of_num(0)
+      #|  (v1 : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 a : Real, (collinear({v0, v1, w1}) \226\134\146 !(a == real_of_num(0))) \226\134\146 coplanar({(z : Cart[Real, Tybit1[Unit]]) | azim(v0, v1, w1, z) == a})
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (x : Cart[Real, Tybit1[Unit]]))
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (delta_x : (Real, Real, Real, Real, Real, Real) -> Real)((x1 : Real), (x2 : Real), (x3 : Real), (x4 : Real), (x5 : Real), (x6 : Real)) == x1 * (x4 * (-x1 + (x2 + (x3 - x4 + (x5 + x6))))) + (x2 * (x5 * (x1 - x2 + (x3 + (x4 - x5 + x6)))) + (x3 * (x6 * (x1 + (x2 - x3 + (x4 + (x5 - x6))))) - x2 * (x3 * x4) - x1 * (x3 * x5) - x1 * (x2 * x6) - x4 * (x5 * x6)))
+      #|  ((x : Real) / real_of_num(6) == (y : Real) / real_of_num(12)) == (y == real_of_num(2) * x)
+      #|  \226\136\128 x1 : Cart[Real, Tybit1[Unit]], \226\136\128 x2 : Cart[Real, Tybit1[Unit]], \226\136\128 x3 : Cart[Real, Tybit1[Unit]], \226\136\128 x4 : Cart[Real, Tybit1[Unit]], measure(hull(convex, {x1, x2, x3, x4})) == sqrt(delta_x(pow(dist((x1, x2)), 2), pow(dist((x1, x3)), 2), pow(dist((x1, x4)), 2), pow(dist((x3, x4)), 2), pow(dist((x2, x4)), 2), pow(dist((x2, x3)), 2))) / real_of_num(12)
+      #|  \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 v4 : Cart[Real, Tybit1[Unit]], measure(conv0({v1, v2, v3, v4})) == LET((x12 : Real) => LET_END(LET((x13 : Real) => LET_END(LET((x14 : Real) => LET_END(LET((x23 : Real) => LET_END(LET((x24 : Real) => LET_END(LET((x34 : Real) => LET_END(sqrt(delta_x(x12, x13, x14, x34, x24, x23)) / real_of_num(12)), pow(dist((v3, v4)), 2))), pow(dist((v2, v4)), 2))), pow(dist((v2, v3)), 2))), pow(dist((v1, v4)), 2))), pow(dist((v1, v3)), 2))), pow(dist((v1, v2)), 2))
+      #|  pow((s : Real), 2) == real_of_num(1) - pow((x : Real), 2) && pow(x, 2) < real_of_num(1) \226\134\146 inv(s) + (x * (-(real_of_num(2) * x) * (inv(real_of_num(2)) * inv(s))) + s) == real_of_num(2) * s
+      #|  (x : Real) / real_of_num(2) - -(x / real_of_num(2)) == x
+      #|  real_of_num(1)
+      #|  -real_of_num(1)
+      #|  (x : Real) => real_of_num(2) * sqrt(real_of_num(1) - pow(x, 2))
+      #|  (x : Real) => asn(x) + x * sqrt(real_of_num(1) - pow(x, 2))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 -x <= x
+      #|  (t : Real)
+      #|  (t : Real) => real_of_num(2) * sqrt(real_of_num(1) - pow(t, 2))
+      #|  \226\136\128 t : Real, (abs(t) <= real_of_num(1)) == IN(t, real_interval([(-real_of_num(1), real_of_num(1))]))
       #|  1
       #|  :N
       #|  :2
       #|  :M
       #|  :1
-      #|  measure(cball(vec 0:real^2,&1)) = pi
-      #|  inv(r) % (w - z):real^2
-      #|  w:real^2
-      #|  abs r * x <= r <=> abs r * x <= r * &1
-      #|  dist(z,a + z) = norm a
+      #|  (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)((cball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), real_of_num(1)))) == pi
+      #|  op_pct(inv((r : Real)), (w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (abs((r : Real)) * (x : Real) <= r) == (abs(r) * x <= r * real_of_num(1))
+      #|  dist(((z : Cart[Real, _]), (a : Cart[Real, _]) + z)) == norm(a)
       #|  :real
       #|  :real
       #|  pi
-      #|  z:real^2
-      #|  r:real
-      #|  cball(vec 0:real^2,&1)
-      #|  &0 < r
-      #|  r = &0
-      #|  forall z:real^2 r. &0 <= r ==> measure(cball(z,r)) = pi * r pow 2
-      #|  forall z:real^2 r. &0 <= r ==> measure(ball(z,r)) = pi * r pow 2
-      #|  r:real
-      #|  --r:real
-      #|  \\t. pi * (r pow 2 - t pow 2)
-      #|  \\t. pi * (r pow 2 * t - &1 / &3 * t pow 3)
-      #|  abs x <= r ==> abs x <= abs r
-      #|  t:real
-      #|  \\t. pi * (r pow 2 - t pow 2)
-      #|  forall t. abs(t) <= r <=> t IN real_interval[--r,r]
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (r : Real)
+      #|  (cball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), real_of_num(1)))
+      #|  real_of_num(0) < (r : Real)
+      #|  (r : Real) == real_of_num(0)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(cball((z, r))) == pi * pow(r, 2)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(ball((z, r))) == pi * pow(r, 2)
+      #|  (r : Real)
+      #|  -(r : Real)
+      #|  (t : Real) => pi * (pow((r : Real), 2) - pow(t, 2))
+      #|  (t : Real) => pi * (pow((r : Real), 2) * t - real_of_num(1) / real_of_num(3) * pow(t, 3))
+      #|  abs((x : Real)) <= (r : Real) \226\134\146 abs(x) <= abs(r)
+      #|  (t : Real)
+      #|  (t : Real) => pi * (pow((r : Real), 2) - pow(t, 2))
+      #|  \226\136\128 t : Real, (abs(t) <= (r : Real)) == IN(t, real_interval([(-r, r)]))
       #|  1
       #|  :N
       #|  :3
       #|  :M
       #|  :2
-      #|  z:real^3
-      #|  forall z:real^3 r. &0 <= r ==> measure(cball(z,r)) = &4 / &3 * pi * r pow 3
-      #|  forall z:real^3 r. &0 <= r ==> measure(ball(z,r)) =  &4 / &3 * pi * r pow 3
-      #|  rconesgn sgn v w h =\n       {x:real^A | sgn ((x-v) dot (w-v)) (dist(x,v)*dist(w,v)*h)}
-      #|  rcone_gt = rconesgn ( > )
-      #|  rcone_ge = rconesgn ( >= )
-      #|  rcone_eq = rconesgn ( = )
-      #|  frustum v0 v1 h1 h2 a =\n     { y:real^N | rcone_gt v0 v1 a y /\\\n                  let d = (y - v0) dot (v1 - v0) in\n                  let n = norm(v1 - v0) in\n                  (h1*n < d /\\ d < h2*n)}
-      #|  frustt v0 v1 h a = frustum v0 v1 (&0) h a
-      #|  forall v0 h1 h2 a. frustum v0 v0 h1 h2 a = {}
-      #|  norm(x:real^N) = a /\\ norm(y) = b ==> norm(x + y) <= a + b
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(cball((z, r))) == real_of_num(4) / real_of_num(3) * (pi * pow(r, 3))
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(ball((z, r))) == real_of_num(4) / real_of_num(3) * (pi * pow(r, 3))
+      #|  (rconesgn : ((Real, Real) -> Bool, Cart[Real, A], Cart[Real, A], Real, Cart[Real, A]) -> Bool)((sgn : (Real, Real) -> Bool), (v : Cart[Real, A]), (w : Cart[Real, A]), (h : Real)) == {(x : Cart[Real, A]) | sgn(dot(x - v, w - v), dist((x, v)) * (dist((w, v)) * h))}
+      #|  (rcone_gt : (Cart[Real, _], Cart[Real, _], Real, Cart[Real, _]) -> Bool) == rconesgn(op_gt)
+      #|  (rcone_ge : (Cart[Real, _], Cart[Real, _], Real, Cart[Real, _]) -> Bool) == rconesgn(op_gt_eq)
+      #|  (rcone_eq : (Cart[Real, _], Cart[Real, _], Real, Cart[Real, _]) -> Bool) == rconesgn(op_eq)
+      #|  (frustum : (Cart[Real, N], Cart[Real, N], Real, Real, Real, Cart[Real, N]) -> Bool)((v0 : Cart[Real, N]), (v1 : Cart[Real, N]), (h1 : Real), (h2 : Real), (a : Real)) == {(y : Cart[Real, N]) | rcone_gt(v0, v1, a, y) && LET((d : Real) => LET_END(LET((n : Real) => LET_END(h1 * n < d && d < h2 * n), norm(v1 - v0))), dot(y - v0, v1 - v0))}
+      #|  (frustt : (Cart[Real, _], Cart[Real, _], Real, Real, Cart[Real, _]) -> Bool)((v0 : Cart[Real, _]), (v1 : Cart[Real, _]), (h : Real), (a : Real)) == frustum(v0, v1, real_of_num(0), h, a)
+      #|  \226\136\128 v0 : Cart[Real, _], \226\136\128 h1 : Real, \226\136\128 h2 : Real, \226\136\128 a : Real, frustum(v0, v0, h1, h2, a) == {}
+      #|  norm((x : Cart[Real, N])) == (a : Real) && norm((y : Cart[Real, N])) == (b : Real) \226\134\146 norm(x + y) <= a + b
       #|  :real
       #|  :real
-      #|  (&1 - t) * norm(x:real^N) * norm v1 * a +\n              t * norm(y:real^N) * norm(v1:real^N) * a
-      #|  t:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  v0:real^N
-      #|  forall v0 v1:real^N a. &0 <= a ==> convex(rcone_gt v0 v1 a)
-      #|  {x:real^1 | x$1 > &0}
-      #|  \\x:real^N. lift(x dot v1 - norm x * norm v1 * a)
-      #|  v0:real^N
-      #|  forall v0 v1:real^N a. open(rcone_gt v0 v1 a)
-      #|  &2 % v - x - v:real^N = --(x - v)
-      #|  dist(&2 % x - y,x) = dist(y,x)
+      #|  (real_of_num(1) - (t : Real)) * (norm((x : Cart[Real, N])) * (norm((v1 : Cart[Real, N])) * (a : Real))) + t * (norm((y : Cart[Real, N])) * (norm(v1) * a))
+      #|  (t : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (v0 : Cart[Real, N])
+      #|  \226\136\128 v0 : Cart[Real, N], \226\136\128 v1 : Cart[Real, N], \226\136\128 a : Real, real_of_num(0) <= a \226\134\146 convex(rcone_gt(v0, v1, a))
+      #|  {(x : Cart[Real, Unit]) | op_dollar(x, 1) > real_of_num(0)}
+      #|  (x : Cart[Real, N]) => lift(dot(x, (v1 : Cart[Real, N])) - norm(x) * (norm(v1) * (a : Real)))
+      #|  (v0 : Cart[Real, N])
+      #|  \226\136\128 v0 : Cart[Real, N], \226\136\128 v1 : Cart[Real, N], \226\136\128 a : Real, open(rcone_gt(v0, v1, a))
+      #|  op_pct(real_of_num(2), (v : Cart[Real, N])) - (x : Cart[Real, N]) - v == -(x - v)
+      #|  dist((op_pct(real_of_num(2), (x : Cart[Real, _])) - (y : Cart[Real, _]), x)) == dist((y, x))
       #|  :real
       #|  :real
-      #|  a - (a - b):real^N = b
-      #|  forall v0 v1:real^N a.\n        rcone_gt v0 v1 (--a) =\n         IMAGE (\\x. &2 % v0 - x) ((:real^N) DIFF rcone_ge v0 v1 a)
-      #|  &0 < a
-      #|  h:real
-      #|  &0
-      #|  \\t. pi * (inv (a pow 2) - &1) * t pow 2
-      #|  \\t. pi / &3 * (inv (a pow 2) - &1) * t pow 3
-      #|  measure(ball(vec 0:real^2,sqrt(inv(a pow 2) - &1) * t))
-      #|  t:real
-      #|  \\t. if &0 < t /\\ t < h then pi * (inv(a pow 2) - &1) * t pow 2\n                  else &0
-      #|  &0 < inv(a pow 2) - &1
+      #|  (a : Cart[Real, N]) - (a - (b : Cart[Real, N])) == b
+      #|  \226\136\128 v0 : Cart[Real, N], \226\136\128 v1 : Cart[Real, N], \226\136\128 a : Real, rcone_gt(v0, v1, -a) == IMAGE((x : Cart[Real, N]) => op_pct(real_of_num(2), v0) - x, DIFF(UNIV, rcone_ge(v0, v1, a)))
+      #|  real_of_num(0) < (a : Real)
+      #|  (h : Real)
+      #|  real_of_num(0)
+      #|  (t : Real) => pi * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 2))
+      #|  (t : Real) => pi / real_of_num(3) * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 3))
+      #|  (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)((ball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), sqrt(inv(pow((a : Real), 2)) - real_of_num(1)) * (t : Real))))
+      #|  (t : Real)
+      #|  (t : Real) => if real_of_num(0) < t && t < (h : Real) { pi * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 2)) } else { real_of_num(0) }
+      #|  real_of_num(0) < inv(pow((a : Real), 2)) - real_of_num(1)
       #|  1
       #|  :M
       #|  :2
-      #|  a:real
-      #|  basis 1:real^3
-      #|  vec 0:real^3
-      #|  &0 < y <=> y > &0
-      #|  {x | P x /\\ Q x /\\ R x} =\n                          {x | Q x} INTER {x | P x /\\ R x}
-      #|  x:real^3
-      #|  ball(vec 0:real^3,h / a)
-      #|  a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  (&0 * x < y /\\ u < v) /\\ &0 < y /\\ y < h <=>\n                          &0 < y /\\ y < h /\\ u < v
-      #|  n * x * a:real = x * n * a
-      #|  b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
-      #|  abs(x) <= a ==> x <= a
-      #|  y:real^3
-      #|  forall y:real^3. ~(norm(y) * norm(b % basis 1:real^3) * a\n                   < y dot (b % basis 1))
-      #|  &1 <= a
-      #|  &0 <= x ==> x = &0 \\/ &0 < x
-      #|  b:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1:real^3 h a.\n       &0 < a\n       ==> bounded(frustt v0 v1 h a) /\\\n           convex(frustt v0 v1 h a) /\\\n           measurable(frustt v0 v1 h a) /\\\n           measure(frustt v0 v1 h a) =\n           if v1 = v0 \\/ &1 <= a \\/ h < &0 then &0\n           else pi * ((h / a) pow 2 - h pow 2) * h / &3
-      #|  forall v0 v1:real^3 h a.\n       &0 < a\n       ==> measurable(frustt v0 v1 h a) /\\\n           measure(frustt v0 v1 h a) =\n           if v1 = v0 \\/ &1 <= a \\/ h < &0 then &0\n           else pi * ((h / a) pow 2 - h pow 2) * h / &3
-      #|  scale (t:real^3) (u:real^3):real^3 =\n       vector[t$1 * u$1; t$2 * u$2; t$3 * u$3]
-      #|  normball x r = { y:real^A | dist(y,x) < r}
-      #|  ellipsoid t r = IMAGE (scale t) (normball(vec 0) r)
-      #|  forall z r. normball z r = ball(z,r)
-      #|  (\\x:real^3. (lambda k. t$k * x$k):real^3) = scale t
-      #|  \\i. (t:real^3)$i
-      #|  forall s. measurable s\n       ==> measurable(IMAGE (scale t) s) /\\\n           measure(IMAGE (scale t) s) = abs(t$1 * t$2 * t$3) * measure s
-      #|  vec 0:real^3
-      #|  forall t r. &0 <= r\n         ==> measurable(ellipsoid t r) /\\\n             measure(ellipsoid t r) =\n                abs(t$1 * t$2 * t$3) * &4 / &3 * pi * r pow 3
-      #|  ~(&0 <= r) ==> ~(norm(x:real^3) < r)
+      #|  (a : Real)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (real_of_num(0) < (y : Real)) == (y > real_of_num(0))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)} == INTER({(x : _) | Q(x)}, {(x : _) | P(x) && R(x)})
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (ball : ((Cart[Real, Tybit1[Unit]], Real), Cart[Real, Tybit1[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (h : Real) / (a : Real)))
+      #|  (a : Bool) && (b : Bool) && (a && b \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  ((real_of_num(0) * (x : Real) < (y : Real) && (u : Real) < (v : Real)) && real_of_num(0) < y && y < (h : Real)) == (real_of_num(0) < y && y < h && u < v)
+      #|  (n : Real) * ((x : Real) * (a : Real)) == x * (n * a)
+      #|  ((b : Real) * (y : Real) <= (n : Real) * (b * real_of_num(1) * (a : Real))) == (b * (real_of_num(1) * y) <= b * (a * n))
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit1[Unit]], !((norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) * ((norm : (Cart[Real, Tybit1[Unit]]) -> Real)((op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((b : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1))) * (a : Real)) < (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)(y, (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(b, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1))))
+      #|  real_of_num(1) <= (a : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == real_of_num(0) || real_of_num(0) < x
+      #|  (b : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 bounded(frustt(v0, v1, h, a)) && convex(frustt(v0, v1, h, a)) && measurable(frustt(v0, v1, h, a)) && measure(frustt(v0, v1, h, a)) == (if v1 == v0 || real_of_num(1) <= a || h < real_of_num(0) { real_of_num(0) } else { pi * ((pow(h / a, 2) - pow(h, 2)) * (h / real_of_num(3))) })
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 measurable(frustt(v0, v1, h, a)) && measure(frustt(v0, v1, h, a)) == (if v1 == v0 || real_of_num(1) <= a || h < real_of_num(0) { real_of_num(0) } else { pi * ((pow(h / a, 2) - pow(h, 2)) * (h / real_of_num(3))) })
+      #|  (scale : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((t : Cart[Real, Tybit1[Unit]]), (u : Cart[Real, Tybit1[Unit]])) == vector([op_dollar(t, 1) * op_dollar(u, 1), op_dollar(t, 2) * op_dollar(u, 2), op_dollar(t, 3) * op_dollar(u, 3)])
+      #|  (normball : (Cart[Real, A], Real, Cart[Real, A]) -> Bool)((x : Cart[Real, A]), (r : Real)) == {(y : Cart[Real, A]) | dist((y, x)) < r}
+      #|  (ellipsoid : (Cart[Real, Tybit1[Unit]], Real, Cart[Real, Tybit1[Unit]]) -> Bool)((t : Cart[Real, Tybit1[Unit]]), (r : Real)) == IMAGE(scale(t), normball(vec(0), r))
+      #|  \226\136\128 z : Cart[Real, _], \226\136\128 r : Real, normball(z, r) == ball((z, r))
+      #|  ((x : Cart[Real, Tybit1[Unit]]) => lambda((k : Num) => op_dollar((t : Cart[Real, Tybit1[Unit]]), k) * op_dollar(x, k))) == scale(t)
+      #|  (i : Num) => op_dollar((t : Cart[Real, Tybit1[Unit]]), i)
+      #|  \226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) \226\134\146 measurable(IMAGE(scale((t : Cart[Real, Tybit1[Unit]])), s)) && measure(IMAGE(scale(t), s)) == abs(op_dollar(t, 1) * (op_dollar(t, 2) * op_dollar(t, 3))) * measure(s)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  \226\136\128 t : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measurable(ellipsoid(t, r)) && measure(ellipsoid(t, r)) == abs(op_dollar(t, 1) * (op_dollar(t, 2) * op_dollar(t, 3))) * (real_of_num(4) / real_of_num(3) * (pi * pow(r, 3)))
+      #|  !(real_of_num(0) <= (r : Real)) \226\134\146 !(norm((x : Cart[Real, Tybit1[Unit]])) < r)
       #|  :real
-      #|  &0 <= r
-      #|  forall t r. measurable(ellipsoid t r)
-      #|  conic_cap v0 v1 r a = normball v0 r INTER rcone_gt v0 v1 a
-      #|  forall v0 r a. conic_cap v0 v0 r a = {}
-      #|  ball(v0:real^3,r)
-      #|  forall v0 v1:real^3 r a. bounded(conic_cap v0 v1 r a)
-      #|  ball(v0:real^3,r)
-      #|  forall v0 v1:real^3 r a. measurable(conic_cap v0 v1 r a)
-      #|  &0 < a
-      #|  a * r <= r <=> &0 <= r * (&1 - a)
-      #|  r:real
-      #|  a * r:real
-      #|  \\t. pi * (r pow 2 - t pow 2)
-      #|  \\t. pi * (r pow 2 * t - t pow 3 / &3)
-      #|  a * r:real
-      #|  &0 <= t
-      #|  t:real
-      #|  \\t. pi * (r pow 2 - t pow 2)
-      #|  a <= b ==> (x < a <=> x < a /\\ x < b)
-      #|  x < r - t <=> t + x < r
-      #|  x:real^2
-      #|  a * r:real
-      #|  &0 <= t
-      #|  t:real
-      #|  \\t. measure(ball(vec 0:real^2,sqrt(r pow 2 - t pow 2)))
-      #|  &0 < a
-      #|  a * r:real
-      #|  &0
-      #|  \\t. pi * (inv (a pow 2) - &1) * t pow 2
-      #|  \\t. pi / &3 * (inv (a pow 2) - &1) * t pow 3
-      #|  t:real
-      #|  \\t. pi * (inv(a pow 2) - &1) * t pow 2
-      #|  b <= a ==> (x < b <=> x < a /\\ x < b)
-      #|  x:real^2
-      #|  x < (a - &1) * t <=> t + x < t * a
-      #|  t:real
-      #|  \\t. measure(ball(vec 0:real^2,sqrt(inv(a pow 2) - &1) * t))
-      #|  a * r <= r <=> &0 <= r * (&1 - a)
-      #|  a * r:real
-      #|  pi * &2 / &3 * (&1 - a) * r pow 3 =\n    pi / &3 * (inv (a pow 2) - &1) * (a * r) pow 3 +\n    (pi * &2 / &3 * (&1 - a) * r pow 3 -\n     pi / &3 * (inv (a pow 2) - &1) * (a * r) pow 3)
-      #|  &0 <= a /\\ &0 <= b /\\ c <= d\n                             ==> ~(&0 < r /\\ d + a + b < c)
-      #|  forall y. ~(norm(vector[t; (y:real^2)$1; y$2]:real^3) < r)
-      #|  &0 < r
-      #|  t:real < r
-      #|  &0 < t
-      #|  t:real
-      #|  \\t. if &0 < t /\\ t < r\n                  then measure\n                    {y:real^2 | norm(vector[t; y$1; y$2]:real^3) pow 2\n                                 < r pow 2 /\\\n                                (t * t + y dot y) * a pow 2 < t pow 2}\n                  else &0
-      #|  &0 < inv(a pow 2) - &1
+      #|  real_of_num(0) <= (r : Real)
+      #|  \226\136\128 t : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, measurable(ellipsoid(t, r))
+      #|  (conic_cap : (Cart[Real, _], Cart[Real, _], Real, Real, Cart[Real, _]) -> Bool)((v0 : Cart[Real, _]), (v1 : Cart[Real, _]), (r : Real), (a : Real)) == INTER(normball(v0, r), rcone_gt(v0, v1, a))
+      #|  \226\136\128 v0 : Cart[Real, _], \226\136\128 r : Real, \226\136\128 a : Real, conic_cap(v0, v0, r, a) == {}
+      #|  ball(((v0 : Cart[Real, Tybit1[Unit]]), (r : Real)))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, bounded(conic_cap(v0, v1, r, a))
+      #|  ball(((v0 : Cart[Real, Tybit1[Unit]]), (r : Real)))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, measurable(conic_cap(v0, v1, r, a))
+      #|  real_of_num(0) < (a : Real)
+      #|  ((a : Real) * (r : Real) <= r) == (real_of_num(0) <= r * (real_of_num(1) - a))
+      #|  (r : Real)
+      #|  (a : Real) * (r : Real)
+      #|  (t : Real) => pi * (pow((r : Real), 2) - pow(t, 2))
+      #|  (t : Real) => pi * (pow((r : Real), 2) * t - pow(t, 3) / real_of_num(3))
+      #|  (a : Real) * (r : Real)
+      #|  real_of_num(0) <= (t : Real)
+      #|  (t : Real)
+      #|  (t : Real) => pi * (pow((r : Real), 2) - pow(t, 2))
+      #|  (a : Real) <= (b : Real) \226\134\146 ((x : Real) < a) == (x < a && x < b)
+      #|  ((x : Real) < (r : Real) - (t : Real)) == (t + x < r)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (a : Real) * (r : Real)
+      #|  real_of_num(0) <= (t : Real)
+      #|  (t : Real)
+      #|  (t : Real) => (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)((ball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), sqrt(pow((r : Real), 2) - pow(t, 2)))))
+      #|  real_of_num(0) < (a : Real)
+      #|  (a : Real) * (r : Real)
+      #|  real_of_num(0)
+      #|  (t : Real) => pi * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 2))
+      #|  (t : Real) => pi / real_of_num(3) * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 3))
+      #|  (t : Real)
+      #|  (t : Real) => pi * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 2))
+      #|  (b : Real) <= (a : Real) \226\134\146 ((x : Real) < b) == (x < a && x < b)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  ((x : Real) < ((a : Real) - real_of_num(1)) * (t : Real)) == (t + x < t * a)
+      #|  (t : Real)
+      #|  (t : Real) => (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)((ball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), sqrt(inv(pow((a : Real), 2)) - real_of_num(1)) * t)))
+      #|  ((a : Real) * (r : Real) <= r) == (real_of_num(0) <= r * (real_of_num(1) - a))
+      #|  (a : Real) * (r : Real)
+      #|  pi * (real_of_num(2) / real_of_num(3) * ((real_of_num(1) - (a : Real)) * pow((r : Real), 3))) == pi / real_of_num(3) * ((inv(pow(a, 2)) - real_of_num(1)) * pow(a * r, 3)) + (pi * (real_of_num(2) / real_of_num(3) * ((real_of_num(1) - a) * pow(r, 3))) - pi / real_of_num(3) * ((inv(pow(a, 2)) - real_of_num(1)) * pow(a * r, 3)))
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real) && (c : Real) <= (d : Real) \226\134\146 !(real_of_num(0) < (r : Real) && d + (a + b) < c)
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], !((norm : (Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(t : Real), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(y, 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(y, 2)])) < (r : Real))
+      #|  real_of_num(0) < (r : Real)
+      #|  (t : Real) < (r : Real)
+      #|  real_of_num(0) < (t : Real)
+      #|  (t : Real)
+      #|  (t : Real) => if real_of_num(0) < t && t < (r : Real) { (measure : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Real)({(y : Cart[Real, Tybit0[Unit]]) | pow((norm : (Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([t, (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(y, 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(y, 2)])), 2) < pow(r, 2) && (t * t + (dot : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Real)(y, y)) * pow((a : Real), 2) < pow(t, 2)}) } else { real_of_num(0) }
+      #|  real_of_num(0) < inv(pow((a : Real), 2)) - real_of_num(1)
       #|  1
       #|  :M
       #|  :2
-      #|  a:real
-      #|  basis 1:real^3
-      #|  vec 0:real^3
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  ball(vec 0:real^3,r)
-      #|  a /\\ b /\\ (a /\\ b ==> c /\\ d) ==> a /\\ b /\\ c /\\ d
-      #|  r < &0 ==> ~(norm x < r)
+      #|  (a : Real)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  (ball : ((Cart[Real, Tybit1[Unit]], Real), Cart[Real, Tybit1[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (r : Real)))
+      #|  (a : Bool) && (b : Bool) && (a && b \226\134\146 (c : Bool) && (d : Bool)) \226\134\146 a && b && c && d
+      #|  (r : Real) < real_of_num(0) \226\134\146 !(norm((x : Cart[Real, _])) < r)
       #|  :real
-      #|  n * x * a:real = x * n * a
-      #|  b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
-      #|  abs(x) <= a ==> x <= a
-      #|  y:real^3
-      #|  forall y:real^3. ~(norm(y) * norm(b % basis 1:real^3) * a\n                   < y dot (b % basis 1))
-      #|  &1 <= a
-      #|  &0 <= x ==> x = &0 \\/ &0 < x
-      #|  b:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1:real^3 r a.\n       &0 < a\n       ==> bounded(conic_cap v0 v1 r a) /\\\n           convex(conic_cap v0 v1 r a) /\\\n           measurable(conic_cap v0 v1 r a) /\\\n           measure(conic_cap v0 v1 r a) =\n             if v1 = v0 \\/ &1 <= a \\/ r < &0 then &0\n             else &2 / &3 * pi * (&1 - a) * r pow 3
-      #|  forall v0 v1:real^3 r a.\n       &0 < a\n       ==> measurable(conic_cap v0 v1 r a) /\\ measure(conic_cap v0 v1 r a) =\n           if v1 = v0 \\/ &1 <= a \\/ r < &0 then &0\n           else &2 / &3 * pi * (&1 - a) * r pow 3
-      #|  vector_angle c ((inv a * u - inv a + &1) % c:real^N) = k
-      #|  c + a % c = (a + &1) % c
-      #|  a % c + x = b % c <=> x = (b - a) % c
-      #|  \\x:real^N. inv(a) % x
-      #|  u:real
-      #|  &0 <= a /\\ a < &1 ==> ~(abs a = &1)
-      #|  a * x = x <=> a = &1 \\/ x = &0
-      #|  dist(x,x + a) = norm(a)
+      #|  (n : Real) * ((x : Real) * (a : Real)) == x * (n * a)
+      #|  ((b : Real) * (y : Real) <= (n : Real) * (b * real_of_num(1) * (a : Real))) == (b * (real_of_num(1) * y) <= b * (a * n))
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit1[Unit]], !((norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) * ((norm : (Cart[Real, Tybit1[Unit]]) -> Real)((op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((b : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1))) * (a : Real)) < (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)(y, (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(b, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1))))
+      #|  real_of_num(1) <= (a : Real)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 x == real_of_num(0) || real_of_num(0) < x
+      #|  (b : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 bounded(conic_cap(v0, v1, r, a)) && convex(conic_cap(v0, v1, r, a)) && measurable(conic_cap(v0, v1, r, a)) && measure(conic_cap(v0, v1, r, a)) == (if v1 == v0 || real_of_num(1) <= a || r < real_of_num(0) { real_of_num(0) } else { real_of_num(2) / real_of_num(3) * (pi * ((real_of_num(1) - a) * pow(r, 3))) })
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 measurable(conic_cap(v0, v1, r, a)) && measure(conic_cap(v0, v1, r, a)) == (if v1 == v0 || real_of_num(1) <= a || r < real_of_num(0) { real_of_num(0) } else { real_of_num(2) / real_of_num(3) * (pi * ((real_of_num(1) - a) * pow(r, 3))) })
+      #|  vector_angle((c : Cart[Real, N]), op_pct(inv((a : Real)) * (u : Real) - inv(a) + real_of_num(1), c)) == (k : Real)
+      #|  (c : Cart[Real, _]) + op_pct((a : Real), c) == op_pct(a + real_of_num(1), c)
+      #|  (op_pct((a : Real), (c : Cart[Real, _])) + (x : Cart[Real, _]) == op_pct((b : Real), c)) == (x == op_pct(b - a, c))
+      #|  (x : Cart[Real, N]) => op_pct(inv((a : Real)), x)
+      #|  (u : Real)
+      #|  real_of_num(0) <= (a : Real) && a < real_of_num(1) \226\134\146 !(abs(a) == real_of_num(1))
+      #|  ((a : Real) * (x : Real) == x) == (a == real_of_num(1) || x == real_of_num(0))
+      #|  dist(((x : Cart[Real, _]), x + (a : Cart[Real, _]))) == norm(a)
       #|  :real
       #|  :real
-      #|  c + x:real^N
-      #|  c:real^N
-      #|  vec 0:real^N
-      #|  c + a % x:real^N
-      #|  c:real^N
-      #|  vec 0:real^N
-      #|  ~a \\/ ~b <=> a ==> ~b
-      #|  a = &0
-      #|  x:real^N = vec 0
-      #|  c + a % x:real^N = vec 0
-      #|  (c + x:real^N) = vec 0
-      #|  x:real^N
-      #|  a:real
-      #|  c:real^N
-      #|  n:num
-      #|  inv(&n)
-      #|  norm(x:real^N)
-      #|  x:real^N = vec 0
-      #|  x:real^N
+      #|  (c : Cart[Real, N]) + (x : Cart[Real, N])
+      #|  (c : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (c : Cart[Real, N]) + op_pct((a : Real), (x : Cart[Real, N]))
+      #|  (c : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (!(a : Bool) || !(b : Bool)) == (a \226\134\146 !b)
+      #|  (a : Real) == real_of_num(0)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (c : Cart[Real, N]) + op_pct((a : Real), (x : Cart[Real, N])) == vec(0)
+      #|  (c : Cart[Real, N]) + (x : Cart[Real, N]) == vec(0)
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  (c : Cart[Real, N])
+      #|  (n : Num)
+      #|  inv(real_of_num((n : Num)))
+      #|  norm((x : Cart[Real, N]))
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (x : Cart[Real, N])
       #|  (vec 0:real^N) INSERT\n              UNIONS { {x | x IN ((:real^N) DIFF ball(vec 0,inv(&n + &1))) /\\\n                            Cx(vector_angle c x) = Cx k} |\n                       n IN (:num)  }
-      #|  forall c:real^N k. ~(c = vec 0) /\\ ~(k = &0) /\\ ~(k = pi)\n                ==> negligible {x | vector_angle c x = k}
-      #|  p - x = p <=> x = &0
-      #|  {x:real^N | vector_angle b x = pi - vector_angle c b}
-      #|  {x:real^N | vector_angle b x = vector_angle c b}
-      #|  k = &0 \\/ k = pi
-      #|  2 <= d ==> 1 <= d
-      #|  basis 1:real^N
-      #|  basis 1:real^N
-      #|  2 <= d ==> 1 <= d
-      #|  basis 2:real^N
-      #|  basis 1:real^N
-      #|  forall a b. P a \\/ P b ==> ?x. P x
-      #|  ?b:real^N. ~(b = vec 0) /\\\n               ~(vector_angle c b = &0) /\\\n               ~(vector_angle c b = pi)
-      #|  k = &0 \\/ k = pi
-      #|  2 <= d ==> 1 <= d
-      #|  orthogonal (basis 1:real^N) (basis 2)
-      #|  forall c:real^N k. 2 <= dimindex(:N) /\\ ~(c = vec 0)\n                ==> negligible {x | vector_angle c x = k}
-      #|  --a + x:real^N = x - a
-      #|  {x:real^N | vector_angle c x = k}
-      #|  --a:real^N
-      #|  forall a:real^N c k.\n      2 <= dimindex(:N) /\\ ~(c = vec 0)\n      ==> negligible(a INSERT {x | vector_angle c (x - a) = k})
-      #|  ~(x * w * h <= x * w) <=> &0 < x * w * (h - &1)
-      #|  w:real^3
-      #|  x:real^3
-      #|  x:real^3
-      #|  {x | P x} SUBSET {a} <=> forall x. ~(x = a) ==> ~P x
-      #|  {vec 0}:real^3->bool
-      #|  ~(x = &0) /\\ ~(w = &0) ==> (a = x * w * b <=> a / (w * x) = b)
-      #|  x:real^3
-      #|  (forall x. ~(x = a) ==> (x IN s <=> x IN t))\n      ==> (s DIFF t) UNION (t DIFF s) SUBSET {a}
-      #|  {vec 0:real^3}
-      #|  acs h
-      #|  w:real^3
-      #|  abs(h) <= &1
-      #|  z:real^3
-      #|  forall w z:real^3 h. ~(w = z) ==> negligible(rcone_eq z w h)
-      #|  z:complex
-      #|  z:complex
-      #|  {z | cexp(ii * Cx(pi / &2 + t)) dot z = &0}
-      #|  forall t. negligible {z | Arg z = t}
-      #|  norm z = dist(vec 0,z)
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 k : Real, !(c == vec(0)) && !(k == real_of_num(0)) && !(k == pi) \226\134\146 negligible({(x : Cart[Real, N]) | vector_angle(c, x) == k})
+      #|  ((p : Real) - (x : Real) == p) == (x == real_of_num(0))
+      #|  {(x : Cart[Real, N]) | vector_angle((b : Cart[Real, N]), x) == pi - vector_angle((c : Cart[Real, N]), b)}
+      #|  {(x : Cart[Real, N]) | vector_angle((b : Cart[Real, N]), x) == vector_angle((c : Cart[Real, N]), b)}
+      #|  (k : Real) == real_of_num(0) || k == pi
+      #|  2 <= (d : Num) \226\134\146 1 <= d
+      #|  (basis : (Num) -> Cart[Real, N])(1)
+      #|  (basis : (Num) -> Cart[Real, N])(1)
+      #|  2 <= (d : Num) \226\134\146 1 <= d
+      #|  (basis : (Num) -> Cart[Real, N])(2)
+      #|  (basis : (Num) -> Cart[Real, N])(1)
+      #|  \226\136\128 a : _, \226\136\128 b : _, (P : (_) -> Bool)(a) || P(b) \226\134\146 (\226\136\131 x : _, P(x))
+      #|  \226\136\131 b : Cart[Real, N], !(b == vec(0)) && !(vector_angle((c : Cart[Real, N]), b) == real_of_num(0)) && !(vector_angle(c, b) == pi)
+      #|  (k : Real) == real_of_num(0) || k == pi
+      #|  2 <= (d : Num) \226\134\146 1 <= d
+      #|  (orthogonal : (Cart[Real, N], Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N])(1), (basis : (Num) -> Cart[Real, N])(2))
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 k : Real, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && !(c == (vec : (Num) -> Cart[Real, N])(0)) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | (vector_angle : (Cart[Real, N], Cart[Real, N]) -> Real)(c, x) == k})
+      #|  -(a : Cart[Real, N]) + (x : Cart[Real, N]) == x - a
+      #|  {(x : Cart[Real, N]) | vector_angle((c : Cart[Real, N]), x) == (k : Real)}
+      #|  -(a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 k : Real, 2 <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && !(c == (vec : (Num) -> Cart[Real, N])(0)) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)((INSERT : (Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(a, {(x : Cart[Real, N]) | (vector_angle : (Cart[Real, N], Cart[Real, N]) -> Real)(c, x - a) == k}))
+      #|  !((x : Real) * ((w : Real) * (h : Real)) <= x * w) == (real_of_num(0) < x * (w * (h - real_of_num(1))))
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  SUBSET({(x : _) | (P : (_) -> Bool)(x)}, {(a : _)}) == (\226\136\128 x : _, !(x == a) \226\134\146 !P(x))
+      #|  {(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)}
+      #|  !((x : Real) == real_of_num(0)) && !((w : Real) == real_of_num(0)) \226\134\146 ((a : Real) == x * (w * (b : Real))) == (a / (w * x) == b)
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (\226\136\128 x : _, !(x == (a : _)) \226\134\146 IN(x, (s : (_) -> Bool)) == IN(x, (t : (_) -> Bool))) \226\134\146 SUBSET(UNION(DIFF(s, t), DIFF(t, s)), {a})
+      #|  {(vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)}
+      #|  acs((h : Real))
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  abs((h : Real)) <= real_of_num(1)
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, !(w == z) \226\134\146 negligible(rcone_eq(z, w, h))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | dot(cexp(ii * Cx(pi / real_of_num(2) + (t : Real))), z) == real_of_num(0)}
+      #|  \226\136\128 t : Real, negligible({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == t})
+      #|  norm((z : Cart[Real, _])) == dist((vec(0), z))
       #|  :real
       #|  :real
-      #|  {z | P z /\\ Q z} = {z | P z} INTER {z | Q z}
-      #|  forall r t. measurable {z | norm(z) <= r /\\ Arg z <= t}
-      #|  {z | Arg z = t}
-      #|  {z | norm(z) <= r /\\ Arg z <= t}
-      #|  forall r t. measurable {z | norm(z) <= r /\\ Arg z < t}
-      #|  {z | P z /\\ Q z /\\ R z} = {z | P z /\\ R z} DIFF {z | P z /\\ ~Q z}
-      #|  forall r s t. measurable {z | norm(z) <= r /\\ s < Arg z /\\ Arg z <= t}
-      #|  z:complex
-      #|  x:real
-      #|  rotate2d x z
-      #|  --x:real
-      #|  z = rotate2d (--x) (rotate2d x z)
-      #|  z = Cx(&0)
-      #|  z:complex
-      #|  measure (IMAGE (rotate2d x)\n              {z | norm z <= r /\\ &0 < Arg z /\\ Arg z < y})
-      #|  {z | Arg z = &0} UNION {z | Arg z = y}
-      #|  measure {z | norm z <= r /\\ &0 < Arg z /\\ Arg z < y}
-      #|  {z | Arg z = x + y}
-      #|  measure {z | norm z <= r /\\ x < Arg z /\\ Arg z < x + y}
-      #|  {z | P z /\\ Q z} INTER {z | P z /\\ ~Q z /\\ R z} = {}
-      #|  {z | Q z \\/ R z} = {z | Q z} UNION {z | R z}
-      #|  &0 <= x /\\ &0 <= y\n       ==> (norm z <= r /\\ Arg z <= x + y <=>\n            norm z <= r /\\ Arg z <= x \\/\n            norm z <= r /\\ x < Arg z /\\ Arg z <= x + y)
-      #|  (\\t. r pow 2 * sin t) real_continuous atreal (&0)
-      #|  &0 <= sin x
-      #|  abs(a * b) <= c * &1 ==> a * b <= c
-      #|  &0 <= Arg z /\\ Arg z < pi / &2 /\\ Arg z <= pi / &2
-      #|  z:complex
-      #|  z:complex
-      #|  measure(interval[vec 0,complex(r,r * sin x)])
-      #|  x:real
-      #|  pi / &2
-      #|  \\t. r pow 2 * sin(t)
-      #|  &0 < p ==> t / (&2 * p) * &2 * p = t
-      #|  &0 < p ==> t / (&2 * p) * p * r = t * r / &2
-      #|  dist(vec 0,z) = norm z
+      #|  {(z : _) | (P : (_) -> Bool)(z) && (Q : (_) -> Bool)(z)} == INTER({(z : _) | P(z)}, {(z : _) | Q(z)})
+      #|  \226\136\128 r : Real, \226\136\128 t : Real, measurable({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= r && Arg(z) <= t})
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (t : Real)}
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= (r : Real) && Arg(z) <= (t : Real)}
+      #|  \226\136\128 r : Real, \226\136\128 t : Real, measurable({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= r && Arg(z) < t})
+      #|  {(z : _) | (P : (_) -> Bool)(z) && (Q : (_) -> Bool)(z) && (R : (_) -> Bool)(z)} == DIFF({(z : _) | P(z) && R(z)}, {(z : _) | P(z) && !Q(z)})
+      #|  \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, measurable({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= r && s < Arg(z) && Arg(z) <= t})
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real)
+      #|  rotate2d((x : Real), (z : Cart[Real, Tybit0[Unit]]))
+      #|  -(x : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]]) == rotate2d(-(x : Real), rotate2d(x, z))
+      #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  measure(IMAGE(rotate2d((x : Real)), {(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= (r : Real) && real_of_num(0) < Arg(z) && Arg(z) < (y : Real)}))
+      #|  UNION({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == real_of_num(0)}, {(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (y : Real)})
+      #|  measure({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= (r : Real) && real_of_num(0) < Arg(z) && Arg(z) < (y : Real)})
+      #|  {(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (x : Real) + (y : Real)}
+      #|  measure({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= (r : Real) && (x : Real) < Arg(z) && Arg(z) < x + (y : Real)})
+      #|  INTER({(z : _) | (P : (_) -> Bool)(z) && (Q : (_) -> Bool)(z)}, {(z : _) | P(z) && !Q(z) && (R : (_) -> Bool)(z)}) == {}
+      #|  {(z : _) | (Q : (_) -> Bool)(z) || (R : (_) -> Bool)(z)} == UNION({(z : _) | Q(z)}, {(z : _) | R(z)})
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (norm((z : Cart[Real, Tybit0[Unit]])) <= (r : Real) && Arg(z) <= x + y) == (norm(z) <= r && Arg(z) <= x || norm(z) <= r && x < Arg(z) && Arg(z) <= x + y)
+      #|  real_continuous((t : Real) => pow((r : Real), 2) * sin(t), atreal(real_of_num(0)))
+      #|  real_of_num(0) <= sin((x : Real))
+      #|  abs((a : Real) * (b : Real)) <= (c : Real) * real_of_num(1) \226\134\146 a * b <= c
+      #|  real_of_num(0) <= Arg((z : Cart[Real, Tybit0[Unit]])) && Arg(z) < pi / real_of_num(2) && Arg(z) <= pi / real_of_num(2)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  measure(interval([(vec(0), complex(((r : Real), r * sin((x : Real)))))]))
+      #|  (x : Real)
+      #|  pi / real_of_num(2)
+      #|  (t : Real) => pow((r : Real), 2) * sin(t)
+      #|  real_of_num(0) < (p : Real) \226\134\146 (t : Real) / (real_of_num(2) * p) * (real_of_num(2) * p) == t
+      #|  real_of_num(0) < (p : Real) \226\134\146 (t : Real) / (real_of_num(2) * p) * (p * (r : Real)) == t * (r / real_of_num(2))
+      #|  dist((vec(0), (z : Cart[Real, _]))) == norm(z)
       #|  :real
       #|  :real
-      #|  r:real
-      #|  vec 0:real^2
-      #|  &2 * pi
-      #|  t / (&2 * pi)
-      #|  &2 * pi
-      #|  \\t. measure {z:real^2 | norm(z) <= r /\\ Arg(z) <= t}
-      #|  forall t r. &0 <= r /\\ &0 <= t /\\ t <= &2 * pi\n         ==> measure {x:real^2 | norm(x) <= r /\\ Arg(x) <= t} =\n             t * r pow 2 / &2
-      #|  {x | dist(vec 0,x) = r} UNION\n              {z | Arg z = &0} UNION {z | Arg z = t}
-      #|  {x | norm x <= r /\\ Arg x <= t}
-      #|  ~(&0 <= r) ==> ~(norm x < r)
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0)
+      #|  real_of_num(2) * pi
+      #|  (t : Real) / (real_of_num(2) * pi)
+      #|  real_of_num(2) * pi
+      #|  (t : Real) => measure({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= (r : Real) && Arg(z) <= t})
+      #|  \226\136\128 t : Real, \226\136\128 r : Real, real_of_num(0) <= r && real_of_num(0) <= t && t <= real_of_num(2) * pi \226\134\146 measure({(x : Cart[Real, Tybit0[Unit]]) | norm(x) <= r && Arg(x) <= t}) == t * (pow(r, 2) / real_of_num(2))
+      #|  UNION({(x : Cart[Real, Tybit0[Unit]]) | dist((vec(0), x)) == (r : Real)}, UNION({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == real_of_num(0)}, {(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (t : Real)}))
+      #|  {(x : Cart[Real, Tybit0[Unit]]) | norm(x) <= (r : Real) && Arg(x) <= (t : Real)}
+      #|  !(real_of_num(0) <= (r : Real)) \226\134\146 !(norm((x : Cart[Real, _])) < r)
       #|  :real
-      #|  forall t r. &0 <= t /\\ t <= &2 * pi\n         ==> {x:real^2 | norm(x) < r /\\ &0 < Arg x /\\ Arg x < t}\n             has_measure (if &0 <= r then t * r pow 2 / &2 else &0)
-      #|  forall t r. &0 <= t /\\ t <= &2 * pi\n         ==> measure {x:real^2 | norm(x) < r /\\ &0 < Arg x /\\ Arg x < t} =\n             if &0 <= r then t * r pow 2 / &2 else &0
-      #|  w = &0
-      #|  w:real
-      #|  w:complex
-      #|  forall w z.\n        ~(w = vec 0)\n        ==> {x | norm(x) < r /\\ &0 < Arg(x / w) /\\ Arg(x / w) < Arg(z / w)}\n            has_measure (if &0 <= r then Arg(z / w) * r pow 2 / &2 else &0)
-      #|  forall z:real^3 w w1 w2. measurable(ball(z,r) INTER wedge z w w1 w2)
-      #|  r:real
-      #|  --r:real
-      #|  \\t. Arg v2 * (r pow 2 - t pow 2) / &2
-      #|  \\t. Arg v2 * (r pow 2 * t - &1 / &3 * t pow 3) / &2
-      #|  abs x <= r ==> abs x <= abs r
-      #|  t:real
-      #|  \\t. Arg v2 * (r pow 2 - t pow 2) / &2
-      #|  forall t. abs(t) < r <=> t IN real_interval(--r,r)
-      #|  forall t z. ~(z = Cx(&0)) /\\ &0 < Arg z /\\ Arg z < t <=>\n          &0 < Arg z /\\ Arg z < t
-      #|  v1 = &0
-      #|  v1:real
-      #|  v1:complex
-      #|  r:real
-      #|  r:real
-      #|  &0 <= r
-      #|  v1:complex
-      #|  v2:complex
-      #|  ~(v2:complex = vec 0)
-      #|  ~(v1:complex = vec 0)
-      #|  v2:real^2 = dropout 3 (w2:real^3)
-      #|  v1:real^2 = dropout 3 (w1:real^3)
-      #|  ~a /\\ b /\\ c <=> ~(~a ==> ~(b /\\ c))
+      #|  \226\136\128 t : Real, \226\136\128 r : Real, real_of_num(0) <= t && t <= real_of_num(2) * pi \226\134\146 has_measure({(x : Cart[Real, Tybit0[Unit]]) | norm(x) < r && real_of_num(0) < Arg(x) && Arg(x) < t}, if real_of_num(0) <= r { t * (pow(r, 2) / real_of_num(2)) } else { real_of_num(0) })
+      #|  \226\136\128 t : Real, \226\136\128 r : Real, real_of_num(0) <= t && t <= real_of_num(2) * pi \226\134\146 measure({(x : Cart[Real, Tybit0[Unit]]) | norm(x) < r && real_of_num(0) < Arg(x) && Arg(x) < t}) == (if real_of_num(0) <= r { t * (pow(r, 2) / real_of_num(2)) } else { real_of_num(0) })
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], !(w == vec(0)) \226\134\146 has_measure({(x : Cart[Real, Tybit0[Unit]]) | norm(x) < (r : Real) && real_of_num(0) < Arg(x / w) && Arg(x / w) < Arg(z / w)}, if real_of_num(0) <= r { Arg(z / w) * (pow(r, 2) / real_of_num(2)) } else { real_of_num(0) })
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], measurable(INTER(ball((z, (r : Real))), wedge(z, w, w1, w2)))
+      #|  (r : Real)
+      #|  -(r : Real)
+      #|  (t : Real) => Arg((v2 : Cart[Real, Tybit0[Unit]])) * ((pow((r : Real), 2) - pow(t, 2)) / real_of_num(2))
+      #|  (t : Real) => Arg((v2 : Cart[Real, Tybit0[Unit]])) * ((pow((r : Real), 2) * t - real_of_num(1) / real_of_num(3) * pow(t, 3)) / real_of_num(2))
+      #|  abs((x : Real)) <= (r : Real) \226\134\146 abs(x) <= abs(r)
+      #|  (t : Real)
+      #|  (t : Real) => Arg((v2 : Cart[Real, Tybit0[Unit]])) * ((pow((r : Real), 2) - pow(t, 2)) / real_of_num(2))
+      #|  \226\136\128 t : Real, (abs(t) < (r : Real)) == IN(t, real_interval((-r, r)))
+      #|  \226\136\128 t : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], (!(z == Cx(real_of_num(0))) && real_of_num(0) < Arg(z) && Arg(z) < t) == (real_of_num(0) < Arg(z) && Arg(z) < t)
+      #|  (v1 : Real) == real_of_num(0)
+      #|  (v1 : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (r : Real)
+      #|  (r : Real)
+      #|  real_of_num(0) <= (r : Real)
+      #|  (v1 : Cart[Real, Tybit0[Unit]])
+      #|  (v2 : Cart[Real, Tybit0[Unit]])
+      #|  !((v2 : Cart[Real, Tybit0[Unit]]) == vec(0))
+      #|  !((v1 : Cart[Real, Tybit0[Unit]]) == vec(0))
+      #|  (v2 : Cart[Real, Tybit0[Unit]]) == dropout(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  (v1 : Cart[Real, Tybit0[Unit]]) == dropout(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (!(a : Bool) && (b : Bool) && (c : Bool)) == !(!a \226\134\146 !(b && c))
       #|  3
       #|  :N
       #|  :3
       #|  :M
       #|  :2
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  z:real^3
-      #|  z:real^3 = w \\/  collinear{z,w,w1} \\/ collinear{z,w,w2}
-      #|  forall z:real^3 w r w1 w2.\n        &0 <= r ==> measure(ball(z,r) INTER wedge z w w1 w2) =\n                       azim z w w1 w2 * &2 * r pow 3 / &3
-      #|  {w1:real^3,w2} = {w2,w1}
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  basis 3:real^3
-      #|  vec 0:real^3
-      #|  &0 < azim (vec 0) (basis 3) w2 w1 /\\\n                azim (vec 0) (basis 3) w2 w1 < pi
-      #|  x:real = y - z <=> z = y - x
-      #|  dihV (vec 0) (basis 3) w1 w2 = azim (vec 0) (basis 3) w2 w1
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  basis 3:real^3
-      #|  vec 0:real^3
-      #|  azim (vec 0) (basis 3) w1 w2 = pi
-      #|  azim (vec 0) (basis 3) w1 w2 < pi
-      #|  &0 < azim (vec 0) (basis 3) w1 w2
-      #|  {a,b} UNION {c,d} = {a,b,c,d}
-      #|  t SUBSET u ==> (s INTER t) SUBSET u
-      #|  affine hull {vec 0:real^3,basis 3,w1,w2}
-      #|  azim (vec 0) (basis 3) w1 w2 = &0
-      #|  azim (vec 0) (basis 3) w1 w2 = &0
-      #|  w2:real^3 = basis 3
-      #|  w1:real^3 = basis 3
-      #|  w2:real^3 = w % basis 3
-      #|  w1:real^3 = w % basis 3
-      #|  w2:real^3 = vec 0
-      #|  w1:real^3 = vec 0
-      #|  basis 3:real^3
-      #|  w:real
-      #|  {w1:real^3,w2:real^3}
-      #|  {}:real^3->bool
-      #|  w = &0
-      #|  w:real
-      #|  w:real^3
-      #|  z:real^3
-      #|  forall z:real^3 w r w1 w2.\n        &0 <= r /\\ ~(w = z) /\\\n        ~collinear {z,w,w1} /\\ ~collinear {z,w,w2} /\\ ~(dihV z w w1 w2 = pi)\n        ==> (ball(z,r) INTER aff_gt {z,w} {w1,w2})\n            has_measure (dihV z w w1 w2 * &2 * r pow 3 / &3)
-      #|  &2 * pi - pi = pi
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  w:real^3
-      #|  z:real^3
-      #|  a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  w:real^3 = z
-      #|  forall z:real^3 w r w1 w2.\n        &0 <= r /\\ ~coplanar{z,w,w1,w2}\n        ==> (ball(z,r) INTER aff_gt {z,w} {w1,w2})\n            has_measure (dihV z w w1 w2 * &2 * r pow 3 / &3)
-      #|  forall z r s t. measurable(ball(z,r) INTER aff_gt s t)
-      #|  &0
-      #|  y - --a % v:real^N = y - a % --v
-      #|  \\x:real^N. if x = vec 0 then &2 * a + f(vec 0) else f x
-      #|  --a:real
-      #|  f:real^N->real
-      #|  a:real
-      #|  --a % --x:real^N = a % x
-      #|  \\x:real^N. if x = vec 0 then f(x) + &2 * v else f(x)
-      #|  f:real^N->real
-      #|  --v:real
-      #|  v = &0
-      #|  v:real
-      #|  &0 < v
-      #|  v:real
-      #|  y:real^N
-      #|  x IN (s UNION t)\n                        ==> x IN t ==> P x <=> x IN t ==> P  x
-      #|  ~(a IN s)\n    ==> ((w IN s UNION t ==> w = a \\/ w IN t ==> P w) <=>\n         (w IN t ==> P w))
-      #|  s UNION (v INSERT t) = v INSERT (s UNION t)
-      #|  (v INSERT s) UNION t = v INSERT (s UNION t)
-      #|  forall s t v:real^N.\n        FINITE s /\\ FINITE t /\\\n        vec 0 IN s /\\ ~(vec 0 IN t) /\\\n        ~(v IN s) /\\ ~(--v IN s) /\\ ~(v IN t)\n        ==> aff_gt (v INSERT s) t =\n            aff_gt s (v INSERT t) UNION\n            aff_gt s (--v INSERT t) UNION\n            aff_gt s t
-      #|  forall s t u:real^N->bool.\n          measurable s /\\ measurable t /\\ s INTER t = {} /\\ negligible u\n          ==> measure(s UNION t UNION u) = measure s + measure t
-      #|  1 <= n /\\ x <= n ==> x - 1 < n
-      #|  CARD((s UNION t) DELETE (vec 0:real^N))
-      #|  affine hull (s UNION t:real^N->bool)
-      #|  aff_gt s t :real^N->bool
-      #|  (a + b) % v + (y - a % v) - (y - b % --v):real^N
-      #|  forall x:real^N. (if x = v then a + b else f x - g x) % x =\n                 (if x = v then a else f x) % x -\n                 (if x = v then --b else g x) % x
-      #|  ~(a IN t) ==> (s DELETE a) UNION t = (s UNION t) DELETE a
-      #|  v:real^N
-      #|  \\x. if x = v then a + b else (f:real^N->real) x - g x
-      #|  g:real^N->real
-      #|  b:real
-      #|  f:real^N->real
-      #|  a:real
-      #|  y:real^N
-      #|  ~(a IN s) ==> ((w IN s UNION t ==> w = a \\/ w IN t ==> P w) <=>\n                     (w IN t ==> P w))
-      #|  s UNION (v INSERT t) = v INSERT (s UNION t)
-      #|  (v INSERT s) UNION t = v INSERT (s UNION t)
-      #|  t INTER u = {} ==> (s INTER t) INTER (s INTER u) = {}
-      #|  forall r s t v:real^N.\n        &0 <= r /\\\n        independent(v INSERT((s DELETE vec 0) UNION t)) /\\\n        FINITE s /\\ FINITE t /\\ CARD(s UNION t) <= dimindex(:N) /\\\n        vec 0 IN s /\\ ~(vec 0 IN t) /\\\n        ~(v IN s) /\\ ~(--v IN s) /\\ ~(v IN t)\n        ==> measure(ball(vec 0,r) INTER aff_gt (v INSERT s) t) =\n            measure(ball(vec 0,r) INTER aff_gt s (v INSERT t)) +\n            measure(ball(vec 0,r) INTER aff_gt s (--v INSERT t))
-      #|  --v:real^N = v <=> v = vec 0
-      #|  v:real^N
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  v:real^N
-      #|  t:real^N->bool
-      #|  (vec 0:real^N) INSERT s
-      #|  r:real
-      #|  forall r s t v:real^N.\n        &0 <= r /\\ ~(v IN (s UNION t)) /\\\n        independent(v INSERT (s UNION t))\n        ==> measure(ball(vec 0,r) INTER aff_gt (vec 0 INSERT v INSERT s) t) =\n            measure(ball(vec 0,r) INTER aff_gt (vec 0 INSERT s) (v INSERT t)) +\n            measure(ball(vec 0,r) INTER\n                    aff_gt (vec 0 INSERT s) (--v INSERT t))
-      #|  vec 0:real^3
-      #|  v1:real^3
-      #|  v2:real^3
-      #|  v3:real^3
-      #|  forall v1 v2 v3:real^3.\n         &0 <= r /\\ ~coplanar {vec 0, v1, v2, v3}\n         ==> measure(ball(vec 0,r) INTER aff_gt {vec 0} {v1,v2,v3}) +\n             measure(ball(vec 0,r) INTER aff_gt {vec 0} {--v1,v2,v3}) =\n             dihV (vec 0) v1 v2 v3 * &2 * r pow 3 / &3
-      #|  --x - a % --w:real^N = --(x - a % w)
-      #|  vec 0:real^N = --x <=> vec 0 = x
-      #|  x IN {a} <=> a = x
-      #|  {a} UNION {b,c,d} = {a,b,d,c}
-      #|  ball(vec 0:real^N,r) INTER aff_gt {vec 0} {--v1, --v2, --v3} =\n    IMAGE (--)\n          (ball(vec 0,r) INTER aff_gt {vec 0} {v1, v2, v3})
-      #|  forall r v1 v2 v3:real^N.\n        measure(ball(vec 0,r) INTER aff_gt {vec 0} {--v1, --v2, --v3}) =\n        measure(ball(vec 0,r) INTER aff_gt {vec 0} {v1, v2, v3})
-      #|  --v2:real^3
-      #|  --v1:real^3
-      #|  --v3:real^3
-      #|  --v1:real^3
-      #|  --v3:real^3
-      #|  --v2:real^3
-      #|  --v3:real^3
-      #|  --v2:real^3
-      #|  --v1:real^3
-      #|  v2:real^3
-      #|  v1:real^3
-      #|  v3:real^3
-      #|  v1:real^3
-      #|  v3:real^3
-      #|  v2:real^3
-      #|  v3:real^3
-      #|  v2:real^3
-      #|  v1:real^3
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  (a INSERT s) UNION t = a INSERT (s UNION t)
-      #|  {vec 0,a,b,c} = {vec 0,b,c,a}
-      #|  ~(coplanar {vec 0:real^3,v1,v2,v3}) /\\\n    ~(coplanar {vec 0,--v1,v2,v3}) /\\\n    ~(coplanar {vec 0,v1,--v2,v3}) /\\\n    ~(coplanar {vec 0,--v1,--v2,v3}) /\\\n    ~(coplanar {vec 0,--v1,--v2,v3}) /\\\n    ~(coplanar {vec 0,--v1,v2,--v3}) /\\\n    ~(coplanar {vec 0,v1,--v2,--v3}) /\\\n    ~(coplanar {vec 0,--v1,--v2,--v3}) /\\\n    ~(coplanar {vec 0,--v1,--v2,--v3})
-      #|  v2:real^3 = v1
-      #|  v3:real^3 = v1
-      #|  v3:real^3 = v2
-      #|  s = UNIV <=> UNIV SUBSET s
-      #|  t = UNIV ==> s INTER t = s
-      #|  r:real
-      #|  vec 0:real^3
-      #|  measure(ball(vec 0:real^3,r) INTER aff_gt {vec 0,v1,v2,v3} {}) =\n     &4 / &3 * pi * r pow 3
-      #|  v0:real^3
-      #|  forall r v0 v1 v2 v3:real^3.\n       &0 < r /\\ ~coplanar{v0, v1, v2, v3}\n       ==> measure(ball(v0,r) INTER aff_gt {v0} {v1,v2,v3}) =\n                let a123 = dihV v0 v1 v2 v3 in\n                let a231 = dihV v0 v2 v3 v1 in\n                let a312 = dihV v0 v3 v1 v2 in\n                  (a123 + a231 + a312 - pi) * r pow 3 / &3
-      #|  s SUBSET i ==> s INTER t = s INTER (t INTER i)
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall s t:real^N->bool.\n       measurable s /\\ bounded s /\\ open t ==> measurable(s INTER t)
-      #|  w = Cx(&0)
-      #|  w:complex
-      #|  v2:real^2 = dropout 3 (w2:real^3)
-      #|  v1:real^2 = dropout 3 (w1:real^3)
-      #|  ~a /\\ b /\\ c <=> ~(~a ==> ~(b /\\ c))
-      #|  forall w1 w2.\n        ~collinear {vec 0, basis 3, w1} /\\ ~collinear {vec 0, basis 3, w2}\n        ==> slice 3 t (wedge (vec 0) (basis 3) w1 w2) =\n            {z | &0 < Arg(z / dropout 3 w1) /\\\n                 Arg(z / dropout 3 w1) < Arg(dropout 3 w2 / dropout 3 w1)}
-      #|  &0 < a
-      #|  h:real
-      #|  &0
-      #|  \\t. g / &2 * (inv (a pow 2) - &1) * t pow 2
-      #|  \\t. g / &6 * (inv (a pow 2) - &1) * t pow 3
-      #|  g = Arg(dropout 3 (w2:real^3) / dropout 3 (w1:real^3))
-      #|  t = &0
-      #|  &0 <= t <=> t = &0 \\/ &0 < t
-      #|  t < h
-      #|  t:real
-      #|  \\t. if &0 < t /\\ t < h\n        then Arg(dropout 3 (w2:real^3) / dropout 3 (w1:real^3)) / &2 *\n             (inv(a pow 2) - &1) * t pow 2\n        else &0
-      #|  &0 < inv(a pow 2) - &1
-      #|  &0 < t
-      #|  &0 < inv(a pow 2) - &1
-      #|  &0 <= a /\\ (a < t <=> u < v) ==> (a < t /\\ &0 < t <=> u < v)
-      #|  t < h
-      #|  z:real^2
-      #|  t:real
-      #|  forall t. slice 3 t {y:real^3 | norm y * a < y$3 /\\ &0 < y$3 /\\ y$3 < h} =\n        if t < h\n        then ball(vec 0:real^2,sqrt(inv(a pow 2) - &1) * t)\n        else {}
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]]) == (w : Cart[Real, Tybit1[Unit]]) || collinear({z, w, (w1 : Cart[Real, Tybit1[Unit]])}) || collinear({z, w, (w2 : Cart[Real, Tybit1[Unit]])})
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= r \226\134\146 measure(INTER(ball((z, r)), wedge(z, w, w1, w2))) == azim(z, w, w1, w2) * (real_of_num(2) * (pow(r, 3) / real_of_num(3)))
+      #|  {(w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])} == {w2, w1}
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  real_of_num(0) < azim(vec(0), basis(3), (w2 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]])) && azim(vec(0), basis(3), w2, w1) < pi
+      #|  ((x : Real) == (y : Real) - (z : Real)) == (z == y - x)
+      #|  dihV(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == azim(vec(0), basis(3), w2, w1)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  azim(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == pi
+      #|  azim(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) < pi
+      #|  real_of_num(0) < azim(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  UNION({(a : _), (b : _)}, {(c : _), (d : _)}) == {a, b, c, d}
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER((s : (_) -> Bool), t), u)
+      #|  hull(affine, {vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])})
+      #|  azim(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == real_of_num(0)
+      #|  azim(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == real_of_num(0)
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == basis(3)
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == op_pct((w : Real), basis(3))
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == op_pct((w : Real), basis(3))
+      #|  (w2 : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (w1 : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (w : Real)
+      #|  {(w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])}
+      #|  ({} : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (w : Real) == real_of_num(0)
+      #|  (w : Real)
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= r && !(w == z) && !collinear({z, w, w1}) && !collinear({z, w, w2}) && !(dihV(z, w, w1, w2) == pi) \226\134\146 has_measure(INTER(ball((z, r)), aff_gt({z, w}, {w1, w2})), dihV(z, w, w1, w2) * (real_of_num(2) * (pow(r, 3) / real_of_num(3))))
+      #|  real_of_num(2) * pi - pi == pi
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]])
+      #|  (z : Cart[Real, Tybit1[Unit]])
+      #|  (a : Bool) && (b : Bool) && (a && b \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  (w : Cart[Real, Tybit1[Unit]]) == (z : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= r && !coplanar({z, w, w1, w2}) \226\134\146 has_measure(INTER(ball((z, r)), aff_gt({z, w}, {w1, w2})), dihV(z, w, w1, w2) * (real_of_num(2) * (pow(r, 3) / real_of_num(3))))
+      #|  \226\136\128 z : Cart[Real, _], \226\136\128 r : Real, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, measurable(INTER(ball((z, r)), aff_gt(s, t)))
+      #|  real_of_num(0)
+      #|  (y : Cart[Real, N]) - op_pct(-(a : Real), (v : Cart[Real, N])) == y - op_pct(a, -v)
+      #|  (x : Cart[Real, N]) => if x == vec(0) { real_of_num(2) * (a : Real) + (f : (Cart[Real, N]) -> Real)(vec(0)) } else { f(x) }
+      #|  -(a : Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (a : Real)
+      #|  op_pct(-(a : Real), -(x : Cart[Real, N])) == op_pct(a, x)
+      #|  (x : Cart[Real, N]) => if x == vec(0) { (f : (Cart[Real, N]) -> Real)(x) + real_of_num(2) * (v : Real) } else { f(x) }
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  -(v : Real)
+      #|  (v : Real) == real_of_num(0)
+      #|  (v : Real)
+      #|  real_of_num(0) < (v : Real)
+      #|  (v : Real)
+      #|  (y : Cart[Real, N])
+      #|  (IN((x : _), UNION((s : (_) -> Bool), (t : (_) -> Bool))) \226\134\146 IN(x, t) \226\134\146 (P : (_) -> Bool)(x)) == (IN(x, t) \226\134\146 P(x))
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 (IN((w : _), UNION(s, (t : (_) -> Bool))) \226\134\146 w == a || IN(w, t) \226\134\146 (P : (_) -> Bool)(w)) == (IN(w, t) \226\134\146 P(w))
+      #|  UNION((s : (_) -> Bool), INSERT((v : _), (t : (_) -> Bool))) == INSERT(v, UNION(s, t))
+      #|  UNION(INSERT((v : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(v, UNION(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 v : Cart[Real, N], FINITE(s) && FINITE(t) && IN(vec(0), s) && !IN(vec(0), t) && !IN(v, s) && !IN(-v, s) && !IN(v, t) \226\134\146 aff_gt(INSERT(v, s), t) == UNION(aff_gt(s, INSERT(v, t)), UNION(aff_gt(s, INSERT(-v, t)), aff_gt(s, t)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, measurable(s) && measurable(t) && INTER(s, t) == {} && negligible(u) \226\134\146 measure(UNION(s, UNION(t, u))) == measure(s) + measure(t)
+      #|  1 <= (n : Num) && (x : Num) <= n \226\134\146 x - 1 < n
+      #|  CARD(DELETE(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), vec(0)))
+      #|  hull(affine, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)))
+      #|  aff_gt((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  op_pct((a : Real) + (b : Real), (v : Cart[Real, N])) + ((y : Cart[Real, N]) - op_pct(a, v) - (y - op_pct(b, -v)))
+      #|  \226\136\128 x : Cart[Real, N], op_pct(if x == (v : Cart[Real, N]) { (a : Real) + (b : Real) } else { (f : (Cart[Real, N]) -> Real)(x) - (g : (Cart[Real, N]) -> Real)(x) }, x) == op_pct(if x == v { a } else { f(x) }, x) - op_pct(if x == v { -b } else { g(x) }, x)
+      #|  !IN((a : _), (t : (_) -> Bool)) \226\134\146 UNION(DELETE((s : (_) -> Bool), a), t) == DELETE(UNION(s, t), a)
+      #|  (v : Cart[Real, N])
+      #|  (x : Cart[Real, N]) => if x == (v : Cart[Real, N]) { (a : Real) + (b : Real) } else { (f : (Cart[Real, N]) -> Real)(x) - (g : (Cart[Real, N]) -> Real)(x) }
+      #|  (g : (Cart[Real, N]) -> Real)
+      #|  (b : Real)
+      #|  (f : (Cart[Real, N]) -> Real)
+      #|  (a : Real)
+      #|  (y : Cart[Real, N])
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 (IN((w : _), UNION(s, (t : (_) -> Bool))) \226\134\146 w == a || IN(w, t) \226\134\146 (P : (_) -> Bool)(w)) == (IN(w, t) \226\134\146 P(w))
+      #|  UNION((s : (_) -> Bool), INSERT((v : _), (t : (_) -> Bool))) == INSERT(v, UNION(s, t))
+      #|  UNION(INSERT((v : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(v, UNION(s, t))
+      #|  INTER((t : (_) -> Bool), (u : (_) -> Bool)) == {} \226\134\146 INTER(INTER((s : (_) -> Bool), t), INTER(s, u)) == {}
+      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 v : Cart[Real, N], real_of_num(0) <= r && (independent : ((Cart[Real, N]) -> Bool) -> Bool)((INSERT : (Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(v, (UNION : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)(s, (vec : (Num) -> Cart[Real, N])(0)), t))) && (FINITE : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (FINITE : ((Cart[Real, N]) -> Bool) -> Bool)(t) && (CARD : ((Cart[Real, N]) -> Bool) -> Num)((UNION : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, t)) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)((vec : (Num) -> Cart[Real, N])(0), s) && !(IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)((vec : (Num) -> Cart[Real, N])(0), t) && !(IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(v, s) && !(IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(-v, s) && !(IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(v, t) \226\134\146 (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r)), (aff_gt : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((INSERT : (Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(v, s), t))) == (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r)), (aff_gt : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, (INSERT : (Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(v, t)))) + (measure : ((Cart[Real, N]) -> Bool) -> Real)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), r)), (aff_gt : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, (INSERT : (Cart[Real, N], (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(-v, t))))
+      #|  (-(v : Cart[Real, N]) == v) == (v == vec(0))
+      #|  (v : Cart[Real, N])
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  (v : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  INSERT(vec(0), (s : (Cart[Real, N]) -> Bool))
+      #|  (r : Real)
+      #|  \226\136\128 r : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 v : Cart[Real, N], real_of_num(0) <= r && !IN(v, UNION(s, t)) && independent(INSERT(v, UNION(s, t))) \226\134\146 measure(INTER(ball((vec(0), r)), aff_gt(INSERT(vec(0), INSERT(v, s)), t))) == measure(INTER(ball((vec(0), r)), aff_gt(INSERT(vec(0), s), INSERT(v, t)))) + measure(INTER(ball((vec(0), r)), aff_gt(INSERT(vec(0), s), INSERT(-v, t))))
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v3 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= (r : Real) && !coplanar({vec(0), v1, v2, v3}) \226\134\146 measure(INTER(ball((vec(0), r)), aff_gt({vec(0)}, {v1, v2, v3}))) + measure(INTER(ball((vec(0), r)), aff_gt({vec(0)}, {-v1, v2, v3}))) == dihV(vec(0), v1, v2, v3) * (real_of_num(2) * (pow(r, 3) / real_of_num(3)))
+      #|  -(x : Cart[Real, N]) - op_pct((a : Real), -(w : Cart[Real, N])) == -(x - op_pct(a, w))
+      #|  (vec(0) == -(x : Cart[Real, N])) == (vec(0) == x)
+      #|  IN((x : _), {(a : _)}) == (a == x)
+      #|  UNION({(a : _)}, {(b : _), (c : _), (d : _)}) == {a, b, d, c}
+      #|  INTER(ball((vec(0), (r : Real))), aff_gt({vec(0)}, {-(v1 : Cart[Real, N]), -(v2 : Cart[Real, N]), -(v3 : Cart[Real, N])})) == IMAGE(op_minus_minus, INTER(ball((vec(0), r)), aff_gt({vec(0)}, {v1, v2, v3})))
+      #|  \226\136\128 r : Real, \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], \226\136\128 v3 : Cart[Real, N], measure(INTER(ball((vec(0), r)), aff_gt({vec(0)}, {-v1, -v2, -v3}))) == measure(INTER(ball((vec(0), r)), aff_gt({vec(0)}, {v1, v2, v3})))
+      #|  -(v2 : Cart[Real, Tybit1[Unit]])
+      #|  -(v1 : Cart[Real, Tybit1[Unit]])
+      #|  -(v3 : Cart[Real, Tybit1[Unit]])
+      #|  -(v1 : Cart[Real, Tybit1[Unit]])
+      #|  -(v3 : Cart[Real, Tybit1[Unit]])
+      #|  -(v2 : Cart[Real, Tybit1[Unit]])
+      #|  -(v3 : Cart[Real, Tybit1[Unit]])
+      #|  -(v2 : Cart[Real, Tybit1[Unit]])
+      #|  -(v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v3 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v3 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v3 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  UNION(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(a, UNION(s, t))
+      #|  {vec(0), (a : Cart[Real, _]), (b : Cart[Real, _]), (c : Cart[Real, _])} == {vec(0), b, c, a}
+      #|  !coplanar({vec(0), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]])}) && !coplanar({vec(0), -v1, v2, v3}) && !coplanar({vec(0), v1, -v2, v3}) && !coplanar({vec(0), -v1, -v2, v3}) && !coplanar({vec(0), -v1, -v2, v3}) && !coplanar({vec(0), -v1, v2, -v3}) && !coplanar({vec(0), v1, -v2, -v3}) && !coplanar({vec(0), -v1, -v2, -v3}) && !coplanar({vec(0), -v1, -v2, -v3})
+      #|  (v2 : Cart[Real, Tybit1[Unit]]) == (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v3 : Cart[Real, Tybit1[Unit]]) == (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v3 : Cart[Real, Tybit1[Unit]]) == (v2 : Cart[Real, Tybit1[Unit]])
+      #|  ((s : (_) -> Bool) == UNIV) == SUBSET(UNIV, s)
+      #|  (t : (_) -> Bool) == UNIV \226\134\146 INTER((s : (_) -> Bool), t) == s
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  measure(INTER(ball((vec(0), (r : Real))), aff_gt({vec(0), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]])}, {}))) == real_of_num(4) / real_of_num(3) * (pi * pow(r, 3))
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 r : Real, \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], real_of_num(0) < r && !coplanar({v0, v1, v2, v3}) \226\134\146 measure(INTER(ball((v0, r)), aff_gt({v0}, {v1, v2, v3}))) == LET((a123 : Real) => LET_END(LET((a231 : Real) => LET_END(LET((a312 : Real) => LET_END((a123 + (a231 + (a312 - pi))) * (pow(r, 3) / real_of_num(3))), dihV(v0, v3, v1, v2))), dihV(v0, v2, v3, v1))), dihV(v0, v1, v2, v3))
+      #|  SUBSET((s : (_) -> Bool), (i : (_) -> Bool)) \226\134\146 INTER(s, (t : (_) -> Bool)) == INTER(s, INTER(t, i))
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, measurable(s) && bounded(s) && open(t) \226\134\146 measurable(INTER(s, t))
+      #|  (w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (v2 : Cart[Real, Tybit0[Unit]]) == dropout(3, (w2 : Cart[Real, Tybit1[Unit]]))
+      #|  (v1 : Cart[Real, Tybit0[Unit]]) == dropout(3, (w1 : Cart[Real, Tybit1[Unit]]))
+      #|  (!(a : Bool) && (b : Bool) && (c : Bool)) == !(!a \226\134\146 !(b && c))
+      #|  \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !collinear({vec(0), basis(3), w1}) && !collinear({vec(0), basis(3), w2}) \226\134\146 slice(3, (t : Real), wedge(vec(0), basis(3), w1, w2)) == {(z : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < Arg(z / dropout(3, w1)) && Arg(z / dropout(3, w1)) < Arg(dropout(3, w2) / dropout(3, w1))}
+      #|  real_of_num(0) < (a : Real)
+      #|  (h : Real)
+      #|  real_of_num(0)
+      #|  (t : Real) => (g : Real) / real_of_num(2) * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 2))
+      #|  (t : Real) => (g : Real) / real_of_num(6) * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 3))
+      #|  (g : Real) == Arg(dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]])))
+      #|  (t : Real) == real_of_num(0)
+      #|  (real_of_num(0) <= (t : Real)) == (t == real_of_num(0) || real_of_num(0) < t)
+      #|  (t : Real) < (h : Real)
+      #|  (t : Real)
+      #|  (t : Real) => if real_of_num(0) < t && t < (h : Real) { Arg(dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]]))) / real_of_num(2) * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 2)) } else { real_of_num(0) }
+      #|  real_of_num(0) < inv(pow((a : Real), 2)) - real_of_num(1)
+      #|  real_of_num(0) < (t : Real)
+      #|  real_of_num(0) < inv(pow((a : Real), 2)) - real_of_num(1)
+      #|  real_of_num(0) <= (a : Real) && (a < (t : Real)) == ((u : Real) < (v : Real)) \226\134\146 (a < t && real_of_num(0) < t) == (u < v)
+      #|  (t : Real) < (h : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, (slice : (Num, Real, (Cart[Real, Tybit1[Unit]]) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)(3, t, {(y : Cart[Real, Tybit1[Unit]]) | (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) * (a : Real) < (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(y, 3) && real_of_num(0) < (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(y, 3) && (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(y, 3) < (h : Real)}) == (if t < h { (ball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), sqrt(inv(pow(a, 2)) - real_of_num(1)) * t)) } else { ({} : (Cart[Real, Tybit0[Unit]]) -> Bool) })
       #|  3
       #|  :M
       #|  :2
-      #|  (&0 * x < y /\\ u < v) /\\ &0 < y /\\ y < h <=>\n                          &0 < y /\\ y < h /\\ u < v
-      #|  n * x * a:real = x * n * a
-      #|  b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
-      #|  abs(x) <= a ==> x <= a
-      #|  y:real^3
-      #|  forall y:real^3. ~(norm(y) * norm(b % basis 3:real^3) * a\n                   < y dot (b % basis 3))
-      #|  &1 <= a
-      #|  b = &0
-      #|  b:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  v1:real^3 = v0
-      #|  forall v0 v1:real^3 w1 w2 h a.\n       &0 < a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) /\\\n           measurable(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) /\\\n           measure(frustt v0 v1 h a INTER wedge v0 v1 w1 w2) =\n           if &1 <= a \\/ h < &0 then &0\n           else azim v0 v1 w1 w2 * ((h / a) pow 2 - h pow 2) * h / &6
-      #|  &0 < a
-      #|  a * r <= r <=> &0 <= r * (&1 - a)
-      #|  r:real
-      #|  a * r:real
-      #|  \\t. k * (r pow 2 - t pow 2) / &2
-      #|  \\t. k / &2 * (r pow 2 * t - t pow 3 / &3)
-      #|  r - t <= t * (a - &1) <=> r <= t * a
+      #|  ((real_of_num(0) * (x : Real) < (y : Real) && (u : Real) < (v : Real)) && real_of_num(0) < y && y < (h : Real)) == (real_of_num(0) < y && y < h && u < v)
+      #|  (n : Real) * ((x : Real) * (a : Real)) == x * (n * a)
+      #|  ((b : Real) * (y : Real) <= (n : Real) * (b * real_of_num(1) * (a : Real))) == (b * (real_of_num(1) * y) <= b * (a * n))
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit1[Unit]], !((norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) * ((norm : (Cart[Real, Tybit1[Unit]]) -> Real)((op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((b : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))) * (a : Real)) < (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)(y, (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(b, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))))
+      #|  real_of_num(1) <= (a : Real)
+      #|  (b : Real) == real_of_num(0)
+      #|  (b : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (a : Bool) && (b : Bool) && (a && b \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  (v1 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, real_of_num(0) < a && !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 bounded(INTER(frustt(v0, v1, h, a), wedge(v0, v1, w1, w2))) && measurable(INTER(frustt(v0, v1, h, a), wedge(v0, v1, w1, w2))) && measure(INTER(frustt(v0, v1, h, a), wedge(v0, v1, w1, w2))) == (if real_of_num(1) <= a || h < real_of_num(0) { real_of_num(0) } else { azim(v0, v1, w1, w2) * ((pow(h / a, 2) - pow(h, 2)) * (h / real_of_num(6))) })
+      #|  real_of_num(0) < (a : Real)
+      #|  ((a : Real) * (r : Real) <= r) == (real_of_num(0) <= r * (real_of_num(1) - a))
+      #|  (r : Real)
+      #|  (a : Real) * (r : Real)
+      #|  (t : Real) => (k : Real) * ((pow((r : Real), 2) - pow(t, 2)) / real_of_num(2))
+      #|  (t : Real) => (k : Real) / real_of_num(2) * (pow((r : Real), 2) * t - pow(t, 3) / real_of_num(3))
+      #|  ((r : Real) - (t : Real) <= t * ((a : Real) - real_of_num(1))) == (r <= t * a)
       #|  2
-      #|  &0 <= r pow 2 - t pow 2
-      #|  a <= b /\\ a pow 2 = x ==> x / &2 = (min a b pow 2) / &2
-      #|  a * r:real
-      #|  &0 <= t
-      #|  t:real
-      #|  \\t:real. k * (r pow 2 - t pow 2) / &2
-      #|  &0 < a
-      #|  a * r:real
-      #|  &0
-      #|  \\t. k * t pow 2 * (inv (a pow 2) - &1) / &2
-      #|  \\t. k / &6 * (inv (a pow 2) - &1) * t pow 3
-      #|  a <= x ==> &0 <= a ==> &0 <= x
-      #|  &0 <= r pow 2 - t pow 2
+      #|  real_of_num(0) <= pow((r : Real), 2) - pow((t : Real), 2)
+      #|  (a : Real) <= (b : Real) && pow(a, 2) == (x : Real) \226\134\146 x / real_of_num(2) == pow(min(a, b), 2) / real_of_num(2)
+      #|  (a : Real) * (r : Real)
+      #|  real_of_num(0) <= (t : Real)
+      #|  (t : Real)
+      #|  (t : Real) => (k : Real) * ((pow((r : Real), 2) - pow(t, 2)) / real_of_num(2))
+      #|  real_of_num(0) < (a : Real)
+      #|  (a : Real) * (r : Real)
+      #|  real_of_num(0)
+      #|  (t : Real) => (k : Real) * (pow(t, 2) * ((inv(pow((a : Real), 2)) - real_of_num(1)) / real_of_num(2)))
+      #|  (t : Real) => (k : Real) / real_of_num(6) * ((inv(pow((a : Real), 2)) - real_of_num(1)) * pow(t, 3))
+      #|  (a : Real) <= (x : Real) \226\134\146 real_of_num(0) <= a \226\134\146 real_of_num(0) <= x
+      #|  real_of_num(0) <= pow((r : Real), 2) - pow((t : Real), 2)
       #|  2
-      #|  t * sqrt(inv(a pow 2) - &1) <= sqrt(r pow 2 - t pow 2)
-      #|  t * (a - &1) <= r - t <=> t * a <= r
-      #|  t pow 2 * (inv(a pow 2) - &1) <= r pow 2 - t pow 2
-      #|  t:real
-      #|  \\t. k * t pow 2 * (inv(a pow 2) - &1) / &2
-      #|  k = Arg(dropout 3 (w2:real^3) / dropout 3 (w1:real^3))
-      #|  a * r <= r <=> &0 <= r * (&1 - a)
-      #|  a * r:real
-      #|  (&1 - a) * az / &3 * r pow 3 =\n    az / &6 * (inv (a pow 2) - &1) * (a * r) pow 3 +\n    (az * &1 / &3 * (&1 - a) * r pow 3 -\n     az / &6 * (inv (a pow 2) - &1) * (a * r) pow 3)
-      #|  &0 < a
-      #|  a + b + c < d <=> a + b < d - c
-      #|  t pow 2 < r pow 2
-      #|  &0 < r
-      #|  r <= t /\\ &0 <= a /\\ &0 <= b ==> ~(a + b + t < r)
-      #|  t < r
-      #|  ~(&0 < t) ==> &0 <= a ==> ~(a < t)
-      #|  &0 < t
-      #|  z:real^2
-      #|  t:real
-      #|  forall t. slice 3 t {y:real^3 | norm y < r /\\ norm y * a < y$3} =\n        if &0 < t /\\ t < r\n        then ball(vec 0:real^2,min (sqrt(r pow 2 - t pow 2))\n                                   (t * sqrt(inv(a pow 2) - &1)))\n        else {}
-      #|  &0 < inv(a pow 2) - &1
-      #|  ~(b = &0)
-      #|  {x | P x /\\ x IN s} = {x | P x} INTER s
-      #|  &0 < b
+      #|  (t : Real) * sqrt(inv(pow((a : Real), 2)) - real_of_num(1)) <= sqrt(pow((r : Real), 2) - pow(t, 2))
+      #|  ((t : Real) * ((a : Real) - real_of_num(1)) <= (r : Real) - t) == (t * a <= r)
+      #|  pow((t : Real), 2) * (inv(pow((a : Real), 2)) - real_of_num(1)) <= pow((r : Real), 2) - pow(t, 2)
+      #|  (t : Real)
+      #|  (t : Real) => (k : Real) * (pow(t, 2) * ((inv(pow((a : Real), 2)) - real_of_num(1)) / real_of_num(2)))
+      #|  (k : Real) == Arg(dropout(3, (w2 : Cart[Real, Tybit1[Unit]])) / dropout(3, (w1 : Cart[Real, Tybit1[Unit]])))
+      #|  ((a : Real) * (r : Real) <= r) == (real_of_num(0) <= r * (real_of_num(1) - a))
+      #|  (a : Real) * (r : Real)
+      #|  (real_of_num(1) - (a : Real)) * ((az : Real) / real_of_num(3) * pow((r : Real), 3)) == az / real_of_num(6) * ((inv(pow(a, 2)) - real_of_num(1)) * pow(a * r, 3)) + (az * (real_of_num(1) / real_of_num(3) * ((real_of_num(1) - a) * pow(r, 3))) - az / real_of_num(6) * ((inv(pow(a, 2)) - real_of_num(1)) * pow(a * r, 3)))
+      #|  real_of_num(0) < (a : Real)
+      #|  ((a : Real) + ((b : Real) + (c : Real)) < (d : Real)) == (a + b < d - c)
+      #|  pow((t : Real), 2) < pow((r : Real), 2)
+      #|  real_of_num(0) < (r : Real)
+      #|  (r : Real) <= (t : Real) && real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real) \226\134\146 !(a + (b + t) < r)
+      #|  (t : Real) < (r : Real)
+      #|  !(real_of_num(0) < (t : Real)) \226\134\146 real_of_num(0) <= (a : Real) \226\134\146 !(a < t)
+      #|  real_of_num(0) < (t : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (t : Real)
+      #|  \226\136\128 t : Real, (slice : (Num, Real, (Cart[Real, Tybit1[Unit]]) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)(3, t, {(y : Cart[Real, Tybit1[Unit]]) | (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) < (r : Real) && (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) * (a : Real) < (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(y, 3)}) == (if real_of_num(0) < t && t < r { (ball : ((Cart[Real, Tybit0[Unit]], Real), Cart[Real, Tybit0[Unit]]) -> Bool)(((vec : (Num) -> Cart[Real, Tybit0[Unit]])(0), min(sqrt(pow(r, 2) - pow(t, 2)), t * sqrt(inv(pow(a, 2)) - real_of_num(1))))) } else { ({} : (Cart[Real, Tybit0[Unit]]) -> Bool) })
+      #|  real_of_num(0) < inv(pow((a : Real), 2)) - real_of_num(1)
+      #|  !((b : Real) == real_of_num(0))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && IN(x, (s : (_) -> Bool))} == INTER({(x : _) | P(x)}, s)
+      #|  real_of_num(0) < (b : Real)
       #|  3
       #|  :M
       #|  :2
-      #|  r < &0 ==> ~(norm x < r)
+      #|  (r : Real) < real_of_num(0) \226\134\146 !(norm((x : Cart[Real, _])) < r)
       #|  :real
-      #|  n * x * a:real = x * n * a
-      #|  b * y <= n * (b * &1) * a <=> b * &1 * y <= b * a * n
-      #|  abs(x) <= a ==> x <= a
-      #|  y:real^3
-      #|  forall y:real^3. ~(norm(y) * norm(b % basis 3:real^3) * a\n                   < y dot (b % basis 3))
-      #|  &1 <= a
-      #|  b = &0
-      #|  b:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  a /\\ b /\\ (a /\\ b ==> c) ==> a /\\ b /\\ c
-      #|  v1:real^3 = v0
-      #|  forall v0 v1:real^3 w1 w2 r a.\n       &0 < a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n           if &1 <= a \\/ r < &0 then &0\n           else azim v0 v1 w1 w2 / &3 * (&1 - a) * r pow 3
-      #|  a <= b ==> min b a = a
-      #|  conic_cap (v0:real^3) v1 r a
-      #|  forall v0 v1:real^3 w1 w2 r a.\n        bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2)
-      #|  forall v0 v1:real^3 w1 w2 r a.\n        measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2)
-      #|  measure(s:real^N->bool) + measure(t':real^N->bool)
-      #|  orthogonal_transformation(f:real^N->real^N)
-      #|  forall f:real^N->real^N s t t' u.\n          measurable(s) /\\ measurable(t) /\\ measurable(u) /\\\n          orthogonal_transformation f /\\\n          s SUBSET u /\\ t' SUBSET u /\\ s INTER t' = {} /\\\n          negligible(u DIFF (s UNION t')) /\\\n          ((forall y. ?x. f x = y) ==> IMAGE f t = t')\n          ==> measure s + measure t = measure u
-      #|  (dropout 3 :real^3->real^2) (vector [x$1; x$2; --(x$3)]) =\n                (dropout 3 :real^3->real^2) x
-      #|  (a ==> (b <=> b')) ==> (a /\\ b <=> a /\\ b')
-      #|  n * a > --x <=> n * --a < x
-      #|  norm(vector [x$1; x$2; --(x$3)]:real^3) = norm(x:real^3)
-      #|  x:real^3
-      #|  rcone_eq (vec 0:real^3) (basis 3) a
-      #|  (ball(vec 0,r) INTER {x | norm x * a > x$3}) INTER\n              wedge (vec 0:real^3) (basis 3) w1 w2
-      #|  (\\x. vector[x$1; x$2; --(x$3)]):real^3->real^3
-      #|  --a:real
-      #|  r:real
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  basis 3:real^3
-      #|  vec 0:real^3
-      #|  a:real
-      #|  r:real
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  basis 3:real^3
-      #|  vec 0:real^3
-      #|  &0 < v1 ==> n * (abs v1 * y) * a = v1 * n * y * a
-      #|  ~collinear{vec 0:real^3,v1 % basis 3,w2}
-      #|  ~collinear{vec 0:real^3,v1 % basis 3,w1}
-      #|  collinear {vec 0:real^3,v1 % basis 3,w2}
-      #|  collinear {vec 0:real^3,v1 % basis 3,w1}
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  v1:real
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  forall v0 v1:real^3 w1 w2 r a.\n        &0 <= r\n        ==> measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) +\n            measure(conic_cap v0 v1 r (--a) INTER wedge v0 v1 w1 w2) =\n            azim v0 v1 w1 w2 * &2 * r pow 3 / &3
-      #|  &0
-      #|  r:real
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  ball(v0:real^3,r) = {}
-      #|  a = &1
-      #|  &0 <= a ==> &0 < a \\/ a = &0
-      #|  forall v0 v1:real^3 w1 w2 r a.\n       &0 <= a /\\ ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n           if &1 < abs a \\/ r < &0 then &0\n           else azim v0 v1 w1 w2 / &3 * (&1 - a) * r pow 3
-      #|  ~(&1 < --a) ==> max a (-- &1) = a
-      #|  &1 < --a ==> max a (-- &1) = -- &1
-      #|  ~(&0 <= a) ==> ~(&1 < a) /\\ abs a = --a
-      #|  ball(v0:real^3,r) = {}
-      #|  r < &0
-      #|  a:real
-      #|  r:real
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  --a:real
-      #|  r:real
-      #|  w2:real^3
-      #|  w1:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  &0 <= a ==> abs a = a /\\ max a (-- &1) = a
-      #|  &0 <= a
-      #|  forall v0 v1:real^3 w1 w2 r a.\n       ~collinear {v0,v1,w1} /\\ ~collinear {v0,v1,w2}\n       ==> bounded(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measurable(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) /\\\n           measure(conic_cap v0 v1 r a INTER wedge v0 v1 w1 w2) =\n                if &1 < a \\/ r < &0 then &0\n                else azim v0 v1 w1 w2 / &3 * (&1 - max a (-- &1)) * r pow 3
-      #|  cone v S:real^A->bool = affsign sgn_ge {v} S
-      #|  cone0 v S:real^A->bool = affsign sgn_gt {v} S
-      #|  solid_triangle v0 S r = normball v0 r INTER cone0 v0 S
-      #|  rect (a:real^3) (b:real^3) =\n        {(v:real^3) | forall i. (a$i < v$i /\\ v$i < b$i )}
-      #|  forall a b. rect a b = interval(a,b)
-      #|  rcone_ge z w h =\n        rcone_gt z w h UNION\n        { x | (x - z) dot (w - z) = norm(x - z) * norm(w - z) * h}
-      #|  rcone_gt z w h =\n        rcone_ge z w h DIFF\n        { x | (x - z) dot (w - z) = norm(x - z) * norm(w - z) * h}
-      #|  negligible:(real^3->bool)->bool
-      #|  measure:(real^3->bool)->real
-      #|  is_sphere x=(?(v:real^3)(r:real). (r> &0)/\\ (x={w:real^3 | norm (w-v)= r}))
-      #|  c_cone (v,w:real^3, r:real)=\n       {x:real^3 | ((x-v) dot w = norm (x-v)* norm w* r)}
-      #|  circular_cone (V:real^3-> bool)=\n   (? (v,w:real^3)(r:real). ~(w = vec 0) /\\ V = c_cone (v,w,r))
-      #|  w + v:real^N = v <=> w = vec 0
-      #|  (w + v) - v:real^N = w
-      #|  r:real
-      #|  v:real^3
-      #|  w + v:real^3
-      #|  s:real^3->bool
-      #|  (forall P. ((plane P)\\/ (is_sphere P) \\/ (circular_cone P)) ==> NULLSET P) /\\\n   (forall(s:real^3->bool) t. (NULLSET s /\\ NULLSET t) ==> NULLSET (s UNION t))
-      #|  primitive (C:real^3->bool) =\n  ((?v0 v1 v2 v3 r.  (C = solid_triangle v0 {v1,v2,v3} r)) \\/\n  (?v0 v1 v2 v3. (C = conv0 {v0,v1,v2,v3})) \\/\n  (?v0 v1 v2 v3 h a. &0 < a /\\\n                     (C = frustt v0 v1 h a INTER wedge v0 v1 v2 v3)) \\/\n  (?v0 v1 v2 v3 r c. (C = conic_cap v0 v1 r c INTER wedge v0 v1 v2 v3)) \\/\n  (?a b.  (C = rect a b)) \\/\n  (?t r. (C = ellipsoid t r)) \\/\n  (?v0 v1 v2 v3 r. (C = normball v0 r INTER wedge v0 v1 v2 v3)))
-      #|  collinear {v0:real^3, v1, v3}
-      #|  collinear {v0:real^3, v1, v2}
-      #|  a:real
-      #|  h:real
-      #|  v3:real^3
-      #|  v2:real^3
-      #|  v1:real^3
-      #|  v0:real^3
-      #|  C:real^3->bool
-      #|  \\i. (t:real^3)$i
-      #|  t:real^3
-      #|  X:real^3->bool
-      #|  (forall C. primitive C ==> measurable C) /\\\n   (forall Z. NULLSET Z ==> measurable Z) /\\\n   (forall X t. measurable X ==> (measurable (IMAGE (scale t) X))) /\\\n   (forall X v. measurable X ==> (measurable (IMAGE ((+) v) X))) /\\\n   (forall(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s UNION t)) /\\\n   (forall(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s INTER t)) /\\\n   (forall(s:real^3->bool) t. (measurable s /\\ measurable t)\n                         ==> measurable (s DIFF t))
-      #|  vol_solid_triangle v0 v1 v2 v3 r =\n   let a123 = dihV v0 v1 v2 v3 in\n   let a231 = dihV v0 v2 v3 v1 in\n   let a312 = dihV v0 v3 v1 v2 in\n     (a123 + a231 + a312 - pi)*(r pow 3)/(&3)
-      #|  vol_frustt_wedge v0 v1 v2 v3 h a =\n       (azim v0 v1 v2 v3)*(h pow 3)*(&1/(a*a) - &1)/(&6)
-      #|  vol_conic_cap_wedge v0 v1 v2 v3 r c =\n       (azim v0 v1 v2 v3)*(&1 - c)*(r pow 3)/(&3)
-      #|  vol_conv v1 v2 v3 v4 =\n   let x12 = dist(v1,v2) pow 2 in\n   let x13 = dist(v1,v3) pow 2 in\n   let x14 = dist(v1,v4) pow 2 in\n   let x23 = dist(v2,v3) pow 2 in\n   let x24 = dist(v2,v4) pow 2 in\n   let x34 = dist(v3,v4) pow 2 in\n   sqrt(delta_x x12 x13 x14 x34 x24 x23)/(&12)
-      #|  vol_rect a b =\n   if (a$1 < b$1) /\\ (a$2 < b$2) /\\ (a$3 < b$3) then\n   (b$3-a$3)*(b$2-a$2)*(b$1-a$1) else &0
-      #|  vol_ball_wedge v0 v1 v2 v3 r =\n   (azim v0 v1 v2 v3)*(&2)*(r pow 3)/(&3)
-      #|  SDIFF X Y = (X DIFF Y) UNION (Y DIFF X)
-      #|  (a:real^3)$3 = (b:real^3)$3
-      #|  (a:real^3)$2 = (b:real^3)$2
-      #|  (a:real^3)$1 = (b:real^3)$1
-      #|  b:real^3
-      #|  a:real^3
-      #|  -- &1 <= c ==> max c (-- &1) = c
-      #|  c <= &1 ==> ~(&1 < c)
-      #|  &0 <= r ==> ~(r < &0)
-      #|  a <= &1 ==> (&1 <= a <=> a = &1)
-      #|  &0 <= h ==> ~(h < &0)
-      #|  \\i. (t:real^3)$i
-      #|  t:real^3
-      #|  X:real^3->bool
-      #|  t:real^3->bool
-      #|  s:real^3->bool
-      #|  (forall C. measurable C ==> vol C >= &0) /\\\n   (forall Z. NULLSET Z ==> (vol Z = &0)) /\\\n   (forall X Y. measurable X /\\ measurable Y /\\ NULLSET (SDIFF X Y)\n          ==> (vol X = vol Y)) /\\\n   (forall X t. (measurable X) /\\ (measurable (IMAGE (scale t) X))\n          ==> (vol (IMAGE (scale t) X) = abs(t$1 * t$2 * t$3)*vol(X))) /\\\n   (forall X v. measurable X ==> (vol (IMAGE ((+) v) X) = vol X)) /\\\n   (forall v0 v1 v2 v3 r. (r > &0) /\\ ~coplanar{v0,v1,v2,v3}\n                    ==> vol (solid_triangle v0 {v1,v2,v3} r) =\n                        vol_solid_triangle v0 v1 v2 v3 r) /\\\n   (forall v0 v1 v2 v3. vol(conv0 {v0,v1,v2,v3}) = vol_conv v0 v1 v2 v3) /\\\n   (forall v0 v1 v2 v3 h a. ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                      (h >= &0) /\\ (a > &0) /\\ (a <= &1)\n                      ==> vol(frustt v0 v1 h a INTER wedge v0 v1 v2 v3) =\n                          vol_frustt_wedge v0 v1 v2 v3 h a) /\\\n   (forall v0 v1 v2 v3 r c.  ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                       (r >= &0) /\\ (c >= -- (&1)) /\\ (c <= &1)\n                       ==> (vol(conic_cap v0 v1 r c INTER wedge v0 v1 v2 v3) =\n                           vol_conic_cap_wedge v0 v1 v2 v3 r c)) /\\\n   (forall(a:real^3) (b:real^3). vol(rect a b) = vol_rect a b) /\\\n   (forall v0 v1 v2 v3 r. ~(collinear {v0,v1,v2}) /\\ ~(collinear {v0,v1,v3}) /\\\n                    (r >= &0)\n                    ==> (vol(normball v0 r INTER wedge v0 v1 v2 v3) =\n                         vol_ball_wedge v0 v1 v2 v3 r))
-      #|  inv t:real
-      #|  q:real^N
-      #|  t % q:real^N
-      #|  vec 0:real^N
-      #|  (g:real^N->bool) face_of P
-      #|  P:real^N->bool
-      #|  g:real^N->bool
-      #|  P:real^N->bool
-      #|  ~((vec 0:real^N) IN g)
-      #|  ?g:real^N->bool. g facet_of P /\\ f' SUBSET g
-      #|  t:real
-      #|  u:real
-      #|  t:real / s = u
-      #|  &0 < t
-      #|  &0 < s
-      #|  s < t
-      #|  &0 < u /\\ &1 < u
-      #|  u:real = t / s
-      #|  (%) (inv s):real^N->real^N
-      #|  F ==> p
-      #|  (forall P f f' p q s t. Q P f f' p q s t) <=>\n    (forall s t P f f' p q. Q P f f' p q s t)
-      #|  forall P:real^N->bool f f' p q s t.\n        polyhedron P /\\ vec 0 IN relative_interior P /\\\n        f face_of P /\\ ~(f = P) /\\ f' face_of P /\\ ~(f' = P) /\\\n        p IN f /\\ q IN f' /\\ s > &0 /\\ t > &0 /\\ s % p = t % q\n        ==> s = t
-      #|  forall P:real^N->bool f f' p q s t.\n        polyhedron P /\\ vec 0 IN interior P /\\\n        f face_of P /\\ ~(f = P) /\\ f' face_of P /\\ ~(f' = P) /\\\n        p IN f /\\ q IN f' /\\ s > &0 /\\ t > &0 /\\ s % p = t % q\n        ==> s = t
-      #|  vertices s = {x:real^N | x extreme_point_of s}
-      #|  edges s = {{v,w} | segment[v,w] edge_of s}
-      #|  forall a s. vertices (IMAGE (\\x. a + x) s) = IMAGE (\\x. a + x) (vertices s)
-      #|  forall f s. linear f /\\ (forall x y. f x = f y ==> x = y)\n         ==> vertices(IMAGE f s) = IMAGE f (vertices s)
-      #|  forall a s. edges (IMAGE (\\x. a + x) s) = IMAGE (IMAGE (\\x. a + x)) (edges s)
-      #|  (f:real^M->real^N) w
-      #|  (f:real^M->real^N) v
-      #|  w:real^M
-      #|  v:real^M
-      #|  ?v w. x = (f:real^M->real^N) v /\\ y = f w
-      #|  y:real^N
-      #|  x:real^N
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> edges(IMAGE f s) = IMAGE (IMAGE f) (edges s)
-      #|  (forall x. ~(x = a) ==> f x = g x)\n    ==> (((\\x. f x) --> l) (at a within s) <=> (g --> l) (at a within s))
-      #|  (forall x. ~(x = a) ==> f x = g x)\n    ==> (((\\x. f x) --> l) (at a) <=> (g --> l) (at a))
-      #|  (forall x. x IN s ==> f x = g x) ==> product s (\\i. f i) = product s g
-      #|  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> product (a..b) (\\i. f i) = product (a..b) g
-      #|  (forall x. p x ==> f x = g x)\n    ==> product {y | p y} (\\i. f i) = product {y | p y} g
-      #|  (forall x. x IN s ==> f x = g x) ==> vsum s (\\i. f i) = vsum s g
-      #|  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> vsum (a..b) (\\i. f i) = vsum (a..b) g
-      #|  (forall x. p x ==> f x = g x) ==> vsum {y | p y} (\\i. f i) = vsum {y | p y} g
-      #|  (forall x. x IN s ==> f x = g x) ==> sum s (\\i. f i) = sum s g
-      #|  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> sum (a..b) (\\i. f i) = sum (a..b) g
-      #|  (forall x. p x ==> f x = g x) ==> sum {y | p y} (\\i. f i) = sum {y | p y} g
-      #|  (forall x. x IN s ==> f x = g x) ==> nsum s (\\i. f i) = nsum s g
-      #|  (forall i. a <= i /\\ i <= b ==> f i = g i)\n    ==> nsum (a..b) (\\i. f i) = nsum (a..b) g
-      #|  (forall x. p x ==> f x = g x) ==> nsum {y | p y} (\\i. f i) = nsum {y | p y} g
-      #|  (g <=> g')\n    ==> (g' ==> t = t')\n    ==> (~g' ==> e = e')\n    ==> (if g then t else e) = (if g' then t' else e')
-      #|  (p <=> p') ==> (p' ==> (q <=> q')) ==> (p ==> q <=> p' ==> q')
+      #|  (n : Real) * ((x : Real) * (a : Real)) == x * (n * a)
+      #|  ((b : Real) * (y : Real) <= (n : Real) * (b * real_of_num(1) * (a : Real))) == (b * (real_of_num(1) * y) <= b * (a * n))
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (y : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 y : Cart[Real, Tybit1[Unit]], !((norm : (Cart[Real, Tybit1[Unit]]) -> Real)(y) * ((norm : (Cart[Real, Tybit1[Unit]]) -> Real)((op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((b : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))) * (a : Real)) < (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)(y, (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(b, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))))
+      #|  real_of_num(1) <= (a : Real)
+      #|  (b : Real) == real_of_num(0)
+      #|  (b : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (a : Bool) && (b : Bool) && (a && b \226\134\146 (c : Bool)) \226\134\146 a && b && c
+      #|  (v1 : Cart[Real, Tybit1[Unit]]) == (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) < a && !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 bounded(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) && measurable(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) && measure(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) == (if real_of_num(1) <= a || r < real_of_num(0) { real_of_num(0) } else { azim(v0, v1, w1, w2) / real_of_num(3) * ((real_of_num(1) - a) * pow(r, 3)) })
+      #|  (a : Real) <= (b : Real) \226\134\146 min(b, a) == a
+      #|  conic_cap((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (r : Real), (a : Real))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, bounded(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2)))
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, measurable(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2)))
+      #|  measure((s : (Cart[Real, N]) -> Bool)) + measure((t' : (Cart[Real, N]) -> Bool))
+      #|  orthogonal_transformation((f : (Cart[Real, N]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, measurable(s) && measurable(t) && measurable(u) && orthogonal_transformation(f) && SUBSET(s, u) && SUBSET(t', u) && INTER(s, t') == {} && negligible(DIFF(u, UNION(s, t'))) && ((\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, N], f(x) == y) \226\134\146 IMAGE(f, t) == t') \226\134\146 measure(s) + measure(t) == measure(u)
+      #|  (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((x : Cart[Real, Tybit1[Unit]]), 1), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 2), -(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 3)])) == (dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, x)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (b' : Bool)) \226\134\146 (a && b) == (a && b')
+      #|  ((n : Real) * (a : Real) > -(x : Real)) == (n * -a < x)
+      #|  (norm : (Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((x : Cart[Real, Tybit1[Unit]]), 1), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 2), -(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 3)])) == (norm : (Cart[Real, Tybit1[Unit]]) -> Real)(x)
+      #|  (x : Cart[Real, Tybit1[Unit]])
+      #|  (rcone_eq : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real, Cart[Real, Tybit1[Unit]]) -> Bool)((vec : (Num) -> Cart[Real, Tybit1[Unit]])(0), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3), (a : Real))
+      #|  INTER(INTER(ball((vec(0), (r : Real))), {(x : Cart[Real, Tybit1[Unit]]) | norm(x) * (a : Real) > op_dollar(x, 3)}), wedge(vec(0), basis(3), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])))
+      #|  (x : Cart[Real, Tybit1[Unit]]) => (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 1), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 2), -(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(x, 3)])
+      #|  -(a : Real)
+      #|  (r : Real)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  (a : Real)
+      #|  (r : Real)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+      #|  (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
+      #|  real_of_num(0) < (v1 : Real) \226\134\146 (n : Real) * (abs(v1) * (y : Real) * (a : Real)) == v1 * (n * (y * a))
+      #|  !collinear({vec(0), op_pct((v1 : Real), basis(3)), (w2 : Cart[Real, Tybit1[Unit]])})
+      #|  !collinear({vec(0), op_pct((v1 : Real), basis(3)), (w1 : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({vec(0), op_pct((v1 : Real), basis(3)), (w2 : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({vec(0), op_pct((v1 : Real), basis(3)), (w1 : Cart[Real, Tybit1[Unit]])})
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  (v1 : Real)
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) <= r \226\134\146 measure(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) + measure(INTER(conic_cap(v0, v1, r, -a), wedge(v0, v1, w1, w2))) == azim(v0, v1, w1, w2) * (real_of_num(2) * (pow(r, 3) / real_of_num(3)))
+      #|  real_of_num(0)
+      #|  (r : Real)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  ball(((v0 : Cart[Real, Tybit1[Unit]]), (r : Real))) == {}
+      #|  (a : Real) == real_of_num(1)
+      #|  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) < a || a == real_of_num(0)
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) <= a && !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 bounded(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) && measurable(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) && measure(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) == (if real_of_num(1) < abs(a) || r < real_of_num(0) { real_of_num(0) } else { azim(v0, v1, w1, w2) / real_of_num(3) * ((real_of_num(1) - a) * pow(r, 3)) })
+      #|  !(real_of_num(1) < -(a : Real)) \226\134\146 max(a, -real_of_num(1)) == a
+      #|  real_of_num(1) < -(a : Real) \226\134\146 max(a, -real_of_num(1)) == -real_of_num(1)
+      #|  !(real_of_num(0) <= (a : Real)) \226\134\146 !(real_of_num(1) < a) && abs(a) == -a
+      #|  ball(((v0 : Cart[Real, Tybit1[Unit]]), (r : Real))) == {}
+      #|  (r : Real) < real_of_num(0)
+      #|  (a : Real)
+      #|  (r : Real)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  -(a : Real)
+      #|  (r : Real)
+      #|  (w2 : Cart[Real, Tybit1[Unit]])
+      #|  (w1 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  real_of_num(0) <= (a : Real) \226\134\146 abs(a) == a && max(a, -real_of_num(1)) == a
+      #|  real_of_num(0) <= (a : Real)
+      #|  \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, !collinear({v0, v1, w1}) && !collinear({v0, v1, w2}) \226\134\146 bounded(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) && measurable(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) && measure(INTER(conic_cap(v0, v1, r, a), wedge(v0, v1, w1, w2))) == (if real_of_num(1) < a || r < real_of_num(0) { real_of_num(0) } else { azim(v0, v1, w1, w2) / real_of_num(3) * ((real_of_num(1) - max(a, -real_of_num(1))) * pow(r, 3)) })
+      #|  (cone : (Cart[Real, A], (Cart[Real, A]) -> Bool, Cart[Real, A]) -> Bool)((v : Cart[Real, A]), (S : (Cart[Real, A]) -> Bool)) == affsign(sgn_ge, {v}, S)
+      #|  (cone0 : (Cart[Real, A], (Cart[Real, A]) -> Bool, Cart[Real, A]) -> Bool)((v : Cart[Real, A]), (S : (Cart[Real, A]) -> Bool)) == affsign(sgn_gt, {v}, S)
+      #|  (solid_triangle : (Cart[Real, _], (Cart[Real, _]) -> Bool, Real, Cart[Real, _]) -> Bool)((v0 : Cart[Real, _]), (S : (Cart[Real, _]) -> Bool), (r : Real)) == INTER(normball(v0, r), cone0(v0, S))
+      #|  (rect : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]])) == {(v : Cart[Real, Tybit1[Unit]]) | \226\136\128 i : Num, op_dollar(a, i) < op_dollar(v, i) && op_dollar(v, i) < op_dollar(b, i)}
+      #|  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], rect(a, b) == interval((a, b))
+      #|  rcone_ge((z : Cart[Real, _]), (w : Cart[Real, _]), (h : Real)) == UNION(rcone_gt(z, w, h), {(x : Cart[Real, _]) | dot(x - z, w - z) == norm(x - z) * (norm(w - z) * h)})
+      #|  rcone_gt((z : Cart[Real, _]), (w : Cart[Real, _]), (h : Real)) == DIFF(rcone_ge(z, w, h), {(x : Cart[Real, _]) | dot(x - z, w - z) == norm(x - z) * (norm(w - z) * h)})
+      #|  (negligible : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+      #|  (measure : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Real)
+      #|  (is_sphere : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((x : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (\226\136\131 v : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, r > real_of_num(0) && x == {(w : Cart[Real, Tybit1[Unit]]) | norm(w - v) == r})
+      #|  (c_cone : ((Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real), Cart[Real, Tybit1[Unit]]) -> Bool)(((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (r : Real))) == {(x : Cart[Real, Tybit1[Unit]]) | dot(x - v, w) == norm(x - v) * (norm(w) * r)}
+      #|  (circular_cone : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((V : (Cart[Real, Tybit1[Unit]]) -> Bool)) == exists(GABS((f : ((Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]])) -> Bool) => \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], GEQ(f((v, w)), \226\136\131 r : Real, !(w == vec(0)) && V == c_cone((v, w, r)))))
+      #|  ((w : Cart[Real, N]) + (v : Cart[Real, N]) == v) == (w == vec(0))
+      #|  (w : Cart[Real, N]) + (v : Cart[Real, N]) - v == w
+      #|  (r : Real)
+      #|  (v : Cart[Real, Tybit1[Unit]])
+      #|  (w : Cart[Real, Tybit1[Unit]]) + (v : Cart[Real, Tybit1[Unit]])
+      #|  (s : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (\226\136\128 P : (Cart[Real, Tybit1[Unit]]) -> Bool, plane(P) || is_sphere(P) || circular_cone(P) \226\134\146 NULLSET(P)) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, NULLSET(s) && NULLSET(t) \226\134\146 NULLSET(UNION(s, t)))
+      #|  (primitive : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((C : (Cart[Real, Tybit1[Unit]]) -> Bool)) == ((\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, C == solid_triangle(v0, {v1, v2, v3}, r)) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], C == conv0({v0, v1, v2, v3})) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 h : Real, \226\136\131 a : Real, real_of_num(0) < a && C == INTER(frustt(v0, v1, h, a), wedge(v0, v1, v2, v3))) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, \226\136\131 c : Real, C == INTER(conic_cap(v0, v1, r, c), wedge(v0, v1, v2, v3))) || (\226\136\131 a : Cart[Real, Tybit1[Unit]], \226\136\131 b : Cart[Real, Tybit1[Unit]], C == rect(a, b)) || (\226\136\131 t : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, C == ellipsoid(t, r)) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, C == INTER(normball(v0, r), wedge(v0, v1, v2, v3))))
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]])})
+      #|  collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]])})
+      #|  (a : Real)
+      #|  (h : Real)
+      #|  (v3 : Cart[Real, Tybit1[Unit]])
+      #|  (v2 : Cart[Real, Tybit1[Unit]])
+      #|  (v1 : Cart[Real, Tybit1[Unit]])
+      #|  (v0 : Cart[Real, Tybit1[Unit]])
+      #|  (C : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (i : Num) => op_dollar((t : Cart[Real, Tybit1[Unit]]), i)
+      #|  (t : Cart[Real, Tybit1[Unit]])
+      #|  (X : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (\226\136\128 C : (Cart[Real, Tybit1[Unit]]) -> Bool, primitive(C) \226\134\146 measurable(C)) && (\226\136\128 Z : (Cart[Real, Tybit1[Unit]]) -> Bool, NULLSET(Z) \226\134\146 measurable(Z)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : Cart[Real, Tybit1[Unit]], measurable(X) \226\134\146 measurable(IMAGE(scale(t), X))) && (\226\136\128 X : (Cart[Real, _]) -> Bool, \226\136\128 v : Cart[Real, _], measurable(X) \226\134\146 measurable(IMAGE(op_plus(v), X))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(UNION(s, t))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(INTER(s, t))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(DIFF(s, t)))
+      #|  (vol_solid_triangle : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _], Real) -> Real)((v0 : Cart[Real, _]), (v1 : Cart[Real, _]), (v2 : Cart[Real, _]), (v3 : Cart[Real, _]), (r : Real)) == LET((a123 : Real) => LET_END(LET((a231 : Real) => LET_END(LET((a312 : Real) => LET_END((a123 + (a231 + (a312 - pi))) * (pow(r, 3) / real_of_num(3))), dihV(v0, v3, v1, v2))), dihV(v0, v2, v3, v1))), dihV(v0, v1, v2, v3))
+      #|  (vol_frustt_wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real, Real) -> Real)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]]), (h : Real), (a : Real)) == azim(v0, v1, v2, v3) * (pow(h, 3) * ((real_of_num(1) / (a * a) - real_of_num(1)) / real_of_num(6)))
+      #|  (vol_conic_cap_wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real, Real) -> Real)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]]), (r : Real), (c : Real)) == azim(v0, v1, v2, v3) * ((real_of_num(1) - c) * (pow(r, 3) / real_of_num(3)))
+      #|  (vol_conv : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((v1 : Cart[Real, _]), (v2 : Cart[Real, _]), (v3 : Cart[Real, _]), (v4 : Cart[Real, _])) == LET((x12 : Real) => LET_END(LET((x13 : Real) => LET_END(LET((x14 : Real) => LET_END(LET((x23 : Real) => LET_END(LET((x24 : Real) => LET_END(LET((x34 : Real) => LET_END(sqrt(delta_x(x12, x13, x14, x34, x24, x23)) / real_of_num(12)), pow(dist((v3, v4)), 2))), pow(dist((v2, v4)), 2))), pow(dist((v2, v3)), 2))), pow(dist((v1, v4)), 2))), pow(dist((v1, v3)), 2))), pow(dist((v1, v2)), 2))
+      #|  (vol_rect : (Cart[Real, _], Cart[Real, _]) -> Real)((a : Cart[Real, _]), (b : Cart[Real, _])) == (if op_dollar(a, 1) < op_dollar(b, 1) && op_dollar(a, 2) < op_dollar(b, 2) && op_dollar(a, 3) < op_dollar(b, 3) { (op_dollar(b, 3) - op_dollar(a, 3)) * ((op_dollar(b, 2) - op_dollar(a, 2)) * (op_dollar(b, 1) - op_dollar(a, 1))) } else { real_of_num(0) })
+      #|  (vol_ball_wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real) -> Real)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]]), (r : Real)) == azim(v0, v1, v2, v3) * (real_of_num(2) * (pow(r, 3) / real_of_num(3)))
+      #|  (SDIFF : ((_) -> Bool, (_) -> Bool, _) -> Bool)((X : (_) -> Bool), (Y : (_) -> Bool)) == UNION(DIFF(X, Y), DIFF(Y, X))
+      #|  op_dollar((a : Cart[Real, Tybit1[Unit]]), 3) == op_dollar((b : Cart[Real, Tybit1[Unit]]), 3)
+      #|  op_dollar((a : Cart[Real, Tybit1[Unit]]), 2) == op_dollar((b : Cart[Real, Tybit1[Unit]]), 2)
+      #|  op_dollar((a : Cart[Real, Tybit1[Unit]]), 1) == op_dollar((b : Cart[Real, Tybit1[Unit]]), 1)
+      #|  (b : Cart[Real, Tybit1[Unit]])
+      #|  (a : Cart[Real, Tybit1[Unit]])
+      #|  -real_of_num(1) <= (c : Real) \226\134\146 max(c, -real_of_num(1)) == c
+      #|  (c : Real) <= real_of_num(1) \226\134\146 !(real_of_num(1) < c)
+      #|  real_of_num(0) <= (r : Real) \226\134\146 !(r < real_of_num(0))
+      #|  (a : Real) <= real_of_num(1) \226\134\146 (real_of_num(1) <= a) == (a == real_of_num(1))
+      #|  real_of_num(0) <= (h : Real) \226\134\146 !(h < real_of_num(0))
+      #|  (i : Num) => op_dollar((t : Cart[Real, Tybit1[Unit]]), i)
+      #|  (t : Cart[Real, Tybit1[Unit]])
+      #|  (X : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (t : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Tybit1[Unit]]) -> Bool)
+      #|  (\226\136\128 C : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(C) \226\134\146 vol(C) >= real_of_num(0)) && (\226\136\128 Z : (Cart[Real, Tybit1[Unit]]) -> Bool, NULLSET(Z) \226\134\146 vol(Z) == real_of_num(0)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 Y : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(X) && measurable(Y) && NULLSET(SDIFF(X, Y)) \226\134\146 vol(X) == vol(Y)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : Cart[Real, Tybit1[Unit]], measurable(X) && measurable(IMAGE(scale(t), X)) \226\134\146 vol(IMAGE(scale(t), X)) == abs(op_dollar(t, 1) * (op_dollar(t, 2) * op_dollar(t, 3))) * vol(X)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 v : Cart[Real, Tybit1[Unit]], measurable(X) \226\134\146 vol(IMAGE(op_plus(v), X)) == vol(X)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, r > real_of_num(0) && !coplanar({v0, v1, v2, v3}) \226\134\146 vol(solid_triangle(v0, {v1, v2, v3}, r)) == vol_solid_triangle(v0, v1, v2, v3, r)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], vol(conv0({v0, v1, v2, v3})) == vol_conv(v0, v1, v2, v3)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && h >= real_of_num(0) && a > real_of_num(0) && a <= real_of_num(1) \226\134\146 vol(INTER(frustt(v0, v1, h, a), wedge(v0, v1, v2, v3))) == vol_frustt_wedge(v0, v1, v2, v3, h, a)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 c : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && r >= real_of_num(0) && c >= -real_of_num(1) && c <= real_of_num(1) \226\134\146 vol(INTER(conic_cap(v0, v1, r, c), wedge(v0, v1, v2, v3))) == vol_conic_cap_wedge(v0, v1, v2, v3, r, c)) && (\226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], vol(rect(a, b)) == vol_rect(a, b)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && r >= real_of_num(0) \226\134\146 vol(INTER(normball(v0, r), wedge(v0, v1, v2, v3))) == vol_ball_wedge(v0, v1, v2, v3, r))
+      #|  inv((t : Real))
+      #|  (q : Cart[Real, N])
+      #|  op_pct((t : Real), (q : Cart[Real, N]))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  face_of((g : (Cart[Real, N]) -> Bool), (P : (Cart[Real, N]) -> Bool))
+      #|  (P : (Cart[Real, N]) -> Bool)
+      #|  (g : (Cart[Real, N]) -> Bool)
+      #|  (P : (Cart[Real, N]) -> Bool)
+      #|  !IN(vec(0), (g : (Cart[Real, N]) -> Bool))
+      #|  \226\136\131 g : (Cart[Real, N]) -> Bool, facet_of(g, (P : (Cart[Real, N]) -> Bool)) && SUBSET((f' : (Cart[Real, N]) -> Bool), g)
+      #|  (t : Real)
+      #|  (u : Real)
+      #|  (t : Real) / (s : Real) == (u : Real)
+      #|  real_of_num(0) < (t : Real)
+      #|  real_of_num(0) < (s : Real)
+      #|  (s : Real) < (t : Real)
+      #|  real_of_num(0) < (u : Real) && real_of_num(1) < u
+      #|  (u : Real) == (t : Real) / (s : Real)
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((s : Real)))
+      #|  false \226\134\146 (p : Bool)
+      #|  (\226\136\128 P : _, \226\136\128 f : _, \226\136\128 f' : _, \226\136\128 p : _, \226\136\128 q : _, \226\136\128 s : _, \226\136\128 t : _, (Q : (_, _, _, _, _, _, _) -> Bool)(P, f, f', p, q, s, t)) == (\226\136\128 s : _, \226\136\128 t : _, \226\136\128 P : _, \226\136\128 f : _, \226\136\128 f' : _, \226\136\128 p : _, \226\136\128 q : _, Q(P, f, f', p, q, s, t))
+      #|  \226\136\128 P : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 f' : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], \226\136\128 q : Cart[Real, N], \226\136\128 s : Real, \226\136\128 t : Real, polyhedron(P) && IN(vec(0), relative_interior(P)) && face_of(f, P) && !(f == P) && face_of(f', P) && !(f' == P) && IN(p, f) && IN(q, f') && s > real_of_num(0) && t > real_of_num(0) && op_pct(s, p) == op_pct(t, q) \226\134\146 s == t
+      #|  \226\136\128 P : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 f' : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], \226\136\128 q : Cart[Real, N], \226\136\128 s : Real, \226\136\128 t : Real, polyhedron(P) && IN(vec(0), interior(P)) && face_of(f, P) && !(f == P) && face_of(f', P) && !(f' == P) && IN(p, f) && IN(q, f') && s > real_of_num(0) && t > real_of_num(0) && op_pct(s, p) == op_pct(t, q) \226\134\146 s == t
+      #|  (vertices : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((s : (Cart[Real, N]) -> Bool)) == {(x : Cart[Real, N]) | extreme_point_of(x, s)}
+      #|  (edges : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((s : (Cart[Real, _]) -> Bool)) == {{(v : Cart[Real, _]), (w : Cart[Real, _])} | edge_of(segment([(v, w)]), s)}
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, vertices(IMAGE((x : Cart[Real, _]) => a + x, s)) == IMAGE((x : Cart[Real, _]) => a + x, vertices(s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], f(x) == f(y) \226\134\146 x == y) \226\134\146 vertices(IMAGE(f, s)) == IMAGE(f, vertices(s))
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, edges(IMAGE((x : Cart[Real, _]) => a + x, s)) == IMAGE(IMAGE((x : Cart[Real, _]) => a + x), edges(s))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])((w : Cart[Real, M]))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])((v : Cart[Real, M]))
+      #|  (w : Cart[Real, M])
+      #|  (v : Cart[Real, M])
+      #|  \226\136\131 v : Cart[Real, M], \226\136\131 w : Cart[Real, M], (x : Cart[Real, N]) == (f : (Cart[Real, M]) -> Cart[Real, N])(v) && (y : Cart[Real, N]) == f(w)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 edges(IMAGE(f, s)) == IMAGE(IMAGE(f), edges(s))
+      #|  (\226\136\128 x : Cart[Real, _], !(x == (a : Cart[Real, _])) \226\134\146 (f : (Cart[Real, _]) -> Cart[Real, _])(x) == (g : (Cart[Real, _]) -> Cart[Real, _])(x)) \226\134\146 op_minus_minus_gt((x : Cart[Real, _]) => f(x), (l : Cart[Real, _]), within(at(a), (s : (Cart[Real, _]) -> Bool))) == op_minus_minus_gt(g, l, within(at(a), s))
+      #|  (\226\136\128 x : Cart[Real, _], !(x == (a : Cart[Real, _])) \226\134\146 (f : (Cart[Real, _]) -> Cart[Real, _])(x) == (g : (Cart[Real, _]) -> Cart[Real, _])(x)) \226\134\146 op_minus_minus_gt((x : Cart[Real, _]) => f(x), (l : Cart[Real, _]), at(a)) == op_minus_minus_gt(g, l, at(a))
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 product(s, (i : _) => f(i)) == product(s, g)
+      #|  (\226\136\128 i : Num, (a : Num) <= i && i <= (b : Num) \226\134\146 (f : (Num) -> Real)(i) == (g : (Num) -> Real)(i)) \226\134\146 product(op_dot_dot(a, b), (i : Num) => f(i)) == product(op_dot_dot(a, b), g)
+      #|  (\226\136\128 x : _, (p : (_) -> Bool)(x) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 product({(y : _) | p(y)}, (i : _) => f(i)) == product({(y : _) | p(y)}, g)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> Cart[Real, _])(x) == (g : (_) -> Cart[Real, _])(x)) \226\134\146 vsum(s, (i : _) => f(i)) == vsum(s, g)
+      #|  (\226\136\128 i : Num, (a : Num) <= i && i <= (b : Num) \226\134\146 (f : (Num) -> Cart[Real, _])(i) == (g : (Num) -> Cart[Real, _])(i)) \226\134\146 vsum(op_dot_dot(a, b), (i : Num) => f(i)) == vsum(op_dot_dot(a, b), g)
+      #|  (\226\136\128 x : _, (p : (_) -> Bool)(x) \226\134\146 (f : (_) -> Cart[Real, _])(x) == (g : (_) -> Cart[Real, _])(x)) \226\134\146 vsum({(y : _) | p(y)}, (i : _) => f(i)) == vsum({(y : _) | p(y)}, g)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 sum(s, (i : _) => f(i)) == sum(s, g)
+      #|  (\226\136\128 i : Num, (a : Num) <= i && i <= (b : Num) \226\134\146 (f : (Num) -> Real)(i) == (g : (Num) -> Real)(i)) \226\134\146 sum(op_dot_dot(a, b), (i : Num) => f(i)) == sum(op_dot_dot(a, b), g)
+      #|  (\226\136\128 x : _, (p : (_) -> Bool)(x) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 sum({(y : _) | p(y)}, (i : _) => f(i)) == sum({(y : _) | p(y)}, g)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> Num)(x) == (g : (_) -> Num)(x)) \226\134\146 nsum(s, (i : _) => f(i)) == nsum(s, g)
+      #|  (\226\136\128 i : Num, (a : Num) <= i && i <= (b : Num) \226\134\146 (f : (Num) -> Num)(i) == (g : (Num) -> Num)(i)) \226\134\146 nsum(op_dot_dot(a, b), (i : Num) => f(i)) == nsum(op_dot_dot(a, b), g)
+      #|  (\226\136\128 x : _, (p : (_) -> Bool)(x) \226\134\146 (f : (_) -> Num)(x) == (g : (_) -> Num)(x)) \226\134\146 nsum({(y : _) | p(y)}, (i : _) => f(i)) == nsum({(y : _) | p(y)}, g)
+      #|  (g : Bool) == (g' : Bool) \226\134\146 (g' \226\134\146 (t : _) == (t' : _)) \226\134\146 (!g' \226\134\146 (e : _) == (e' : _)) \226\134\146 (if g { t } else { e }) == (if g' { t' } else { e' })
+      #|  (p : Bool) == (p' : Bool) \226\134\146 (p' \226\134\146 (q : Bool) == (q' : Bool)) \226\134\146 (p \226\134\146 q) == (p' \226\134\146 q')
       #|NORM_CROSS =  |- (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\y:cart(real,tybit1(1)). ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) x:cart(real,tybit1(1))) y:cart(real,tybit1(1))))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) ((#real_mul:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,tybit1(1)),real) y:cart(real,tybit1(1)))) (#sin:fun(real,real) ((#vector_angle:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),real)) x:cart(real,tybit1(1))) y:cart(real,tybit1(1)))))))))))
       #|COPLANAR_INSERT_0_NEG =  |- ((#=:fun(bool,fun(bool,bool)) (#coplanar:fun(fun(cart(real,'?1),bool),bool) ((#INSERT:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),fun(cart(real,'?1),bool))) (#vec:fun(num,cart(real,'?1)) (#NUMERAL:fun(num,num) #_0:num))) ((#INSERT:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),fun(cart(real,'?1),bool))) (#vector_neg:fun(cart(real,'?1),cart(real,'?1)) x:cart(real,'?1))) s:fun(cart(real,'?1),bool))))) (#coplanar:fun(fun(cart(real,'?1),bool),bool) ((#INSERT:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),fun(cart(real,'?1),bool))) (#vec:fun(num,cart(real,'?1)) (#NUMERAL:fun(num,num) #_0:num))) ((#INSERT:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),fun(cart(real,'?1),bool))) x:cart(real,'?1)) s:fun(cart(real,'?1),bool)))))
       #|COPLANAR_IMP_NEGLIGIBLE =  |- (#forall:fun(fun(fun(cart(real,tybit1(1)),bool),bool),bool) (\s:fun(cart(real,tybit1(1)),bool). ((#==>:fun(bool,fun(bool,bool)) (#coplanar:fun(fun(cart(real,tybit1(1)),bool),bool) s:fun(cart(real,tybit1(1)),bool))) (#negligible:fun(fun(cart(real,tybit1(1)),bool),bool) s:fun(cart(real,tybit1(1)),bool)))))
