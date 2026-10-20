@@ -33,7 +33,7 @@ fn step_3() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([subfield_of()]))
   subfield_imp_subring_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall r s:A->bool. s subfield_of r ==> s subring_of r"),
+      @term_syntax.parse_term("∀ r : Ring[A], ∀ s : (A) -> Bool, subfield_of(s, r) → subring_of(s, r)"),
       t1,
     ),
   )
@@ -114,7 +114,7 @@ fn step_6() -> Unit raise {
   )
   subfield_of_imp_nontrivial_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(r:A ring) s. s subfield_of r ==> ~trivial_ring r"),
+      @term_syntax.parse_term("∀ r : Ring[A], ∀ s : (A) -> Bool, subfield_of(s, r) → !trivial_ring(r)"),
       t4,
     ),
   )
@@ -401,8 +401,8 @@ fn step_11() -> Unit raise {
   let t30 = @simp.asm_simp_tac(@list.List([@ringtheory.field_unit()]))
   let t29 = @tactics.match_mp_tac(@ringtheory.ring_mul_rinv())
   let t28 = @simp.asm_simp_tac(@list.List([]))
-  let t27 = @tactics.exists_tac(@parser.parse_term("ring_inv k x:A"))
-  let t26 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t27 = @tactics.exists_tac(@term_syntax.parse_term("ring_inv((k : Ring[A]), (x : A))"))
+  let t26 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t25 = @simp.asm_simp_tac(
     @list.List([
       @ringtheory.field(),
@@ -470,7 +470,7 @@ fn step_12() -> Unit raise {
       @ringtheory.subring_of_imp_subset(),
     ]),
   )
-  let t84 = @parser.parse_term("x:A")
+  let t84 = @term_syntax.parse_term("(x : A)")
   let t87 = @tactics.disch_then(fn(
     x86 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -545,7 +545,7 @@ fn step_12() -> Unit raise {
       @ringtheory.carrier_subring_generated_subring(),
     ]),
   )
-  let t76 = @parser.parse_term("h:A->bool")
+  let t76 = @term_syntax.parse_term("(h : (A) -> Bool)")
   let t79 = @tactics.first_x_assum(fn(
     x78 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -614,16 +614,16 @@ fn step_12() -> Unit raise {
       }
     })(((x77 : @kernel.Thm) => @bool.spec(t76, x77))(x78))
   })
-  let t72 = @tactics.x_gen_tac(@parser.parse_term("h:A->bool"))
+  let t72 = @tactics.x_gen_tac(@term_syntax.parse_term("(h : (A) -> Bool)"))
   let t71 = @simp.asm_rewrite_tac(@list.List([@sets.in_inters()]))
-  let t70 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t70 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t69 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t68 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t67 = @simp.asm_rewrite_tac(@list.List([]))
-  let t63 = @parser.parse_term("x:A")
+  let t63 = @term_syntax.parse_term("(x : A)")
   let t66 = @tactics.disch_then(fn(
     x65 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -745,7 +745,7 @@ fn step_12() -> Unit raise {
     }),
     t57,
   ])
-  let t50 = @parser.parse_term("g:A->bool")
+  let t50 = @term_syntax.parse_term("(g : (A) -> Bool)")
   let t53 = @tactics.first_assum(fn(
     x52 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -814,7 +814,7 @@ fn step_12() -> Unit raise {
       }
     })(((x51 : @kernel.Thm) => @bool.spec(t50, x51))(x52))
   })
-  let t44 = @parser.parse_term("g:A->bool")
+  let t44 = @term_syntax.parse_term("(g : (A) -> Bool)")
   let t46 = @tactics.disch_then((x45 : @kernel.Thm) => {
     @tactics.x_choose_tac(t44, x45)
   })
@@ -894,7 +894,7 @@ fn step_12() -> Unit raise {
       }
     })(t41(x42))
   })
-  let t36 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t36 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t35 = @list.List([
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
@@ -1076,7 +1076,7 @@ fn step_14() -> Unit raise {
   )
   carrier_subfield_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall r:A ring. ring_carrier r subfield_of r <=> field r"),
+      @term_syntax.parse_term("∀ r : Ring[A], subfield_of(ring_carrier(r), r) == field(r)"),
       t95,
     ),
   )
@@ -1101,7 +1101,7 @@ fn step_15() -> Unit raise {
   )
   in_subfield_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall r h:A->bool. h subfield_of r ==> ring_0 r IN h"),
+      @term_syntax.parse_term("∀ r : Ring[A], ∀ h : (A) -> Bool, subfield_of(h, r) → IN(ring_0(r), h)"),
       t96,
     ),
   )
@@ -1124,7 +1124,7 @@ fn step_16() -> Unit raise {
   )
   in_subfield_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall r h:A->bool. h subfield_of r ==> ring_1 r IN h"),
+      @term_syntax.parse_term("∀ r : Ring[A], ∀ h : (A) -> Bool, subfield_of(h, r) → IN(ring_1(r), h)"),
       t97,
     ),
   )
@@ -1430,9 +1430,9 @@ fn step_26() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th_2 = x192
-    let t194 = @tactics.mp_tac(@bool.spec(@parser.parse_term("a:A"), th_2))
+    let t194 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(a : A)"), th_2))
     @tactics.then_tac(
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("b:A"), th_2)),
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(b : A)"), th_2)),
       t194,
     )
   })
@@ -1443,10 +1443,10 @@ fn step_26() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t190 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t189 = @simp.asm_rewrite_tac(@list.List([]))
-  let t187 = @parser.parse_term("a:A")
+  let t187 = @term_syntax.parse_term("(a : A)")
   let t188 = @tactics.map_every(
     fn(
       x184 : @kernel.Term,
@@ -1494,10 +1494,10 @@ fn step_26() -> Unit raise {
         s185(x186)
       }
     },
-    @list.List([@parser.parse_term("b:A"), t187]),
+    @list.List([@term_syntax.parse_term("(b : A)"), t187]),
   )
   let t183 = @simp.rewrite_tac(@list.List([@ringtheory.ring_div()]))
-  let t182 = @parser.parse_term("b:A")
+  let t182 = @term_syntax.parse_term("(b : A)")
   let t198 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1514,7 +1514,7 @@ fn step_26() -> Unit raise {
                             @tactics.then_tac(
                               @tactics.map_every(
                                 @tactics.x_gen_tac,
-                                @list.List([@parser.parse_term("a:A"), t182]),
+                                @list.List([@term_syntax.parse_term("(a : A)"), t182]),
                               ),
                               @tactics.strip_tac,
                             ),
@@ -1546,7 +1546,7 @@ fn step_26() -> Unit raise {
   )
   let t181 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_inv_v1()]))
   let t180 = @tactics.undisch_tac(
-    @parser.parse_term("~(ring_1 r:A = ring_0 r)"),
+    @term_syntax.parse_term("!(ring_1((r : Ring[A])) == ring_0(r))"),
   )
   let t179 = @simp.asm_rewrite_tac(@list.List([]))
   let t178 = @tactics.remove_then("*", fn(
@@ -1571,16 +1571,16 @@ fn step_26() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th_1 = x175
-    let t177 = @tactics.mp_tac(@bool.spec(@parser.parse_term("b:A"), th_1))
+    let t177 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(b : A)"), th_1))
     @tactics.then_tac(
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("d:A"), th_1)),
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(d : A)"), th_1)),
       t177,
     )
   })
   let t174 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_mul()]),
   )
-  let t172 = @parser.parse_term("ring_mul r b d:A")
+  let t172 = @term_syntax.parse_term("ring_mul((r : Ring[A]), (b : A), (d : A))")
   let t173 = @tactics.map_every(
     fn(
       x169 : @kernel.Term,
@@ -1628,14 +1628,14 @@ fn step_26() -> Unit raise {
         s170(x171)
       }
     },
-    @list.List([@parser.parse_term("ring_mul r a c:A"), t172]),
+    @list.List([@term_syntax.parse_term("ring_mul((r : Ring[A]), (a : A), (c : A))"), t172]),
   )
-  let t167 = @parser.parse_term("d:A")
+  let t167 = @term_syntax.parse_term("(d : A)")
   let t168 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t167]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t167]),
   )
-  let t166 = @parser.parse_term("b:A")
+  let t166 = @term_syntax.parse_term("(b : A)")
   let t199 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1650,7 +1650,7 @@ fn step_26() -> Unit raise {
                         @tactics.then_tac(
                           @tactics.map_every(
                             @tactics.x_gen_tac,
-                            @list.List([@parser.parse_term("a:A"), t166]),
+                            @list.List([@term_syntax.parse_term("(a : A)"), t166]),
                           ),
                           @tactics.strip_tac,
                         ),
@@ -1678,7 +1678,7 @@ fn step_26() -> Unit raise {
   )
   let t165 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_inv_v1()]))
   let t164 = @tactics.undisch_tac(
-    @parser.parse_term("~(ring_1 r:A = ring_0 r)"),
+    @term_syntax.parse_term("!(ring_1((r : Ring[A])) == ring_0(r))"),
   )
   let t163 = @simp.asm_rewrite_tac(@list.List([]))
   let t162 = @tactics.remove_then("*", fn(
@@ -1703,16 +1703,16 @@ fn step_26() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th = x159
-    let t161 = @tactics.mp_tac(@bool.spec(@parser.parse_term("b:A"), th))
+    let t161 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(b : A)"), th))
     @tactics.then_tac(
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("d:A"), th)),
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(d : A)"), th)),
       t161,
     )
   })
   let t158 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_mul()]),
   )
-  let t156 = @parser.parse_term("ring_mul r b d:A")
+  let t156 = @term_syntax.parse_term("ring_mul((r : Ring[A]), (b : A), (d : A))")
   let t157 = @tactics.map_every(
     fn(
       x153 : @kernel.Term,
@@ -1761,16 +1761,16 @@ fn step_26() -> Unit raise {
       }
     },
     @list.List([
-      @parser.parse_term("ring_add r (ring_mul r a d) (ring_mul r b c):A"),
+      @term_syntax.parse_term("ring_add((r : Ring[A]), ring_mul(r, (a : A), (d : A)), ring_mul(r, (b : A), (c : A)))"),
       t156,
     ]),
   )
-  let t151 = @parser.parse_term("d:A")
+  let t151 = @term_syntax.parse_term("(d : A)")
   let t152 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t151]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t151]),
   )
-  let t150 = @parser.parse_term("b:A")
+  let t150 = @term_syntax.parse_term("(b : A)")
   let t200 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1785,7 +1785,7 @@ fn step_26() -> Unit raise {
                         @tactics.then_tac(
                           @tactics.map_every(
                             @tactics.x_gen_tac,
-                            @list.List([@parser.parse_term("a:A"), t150]),
+                            @list.List([@term_syntax.parse_term("(a : A)"), t150]),
                           ),
                           @tactics.strip_tac,
                         ),
@@ -1815,7 +1815,7 @@ fn step_26() -> Unit raise {
     @list.List([@ringtheory.ring_inv_v1()]),
   )
   let t148 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_div()]))
-  let t146 = @parser.parse_term("b:A")
+  let t146 = @term_syntax.parse_term("(b : A)")
   let t147 = @tactics.map_every(
     fn(
       x143 : @kernel.Term,
@@ -1863,9 +1863,9 @@ fn step_26() -> Unit raise {
         s144(x145)
       }
     },
-    @list.List([@parser.parse_term("ring_neg r a:A"), t146]),
+    @list.List([@term_syntax.parse_term("ring_neg((r : Ring[A]), (a : A))"), t146]),
   )
-  let t142 = @parser.parse_term("b:A")
+  let t142 = @term_syntax.parse_term("(b : A)")
   let t201 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1873,7 +1873,7 @@ fn step_26() -> Unit raise {
           @tactics.then_tac(
             @tactics.map_every(
               @tactics.x_gen_tac,
-              @list.List([@parser.parse_term("a:A"), t142]),
+              @list.List([@term_syntax.parse_term("(a : A)"), t142]),
             ),
             @tactics.strip_tac,
           ),
@@ -1888,7 +1888,7 @@ fn step_26() -> Unit raise {
   let t141 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_div_1(), @ringtheory.ring_1_v1()]),
   )
-  let t140 = @parser.parse_term("ring_1 r:A")
+  let t140 = @term_syntax.parse_term("ring_1((r : Ring[A]))")
   let t202 = @tactics.then_tac(
     @tactics.map_every(
       fn(
@@ -1937,14 +1937,14 @@ fn step_26() -> Unit raise {
           s138(x139)
         }
       },
-      @list.List([@parser.parse_term("ring_1 r:A"), t140]),
+      @list.List([@term_syntax.parse_term("ring_1((r : Ring[A]))"), t140]),
     ),
     t141,
   )
   let t136 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_div_1(), @ringtheory.ring_0_v1()]),
   )
-  let t135 = @parser.parse_term("ring_1 r:A")
+  let t135 = @term_syntax.parse_term("ring_1((r : Ring[A]))")
   let t203 = @tactics.then_tac(
     @tactics.map_every(
       fn(
@@ -1993,7 +1993,7 @@ fn step_26() -> Unit raise {
           s133(x134)
         }
       },
-      @list.List([@parser.parse_term("ring_0 r:A"), t135]),
+      @list.List([@term_syntax.parse_term("ring_0((r : Ring[A]))"), t135]),
     ),
     t136,
   )
@@ -2120,7 +2120,7 @@ fn step_26() -> Unit raise {
     ]),
   )
   let t113 = @simp.once_rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool)) == !(p → !q)"))]),
   )
   let t112 = @simp.rewrite_tac(@list.List([subfield_of()]))
   let t205 = @tactics.thenl(
@@ -2299,7 +2299,7 @@ fn step_28() -> Unit raise {
   })
   let t226 = @tactics.repeat_tac(@tactics.strip_tac)
   let t225 = @simp.asm_rewrite_tac(@list.List([]))
-  let t221 = @parser.parse_term("h:A->bool")
+  let t221 = @term_syntax.parse_term("(h : (A) -> Bool)")
   let t224 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x223 : @kernel.Thm,
@@ -2371,7 +2371,7 @@ fn step_28() -> Unit raise {
     }),
   )
   let t217 = @tactics.first_x_assum(
-    @tactics.x_choose_then(@parser.parse_term("h:A->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(h : (A) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -2542,7 +2542,7 @@ fn step_29() -> Unit raise {
     },
     @list.List([@class.not_exists_thm()]),
   )
-  let t242 = @parser.parse_term("ring_carrier r:A->bool")
+  let t242 = @term_syntax.parse_term("ring_carrier((r : Ring[A]))")
   let t248 = @tactics.first_x_assum(fn(
     x247 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2749,7 +2749,7 @@ fn step_32() -> Unit raise {
   let t259 = @simp.rewrite_tac(
     @list.List([
       subfield_generated(),
-      @sets.set_rule(@parser.parse_term("g INTER g INTER s = g INTER s")),
+      @sets.set_rule(@term_syntax.parse_term("INTER((g : (_) -> Bool), INTER(g, (s : (_) -> Bool))) == INTER(g, s)")),
     ]),
   )
   subfield_generated_restrict_c.set(
@@ -3202,7 +3202,7 @@ fn step_42() -> Unit raise {
   let t314 = @simp.asm_rewrite_tac(
     @list.List([carrier_subfield_of(), @sets.inter_subset()]),
   )
-  let t313 = @tactics.exists_tac(@parser.parse_term("ring_carrier r:A->bool"))
+  let t313 = @tactics.exists_tac(@term_syntax.parse_term("ring_carrier((r : Ring[A]))"))
   let t312 = @simp.rewrite_tac(@list.List([subfield_subfield_generated_alt()]))
   let t315 = @tactics.then_tac(
     @tactics.then_tac(
@@ -3432,7 +3432,7 @@ fn step_49() -> Unit raise {
     @simp.rewrite_tac(
       @list.List([
         @class.taut(
-          @parser.parse_term("(p ==> (q <=> r)) <=> (p /\\ q <=> p /\\ r)"),
+          @term_syntax.parse_term("((p : Bool) → (q : Bool) == (r : Bool)) == ((p && q) == (p && r))"),
         ),
       ]),
     ),
@@ -3619,7 +3619,7 @@ fn step_54() -> Unit raise {
   )
   subfield_generated_ring_carrier_c.set(
     @tactics.prove(
-      @parser.parse_term("forall r:A ring. subfield_generated r (ring_carrier r) = r"),
+      @term_syntax.parse_term("∀ r : Ring[A], subfield_generated(r, ring_carrier(r)) == r"),
       t342,
     ),
   )
@@ -3642,7 +3642,7 @@ fn step_55() -> Unit raise {
   let t343 = @meson.meson_tac(
     @list.List([
       subfield_generated_subset_carrier(),
-      @sets.set_rule(@parser.parse_term("s SUBSET t <=> t INTER s = s")),
+      @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (INTER(t, s) == s)")),
     ]),
   )
   subfield_generated_subset_carrier_subset_c.set(
@@ -3729,7 +3729,7 @@ fn step_57() -> Unit raise {
   let t352 = @simp.rewrite_tac(@list.List([subfield_generated_ring_carrier()]))
   let t351 = @simp.asm_simp_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("u SUBSET s ==> u INTER s = u")),
+      @sets.set_rule(@term_syntax.parse_term("SUBSET((u : (_) -> Bool), (s : (_) -> Bool)) → INTER(u, s) == u")),
     ]),
   )
   let t350 = @simp.once_rewrite_tac(@list.List([subfield_generated_restrict()]))
@@ -3846,7 +3846,7 @@ fn step_60() -> Unit raise {
   )
   let t357 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("(p ==> r) /\\ (r ==> (p <=> q)) ==> (p <=> q /\\ r)"),
+      @term_syntax.parse_term("((p : Bool) → (r : Bool)) && (r → p == (q : Bool)) → p == (q && r)"),
     ),
   )
   let t361 = @tactics.then_tac(
@@ -3905,7 +3905,7 @@ fn step_61() -> Unit raise {
     t370,
   ])
   let t367 = @tactics.subgoal_then(
-    @parser.parse_term("(h:A->bool) subring_of (subfield_generated r k)"),
+    @term_syntax.parse_term("subring_of((h : (A) -> Bool), subfield_generated((r : Ring[A]), (k : (A) -> Bool)))"),
     fn(
       x364 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4097,7 +4097,7 @@ fn step_65() -> Unit raise {
   let t412 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.exists_tac(@parser.parse_term("h:A->bool")),
+        @tactics.exists_tac(@term_syntax.parse_term("(h : (A) -> Bool)")),
         t409,
       ),
       t410,
@@ -4108,7 +4108,7 @@ fn step_65() -> Unit raise {
     @list.List([ring_carrier_subfield_generated_subset()]),
   )
   let t407 = @simp.asm_simp_tac(@list.List([subfield_of_inter()]))
-  let t406 = @tactics.exists_tac(@parser.parse_term("h INTER j:A->bool"))
+  let t406 = @tactics.exists_tac(@term_syntax.parse_term("INTER((h : (A) -> Bool), (j : (A) -> Bool))"))
   let t405 = @simp.rewrite_tac(
     @list.List([subfield_of_subfield_generated_eq()]),
   )
@@ -4119,7 +4119,7 @@ fn step_65() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.first_x_assum(
-                @tactics.x_choose_then(@parser.parse_term("j:A->bool"))(fn(
+                @tactics.x_choose_then(@term_syntax.parse_term("(j : (A) -> Bool)"))(fn(
                   x402 : @kernel.Thm,
                 ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
                   (
@@ -4181,7 +4181,7 @@ fn step_65() -> Unit raise {
     t412,
   ])
   let t401 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t400 = @tactics.x_gen_tac(@parser.parse_term("h:A->bool"))
+  let t400 = @tactics.x_gen_tac(@term_syntax.parse_term("(h : (A) -> Bool)"))
   let t399 = @tactics.match_mp_tac(@sets.inters_antimono_gen())
   let t398 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t397 = @simp.asm_rewrite_tac(@list.List([]))
@@ -4267,7 +4267,7 @@ fn step_65() -> Unit raise {
     })(t391(x392))
   })
   let t387 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(~p ==> p) ==> p")),
+    @class.taut(@term_syntax.parse_term("(!(p : Bool) → p) → p")),
   )
   let t386 = @simp.rewrite_tac(@list.List([]))
   let t383 = @drule.match_mp(
@@ -4345,7 +4345,7 @@ fn step_65() -> Unit raise {
   })
   let t379 = @simp.asm_rewrite_tac(@list.List([]))
   let t378 = @class.asm_cases_tac(
-    @parser.parse_term("subfield_generated r s:A ring = r"),
+    @term_syntax.parse_term("subfield_generated((r : Ring[A]), (s : (A) -> Bool)) == r"),
   )
   let t414 = @tactics.thenl(
     @tactics.then_tac(
@@ -4509,7 +4509,7 @@ fn step_67() -> Unit raise {
     @list.List([subfield_generated_subset_carrier()]),
   )
   let t441 = @tactics.then_tac(
-    @tactics.exists_tac(@parser.parse_term("h:A->bool")),
+    @tactics.exists_tac(@term_syntax.parse_term("(h : (A) -> Bool)")),
     t440,
   )
   let t438 = @tactics.asm_tac(@sets.set_tac)(
@@ -4544,7 +4544,7 @@ fn step_67() -> Unit raise {
     t441,
   ])
   let t435 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t434 = @tactics.x_gen_tac(@parser.parse_term("h:A->bool"))
+  let t434 = @tactics.x_gen_tac(@term_syntax.parse_term("(h : (A) -> Bool)"))
   let t433 = @tactics.match_mp_tac(@sets.inters_antimono_gen())
   let t432 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t431 = @simp.rewrite_tac(
@@ -5022,7 +5022,7 @@ fn step_73() -> Unit raise {
       @ringtheory.ring_image(),
     ]),
   )
-  let t517 = @tactics.exists_tac(@parser.parse_term("r':B ring"))
+  let t517 = @tactics.exists_tac(@term_syntax.parse_term("(r' : Ring[B])"))
   let t516 = @tactics.match_mp_tac(
     @ringtheory.ring_homomorphism_image_preimage_eq(),
   )
@@ -5104,18 +5104,18 @@ fn step_73() -> Unit raise {
       @sets.subset_restrict(),
     ]),
   )
-  let t504 = @parser.parse_term("{x | x IN ring_carrier r /\\ (f:A->B) x IN h}")
-  let t505 = @parser.parse_term("f:A->B")
-  let t506 = @parser.parse_term("r':B ring")
+  let t504 = @term_syntax.parse_term("{(x : A) | IN(x, ring_carrier((r : Ring[A]))) && IN((f : (A) -> B)(x), (h : (B) -> Bool))}")
+  let t505 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t506 = @term_syntax.parse_term("(r' : Ring[B])")
   let t507 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t506, t505, t504]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t506, t505, t504]),
       @ringtheory.subring_generated_by_homomorphic_image(),
     ),
   )
   let t503 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t502 = @tactics.undisch_tac(
-    @parser.parse_term("field (subring_generated r' h:B ring)"),
+    @term_syntax.parse_term("field(subring_generated((r' : Ring[B]), (h : (B) -> Bool)))"),
   )
   let t501 = @tactics.disch_then(fn(
     x498 : @kernel.Thm,
@@ -5473,7 +5473,7 @@ fn step_74() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
   ])
   let t547 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (f:A->B) (ring_carrier(subfield_generated r s))"),
+    @term_syntax.parse_term("IMAGE((f : (A) -> B), ring_carrier(subfield_generated((r : Ring[A]), (s : (A) -> Bool))))"),
   )
   let t551 = @list.List([
     @tactics.thenl(
@@ -5497,13 +5497,13 @@ fn step_74() -> Unit raise {
   let t544 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(subring_generated_by_subfield_generated())]),
   )
-  let t543 = @tactics.exists_tac(@parser.parse_term("r':B ring"))
+  let t543 = @tactics.exists_tac(@term_syntax.parse_term("(r' : Ring[B])"))
   let t542 = @tactics.match_mp_tac(subfield_of_monomorphic_preimage())
-  let t541 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
+  let t541 = @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t540 = @tactics.match_mp_tac(subfield_of_subfield_generated_rev())
   let t536 = @drule.match_mp(
     @sets.set_rule(
-      @parser.parse_term("s SUBSET {x | x IN t /\\ P x} ==> s SUBSET t"),
+      @term_syntax.parse_term("SUBSET((s : (_) -> Bool), {(x : _) | IN(x, (t : (_) -> Bool)) && (P : (_) -> Bool)(x)}) → SUBSET(s, t)"),
     ),
   )
   let t538 = @tactics.disch_then(fn(
@@ -5585,7 +5585,7 @@ fn step_74() -> Unit raise {
   )
   let t530 = @tactics.match_mp_tac(subfield_generated_inc_gen())
   let t529 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t528 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t528 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t539 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -5608,12 +5608,12 @@ fn step_74() -> Unit raise {
     t538,
   ])
   let t527 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t525 = @simp.asm_rewrite_tac(
     @list.List([subfield_subfield_generated_eq()]),
   )
-  let t524 = @tactics.exists_tac(@parser.parse_term("r:A ring"))
+  let t524 = @tactics.exists_tac(@term_syntax.parse_term("(r : Ring[A])"))
   let t523 = @tactics.match_mp_tac(subfield_of_monomorphic_image())
   let t526 = @list.List([
     @tactics.then_tac(
@@ -6187,8 +6187,8 @@ fn step_89() -> Unit raise {
     @list.List([@bool.conjunct2(subfield_generated_v1())]),
   )
   let t614 = @simp.rewrite_tac(@list.List([subfield_generated_idempot()]))
-  let t609 = @parser.parse_term("s:A->bool")
-  let t610 = @list.List([@parser.parse_term("P:A->bool"), t609])
+  let t609 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t610 = @list.List([@term_syntax.parse_term("(P : (A) -> Bool)"), t609])
   let t613 = @tactics.disch_then(fn(
     x612 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6258,7 +6258,7 @@ fn step_89() -> Unit raise {
     })(((x611 : @kernel.Thm) => @bool.specl(t610, x611))(x612))
   })
   let t605 = @simp.asm_rewrite_tac(@list.List([]))
-  let t601 = @parser.parse_term("subfield_generated r s:A ring")
+  let t601 = @term_syntax.parse_term("subfield_generated((r : Ring[A]), (s : (A) -> Bool))")
   let t604 = @tactics.first_x_assum(fn(
     x603 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6573,10 +6573,10 @@ pub fn poly_subfield_generated_clauses() -> @kernel.Thm {
 /// FIELD_SUBFIELD_GENERATED_UNITS
 fn step_92() -> Unit raise {
   let t657 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t655 = @parser.parse_term("s:A->bool")
+  let t655 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t656 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t655]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t655]),
       @ringtheory.subring_generated_subset_carrier(),
     ),
   )
@@ -6589,7 +6589,7 @@ fn step_92() -> Unit raise {
       @ringtheory.ring_div_1(),
     ]),
   )
-  let t651 = @parser.parse_term("ring_1 r:A")
+  let t651 = @term_syntax.parse_term("ring_1((r : Ring[A]))")
   let t652 = @tactics.map_every(
     fn(
       x648 : @kernel.Term,
@@ -6637,9 +6637,9 @@ fn step_92() -> Unit raise {
         s649(x650)
       }
     },
-    @list.List([@parser.parse_term("a:A"), t651]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t651]),
   )
-  let t647 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t647 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t646 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.in_inter(), @sets.in_elim_thm()]),
   )
@@ -6691,17 +6691,17 @@ fn step_92() -> Unit raise {
     t657,
   )
   let t643 = @sets.set_tac(@list.List([]))
-  let t641 = @parser.parse_term("s:A->bool")
+  let t641 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t642 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t641]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t641]),
       ring_carrier_subfield_generated_subset(),
     ),
   )
-  let t639 = @parser.parse_term("s:A->bool")
+  let t639 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t640 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t639]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t639]),
       subring_subset_subfield_generated(),
     ),
   )
@@ -6970,7 +6970,7 @@ fn step_93() -> Unit raise {
   let t702 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([@sets.subset()])),
   )
-  let t700 = @parser.parse_term("ring_1 r:A")
+  let t700 = @term_syntax.parse_term("ring_1((r : Ring[A]))")
   let t701 = @tactics.map_every(
     fn(
       x697 : @kernel.Term,
@@ -7018,9 +7018,9 @@ fn step_93() -> Unit raise {
         s698(x699)
       }
     },
-    @list.List([@parser.parse_term("a:A"), t700]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t700]),
   )
-  let t696 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t696 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t695 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.in_elim_thm()]),
   )
@@ -7066,32 +7066,32 @@ fn step_93() -> Unit raise {
   )
   let t689 = @simp.rewrite_tac(@list.List([@ringtheory.rings_eq()]))
   let t688 = @simp.asm_rewrite_tac(@list.List([]))
-  let t686 = @parser.parse_term("s:A->bool")
+  let t686 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t687 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t686]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t686]),
       field_subfield_generated_units(),
     ),
   )
   let t685 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.subring_subring_generated()]),
   )
-  let t683 = @parser.parse_term("ring_carrier(subring_generated r s):A->bool")
+  let t683 = @term_syntax.parse_term("ring_carrier(subring_generated((r : Ring[A]), (s : (A) -> Bool)))")
   let t684 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t683]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t683]),
       subfield_of_subring_quotients(),
     ),
   )
   let t682 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t680 = @parser.parse_term("s:A->bool")
+  let t680 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t681 = @tactics.spec_tac(
-    @parser.parse_term("ring_carrier r INTER s:A->bool"),
+    @term_syntax.parse_term("INTER(ring_carrier((r : Ring[A])), (s : (A) -> Bool))"),
     t680,
   )
   let t679 = @tactics.mp_tac(
     @sets.set_rule(
-      @parser.parse_term("ring_carrier r INTER s SUBSET ring_carrier(r:A ring)"),
+      @term_syntax.parse_term("SUBSET(INTER(ring_carrier((r : Ring[A])), (s : (A) -> Bool)), ring_carrier(r))"),
     ),
   )
   let t678 = @simp.gen_rewrite_tac(
@@ -7499,7 +7499,7 @@ fn step_96() -> Unit raise {
     @tactics.thenl(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.x_gen_tac(@parser.parse_term("x:A")),
+          @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)")),
           @tactics.disch_tac,
         ),
         t786,
@@ -7531,7 +7531,7 @@ fn step_96() -> Unit raise {
   ) raise) raise {
     @tactics.all_tac
   })
-  let t780 = @tactics.undisch_tac(@parser.parse_term("field(r: A ring)"))
+  let t780 = @tactics.undisch_tac(@term_syntax.parse_term("field((r : Ring[A]))"))
   let t777 = @drule.match_mp(
     @simp.rewrite_rule(@list.List([@sets.subset()]))(
       @ringtheory.ring_carrier_subring_generated_subset(),
@@ -7607,7 +7607,7 @@ fn step_96() -> Unit raise {
       })(t777(x778))
     }),
   )
-  let t773 = @tactics.undisch_tac(@parser.parse_term("~(b:A = ring_0 r)"))
+  let t773 = @tactics.undisch_tac(@term_syntax.parse_term("!((b : A) == ring_0((r : Ring[A])))"))
   let t772 = @simp.expand_tac("y")
   let t771 = @list.List([
     @tactics.all_tac,
@@ -7708,26 +7708,26 @@ fn step_96() -> Unit raise {
     t788,
   ])
   let t767 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t766 = @tactics.exists_tac(@parser.parse_term("ring_mul r b c:A"))
-  let t764 = @parser.parse_term("b:A")
+  let t766 = @tactics.exists_tac(@term_syntax.parse_term("ring_mul((r : Ring[A]), (b : A), (c : A))"))
+  let t764 = @term_syntax.parse_term("(b : A)")
   let t765 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t764]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t764]),
   )
   let t763 = @simp.asm_simp_tac(
     @list.List([@theorems.left_imp_exists_thm(), field_subfield_generated()]),
   )
-  let t760 = @parser.parse_term("y:A")
-  let t761 = @parser.parse_term("s:A->bool")
+  let t760 = @term_syntax.parse_term("(y : A)")
+  let t761 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t762 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t761, t760]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t761, t760]),
       subfield_generated_quotients(),
     ),
   )
   let t759 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("c:A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(c : A)"))(
         @tactics.strip_assume_tac,
       ),
       @tactics.strip_assume_tac,
@@ -7758,10 +7758,10 @@ fn step_96() -> Unit raise {
     let th = x755
     @tactics.then_tac(@tactics.strip_tac, @tactics.mp_tac(th))
   })
-  let t753 = @parser.parse_term("d:A->bool")
+  let t753 = @term_syntax.parse_term("(d : (A) -> Bool)")
   let t754 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("y:A"), t753]),
+    @list.List([@term_syntax.parse_term("(y : A)"), t753]),
   )
   let t751 = @simp.rewrite_tac(@list.List([@sets.forall_in_insert()]))
   let t750 = @meson.asm_meson_tac(
@@ -7771,7 +7771,7 @@ fn step_96() -> Unit raise {
   let t752 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.exists_tac(@parser.parse_term("ring_1 r:A")),
+        @tactics.exists_tac(@term_syntax.parse_term("ring_1((r : Ring[A]))")),
         t749,
       ),
       t750,
@@ -7792,10 +7792,10 @@ fn step_96() -> Unit raise {
   let t742 = @simp.asm_rewrite_tac(
     @list.List([subring_generated_subfield_generated()]),
   )
-  let t736 = @parser.parse_term("d:A->bool")
-  let t737 = @parser.parse_term("s:A->bool")
+  let t736 = @term_syntax.parse_term("(d : (A) -> Bool)")
+  let t737 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t738 = @list.List([
-    @parser.parse_term("subfield_generated r s:A ring"),
+    @term_syntax.parse_term("subfield_generated((r : Ring[A]), (s : (A) -> Bool))"),
     t737,
     t736,
   ])
@@ -8101,7 +8101,7 @@ fn step_97() -> Unit raise {
       @ringtheory.field_mul_eq_0(),
     ),
   )
-  let t841 = @parser.parse_term("d:A")
+  let t841 = @term_syntax.parse_term("(d : A)")
   let t846 = @tactics.first_assum(fn(
     x845 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8340,14 +8340,14 @@ fn step_97() -> Unit raise {
     @list.List([@ringtheory.poly_ring_v1(), poly_const_subfield_generated()]),
   )
   let t819 = @lib.el(4, @bool.conjuncts_rule(poly_subfield_generated_clauses()))
-  let t815 = @parser.parse_term("p:(V->num)->A")
-  let t816 = @parser.parse_term("poly_const r d:(V->num)->A")
-  let t817 = @parser.parse_term("(:V)")
-  let t818 = @parser.parse_term("s:A->bool")
+  let t815 = @term_syntax.parse_term("(p : ((V) -> Num) -> A)")
+  let t816 = @term_syntax.parse_term("(poly_const : (Ring[A], A, (V) -> Num) -> A)((r : Ring[A]), (d : A))")
+  let t817 = @term_syntax.parse_term("(UNIV : (V) -> Bool)")
+  let t818 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t821 = @tactics.then_tac(
     @tactics.mp_tac(
       @bool.ispecl(
-        @list.List([@parser.parse_term("r:A ring"), t818, t817, t816, t815]),
+        @list.List([@term_syntax.parse_term("(r : Ring[A])"), t818, t817, t816, t815]),
         t819,
       ),
     ),
@@ -8369,12 +8369,12 @@ fn step_97() -> Unit raise {
     ),
     t821,
   ])
-  let t811 = @parser.parse_term("p:(V->num)->A")
-  let t812 = @parser.parse_term("d:A")
+  let t811 = @term_syntax.parse_term("(p : ((V) -> Num) -> A)")
+  let t812 = @term_syntax.parse_term("(d : A)")
   let t813 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("subfield_generated r s:A ring"),
+        @term_syntax.parse_term("subfield_generated((r : Ring[A]), (s : (A) -> Bool))"),
         t812,
         t811,
       ]),
@@ -8384,7 +8384,7 @@ fn step_97() -> Unit raise {
   let t810 = @simp.asm_rewrite_tac(
     @list.List([@bool.conjunct2(@ringtheory.subring_generated_v1())]),
   )
-  let t809 = @tactics.x_gen_tac(@parser.parse_term("d:A"))
+  let t809 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : A)"))
   let t808 = @simp.rewrite_tac(@list.List([@sets.in_univ()]))
   let t806 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t805 = @sets.set_tac(@list.List([]))
@@ -8409,11 +8409,11 @@ fn step_97() -> Unit raise {
   let t802 = @simp.asm_rewrite_tac(
     @list.List([@sets.subset(), @sets.forall_in_image()]),
   )
-  let t799 = @parser.parse_term("IMAGE (p:(V->num)->A) UNIV")
-  let t800 = @parser.parse_term("s:A->bool")
+  let t799 = @term_syntax.parse_term("IMAGE((p : ((V) -> Num) -> A), UNIV)")
+  let t800 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t801 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t800, t799]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t800, t799]),
       finite_subset_subfield_generated_denominator(),
     ),
   )
@@ -8558,7 +8558,7 @@ fn step_98() -> Unit raise {
     ),
   ])
   let t920 = @tactics.subgoal_then(
-    @parser.parse_term("subfield_generated r t:A ring = r"),
+    @term_syntax.parse_term("subfield_generated((r : Ring[A]), (t : (A) -> Bool)) == r"),
     fn(
       x917 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8607,7 +8607,7 @@ fn step_98() -> Unit raise {
     },
   )
   let t916 = @simp.asm_rewrite_tac(@list.List([]))
-  let t915 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t915 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t914 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t911 = @drule.match_mp(@ringtheory.in_subring_generated_finitary())
   let t913 = @tactics.first_assum(fn(
@@ -8679,7 +8679,7 @@ fn step_98() -> Unit raise {
     })(t911(x912))
   })
   let t907 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("u:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(u : A)"))(@tactics.strip_assume_tac),
   )
   let t906 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t904 = @simp.gen_rewrite_rule(
@@ -8840,10 +8840,10 @@ fn step_98() -> Unit raise {
     t897,
   )
   let t896 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t894 = @parser.parse_term("s:A->bool")
+  let t894 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t895 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("r:A ring"), t894]),
+      @list.List([@term_syntax.parse_term("(r : Ring[A])"), t894]),
       ring_carrier_subfield_generated_subset(),
     ),
   )
@@ -8859,7 +8859,7 @@ fn step_98() -> Unit raise {
     ),
     t898,
   ])
-  let t893 = @tactics.subgoal_then(@parser.parse_term("x:A = ring_0 r"), fn(
+  let t893 = @tactics.subgoal_then(@term_syntax.parse_term("(x : A) == ring_0((r : Ring[A]))"), fn(
     x890 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -8912,7 +8912,7 @@ fn step_98() -> Unit raise {
     @tactics.thenl(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.exists_tac(@parser.parse_term("{}:A->bool")),
+          @tactics.exists_tac(@term_syntax.parse_term("({} : (A) -> Bool)")),
           t889,
         ),
         t893,
@@ -9031,17 +9031,17 @@ fn step_98() -> Unit raise {
   let t874 = @simp.asm_rewrite_tac(
     @list.List([@sets.finite_union(), @sets.union_subset()]),
   )
-  let t873 = @tactics.exists_tac(@parser.parse_term("t UNION u:A->bool"))
-  let t872 = @tactics.x_gen_tac(@parser.parse_term("u:A->bool"))
-  let t871 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
+  let t873 = @tactics.exists_tac(@term_syntax.parse_term("UNION((t : (A) -> Bool), (u : (A) -> Bool))"))
+  let t872 = @tactics.x_gen_tac(@term_syntax.parse_term("(u : (A) -> Bool)"))
+  let t871 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))
   let t870 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
-  let t866 = @parser.parse_term("y:A")
-  let t867 = @parser.parse_term("s:A->bool")
-  let t868 = @list.List([@parser.parse_term("r:A ring"), t867, t866])
-  let t864 = @parser.parse_term("z:A")
-  let t865 = @parser.parse_term("s:A->bool")
+  let t866 = @term_syntax.parse_term("(y : A)")
+  let t867 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t868 = @list.List([@term_syntax.parse_term("(r : Ring[A])"), t867, t866])
+  let t864 = @term_syntax.parse_term("(z : A)")
+  let t865 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t869 = @tactics.map_every(
     fn(
       x863 : @list.List[@kernel.Term],
@@ -9121,18 +9121,18 @@ fn step_98() -> Unit raise {
         })(x863),
       )
     },
-    @list.List([@list.List([@parser.parse_term("r:A ring"), t865, t864]), t868]),
+    @list.List([@list.List([@term_syntax.parse_term("(r : Ring[A])"), t865, t864]), t868]),
   )
-  let t855 = @parser.parse_term("z:A")
+  let t855 = @term_syntax.parse_term("(z : A)")
   let t856 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("y:A"), t855]),
+    @list.List([@term_syntax.parse_term("(y : A)"), t855]),
   )
   let t854 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
-  let t852 = @parser.parse_term("x:A")
-  let t853 = @parser.parse_term("s:A->bool")
+  let t852 = @term_syntax.parse_term("(x : A)")
+  let t853 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t929 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9155,7 +9155,7 @@ fn step_98() -> Unit raise {
                                         @tactics.mp_tac(
                                           @bool.ispecl(
                                             @list.List([
-                                              @parser.parse_term("r:A ring"),
+                                              @term_syntax.parse_term("(r : Ring[A])"),
                                               t853,
                                               t852,
                                             ]),
@@ -9201,7 +9201,7 @@ fn step_98() -> Unit raise {
     t928,
   ])
   let t851 = @class.asm_cases_tac(
-    @parser.parse_term("field(subfield_generated r s:A ring)"),
+    @term_syntax.parse_term("field(subfield_generated((r : Ring[A]), (s : (A) -> Bool)))"),
   )
   let t930 = @tactics.thenl(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t851),
@@ -9534,7 +9534,7 @@ fn step_109() -> Unit raise {
   )
   field_extension_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall k:A ring. field_extension (k,k) I <=> field k"),
+      @term_syntax.parse_term("∀ k : Ring[A], field_extension((k, k), I) == field(k)"),
       t946,
     ),
   )
@@ -9837,21 +9837,21 @@ fn step_116() -> Unit raise {
       @ringtheory.maximal_imp_prime_ideal(),
     ]),
   )
-  let t994 = @parser.parse_term("x:A")
-  let t995 = @parser.parse_term("(:1)")
+  let t994 = @term_syntax.parse_term("(x : A)")
+  let t995 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
   let t996 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t995, t994]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t995, t994]),
       @ringtheory.ring_unit_poly_const(),
     ),
   )
   let t993 = @tactics.repeat_tac(@tactics.disch_tac)
   let t992 = @simp.asm_rewrite_tac(@list.List([]))
-  let t991 = @class.asm_cases_tac(@parser.parse_term("x:A = ring_0 k"))
-  let t989 = @parser.parse_term("x:A")
+  let t991 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == ring_0((k : Ring[A]))"))
+  let t989 = @term_syntax.parse_term("(x : A)")
   let t990 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t989]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t989]),
       @ringtheory.field_unit(),
     ),
   )
@@ -9959,7 +9959,7 @@ fn step_116() -> Unit raise {
       },
     ),
   )
-  let t980 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t980 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t978 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_homomorphism_ring_coset()]),
   )
@@ -9967,7 +9967,7 @@ fn step_116() -> Unit raise {
     @list.List([@ringtheory.ring_homomorphism_poly_const()]),
   )
   let t976 = @tactics.exists_tac(
-    @parser.parse_term("poly_ring (k:A ring) (:1)"),
+    @term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"),
   )
   let t979 = @list.List([
     @tactics.then_tac(
@@ -10152,9 +10152,9 @@ fn step_117() -> Unit raise {
       @class.eta_ax(),
     ]),
   )
-  let t1138 = @parser.parse_term("(:1)")
+  let t1138 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
   let t1139 = @bool.ispecl(
-    @list.List([@parser.parse_term("k:A ring"), t1138]),
+    @list.List([@term_syntax.parse_term("(k : Ring[A])"), t1138]),
     @ringtheory.ring_homomorphism_poly_const(),
   )
   let t1140 = @simp.rewrite_tac(
@@ -10350,7 +10350,7 @@ fn step_117() -> Unit raise {
   let t1119 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.ring_homomorphism_poly_const()]),
   )
-  let t1118 = @tactics.exists_tac(@parser.parse_term("k:A ring"))
+  let t1118 = @tactics.exists_tac(@term_syntax.parse_term("(k : Ring[A])"))
   let t1117 = @tactics.match_mp_tac(
     @ringtheory.in_ring_polynomial_carrier_compose(),
   )
@@ -11163,14 +11163,14 @@ fn step_117() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1046 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(p ==> ~r) /\\ q /\\ r ==> ~p /\\ q /\\ r")),
+    @class.taut(@term_syntax.parse_term("((p : Bool) → !(r : Bool)) && (q : Bool) && r → !p && q && r")),
   )
   let t1045 = @simp.asm_rewrite_tac(@list.List([]))
   let t1044 = @simp.asm_rewrite_tac(@list.List([field_extension()]))
-  let t1042 = @parser.parse_term("j:((1->num)->A)->bool")
+  let t1042 = @term_syntax.parse_term("(j : (((Unit) -> Num) -> A) -> Bool)")
   let t1043 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t1042]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t1042]),
       kronecker_field_extension(),
     ),
   )
@@ -11257,7 +11257,7 @@ fn step_117() -> Unit raise {
     t1040,
   ])
   let t1031 = @tactics.subgoal_then(
-    @parser.parse_term("(z:((1->num)->A)->bool) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((z : (((Unit) -> Num) -> A) -> Bool), ring_carrier((l : Ring[(((Unit) -> Num) -> A) -> Bool])))"),
     fn(
       x1028 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11320,7 +11320,7 @@ fn step_117() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1024 = @tactics.subgoal_then(
-    @parser.parse_term("maximal_ideal (poly_ring (k:A ring) (:1)) j"),
+    @term_syntax.parse_term("maximal_ideal(poly_ring((k : Ring[A]), UNIV), (j : (((Unit) -> Num) -> A) -> Bool))"),
     fn(
       x1021 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11368,8 +11368,8 @@ fn step_117() -> Unit raise {
       }
     },
   )
-  let t1018 = @parser.parse_term("z:((1->num)->A)->bool")
-  let t1019 = @parser.parse_term("h:A->((1->num)->A)->bool")
+  let t1018 = @term_syntax.parse_term("(z : (((Unit) -> Num) -> A) -> Bool)")
+  let t1019 = @term_syntax.parse_term("(h : (A, ((Unit) -> Num) -> A) -> Bool)")
   let t1020 = @tactics.map_every(
     fn(
       x1015 : @kernel.Term,
@@ -11417,7 +11417,7 @@ fn step_117() -> Unit raise {
         s1016(x1017)
       }
     },
-    @list.List([@parser.parse_term("l:(((1->num)->A)->bool)ring"), t1019, t1018]),
+    @list.List([@term_syntax.parse_term("(l : Ring[(((Unit) -> Num) -> A) -> Bool])"), t1019, t1018]),
   )
   let t1011 = @parser.parse_term(
     "z = ring_coset (poly_ring (k:A ring) (:1)) j (poly_var k one)",
@@ -11431,7 +11431,7 @@ fn step_117() -> Unit raise {
   let t1014 = @tactics.map_every(
     @simp.abbrev_tac,
     @list.List([
-      @parser.parse_term("j = ideal_generated (poly_ring (k:A ring) (:1)) {q}"),
+      @term_syntax.parse_term("(j : (((Unit) -> Num) -> A) -> Bool) == ideal_generated(poly_ring((k : Ring[A]), UNIV), {(q : ((Unit) -> Num) -> A)})"),
       t1013,
       t1012,
       t1011,
@@ -11442,14 +11442,14 @@ fn step_117() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1009 = @class.asm_cases_tac(
-    @parser.parse_term("q = ring_0 (poly_ring (k:A ring) (:1))"),
+    @term_syntax.parse_term("(q : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV))"),
   )
   let t1008 = @list.List([
     @meson.asm_meson_tac(@list.List([@ringtheory.ring_prime()])),
     @tactics.all_tac,
   ])
   let t1007 = @tactics.subgoal_then(
-    @parser.parse_term("q IN ring_carrier(poly_ring (k:A ring) (:1))"),
+    @term_syntax.parse_term("IN((q : ((Unit) -> Num) -> A), ring_carrier(poly_ring((k : Ring[A]), UNIV)))"),
     fn(
       x1004 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -11498,7 +11498,7 @@ fn step_117() -> Unit raise {
     },
   )
   let t1002 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("q:(1->num)->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -11524,10 +11524,10 @@ fn step_117() -> Unit raise {
     ),
     t1002,
   ])
-  let t999 = @parser.parse_term("p:(1->num)->A")
+  let t999 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t1000 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("poly_ring (k:A ring) (:1)"), t999]),
+      @list.List([@term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"), t999]),
       @ringtheory.ufd_prime_factor_exists(),
     ),
   )
@@ -11686,7 +11686,7 @@ fn step_118() -> Unit raise {
     ]),
   )
   let t1156 = @tactics.exists_tac(
-    @parser.parse_term("poly_ring (l:B ring) (:1)"),
+    @term_syntax.parse_term("(poly_ring : (Ring[B], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> B])((l : Ring[B]), (UNIV : (Unit) -> Bool))"),
   )
   let t1155 = @tactics.match_mp_tac(@ringtheory.ring_homomorphism_compose())
   let t1154 = @simp.asm_simp_tac(
@@ -11698,14 +11698,14 @@ fn step_118() -> Unit raise {
       @trivia.o_thm(),
     ]),
   )
-  let t1149 = @parser.parse_term("q:(1->num)->A")
-  let t1150 = @parser.parse_term("p:(1->num)->A")
-  let t1151 = @parser.parse_term("(\\q. poly_eval l q y) o (\\p. (h:A->B) o p)")
-  let t1152 = @parser.parse_term("l:B ring")
+  let t1149 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
+  let t1150 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t1151 = @term_syntax.parse_term("o((q : ((Unit) -> Num) -> B) => poly_eval((l : Ring[B]), q, (y : B)), (p : ((Unit) -> Num) -> A) => o((h : (A) -> B), p))")
+  let t1152 = @term_syntax.parse_term("(l : Ring[B])")
   let t1153 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("poly_ring (k:A ring) (:1)"),
+        @term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"),
         t1152,
         t1151,
         t1150,
@@ -11715,7 +11715,7 @@ fn step_118() -> Unit raise {
     ),
   )
   let t1148 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:B"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : B)"))(@tactics.strip_assume_tac),
   )
   let t1147 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1158 = @tactics.then_tac(
@@ -11768,15 +11768,15 @@ pub fn coprime_poly_no_common_root() -> @kernel.Thm {
 /// COPRIME_POLY_NO_COMMON_ROOT_I
 fn step_119() -> Unit raise {
   let t1166 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1165 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t1165 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t1164 = @simp.asm_rewrite_tac(@list.List([@trivia.i_o_id()]))
-  let t1159 = @parser.parse_term("q:(1->num)->A")
-  let t1160 = @parser.parse_term("p:(1->num)->A")
-  let t1161 = @parser.parse_term("I:A->A")
-  let t1162 = @parser.parse_term("E:A ring")
+  let t1159 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
+  let t1160 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t1161 = @term_syntax.parse_term("(I : (A) -> A)")
+  let t1162 = @term_syntax.parse_term("(E : Ring[A])")
   let t1163 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t1162, t1161, t1160, t1159]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t1162, t1161, t1160, t1159]),
       coprime_poly_no_common_root(),
     ),
   )
@@ -11852,12 +11852,12 @@ fn step_120() -> Unit raise {
       "(ring_0 (SND kl) IN ring_span kl (h:A->B) s) /\\\n    (forall x. x IN s /\\ x IN ring_carrier(SND kl) ==> x IN ring_span kl h s) /\\\n    (forall x y. x IN ring_span kl h s /\\ y IN ring_span kl h s\n           ==> ring_add (SND kl) x y IN ring_span kl h s) /\\\n    (forall a x. a IN ring_carrier(FST kl) /\\\n           h a IN ring_carrier(SND kl) /\\\n           x IN ring_span kl h s\n           ==> ring_mul (SND kl) (h a) x IN ring_span kl h s)",
     ),
   )
-  let t1174 = @parser.parse_term("h:A->B")
-  let t1175 = @list.List([@parser.parse_term("(k:A ring),(l:B ring)"), t1174])
+  let t1174 = @term_syntax.parse_term("(h : (A) -> B)")
+  let t1175 = @list.List([@term_syntax.parse_term("((k : Ring[A]), (l : Ring[B]))"), t1174])
   let t1172 = @simp.rewrite_rule(@list.List([]))
-  let t1168 = @parser.parse_term("l:B ring")
-  let t1169 = @parser.parse_term("k:A ring")
-  let t1170 = @list.List([@parser.parse_term("h:A->B"), t1169, t1168])
+  let t1168 = @term_syntax.parse_term("(l : Ring[B])")
+  let t1169 = @term_syntax.parse_term("(k : Ring[A])")
+  let t1170 = @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t1169, t1168])
   match
     @lib.map(
       fn(x1177 : @kernel.Thm) -> @kernel.Thm raise {
@@ -12245,16 +12245,16 @@ fn step_130() -> Unit raise {
   let t1216 = @simp.asm_rewrite_tac(
     @list.List([@sets.finite_union(), @sets.union_subset(), @sets.subset_refl()]),
   )
-  let t1215 = @tactics.exists_tac(@parser.parse_term("t UNION u:B->bool"))
-  let t1212 = @parser.parse_term("u:B->bool")
-  let t1210 = @parser.parse_term("t:B->bool")
+  let t1215 = @tactics.exists_tac(@term_syntax.parse_term("UNION((t : (B) -> Bool), (u : (B) -> Bool))"))
+  let t1212 = @term_syntax.parse_term("(u : (B) -> Bool)")
+  let t1210 = @term_syntax.parse_term("(t : (B) -> Bool)")
   let t1214 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       (x1211 : @kernel.Thm) => @tactics.x_choose_tac(t1210, x1211),
       (x1213 : @kernel.Thm) => @tactics.x_choose_tac(t1212, x1213),
     ),
   )
-  let t1209 = @parser.parse_term("y:B")
+  let t1209 = @term_syntax.parse_term("(y : B)")
   let t1220 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -12262,7 +12262,7 @@ fn step_130() -> Unit raise {
           @tactics.then_tac(
             @tactics.map_every(
               @tactics.x_gen_tac,
-              @list.List([@parser.parse_term("x:B"), t1209]),
+              @list.List([@term_syntax.parse_term("(x : B)"), t1209]),
             ),
             t1214,
           ),
@@ -12282,11 +12282,11 @@ fn step_130() -> Unit raise {
       @sets.in_sing(),
     ]),
   )
-  let t1207 = @tactics.exists_tac(@parser.parse_term("{x:B}"))
+  let t1207 = @tactics.exists_tac(@term_syntax.parse_term("{(x : B)}"))
   let t1221 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.x_gen_tac(@parser.parse_term("x:B")),
+        @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)")),
         @tactics.disch_tac,
       ),
       t1207,
@@ -12298,7 +12298,7 @@ fn step_130() -> Unit raise {
   )
   let t1222 = @list.List([
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("{}:B->bool")),
+      @tactics.exists_tac(@term_syntax.parse_term("({} : (B) -> Bool)")),
       t1206,
     ),
     t1221,
@@ -12347,7 +12347,7 @@ fn step_131() -> Unit raise {
   )
   ring_span_nonempty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(h:A->B) k l s. ~(ring_span (k,l) h s = {})"),
+      @term_syntax.parse_term("∀ h : (A) -> B, ∀ k : Ring[A], ∀ l : Ring[B], ∀ s : (B) -> Bool, !(ring_span((k, l), h, s) == {})"),
       t1224,
     ),
   )
@@ -12478,15 +12478,15 @@ fn step_134() -> Unit raise {
   let t1240 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_neg_v1(), @ringtheory.ring_1_v1()]),
   )
-  let t1234 = @parser.parse_term("x:B")
-  let t1235 = @parser.parse_term("ring_neg k (ring_1 k):A")
-  let t1236 = @parser.parse_term("s:B->bool")
-  let t1237 = @parser.parse_term("l:B ring")
-  let t1238 = @parser.parse_term("k:A ring")
+  let t1234 = @term_syntax.parse_term("(x : B)")
+  let t1235 = @term_syntax.parse_term("ring_neg((k : Ring[A]), ring_1(k))")
+  let t1236 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t1237 = @term_syntax.parse_term("(l : Ring[B])")
+  let t1238 = @term_syntax.parse_term("(k : Ring[A])")
   let t1239 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h:A->B"),
+        @term_syntax.parse_term("(h : (A) -> B)"),
         t1238,
         t1237,
         t1236,
@@ -12580,11 +12580,11 @@ fn step_136() -> Unit raise {
   let t1250 = @simp.asm_simp_tac(@list.List([ring_span_add(), ring_span_0()]))
   let t1249 = @tactics.disch_then(@tactics.match_mp_tac)
   let t1248 = @simp.rewrite_tac(@list.List([]))
-  let t1245 = @parser.parse_term("f:K->B")
-  let t1246 = @parser.parse_term("\\x. x IN ring_span (k,l) (h:A->B) s")
+  let t1245 = @term_syntax.parse_term("(f : (K) -> B)")
+  let t1246 = @term_syntax.parse_term("(x : B) => IN(x, ring_span(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), (s : (B) -> Bool)))")
   let t1247 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t1246, t1245]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t1246, t1245]),
       @ringtheory.ring_sum_closed(),
     ),
   )
@@ -12625,16 +12625,16 @@ fn step_137() -> Unit raise {
     @simp.rewrite_rule(@list.List([@ringtheory.ring_homomorphism()])),
   )
   let t1302 = @simp.asm_rewrite_tac(@list.List([@sets.subset()]))
-  let t1299 = @parser.parse_term("l:B ring")
-  let t1300 = @parser.parse_term("k:A ring")
+  let t1299 = @term_syntax.parse_term("(l : Ring[B])")
+  let t1300 = @term_syntax.parse_term("(k : Ring[A])")
   let t1301 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t1300, t1299]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t1300, t1299]),
       ring_span_subset(),
     ),
   )
   let t1298 = @simp.asm_simp_tac(@list.List([ring_span_mul()]))
-  let t1296 = @parser.parse_term("ring_mul l ((h:A->B) c) y")
+  let t1296 = @term_syntax.parse_term("ring_mul((l : Ring[B]), (h : (A) -> B)((c : A)), (y : B))")
   let t1297 = @tactics.map_every(
     fn(
       x1293 : @kernel.Term,
@@ -12682,14 +12682,14 @@ fn step_137() -> Unit raise {
         s1294(x1295)
       }
     },
-    @list.List([@parser.parse_term("ring_mul l ((h:A->B) c) x"), t1296]),
+    @list.List([@term_syntax.parse_term("ring_mul((l : Ring[B]), (h : (A) -> B)((c : A)), (x : B))"), t1296]),
   )
   let t1292 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t1289 = @parser.parse_term("y:B")
-  let t1290 = @parser.parse_term("x:B")
+  let t1289 = @term_syntax.parse_term("(y : B)")
+  let t1290 = @term_syntax.parse_term("(x : B)")
   let t1291 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t1290, t1289]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t1290, t1289]),
   )
   let t1305 = @tactics.then_tac(
     @tactics.then_tac(
@@ -12725,7 +12725,7 @@ fn step_137() -> Unit raise {
     @list.List([ring_span_subset(), @sets.subset()]),
   )
   let t1287 = @simp.asm_simp_tac(@list.List([ring_span_add()]))
-  let t1285 = @parser.parse_term("ring_add l y1 y2:B")
+  let t1285 = @term_syntax.parse_term("ring_add((l : Ring[B]), (y1 : B), (y2 : B))")
   let t1286 = @tactics.map_every(
     fn(
       x1282 : @kernel.Term,
@@ -12773,15 +12773,15 @@ fn step_137() -> Unit raise {
         s1283(x1284)
       }
     },
-    @list.List([@parser.parse_term("ring_add l x1 x2:B"), t1285]),
+    @list.List([@term_syntax.parse_term("ring_add((l : Ring[B]), (x1 : B), (x2 : B))"), t1285]),
   )
   let t1281 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t1277 = @parser.parse_term("y2:B")
-  let t1278 = @parser.parse_term("x2:B")
-  let t1279 = @parser.parse_term("y1:B")
+  let t1277 = @term_syntax.parse_term("(y2 : B)")
+  let t1278 = @term_syntax.parse_term("(x2 : B)")
+  let t1279 = @term_syntax.parse_term("(y1 : B)")
   let t1280 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x1:B"), t1279, t1278, t1277]),
+    @list.List([@term_syntax.parse_term("(x1 : B)"), t1279, t1278, t1277]),
   )
   let t1306 = @tactics.then_tac(
     @tactics.then_tac(
@@ -12805,7 +12805,7 @@ fn step_137() -> Unit raise {
   let t1276 = @simp.asm_simp_tac(
     @list.List([ring_span_0(), ring_span_inc(), @ringtheory.ring_add_lzero()]),
   )
-  let t1274 = @parser.parse_term("x:B")
+  let t1274 = @term_syntax.parse_term("(x : B)")
   let t1275 = @tactics.map_every(
     fn(
       x1271 : @kernel.Term,
@@ -12853,12 +12853,12 @@ fn step_137() -> Unit raise {
         s1272(x1273)
       }
     },
-    @list.List([@parser.parse_term("ring_0 l:B"), t1274]),
+    @list.List([@term_syntax.parse_term("ring_0((l : Ring[B]))"), t1274]),
   )
   let t1270 = @tactics.repeat_tac(@tactics.disch_tac)
   let t1307 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:B")), t1270),
+      @tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(x : B)")), t1270),
       t1275,
     ),
     t1276,
@@ -12866,7 +12866,7 @@ fn step_137() -> Unit raise {
   let t1269 = @simp.asm_simp_tac(
     @list.List([ring_span_0(), ring_span_inc(), @ringtheory.ring_add_rzero()]),
   )
-  let t1267 = @parser.parse_term("ring_0 l:B")
+  let t1267 = @term_syntax.parse_term("ring_0((l : Ring[B]))")
   let t1268 = @tactics.map_every(
     fn(
       x1264 : @kernel.Term,
@@ -12914,12 +12914,12 @@ fn step_137() -> Unit raise {
         s1265(x1266)
       }
     },
-    @list.List([@parser.parse_term("x:B"), t1267]),
+    @list.List([@term_syntax.parse_term("(x : B)"), t1267]),
   )
   let t1263 = @tactics.repeat_tac(@tactics.disch_tac)
   let t1308 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:B")), t1263),
+      @tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(x : B)")), t1263),
       t1268,
     ),
     t1269,
@@ -12933,7 +12933,7 @@ fn step_137() -> Unit raise {
   )
   let t1309 = @list.List([
     @tactics.then_tac(
-      @tactics.repeat_tac(@tactics.exists_tac(@parser.parse_term("ring_0 l:B"))),
+      @tactics.repeat_tac(@tactics.exists_tac(@term_syntax.parse_term("ring_0((l : Ring[B]))"))),
       t1262,
     ),
     t1308,
@@ -13030,12 +13030,12 @@ fn step_138() -> Unit raise {
   let t1335 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_add_v1(), @ringtheory.ring_mul_v1()]),
   )
-  let t1330 = @tactics.exists_tac(@parser.parse_term("ring_mul k c d:A"))
+  let t1330 = @tactics.exists_tac(@term_syntax.parse_term("ring_mul((k : Ring[A]), (c : A), (d : A))"))
   let t1329 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t1327 = @parser.parse_term("d:A")
+  let t1327 = @term_syntax.parse_term("(d : A)")
   let t1328 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t1327]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t1327]),
   )
   let t1331 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13047,12 +13047,12 @@ fn step_138() -> Unit raise {
     ),
     t1330,
   )
-  let t1326 = @tactics.exists_tac(@parser.parse_term("ring_add k c d:A"))
+  let t1326 = @tactics.exists_tac(@term_syntax.parse_term("ring_add((k : Ring[A]), (c : A), (d : A))"))
   let t1325 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t1323 = @parser.parse_term("d:A")
+  let t1323 = @term_syntax.parse_term("(d : A)")
   let t1324 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t1323]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t1323]),
   )
   let t1332 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13067,7 +13067,7 @@ fn step_138() -> Unit raise {
   let t1322 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_mul_lid(), @ringtheory.ring_1_v1()]),
   )
-  let t1321 = @tactics.exists_tac(@parser.parse_term("ring_1 k:A"))
+  let t1321 = @tactics.exists_tac(@term_syntax.parse_term("ring_1((k : Ring[A]))"))
   let t1333 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -13085,7 +13085,7 @@ fn step_138() -> Unit raise {
   )
   let t1334 = @list.List([
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("ring_0 k:A")),
+      @tactics.exists_tac(@term_syntax.parse_term("ring_0((k : Ring[A]))")),
       t1320,
     ),
     t1333,
@@ -13315,7 +13315,7 @@ fn step_139() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(t1378(x1379))
   })
-  let t1375 = @parser.parse_term("ring_inv k c:A")
+  let t1375 = @term_syntax.parse_term("ring_inv((k : Ring[A]), (c : A))")
   let t1376 = @tactics.map_every(
     fn(
       x1372 : @kernel.Term,
@@ -13364,7 +13364,7 @@ fn step_139() -> Unit raise {
       }
     },
     @list.List([
-      @parser.parse_term("ring_neg l (ring_mul l ((h:A->B)(ring_inv k c)) x')"),
+      @term_syntax.parse_term("ring_neg((l : Ring[B]), ring_mul(l, (h : (A) -> B)(ring_inv((k : Ring[A]), (c : A))), (x' : B)))"),
       t1375,
     ]),
   )
@@ -13374,7 +13374,7 @@ fn step_139() -> Unit raise {
     ),
     @tactics.strip_tac,
   ])
-  let t1370 = @class.asm_cases_tac(@parser.parse_term("c:A = ring_0 k"))
+  let t1370 = @class.asm_cases_tac(@term_syntax.parse_term("(c : A) == ring_0((k : Ring[A]))"))
   let t1367 = @simp.gen_rewrite_rule(
     fn(
       x1366 : (@kernel.Term) -> @kernel.Thm raise,
@@ -13435,11 +13435,11 @@ fn step_139() -> Unit raise {
     @tactics.all_tac,
     @meson.asm_meson_tac(@list.List([ring_span_subset(), @sets.subset()])),
   ])
-  let t1362 = @class.asm_cases_tac(@parser.parse_term("x':B IN ring_carrier l"))
-  let t1360 = @parser.parse_term("c:A")
+  let t1362 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x' : B), ring_carrier((l : Ring[B])))"))
+  let t1360 = @term_syntax.parse_term("(c : A)")
   let t1361 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x':B"), t1360]),
+    @list.List([@term_syntax.parse_term("(x' : B)"), t1360]),
   )
   let t1359 = @simp.rewrite_tac(
     @list.List([@sets.in_elim_thm(), @theorems.left_imp_exists_thm()]),
@@ -13462,13 +13462,13 @@ fn step_139() -> Unit raise {
   let t1356 = @list.List([
     @simp.once_rewrite_tac(
       @list.List([
-        @sets.set_rule(@parser.parse_term("a INSERT s = {a} UNION s")),
+        @sets.set_rule(@term_syntax.parse_term("INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)")),
       ]),
     ),
     t1355,
   ])
   let t1354 = @class.asm_cases_tac(
-    @parser.parse_term("(a:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((a : B), ring_carrier((l : Ring[B])))"),
   )
   let t1353 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -13671,13 +13671,13 @@ fn step_139() -> Unit raise {
       @list.List([
         ring_span_restrict(),
         @sets.set_rule(
-          @parser.parse_term("~(b IN l) ==> l INTER (b INSERT s) = l INTER s"),
+          @term_syntax.parse_term("!IN((b : _), (l : (_) -> Bool)) → INTER(l, INSERT(b, (s : (_) -> Bool))) == INTER(l, s)"),
         ),
       ]),
     ),
   ])
   let t1338 = @class.asm_cases_tac(
-    @parser.parse_term("(b:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((b : B), ring_carrier((l : Ring[B])))"),
   )
   let t1393 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13775,7 +13775,7 @@ fn step_140() -> Unit raise {
   let t1436 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_sum_clauses(), @ringtheory.ring_mul_v1()]),
   )
-  let t1434 = @parser.parse_term("c:B->A")
+  let t1434 = @term_syntax.parse_term("(c : (B) -> A)")
   let t1435 = @tactics.map_every(
     fn(
       x1431 : @kernel.Term,
@@ -13823,12 +13823,12 @@ fn step_140() -> Unit raise {
         s1432(x1433)
       }
     },
-    @list.List([@parser.parse_term("(c:B->A) x"), t1434]),
+    @list.List([@term_syntax.parse_term("(c : (B) -> A)((x : B))"), t1434]),
   )
   let t1437 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.x_gen_tac(@parser.parse_term("c:B->A")),
+        @tactics.x_gen_tac(@term_syntax.parse_term("(c : (B) -> A)")),
         @tactics.strip_tac,
       ),
       t1435,
@@ -13846,9 +13846,9 @@ fn step_140() -> Unit raise {
   ])
   let t1426 = @simp.rewrite_tac(@list.List([]))
   let t1425 = @tactics.exists_tac(
-    @parser.parse_term("\\y. if y = x then d else (c:B->A) y"),
+    @term_syntax.parse_term("(y : B) => if y == (x : B) { (d : A) } else { (c : (B) -> A)(y) }"),
   )
-  let t1424 = @parser.parse_term("c:B->A")
+  let t1424 = @term_syntax.parse_term("(c : (B) -> A)")
   let t1438 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -13861,7 +13861,7 @@ fn step_140() -> Unit raise {
                     @tactics.then_tac(
                       @tactics.map_every(
                         @tactics.x_gen_tac,
-                        @list.List([@parser.parse_term("d:A"), t1424]),
+                        @list.List([@term_syntax.parse_term("(d : A)"), t1424]),
                       ),
                       @tactics.strip_tac,
                     ),
@@ -13953,7 +13953,7 @@ fn step_140() -> Unit raise {
     ]),
   )
   let t1414 = @simp.rewrite_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("{x} UNION s = x INSERT s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("UNION({(x : _)}, (s : (_) -> Bool)) == INSERT(x, s)"))]),
   )
   let t1413 = @simp.asm_simp_tac(
     @list.List([
@@ -14015,7 +14015,7 @@ fn step_140() -> Unit raise {
     @list.List([ring_span_union(), @sets.sing_subset()]),
   )
   let t1407 = @simp.once_rewrite_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("x INSERT s = {x} UNION s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)"))]),
   )
   let t1406 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -14071,10 +14071,10 @@ fn step_140() -> Unit raise {
   let t1402 = @simp.rewrite_tac(
     @list.List([@theorems.imp_imp(), @equal.gsym(@theorems.conj_assoc())]),
   )
-  let t1400 = @parser.parse_term("s:B->bool")
+  let t1400 = @term_syntax.parse_term("(s : (B) -> Bool)")
   let t1401 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:B"), t1400]),
+    @list.List([@term_syntax.parse_term("(x : B)"), t1400]),
   )
   let t1398 = @simp.rewrite_tac(@list.List([@sets.insert_subset()]))
   let t1399 = @list.List([@sets.set_tac(@list.List([])), t1398])
@@ -14206,9 +14206,9 @@ fn step_141() -> Unit raise {
   let t1451 = @tactics.match_mp_tac(ring_span_induct())
   let t1450 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t1449 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1446 = @parser.parse_term("s:B->bool")
-  let t1447 = @parser.parse_term("l:B ring")
-  let t1448 = @parser.parse_term("k:A ring")
+  let t1446 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t1447 = @term_syntax.parse_term("(l : Ring[B])")
+  let t1448 = @term_syntax.parse_term("(k : Ring[A])")
   let t1456 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14220,7 +14220,7 @@ fn step_141() -> Unit raise {
                   @tactics.mp_tac(
                     @bool.ispecl(
                       @list.List([
-                        @parser.parse_term("f:A->B"),
+                        @term_syntax.parse_term("(f : (A) -> B)"),
                         t1448,
                         t1447,
                         t1446,
@@ -14268,7 +14268,7 @@ fn step_141() -> Unit raise {
     ),
   )
   let t1442 = @tactics.match_mp_tac(ring_span_induct())
-  let t1441 = @tactics.exists_tac(@parser.parse_term("ring_carrier l:B->bool"))
+  let t1441 = @tactics.exists_tac(@term_syntax.parse_term("ring_carrier((l : Ring[B]))"))
   let t1457 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14837,7 +14837,7 @@ fn step_159() -> Unit raise {
   let t1481 = @simp.asm_rewrite_tac(
     @list.List([field_extension(), ring_spanning()]),
   )
-  let t1480 = @class.asm_cases_tac(@parser.parse_term("b:B->bool = {}"))
+  let t1480 = @class.asm_cases_tac(@term_syntax.parse_term("(b : (B) -> Bool) == {}"))
   let t1483 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1480),
@@ -14879,7 +14879,7 @@ fn step_160() -> Unit raise {
   )
   ring_independent_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(h:A->B) k l. ring_independent (k,l) h {}"),
+      @term_syntax.parse_term("∀ h : (A) -> B, ∀ k : Ring[A], ∀ l : Ring[B], ring_independent((k, l), h, {})"),
       t1484,
     ),
   )
@@ -14994,7 +14994,7 @@ pub fn ring_independent_mono() -> @kernel.Thm {
 fn step_164() -> Unit raise {
   let t1511 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1510 = @tactics.subgoal_then(
-    @parser.parse_term("(a INSERT t) DELETE (a:B) = t"),
+    @term_syntax.parse_term("DELETE(INSERT((a : B), (t : (B) -> Bool)), a) == t"),
     fn(
       x1507 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15045,9 +15045,9 @@ fn step_164() -> Unit raise {
   let t1506 = @simp.asm_rewrite_tac(
     @list.List([@sets.finite_insert(), @sets.exists_in_insert()]),
   )
-  let t1505 = @tactics.exists_tac(@parser.parse_term("(a:B) INSERT t"))
+  let t1505 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((a : B), (t : (B) -> Bool))"))
   let t1504 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("t:B->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(t : (B) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -15169,7 +15169,7 @@ fn step_164() -> Unit raise {
           s1494(x1495)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("a:B"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(a : B)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -15293,7 +15293,7 @@ fn step_166() -> Unit raise {
     @list.List([ring_matroid_v1(), ring_matroid_independent()]),
   )
   let t1525 = @tactics.exists_tac(
-    @parser.parse_term("ring_matroid (k,l) (h:A->B)"),
+    @term_syntax.parse_term("ring_matroid(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B))"),
   )
   let t1524 = @tactics.match_mp_tac(
     @matroids.matroid_independent_card_le_span_finite(),
@@ -15493,7 +15493,7 @@ fn step_167() -> Unit raise {
   let t1618 = @simp.asm_simp_tac(
     @list.List([@trivia.o_thm(), @ringtheory.ring_1_v1()]),
   )
-  let t1614 = @parser.parse_term("(h:A->B) o ring_neg k")
+  let t1614 = @term_syntax.parse_term("o((h : (A) -> B), ring_neg((k : Ring[A])))")
   let t1617 = @tactics.disch_then(fn(
     x1616 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15563,10 +15563,10 @@ fn step_167() -> Unit raise {
     })(((x1615 : @kernel.Thm) => @equal.ap_term(t1614, x1615))(x1616))
   })
   let t1610 = @list.List([@simp.asm_simp_tac(@list.List([])), @tactics.all_tac])
-  let t1608 = @parser.parse_term("(c:B->A) a")
+  let t1608 = @term_syntax.parse_term("(c : (B) -> A)((a : B))")
   let t1609 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t1608]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t1608]),
       @ringtheory.field_mul_linv(),
     ),
   )
@@ -15724,7 +15724,7 @@ fn step_167() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1590 = @tactics.subgoal_then(
-    @parser.parse_term("s:B->bool = a INSERT (s DELETE a)"),
+    @term_syntax.parse_term("(s : (B) -> Bool) == INSERT((a : B), DELETE(s, a))"),
     fn(
       x1587 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15827,7 +15827,7 @@ fn step_167() -> Unit raise {
     },
     @equal.gsym(@ringtheory.ring_sum_lmul()),
   )
-  let t1567 = @parser.parse_term("ring_mul l (y:B)")
+  let t1567 = @term_syntax.parse_term("ring_mul((l : Ring[B]), (y : B))")
   let t1570 = @tactics.disch_then(fn(
     x1569 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15903,7 +15903,7 @@ fn step_167() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1562 = @tactics.subgoal_then(
-    @parser.parse_term("(y:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((y : B), ring_carrier((l : Ring[B])))"),
     fn(
       x1559 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15952,7 +15952,7 @@ fn step_167() -> Unit raise {
     },
   )
   let t1558 = @simp.abbrev_tac(
-    @parser.parse_term("y = (h:A->B) (ring_neg k (ring_inv k ((c:B->A) a)))"),
+    @term_syntax.parse_term("(y : B) == (h : (A) -> B)(ring_neg((k : Ring[A]), ring_inv(k, (c : (B) -> A)((a : B)))))"),
   )
   let t1640 = @tactics.then_tac(
     @tactics.then_tac(
@@ -16564,7 +16564,7 @@ fn step_167() -> Unit raise {
     ]),
   )
   let t1550 = @sets.set_rule(
-    @parser.parse_term("a IN s ==> {x | x IN s /\\ x = a} = {a}"),
+    @term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → {(x : _) | IN(x, s) && x == a} == {a}"),
   )
   let t1551 = @simp.asm_simp_tac(
     @list.List([
@@ -16637,11 +16637,11 @@ fn step_167() -> Unit raise {
     ),
     t1640,
   ])
-  let t1546 = @tactics.x_gen_tac(@parser.parse_term("c:B->A"))
+  let t1546 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (B) -> A)"))
   let t1545 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t1544 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t1543 = @class.asm_cases_tac(@parser.parse_term("(a:B) IN s"))
-  let t1542 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t1543 = @class.asm_cases_tac(@term_syntax.parse_term("IN((a : B), (s : (B) -> Bool))"))
+  let t1542 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t1539 = @simp.gen_rewrite_rule(
     fn(
       x1538 : (@kernel.Term) -> @kernel.Thm raise,
@@ -16715,11 +16715,11 @@ fn step_167() -> Unit raise {
     @list.List([
       ring_span_finite(),
       @sets.finite_delete(),
-      @sets.set_rule(@parser.parse_term("s SUBSET t ==> s DELETE a SUBSET t")),
+      @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) → SUBSET(DELETE(s, (a : _)), t)")),
     ]),
   )
   let t1529 = @class.asm_cases_tac(
-    @parser.parse_term("(s:B->bool) SUBSET ring_carrier l"),
+    @term_syntax.parse_term("SUBSET((s : (B) -> Bool), ring_carrier((l : Ring[B])))"),
   )
   let t1528 = @simp.rewrite_tac(@list.List([ring_dependent()]))
   let t1642 = @tactics.thenl(
@@ -16864,7 +16864,7 @@ fn step_169() -> Unit raise {
     let th = x1703
     @tactics.then_tac(@tactics.strip_tac, @tactics.mp_tac(th))
   })
-  let t1699 = @parser.parse_term("(\\x. ring_0 k):B->A")
+  let t1699 = @term_syntax.parse_term("(x : B) => ring_0((k : Ring[A]))")
   let t1702 = @tactics.disch_then(fn(
     x1701 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -16933,7 +16933,7 @@ fn step_169() -> Unit raise {
       }
     })(((x1700 : @kernel.Thm) => @bool.spec(t1699, x1700))(x1701))
   })
-  let t1695 = @tactics.x_gen_tac(@parser.parse_term("c:B->A"))
+  let t1695 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (B) -> A)"))
   let t1712 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -17279,7 +17279,7 @@ fn step_169() -> Unit raise {
       @list.List([@ringtheory.ring_sub_eq_0(), @sets.subset()]),
     ),
   ])
-  let t1652 = @parser.parse_term("\\x. ring_sub k ((d:B->A) x) (c x)")
+  let t1652 = @term_syntax.parse_term("(x : B) => ring_sub((k : Ring[A]), (d : (B) -> A)(x), (c : (B) -> A)(x))")
   let t1655 = @tactics.first_x_assum(fn(
     x1654 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -17348,7 +17348,7 @@ fn step_169() -> Unit raise {
       }
     })(((x1653 : @kernel.Thm) => @bool.spec(t1652, x1653))(x1654))
   })
-  let t1648 = @parser.parse_term("d:B->A")
+  let t1648 = @term_syntax.parse_term("(d : (B) -> A)")
   let t1713 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -17370,7 +17370,7 @@ fn step_169() -> Unit raise {
                                     @tactics.map_every(
                                       @tactics.x_gen_tac,
                                       @list.List([
-                                        @parser.parse_term("c:B->A"),
+                                        @term_syntax.parse_term("(c : (B) -> A)"),
                                         t1648,
                                       ]),
                                     ),
@@ -17585,7 +17585,7 @@ fn step_169() -> Unit raise {
   ])
   let t1647 = @simp.asm_rewrite_tac(@list.List([]))
   let t1646 = @class.asm_cases_tac(
-    @parser.parse_term("(s:B->bool) SUBSET ring_carrier l"),
+    @term_syntax.parse_term("SUBSET((s : (B) -> Bool), ring_carrier((l : Ring[B])))"),
   )
   let t1645 = @simp.asm_simp_tac(@list.List([ring_independent_finite()]))
   let t1714 = @tactics.thenl(
@@ -17660,7 +17660,7 @@ fn step_170() -> Unit raise {
       @ringtheory.ring_1_v1(),
       @ringtheory.ring_neg_v1(),
       @sets.set_rule(
-        @parser.parse_term("a IN s ==> {x | x IN s /\\ x = a} = {a}"),
+        @term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → {(x : _) | IN(x, s) && x == a} == {a}"),
       ),
     ]),
   )
@@ -17679,7 +17679,7 @@ fn step_170() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1782 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. x IN s ==> (f:K->B) x IN ring_carrier l"),
+    @term_syntax.parse_term("∀ x : K, IN(x, (s : (K) -> Bool)) → IN((f : (K) -> B)(x), ring_carrier((l : Ring[B])))"),
     fn(
       x1779 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -17729,7 +17729,7 @@ fn step_170() -> Unit raise {
   )
   let t1775 = @meson.asm_meson_tac(@list.List([@ringtheory.field_nontrivial()]))
   let t1776 = @tactics.then_tac(
-    @tactics.exists_tac(@parser.parse_term("m:K")),
+    @tactics.exists_tac(@term_syntax.parse_term("(m : K)")),
     t1775,
   )
   let t1777 = @meson.meson_tac(
@@ -17768,10 +17768,10 @@ fn step_170() -> Unit raise {
       "(\\i. if i = m then ring_1 k\n           else if i = n then ring_neg k (ring_1 k)\n           else ring_0 k):K->A",
     ),
   )
-  let t1767 = @parser.parse_term("n:K")
+  let t1767 = @term_syntax.parse_term("(n : K)")
   let t1768 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("m:K"), t1767]),
+    @list.List([@term_syntax.parse_term("(m : K)"), t1767]),
   )
   let t1766 = @simp.rewrite_tac(
     @list.List([
@@ -17941,7 +17941,7 @@ fn step_170() -> Unit raise {
   )
   let t1757 = @meson.asm_meson_tac(@list.List([]))
   let t1756 = @simp.asm_simp_tac(@list.List([@trivia.o_def()]))
-  let t1755 = @tactics.exists_tac(@parser.parse_term("(c:B->A) o (f:K->B)"))
+  let t1755 = @tactics.exists_tac(@term_syntax.parse_term("o((c : (B) -> A), (f : (K) -> B))"))
   let t1754 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1753 = @simp.asm_simp_tac(
     @list.List([
@@ -17950,7 +17950,7 @@ fn step_170() -> Unit raise {
       @trivia.o_def(),
     ]),
   )
-  let t1752 = @tactics.x_gen_tac(@parser.parse_term("c:B->A"))
+  let t1752 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (B) -> A)"))
   let t1751 = @simp.rewrite_tac(
     @list.List([
       @theorems.left_imp_exists_thm(),
@@ -18113,7 +18113,7 @@ fn step_170() -> Unit raise {
   ])
   let t1727 = @simp.rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("~(p /\\ q) <=> p ==> (p /\\ ~q)")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (p → p && !q)")),
     ]),
   )
   let t1726 = @list.List([
@@ -18137,10 +18137,10 @@ fn step_170() -> Unit raise {
       @sets.finite_image(),
     ]),
   )
-  let t1716 = @parser.parse_term("t:B->bool")
-  let t1717 = @parser.parse_term("IMAGE (f:K->B) s")
-  let t1718 = @parser.parse_term("l:B ring")
-  let t1719 = @parser.parse_term("k:A ring")
+  let t1716 = @term_syntax.parse_term("(t : (B) -> Bool)")
+  let t1717 = @term_syntax.parse_term("IMAGE((f : (K) -> B), (s : (K) -> Bool))")
+  let t1718 = @term_syntax.parse_term("(l : Ring[B])")
+  let t1719 = @term_syntax.parse_term("(k : Ring[A])")
   let t1791 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -18163,7 +18163,7 @@ fn step_170() -> Unit raise {
                                         @tactics.mp_tac(
                                           @bool.ispecl(
                                             @list.List([
-                                              @parser.parse_term("h:A->B"),
+                                              @term_syntax.parse_term("(h : (A) -> B)"),
                                               t1719,
                                               t1718,
                                               t1717,
@@ -18556,12 +18556,12 @@ fn step_173() -> Unit raise {
       ring_matroid_independent(),
     ]),
   )
-  let t1804 = @parser.parse_term("a:B")
-  let t1805 = @parser.parse_term("s:B->bool")
+  let t1804 = @term_syntax.parse_term("(a : B)")
+  let t1805 = @term_syntax.parse_term("(s : (B) -> Bool)")
   let t1806 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("ring_matroid (k,l) (h:A->B)"),
+        @term_syntax.parse_term("ring_matroid(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B))"),
         t1805,
         t1804,
       ]),
@@ -18722,11 +18722,11 @@ fn step_175() -> Unit raise {
   )
   let t1955 = @tactics.disch_then(@tactics.match_mp_tac)
   let t1954 = @simp.rewrite_tac(@list.List([@trivia.o_def()]))
-  let t1951 = @parser.parse_term("m:C ring")
-  let t1952 = @parser.parse_term("k:A ring")
+  let t1951 = @term_syntax.parse_term("(m : Ring[C])")
+  let t1952 = @term_syntax.parse_term("(k : Ring[A])")
   let t1953 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("(g:B->C) o (f:A->B)"), t1952, t1951]),
+      @list.List([@term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"), t1952, t1951]),
       ring_span_mul(),
     ),
   )
@@ -19064,16 +19064,16 @@ fn step_175() -> Unit raise {
   let t1915 = @simp.asm_simp_tac(
     @list.List([field_extension_imp_homomorphism()]),
   )
-  let t1912 = @parser.parse_term("g:B->C")
-  let t1913 = @parser.parse_term("m:C ring")
+  let t1912 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t1913 = @term_syntax.parse_term("(m : Ring[C])")
   let t1914 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t1913, t1912]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t1913, t1912]),
       @ringtheory.ring_homomorphism_mul(),
     ),
   )
   let t1911 = @simp.rewrite_tac(@list.List([]))
-  let t1910 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t1910 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t1909 = @tactics.match_mp_tac(ring_span_sum())
   let t1907 = @tactics.disch_then(fn(
     x1906 : @kernel.Thm,
@@ -19413,19 +19413,19 @@ fn step_175() -> Unit raise {
   let t1869 = @simp.rewrite_rule(@list.List([@theorems.right_imp_forall_thm()]))(
     @ringtheory.ring_homomorphism_sum(),
   )
-  let t1865 = @parser.parse_term("b':B->bool")
-  let t1866 = @parser.parse_term("i:B->B")
-  let t1867 = @parser.parse_term("g:B->C")
-  let t1868 = @parser.parse_term("m:C ring")
+  let t1865 = @term_syntax.parse_term("(b' : (B) -> Bool)")
+  let t1866 = @term_syntax.parse_term("(i : (B) -> B)")
+  let t1867 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t1868 = @term_syntax.parse_term("(m : Ring[C])")
   let t1870 = @bool.ispecl(
-    @list.List([@parser.parse_term("l:B ring"), t1868, t1867, t1866, t1865]),
+    @list.List([@term_syntax.parse_term("(l : Ring[B])"), t1868, t1867, t1866, t1865]),
     t1869,
   )
-  let t1871 = @tactics.mp_tac(@bool.gen(@parser.parse_term("i:B->B"), t1870))
-  let t1864 = @tactics.x_gen_tac(@parser.parse_term("e:B->A"))
+  let t1871 = @tactics.mp_tac(@bool.gen(@term_syntax.parse_term("(i : (B) -> B)"), t1870))
+  let t1864 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : (B) -> A)"))
   let t1863 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec()]))
-  let t1861 = @parser.parse_term("y:B")
-  let t1862 = @tactics.spec_tac(@parser.parse_term("(d:C->B) z"), t1861)
+  let t1861 = @term_syntax.parse_term("(y : B)")
+  let t1862 = @tactics.spec_tac(@term_syntax.parse_term("(d : (C) -> B)((z : C))"), t1861)
   let t1860 = @simp.asm_simp_tac(
     @list.List([ring_span_finite(), field_extension_imp_homomorphism()]),
   )
@@ -19434,7 +19434,7 @@ fn step_175() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1858 = @tactics.subgoal_then(
-    @parser.parse_term("(b':B->bool) SUBSET ring_carrier l"),
+    @term_syntax.parse_term("SUBSET((b' : (B) -> Bool), ring_carrier((l : Ring[B])))"),
     fn(
       x1855 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -19482,7 +19482,7 @@ fn step_175() -> Unit raise {
       }
     },
   )
-  let t1854 = @tactics.x_gen_tac(@parser.parse_term("b':B->bool"))
+  let t1854 = @tactics.x_gen_tac(@term_syntax.parse_term("(b' : (B) -> Bool)"))
   let t1853 = @simp.rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm(), @theorems.imp_conj()]),
   )
@@ -19557,7 +19557,7 @@ fn step_175() -> Unit raise {
   })
   let t1852 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t1851])
   let t1845 = @tactics.subgoal_then(
-    @parser.parse_term("(d:C->B) z IN ring_span (k,l) (f:A->B) b"),
+    @term_syntax.parse_term("IN((d : (C) -> B)((z : C)), ring_span(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B), (b : (B) -> Bool)))"),
     fn(
       x1842 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -19606,14 +19606,14 @@ fn step_175() -> Unit raise {
     },
   )
   let t1841 = @simp.rewrite_tac(@list.List([]))
-  let t1840 = @tactics.x_gen_tac(@parser.parse_term("z:C"))
+  let t1840 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : C)"))
   let t1839 = @tactics.match_mp_tac(ring_span_sum())
-  let t1838 = @tactics.x_gen_tac(@parser.parse_term("d:C->B"))
+  let t1838 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : (C) -> B)"))
   let t1837 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.forall_in_gspec()]),
   )
-  let t1835 = @parser.parse_term("w:C")
-  let t1836 = @tactics.spec_tac(@parser.parse_term("w:C"), t1835)
+  let t1835 = @term_syntax.parse_term("(w : C)")
+  let t1836 = @tactics.spec_tac(@term_syntax.parse_term("(w : C)"), t1835)
   let t1834 = @simp.asm_simp_tac(
     @list.List([ring_span_finite(), field_extension_imp_homomorphism()]),
   )
@@ -19622,7 +19622,7 @@ fn step_175() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1832 = @tactics.subgoal_then(
-    @parser.parse_term("(c':C->bool) SUBSET ring_carrier m"),
+    @term_syntax.parse_term("SUBSET((c' : (C) -> Bool), ring_carrier((m : Ring[C])))"),
     fn(
       x1829 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -19670,7 +19670,7 @@ fn step_175() -> Unit raise {
       }
     },
   )
-  let t1828 = @tactics.x_gen_tac(@parser.parse_term("c':C->bool"))
+  let t1828 = @tactics.x_gen_tac(@term_syntax.parse_term("(c' : (C) -> Bool)"))
   let t1827 = @simp.rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm(), @theorems.imp_conj()]),
   )
@@ -19743,7 +19743,7 @@ fn step_175() -> Unit raise {
       }
     })(t1824(x1825))
   })
-  let t1820 = @tactics.x_gen_tac(@parser.parse_term("w:C"))
+  let t1820 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : C)"))
   let t1819 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t1815 = @drule.match_mp(
     @simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@sets.subset_trans()),
@@ -20859,8 +20859,8 @@ fn step_176() -> Unit raise {
     t2254,
   ])
   let t2245 = @simp.asm_simp_tac(@list.List([@sets.finite_image()]))
-  let t2240 = @parser.parse_term("IMAGE FST (t:C#B->bool)")
-  let t2241 = @list.List([@parser.parse_term("IMAGE SND (t:C#B->bool)"), t2240])
+  let t2240 = @term_syntax.parse_term("IMAGE(FST, (t : ((C, B)) -> Bool))")
+  let t2241 = @list.List([@term_syntax.parse_term("IMAGE(SND, (t : ((C, B)) -> Bool))"), t2240])
   let t2244 = @tactics.first_x_assum(fn(
     x2243 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -20929,7 +20929,7 @@ fn step_176() -> Unit raise {
       }
     })(((x2242 : @kernel.Thm) => @bool.specl(t2241, x2242))(x2243))
   })
-  let t2236 = @tactics.x_gen_tac(@parser.parse_term("t:C#B->bool"))
+  let t2236 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : ((C, B)) -> Bool)"))
   let t2235 = @simp.rewrite_tac(
     @list.List([lemma, @sets.forall_finite_subset_image()]),
   )
@@ -20989,7 +20989,7 @@ fn step_176() -> Unit raise {
     t2259,
   )
   let t2233 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_mul_v1()]))
-  let t2229 = @parser.parse_term("\\x. c(ring_mul m ((g:B->C) x) y):A")
+  let t2229 = @term_syntax.parse_term("(x : B) => (c : (C) -> A)(ring_mul((m : Ring[C]), (g : (B) -> C)(x), (y : C)))")
   let t2232 = @tactics.disch_then(fn(
     x2231 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -21192,7 +21192,7 @@ fn step_176() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2204 = @tactics.subgoal_then(
-    @parser.parse_term("ring_independent(k,l) (f:A->B) b'"),
+    @term_syntax.parse_term("ring_independent(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B), (b' : (B) -> Bool))"),
     fn(
       x2201 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -21241,8 +21241,8 @@ fn step_176() -> Unit raise {
     },
   )
   let t2200 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2199 = @class.asm_cases_tac(@parser.parse_term("(y:C) IN c'"))
-  let t2198 = @tactics.x_gen_tac(@parser.parse_term("y:C"))
+  let t2199 = @class.asm_cases_tac(@term_syntax.parse_term("IN((y : C), (c' : (C) -> Bool))"))
+  let t2198 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : C)"))
   let t2195 = @tactics.match_mp_tac(@theorems.mono_forall())
   let t2196 = @tactics.then_tac(
     @simp.gen_rewrite_tac(
@@ -21319,7 +21319,7 @@ fn step_176() -> Unit raise {
     @ringtheory.ring_mul_assoc(),
   )
   let t2175 = @simp.rewrite_tac(@list.List([]))
-  let t2174 = @tactics.x_gen_tac(@parser.parse_term("x:B"))
+  let t2174 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)"))
   let t2173 = @tactics.match_mp_tac(@ringtheory.ring_sum_eq())
   let t2171 = @tactics.disch_then(fn(
     x2170 : @kernel.Thm,
@@ -21453,20 +21453,20 @@ fn step_176() -> Unit raise {
   let t2148 = @simp.rewrite_rule(@list.List([@theorems.right_imp_forall_thm()]))(
     @ringtheory.ring_homomorphism_sum(),
   )
-  let t2144 = @parser.parse_term("b':B->bool")
+  let t2144 = @term_syntax.parse_term("(b' : (B) -> Bool)")
   let t2145 = @parser.parse_term(
     "\\x. ring_mul l ((f:A->B) (c (ring_mul m ((g:B->C) x) y))) x",
   )
-  let t2146 = @parser.parse_term("g:B->C")
-  let t2147 = @parser.parse_term("m:C ring")
+  let t2146 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t2147 = @term_syntax.parse_term("(m : Ring[C])")
   let t2149 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t2147, t2146, t2145, t2144]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t2147, t2146, t2145, t2144]),
       t2148,
     ),
   )
   let t2143 = @simp.rewrite_tac(@list.List([]))
-  let t2142 = @tactics.x_gen_tac(@parser.parse_term("y:C"))
+  let t2142 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : C)"))
   let t2197 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -22167,7 +22167,7 @@ fn step_176() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2110 = @tactics.subgoal_then(
-    @parser.parse_term("ring_independent(l,m) (g:B->C) c'"),
+    @term_syntax.parse_term("ring_independent(((l : Ring[B]), (m : Ring[C])), (g : (B) -> C), (c' : (C) -> Bool))"),
     fn(
       x2107 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -22451,7 +22451,7 @@ fn step_176() -> Unit raise {
       },
     ),
   )
-  let t2059 = @tactics.x_gen_tac(@parser.parse_term("c:C->A"))
+  let t2059 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (C) -> A)"))
   let t2058 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec()]))
   let t2056 = @meson.asm_meson_tac(@list.List([@ringtheory.ring_mul_v1()]))
   let t2057 = @list.List([
@@ -22462,7 +22462,7 @@ fn step_176() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t2055 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t2053 = @tactics.disch_then(fn(
     x2050 : @kernel.Thm,
@@ -24876,7 +24876,7 @@ fn step_176() -> Unit raise {
     },
   )
   let t2026 = @tactics.undisch_tac(
-    @parser.parse_term("ring_mul m ((g:B->C) x) y = ring_mul m (g x') y'"),
+    @term_syntax.parse_term("ring_mul((m : Ring[C]), (g : (B) -> C)((x : B)), (y : C)) == ring_mul(m, g((x' : B)), (y' : C))"),
   )
   let t2023 = @tactics.disch_then(fn(
     x2022 : @kernel.Thm,
@@ -24908,16 +24908,16 @@ fn step_176() -> Unit raise {
     ),
     t2024,
   ])
-  let t2019 = @parser.parse_term("g:B->C")
-  let t2020 = @parser.parse_term("m:C ring")
+  let t2019 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t2020 = @term_syntax.parse_term("(m : Ring[C])")
   let t2021 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t2020, t2019]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t2020, t2019]),
       @ringtheory.field_homomorphism_div(),
     ),
   )
   let t2018 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_div_v1()]))
-  let t2017 = @tactics.exists_tac(@parser.parse_term("ring_div l x' x:B"))
+  let t2017 = @tactics.exists_tac(@term_syntax.parse_term("ring_div((l : Ring[B]), (x' : B), (x : B))"))
   let t2016 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t2014 = @simp.asm_simp_tac(
     @list.List([ring_span_sing(), field_extension_imp_homomorphism()]),
@@ -24928,13 +24928,13 @@ fn step_176() -> Unit raise {
     t2014,
   ])
   let t2012 = @tactics.exists_tac(
-    @parser.parse_term("ring_span (l,m) (g:B->C) {y'}"),
+    @term_syntax.parse_term("ring_span(((l : Ring[B]), (m : Ring[C])), (g : (B) -> C), {(y' : C)})"),
   )
   let t2011 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("forall s. s SUBSET t /\\ x IN s ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("∀ s : (_) -> Bool, SUBSET(s, (t : (_) -> Bool)) && IN((x : _), s) → IN(x, t)")),
   )
   let t2010 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2009 = @tactics.exists_tac(@parser.parse_term("y:C"))
+  let t2009 = @tactics.exists_tac(@term_syntax.parse_term("(y : C)"))
   let t2008 = @simp.asm_rewrite_tac(@list.List([]))
   let t2007 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -25036,7 +25036,7 @@ fn step_176() -> Unit raise {
     @list.List([ring_independent(), ring_dependent()]),
   )
   let t1999 = @tactics.undisch_tac(
-    @parser.parse_term("ring_independent (l,m) (g:B->C) c"),
+    @term_syntax.parse_term("ring_independent(((l : Ring[B]), (m : Ring[C])), (g : (B) -> C), (c : (C) -> Bool))"),
   )
   let t1997 = @meson.asm_meson_tac(
     @list.List([
@@ -25209,7 +25209,7 @@ fn step_176() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t1984 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1983 = @class.asm_cases_tac(@parser.parse_term("y:C = y'"))
+  let t1983 = @class.asm_cases_tac(@term_syntax.parse_term("(y : C) == (y' : C)"))
   let t1981 = @meson.asm_meson_tac(
     @list.List([
       ring_independent_nonzero(),
@@ -25237,7 +25237,7 @@ fn step_176() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1978 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1977 = @class.asm_cases_tac(@parser.parse_term("x:B = x'"))
+  let t1977 = @class.asm_cases_tac(@term_syntax.parse_term("(x : B) == (x' : B)"))
   let t1976 = @simp.simp_tac(@list.List([]))
   let t2034 = @list.List([
     @tactics.thenl(
@@ -25474,8 +25474,8 @@ fn step_178() -> Unit raise {
     ),
   )
   let t2285 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2282 = @parser.parse_term("m:C ring")
-  let t2283 = @parser.parse_term("k:A ring")
+  let t2282 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2283 = @term_syntax.parse_term("(k : Ring[A])")
   let t2284 = @tactics.map_every(
     fn(
       x2279 : @kernel.Term,
@@ -25523,7 +25523,7 @@ fn step_178() -> Unit raise {
         s2280(x2281)
       }
     },
-    @list.List([@parser.parse_term("(g:B->C) o (f:A->B)"), t2283, t2282]),
+    @list.List([@term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"), t2283, t2282]),
   )
   let t2289 = @tactics.then_tac(
     @tactics.then_tac(
@@ -25980,10 +25980,10 @@ fn step_187() -> Unit raise {
   })
   let t2323 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_mul_rid()]))
   let t2322 = @simp.once_rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool)) == !(p → !q)"))]),
   )
   let t2321 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t2320 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t2320 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t2319 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_mul_rid()]))
   let t2318 = @simp.rewrite_tac(
     @list.List([
@@ -26078,7 +26078,7 @@ fn step_187() -> Unit raise {
   let t2309 = @simp.rewrite_tac(
     @list.List([@sets.finite_sing(), @sets.sing_subset()]),
   )
-  let t2308 = @tactics.exists_tac(@parser.parse_term("{ring_1 l:B}"))
+  let t2308 = @tactics.exists_tac(@term_syntax.parse_term("{ring_1((l : Ring[B]))}"))
   let t2307 = @simp.asm_simp_tac(
     @list.List([finite_extension(), field_extension_isomorphism()]),
   )
@@ -26212,17 +26212,17 @@ fn step_188() -> Unit raise {
   let t2355 = @meson.asm_meson_tac(
     @list.List([@card.card_mul_finite(), @card.card_finite_cong()]),
   )
-  let t2347 = @parser.parse_term("d:C->bool")
-  let t2348 = @parser.parse_term("c:C->bool")
-  let t2349 = @parser.parse_term("b:B->bool")
-  let t2350 = @parser.parse_term("m:C ring")
-  let t2351 = @parser.parse_term("l:B ring")
-  let t2352 = @parser.parse_term("k:A ring")
-  let t2353 = @parser.parse_term("g:B->C")
+  let t2347 = @term_syntax.parse_term("(d : (C) -> Bool)")
+  let t2348 = @term_syntax.parse_term("(c : (C) -> Bool)")
+  let t2349 = @term_syntax.parse_term("(b : (B) -> Bool)")
+  let t2350 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2351 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2352 = @term_syntax.parse_term("(k : Ring[A])")
+  let t2353 = @term_syntax.parse_term("(g : (B) -> C)")
   let t2354 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("f:A->B"),
+        @term_syntax.parse_term("(f : (A) -> B)"),
         t2353,
         t2352,
         t2351,
@@ -26235,7 +26235,7 @@ fn step_188() -> Unit raise {
     ),
   )
   let t2346 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2345 = @tactics.x_gen_tac(@parser.parse_term("d:C->bool"))
+  let t2345 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : (C) -> Bool)"))
   let t2343 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t2344 = @list.List([
     @meson.asm_meson_tac(
@@ -26247,11 +26247,11 @@ fn step_188() -> Unit raise {
     ),
     t2343,
   ])
-  let t2340 = @parser.parse_term("m:C ring")
-  let t2341 = @parser.parse_term("k:A ring")
+  let t2340 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2341 = @term_syntax.parse_term("(k : Ring[A])")
   let t2342 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("(g:B->C) o (f:A->B)"), t2341, t2340]),
+      @list.List([@term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"), t2341, t2340]),
       ring_basis_exists(),
     ),
   )
@@ -26260,9 +26260,9 @@ fn step_188() -> Unit raise {
     @tactics.all_tac,
   ])
   let t2338 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t2337 = @tactics.x_gen_tac(@parser.parse_term("c:C->bool"))
+  let t2337 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (C) -> Bool)"))
   let t2336 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t2335 = @tactics.x_gen_tac(@parser.parse_term("b:B->bool"))
+  let t2335 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : (B) -> Bool)"))
   let t2334 = @simp.rewrite_tac(
     @list.List([@theorems.imp_conj(), @theorems.left_imp_exists_thm()]),
   )
@@ -26465,31 +26465,31 @@ fn step_189() -> Unit raise {
     }),
   )
   let t2400 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2396 = @parser.parse_term("b:B->bool")
-  let t2397 = @parser.parse_term("l:B ring")
-  let t2398 = @parser.parse_term("k:A ring")
+  let t2396 = @term_syntax.parse_term("(b : (B) -> Bool)")
+  let t2397 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2398 = @term_syntax.parse_term("(k : Ring[A])")
   let t2399 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t2398, t2397, t2396]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t2398, t2397, t2396]),
       finite_extension_any(),
     ),
   )
-  let t2392 = @parser.parse_term("c:C->bool")
-  let t2393 = @parser.parse_term("m:C ring")
-  let t2394 = @parser.parse_term("l:B ring")
+  let t2392 = @term_syntax.parse_term("(c : (C) -> Bool)")
+  let t2393 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2394 = @term_syntax.parse_term("(l : Ring[B])")
   let t2395 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("g:B->C"), t2394, t2393, t2392]),
+      @list.List([@term_syntax.parse_term("(g : (B) -> C)"), t2394, t2393, t2392]),
       finite_extension_any(),
     ),
   )
-  let t2388 = @parser.parse_term("d:C->bool")
-  let t2389 = @parser.parse_term("m:C ring")
-  let t2390 = @parser.parse_term("k:A ring")
+  let t2388 = @term_syntax.parse_term("(d : (C) -> Bool)")
+  let t2389 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2390 = @term_syntax.parse_term("(k : Ring[A])")
   let t2391 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("(g:B->C) o (f:A->B)"),
+        @term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"),
         t2390,
         t2389,
         t2388,
@@ -26498,17 +26498,17 @@ fn step_189() -> Unit raise {
     ),
   )
   let t2387 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2379 = @parser.parse_term("d:C->bool")
-  let t2380 = @parser.parse_term("c:C->bool")
-  let t2381 = @parser.parse_term("b:B->bool")
-  let t2382 = @parser.parse_term("m:C ring")
-  let t2383 = @parser.parse_term("l:B ring")
-  let t2384 = @parser.parse_term("k:A ring")
-  let t2385 = @parser.parse_term("g:B->C")
+  let t2379 = @term_syntax.parse_term("(d : (C) -> Bool)")
+  let t2380 = @term_syntax.parse_term("(c : (C) -> Bool)")
+  let t2381 = @term_syntax.parse_term("(b : (B) -> Bool)")
+  let t2382 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2383 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2384 = @term_syntax.parse_term("(k : Ring[A])")
+  let t2385 = @term_syntax.parse_term("(g : (B) -> C)")
   let t2386 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("f:A->B"),
+        @term_syntax.parse_term("(f : (A) -> B)"),
         t2385,
         t2384,
         t2383,
@@ -26520,8 +26520,8 @@ fn step_189() -> Unit raise {
       field_extension_tower_law(),
     ),
   )
-  let t2376 = @parser.parse_term("d:C->bool")
-  let t2377 = @parser.parse_term("c:C->bool")
+  let t2376 = @term_syntax.parse_term("(d : (C) -> Bool)")
+  let t2377 = @term_syntax.parse_term("(c : (C) -> Bool)")
   let t2378 = @tactics.map_every(
     fn(
       x2372 : @kernel.Term,
@@ -26562,40 +26562,40 @@ fn step_189() -> Unit raise {
         ]),
       )
     },
-    @list.List([@parser.parse_term("b:B->bool"), t2377, t2376]),
+    @list.List([@term_syntax.parse_term("(b : (B) -> Bool)"), t2377, t2376]),
   )
-  let t2369 = @parser.parse_term("l:B ring")
-  let t2370 = @parser.parse_term("k:A ring")
+  let t2369 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2370 = @term_syntax.parse_term("(k : Ring[A])")
   let t2371 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t2370, t2369]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t2370, t2369]),
       ring_basis_exists(),
     ),
   )
-  let t2366 = @parser.parse_term("m:C ring")
-  let t2367 = @parser.parse_term("l:B ring")
+  let t2366 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2367 = @term_syntax.parse_term("(l : Ring[B])")
   let t2368 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("g:B->C"), t2367, t2366]),
+      @list.List([@term_syntax.parse_term("(g : (B) -> C)"), t2367, t2366]),
       ring_basis_exists(),
     ),
   )
-  let t2363 = @parser.parse_term("m:C ring")
-  let t2364 = @parser.parse_term("k:A ring")
+  let t2363 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2364 = @term_syntax.parse_term("(k : Ring[A])")
   let t2365 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("(g:B->C) o (f:A->B)"), t2364, t2363]),
+      @list.List([@term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"), t2364, t2363]),
       ring_basis_exists(),
     ),
   )
   let t2362 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2357 = @parser.parse_term("m:C ring")
-  let t2358 = @parser.parse_term("l:B ring")
-  let t2359 = @parser.parse_term("k:A ring")
-  let t2360 = @parser.parse_term("g:B->C")
+  let t2357 = @term_syntax.parse_term("(m : Ring[C])")
+  let t2358 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2359 = @term_syntax.parse_term("(k : Ring[A])")
+  let t2360 = @term_syntax.parse_term("(g : (B) -> C)")
   let t2361 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t2360, t2359, t2358, t2357]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t2360, t2359, t2358, t2357]),
       field_extension_trans(),
     ),
   )
@@ -27221,11 +27221,11 @@ fn step_194() -> Unit raise {
       })(x2468)(x2468)
     }
   })
-  let t2454 = @parser.parse_term("g:B->C")
-  let t2455 = @parser.parse_term("m:C ring")
+  let t2454 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t2455 = @term_syntax.parse_term("(m : Ring[C])")
   let t2456 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t2455, t2454]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t2455, t2454]),
       subfield_generated_by_monomorphic_image(),
     ),
   )
@@ -27336,16 +27336,16 @@ fn step_194() -> Unit raise {
     ]),
   )
   let t2440 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (g:B->C) b UNION c"),
+    @term_syntax.parse_term("UNION(IMAGE((g : (B) -> C), (b : (B) -> Bool)), (c : (C) -> Bool))"),
   )
   let t2439 = @list.List([
     @meson.asm_meson_tac(@list.List([field_extension_trans()])),
     @tactics.all_tac,
   ])
   let t2438 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t2437 = @tactics.x_gen_tac(@parser.parse_term("c:C->bool"))
+  let t2437 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (C) -> Bool)"))
   let t2436 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t2435 = @tactics.x_gen_tac(@parser.parse_term("b:B->bool"))
+  let t2435 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : (B) -> Bool)"))
   let t2434 = @simp.rewrite_tac(
     @list.List([@theorems.imp_conj(), @theorems.left_imp_exists_thm()]),
   )
@@ -27505,20 +27505,20 @@ fn step_198() -> Unit raise {
   let t2566 = @simp.asm_rewrite_tac(
     @list.List([
       @trivia.o_def(),
-      @sets.set_rule(@parser.parse_term("BIJ (\\x. b) {a} {b}")),
+      @sets.set_rule(@term_syntax.parse_term("BIJ((x : _) => (b : _), {(a : _)}, {b})")),
     ]),
   )
-  let t2556 = @parser.parse_term("(\\v. x):V->B")
-  let t2557 = @parser.parse_term("\\x:1. (v:V)")
-  let t2558 = @parser.parse_term("q:(V->num)->A")
-  let t2559 = @parser.parse_term("{v:V}")
-  let t2560 = @parser.parse_term("{one}")
-  let t2561 = @parser.parse_term("l:B ring")
-  let t2562 = @parser.parse_term("k:A ring")
+  let t2556 = @term_syntax.parse_term("(v : V) => (x : B)")
+  let t2557 = @term_syntax.parse_term("(x : Unit) => (v : V)")
+  let t2558 = @term_syntax.parse_term("(q : ((V) -> Num) -> A)")
+  let t2559 = @term_syntax.parse_term("{(v : V)}")
+  let t2560 = @term_syntax.parse_term("{one}")
+  let t2561 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2562 = @term_syntax.parse_term("(k : Ring[A])")
   let t2563 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h:A->B"),
+        @term_syntax.parse_term("(h : (A) -> B)"),
         t2562,
         t2561,
         t2560,
@@ -27531,17 +27531,17 @@ fn step_198() -> Unit raise {
     ),
   )
   let t2564 = @tactics.then_tac(@simp.expand_tac("f"), t2563)
-  let t2548 = @parser.parse_term("(\\v. x):1->B")
-  let t2549 = @parser.parse_term("\\x:V. one")
-  let t2550 = @parser.parse_term("p:(1->num)->A")
-  let t2551 = @parser.parse_term("{one}")
-  let t2552 = @parser.parse_term("{v:V}")
-  let t2553 = @parser.parse_term("l:B ring")
-  let t2554 = @parser.parse_term("k:A ring")
+  let t2548 = @term_syntax.parse_term("(v : Unit) => (x : B)")
+  let t2549 = @term_syntax.parse_term("(x : V) => one")
+  let t2550 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t2551 = @term_syntax.parse_term("{one}")
+  let t2552 = @term_syntax.parse_term("{(v : V)}")
+  let t2553 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2554 = @term_syntax.parse_term("(k : Ring[A])")
   let t2555 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h:A->B"),
+        @term_syntax.parse_term("(h : (A) -> B)"),
         t2554,
         t2553,
         t2552,
@@ -27922,12 +27922,12 @@ fn step_198() -> Unit raise {
     })(t2521(x2522))
   })
   let t2513 = @tactics.exists_tac(
-    @parser.parse_term("(f:((V->num)->A)->(1->num)->A) q"),
+    @term_syntax.parse_term("(f : (((V) -> Num) -> A, (Unit) -> Num) -> A)((q : ((V) -> Num) -> A))"),
   )
   let t2524 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.disch_then(
-        @tactics.x_choose_then(@parser.parse_term("q:(V->num)->A"))(
+        @tactics.x_choose_then(@term_syntax.parse_term("(q : ((V) -> Num) -> A)"))(
           @tactics.strip_assume_tac,
         ),
       ),
@@ -28056,13 +28056,13 @@ fn step_198() -> Unit raise {
     })(t2510(x2511))
   })
   let t2502 = @tactics.exists_tac(
-    @parser.parse_term("(g:((1->num)->A)->(V->num)->A) p"),
+    @term_syntax.parse_term("(g : (((Unit) -> Num) -> A, (V) -> Num) -> A)((p : ((Unit) -> Num) -> A))"),
   )
   let t2525 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.disch_then(
-          @tactics.x_choose_then(@parser.parse_term("p:(1->num)->A"))(
+          @tactics.x_choose_then(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))(
             @tactics.strip_assume_tac,
           ),
         ),
@@ -28076,19 +28076,19 @@ fn step_198() -> Unit raise {
   let t2496 = @simp.rewrite_tac(
     @list.List([@sets.univ_1(), @sets.forall_in_insert(), @sets.not_in_empty()]),
   )
-  let t2491 = @parser.parse_term("\\u:1. (v:V)")
-  let t2492 = @parser.parse_term("\\x:V. one")
-  let t2493 = @parser.parse_term("(:1)")
-  let t2494 = @parser.parse_term("{v:V}")
+  let t2491 = @term_syntax.parse_term("(u : Unit) => (v : V)")
+  let t2492 = @term_syntax.parse_term("(x : V) => one")
+  let t2493 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t2494 = @term_syntax.parse_term("{(v : V)}")
   let t2495 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t2494, t2493, t2492, t2491]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t2494, t2493, t2492, t2491]),
       @ringtheory.ring_isomorphisms_poly_reindex(),
     ),
   )
   let t2490 = @simp.asm_rewrite_tac(@list.List([]))
   let t2489 = @class.asm_cases_tac(
-    @parser.parse_term("(x:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((x : B), ring_carrier((l : Ring[B])))"),
   )
   let t2488 = @simp.rewrite_tac(@list.List([algebraic_over()]))
   let t2568 = @tactics.then_tac(
@@ -28302,10 +28302,10 @@ fn step_200() -> Unit raise {
     ]),
   )
   let t2600 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2599 = @tactics.x_gen_tac(@parser.parse_term("c:A"))
+  let t2599 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : A)"))
   let t2598 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t2597 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(r ==> ~q) ==> p ==> q ==> ~r")),
+    @class.taut(@term_syntax.parse_term("((r : Bool) → !(q : Bool)) → (p : Bool) → q → !r")),
   )
   let t2596 = @simp.asm_simp_tac(@list.List([@ringtheory.poly_deg_eq_0()]))
   let t2593 = @simp.gen_rewrite_rule(
@@ -28480,7 +28480,7 @@ fn step_200() -> Unit raise {
       },
     ),
   )
-  let t2581 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t2581 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t2580 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t2579 = @simp.asm_rewrite_tac(@list.List([]))
   let t2578 = @tactics.disch_then(
@@ -28780,7 +28780,7 @@ fn step_203() -> Unit raise {
     @list.List([@ringtheory.poly_clauses()]),
   )
   let t2617 = @tactics.exists_tac(
-    @parser.parse_term("poly_sub k (poly_var k one) (poly_const k (x:A))"),
+    @term_syntax.parse_term("poly_sub((k : Ring[A]), poly_var(k, one), poly_const(k, (x : A)))"),
   )
   let t2616 = @simp.asm_simp_tac(
     @list.List([@sets.subset(), @sets.forall_in_image()]),
@@ -29040,7 +29040,7 @@ fn step_207() -> Unit raise {
   let t2667 = @simp.asm_simp_tac(
     @list.List([@ringtheory.subring_generated_inc_gen()]),
   )
-  let t2666 = @tactics.exists_tac(@parser.parse_term("(:1)"))
+  let t2666 = @tactics.exists_tac(@term_syntax.parse_term("(UNIV : (Unit) -> Bool)"))
   let t2665 = @tactics.match_mp_tac(
     @ringtheory.poly_extend_into_subring_generated(),
   )
@@ -29115,7 +29115,7 @@ fn step_207() -> Unit raise {
   let t2659 = @simp.asm_rewrite_tac(
     @list.List([@bool.conjunct2(@ringtheory.subring_generated_v1())]),
   )
-  let t2658 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t2658 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t2657 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t2656 = @simp.asm_simp_tac(
     @list.List([algebraic_over(), @ringtheory.subring_generated_inc_gen()]),
@@ -29360,7 +29360,7 @@ fn step_208() -> Unit raise {
   let t2682 = @simp.asm_rewrite_tac(
     @list.List([subfield_generated_subset_carrier(), @sets.subset_inter()]),
   )
-  let t2680 = @parser.parse_term("ring_carrier l INTER s:B->bool")
+  let t2680 = @term_syntax.parse_term("INTER(ring_carrier((l : Ring[B])), (s : (B) -> Bool))")
   let t2681 = @tactics.trans_tac(@sets.subset_trans())(t2680)
   let t2679 = @simp.asm_simp_tac(@list.List([subfield_generated_inc_gen()]))
   let t2676 = @drule.match_mp(algebraic_over_in_carrier())
@@ -29543,11 +29543,11 @@ fn step_210() -> Unit raise {
   let t2756 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_mul_rzero(), @ringtheory.poly_extend_v1()]),
   )
-  let t2751 = @parser.parse_term("p:(1->num)->A")
-  let t2752 = @parser.parse_term("poly_const k d:(1->num)->A")
-  let t2753 = @parser.parse_term("(\\v. x):1->B")
-  let t2754 = @parser.parse_term("h:A->B")
-  let t2755 = @parser.parse_term("l:B ring")
+  let t2751 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t2752 = @term_syntax.parse_term("(poly_const : (Ring[A], A, (Unit) -> Num) -> A)((k : Ring[A]), (d : A))")
+  let t2753 = @term_syntax.parse_term("(v : Unit) => (x : B)")
+  let t2754 = @term_syntax.parse_term("(h : (A) -> B)")
+  let t2755 = @term_syntax.parse_term("(l : Ring[B])")
   let t2761 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -29556,7 +29556,7 @@ fn step_210() -> Unit raise {
             @tactics.mp_tac(
               @bool.ispecl(
                 @list.List([
-                  @parser.parse_term("k:A ring"),
+                  @term_syntax.parse_term("(k : Ring[A])"),
                   t2755,
                   t2754,
                   t2753,
@@ -29626,19 +29626,19 @@ fn step_210() -> Unit raise {
     4,
     @bool.conjuncts_rule(poly_subfield_generated_clauses()),
   )
-  let t2736 = @parser.parse_term("p:(1->num)->A")
-  let t2737 = @parser.parse_term("poly_const k d:(1->num)->A")
-  let t2738 = @parser.parse_term("(:1)")
-  let t2739 = @parser.parse_term("s:A->bool")
+  let t2736 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t2737 = @term_syntax.parse_term("(poly_const : (Ring[A], A, (Unit) -> Num) -> A)((k : Ring[A]), (d : A))")
+  let t2738 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t2739 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t2741 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t2739, t2738, t2737, t2736]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t2739, t2738, t2737, t2736]),
       t2740,
     ),
   )
-  let t2730 = @parser.parse_term("p:(1->num)->A")
+  let t2730 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t2731 = @list.List([
-    @parser.parse_term("poly_const k d:(1->num)->A"),
+    @term_syntax.parse_term("(poly_const : (Ring[A], A, (Unit) -> Num) -> A)((k : Ring[A]), (d : A))"),
     t2730,
   ])
   let t2735 = @tactics.disch_then(fn(
@@ -29742,7 +29742,7 @@ fn step_210() -> Unit raise {
     ),
     t2725,
   ])
-  let t2724 = @parser.parse_term("(:1)")
+  let t2724 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
   let t2762 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -29756,7 +29756,7 @@ fn step_210() -> Unit raise {
                       @bool.eq_imp_rule(
                         @bool.ispecl(
                           @list.List([
-                            @parser.parse_term("subfield_generated k s:A ring"),
+                            @term_syntax.parse_term("subfield_generated((k : Ring[A]), (s : (A) -> Bool))"),
                             t2724,
                           ]),
                           @ringtheory.integral_domain_poly_ring(),
@@ -29783,10 +29783,10 @@ fn step_210() -> Unit raise {
   ])
   let t2723 = @simp.asm_rewrite_tac(@list.List([]))
   let t2722 = @tactics.exists_tac(
-    @parser.parse_term("poly_mul k (poly_const k d) p:(1->num)->A"),
+    @term_syntax.parse_term("poly_mul((k : Ring[A]), poly_const(k, (d : A)), (p : ((Unit) -> Num) -> A))"),
   )
   let t2720 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("d:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(d : A)"))(@tactics.strip_assume_tac),
   )
   let t2721 = @list.List([
     @meson.asm_meson_tac(
@@ -29795,12 +29795,12 @@ fn step_210() -> Unit raise {
     t2720,
   ])
   let t2719 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2715 = @parser.parse_term("p:(1->num)->A")
-  let t2716 = @parser.parse_term("(:1)")
-  let t2717 = @parser.parse_term("s:A->bool")
+  let t2715 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t2716 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t2717 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t2718 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t2717, t2716, t2715]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t2717, t2716, t2715]),
       poly_over_subfield_generated_denominator(),
     ),
   )
@@ -29892,7 +29892,7 @@ fn step_210() -> Unit raise {
     })(t2710(x2711))
   })
   let t2703 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("p:(1->num)->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -30214,7 +30214,7 @@ pub fn algebraic_extension_alt() -> @kernel.Thm {
 /// ALGEBRAIC_OVER_EQ
 fn step_214() -> Unit raise {
   let t2791 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2790 = @tactics.exists_tac(@parser.parse_term("(:1)"))
+  let t2790 = @tactics.exists_tac(@term_syntax.parse_term("(UNIV : (Unit) -> Bool)"))
   let t2789 = @tactics.match_mp_tac(@ringtheory.poly_extend_eq())
   let t2788 = @tactics.first_x_assum(fn(
     x2783 : @kernel.Thm,
@@ -30249,7 +30249,7 @@ fn step_214() -> Unit raise {
     )
   })
   let t2782 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2781 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t2781 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t2780 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t2779 = @simp.asm_rewrite_tac(@list.List([]))
   let t2778 = @tactics.repeat_tac(
@@ -30476,11 +30476,11 @@ fn step_217() -> Unit raise {
     @list.List([@ringtheory.ring_mul_lzero(), @ringtheory.ring_pow_v1()]),
   )
   let t2873 = @simp.rewrite_tac(
-    @list.List([@kernel.assume_rule(@parser.parse_term("i:num <= n"))]),
+    @list.List([@kernel.assume_rule(@term_syntax.parse_term("(i : Num) <= (n : Num)"))]),
   )
   let t2872 = @simp.expand_tac("p")
   let t2871 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(p ==> r) ==> (~p ==> q) ==> ~q ==> r")),
+    @class.taut(@term_syntax.parse_term("((p : Bool) → (r : Bool)) → (!p → (q : Bool)) → !q → r")),
   )
   let t2870 = @simp.asm_rewrite_tac(
     @list.List([
@@ -30488,11 +30488,11 @@ fn step_217() -> Unit raise {
       @ringtheory.monomial_deg_univariate(),
     ]),
   )
-  let t2867 = @parser.parse_term("(\\x. i):1->num")
-  let t2868 = @parser.parse_term("p:(1->num)->A")
+  let t2867 = @term_syntax.parse_term("(x : Unit) => (i : Num)")
+  let t2868 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t2869 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t2868, t2867]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t2868, t2867]),
       @ringtheory.monomial_deg_le_poly_deg(),
     ),
   )
@@ -30593,7 +30593,7 @@ fn step_217() -> Unit raise {
       },
     ),
   )
-  let t2858 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
+  let t2858 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)"))
   let t2857 = @simp.simp_tac(
     @list.List([
       @sets.subset(),
@@ -30691,7 +30691,7 @@ fn step_217() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t2837 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t2835 = @meson.asm_meson_tac(
     @list.List([@iterate.in_numseg(), @arith.le_0()]),
@@ -30718,7 +30718,7 @@ fn step_217() -> Unit raise {
       @sets.in_sing(),
     ]),
   )
-  let t2829 = @tactics.exists_tac(@parser.parse_term("{(\\v. i):1->num}"))
+  let t2829 = @tactics.exists_tac(@term_syntax.parse_term("{(v : Unit) => (i : Num)}"))
   let t2828 = @tactics.match_mp_tac(@sets.finite_subset())
   let t2827 = @tactics.disch_then(fn(
     x2826 : @kernel.Thm,
@@ -30743,7 +30743,7 @@ fn step_217() -> Unit raise {
   ) raise) raise {
     @tactics.all_tac
   })
-  let t2825 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
+  let t2825 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)"))
   let t2824 = @simp.simp_tac(
     @list.List([@sets.finite_image(), @sets.finite_numseg_le()]),
   )
@@ -30835,9 +30835,9 @@ fn step_217() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t2817 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
-  let t2816 = @tactics.exists_tac(@parser.parse_term("p:(1->num)->A"))
+  let t2816 = @tactics.exists_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t2815 = @simp.abbrev_tac(
     @parser.parse_term(
       "p = \\m. if m one <= n then (c:num->A) (m one) else ring_0 k",
@@ -30891,7 +30891,7 @@ fn step_217() -> Unit raise {
       }
     }),
   )
-  let t2810 = @tactics.x_gen_tac(@parser.parse_term("c:num->A"))
+  let t2810 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (Num) -> A)"))
   let t2808 = @simp.rewrite_tac(
     @list.List([
       @iterate.in_numseg(),
@@ -30950,15 +30950,15 @@ fn step_217() -> Unit raise {
   let t2803 = @simp.asm_rewrite_tac(
     @list.List([@iterate.finite_numseg(), @iterate.card_numseg()]),
   )
-  let t2797 = @parser.parse_term("b:B->bool")
-  let t2798 = @parser.parse_term("0..n")
-  let t2799 = @parser.parse_term("ring_pow l (a:B)")
-  let t2800 = @parser.parse_term("l:B ring")
-  let t2801 = @parser.parse_term("k:A ring")
+  let t2797 = @term_syntax.parse_term("(b : (B) -> Bool)")
+  let t2798 = @term_syntax.parse_term("op_dot_dot(0, (n : Num))")
+  let t2799 = @term_syntax.parse_term("ring_pow((l : Ring[B]), (a : B))")
+  let t2800 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2801 = @term_syntax.parse_term("(k : Ring[A])")
   let t2802 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h:A->B"),
+        @term_syntax.parse_term("(h : (A) -> B)"),
         t2801,
         t2800,
         t2799,
@@ -31119,15 +31119,15 @@ fn step_218() -> Unit raise {
   let t2890 = @simp.asm_rewrite_tac(
     @list.List([@sets.has_size(), @sets.subset_refl()]),
   )
-  let t2884 = @parser.parse_term("CARD(b:B->bool)")
-  let t2885 = @parser.parse_term("b:B->bool")
-  let t2886 = @parser.parse_term("a:B")
-  let t2887 = @parser.parse_term("l:B ring")
-  let t2888 = @parser.parse_term("k:A ring")
+  let t2884 = @term_syntax.parse_term("CARD((b : (B) -> Bool))")
+  let t2885 = @term_syntax.parse_term("(b : (B) -> Bool)")
+  let t2886 = @term_syntax.parse_term("(a : B)")
+  let t2887 = @term_syntax.parse_term("(l : Ring[B])")
+  let t2888 = @term_syntax.parse_term("(k : Ring[A])")
   let t2889 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h:A->B"),
+        @term_syntax.parse_term("(h : (A) -> B)"),
         t2888,
         t2887,
         t2886,
@@ -31138,7 +31138,7 @@ fn step_218() -> Unit raise {
     ),
   )
   let t2883 = @simp.rewrite_tac(@list.List([algebraic_over()]))
-  let t2882 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t2882 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t2881 = @simp.asm_rewrite_tac(@list.List([]))
   let t2880 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -31188,7 +31188,7 @@ fn step_218() -> Unit raise {
           s2878(x2879)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("b:B->bool"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(b : (B) -> Bool)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -31341,7 +31341,7 @@ fn step_219() -> Unit raise {
   let t2917 = @simp.asm_simp_tac(
     @list.List([@ringtheory.poly_extend_univariate()]),
   )
-  let t2916 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t2916 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t2915 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.forall_in_image()]),
   )
@@ -31833,7 +31833,7 @@ fn step_220() -> Unit raise {
   })
   let t2978 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("P i ==> ring_pow l a i IN {ring_pow l a n | P n}"),
+      @term_syntax.parse_term("(P : (Num) -> Bool)((i : Num)) → IN(ring_pow((l : Ring[_]), (a : _), i), {ring_pow(l, a, (n : Num)) | P(n)})"),
     ),
   )
   let t2977 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_pow_v1()]))
@@ -31862,7 +31862,7 @@ fn step_220() -> Unit raise {
     ]),
   )
   let t2971 = @class.asm_cases_tac(
-    @parser.parse_term("(r:(1->num)->A) (\\v. i) = ring_0 k"),
+    @term_syntax.parse_term("(r : ((Unit) -> Num) -> A)((v : Unit) => (i : Num)) == ring_0((k : Ring[A]))"),
   )
   let t2970 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(
@@ -32069,23 +32069,23 @@ fn step_220() -> Unit raise {
       ),
     ),
   )
-  let t2947 = @parser.parse_term("r:(1->num)->A")
+  let t2947 = @term_syntax.parse_term("(r : ((Unit) -> Num) -> A)")
   let t2948 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("q:(1->num)->A"), t2947]),
+    @list.List([@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"), t2947]),
   )
   let t2946 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
-  let t2943 = @parser.parse_term("p:(1->num)->A")
-  let t2944 = @parser.parse_term("f:(1->num)->A")
+  let t2943 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t2944 = @term_syntax.parse_term("(f : ((Unit) -> Num) -> A)")
   let t2945 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t2944, t2943]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t2944, t2943]),
       @ringtheory.poly_division(),
     ),
   )
-  let t2942 = @tactics.x_gen_tac(@parser.parse_term("f:(1->num)->A"))
+  let t2942 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : ((Unit) -> Num) -> A)"))
   let t2941 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.forall_in_image()]),
   )
@@ -32248,12 +32248,12 @@ fn step_221() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t3033 = @parser.parse_term("q:(1->num)->A")
+  let t3033 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
   let t3036 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.map_every(
         @tactics.x_gen_tac,
-        @list.List([@parser.parse_term("p:(1->num)->A"), t3033]),
+        @list.List([@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"), t3033]),
       ),
       t3034,
     ),
@@ -32275,7 +32275,7 @@ fn step_221() -> Unit raise {
   let t3037 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.exists_tac(@parser.parse_term("poly_1 k:(1->num)->A")),
+        @tactics.exists_tac(@term_syntax.parse_term("(poly_1 : (Ring[A], (Unit) -> Num) -> A)((k : Ring[A]))")),
         t3031,
       ),
       t3032,
@@ -32473,11 +32473,11 @@ fn step_221() -> Unit raise {
     ]),
   )
   let t3001 = @simp.rewrite_tac(@list.List([@ringtheory.ring_image()]))
-  let t2998 = @parser.parse_term("poly_extend (k,l) (h:A->B) (\\x:1. a)")
-  let t2999 = @parser.parse_term("l:B ring")
+  let t2998 = @term_syntax.parse_term("poly_extend(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), (x : Unit) => (a : B))")
+  let t2999 = @term_syntax.parse_term("(l : Ring[B])")
   let t3000 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("poly_ring (k:A ring) (:1)"), t2999, t2998]),
+      @list.List([@term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"), t2999, t2998]),
       @ringtheory.first_ring_isomorphism_theorem(),
     ),
   )
@@ -33102,7 +33102,7 @@ fn step_224() -> Unit raise {
   let t3133 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_monomorphism_imp_homomorphism()]),
   )
-  let t3132 = @tactics.exists_tac(@parser.parse_term("(:1)"))
+  let t3132 = @tactics.exists_tac(@term_syntax.parse_term("(UNIV : (Unit) -> Bool)"))
   let t3131 = @tactics.match_mp_tac(
     @ringtheory.poly_extend_into_subring_generated(),
   )
@@ -33180,15 +33180,15 @@ fn step_224() -> Unit raise {
   let t3112 = @simp.simp_tac(
     @list.List([@ringtheory.subring_generated_idempot(), @sets.subset_refl()]),
   )
-  let t3107 = @parser.parse_term("a:B")
-  let t3108 = @parser.parse_term("p:(1->num)->A")
+  let t3107 = @term_syntax.parse_term("(a : B)")
+  let t3108 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t3109 = @parser.parse_term(
     "subring_generated l (a INSERT IMAGE (h:A->B) (ring_carrier k))",
   )
-  let t3110 = @parser.parse_term("k:A ring")
+  let t3110 = @term_syntax.parse_term("(k : Ring[A])")
   let t3111 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t3110, t3109, t3108, t3107]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3110, t3109, t3108, t3107]),
       ring_simple_algebraic_extension_span(),
     ),
   )
@@ -33236,7 +33236,7 @@ fn step_224() -> Unit raise {
   ])
   let t3097 = @tactics.repeat_tac(@tactics.conj_tac)
   let t3096 = @tactics.exists_tac(
-    @parser.parse_term("{ring_pow l (a:B) n | n < poly_deg k (p:(1->num)->A)}"),
+    @term_syntax.parse_term("{ring_pow((l : Ring[B]), (a : B), (n : Num)) | n < poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A))}"),
   )
   let t3094 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t3095 = @list.List([
@@ -33247,7 +33247,7 @@ fn step_224() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t3093 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t3090 = @simp.gen_rewrite_rule(
     fn(
@@ -33257,7 +33257,7 @@ fn step_224() -> Unit raise {
     },
     @list.List([algebraic_over()]),
   )
-  let t3087 = @tactics.x_choose_then(@parser.parse_term("p:(1->num)->A"))(
+  let t3087 = @tactics.x_choose_then(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))(
     @tactics.strip_assume_tac,
   )
   let t3092 = @tactics.first_x_assum(fn(
@@ -33601,10 +33601,10 @@ fn step_225() -> Unit raise {
     ),
   )
   let t3176 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3172 = @parser.parse_term("g:B->C")
-  let t3173 = @parser.parse_term("f:A->B")
-  let t3174 = @parser.parse_term("m:C ring")
-  let t3175 = @parser.parse_term("l:B ring")
+  let t3172 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t3173 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t3174 = @term_syntax.parse_term("(m : Ring[C])")
+  let t3175 = @term_syntax.parse_term("(l : Ring[B])")
   let t3179 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -33612,7 +33612,7 @@ fn step_225() -> Unit raise {
           @tactics.mp_tac(
             @bool.ispecl(
               @list.List([
-                @parser.parse_term("k:A ring"),
+                @term_syntax.parse_term("(k : Ring[A])"),
                 t3175,
                 t3174,
                 t3173,
@@ -33637,7 +33637,7 @@ fn step_225() -> Unit raise {
       @ringtheory.poly_eq_0_monomorphic_image(),
     ),
   )
-  let t3166 = @parser.parse_term("p:(1->num)->A")
+  let t3166 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t3180 = @tactics.then_tac(
     @tactics.first_assum(fn(
       x3170 : @kernel.Thm,
@@ -33732,7 +33732,7 @@ fn step_225() -> Unit raise {
     t3171,
   )
   let t3162 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3161 = @tactics.exists_tac(@parser.parse_term("k:A ring"))
+  let t3161 = @tactics.exists_tac(@term_syntax.parse_term("(k : Ring[A])"))
   let t3181 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -33746,7 +33746,7 @@ fn step_225() -> Unit raise {
   ])
   let t3160 = @tactics.repeat_tac(@tactics.conj_tac)
   let t3159 = @tactics.exists_tac(
-    @parser.parse_term("(f:A->B) o (p:(1->num)->A)"),
+    @term_syntax.parse_term("o((f : (A) -> B), (p : ((Unit) -> Num) -> A))"),
   )
   let t3158 = @simp.asm_rewrite_tac(@list.List([]))
   let t3157 = @tactics.disch_then(
@@ -33797,7 +33797,7 @@ fn step_225() -> Unit raise {
           s3155(x3156)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("p:(1->num)->A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -34026,13 +34026,13 @@ fn step_226() -> Unit raise {
       @ringtheory.ring_isomorphism_imp_homomorphism(),
     ]),
   )
-  let t3201 = @tactics.exists_tac(@parser.parse_term("g:B->C"))
+  let t3201 = @tactics.exists_tac(@term_syntax.parse_term("(g : (B) -> C)"))
   let t3202 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(@tactics.match_mp_tac(algebraic_over_eq()), t3201),
   ])
   let t3200 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
-  let t3198 = @parser.parse_term("l:B ring")
+  let t3198 = @term_syntax.parse_term("(l : Ring[B])")
   let t3199 = @tactics.map_every(
     fn(
       x3195 : @kernel.Term,
@@ -34080,7 +34080,7 @@ fn step_226() -> Unit raise {
         s3196(x3197)
       }
     },
-    @list.List([@parser.parse_term("f':B->A"), t3198]),
+    @list.List([@term_syntax.parse_term("(f' : (B) -> A)"), t3198]),
   )
   let t3191 = @parser.parse_type("C")
   let t3192 = (@parser.parse_type("Z"), t3191)
@@ -34101,7 +34101,7 @@ fn step_226() -> Unit raise {
     },
     @list.List([@ringtheory.ring_isomorphism()]),
   )
-  let t3186 = @tactics.x_choose_then(@parser.parse_term("f':B->A"))(
+  let t3186 = @tactics.x_choose_then(@term_syntax.parse_term("(f' : (B) -> A)"))(
     @tactics.strip_assume_tac,
   )
   let t3188 = @tactics.first_x_assum(fn(
@@ -34272,17 +34272,17 @@ fn step_227() -> Unit raise {
     ),
     t3225,
   ])
-  let t3215 = @parser.parse_term("x:B")
-  let t3216 = @parser.parse_term("l:B ring")
-  let t3217 = @parser.parse_term("k:A ring")
+  let t3215 = @term_syntax.parse_term("(x : B)")
+  let t3216 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3217 = @term_syntax.parse_term("(k : Ring[A])")
   let t3218 = @parser.parse_term(
     "subring_generated l (IMAGE (h:A->B) (ring_carrier k))",
   )
-  let t3219 = @parser.parse_term("h:A->B")
+  let t3219 = @term_syntax.parse_term("(h : (A) -> B)")
   let t3220 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h':B->A"),
+        @term_syntax.parse_term("(h' : (B) -> A)"),
         t3219,
         t3218,
         t3217,
@@ -34293,7 +34293,7 @@ fn step_227() -> Unit raise {
     ),
   )
   let t3214 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("h':B->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(h' : (B) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -34476,7 +34476,7 @@ fn step_229() -> Unit raise {
     @list.List([@ringtheory.subring_generated_union_right()]),
   )
   let t3266 = @simp.once_rewrite_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("x INSERT s = {x} UNION s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("INSERT((x : _), (s : (_) -> Bool)) == UNION({x}, s)"))]),
   )
   let t3265 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t3264 = @simp.rewrite_tac(@list.List([@trivia.i_o_id(), @sets.image_i()]))
@@ -34596,7 +34596,7 @@ fn step_229() -> Unit raise {
       @simp.rewrite_rule(
         @list.List([
           @class.taut(
-            @parser.parse_term("p /\\ q /\\ r ==> s <=> p /\\ r ==> q ==> s"),
+            @term_syntax.parse_term("((p : Bool) && (q : Bool) && (r : Bool) → (s : Bool)) == (p && r → q → s)"),
           ),
         ]),
       )(algebraic_over_field_extension()),
@@ -34629,7 +34629,7 @@ fn step_229() -> Unit raise {
     @tactics.thenl(
       @tactics.then_tac(
         @tactics.match_mp_tac(
-          @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+          @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
         ),
         @tactics.conj_tac,
       ),
@@ -34638,14 +34638,14 @@ fn step_229() -> Unit raise {
     t3269,
   ])
   let t3250 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3246 = @parser.parse_term("y:B")
-  let t3247 = @parser.parse_term("l:B ring")
+  let t3246 = @term_syntax.parse_term("(y : B)")
+  let t3247 = @term_syntax.parse_term("(l : Ring[B])")
   let t3248 = @parser.parse_term(
     "subring_generated l (IMAGE (h:A->B) (ring_carrier k) UNION b)",
   )
   let t3249 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("I:B->B"), t3248, t3247, t3246]),
+      @list.List([@term_syntax.parse_term("(I : (B) -> B)"), t3248, t3247, t3246]),
       finite_simple_algebraic_extension(),
     ),
   )
@@ -34677,10 +34677,10 @@ fn step_229() -> Unit raise {
       t3244,
     )
   })
-  let t3240 = @parser.parse_term("b:B->bool")
+  let t3240 = @term_syntax.parse_term("(b : (B) -> Bool)")
   let t3241 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("y:B"), t3240]),
+    @list.List([@term_syntax.parse_term("(y : B)"), t3240]),
   )
   let t3238 = @simp.rewrite_tac(@list.List([@sets.forall_in_insert()]))
   let t3237 = @meson.asm_meson_tac(
@@ -34930,7 +34930,7 @@ fn step_231() -> Unit raise {
   let t3298 = @simp.rewrite_tac(
     @list.List([@ringtheory.subring_generated_v1()]),
   )
-  let t3297 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t3297 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t3296 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t3295 = @simp.asm_rewrite_tac(@list.List([]))
   let t3292 = @drule.match_mp(
@@ -35209,7 +35209,7 @@ fn step_233() -> Unit raise {
   )
   algebraic_extension_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall k:A ring. algebraic_extension (k,k) I <=> field k"),
+      @term_syntax.parse_term("∀ k : Ring[A], algebraic_extension((k, k), I) == field(k)"),
       t3311,
     ),
   )
@@ -35240,7 +35240,7 @@ fn step_234() -> Unit raise {
     @list.List([
       @class.de_morgan_thm(),
       @class.not_exists_thm(),
-      @class.taut(@parser.parse_term("p \\/ ~q <=> q ==> p")),
+      @class.taut(@term_syntax.parse_term("((p : Bool) || !(q : Bool)) == (q → p)")),
     ]),
   )
   let t3383 = @simp.asm_simp_tac(
@@ -35353,9 +35353,9 @@ fn step_234() -> Unit raise {
     t3386,
   ])
   let t3373 = @class.asm_cases_tac(
-    @parser.parse_term("m:num <= poly_deg l (p:(1->num)->B)"),
+    @term_syntax.parse_term("(m : Num) <= poly_deg((l : Ring[B]), (p : ((Unit) -> Num) -> B))"),
   )
-  let t3372 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
+  let t3372 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)"))
   let t3371 = @simp.rewrite_tac(@list.List([@ringtheory.forall_fun_from_1()]))
   let t3370 = @simp.asm_simp_tac(
     @list.List([
@@ -35376,7 +35376,7 @@ fn step_234() -> Unit raise {
   let t3367 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.poly_extend_from_subring_generated()]),
   )
-  let t3366 = @tactics.exists_tac(@parser.parse_term("p:(1->num)->B"))
+  let t3366 = @tactics.exists_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> B)"))
   let t3364 = @simp.asm_rewrite_tac(@list.List([algebraic_over()]))
   let t3365 = @list.List([
     @meson.asm_meson_tac(
@@ -35424,7 +35424,7 @@ fn step_234() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t3355 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t3353 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t3352 = @tactics.rule_assum_tac(
@@ -35442,7 +35442,7 @@ fn step_234() -> Unit raise {
       @ringtheory.ring_carrier_subring_generated_subset(),
     ]),
   )
-  let t3349 = @parser.parse_term("IMAGE (g:B->C) (ring_carrier l)")
+  let t3349 = @term_syntax.parse_term("IMAGE((g : (B) -> C), ring_carrier((l : Ring[B])))")
   let t3350 = @tactics.trans_tac(@sets.subset_trans())(t3349)
   let t3348 = @simp.asm_rewrite_tac(
     @list.List([@sets.insert_subset(), @sets.in_insert()]),
@@ -35453,10 +35453,10 @@ fn step_234() -> Unit raise {
   )
   let t3345 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("(p /\\ r ==> s) /\\ q ==> (p /\\ (q ==> r) ==> s)"),
+      @term_syntax.parse_term("((p : Bool) && (r : Bool) → (s : Bool)) && (q : Bool) → p && (q → r) → s"),
     ),
   )
-  let t3341 = @parser.parse_term("z:C")
+  let t3341 = @term_syntax.parse_term("(z : C)")
   let t3344 = @tactics.disch_then(fn(
     x3343 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -35652,19 +35652,19 @@ fn step_234() -> Unit raise {
   let t3328 = @parser.parse_term(
     "subring_generated l\n        (IMAGE (f:A->B) (ring_carrier k) UNION\n         {p(\\i:1. n) |n| n <= poly_deg l p})",
   )
-  let t3329 = @parser.parse_term("k:A ring")
-  let t3330 = @parser.parse_term("g:B->C")
+  let t3329 = @term_syntax.parse_term("(k : Ring[A])")
+  let t3330 = @term_syntax.parse_term("(g : (B) -> C)")
   let t3331 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t3330, t3329, t3328, t3327]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t3330, t3329, t3328, t3327]),
       finite_extension_trans(),
     ),
   )
-  let t3326 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->B"))
+  let t3326 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> B)"))
   let t3325 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
-  let t3321 = @parser.parse_term("z:C")
+  let t3321 = @term_syntax.parse_term("(z : C)")
   let t3319 = @simp.rewrite_rule(@list.List([algebraic_over()]))
   let t3324 = @tactics.first_x_assum(fn(
     x3323 : @kernel.Thm,
@@ -35756,13 +35756,13 @@ fn step_234() -> Unit raise {
       })(t3319(x3320))
     })(((x3322 : @kernel.Thm) => @bool.spec(t3321, x3322))(x3323))
   })
-  let t3315 = @tactics.x_gen_tac(@parser.parse_term("z:C"))
+  let t3315 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : C)"))
   let t3314 = @list.List([
     @meson.asm_meson_tac(@list.List([field_extension_trans()])),
     @tactics.disch_tac,
   ])
   let t3313 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t3312 = @simp.rewrite_tac(@list.List([algebraic_extension()]))
   let t3388 = @tactics.thenl(
@@ -35944,15 +35944,15 @@ fn step_235() -> Unit raise {
   ])
   let t3450 = @tactics.repeat_tac(@tactics.conj_tac)
   let t3449 = @tactics.exists_tac(
-    @parser.parse_term("(f:A->B) o (p:(1->num)->A)"),
+    @term_syntax.parse_term("o((f : (A) -> B), (p : ((Unit) -> Num) -> A))"),
   )
   let t3448 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("p:(1->num)->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t3447 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3443 = @parser.parse_term("z:C")
+  let t3443 = @term_syntax.parse_term("(z : C)")
   let t3446 = @tactics.first_x_assum(fn(
     x3445 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -36030,7 +36030,7 @@ fn step_235() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.disch_tac,
-                  @tactics.x_gen_tac(@parser.parse_term("z:C")),
+                  @tactics.x_gen_tac(@term_syntax.parse_term("(z : C)")),
                 ),
                 @tactics.disch_tac,
               ),
@@ -36136,13 +36136,13 @@ fn step_235() -> Unit raise {
   let t3432 = @simp.asm_simp_tac(
     @list.List([field_extension_imp_homomorphism()]),
   )
-  let t3427 = @parser.parse_term("(f:A->B) o (p:(1->num)->A)")
-  let t3428 = @parser.parse_term("g:B->C")
-  let t3429 = @parser.parse_term("y:B")
-  let t3430 = @parser.parse_term("m:C ring")
+  let t3427 = @term_syntax.parse_term("o((f : (A) -> B), (p : ((Unit) -> Num) -> A))")
+  let t3428 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t3429 = @term_syntax.parse_term("(y : B)")
+  let t3430 = @term_syntax.parse_term("(m : Ring[C])")
   let t3431 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t3430, t3429, t3428, t3427]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t3430, t3429, t3428, t3427]),
       @ringtheory.poly_eval_homomorphic_image(),
     ),
   )
@@ -36254,7 +36254,7 @@ fn step_235() -> Unit raise {
       field_extension_imp_homomorphism(),
     ]),
   )
-  let t3416 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t3416 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t3414 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t3413 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t3411 = @drule.match_mp(field_extension_imp_subset())
@@ -36334,7 +36334,7 @@ fn step_235() -> Unit raise {
     ),
     t3414,
   ])
-  let t3404 = @parser.parse_term("(g:B->C) y")
+  let t3404 = @term_syntax.parse_term("(g : (B) -> C)((y : B))")
   let t3407 = @tactics.first_x_assum(fn(
     x3406 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -36418,7 +36418,7 @@ fn step_235() -> Unit raise {
                           @tactics.then_tac(
                             @tactics.then_tac(
                               @tactics.disch_tac,
-                              @tactics.x_gen_tac(@parser.parse_term("y:B")),
+                              @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)")),
                             ),
                             @tactics.disch_tac,
                           ),
@@ -36924,12 +36924,12 @@ fn step_236() -> Unit raise {
       @equal.gsym(@card.infinite_card_le()),
     ]),
   )
-  let t3491 = @parser.parse_term("ring_carrier(k:A ring) *_c (:num)")
+  let t3491 = @term_syntax.parse_term("(op_star_us_c : ((A) -> Bool, (Num) -> Bool, (A, Num)) -> Bool)((ring_carrier : (Ring[A], A) -> Bool)((k : Ring[A])), (UNIV : (Num) -> Bool))")
   let t3492 = @tactics.trans_tac(@card.card_le_trans())(t3491)
   let t3490 = @simp.simp_tac(
     @list.List([@card.card_le_subset(), @sets.subset_restrict()]),
   )
-  let t3488 = @parser.parse_term("ring_carrier (poly_ring (k:A ring) (:1))")
+  let t3488 = @term_syntax.parse_term("(ring_carrier : (Ring[((Unit) -> Num) -> A], ((Unit) -> Num) -> A) -> Bool)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool)))")
   let t3489 = @tactics.trans_tac(@card.card_le_trans())(t3488)
   let t3487 = @tactics.match_mp_tac(
     @simp.rewrite_rule(@list.List([@theorems.imp_conj_alt()]))(
@@ -37336,7 +37336,7 @@ fn step_237() -> Unit raise {
       ]),
     ),
   )
-  let t3545 = @tactics.exists_tac(@parser.parse_term("h:A->B"))
+  let t3545 = @tactics.exists_tac(@term_syntax.parse_term("(h : (A) -> B)"))
   let t3544 = @simp.rewrite_tac(@list.List([@sets.le_c()]))
   let t3541 = @drule.match_mp(field_extension_imp_monomorphism())
   let t3543 = @tactics.first_x_assum(fn(
@@ -37492,14 +37492,14 @@ fn step_237() -> Unit raise {
     t3547,
   )
   let t3532 = @simp.asm_rewrite_tac(@list.List([@card.card_le_refl()]))
-  let t3529 = @parser.parse_term("ring_carrier k:A->bool")
-  let t3530 = @parser.parse_term("l:B ring")
-  let t3531 = @parser.parse_term("k:A ring")
+  let t3529 = @term_syntax.parse_term("ring_carrier((k : Ring[A]))")
+  let t3530 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3531 = @term_syntax.parse_term("(k : Ring[A])")
   let t3549 = @list.List([
     @tactics.then_tac(
       @tactics.mp_tac(
         @bool.ispecl(
-          @list.List([@parser.parse_term("h:A->B"), t3531, t3530, t3529]),
+          @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3531, t3530, t3529]),
           card_le_algebraic_extension(),
         ),
       ),
@@ -37553,7 +37553,7 @@ fn step_238() -> Unit raise {
   )
   let t3617 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t3616 = @simp.asm_simp_tac(@list.List([]))
-  let t3615 = @tactics.exists_tac(@parser.parse_term("(:1)"))
+  let t3615 = @tactics.exists_tac(@term_syntax.parse_term("(UNIV : (Unit) -> Bool)"))
   let t3613 = @tactics.match_mp_tac(@ringtheory.poly_extend_eq())
   let t3614 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t3613])
   let t3612 = @tactics.disch_then(fn(
@@ -37620,17 +37620,17 @@ fn step_238() -> Unit raise {
       @trivia.o_def(),
     ]),
   )
-  let t3597 = @parser.parse_term("p:(1->num)->A")
-  let t3598 = @parser.parse_term("f:B->B")
-  let t3599 = @parser.parse_term("(\\v. y):1->B")
-  let t3600 = @parser.parse_term("(:1)")
-  let t3601 = @parser.parse_term("h:A->B")
-  let t3602 = @parser.parse_term("l:B ring")
-  let t3603 = @parser.parse_term("l:B ring")
+  let t3597 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t3598 = @term_syntax.parse_term("(f : (B) -> B)")
+  let t3599 = @term_syntax.parse_term("(v : Unit) => (y : B)")
+  let t3600 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t3601 = @term_syntax.parse_term("(h : (A) -> B)")
+  let t3602 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3603 = @term_syntax.parse_term("(l : Ring[B])")
   let t3604 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("k:A ring"),
+        @term_syntax.parse_term("(k : Ring[A])"),
         t3603,
         t3602,
         t3601,
@@ -37643,7 +37643,7 @@ fn step_238() -> Unit raise {
     ),
   )
   let t3596 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t3595 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t3595 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t3594 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.forall_in_image()]),
   )
@@ -37700,12 +37700,12 @@ fn step_238() -> Unit raise {
   let t3591 = @simp.asm_simp_tac(
     @list.List([@ringtheory.field_imp_integral_domain()]),
   )
-  let t3587 = @parser.parse_term("(:1)")
-  let t3588 = @parser.parse_term("h:A->B")
-  let t3589 = @parser.parse_term("l:B ring")
+  let t3587 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t3588 = @term_syntax.parse_term("(h : (A) -> B)")
+  let t3589 = @term_syntax.parse_term("(l : Ring[B])")
   let t3590 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t3589, t3588, t3587]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t3589, t3588, t3587]),
       @ringtheory.ring_monomorphism_poly_rings(),
     ),
   )
@@ -37949,10 +37949,10 @@ fn step_238() -> Unit raise {
     ),
     t3620,
   ])
-  let t3569 = @parser.parse_term("f:B->B")
+  let t3569 = @term_syntax.parse_term("(f : (B) -> B)")
   let t3570 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("s:B->bool"), t3569]),
+      @list.List([@term_syntax.parse_term("(s : (B) -> Bool)"), t3569]),
       @sets.surjective_iff_injective(),
     ),
   )
@@ -37993,12 +37993,12 @@ fn step_238() -> Unit raise {
     @tactics.strip_assume_tac(t3565(x3566))
   })
   let t3563 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("p:(1->num)->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t3562 = @simp.asm_rewrite_tac(@list.List([algebraic_over()]))
-  let t3558 = @parser.parse_term("x:B")
+  let t3558 = @term_syntax.parse_term("(x : B)")
   let t3561 = @tactics.first_x_assum(fn(
     x3560 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -38067,7 +38067,7 @@ fn step_238() -> Unit raise {
       }
     })(((x3559 : @kernel.Thm) => @bool.spec(t3558, x3559))(x3560))
   })
-  let t3554 = @tactics.x_gen_tac(@parser.parse_term("x:B"))
+  let t3554 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)"))
   let t3553 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t3552 = @simp.asm_rewrite_tac(
     @list.List([
@@ -38439,7 +38439,7 @@ fn step_242() -> Unit raise {
   let t3657 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t3656 = @simp.asm_rewrite_tac(@list.List([]))
   let t3655 = @tactics.exists_tac(
-    @parser.parse_term("a INSERT IMAGE (h:A->B) (ring_carrier k)"),
+    @term_syntax.parse_term("INSERT((a : B), IMAGE((h : (A) -> B), ring_carrier((k : Ring[A]))))"),
   )
   let t3654 = @tactics.match_mp_tac(algebraic_from_subring_generated())
   let t3653 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -38514,12 +38514,12 @@ fn step_242() -> Unit raise {
     })(t3649(x3650))
   })
   let t3645 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3641 = @parser.parse_term("a:B")
-  let t3642 = @parser.parse_term("l:B ring")
-  let t3643 = @parser.parse_term("k:A ring")
+  let t3641 = @term_syntax.parse_term("(a : B)")
+  let t3642 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3643 = @term_syntax.parse_term("(k : Ring[A])")
   let t3644 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t3643, t3642, t3641]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3643, t3642, t3641]),
       finite_simple_algebraic_extension(),
     ),
   )
@@ -38675,7 +38675,7 @@ fn step_243() -> Unit raise {
   let t3686 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t3685 = @simp.asm_rewrite_tac(@list.List([]))
   let t3684 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (h:A->B) (ring_carrier k) UNION {a, b}"),
+    @term_syntax.parse_term("UNION(IMAGE((h : (A) -> B), ring_carrier((k : Ring[A]))), {(a : B), (b : B)})"),
   )
   let t3683 = @tactics.match_mp_tac(algebraic_from_subring_generated())
   let t3682 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -38755,12 +38755,12 @@ fn step_243() -> Unit raise {
   let t3673 = @simp.asm_rewrite_tac(
     @list.List([@sets.finite_insert(), @sets.finite_empty()]),
   )
-  let t3669 = @parser.parse_term("{a:B,b}")
-  let t3670 = @parser.parse_term("l:B ring")
-  let t3671 = @parser.parse_term("k:A ring")
+  let t3669 = @term_syntax.parse_term("{(a : B), (b : B)}")
+  let t3670 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3671 = @term_syntax.parse_term("(k : Ring[A])")
   let t3672 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t3671, t3670, t3669]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3671, t3670, t3669]),
       finite_finitely_generated_algebraic_extension(),
     ),
   )
@@ -39110,7 +39110,7 @@ fn step_249() -> Unit raise {
   let t3712 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("(forall x. x IN s ==> P x) <=> s SUBSET {x | P x}"),
+        @term_syntax.parse_term("(∀ x : _, IN(x, (s : (_) -> Bool)) → (P : (_) -> Bool)(x)) == SUBSET(s, {(x : _) | P(x)})"),
       ),
     ]),
   )
@@ -39237,11 +39237,11 @@ fn step_250() -> Unit raise {
   )
   let t3755 = @tactics.match_mp_tac(@ringtheory.subring_generated_minimal())
   let t3754 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset())]))
-  let t3752 = @parser.parse_term("y:B")
-  let t3753 = @tactics.spec_tac(@parser.parse_term("y:B"), t3752)
+  let t3752 = @term_syntax.parse_term("(y : B)")
+  let t3753 = @tactics.spec_tac(@term_syntax.parse_term("(y : B)"), t3752)
   let t3751 = @simp.rewrite_tac(@list.List([]))
   let t3750 = @tactics.match_mp_tac(@theorems.mono_and())
-  let t3749 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t3749 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t3767 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -39291,7 +39291,7 @@ fn step_250() -> Unit raise {
     t3767,
   ])
   let t3748 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3743 = @parser.parse_term("a:B")
+  let t3743 = @term_syntax.parse_term("(a : B)")
   let t3747 = @tactics.disch_then(fn(
     x3746 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -39388,12 +39388,12 @@ fn step_250() -> Unit raise {
       @bool.conjunct2(@ringtheory.subring_generated_v1()),
     ]),
   )
-  let t3735 = @parser.parse_term("a:B")
-  let t3736 = @parser.parse_term("l:B ring")
-  let t3737 = @parser.parse_term("k:A ring")
+  let t3735 = @term_syntax.parse_term("(a : B)")
+  let t3736 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3737 = @term_syntax.parse_term("(k : Ring[A])")
   let t3738 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t3737, t3736, t3735]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3737, t3736, t3735]),
       field_simple_algebraic_extension(),
     ),
   )
@@ -39403,7 +39403,7 @@ fn step_250() -> Unit raise {
     ),
     @tactics.disch_tac,
   ])
-  let t3730 = @parser.parse_term("a:B")
+  let t3730 = @term_syntax.parse_term("(a : B)")
   let t3733 = @tactics.disch_then(fn(
     x3732 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -39473,16 +39473,16 @@ fn step_250() -> Unit raise {
     })(((x3731 : @kernel.Thm) => @bool.spec(t3730, x3731))(x3732))
   })
   let t3726 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3722 = @parser.parse_term("s:B->bool")
-  let t3723 = @parser.parse_term("l:B ring")
-  let t3724 = @parser.parse_term("k:A ring")
+  let t3722 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t3723 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3724 = @term_syntax.parse_term("(k : Ring[A])")
   let t3725 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t3724, t3723, t3722]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3724, t3723, t3722]),
       algebraic_over_subfield_generated_algebraic(),
     ),
   )
-  let t3721 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t3721 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t3719 = @simp.rewrite_tac(
     @list.List([@bool.conjunct2(@ringtheory.subring_generated_v1())]),
   )
@@ -39683,12 +39683,12 @@ fn step_254() -> Unit raise {
   let t3776 = @parser.parse_term(
     "subring_generated m {x | algebraic_over(l,m) (g:B->C) x}",
   )
-  let t3777 = @parser.parse_term("l:B ring")
-  let t3778 = @parser.parse_term("k:A ring")
-  let t3779 = @parser.parse_term("g:B->C")
+  let t3777 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3778 = @term_syntax.parse_term("(k : Ring[A])")
+  let t3779 = @term_syntax.parse_term("(g : (B) -> C)")
   let t3780 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t3779, t3778, t3777, t3776]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t3779, t3778, t3777, t3776]),
       algebraic_extension_trans(),
     ),
   )
@@ -39827,12 +39827,12 @@ fn step_257() -> Unit raise {
     @tactics.all_tac,
   ])
   let t3816 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3812 = @parser.parse_term("b:B->bool")
-  let t3813 = @parser.parse_term("l:B ring")
-  let t3814 = @parser.parse_term("k:A ring")
+  let t3812 = @term_syntax.parse_term("(b : (B) -> Bool)")
+  let t3813 = @term_syntax.parse_term("(l : Ring[B])")
+  let t3814 = @term_syntax.parse_term("(k : Ring[A])")
   let t3815 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t3814, t3813, t3812]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t3814, t3813, t3812]),
       ring_independent_finite_eq(),
     ),
   )
@@ -39875,7 +39875,7 @@ fn step_257() -> Unit raise {
   let t3808 = @tactics.match_mp_tac(@ringtheory.ring_sum_eq())
   let t3807 = @simp.simp_tac(@list.List([@sets.restriction()]))
   let t3806 = @tactics.exists_tac(
-    @parser.parse_term("\\c:B->A. RESTRICTION b c"),
+    @term_syntax.parse_term("(c : (B) -> A) => RESTRICTION((b : (B) -> Bool), c)"),
   )
   let t3805 = @tactics.match_mp_tac(
     @sets.set_rule(
@@ -40186,7 +40186,7 @@ fn step_261() -> Unit raise {
     ]),
   )
   let t3856 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3855 = @tactics.exists_tac(@parser.parse_term("CARD(b:A->bool)"))
+  let t3855 = @tactics.exists_tac(@term_syntax.parse_term("CARD((b : (A) -> Bool))"))
   let t3854 = @simp.asm_simp_tac(
     @list.List([
       @ringtheory.finite_prime_subring(),
@@ -40205,7 +40205,7 @@ fn step_261() -> Unit raise {
       card_finite_extension(),
     ),
   )
-  let t3847 = @parser.parse_term("b:A->bool")
+  let t3847 = @term_syntax.parse_term("(b : (A) -> Bool)")
   let t3852 = @tactics.first_assum(fn(
     x3851 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -40344,7 +40344,7 @@ fn step_261() -> Unit raise {
           s3841(x3842)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("b:A->bool"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(b : (A) -> Bool)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -40418,11 +40418,11 @@ fn step_261() -> Unit raise {
   )
   let t3832 = @tactics.mp_tac(
     @bool.ispec(
-      @parser.parse_term("k:A ring"),
+      @term_syntax.parse_term("(k : Ring[A])"),
       @ringtheory.integral_domain_char(),
     ),
   )
-  let t3831 = @tactics.exists_tac(@parser.parse_term("ring_char(k:A ring)"))
+  let t3831 = @tactics.exists_tac(@term_syntax.parse_term("ring_char((k : Ring[A]))"))
   let t3830 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3858 = @tactics.then_tac(
     @tactics.then_tac(
@@ -40708,7 +40708,7 @@ fn step_270() -> Unit raise {
   let t3891 = @simp.asm_rewrite_tac(@list.List([]))
   let t3890 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t3889 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(r ==> ~q) ==> p ==> q ==> ~r")),
+    @class.taut(@term_syntax.parse_term("((r : Bool) → !(q : Bool)) → (p : Bool) → q → !r")),
   )
   let t3888 = @simp.asm_simp_tac(@list.List([@ringtheory.poly_deg_eq_0()]))
   let t3885 = @simp.gen_rewrite_rule(
@@ -40883,7 +40883,7 @@ fn step_270() -> Unit raise {
       },
     ),
   )
-  let t3873 = @tactics.x_gen_tac(@parser.parse_term("p:(B->num)->A"))
+  let t3873 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((B) -> Num) -> A)"))
   let t3872 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t3871 = @simp.asm_rewrite_tac(@list.List([]))
   let t3870 = @tactics.disch_then(
@@ -41089,7 +41089,7 @@ fn step_271() -> Unit raise {
   )
   let t3897 = @simp.rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("a INSERT s = s <=> a IN s")),
+      @sets.set_rule(@term_syntax.parse_term("(INSERT((a : _), (s : (_) -> Bool)) == s) == IN(a, s)")),
       @sets.in_elim_thm(),
     ]),
   )
@@ -41134,7 +41134,7 @@ fn step_272() -> Unit raise {
   let t3910 = @simp.asm_rewrite_tac(@list.List([field_extension_refl()]))
   let t3909 = @tactics.match_mp_tac(algebraic_over_subfield_subring_generated())
   let t3908 = @tactics.conv_tac(@equal.sym_conv)
-  let t3907 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t3907 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t3906 = @simp.rewrite_tac(
     @list.List([@sets.extension(), @sets.in_elim_thm()]),
   )
@@ -41215,7 +41215,7 @@ fn step_274() -> Unit raise {
   let t3916 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("s INTER (u UNION s INTER v) = s INTER (u UNION v)"),
+        @term_syntax.parse_term("INTER((s : (_) -> Bool), UNION((u : (_) -> Bool), INTER(s, (v : (_) -> Bool)))) == INTER(s, UNION(u, v))"),
       ),
     ]),
   )
@@ -41312,8 +41312,8 @@ fn step_276() -> Unit raise {
     @list.List([@equal.gsym(@trivia.i_thm())]),
   )
   let t3935 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t3934 = @class.asm_cases_tac(@parser.parse_term("x:B = ring_0 l"))
-  let t3933 = @tactics.x_gen_tac(@parser.parse_term("x:B"))
+  let t3934 = @class.asm_cases_tac(@term_syntax.parse_term("(x : B) == ring_0((l : Ring[B]))"))
+  let t3933 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)"))
   let t3932 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_insert()]))
   let t3931 = @simp.rewrite_tac(@list.List([algebraic_span()]))
   let t3930 = @tactics.match_mp_tac(
@@ -41637,11 +41637,11 @@ fn step_278() -> Unit raise {
     @ringtheory.ring_carrier_poly_subring_generated_mono(),
   )
   let t3961 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("s SUBSET t ==> x IN s ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) → IN((x : _), s) → IN(x, t)")),
   )
   let t3960 = @simp.rewrite_tac(@list.List([]))
   let t3959 = @tactics.match_mp_tac(@theorems.mono_and())
-  let t3958 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->B"))
+  let t3958 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> B)"))
   let t3957 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t3956 = @simp.asm_rewrite_tac(@list.List([]))
   let t3955 = @tactics.disch_then(
@@ -41740,7 +41740,7 @@ fn step_278() -> Unit raise {
       },
     ),
   )
-  let t3948 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t3948 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t3947 = @simp.rewrite_tac(
     @list.List([
       @sets.subset(),
@@ -41752,7 +41752,7 @@ fn step_278() -> Unit raise {
   )
   let t3946 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("s SUBSET t ==> a INSERT s SUBSET a INSERT t"),
+      @term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) → SUBSET(INSERT((a : _), s), INSERT(a, t))"),
     ),
   )
   let t3945 = @simp.rewrite_tac(@list.List([algebraic_span()]))
@@ -41824,7 +41824,7 @@ fn step_279() -> Unit raise {
     @list.List([algebraic_over_image_subset(), @sets.in_elim_thm()]),
   )
   let t3969 = @tactics.match_mp_tac(algebraic_over_subfield_generated())
-  let t3968 = @tactics.x_gen_tac(@parser.parse_term("x:B"))
+  let t3968 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)"))
   let t3971 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -42105,19 +42105,19 @@ fn step_281() -> Unit raise {
       t4026,
     ),
   ])
-  let t4011 = @parser.parse_term("l:B ring")
+  let t4011 = @term_syntax.parse_term("(l : Ring[B])")
   let t4012 = @parser.parse_term(
     "subfield_generated l (IMAGE (h:A->B) (ring_carrier k) UNION s)",
   )
   let t4013 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("I:B->B"), t4012, t4011]),
+      @list.List([@term_syntax.parse_term("(I : (B) -> B)"), t4012, t4011]),
       algebraic_over_image_subset(),
     ),
   )
   let t4010 = @simp.rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("s = t UNION s <=> t SUBSET s")),
+      @sets.set_rule(@term_syntax.parse_term("((s : (_) -> Bool) == UNION((t : (_) -> Bool), s)) == SUBSET(t, s)")),
     ]),
   )
   let t4028 = @list.List([
@@ -42148,7 +42148,7 @@ fn step_281() -> Unit raise {
       t4027,
     ),
   ])
-  let t4008 = @parser.parse_term("l:B ring")
+  let t4008 = @term_syntax.parse_term("(l : Ring[B])")
   let t4009 = @parser.parse_term(
     "subfield_generated l (IMAGE (h:A->B) (ring_carrier k) UNION s)",
   )
@@ -42157,7 +42157,7 @@ fn step_281() -> Unit raise {
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
-            @list.List([@parser.parse_term("I:B->B"), t4009, t4008]),
+            @list.List([@term_syntax.parse_term("(I : (B) -> B)"), t4009, t4008]),
             algebraic_extension_subfield_generated_algebraic(),
           ),
         ),
@@ -42169,19 +42169,19 @@ fn step_281() -> Unit raise {
   ])
   let t4007 = @tactics.disch_then(@tactics.match_mp_tac)
   let t4006 = @simp.asm_rewrite_tac(@list.List([@trivia.i_o_id()]))
-  let t4000 = @parser.parse_term("x:B")
-  let t4001 = @parser.parse_term("l:B ring")
+  let t4000 = @term_syntax.parse_term("(x : B)")
+  let t4001 = @term_syntax.parse_term("(l : Ring[B])")
   let t4002 = @parser.parse_term(
     "subfield_generated l\n       (IMAGE h (ring_carrier k) UNION\n        {x | algebraic_over\n               (subfield_generated l (IMAGE (h:A->B) (ring_carrier k) UNION s),\n                l) I x})",
   )
   let t4003 = @parser.parse_term(
     "subfield_generated l (IMAGE (h:A->B) (ring_carrier k) UNION s)",
   )
-  let t4004 = @parser.parse_term("I:B->B")
+  let t4004 = @term_syntax.parse_term("(I : (B) -> B)")
   let t4005 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("I:B->B"),
+        @term_syntax.parse_term("(I : (B) -> B)"),
         t4004,
         t4003,
         t4002,
@@ -42191,7 +42191,7 @@ fn step_281() -> Unit raise {
       algebraic_over_trans(),
     ),
   )
-  let t3999 = @tactics.x_gen_tac(@parser.parse_term("x:B"))
+  let t3999 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)"))
   let t3998 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.in_elim_thm()]),
   )
@@ -42228,9 +42228,9 @@ fn step_281() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(t3993(x3994))
   })
-  let t3990 = @parser.parse_term("s:B->bool")
+  let t3990 = @term_syntax.parse_term("(s : (B) -> Bool)")
   let t3991 = @tactics.spec_tac(
-    @parser.parse_term("ring_carrier l INTER s:B->bool"),
+    @term_syntax.parse_term("INTER(ring_carrier((l : Ring[B])), (s : (B) -> Bool))"),
     t3990,
   )
   let t3989 = @tactics.mp_tac(
@@ -42375,7 +42375,7 @@ fn step_282() -> Unit raise {
     @ringtheory.ring_carrier_poly_subring_generated_mono(),
   )
   let t4066 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("x IN s ==> s SUBSET t ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("IN((x : _), (s : (_) -> Bool)) → SUBSET(s, (t : (_) -> Bool)) → IN(x, t)")),
   )
   let t4068 = @tactics.first_x_assum(fn(
     x4067 : @kernel.Thm,
@@ -42403,9 +42403,9 @@ fn step_282() -> Unit raise {
   let t4065 = @simp.asm_simp_tac(
     @list.List([@sets.finite_inter(), @sets.inter_subset()]),
   )
-  let t4064 = @tactics.exists_tac(@parser.parse_term("s INTER t:B->bool"))
+  let t4064 = @tactics.exists_tac(@term_syntax.parse_term("INTER((s : (B) -> Bool), (t : (B) -> Bool))"))
   let t4063 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("t:B->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(t : (B) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -42481,7 +42481,7 @@ fn step_282() -> Unit raise {
     })(t4060(x4061))
   })
   let t4056 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4055 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->B"))
+  let t4055 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> B)"))
   let t4054 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t4053 = @simp.gen_rewrite_tac(
     fn(
@@ -42606,7 +42606,7 @@ fn step_282() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4038 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4037 = @class.asm_cases_tac(@parser.parse_term("a:B = ring_0 l"))
+  let t4037 = @class.asm_cases_tac(@term_syntax.parse_term("(a : B) == ring_0((l : Ring[B]))"))
   let t4036 = @simp.rewrite_tac(
     @list.List([algebraic_span(), @sets.in_insert()]),
   )
@@ -43088,7 +43088,7 @@ pub fn algebraically_independent_empty() -> @kernel.Thm {
 /// ALGEBRAICALLY_DEPENDENT_SING
 fn step_285() -> Unit raise {
   let t4133 = @simp.asm_simp_tac(@list.List([@sets.in_sing()]))
-  let t4132 = @tactics.exists_tac(@parser.parse_term("{x:B}"))
+  let t4132 = @tactics.exists_tac(@term_syntax.parse_term("{(x : B)}"))
   let t4131 = @tactics.match_mp_tac(@ringtheory.poly_extend_eq())
   let t4130 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t4129 = @simp.asm_rewrite_tac(@list.List([]))
@@ -43190,7 +43190,7 @@ fn step_285() -> Unit raise {
       ),
     ),
   )
-  let t4121 = @tactics.x_gen_tac(@parser.parse_term("p:(B->num)->A"))
+  let t4121 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((B) -> Num) -> A)"))
   let t4120 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t4119 = @simp.asm_rewrite_tac(@list.List([]))
   let t4118 = @tactics.disch_then(
@@ -43338,13 +43338,13 @@ fn step_285() -> Unit raise {
       s4108(x4109)
     }
   })
-  let t4102 = @parser.parse_term("x:B")
-  let t4103 = @parser.parse_term("x:B")
-  let t4104 = @parser.parse_term("l:B ring")
-  let t4105 = @parser.parse_term("k:A ring")
+  let t4102 = @term_syntax.parse_term("(x : B)")
+  let t4103 = @term_syntax.parse_term("(x : B)")
+  let t4104 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4105 = @term_syntax.parse_term("(k : Ring[A])")
   let t4106 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4105, t4104, t4103, t4102]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4105, t4104, t4103, t4102]),
       algebraic_over_v1(),
     ),
   )
@@ -43851,10 +43851,10 @@ fn step_293() -> Unit raise {
   let t4187 = @meson.asm_meson_tac(
     @list.List([@bool.conjunct2(@ringtheory.poly_ring_v1())]),
   )
-  let t4185 = @tactics.exists_tac(@parser.parse_term("p:(B->num)->A"))
+  let t4185 = @tactics.exists_tac(@term_syntax.parse_term("(p : ((B) -> Num) -> A)"))
   let t4186 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t4185])
   let t4184 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4183 = @tactics.x_gen_tac(@parser.parse_term("t:B->bool"))
+  let t4183 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (B) -> Bool)"))
   let t4182 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t4179 = @drule.match_mp(@ringtheory.poly_ring_in_finite_variables())
   let t4181 = @tactics.first_x_assum(fn(
@@ -43974,7 +43974,7 @@ fn step_293() -> Unit raise {
           s4172(x4173)
         }
       },
-      @tactics.x_choose_then(@parser.parse_term("p:(B->num)->A"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(p : ((B) -> Num) -> A)"))(
         @tactics.strip_assume_tac,
       ),
     ),
@@ -44051,7 +44051,7 @@ fn step_294() -> Unit raise {
   let t4193 = @tactics.match_mp_tac(@ringtheory.ring_homomorphism_poly_extend())
   let t4192 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t4191 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (q <=> q') ==> (p /\\ q <=> q')")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (q : Bool) == (q' : Bool) → (p && q) == q'")),
   )
   let t4190 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.ring_monomorphism_alt(), algebraically_dependent()]),
@@ -44183,7 +44183,7 @@ fn step_295() -> Unit raise {
   let t4343 = @simp.rewrite_tac(
     @list.List([@ringtheory.subring_generated_by_subring_generated()]),
   )
-  let t4339 = @parser.parse_term("subring_generated (l:B ring)")
+  let t4339 = @term_syntax.parse_term("subring_generated((l : Ring[B]))")
   let t4342 = @tactics.disch_then(fn(
     x4341 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -44258,16 +44258,16 @@ fn step_295() -> Unit raise {
   ])
   let t4334 = @simp.rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("IMAGE (\\x. x) s UNION t = t UNION s")),
+      @sets.set_rule(@term_syntax.parse_term("UNION(IMAGE((x : _) => x, (s : (_) -> Bool)), (t : (_) -> Bool)) == UNION(t, s)")),
     ]),
   )
-  let t4329 = @parser.parse_term("\\x:B. x")
-  let t4330 = @parser.parse_term("s:B->bool")
-  let t4331 = @parser.parse_term("l:B ring")
-  let t4332 = @parser.parse_term("k:A ring")
+  let t4329 = @term_syntax.parse_term("(x : B) => x")
+  let t4330 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4331 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4332 = @term_syntax.parse_term("(k : Ring[A])")
   let t4333 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4332, t4331, t4330, t4329]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4332, t4331, t4330, t4329]),
       @ringtheory.image_poly_extend(),
     ),
   )
@@ -44315,7 +44315,7 @@ fn step_295() -> Unit raise {
     t4354,
   )
   let t4328 = @simp.asm_simp_tac(@list.List([@sets.in_sing()]))
-  let t4327 = @tactics.exists_tac(@parser.parse_term("{a:B}"))
+  let t4327 = @tactics.exists_tac(@term_syntax.parse_term("{(a : B)}"))
   let t4326 = @tactics.match_mp_tac(@ringtheory.poly_extend_eq())
   let t4325 = @tactics.first_x_assum(fn(
     x4320 : @kernel.Thm,
@@ -44503,12 +44503,12 @@ fn step_295() -> Unit raise {
     })(t4307(x4308))
   })
   let t4302 = @tactics.exists_tac(
-    @parser.parse_term("(f:((B->num)->(B->num)->A)->(B->num)->A) p"),
+    @term_syntax.parse_term("(f : (((B) -> Num, (B) -> Num) -> A, (B) -> Num) -> A)((p : ((B) -> Num, (B) -> Num) -> A))"),
   )
   let t4299 = @drule.match_mp(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("(forall x. P x) ==> (?x. P x ==> Q x) ==> (?x. Q x)"),
+      @term_syntax.parse_term("(∀ x : _, (P : (_) -> Bool)(x)) → (∃ x : _, P(x) → (Q : (_) -> Bool)(x)) → (∃ x : _, Q(x))"),
     ),
   )
   let t4301 = @tactics.first_x_assum(fn(
@@ -44545,7 +44545,7 @@ fn step_295() -> Unit raise {
                   @tactics.then_tac(
                     @tactics.disch_then(
                       @tactics.x_choose_then(
-                        @parser.parse_term("p:(B->num)->(B->num)->A"),
+                        @term_syntax.parse_term("(p : ((B) -> Num, (B) -> Num) -> A)"),
                       )(@tactics.strip_assume_tac),
                     ),
                     t4301,
@@ -44999,10 +44999,10 @@ fn step_295() -> Unit raise {
   })
   let t4260 = @simp.asm_rewrite_tac(@list.List([]))
   let t4259 = @tactics.exists_tac(
-    @parser.parse_term("(g:((B->num)->A)->(B->num)->(B->num)->A) p"),
+    @term_syntax.parse_term("(g : (((B) -> Num) -> A, (B) -> Num, (B) -> Num) -> A)((p : ((B) -> Num) -> A))"),
   )
   let t4258 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4254 = @parser.parse_term("p:(B->num)->A")
+  let t4254 = @term_syntax.parse_term("(p : ((B) -> Num) -> A)")
   let t4257 = @tactics.first_x_assum(fn(
     x4256 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -45088,7 +45088,7 @@ fn step_295() -> Unit raise {
                               @tactics.then_tac(
                                 @tactics.disch_then(
                                   @tactics.x_choose_then(
-                                    @parser.parse_term("p:(B->num)->A"),
+                                    @term_syntax.parse_term("(p : ((B) -> Num) -> A)"),
                                   )(@tactics.strip_assume_tac),
                                 ),
                                 t4257,
@@ -45226,26 +45226,26 @@ fn step_295() -> Unit raise {
     })(t4243(x4244))
   })
   let t4234 = @simp.rewrite_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("s UNION {a} = a INSERT s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("UNION((s : (_) -> Bool), {(a : _)}) == INSERT(a, s)"))]),
   )
   let t4233 = @simp.asm_rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("DISJOINT s {a} <=> ~(a IN s)")),
+      @sets.set_rule(@term_syntax.parse_term("DISJOINT((s : (_) -> Bool), {(a : _)}) == !IN(a, s)")),
     ]),
   )
-  let t4230 = @parser.parse_term("{a:B}")
-  let t4231 = @parser.parse_term("s:B->bool")
+  let t4230 = @term_syntax.parse_term("{(a : B)}")
+  let t4231 = @term_syntax.parse_term("(s : (B) -> Bool)")
   let t4232 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t4231, t4230]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t4231, t4230]),
       @ringtheory.ring_isomorphisms_poly_poly_ring(),
     ),
   )
-  let t4225 = @parser.parse_term("\\x:B. x")
-  let t4226 = @parser.parse_term("{a:B}")
-  let t4227 = @parser.parse_term("s:B->bool")
-  let t4228 = @parser.parse_term("l:B ring")
-  let t4229 = @parser.parse_term("k:A ring")
+  let t4225 = @term_syntax.parse_term("(x : B) => x")
+  let t4226 = @term_syntax.parse_term("{(a : B)}")
+  let t4227 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4228 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4229 = @term_syntax.parse_term("(k : Ring[A])")
   let t4356 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -45266,7 +45266,7 @@ fn step_295() -> Unit raise {
                                     @tactics.mp_tac(
                                       @bool.ispecl(
                                         @list.List([
-                                          @parser.parse_term("h:A->B"),
+                                          @term_syntax.parse_term("(h : (A) -> B)"),
                                           t4229,
                                           t4228,
                                           t4227,
@@ -45408,14 +45408,14 @@ fn step_295() -> Unit raise {
       ),
     ),
   )
-  let t4219 = @parser.parse_term("a:B")
-  let t4220 = @parser.parse_term("a:B")
-  let t4221 = @parser.parse_term("l:B ring")
-  let t4222 = @parser.parse_term("poly_ring (k:A ring) (s:B->bool)")
+  let t4219 = @term_syntax.parse_term("(a : B)")
+  let t4220 = @term_syntax.parse_term("(a : B)")
+  let t4221 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4222 = @term_syntax.parse_term("poly_ring((k : Ring[A]), (s : (B) -> Bool))")
   let t4223 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("poly_extend (k,l) (h:A->B) (\\x. x)"),
+        @term_syntax.parse_term("poly_extend(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), (x : B) => x)"),
         t4222,
         t4221,
         t4220,
@@ -45425,19 +45425,19 @@ fn step_295() -> Unit raise {
     ),
   )
   let t4218 = @simp.asm_rewrite_tac(@list.List([algebraically_independent()]))
-  let t4214 = @parser.parse_term("h:A->B")
-  let t4215 = @parser.parse_term("s:B->bool")
-  let t4216 = @parser.parse_term("l:B ring")
+  let t4214 = @term_syntax.parse_term("(h : (A) -> B)")
+  let t4215 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4216 = @term_syntax.parse_term("(l : Ring[B])")
   let t4217 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t4216, t4215, t4214]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t4216, t4215, t4214]),
       ring_monomorphism_poly_extend(),
     ),
   )
   let t4213 = @simp.asm_simp_tac(
-    @list.List([@sets.set_rule(@parser.parse_term("a IN s ==> a INSERT s = s"))]),
+    @list.List([@sets.set_rule(@term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → INSERT(a, s) == s"))]),
   )
-  let t4212 = @class.asm_cases_tac(@parser.parse_term("(a:B) IN s"))
+  let t4212 = @class.asm_cases_tac(@term_syntax.parse_term("IN((a : B), (s : (B) -> Bool))"))
   let t4210 = @tactics.asm_tac(@sets.set_tac)(
     @list.List([algebraic_span_subset()]),
   )
@@ -45451,7 +45451,7 @@ fn step_295() -> Unit raise {
     ),
   ])
   let t4209 = @class.asm_cases_tac(
-    @parser.parse_term("(a:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((a : B), ring_carrier((l : Ring[B])))"),
   )
   let t4208 = @list.List([
     @tactics.all_tac,
@@ -45461,7 +45461,7 @@ fn step_295() -> Unit raise {
   ])
   let t4207 = @simp.asm_rewrite_tac(@list.List([]))
   let t4206 = @class.asm_cases_tac(
-    @parser.parse_term("(s:B->bool) SUBSET ring_carrier l"),
+    @term_syntax.parse_term("SUBSET((s : (B) -> Bool), ring_carrier((l : Ring[B])))"),
   )
   let t4203 = @drule.match_mp(@ringtheory.ring_monomorphism_imp_homomorphism())
   let t4205 = @tactics.first_assum(fn(
@@ -45643,7 +45643,7 @@ fn step_296() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
-  let t4369 = @class.asm_cases_tac(@parser.parse_term("(a:B) IN s"))
+  let t4369 = @class.asm_cases_tac(@term_syntax.parse_term("IN((a : B), (s : (B) -> Bool))"))
   let t4372 = @tactics.then_tac(
     @tactics.thenl(
       @tactics.then_tac(
@@ -45666,7 +45666,7 @@ fn step_296() -> Unit raise {
   ])
   let t4367 = @simp.asm_rewrite_tac(@list.List([]))
   let t4366 = @class.asm_cases_tac(
-    @parser.parse_term("(a:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((a : B), ring_carrier((l : Ring[B])))"),
   )
   let t4363 = @drule.match_mp(algebraically_dependent_imp_subset())
   let t4365 = @tactics.first_assum(fn(
@@ -45741,7 +45741,7 @@ fn step_296() -> Unit raise {
     @list.List([algebraically_dependent_from_insert()]),
   )
   let t4358 = @class.asm_cases_tac(
-    @parser.parse_term("algebraically_dependent (k,l) (h:A->B) s"),
+    @term_syntax.parse_term("algebraically_dependent(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), (s : (B) -> Bool))"),
   )
   let t4374 = @tactics.thenl(
     @tactics.then_tac(
@@ -45820,13 +45820,13 @@ fn step_298() -> Unit raise {
   let t4535 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t4534 = @simp.asm_simp_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("a IN s ==> s DELETE a PSUBSET s")),
+      @sets.set_rule(@term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → PSUBSET(DELETE(s, a), s)")),
       @sets.in_delete(),
     ]),
   )
   let t4533 = @simp.asm_simp_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("a IN s ==> a INSERT (s DELETE a) = s")),
+      @sets.set_rule(@term_syntax.parse_term("IN((a : _), (s : (_) -> Bool)) → INSERT(a, DELETE(s, a)) == s")),
     ]),
   )
   let t4530 = @simp.gen_rewrite_rule(
@@ -45837,7 +45837,7 @@ fn step_298() -> Unit raise {
     },
     @list.List([@class.not_exists_thm()]),
   )
-  let t4526 = @parser.parse_term("s DELETE (a:B)")
+  let t4526 = @term_syntax.parse_term("DELETE((s : (B) -> Bool), (a : B))")
   let t4532 = @tactics.first_x_assum(fn(
     x4531 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -45928,20 +45928,20 @@ fn step_298() -> Unit raise {
       })(((x4527 : @kernel.Thm) => @bool.spec(t4526, x4527))(x4528))
     })(t4530(x4531))
   })
-  let t4518 = @parser.parse_term("a:B")
-  let t4519 = @parser.parse_term("s DELETE (a:B)")
-  let t4520 = @parser.parse_term("l:B ring")
-  let t4521 = @parser.parse_term("k:A ring")
+  let t4518 = @term_syntax.parse_term("(a : B)")
+  let t4519 = @term_syntax.parse_term("DELETE((s : (B) -> Bool), (a : B))")
+  let t4520 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4521 = @term_syntax.parse_term("(k : Ring[A])")
   let t4522 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4521, t4520, t4519, t4518]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4521, t4520, t4519, t4518]),
       algebraically_dependent_from_insert(),
     ),
   )
   let t4516 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a:B"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(a : B)"))(@tactics.strip_assume_tac),
   )
-  let t4515 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t4515 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t4514 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t4511 = @simp.gen_rewrite_rule(
     fn(
@@ -46033,7 +46033,7 @@ fn step_298() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.then_tac(
-                @class.asm_cases_tac(@parser.parse_term("s:B->bool = {}")),
+                @class.asm_cases_tac(@term_syntax.parse_term("(s : (B) -> Bool) == {}")),
                 t4506,
               ),
               @tactics.disch_tac,
@@ -46048,7 +46048,7 @@ fn step_298() -> Unit raise {
     ),
     t4516,
   ])
-  let t4501 = @parser.parse_term("0")
+  let t4501 = @term_syntax.parse_term("0")
   let t4504 = @tactics.first_x_assum(fn(
     x4503 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -46102,7 +46102,7 @@ fn step_298() -> Unit raise {
       @sets.in_delete(),
     ]),
   )
-  let t4498 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t4498 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t4497 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t4496 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -46207,7 +46207,7 @@ fn step_298() -> Unit raise {
     ),
     t4488,
   ])
-  let t4484 = @parser.parse_term("t:B->bool")
+  let t4484 = @term_syntax.parse_term("(t : (B) -> Bool)")
   let t4487 = @tactics.disch_then(fn(
     x4486 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -46277,7 +46277,7 @@ fn step_298() -> Unit raise {
     })(((x4485 : @kernel.Thm) => @bool.spec(t4484, x4485))(x4486))
   })
   let t4480 = @simp.asm_simp_tac(@list.List([@sets.card_psubset()]))
-  let t4476 = @parser.parse_term("CARD(t:B->bool)")
+  let t4476 = @term_syntax.parse_term("CARD((t : (B) -> Bool))")
   let t4479 = @tactics.first_x_assum(fn(
     x4478 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -46353,7 +46353,7 @@ fn step_298() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4471 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ q ==> (p <=> q)")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (q : Bool) → p == q")),
   )
   let t4505 = @list.List([
     @tactics.then_tac(
@@ -46370,7 +46370,7 @@ fn step_298() -> Unit raise {
                           @tactics.then_tac(
                             @tactics.first_x_assum(
                               @tactics.x_choose_then(
-                                @parser.parse_term("t:B->bool"),
+                                @term_syntax.parse_term("(t : (B) -> Bool)"),
                               )(@tactics.strip_assume_tac),
                             ),
                             t4471,
@@ -46410,7 +46410,7 @@ fn step_298() -> Unit raise {
   ])
   let t4468 = @simp.asm_rewrite_tac(@list.List([]))
   let t4467 = @class.asm_cases_tac(
-    @parser.parse_term("(s:B->bool) SUBSET ring_carrier l"),
+    @term_syntax.parse_term("SUBSET((s : (B) -> Bool), ring_carrier((l : Ring[B])))"),
   )
   let t4464 = @drule.match_mp(@ringtheory.ring_monomorphism_imp_homomorphism())
   let t4466 = @tactics.first_assum(fn(
@@ -46631,13 +46631,13 @@ fn step_298() -> Unit raise {
     ),
   )
   let t4448 = @simp.rewrite_tac(@list.List([@sets.has_size()]))
-  let t4447 = @tactics.x_gen_tac(@parser.parse_term("s:B->bool"))
-  let t4446 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t4447 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (B) -> Bool)"))
+  let t4446 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t4444 = @tactics.match_mp_tac(@arith.num_wf())
   let t4441 = @simp.asm_rewrite_tac(@list.List([@sets.in_insert()]))
   let t4438 = @drule.match_mp(
     @sets.set_rule(
-      @parser.parse_term("t SUBSET s DELETE a ==> (a INSERT t) DELETE a = t"),
+      @term_syntax.parse_term("SUBSET((t : (_) -> Bool), DELETE((s : (_) -> Bool), (a : _))) → DELETE(INSERT(a, t), a) == t"),
     ),
   )
   let t4440 = @tactics.first_assum(fn(
@@ -46708,7 +46708,7 @@ fn step_298() -> Unit raise {
       }
     })(t4438(x4439))
   })
-  let t4433 = @tactics.exists_tac(@parser.parse_term("a:B"))
+  let t4433 = @tactics.exists_tac(@term_syntax.parse_term("(a : B)"))
   let t4434 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t4433])
   let t4432 = @tactics.disch_then(fn(
     x4429 : @kernel.Thm,
@@ -46757,7 +46757,7 @@ fn step_298() -> Unit raise {
     }
   })
   let t4428 = @simp.asm_rewrite_tac(@list.List([@sets.finite_insert()]))
-  let t4424 = @parser.parse_term("(a:B) INSERT t")
+  let t4424 = @term_syntax.parse_term("INSERT((a : B), (t : (B) -> Bool))")
   let t4427 = @tactics.first_x_assum(fn(
     x4426 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -46830,10 +46830,10 @@ fn step_298() -> Unit raise {
     @tactics.all_tac,
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
   ])
-  let t4419 = @tactics.exists_tac(@parser.parse_term("(a:B) INSERT t"))
+  let t4419 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((a : B), (t : (B) -> Bool))"))
   let t4418 = @tactics.match_mp_tac(algebraically_dependent_mono())
   let t4417 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("t:B->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(t : (B) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -46968,7 +46968,7 @@ fn step_298() -> Unit raise {
   let t4411 = @meson.asm_meson_tac(
     @list.List([algebraic_span_mono(), @sets.subset(), @sets.in_delete()]),
   )
-  let t4410 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t4410 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t4409 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t4408 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -47067,7 +47067,7 @@ fn step_298() -> Unit raise {
     ),
   )
   let t4401 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4397 = @parser.parse_term("t:B->bool")
+  let t4397 = @term_syntax.parse_term("(t : (B) -> Bool)")
   let t4400 = @tactics.first_x_assum(fn(
     x4399 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -47137,7 +47137,7 @@ fn step_298() -> Unit raise {
     })(((x4398 : @kernel.Thm) => @bool.spec(t4397, x4398))(x4399))
   })
   let t4393 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("t:B->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(t : (B) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -47504,18 +47504,18 @@ pub fn algebraically_independent_span() -> @kernel.Thm {
 /// ALGEBRAIC_SPAN_EXCHANGE
 fn step_300() -> Unit raise {
   let t4689 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t4684 = @parser.parse_term("(b INSERT a INSERT t) DELETE (a:B)")
-  let t4685 = @parser.parse_term("(b:B) INSERT t")
-  let t4686 = @parser.parse_term("l:B ring")
-  let t4687 = @parser.parse_term("k:A ring")
+  let t4684 = @term_syntax.parse_term("DELETE(INSERT((b : B), INSERT((a : B), (t : (B) -> Bool))), a)")
+  let t4685 = @term_syntax.parse_term("INSERT((b : B), (t : (B) -> Bool))")
+  let t4686 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4687 = @term_syntax.parse_term("(k : Ring[A])")
   let t4688 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4687, t4686, t4685, t4684]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4687, t4686, t4685, t4684]),
       algebraic_span_mono(),
     ),
   )
   let t4683 = @simp.asm_rewrite_tac(@list.List([@sets.in_insert()]))
-  let t4682 = @tactics.exists_tac(@parser.parse_term("a:B"))
+  let t4682 = @tactics.exists_tac(@term_syntax.parse_term("(a : B)"))
   let t4681 = @simp.asm_simp_tac(
     @list.List([algebraically_dependent_span(), @sets.insert_subset()]),
   )
@@ -47618,15 +47618,15 @@ fn step_300() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([])),
   )
   let t4671 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t4667 = @parser.parse_term("s:B->bool")
-  let t4668 = @parser.parse_term("t:B->bool")
-  let t4669 = @parser.parse_term("l:B ring")
-  let t4670 = @parser.parse_term("k:A ring")
+  let t4667 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4668 = @term_syntax.parse_term("(t : (B) -> Bool)")
+  let t4669 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4670 = @term_syntax.parse_term("(k : Ring[A])")
   let t4673 = @list.List([
     @tactics.then_tac(
       @tactics.mp_tac(
         @bool.ispecl(
-          @list.List([@parser.parse_term("h:A->B"), t4670, t4669, t4668, t4667]),
+          @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4670, t4669, t4668, t4667]),
           algebraic_span_mono(),
         ),
       ),
@@ -47635,7 +47635,7 @@ fn step_300() -> Unit raise {
     t4672,
   ])
   let t4664 = @drule.match_mp(
-    @class.taut(@parser.parse_term("(p <=> q /\\ r) ==> ~r ==> ~p")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) == ((q : Bool) && (r : Bool)) → !r → !p")),
   )
   let t4666 = @tactics.disch_then(fn(
     x4665 : @kernel.Thm,
@@ -47706,23 +47706,23 @@ fn step_300() -> Unit raise {
     })(t4664(x4665))
   })
   let t4660 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4655 = @parser.parse_term("a:B")
-  let t4656 = @parser.parse_term("t:B->bool")
-  let t4657 = @parser.parse_term("l:B ring")
-  let t4658 = @parser.parse_term("k:A ring")
+  let t4655 = @term_syntax.parse_term("(a : B)")
+  let t4656 = @term_syntax.parse_term("(t : (B) -> Bool)")
+  let t4657 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4658 = @term_syntax.parse_term("(k : Ring[A])")
   let t4659 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4658, t4657, t4656, t4655]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4658, t4657, t4656, t4655]),
       algebraically_dependent_from_insert(),
     ),
   )
-  let t4650 = @parser.parse_term("b:B")
-  let t4651 = @parser.parse_term("(a:B) INSERT t")
-  let t4652 = @parser.parse_term("l:B ring")
-  let t4653 = @parser.parse_term("k:A ring")
+  let t4650 = @term_syntax.parse_term("(b : B)")
+  let t4651 = @term_syntax.parse_term("INSERT((a : B), (t : (B) -> Bool))")
+  let t4652 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4653 = @term_syntax.parse_term("(k : Ring[A])")
   let t4654 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4653, t4652, t4651, t4650]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4653, t4652, t4651, t4650]),
       algebraically_dependent_from_insert(),
     ),
   )
@@ -47732,10 +47732,10 @@ fn step_300() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4647 = @tactics.exists_tac(
-    @parser.parse_term("algebraic_span (k,l) (h:A->B) (a INSERT t)"),
+    @term_syntax.parse_term("algebraic_span(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), INSERT((a : B), (t : (B) -> Bool)))"),
   )
   let t4646 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("forall t. t SUBSET s /\\ x IN t ==> x IN s")),
+    @sets.set_rule(@term_syntax.parse_term("∀ t : (_) -> Bool, SUBSET(t, (s : (_) -> Bool)) && IN((x : _), t) → IN(x, s)")),
   )
   let t4644 = @tactics.first_x_assum(fn(
     x4643 : @kernel.Thm,
@@ -47803,7 +47803,7 @@ fn step_300() -> Unit raise {
   let t4634 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t4633 = @tactics.match_mp_tac(algebraic_span_mono())
   let t4632 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("s SUBSET t ==> x IN s ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) → IN((x : _), s) → IN(x, t)")),
   )
   let t4637 = @list.List([
     @tactics.then_tac(
@@ -47824,14 +47824,14 @@ fn step_300() -> Unit raise {
   ])
   let t4630 = @simp.once_rewrite_tac(@list.List([@sets.insert_subset()]))
   let t4631 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t4630])
-  let t4628 = @parser.parse_term("c INSERT (b INSERT (t DELETE c)):B->bool")
+  let t4628 = @term_syntax.parse_term("INSERT((c : B), INSERT((b : B), DELETE((t : (B) -> Bool), c)))")
   let t4629 = @tactics.trans_tac(@sets.subset_trans())(t4628)
   let t4627 = @tactics.match_mp_tac(algebraic_span_mono())
   let t4626 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset())]))
-  let t4624 = @parser.parse_term("a:B")
-  let t4625 = @tactics.spec_tac(@parser.parse_term("a:B"), t4624)
+  let t4624 = @term_syntax.parse_term("(a : B)")
+  let t4625 = @tactics.spec_tac(@term_syntax.parse_term("(a : B)"), t4624)
   let t4623 = @tactics.undisch_tac(
-    @parser.parse_term("a IN algebraic_span (k,l) (h:A->B) (b INSERT t)"),
+    @term_syntax.parse_term("IN((a : B), algebraic_span(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), INSERT((b : B), (t : (B) -> Bool))))"),
   )
   let t4622 = @tactics.first_assum(fn(
     x4620 : @kernel.Thm,
@@ -47868,10 +47868,10 @@ fn step_300() -> Unit raise {
       @sets.card_psubset(),
       @sets.finite_delete(),
       @class.not_imp(),
-      @sets.set_rule(@parser.parse_term("s DELETE a PSUBSET s <=> a IN s")),
+      @sets.set_rule(@term_syntax.parse_term("PSUBSET(DELETE((s : (_) -> Bool), (a : _)), s) == IN(a, s)")),
     ]),
   )
-  let t4614 = @parser.parse_term("t DELETE (c:B)")
+  let t4614 = @term_syntax.parse_term("DELETE((t : (B) -> Bool), (c : B))")
   let t4617 = @tactics.first_x_assum(fn(
     x4616 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -47941,7 +47941,7 @@ fn step_300() -> Unit raise {
     })(((x4615 : @kernel.Thm) => @bool.spec(t4614, x4615))(x4616))
   })
   let t4610 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:B"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : B)"))(@tactics.strip_assume_tac),
   )
   let t4645 = @list.List([
     @tactics.thenl(
@@ -47995,7 +47995,7 @@ fn step_300() -> Unit raise {
     t4644,
   ])
   let t4609 = @tactics.subgoal_then(
-    @parser.parse_term("~algebraically_dependent (k,l) (h:A->B) t"),
+    @term_syntax.parse_term("!algebraically_dependent(((k : Ring[A]), (l : Ring[B])), (h : (A) -> B), (t : (B) -> Bool))"),
     fn(
       x4606 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -48048,7 +48048,7 @@ fn step_300() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4604 = @tactics.subgoal_then(
-    @parser.parse_term("(t:B->bool) SUBSET ring_carrier l"),
+    @term_syntax.parse_term("SUBSET((t : (B) -> Bool), ring_carrier((l : Ring[B])))"),
     fn(
       x4601 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -48111,12 +48111,12 @@ fn step_300() -> Unit raise {
   )
   let t4594 = @simp.rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("p ==> ~(q /\\ r) <=> q ==> p ==> ~r")),
+      @class.taut(@term_syntax.parse_term("((p : Bool) → !((q : Bool) && (r : Bool))) == (q → p → !r)")),
     ]),
   )
   let t4593 = @simp.rewrite_tac(@list.List([@theorems.right_imp_forall_thm()]))
   let t4592 = @tactics.replicate_tac(3, @tactics.disch_tac)
-  let t4591 = @tactics.x_gen_tac(@parser.parse_term("t:B->bool"))
+  let t4591 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : (B) -> Bool)"))
   let t4590 = @simp.rewrite_tac(
     @list.List([@theorems.imp_conj(), @theorems.forall_unwind_thm1()]),
   )
@@ -48154,20 +48154,20 @@ fn step_300() -> Unit raise {
     @list.List([@arith.num_wop()]),
   )
   let t4579 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t4574 = @parser.parse_term("(b:B) INSERT (t DELETE b)")
-  let t4575 = @parser.parse_term("t:B->bool")
-  let t4576 = @parser.parse_term("l:B ring")
-  let t4577 = @parser.parse_term("k:A ring")
+  let t4574 = @term_syntax.parse_term("INSERT((b : B), DELETE((t : (B) -> Bool), b))")
+  let t4575 = @term_syntax.parse_term("(t : (B) -> Bool)")
+  let t4576 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4577 = @term_syntax.parse_term("(k : Ring[A])")
   let t4578 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("h:A->B"), t4577, t4576, t4575, t4574]),
+      @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4577, t4576, t4575, t4574]),
       algebraic_span_mono(),
     ),
   )
   let t4573 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@sets.finite_has_size()), @sets.finite_delete()]),
   )
-  let t4571 = @parser.parse_term("t DELETE (b:B)")
+  let t4571 = @term_syntax.parse_term("DELETE((t : (B) -> Bool), (b : B))")
   let t4572 = @tactics.map_every(
     fn(
       x4568 : @kernel.Term,
@@ -48215,10 +48215,10 @@ fn step_300() -> Unit raise {
         s4569(x4570)
       }
     },
-    @list.List([@parser.parse_term("CARD(t DELETE (b:B))"), t4571]),
+    @list.List([@term_syntax.parse_term("CARD(DELETE((t : (B) -> Bool), (b : B)))"), t4571]),
   )
   let t4567 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("t:B->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(t : (B) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -48364,14 +48364,14 @@ fn step_300() -> Unit raise {
   )
   let t4556 = @tactics.repeat_tac(@tactics.strip_tac)
   let t4555 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t4552 = @parser.parse_term("s:B->bool")
-  let t4553 = @parser.parse_term("l:B ring")
-  let t4554 = @parser.parse_term("k:A ring")
+  let t4552 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4553 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4554 = @term_syntax.parse_term("(k : Ring[A])")
   let t4557 = @list.List([
     @tactics.then_tac(
       @tactics.mp_tac(
         @bool.ispecl(
-          @list.List([@parser.parse_term("h:A->B"), t4554, t4553, t4552]),
+          @list.List([@term_syntax.parse_term("(h : (A) -> B)"), t4554, t4553, t4552]),
           algebraic_span_superset(),
         ),
       ),
@@ -48379,13 +48379,13 @@ fn step_300() -> Unit raise {
     ),
     t4556,
   ])
-  let t4551 = @class.asm_cases_tac(@parser.parse_term("(a:B) IN s"))
+  let t4551 = @class.asm_cases_tac(@term_syntax.parse_term("IN((a : B), (s : (B) -> Bool))"))
   let t4550 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
-  let t4549 = @class.asm_cases_tac(@parser.parse_term("a:B = b"))
-  let t4548 = @tactics.x_gen_tac(@parser.parse_term("s:B->bool"))
-  let t4546 = @parser.parse_term("s:B->bool")
+  let t4549 = @class.asm_cases_tac(@term_syntax.parse_term("(a : B) == (b : B)"))
+  let t4548 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : (B) -> Bool)"))
+  let t4546 = @term_syntax.parse_term("(s : (B) -> Bool)")
   let t4547 = @tactics.spec_tac(
-    @parser.parse_term("ring_carrier l INTER (s:B->bool)"),
+    @term_syntax.parse_term("INTER(ring_carrier((l : Ring[B])), (s : (B) -> Bool))"),
     t4546,
   )
   let t4545 = @tactics.mp_tac(
@@ -48411,20 +48411,20 @@ fn step_300() -> Unit raise {
     t4543,
   ])
   let t4542 = @class.asm_cases_tac(
-    @parser.parse_term("(a:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((a : B), ring_carrier((l : Ring[B])))"),
   )
   let t4541 = @list.List([
     @tactics.all_tac,
     @meson.asm_meson_tac(
       @list.List([
         @sets.set_rule(
-          @parser.parse_term("~(b IN s) ==> s INTER (b INSERT t) = s INTER t"),
+          @term_syntax.parse_term("!IN((b : _), (s : (_) -> Bool)) → INTER(s, INSERT(b, (t : (_) -> Bool))) == INTER(s, t)"),
         ),
       ]),
     ),
   ])
   let t4540 = @class.asm_cases_tac(
-    @parser.parse_term("(b:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((b : B), ring_carrier((l : Ring[B])))"),
   )
   let t4539 = @simp.once_rewrite_tac(@list.List([algebraic_span_restrict()]))
   let t4690 = @tactics.then_tac(
@@ -48612,7 +48612,7 @@ fn step_301() -> Unit raise {
     @list.List([@equal.gsym(subring_generated_by_subfield_generated())]),
   )
   let t4697 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("q ==> (p /\\ r <=> p /\\ q /\\ r)")),
+    @class.taut(@term_syntax.parse_term("(q : Bool) → ((p : Bool) && (r : Bool)) == (p && q && r)")),
   )
   let t4696 = @simp.asm_simp_tac(
     @list.List([
@@ -49073,7 +49073,7 @@ pub fn transcendence_bases_card_eq() -> @kernel.Thm {
 /// ALGEBRAICALLY_DEPENDENT_MONOMORPHIC_IMAGE
 fn step_311() -> Unit raise {
   let t4851 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t4850 = @tactics.exists_tac(@parser.parse_term("IMAGE (g:B->C) s"))
+  let t4850 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((g : (B) -> C), (s : (B) -> Bool))"))
   let t4849 = @tactics.match_mp_tac(@ringtheory.poly_extend_eq())
   let t4847 = @tactics.disch_then(fn(
     x4846 : @kernel.Thm,
@@ -49153,7 +49153,7 @@ fn step_311() -> Unit raise {
     t4847,
   ])
   let t4842 = @tactics.subgoal_then(
-    @parser.parse_term("(g:B->C) (ring_0 l) = ring_0 m"),
+    @term_syntax.parse_term("(g : (B) -> C)(ring_0((l : Ring[B]))) == ring_0((m : Ring[C]))"),
     fn(
       x4839 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -49286,17 +49286,17 @@ fn step_311() -> Unit raise {
       @ringtheory.ring_monomorphism_imp_homomorphism(),
     ]),
   )
-  let t4823 = @parser.parse_term("q:(B->num)->A")
-  let t4824 = @parser.parse_term("g:B->C")
-  let t4825 = @parser.parse_term("\\x:B. x")
-  let t4826 = @parser.parse_term("s:B->bool")
-  let t4827 = @parser.parse_term("f:A->B")
-  let t4828 = @parser.parse_term("m:C ring")
-  let t4829 = @parser.parse_term("l:B ring")
+  let t4823 = @term_syntax.parse_term("(q : ((B) -> Num) -> A)")
+  let t4824 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t4825 = @term_syntax.parse_term("(x : B) => x")
+  let t4826 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4827 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t4828 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4829 = @term_syntax.parse_term("(l : Ring[B])")
   let t4830 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("k:A ring"),
+        @term_syntax.parse_term("(k : Ring[A])"),
         t4829,
         t4828,
         t4827,
@@ -49338,19 +49338,19 @@ fn step_311() -> Unit raise {
     ),
   )
   let t4816 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4809 = @parser.parse_term("g:B->C")
-  let t4810 = @parser.parse_term("h:C->B")
-  let t4811 = @parser.parse_term("q:(B->num)->A")
-  let t4812 = @parser.parse_term("s:B->bool")
-  let t4813 = @parser.parse_term("IMAGE (g:B->C) s")
-  let t4814 = @parser.parse_term("m:C ring")
-  let t4815 = @parser.parse_term("k:A ring")
+  let t4809 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t4810 = @term_syntax.parse_term("(h : (C) -> B)")
+  let t4811 = @term_syntax.parse_term("(q : ((B) -> Num) -> A)")
+  let t4812 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4813 = @term_syntax.parse_term("IMAGE((g : (B) -> C), (s : (B) -> Bool))")
+  let t4814 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4815 = @term_syntax.parse_term("(k : Ring[A])")
   let t4818 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.mp_tac(
         @bool.ispecl(
           @list.List([
-            @parser.parse_term("(g:B->C) o (f:A->B)"),
+            @term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"),
             t4815,
             t4814,
             t4813,
@@ -49372,20 +49372,20 @@ fn step_311() -> Unit raise {
     ),
   )
   let t4807 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4800 = @parser.parse_term("\\x:C. x")
-  let t4801 = @parser.parse_term("g:B->C")
-  let t4802 = @parser.parse_term("p:(C->num)->A")
-  let t4803 = @parser.parse_term("IMAGE (g:B->C) s")
-  let t4804 = @parser.parse_term("s:B->bool")
-  let t4805 = @parser.parse_term("m:C ring")
-  let t4806 = @parser.parse_term("k:A ring")
+  let t4800 = @term_syntax.parse_term("(x : C) => x")
+  let t4801 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t4802 = @term_syntax.parse_term("(p : ((C) -> Num) -> A)")
+  let t4803 = @term_syntax.parse_term("IMAGE((g : (B) -> C), (s : (B) -> Bool))")
+  let t4804 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4805 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4806 = @term_syntax.parse_term("(k : Ring[A])")
   let t4819 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
             @list.List([
-              @parser.parse_term("(g:B->C) o (f:A->B)"),
+              @term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"),
               t4806,
               t4805,
               t4804,
@@ -49523,7 +49523,7 @@ fn step_311() -> Unit raise {
     @tactics.then_tac(
       @tactics.match_mp_tac(
         @class.taut(
-          @parser.parse_term("p /\\ q /\\ (p ==> r) ==> p /\\ q /\\ r"),
+          @term_syntax.parse_term("(p : Bool) && (q : Bool) && (p → (r : Bool)) → p && q && r"),
         ),
       ),
       t4785,
@@ -49675,7 +49675,7 @@ fn step_311() -> Unit raise {
   let t4777 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.disch_then(
-        @tactics.x_choose_then(@parser.parse_term("q:(B->num)->A"))(
+        @tactics.x_choose_then(@term_syntax.parse_term("(q : ((B) -> Num) -> A)"))(
           @tactics.strip_assume_tac,
         ),
       ),
@@ -49782,7 +49782,7 @@ fn step_311() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.disch_then(
-          @tactics.x_choose_then(@parser.parse_term("p:(C->num)->A"))(
+          @tactics.x_choose_then(@term_syntax.parse_term("(p : ((C) -> Num) -> A)"))(
             @tactics.strip_assume_tac,
           ),
         ),
@@ -49907,7 +49907,7 @@ fn step_311() -> Unit raise {
     t4751,
   ])
   let t4749 = @tactics.subgoal_then(
-    @parser.parse_term("IMAGE (g:B->C) s SUBSET ring_carrier m"),
+    @term_syntax.parse_term("SUBSET(IMAGE((g : (B) -> C), (s : (B) -> Bool)), ring_carrier((m : Ring[C])))"),
     fn(
       x4746 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -49960,17 +49960,17 @@ fn step_311() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
-  let t4739 = @parser.parse_term("h:C->B")
-  let t4740 = @parser.parse_term("g:B->C")
-  let t4741 = @parser.parse_term("IMAGE (g:B->C) s")
-  let t4742 = @parser.parse_term("s:B->bool")
+  let t4739 = @term_syntax.parse_term("(h : (C) -> B)")
+  let t4740 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t4741 = @term_syntax.parse_term("IMAGE((g : (B) -> C), (s : (B) -> Bool))")
+  let t4742 = @term_syntax.parse_term("(s : (B) -> Bool)")
   let t4743 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t4742, t4741, t4740, t4739]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t4742, t4741, t4740, t4739]),
       @ringtheory.ring_isomorphisms_poly_reindex(),
     ),
   )
-  let t4736 = @parser.parse_term("h:C->B")
+  let t4736 = @term_syntax.parse_term("(h : (C) -> B)")
   let t4738 = @tactics.disch_then((x4737 : @kernel.Thm) => {
     @tactics.x_choose_tac(t4736, x4737)
   })
@@ -50310,12 +50310,12 @@ fn step_313() -> Unit raise {
       @sets.union_subset(),
     ]),
   )
-  let t4876 = @parser.parse_term("IMAGE (f:A->B) (ring_carrier k) UNION s")
-  let t4877 = @parser.parse_term("g:B->C")
-  let t4878 = @parser.parse_term("m:C ring")
+  let t4876 = @term_syntax.parse_term("UNION(IMAGE((f : (A) -> B), ring_carrier((k : Ring[A]))), (s : (B) -> Bool))")
+  let t4877 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t4878 = @term_syntax.parse_term("(m : Ring[C])")
   let t4879 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t4878, t4877, t4876]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t4878, t4877, t4876]),
       @ringtheory.subring_generated_by_homomorphic_image(),
     ),
   )
@@ -50401,17 +50401,17 @@ fn step_313() -> Unit raise {
       ),
     ]),
   )
-  let t4862 = @parser.parse_term("z:B")
-  let t4863 = @parser.parse_term("m:C ring")
-  let t4864 = @parser.parse_term("l:B ring")
+  let t4862 = @term_syntax.parse_term("(z : B)")
+  let t4863 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4864 = @term_syntax.parse_term("(l : Ring[B])")
   let t4865 = @parser.parse_term(
     "subring_generated l (IMAGE (f:A->B) (ring_carrier k) UNION s)",
   )
-  let t4866 = @parser.parse_term("g:B->C")
+  let t4866 = @term_syntax.parse_term("(g : (B) -> C)")
   let t4867 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("I:B->B"),
+        @term_syntax.parse_term("(I : (B) -> B)"),
         t4866,
         t4865,
         t4864,
@@ -50429,7 +50429,7 @@ fn step_313() -> Unit raise {
     @list.List([@sets.in_insert(), @sets.in_elim_thm()]),
   )
   let t4859 = @simp.rewrite_tac(@list.List([algebraic_span()]))
-  let t4858 = @tactics.x_gen_tac(@parser.parse_term("z:B"))
+  let t4858 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : B)"))
   let t4857 = @simp.rewrite_tac(@list.List([algebraic_span_subset()]))
   let t4856 = @tactics.match_mp_tac(
     @sets.set_rule(
@@ -50684,14 +50684,14 @@ fn step_314() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
-  let t4958 = @tactics.exists_tac(@parser.parse_term("c:C"))
+  let t4958 = @tactics.exists_tac(@term_syntax.parse_term("(c : C)"))
   let t4957 = @simp.asm_simp_tac(@list.List([algebraically_dependent_span()]))
   let t4956 = @tactics.undisch_tac(
-    @parser.parse_term("~algebraically_dependent (l,m) (g:B->C) t"),
+    @term_syntax.parse_term("!algebraically_dependent(((l : Ring[B]), (m : Ring[C])), (g : (B) -> C), (t : (C) -> Bool))"),
   )
   let t4955 = @simp.asm_simp_tac(@list.List([algebraic_matroid_v1()]))
   let t4954 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4950 = @parser.parse_term("c:C")
+  let t4950 = @term_syntax.parse_term("(c : C)")
   let t4953 = @tactics.first_x_assum(fn(
     x4952 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -50760,7 +50760,7 @@ fn step_314() -> Unit raise {
       }
     })(((x4951 : @kernel.Thm) => @bool.spec(t4950, x4951))(x4952))
   })
-  let t4944 = @parser.parse_term("c:C")
+  let t4944 = @term_syntax.parse_term("(c : C)")
   let t4946 = @tactics.disch_then((x4945 : @kernel.Thm) => {
     @tactics.x_choose_tac(t4944, x4945)
   })
@@ -50973,18 +50973,18 @@ fn step_314() -> Unit raise {
       field_extension_imp_homomorphism(),
     ]),
   )
-  let t4931 = @parser.parse_term("s:B->bool")
-  let t4932 = @parser.parse_term("m:C ring")
-  let t4933 = @parser.parse_term("l:B ring")
-  let t4934 = @parser.parse_term("k:A ring")
-  let t4935 = @parser.parse_term("g:B->C")
+  let t4931 = @term_syntax.parse_term("(s : (B) -> Bool)")
+  let t4932 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4933 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4934 = @term_syntax.parse_term("(k : Ring[A])")
+  let t4935 = @term_syntax.parse_term("(g : (B) -> C)")
   let t4982 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
             @list.List([
-              @parser.parse_term("f:A->B"),
+              @term_syntax.parse_term("(f : (A) -> B)"),
               t4935,
               t4934,
               t4933,
@@ -51014,11 +51014,11 @@ fn step_314() -> Unit raise {
       @sets.union_empty(),
     ]),
   )
-  let t4928 = @class.asm_cases_tac(@parser.parse_term("t':C->bool = {}"))
-  let t4926 = @parser.parse_term("t':C->bool")
+  let t4928 = @class.asm_cases_tac(@term_syntax.parse_term("(t' : (C) -> Bool) == {}"))
+  let t4926 = @term_syntax.parse_term("(t' : (C) -> Bool)")
   let t4927 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("s':B->bool"), t4926]),
+    @list.List([@term_syntax.parse_term("(s' : (B) -> Bool)"), t4926]),
   )
   let t4925 = @simp.rewrite_tac(
     @list.List([@theorems.right_and_exists_thm(), @class.not_exists_thm()]),
@@ -51046,7 +51046,7 @@ fn step_314() -> Unit raise {
   )
   let t4920 = @simp.once_rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("p /\\ q /\\ r <=> q /\\ p /\\ r")),
+      @class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)")),
     ]),
   )
   let t4919 = @simp.asm_simp_tac(@list.List([algebraic_matroid_dependent()]))
@@ -51123,13 +51123,13 @@ fn step_314() -> Unit raise {
     @list.List([@equal.gsym(algebraic_matroid_dependent())]),
   )
   let t4911 = @simp.asm_rewrite_tac(@list.List([]))
-  let t4906 = @parser.parse_term("m:C ring")
-  let t4907 = @parser.parse_term("l:B ring")
-  let t4908 = @parser.parse_term("k:A ring")
-  let t4909 = @parser.parse_term("g:B->C")
+  let t4906 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4907 = @term_syntax.parse_term("(l : Ring[B])")
+  let t4908 = @term_syntax.parse_term("(k : Ring[A])")
+  let t4909 = @term_syntax.parse_term("(g : (B) -> C)")
   let t4910 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t4909, t4908, t4907, t4906]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t4909, t4908, t4907, t4906]),
       field_extension_trans(),
     ),
   )
@@ -51206,16 +51206,16 @@ fn step_314() -> Unit raise {
     }),
   )
   let t4897 = @simp.asm_rewrite_tac(@list.List([algebraically_independent()]))
-  let t4894 = @parser.parse_term("t:C->bool")
-  let t4895 = @parser.parse_term("m:C ring")
-  let t4896 = @parser.parse_term("l:B ring")
+  let t4894 = @term_syntax.parse_term("(t : (C) -> Bool)")
+  let t4895 = @term_syntax.parse_term("(m : Ring[C])")
+  let t4896 = @term_syntax.parse_term("(l : Ring[B])")
   let t4905 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.mp_tac(
             @bool.ispecl(
-              @list.List([@parser.parse_term("g:B->C"), t4896, t4895, t4894]),
+              @list.List([@term_syntax.parse_term("(g : (B) -> C)"), t4896, t4895, t4894]),
               algebraically_independent_imp_disjoint(),
             ),
           ),
@@ -51228,7 +51228,7 @@ fn step_314() -> Unit raise {
     @tactics.strip_tac,
   ])
   let t4893 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t4892 = @simp.asm_rewrite_tac(
     @list.List([@sets.union_subset(), @theorems.conj_assoc()]),
@@ -51343,7 +51343,7 @@ fn step_315() -> Unit raise {
   )
   let t5050 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("s SUBSET s' ==> s UNION t SUBSET s' UNION t"),
+      @term_syntax.parse_term("SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) → SUBSET(UNION(s, (t : (_) -> Bool)), UNION(s', t))"),
     ),
   )
   let t5052 = @tactics.then_tac(
@@ -51426,12 +51426,12 @@ fn step_315() -> Unit raise {
   let t5041 = @simp.rewrite_tac(
     @list.List([@ringtheory.subring_generated_union_left()]),
   )
-  let t5040 = @tactics.x_gen_tac(@parser.parse_term("z:C"))
+  let t5040 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : C)"))
   let t5039 = @simp.rewrite_tac(
     @list.List([@sets.image_i(), @sets.extension(), @sets.in_elim_thm()]),
   )
   let t5038 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("s = t ==> a INSERT s SUBSET a INSERT t")),
+    @sets.set_rule(@term_syntax.parse_term("(s : (_) -> Bool) == (t : (_) -> Bool) → SUBSET(INSERT((a : _), s), INSERT(a, t))")),
   )
   let t5037 = @simp.rewrite_tac(@list.List([algebraic_span()]))
   let t5036 = @simp.once_rewrite_tac(@list.List([algebraic_span_range()]))
@@ -51649,7 +51649,7 @@ fn step_315() -> Unit raise {
     t5026,
   ])
   let t5015 = @tactics.subgoal_then(
-    @parser.parse_term("IMAGE (g:B->C) s SUBSET ring_carrier m"),
+    @term_syntax.parse_term("SUBSET(IMAGE((g : (B) -> C), (s : (B) -> Bool)), ring_carrier((m : Ring[C])))"),
     fn(
       x5012 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -51740,7 +51740,7 @@ fn step_315() -> Unit raise {
       @matroids.matroid_spanning(),
     ]),
   )
-  let t4993 = @parser.parse_term("algebraically_spanning (k,l) (f:A->B) s")
+  let t4993 = @term_syntax.parse_term("algebraically_spanning(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B), (s : (B) -> Bool))")
   let t4994 = @tactics.map_every(
     fn(
       x4990 : @kernel.Term,
@@ -51789,7 +51789,7 @@ fn step_315() -> Unit raise {
       }
     },
     @list.List([
-      @parser.parse_term("algebraically_spanning (l,m) (g:B->C) t"),
+      @term_syntax.parse_term("algebraically_spanning(((l : Ring[B]), (m : Ring[C])), (g : (B) -> C), (t : (C) -> Bool))"),
       t4993,
     ]),
   )
@@ -51804,7 +51804,7 @@ fn step_315() -> Unit raise {
     @tactics.all_tac,
   ])
   let t4987 = @tactics.subgoal_then(
-    @parser.parse_term("field_extension (k,m) ((g:B->C) o (f:A->B))"),
+    @term_syntax.parse_term("field_extension(((k : Ring[A]), (m : Ring[C])), o((g : (B) -> C), (f : (A) -> B)))"),
     fn(
       x4984 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -52275,7 +52275,7 @@ fn step_317() -> Unit raise {
     @tactics.then_tac(@tactics.match_mp_tac(@card.card_disjoint_union()), t5067),
     t5070,
   ])
-  let t5065 = @parser.parse_term("IMAGE (g:B->C) b +_c (c:C->bool)")
+  let t5065 = @term_syntax.parse_term("op_plus_us_c(IMAGE((g : (B) -> C), (b : (B) -> Bool)), (c : (C) -> Bool))")
   let t5066 = @tactics.trans_tac(@card.card_eq_trans())(t5065)
   let t5064 = @simp.once_rewrite_tac(@list.List([@card.card_eq_sym()]))
   let t5062 = @tactics.match_mp_tac(
@@ -52289,14 +52289,14 @@ fn step_317() -> Unit raise {
     ),
     t5062,
   ])
-  let t5057 = @parser.parse_term("d:C->bool")
-  let t5058 = @parser.parse_term("IMAGE (g:B->C) b UNION c")
-  let t5059 = @parser.parse_term("m:C ring")
-  let t5060 = @parser.parse_term("k:A ring")
+  let t5057 = @term_syntax.parse_term("(d : (C) -> Bool)")
+  let t5058 = @term_syntax.parse_term("UNION(IMAGE((g : (B) -> C), (b : (B) -> Bool)), (c : (C) -> Bool))")
+  let t5059 = @term_syntax.parse_term("(m : Ring[C])")
+  let t5060 = @term_syntax.parse_term("(k : Ring[A])")
   let t5061 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("(g:B->C) o (f:A->B)"),
+        @term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"),
         t5060,
         t5059,
         t5058,
@@ -52580,12 +52580,12 @@ fn step_320() -> Unit raise {
     ),
     t5161,
   ])
-  let t5151 = @parser.parse_term("IMAGE (f:A->B) (ring_carrier k)")
-  let t5152 = @parser.parse_term("g:B->C")
-  let t5153 = @parser.parse_term("m:C ring")
+  let t5151 = @term_syntax.parse_term("IMAGE((f : (A) -> B), ring_carrier((k : Ring[A])))")
+  let t5152 = @term_syntax.parse_term("(g : (B) -> C)")
+  let t5153 = @term_syntax.parse_term("(m : Ring[C])")
   let t5154 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t5153, t5152, t5151]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t5153, t5152, t5151]),
       @ringtheory.subring_generated_by_homomorphic_image(),
     ),
   )
@@ -52611,17 +52611,17 @@ fn step_320() -> Unit raise {
       ),
     ]),
   )
-  let t5141 = @parser.parse_term("b:B")
-  let t5142 = @parser.parse_term("m:C ring")
-  let t5143 = @parser.parse_term("l:B ring")
+  let t5141 = @term_syntax.parse_term("(b : B)")
+  let t5142 = @term_syntax.parse_term("(m : Ring[C])")
+  let t5143 = @term_syntax.parse_term("(l : Ring[B])")
   let t5144 = @parser.parse_term(
     "subring_generated l (IMAGE (f:A->B) (ring_carrier k))",
   )
-  let t5145 = @parser.parse_term("g:B->C")
+  let t5145 = @term_syntax.parse_term("(g : (B) -> C)")
   let t5146 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("I:B->B"),
+        @term_syntax.parse_term("(I : (B) -> B)"),
         t5145,
         t5144,
         t5143,
@@ -52632,7 +52632,7 @@ fn step_320() -> Unit raise {
     ),
   )
   let t5140 = @simp.asm_simp_tac(@list.List([algebraic_over_range()]))
-  let t5136 = @parser.parse_term("b:B")
+  let t5136 = @term_syntax.parse_term("(b : B)")
   let t5139 = @tactics.disch_then(fn(
     x5138 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -52850,7 +52850,7 @@ fn step_320() -> Unit raise {
   let t5112 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(subring_generated_by_subfield_generated())]),
   )
-  let t5111 = @tactics.x_gen_tac(@parser.parse_term("b:B"))
+  let t5111 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : B)"))
   let t5188 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -53086,7 +53086,7 @@ fn step_320() -> Unit raise {
   let t5108 = @simp.asm_rewrite_tac(@list.List([]))
   let t5107 = @tactics.match_mp_tac(subfield_of_algebraic_over())
   let t5106 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (g:B->C) (ring_carrier l) UNION s"),
+    @term_syntax.parse_term("UNION(IMAGE((g : (B) -> C), ring_carrier((l : Ring[B]))), (s : (C) -> Bool))"),
   )
   let t5109 = @tactics.then_tac(
     @tactics.then_tac(
@@ -53108,7 +53108,7 @@ fn step_320() -> Unit raise {
     @simp.rewrite_tac(
       @list.List([
         @sets.set_rule(
-          @parser.parse_term("(forall x. x IN s ==> P x) <=> s SUBSET {x | P x}"),
+          @term_syntax.parse_term("(∀ x : _, IN(x, (s : (_) -> Bool)) → (P : (_) -> Bool)(x)) == SUBSET(s, {(x : _) | P(x)})"),
         ),
       ]),
     ),
@@ -53161,7 +53161,7 @@ fn step_320() -> Unit raise {
     t5103,
   ])
   let t5096 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t5095 = @simp.rewrite_tac(@list.List([algebraic_extension()]))
   let t5094 = @list.List([
@@ -53169,7 +53169,7 @@ fn step_320() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5093 = @tactics.subgoal_then(
-    @parser.parse_term("field k /\\ ring_monomorphism(k,l) (f:A->B)"),
+    @term_syntax.parse_term("field((k : Ring[A])) && ring_monomorphism((k, (l : Ring[B])), (f : (A) -> B))"),
     @tactics.strip_assume_tac,
   )
   let t5090 = @simp.gen_rewrite_rule(
@@ -53281,19 +53281,19 @@ fn step_321() -> Unit raise {
   )
   let t5209 = @tactics.disch_then(@tactics.match_mp_tac)
   let t5208 = @simp.rewrite_tac(@list.List([@trivia.i_o_id()]))
-  let t5202 = @parser.parse_term("z:C")
-  let t5203 = @parser.parse_term("m:C ring")
+  let t5202 = @term_syntax.parse_term("(z : C)")
+  let t5203 = @term_syntax.parse_term("(m : Ring[C])")
   let t5204 = @parser.parse_term(
     "subfield_generated m (IMAGE (g:B->C) (ring_carrier l) UNION s)",
   )
   let t5205 = @parser.parse_term(
     "subfield_generated m\n       (IMAGE ((g:B->C) o (f:A->B)) (ring_carrier k) UNION s)",
   )
-  let t5206 = @parser.parse_term("I:C->C")
+  let t5206 = @term_syntax.parse_term("(I : (C) -> C)")
   let t5207 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("I:C->C"),
+        @term_syntax.parse_term("(I : (C) -> C)"),
         t5206,
         t5205,
         t5204,
@@ -53303,7 +53303,7 @@ fn step_321() -> Unit raise {
       algebraic_over_algebraic_extension(),
     ),
   )
-  let t5201 = @tactics.x_gen_tac(@parser.parse_term("z:C"))
+  let t5201 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : C)"))
   let t5200 = @simp.rewrite_tac(
     @list.List([@sets.extension(), @sets.in_elim_thm()]),
   )
@@ -53340,9 +53340,9 @@ fn step_321() -> Unit raise {
     @tactics.strip_assume_tac(t5196(x5197))
   })
   let t5194 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t5192 = @parser.parse_term("s:C->bool")
+  let t5192 = @term_syntax.parse_term("(s : (C) -> Bool)")
   let t5193 = @tactics.spec_tac(
-    @parser.parse_term("ring_carrier m INTER s:C->bool"),
+    @term_syntax.parse_term("INTER(ring_carrier((m : Ring[C])), (s : (C) -> Bool))"),
     t5192,
   )
   let t5191 = @tactics.mp_tac(
@@ -53430,13 +53430,13 @@ fn step_322() -> Unit raise {
       algebraic_span_over_algebraic_extension(),
     ]),
   )
-  let t5215 = @parser.parse_term("m:C ring")
-  let t5216 = @parser.parse_term("l:B ring")
-  let t5217 = @parser.parse_term("k:A ring")
-  let t5218 = @parser.parse_term("g:B->C")
+  let t5215 = @term_syntax.parse_term("(m : Ring[C])")
+  let t5216 = @term_syntax.parse_term("(l : Ring[B])")
+  let t5217 = @term_syntax.parse_term("(k : Ring[A])")
+  let t5218 = @term_syntax.parse_term("(g : (B) -> C)")
   let t5219 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t5218, t5217, t5216, t5215]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t5218, t5217, t5216, t5215]),
       field_extension_trans(),
     ),
   )
@@ -53732,7 +53732,7 @@ fn step_328() -> Unit raise {
     @tactics.match_mp_tac(t5244(x5245))
   })
   let t5243 = @tactics.first_x_assum(
-    @tactics.x_choose_then(@parser.parse_term("c:B->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : (B) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -53911,14 +53911,14 @@ fn step_331() -> Unit raise {
   ) raise) raise {
     @tactics.all_tac
   })
-  let t5460 = @parser.parse_term("qm:A")
-  let t5461 = @tactics.spec_tac(@parser.parse_term("(q:(1->num)->A) m"), t5460)
-  let t5459 = @tactics.undisch_tac(@parser.parse_term("field(l:A ring)"))
+  let t5460 = @term_syntax.parse_term("(qm : A)")
+  let t5461 = @tactics.spec_tac(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)((m : (Unit) -> Num))"), t5460)
+  let t5459 = @tactics.undisch_tac(@term_syntax.parse_term("field((l : Ring[A]))"))
   let t5458 = @tactics.undisch_tac(
-    @parser.parse_term("(z:A) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((z : A), ring_carrier((l : Ring[A])))"),
   )
   let t5457 = @tactics.undisch_tac(
-    @parser.parse_term("(q:(1->num)->A) m IN ring_carrier l"),
+    @term_syntax.parse_term("IN((q : ((Unit) -> Num) -> A)((m : (Unit) -> Num)), ring_carrier((l : Ring[A])))"),
   )
   let t5468 = @list.List([
     @tactics.then_tac(
@@ -53928,7 +53928,7 @@ fn step_331() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.undisch_tac(
-                  @parser.parse_term("~((q:(1->num)->A) m = ring_0 l)"),
+                  @term_syntax.parse_term("!((q : ((Unit) -> Num) -> A)((m : (Unit) -> Num)) == ring_0((l : Ring[A])))"),
                 ),
                 t5457,
               ),
@@ -54037,11 +54037,11 @@ fn step_331() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5446 = @tactics.subgoal_then(
-    @parser.parse_term("(q:(1->num)->A) m IN k /\\ q m IN ring_carrier l"),
+    @term_syntax.parse_term("IN((q : ((Unit) -> Num) -> A)((m : (Unit) -> Num)), (k : (A) -> Bool)) && IN(q(m), ring_carrier((l : Ring[A])))"),
     @tactics.strip_assume_tac,
   )
   let t5445 = @simp.rewrite_tac(@list.List([@class.contrapos_thm()]))
-  let t5444 = @tactics.undisch_tac(@parser.parse_term("~((z:A) IN k)"))
+  let t5444 = @tactics.undisch_tac(@term_syntax.parse_term("!IN((z : A), (k : (A) -> Bool))"))
   let t5443 = @simp.asm_simp_tac(
     @list.List([
       @bool.conjunct2(@ringtheory.subring_generated_v1()),
@@ -54119,19 +54119,19 @@ fn step_331() -> Unit raise {
     t5441,
   ])
   let t5434 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5431 = @parser.parse_term("q:(1->num)->A")
-  let t5432 = @parser.parse_term("z:A")
+  let t5431 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
+  let t5432 = @term_syntax.parse_term("(z : A)")
   let t5433 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("subring_generated l (z INSERT k):A ring"),
+        @term_syntax.parse_term("subring_generated((l : Ring[A]), INSERT((z : A), (k : (A) -> Bool)))"),
         t5432,
         t5431,
       ]),
       @ringtheory.poly_mul_const(),
     ),
   )
-  let t5430 = @tactics.x_gen_tac(@parser.parse_term("m:1->num"))
+  let t5430 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : (Unit) -> Num)"))
   let t5429 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t5428 = @simp.rewrite_tac(
     @list.List([@ringtheory.poly_0_v1(), @class.not_forall_thm()]),
@@ -54248,14 +54248,14 @@ fn step_331() -> Unit raise {
     t5417,
   ])
   let t5409 = @class.asm_cases_tac(
-    @parser.parse_term("q:(1->num)->A = poly_0 l"),
+    @term_syntax.parse_term("(q : ((Unit) -> Num) -> A) == poly_0((l : Ring[A]))"),
   )
   let t5407 = @simp.expand_tac("z")
   let t5408 = @list.List([
     @meson.asm_meson_tac(@list.List([in_subfield_0()])),
     t5407,
   ])
-  let t5406 = @tactics.subgoal_then(@parser.parse_term("~(z:A = ring_0 l)"), fn(
+  let t5406 = @tactics.subgoal_then(@term_syntax.parse_term("!((z : A) == ring_0((l : Ring[A])))"), fn(
     x5403 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -54505,24 +54505,24 @@ fn step_331() -> Unit raise {
       }
     })(((x5385 : @kernel.Thm) => @equal.ap_term(t5384, x5385))(x5386))
   })
-  let t5377 = @parser.parse_term("a:A")
-  let t5378 = @parser.parse_term("p:(1->num)->A")
+  let t5377 = @term_syntax.parse_term("(a : A)")
+  let t5378 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t5379 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A ring"), t5378, t5377]),
+      @list.List([@term_syntax.parse_term("(l : Ring[A])"), t5378, t5377]),
       @ringtheory.poly_eval_v1(),
     ),
   )
-  let t5374 = @parser.parse_term("a:A")
-  let t5375 = @parser.parse_term("q:(1->num)->A")
+  let t5374 = @term_syntax.parse_term("(a : A)")
+  let t5375 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
   let t5376 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A ring"), t5375, t5374]),
+      @list.List([@term_syntax.parse_term("(l : Ring[A])"), t5375, t5374]),
       @ringtheory.poly_eval_v1(),
     ),
   )
   let t5373 = @tactics.undisch_tac(
-    @parser.parse_term("~(poly_eval l (q:(1->num)->A) a = ring_0 l)"),
+    @term_syntax.parse_term("!(poly_eval((l : Ring[A]), (q : ((Unit) -> Num) -> A), (a : A)) == ring_0(l))"),
   )
   let t5372 = @simp.expand_tac("z")
   let t5371 = @simp.asm_simp_tac(
@@ -54603,10 +54603,10 @@ fn step_331() -> Unit raise {
       ),
     ]),
   )
-  let t5356 = @parser.parse_term("(\\v. a):1->A")
-  let t5357 = @parser.parse_term("I:A->A")
-  let t5358 = @parser.parse_term("(:1)")
-  let t5359 = @parser.parse_term("l:A ring")
+  let t5356 = @term_syntax.parse_term("(v : Unit) => (a : A)")
+  let t5357 = @term_syntax.parse_term("(I : (A) -> A)")
+  let t5358 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t5359 = @term_syntax.parse_term("(l : Ring[A])")
   let t5380 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(
@@ -54844,12 +54844,12 @@ fn step_331() -> Unit raise {
       )
     })(@bool.eq_imp_rule(x5345))
   })
-  let t5337 = @parser.parse_term("z:A")
-  let t5338 = @parser.parse_term("(:1)")
+  let t5337 = @term_syntax.parse_term("(z : A)")
+  let t5338 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
   let t5339 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("subring_generated l (z INSERT k):A ring"),
+        @term_syntax.parse_term("subring_generated((l : Ring[A]), INSERT((z : A), (k : (A) -> Bool)))"),
         t5338,
         t5337,
       ]),
@@ -54880,10 +54880,10 @@ fn step_331() -> Unit raise {
   ) raise) raise {
     let th = x5332
     let t5334 = @tactics.mp_tac(
-      @bool.spec(@parser.parse_term("p:(1->num)->A"), th),
+      @bool.spec(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"), th),
     )
     @tactics.then_tac(
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("q:(1->num)->A"), th)),
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"), th)),
       t5334,
     )
   })
@@ -54897,12 +54897,12 @@ fn step_331() -> Unit raise {
     @list.List([@sets.subset()]),
   )
   let t5331 = @list.List([@sets.set_tac(@list.List([])), t5330])
-  let t5323 = @parser.parse_term("(:1)")
-  let t5324 = @parser.parse_term("(z:A) INSERT k")
-  let t5325 = @parser.parse_term("k:A->bool")
+  let t5323 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t5324 = @term_syntax.parse_term("INSERT((z : A), (k : (A) -> Bool))")
+  let t5325 = @term_syntax.parse_term("(k : (A) -> Bool)")
   let t5326 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A ring"), t5325, t5324, t5323]),
+      @list.List([@term_syntax.parse_term("(l : Ring[A])"), t5325, t5324, t5323]),
       @ringtheory.ring_carrier_poly_subring_generated_mono(),
     ),
   )
@@ -55062,7 +55062,7 @@ fn step_331() -> Unit raise {
   let t5297 = @tactics.disch_then(@tactics.match_mp_tac)
   let t5296 = @simp.rewrite_tac(
     @list.List([
-      @sets.set_rule(@parser.parse_term("s UNION {a} = a INSERT s")),
+      @sets.set_rule(@term_syntax.parse_term("UNION((s : (_) -> Bool), {(a : _)}) == INSERT(a, s)")),
       subfield_generated_idempot(),
     ]),
   )
@@ -55077,7 +55077,7 @@ fn step_331() -> Unit raise {
       algebraic_over_subfield_generated_algebraic(),
     ),
   )
-  let t5289 = @parser.parse_term("{z:A}")
+  let t5289 = @term_syntax.parse_term("{(z : A)}")
   let t5304 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -55253,7 +55253,7 @@ fn step_331() -> Unit raise {
     t5304,
   ])
   let t5280 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t5319 = @list.List([
     @tactics.thenl(
@@ -55273,15 +55273,15 @@ fn step_331() -> Unit raise {
   let t5278 = @simp.rewrite_tac(
     @list.List([@trivia.i_o_id(), @class.not_imp()]),
   )
-  let t5272 = @parser.parse_term("a:A")
-  let t5273 = @parser.parse_term("l:A ring")
-  let t5274 = @parser.parse_term("subfield_generated l ((z:A) INSERT k)")
-  let t5275 = @parser.parse_term("subfield_generated l k:A ring")
-  let t5276 = @parser.parse_term("I:A->A")
+  let t5272 = @term_syntax.parse_term("(a : A)")
+  let t5273 = @term_syntax.parse_term("(l : Ring[A])")
+  let t5274 = @term_syntax.parse_term("subfield_generated((l : Ring[A]), INSERT((z : A), (k : (A) -> Bool)))")
+  let t5275 = @term_syntax.parse_term("subfield_generated((l : Ring[A]), (k : (A) -> Bool))")
+  let t5276 = @term_syntax.parse_term("(I : (A) -> A)")
   let t5277 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("I:A->A"),
+        @term_syntax.parse_term("(I : (A) -> A)"),
         t5276,
         t5275,
         t5274,
@@ -55292,10 +55292,10 @@ fn step_331() -> Unit raise {
     ),
   )
   let t5271 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5270 = @class.asm_cases_tac(@parser.parse_term("(z:A) IN k"))
+  let t5270 = @class.asm_cases_tac(@term_syntax.parse_term("IN((z : A), (k : (A) -> Bool))"))
   let t5269 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t5268 = @tactics.x_gen_tac(@parser.parse_term("q:(1->num)->A"))
-  let t5267 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t5268 = @tactics.x_gen_tac(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))
+  let t5267 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t5266 = @simp.rewrite_tac(
     @list.List([
       @theorems.imp_conj(),
@@ -55381,11 +55381,11 @@ fn step_331() -> Unit raise {
   let t5258 = @simp.asm_simp_tac(
     @list.List([field_subfield_generated(), @theorems.left_imp_exists_thm()]),
   )
-  let t5255 = @parser.parse_term("z:A")
-  let t5256 = @parser.parse_term("a INSERT k:A->bool")
+  let t5255 = @term_syntax.parse_term("(z : A)")
+  let t5256 = @term_syntax.parse_term("INSERT((a : A), (k : (A) -> Bool))")
   let t5257 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A ring"), t5256, t5255]),
+      @list.List([@term_syntax.parse_term("(l : Ring[A])"), t5256, t5255]),
       subfield_generated_quotients(),
     ),
   )
@@ -55590,7 +55590,7 @@ fn step_331() -> Unit raise {
   let t5551 = @simp.asm_rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("{a} UNION s UNION b = s UNION a INSERT b"),
+        @term_syntax.parse_term("UNION({(a : _)}, UNION((s : (_) -> Bool), (b : (_) -> Bool))) == UNION(s, INSERT(a, b))"),
       ),
     ]),
   )
@@ -55599,7 +55599,7 @@ fn step_331() -> Unit raise {
     @tactics.then_tac(
       @simp.once_rewrite_tac(
         @list.List([
-          @sets.set_rule(@parser.parse_term("a INSERT s = {a} UNION s")),
+          @sets.set_rule(@term_syntax.parse_term("INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)")),
         ]),
       ),
       t5550,
@@ -55622,7 +55622,7 @@ fn step_331() -> Unit raise {
     @list.List([@equal.gsym(algebraic_over_range())]),
   )
   let t5543 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (f:A->B) (ring_carrier k)"),
+    @term_syntax.parse_term("IMAGE((f : (A) -> B), ring_carrier((k : Ring[A])))"),
   )
   let t5542 = @tactics.match_mp_tac(algebraic_over_subring_generated_mono())
   let t5553 = @tactics.then_tac(
@@ -55664,7 +55664,7 @@ fn step_331() -> Unit raise {
   )
   let t5554 = @tactics.then_tac(
     @tactics.undisch_tac(
-      @parser.parse_term("~(a IN algebraic_span (k,l) (f:A->B) b)"),
+      @term_syntax.parse_term("!IN((a : B), algebraic_span(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B), (b : (B) -> Bool)))"),
     ),
     t5541,
   )
@@ -55679,9 +55679,9 @@ fn step_331() -> Unit raise {
   let t5538 = @simp.asm_rewrite_tac(
     @list.List([subfield_generated_by_subfield_generated()]),
   )
-  let t5534 = @parser.parse_term("y:B")
-  let t5535 = @parser.parse_term("a:B")
-  let t5536 = @parser.parse_term("l:B ring")
+  let t5534 = @term_syntax.parse_term("(y : B)")
+  let t5535 = @term_syntax.parse_term("(a : B)")
+  let t5536 = @term_syntax.parse_term("(l : Ring[B])")
   let t5537 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
@@ -55727,7 +55727,7 @@ fn step_331() -> Unit raise {
     @tactics.strip_assume_tac(t5531(x5532))
   })
   let t5529 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5528 = @tactics.exists_tac(@parser.parse_term("l:B ring"))
+  let t5528 = @tactics.exists_tac(@term_syntax.parse_term("(l : Ring[B])"))
   let t5527 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t5526 = @simp.asm_simp_tac(
     @list.List([algebraically_independent_insert()]),
@@ -55879,17 +55879,17 @@ fn step_331() -> Unit raise {
       },
     ),
   )
-  let t5511 = @parser.parse_term("y:B")
-  let t5512 = @parser.parse_term("l:B ring")
-  let t5513 = @parser.parse_term("k:A ring")
+  let t5511 = @term_syntax.parse_term("(y : B)")
+  let t5512 = @term_syntax.parse_term("(l : Ring[B])")
+  let t5513 = @term_syntax.parse_term("(k : Ring[A])")
   let t5514 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("f:A->B"), t5513, t5512, t5511]),
+    @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t5513, t5512, t5511]),
   )
-  let t5509 = @parser.parse_term("b:B->bool")
+  let t5509 = @term_syntax.parse_term("(b : (B) -> Bool)")
   let t5510 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:B"), t5509]),
+    @list.List([@term_syntax.parse_term("(a : B)"), t5509]),
   )
   let t5507 = @meson.asm_meson_tac(
     @list.List([carrier_subfield_of(), field_extension()]),
@@ -55898,7 +55898,7 @@ fn step_331() -> Unit raise {
   let t5505 = @tactics.match_mp_tac(carrier_subfield_generated_subfield())
   let t5504 = @simp.rewrite_tac(@list.List([@sets.union_empty()]))
   let t5503 = @tactics.match_mp_tac(
-    @sets.set_rule(@parser.parse_term("s = t ==> x IN s ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("(s : (_) -> Bool) == (t : (_) -> Bool) → IN((x : _), s) → IN(x, t)")),
   )
   let t5502 = @tactics.repeat_tac(
     @tactics.disch_then(
@@ -56021,7 +56021,7 @@ fn step_331() -> Unit raise {
   let t5493 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t5492 = @tactics.match_mp_tac(subfield_generated_mono())
   let t5489 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("x IN s ==> s SUBSET t ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("IN((x : _), (s : (_) -> Bool)) → SUBSET(s, (t : (_) -> Bool)) → IN(x, t)")),
   )
   let t5491 = @tactics.first_x_assum(fn(
     x5490 : @kernel.Thm,
@@ -56052,7 +56052,7 @@ fn step_331() -> Unit raise {
   ])
   let t5487 = @tactics.disch_then(@tactics.match_mp_tac)
   let t5486 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5482 = @parser.parse_term("c:B->bool")
+  let t5482 = @term_syntax.parse_term("(c : (B) -> Bool)")
   let t5485 = @tactics.first_x_assum(fn(
     x5484 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -56121,10 +56121,10 @@ fn step_331() -> Unit raise {
       }
     })(((x5483 : @kernel.Thm) => @bool.spec(t5482, x5483))(x5484))
   })
-  let t5477 = @parser.parse_term("c:B->bool")
+  let t5477 = @term_syntax.parse_term("(c : (B) -> Bool)")
   let t5478 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("u:B->bool"), t5477]),
+    @list.List([@term_syntax.parse_term("(u : (B) -> Bool)"), t5477]),
   )
   let t5476 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t5475 = @simp.rewrite_tac(
@@ -56132,7 +56132,7 @@ fn step_331() -> Unit raise {
   )
   let t5473 = @simp.once_rewrite_tac(
     @list.List([
-      @class.taut(@parser.parse_term("p /\\ q /\\ r <=> q /\\ p /\\ r")),
+      @class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)")),
     ]),
   )
   let t5474 = @list.List([
@@ -56141,11 +56141,11 @@ fn step_331() -> Unit raise {
     ),
     t5473,
   ])
-  let t5470 = @parser.parse_term("x:B")
-  let t5471 = @parser.parse_term("IMAGE (f:A->B) (ring_carrier k) UNION b")
+  let t5470 = @term_syntax.parse_term("(x : B)")
+  let t5471 = @term_syntax.parse_term("UNION(IMAGE((f : (A) -> B), ring_carrier((k : Ring[A]))), (b : (B) -> Bool))")
   let t5472 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t5471, t5470]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t5471, t5470]),
       in_subfield_generated_finitary(),
     ),
   )
@@ -56295,7 +56295,7 @@ pub fn totally_transcendental_extension() -> @kernel.Thm {
 fn step_332() -> Unit raise {
   let t5569 = @meson.asm_meson_tac(@list.List([algebraic_over_in_carrier()]))
   let t5568 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5566 = @parser.parse_term("b:B->bool")
+  let t5566 = @term_syntax.parse_term("(b : (B) -> Bool)")
   let t5567 = @tactics.map_every(
     fn(
       x5563 : @kernel.Term,
@@ -56343,7 +56343,7 @@ fn step_332() -> Unit raise {
         s5564(x5565)
       }
     },
-    @list.List([@parser.parse_term("l:B ring"), t5566]),
+    @list.List([@term_syntax.parse_term("(l : Ring[B])"), t5566]),
   )
   let t5562 = @tactics.match_mp_tac(totally_transcendental_extension())
   let t5561 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -56494,7 +56494,7 @@ fn step_333() -> Unit raise {
     ]),
   )
   let t5592 = @simp.once_rewrite_tac(@list.List([@sets.simple_image_gen()]))
-  let t5588 = @parser.parse_term("{(f:num->A) i | i < n}")
+  let t5588 = @term_syntax.parse_term("{(f : (Num) -> A)((i : Num)) | i < (n : Num)}")
   let t5591 = @tactics.first_x_assum(fn(
     x5590 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -56563,7 +56563,7 @@ fn step_333() -> Unit raise {
       }
     })(((x5589 : @kernel.Thm) => @bool.spec(t5588, x5589))(x5590))
   })
-  let t5584 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t5584 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t5583 = @tactics.match_mp_tac(@arith.num_wf())
   let t5582 = @tactics.disch_then(fn(
     x5581 : @kernel.Thm,
@@ -56695,7 +56695,7 @@ fn step_333() -> Unit raise {
     t5600,
   ])
   let t5574 = @tactics.subgoal_then(
-    @parser.parse_term("?f:num->A. forall n. f n = @y. y IN s /\\ P y {f i | i < n}"),
+    @term_syntax.parse_term("∃ f : (Num) -> A, ∀ n : Num, f(n) == select((y : A) => IN(y, (s : (A) -> Bool)) && (P : (A, (A) -> Bool) -> Bool)(y, {f((i : Num)) | i < n}))"),
     fn(
       x5571 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -56781,9 +56781,9 @@ fn step_333() -> Unit raise {
   let t5969 = @tactics.match_mp_tac(subfield_generated_minimal())
   let t5968 = @simp.asm_rewrite_tac(@list.List([@arith.not_lt()]))
   let t5965 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("x IN s ==> forall t. s SUBSET t ==> x IN t")),
+    @sets.set_rule(@term_syntax.parse_term("IN((x : _), (s : (_) -> Bool)) → (∀ t : (_) -> Bool, SUBSET(s, t) → IN(x, t))")),
   )
-  let t5962 = @parser.parse_term("(B:num->C->bool) n")
+  let t5962 = @term_syntax.parse_term("(B : (Num, C) -> Bool)((n : Num))")
   let t5967 = @tactics.disch_then(fn(
     x5966 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -57017,7 +57017,7 @@ fn step_333() -> Unit raise {
     },
     ring_independent_insert(),
   )
-  let t5934 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t5934 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t5933 = @simp.rewrite_tac(
     @list.List([
       @sets.numseg_clauses_lt(),
@@ -57069,21 +57069,21 @@ fn step_333() -> Unit raise {
     ),
     @int.arith_tac,
   )
-  let t5924 = @parser.parse_term("n:num")
+  let t5924 = @term_syntax.parse_term("(n : Num)")
   let t5930 = @list.List([
-    @tactics.spec_tac(@parser.parse_term("SUC nn"), t5924),
+    @tactics.spec_tac(@term_syntax.parse_term("SUC((nn : Num))"), t5924),
     t5929,
   ])
   let t5923 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (y:num->C) {i | i < SUC nn}"),
+    @term_syntax.parse_term("IMAGE((y : (Num) -> C), {(i : Num) | i < SUC((nn : Num))})"),
   )
   let t5922 = @tactics.match_mp_tac(@matroids.matroid_independent_mono())
-  let t5919 = @parser.parse_term("nn:num")
+  let t5919 = @term_syntax.parse_term("(nn : Num)")
   let t5921 = @tactics.disch_then((x5920 : @kernel.Thm) => {
     @tactics.x_choose_tac(t5919, x5920)
   })
   let t5918 = @simp.rewrite_tac(@list.List([@iterate.finite_subset_numseg()]))
-  let t5917 = @tactics.x_gen_tac(@parser.parse_term("d:num->bool"))
+  let t5917 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : (Num) -> Bool)"))
   let t5916 = @simp.asm_rewrite_tac(
     @list.List([@sets.subset(), @sets.forall_in_image()]),
   )
@@ -57114,7 +57114,7 @@ fn step_333() -> Unit raise {
       @matroids.matroid_dimension_ge_finite_card(),
     ),
   )
-  let t5904 = @parser.parse_term("IMAGE (y:num->C) (:num)")
+  let t5904 = @term_syntax.parse_term("IMAGE((y : (Num) -> C), UNIV)")
   let t5909 = @tactics.first_assum(fn(
     x5908 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -57211,7 +57211,7 @@ fn step_333() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5898 = @tactics.subgoal_then(
-    @parser.parse_term("forall i j. (y:num->C) i = y j <=> i = j"),
+    @term_syntax.parse_term("∀ i : Num, ∀ j : Num, ((y : (Num) -> C)(i) == y(j)) == (i == j)"),
     fn(
       x5895 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -57266,7 +57266,7 @@ fn step_333() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5893 = @tactics.subgoal_then(
-    @parser.parse_term("forall i j. (y:num->C) i IN B j <=> i < j"),
+    @term_syntax.parse_term("∀ i : Num, ∀ j : Num, IN((y : (Num) -> C)(i), (B : (Num, C) -> Bool)(j)) == (i < j)"),
     fn(
       x5890 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -57315,7 +57315,7 @@ fn step_333() -> Unit raise {
     },
   )
   let t5887 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:num->C"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : (Num) -> C)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -57328,7 +57328,7 @@ fn step_333() -> Unit raise {
   let t5886 = @meson.asm_meson_tac(
     @list.List([
       @sets.subset(),
-      @int.arith_rule(@parser.parse_term("n < SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("(n : Num) < SUC(n)")),
     ]),
   )
   let t5889 = @list.List([
@@ -57415,7 +57415,7 @@ fn step_333() -> Unit raise {
   let t5875 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.image_i()]))
   let t5874 = @tactics.match_mp_tac(
     @sets.set_rule(
-      @parser.parse_term("s SUBSET s' ==> s UNION t SUBSET s' UNION t"),
+      @term_syntax.parse_term("SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) → SUBSET(UNION(s, (t : (_) -> Bool)), UNION(s', t))"),
     ),
   )
   let t5873 = @simp.rewrite_tac(@list.List([@sets.image_o()]))
@@ -57447,7 +57447,7 @@ fn step_333() -> Unit raise {
     @tactics.match_mp_tac(t5869(x5870))
   })
   let t5868 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5867 = @tactics.x_gen_tac(@parser.parse_term("c:C->bool"))
+  let t5867 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (C) -> Bool)"))
   let t5866 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t5863 = @simp.gen_rewrite_rule(
     fn(
@@ -57934,13 +57934,13 @@ fn step_333() -> Unit raise {
   )
   let t5815 = @simp.asm_rewrite_tac(@list.List([]))
   let t5814 = @tactics.disch_then(@tactics.match_mp_tac)
-  let t5809 = @parser.parse_term("subfield_generated m ((B:num->C->bool) n)")
-  let t5810 = @parser.parse_term("subfield_generated l ((A:num->B->bool) n)")
-  let t5811 = @parser.parse_term("k:A ring")
-  let t5812 = @parser.parse_term("g:B->C")
+  let t5809 = @term_syntax.parse_term("subfield_generated((m : Ring[C]), (B : (Num, C) -> Bool)((n : Num)))")
+  let t5810 = @term_syntax.parse_term("subfield_generated((l : Ring[B]), (A : (Num, B) -> Bool)((n : Num)))")
+  let t5811 = @term_syntax.parse_term("(k : Ring[A])")
+  let t5812 = @term_syntax.parse_term("(g : (B) -> C)")
   let t5813 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t5812, t5811, t5810, t5809]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t5812, t5811, t5810, t5809]),
       algebraic_over_from_monomorphic_image(),
     ),
   )
@@ -58061,7 +58061,7 @@ fn step_333() -> Unit raise {
   let t5793 = @simp.asm_rewrite_tac(
     @list.List([ring_carrier_subfield_generated_subset()]),
   )
-  let t5792 = @tactics.exists_tac(@parser.parse_term("ring_carrier l:B->bool"))
+  let t5792 = @tactics.exists_tac(@term_syntax.parse_term("ring_carrier((l : Ring[B]))"))
   let t5791 = @tactics.match_mp_tac(
     algebraically_independent_over_subring_generated_mono(),
   )
@@ -58207,17 +58207,17 @@ fn step_333() -> Unit raise {
   let t5775 = @simp.asm_simp_tac(
     @list.List([carrier_subfield_generated_subfield()]),
   )
-  let t5770 = @parser.parse_term("y:C")
-  let t5771 = @parser.parse_term("b:C->bool")
-  let t5772 = @parser.parse_term("m:C ring")
-  let t5773 = @parser.parse_term("subfield_generated l ((A:num->B->bool) n)")
+  let t5770 = @term_syntax.parse_term("(y : C)")
+  let t5771 = @term_syntax.parse_term("(b : (C) -> Bool)")
+  let t5772 = @term_syntax.parse_term("(m : Ring[C])")
+  let t5773 = @term_syntax.parse_term("subfield_generated((l : Ring[B]), (A : (Num, B) -> Bool)((n : Num)))")
   let t5774 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("g:B->C"), t5773, t5772, t5771, t5770]),
+      @list.List([@term_syntax.parse_term("(g : (B) -> C)"), t5773, t5772, t5771, t5770]),
       totally_transcendental_extension(),
     ),
   )
-  let t5769 = @tactics.x_gen_tac(@parser.parse_term("y:C"))
+  let t5769 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : C)"))
   let t5767 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t5766 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(
@@ -58250,7 +58250,7 @@ fn step_333() -> Unit raise {
     t5758,
   ])
   let t5756 = @tactics.subgoal_then(
-    @parser.parse_term("(x:B) IN ring_carrier l"),
+    @term_syntax.parse_term("IN((x : B), ring_carrier((l : Ring[B])))"),
     fn(
       x5753 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -58304,18 +58304,18 @@ fn step_333() -> Unit raise {
       @ringtheory.ring_monomorphism_imp_homomorphism(),
     ]),
   )
-  let t5747 = @parser.parse_term("x:B")
-  let t5748 = @parser.parse_term("m:C ring")
-  let t5749 = @parser.parse_term("l:B ring")
-  let t5750 = @parser.parse_term("k:A ring")
-  let t5751 = @parser.parse_term("g:B->C")
+  let t5747 = @term_syntax.parse_term("(x : B)")
+  let t5748 = @term_syntax.parse_term("(m : Ring[C])")
+  let t5749 = @term_syntax.parse_term("(l : Ring[B])")
+  let t5750 = @term_syntax.parse_term("(k : Ring[A])")
+  let t5751 = @term_syntax.parse_term("(g : (B) -> C)")
   let t5763 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
             @list.List([
-              @parser.parse_term("f:A->B"),
+              @term_syntax.parse_term("(f : (A) -> B)"),
               t5751,
               t5750,
               t5749,
@@ -58378,7 +58378,7 @@ fn step_333() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.then_tac(
-                    @tactics.x_gen_tac(@parser.parse_term("x:B")),
+                    @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)")),
                     @tactics.disch_tac,
                   ),
                   t5739,
@@ -58400,7 +58400,7 @@ fn step_333() -> Unit raise {
     @list.List([@sets.subset(), @sets.forall_in_image(), @sets.in_elim_thm()]),
   )
   let t5737 = @tactics.match_mp_tac(@sets.subset_antisym())
-  let t5736 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t5736 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t5734 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t5733 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(
@@ -58482,9 +58482,9 @@ fn step_333() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th_1 = x5724
-    let t5726 = @tactics.mp_tac(@bool.spec(@parser.parse_term("j:num"), th_1))
+    let t5726 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(j : Num)"), th_1))
     @tactics.then_tac(
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("i:num"), th_1)),
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(i : Num)"), th_1)),
       t5726,
     )
   })
@@ -58507,8 +58507,8 @@ fn step_333() -> Unit raise {
   ])
   let t5718 = @tactics.match_mp_tac(@theorems.mono_and())
   let t5717 = @simp.asm_rewrite_tac(@list.List([@sets.psubset()]))
-  let t5712 = @parser.parse_term("j:num")
-  let t5713 = @list.List([@parser.parse_term("i:num"), t5712])
+  let t5712 = @term_syntax.parse_term("(j : Num)")
+  let t5713 = @list.List([@term_syntax.parse_term("(i : Num)"), t5712])
   let t5716 = @tactics.first_x_assum(fn(
     x5715 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -58577,7 +58577,7 @@ fn step_333() -> Unit raise {
       }
     })(((x5714 : @kernel.Thm) => @bool.specl(t5713, x5714))(x5715))
   })
-  let t5708 = @parser.parse_term("j:num")
+  let t5708 = @term_syntax.parse_term("(j : Num)")
   let t5735 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(
@@ -58594,7 +58594,7 @@ fn step_333() -> Unit raise {
                           @tactics.then_tac(
                             @tactics.map_every(
                               @tactics.x_gen_tac,
-                              @list.List([@parser.parse_term("i:num"), t5708]),
+                              @list.List([@term_syntax.parse_term("(i : Num)"), t5708]),
                             ),
                             @tactics.disch_tac,
                           ),
@@ -58764,7 +58764,7 @@ fn step_333() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5704 = @tactics.subgoal_then(
-    @parser.parse_term("forall m n. m < n ==> (B:num->C->bool) m PSUBSET B n"),
+    @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < n → PSUBSET((B : (Num, C) -> Bool)(m), B(n))"),
     fn(
       x5701 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -58819,7 +58819,7 @@ fn step_333() -> Unit raise {
     @tactics.all_tac,
   ])
   let t5697 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. (B:num->C->bool) n subfield_of m"),
+    @term_syntax.parse_term("∀ n : Num, subfield_of((B : (Num, C) -> Bool)(n), (m : Ring[C]))"),
     fn(
       x5694 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -58872,7 +58872,7 @@ fn step_333() -> Unit raise {
       "B = \\n:num. ring_carrier(subfield_generated m\n                   (IMAGE (g:B->C) (A n) UNION b))",
     ),
   )
-  let t5685 = @parser.parse_term("y:num->B")
+  let t5685 = @term_syntax.parse_term("(y : (Num) -> B)")
   let t5692 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x5691 : @kernel.Thm,
@@ -58992,7 +58992,7 @@ fn step_333() -> Unit raise {
     @tactics.then_tac(
       @tactics.thenl(
         @tactics.then_tac(
-          @tactics.exists_tac(@parser.parse_term("(y:num->B) n")),
+          @tactics.exists_tac(@term_syntax.parse_term("(y : (Num) -> B)((n : Num))")),
           @tactics.conj_tac,
         ),
         t5676,
@@ -59011,7 +59011,7 @@ fn step_333() -> Unit raise {
     t5679,
   ])
   let t5672 = @simp.rewrite_tac(@list.List([@sets.psubset_alt()]))
-  let t5671 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t5671 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t5670 = @simp.rewrite_tac(@list.List([@sets.psubset_trans()]))
   let t5669 = @tactics.match_mp_tac(@arith.transitive_stepwise_lt())
   let t5667 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -59285,7 +59285,7 @@ fn step_333() -> Unit raise {
     ),
   )
   let t5644 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:num->B"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : (Num) -> B)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -59361,7 +59361,7 @@ fn step_333() -> Unit raise {
   let t5637 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("~(s SUBSET t) <=> ?x. x IN s /\\ ~(x IN t)"),
+        @term_syntax.parse_term("!SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) == (∃ x : _, IN(x, s) && !IN(x, t))"),
       ),
     ]),
   )
@@ -59460,15 +59460,15 @@ fn step_333() -> Unit raise {
   let t5626 = @simp.asm_simp_tac(
     @list.List([transcendence_basis_imp_algebraically_independent()]),
   )
-  let t5620 = @parser.parse_term("b:C->bool")
-  let t5621 = @parser.parse_term("m:C ring")
-  let t5622 = @parser.parse_term("l:B ring")
-  let t5623 = @parser.parse_term("k:A ring")
-  let t5624 = @parser.parse_term("g:B->C")
+  let t5620 = @term_syntax.parse_term("(b : (C) -> Bool)")
+  let t5621 = @term_syntax.parse_term("(m : Ring[C])")
+  let t5622 = @term_syntax.parse_term("(l : Ring[B])")
+  let t5623 = @term_syntax.parse_term("(k : Ring[A])")
+  let t5624 = @term_syntax.parse_term("(g : (B) -> C)")
   let t5625 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("f:A->B"),
+        @term_syntax.parse_term("(f : (A) -> B)"),
         t5624,
         t5623,
         t5622,
@@ -59547,7 +59547,7 @@ fn step_333() -> Unit raise {
       }
     })(t5617(x5618))
   })
-  let t5611 = @parser.parse_term("b:C->bool")
+  let t5611 = @term_syntax.parse_term("(b : (C) -> Bool)")
   let t5613 = @tactics.disch_then((x5612 : @kernel.Thm) => {
     @tactics.x_choose_tac(t5611, x5612)
   })
@@ -60399,7 +60399,7 @@ fn step_333() -> Unit raise {
     )
   })
   let t6085 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6084 = @tactics.x_gen_tac(@parser.parse_term("d:C->bool"))
+  let t6084 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : (C) -> Bool)"))
   let t6083 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t6079 = @simp.gen_rewrite_rule(
     fn(
@@ -60530,15 +60530,15 @@ fn step_333() -> Unit raise {
   ])
   let t6068 = @tactics.disch_then(@tactics.match_mp_tac)
   let t6067 = @simp.asm_rewrite_tac(@list.List([@trivia.i_o_id()]))
-  let t6062 = @parser.parse_term("m:C ring")
-  let t6063 = @parser.parse_term("l:B ring")
+  let t6062 = @term_syntax.parse_term("(m : Ring[C])")
+  let t6063 = @term_syntax.parse_term("(l : Ring[B])")
   let t6064 = @parser.parse_term(
     "subfield_generated l (IMAGE (f:A->B) (ring_carrier k) UNION b)",
   )
-  let t6065 = @parser.parse_term("g:B->C")
+  let t6065 = @term_syntax.parse_term("(g : (B) -> C)")
   let t6066 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("I:B->B"), t6065, t6064, t6063, t6062]),
+      @list.List([@term_syntax.parse_term("(I : (B) -> B)"), t6065, t6064, t6063, t6062]),
       main_lemma,
     ),
   )
@@ -60638,7 +60638,7 @@ fn step_333() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.then_tac(
-                  @tactics.exists_tac(@parser.parse_term("b:B->bool")),
+                  @tactics.exists_tac(@term_syntax.parse_term("(b : (B) -> Bool)")),
                   t6046,
                 ),
                 t6047,
@@ -60777,15 +60777,15 @@ fn step_333() -> Unit raise {
   ])
   let t6033 = @tactics.disch_then(@tactics.match_mp_tac)
   let t6032 = @simp.rewrite_tac(@list.List([@trivia.i_o_id()]))
-  let t6027 = @parser.parse_term("l:B ring")
+  let t6027 = @term_syntax.parse_term("(l : Ring[B])")
   let t6028 = @parser.parse_term(
     "subfield_generated l (IMAGE (f:A->B) (ring_carrier k) UNION b)",
   )
-  let t6029 = @parser.parse_term("k:A ring")
-  let t6030 = @parser.parse_term("I:B->B")
+  let t6029 = @term_syntax.parse_term("(k : Ring[A])")
+  let t6030 = @term_syntax.parse_term("(I : (B) -> B)")
   let t6031 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t6030, t6029, t6028, t6027]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t6030, t6029, t6028, t6027]),
       finitely_generated_extension_trans(),
     ),
   )
@@ -60800,7 +60800,7 @@ fn step_333() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t6025 = @tactics.subgoal_then(@parser.parse_term("FINITE(b:B->bool)"), fn(
+  let t6025 = @tactics.subgoal_then(@term_syntax.parse_term("FINITE((b : (B) -> Bool))"), fn(
     x6022 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -60846,7 +60846,7 @@ fn step_333() -> Unit raise {
       s6023(x6024)
     }
   })
-  let t6019 = @parser.parse_term("c:C->bool")
+  let t6019 = @term_syntax.parse_term("(c : (C) -> Bool)")
   let t6021 = @tactics.disch_then((x6020 : @kernel.Thm) => {
     @tactics.x_choose_tac(t6019, x6020)
   })
@@ -60854,23 +60854,23 @@ fn step_333() -> Unit raise {
     @meson.asm_meson_tac(@list.List([field_extension_trans()])),
     @tactics.all_tac,
   ])
-  let t6017 = @tactics.x_gen_tac(@parser.parse_term("b:B->bool"))
+  let t6017 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : (B) -> Bool)"))
   let t6016 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
-  let t6013 = @parser.parse_term("l:B ring")
-  let t6014 = @parser.parse_term("k:A ring")
+  let t6013 = @term_syntax.parse_term("(l : Ring[B])")
+  let t6014 = @term_syntax.parse_term("(k : Ring[A])")
   let t6015 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t6014, t6013]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t6014, t6013]),
       transcendence_basis_exists(),
     ),
   )
-  let t6010 = @parser.parse_term("m:C ring")
-  let t6011 = @parser.parse_term("k:A ring")
+  let t6010 = @term_syntax.parse_term("(m : Ring[C])")
+  let t6011 = @term_syntax.parse_term("(k : Ring[A])")
   let t6012 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("(g:B->C) o (f:A->B)"), t6011, t6010]),
+      @list.List([@term_syntax.parse_term("o((g : (B) -> C), (f : (A) -> B))"), t6011, t6010]),
       transcendence_basis_exists(),
     ),
   )
@@ -60975,7 +60975,7 @@ fn step_333() -> Unit raise {
     @tactics.match_mp_tac(t5997(x5998))
   })
   let t5996 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5995 = @tactics.x_gen_tac(@parser.parse_term("c:C->bool"))
+  let t5995 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (C) -> Bool)"))
   let t5994 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t5993 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -61315,7 +61315,7 @@ fn step_335() -> Unit raise {
   let t6112 = @simp.simp_tac(@list.List([algebraically_closed_field()]))
   algebraically_closed_field_imp_field_c.set(
     @tactics.prove(
-      @parser.parse_term("forall k:A ring. algebraically_closed_field k ==> field k"),
+      @term_syntax.parse_term("∀ k : Ring[A], algebraically_closed_field(k) → field(k)"),
       t6112,
     ),
   )
@@ -61365,7 +61365,7 @@ fn step_336() -> Unit raise {
     )
   })
   let t6174 = @tactics.undisch_tac(
-    @parser.parse_term("ring_isomorphism(k:A ring,l:B ring) (f:A->B)"),
+    @term_syntax.parse_term("ring_isomorphism(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B))"),
   )
   let t6173 = @tactics.disch_then(fn(
     x6172 : @kernel.Thm,
@@ -61447,13 +61447,13 @@ fn step_336() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t6160 = @parser.parse_term("(g:B->A) o (p:(1->num)->B)")
-  let t6161 = @parser.parse_term("f:A->B")
-  let t6162 = @parser.parse_term("y:A")
-  let t6163 = @parser.parse_term("l:B ring")
+  let t6160 = @term_syntax.parse_term("o((g : (B) -> A), (p : ((Unit) -> Num) -> B))")
+  let t6161 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t6162 = @term_syntax.parse_term("(y : A)")
+  let t6163 = @term_syntax.parse_term("(l : Ring[B])")
   let t6164 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6163, t6162, t6161, t6160]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6163, t6162, t6161, t6160]),
       @ringtheory.poly_eval_homomorphic_image(),
     ),
   )
@@ -61473,7 +61473,7 @@ fn step_336() -> Unit raise {
     ),
   )
   let t6155 = @tactics.first_assum(@tactics.match_mp_tac)
-  let t6154 = @tactics.x_gen_tac(@parser.parse_term("m:1->num"))
+  let t6154 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : (Unit) -> Num)"))
   let t6159 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -61496,7 +61496,7 @@ fn step_336() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6153 = @tactics.subgoal_then(
-    @parser.parse_term("(f:A->B) o (g:B->A) o (p:(1->num)->B) = p"),
+    @term_syntax.parse_term("o((f : (A) -> B), o((g : (B) -> A), (p : ((Unit) -> Num) -> B))) == p"),
     fn(
       x6150 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -61557,7 +61557,7 @@ fn step_336() -> Unit raise {
     t6148,
   ])
   let t6147 = @tactics.subgoal_then(
-    @parser.parse_term("(f:A->B) y IN ring_carrier l"),
+    @term_syntax.parse_term("IN((f : (A) -> B)((y : A)), ring_carrier((l : Ring[B])))"),
     fn(
       x6144 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -61605,12 +61605,12 @@ fn step_336() -> Unit raise {
       }
     },
   )
-  let t6143 = @tactics.exists_tac(@parser.parse_term("(f:A->B) y"))
+  let t6143 = @tactics.exists_tac(@term_syntax.parse_term("(f : (A) -> B)((y : A))"))
   let t6142 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : A)"))(@tactics.strip_assume_tac),
   )
   let t6141 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
-  let t6137 = @parser.parse_term("(g:B->A) o (p:(1->num)->B)")
+  let t6137 = @term_syntax.parse_term("o((g : (B) -> A), (p : ((Unit) -> Num) -> B))")
   let t6140 = @tactics.first_x_assum(fn(
     x6139 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -61697,7 +61697,7 @@ fn step_336() -> Unit raise {
     ),
     @tactics.strip_assume_tac,
   )
-  let t6131 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->B"))
+  let t6131 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> B)"))
   let t6130 = @list.List([
     @meson.asm_meson_tac(
       @list.List([
@@ -61719,7 +61719,7 @@ fn step_336() -> Unit raise {
     },
     @list.List([@ringtheory.ring_isomorphism()]),
   )
-  let t6125 = @tactics.x_choose_then(@parser.parse_term("g:B->A"))(fn(
+  let t6125 = @tactics.x_choose_then(@term_syntax.parse_term("(g : (B) -> A)"))(fn(
     x6120 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -62037,7 +62037,7 @@ fn step_337() -> Unit raise {
     },
     @list.List([@ringtheory.ring_isomorphism()]),
   )
-  let t6181 = @parser.parse_term("g:B->A")
+  let t6181 = @term_syntax.parse_term("(g : (B) -> A)")
   let t6186 = @tactics.first_assum(fn(
     x6185 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -62207,7 +62207,7 @@ fn step_338() -> Unit raise {
     ),
   )
   let t6275 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:A")), t6273),
+    @tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(x : A)")), t6273),
     t6274,
   )
   let t6265 = @tactics.disch_then(fn(
@@ -62263,14 +62263,14 @@ fn step_338() -> Unit raise {
       @ringtheory.poly_deg_1(),
     ]),
   )
-  let t6259 = @parser.parse_term("poly_1 (k:A ring):(1->num)->A")
-  let t6260 = @parser.parse_term("P:(1->num)->A")
+  let t6259 = @term_syntax.parse_term("(poly_1 : (Ring[A], (Unit) -> Num) -> A)((k : Ring[A]))")
+  let t6260 = @term_syntax.parse_term("(P : ((Unit) -> Num) -> A)")
   let t6266 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
-            @list.List([@parser.parse_term("k:A ring"), t6260, t6259]),
+            @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6260, t6259]),
             @ringtheory.poly_deg_add(),
           ),
         ),
@@ -62308,7 +62308,7 @@ fn step_338() -> Unit raise {
   let t6256 = @simp.rewrite_tac(
     @list.List([@class.not_imp(), @class.not_exists_thm()]),
   )
-  let t6252 = @parser.parse_term("poly_add (k:A ring) P (poly_1 k:(1->num)->A)")
+  let t6252 = @term_syntax.parse_term("poly_add((k : Ring[A]), (P : ((Unit) -> Num) -> A), poly_1(k))")
   let t6255 = @tactics.first_x_assum(fn(
     x6254 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -62382,7 +62382,7 @@ fn step_338() -> Unit raise {
   )
   let t6245 = @simp.asm_simp_tac(@list.List([@ringtheory.poly_eval_const()]))
   let t6244 = @simp.rewrite_tac(@list.List([@ringtheory.ring_0_v1()]))
-  let t6241 = @parser.parse_term("ring_0 (k:A ring)")
+  let t6241 = @term_syntax.parse_term("ring_0((k : Ring[A]))")
   let t6247 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -62460,7 +62460,7 @@ fn step_338() -> Unit raise {
     ),
     t6246,
   ])
-  let t6237 = @tactics.subgoal_then(@parser.parse_term("(c:A) = ring_0 k"), fn(
+  let t6237 = @tactics.subgoal_then(@term_syntax.parse_term("(c : A) == ring_0((k : Ring[A]))"), fn(
     x6234 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -62507,12 +62507,12 @@ fn step_338() -> Unit raise {
     }
   })
   let t6233 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : A)"))(@tactics.strip_assume_tac),
   )
   let t6232 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.ring_polynomial_v1()]),
   )
-  let t6231 = @parser.parse_term("P:(1->num)->A")
+  let t6231 = @term_syntax.parse_term("(P : ((Unit) -> Num) -> A)")
   let t6248 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -62522,7 +62522,7 @@ fn step_338() -> Unit raise {
               @tactics.disch_tac,
               @tactics.mp_tac(
                 @bool.ispecl(
-                  @list.List([@parser.parse_term("k:A ring"), t6231]),
+                  @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6231]),
                   @ringtheory.poly_deg_eq_0(),
                 ),
               ),
@@ -62538,7 +62538,7 @@ fn step_338() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6230 = @tactics.subgoal_then(
-    @parser.parse_term("~(poly_deg (k:A ring) (P:(1->num)->A) = 0)"),
+    @term_syntax.parse_term("!(poly_deg((k : Ring[A]), (P : ((Unit) -> Num) -> A)) == 0)"),
     fn(
       x6227 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -62597,7 +62597,7 @@ fn step_338() -> Unit raise {
     ]),
   )
   let t6224 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6223 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t6223 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t6222 = @simp.asm_simp_tac(
     @list.List([
       @ringtheory.integral_domain_product_eq_0(),
@@ -62620,7 +62620,7 @@ fn step_338() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.then_tac(
-                    @tactics.x_gen_tac(@parser.parse_term("x:A")),
+                    @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)")),
                     @tactics.disch_tac,
                   ),
                   t6220,
@@ -62694,11 +62694,11 @@ fn step_338() -> Unit raise {
     @list.List([@ringtheory.poly_x_minus_a_nonzero()]),
   )
   let t6213 = @simp.rewrite_tac(@list.List([@ringtheory.poly_ring_clauses()]))
-  let t6212 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t6212 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t6211 = @simp.rewrite_tac(
     @list.List([
       @class.not_exists_thm(),
-      @class.taut(@parser.parse_term("~(p /\\ q) <=> p ==> ~q")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (p → !q)")),
     ]),
   )
   let t6210 = @simp.asm_simp_tac(
@@ -62728,7 +62728,7 @@ fn step_338() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6209 = @tactics.subgoal_then(
-    @parser.parse_term("~(P = ring_0(poly_ring (k:A ring) (:1)))"),
+    @term_syntax.parse_term("!((P : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV)))"),
     fn(
       x6206 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -62782,7 +62782,7 @@ fn step_338() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6203 = @tactics.subgoal_then(
-    @parser.parse_term("P IN ring_carrier(poly_ring (k:A ring) (:1))"),
+    @term_syntax.parse_term("IN((P : ((Unit) -> Num) -> A), ring_carrier(poly_ring((k : Ring[A]), UNIV)))"),
     fn(
       x6200 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -62840,7 +62840,7 @@ fn step_338() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6197 = @tactics.subgoal_then(
-    @parser.parse_term("~trivial_ring (k:A ring)"),
+    @term_syntax.parse_term("!trivial_ring((k : Ring[A]))"),
     fn(
       x6194 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -62976,10 +62976,10 @@ pub fn algebraically_closed_field_imp_infinite() -> @kernel.Thm {
 /// ALGEBRAICALLY_CLOSED_FIELD_NO_PROPER_ALGEBRAIC_EXTENSION
 fn step_339() -> Unit raise {
   let t6472 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6466 = @parser.parse_term("p0:(1->num)->A")
-  let t6467 = @parser.parse_term("x:B")
+  let t6466 = @term_syntax.parse_term("(p0 : ((Unit) -> Num) -> A)")
+  let t6467 = @term_syntax.parse_term("(x : B)")
   let t6468 = @list.List([
-    @parser.parse_term("poly_deg (k:A ring) (p0:(1->num)->A)"),
+    @term_syntax.parse_term("poly_deg((k : Ring[A]), (p0 : ((Unit) -> Num) -> A))"),
     t6467,
     t6466,
   ])
@@ -63052,12 +63052,12 @@ fn step_339() -> Unit raise {
     })(((x6469 : @kernel.Thm) => @bool.specl(t6468, x6469))(x6470))
   })
   let t6462 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("p0:(1->num)->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(p0 : ((Unit) -> Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t6461 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6457 = @parser.parse_term("x:B")
+  let t6457 = @term_syntax.parse_term("(x : B)")
   let t6460 = @tactics.first_x_assum(fn(
     x6459 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -63126,7 +63126,7 @@ fn step_339() -> Unit raise {
       }
     })(((x6458 : @kernel.Thm) => @bool.spec(t6457, x6458))(x6459))
   })
-  let t6453 = @tactics.x_gen_tac(@parser.parse_term("x:B"))
+  let t6453 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : B)"))
   let t6473 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -63155,8 +63155,8 @@ fn step_339() -> Unit raise {
   let t6450 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.poly_ring_clauses()]),
   )
-  let t6445 = @parser.parse_term("q:(1->num)->A")
-  let t6446 = @list.List([@parser.parse_term("x:B"), t6445])
+  let t6445 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
+  let t6446 = @list.List([@term_syntax.parse_term("(x : B)"), t6445])
   let t6449 = @tactics.disch_then(fn(
     x6448 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -63226,7 +63226,7 @@ fn step_339() -> Unit raise {
     })(((x6447 : @kernel.Thm) => @bool.specl(t6446, x6447))(x6448))
   })
   let t6441 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6438 = @parser.parse_term("poly_deg (k:A ring) (q:(1->num)->A)")
+  let t6438 = @term_syntax.parse_term("poly_deg((k : Ring[A]), (q : ((Unit) -> Num) -> A))")
   let t6451 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -63306,7 +63306,7 @@ fn step_339() -> Unit raise {
   )
   let t6434 = @meson.asm_meson_tac(@list.List([@ringtheory.ring_sub_eq_0()]))
   let t6433 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6432 = @tactics.exists_tac(@parser.parse_term("y:A"))
+  let t6432 = @tactics.exists_tac(@term_syntax.parse_term("(y : A)"))
   let t6452 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -63382,7 +63382,7 @@ fn step_339() -> Unit raise {
   let t6418 = @parser.parse_term(
     "poly_eval (l:B ring) ((f:A->B) o (q:(1->num)->A)) (x:B)",
   )
-  let t6419 = @parser.parse_term("ring_sub (l:B ring) (x:B) ((f:A->B) y)")
+  let t6419 = @term_syntax.parse_term("ring_sub((l : Ring[B]), (x : B), (f : (A) -> B)((y : A)))")
   let t6430 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -63393,7 +63393,7 @@ fn step_339() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.mp_tac(
                     @bool.ispecl(
-                      @list.List([@parser.parse_term("l:B ring"), t6419, t6418]),
+                      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t6419, t6418]),
                       @ringtheory.field_mul_eq_0(),
                     ),
                   ),
@@ -63576,10 +63576,10 @@ fn step_339() -> Unit raise {
       @ringtheory.ring_powerseries_const(),
     ]),
   )
-  let t6395 = @parser.parse_term("poly_const k (y:A):(1->num)->A")
-  let t6396 = @parser.parse_term("poly_var k one:(1->num)->A")
-  let t6397 = @parser.parse_term("f:A->B")
-  let t6398 = @parser.parse_term("l:B ring")
+  let t6395 = @term_syntax.parse_term("(poly_const : (Ring[A], A, (Unit) -> Num) -> A)((k : Ring[A]), (y : A))")
+  let t6396 = @term_syntax.parse_term("poly_var((k : Ring[A]), one)")
+  let t6397 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t6398 = @term_syntax.parse_term("(l : Ring[B])")
   let t6411 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -63589,7 +63589,7 @@ fn step_339() -> Unit raise {
               @tactics.mp_tac(
                 @bool.ispecl(
                   @list.List([
-                    @parser.parse_term("k:A ring"),
+                    @term_syntax.parse_term("(k : Ring[A])"),
                     t6398,
                     t6397,
                     t6396,
@@ -63730,13 +63730,13 @@ fn step_339() -> Unit raise {
   )
   let t6382 = @simp.asm_rewrite_tac(@list.List([]))
   let t6381 = @tactics.undisch_tac(
-    @parser.parse_term("poly_deg (k:A ring) (p:(1->num)->A) = n"),
+    @term_syntax.parse_term("poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A)) == (n : Num)"),
   )
   let t6380 = @simp.asm_simp_tac(
     @list.List([@ringtheory.field_imp_integral_domain()]),
   )
-  let t6378 = @parser.parse_term("q:(1->num)->A")
-  let t6379 = @parser.parse_term("y:A")
+  let t6378 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
+  let t6379 = @term_syntax.parse_term("(y : A)")
   let t6383 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -63744,7 +63744,7 @@ fn step_339() -> Unit raise {
           @tactics.then_tac(
             @tactics.mp_tac(
               @bool.ispecl(
-                @list.List([@parser.parse_term("k:A ring"), t6379, t6378]),
+                @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6379, t6378]),
                 @ringtheory.poly_deg_mul_x_minus_a(),
               ),
             ),
@@ -63759,7 +63759,7 @@ fn step_339() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6377 = @tactics.subgoal_then(
-    @parser.parse_term("poly_deg (k:A ring) (q:(1->num)->A) < n"),
+    @term_syntax.parse_term("poly_deg((k : Ring[A]), (q : ((Unit) -> Num) -> A)) < (n : Num)"),
     fn(
       x6374 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -63844,7 +63844,7 @@ fn step_339() -> Unit raise {
       @tactics.then_tac(
         @tactics.disch_tac,
         @tactics.subgoal_then(
-          @parser.parse_term("(p:(1->num)->A) = poly_0 (k:A ring)"),
+          @term_syntax.parse_term("(p : ((Unit) -> Num) -> A) == poly_0((k : Ring[A]))"),
           fn(
             x6363 : @kernel.Thm,
           ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -63898,7 +63898,7 @@ fn step_339() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6362 = @tactics.subgoal_then(
-    @parser.parse_term("~(q:(1->num)->A = poly_0 (k:A ring))"),
+    @term_syntax.parse_term("!((q : ((Unit) -> Num) -> A) == poly_0((k : Ring[A])))"),
     fn(
       x6359 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -63977,15 +63977,15 @@ fn step_339() -> Unit raise {
     ]),
   )
   let t6351 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6349 = @parser.parse_term("p:(1->num)->A")
-  let t6350 = @parser.parse_term("y:A")
+  let t6349 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t6350 = @term_syntax.parse_term("(y : A)")
   let t6354 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.mp_tac(
             @bool.ispecl(
-              @list.List([@parser.parse_term("k:A ring"), t6350, t6349]),
+              @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6350, t6349]),
               @ringtheory.poly_divides_x_minus_root(),
             ),
           ),
@@ -63997,7 +63997,7 @@ fn step_339() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t6347 = @tactics.x_choose_then(@parser.parse_term("q:(1->num)->A"))(
+  let t6347 = @tactics.x_choose_then(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))(
     @tactics.strip_assume_tac,
   )
   let t6348 = @tactics.subgoal_then(
@@ -64007,13 +64007,13 @@ fn step_339() -> Unit raise {
     t6347,
   )
   let t6346 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : A)"))(@tactics.strip_assume_tac),
   )
   let t6345 = @list.List([
     @simp.asm_rewrite_tac(@list.List([])),
     @tactics.all_tac,
   ])
-  let t6341 = @parser.parse_term("p:(1->num)->A")
+  let t6341 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6344 = @tactics.first_assum(fn(
     x6343 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -64084,12 +64084,12 @@ fn step_339() -> Unit raise {
   })
   let t6336 = @meson.asm_meson_tac(@list.List([]))
   let t6335 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6331 = @parser.parse_term("c:A")
-  let t6332 = @parser.parse_term("f:A->B")
-  let t6333 = @parser.parse_term("l:B ring")
+  let t6331 = @term_syntax.parse_term("(c : A)")
+  let t6332 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t6333 = @term_syntax.parse_term("(l : Ring[B])")
   let t6334 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6333, t6332, t6331]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6333, t6332, t6331]),
       @ringtheory.ring_monomorphism_eq_0(),
     ),
   )
@@ -64164,7 +64164,7 @@ fn step_339() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6321 = @tactics.subgoal_then(
-    @parser.parse_term("(f:A->B) c IN ring_carrier (l:B ring)"),
+    @term_syntax.parse_term("IN((f : (A) -> B)((c : A)), ring_carrier((l : Ring[B])))"),
     fn(
       x6318 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -64236,7 +64236,7 @@ fn step_339() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6317 = @tactics.subgoal_then(
-    @parser.parse_term("(f:A->B) c = ring_0 (l:B ring)"),
+    @term_syntax.parse_term("(f : (A) -> B)((c : A)) == ring_0((l : Ring[B]))"),
     fn(
       x6314 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -64291,7 +64291,7 @@ fn step_339() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6312 = @tactics.subgoal_then(
-    @parser.parse_term("~(c = ring_0 (k:A ring))"),
+    @term_syntax.parse_term("!((c : A) == ring_0((k : Ring[A])))"),
     fn(
       x6309 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -64340,7 +64340,7 @@ fn step_339() -> Unit raise {
     },
   )
   let t6308 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : A)"))(@tactics.strip_assume_tac),
   )
   let t6307 = @simp.asm_rewrite_tac(@list.List([]))
   let t6305 = @drule.match_mp(@ringtheory.poly_deg_eq_0())
@@ -64453,13 +64453,13 @@ fn step_339() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t6301 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t6301 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t6300 = @list.List([
     @simp.asm_rewrite_tac(@list.List([@ringtheory.ring_polynomial_v1()])),
     @tactics.all_tac,
   ])
   let t6299 = @tactics.subgoal_then(
-    @parser.parse_term("ring_polynomial (k:A ring) (p:(1->num)->A)"),
+    @term_syntax.parse_term("ring_polynomial((k : Ring[A]), (p : ((Unit) -> Num) -> A))"),
     fn(
       x6296 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -64507,12 +64507,12 @@ fn step_339() -> Unit raise {
       }
     },
   )
-  let t6294 = @parser.parse_term("p:(1->num)->A")
+  let t6294 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6295 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:B"), t6294]),
+    @list.List([@term_syntax.parse_term("(x : B)"), t6294]),
   )
-  let t6293 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t6293 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t6474 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -64803,16 +64803,16 @@ fn step_340() -> Unit raise {
     @simp.asm_simp_tac(@list.List([@ringtheory.ring_homomorphism_poly_eval()])),
     @tactics.all_tac,
   ])
-  let t6588 = @parser.parse_term("p:(1->num)->A")
-  let t6589 = @parser.parse_term("q:(1->num)->A")
+  let t6588 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t6589 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
   let t6590 = @parser.parse_term(
     "\\(pp:(1->num)->A). poly_eval (k:A ring) pp (x:A)",
   )
-  let t6591 = @parser.parse_term("k:A ring")
+  let t6591 = @term_syntax.parse_term("(k : Ring[A])")
   let t6592 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("poly_ring (k:A ring) (:1)"),
+        @term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"),
         t6591,
         t6590,
         t6589,
@@ -64822,9 +64822,9 @@ fn step_340() -> Unit raise {
     ),
   )
   let t6587 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6586 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t6586 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t6585 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("x:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(x : A)"))(@tactics.strip_assume_tac),
   )
   let t6584 = @list.List([
     @meson.asm_meson_tac(
@@ -64837,15 +64837,15 @@ fn step_340() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t6582 = @parser.parse_term("q:(1->num)->A")
+  let t6582 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
   let t6583 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6582]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6582]),
       @ringtheory.poly_deg_1_root(),
     ),
   )
   let t6581 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("q:(1->num)->A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -64867,16 +64867,16 @@ fn step_340() -> Unit raise {
   let t6577 = @simp.asm_simp_tac(
     @list.List([@ringtheory.integral_domain_poly_ring()]),
   )
-  let t6575 = @parser.parse_term("p:(1->num)->A")
+  let t6575 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6576 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("poly_ring (k:A ring) (:1)"), t6575]),
+      @list.List([@term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"), t6575]),
       @ringtheory.noetherian_domain_irreducible_factor_exists(),
     ),
   )
   let t6573 = @simp.asm_rewrite_tac(@list.List([@ringtheory.poly_deg_const()]))
   let t6572 = @tactics.undisch_tac(
-    @parser.parse_term("~(poly_deg (k:A ring) (p:(1->num)->A) = 0)"),
+    @term_syntax.parse_term("!(poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A)) == 0)"),
   )
   let t6574 = @list.List([
     @tactics.then_tac(
@@ -64892,7 +64892,7 @@ fn step_340() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6571 = @tactics.subgoal_then(
-    @parser.parse_term("~ring_unit (poly_ring (k:A ring) (:1)) (p:(1->num)->A)"),
+    @term_syntax.parse_term("!ring_unit(poly_ring((k : Ring[A]), UNIV), (p : ((Unit) -> Num) -> A))"),
     fn(
       x6568 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -64961,7 +64961,7 @@ fn step_340() -> Unit raise {
     ),
     @tactics.strip_assume_tac,
   )
-  let t6564 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t6564 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t6595 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.thenl(
@@ -65074,11 +65074,11 @@ fn step_340() -> Unit raise {
     t6562,
   ])
   let t6558 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6555 = @parser.parse_term("poly_const (k:A ring) (u:A):(1->num)->A")
-  let t6556 = @parser.parse_term("x:A")
+  let t6555 = @term_syntax.parse_term("(poly_const : (Ring[A], A, (Unit) -> Num) -> A)((k : Ring[A]), (u : A))")
+  let t6556 = @term_syntax.parse_term("(x : A)")
   let t6557 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6556, t6555]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6556, t6555]),
       @ringtheory.poly_deg_mul_x_minus_a(),
     ),
   )
@@ -65093,7 +65093,7 @@ fn step_340() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6551 = @tactics.subgoal_then(
-    @parser.parse_term("(u:A) IN ring_carrier k"),
+    @term_syntax.parse_term("IN((u : A), ring_carrier((k : Ring[A])))"),
     fn(
       x6548 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -65142,24 +65142,24 @@ fn step_340() -> Unit raise {
     },
   )
   let t6547 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("u:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(u : A)"))(@tactics.strip_assume_tac),
   )
   let t6546 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_unit_poly_domain()]),
   )
   let t6545 = @tactics.undisch_tac(
-    @parser.parse_term("ring_unit (poly_ring (k:A ring) (:1)) (q:(1->num)->A)"),
+    @term_syntax.parse_term("ring_unit(poly_ring((k : Ring[A]), UNIV), (q : ((Unit) -> Num) -> A))"),
   )
   let t6543 = @simp.asm_rewrite_tac(@list.List([@ringtheory.poly_deg_const()]))
-  let t6541 = @parser.parse_term("x:A")
+  let t6541 = @term_syntax.parse_term("(x : A)")
   let t6542 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("k:A ring"), t6541]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6541]),
       @ringtheory.poly_deg_x_minus_a(),
     ),
   )
   let t6540 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("u:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(u : A)"))(@tactics.strip_assume_tac),
   )
   let t6539 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_unit_poly_domain()]),
@@ -65204,9 +65204,9 @@ fn step_340() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t6530 = @parser.parse_term("q:(1->num)->A")
+  let t6530 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
   let t6531 = @list.List([
-    @parser.parse_term("poly_sub (k:A ring) (poly_var k one) (poly_const k x)"),
+    @term_syntax.parse_term("poly_sub((k : Ring[A]), poly_var(k, one), poly_const(k, (x : A)))"),
     t6530,
   ])
   let t6534 = @tactics.first_x_assum(fn(
@@ -65372,7 +65372,7 @@ fn step_340() -> Unit raise {
             s6524(x6525)
           }
         },
-        @tactics.x_choose_then(@parser.parse_term("q:(1->num)->A"))(
+        @tactics.x_choose_then(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))(
           @tactics.strip_assume_tac,
         ),
       ),
@@ -65392,16 +65392,16 @@ fn step_340() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t6515 = @parser.parse_term("p:(1->num)->A")
-  let t6516 = @parser.parse_term("x:A")
+  let t6515 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t6516 = @term_syntax.parse_term("(x : A)")
   let t6517 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6516, t6515]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6516, t6515]),
       @ringtheory.poly_divides_x_minus_root(),
     ),
   )
   let t6514 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("x:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(x : A)"))(@tactics.strip_assume_tac),
   )
   let t6513 = @simp.asm_rewrite_tac(
     @list.List([
@@ -65410,7 +65410,7 @@ fn step_340() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t6509 = @parser.parse_term("p:(1->num)->A")
+  let t6509 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6512 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -65608,15 +65608,15 @@ fn step_340() -> Unit raise {
   let t6494 = @meson.asm_meson_tac(@list.List([@ringtheory.poly_const_0()]))
   let t6493 = @simp.asm_simp_tac(@list.List([@ringtheory.field_unit()]))
   let t6492 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6491 = @tactics.exists_tac(@parser.parse_term("a:A"))
+  let t6491 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
   let t6490 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(@tactics.strip_assume_tac),
   )
   let t6489 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6487 = @parser.parse_term("p:(1->num)->A")
+  let t6487 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6488 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6487]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6487]),
       @ringtheory.poly_deg_eq_0(),
     ),
   )
@@ -65663,7 +65663,7 @@ fn step_340() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6484 = @tactics.subgoal_then(
-    @parser.parse_term("~(poly_deg (k:A ring) (p:(1->num)->A) = 0)"),
+    @term_syntax.parse_term("!(poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A)) == 0)"),
     fn(
       x6481 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -65734,7 +65734,7 @@ fn step_340() -> Unit raise {
       @sets.in_elim_thm(),
     ]),
   )
-  let t6477 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t6477 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t6476 = @list.List([
     @meson.asm_meson_tac(@list.List([algebraically_closed_field_imp_field()])),
     @tactics.all_tac,
@@ -65915,11 +65915,11 @@ fn step_342() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t6636 = @parser.parse_term("q:(1->num)->A")
-  let t6637 = @parser.parse_term("a:A")
+  let t6636 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
+  let t6637 = @term_syntax.parse_term("(a : A)")
   let t6638 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6637, t6636]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6637, t6636]),
       @ringtheory.poly_deg_mul_x_minus_a(),
     ),
   )
@@ -65956,7 +65956,7 @@ fn step_342() -> Unit raise {
       @tactics.then_tac(
         @tactics.disch_tac,
         @tactics.subgoal_then(
-          @parser.parse_term("(p:(1->num)->A) = poly_0 (k:A ring)"),
+          @term_syntax.parse_term("(p : ((Unit) -> Num) -> A) == poly_0((k : Ring[A]))"),
           fn(
             x6626 : @kernel.Thm,
           ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -66010,7 +66010,7 @@ fn step_342() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6625 = @tactics.subgoal_then(
-    @parser.parse_term("~((q:(1->num)->A) = poly_0 (k:A ring))"),
+    @term_syntax.parse_term("!((q : ((Unit) -> Num) -> A) == poly_0((k : Ring[A])))"),
     fn(
       x6622 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -66065,8 +66065,8 @@ fn step_342() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t6620 = @tactics.exists_tac(@parser.parse_term("q:(1->num)->A"))
-  let t6619 = @tactics.exists_tac(@parser.parse_term("a:A"))
+  let t6620 = @tactics.exists_tac(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))
+  let t6619 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
   let t6618 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -66162,7 +66162,7 @@ fn step_342() -> Unit raise {
             s6616(x6617)
           }
         },
-        @tactics.x_choose_then(@parser.parse_term("q:(1->num)->A"))(
+        @tactics.x_choose_then(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))(
           @tactics.strip_assume_tac,
         ),
       ),
@@ -66177,11 +66177,11 @@ fn step_342() -> Unit raise {
     ]),
   )
   let t6610 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6607 = @parser.parse_term("p:(1->num)->A")
-  let t6608 = @parser.parse_term("a:A")
+  let t6607 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t6608 = @term_syntax.parse_term("(a : A)")
   let t6609 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t6608, t6607]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6608, t6607]),
       @ringtheory.poly_divides_x_minus_root(),
     ),
   )
@@ -66199,7 +66199,7 @@ fn step_342() -> Unit raise {
     @meson.asm_meson_tac(@list.List([algebraically_closed_field_imp_field()])),
     @tactics.all_tac,
   ])
-  let t6603 = @tactics.subgoal_then(@parser.parse_term("field (k:A ring)"), fn(
+  let t6603 = @tactics.subgoal_then(@term_syntax.parse_term("field((k : Ring[A]))"), fn(
     x6600 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -66245,7 +66245,7 @@ fn step_342() -> Unit raise {
       s6601(x6602)
     }
   })
-  let t6599 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t6599 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t6640 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -66343,7 +66343,7 @@ fn step_343() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6732 = @tactics.subgoal_then(
-    @parser.parse_term("poly_mul (k:A ring) = ring_mul\n    (poly_ring k (:1))"),
+    @term_syntax.parse_term("(poly_mul : (Ring[A], ((Unit) -> Num) -> A, ((Unit) -> Num) -> A, (Unit) -> Num) -> A)((k : Ring[A])) == (ring_mul : (Ring[((Unit) -> Num) -> A], ((Unit) -> Num) -> A, ((Unit) -> Num) -> A, (Unit) -> Num) -> A)((poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])(k, (UNIV : (Unit) -> Bool)))"),
     fn(
       x6729 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -66393,12 +66393,12 @@ fn step_343() -> Unit raise {
   )
   let t6728 = @simp.asm_rewrite_tac(@list.List([]))
   let t6726 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6725 = @tactics.x_gen_tac(@parser.parse_term("j:num"))
+  let t6725 = @tactics.x_gen_tac(@term_syntax.parse_term("(j : Num)"))
   let t6724 = @simp.rewrite_tac(@list.List([@iterate.in_numseg()]))
   let t6723 = @tactics.match_mp_tac(@ringtheory.ring_product_eq())
   let t6722 = @simp.rewrite_tac(@list.List([@ringtheory.poly_ring_clauses()]))
   let t6721 = @simp.asm_rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("~(SUC n <= n)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("!(SUC((n : Num)) <= n)"))]),
   )
   let t6727 = @list.List([
     @tactics.then_tac(
@@ -66414,7 +66414,7 @@ fn step_343() -> Unit raise {
                         @simp.rewrite_tac(
                           @list.List([
                             @ringtheory.ring_product_clauses_numseg_alt(),
-                            @int.arith_rule(@parser.parse_term("1 <= SUC n")),
+                            @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))")),
                           ]),
                         ),
                         t6721,
@@ -66501,7 +66501,7 @@ fn step_343() -> Unit raise {
         @tactics.thenl(
           @tactics.then_tac(
             @tactics.then_tac(
-              @tactics.x_gen_tac(@parser.parse_term("i:num")),
+              @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)")),
               @tactics.strip_tac,
             ),
             @class.cond_cases_tac,
@@ -66516,14 +66516,14 @@ fn step_343() -> Unit raise {
   ])
   let t6713 = @simp.asm_rewrite_tac(@list.List([]))
   let t6712 = @tactics.exists_tac(
-    @parser.parse_term("\\i:num. if i = SUC n then (a0:A) else (a':num->A) i"),
+    @term_syntax.parse_term("(i : Num) => if i == SUC((n : Num)) { (a0 : A) } else { (a' : (Num) -> A)(i) }"),
   )
-  let t6711 = @tactics.exists_tac(@parser.parse_term("c':A"))
-  let t6709 = @tactics.x_choose_then(@parser.parse_term("a':num->A"))(
+  let t6711 = @tactics.exists_tac(@term_syntax.parse_term("(c' : A)"))
+  let t6709 = @tactics.x_choose_then(@term_syntax.parse_term("(a' : (Num) -> A)"))(
     @tactics.strip_assume_tac,
   )
   let t6710 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c':A"))(t6709),
+    @tactics.x_choose_then(@term_syntax.parse_term("(c' : A)"))(t6709),
   )
   let t6708 = @list.List([
     @meson.asm_meson_tac(
@@ -66537,7 +66537,7 @@ fn step_343() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6707 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6703 = @parser.parse_term("q:(1->num)->A")
+  let t6703 = @term_syntax.parse_term("(q : ((Unit) -> Num) -> A)")
   let t6706 = @tactics.first_x_assum(fn(
     x6705 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -66666,7 +66666,7 @@ fn step_343() -> Unit raise {
     },
   )
   let t6693 = @tactics.subgoal_then(
-    @parser.parse_term("poly_deg (k:A ring) (q:(1->num)->A) = n"),
+    @term_syntax.parse_term("poly_deg((k : Ring[A]), (q : ((Unit) -> Num) -> A)) == (n : Num)"),
     fn(
       x6690 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -66714,16 +66714,16 @@ fn step_343() -> Unit raise {
       }
     },
   )
-  let t6688 = @tactics.x_choose_then(@parser.parse_term("q:(1->num)->A"))(
+  let t6688 = @tactics.x_choose_then(@term_syntax.parse_term("(q : ((Unit) -> Num) -> A)"))(
     @tactics.strip_assume_tac,
   )
   let t6689 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a0:A"))(t6688),
+    @tactics.x_choose_then(@term_syntax.parse_term("(a0 : A)"))(t6688),
   )
   let t6687 = @simp.asm_rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("~(SUC n = 0)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("!(SUC((n : Num)) == 0)"))]),
   )
-  let t6683 = @parser.parse_term("p:(1->num)->A")
+  let t6683 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6686 = @tactics.disch_then(fn(
     x6685 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -66795,7 +66795,7 @@ fn step_343() -> Unit raise {
   let t6679 = @simp.asm_rewrite_tac(@list.List([]))
   let t6678 = @tactics.mp_tac(
     @bool.spec(
-      @parser.parse_term("k:A ring"),
+      @term_syntax.parse_term("(k : Ring[A])"),
       algebraically_closed_field_decompose(),
     ),
   )
@@ -66807,7 +66807,7 @@ fn step_343() -> Unit raise {
     ]),
   )
   let t6674 = @simp.rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("~(1 <= i /\\ i <= 0)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("!(1 <= (i : Num) && i <= 0)"))]),
   )
   let t6673 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.poly_const_1(), @ringtheory.poly_ring_v1()]),
@@ -66911,7 +66911,7 @@ fn step_343() -> Unit raise {
       },
     ),
   )
-  let t6664 = @tactics.x_gen_tac(@parser.parse_term("c:A"))
+  let t6664 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : A)"))
   let t6663 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t6662 = @simp.asm_simp_tac(
     @list.List([@ringtheory.poly_deg_eq_0(), @ringtheory.ring_polynomial_v1()]),
@@ -66927,7 +66927,7 @@ fn step_343() -> Unit raise {
                   @tactics.then_tac(
                     @tactics.then_tac(
                       @tactics.undisch_tac(
-                        @parser.parse_term("poly_deg k (p:(1->num)->A) = 0"),
+                        @term_syntax.parse_term("poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A)) == 0"),
                       ),
                       t6662,
                     ),
@@ -66949,8 +66949,8 @@ fn step_343() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t6661 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
-  let t6659 = @parser.parse_term("n:num")
+  let t6661 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
+  let t6659 = @term_syntax.parse_term("(n : Num)")
   let t6660 = @tactics.map_every(
     fn(
       x6657 : @kernel.Term,
@@ -66976,7 +66976,7 @@ fn step_343() -> Unit raise {
       let t = x6657
       @tactics.spec_tac(t, t)
     },
-    @list.List([@parser.parse_term("p:(1->num)->A"), t6659]),
+    @list.List([@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"), t6659]),
   )
   let t6655 = @equal.gsym(@theorems.conj_assoc())
   let t6656 = @simp.rewrite_tac(
@@ -67029,7 +67029,7 @@ fn step_343() -> Unit raise {
     }
   })
   let t6650 = @simp.abbrev_tac(
-    @parser.parse_term("n = poly_deg k (p:(1->num)->A)"),
+    @term_syntax.parse_term("(n : Num) == poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A))"),
   )
   let t6649 = @list.List([
     @meson.asm_meson_tac(
@@ -67041,7 +67041,7 @@ fn step_343() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6648 = @tactics.subgoal_then(
-    @parser.parse_term("field (k:A ring) /\\ integral_domain (k:A ring)"),
+    @term_syntax.parse_term("field((k : Ring[A])) && integral_domain(k)"),
     @tactics.strip_assume_tac,
   )
   let t6647 = @tactics.disch_then(
@@ -67295,7 +67295,7 @@ fn step_344() -> Unit raise {
   let t6817 = @simp.rewrite_tac(
     @list.List([@iterate.in_numseg(), @arith.le_refl()]),
   )
-  let t6816 = @tactics.exists_tac(@parser.parse_term("1"))
+  let t6816 = @tactics.exists_tac(@term_syntax.parse_term("1"))
   let t6815 = @tactics.disch_then(fn(
     x6813 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67321,11 +67321,11 @@ fn step_344() -> Unit raise {
     @simp.rewrite_tac(@list.List([th]))
   })
   let t6810 = @kernel.assume_rule(
-    @parser.parse_term("integral_domain (k:A ring)"),
+    @term_syntax.parse_term("integral_domain((k : Ring[A]))"),
   )
-  let t6808 = @parser.parse_term("1..poly_deg (k:A ring) (p:(1->num)->A)")
+  let t6808 = @term_syntax.parse_term("op_dot_dot(1, poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A)))")
   let t6809 = @bool.ispecl(
-    @list.List([@parser.parse_term("k:A ring"), t6808]),
+    @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6808]),
     @ringtheory.integral_domain_product_eq_0(),
   )
   let t6811 = @drule.match_mp(
@@ -67333,7 +67333,7 @@ fn step_344() -> Unit raise {
   )(t6810)
   let t6812 = @tactics.mp_tac(
     @bool.spec(
-      @parser.parse_term("\\i:num. ring_sub (k:A ring) ((a:num->A) 1) (a i)"),
+      @term_syntax.parse_term("(i : Num) => ring_sub((k : Ring[A]), (a : (Num) -> A)(1), a(i))"),
       t6811,
     ),
   )
@@ -67352,7 +67352,7 @@ fn step_344() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6803 = @tactics.subgoal_then(
-    @parser.parse_term("(a:num->A) j IN ring_carrier k"),
+    @term_syntax.parse_term("IN((a : (Num) -> A)((j : Num)), ring_carrier((k : Ring[A])))"),
     fn(
       x6800 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67400,7 +67400,7 @@ fn step_344() -> Unit raise {
       }
     },
   )
-  let t6799 = @tactics.x_gen_tac(@parser.parse_term("j:num"))
+  let t6799 = @tactics.x_gen_tac(@term_syntax.parse_term("(j : Num)"))
   let t6798 = @simp.rewrite_tac(@list.List([@iterate.in_numseg()]))
   let t6807 = @list.List([
     @tactics.then_tac(
@@ -67655,7 +67655,7 @@ fn step_344() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6776 = @tactics.subgoal_then(
-    @parser.parse_term("ring_polynomial (k:A ring) (Q:(1->num)->A)"),
+    @term_syntax.parse_term("ring_polynomial((k : Ring[A]), (Q : ((Unit) -> Num) -> A))"),
     fn(
       x6773 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67709,14 +67709,14 @@ fn step_344() -> Unit raise {
     ),
   )
   let t6771 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6770 = @tactics.exists_tac(@parser.parse_term("(a:num->A) 1"))
+  let t6770 = @tactics.exists_tac(@term_syntax.parse_term("(a : (Num) -> A)(1)"))
   let t6768 = @simp.asm_rewrite_tac(@list.List([@arith.le_refl()]))
   let t6769 = @list.List([
     @tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t6768),
     @tactics.all_tac,
   ])
   let t6767 = @tactics.subgoal_then(
-    @parser.parse_term("(a:num->A) 1 IN ring_carrier k"),
+    @term_syntax.parse_term("IN((a : (Num) -> A)(1), ring_carrier((k : Ring[A])))"),
     fn(
       x6764 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67765,7 +67765,7 @@ fn step_344() -> Unit raise {
     },
   )
   let t6763 = @tactics.subgoal_then(
-    @parser.parse_term("1 <= poly_deg (k:A ring) (p:(1->num)->A)"),
+    @term_syntax.parse_term("1 <= poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A))"),
     fn(
       x6760 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67818,7 +67818,7 @@ fn step_344() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6758 = @tactics.subgoal_then(
-    @parser.parse_term("integral_domain (k:A ring)"),
+    @term_syntax.parse_term("integral_domain((k : Ring[A]))"),
     fn(
       x6755 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67866,14 +67866,14 @@ fn step_344() -> Unit raise {
       }
     },
   )
-  let t6753 = @tactics.x_choose_then(@parser.parse_term("a:num->A"))(
+  let t6753 = @tactics.x_choose_then(@term_syntax.parse_term("(a : (Num) -> A)"))(
     @tactics.strip_assume_tac,
   )
   let t6754 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A"))(t6753),
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : A)"))(t6753),
   )
   let t6752 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6748 = @parser.parse_term("p:(1->num)->A")
+  let t6748 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t6751 = @tactics.first_x_assum(fn(
     x6750 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -67942,7 +67942,7 @@ fn step_344() -> Unit raise {
       }
     })(((x6749 : @kernel.Thm) => @bool.spec(t6748, x6749))(x6750))
   })
-  let t6744 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t6744 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t6743 = @simp.asm_rewrite_tac(@list.List([algebraically_closed_field()]))
   let t6741 = @meson.asm_meson_tac(@list.List([@ringtheory.poly_deg_0()]))
   let t6740 = @tactics.match_mp_tac(algebraically_closed_field_splits())
@@ -68126,7 +68126,7 @@ pub fn algebraically_closed_field_eq_splits() -> @kernel.Thm {
 fn step_346() -> Unit raise {
   let t7003 = @simp.asm_simp_tac(@list.List([@ringtheory.poly_extend_const()]))
   let t7002 = @simp.asm_rewrite_tac(@list.List([@ringtheory.poly_const_v1()]))
-  let t6998 = @parser.parse_term("(poly_const (k:A ring) (x:A)):(1->num)->A")
+  let t6998 = @term_syntax.parse_term("(poly_const : (Ring[A], A, (Unit) -> Num) -> A)((k : Ring[A]), (x : A))")
   let t7001 = @tactics.first_x_assum(fn(
     x7000 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -68195,11 +68195,11 @@ fn step_346() -> Unit raise {
       }
     })(((x6999 : @kernel.Thm) => @bool.spec(t6998, x6999))(x7000))
   })
-  let t6994 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t6994 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t6993 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6992 = @tactics.exists_tac(@parser.parse_term("h:B->C"))
+  let t6992 = @tactics.exists_tac(@term_syntax.parse_term("(h : (B) -> C)"))
   let t6991 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("h:B->C"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(h : (B) -> C)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -68210,14 +68210,14 @@ fn step_346() -> Unit raise {
   let t6986 = @parser.parse_term(
     "poly_extend(k:A ring,l:B ring) (f:A->B) (\\v:1. a:B)",
   )
-  let t6987 = @parser.parse_term("l':C ring")
+  let t6987 = @term_syntax.parse_term("(l' : Ring[C])")
   let t6988 = @parser.parse_term(
     "subring_generated (l:B ring)\n        ((a:B) INSERT IMAGE (f:A->B) (ring_carrier k))",
   )
   let t6989 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("poly_ring (k:A ring) (:1)"),
+        @term_syntax.parse_term("(poly_ring : (Ring[A], (Unit) -> Bool) -> Ring[((Unit) -> Num) -> A])((k : Ring[A]), (UNIV : (Unit) -> Bool))"),
         t6988,
         t6987,
         t6986,
@@ -68344,17 +68344,17 @@ fn step_346() -> Unit raise {
     }
   })
   let t6964 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6960 = @parser.parse_term("m:(1->num)->A")
-  let t6961 = @parser.parse_term("(\\v:1. a':C)")
-  let t6962 = @parser.parse_term("g:A->C")
-  let t6963 = @parser.parse_term("l':C ring")
+  let t6960 = @term_syntax.parse_term("(m : ((Unit) -> Num) -> A)")
+  let t6961 = @term_syntax.parse_term("(v : Unit) => (a' : C)")
+  let t6962 = @term_syntax.parse_term("(g : (A) -> C)")
+  let t6963 = @term_syntax.parse_term("(l' : Ring[C])")
   let t6970 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.ispecl(
             @list.List([
-              @parser.parse_term("k:A ring"),
+              @term_syntax.parse_term("(k : Ring[A])"),
               t6963,
               t6962,
               t6961,
@@ -68380,7 +68380,7 @@ fn step_346() -> Unit raise {
           @simp.rewrite_tac(
             @list.List([
               @sets.set_rule(
-                @parser.parse_term("{x:(1->num)->A} SUBSET s <=> x IN s"),
+                @term_syntax.parse_term("SUBSET({(x : ((Unit) -> Num) -> A)}, (s : (((Unit) -> Num) -> A) -> Bool)) == IN(x, s)"),
               ),
             ]),
           ),
@@ -68394,14 +68394,14 @@ fn step_346() -> Unit raise {
   ])
   let t6958 = @tactics.match_mp_tac(@ringtheory.ideal_generated_minimal())
   let t6957 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6956 = @tactics.exists_tac(@parser.parse_term("a':C"))
+  let t6956 = @tactics.exists_tac(@term_syntax.parse_term("(a' : C)"))
   let t6955 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a':C"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(a' : C)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t6954 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6950 = @parser.parse_term("(g:A->C) o (m:(1->num)->A)")
+  let t6950 = @term_syntax.parse_term("o((g : (A) -> C), (m : ((Unit) -> Num) -> A))")
   let t6953 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -68522,7 +68522,7 @@ fn step_346() -> Unit raise {
   )
   let t6943 = @simp.asm_rewrite_tac(@list.List([]))
   let t6942 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("l':C ring"), algebraically_closed_field()),
+    @bool.ispec(@term_syntax.parse_term("(l' : Ring[C])"), algebraically_closed_field()),
   )
   let t6941 = @list.List([
     @meson.asm_meson_tac(@list.List([@ringtheory.poly_deg_monomorphic_image()])),
@@ -68692,7 +68692,7 @@ fn step_346() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6928 = @tactics.subgoal_then(
-    @parser.parse_term("ring_0 (l:B ring) = ring_1 (l:B ring)"),
+    @term_syntax.parse_term("ring_0((l : Ring[B])) == ring_1(l)"),
     fn(
       x6925 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -68921,7 +68921,7 @@ fn step_346() -> Unit raise {
       }
     },
   )
-  let t6907 = @tactics.subgoal_then(@parser.parse_term("F"), fn(
+  let t6907 = @tactics.subgoal_then(@term_syntax.parse_term("false"), fn(
     x6905 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -69009,17 +69009,17 @@ fn step_346() -> Unit raise {
     ]),
   )
   let t6897 = @tactics.undisch_tac(
-    @parser.parse_term("~(m = ring_0(poly_ring (k:A ring) (:1)):(1->num)->A)"),
+    @term_syntax.parse_term("!((m : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV)))"),
   )
   let t6896 = @simp.asm_simp_tac(@list.List([@ringtheory.field_unit()]))
   let t6895 = @simp.asm_rewrite_tac(
     @list.List([@ringtheory.ring_unit_poly_const()]),
   )
   let t6894 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("c:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(c : A)"))(@tactics.strip_assume_tac),
   )
   let t6893 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6892 = @parser.parse_term("m:(1->num)->A")
+  let t6892 = @term_syntax.parse_term("(m : ((Unit) -> Num) -> A)")
   let t6899 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -69030,7 +69030,7 @@ fn step_346() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.mp_tac(
                     @bool.ispecl(
-                      @list.List([@parser.parse_term("k:A ring"), t6892]),
+                      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t6892]),
                       @ringtheory.poly_deg_eq_0(),
                     ),
                   ),
@@ -69182,7 +69182,7 @@ fn step_346() -> Unit raise {
           @tactics.then_tac(
             @tactics.thenl(
               @tactics.then_tac(
-                @tactics.exists_tac(@parser.parse_term("ring_0(l':C ring)")),
+                @tactics.exists_tac(@term_syntax.parse_term("ring_0((l' : Ring[C]))")),
                 @tactics.conj_tac,
               ),
               t6882,
@@ -69200,14 +69200,14 @@ fn step_346() -> Unit raise {
   let t6977 = @list.List([
     @tactics.thenl(
       @class.asm_cases_tac(
-        @parser.parse_term("m = ring_0(poly_ring (k:A ring) (:1)):(1->num)->A"),
+        @term_syntax.parse_term("(m : ((Unit) -> Num) -> A) == ring_0(poly_ring((k : Ring[A]), UNIV))"),
       ),
       t6937,
     ),
     t6976,
   ])
   let t6881 = @class.asm_cases_tac(
-    @parser.parse_term("poly_deg (k:A ring) (m:(1->num)->A) = 0"),
+    @term_syntax.parse_term("poly_deg((k : Ring[A]), (m : ((Unit) -> Num) -> A)) == 0"),
   )
   let t6880 = @list.List([
     @meson.asm_meson_tac(
@@ -69274,7 +69274,7 @@ fn step_346() -> Unit raise {
     @tactics.all_tac,
   ])
   let t6874 = @tactics.subgoal_then(
-    @parser.parse_term("ring_polynomial (k:A ring) (m:(1->num)->A)"),
+    @term_syntax.parse_term("ring_polynomial((k : Ring[A]), (m : ((Unit) -> Num) -> A))"),
     fn(
       x6871 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -69439,7 +69439,7 @@ fn step_346() -> Unit raise {
     },
   )
   let t6870 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("m:(1->num)->A"))(t6869),
+    @tactics.x_choose_then(@term_syntax.parse_term("(m : ((Unit) -> Num) -> A)"))(t6869),
   )
   let t6861 = @simp.rewrite_tac(@list.List([@ringtheory.principal_ideal()]))
   let t6859 = @simp.asm_rewrite_tac(@list.List([]))
@@ -69604,12 +69604,12 @@ fn step_346() -> Unit raise {
   )
   let t6844 = @simp.simp_tac(@list.List([@sets.subset_refl()]))
   let t6843 = @simp.asm_rewrite_tac(@list.List([]))
-  let t6839 = @parser.parse_term("a:B")
-  let t6840 = @parser.parse_term("l:B ring")
-  let t6841 = @parser.parse_term("k:A ring")
+  let t6839 = @term_syntax.parse_term("(a : B)")
+  let t6840 = @term_syntax.parse_term("(l : Ring[B])")
+  let t6841 = @term_syntax.parse_term("(k : Ring[A])")
   let t6842 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("f:A->B"), t6841, t6840, t6839]),
+      @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t6841, t6840, t6839]),
       @ringtheory.image_poly_extend_1(),
     ),
   )
@@ -69800,7 +69800,7 @@ fn step_347() -> Unit raise {
   ) raise) raise {
     let ch_p = x7005
     let t7015 = @drule.match_mp(
-      @bool.spec(@parser.parse_term("G0:(B#C)->bool"), ch_p),
+      @bool.spec(@term_syntax.parse_term("(G0 : ((B, C)) -> Bool)"), ch_p),
     )
     let t7013 = @simp.rewrite_rule(@list.List([]))
     @tactics.first_assum(fn(
@@ -70146,7 +70146,7 @@ fn step_347() -> Unit raise {
     },
   )
   let t7032 = @tactics.subgoal_then(
-    @parser.parse_term("IMAGE FST (G0:(B#C)->bool) subring_of (l:B ring)"),
+    @term_syntax.parse_term("subring_of(IMAGE(FST, (G0 : ((B, C)) -> Bool)), (l : Ring[B]))"),
     fn(
       x7029 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -70241,7 +70241,7 @@ fn step_347() -> Unit raise {
     @list.List([@ringtheory.subring_generated_ring_carrier()]),
   )
   let t7571 = @tactics.exists_tac(
-    @parser.parse_term("\\x:B. @y:C. (x,y) IN (G:(B#C)->bool)"),
+    @term_syntax.parse_term("(x : B) => select((y : C) => IN((x, y), (G : ((B, C)) -> Bool)))"),
   )
   let t7569 = @meson.asm_meson_tac(@list.List([]))
   let t7566 = @tactics.disch_then(fn(
@@ -70291,7 +70291,7 @@ fn step_347() -> Unit raise {
     }
   })
   let t7561 = @meson.asm_meson_tac(@list.List([]))
-  let t7560 = @tactics.x_gen_tac(@parser.parse_term("z:C"))
+  let t7560 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : C)"))
   let t7559 = @tactics.match_mp_tac(@class.select_unique())
   let t7558 = @tactics.conv_tac(@equal.sym_conv)
   let t7557 = @list.List([
@@ -70350,7 +70350,7 @@ fn step_347() -> Unit raise {
     },
   )
   let t7552 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7551 = @tactics.exists_tac(@parser.parse_term("x0:B"))
+  let t7551 = @tactics.exists_tac(@term_syntax.parse_term("(x0 : B)"))
   let t7550 = @list.List([
     @meson.asm_meson_tac(
       @list.List([@sets.subset(), @sets.in_image(), @pair.fst()]),
@@ -70358,7 +70358,7 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7549 = @tactics.subgoal_then(
-    @parser.parse_term("(x0:B) IN (S':B->bool)"),
+    @term_syntax.parse_term("IN((x0 : B), (S' : (B) -> Bool))"),
     fn(
       x7546 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -70406,10 +70406,10 @@ fn step_347() -> Unit raise {
       }
     },
   )
-  let t7544 = @parser.parse_term("y0:C")
+  let t7544 = @term_syntax.parse_term("(y0 : C)")
   let t7545 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x0:B"), t7544]),
+    @list.List([@term_syntax.parse_term("(x0 : B)"), t7544]),
   )
   let t7562 = @tactics.then_tac(
     @tactics.then_tac(
@@ -70527,7 +70527,7 @@ fn step_347() -> Unit raise {
         @tactics.thenl(
           @tactics.then_tac(
             @tactics.then_tac(
-              @tactics.x_gen_tac(@parser.parse_term("x0:A")),
+              @tactics.x_gen_tac(@term_syntax.parse_term("(x0 : A)")),
               @tactics.disch_tac,
             ),
             t7531,
@@ -70549,7 +70549,7 @@ fn step_347() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([])),
     @tactics.all_tac,
   ])
-  let t7524 = @tactics.exists_tac(@parser.parse_term("h':B->C"))
+  let t7524 = @tactics.exists_tac(@term_syntax.parse_term("(h' : (B) -> C)"))
   let t7523 = @tactics.match_mp_tac(@ringtheory.ring_homomorphism_eq())
   let t7521 = @simp.rewrite_tac(
     @list.List([@ringtheory.subring_generated_by_subring_generated()]),
@@ -70744,7 +70744,7 @@ fn step_347() -> Unit raise {
     @meson.asm_meson_tac(@list.List([@sets.subset()])),
     @tactics.all_tac,
   ])
-  let t7508 = @tactics.x_gen_tac(@parser.parse_term("b':B"))
+  let t7508 = @tactics.x_gen_tac(@term_syntax.parse_term("(b' : B)"))
   let t7543 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -70791,7 +70791,7 @@ fn step_347() -> Unit raise {
     t7566,
   ])
   let t7506 = @simp.rewrite_tac(@list.List([]))
-  let t7503 = @parser.parse_term("IMAGE (\\x:B. (x, (h':B->C) x)) (S':B->bool)")
+  let t7503 = @term_syntax.parse_term("IMAGE((x : B) => (x, (h' : (B) -> C)(x)), (S' : (B) -> Bool))")
   let t7568 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -70925,7 +70925,7 @@ fn step_347() -> Unit raise {
   )
   let t7494 = @meson.asm_meson_tac(@list.List([]))
   let t7493 = @simp.rewrite_tac(@list.List([@sets.in_image(), @pair.pair_eq()]))
-  let t7492 = @tactics.x_gen_tac(@parser.parse_term("c':C"))
+  let t7492 = @tactics.x_gen_tac(@term_syntax.parse_term("(c' : C)"))
   let t7491 = @tactics.match_mp_tac(@class.select_unique())
   let t7495 = @list.List([
     @tactics.then_tac(
@@ -71080,7 +71080,7 @@ fn step_347() -> Unit raise {
   )
   let t7472 = @list.List([@sets.set_tac(@list.List([])), @tactics.all_tac])
   let t7471 = @tactics.exists_tac(
-    @parser.parse_term("(a:B) INSERT IMAGE FST (G:(B#C)->bool)"),
+    @term_syntax.parse_term("INSERT((a : B), IMAGE(FST, (G : ((B, C)) -> Bool)))"),
   )
   let t7477 = @list.List([
     @tactics.then_tac(
@@ -71150,8 +71150,8 @@ fn step_347() -> Unit raise {
   )
   let t7462 = @tactics.disch_then(@tactics.match_mp_tac)
   let t7461 = @simp.asm_rewrite_tac(@list.List([@sets.image_i()]))
-  let t7458 = @parser.parse_term("a:B")
-  let t7459 = @parser.parse_term("l:B ring")
+  let t7458 = @term_syntax.parse_term("(a : B)")
+  let t7459 = @term_syntax.parse_term("(l : Ring[B])")
   let t7460 = @parser.parse_term(
     "subring_generated (l:B ring) (IMAGE FST (G:(B#C)->bool))",
   )
@@ -71161,7 +71161,7 @@ fn step_347() -> Unit raise {
         @tactics.then_tac(
           @tactics.mp_tac(
             @bool.ispecl(
-              @list.List([@parser.parse_term("I:B->B"), t7460, t7459, t7458]),
+              @list.List([@term_syntax.parse_term("(I : (B) -> B)"), t7460, t7459, t7458]),
               field_simple_algebraic_extension_gen(),
             ),
           ),
@@ -71230,7 +71230,7 @@ fn step_347() -> Unit raise {
     ),
   )
   let t7452 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("h':B->C"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(h' : (B) -> C)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -71241,11 +71241,11 @@ fn step_347() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([])),
     @tactics.all_tac,
   ])
-  let t7444 = @parser.parse_term("a:B")
-  let t7445 = @parser.parse_term("(\\x:B. @y:C. (x,y) IN (G:(B#C)->bool)):B->C")
-  let t7446 = @parser.parse_term("I:B->B")
-  let t7447 = @parser.parse_term("l':C ring")
-  let t7448 = @parser.parse_term("l:B ring")
+  let t7444 = @term_syntax.parse_term("(a : B)")
+  let t7445 = @term_syntax.parse_term("(x : B) => select((y : C) => IN((x, y), (G : ((B, C)) -> Bool)))")
+  let t7446 = @term_syntax.parse_term("(I : (B) -> B)")
+  let t7447 = @term_syntax.parse_term("(l' : Ring[C])")
+  let t7448 = @term_syntax.parse_term("(l : Ring[B])")
   let t7449 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
@@ -71355,16 +71355,16 @@ fn step_347() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.gsym(th_3)]))
   })
   let t7429 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7426 = @parser.parse_term("a:B")
-  let t7427 = @parser.parse_term("l:B ring")
-  let t7428 = @parser.parse_term("k:A ring")
+  let t7426 = @term_syntax.parse_term("(a : B)")
+  let t7427 = @term_syntax.parse_term("(l : Ring[B])")
+  let t7428 = @term_syntax.parse_term("(k : Ring[A])")
   let t7435 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.mp_tac(
             @bool.ispecl(
-              @list.List([@parser.parse_term("f:A->B"), t7428, t7427, t7426]),
+              @list.List([@term_syntax.parse_term("(f : (A) -> B)"), t7428, t7427, t7426]),
               algebraic_over_range(),
             ),
           ),
@@ -71377,7 +71377,7 @@ fn step_347() -> Unit raise {
     t7434,
   ])
   let t7425 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE (f:A->B) (ring_carrier k)"),
+    @term_syntax.parse_term("IMAGE((f : (A) -> B), ring_carrier((k : Ring[A])))"),
   )
   let t7436 = @list.List([
     @tactics.thenl(
@@ -71524,9 +71524,9 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7409 = @class.asm_cases_tac(
-    @parser.parse_term("(a:B) IN IMAGE FST (G:(B#C)->bool)"),
+    @term_syntax.parse_term("IN((a : B), IMAGE(FST, (G : ((B, C)) -> Bool)))"),
   )
-  let t7408 = @tactics.x_gen_tac(@parser.parse_term("a:B"))
+  let t7408 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : B)"))
   let t7407 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t7406 = @list.List([
     @meson.asm_meson_tac(@list.List([subfield_of_imp_subset()])),
@@ -71652,7 +71652,7 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7405 = @tactics.subgoal_then(
-    @parser.parse_term("IMAGE FST (G:(B#C)->bool) = ring_carrier (l:B ring)"),
+    @term_syntax.parse_term("IMAGE(FST, (G : ((B, C)) -> Bool)) == ring_carrier((l : Ring[B]))"),
     fn(
       x7402 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -71705,7 +71705,7 @@ fn step_347() -> Unit raise {
       @tactics.thenl(
         @tactics.then_tac(
           @tactics.disch_then(
-            @tactics.x_choose_then(@parser.parse_term("G:(B#C)->bool"))(
+            @tactics.x_choose_then(@term_syntax.parse_term("(G : ((B, C)) -> Bool)"))(
               @tactics.strip_assume_tac,
             ),
           ),
@@ -71810,9 +71810,9 @@ fn step_347() -> Unit raise {
     ) raise) raise {
       let gw_4 = x7385
       let t7387 = @drule.match_mp(
-        @bool.spec(@parser.parse_term("G_w:(B#C)->bool"), su_1),
+        @bool.spec(@term_syntax.parse_term("(G_w : ((B, C)) -> Bool)"), su_1),
       )(gw_4)
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("(f:A->B) a0"), t7387))
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(f : (A) -> B)((a0 : A))"), t7387))
     })
   })
   let t7381 = @simp.asm_rewrite_tac(@list.List([]))
@@ -71849,7 +71849,7 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7378 = @tactics.subgoal_then(
-    @parser.parse_term("(f:A->B) a0 IN IMAGE FST (G_w:(B#C)->bool)"),
+    @term_syntax.parse_term("IN((f : (A) -> B)((a0 : A)), IMAGE(FST, (G_w : ((B, C)) -> Bool)))"),
     fn(
       x7375 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -71943,7 +71943,7 @@ fn step_347() -> Unit raise {
       let gw_3 = x7372
       @tactics.strip_assume_tac(
         @drule.match_mp(
-          @bool.spec(@parser.parse_term("G_w:(B#C)->bool"), ch_p_2),
+          @bool.spec(@term_syntax.parse_term("(G_w : ((B, C)) -> Bool)"), ch_p_2),
         )(gw_3),
       )
     })
@@ -71956,7 +71956,7 @@ fn step_347() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.then_tac(
-                  @tactics.x_gen_tac(@parser.parse_term("a0:A")),
+                  @tactics.x_gen_tac(@term_syntax.parse_term("(a0 : A)")),
                   @tactics.disch_tac,
                 ),
                 t7374,
@@ -72084,9 +72084,9 @@ fn step_347() -> Unit raise {
           let xyin = x7359
           let t7362 = @drule.match_mp(hom_u_3)(gin_3)
           let t7363 = @drule.match_mp(ring_hom_op)(t7362)
-          let t7361 = @parser.parse_term("y0:B")
+          let t7361 = @term_syntax.parse_term("(y0 : B)")
           let t7364 = @drule.match_mp(
-            @bool.specl(@list.List([@parser.parse_term("x0:B"), t7361]), t7363),
+            @bool.specl(@list.List([@term_syntax.parse_term("(x0 : B)"), t7361]), t7363),
           )(xyin)
           let t7365 = @simp.rewrite_rule(
             @list.List([@bool.conjunct2(@ringtheory.subring_generated_v1())]),
@@ -72155,7 +72155,7 @@ fn step_347() -> Unit raise {
       },
     )
     let t7349 = @tactics.subgoal_then(
-      @parser.parse_term("IMAGE FST (G0:(B#C)->bool) subring_of (l:B ring)"),
+      @term_syntax.parse_term("subring_of(IMAGE(FST, (G0 : ((B, C)) -> Bool)), (l : Ring[B]))"),
       fn(
         x7346 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -72209,7 +72209,7 @@ fn step_347() -> Unit raise {
     let t7341 = @simp.asm_rewrite_tac(@list.List([]))
     let t7343 = @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.exists_tac(@parser.parse_term("G1:(B#C)->bool")),
+        @tactics.exists_tac(@term_syntax.parse_term("(G1 : ((B, C)) -> Bool)")),
         t7341,
       ),
       t7342,
@@ -72221,7 +72221,7 @@ fn step_347() -> Unit raise {
     let t7344 = @list.List([
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.exists_tac(@parser.parse_term("G2:(B#C)->bool")),
+          @tactics.exists_tac(@term_syntax.parse_term("(G2 : ((B, C)) -> Bool)")),
           t7339,
         ),
         t7340,
@@ -72251,17 +72251,17 @@ fn step_347() -> Unit raise {
     ) raise) raise {
       let ch_ord_1 = x7333
       let t7336 = @kernel.assume_rule(
-        @parser.parse_term("G2:(B#C)->bool IN cc"),
+        @term_syntax.parse_term("IN((G2 : ((B, C)) -> Bool), (cc : (((B, C)) -> Bool) -> Bool))"),
       )
       let t7337 = @bool.conj(
-        @kernel.assume_rule(@parser.parse_term("G1:(B#C)->bool IN cc")),
+        @kernel.assume_rule(@term_syntax.parse_term("IN((G1 : ((B, C)) -> Bool), (cc : (((B, C)) -> Bool) -> Bool))")),
         t7336,
       )
-      let t7335 = @parser.parse_term("G2:(B#C)->bool")
+      let t7335 = @term_syntax.parse_term("(G2 : ((B, C)) -> Bool)")
       @tactics.disj_cases_tac(
         @drule.match_mp(
           @bool.specl(
-            @list.List([@parser.parse_term("G1:(B#C)->bool"), t7335]),
+            @list.List([@term_syntax.parse_term("(G1 : ((B, C)) -> Bool)"), t7335]),
             ch_ord_1,
           ),
         )(t7337),
@@ -72301,7 +72301,7 @@ fn step_347() -> Unit raise {
       ),
       @tactics.strip_assume_tac,
     )
-    let t7329 = @parser.parse_term("y0:B")
+    let t7329 = @term_syntax.parse_term("(y0 : B)")
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.thenl(
@@ -72313,7 +72313,7 @@ fn step_347() -> Unit raise {
                     @tactics.then_tac(
                       @tactics.map_every(
                         @tactics.x_gen_tac,
-                        @list.List([@parser.parse_term("x0:B"), t7329]),
+                        @list.List([@term_syntax.parse_term("(x0 : B)"), t7329]),
                       ),
                       @tactics.strip_tac,
                     ),
@@ -72415,7 +72415,7 @@ fn step_347() -> Unit raise {
         let t7320 = @drule.match_mp(hom_u_2)(gin_2)
         let t7321 = @drule.match_mp(@ringtheory.ring_homomorphism_neg())(t7320)
         let t7322 = @drule.match_mp(
-          @bool.spec(@parser.parse_term("x0:B"), t7321),
+          @bool.spec(@term_syntax.parse_term("(x0 : B)"), t7321),
         )(xin_1)
         let t7323 = @simp.rewrite_rule(
           @list.List([@bool.conjunct2(@ringtheory.subring_generated_v1())]),
@@ -72431,7 +72431,7 @@ fn step_347() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
-            @tactics.x_gen_tac(@parser.parse_term("x0:B")),
+            @tactics.x_gen_tac(@term_syntax.parse_term("(x0 : B)")),
             @tactics.disch_tac,
           ),
           g0_x0_in_cc_tac,
@@ -72527,7 +72527,7 @@ fn step_347() -> Unit raise {
             ]),
           )(t7306),
         )
-        let t7308 = @bool.mp(@bool.spec(@parser.parse_term("x0:B"), t7307), xin)
+        let t7308 = @bool.mp(@bool.spec(@term_syntax.parse_term("(x0 : B)"), t7307), xin)
         @tactics.mp_tac(
           @equal.conv_rule(@equal.depth_conv(@equal.beta_conv), t7308),
         )
@@ -72630,7 +72630,7 @@ fn step_347() -> Unit raise {
     },
   )
   let t7298 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("x0:B"))(t7297),
+    @tactics.x_choose_then(@term_syntax.parse_term("(x0 : B)"))(t7297),
   )
   let t7290 = @simp.gen_rewrite_tac(
     fn(
@@ -72641,7 +72641,7 @@ fn step_347() -> Unit raise {
     },
     @list.List([@sets.in_image()]),
   )
-  let t7286 = @tactics.x_gen_tac(@parser.parse_term("c0:C"))
+  let t7286 = @tactics.x_gen_tac(@term_syntax.parse_term("(c0 : C)"))
   let t7311 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -72747,13 +72747,13 @@ fn step_347() -> Unit raise {
     ) raise) raise {
       let gin = x7274
       let t7276 = @drule.match_mp(
-        @bool.spec(@parser.parse_term("G0:(B#C)->bool"), su),
+        @bool.spec(@term_syntax.parse_term("(G0 : ((B, C)) -> Bool)"), su),
       )(gin)
-      @tactics.mp_tac(@bool.spec(@parser.parse_term("x0:B"), t7276))
+      @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x0 : B)"), t7276))
     })
   })
   let t7271 = @tactics.conv_tac(@equal.depth_conv(@equal.beta_conv))
-  let t7270 = @tactics.x_gen_tac(@parser.parse_term("x0:B"))
+  let t7270 = @tactics.x_gen_tac(@term_syntax.parse_term("(x0 : B)"))
   let t7279 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -72774,11 +72774,11 @@ fn step_347() -> Unit raise {
   )
   let t7280 = @list.List([@meson.asm_meson_tac(@list.List([])), t7279])
   let t7269 = @tactics.exists_tac(
-    @parser.parse_term("\\x:B. @y:C. (x,y) IN (G0:(B#C)->bool)"),
+    @term_syntax.parse_term("(x : B) => select((y : C) => IN((x, y), (G0 : ((B, C)) -> Bool)))"),
   )
   let t7268 = @tactics.match_mp_tac(@ringtheory.ring_homomorphism_eq())
   let t7267 = @tactics.subgoal_then(
-    @parser.parse_term("IMAGE FST (G0:(B#C)->bool) subring_of (l:B ring)"),
+    @term_syntax.parse_term("subring_of(IMAGE(FST, (G0 : ((B, C)) -> Bool)), (l : Ring[B]))"),
     fn(
       x7264 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -72834,7 +72834,7 @@ fn step_347() -> Unit raise {
             @tactics.thenl(
               @tactics.then_tac(
                 @tactics.then_tac(
-                  @tactics.x_gen_tac(@parser.parse_term("G0:(B#C)->bool")),
+                  @tactics.x_gen_tac(@term_syntax.parse_term("(G0 : ((B, C)) -> Bool)")),
                   @tactics.disch_tac,
                 ),
                 t7267,
@@ -72987,7 +72987,7 @@ fn step_347() -> Unit raise {
   let t7255 = @tactics.match_mp_tac(@sets.image_subset())
   let t7254 = @simp.asm_rewrite_tac(@list.List([]))
   let t7253 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE FST (G_w:(B#C)->bool)"),
+    @term_syntax.parse_term("IMAGE(FST, (G_w : ((B, C)) -> Bool))"),
   )
   let t7252 = @tactics.match_mp_tac(@sets.subset_trans())
   let t7397 = @tactics.then_tac(
@@ -73042,7 +73042,7 @@ fn step_347() -> Unit raise {
                   let gw_2 = x7250
                   @tactics.strip_assume_tac(
                     @drule.match_mp(
-                      @bool.spec(@parser.parse_term("G_w:(B#C)->bool"), ch_p_1),
+                      @bool.spec(@term_syntax.parse_term("(G_w : ((B, C)) -> Bool)"), ch_p_1),
                     )(gw_2),
                   )
                 })
@@ -73065,14 +73065,14 @@ fn step_347() -> Unit raise {
     t7244,
   ])
   let t7243 = @tactics.exists_tac(
-    @parser.parse_term("ring_inv (l:B ring) (x0:B)"),
+    @term_syntax.parse_term("ring_inv((l : Ring[B]), (x0 : B))"),
   )
   let t7242 = @list.List([
     @meson.asm_meson_tac(@list.List([@ringtheory.subring_of(), @sets.subset()])),
     @tactics.all_tac,
   ])
   let t7241 = @tactics.subgoal_then(
-    @parser.parse_term("(x0:B) IN ring_carrier (l:B ring)"),
+    @term_syntax.parse_term("IN((x0 : B), ring_carrier((l : Ring[B])))"),
     fn(
       x7238 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -73178,7 +73178,7 @@ fn step_347() -> Unit raise {
   )
   let t7231 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t7230 = @tactics.subgoal_then(
-    @parser.parse_term("IMAGE FST (G0:(B#C)->bool) subfield_of (l:B ring)"),
+    @term_syntax.parse_term("subfield_of(IMAGE(FST, (G0 : ((B, C)) -> Bool)), (l : Ring[B]))"),
     fn(
       x7227 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -73231,10 +73231,10 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7225 = @tactics.subgoal_then(
-    @parser.parse_term("?G0. (G0:(B#C)->bool) IN cc /\\ (x0:B) IN IMAGE FST G0"),
+    @term_syntax.parse_term("∃ G0 : ((B, C)) -> Bool, IN(G0, (cc : (((B, C)) -> Bool) -> Bool)) && IN((x0 : B), IMAGE(FST, G0))"),
     @tactics.strip_assume_tac,
   )
-  let t7224 = @tactics.x_gen_tac(@parser.parse_term("x0:B"))
+  let t7224 = @tactics.x_gen_tac(@term_syntax.parse_term("(x0 : B)"))
   let t7223 = @list.List([
     @meson.asm_meson_tac(@list.List([@ringtheory.field_nontrivial()])),
     @tactics.all_tac,
@@ -73433,17 +73433,17 @@ fn step_347() -> Unit raise {
   ) raise) raise {
     let ch_ord = x7203
     let t7206 = @kernel.assume_rule(
-      @parser.parse_term("(G2:(B#C)->bool) IN cc"),
+      @term_syntax.parse_term("IN((G2 : ((B, C)) -> Bool), (cc : (((B, C)) -> Bool) -> Bool))"),
     )
     let t7207 = @bool.conj(
-      @kernel.assume_rule(@parser.parse_term("(G1:(B#C)->bool) IN cc")),
+      @kernel.assume_rule(@term_syntax.parse_term("IN((G1 : ((B, C)) -> Bool), (cc : (((B, C)) -> Bool) -> Bool))")),
       t7206,
     )
-    let t7205 = @parser.parse_term("G2:(B#C)->bool")
+    let t7205 = @term_syntax.parse_term("(G2 : ((B, C)) -> Bool)")
     @tactics.disj_cases_tac(
       @drule.match_mp(
         @bool.specl(
-          @list.List([@parser.parse_term("G1:(B#C)->bool"), t7205]),
+          @list.List([@term_syntax.parse_term("(G1 : ((B, C)) -> Bool)"), t7205]),
           ch_ord,
         ),
       )(t7207),
@@ -73541,21 +73541,21 @@ fn step_347() -> Unit raise {
       s7196(x7197)
     }
   })
-  let t7193 = @tactics.x_choose_then(@parser.parse_term("G2:(B#C)->bool"))(
+  let t7193 = @tactics.x_choose_then(@term_syntax.parse_term("(G2 : ((B, C)) -> Bool)"))(
     @tactics.strip_assume_tac,
   )
   let t7194 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("G1:(B#C)->bool"))(
+      @tactics.x_choose_then(@term_syntax.parse_term("(G1 : ((B, C)) -> Bool)"))(
         @tactics.strip_assume_tac,
       ),
       t7193,
     ),
   )
-  let t7191 = @parser.parse_term("s2:B->bool")
+  let t7191 = @term_syntax.parse_term("(s2 : (B) -> Bool)")
   let t7192 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("s1:B->bool"), t7191]),
+    @list.List([@term_syntax.parse_term("(s1 : (B) -> Bool)"), t7191]),
   )
   let t7211 = @tactics.then_tac(
     @tactics.then_tac(
@@ -73582,7 +73582,7 @@ fn step_347() -> Unit raise {
     ),
     t7210,
   )
-  let t7190 = @tactics.x_gen_tac(@parser.parse_term("G0:(B#C)->bool"))
+  let t7190 = @tactics.x_gen_tac(@term_syntax.parse_term("(G0 : ((B, C)) -> Bool)"))
   let t7212 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -73617,7 +73617,7 @@ fn step_347() -> Unit raise {
     let gw_1 = x7186
     let t7188 = @tactics.accept_tac(gw_1)
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("G_w:(B#C)->bool")),
+      @tactics.exists_tac(@term_syntax.parse_term("(G_w : ((B, C)) -> Bool)")),
       t7188,
     )
   })
@@ -73719,7 +73719,7 @@ fn step_347() -> Unit raise {
       @tactics.then_tac(
         @tactics.mp_tac(
           @kernel.assume_rule(
-            @parser.parse_term("x0:B IN IMAGE FST (G0:(B#C)->bool)"),
+            @term_syntax.parse_term("IN((x0 : B), IMAGE(FST, (G0 : ((B, C)) -> Bool)))"),
           ),
         ),
         t7171,
@@ -73734,7 +73734,7 @@ fn step_347() -> Unit raise {
         @tactics.then_tac(
           @tactics.disch_tac,
           @tactics.subgoal_then(
-            @parser.parse_term("?y':C. (x0:B,y') IN (G0:(B#C)->bool)"),
+            @term_syntax.parse_term("∃ y' : C, IN(((x0 : B), y'), (G0 : ((B, C)) -> Bool))"),
             @tactics.strip_assume_tac,
           ),
         ),
@@ -73744,7 +73744,7 @@ fn step_347() -> Unit raise {
     ),
     t7175,
   ])
-  let t7170 = @tactics.x_gen_tac(@parser.parse_term("y0:C"))
+  let t7170 = @tactics.x_gen_tac(@term_syntax.parse_term("(y0 : C)"))
   let t7169 = @tactics.subgoal_then(
     @parser.parse_term(
       "forall y0:C. (x0:B,y0) IN UNIONS cc <=>\n                  (x0,y0) IN (G0:(B#C)->bool)",
@@ -73774,7 +73774,7 @@ fn step_347() -> Unit raise {
       @simp.rewrite_tac(@list.List([th_1]))
     },
   )
-  let t7166 = @tactics.x_gen_tac(@parser.parse_term("x0:B"))
+  let t7166 = @tactics.x_gen_tac(@term_syntax.parse_term("(x0 : B)"))
   let t7177 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -73783,7 +73783,7 @@ fn step_347() -> Unit raise {
             @tactics.then_tac(
               @tactics.then_tac(
                 @tactics.then_tac(
-                  @tactics.x_gen_tac(@parser.parse_term("G0:(B#C)->bool")),
+                  @tactics.x_gen_tac(@term_syntax.parse_term("(G0 : ((B, C)) -> Bool)")),
                   @tactics.disch_tac,
                 ),
                 t7166,
@@ -74063,7 +74063,7 @@ fn step_347() -> Unit raise {
   )
   let t7148 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      @tactics.x_choose_then(@parser.parse_term("G_w:(B#C)->bool"))(fn(
+      @tactics.x_choose_then(@term_syntax.parse_term("(G_w : ((B, C)) -> Bool)"))(fn(
         x7136 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
@@ -74127,7 +74127,7 @@ fn step_347() -> Unit raise {
                       @tactics.then_tac(
                         @tactics.then_tac(
                           @tactics.x_gen_tac(
-                            @parser.parse_term("cc:((B#C)->bool)->bool"),
+                            @term_syntax.parse_term("(cc : (((B, C)) -> Bool) -> Bool)"),
                           ),
                           @tactics.beta_tac,
                         ),
@@ -74156,7 +74156,7 @@ fn step_347() -> Unit raise {
   let t7129 = @meson.asm_meson_tac(@list.List([]))
   let t7128 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t7127 = @tactics.subgoal_then(
-    @parser.parse_term("(@y:C. ((f:A->B) a,y) IN G0) = (g:A->C) a"),
+    @term_syntax.parse_term("select((y : C) => IN(((f : (A) -> B)((a : A)), y), (G0 : ((B, C)) -> Bool))) == (g : (A) -> C)(a)"),
     fn(
       x7124 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -74204,13 +74204,13 @@ fn step_347() -> Unit raise {
       }
     },
   )
-  let t7123 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t7123 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t7122 = @simp.rewrite_tac(@list.List([@sets.forall_in_image()]))
   let t7121 = @simp.asm_simp_tac(
     @list.List([@ringtheory.carrier_subring_generated_subring()]),
   )
   let t7119 = @simp.asm_simp_tac(@list.List([carrier_subfield_of()]))
-  let t7118 = @tactics.exists_tac(@parser.parse_term("k:A ring"))
+  let t7118 = @tactics.exists_tac(@term_syntax.parse_term("(k : Ring[A])"))
   let t7117 = @tactics.match_mp_tac(subfield_of_monomorphic_image())
   let t7120 = @list.List([
     @tactics.then_tac(
@@ -74226,7 +74226,7 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7116 = @tactics.subgoal_then(
-    @parser.parse_term("(IMAGE (f:A->B) (ring_carrier k)) subring_of l"),
+    @term_syntax.parse_term("subring_of(IMAGE((f : (A) -> B), ring_carrier((k : Ring[A]))), (l : Ring[B]))"),
     fn(
       x7113 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -74275,10 +74275,10 @@ fn step_347() -> Unit raise {
     },
   )
   let t7112 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7111 = @tactics.exists_tac(@parser.parse_term("h':B->C"))
+  let t7111 = @tactics.exists_tac(@term_syntax.parse_term("(h' : (B) -> C)"))
   let t7110 = @tactics.match_mp_tac(@ringtheory.ring_homomorphism_eq())
   let t7109 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("h':B->C"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(h' : (B) -> C)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -74290,7 +74290,7 @@ fn step_347() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7100 = @tactics.subgoal_then(
-    @parser.parse_term("ring_kernel(k:A ring,l:B ring) f = {ring_0 k}"),
+    @term_syntax.parse_term("ring_kernel(((k : Ring[A]), (l : Ring[B])), (f : (A) -> B)) == {ring_0(k)}"),
     fn(
       x7097 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -74358,7 +74358,7 @@ fn step_347() -> Unit raise {
   )
   let t7106 = @simp.asm_rewrite_tac(@list.List([]))
   let t7094 = @simp.asm_simp_tac(@list.List([carrier_subfield_of()]))
-  let t7093 = @tactics.exists_tac(@parser.parse_term("k:A ring"))
+  let t7093 = @tactics.exists_tac(@term_syntax.parse_term("(k : Ring[A])"))
   let t7092 = @tactics.match_mp_tac(subfield_of_monomorphic_image())
   let t7091 = @tactics.match_mp_tac(subfield_imp_subring_of())
   let t7095 = @tactics.then_tac(
@@ -74366,7 +74366,7 @@ fn step_347() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.subgoal_then(
-            @parser.parse_term("(IMAGE (f:A->B) (ring_carrier k)) subring_of l"),
+            @term_syntax.parse_term("subring_of(IMAGE((f : (A) -> B), ring_carrier((k : Ring[A]))), (l : Ring[B]))"),
             fn(
               x7089 : @kernel.Thm,
             ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -74425,9 +74425,9 @@ fn step_347() -> Unit raise {
     @tactics.thenl(@tactics.repeat_tac(@tactics.conj_tac), t7107),
     @tactics.all_tac,
   ])
-  let t7084 = @parser.parse_term("g:A->C")
-  let t7085 = @parser.parse_term("f:A->B")
-  let t7086 = @parser.parse_term("l':C ring")
+  let t7084 = @term_syntax.parse_term("(g : (A) -> C)")
+  let t7085 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t7086 = @term_syntax.parse_term("(l' : Ring[C])")
   let t7087 = @parser.parse_term(
     "subring_generated (l:B ring)\n              (IMAGE (f:A->B) (ring_carrier k))",
   )
@@ -74449,7 +74449,7 @@ fn step_347() -> Unit raise {
                                 @tactics.mp_tac(
                                   @bool.ispecl(
                                     @list.List([
-                                      @parser.parse_term("k:A ring"),
+                                      @term_syntax.parse_term("(k : Ring[A])"),
                                       t7087,
                                       t7086,
                                       t7085,
@@ -74490,7 +74490,7 @@ fn step_347() -> Unit raise {
   )
   let t7131 = @sets.set_tac(@list.List([]))
   let t7083 = @simp.asm_simp_tac(@list.List([carrier_subfield_of()]))
-  let t7082 = @tactics.exists_tac(@parser.parse_term("k:A ring"))
+  let t7082 = @tactics.exists_tac(@term_syntax.parse_term("(k : Ring[A])"))
   let t7132 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.match_mp_tac(subfield_of_monomorphic_image()),
@@ -74589,11 +74589,11 @@ fn step_347() -> Unit raise {
     @list.List([@pair.fst(), @pair.snd(), @sets.in_cross()]),
   )
   let t7070 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a0:A"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(a0 : A)"))(
       @tactics.strip_assume_tac,
     ),
   )
-  let t7069 = @tactics.x_gen_tac(@parser.parse_term("p:B#C"))
+  let t7069 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : (B, C))"))
   let t7068 = @simp.rewrite_tac(
     @list.List([@sets.subset(), @sets.in_elim_thm(), @sets.in_cross()]),
   )
@@ -74695,7 +74695,7 @@ fn step_347() -> Unit raise {
     @list.List([@sets.in_elim_thm(), @pair.pair_eq()]),
   )
   let t7055 = @simp.expand_tac("G0")
-  let t7054 = @tactics.x_gen_tac(@parser.parse_term("c:C"))
+  let t7054 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : C)"))
   let t7053 = @tactics.match_mp_tac(@class.select_unique())
   let t7058 = @list.List([
     @tactics.then_tac(
@@ -74704,7 +74704,7 @@ fn step_347() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.then_tac(
-                @tactics.x_gen_tac(@parser.parse_term("a:A")),
+                @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)")),
                 @tactics.disch_tac,
               ),
               t7053,
@@ -74829,7 +74829,7 @@ fn step_347() -> Unit raise {
       }
     },
   )
-  let t7041 = @tactics.exists_tac(@parser.parse_term("G0:(B#C)->bool"))
+  let t7041 = @tactics.exists_tac(@term_syntax.parse_term("(G0 : ((B, C)) -> Bool)"))
   let t7574 = @list.List([
     @tactics.thenl(
       @tactics.conj_tac,
@@ -74985,7 +74985,7 @@ fn step_348() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7685 = @tactics.subgoal_then(
-    @parser.parse_term("1..n = i INSERT j INSERT ((1..n) DIFF {i,j})"),
+    @term_syntax.parse_term("op_dot_dot(1, (n : Num)) == INSERT((i : Num), INSERT((j : Num), DIFF(op_dot_dot(1, n), {i, j})))"),
     fn(
       x7682 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -75036,7 +75036,7 @@ fn step_348() -> Unit raise {
   let t7679 = @simp.rewrite_tac(@list.List([]))
   let t7680 = @tactics.then_tac(@simp.expand_tac("p"), t7679)
   let t7681 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t7680])
-  let t7674 = @parser.parse_term("b:A")
+  let t7674 = @term_syntax.parse_term("(b : A)")
   let t7677 = @tactics.first_x_assum(fn(
     x7676 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -75107,7 +75107,7 @@ fn step_348() -> Unit raise {
   })
   let t7678 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t7677])
   let t7670 = @tactics.subgoal_then(
-    @parser.parse_term("(b:A) IN ring_carrier k"),
+    @term_syntax.parse_term("IN((b : A), ring_carrier((k : Ring[A])))"),
     fn(
       x7667 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -75156,12 +75156,12 @@ fn step_348() -> Unit raise {
     },
   )
   let t7666 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7665 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
-  let t7664 = @simp.abbrev_tac(@parser.parse_term("b = (a:num->A) j"))
-  let t7662 = @parser.parse_term("j:num")
+  let t7665 = @class.asm_cases_tac(@term_syntax.parse_term("(i : Num) == (j : Num)"))
+  let t7664 = @simp.abbrev_tac(@term_syntax.parse_term("(b : A) == (a : (Num) -> A)((j : Num))"))
+  let t7662 = @term_syntax.parse_term("(j : Num)")
   let t7663 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("i:num"), t7662]),
+    @list.List([@term_syntax.parse_term("(i : Num)"), t7662]),
   )
   let t7661 = @simp.rewrite_tac(@list.List([@iterate.finite_numseg()]))
   let t7660 = @tactics.match_mp_tac(@sets.card_image_inj())
@@ -75384,7 +75384,7 @@ fn step_348() -> Unit raise {
     @ringtheory.poly_eval_mul(),
   )
   let t7611 = @simp.rewrite_tac(@list.List([]))
-  let t7607 = @parser.parse_term("\\p:(1->num)->A. poly_eval k p x")
+  let t7607 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A) => poly_eval((k : Ring[A]), p, (x : A))")
   let t7610 = @tactics.first_x_assum(fn(
     x7609 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -75456,9 +75456,9 @@ fn step_348() -> Unit raise {
   let t7602 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t7603 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t7602])
   let t7601 = @class.asm_cases_tac(
-    @parser.parse_term("(x:A) IN ring_carrier k"),
+    @term_syntax.parse_term("IN((x : A), ring_carrier((k : Ring[A])))"),
   )
-  let t7600 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t7600 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t7655 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -76042,7 +76042,7 @@ fn step_348() -> Unit raise {
     },
   )
   let t7595 = @simp.abbrev_tac(
-    @parser.parse_term("n = poly_deg k (p:(1->num)->A)"),
+    @term_syntax.parse_term("(n : Num) == poly_deg((k : Ring[A]), (p : ((Unit) -> Num) -> A))"),
   )
   let t7594 = @tactics.disch_then(fn(
     x7593 : @kernel.Thm,
@@ -76210,10 +76210,10 @@ fn step_348() -> Unit raise {
       ),
     ),
   )
-  let t7581 = @parser.parse_term("a:num->A")
+  let t7581 = @term_syntax.parse_term("(a : (Num) -> A)")
   let t7582 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t7581]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t7581]),
   )
   let t7579 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t7580 = @list.List([
@@ -76223,10 +76223,10 @@ fn step_348() -> Unit raise {
   let t7578 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.in_numseg())]),
   )
-  let t7576 = @parser.parse_term("p:(1->num)->A")
+  let t7576 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t7577 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t7576]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t7576]),
       algebraically_closed_field_splits(),
     ),
   )
@@ -76596,7 +76596,7 @@ fn step_349() -> Unit raise {
   ) raise) raise {
     t7710(t7709(x7711))
   })
-  let t7699 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t7699 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t7698 = @simp.asm_simp_tac(
     @list.List([
       @ringtheory.ring_squarefree_in_carrier(),
@@ -76967,7 +76967,7 @@ fn step_351() -> Unit raise {
   ) raise) raise {
     t7737(t7736(x7738))
   })
-  let t7726 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t7726 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t7753 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -77048,7 +77048,7 @@ fn step_352() -> Unit raise {
       ]),
     ),
   )
-  let t8075 = @parser.parse_term("(h':(((1->num)->A)->bool)->A) z")
+  let t8075 = @term_syntax.parse_term("(h' : ((((Unit) -> Num) -> A) -> Bool) -> A)((z : (((Unit) -> Num) -> A) -> Bool))")
   let t8078 = @tactics.disch_then(fn(
     x8077 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -77195,7 +77195,7 @@ fn step_352() -> Unit raise {
       }
     })(t8068(x8069))
   })
-  let t8058 = @parser.parse_term("(h':(((1->num)->A)->bool)->A) z")
+  let t8058 = @term_syntax.parse_term("(h' : ((((Unit) -> Num) -> A) -> Bool) -> A)((z : (((Unit) -> Num) -> A) -> Bool))")
   let t8061 = @tactics.disch_then(fn(
     x8060 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -77350,7 +77350,7 @@ fn step_352() -> Unit raise {
     ]),
   )
   let t8043 = @tactics.exists_tac(
-    @parser.parse_term("m:(((1->num)->A)->bool)ring"),
+    @term_syntax.parse_term("(m : Ring[(((Unit) -> Num) -> A) -> Bool])"),
   )
   let t8042 = @tactics.match_mp_tac(algebraic_extension_trans())
   let t8041 = @simp.asm_simp_tac(@list.List([@trivia.o_thm(), @trivia.i_thm()]))
@@ -77381,7 +77381,7 @@ fn step_352() -> Unit raise {
   let t8047 = @list.List([
     @tactics.thenl(
       @tactics.subgoal_then(
-        @parser.parse_term("algebraic_extension(l,n) (I:A->A)"),
+        @term_syntax.parse_term("algebraic_extension(((l : Ring[A]), (n : Ring[A])), I)"),
         fn(
           x8037 : @kernel.Thm,
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -77434,7 +77434,7 @@ fn step_352() -> Unit raise {
     @tactics.all_tac,
   ])
   let t8036 = @simp.asm_rewrite_tac(@list.List([@class.not_imp()]))
-  let t8032 = @parser.parse_term("n:A ring")
+  let t8032 = @term_syntax.parse_term("(n : Ring[A])")
   let t8035 = @tactics.first_x_assum(fn(
     x8034 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -77503,7 +77503,7 @@ fn step_352() -> Unit raise {
       }
     })(((x8033 : @kernel.Thm) => @bool.spec(t8032, x8033))(x8034))
   })
-  let t8026 = @parser.parse_term("n:A ring")
+  let t8026 = @term_syntax.parse_term("(n : Ring[A])")
   let t8028 = @tactics.disch_then((x8027 : @kernel.Thm) => {
     @tactics.x_choose_tac(t8026, x8027)
   })
@@ -77589,7 +77589,7 @@ fn step_352() -> Unit raise {
       "\\x. if x IN IMAGE (h:A->((1->num)->A)->bool) (ring_carrier l)\n          then (h':(((1->num)->A)->bool)->A) x else h'' x",
     ),
   )
-  let t8009 = @parser.parse_term("h':(((1->num)->A)->bool)->A")
+  let t8009 = @term_syntax.parse_term("(h' : ((((Unit) -> Num) -> A) -> Bool) -> A)")
   let t8011 = @tactics.disch_then((x8010 : @kernel.Thm) => {
     @tactics.x_choose_tac(t8009, x8010)
   })
@@ -77696,7 +77696,7 @@ fn step_352() -> Unit raise {
     @list.List([@sets.in_diff(), @sets.injective_on_alt()]),
   )
   let t7998 = @tactics.x_gen_tac(
-    @parser.parse_term("h'':(((1->num)->A)->bool)->A"),
+    @term_syntax.parse_term("(h'' : ((((Unit) -> Num) -> A) -> Bool) -> A)"),
   )
   let t7996 = @simp.rewrite_tac(
     @list.List([@sets.le_c(), @theorems.left_imp_exists_thm()]),
@@ -77709,13 +77709,13 @@ fn step_352() -> Unit raise {
     @list.List([@card.infinite_card_le(), @card.card_lt_imp_le()]),
   )
   let t7992 = @tactics.disch_then(@tactics.match_mp_tac)
-  let t7988 = @parser.parse_term("(:A)")
-  let t7989 = @parser.parse_term("m:(((1->num)->A)->bool)ring")
-  let t7990 = @parser.parse_term("k:A ring")
+  let t7988 = @term_syntax.parse_term("(UNIV : (A) -> Bool)")
+  let t7989 = @term_syntax.parse_term("(m : Ring[(((Unit) -> Num) -> A) -> Bool])")
+  let t7990 = @term_syntax.parse_term("(k : Ring[A])")
   let t7991 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("(h:A->((1->num)->A)->bool) o (I:A->A)"),
+        @term_syntax.parse_term("o((h : (A, ((Unit) -> Num) -> A) -> Bool), I)"),
         t7990,
         t7989,
         t7988,
@@ -78178,7 +78178,7 @@ fn step_352() -> Unit raise {
       @equal.gsym(@ringtheory.poly_eval()),
     ]),
   )
-  let t7958 = @tactics.exists_tac(@parser.parse_term("p:(1->num)->A"))
+  let t7958 = @tactics.exists_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t7961 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -78193,13 +78193,13 @@ fn step_352() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t7957 = @simp.asm_rewrite_tac(@list.List([@class.not_imp()]))
-  let t7953 = @parser.parse_term("z:((1->num)->A)->bool")
-  let t7954 = @parser.parse_term("m:(((1->num)->A)->bool)ring")
-  let t7955 = @parser.parse_term("l:A ring")
+  let t7953 = @term_syntax.parse_term("(z : (((Unit) -> Num) -> A) -> Bool)")
+  let t7954 = @term_syntax.parse_term("(m : Ring[(((Unit) -> Num) -> A) -> Bool])")
+  let t7955 = @term_syntax.parse_term("(l : Ring[A])")
   let t7956 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("h:A->((1->num)->A)->bool"),
+        @term_syntax.parse_term("(h : (A, ((Unit) -> Num) -> A) -> Bool)"),
         t7955,
         t7954,
         t7953,
@@ -78307,28 +78307,28 @@ fn step_352() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(t7944(x7945))
   })
-  let t7940 = @parser.parse_term("z:((1->num)->A)->bool")
-  let t7941 = @parser.parse_term("h:A->((1->num)->A)->bool")
+  let t7940 = @term_syntax.parse_term("(z : (((Unit) -> Num) -> A) -> Bool)")
+  let t7941 = @term_syntax.parse_term("(h : (A, ((Unit) -> Num) -> A) -> Bool)")
   let t7942 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("m:(((1->num)->A)->bool)ring"), t7941, t7940]),
+    @list.List([@term_syntax.parse_term("(m : Ring[(((Unit) -> Num) -> A) -> Bool])"), t7941, t7940]),
   )
   let t7939 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
   let t7938 = @list.List([
     @meson.asm_meson_tac(@list.List([field_extension()])),
     @tactics.all_tac,
   ])
-  let t7936 = @parser.parse_term("p:(1->num)->A")
+  let t7936 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
   let t7937 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:A ring"), t7936]),
+      @list.List([@term_syntax.parse_term("(l : Ring[A])"), t7936]),
       kronecker_simple_field_extension(),
     ),
   )
   let t7935 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(~p ==> F) ==> p")),
+    @class.taut(@term_syntax.parse_term("(!(p : Bool) → false) → p")),
   )
-  let t7934 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t7934 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t7930 = @simp.asm_simp_tac(
     @list.List([@card.infinite_card_le(), @card.card_lt_imp_le()]),
   )
@@ -78372,7 +78372,7 @@ fn step_352() -> Unit raise {
     @tactics.then_tac(@tactics.match_mp_tac(@card.card_eq_imp_le()), t7922),
     t7925,
   ])
-  let t7920 = @parser.parse_term("(ring_carrier k:A->bool) *_c {0}")
+  let t7920 = @term_syntax.parse_term("op_star_us_c(ring_carrier((k : Ring[A])), {0})")
   let t7921 = @tactics.trans_tac(@card.card_le_trans())(t7920)
   let t7932 = @list.List([
     @tactics.thenl(
@@ -78401,16 +78401,16 @@ fn step_352() -> Unit raise {
       @sets.univ_not_empty(),
     ]),
   )
-  let t7916 = @parser.parse_term("(ring_carrier k:A->bool) CROSS (:num)")
-  let t7917 = @parser.parse_term("l:A ring")
-  let t7918 = @parser.parse_term("k:A ring")
+  let t7916 = @term_syntax.parse_term("(CROSS : ((A) -> Bool, (Num) -> Bool, (A, Num)) -> Bool)((ring_carrier : (Ring[A], A) -> Bool)((k : Ring[A])), (UNIV : (Num) -> Bool))")
+  let t7917 = @term_syntax.parse_term("(l : Ring[A])")
+  let t7918 = @term_syntax.parse_term("(k : Ring[A])")
   let t7933 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.mp_tac(
             @bool.ispecl(
-              @list.List([@parser.parse_term("I:A->A"), t7918, t7917, t7916]),
+              @list.List([@term_syntax.parse_term("(I : (A) -> A)"), t7918, t7917, t7916]),
               card_le_algebraic_extension(),
             ),
           ),
@@ -78423,7 +78423,7 @@ fn step_352() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7915 = @tactics.subgoal_then(
-    @parser.parse_term("ring_carrier(l:A ring) <_c (:A)"),
+    @term_syntax.parse_term("(op_lt_us_c : ((A) -> Bool, (A) -> Bool) -> Bool)((ring_carrier : (Ring[A], A) -> Bool)((l : Ring[A])), (UNIV : (A) -> Bool))"),
     fn(
       x7912 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -78478,7 +78478,7 @@ fn step_352() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7908 = @simp.asm_rewrite_tac(@list.List([algebraically_closed_field()]))
-  let t7907 = @tactics.x_gen_tac(@parser.parse_term("l:A ring"))
+  let t7907 = @tactics.x_gen_tac(@term_syntax.parse_term("(l : Ring[A])"))
   let t7910 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -78605,17 +78605,17 @@ fn step_352() -> Unit raise {
   let t7893 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_monomorphism_imp_homomorphism()]),
   )
-  let t7885 = @parser.parse_term("p:(1->num)->A")
-  let t7886 = @parser.parse_term("I:A->A")
-  let t7887 = @parser.parse_term("(\\v. z):1->A")
-  let t7888 = @parser.parse_term("(:1)")
-  let t7889 = @parser.parse_term("I:A->A")
-  let t7890 = @parser.parse_term("l:A ring")
-  let t7891 = @parser.parse_term("f:A ring")
+  let t7885 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> A)")
+  let t7886 = @term_syntax.parse_term("(I : (A) -> A)")
+  let t7887 = @term_syntax.parse_term("(v : Unit) => (z : A)")
+  let t7888 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t7889 = @term_syntax.parse_term("(I : (A) -> A)")
+  let t7890 = @term_syntax.parse_term("(l : Ring[A])")
+  let t7891 = @term_syntax.parse_term("(f : Ring[A])")
   let t7892 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("k:A ring"),
+        @term_syntax.parse_term("(k : Ring[A])"),
         t7891,
         t7890,
         t7889,
@@ -78628,7 +78628,7 @@ fn step_352() -> Unit raise {
     ),
   )
   let t7884 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7880 = @parser.parse_term("I:A->A")
+  let t7880 = @term_syntax.parse_term("(I : (A) -> A)")
   let t7883 = @tactics.first_x_assum(fn(
     x7882 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -78697,10 +78697,10 @@ fn step_352() -> Unit raise {
       }
     })(((x7881 : @kernel.Thm) => @equal.ap_term(t7880, x7881))(x7882))
   })
-  let t7876 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->A"))
+  let t7876 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> A)"))
   let t7875 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t7874 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7870 = @parser.parse_term("z:A")
+  let t7870 = @term_syntax.parse_term("(z : A)")
   let t7873 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -78897,7 +78897,7 @@ fn step_352() -> Unit raise {
   })
   let t7856 = @tactics.repeat_tac(@tactics.strip_tac)
   let t7855 = @simp.asm_rewrite_tac(@list.List([]))
-  let t7851 = @parser.parse_term("f:A ring")
+  let t7851 = @term_syntax.parse_term("(f : Ring[A])")
   let t7854 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x7853 : @kernel.Thm,
@@ -78969,11 +78969,11 @@ fn step_352() -> Unit raise {
     }),
   )
   let t7847 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("f:A ring"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(f : Ring[A])"))(
       @tactics.strip_assume_tac,
     ),
   )
-  let t7846 = @tactics.x_gen_tac(@parser.parse_term("z:A"))
+  let t7846 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : A)"))
   let t7845 = @simp.rewrite_tac(
     @list.List([@sets.unions_gspec(), @sets.forall_in_gspec()]),
   )
@@ -78985,11 +78985,11 @@ fn step_352() -> Unit raise {
     t7843,
   ])
   let t7842 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(p ==> q) /\\ p ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) && p → p && q")),
   )
   let t7840 = @meson.asm_meson_tac(@list.List([]))
-  let t7839 = @tactics.exists_tac(@parser.parse_term("f0:A ring"))
-  let t7836 = @parser.parse_term("f0:A ring")
+  let t7839 = @tactics.exists_tac(@term_syntax.parse_term("(f0 : Ring[A])"))
+  let t7836 = @term_syntax.parse_term("(f0 : Ring[A])")
   let t7838 = @tactics.disch_then((x7837 : @kernel.Thm) => {
     @tactics.x_choose_tac(t7836, x7837)
   })
@@ -79104,7 +79104,7 @@ fn step_352() -> Unit raise {
     @tactics.all_tac,
   ])
   let t7823 = @tactics.subgoal_then(
-    @parser.parse_term("field_extension (k,l) (I:A->A)"),
+    @term_syntax.parse_term("field_extension(((k : Ring[A]), (l : Ring[A])), I)"),
     fn(
       x7820 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -79154,7 +79154,7 @@ fn step_352() -> Unit raise {
   )
   let t7818 = @simp.asm_simp_tac(@list.List([]))
   let t7817 = @meson.asm_meson_tac(@list.List([]))
-  let t7812 = @parser.parse_term("a:A")
+  let t7812 = @term_syntax.parse_term("(a : A)")
   let t7816 = @tactics.disch_then(fn(
     x7815 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -79304,7 +79304,7 @@ fn step_352() -> Unit raise {
       @trivia.i_thm(),
     ]),
   )
-  let t7799 = @parser.parse_term("f:A ring")
+  let t7799 = @term_syntax.parse_term("(f : Ring[A])")
   let t7802 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
       x7801 : @kernel.Thm,
@@ -79376,8 +79376,8 @@ fn step_352() -> Unit raise {
     }),
   )
   let t7795 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t7794 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
-  let t7793 = @tactics.x_gen_tac(@parser.parse_term("f:A ring"))
+  let t7794 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
+  let t7793 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : Ring[A])"))
   let t7791 = @simp.asm_rewrite_tac(
     @list.List([
       @theorems.imp_conj(),
@@ -79447,7 +79447,7 @@ fn step_352() -> Unit raise {
     ),
     t7818,
   ])
-  let t7790 = @tactics.subgoal_then(@parser.parse_term("field(l:A ring)"), fn(
+  let t7790 = @tactics.subgoal_then(@term_syntax.parse_term("field((l : Ring[A]))"), fn(
     x7787 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -79493,8 +79493,8 @@ fn step_352() -> Unit raise {
       s7788(x7789)
     }
   })
-  let t7781 = @parser.parse_term("k:A ring")
-  let t7782 = @list.List([@parser.parse_term("k:A ring"), t7781])
+  let t7781 = @term_syntax.parse_term("(k : Ring[A])")
+  let t7782 = @list.List([@term_syntax.parse_term("(k : Ring[A])"), t7781])
   let t7785 = @tactics.first_x_assum(fn(
     x7784 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -79598,7 +79598,7 @@ fn step_352() -> Unit raise {
     },
   )
   let t7775 = @simp.rewrite_tac(@list.List([field_extension_refl()]))
-  let t7772 = @tactics.x_gen_tac(@parser.parse_term("l:A ring"))
+  let t7772 = @tactics.x_gen_tac(@term_syntax.parse_term("(l : Ring[A])"))
   let t7773 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t7772),
     @tactics.strip_tac,
@@ -79617,14 +79617,14 @@ fn step_352() -> Unit raise {
   ])
   let t7770 = @tactics.mp_tac(
     @bool.ispec(
-      @parser.parse_term("c:A ring->bool"),
+      @term_syntax.parse_term("(c : (Ring[A]) -> Bool)"),
       @ringtheory.ring_direct_limit(),
     ),
   )
   let t7768 = @simp.asm_rewrite_tac(
     @list.List([algebraic_extension_refl(), field_extension_refl()]),
   )
-  let t7767 = @tactics.exists_tac(@parser.parse_term("k:A ring"))
+  let t7767 = @tactics.exists_tac(@term_syntax.parse_term("(k : Ring[A])"))
   let t7769 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -79635,7 +79635,7 @@ fn step_352() -> Unit raise {
     ),
     @tactics.strip_tac,
   ])
-  let t7766 = @class.asm_cases_tac(@parser.parse_term("c:A ring->bool = {}"))
+  let t7766 = @class.asm_cases_tac(@term_syntax.parse_term("(c : (Ring[A]) -> Bool) == {}"))
   let t7911 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -80060,23 +80060,23 @@ fn step_353() -> Unit raise {
   let t8222 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_isomorphism_imp_homomorphism()]),
   )
-  let t8218 = @parser.parse_term("(:1)")
-  let t8219 = @parser.parse_term("g':B->A#num->bool")
-  let t8220 = @parser.parse_term("l':(A#num->bool)ring")
+  let t8218 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t8219 = @term_syntax.parse_term("(g' : (B, (A, Num)) -> Bool)")
+  let t8220 = @term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])")
   let t8221 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t8220, t8219, t8218]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t8220, t8219, t8218]),
       @ringtheory.in_ring_polynomial_carrier_compose(),
     ),
   )
-  let t8213 = @parser.parse_term("(g':B->A#num->bool) o (p:(1->num)->B)")
-  let t8214 = @parser.parse_term("g:(A#num->bool)->B")
-  let t8215 = @parser.parse_term("w:A#num->bool")
-  let t8216 = @parser.parse_term("l:B ring")
+  let t8213 = @term_syntax.parse_term("o((g' : (B, (A, Num)) -> Bool), (p : ((Unit) -> Num) -> B))")
+  let t8214 = @term_syntax.parse_term("(g : (((A, Num)) -> Bool) -> B)")
+  let t8215 = @term_syntax.parse_term("(w : ((A, Num)) -> Bool)")
+  let t8216 = @term_syntax.parse_term("(l : Ring[B])")
   let t8217 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("l':(A#num->bool)ring"),
+        @term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])"),
         t8216,
         t8215,
         t8214,
@@ -80095,7 +80095,7 @@ fn step_353() -> Unit raise {
     ),
   ])
   let t8211 = @tactics.match_mp_tac(@theorems.eq_imp())
-  let t8207 = @parser.parse_term("g:(A#num->bool)->B")
+  let t8207 = @term_syntax.parse_term("(g : (((A, Num)) -> Bool) -> B)")
   let t8210 = @tactics.first_x_assum(fn(
     x8209 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -80175,11 +80175,11 @@ fn step_353() -> Unit raise {
     @tactics.disch_tac,
   ])
   let t8201 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
-  let t8200 = @tactics.exists_tac(@parser.parse_term("(g:(A#num->bool)->B) w"))
+  let t8200 = @tactics.exists_tac(@term_syntax.parse_term("(g : (((A, Num)) -> Bool) -> B)((w : ((A, Num)) -> Bool))"))
   let t8199 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("w:A#num->bool"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(w : ((A, Num)) -> Bool)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -80212,12 +80212,12 @@ fn step_353() -> Unit raise {
       @ringtheory.ring_polynomial_v1(),
     ]),
   )
-  let t8192 = @parser.parse_term("p:(1->num)->B")
-  let t8193 = @parser.parse_term("g':B->A#num->bool")
-  let t8194 = @parser.parse_term("l':(A#num->bool)ring")
+  let t8192 = @term_syntax.parse_term("(p : ((Unit) -> Num) -> B)")
+  let t8193 = @term_syntax.parse_term("(g' : (B, (A, Num)) -> Bool)")
+  let t8194 = @term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])")
   let t8195 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t8194, t8193, t8192]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t8194, t8193, t8192]),
       @ringtheory.poly_deg_monomorphic_image(),
     ),
   )
@@ -80247,16 +80247,16 @@ fn step_353() -> Unit raise {
   let t8189 = @simp.asm_simp_tac(
     @list.List([@ringtheory.ring_isomorphism_imp_homomorphism()]),
   )
-  let t8185 = @parser.parse_term("(:1)")
-  let t8186 = @parser.parse_term("g':B->A#num->bool")
-  let t8187 = @parser.parse_term("l':(A#num->bool)ring")
+  let t8185 = @term_syntax.parse_term("(UNIV : (Unit) -> Bool)")
+  let t8186 = @term_syntax.parse_term("(g' : (B, (A, Num)) -> Bool)")
+  let t8187 = @term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])")
   let t8188 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l:B ring"), t8187, t8186, t8185]),
+      @list.List([@term_syntax.parse_term("(l : Ring[B])"), t8187, t8186, t8185]),
       @ringtheory.in_ring_polynomial_carrier_compose(),
     ),
   )
-  let t8181 = @parser.parse_term("(g':B->A#num->bool) o (p:(1->num)->B)")
+  let t8181 = @term_syntax.parse_term("o((g' : (B, (A, Num)) -> Bool), (p : ((Unit) -> Num) -> B))")
   let t8184 = @tactics.first_x_assum(fn(
     x8183 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -80325,7 +80325,7 @@ fn step_353() -> Unit raise {
       }
     })(((x8182 : @kernel.Thm) => @bool.spec(t8181, x8182))(x8183))
   })
-  let t8177 = @tactics.x_gen_tac(@parser.parse_term("p:(1->num)->B"))
+  let t8177 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Unit) -> Num) -> B)"))
   let t8176 = @simp.rewrite_tac(
     @list.List([@ringtheory.ring_isomorphisms_isomorphism()]),
   )
@@ -80337,7 +80337,7 @@ fn step_353() -> Unit raise {
     },
     @list.List([@ringtheory.ring_isomorphism()]),
   )
-  let t8173 = @tactics.x_choose_then(@parser.parse_term("g':B->A#num->bool"))(fn(
+  let t8173 = @tactics.x_choose_then(@term_syntax.parse_term("(g' : (B, (A, Num)) -> Bool)"))(fn(
     x8168 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -80507,7 +80507,7 @@ fn step_353() -> Unit raise {
   let t8167 = @simp.asm_simp_tac(
     @list.List([algebraic_extension_isomorphism()]),
   )
-  let t8166 = @tactics.exists_tac(@parser.parse_term("k':(A#num->bool)ring"))
+  let t8166 = @tactics.exists_tac(@term_syntax.parse_term("(k' : Ring[((A, Num)) -> Bool])"))
   let t8165 = @tactics.match_mp_tac(algebraic_extension_trans())
   let t8164 = @simp.gen_rewrite_tac(
     fn(
@@ -80521,7 +80521,7 @@ fn step_353() -> Unit raise {
   let t8160 = @simp.asm_simp_tac(
     @list.List([algebraic_extension_isomorphism()]),
   )
-  let t8159 = @tactics.exists_tac(@parser.parse_term("l':(A#num->bool)ring"))
+  let t8159 = @tactics.exists_tac(@term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])"))
   let t8233 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -80545,7 +80545,7 @@ fn step_353() -> Unit raise {
     t8232,
   ])
   let t8158 = @tactics.exists_tac(
-    @parser.parse_term("(g:(A#num->bool)->B) o (f:A->A#num->bool)"),
+    @term_syntax.parse_term("o((g : (((A, Num)) -> Bool) -> B), (f : (A, (A, Num)) -> Bool))"),
   )
   let t8155 = @simp.gen_rewrite_rule(
     fn(
@@ -80555,7 +80555,7 @@ fn step_353() -> Unit raise {
     },
     @list.List([@ringtheory.isomorphic_ring()]),
   )
-  let t8152 = @parser.parse_term("g:(A#num->bool)->B")
+  let t8152 = @term_syntax.parse_term("(g : (((A, Num)) -> Bool) -> B)")
   let t8157 = @tactics.first_assum(fn(
     x8156 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -80587,7 +80587,7 @@ fn step_353() -> Unit raise {
     },
     @list.List([@ringtheory.isomorphic_ring()]),
   )
-  let t8146 = @parser.parse_term("f:A->A#num->bool")
+  let t8146 = @term_syntax.parse_term("(f : (A, (A, Num)) -> Bool)")
   let t8151 = @tactics.first_assum(fn(
     x8150 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -80621,7 +80621,7 @@ fn step_353() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t8144 = @tactics.subgoal_then(@parser.parse_term("field(l:B ring)"), fn(
+  let t8144 = @tactics.subgoal_then(@term_syntax.parse_term("field((l : Ring[B]))"), fn(
     x8141 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -80667,20 +80667,20 @@ fn step_353() -> Unit raise {
       s8142(x8143)
     }
   })
-  let t8140 = @tactics.x_gen_tac(@parser.parse_term("l:B ring"))
+  let t8140 = @tactics.x_gen_tac(@term_syntax.parse_term("(l : Ring[B])"))
   let t8138 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t8137 = @simp.asm_rewrite_tac(@list.List([]))
   let t8136 = @tactics.match_mp_tac(@ringtheory.isomorphic_ring_card_eq())
   let t8135 = @simp.once_rewrite_tac(@list.List([@card.card_eq_sym()]))
   let t8134 = @tactics.match_mp_tac(@card.card_eq_imp_le())
   let t8133 = @simp.asm_rewrite_tac(@list.List([]))
-  let t8131 = @parser.parse_term("ring_carrier(k:A ring)")
+  let t8131 = @term_syntax.parse_term("ring_carrier((k : Ring[A]))")
   let t8132 = @tactics.trans_tac(@card.card_le_trans())(t8131)
   let t8130 = @tactics.disch_then(@tactics.match_mp_tac)
   let t8129 = @simp.asm_rewrite_tac(@list.List([]))
-  let t8126 = @parser.parse_term("(:B)")
-  let t8127 = @parser.parse_term("l':(A#num->bool)ring")
-  let t8128 = @parser.parse_term("k':(A#num->bool)ring")
+  let t8126 = @term_syntax.parse_term("(UNIV : (B) -> Bool)")
+  let t8127 = @term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])")
+  let t8128 = @term_syntax.parse_term("(k' : Ring[((A, Num)) -> Bool])")
   let t8139 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -80693,7 +80693,7 @@ fn step_353() -> Unit raise {
                     @tactics.mp_tac(
                       @bool.ispecl(
                         @list.List([
-                          @parser.parse_term("I:(A#num->bool)->(A#num->bool)"),
+                          @term_syntax.parse_term("(I : (((A, Num)) -> Bool, (A, Num)) -> Bool)"),
                           t8128,
                           t8127,
                           t8126,
@@ -80720,16 +80720,16 @@ fn step_353() -> Unit raise {
     t8138,
   ])
   let t8125 = @simp.rewrite_tac(@list.List([@sets.subset_univ()]))
-  let t8123 = @parser.parse_term("(:B)")
+  let t8123 = @term_syntax.parse_term("(UNIV : (B) -> Bool)")
   let t8124 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("l':(A#num->bool)ring"), t8123]),
+      @list.List([@term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])"), t8123]),
       @ringtheory.isomorphic_subcopy_of_ring(),
     ),
   )
   let t8119 = @simp.rewrite_rule(@list.List([algebraically_closed_field()]))
   let t8121 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("l':(A#num->bool)ring"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(l' : Ring[((A, Num)) -> Bool])"))(fn(
       x8120 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -80760,10 +80760,10 @@ fn step_353() -> Unit raise {
   let t8114 = @simp.asm_simp_tac(
     @list.List([@card.card_le_subset(), @sets.subset_univ()]),
   )
-  let t8112 = @parser.parse_term("ring_carrier(k:A ring)")
+  let t8112 = @term_syntax.parse_term("ring_carrier((k : Ring[A]))")
   let t8113 = @tactics.trans_tac(@card.card_le_trans())(t8112)
   let t8111 = @simp.asm_rewrite_tac(@list.List([]))
-  let t8110 = @parser.parse_term("(:A)")
+  let t8110 = @term_syntax.parse_term("(UNIV : (A) -> Bool)")
   let t8122 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -80792,7 +80792,7 @@ fn step_353() -> Unit raise {
   let t8109 = @simp.asm_rewrite_tac(@list.List([]))
   let t8108 = @tactics.mp_tac(
     @bool.ispec(
-      @parser.parse_term("k':(A#num->bool)ring"),
+      @term_syntax.parse_term("(k' : Ring[((A, Num)) -> Bool])"),
       algebraic_closure_exists_id(),
     ),
   )
@@ -80867,7 +80867,7 @@ fn step_353() -> Unit raise {
     })(t8104(x8105))
   })
   let t8098 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("k':(A#num->bool)ring"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(k' : Ring[((A, Num)) -> Bool])"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -80882,15 +80882,15 @@ fn step_353() -> Unit raise {
       @sets.subset_univ(),
     ]),
   )
-  let t8096 = @parser.parse_term("(:A)")
+  let t8096 = @term_syntax.parse_term("(UNIV : (A) -> Bool)")
   let t8100 = @list.List([
     @tactics.then_tac(@tactics.trans_tac(@card.card_le_trans())(t8096), t8097),
     t8099,
   ])
-  let t8094 = @parser.parse_term("(:A#num->bool)")
+  let t8094 = @term_syntax.parse_term("(UNIV : (((A, Num)) -> Bool) -> Bool)")
   let t8095 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t8094]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t8094]),
       @ringtheory.isomorphic_subcopy_of_ring(),
     ),
   )
@@ -80908,15 +80908,15 @@ fn step_353() -> Unit raise {
       @card.card_le_refl(),
     ]),
   )
-  let t8086 = @parser.parse_term("{one} *_c (:num)")
+  let t8086 = @term_syntax.parse_term("(op_star_us_c : ((Unit) -> Bool, (Num) -> Bool, (Unit, Num)) -> Bool)({one}, (UNIV : (Num) -> Bool))")
   let t8087 = @tactics.trans_tac(@card.card_le_trans())(t8086)
-  let t8085 = @parser.parse_term("(:A) *_c {one}")
+  let t8085 = @term_syntax.parse_term("(op_star_us_c : ((A) -> Bool, (Unit) -> Bool, (A, Unit)) -> Bool)((UNIV : (A) -> Bool), {one})")
   let t8088 = @list.List([
     @tactics.trans_tac(@card.card_le_trans())(t8085),
     t8087,
   ])
   let t8084 = @simp.rewrite_tac(@list.List([@card.cantor_thm_univ()]))
-  let t8083 = @parser.parse_term("(:A#num)")
+  let t8083 = @term_syntax.parse_term("(UNIV : ((A, Num)) -> Bool)")
   let t8093 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -80943,7 +80943,7 @@ fn step_353() -> Unit raise {
     @tactics.all_tac,
   ])
   let t8082 = @tactics.subgoal_then(
-    @parser.parse_term("(:A) <_c (:A#num->bool) /\\ (:num) <_c (:A#num->bool)"),
+    @term_syntax.parse_term("(op_lt_us_c : ((A) -> Bool, (((A, Num)) -> Bool) -> Bool) -> Bool)((UNIV : (A) -> Bool), (UNIV : (((A, Num)) -> Bool) -> Bool)) && (op_lt_us_c : ((Num) -> Bool, (((A, Num)) -> Bool) -> Bool) -> Bool)(UNIV, (UNIV : (((A, Num)) -> Bool) -> Bool))"),
     @tactics.strip_assume_tac,
   )
   let t8234 = @tactics.thenl(
@@ -81050,13 +81050,13 @@ pub fn algebraic_closure_exists() -> @kernel.Thm {
 fn step_354() -> Unit raise {
   let t8280 = @meson.asm_meson_tac(@list.List([algebraic_extension()]))
   let t8279 = @simp.asm_rewrite_tac(@list.List([@trivia.o_thm()]))
-  let t8274 = @parser.parse_term("((h:B->C) o (f:A->B)):A->C")
-  let t8275 = @parser.parse_term("g:A->C")
-  let t8276 = @parser.parse_term("x:C")
-  let t8277 = @parser.parse_term("l':C ring")
+  let t8274 = @term_syntax.parse_term("o((h : (B) -> C), (f : (A) -> B))")
+  let t8275 = @term_syntax.parse_term("(g : (A) -> C)")
+  let t8276 = @term_syntax.parse_term("(x : C)")
+  let t8277 = @term_syntax.parse_term("(l' : Ring[C])")
   let t8278 = @tactics.match_mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t8277, t8276, t8275, t8274]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t8277, t8276, t8275, t8274]),
       algebraic_over_eq(),
     ),
   )
@@ -81129,15 +81129,15 @@ fn step_354() -> Unit raise {
     })(@equal.sym(x8272))
   })
   let t8268 = @simp.asm_rewrite_tac(@list.List([]))
-  let t8262 = @parser.parse_term("x:C")
-  let t8263 = @parser.parse_term("l':C ring")
-  let t8264 = @parser.parse_term("l:B ring")
-  let t8265 = @parser.parse_term("k:A ring")
-  let t8266 = @parser.parse_term("h:B->C")
+  let t8262 = @term_syntax.parse_term("(x : C)")
+  let t8263 = @term_syntax.parse_term("(l' : Ring[C])")
+  let t8264 = @term_syntax.parse_term("(l : Ring[B])")
+  let t8265 = @term_syntax.parse_term("(k : Ring[A])")
+  let t8266 = @term_syntax.parse_term("(h : (B) -> C)")
   let t8267 = @tactics.mp_tac(
     @bool.ispecl(
       @list.List([
-        @parser.parse_term("f:A->B"),
+        @term_syntax.parse_term("(f : (A) -> B)"),
         t8266,
         t8265,
         t8264,
@@ -81147,7 +81147,7 @@ fn step_354() -> Unit raise {
       algebraic_over_algebraic_extension(),
     ),
   )
-  let t8261 = @tactics.x_gen_tac(@parser.parse_term("x:C"))
+  let t8261 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : C)"))
   let t8260 = @simp.asm_rewrite_tac(@list.List([algebraic_extension()]))
   let t8259 = @tactics.match_mp_tac(
     algebraically_closed_field_no_proper_algebraic_extension(),
@@ -81157,7 +81157,7 @@ fn step_354() -> Unit raise {
     @tactics.all_tac,
   ])
   let t8257 = @tactics.subgoal_then(
-    @parser.parse_term("field_extension(l:B ring,l':C ring) (h:B->C)"),
+    @term_syntax.parse_term("field_extension(((l : Ring[B]), (l' : Ring[C])), (h : (B) -> C))"),
     fn(
       x8254 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -81222,7 +81222,7 @@ fn step_354() -> Unit raise {
     @tactics.all_tac,
   ])
   let t8250 = @tactics.subgoal_then(
-    @parser.parse_term("ring_monomorphism(l:B ring,l':C ring) (h:B->C)"),
+    @term_syntax.parse_term("ring_monomorphism(((l : Ring[B]), (l' : Ring[C])), (h : (B) -> C))"),
     fn(
       x8247 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -81274,20 +81274,20 @@ fn step_354() -> Unit raise {
     @tactics.all_tac,
     @simp.asm_rewrite_tac(@list.List([])),
   ])
-  let t8245 = @tactics.exists_tac(@parser.parse_term("h:B->C"))
+  let t8245 = @tactics.exists_tac(@term_syntax.parse_term("(h : (B) -> C)"))
   let t8244 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("h:B->C"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(h : (B) -> C)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t8243 = @simp.asm_rewrite_tac(@list.List([]))
-  let t8238 = @parser.parse_term("g:A->C")
-  let t8239 = @parser.parse_term("f:A->B")
-  let t8240 = @parser.parse_term("l':C ring")
-  let t8241 = @parser.parse_term("l:B ring")
+  let t8238 = @term_syntax.parse_term("(g : (A) -> C)")
+  let t8239 = @term_syntax.parse_term("(f : (A) -> B)")
+  let t8240 = @term_syntax.parse_term("(l' : Ring[C])")
+  let t8241 = @term_syntax.parse_term("(l : Ring[B])")
   let t8242 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("k:A ring"), t8241, t8240, t8239, t8238]),
+      @list.List([@term_syntax.parse_term("(k : Ring[A])"), t8241, t8240, t8239, t8238]),
       algebraic_closure_extend_homomorphism(),
     ),
   )
