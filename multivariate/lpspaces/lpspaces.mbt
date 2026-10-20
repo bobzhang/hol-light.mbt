@@ -2959,7 +2959,7 @@ fn step_61() -> Unit raise {
   let t1729 = @tactics.x_gen_tac(@term_syntax.parse_term("(k : Num)"))
   let t1728 = @simp.simp_tac(@list.List([@cart.lambda_beta(), @vectors.vector_sub_component()]))
   let t1727 = @tactics.match_mp_tac(@vectors.norm_le_componentwise())
-  let t1726 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("norm((c : Cart[Real, N]) - (a : Cart[Real, N])) <= norm((b : Cart[Real, N]) - a) → dist((b, a)) < (ee : Real) → dist((c, a)) < ee")))
+  let t1726 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("norm((c : Cart[Real, N]) - (a : Cart[Real, N])) <= norm((b : Cart[Real, N]) - a) → distance((b, a)) < (ee : Real) → distance((c, a)) < ee")))
   let t1725 = @simp.rewrite_tac(@list.List([]))
   let t1724 = @tactics.match_mp_tac(@theorems.mono_imp())
   let t1723 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
