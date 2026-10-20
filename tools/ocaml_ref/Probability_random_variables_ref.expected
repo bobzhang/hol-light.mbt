@@ -80015,209 +80015,209 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..solved at 2
 Probability/random_variables quotations (203):
-  random_variable (p:(A)prob_space) (X:A->real) <=>\n   (forall a. {x | x IN prob_carrier p /\\ X x <= a} IN prob_events p)
-  {x:A | x IN prob_carrier p /\\ c:real <= a} = {}
-  {x:A | x IN prob_carrier p /\\ c:real <= a} = prob_carrier p
-  c:real <= a
-  a:real
-  forall p:A prob_space c. random_variable p (\\x. c)
-  indicator_fn (a:A->bool) (x:A) = if x IN a then &1 else &0
-  &0 < inv(&n + &1)
-  n:num
-  inv(&n + &1) <= inv(&n)
-  n:num
-  n:num
-  a - X(y:A):real
-  y:A
+  (random_variable : (Prob_space[A], (A) -> Real) -> Bool)((p : Prob_space[A]), (X : (A) -> Real)) == (\226\136\128 a : Real, IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= a}, prob_events(p)))
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (c : Real) <= (a : Real)} == {}
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (c : Real) <= (a : Real)} == prob_carrier(p)
+  (c : Real) <= (a : Real)
+  (a : Real)
+  \226\136\128 p : Prob_space[A], \226\136\128 c : Real, random_variable(p, (x : A) => c)
+  (indicator_fn : ((A) -> Bool, A) -> Real)((a : (A) -> Bool), (x : A)) == (if IN(x, a) { real_of_num(1) } else { real_of_num(0) })
+  real_of_num(0) < inv(real_of_num((n : Num)) + real_of_num(1))
+  (n : Num)
+  inv(real_of_num((n : Num)) + real_of_num(1)) <= inv(real_of_num(n))
+  (n : Num)
+  (n : Num)
+  (a : Real) - (X : (A) -> Real)((y : A))
+  (y : A)
   forall p (X:A->real) a.\n     {x | x IN prob_carrier p /\\ X x < a} =\n     UNIONS {{x | x IN prob_carrier p /\\ X x <= a - inv(&n + &1)} | n IN (:num)}
-  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x <= a} IN prob_events p
-  a - inv(&n + &1)
-  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x < a} IN prob_events p
-  (y:A) IN prob_carrier p
-  y:A
-  {x:A | x IN prob_carrier p /\\ X x >= a} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x < a}
-  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x >= a} IN prob_events p
-  (y:A) IN prob_carrier p
-  y:A
-  {x:A | x IN prob_carrier p /\\ X x > a} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x <= a}
-  forall p (X:A->real) a.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x > a} IN prob_events p
-  (y:A) IN prob_carrier p
-  y:A
-  {x:A | x IN prob_carrier p /\\ X x IN real_interval(a,b)} =\n     {x | x IN prob_carrier p /\\ X x > a} INTER\n     {x | x IN prob_carrier p /\\ X x < b}
-  forall p (X:A->real) a b.\n     random_variable p X\n     ==> {x | x IN prob_carrier p /\\ X x IN real_interval(a,b)} IN prob_events p
-  j SUBSET IMAGE lift s\n       ==> IMAGE drop j SUBSET IMAGE drop (IMAGE lift s)
-  b:real^1
-  a:real^1
-  j:real^1->bool
-  j:real^1->bool
-  IMAGE (IMAGE drop) D
-  D:(real^1->bool)->bool
-  forall s:real->bool.\n       real_open s\n       ==> ?D. COUNTABLE D /\\\n               (forall i. i IN D ==> i SUBSET s /\\ ?a b. i = real_interval(a,b)) /\\\n               UNIONS D = s
-  b:real
-  a:real
-  i:real->bool
-  i:real->bool
-  {x:A | x IN prob_carrier p /\\ X x IN UNIONS D} =\n     UNIONS (IMAGE (\\i:real->bool. {x:A | x IN prob_carrier p /\\ X x IN i}) D)
-  D:(real->bool)->bool
-  forall p (X:A->real) t.\n     random_variable p X /\\ real_open t\n     ==> {x | x IN prob_carrier p /\\ X x IN t} IN prob_events p
-  {y:real | y <= a}
-  a:real
-  {x:A | x IN prob_carrier p /\\ X x IN UNIONS u} =\n       UNIONS (IMAGE (\\s:real->bool. {x:A | x IN prob_carrier p /\\ X x IN s}) u)
-  u:(real->bool)->bool
-  {x:A | x IN prob_carrier p /\\ X x IN (:real) DIFF s} =\n       prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x IN s}
-  s:real->bool
-  forall p (X:A->real).\n     random_variable p X <=>\n     forall b. borel_in euclideanreal b\n         ==> {x | x IN prob_carrier p /\\ X x IN b} IN prob_events p
-  random_variable p (X:A->real)
-  {x:A | x IN prob_carrier p /\\ (g:real->real) (X x) IN b} =\n     {x:A | x IN prob_carrier p /\\ X x IN {y:real | y IN (:real) /\\ g y IN b}}
-  b:real->bool
-  b:real->bool
-  forall p (X:A->real) g.\n     random_variable p X /\\\n     borel_measurable_map (euclideanreal,euclideanreal) g\n     ==> random_variable p (\\x. g(X x))
-  forall p (X:A->real) g.\n     random_variable p X /\\ continuous_map (euclideanreal,euclideanreal) g\n     ==> random_variable p (\\x. g(X x))
-  (y:A) IN prob_carrier p
-  y:A
-  {x:A | x IN prob_carrier p /\\ X x <= a} =\n     prob_carrier p DIFF {x | x IN prob_carrier p /\\ X x > a}
-  a:real
-  forall p (X:A->real).\n     (forall a. {x | x IN prob_carrier p /\\ X x > a} IN prob_events p)\n     ==> random_variable p X
-  &0 < inv(&j + &1) ==> a + inv(&j + &1) <= L ==> L > a
-  n:num
-  n:num
-  N:num
-  \\n:num. (X:num->A->real) n y
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= a}, prob_events(p))
+  (a : Real) - inv(real_of_num((n : Num)) + real_of_num(1))
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) < a}, prob_events(p))
+  IN((y : A), prob_carrier((p : Prob_space[A])))
+  (y : A)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) >= (a : Real)} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && X(x) < a})
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) >= a}, prob_events(p))
+  IN((y : A), prob_carrier((p : Prob_space[A])))
+  (y : A)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) > (a : Real)} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && X(x) <= a})
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) > a}, prob_events(p))
+  IN((y : A), prob_carrier((p : Prob_space[A])))
+  (y : A)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), real_interval(((a : Real), (b : Real))))} == INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) > a}, {(x : A) | IN(x, prob_carrier(p)) && X(x) < b})
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && IN(X(x), real_interval((a, b)))}, prob_events(p))
+  SUBSET((j : (Cart[Real, Unit]) -> Bool), IMAGE(lift, (s : (Real) -> Bool))) \226\134\146 SUBSET(IMAGE(drop, j), IMAGE(drop, IMAGE(lift, s)))
+  (b : Cart[Real, Unit])
+  (a : Cart[Real, Unit])
+  (j : (Cart[Real, Unit]) -> Bool)
+  (j : (Cart[Real, Unit]) -> Bool)
+  IMAGE(IMAGE(drop), (D : ((Cart[Real, Unit]) -> Bool) -> Bool))
+  (D : ((Cart[Real, Unit]) -> Bool) -> Bool)
+  \226\136\128 s : (Real) -> Bool, real_open(s) \226\134\146 (\226\136\131 D : ((Real) -> Bool) -> Bool, COUNTABLE(D) && (\226\136\128 i : (Real) -> Bool, IN(i, D) \226\134\146 SUBSET(i, s) && (\226\136\131 a : Real, \226\136\131 b : Real, i == real_interval((a, b)))) && UNIONS(D) == s)
+  (b : Real)
+  (a : Real)
+  (i : (Real) -> Bool)
+  (i : (Real) -> Bool)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), UNIONS((D : ((Real) -> Bool) -> Bool)))} == UNIONS(IMAGE((i : (Real) -> Bool) => {(x : A) | IN(x, prob_carrier(p)) && IN(X(x), i)}, D))
+  (D : ((Real) -> Bool) -> Bool)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 t : (Real) -> Bool, random_variable(p, X) && real_open(t) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && IN(X(x), t)}, prob_events(p))
+  {(y : Real) | y <= (a : Real)}
+  (a : Real)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), UNIONS((u : ((Real) -> Bool) -> Bool)))} == UNIONS(IMAGE((s : (Real) -> Bool) => {(x : A) | IN(x, prob_carrier(p)) && IN(X(x), s)}, u))
+  (u : ((Real) -> Bool) -> Bool)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), DIFF(UNIV, (s : (Real) -> Bool)))} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && IN(X(x), s)})
+  (s : (Real) -> Bool)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, random_variable(p, X) == (\226\136\128 b : (Real) -> Bool, borel_in(euclideanreal, b) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && IN(X(x), b)}, prob_events(p)))
+  random_variable((p : Prob_space[A]), (X : (A) -> Real))
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((g : (Real) -> Real)((X : (A) -> Real)(x)), (b : (Real) -> Bool))} == {(x : A) | IN(x, prob_carrier(p)) && IN(X(x), {(y : Real) | IN(y, UNIV) && IN(g(y), b)})}
+  (b : (Real) -> Bool)
+  (b : (Real) -> Bool)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 g : (Real) -> Real, random_variable(p, X) && borel_measurable_map((euclideanreal, euclideanreal), g) \226\134\146 random_variable(p, (x : A) => g(X(x)))
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 g : (Real) -> Real, random_variable(p, X) && continuous_map((euclideanreal, euclideanreal), g) \226\134\146 random_variable(p, (x : A) => g(X(x)))
+  IN((y : A), prob_carrier((p : Prob_space[A])))
+  (y : A)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (a : Real)} == DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && X(x) > a})
+  (a : Real)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, (\226\136\128 a : Real, IN({(x : A) | IN(x, prob_carrier(p)) && X(x) > a}, prob_events(p))) \226\134\146 random_variable(p, X)
+  real_of_num(0) < inv(real_of_num((j : Num)) + real_of_num(1)) \226\134\146 (a : Real) + inv(real_of_num(j) + real_of_num(1)) <= (L : Real) \226\134\146 L > a
+  (n : Num)
+  (n : Num)
+  (N : Num)
+  (n : Num) => (X : (Num, A) -> Real)(n, (y : A))
   sequentially
-  a + inv(&j + &1) <= L(y:A)
-  N:num
-  y:A IN prob_carrier p
-  N:num
-  j:num
-  n:num
-  n:num
-  N:num
-  j:num
-  N:num
-  L(y:A) - (a + inv(&j + &1))
-  inv(&j + &1) <= inv(&j)
-  &0 < L(y:A) - (a + inv(&j + &1))
-  ?j. ~(j = 0) /\\ &0 < inv(&j) /\\ inv(&j) < L(y:A) - a
-  y:A
-  y:A
+  (a : Real) + inv(real_of_num((j : Num)) + real_of_num(1)) <= (L : (A) -> Real)((y : A))
+  (N : Num)
+  IN((y : A), prob_carrier((p : Prob_space[A])))
+  (N : Num)
+  (j : Num)
+  (n : Num)
+  (n : Num)
+  (N : Num)
+  (j : Num)
+  (N : Num)
+  (L : (A) -> Real)((y : A)) - ((a : Real) + inv(real_of_num((j : Num)) + real_of_num(1)))
+  inv(real_of_num((j : Num)) + real_of_num(1)) <= inv(real_of_num(j))
+  real_of_num(0) < (L : (A) -> Real)((y : A)) - ((a : Real) + inv(real_of_num((j : Num)) + real_of_num(1)))
+  \226\136\131 j : Num, !(j == 0) && real_of_num(0) < inv(real_of_num(j)) && inv(real_of_num(j)) < (L : (A) -> Real)((y : A)) - (a : Real)
+  (y : A)
+  (y : A)
   forall p (X:num->A->real) L a.\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> {x | x IN prob_carrier p /\\ L x > a} =\n         UNIONS {INTERS {{x | x IN prob_carrier p /\\ X n x >= a + inv(&j + &1)}\n                         | n IN from N} | j,N | T}
-  (j:num,N:num)
+  ((j : Num), (N : Num))
   IMAGE (\\(j,N). INTERS {{x:A | x IN prob_carrier p /\\\n                 X n x >= a + inv(&j + &1)} | n IN from N}) (:num#num)
-  N:num
-  {x:A | x IN prob_carrier p /\\ (X:num->A->real) N x >= a + inv(&j + &1)}
-  IMAGE (\\n. {x:A | x IN prob_carrier p /\\\n        (X:num->A->real) n x >= a + inv(&j + &1)}) (:num)
-  a:real
-  forall p (X:num->A->real) L.\n     (forall n. random_variable p (X n)) /\\\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> random_variable p L
-  \\y:real. --y
-  X:A->real
-  p:A prob_space
-  forall p:A prob_space X.\n      random_variable p X ==> random_variable p (\\x. --(X x))
-  \\y:real. c * y
-  X:A->real
-  p:A prob_space
-  forall p:A prob_space X c.\n      random_variable p X /\\ &0 < c\n      ==> random_variable p (\\x. c * X x)
-  forall p:A prob_space A.\n      (forall n:num. A n IN prob_events p)\n      ==> UNIONS {A n | n IN (:num)} IN prob_events p
-  forall p:A prob_space A.\n      (forall n:num. A n IN prob_events p)\n      ==> INTERS {A n | n IN (:num)} IN prob_events p
-  forall p:A prob_space (A:num->A->bool) n.\n      (forall i. i <= n ==> A i IN prob_events p)\n      ==> UNIONS (IMAGE A (0..n)) IN prob_events p
-  (b:real) <= c ==> a + b <= c + a
-  prob p (A (SUC n):A->bool) +\n                prob p (UNIONS (IMAGE (A:num->A->bool) (0..n)))
-  0 <= SUC n
-  0 <= SUC n
-  forall p:A prob_space (A:num->A->bool) n.\n      (forall i. i <= n ==> A i IN prob_events p)\n      ==> prob p (UNIONS (IMAGE A (0..n))) <= sum (0..n) (\\i. prob p (A i))
-  (A:num->A->bool) n
-  m = SUC n
-  forall(A:num->A->bool) m n.\n      (forall k. A k SUBSET A (SUC k)) /\\ m <= n ==> A m SUBSET A n
-  SUC n
-  n:num
+  (N : Num)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((N : Num), x) >= (a : Real) + inv(real_of_num((j : Num)) + real_of_num(1))}
+  IMAGE((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) >= (a : Real) + inv(real_of_num((j : Num)) + real_of_num(1))}, UNIV)
+  (a : Real)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, (\226\136\128 n : Num, random_variable(p, X(n))) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)) \226\134\146 random_variable(p, L)
+  (y : Real) => -y
+  (X : (A) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, random_variable(p, X) \226\134\146 random_variable(p, (x : A) => -X(x))
+  (y : Real) => (c : Real) * y
+  (X : (A) -> Real)
+  (p : Prob_space[A])
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 c : Real, random_variable(p, X) && real_of_num(0) < c \226\134\146 random_variable(p, (x : A) => c * X(x))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), prob_events(p))) \226\134\146 IN(UNIONS({A((n : Num)) | IN(n, UNIV)}), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), prob_events(p))) \226\134\146 IN(INTERS({A((n : Num)) | IN(n, UNIV)}), prob_events(p))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 n : Num, (\226\136\128 i : Num, i <= n \226\134\146 IN(A(i), prob_events(p))) \226\134\146 IN(UNIONS(IMAGE(A, op_dot_dot(0, n))), prob_events(p))
+  (b : Real) <= (c : Real) \226\134\146 (a : Real) + b <= c + a
+  prob((p : Prob_space[A]), (A : (Num, A) -> Bool)(SUC((n : Num)))) + prob(p, UNIONS(IMAGE(A, op_dot_dot(0, n))))
+  0 <= SUC((n : Num))
+  0 <= SUC((n : Num))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 n : Num, (\226\136\128 i : Num, i <= n \226\134\146 IN(A(i), prob_events(p))) \226\134\146 prob(p, UNIONS(IMAGE(A, op_dot_dot(0, n)))) <= sum(op_dot_dot(0, n), (i : Num) => prob(p, A(i)))
+  (A : (Num, A) -> Bool)((n : Num))
+  (m : Num) == SUC((n : Num))
+  \226\136\128 A : (Num, A) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 k : Num, SUBSET(A(k), A(SUC(k)))) && m <= n \226\134\146 SUBSET(A(m), A(n))
+  SUC((n : Num))
+  (n : Num)
   0
-  n:num
-  (x:A) IN A (n:num)
-  n:num
-  n:num
-  n:num
-  x:A
-  forall(A:num->A->bool).\n      (forall n. A n SUBSET A (SUC n))\n      ==> UNIONS {A n | n IN (:num)} =\n          A 0 UNION UNIONS {A (SUC n) DIFF A n | n IN (:num)}
-  (A:num->A->bool) 0 SUBSET A n
-  n:num
-  (x:A) IN A 0
-  x:A
-  forall(A:num->A->bool).\n      (forall n. A n SUBSET A (SUC n))\n      ==> DISJOINT (A 0) (UNIONS {A (SUC n) DIFF A n | n IN (:num)})
-  x - a - b = x - (a + b):real
-  m:num
-  n - 1
-  ?m:num. n = SUC m /\\ N0 <= m
-  n:num
-  SUC N0
-  N0:num
-  e:real
-  B:num->A->bool
-  p:A prob_space
-  e:real
-  forall n. prob (p:A prob_space) ((B:num->A->bool) n) =\n                        prob p ((A:num->A->bool) (SUC n)) - prob p (A n)
-  forall N. sum (0..N) (\\n. prob (p:A prob_space) ((B:num->A->bool) n)) =\n          prob p ((A:num->A->bool) (SUC N)) - prob p (A 0)
-  UNIONS {(A:num->A->bool) n | n IN (:num)} =\n                   A 0 UNION UNIONS {(B:num->A->bool) n | n IN (:num)}
-  prob (p:A prob_space) (UNIONS {(A:num->A->bool) n | n IN (:num)}) =\n      prob p (A 0) + prob p (UNIONS {(B:num->A->bool) n | n IN (:num)})
-  UNIONS {(B:num->A->bool) n | n IN (:num)} IN\n                  prob_events (p:A prob_space)
-  (A:num->A->bool) (SUC j) SUBSET A i
-  (A:num->A->bool) (SUC i) SUBSET A j
-  i:num < j
-  x:A
-  forall i j. ~(i = j) ==> DISJOINT ((B:num->A->bool) i) (B j)
-  forall n:num. (B:num->A->bool) n IN prob_events (p:A prob_space)
-  B = \\n:num. A(SUC n) DIFF (A:num->A->bool) n
-  forall p:A prob_space A.\n      (forall n. A n IN prob_events p) /\\\n      (forall n. A n SUBSET A (SUC n))\n      ==> ((\\n. prob p (A n)) --->\n           prob p (UNIONS {A n | n IN (:num)})) sequentially
-  (a - x) - (a - y):real = --(x - y)
-  n:num
-  n:num
-  N:num
-  N:num
-  e:real
-  C:num->A->bool
-  p:A prob_space
-  e:real
-  m:num
-  (A:num->A->bool) 0 DIFF A m
-  m:num
-  S:A->bool
-  m:num
-  (A:num->A->bool) m
-  m:num
-  S:A->bool
-  x:A
-  UNIONS {(C:num->A->bool) n | n IN (:num)} =\n       (A:num->A->bool) 0 DIFF INTERS {A n | n IN (:num)}
-  prob (p:A prob_space) (UNIONS {(C:num->A->bool) n | n IN (:num)}) =\n      prob p ((A:num->A->bool) 0) -\n      prob p (INTERS {A n | n IN (:num)})
-  forall n. prob (p:A prob_space) ((C:num->A->bool) n) =\n                       prob p ((A:num->A->bool) 0) - prob p (A n)
-  INTERS {(A:num->A->bool) n | n IN (:num)} IN\n                  prob_events (p:A prob_space)
+  (n : Num)
+  IN((x : A), (A : (Num, A) -> Bool)((n : Num)))
+  (n : Num)
+  (n : Num)
+  (n : Num)
+  (x : A)
+  \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, SUBSET(A(n), A(SUC(n)))) \226\134\146 UNIONS({A((n : Num)) | IN(n, UNIV)}) == UNION(A(0), UNIONS({DIFF(A(SUC((n : Num))), A(n)) | IN(n, UNIV)}))
+  SUBSET((A : (Num, A) -> Bool)(0), A((n : Num)))
+  (n : Num)
+  IN((x : A), (A : (Num, A) -> Bool)(0))
+  (x : A)
+  \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, SUBSET(A(n), A(SUC(n)))) \226\134\146 DISJOINT(A(0), UNIONS({DIFF(A(SUC((n : Num))), A(n)) | IN(n, UNIV)}))
+  (x : Real) - (a : Real) - (b : Real) == x - (a + b)
+  (m : Num)
+  (n : Num) - 1
+  \226\136\131 m : Num, (n : Num) == SUC(m) && (N0 : Num) <= m
+  (n : Num)
+  SUC((N0 : Num))
+  (N0 : Num)
+  (e : Real)
+  (B : (Num, A) -> Bool)
+  (p : Prob_space[A])
+  (e : Real)
+  \226\136\128 n : Num, prob((p : Prob_space[A]), (B : (Num, A) -> Bool)(n)) == prob(p, (A : (Num, A) -> Bool)(SUC(n))) - prob(p, A(n))
+  \226\136\128 N : Num, sum(op_dot_dot(0, N), (n : Num) => prob((p : Prob_space[A]), (B : (Num, A) -> Bool)(n))) == prob(p, (A : (Num, A) -> Bool)(SUC(N))) - prob(p, A(0))
+  UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == UNION(A(0), UNIONS({(B : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+  prob((p : Prob_space[A]), UNIONS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})) == prob(p, A(0)) + prob(p, UNIONS({(B : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+  IN(UNIONS({(B : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}), prob_events((p : Prob_space[A])))
+  SUBSET((A : (Num, A) -> Bool)(SUC((j : Num))), A((i : Num)))
+  SUBSET((A : (Num, A) -> Bool)(SUC((i : Num))), A((j : Num)))
+  (i : Num) < (j : Num)
+  (x : A)
+  \226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT((B : (Num, A) -> Bool)(i), B(j))
+  \226\136\128 n : Num, IN((B : (Num, A) -> Bool)(n), prob_events((p : Prob_space[A])))
+  (B : (Num, A) -> Bool) == ((n : Num) => DIFF((A : (Num, A) -> Bool)(SUC(n)), A(n)))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(A(n), A(SUC(n)))) \226\134\146 op_minus_minus_minus_gt((n : Num) => prob(p, A(n)), prob(p, UNIONS({A((n : Num)) | IN(n, UNIV)})), sequentially)
+  (a : Real) - (x : Real) - (a - (y : Real)) == -(x - y)
+  (n : Num)
+  (n : Num)
+  (N : Num)
+  (N : Num)
+  (e : Real)
+  (C : (Num, A) -> Bool)
+  (p : Prob_space[A])
+  (e : Real)
+  (m : Num)
+  DIFF((A : (Num, A) -> Bool)(0), A((m : Num)))
+  (m : Num)
+  (S : (A) -> Bool)
+  (m : Num)
+  (A : (Num, A) -> Bool)((m : Num))
+  (m : Num)
+  (S : (A) -> Bool)
+  (x : A)
+  UNIONS({(C : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == DIFF((A : (Num, A) -> Bool)(0), INTERS({A((n : Num)) | IN(n, UNIV)}))
+  prob((p : Prob_space[A]), UNIONS({(C : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})) == prob(p, (A : (Num, A) -> Bool)(0)) - prob(p, INTERS({A((n : Num)) | IN(n, UNIV)}))
+  \226\136\128 n : Num, prob((p : Prob_space[A]), (C : (Num, A) -> Bool)(n)) == prob(p, (A : (Num, A) -> Bool)(0)) - prob(p, A(n))
+  IN(INTERS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}), prob_events((p : Prob_space[A])))
   0
-  (A:num->A->bool) 0
-  INTERS {(A:num->A->bool) n | n IN (:num)} SUBSET A 0
-  forall n. (C:num->A->bool) n SUBSET C(SUC n)
-  forall n. (C:num->A->bool) n IN prob_events (p:A prob_space)
-  forall n:num. (A:num->A->bool) n SUBSET A 0
-  C = \\n:num. (A:num->A->bool) 0 DIFF A n
-  forall p:A prob_space A.\n      (forall n. A n IN prob_events p) /\\\n      (forall n. A (SUC n) SUBSET A n)\n      ==> ((\\n. prob p (A n)) --->\n           prob p (INTERS {A n | n IN (:num)})) sequentially
-  distribution (p:A prob_space) (X:A->real) (b:real->bool) =\n   prob p {x | x IN prob_carrier p /\\ X x IN b}
-  forall p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> {x | x IN prob_carrier p /\\ X x IN b} IN prob_events p
-  b:real->bool
-  b:real->bool
-  forall p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> &0 <= distribution p X b
-  forall p (X:A->real) b.\n     random_variable p X /\\ borel_in euclideanreal b\n     ==> distribution p X b <= &1
-  {x:A | x IN prob_carrier p} = prob_carrier p
-  forall p (X:A->real). distribution p X (:real) = &1
-  forall p (X:A->real). distribution p X {} = &0
-  forall p (X:A->real) b c.\n     random_variable p X /\\ borel_in euclideanreal b /\\\n     borel_in euclideanreal c /\\ b SUBSET c\n     ==> distribution p X b <= distribution p X c
-  j:num
-  i:num
-  j:num
-  i:num
-  \\n:num. {x:A | x IN prob_carrier p /\\ X x IN (B:num->real->bool) n}
-  p:A prob_space
+  (A : (Num, A) -> Bool)(0)
+  SUBSET(INTERS({(A : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}), A(0))
+  \226\136\128 n : Num, SUBSET((C : (Num, A) -> Bool)(n), C(SUC(n)))
+  \226\136\128 n : Num, IN((C : (Num, A) -> Bool)(n), prob_events((p : Prob_space[A])))
+  \226\136\128 n : Num, SUBSET((A : (Num, A) -> Bool)(n), A(0))
+  (C : (Num, A) -> Bool) == ((n : Num) => DIFF((A : (Num, A) -> Bool)(0), A(n)))
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, A) -> Bool, (\226\136\128 n : Num, IN(A(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(A(SUC(n)), A(n))) \226\134\146 op_minus_minus_minus_gt((n : Num) => prob(p, A(n)), prob(p, INTERS({A((n : Num)) | IN(n, UNIV)})), sequentially)
+  (distribution : (Prob_space[A], (A) -> Real, (Real) -> Bool) -> Real)((p : Prob_space[A]), (X : (A) -> Real), (b : (Real) -> Bool)) == prob(p, {(x : A) | IN(x, prob_carrier(p)) && IN(X(x), b)})
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 b : (Real) -> Bool, random_variable(p, X) && borel_in(euclideanreal, b) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && IN(X(x), b)}, prob_events(p))
+  (b : (Real) -> Bool)
+  (b : (Real) -> Bool)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 b : (Real) -> Bool, random_variable(p, X) && borel_in(euclideanreal, b) \226\134\146 real_of_num(0) <= distribution(p, X, b)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 b : (Real) -> Bool, random_variable(p, X) && borel_in(euclideanreal, b) \226\134\146 distribution(p, X, b) <= real_of_num(1)
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A])))} == prob_carrier(p)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, distribution(p, X, UNIV) == real_of_num(1)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, distribution(p, X, {}) == real_of_num(0)
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 b : (Real) -> Bool, \226\136\128 c : (Real) -> Bool, random_variable(p, X) && borel_in(euclideanreal, b) && borel_in(euclideanreal, c) && SUBSET(b, c) \226\134\146 distribution(p, X, b) <= distribution(p, X, c)
+  (j : Num)
+  (i : Num)
+  (j : Num)
+  (i : Num)
+  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), (B : (Num, Real) -> Bool)(n))}
+  (p : Prob_space[A])
   {x:A | x IN prob_carrier p /\\ X x IN UNIONS {(B:num->real->bool) n | n IN (:num)}} =\n     UNIONS {{x:A | x IN prob_carrier p /\\ X x IN B n} | n IN (:num)}
-  forall p (X:A->real) B.\n     random_variable p X /\\ (forall n. borel_in euclideanreal (B n)) /\\\n     (forall i j. ~(i = j) ==> DISJOINT (B i) (B j))\n     ==> ((\\n. distribution p X (B n)) real_sums\n          distribution p X (UNIONS {B n | n IN (:num)})) (from 0)
-  {w:A | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b} =\n    {w | w IN prob_carrier p /\\ X w <= a} INTER\n    {w | w IN prob_carrier p /\\ Y w <= b}
-  forall p (X:A->real) Y a b.\n     random_variable p X /\\ random_variable p Y\n     ==> {w | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b} IN prob_events p
-  joint_distribution_fn (p:A prob_space) (X:A->real) (Y:A->real)\n                         (a:real) (b:real) =\n   prob p {w | w IN prob_carrier p /\\ X w <= a /\\ Y w <= b}
-  forall p (X:A->real) Y a b.\n     joint_distribution_fn p X Y a b = joint_distribution_fn p Y X b a
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 B : (Num, Real) -> Bool, random_variable(p, X) && (\226\136\128 n : Num, borel_in(euclideanreal, B(n))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT(B(i), B(j))) \226\134\146 real_sums((n : Num) => distribution(p, X, B(n)), distribution(p, X, UNIONS({B((n : Num)) | IN(n, UNIV)})), from(0))
+  {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(w) <= (a : Real) && (Y : (A) -> Real)(w) <= (b : Real)} == INTER({(w : A) | IN(w, prob_carrier(p)) && X(w) <= a}, {(w : A) | IN(w, prob_carrier(p)) && Y(w) <= b})
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, random_variable(p, X) && random_variable(p, Y) \226\134\146 IN({(w : A) | IN(w, prob_carrier(p)) && X(w) <= a && Y(w) <= b}, prob_events(p))
+  (joint_distribution_fn : (Prob_space[A], (A) -> Real, (A) -> Real, Real, Real) -> Real)((p : Prob_space[A]), (X : (A) -> Real), (Y : (A) -> Real), (a : Real), (b : Real)) == prob(p, {(w : A) | IN(w, prob_carrier(p)) && X(w) <= a && Y(w) <= b})
+  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, joint_distribution_fn(p, X, Y, a, b) == joint_distribution_fn(p, Y, X, b, a)
 random_variable =  |- (#forall:fun(fun(fun('A,real),bool),bool) (\X:fun('A,real). (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). ((#=:fun(bool,fun(bool,bool)) ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) X:fun('A,real))) (#forall:fun(fun(real,bool),bool) (\a:real. ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) (#GSPEC:fun(fun('A,bool),fun('A,bool)) (\GEN%PVAR%1:'A. (#?:fun(fun('A,bool),bool) (\x:'A. (((#SETSPEC:fun('A,fun(bool,fun('A,bool))) GEN%PVAR%1:'A) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#prob_carrier:fun(prob_space('A),fun('A,bool)) p:prob_space('A)))) ((#real_le:fun(real,fun(real,bool)) (X:fun('A,real) x:'A)) a:real))) x:'A)))))) (#prob_events:fun(prob_space('A),fun(fun('A,bool),bool)) p:prob_space('A))))))))))
 RANDOM_VARIABLE_CONST =  |- (#forall:fun(fun(prob_space('A),bool),bool) (\p:prob_space('A). (#forall:fun(fun(real,bool),bool) (\c:real. ((#random_variable:fun(prob_space('A),fun(fun('A,real),bool)) p:prob_space('A)) (\x:'A. c:real))))))
 indicator_fn =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#=:fun(real,fun(real,bool)) ((#indicator_fn:fun(fun('A,bool),fun('A,real)) a:fun('A,bool)) x:'A)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) a:fun('A,bool))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
