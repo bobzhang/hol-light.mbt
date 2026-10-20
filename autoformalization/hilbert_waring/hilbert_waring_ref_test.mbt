@@ -11076,4819 +11076,4819 @@ test "Autoformalization/hilbert_waring matches Autoformalization/hilbert_waring.
       #|0..0..1..2..3..solved at 8
       #|0..0..0..0..2..4..6..11..16..21..55..solved at 77
       #|Autoformalization/hilbert_waring quotations (4813):
-      #|  &(num_of_int(k - lo)) = k - lo
-      #|  num_of_int(k - lo)
-      #|  k:int
-      #|  &(num_of_int(hi - lo)) = hi - lo
-      #|  forall lo hi:int. lo <= hi\n               ==> {k:int | lo <= k /\\ k <= hi} =\n                   IMAGE (\\j. lo + &j) (0..num_of_int(hi - lo))
-      #|  &(num_of_int(hi - lo + &1)):int = hi - lo + &1
-      #|  &(num_of_int(hi - lo)):int = hi - lo
-      #|  CARD(IMAGE (\\j. lo + &j) (0..num_of_int(hi - lo))) =\n                CARD(0..num_of_int(hi - lo))
-      #|  forall lo hi:int. lo <= hi ==> CARD {k:int | lo <= k /\\\n  k <= hi} = num_of_int(hi - lo + &1)
-      #|  forall lo hi:int. lo <= hi\n               ==> CARD {k:int | lo <= k /\\ k <= hi}\n                   <= num_of_int(hi - lo + &1)
-      #|  k * q:int
-      #|  (k:int) <= &0 \\/ &0 < k
-      #|  forall k q B:int. &1 <= q /\\ k * q <= B /\\ &0 <= B ==> k <= B
-      #|  --C:int
-      #|  q:int
-      #|  --k:int
-      #|  forall k q C:int. &1 <= q /\\ C <= k * q /\\ C <= &0 ==> C <= k
-      #|  s:int->bool = {}
-      #|  forall s:int->bool. FINITE s /\\ ~(s = {})\n                 ==> ?M:int. M IN s /\\ (forall x. x IN s ==> x <= M)
-      #|  s:int->bool = {}
-      #|  forall s:int->bool. FINITE s /\\ ~(s = {})\n                 ==> ?N:int. N IN s /\\ (forall x. x IN s ==> N <= x)
-      #|  &0:int
-      #|  q:int
-      #|  (a - b):int
-      #|  forall a b q:int. &1 <= q /\\ a * q <= b * q ==> a <= b
-      #|  z:int <= M
-      #|  z - N:int = q * k
-      #|  ((M - N) div q) * q = M - N
-      #|  q:int
-      #|  q:int
-      #|  z - N:int = q * k
-      #|  k:int
-      #|  k:int
-      #|  (q:int) divides (N - r)
-      #|  (q:int) divides (z - r)
-      #|  (q:int) divides (z - N)
-      #|  z:int
-      #|  forall S q N M A:int r.\n      &1 <= q /\\ &0 <= A /\\ q divides (M - N) /\\ N <= M /\\\n      (forall x. x IN S ==> N <= x /\\ x <= M /\\ q divides (x - r)) /\\\n       q divides (N - r)\n      ==> S SUBSET IMAGE (\\k:int. N + k * q) {k:int | &0 <= k /\\\n       k <= (M - N) div q}
-      #|  z:int
-      #|  z:int
-      #|  z:int
-      #|  q * ((M - N) div q) = M - N
-      #|  &(num_of_int((M - N) div q - &0 + &1)) = (M - N) div q + &1
-      #|  &0 <= (M - N) div q
-      #|  forall q M N A:int. &1 <= q /\\ q divides (M - N) /\\ N <= M /\\ M - N <= &2 * A /\\\n  &0 <= A\n                 ==> q * &(num_of_int((M - N) div q - &0 + &1)) <= &2 * A + q
-      #|  r:int
-      #|  A:int
-      #|  CARD(IMAGE (\\k. N + k * q) {k | &0 <= k /\\\n   k <= (M - N) div q})
-      #|  forall S q N M A:int r.\n      &1 <= q /\\ &0 <= A /\\ q divides (M - N) /\\ N <= M /\\\n      (forall x. x IN S ==> N <= x /\\ x <= M /\\ q divides (x - r)) /\\\n       q divides (N - r) /\\\n      FINITE S\n      ==> q * &(CARD S) <= q * &(CARD {k:int | &0 <= k /\\\n       k <= (M - N) div q})
-      #|  &1 <= (q:int) ==> &0 <= q
-      #|  q * &(num_of_int((M - N) div q - &0 + &1))
-      #|  CARD {k | &0 <= k /\\ k <= (M - N) div q} <=\n                  num_of_int((M - N) div q - &0 + &1)
-      #|  x IN {z:int | abs z <= A /\\\n       q divides (z - r)}
-      #|  x:int
-      #|  r:int
-      #|  A:int
-      #|  q * &(CARD {k | &0 <= k /\\ k <= (M - N) div q})
-      #|  (q:int) divides (M - r) /\\ q divides (N - r)\n       ==> q divides (M - N)
-      #|  (q:int) divides (M - N)
-      #|  (N:int) <= M
-      #|  abs(M:int) <= A /\\ q divides (M - r) /\\ abs(N:int) <= A /\\\n   q divides (N - r)
-      #|  N:int
-      #|  S:int->bool
-      #|  M:int
-      #|  S:int->bool
-      #|  S:int->bool = {}
-      #|  {z:int | --A <= z /\\ z <= A}
-      #|  FINITE(S:int->bool)
-      #|  S = {z:int | abs z <= A /\\ q divides (z - r)}
-      #|  forall A q r:int. &0 <= A /\\ &1 <= q\n               ==> q * &(CARD {z:int | abs z <= A /\\\n                q divides (z - r)}) <= &2 * A + q
-      #|  forall a1 a2 d:int. coprime(a1,a2) /\\ a1 divides (a2 * d) ==> a1 divides d
-      #|  lincount2 a1 a2 m A =\n    CARD {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\ abs z2 <= A}
-      #|  (a1:int) divides (a1 * x)
-      #|  (a2:int) * (z2 - z2_0) = a1 * (z1_0 - z1)
-      #|  a2:int
-      #|  z2:int
-      #|  forall a1 a2 m A z2_0 z1_0:int.\n      coprime(a1,a2) /\\ a1 * z1_0 + a2 * z2_0 = m\n      ==> {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\ abs z2 <= A}\n          SUBSET {z:int | abs z <= A /\\ a1 divides (z - z2_0)}
-      #|  z2_0:int
-      #|  abs a1:int
-      #|  A:int
-      #|  {z:int | --A <= z /\\ z <= A}
-      #|  z1_0:int
-      #|  z2_0:int
-      #|  A:int
-      #|  m:int
-      #|  a2:int
-      #|  a1:int
-      #|  abs a1 * &(CARD {z:int | abs z <= A /\\\n   abs a1 divides (z - z2_0)})
-      #|  z1_0:int
-      #|  z2_0:int
-      #|  T2:int->bool = {}
-      #|  &1 <= abs(a1:int)
-      #|  T2 = {z2:int | ?z1. a1*z1 + a2*z2 = m /\\ abs z1 <= A /\\\n   abs z2 <= A}
-      #|  forall a1 a2 m A:int.\n      coprime(a1,a2) /\\ ~(a1 = &0) /\\ &0 <= A\n      ==> abs a1 * &(lincount2 a1 a2 m A) <= &2 * A + abs a1
-      #|  A:int
-      #|  m:int
-      #|  a2:int
-      #|  a1:int
-      #|  forall a1 a2 m A:int.\n      coprime(a1,a2) /\\ ~(a1 = &0) /\\ &0 <= A /\\ abs a1 <= A\n      ==> abs a1 * &(lincount2 a1 a2 m A) <= &3 * A
-      #|  (d:int) divides g
-      #|  (d:int) divides (a:A->int) x
-      #|  v:int
-      #|  u:int
-      #|  g:int
-      #|  (a:A->int) x
-      #|  j:A
-      #|  (d:int) divides (a:A->int) x /\\\n     d divides g
-      #|  d:int
-      #|  g:int
-      #|  forall b:int. G divides b /\\ b divides c ==> G divides c
-      #|  i:A
-      #|  gcd((a:A->int) x, g)
-      #|  g:int
-      #|  a:A->int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  x:A
-      #|  (d:int) divides &0
-      #|  &0:int
-      #|  forall s:A->bool. FINITE s\n     ==> forall a:A->int. ?g. (forall i. i IN s ==> g divides a i) /\\\n                        (forall d. (forall i. i IN s ==> d divides a i) ==> d divides g) /\\\n                        &0 <= g
-      #|  lincount (s:A->bool) (a:A->int) (m:int) (A:int) =\n    CARD {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                     (forall i. ~(i IN s) ==> z i = &0) /\\\n                     isum s (\\i. a i * z i) = m}
-      #|  setcoprime (s:A->bool) (a:A->int) <=>\n    (forall d. (forall i. i IN s ==> d divides a i) ==> d divides &1)
-      #|  abs((z:A->int) i) <= A
-      #|  i:A
-      #|  z:A->int
-      #|  {z:A->int | (forall i. i IN s ==> z i IN {w:int | --A <= w /\\\n   w <= A}) /\\\n                          (forall i. ~(i IN s) ==> z i = &0)}
-      #|  forall s:A->bool a m A. FINITE s\n    ==> FINITE {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                           (forall i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m}
-      #|  abs(z:int) <= A ==> --A <= z /\\ z <= A
-      #|  {z:int | --A <= z /\\ z <= A}
-      #|  (z:A->int) IN SS
-      #|  z:A->int
-      #|  (z:A->int) H
-      #|  z:A->int
-      #|  z2:int
-      #|  A:int
-      #|  m:int
-      #|  a:A->int
-      #|  {H,K}:A->bool
-      #|  (z:A->int) i = &0 /\\ (w:A->int) i = &0
-      #|  i:A = K
-      #|  i:A = H
-      #|  i:A
-      #|  (z:A->int) K = (w:A->int) K
-      #|  a H * (z:A->int) H + a K * z K = m
-      #|  a H * (w:A->int) H + a K * w K = m
-      #|  a (H:A) * (z:A->int) H = a H * (w:A->int) H
-      #|  w:A->int
-      #|  z:A->int
-      #|  w:A->int
-      #|  z:A->int
-      #|  CARD (IMAGE (\\z:A->int. z K) SS)
-      #|  z:A->int
-      #|  forall z:A->int. z IN SS ==> a H * z H + a K * z K = m /\\\n                           (forall i. ~(i IN {H,K}) ==> z i = &0)
-      #|  SS = {z:A->int | (forall i. i IN {H,K} ==> abs(z i) <= A) /\\\n                (forall i. ~(i IN {H,K}) ==> z i = &0) /\\\n                isum {H,K} (\\i. a i * z i) = m}
-      #|  abs(a (H:A)) * &(lincount2 (a H) (a K) m A)
-      #|  forall H K:A a m A:int.\n     ~(H = K) /\\ ~(a H = &0) /\\ &0 <= A /\\ abs(a K) <= abs(a H) /\\\n      abs(a H) <= A /\\\n     coprime(a H, a K)\n     ==> abs(a H) * &(lincount {H,K} a m A) <= &3 * A
-      #|  K:A
-      #|  H:A
-      #|  gcd((x:int),y) divides &1 ==> coprime(x,y)
-      #|  forall x y:int. (forall d. d divides x /\\\n  d divides y ==> d divides &1) ==> coprime(x,y)
-      #|  i:A
-      #|  setcoprime {H,K:A} a
-      #|  d:int
-      #|  H:A
-      #|  K:A
-      #|  ~(H:A = K)
-      #|  K:A
-      #|  K:A
-      #|  ~(CARD(s DELETE (H:A)) = 0)
-      #|  ~(s DELETE (H:A) = {})
-      #|  ?K:A. ~(H = K) /\\ s = {H,K}
-      #|  forall s:A->bool a m A H.\n     FINITE s /\\ CARD s = 2 /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     (forall i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n     (forall i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &3 * A
-      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= abs(a H)
-      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= abs(a H)
-      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  forall i:A. i IN {H,K} ==> abs((a:A->int) i) <= A
-      #|  X:X->bool
-      #|  FINITE {x:X | x IN X /\\ (f:X->Y) x = y}
-      #|  y:Y
-      #|  nsum (IMAGE (f:X->Y) X) (\\y. D)
-      #|  X:X->bool
-      #|  (\\x:X. 1)
-      #|  f:X->Y
-      #|  forall(f:X->Y) X c D.\n     FINITE X /\\ (forall y. c * CARD {x | x IN X /\\ f x = y} <= D)\n     ==> c * CARD X <= CARD (IMAGE f X) * D
-      #|  H:A
-      #|  s:A->bool
-      #|  \\i:A. a i * (z:A->int) i
-      #|  forall s:A->bool a z:A->int H. FINITE s /\\ H IN s\n     ==> isum s (\\i. a i * z i) = a H * z H + isum (s DELETE H) (\\i. a i * z\n      i)
-      #|  &1 <= A ==> &0:int <= A - --A + &1
-      #|  &1 <= A ==> &0:int <= &3 * A
-      #|  &1 <= A ==> --A:int <= A
-      #|  forall A:int. &1 <= A ==> CARD {x:int | --A <= x /\\\n  x <= A} <= num_of_int(&3 * A)
-      #|  &(num_of_int(&3 * A)):int = &3 * A
-      #|  --A <= (x:int) /\\ x <= A <=> abs x <= A
-      #|  w:A->int
-      #|  {w:A->int | (forall i. i IN t ==> abs(w i) <= A) /\\ (forall i. ~(i IN t) ==> w i =\n    &0)} =\n    {w:A->int | (forall i. i IN t ==> w i IN {x:int | --A <= x /\\ x <= A}) /\\\n                (forall i. ~(i IN t) ==> w i = &0)}
-      #|  forall t:A->bool A. FINITE t /\\ &1 <= A\n    ==> &(CARD {w:A->int | (forall i. i IN t ==> abs(w i) <= A) /\\\n                           (forall i. ~(i IN t) ==> w i = &0)})\n        <= (&3 * A) pow (CARD t)
-      #|  (a:A->int) i = &0
-      #|  (d:int) divides d
-      #|  i:A = H
-      #|  i:A
-      #|  (a:A->int) H
-      #|  setcoprime (s:A->bool) a
-      #|  (a:A->int) H divides &1
-      #|  forall s:A->bool a H. H IN s /\\ setcoprime s a /\\\n  (forall i. i IN s DELETE H ==> a i = &0) /\\\n                   &1 <= abs(a H)\n     ==> abs(a H) = &1
-      #|  (d:int) divides &0
-      #|  --A <= (x:int) /\\ x <= A <=> abs x <= A
-      #|  {w:A->int | (forall i. i IN (s DELETE H) ==> w i IN {x:int | --A <=\n       x /\\ x <= A}) /\\\n                              (forall i. ~(i IN (s DELETE H)) ==> w i = &0)}
-      #|  (z:A->int) IN X
-      #|  (z:A->int) IN X
-      #|  i:A
-      #|  z:A->int
-      #|  w:A->int
-      #|  i:A
-      #|  ~((a:A->int) H = &0)
-      #|  a H * (z:A->int) H = a H * (w:A->int) H
-      #|  i:A = H
-      #|  i:A
-      #|  w:A->int
-      #|  z:A->int
-      #|  CARD (IMAGE (\\z:A->int i. if i = H then &0 else z i) X)
-      #|  (a:A->int) i = &0
-      #|  i:A
-      #|  isum (s DELETE H) (\\i. a i * (z:A->int) i) = &0
-      #|  H:A
-      #|  z:A->int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  z:A->int
-      #|  forall z:A->int. z IN X ==> a H * z H = m
-      #|  X = {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                          (forall i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}
-      #|  forall s:A->bool a m A H.\n     FINITE s /\\ H IN s /\\ abs(a H) = &1 /\\ (forall i. i IN s DELETE H ==> a i = &0)\n     ==> CARD {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                          (forall i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}\n         <= CARD {w:A->int | (forall i. i IN (s DELETE H) ==> abs(w i) <= A) /\\\n                             (forall i. ~(i IN (s DELETE H)) ==> w i = &0)}
-      #|  H:A
-      #|  z:A->int
-      #|  CARD(s DELETE (H:A)) = CARD s - 1
-      #|  A:int
-      #|  s DELETE (H:A)
-      #|  &(CARD {w:A->int | (forall i. i IN (s DELETE H) ==> abs(w i) <= A) /\\\n                                 (forall i. ~(i IN (s DELETE H)) ==> w i =\n                                  &0)}):int
-      #|  s:A->bool
-      #|  abs((a:A->int) H) = &1
-      #|  forall s:A->bool a m A H.\n     FINITE s /\\ 3 <= CARD s /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     H IN s /\\ (forall i. i IN s DELETE H ==> a i = &0)\n     ==> abs(a H) * &(lincount s a m A) <= (&3 * A) pow (CARD s - 1)
-      #|  &0 divides (x:int) <=> x = &0
-      #|  g divides (a:A->int) j
-      #|  ~((a:A->int) j = &0)
-      #|  &1 <= (g:int) <=> &0 <= g /\\ ~(g = &0)
-      #|  g:int
-      #|  g:int
-      #|  a:A->int
-      #|  t:A->bool
-      #|  forall t:A->bool a. FINITE t /\\ (?j. j IN t /\\ ~(a j = &0))\n    ==> ?delta. &1 <= delta /\\ (forall i. i IN t ==> delta divides a i) /\\\n                (forall d. (forall i. i IN t ==> d divides a i) ==> d divides delta)
-      #|  A:int
-      #|  mp:int
-      #|  q:A->int
-      #|  t:A->bool
-      #|  i:A
-      #|  isum t (\\i. q i * (if i IN t then (z:A->int) i else &0))\n         =\n                      isum t (\\i. q i * z i)
-      #|  i:A
-      #|  i:A IN s
-      #|  i:A
-      #|  z:A->int
-      #|  w:A->int
-      #|  {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                              (forall i. ~(i IN s) ==> z i = &0) /\\\n                              isum s (\\i. a i * z i) = m}
-      #|  (w:A->int) IN Fset
-      #|  (z:A->int) IN Fset
-      #|  (z:A->int) i = &0
-      #|  ~(i:A IN s)
-      #|  a H * (z:A->int) H = a H * (w:A->int) H
-      #|  i:A = H
-      #|  i:A IN t
-      #|  i:A
-      #|  i:A
-      #|  i:A
-      #|  forall i:A. i IN t ==> (z:A->int) i = w i
-      #|  w:A->int
-      #|  z:A->int
-      #|  CARD (IMAGE (\\z:A->int i. if i IN t then z i else &0) Fset)
-      #|  (a:A->int) i = delta * q i
-      #|  i:A
-      #|  isum t (\\i. a i * (v:A->int) i) = isum t (\\i. delta * (q i\n      * v i))
-      #|  isum t (\\i. a i * (v:A->int) i) = delta * mp
-      #|  H:A
-      #|  v:A->int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  v:A->int
-      #|  forall v:A->int. v IN Fset ==> a H * v H = m - delta * mp
-      #|  Fset = {z:A->int | ((forall i. i IN s ==> abs(z i) <= A) /\\\n                           (forall i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m) /\\\n                          isum t (\\i. q i * z i) = mp}
-      #|  t = s DELETE (H:A)
-      #|  forall s:A->bool a q delta m A H mp.\n     FINITE s /\\ H IN s /\\ ~(a H = &0) /\\\n     (forall i. i IN (s DELETE H) ==> a i = delta * q i)\n     ==> CARD {z:A->int | ((forall i. i IN s ==> abs(z i) <= A) /\\\n                           (forall i. ~(i IN s) ==> z i = &0) /\\\n                           isum s (\\i. a i * z i) = m) /\\\n                          isum (s DELETE H) (\\i. q i * z i) = mp}\n         <= lincount (s DELETE H) q mp A
-      #|  i:A
-      #|  isum t (\\i. abs((q:A->int) i)) * A = isum t (\\i. abs(q i) * A)
-      #|  isum t (\\i. abs((q:A->int) i * z i))
-      #|  forall t:A->bool q z A. FINITE t /\\ &0 <= A /\\ (forall i. i IN t ==> abs(z i) <= A)\n    ==> abs(isum t (\\i. q i * z i)) <= isum t (\\i. abs(q i)) * A
-      #|  abs(z:int) <= b ==> --b <= z /\\ z <= b
-      #|  {z:int | --(Hs * A) <= z /\\ z <= Hs * A}
-      #|  A:int
-      #|  (a:A->int) i = delta * q i
-      #|  i:A
-      #|  isum t (\\i. a i * (z:A->int) i) =\n                    delta * isum t (\\i. q i * z i)
-      #|  H:A
-      #|  z:A->int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  i:A IN t
-      #|  i:A
-      #|  abs(isum t (\\i. (q:A->int) i * z i)) <= Hs * A
-      #|  mp = isum t (\\i. (q:A->int) i * z i)
-      #|  (z:A->int) H
-      #|  z:A->int
-      #|  mp:int
-      #|  Hs = isum t (\\i. abs((q:A->int) i))
-      #|  t = s DELETE (H:A)
-      #|  forall s:A->bool a q delta m A H.\n     FINITE s /\\ H IN s /\\ &0 <= A /\\ &1 <= isum (s DELETE H) (\\i. abs(q i)) /\\\n     (forall i. i IN (s DELETE H) ==> a i = delta * q i)\n     ==> CARD (IMAGE (\\z:A->int. isum (s DELETE H) (\\i. q i * z i))\n                {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                            (forall i. ~(i IN s) ==> z i = &0) /\\\n                            isum s (\\i. a i * z i) = m})\n         <= lincount2 (a H) delta m (isum (s DELETE H) (\\i. abs(q i)) * A)
-      #|  y:Y
-      #|  &(num_of_int c):int = c /\\\n   &(num_of_int D):int = D
-      #|  num_of_int D
-      #|  num_of_int c
-      #|  X:X->bool
-      #|  f:X->Y
-      #|  forall(f:X->Y) X (c:int) (D:int).\n     FINITE X /\\ &0 <= c /\\ &0 <= D /\\ (forall y. c * &(CARD {x | x IN X /\\\n      f x = y}) <= D)\n     ==> c * &(CARD X) <= &(CARD (IMAGE f X)) * D
-      #|  abs((q:A->int) i)
-      #|  i:A
-      #|  Ht:A
-      #|  Ht:A
-      #|  M:int
-      #|  IMAGE (\\i:A. abs((q:A->int) i)) t
-      #|  forall t:A->bool q. FINITE t /\\ ~(t = {})\n    ==> ?Ht. Ht IN t /\\\n             (forall i. i IN t ==> abs((q:A->int) i) <= abs(q Ht))
-      #|  isum t (\\i:A. abs((q:A->int) Ht))
-      #|  forall t:A->bool q Ht.\n     FINITE t /\\ (forall i. i IN t ==> abs((q:A->int) i) <= abs(q Ht))\n     ==> isum t (\\i. abs(q i)) <= &(CARD t) * abs(q Ht)
-      #|  &3 * ((Hs:int) * A) = (&3 * A) * Hs /\\\n                           &3 * ((l * Hm) * A) = (&3 * A) * (l * Hm)
-      #|  (Hm:int) * (l * F2) * ((&3 * A) * P) =\n    (&3 * ((l * Hm) * A)) * (F2 * P)
-      #|  (&3 * ((Hs:int) * A)) * (F2 * P)
-      #|  (c:int) * (Ic * (F2 * P)) = (c * Ic) * (F2 * P)
-      #|  (Hm:int) * (c * X) = c * (Hm * X)
-      #|  (c:int) * (Ic * (F2 * P))
-      #|  Hm:int
-      #|  forall c X Ic Hm Hs A F2 P l:int.\n     &1 <= Hm /\\ &0 <= c /\\ &0 <= A /\\ &0 <= F2 /\\ &0 <= P /\\ &0 <= Ic /\\\n      &0 <= X /\\\n     Hm * X <= Ic * (F2 * P) /\\ c * Ic <= &3 * (Hs * A) /\\ Hs <= l * Hm\n     ==> c * X <= (l * F2) * ((&3 * A) * P)
-      #|  CARD(s:A->bool) - 1 =\n   SUC((CARD s - 1) - 1)
-      #|  CARD(s:A->bool) - 1 = SUC((CARD s - 1) - 1)
-      #|  forall s:A->bool. 3 <= CARD s\n   ==> (&(CARD s - 1):int) * &(FACT((CARD s - 1) - 1)) =\n       &(FACT(CARD s - 1))
-      #|  CARD(s:A->bool) - 1 =\n   SUC((CARD s - 1) - 1)
-      #|  CARD(s:A->bool) - 1 = SUC((CARD s - 1) - 1)
-      #|  forall s:A->bool A:int. 3 <= CARD s\n   ==> (&3 * A) * (&3 * A) pow ((CARD s - 1) - 1) = (&3 * A) pow (CARD s - 1)
-      #|  Hs <= &(CARD(t:A->bool)) * abs((q:A->int) Ht)
-      #|  Hs:int
-      #|  abs((q:A->int) Ht)
-      #|  &(CARD(IMAGE (gproj:(A->int)->int) (Xset:(A->int)->bool))):int
-      #|  A:int
-      #|  s:A->bool
-      #|  s:A->bool
-      #|  A:int
-      #|  Hs * A:int
-      #|  m:int
-      #|  delta:int
-      #|  (a:A->int) H
-      #|  abs((a:A->int) H) * &(lincount2 ((a:A->int) H) delta m (Hs *\n     A))
-      #|  isum (s DELETE H) (\\i. abs((q:A->int) i)) = Hs
-      #|  IMAGE (\\z:A->int. isum (s DELETE H) (\\i. (q:A->int) i * z i))\n                    {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                                (forall i. ~(i IN s) ==> z i = &0) /\\\n                                isum s (\\i. a i * z i) = m} =\n                  IMAGE (gproj:(A->int)->int) (Xset:(A->int)->bool)
-      #|  H:A
-      #|  A:int
-      #|  m:int
-      #|  delta:int
-      #|  q:A->int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  abs((a:A->int) H) * &(CARD(IMAGE (gproj:(A->int)->int)\n    (Xset:(A->int)->bool))) <=\n    &3 * (Hs * A)
-      #|  (CARD(s:A->bool)-1)-1 = CARD(t:A->bool) - 1
-      #|  delta:int
-      #|  abs((q:A->int) Ht) * &(lincount (s DELETE H) (q:A->int) mp\n       A)
-      #|  {x:A->int | x IN Xset /\\ (gproj:(A->int)->int) x = mp} =\n                    {z:A->int | ((forall i. i IN s ==> abs(z i) <= A) /\\\n                                 (forall i. ~(i IN s) ==> z i = &0) /\\\n                                 isum s (\\i. a i * z i) = m) /\\\n                                isum (s DELETE H) (\\i. q i * z i) = mp}
-      #|  mp:int
-      #|  abs((q:A->int) Ht) * &(CARD (Xset:(A->int)->bool)) <=\n    &(CARD(IMAGE (gproj:(A->int)->int) Xset)) *\n    (&(FACT((CARD(s:A->bool) - 1)-1)) * (&3 * A) pow ((CARD s - 1) - 1))
-      #|  Ht:A
-      #|  t:A->bool
-      #|  \\i:A. abs((q:A->int) i)
-      #|  &0 <= isum (t DELETE (Ht:A)) (\\i. abs((q:A->int) i))
-      #|  abs((q:A->int) Ht)
-      #|  &1 <= (Hs:int)
-      #|  Hs = isum (t:A->bool) (\\i. abs((q:A->int) i))
-      #|  gproj = \\z:A->int. isum t (\\i. (q:A->int) i * z i)
-      #|  Xset = {z:A->int | (forall i. i IN s ==> abs(z i) <= A) /\\\n                                 (forall i. ~(i IN s) ==> z i = &0) /\\\n                                 isum s (\\i. a i * z i) = m}
-      #|  CARD(t:A->bool) = CARD(s:A->bool) - 1
-      #|  FINITE (t:A->bool)
-      #|  forall s:A->bool a q delta m A H Ht t.\n     FINITE s /\\ 3 <= CARD s /\\ &1 <= A /\\ &1 <= abs(a H) /\\ abs(a H) <= A /\\\n      H IN s /\\\n     s DELETE H = t /\\\n     (forall i. i IN t ==> a i = delta * q i) /\\\n     setcoprime t q /\\ coprime(a H, delta) /\\\n     Ht IN t /\\ (forall i. i IN t ==> abs(q i) <= abs(q Ht)) /\\ &1 <= abs(q Ht) /\\\n     (forall i. i IN t ==> abs(q i) <= A) /\\\n     (forall q' m' Ht'. setcoprime t q' /\\\n      (forall i. i IN t ==> abs(q' i) <= abs(q' Ht')) /\\\n                  (forall i. i IN t ==> abs(q' i) <= A) /\\ Ht' IN t\n                ==> abs(q' Ht') * &(lincount t q' m' A) <=\n                    &(FACT(CARD t - 1)) * (&3 * A) pow (CARD t - 1))\n     ==> abs(a H) * &(lincount s a m A) <=\n         &(FACT(CARD s - 1)) * (&3 * A) pow (CARD s - 1)
-      #|  forall t:A->bool a delta. &1 <= delta /\\ (forall i. i IN t ==> delta divides a i)\n    ==> (forall i. i IN t ==> a i = delta * (a i div delta))
-      #|  &1 <= (delta:int) ==> abs delta = delta
-      #|  i:A
-      #|  delta:int
-      #|  a:A->int
-      #|  t:A->bool
-      #|  abs((a:A->int) i) = delta * abs(a i div delta)
-      #|  forall t:A->bool a delta. &1 <= delta /\\ (forall i. i IN t ==> delta divides a i)\n    ==> (forall i. i IN t ==> abs(a i div delta) <= abs(a i))
-      #|  ~((delta:int) = &0)
-      #|  ((delta:int) * d) divides delta
-      #|  ~((delta:int) = &0)
-      #|  i:A
-      #|  (d:int) divides e ==> (delta * d) divides (delta * e)
-      #|  (a:A->int) i = delta * (a i div delta)
-      #|  i:A
-      #|  ((delta:int) * d) divides delta
-      #|  d:int
-      #|  forall t:A->bool a delta.\n     &1 <= delta /\\ (forall i. i IN t ==> delta divides a i) /\\\n     (forall d. (forall i. i IN t ==> d divides a i) ==> d divides delta)\n     ==> setcoprime t (\\i. a i div delta)
-      #|  (d:int) divides delta /\\ delta divides ai ==> d divides ai
-      #|  i:A = H
-      #|  i:A
-      #|  setcoprime (s:A->bool) a
-      #|  d:int
-      #|  forall s:A->bool a delta H.\n     setcoprime s a /\\ H IN s /\\\n     (forall i. i IN (s DELETE H) ==> delta divides a i)\n     ==> coprime(a H, delta)
-      #|  ~((aj:int) = &0)
-      #|  &1 <= abs(x:int) <=> ~(x = &0)
-      #|  forall aj delta qj:int. aj = delta * qj /\\ ~(aj = &0) ==> &1 <= abs qj
-      #|  s DELETE (H:A)
-      #|  Ht:A
-      #|  delta:int
-      #|  q:A->int
-      #|  delta:int
-      #|  (a:A->int) j
-      #|  abs((q:A->int) j)
-      #|  &1 <= abs((q:A->int) Ht)
-      #|  Ht:A
-      #|  q:A->int
-      #|  s DELETE (H:A)
-      #|  i:A IN s DELETE H
-      #|  forall i:A. i IN s ==> abs((a:A->int) i) <= A
-      #|  abs((a:A->int) i)
-      #|  i:A
-      #|  forall i:A. i IN s DELETE H ==> abs((q:A->int) i) <= A
-      #|  forall i:A. i IN s DELETE H ==> abs((q:A->int) i) <= abs(a i)
-      #|  s:A->bool
-      #|  coprime((a:A->int) H, delta)
-      #|  setcoprime (s DELETE H) (q:A->int)
-      #|  forall i:A. i IN s DELETE H ==> (a:A->int) i = delta * q i
-      #|  q = \\i:A. (a:A->int) i div delta
-      #|  delta:int
-      #|  a:A->int
-      #|  s DELETE (H:A)
-      #|  forall s:A->bool a m A H.\n     FINITE s /\\ 3 <= CARD s /\\ setcoprime s a /\\ &1 <= A /\\ &1 <= abs(a H) /\\\n     abs(a H) <= A /\\ H IN s /\\ (forall i. i IN s ==> abs(a i) <= A) /\\\n     (?j. j IN s DELETE H /\\ ~(a j = &0)) /\\\n     (forall q' m' Ht'. setcoprime (s DELETE H) q' /\\\n                  (forall i. i IN s DELETE H ==> abs(q' i) <= abs(q' Ht')) /\\\n                  (forall i. i IN s DELETE H ==> abs(q' i) <= A) /\\\n                   Ht' IN (s DELETE H)\n                ==> abs(q' Ht') * &(lincount (s DELETE H) q' m' A) <=\n                    &(FACT(CARD(s DELETE H) - 1)) * (&3 * A) pow (CARD(s DELETE\n                     H) - 1))\n     ==> abs(a H) * &(lincount s a m A) <=\n         &(FACT(CARD s - 1)) * (&3 * A) pow (CARD s - 1)
-      #|  3 <= CARD(s:A->bool)
-      #|  CARD(s DELETE (H:A)) = CARD(s:A->bool) - 1
-      #|  Ht':A
-      #|  A:int
-      #|  m':int
-      #|  q':A->int
-      #|  s DELETE\n   (H:A)
-      #|  3 <= CARD(s:A->bool)
-      #|  CARD(s:A->bool) - 1
-      #|  Ht':A
-      #|  m':int
-      #|  q':A->int
-      #|  ~(forall i:A. i IN s DELETE H ==> (a:A->int) i = &0)
-      #|  (&3 * (A:int)) pow (CARD(s:A->bool) - 1)
-      #|  forall i:A. i IN s DELETE H ==> (a:A->int) i = &0
-      #|  ~(CARD(s:A->bool) = 2)
-      #|  2 <= CARD(s:A->bool)
-      #|  3 <= CARD(s:A->bool)
-      #|  2 - 1 = 1
-      #|  2 - 1 = 1
-      #|  FACT(2 - 1) = 1
-      #|  CARD(s:A->bool) = 2
-      #|  abs((a:A->int) H) <= A
-      #|  abs((a:A->int) H)
-      #|  &1 <= (A:int)
-      #|  &1:int
-      #|  &2:int
-      #|  abs((a:A->int) i) <= abs(a H)
-      #|  (a:A->int) i = &0
-      #|  i:A
-      #|  &2:int
-      #|  setcoprime (s:A->bool) a
-      #|  &1 <= abs(x:int) <=> ~(x = &0)
-      #|  &1 <= abs((a:A->int) H)
-      #|  H:A
-      #|  A:int
-      #|  m:int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  n:num
-      #|  forall n. forall s:A->bool a m A H.\n     CARD s = n /\\ FINITE s /\\ 2 <= CARD s /\\ setcoprime s a /\\ &0 <= A /\\\n     (forall i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n      (forall i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &(FACT(CARD s - 1)) * (&3 * A) pow\n      (CARD s - 1)
-      #|  (d:int) divides &0
-      #|  H:A
-      #|  A:int
-      #|  m:int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  CARD(s:A->bool)
-      #|  forall s:A->bool a m A H.\n     FINITE s /\\ 2 <= CARD s /\\ setcoprime s a /\\ &0 <= A /\\\n     (forall i. i IN s ==> abs(a i) <= A) /\\ H IN s /\\\n      (forall i. i IN s ==> abs(a i) <= abs(a H))\n     ==> abs(a H) * &(lincount s a m A) <= &(FACT(CARD s - 1)) * (&3 * A) pow\n      (CARD s - 1)
-      #|  abs((a:A->int) i) <= A
-      #|  i:A
-      #|  a:A->int
-      #|  {a:A->int | (forall i. i IN s ==> a i IN {w:int | --A <= w /\\\n   w <= A}) /\\\n                          (forall i. ~(i IN s) ==> a i = &0)}
-      #|  forall s:A->bool A. FINITE s\n    ==> FINITE {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
-      #|  isum s (\\i. (a:A->int) i * z i) = delta * isum s (\\i. q i * z\n   i)
-      #|  forall s (a:A->int) q delta z.\n      FINITE s /\\ ~(delta = &0) /\\ (forall i. i IN s ==> a i = delta * q i)\n      ==> (isum s (\\i. a i * z i) = &0 <=> isum s (\\i. q i * z i) = &0)
-      #|  z:A->int
-      #|  delta:int
-      #|  q:A->int
-      #|  a:A->int
-      #|  s:A->bool
-      #|  z:A->int
-      #|  forall s (a:A->int) q delta B.\n      FINITE s /\\ ~(delta = &0) /\\\n      (forall i. i IN s ==> a i = delta * q i) /\\ (forall i. ~(i IN s) ==> q i = &0)\n      ==> lincount s a (&0) B = lincount s q (&0) B
-      #|  (delta:int) = &0 /\\ delta divides x ==> x = &0
-      #|  ~((delta:int) = &0)
-      #|  forall delta x:int. &0 <= delta /\\ delta divides x /\\ ~(x = &0) ==> &1 <= delta
-      #|  (a:int) <= b ==> a + c <= b + c
-      #|  ((&n:int) + &1) pow q * (&n + &1) =\n    (&n + &1) pow q * &n + (&n + &1) pow q
-      #|  (&n:int) pow (q+1) + &(SUC n) pow q
-      #|  1 <= SUC n
-      #|  forall q. forall n:num. isum(1..n)(\\h. &h pow q) <= &n pow (q+1)
-      #|  forall d:num. d * (d - 1) <= d * d
-      #|  d:num
-      #|  A:num
-      #|  forall A d q:num. (A DIV d) EXP q * d EXP q <= A EXP q
-      #|  forall d q:num. 2 <= q ==> d EXP 2 <= d EXP q
-      #|  d EXP 2
-      #|  (A DIV d) EXP q * d EXP q
-      #|  forall A d q:num. 2 <= q ==> (A DIV d) EXP q * d * (d - 1) <= A EXP q
-      #|  forall n:num. 1 <= n ==> SUC n * (n - 1) + 1 = n * n
-      #|  SUC n * (n - 1) * Aq + Aq = (SUC n * (n - 1) + 1) * Aq
-      #|  SUC n * ((n - 1) * Aq) + Aq
-      #|  SUC n * (n * S) + F1 * SUC n * n
-      #|  n = 0
-      #|  n * (SUC n * (S + F1)) <= n * (n * Aq)
-      #|  forall n S F1 Aq:num. 1 <= n /\\ n * S <= (n - 1) * Aq /\\ F1 * SUC n * n <= Aq\n      ==> SUC n * (S + F1) <= n * Aq
-      #|  q:num
-      #|  SUC n
-      #|  A:num
-      #|  n = 0
-      #|  1 <= n
-      #|  2 <= SUC n <=> 1 <= n
-      #|  forall A q:num. 2 <= q ==> forall n. n * nsum(2..n)(\\d. (A DIV d) EXP q) <= (n - 1) * A\n  EXP q
-      #|  A = 0
-      #|  (A - 1) * A EXP q
-      #|  A * S <= A * A EXP q
-      #|  forall A q S:num. 1 <= A /\\ A * S <= (A - 1) * A EXP q ==> S <= A EXP q
-      #|  q:num
-      #|  A:num
-      #|  nsum(2..A)(\\d. (A DIV d) EXP q) <= A EXP q
-      #|  1 + 1 = 2
-      #|  A:num
+      #|  int_of_num(num_of_int((k : Int) - (lo : Int))) == k - lo
+      #|  num_of_int((k : Int) - (lo : Int))
+      #|  (k : Int)
+      #|  int_of_num(num_of_int((hi : Int) - (lo : Int))) == hi - lo
+      #|  \226\136\128 lo : Int, \226\136\128 hi : Int, lo <= hi \226\134\146 {(k : Int) | lo <= k && k <= hi} == IMAGE((j : Num) => lo + int_of_num(j), op_dot_dot(0, num_of_int(hi - lo)))
+      #|  int_of_num(num_of_int((hi : Int) - (lo : Int) + int_of_num(1))) == hi - lo + int_of_num(1)
+      #|  int_of_num(num_of_int((hi : Int) - (lo : Int))) == hi - lo
+      #|  CARD(IMAGE((j : Num) => (lo : Int) + int_of_num(j), op_dot_dot(0, num_of_int((hi : Int) - lo)))) == CARD(op_dot_dot(0, num_of_int(hi - lo)))
+      #|  \226\136\128 lo : Int, \226\136\128 hi : Int, lo <= hi \226\134\146 CARD({(k : Int) | lo <= k && k <= hi}) == num_of_int(hi - lo + int_of_num(1))
+      #|  \226\136\128 lo : Int, \226\136\128 hi : Int, lo <= hi \226\134\146 CARD({(k : Int) | lo <= k && k <= hi}) <= num_of_int(hi - lo + int_of_num(1))
+      #|  (k : Int) * (q : Int)
+      #|  (k : Int) <= int_of_num(0) || int_of_num(0) < k
+      #|  \226\136\128 k : Int, \226\136\128 q : Int, \226\136\128 B : Int, int_of_num(1) <= q && k * q <= B && int_of_num(0) <= B \226\134\146 k <= B
+      #|  -(C : Int)
+      #|  (q : Int)
+      #|  -(k : Int)
+      #|  \226\136\128 k : Int, \226\136\128 q : Int, \226\136\128 C : Int, int_of_num(1) <= q && C <= k * q && C <= int_of_num(0) \226\134\146 C <= k
+      #|  (s : (Int) -> Bool) == {}
+      #|  \226\136\128 s : (Int) -> Bool, FINITE(s) && !(s == {}) \226\134\146 (\226\136\131 M : Int, IN(M, s) && (\226\136\128 x : Int, IN(x, s) \226\134\146 x <= M))
+      #|  (s : (Int) -> Bool) == {}
+      #|  \226\136\128 s : (Int) -> Bool, FINITE(s) && !(s == {}) \226\134\146 (\226\136\131 N : Int, IN(N, s) && (\226\136\128 x : Int, IN(x, s) \226\134\146 N <= x))
+      #|  int_of_num(0)
+      #|  (q : Int)
+      #|  (a : Int) - (b : Int)
+      #|  \226\136\128 a : Int, \226\136\128 b : Int, \226\136\128 q : Int, int_of_num(1) <= q && a * q <= b * q \226\134\146 a <= b
+      #|  (z : Int) <= (M : Int)
+      #|  (z : Int) - (N : Int) == (q : Int) * (k : Int)
+      #|  div((M : Int) - (N : Int), (q : Int)) * q == M - N
+      #|  (q : Int)
+      #|  (q : Int)
+      #|  (z : Int) - (N : Int) == (q : Int) * (k : Int)
+      #|  (k : Int)
+      #|  (k : Int)
+      #|  divides((q : Int), (N : Int) - (r : Int))
+      #|  divides((q : Int), (z : Int) - (r : Int))
+      #|  divides((q : Int), (z : Int) - (N : Int))
+      #|  (z : Int)
+      #|  \226\136\128 S : (Int) -> Bool, \226\136\128 q : Int, \226\136\128 N : Int, \226\136\128 M : Int, \226\136\128 A : Int, \226\136\128 r : Int, int_of_num(1) <= q && int_of_num(0) <= A && divides(q, M - N) && N <= M && (\226\136\128 x : Int, IN(x, S) \226\134\146 N <= x && x <= M && divides(q, x - r)) && divides(q, N - r) \226\134\146 SUBSET(S, IMAGE((k : Int) => N + k * q, {(k : Int) | int_of_num(0) <= k && k <= div(M - N, q)}))
+      #|  (z : Int)
+      #|  (z : Int)
+      #|  (z : Int)
+      #|  (q : Int) * div((M : Int) - (N : Int), q) == M - N
+      #|  int_of_num(num_of_int(div((M : Int) - (N : Int), (q : Int)) - int_of_num(0) + int_of_num(1))) == div(M - N, q) + int_of_num(1)
+      #|  int_of_num(0) <= div((M : Int) - (N : Int), (q : Int))
+      #|  \226\136\128 q : Int, \226\136\128 M : Int, \226\136\128 N : Int, \226\136\128 A : Int, int_of_num(1) <= q && divides(q, M - N) && N <= M && M - N <= int_of_num(2) * A && int_of_num(0) <= A \226\134\146 q * int_of_num(num_of_int(div(M - N, q) - int_of_num(0) + int_of_num(1))) <= int_of_num(2) * A + q
+      #|  (r : Int)
+      #|  (A : Int)
+      #|  CARD(IMAGE((k : Int) => (N : Int) + k * (q : Int), {(k : Int) | int_of_num(0) <= k && k <= div((M : Int) - N, q)}))
+      #|  \226\136\128 S : (Int) -> Bool, \226\136\128 q : Int, \226\136\128 N : Int, \226\136\128 M : Int, \226\136\128 A : Int, \226\136\128 r : Int, int_of_num(1) <= q && int_of_num(0) <= A && divides(q, M - N) && N <= M && (\226\136\128 x : Int, IN(x, S) \226\134\146 N <= x && x <= M && divides(q, x - r)) && divides(q, N - r) && FINITE(S) \226\134\146 q * int_of_num(CARD(S)) <= q * int_of_num(CARD({(k : Int) | int_of_num(0) <= k && k <= div(M - N, q)}))
+      #|  int_of_num(1) <= (q : Int) \226\134\146 int_of_num(0) <= q
+      #|  (q : Int) * int_of_num(num_of_int(div((M : Int) - (N : Int), q) - int_of_num(0) + int_of_num(1)))
+      #|  CARD({(k : Int) | int_of_num(0) <= k && k <= div((M : Int) - (N : Int), (q : Int))}) <= num_of_int(div(M - N, q) - int_of_num(0) + int_of_num(1))
+      #|  IN((x : Int), {(z : Int) | abs(z) <= (A : Int) && divides((q : Int), z - (r : Int))})
+      #|  (x : Int)
+      #|  (r : Int)
+      #|  (A : Int)
+      #|  (q : Int) * int_of_num(CARD({(k : Int) | int_of_num(0) <= k && k <= div((M : Int) - (N : Int), q)}))
+      #|  divides((q : Int), (M : Int) - (r : Int)) && divides(q, (N : Int) - r) \226\134\146 divides(q, M - N)
+      #|  divides((q : Int), (M : Int) - (N : Int))
+      #|  (N : Int) <= (M : Int)
+      #|  abs((M : Int)) <= (A : Int) && divides((q : Int), M - (r : Int)) && abs((N : Int)) <= A && divides(q, N - r)
+      #|  (N : Int)
+      #|  (S : (Int) -> Bool)
+      #|  (M : Int)
+      #|  (S : (Int) -> Bool)
+      #|  (S : (Int) -> Bool) == {}
+      #|  {(z : Int) | -(A : Int) <= z && z <= A}
+      #|  FINITE((S : (Int) -> Bool))
+      #|  (S : (Int) -> Bool) == {(z : Int) | abs(z) <= (A : Int) && divides((q : Int), z - (r : Int))}
+      #|  \226\136\128 A : Int, \226\136\128 q : Int, \226\136\128 r : Int, int_of_num(0) <= A && int_of_num(1) <= q \226\134\146 q * int_of_num(CARD({(z : Int) | abs(z) <= A && divides(q, z - r)})) <= int_of_num(2) * A + q
+      #|  \226\136\128 a1 : Int, \226\136\128 a2 : Int, \226\136\128 d : Int, coprime((a1, a2)) && divides(a1, a2 * d) \226\134\146 divides(a1, d)
+      #|  (lincount2 : (Int, Int, Int, Int) -> Num)((a1 : Int), (a2 : Int), (m : Int), (A : Int)) == CARD({(z2 : Int) | \226\136\131 z1 : Int, a1 * z1 + a2 * z2 == m && abs(z1) <= A && abs(z2) <= A})
+      #|  divides((a1 : Int), a1 * (x : Int))
+      #|  (a2 : Int) * ((z2 : Int) - (z2_0 : Int)) == (a1 : Int) * ((z1_0 : Int) - (z1 : Int))
+      #|  (a2 : Int)
+      #|  (z2 : Int)
+      #|  \226\136\128 a1 : Int, \226\136\128 a2 : Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 z2_0 : Int, \226\136\128 z1_0 : Int, coprime((a1, a2)) && a1 * z1_0 + a2 * z2_0 == m \226\134\146 SUBSET({(z2 : Int) | \226\136\131 z1 : Int, a1 * z1 + a2 * z2 == m && abs(z1) <= A && abs(z2) <= A}, {(z : Int) | abs(z) <= A && divides(a1, z - z2_0)})
+      #|  (z2_0 : Int)
+      #|  abs((a1 : Int))
+      #|  (A : Int)
+      #|  {(z : Int) | -(A : Int) <= z && z <= A}
+      #|  (z1_0 : Int)
+      #|  (z2_0 : Int)
+      #|  (A : Int)
+      #|  (m : Int)
+      #|  (a2 : Int)
+      #|  (a1 : Int)
+      #|  abs((a1 : Int)) * int_of_num(CARD({(z : Int) | abs(z) <= (A : Int) && divides(abs(a1), z - (z2_0 : Int))}))
+      #|  (z1_0 : Int)
+      #|  (z2_0 : Int)
+      #|  (T2 : (Int) -> Bool) == {}
+      #|  int_of_num(1) <= abs((a1 : Int))
+      #|  (T2 : (Int) -> Bool) == {(z2 : Int) | \226\136\131 z1 : Int, (a1 : Int) * z1 + (a2 : Int) * z2 == (m : Int) && abs(z1) <= (A : Int) && abs(z2) <= A}
+      #|  \226\136\128 a1 : Int, \226\136\128 a2 : Int, \226\136\128 m : Int, \226\136\128 A : Int, coprime((a1, a2)) && !(a1 == int_of_num(0)) && int_of_num(0) <= A \226\134\146 abs(a1) * int_of_num(lincount2(a1, a2, m, A)) <= int_of_num(2) * A + abs(a1)
+      #|  (A : Int)
+      #|  (m : Int)
+      #|  (a2 : Int)
+      #|  (a1 : Int)
+      #|  \226\136\128 a1 : Int, \226\136\128 a2 : Int, \226\136\128 m : Int, \226\136\128 A : Int, coprime((a1, a2)) && !(a1 == int_of_num(0)) && int_of_num(0) <= A && abs(a1) <= A \226\134\146 abs(a1) * int_of_num(lincount2(a1, a2, m, A)) <= int_of_num(3) * A
+      #|  divides((d : Int), (g : Int))
+      #|  divides((d : Int), (a : (A) -> Int)((x : A)))
+      #|  (v : Int)
+      #|  (u : Int)
+      #|  (g : Int)
+      #|  (a : (A) -> Int)((x : A))
+      #|  (j : A)
+      #|  divides((d : Int), (a : (A) -> Int)((x : A))) && divides(d, (g : Int))
+      #|  (d : Int)
+      #|  (g : Int)
+      #|  \226\136\128 b : Int, divides((G : Int), b) && divides(b, (c : Int)) \226\134\146 divides(G, c)
+      #|  (i : A)
+      #|  gcd(((a : (A) -> Int)((x : A)), (g : Int)))
+      #|  (g : Int)
+      #|  (a : (A) -> Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (x : A)
+      #|  divides((d : Int), int_of_num(0))
+      #|  int_of_num(0)
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 (\226\136\128 a : (A) -> Int, \226\136\131 g : Int, (\226\136\128 i : A, IN(i, s) \226\134\146 divides(g, a(i))) && (\226\136\128 d : Int, (\226\136\128 i : A, IN(i, s) \226\134\146 divides(d, a(i))) \226\134\146 divides(d, g)) && int_of_num(0) <= g)
+      #|  (lincount : ((A) -> Bool, (A) -> Int, Int, Int) -> Num)((s : (A) -> Bool), (a : (A) -> Int), (m : Int), (A : Int)) == CARD({(z : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => a(i) * z(i)) == m})
+      #|  (setcoprime : ((A) -> Bool, (A) -> Int) -> Bool)((s : (A) -> Bool), (a : (A) -> Int)) == (\226\136\128 d : Int, (\226\136\128 i : A, IN(i, s) \226\134\146 divides(d, a(i))) \226\134\146 divides(d, int_of_num(1)))
+      #|  abs((z : (A) -> Int)((i : A))) <= (A : Int)
+      #|  (i : A)
+      #|  (z : (A) -> Int)
+      #|  {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 IN(z(i), {(w : Int) | -(A : Int) <= w && w <= A})) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, FINITE(s) \226\134\146 FINITE({(z : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => a(i) * z(i)) == m})
+      #|  abs((z : Int)) <= (A : Int) \226\134\146 -A <= z && z <= A
+      #|  {(z : Int) | -(A : Int) <= z && z <= A}
+      #|  IN((z : (A) -> Int), (SS : ((A) -> Int) -> Bool))
+      #|  (z : (A) -> Int)
+      #|  (z : (A) -> Int)((H : A))
+      #|  (z : (A) -> Int)
+      #|  (z2 : Int)
+      #|  (A : Int)
+      #|  (m : Int)
+      #|  (a : (A) -> Int)
+      #|  {(H : A), (K : A)}
+      #|  (z : (A) -> Int)((i : A)) == int_of_num(0) && (w : (A) -> Int)(i) == int_of_num(0)
+      #|  (i : A) == (K : A)
+      #|  (i : A) == (H : A)
+      #|  (i : A)
+      #|  (z : (A) -> Int)((K : A)) == (w : (A) -> Int)(K)
+      #|  (a : (A) -> Int)((H : A)) * (z : (A) -> Int)(H) + a((K : A)) * z(K) == (m : Int)
+      #|  (a : (A) -> Int)((H : A)) * (w : (A) -> Int)(H) + a((K : A)) * w(K) == (m : Int)
+      #|  (a : (A) -> Int)((H : A)) * (z : (A) -> Int)(H) == a(H) * (w : (A) -> Int)(H)
+      #|  (w : (A) -> Int)
+      #|  (z : (A) -> Int)
+      #|  (w : (A) -> Int)
+      #|  (z : (A) -> Int)
+      #|  CARD(IMAGE((z : (A) -> Int) => z((K : A)), (SS : ((A) -> Int) -> Bool)))
+      #|  (z : (A) -> Int)
+      #|  \226\136\128 z : (A) -> Int, IN(z, (SS : ((A) -> Int) -> Bool)) \226\134\146 (a : (A) -> Int)((H : A)) * z(H) + a((K : A)) * z(K) == (m : Int) && (\226\136\128 i : A, !IN(i, {H, K}) \226\134\146 z(i) == int_of_num(0))
+      #|  (SS : ((A) -> Int) -> Bool) == {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, {H, K}) \226\134\146 z(i) == int_of_num(0)) && isum({H, K}, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}
+      #|  abs((a : (A) -> Int)((H : A))) * int_of_num(lincount2(a(H), a((K : A)), (m : Int), (A : Int)))
+      #|  \226\136\128 H : A, \226\136\128 K : A, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, !(H == K) && !(a(H) == int_of_num(0)) && int_of_num(0) <= A && abs(a(K)) <= abs(a(H)) && abs(a(H)) <= A && coprime((a(H), a(K))) \226\134\146 abs(a(H)) * int_of_num(lincount({H, K}, a, m, A)) <= int_of_num(3) * A
+      #|  (K : A)
+      #|  (H : A)
+      #|  divides(gcd(((x : Int), (y : Int))), int_of_num(1)) \226\134\146 coprime((x, y))
+      #|  \226\136\128 x : Int, \226\136\128 y : Int, (\226\136\128 d : Int, divides(d, x) && divides(d, y) \226\134\146 divides(d, int_of_num(1))) \226\134\146 coprime((x, y))
+      #|  (i : A)
+      #|  setcoprime({(H : A), (K : A)}, (a : (A) -> Int))
+      #|  (d : Int)
+      #|  (H : A)
+      #|  (K : A)
+      #|  !((H : A) == (K : A))
+      #|  (K : A)
+      #|  (K : A)
+      #|  !(CARD(DELETE((s : (A) -> Bool), (H : A))) == 0)
+      #|  !(DELETE((s : (A) -> Bool), (H : A)) == {})
+      #|  \226\136\131 K : A, !((H : A) == K) && (s : (A) -> Bool) == {H, K}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, FINITE(s) && CARD(s) == 2 && setcoprime(s, a) && int_of_num(1) <= A && int_of_num(1) <= abs(a(H)) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && IN(H, s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= abs(a(H))) \226\134\146 abs(a(H)) * int_of_num(lincount(s, a, m, A)) <= int_of_num(3) * A
+      #|  \226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs((a : (A) -> Int)(i)) <= abs(a(H))
+      #|  \226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs((a : (A) -> Int)(i)) <= abs(a(H))
+      #|  \226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs((a : (A) -> Int)(i)) <= (A : Int)
+      #|  \226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs((a : (A) -> Int)(i)) <= (A : Int)
+      #|  \226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs((a : (A) -> Int)(i)) <= (A : Int)
+      #|  \226\136\128 i : A, IN(i, {(H : A), (K : A)}) \226\134\146 abs((a : (A) -> Int)(i)) <= (A : Int)
+      #|  (X : (X) -> Bool)
+      #|  FINITE({(x : X) | IN(x, (X : (X) -> Bool)) && (f : (X) -> Y)(x) == (y : Y)})
+      #|  (y : Y)
+      #|  nsum(IMAGE((f : (X) -> Y), (X : (X) -> Bool)), (y : Y) => (D : Num))
+      #|  (X : (X) -> Bool)
+      #|  (x : X) => 1
+      #|  (f : (X) -> Y)
+      #|  \226\136\128 f : (X) -> Y, \226\136\128 X : (X) -> Bool, \226\136\128 c : Num, \226\136\128 D : Num, FINITE(X) && (\226\136\128 y : Y, c * CARD({(x : X) | IN(x, X) && f(x) == y}) <= D) \226\134\146 c * CARD(X) <= CARD(IMAGE(f, X)) * D
+      #|  (H : A)
+      #|  (s : (A) -> Bool)
+      #|  (i : A) => (a : (A) -> Int)(i) * (z : (A) -> Int)(i)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 z : (A) -> Int, \226\136\128 H : A, FINITE(s) && IN(H, s) \226\134\146 isum(s, (i : A) => a(i) * z(i)) == a(H) * z(H) + isum(DELETE(s, H), (i : A) => a(i) * z(i))
+      #|  int_of_num(1) <= (A : Int) \226\134\146 int_of_num(0) <= A - -A + int_of_num(1)
+      #|  int_of_num(1) <= (A : Int) \226\134\146 int_of_num(0) <= int_of_num(3) * A
+      #|  int_of_num(1) <= (A : Int) \226\134\146 -A <= A
+      #|  \226\136\128 A : Int, int_of_num(1) <= A \226\134\146 CARD({(x : Int) | -A <= x && x <= A}) <= num_of_int(int_of_num(3) * A)
+      #|  int_of_num(num_of_int(int_of_num(3) * (A : Int))) == int_of_num(3) * A
+      #|  (-(A : Int) <= (x : Int) && x <= A) == (abs(x) <= A)
+      #|  (w : (A) -> Int)
+      #|  {(w : (A) -> Int) | (\226\136\128 i : A, IN(i, (t : (A) -> Bool)) \226\134\146 abs(w(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, t) \226\134\146 w(i) == int_of_num(0))} == {(w : (A) -> Int) | (\226\136\128 i : A, IN(i, t) \226\134\146 IN(w(i), {(x : Int) | -A <= x && x <= A})) && (\226\136\128 i : A, !IN(i, t) \226\134\146 w(i) == int_of_num(0))}
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 A : Int, FINITE(t) && int_of_num(1) <= A \226\134\146 int_of_num(CARD({(w : (A) -> Int) | (\226\136\128 i : A, IN(i, t) \226\134\146 abs(w(i)) <= A) && (\226\136\128 i : A, !IN(i, t) \226\134\146 w(i) == int_of_num(0))})) <= pow(int_of_num(3) * A, CARD(t))
+      #|  (a : (A) -> Int)((i : A)) == int_of_num(0)
+      #|  divides((d : Int), d)
+      #|  (i : A) == (H : A)
+      #|  (i : A)
+      #|  (a : (A) -> Int)((H : A))
+      #|  setcoprime((s : (A) -> Bool), (a : (A) -> Int))
+      #|  divides((a : (A) -> Int)((H : A)), int_of_num(1))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 H : A, IN(H, s) && setcoprime(s, a) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 a(i) == int_of_num(0)) && int_of_num(1) <= abs(a(H)) \226\134\146 abs(a(H)) == int_of_num(1)
+      #|  divides((d : Int), int_of_num(0))
+      #|  (-(A : Int) <= (x : Int) && x <= A) == (abs(x) <= A)
+      #|  {(w : (A) -> Int) | (\226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 IN(w(i), {(x : Int) | -(A : Int) <= x && x <= A})) && (\226\136\128 i : A, !IN(i, DELETE(s, H)) \226\134\146 w(i) == int_of_num(0))}
+      #|  IN((z : (A) -> Int), (X : ((A) -> Int) -> Bool))
+      #|  IN((z : (A) -> Int), (X : ((A) -> Int) -> Bool))
+      #|  (i : A)
+      #|  (z : (A) -> Int)
+      #|  (w : (A) -> Int)
+      #|  (i : A)
+      #|  !((a : (A) -> Int)((H : A)) == int_of_num(0))
+      #|  (a : (A) -> Int)((H : A)) * (z : (A) -> Int)(H) == a(H) * (w : (A) -> Int)(H)
+      #|  (i : A) == (H : A)
+      #|  (i : A)
+      #|  (w : (A) -> Int)
+      #|  (z : (A) -> Int)
+      #|  CARD(IMAGE((z : (A) -> Int) => (i : A) => if i == (H : A) { int_of_num(0) } else { z(i) }, (X : ((A) -> Int) -> Bool)))
+      #|  (a : (A) -> Int)((i : A)) == int_of_num(0)
+      #|  (i : A)
+      #|  isum(DELETE((s : (A) -> Bool), (H : A)), (i : A) => (a : (A) -> Int)(i) * (z : (A) -> Int)(i)) == int_of_num(0)
+      #|  (H : A)
+      #|  (z : (A) -> Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (z : (A) -> Int)
+      #|  \226\136\128 z : (A) -> Int, IN(z, (X : ((A) -> Int) -> Bool)) \226\134\146 (a : (A) -> Int)((H : A)) * z(H) == (m : Int)
+      #|  (X : ((A) -> Int) -> Bool) == {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, FINITE(s) && IN(H, s) && abs(a(H)) == int_of_num(1) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 a(i) == int_of_num(0)) \226\134\146 CARD({(z : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => a(i) * z(i)) == m}) <= CARD({(w : (A) -> Int) | (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 abs(w(i)) <= A) && (\226\136\128 i : A, !IN(i, DELETE(s, H)) \226\134\146 w(i) == int_of_num(0))})
+      #|  (H : A)
+      #|  (z : (A) -> Int)
+      #|  CARD(DELETE((s : (A) -> Bool), (H : A))) == CARD(s) - 1
+      #|  (A : Int)
+      #|  DELETE((s : (A) -> Bool), (H : A))
+      #|  int_of_num(CARD({(w : (A) -> Int) | (\226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 abs(w(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, DELETE(s, H)) \226\134\146 w(i) == int_of_num(0))}))
+      #|  (s : (A) -> Bool)
+      #|  abs((a : (A) -> Int)((H : A))) == int_of_num(1)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, FINITE(s) && 3 <= CARD(s) && setcoprime(s, a) && int_of_num(1) <= A && int_of_num(1) <= abs(a(H)) && IN(H, s) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 a(i) == int_of_num(0)) \226\134\146 abs(a(H)) * int_of_num(lincount(s, a, m, A)) <= pow(int_of_num(3) * A, CARD(s) - 1)
+      #|  divides(int_of_num(0), (x : Int)) == (x == int_of_num(0))
+      #|  divides((g : Int), (a : (A) -> Int)((j : A)))
+      #|  !((a : (A) -> Int)((j : A)) == int_of_num(0))
+      #|  (int_of_num(1) <= (g : Int)) == (int_of_num(0) <= g && !(g == int_of_num(0)))
+      #|  (g : Int)
+      #|  (g : Int)
+      #|  (a : (A) -> Int)
+      #|  (t : (A) -> Bool)
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 a : (A) -> Int, FINITE(t) && (\226\136\131 j : A, IN(j, t) && !(a(j) == int_of_num(0))) \226\134\146 (\226\136\131 delta : Int, int_of_num(1) <= delta && (\226\136\128 i : A, IN(i, t) \226\134\146 divides(delta, a(i))) && (\226\136\128 d : Int, (\226\136\128 i : A, IN(i, t) \226\134\146 divides(d, a(i))) \226\134\146 divides(d, delta)))
+      #|  (A : Int)
+      #|  (mp : Int)
+      #|  (q : (A) -> Int)
+      #|  (t : (A) -> Bool)
+      #|  (i : A)
+      #|  isum((t : (A) -> Bool), (i : A) => (q : (A) -> Int)(i) * (if IN(i, t) { (z : (A) -> Int)(i) } else { int_of_num(0) })) == isum(t, (i : A) => q(i) * z(i))
+      #|  (i : A)
+      #|  IN((i : A), (s : (A) -> Bool))
+      #|  (i : A)
+      #|  (z : (A) -> Int)
+      #|  (w : (A) -> Int)
+      #|  {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}
+      #|  IN((w : (A) -> Int), (Fset : ((A) -> Int) -> Bool))
+      #|  IN((z : (A) -> Int), (Fset : ((A) -> Int) -> Bool))
+      #|  (z : (A) -> Int)((i : A)) == int_of_num(0)
+      #|  !IN((i : A), (s : (A) -> Bool))
+      #|  (a : (A) -> Int)((H : A)) * (z : (A) -> Int)(H) == a(H) * (w : (A) -> Int)(H)
+      #|  (i : A) == (H : A)
+      #|  IN((i : A), (t : (A) -> Bool))
+      #|  (i : A)
+      #|  (i : A)
+      #|  (i : A)
+      #|  \226\136\128 i : A, IN(i, (t : (A) -> Bool)) \226\134\146 (z : (A) -> Int)(i) == (w : (A) -> Int)(i)
+      #|  (w : (A) -> Int)
+      #|  (z : (A) -> Int)
+      #|  CARD(IMAGE((z : (A) -> Int) => (i : A) => if IN(i, (t : (A) -> Bool)) { z(i) } else { int_of_num(0) }, (Fset : ((A) -> Int) -> Bool)))
+      #|  (a : (A) -> Int)((i : A)) == (delta : Int) * (q : (A) -> Int)(i)
+      #|  (i : A)
+      #|  isum((t : (A) -> Bool), (i : A) => (a : (A) -> Int)(i) * (v : (A) -> Int)(i)) == isum(t, (i : A) => (delta : Int) * ((q : (A) -> Int)(i) * v(i)))
+      #|  isum((t : (A) -> Bool), (i : A) => (a : (A) -> Int)(i) * (v : (A) -> Int)(i)) == (delta : Int) * (mp : Int)
+      #|  (H : A)
+      #|  (v : (A) -> Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (v : (A) -> Int)
+      #|  \226\136\128 v : (A) -> Int, IN(v, (Fset : ((A) -> Int) -> Bool)) \226\134\146 (a : (A) -> Int)((H : A)) * v(H) == (m : Int) - (delta : Int) * (mp : Int)
+      #|  (Fset : ((A) -> Int) -> Bool) == {(z : (A) -> Int) | ((\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)) && isum((t : (A) -> Bool), (i : A) => (q : (A) -> Int)(i) * z(i)) == (mp : Int)}
+      #|  (t : (A) -> Bool) == DELETE((s : (A) -> Bool), (H : A))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 q : (A) -> Int, \226\136\128 delta : Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, \226\136\128 mp : Int, FINITE(s) && IN(H, s) && !(a(H) == int_of_num(0)) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 a(i) == delta * q(i)) \226\134\146 CARD({(z : (A) -> Int) | ((\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => a(i) * z(i)) == m) && isum(DELETE(s, H), (i : A) => q(i) * z(i)) == mp}) <= lincount(DELETE(s, H), q, mp, A)
+      #|  (i : A)
+      #|  isum((t : (A) -> Bool), (i : A) => abs((q : (A) -> Int)(i))) * (A : Int) == isum(t, (i : A) => abs(q(i)) * A)
+      #|  isum((t : (A) -> Bool), (i : A) => abs((q : (A) -> Int)(i) * (z : (A) -> Int)(i)))
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 q : (A) -> Int, \226\136\128 z : (A) -> Int, \226\136\128 A : Int, FINITE(t) && int_of_num(0) <= A && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(z(i)) <= A) \226\134\146 abs(isum(t, (i : A) => q(i) * z(i))) <= isum(t, (i : A) => abs(q(i))) * A
+      #|  abs((z : Int)) <= (b : Int) \226\134\146 -b <= z && z <= b
+      #|  {(z : Int) | -((Hs : Int) * (A : Int)) <= z && z <= Hs * A}
+      #|  (A : Int)
+      #|  (a : (A) -> Int)((i : A)) == (delta : Int) * (q : (A) -> Int)(i)
+      #|  (i : A)
+      #|  isum((t : (A) -> Bool), (i : A) => (a : (A) -> Int)(i) * (z : (A) -> Int)(i)) == (delta : Int) * isum(t, (i : A) => (q : (A) -> Int)(i) * z(i))
+      #|  (H : A)
+      #|  (z : (A) -> Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  IN((i : A), (t : (A) -> Bool))
+      #|  (i : A)
+      #|  abs(isum((t : (A) -> Bool), (i : A) => (q : (A) -> Int)(i) * (z : (A) -> Int)(i))) <= (Hs : Int) * (A : Int)
+      #|  (mp : Int) == isum((t : (A) -> Bool), (i : A) => (q : (A) -> Int)(i) * (z : (A) -> Int)(i))
+      #|  (z : (A) -> Int)((H : A))
+      #|  (z : (A) -> Int)
+      #|  (mp : Int)
+      #|  (Hs : Int) == isum((t : (A) -> Bool), (i : A) => abs((q : (A) -> Int)(i)))
+      #|  (t : (A) -> Bool) == DELETE((s : (A) -> Bool), (H : A))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 q : (A) -> Int, \226\136\128 delta : Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, FINITE(s) && IN(H, s) && int_of_num(0) <= A && int_of_num(1) <= isum(DELETE(s, H), (i : A) => abs(q(i))) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 a(i) == delta * q(i)) \226\134\146 CARD(IMAGE((z : (A) -> Int) => isum(DELETE(s, H), (i : A) => q(i) * z(i)), {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => a(i) * z(i)) == m})) <= lincount2(a(H), delta, m, isum(DELETE(s, H), (i : A) => abs(q(i))) * A)
+      #|  (y : Y)
+      #|  int_of_num(num_of_int((c : Int))) == c && int_of_num(num_of_int((D : Int))) == D
+      #|  num_of_int((D : Int))
+      #|  num_of_int((c : Int))
+      #|  (X : (X) -> Bool)
+      #|  (f : (X) -> Y)
+      #|  \226\136\128 f : (X) -> Y, \226\136\128 X : (X) -> Bool, \226\136\128 c : Int, \226\136\128 D : Int, FINITE(X) && int_of_num(0) <= c && int_of_num(0) <= D && (\226\136\128 y : Y, c * int_of_num(CARD({(x : X) | IN(x, X) && f(x) == y})) <= D) \226\134\146 c * int_of_num(CARD(X)) <= int_of_num(CARD(IMAGE(f, X))) * D
+      #|  abs((q : (A) -> Int)((i : A)))
+      #|  (i : A)
+      #|  (Ht : A)
+      #|  (Ht : A)
+      #|  (M : Int)
+      #|  IMAGE((i : A) => abs((q : (A) -> Int)(i)), (t : (A) -> Bool))
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 q : (A) -> Int, FINITE(t) && !(t == {}) \226\134\146 (\226\136\131 Ht : A, IN(Ht, t) && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(q(i)) <= abs(q(Ht))))
+      #|  isum((t : (A) -> Bool), (i : A) => abs((q : (A) -> Int)((Ht : A))))
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 q : (A) -> Int, \226\136\128 Ht : A, FINITE(t) && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(q(i)) <= abs(q(Ht))) \226\134\146 isum(t, (i : A) => abs(q(i))) <= int_of_num(CARD(t)) * abs(q(Ht))
+      #|  int_of_num(3) * ((Hs : Int) * (A : Int)) == int_of_num(3) * A * Hs && int_of_num(3) * ((l : Int) * (Hm : Int) * A) == int_of_num(3) * A * (l * Hm)
+      #|  (Hm : Int) * ((l : Int) * (F2 : Int) * (int_of_num(3) * (A : Int) * (P : Int))) == int_of_num(3) * (l * Hm * A) * (F2 * P)
+      #|  int_of_num(3) * ((Hs : Int) * (A : Int)) * ((F2 : Int) * (P : Int))
+      #|  (c : Int) * ((Ic : Int) * ((F2 : Int) * (P : Int))) == c * Ic * (F2 * P)
+      #|  (Hm : Int) * ((c : Int) * (X : Int)) == c * (Hm * X)
+      #|  (c : Int) * ((Ic : Int) * ((F2 : Int) * (P : Int)))
+      #|  (Hm : Int)
+      #|  \226\136\128 c : Int, \226\136\128 X : Int, \226\136\128 Ic : Int, \226\136\128 Hm : Int, \226\136\128 Hs : Int, \226\136\128 A : Int, \226\136\128 F2 : Int, \226\136\128 P : Int, \226\136\128 l : Int, int_of_num(1) <= Hm && int_of_num(0) <= c && int_of_num(0) <= A && int_of_num(0) <= F2 && int_of_num(0) <= P && int_of_num(0) <= Ic && int_of_num(0) <= X && Hm * X <= Ic * (F2 * P) && c * Ic <= int_of_num(3) * (Hs * A) && Hs <= l * Hm \226\134\146 c * X <= l * F2 * (int_of_num(3) * A * P)
+      #|  CARD((s : (A) -> Bool)) - 1 == SUC(CARD(s) - 1 - 1)
+      #|  CARD((s : (A) -> Bool)) - 1 == SUC(CARD(s) - 1 - 1)
+      #|  \226\136\128 s : (A) -> Bool, 3 <= CARD(s) \226\134\146 int_of_num(CARD(s) - 1) * int_of_num(FACT(CARD(s) - 1 - 1)) == int_of_num(FACT(CARD(s) - 1))
+      #|  CARD((s : (A) -> Bool)) - 1 == SUC(CARD(s) - 1 - 1)
+      #|  CARD((s : (A) -> Bool)) - 1 == SUC(CARD(s) - 1 - 1)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, 3 <= CARD(s) \226\134\146 int_of_num(3) * A * pow(int_of_num(3) * A, CARD(s) - 1 - 1) == pow(int_of_num(3) * A, CARD(s) - 1)
+      #|  (Hs : Int) <= int_of_num(CARD((t : (A) -> Bool))) * abs((q : (A) -> Int)((Ht : A)))
+      #|  (Hs : Int)
+      #|  abs((q : (A) -> Int)((Ht : A)))
+      #|  int_of_num(CARD(IMAGE((gproj : ((A) -> Int) -> Int), (Xset : ((A) -> Int) -> Bool))))
+      #|  (A : Int)
+      #|  (s : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (A : Int)
+      #|  (Hs : Int) * (A : Int)
+      #|  (m : Int)
+      #|  (delta : Int)
+      #|  (a : (A) -> Int)((H : A))
+      #|  abs((a : (A) -> Int)((H : A))) * int_of_num(lincount2(a(H), (delta : Int), (m : Int), (Hs : Int) * (A : Int)))
+      #|  isum(DELETE((s : (A) -> Bool), (H : A)), (i : A) => abs((q : (A) -> Int)(i))) == (Hs : Int)
+      #|  IMAGE((z : (A) -> Int) => isum(DELETE((s : (A) -> Bool), (H : A)), (i : A) => (q : (A) -> Int)(i) * z(i)), {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}) == IMAGE((gproj : ((A) -> Int) -> Int), (Xset : ((A) -> Int) -> Bool))
+      #|  (H : A)
+      #|  (A : Int)
+      #|  (m : Int)
+      #|  (delta : Int)
+      #|  (q : (A) -> Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  abs((a : (A) -> Int)((H : A))) * int_of_num(CARD(IMAGE((gproj : ((A) -> Int) -> Int), (Xset : ((A) -> Int) -> Bool)))) <= int_of_num(3) * ((Hs : Int) * (A : Int))
+      #|  CARD((s : (A) -> Bool)) - 1 - 1 == CARD((t : (A) -> Bool)) - 1
+      #|  (delta : Int)
+      #|  abs((q : (A) -> Int)((Ht : A))) * int_of_num(lincount(DELETE((s : (A) -> Bool), (H : A)), q, (mp : Int), (A : Int)))
+      #|  {(x : (A) -> Int) | IN(x, (Xset : ((A) -> Int) -> Bool)) && (gproj : ((A) -> Int) -> Int)(x) == (mp : Int)} == {(z : (A) -> Int) | ((\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)) && isum(DELETE(s, (H : A)), (i : A) => (q : (A) -> Int)(i) * z(i)) == mp}
+      #|  (mp : Int)
+      #|  abs((q : (A) -> Int)((Ht : A))) * int_of_num(CARD((Xset : ((A) -> Int) -> Bool))) <= int_of_num(CARD(IMAGE((gproj : ((A) -> Int) -> Int), Xset))) * (int_of_num(FACT(CARD((s : (A) -> Bool)) - 1 - 1)) * pow(int_of_num(3) * (A : Int), CARD(s) - 1 - 1))
+      #|  (Ht : A)
+      #|  (t : (A) -> Bool)
+      #|  (i : A) => abs((q : (A) -> Int)(i))
+      #|  int_of_num(0) <= isum(DELETE((t : (A) -> Bool), (Ht : A)), (i : A) => abs((q : (A) -> Int)(i)))
+      #|  abs((q : (A) -> Int)((Ht : A)))
+      #|  int_of_num(1) <= (Hs : Int)
+      #|  (Hs : Int) == isum((t : (A) -> Bool), (i : A) => abs((q : (A) -> Int)(i)))
+      #|  (gproj : ((A) -> Int) -> Int) == ((z : (A) -> Int) => isum((t : (A) -> Bool), (i : A) => (q : (A) -> Int)(i) * z(i)))
+      #|  (Xset : ((A) -> Int) -> Bool) == {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}
+      #|  CARD((t : (A) -> Bool)) == CARD((s : (A) -> Bool)) - 1
+      #|  FINITE((t : (A) -> Bool))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 q : (A) -> Int, \226\136\128 delta : Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, \226\136\128 Ht : A, \226\136\128 t : (A) -> Bool, FINITE(s) && 3 <= CARD(s) && int_of_num(1) <= A && int_of_num(1) <= abs(a(H)) && abs(a(H)) <= A && IN(H, s) && DELETE(s, H) == t && (\226\136\128 i : A, IN(i, t) \226\134\146 a(i) == delta * q(i)) && setcoprime(t, q) && coprime((a(H), delta)) && IN(Ht, t) && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(q(i)) <= abs(q(Ht))) && int_of_num(1) <= abs(q(Ht)) && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(q(i)) <= A) && (\226\136\128 q' : (A) -> Int, \226\136\128 m' : Int, \226\136\128 Ht' : A, setcoprime(t, q') && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(q'(i)) <= abs(q'(Ht'))) && (\226\136\128 i : A, IN(i, t) \226\134\146 abs(q'(i)) <= A) && IN(Ht', t) \226\134\146 abs(q'(Ht')) * int_of_num(lincount(t, q', m', A)) <= int_of_num(FACT(CARD(t) - 1)) * pow(int_of_num(3) * A, CARD(t) - 1)) \226\134\146 abs(a(H)) * int_of_num(lincount(s, a, m, A)) <= int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * A, CARD(s) - 1)
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 delta : Int, int_of_num(1) <= delta && (\226\136\128 i : A, IN(i, t) \226\134\146 divides(delta, a(i))) \226\134\146 (\226\136\128 i : A, IN(i, t) \226\134\146 a(i) == delta * div(a(i), delta))
+      #|  int_of_num(1) <= (delta : Int) \226\134\146 abs(delta) == delta
+      #|  (i : A)
+      #|  (delta : Int)
+      #|  (a : (A) -> Int)
+      #|  (t : (A) -> Bool)
+      #|  abs((a : (A) -> Int)((i : A))) == (delta : Int) * abs(div(a(i), delta))
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 delta : Int, int_of_num(1) <= delta && (\226\136\128 i : A, IN(i, t) \226\134\146 divides(delta, a(i))) \226\134\146 (\226\136\128 i : A, IN(i, t) \226\134\146 abs(div(a(i), delta)) <= abs(a(i)))
+      #|  !((delta : Int) == int_of_num(0))
+      #|  divides((delta : Int) * (d : Int), delta)
+      #|  !((delta : Int) == int_of_num(0))
+      #|  (i : A)
+      #|  divides((d : Int), (e : Int)) \226\134\146 divides((delta : Int) * d, delta * e)
+      #|  (a : (A) -> Int)((i : A)) == (delta : Int) * div(a(i), delta)
+      #|  (i : A)
+      #|  divides((delta : Int) * (d : Int), delta)
+      #|  (d : Int)
+      #|  \226\136\128 t : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 delta : Int, int_of_num(1) <= delta && (\226\136\128 i : A, IN(i, t) \226\134\146 divides(delta, a(i))) && (\226\136\128 d : Int, (\226\136\128 i : A, IN(i, t) \226\134\146 divides(d, a(i))) \226\134\146 divides(d, delta)) \226\134\146 setcoprime(t, (i : A) => div(a(i), delta))
+      #|  divides((d : Int), (delta : Int)) && divides(delta, (ai : Int)) \226\134\146 divides(d, ai)
+      #|  (i : A) == (H : A)
+      #|  (i : A)
+      #|  setcoprime((s : (A) -> Bool), (a : (A) -> Int))
+      #|  (d : Int)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 delta : Int, \226\136\128 H : A, setcoprime(s, a) && IN(H, s) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 divides(delta, a(i))) \226\134\146 coprime((a(H), delta))
+      #|  !((aj : Int) == int_of_num(0))
+      #|  (int_of_num(1) <= abs((x : Int))) == !(x == int_of_num(0))
+      #|  \226\136\128 aj : Int, \226\136\128 delta : Int, \226\136\128 qj : Int, aj == delta * qj && !(aj == int_of_num(0)) \226\134\146 int_of_num(1) <= abs(qj)
+      #|  DELETE((s : (A) -> Bool), (H : A))
+      #|  (Ht : A)
+      #|  (delta : Int)
+      #|  (q : (A) -> Int)
+      #|  (delta : Int)
+      #|  (a : (A) -> Int)((j : A))
+      #|  abs((q : (A) -> Int)((j : A)))
+      #|  int_of_num(1) <= abs((q : (A) -> Int)((Ht : A)))
+      #|  (Ht : A)
+      #|  (q : (A) -> Int)
+      #|  DELETE((s : (A) -> Bool), (H : A))
+      #|  IN((i : A), DELETE((s : (A) -> Bool), (H : A)))
+      #|  \226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs((a : (A) -> Int)(i)) <= (A : Int)
+      #|  abs((a : (A) -> Int)((i : A)))
+      #|  (i : A)
+      #|  \226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 abs((q : (A) -> Int)(i)) <= (A : Int)
+      #|  \226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 abs((q : (A) -> Int)(i)) <= abs((a : (A) -> Int)(i))
+      #|  (s : (A) -> Bool)
+      #|  coprime(((a : (A) -> Int)((H : A)), (delta : Int)))
+      #|  setcoprime(DELETE((s : (A) -> Bool), (H : A)), (q : (A) -> Int))
+      #|  \226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 (a : (A) -> Int)(i) == (delta : Int) * (q : (A) -> Int)(i)
+      #|  (q : (A) -> Int) == ((i : A) => div((a : (A) -> Int)(i), (delta : Int)))
+      #|  (delta : Int)
+      #|  (a : (A) -> Int)
+      #|  DELETE((s : (A) -> Bool), (H : A))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, FINITE(s) && 3 <= CARD(s) && setcoprime(s, a) && int_of_num(1) <= A && int_of_num(1) <= abs(a(H)) && abs(a(H)) <= A && IN(H, s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\131 j : A, IN(j, DELETE(s, H)) && !(a(j) == int_of_num(0))) && (\226\136\128 q' : (A) -> Int, \226\136\128 m' : Int, \226\136\128 Ht' : A, setcoprime(DELETE(s, H), q') && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 abs(q'(i)) <= abs(q'(Ht'))) && (\226\136\128 i : A, IN(i, DELETE(s, H)) \226\134\146 abs(q'(i)) <= A) && IN(Ht', DELETE(s, H)) \226\134\146 abs(q'(Ht')) * int_of_num(lincount(DELETE(s, H), q', m', A)) <= int_of_num(FACT(CARD(DELETE(s, H)) - 1)) * pow(int_of_num(3) * A, CARD(DELETE(s, H)) - 1)) \226\134\146 abs(a(H)) * int_of_num(lincount(s, a, m, A)) <= int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * A, CARD(s) - 1)
+      #|  3 <= CARD((s : (A) -> Bool))
+      #|  CARD(DELETE((s : (A) -> Bool), (H : A))) == CARD(s) - 1
+      #|  (Ht' : A)
+      #|  (A : Int)
+      #|  (m' : Int)
+      #|  (q' : (A) -> Int)
+      #|  DELETE((s : (A) -> Bool), (H : A))
+      #|  3 <= CARD((s : (A) -> Bool))
+      #|  CARD((s : (A) -> Bool)) - 1
+      #|  (Ht' : A)
+      #|  (m' : Int)
+      #|  (q' : (A) -> Int)
+      #|  !(\226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 (a : (A) -> Int)(i) == int_of_num(0))
+      #|  pow(int_of_num(3) * (A : Int), CARD((s : (A) -> Bool)) - 1)
+      #|  \226\136\128 i : A, IN(i, DELETE((s : (A) -> Bool), (H : A))) \226\134\146 (a : (A) -> Int)(i) == int_of_num(0)
+      #|  !(CARD((s : (A) -> Bool)) == 2)
+      #|  2 <= CARD((s : (A) -> Bool))
+      #|  3 <= CARD((s : (A) -> Bool))
+      #|  2 - 1 == 1
+      #|  2 - 1 == 1
+      #|  FACT(2 - 1) == 1
+      #|  CARD((s : (A) -> Bool)) == 2
+      #|  abs((a : (A) -> Int)((H : A))) <= (A : Int)
+      #|  abs((a : (A) -> Int)((H : A)))
+      #|  int_of_num(1) <= (A : Int)
+      #|  int_of_num(1)
+      #|  int_of_num(2)
+      #|  abs((a : (A) -> Int)((i : A))) <= abs(a((H : A)))
+      #|  (a : (A) -> Int)((i : A)) == int_of_num(0)
+      #|  (i : A)
+      #|  int_of_num(2)
+      #|  setcoprime((s : (A) -> Bool), (a : (A) -> Int))
+      #|  (int_of_num(1) <= abs((x : Int))) == !(x == int_of_num(0))
+      #|  int_of_num(1) <= abs((a : (A) -> Int)((H : A)))
+      #|  (H : A)
+      #|  (A : Int)
+      #|  (m : Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, CARD(s) == n && FINITE(s) && 2 <= CARD(s) && setcoprime(s, a) && int_of_num(0) <= A && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && IN(H, s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= abs(a(H))) \226\134\146 abs(a(H)) * int_of_num(lincount(s, a, m, A)) <= int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * A, CARD(s) - 1)
+      #|  divides((d : Int), int_of_num(0))
+      #|  (H : A)
+      #|  (A : Int)
+      #|  (m : Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  CARD((s : (A) -> Bool))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 A : Int, \226\136\128 H : A, FINITE(s) && 2 <= CARD(s) && setcoprime(s, a) && int_of_num(0) <= A && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && IN(H, s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= abs(a(H))) \226\134\146 abs(a(H)) * int_of_num(lincount(s, a, m, A)) <= int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * A, CARD(s) - 1)
+      #|  abs((a : (A) -> Int)((i : A))) <= (A : Int)
+      #|  (i : A)
+      #|  (a : (A) -> Int)
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 IN(a(i), {(w : Int) | -(A : Int) <= w && w <= A})) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, FINITE(s) \226\134\146 FINITE({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))})
+      #|  isum((s : (A) -> Bool), (i : A) => (a : (A) -> Int)(i) * (z : (A) -> Int)(i)) == (delta : Int) * isum(s, (i : A) => (q : (A) -> Int)(i) * z(i))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 q : (A) -> Int, \226\136\128 delta : Int, \226\136\128 z : (A) -> Int, FINITE(s) && !(delta == int_of_num(0)) && (\226\136\128 i : A, IN(i, s) \226\134\146 a(i) == delta * q(i)) \226\134\146 (isum(s, (i : A) => a(i) * z(i)) == int_of_num(0)) == (isum(s, (i : A) => q(i) * z(i)) == int_of_num(0))
+      #|  (z : (A) -> Int)
+      #|  (delta : Int)
+      #|  (q : (A) -> Int)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (z : (A) -> Int)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 q : (A) -> Int, \226\136\128 delta : Int, \226\136\128 B : Int, FINITE(s) && !(delta == int_of_num(0)) && (\226\136\128 i : A, IN(i, s) \226\134\146 a(i) == delta * q(i)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 q(i) == int_of_num(0)) \226\134\146 lincount(s, a, int_of_num(0), B) == lincount(s, q, int_of_num(0), B)
+      #|  (delta : Int) == int_of_num(0) && divides(delta, (x : Int)) \226\134\146 x == int_of_num(0)
+      #|  !((delta : Int) == int_of_num(0))
+      #|  \226\136\128 delta : Int, \226\136\128 x : Int, int_of_num(0) <= delta && divides(delta, x) && !(x == int_of_num(0)) \226\134\146 int_of_num(1) <= delta
+      #|  (a : Int) <= (b : Int) \226\134\146 a + (c : Int) <= b + c
+      #|  pow(int_of_num((n : Num)) + int_of_num(1), (q : Num)) * (int_of_num(n) + int_of_num(1)) == pow(int_of_num(n) + int_of_num(1), q) * int_of_num(n) + pow(int_of_num(n) + int_of_num(1), q)
+      #|  pow(int_of_num((n : Num)), (q : Num) + 1) + pow(int_of_num(SUC(n)), q)
+      #|  1 <= SUC((n : Num))
+      #|  \226\136\128 q : Num, \226\136\128 n : Num, isum(op_dot_dot(1, n), (h : Num) => pow(int_of_num(h), q)) <= pow(int_of_num(n), q + 1)
+      #|  \226\136\128 d : Num, d * (d - 1) <= d * d
+      #|  (d : Num)
+      #|  (A : Num)
+      #|  \226\136\128 A : Num, \226\136\128 d : Num, \226\136\128 q : Num, EXP(DIV(A, d), q) * EXP(d, q) <= EXP(A, q)
+      #|  \226\136\128 d : Num, \226\136\128 q : Num, 2 <= q \226\134\146 EXP(d, 2) <= EXP(d, q)
+      #|  EXP((d : Num), 2)
+      #|  EXP(DIV((A : Num), (d : Num)), (q : Num)) * EXP(d, q)
+      #|  \226\136\128 A : Num, \226\136\128 d : Num, \226\136\128 q : Num, 2 <= q \226\134\146 EXP(DIV(A, d), q) * (d * (d - 1)) <= EXP(A, q)
+      #|  \226\136\128 n : Num, 1 <= n \226\134\146 SUC(n) * (n - 1) + 1 == n * n
+      #|  SUC((n : Num)) * ((n - 1) * (Aq : Num)) + Aq == (SUC(n) * (n - 1) + 1) * Aq
+      #|  SUC((n : Num)) * ((n - 1) * (Aq : Num)) + Aq
+      #|  SUC((n : Num)) * (n * (S : Num)) + (F1 : Num) * (SUC(n) * n)
+      #|  (n : Num) == 0
+      #|  (n : Num) * (SUC(n) * ((S : Num) + (F1 : Num))) <= n * (n * (Aq : Num))
+      #|  \226\136\128 n : Num, \226\136\128 S : Num, \226\136\128 F1 : Num, \226\136\128 Aq : Num, 1 <= n && n * S <= (n - 1) * Aq && F1 * (SUC(n) * n) <= Aq \226\134\146 SUC(n) * (S + F1) <= n * Aq
+      #|  (q : Num)
+      #|  SUC((n : Num))
+      #|  (A : Num)
+      #|  (n : Num) == 0
+      #|  1 <= (n : Num)
+      #|  (2 <= SUC((n : Num))) == (1 <= n)
+      #|  \226\136\128 A : Num, \226\136\128 q : Num, 2 <= q \226\134\146 (\226\136\128 n : Num, n * nsum(op_dot_dot(2, n), (d : Num) => EXP(DIV(A, d), q)) <= (n - 1) * EXP(A, q))
+      #|  (A : Num) == 0
+      #|  ((A : Num) - 1) * EXP(A, (q : Num))
+      #|  (A : Num) * (S : Num) <= A * EXP(A, (q : Num))
+      #|  \226\136\128 A : Num, \226\136\128 q : Num, \226\136\128 S : Num, 1 <= A && A * S <= (A - 1) * EXP(A, q) \226\134\146 S <= EXP(A, q)
+      #|  (q : Num)
+      #|  (A : Num)
+      #|  nsum(op_dot_dot(2, (A : Num)), (d : Num) => EXP(DIV(A, d), (q : Num))) <= EXP(A, q)
+      #|  1 + 1 == 2
+      #|  (A : Num)
       #|  1
-      #|  \\d:num. (A DIV d) EXP q
-      #|  1 <= A
-      #|  A = 0
-      #|  forall A q:num. 2 <= q ==> nsum(1..A)(\\d. (A DIV d) EXP q) <= 2 * A EXP q
-      #|  setgcd (s:A->bool) (a:A->int) =\n    @g. (forall i. i IN s ==> g divides a i) /\\\n        (forall d. (forall i. i IN s ==> d divides a i) ==> d divides g) /\\ &0 <= g
-      #|  forall s:A->bool a. FINITE s\n    ==> (forall i. i IN s ==> setgcd s a divides a i) /\\\n        (forall d. (forall i. i IN s ==> d divides a i) ==> d divides setgcd s a) /\\\n        &0 <= setgcd s a
-      #|  setmaxabs (s:A->bool) (a:A->int) =\n    abs(a (@H. H IN s /\\ (forall i. i IN s ==> abs(a i) <= abs(a H))))
-      #|  (@H. H IN s /\\\n   (forall i. i IN s ==> abs((a:A->int) i) <= abs(a H)))
-      #|  (@H. H IN s /\\\n   (forall i. i IN s ==> abs((a:A->int) i) <= abs(a H))) IN s /\\\n    (forall i. i IN s ==> abs((a:A->int) i) <= abs(a (@H. H IN s /\\\n     (forall i. i IN s ==> abs(a i) <= abs(a H)))))
-      #|  a:A->int
-      #|  s:A->bool
-      #|  forall s:A->bool a. FINITE s /\\ ~(s = {})\n    ==> (forall i. i IN s ==> abs(a i) <= setmaxabs s a) /\\\n        (?H. H IN s /\\ setmaxabs s a = abs(a H))
-      #|  &(num_of_int t):int = t
-      #|  &(num_of_int(t - --t + &1)):int = t - --t + &1
-      #|  t:int
-      #|  --t:int
-      #|  (--t <= x /\\ x <= t) <=> (--t <= x /\\ x <= t)
-      #|  --t <= x <=> x >= --t
-      #|  {b:A->int | (forall i. i IN s ==> abs(b i) <= t) /\\ (forall i. ~(i IN s) ==> b i =\n    &0)} =\n    {b:A->int | (forall i. i IN s ==> b i IN {k:int | --t <= k /\\ k <= t}) /\\\n                (forall i. ~(i IN s) ==> b i = &0)}
-      #|  forall s:A->bool t. FINITE s /\\ &0 <= t\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= t) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}\n        = (2 * num_of_int t + 1) EXP CARD s
-      #|  abs((b:A->int) j)
-      #|  setmaxabs s (b:A->int) <= &h /\\ &h <= setmaxabs s (b:A->int)
-      #|  j:A
-      #|  abs((b:A->int) H) = &h
-      #|  H:A
-      #|  H:A
-      #|  b:A->int
-      #|  s:A->bool
-      #|  forall s:A->bool b h. FINITE s /\\ ~(s = {}) /\\ 1 <= h /\\\n  (forall i. i IN s ==> abs(b i) <= &h)\n    ==> (setmaxabs s b = &h <=> ~(forall i. i IN s ==> abs(b i) <= &h - &1))
-      #|  h:num
-      #|  b:A->int
-      #|  s:A->bool
-      #|  h:num
-      #|  b:A->int
-      #|  s:A->bool
-      #|  b:A->int
-      #|  forall s:A->bool h. FINITE s /\\ ~(s = {}) /\\ 1 <= h\n    ==> {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)\n                    /\\ setmaxabs s b = &h}\n        = {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n         (forall i. ~(i IN s) ==> b i = &0)}\n          DIFF {b:A->int | (forall i. i IN s ==> abs(b i) <= &h - &1) /\\\n           (forall i. ~(i IN s) ==> b i = &0)}
-      #|  &h:int
-      #|  s:A->bool
-      #|  forall s:A->bool h. FINITE s\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}\n        = (2 * h + 1) EXP CARD s
-      #|  2 * (h - 1) + 1 = 2 * h - 1
-      #|  &h - &1 = &(h - 1):int
-      #|  num_of_int(&h - &1) = h - 1
-      #|  &1:int <= &h
-      #|  &h - &1:int
-      #|  s:A->bool
-      #|  forall s:A->bool h. FINITE s /\\ 1 <= h\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h - &1) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}\n        = (2 * h - 1) EXP CARD s
-      #|  abs((b:A->int) i) <= &h - &1
-      #|  i:A
-      #|  b:A->int
-      #|  {b:A->int | (forall i. i IN s ==> abs(b i) <= &h - &1) /\\\n    (forall i. ~(i IN s) ==> b i = &0)}\n    SUBSET {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)}
-      #|  forall s:A->bool h. FINITE s /\\ ~(s = {}) /\\ 1 <= h\n    ==> CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)\n                         /\\ setmaxabs s b = &h}\n        = (2 * h + 1) EXP CARD s - (2 * h - 1) EXP CARD s
-      #|  SUC(n + 1) = (n + 1) + 1
-      #|  (a + 2) * Y = a * Y + 2 * Y
-      #|  Y = a EXP (n + 1)
-      #|  X = (a + 2) EXP (n + 1)
-      #|  (a+2) * 2 * (n+1) * x = 2 * (n+1) * ((a+2) *\n    x)
-      #|  (a + 2) * 2 * (n + 1) * (a + 2) EXP n = 2 * (n + 1) * (a + 2)\n   EXP (n + 1)
-      #|  a EXP (n + 1) <= (a + 2) EXP (n + 1)
-      #|  (a + 2) * (a + 2) EXP n = (a + 2) EXP (n + 1)
-      #|  (a + 2) * (a EXP (n + 1) + 2 * (n + 1) * (a + 2) EXP n)
-      #|  (n + 1) + 1 = SUC(n+1)
-      #|  forall n a:num. (a + 2) EXP (n + 1) <= a EXP (n + 1) + 2 * (n + 1) * (a + 2) EXP\n  n
-      #|  (2 * l * 3 EXP (l - 1)) * h EXP (l - 1) = 2 * l * (3 * h) EXP\n     (l - 1)
-      #|  (2 * h - 1) + 2 = 2 * h + 1
-      #|  (l - 1) + 1 = l
-      #|  2 * h - 1
-      #|  l - 1
-      #|  2 * l * (2 * h + 1) EXP (l - 1)
-      #|  forall l h:num. 1 <= l /\\ 1 <= h\n    ==> (2 * h + 1) EXP l - (2 * h - 1) EXP l <= (2 * l * 3 EXP (l - 1)) * h\n     EXP (l - 1)
-      #|  2 <= CARD(s:A->bool)
-      #|  forall s:A->bool. FINITE s /\\ 2 <= CARD s ==> ~(s = {})
-      #|  j:A
-      #|  j:A
-      #|  forall s:A->bool b. (forall i. ~(i IN s) ==> b i = &0) /\\ ~(b = (\\i:A. &0))\n    ==> ?j. j IN s /\\ ~((b:A->int) j = &0)
-      #|  forall s:A->bool b. &0 <= setmaxabs s b
-      #|  &(num_of_int(setmaxabs s (b:A->int))):int = setmaxabs s b
-      #|  forall s:A->bool b h. num_of_int(setmaxabs s b) = h ==> setmaxabs s b = &h
-      #|  abs((b:A->int) j)
-      #|  b:A->int
-      #|  s:A->bool
-      #|  forall s:A->bool b A'. FINITE s /\\ ~(s = {}) /\\\n  (forall i. i IN s ==> abs(b i) <= &A') /\\\n                    (?j. j IN s /\\ ~(b j = &0))\n    ==> &1 <= setmaxabs s b /\\ setmaxabs s b <= &A'
-      #|  setmaxabs s (b:A->int) <= &Ap
-      #|  &1 <= setmaxabs s (b:A->int)
-      #|  &(num_of_int(setmaxabs s (b:A->int))):int = setmaxabs s b
-      #|  Ap:num
-      #|  b:A->int
-      #|  s:A->bool
-      #|  ?j:A. j IN s /\\ ~((b:A->int) j = &0)
-      #|  ~(s:A->bool = {})
-      #|  b:A->int
-      #|  x:num
-      #|  forall s:A->bool Ap. FINITE s /\\ 2 <= CARD s\n    ==> forall x. (?b:A->int. x = num_of_int(setmaxabs s b) /\\\n             ((forall i. i IN s ==> abs(b i) <= &Ap) /\\\n              (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n             ~(b = (\\i:A. &0)))\n        ==> 1 <= x /\\ x <= Ap
-      #|  (C * K) * h EXP q = (C * h EXP q) * K
-      #|  (C * h EXP q * h) * (K DIV h) = (C * h EXP q) * (h * (K DIV\n   h))
-      #|  (C * h EXP (q + 1)) * (K DIV h)
-      #|  forall cnt C K h q:num. 1 <= h /\\ cnt <= C * h EXP (q + 1)\n    ==> cnt * (K DIV h) <= (C * K) * h EXP q
-      #|  1 <= h ==> ~(h = 0)
-      #|  &(num_of_int K):int = K
-      #|  h * lincount s (b:A->int) (&0) B <= num_of_int K
-      #|  &0 <= (K:int)
-      #|  K:int = &(FACT(CARD(s:A->bool) - 1)) *\n            (&3 * B) pow (CARD s - 1)
-      #|  abs((b:A->int) H) = &h
-      #|  abs((b:A->int) i) <= &h /\\ &h = abs(b H)
-      #|  i:A
-      #|  &Ap:int
-      #|  i:A
-      #|  H:A
-      #|  B:int
-      #|  &0:int
-      #|  b:A->int
-      #|  s:A->bool
-      #|  H:A
-      #|  b:A->int
-      #|  s:A->bool
-      #|  ~(s:A->bool = {})
-      #|  forall s:A->bool b B h Ap. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B /\\\n  1 <= h /\\\n     (forall i. i IN s ==> abs(b i) <= &Ap) /\\ (forall i. ~(i IN s) ==> b i = &0) /\\\n     setcoprime s b /\\ (?j. j IN s /\\ ~(b j = &0)) /\\ setmaxabs s b = &h\n    ==> lincount s b (&0) B\n        <= (num_of_int(&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) DIV\n         h
-      #|  (l - 2) + 1 = l - 1
-      #|  &C * &Kn * &h pow (l - 2) = &((C * Kn) * h EXP (l - 2)):int
-      #|  &fib * &(Kn DIV h) = &(fib * (Kn DIV h)):int
-      #|  forall fib C Kn h l:num.\n     fib <= C * h EXP (l - 1) /\\ 2 <= l /\\ 1 <= h\n    ==> (&fib:int) * &(Kn DIV h) <= &C * &Kn * &h pow (l - 2)
-      #|  &(2 * CARD(s:A->bool) * 3 EXP (CARD s - 1)) * (KI:int) *\n    &h pow (CARD s - 2) =\n                &(2 * CARD s * 3 EXP (CARD s - 1)) * &Kn * &h pow (CARD s - 2)
-      #|  ~(s:A->bool = {})
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &h) /\\\n         (forall i. ~(i IN s) ==> a i = &0)}
-      #|  b:A->int
-      #|  s:A->bool
-      #|  abs((b:A->int) i) <= setmaxabs s b
-      #|  i:A
-      #|  b:A->int
-      #|  b:A->int
-      #|  CARD {b:A->int | (forall i. i IN s ==> abs(b i) <= &h) /\\\n     (forall i. ~(i IN s) ==> b i = &0)\n                       /\\ setmaxabs s b = &h}
-      #|  CARD (FIB:(A->int)->bool) <= (2 * CARD(s:A->bool) * 3 EXP (CARD\n   s - 1)) * h EXP (CARD s - 1)
-      #|  Ap:num
-      #|  h:num
-      #|  B:int
-      #|  b:A->int
-      #|  s:A->bool
-      #|  b:A->int
-      #|  b:A->int
-      #|  isum (FIB:(A->int)->bool) (\\b. &(Kn DIV h))
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &Ap) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
-      #|  FINITE (FIB:(A->int)->bool)
-      #|  ~(s:A->bool = {})
-      #|  forall b:A->int. b IN FIB ==>\n     (forall i. i IN s ==> abs(b i) <= &Ap) /\\ (forall i. ~(i IN s) ==> b i = &0) /\\\n      setcoprime s b /\\\n     (?j. j IN s /\\ ~(b j = &0)) /\\ setmaxabs s b = &h
-      #|  &Kn = KI:int
-      #|  &0 <= (KI:int)
-      #|  FIB = {b:A->int | b IN {b:A->int | ((forall i. i IN s ==> abs(b i) <=\n   &Ap) /\\\n                    (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                     ~(b = (\\i:A. &0))} /\\\n                   num_of_int(setmaxabs s b) = h}
-      #|  Kn = num_of_int(KI:int)
-      #|  KI:int = &(FACT(CARD(s:A->bool) - 1)) *\n             (&3 * B) pow (CARD s - 1)
-      #|  forall s:A->bool Ap B h. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B /\\\n  1 <= h /\\ h <= Ap\n    ==> isum {b:A->int | b IN {b:A->int | ((forall i. i IN s ==> abs(b i) <= &Ap) /\\\n                          (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                           ~(b = (\\i:A. &0))} /\\\n                         num_of_int(setmaxabs s b) = h}\n             (\\b. &(lincount s b (&0) B))\n        <= &(2 * CARD s * 3 EXP (CARD s - 1)) *\n           (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1)) * &h pow (CARD s -\n            2)
-      #|  (CARD(s:A->bool) - 2) + 1 = CARD s - 1
-      #|  Ap:num
-      #|  CARD(s:A->bool) - 2
-      #|  h:num
-      #|  B:int
-      #|  Ap:num
-      #|  s:A->bool
-      #|  h:num
-      #|  isum(1..Ap)(\\h. (&(2 * CARD(s:A->bool) * 3 EXP (CARD s - 1)) *\n              (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &h pow (CARD\n               s - 2))
-      #|  k:num
-      #|  Ap:num
-      #|  s:A->bool
-      #|  k:num
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &Ap) /\\\n       (forall i. ~(i IN s) ==> a i = &0)}
-      #|  1..Ap
-      #|  {b:A->int | ((forall i. i IN s ==> abs(b i) <= &Ap) /\\ (forall i. ~(i IN s) ==> b i =\n      &0) /\\\n                   setcoprime s b) /\\ ~(b = (\\i:A. &0))}
-      #|  \\b:A->int. (&(lincount s b (&0) B):int)
-      #|  \\b:A->int. num_of_int(setmaxabs s b)
-      #|  forall s:A->bool Ap B. FINITE s /\\ 2 <= CARD s /\\ &0 <= B /\\ &Ap <= B\n    ==> isum {b:A->int | ((forall i. i IN s ==> abs(b i) <= &Ap) /\\\n     (forall i. ~(i IN s) ==> b i = &0) /\\\n                          setcoprime s b) /\\ ~(b = (\\i:A. &0))}\n             (\\b. &(lincount s b (&0) B))\n        <= (&(2 * CARD s * 3 EXP (CARD s - 1)) *\n            (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &Ap pow (CARD\n             s - 1)
-      #|  ~(aj:int = &0)
-      #|  forall aj d:int. &1 <= d /\\ ~(aj = &0) /\\\n  aj = d * (aj div d) ==> ~(aj div d = &0)
-      #|  abs(ai div d) = &(num_of_int(abs(ai div\n   d)))
-      #|  &(num_of_int d):int = d
-      #|  abs(ai div d) = &(num_of_int(abs(ai div d)))
-      #|  &(num_of_int d):int = d
-      #|  ~(num_of_int d = 0)
-      #|  &1 <= (d:int) ==> abs d = d
-      #|  (ai:int) = d * (ai div d)
-      #|  d * abs(ai div d) = abs(ai:int)
-      #|  (d:int) * abs(ai div d) <= &A
-      #|  forall ai d:int. forall A:num. &1 <= d /\\ abs(ai) <= &A /\\ ai = d * (ai div d)\n    ==> abs(ai div d) <= &(A DIV (num_of_int d))
-      #|  &1 <= (d:int) ==> ~(d = &0)
-      #|  d:int
-      #|  ~((a:A->int) j div d = &0)
-      #|  j:A
-      #|  i:A
-      #|  ~((d:int) = &0) ==> (d * e) divides d ==> e divides &1
-      #|  i:A
-      #|  (e:int) divides q ==> (d * e) divides (d * q)
-      #|  (a:A->int) i = d * q i
-      #|  i:A
-      #|  ((d:int) * e) divides d
-      #|  e:int
-      #|  (a:A->int) i = d * q i
-      #|  forall i:A. i IN s ==> (a:A->int) i = (d:int) * (a i div d)
-      #|  i:A
-      #|  forall i:A. ~(i IN s) ==> (q:A->int) i = &0
-      #|  i:A
-      #|  forall i:A. i IN s ==> (a:A->int) i = (d:int) * (q:A->int) i
-      #|  q = \\i:A. if i IN s then (a:A->int) i div d else &0
-      #|  (a:A->int) j
-      #|  &1 <= (d:int)
-      #|  d = setgcd s (a:A->int)
-      #|  a:A->int
-      #|  s:A->bool
-      #|  forall s:A->bool a A B. FINITE s /\\ 2 <= CARD s /\\\n  (forall i. i IN s ==> abs(a i) <= &A) /\\\n     (forall i. ~(i IN s) ==> a i = &0) /\\ (?j. j IN s /\\ ~(a j = &0))\n    ==> &1 <= setgcd s a /\\\n        (forall i. i IN s ==> a i = setgcd s a * (a i div setgcd s a)) /\\\n        setcoprime s (\\i. if i IN s then a i div setgcd s a else &0) /\\\n        (forall i. i IN s ==> abs((if i IN s then a i div setgcd s a else &0))\n                        <= &(A DIV (num_of_int(setgcd s a)))) /\\\n        (forall i. ~(i IN s) ==> (if i IN s then a i div setgcd s a else &0) = &0) /\\\n        ~((\\i. if i IN s then a i div setgcd s a else &0) = (\\i:A. &0)) /\\\n        lincount s a (&0) B = lincount s (\\i. if i IN s then a i div setgcd s a\n         else &0) (&0) B
-      #|  k:A
-      #|  i:A
-      #|  forall i. i IN s ==> abs((if i IN s then (a:A->int) i div setgcd s a\n     else &0)) <= &(A DIV (num_of_int(setgcd s a)))
-      #|  i:A
-      #|  forall i:A. i IN s ==> abs((if i IN s then (a:A->int) i div setgcd s a else &0))\n    <= &(A DIV dn)
-      #|  setgcd s (a:A->int) = &dn
-      #|  a:A->int
-      #|  s:A->bool
-      #|  B:int
-      #|  A:num
-      #|  a:A->int
-      #|  s:A->bool
-      #|  ?j:A. j IN s /\\ ~((a:A->int) j = &0)
-      #|  \\k:A. if k IN s then (a:A->int) k div setgcd s a else &0
-      #|  a:A->int
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &(A DIV dn)) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
-      #|  \\b:A->int. (\\k:A. if k IN s then &dn * b k else &0)
-      #|  forall s:A->bool A B dn. FINITE s /\\ 2 <= CARD s /\\ 1 <= dn\n    ==> isum {a:A->int | (a IN ({a:A->int | (forall i. i IN s ==> abs(a i) <= &A) /\\\n                          (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)})) /\\\n                         num_of_int(setgcd s a) = dn}\n             (\\a. &(lincount s a (&0) B))\n        <= isum {b:A->int | ((forall i. i IN s ==> abs(b i) <= &(A DIV dn)) /\\\n                             (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                              ~(b = (\\i:A. &0))}\n                (\\b. &(lincount s b (&0) B))
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  num_of_int(setgcd s (a:A->int)) =\n    dn
-      #|  &(num_of_int A):int = A
-      #|  &(num_of_int(setgcd s (a:A->int))):int = setgcd s a
-      #|  (a:A->int) j
-      #|  setgcd s (a:A->int)
-      #|  abs((a:A->int) j)
-      #|  setgcd s (a:A->int) <= A
-      #|  (a:A->int) j
-      #|  &1 <= setgcd s (a:A->int)
-      #|  a:A->int
-      #|  s:A->bool
-      #|  ?j:A. j IN s /\\ ~((a:A->int) j = &0)
-      #|  a:A->int
-      #|  x:num
-      #|  forall s:A->bool A. FINITE s /\\ 2 <= CARD s /\\ &1 <= A\n    ==> forall x. (?a:A->int. x = num_of_int(setgcd s a) /\\\n             (a IN ({a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n              (forall i. ~(i IN s) ==> a i = &0)}\n                    DIFF {(\\i:A. &0)})))\n        ==> 1 <= x /\\ x <= num_of_int A
-      #|  &Anat:int
-      #|  isum {b:A->int | ((forall i. i IN s ==> abs(b i) <= &(Anat DIV dn)) /\\\n                             (forall i. ~(i IN s) ==> b i = &0) /\\ setcoprime s b) /\\\n                              ~(b = (\\i:A. &0))}\n                (\\b. &(lincount s b (&0) B))
-      #|  forall s:A->bool Anat B dn. FINITE s /\\ 2 <= CARD s /\\ &Anat <= B /\\ 1 <= dn\n    ==> isum {a:A->int | (a IN ({a:A->int | (forall i. i IN s ==> abs(a i) <= &Anat)\n     /\\\n                          (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)})) /\\\n                         num_of_int(setgcd s a) = dn}\n             (\\a. &(lincount s a (&0) B))\n        <= (&(2 * CARD s * 3 EXP (CARD s - 1)) *\n            (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &(Anat DIV dn)\n             pow (CARD s - 1)
-      #|  &2 * &An pow q = &(2 * An EXP q):int
-      #|  isum(1..An)(\\dn. &(An DIV dn) pow q) = &(nsum(1..An)(\\dn. (An\n   DIV dn) EXP q))
-      #|  forall An q:num. 2 <= q ==> isum(1..An)(\\dn. &(An DIV dn) pow q) <= &2 * &An pow\n  q
-      #|  (x:int) = y ==> x <= y
-      #|  ((&(2 * CARD(s:A->bool) * 3 EXP (CARD s - 1)):int) *\n               (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) *\n              (&2 * &An pow (CARD s - 1))
-      #|  dn:num
-      #|  isum(1..An)(\\dn. (&(2 * CARD(s:A->bool) * 3 EXP (CARD s - 1)) *\n              (&(FACT(CARD s - 1)) * (&3 * B) pow (CARD s - 1))) * &(An DIV dn)\n               pow (CARD s - 1))
-      #|  k:num
-      #|  &An:int
-      #|  s:A->bool
-      #|  k:num
-      #|  1..An
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &An) /\\ (forall i. ~(i IN s) ==> a i =\n     &0)} DIFF {(\\i:A. &0)}
-      #|  \\a:A->int. (&(lincount s a (&0) B):int)
-      #|  \\a:A->int. num_of_int(setgcd s a)
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\ (forall i. ~(i IN s) ==> a i =\n    &0)} DIFF {(\\i:A. &0)}\n    = {a:A->int | (forall i. i IN s ==> abs(a i) <= &An) /\\\n     (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A. &0)}
-      #|  (&1:int) <= &An
-      #|  2 <= CARD(s:A->bool) - 1
-      #|  2 <= CARD(s:A->bool)
-      #|  (A:int) = &An
-      #|  An = num_of_int A
-      #|  (&4:int) * &(CARD(s:A->bool)) * &3 pow (2 * (CARD s - 1)) *\n    &(FACT(CARD s - 1))
-      #|  forall s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?Cnz. forall A B:int. &1 <= A /\\ A <= B\n            ==> isum ({a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n                                  (forall i. ~(i IN s) ==> a i = &0)} DIFF {(\\i:A.\n                                   &0)})\n                     (\\a. &(lincount s a (&0) B))\n                <= Cnz * (A * B) pow (CARD s - 1)
-      #|  A:int
-      #|  s:A->bool
-      #|  forall s:A->bool A. FINITE s /\\ &0 <= A\n    ==> CARD {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n                         (forall i. ~(i IN s) ==> a i = &0)}\n        <= (2 * num_of_int A + 1) EXP CARD s
-      #|  z:A->int
-      #|  {z:A->int | (forall i. i IN s ==> abs(z i) <= B) /\\\n                (forall i. ~(i IN s) ==> z i = &0) /\\\n                isum s (\\i. &0 * z i) = &0} =\n    {a:A->int | (forall i. i IN s ==> abs(a i) <= B) /\\\n                (forall i. ~(i IN s) ==> a i = &0)}
-      #|  forall s:A->bool B. FINITE s /\\ &0 <= B\n    ==> lincount s (\\i. &0) (&0) B <= (2 * num_of_int B + 1) EXP CARD s
-      #|  &(num_of_int B):int = B
-      #|  forall B:int n. &0 <= B ==> &((2 * num_of_int B + 1) EXP n) = (&2 * B + &1) pow\n  n
-      #|  (&3 * &3 pow l1) * (B:int) * B pow l1 =\n    ((&3 * &3 pow l1) * B pow l1) * B /\\\n    ((&3 * &3 pow l1) * C0) * A pow l1 * B pow l1 =\n    ((&3 * &3 pow l1) * B pow l1) * (C0 * A pow l1)
-      #|  l1 = CARD(s:A->bool) - 1
-      #|  1 <= CARD(s:A->bool)
-      #|  CARD(s:A->bool) = SUC(CARD s - 1)
-      #|  (&3 * (B:int)) pow (CARD(s:A->bool)) =\n    (&3 * &3 pow (CARD s - 1)) * B * B pow (CARD s - 1)
-      #|  1 <= CARD(s:A->bool)
-      #|  CARD(s:A->bool) = SUC(CARD s - 1)
-      #|  (&3:int) pow (CARD(s:A->bool)) =\n                &3 * &3 pow (CARD s - 1)
-      #|  forall s:A->bool A B C0. 1 <= CARD s /\\ (&1:int) <= A /\\ A <= B /\\\n                      B <= C0 * A pow (CARD s - 1) /\\ &1 <= C0\n    ==> (&3 * B) pow (CARD s) <= (&3 pow (CARD s) * C0) * (A * B) pow (CARD s -\n     1)
-      #|  &((2 * num_of_int B + 1) EXP CARD(s:A->bool)):int
-      #|  (&3 * (B:int)) pow (CARD(s:A->bool))
-      #|  &0 <= (B:int)
-      #|  forall s:A->bool A B C0. FINITE s /\\ 1 <= CARD s /\\ &1 <= A /\\ A <= B /\\\n                      B <= C0 * A pow (CARD s - 1) /\\ &1 <= C0\n    ==> &(lincount s (\\i. &0) (&0) B) <= (&3 pow (CARD s) * C0) * (A * B) pow\n     (CARD s - 1)
-      #|  cz:int = &(lincount s (\\i:A. &0) (&0) B)
-      #|  X = isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n   (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) B))
-      #|  {(\\i:A. &0:int)}
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\ (forall i. ~(i IN s) ==> a i =\n       &0)}
-      #|  \\a:A->int. (&(lincount s a (&0) B):int)
-      #|  a:A->int
-      #|  {(\\i:A. &0)} SUBSET\n     {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n      (forall i. ~(i IN s) ==> a i = &0)}
-      #|  forall s:A->bool A B. FINITE s /\\ &1 <= A\n    ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) B))\n        = &(lincount s (\\i. &0) (&0) B) +\n          isum ({a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n           (forall i. ~(i IN s) ==> a i = &0)}\n                DIFF {(\\i:A. &0)}) (\\a. &(lincount s a (&0) B))
-      #|  d:num
-      #|  a <= b \\/ b <= a:num
-      #|  forall a b:num. 2 * a * b <= a * a + b * b
-      #|  c - y:int
-      #|  y:int
-      #|  IMAGE (\\x:int. c - x) s = s
-      #|  s:int->bool
-      #|  \\y:int. (B:int->num) y * B y
-      #|  \\x:int. c - x
-      #|  b:num = b' ==> a + b <= a + b'
-      #|  (B:int->num)(c - x)
-      #|  (A:int->num) x
-      #|  x:int
-      #|  2 * nsum s (\\x. (A:int->num) x * B(c - x)) =\n      nsum s (\\x. 2 * (A x * B(c - x)))
-      #|  nsum s (\\x. (A:int->num) x * A x + B(c - x) * B(c - x))
-      #|  forall(A:int->num) (B:int->num) c s.\n        FINITE s /\\\n        (forall x. ~(x IN s) ==> A x = 0) /\\ (forall x. ~(x IN s) ==> B x = 0) /\\\n        (forall x. x IN s ==> c - x IN s)\n        ==> 2 * nsum s (\\x. A x * B(c - x))\n            <= nsum s (\\x. A x * A x) + nsum s (\\x. B x * B x)
-      #|  ipoly (f:num->int) e (x:int) = isum(0..e)(\\i. f i * x pow i)
-      #|  j:num
-      #|  forall k c y:int. y * isum(0..k)(\\j. c j * y pow j) = isum(0..k)(\\j. c j * y pow\n  (j+1))
-      #|  y:int
-      #|  g:num->int
-      #|  forall e (g:num->int) y.\n      isum (0..SUC e) (\\j. (if j = 0 then &0 else g (j - 1)) * y pow j) =\n      isum(0..e)(\\j. g j * y pow (j+1))
-      #|  forall f e x:int. ipoly f (SUC e) x = ipoly f e x + f(SUC e) * x pow (SUC e)
-      #|  ibox t M =\n  {z:num->int | (forall i. i IN 1..t ==> abs(z i) <= M) /\\\n   (forall i. ~(i IN 1..t) ==> z i = &0)}
-      #|  abs((z:num->int) i) <= M
-      #|  i:num
-      #|  z:num->int
-      #|  {z:num->int | (forall i. i IN 1..t ==> z i IN {w:int | --M <= w /\\\n   w <= M}) /\\ (forall i. ~(i IN 1..t) ==> z i = &0)}
-      #|  forall t M. FINITE(ibox t M)
-      #|  ijoin t (u:num->int) (v:num->int) =\n    (\\i. if i IN 1..t then u i else if i IN (t+1)..(2*t) then v(i - t) else\n     &0)
-      #|  ihead t (w:num->int) = (\\i. if i IN 1..t then w i\n else &0)
-      #|  itail t (w:num->int) = (\\i. if i IN 1..t then w(i +\n t) else &0)
-      #|  i:num
-      #|  forall t M (u:num->int) (v:num->int). u IN ibox t M /\\\n  v IN ibox t M ==> ijoin t u v IN ibox (2*t) M
-      #|  ~((i + t) IN 1..t) /\\ (i + t) IN (t+1)..(2*t) /\\\n       (i + t) - t = i
-      #|  i + t
-      #|  i IN 1..t
-      #|  i:num
-      #|  i IN 1..t
-      #|  i:num
-      #|  forall t M (u:num->int) v u' v'.\n     1 <= t /\\ u IN ibox t M /\\ v IN ibox t M /\\ u' IN ibox t M /\\\n      v' IN ibox t M /\\\n     ijoin t u v = ijoin t u' v'\n     ==> u = u' /\\ v = v'
-      #|  i:num
-      #|  forall t M (w:num->int). w IN ibox (2*t) M ==> ihead t w IN ibox t M
-      #|  i:num
-      #|  forall t M (w:num->int). w IN ibox (2*t) M ==> itail t w IN ibox t M
-      #|  1 <= i - t /\\ i - t <= t
-      #|  i:num
-      #|  forall t M (w:num->int). w IN ibox (2*t) M ==> ijoin t (ihead t w) (itail t w) =\n  w
-      #|  0 + 1 = 1
-      #|  forall f z:int. ipoly f 1 z = f 0 + f 1 * z
-      #|  (2 + 1..2) = {}
+      #|  (d : Num) => EXP(DIV((A : Num), d), (q : Num))
+      #|  1 <= (A : Num)
+      #|  (A : Num) == 0
+      #|  \226\136\128 A : Num, \226\136\128 q : Num, 2 <= q \226\134\146 nsum(op_dot_dot(1, A), (d : Num) => EXP(DIV(A, d), q)) <= 2 * EXP(A, q)
+      #|  (setgcd : ((A) -> Bool, (A) -> Int) -> Int)((s : (A) -> Bool), (a : (A) -> Int)) == select((g : Int) => (\226\136\128 i : A, IN(i, s) \226\134\146 divides(g, a(i))) && (\226\136\128 d : Int, (\226\136\128 i : A, IN(i, s) \226\134\146 divides(d, a(i))) \226\134\146 divides(d, g)) && int_of_num(0) <= g)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, FINITE(s) \226\134\146 (\226\136\128 i : A, IN(i, s) \226\134\146 divides(setgcd(s, a), a(i))) && (\226\136\128 d : Int, (\226\136\128 i : A, IN(i, s) \226\134\146 divides(d, a(i))) \226\134\146 divides(d, setgcd(s, a))) && int_of_num(0) <= setgcd(s, a)
+      #|  (setmaxabs : ((A) -> Bool, (A) -> Int) -> Int)((s : (A) -> Bool), (a : (A) -> Int)) == abs(a(select((H : A) => IN(H, s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= abs(a(H))))))
+      #|  select((H : A) => IN(H, (s : (A) -> Bool)) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs((a : (A) -> Int)(i)) <= abs(a(H))))
+      #|  IN(select((H : A) => IN(H, (s : (A) -> Bool)) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs((a : (A) -> Int)(i)) <= abs(a(H)))), s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= abs(a(select((H : A) => IN(H, s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= abs(a(H)))))))
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, FINITE(s) && !(s == {}) \226\134\146 (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= setmaxabs(s, a)) && (\226\136\131 H : A, IN(H, s) && setmaxabs(s, a) == abs(a(H)))
+      #|  int_of_num(num_of_int((t : Int))) == t
+      #|  int_of_num(num_of_int((t : Int) - -t + int_of_num(1))) == t - -t + int_of_num(1)
+      #|  (t : Int)
+      #|  -(t : Int)
+      #|  (-(t : Real) <= (x : Real) && x <= t) == (-t <= x && x <= t)
+      #|  (-(t : Real) <= (x : Real)) == (x >= -t)
+      #|  {(b : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= (t : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))} == {(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 IN(b(i), {(k : Int) | -t <= k && k <= t})) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : Int, FINITE(s) && int_of_num(0) <= t \226\134\146 CARD({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= t) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))}) == EXP(2 * num_of_int(t) + 1, CARD(s))
+      #|  abs((b : (A) -> Int)((j : A)))
+      #|  setmaxabs((s : (A) -> Bool), (b : (A) -> Int)) <= int_of_num((h : Num)) && int_of_num(h) <= setmaxabs(s, b)
+      #|  (j : A)
+      #|  abs((b : (A) -> Int)((H : A))) == int_of_num((h : Num))
+      #|  (H : A)
+      #|  (H : A)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 b : (A) -> Int, \226\136\128 h : Num, FINITE(s) && !(s == {}) && 1 <= h && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h)) \226\134\146 (setmaxabs(s, b) == int_of_num(h)) == !(\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h) - int_of_num(1))
+      #|  (h : Num)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (h : Num)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (b : (A) -> Int)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 h : Num, FINITE(s) && !(s == {}) && 1 <= h \226\134\146 {(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setmaxabs(s, b) == int_of_num(h)} == DIFF({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))}, {(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h) - int_of_num(1)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))})
+      #|  int_of_num((h : Num))
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 h : Num, FINITE(s) \226\134\146 CARD({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))}) == EXP(2 * h + 1, CARD(s))
+      #|  2 * ((h : Num) - 1) + 1 == 2 * h - 1
+      #|  int_of_num((h : Num)) - int_of_num(1) == int_of_num(h - 1)
+      #|  num_of_int(int_of_num((h : Num)) - int_of_num(1)) == h - 1
+      #|  int_of_num(1) <= int_of_num((h : Num))
+      #|  int_of_num((h : Num)) - int_of_num(1)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 h : Num, FINITE(s) && 1 <= h \226\134\146 CARD({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h) - int_of_num(1)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))}) == EXP(2 * h - 1, CARD(s))
+      #|  abs((b : (A) -> Int)((i : A))) <= int_of_num((h : Num)) - int_of_num(1)
+      #|  (i : A)
+      #|  (b : (A) -> Int)
+      #|  SUBSET({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= int_of_num((h : Num)) - int_of_num(1)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))}, {(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0))})
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 h : Num, FINITE(s) && !(s == {}) && 1 <= h \226\134\146 CARD({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(h)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setmaxabs(s, b) == int_of_num(h)}) == EXP(2 * h + 1, CARD(s)) - EXP(2 * h - 1, CARD(s))
+      #|  SUC((n : Num) + 1) == n + 1 + 1
+      #|  ((a : Num) + 2) * (Y : Num) == a * Y + 2 * Y
+      #|  (Y : Num) == EXP((a : Num), (n : Num) + 1)
+      #|  (X : Num) == EXP((a : Num) + 2, (n : Num) + 1)
+      #|  ((a : Num) + 2) * (2 * (((n : Num) + 1) * (x : Num))) == 2 * ((n + 1) * ((a + 2) * x))
+      #|  ((a : Num) + 2) * (2 * (((n : Num) + 1) * EXP(a + 2, n))) == 2 * ((n + 1) * EXP(a + 2, n + 1))
+      #|  EXP((a : Num), (n : Num) + 1) <= EXP(a + 2, n + 1)
+      #|  ((a : Num) + 2) * EXP(a + 2, (n : Num)) == EXP(a + 2, n + 1)
+      #|  ((a : Num) + 2) * (EXP(a, (n : Num) + 1) + 2 * ((n + 1) * EXP(a + 2, n)))
+      #|  (n : Num) + 1 + 1 == SUC(n + 1)
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, EXP(a + 2, n + 1) <= EXP(a, n + 1) + 2 * ((n + 1) * EXP(a + 2, n))
+      #|  2 * ((l : Num) * EXP(3, l - 1)) * EXP((h : Num), l - 1) == 2 * (l * EXP(3 * h, l - 1))
+      #|  2 * (h : Num) - 1 + 2 == 2 * h + 1
+      #|  (l : Num) - 1 + 1 == l
+      #|  2 * (h : Num) - 1
+      #|  (l : Num) - 1
+      #|  2 * ((l : Num) * EXP(2 * (h : Num) + 1, l - 1))
+      #|  \226\136\128 l : Num, \226\136\128 h : Num, 1 <= l && 1 <= h \226\134\146 EXP(2 * h + 1, l) - EXP(2 * h - 1, l) <= 2 * (l * EXP(3, l - 1)) * EXP(h, l - 1)
+      #|  2 <= CARD((s : (A) -> Bool))
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) && 2 <= CARD(s) \226\134\146 !(s == {})
+      #|  (j : A)
+      #|  (j : A)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 b : (A) -> Int, (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && !(b == ((i : A) => int_of_num(0))) \226\134\146 (\226\136\131 j : A, IN(j, s) && !(b(j) == int_of_num(0)))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 b : (A) -> Int, int_of_num(0) <= setmaxabs(s, b)
+      #|  int_of_num(num_of_int(setmaxabs((s : (A) -> Bool), (b : (A) -> Int)))) == setmaxabs(s, b)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 b : (A) -> Int, \226\136\128 h : Num, num_of_int(setmaxabs(s, b)) == h \226\134\146 setmaxabs(s, b) == int_of_num(h)
+      #|  abs((b : (A) -> Int)((j : A)))
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 b : (A) -> Int, \226\136\128 A' : Num, FINITE(s) && !(s == {}) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(A')) && (\226\136\131 j : A, IN(j, s) && !(b(j) == int_of_num(0))) \226\134\146 int_of_num(1) <= setmaxabs(s, b) && setmaxabs(s, b) <= int_of_num(A')
+      #|  setmaxabs((s : (A) -> Bool), (b : (A) -> Int)) <= int_of_num((Ap : Num))
+      #|  int_of_num(1) <= setmaxabs((s : (A) -> Bool), (b : (A) -> Int))
+      #|  int_of_num(num_of_int(setmaxabs((s : (A) -> Bool), (b : (A) -> Int)))) == setmaxabs(s, b)
+      #|  (Ap : Num)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\131 j : A, IN(j, (s : (A) -> Bool)) && !((b : (A) -> Int)(j) == int_of_num(0))
+      #|  !((s : (A) -> Bool) == {})
+      #|  (b : (A) -> Int)
+      #|  (x : Num)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 Ap : Num, FINITE(s) && 2 <= CARD(s) \226\134\146 (\226\136\128 x : Num, (\226\136\131 b : (A) -> Int, x == num_of_int(setmaxabs(s, b)) && ((\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(Ap)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))) \226\134\146 1 <= x && x <= Ap)
+      #|  (C : Num) * (K : Num) * EXP((h : Num), (q : Num)) == C * EXP(h, q) * K
+      #|  (C : Num) * (EXP((h : Num), (q : Num)) * h) * DIV((K : Num), h) == C * EXP(h, q) * (h * DIV(K, h))
+      #|  (C : Num) * EXP((h : Num), (q : Num) + 1) * DIV((K : Num), h)
+      #|  \226\136\128 cnt : Num, \226\136\128 C : Num, \226\136\128 K : Num, \226\136\128 h : Num, \226\136\128 q : Num, 1 <= h && cnt <= C * EXP(h, q + 1) \226\134\146 cnt * DIV(K, h) <= C * K * EXP(h, q)
+      #|  1 <= (h : Num) \226\134\146 !(h == 0)
+      #|  int_of_num(num_of_int((K : Int))) == K
+      #|  (h : Num) * lincount((s : (A) -> Bool), (b : (A) -> Int), int_of_num(0), (B : Int)) <= num_of_int((K : Int))
+      #|  int_of_num(0) <= (K : Int)
+      #|  (K : Int) == int_of_num(FACT(CARD((s : (A) -> Bool)) - 1)) * pow(int_of_num(3) * (B : Int), CARD(s) - 1)
+      #|  abs((b : (A) -> Int)((H : A))) == int_of_num((h : Num))
+      #|  abs((b : (A) -> Int)((i : A))) <= int_of_num((h : Num)) && int_of_num(h) == abs(b((H : A)))
+      #|  (i : A)
+      #|  int_of_num((Ap : Num))
+      #|  (i : A)
+      #|  (H : A)
+      #|  (B : Int)
+      #|  int_of_num(0)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (H : A)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  !((s : (A) -> Bool) == {})
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 b : (A) -> Int, \226\136\128 B : Int, \226\136\128 h : Num, \226\136\128 Ap : Num, FINITE(s) && 2 <= CARD(s) && int_of_num(0) <= B && int_of_num(Ap) <= B && 1 <= h && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(Ap)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b) && (\226\136\131 j : A, IN(j, s) && !(b(j) == int_of_num(0))) && setmaxabs(s, b) == int_of_num(h) \226\134\146 lincount(s, b, int_of_num(0), B) <= DIV(num_of_int(int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * B, CARD(s) - 1)), h)
+      #|  (l : Num) - 2 + 1 == l - 1
+      #|  int_of_num((C : Num)) * (int_of_num((Kn : Num)) * pow(int_of_num((h : Num)), (l : Num) - 2)) == int_of_num(C * Kn * EXP(h, l - 2))
+      #|  int_of_num((fib : Num)) * int_of_num(DIV((Kn : Num), (h : Num))) == int_of_num(fib * DIV(Kn, h))
+      #|  \226\136\128 fib : Num, \226\136\128 C : Num, \226\136\128 Kn : Num, \226\136\128 h : Num, \226\136\128 l : Num, fib <= C * EXP(h, l - 1) && 2 <= l && 1 <= h \226\134\146 int_of_num(fib) * int_of_num(DIV(Kn, h)) <= int_of_num(C) * (int_of_num(Kn) * pow(int_of_num(h), l - 2))
+      #|  int_of_num(2 * (CARD((s : (A) -> Bool)) * EXP(3, CARD(s) - 1))) * ((KI : Int) * pow(int_of_num((h : Num)), CARD(s) - 2)) == int_of_num(2 * (CARD(s) * EXP(3, CARD(s) - 1))) * (int_of_num((Kn : Num)) * pow(int_of_num(h), CARD(s) - 2))
+      #|  !((s : (A) -> Bool) == {})
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num((h : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  abs((b : (A) -> Int)((i : A))) <= setmaxabs((s : (A) -> Bool), b)
+      #|  (i : A)
+      #|  (b : (A) -> Int)
+      #|  (b : (A) -> Int)
+      #|  CARD({(b : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= int_of_num((h : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setmaxabs(s, b) == int_of_num(h)})
+      #|  CARD((FIB : ((A) -> Int) -> Bool)) <= 2 * (CARD((s : (A) -> Bool)) * EXP(3, CARD(s) - 1)) * EXP((h : Num), CARD(s) - 1)
+      #|  (Ap : Num)
+      #|  (h : Num)
+      #|  (B : Int)
+      #|  (b : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (b : (A) -> Int)
+      #|  (b : (A) -> Int)
+      #|  isum((FIB : ((A) -> Int) -> Bool), (b : (A) -> Int) => int_of_num(DIV((Kn : Num), (h : Num))))
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num((Ap : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  FINITE((FIB : ((A) -> Int) -> Bool))
+      #|  !((s : (A) -> Bool) == {})
+      #|  \226\136\128 b : (A) -> Int, IN(b, (FIB : ((A) -> Int) -> Bool)) \226\134\146 (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= int_of_num((Ap : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b) && (\226\136\131 j : A, IN(j, s) && !(b(j) == int_of_num(0))) && setmaxabs(s, b) == int_of_num((h : Num))
+      #|  int_of_num((Kn : Num)) == (KI : Int)
+      #|  int_of_num(0) <= (KI : Int)
+      #|  (FIB : ((A) -> Int) -> Bool) == {(b : (A) -> Int) | IN(b, {(b : (A) -> Int) | ((\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= int_of_num((Ap : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))}) && num_of_int(setmaxabs(s, b)) == (h : Num)}
+      #|  (Kn : Num) == num_of_int((KI : Int))
+      #|  (KI : Int) == int_of_num(FACT(CARD((s : (A) -> Bool)) - 1)) * pow(int_of_num(3) * (B : Int), CARD(s) - 1)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 Ap : Num, \226\136\128 B : Int, \226\136\128 h : Num, FINITE(s) && 2 <= CARD(s) && int_of_num(0) <= B && int_of_num(Ap) <= B && 1 <= h && h <= Ap \226\134\146 isum({(b : (A) -> Int) | IN(b, {(b : (A) -> Int) | ((\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(Ap)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))}) && num_of_int(setmaxabs(s, b)) == h}, (b : (A) -> Int) => int_of_num(lincount(s, b, int_of_num(0), B))) <= int_of_num(2 * (CARD(s) * EXP(3, CARD(s) - 1))) * (int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * B, CARD(s) - 1) * pow(int_of_num(h), CARD(s) - 2))
+      #|  CARD((s : (A) -> Bool)) - 2 + 1 == CARD(s) - 1
+      #|  (Ap : Num)
+      #|  CARD((s : (A) -> Bool)) - 2
+      #|  (h : Num)
+      #|  (B : Int)
+      #|  (Ap : Num)
+      #|  (s : (A) -> Bool)
+      #|  (h : Num)
+      #|  isum(op_dot_dot(1, (Ap : Num)), (h : Num) => int_of_num(2 * (CARD((s : (A) -> Bool)) * EXP(3, CARD(s) - 1))) * (int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * (B : Int), CARD(s) - 1)) * pow(int_of_num(h), CARD(s) - 2))
+      #|  (k : Num)
+      #|  (Ap : Num)
+      #|  (s : (A) -> Bool)
+      #|  (k : Num)
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num((Ap : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  op_dot_dot(1, (Ap : Num))
+      #|  {(b : (A) -> Int) | ((\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= int_of_num((Ap : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))}
+      #|  (b : (A) -> Int) => int_of_num(lincount((s : (A) -> Bool), b, int_of_num(0), (B : Int)))
+      #|  (b : (A) -> Int) => num_of_int(setmaxabs((s : (A) -> Bool), b))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 Ap : Num, \226\136\128 B : Int, FINITE(s) && 2 <= CARD(s) && int_of_num(0) <= B && int_of_num(Ap) <= B \226\134\146 isum({(b : (A) -> Int) | ((\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(Ap)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))}, (b : (A) -> Int) => int_of_num(lincount(s, b, int_of_num(0), B))) <= int_of_num(2 * (CARD(s) * EXP(3, CARD(s) - 1))) * (int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * B, CARD(s) - 1)) * pow(int_of_num(Ap), CARD(s) - 1)
+      #|  !((aj : Int) == int_of_num(0))
+      #|  \226\136\128 aj : Int, \226\136\128 d : Int, int_of_num(1) <= d && !(aj == int_of_num(0)) && aj == d * div(aj, d) \226\134\146 !(div(aj, d) == int_of_num(0))
+      #|  abs(div((ai : Int), (d : Int))) == int_of_num(num_of_int(abs(div(ai, d))))
+      #|  int_of_num(num_of_int((d : Int))) == d
+      #|  abs(div((ai : Int), (d : Int))) == int_of_num(num_of_int(abs(div(ai, d))))
+      #|  int_of_num(num_of_int((d : Int))) == d
+      #|  !(num_of_int((d : Int)) == 0)
+      #|  int_of_num(1) <= (d : Int) \226\134\146 abs(d) == d
+      #|  (ai : Int) == (d : Int) * div(ai, d)
+      #|  (d : Int) * abs(div((ai : Int), d)) == abs(ai)
+      #|  (d : Int) * abs(div((ai : Int), d)) <= int_of_num((A : Num))
+      #|  \226\136\128 ai : Int, \226\136\128 d : Int, \226\136\128 A : Num, int_of_num(1) <= d && abs(ai) <= int_of_num(A) && ai == d * div(ai, d) \226\134\146 abs(div(ai, d)) <= int_of_num(DIV(A, num_of_int(d)))
+      #|  int_of_num(1) <= (d : Int) \226\134\146 !(d == int_of_num(0))
+      #|  (d : Int)
+      #|  !(div((a : (A) -> Int)((j : A)), (d : Int)) == int_of_num(0))
+      #|  (j : A)
+      #|  (i : A)
+      #|  !((d : Int) == int_of_num(0)) \226\134\146 divides(d * (e : Int), d) \226\134\146 divides(e, int_of_num(1))
+      #|  (i : A)
+      #|  divides((e : Int), (q : Int)) \226\134\146 divides((d : Int) * e, d * q)
+      #|  (a : (A) -> Int)((i : A)) == (d : Int) * (q : (A) -> Int)(i)
+      #|  (i : A)
+      #|  divides((d : Int) * (e : Int), d)
+      #|  (e : Int)
+      #|  (a : (A) -> Int)((i : A)) == (d : Int) * (q : (A) -> Int)(i)
+      #|  \226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 (a : (A) -> Int)(i) == (d : Int) * div(a(i), d)
+      #|  (i : A)
+      #|  \226\136\128 i : A, !IN(i, (s : (A) -> Bool)) \226\134\146 (q : (A) -> Int)(i) == int_of_num(0)
+      #|  (i : A)
+      #|  \226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 (a : (A) -> Int)(i) == (d : Int) * (q : (A) -> Int)(i)
+      #|  (q : (A) -> Int) == ((i : A) => if IN(i, (s : (A) -> Bool)) { div((a : (A) -> Int)(i), (d : Int)) } else { int_of_num(0) })
+      #|  (a : (A) -> Int)((j : A))
+      #|  int_of_num(1) <= (d : Int)
+      #|  (d : Int) == setgcd((s : (A) -> Bool), (a : (A) -> Int))
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 A : Num, \226\136\128 B : Int, FINITE(s) && 2 <= CARD(s) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= int_of_num(A)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0)) && (\226\136\131 j : A, IN(j, s) && !(a(j) == int_of_num(0))) \226\134\146 int_of_num(1) <= setgcd(s, a) && (\226\136\128 i : A, IN(i, s) \226\134\146 a(i) == setgcd(s, a) * div(a(i), setgcd(s, a))) && setcoprime(s, (i : A) => if IN(i, s) { div(a(i), setgcd(s, a)) } else { int_of_num(0) }) && (\226\136\128 i : A, IN(i, s) \226\134\146 abs(if IN(i, s) { div(a(i), setgcd(s, a)) } else { int_of_num(0) }) <= int_of_num(DIV(A, num_of_int(setgcd(s, a))))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 (if IN(i, s) { div(a(i), setgcd(s, a)) } else { int_of_num(0) }) == int_of_num(0)) && !(((i : A) => if IN(i, s) { div(a(i), setgcd(s, a)) } else { int_of_num(0) }) == ((i : A) => int_of_num(0))) && lincount(s, a, int_of_num(0), B) == lincount(s, (i : A) => if IN(i, s) { div(a(i), setgcd(s, a)) } else { int_of_num(0) }, int_of_num(0), B)
+      #|  (k : A)
+      #|  (i : A)
+      #|  \226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(if IN(i, s) { div((a : (A) -> Int)(i), setgcd(s, a)) } else { int_of_num(0) }) <= int_of_num(DIV((A : Num), num_of_int(setgcd(s, a))))
+      #|  (i : A)
+      #|  \226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(if IN(i, s) { div((a : (A) -> Int)(i), setgcd(s, a)) } else { int_of_num(0) }) <= int_of_num(DIV((A : Num), (dn : Num)))
+      #|  setgcd((s : (A) -> Bool), (a : (A) -> Int)) == int_of_num((dn : Num))
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  (B : Int)
+      #|  (A : Num)
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\131 j : A, IN(j, (s : (A) -> Bool)) && !((a : (A) -> Int)(j) == int_of_num(0))
+      #|  (k : A) => if IN(k, (s : (A) -> Bool)) { div((a : (A) -> Int)(k), setgcd(s, a)) } else { int_of_num(0) }
+      #|  (a : (A) -> Int)
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num(DIV((A : Num), (dn : Num)))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num((A : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  (b : (A) -> Int) => (k : A) => if IN(k, (s : (A) -> Bool)) { int_of_num((dn : Num)) * b(k) } else { int_of_num(0) }
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Num, \226\136\128 B : Int, \226\136\128 dn : Num, FINITE(s) && 2 <= CARD(s) && 1 <= dn \226\134\146 isum({(a : (A) -> Int) | IN(a, DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= int_of_num(A)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)})) && num_of_int(setgcd(s, a)) == dn}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), B))) <= isum({(b : (A) -> Int) | ((\226\136\128 i : A, IN(i, s) \226\134\146 abs(b(i)) <= int_of_num(DIV(A, dn))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))}, (b : (A) -> Int) => int_of_num(lincount(s, b, int_of_num(0), B)))
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int))) == (dn : Num)
+      #|  int_of_num(num_of_int((A : Int))) == A
+      #|  int_of_num(num_of_int(setgcd((s : (A) -> Bool), (a : (A) -> Int)))) == setgcd(s, a)
+      #|  (a : (A) -> Int)((j : A))
+      #|  setgcd((s : (A) -> Bool), (a : (A) -> Int))
+      #|  abs((a : (A) -> Int)((j : A)))
+      #|  setgcd((s : (A) -> Bool), (a : (A) -> Int)) <= (A : Int)
+      #|  (a : (A) -> Int)((j : A))
+      #|  int_of_num(1) <= setgcd((s : (A) -> Bool), (a : (A) -> Int))
+      #|  (a : (A) -> Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\131 j : A, IN(j, (s : (A) -> Bool)) && !((a : (A) -> Int)(j) == int_of_num(0))
+      #|  (a : (A) -> Int)
+      #|  (x : Num)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, FINITE(s) && 2 <= CARD(s) && int_of_num(1) <= A \226\134\146 (\226\136\128 x : Num, (\226\136\131 a : (A) -> Int, x == num_of_int(setgcd(s, a)) && IN(a, DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)}))) \226\134\146 1 <= x && x <= num_of_int(A))
+      #|  int_of_num((Anat : Num))
+      #|  isum({(b : (A) -> Int) | ((\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(b(i)) <= int_of_num(DIV((Anat : Num), (dn : Num)))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 b(i) == int_of_num(0)) && setcoprime(s, b)) && !(b == ((i : A) => int_of_num(0)))}, (b : (A) -> Int) => int_of_num(lincount(s, b, int_of_num(0), (B : Int))))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 Anat : Num, \226\136\128 B : Int, \226\136\128 dn : Num, FINITE(s) && 2 <= CARD(s) && int_of_num(Anat) <= B && 1 <= dn \226\134\146 isum({(a : (A) -> Int) | IN(a, DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= int_of_num(Anat)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)})) && num_of_int(setgcd(s, a)) == dn}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), B))) <= int_of_num(2 * (CARD(s) * EXP(3, CARD(s) - 1))) * (int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * B, CARD(s) - 1)) * pow(int_of_num(DIV(Anat, dn)), CARD(s) - 1)
+      #|  int_of_num(2) * pow(int_of_num((An : Num)), (q : Num)) == int_of_num(2 * EXP(An, q))
+      #|  isum(op_dot_dot(1, (An : Num)), (dn : Num) => pow(int_of_num(DIV(An, dn)), (q : Num))) == int_of_num(nsum(op_dot_dot(1, An), (dn : Num) => EXP(DIV(An, dn), q)))
+      #|  \226\136\128 An : Num, \226\136\128 q : Num, 2 <= q \226\134\146 isum(op_dot_dot(1, An), (dn : Num) => pow(int_of_num(DIV(An, dn)), q)) <= int_of_num(2) * pow(int_of_num(An), q)
+      #|  (x : Int) == (y : Int) \226\134\146 x <= y
+      #|  int_of_num(2 * (CARD((s : (A) -> Bool)) * EXP(3, CARD(s) - 1))) * (int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * (B : Int), CARD(s) - 1)) * (int_of_num(2) * pow(int_of_num((An : Num)), CARD(s) - 1))
+      #|  (dn : Num)
+      #|  isum(op_dot_dot(1, (An : Num)), (dn : Num) => int_of_num(2 * (CARD((s : (A) -> Bool)) * EXP(3, CARD(s) - 1))) * (int_of_num(FACT(CARD(s) - 1)) * pow(int_of_num(3) * (B : Int), CARD(s) - 1)) * pow(int_of_num(DIV(An, dn)), CARD(s) - 1))
+      #|  (k : Num)
+      #|  int_of_num((An : Num))
+      #|  (s : (A) -> Bool)
+      #|  (k : Num)
+      #|  op_dot_dot(1, (An : Num))
+      #|  DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num((An : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)})
+      #|  (a : (A) -> Int) => int_of_num(lincount((s : (A) -> Bool), a, int_of_num(0), (B : Int)))
+      #|  (a : (A) -> Int) => num_of_int(setgcd((s : (A) -> Bool), a))
+      #|  DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)}) == DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= int_of_num((An : Num))) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)})
+      #|  int_of_num(1) <= int_of_num((An : Num))
+      #|  2 <= CARD((s : (A) -> Bool)) - 1
+      #|  2 <= CARD((s : (A) -> Bool))
+      #|  (A : Int) == int_of_num((An : Num))
+      #|  (An : Num) == num_of_int((A : Int))
+      #|  int_of_num(4) * (int_of_num(CARD((s : (A) -> Bool))) * (pow(int_of_num(3), 2 * (CARD(s) - 1)) * int_of_num(FACT(CARD(s) - 1))))
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) && 2 < CARD(s) \226\134\146 (\226\136\131 Cnz : Int, \226\136\128 A : Int, \226\136\128 B : Int, int_of_num(1) <= A && A <= B \226\134\146 isum(DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)}), (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), B))) <= Cnz * pow(A * B, CARD(s) - 1))
+      #|  (A : Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, FINITE(s) && int_of_num(0) <= A \226\134\146 CARD({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}) <= EXP(2 * num_of_int(A) + 1, CARD(s))
+      #|  (z : (A) -> Int)
+      #|  {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (B : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => int_of_num(0) * z(i)) == int_of_num(0)} == {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= B) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 B : Int, FINITE(s) && int_of_num(0) <= B \226\134\146 lincount(s, (i : A) => int_of_num(0), int_of_num(0), B) <= EXP(2 * num_of_int(B) + 1, CARD(s))
+      #|  int_of_num(num_of_int((B : Int))) == B
+      #|  \226\136\128 B : Int, \226\136\128 n : Num, int_of_num(0) <= B \226\134\146 int_of_num(EXP(2 * num_of_int(B) + 1, n)) == pow(int_of_num(2) * B + int_of_num(1), n)
+      #|  int_of_num(3) * pow(int_of_num(3), (l1 : Num)) * ((B : Int) * pow(B, l1)) == int_of_num(3) * pow(int_of_num(3), l1) * pow(B, l1) * B && int_of_num(3) * pow(int_of_num(3), l1) * (C0 : Int) * (pow((A : Int), l1) * pow(B, l1)) == int_of_num(3) * pow(int_of_num(3), l1) * pow(B, l1) * (C0 * pow(A, l1))
+      #|  (l1 : Num) == CARD((s : (A) -> Bool)) - 1
+      #|  1 <= CARD((s : (A) -> Bool))
+      #|  CARD((s : (A) -> Bool)) == SUC(CARD(s) - 1)
+      #|  pow(int_of_num(3) * (B : Int), CARD((s : (A) -> Bool))) == int_of_num(3) * pow(int_of_num(3), CARD(s) - 1) * (B * pow(B, CARD(s) - 1))
+      #|  1 <= CARD((s : (A) -> Bool))
+      #|  CARD((s : (A) -> Bool)) == SUC(CARD(s) - 1)
+      #|  pow(int_of_num(3), CARD((s : (A) -> Bool))) == int_of_num(3) * pow(int_of_num(3), CARD(s) - 1)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, \226\136\128 B : Int, \226\136\128 C0 : Int, 1 <= CARD(s) && int_of_num(1) <= A && A <= B && B <= C0 * pow(A, CARD(s) - 1) && int_of_num(1) <= C0 \226\134\146 pow(int_of_num(3) * B, CARD(s)) <= pow(int_of_num(3), CARD(s)) * C0 * pow(A * B, CARD(s) - 1)
+      #|  int_of_num(EXP(2 * num_of_int((B : Int)) + 1, CARD((s : (A) -> Bool))))
+      #|  pow(int_of_num(3) * (B : Int), CARD((s : (A) -> Bool)))
+      #|  int_of_num(0) <= (B : Int)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, \226\136\128 B : Int, \226\136\128 C0 : Int, FINITE(s) && 1 <= CARD(s) && int_of_num(1) <= A && A <= B && B <= C0 * pow(A, CARD(s) - 1) && int_of_num(1) <= C0 \226\134\146 int_of_num(lincount(s, (i : A) => int_of_num(0), int_of_num(0), B)) <= pow(int_of_num(3), CARD(s)) * C0 * pow(A * B, CARD(s) - 1)
+      #|  (cz : Int) == int_of_num(lincount((s : (A) -> Bool), (i : A) => int_of_num(0), int_of_num(0), (B : Int)))
+      #|  (X : Int) == isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), (B : Int))))
+      #|  {(i : A) => int_of_num(0)}
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  (a : (A) -> Int) => int_of_num(lincount((s : (A) -> Bool), a, int_of_num(0), (B : Int)))
+      #|  (a : (A) -> Int)
+      #|  SUBSET({(i : A) => int_of_num(0)}, {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))})
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, \226\136\128 B : Int, FINITE(s) && int_of_num(1) <= A \226\134\146 isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), B))) == int_of_num(lincount(s, (i : A) => int_of_num(0), int_of_num(0), B)) + isum(DIFF({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, {(i : A) => int_of_num(0)}), (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), B)))
+      #|  (d : Num)
+      #|  (a : Num) <= (b : Num) || b <= a
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, 2 * (a * b) <= a * a + b * b
+      #|  (c : Int) - (y : Int)
+      #|  (y : Int)
+      #|  IMAGE((x : Int) => (c : Int) - x, (s : (Int) -> Bool)) == s
+      #|  (s : (Int) -> Bool)
+      #|  (y : Int) => (B : (Int) -> Num)(y) * B(y)
+      #|  (x : Int) => (c : Int) - x
+      #|  (b : Num) == (b' : Num) \226\134\146 (a : Num) + b <= a + b'
+      #|  (B : (Int) -> Num)((c : Int) - (x : Int))
+      #|  (A : (Int) -> Num)((x : Int))
+      #|  (x : Int)
+      #|  2 * nsum((s : (Int) -> Bool), (x : Int) => (A : (Int) -> Num)(x) * (B : (Int) -> Num)((c : Int) - x)) == nsum(s, (x : Int) => 2 * (A(x) * B(c - x)))
+      #|  nsum((s : (Int) -> Bool), (x : Int) => (A : (Int) -> Num)(x) * A(x) + (B : (Int) -> Num)((c : Int) - x) * B(c - x))
+      #|  \226\136\128 A : (Int) -> Num, \226\136\128 B : (Int) -> Num, \226\136\128 c : Int, \226\136\128 s : (Int) -> Bool, FINITE(s) && (\226\136\128 x : Int, !IN(x, s) \226\134\146 A(x) == 0) && (\226\136\128 x : Int, !IN(x, s) \226\134\146 B(x) == 0) && (\226\136\128 x : Int, IN(x, s) \226\134\146 IN(c - x, s)) \226\134\146 2 * nsum(s, (x : Int) => A(x) * B(c - x)) <= nsum(s, (x : Int) => A(x) * A(x)) + nsum(s, (x : Int) => B(x) * B(x))
+      #|  (ipoly : ((Num) -> Int, Num, Int) -> Int)((f : (Num) -> Int), (e : Num), (x : Int)) == isum(op_dot_dot(0, e), (i : Num) => f(i) * pow(x, i))
+      #|  (j : Num)
+      #|  \226\136\128 k : Num, \226\136\128 c : (Num) -> Int, \226\136\128 y : Int, y * isum(op_dot_dot(0, k), (j : Num) => c(j) * pow(y, j)) == isum(op_dot_dot(0, k), (j : Num) => c(j) * pow(y, j + 1))
+      #|  (y : Int)
+      #|  (g : (Num) -> Int)
+      #|  \226\136\128 e : Num, \226\136\128 g : (Num) -> Int, \226\136\128 y : Int, isum(op_dot_dot(0, SUC(e)), (j : Num) => (if j == 0 { int_of_num(0) } else { g(j - 1) }) * pow(y, j)) == isum(op_dot_dot(0, e), (j : Num) => g(j) * pow(y, j + 1))
+      #|  \226\136\128 f : (Num) -> Int, \226\136\128 e : Num, \226\136\128 x : Int, ipoly(f, SUC(e), x) == ipoly(f, e, x) + f(SUC(e)) * pow(x, SUC(e))
+      #|  (ibox : (Num, Int, (Num) -> Int) -> Bool)((t : Num), (M : Int)) == {(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, t)) \226\134\146 abs(z(i)) <= M) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, t)) \226\134\146 z(i) == int_of_num(0))}
+      #|  abs((z : (Num) -> Int)((i : Num))) <= (M : Int)
+      #|  (i : Num)
+      #|  (z : (Num) -> Int)
+      #|  {(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, (t : Num))) \226\134\146 IN(z(i), {(w : Int) | -(M : Int) <= w && w <= M})) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, t)) \226\134\146 z(i) == int_of_num(0))}
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, FINITE(ibox(t, M))
+      #|  (ijoin : (Num, (Num) -> Int, (Num) -> Int, Num) -> Int)((t : Num), (u : (Num) -> Int), (v : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, t)) { u(i) } else { if IN(i, op_dot_dot(t + 1, 2 * t)) { v(i - t) } else { int_of_num(0) } })
+      #|  (ihead : (Num, (Num) -> Int, Num) -> Int)((t : Num), (w : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, t)) { w(i) } else { int_of_num(0) })
+      #|  (itail : (Num, (Num) -> Int, Num) -> Int)((t : Num), (w : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, t)) { w(i + t) } else { int_of_num(0) })
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, IN(u, ibox(t, M)) && IN(v, ibox(t, M)) \226\134\146 IN(ijoin(t, u, v), ibox(2 * t, M))
+      #|  !IN((i : Num) + (t : Num), op_dot_dot(1, t)) && IN(i + t, op_dot_dot(t + 1, 2 * t)) && i + t - t == i
+      #|  (i : Num) + (t : Num)
+      #|  IN((i : Num), op_dot_dot(1, (t : Num)))
+      #|  (i : Num)
+      #|  IN((i : Num), op_dot_dot(1, (t : Num)))
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 u' : (Num) -> Int, \226\136\128 v' : (Num) -> Int, 1 <= t && IN(u, ibox(t, M)) && IN(v, ibox(t, M)) && IN(u', ibox(t, M)) && IN(v', ibox(t, M)) && ijoin(t, u, v) == ijoin(t, u', v') \226\134\146 u == u' && v == v'
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, IN(w, ibox(2 * t, M)) \226\134\146 IN(ihead(t, w), ibox(t, M))
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, IN(w, ibox(2 * t, M)) \226\134\146 IN(itail(t, w), ibox(t, M))
+      #|  1 <= (i : Num) - (t : Num) && i - t <= t
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, IN(w, ibox(2 * t, M)) \226\134\146 ijoin(t, ihead(t, w), itail(t, w)) == w
+      #|  0 + 1 == 1
+      #|  \226\136\128 f : (Num) -> Int, \226\136\128 z : Int, ipoly(f, 1, z) == f(0) + f(1) * z
+      #|  op_dot_dot(2 + 1, 2) == {}
       #|  2
       #|  2
-      #|  g:num->int
-      #|  1 + 1 = 2
+      #|  (g : (Num) -> Int)
+      #|  1 + 1 == 2
       #|  2
       #|  1
-      #|  g:num->int
-      #|  forall g:num->int. isum(1..2) g = g 1 + g 2
-      #|  {v:int | abs v <= P} = {v:int | --P <= v /\\\n    v <= P}
-      #|  forall P:int. FINITE {v:int | abs v <= P}
-      #|  &1 <= P ==> &0:int <= P - --P + &1
-      #|  &1 <= P ==> --P:int <= P
-      #|  {v:int | abs v <= P} = {x:int | --P <= x /\\ x <= P}
-      #|  forall P:int. &1 <= P ==> &(CARD {v:int | abs v <= P}) <= &3 * P
-      #|  reparam kk (w:num->int) =\n     (\\i. if i IN 1..kk then w(i+kk)\n          else if i IN (kk+1)..(2*kk) then w(i-kk) - w(i) else &0)
-      #|  i:num
-      #|  kk + kk = 2 * kk
-      #|  1 + kk = kk + 1
-      #|  kk:num
+      #|  (g : (Num) -> Int)
+      #|  \226\136\128 g : (Num) -> Int, isum(op_dot_dot(1, 2), g) == g(1) + g(2)
+      #|  {(v : Int) | abs(v) <= (P : Int)} == {(v : Int) | -P <= v && v <= P}
+      #|  \226\136\128 P : Int, FINITE({(v : Int) | abs(v) <= P})
+      #|  int_of_num(1) <= (P : Int) \226\134\146 int_of_num(0) <= P - -P + int_of_num(1)
+      #|  int_of_num(1) <= (P : Int) \226\134\146 -P <= P
+      #|  {(v : Int) | abs(v) <= (P : Int)} == {(x : Int) | -P <= x && x <= P}
+      #|  \226\136\128 P : Int, int_of_num(1) <= P \226\134\146 int_of_num(CARD({(v : Int) | abs(v) <= P})) <= int_of_num(3) * P
+      #|  (reparam : (Num, (Num) -> Int, Num) -> Int)((kk : Num), (w : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, kk)) { w(i + kk) } else { if IN(i, op_dot_dot(kk + 1, 2 * kk)) { w(i - kk) - w(i) } else { int_of_num(0) } })
+      #|  (i : Num)
+      #|  (kk : Num) + kk == 2 * kk
+      #|  1 + (kk : Num) == kk + 1
+      #|  (kk : Num)
       #|  1
-      #|  g:num->int
-      #|  kk:num
-      #|  forall kk (g:num->int). isum((kk+1)..(2*kk)) g = isum(1..kk)(\\i. g(i+kk))
-      #|  abs((w:num->int)(i-kk)) <= P /\\\n   abs((w:num->int) i) <= P
-      #|  abs((w:num->int)(i+kk)) <= P
-      #|  i:num
-      #|  abs((w:num->int)(1+kk)) <= P
-      #|  &0 <= (P:int)
-      #|  forall kk P (w:num->int). 1 <= kk /\\\n  w IN ibox (2*kk) P ==> reparam kk w IN ibox (2*kk) (&2 * P)
-      #|  1 <= kk
-      #|  ~(i <= kk)
-      #|  i <= 2*kk
-      #|  (1 <= i-kk /\\ i-kk <= kk /\\\n       (i-kk)+kk = i):bool
-      #|  i-kk
-      #|  1 <= kk
-      #|  i <= kk
-      #|  1 <= i
-      #|  (1 <= i /\\ i <= kk /\\ ~(1 <= i+kk /\\ i+kk <= kk) /\\\n       (kk+1 <= i+kk /\\ i+kk <= 2*kk) /\\ (i+kk)-kk = i):bool
-      #|  i+kk
-      #|  i:num
-      #|  i <= kk
-      #|  i IN 1..2*kk
-      #|  i:num
-      #|  forall kk P (w:num->int) w'.\n     1 <= kk /\\ w IN ibox (2*kk) P /\\ w' IN ibox (2*kk) P /\\\n      reparam kk w = reparam kk w'\n     ==> w = w'
-      #|  boxtuples s P =\n    {t | (forall i. i IN 1..s ==> (t:num->num) i < P) /\\\n     (forall i. ~(i IN 1..s) ==> t i = 0)}
-      #|  boxsum e s (t:num->num) = nsum(1..s) (\\i. (t i) EXP e)
-      #|  rcount e s P m = CARD {t | t IN boxtuples s P /\\ boxsum e s t = m}
-      #|  {f:num->num | (forall x. x IN 1..s ==> f x IN {y | y < P}) /\\\n   (forall x. ~(x IN 1..s) ==> f x = 0)}
-      #|  forall s P. FINITE(boxtuples s P)
-      #|  monom e = \\i:num. if i = e then &1:int else &0
-      #|  (\\i. (if i = e then &1:int else &0) * z pow i) = (\\i. if i = e\n   then z pow e else &0)
-      #|  forall e z:int. ipoly (monom e) e z = z pow e
-      #|  (t:num->num) i < P
-      #|  i:num
-      #|  t:num->num
-      #|  x:num->int
-      #|  ibox s (&P)
-      #|  boxtuples s P
-      #|  t2:num->num
-      #|  t1:num->num
-      #|  CARD(IMAGE (\\t:num->num. (\\i. &(t i)):num->int) {t | t IN\n   boxtuples s P /\\ boxsum e s t = m})
-      #|  forall e s P m. 1 <= P\n    ==> rcount e s P m <= CARD {x | x IN ibox s (&P) /\\\n     isum(1..s)(\\i. ipoly (monom e) e (x i)) = &m}
-      #|  CHQ (t:num) (p:num->num) (b:bool) =\n   \\i. p((if i <= t then i else i-t) + (if b then t else 0))
-      #|  CHSG (t:num) = \\i:num. ~(i <= t)
-      #|  (leafidx 0 t (pp:num->num->num) (bp:num->bool) = (\\i:num. i)) /\\\n   (leafidx (SUC s) t pp bp =\n      \\i. CHQ t (pp 0) (bp 0) (leafidx s t (\\j. pp(j+1)) (\\j. bp(j+1)) i))
-      #|  (leafsg 0 t (pp:num->num->num) (bp:num->bool) = (\\i:num. F)) /\\\n   (leafsg (SUC s) t pp bp =\n      \\i. ~(leafsg s t (\\j. pp(j+1)) (\\j. bp(j+1)) i <=>\n            CHSG t (leafidx s t (\\j. pp(j+1)) (\\j. bp(j+1)) i)))
-      #|  RIFFLE (t:num) =\n   \\x:num. if x IN 1..2*t then (if ODD x then (x+1) DIV 2 else t + x DIV 2)\n    else x
-      #|  TSET (e:num) (G:num) = (1..e) UNION (IMAGE (\\g. e*G + g) (1..e))
-      #|  ~ODD(2*(y-t)) /\\ 1 <= 2*(y-t) /\\ 2*(y-t) <= 2*t /\\\n       t + (2*(y-t)) DIV 2 = y
-      #|  2*(y-t)
-      #|  ODD(2*y-1) /\\ 1 <= 2*y-1 /\\ 2*y-1 <= 2*t /\\\n       (2*y-1+1) DIV 2 = y
-      #|  2*y-1
-      #|  y:num <= t
-      #|  y:num
-      #|  (2*m) DIV 2 = m
-      #|  m:num
-      #|  (SUC(2*m)+1) DIV 2 = m+1
-      #|  m:num
-      #|  x:num
-      #|  forall t. RIFFLE t permutes 1..2*t
-      #|  (2*m) DIV 2 = m
-      #|  (2*m-1+1) DIV 2 = m
-      #|  forall t m. 1 <= m /\\ 2*m <= 2*t ==> RIFFLE t (2*m-1) = m /\\\n  RIFFLE t (2*m) = t + m
-      #|  t:num
-      #|  forall t x y. RIFFLE t x = RIFFLE t y <=> x = y
-      #|  BLK (B:num) (t:num) = (1..B) UNION (IMAGE (\\j. t+j)\n (1..B))
-      #|  forall B t x. x IN BLK B t <=> (1 <= x /\\ x <= B) \\/ (?j. 1 <= j /\\ j <= B /\\\n  x = t+j)
-      #|  x - B:num
-      #|  x:num <= B
-      #|  x:num
-      #|  forall B. BLK B B = 1..2*B
-      #|  forall e G. TSET e G = BLK e (e*G)
-      #|  j:num
-      #|  t:num
-      #|  2*j
-      #|  v:num
-      #|  t:num
-      #|  2*v-1
-      #|  2*(m+1)-1 = SUC(2*m)
-      #|  m+1
-      #|  t:num
-      #|  RIFFLE t (SUC(2*m)) = m + 1
-      #|  m:num
-      #|  m:num
-      #|  t:num
-      #|  RIFFLE t (2*m) = t + m
-      #|  m:num
-      #|  m:num
-      #|  x:num
-      #|  x:num
-      #|  v:num
-      #|  (2*c) DIV 2 = c
-      #|  c:num
-      #|  forall t B. EVEN B /\\ 1 <= B /\\\n  B <= t ==> IMAGE (RIFFLE t) (1..B) = BLK (B DIV 2) t
-      #|  FF (t:num) = \\y:num. RIFFLE t (if y <= t then y else y - t)
-      #|  forall s t i. leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n             RIFFLE t (if leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i <= t\n                       then leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i\n                       else leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i - t)
-      #|  forall s t i. leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n             FF t (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i)
-      #|  1 <= w ==> (if t + w <= t then t + w else (t + w)\n     - t) = w
-      #|  w <= t ==> (if w <= t then w else w - t) = w
-      #|  forall t w. 1 <= w /\\ w <= t ==> FF t w = RIFFLE t w /\\\n  FF t (t + w) = RIFFLE t w
-      #|  x:num
-      #|  t:num
-      #|  x:num
-      #|  j:num
-      #|  t:num
-      #|  j:num
-      #|  x:num
-      #|  t:num
-      #|  x:num
-      #|  x:num
-      #|  v:num
-      #|  forall t C. 1 <= C /\\\n  C <= t ==> IMAGE (FF t) (BLK C t) = IMAGE (RIFFLE t) (1..C)
-      #|  forall t B w y. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\ y IN BLK (2*B) t\n            ==> (FF t y = RIFFLE t w <=> (y = w \\/ y = t + w))
-      #|  j:num
-      #|  t:num
-      #|  2*j
-      #|  v:num
-      #|  t:num
-      #|  2*v-1
-      #|  forall t B v. 1 <= B /\\ 2*B <= t /\\ v IN BLK B t\n           ==> ?w. 1 <= w /\\ w <= 2*B /\\ v = RIFFLE t w
-      #|  t = (2*B) * 2 EXP s
-      #|  (2*B) * 1
-      #|  t = (2*B) * 2 EXP s
-      #|  1 <= n <=> 0 < n
-      #|  1 <= 2 EXP s
-      #|  forall s t B. t = B * 2 EXP SUC s\n           ==> t = (2*B) * 2 EXP s /\\ (1 <= B ==> (1 <= 2*B /\\ 2*B <= t /\\\n            EVEN(2*B)))
-      #|  1 <= n <=> ~(n = 0)
-      #|  2*B = (2*B)*1
-      #|  1 <= n <=> 0 < n
-      #|  1 <= 2 EXP s
-      #|  forall B s t. t = (2*B)*2 EXP s /\\ 1 <= B ==> 2*B <= t /\\ 1 <= t
-      #|  (2*B) DIV 2 = B
-      #|  IMAGE (RIFFLE T2) (1..(2*B)) = BLK ((2*B) DIV 2) T2
-      #|  IMAGE (FF T2) (BLK (2*B) T2) = IMAGE (RIFFLE T2) (1..(2*B))
-      #|  2*B:num
-      #|  T2:num
-      #|  IMAGE (leafidx s T2 (\\j:num. RIFFLE T2) (\\j:num. F)) (1..2*T2)\n    = BLK (2*B) T2
-      #|  T2 = B * 2 EXP SUC s
-      #|  B:num
-      #|  t:num
-      #|  s:num
-      #|  IMAGE (leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F))\n    (1..2*t) =\n                IMAGE (FF t) (IMAGE (leafidx s t (\\j:num. RIFFLE t) (\\j:num.\n                 F)) (1..2*t))
-      #|  forall s t B. t = B * 2 EXP s /\\ 1 <= B\n          ==> IMAGE (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)) (1..2*t) = BLK\n           B t
-      #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w
-      #|  i:num
-      #|  w:num
-      #|  t+w:num
-      #|  2*B:num
-      #|  t:num
-      #|  w:num
-      #|  2*B:num
-      #|  t:num
-      #|  2 EXP SUC s = 2 EXP s + 2 EXP s
-      #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i
-      #|  w:num
-      #|  B:num
-      #|  t:num
-      #|  i IN 1..2*t
-      #|  i:num
-      #|  {i | i IN 1..2*t /\\ leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n      v} =\n      {i | i IN 1..2*t /\\\n       leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w} UNION\n      {i | i IN 1..2*t /\\\n       leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w}
-      #|  i:num
-      #|  2*B:num
-      #|  t:num
-      #|  s:num
-      #|  i:num
-      #|  forall i. i IN 1..2*t ==> leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)\n    i IN BLK (2*B) t
-      #|  t = B * 2 EXP SUC s
-      #|  w:num
-      #|  v:num
-      #|  B:num
-      #|  t:num
-      #|  t:num
-      #|  s:num
-      #|  B:num
-      #|  B:num
-      #|  t:num
-      #|  s:num
-      #|  i:num
-      #|  {i | i IN 1..2*t /\\ i = v} = {v}
-      #|  t:num = B
-      #|  v IN BLK B t
-      #|  1 <= v /\\ v <= 2*B
-      #|  t:num = B
-      #|  forall s t B v. t = B * 2 EXP s /\\ 1 <= B /\\ v IN BLK B t\n           ==> {i | i IN 1..2*t /\\\n            leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v} HAS_SIZE 2 EXP\n             s
-      #|  g IN TSET e G
-      #|  g:num
-      #|  e:num
-      #|  e*G:num
-      #|  k:num
-      #|  g:num
-      #|  e:num
-      #|  e*G:num
-      #|  k:num
-      #|  e*G = e * 2 EXP k
-      #|  2*e*G = 2*(e*G)
-      #|  forall e k (G:num).\n    2 <= e /\\ 1 <= G /\\ G = 2 EXP k\n    ==> IMAGE (leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F)) (1..2*e*G) =\n     TSET e G /\\\n        (forall g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F) i = g} = G)
-      #|  forall s t i. leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n             CHSG t (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i))
-      #|  ~(t + w <= t)
-      #|  w <= t
-      #|  forall s t B w i. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\\n               i IN 1..2*t /\\\n                leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i IN BLK (2*B) t\n     ==> (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w\n            ==> (leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n                 leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i))\n      /\\ (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w\n            ==> (leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i <=>\n                 ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)))
-      #|  ~(leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n                  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w)
-      #|  i:num
-      #|  w:num
-      #|  B:num
-      #|  t:num
-      #|  s:num
-      #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i
-      #|  w:num
-      #|  B:num
-      #|  t:num
-      #|  forall s t B w i. 1 <= w /\\ w <= 2*B /\\ 2*B <= t /\\ i IN 1..2*t /\\\n               leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i IN BLK (2*B) t\n     ==> ((leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i = RIFFLE t w /\\\n           ~(leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i)) <=>\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)) \\/\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n           leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i))\n      /\\ ((leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i = RIFFLE t w /\\\n           leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i) <=>\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n           leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i) \\/\n          (leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n           ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)))
-      #|  2 * 2 * m = 2 * (2 * m)
-      #|  ?m. 2 EXP s = 2 * m
-      #|  forall s. 1 <= s ==> 2 EXP SUC s DIV 2 = 2 EXP s DIV 2 + 2 EXP s DIV 2
-      #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w
-      #|  i:num
-      #|  t+w:num
-      #|  2*B:num
-      #|  t:num
-      #|  w:num
-      #|  2*B:num
-      #|  t:num
-      #|  leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w
-      #|  i:num
-      #|  t+w:num
-      #|  2*B:num
-      #|  t:num
-      #|  w:num
-      #|  2*B:num
-      #|  t:num
-      #|  w:num
-      #|  w IN BLK (2*B) t /\\\n   (t + w) IN BLK (2*B) t
-      #|  1 <= s
-      #|  j:num
-      #|  {i | i IN 1..2*t /\\ i = w} = {w} /\\ {i | i IN 1..2*t /\\\n     i = t + w} = {t + w}
-      #|  s = 0
-      #|  ~(w = t + w)
-      #|  i:num
-      #|  w:num
-      #|  B:num
-      #|  t:num
-      #|  s:num
-      #|  i IN 1..2*t
-      #|  i:num
-      #|  {i | i IN 1..2*t /\\ leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n     RIFFLE t w /\\\n          leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i} =\n     {i | i IN 1..2*t /\\ leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n          leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i} UNION\n     {i | i IN 1..2*t /\\\n      leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n          ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)}
-      #|  i:num
-      #|  w:num
-      #|  B:num
-      #|  t:num
-      #|  s:num
-      #|  i IN 1..2*t
-      #|  i:num
-      #|  {i | i IN 1..2*t /\\ leafidx (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i =\n     RIFFLE t w /\\\n          ~(leafsg (SUC s) t (\\j:num. RIFFLE t) (\\j:num. F) i)} =\n     {i | i IN 1..2*t /\\ leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = w /\\\n          ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)} UNION\n     {i | i IN 1..2*t /\\\n      leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = t + w /\\\n          leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i}
-      #|  i:num
-      #|  2*B:num
-      #|  t:num
-      #|  s:num
-      #|  i:num
-      #|  forall i. i IN 1..2*t ==> leafidx s t (\\j:num. RIFFLE t) (\\j:num. F)\n   i IN BLK (2*B) t
-      #|  t = B * 2 EXP SUC s
-      #|  w:num
-      #|  v:num
-      #|  B:num
-      #|  t:num
-      #|  t:num
-      #|  s:num
-      #|  B:num
-      #|  B:num
-      #|  t:num
-      #|  s:num
-      #|  ~(1 <= 0)
-      #|  forall s t B v. 1 <= s /\\ t = B * 2 EXP s /\\ 1 <= B /\\ v IN BLK B t\n     ==> {i | i IN 1..2*t /\\\n      leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v /\\\n              ~(leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i)} HAS_SIZE (2 EXP s\n               DIV 2)\n      /\\ {i | i IN 1..2*t /\\\n       leafidx s t (\\j:num. RIFFLE t) (\\j:num. F) i = v /\\\n              leafsg s t (\\j:num. RIFFLE t) (\\j:num. F) i} HAS_SIZE (2 EXP s\n               DIV 2)
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  t = (2 * B) * 2 EXP s
-      #|  g IN TSET e G
-      #|  g:num
-      #|  e:num
-      #|  e*G:num
-      #|  k:num
-      #|  g:num
-      #|  e*G = e * 2 EXP k
-      #|  2*e*G = 2*(e*G)
-      #|  1 <= k
-      #|  forall e k (G:num).\n    2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n    ==> (forall g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F) i = g /\\\n                           ~(leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F)\n                            i)} = G DIV 2 /\\\n                 CARD {i | i IN 1..2*e*G /\\\n                  leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i}\n                            = G DIV 2)
-      #|  G:num
-      #|  k:num
-      #|  e:num
-      #|  G:num
-      #|  k:num
-      #|  e:num
-      #|  forall e k (G:num).\n    2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n    ==> (IMAGE (leafidx k (e*G) (\\j:num. RIFFLE (e*G)) (\\j:num. F)) (1..2*e*G)\n     = TSET e G /\\\n         (forall g. g IN TSET e G\n              ==> CARD {i | i IN 1..2*e*G /\\\n               leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g} = G))\n                /\\\n        (forall g. g IN TSET e G\n             ==> CARD {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           ~(leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F)\n                            i)} = G DIV 2 /\\\n                 CARD {i | i IN 1..2*e*G /\\\n                  leafidx k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i = g /\\\n                           leafsg k (e*G) (\\j:num. RIFFLE(e*G)) (\\j:num. F) i}\n                            = G DIV 2)
-      #|  jsplit p t (u:num->int) (v:num->int) =\n    (\\i. if i IN 1..p then u i else if i IN (p+1)..(p+t) then v(i - p) else\n     &0)
-      #|  jtl p t (w:num->int) = (\\i. if i IN 1..t then w(i +\n p) else &0)
-      #|  i:num
-      #|  forall p t M (w:num->int). w IN ibox (p+t) M ==> ihead p w IN ibox p M
-      #|  i:num
-      #|  forall p t M (w:num->int). w IN ibox (p+t) M ==> jtl p t w IN ibox t M
-      #|  i:num
-      #|  forall p t M (u:num->int) (v:num->int). u IN ibox p M /\\\n  v IN ibox t M ==> jsplit p t u v IN ibox (p+t) M
-      #|  1 <= i - p /\\ i - p <= t
-      #|  i:num
-      #|  forall p t M (w:num->int).\n    w IN ibox (p+t) M ==> jsplit p t (ihead p w) (jtl p t w) = w
-      #|  i + p:num
-      #|  ~((i + p) IN 1..p) /\\ (i + p) IN (p+1)..(p+t) /\\\n      (i + p) - p = i
-      #|  i IN 1..t
-      #|  i:num
-      #|  i IN 1..p
-      #|  i:num
-      #|  forall p t M (u:num->int) v u' v'.\n     u IN ibox p M /\\ v IN ibox t M /\\ u' IN ibox p M /\\ v' IN ibox t M /\\\n     jsplit p t u v = jsplit p t u' v'\n     ==> u = u' /\\ v = v'
-      #|  i:num
-      #|  t:num
+      #|  (g : (Num) -> Int)
+      #|  (kk : Num)
+      #|  \226\136\128 kk : Num, \226\136\128 g : (Num) -> Int, isum(op_dot_dot(kk + 1, 2 * kk), g) == isum(op_dot_dot(1, kk), (i : Num) => g(i + kk))
+      #|  abs((w : (Num) -> Int)((i : Num) - (kk : Num))) <= (P : Int) && abs(w(i)) <= P
+      #|  abs((w : (Num) -> Int)((i : Num) + (kk : Num))) <= (P : Int)
+      #|  (i : Num)
+      #|  abs((w : (Num) -> Int)(1 + (kk : Num))) <= (P : Int)
+      #|  int_of_num(0) <= (P : Int)
+      #|  \226\136\128 kk : Num, \226\136\128 P : Int, \226\136\128 w : (Num) -> Int, 1 <= kk && IN(w, ibox(2 * kk, P)) \226\134\146 IN(reparam(kk, w), ibox(2 * kk, int_of_num(2) * P))
+      #|  1 <= (kk : Num)
+      #|  !((i : Num) <= (kk : Num))
+      #|  (i : Num) <= 2 * (kk : Num)
+      #|  1 <= (i : Num) - (kk : Num) && i - kk <= kk && i - kk + kk == i
+      #|  (i : Num) - (kk : Num)
+      #|  1 <= (kk : Num)
+      #|  (i : Num) <= (kk : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num) && i <= (kk : Num) && !(1 <= i + kk && i + kk <= kk) && (kk + 1 <= i + kk && i + kk <= 2 * kk) && i + kk - kk == i
+      #|  (i : Num) + (kk : Num)
+      #|  (i : Num)
+      #|  (i : Num) <= (kk : Num)
+      #|  IN((i : Num), op_dot_dot(1, 2 * (kk : Num)))
+      #|  (i : Num)
+      #|  \226\136\128 kk : Num, \226\136\128 P : Int, \226\136\128 w : (Num) -> Int, \226\136\128 w' : (Num) -> Int, 1 <= kk && IN(w, ibox(2 * kk, P)) && IN(w', ibox(2 * kk, P)) && reparam(kk, w) == reparam(kk, w') \226\134\146 w == w'
+      #|  (boxtuples : (Num, Num, (Num) -> Num) -> Bool)((s : Num), (P : Num)) == {(t : (Num) -> Num) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, s)) \226\134\146 t(i) < P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, s)) \226\134\146 t(i) == 0)}
+      #|  (boxsum : (Num, Num, (Num) -> Num) -> Num)((e : Num), (s : Num), (t : (Num) -> Num)) == nsum(op_dot_dot(1, s), (i : Num) => EXP(t(i), e))
+      #|  (rcount : (Num, Num, Num, Num) -> Num)((e : Num), (s : Num), (P : Num), (m : Num)) == CARD({(t : (Num) -> Num) | IN(t, boxtuples(s, P)) && boxsum(e, s, t) == m})
+      #|  {(f : (Num) -> Num) | (\226\136\128 x : Num, IN(x, op_dot_dot(1, (s : Num))) \226\134\146 IN(f(x), {(y : Num) | y < (P : Num)})) && (\226\136\128 x : Num, !IN(x, op_dot_dot(1, s)) \226\134\146 f(x) == 0)}
+      #|  \226\136\128 s : Num, \226\136\128 P : Num, FINITE(boxtuples(s, P))
+      #|  (monom : (Num, Num) -> Int)((e : Num)) == ((i : Num) => if i == e { int_of_num(1) } else { int_of_num(0) })
+      #|  ((i : Num) => (if i == (e : Num) { int_of_num(1) } else { int_of_num(0) }) * pow((z : Int), i)) == ((i : Num) => if i == e { pow(z, e) } else { int_of_num(0) })
+      #|  \226\136\128 e : Num, \226\136\128 z : Int, ipoly(monom(e), e, z) == pow(z, e)
+      #|  (t : (Num) -> Num)((i : Num)) < (P : Num)
+      #|  (i : Num)
+      #|  (t : (Num) -> Num)
+      #|  (x : (Num) -> Int)
+      #|  ibox((s : Num), int_of_num((P : Num)))
+      #|  boxtuples((s : Num), (P : Num))
+      #|  (t2 : (Num) -> Num)
+      #|  (t1 : (Num) -> Num)
+      #|  CARD(IMAGE((t : (Num) -> Num) => (i : Num) => int_of_num(t(i)), {(t : (Num) -> Num) | IN(t, boxtuples((s : Num), (P : Num))) && boxsum((e : Num), s, t) == (m : Num)}))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, \226\136\128 m : Num, 1 <= P \226\134\146 rcount(e, s, P, m) <= CARD({(x : (Num) -> Int) | IN(x, ibox(s, int_of_num(P))) && isum(op_dot_dot(1, s), (i : Num) => ipoly(monom(e), e, x(i))) == int_of_num(m)})
+      #|  (CHQ : (Num, (Num) -> Num, Bool, Num) -> Num)((t : Num), (p : (Num) -> Num), (b : Bool)) == ((i : Num) => p((if i <= t { i } else { i - t }) + (if b { t } else { 0 })))
+      #|  (CHSG : (Num, Num) -> Bool)((t : Num)) == ((i : Num) => !(i <= t))
+      #|  (leafidx : (Num, Num, (Num, Num) -> Num, (Num) -> Bool, Num) -> Num)(0, (t : Num), (pp : (Num, Num) -> Num), (bp : (Num) -> Bool)) == ((i : Num) => i) && leafidx(SUC((s : Num)), t, pp, bp) == ((i : Num) => CHQ(t, pp(0), bp(0), leafidx(s, t, (j : Num) => pp(j + 1), (j : Num) => bp(j + 1), i)))
+      #|  (leafsg : (Num, Num, (Num, Num) -> Num, (Num) -> Bool, Num) -> Bool)(0, (t : Num), (pp : (Num, Num) -> Num), (bp : (Num) -> Bool)) == ((i : Num) => false) && leafsg(SUC((s : Num)), t, pp, bp) == ((i : Num) => !(leafsg(s, t, (j : Num) => pp(j + 1), (j : Num) => bp(j + 1), i) == CHSG(t, leafidx(s, t, (j : Num) => pp(j + 1), (j : Num) => bp(j + 1), i))))
+      #|  (RIFFLE : (Num, Num) -> Num)((t : Num)) == ((x : Num) => if IN(x, op_dot_dot(1, 2 * t)) { if ODD(x) { DIV(x + 1, 2) } else { t + DIV(x, 2) } } else { x })
+      #|  (TSET : (Num, Num, Num) -> Bool)((e : Num), (G : Num)) == UNION(op_dot_dot(1, e), IMAGE((g : Num) => e * G + g, op_dot_dot(1, e)))
+      #|  !ODD(2 * ((y : Num) - (t : Num))) && 1 <= 2 * (y - t) && 2 * (y - t) <= 2 * t && t + DIV(2 * (y - t), 2) == y
+      #|  2 * ((y : Num) - (t : Num))
+      #|  ODD(2 * (y : Num) - 1) && 1 <= 2 * y - 1 && 2 * y - 1 <= 2 * (t : Num) && DIV(2 * y - 1 + 1, 2) == y
+      #|  2 * (y : Num) - 1
+      #|  (y : Num) <= (t : Num)
+      #|  (y : Num)
+      #|  DIV(2 * (m : Num), 2) == m
+      #|  (m : Num)
+      #|  DIV(SUC(2 * (m : Num)) + 1, 2) == m + 1
+      #|  (m : Num)
+      #|  (x : Num)
+      #|  \226\136\128 t : Num, permutes(RIFFLE(t), op_dot_dot(1, 2 * t))
+      #|  DIV(2 * (m : Num), 2) == m
+      #|  DIV(2 * (m : Num) - 1 + 1, 2) == m
+      #|  \226\136\128 t : Num, \226\136\128 m : Num, 1 <= m && 2 * m <= 2 * t \226\134\146 RIFFLE(t, 2 * m - 1) == m && RIFFLE(t, 2 * m) == t + m
+      #|  (t : Num)
+      #|  \226\136\128 t : Num, \226\136\128 x : Num, \226\136\128 y : Num, (RIFFLE(t, x) == RIFFLE(t, y)) == (x == y)
+      #|  (BLK : (Num, Num, Num) -> Bool)((B : Num), (t : Num)) == UNION(op_dot_dot(1, B), IMAGE((j : Num) => t + j, op_dot_dot(1, B)))
+      #|  \226\136\128 B : Num, \226\136\128 t : Num, \226\136\128 x : Num, IN(x, BLK(B, t)) == (1 <= x && x <= B || (\226\136\131 j : Num, 1 <= j && j <= B && x == t + j))
+      #|  (x : Num) - (B : Num)
+      #|  (x : Num) <= (B : Num)
+      #|  (x : Num)
+      #|  \226\136\128 B : Num, BLK(B, B) == op_dot_dot(1, 2 * B)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, TSET(e, G) == BLK(e, e * G)
+      #|  (j : Num)
+      #|  (t : Num)
+      #|  2 * (j : Num)
+      #|  (v : Num)
+      #|  (t : Num)
+      #|  2 * (v : Num) - 1
+      #|  2 * ((m : Num) + 1) - 1 == SUC(2 * m)
+      #|  (m : Num) + 1
+      #|  (t : Num)
+      #|  RIFFLE((t : Num), SUC(2 * (m : Num))) == m + 1
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (t : Num)
+      #|  RIFFLE((t : Num), 2 * (m : Num)) == t + m
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (v : Num)
+      #|  DIV(2 * (c : Num), 2) == c
+      #|  (c : Num)
+      #|  \226\136\128 t : Num, \226\136\128 B : Num, EVEN(B) && 1 <= B && B <= t \226\134\146 IMAGE(RIFFLE(t), op_dot_dot(1, B)) == BLK(DIV(B, 2), t)
+      #|  (FF : (Num, Num) -> Num)((t : Num)) == ((y : Num) => RIFFLE(t, if y <= t { y } else { y - t }))
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 i : Num, leafidx(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == RIFFLE(t, if leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) <= t { leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) } else { leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) - t })
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 i : Num, leafidx(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == FF(t, leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i))
+      #|  1 <= (w : Num) \226\134\146 (if (t : Num) + w <= t { t + w } else { t + w - t }) == w
+      #|  (w : Num) <= (t : Num) \226\134\146 (if w <= t { w } else { w - t }) == w
+      #|  \226\136\128 t : Num, \226\136\128 w : Num, 1 <= w && w <= t \226\134\146 FF(t, w) == RIFFLE(t, w) && FF(t, t + w) == RIFFLE(t, w)
+      #|  (x : Num)
+      #|  (t : Num)
+      #|  (x : Num)
+      #|  (j : Num)
+      #|  (t : Num)
+      #|  (j : Num)
+      #|  (x : Num)
+      #|  (t : Num)
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (v : Num)
+      #|  \226\136\128 t : Num, \226\136\128 C : Num, 1 <= C && C <= t \226\134\146 IMAGE(FF(t), BLK(C, t)) == IMAGE(RIFFLE(t), op_dot_dot(1, C))
+      #|  \226\136\128 t : Num, \226\136\128 B : Num, \226\136\128 w : Num, \226\136\128 y : Num, 1 <= w && w <= 2 * B && 2 * B <= t && IN(y, BLK(2 * B, t)) \226\134\146 (FF(t, y) == RIFFLE(t, w)) == (y == w || y == t + w)
+      #|  (j : Num)
+      #|  (t : Num)
+      #|  2 * (j : Num)
+      #|  (v : Num)
+      #|  (t : Num)
+      #|  2 * (v : Num) - 1
+      #|  \226\136\128 t : Num, \226\136\128 B : Num, \226\136\128 v : Num, 1 <= B && 2 * B <= t && IN(v, BLK(B, t)) \226\134\146 (\226\136\131 w : Num, 1 <= w && w <= 2 * B && v == RIFFLE(t, w))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  2 * (B : Num) * 1
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (1 <= (n : Num)) == (0 < n)
+      #|  1 <= EXP(2, (s : Num))
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 B : Num, t == B * EXP(2, SUC(s)) \226\134\146 t == 2 * B * EXP(2, s) && (1 <= B \226\134\146 1 <= 2 * B && 2 * B <= t && EVEN(2 * B))
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  2 * (B : Num) == 2 * B * 1
+      #|  (1 <= (n : Num)) == (0 < n)
+      #|  1 <= EXP(2, (s : Num))
+      #|  \226\136\128 B : Num, \226\136\128 s : Num, \226\136\128 t : Num, t == 2 * B * EXP(2, s) && 1 <= B \226\134\146 2 * B <= t && 1 <= t
+      #|  DIV(2 * (B : Num), 2) == B
+      #|  IMAGE(RIFFLE((T2 : Num)), op_dot_dot(1, 2 * (B : Num))) == BLK(DIV(2 * B, 2), T2)
+      #|  IMAGE(FF((T2 : Num)), BLK(2 * (B : Num), T2)) == IMAGE(RIFFLE(T2), op_dot_dot(1, 2 * B))
+      #|  2 * (B : Num)
+      #|  (T2 : Num)
+      #|  IMAGE(leafidx((s : Num), (T2 : Num), (j : Num) => RIFFLE(T2), (j : Num) => false), op_dot_dot(1, 2 * T2)) == BLK(2 * (B : Num), T2)
+      #|  (T2 : Num) == (B : Num) * EXP(2, SUC((s : Num)))
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  IMAGE(leafidx(SUC((s : Num)), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false), op_dot_dot(1, 2 * t)) == IMAGE(FF(t), IMAGE(leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false), op_dot_dot(1, 2 * t)))
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 B : Num, t == B * EXP(2, s) && 1 <= B \226\134\146 IMAGE(leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false), op_dot_dot(1, 2 * t)) == BLK(B, t)
+      #|  leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num)) == (w : Num)
+      #|  (i : Num)
+      #|  (w : Num)
+      #|  (t : Num) + (w : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (w : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  EXP(2, SUC((s : Num))) == EXP(2, s) + EXP(2, s)
+      #|  leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num))
+      #|  (w : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  IN((i : Num), op_dot_dot(1, 2 * (t : Num)))
+      #|  (i : Num)
+      #|  {(i : Num) | IN(i, op_dot_dot(1, 2 * (t : Num))) && leafidx(SUC((s : Num)), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == (v : Num)} == UNION({(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == (w : Num)}, {(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w})
+      #|  (i : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (t : Num))) \226\134\146 IN(leafidx((s : Num), t, (j : Num) => RIFFLE(t), (j : Num) => false, i), BLK(2 * (B : Num), t))
+      #|  (t : Num) == (B : Num) * EXP(2, SUC((s : Num)))
+      #|  (w : Num)
+      #|  (v : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  (i : Num)
+      #|  {(i : Num) | IN(i, op_dot_dot(1, 2 * (t : Num))) && i == (v : Num)} == {v}
+      #|  (t : Num) == (B : Num)
+      #|  IN((v : Num), BLK((B : Num), (t : Num)))
+      #|  1 <= (v : Num) && v <= 2 * (B : Num)
+      #|  (t : Num) == (B : Num)
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 B : Num, \226\136\128 v : Num, t == B * EXP(2, s) && 1 <= B && IN(v, BLK(B, t)) \226\134\146 HAS_SIZE({(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == v}, EXP(2, s))
+      #|  IN((g : Num), TSET((e : Num), (G : Num)))
+      #|  (g : Num)
+      #|  (e : Num)
+      #|  (e : Num) * (G : Num)
+      #|  (k : Num)
+      #|  (g : Num)
+      #|  (e : Num)
+      #|  (e : Num) * (G : Num)
+      #|  (k : Num)
+      #|  (e : Num) * (G : Num) == e * EXP(2, (k : Num))
+      #|  2 * ((e : Num) * (G : Num)) == 2 * (e * G)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, 2 <= e && 1 <= G && G == EXP(2, k) \226\134\146 IMAGE(leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false), op_dot_dot(1, 2 * (e * G))) == TSET(e, G) && (\226\136\128 g : Num, IN(g, TSET(e, G)) \226\134\146 CARD({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == g}) == G)
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 i : Num, leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == !(leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == CHSG(t, leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)))
+      #|  !((t : Num) + (w : Num) <= t)
+      #|  (w : Num) <= (t : Num)
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 B : Num, \226\136\128 w : Num, \226\136\128 i : Num, 1 <= w && w <= 2 * B && 2 * B <= t && IN(i, op_dot_dot(1, 2 * t)) && IN(leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i), BLK(2 * B, t)) \226\134\146 (leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == w \226\134\146 leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)) && (leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w \226\134\146 leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == !leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i))
+      #|  !(leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num)) == (w : Num) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w)
+      #|  (i : Num)
+      #|  (w : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num))
+      #|  (w : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 B : Num, \226\136\128 w : Num, \226\136\128 i : Num, 1 <= w && w <= 2 * B && 2 * B <= t && IN(i, op_dot_dot(1, 2 * t)) && IN(leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i), BLK(2 * B, t)) \226\134\146 (leafidx(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == RIFFLE(t, w) && !leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i)) == (leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == w && !leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) || leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w && leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)) && (leafidx(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == RIFFLE(t, w) && leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i)) == (leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == w && leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) || leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w && !leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i))
+      #|  2 * (2 * (m : Num)) == 2 * (2 * m)
+      #|  \226\136\131 m : Num, EXP(2, (s : Num)) == 2 * m
+      #|  \226\136\128 s : Num, 1 <= s \226\134\146 DIV(EXP(2, SUC(s)), 2) == DIV(EXP(2, s), 2) + DIV(EXP(2, s), 2)
+      #|  leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num)) == (w : Num)
+      #|  (i : Num)
+      #|  (t : Num) + (w : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (w : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num)) == (w : Num)
+      #|  (i : Num)
+      #|  (t : Num) + (w : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (w : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (w : Num)
+      #|  IN((w : Num), BLK(2 * (B : Num), (t : Num))) && IN(t + w, BLK(2 * B, t))
+      #|  1 <= (s : Num)
+      #|  (j : Num)
+      #|  {(i : Num) | IN(i, op_dot_dot(1, 2 * (t : Num))) && i == (w : Num)} == {w} && {(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && i == t + w} == {t + w}
+      #|  (s : Num) == 0
+      #|  !((w : Num) == (t : Num) + w)
+      #|  (i : Num)
+      #|  (w : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  IN((i : Num), op_dot_dot(1, 2 * (t : Num)))
+      #|  (i : Num)
+      #|  {(i : Num) | IN(i, op_dot_dot(1, 2 * (t : Num))) && leafidx(SUC((s : Num)), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == RIFFLE(t, (w : Num)) && leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i)} == UNION({(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == w && leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)}, {(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w && !leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)})
+      #|  (i : Num)
+      #|  (w : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  IN((i : Num), op_dot_dot(1, 2 * (t : Num)))
+      #|  (i : Num)
+      #|  {(i : Num) | IN(i, op_dot_dot(1, 2 * (t : Num))) && leafidx(SUC((s : Num)), t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == RIFFLE(t, (w : Num)) && !leafsg(SUC(s), t, (j : Num) => RIFFLE(t), (j : Num) => false, i)} == UNION({(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == w && !leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)}, {(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == t + w && leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)})
+      #|  (i : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (t : Num))) \226\134\146 IN(leafidx((s : Num), t, (j : Num) => RIFFLE(t), (j : Num) => false, i), BLK(2 * (B : Num), t))
+      #|  (t : Num) == (B : Num) * EXP(2, SUC((s : Num)))
+      #|  (w : Num)
+      #|  (v : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  !(1 <= 0)
+      #|  \226\136\128 s : Num, \226\136\128 t : Num, \226\136\128 B : Num, \226\136\128 v : Num, 1 <= s && t == B * EXP(2, s) && 1 <= B && IN(v, BLK(B, t)) \226\134\146 HAS_SIZE({(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == v && !leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)}, DIV(EXP(2, s), 2)) && HAS_SIZE({(i : Num) | IN(i, op_dot_dot(1, 2 * t)) && leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) == v && leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)}, DIV(EXP(2, s), 2))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  IN((g : Num), TSET((e : Num), (G : Num)))
+      #|  (g : Num)
+      #|  (e : Num)
+      #|  (e : Num) * (G : Num)
+      #|  (k : Num)
+      #|  (g : Num)
+      #|  (e : Num) * (G : Num) == e * EXP(2, (k : Num))
+      #|  2 * ((e : Num) * (G : Num)) == 2 * (e * G)
+      #|  1 <= (k : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) \226\134\146 (\226\136\128 g : Num, IN(g, TSET(e, G)) \226\134\146 CARD({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == g && !leafsg(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)}) == DIV(G, 2) && CARD({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == g && leafsg(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)}) == DIV(G, 2))
+      #|  (G : Num)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  (G : Num)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) \226\134\146 (IMAGE(leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false), op_dot_dot(1, 2 * (e * G))) == TSET(e, G) && (\226\136\128 g : Num, IN(g, TSET(e, G)) \226\134\146 CARD({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == g}) == G)) && (\226\136\128 g : Num, IN(g, TSET(e, G)) \226\134\146 CARD({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == g && !leafsg(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)}) == DIV(G, 2) && CARD({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == g && leafsg(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)}) == DIV(G, 2))
+      #|  (jsplit : (Num, Num, (Num) -> Int, (Num) -> Int, Num) -> Int)((p : Num), (t : Num), (u : (Num) -> Int), (v : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, p)) { u(i) } else { if IN(i, op_dot_dot(p + 1, p + t)) { v(i - p) } else { int_of_num(0) } })
+      #|  (jtl : (Num, Num, (Num) -> Int, Num) -> Int)((p : Num), (t : Num), (w : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, t)) { w(i + p) } else { int_of_num(0) })
+      #|  (i : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, IN(w, ibox(p + t, M)) \226\134\146 IN(ihead(p, w), ibox(p, M))
+      #|  (i : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, IN(w, ibox(p + t, M)) \226\134\146 IN(jtl(p, t, w), ibox(t, M))
+      #|  (i : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, IN(u, ibox(p, M)) && IN(v, ibox(t, M)) \226\134\146 IN(jsplit(p, t, u, v), ibox(p + t, M))
+      #|  1 <= (i : Num) - (p : Num) && i - p <= (t : Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, IN(w, ibox(p + t, M)) \226\134\146 jsplit(p, t, ihead(p, w), jtl(p, t, w)) == w
+      #|  (i : Num) + (p : Num)
+      #|  !IN((i : Num) + (p : Num), op_dot_dot(1, p)) && IN(i + p, op_dot_dot(p + 1, p + (t : Num))) && i + p - p == i
+      #|  IN((i : Num), op_dot_dot(1, (t : Num)))
+      #|  (i : Num)
+      #|  IN((i : Num), op_dot_dot(1, (p : Num)))
+      #|  (i : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 u' : (Num) -> Int, \226\136\128 v' : (Num) -> Int, IN(u, ibox(p, M)) && IN(v, ibox(t, M)) && IN(u', ibox(p, M)) && IN(v', ibox(t, M)) && jsplit(p, t, u, v) == jsplit(p, t, u', v') \226\134\146 u == u' && v == v'
+      #|  (i : Num)
+      #|  (t : Num)
       #|  1
-      #|  \\i. (W:num->int->int) i ((w:num->int) i)
-      #|  p:num
-      #|  forall p t (w:num->int) (W:num->int->int). isum((p+1)..(p+t))(\\i. W i (w i)) =\n  isum(1..t)(\\i. W (i+p) (jtl p t w i))
-      #|  ~(1 <= i+p /\\ i+p <= p) /\\ (p+1 <= i+p /\\ i+p <= p+t) /\\\n   (i+p)-p = i
-      #|  i:num
-      #|  t:num
+      #|  (i : Num) => (W : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, \226\136\128 W : (Num, Int) -> Int, isum(op_dot_dot(p + 1, p + t), (i : Num) => W(i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i + p, jtl(p, t, w, i)))
+      #|  !(1 <= (i : Num) + (p : Num) && i + p <= p) && (p + 1 <= i + p && i + p <= p + (t : Num)) && i + p - p == i
+      #|  (i : Num)
+      #|  (t : Num)
       #|  1
-      #|  \\i. (W:num->int->int) i (jsplit p t (u:num->int) (v:num->int) i)
-      #|  p:num
-      #|  forall p t (u:num->int) (v:num->int) (W:num->int->int). isum((p+1)..(p+t))(\\i. W i\n  (jsplit p t u v i)) = isum(1..t)(\\i. W (i+p) (v i))
-      #|  1..0 = {}
-      #|  forall M. ibox 0 M = {(\\i. &0)}
-      #|  (i + p) - p = i /\\\n   (p:num) + i = i + p
-      #|  i:num
-      #|  (p+1)..(p+t) = (1+p)..(t+p)
-      #|  forall(Vm:num->int->int) p t (w:num->int).\n     isum((p+1)..(p+t))(\\i. Vm (i-p) (w i)) = isum(1..t)(\\i. Vm i (w (p+i)))
-      #|  M:int
-      #|  t:num
-      #|  p:num
-      #|  v2:num->int
-      #|  u2:num->int
-      #|  v1:num->int
-      #|  u1:num->int
-      #|  ({u:num->int | u IN ibox p M /\\ Q u} CROSS {v:num->int | v IN ibox t M /\\\n     isum(1..t)(\\i. (W:num->int->int) (i+p) (v i)) = b})
-      #|  \\pr. jsplit p t (FST pr) (SND pr:num->int)
-      #|  ibox t M
-      #|  ibox p M
-      #|  FINITE ({u:num->int | u IN ibox p M /\\ Q u}) /\\\n   FINITE ({v:num->int | v IN ibox t M /\\\n    isum(1..t)(\\i. (W:num->int->int) (i+p) (v i)) = b})
-      #|  t:num
-      #|  jsplit p t (ihead p (w:num->int)) (jtl p t w) = w
-      #|  ihead p (w:num->int) IN ibox p M /\\\n       jtl p t (w:num->int) IN ibox t M
-      #|  jtl p t (w:num->int)
-      #|  ihead p (w:num->int)
-      #|  w:num->int
-      #|  {w:num->int | w IN ibox (p+t) M /\\ Q w /\\\n    isum((p+1)..(p+t))(\\i. (W:num->int->int) i (w i)) = b} =\n    IMAGE (\\pr. jsplit p t (FST pr) (SND pr))\n          (({u:num->int | u IN ibox p M /\\ Q u}) CROSS\n           ({v:num->int | v IN ibox t M /\\\n            isum(1..t)(\\i. W (i+p) (v i)) = b}))
-      #|  forall(Q:(num->int)->bool) (W:num->int->int) p t M b.\n    (forall u v. u IN ibox p M /\\ v IN ibox t M ==> (Q (jsplit p t u v) <=> Q u))\n    ==> CARD {w | w IN ibox (p+t) M /\\ Q w /\\\n     isum((p+1)..(p+t))(\\i. W i (w i)) = b} =\n        CARD {u | u IN ibox p M /\\ Q u} *\n        CARD {v | v IN ibox t M /\\ isum(1..t)(\\i. W (i+p) (v i)) = b}
-      #|  g*t + t = (g+1)*t
-      #|  g*t + t:num
-      #|  (g*t+i) IN 1..(m*t)
-      #|  forall m t (u:num->int) (v:num->int) g i. g < m /\\ 1 <= i /\\ i <= t\n     ==> jsplit (m*t) t u v (g*t+i) = u (g*t+i)
-      #|  i:num
-      #|  forall(V:num->num->int->int) t m (u:num->int) (v:num->int) g. g < m\n     ==> isum(1..t)(\\i. V g i (jsplit (m*t) t u v (g*t+i))) = isum(1..t)(\\i. V\n      g i (u (g*t+i)))
-      #|  g:num
-      #|  g:num
-      #|  v:num->int
-      #|  u:num->int
-      #|  m:num
-      #|  t:num
-      #|  V:num->num->int->int
-      #|  g:num
-      #|  forall(V:num->num->int->int) t (z:num->int) m (u:num->int) (v:num->int).\n     ((forall g. g < m ==> isum(1..t)(\\i. V g i (jsplit (m*t) t u v (g*t+i))) = z g)\n      <=>\n      (forall g. g < m ==> isum(1..t)(\\i. V g i (u (g*t+i))) = z g))
-      #|  v:num->int
-      #|  u:num->int
-      #|  (z:num->int) m
-      #|  M:int
-      #|  t:num
-      #|  m*t:num
-      #|  \\i. (V:num->num->int->int) m (i-(m*t))
-      #|  \\ww:num->int. forall g. g < m ==> isum(1..t)(\\i. (V:num->num->int->int) g i (ww\n     (g*t+i))) = (z:num->int) g
-      #|  (w:num->int) IN ibox ((m*t)+t) M
-      #|  w:num->int
-      #|  {w:num->int | w IN ibox ((m*t)+t) M /\\\n    (forall g. g < SUC m ==> isum(1..t)(\\i. (V:num->num->int->int) g i (w (g*t+i))) =\n     (z:num->int) g)} =\n    {w:num->int | w IN ibox ((m*t)+t) M /\\\n     (\\ww. forall g. g < m ==> isum(1..t)(\\i. V g i (ww (g*t+i))) = z g) w /\\\n      isum(((m*t)+1)..((m*t)+t))(\\i. V m (i-(m*t)) (w i)) = z m}
-      #|  {g | g < SUC m} = m INSERT {g | g < m}
-      #|  nproduct (m INSERT {g | g < m}) (\\g. CARD{ u:num->int | u IN\n   ibox t M /\\\n    isum(1..t)(\\i. (V:num->num->int->int) g i (u i)) = (z:num->int) g }) =\n    CARD{ u:num->int | u IN ibox t M /\\ isum(1..t)(\\i. V m i (u i)) = z m } *\n    nproduct {g | g < m} (\\g. CARD{ u:num->int | u IN ibox t M /\\\n     isum(1..t)(\\i. V g i (u i)) = z g })
-      #|  SUC m * t = (m * t) + t
-      #|  {w:num->int | w IN {(\\i. &0)}} = {(\\i. &0)}
-      #|  forall(V:num->num->int->int) t M (z:num->int) m.\n    CARD {w | w IN ibox (m*t) M /\\\n     (forall g. g < m ==> isum(1..t)(\\i. V g i (w (g*t+i))) = z g)} =\n    nproduct {g | g < m} (\\g. CARD{ u | u IN ibox t M /\\\n     isum(1..t)(\\i. V g i (u i)) = z g })
-      #|  CARD(IMAGE (\\g. e*G + g) (1..e)) = CARD(1..e)
-      #|  x:num
-      #|  (1..e) INTER (IMAGE (\\g. e*G + g) (1..e)) = {}
-      #|  e = e*1
-      #|  e <= e*G
-      #|  forall e G. 1 <= G ==> CARD(TSET e G) = 2*e
-      #|  t IN TSET e G
-      #|  t:num
-      #|  e:num
-      #|  e*G:num
-      #|  k:num
-      #|  forall e k (G:num) t. 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\ t IN TSET e G\n   ==> {i | i IN 1..2*e*G /\\\n    leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = t} HAS_SIZE G
-      #|  G = 2 EXP k
-      #|  G = 2 EXP k
-      #|  {i | i IN 1..2*e*G /\\\n   leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = (lab:num->num) g} HAS_SIZE G
-      #|  g:num
-      #|  lab:num->num
-      #|  lab:num->num
-      #|  2*e
-      #|  TSET e G
-      #|  forall e k (G:num). 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n   ==> ?lab. (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n             (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n             (forall g. g < 2*e ==> ?en. (forall r. r < G ==> en r IN {i | i IN 1..2*e*G /\\\n              leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g}) /\\\n                                   (forall i. i IN {i | i IN 1..2*e*G /\\\n                                    leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i\n                                     = lab g} ==> ?!r. r < G /\\ en r = i))
-      #|  g:num
-      #|  signfam (V:num->int->int) t =\n  \\i x. if i <= t then V i x else --(V (i-t) x)
-      #|  childfam (Wf:(num->int)->num->int->int) t (p:num->num) b =\n    if b then (\\hh. signfam (\\j. Wf hh (p(j+t))) t)\n         else (\\hh. signfam (\\k. Wf hh (p k)) t)
-      #|  (pleaf 0 (Wf:(num->int)->num->int->int) t (pp:num->num->num) (bp:num->bool) =\n  Wf) /\\\n  (pleaf (SUC s) (Wf:(num->int)->num->int->int) t (pp:num->num->num)\n   (bp:num->bool) =\n     pleaf s (childfam Wf t (pp 0) (bp 0)) t (\\j:num. pp(j+1)) (\\j:num.\n      bp(j+1)))
-      #|  SGNRELAB (Wf:(num->int)->num->int->int) (sg:num->bool) (q:num->num) =\n     \\hh i x. if sg i then --(Wf hh (q i) x) else Wf hh (q i) x
-      #|  forall(Wf:(num->int)->num->int->int) t p b.\n     childfam Wf t p b = SGNRELAB Wf (CHSG t) (CHQ t p b)
-      #|  forall(Wf:(num->int)->num->int->int) sg1 q1 sg2 q2.\n     SGNRELAB (SGNRELAB Wf sg1 q1) sg2 q2 =\n     SGNRELAB Wf (\\i. ~(sg2 i <=> sg1(q2 i))) (\\i. q1(q2 i))
-      #|  forall(Wf:(num->int)->num->int->int). SGNRELAB Wf (\\i. F) (\\i. i) = Wf
-      #|  forall s (Wf:(num->int)->num->int->int) t pp bp.\n     pleaf s Wf t pp bp = SGNRELAB Wf (leafsg s t pp bp) (leafidx s t pp bp)
-      #|  \\j:num. (bp:num->bool)(j+1)
-      #|  \\j:num. (pp:num->num->num)(j+1)
-      #|  t:num
-      #|  childfam (Wf:(num->int)->num->int->int) t (pp 0) (bp 0)
-      #|  i:num
-      #|  g:num
-      #|  i:num
-      #|  g:num
-      #|  r:num
-      #|  g:num
-      #|  r:num
-      #|  g:num
-      #|  en:num->num->num
-      #|  en:num->num->num
-      #|  lab:num->num
-      #|  lab:num->num
-      #|  G:num
-      #|  k:num
-      #|  e:num
-      #|  forall e k (G:num). 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k\n   ==> ?(lab:num->num) (en:num->num->num).\n         (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n         (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n         (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n          leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n         (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n          leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n           en g r = i)
-      #|  i:num
-      #|  G:num
-      #|  k:num
-      #|  e:num
-      #|  forall e k (G:num) i. 2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\ i IN 1..2*e*G\n     ==> leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i IN TSET e G
-      #|  G = 2 EXP k
-      #|  G = 2 EXP k
-      #|  g1:num = g2
-      #|  (lab:num->num) g1 IN TSET e G
-      #|  (lab:num->num) g1 = lab g2
-      #|  leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) ((en:num->num->num)\n   g2 r2) = lab g2
-      #|  (en:num->num->num) g1 r1 IN 1..2*e*G /\\\n   leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g1 r1) = lab g1
-      #|  r2:num
-      #|  g2:num
-      #|  r1:num
-      #|  g1:num
-      #|  forall e k (G:num) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ 1 <= G /\\ G = 2 EXP k /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx k (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> forall g1 r1 g2 r2. g1 < 2*e /\\ r1 < G /\\ g2 < 2*e /\\ r2 < G /\\\n      en g1 r1 = en g2 r2 ==> g1 = g2 /\\ r1 = r2
-      #|  r1:num
-      #|  g1:num
-      #|  r2:num
-      #|  g2:num
-      #|  (lab:num->num) g1
-      #|  g2:num
-      #|  g1:num
-      #|  (en:num->num->num) g1 r1
-      #|  g1:num
-      #|  r2:num
-      #|  r1:num
-      #|  1 <= n <=> ~(n=0)
-      #|  &1 <= &(4 EXP SUC e):int
-      #|  4 EXP SUC(SUC e) = 4 * 4 EXP SUC e
-      #|  forall e. &3 * &(4 EXP SUC e) + &1 <= &(4 EXP SUC(SUC e)):int
-      #|  (&(4 EXP SUC e):int) * P pow (SUC e - j) +\n    &2 * &(4 EXP SUC e) * P pow (SUC e - j) +\n    P pow (SUC e - j) =\n    (&3 * &(4 EXP SUC e) + &1) * P pow (SUC e - j)
-      #|  (&(4 EXP SUC e):int) * P pow (SUC e - j) +\n    &2 * &(4 EXP SUC e) * P pow (SUC e - j) +\n    P pow (SUC e - j)
-      #|  abs(if j = SUC e then &1 else &0) <= (P:int) pow (SUC e - j)
-      #|  (P:int) * P pow (e - j) = P pow (SUC e - j)
-      #|  (&2 * (P:int)) * &(4 EXP SUC e) * P pow (e - j) =\n          &2 * &(4 EXP SUC e) * (P * P pow (e - j))
-      #|  (&2 * (P:int)) * &(4 EXP SUC e) * P pow (e - j)
-      #|  abs(if j <= e then h * (g0:num->int) j else &0) <= &2 * &(4 EXP\n   SUC e) * P pow (SUC e - j)
-      #|  SUC e - j = e - (j - 1)
-      #|  (j:num) - 1 <= e
-      #|  abs(if j = 0 then &0 else (g0:num->int)(j-1)) <= &(4 EXP SUC e)\n   * P pow (SUC e - j)
-      #|  &1 <= (P:int) pow (SUC e - j)
-      #|  &0 <= (P:int) pow (SUC e - j)
-      #|  &0 <= (P:int)
-      #|  abs(if j = 0 then &0 else (g0:num->int)(j-1)) + abs(if j <= e\n   then h * g0 j else &0) + abs(if j = SUC e then &1 else &0)
-      #|  forall e (g0:num->int) P h j. &1 <= P /\\ abs h <= &2 * P /\\ j <= SUC e /\\\n     (forall k. k <= e ==> abs (g0 k) <= &(4 EXP SUC e) * P pow (e - k))\n   ==> abs((if j = 0 then &0 else g0 (j - 1)) + (if j <= e then h * g0 j else\n    &0) + (if j = SUC e then &1 else &0))\n       <= &(4 EXP SUC(SUC e)) * P pow (SUC e - j)
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= &2 * B) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
-      #|  i:A
-      #|  isum s (\\i. (a:A->int) i * (z i - z0 i)) = isum s (\\i. a i\n       * z i) - isum s (\\i. a i * z0 i)
-      #|  (z:A->int) i = &0 /\\ (z0:A->int) i = &0
-      #|  i:A
-      #|  abs((z:A->int) i) <= B /\\\n       abs((z0:A->int) i) <= B
-      #|  i:A
-      #|  z:A->int
-      #|  w:A->int
-      #|  IMS = IMAGE (\\z:A->int. \\i. z i - z0 i) MS
-      #|  i:A
-      #|  i:A
-      #|  v:A->int
-      #|  u:A->int
-      #|  CARD (IMAGE (\\z:A->int. \\i. z i - z0 i) MS)
-      #|  z0:A->int
-      #|  MS:(A->int)->bool = {}
-      #|  MS:(A->int)->bool = {}
-      #|  {a:A->int | (forall i. i IN s ==> abs(a i) <= B) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}
-      #|  FINITE (MS:(A->int)->bool)
-      #|  MS = {z:A->int | (forall i. i IN s ==> abs(z i) <= B) /\\\n   (forall i. ~(i IN s) ==> z i = &0) /\\ isum s (\\i. a i * z i) = m}
-      #|  forall s:A->bool a m B. FINITE s /\\ &0 <= B\n    ==> lincount s a m B <= lincount s a (&0) (&2 * B)
-      #|  MS:(A->int)->bool
-      #|  MS:(A->int)->bool
-      #|  MS:(A->int)->bool
-      #|  MS:(A->int)->bool
-      #|  MS:(A->int)->bool
-      #|  a:A->int
-      #|  forall s:A->bool A B (mfn:(A->int)->int).\n     FINITE s /\\ &0 <= B\n    ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n     (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (mfn a) B))\n        <= isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n         (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) (&2 * B)))
-      #|  2 < CARD(s:A->bool)
-      #|  ((&3:int) pow (CARD(s:A->bool)) * &1) *\n    ((A:int) * B) pow (CARD s - 1) +\n    Cnz * (A * B) pow (CARD s - 1)
-      #|  B:int
-      #|  A:int
-      #|  s:A->bool
-      #|  (&3:int) pow (CARD(s:A->bool)) * &1 + (Cnz:int)
-      #|  Cnz:int
-      #|  s:A->bool
-      #|  forall s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?c. forall A B:int. &1 <= A /\\ A <= B /\\ B <= A pow (CARD s - 1)\n            ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n                                 (forall i. ~(i IN s) ==> a i = &0)}\n                     (\\a. &(lincount s a (&0) B))\n                <= c * (A * B) pow (CARD s - 1)
-      #|  &2 * B:int
-      #|  A:int
-      #|  isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n   (forall i. ~(i IN s) ==> a i = &0)}\n             (\\a. &(lincount s a (&0) (&2 * B)))
-      #|  mfn:(A->int)->int
-      #|  B:int
-      #|  A:int
-      #|  c:int
-      #|  c:int
-      #|  s:A->bool
-      #|  forall s:A->bool. FINITE s /\\ 2 < CARD s\n    ==> ?c. forall A B (mfn:(A->int)->int). &1 <= A /\\ A <= &2 * B /\\\n     &2 * B <= A pow (CARD s - 1)\n            ==> isum {a:A->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n             (forall i. ~(i IN s) ==> a i = &0)}\n                     (\\a. &(lincount s a (mfn a) B))\n                <= c * (A * (&2 * B)) pow (CARD s - 1)
-      #|  amcount (V:num->int->int) t M a =\n  CARD {z | z IN ibox t M /\\ isum(1..t)(\\i. V i (z i)) = a}
-      #|  amreps (V:num->int->int) t M =\n  IMAGE (\\z. isum(1..t)(\\i. V i (z i))) (ibox t M)
-      #|  mvf t (V:num->int->int) = \\i x. if i <= t then V i x else V (i - t) x
-      #|  i:num
-      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum(1..t)(\\i. V i (ijoin t u v i)) = isum(1..t)(\\i. V i (u i))
-      #|  (i+t)-t = i
-      #|  i:num
-      #|  t + t = 2 * t
-      #|  1 + t = t + 1
-      #|  t:num
+      #|  (i : Num) => (W : (Num, Int) -> Int)(i, jsplit((p : Num), (t : Num), (u : (Num) -> Int), (v : (Num) -> Int), i))
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 W : (Num, Int) -> Int, isum(op_dot_dot(p + 1, p + t), (i : Num) => W(i, jsplit(p, t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => W(i + p, v(i)))
+      #|  op_dot_dot(1, 0) == {}
+      #|  \226\136\128 M : Int, ibox(0, M) == {(i : Num) => int_of_num(0)}
+      #|  (i : Num) + (p : Num) - p == i && p + i == i + p
+      #|  (i : Num)
+      #|  op_dot_dot((p : Num) + 1, p + (t : Num)) == op_dot_dot(1 + p, t + p)
+      #|  \226\136\128 Vm : (Num, Int) -> Int, \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, isum(op_dot_dot(p + 1, p + t), (i : Num) => Vm(i - p, w(i))) == isum(op_dot_dot(1, t), (i : Num) => Vm(i, w(p + i)))
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (p : Num)
+      #|  (v2 : (Num) -> Int)
+      #|  (u2 : (Num) -> Int)
+      #|  (v1 : (Num) -> Int)
+      #|  (u1 : (Num) -> Int)
+      #|  CROSS({(u : (Num) -> Int) | IN(u, ibox((p : Num), (M : Int))) && (Q : ((Num) -> Int) -> Bool)(u)}, {(v : (Num) -> Int) | IN(v, ibox((t : Num), M)) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i + p, v(i))) == (b : Int)})
+      #|  (pr : ((Num) -> Int, (Num) -> Int)) => jsplit((p : Num), (t : Num), FST(pr), SND(pr))
+      #|  ibox((t : Num), (M : Int))
+      #|  ibox((p : Num), (M : Int))
+      #|  FINITE({(u : (Num) -> Int) | IN(u, ibox((p : Num), (M : Int))) && (Q : ((Num) -> Int) -> Bool)(u)}) && FINITE({(v : (Num) -> Int) | IN(v, ibox((t : Num), M)) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i + p, v(i))) == (b : Int)})
+      #|  (t : Num)
+      #|  jsplit((p : Num), (t : Num), ihead(p, (w : (Num) -> Int)), jtl(p, t, w)) == w
+      #|  IN(ihead((p : Num), (w : (Num) -> Int)), ibox(p, (M : Int))) && IN(jtl(p, (t : Num), w), ibox(t, M))
+      #|  jtl((p : Num), (t : Num), (w : (Num) -> Int))
+      #|  ihead((p : Num), (w : (Num) -> Int))
+      #|  (w : (Num) -> Int)
+      #|  {(w : (Num) -> Int) | IN(w, ibox((p : Num) + (t : Num), (M : Int))) && (Q : ((Num) -> Int) -> Bool)(w) && isum(op_dot_dot(p + 1, p + t), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))) == (b : Int)} == IMAGE((pr : ((Num) -> Int, (Num) -> Int)) => jsplit(p, t, FST(pr), SND(pr)), CROSS({(u : (Num) -> Int) | IN(u, ibox(p, M)) && Q(u)}, {(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i + p, v(i))) == b}))
+      #|  \226\136\128 Q : ((Num) -> Int) -> Bool, \226\136\128 W : (Num, Int) -> Int, \226\136\128 p : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 b : Int, (\226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, IN(u, ibox(p, M)) && IN(v, ibox(t, M)) \226\134\146 Q(jsplit(p, t, u, v)) == Q(u)) \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(p + t, M)) && Q(w) && isum(op_dot_dot(p + 1, p + t), (i : Num) => W(i, w(i))) == b}) == CARD({(u : (Num) -> Int) | IN(u, ibox(p, M)) && Q(u)}) * CARD({(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i + p, v(i))) == b})
+      #|  (g : Num) * (t : Num) + t == (g + 1) * t
+      #|  (g : Num) * (t : Num) + t
+      #|  IN((g : Num) * (t : Num) + (i : Num), op_dot_dot(1, (m : Num) * t))
+      #|  \226\136\128 m : Num, \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 g : Num, \226\136\128 i : Num, g < m && 1 <= i && i <= t \226\134\146 jsplit(m * t, t, u, v, g * t + i) == u(g * t + i)
+      #|  (i : Num)
+      #|  \226\136\128 V : (Num, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 m : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 g : Num, g < m \226\134\146 isum(op_dot_dot(1, t), (i : Num) => V(g, i, jsplit(m * t, t, u, v, g * t + i))) == isum(op_dot_dot(1, t), (i : Num) => V(g, i, u(g * t + i)))
+      #|  (g : Num)
+      #|  (g : Num)
+      #|  (v : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  (m : Num)
+      #|  (t : Num)
+      #|  (V : (Num, Num, Int) -> Int)
+      #|  (g : Num)
+      #|  \226\136\128 V : (Num, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 z : (Num) -> Int, \226\136\128 m : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, (\226\136\128 g : Num, g < m \226\134\146 isum(op_dot_dot(1, t), (i : Num) => V(g, i, jsplit(m * t, t, u, v, g * t + i))) == z(g)) == (\226\136\128 g : Num, g < m \226\134\146 isum(op_dot_dot(1, t), (i : Num) => V(g, i, u(g * t + i))) == z(g))
+      #|  (v : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  (z : (Num) -> Int)((m : Num))
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (m : Num) * (t : Num)
+      #|  (i : Num) => (V : (Num, Num, Int) -> Int)((m : Num), i - m * (t : Num))
+      #|  (ww : (Num) -> Int) => \226\136\128 g : Num, g < (m : Num) \226\134\146 isum(op_dot_dot(1, (t : Num)), (i : Num) => (V : (Num, Num, Int) -> Int)(g, i, ww(g * t + i))) == (z : (Num) -> Int)(g)
+      #|  IN((w : (Num) -> Int), ibox((m : Num) * (t : Num) + t, (M : Int)))
+      #|  (w : (Num) -> Int)
+      #|  {(w : (Num) -> Int) | IN(w, ibox((m : Num) * (t : Num) + t, (M : Int))) && (\226\136\128 g : Num, g < SUC(m) \226\134\146 isum(op_dot_dot(1, t), (i : Num) => (V : (Num, Num, Int) -> Int)(g, i, w(g * t + i))) == (z : (Num) -> Int)(g))} == {(w : (Num) -> Int) | IN(w, ibox(m * t + t, M)) && ((ww : (Num) -> Int) => \226\136\128 g : Num, g < m \226\134\146 isum(op_dot_dot(1, t), (i : Num) => V(g, i, ww(g * t + i))) == z(g))(w) && isum(op_dot_dot(m * t + 1, m * t + t), (i : Num) => V(m, i - m * t, w(i))) == z(m)}
+      #|  {(g : Num) | g < SUC((m : Num))} == INSERT(m, {(g : Num) | g < m})
+      #|  nproduct(INSERT((m : Num), {(g : Num) | g < m}), (g : Num) => CARD({(u : (Num) -> Int) | IN(u, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (V : (Num, Num, Int) -> Int)(g, i, u(i))) == (z : (Num) -> Int)(g)})) == CARD({(u : (Num) -> Int) | IN(u, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(m, i, u(i))) == z(m)}) * nproduct({(g : Num) | g < m}, (g : Num) => CARD({(u : (Num) -> Int) | IN(u, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(g, i, u(i))) == z(g)}))
+      #|  SUC((m : Num)) * (t : Num) == m * t + t
+      #|  {(w : (Num) -> Int) | IN(w, {(i : Num) => int_of_num(0)})} == {(i : Num) => int_of_num(0)}
+      #|  \226\136\128 V : (Num, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 z : (Num) -> Int, \226\136\128 m : Num, CARD({(w : (Num) -> Int) | IN(w, ibox(m * t, M)) && (\226\136\128 g : Num, g < m \226\134\146 isum(op_dot_dot(1, t), (i : Num) => V(g, i, w(g * t + i))) == z(g))}) == nproduct({(g : Num) | g < m}, (g : Num) => CARD({(u : (Num) -> Int) | IN(u, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(g, i, u(i))) == z(g)}))
+      #|  CARD(IMAGE((g : Num) => (e : Num) * (G : Num) + g, op_dot_dot(1, e))) == CARD(op_dot_dot(1, e))
+      #|  (x : Num)
+      #|  INTER(op_dot_dot(1, (e : Num)), IMAGE((g : Num) => e * (G : Num) + g, op_dot_dot(1, e))) == {}
+      #|  (e : Num) == e * 1
+      #|  (e : Num) <= e * (G : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, 1 <= G \226\134\146 CARD(TSET(e, G)) == 2 * e
+      #|  IN((t : Num), TSET((e : Num), (G : Num)))
+      #|  (t : Num)
+      #|  (e : Num)
+      #|  (e : Num) * (G : Num)
+      #|  (k : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 t : Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) && IN(t, TSET(e, G)) \226\134\146 HAS_SIZE({(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == t}, G)
+      #|  (G : Num) == EXP(2, (k : Num))
+      #|  (G : Num) == EXP(2, (k : Num))
+      #|  HAS_SIZE({(i : Num) | IN(i, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) && leafidx((k : Num), e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == (lab : (Num) -> Num)((g : Num))}, G)
+      #|  (g : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  2 * (e : Num)
+      #|  TSET((e : Num), (G : Num))
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) \226\134\146 (\226\136\131 lab : (Num) -> Num, (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) && (\226\136\128 g : Num, g < 2 * e \226\134\146 (\226\136\131 en : (Num) -> Num, (\226\136\128 r : Num, r < G \226\134\146 IN(en(r), {(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == lab(g)})) && (\226\136\128 i : Num, IN(i, {(i : Num) | IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == lab(g)}) \226\134\146 existsunique((r : Num) => r < G && en(r) == i)))))
+      #|  (g : Num)
+      #|  (signfam : ((Num, Int) -> Int, Num, Num, Int) -> Int)((V : (Num, Int) -> Int), (t : Num)) == ((i : Num) => (x : Int) => if i <= t { V(i, x) } else { -V(i - t, x) })
+      #|  (childfam : (((Num) -> Int, Num, Int) -> Int, Num, (Num) -> Num, Bool, (Num) -> Int, Num, Int) -> Int)((Wf : ((Num) -> Int, Num, Int) -> Int), (t : Num), (p : (Num) -> Num), (b : Bool)) == (if b { (hh : (Num) -> Int) => signfam((j : Num) => Wf(hh, p(j + t)), t) } else { (hh : (Num) -> Int) => signfam((k : Num) => Wf(hh, p(k)), t) })
+      #|  (pleaf : (Num, ((Num) -> Int, Num, Int) -> Int, Num, (Num, Num) -> Num, (Num) -> Bool, (Num) -> Int, Num, Int) -> Int)(0, (Wf : ((Num) -> Int, Num, Int) -> Int), (t : Num), (pp : (Num, Num) -> Num), (bp : (Num) -> Bool)) == Wf && pleaf(SUC((s : Num)), Wf, t, pp, bp) == pleaf(s, childfam(Wf, t, pp(0), bp(0)), t, (j : Num) => pp(j + 1), (j : Num) => bp(j + 1))
+      #|  (SGNRELAB : (((Num) -> Int, Num, Int) -> Int, (Num) -> Bool, (Num) -> Num, (Num) -> Int, Num, Int) -> Int)((Wf : ((Num) -> Int, Num, Int) -> Int), (sg : (Num) -> Bool), (q : (Num) -> Num)) == ((hh : (Num) -> Int) => (i : Num) => (x : Int) => if sg(i) { -Wf(hh, q(i), x) } else { Wf(hh, q(i), x) })
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 p : (Num) -> Num, \226\136\128 b : Bool, childfam(Wf, t, p, b) == SGNRELAB(Wf, CHSG(t), CHQ(t, p, b))
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 sg1 : (Num) -> Bool, \226\136\128 q1 : (Num) -> Num, \226\136\128 sg2 : (Num) -> Bool, \226\136\128 q2 : (Num) -> Num, SGNRELAB(SGNRELAB(Wf, sg1, q1), sg2, q2) == SGNRELAB(Wf, (i : Num) => !(sg2(i) == sg1(q2(i))), (i : Num) => q1(q2(i)))
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, SGNRELAB(Wf, (i : Num) => false, (i : Num) => i) == Wf
+      #|  \226\136\128 s : Num, \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 pp : (Num, Num) -> Num, \226\136\128 bp : (Num) -> Bool, pleaf(s, Wf, t, pp, bp) == SGNRELAB(Wf, leafsg(s, t, pp, bp), leafidx(s, t, pp, bp))
+      #|  (j : Num) => (bp : (Num) -> Bool)(j + 1)
+      #|  (j : Num) => (pp : (Num, Num) -> Num)(j + 1)
+      #|  (t : Num)
+      #|  childfam((Wf : ((Num) -> Int, Num, Int) -> Int), (t : Num), (pp : (Num, Num) -> Num)(0), (bp : (Num) -> Bool)(0))
+      #|  (i : Num)
+      #|  (g : Num)
+      #|  (i : Num)
+      #|  (g : Num)
+      #|  (r : Num)
+      #|  (g : Num)
+      #|  (r : Num)
+      #|  (g : Num)
+      #|  (en : (Num, Num) -> Num)
+      #|  (en : (Num, Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) \226\134\146 (\226\136\131 lab : (Num) -> Num, \226\136\131 en : (Num, Num) -> Num, (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) && (\226\136\128 g : Num, \226\136\128 r : Num, g < 2 * e && r < G \226\134\146 IN(en(g, r), op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, en(g, r)) == lab(g)) && (\226\136\128 g : Num, \226\136\128 i : Num, g < 2 * e && IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == lab(g) \226\134\146 existsunique((r : Num) => r < G && en(g, r) == i)))
+      #|  (i : Num)
+      #|  (G : Num)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 i : Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) && IN(i, op_dot_dot(1, 2 * (e * G))) \226\134\146 IN(leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i), TSET(e, G))
+      #|  (G : Num) == EXP(2, (k : Num))
+      #|  (G : Num) == EXP(2, (k : Num))
+      #|  (g1 : Num) == (g2 : Num)
+      #|  IN((lab : (Num) -> Num)((g1 : Num)), TSET((e : Num), (G : Num)))
+      #|  (lab : (Num) -> Num)((g1 : Num)) == lab((g2 : Num))
+      #|  leafidx((k : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (en : (Num, Num) -> Num)((g2 : Num), (r2 : Num))) == (lab : (Num) -> Num)(g2)
+      #|  IN((en : (Num, Num) -> Num)((g1 : Num), (r1 : Num)), op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) && leafidx((k : Num), e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, en(g1, r1)) == (lab : (Num) -> Num)(g1)
+      #|  (r2 : Num)
+      #|  (g2 : Num)
+      #|  (r1 : Num)
+      #|  (g1 : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, \226\136\128 en : (Num, Num) -> Num, 2 <= e && e - 1 <= k && 1 <= G && G == EXP(2, k) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) && (\226\136\128 g : Num, \226\136\128 r : Num, g < 2 * e && r < G \226\134\146 IN(en(g, r), op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, en(g, r)) == lab(g)) && (\226\136\128 g : Num, \226\136\128 i : Num, g < 2 * e && IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(k, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == lab(g) \226\134\146 existsunique((r : Num) => r < G && en(g, r) == i)) \226\134\146 (\226\136\128 g1 : Num, \226\136\128 r1 : Num, \226\136\128 g2 : Num, \226\136\128 r2 : Num, g1 < 2 * e && r1 < G && g2 < 2 * e && r2 < G && en(g1, r1) == en(g2, r2) \226\134\146 g1 == g2 && r1 == r2)
+      #|  (r1 : Num)
+      #|  (g1 : Num)
+      #|  (r2 : Num)
+      #|  (g2 : Num)
+      #|  (lab : (Num) -> Num)((g1 : Num))
+      #|  (g2 : Num)
+      #|  (g1 : Num)
+      #|  (en : (Num, Num) -> Num)((g1 : Num), (r1 : Num))
+      #|  (g1 : Num)
+      #|  (r2 : Num)
+      #|  (r1 : Num)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  int_of_num(1) <= int_of_num(EXP(4, SUC((e : Num))))
+      #|  EXP(4, SUC(SUC((e : Num)))) == 4 * EXP(4, SUC(e))
+      #|  \226\136\128 e : Num, int_of_num(3) * int_of_num(EXP(4, SUC(e))) + int_of_num(1) <= int_of_num(EXP(4, SUC(SUC(e))))
+      #|  int_of_num(EXP(4, SUC((e : Num)))) * pow((P : Int), SUC(e) - (j : Num)) + (int_of_num(2) * (int_of_num(EXP(4, SUC(e))) * pow(P, SUC(e) - j)) + pow(P, SUC(e) - j)) == (int_of_num(3) * int_of_num(EXP(4, SUC(e))) + int_of_num(1)) * pow(P, SUC(e) - j)
+      #|  int_of_num(EXP(4, SUC((e : Num)))) * pow((P : Int), SUC(e) - (j : Num)) + (int_of_num(2) * (int_of_num(EXP(4, SUC(e))) * pow(P, SUC(e) - j)) + pow(P, SUC(e) - j))
+      #|  abs(if (j : Num) == SUC((e : Num)) { int_of_num(1) } else { int_of_num(0) }) <= pow((P : Int), SUC(e) - j)
+      #|  (P : Int) * pow(P, (e : Num) - (j : Num)) == pow(P, SUC(e) - j)
+      #|  int_of_num(2) * (P : Int) * (int_of_num(EXP(4, SUC((e : Num)))) * pow(P, e - (j : Num))) == int_of_num(2) * (int_of_num(EXP(4, SUC(e))) * (P * pow(P, e - j)))
+      #|  int_of_num(2) * (P : Int) * (int_of_num(EXP(4, SUC((e : Num)))) * pow(P, e - (j : Num)))
+      #|  abs(if (j : Num) <= (e : Num) { (h : Int) * (g0 : (Num) -> Int)(j) } else { int_of_num(0) }) <= int_of_num(2) * (int_of_num(EXP(4, SUC(e))) * pow((P : Int), SUC(e) - j))
+      #|  SUC((e : Num)) - (j : Num) == e - (j - 1)
+      #|  (j : Num) - 1 <= (e : Num)
+      #|  abs(if (j : Num) == 0 { int_of_num(0) } else { (g0 : (Num) -> Int)(j - 1) }) <= int_of_num(EXP(4, SUC((e : Num)))) * pow((P : Int), SUC(e) - j)
+      #|  int_of_num(1) <= pow((P : Int), SUC((e : Num)) - (j : Num))
+      #|  int_of_num(0) <= pow((P : Int), SUC((e : Num)) - (j : Num))
+      #|  int_of_num(0) <= (P : Int)
+      #|  abs(if (j : Num) == 0 { int_of_num(0) } else { (g0 : (Num) -> Int)(j - 1) }) + (abs(if j <= (e : Num) { (h : Int) * g0(j) } else { int_of_num(0) }) + abs(if j == SUC(e) { int_of_num(1) } else { int_of_num(0) }))
+      #|  \226\136\128 e : Num, \226\136\128 g0 : (Num) -> Int, \226\136\128 P : Int, \226\136\128 h : Int, \226\136\128 j : Num, int_of_num(1) <= P && abs(h) <= int_of_num(2) * P && j <= SUC(e) && (\226\136\128 k : Num, k <= e \226\134\146 abs(g0(k)) <= int_of_num(EXP(4, SUC(e))) * pow(P, e - k)) \226\134\146 abs((if j == 0 { int_of_num(0) } else { g0(j - 1) }) + ((if j <= e { h * g0(j) } else { int_of_num(0) }) + (if j == SUC(e) { int_of_num(1) } else { int_of_num(0) }))) <= int_of_num(EXP(4, SUC(SUC(e)))) * pow(P, SUC(e) - j)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= int_of_num(2) * (B : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  (i : A)
+      #|  isum((s : (A) -> Bool), (i : A) => (a : (A) -> Int)(i) * ((z : (A) -> Int)(i) - (z0 : (A) -> Int)(i))) == isum(s, (i : A) => a(i) * z(i)) - isum(s, (i : A) => a(i) * z0(i))
+      #|  (z : (A) -> Int)((i : A)) == int_of_num(0) && (z0 : (A) -> Int)(i) == int_of_num(0)
+      #|  (i : A)
+      #|  abs((z : (A) -> Int)((i : A))) <= (B : Int) && abs((z0 : (A) -> Int)(i)) <= B
+      #|  (i : A)
+      #|  (z : (A) -> Int)
+      #|  (w : (A) -> Int)
+      #|  (IMS : ((A) -> Int) -> Bool) == IMAGE((z : (A) -> Int) => (i : A) => z(i) - (z0 : (A) -> Int)(i), (MS : ((A) -> Int) -> Bool))
+      #|  (i : A)
+      #|  (i : A)
+      #|  (v : (A) -> Int)
+      #|  (u : (A) -> Int)
+      #|  CARD(IMAGE((z : (A) -> Int) => (i : A) => z(i) - (z0 : (A) -> Int)(i), (MS : ((A) -> Int) -> Bool)))
+      #|  (z0 : (A) -> Int)
+      #|  (MS : ((A) -> Int) -> Bool) == {}
+      #|  (MS : ((A) -> Int) -> Bool) == {}
+      #|  {(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= (B : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}
+      #|  FINITE((MS : ((A) -> Int) -> Bool))
+      #|  (MS : ((A) -> Int) -> Bool) == {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (B : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 B : Int, FINITE(s) && int_of_num(0) <= B \226\134\146 lincount(s, a, m, B) <= lincount(s, a, int_of_num(0), int_of_num(2) * B)
+      #|  (MS : ((A) -> Int) -> Bool)
+      #|  (MS : ((A) -> Int) -> Bool)
+      #|  (MS : ((A) -> Int) -> Bool)
+      #|  (MS : ((A) -> Int) -> Bool)
+      #|  (MS : ((A) -> Int) -> Bool)
+      #|  (a : (A) -> Int)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 A : Int, \226\136\128 B : Int, \226\136\128 mfn : ((A) -> Int) -> Int, FINITE(s) && int_of_num(0) <= B \226\134\146 isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, mfn(a), B))) <= isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), int_of_num(2) * B)))
+      #|  2 < CARD((s : (A) -> Bool))
+      #|  pow(int_of_num(3), CARD((s : (A) -> Bool))) * int_of_num(1) * pow((A : Int) * (B : Int), CARD(s) - 1) + (Cnz : Int) * pow(A * B, CARD(s) - 1)
+      #|  (B : Int)
+      #|  (A : Int)
+      #|  (s : (A) -> Bool)
+      #|  pow(int_of_num(3), CARD((s : (A) -> Bool))) * int_of_num(1) + (Cnz : Int)
+      #|  (Cnz : Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) && 2 < CARD(s) \226\134\146 (\226\136\131 c : Int, \226\136\128 A : Int, \226\136\128 B : Int, int_of_num(1) <= A && A <= B && B <= pow(A, CARD(s) - 1) \226\134\146 isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), B))) <= c * pow(A * B, CARD(s) - 1))
+      #|  int_of_num(2) * (B : Int)
+      #|  (A : Int)
+      #|  isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(a(i)) <= (A : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, int_of_num(0), int_of_num(2) * (B : Int))))
+      #|  (mfn : ((A) -> Int) -> Int)
+      #|  (B : Int)
+      #|  (A : Int)
+      #|  (c : Int)
+      #|  (c : Int)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) && 2 < CARD(s) \226\134\146 (\226\136\131 c : Int, \226\136\128 A : Int, \226\136\128 B : Int, \226\136\128 mfn : ((A) -> Int) -> Int, int_of_num(1) <= A && A <= int_of_num(2) * B && int_of_num(2) * B <= pow(A, CARD(s) - 1) \226\134\146 isum({(a : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : A, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (A) -> Int) => int_of_num(lincount(s, a, mfn(a), B))) <= c * pow(A * (int_of_num(2) * B), CARD(s) - 1))
+      #|  (amcount : ((Num, Int) -> Int, Num, Int, Int) -> Num)((V : (Num, Int) -> Int), (t : Num), (M : Int), (a : Int)) == CARD({(z : (Num) -> Int) | IN(z, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, z(i))) == a})
+      #|  (amreps : ((Num, Int) -> Int, Num, Int, Int) -> Bool)((V : (Num, Int) -> Int), (t : Num), (M : Int)) == IMAGE((z : (Num) -> Int) => isum(op_dot_dot(1, t), (i : Num) => V(i, z(i))), ibox(t, M))
+      #|  (mvf : (Num, (Num, Int) -> Int, Num, Int) -> Int)((t : Num), (V : (Num, Int) -> Int)) == ((i : Num) => (x : Int) => if i <= t { V(i, x) } else { V(i - t, x) })
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 V : (Num, Int) -> Int, isum(op_dot_dot(1, t), (i : Num) => V(i, ijoin(t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => V(i, u(i)))
+      #|  (i : Num) + (t : Num) - t == i
+      #|  (i : Num)
+      #|  (t : Num) + t == 2 * t
+      #|  1 + (t : Num) == t + 1
+      #|  (t : Num)
       #|  1
-      #|  \\i. (V:num->int->int) (i-t) (ijoin t (u:num->int) (v:num->int) i)
-      #|  t:num
-      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum((t+1)..(2*t))(\\i. V (i-t) (ijoin t u v i)) = isum(1..t)(\\i. V i (v\n     i))
-      #|  i:num
-      #|  V:num->int->int
-      #|  v:num->int
-      #|  u:num->int
-      #|  t:num
-      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum(1..t)(\\i. mvf t V i (ijoin t u v i)) = isum(1..t)(\\i. V i (u i))
-      #|  i:num
-      #|  V:num->int->int
-      #|  v:num->int
-      #|  u:num->int
-      #|  t:num
-      #|  forall t (u:num->int) (v:num->int) (V:num->int->int).\n    isum((t+1)..(2*t))(\\i. mvf t V i (ijoin t u v i)) = isum(1..t)(\\i. V i (v\n     i))
-      #|  forall(V:num->int->int) t M. FINITE(amreps V t M)
-      #|  z:num->int
-      #|  ~(a IN amreps V t M)
-      #|  z:num->int
-      #|  {z | z IN ibox t M /\\\n   isum(1..t)(\\i. V i (z i)) = a} = {}
-      #|  forall(V:num->int->int) t M a. ~(a IN amreps V t M) ==> amcount V t M a = 0
-      #|  M:int
-      #|  t:num
-      #|  v2:num->int
-      #|  u2:num->int
-      #|  v1:num->int
-      #|  u1:num->int
-      #|  ({u | u IN ibox t M /\\ isum(1..t)(\\i. V i (u i)) =\n     a} CROSS {v | v IN ibox t M /\\\n      isum(1..t)(\\i. V i (v i)) = b})
-      #|  \\p. ijoin t (FST p) (SND p:num->int)
-      #|  ibox t M
-      #|  FINITE ({u | u IN ibox t M /\\\n   isum(1..t)(\\i. V i (u i)) = a}) /\\ FINITE ({v | v IN ibox t M /\\\n    isum(1..t)(\\i. V i (v i)) = b})
-      #|  V:num->int->int
-      #|  itail t\n       (w:num->int)
-      #|  ihead t (w:num->int)
-      #|  t:num
-      #|  V:num->int->int
-      #|  itail t\n       (w:num->int)
-      #|  ihead t (w:num->int)
-      #|  t:num
-      #|  ijoin t (ihead t (w:num->int)) (itail t w) = w
-      #|  itail t (w:num->int)
-      #|  ihead t (w:num->int)
-      #|  w:num->int
-      #|  {w | w IN ibox (2*t) M /\\ isum(1..t)(\\i. mvf t V i (w i)) =\n    a /\\ isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = b} =\n    IMAGE (\\p. ijoin t (FST p) (SND p))\n          (({u | u IN ibox t M /\\ isum(1..t)(\\i. V i (u i)) = a}) CROSS\n           ({v | v IN ibox t M /\\ isum(1..t)(\\i. V i (v i)) = b}))
-      #|  forall(V:num->int->int) t M a b.\n    1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\\n                  isum(1..t)(\\i. mvf t V i (w i)) = a /\\\n                  isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = b} =\n        amcount V t M a * amcount V t M b
-      #|  w:num->int
-      #|  ~(a IN IMAGE (\\w. isum (1..t) (\\i. mvf t V i (w i))) S)
-      #|  w:num->int
-      #|  a:int
-      #|  {w | w IN ibox (2*t) M /\\\n     isum(1..t)(\\i. mvf t V i (w i)) = a /\\\n      isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = a} = {}
-      #|  a:int
-      #|  a:int
-      #|  M:int
-      #|  t:num
-      #|  V:num->int->int
-      #|  a:int
-      #|  w:num->int
-      #|  M:int
-      #|  t:num
-      #|  V:num->int->int
-      #|  itail t\n       (w:num->int)
-      #|  ihead t (w:num->int)
-      #|  t:num
-      #|  ihead t (w:num->int)
-      #|  w:num->int
-      #|  y:int
-      #|  y:int
-      #|  y:int
-      #|  M:int
-      #|  t:num
-      #|  V:num->int->int
-      #|  ibox (2*t) M
-      #|  FINITE {w | w IN ibox (2*t) M /\\\n     isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n      isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y}
-      #|  y:int
-      #|  forall y. nsum {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n    isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y} (\\w:num->int. 1) = amcount V t\n     M y * amcount V t M y
-      #|  w:num->int
-      #|  y:int
-      #|  forall y. {x | x IN S /\\\n   isum(1..t)(\\i. mvf t V i (x i)) = y} = {w | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. mvf t V i (w i)) = y /\\\n     isum((t+1)..(2*t))(\\i. mvf t V i (w i)) = y}
-      #|  S:(num->int)->bool
-      #|  \\w:num->int. 1
-      #|  \\w:num->int. isum(1..t)(\\i. mvf t V i (w i))
-      #|  ibox (2*t) M
-      #|  FINITE (S:(num->int)->bool)
-      #|  S = {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. mvf t V i (w i)) = isum((t+1)..(2*t))(\\i. mvf t V i (w\n    i))}
-      #|  forall(V:num->int->int) t M.\n    1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\\n                  isum(1..t)(\\i. mvf t V i (w i)) = isum((t+1)..(2*t))(\\i. mvf\n                   t V i (w i))} =\n        nsum (amreps V t M) (\\a. amcount V t M a * amcount V t M a)
-      #|  wtail t (W:num->int->int) = \\i x. W (i+t) x
-      #|  i:num
-      #|  forall t (w:num->int) (W:num->int->int). isum(1..t)(\\i. W i (ihead t w i)) =\n  isum(1..t)(\\i. W i (w i))
-      #|  i:num
-      #|  t + t = 2 * t
-      #|  1 + t = t + 1
-      #|  t:num
+      #|  (i : Num) => (V : (Num, Int) -> Int)(i - (t : Num), ijoin(t, (u : (Num) -> Int), (v : (Num) -> Int), i))
+      #|  (t : Num)
+      #|  \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 V : (Num, Int) -> Int, isum(op_dot_dot(t + 1, 2 * t), (i : Num) => V(i - t, ijoin(t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => V(i, v(i)))
+      #|  (i : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  (v : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  (t : Num)
+      #|  \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 V : (Num, Int) -> Int, isum(op_dot_dot(1, t), (i : Num) => mvf(t, V, i, ijoin(t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => V(i, u(i)))
+      #|  (i : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  (v : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  (t : Num)
+      #|  \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 V : (Num, Int) -> Int, isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, ijoin(t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => V(i, v(i)))
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, FINITE(amreps(V, t, M))
+      #|  (z : (Num) -> Int)
+      #|  !IN((a : Int), amreps((V : (Num, Int) -> Int), (t : Num), (M : Int)))
+      #|  (z : (Num) -> Int)
+      #|  {(z : (Num) -> Int) | IN(z, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (V : (Num, Int) -> Int)(i, z(i))) == (a : Int)} == {}
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 a : Int, !IN(a, amreps(V, t, M)) \226\134\146 amcount(V, t, M, a) == 0
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (v2 : (Num) -> Int)
+      #|  (u2 : (Num) -> Int)
+      #|  (v1 : (Num) -> Int)
+      #|  (u1 : (Num) -> Int)
+      #|  CROSS({(u : (Num) -> Int) | IN(u, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (V : (Num, Int) -> Int)(i, u(i))) == (a : Int)}, {(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, v(i))) == (b : Int)})
+      #|  (p : ((Num) -> Int, (Num) -> Int)) => ijoin((t : Num), FST(p), SND(p))
+      #|  ibox((t : Num), (M : Int))
+      #|  FINITE({(u : (Num) -> Int) | IN(u, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (V : (Num, Int) -> Int)(i, u(i))) == (a : Int)}) && FINITE({(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, v(i))) == (b : Int)})
+      #|  (V : (Num, Int) -> Int)
+      #|  itail((t : Num), (w : (Num) -> Int))
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (t : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  itail((t : Num), (w : (Num) -> Int))
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (t : Num)
+      #|  ijoin((t : Num), ihead(t, (w : (Num) -> Int)), itail(t, w)) == w
+      #|  itail((t : Num), (w : (Num) -> Int))
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (w : (Num) -> Int)
+      #|  {(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i))) == (a : Int) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i))) == (b : Int)} == IMAGE((p : ((Num) -> Int, (Num) -> Int)) => ijoin(t, FST(p), SND(p)), CROSS({(u : (Num) -> Int) | IN(u, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, u(i))) == a}, {(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, v(i))) == b}))
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 a : Int, \226\136\128 b : Int, 1 <= t \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, V, i, w(i))) == a && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i))) == b}) == amcount(V, t, M, a) * amcount(V, t, M, b)
+      #|  (w : (Num) -> Int)
+      #|  !IN((a : Int), IMAGE((w : (Num) -> Int) => isum(op_dot_dot(1, (t : Num)), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i))), (S : ((Num) -> Int) -> Bool)))
+      #|  (w : (Num) -> Int)
+      #|  (a : Int)
+      #|  {(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i))) == (a : Int) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i))) == a} == {}
+      #|  (a : Int)
+      #|  (a : Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  (a : Int)
+      #|  (w : (Num) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  itail((t : Num), (w : (Num) -> Int))
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (t : Num)
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (w : (Num) -> Int)
+      #|  (y : Int)
+      #|  (y : Int)
+      #|  (y : Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  ibox(2 * (t : Num), (M : Int))
+      #|  FINITE({(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i))) == (y : Int) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i))) == y})
+      #|  (y : Int)
+      #|  \226\136\128 y : Int, nsum({(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i))) == y && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i))) == y}, (w : (Num) -> Int) => 1) == amcount(V, t, M, y) * amcount(V, t, M, y)
+      #|  (w : (Num) -> Int)
+      #|  (y : Int)
+      #|  \226\136\128 y : Int, {(x : (Num) -> Int) | IN(x, (S : ((Num) -> Int) -> Bool)) && isum(op_dot_dot(1, (t : Num)), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, x(i))) == y} == {(w : (Num) -> Int) | IN(w, ibox(2 * t, (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, V, i, w(i))) == y && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i))) == y}
+      #|  (S : ((Num) -> Int) -> Bool)
+      #|  (w : (Num) -> Int) => 1
+      #|  (w : (Num) -> Int) => isum(op_dot_dot(1, (t : Num)), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i)))
+      #|  ibox(2 * (t : Num), (M : Int))
+      #|  FINITE((S : ((Num) -> Int) -> Bool))
+      #|  (S : ((Num) -> Int) -> Bool) == {(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, (V : (Num, Int) -> Int), i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i)))}
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, 1 <= t \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, V, i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, V, i, w(i)))}) == nsum(amreps(V, t, M), (a : Int) => amcount(V, t, M, a) * amcount(V, t, M, a))
+      #|  (wtail : (Num, (Num, Int) -> Int, Num, Int) -> Int)((t : Num), (W : (Num, Int) -> Int)) == ((i : Num) => (x : Int) => W(i + t, x))
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, \226\136\128 W : (Num, Int) -> Int, isum(op_dot_dot(1, t), (i : Num) => W(i, ihead(t, w, i))) == isum(op_dot_dot(1, t), (i : Num) => W(i, w(i)))
+      #|  (i : Num)
+      #|  (t : Num) + t == 2 * t
+      #|  1 + (t : Num) == t + 1
+      #|  (t : Num)
       #|  1
-      #|  \\i. (W:num->int->int) i ((w:num->int) i)
-      #|  t:num
-      #|  forall t (w:num->int) (W:num->int->int). isum((t+1)..(2*t))(\\i. W i (w i)) =\n  isum(1..t)(\\i. W (i+t) (itail t w i))
-      #|  i:num
-      #|  forall t (u:num->int) (v:num->int) (W:num->int->int). isum(1..t)(\\i. W i (ijoin t\n  u v i)) = isum(1..t)(\\i. W i (u i))
-      #|  ~(1 <= i+t /\\ i+t <= t) /\\ (t+1 <= i+t /\\ i+t <= 2*t) /\\\n   (i+t)-t = i
-      #|  i:num
-      #|  t + t = 2 * t
-      #|  1 + t = t + 1
-      #|  t:num
+      #|  (i : Num) => (W : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))
+      #|  (t : Num)
+      #|  \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, \226\136\128 W : (Num, Int) -> Int, isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i + t, itail(t, w, i)))
+      #|  (i : Num)
+      #|  \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 W : (Num, Int) -> Int, isum(op_dot_dot(1, t), (i : Num) => W(i, ijoin(t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => W(i, u(i)))
+      #|  !(1 <= (i : Num) + (t : Num) && i + t <= t) && (t + 1 <= i + t && i + t <= 2 * t) && i + t - t == i
+      #|  (i : Num)
+      #|  (t : Num) + t == 2 * t
+      #|  1 + (t : Num) == t + 1
+      #|  (t : Num)
       #|  1
-      #|  \\i. (W:num->int->int) i (ijoin t (u:num->int) (v:num->int) i)
-      #|  t:num
-      #|  forall t (u:num->int) (v:num->int) (W:num->int->int). isum((t+1)..(2*t))(\\i. W i\n  (ijoin t u v i)) = isum(1..t)(\\i. W (i+t) (v i))
-      #|  M:int
-      #|  t:num
-      #|  v2:num->int
-      #|  u2:num->int
-      #|  v1:num->int
-      #|  u1:num->int
-      #|  ({u:num->int | u IN ibox t M /\\\n     isum(1..t)(\\i. (W:num->int->int) i (u i)) = a} CROSS {v:num->int | v IN\n      ibox t M /\\\n       isum(1..t)(\\i. (W:num->int->int) (i+t) (v i)) = b})
-      #|  \\p. ijoin t (FST p) (SND p:num->int)
-      #|  ibox t M
-      #|  FINITE ({u:num->int | u IN ibox t M /\\\n   isum(1..t)(\\i. (W:num->int->int) i (u i)) = a}) /\\\n    FINITE ({v:num->int | v IN ibox t M /\\\n     isum(1..t)(\\i. (W:num->int->int) (i+t) (v i)) = b})
-      #|  ijoin t (ihead t (w:num->int)) (itail t w) = w
-      #|  itail t (w:num->int)
-      #|  ihead t (w:num->int)
-      #|  w:num->int
-      #|  {w:num->int | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. (W:num->int->int) i (w i)) = a /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = b} =\n    IMAGE (\\p. ijoin t (FST p) (SND p))\n          (({u:num->int | u IN ibox t M /\\\n           isum(1..t)(\\i. W i (u i)) = a}) CROSS\n           ({v:num->int | v IN ibox t M /\\\n            isum(1..t)(\\i. W (i+t) (v i)) = b}))
-      #|  forall(W:num->int->int) t M a b. 1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\ isum(1..t)(\\i. W i (w i)) = a /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = b} =\n        amcount W t M a * amcount (wtail t W) t M b
-      #|  w:num->int
-      #|  ~(a IN IMAGE (\\w. isum (1..t) (\\i. (W:num->int->int) i (w\n          i))) S)
-      #|  w:num->int
-      #|  a:int
-      #|  {w | w IN ibox (2*t) M /\\\n     isum(1..t)(\\i. (W:num->int->int) i (w i)) = a /\\\n      isum((t+1)..(2*t))(\\i. W i (w i)) = (m - a)} = {}
-      #|  m - a:int
-      #|  a:int
-      #|  M:int
-      #|  t:num
-      #|  W:num->int->int
-      #|  a:int
-      #|  w:num->int
-      #|  M:int
-      #|  t:num
-      #|  W:num->int->int
-      #|  w:num->int
-      #|  t:num
-      #|  ihead t (w:num->int)
-      #|  w:num->int
-      #|  y:int
-      #|  ibox (2*t) M
-      #|  FINITE {w | w IN ibox (2*t) M /\\\n     isum(1..t)(\\i. (W:num->int->int) i (w i)) = y /\\\n      isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)}
-      #|  y:int
-      #|  forall y. nsum {w | w IN ibox (2*t) M /\\\n   isum(1..t)(\\i. (W:num->int->int) i (w i)) = y /\\\n    isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)} (\\w:num->int. 1) = amcount\n     W t M y * amcount (wtail t W) t M (m - y)
-      #|  t + t = 2 * t
-      #|  1 <= t + 1
-      #|  2 * t = t + t
-      #|  isum(1..2*t)(\\i. (W:num->int->int) i (w i)) = isum(1..t)(\\i.\n     W i (w i)) + isum((t+1)..(2*t))(\\i. W i (w i))
-      #|  w:num->int
-      #|  y:int
-      #|  forall y. {x | x IN S /\\\n   isum(1..t)(\\i. (W:num->int->int) i (x i)) = y} = {w | w IN ibox (2*t) M /\\\n    isum(1..t)(\\i. W i (w i)) = y /\\\n     isum((t+1)..(2*t))(\\i. W i (w i)) = (m - y)}
-      #|  S:(num->int)->bool
-      #|  \\w:num->int. 1
-      #|  \\w:num->int. isum(1..t)(\\i. (W:num->int->int) i (w i))
-      #|  ibox (2*t) M
-      #|  FINITE (S:(num->int)->bool)
-      #|  S = {w | w IN ibox (2*t) M /\\\n   isum(1..2*t)(\\i. (W:num->int->int) i (w i)) = m}
-      #|  forall(W:num->int->int) t M m. 1 <= t\n    ==> CARD {w | w IN ibox (2*t) M /\\ isum(1..2*t)(\\i. W i (w i)) = m} =\n        nsum (amreps W t M) (\\a. amcount W t M a * amcount\n         (wtail t W) t M (m - a))
-      #|  m - (m - x) = x:int
-      #|  a:int
-      #|  a:int
-      #|  a:int
-      #|  a:int
-      #|  nsum (amreps (wtail t W) t M) (\\a. amcount (wtail t W) t M a *\n   amcount (wtail t W) t M a) = nsum s (\\a. amcount (wtail t W) t M a * amcount\n    (wtail t W) t M a)
-      #|  a:int
-      #|  nsum (amreps W t M) (\\a. amcount W t M a *\n   amcount W t M a) = nsum s (\\a. amcount W t M a * amcount\n    W t M a)
-      #|  a:int
-      #|  nsum (amreps W t M) (\\a. amcount W t M a *\n   amcount (wtail t W) t M (m - a)) = nsum s (\\a. amcount W t M a *\n    amcount (wtail t W) t M (m - a))
-      #|  amreps W t M SUBSET (s:int->bool) /\\\n   amreps (wtail t W) t M SUBSET (s:int->bool)
-      #|  FINITE (s:int->bool)
-      #|  s = amreps W t M UNION amreps (wtail t W) t M UNION IMAGE\n   (\\a:int. m - a) (amreps W t M) UNION IMAGE (\\a:int. m - a) (amreps\n    (wtail t W) t M)
-      #|  forall(W:num->int->int) t M m. 1 <= t\n    ==> 2 * CARD {w | w IN ibox (2*t) M /\\ isum(1..2*t)(\\i. W i (w i)) = m} <=\n        CARD {w | w IN ibox (2*t) M /\\\n         isum(1..t)(\\i. mvf t W i (w i)) = isum((t+1)..(2*t))(\\i. mvf t\n          W i (w i))} +\n        CARD {w | w IN ibox (2*t) M /\\\n         isum(1..t)(\\i. mvf t (wtail t W) i (w i)) = isum((t+1)..(2*t))(\\i. mvf\n          t (wtail t W) i (w i))}
-      #|  &0 <= M ==> &0:int <= M - --M + &1
-      #|  &0 <= M ==> --M:int <= M
-      #|  forall M:int. &0 <= M ==> CARD {w:int | --M <= w /\\\n  w <= M} <= 2 * num_of_int M + 1
-      #|  &(2 * num_of_int M + 1):int = &2 * M + &1
-      #|  {x:int | --M < x /\\ x <= M} UNION {--M}
-      #|  {w:int | --M <= w /\\ w <= M}
-      #|  1..t
-      #|  d:int
-      #|  &0:int
-      #|  abs(x:int) <= M <=> --M <= x /\\ x <= M
-      #|  (a<=>a') ==> (a/\\b <=> a'/\\b)
-      #|  z:num->int
-      #|  ibox t M = {z:num->int | (forall i. i IN 1..t ==> z i IN {w:int |\n     --M <= w /\\ w <= M}) /\\ (forall i. ~(i IN 1..t) ==> z i = &0)}
-      #|  &((2 * num_of_int M + 1) EXP t):int
-      #|  forall t M:int. &0 <= M ==> &(CARD(ibox t M)) <= (&2 * M + &1) pow t
-      #|  forall a b e:num. e <= a /\\ a <= b ==> (b - a) + (a - e) = b - e
-      #|  i:A
-      #|  FINITE(s:A->bool)
-      #|  z:A->int
-      #|  nsum (SL:(A->int)->bool) (\\z:A->int. MaxMult EXP\n   (CARD(s:A->bool)))
-      #|  SL = {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n   (forall i. ~(i IN s) ==> z i = &0) /\\ isum s (\\i. a i * z i) = m}
-      #|  {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n     (forall i. ~(i IN s) ==> z i = &0)}
-      #|  FINITE {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n   (forall i. ~(i IN s) ==> z i = &0) /\\\n    isum s (\\i. a i * z i) = m}
-      #|  forall(s:A->bool) (a:A->int) m (Amax:int) (mult:A->int->num) (MaxMult:num).\n     FINITE s /\\ (forall i z. mult i z <= MaxMult)\n     ==> nsum {z:A->int | (forall i. i IN s ==> abs(z i) <= Amax) /\\\n                          (forall i. ~(i IN s) ==> z i = &0) /\\\n                          isum s (\\i. a i * z i) = m}\n              (\\z. nproduct s (\\i. mult i (z i)))\n         <= MaxMult EXP (CARD s) * lincount s a m Amax
-      #|  gtail k (z:num->int) = (\\i. if 1 <= i then z (i +\n k) else &0)
-      #|  gjoin k (u:num->int) (v:num->int) = (\\i. if i IN\n 1..k then u i else v (i - k))
-      #|  i:num
-      #|  forall i. 1 <= i /\\ i <= G ==> abs((w:num->int) i) <= M
-      #|  i:num
-      #|  forall k G M (w:num->int). k <= G /\\ w IN ibox G M ==> ihead k w IN ibox k M
-      #|  i+k:num
-      #|  forall i. ~(1 <= i /\\ i <= G) ==> (w:num->int) i = &0
-      #|  i+k:num
-      #|  forall i. 1 <= i /\\ i <= G ==> abs((w:num->int) i) <= M
-      #|  1 <= i
-      #|  i:num
-      #|  forall k G M (w:num->int). k <= G /\\ w IN ibox G M ==> gtail k w IN ibox (G-k) M
-      #|  i:num
-      #|  i-k+k = i
-      #|  1 <= i-k
-      #|  i:num
-      #|  forall k G M (w:num->int). k <= G /\\\n  w IN ibox G M ==> gjoin k (ihead k w) (gtail k w) = w
-      #|  s:A->bool
-      #|  nsum {x | x IN s /\\\n     (f:A->B) x = y} (\\x. 1) = CARD {x | x IN s /\\ f x = y}
-      #|  y:B
-      #|  nsum (IMAGE (f:A->B) s) (\\y:B. c)
-      #|  s:A->bool
-      #|  \\x:A. 1
-      #|  f:A->B
-      #|  forall(f:A->B) s t c. FINITE s /\\ FINITE t /\\ IMAGE f s SUBSET t /\\\n     (forall y. CARD {x | x IN s /\\ f x = y} <= c) ==> CARD s <= CARD t * c
-      #|  (x:num->int) i = &0 /\\\n   (y:num->int) i = &0
-      #|  ~(i IN 1..2)
-      #|  i = 2
-      #|  i = 1
-      #|  i:num
-      #|  (ffam:num->num->int) 2 1 * (x:num->int) 2 = ffam 2 1 *\n    (y:num->int) 2
-      #|  (x:num->int) 2 = (y:num->int) 2
-      #|  forall(ffam:num->num->int) P m x y:num->int.\n     ~(ffam 2 1 = &0) /\\\n     x IN ibox 2 P /\\ isum(1..2)(\\j. ipoly (ffam j) 1 (x j)) = m /\\\n     y IN ibox 2 P /\\ isum(1..2)(\\j. ipoly (ffam j) 1 (y j)) = m /\\\n     x 1 = y 1\n     ==> x = y
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  m:int
-      #|  i:num
-      #|  forall(V:num->int->int) k (w:num->int). isum(1..k)(\\i. V i (ihead k w i)) =\n  isum(1..k)(\\i. V i (w i))
-      #|  i:num
-      #|  1+k = k+1 /\\ (G-k)+k = G
-      #|  G-k:num
+      #|  (i : Num) => (W : (Num, Int) -> Int)(i, ijoin((t : Num), (u : (Num) -> Int), (v : (Num) -> Int), i))
+      #|  (t : Num)
+      #|  \226\136\128 t : Num, \226\136\128 u : (Num) -> Int, \226\136\128 v : (Num) -> Int, \226\136\128 W : (Num, Int) -> Int, isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, ijoin(t, u, v, i))) == isum(op_dot_dot(1, t), (i : Num) => W(i + t, v(i)))
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (v2 : (Num) -> Int)
+      #|  (u2 : (Num) -> Int)
+      #|  (v1 : (Num) -> Int)
+      #|  (u1 : (Num) -> Int)
+      #|  CROSS({(u : (Num) -> Int) | IN(u, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i, u(i))) == (a : Int)}, {(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i + t, v(i))) == (b : Int)})
+      #|  (p : ((Num) -> Int, (Num) -> Int)) => ijoin((t : Num), FST(p), SND(p))
+      #|  ibox((t : Num), (M : Int))
+      #|  FINITE({(u : (Num) -> Int) | IN(u, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i, u(i))) == (a : Int)}) && FINITE({(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i + t, v(i))) == (b : Int)})
+      #|  ijoin((t : Num), ihead(t, (w : (Num) -> Int)), itail(t, w)) == w
+      #|  itail((t : Num), (w : (Num) -> Int))
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (w : (Num) -> Int)
+      #|  {(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))) == (a : Int) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == (b : Int)} == IMAGE((p : ((Num) -> Int, (Num) -> Int)) => ijoin(t, FST(p), SND(p)), CROSS({(u : (Num) -> Int) | IN(u, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i, u(i))) == a}, {(v : (Num) -> Int) | IN(v, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i + t, v(i))) == b}))
+      #|  \226\136\128 W : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 a : Int, \226\136\128 b : Int, 1 <= t \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(i, w(i))) == a && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == b}) == amcount(W, t, M, a) * amcount(wtail(t, W), t, M, b)
+      #|  (w : (Num) -> Int)
+      #|  !IN((a : Int), IMAGE((w : (Num) -> Int) => isum(op_dot_dot(1, (t : Num)), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))), (S : ((Num) -> Int) -> Bool)))
+      #|  (w : (Num) -> Int)
+      #|  (a : Int)
+      #|  {(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))) == (a : Int) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == (m : Int) - a} == {}
+      #|  (m : Int) - (a : Int)
+      #|  (a : Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (W : (Num, Int) -> Int)
+      #|  (a : Int)
+      #|  (w : (Num) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (W : (Num, Int) -> Int)
+      #|  (w : (Num) -> Int)
+      #|  (t : Num)
+      #|  ihead((t : Num), (w : (Num) -> Int))
+      #|  (w : (Num) -> Int)
+      #|  (y : Int)
+      #|  ibox(2 * (t : Num), (M : Int))
+      #|  FINITE({(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))) == (y : Int) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == (m : Int) - y})
+      #|  (y : Int)
+      #|  \226\136\128 y : Int, nsum({(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))) == y && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == (m : Int) - y}, (w : (Num) -> Int) => 1) == amcount(W, t, M, y) * amcount(wtail(t, W), t, M, m - y)
+      #|  (t : Num) + t == 2 * t
+      #|  1 <= (t : Num) + 1
+      #|  2 * (t : Num) == t + t
+      #|  isum(op_dot_dot(1, 2 * (t : Num)), (i : Num) => (W : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i, w(i))) + isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i)))
+      #|  (w : (Num) -> Int)
+      #|  (y : Int)
+      #|  \226\136\128 y : Int, {(x : (Num) -> Int) | IN(x, (S : ((Num) -> Int) -> Bool)) && isum(op_dot_dot(1, (t : Num)), (i : Num) => (W : (Num, Int) -> Int)(i, x(i))) == y} == {(w : (Num) -> Int) | IN(w, ibox(2 * t, (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => W(i, w(i))) == y && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => W(i, w(i))) == (m : Int) - y}
+      #|  (S : ((Num) -> Int) -> Bool)
+      #|  (w : (Num) -> Int) => 1
+      #|  (w : (Num) -> Int) => isum(op_dot_dot(1, (t : Num)), (i : Num) => (W : (Num, Int) -> Int)(i, w(i)))
+      #|  ibox(2 * (t : Num), (M : Int))
+      #|  FINITE((S : ((Num) -> Int) -> Bool))
+      #|  (S : ((Num) -> Int) -> Bool) == {(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, 2 * t), (i : Num) => (W : (Num, Int) -> Int)(i, w(i))) == (m : Int)}
+      #|  \226\136\128 W : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 m : Int, 1 <= t \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => W(i, w(i))) == m}) == nsum(amreps(W, t, M), (a : Int) => amcount(W, t, M, a) * amcount(wtail(t, W), t, M, m - a))
+      #|  (m : Int) - (m - (x : Int)) == x
+      #|  (a : Int)
+      #|  (a : Int)
+      #|  (a : Int)
+      #|  (a : Int)
+      #|  nsum(amreps(wtail((t : Num), (W : (Num, Int) -> Int)), t, (M : Int)), (a : Int) => amcount(wtail(t, W), t, M, a) * amcount(wtail(t, W), t, M, a)) == nsum((s : (Int) -> Bool), (a : Int) => amcount(wtail(t, W), t, M, a) * amcount(wtail(t, W), t, M, a))
+      #|  (a : Int)
+      #|  nsum(amreps((W : (Num, Int) -> Int), (t : Num), (M : Int)), (a : Int) => amcount(W, t, M, a) * amcount(W, t, M, a)) == nsum((s : (Int) -> Bool), (a : Int) => amcount(W, t, M, a) * amcount(W, t, M, a))
+      #|  (a : Int)
+      #|  nsum(amreps((W : (Num, Int) -> Int), (t : Num), (M : Int)), (a : Int) => amcount(W, t, M, a) * amcount(wtail(t, W), t, M, (m : Int) - a)) == nsum((s : (Int) -> Bool), (a : Int) => amcount(W, t, M, a) * amcount(wtail(t, W), t, M, m - a))
+      #|  SUBSET(amreps((W : (Num, Int) -> Int), (t : Num), (M : Int)), (s : (Int) -> Bool)) && SUBSET(amreps(wtail(t, W), t, M), s)
+      #|  FINITE((s : (Int) -> Bool))
+      #|  (s : (Int) -> Bool) == UNION(amreps((W : (Num, Int) -> Int), (t : Num), (M : Int)), UNION(amreps(wtail(t, W), t, M), UNION(IMAGE((a : Int) => (m : Int) - a, amreps(W, t, M)), IMAGE((a : Int) => m - a, amreps(wtail(t, W), t, M)))))
+      #|  \226\136\128 W : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 m : Int, 1 <= t \226\134\146 2 * CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => W(i, w(i))) == m}) <= CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, W, i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, W, i, w(i)))}) + CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, wtail(t, W), i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, wtail(t, W), i, w(i)))})
+      #|  int_of_num(0) <= (M : Int) \226\134\146 int_of_num(0) <= M - -M + int_of_num(1)
+      #|  int_of_num(0) <= (M : Int) \226\134\146 -M <= M
+      #|  \226\136\128 M : Int, int_of_num(0) <= M \226\134\146 CARD({(w : Int) | -M <= w && w <= M}) <= 2 * num_of_int(M) + 1
+      #|  int_of_num(2 * num_of_int((M : Int)) + 1) == int_of_num(2) * M + int_of_num(1)
+      #|  UNION({(x : Int) | -(M : Int) < x && x <= M}, {-M})
+      #|  {(w : Int) | -(M : Int) <= w && w <= M}
+      #|  op_dot_dot(1, (t : Num))
+      #|  (d : Int)
+      #|  int_of_num(0)
+      #|  (abs((x : Int)) <= (M : Int)) == (-M <= x && x <= M)
+      #|  (a : Bool) == (a' : Bool) \226\134\146 (a && (b : Bool)) == (a' && b)
+      #|  (z : (Num) -> Int)
+      #|  ibox((t : Num), (M : Int)) == {(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, t)) \226\134\146 IN(z(i), {(w : Int) | -M <= w && w <= M})) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, t)) \226\134\146 z(i) == int_of_num(0))}
+      #|  int_of_num(EXP(2 * num_of_int((M : Int)) + 1, (t : Num)))
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, int_of_num(0) <= M \226\134\146 int_of_num(CARD(ibox(t, M))) <= pow(int_of_num(2) * M + int_of_num(1), t)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 e : Num, e <= a && a <= b \226\134\146 b - a + (a - e) == b - e
+      #|  (i : A)
+      #|  FINITE((s : (A) -> Bool))
+      #|  (z : (A) -> Int)
+      #|  nsum((SL : ((A) -> Int) -> Bool), (z : (A) -> Int) => EXP((MaxMult : Num), CARD((s : (A) -> Bool))))
+      #|  (SL : ((A) -> Int) -> Bool) == {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (Amax : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)}
+      #|  {(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (Amax : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0))}
+      #|  FINITE({(z : (A) -> Int) | (\226\136\128 i : A, IN(i, (s : (A) -> Bool)) \226\134\146 abs(z(i)) <= (Amax : Int)) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => (a : (A) -> Int)(i) * z(i)) == (m : Int)})
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : (A) -> Int, \226\136\128 m : Int, \226\136\128 Amax : Int, \226\136\128 mult : (A, Int) -> Num, \226\136\128 MaxMult : Num, FINITE(s) && (\226\136\128 i : A, \226\136\128 z : Int, mult(i, z) <= MaxMult) \226\134\146 nsum({(z : (A) -> Int) | (\226\136\128 i : A, IN(i, s) \226\134\146 abs(z(i)) <= Amax) && (\226\136\128 i : A, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : A) => a(i) * z(i)) == m}, (z : (A) -> Int) => nproduct(s, (i : A) => mult(i, z(i)))) <= EXP(MaxMult, CARD(s)) * lincount(s, a, m, Amax)
+      #|  (gtail : (Num, (Num) -> Int, Num) -> Int)((k : Num), (z : (Num) -> Int)) == ((i : Num) => if 1 <= i { z(i + k) } else { int_of_num(0) })
+      #|  (gjoin : (Num, (Num) -> Int, (Num) -> Int, Num) -> Int)((k : Num), (u : (Num) -> Int), (v : (Num) -> Int)) == ((i : Num) => if IN(i, op_dot_dot(1, k)) { u(i) } else { v(i - k) })
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, 1 <= i && i <= (G : Num) \226\134\146 abs((w : (Num) -> Int)(i)) <= (M : Int)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, k <= G && IN(w, ibox(G, M)) \226\134\146 IN(ihead(k, w), ibox(k, M))
+      #|  (i : Num) + (k : Num)
+      #|  \226\136\128 i : Num, !(1 <= i && i <= (G : Num)) \226\134\146 (w : (Num) -> Int)(i) == int_of_num(0)
+      #|  (i : Num) + (k : Num)
+      #|  \226\136\128 i : Num, 1 <= i && i <= (G : Num) \226\134\146 abs((w : (Num) -> Int)(i)) <= (M : Int)
+      #|  1 <= (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, k <= G && IN(w, ibox(G, M)) \226\134\146 IN(gtail(k, w), ibox(G - k, M))
+      #|  (i : Num)
+      #|  (i : Num) - (k : Num) + k == i
+      #|  1 <= (i : Num) - (k : Num)
+      #|  (i : Num)
+      #|  \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, k <= G && IN(w, ibox(G, M)) \226\134\146 gjoin(k, ihead(k, w), gtail(k, w)) == w
+      #|  (s : (A) -> Bool)
+      #|  nsum({(x : A) | IN(x, (s : (A) -> Bool)) && (f : (A) -> B)(x) == (y : B)}, (x : A) => 1) == CARD({(x : A) | IN(x, s) && f(x) == y})
+      #|  (y : B)
+      #|  nsum(IMAGE((f : (A) -> B), (s : (A) -> Bool)), (y : B) => (c : Num))
+      #|  (s : (A) -> Bool)
+      #|  (x : A) => 1
+      #|  (f : (A) -> B)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 c : Num, FINITE(s) && FINITE(t) && SUBSET(IMAGE(f, s), t) && (\226\136\128 y : B, CARD({(x : A) | IN(x, s) && f(x) == y}) <= c) \226\134\146 CARD(s) <= CARD(t) * c
+      #|  (x : (Num) -> Int)((i : Num)) == int_of_num(0) && (y : (Num) -> Int)(i) == int_of_num(0)
+      #|  !IN((i : Num), op_dot_dot(1, 2))
+      #|  (i : Num) == 2
+      #|  (i : Num) == 1
+      #|  (i : Num)
+      #|  (ffam : (Num, Num) -> Int)(2, 1) * (x : (Num) -> Int)(2) == ffam(2, 1) * (y : (Num) -> Int)(2)
+      #|  (x : (Num) -> Int)(2) == (y : (Num) -> Int)(2)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 P : Int, \226\136\128 m : Int, \226\136\128 x : (Num) -> Int, \226\136\128 y : (Num) -> Int, !(ffam(2, 1) == int_of_num(0)) && IN(x, ibox(2, P)) && isum(op_dot_dot(1, 2), (j : Num) => ipoly(ffam(j), 1, x(j))) == m && IN(y, ibox(2, P)) && isum(op_dot_dot(1, 2), (j : Num) => ipoly(ffam(j), 1, y(j))) == m && x(1) == y(1) \226\134\146 x == y
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (m : Int)
+      #|  (i : Num)
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 k : Num, \226\136\128 w : (Num) -> Int, isum(op_dot_dot(1, k), (i : Num) => V(i, ihead(k, w, i))) == isum(op_dot_dot(1, k), (i : Num) => V(i, w(i)))
+      #|  (i : Num)
+      #|  1 + (k : Num) == k + 1 && (G : Num) - k + k == G
+      #|  (G : Num) - (k : Num)
       #|  1
-      #|  \\i. (V:num->int->int) i (w i)
-      #|  k:num
-      #|  1 <= i
-      #|  i:num
-      #|  isum(1..(G-k))(\\i. V (i+k) (gtail k w i)) = isum(1..(G-k))(\\i.\n   V (i+k) (w (i+k)))
-      #|  forall(V:num->int->int) k G (w:num->int). k <= G\n    ==> isum(1..(G-k))(\\i. V (i+k) (gtail k w i)) = isum((k+1)..G)(\\i. V i (w\n     i))
-      #|  ibox k M
-      #|  isum (1..G) (\\i. V i ((w:num->int) i)) = z
-      #|  G:num
-      #|  k:num
+      #|  (i : Num) => (V : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))
+      #|  (k : Num)
+      #|  1 <= (i : Num)
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, (G : Num) - (k : Num)), (i : Num) => (V : (Num, Int) -> Int)(i + k, gtail(k, (w : (Num) -> Int), i))) == isum(op_dot_dot(1, G - k), (i : Num) => V(i + k, w(i + k)))
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 w : (Num) -> Int, k <= G \226\134\146 isum(op_dot_dot(1, G - k), (i : Num) => V(i + k, gtail(k, w, i))) == isum(op_dot_dot(k + 1, G), (i : Num) => V(i, w(i)))
+      #|  ibox((k : Num), (M : Int))
+      #|  isum(op_dot_dot(1, (G : Num)), (i : Num) => (V : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))) == (z : Int)
+      #|  (G : Num)
+      #|  (k : Num)
       #|  1
-      #|  \\i. (V:num->int->int) i (w i)
-      #|  w:num->int
-      #|  G:num
-      #|  k:num
-      #|  V:num->int->int
-      #|  isum(k+1..G)(\\i. V i ((w:num->int) i)) = isum(1..(G-k))(\\i.\n       V (i+k) (v i))
-      #|  w:num->int
-      #|  u:num->int
-      #|  ibox G M
-      #|  gjoin k (ihead k (w1:num->int)) (gtail k w1) = gjoin k\n       (ihead k (w2:num->int)) (gtail k w2)
-      #|  w2:num->int
-      #|  w1:num->int
-      #|  CARD(IMAGE (ihead k) {w | (w IN ibox G M /\\\n   isum(1..G)(\\i. V i (w i)) = z) /\\ gtail k w = v})
-      #|  forall(V:num->int->int) k G M z v. 1 <= k /\\ k <= G\n    ==> CARD {w | (w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z) /\\\n     gtail k w = v}\n        <= CARD {u | u IN ibox k M /\\\n         isum(1..k)(\\i. V i (u i)) = z - isum(1..(G-k))(\\i. V (i+k) (v i))}
-      #|  CARD {u | u IN ibox k M /\\\n       isum(1..k)(\\i. V i (u i)) = z - isum(1..(G-k))(\\i. V (i+k) (vv\n        i))}
-      #|  {x | x IN {w | w IN ibox G M /\\\n       isum(1..G)(\\i. V i (w i)) = z} /\\ gtail k x = vv} =\n                    {w | (w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z) /\\\n                     gtail k w = vv}
-      #|  vv:num->int
-      #|  w:num->int
-      #|  vv:num->int
-      #|  ibox G M
-      #|  c:num
-      #|  ibox (G-k) M
-      #|  {w | w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z}
-      #|  gtail k :(num->int)->(num->int)
-      #|  forall(V:num->int->int) k G M z c. 1 <= k /\\ k <= G /\\\n     (forall a. CARD {u | u IN ibox k M /\\ isum(1..k)(\\i. V i (u i)) = a} <= c)\n     ==> CARD {w | w IN ibox G M /\\ isum(1..G)(\\i. V i (w i)) = z}\n         <= CARD (ibox (G-k) M) * c
-      #|  findiffset_dp (ffam:num->num->int) e kk P =\n    {p | p IN ibox (2*kk) (&2 * P) /\\\n         isum(1..kk)(\\i. ipoly (ffam i) e (p i + p(i+kk)) - ipoly (ffam i) e (p\n          i)) = &0}
-      #|  i:num
-      #|  i:num
-      #|  isum(1..kk)(\\i. ipoly (ffam i) e (reparam kk (w:num->int) i +\n   reparam kk w (i+kk))) = isum(1..kk)(\\i. ipoly (ffam i) e (w i)) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (reparam kk (w:num->int) i)) =\n                 isum(1..kk)(\\i. ipoly (ffam i) e (w(i+kk)))
-      #|  ~(i + kk <= kk) /\\ (i+kk)-kk = i
-      #|  i:num
-      #|  isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n   = isum(1..kk)(\\i. ipoly (ffam i) e (w(i+kk)))
-      #|  i:num
-      #|  isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n   isum(1..kk)(\\i. ipoly (ffam i) e (w i))
-      #|  1 <= kk
-      #|  i <= kk
-      #|  1 <= i
-      #|  (1 <= i /\\ i <= kk /\\ ~(1 <= i+kk /\\ i+kk <= kk) /\\\n     (kk+1 <= i+kk /\\ i+kk <= 2*kk) /\\ (i+kk)-kk = i):bool
-      #|  i:num
-      #|  forall i. i IN 1..kk ==> reparam kk (w:num->int) i = w(i+kk) /\\\n                                   reparam kk w (i+kk) = w i - w(i+kk)
-      #|  forall(ffam:num->num->int) e kk P (w:num->int). 1 <= kk /\\ w IN ibox (2*kk) P /\\\n     isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n     isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n     ==> isum(1..kk)(\\i. ipoly (ffam i) e (reparam kk w i + reparam kk w\n      (i+kk))\n                         - ipoly (ffam i) e (reparam kk w i)) = &0
-      #|  ibox (2*kk) (&2 * P)
-      #|  P:int
-      #|  w:num->int
-      #|  p:num->int
-      #|  ibox (2*kk) P
-      #|  P:int
-      #|  kk:num
-      #|  w':num->int
-      #|  w:num->int
-      #|  CARD(IMAGE (reparam kk) {w | w IN ibox (2*kk) P /\\\n   isum(1..kk)(\\i. mvf kk (\\j. ipoly ((ffam:num->num->int) j) e) i (w i)) =\n    isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))})
-      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> CARD {w | w IN ibox (2*kk) P /\\\n                  isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i)) =\n                  isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w\n                   i))}\n        <= CARD (findiffset_dp ffam e kk P)
-      #|  (1 <= i /\\ i <= kk /\\ ~(1 <= i+kk /\\ i+kk <= kk) /\\\n       (kk+1 <= i+kk /\\ i+kk <= 2*kk) /\\\n        (i+kk)-kk=i):bool
-      #|  i:num
-      #|  isum(1..kk)(\\i. ipoly (ffam i) e ((p1:num->int) i +\n       (p2:num->int) i) - ipoly (ffam i) e (p1 i))
-      #|  (1 <= i /\\ i <= kk):bool
-      #|  i:num
-      #|  isum(1..kk)(\\i. ipoly (ffam i) e ((p:num->int) i + p(i+kk)) -\n     ipoly (ffam i) e (p i))
-      #|  ijoin kk (ihead kk (p:num->int)) (itail kk p) = p
-      #|  itail kk (p:num->int)
-      #|  ihead kk (p:num->int)
-      #|  p:num->int
-      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> findiffset_dp ffam e kk P =\n        IMAGE (\\pr. ijoin kk (FST pr) (SND pr))\n          {yh | FST yh IN ibox kk (&2 * P) /\\ SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
-      #|  (ibox kk (&2 * P)) CROSS (ibox kk (&2 * P))
-      #|  forall(ffam:num->num->int) e kk P. FINITE {yh:(num->int)#(num->int) | FST yh IN\n  ibox kk (&2 * P) /\\ SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
-      #|  &2 * P:int
-      #|  kk:num
-      #|  (u1:num->int) = u2 /\\ (v1:num->int) = v2
-      #|  v2:num->int
-      #|  u2:num->int
-      #|  v1:num->int
-      #|  u1:num->int
-      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> CARD(findiffset_dp ffam e kk P) =\n        CARD {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n         SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}
-      #|  ibox kk (&2 * P)
-      #|  isum(1..kk)(\\i. ipoly (ffam i) e ((a:num->int) i +\n       (hh:num->int) i) - ipoly (ffam i) e (a i)) = &0
-      #|  isum(1..kk)(\\i. ipoly (ffam i) e ((a:num->int) i +\n       (b:num->int) i) - ipoly (ffam i) e (a i)) = &0
-      #|  a:num->int
-      #|  b:num->int
-      #|  a:num->int
-      #|  {x:(num->int)#(num->int) |\n       (FST x IN ibox kk (&2 * P) /\\ SND x IN ibox kk (&2 * P) /\\\n        isum(1..kk)(\\i. ipoly (ffam i) e (FST x i + SND x i) - ipoly (ffam i) e\n         (FST x i)) = &0)\n       /\\ SND x = hh} =\n    IMAGE (\\y:num->int. (y,hh))\n      {y:num->int | y IN ibox kk (&2 * P) /\\\n                    isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam\n                     i) e (y i)) = &0}
-      #|  forall(ffam:num->num->int) e kk P hh. hh IN ibox kk (&2 * P)\n    ==> CARD {x:(num->int)#(num->int) |\n                (FST x IN ibox kk (&2 * P) /\\ SND x IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. ipoly (ffam i) e (FST x i + SND x i) - ipoly\n                  (ffam i) e (FST x i)) = &0)\n                /\\ SND x = hh}\n        = CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0}
-      #|  (y:num->int,hh:num->int)
-      #|  ~((hh:num->int) IN IMAGE\n       (SND:(num->int)#(num->int)->num->int) PS)
-      #|  y:num->int
-      #|  {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly ((ffam:num->num->int) i) e (y i +\n                         hh i) - ipoly (ffam i) e (y i)) = &0} = {}
-      #|  hh:num->int
-      #|  (yh:(num->int)#(num->int)) IN PS
-      #|  yh:(num->int)#(num->int)
-      #|  hh:num->int
-      #|  x:(num->int)#(num->int)
-      #|  hh:num->int
-      #|  P:int
-      #|  kk:num
-      #|  e:num
-      #|  ffam:num->num->int
-      #|  PS:((num->int)#(num->int))->bool
-      #|  FINITE {x:(num->int)#(num->int) | x IN PS /\\\n     SND x = hh}
-      #|  (x:(num->int)#(num->int)) IN PS
-      #|  x:(num->int)#(num->int)
-      #|  (hh:num->int) IN IMAGE (SND:(num->int)#(num->int)->num->int)\n      PS
-      #|  (hh:num->int) IN ibox kk (&2 * P)
-      #|  hh:num->int
-      #|  nsum (IMAGE (SND:(num->int)#(num->int)->num->int) PS)\n                (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly ((ffam:num->num->int) i) e (y i +\n                         hh i) - ipoly (ffam i) e (y i)) = &0})
-      #|  PS:((num->int)#(num->int))->bool
-      #|  \\x:(num->int)#(num->int). 1
-      #|  SND:(num->int)#(num->int)->(num->int)
-      #|  FINITE (PS:((num->int)#(num->int))->bool)
-      #|  PS = {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n   SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly ((ffam:num->num->int) i) e (FST yh i +\n                 SND yh i) - ipoly (ffam i) e (FST yh i)) = &0}
-      #|  forall(ffam:num->num->int) e kk P.\n    CARD {yh:(num->int)#(num->int) | FST yh IN ibox kk (&2 * P) /\\\n     SND yh IN ibox kk (&2 * P) /\\\n                isum(1..kk)(\\i. ipoly (ffam i) e (FST yh i + SND yh i) - ipoly\n                 (ffam i) e (FST yh i)) = &0}\n        = nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0})
-      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n    ==> (&(CARD(findiffset_dp ffam e kk P)):int) =\n        &(nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                        isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly\n                         (ffam i) e (y i)) = &0}))
-      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n   ==> CARD {w | w IN ibox (2*kk) P /\\\n                 isum(1..kk)(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w i))\n                  =\n                 isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e)\n                  i (w i))}\n       <= CARD (findiffset_dp ffam e kk P)
-      #|  mvf kk (wtail kk (\\j. ipoly ((ffam:num->num->int) j) e)) = mvf\n   kk (\\j. ipoly ((\\n. ffam(n+kk)) j) e)
-      #|  forall(ffam:num->num->int) e kk P. 1 <= kk\n   ==> CARD {w | w IN ibox (2*kk) P /\\\n                 isum(1..kk)(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j) e)) i (w\n                  i)) =\n                 isum((kk+1)..(2*kk))(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j)\n                  e)) i (w i))}\n       <= CARD (findiffset_dp (\\n. ffam (n+kk)) e kk P)
-      #|  &0:int
-      #|  M:int
-      #|  t:num
-      #|  (Wf:(num->int)->num->int->int) hh
-      #|  hh:num->int
-      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     1 <= t /\\ FINITE HH\n     ==> 2 * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n                 isum(1..t)(\\i. mvf t (Wf hh) i (w i)) =\n                  isum(t+1..2*t)(\\i. mvf t (Wf hh) i (w i))})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n                 isum(1..t)(\\i. mvf t (wtail t (Wf hh)) i (w i)) =\n                  isum(t+1..2*t)(\\i. mvf t (wtail t (Wf hh)) i (w i))})
-      #|  (i+t)-t = i
-      #|  i:num
-      #|  t + t = 2 * t
-      #|  1 + t = t + 1
-      #|  t:num
+      #|  (i : Num) => (V : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))
+      #|  (w : (Num) -> Int)
+      #|  (G : Num)
+      #|  (k : Num)
+      #|  (V : (Num, Int) -> Int)
+      #|  isum(op_dot_dot((k : Num) + 1, (G : Num)), (i : Num) => (V : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i))) == isum(op_dot_dot(1, G - k), (i : Num) => V(i + k, (v : (Num) -> Int)(i)))
+      #|  (w : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  ibox((G : Num), (M : Int))
+      #|  gjoin((k : Num), ihead(k, (w1 : (Num) -> Int)), gtail(k, w1)) == gjoin(k, ihead(k, (w2 : (Num) -> Int)), gtail(k, w2))
+      #|  (w2 : (Num) -> Int)
+      #|  (w1 : (Num) -> Int)
+      #|  CARD(IMAGE(ihead((k : Num)), {(w : (Num) -> Int) | (IN(w, ibox((G : Num), (M : Int))) && isum(op_dot_dot(1, G), (i : Num) => (V : (Num, Int) -> Int)(i, w(i))) == (z : Int)) && gtail(k, w) == (v : (Num) -> Int)}))
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 z : Int, \226\136\128 v : (Num) -> Int, 1 <= k && k <= G \226\134\146 CARD({(w : (Num) -> Int) | (IN(w, ibox(G, M)) && isum(op_dot_dot(1, G), (i : Num) => V(i, w(i))) == z) && gtail(k, w) == v}) <= CARD({(u : (Num) -> Int) | IN(u, ibox(k, M)) && isum(op_dot_dot(1, k), (i : Num) => V(i, u(i))) == z - isum(op_dot_dot(1, G - k), (i : Num) => V(i + k, v(i)))})
+      #|  CARD({(u : (Num) -> Int) | IN(u, ibox((k : Num), (M : Int))) && isum(op_dot_dot(1, k), (i : Num) => (V : (Num, Int) -> Int)(i, u(i))) == (z : Int) - isum(op_dot_dot(1, (G : Num) - k), (i : Num) => V(i + k, (vv : (Num) -> Int)(i)))})
+      #|  {(x : (Num) -> Int) | IN(x, {(w : (Num) -> Int) | IN(w, ibox((G : Num), (M : Int))) && isum(op_dot_dot(1, G), (i : Num) => (V : (Num, Int) -> Int)(i, w(i))) == (z : Int)}) && gtail((k : Num), x) == (vv : (Num) -> Int)} == {(w : (Num) -> Int) | (IN(w, ibox(G, M)) && isum(op_dot_dot(1, G), (i : Num) => V(i, w(i))) == z) && gtail(k, w) == vv}
+      #|  (vv : (Num) -> Int)
+      #|  (w : (Num) -> Int)
+      #|  (vv : (Num) -> Int)
+      #|  ibox((G : Num), (M : Int))
+      #|  (c : Num)
+      #|  ibox((G : Num) - (k : Num), (M : Int))
+      #|  {(w : (Num) -> Int) | IN(w, ibox((G : Num), (M : Int))) && isum(op_dot_dot(1, G), (i : Num) => (V : (Num, Int) -> Int)(i, w(i))) == (z : Int)}
+      #|  gtail((k : Num))
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 z : Int, \226\136\128 c : Num, 1 <= k && k <= G && (\226\136\128 a : Int, CARD({(u : (Num) -> Int) | IN(u, ibox(k, M)) && isum(op_dot_dot(1, k), (i : Num) => V(i, u(i))) == a}) <= c) \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(G, M)) && isum(op_dot_dot(1, G), (i : Num) => V(i, w(i))) == z}) <= CARD(ibox(G - k, M)) * c
+      #|  (findiffset_dp : ((Num, Num) -> Int, Num, Num, Int, (Num) -> Int) -> Bool)((ffam : (Num, Num) -> Int), (e : Num), (kk : Num), (P : Int)) == {(p : (Num) -> Int) | IN(p, ibox(2 * kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, p(i) + p(i + kk)) - ipoly(ffam(i), e, p(i))) == int_of_num(0)}
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, (kk : Num)), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), reparam(kk, (w : (Num) -> Int), i) + reparam(kk, w, i + kk))) == isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, w(i))) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, reparam(kk, w, i))) == isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, w(i + kk)))
+      #|  !((i : Num) + (kk : Num) <= kk) && i + kk - kk == i
+      #|  (i : Num)
+      #|  isum(op_dot_dot((kk : Num) + 1, 2 * kk), (i : Num) => mvf(kk, (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num)), i, (w : (Num) -> Int)(i))) == isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, w(i + kk)))
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, (kk : Num)), (i : Num) => mvf(kk, (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num)), i, (w : (Num) -> Int)(i))) == isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, w(i)))
+      #|  1 <= (kk : Num)
+      #|  (i : Num) <= (kk : Num)
+      #|  1 <= (i : Num)
+      #|  1 <= (i : Num) && i <= (kk : Num) && !(1 <= i + kk && i + kk <= kk) && (kk + 1 <= i + kk && i + kk <= 2 * kk) && i + kk - kk == i
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, (kk : Num))) \226\134\146 reparam(kk, (w : (Num) -> Int), i) == w(i + kk) && reparam(kk, w, i + kk) == w(i) - w(i + kk)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, \226\136\128 w : (Num) -> Int, 1 <= kk && IN(w, ibox(2 * kk, P)) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i))) \226\134\146 isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, reparam(kk, w, i) + reparam(kk, w, i + kk)) - ipoly(ffam(i), e, reparam(kk, w, i))) == int_of_num(0)
+      #|  ibox(2 * (kk : Num), int_of_num(2) * (P : Int))
+      #|  (P : Int)
+      #|  (w : (Num) -> Int)
+      #|  (p : (Num) -> Int)
+      #|  ibox(2 * (kk : Num), (P : Int))
+      #|  (P : Int)
+      #|  (kk : Num)
+      #|  (w' : (Num) -> Int)
+      #|  (w : (Num) -> Int)
+      #|  CARD(IMAGE(reparam((kk : Num)), {(w : (Num) -> Int) | IN(w, ibox(2 * kk, (P : Int))) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num)), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i)))}))
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, 1 <= kk \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * kk, P)) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i)))}) <= CARD(findiffset_dp(ffam, e, kk, P))
+      #|  1 <= (i : Num) && i <= (kk : Num) && !(1 <= i + kk && i + kk <= kk) && (kk + 1 <= i + kk && i + kk <= 2 * kk) && i + kk - kk == i
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, (kk : Num)), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), (p1 : (Num) -> Int)(i) + (p2 : (Num) -> Int)(i)) - ipoly(ffam(i), e, p1(i)))
+      #|  1 <= (i : Num) && i <= (kk : Num)
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, (kk : Num)), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), (p : (Num) -> Int)(i) + p(i + kk)) - ipoly(ffam(i), e, p(i)))
+      #|  ijoin((kk : Num), ihead(kk, (p : (Num) -> Int)), itail(kk, p)) == p
+      #|  itail((kk : Num), (p : (Num) -> Int))
+      #|  ihead((kk : Num), (p : (Num) -> Int))
+      #|  (p : (Num) -> Int)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, 1 <= kk \226\134\146 findiffset_dp(ffam, e, kk, P) == IMAGE((pr : ((Num) -> Int, (Num) -> Int)) => ijoin(kk, FST(pr), SND(pr)), {(yh : ((Num) -> Int, (Num) -> Int)) | IN(FST(yh), ibox(kk, int_of_num(2) * P)) && IN(SND(yh), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, FST(yh, i) + SND(yh, i)) - ipoly(ffam(i), e, FST(yh, i))) == int_of_num(0)})
+      #|  CROSS(ibox((kk : Num), int_of_num(2) * (P : Int)), ibox(kk, int_of_num(2) * P))
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, FINITE({(yh : ((Num) -> Int, (Num) -> Int)) | IN(FST(yh), ibox(kk, int_of_num(2) * P)) && IN(SND(yh), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, FST(yh, i) + SND(yh, i)) - ipoly(ffam(i), e, FST(yh, i))) == int_of_num(0)})
+      #|  int_of_num(2) * (P : Int)
+      #|  (kk : Num)
+      #|  (u1 : (Num) -> Int) == (u2 : (Num) -> Int) && (v1 : (Num) -> Int) == (v2 : (Num) -> Int)
+      #|  (v2 : (Num) -> Int)
+      #|  (u2 : (Num) -> Int)
+      #|  (v1 : (Num) -> Int)
+      #|  (u1 : (Num) -> Int)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, 1 <= kk \226\134\146 CARD(findiffset_dp(ffam, e, kk, P)) == CARD({(yh : ((Num) -> Int, (Num) -> Int)) | IN(FST(yh), ibox(kk, int_of_num(2) * P)) && IN(SND(yh), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, FST(yh, i) + SND(yh, i)) - ipoly(ffam(i), e, FST(yh, i))) == int_of_num(0)})
+      #|  ibox((kk : Num), int_of_num(2) * (P : Int))
+      #|  isum(op_dot_dot(1, (kk : Num)), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), (a : (Num) -> Int)(i) + (hh : (Num) -> Int)(i)) - ipoly(ffam(i), e, a(i))) == int_of_num(0)
+      #|  isum(op_dot_dot(1, (kk : Num)), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), (a : (Num) -> Int)(i) + (b : (Num) -> Int)(i)) - ipoly(ffam(i), e, a(i))) == int_of_num(0)
+      #|  (a : (Num) -> Int)
+      #|  (b : (Num) -> Int)
+      #|  (a : (Num) -> Int)
+      #|  {(x : ((Num) -> Int, (Num) -> Int)) | (IN(FST(x), ibox((kk : Num), int_of_num(2) * (P : Int))) && IN(SND(x), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), FST(x, i) + SND(x, i)) - ipoly(ffam(i), e, FST(x, i))) == int_of_num(0)) && SND(x) == (hh : (Num) -> Int)} == IMAGE((y : (Num) -> Int) => (y, hh), {(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)})
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, \226\136\128 hh : (Num) -> Int, IN(hh, ibox(kk, int_of_num(2) * P)) \226\134\146 CARD({(x : ((Num) -> Int, (Num) -> Int)) | (IN(FST(x), ibox(kk, int_of_num(2) * P)) && IN(SND(x), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, FST(x, i) + SND(x, i)) - ipoly(ffam(i), e, FST(x, i))) == int_of_num(0)) && SND(x) == hh}) == CARD({(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)})
+      #|  ((y : (Num) -> Int), (hh : (Num) -> Int))
+      #|  !IN((hh : (Num) -> Int), IMAGE(SND, (PS : (((Num) -> Int, (Num) -> Int)) -> Bool)))
+      #|  (y : (Num) -> Int)
+      #|  {(y : (Num) -> Int) | IN(y, ibox((kk : Num), int_of_num(2) * (P : Int))) && isum(op_dot_dot(1, kk), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), y(i) + (hh : (Num) -> Int)(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)} == {}
+      #|  (hh : (Num) -> Int)
+      #|  IN((yh : ((Num) -> Int, (Num) -> Int)), (PS : (((Num) -> Int, (Num) -> Int)) -> Bool))
+      #|  (yh : ((Num) -> Int, (Num) -> Int))
+      #|  (hh : (Num) -> Int)
+      #|  (x : ((Num) -> Int, (Num) -> Int))
+      #|  (hh : (Num) -> Int)
+      #|  (P : Int)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (PS : (((Num) -> Int, (Num) -> Int)) -> Bool)
+      #|  FINITE({(x : ((Num) -> Int, (Num) -> Int)) | IN(x, (PS : (((Num) -> Int, (Num) -> Int)) -> Bool)) && SND(x) == (hh : (Num) -> Int)})
+      #|  IN((x : ((Num) -> Int, (Num) -> Int)), (PS : (((Num) -> Int, (Num) -> Int)) -> Bool))
+      #|  (x : ((Num) -> Int, (Num) -> Int))
+      #|  IN((hh : (Num) -> Int), IMAGE(SND, (PS : (((Num) -> Int, (Num) -> Int)) -> Bool)))
+      #|  IN((hh : (Num) -> Int), ibox((kk : Num), int_of_num(2) * (P : Int)))
+      #|  (hh : (Num) -> Int)
+      #|  nsum(IMAGE(SND, (PS : (((Num) -> Int, (Num) -> Int)) -> Bool)), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox((kk : Num), int_of_num(2) * (P : Int))) && isum(op_dot_dot(1, kk), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)}))
+      #|  (PS : (((Num) -> Int, (Num) -> Int)) -> Bool)
+      #|  (x : ((Num) -> Int, (Num) -> Int)) => 1
+      #|  (SND : (((Num) -> Int, (Num) -> Int), Num) -> Int)
+      #|  FINITE((PS : (((Num) -> Int, (Num) -> Int)) -> Bool))
+      #|  (PS : (((Num) -> Int, (Num) -> Int)) -> Bool) == {(yh : ((Num) -> Int, (Num) -> Int)) | IN(FST(yh), ibox((kk : Num), int_of_num(2) * (P : Int))) && IN(SND(yh), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), FST(yh, i) + SND(yh, i)) - ipoly(ffam(i), e, FST(yh, i))) == int_of_num(0)}
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, CARD({(yh : ((Num) -> Int, (Num) -> Int)) | IN(FST(yh), ibox(kk, int_of_num(2) * P)) && IN(SND(yh), ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, FST(yh, i) + SND(yh, i)) - ipoly(ffam(i), e, FST(yh, i))) == int_of_num(0)}) == nsum(ibox(kk, int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)}))
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, 1 <= kk \226\134\146 int_of_num(CARD(findiffset_dp(ffam, e, kk, P))) == int_of_num(nsum(ibox(kk, int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)})))
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, 1 <= kk \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * kk, P)) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i)))}) <= CARD(findiffset_dp(ffam, e, kk, P))
+      #|  mvf((kk : Num), wtail(kk, (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num)))) == mvf(kk, (j : Num) => ipoly(((n : Num) => ffam(n + kk))(j), e))
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, 1 <= kk \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(2 * kk, P)) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, wtail(kk, (j : Num) => ipoly(ffam(j), e)), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, wtail(kk, (j : Num) => ipoly(ffam(j), e)), i, w(i)))}) <= CARD(findiffset_dp((n : Num) => ffam(n + kk), e, kk, P))
+      #|  int_of_num(0)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (Wf : ((Num) -> Int, Num, Int) -> Int)((hh : (Num) -> Int))
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 HH : ((Num) -> Int) -> Bool, 1 <= t && FINITE(HH) \226\134\146 2 * nsum(HH, (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => Wf(hh, i, y(i))) == int_of_num(0)})) <= nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, Wf(hh), i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, Wf(hh), i, w(i)))})) + nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, wtail(t, Wf(hh)), i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, wtail(t, Wf(hh)), i, w(i)))}))
+      #|  (i : Num) + (t : Num) - t == i
+      #|  (i : Num)
+      #|  (t : Num) + t == 2 * t
+      #|  1 + (t : Num) == t + 1
+      #|  (t : Num)
       #|  1
-      #|  \\i. mvf t (W:num->int->int) i (w i)
-      #|  t:num
-      #|  i:num
-      #|  forall(W:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. mvf t W i (w i)) = isum(1..t)(\\i. W i (w i)) /\\\n     isum(t+1..2*t)(\\i. mvf t W i (w i)) = isum(1..t)(\\i. W i\n      (w(i+t)))
-      #|  (i+t)-t = i
-      #|  i:num
-      #|  t + t = 2 * t
-      #|  1 + t = t + 1
-      #|  t:num
+      #|  (i : Num) => mvf((t : Num), (W : (Num, Int) -> Int), i, (w : (Num) -> Int)(i))
+      #|  (t : Num)
+      #|  (i : Num)
+      #|  \226\136\128 W : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, isum(op_dot_dot(1, t), (i : Num) => mvf(t, W, i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i, w(i))) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, W, i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i, w(i + t)))
+      #|  (i : Num) + (t : Num) - t == i
+      #|  (i : Num)
+      #|  (t : Num) + t == 2 * t
+      #|  1 + (t : Num) == t + 1
+      #|  (t : Num)
       #|  1
-      #|  \\i. mvf t (wtail t (W:num->int->int)) i (w i)
-      #|  t:num
-      #|  i:num
-      #|  forall(W:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. mvf t (wtail t W) i (w i)) = isum(1..t)(\\i. W (i+t) (w i))\n      /\\\n     isum(t+1..2*t)(\\i. mvf t (wtail t W) i (w i)) = isum(1..t)(\\i. W (i+t)\n      (w(i+t)))
-      #|  j:num
-      #|  forall(psi:num->int) d y:int. ipoly (\\i. --(psi i)) d y = --(ipoly psi d y)
-      #|  sgnf (phi:num->num->int) (neg:num->bool) j =\n  if neg j then (\\i. --(phi j i)) else phi j
-      #|  forall(phi:num->num->int) neg j d y:int.\n     ipoly (sgnf phi neg j) d y = (if neg j then --(ipoly (phi j) d y) else\n      ipoly (phi j) d y)
-      #|  forall(phi:num->num->int) neg j d. ~(phi j d = &0) ==> ~(sgnf phi neg j d = &0)
-      #|  forall(phi:num->num->int) neg j i. abs(sgnf phi neg j i) = abs(phi j i)
-      #|  forall(s:num->bool) (MaxMult:num) A B (mfn:(num->int)->int).\n     isum {a:num->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n      (forall i. ~(i IN s) ==> a i = &0)}\n          (\\a. &(MaxMult EXP (CARD s)) * &(lincount s a (mfn a) B))\n     = &(MaxMult EXP (CARD s)) *\n       isum {a:num->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n        (forall i. ~(i IN s) ==> a i = &0)}\n            (\\a. &(lincount s a (mfn a) B))
-      #|  ~(i+t <= t) /\\ (i+t)-t = i
-      #|  i:num
-      #|  t+1 = 1+t /\\ 2*t = t+t
-      #|  forall(V:num->int->int) t (w:num->int).\n     isum(t+1..2*t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w i)))) =\n      --(isum(1..t)(\\i. V i (w(i+t))))
-      #|  i <= t
-      #|  i:num
-      #|  forall(V:num->int->int) t (w:num->int).\n     isum(1..t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w i)))) =\n      isum(1..t)(\\i. V i (w i))
-      #|  isum(1..t)(\\i. (if i <= t then (V:num->int->int) i (w i) else\n     --(V (i-t) (w i)))) = isum(1..t)(\\i. V i (w i))
-      #|  t+t = 2*t
-      #|  1 <= t+1
-      #|  2*t = t+t
-      #|  isum(1..2*t)(\\i. (if i <= t then (V:num->int->int) i (w i) else --(V (i-t)\n    (w i))))\n    = isum(1..t)(\\i. V i (w i)) + --(isum(1..t)(\\i. V i (w(i+t))))
-      #|  (b<=>c) ==> (a/\\b<=>a/\\c)
-      #|  w:num->int
-      #|  forall(V:num->int->int) t M.\n     CARD {w | w IN ibox (2*t) M /\\\n      isum(1..t)(\\i. V i (w i)) = isum(1..t)(\\i. V i (w(i+t)))}\n   = CARD {w | w IN ibox (2*t) M /\\\n               isum(1..2*t)(\\i. (if i <= t then V i (w i) else --(V (i-t) (w\n                i)))) = &0}
-      #|  forall(V:num->int->int) t M.\n     CARD {w | w IN ibox (2*t) M /\\\n      isum(1..t)(\\i. V i (w i)) = isum(1..t)(\\i. V i (w(i+t)))}\n   = CARD {w | w IN ibox (2*t) M /\\\n    isum(1..2*t)(\\i. signfam V t i (w i)) = &0}
-      #|  hh:num->int
-      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n             isum(1..t)(\\i. mvf t (Wf hh) i (w i)) = isum(t+1..2*t)(\\i.\n              mvf t (Wf hh) i (w i))})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. signfam (Wf hh) t i (w i)) = &0})
-      #|  M:int
-      #|  t:num
-      #|  \\j. (Wf:(num->int)->num->int->int) hh (j+t)
-      #|  hh:num->int
-      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n             isum(1..t)(\\i. mvf t (wtail t (Wf hh)) i (w i)) =\n              isum(t+1..2*t)(\\i. mvf t (wtail t (Wf hh)) i (w i))})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. signfam (\\j. Wf hh (j+t)) t i (w i)) = &0})
-      #|  HH:(num->int)->bool
-      #|  M:int
-      #|  t:num
-      #|  Wf:(num->int)->num->int->int
-      #|  forall(Wf:(num->int)->num->int->int) t M HH.\n     1 <= t /\\ FINITE HH\n     ==> 2 * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n          isum(1..2*t)(\\i. signfam (Wf hh) t i (w i)) = &0})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n           isum(1..2*t)(\\i. signfam (\\j. Wf hh (j+t)) t i (w i)) = &0})
-      #|  (2*p)*B = p*B + p*B
-      #|  (2*p)*FS = p*(2*FS)
-      #|  p*(SH+ST):num
-      #|  forall p FS SH ST B:num. 2*FS <= SH+ST /\\ p*SH <= p*B /\\\n  p*ST <= p*B ==> (2*p)*FS <= (2*p)*B
-      #|  i:num
-      #|  p permutes 1..n
-      #|  (p:num->num) i = i
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  i:num
-      #|  forall(p:num->num) n M (w:num->int).\n     p permutes 1..n /\\ w IN ibox n M ==> (\\i. w(p i)) IN ibox n M
-      #|  (abs:int->int)
-      #|  (abs:int->int)
-      #|  (abs:int->int)
-      #|  1..n
-      #|  p:num->num
-      #|  inverse (p:num->num) j
-      #|  j:num
-      #|  forall(p:num->num) n M (w1:num->int) (w2:num->int).\n     p permutes 1..n /\\ w1 IN ibox n M /\\ w2 IN ibox n M /\\\n     (\\i. w1(p i)) = (\\i. w2(p i)) ==> w1 = w2
-      #|  1..n
-      #|  p:num->num
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  1..n
-      #|  p:num->num
-      #|  i:num
-      #|  n:num
-      #|  inverse(p:num->num)
-      #|  i:num
-      #|  inverse(p:num->num)
-      #|  p:num->num
-      #|  forall(p:num->num) n (g:num->int). p permutes 1..n\n     ==> isum(1..n)(\\i. g(p i)) = isum(1..n) g
-      #|  \\i:num. (V:num->int->int) i\n       ((x':num->int) i)
-      #|  n:num
-      #|  p:num->num
-      #|  x':num->int
-      #|  M:int
-      #|  n:num
-      #|  p:num->num
-      #|  \\j:num. (V:num->int->int) j\n       ((w:num->int)(inverse (p:num->num) j))
-      #|  n:num
-      #|  p:num->num
-      #|  w:num->int
-      #|  M:int
-      #|  n:num
-      #|  inverse(p:num->num)
-      #|  x:num
-      #|  \\j:num. (w:num->int)(inverse (p:num->num) j)
-      #|  w:num->int
-      #|  forall(p:num->num) n M (V:num->int->int). p permutes 1..n ==>\n     {w | w IN ibox n M /\\ isum(1..n)(\\i. (V:num->int->int) (p i) (w i)) = &0}\n       = IMAGE (\\w. (\\i. w(p i))) {w | w IN ibox n M /\\\n        isum(1..n)(\\j. V j (w j)) = &0}
-      #|  w:num->int
-      #|  w:num->int
-      #|  w:num->int
-      #|  ibox n M
-      #|  M:int
-      #|  n:num
-      #|  p:num->num
-      #|  forall(p:num->num) n M (V:num->int->int).\n     p permutes 1..n\n     ==> CARD {w | w IN ibox n M /\\ isum(1..n)(\\i. V i (w i)) = &0}\n       = CARD {w | w IN ibox n M /\\ isum(1..n)(\\i. V (p i) (w i)) = &0}
-      #|  (Wf:(num->int)->num->int->int) hh
-      #|  M:int
-      #|  2*t
-      #|  p:num->num
-      #|  hh:num->int
-      #|  forall(p:num->num) t M (Wf:(num->int)->num->int->int) (HH:(num->int)->bool).\n     p permutes 1..(2*t)\n     ==> nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (w i)) = &0})\n       = nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. Wf hh (p i) (w i)) = &0})
-      #|  HH:(num->int)->bool
-      #|  M:int
-      #|  t:num
-      #|  \\hh k. (Wf:(num->int)->num->int->int) hh ((p:num->num) k)
-      #|  HH:(num->int)->bool
-      #|  Wf:(num->int)->num->int->int
-      #|  M:int
-      #|  t:num
-      #|  p:num->num
-      #|  forall(p:num->num) t M (Wf:(num->int)->num->int->int) (HH:(num->int)->bool).\n     1 <= t /\\ FINITE HH /\\ p permutes 1..(2*t)\n     ==> 2 * nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (w i)) = &0})\n         <= nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n          isum(1..2*t)(\\i. signfam (\\k. Wf hh (p k)) t i (w i)) = &0})\n          + nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n           isum(1..2*t)(\\i. signfam (\\j. Wf hh (p(j+t))) t i (w i)) = &0})
-      #|  j:num
-      #|  (pp:num->num->num) 0 = pp' 0 /\\\n   ((bp:num->bool) 0 <=> bp' 0)
-      #|  forall s (Wf:(num->int)->num->int->int) t pp pp' bp bp'.\n     (forall j. j < s ==> pp j = pp' j) /\\ (forall j. j < s ==> (bp j <=> bp' j))\n     ==> pleaf s Wf t pp bp = pleaf s Wf t pp' bp'
-      #|  (j+1)-1=j
-      #|  ~(j+1=0)
-      #|  j:num
-      #|  forall s (Wf:(num->int)->num->int->int) t pp b bp.\n     pleaf (SUC s) Wf t pp (\\n. if n = 0 then b else bp(n-1))\n   = pleaf s (childfam Wf t (pp 0) b) t (\\j. pp(j+1)) bp
-      #|  T
-      #|  F
-      #|  nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n   isum(1..2*t)(\\i. signfam (\\j. (Wf:(num->int)->num->int->int) hh ((pp\n    0)(j+t))) t i (w i)) = &0})
-      #|  nsum HH (\\hh. CARD {w | w IN ibox (2*t) M /\\\n   isum(1..2*t)(\\i. signfam (\\k. (Wf:(num->int)->num->int->int) hh ((pp 0) k))\n    t i (w i)) = &0})
-      #|  HH:(num->int)->bool
-      #|  Wf:(num->int)->num->int->int
-      #|  M:int
-      #|  t:num
-      #|  (pp:num->num->num) 0
-      #|  bp:num->bool
-      #|  forall b. 2 EXP s * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n        isum(1..2*t)(\\i. childfam (Wf:(num->int)->num->int->int) t (pp 0) b hh\n         i (y i)) = &0}) <= 2 EXP s * B
-      #|  B:num
-      #|  pp:num->num->num
-      #|  Wf:(num->int)->num->int->int
-      #|  (\\n. F):num->bool
-      #|  forall t M HH. 1 <= t /\\ FINITE HH ==>\n   forall s (Wf:(num->int)->num->int->int) (pp:num->num->num) B.\n     (forall j. (pp j) permutes 1..(2*t))\n     /\\ (forall bp:num->bool. nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. pleaf s Wf t pp bp hh i (y i)) = &0}) <= B)\n     ==> 2 EXP s * nsum HH (\\hh. CARD {y | y IN ibox (2*t) M /\\\n      isum(1..2*t)(\\i. Wf hh i (y i)) = &0}) <= 2 EXP s * B
-      #|  B:num
-      #|  \\j:num. (pp:num->num->num)(j+1)
-      #|  childfam (Wf:(num->int)->num->int->int) t (pp 0) b
-      #|  B:num
-      #|  \\j:num. (pp:num->num->num)(j+1)
-      #|  childfam (Wf:(num->int)->num->int->int) t (pp 0) b
-      #|  B:num
-      #|  \\j:num. (pp:num->num->num)(j+1)
-      #|  childfam (Wf:(num->int)->num->int->int) t (pp 0) b
-      #|  SUC s
-      #|  \\n:num. if n = 0 then b else\n        (bp:num->bool)(n-1)
-      #|  &0 <= M ==> &0:int <= M - --M + &1
-      #|  &0 <= M ==> --M:int <= M
-      #|  {v:int | abs v <= M} = {k:int | --M <= k /\\ k <= M}
-      #|  forall M:int. &0 <= M ==> {v:int | abs v <= M} HAS_SIZE (2 * num_of_int M + 1)
-      #|  a:int
-      #|  forall a b:int. &1 <= a /\\ &1 <= b ==> &1 <= a * b
-      #|  2*2*(r+2)*x = (2*(r+2))*(2*x) /\\\n       (r+2)*2*(r+2) = (2*(r+2))*(r+2)
-      #|  2*(r+2) = 2*(r+2)*1
-      #|  2*(r+2) <= 2*(r+2)*(q+r+1) /\\\n   (r+2)*2*(r+2) <= 2*2*(r+2)*(q+r+1)
-      #|  (q+r+1)-(r+1) = q
-      #|  (r+2)-1 = r+1
-      #|  e-2
-      #|  ?r. e = r+2
-      #|  G-(e-1)
-      #|  ?q. G = q + (e-1)
-      #|  forall(e:num) (G:num). 2 <= e /\\ e-1 <= G\n     ==> (G-(e-1))*(2*e) + (2*e*G - 2*e) = 2*(2*e*G) - e*(2*e)
-      #|  forall(e:num) (G:num) (P:int). 2 <= e /\\ e-1 <= G\n     ==> (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) = P pow (2*(2*e*G) -\n      e*(2*e))
-      #|  e*1
-      #|  e <= e*(2*e)
-      #|  e*(2*e-1) = e*(2*e) - e
-      #|  a * b * c = b * (a * c):int
-      #|  (P:int) pow e = P pow 1 * P pow (e-1) /\\\n     (&2:int) pow (e+1) = &2 pow 2 * &2 pow (e-1)
-      #|  (&2 * (P:int)) pow (e-1) = &2 pow (e-1) * P pow (e-1)
-      #|  ((&2 * (P:int)) * &2 * (&2 * P) pow (e-1)) =\n    &2 pow (e+1) * P pow e
-      #|  forall(e:num) (kk:num) (P:int). &1 <= P /\\ 2 <= e /\\ e*(2*e) <= 2*kk\n     ==> P pow (2*kk - e*(2*e)) * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e\n      - 1) = (&2 pow (e+1)) pow (2*e-1) * P pow (2*kk - e)
-      #|  e*(2*e) = e*(2*e)
-      #|  2*(2*e*G) = e*(2*2*G)
-      #|  e <= 2*G
-      #|  P:int
-      #|  2*e*G:num
-      #|  e:num
-      #|  P:int
-      #|  G:num
-      #|  e:num
-      #|  forall(e:num) (G:num) (P:int) (Cm:int) (Cf:int).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P\n     ==> (Cm pow (2*e)) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n         (Cf * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e-1))\n       = (Cm pow (2*e) * Cf * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) -\n        e)
-      #|  a * b * c * d = a * (b * c)\n   * d:int
-      #|  Cm * pp * Cf * fam = Cf * (pp * fam) * Cm:int
-      #|  Cf:int
-      #|  Cm:int
-      #|  P:int
-      #|  G:num
-      #|  e:num
-      #|  forall e (G:num) (P:int) (Cm:int) (Cf:int) (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm /\\ &1 <= Cf /\\\n     &FS <= Cm pow (2*e) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n            (Cf * ((&2 * P) * &2 * (&2 * P) pow (e-1)) pow (2*e-1))\n     ==> &FS <= (Cm pow (2*e) * Cf * (&2 pow (e+1)) pow (2*e-1)) * P pow\n      (2*(2*e*G) - e)
-      #|  forall e. 2 <= e ==> 2 < CARD(1..(2*e))
-      #|  (\\a. &0):(num->int)->int
-      #|  MaxMult:num
-      #|  mult:num->int->num
-      #|  B:int
-      #|  &0:int
-      #|  hh:num->int
-      #|  s:num->bool
-      #|  hh:num->int
-      #|  FINITE {hh:num->int | (forall i. i IN s ==> abs(hh i) <= A) /\\\n    (forall i. ~(i IN s) ==> hh i = &0)}
-      #|  isum {hh:num->int | (forall i. i IN s ==> abs(hh i) <= A) /\\\n   (forall i. ~(i IN s) ==> hh i = &0)}\n                   (\\hh. &(MaxMult EXP (CARD(s:num->bool))) * &(lincount s hh\n                    (&0) B))
-      #|  forall(s:num->bool) (mult:num->int->num) (MaxMult:num) A B (Cf:int).\n     FINITE s /\\ 2 < CARD s /\\ &1 <= A /\\ A <= &2 * B /\\\n      &2 * B <= A pow (CARD s - 1) /\\\n     (forall i z. mult i z <= MaxMult) /\\\n     (forall mfn:(num->int)->int.\n         isum {a:num->int | (forall i. i IN s ==> abs(a i) <= A) /\\\n          (forall i. ~(i IN s) ==> a i = &0)}\n              (\\a. &(lincount s a (mfn a) B))\n         <= Cf * (A * &2 * B) pow (CARD s - 1))\n     ==> &(nsum {hh:num->int | (forall i. i IN s ==> abs(hh i) <= A) /\\\n      (forall i. ~(i IN s) ==> hh i = &0)}\n                  (\\hh. nsum {z:num->int | (forall i. i IN s ==> abs(z i) <= B) /\\\n                   (forall i. ~(i IN s) ==> z i = &0) /\\\n                                           isum s (\\i. hh i * z i) = &0}\n                             (\\z. nproduct s (\\i. mult i (z i)))))\n             <= &(MaxMult EXP (CARD s)) * Cf * (A * &2 * B) pow (CARD s - 1)
-      #|  (&2:int) pow (e+1) = &2 * &2 * &2 pow (e-1) /\\\n    (P:int) pow e = P * P pow (e-1)
-      #|  forall(P:int) (e:num) (W:int). 2 <= e /\\ &1 <= P\n   ==> (&2 * P) * &2 * (W * (&2 * P) pow (e-1)) = W * &2 pow (e+1) * P pow e
-      #|  mfn:(num->int)->int
-      #|  B:int
-      #|  (&2 *\n        P):int
-      #|  (Cf:int) * ((&2 * P) * &2 * B) pow (2*e-1)
-      #|  mfn:(num->int)->int
-      #|  Cfp:int
-      #|  B:int
-      #|  (&2 * P):int
-      #|  MaxMult:num
-      #|  mult:num->int->num
-      #|  1..(2*e)
-      #|  &0 <= ((&2 * (P:int)) * &2 * B) pow (2*e-1)
-      #|  &1 <= &2 * (P:int) /\\ &2 * P <= &2 * B /\\\n   &2 * B <= (&2 * P) pow (2*e-1)
-      #|  forall(mult:num->int->num) (MaxMult:num) (P:int) (e:num) (Cf:int) (Cfp:int)\n  (B:int).\n     2 <= e /\\ &1 <= P /\\ Cf <= Cfp /\\ &2 * P <= &2 * B /\\\n      &2 * B <= (&2 * P) pow (2*e-1) /\\\n     (forall i z. mult i z <= MaxMult) /\\\n     (forall A B' mfn.\n        &1 <= A /\\ A <= &2 * B' /\\ &2 * B' <= A pow (CARD (1..2 * e) - 1)\n        ==> isum {a | (forall i. i IN 1..2 * e ==> abs (a i) <= A) /\\\n         (forall i. ~(i IN 1..2 * e) ==> a i = &0)}\n                 (\\a. &(lincount (1..2 * e) a (mfn a) B')) <= Cf * (A * &2 *\n                  B') pow (CARD (1..2 * e) - 1))\n     ==> &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n      (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= B) /\\\n                 (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                           (\\z. nproduct (1..(2*e)) (\\i. mult i (z i)))))\n         <= &(MaxMult EXP (2*e)) * Cfp * ((&2 * P) * &2 * B) pow (2*e-1)
-      #|  (x:int) = y ==> &FS <= x ==> &FS <= y
-      #|  W:int
-      #|  e:num
-      #|  P:int
-      #|  FS:num
-      #|  (Cf:int) * (W:int) pow\n   (2*e-1)
-      #|  Cm:int
-      #|  P:int
-      #|  G:num
-      #|  e:num
-      #|  forall e (G:num) (P:int) (Cm:int) (Cf:int) (W:int) (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm /\\ &1 <= Cf /\\ &1 <= W /\\\n     &FS <= Cm pow (2*e) * (P pow (G-(e-1))) pow (2*e) * P pow (2*e*G - 2*e) *\n            (Cf * ((&2 * P) * &2 * (W * (&2 * P) pow (e-1))) pow (2*e-1))\n     ==> &FS <= (Cm pow (2*e) * (Cf * W pow (2*e-1)) * (&2 pow (e+1)) pow\n      (2*e-1)) * P pow (2*(2*e*G) - e)
-      #|  FS:num
-      #|  g:num
-      #|  (\\g. Bvec (y:num->int) g) = (zv:num->int)
-      #|  g:num
-      #|  isum(0..m-1)(\\g. (w:num->int) g * Bvec (y:num->int) g) =\n     isum(0..m-1)(\\g. w g * (zv:num->int) g)
-      #|  y:num->int
-      #|  nsum {y:num->int | y IN S /\\ (\\g. Bvec y g) = (zv:num->int)}\n         (\\y. if isum(0..m-1)(\\g. (w:num->int) g * Bvec y g) = &0 then 1 else\n          0) =\n    nsum {y:num->int | y IN S /\\ (\\g. Bvec y g) = (zv:num->int)}\n         (\\y. if isum(0..m-1)(\\g. (w:num->int) g * zv g) = &0 then 1 else 0)
-      #|  S:(num->int)->bool
-      #|  FINITE {y:num->int | y IN S /\\\n   (\\g. Bvec y g) = (zv:num->int)}
-      #|  x0:num->int
-      #|  zv:num->int
-      #|  S:(num->int)->bool
-      #|  \\y:num->int. if isum(0..m-1)(\\g. (w:num->int) g * Bvec y g) =\n                  &0 then 1 else 0
-      #|  \\y:num->int. (\\g. Bvec y g):num->int
-      #|  {y:num->int | y IN S /\\\n    isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n                  {y | y IN S /\\\n                   (\\y. isum(0..m-1)(\\g. (w:num->int) g * Bvec y g) = &0) y}
-      #|  CARD {y:num->int | y IN S /\\ isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n    nsum S (\\y:num->int. if isum(0..m-1)(\\g. (w:num->int) g * Bvec y g) = &0\n     then 1 else 0)
-      #|  forall(S:(num->int)->bool) (Bvec:(num->int)->num->int) (w:num->int) (m:num).\n     FINITE S\n     ==> CARD {y | y IN S /\\ isum(0..m-1)(\\g. w g * Bvec y g) = &0} =\n         nsum (IMAGE (\\y. (\\g. Bvec y g)) S)\n              (\\zv. if isum(0..m-1)(\\g. w g * zv g) = &0\n                    then CARD {y | y IN S /\\ (\\g. Bvec y g) = zv} else 0)
-      #|  nproduct {g | g < 2*e} (\\g:num. MaxMult)
-      #|  forall(cnt:num->num) (MaxMult:num) (e:num).\n     (forall g. g < 2*e ==> cnt g <= MaxMult)\n     ==> nproduct {g | g < 2*e} cnt <= MaxMult EXP (2*e)
-      #|  y0:num->int
-      #|  (zv:num->int) IN boxset
-      #|  y0:num->int
-      #|  zv:num->int
-      #|  CARD {y:num->int | y IN (S:(num->int)->bool) /\\\n     (\\g:num. (Bvec:(num->int)->num->int) y g) = (zv:num->int)} =\n                  nproduct {g | g < 2*e} (\\g. (perblk:num->int->num) g (zv g))
-      #|  zv:num->int
-      #|  nsum (IMAGE (\\y:num->int. (\\g. Bvec y g)) S)\n         (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0 then MaxMult EXP (2*e)\n          else 0)
-      #|  2*e
-      #|  w:num->int
-      #|  Bvec:(num->int)->num->int
-      #|  S:(num->int)->bool
-      #|  forall(S:(num->int)->bool) (Bvec:(num->int)->num->int) (w:num->int) (e:num)\n     (perblk:num->int->num) (MaxMult:num) (boxset:(num->int)->bool).\n      FINITE S /\\ FINITE boxset /\\\n      (forall zv. zv IN IMAGE (\\y. (\\g. Bvec y g)) S\n            ==> CARD {y | y IN S /\\ (\\g. Bvec y g) = zv} =\n                nproduct {g | g < 2*e} (\\g. perblk g (zv g))) /\\\n      (forall g v. g < 2*e ==> perblk g v <= MaxMult) /\\\n      (forall y. y IN S ==> (\\g. Bvec y g) IN boxset)\n      ==> CARD {y | y IN S /\\ isum(0..(2*e)-1)(\\g. w g * Bvec y g) = &0} <=\n          nsum boxset (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0\n                            then MaxMult EXP (2*e) else 0)
-      #|  zv:num->int
-      #|  zv:num->int
-      #|  zv:num->int
-      #|  g < 2*e
-      #|  g:num
-      #|  forall(e:num) (w:num->int) (Fv:num->int).\n     0 < e\n     ==> isum(0..(2*e)-1)(\\g. w g * (if g < 2*e then Fv g else &0)) =\n      isum(0..(2*e)-1)(\\g. w g * Fv g)
-      #|  g:num
-      #|  g:num
-      #|  g:num
-      #|  (b <=> c) ==> (a /\\ b <=> a /\\ c)
-      #|  y:num->int
-      #|  forall e (t:num) (M:int) (W:num->num->int->int) (zv:num->int).\n     (forall g. ~(g < 2*e) ==> zv g = &0)\n     ==> {y | y IN ibox ((2*e)*t) M /\\\n              (\\g. if g < 2*e then isum(1..t)(\\i. W g i (y (g*t+i))) else &0) =\n               zv} =\n         {y | y IN ibox ((2*e)*t) M /\\\n              (forall g. g < 2*e ==> isum(1..t)(\\i. W g i (y (g*t+i))) = zv g)}
-      #|  2*e
-      #|  zv:num->int
-      #|  M:int
-      #|  t:num
-      #|  \\(g:num) (i:num) (x:int). (W:num->num->int->int) g i x
-      #|  x0:num->int
-      #|  zv IN IMAGE (\\y g. if g < 2*e then isum(1..t)(\\i.\n      (W:num->num->int->int) g i (y (g*t+i))) else &0) (ibox ((2*e)*t) M)
-      #|  forall g. ~(g < 2*e) ==> (zv:num->int) g = &0
-      #|  zv:num->int
-      #|  boxset:(num->int)->bool
-      #|  MaxMult:num
-      #|  \\(g:num) (v:int). CARD {u | u IN ibox t M /\\\n      isum(1..t)(\\i. (W:num->num->int->int) g i (u i)) = v}
-      #|  e:num
-      #|  w:num->int
-      #|  \\(y:num->int) (g:num). if g < 2*e then isum(1..t)(\\i.\n      (W:num->num->int->int) g i (y (g*t+i))) else &0
-      #|  ibox ((2*e)*t) M
-      #|  forall e (t:num) (M:int) (W:num->num->int->int) (w:num->int) (MaxMult:num)\n  (boxset:(num->int)->bool).\n     0 < e /\\ FINITE boxset /\\\n     (forall g v. g < 2*e ==> CARD {u | u IN ibox t M /\\\n      isum(1..t)(\\i. W g i (u i)) = v} <= MaxMult) /\\\n     (forall y. y IN ibox ((2*e)*t) M ==> (\\g. if g < 2*e then isum(1..t)(\\i. W g i\n      (y (g*t+i))) else &0) IN boxset)\n     ==> CARD {y | y IN ibox ((2*e)*t) M /\\\n                   isum(0..(2*e)-1)(\\g. w g * isum(1..t)(\\i. W g i (y\n                    (g*t+i)))) = &0}\n         <= nsum boxset (\\zv. if isum(0..(2*e)-1)(\\g. w g * zv g) = &0 then\n          MaxMult EXP (2*e) else 0)
-      #|  (2 * e) * G = ((2*e-1)+1) * G
-      #|  forall e (G:num). 1 <= e ==> (2*e-1)*G + G = 2*e*G
-      #|  q2-1
-      #|  q1:num
-      #|  p2-1
-      #|  p1:num
-      #|  G:num
-      #|  p1*G+(p2-1)
-      #|  forall p1 p2 q1 q2 (G:num). 1 <= p2 /\\ p2 <= G /\\ 1 <= q2 /\\ q2 <= G /\\\n  p1*G+p2 = q1*G+q2 ==> p1 = q1 /\\ p2 = q2
-      #|  G:num
-      #|  e:num
-      #|  forall p1 p2 e (G:num). 1 <= e /\\ p1 <= 2*e-1 /\\ p2 <= G ==> p1*G+p2 <= 2*e*G
-      #|  1 <= G ==> ~(G = 0)
-      #|  (n-1) DIV G < 2*e
-      #|  1 <= G ==> ~(G = 0)
-      #|  G:num
-      #|  n-1
-      #|  (n-1) MOD G + 1
-      #|  (n-1) DIV G
-      #|  G:num
-      #|  e:num
-      #|  p2:num
-      #|  p1:num
-      #|  n:num
-      #|  forall e (G:num). 1 <= e /\\\n  1 <= G ==> IMAGE (\\(i,j). i*G+j) {i,j | i IN 0..2 * e - 1 /\\\n   j IN 1..G} = 1..2*e*G
-      #|  G:num
-      #|  p2':num
-      #|  p1':num
-      #|  p2:num
-      #|  p1:num
-      #|  forall e (G:num). 1 <= G ==> (forall x y. x IN {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G} /\\\n  y IN {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G} /\\\n   (\\(i,j). i*G+j) x = (\\(i,j). i*G+j) y ==> x = y)
-      #|  {i,j | i IN 0..2 * e - 1 /\\ j IN 1..G}
-      #|  H:num->int
-      #|  (\\(i,j). i*G+j):num#num->num
-      #|  G:num
-      #|  e:num
-      #|  G:num
-      #|  e:num
-      #|  \\g i. (H:num->int)(g*G+i)
-      #|  \\g:num. 1..G
-      #|  0..2*e-1
-      #|  forall e (G:num) (H:num->int). 1 <= e /\\ 1 <= G ==>\n     isum(1..2*e*G) H = isum(0..2*e-1)(\\g. isum(1..G)(\\i. H(g*G+i)))
-      #|  G * 2 * e = 2 * e * G
-      #|  ~(G = 0)
-      #|  forall x e (G:num). 1 <= G /\\ x IN 1..2*e*G ==> (x-1) DIV G < 2*e /\\\n  (x-1) MOD G < G
-      #|  G:num
-      #|  y-1
-      #|  G:num
-      #|  x-1
-      #|  ~(G = 0)
-      #|  (y-1) MOD G
-      #|  (y-1) DIV\n     G
-      #|  (x-1) MOD G
-      #|  (x-1) DIV G
-      #|  G:num
-      #|  e:num
-      #|  y:num
-      #|  G:num
-      #|  e:num
-      #|  x:num
-      #|  y:num
-      #|  x:num
-      #|  G:num
-      #|  e:num
-      #|  x:num
-      #|  x:num
-      #|  lab:num->num
-      #|  ss:num
-      #|  forall g1 r1 g2 r2. g1 < 2*e /\\ r1 < G /\\ g2 < 2*e /\\ r2 < G /\\\n   (en:num->num->num) g1 r1 = en g2 r2 ==> g1 = g2 /\\\n    r1 = r2
-      #|  forall e ss (G:num) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> (\\j. if j IN 1..2*e*G then en ((j-1) DIV G) ((j-1) MOD G) else j)\n      permutes 1..2*e*G
-      #|  (cpsi:int) * M pow d = (cpsi * M pow (d-j)) * M pow j
-      #|  &0 <= (M:int) /\\ &0 <= (cpsi:int) /\\ &0 <= abs x /\\\n    abs x <= M
-      #|  forall(fj:int) (x:int) (M:int) (cpsi:int) (d:num) (j:num).\n     &1 <= M /\\ abs x <= M /\\ &1 <= cpsi /\\ j <= d /\\\n      abs fj <= cpsi * M pow (d - j)\n     ==> abs(fj * x pow j) <= cpsi * M pow d
-      #|  (d+1)-0 = d+1
-      #|  j:num
-      #|  isum(0..d)(\\j:num. cpsi * M pow d)
-      #|  isum(0..d)(\\j. abs((f:num->int) j * x pow j))
-      #|  forall(f:num->int) d (x:int) (M:int) (cpsi:int).\n      &1 <= M /\\ abs x <= M /\\ &1 <= cpsi /\\\n       (forall j. j <= d ==> abs(f j) <= cpsi * M pow (d - j))\n      ==> abs(ipoly f d x) <= &(d+1) * cpsi * M pow d
-      #|  i-1
-      #|  g:num
-      #|  G:num
-      #|  (g*G+i)-1
-      #|  G:num
-      #|  e:num
-      #|  i:num
-      #|  g:num
-      #|  1 <= g * G + i /\\\n   g * G + i <= 2 * e * G
-      #|  1 <= e
-      #|  i:num
-      #|  g:num
-      #|  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-      #|  y:num->int
-      #|  \\i x. if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i then --(hh (leafidx\n      ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i) * ipoly (PSI hh (leafidx ss (e*G)\n       (\\j. RIFFLE(e*G)) (\\j. F) i)) (e-1) x) else hh (leafidx ss (e*G) (\\j.\n        RIFFLE(e*G)) (\\j. F) i) * ipoly (PSI hh (leafidx ss (e*G) (\\j.\n         RIFFLE(e*G)) (\\j. F) i)) (e-1) x
-      #|  &2*P:int
-      #|  2*e*G
-      #|  (\\j. if j IN 1..2*e*G then en ((j-1) DIV G) ((j-1) MOD G)\n   else j):num->num
-      #|  lab:num->num
-      #|  ss:num
-      #|  (\\j. if j IN 1..2*e*G then en ((j-1) DIV G) ((j-1) MOD G) else\n   j) permutes 1..2*e*G
+      #|  (i : Num) => mvf((t : Num), wtail(t, (W : (Num, Int) -> Int)), i, (w : (Num) -> Int)(i))
+      #|  (t : Num)
+      #|  (i : Num)
+      #|  \226\136\128 W : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, isum(op_dot_dot(1, t), (i : Num) => mvf(t, wtail(t, W), i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i + t, w(i))) && isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, wtail(t, W), i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => W(i + t, w(i + t)))
+      #|  (j : Num)
+      #|  \226\136\128 psi : (Num) -> Int, \226\136\128 d : Num, \226\136\128 y : Int, ipoly((i : Num) => -psi(i), d, y) == -ipoly(psi, d, y)
+      #|  (sgnf : ((Num, Num) -> Int, (Num) -> Bool, Num, Num) -> Int)((phi : (Num, Num) -> Int), (neg : (Num) -> Bool), (j : Num)) == (if neg(j) { (i : Num) => -phi(j, i) } else { phi(j) })
+      #|  \226\136\128 phi : (Num, Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 j : Num, \226\136\128 d : Num, \226\136\128 y : Int, ipoly(sgnf(phi, neg, j), d, y) == (if neg(j) { -ipoly(phi(j), d, y) } else { ipoly(phi(j), d, y) })
+      #|  \226\136\128 phi : (Num, Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 j : Num, \226\136\128 d : Num, !(phi(j, d) == int_of_num(0)) \226\134\146 !(sgnf(phi, neg, j, d) == int_of_num(0))
+      #|  \226\136\128 phi : (Num, Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 j : Num, \226\136\128 i : Num, abs(sgnf(phi, neg, j, i)) == abs(phi(j, i))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 MaxMult : Num, \226\136\128 A : Int, \226\136\128 B : Int, \226\136\128 mfn : ((Num) -> Int) -> Int, isum({(a : (Num) -> Int) | (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (Num) -> Int) => int_of_num(EXP(MaxMult, CARD(s))) * int_of_num(lincount(s, a, mfn(a), B))) == int_of_num(EXP(MaxMult, CARD(s))) * isum({(a : (Num) -> Int) | (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (Num) -> Int) => int_of_num(lincount(s, a, mfn(a), B)))
+      #|  !((i : Num) + (t : Num) <= t) && i + t - t == i
+      #|  (i : Num)
+      #|  (t : Num) + 1 == 1 + t && 2 * t == t + t
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, isum(op_dot_dot(t + 1, 2 * t), (i : Num) => if i <= t { V(i, w(i)) } else { -V(i - t, w(i)) }) == -isum(op_dot_dot(1, t), (i : Num) => V(i, w(i + t)))
+      #|  (i : Num) <= (t : Num)
+      #|  (i : Num)
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 w : (Num) -> Int, isum(op_dot_dot(1, t), (i : Num) => if i <= t { V(i, w(i)) } else { -V(i - t, w(i)) }) == isum(op_dot_dot(1, t), (i : Num) => V(i, w(i)))
+      #|  isum(op_dot_dot(1, (t : Num)), (i : Num) => if i <= t { (V : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i)) } else { -V(i - t, w(i)) }) == isum(op_dot_dot(1, t), (i : Num) => V(i, w(i)))
+      #|  (t : Num) + t == 2 * t
+      #|  1 <= (t : Num) + 1
+      #|  2 * (t : Num) == t + t
+      #|  isum(op_dot_dot(1, 2 * (t : Num)), (i : Num) => if i <= t { (V : (Num, Int) -> Int)(i, (w : (Num) -> Int)(i)) } else { -V(i - t, w(i)) }) == isum(op_dot_dot(1, t), (i : Num) => V(i, w(i))) + -isum(op_dot_dot(1, t), (i : Num) => V(i, w(i + t)))
+      #|  (b : Bool) == (c : Bool) \226\134\146 ((a : Bool) && b) == (a && c)
+      #|  (w : (Num) -> Int)
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => V(i, w(i + t)))}) == CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => if i <= t { V(i, w(i)) } else { -V(i - t, w(i)) }) == int_of_num(0)})
+      #|  \226\136\128 V : (Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => V(i, w(i))) == isum(op_dot_dot(1, t), (i : Num) => V(i, w(i + t)))}) == CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam(V, t, i, w(i))) == int_of_num(0)})
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 HH : ((Num) -> Int) -> Bool, nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, Wf(hh), i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, Wf(hh), i, w(i)))})) == nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam(Wf(hh), t, i, w(i))) == int_of_num(0)}))
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (j : Num) => (Wf : ((Num) -> Int, Num, Int) -> Int)((hh : (Num) -> Int), j + (t : Num))
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 HH : ((Num) -> Int) -> Bool, nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, t), (i : Num) => mvf(t, wtail(t, Wf(hh)), i, w(i))) == isum(op_dot_dot(t + 1, 2 * t), (i : Num) => mvf(t, wtail(t, Wf(hh)), i, w(i)))})) == nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam((j : Num) => Wf(hh, j + t), t, i, w(i))) == int_of_num(0)}))
+      #|  (HH : ((Num) -> Int) -> Bool)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (Wf : ((Num) -> Int, Num, Int) -> Int)
+      #|  \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 HH : ((Num) -> Int) -> Bool, 1 <= t && FINITE(HH) \226\134\146 2 * nsum(HH, (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => Wf(hh, i, y(i))) == int_of_num(0)})) <= nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam(Wf(hh), t, i, w(i))) == int_of_num(0)})) + nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam((j : Num) => Wf(hh, j + t), t, i, w(i))) == int_of_num(0)}))
+      #|  2 * (p : Num) * (B : Num) == p * B + p * B
+      #|  2 * (p : Num) * (FS : Num) == p * (2 * FS)
+      #|  (p : Num) * ((SH : Num) + (ST : Num))
+      #|  \226\136\128 p : Num, \226\136\128 FS : Num, \226\136\128 SH : Num, \226\136\128 ST : Num, \226\136\128 B : Num, 2 * FS <= SH + ST && p * SH <= p * B && p * ST <= p * B \226\134\146 2 * p * FS <= 2 * p * B
+      #|  (i : Num)
+      #|  permutes((p : (Num) -> Num), op_dot_dot(1, (n : Num)))
+      #|  (p : (Num) -> Num)((i : Num)) == i
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, \226\136\128 w : (Num) -> Int, permutes(p, op_dot_dot(1, n)) && IN(w, ibox(n, M)) \226\134\146 IN((i : Num) => w(p(i)), ibox(n, M))
+      #|  int_abs
+      #|  int_abs
+      #|  int_abs
+      #|  op_dot_dot(1, (n : Num))
+      #|  (p : (Num) -> Num)
+      #|  inverse((p : (Num) -> Num), (j : Num))
+      #|  (j : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, \226\136\128 w1 : (Num) -> Int, \226\136\128 w2 : (Num) -> Int, permutes(p, op_dot_dot(1, n)) && IN(w1, ibox(n, M)) && IN(w2, ibox(n, M)) && ((i : Num) => w1(p(i))) == ((i : Num) => w2(p(i))) \226\134\146 w1 == w2
+      #|  op_dot_dot(1, (n : Num))
+      #|  (p : (Num) -> Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  op_dot_dot(1, (n : Num))
+      #|  (p : (Num) -> Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  inverse((p : (Num) -> Num))
+      #|  (i : Num)
+      #|  inverse((p : (Num) -> Num))
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 g : (Num) -> Int, permutes(p, op_dot_dot(1, n)) \226\134\146 isum(op_dot_dot(1, n), (i : Num) => g(p(i))) == isum(op_dot_dot(1, n), g)
+      #|  (i : Num) => (V : (Num, Int) -> Int)(i, (x' : (Num) -> Int)(i))
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (x' : (Num) -> Int)
+      #|  (M : Int)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (j : Num) => (V : (Num, Int) -> Int)(j, (w : (Num) -> Int)(inverse((p : (Num) -> Num), j)))
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (w : (Num) -> Int)
+      #|  (M : Int)
+      #|  (n : Num)
+      #|  inverse((p : (Num) -> Num))
+      #|  (x : Num)
+      #|  (j : Num) => (w : (Num) -> Int)(inverse((p : (Num) -> Num), j))
+      #|  (w : (Num) -> Int)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, \226\136\128 V : (Num, Int) -> Int, permutes(p, op_dot_dot(1, n)) \226\134\146 {(w : (Num) -> Int) | IN(w, ibox(n, M)) && isum(op_dot_dot(1, n), (i : Num) => V(p(i), w(i))) == int_of_num(0)} == IMAGE((w : (Num) -> Int) => (i : Num) => w(p(i)), {(w : (Num) -> Int) | IN(w, ibox(n, M)) && isum(op_dot_dot(1, n), (j : Num) => V(j, w(j))) == int_of_num(0)})
+      #|  (w : (Num) -> Int)
+      #|  (w : (Num) -> Int)
+      #|  (w : (Num) -> Int)
+      #|  ibox((n : Num), (M : Int))
+      #|  (M : Int)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, \226\136\128 V : (Num, Int) -> Int, permutes(p, op_dot_dot(1, n)) \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(n, M)) && isum(op_dot_dot(1, n), (i : Num) => V(i, w(i))) == int_of_num(0)}) == CARD({(w : (Num) -> Int) | IN(w, ibox(n, M)) && isum(op_dot_dot(1, n), (i : Num) => V(p(i), w(i))) == int_of_num(0)})
+      #|  (Wf : ((Num) -> Int, Num, Int) -> Int)((hh : (Num) -> Int))
+      #|  (M : Int)
+      #|  2 * (t : Num)
+      #|  (p : (Num) -> Num)
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 HH : ((Num) -> Int) -> Bool, permutes(p, op_dot_dot(1, 2 * t)) \226\134\146 nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => Wf(hh, i, w(i))) == int_of_num(0)})) == nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => Wf(hh, p(i), w(i))) == int_of_num(0)}))
+      #|  (HH : ((Num) -> Int) -> Bool)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (hh : (Num) -> Int) => (k : Num) => (Wf : ((Num) -> Int, Num, Int) -> Int)(hh, (p : (Num) -> Num)(k))
+      #|  (HH : ((Num) -> Int) -> Bool)
+      #|  (Wf : ((Num) -> Int, Num, Int) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 HH : ((Num) -> Int) -> Bool, 1 <= t && FINITE(HH) && permutes(p, op_dot_dot(1, 2 * t)) \226\134\146 2 * nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => Wf(hh, i, w(i))) == int_of_num(0)})) <= nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam((k : Num) => Wf(hh, p(k)), t, i, w(i))) == int_of_num(0)})) + nsum(HH, (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam((j : Num) => Wf(hh, p(j + t)), t, i, w(i))) == int_of_num(0)}))
+      #|  (j : Num)
+      #|  (pp : (Num, Num) -> Num)(0) == (pp' : (Num, Num) -> Num)(0) && (bp : (Num) -> Bool)(0) == (bp' : (Num) -> Bool)(0)
+      #|  \226\136\128 s : Num, \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 pp : (Num, Num) -> Num, \226\136\128 pp' : (Num, Num) -> Num, \226\136\128 bp : (Num) -> Bool, \226\136\128 bp' : (Num) -> Bool, (\226\136\128 j : Num, j < s \226\134\146 pp(j) == pp'(j)) && (\226\136\128 j : Num, j < s \226\134\146 bp(j) == bp'(j)) \226\134\146 pleaf(s, Wf, t, pp, bp) == pleaf(s, Wf, t, pp', bp')
+      #|  (j : Num) + 1 - 1 == j
+      #|  !((j : Num) + 1 == 0)
+      #|  (j : Num)
+      #|  \226\136\128 s : Num, \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 t : Num, \226\136\128 pp : (Num, Num) -> Num, \226\136\128 b : Bool, \226\136\128 bp : (Num) -> Bool, pleaf(SUC(s), Wf, t, pp, (n : Num) => if n == 0 { b } else { bp(n - 1) }) == pleaf(s, childfam(Wf, t, pp(0), b), t, (j : Num) => pp(j + 1), bp)
+      #|  true
+      #|  false
+      #|  nsum((HH : ((Num) -> Int) -> Bool), (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam((j : Num) => (Wf : ((Num) -> Int, Num, Int) -> Int)(hh, (pp : (Num, Num) -> Num)(0, j + t)), t, i, w(i))) == int_of_num(0)}))
+      #|  nsum((HH : ((Num) -> Int) -> Bool), (hh : (Num) -> Int) => CARD({(w : (Num) -> Int) | IN(w, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, 2 * t), (i : Num) => signfam((k : Num) => (Wf : ((Num) -> Int, Num, Int) -> Int)(hh, (pp : (Num, Num) -> Num)(0, k)), t, i, w(i))) == int_of_num(0)}))
+      #|  (HH : ((Num) -> Int) -> Bool)
+      #|  (Wf : ((Num) -> Int, Num, Int) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (pp : (Num, Num) -> Num)(0)
+      #|  (bp : (Num) -> Bool)
+      #|  \226\136\128 b : Bool, EXP(2, (s : Num)) * nsum((HH : ((Num) -> Int) -> Bool), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (t : Num), (M : Int))) && isum(op_dot_dot(1, 2 * t), (i : Num) => childfam((Wf : ((Num) -> Int, Num, Int) -> Int), t, (pp : (Num, Num) -> Num)(0), b, hh, i, y(i))) == int_of_num(0)})) <= EXP(2, s) * (B : Num)
+      #|  (B : Num)
+      #|  (pp : (Num, Num) -> Num)
+      #|  (Wf : ((Num) -> Int, Num, Int) -> Int)
+      #|  (n : Num) => false
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 HH : ((Num) -> Int) -> Bool, 1 <= t && FINITE(HH) \226\134\146 (\226\136\128 s : Num, \226\136\128 Wf : ((Num) -> Int, Num, Int) -> Int, \226\136\128 pp : (Num, Num) -> Num, \226\136\128 B : Num, (\226\136\128 j : Num, permutes(pp(j), op_dot_dot(1, 2 * t))) && (\226\136\128 bp : (Num) -> Bool, nsum(HH, (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => pleaf(s, Wf, t, pp, bp, hh, i, y(i))) == int_of_num(0)})) <= B) \226\134\146 EXP(2, s) * nsum(HH, (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * t, M)) && isum(op_dot_dot(1, 2 * t), (i : Num) => Wf(hh, i, y(i))) == int_of_num(0)})) <= EXP(2, s) * B)
+      #|  (B : Num)
+      #|  (j : Num) => (pp : (Num, Num) -> Num)(j + 1)
+      #|  childfam((Wf : ((Num) -> Int, Num, Int) -> Int), (t : Num), (pp : (Num, Num) -> Num)(0), (b : Bool))
+      #|  (B : Num)
+      #|  (j : Num) => (pp : (Num, Num) -> Num)(j + 1)
+      #|  childfam((Wf : ((Num) -> Int, Num, Int) -> Int), (t : Num), (pp : (Num, Num) -> Num)(0), (b : Bool))
+      #|  (B : Num)
+      #|  (j : Num) => (pp : (Num, Num) -> Num)(j + 1)
+      #|  childfam((Wf : ((Num) -> Int, Num, Int) -> Int), (t : Num), (pp : (Num, Num) -> Num)(0), (b : Bool))
+      #|  SUC((s : Num))
+      #|  (n : Num) => if n == 0 { (b : Bool) } else { (bp : (Num) -> Bool)(n - 1) }
+      #|  int_of_num(0) <= (M : Int) \226\134\146 int_of_num(0) <= M - -M + int_of_num(1)
+      #|  int_of_num(0) <= (M : Int) \226\134\146 -M <= M
+      #|  {(v : Int) | abs(v) <= (M : Int)} == {(k : Int) | -M <= k && k <= M}
+      #|  \226\136\128 M : Int, int_of_num(0) <= M \226\134\146 HAS_SIZE({(v : Int) | abs(v) <= M}, 2 * num_of_int(M) + 1)
+      #|  (a : Int)
+      #|  \226\136\128 a : Int, \226\136\128 b : Int, int_of_num(1) <= a && int_of_num(1) <= b \226\134\146 int_of_num(1) <= a * b
+      #|  2 * (2 * (((r : Num) + 2) * (x : Num))) == 2 * (r + 2) * (2 * x) && (r + 2) * (2 * (r + 2)) == 2 * (r + 2) * (r + 2)
+      #|  2 * ((r : Num) + 2) == 2 * ((r + 2) * 1)
+      #|  2 * ((r : Num) + 2) <= 2 * ((r + 2) * ((q : Num) + (r + 1))) && (r + 2) * (2 * (r + 2)) <= 2 * (2 * ((r + 2) * (q + (r + 1))))
+      #|  (q : Num) + ((r : Num) + 1) - (r + 1) == q
+      #|  (r : Num) + 2 - 1 == r + 1
+      #|  (e : Num) - 2
+      #|  \226\136\131 r : Num, (e : Num) == r + 2
+      #|  (G : Num) - ((e : Num) - 1)
+      #|  \226\136\131 q : Num, (G : Num) == q + ((e : Num) - 1)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, 2 <= e && e - 1 <= G \226\134\146 (G - (e - 1)) * (2 * e) + (2 * (e * G) - 2 * e) == 2 * (2 * (e * G)) - e * (2 * e)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 P : Int, 2 <= e && e - 1 <= G \226\134\146 pow(pow(P, G - (e - 1)), 2 * e) * pow(P, 2 * (e * G) - 2 * e) == pow(P, 2 * (2 * (e * G)) - e * (2 * e))
+      #|  (e : Num) * 1
+      #|  (e : Num) <= e * (2 * e)
+      #|  (e : Num) * (2 * e - 1) == e * (2 * e) - e
+      #|  (a : Int) * ((b : Int) * (c : Int)) == b * (a * c)
+      #|  pow((P : Int), (e : Num)) == pow(P, 1) * pow(P, e - 1) && pow(int_of_num(2), e + 1) == pow(int_of_num(2), 2) * pow(int_of_num(2), e - 1)
+      #|  pow(int_of_num(2) * (P : Int), (e : Num) - 1) == pow(int_of_num(2), e - 1) * pow(P, e - 1)
+      #|  int_of_num(2) * (P : Int) * (int_of_num(2) * pow(int_of_num(2) * P, (e : Num) - 1)) == pow(int_of_num(2), e + 1) * pow(P, e)
+      #|  \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, int_of_num(1) <= P && 2 <= e && e * (2 * e) <= 2 * kk \226\134\146 pow(P, 2 * kk - e * (2 * e)) * pow(int_of_num(2) * P * (int_of_num(2) * pow(int_of_num(2) * P, e - 1)), 2 * e - 1) == pow(pow(int_of_num(2), e + 1), 2 * e - 1) * pow(P, 2 * kk - e)
+      #|  (e : Num) * (2 * e) == e * (2 * e)
+      #|  2 * (2 * ((e : Num) * (G : Num))) == e * (2 * (2 * G))
+      #|  (e : Num) <= 2 * (G : Num)
+      #|  (P : Int)
+      #|  2 * ((e : Num) * (G : Num))
+      #|  (e : Num)
+      #|  (P : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 P : Int, \226\136\128 Cm : Int, \226\136\128 Cf : Int, 2 <= e && e - 1 <= G && int_of_num(1) <= P \226\134\146 pow(Cm, 2 * e) * (pow(pow(P, G - (e - 1)), 2 * e) * (pow(P, 2 * (e * G) - 2 * e) * (Cf * pow(int_of_num(2) * P * (int_of_num(2) * pow(int_of_num(2) * P, e - 1)), 2 * e - 1)))) == pow(Cm, 2 * e) * (Cf * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) * pow(P, 2 * (2 * (e * G)) - e)
+      #|  (a : Int) * ((b : Int) * ((c : Int) * (d : Int))) == a * (b * c * d)
+      #|  (Cm : Int) * ((pp : Int) * ((Cf : Int) * (fam : Int))) == Cf * (pp * fam * Cm)
+      #|  (Cf : Int)
+      #|  (Cm : Int)
+      #|  (P : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 P : Int, \226\136\128 Cm : Int, \226\136\128 Cf : Int, \226\136\128 FS : Num, 2 <= e && e - 1 <= G && int_of_num(1) <= P && int_of_num(1) <= Cm && int_of_num(1) <= Cf && int_of_num(FS) <= pow(Cm, 2 * e) * (pow(pow(P, G - (e - 1)), 2 * e) * (pow(P, 2 * (e * G) - 2 * e) * (Cf * pow(int_of_num(2) * P * (int_of_num(2) * pow(int_of_num(2) * P, e - 1)), 2 * e - 1)))) \226\134\146 int_of_num(FS) <= pow(Cm, 2 * e) * (Cf * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) * pow(P, 2 * (2 * (e * G)) - e)
+      #|  \226\136\128 e : Num, 2 <= e \226\134\146 2 < CARD(op_dot_dot(1, 2 * e))
+      #|  (a : (Num) -> Int) => int_of_num(0)
+      #|  (MaxMult : Num)
+      #|  (mult : (Num, Int) -> Num)
+      #|  (B : Int)
+      #|  int_of_num(0)
+      #|  (hh : (Num) -> Int)
+      #|  (s : (Num) -> Bool)
+      #|  (hh : (Num) -> Int)
+      #|  FINITE({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, (s : (Num) -> Bool)) \226\134\146 abs(hh(i)) <= (A : Int)) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 hh(i) == int_of_num(0))})
+      #|  isum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, (s : (Num) -> Bool)) \226\134\146 abs(hh(i)) <= (A : Int)) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => int_of_num(EXP((MaxMult : Num), CARD(s))) * int_of_num(lincount(s, hh, int_of_num(0), (B : Int))))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 mult : (Num, Int) -> Num, \226\136\128 MaxMult : Num, \226\136\128 A : Int, \226\136\128 B : Int, \226\136\128 Cf : Int, FINITE(s) && 2 < CARD(s) && int_of_num(1) <= A && A <= int_of_num(2) * B && int_of_num(2) * B <= pow(A, CARD(s) - 1) && (\226\136\128 i : Num, \226\136\128 z : Int, mult(i, z) <= MaxMult) && (\226\136\128 mfn : ((Num) -> Int) -> Int, isum({(a : (Num) -> Int) | (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 a(i) == int_of_num(0))}, (a : (Num) -> Int) => int_of_num(lincount(s, a, mfn(a), B))) <= Cf * pow(A * (int_of_num(2) * B), CARD(s) - 1)) \226\134\146 int_of_num(nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(hh(i)) <= A) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, s) \226\134\146 abs(z(i)) <= B) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 z(i) == int_of_num(0)) && isum(s, (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(s, (i : Num) => mult(i, z(i)))))) <= int_of_num(EXP(MaxMult, CARD(s))) * (Cf * pow(A * (int_of_num(2) * B), CARD(s) - 1))
+      #|  pow(int_of_num(2), (e : Num) + 1) == int_of_num(2) * (int_of_num(2) * pow(int_of_num(2), e - 1)) && pow((P : Int), e) == P * pow(P, e - 1)
+      #|  \226\136\128 P : Int, \226\136\128 e : Num, \226\136\128 W : Int, 2 <= e && int_of_num(1) <= P \226\134\146 int_of_num(2) * P * (int_of_num(2) * (W * pow(int_of_num(2) * P, e - 1))) == W * (pow(int_of_num(2), e + 1) * pow(P, e))
+      #|  (mfn : ((Num) -> Int) -> Int)
+      #|  (B : Int)
+      #|  int_of_num(2) * (P : Int)
+      #|  (Cf : Int) * pow(int_of_num(2) * (P : Int) * (int_of_num(2) * (B : Int)), 2 * (e : Num) - 1)
+      #|  (mfn : ((Num) -> Int) -> Int)
+      #|  (Cfp : Int)
+      #|  (B : Int)
+      #|  int_of_num(2) * (P : Int)
+      #|  (MaxMult : Num)
+      #|  (mult : (Num, Int) -> Num)
+      #|  op_dot_dot(1, 2 * (e : Num))
+      #|  int_of_num(0) <= pow(int_of_num(2) * (P : Int) * (int_of_num(2) * (B : Int)), 2 * (e : Num) - 1)
+      #|  int_of_num(1) <= int_of_num(2) * (P : Int) && int_of_num(2) * P <= int_of_num(2) * (B : Int) && int_of_num(2) * B <= pow(int_of_num(2) * P, 2 * (e : Num) - 1)
+      #|  \226\136\128 mult : (Num, Int) -> Num, \226\136\128 MaxMult : Num, \226\136\128 P : Int, \226\136\128 e : Num, \226\136\128 Cf : Int, \226\136\128 Cfp : Int, \226\136\128 B : Int, 2 <= e && int_of_num(1) <= P && Cf <= Cfp && int_of_num(2) * P <= int_of_num(2) * B && int_of_num(2) * B <= pow(int_of_num(2) * P, 2 * e - 1) && (\226\136\128 i : Num, \226\136\128 z : Int, mult(i, z) <= MaxMult) && (\226\136\128 A : Int, \226\136\128 B' : Int, \226\136\128 mfn : ((Num) -> Int) -> Int, int_of_num(1) <= A && A <= int_of_num(2) * B' && int_of_num(2) * B' <= pow(A, CARD(op_dot_dot(1, 2 * e)) - 1) \226\134\146 isum({(a : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 a(i) == int_of_num(0))}, (a : (Num) -> Int) => int_of_num(lincount(op_dot_dot(1, 2 * e), a, mfn(a), B'))) <= Cf * pow(A * (int_of_num(2) * B'), CARD(op_dot_dot(1, 2 * e)) - 1)) \226\134\146 int_of_num(nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= B) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => mult(i, z(i)))))) <= int_of_num(EXP(MaxMult, 2 * e)) * (Cfp * pow(int_of_num(2) * P * (int_of_num(2) * B), 2 * e - 1))
+      #|  (x : Int) == (y : Int) \226\134\146 int_of_num((FS : Num)) <= x \226\134\146 int_of_num(FS) <= y
+      #|  (W : Int)
+      #|  (e : Num)
+      #|  (P : Int)
+      #|  (FS : Num)
+      #|  (Cf : Int) * pow((W : Int), 2 * (e : Num) - 1)
+      #|  (Cm : Int)
+      #|  (P : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 P : Int, \226\136\128 Cm : Int, \226\136\128 Cf : Int, \226\136\128 W : Int, \226\136\128 FS : Num, 2 <= e && e - 1 <= G && int_of_num(1) <= P && int_of_num(1) <= Cm && int_of_num(1) <= Cf && int_of_num(1) <= W && int_of_num(FS) <= pow(Cm, 2 * e) * (pow(pow(P, G - (e - 1)), 2 * e) * (pow(P, 2 * (e * G) - 2 * e) * (Cf * pow(int_of_num(2) * P * (int_of_num(2) * (W * pow(int_of_num(2) * P, e - 1))), 2 * e - 1)))) \226\134\146 int_of_num(FS) <= pow(Cm, 2 * e) * (Cf * pow(W, 2 * e - 1) * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) * pow(P, 2 * (2 * (e * G)) - e)
+      #|  (FS : Num)
+      #|  (g : Num)
+      #|  ((g : Num) => (Bvec : ((Num) -> Int, Num) -> Int)((y : (Num) -> Int), g)) == (zv : (Num) -> Int)
+      #|  (g : Num)
+      #|  isum(op_dot_dot(0, (m : Num) - 1), (g : Num) => (w : (Num) -> Int)(g) * (Bvec : ((Num) -> Int, Num) -> Int)((y : (Num) -> Int), g)) == isum(op_dot_dot(0, m - 1), (g : Num) => w(g) * (zv : (Num) -> Int)(g))
+      #|  (y : (Num) -> Int)
+      #|  nsum({(y : (Num) -> Int) | IN(y, (S : ((Num) -> Int) -> Bool)) && ((g : Num) => (Bvec : ((Num) -> Int, Num) -> Int)(y, g)) == (zv : (Num) -> Int)}, (y : (Num) -> Int) => if isum(op_dot_dot(0, (m : Num) - 1), (g : Num) => (w : (Num) -> Int)(g) * Bvec(y, g)) == int_of_num(0) { 1 } else { 0 }) == nsum({(y : (Num) -> Int) | IN(y, S) && ((g : Num) => Bvec(y, g)) == zv}, (y : (Num) -> Int) => if isum(op_dot_dot(0, m - 1), (g : Num) => w(g) * zv(g)) == int_of_num(0) { 1 } else { 0 })
+      #|  (S : ((Num) -> Int) -> Bool)
+      #|  FINITE({(y : (Num) -> Int) | IN(y, (S : ((Num) -> Int) -> Bool)) && ((g : Num) => (Bvec : ((Num) -> Int, Num) -> Int)(y, g)) == (zv : (Num) -> Int)})
+      #|  (x0 : (Num) -> Int)
+      #|  (zv : (Num) -> Int)
+      #|  (S : ((Num) -> Int) -> Bool)
+      #|  (y : (Num) -> Int) => if isum(op_dot_dot(0, (m : Num) - 1), (g : Num) => (w : (Num) -> Int)(g) * (Bvec : ((Num) -> Int, Num) -> Int)(y, g)) == int_of_num(0) { 1 } else { 0 }
+      #|  (y : (Num) -> Int) => (g : Num) => (Bvec : ((Num) -> Int, Num) -> Int)(y, g)
+      #|  {(y : (Num) -> Int) | IN(y, (S : ((Num) -> Int) -> Bool)) && isum(op_dot_dot(0, (m : Num) - 1), (g : Num) => (w : (Num) -> Int)(g) * (Bvec : ((Num) -> Int, Num) -> Int)(y, g)) == int_of_num(0)} == {(y : (Num) -> Int) | IN(y, S) && ((y : (Num) -> Int) => isum(op_dot_dot(0, m - 1), (g : Num) => w(g) * Bvec(y, g)) == int_of_num(0))(y)}
+      #|  CARD({(y : (Num) -> Int) | IN(y, (S : ((Num) -> Int) -> Bool)) && isum(op_dot_dot(0, (m : Num) - 1), (g : Num) => (w : (Num) -> Int)(g) * (Bvec : ((Num) -> Int, Num) -> Int)(y, g)) == int_of_num(0)}) == nsum(S, (y : (Num) -> Int) => if isum(op_dot_dot(0, m - 1), (g : Num) => w(g) * Bvec(y, g)) == int_of_num(0) { 1 } else { 0 })
+      #|  \226\136\128 S : ((Num) -> Int) -> Bool, \226\136\128 Bvec : ((Num) -> Int, Num) -> Int, \226\136\128 w : (Num) -> Int, \226\136\128 m : Num, FINITE(S) \226\134\146 CARD({(y : (Num) -> Int) | IN(y, S) && isum(op_dot_dot(0, m - 1), (g : Num) => w(g) * Bvec(y, g)) == int_of_num(0)}) == nsum(IMAGE((y : (Num) -> Int) => (g : Num) => Bvec(y, g), S), (zv : (Num) -> Int) => if isum(op_dot_dot(0, m - 1), (g : Num) => w(g) * zv(g)) == int_of_num(0) { CARD({(y : (Num) -> Int) | IN(y, S) && ((g : Num) => Bvec(y, g)) == zv}) } else { 0 })
+      #|  nproduct({(g : Num) | g < 2 * (e : Num)}, (g : Num) => (MaxMult : Num))
+      #|  \226\136\128 cnt : (Num) -> Num, \226\136\128 MaxMult : Num, \226\136\128 e : Num, (\226\136\128 g : Num, g < 2 * e \226\134\146 cnt(g) <= MaxMult) \226\134\146 nproduct({(g : Num) | g < 2 * e}, cnt) <= EXP(MaxMult, 2 * e)
+      #|  (y0 : (Num) -> Int)
+      #|  IN((zv : (Num) -> Int), (boxset : ((Num) -> Int) -> Bool))
+      #|  (y0 : (Num) -> Int)
+      #|  (zv : (Num) -> Int)
+      #|  CARD({(y : (Num) -> Int) | IN(y, (S : ((Num) -> Int) -> Bool)) && ((g : Num) => (Bvec : ((Num) -> Int, Num) -> Int)(y, g)) == (zv : (Num) -> Int)}) == nproduct({(g : Num) | g < 2 * (e : Num)}, (g : Num) => (perblk : (Num, Int) -> Num)(g, zv(g)))
+      #|  (zv : (Num) -> Int)
+      #|  nsum(IMAGE((y : (Num) -> Int) => (g : Num) => (Bvec : ((Num) -> Int, Num) -> Int)(y, g), (S : ((Num) -> Int) -> Bool)), (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * (e : Num) - 1), (g : Num) => (w : (Num) -> Int)(g) * zv(g)) == int_of_num(0) { EXP((MaxMult : Num), 2 * e) } else { 0 })
+      #|  2 * (e : Num)
+      #|  (w : (Num) -> Int)
+      #|  (Bvec : ((Num) -> Int, Num) -> Int)
+      #|  (S : ((Num) -> Int) -> Bool)
+      #|  \226\136\128 S : ((Num) -> Int) -> Bool, \226\136\128 Bvec : ((Num) -> Int, Num) -> Int, \226\136\128 w : (Num) -> Int, \226\136\128 e : Num, \226\136\128 perblk : (Num, Int) -> Num, \226\136\128 MaxMult : Num, \226\136\128 boxset : ((Num) -> Int) -> Bool, FINITE(S) && FINITE(boxset) && (\226\136\128 zv : (Num) -> Int, IN(zv, IMAGE((y : (Num) -> Int) => (g : Num) => Bvec(y, g), S)) \226\134\146 CARD({(y : (Num) -> Int) | IN(y, S) && ((g : Num) => Bvec(y, g)) == zv}) == nproduct({(g : Num) | g < 2 * e}, (g : Num) => perblk(g, zv(g)))) && (\226\136\128 g : Num, \226\136\128 v : Int, g < 2 * e \226\134\146 perblk(g, v) <= MaxMult) && (\226\136\128 y : (Num) -> Int, IN(y, S) \226\134\146 IN((g : Num) => Bvec(y, g), boxset)) \226\134\146 CARD({(y : (Num) -> Int) | IN(y, S) && isum(op_dot_dot(0, 2 * e - 1), (g : Num) => w(g) * Bvec(y, g)) == int_of_num(0)}) <= nsum(boxset, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => w(g) * zv(g)) == int_of_num(0) { EXP(MaxMult, 2 * e) } else { 0 })
+      #|  (zv : (Num) -> Int)
+      #|  (zv : (Num) -> Int)
+      #|  (zv : (Num) -> Int)
+      #|  (g : Num) < 2 * (e : Num)
+      #|  (g : Num)
+      #|  \226\136\128 e : Num, \226\136\128 w : (Num) -> Int, \226\136\128 Fv : (Num) -> Int, 0 < e \226\134\146 isum(op_dot_dot(0, 2 * e - 1), (g : Num) => w(g) * (if g < 2 * e { Fv(g) } else { int_of_num(0) })) == isum(op_dot_dot(0, 2 * e - 1), (g : Num) => w(g) * Fv(g))
+      #|  (g : Num)
+      #|  (g : Num)
+      #|  (g : Num)
+      #|  (b : Bool) == (c : Bool) \226\134\146 ((a : Bool) && b) == (a && c)
+      #|  (y : (Num) -> Int)
+      #|  \226\136\128 e : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 W : (Num, Num, Int) -> Int, \226\136\128 zv : (Num) -> Int, (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0)) \226\134\146 {(y : (Num) -> Int) | IN(y, ibox(2 * e * t, M)) && ((g : Num) => if g < 2 * e { isum(op_dot_dot(1, t), (i : Num) => W(g, i, y(g * t + i))) } else { int_of_num(0) }) == zv} == {(y : (Num) -> Int) | IN(y, ibox(2 * e * t, M)) && (\226\136\128 g : Num, g < 2 * e \226\134\146 isum(op_dot_dot(1, t), (i : Num) => W(g, i, y(g * t + i))) == zv(g))}
+      #|  2 * (e : Num)
+      #|  (zv : (Num) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (g : Num) => (i : Num) => (x : Int) => (W : (Num, Num, Int) -> Int)(g, i, x)
+      #|  (x0 : (Num) -> Int)
+      #|  IN((zv : (Num) -> Int), IMAGE((y : (Num) -> Int) => (g : Num) => if g < 2 * (e : Num) { isum(op_dot_dot(1, (t : Num)), (i : Num) => (W : (Num, Num, Int) -> Int)(g, i, y(g * t + i))) } else { int_of_num(0) }, ibox(2 * e * t, (M : Int))))
+      #|  \226\136\128 g : Num, !(g < 2 * (e : Num)) \226\134\146 (zv : (Num) -> Int)(g) == int_of_num(0)
+      #|  (zv : (Num) -> Int)
+      #|  (boxset : ((Num) -> Int) -> Bool)
+      #|  (MaxMult : Num)
+      #|  (g : Num) => (v : Int) => CARD({(u : (Num) -> Int) | IN(u, ibox((t : Num), (M : Int))) && isum(op_dot_dot(1, t), (i : Num) => (W : (Num, Num, Int) -> Int)(g, i, u(i))) == v})
+      #|  (e : Num)
+      #|  (w : (Num) -> Int)
+      #|  (y : (Num) -> Int) => (g : Num) => if g < 2 * (e : Num) { isum(op_dot_dot(1, (t : Num)), (i : Num) => (W : (Num, Num, Int) -> Int)(g, i, y(g * t + i))) } else { int_of_num(0) }
+      #|  ibox(2 * (e : Num) * (t : Num), (M : Int))
+      #|  \226\136\128 e : Num, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 W : (Num, Num, Int) -> Int, \226\136\128 w : (Num) -> Int, \226\136\128 MaxMult : Num, \226\136\128 boxset : ((Num) -> Int) -> Bool, 0 < e && FINITE(boxset) && (\226\136\128 g : Num, \226\136\128 v : Int, g < 2 * e \226\134\146 CARD({(u : (Num) -> Int) | IN(u, ibox(t, M)) && isum(op_dot_dot(1, t), (i : Num) => W(g, i, u(i))) == v}) <= MaxMult) && (\226\136\128 y : (Num) -> Int, IN(y, ibox(2 * e * t, M)) \226\134\146 IN((g : Num) => if g < 2 * e { isum(op_dot_dot(1, t), (i : Num) => W(g, i, y(g * t + i))) } else { int_of_num(0) }, boxset)) \226\134\146 CARD({(y : (Num) -> Int) | IN(y, ibox(2 * e * t, M)) && isum(op_dot_dot(0, 2 * e - 1), (g : Num) => w(g) * isum(op_dot_dot(1, t), (i : Num) => W(g, i, y(g * t + i)))) == int_of_num(0)}) <= nsum(boxset, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => w(g) * zv(g)) == int_of_num(0) { EXP(MaxMult, 2 * e) } else { 0 })
+      #|  2 * (e : Num) * (G : Num) == (2 * e - 1 + 1) * G
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, 1 <= e \226\134\146 (2 * e - 1) * G + G == 2 * (e * G)
+      #|  (q2 : Num) - 1
+      #|  (q1 : Num)
+      #|  (p2 : Num) - 1
+      #|  (p1 : Num)
+      #|  (G : Num)
+      #|  (p1 : Num) * (G : Num) + ((p2 : Num) - 1)
+      #|  \226\136\128 p1 : Num, \226\136\128 p2 : Num, \226\136\128 q1 : Num, \226\136\128 q2 : Num, \226\136\128 G : Num, 1 <= p2 && p2 <= G && 1 <= q2 && q2 <= G && p1 * G + p2 == q1 * G + q2 \226\134\146 p1 == q1 && p2 == q2
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 p1 : Num, \226\136\128 p2 : Num, \226\136\128 e : Num, \226\136\128 G : Num, 1 <= e && p1 <= 2 * e - 1 && p2 <= G \226\134\146 p1 * G + p2 <= 2 * (e * G)
+      #|  1 <= (G : Num) \226\134\146 !(G == 0)
+      #|  DIV((n : Num) - 1, (G : Num)) < 2 * (e : Num)
+      #|  1 <= (G : Num) \226\134\146 !(G == 0)
+      #|  (G : Num)
+      #|  (n : Num) - 1
+      #|  MOD((n : Num) - 1, (G : Num)) + 1
+      #|  DIV((n : Num) - 1, (G : Num))
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (p2 : Num)
+      #|  (p1 : Num)
+      #|  (n : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, 1 <= e && 1 <= G \226\134\146 IMAGE(GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), i * G + j)), {((i : Num), (j : Num)) | IN(i, op_dot_dot(0, 2 * e - 1)) && IN(j, op_dot_dot(1, G))}) == op_dot_dot(1, 2 * (e * G))
+      #|  (G : Num)
+      #|  (p2' : Num)
+      #|  (p1' : Num)
+      #|  (p2 : Num)
+      #|  (p1 : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, 1 <= G \226\134\146 (\226\136\128 x : (Num, Num), \226\136\128 y : (Num, Num), IN(x, {((i : Num), (j : Num)) | IN(i, op_dot_dot(0, 2 * e - 1)) && IN(j, op_dot_dot(1, G))}) && IN(y, {((i : Num), (j : Num)) | IN(i, op_dot_dot(0, 2 * e - 1)) && IN(j, op_dot_dot(1, G))}) && GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), i * G + j), x) == GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), i * G + j), y) \226\134\146 x == y)
+      #|  {((i : Num), (j : Num)) | IN(i, op_dot_dot(0, 2 * (e : Num) - 1)) && IN(j, op_dot_dot(1, (G : Num)))}
+      #|  (H : (Num) -> Int)
+      #|  GABS((f : ((Num, Num)) -> Num) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), i * (G : Num) + j))
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (g : Num) => (i : Num) => (H : (Num) -> Int)(g * (G : Num) + i)
+      #|  (g : Num) => op_dot_dot(1, (G : Num))
+      #|  op_dot_dot(0, 2 * (e : Num) - 1)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 H : (Num) -> Int, 1 <= e && 1 <= G \226\134\146 isum(op_dot_dot(1, 2 * (e * G)), H) == isum(op_dot_dot(0, 2 * e - 1), (g : Num) => isum(op_dot_dot(1, G), (i : Num) => H(g * G + i)))
+      #|  (G : Num) * (2 * (e : Num)) == 2 * (e * G)
+      #|  !((G : Num) == 0)
+      #|  \226\136\128 x : Num, \226\136\128 e : Num, \226\136\128 G : Num, 1 <= G && IN(x, op_dot_dot(1, 2 * (e * G))) \226\134\146 DIV(x - 1, G) < 2 * e && MOD(x - 1, G) < G
+      #|  (G : Num)
+      #|  (y : Num) - 1
+      #|  (G : Num)
+      #|  (x : Num) - 1
+      #|  !((G : Num) == 0)
+      #|  MOD((y : Num) - 1, (G : Num))
+      #|  DIV((y : Num) - 1, (G : Num))
+      #|  MOD((x : Num) - 1, (G : Num))
+      #|  DIV((x : Num) - 1, (G : Num))
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (y : Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (x : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (ss : Num)
+      #|  \226\136\128 g1 : Num, \226\136\128 r1 : Num, \226\136\128 g2 : Num, \226\136\128 r2 : Num, g1 < 2 * (e : Num) && r1 < (G : Num) && g2 < 2 * e && r2 < G && (en : (Num, Num) -> Num)(g1, r1) == en(g2, r2) \226\134\146 g1 == g2 && r1 == r2
+      #|  \226\136\128 e : Num, \226\136\128 ss : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, \226\136\128 en : (Num, Num) -> Num, 2 <= e && e - 1 <= ss && 1 <= G && G == EXP(2, ss) && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) && (\226\136\128 g : Num, \226\136\128 r : Num, g < 2 * e && r < G \226\134\146 IN(en(g, r), op_dot_dot(1, 2 * (e * G))) && leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, en(g, r)) == lab(g)) && (\226\136\128 g : Num, \226\136\128 i : Num, g < 2 * e && IN(i, op_dot_dot(1, 2 * (e * G))) && leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i) == lab(g) \226\134\146 existsunique((r : Num) => r < G && en(g, r) == i)) \226\134\146 permutes((j : Num) => if IN(j, op_dot_dot(1, 2 * (e * G))) { en(DIV(j - 1, G), MOD(j - 1, G)) } else { j }, op_dot_dot(1, 2 * (e * G)))
+      #|  (cpsi : Int) * pow((M : Int), (d : Num)) == cpsi * pow(M, d - (j : Num)) * pow(M, j)
+      #|  int_of_num(0) <= (M : Int) && int_of_num(0) <= (cpsi : Int) && int_of_num(0) <= abs((x : Int)) && abs(x) <= M
+      #|  \226\136\128 fj : Int, \226\136\128 x : Int, \226\136\128 M : Int, \226\136\128 cpsi : Int, \226\136\128 d : Num, \226\136\128 j : Num, int_of_num(1) <= M && abs(x) <= M && int_of_num(1) <= cpsi && j <= d && abs(fj) <= cpsi * pow(M, d - j) \226\134\146 abs(fj * pow(x, j)) <= cpsi * pow(M, d)
+      #|  (d : Num) + 1 - 0 == d + 1
+      #|  (j : Num)
+      #|  isum(op_dot_dot(0, (d : Num)), (j : Num) => (cpsi : Int) * pow((M : Int), d))
+      #|  isum(op_dot_dot(0, (d : Num)), (j : Num) => abs((f : (Num) -> Int)(j) * pow((x : Int), j)))
+      #|  \226\136\128 f : (Num) -> Int, \226\136\128 d : Num, \226\136\128 x : Int, \226\136\128 M : Int, \226\136\128 cpsi : Int, int_of_num(1) <= M && abs(x) <= M && int_of_num(1) <= cpsi && (\226\136\128 j : Num, j <= d \226\134\146 abs(f(j)) <= cpsi * pow(M, d - j)) \226\134\146 abs(ipoly(f, d, x)) <= int_of_num(d + 1) * (cpsi * pow(M, d))
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (G : Num)
+      #|  (g : Num) * (G : Num) + (i : Num) - 1
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (i : Num)
+      #|  (g : Num)
+      #|  1 <= (g : Num) * (G : Num) + (i : Num) && g * G + i <= 2 * ((e : Num) * G)
+      #|  1 <= (e : Num)
+      #|  (i : Num)
+      #|  (g : Num)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+      #|  (y : (Num) -> Int)
+      #|  (i : Num) => (x : Int) => if leafsg((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, i) { -((hh : (Num) -> Int)(leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)) * ipoly((PSI : ((Num) -> Int, Num, Num) -> Int)(hh, leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)), e - 1, x)) } else { hh(leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)) * ipoly(PSI(hh, leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)), e - 1, x) }
+      #|  int_of_num(2) * (P : Int)
+      #|  2 * ((e : Num) * (G : Num))
+      #|  (j : Num) => if IN(j, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) { (en : (Num, Num) -> Num)(DIV(j - 1, G), MOD(j - 1, G)) } else { j }
+      #|  (lab : (Num) -> Num)
+      #|  (ss : Num)
+      #|  permutes((j : Num) => if IN(j, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) { (en : (Num, Num) -> Num)(DIV(j - 1, G), MOD(j - 1, G)) } else { j }, op_dot_dot(1, 2 * (e * G)))
       #|  forall e ss (G:num) (P:int) (PSI:(num->int)->num->num->int) (hh:num->int)\n  (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0} =\n         CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(0..2*e-1)(\\g. hh(lab g) * isum(1..G)(\\i. (if leafsg ss\n                    (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g (i-1)) then --(ipoly\n                     (PSI hh (lab g)) (e-1) (y(g*G+i))) else ipoly (PSI hh (lab\n                      g)) (e-1) (y(g*G+i))))) = &0}
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G:num
-      #|  e:num
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  i-1
-      #|  g:num
-      #|  leafidx ss (e * G)\n     (\\j. RIFFLE(e*G)) (\\j. F) (en g (i-1)) = (lab:num->num) g
-      #|  ~(1 <= i /\\ i <= n)
-      #|  1 <= i /\\ i <= n
-      #|  i:num
-      #|  ~(1 <= g + 1 /\\\n         g + 1 <= n)
-      #|  1 <= g + 1 /\\\n        g + 1 <= n
-      #|  g < n:num
-      #|  g:num
-      #|  \\i:num. if i IN 1..n then (zv:num->int)(i-1) else &0
-      #|  zv:num->int
-      #|  IMAGE (\\z:num->int. (\\g. z (g+1))) (ibox n B)
-      #|  forall(n:num) (B:int). FINITE {zv:num->int | (forall g. g < n ==> abs(zv g) <= B) /\\\n  (forall g. ~(g < n) ==> zv g = &0)}
-      #|  e*1
-      #|  x <= e*G ==> e*G+x <= 2*e*G
-      #|  e*1
-      #|  e*G:num
-      #|  forall e (G:num) t. 1 <= G /\\ t IN TSET e G ==> t IN 1..2*e*G
-      #|  (G+1)-1 = G
-      #|  j:num
-      #|  (lab:num->num) g
-      #|  hh:num->int
-      #|  j:num
-      #|  y IN ibox (2*e*G) (&2*P)
-      #|  (lab:num->num) g IN 1..2*e*G
-      #|  (&e:int) = &((e-1)+1)
-      #|  i:num
-      #|  isum(1..G)(\\i:num. &e * cpsi * (&2*P) pow (e-1))
-      #|  isum(1..G)(\\i:num. abs(if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j.\n   F) ((en:num->num->num) g (i-1)) then --ipoly (PSI (hh:num->int)\n    ((lab:num->num) g)) (e-1) (y(g*G+i)) else ipoly (PSI hh (lab g)) (e-1)\n     (y(g*G+i))))
-      #|  g:num
-      #|  forall e ss (G:num) (P:int) (cpsi:int) (PSI:(num->int)->num->num->int)\n  (hh:num->int) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\ &1 <= cpsi /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G)\n     ==> forall y. y IN ibox (2*e*G) (&2*P)\n         ==> (\\g. if g < 2*e then isum(1..G)(\\i. if leafsg ss (e*G) (\\j.\n          RIFFLE(e*G)) (\\j. F) (en g (i-1)) then --ipoly (PSI hh (lab g)) (e-1)\n           (y(g*G+i)) else ipoly (PSI hh (lab g)) (e-1) (y(g*G+i))) else &0)\n             IN {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P) pow\n              (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}
-      #|  rstx (s:num->bool) (x:num->int) = (\\i. if i IN s then x i else &0)
-      #|  rbox (s:num->bool) t (M:int) =\n    {x:num->int | x IN ibox t M /\\ (forall i. ~(i IN s) ==> x i = &0)}
-      #|  i:num
-      #|  forall(s:num->bool) t (M:int) (x:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ x IN ibox t M ==> rstx s x IN rbox s t M
-      #|  i:num
-      #|  r:num->int
-      #|  x:num->int
-      #|  r:num->int
-      #|  forall(s:num->bool) t (M:int).\n     &0 <= M /\\ s SUBSET (1..t)\n     ==> IMAGE (rstx s) (ibox t M) = rbox s t M
-      #|  glue (s:num->bool) t (r:num->int) (u:num->int) =\n    (\\i. if i IN s then r i else if i IN ((1..t) DIFF s) then u i else &0)
-      #|  i:num
-      #|  u:num->int
-      #|  i:num
-      #|  rstx ((1..t) DIFF s) x
-      #|  x:num->int
-      #|  forall(s:num->bool) t (M:int) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ r IN rbox s t M\n     ==> {x | x IN ibox t M /\\ rstx s x = r} =\n         IMAGE (glue s t r)\n               {u | (forall i. i IN ((1..t) DIFF s) ==> u i IN {v:int | abs v <= M})\n                /\\\n                    (forall i. ~(i IN ((1..t) DIFF s)) ==> u i = &0)}
-      #|  i:num
-      #|  (i:num) IN ((1..t) DIFF s)
-      #|  ~((i:num) IN s)
-      #|  (i:num) IN ((1..t) DIFF s)
-      #|  i:num
-      #|  forall(s:num->bool) (t:num) (M:int) (r:num->int) (u:num->int) (u':num->int).\n     (forall i:num. ~(i IN ((1..t) DIFF s)) ==> u i = &0) /\\\n     (forall i:num. ~(i IN ((1..t) DIFF s)) ==> u' i = &0) /\\\n     glue s t r u = glue s t r u'\n     ==> u = u'
-      #|  (1..t) DIFF s
-      #|  CARD((1..t) DIFF s)
-      #|  {v:int | abs v <= M}
-      #|  2 * num_of_int M + 1
-      #|  &0:int
-      #|  u':num->int
-      #|  u:num->int
-      #|  r:num->int
-      #|  M:int
-      #|  t:num
-      #|  s:num->bool
-      #|  u':num->int
-      #|  u:num->int
-      #|  {x | x IN ibox t M /\\ rstx s x =\n    r} HAS_SIZE (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s))
-      #|  forall(s:num->bool) t (M:int) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ r IN rbox s t M\n     ==> CARD {x | x IN ibox t M /\\ rstx s x = r} =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s))
-      #|  r:num->int
-      #|  M:int
-      #|  t:num
-      #|  s:num->bool
-      #|  ibox t M
-      #|  FINITE {x:num->int | x IN ibox t M /\\\n   rstx s x = r}
-      #|  x:num->int
-      #|  nsum {x | x IN ibox t M /\\ rstx s x = r} G =\n    nsum {x | x IN ibox t M /\\ rstx s x = r} (\\x. G r)
-      #|  forall(t:num) (M:int) (s:num->bool) (G:(num->int)->num) (r:num->int).\n     &0 <= M /\\ s SUBSET (1..t) /\\ (forall x. G x = G (rstx s x)) /\\ r IN rbox s t M\n     ==> nsum {x | x IN ibox t M /\\ rstx s x = r} G =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) * G r
-      #|  x:num->int
-      #|  x:num->int
-      #|  x:num->int
-      #|  x:num->int
-      #|  r:num->int
-      #|  nsum (rbox s t M) (\\y. nsum {x | x IN ibox t M /\\ rstx s x = y} G) =\n    nsum (rbox s t M) (\\y. (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) * G\n     y)
-      #|  ibox t M
-      #|  G:(num->int)->num
-      #|  rstx s
-      #|  forall(t:num) (M:int) (s:num->bool) (G:(num->int)->num).\n     &0 <= M /\\ s SUBSET (1..t) /\\ (forall x. G x = G (rstx s x))\n     ==> nsum (ibox t M) G =\n         (2 * num_of_int M + 1) EXP (CARD((1..t) DIFF s)) *\n         nsum (rbox s t M) G
-      #|  LVAL (bp:num->bool) (ss:num) =\n   nsum {j | j < ss} (\\j. if bp j then 2 EXP (ss-1-j) else 0)
-      #|  {j | j < 0} = {}
-      #|  forall bp. LVAL bp 0 = 0
-      #|  x-1
-      #|  x = 0
-      #|  x:num
-      #|  forall s. {j | j < SUC s} = 0 INSERT (IMAGE SUC {j | j < s})
-      #|  SUC(j) = j + 1
-      #|  j:num
-      #|  SUC s - 1 - 0 = s
-      #|  ~(0 IN IMAGE SUC {j | j < s})
-      #|  forall bp s. LVAL bp (SUC s) = (if bp 0 then 2 EXP s else 0) + LVAL (\\j. bp(j+1))\n  s
-      #|  {j | j < s}
-      #|  (\\j. if bp j then 2 EXP (SUC s - 1 - j) else 0):num->num
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  (i : Num) - 1
+      #|  (g : Num)
+      #|  leafidx((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (en : (Num, Num) -> Num)((g : Num), (i : Num) - 1)) == (lab : (Num) -> Num)(g)
+      #|  !(1 <= (i : Num) && i <= (n : Num))
+      #|  1 <= (i : Num) && i <= (n : Num)
+      #|  (i : Num)
+      #|  !(1 <= (g : Num) + 1 && g + 1 <= (n : Num))
+      #|  1 <= (g : Num) + 1 && g + 1 <= (n : Num)
+      #|  (g : Num) < (n : Num)
+      #|  (g : Num)
+      #|  (i : Num) => if IN(i, op_dot_dot(1, (n : Num))) { (zv : (Num) -> Int)(i - 1) } else { int_of_num(0) }
+      #|  (zv : (Num) -> Int)
+      #|  IMAGE((z : (Num) -> Int) => (g : Num) => z(g + 1), ibox((n : Num), (B : Int)))
+      #|  \226\136\128 n : Num, \226\136\128 B : Int, FINITE({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < n \226\134\146 abs(zv(g)) <= B) && (\226\136\128 g : Num, !(g < n) \226\134\146 zv(g) == int_of_num(0))})
+      #|  (e : Num) * 1
+      #|  (x : Num) <= (e : Num) * (G : Num) \226\134\146 e * G + x <= 2 * (e * G)
+      #|  (e : Num) * 1
+      #|  (e : Num) * (G : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 t : Num, 1 <= G && IN(t, TSET(e, G)) \226\134\146 IN(t, op_dot_dot(1, 2 * (e * G)))
+      #|  (G : Num) + 1 - 1 == G
+      #|  (j : Num)
+      #|  (lab : (Num) -> Num)((g : Num))
+      #|  (hh : (Num) -> Int)
+      #|  (j : Num)
+      #|  IN((y : (Num) -> Int), ibox(2 * ((e : Num) * (G : Num)), int_of_num(2) * (P : Int)))
+      #|  IN((lab : (Num) -> Num)((g : Num)), op_dot_dot(1, 2 * ((e : Num) * (G : Num))))
+      #|  int_of_num((e : Num)) == int_of_num(e - 1 + 1)
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, (G : Num)), (i : Num) => int_of_num((e : Num)) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1)))
+      #|  isum(op_dot_dot(1, (G : Num)), (i : Num) => abs(if leafsg((ss : Num), (e : Num) * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, (en : (Num, Num) -> Num)((g : Num), i - 1)) { -ipoly((PSI : ((Num) -> Int, Num, Num) -> Int)((hh : (Num) -> Int), (lab : (Num) -> Num)(g)), e - 1, (y : (Num) -> Int)(g * G + i)) } else { ipoly(PSI(hh, lab(g)), e - 1, y(g * G + i)) }))
+      #|  (g : Num)
+      #|  \226\136\128 e : Num, \226\136\128 ss : Num, \226\136\128 G : Num, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, \226\136\128 hh : (Num) -> Int, \226\136\128 lab : (Num) -> Num, \226\136\128 en : (Num, Num) -> Num, 2 <= e && 1 <= G && int_of_num(1) <= P && int_of_num(1) <= cpsi && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) && (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) \226\134\146 (\226\136\128 y : (Num) -> Int, IN(y, ibox(2 * (e * G), int_of_num(2) * P)) \226\134\146 IN((g : Num) => if g < 2 * e { isum(op_dot_dot(1, G), (i : Num) => if leafsg(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, en(g, i - 1)) { -ipoly(PSI(hh, lab(g)), e - 1, y(g * G + i)) } else { ipoly(PSI(hh, lab(g)), e - 1, y(g * G + i)) }) } else { int_of_num(0) }, {(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}))
+      #|  (rstx : ((Num) -> Bool, (Num) -> Int, Num) -> Int)((s : (Num) -> Bool), (x : (Num) -> Int)) == ((i : Num) => if IN(i, s) { x(i) } else { int_of_num(0) })
+      #|  (rbox : ((Num) -> Bool, Num, Int, (Num) -> Int) -> Bool)((s : (Num) -> Bool), (t : Num), (M : Int)) == {(x : (Num) -> Int) | IN(x, ibox(t, M)) && (\226\136\128 i : Num, !IN(i, s) \226\134\146 x(i) == int_of_num(0))}
+      #|  (i : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 x : (Num) -> Int, int_of_num(0) <= M && SUBSET(s, op_dot_dot(1, t)) && IN(x, ibox(t, M)) \226\134\146 IN(rstx(s, x), rbox(s, t, M))
+      #|  (i : Num)
+      #|  (r : (Num) -> Int)
+      #|  (x : (Num) -> Int)
+      #|  (r : (Num) -> Int)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : Num, \226\136\128 M : Int, int_of_num(0) <= M && SUBSET(s, op_dot_dot(1, t)) \226\134\146 IMAGE(rstx(s), ibox(t, M)) == rbox(s, t, M)
+      #|  (glue : ((Num) -> Bool, Num, (Num) -> Int, (Num) -> Int, Num) -> Int)((s : (Num) -> Bool), (t : Num), (r : (Num) -> Int), (u : (Num) -> Int)) == ((i : Num) => if IN(i, s) { r(i) } else { if IN(i, DIFF(op_dot_dot(1, t), s)) { u(i) } else { int_of_num(0) } })
+      #|  (i : Num)
+      #|  (u : (Num) -> Int)
+      #|  (i : Num)
+      #|  rstx(DIFF(op_dot_dot(1, (t : Num)), (s : (Num) -> Bool)), (x : (Num) -> Int))
+      #|  (x : (Num) -> Int)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 r : (Num) -> Int, int_of_num(0) <= M && SUBSET(s, op_dot_dot(1, t)) && IN(r, rbox(s, t, M)) \226\134\146 {(x : (Num) -> Int) | IN(x, ibox(t, M)) && rstx(s, x) == r} == IMAGE(glue(s, t, r), {(u : (Num) -> Int) | (\226\136\128 i : Num, IN(i, DIFF(op_dot_dot(1, t), s)) \226\134\146 IN(u(i), {(v : Int) | abs(v) <= M})) && (\226\136\128 i : Num, !IN(i, DIFF(op_dot_dot(1, t), s)) \226\134\146 u(i) == int_of_num(0))})
+      #|  (i : Num)
+      #|  IN((i : Num), DIFF(op_dot_dot(1, (t : Num)), (s : (Num) -> Bool)))
+      #|  !IN((i : Num), (s : (Num) -> Bool))
+      #|  IN((i : Num), DIFF(op_dot_dot(1, (t : Num)), (s : (Num) -> Bool)))
+      #|  (i : Num)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 r : (Num) -> Int, \226\136\128 u : (Num) -> Int, \226\136\128 u' : (Num) -> Int, (\226\136\128 i : Num, !IN(i, DIFF(op_dot_dot(1, t), s)) \226\134\146 u(i) == int_of_num(0)) && (\226\136\128 i : Num, !IN(i, DIFF(op_dot_dot(1, t), s)) \226\134\146 u'(i) == int_of_num(0)) && glue(s, t, r, u) == glue(s, t, r, u') \226\134\146 u == u'
+      #|  DIFF(op_dot_dot(1, (t : Num)), (s : (Num) -> Bool))
+      #|  CARD(DIFF(op_dot_dot(1, (t : Num)), (s : (Num) -> Bool)))
+      #|  {(v : Int) | abs(v) <= (M : Int)}
+      #|  2 * num_of_int((M : Int)) + 1
+      #|  int_of_num(0)
+      #|  (u' : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  (r : (Num) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (s : (Num) -> Bool)
+      #|  (u' : (Num) -> Int)
+      #|  (u : (Num) -> Int)
+      #|  HAS_SIZE({(x : (Num) -> Int) | IN(x, ibox((t : Num), (M : Int))) && rstx((s : (Num) -> Bool), x) == (r : (Num) -> Int)}, EXP(2 * num_of_int(M) + 1, CARD(DIFF(op_dot_dot(1, t), s))))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 r : (Num) -> Int, int_of_num(0) <= M && SUBSET(s, op_dot_dot(1, t)) && IN(r, rbox(s, t, M)) \226\134\146 CARD({(x : (Num) -> Int) | IN(x, ibox(t, M)) && rstx(s, x) == r}) == EXP(2 * num_of_int(M) + 1, CARD(DIFF(op_dot_dot(1, t), s)))
+      #|  (r : (Num) -> Int)
+      #|  (M : Int)
+      #|  (t : Num)
+      #|  (s : (Num) -> Bool)
+      #|  ibox((t : Num), (M : Int))
+      #|  FINITE({(x : (Num) -> Int) | IN(x, ibox((t : Num), (M : Int))) && rstx((s : (Num) -> Bool), x) == (r : (Num) -> Int)})
+      #|  (x : (Num) -> Int)
+      #|  nsum({(x : (Num) -> Int) | IN(x, ibox((t : Num), (M : Int))) && rstx((s : (Num) -> Bool), x) == (r : (Num) -> Int)}, (G : ((Num) -> Int) -> Num)) == nsum({(x : (Num) -> Int) | IN(x, ibox(t, M)) && rstx(s, x) == r}, (x : (Num) -> Int) => G(r))
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 s : (Num) -> Bool, \226\136\128 G : ((Num) -> Int) -> Num, \226\136\128 r : (Num) -> Int, int_of_num(0) <= M && SUBSET(s, op_dot_dot(1, t)) && (\226\136\128 x : (Num) -> Int, G(x) == G(rstx(s, x))) && IN(r, rbox(s, t, M)) \226\134\146 nsum({(x : (Num) -> Int) | IN(x, ibox(t, M)) && rstx(s, x) == r}, G) == EXP(2 * num_of_int(M) + 1, CARD(DIFF(op_dot_dot(1, t), s))) * G(r)
+      #|  (x : (Num) -> Int)
+      #|  (x : (Num) -> Int)
+      #|  (x : (Num) -> Int)
+      #|  (x : (Num) -> Int)
+      #|  (r : (Num) -> Int)
+      #|  nsum(rbox((s : (Num) -> Bool), (t : Num), (M : Int)), (y : (Num) -> Int) => nsum({(x : (Num) -> Int) | IN(x, ibox(t, M)) && rstx(s, x) == y}, (G : ((Num) -> Int) -> Num))) == nsum(rbox(s, t, M), (y : (Num) -> Int) => EXP(2 * num_of_int(M) + 1, CARD(DIFF(op_dot_dot(1, t), s))) * G(y))
+      #|  ibox((t : Num), (M : Int))
+      #|  (G : ((Num) -> Int) -> Num)
+      #|  rstx((s : (Num) -> Bool))
+      #|  \226\136\128 t : Num, \226\136\128 M : Int, \226\136\128 s : (Num) -> Bool, \226\136\128 G : ((Num) -> Int) -> Num, int_of_num(0) <= M && SUBSET(s, op_dot_dot(1, t)) && (\226\136\128 x : (Num) -> Int, G(x) == G(rstx(s, x))) \226\134\146 nsum(ibox(t, M), G) == EXP(2 * num_of_int(M) + 1, CARD(DIFF(op_dot_dot(1, t), s))) * nsum(rbox(s, t, M), G)
+      #|  (LVAL : ((Num) -> Bool, Num) -> Num)((bp : (Num) -> Bool), (ss : Num)) == nsum({(j : Num) | j < ss}, (j : Num) => if bp(j) { EXP(2, ss - 1 - j) } else { 0 })
+      #|  {(j : Num) | j < 0} == {}
+      #|  \226\136\128 bp : (Num) -> Bool, LVAL(bp, 0) == 0
+      #|  (x : Num) - 1
+      #|  (x : Num) == 0
+      #|  (x : Num)
+      #|  \226\136\128 s : Num, {(j : Num) | j < SUC(s)} == INSERT(0, IMAGE(SUC, {(j : Num) | j < s}))
+      #|  SUC((j : Num)) == j + 1
+      #|  (j : Num)
+      #|  SUC((s : Num)) - 1 - 0 == s
+      #|  !IN(0, IMAGE(SUC, {(j : Num) | j < (s : Num)}))
+      #|  \226\136\128 bp : (Num) -> Bool, \226\136\128 s : Num, LVAL(bp, SUC(s)) == (if bp(0) { EXP(2, s) } else { 0 }) + LVAL((j : Num) => bp(j + 1), s)
+      #|  {(j : Num) | j < (s : Num)}
+      #|  (j : Num) => if (bp : (Num) -> Bool)(j) { EXP(2, SUC((s : Num)) - 1 - j) } else { 0 }
       #|  SUC
-      #|  \\j. (bp:num->bool)(j+1)
-      #|  forall ss bp. LVAL bp ss < 2 EXP ss
-      #|  (1 <= x + 2*d /\\ x + 2*d <= 2*t) /\\ (1 <= x /\\\n   x <= 2*t)
-      #|  forall t x d. 1 <= x /\\ x + 2*d <= 2*t ==> RIFFLE t (x + 2*d) = RIFFLE t x + d
-      #|  (if bp 0 then t else 0) = (2*B) * (if bp 0 then 2 EXP s else\n   0)
-      #|  t = (2*B) * 2 EXP s /\\ LVAL (\\j. (bp:num->bool)(j+1)) s = V\n    ==> (if bp 0 then t else 0) + 2 * B * V = 2 * (B * LVAL bp (SUC s))
-      #|  LVAL (\\j. (bp:num->bool)(j+1)) s = V
-      #|  (if Lb <= t then Lb else Lb - t) + (if bp 0 then t else 0) =\n     (if Lf <= t then Lf else Lf - t) + 2 * (B * LVAL bp (SUC s))
-      #|  t = (2 * B) * 2 EXP\n        s
-      #|  2 * t = (2*B) * (2 * 2 EXP s)
-      #|  2 * (B * LVAL bp (SUC s)) + 2 * B = (2*B) * (LVAL bp (SUC\n      s) + 1)
-      #|  2 * (B * LVAL bp (SUC s)) + 2 * B <= 2 * t
-      #|  (if Lf <= t then Lf else Lf - t) = j
-      #|  (if Lb <= t then Lb else Lb - t) = (if Lf <= t then Lf else\n     Lf - t) + 2 * B * V
-      #|  ~(Lf <= t) /\\ ~(Lb <= t)
-      #|  2*t - 2*B = (2*B)*(2 * 2 EXP s - 1)
-      #|  2*(B*L) = (2*B)*L
-      #|  2 * (B * LVAL bp (SUC s)) <= 2*t - 2*B
-      #|  (if Lb <= t then Lb else Lb - t) + (if bp 0 then t else 0) =\n     (if Lf <= t then Lf else Lf - t) + 2 * (B * LVAL bp (SUC s))
-      #|  (if Lb <= t then Lb else Lb - t) = (if Lf <= t then Lf else\n     Lf - t) + 2 * B * V
-      #|  Lb <= t /\\ Lf <= t
-      #|  (2*B)*V + 2*B <= (2*B)*(V+1) /\\\n      (2*B)*(V+1) <= (2*B)*2 EXP s ==> (2*B)*V + 2*B <= (2*B)*2 EXP s
-      #|  (2*B) * V + 2 * B <= (2 * B) * 2 EXP s
-      #|  V = LVAL (\\j. (bp:num->bool)(j+1)) s
-      #|  i:num
-      #|  2*B:num
-      #|  t:num
-      #|  s:num
-      #|  Lf IN BLK (2*B) t
-      #|  bp:num->bool
-      #|  SUC s
-      #|  LVAL bp (SUC s) < 2 * 2 EXP s
-      #|  LVAL (\\j. bp(j+1)) s < 2 EXP s
-      #|  i:num
-      #|  t:num
-      #|  2*B:num
-      #|  \\j. (bp:num->bool)(j+1)
-      #|  Lb:num = Lf + (2*B) * LVAL (\\j. bp(j+1)) s
-      #|  t = (2*B) * 2 EXP s
-      #|  Lf = leafidx s t (\\j:num. RIFFLE t) (\\j. F) i
-      #|  Lb = leafidx s t (\\j:num. RIFFLE t) (\\j. bp(j+1)) i
-      #|  forall s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> leafidx s t (\\j:num. RIFFLE t) bp i = leafidx s t (\\j:num. RIFFLE t)\n      (\\j. F) i + B * LVAL bp s
-      #|  bp:num->bool
-      #|  s:num
-      #|  B * LVAL bp s + B = B * (LVAL bp s + 1)
-      #|  B * LVAL bp s + B <= t
-      #|  i:num
-      #|  t:num
-      #|  B:num
-      #|  bp:num->bool
-      #|  s:num
-      #|  i:num
-      #|  leafidx s t (\\j:num. RIFFLE t) (\\j. F) i IN BLK B t
-      #|  forall s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> (leafidx s t (\\j:num. RIFFLE t) bp i <= t <=> leafidx s t (\\j:num.\n      RIFFLE t) (\\j. F) i <= t)
-      #|  i IN 1..2 * t
-      #|  t = B * 2 EXP s
-      #|  t = B * 2 EXP s
-      #|  t = B * 2 EXP s
-      #|  t = B * 2 EXP s
-      #|  t = B * 2 EXP s
-      #|  i:num
-      #|  t:num
-      #|  2*B:num
-      #|  \\j. (bp:num->bool)(j+1)
-      #|  s:num
-      #|  CHSG t (leafidx s t (\\j:num. RIFFLE t) (\\j. bp(j+1)) i) <=>\n   CHSG t (leafidx s t (\\j:num. RIFFLE t) (\\j. F) i)
-      #|  i:num
-      #|  t:num
-      #|  2*B:num
-      #|  \\j. (bp:num->bool)(j+1)
-      #|  leafsg s t (\\j:num. RIFFLE t) (\\j. bp(j+1)) i <=> leafsg s t\n   (\\j:num. RIFFLE t) (\\j. F) i
-      #|  t = (2*B) * 2 EXP s
-      #|  forall s bp B t i. t = B * 2 EXP s /\\ 1 <= B /\\ i IN 1..2*t\n     ==> (leafsg s t (\\j:num. RIFFLE t) bp i <=> leafsg s t (\\j:num. RIFFLE t)\n      (\\j. F) i)
-      #|  p permutes 1..n
-      #|  (p:num->num) i = i
-      #|  i:num
-      #|  forall p n M hh. p permutes 1..n /\\ hh IN ibox n M ==> (\\i. hh(p i)) IN ibox n M
-      #|  g:num->int
-      #|  M:int
-      #|  n:num
-      #|  inverse(p:num->num)
-      #|  i:num
-      #|  (\\i. g(inverse (p:num->num) i)):num->int
-      #|  hh:num->int
-      #|  g:num->int
-      #|  forall p n M. p permutes 1..n ==> IMAGE (\\hh:num->int. (\\i. hh(p i))) (ibox n M) =\n  ibox n M
-      #|  inverse (p:num->num) j
-      #|  (a:num->int)((p:num->num)(inverse p j)) =\n     (b:num->int)(p(inverse p j))
-      #|  j:num
-      #|  b:num->int
-      #|  a:num->int
-      #|  ibox n M
-      #|  Fn:(num->int)->num
-      #|  (\\hh:num->int. (\\i:num. hh((p:num->num)\n   i))):(num->int)->(num->int)
-      #|  p permutes 1..n
-      #|  M:int
-      #|  forall p n M (Fn:(num->int)->num). p permutes 1..n\n     ==> nsum (ibox n M) Fn = nsum (ibox n M) (\\hh. Fn (\\i. hh(p i)))
-      #|  hinv:num->num
-      #|  (if x IN s then (g:num->num) x else h x) = (if y IN s then g\n       y else h y)
-      #|  (hinv:num->num)((h:num->num) x) = x /\\\n       (hinv:num->num)((h:num->num) y) = y
-      #|  (x:num) IN u DIFF s /\\\n       (y:num) IN u DIFF s
-      #|  (if x IN s then (g:num->num) x else h x) = (if y IN s then g\n       y else h y)
-      #|  (g:num->num) y IN IMAGE g s
-      #|  h(x:num) IN u DIFF IMAGE (g:num->num) s
-      #|  (x:num) IN u DIFF s
-      #|  (if x IN s then (g:num->num) x else h x) = (if y IN s then g\n       y else h y)
-      #|  (g:num->num) x IN IMAGE g s
-      #|  h(y:num) IN u DIFF IMAGE (g:num->num) s
-      #|  (y:num) IN u DIFF s
-      #|  (y:num) IN s
-      #|  (x:num) IN s
-      #|  (y:num) IN u
-      #|  (x:num) IN u
-      #|  y:num
-      #|  x:num
-      #|  (x:num) IN u DIFF s
-      #|  x:num
-      #|  x:num
-      #|  \\x. if x IN s then (g:num->num) x else if x IN u then h x else x
-      #|  hinv:num->num
-      #|  h:num->num
-      #|  u DIFF IMAGE (g:num->num) s
-      #|  u DIFF s:num->bool
-      #|  CARD(IMAGE (g:num->num) s) = CARD s
-      #|  CARD(u DIFF s) = CARD(u DIFF IMAGE (g:num->num) s)
-      #|  FINITE(s:num->bool) /\\\n   FINITE(IMAGE (g:num->num) s)
-      #|  forall(u:num->bool) (s:num->bool) (g:num->num).\n    FINITE u /\\ s SUBSET u /\\ (IMAGE g s) SUBSET u /\\\n    (forall x y. x IN s /\\ y IN s /\\ g x = g y ==> x = y)\n    ==> ?p. p permutes u /\\ (forall x. x IN s ==> p x = g x)
-      #|  x:num
-      #|  forall e G c t. 1 <= G /\\ c + e <= e * G /\\ t IN TSET e G ==> t + c IN 1..2*e*G
-      #|  bp:num->bool
-      #|  ss:num
-      #|  e * LVAL bp ss + e = e * (LVAL bp ss + 1)
-      #|  t:num
-      #|  u:num
-      #|  t:num
-      #|  \\t. t + e * LVAL bp ss
-      #|  TSET e G
-      #|  1..2*e*G
-      #|  forall e G ss bp. 2 <= e /\\ 1 <= G /\\ G = 2 EXP ss\n     ==> ?sigma. sigma permutes 1..2*e*G /\\\n                 (forall t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)
-      #|  l:num
-      #|  (\\l. hh(sigma(inverse (sigma:num->num) l))):num->int = hh
-      #|  2*e*G = 2*(e*G)
-      #|  i:num
-      #|  e*G:num
-      #|  e:num
-      #|  bp:num->bool
-      #|  ss:num
-      #|  leafsg ss (e*G) (\\j:num. RIFFLE(e*G)) bp i <=> leafsg ss (e*G)\n   (\\j:num. RIFFLE(e*G)) (\\j. F) i
-      #|  2*e*G = 2*(e*G)
-      #|  i:num
-      #|  e*G:num
-      #|  e:num
-      #|  bp:num->bool
-      #|  ss:num
-      #|  sigma (leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) (\\j. F) i) =\n   leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) bp i
-      #|  leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) (\\j. F) i IN TSET e G
-      #|  i:num
+      #|  (j : Num) => (bp : (Num) -> Bool)(j + 1)
+      #|  \226\136\128 ss : Num, \226\136\128 bp : (Num) -> Bool, LVAL(bp, ss) < EXP(2, ss)
+      #|  (1 <= (x : Num) + 2 * (d : Num) && x + 2 * d <= 2 * (t : Num)) && 1 <= x && x <= 2 * t
+      #|  \226\136\128 t : Num, \226\136\128 x : Num, \226\136\128 d : Num, 1 <= x && x + 2 * d <= 2 * t \226\134\146 RIFFLE(t, x + 2 * d) == RIFFLE(t, x) + d
+      #|  (if (bp : (Num) -> Bool)(0) { (t : Num) } else { 0 }) == 2 * (B : Num) * (if bp(0) { EXP(2, (s : Num)) } else { 0 })
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num)) && LVAL((j : Num) => (bp : (Num) -> Bool)(j + 1), s) == (V : Num) \226\134\146 (if bp(0) { t } else { 0 }) + 2 * (B * V) == 2 * (B * LVAL(bp, SUC(s)))
+      #|  LVAL((j : Num) => (bp : (Num) -> Bool)(j + 1), (s : Num)) == (V : Num)
+      #|  (if (Lb : Num) <= (t : Num) { Lb } else { Lb - t }) + (if (bp : (Num) -> Bool)(0) { t } else { 0 }) == (if (Lf : Num) <= t { Lf } else { Lf - t }) + 2 * ((B : Num) * LVAL(bp, SUC((s : Num))))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  2 * (t : Num) == 2 * (B : Num) * (2 * EXP(2, (s : Num)))
+      #|  2 * ((B : Num) * LVAL((bp : (Num) -> Bool), SUC((s : Num)))) + 2 * B == 2 * B * (LVAL(bp, SUC(s)) + 1)
+      #|  2 * ((B : Num) * LVAL((bp : (Num) -> Bool), SUC((s : Num)))) + 2 * B <= 2 * (t : Num)
+      #|  (if (Lf : Num) <= (t : Num) { Lf } else { Lf - t }) == (j : Num)
+      #|  (if (Lb : Num) <= (t : Num) { Lb } else { Lb - t }) == (if (Lf : Num) <= t { Lf } else { Lf - t }) + 2 * ((B : Num) * (V : Num))
+      #|  !((Lf : Num) <= (t : Num)) && !((Lb : Num) <= t)
+      #|  2 * (t : Num) - 2 * (B : Num) == 2 * B * (2 * EXP(2, (s : Num)) - 1)
+      #|  2 * ((B : Num) * (L : Num)) == 2 * B * L
+      #|  2 * ((B : Num) * LVAL((bp : (Num) -> Bool), SUC((s : Num)))) <= 2 * (t : Num) - 2 * B
+      #|  (if (Lb : Num) <= (t : Num) { Lb } else { Lb - t }) + (if (bp : (Num) -> Bool)(0) { t } else { 0 }) == (if (Lf : Num) <= t { Lf } else { Lf - t }) + 2 * ((B : Num) * LVAL(bp, SUC((s : Num))))
+      #|  (if (Lb : Num) <= (t : Num) { Lb } else { Lb - t }) == (if (Lf : Num) <= t { Lf } else { Lf - t }) + 2 * ((B : Num) * (V : Num))
+      #|  (Lb : Num) <= (t : Num) && (Lf : Num) <= t
+      #|  2 * (B : Num) * (V : Num) + 2 * B <= 2 * B * (V + 1) && 2 * B * (V + 1) <= 2 * B * EXP(2, (s : Num)) \226\134\146 2 * B * V + 2 * B <= 2 * B * EXP(2, s)
+      #|  2 * (B : Num) * (V : Num) + 2 * B <= 2 * B * EXP(2, (s : Num))
+      #|  (V : Num) == LVAL((j : Num) => (bp : (Num) -> Bool)(j + 1), (s : Num))
+      #|  (i : Num)
+      #|  2 * (B : Num)
+      #|  (t : Num)
+      #|  (s : Num)
+      #|  IN((Lf : Num), BLK(2 * (B : Num), (t : Num)))
+      #|  (bp : (Num) -> Bool)
+      #|  SUC((s : Num))
+      #|  LVAL((bp : (Num) -> Bool), SUC((s : Num))) < 2 * EXP(2, s)
+      #|  LVAL((j : Num) => (bp : (Num) -> Bool)(j + 1), (s : Num)) < EXP(2, s)
+      #|  (i : Num)
+      #|  (t : Num)
+      #|  2 * (B : Num)
+      #|  (j : Num) => (bp : (Num) -> Bool)(j + 1)
+      #|  (Lb : Num) == (Lf : Num) + 2 * (B : Num) * LVAL((j : Num) => (bp : (Num) -> Bool)(j + 1), (s : Num))
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  (Lf : Num) == leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num))
+      #|  (Lb : Num) == leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => (bp : (Num) -> Bool)(j + 1), (i : Num))
+      #|  \226\136\128 s : Num, \226\136\128 bp : (Num) -> Bool, \226\136\128 B : Num, \226\136\128 t : Num, \226\136\128 i : Num, t == B * EXP(2, s) && 1 <= B && IN(i, op_dot_dot(1, 2 * t)) \226\134\146 leafidx(s, t, (j : Num) => RIFFLE(t), bp, i) == leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) + B * LVAL(bp, s)
+      #|  (bp : (Num) -> Bool)
+      #|  (s : Num)
+      #|  (B : Num) * LVAL((bp : (Num) -> Bool), (s : Num)) + B == B * (LVAL(bp, s) + 1)
+      #|  (B : Num) * LVAL((bp : (Num) -> Bool), (s : Num)) + B <= (t : Num)
+      #|  (i : Num)
+      #|  (t : Num)
+      #|  (B : Num)
+      #|  (bp : (Num) -> Bool)
+      #|  (s : Num)
+      #|  (i : Num)
+      #|  IN(leafidx((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => false, (i : Num)), BLK((B : Num), t))
+      #|  \226\136\128 s : Num, \226\136\128 bp : (Num) -> Bool, \226\136\128 B : Num, \226\136\128 t : Num, \226\136\128 i : Num, t == B * EXP(2, s) && 1 <= B && IN(i, op_dot_dot(1, 2 * t)) \226\134\146 (leafidx(s, t, (j : Num) => RIFFLE(t), bp, i) <= t) == (leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i) <= t)
+      #|  IN((i : Num), op_dot_dot(1, 2 * (t : Num)))
+      #|  (t : Num) == (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == (B : Num) * EXP(2, (s : Num))
+      #|  (t : Num) == (B : Num) * EXP(2, (s : Num))
+      #|  (i : Num)
+      #|  (t : Num)
+      #|  2 * (B : Num)
+      #|  (j : Num) => (bp : (Num) -> Bool)(j + 1)
+      #|  (s : Num)
+      #|  CHSG((t : Num), leafidx((s : Num), t, (j : Num) => RIFFLE(t), (j : Num) => (bp : (Num) -> Bool)(j + 1), (i : Num))) == CHSG(t, leafidx(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i))
+      #|  (i : Num)
+      #|  (t : Num)
+      #|  2 * (B : Num)
+      #|  (j : Num) => (bp : (Num) -> Bool)(j + 1)
+      #|  leafsg((s : Num), (t : Num), (j : Num) => RIFFLE(t), (j : Num) => (bp : (Num) -> Bool)(j + 1), (i : Num)) == leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)
+      #|  (t : Num) == 2 * (B : Num) * EXP(2, (s : Num))
+      #|  \226\136\128 s : Num, \226\136\128 bp : (Num) -> Bool, \226\136\128 B : Num, \226\136\128 t : Num, \226\136\128 i : Num, t == B * EXP(2, s) && 1 <= B && IN(i, op_dot_dot(1, 2 * t)) \226\134\146 leafsg(s, t, (j : Num) => RIFFLE(t), bp, i) == leafsg(s, t, (j : Num) => RIFFLE(t), (j : Num) => false, i)
+      #|  permutes((p : (Num) -> Num), op_dot_dot(1, (n : Num)))
+      #|  (p : (Num) -> Num)((i : Num)) == i
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, \226\136\128 hh : (Num) -> Int, permutes(p, op_dot_dot(1, n)) && IN(hh, ibox(n, M)) \226\134\146 IN((i : Num) => hh(p(i)), ibox(n, M))
+      #|  (g : (Num) -> Int)
+      #|  (M : Int)
+      #|  (n : Num)
+      #|  inverse((p : (Num) -> Num))
+      #|  (i : Num)
+      #|  (i : Num) => (g : (Num) -> Int)(inverse((p : (Num) -> Num), i))
+      #|  (hh : (Num) -> Int)
+      #|  (g : (Num) -> Int)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, permutes(p, op_dot_dot(1, n)) \226\134\146 IMAGE((hh : (Num) -> Int) => (i : Num) => hh(p(i)), ibox(n, M)) == ibox(n, M)
+      #|  inverse((p : (Num) -> Num), (j : Num))
+      #|  (a : (Num) -> Int)((p : (Num) -> Num)(inverse(p, (j : Num)))) == (b : (Num) -> Int)(p(inverse(p, j)))
+      #|  (j : Num)
+      #|  (b : (Num) -> Int)
+      #|  (a : (Num) -> Int)
+      #|  ibox((n : Num), (M : Int))
+      #|  (Fn : ((Num) -> Int) -> Num)
+      #|  (hh : (Num) -> Int) => (i : Num) => hh((p : (Num) -> Num)(i))
+      #|  permutes((p : (Num) -> Num), op_dot_dot(1, (n : Num)))
+      #|  (M : Int)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 M : Int, \226\136\128 Fn : ((Num) -> Int) -> Num, permutes(p, op_dot_dot(1, n)) \226\134\146 nsum(ibox(n, M), Fn) == nsum(ibox(n, M), (hh : (Num) -> Int) => Fn((i : Num) => hh(p(i))))
+      #|  (hinv : (Num) -> Num)
+      #|  (if IN((x : Num), (s : (Num) -> Bool)) { (g : (Num) -> Num)(x) } else { (h : (Num) -> Num)(x) }) == (if IN((y : Num), s) { g(y) } else { h(y) })
+      #|  (hinv : (Num) -> Num)((h : (Num) -> Num)((x : Num))) == x && hinv(h((y : Num))) == y
+      #|  IN((x : Num), DIFF((u : (Num) -> Bool), (s : (Num) -> Bool))) && IN((y : Num), DIFF(u, s))
+      #|  (if IN((x : Num), (s : (Num) -> Bool)) { (g : (Num) -> Num)(x) } else { (h : (Num) -> Num)(x) }) == (if IN((y : Num), s) { g(y) } else { h(y) })
+      #|  IN((g : (Num) -> Num)((y : Num)), IMAGE(g, (s : (Num) -> Bool)))
+      #|  IN((h : (Num) -> Num)((x : Num)), DIFF((u : (Num) -> Bool), IMAGE((g : (Num) -> Num), (s : (Num) -> Bool))))
+      #|  IN((x : Num), DIFF((u : (Num) -> Bool), (s : (Num) -> Bool)))
+      #|  (if IN((x : Num), (s : (Num) -> Bool)) { (g : (Num) -> Num)(x) } else { (h : (Num) -> Num)(x) }) == (if IN((y : Num), s) { g(y) } else { h(y) })
+      #|  IN((g : (Num) -> Num)((x : Num)), IMAGE(g, (s : (Num) -> Bool)))
+      #|  IN((h : (Num) -> Num)((y : Num)), DIFF((u : (Num) -> Bool), IMAGE((g : (Num) -> Num), (s : (Num) -> Bool))))
+      #|  IN((y : Num), DIFF((u : (Num) -> Bool), (s : (Num) -> Bool)))
+      #|  IN((y : Num), (s : (Num) -> Bool))
+      #|  IN((x : Num), (s : (Num) -> Bool))
+      #|  IN((y : Num), (u : (Num) -> Bool))
+      #|  IN((x : Num), (u : (Num) -> Bool))
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  IN((x : Num), DIFF((u : (Num) -> Bool), (s : (Num) -> Bool)))
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (x : Num) => if IN(x, (s : (Num) -> Bool)) { (g : (Num) -> Num)(x) } else { if IN(x, (u : (Num) -> Bool)) { (h : (Num) -> Num)(x) } else { x } }
+      #|  (hinv : (Num) -> Num)
+      #|  (h : (Num) -> Num)
+      #|  DIFF((u : (Num) -> Bool), IMAGE((g : (Num) -> Num), (s : (Num) -> Bool)))
+      #|  DIFF((u : (Num) -> Bool), (s : (Num) -> Bool))
+      #|  CARD(IMAGE((g : (Num) -> Num), (s : (Num) -> Bool))) == CARD(s)
+      #|  CARD(DIFF((u : (Num) -> Bool), (s : (Num) -> Bool))) == CARD(DIFF(u, IMAGE((g : (Num) -> Num), s)))
+      #|  FINITE((s : (Num) -> Bool)) && FINITE(IMAGE((g : (Num) -> Num), s))
+      #|  \226\136\128 u : (Num) -> Bool, \226\136\128 s : (Num) -> Bool, \226\136\128 g : (Num) -> Num, FINITE(u) && SUBSET(s, u) && SUBSET(IMAGE(g, s), u) && (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, s) && IN(y, s) && g(x) == g(y) \226\134\146 x == y) \226\134\146 (\226\136\131 p : (Num) -> Num, permutes(p, u) && (\226\136\128 x : Num, IN(x, s) \226\134\146 p(x) == g(x)))
+      #|  (x : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 c : Num, \226\136\128 t : Num, 1 <= G && c + e <= e * G && IN(t, TSET(e, G)) \226\134\146 IN(t + c, op_dot_dot(1, 2 * (e * G)))
+      #|  (bp : (Num) -> Bool)
+      #|  (ss : Num)
+      #|  (e : Num) * LVAL((bp : (Num) -> Bool), (ss : Num)) + e == e * (LVAL(bp, ss) + 1)
+      #|  (t : Num)
+      #|  (u : Num)
+      #|  (t : Num)
+      #|  (t : Num) => t + (e : Num) * LVAL((bp : (Num) -> Bool), (ss : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  op_dot_dot(1, 2 * ((e : Num) * (G : Num)))
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 ss : Num, \226\136\128 bp : (Num) -> Bool, 2 <= e && 1 <= G && G == EXP(2, ss) \226\134\146 (\226\136\131 sigma : (Num) -> Num, permutes(sigma, op_dot_dot(1, 2 * (e * G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 sigma(t) == t + e * LVAL(bp, ss)))
+      #|  (l : Num)
+      #|  ((l : Num) => (hh : (Num) -> Int)((sigma : (Num) -> Num)(inverse(sigma, l)))) == hh
+      #|  2 * ((e : Num) * (G : Num)) == 2 * (e * G)
+      #|  (i : Num)
+      #|  (e : Num) * (G : Num)
+      #|  (e : Num)
+      #|  (bp : (Num) -> Bool)
+      #|  (ss : Num)
+      #|  leafsg((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (bp : (Num) -> Bool), (i : Num)) == leafsg(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, i)
+      #|  2 * ((e : Num) * (G : Num)) == 2 * (e * G)
+      #|  (i : Num)
+      #|  (e : Num) * (G : Num)
+      #|  (e : Num)
+      #|  (bp : (Num) -> Bool)
+      #|  (ss : Num)
+      #|  (sigma : (Num) -> Num)(leafidx((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (i : Num))) == leafidx(ss, e * G, (j : Num) => RIFFLE(e * G), (bp : (Num) -> Bool), i)
+      #|  IN(leafidx((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (i : Num)), TSET(e, G))
+      #|  (i : Num)
       #|  forall e (ss:num) (G:num) (bp:num->bool) (PSI:(num->int)->num->num->int)\n  (hh:num->int) (sigma:num->num) (y:num->int).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     sigma permutes 1..2*e*G /\\\n     (forall t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)\n     ==> isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh i) (e-1)\n      y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) =\n         isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI (\\l.\n          hh(inverse sigma l)) (sigma i)) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j.\n           F) (\\l. hh(sigma l)) i (y i))
-      #|  e * LVAL bp ss
-      #|  leafidx ss (e*G) (\\j:num. RIFFLE(e*G)) (\\j.\n      F) i
-      #|  y:num->int
-      #|  sigma:num->num
-      #|  hh:num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  bp:num->bool
-      #|  G:num
-      #|  ss:num
-      #|  e:num
-      #|  (b <=> c) ==> (a /\\ b <=> a /\\ c)
-      #|  y:num->int
-      #|  hh:num->int
-      #|  sigma permutes\n   1..2*e*G
+      #|  (e : Num) * LVAL((bp : (Num) -> Bool), (ss : Num))
+      #|  leafidx((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (i : Num))
+      #|  (y : (Num) -> Int)
+      #|  (sigma : (Num) -> Num)
+      #|  (hh : (Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (bp : (Num) -> Bool)
+      #|  (G : Num)
+      #|  (ss : Num)
+      #|  (e : Num)
+      #|  (b : Bool) == (c : Bool) \226\134\146 ((a : Bool) && b) == (a && c)
+      #|  (y : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  permutes((sigma : (Num) -> Num), op_dot_dot(1, 2 * ((e : Num) * (G : Num))))
       #|  forall e (ss:num) (G:num) (bp:num->bool) (P:int) (PSI:(num->int)->num->num->int)\n  (sigma:num->num).\n     2 <= e /\\ e-1 <= ss /\\ 1 <= G /\\ G = 2 EXP ss /\\\n     sigma permutes 1..2*e*G /\\\n     (forall t. t IN TSET e G ==> sigma t = t + e * LVAL bp ss)\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0})\n         = nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI\n                    (\\l. hh(inverse sigma l)) (sigma i)) (e-1) y) (e*G) (\\j.\n                     RIFFLE(e*G)) (\\j. F) hh i (y i)) = &0})
-      #|  y:num
-      #|  x:num
-      #|  (lab:num->num) x
-      #|  forall e (G:num) (lab:num->num).\n     1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> (forall x y. x IN {g | g < 2*e} /\\ y IN {g | g < 2*e} /\\\n      lab x = lab y ==> x = y)
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  lab:num->num
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  x':num
-      #|  g:num
-      #|  g:num
-      #|  t:num
-      #|  g:num
-      #|  t:num
-      #|  (0..2*e-1) = {g | g < 2*e}
-      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> IMAGE lab (0..2*e-1) = TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab g IN TSET e G
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> CARD(IMAGE lab (0..2*e-1)) = 2*e
-      #|  t:num
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> IMAGE lab (0..2*e-1) SUBSET 1..2*e*G
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> CARD((1..2*e*G) DIFF IMAGE lab (0..2*e-1)) = 2*e*G - 2*e
-      #|  g:num
-      #|  (lab:num->num) g IN IMAGE lab (0..2 * e - 1)
-      #|  g:num
-      #|  isum (0..2 * e - 1) (\\g. rstx (IMAGE lab (0..2 * e - 1)) hh\n   (lab g) * zv g) = isum (0..2 * e - 1) (\\g. hh (lab g) * zv g)
-      #|  zv:num->int
-      #|  forall e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num) (hh:num->int).\n     2 <= e\n     ==> (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n      pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) hh =\n         (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n          pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) (rstx\n                   (IMAGE lab (0..2*e-1)) hh)
-      #|  (i + 1) - 1 = i
-      #|  (2*e-1)+1 = 2*e
-      #|  i + 1 - 1 = i
-      #|  0 + 1 = 1
-      #|  2*e-1
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (lab : (Num) -> Num)((x : Num))
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, 1 <= G && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, {(g : Num) | g < 2 * e}) && IN(y, {(g : Num) | g < 2 * e}) && lab(x) == lab(y) \226\134\146 x == y)
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  (lab : (Num) -> Num)
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (x' : Num)
+      #|  (g : Num)
+      #|  (g : Num)
+      #|  (t : Num)
+      #|  (g : Num)
+      #|  (t : Num)
+      #|  op_dot_dot(0, 2 * (e : Num) - 1) == {(g : Num) | g < 2 * e}
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, 2 <= e && 1 <= G && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 IMAGE(lab, op_dot_dot(0, 2 * e - 1)) == TSET(e, G)
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  TSET((e : Num), (G : Num))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  IN((lab : (_) -> Num)((g : _)), TSET((e : Num), (G : Num)))
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, 2 <= e && 1 <= G && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 CARD(IMAGE(lab, op_dot_dot(0, 2 * e - 1))) == 2 * e
+      #|  (t : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, 2 <= e && 1 <= G && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 SUBSET(IMAGE(lab, op_dot_dot(0, 2 * e - 1)), op_dot_dot(1, 2 * (e * G)))
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, 2 <= e && 1 <= G && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 CARD(DIFF(op_dot_dot(1, 2 * (e * G)), IMAGE(lab, op_dot_dot(0, 2 * e - 1)))) == 2 * (e * G) - 2 * e
+      #|  (g : Num)
+      #|  IN((lab : (Num) -> Num)((g : Num)), IMAGE(lab, op_dot_dot(0, 2 * (e : Num) - 1)))
+      #|  (g : Num)
+      #|  isum(op_dot_dot(0, 2 * (e : Num) - 1), (g : Num) => rstx(IMAGE((lab : (Num) -> Num), op_dot_dot(0, 2 * e - 1)), (hh : (Num) -> Int), lab(g)) * (zv : (Num) -> Int)(g)) == isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * zv(g))
+      #|  (zv : (Num) -> Int)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 lab : (Num) -> Num, \226\136\128 hh : (Num) -> Int, 2 <= e \226\134\146 ((hh : (Num) -> Int) => nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int(Cm0 * pow(P, G - (e - 1))), 2 * e) } else { 0 }))(hh) == ((hh : (Num) -> Int) => nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int(Cm0 * pow(P, G - (e - 1))), 2 * e) } else { 0 }))(rstx(IMAGE(lab, op_dot_dot(0, 2 * e - 1)), hh))
+      #|  (i : Num) + 1 - 1 == i
+      #|  2 * (e : Num) - 1 + 1 == 2 * e
+      #|  (i : Num) + (1 - 1) == i
+      #|  0 + 1 == 1
+      #|  2 * (e : Num) - 1
       #|  0
-      #|  (\\i. (hh:num->int)((lab:num->num)(i-1)) * v(i-1)):num->int
+      #|  (i : Num) => (hh : (Num) -> Int)((lab : (Num) -> Num)(i - 1)) * (v : (Num) -> Int)(i - 1)
       #|  1
-      #|  i:num
-      #|  isum(1..2*e)(\\i. hh' i * v(i-1)) = isum(1..2*e)(\\i.\n    (hh:num->int)((lab:num->num)(i-1)) * v(i-1))
-      #|  forall e (lab:num->num) (hh:num->int) (hh':num->int) (v:num->int).\n     2 <= e /\\ (forall i. i IN 1..2*e ==> hh' i = hh(lab(i-1)))\n     ==> isum(1..2*e)(\\i. hh' i * v(i-1)) = isum(0..2*e-1)(\\g. hh(lab g) * v\n      g)
-      #|  (g+1)-1 = g
-      #|  g + 1 IN 1..2 * e
-      #|  g:num
-      #|  zv:num->int
-      #|  hh':num->int
-      #|  hh:num->int
-      #|  lab:num->num
-      #|  e:num
-      #|  i:num
-      #|  isum (1..2 * e) (\\i. hh' i * (if i IN 1..2 * e then zv (i -\n       1) else &0)) = isum (1..2*e)(\\i. hh' i * zv(i-1))
-      #|  i:num
-      #|  i:num
-      #|  zv:num->int
-      #|  i - 1 < 2 * e
-      #|  i:num
-      #|  i:num
-      #|  isum (1..2 * e) (\\i. hh' i * z (i - 1 + 1)) = isum\n           (1..2 * e) (\\i. hh' i * z i)
-      #|  (\\g. z(g+1)):num->int
-      #|  hh':num->int
-      #|  hh:num->int
-      #|  lab:num->num
-      #|  e:num
-      #|  g < 2 * e
-      #|  g:num
-      #|  isum (0..2 * e - 1) (\\g. hh (lab g) * (if g < 2 * e then z\n       (g + 1) else &0)) = isum (0..2 * e - 1) (\\g.\n        (hh:num->int)((lab:num->num) g) * (\\g. z(g+1)) g)
-      #|  g:num
-      #|  g:num
-      #|  z:num->int
-      #|  \\(z:num->int). (\\g. if g < 2*e then z(g+1) else &0):num->int
-      #|  \\(zv:num->int). (\\i. if i IN 1..2*e then zv(i-1) else\n    &0):num->int
-      #|  forall e (lab:num->num) (G:num) (Cm0:int) (P:int) (WB:int)\n    (hh:num->int) (hh':num->int).\n     2 <= e /\\ (forall i. i IN 1..2*e ==> hh' i = hh(lab(i-1)))\n     ==> nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= WB) /\\\n      (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)\n         = nsum {z | (forall i. i IN 1..2*e ==> abs(z i) <= WB) /\\\n          (forall i. ~(i IN 1..2*e) ==> z i = &0) /\\\n                     isum (1..2*e) (\\i. hh' i * z i) = &0}\n                 (\\z. nproduct (1..2*e) (\\i. num_of_int (Cm0 * P pow\n                  (G-(e-1)))))
-      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  forall i. i IN 1..2 * e ==> abs ((z:num->int) i) <= WB
-      #|  forall i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
-      #|  forall i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
-      #|  forall i. ~(i IN 1..2 * e) ==> (z:num->int) i = &0
-      #|  i:num
-      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  forall g. g < 2 * e ==> abs ((zv:num->int) g) <= WB
-      #|  forall g. ~(g < 2 * e) ==> (zv:num->int) g = &0
-      #|  forall g. ~(g < 2 * e) ==> (zv:num->int) g = &0
-      #|  forall g. ~(g < 2 * e) ==> (zv:num->int) g = &0
-      #|  g:num
-      #|  y:num
-      #|  x:num
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  (forall x y. x IN 0..2 * e - 1 /\\ y IN 0..2 * e - 1 /\\\n   lab x = lab y ==> x = y) /\\\n    (forall y. y IN IMAGE (lab:num->num) (0..2 * e - 1) ==> (?x. x IN 0..2 * e - 1 /\\\n     lab x = y))
-      #|  IMAGE (lab:num->num) (0..2*e-1)
-      #|  0..2*e-1
-      #|  lab:num->num
-      #|  forall e (G:num) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> ?labinv. (forall t. t IN IMAGE lab (0..2*e-1) ==> labinv t IN (0..2*e-1) /\\\n      lab(labinv t) = t) /\\\n                  (forall g. g IN (0..2*e-1) ==> labinv(lab g) = g)
-      #|  (\\i. if i IN 1..2*e then (x:num->int)((lab:num->num)(i-1)) else\n            &0):num->int
-      #|  x:num->int
-      #|  (&G:int) * &e * cpsi * (&2 * P) pow (e-1)
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  lab:num->num
-      #|  e:num
-      #|  ((labinv:num->num) l + 1) - 1 = labinv\n               l
-      #|  (labinv:num->num) l + 1 IN 1..2*e
-      #|  (labinv:num->num) l IN (0..2*e-1) /\\\n        (lab:num->num)(labinv l) = l
-      #|  l:num
-      #|  i:num
-      #|  i:num
-      #|  x:num->int
-      #|  (labinv:num->num)((lab:num->num)(i-1)) = i - 1
-      #|  i-1
-      #|  (lab:num->num)(i-1) IN IMAGE (lab:num->num) (0..2*e-1)
-      #|  (i-1) IN (0..2*e-1)
-      #|  i:num
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  ~((l:num) IN IMAGE (lab:num->num) (0..2*e-1))
-      #|  (labinv:num->num) l IN (0..2*e-1)
-      #|  l:num
-      #|  y:num->int
-      #|  \\(hh:num->int). (\\l. if l IN IMAGE lab (0..2*e-1) then hh(labinv l + 1)\n       else &0):num->int
-      #|  \\(hh:num->int). (\\i. if i IN 1..2*e then hh(lab(i-1))\n    else &0):num->int
-      #|  labinv:num->num
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  forall e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t)\n     ==> nsum (rbox (IMAGE lab (0..2*e-1)) (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0))\n         = nsum {hh | (forall i. i IN 1..2*e ==> abs(hh i) <= (&2*P)) /\\\n          (forall i. ~(i IN 1..2*e) ==> hh i = &0)}\n                 (\\hh. nsum {z | (forall i. i IN 1..2*e ==> abs(z i) <= (&G) * &e *\n                  cpsi * (&2 * P) pow (e-1)) /\\\n                   (forall i. ~(i IN 1..2*e) ==> z i = &0) /\\\n                                 isum (1..2*e) (\\i. hh i * z i) = &0}\n                            (\\z. nproduct (1..2*e) (\\i. num_of_int (Cm0 * P pow\n                             (G-(e-1))))))
-      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e ==> abs ((y:num->int) i) <= &2 * P
-      #|  forall i. ~(i IN 1..2 * e) ==> (y:num->int) i = &0
-      #|  forall i. ~(i IN 1..2 * e) ==> (y:num->int) i = &0
-      #|  i:num
-      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  forall i. i IN 1..2 * e * G ==> abs ((x:num->int) i) <= &2 * P
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  forall g. g < 2 * e ==> lab g IN TSET\n          e G
-      #|  &(num_of_int(&2 * P)):int = &2 * P
-      #|  &2 * (&2 * P) + &1 = &(2 * num_of_int(&2 * P) + 1):int
-      #|  lab:num->num
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  e:num
-      #|  lab:num->num
-      #|  G:num
-      #|  e:num
-      #|  (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n      pow (e-1)) /\\\n       (forall g. ~(g < 2*e) ==> zv g = &0)} (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) *\n        zv g) = &0 then (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else\n         0)):(num->int)->num
-      #|  IMAGE (lab:num->num) (0..2*e-1)
-      #|  &2*P:int
-      #|  2*e*G
-      #|  forall e (G:num) (Cm0:int) (P:int) (cpsi:int) (lab:num->num) (Bn:num).\n     2 <= e /\\ 1 <= G /\\ &1 <= P /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)) =\n                       Bn
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  &Bn:int
-      #|  (P:int) pow (G-k) * P pow (k-(e-1)) = P pow (G-(e-1))
-      #|  (B:int) * (&5 * P) pow (G-k) * (&2 * P) pow (k-(e-1))
-      #|  (&2 * (&2 * (P:int)) + &1) pow (G-k) <= (&5 * P) pow (G-k)
-      #|  &2 * (&2 * (P:int)) + &1 <= &5 * P
-      #|  forall(B:int) (P:int) (e:num) (k:num) (G:num) (Cm0:int).\n     &1 <= B /\\ &1 <= P /\\ e-1 <= k /\\ k <= G /\\\n     B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0\n     ==> B * (&2 * (&2 * P) + &1) pow (G-k) * (&2 * P) pow (k-(e-1))\n         <= Cm0 * P pow (G-(e-1))
-      #|  B:num
-      #|  pp:num->num->num
-      #|  (\\hh (i:num) (y:int). hh i * ipoly (PSI hh i) (e-1)\n     y):(num->int)->num->int->int
-      #|  s:num
-      #|  ibox (2*e*G) (&2*P)
-      #|  &2*P:int
-      #|  e*G:num
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, 2 * (e : Num)), (i : Num) => (hh' : (Num) -> Int)(i) * (v : (Num) -> Int)(i - 1)) == isum(op_dot_dot(1, 2 * e), (i : Num) => (hh : (Num) -> Int)((lab : (Num) -> Num)(i - 1)) * v(i - 1))
+      #|  \226\136\128 e : Num, \226\136\128 lab : (Num) -> Num, \226\136\128 hh : (Num) -> Int, \226\136\128 hh' : (Num) -> Int, \226\136\128 v : (Num) -> Int, 2 <= e && (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh'(i) == hh(lab(i - 1))) \226\134\146 isum(op_dot_dot(1, 2 * e), (i : Num) => hh'(i) * v(i - 1)) == isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * v(g))
+      #|  (g : Num) + 1 - 1 == g
+      #|  IN((g : Num) + 1, op_dot_dot(1, 2 * (e : Num)))
+      #|  (g : Num)
+      #|  (zv : (Num) -> Int)
+      #|  (hh' : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  (lab : (Num) -> Num)
+      #|  (e : Num)
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, 2 * (e : Num)), (i : Num) => (hh' : (Num) -> Int)(i) * (if IN(i, op_dot_dot(1, 2 * e)) { (zv : (Num) -> Int)(i - 1) } else { int_of_num(0) })) == isum(op_dot_dot(1, 2 * e), (i : Num) => hh'(i) * zv(i - 1))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (zv : (Num) -> Int)
+      #|  (i : Num) - 1 < 2 * (e : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  isum(op_dot_dot(1, 2 * (e : Num)), (i : Num) => (hh' : (Num) -> Int)(i) * (z : (Num) -> Int)(i - 1 + 1)) == isum(op_dot_dot(1, 2 * e), (i : Num) => hh'(i) * z(i))
+      #|  (g : Num) => (z : (Num) -> Int)(g + 1)
+      #|  (hh' : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  (lab : (Num) -> Num)
+      #|  (e : Num)
+      #|  (g : Num) < 2 * (e : Num)
+      #|  (g : Num)
+      #|  isum(op_dot_dot(0, 2 * (e : Num) - 1), (g : Num) => (hh : (Num) -> Int)((lab : (Num) -> Num)(g)) * (if g < 2 * e { (z : (Num) -> Int)(g + 1) } else { int_of_num(0) })) == isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * ((g : Num) => z(g + 1))(g))
+      #|  (g : Num)
+      #|  (g : Num)
+      #|  (z : (Num) -> Int)
+      #|  (z : (Num) -> Int) => (g : Num) => if g < 2 * (e : Num) { z(g + 1) } else { int_of_num(0) }
+      #|  (zv : (Num) -> Int) => (i : Num) => if IN(i, op_dot_dot(1, 2 * (e : Num))) { zv(i - 1) } else { int_of_num(0) }
+      #|  \226\136\128 e : Num, \226\136\128 lab : (Num) -> Num, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 WB : Int, \226\136\128 hh : (Num) -> Int, \226\136\128 hh' : (Num) -> Int, 2 <= e && (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh'(i) == hh(lab(i - 1))) \226\134\146 nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= WB) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int(Cm0 * pow(P, G - (e - 1))), 2 * e) } else { 0 }) == nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= WB) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh'(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => num_of_int(Cm0 * pow(P, G - (e - 1)))))
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((z : (Num) -> Int)(i)) <= (WB : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((z : (Num) -> Int)(i)) <= (WB : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((z : (Num) -> Int)(i)) <= (WB : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((z : (Num) -> Int)(i)) <= (WB : Int)
+      #|  \226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 (z : (Num) -> Int)(i) == int_of_num(0)
+      #|  \226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 (z : (Num) -> Int)(i) == int_of_num(0)
+      #|  \226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 (z : (Num) -> Int)(i) == int_of_num(0)
+      #|  (i : Num)
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 abs((zv : (Num) -> Int)(g)) <= (WB : Int)
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 abs((zv : (Num) -> Int)(g)) <= (WB : Int)
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 abs((zv : (Num) -> Int)(g)) <= (WB : Int)
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 abs((zv : (Num) -> Int)(g)) <= (WB : Int)
+      #|  \226\136\128 g : Num, !(g < 2 * (e : Num)) \226\134\146 (zv : (Num) -> Int)(g) == int_of_num(0)
+      #|  \226\136\128 g : Num, !(g < 2 * (e : Num)) \226\134\146 (zv : (Num) -> Int)(g) == int_of_num(0)
+      #|  \226\136\128 g : Num, !(g < 2 * (e : Num)) \226\134\146 (zv : (Num) -> Int)(g) == int_of_num(0)
+      #|  (g : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, op_dot_dot(0, 2 * (e : Num) - 1)) && IN(y, op_dot_dot(0, 2 * e - 1)) && (lab : (Num) -> Num)(x) == lab(y) \226\134\146 x == y) && (\226\136\128 y : Num, IN(y, IMAGE(lab, op_dot_dot(0, 2 * e - 1))) \226\134\146 (\226\136\131 x : Num, IN(x, op_dot_dot(0, 2 * e - 1)) && lab(x) == y))
+      #|  IMAGE((lab : (Num) -> Num), op_dot_dot(0, 2 * (e : Num) - 1))
+      #|  op_dot_dot(0, 2 * (e : Num) - 1)
+      #|  (lab : (Num) -> Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 lab : (Num) -> Num, 2 <= e && 1 <= G && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 (\226\136\131 labinv : (Num) -> Num, (\226\136\128 t : Num, IN(t, IMAGE(lab, op_dot_dot(0, 2 * e - 1))) \226\134\146 IN(labinv(t), op_dot_dot(0, 2 * e - 1)) && lab(labinv(t)) == t) && (\226\136\128 g : Num, IN(g, op_dot_dot(0, 2 * e - 1)) \226\134\146 labinv(lab(g)) == g))
+      #|  (i : Num) => if IN(i, op_dot_dot(1, 2 * (e : Num))) { (x : (Num) -> Int)((lab : (Num) -> Num)(i - 1)) } else { int_of_num(0) }
+      #|  (x : (Num) -> Int)
+      #|  int_of_num((G : Num)) * (int_of_num((e : Num)) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1)))
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (e : Num)
+      #|  (labinv : (Num) -> Num)((l : Num)) + 1 - 1 == labinv(l)
+      #|  IN((labinv : (Num) -> Num)((l : Num)) + 1, op_dot_dot(1, 2 * (e : Num)))
+      #|  IN((labinv : (Num) -> Num)((l : Num)), op_dot_dot(0, 2 * (e : Num) - 1)) && (lab : (Num) -> Num)(labinv(l)) == l
+      #|  (l : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (x : (Num) -> Int)
+      #|  (labinv : (Num) -> Num)((lab : (Num) -> Num)((i : Num) - 1)) == i - 1
+      #|  (i : Num) - 1
+      #|  IN((lab : (Num) -> Num)((i : Num) - 1), IMAGE(lab, op_dot_dot(0, 2 * (e : Num) - 1)))
+      #|  IN((i : Num) - 1, op_dot_dot(0, 2 * (e : Num) - 1))
+      #|  (i : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  !IN((l : Num), IMAGE((lab : (Num) -> Num), op_dot_dot(0, 2 * (e : Num) - 1)))
+      #|  IN((labinv : (Num) -> Num)((l : Num)), op_dot_dot(0, 2 * (e : Num) - 1))
+      #|  (l : Num)
+      #|  (y : (Num) -> Int)
+      #|  (hh : (Num) -> Int) => (l : Num) => if IN(l, IMAGE((lab : (Num) -> Num), op_dot_dot(0, 2 * (e : Num) - 1))) { hh((labinv : (Num) -> Num)(l) + 1) } else { int_of_num(0) }
+      #|  (hh : (Num) -> Int) => (i : Num) => if IN(i, op_dot_dot(1, 2 * (e : Num))) { hh((lab : (Num) -> Num)(i - 1)) } else { int_of_num(0) }
+      #|  (labinv : (Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 lab : (Num) -> Num, 2 <= e && 1 <= G && int_of_num(1) <= P && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) \226\134\146 nsum(rbox(IMAGE(lab, op_dot_dot(0, 2 * e - 1)), 2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int(Cm0 * pow(P, G - (e - 1))), 2 * e) } else { 0 })) == nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => num_of_int(Cm0 * pow(P, G - (e - 1))))))
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((y : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((y : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((y : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((y : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((y : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs((y : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 (y : (Num) -> Int)(i) == int_of_num(0)
+      #|  \226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 (y : (Num) -> Int)(i) == int_of_num(0)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((x : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((x : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((x : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((x : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  \226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 IN((lab : (Num) -> Num)(g), TSET(e, (G : Num)))
+      #|  int_of_num(num_of_int(int_of_num(2) * (P : Int))) == int_of_num(2) * P
+      #|  int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1) == int_of_num(2 * num_of_int(int_of_num(2) * P) + 1)
+      #|  (lab : (Num) -> Num)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (hh : (Num) -> Int) => nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 abs(zv(g)) <= int_of_num((G : Num)) * (int_of_num(e) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh((lab : (Num) -> Num)(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int((Cm0 : Int) * pow(P, G - (e - 1))), 2 * e) } else { 0 })
+      #|  IMAGE((lab : (Num) -> Num), op_dot_dot(0, 2 * (e : Num) - 1))
+      #|  int_of_num(2) * (P : Int)
+      #|  2 * ((e : Num) * (G : Num))
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 lab : (Num) -> Num, \226\136\128 Bn : Num, 2 <= e && 1 <= G && int_of_num(1) <= P && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) && (\226\136\128 t : Num, IN(t, TSET(e, G)) \226\134\146 existsunique((g : Num) => g < 2 * e && lab(g) == t)) && pow(int_of_num(2) * (int_of_num(2) * P) + int_of_num(1), 2 * (e * G) - 2 * e) * int_of_num(nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => num_of_int(Cm0 * pow(P, G - (e - 1))))))) == int_of_num(Bn) \226\134\146 nsum(ibox(2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh(lab(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int(Cm0 * pow(P, G - (e - 1))), 2 * e) } else { 0 })) == Bn
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  int_of_num((Bn : Num))
+      #|  pow((P : Int), (G : Num) - (k : Num)) * pow(P, k - ((e : Num) - 1)) == pow(P, G - (e - 1))
+      #|  (B : Int) * (pow(int_of_num(5) * (P : Int), (G : Num) - (k : Num)) * pow(int_of_num(2) * P, k - ((e : Num) - 1)))
+      #|  pow(int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1), (G : Num) - (k : Num)) <= pow(int_of_num(5) * P, G - k)
+      #|  int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1) <= int_of_num(5) * P
+      #|  \226\136\128 B : Int, \226\136\128 P : Int, \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, \226\136\128 Cm0 : Int, int_of_num(1) <= B && int_of_num(1) <= P && e - 1 <= k && k <= G && B * (pow(int_of_num(5), G - k) * pow(int_of_num(2), k - (e - 1))) == Cm0 \226\134\146 B * (pow(int_of_num(2) * (int_of_num(2) * P) + int_of_num(1), G - k) * pow(int_of_num(2) * P, k - (e - 1))) <= Cm0 * pow(P, G - (e - 1))
+      #|  (B : Num)
+      #|  (pp : (Num, Num) -> Num)
+      #|  (hh : (Num) -> Int) => (i : Num) => (y : Int) => hh(i) * ipoly((PSI : ((Num) -> Int, Num, Num) -> Int)(hh, i), (e : Num) - 1, y)
+      #|  (s : Num)
+      #|  ibox(2 * ((e : Num) * (G : Num)), int_of_num(2) * (P : Int))
+      #|  int_of_num(2) * (P : Int)
+      #|  (e : Num) * (G : Num)
       #|  forall e (G:num) (P:int) (PSI:(num->int)->num->num->int) (s:num)\n  (pp:num->num->num) (B:num).\n    1 <= e * G /\\ (forall j. pp j permutes 1..(2*e*G)) /\\\n    (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n       (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n             isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI hh i)\n              (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= B)\n    ==> nsum (ibox (2*e*G) (&2*P))\n          (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2*P) /\\\n               isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})\n                <= B
-      #|  (\\(j:num) (x:num). x):num->num->num
+      #|  (j : Num) => (x : Num) => x
       #|  0
       #|  forall e (G:num) (P:int) (PSI:(num->int)->num->num->int) (Bn:num).\n     1 <= e * G /\\\n     nsum (ibox (2*e*G) (&2*P))\n       (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2*P) /\\\n             isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})\n              <= Bn\n     ==> ?(s:num) (pp:num->num->num).\n            1 <= e * G /\\ (forall j. pp j permutes 1..(2*e*G)) /\\\n            (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n               (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                     isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI\n                      hh i) (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= Bn)
-      #|  2*e*G = 2*(e*G)
-      #|  1 <= n <=> ~(n=0)
-      #|  1 <= e * G
-      #|  (\\j:num. RIFFLE(e*G)):num->num->num
-      #|  ss:num
+      #|  2 * ((e : Num) * (G : Num)) == 2 * (e * G)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  1 <= (e : Num) * (G : Num)
+      #|  (j : Num) => RIFFLE((e : Num) * (G : Num))
+      #|  (ss : Num)
       #|  forall e k (c:int) (G:num) (Cm0:int) (P:int) (cpsi:int) (L:int)\n  (PSI:(num->int)->num->num->int) (Bn:num) (ss:num).\n      2 <= e /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\ &1 <= P /\\ G = 2 EXP ss /\\\n      (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n          (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh i)\n                 (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0}) <= Bn)\n      ==> nsum (ibox (2*e*G) (&2*P))\n            (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= Bn
-      #|  2*e*(q+1) - 2*e = 2*e*q
-      #|  (q+1)-1 = q
-      #|  G-1
-      #|  ?q. G = q + 1
-      #|  (&5:int) pow (2*e*G-2*e) =\n                  (&5 pow (G-1)) pow (2*e)
-      #|  (&2*(&2*(P:int))+ &1) pow (2*e*G-2*e) * &GN
-      #|  ((&5:int) pow (2*e*G-2*e) * P pow (2*e*G-2*e)) * ((Cm0 * P pow\n   (G-(e-1))) pow (2*e) * Cf * fam)
-      #|  a * Cf * fam = a * (Cf * fam):int
-      #|  (&(MaxMult EXP (2*e)):int) * Cf * fam
-      #|  (&GN:int) <= (Cm0 * P pow (G-(e-1))) pow (2*e) * Cf * fam
-      #|  &(MaxMult EXP (2*e)):int <=\n    (Cm0 * P pow (G-(e-1))) pow (2*e)
-      #|  (&2*(&2*(P:int))+ &1) pow (2*e*G-2*e) <=\n   &5 pow (2*e*G-2*e) * P pow\n   (2*e*G-2*e)
-      #|  &0 <= (Cf:int)
-      #|  &0 <= (fam:int)
-      #|  &0 <= (&2 * (P:int)) * &2 * W * (&2 * P) pow (e-1)
-      #|  &0 <= (P:int) pow (e-1) /\\\n   &0 <= P pow (G-(e-1))
-      #|  &0 <= (P:int)
-      #|  fam:int = ((&2 * P) * &2 * W * (&2 * P) pow (e-1)) pow (2*e-1)
-      #|  forall e (G:num) (P:int) (Cm0:int) (Cf:int) (W:int) (MaxMult:num) (GN:num)\n  (FS:num).\n     2 <= e /\\ e-1 <= G /\\ &1 <= P /\\ &1 <= Cm0 /\\ &1 <= Cf /\\ &1 <= W /\\\n     &MaxMult <= Cm0 * P pow (G-(e-1)) /\\\n     &GN <= &(MaxMult EXP (2*e)) * Cf * ((&2 * P) * &2 * (W * (&2 * P) pow\n      (e-1))) pow (2*e-1) /\\\n     &FS <= (&2*(&2*P)+ &1) pow (2*e*G - 2*e) * &GN\n     ==> &FS <= (&5 pow (G-1) * Cm0) pow (2*e) * (P pow (G-(e-1))) pow (2*e) *\n      P pow (2*e*G - 2*e) *\n                (Cf * ((&2 * P) * &2 * W * (&2 * P) pow (e-1)) pow (2*e-1))
-      #|  &1 * x = x:int
-      #|  (&G:int) * &e * cpsi * (&2 * P) pow (e-1) =\n    (&G * &e * cpsi) * (&2 * P) pow (e-1)
-      #|  (&2 * (P:int)) pow (e-1)
-      #|  &2 * (P:int) <= (&2 * P) pow (e-1)
-      #|  &1 <= (&G:int) * &e * cpsi
-      #|  forall e (G:num) (cpsi:int) (P:int).\n     2 <= e /\\ 1 <= G /\\ &1 <= cpsi /\\ &1 <= P\n     ==> &2 * P <= &G * &e * cpsi * (&2 * P) pow (e-1)
-      #|  (&4 * &G * &e * (cpsi:int)) pow (4*e*G) =\n    (&4 * &G * &e * cpsi) pow (2*e*G) *\n    (&4 * &G * &e * cpsi) pow (2*e*G)
-      #|  &(NB * NB):int
-      #|  &0 <= (&4 * &G * &e * (cpsi:int)) pow (2*e*G)
-      #|  (&2 * (&2 * (P:int)) + &1) pow (2*e*G)
-      #|  (&NB:int) <= (&4 * &G * &e * cpsi) pow (2*e*G)
-      #|  &2 * (&2 * (P:int)) + &1 <= &4 * &G * &e * cpsi
-      #|  &2 * (P:int) <= (&2 * P) pow e
-      #|  (&2:int) * &G * &e * cpsi * (&2 * P) pow (e - 1)
-      #|  (&2 * (P:int)) pow (e-1) * (&2 * P) pow e <\n     (&2 * P) pow (e-1) *\n     (&2 * &G * &e * cpsi)
-      #|  &0 < (&2 * (P:int)) pow (e-1)
-      #|  (&2 * (P:int)) pow (2*e-1) =\n      (&2 * P) pow (e-1) * (&2 * P) pow e
-      #|  (&2 * (P:int)) pow e < &2 * &G * &e * cpsi
-      #|  hh:num->int
-      #|  nsum (ibox (2*e*G) (&2 * P)) (\\hh:num->int. NB)
-      #|  nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= NB * NB
-      #|  NB = CARD(ibox (2*e*G) (&2 * P))
-      #|  forall e (G:num) (P:int) (cpsi:int) (PSI:(num->int)->num->num->int).\n      2 <= e /\\ 1 <= G /\\ &1 <= P /\\ &1 <= cpsi /\\\n      ~(&2 * (&G * &e * cpsi * (&2 * P) pow (e-1)) <= (&2 * P) pow (2*e-1))\n      ==> &(nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}))\n          <= (&4 * &G * &e * cpsi) pow (4*e*G)
-      #|  DPWIH2 e <=>\n    ?k. e <= k /\\\n        forall(A:int). &1 <= A\n          ==> ?B. &1 <= B /\\\n              forall(ffam:num->num->int) P m.\n                  &1 <= P /\\\n                  (forall j. j IN 1..k ==> ~(ffam j e = &0)) /\\\n                  (forall j j'. j IN 1..k /\\\n                   j' IN 1..k ==> abs(ffam j e) = abs(ffam j' e)) /\\\n                  (forall j i. j IN 1..k /\\\n                   i <= e ==> abs(ffam j i) <= A * P pow (e - i))\n                  ==> &(CARD {x | x IN ibox k P /\\\n                                  isum(1..k)(\\j. ipoly (ffam j) e (x j)) = m})\n                      <= B * P pow (k - e)
-      #|  a:int
-      #|  M:int
-      #|  ffam:num->num->int
-      #|  a:int
-      #|  M:int
-      #|  ffam:num->num->int
-      #|  B:int
-      #|  B:int
-      #|  A:int
-      #|  A:int
-      #|  k:num
-      #|  k:num
-      #|  forall d. DPWIH2 d\n    ==> ?k. d <= k /\\\n        forall(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        forall(ffam:num->num->int) M a. &1 <= M /\\\n            (forall j. j IN 1..k ==> ~(ffam j d = &0)) /\\\n            (forall j j'. j IN 1..k /\\\n             j' IN 1..k ==> abs(ffam j d) = abs(ffam j' d)) /\\\n            (forall j i. j IN 1..k /\\ i <= d ==> abs(ffam j i) <= A * M pow (d - i))\n            ==> &(amcount (\\j. ipoly (ffam j) d) k M a) <= B * M pow (k - d)
-      #|  (&2 * (M:int) + &1) pow (G-k) * (B * M pow (k-d))
-      #|  M:int
-      #|  G-k:num
-      #|  &(CARD(ibox (G-k) M)):int <= (&2 * M + &1) pow (G-k)
-      #|  &(CARD (ibox (G-k) M) * c0):int
-      #|  a:int
-      #|  M:int
-      #|  ffam:num->num->int
-      #|  a:int
-      #|  c0:num
-      #|  z:int
-      #|  M:int
-      #|  G:num
-      #|  k:num
-      #|  \\j. ipoly ((ffam:num->num->int) j) d
-      #|  (&c0:int) = B * M pow (k-d)
-      #|  c0 = num_of_int(B * M pow (k-d))
-      #|  &0 <= (B:int) * M pow (k-d)
-      #|  d <= k:num
-      #|  1 <= d:num
-      #|  1 <= k
-      #|  z:int
-      #|  M:int
-      #|  G:num
-      #|  ffam:num->num->int
-      #|  B:int
-      #|  B:int
-      #|  A:int
-      #|  A:int
-      #|  k:num
-      #|  k:num
-      #|  forall d. 1 <= d /\\ DPWIH2 d\n    ==> ?k. d <= k /\\\n        forall(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        forall(ffam:num->num->int) G M z. k <= G /\\ &1 <= M /\\\n            (forall j. j IN 1..k ==> ~(ffam j d = &0)) /\\\n            (forall j j'. j IN 1..k /\\\n             j' IN 1..k ==> abs(ffam j d) = abs(ffam j' d)) /\\\n            (forall j i. j IN 1..k /\\ i <= d ==> abs(ffam j i) <= A * M pow (d - i))\n            ==> &(CARD {w | w IN ibox G M /\\\n             isum(1..G)(\\j. ipoly (ffam j) d (w j)) = z})\n                <= B * (&2 * M + &1) pow (G - k) * M pow (k - d)
-      #|  (w:num->int) j
-      #|  d:num
-      #|  j:num
-      #|  neg:num->bool
-      #|  \\j:num. (psi:num->int)
-      #|  j:num
-      #|  (b<=>c) ==> (a/\\b<=>a/\\c)
-      #|  w:num->int
-      #|  i:num
-      #|  j:num
-      #|  neg:num->bool
-      #|  \\j:num. (psi:num->int)
-      #|  i:num
-      #|  j:num
-      #|  d:num
-      #|  j':num
-      #|  neg:num->bool
-      #|  \\j:num. (psi:num->int)
-      #|  d:num
-      #|  j:num
-      #|  neg:num->bool
-      #|  \\j:num. (psi:num->int)
-      #|  j':num
-      #|  j:num
-      #|  d:num
-      #|  j:num
-      #|  neg:num->bool
-      #|  \\j:num. (psi:num->int)
-      #|  j:num
-      #|  z:int
-      #|  M:int
-      #|  G:num
-      #|  sgnf (\\j:num. (psi:num->int)) neg
-      #|  z:int
-      #|  M:int
-      #|  G:num
-      #|  neg:num->bool
-      #|  psi:num->int
-      #|  B:int
-      #|  B:int
-      #|  A:int
-      #|  k:num
-      #|  k:num
-      #|  DPWIH2\n   d
-      #|  1 <= d
-      #|  forall d. 1 <= d /\\ DPWIH2 d\n    ==> ?k. d <= k /\\\n        forall(A:int). &1 <= A ==> ?B. &1 <= B /\\\n        forall(psi:num->int) (neg:num->bool) G M z. k <= G /\\ &1 <= M /\\\n            ~(psi d = &0) /\\\n            (forall i. i <= d ==> abs(psi i) <= A * M pow (d - i))\n            ==> &(CARD {w | w IN ibox G M /\\\n                    isum(1..G)(\\j. if neg j then --(ipoly psi d (w j)) else\n                     ipoly psi d (w j)) = z})\n                <= B * (&2 * M + &1) pow (G - k) * M pow (k - d)
-      #|  A:int
-      #|  z:int
-      #|  &2 * P:int
-      #|  G:num
-      #|  neg:num->bool
-      #|  psi:num->int
-      #|  (B:int) * (&2 * (&2 * P) + &1) pow (G-k) *\n    (&2 * P) pow (k-(e-1))
-      #|  &(num_of_int(Cm0 * P pow (G-(e-1)))):int =\n    Cm0 * P pow (G-(e-1))
-      #|  &0 <= (Cm0:int) * P pow (G-(e-1))
-      #|  &0 <= (Cm0:int)
-      #|  &0 <= (&2:int) pow (k-(e-1))
-      #|  &0 <= (&5:int) pow (G-k)
-      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n     (psi:num->int) (neg:num->bool) (z:int).\n      e-1 <= k /\\ &1 <= B /\\ &1 <= cpsi /\\ k <= G /\\ &1 <= P /\\\n      B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      ~(psi (e-1) = &0) /\\\n       (forall i. i <= e-1 ==> abs(psi i) <= cpsi * (&2 * P) pow (e-1-i)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (zz:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = zz})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1)))\n      ==> CARD {w | w IN ibox G (&2 * P) /\\\n                    isum(1..G)(\\j. if neg j then --ipoly psi (e-1) (w j) else\n                     ipoly psi (e-1) (w j)) = z}\n          <= num_of_int(Cm0 * P pow (G-(e-1)))
-      #|  i:num
-      #|  (lab:num->num) g
-      #|  hh:num->int
-      #|  i:num
-      #|  (lab:num->num) g
-      #|  hh:num->int
-      #|  v:int
-      #|  \\i:num. leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) ((en:num->num->num) g\n     (i-1))
-      #|  PSI (hh:num->int) ((lab:num->num) g):num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  (lab:num->num) g IN 1..2*e*G
-      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (hh:num->int) (lab:num->num)\n   (en:num->num->num) ss.\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ 1 <= G /\\ &1 <= P /\\\n      &1 <= cpsi /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G)\n     ==> forall g v. g < 2*e\n         ==> CARD {u | u IN ibox G (&2*P) /\\\n          isum(1..G)(\\i. if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g\n           (i-1)) then --ipoly (PSI hh (lab g)) (e-1) (u i) else ipoly (PSI hh\n            (lab g)) (e-1) (u i)) = v}\n             <= num_of_int (Cm0 * P pow (G-(e-1)))
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  (e:num)-1
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  en:num->num->num
-      #|  lab:num->num
-      #|  hh:num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  G:num
-      #|  ss:num
-      #|  e:num
-      #|  ss:num
-      #|  en:num->num->num
-      #|  lab:num->num
-      #|  hh:num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  (2*e)*G = 2*e*G
-      #|  {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P) pow\n             (e-1)) /\\\n              (forall g. ~(g < 2*e) ==> (zv:num->int) g = &0)}
-      #|  num_of_int (Cm0 * P pow (G-(e-1)))
-      #|  \\g:num. (hh:num->int)((lab:num->num) g)
-      #|  \\(g:num) (i:num) (x:int). if leafsg ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F)\n     ((en:num->num->num) g (i-1)) then --(ipoly (PSI (hh:num->int)\n      ((lab:num->num) g)) (e-1) x) else ipoly (PSI hh (lab g)) (e-1) x
-      #|  &2*P:int
-      #|  G:num
-      #|  e:num
-      #|  en:num->num->num
-      #|  lab:num->num
-      #|  hh:num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  P:int
-      #|  G:num
-      #|  ss:num
-      #|  e:num
+      #|  2 * ((e : Num) * ((q : Num) + 1)) - 2 * e == 2 * (e * q)
+      #|  (q : Num) + 1 - 1 == q
+      #|  (G : Num) - 1
+      #|  \226\136\131 q : Num, (G : Num) == q + 1
+      #|  pow(int_of_num(5), 2 * ((e : Num) * (G : Num)) - 2 * e) == pow(pow(int_of_num(5), G - 1), 2 * e)
+      #|  pow(int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1), 2 * ((e : Num) * (G : Num)) - 2 * e) * int_of_num((GN : Num))
+      #|  pow(int_of_num(5), 2 * ((e : Num) * (G : Num)) - 2 * e) * pow((P : Int), 2 * (e * G) - 2 * e) * (pow((Cm0 : Int) * pow(P, G - (e - 1)), 2 * e) * ((Cf : Int) * (fam : Int)))
+      #|  (a : Int) * ((Cf : Int) * (fam : Int)) == a * (Cf * fam)
+      #|  int_of_num(EXP((MaxMult : Num), 2 * (e : Num))) * ((Cf : Int) * (fam : Int))
+      #|  int_of_num((GN : Num)) <= pow((Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1)), 2 * e) * ((Cf : Int) * (fam : Int))
+      #|  int_of_num(EXP((MaxMult : Num), 2 * (e : Num))) <= pow((Cm0 : Int) * pow((P : Int), (G : Num) - (e - 1)), 2 * e)
+      #|  pow(int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1), 2 * ((e : Num) * (G : Num)) - 2 * e) <= pow(int_of_num(5), 2 * (e * G) - 2 * e) * pow(P, 2 * (e * G) - 2 * e)
+      #|  int_of_num(0) <= (Cf : Int)
+      #|  int_of_num(0) <= (fam : Int)
+      #|  int_of_num(0) <= int_of_num(2) * (P : Int) * (int_of_num(2) * ((W : Int) * pow(int_of_num(2) * P, (e : Num) - 1)))
+      #|  int_of_num(0) <= pow((P : Int), (e : Num) - 1) && int_of_num(0) <= pow(P, (G : Num) - (e - 1))
+      #|  int_of_num(0) <= (P : Int)
+      #|  (fam : Int) == pow(int_of_num(2) * (P : Int) * (int_of_num(2) * ((W : Int) * pow(int_of_num(2) * P, (e : Num) - 1))), 2 * e - 1)
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 P : Int, \226\136\128 Cm0 : Int, \226\136\128 Cf : Int, \226\136\128 W : Int, \226\136\128 MaxMult : Num, \226\136\128 GN : Num, \226\136\128 FS : Num, 2 <= e && e - 1 <= G && int_of_num(1) <= P && int_of_num(1) <= Cm0 && int_of_num(1) <= Cf && int_of_num(1) <= W && int_of_num(MaxMult) <= Cm0 * pow(P, G - (e - 1)) && int_of_num(GN) <= int_of_num(EXP(MaxMult, 2 * e)) * (Cf * pow(int_of_num(2) * P * (int_of_num(2) * (W * pow(int_of_num(2) * P, e - 1))), 2 * e - 1)) && int_of_num(FS) <= pow(int_of_num(2) * (int_of_num(2) * P) + int_of_num(1), 2 * (e * G) - 2 * e) * int_of_num(GN) \226\134\146 int_of_num(FS) <= pow(pow(int_of_num(5), G - 1) * Cm0, 2 * e) * (pow(pow(P, G - (e - 1)), 2 * e) * (pow(P, 2 * (e * G) - 2 * e) * (Cf * pow(int_of_num(2) * P * (int_of_num(2) * (W * pow(int_of_num(2) * P, e - 1))), 2 * e - 1))))
+      #|  int_of_num(1) * (x : Int) == x
+      #|  int_of_num((G : Num)) * (int_of_num((e : Num)) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1))) == int_of_num(G) * (int_of_num(e) * cpsi) * pow(int_of_num(2) * P, e - 1)
+      #|  pow(int_of_num(2) * (P : Int), (e : Num) - 1)
+      #|  int_of_num(2) * (P : Int) <= pow(int_of_num(2) * P, (e : Num) - 1)
+      #|  int_of_num(1) <= int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 cpsi : Int, \226\136\128 P : Int, 2 <= e && 1 <= G && int_of_num(1) <= cpsi && int_of_num(1) <= P \226\134\146 int_of_num(2) * P <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))
+      #|  pow(int_of_num(4) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))), 4 * (e * G)) == pow(int_of_num(4) * (int_of_num(G) * (int_of_num(e) * cpsi)), 2 * (e * G)) * pow(int_of_num(4) * (int_of_num(G) * (int_of_num(e) * cpsi)), 2 * (e * G))
+      #|  int_of_num((NB : Num) * NB)
+      #|  int_of_num(0) <= pow(int_of_num(4) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))), 2 * (e * G))
+      #|  pow(int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1), 2 * ((e : Num) * (G : Num)))
+      #|  int_of_num((NB : Num)) <= pow(int_of_num(4) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))), 2 * (e * G))
+      #|  int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1) <= int_of_num(4) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int)))
+      #|  int_of_num(2) * (P : Int) <= pow(int_of_num(2) * P, (e : Num))
+      #|  int_of_num(2) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1))))
+      #|  pow(int_of_num(2) * (P : Int), (e : Num) - 1) * pow(int_of_num(2) * P, e) < pow(int_of_num(2) * P, e - 1) * (int_of_num(2) * (int_of_num((G : Num)) * (int_of_num(e) * (cpsi : Int))))
+      #|  int_of_num(0) < pow(int_of_num(2) * (P : Int), (e : Num) - 1)
+      #|  pow(int_of_num(2) * (P : Int), 2 * (e : Num) - 1) == pow(int_of_num(2) * P, e - 1) * pow(int_of_num(2) * P, e)
+      #|  pow(int_of_num(2) * (P : Int), (e : Num)) < int_of_num(2) * (int_of_num((G : Num)) * (int_of_num(e) * (cpsi : Int)))
+      #|  (hh : (Num) -> Int)
+      #|  nsum(ibox(2 * ((e : Num) * (G : Num)), int_of_num(2) * (P : Int)), (hh : (Num) -> Int) => (NB : Num))
+      #|  nsum(ibox(2 * ((e : Num) * (G : Num)), int_of_num(2) * (P : Int)), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (e * G), int_of_num(2) * P)) && isum(op_dot_dot(1, 2 * (e * G)), (i : Num) => hh(i) * ipoly((PSI : ((Num) -> Int, Num, Num) -> Int)(hh, i), e - 1, y(i))) == int_of_num(0)})) <= (NB : Num) * NB
+      #|  (NB : Num) == CARD(ibox(2 * ((e : Num) * (G : Num)), int_of_num(2) * (P : Int)))
+      #|  \226\136\128 e : Num, \226\136\128 G : Num, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, 2 <= e && 1 <= G && int_of_num(1) <= P && int_of_num(1) <= cpsi && !(int_of_num(2) * (int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) <= pow(int_of_num(2) * P, 2 * e - 1)) \226\134\146 int_of_num(nsum(ibox(2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (e * G), int_of_num(2) * P)) && isum(op_dot_dot(1, 2 * (e * G)), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)}))) <= pow(int_of_num(4) * (int_of_num(G) * (int_of_num(e) * cpsi)), 4 * (e * G))
+      #|  (DPWIH2 : (Num) -> Bool)((e : Num)) == (\226\136\131 k : Num, e <= k && (\226\136\128 A : Int, int_of_num(1) <= A \226\134\146 (\226\136\131 B : Int, int_of_num(1) <= B && (\226\136\128 ffam : (Num, Num) -> Int, \226\136\128 P : Int, \226\136\128 m : Int, int_of_num(1) <= P && (\226\136\128 j : Num, IN(j, op_dot_dot(1, k)) \226\134\146 !(ffam(j, e) == int_of_num(0))) && (\226\136\128 j : Num, \226\136\128 j' : Num, IN(j, op_dot_dot(1, k)) && IN(j', op_dot_dot(1, k)) \226\134\146 abs(ffam(j, e)) == abs(ffam(j', e))) && (\226\136\128 j : Num, \226\136\128 i : Num, IN(j, op_dot_dot(1, k)) && i <= e \226\134\146 abs(ffam(j, i)) <= A * pow(P, e - i)) \226\134\146 int_of_num(CARD({(x : (Num) -> Int) | IN(x, ibox(k, P)) && isum(op_dot_dot(1, k), (j : Num) => ipoly(ffam(j), e, x(j))) == m})) <= B * pow(P, k - e)))))
+      #|  (a : Int)
+      #|  (M : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (a : Int)
+      #|  (M : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (B : Int)
+      #|  (B : Int)
+      #|  (A : Int)
+      #|  (A : Int)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  \226\136\128 d : Num, DPWIH2(d) \226\134\146 (\226\136\131 k : Num, d <= k && (\226\136\128 A : Int, int_of_num(1) <= A \226\134\146 (\226\136\131 B : Int, int_of_num(1) <= B && (\226\136\128 ffam : (Num, Num) -> Int, \226\136\128 M : Int, \226\136\128 a : Int, int_of_num(1) <= M && (\226\136\128 j : Num, IN(j, op_dot_dot(1, k)) \226\134\146 !(ffam(j, d) == int_of_num(0))) && (\226\136\128 j : Num, \226\136\128 j' : Num, IN(j, op_dot_dot(1, k)) && IN(j', op_dot_dot(1, k)) \226\134\146 abs(ffam(j, d)) == abs(ffam(j', d))) && (\226\136\128 j : Num, \226\136\128 i : Num, IN(j, op_dot_dot(1, k)) && i <= d \226\134\146 abs(ffam(j, i)) <= A * pow(M, d - i)) \226\134\146 int_of_num(amcount((j : Num) => ipoly(ffam(j), d), k, M, a)) <= B * pow(M, k - d)))))
+      #|  pow(int_of_num(2) * (M : Int) + int_of_num(1), (G : Num) - (k : Num)) * ((B : Int) * pow(M, k - (d : Num)))
+      #|  (M : Int)
+      #|  (G : Num) - (k : Num)
+      #|  int_of_num(CARD(ibox((G : Num) - (k : Num), (M : Int)))) <= pow(int_of_num(2) * M + int_of_num(1), G - k)
+      #|  int_of_num(CARD(ibox((G : Num) - (k : Num), (M : Int))) * (c0 : Num))
+      #|  (a : Int)
+      #|  (M : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (a : Int)
+      #|  (c0 : Num)
+      #|  (z : Int)
+      #|  (M : Int)
+      #|  (G : Num)
+      #|  (k : Num)
+      #|  (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (d : Num))
+      #|  int_of_num((c0 : Num)) == (B : Int) * pow((M : Int), (k : Num) - (d : Num))
+      #|  (c0 : Num) == num_of_int((B : Int) * pow((M : Int), (k : Num) - (d : Num)))
+      #|  int_of_num(0) <= (B : Int) * pow((M : Int), (k : Num) - (d : Num))
+      #|  (d : Num) <= (k : Num)
+      #|  1 <= (d : Num)
+      #|  1 <= (k : Num)
+      #|  (z : Int)
+      #|  (M : Int)
+      #|  (G : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (B : Int)
+      #|  (B : Int)
+      #|  (A : Int)
+      #|  (A : Int)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  \226\136\128 d : Num, 1 <= d && DPWIH2(d) \226\134\146 (\226\136\131 k : Num, d <= k && (\226\136\128 A : Int, int_of_num(1) <= A \226\134\146 (\226\136\131 B : Int, int_of_num(1) <= B && (\226\136\128 ffam : (Num, Num) -> Int, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= G && int_of_num(1) <= M && (\226\136\128 j : Num, IN(j, op_dot_dot(1, k)) \226\134\146 !(ffam(j, d) == int_of_num(0))) && (\226\136\128 j : Num, \226\136\128 j' : Num, IN(j, op_dot_dot(1, k)) && IN(j', op_dot_dot(1, k)) \226\134\146 abs(ffam(j, d)) == abs(ffam(j', d))) && (\226\136\128 j : Num, \226\136\128 i : Num, IN(j, op_dot_dot(1, k)) && i <= d \226\134\146 abs(ffam(j, i)) <= A * pow(M, d - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(G, M)) && isum(op_dot_dot(1, G), (j : Num) => ipoly(ffam(j), d, w(j))) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), G - k) * pow(M, k - d))))))
+      #|  (w : (Num) -> Int)((j : Num))
+      #|  (d : Num)
+      #|  (j : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (j : Num) => (psi : (Num) -> Int)
+      #|  (j : Num)
+      #|  (b : Bool) == (c : Bool) \226\134\146 ((a : Bool) && b) == (a && c)
+      #|  (w : (Num) -> Int)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (j : Num) => (psi : (Num) -> Int)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (d : Num)
+      #|  (j' : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (j : Num) => (psi : (Num) -> Int)
+      #|  (d : Num)
+      #|  (j : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (j : Num) => (psi : (Num) -> Int)
+      #|  (j' : Num)
+      #|  (j : Num)
+      #|  (d : Num)
+      #|  (j : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (j : Num) => (psi : (Num) -> Int)
+      #|  (j : Num)
+      #|  (z : Int)
+      #|  (M : Int)
+      #|  (G : Num)
+      #|  sgnf((j : Num) => (psi : (Num) -> Int), (neg : (Num) -> Bool))
+      #|  (z : Int)
+      #|  (M : Int)
+      #|  (G : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (psi : (Num) -> Int)
+      #|  (B : Int)
+      #|  (B : Int)
+      #|  (A : Int)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  DPWIH2((d : Num))
+      #|  1 <= (d : Num)
+      #|  \226\136\128 d : Num, 1 <= d && DPWIH2(d) \226\134\146 (\226\136\131 k : Num, d <= k && (\226\136\128 A : Int, int_of_num(1) <= A \226\134\146 (\226\136\131 B : Int, int_of_num(1) <= B && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 G : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= G && int_of_num(1) <= M && !(psi(d) == int_of_num(0)) && (\226\136\128 i : Num, i <= d \226\134\146 abs(psi(i)) <= A * pow(M, d - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(G, M)) && isum(op_dot_dot(1, G), (j : Num) => if neg(j) { -ipoly(psi, d, w(j)) } else { ipoly(psi, d, w(j)) }) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), G - k) * pow(M, k - d))))))
+      #|  (A : Int)
+      #|  (z : Int)
+      #|  int_of_num(2) * (P : Int)
+      #|  (G : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (psi : (Num) -> Int)
+      #|  (B : Int) * (pow(int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1), (G : Num) - (k : Num)) * pow(int_of_num(2) * P, k - ((e : Num) - 1)))
+      #|  int_of_num(num_of_int((Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1)))) == Cm0 * pow(P, G - (e - 1))
+      #|  int_of_num(0) <= (Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1))
+      #|  int_of_num(0) <= (Cm0 : Int)
+      #|  int_of_num(0) <= pow(int_of_num(2), (k : Num) - ((e : Num) - 1))
+      #|  int_of_num(0) <= pow(int_of_num(5), (G : Num) - (k : Num))
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 B : Int, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 z : Int, e - 1 <= k && int_of_num(1) <= B && int_of_num(1) <= cpsi && k <= G && int_of_num(1) <= P && B * (pow(int_of_num(5), G - k) * pow(int_of_num(2), k - (e - 1))) == Cm0 && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(int_of_num(2) * P, e - 1 - i)) && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 GG : Num, \226\136\128 M : Int, \226\136\128 zz : Int, k <= GG && int_of_num(1) <= M && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(M, e - 1 - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(GG, M)) && isum(op_dot_dot(1, GG), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == zz})) <= B * (pow(int_of_num(2) * M + int_of_num(1), GG - k) * pow(M, k - (e - 1)))) \226\134\146 CARD({(w : (Num) -> Int) | IN(w, ibox(G, int_of_num(2) * P)) && isum(op_dot_dot(1, G), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == z}) <= num_of_int(Cm0 * pow(P, G - (e - 1)))
+      #|  (i : Num)
+      #|  (lab : (Num) -> Num)((g : Num))
+      #|  (hh : (Num) -> Int)
+      #|  (i : Num)
+      #|  (lab : (Num) -> Num)((g : Num))
+      #|  (hh : (Num) -> Int)
+      #|  (v : Int)
+      #|  (i : Num) => leafsg((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (en : (Num, Num) -> Num)((g : Num), i - 1))
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)((hh : (Num) -> Int), (lab : (Num) -> Num)((g : Num)))
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  IN((lab : (Num) -> Num)((g : Num)), op_dot_dot(1, 2 * ((e : Num) * (G : Num))))
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 B : Int, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, \226\136\128 hh : (Num) -> Int, \226\136\128 lab : (Num) -> Num, \226\136\128 en : (Num, Num) -> Num, \226\136\128 ss : Num, 2 <= e && e - 1 <= k && int_of_num(1) <= B && k <= G && 1 <= G && int_of_num(1) <= P && int_of_num(1) <= cpsi && int_of_num(1) <= Cm0 && B * (pow(int_of_num(5), G - k) * pow(int_of_num(2), k - (e - 1))) == Cm0 && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) \226\134\146 !(PSI(hh, i, e - 1) == int_of_num(0))) && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 GG : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= GG && int_of_num(1) <= M && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(M, e - 1 - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(GG, M)) && isum(op_dot_dot(1, GG), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), GG - k) * pow(M, k - (e - 1)))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) && (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && (\226\136\128 g : Num, g < 2 * e \226\134\146 IN(lab(g), TSET(e, G))) \226\134\146 (\226\136\128 g : Num, \226\136\128 v : Int, g < 2 * e \226\134\146 CARD({(u : (Num) -> Int) | IN(u, ibox(G, int_of_num(2) * P)) && isum(op_dot_dot(1, G), (i : Num) => if leafsg(ss, e * G, (j : Num) => RIFFLE(e * G), (j : Num) => false, en(g, i - 1)) { -ipoly(PSI(hh, lab(g)), e - 1, u(i)) } else { ipoly(PSI(hh, lab(g)), e - 1, u(i)) }) == v}) <= num_of_int(Cm0 * pow(P, G - (e - 1))))
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (e : Num) - 1
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (en : (Num, Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (hh : (Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (G : Num)
+      #|  (ss : Num)
+      #|  (e : Num)
+      #|  (ss : Num)
+      #|  (en : (Num, Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (hh : (Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  2 * (e : Num) * (G : Num) == 2 * (e * G)
+      #|  {(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * (e : Num) \226\134\146 abs(zv(g)) <= int_of_num((G : Num)) * (int_of_num(e) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}
+      #|  num_of_int((Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1)))
+      #|  (g : Num) => (hh : (Num) -> Int)((lab : (Num) -> Num)(g))
+      #|  (g : Num) => (i : Num) => (x : Int) => if leafsg((ss : Num), (e : Num) * (G : Num), (j : Num) => RIFFLE(e * G), (j : Num) => false, (en : (Num, Num) -> Num)(g, i - 1)) { -ipoly((PSI : ((Num) -> Int, Num, Num) -> Int)((hh : (Num) -> Int), (lab : (Num) -> Num)(g)), e - 1, x) } else { ipoly(PSI(hh, lab(g)), e - 1, x) }
+      #|  int_of_num(2) * (P : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (en : (Num, Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (hh : (Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (G : Num)
+      #|  (ss : Num)
+      #|  (e : Num)
       #|  forall e k (B:int) ss (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (hh:num->int) (lab:num->num)\n   (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= ss /\\ 1 <= G /\\\n      &1 <= P /\\ &1 <= cpsi /\\\n     G = 2 EXP ss /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0}\n         <= nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi * (&2*P)\n          pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                 (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                  (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0)
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  en:num->num->num
-      #|  B:int
-      #|  k:num
-      #|  hh:num->int
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (en : (Num, Num) -> Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (hh : (Num) -> Int)
       #|  forall e k (B:int) ss (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (lab:num->num) (en:num->num->num).\n     2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= ss /\\ 1 <= G /\\\n      &1 <= P /\\ &1 <= cpsi /\\\n     G = 2 EXP ss /\\\n     &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n     (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n     (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n      &1 <= M /\\ ~(psi (e-1) = &0) /\\\n         (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n         ==> &(CARD {w | w IN ibox GG M /\\\n          isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n           (e-1) (w j)) = z})\n             <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n     (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n      i IN 1..(2*e*G) /\\ j <= (e-1)\n          ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n     (forall g. g < 2*e ==> lab g IN TSET e G) /\\\n     (forall t. t IN TSET e G ==> ?!g. g < 2*e /\\ lab g = t) /\\\n     (forall g r. g < 2*e /\\ r < G ==> en g r IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) (en g r) = lab g) /\\\n     (forall g i. g < 2*e /\\ i IN 1..2*e*G /\\\n      leafidx ss (e*G) (\\j. RIFFLE(e*G)) (\\j. F) i = lab g ==> ?!r. r < G /\\\n       en g r = i)\n     ==> nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) (\\j. F) hh i (y i)) =\n                     &0})\n         <= nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else 0))
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  G = 2 EXP ss
-      #|  Bn:num
-      #|  lab:num->num
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  e:num
-      #|  l:num
-      #|  l:num
-      #|  i:num
-      #|  hh:num->int
-      #|  G = 2 EXP ss
-      #|  en:num->num->num
-      #|  lab:num->num
-      #|  (\\(hh:num->int) (i:num). PSI (\\l:num. hh(inverse (sigma:num->num) l))\n        (sigma i)):(num->int)->num->num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  ss:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  nsum (ibox (2*e*G) (&2*P))\n             (\\hh. nsum {zv | (forall g. g < 2*e ==> abs(zv g) <= &G * &e * cpsi *\n              (&2*P) pow (e-1)) /\\ (forall g. ~(g < 2*e) ==> zv g = &0)}\n                     (\\zv. if isum(0..2*e-1)(\\g. hh(lab g) * zv g) = &0 then\n                      (num_of_int (Cm0 * P pow (G-(e-1)))) EXP (2*e) else\n                       0))
-      #|  en:num->num->num
-      #|  lab:num->num
-      #|  G:num
-      #|  ss:num
-      #|  e:num
-      #|  sigma:num->num
-      #|  PSI:(num->int)->num->num->int
-      #|  P:int
-      #|  bp:num->bool
-      #|  G:num
-      #|  ss:num
-      #|  e:num
-      #|  sigma:num->num
-      #|  bp:num->bool
-      #|  ss:num
-      #|  G:num
-      #|  e:num
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (Bn : Num)
+      #|  (lab : (Num) -> Num)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (l : Num)
+      #|  (l : Num)
+      #|  (i : Num)
+      #|  (hh : (Num) -> Int)
+      #|  (G : Num) == EXP(2, (ss : Num))
+      #|  (en : (Num, Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (hh : (Num) -> Int) => (i : Num) => (PSI : ((Num) -> Int, Num, Num) -> Int)((l : Num) => hh(inverse((sigma : (Num) -> Num), l)), sigma(i))
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (ss : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  nsum(ibox(2 * ((e : Num) * (G : Num)), int_of_num(2) * (P : Int)), (hh : (Num) -> Int) => nsum({(zv : (Num) -> Int) | (\226\136\128 g : Num, g < 2 * e \226\134\146 abs(zv(g)) <= int_of_num(G) * (int_of_num(e) * ((cpsi : Int) * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 g : Num, !(g < 2 * e) \226\134\146 zv(g) == int_of_num(0))}, (zv : (Num) -> Int) => if isum(op_dot_dot(0, 2 * e - 1), (g : Num) => hh((lab : (Num) -> Num)(g)) * zv(g)) == int_of_num(0) { EXP(num_of_int((Cm0 : Int) * pow(P, G - (e - 1))), 2 * e) } else { 0 }))
+      #|  (en : (Num, Num) -> Num)
+      #|  (lab : (Num) -> Num)
+      #|  (G : Num)
+      #|  (ss : Num)
+      #|  (e : Num)
+      #|  (sigma : (Num) -> Num)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (bp : (Num) -> Bool)
+      #|  (G : Num)
+      #|  (ss : Num)
+      #|  (e : Num)
+      #|  (sigma : (Num) -> Num)
+      #|  (bp : (Num) -> Bool)
+      #|  (ss : Num)
+      #|  (G : Num)
+      #|  (e : Num)
       #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num) (ss:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      e-1 <= ss /\\\n      G = 2 EXP ss /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n             (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                   isum(1..(2*e*G))(\\i. pleaf ss (\\hh i y. hh i * ipoly (PSI hh\n                    i) (e-1) y) (e*G) (\\j. RIFFLE(e*G)) bp hh i (y i)) = &0})\n                     <= Bn)
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  forall l. l IN 1..2*e*G ==>\n         abs((hh:num->int) l) <= &2 * P
-      #|  ss:num
-      #|  Bn:num
-      #|  PSI:(num->int)->num->num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  ss:num
-      #|  Bn:num
-      #|  PSI:(num->int)->num->num->int
-      #|  &1:int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> nsum (ibox (2*e*G) (&2*P))\n            (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}) <= Bn
-      #|  ss:num
-      #|  Bn:num
-      #|  PSI:(num->int)->num->num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  1 <= n <=> ~(n=0)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  \226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * ((e : Num) * (G : Num)))) \226\134\146 abs((hh : (Num) -> Int)(l)) <= int_of_num(2) * (P : Int)
+      #|  (ss : Num)
+      #|  (Bn : Num)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  (ss : Num)
+      #|  (Bn : Num)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  int_of_num(1)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 B : Int, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, \226\136\128 Bn : Num, 2 <= e && e - 1 <= k && int_of_num(1) <= B && k <= G && e - 1 <= G && 1 <= G && int_of_num(1) <= P && int_of_num(1) <= cpsi && (\226\136\131 ss : Num, e - 1 <= ss && G == EXP(2, ss)) && int_of_num(1) <= Cm0 && B * (pow(int_of_num(5), G - k) * pow(int_of_num(2), k - (e - 1))) == Cm0 && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) \226\134\146 !(PSI(hh, i, e - 1) == int_of_num(0))) && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 GG : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= GG && int_of_num(1) <= M && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(M, e - 1 - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(GG, M)) && isum(op_dot_dot(1, GG), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), GG - k) * pow(M, k - (e - 1)))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) && pow(int_of_num(2) * (int_of_num(2) * P) + int_of_num(1), 2 * (e * G) - 2 * e) * int_of_num(nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => num_of_int(Cm0 * pow(P, G - (e - 1))))))) == int_of_num(Bn) \226\134\146 nsum(ibox(2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (e * G), int_of_num(2) * P)) && isum(op_dot_dot(1, 2 * (e * G)), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)})) <= Bn
+      #|  (ss : Num)
+      #|  (Bn : Num)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  (1 <= (n : Num)) == !(n == 0)
       #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int) (Bn:num).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= (&G) * &e\n                   * cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. num_of_int (Cm0 * P\n                              pow (G-(e-1))))))) = &Bn\n      ==> ?(s:num) (pp:num->num->num).\n             1 <= e * G /\\ (forall j. pp j permutes 1..(2*e*G)) /\\\n             (forall bp:num->bool. nsum (ibox (2*e*G) (&2*P))\n                (\\hh. CARD {y | y IN ibox (2*e*G) (&2*P) /\\\n                      isum(1..(2*e*G))(\\i. pleaf s (\\hh i y. hh i * ipoly (PSI\n                       hh i) (e-1) y) (e*G) pp bp hh i (y i)) = &0}) <= Bn)
-      #|  cpsi:int
-      #|  Cm0:int
-      #|  B:int
-      #|  k:num
-      #|  &Bn:int = RHS
-      #|  Bn = num_of_int RHS
-      #|  &0 <= (RHS:int)
-      #|  RHS:int = (&2 * &2 * P + &1) pow (2 * e * G - 2 * e) *\n    &(nsum\n      {hh | (forall i. i IN 1..2 * e ==> abs (hh i) <= &2 * P) /\\\n            (forall i. ~(i IN 1..2 * e) ==> hh i = &0)}\n     (\\hh.\n          nsum\n          {z | (forall i. i IN 1..2 * e ==> abs (z i) <= &G * &e * cpsi * (&2 * P)\n           pow (e - 1)) /\\\n               (forall i. ~(i IN 1..2 * e) ==> z i = &0) /\\\n               isum (1..2 * e) (\\i. hh i * z i) = &0}\n          (\\z. nproduct (1..2 * e) (\\i. num_of_int (Cm0 * P pow (G - (e -\n           1)))))))
-      #|  &(num_of_int(Cm0 * P pow (G-(e-1)))) = Cm0 * P pow (G-(e-1))
-      #|  &0 <= (Cm0:int) * P pow (G-(e-1))
-      #|  num_of_int(Cm0 * P pow (G-(e-1)))
-      #|  \\(i:num) (z:int). num_of_int(Cm0 * P pow (G-(e-1)))
-      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int)\n  (PSI:(num->int)->num->num->int).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j))\n      ==> ?(mult:num->int->num) (MaxMult:num).\n      &MaxMult <= Cm0 * P pow (G-(e-1)) /\\\n      (forall i z. mult i z <= MaxMult) /\\\n      &(nsum (ibox (2 * e * G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2 * e * G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e - 1) (y i)) =\n                   &0}))\n       <= (&2*(&2*P)+ &1) pow (2*e*G - 2*e) *\n             &(nsum {hh | (forall i. i IN 1..(2*e) ==> abs(hh i) <= (&2*P)) /\\\n              (forall i. ~(i IN 1..(2*e)) ==> hh i = &0)}\n                  (\\hh. nsum {z | (forall i. i IN 1..(2*e) ==> abs(z i) <= &G * &e *\n                   cpsi * (&2 * P) pow (e-1)) /\\\n                    (forall i. ~(i IN 1..(2*e)) ==> z i = &0) /\\\n                                  isum (1..(2*e)) (\\i. hh i * z i) = &0}\n                             (\\z. nproduct (1..(2*e)) (\\i. mult i (z i)))))
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  e-1 <= ss
-      #|  ss:num
-      #|  ?ss:num. e-1 <= ss /\\\n                           G = 2 EXP ss
-      #|  &Bn:int
-      #|  Bn:num
-      #|  &0 <= &G * &e * (cpsi:int) * (&2 * P) pow (e - 1)
-      #|  P:int
-      #|  cpsi:int
-      #|  G:num
-      #|  e:num
-      #|  Cf:int
-      #|  (&2 * (P:int)) * &2 * (&G * &e * cpsi) * (&2 * P) pow (e - 1) = (&2 *\n   P) * &2 * (&G * &e * cpsi * (&2 * P) pow (e-1))
-      #|  nsum\n  {hh | (forall i. i IN 1..2 * e ==> abs (hh i) <= &2 * P) /\\\n        (forall i. ~(i IN 1..2 * e) ==> hh i = &0)}\n (\\hh.\n      nsum\n      {z | (forall i.\n                i IN 1..2 * e\n                ==> abs (z i) <= &G * &e * cpsi * (&2 * P) pow (e - 1)) /\\\n           (forall i. ~(i IN 1..2 * e) ==> z i = &0) /\\\n           isum (1..2 * e) (\\i. hh i * z i) = &0}\n      (\\z. nproduct (1..2 * e) (\\i:num. mult i (z i))))
-      #|  MaxMult:num
-      #|  2*2*e*G-e = 2*(2*e*G)-e
-      #|  MaxMult:num
-      #|  mult:num->int->num
-      #|  PSI:(num->int)->num->num->int
-      #|  cpsi:int
-      #|  P:int
-      #|  Cm0:int
-      #|  G:num
-      #|  B:int
-      #|  k:num
-      #|  e:num
-      #|  forall e k (B:int) (G:num) (Cm0:int) (P:int) (cpsi:int) (Cfp:int) (Cf:int)\n  (PSI:(num->int)->num->num->int).\n      2 <= e /\\ e-1 <= k /\\ &1 <= B /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n       &1 <= P /\\ &1 <= cpsi /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss) /\\\n      &1 <= Cm0 /\\ B * &5 pow (G-k) * &2 pow (k-(e-1)) = Cm0 /\\\n      &1 <= Cfp /\\ Cf <= Cfp /\\\n      &1 <= &G * &e * cpsi /\\\n      (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG /\\\n       &1 <= M /\\ ~(psi (e-1) = &0) /\\\n          (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n          ==> &(CARD {w | w IN ibox GG M /\\\n           isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else ipoly psi\n            (e-1) (w j)) = z})\n              <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1))) /\\\n      (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n      (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2 * P) /\\\n       i IN 1..(2*e*G) /\\ j <= (e-1)\n           ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) - j)) /\\\n      (forall A B' mfn. &1 <= A /\\ A <= &2 * B' /\\\n       &2 * B' <= A pow (CARD (1..2 * e) - 1)\n          ==> isum {a | (forall i. i IN 1..2 * e ==> abs (a i) <= A) /\\\n           (forall i. ~(i IN 1..2 * e) ==> a i = &0)}\n                   (\\a. &(lincount (1..2 * e) a (mfn a) B')) <= Cf * (A * &2 *\n                    B') pow (CARD (1..2 * e) - 1)) /\\\n      &2 * (&G * &e * cpsi * (&2 * P) pow (e-1)) <= (&2 * P) pow (2*e-1)\n      ==> &(nsum (ibox (2*e*G) (&2 * P))\n             (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P) /\\\n                  isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) =\n                   &0}))\n          <= ((&5 pow (G-1) * Cm0) pow (2*e) * (Cfp * (&G * &e * cpsi) pow\n           (2*e-1)) * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) - e)
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  G:num
-      #|  e-1 <= ss
-      #|  ss:num
-      #|  ?ss:num. e-1 <= ss /\\\n                           G = 2 EXP ss
-      #|  (&5 pow (G-1) * (Cm0:int)) pow (2*e) * (Cfp * (&G * &e * cpsi) pow\n     (2*e-1)) * (&2 pow (e+1)) pow (2*e-1) + (&4 * &G * &e * cpsi) pow\n      (4*e*G)
-      #|  (&4 * &G * &e * (cpsi:int)) pow (4*e*G)
-      #|  2*(2*e*G)-e = 2*2*e*G-e
-      #|  Cf:int
-      #|  B:int
-      #|  k:num
-      #|  2*(2*e*G)-e = 2*2*e*G-e
-      #|  ((&5 pow (G-1) * (Cm0:int)) pow (2*e) * (Cfp * (&G * &e * cpsi) pow\n     (2*e-1)) * (&2 pow (e+1)) pow (2*e-1)) * P pow (2*(2*e*G) - e)
-      #|  &2 * (&G * &e * (cpsi:int) * (&2 * P) pow (e-1)) <= (&2 * P) pow\n   (2*e-1)
-      #|  P:int
-      #|  PSI:(num->int)->num->num->int
-      #|  &0 <= (&4 * &G * &e * (cpsi:int)) pow (4*e*G)
-      #|  &1 <= (&5 pow (G-1) * (Cm0:int)) pow (2*e) * (Cfp * (&G * &e * cpsi)\n   pow (2*e-1)) * (&2 pow (e+1)) pow (2*e-1)
-      #|  &1 <= &5 pow (G-1) * (Cm0:int)
-      #|  (&5 pow (G-1) * (Cm0:int)) pow (2*e) * (Cfp * (&G * &e * cpsi) pow\n   (2*e-1)) * (&2 pow (e+1)) pow (2*e-1) + (&4 * &G * &e * cpsi) pow\n    (4*e*G)
-      #|  &1 <= &G * &e * (cpsi:int)
-      #|  &1 <= (Cfp:int) /\\ Cf <= Cfp
-      #|  &1 <= (Cm0:int)
-      #|  Cfp:int = abs Cf + &1
-      #|  Cm0:int = B * &5 pow (G-k) * &2 pow (k-(e-1))
-      #|  B:int
-      #|  cpsi:int
-      #|  Cf:int
-      #|  1..(2*e)
-      #|  forall e k (G:num). 2 <= e /\\ e-1 <= k /\\ k <= G /\\ e-1 <= G /\\ 1 <= G /\\\n      (?ss. e-1 <= ss /\\ G = 2 EXP ss)\n    ==> forall cpsi:int. &1 <= cpsi\n        ==> forall B:int. &1 <= B /\\\n            (forall(psi:num->int) (neg:num->bool) (GG:num) (M:int) (z:int). k <= GG\n             /\\ &1 <= M /\\ ~(psi (e-1) = &0) /\\\n                (forall i. i <= e-1 ==> abs(psi i) <= cpsi * M pow (e-1-i))\n                ==> &(CARD {w | w IN ibox GG M /\\\n                 isum(1..GG)(\\j. if neg j then --ipoly psi (e-1) (w j) else\n                  ipoly psi (e-1) (w j)) = z})\n                    <= B * (&2 * M + &1) pow (GG-k) * M pow (k-(e-1)))\n            ==> ?cc:int. &1 <= cc /\\\n                forall(PSI:(num->int)->num->num->int) (P:int). &1 <= P /\\\n                    (forall(hh:num->int) i. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <= &2\n                     * P) /\\ i IN 1..(2*e*G) ==> ~(PSI hh i (e-1) = &0)) /\\\n                    (forall(hh:num->int) i j. (forall l. l IN 1..(2*e*G) ==> abs(hh l) <=\n                     &2 * P) /\\ i IN 1..(2*e*G) /\\ j <= (e-1)\n                         ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) -\n                          j))\n                    ==> &(nsum (ibox (2*e*G) (&2 * P))\n                           (\\hh. CARD {y:num->int | y IN ibox (2*e*G) (&2 * P)\n                            /\\\n                                isum(1..(2*e*G))(\\i. hh i * ipoly (PSI hh i)\n                                 (e-1) (y i)) = &0}))\n                        <= cc * P pow (2*(2*e*G) - e)
-      #|  G:num
-      #|  e-1 <= ss
-      #|  ss:num
-      #|  ?ss:num. e-1 <= ss /\\\n                           G = 2 EXP ss
-      #|  z:int
-      #|  M:int
-      #|  GG:num
-      #|  neg:num->bool
-      #|  psi:num->int
-      #|  B:int
-      #|  cpsi:int
-      #|  k:num
-      #|  2 EXP k
-      #|  k:num
-      #|  e:num
-      #|  B:int
-      #|  cpsi:int
-      #|  2 <= e
-      #|  1 <= n <=> ~(n=0)
-      #|  1 <= 4 * n <=> ~(n = 0)
-      #|  e = e * 1
-      #|  2*2*e*n = e*(4*n)
-      #|  2*e*2 EXP k
-      #|  1 <= n <=> ~(n=0)
-      #|  k:num
-      #|  1 <= 2 EXP k /\\ k <= 2 EXP k /\\\n   e - 1 <= 2 EXP k
-      #|  k:num
-      #|  e-1
-      #|  forall e. 2 <= e ==> DPWIH2 (e-1)\n     ==> ?kk. e <= 2*kk /\\ 1 <= kk /\\\n            forall cpsi:int. &1 <= cpsi\n            ==> ?cc. &1 <= cc /\\\n            forall(PSI:(num->int)->num->num->int) (P:int). &1 <= P /\\\n                    (forall(hh:num->int) i. (forall l. l IN 1..kk ==> abs(hh l) <= &2 * P)\n                     /\\ i IN 1..kk ==> ~(PSI hh i (e-1) = &0)) /\\\n                    (forall(hh:num->int) i j. (forall l. l IN 1..kk ==> abs(hh l) <= &2 *\n                     P) /\\ i IN 1..kk /\\ j <= (e-1)\n                         ==> abs(PSI hh i j) <= cpsi * (&2 * P) pow ((e-1) -\n                          j))\n                    ==> &(nsum (ibox kk (&2 * P))\n                           (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                                isum(1..kk)(\\i. hh i * ipoly (PSI hh i) (e-1)\n                                 (y i)) = &0}))\n                        <= cc * P pow (2*kk - e)
-      #|  cpsi:int
-      #|  j:num
-      #|  ~(SUC e <= e)
-      #|  ~(SUC e = 0)
-      #|  (y:int) pow SUC(SUC e) = y * y pow SUC e
-      #|  ((y:int) + h) pow SUC(SUC e) = (y + h) * (y pow SUC e + h *\n      isum(0..e)(\\j. g0 j * y pow j))
-      #|  j:num
-      #|  ~(SUC e <= e)
-      #|  isum (0..SUC e) (\\j. (if j <= e then h * g0 j else &0) * y\n        pow j) = h * isum(0..e)(\\j. g0 j * y pow j)
-      #|  (\\j. (if j = SUC e then &1 else &0) * (y:int) pow j) = (\\j. if j\n        = SUC e then y pow (SUC e) else &0)
-      #|  isum (0..SUC e) (\\j. ((if j =\n       0 then &0 else g0 (j - 1)) + (if j <= e then h * g0 j else &0) + (if j =\n        SUC e then &1 else &0)) * y pow j) = y pow (SUC e) + y * isum(0..e)(\\j.\n         g0 j * y pow j) + h * isum(0..e)(\\j. g0 j * y pow j)
-      #|  \\j. (if j = 0 then &0 else g0(j - 1)) + (if j <= e then h * g0 j\n    else &0) + (if j = SUC e then &1 else &0):int
-      #|  g0:num->int
-      #|  h:int
-      #|  P:int
-      #|  (\\j. &1):num->int
-      #|  forall e P h:int. &1 <= P /\\ abs h <= &2 * P\n   ==> ?g. (forall y:int. (y+h) pow (SUC e) = y pow (SUC e) + h * isum(0..e)(\\j. g j\n    * y pow j)) /\\\n           g e = &(SUC e) /\\\n           (forall j. j <= e ==> abs(g j) <= &(4 EXP (SUC e)) * P pow (e - j))
-      #|  4 EXP SUC(SUC n) = 4 * 4 EXP SUC n
-      #|  &2 * &(4 EXP (SUC n)) * (c:int) * P pow (nn - 1 - j) + &(4 EXP (SUC(SUC n))) *\n       c * P pow (nn - 1 - j) = (&2 * &(4 EXP (SUC n)) + &(4 EXP (SUC(SUC n))))\n        * (c * P pow (nn - 1 - j)) /\\\n       &2 * &(4 EXP SUC (SUC n)) * c * P pow (nn - 1 - j) = (&2 * &(4 EXP\n        SUC(SUC n))) * (c * P pow (nn - 1 - j))
-      #|  &2 * &(4 EXP (SUC n)) * (c:int) * P pow (nn - 1 - j) + &(4 EXP\n      (SUC(SUC n))) * c * P pow (nn - 1 - j)
-      #|  (nn - SUC(SUC n)) + (SUC n - j) = nn - 1 - j
-      #|  ((c:int) * P pow (nn - SUC(SUC n))) * (&(4 EXP SUC(SUC n)) * P\n          pow (SUC n - j)) = &(4 EXP SUC(SUC n)) * c * (P pow (nn - SUC(SUC n))\n           * P pow (SUC n - j))
-      #|  SUC(SUC n)
-      #|  ((c:int) * P pow (nn - SUC(SUC n))) * (&(4 EXP SUC(SUC n)) * P pow\n        (SUC n - j))
-      #|  abs((f:num->int)(SUC(SUC n)) * g j) <= &(4 EXP (SUC(SUC n)))\n      * c * P pow (nn - 1 - j)
-      #|  abs(if j <= n then (psiP:num->int) j else &0) <=\n      &2 * &(4 EXP (SUC n))\n      * c * P pow (nn - 1 - j)
-      #|  &0 <= &2 * &(4 EXP SUC n) * (c:int) * P pow (nn - 1 - j)
-      #|  &0 <= (c:int) * P pow (nn - 1 - j)
-      #|  &0 <= (P:int) /\\ &0 <= P pow (nn - 1 - j) /\\\n      &0 <= P pow (SUC n - j) /\\\n       P pow (SUC n - j) <= P pow (nn - 1 - j)
-      #|  abs(if j <= n then psiP j else &0) + abs((f:num->int)(SUC(SUC\n      n)) * g j)
-      #|  j:num
-      #|  ~(SUC n <= n)
-      #|  y:int
-      #|  y:int
-      #|  j:num
-      #|  j:num
-      #|  ~(SUC n <= n)
-      #|  ipoly (\\j. (if j <= n then psiP j else &0) +\n      (f:num->int)(SUC(SUC n)) * g j) (SUC n) y =\n                   ipoly psiP n y + f(SUC(SUC n)) * isum(0..SUC n)(\\j. g j * y\n                    pow j)
-      #|  \\j. (if j <= n then psiP j else &0) + (f:num->int)(SUC(SUC n)) *\n    g j :int
-      #|  g:num->int
-      #|  h:int
-      #|  P:int
-      #|  SUC n
-      #|  psiP:num->int
-      #|  i:num
-      #|  P:int
-      #|  c:int
-      #|  h:int
-      #|  f:num->int
-      #|  nn:num
-      #|  &0 <= (c:int) * P pow (nn-1)
-      #|  abs ((f:num->int) 1) <= c * P pow (nn - 1)
-      #|  &0 <= (c:int) * P pow (nn-1)
-      #|  1 <= SUC 0
+      #|  (cpsi : Int)
+      #|  (Cm0 : Int)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  int_of_num((Bn : Num)) == (RHS : Int)
+      #|  (Bn : Num) == num_of_int((RHS : Int))
+      #|  int_of_num(0) <= (RHS : Int)
+      #|  (RHS : Int) == pow(int_of_num(2) * (int_of_num(2) * (P : Int)) + int_of_num(1), 2 * ((e : Num) * (G : Num)) - 2 * e) * int_of_num(nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= int_of_num(G) * (int_of_num(e) * ((cpsi : Int) * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => num_of_int((Cm0 : Int) * pow(P, G - (e - 1)))))))
+      #|  int_of_num(num_of_int((Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1)))) == Cm0 * pow(P, G - (e - 1))
+      #|  int_of_num(0) <= (Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1))
+      #|  num_of_int((Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1)))
+      #|  (i : Num) => (z : Int) => num_of_int((Cm0 : Int) * pow((P : Int), (G : Num) - ((e : Num) - 1)))
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 B : Int, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, 2 <= e && e - 1 <= k && int_of_num(1) <= B && k <= G && e - 1 <= G && 1 <= G && int_of_num(1) <= P && int_of_num(1) <= cpsi && (\226\136\131 ss : Num, e - 1 <= ss && G == EXP(2, ss)) && int_of_num(1) <= Cm0 && B * (pow(int_of_num(5), G - k) * pow(int_of_num(2), k - (e - 1))) == Cm0 && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 GG : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= GG && int_of_num(1) <= M && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(M, e - 1 - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(GG, M)) && isum(op_dot_dot(1, GG), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), GG - k) * pow(M, k - (e - 1)))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) \226\134\146 !(PSI(hh, i, e - 1) == int_of_num(0))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) \226\134\146 (\226\136\131 mult : (Num, Int) -> Num, \226\136\131 MaxMult : Num, int_of_num(MaxMult) <= Cm0 * pow(P, G - (e - 1)) && (\226\136\128 i : Num, \226\136\128 z : Int, mult(i, z) <= MaxMult) && int_of_num(nsum(ibox(2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (e * G), int_of_num(2) * P)) && isum(op_dot_dot(1, 2 * (e * G)), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)}))) <= pow(int_of_num(2) * (int_of_num(2) * P) + int_of_num(1), 2 * (e * G) - 2 * e) * int_of_num(nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => mult(i, z(i)))))))
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (e : Num) - 1 <= (ss : Num)
+      #|  (ss : Num)
+      #|  \226\136\131 ss : Num, (e : Num) - 1 <= ss && (G : Num) == EXP(2, ss)
+      #|  int_of_num((Bn : Num))
+      #|  (Bn : Num)
+      #|  int_of_num(0) <= int_of_num((G : Num)) * (int_of_num((e : Num)) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1)))
+      #|  (P : Int)
+      #|  (cpsi : Int)
+      #|  (G : Num)
+      #|  (e : Num)
+      #|  (Cf : Int)
+      #|  int_of_num(2) * (P : Int) * (int_of_num(2) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int)) * pow(int_of_num(2) * P, e - 1))) == int_of_num(2) * P * (int_of_num(2) * (int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))))
+      #|  nsum({(hh : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * (e : Num))) \226\134\146 abs(hh(i)) <= int_of_num(2) * (P : Int)) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 hh(i) == int_of_num(0))}, (hh : (Num) -> Int) => nsum({(z : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(z(i)) <= int_of_num((G : Num)) * (int_of_num(e) * ((cpsi : Int) * pow(int_of_num(2) * P, e - 1)))) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 z(i) == int_of_num(0)) && isum(op_dot_dot(1, 2 * e), (i : Num) => hh(i) * z(i)) == int_of_num(0)}, (z : (Num) -> Int) => nproduct(op_dot_dot(1, 2 * e), (i : Num) => (mult : (Num, Int) -> Num)(i, z(i)))))
+      #|  (MaxMult : Num)
+      #|  2 * (2 * ((e : Num) * (G : Num))) - e == 2 * (2 * (e * G)) - e
+      #|  (MaxMult : Num)
+      #|  (mult : (Num, Int) -> Num)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (cpsi : Int)
+      #|  (P : Int)
+      #|  (Cm0 : Int)
+      #|  (G : Num)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 B : Int, \226\136\128 G : Num, \226\136\128 Cm0 : Int, \226\136\128 P : Int, \226\136\128 cpsi : Int, \226\136\128 Cfp : Int, \226\136\128 Cf : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, 2 <= e && e - 1 <= k && int_of_num(1) <= B && k <= G && e - 1 <= G && 1 <= G && int_of_num(1) <= P && int_of_num(1) <= cpsi && (\226\136\131 ss : Num, e - 1 <= ss && G == EXP(2, ss)) && int_of_num(1) <= Cm0 && B * (pow(int_of_num(5), G - k) * pow(int_of_num(2), k - (e - 1))) == Cm0 && int_of_num(1) <= Cfp && Cf <= Cfp && int_of_num(1) <= int_of_num(G) * (int_of_num(e) * cpsi) && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 GG : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= GG && int_of_num(1) <= M && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(M, e - 1 - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(GG, M)) && isum(op_dot_dot(1, GG), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), GG - k) * pow(M, k - (e - 1)))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) \226\134\146 !(PSI(hh, i, e - 1) == int_of_num(0))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) && (\226\136\128 A : Int, \226\136\128 B' : Int, \226\136\128 mfn : ((Num) -> Int) -> Int, int_of_num(1) <= A && A <= int_of_num(2) * B' && int_of_num(2) * B' <= pow(A, CARD(op_dot_dot(1, 2 * e)) - 1) \226\134\146 isum({(a : (Num) -> Int) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, 2 * e)) \226\134\146 abs(a(i)) <= A) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, 2 * e)) \226\134\146 a(i) == int_of_num(0))}, (a : (Num) -> Int) => int_of_num(lincount(op_dot_dot(1, 2 * e), a, mfn(a), B'))) <= Cf * pow(A * (int_of_num(2) * B'), CARD(op_dot_dot(1, 2 * e)) - 1)) && int_of_num(2) * (int_of_num(G) * (int_of_num(e) * (cpsi * pow(int_of_num(2) * P, e - 1)))) <= pow(int_of_num(2) * P, 2 * e - 1) \226\134\146 int_of_num(nsum(ibox(2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (e * G), int_of_num(2) * P)) && isum(op_dot_dot(1, 2 * (e * G)), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)}))) <= pow(pow(int_of_num(5), G - 1) * Cm0, 2 * e) * (Cfp * pow(int_of_num(G) * (int_of_num(e) * cpsi), 2 * e - 1) * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) * pow(P, 2 * (2 * (e * G)) - e)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (G : Num)
+      #|  (e : Num) - 1 <= (ss : Num)
+      #|  (ss : Num)
+      #|  \226\136\131 ss : Num, (e : Num) - 1 <= ss && (G : Num) == EXP(2, ss)
+      #|  pow(pow(int_of_num(5), (G : Num) - 1) * (Cm0 : Int), 2 * (e : Num)) * ((Cfp : Int) * pow(int_of_num(G) * (int_of_num(e) * (cpsi : Int)), 2 * e - 1) * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) + pow(int_of_num(4) * (int_of_num(G) * (int_of_num(e) * cpsi)), 4 * (e * G))
+      #|  pow(int_of_num(4) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))), 4 * (e * G))
+      #|  2 * (2 * ((e : Num) * (G : Num))) - e == 2 * (2 * (e * G)) - e
+      #|  (Cf : Int)
+      #|  (B : Int)
+      #|  (k : Num)
+      #|  2 * (2 * ((e : Num) * (G : Num))) - e == 2 * (2 * (e * G)) - e
+      #|  pow(pow(int_of_num(5), (G : Num) - 1) * (Cm0 : Int), 2 * (e : Num)) * ((Cfp : Int) * pow(int_of_num(G) * (int_of_num(e) * (cpsi : Int)), 2 * e - 1) * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) * pow((P : Int), 2 * (2 * (e * G)) - e)
+      #|  int_of_num(2) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * ((cpsi : Int) * pow(int_of_num(2) * (P : Int), e - 1)))) <= pow(int_of_num(2) * P, 2 * e - 1)
+      #|  (P : Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  int_of_num(0) <= pow(int_of_num(4) * (int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))), 4 * (e * G))
+      #|  int_of_num(1) <= pow(pow(int_of_num(5), (G : Num) - 1) * (Cm0 : Int), 2 * (e : Num)) * ((Cfp : Int) * pow(int_of_num(G) * (int_of_num(e) * (cpsi : Int)), 2 * e - 1) * pow(pow(int_of_num(2), e + 1), 2 * e - 1))
+      #|  int_of_num(1) <= pow(int_of_num(5), (G : Num) - 1) * (Cm0 : Int)
+      #|  pow(pow(int_of_num(5), (G : Num) - 1) * (Cm0 : Int), 2 * (e : Num)) * ((Cfp : Int) * pow(int_of_num(G) * (int_of_num(e) * (cpsi : Int)), 2 * e - 1) * pow(pow(int_of_num(2), e + 1), 2 * e - 1)) + pow(int_of_num(4) * (int_of_num(G) * (int_of_num(e) * cpsi)), 4 * (e * G))
+      #|  int_of_num(1) <= int_of_num((G : Num)) * (int_of_num((e : Num)) * (cpsi : Int))
+      #|  int_of_num(1) <= (Cfp : Int) && (Cf : Int) <= Cfp
+      #|  int_of_num(1) <= (Cm0 : Int)
+      #|  (Cfp : Int) == abs((Cf : Int)) + int_of_num(1)
+      #|  (Cm0 : Int) == (B : Int) * (pow(int_of_num(5), (G : Num) - (k : Num)) * pow(int_of_num(2), k - ((e : Num) - 1)))
+      #|  (B : Int)
+      #|  (cpsi : Int)
+      #|  (Cf : Int)
+      #|  op_dot_dot(1, 2 * (e : Num))
+      #|  \226\136\128 e : Num, \226\136\128 k : Num, \226\136\128 G : Num, 2 <= e && e - 1 <= k && k <= G && e - 1 <= G && 1 <= G && (\226\136\131 ss : Num, e - 1 <= ss && G == EXP(2, ss)) \226\134\146 (\226\136\128 cpsi : Int, int_of_num(1) <= cpsi \226\134\146 (\226\136\128 B : Int, int_of_num(1) <= B && (\226\136\128 psi : (Num) -> Int, \226\136\128 neg : (Num) -> Bool, \226\136\128 GG : Num, \226\136\128 M : Int, \226\136\128 z : Int, k <= GG && int_of_num(1) <= M && !(psi(e - 1) == int_of_num(0)) && (\226\136\128 i : Num, i <= e - 1 \226\134\146 abs(psi(i)) <= cpsi * pow(M, e - 1 - i)) \226\134\146 int_of_num(CARD({(w : (Num) -> Int) | IN(w, ibox(GG, M)) && isum(op_dot_dot(1, GG), (j : Num) => if neg(j) { -ipoly(psi, e - 1, w(j)) } else { ipoly(psi, e - 1, w(j)) }) == z})) <= B * (pow(int_of_num(2) * M + int_of_num(1), GG - k) * pow(M, k - (e - 1)))) \226\134\146 (\226\136\131 cc : Int, int_of_num(1) <= cc && (\226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, \226\136\128 P : Int, int_of_num(1) <= P && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) \226\134\146 !(PSI(hh, i, e - 1) == int_of_num(0))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, 2 * (e * G))) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, 2 * (e * G))) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) \226\134\146 int_of_num(nsum(ibox(2 * (e * G), int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(2 * (e * G), int_of_num(2) * P)) && isum(op_dot_dot(1, 2 * (e * G)), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)}))) <= cc * pow(P, 2 * (2 * (e * G)) - e)))))
+      #|  (G : Num)
+      #|  (e : Num) - 1 <= (ss : Num)
+      #|  (ss : Num)
+      #|  \226\136\131 ss : Num, (e : Num) - 1 <= ss && (G : Num) == EXP(2, ss)
+      #|  (z : Int)
+      #|  (M : Int)
+      #|  (GG : Num)
+      #|  (neg : (Num) -> Bool)
+      #|  (psi : (Num) -> Int)
+      #|  (B : Int)
+      #|  (cpsi : Int)
+      #|  (k : Num)
+      #|  EXP(2, (k : Num))
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  (B : Int)
+      #|  (cpsi : Int)
+      #|  2 <= (e : Num)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (1 <= 4 * (n : Num)) == !(n == 0)
+      #|  (e : Num) == e * 1
+      #|  2 * (2 * ((e : Num) * (n : Num))) == e * (4 * n)
+      #|  2 * ((e : Num) * EXP(2, (k : Num)))
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (k : Num)
+      #|  1 <= EXP(2, (k : Num)) && k <= EXP(2, k) && (e : Num) - 1 <= EXP(2, k)
+      #|  (k : Num)
+      #|  (e : Num) - 1
+      #|  \226\136\128 e : Num, 2 <= e \226\134\146 DPWIH2(e - 1) \226\134\146 (\226\136\131 kk : Num, e <= 2 * kk && 1 <= kk && (\226\136\128 cpsi : Int, int_of_num(1) <= cpsi \226\134\146 (\226\136\131 cc : Int, int_of_num(1) <= cc && (\226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, \226\136\128 P : Int, int_of_num(1) <= P && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, kk)) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, kk)) \226\134\146 !(PSI(hh, i, e - 1) == int_of_num(0))) && (\226\136\128 hh : (Num) -> Int, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 l : Num, IN(l, op_dot_dot(1, kk)) \226\134\146 abs(hh(l)) <= int_of_num(2) * P) && IN(i, op_dot_dot(1, kk)) && j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= cpsi * pow(int_of_num(2) * P, e - 1 - j)) \226\134\146 int_of_num(nsum(ibox(kk, int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)}))) <= cc * pow(P, 2 * kk - e)))))
+      #|  (cpsi : Int)
+      #|  (j : Num)
+      #|  !(SUC((e : Num)) <= e)
+      #|  !(SUC((e : Num)) == 0)
+      #|  pow((y : Int), SUC(SUC((e : Num)))) == y * pow(y, SUC(e))
+      #|  pow((y : Int) + (h : Int), SUC(SUC((e : Num)))) == (y + h) * (pow(y, SUC(e)) + h * isum(op_dot_dot(0, e), (j : Num) => (g0 : (Num) -> Int)(j) * pow(y, j)))
+      #|  (j : Num)
+      #|  !(SUC((e : Num)) <= e)
+      #|  isum(op_dot_dot(0, SUC((e : Num))), (j : Num) => (if j <= e { (h : Int) * (g0 : (Num) -> Int)(j) } else { int_of_num(0) }) * pow((y : Int), j)) == h * isum(op_dot_dot(0, e), (j : Num) => g0(j) * pow(y, j))
+      #|  ((j : Num) => (if j == SUC((e : Num)) { int_of_num(1) } else { int_of_num(0) }) * pow((y : Int), j)) == ((j : Num) => if j == SUC(e) { pow(y, SUC(e)) } else { int_of_num(0) })
+      #|  isum(op_dot_dot(0, SUC((e : Num))), (j : Num) => ((if j == 0 { int_of_num(0) } else { (g0 : (Num) -> Int)(j - 1) }) + ((if j <= e { (h : Int) * g0(j) } else { int_of_num(0) }) + (if j == SUC(e) { int_of_num(1) } else { int_of_num(0) }))) * pow((y : Int), j)) == pow(y, SUC(e)) + (y * isum(op_dot_dot(0, e), (j : Num) => g0(j) * pow(y, j)) + h * isum(op_dot_dot(0, e), (j : Num) => g0(j) * pow(y, j)))
+      #|  (j : Num) => (if j == 0 { int_of_num(0) } else { (g0 : (Num) -> Int)(j - 1) }) + ((if j <= (e : Num) { (h : Int) * g0(j) } else { int_of_num(0) }) + (if j == SUC(e) { int_of_num(1) } else { int_of_num(0) }))
+      #|  (g0 : (Num) -> Int)
+      #|  (h : Int)
+      #|  (P : Int)
+      #|  (j : Num) => int_of_num(1)
+      #|  \226\136\128 e : Num, \226\136\128 P : Int, \226\136\128 h : Int, int_of_num(1) <= P && abs(h) <= int_of_num(2) * P \226\134\146 (\226\136\131 g : (Num) -> Int, (\226\136\128 y : Int, pow(y + h, SUC(e)) == pow(y, SUC(e)) + h * isum(op_dot_dot(0, e), (j : Num) => g(j) * pow(y, j))) && g(e) == int_of_num(SUC(e)) && (\226\136\128 j : Num, j <= e \226\134\146 abs(g(j)) <= int_of_num(EXP(4, SUC(e))) * pow(P, e - j)))
+      #|  EXP(4, SUC(SUC((n : Num)))) == 4 * EXP(4, SUC(n))
+      #|  int_of_num(2) * (int_of_num(EXP(4, SUC((n : Num)))) * ((c : Int) * pow((P : Int), (nn : Num) - 1 - (j : Num)))) + int_of_num(EXP(4, SUC(SUC(n)))) * (c * pow(P, nn - 1 - j)) == (int_of_num(2) * int_of_num(EXP(4, SUC(n))) + int_of_num(EXP(4, SUC(SUC(n))))) * (c * pow(P, nn - 1 - j)) && int_of_num(2) * (int_of_num(EXP(4, SUC(SUC(n)))) * (c * pow(P, nn - 1 - j))) == int_of_num(2) * int_of_num(EXP(4, SUC(SUC(n)))) * (c * pow(P, nn - 1 - j))
+      #|  int_of_num(2) * (int_of_num(EXP(4, SUC((n : Num)))) * ((c : Int) * pow((P : Int), (nn : Num) - 1 - (j : Num)))) + int_of_num(EXP(4, SUC(SUC(n)))) * (c * pow(P, nn - 1 - j))
+      #|  (nn : Num) - SUC(SUC((n : Num))) + (SUC(n) - (j : Num)) == nn - 1 - j
+      #|  (c : Int) * pow((P : Int), (nn : Num) - SUC(SUC((n : Num)))) * (int_of_num(EXP(4, SUC(SUC(n)))) * pow(P, SUC(n) - (j : Num))) == int_of_num(EXP(4, SUC(SUC(n)))) * (c * (pow(P, nn - SUC(SUC(n))) * pow(P, SUC(n) - j)))
+      #|  SUC(SUC((n : Num)))
+      #|  (c : Int) * pow((P : Int), (nn : Num) - SUC(SUC((n : Num)))) * (int_of_num(EXP(4, SUC(SUC(n)))) * pow(P, SUC(n) - (j : Num)))
+      #|  abs((f : (Num) -> Int)(SUC(SUC((n : Num)))) * (g : (Num) -> Int)((j : Num))) <= int_of_num(EXP(4, SUC(SUC(n)))) * ((c : Int) * pow((P : Int), (nn : Num) - 1 - j))
+      #|  abs(if (j : Num) <= (n : Num) { (psiP : (Num) -> Int)(j) } else { int_of_num(0) }) <= int_of_num(2) * (int_of_num(EXP(4, SUC(n))) * ((c : Int) * pow((P : Int), (nn : Num) - 1 - j)))
+      #|  int_of_num(0) <= int_of_num(2) * (int_of_num(EXP(4, SUC((n : Num)))) * ((c : Int) * pow((P : Int), (nn : Num) - 1 - (j : Num))))
+      #|  int_of_num(0) <= (c : Int) * pow((P : Int), (nn : Num) - 1 - (j : Num))
+      #|  int_of_num(0) <= (P : Int) && int_of_num(0) <= pow(P, (nn : Num) - 1 - (j : Num)) && int_of_num(0) <= pow(P, SUC((n : Num)) - j) && pow(P, SUC(n) - j) <= pow(P, nn - 1 - j)
+      #|  abs(if (j : Num) <= (n : Num) { (psiP : (Num) -> Int)(j) } else { int_of_num(0) }) + abs((f : (Num) -> Int)(SUC(SUC(n))) * (g : (Num) -> Int)(j))
+      #|  (j : Num)
+      #|  !(SUC((n : Num)) <= n)
+      #|  (y : Int)
+      #|  (y : Int)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  !(SUC((n : Num)) <= n)
+      #|  ipoly((j : Num) => (if j <= (n : Num) { (psiP : (Num) -> Int)(j) } else { int_of_num(0) }) + (f : (Num) -> Int)(SUC(SUC(n))) * (g : (Num) -> Int)(j), SUC(n), (y : Int)) == ipoly(psiP, n, y) + f(SUC(SUC(n))) * isum(op_dot_dot(0, SUC(n)), (j : Num) => g(j) * pow(y, j))
+      #|  (j : Num) => (if j <= (n : Num) { (psiP : (Num) -> Int)(j) } else { int_of_num(0) }) + (f : (Num) -> Int)(SUC(SUC(n))) * (g : (Num) -> Int)(j)
+      #|  (g : (Num) -> Int)
+      #|  (h : Int)
+      #|  (P : Int)
+      #|  SUC((n : Num))
+      #|  (psiP : (Num) -> Int)
+      #|  (i : Num)
+      #|  (P : Int)
+      #|  (c : Int)
+      #|  (h : Int)
+      #|  (f : (Num) -> Int)
+      #|  (nn : Num)
+      #|  int_of_num(0) <= (c : Int) * pow((P : Int), (nn : Num) - 1)
+      #|  abs((f : (Num) -> Int)(1)) <= (c : Int) * pow((P : Int), (nn : Num) - 1)
+      #|  int_of_num(0) <= (c : Int) * pow((P : Int), (nn : Num) - 1)
+      #|  1 <= SUC(0)
       #|  1
-      #|  SUC 0 = 1
-      #|  forall z. ipoly (\\j. (f:num->int) 1) 0 z = f 1
-      #|  (\\j. (f:num->int) 1):num->int
-      #|  forall n nn f (h:int) c P. &1 <= P /\\ abs h <= &2 * P /\\ &0 <= c /\\ SUC n <= nn /\\\n     (forall i. i <= SUC n ==> abs(f i) <= c * P pow (nn - i))\n    ==> ?psi. (forall y. ipoly f (SUC n) (y+h) - ipoly f (SUC n) y = h * ipoly psi n\n     y) /\\\n              psi n = &(SUC n) * f (SUC n) /\\\n              (forall j. j <= n ==> abs(psi j) <= &2 * &(4 EXP (SUC n)) * c * P pow\n               (nn - 1 - j))
-      #|  psiP:num->int
-      #|  psiP:num->int
-      #|  psiP:num->int
-      #|  c:int
-      #|  psiP:num->int
-      #|  g:num->int
-      #|  psiP:num->int
-      #|  g:num->int
-      #|  psiP:num->int
-      #|  psiP:num->int
-      #|  psiP:num->int
-      #|  g:num->int
-      #|  g:num->int
-      #|  SUC n - 1 - j = n - j
-      #|  j:num
-      #|  j:num
-      #|  psi:num->int
-      #|  psi:num->int
-      #|  P:int
-      #|  c:int
-      #|  h:int
-      #|  f:num->int
-      #|  SUC n
-      #|  n:num
-      #|  e - 1
-      #|  ?n. e = SUC n
-      #|  forall e f (h:int) c P. 2 <= e /\\ &1 <= P /\\ abs h <= &2 * P /\\ &0 <= c /\\\n     (forall i. i <= e ==> abs(f i) <= c * P pow (e - i))\n    ==> ?psi. (forall y. ipoly f e (y+h) - ipoly f e y = h * ipoly psi (e-1) y) /\\\n              psi (e-1) = &e * f e /\\\n              (forall j. j <= e-1 ==> abs(psi j) <= &2 * &(4 EXP e) * c * P pow\n               ((e-1) - j))
-      #|  psifam:num->num->int
-      #|  psifam:num->num->int
-      #|  (\\j. &0):num->int
-      #|  psi:num->int
-      #|  psi:num->int
-      #|  i':num
-      #|  P:int
-      #|  c:int
-      #|  (hh:num->int)\n      i
-      #|  (ffam:num->num->int) i
-      #|  e:num
-      #|  i IN 1..kk
-      #|  i:num
-      #|  forall i. ?psi. i IN 1..kk\n              ==> (forall y. ipoly ((ffam:num->num->int) i) e (y + hh i) - ipoly\n               (ffam i) e y = hh i * ipoly psi (e-1) y) /\\\n                  psi (e-1) = &e * ffam i e /\\\n                  (forall j. j <= e-1 ==> abs(psi j) <= &2 * &(4 EXP e) * c * P pow\n                   ((e-1) - j))
-      #|  forall(ffam:num->num->int) e kk c P (hh:num->int).\n     2 <= e /\\ &1 <= P /\\ &0 <= c /\\\n      (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P) /\\\n     (forall j i. j IN 1..kk /\\ i <= e ==> abs(ffam j i) <= c * P pow (e - i))\n     ==> ?psifam. (forall i. i IN 1..kk\n                       ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e\n                        y = hh i * ipoly (psifam i) (e-1) y) /\\\n                           psifam i (e-1) = &e * ffam i e /\\\n                           (forall j. j <= e-1 ==> abs(psifam i j) <= &2 * &(4 EXP e)\n                            * c * P pow ((e-1) - j)))
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  (y:num->int) i
-      #|  i:num
-      #|  i:num
-      #|  forall(ffam:num->num->int) (psifam:num->num->int) e kk (hh:num->int)\n  (y:num->int).\n     (forall i. i IN 1..kk ==> forall z. ipoly (ffam i) e (z + hh i) - ipoly (ffam i) e z =\n      hh i * ipoly (psifam i) (e-1) z)\n     ==> isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam i) e (y\n      i)) =\n         isum(1..kk)(\\i. hh i * ipoly (psifam i) (e-1) (y i))
-      #|  (\\i j. &0):num->num->int
-      #|  psifam:num->num->int
-      #|  psifam:num->num->int
-      #|  hh:num->int
-      #|  P:int
-      #|  c:int
-      #|  kk:num
-      #|  e:num
-      #|  ffam:num->num->int
-      #|  forall i. i IN 1..kk ==> abs((hh:num->int) i) <= &2 * P
-      #|  hh:num->int
-      #|  forall(ffam:num->num->int) e kk (c:int) (P:int).\n     2 <= e /\\ &1 <= P /\\ &0 <= c /\\\n     (forall j i. j IN 1..kk /\\ i <= e ==> abs(ffam j i) <= c * P pow (e - i))\n     ==> ?PSI. forall(hh:num->int). (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n             ==> forall i. i IN 1..kk\n                 ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e y = hh\n                  i * ipoly (PSI hh i) (e-1) y) /\\\n                     PSI hh i (e-1) = &e * ffam i e /\\\n                     (forall j. j <= e-1 ==> abs(PSI hh i j) <= &2 * &(4 EXP e) * c *\n                      P pow ((e-1) - j))
-      #|  hh:num->int
-      #|  y:num->int
-      #|  hh:num->int
-      #|  kk:num
-      #|  e:num
-      #|  (PSI:(num->int)->num->num->int)\n   hh
-      #|  ffam:num->num->int
-      #|  i:num
-      #|  (hh:num->int) IN ibox kk (&2 * P)
-      #|  (forall i. i IN 1..kk ==> abs((hh:num->int) i) <= &2 * P)
-      #|  (b<=>c) ==> (a/\\b<=>a/\\c)
-      #|  y:num->int
-      #|  hh:num->int
-      #|  forall(ffam:num->num->int) e kk (P:int) (PSI:(num->int)->num->num->int).\n     (forall(hh:num->int). (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n             ==> forall i. i IN 1..kk\n                 ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i) e y = hh\n                  i * ipoly (PSI hh i) (e-1) y))\n     ==> nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. ipoly (ffam i) e (y i + hh i) - ipoly (ffam i)\n                  e (y i)) = &0})\n         = nsum (ibox kk (&2 * P))\n            (\\hh. CARD {y:num->int | y IN ibox kk (&2 * P) /\\\n                 isum(1..kk)(\\i. hh i * ipoly (PSI hh i) (e-1) (y i)) = &0})
-      #|  &2 * &(4 EXP e) * (A:int) * P pow ((e-1) - j)
-      #|  hh:num->int
-      #|  abs((PSI:(num->int)->num->num->int) hh i j) <= &2 * &(4 EXP\n     e) * A * P pow ((e-1) - j)
-      #|  j:num
-      #|  i:num
-      #|  hh:num->int
-      #|  hh:num->int
-      #|  PSI (hh:num->int) i (e-1) = &e * (ffam:num->num->int) i e
-      #|  i:num
-      #|  hh:num->int
-      #|  hh:num->int
-      #|  i:num
-      #|  hh:num->int
-      #|  forall(hh:num->int). (forall i. i IN 1..kk ==> abs(hh i) <= &2 * P)\n       ==> forall i. i IN 1..kk ==> (forall y. ipoly (ffam i) e (y + hh i) - ipoly (ffam i)\n        e y = hh i * ipoly ((PSI:(num->int)->num->num->int) hh i) (e-1) y)
-      #|  PSI:(num->int)->num->num->int
-      #|  P:int
-      #|  A:int
-      #|  kk:num
-      #|  e:num
-      #|  ffam:num->num->int
-      #|  P:int
-      #|  kk:num
-      #|  e:num
-      #|  ffam:num->num->int
-      #|  P:int
-      #|  ffam:num->num->int
-      #|  cc:int
-      #|  cc:int
-      #|  1 <= n <=> ~(n = 0)
-      #|  1 <= 2 * n <=> 1 <= n
-      #|  A:int
-      #|  &2 * &(4 EXP e) * A:int
-      #|  A:int
-      #|  kk:num
-      #|  kk:num
-      #|  e:num
-      #|  forall e. 2 <= e ==> DPWIH2 (e-1)\n      ==> ?kk. e <= 2*kk /\\\n             forall A:int. &1 <= A ==> ?c. &1 <= c /\\\n             forall(ffam:num->num->int) (P:int). &1 <= P /\\\n              (forall j. j IN 1..kk ==> ~(ffam j e = &0)) /\\\n                 (forall j j'. j IN 1..kk /\\\n                  j' IN 1..kk ==> abs(ffam j e) = abs(ffam j' e)) /\\\n                 (forall j i. j IN 1..kk /\\\n                  i <= e ==> abs(ffam j i) <= A * P pow (e - i))\n                 ==> &(CARD (findiffset_dp ffam e kk P)) <= c * P pow (2*kk -\n                  e)
-      #|  cpsi:int
-      #|  cpsi:int
-      #|  PSI:(num->int)->num->num->int
-      #|  P:int
-      #|  kk:num
-      #|  e:num
-      #|  ffam:num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  PSI:(num->int)->num->num->int
-      #|  P:int
-      #|  PSI:(num->int)->num->num->int
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  &B0:int
-      #|  CARD (findiffset_dp (\\n. (ffam:num->num->int)(n+kk)) e kk P)
-      #|  CARD {w | w IN ibox (2*kk) P /\\\n    isum(1..kk)(\\i. mvf kk (wtail kk (\\j. ipoly ((ffam:num->num->int) j) e)) i\n     (w i)) = isum((kk+1)..(2*kk))(\\i. mvf kk (wtail kk (\\j. ipoly (ffam j) e))\n      i (w i))} <= B0
-      #|  CARD (findiffset_dp (ffam:num->num->int) e kk P)
-      #|  CARD {w | w IN ibox (2*kk) P /\\\n    isum(1..kk)(\\i. mvf kk (\\j. ipoly ((ffam:num->num->int) j) e) i (w\n     i)) = isum((kk+1)..(2*kk))(\\i. mvf kk (\\j. ipoly (ffam j) e) i (w\n      i))} <= B0
-      #|  CARD (findiffset_dp (ffam:num->num->int) e kk P) <= B0 /\\\n   CARD (findiffset_dp (\\n. (ffam:num->num->int)(n+kk)) e kk P) <= B0
-      #|  &B0:int = c * P pow (2 * kk - e)
-      #|  B0 = num_of_int(c * P pow (2 * kk - e))
-      #|  &0 <= (c:int) * P pow (2 * kk - e)
-      #|  m:int
-      #|  P:int
-      #|  kk:num
-      #|  \\j. ipoly ((ffam:num->num->int) j) e
-      #|  (j:num) IN 1..kk
-      #|  i:num
-      #|  j:num
-      #|  j':num
-      #|  j:num
-      #|  (j:num) IN 1..kk
-      #|  j:num
-      #|  &(CARD (findiffset_dp (\\n. (ffam:num->num->int)(n+kk)) e kk P))\n   <= (c:int) * P pow (2 * kk - e)
-      #|  (j:num) IN 1..kk
-      #|  i:num
-      #|  j:num
-      #|  (j':num) IN 1..kk
-      #|  (j:num) IN 1..kk
-      #|  j':num
-      #|  j:num
-      #|  (j:num) IN 1..kk
-      #|  j:num
-      #|  &(CARD (findiffset_dp (ffam:num->num->int) e kk P)) <= (c:int) * P\n   pow (2 * kk - e)
-      #|  1 <= kk
-      #|  m:int
-      #|  P:int
-      #|  ffam:num->num->int
-      #|  c:int
-      #|  c:int
-      #|  A:int
-      #|  A:int
-      #|  2*kk
-      #|  kk:num
-      #|  e:num
-      #|  forall e. 2 <= e ==> DPWIH2 (e-1) ==> DPWIH2 e
-      #|  A:int
-      #|  A:int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  P:int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  P:int
-      #|  \\n.\n     (ffam:num->num->int)(n+kk)
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
-      #|  j:num
+      #|  SUC(0) == 1
+      #|  \226\136\128 z : Int, ipoly((j : Num) => (f : (Num) -> Int)(1), 0, z) == f(1)
+      #|  (j : Num) => (f : (Num) -> Int)(1)
+      #|  \226\136\128 n : Num, \226\136\128 nn : Num, \226\136\128 f : (Num) -> Int, \226\136\128 h : Int, \226\136\128 c : Int, \226\136\128 P : Int, int_of_num(1) <= P && abs(h) <= int_of_num(2) * P && int_of_num(0) <= c && SUC(n) <= nn && (\226\136\128 i : Num, i <= SUC(n) \226\134\146 abs(f(i)) <= c * pow(P, nn - i)) \226\134\146 (\226\136\131 psi : (Num) -> Int, (\226\136\128 y : Int, ipoly(f, SUC(n), y + h) - ipoly(f, SUC(n), y) == h * ipoly(psi, n, y)) && psi(n) == int_of_num(SUC(n)) * f(SUC(n)) && (\226\136\128 j : Num, j <= n \226\134\146 abs(psi(j)) <= int_of_num(2) * (int_of_num(EXP(4, SUC(n))) * (c * pow(P, nn - 1 - j)))))
+      #|  (psiP : (Num) -> Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (c : Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (g : (Num) -> Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (g : (Num) -> Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (psiP : (Num) -> Int)
+      #|  (g : (Num) -> Int)
+      #|  (g : (Num) -> Int)
+      #|  SUC((n : Num)) - 1 - (j : Num) == n - j
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (psi : (Num) -> Int)
+      #|  (psi : (Num) -> Int)
+      #|  (P : Int)
+      #|  (c : Int)
+      #|  (h : Int)
+      #|  (f : (Num) -> Int)
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  (e : Num) - 1
+      #|  \226\136\131 n : Num, (e : Num) == SUC(n)
+      #|  \226\136\128 e : Num, \226\136\128 f : (Num) -> Int, \226\136\128 h : Int, \226\136\128 c : Int, \226\136\128 P : Int, 2 <= e && int_of_num(1) <= P && abs(h) <= int_of_num(2) * P && int_of_num(0) <= c && (\226\136\128 i : Num, i <= e \226\134\146 abs(f(i)) <= c * pow(P, e - i)) \226\134\146 (\226\136\131 psi : (Num) -> Int, (\226\136\128 y : Int, ipoly(f, e, y + h) - ipoly(f, e, y) == h * ipoly(psi, e - 1, y)) && psi(e - 1) == int_of_num(e) * f(e) && (\226\136\128 j : Num, j <= e - 1 \226\134\146 abs(psi(j)) <= int_of_num(2) * (int_of_num(EXP(4, e)) * (c * pow(P, e - 1 - j)))))
+      #|  (psifam : (Num, Num) -> Int)
+      #|  (psifam : (Num, Num) -> Int)
+      #|  (j : Num) => int_of_num(0)
+      #|  (psi : (Num) -> Int)
+      #|  (psi : (Num) -> Int)
+      #|  (i' : Num)
+      #|  (P : Int)
+      #|  (c : Int)
+      #|  (hh : (Num) -> Int)((i : Num))
+      #|  (ffam : (Num, Num) -> Int)((i : Num))
+      #|  (e : Num)
+      #|  IN((i : Num), op_dot_dot(1, (kk : Num)))
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, \226\136\131 psi : (Num) -> Int, IN(i, op_dot_dot(1, (kk : Num))) \226\134\146 (\226\136\128 y : Int, ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), y + (hh : (Num) -> Int)(i)) - ipoly(ffam(i), e, y) == hh(i) * ipoly(psi, e - 1, y)) && psi(e - 1) == int_of_num(e) * ffam(i, e) && (\226\136\128 j : Num, j <= e - 1 \226\134\146 abs(psi(j)) <= int_of_num(2) * (int_of_num(EXP(4, e)) * ((c : Int) * pow((P : Int), e - 1 - j))))
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 c : Int, \226\136\128 P : Int, \226\136\128 hh : (Num) -> Int, 2 <= e && int_of_num(1) <= P && int_of_num(0) <= c && (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) && (\226\136\128 j : Num, \226\136\128 i : Num, IN(j, op_dot_dot(1, kk)) && i <= e \226\134\146 abs(ffam(j, i)) <= c * pow(P, e - i)) \226\134\146 (\226\136\131 psifam : (Num, Num) -> Int, \226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 (\226\136\128 y : Int, ipoly(ffam(i), e, y + hh(i)) - ipoly(ffam(i), e, y) == hh(i) * ipoly(psifam(i), e - 1, y)) && psifam(i, e - 1) == int_of_num(e) * ffam(i, e) && (\226\136\128 j : Num, j <= e - 1 \226\134\146 abs(psifam(i, j)) <= int_of_num(2) * (int_of_num(EXP(4, e)) * (c * pow(P, e - 1 - j)))))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (y : (Num) -> Int)((i : Num))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 psifam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 hh : (Num) -> Int, \226\136\128 y : (Num) -> Int, (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 (\226\136\128 z : Int, ipoly(ffam(i), e, z + hh(i)) - ipoly(ffam(i), e, z) == hh(i) * ipoly(psifam(i), e - 1, z))) \226\134\146 isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == isum(op_dot_dot(1, kk), (i : Num) => hh(i) * ipoly(psifam(i), e - 1, y(i)))
+      #|  (i : Num) => (j : Num) => int_of_num(0)
+      #|  (psifam : (Num, Num) -> Int)
+      #|  (psifam : (Num, Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  (P : Int)
+      #|  (c : Int)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, (kk : Num))) \226\134\146 abs((hh : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 c : Int, \226\136\128 P : Int, 2 <= e && int_of_num(1) <= P && int_of_num(0) <= c && (\226\136\128 j : Num, \226\136\128 i : Num, IN(j, op_dot_dot(1, kk)) && i <= e \226\134\146 abs(ffam(j, i)) <= c * pow(P, e - i)) \226\134\146 (\226\136\131 PSI : ((Num) -> Int, Num, Num) -> Int, \226\136\128 hh : (Num) -> Int, (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) \226\134\146 (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 (\226\136\128 y : Int, ipoly(ffam(i), e, y + hh(i)) - ipoly(ffam(i), e, y) == hh(i) * ipoly(PSI(hh, i), e - 1, y)) && PSI(hh, i, e - 1) == int_of_num(e) * ffam(i, e) && (\226\136\128 j : Num, j <= e - 1 \226\134\146 abs(PSI(hh, i, j)) <= int_of_num(2) * (int_of_num(EXP(4, e)) * (c * pow(P, e - 1 - j))))))
+      #|  (hh : (Num) -> Int)
+      #|  (y : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)((hh : (Num) -> Int))
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (i : Num)
+      #|  IN((hh : (Num) -> Int), ibox((kk : Num), int_of_num(2) * (P : Int)))
+      #|  \226\136\128 i : Num, IN(i, op_dot_dot(1, (kk : Num))) \226\134\146 abs((hh : (Num) -> Int)(i)) <= int_of_num(2) * (P : Int)
+      #|  (b : Bool) == (c : Bool) \226\134\146 ((a : Bool) && b) == (a && c)
+      #|  (y : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 ffam : (Num, Num) -> Int, \226\136\128 e : Num, \226\136\128 kk : Num, \226\136\128 P : Int, \226\136\128 PSI : ((Num) -> Int, Num, Num) -> Int, (\226\136\128 hh : (Num) -> Int, (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 abs(hh(i)) <= int_of_num(2) * P) \226\134\146 (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 (\226\136\128 y : Int, ipoly(ffam(i), e, y + hh(i)) - ipoly(ffam(i), e, y) == hh(i) * ipoly(PSI(hh, i), e - 1, y)))) \226\134\146 nsum(ibox(kk, int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => ipoly(ffam(i), e, y(i) + hh(i)) - ipoly(ffam(i), e, y(i))) == int_of_num(0)})) == nsum(ibox(kk, int_of_num(2) * P), (hh : (Num) -> Int) => CARD({(y : (Num) -> Int) | IN(y, ibox(kk, int_of_num(2) * P)) && isum(op_dot_dot(1, kk), (i : Num) => hh(i) * ipoly(PSI(hh, i), e - 1, y(i))) == int_of_num(0)}))
+      #|  int_of_num(2) * (int_of_num(EXP(4, (e : Num))) * ((A : Int) * pow((P : Int), e - 1 - (j : Num))))
+      #|  (hh : (Num) -> Int)
+      #|  abs((PSI : ((Num) -> Int, Num, Num) -> Int)((hh : (Num) -> Int), (i : Num), (j : Num))) <= int_of_num(2) * (int_of_num(EXP(4, (e : Num))) * ((A : Int) * pow((P : Int), e - 1 - j)))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (hh : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)((hh : (Num) -> Int), (i : Num), (e : Num) - 1) == int_of_num(e) * (ffam : (Num, Num) -> Int)(i, e)
+      #|  (i : Num)
+      #|  (hh : (Num) -> Int)
+      #|  (hh : (Num) -> Int)
+      #|  (i : Num)
+      #|  (hh : (Num) -> Int)
+      #|  \226\136\128 hh : (Num) -> Int, (\226\136\128 i : Num, IN(i, op_dot_dot(1, (kk : Num))) \226\134\146 abs(hh(i)) <= int_of_num(2) * (P : Int)) \226\134\146 (\226\136\128 i : Num, IN(i, op_dot_dot(1, kk)) \226\134\146 (\226\136\128 y : Int, ipoly((ffam : (Num, Num) -> Int)(i), (e : Num), y + hh(i)) - ipoly(ffam(i), e, y) == hh(i) * ipoly((PSI : ((Num) -> Int, Num, Num) -> Int)(hh, i), e - 1, y)))
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (A : Int)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (cc : Int)
+      #|  (cc : Int)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (1 <= 2 * (n : Num)) == (1 <= n)
+      #|  (A : Int)
+      #|  int_of_num(2) * (int_of_num(EXP(4, (e : Num))) * (A : Int))
+      #|  (A : Int)
+      #|  (kk : Num)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, 2 <= e \226\134\146 DPWIH2(e - 1) \226\134\146 (\226\136\131 kk : Num, e <= 2 * kk && (\226\136\128 A : Int, int_of_num(1) <= A \226\134\146 (\226\136\131 c : Int, int_of_num(1) <= c && (\226\136\128 ffam : (Num, Num) -> Int, \226\136\128 P : Int, int_of_num(1) <= P && (\226\136\128 j : Num, IN(j, op_dot_dot(1, kk)) \226\134\146 !(ffam(j, e) == int_of_num(0))) && (\226\136\128 j : Num, \226\136\128 j' : Num, IN(j, op_dot_dot(1, kk)) && IN(j', op_dot_dot(1, kk)) \226\134\146 abs(ffam(j, e)) == abs(ffam(j', e))) && (\226\136\128 j : Num, \226\136\128 i : Num, IN(j, op_dot_dot(1, kk)) && i <= e \226\134\146 abs(ffam(j, i)) <= A * pow(P, e - i)) \226\134\146 int_of_num(CARD(findiffset_dp(ffam, e, kk, P))) <= c * pow(P, 2 * kk - e)))))
+      #|  (cpsi : Int)
+      #|  (cpsi : Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (PSI : ((Num) -> Int, Num, Num) -> Int)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  int_of_num((B0 : Num))
+      #|  CARD(findiffset_dp((n : Num) => (ffam : (Num, Num) -> Int)(n + (kk : Num)), (e : Num), kk, (P : Int)))
+      #|  CARD({(w : (Num) -> Int) | IN(w, ibox(2 * (kk : Num), (P : Int))) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, wtail(kk, (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num))), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, wtail(kk, (j : Num) => ipoly(ffam(j), e)), i, w(i)))}) <= (B0 : Num)
+      #|  CARD(findiffset_dp((ffam : (Num, Num) -> Int), (e : Num), (kk : Num), (P : Int)))
+      #|  CARD({(w : (Num) -> Int) | IN(w, ibox(2 * (kk : Num), (P : Int))) && isum(op_dot_dot(1, kk), (i : Num) => mvf(kk, (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num)), i, w(i))) == isum(op_dot_dot(kk + 1, 2 * kk), (i : Num) => mvf(kk, (j : Num) => ipoly(ffam(j), e), i, w(i)))}) <= (B0 : Num)
+      #|  CARD(findiffset_dp((ffam : (Num, Num) -> Int), (e : Num), (kk : Num), (P : Int))) <= (B0 : Num) && CARD(findiffset_dp((n : Num) => ffam(n + kk), e, kk, P)) <= B0
+      #|  int_of_num((B0 : Num)) == (c : Int) * pow((P : Int), 2 * (kk : Num) - (e : Num))
+      #|  (B0 : Num) == num_of_int((c : Int) * pow((P : Int), 2 * (kk : Num) - (e : Num)))
+      #|  int_of_num(0) <= (c : Int) * pow((P : Int), 2 * (kk : Num) - (e : Num))
+      #|  (m : Int)
+      #|  (P : Int)
+      #|  (kk : Num)
+      #|  (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), (e : Num))
+      #|  IN((j : Num), op_dot_dot(1, (kk : Num)))
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j' : Num)
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (kk : Num)))
+      #|  (j : Num)
+      #|  int_of_num(CARD(findiffset_dp((n : Num) => (ffam : (Num, Num) -> Int)(n + (kk : Num)), (e : Num), kk, (P : Int)))) <= (c : Int) * pow(P, 2 * kk - e)
+      #|  IN((j : Num), op_dot_dot(1, (kk : Num)))
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  IN((j' : Num), op_dot_dot(1, (kk : Num)))
+      #|  IN((j : Num), op_dot_dot(1, (kk : Num)))
+      #|  (j' : Num)
+      #|  (j : Num)
+      #|  IN((j : Num), op_dot_dot(1, (kk : Num)))
+      #|  (j : Num)
+      #|  int_of_num(CARD(findiffset_dp((ffam : (Num, Num) -> Int), (e : Num), (kk : Num), (P : Int)))) <= (c : Int) * pow(P, 2 * kk - e)
+      #|  1 <= (kk : Num)
+      #|  (m : Int)
+      #|  (P : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (c : Int)
+      #|  (c : Int)
+      #|  (A : Int)
+      #|  (A : Int)
+      #|  2 * (kk : Num)
+      #|  (kk : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, 2 <= e \226\134\146 DPWIH2(e - 1) \226\134\146 DPWIH2(e)
+      #|  (A : Int)
+      #|  (A : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (P : Int)
+      #|  (n : Num) => (ffam : (Num, Num) -> Int)(n + (kk : Num))
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (j : Num)
       #|  1
-      #|  x:num->int
-      #|  v:int
-      #|  ibox 2 P
-      #|  m:int
-      #|  P:int
-      #|  ffam:num->num->int
-      #|  y:num->int
-      #|  x:num->int
-      #|  CARD(IMAGE (\\x:num->int. x 1) {x | x IN ibox 2 P /\\\n   isum (1..2) (\\j. ipoly (ffam j) 1 (x j)) = m})
-      #|  &(CARD {v:int | abs v <= P}):int
-      #|  2 - 1 = 1
-      #|  &3:int
-      #|  A:int
+      #|  (x : (Num) -> Int)
+      #|  (v : Int)
+      #|  ibox(2, (P : Int))
+      #|  (m : Int)
+      #|  (P : Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (y : (Num) -> Int)
+      #|  (x : (Num) -> Int)
+      #|  CARD(IMAGE((x : (Num) -> Int) => x(1), {(x : (Num) -> Int) | IN(x, ibox(2, (P : Int))) && isum(op_dot_dot(1, 2), (j : Num) => ipoly((ffam : (Num, Num) -> Int)(j), 1, x(j))) == (m : Int)}))
+      #|  int_of_num(CARD({(v : Int) | abs(v) <= (P : Int)}))
+      #|  2 - 1 == 1
+      #|  int_of_num(3)
+      #|  (A : Int)
       #|  2
-      #|  DPWIH2 1
-      #|  SUC e
-      #|  e = 0
-      #|  forall e. 1 <= e ==> DPWIH2 e
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  &m:int
-      #|  &P:int
-      #|  \\j:num. monom e
-      #|  &1 <= &P:int
-      #|  &(num_of_int B):int = B
-      #|  &(num_of_int B * P EXP (k - e)):int = B * (&P) pow (k - e)
-      #|  CARD {x | x IN ibox k (&P) /\\\n   isum(1..k)(\\i. ipoly (monom e) e (x i)) = &m}
-      #|  1 <= P
-      #|  ~(x < 0)
-      #|  1 <= k
-      #|  t:num->num
-      #|  {t | t IN boxtuples k 0 /\\\n     boxsum e k t = m} = {}
-      #|  rcount e k 0 m = 0
-      #|  P = 0
-      #|  m:num
-      #|  P:num
-      #|  &(num_of_int B):int = B
-      #|  num_of_int B
-      #|  k:num
-      #|  B:int
-      #|  &1:int
-      #|  k:num
-      #|  e:num
-      #|  forall e. 1 <= e\n       ==> ?s c. e <= s /\\ 1 <= c /\\\n                 forall P m. rcount e s P m <= c * P EXP (s - e)
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  ffam:num->num->int
-      #|  epowers e = {x EXP e | x IN (:num)}
-      #|  1 <= e ==> ~(e = 0)
+      #|  DPWIH2(1)
+      #|  SUC((e : Num))
+      #|  (e : Num) == 0
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 DPWIH2(e)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  int_of_num((m : Num))
+      #|  int_of_num((P : Num))
+      #|  (j : Num) => monom((e : Num))
+      #|  int_of_num(1) <= int_of_num((P : Num))
+      #|  int_of_num(num_of_int((B : Int))) == B
+      #|  int_of_num(num_of_int((B : Int)) * EXP((P : Num), (k : Num) - (e : Num))) == B * pow(int_of_num(P), k - e)
+      #|  CARD({(x : (Num) -> Int) | IN(x, ibox((k : Num), int_of_num((P : Num)))) && isum(op_dot_dot(1, k), (i : Num) => ipoly(monom((e : Num)), e, x(i))) == int_of_num((m : Num))})
+      #|  1 <= (P : Num)
+      #|  !((x : Num) < 0)
+      #|  1 <= (k : Num)
+      #|  (t : (Num) -> Num)
+      #|  {(t : (Num) -> Num) | IN(t, boxtuples((k : Num), 0)) && boxsum((e : Num), k, t) == (m : Num)} == {}
+      #|  rcount((e : Num), (k : Num), 0, (m : Num)) == 0
+      #|  (P : Num) == 0
+      #|  (m : Num)
+      #|  (P : Num)
+      #|  int_of_num(num_of_int((B : Int))) == B
+      #|  num_of_int((B : Int))
+      #|  (k : Num)
+      #|  (B : Int)
+      #|  int_of_num(1)
+      #|  (k : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 (\226\136\131 s : Num, \226\136\131 c : Num, e <= s && 1 <= c && (\226\136\128 P : Num, \226\136\128 m : Num, rcount(e, s, P, m) <= c * EXP(P, s - e)))
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (ffam : (Num, Num) -> Int)
+      #|  (epowers : (Num, Num) -> Bool)((e : Num)) == {EXP((x : Num), e) | IN(x, UNIV)}
+      #|  1 <= (e : Num) \226\134\146 !(e == 0)
       #|  0
-      #|  forall e. 1 <= e ==> 0 IN epowers e
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 IN(0, epowers(e))
       #|  1
-      #|  forall e. 1 IN epowers e
-      #|  waring_repr e g n <=>\n    ?m f. m <= g /\\ (forall i. i IN 1..m ==> ?x. f i = x EXP e) /\\\n     n = nsum(1..m) f
-      #|  m + 1 = 1 + m /\\ m + m' = m' + m
-      #|  m':num
-      #|  m:num
+      #|  \226\136\128 e : Num, IN(1, epowers(e))
+      #|  (waring_repr : (Num, Num, Num) -> Bool)((e : Num), (g : Num), (n : Num)) == (\226\136\131 m : Num, \226\136\131 f : (Num) -> Num, m <= g && (\226\136\128 i : Num, IN(i, op_dot_dot(1, m)) \226\134\146 (\226\136\131 x : Num, f(i) == EXP(x, e))) && n == nsum(op_dot_dot(1, m), f))
+      #|  (m : Num) + 1 == 1 + m && m + (m' : Num) == m' + m
+      #|  (m' : Num)
+      #|  (m : Num)
       #|  1
-      #|  (\\i. if i <= m then (f:num->num) i else g(i - m)):num->num
-      #|  i - m:num
-      #|  i:num
-      #|  (\\i. if i <= m then (f:num->num) i else g(i - m)):num->num
-      #|  m + m':num
-      #|  g:num->num
-      #|  m':num
-      #|  f:num->num
-      #|  m:num
-      #|  forall e a b x y. waring_repr e a x /\\ waring_repr e b y\n               ==> waring_repr e (a + b) (x + y)
-      #|  (\\i. 0):num->num
+      #|  (i : Num) => if i <= (m : Num) { (f : (Num) -> Num)(i) } else { (g : (Num) -> Num)(i - m) }
+      #|  (i : Num) - (m : Num)
+      #|  (i : Num)
+      #|  (i : Num) => if i <= (m : Num) { (f : (Num) -> Num)(i) } else { (g : (Num) -> Num)(i - m) }
+      #|  (m : Num) + (m' : Num)
+      #|  (g : (Num) -> Num)
+      #|  (m' : Num)
+      #|  (f : (Num) -> Num)
+      #|  (m : Num)
+      #|  \226\136\128 e : Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 x : Num, \226\136\128 y : Num, waring_repr(e, a, x) && waring_repr(e, b, y) \226\134\146 waring_repr(e, a + b, x + y)
+      #|  (i : Num) => 0
       #|  0
-      #|  forall e. waring_repr e 0 0
-      #|  sumpow e s = iterate(+++) (1..s) (\\i. epowers e)
-      #|  forall e. sumpow e 0 = {0}
-      #|  ~(SUC s <= s)
-      #|  1 <= SUC s
-      #|  forall e s. sumpow e (SUC s) = epowers e +++ sumpow e s
-      #|  nsum(1..s)(\\i. if i = SUC s then x else (g:num->num) i) =\n   nsum(1..s) g
-      #|  i IN 1..s
-      #|  i:num
-      #|  1 <= SUC s
-      #|  (\\i. if i = SUC s then x else (g:num->num) i):num->num
-      #|  x0:num
-      #|  x IN epowers e
-      #|  g:num->num
-      #|  y:num
-      #|  (\\i. 0):num->num
-      #|  forall e s n. 1 <= e /\\ n IN sumpow e s\n           ==> ?f. (forall i. i IN 1..s ==> ?x. f i = x EXP e) /\\ n = nsum(1..s) f
-      #|  f:num->num
-      #|  s:num
-      #|  f:num->num
-      #|  z:num
-      #|  s:num
-      #|  e:num
-      #|  forall e s z. 1 <= e /\\ z IN sumpow e s ==> waring_repr e s z
-      #|  boxreps e s P = {m | ?t. t IN boxtuples s P /\\ boxsum e s t = m}
-      #|  {y:num | y < P}
-      #|  1..s
-      #|  d:num
+      #|  \226\136\128 e : Num, waring_repr(e, 0, 0)
+      #|  (sumpow : (Num, Num, Num) -> Bool)((e : Num), (s : Num)) == iterate(op_plus_plus_plus, op_dot_dot(1, s), (i : Num) => epowers(e))
+      #|  \226\136\128 e : Num, sumpow(e, 0) == {0}
+      #|  !(SUC((s : Num)) <= s)
+      #|  1 <= SUC((s : Num))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, sumpow(e, SUC(s)) == op_plus_plus_plus(epowers(e), sumpow(e, s))
+      #|  nsum(op_dot_dot(1, (s : Num)), (i : Num) => if i == SUC(s) { (x : Num) } else { (g : (Num) -> Num)(i) }) == nsum(op_dot_dot(1, s), g)
+      #|  IN((i : Num), op_dot_dot(1, (s : Num)))
+      #|  (i : Num)
+      #|  1 <= SUC((s : Num))
+      #|  (i : Num) => if i == SUC((s : Num)) { (x : Num) } else { (g : (Num) -> Num)(i) }
+      #|  (x0 : Num)
+      #|  IN((x : Num), epowers((e : Num)))
+      #|  (g : (Num) -> Num)
+      #|  (y : Num)
+      #|  (i : Num) => 0
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 n : Num, 1 <= e && IN(n, sumpow(e, s)) \226\134\146 (\226\136\131 f : (Num) -> Num, (\226\136\128 i : Num, IN(i, op_dot_dot(1, s)) \226\134\146 (\226\136\131 x : Num, f(i) == EXP(x, e))) && n == nsum(op_dot_dot(1, s), f))
+      #|  (f : (Num) -> Num)
+      #|  (s : Num)
+      #|  (f : (Num) -> Num)
+      #|  (z : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 z : Num, 1 <= e && IN(z, sumpow(e, s)) \226\134\146 waring_repr(e, s, z)
+      #|  (boxreps : (Num, Num, Num, Num) -> Bool)((e : Num), (s : Num), (P : Num)) == {(m : Num) | \226\136\131 t : (Num) -> Num, IN(t, boxtuples(s, P)) && boxsum(e, s, t) == m}
+      #|  {(y : Num) | y < (P : Num)}
+      #|  op_dot_dot(1, (s : Num))
+      #|  (d : Num)
       #|  0
-      #|  {t | (forall i. i IN 1..s ==> (t:num->num) i < P) /\\\n         (forall i. ~(i IN 1..s) ==> t i = 0)} =\n    {f | (forall x. x IN 1..s ==> (f:num->num) x IN {y | y < P}) /\\\n         (forall x. ~(x IN 1..s) ==> f x = 0)}
-      #|  forall s P. CARD(boxtuples s P) = P EXP s
-      #|  i:num
-      #|  nsum(1..s) f
-      #|  (f:num->num)(SUC s)
-      #|  1 <= SUC s
-      #|  forall e s f. (forall i. i IN 1..s ==> (f:num->num) i IN epowers e)\n           ==> nsum(1..s) f IN sumpow e s
-      #|  i:num
-      #|  t:num->num
-      #|  m:num
-      #|  forall e s P. boxreps e s P SUBSET sumpow e s
-      #|  i:num
-      #|  nsum(1..s) (\\i:num. P EXP e)
-      #|  forall e s P t. t IN boxtuples s P ==> boxsum e s t <= s * P EXP e
-      #|  t:num->num
-      #|  m:num
-      #|  forall e s P. boxreps e s P SUBSET 0..(s * P EXP e)
-      #|  forall e s P. FINITE(boxreps e s P)
-      #|  forall e s P. boxreps e s P = IMAGE (boxsum e s) (boxtuples s P)
-      #|  boxtuples s P
-      #|  m:num
-      #|  boxtuples s P
-      #|  (\\x:num->num. 1)
-      #|  boxsum e s
-      #|  forall e s P. P EXP s = nsum (boxreps e s P) (\\m. rcount e s P m)
-      #|  1 <= P ==> ~(P = 0)
-      #|  a * b <= c * (d * b) <=> a * b <= (c * d) * b
-      #|  P EXP s = P EXP e * P EXP (s - e)
-      #|  nsum (boxreps e s P) (\\m:num. c * P EXP (s - e))
-      #|  P EXP s <= CARD(boxreps e s P) * (c * P EXP (s - e))
-      #|  forall e s c P.\n        e <= s /\\ 1 <= P /\\ (forall m. rcount e s P m <= c * P EXP (s - e))\n        ==> P EXP e <= c * CARD(boxreps e s P)
-      #|  (s:num->bool) INTER (0 INSERT t) =\n     (if 0 IN s then 0 INSERT (s INTER t) else s INTER t)
-      #|  0..L = 0 INSERT (1..L)
-      #|  P:num
-      #|  s:num
-      #|  e:num
-      #|  m:num
-      #|  CARD(sumpow e s INTER (0..L))
-      #|  FINITE(sumpow e s INTER (1..L))
-      #|  L = s * P EXP e
-      #|  forall e s P. CARD(boxreps e s P) <= count (sumpow e s) (s * P EXP e) + 1
-      #|  c * CARD(boxreps e s P)
-      #|  forall e s c P.\n        e <= s /\\ 1 <= P /\\ (forall m. rcount e s P m <= c * P EXP (s - e))\n        ==> P EXP e <= c * (count (sumpow e s) (s * P EXP e) + 1)
-      #|  (a:num->bool) SUBSET b ==> s INTER a SUBSET s INTER b
-      #|  forall s m n. m <= n ==> count s m <= count s n
-      #|  i:num
-      #|  {i | (1 <= i /\\ i <= s) /\\ i <= k} = 1..k
-      #|  k = nsum(1..s) (\\i:num. if i <= k then 1 else 0)
-      #|  forall e s k. 1 <= e /\\ k <= s ==> k IN sumpow e s
-      #|  1 <= n <=> ~(n = 0)
-      #|  1 IN (sumpow e s INTER (1..n))
-      #|  forall e s n. 1 <= e /\\ 1 <= s /\\ 1 <= n ==> 1 <= count (sumpow e s) n
-      #|  n = 0
-      #|  forall n e. 1 <= e ==> n <= n EXP e
-      #|  forall e P. 1 <= P ==> (P + 1) EXP e <= 2 EXP e * P EXP e
-      #|  P < P + 1
+      #|  {(t : (Num) -> Num) | (\226\136\128 i : Num, IN(i, op_dot_dot(1, (s : Num))) \226\134\146 t(i) < (P : Num)) && (\226\136\128 i : Num, !IN(i, op_dot_dot(1, s)) \226\134\146 t(i) == 0)} == {(f : (Num) -> Num) | (\226\136\128 x : Num, IN(x, op_dot_dot(1, s)) \226\134\146 IN(f(x), {(y : Num) | y < P})) && (\226\136\128 x : Num, !IN(x, op_dot_dot(1, s)) \226\134\146 f(x) == 0)}
+      #|  \226\136\128 s : Num, \226\136\128 P : Num, CARD(boxtuples(s, P)) == EXP(P, s)
+      #|  (i : Num)
+      #|  nsum(op_dot_dot(1, (s : Num)), (f : (Num) -> Num))
+      #|  (f : (Num) -> Num)(SUC((s : Num)))
+      #|  1 <= SUC((s : Num))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 f : (Num) -> Num, (\226\136\128 i : Num, IN(i, op_dot_dot(1, s)) \226\134\146 IN(f(i), epowers(e))) \226\134\146 IN(nsum(op_dot_dot(1, s), f), sumpow(e, s))
+      #|  (i : Num)
+      #|  (t : (Num) -> Num)
+      #|  (m : Num)
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, SUBSET(boxreps(e, s, P), sumpow(e, s))
+      #|  (i : Num)
+      #|  nsum(op_dot_dot(1, (s : Num)), (i : Num) => EXP((P : Num), (e : Num)))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, \226\136\128 t : (Num) -> Num, IN(t, boxtuples(s, P)) \226\134\146 boxsum(e, s, t) <= s * EXP(P, e)
+      #|  (t : (Num) -> Num)
+      #|  (m : Num)
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, SUBSET(boxreps(e, s, P), op_dot_dot(0, s * EXP(P, e)))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, FINITE(boxreps(e, s, P))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, boxreps(e, s, P) == IMAGE(boxsum(e, s), boxtuples(s, P))
+      #|  boxtuples((s : Num), (P : Num))
+      #|  (m : Num)
+      #|  boxtuples((s : Num), (P : Num))
+      #|  (x : (Num) -> Num) => 1
+      #|  boxsum((e : Num), (s : Num))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, EXP(P, s) == nsum(boxreps(e, s, P), (m : Num) => rcount(e, s, P, m))
+      #|  1 <= (P : Num) \226\134\146 !(P == 0)
+      #|  ((a : Num) * (b : Num) <= (c : Num) * ((d : Num) * b)) == (a * b <= c * d * b)
+      #|  EXP((P : Num), (s : Num)) == EXP(P, (e : Num)) * EXP(P, s - e)
+      #|  nsum(boxreps((e : Num), (s : Num), (P : Num)), (m : Num) => (c : Num) * EXP(P, s - e))
+      #|  EXP((P : Num), (s : Num)) <= CARD(boxreps((e : Num), s, P)) * ((c : Num) * EXP(P, s - e))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 c : Num, \226\136\128 P : Num, e <= s && 1 <= P && (\226\136\128 m : Num, rcount(e, s, P, m) <= c * EXP(P, s - e)) \226\134\146 EXP(P, e) <= c * CARD(boxreps(e, s, P))
+      #|  INTER((s : (Num) -> Bool), INSERT(0, (t : (Num) -> Bool))) == (if IN(0, s) { INSERT(0, INTER(s, t)) } else { INTER(s, t) })
+      #|  op_dot_dot(0, (L : Num)) == INSERT(0, op_dot_dot(1, L))
+      #|  (P : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  (m : Num)
+      #|  CARD(INTER(sumpow((e : Num), (s : Num)), op_dot_dot(0, (L : Num))))
+      #|  FINITE(INTER(sumpow((e : Num), (s : Num)), op_dot_dot(1, (L : Num))))
+      #|  (L : Num) == (s : Num) * EXP((P : Num), (e : Num))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 P : Num, CARD(boxreps(e, s, P)) <= count(sumpow(e, s), s * EXP(P, e)) + 1
+      #|  (c : Num) * CARD(boxreps((e : Num), (s : Num), (P : Num)))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 c : Num, \226\136\128 P : Num, e <= s && 1 <= P && (\226\136\128 m : Num, rcount(e, s, P, m) <= c * EXP(P, s - e)) \226\134\146 EXP(P, e) <= c * (count(sumpow(e, s), s * EXP(P, e)) + 1)
+      #|  SUBSET((a : (Num) -> Bool), (b : (Num) -> Bool)) \226\134\146 SUBSET(INTER((s : (Num) -> Bool), a), INTER(s, b))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 count(s, m) <= count(s, n)
+      #|  (i : Num)
+      #|  {(i : Num) | (1 <= i && i <= (s : Num)) && i <= (k : Num)} == op_dot_dot(1, k)
+      #|  (k : Num) == nsum(op_dot_dot(1, (s : Num)), (i : Num) => if i <= k { 1 } else { 0 })
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 k : Num, 1 <= e && k <= s \226\134\146 IN(k, sumpow(e, s))
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  IN(1, INTER(sumpow((e : Num), (s : Num)), op_dot_dot(1, (n : Num))))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 n : Num, 1 <= e && 1 <= s && 1 <= n \226\134\146 1 <= count(sumpow(e, s), n)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 e : Num, 1 <= e \226\134\146 n <= EXP(n, e)
+      #|  \226\136\128 e : Num, \226\136\128 P : Num, 1 <= P \226\134\146 EXP(P + 1, e) <= EXP(2, e) * EXP(P, e)
+      #|  (P : Num) < P + 1
       #|  1
-      #|  forall x:num. s * x EXP e <= n ==> x <= P
-      #|  P:num
-      #|  P:num
-      #|  a = 1 * a
-      #|  s * x EXP e
-      #|  x EXP e
-      #|  x:num
-      #|  n:num
+      #|  \226\136\128 x : Num, (s : Num) * EXP(x, (e : Num)) <= (n : Num) \226\134\146 x <= (P : Num)
+      #|  (P : Num)
+      #|  (P : Num)
+      #|  (a : Num) == 1 * a
+      #|  (s : Num) * EXP((x : Num), (e : Num))
+      #|  EXP((x : Num), (e : Num))
+      #|  (x : Num)
+      #|  (n : Num)
       #|  1
-      #|  (?x:num. s * x EXP e <= n) /\\ (?M. forall x:num. s * x EXP e <= n ==> x <= M)
-      #|  \\P:num. s * P EXP e <= n
-      #|  forall e s n. 1 <= e /\\ 1 <= s /\\ s <= n\n           ==> ?P. 1 <= P /\\ s * P EXP e <= n /\\ n < s * (P + 1) EXP e
-      #|  s * (2 EXP e * (2 * c * C))
-      #|  s * (2 EXP e * P EXP e)
-      #|  s * (P + 1) EXP e
-      #|  c = c * 1
-      #|  c <= c * C ==> c * C + c <= 2 * c * C
-      #|  c * (C + 1)
-      #|  c * (count (sumpow e s) (s * P EXP e) + 1)
-      #|  P EXP e <= 2 * c * C
-      #|  count (sumpow e s) (s * P EXP e) <= C
-      #|  C = count (sumpow e s) n
-      #|  P:num
-      #|  c:num
-      #|  s:num
-      #|  e:num
-      #|  P:num
-      #|  s <= n:num
-      #|  e <= s:num
-      #|  1 <= e
-      #|  n:num
-      #|  s:num
-      #|  e:num
-      #|  ~(n <= B:num)
-      #|  s <= B:num
-      #|  s <= n:num
-      #|  s = s * 1
-      #|  1 <= x <=> ~(x = 0)
-      #|  1 = 1 * 1
-      #|  1 <= 2 EXP (e + 1) * c
-      #|  s <= B:num
-      #|  B = B * 1
-      #|  B:num
-      #|  n <= B:num
-      #|  1 <= count (sumpow e s) n
-      #|  n:num
-      #|  B = s * 2 EXP (e + 1) * c
-      #|  forall e s c.\n        1 <= e /\\ e <= s /\\ 1 <= c /\\\n        (forall P m. rcount e s P m <= c * P EXP (s - e))\n        ==> forall n. 1 <= n\n                ==> n <= (s * 2 EXP (e + 1) * c) * count (sumpow e s) n
-      #|  forall n B c:real. &0 < B /\\ &0 < n /\\ n <= B * c ==> inv B <= c / n
-      #|  n:num
-      #|  inv(&B)
-      #|  1 <= x <=> ~(x = 0)
-      #|  1 = 1 * 1 * 1
-      #|  1 <= B
-      #|  B = s * 2 EXP (e + 1) * c
-      #|  c:num
-      #|  s:num
-      #|  e:num
-      #|  forall e s c.\n        1 <= e /\\ e <= s /\\ 1 <= c /\\\n        (forall P m. rcount e s P m <= c * P EXP (s - e))\n        ==> schnirelmann (sumpow e s) > &0
-      #|  c:num
-      #|  s:num
-      #|  c:num
-      #|  s:num
-      #|  e:num
-      #|  forall e. 1 <= e ==> ?s. schnirelmann (sumpow e s) > &0
-      #|  k:num
-      #|  s:num
-      #|  k:num
-      #|  sumpow e s
-      #|  s:num
-      #|  e:num
-      #|  forall e. 1 <= e\n       ==> ?s k. forall n. ?m f. m <= k /\\ (forall i. i IN 1..m ==> f i IN sumpow e s) /\\\n                           n = nsum(1..m) f
-      #|  forall e a b n. waring_repr e a n /\\ a <= b ==> waring_repr e b n
-      #|  i:num
-      #|  SUC m * s = m * s + s
-      #|  1 <= SUC m
-      #|  forall e s m f. (forall i. i IN 1..m ==> waring_repr e s (f i))\n             ==> waring_repr e (m * s) (nsum(1..m) f)
-      #|  i:num
-      #|  m * s:num
-      #|  f:num->num
-      #|  m:num
-      #|  n:num
-      #|  n:num
-      #|  k * s:num
-      #|  k:num
-      #|  s:num
-      #|  e:num
-      #|  forall e. 1 <= e ==> ?g. forall n. waring_repr e g n
-      #|  m <= k ==> ((1 <= i /\\ i <= k) /\\ i <= m <=> 1 <= i /\\ i <= m)
-      #|  \\i. if i <= m then (g:num->num) i else 0
-      #|  g:num->num
-      #|  f:num->num
-      #|  m:num
-      #|  n:num
-      #|  k:num
-      #|  forall e. 1 <= e ==> ?k. forall n. ?f. n = nsum(1..k) (\\i. f i EXP e)
+      #|  (\226\136\131 x : Num, (s : Num) * EXP(x, (e : Num)) <= (n : Num)) && (\226\136\131 M : Num, \226\136\128 x : Num, s * EXP(x, e) <= n \226\134\146 x <= M)
+      #|  (P : Num) => (s : Num) * EXP(P, (e : Num)) <= (n : Num)
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 n : Num, 1 <= e && 1 <= s && s <= n \226\134\146 (\226\136\131 P : Num, 1 <= P && s * EXP(P, e) <= n && n < s * EXP(P + 1, e))
+      #|  (s : Num) * (EXP(2, (e : Num)) * (2 * ((c : Num) * (C : Num))))
+      #|  (s : Num) * (EXP(2, (e : Num)) * EXP((P : Num), e))
+      #|  (s : Num) * EXP((P : Num) + 1, (e : Num))
+      #|  (c : Num) == c * 1
+      #|  (c : Num) <= c * (C : Num) \226\134\146 c * C + c <= 2 * (c * C)
+      #|  (c : Num) * ((C : Num) + 1)
+      #|  (c : Num) * (count(sumpow((e : Num), (s : Num)), s * EXP((P : Num), e)) + 1)
+      #|  EXP((P : Num), (e : Num)) <= 2 * ((c : Num) * (C : Num))
+      #|  count(sumpow((e : Num), (s : Num)), s * EXP((P : Num), e)) <= (C : Num)
+      #|  (C : Num) == count(sumpow((e : Num), (s : Num)), (n : Num))
+      #|  (P : Num)
+      #|  (c : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  (P : Num)
+      #|  (s : Num) <= (n : Num)
+      #|  (e : Num) <= (s : Num)
+      #|  1 <= (e : Num)
+      #|  (n : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  !((n : Num) <= (B : Num))
+      #|  (s : Num) <= (B : Num)
+      #|  (s : Num) <= (n : Num)
+      #|  (s : Num) == s * 1
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  1 == 1 * 1
+      #|  1 <= EXP(2, (e : Num) + 1) * (c : Num)
+      #|  (s : Num) <= (B : Num)
+      #|  (B : Num) == B * 1
+      #|  (B : Num)
+      #|  (n : Num) <= (B : Num)
+      #|  1 <= count(sumpow((e : Num), (s : Num)), (n : Num))
+      #|  (n : Num)
+      #|  (B : Num) == (s : Num) * (EXP(2, (e : Num) + 1) * (c : Num))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 c : Num, 1 <= e && e <= s && 1 <= c && (\226\136\128 P : Num, \226\136\128 m : Num, rcount(e, s, P, m) <= c * EXP(P, s - e)) \226\134\146 (\226\136\128 n : Num, 1 <= n \226\134\146 n <= s * (EXP(2, e + 1) * c) * count(sumpow(e, s), n))
+      #|  \226\136\128 n : Real, \226\136\128 B : Real, \226\136\128 c : Real, real_of_num(0) < B && real_of_num(0) < n && n <= B * c \226\134\146 inv(B) <= c / n
+      #|  (n : Num)
+      #|  inv(real_of_num((B : Num)))
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  1 == 1 * (1 * 1)
+      #|  1 <= (B : Num)
+      #|  (B : Num) == (s : Num) * (EXP(2, (e : Num) + 1) * (c : Num))
+      #|  (c : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 c : Num, 1 <= e && e <= s && 1 <= c && (\226\136\128 P : Num, \226\136\128 m : Num, rcount(e, s, P, m) <= c * EXP(P, s - e)) \226\134\146 schnirelmann(sumpow(e, s)) > real_of_num(0)
+      #|  (c : Num)
+      #|  (s : Num)
+      #|  (c : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 (\226\136\131 s : Num, schnirelmann(sumpow(e, s)) > real_of_num(0))
+      #|  (k : Num)
+      #|  (s : Num)
+      #|  (k : Num)
+      #|  sumpow((e : Num), (s : Num))
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 (\226\136\131 s : Num, \226\136\131 k : Num, \226\136\128 n : Num, \226\136\131 m : Num, \226\136\131 f : (Num) -> Num, m <= k && (\226\136\128 i : Num, IN(i, op_dot_dot(1, m)) \226\134\146 IN(f(i), sumpow(e, s))) && n == nsum(op_dot_dot(1, m), f))
+      #|  \226\136\128 e : Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, waring_repr(e, a, n) && a <= b \226\134\146 waring_repr(e, b, n)
+      #|  (i : Num)
+      #|  SUC((m : Num)) * (s : Num) == m * s + s
+      #|  1 <= SUC((m : Num))
+      #|  \226\136\128 e : Num, \226\136\128 s : Num, \226\136\128 m : Num, \226\136\128 f : (Num) -> Num, (\226\136\128 i : Num, IN(i, op_dot_dot(1, m)) \226\134\146 waring_repr(e, s, f(i))) \226\134\146 waring_repr(e, m * s, nsum(op_dot_dot(1, m), f))
+      #|  (i : Num)
+      #|  (m : Num) * (s : Num)
+      #|  (f : (Num) -> Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (k : Num) * (s : Num)
+      #|  (k : Num)
+      #|  (s : Num)
+      #|  (e : Num)
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 (\226\136\131 g : Num, \226\136\128 n : Num, waring_repr(e, g, n))
+      #|  (m : Num) <= (k : Num) \226\134\146 ((1 <= (i : Num) && i <= k) && i <= m) == (1 <= i && i <= m)
+      #|  (i : Num) => if i <= (m : Num) { (g : (Num) -> Num)(i) } else { 0 }
+      #|  (g : (Num) -> Num)
+      #|  (f : (Num) -> Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  \226\136\128 e : Num, 1 <= e \226\134\146 (\226\136\131 k : Num, \226\136\128 n : Num, \226\136\131 f : (Num) -> Num, n == nsum(op_dot_dot(1, k), (i : Num) => EXP(f(i), e)))
       #|INT_INTERVAL_IMAGE =  |- (#forall:fun(fun(int,bool),bool) (\lo:int. (#forall:fun(fun(int,bool),bool) (\hi:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) hi:int)) ((#=:fun(fun(int,bool),fun(fun(int,bool),bool)) (#GSPEC:fun(fun(int,bool),fun(int,bool)) (\GEN%PVAR%1:int. (#?:fun(fun(int,bool),bool) (\k:int. (((#SETSPEC:fun(int,fun(bool,fun(int,bool))) GEN%PVAR%1:int) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) k:int)) ((#int_le:fun(int,fun(int,bool)) k:int) hi:int))) k:int)))))) ((#IMAGE:fun(fun(num,int),fun(fun(num,bool),fun(int,bool))) (\j:num. ((#int_add:fun(int,fun(int,int)) lo:int) (#int_of_num:fun(num,int) j:num)))) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) (#num_of_int:fun(int,num) ((#int_sub:fun(int,fun(int,int)) hi:int) lo:int))))))))))
       #|EXACT_INT_INTERVAL_CARD =  |- (#forall:fun(fun(int,bool),bool) (\lo:int. (#forall:fun(fun(int,bool),bool) (\hi:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) hi:int)) ((#=:fun(num,fun(num,bool)) (#CARD:fun(fun(int,bool),num) (#GSPEC:fun(fun(int,bool),fun(int,bool)) (\GEN%PVAR%2:int. (#?:fun(fun(int,bool),bool) (\k:int. (((#SETSPEC:fun(int,fun(bool,fun(int,bool))) GEN%PVAR%2:int) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) k:int)) ((#int_le:fun(int,fun(int,bool)) k:int) hi:int))) k:int))))))) (#num_of_int:fun(int,num) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) hi:int) lo:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
       #|INT_INTERVAL_CARD_LE =  |- (#forall:fun(fun(int,bool),bool) (\lo:int. (#forall:fun(fun(int,bool),bool) (\hi:int. ((#==>:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) hi:int)) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun(int,bool),num) (#GSPEC:fun(fun(int,bool),fun(int,bool)) (\GEN%PVAR%3:int. (#?:fun(fun(int,bool),bool) (\k:int. (((#SETSPEC:fun(int,fun(bool,fun(int,bool))) GEN%PVAR%3:int) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) lo:int) k:int)) ((#int_le:fun(int,fun(int,bool)) k:int) hi:int))) k:int))))))) (#num_of_int:fun(int,num) ((#int_add:fun(int,fun(int,int)) ((#int_sub:fun(int,fun(int,int)) hi:int) lo:int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
