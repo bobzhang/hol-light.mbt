@@ -6668,66 +6668,66 @@ Warning: inventing type variables
 0..0..2..5..22..51..135..307..766..solved at 1050
 Rqe/poly_ext quotations (61):
   poly
-  &1
-  (poly [] x = &0) /\\\n   (poly [__c__] x = __c__) /\\\n   (poly (CONS __h__ __t__) x = __h__ + x * poly __t__ x)
-  (poly_diff [] = []) /\\\n   (poly_diff [c] = []) /\\\n   (poly_diff (CONS h t) = poly_diff_aux 1 t)
-  SUC n
-  \\x. x pow (SUC n)
-  (((\\x. (x pow (SUC n)) * h)) diffl\n                        ((x pow n) * &(SUC n) * h))(x)
-  x:real
-  SUC n
-  x:real
-  n:num
-  forall l n x. ((\\x. (x pow (SUC n)) * poly l x) diffl\n                   ((x pow n) * poly (poly_diff_aux (SUC n) l) x))(x)
-  x:real
-  h:real
+  real_of_num(1)
+  poly(NIL, (x : Real)) == real_of_num(0) && poly([(__c__ : Real)], x) == __c__ && poly(CONS((__h__ : Real), (__t__ : List[Real])), x) == __h__ + x * poly(__t__, x)
+  poly_diff(NIL) == NIL && poly_diff([(c : Real)]) == NIL && poly_diff(CONS((h : Real), (t : List[Real]))) == poly_diff_aux(1, t)
+  SUC((n : Num))
+  (x : Real) => pow(x, SUC((n : Num)))
+  diffl((x : Real) => pow(x, SUC((n : Num))) * (h : Real), pow((x : Real), n) * (real_of_num(SUC(n)) * h), x)
+  (x : Real)
+  SUC((n : Num))
+  (x : Real)
+  (n : Num)
+  \226\136\128 l : List[Real], \226\136\128 n : Num, \226\136\128 x : Real, diffl((x : Real) => pow(x, SUC(n)) * poly(l, x), pow(x, n) * poly(poly_diff_aux(SUC(n), l), x), x)
+  (x : Real)
+  (h : Real)
   1
-  x:real
+  (x : Real)
   0
-  t:(real)list
-  x:real
-  \\x. poly l x
-  forall l x. ((\\x. poly l x) diffl (poly (poly_diff l) x))(x)
-  (pol1 + (d + y * q) = (pol1 + d) + y * q) /\\\n     ((c + x * p) + pol2 = (c + pol2) + x * p) /\\\n     ((c + x * p) + (d + x * q) = (c + d) + x * (p + q)) /\\\n     (c + x * &0 = c)
-  (+)
-  --(c + x * p) = --c + x * --p
-  (pol1 * (d + y * q) = (pol1 * d) + y * (pol1 * q)) /\\\n     ((c + x * p) * pol2 = (c * pol2) + x * (p * pol2)) /\\\n     (pol1 * (d + x * q) = pol1 * d + (&0 + x * pol1 * q)) /\\\n     (&0 * pol2 = &0) /\\\n     (pol1 * &0 = &0)
-  ( * )
-  &0
+  (t : List[Real])
+  (x : Real)
+  (x : Real) => poly((l : List[Real]), x)
+  \226\136\128 l : List[Real], \226\136\128 x : Real, diffl((x : Real) => poly(l, x), poly(poly_diff(l), x), x)
+  (pol1 : Real) + ((d : Real) + (y : Real) * (q : Real)) == pol1 + d + y * q && (c : Real) + (x : Real) * (p : Real) + (pol2 : Real) == c + pol2 + x * p && c + x * p + (d + x * q) == c + d + x * (p + q) && c + x * real_of_num(0) == c
+  op_plus
+  -((c : Real) + (x : Real) * (p : Real)) == -c + x * -p
+  (pol1 : Real) * ((d : Real) + (y : Real) * (q : Real)) == pol1 * d + y * (pol1 * q) && ((c : Real) + (x : Real) * (p : Real)) * (pol2 : Real) == c * pol2 + x * (p * pol2) && pol1 * (d + x * q) == pol1 * d + (real_of_num(0) + x * (pol1 * q)) && real_of_num(0) * pol2 == real_of_num(0) && pol1 * real_of_num(0) == real_of_num(0)
+  op_star
+  real_of_num(0)
   0
-  x = &0 + x * &1
-  (--)
-  (+)
-  (-)
-  ( * )
-  (pow)
-  (/)
-  (+)
-  (-)
-  ( * )
-  (--)
-  (pow)
-  a + b * &0 = a
-  a + b * &0 = a
-  ( * ):real->real->real
-  &0
-  (+) (&0)
-  (+)
-  ( * )
-  (pow)
-  &1
-  &0
-  (=):real->real->bool
-  (>):real->real->bool
-  (<):real->real->bool
+  (x : Real) == real_of_num(0) + x * real_of_num(1)
+  op_minus_minus
+  op_plus
+  op_minus
+  op_star
+  pow
+  op_slash
+  op_plus
+  op_minus
+  op_star
+  op_minus_minus
+  pow
+  (a : Real) + (b : Real) * real_of_num(0) == a
+  (a : Real) + (b : Real) * real_of_num(0) == a
+  op_star
+  real_of_num(0)
+  op_plus(real_of_num(0))
+  op_plus
+  op_star
+  pow
+  real_of_num(1)
+  real_of_num(0)
+  (op_eq : (Real, Real) -> Bool)
+  op_gt
+  op_lt
   poly_diff
-  forall x y. x < y <=> x - y < &0
-  forall x y. x <= y <=> x - y <= &0
-  forall x y. (x = y) <=> (x - y = &0)
-  n + SUC m = SUC (n + m)
-  forall x n m. (x pow n) * x pow m = x pow (n + m)
-  x * x = x pow 2
-  forall x. x = x pow 1
+  \226\136\128 x : Real, \226\136\128 y : Real, (x < y) == (x - y < real_of_num(0))
+  \226\136\128 x : Real, \226\136\128 y : Real, (x <= y) == (x - y <= real_of_num(0))
+  \226\136\128 x : Real, \226\136\128 y : Real, (x == y) == (x - y == real_of_num(0))
+  (n : Num) + SUC((m : Num)) == SUC(n + m)
+  \226\136\128 x : Real, \226\136\128 n : Num, \226\136\128 m : Num, pow(x, n) * pow(x, m) == pow(x, n + m)
+  (x : Real) * x == pow(x, 2)
+  \226\136\128 x : Real, x == pow(x, 1)
 POLY =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) #NIL:list(real)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) __c__:real) #NIL:list(real))) x:real)) __c__:real)) ((#=:fun(real,fun(real,bool)) ((#poly:fun(list(real),fun(real,real)) ((#CONS:fun(real,fun(list(real),list(real))) __h__:real) __t__:list(real))) x:real)) ((#real_add:fun(real,fun(real,real)) __h__:real) ((#real_mul:fun(real,fun(real,real)) x:real) ((#poly:fun(list(real),fun(real,real)) __t__:list(real)) x:real))))))
 POLY_DIFF_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(real),fun(list(real),bool)) (#poly_diff:fun(list(real),list(real)) #NIL:list(real))) #NIL:list(real))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(real),fun(list(real),bool)) (#poly_diff:fun(list(real),list(real)) ((#CONS:fun(real,fun(list(real),list(real))) c:real) #NIL:list(real)))) #NIL:list(real))) ((#=:fun(list(real),fun(list(real),bool)) (#poly_diff:fun(list(real),list(real)) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real)))) ((#poly_diff_aux:fun(num,fun(list(real),list(real))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) t:list(real)))))
 POLY_DIFF_LEMMA =  |- (#forall:fun(fun(list(real),bool),bool) (\l:list(real). (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(real,bool),bool) (\x:real. (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) (\x:real. ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) (#SUC:fun(num,num) n:num))) ((#poly:fun(list(real),fun(real,real)) l:list(real)) x:real)))) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) n:num)) ((#poly:fun(list(real),fun(real,real)) ((#poly_diff_aux:fun(num,fun(list(real),list(real))) (#SUC:fun(num,num) n:num)) l:list(real))) x:real))) x:real)))))))
