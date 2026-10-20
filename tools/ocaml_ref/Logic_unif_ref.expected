@@ -8107,672 +8107,672 @@ Warning: inventing type variables
 0..0..2..6..18..61..129..390..828..solved at 953
 0..0..1..4..9..22..42..90..165..solved at 213
 Logic/unif quotations (666):
-  forall P Q l. EX P l /\\ Q <=> EX (\\x. P x /\\ Q) l
-  forall l. (forall x. ~(P x) ==> (Q x <=> R x)) ==> (~EX P l ==> (EX Q l <=> EX R l))
-  forall l. ALL (\\x. f x = g x) l ==> (EX f l <=> EX g l)
-  forall d. RTC(<<) ((u:num->A)(n + d))(u n) 
-  d:num
-  n:num
-  forall m n. m < n ==> TC(<<) ((u:num->A) n) (u m)
-  {n | (u:num->A)(n) IN s} = UNIV:num->bool
-  FINITE(s:A->bool)
-  s:A->bool
-  u:num->A
-  forall n. (u:num->A)(n) IN s
-  u:num->A
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : Bool, \226\136\128 l : List[_], (EX(P, l) && Q) == EX((x : _) => P(x) && Q, l)
+  \226\136\128 l : List[_], (\226\136\128 x : _, !(P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x) == (R : (_) -> Bool)(x)) \226\134\146 !EX(P, l) \226\134\146 EX(Q, l) == EX(R, l)
+  \226\136\128 l : List[_], ALL((x : _) => (f : (_) -> Bool)(x) == (g : (_) -> Bool)(x), l) \226\134\146 EX(f, l) == EX(g, l)
+  \226\136\128 d : Num, RTC((op_lt_lt : (A, A) -> Bool), (u : (Num) -> A)((n : Num) + d), u(n))
+  (d : Num)
+  (n : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 TC((op_lt_lt : (A, A) -> Bool), (u : (Num) -> A)(n), u(m))
+  {(n : Num) | IN((u : (Num) -> A)(n), (s : (A) -> Bool))} == UNIV
+  FINITE((s : (A) -> Bool))
+  (s : (A) -> Bool)
+  (u : (Num) -> A)
+  \226\136\128 n : Num, IN((u : (Num) -> A)(n), (s : (A) -> Bool))
+  (u : (Num) -> A)
   forall(<<) s. FINITE s /\\\n            (forall x:A. ~(TC(<<) x x)) /\\ (forall x y. x << y ==> y IN s)\n            ==> WF(<<)
-  (a <=> b) <=> (a ==> b) /\\ (b ==> a)
-  forall x:A y. TC (\\u v. R v u) x y <=> TC R y x
-  \\y:A. P(y) /\\ TC R y a
-  a:A
-  (b ==> c) ==> (a ==> b) ==> (a ==> c)
-  P:A->bool
-  WF(R) /\\ WF(\\x y. ?z. S x z /\\ RTC(R) z y) ==> WF(\\x:A y. R x y \\/ S x y)
-  a:A
-  b:A
-  b:A
-  a:A
-  (P:A->A->bool) b a /\\ s(a,b)
-  b:A
-  \\y:A. s(y,a:A):bool
-  a:A
-  b:A
-  b:A
-  \\y:A. s(y,a:A):bool
-  a:A
-  b0:A
-  ?y:A. R y (b0:A) /\\ s(y,a:A)
-  b0:A
-  a:A
-  (s:A#A->bool)(b0,a)
-  (P:A->A->bool) a b0
-  b0:A
-  a:A
-  \\x:A. ?y:A. s(x,y) \\/ s(y,x)
-  s:A#A->bool
+  ((a : Bool) == (b : Bool)) == ((a \226\134\146 b) && (b \226\134\146 a))
+  \226\136\128 x : A, \226\136\128 y : A, TC((u : A) => (v : A) => (R : (A, A) -> Bool)(v, u), x, y) == TC(R, y, x)
+  (y : A) => (P : (A) -> Bool)(y) && TC((R : (A, A) -> Bool), y, (a : A))
+  (a : A)
+  ((b : Bool) \226\134\146 (c : Bool)) \226\134\146 ((a : Bool) \226\134\146 b) \226\134\146 a \226\134\146 c
+  (P : (A) -> Bool)
+  WF((R : (A, A) -> Bool)) && WF((x : A) => (y : A) => \226\136\131 z : A, (S : (A, A) -> Bool)(x, z) && RTC(R, z, y)) \226\134\146 WF((x : A) => (y : A) => R(x, y) || S(x, y))
+  (a : A)
+  (b : A)
+  (b : A)
+  (a : A)
+  (P : (A, A) -> Bool)((b : A), (a : A)) && (s : ((A, A)) -> Bool)((a, b))
+  (b : A)
+  (y : A) => (s : ((A, A)) -> Bool)((y, (a : A)))
+  (a : A)
+  (b : A)
+  (b : A)
+  (y : A) => (s : ((A, A)) -> Bool)((y, (a : A)))
+  (a : A)
+  (b0 : A)
+  \226\136\131 y : A, (R : (A, A) -> Bool)(y, (b0 : A)) && (s : ((A, A)) -> Bool)((y, (a : A)))
+  (b0 : A)
+  (a : A)
+  (s : ((A, A)) -> Bool)(((b0 : A), (a : A)))
+  (P : (A, A) -> Bool)((a : A), (b0 : A))
+  (b0 : A)
+  (a : A)
+  (x : A) => \226\136\131 y : A, (s : ((A, A)) -> Bool)((x, y)) || s((y, x))
+  (s : ((A, A)) -> Bool)
   WF(\\x y. R x y \\/ S x y) /\\ (forall x y z. ~(P x y /\\ P y z))\n   ==> WF(\\(x1:A,y1) (x2,y2). S x1 x2 /\\ S y1 y2 \\/\n                              R x1 x2 /\\ (y1 = y2) \\/\n                              P x2 y2 /\\ (x1 = y2) /\\ (x2 = y1))
-  l:(A)list
-  l:(A)list
-  {a:A | MEM a (CONS h t)} = h INSERT {a | MEM a t}
-  {a:A | MEM a []} = EMPTY
-  l:(A)list
-  l:(A)list
-  {a:A | MEM a l}
-  (b ==> c) /\\ a ==> ((a <=> b) ==> c)
-  \\x:A. LENGTH (FILTER ((=) x) l)
-  multiplicity (multiset (\\x:A. LENGTH (FILTER ((=) x) l))) a =\n        LENGTH (FILTER ((=) a) l)
+  (l : List[A])
+  (l : List[A])
+  {(a : A) | MEM(a, CONS((h : A), (t : List[A])))} == INSERT(h, {(a : A) | MEM(a, t)})
+  {(a : A) | MEM(a, NIL)} == {}
+  (l : List[A])
+  (l : List[A])
+  {(a : A) | MEM(a, (l : List[A]))}
+  ((b : Bool) \226\134\146 (c : Bool)) && (a : Bool) \226\134\146 a == b \226\134\146 c
+  (x : A) => LENGTH(FILTER(op_eq(x), (l : List[A])))
+  multiplicity(multiset((x : A) => LENGTH(FILTER(op_eq(x), (l : List[A])))), (a : A)) == LENGTH(FILTER(op_eq(a), l))
   :A
   :(A)list
-  forall a:A l. ~(LENGTH (FILTER ((=) a) l) = 0) ==> MEM a l
-  multiset(\\x:A. LENGTH (FILTER ((=) x) m))
-  a:A
-  multiset(\\x:A. LENGTH (FILTER ((=) x) l))
-  m:(A)list
-  l:(A)list
-  a:A
-  \\l. multiset(\\x:A. LENGTH (FILTER ((=) x) l))
-  WF(R)\n   ==> WF(\\l1 l2. ?h:A t l0.\n             (l2 = CONS h t) /\\ (l1 = APPEND l0 t) /\\\n             (forall k. MEM k l0 ==> R k h))
-  b:A
-  b:A
-  a:A
-  a:A
-  TC R b (a:A)
-  (m:A->num)(b) <= m(a)
-  b:A
-  \\y. TC (R:A->A->bool) y a /\\ P y
-  ?y. (R:A->A->bool) y a /\\ P y
-  a:A
-  P:A->bool
-  m:A->num
-  P:A->bool
-  forall R (m:A->num).\n        WF(R) /\\ (forall x y. R x y ==> m x <= m y)\n        ==> WF(\\x y. MEASURE m x y \\/ R x y)
-  (s:num->A#B) (SUC n)
-  (s:num->A#B) n
-  n:num
-  FST((s:num->A#B) n)
-  n:num
-  n:num
-  FST((s:num->A#B) 0) = FST(s n)
-  n:num
-  SND o (s:num->A#B)
-  (s:num->A#B) (SUC 0)
-  (s:num->A#B) 0
+  \226\136\128 a : A, \226\136\128 l : List[A], !(LENGTH(FILTER(op_eq(a), l)) == 0) \226\134\146 MEM(a, l)
+  multiset((x : A) => LENGTH(FILTER(op_eq(x), (m : List[A]))))
+  (a : A)
+  multiset((x : A) => LENGTH(FILTER(op_eq(x), (l : List[A]))))
+  (m : List[A])
+  (l : List[A])
+  (a : A)
+  (l : List[A]) => multiset((x : A) => LENGTH(FILTER(op_eq(x), l)))
+  WF((R : (A, A) -> Bool)) \226\134\146 WF((l1 : List[A]) => (l2 : List[A]) => \226\136\131 h : A, \226\136\131 t : List[A], \226\136\131 l0 : List[A], l2 == CONS(h, t) && l1 == APPEND(l0, t) && (\226\136\128 k : A, MEM(k, l0) \226\134\146 R(k, h)))
+  (b : A)
+  (b : A)
+  (a : A)
+  (a : A)
+  TC((R : (A, A) -> Bool), (b : A), (a : A))
+  (m : (A) -> Num)((b : A)) <= m((a : A))
+  (b : A)
+  (y : A) => TC((R : (A, A) -> Bool), y, (a : A)) && (P : (A) -> Bool)(y)
+  \226\136\131 y : A, (R : (A, A) -> Bool)(y, (a : A)) && (P : (A) -> Bool)(y)
+  (a : A)
+  (P : (A) -> Bool)
+  (m : (A) -> Num)
+  (P : (A) -> Bool)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 m : (A) -> Num, WF(R) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 m(x) <= m(y)) \226\134\146 WF((x : A) => (y : A) => MEASURE(m, x, y) || R(x, y))
+  (s : (Num) -> (A, B))(SUC((n : Num)))
+  (s : (Num) -> (A, B))((n : Num))
+  (n : Num)
+  FST((s : (Num) -> (A, B))((n : Num)))
+  (n : Num)
+  (n : Num)
+  FST((s : (Num) -> (A, B))(0)) == FST(s((n : Num)))
+  (n : Num)
+  o(SND, (s : (Num) -> (A, B)))
+  (s : (Num) -> (A, B))(SUC(0))
+  (s : (Num) -> (A, B))(0)
   0
-  FST((s:num->A#B) 0)
-  s:num->A#B
+  FST((s : (Num) -> (A, B))(0))
+  (s : (Num) -> (A, B))
   (forall x. P x ==> WF(R x))\n   ==> WF(\\(x',y') (x:A,y:B). P(x) /\\ (x' = x) /\\ R x y' y)
-  OCC env (x:num) y <=> ?t. MEM (x,t) env /\\ y IN FVT(t)
-  LOOPFREE env <=> forall z. ~(TC (OCC env) z z)
-  s:term
-  OCC (CONS (x,t) env) v z
-  y:num
-  a ==> ~a ==> b
-  ~TC (OCC env) u z
-  s:term
-  OCC (CONS (x,t) env) v z
-  TC (OCC env) u v
-  ~TC (OCC env) u v
-  s:term
-  OCC (CONS (x,t) env) u v
-  a /\\ ~b ==> c <=> a ==> ~b ==> c
-  forall env x t u v.\n        TC(OCC (CONS (x,t) env)) u v /\\ ~(TC(OCC env) u v)\n        ==> ?y. RTC(OCC env) u x /\\ y IN FVT(t) /\\ RTC(OCC env) y v
-  LOOPFREE env /\\ ~(?y. y IN FVT(t) /\\ RTC (OCC env) y x)\n   ==> LOOPFREE (CONS (x,t) env)
-  RTC (OCC env) y x
-  t:term
-  y:num
-  x:num
-  y:num
-  (a /\\ ~c ==> b) /\\ (c ==> ~b) ==> (a ==> (b <=> ~c))
-  LOOPFREE env\n   ==> (LOOPFREE (CONS (x,t) env) = ~(?y. y IN FVT(t) /\\ RTC (OCC env) y x))
-  env:(num#term)list
-  env:(num#term)list
-  set_of_list (MAP FST (env:(num#term)list))
-  forall env. LOOPFREE env ==> WF(\\x y. OCC env y x)
-  \\n. s(SUC n):term
-  x:num->num
-  x:num->num
-  s:num->term
-  ~a ==> ~b <=> b ==> a
-  forall env. LOOPFREE(env) ==> WF(\\s t. ?y. y IN FVT(t) /\\ MEM (y,s) env)
-  forall env x.\n     LOOPFREE(env)\n     ==> ?loopcheck. forall t.\n               loopcheck t <=>\n                  ?y. y IN FVT(t) /\\\n                            ((y = x) \\/ ?s. MEM (y,s) env /\\ loopcheck s)
-  forall env x.\n        LOOPFREE(env)\n        ==> (forall x y. loopcheck env x (V y) <=>\n                   (y = x) \\/ ?s. MEM (y,s) env /\\ loopcheck env x s) /\\\n            (forall f args. loopcheck env x (Fn f args) <=>\n                   EX (loopcheck env x) args)
-  y:num
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  x:num = y
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  t:term
-  t:term
-  t:term
-  ?y. y IN FVT t /\\ RTC (OCC env) y x
-  forall env x t. LOOPFREE(env)\n             ==> (loopcheck env x t <=> ~LOOPFREE (CONS (x,t) env))
-  rightsubst (x,t) (y:num,s) =\n     y,termsubst (\\z. if z = x then t else V(z)) s
-  b:bool
-  (if b then x else y) = (if ~b then y else x)
-  ?SOLVE. forall pr. SOLVE pr =\n                  if SND pr = [] then FST pr\n                  else SOLVE (CONS (HD(SND pr))\n                                   (MAP (rightsubst (HD(SND pr))) (FST pr)),\n                              MAP (rightsubst (HD(SND pr))) (TL(SND pr)))
-  SOLVE sol uns = SOLVEC (sol,uns)
-  (forall sol. SOLVE sol [] = sol) /\\\n   (forall sol p oth. SOLVE sol (CONS p oth) =\n                SOLVE (CONS p (MAP (rightsubst p) sol))\n                      (MAP (rightsubst p) oth))
-  CONFLICTFREE l <=> forall x. LENGTH (FILTER (\\(y:num,s:term). y = x) l) <= 1
-  x:num
-  z:num
-  v IN FVT p
-  s:term
-  y:num
-  p:term
-  v:num
-  u:num
-  oth:(num#term)list
-  t:term
-  x:num
-  forall p oth x y.\n        TC(OCC (MAP (rightsubst p) oth)) x y ==> TC(OCC (CONS p oth)) x y
-  forall p oth. LOOPFREE(CONS p oth) ==> LOOPFREE(MAP (rightsubst p) oth)
-  forall p x. (\\(y,s). y = x) o rightsubst p = (\\(y,s). y = x)
-  CONFLICTFREE(APPEND sol (CONS p oth))\n   ==> CONFLICTFREE(APPEND (CONS p (MAP (rightsubst p) sol))\n                           (MAP (rightsubst p) oth))
-  w:num
-  r = SND(p:num#term)
-  z = FST(p:num#term)
-  u:term
-  p:num#term
-  MEM (y,s)\n        (APPEND (CONS p (MAP (rightsubst p) sol))\n                (MAP (rightsubst p) oth))
-  t:term
-  ~a ==> ~b <=> b ==> a
-  x:num
-  LOOPFREE (CONS (x,t) oth)
-  z:num
-  MEM (y,s)\n       (APPEND (CONS (x,t) (MAP (rightsubst (x,t)) sol))\n       (MAP (rightsubst (x,t)) oth))
-  p:num#term
-  forall x. (?t. MEM (x,t) (CONS p (MAP (rightsubst p) sol))) <=>\n                    (?t. MEM (x,t) (CONS p sol))
-  LOOPFREE(CONS p oth) /\\\n   (forall x y s t. MEM (x,t) sol /\\ MEM (y,s) (APPEND sol (CONS p oth))\n              ==> ~(x IN FVT(s)))\n   ==> (forall x y s t. MEM (x,t) (CONS p (MAP (rightsubst p) sol)) /\\\n                  MEM (y,s) (APPEND (CONS p (MAP (rightsubst p) sol))\n                                    (MAP (rightsubst p) oth))\n                  ==> ~(x IN FVT(s)))
-  (forall x t y s. P y s /\\ (x = y) /\\ (t = f s) ==> Q x t) <=>\n     (forall x t s. P x s ==> Q x (f s))
-  (\\x. termsubst i (if x = y then s else V x)) = i
-  s:term
-  y:num
-  p:num#term
-  p:num#term
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-  l:(num#term)list
-  APPEND sol (oth:(num#term)list)
-  a \\/ b \\/ c <=> b \\/ a \\/ c
-  (forall x t. MEM (x,t) (APPEND sol (CONS p oth))\n          ==> (i(x) = termsubst i t)) <=>\n   (forall x t. MEM (x,t) (APPEND (CONS p (MAP (rightsubst p) sol))\n                            (MAP (rightsubst p) oth))\n          ==> (i(x) = termsubst i t))
-  sol:(num#term)list
-  forall n env sol. (LENGTH env = n) /\\\n               LOOPFREE(env) /\\\n               CONFLICTFREE(APPEND sol env) /\\\n               (forall x y s t. MEM (x,t) sol /\\ MEM (y,s) (APPEND sol env)\n                          ==> ~(x IN FVT(s)))\n               ==> CONFLICTFREE(SOLVE sol env) /\\\n                   (forall i. (forall x t. MEM (x,t) (APPEND sol env)\n                               ==> (i x = termsubst i t)) <=>\n                        (forall x t. MEM (x,t) (SOLVE sol env)\n                               ==> (i x = termsubst i t))) /\\\n                   forall x y s t. MEM (x,t) (SOLVE sol env) /\\\n                             MEM (y,s) (SOLVE sol env)\n                             ==> ~(x IN FVT(s))
-  forall x:num t:term. MEM (x,t) env = MEM (x,t) (APPEND [] env)
-  forall env.\n        LOOPFREE(env) /\\ CONFLICTFREE(env)\n        ==> CONFLICTFREE(SOLVE [] env) /\\\n            (forall i. (forall x t. MEM (x,t) env ==> (i x = termsubst i t)) <=>\n                 (forall x t. MEM (x,t) (SOLVE [] env) ==> (i x = termsubst i t))) /\\\n            forall x y s t. MEM (x,t) (SOLVE [] env) /\\ MEM (y,s) (SOLVE [] env)\n                      ==> ~(x IN FVT s)
-  y:num = z
-  s:term
-  y:num
-  h:num#term
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  z:num
-  forall x. LENGTH (FILTER (\\(y:num,s:term). y = x) env) <= 1
-  MEM z (MAP FST (env:(num#term)list))
-  w:num
-  (@y. (z = y) /\\ MEM y (MAP FST (env:(num#term)list))) = z
-  z:num
-  z:num
-  forall env x. LOOPFREE(env) /\\ CONFLICTFREE(env)\n     ==> ?istriv. forall t. istriv t =\n     if t = V x then TT\n     else if ?y. (t = V y) /\\ MEM y (MAP FST env)\n          then istriv (ASSOC (@y. (t = V y) /\\ MEM y (MAP FST env)) env)\n     else if x IN FVT(t) then Exception\n     else if ?y s. y IN FVT(t) /\\ MEM (y,s) env /\\ ~(istriv s = FF)\n          then Exception else FF
-  CONFLICTFREE t
-  MEM (y:num,s:term)
-  ~(SUC n <= 1) <=> ~(n = 0)
-  y:num
-  (b ==> ~a) ==> (a ==> (c \\/ b <=> c))
-  x:num = y
-  t:term
-  x:num
-  h:num#term
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  MEM y (MAP FST (env:(num#term)list))
-  forall s. MEM (y:num,s:term) env <=> (s = ASSOC y env)
-  w:num
-  (@z. (y = z) /\\ MEM z (MAP FST (env:(num#term)list))) = y
-  y:num
-  ?y. (t = V y) /\\ MEM y (MAP FST (env:(num#term)list))
-  ~(x IN FVT t)
-  t:term
-  ~(x IN FVT (Fn f args))
-  x IN FVT (Fn f args)
-  a ==> ~a ==> b
-  ~EX (\\a. ~(istriv env x a = FF)) args
-  x IN FVT(Fn f args)
-  env:(num#term)list
-  env:(num#term)list
-  a ==> ~a ==> b
-  ~MEM y (MAP FST (env:(num#term)list))
-  w:num
-  forall env x.\n        LOOPFREE(env) /\\ CONFLICTFREE(env)\n        ==> (forall x y. istriv env x (V y) =\n                        if y = x then TT\n                        else if MEM y (MAP FST env) then\n                           istriv env x (ASSOC y env)\n                        else FF) /\\\n            (forall f args. istriv env x (Fn f args) =\n                        if EX (\\a. ~(istriv env x a = FF)) args\n                        then Exception else FF)
-  EQV env x y = MEM (x,V y) env
-  forall env x y. EQV env x y ==> OCC env x y
-  z:num
-  z:num
-  ?y. (s = V y) /\\ RTC (EQV env) y x
-  s:term
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  s:term
-  y = x:num
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  y:num
-  ?y. y IN FVT t /\\ RTC (OCC env) y x
-  x IN FVT(t)
-  y = x:num
-  y:num
-  ~a ==> ~b <=> b ==> a
-  ~(?y. (t = V y) /\\ MEM y (MAP FST (env:(num#term)list)))
-  ~(?y. (t = V y) /\\ RTC (EQV env) y x)
-  CONFLICTFREE t
-  MEM (z:num,s:term)
-  ~(SUC n <= 1) <=> ~(n = 0)
-  z:num
-  (b ==> ~a) ==> (a ==> (c \\/ b <=> c))
-  x:num = z
-  t:term
-  x:num
-  h:num#term
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  MEM z (MAP FST (env:(num#term)list))
-  forall s. MEM (z:num,s:term) env = (s = ASSOC z env)
-  x:num = z
-  y:num = z
-  s:term
-  y:num
-  h:num#term
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  z:num
-  MEM z (MAP FST (env:(num#term)list))
-  z:num
-  ASSOC z (env:(num#term)list)
-  w:num
-  (@y. (z = y) /\\ MEM y (MAP FST (env:(num#term)list))) = z
-  z:num
-  ?y. (t = V y) /\\ MEM y (MAP FST (env:(num#term)list))
-  t = V x
-  t:term
-  forall env x t. LOOPFREE(env) /\\ CONFLICTFREE(env)\n             ==> (istriv env x t =\n                    if ?y. (t = V y) /\\ RTC (EQV env) y x then TT\n                    else if ?y. y IN FVT t /\\ RTC (OCC env) y x then Exception\n                    else FF)
-  SUB1 s t <=> ?f args. (t = Fn f args) /\\ MEM s args
+  (OCC : (List[(Num, Term)], Num, Num) -> Bool)((env : List[(Num, Term)]), (x : Num), (y : Num)) == (\226\136\131 t : Term, MEM((x, t), env) && IN(y, FVT(t)))
+  (LOOPFREE : (List[(Num, Term)]) -> Bool)((env : List[(Num, Term)])) == (\226\136\128 z : Num, !TC(OCC(env), z, z))
+  (s : Term)
+  OCC(CONS(((x : Num), (t : Term)), (env : List[(Num, Term)])), (v : Num), (z : Num))
+  (y : Num)
+  (a : Bool) \226\134\146 !a \226\134\146 (b : Bool)
+  !TC(OCC((env : List[(Num, Term)])), (u : Num), (z : Num))
+  (s : Term)
+  OCC(CONS(((x : Num), (t : Term)), (env : List[(Num, Term)])), (v : Num), (z : Num))
+  TC(OCC((env : List[(Num, Term)])), (u : Num), (v : Num))
+  !TC(OCC((env : List[(Num, Term)])), (u : Num), (v : Num))
+  (s : Term)
+  OCC(CONS(((x : Num), (t : Term)), (env : List[(Num, Term)])), (u : Num), (v : Num))
+  ((a : Bool) && !(b : Bool) \226\134\146 (c : Bool)) == (a \226\134\146 !b \226\134\146 c)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 u : Num, \226\136\128 v : Num, TC(OCC(CONS((x, t), env)), u, v) && !TC(OCC(env), u, v) \226\134\146 (\226\136\131 y : Num, RTC(OCC(env), u, x) && IN(y, FVT(t)) && RTC(OCC(env), y, v))
+  LOOPFREE((env : List[(Num, Term)])) && !(\226\136\131 y : Num, IN(y, FVT((t : Term))) && RTC(OCC(env), y, (x : Num))) \226\134\146 LOOPFREE(CONS((x, t), env))
+  RTC(OCC((env : List[(Num, Term)])), (y : Num), (x : Num))
+  (t : Term)
+  (y : Num)
+  (x : Num)
+  (y : Num)
+  ((a : Bool) && !(c : Bool) \226\134\146 (b : Bool)) && (c \226\134\146 !b) \226\134\146 a \226\134\146 b == !c
+  LOOPFREE((env : List[(Num, Term)])) \226\134\146 LOOPFREE(CONS(((x : Num), (t : Term)), env)) == !(\226\136\131 y : Num, IN(y, FVT(t)) && RTC(OCC(env), y, x))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  set_of_list(MAP(FST, (env : List[(Num, Term)])))
+  \226\136\128 env : List[(Num, Term)], LOOPFREE(env) \226\134\146 WF((x : Num) => (y : Num) => OCC(env, y, x))
+  (n : Num) => (s : (Num) -> Term)(SUC(n))
+  (x : (Num) -> Num)
+  (x : (Num) -> Num)
+  (s : (Num) -> Term)
+  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+  \226\136\128 env : List[(Num, Term)], LOOPFREE(env) \226\134\146 WF((s : Term) => (t : Term) => \226\136\131 y : Num, IN(y, FVT(t)) && MEM((y, s), env))
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, LOOPFREE(env) \226\134\146 (\226\136\131 loopcheck : (Term) -> Bool, \226\136\128 t : Term, loopcheck(t) == (\226\136\131 y : Num, IN(y, FVT(t)) && (y == x || (\226\136\131 s : Term, MEM((y, s), env) && loopcheck(s)))))
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, LOOPFREE(env) \226\134\146 (\226\136\128 x : Num, \226\136\128 y : Num, loopcheck(env, x, V(y)) == (y == x || (\226\136\131 s : Term, MEM((y, s), env) && loopcheck(env, x, s)))) && (\226\136\128 f : Num, \226\136\128 args : List[Term], loopcheck(env, x, Fn(f, args)) == EX(loopcheck(env, x), args))
+  (y : Num)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  (x : Num) == (y : Num)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  (t : Term)
+  (t : Term)
+  (t : Term)
+  \226\136\131 y : Num, IN(y, FVT((t : Term))) && RTC(OCC((env : List[(Num, Term)])), y, (x : Num))
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 t : Term, LOOPFREE(env) \226\134\146 loopcheck(env, x, t) == !LOOPFREE(CONS((x, t), env))
+  (rightsubst : ((Num, Term), (Num, Term)) -> (Num, Term))(((x : Num), (t : Term)), ((y : Num), (s : Term))) == (y, termsubst((z : Num) => if z == x { t } else { V(z) }, s))
+  (b : Bool)
+  (if (b : Bool) { (x : _) } else { (y : _) }) == (if !b { y } else { x })
+  \226\136\131 SOLVE : ((List[(Num, Term)], List[(Num, Term)])) -> List[(Num, Term)], \226\136\128 pr : (List[(Num, Term)], List[(Num, Term)]), SOLVE(pr) == (if SND(pr) == NIL { FST(pr) } else { SOLVE((CONS(HD(SND(pr)), MAP(rightsubst(HD(SND(pr))), FST(pr))), MAP(rightsubst(HD(SND(pr))), TL(SND(pr))))) })
+  (SOLVE : (List[(Num, Term)], List[(Num, Term)]) -> List[(Num, Term)])((sol : List[(Num, Term)]), (uns : List[(Num, Term)])) == SOLVEC((sol, uns))
+  (\226\136\128 sol : List[(Num, Term)], SOLVE(sol, NIL) == sol) && (\226\136\128 sol : List[(Num, Term)], \226\136\128 p : (Num, Term), \226\136\128 oth : List[(Num, Term)], SOLVE(sol, CONS(p, oth)) == SOLVE(CONS(p, MAP(rightsubst(p), sol)), MAP(rightsubst(p), oth)))
+  (CONFLICTFREE : (List[(Num, Term)]) -> Bool)((l : List[(Num, Term)])) == (\226\136\128 x : Num, LENGTH(FILTER(GABS((f : ((Num, Term)) -> Bool) => \226\136\128 y : Num, \226\136\128 s : Term, GEQ(f((y, s)), y == x)), l)) <= 1)
+  (x : Num)
+  (z : Num)
+  IN((v : Num), FVT((p : Term)))
+  (s : Term)
+  (y : Num)
+  (p : Term)
+  (v : Num)
+  (u : Num)
+  (oth : List[(Num, Term)])
+  (t : Term)
+  (x : Num)
+  \226\136\128 p : (Num, Term), \226\136\128 oth : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 y : Num, TC(OCC(MAP(rightsubst(p), oth)), x, y) \226\134\146 TC(OCC(CONS(p, oth)), x, y)
+  \226\136\128 p : (Num, Term), \226\136\128 oth : List[(Num, Term)], LOOPFREE(CONS(p, oth)) \226\134\146 LOOPFREE(MAP(rightsubst(p), oth))
+  \226\136\128 p : (Num, Term), \226\136\128 x : Num, o(GABS((f : ((Num, Term)) -> Bool) => \226\136\128 y : Num, \226\136\128 s : Term, GEQ(f((y, s)), y == x)), rightsubst(p)) == GABS((f : ((Num, Term)) -> Bool) => \226\136\128 y : Num, \226\136\128 s : Term, GEQ(f((y, s)), y == x))
+  CONFLICTFREE(APPEND((sol : List[(Num, Term)]), CONS((p : (Num, Term)), (oth : List[(Num, Term)])))) \226\134\146 CONFLICTFREE(APPEND(CONS(p, MAP(rightsubst(p), sol)), MAP(rightsubst(p), oth)))
+  (w : Num)
+  (r : Term) == SND((p : (Num, Term)))
+  (z : Num) == FST((p : (Num, Term)))
+  (u : Term)
+  (p : (Num, Term))
+  MEM(((y : Num), (s : Term)), APPEND(CONS((p : (Num, Term)), MAP(rightsubst(p), (sol : List[(Num, Term)]))), MAP(rightsubst(p), (oth : List[(Num, Term)]))))
+  (t : Term)
+  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+  (x : Num)
+  LOOPFREE(CONS(((x : Num), (t : Term)), (oth : List[(Num, Term)])))
+  (z : Num)
+  MEM(((y : Num), (s : Term)), APPEND(CONS(((x : Num), (t : Term)), MAP(rightsubst((x, t)), (sol : List[(Num, Term)]))), MAP(rightsubst((x, t)), (oth : List[(Num, Term)]))))
+  (p : (Num, Term))
+  \226\136\128 x : Num, (\226\136\131 t : Term, MEM((x, t), CONS((p : (Num, Term)), MAP(rightsubst(p), (sol : List[(Num, Term)]))))) == (\226\136\131 t : Term, MEM((x, t), CONS(p, sol)))
+  LOOPFREE(CONS((p : (Num, Term)), (oth : List[(Num, Term)]))) && (\226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 s : Term, \226\136\128 t : Term, MEM((x, t), (sol : List[(Num, Term)])) && MEM((y, s), APPEND(sol, CONS(p, oth))) \226\134\146 !IN(x, FVT(s))) \226\134\146 (\226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 s : Term, \226\136\128 t : Term, MEM((x, t), CONS(p, MAP(rightsubst(p), sol))) && MEM((y, s), APPEND(CONS(p, MAP(rightsubst(p), sol)), MAP(rightsubst(p), oth))) \226\134\146 !IN(x, FVT(s)))
+  (\226\136\128 x : _, \226\136\128 t : _, \226\136\128 y : _, \226\136\128 s : _, (P : (_, _) -> Bool)(y, s) && x == y && t == (f : (_) -> _)(s) \226\134\146 (Q : (_, _) -> Bool)(x, t)) == (\226\136\128 x : _, \226\136\128 t : _, \226\136\128 s : _, P(x, s) \226\134\146 Q(x, f(s)))
+  ((x : Num) => termsubst((i : (Num) -> Term), if x == (y : Num) { (s : Term) } else { V(x) })) == i
+  (s : Term)
+  (y : Num)
+  (p : (Num, Term))
+  (p : (Num, Term))
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (l : List[(Num, Term)])
+  APPEND((sol : List[(Num, Term)]), (oth : List[(Num, Term)]))
+  ((a : Bool) || (b : Bool) || (c : Bool)) == (b || a || c)
+  (\226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), APPEND((sol : List[(Num, Term)]), CONS((p : (Num, Term)), (oth : List[(Num, Term)])))) \226\134\146 (i : (Num) -> Term)(x) == termsubst(i, t)) == (\226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), APPEND(CONS(p, MAP(rightsubst(p), sol)), MAP(rightsubst(p), oth))) \226\134\146 i(x) == termsubst(i, t))
+  (sol : List[(Num, Term)])
+  \226\136\128 n : Num, \226\136\128 env : List[(Num, Term)], \226\136\128 sol : List[(Num, Term)], LENGTH(env) == n && LOOPFREE(env) && CONFLICTFREE(APPEND(sol, env)) && (\226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 s : Term, \226\136\128 t : Term, MEM((x, t), sol) && MEM((y, s), APPEND(sol, env)) \226\134\146 !IN(x, FVT(s))) \226\134\146 CONFLICTFREE(SOLVE(sol, env)) && (\226\136\128 i : (Num) -> Term, (\226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), APPEND(sol, env)) \226\134\146 i(x) == termsubst(i, t)) == (\226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), SOLVE(sol, env)) \226\134\146 i(x) == termsubst(i, t))) && (\226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 s : Term, \226\136\128 t : Term, MEM((x, t), SOLVE(sol, env)) && MEM((y, s), SOLVE(sol, env)) \226\134\146 !IN(x, FVT(s)))
+  \226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), (env : List[(Num, Term)])) == MEM((x, t), APPEND(NIL, env))
+  \226\136\128 env : List[(Num, Term)], LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 CONFLICTFREE(SOLVE(NIL, env)) && (\226\136\128 i : (Num) -> Term, (\226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), env) \226\134\146 i(x) == termsubst(i, t)) == (\226\136\128 x : Num, \226\136\128 t : Term, MEM((x, t), SOLVE(NIL, env)) \226\134\146 i(x) == termsubst(i, t))) && (\226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 s : Term, \226\136\128 t : Term, MEM((x, t), SOLVE(NIL, env)) && MEM((y, s), SOLVE(NIL, env)) \226\134\146 !IN(x, FVT(s)))
+  (y : Num) == (z : Num)
+  (s : Term)
+  (y : Num)
+  (h : (Num, Term))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  (z : Num)
+  \226\136\128 x : Num, LENGTH(FILTER(GABS((f : ((Num, Term)) -> Bool) => \226\136\128 y : Num, \226\136\128 s : Term, GEQ(f((y, s)), y == x)), (env : List[(Num, Term)]))) <= 1
+  MEM((z : Num), MAP(FST, (env : List[(Num, Term)])))
+  (w : Num)
+  select((y : Num) => (z : Num) == y && MEM(y, MAP(FST, (env : List[(Num, Term)])))) == z
+  (z : Num)
+  (z : Num)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 (\226\136\131 istriv : (Term) -> Retval, \226\136\128 t : Term, istriv(t) == (if t == V(x) { TT } else { if (\226\136\131 y : Num, t == V(y) && MEM(y, MAP(FST, env))) { istriv(ASSOC(select((y : Num) => t == V(y) && MEM(y, MAP(FST, env))), env)) } else { if IN(x, FVT(t)) { Exception } else { if (\226\136\131 y : Num, \226\136\131 s : Term, IN(y, FVT(t)) && MEM((y, s), env) && !(istriv(s) == FF)) { Exception } else { FF } } } }))
+  CONFLICTFREE((t : List[(Num, Term)]))
+  MEM(((y : Num), (s : Term)))
+  !(SUC((n : Num)) <= 1) == !(n == 0)
+  (y : Num)
+  ((b : Bool) \226\134\146 !(a : Bool)) \226\134\146 a \226\134\146 ((c : Bool) || b) == c
+  (x : Num) == (y : Num)
+  (t : Term)
+  (x : Num)
+  (h : (Num, Term))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  MEM((y : Num), MAP(FST, (env : List[(Num, Term)])))
+  \226\136\128 s : Term, MEM(((y : Num), s), (env : List[(Num, Term)])) == (s == ASSOC(y, env))
+  (w : Num)
+  select((z : Num) => (y : Num) == z && MEM(z, MAP(FST, (env : List[(Num, Term)])))) == y
+  (y : Num)
+  \226\136\131 y : Num, (t : Term) == V(y) && MEM(y, MAP(FST, (env : List[(Num, Term)])))
+  !IN((x : Num), FVT((t : Term)))
+  (t : Term)
+  !IN((x : Num), FVT(Fn((f : Num), (args : List[Term]))))
+  IN((x : Num), FVT(Fn((f : Num), (args : List[Term]))))
+  (a : Bool) \226\134\146 !a \226\134\146 (b : Bool)
+  !EX((a : Term) => !(istriv((env : List[(Num, Term)]), (x : Num), a) == FF), (args : List[Term]))
+  IN((x : Num), FVT(Fn((f : Num), (args : List[Term]))))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  (a : Bool) \226\134\146 !a \226\134\146 (b : Bool)
+  !MEM((y : Num), MAP(FST, (env : List[(Num, Term)])))
+  (w : Num)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 (\226\136\128 x : Num, \226\136\128 y : Num, istriv(env, x, V(y)) == (if y == x { TT } else { if MEM(y, MAP(FST, env)) { istriv(env, x, ASSOC(y, env)) } else { FF } })) && (\226\136\128 f : Num, \226\136\128 args : List[Term], istriv(env, x, Fn(f, args)) == (if EX((a : Term) => !(istriv(env, x, a) == FF), args) { Exception } else { FF }))
+  (EQV : (List[(_, Term)], _, Num) -> Bool)((env : List[(_, Term)]), (x : _), (y : Num)) == MEM((x, V(y)), env)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 y : Num, EQV(env, x, y) \226\134\146 OCC(env, x, y)
+  (z : Num)
+  (z : Num)
+  \226\136\131 y : Num, (s : Term) == V(y) && RTC(EQV((env : List[(Num, Term)])), y, (x : Num))
+  (s : Term)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  (s : Term)
+  (y : Num) == (x : Num)
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  (y : Num)
+  \226\136\131 y : Num, IN(y, FVT((t : Term))) && RTC(OCC((env : List[(Num, Term)])), y, (x : Num))
+  IN((x : Num), FVT((t : Term)))
+  (y : Num) == (x : Num)
+  (y : Num)
+  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+  !(\226\136\131 y : Num, (t : Term) == V(y) && MEM(y, MAP(FST, (env : List[(Num, Term)]))))
+  !(\226\136\131 y : Num, (t : Term) == V(y) && RTC(EQV((env : List[(Num, Term)])), y, (x : Num)))
+  CONFLICTFREE((t : List[(Num, Term)]))
+  MEM(((z : Num), (s : Term)))
+  !(SUC((n : Num)) <= 1) == !(n == 0)
+  (z : Num)
+  ((b : Bool) \226\134\146 !(a : Bool)) \226\134\146 a \226\134\146 ((c : Bool) || b) == c
+  (x : Num) == (z : Num)
+  (t : Term)
+  (x : Num)
+  (h : (Num, Term))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  MEM((z : Num), MAP(FST, (env : List[(Num, Term)])))
+  \226\136\128 s : Term, MEM(((z : Num), s), (env : List[(Num, Term)])) == (s == ASSOC(z, env))
+  (x : Num) == (z : Num)
+  (y : Num) == (z : Num)
+  (s : Term)
+  (y : Num)
+  (h : (Num, Term))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  (z : Num)
+  MEM((z : Num), MAP(FST, (env : List[(Num, Term)])))
+  (z : Num)
+  ASSOC((z : Num), (env : List[(Num, Term)]))
+  (w : Num)
+  select((y : Num) => (z : Num) == y && MEM(y, MAP(FST, (env : List[(Num, Term)])))) == z
+  (z : Num)
+  \226\136\131 y : Num, (t : Term) == V(y) && MEM(y, MAP(FST, (env : List[(Num, Term)])))
+  (t : Term) == V((x : Num))
+  (t : Term)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 t : Term, LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 istriv(env, x, t) == (if (\226\136\131 y : Num, t == V(y) && RTC(EQV(env), y, x)) { TT } else { if (\226\136\131 y : Num, IN(y, FVT(t)) && RTC(OCC(env), y, x)) { Exception } else { FF } })
+  (SUB1 : (Term, Term) -> Bool)((s : Term), (t : Term)) == (\226\136\131 f : Num, \226\136\131 args : List[Term], t == Fn(f, args) && MEM(s, args))
   WF(SUB1)
-  ?y. RTC SUB1 (V x) y /\\ MEM y l
-  forall x t. RTC(SUB1) (V x) t <=> x IN FVT(t)
-  LOOPFREE(env) ==> WF(\\s t. ?x. MEM (x,s) env /\\ RTC(SUB1) (V x) t)
-  LOOPFREE(env)\n   ==> WF(\\s t. (?x. (t = V x) /\\ MEM (x,s) env) \\/\n                (?f args. (t = Fn f args) /\\ MEM s args))
-  (termcases cv cf (V v) = cv v) /\\\n   (termcases cv cf (Fn f args) = cf f args)
-  tpcases c1 c2 c3 (t1,t2) =\n        termcases (\\v1. termcases\n                            (\\v2. c2 v1 (V v2))\n                            (\\f2 args2. c2 v1 (Fn f2 args2)) t2)\n                  (\\f1 args1. termcases\n                                (\\v2. c3 f1 args1 v2)\n                                (\\f2 args2. c1 f1 args1 f2 args2) t2)\n                  t1
-  t2:term
-  t2:term
-  (tpcases c1 c2 c3 (Fn f1 args1,Fn f2 args2) = c1 f1 args1 f2 args2) /\\\n   (tpcases c1 c2 c3 (V v1,t2) = c2 v1 t2) /\\\n   (tpcases c1 c2 c3 (Fn f1 args1,V v2) = c3 f1 args1 v2)
-  MLEFT (env,eqs) =\n       CARD(FVT(Fn 0 (MAP FST eqs)) UNION\n            FVT(Fn 0 (MAP SND eqs)) UNION\n            FVT(Fn 0 (MAP SND env)) UNION\n            FVT(Fn 0 (MAP (V o FST) env))) -\n       CARD(FVT(Fn 0 (MAP (V o FST) env)))
-  CRIGHT (env',eqs') (env,eqs) <=>\n         LOOPFREE(env) /\\\n         (env' = env) /\\\n         ((?f args1 args2 oth.\n                (LENGTH args1 = LENGTH args2) /\\\n                (eqs = CONS (Fn f args1,Fn f args2) oth) /\\\n                (eqs' = APPEND (ZIP args1 args2) oth)) \\/\n          (?x t oth. (eqs = CONS (V x,t) oth) /\\\n                     (MEM x (MAP FST env) /\\\n                      (eqs' = CONS (ASSOC x env,t) oth) \\/\n                      ~(MEM x (MAP FST env)) /\\\n                      (istriv env x t = TT) /\\\n                      (eqs' = oth))) \\/\n          (?x f args oth. (eqs = CONS (Fn f args,V x) oth) /\\\n                          (eqs' = CONS (V x,Fn f args) oth)))
-  CALLORDER (env',eqs') (env,eqs) <=>\n        MEASURE MLEFT (env',eqs') (env,eqs) \\/\n        CRIGHT (env',eqs') (env,eqs)
-  forall g:A#B->C. (\\(p1,p2). g (p1,p2)) = g
-  u:term
-  s:term
-  [V x,Fn f args]
-  oth:(term#term)list
-  (Fn f args,V x)
-  []:(term#term)list
-  oth:(term#term)list
-  (V x,t:term)
-  x:num
-  u:term
-  s:term
-  [ASSOC x (env:(num#term)list),t:term]
-  oth:(term#term)list
-  (V x,t:term)
-  args2:term list
-  f:num
-  args1:term list
-  f:num
-  t:term
-  s:term
-  (ZIP args1 args2):(term#term)list
-  oth:(term#term)list
-  (Fn f args1,Fn f args2)
-  eqs1:(term#term)list
-  eqs2:(term#term)list
-  \\s t. (?f args. s = Fn f args) /\\ (?x. t = V x)
-  env:(num#term)list
+  \226\136\131 y : Term, RTC(SUB1, V((x : Num)), y) && MEM(y, (l : List[Term]))
+  \226\136\128 x : Num, \226\136\128 t : Term, RTC(SUB1, V(x), t) == IN(x, FVT(t))
+  LOOPFREE((env : List[(Num, Term)])) \226\134\146 WF((s : Term) => (t : Term) => \226\136\131 x : Num, MEM((x, s), env) && RTC(SUB1, V(x), t))
+  LOOPFREE((env : List[(Num, Term)])) \226\134\146 WF((s : Term) => (t : Term) => (\226\136\131 x : Num, t == V(x) && MEM((x, s), env)) || (\226\136\131 f : Num, \226\136\131 args : List[Term], t == Fn(f, args) && MEM(s, args)))
+  (termcases : ((Num) -> _, (Num, List[Term]) -> _, Term) -> _)((cv : (Num) -> _), (cf : (Num, List[Term]) -> _), V((v : Num))) == cv(v) && termcases(cv, cf, Fn((f : Num), (args : List[Term]))) == cf(f, args)
+  (tpcases : ((Num, List[Term], Num, List[Term]) -> _, (Num, Term) -> _, (Num, List[Term], Num) -> _, (Term, Term)) -> _)((c1 : (Num, List[Term], Num, List[Term]) -> _), (c2 : (Num, Term) -> _), (c3 : (Num, List[Term], Num) -> _), ((t1 : Term), (t2 : Term))) == termcases((v1 : Num) => termcases((v2 : Num) => c2(v1, V(v2)), (f2 : Num) => (args2 : List[Term]) => c2(v1, Fn(f2, args2)), t2), (f1 : Num) => (args1 : List[Term]) => termcases((v2 : Num) => c3(f1, args1, v2), (f2 : Num) => (args2 : List[Term]) => c1(f1, args1, f2, args2), t2), t1)
+  (t2 : Term)
+  (t2 : Term)
+  tpcases((c1 : (Num, List[Term], Num, List[Term]) -> _), (c2 : (Num, Term) -> _), (c3 : (Num, List[Term], Num) -> _), (Fn((f1 : Num), (args1 : List[Term])), Fn((f2 : Num), (args2 : List[Term])))) == c1(f1, args1, f2, args2) && tpcases(c1, c2, c3, (V((v1 : Num)), (t2 : Term))) == c2(v1, t2) && tpcases(c1, c2, c3, (Fn(f1, args1), V((v2 : Num)))) == c3(f1, args1, v2)
+  (MLEFT : ((List[(Num, Term)], List[(Term, Term)])) -> Num)(((env : List[(Num, Term)]), (eqs : List[(Term, Term)]))) == CARD(UNION(FVT(Fn(0, MAP(FST, eqs))), UNION(FVT(Fn(0, MAP(SND, eqs))), UNION(FVT(Fn(0, MAP(SND, env))), FVT(Fn(0, MAP(o(V, FST), env))))))) - CARD(FVT(Fn(0, MAP(o(V, FST), env))))
+  (CRIGHT : ((List[(Num, Term)], List[(Term, Term)]), (List[(Num, Term)], List[(Term, Term)])) -> Bool)(((env' : List[(Num, Term)]), (eqs' : List[(Term, Term)])), ((env : List[(Num, Term)]), (eqs : List[(Term, Term)]))) == (LOOPFREE(env) && env' == env && ((\226\136\131 f : Num, \226\136\131 args1 : List[Term], \226\136\131 args2 : List[Term], \226\136\131 oth : List[(Term, Term)], LENGTH(args1) == LENGTH(args2) && eqs == CONS((Fn(f, args1), Fn(f, args2)), oth) && eqs' == APPEND(ZIP(args1, args2), oth)) || (\226\136\131 x : Num, \226\136\131 t : Term, \226\136\131 oth : List[(Term, Term)], eqs == CONS((V(x), t), oth) && (MEM(x, MAP(FST, env)) && eqs' == CONS((ASSOC(x, env), t), oth) || !MEM(x, MAP(FST, env)) && istriv(env, x, t) == TT && eqs' == oth)) || (\226\136\131 x : Num, \226\136\131 f : Num, \226\136\131 args : List[Term], \226\136\131 oth : List[(Term, Term)], eqs == CONS((Fn(f, args), V(x)), oth) && eqs' == CONS((V(x), Fn(f, args)), oth))))
+  (CALLORDER : ((List[(Num, Term)], List[(Term, Term)]), (List[(Num, Term)], List[(Term, Term)])) -> Bool)(((env' : List[(Num, Term)]), (eqs' : List[(Term, Term)])), ((env : List[(Num, Term)]), (eqs : List[(Term, Term)]))) == (MEASURE(MLEFT, (env', eqs'), (env, eqs)) || CRIGHT((env', eqs'), (env, eqs)))
+  \226\136\128 g : ((A, B)) -> C, GABS((f : ((A, B)) -> C) => \226\136\128 p1 : A, \226\136\128 p2 : B, GEQ(f((p1, p2)), g((p1, p2)))) == g
+  (u : Term)
+  (s : Term)
+  [(V((x : Num)), Fn((f : Num), (args : List[Term])))]
+  (oth : List[(Term, Term)])
+  (Fn((f : Num), (args : List[Term])), V((x : Num)))
+  (NIL : List[(Term, Term)])
+  (oth : List[(Term, Term)])
+  (V((x : Num)), (t : Term))
+  (x : Num)
+  (u : Term)
+  (s : Term)
+  [(ASSOC((x : Num), (env : List[(Num, Term)])), (t : Term))]
+  (oth : List[(Term, Term)])
+  (V((x : Num)), (t : Term))
+  (args2 : List[Term])
+  (f : Num)
+  (args1 : List[Term])
+  (f : Num)
+  (t : Term)
+  (s : Term)
+  ZIP((args1 : List[Term]), (args2 : List[Term]))
+  (oth : List[(Term, Term)])
+  (Fn((f : Num), (args1 : List[Term])), Fn(f, (args2 : List[Term])))
+  (eqs1 : List[(Term, Term)])
+  (eqs2 : List[(Term, Term)])
+  (s : Term) => (t : Term) => (\226\136\131 f : Num, \226\136\131 args : List[Term], s == Fn(f, args)) && (\226\136\131 x : Num, t == V(x))
+  (env : List[(Num, Term)])
   CRIGHT = \\(env',eqs') (env,eqs). CRIGHT (env',eqs') (env,eqs)
-  WF CRIGHT
-  env:(num#term)list
-  env:(num#term)list
-  MEM x' (MAP FST (env:(num#term)list))
-  (a ==> e)\n       ==> a \\/ b \\/ c \\/ d \\/ e \\/ f\n           ==> a' \\/ b \\/ c \\/ d \\/ e \\/ f
-  (a' <=> a) /\\ (c' <=> c)\n                       ==> a \\/ b \\/ c \\/ d ==> a' \\/ b \\/ c' \\/ d
-  x:num
-  a <= c:num ==> a - b <= c - b
-  eqs:(term#term)list
-  env:(num#term)list
-  eqs':(term#term)list
-  env':(num#term)list
+  WF(CRIGHT)
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  MEM((x' : Num), MAP(FST, (env : List[(Num, Term)])))
+  ((a : Bool) \226\134\146 (e : Bool)) \226\134\146 a || (b : Bool) || (c : Bool) || (d : Bool) || e || (f : Bool) \226\134\146 (a' : Bool) || b || c || d || e || f
+  (a' : Bool) == (a : Bool) && (c' : Bool) == (c : Bool) \226\134\146 a || (b : Bool) || c || (d : Bool) \226\134\146 a' || b || c' || d
+  (x : Num)
+  (a : Num) <= (c : Num) \226\134\146 a - (b : Num) <= c - b
+  (eqs : List[(Term, Term)])
+  (env : List[(Num, Term)])
+  (eqs' : List[(Term, Term)])
+  (env' : List[(Num, Term)])
   CALLORDER = \\(env',eqs') (env,eqs). CALLORDER (env',eqs') (env,eqs)
-  WF CALLORDER
-  env1:(num#term)list
-  env1:(num#term)list
-  (b ==> a) ==> ~a ==> b ==> c
-  ~MEM x (MAP FST (env1:(num#term)list))
-  x IN FVT (Fn 0 (MAP (V o FST) (env1:(num#term)list)))
-  FVT(Fn 0 (CONS t (MAP SND oth))) =\n    FVT(t) UNION FVT(Fn 0 (MAP SND (oth:(term#term)list)))
-  FVT(Fn 0 (CONS t (MAP SND env1))) =\n    FVT(t) UNION FVT(Fn 0 (MAP SND (env1:(num#term)list)))
-  FVT(Fn 0 (CONS (V x) (MAP FST (oth:(term#term)list)))) =\n    x INSERT FVT(Fn 0 (MAP FST oth))
-  FVT(Fn 0 (CONS ((V o FST) (x,t:term)) (MAP (V o FST) env1))) =\n    x INSERT FVT(Fn 0 (MAP (V o FST) (env1:(num#term)list)))
-  (a' = a) /\\ (b' = b + 1) /\\ b' <= a' ==> a' - b' < a - b
-  istriv env1 x t = TT
-  istriv env1 x t = Exception
-  MEM x (MAP FST (env1:(num#term)list))
-  gargs:term list
-  g:num
-  x:num
-  SND(hpr:term#term)
-  t = SND(hpr:term#term)
-  fargs:term list
-  f:num
-  x:num
-  FST(hpr:term#term)
-  hpr:term#term
-  oth:(term#term)list
-  hpr:term#term
-  eqs1:(term#term)list
-  LOOPFREE env1
-  (env2,eqs2):(num#term)list#(term#term)list
-  eqs2:(term#term)list
-  env2:(num#term)list
-  eqs1:(term#term)list
-  env1:(num#term)list
-  unify2:(num#term)list#(term#term)list->((num#term)list)option
-  unify1:(num#term)list#(term#term)list->((num#term)list)option
-  ?unify.\n      forall pr. unify pr =\n              if ~LOOPFREE(FST pr) then NONE\n              else if SND pr = [] then SOME(FST pr)\n              else tpcases\n                        (\\f fargs g gargs.\n                                if (f = g) /\\ (LENGTH fargs = LENGTH gargs)\n                                then unify (FST pr,APPEND (ZIP fargs gargs)\n                                                          (TL(SND pr)))\n                                else NONE)\n                        (\\x t. if MEM x (MAP FST (FST pr)) then\n                                  unify (FST pr,CONS (ASSOC x (FST pr),t)\n                                                     (TL(SND pr)))\n                               else if istriv (FST pr) x t = Exception then\n                                  NONE\n                               else if istriv (FST pr) x t = TT then\n                                  unify(FST pr,TL(SND pr))\n                               else\n                                  unify(CONS (x,t) (FST pr),TL(SND pr)))\n                        (\\f args x. unify (FST pr,\n                                           CONS (V x,Fn f args)\n                                                (TL(SND pr))))\n                        (HD(SND pr))
-  LOOPFREE(env)\n   ==> (unify (env,CONS (Fn f fargs,Fn g gargs) oth) =\n            if (f = g) /\\ (LENGTH fargs = LENGTH gargs)\n            then unify (env,APPEND (ZIP fargs gargs) oth)\n            else NONE) /\\\n       (unify (env,CONS (V x,t) oth) =\n            if MEM x (MAP FST env) then unify (env,CONS (ASSOC x env,t) oth)\n            else if istriv env x t = Exception then NONE\n            else if istriv env x t = TT then unify (env,oth)\n            else unify (CONS (x,t) env,oth)) /\\\n       (unify (env,CONS (Fn f fargs,V x) oth) =\n        unify (env,CONS (V x,Fn f fargs) oth))
-  unifies i l <=> ALL (\\(s,t). termsubst i s = termsubst i t) l
-  a ==> ~b <=> b ==> ~a
-  forall s t. TC SUB1 s t ==> ~(s = t)
-  MAP (termsubst i) args
-  f:num
-  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (i y) (termsubst i t)) args
-  termsubst i s
-  s:term
-  z:num
-  args:term list
-  f:num
-  t:term
-  t:term
-  y:num
-  y:num
-  y IN FVT(t)
-  (x:num,t:term)
-  t:term
-  forall env i.\n        ALL (\\(x,t). i x = termsubst i t) env\n        ==> forall x y. RTC (OCC env) x y ==> RTC SUB1 (i y) (i x)
-  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (V y) t) args
-  s:term
-  s:term
-  z:num
-  args:term list
-  f:num
-  MAP (termsubst i) args
-  f:num
-  args:term list
-  f:num
-  u:term
-  s:term
-  forall s t. TC SUB1 s t ==> TC SUB1 (termsubst i s) (termsubst i t)
-  forall t y. y IN FVT t ==> RTC SUB1 (V y) t
-  forall t y. y IN FVT t ==> (t = V y) \\/ TC SUB1 (i y) (termsubst i t)
-  (x:num,t:term)
-  t:term
-  (i:num->term) y
-  forall env i.\n        ALL (\\(x,t). i x = termsubst i t) env\n        ==> forall x y. RTC (OCC env) x y\n                  ==> RTC (EQV env) x y \\/ TC SUB1 (i y) (i x)
-  env:(num#term)list
-  env:(num#term)list
-  ALL (\\(p1,p2). i p1 = termsubst i p2) env
-  v:num
-  u:num
-  forall x y. RTC (EQV env) x y ==> (i x :term = i y)
-  x:num
-  x:num
-  ?y. (t = V y) /\\ RTC (EQV env) y x
-  (a /\\ b <=> b) <=> (b ==> a)
-  i:num->term
-  forall env x t.\n        LOOPFREE(env) /\\ CONFLICTFREE(env) /\\ (istriv env x t = TT)\n   ==> forall i. unifies i (CONS (V x,t) (MAP (\\(x,t). V x,t) env)) =\n           unifies i (MAP (\\(x,t). V x,t) env)
-  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (V y) t) args
-  s:term
-  s:term
-  z:num
-  args:term list
-  f:num
-  MAP (termsubst i) args
-  f:num
-  args:term list
-  f:num
-  u:term
-  s:term
-  forall s t. RTC SUB1 s t ==> RTC SUB1 (termsubst i s) (termsubst i t)
-  forall t y. y IN FVT t ==> RTC SUB1 (V y) t
-  x:num
-  y:num
-  (i:num->term) y
-  ALL (\\t. forall y. y IN FVT t ==> RTC SUB1 (V y) t) args
-  s:term
-  s:term
-  z:num
-  args:term list
-  f:num
-  MAP (termsubst i) args
-  f:num
-  args:term list
-  f:num
-  u:term
-  s:term
-  forall s t. TC SUB1 s t ==> TC SUB1 (termsubst i s) (termsubst i t)
-  forall t y. y IN FVT t ==> RTC SUB1 (V y) t
-  forall t y. y IN FVT t ==> (t = V y) \\/ TC SUB1 (i y) (termsubst i t)
-  (i:num->term) y
-  RTC (EQV env) y x
-  y:num
-  y:num
-  ?y. y IN FVT t /\\ RTC (OCC env) y x
-  (b ==> ~a) ==> ~(a /\\ b)
-  i:num->term
-  forall env x t.\n        LOOPFREE(env) /\\ CONFLICTFREE(env) /\\ (istriv env x t = Exception)\n        ==> forall i. ~(unifies i (CONS (V x,t) (MAP (\\(x,t). V x,t) env)))
-  fargs:term list
-  fargs:term list
-  gargs:term list
-  gargs:term list
-  i:num->term
-  forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) env)\n                            (APPEND (ZIP fargs gargs) oth)) =\n          unifies i (APPEND (MAP (\\(x,t). V x,t) env)\n                            (CONS (Fn g fargs,Fn g gargs) oth))
-  APPEND (ZIP fargs gargs) (oth:(term#term)list)
-  env:(num#term)list
-  CONS (V x,Fn f fargs) oth
-  env:(num#term)list
-  forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) (CONS (x,t) env)) oth) =\n          unifies i (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth))
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  ~(MEM x (MAP FST (env:(num#term)list)))
-  x:num = y
-  (x = 0) ==> y <= z ==> SUC x <= 1
-  x:num = y
-  y:num
-  CONFLICTFREE env
-  t:term
-  x:num
-  env:(num#term)list
-  env:(num#term)list
-  env:(num#term)list
-  (b ==> a) ==> ~a ==> b ==> c
-  ~MEM x (MAP FST (env:(num#term)list))
-  x IN FVT (Fn 0 (MAP (V o FST) (env:(num#term)list)))
-  FVT(Fn 0 (CONS t (MAP SND oth))) =\n        FVT(t) UNION FVT(Fn 0 (MAP SND (oth:(term#term)list)))
-  FVT(Fn 0 (CONS t (MAP SND env))) =\n        FVT(t) UNION FVT(Fn 0 (MAP SND (env:(num#term)list)))
-  FVT(Fn 0 (CONS (V x) (MAP FST (oth:(term#term)list)))) =\n        x INSERT FVT(Fn 0 (MAP FST oth))
-  FVT(Fn 0 (CONS ((V o FST) (x,t:term)) (MAP (V o FST) env))) =\n        x INSERT FVT(Fn 0 (MAP (V o FST) (env:(num#term)list)))
-  (a' = a) /\\ (b' = b + 1) /\\ b' <= a' ==> a' - b' < a - b
-  oth:(term#term)list
-  CONS (x:num,t:term) env
-  t:term
-  x:num
-  env:(num#term)list
-  forall i. unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth)) =\n            unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) oth)
-  oth:(term#term)list
-  env:(num#term)list
-  istriv env x t = TT
-  t:term
-  x:num
-  env:(num#term)list
-  istriv env x t = Exception
-  x = y:num
-  eev:(num#term)list
-  s:term
-  y:num
-  env:(num#term)list
-  env:(num#term)list
-  MEM x (MAP FST (env:(num#term)list))
-  (a ==> (b <=> b')) ==> (a /\\ b /\\ c <=> a /\\ b' /\\ c)
-  i:num->term
-  forall i. unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (ASSOC x env,t) oth)) =\n            unifies i\n              (APPEND (MAP (\\(x,t). V x,t) env) (CONS (V x,t) oth))
-  CONS (ASSOC (x:num) env,t) (oth:(term#term)list)
-  env:(num#term)list
-  MEM x (MAP FST (env:(num#term)list))
-  gargs:term list
-  g:num
-  x:num
-  t:term
-  fargs:term list
-  f:num
-  x:num
-  s:term
-  oth:(term#term)list
-  t:term
-  s:term
-  eqs:(term#term)list
-  env':(num#term)list,eqs':(term#term)list
-  eqs':(term#term)list
-  env':(num#term)list
-  eqs:(term#term)list
-  env:(num#term)list
-  forall pr. LOOPFREE(FST pr) /\\ CONFLICTFREE(FST pr)\n        ==> ((unify pr = NONE)\n             ==> forall i. ~(unifies i (APPEND (MAP (\\(x,t). V x,t) (FST pr))\n                                         (SND pr)))) /\\\n            forall ans. (unify pr = SOME ans)\n                  ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n                      forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) (FST pr))\n                                            (SND pr)) =\n                          unifies i (MAP (\\(x,t). V x,t) ans)
-  THE(SOME x) = x
-  unifier env =\n     let sol = SOLVE [] env in ITLIST valmod sol V
-  MEM (x:num,t':term)
-  (a ==> ~c) /\\ (b <=> b') ==> a ==> (b <=> b' \\/ c)
-  SUC n <= 1 <=> (n = 0)
-  z = x:num
-  s:term
-  z:num
-  h:num#term
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  x:num
-  forall env x. CONFLICTFREE(env)\n           ==> forall t. (ITLIST valmod env V x = t) <=>\n                   MEM (x,t) env \\/ (t = V x) /\\ ~(MEM x (MAP FST env))
-  z:num
-  termsubst i t = t
-  t:term
-  x:num
-  i:num->term
-  i = ITLIST valmod sol V
-  env:(num#term)list
-  forall env. LOOPFREE(env) /\\ CONFLICTFREE(env)\n         ==> unifies (unifier env) (MAP (\\(x,t). V x,t) env)
-  y = z:num
-  s:term
-  z:num
-  h:num#term
-  h:num#term
-  env:(num#term)list
-  env:(num#term)list
-  unifies i (MAP (\\(x,t). V x,t) env)
-  y:num
-  s:term
-  forall env. LOOPFREE(env) /\\ CONFLICTFREE(env)\n         ==> forall i. unifies i (MAP (\\(x,t). V x,t) env)\n                 ==> (termsubst i =\n                      termsubst i o\n                      termsubst (ITLIST valmod env V))
-  forall i. unifies i (MAP (\\(x,t). V x,t) ans) =\n                    unifies i (MAP (\\(x,t). V x,t) sol)
-  z:num
-  LOOPFREE(sol)
-  sol:(num#term)list
-  ans:(num#term)list
-  ans:(num#term)list
-  ans:(num#term)list
-  env:(num#term)list,eqs:(term#term)list
-  forall env eqs.\n     LOOPFREE(env) /\\ CONFLICTFREE(env)\n     ==> ((unify (env,eqs) = NONE)\n          ==> forall i. ~(unifies i (APPEND (MAP (\\(x,t). V x,t) env) eqs))) /\\\n         ((unify (env,eqs) = SOME ans)\n          ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n              unifies (unifier ans) (APPEND (MAP (\\(x,t). V x,t) env) eqs) /\\\n              forall i. unifies i (APPEND (MAP (\\(x,t). V x,t) env) eqs)\n                  ==> (termsubst i = termsubst i o termsubst (unifier ans)))
-  []:(num#term)list
-  forall eqs. ((unify ([],eqs) = NONE) ==> forall i. ~(unifies i eqs)) /\\\n         ((unify ([],eqs) = SOME ans)\n          ==> LOOPFREE(ans) /\\ CONFLICTFREE(ans) /\\\n              unifies (unifier ans) eqs /\\\n              forall i. unifies i eqs\n                  ==> (termsubst i = termsubst i o termsubst (unifier ans)))
-  Unifies i s <=> forall p q. p IN s /\\ q IN s ==> (formsubst i p = formsubst i q)
-  Unifies i s <=> ?q. forall p. p IN s ==> (formsubst i p = q)
-  [Fn 0 [], Fn 1 []]
-  ?l. forall i. ~(unifies i l)
-  APPEND (l1:(term#term)list) l2
-  l2:(term#term)list
-  s:form
-  l1:(term#term)list
-  r:form
-  forall q. qfree q\n          ==> (?l. forall i. (formsubst i p = formsubst i q) <=> unifies i l)
-  s:form
-  r:form
-  fargs:term list
-  fargs:term list
-  gargs:term list
-  gargs:term list
-  LENGTH(fargs:term list) = LENGTH(gargs:term list)
-  i:num->term
-  ZIP (fargs:term list) (gargs:term list)
-  LENGTH(fargs:term list) = LENGTH(gargs:term list)
-  f:num = g
-  gargs:term list
-  g:num
-  []:(term#term)list
-  q:form
-  p:form
-  fargs:term list
-  f:num
-  forall p q. qfree(p) /\\ qfree(q)\n         ==> ?l. forall i. (formsubst i p = formsubst i q) <=> unifies i l
-  APPEND (l:(term#term)list) m
-  m:(term#term)list
-  q:form
-  p:form
-  l:(term#term)list
-  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-  B:(form#form)->bool
-  q:form
-  p:form
-  []:(term#term)list
-  B:(form#form)->bool
-  B:(form#form)->bool
-  FINITE(B:(form#form)->bool)
-  forall p q. (p,q) IN B ==> qfree p /\\ qfree q
-  forall i. Unifies i A =\n                    forall p q. (p,q) IN B ==> (formsubst i p = formsubst i q)
-  B = {(x:form,y) | x IN A /\\ y IN A}
-  forall A. FINITE A /\\ (forall p. p IN A ==> qfree p)\n       ==> ?l. forall i. Unifies i A = unifies i l
-  j:num->term
-  u:(num#term)list
-  u:(num#term)list
-  u:((num#term)list)option
-  unify ([],l)
-  l:(term#term)list
-  ans:(num#term)list
-  unifier(THE(unify([],l)))
-  i:num->term
-  l:(term#term)list
-  FINITE s /\\ (forall p. p IN s ==> qfree p)\n   ==> ((?i. Unifies i s) <=>\n        (?i. Unifies i s /\\\n             forall j. Unifies j s\n                 ==> forall p. qfree p\n                         ==> (formsubst j p = formsubst j (formsubst i p))))
-  mgu s = @i. Unifies i s /\\\n               forall j. Unifies j s\n                   ==> forall p. qfree p\n                           ==> (formsubst j p =\n                                formsubst j (formsubst i p))
-  forall s. FINITE s /\\ (forall p. p IN s ==> qfree p) /\\ (?i. Unifies i s)\n       ==> Unifies (mgu s) s /\\\n           forall i. Unifies i s\n               ==> forall p. qfree p\n                       ==> (formsubst i p =\n                            formsubst i (formsubst (mgu s) p))
-  Atom p [t]
-  t:term
-  (forall p. qfree(p) ==> (formsubst i p = formsubst j (formsubst k p))) <=>\n   (termsubst i = termsubst j o termsubst k)
-  ismgu s i <=> Unifies i s /\\\n                 forall j. Unifies j s\n                     ==> ?k. (termsubst j = termsubst k o termsubst i)
-  ismgu s i <=> Unifies i s /\\\n                 forall j. Unifies j s\n                     ==> ?k. forall p. qfree(p)\n                                 ==> (formsubst j p =\n                                      formsubst k (formsubst i p))
-  forall s. FINITE(s) /\\ (forall p. p IN s ==> qfree p) /\\ (?i. Unifies i s)\n       ==> ismgu s (mgu s)
-  renaming i <=> ?j. (termsubst j o termsubst i = I) /\\\n                      (termsubst i o termsubst j = I)
-  x2:num
-  x1:num
-  V x
-  x:num
-  j:num->term
-  renaming i ==> (forall x. ?y. i(x) = V y) /\\\n                  (forall x x'. (i(x') = i(x)) ==> (x' = x))
-  V x2
-  V x1
+  WF(CALLORDER)
+  (env1 : List[(Num, Term)])
+  (env1 : List[(Num, Term)])
+  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 !a \226\134\146 b \226\134\146 (c : Bool)
+  !MEM((x : Num), MAP(FST, (env1 : List[(Num, Term)])))
+  IN((x : Num), FVT(Fn(0, MAP(o(V, FST), (env1 : List[(Num, Term)])))))
+  FVT(Fn(0, CONS((t : Term), MAP(SND, (oth : List[(Term, Term)]))))) == UNION(FVT(t), FVT(Fn(0, MAP(SND, oth))))
+  FVT(Fn(0, CONS((t : Term), MAP(SND, (env1 : List[(Num, Term)]))))) == UNION(FVT(t), FVT(Fn(0, MAP(SND, env1))))
+  FVT(Fn(0, CONS(V((x : Num)), MAP(FST, (oth : List[(Term, Term)]))))) == INSERT(x, FVT(Fn(0, MAP(FST, oth))))
+  FVT(Fn(0, CONS(o(V, FST, ((x : Num), (t : Term))), MAP(o(V, FST), (env1 : List[(Num, Term)]))))) == INSERT(x, FVT(Fn(0, MAP(o(V, FST), env1))))
+  (a' : Num) == (a : Num) && (b' : Num) == (b : Num) + 1 && b' <= a' \226\134\146 a' - b' < a - b
+  istriv((env1 : List[(Num, Term)]), (x : Num), (t : Term)) == TT
+  istriv((env1 : List[(Num, Term)]), (x : Num), (t : Term)) == Exception
+  MEM((x : Num), MAP(FST, (env1 : List[(Num, Term)])))
+  (gargs : List[Term])
+  (g : Num)
+  (x : Num)
+  SND((hpr : (Term, Term)))
+  (t : Term) == SND((hpr : (Term, Term)))
+  (fargs : List[Term])
+  (f : Num)
+  (x : Num)
+  FST((hpr : (Term, Term)))
+  (hpr : (Term, Term))
+  (oth : List[(Term, Term)])
+  (hpr : (Term, Term))
+  (eqs1 : List[(Term, Term)])
+  LOOPFREE((env1 : List[(Num, Term)]))
+  ((env2 : List[(Num, Term)]), (eqs2 : List[(Term, Term)]))
+  (eqs2 : List[(Term, Term)])
+  (env2 : List[(Num, Term)])
+  (eqs1 : List[(Term, Term)])
+  (env1 : List[(Num, Term)])
+  (unify2 : ((List[(Num, Term)], List[(Term, Term)])) -> Option[List[(Num, Term)]])
+  (unify1 : ((List[(Num, Term)], List[(Term, Term)])) -> Option[List[(Num, Term)]])
+  \226\136\131 unify : ((List[(Num, Term)], List[(Term, Term)])) -> Option[List[(Num, Term)]], \226\136\128 pr : (List[(Num, Term)], List[(Term, Term)]), unify(pr) == (if !LOOPFREE(FST(pr)) { NONE } else { if SND(pr) == NIL { SOME(FST(pr)) } else { tpcases((f : Num) => (fargs : List[Term]) => (g : Num) => (gargs : List[Term]) => if f == g && LENGTH(fargs) == LENGTH(gargs) { unify((FST(pr), APPEND(ZIP(fargs, gargs), TL(SND(pr))))) } else { NONE }, (x : Num) => (t : Term) => if MEM(x, MAP(FST, FST(pr))) { unify((FST(pr), CONS((ASSOC(x, FST(pr)), t), TL(SND(pr))))) } else { if istriv(FST(pr), x, t) == Exception { NONE } else { if istriv(FST(pr), x, t) == TT { unify((FST(pr), TL(SND(pr)))) } else { unify((CONS((x, t), FST(pr)), TL(SND(pr)))) } } }, (f : Num) => (args : List[Term]) => (x : Num) => unify((FST(pr), CONS((V(x), Fn(f, args)), TL(SND(pr))))), HD(SND(pr))) } })
+  LOOPFREE((env : List[(Num, Term)])) \226\134\146 unify((env, CONS((Fn((f : Num), (fargs : List[Term])), Fn((g : Num), (gargs : List[Term]))), (oth : List[(Term, Term)])))) == (if f == g && LENGTH(fargs) == LENGTH(gargs) { unify((env, APPEND(ZIP(fargs, gargs), oth))) } else { NONE }) && unify((env, CONS((V((x : Num)), (t : Term)), oth))) == (if MEM(x, MAP(FST, env)) { unify((env, CONS((ASSOC(x, env), t), oth))) } else { if istriv(env, x, t) == Exception { NONE } else { if istriv(env, x, t) == TT { unify((env, oth)) } else { unify((CONS((x, t), env), oth)) } } }) && unify((env, CONS((Fn(f, fargs), V(x)), oth))) == unify((env, CONS((V(x), Fn(f, fargs)), oth)))
+  (unifies : ((Num) -> Term, List[(Term, Term)]) -> Bool)((i : (Num) -> Term), (l : List[(Term, Term)])) == ALL(GABS((f : ((Term, Term)) -> Bool) => \226\136\128 s : Term, \226\136\128 t : Term, GEQ(f((s, t)), termsubst(i, s) == termsubst(i, t))), l)
+  ((a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 !a)
+  \226\136\128 s : Term, \226\136\128 t : Term, TC(SUB1, s, t) \226\134\146 !(s == t)
+  MAP(termsubst((i : (Num) -> Term)), (args : List[Term]))
+  (f : Num)
+  ALL((t : Term) => \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, (i : (Num) -> Term)(y), termsubst(i, t)), (args : List[Term]))
+  termsubst((i : (Num) -> Term), (s : Term))
+  (s : Term)
+  (z : Num)
+  (args : List[Term])
+  (f : Num)
+  (t : Term)
+  (t : Term)
+  (y : Num)
+  (y : Num)
+  IN((y : Num), FVT((t : Term)))
+  ((x : Num), (t : Term))
+  (t : Term)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 i : (Num) -> Term, ALL(GABS((f : ((Num, Term)) -> Bool) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), i(x) == termsubst(i, t))), env) \226\134\146 (\226\136\128 x : Num, \226\136\128 y : Num, RTC(OCC(env), x, y) \226\134\146 RTC(SUB1, i(y), i(x)))
+  ALL((t : Term) => \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, V(y), t), (args : List[Term]))
+  (s : Term)
+  (s : Term)
+  (z : Num)
+  (args : List[Term])
+  (f : Num)
+  MAP(termsubst((i : (Num) -> Term)), (args : List[Term]))
+  (f : Num)
+  (args : List[Term])
+  (f : Num)
+  (u : Term)
+  (s : Term)
+  \226\136\128 s : Term, \226\136\128 t : Term, TC(SUB1, s, t) \226\134\146 TC(SUB1, termsubst((i : (Num) -> Term), s), termsubst(i, t))
+  \226\136\128 t : Term, \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, V(y), t)
+  \226\136\128 t : Term, \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 t == V(y) || TC(SUB1, (i : (Num) -> Term)(y), termsubst(i, t))
+  ((x : Num), (t : Term))
+  (t : Term)
+  (i : (Num) -> Term)((y : Num))
+  \226\136\128 env : List[(Num, Term)], \226\136\128 i : (Num) -> Term, ALL(GABS((f : ((Num, Term)) -> Bool) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), i(x) == termsubst(i, t))), env) \226\134\146 (\226\136\128 x : Num, \226\136\128 y : Num, RTC(OCC(env), x, y) \226\134\146 RTC(EQV(env), x, y) || TC(SUB1, i(y), i(x)))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  ALL(GABS((f : ((Num, Term)) -> Bool) => \226\136\128 p1 : Num, \226\136\128 p2 : Term, GEQ(f((p1, p2)), (i : (Num) -> Term)(p1) == termsubst(i, p2))), (env : List[(Num, Term)]))
+  (v : Num)
+  (u : Num)
+  \226\136\128 x : Num, \226\136\128 y : Num, RTC(EQV((env : List[(Num, Term)])), x, y) \226\134\146 (i : (Num) -> Term)(x) == i(y)
+  (x : Num)
+  (x : Num)
+  \226\136\131 y : Num, (t : Term) == V(y) && RTC(EQV((env : List[(Num, Term)])), y, (x : Num))
+  (((a : Bool) && (b : Bool)) == b) == (b \226\134\146 a)
+  (i : (Num) -> Term)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 t : Term, LOOPFREE(env) && CONFLICTFREE(env) && istriv(env, x, t) == TT \226\134\146 (\226\136\128 i : (Num) -> Term, unifies(i, CONS((V(x), t), MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env))) == unifies(i, MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env)))
+  ALL((t : Term) => \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, V(y), t), (args : List[Term]))
+  (s : Term)
+  (s : Term)
+  (z : Num)
+  (args : List[Term])
+  (f : Num)
+  MAP(termsubst((i : (Num) -> Term)), (args : List[Term]))
+  (f : Num)
+  (args : List[Term])
+  (f : Num)
+  (u : Term)
+  (s : Term)
+  \226\136\128 s : Term, \226\136\128 t : Term, RTC(SUB1, s, t) \226\134\146 RTC(SUB1, termsubst((i : (Num) -> Term), s), termsubst(i, t))
+  \226\136\128 t : Term, \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, V(y), t)
+  (x : Num)
+  (y : Num)
+  (i : (Num) -> Term)((y : Num))
+  ALL((t : Term) => \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, V(y), t), (args : List[Term]))
+  (s : Term)
+  (s : Term)
+  (z : Num)
+  (args : List[Term])
+  (f : Num)
+  MAP(termsubst((i : (Num) -> Term)), (args : List[Term]))
+  (f : Num)
+  (args : List[Term])
+  (f : Num)
+  (u : Term)
+  (s : Term)
+  \226\136\128 s : Term, \226\136\128 t : Term, TC(SUB1, s, t) \226\134\146 TC(SUB1, termsubst((i : (Num) -> Term), s), termsubst(i, t))
+  \226\136\128 t : Term, \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 RTC(SUB1, V(y), t)
+  \226\136\128 t : Term, \226\136\128 y : Num, IN(y, FVT(t)) \226\134\146 t == V(y) || TC(SUB1, (i : (Num) -> Term)(y), termsubst(i, t))
+  (i : (Num) -> Term)((y : Num))
+  RTC(EQV((env : List[(Num, Term)])), (y : Num), (x : Num))
+  (y : Num)
+  (y : Num)
+  \226\136\131 y : Num, IN(y, FVT((t : Term))) && RTC(OCC((env : List[(Num, Term)])), y, (x : Num))
+  ((b : Bool) \226\134\146 !(a : Bool)) \226\134\146 !(a && b)
+  (i : (Num) -> Term)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, \226\136\128 t : Term, LOOPFREE(env) && CONFLICTFREE(env) && istriv(env, x, t) == Exception \226\134\146 (\226\136\128 i : (Num) -> Term, !unifies(i, CONS((V(x), t), MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env))))
+  (fargs : List[Term])
+  (fargs : List[Term])
+  (gargs : List[Term])
+  (gargs : List[Term])
+  (i : (Num) -> Term)
+  \226\136\128 i : (Num) -> Term, unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), (env : List[(Num, Term)])), APPEND(ZIP((fargs : List[Term]), (gargs : List[Term])), (oth : List[(Term, Term)])))) == unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), CONS((Fn((g : Num), fargs), Fn(g, gargs)), oth)))
+  APPEND(ZIP((fargs : List[Term]), (gargs : List[Term])), (oth : List[(Term, Term)]))
+  (env : List[(Num, Term)])
+  CONS((V((x : Num)), Fn((f : Num), (fargs : List[Term]))), (oth : List[(Term, Term)]))
+  (env : List[(Num, Term)])
+  \226\136\128 i : (Num) -> Term, unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), CONS(((x : Num), (t : Term)), (env : List[(Num, Term)]))), (oth : List[(Term, Term)]))) == unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), CONS((V(x), t), oth)))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  !MEM((x : Num), MAP(FST, (env : List[(Num, Term)])))
+  (x : Num) == (y : Num)
+  (x : Num) == 0 \226\134\146 (y : Num) <= (z : Num) \226\134\146 SUC(x) <= 1
+  (x : Num) == (y : Num)
+  (y : Num)
+  CONFLICTFREE((env : List[(Num, Term)]))
+  (t : Term)
+  (x : Num)
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 !a \226\134\146 b \226\134\146 (c : Bool)
+  !MEM((x : Num), MAP(FST, (env : List[(Num, Term)])))
+  IN((x : Num), FVT(Fn(0, MAP(o(V, FST), (env : List[(Num, Term)])))))
+  FVT(Fn(0, CONS((t : Term), MAP(SND, (oth : List[(Term, Term)]))))) == UNION(FVT(t), FVT(Fn(0, MAP(SND, oth))))
+  FVT(Fn(0, CONS((t : Term), MAP(SND, (env : List[(Num, Term)]))))) == UNION(FVT(t), FVT(Fn(0, MAP(SND, env))))
+  FVT(Fn(0, CONS(V((x : Num)), MAP(FST, (oth : List[(Term, Term)]))))) == INSERT(x, FVT(Fn(0, MAP(FST, oth))))
+  FVT(Fn(0, CONS(o(V, FST, ((x : Num), (t : Term))), MAP(o(V, FST), (env : List[(Num, Term)]))))) == INSERT(x, FVT(Fn(0, MAP(o(V, FST), env))))
+  (a' : Num) == (a : Num) && (b' : Num) == (b : Num) + 1 && b' <= a' \226\134\146 a' - b' < a - b
+  (oth : List[(Term, Term)])
+  CONS(((x : Num), (t : Term)), (env : List[(Num, Term)]))
+  (t : Term)
+  (x : Num)
+  (env : List[(Num, Term)])
+  \226\136\128 i : (Num) -> Term, unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), (env : List[(Num, Term)])), CONS((V((x : Num)), (t : Term)), (oth : List[(Term, Term)])))) == unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), oth))
+  (oth : List[(Term, Term)])
+  (env : List[(Num, Term)])
+  istriv((env : List[(Num, Term)]), (x : Num), (t : Term)) == TT
+  (t : Term)
+  (x : Num)
+  (env : List[(Num, Term)])
+  istriv((env : List[(Num, Term)]), (x : Num), (t : Term)) == Exception
+  (x : Num) == (y : Num)
+  (eev : List[(Num, Term)])
+  (s : Term)
+  (y : Num)
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  MEM((x : Num), MAP(FST, (env : List[(Num, Term)])))
+  ((a : Bool) \226\134\146 (b : Bool) == (b' : Bool)) \226\134\146 (a && b && (c : Bool)) == (a && b' && c)
+  (i : (Num) -> Term)
+  \226\136\128 i : (Num) -> Term, unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), (env : List[(Num, Term)])), CONS((ASSOC((x : Num), env), (t : Term)), (oth : List[(Term, Term)])))) == unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), CONS((V(x), t), oth)))
+  CONS((ASSOC((x : Num), (env : List[(Num, Term)])), (t : Term)), (oth : List[(Term, Term)]))
+  (env : List[(Num, Term)])
+  MEM((x : Num), MAP(FST, (env : List[(Num, Term)])))
+  (gargs : List[Term])
+  (g : Num)
+  (x : Num)
+  (t : Term)
+  (fargs : List[Term])
+  (f : Num)
+  (x : Num)
+  (s : Term)
+  (oth : List[(Term, Term)])
+  (t : Term)
+  (s : Term)
+  (eqs : List[(Term, Term)])
+  ((env' : List[(Num, Term)]), (eqs' : List[(Term, Term)]))
+  (eqs' : List[(Term, Term)])
+  (env' : List[(Num, Term)])
+  (eqs : List[(Term, Term)])
+  (env : List[(Num, Term)])
+  \226\136\128 pr : (List[(Num, Term)], List[(Term, Term)]), LOOPFREE(FST(pr)) && CONFLICTFREE(FST(pr)) \226\134\146 (unify(pr) == NONE \226\134\146 (\226\136\128 i : (Num) -> Term, !unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), FST(pr)), SND(pr))))) && (\226\136\128 ans : List[(Num, Term)], unify(pr) == SOME(ans) \226\134\146 LOOPFREE(ans) && CONFLICTFREE(ans) && (\226\136\128 i : (Num) -> Term, unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), FST(pr)), SND(pr))) == unifies(i, MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), ans))))
+  (THE : (Option[_]) -> _)(SOME((x : _))) == x
+  (unifier : (List[(Num, Term)], Num) -> Term)((env : List[(Num, Term)])) == LET((sol : List[(Num, Term)]) => LET_END(ITLIST(valmod, sol, V)), SOLVE(NIL, env))
+  MEM(((x : Num), (t' : Term)))
+  ((a : Bool) \226\134\146 !(c : Bool)) && (b : Bool) == (b' : Bool) \226\134\146 a \226\134\146 b == (b' || c)
+  (SUC((n : Num)) <= 1) == (n == 0)
+  (z : Num) == (x : Num)
+  (s : Term)
+  (z : Num)
+  (h : (Num, Term))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  (x : Num)
+  \226\136\128 env : List[(Num, Term)], \226\136\128 x : Num, CONFLICTFREE(env) \226\134\146 (\226\136\128 t : Term, (ITLIST(valmod, env, V, x) == t) == (MEM((x, t), env) || t == V(x) && !MEM(x, MAP(FST, env))))
+  (z : Num)
+  termsubst((i : (Num) -> Term), (t : Term)) == t
+  (t : Term)
+  (x : Num)
+  (i : (Num) -> Term)
+  (i : (Num) -> Term) == ITLIST(valmod, (sol : List[(Num, Term)]), V)
+  (env : List[(Num, Term)])
+  \226\136\128 env : List[(Num, Term)], LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 unifies(unifier(env), MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env))
+  (y : Num) == (z : Num)
+  (s : Term)
+  (z : Num)
+  (h : (Num, Term))
+  (h : (Num, Term))
+  (env : List[(Num, Term)])
+  (env : List[(Num, Term)])
+  unifies((i : (Num) -> Term), MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), (env : List[(Num, Term)])))
+  (y : Num)
+  (s : Term)
+  \226\136\128 env : List[(Num, Term)], LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 (\226\136\128 i : (Num) -> Term, unifies(i, MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env)) \226\134\146 termsubst(i) == o(termsubst(i), termsubst(ITLIST(valmod, env, V))))
+  \226\136\128 i : (Num) -> Term, unifies(i, MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), (ans : List[(Num, Term)]))) == unifies(i, MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), (sol : List[(Num, Term)])))
+  (z : Num)
+  LOOPFREE((sol : List[(Num, Term)]))
+  (sol : List[(Num, Term)])
+  (ans : List[(Num, Term)])
+  (ans : List[(Num, Term)])
+  (ans : List[(Num, Term)])
+  ((env : List[(Num, Term)]), (eqs : List[(Term, Term)]))
+  \226\136\128 env : List[(Num, Term)], \226\136\128 eqs : List[(Term, Term)], LOOPFREE(env) && CONFLICTFREE(env) \226\134\146 (unify((env, eqs)) == NONE \226\134\146 (\226\136\128 i : (Num) -> Term, !unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), eqs)))) && (unify((env, eqs)) == SOME((ans : List[(Num, Term)])) \226\134\146 LOOPFREE(ans) && CONFLICTFREE(ans) && unifies(unifier(ans), APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), eqs)) && (\226\136\128 i : (Num) -> Term, unifies(i, APPEND(MAP(GABS((f : ((Num, Term)) -> (Term, Term)) => \226\136\128 x : Num, \226\136\128 t : Term, GEQ(f((x, t)), (V(x), t))), env), eqs)) \226\134\146 termsubst(i) == o(termsubst(i), termsubst(unifier(ans)))))
+  (NIL : List[(Num, Term)])
+  \226\136\128 eqs : List[(Term, Term)], (unify((NIL, eqs)) == NONE \226\134\146 (\226\136\128 i : (Num) -> Term, !unifies(i, eqs))) && (unify((NIL, eqs)) == SOME((ans : List[(Num, Term)])) \226\134\146 LOOPFREE(ans) && CONFLICTFREE(ans) && unifies(unifier(ans), eqs) && (\226\136\128 i : (Num) -> Term, unifies(i, eqs) \226\134\146 termsubst(i) == o(termsubst(i), termsubst(unifier(ans)))))
+  (Unifies : ((Num) -> Term, (Form) -> Bool) -> Bool)((i : (Num) -> Term), (s : (Form) -> Bool)) == (\226\136\128 p : Form, \226\136\128 q : Form, IN(p, s) && IN(q, s) \226\134\146 formsubst(i, p) == formsubst(i, q))
+  Unifies((i : (Num) -> Term), (s : (Form) -> Bool)) == (\226\136\131 q : Form, \226\136\128 p : Form, IN(p, s) \226\134\146 formsubst(i, p) == q)
+  [(Fn(0, NIL), Fn(1, NIL))]
+  \226\136\131 l : List[(Term, Term)], \226\136\128 i : (Num) -> Term, !unifies(i, l)
+  APPEND((l1 : List[(Term, Term)]), (l2 : List[(Term, Term)]))
+  (l2 : List[(Term, Term)])
+  (s : Form)
+  (l1 : List[(Term, Term)])
+  (r : Form)
+  \226\136\128 q : Form, qfree(q) \226\134\146 (\226\136\131 l : List[(Term, Term)], \226\136\128 i : (Num) -> Term, (formsubst(i, (p : Form)) == formsubst(i, q)) == unifies(i, l))
+  (s : Form)
+  (r : Form)
+  (fargs : List[Term])
+  (fargs : List[Term])
+  (gargs : List[Term])
+  (gargs : List[Term])
+  LENGTH((fargs : List[Term])) == LENGTH((gargs : List[Term]))
+  (i : (Num) -> Term)
+  ZIP((fargs : List[Term]), (gargs : List[Term]))
+  LENGTH((fargs : List[Term])) == LENGTH((gargs : List[Term]))
+  (f : Num) == (g : Num)
+  (gargs : List[Term])
+  (g : Num)
+  (NIL : List[(Term, Term)])
+  (q : Form)
+  (p : Form)
+  (fargs : List[Term])
+  (f : Num)
+  \226\136\128 p : Form, \226\136\128 q : Form, qfree(p) && qfree(q) \226\134\146 (\226\136\131 l : List[(Term, Term)], \226\136\128 i : (Num) -> Term, (formsubst(i, p) == formsubst(i, q)) == unifies(i, l))
+  APPEND((l : List[(Term, Term)]), (m : List[(Term, Term)]))
+  (m : List[(Term, Term)])
+  (q : Form)
+  (p : Form)
+  (l : List[(Term, Term)])
+  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+  (B : ((Form, Form)) -> Bool)
+  (q : Form)
+  (p : Form)
+  (NIL : List[(Term, Term)])
+  (B : ((Form, Form)) -> Bool)
+  (B : ((Form, Form)) -> Bool)
+  FINITE((B : ((Form, Form)) -> Bool))
+  \226\136\128 p : Form, \226\136\128 q : Form, IN((p, q), (B : ((Form, Form)) -> Bool)) \226\134\146 qfree(p) && qfree(q)
+  \226\136\128 i : (Num) -> Term, Unifies(i, (A : (Form) -> Bool)) == (\226\136\128 p : Form, \226\136\128 q : Form, IN((p, q), (B : ((Form, Form)) -> Bool)) \226\134\146 formsubst(i, p) == formsubst(i, q))
+  (B : ((Form, Form)) -> Bool) == {((x : Form), (y : Form)) | IN(x, (A : (Form) -> Bool)) && IN(y, A)}
+  \226\136\128 A : (Form) -> Bool, FINITE(A) && (\226\136\128 p : Form, IN(p, A) \226\134\146 qfree(p)) \226\134\146 (\226\136\131 l : List[(Term, Term)], \226\136\128 i : (Num) -> Term, Unifies(i, A) == unifies(i, l))
+  (j : (Num) -> Term)
+  (u : List[(Num, Term)])
+  (u : List[(Num, Term)])
+  (u : Option[List[(Num, Term)]])
+  unify((NIL, (l : List[(Term, Term)])))
+  (l : List[(Term, Term)])
+  (ans : List[(Num, Term)])
+  unifier(THE(unify((NIL, (l : List[(Term, Term)])))))
+  (i : (Num) -> Term)
+  (l : List[(Term, Term)])
+  FINITE((s : (Form) -> Bool)) && (\226\136\128 p : Form, IN(p, s) \226\134\146 qfree(p)) \226\134\146 (\226\136\131 i : (Num) -> Term, Unifies(i, s)) == (\226\136\131 i : (Num) -> Term, Unifies(i, s) && (\226\136\128 j : (Num) -> Term, Unifies(j, s) \226\134\146 (\226\136\128 p : Form, qfree(p) \226\134\146 formsubst(j, p) == formsubst(j, formsubst(i, p)))))
+  (mgu : ((Form) -> Bool, Num) -> Term)((s : (Form) -> Bool)) == select((i : (Num) -> Term) => Unifies(i, s) && (\226\136\128 j : (Num) -> Term, Unifies(j, s) \226\134\146 (\226\136\128 p : Form, qfree(p) \226\134\146 formsubst(j, p) == formsubst(j, formsubst(i, p)))))
+  \226\136\128 s : (Form) -> Bool, FINITE(s) && (\226\136\128 p : Form, IN(p, s) \226\134\146 qfree(p)) && (\226\136\131 i : (Num) -> Term, Unifies(i, s)) \226\134\146 Unifies(mgu(s), s) && (\226\136\128 i : (Num) -> Term, Unifies(i, s) \226\134\146 (\226\136\128 p : Form, qfree(p) \226\134\146 formsubst(i, p) == formsubst(i, formsubst(mgu(s), p))))
+  Atom((p : Num), [(t : Term)])
+  (t : Term)
+  (\226\136\128 p : Form, qfree(p) \226\134\146 formsubst((i : (Num) -> Term), p) == formsubst((j : (Num) -> Term), formsubst((k : (Num) -> Term), p))) == (termsubst(i) == o(termsubst(j), termsubst(k)))
+  (ismgu : ((Form) -> Bool, (Num) -> Term) -> Bool)((s : (Form) -> Bool), (i : (Num) -> Term)) == (Unifies(i, s) && (\226\136\128 j : (Num) -> Term, Unifies(j, s) \226\134\146 (\226\136\131 k : (Num) -> Term, termsubst(j) == o(termsubst(k), termsubst(i)))))
+  ismgu((s : (Form) -> Bool), (i : (Num) -> Term)) == (Unifies(i, s) && (\226\136\128 j : (Num) -> Term, Unifies(j, s) \226\134\146 (\226\136\131 k : (Num) -> Term, \226\136\128 p : Form, qfree(p) \226\134\146 formsubst(j, p) == formsubst(k, formsubst(i, p)))))
+  \226\136\128 s : (Form) -> Bool, FINITE(s) && (\226\136\128 p : Form, IN(p, s) \226\134\146 qfree(p)) && (\226\136\131 i : (Num) -> Term, Unifies(i, s)) \226\134\146 ismgu(s, mgu(s))
+  (renaming : ((Num) -> Term) -> Bool)((i : (Num) -> Term)) == (\226\136\131 j : (Num) -> Term, o(termsubst(j), termsubst(i)) == I && o(termsubst(i), termsubst(j)) == I)
+  (x2 : Num)
+  (x1 : Num)
+  V((x : Num))
+  (x : Num)
+  (j : (Num) -> Term)
+  renaming((i : (Num) -> Term)) \226\134\146 (\226\136\128 x : Num, \226\136\131 y : Num, i(x) == V(y)) && (\226\136\128 x : Num, \226\136\128 x' : Num, i(x') == i(x) \226\134\146 x' == x)
+  V((x2 : Num))
+  V((x1 : Num))
 LEFT_AND_EX_THM =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\P:fun('?1,bool). (#forall:fun(fun(bool,bool),bool) (\Q:bool. (#forall:fun(fun(list('?1),bool),bool) (\l:list('?1). ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#EX:fun(fun('?1,bool),fun(list('?1),bool)) P:fun('?1,bool)) l:list('?1))) Q:bool)) ((#EX:fun(fun('?1,bool),fun(list('?1),bool)) (\x:'?1. ((#/\:fun(bool,fun(bool,bool)) (P:fun('?1,bool) x:'?1)) Q:bool))) l:list('?1)))))))))
 EX_ADHOC =  |- (#forall:fun(fun(list('?2),bool),bool) (\l:list('?2). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('?2,bool),bool) (\x:'?2. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun('?2,bool) x:'?2))) ((#=:fun(bool,fun(bool,bool)) (Q:fun('?2,bool) x:'?2)) (R:fun('?2,bool) x:'?2)))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#EX:fun(fun('?2,bool),fun(list('?2),bool)) P:fun('?2,bool)) l:list('?2)))) ((#=:fun(bool,fun(bool,bool)) ((#EX:fun(fun('?2,bool),fun(list('?2),bool)) Q:fun('?2,bool)) l:list('?2))) ((#EX:fun(fun('?2,bool),fun(list('?2),bool)) R:fun('?2,bool)) l:list('?2)))))))
 ALL_ADHOC =  |- (#forall:fun(fun(list('?3),bool),bool) (\l:list('?3). ((#==>:fun(bool,fun(bool,bool)) ((#ALL:fun(fun('?3,bool),fun(list('?3),bool)) (\x:'?3. ((#=:fun(bool,fun(bool,bool)) (f:fun('?3,bool) x:'?3)) (g:fun('?3,bool) x:'?3)))) l:list('?3))) ((#=:fun(bool,fun(bool,bool)) ((#EX:fun(fun('?3,bool),fun(list('?3),bool)) f:fun('?3,bool)) l:list('?3))) ((#EX:fun(fun('?3,bool),fun(list('?3),bool)) g:fun('?3,bool)) l:list('?3))))))
