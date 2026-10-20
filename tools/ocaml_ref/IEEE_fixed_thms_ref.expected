@@ -5524,596 +5524,596 @@ Generating HOL version of proof
 0..0..solved at 2
 0..0..solved at 2
 IEEE/fixed_thms quotations (590):
-  forall(fmt:fformat).\n  (dest_fformat fmt) = (FST (dest_fformat fmt),\n                        (FST (SND (dest_fformat fmt)),\n                         SND (SND (dest_fformat fmt))))
-  forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      1 < (FST (r,p,e)))
-  forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      EVEN (FST (r,p,e)))
-  forall(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      0 < (FST (SND (r,p,e))))
-  forall(fmt:fformat). is_valid_fformat (dest_fformat fmt)
-  forall(fmt:fformat). 1 < (fr fmt)
-  1 < x ==> 0 < x
-  forall(fmt:fformat). 0 < (fr fmt)
-  0 < x ==> ~(x = 0)
-  forall(fmt:fformat). ~(&(fr fmt) = &0)
-  forall(fmt:fformat). EVEN (fr fmt)
-  forall(fmt:fformat). 0 < (fp fmt)
-  1 <= n <=> 0 < n
-  &0 <= x:int - &1:int <=> &1 <= x
-  forall(fmt:fformat). &0 <= (&(fp fmt):int) - (&1:int)
-  forall(fmt:fformat). &(fr fmt) ipow (&(fp fmt) - &1) =\n      &((fr fmt) EXP ((fp fmt) - 1))
-  &0 < (x:real) ==> &0 <= x
-  forall(fmt:fformat) (e:int). &0 <= &(fr fmt) ipow e
-  forall(fmt:fformat) (e:int). &0 < &(fr fmt) ipow e
-  &0 < (x:real) ==> ~(x = &0)
-  forall(fmt:fformat) (e:int). ~(&(fr fmt) ipow e = &0)
-  forall(fmt:fformat) (u:int) (v:int).\n        &(fr fmt) ipow u * &(fr fmt) ipow v = &(fr fmt) ipow (u + v)
-  abs(-- x) = abs(x)
-  forall(fmt:fformat) (x:real). (x IN (fixed fmt)) <=> (-- x IN (fixed fmt))
-  fmt:fformat
-  (fe fmt)
-  &0 < (x:real) ==> &0 <= x
-  (x:int) - (y:int) + (z:int) - x + y = z
-  fmt:fformat
-  fmt:fformat
-  (fr fmt)
-  (x:num) <= x
-  (fr (fmt:fformat)) EXP ((fp fmt) - 1)
-  (finf fmt) IN (fixed fmt)
-  forall(fmt:fformat). ((finf fmt) IN (fixed fmt) /\\\n                            (-- (finf fmt)) IN (fixed fmt))
-  fmt:fformat
-  0:num
-  forall(fmt:fformat). &0 IN (fixed fmt)
-  (fe fmt) - &(fp fmt) + &1
-  fmt:fformat
-  &0 <= (x:real) ==> abs(x) = x
-  1:num
-  forall(fmt:fformat). (fulp fmt) IN (fixed fmt)
-  (z:real) <= abs(z)
-  abs(x)
-  -- (z:real) <= abs(z)
-  abs(x)
-  -- (x:real) <= y <=> -- y <= x
-  (x:real) * y <= z * y <=> y * x <= y * z
-  (fe fmt) = (&(fp fmt) - &1) + (fe fmt) - &(fp fmt) + &1
-  &f * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1) <=\n                       (finf fmt)
-  forall(fmt:fformat) (x:real). x IN (fixed fmt) ==> -- (finf fmt) <= x /\\\n          x <= (finf fmt)
-  ~(f = 0) ==> 0 < f
-  forall(fmt:fformat) (u:real) (f:num).\n          ~(u = &0) /\\ (is_frac(fmt) u f) ==> 0 < f
-  ~((u:real) = &0) <=> ~(abs(u) = &0)
-  f:num
-  ff(fmt) x
-  forall(fmt:fformat) (x:real). (x IN (fixed fmt)) ==>\n          (?(f:num). ff(fmt) x = f /\\ is_frac(fmt) x f)
-  fmt:fformat
-  &0 < (x:real) ==> ~(x = &0)
-  &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  forall(fmt:fformat) (x:real) (f1:num) (f2:num).\n          (is_frac(fmt) x f1) /\\ (is_frac(fmt) x f2) ==> f1 = f2
-  fmt:fformat
-  forall(fmt:fformat). &0 <= (fulp fmt)
-  fmt:fformat
-  forall(fmt:fformat). &0 < (fulp fmt)
-  (x:int) - y + z - x + y = z
-  fmt:fformat
-  &(fr fmt)
-  fmt:fformat
-  (fr fmt)
-  fmt:fformat
-  fmt:fformat
-  0 < n ==> 0 <= n - 1
-  fmt:fformat
-  (fr fmt)
-  1 = (fr fmt) EXP 0
-  x:real = &1 * x
-  &((fr fmt) EXP ((fp fmt) - 1)) *\n                      &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  forall(fmt:fformat). (fulp fmt) <= (finf fmt)
-  is_frac(fmt) x (ff(fmt) x)
-  forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) x <= (fr fmt) EXP ((fp fmt) - 1)
-  (e:int) - &1 + e2 - e + &1 = e2
-  fmt:fformat
-  &(fr fmt)
-  &0 < &(fr fmt) ipow (fe fmt - &(fp fmt) + &1)
-  fmt:fformat
-  (fr fmt)
-  &(ff fmt x) * &(fr fmt) ipow (fe fmt - &(fp fmt) + &1) < (finf fmt)
-  is_frac(fmt) x (ff(fmt) x)
-  forall(fmt:fformat) (x:real). is_fixed(fmt) x /\\ abs(x) < (finf fmt) ==>\n          ff(fmt) x < (fr fmt) EXP ((fp fmt) - 1)
-  &0 <= (x:real) ==> x = abs(x)
-  (finf fmt) = abs((finf fmt))
-  (e:int) - &1 + e2 - e + &1 = e2
-  fmt:fformat
-  &(fr fmt)
-  &(fr fmt) ipow (fe fmt - &(fp fmt) + &1)
-  fmt:fformat
-  (fr fmt)
-  is_frac(fmt) (finf fmt) (ff(fmt) (finf fmt))
-  forall(fmt:fformat). ff(fmt) (finf fmt) = (fr fmt) EXP ((fp fmt) - 1)
-  x:real
-  fmt:fformat
-  abs(--x) = abs(x)
-  is_frac(fmt) x (ff(fmt) (-- x))
-  is_frac(fmt) x (ff(fmt) x)
-  forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          ff(fmt) (-- x) = ff(fmt) x
-  is_frac(fmt) x (ff(fmt) x)
-  forall(fmt:fformat) (x:real). is_fixed(fmt) x ==>\n          abs(x) = &(ff(fmt) x) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  &0 * (x:real) = abs(&0)
-  &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1) = &0
-  forall(b:bool). (~b) /\\ (a \\/ b) ==> a
-  is_frac(fmt) (&0) (ff(fmt) (&0))
-  fmt:fformat
-  forall(fmt:fformat). ff(fmt) (&0) = 0
-  fixed_corr (fmt:fformat) (n:num) =\n  (if (n = 0)\n   then\n     &0\n   else if (ODD n)\n   then\n     -- &((n + 1) DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)\n   else\n     &(n DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))
-  fixed_preimage (fmt:fformat) =\n  { n:num | 0 <= n /\\ n <= 2 * (fr fmt) EXP ((fp fmt) - 1) }
-  x = -- abs(x)
-  (2 * f - 1 + 1) DIV 2 = f
-  2 * f - 1
-  &0 <= x
-  (2 * z) DIV 2 = z
-  ODD(2 * f)
-  f = 0
-  2 * f
-  &0 <= x
-  forall(fmt:fformat) (x:real). x IN (fixed fmt) ==>\n          ?(n:num). n IN (fixed_preimage fmt) /\\ (fixed_corr fmt n) = x
-  &0 * x = &0
-  ~(&0 <= x)
-  ~(&0 <= x) ==> ~(x = &0)
-  fmt:fformat
-  (x:real) = y * z <=> --y * z = --x
-  ~ODD(2 * f - 1)
-  ~a /\\ a <=> F
-  {y | ?n. n IN fixed_preimage fmt /\\\n                           y = fixed_corr fmt n}
-  fmt:fformat
-  forall(fmt:fformat). (fixed fmt) SUBSET\n          {(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n               y = (fixed_corr fmt n)}
-  forall(fmt:fformat).\n                     FINITE({(y:real) | ?(n:num). n IN (fixed_preimage fmt) /\\\n                          y = (fixed_corr fmt n)})
-  forall(fmt:fformat). FINITE(fixed_preimage fmt)
-  forall(fmt:fformat). FINITE(fixed fmt)
-  (fp fmt) - 1 = 0
-  fmt:fformat
-  &0 * x = &0
-  0:num
-  (&0):real
-  forall(fmt:fformat). ~((fixed fmt) = {})
-  sup ({z | z IN (fixed fmt) /\\ z <= (x:real)})
-  --(finf fmt)
-  ~({z | z IN (fixed fmt) /\\ z <= x} = {})
-  a /\\ b ==> a
-  (fixed fmt)
-  FINITE({z | z IN (fixed fmt) /\\ z <= x})
-  forall(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (glb(fmt) x) = y /\\ (is_glb(fmt) x y)
-  inf ({z | z IN (fixed fmt) /\\ x <= (z:real)})
-  (finf fmt)
-  ~({z | z IN (fixed fmt) /\\ x <= z} = {})
-  a /\\ b ==> a
-  (fixed fmt)
-  FINITE({z | z IN (fixed fmt) /\\ x <= z})
-  forall(fmt:fformat) (x:real). abs(x) <= finf(fmt) ==>\n           ?(y:real). (lub(fmt) x) = y /\\ (is_lub(fmt) x y)
-  y2:real <= y1
-  y1:real <= y2
-  forall(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_glb(fmt) x y1 /\\ is_glb(fmt) x y2 ==>\n           y1 = y2
-  y2:real <= y1
-  y1:real <= y2
-  forall(fmt:fformat) (x:real) (y1:real) (y2:real).\n           abs(x) <= (finf fmt) /\\ is_lub(fmt) x y1 /\\ is_lub(fmt) x y2 ==>\n           y1 = y2
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (glb(fmt) x) IN (fixed fmt)
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (lub(fmt) x) IN (fixed fmt)
-  (&x:real) * y + y = (&x + &1) * y
-  forall(fmt:fformat) (u:real) (f:num).\n          &0 <= u /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              &(f + 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  &0 <= (x:real) ==> abs(x) = x
-  -- ((&x:real) * y) + y = -- (&x - &1) * y
-  forall(fmt:fformat) (u:real) (f:num).\n          u < &0 /\\ (is_frac(fmt) u f) ==>\n          u + (fulp fmt) =\n              -- &(f - 1) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  (x:real) < &0 ==> (abs(x) = z <=> x = -- z)
-  (u:real) < &0 ==> ~(u = &0)
-  0 < f ==> 1 <= f
-  (--  (a:real)) * b = -- (a * b)
-  --((a:real) * b) = (--a) * b
-  (x:real) * z - &1 * z = (x - &1) * z
-  (x:real) <= y + z <=> x - z <= y
-  ((x:real) + &1) * y = x * y + &1 * y
-  (fe fmt) - &(fp fmt) + &1
-  &(fr fmt)
-  ((a:num) = b) <=> (b = a)
-  (x:real) = (y:real) - &1 <=> x + &1 = y
-  (-- (a:real) * b) = -- (a * b)
-  u + (fulp fmt)
-  (v:real) <= &0
-  &0 <= (x:real) - &1 <=> &1 <= x
-  &0 <= (x:real) * y <=> &0 * y <= x * y
-  -- (x:real) <= &0 <=> &0 <= x
-  (-- (a:real)) * b = -- (a * b)
-  (u:real) + (fulp fmt) <= &0
-  ~(&0 <= (u:real))
-  (fe fmt) - &(fp fmt) + (&1:int)
-  &(fr fmt)
-  &0 <= (u:real) /\\ (is_frac(fmt) u f1)
-  &0 <= (u:real)
-  &0 <= (u:real)
-  forall(fmt:fformat) (u:real) (v:real).\n          (u IN (fixed fmt)) /\\ (v IN (fixed fmt)) /\\\n          (u <= v) /\\ (v <= u + (fulp fmt)) ==>\n          (v = u \\/ v = u + (fulp fmt))
-  f1:num
-  f2:num
-  &0 <= (x:real) ==> abs(x) = x
-  &0 <= (x:real) ==> abs(x) = x
-  ~(&0 <= (x:real)) ==> x < &0
-  ~(&0 <= (u:real)) ==> ~(u = &0)
-  fmt:fformat
-  0 < x ==> 1 <= x
-  (x:real) < &0 ==> (abs(x) = z <=> x = --z)
-  (x:real) <= &0 ==> (abs(x) = z <=> x = --z)
-  0 < x ==> 1 <= x
-  0 < n ==> 1 <= n
-  is_ub(fmt) x (y1 + (fulp fmt))
-  ~(y1 + (fulp fmt) <= x)
-  ~((z:real) <= y) ==> y <= z
-  fmt:fformat
-  x:real < x + y <=> &0 < y
-  y1 < (y1 + (fulp fmt))
-  is_lb(fmt) x (y1 + (fulp fmt))
-  y1 + (fulp fmt) <= x
-  (y1 + (fulp fmt)) <= x
-  -- (x:real) = a * b <=> x = (-- a) * b
-  (-- (a:real)) * b <= &0 <=> &0 <= a * b
-  x <= &0 /\\ -- x = y ==> abs(x) = y
-  f1 - 1
-  (y1 + (fulp fmt)) IN fixed(fmt)
-  x <= y ==> x - 1 <= y
-  f1 - 1 <= (fr fmt) EXP ((fp fmt) - 1)
-  y1:real
-  fmt:fformat
-  0 < f1
-  ~(&0 <= (y1:real))
-  ~(&0 <= y) <=> y < &0
-  --(finf fmt) <= x /\\ x <= (finf fmt) ==>\n              x <= (finf fmt)
-  &0 <= z /\\ (x:real) <= y ==> x <= y + z
-  --(finf fmt) <= x /\\ x <= (finf fmt) ==>\n              x <= (finf fmt)
-  (x:real) <= y <=> ~(y < x)
-  (x:real) = y <=> x <= y /\\ y <= x
-  y1 = (finf fmt)
-  is_ub(fmt) x (y1 + (fulp fmt))
-  ~(y1 + (fulp fmt) <= x)
-  ~((z:real) <= y) ==> y <= z
-  fmt:fformat
-  x:real < x + y <=> &0 < y
-  y1 < (y1 + (fulp fmt))
-  is_lb(fmt) x (y1 + (fulp fmt))
-  y1 + (fulp fmt) <= x
-  (y1 + (fulp fmt)) <= x
-  &0 <= x /\\ &0 <= y ==> &0 <= x + y
-  &0 <= x /\\ x = y ==> abs(x) = y
-  f1 + 1
-  (y1 + (fulp fmt)) IN fixed(fmt)
-  (a:real) * b = b * a
-  ((x:int) - y + &1) + y - &1 = x
-  fmt:fformat
-  &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  x < y ==> x + 1 <= y
-  f1 + 1 <= (fr fmt) EXP ((fp fmt) - 1)
-  y1 < (finf fmt)
-  &0 <= (y1:real)
-  &0 <= (y1:real)
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          glb(fmt) x <= lub(fmt) x /\\ lub(fmt) x <= glb(fmt) x + (fulp fmt)
-  fmt:fformat
-  y1:real
-  fmt:fformat
-  y2:real
-  f1:num
-  &0 <= (x:real) ==> abs(x) = x
-  f1:num
-  a /\\ b /\\ c /\\ d <=> (a /\\ b) /\\ (c /\\ d)
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          lub(fmt) x = glb(fmt) x \\/ lub(fmt) x = glb(fmt) x + (fulp fmt)
-  fmt:fformat
-  &0 <= (x:real) ==> abs(x) = x
-  ((x:real) + y) - x = y
-  fmt:fformat
-  abs((x:real) - x) = &0
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(lub(fmt) x - glb(fmt) x) <= (fulp fmt)
-  fmt:fformat
-  (-- a) * (b:real) <= &0 <=> &0 <= (a * b)
-  lub(fmt) x = glb(fmt) x + (fulp fmt)
-  lub(fmt) x <= &0
-  (a:real) * b = -- (-- a * b)
-  fmt:fformat
-  &0 < (x:real) ==> ~(x = &0)
-  &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  x:real
-  glb(fmt) x
-  forall x. &0 <= x /\\ x <= y ==> &0 <= (y:real)
-  &0 <= lub(fmt) x
-  fmt:fformat
-  &0 < (x:real) ==> ~(x = &0)
-  &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  &0 <= glb(fmt) x
-  fmt:fformat
-  &0 < (x:real) ==> ~(x = &0)
-  &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)
-  lub(fmt) x = glb(fmt) x
-  glb(fmt) x
-  fmt:fformat
-  (f2:num) = f
-  lub(fmt) x
-  fmt:fformat
-  (f1:num) = f'
-  forall(fmt:fformat) (x:real) (f1:num) (f2:num). abs(x) <= (finf fmt) ==>\n          ((is_frac(fmt) (lub(fmt) x) f1) /\\ (is_frac(fmt) (glb(fmt) x) f2) ==>\n          (f1 = f2 /\\ (lub(fmt) x = glb(fmt) x)) \\/ f1 = f2 + 1 \\/\n            f1 = f2 - 1)
-  fmt:fformat
-  &0 <= (glb fmt x)
-  x = y /\\ &0 <= x ==> &0 <= (y:real)
-  fmt:fformat
-  ~(&0 <= (glb fmt x))
-  x = y /\\ ~(&0 <= x) ==> (y:real) < &0
-  fmt:fformat
-  (x:real) = y \\/ x = z ==> x <= y \\/ z <= x
-  ~((s:real) < glb(fmt) x \\/ lub(fmt) x < s)
-  ~((x:real) < y \\/ z < x) <=> (y <= x /\\ x <= z)
-  lub(fmt) x = glb(fmt) x + (fulp fmt)
-  s < glb(fmt) x \\/ lub(fmt) x < s
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          (forall(s:real). s IN (fixed fmt) ==>\n             s <= glb(fmt) x \\/ lub(fmt) x <= s)
-  (s:real) IN (fixed fmt)
-  fmt:fformat
-  is_lb(fmt) x (&0)
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (glb(fmt) x)
-  x:real
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (glb(fmt) x) <= &0
-  x:real
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ &0 <= x ==>\n              &0 <= (lub(fmt) x)
-  is_ub(fmt) x (&0)
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ x <= &0 ==>\n              (lub(fmt) x) <= &0
-  abs(y - z) = z - (y:real)
-  abs(x - z) = z - (x:real)
-  x < (z:real)
-  forall(x:real) (y:real) (z:real). x < y /\\ y <= z ==>\n          closer y x z
-  abs(y - z) = z - (y:real)
-  abs(x - z) = z - (x:real)
-  x < (z:real)
-  forall(x:real) (y:real) (z:real). x <= y /\\ y < z ==>\n          closer y z x
-  forall(x:real) (y:real). closer y y x <=> F
-  forall(a:real) (x:real) (y:real). (closer x y a) ==> ~(closer y x a)
-  forall(a:real) (x:real) (y:real) (z:real).\n          (closer x y a) /\\ (closer y z a) ==> (closer x z a)
-  forall(a:real) (x:real) (y:real) (z:real).\n          ~(closer x y a) /\\ ~(closer y x a) /\\ (closer y z a) ==>\n          (closer x z a)
-  forall(a:real) (x:real) (y:real).\n          (closer x y a \\/ ~closer y x a) /\\ x <= a /\\ a <= y ==>\n          abs(x - a) <= abs(y - x) / &2
-  forall(a:real) (x:real) (y:real).\n          (closer y x a \\/ ~closer x y a) /\\ x <= a /\\ a <= y ==>\n              abs(y - a) <= abs(y - x) / &2
-  is_closest (fmt:fformat) (x:real) (y:real) =\n         (forall(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))
-  to_even (fmt:fformat) (x:real) (y:real) = (forall(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))
-  s = lub(fmt) x
-  y:real
-  s = glb(fmt) x
-  y':real
-  y':real
-  s = lub(fmt) x
-  s = glb(fmt) x
-  y:real
-  y:real
-  s = glb(fmt) x
-  y':real
-  y':real
-  s = lub(fmt) x
-  s < glb fmt x
-  y:real
-  lub(fmt) x = hi
-  glb(fmt) x = lo
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\ is_closest(fmt) x y
-  fmt:fformat
-  fmt:fformat
-  fmt:fformat
-  fmt:fformat
-  1 = SUC(0)
-  f':num = f - 1
-  f':num = f + 1
-  f':num = f + 1 \\/ f' = f - 1
-  y':real
-  ~(is_closest(fmt) x y2)
-  y2 = lub(fmt) x
-  y:real
-  y:real
-  y':real
-  ~(is_closest(fmt) x y2)
-  y2 = glb(fmt) x
-  y2 = glb(fmt) x
-  ~(y' = (y:real))
-  y':real
-  y:real
-  ~(y2 = lub(fmt) x)
-  y:real
-  y:real
-  y2 = glb(fmt) x
-  y':real
-  ~(is_closest(fmt) x y2)
-  y':real
-  y':real
-  y':real
-  y2 = lub(fmt) x
-  ~(y2 = glb(fmt) x)
-  y:real
-  ~(is_closest(fmt) x y2)
-  y:real
-  lub(fmt) x = hi
-  glb(fmt) x = lo
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_even(fmt) x y
-  fmt:fformat
-  a /\\ ~a <=> F
-  fmt:fformat
-  a /\\ ~a <=> F
-  fmt:fformat
-  fy:num
-  fmt:fformat
-  fmt:fformat
-  a /\\ ~a <=> F
-  y2 = lub(fmt) x
-  a /\\ ~a <=> F
-  a /\\ ~a <=> F
-  fmt:fformat
-  fy:num
-  fmt:fformat
-  fmt:fformat
-  y:real
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_near x = y /\\\n                     is_fixed(fmt) y /\\\n                     is_closest(fmt) x y /\\\n                     to_even(fmt) x y
-  to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       forall(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       forall(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')
-  ~(&0 <= (x:real)) ==> x <= &0
-  is_ub(fmt) x (&0)
-  y':real
-  is_lb(fmt) x (&0)
-  y:real
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_zero x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_zero(fmt) x y
-  to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ forall(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')
-  y':real
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_pinf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_pinf(fmt) x y
-  to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ forall(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)
-  y:real
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          ?(y:real). fround(fmt) To_ninf x = y /\\\n                     is_fixed(fmt) y /\\\n                     to_ninf(fmt) x y
-  forall(fmt:fformat) (x:real) (m:roundmode) (y:real).\n          fround(fmt) m x = y ==>\n             y = glb(fmt) x \\/ y = lub(fmt) x
-  forall(fmt:fformat) (x:real) (m:roundmode).\n          fround(fmt) m x = glb(fmt) x \\/ fround(fmt) m x = lub(fmt) x
-  m:roundmode
-  x:real
-  fmt:fformat
-  forall(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          &0 <= x ==>\n          &0 <= (fround(fmt) m x)
-  m:roundmode
-  x:real
-  fmt:fformat
-  forall(fmt:fformat) (x:real) (m:roundmode). abs(x) <= (finf fmt) /\\\n          x <= &0 ==>\n          (fround(fmt) m x) <= &0
-  m:roundmode
-  x:real
-  fmt:fformat
-  lub(fmt) x
-  forall(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ x <= y ==>\n          (fround(fmt) m x) <= y
-  m:roundmode
-  x:real
-  fmt:fformat
-  glb(fmt) x
-  forall(fmt:fformat) (x:real) (y:real) (m:roundmode).\n          abs(x) <= (finf fmt) /\\ is_fixed(fmt) y /\\ y <= x ==>\n          y <= (fround(fmt) m x)
-  abs(&0) = &0
-  (fround(fmt) m (&0)) <= &0
-  abs(&0) = &0
-  &0 <= (fround(fmt) m (&0))
-  forall(fmt:fformat) (m:roundmode). (fround(fmt) m (&0)) = &0
-  m:roundmode
-  x:real
-  fmt:fformat
-  forall(fmt:fformat) (x:real) (m:roundmode).\n          abs(x) <= (finf fmt) ==> is_fixed(fmt) (fround(fmt) m x)
-  fmt:fformat
-  &0 <= (x:real) ==> abs(x) = x
-  ((y:real) + x) - y = x
-  a ==> b <=> ~a \\/ b
-  y' = y + (fulp fmt)
-  abs(y' - y) / &2
-  (x:real) <= y /\\ ~(x = y) ==> x < y
-  x:real
-  forall(x:real). z1 <= x /\\ x < z2 ==> ~(z2 = z1)
-  ~(y' = (y:real))
-  fmt:fformat
-  &0 <= (x:real) ==> &0 <= x / &2
-  abs((y':real) - y') = &0
-  (x:real) = (y':real)
-  fmt:fformat
-  &0 <= (x:real) ==> abs(x) = x
-  ((y:real) + x) - y = x
-  a ==> b <=> ~a \\/ b
-  y' = y + (fulp fmt)
-  abs(y' - y) / &2
-  (y:real) <= x /\\ ~(x = y) ==> y < x
-  x:real
-  forall(x:real). z1 < x /\\ x <= z2 ==> ~(z2 = z1)
-  ~(y' = (y:real))
-  fmt:fformat
-  &0 <= (x:real) ==> &0 <= x / &2
-  abs((y:real) - y) = &0
-  (x:real) = (y:real)
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_near x - x) <= (fulp fmt) / &2
-  y'' = glb(fmt) x
-  ~(y' = (y:real))
-  y'' = lub(fmt) x
-  ~(y' = (y:real))
-  (z:real) <= a /\\ a <= w ==> abs(w - a) <= abs(w - z)
-  abs(y' - (y:real))
-  (z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)
-  abs(y' - (y:real))
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_zero x - x) <= fulp fmt
-  x:real
-  fmt:fformat
-  x:real
-  fmt:fformat
-  (z:real) <= a /\\ a <= w ==> abs(w - a) <= abs(w - z)
-  abs(y' - (y:real))
-  (z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)
-  abs(y' - (y:real))
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_pinf x - x) <= fulp fmt
-  x:real
-  fmt:fformat
-  x:real
-  fmt:fformat
-  (z:real) <= a /\\ a <= w ==> abs(w - a) <= abs(w - z)
-  abs(y' - (y:real))
-  (z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)
-  abs(y' - (y:real))
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) ==>\n          abs(fround(fmt) To_ninf x - x) <= fulp fmt
-  x:real
-  fmt:fformat
-  x:real
-  fmt:fformat
-  (x:real) - z < y <=> x < z + y
-  ((x:real) + y) - x = y
-  lub(fmt) x = glb(fmt) x + (fulp fmt)
-  &2 * (x - y) < y' - y <=> x - y < (y' - y) / &2
-  &2 * (x:real) - &2 * y = &2 * (x - y)
-  &2 * (x:real) - y < y' <=> &2 * x - &2 * y < y' - y
-  (x:real) - y < y' - x <=> &2 * x - y < y'
-  (closer (glb(fmt) x) (lub(fmt) x) x)
-  lub(fmt) x = glb(fmt) x
-  forall(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ x < glb(fmt) x + (fulp fmt) / &2 ==>\n          (fround(fmt) To_near x) = glb(fmt) x
-  (y:real) <= x ==> abs(y - x) = x - y
-  (y:real) <= x ==> abs(x - y) = x - y
-  (x:real) - z < y <=> x - y < z
-  ((x:real) + y) - x = y
-  lub(fmt) x = glb(fmt) x + (fulp fmt)
-  (y':real) - x < x - y <=> y' - x < (y' - y) / &2
-  (closer (lub(fmt) x) (glb(fmt) x) x)
-  lub(fmt) x = glb(fmt) x
-  forall(fmt:fformat) (x:real).\n          abs(x) <= (finf fmt) /\\ lub(fmt) x - (fulp fmt) / &2 < x ==>\n          (fround(fmt) To_near x) = lub(fmt) x
-  (y:real) <= x ==> abs(y - x) = x - y
-  (y:real) <= x ==> abs(x - y) = x - y
-  &0 - (x:real) = -- x
-  lub(fmt) x - (fulp fmt) / &2 < x
-  (-- (fulp fmt)) / &2
-  forall y. (x:real) < y /\\ y <= z ==> x < z
-  (x:real) < y ==> ~(y = x)
-  ~(y' = -- (fulp fmt))
-  -- (x:real) + x = &0
-  (y':real) <= -- (fulp fmt) + (fulp fmt)
-  -- (fulp fmt) IN (fixed fmt)
-  -- (fulp fmt) <= (y':real)
-  (y':real) <= &0
-  ~(&0 <= (x:real))
-  ~(&0 <= (x:real)) ==> x <= &0
-  is_lub(fmt) x (&0)
-  &0 <= (x:real)
-  &0 <= (x:real) ==> x = abs(x)
-  &0 + (x:real) = x
-  x < glb(fmt) x + (fulp fmt) / &2
-  (x:real) / &2 < x <=> &0 < x
-  (fulp fmt) / &2
-  forall y. (x:real) <= y /\\ y < z ==> x < z
-  &0 + x = (x:real)
-  (x:real) < y ==> ~(x = y)
-  ~(y' = &0 + (fulp fmt))
-  (y':real) <= &0 + (fulp fmt)
-  &0 <= (y':real)
-  is_glb(fmt) x (&0)
-  &0 <= (x:real)
-  fmt:fformat
-  fulp fmt
-  abs(x) <= (finf fmt)
-  forall(fmt:fformat) (x:real).\n          abs(x) < (fulp fmt) / &2 ==> (fround(fmt) To_near x) = &0
-  &0 <= (y':real)
-  fmt:fformat
-  &0 <= (x:real)
-  &0 <= (x:real) ==> abs(x) = x
-  fmt:fformat
-  ~(&0 <= (x:real))
-  ~(&0 <= (x:real)) ==>\n                                       (abs(x) < z <=> x > -- z)
-  ~(&0 <= (x:real))
-  ~(&0 <= (x:real)) ==>\n                                  (abs(x) < z <=> x > -- z)
-  (fulp fmt) / &2
-  (a:real) * abs(&1) = a
-  (a:real) * (b / c) = b * (a / c)
-  (x:real) * &1 = x
-  abs((x:real))
-  abs(-- x) = abs(x)
-  (&0 - x) / x = -- (x / x)
-  abs(x) < (fulp fmt) / &2
-  abs(x) < (fulp fmt) / &2
-  forall(fmt:fformat) (x:real). abs(x) <= (finf fmt) /\\ ~(x = &0) ==>\n          (rerror x (fround(fmt) To_near x)) <= &1
+  \226\136\128 fmt : Fformat, dest_fformat(fmt) == (FST(dest_fformat(fmt)), FST(SND(dest_fformat(fmt))), SND(SND(dest_fformat(fmt))))
+  \226\136\128 r : Num, \226\136\128 p : Num, \226\136\128 e : Int, is_valid_fformat((r, p, e)) \226\134\146 1 < FST((r, p, e))
+  \226\136\128 r : Num, \226\136\128 p : Num, \226\136\128 e : Int, is_valid_fformat((r, p, e)) \226\134\146 EVEN(FST((r, p, e)))
+  \226\136\128 r : Num, \226\136\128 p : Num, \226\136\128 e : Int, is_valid_fformat((r, p, e)) \226\134\146 0 < FST(SND((r, p, e)))
+  \226\136\128 fmt : Fformat, is_valid_fformat(dest_fformat(fmt))
+  \226\136\128 fmt : Fformat, 1 < fr(fmt)
+  1 < (x : Num) \226\134\146 0 < x
+  \226\136\128 fmt : Fformat, 0 < fr(fmt)
+  0 < (x : Num) \226\134\146 !(x == 0)
+  \226\136\128 fmt : Fformat, !(real_of_num(fr(fmt)) == real_of_num(0))
+  \226\136\128 fmt : Fformat, EVEN(fr(fmt))
+  \226\136\128 fmt : Fformat, 0 < fp(fmt)
+  (1 <= (n : Num)) == (0 < n)
+  (int_of_num(0) <= (x : Int) - int_of_num(1)) == (int_of_num(1) <= x)
+  \226\136\128 fmt : Fformat, int_of_num(0) <= int_of_num(fp(fmt)) - int_of_num(1)
+  \226\136\128 fmt : Fformat, ipow(real_of_num(fr(fmt)), int_of_num(fp(fmt)) - int_of_num(1)) == real_of_num(EXP(fr(fmt), fp(fmt) - 1))
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  \226\136\128 fmt : Fformat, \226\136\128 e : Int, real_of_num(0) <= ipow(real_of_num(fr(fmt)), e)
+  \226\136\128 fmt : Fformat, \226\136\128 e : Int, real_of_num(0) < ipow(real_of_num(fr(fmt)), e)
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  \226\136\128 fmt : Fformat, \226\136\128 e : Int, !(ipow(real_of_num(fr(fmt)), e) == real_of_num(0))
+  \226\136\128 fmt : Fformat, \226\136\128 u : Int, \226\136\128 v : Int, ipow(real_of_num(fr(fmt)), u) * ipow(real_of_num(fr(fmt)), v) == ipow(real_of_num(fr(fmt)), u + v)
+  abs(-(x : Real)) == abs(x)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, IN(x, fixed(fmt)) == IN(-x, fixed(fmt))
+  (fmt : Fformat)
+  fe((fmt : Fformat))
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  (x : Int) - (y : Int) + ((z : Int) - x + y) == z
+  (fmt : Fformat)
+  (fmt : Fformat)
+  fr((fmt : Fformat))
+  (x : Num) <= x
+  EXP(fr((fmt : Fformat)), fp(fmt) - 1)
+  IN(finf((fmt : Fformat)), fixed(fmt))
+  \226\136\128 fmt : Fformat, IN(finf(fmt), fixed(fmt)) && IN(-finf(fmt), fixed(fmt))
+  (fmt : Fformat)
+  0
+  \226\136\128 fmt : Fformat, IN(real_of_num(0), fixed(fmt))
+  fe((fmt : Fformat)) - int_of_num(fp(fmt)) + int_of_num(1)
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  1
+  \226\136\128 fmt : Fformat, IN(fulp(fmt), fixed(fmt))
+  (z : Real) <= abs(z)
+  abs((x : Real))
+  -(z : Real) <= abs(z)
+  abs((x : Real))
+  (-(x : Real) <= (y : Real)) == (-y <= x)
+  ((x : Real) * (y : Real) <= (z : Real) * y) == (y * x <= y * z)
+  fe((fmt : Fformat)) == int_of_num(fp(fmt)) - int_of_num(1) + (fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  real_of_num((f : Num)) * ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1)) <= finf(fmt)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, IN(x, fixed(fmt)) \226\134\146 -finf(fmt) <= x && x <= finf(fmt)
+  !((f : Num) == 0) \226\134\146 0 < f
+  \226\136\128 fmt : Fformat, \226\136\128 u : Real, \226\136\128 f : Num, !(u == real_of_num(0)) && is_frac(fmt, u, f) \226\134\146 0 < f
+  !((u : Real) == real_of_num(0)) == !(abs(u) == real_of_num(0))
+  (f : Num)
+  ff((fmt : Fformat), (x : Real))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, IN(x, fixed(fmt)) \226\134\146 (\226\136\131 f : Num, ff(fmt, x) == f && is_frac(fmt, x, f))
+  (fmt : Fformat)
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 f1 : Num, \226\136\128 f2 : Num, is_frac(fmt, x, f1) && is_frac(fmt, x, f2) \226\134\146 f1 == f2
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, real_of_num(0) <= fulp(fmt)
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, real_of_num(0) < fulp(fmt)
+  (x : Int) - (y : Int) + ((z : Int) - x + y) == z
+  (fmt : Fformat)
+  real_of_num(fr((fmt : Fformat)))
+  (fmt : Fformat)
+  fr((fmt : Fformat))
+  (fmt : Fformat)
+  (fmt : Fformat)
+  0 < (n : Num) \226\134\146 0 <= n - 1
+  (fmt : Fformat)
+  fr((fmt : Fformat))
+  1 == EXP(fr((fmt : Fformat)), 0)
+  (x : Real) == real_of_num(1) * x
+  real_of_num(EXP(fr((fmt : Fformat)), fp(fmt) - 1)) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  \226\136\128 fmt : Fformat, fulp(fmt) <= finf(fmt)
+  is_frac((fmt : Fformat), (x : Real), ff(fmt, x))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, is_fixed(fmt, x) \226\134\146 ff(fmt, x) <= EXP(fr(fmt), fp(fmt) - 1)
+  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+  (fmt : Fformat)
+  real_of_num(fr((fmt : Fformat)))
+  real_of_num(0) < ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  (fmt : Fformat)
+  fr((fmt : Fformat))
+  real_of_num(ff((fmt : Fformat), (x : Real))) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1)) < finf(fmt)
+  is_frac((fmt : Fformat), (x : Real), ff(fmt, x))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, is_fixed(fmt, x) && abs(x) < finf(fmt) \226\134\146 ff(fmt, x) < EXP(fr(fmt), fp(fmt) - 1)
+  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+  finf((fmt : Fformat)) == abs(finf(fmt))
+  (e : Int) - int_of_num(1) + ((e2 : Int) - e + int_of_num(1)) == e2
+  (fmt : Fformat)
+  real_of_num(fr((fmt : Fformat)))
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  (fmt : Fformat)
+  fr((fmt : Fformat))
+  is_frac((fmt : Fformat), finf(fmt), ff(fmt, finf(fmt)))
+  \226\136\128 fmt : Fformat, ff(fmt, finf(fmt)) == EXP(fr(fmt), fp(fmt) - 1)
+  (x : Real)
+  (fmt : Fformat)
+  abs(-(x : Real)) == abs(x)
+  is_frac((fmt : Fformat), (x : Real), ff(fmt, -x))
+  is_frac((fmt : Fformat), (x : Real), ff(fmt, x))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, is_fixed(fmt, x) \226\134\146 ff(fmt, -x) == ff(fmt, x)
+  is_frac((fmt : Fformat), (x : Real), ff(fmt, x))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, is_fixed(fmt, x) \226\134\146 abs(x) == real_of_num(ff(fmt, x)) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  real_of_num(0) * (x : Real) == abs(real_of_num(0))
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1)) == real_of_num(0)
+  \226\136\128 b : Bool, !b && ((a : Bool) || b) \226\134\146 a
+  is_frac((fmt : Fformat), real_of_num(0), ff(fmt, real_of_num(0)))
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, ff(fmt, real_of_num(0)) == 0
+  (fixed_corr : (Fformat, Num) -> Real)((fmt : Fformat), (n : Num)) == (if n == 0 { real_of_num(0) } else { if ODD(n) { -real_of_num(DIV(n + 1, 2)) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1)) } else { real_of_num(DIV(n, 2)) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1)) } })
+  (fixed_preimage : (Fformat, Num) -> Bool)((fmt : Fformat)) == {(n : Num) | 0 <= n && n <= 2 * EXP(fr(fmt), fp(fmt) - 1)}
+  (x : Real) == -abs(x)
+  DIV(2 * (f : Num) - 1 + 1, 2) == f
+  2 * (f : Num) - 1
+  real_of_num(0) <= (x : Real)
+  DIV(2 * (z : Num), 2) == z
+  ODD(2 * (f : Num))
+  (f : Num) == 0
+  2 * (f : Num)
+  real_of_num(0) <= (x : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, IN(x, fixed(fmt)) \226\134\146 (\226\136\131 n : Num, IN(n, fixed_preimage(fmt)) && fixed_corr(fmt, n) == x)
+  real_of_num(0) * (x : Real) == real_of_num(0)
+  !(real_of_num(0) <= (x : Real))
+  !(real_of_num(0) <= (x : Real)) \226\134\146 !(x == real_of_num(0))
+  (fmt : Fformat)
+  ((x : Real) == (y : Real) * (z : Real)) == (-y * z == -x)
+  !ODD(2 * (f : Num) - 1)
+  (!(a : Bool) && a) == false
+  {(y : Real) | \226\136\131 n : Num, IN(n, fixed_preimage((fmt : Fformat))) && y == fixed_corr(fmt, n)}
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, SUBSET(fixed(fmt), {(y : Real) | \226\136\131 n : Num, IN(n, fixed_preimage(fmt)) && y == fixed_corr(fmt, n)})
+  \226\136\128 fmt : Fformat, FINITE({(y : Real) | \226\136\131 n : Num, IN(n, fixed_preimage(fmt)) && y == fixed_corr(fmt, n)})
+  \226\136\128 fmt : Fformat, FINITE(fixed_preimage(fmt))
+  \226\136\128 fmt : Fformat, FINITE(fixed(fmt))
+  fp((fmt : Fformat)) - 1 == 0
+  (fmt : Fformat)
+  real_of_num(0) * (x : Real) == real_of_num(0)
+  0
+  real_of_num(0)
+  \226\136\128 fmt : Fformat, !(fixed(fmt) == {})
+  sup({(z : Real) | IN(z, fixed((fmt : Fformat))) && z <= (x : Real)})
+  -finf((fmt : Fformat))
+  !({(z : Real) | IN(z, fixed((fmt : Fformat))) && z <= (x : Real)} == {})
+  (a : Bool) && (b : Bool) \226\134\146 a
+  fixed((fmt : Fformat))
+  FINITE({(z : Real) | IN(z, fixed((fmt : Fformat))) && z <= (x : Real)})
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, glb(fmt, x) == y && is_glb(fmt, x, y))
+  inf({(z : Real) | IN(z, fixed((fmt : Fformat))) && (x : Real) <= z})
+  finf((fmt : Fformat))
+  !({(z : Real) | IN(z, fixed((fmt : Fformat))) && (x : Real) <= z} == {})
+  (a : Bool) && (b : Bool) \226\134\146 a
+  fixed((fmt : Fformat))
+  FINITE({(z : Real) | IN(z, fixed((fmt : Fformat))) && (x : Real) <= z})
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, lub(fmt, x) == y && is_lub(fmt, x, y))
+  (y2 : Real) <= (y1 : Real)
+  (y1 : Real) <= (y2 : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 y1 : Real, \226\136\128 y2 : Real, abs(x) <= finf(fmt) && is_glb(fmt, x, y1) && is_glb(fmt, x, y2) \226\134\146 y1 == y2
+  (y2 : Real) <= (y1 : Real)
+  (y1 : Real) <= (y2 : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 y1 : Real, \226\136\128 y2 : Real, abs(x) <= finf(fmt) && is_lub(fmt, x, y1) && is_lub(fmt, x, y2) \226\134\146 y1 == y2
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 IN(glb(fmt, x), fixed(fmt))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 IN(lub(fmt, x), fixed(fmt))
+  real_of_num((x : Num)) * (y : Real) + y == (real_of_num(x) + real_of_num(1)) * y
+  \226\136\128 fmt : Fformat, \226\136\128 u : Real, \226\136\128 f : Num, real_of_num(0) <= u && is_frac(fmt, u, f) \226\134\146 u + fulp(fmt) == real_of_num(f + 1) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  -(real_of_num((x : Num)) * (y : Real)) + y == -(real_of_num(x) - real_of_num(1)) * y
+  \226\136\128 fmt : Fformat, \226\136\128 u : Real, \226\136\128 f : Num, u < real_of_num(0) && is_frac(fmt, u, f) \226\134\146 u + fulp(fmt) == -real_of_num(f - 1) * ipow(real_of_num(fr(fmt)), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  (x : Real) < real_of_num(0) \226\134\146 (abs(x) == (z : Real)) == (x == -z)
+  (u : Real) < real_of_num(0) \226\134\146 !(u == real_of_num(0))
+  0 < (f : Num) \226\134\146 1 <= f
+  -(a : Real) * (b : Real) == -(a * b)
+  -((a : Real) * (b : Real)) == -a * b
+  (x : Real) * (z : Real) - real_of_num(1) * z == (x - real_of_num(1)) * z
+  ((x : Real) <= (y : Real) + (z : Real)) == (x - z <= y)
+  ((x : Real) + real_of_num(1)) * (y : Real) == x * y + real_of_num(1) * y
+  fe((fmt : Fformat)) - int_of_num(fp(fmt)) + int_of_num(1)
+  real_of_num(fr((fmt : Fformat)))
+  ((a : Num) == (b : Num)) == (b == a)
+  ((x : Real) == (y : Real) - real_of_num(1)) == (x + real_of_num(1) == y)
+  -(a : Real) * (b : Real) == -(a * b)
+  (u : Real) + fulp((fmt : Fformat))
+  (v : Real) <= real_of_num(0)
+  (real_of_num(0) <= (x : Real) - real_of_num(1)) == (real_of_num(1) <= x)
+  (real_of_num(0) <= (x : Real) * (y : Real)) == (real_of_num(0) * y <= x * y)
+  (-(x : Real) <= real_of_num(0)) == (real_of_num(0) <= x)
+  -(a : Real) * (b : Real) == -(a * b)
+  (u : Real) + fulp((fmt : Fformat)) <= real_of_num(0)
+  !(real_of_num(0) <= (u : Real))
+  fe((fmt : Fformat)) - int_of_num(fp(fmt)) + int_of_num(1)
+  real_of_num(fr((fmt : Fformat)))
+  real_of_num(0) <= (u : Real) && is_frac((fmt : Fformat), u, (f1 : Num))
+  real_of_num(0) <= (u : Real)
+  real_of_num(0) <= (u : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 u : Real, \226\136\128 v : Real, IN(u, fixed(fmt)) && IN(v, fixed(fmt)) && u <= v && v <= u + fulp(fmt) \226\134\146 v == u || v == u + fulp(fmt)
+  (f1 : Num)
+  (f2 : Num)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  !(real_of_num(0) <= (x : Real)) \226\134\146 x < real_of_num(0)
+  !(real_of_num(0) <= (u : Real)) \226\134\146 !(u == real_of_num(0))
+  (fmt : Fformat)
+  0 < (x : Num) \226\134\146 1 <= x
+  (x : Real) < real_of_num(0) \226\134\146 (abs(x) == (z : Real)) == (x == -z)
+  (x : Real) <= real_of_num(0) \226\134\146 (abs(x) == (z : Real)) == (x == -z)
+  0 < (x : Num) \226\134\146 1 <= x
+  0 < (n : Num) \226\134\146 1 <= n
+  is_ub((fmt : Fformat), (x : Real), (y1 : Real) + fulp(fmt))
+  !((y1 : Real) + fulp((fmt : Fformat)) <= (x : Real))
+  !((z : Real) <= (y : Real)) \226\134\146 y <= z
+  (fmt : Fformat)
+  ((x : Real) < x + (y : Real)) == (real_of_num(0) < y)
+  (y1 : Real) < y1 + fulp((fmt : Fformat))
+  is_lb((fmt : Fformat), (x : Real), (y1 : Real) + fulp(fmt))
+  (y1 : Real) + fulp((fmt : Fformat)) <= (x : Real)
+  (y1 : Real) + fulp((fmt : Fformat)) <= (x : Real)
+  (-(x : Real) == (a : Real) * (b : Real)) == (x == -a * b)
+  (-(a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= a * b)
+  (x : Real) <= real_of_num(0) && -x == (y : Real) \226\134\146 abs(x) == y
+  (f1 : Num) - 1
+  IN((y1 : Real) + fulp((fmt : Fformat)), fixed(fmt))
+  (x : Num) <= (y : Num) \226\134\146 x - 1 <= y
+  (f1 : Num) - 1 <= EXP(fr((fmt : Fformat)), fp(fmt) - 1)
+  (y1 : Real)
+  (fmt : Fformat)
+  0 < (f1 : Num)
+  !(real_of_num(0) <= (y1 : Real))
+  !(real_of_num(0) <= (y : Real)) == (y < real_of_num(0))
+  -finf((fmt : Fformat)) <= (x : Real) && x <= finf(fmt) \226\134\146 x <= finf(fmt)
+  real_of_num(0) <= (z : Real) && (x : Real) <= (y : Real) \226\134\146 x <= y + z
+  -finf((fmt : Fformat)) <= (x : Real) && x <= finf(fmt) \226\134\146 x <= finf(fmt)
+  ((x : Real) <= (y : Real)) == !(y < x)
+  ((x : Real) == (y : Real)) == (x <= y && y <= x)
+  (y1 : Real) == finf((fmt : Fformat))
+  is_ub((fmt : Fformat), (x : Real), (y1 : Real) + fulp(fmt))
+  !((y1 : Real) + fulp((fmt : Fformat)) <= (x : Real))
+  !((z : Real) <= (y : Real)) \226\134\146 y <= z
+  (fmt : Fformat)
+  ((x : Real) < x + (y : Real)) == (real_of_num(0) < y)
+  (y1 : Real) < y1 + fulp((fmt : Fformat))
+  is_lb((fmt : Fformat), (x : Real), (y1 : Real) + fulp(fmt))
+  (y1 : Real) + fulp((fmt : Fformat)) <= (x : Real)
+  (y1 : Real) + fulp((fmt : Fformat)) <= (x : Real)
+  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 real_of_num(0) <= x + y
+  real_of_num(0) <= (x : Real) && x == (y : Real) \226\134\146 abs(x) == y
+  (f1 : Num) + 1
+  IN((y1 : Real) + fulp((fmt : Fformat)), fixed(fmt))
+  (a : Real) * (b : Real) == b * a
+  (x : Int) - (y : Int) + int_of_num(1) + (y - int_of_num(1)) == x
+  (fmt : Fformat)
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  (x : Num) < (y : Num) \226\134\146 x + 1 <= y
+  (f1 : Num) + 1 <= EXP(fr((fmt : Fformat)), fp(fmt) - 1)
+  (y1 : Real) < finf((fmt : Fformat))
+  real_of_num(0) <= (y1 : Real)
+  real_of_num(0) <= (y1 : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 glb(fmt, x) <= lub(fmt, x) && lub(fmt, x) <= glb(fmt, x) + fulp(fmt)
+  (fmt : Fformat)
+  (y1 : Real)
+  (fmt : Fformat)
+  (y2 : Real)
+  (f1 : Num)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  (f1 : Num)
+  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == ((a && b) && c && d)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 lub(fmt, x) == glb(fmt, x) || lub(fmt, x) == glb(fmt, x) + fulp(fmt)
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  (x : Real) + (y : Real) - x == y
+  (fmt : Fformat)
+  abs((x : Real) - x) == real_of_num(0)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 abs(lub(fmt, x) - glb(fmt, x)) <= fulp(fmt)
+  (fmt : Fformat)
+  (-(a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= a * b)
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x) + fulp(fmt)
+  lub((fmt : Fformat), (x : Real)) <= real_of_num(0)
+  (a : Real) * (b : Real) == -(-a * b)
+  (fmt : Fformat)
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  (x : Real)
+  glb((fmt : Fformat), (x : Real))
+  \226\136\128 x : Real, real_of_num(0) <= x && x <= (y : Real) \226\134\146 real_of_num(0) <= y
+  real_of_num(0) <= lub((fmt : Fformat), (x : Real))
+  (fmt : Fformat)
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  real_of_num(0) <= glb((fmt : Fformat), (x : Real))
+  (fmt : Fformat)
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  ipow(real_of_num(fr((fmt : Fformat))), fe(fmt) - int_of_num(fp(fmt)) + int_of_num(1))
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x)
+  glb((fmt : Fformat), (x : Real))
+  (fmt : Fformat)
+  (f2 : Num) == (f : Num)
+  lub((fmt : Fformat), (x : Real))
+  (fmt : Fformat)
+  (f1 : Num) == (f' : Num)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 f1 : Num, \226\136\128 f2 : Num, abs(x) <= finf(fmt) \226\134\146 is_frac(fmt, lub(fmt, x), f1) && is_frac(fmt, glb(fmt, x), f2) \226\134\146 f1 == f2 && lub(fmt, x) == glb(fmt, x) || f1 == f2 + 1 || f1 == f2 - 1
+  (fmt : Fformat)
+  real_of_num(0) <= glb((fmt : Fformat), (x : Real))
+  (x : Real) == (y : Real) && real_of_num(0) <= x \226\134\146 real_of_num(0) <= y
+  (fmt : Fformat)
+  !(real_of_num(0) <= glb((fmt : Fformat), (x : Real)))
+  (x : Real) == (y : Real) && !(real_of_num(0) <= x) \226\134\146 y < real_of_num(0)
+  (fmt : Fformat)
+  (x : Real) == (y : Real) || x == (z : Real) \226\134\146 x <= y || z <= x
+  !((s : Real) < glb((fmt : Fformat), (x : Real)) || lub(fmt, x) < s)
+  !((x : Real) < (y : Real) || (z : Real) < x) == (y <= x && x <= z)
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x) + fulp(fmt)
+  (s : Real) < glb((fmt : Fformat), (x : Real)) || lub(fmt, x) < s
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\128 s : Real, IN(s, fixed(fmt)) \226\134\146 s <= glb(fmt, x) || lub(fmt, x) <= s)
+  IN((s : Real), fixed((fmt : Fformat)))
+  (fmt : Fformat)
+  is_lb((fmt : Fformat), (x : Real), real_of_num(0))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && real_of_num(0) <= x \226\134\146 real_of_num(0) <= glb(fmt, x)
+  (x : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && x <= real_of_num(0) \226\134\146 glb(fmt, x) <= real_of_num(0)
+  (x : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && real_of_num(0) <= x \226\134\146 real_of_num(0) <= lub(fmt, x)
+  is_ub((fmt : Fformat), (x : Real), real_of_num(0))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && x <= real_of_num(0) \226\134\146 lub(fmt, x) <= real_of_num(0)
+  abs((y : Real) - (z : Real)) == z - y
+  abs((x : Real) - (z : Real)) == z - x
+  (x : Real) < (z : Real)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x < y && y <= z \226\134\146 closer(y, x, z)
+  abs((y : Real) - (z : Real)) == z - y
+  abs((x : Real) - (z : Real)) == z - x
+  (x : Real) < (z : Real)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, x <= y && y < z \226\134\146 closer(y, z, x)
+  \226\136\128 x : Real, \226\136\128 y : Real, closer(y, y, x) == false
+  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, closer(x, y, a) \226\134\146 !closer(y, x, a)
+  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, closer(x, y, a) && closer(y, z, a) \226\134\146 closer(x, z, a)
+  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, !closer(x, y, a) && !closer(y, x, a) && closer(y, z, a) \226\134\146 closer(x, z, a)
+  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, (closer(x, y, a) || !closer(y, x, a)) && x <= a && a <= y \226\134\146 abs(x - a) <= abs(y - x) / real_of_num(2)
+  \226\136\128 a : Real, \226\136\128 x : Real, \226\136\128 y : Real, (closer(y, x, a) || !closer(x, y, a)) && x <= a && a <= y \226\134\146 abs(y - a) <= abs(y - x) / real_of_num(2)
+  (is_closest : (Fformat, Real, Real) -> Bool)((fmt : Fformat), (x : Real), (y : Real)) == (\226\136\128 s : Real, IN(s, fixed(fmt)) && !(s == y) \226\134\146 closer(y, s, x) || !closer(s, y, x))
+  (to_even : (Fformat, Real, Real) -> Bool)((fmt : Fformat), (x : Real), (y : Real)) == (\226\136\128 y2 : Real, \226\136\128 f : Num, IN(y2, fixed(fmt)) && is_closest(fmt, x, y) && is_closest(fmt, x, y2) && !(y2 == y) && is_frac(fmt, y, f) \226\134\146 EVEN(f))
+  (s : Real) == lub((fmt : Fformat), (x : Real))
+  (y : Real)
+  (s : Real) == glb((fmt : Fformat), (x : Real))
+  (y' : Real)
+  (y' : Real)
+  (s : Real) == lub((fmt : Fformat), (x : Real))
+  (s : Real) == glb((fmt : Fformat), (x : Real))
+  (y : Real)
+  (y : Real)
+  (s : Real) == glb((fmt : Fformat), (x : Real))
+  (y' : Real)
+  (y' : Real)
+  (s : Real) == lub((fmt : Fformat), (x : Real))
+  (s : Real) < glb((fmt : Fformat), (x : Real))
+  (y : Real)
+  lub((fmt : Fformat), (x : Real)) == (hi : Real)
+  glb((fmt : Fformat), (x : Real)) == (lo : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, fround(fmt, To_near, x) == y && is_fixed(fmt, y) && is_closest(fmt, x, y))
+  (fmt : Fformat)
+  (fmt : Fformat)
+  (fmt : Fformat)
+  (fmt : Fformat)
+  1 == SUC(0)
+  (f' : Num) == (f : Num) - 1
+  (f' : Num) == (f : Num) + 1
+  (f' : Num) == (f : Num) + 1 || f' == f - 1
+  (y' : Real)
+  !is_closest((fmt : Fformat), (x : Real), (y2 : Real))
+  (y2 : Real) == lub((fmt : Fformat), (x : Real))
+  (y : Real)
+  (y : Real)
+  (y' : Real)
+  !is_closest((fmt : Fformat), (x : Real), (y2 : Real))
+  (y2 : Real) == glb((fmt : Fformat), (x : Real))
+  (y2 : Real) == glb((fmt : Fformat), (x : Real))
+  !((y' : Real) == (y : Real))
+  (y' : Real)
+  (y : Real)
+  !((y2 : Real) == lub((fmt : Fformat), (x : Real)))
+  (y : Real)
+  (y : Real)
+  (y2 : Real) == glb((fmt : Fformat), (x : Real))
+  (y' : Real)
+  !is_closest((fmt : Fformat), (x : Real), (y2 : Real))
+  (y' : Real)
+  (y' : Real)
+  (y' : Real)
+  (y2 : Real) == lub((fmt : Fformat), (x : Real))
+  !((y2 : Real) == glb((fmt : Fformat), (x : Real)))
+  (y : Real)
+  !is_closest((fmt : Fformat), (x : Real), (y2 : Real))
+  (y : Real)
+  lub((fmt : Fformat), (x : Real)) == (hi : Real)
+  glb((fmt : Fformat), (x : Real)) == (lo : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, fround(fmt, To_near, x) == y && is_fixed(fmt, y) && to_even(fmt, x, y))
+  (fmt : Fformat)
+  ((a : Bool) && !a) == false
+  (fmt : Fformat)
+  ((a : Bool) && !a) == false
+  (fmt : Fformat)
+  (fy : Num)
+  (fmt : Fformat)
+  (fmt : Fformat)
+  ((a : Bool) && !a) == false
+  (y2 : Real) == lub((fmt : Fformat), (x : Real))
+  ((a : Bool) && !a) == false
+  ((a : Bool) && !a) == false
+  (fmt : Fformat)
+  (fy : Num)
+  (fmt : Fformat)
+  (fmt : Fformat)
+  (y : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, fround(fmt, To_near, x) == y && is_fixed(fmt, y) && is_closest(fmt, x, y) && to_even(fmt, x, y))
+  (to_zero : (Fformat, Real, Real) -> Bool)((fmt : Fformat), (x : Real), (y : Real)) == (if real_of_num(0) <= x { real_of_num(0) <= y && y <= x && (\226\136\128 y' : Real, IN(y', fixed(fmt)) && y' <= x \226\134\146 y' <= y) } else { y <= real_of_num(0) && x <= y && (\226\136\128 y' : Real, IN(y', fixed(fmt)) && x <= y' \226\134\146 y <= y') })
+  !(real_of_num(0) <= (x : Real)) \226\134\146 x <= real_of_num(0)
+  is_ub((fmt : Fformat), (x : Real), real_of_num(0))
+  (y' : Real)
+  is_lb((fmt : Fformat), (x : Real), real_of_num(0))
+  (y : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, fround(fmt, To_zero, x) == y && is_fixed(fmt, y) && to_zero(fmt, x, y))
+  (to_pinf : (Fformat, Real, Real) -> Bool)((fmt : Fformat), (x : Real), (y : Real)) == (x <= y && (\226\136\128 y' : Real, IN(y', fixed(fmt)) && x <= y' \226\134\146 y <= y'))
+  (y' : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, fround(fmt, To_pinf, x) == y && is_fixed(fmt, y) && to_pinf(fmt, x, y))
+  (to_ninf : (Fformat, Real, Real) -> Bool)((fmt : Fformat), (x : Real), (y : Real)) == (y <= x && (\226\136\128 y' : Real, IN(y', fixed(fmt)) && y' <= x \226\134\146 y' <= y))
+  (y : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 (\226\136\131 y : Real, fround(fmt, To_ninf, x) == y && is_fixed(fmt, y) && to_ninf(fmt, x, y))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, \226\136\128 y : Real, fround(fmt, m, x) == y \226\134\146 y == glb(fmt, x) || y == lub(fmt, x)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, fround(fmt, m, x) == glb(fmt, x) || fround(fmt, m, x) == lub(fmt, x)
+  (m : Roundmode)
+  (x : Real)
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, abs(x) <= finf(fmt) && real_of_num(0) <= x \226\134\146 real_of_num(0) <= fround(fmt, m, x)
+  (m : Roundmode)
+  (x : Real)
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, abs(x) <= finf(fmt) && x <= real_of_num(0) \226\134\146 fround(fmt, m, x) <= real_of_num(0)
+  (m : Roundmode)
+  (x : Real)
+  (fmt : Fformat)
+  lub((fmt : Fformat), (x : Real))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 m : Roundmode, abs(x) <= finf(fmt) && is_fixed(fmt, y) && x <= y \226\134\146 fround(fmt, m, x) <= y
+  (m : Roundmode)
+  (x : Real)
+  (fmt : Fformat)
+  glb((fmt : Fformat), (x : Real))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 m : Roundmode, abs(x) <= finf(fmt) && is_fixed(fmt, y) && y <= x \226\134\146 y <= fround(fmt, m, x)
+  abs(real_of_num(0)) == real_of_num(0)
+  fround((fmt : Fformat), (m : Roundmode), real_of_num(0)) <= real_of_num(0)
+  abs(real_of_num(0)) == real_of_num(0)
+  real_of_num(0) <= fround((fmt : Fformat), (m : Roundmode), real_of_num(0))
+  \226\136\128 fmt : Fformat, \226\136\128 m : Roundmode, fround(fmt, m, real_of_num(0)) == real_of_num(0)
+  (m : Roundmode)
+  (x : Real)
+  (fmt : Fformat)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, \226\136\128 m : Roundmode, abs(x) <= finf(fmt) \226\134\146 is_fixed(fmt, fround(fmt, m, x))
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  (y : Real) + (x : Real) - y == x
+  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
+  (y' : Real) == (y : Real) + fulp((fmt : Fformat))
+  abs((y' : Real) - (y : Real)) / real_of_num(2)
+  (x : Real) <= (y : Real) && !(x == y) \226\134\146 x < y
+  (x : Real)
+  \226\136\128 x : Real, (z1 : Real) <= x && x < (z2 : Real) \226\134\146 !(z2 == z1)
+  !((y' : Real) == (y : Real))
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) <= x / real_of_num(2)
+  abs((y' : Real) - y') == real_of_num(0)
+  (x : Real) == (y' : Real)
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  (y : Real) + (x : Real) - y == x
+  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
+  (y' : Real) == (y : Real) + fulp((fmt : Fformat))
+  abs((y' : Real) - (y : Real)) / real_of_num(2)
+  (y : Real) <= (x : Real) && !(x == y) \226\134\146 y < x
+  (x : Real)
+  \226\136\128 x : Real, (z1 : Real) < x && x <= (z2 : Real) \226\134\146 !(z2 == z1)
+  !((y' : Real) == (y : Real))
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) <= x / real_of_num(2)
+  abs((y : Real) - y) == real_of_num(0)
+  (x : Real) == (y : Real)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 abs(fround(fmt, To_near, x) - x) <= fulp(fmt) / real_of_num(2)
+  (y'' : Real) == glb((fmt : Fformat), (x : Real))
+  !((y' : Real) == (y : Real))
+  (y'' : Real) == lub((fmt : Fformat), (x : Real))
+  !((y' : Real) == (y : Real))
+  (z : Real) <= (a : Real) && a <= (w : Real) \226\134\146 abs(w - a) <= abs(w - z)
+  abs((y' : Real) - (y : Real))
+  (z : Real) <= (a : Real) && a <= (w : Real) \226\134\146 abs(z - a) <= abs(w - z)
+  abs((y' : Real) - (y : Real))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 abs(fround(fmt, To_zero, x) - x) <= fulp(fmt)
+  (x : Real)
+  (fmt : Fformat)
+  (x : Real)
+  (fmt : Fformat)
+  (z : Real) <= (a : Real) && a <= (w : Real) \226\134\146 abs(w - a) <= abs(w - z)
+  abs((y' : Real) - (y : Real))
+  (z : Real) <= (a : Real) && a <= (w : Real) \226\134\146 abs(z - a) <= abs(w - z)
+  abs((y' : Real) - (y : Real))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 abs(fround(fmt, To_pinf, x) - x) <= fulp(fmt)
+  (x : Real)
+  (fmt : Fformat)
+  (x : Real)
+  (fmt : Fformat)
+  (z : Real) <= (a : Real) && a <= (w : Real) \226\134\146 abs(w - a) <= abs(w - z)
+  abs((y' : Real) - (y : Real))
+  (z : Real) <= (a : Real) && a <= (w : Real) \226\134\146 abs(z - a) <= abs(w - z)
+  abs((y' : Real) - (y : Real))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) \226\134\146 abs(fround(fmt, To_ninf, x) - x) <= fulp(fmt)
+  (x : Real)
+  (fmt : Fformat)
+  (x : Real)
+  (fmt : Fformat)
+  ((x : Real) - (z : Real) < (y : Real)) == (x < z + y)
+  (x : Real) + (y : Real) - x == y
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x) + fulp(fmt)
+  (real_of_num(2) * ((x : Real) - (y : Real)) < (y' : Real) - y) == (x - y < (y' - y) / real_of_num(2))
+  real_of_num(2) * (x : Real) - real_of_num(2) * (y : Real) == real_of_num(2) * (x - y)
+  (real_of_num(2) * (x : Real) - (y : Real) < (y' : Real)) == (real_of_num(2) * x - real_of_num(2) * y < y' - y)
+  ((x : Real) - (y : Real) < (y' : Real) - x) == (real_of_num(2) * x - y < y')
+  closer(glb((fmt : Fformat), (x : Real)), lub(fmt, x), x)
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && x < glb(fmt, x) + fulp(fmt) / real_of_num(2) \226\134\146 fround(fmt, To_near, x) == glb(fmt, x)
+  (y : Real) <= (x : Real) \226\134\146 abs(y - x) == x - y
+  (y : Real) <= (x : Real) \226\134\146 abs(x - y) == x - y
+  ((x : Real) - (z : Real) < (y : Real)) == (x - y < z)
+  (x : Real) + (y : Real) - x == y
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x) + fulp(fmt)
+  ((y' : Real) - (x : Real) < x - (y : Real)) == (y' - x < (y' - y) / real_of_num(2))
+  closer(lub((fmt : Fformat), (x : Real)), glb(fmt, x), x)
+  lub((fmt : Fformat), (x : Real)) == glb(fmt, x)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && lub(fmt, x) - fulp(fmt) / real_of_num(2) < x \226\134\146 fround(fmt, To_near, x) == lub(fmt, x)
+  (y : Real) <= (x : Real) \226\134\146 abs(y - x) == x - y
+  (y : Real) <= (x : Real) \226\134\146 abs(x - y) == x - y
+  real_of_num(0) - (x : Real) == -x
+  lub((fmt : Fformat), (x : Real)) - fulp(fmt) / real_of_num(2) < x
+  -fulp((fmt : Fformat)) / real_of_num(2)
+  \226\136\128 y : Real, (x : Real) < y && y <= (z : Real) \226\134\146 x < z
+  (x : Real) < (y : Real) \226\134\146 !(y == x)
+  !((y' : Real) == -fulp((fmt : Fformat)))
+  -(x : Real) + x == real_of_num(0)
+  (y' : Real) <= -fulp((fmt : Fformat)) + fulp(fmt)
+  IN(-fulp((fmt : Fformat)), fixed(fmt))
+  -fulp((fmt : Fformat)) <= (y' : Real)
+  (y' : Real) <= real_of_num(0)
+  !(real_of_num(0) <= (x : Real))
+  !(real_of_num(0) <= (x : Real)) \226\134\146 x <= real_of_num(0)
+  is_lub((fmt : Fformat), (x : Real), real_of_num(0))
+  real_of_num(0) <= (x : Real)
+  real_of_num(0) <= (x : Real) \226\134\146 x == abs(x)
+  real_of_num(0) + (x : Real) == x
+  (x : Real) < glb((fmt : Fformat), x) + fulp(fmt) / real_of_num(2)
+  ((x : Real) / real_of_num(2) < x) == (real_of_num(0) < x)
+  fulp((fmt : Fformat)) / real_of_num(2)
+  \226\136\128 y : Real, (x : Real) <= y && y < (z : Real) \226\134\146 x < z
+  real_of_num(0) + (x : Real) == x
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((y' : Real) == real_of_num(0) + fulp((fmt : Fformat)))
+  (y' : Real) <= real_of_num(0) + fulp((fmt : Fformat))
+  real_of_num(0) <= (y' : Real)
+  is_glb((fmt : Fformat), (x : Real), real_of_num(0))
+  real_of_num(0) <= (x : Real)
+  (fmt : Fformat)
+  fulp((fmt : Fformat))
+  abs((x : Real)) <= finf((fmt : Fformat))
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) < fulp(fmt) / real_of_num(2) \226\134\146 fround(fmt, To_near, x) == real_of_num(0)
+  real_of_num(0) <= (y' : Real)
+  (fmt : Fformat)
+  real_of_num(0) <= (x : Real)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  (fmt : Fformat)
+  !(real_of_num(0) <= (x : Real))
+  !(real_of_num(0) <= (x : Real)) \226\134\146 (abs(x) < (z : Real)) == (x > -z)
+  !(real_of_num(0) <= (x : Real))
+  !(real_of_num(0) <= (x : Real)) \226\134\146 (abs(x) < (z : Real)) == (x > -z)
+  fulp((fmt : Fformat)) / real_of_num(2)
+  (a : Real) * abs(real_of_num(1)) == a
+  (a : Real) * ((b : Real) / (c : Real)) == b * (a / c)
+  (x : Real) * real_of_num(1) == x
+  abs((x : Real))
+  abs(-(x : Real)) == abs(x)
+  (real_of_num(0) - (x : Real)) / x == -(x / x)
+  abs((x : Real)) < fulp((fmt : Fformat)) / real_of_num(2)
+  abs((x : Real)) < fulp((fmt : Fformat)) / real_of_num(2)
+  \226\136\128 fmt : Fformat, \226\136\128 x : Real, abs(x) <= finf(fmt) && !(x == real_of_num(0)) \226\134\146 rerror(x, fround(fmt, To_near, x)) <= real_of_num(1)
 FFORMAT_SPLIT =  |- (#forall:fun(fun(fformat,bool),bool) (\fmt:fformat. ((#=:fun(prod(num,prod(num,int)),fun(prod(num,prod(num,int)),bool)) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat)) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) (#FST:fun(prod(num,prod(num,int)),num) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat))) ((#,:fun(num,fun(int,prod(num,int))) (#FST:fun(prod(num,int),num) (#SND:fun(prod(num,prod(num,int)),prod(num,int)) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat)))) (#SND:fun(prod(num,int),int) (#SND:fun(prod(num,prod(num,int)),prod(num,int)) (#dest_fformat:fun(fformat,prod(num,prod(num,int))) fmt:fformat))))))))
 FFORMAT_VALID_IMP_RADIX_LT_1 =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_fformat:fun(prod(num,prod(num,int)),bool) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#FST:fun(prod(num,prod(num,int)),num) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))))))))))
 FFORMAT_VALID_IMP_RADIX_EVEN =  |- (#forall:fun(fun(num,bool),bool) (\r:num. (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(int,bool),bool) (\e:int. ((#==>:fun(bool,fun(bool,bool)) (#is_valid_fformat:fun(prod(num,prod(num,int)),bool) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))) (#EVEN:fun(num,bool) (#FST:fun(prod(num,prod(num,int)),num) ((#,:fun(num,fun(prod(num,int),prod(num,prod(num,int)))) r:num) ((#,:fun(num,fun(int,prod(num,int))) p:num) e:int)))))))))))
