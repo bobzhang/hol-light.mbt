@@ -79087,235 +79087,235 @@ Generating HOL version of proof
 Generating HOL version of proof
 0..0..1..2..solved at 6
 Examples/digit_serial_methods quotations (229):
-  (PSI:num->real#real->real) i (V,abs(Tl i))
-  &0 < x ==> abs x = x
-  1 <= i + 1
-  abs(x) <= a /\\ abs(y) <= b ==> abs(x + y) <= a + b
-  beta (i + 1) * abs(psi i (V:real,Tl i)) * abs(Tl i) + omega(i + 1)
-  abs(-- beta (i + 1)  * psi i (V:real,Tl i) * Tl i +\n        (beta (i + 1) * Tp i - DSF (i + 1) (beta (i + 1) * Tp i)))
-  &0 < beta (i + 1) /\\ &0 < B i
-  (PSI:num->real#real->real) i (V,abs(Tl i))
-  abs(x) <= a ==> abs(&1 + x) <= &1 + a
-  (p /\\ q ==> r) /\\ p /\\ q ==> p /\\ q /\\ r
-  forall i:num. &0 < B i
-  forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 <= V /\\\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1))\n\n        // Conclude loop invariant and bounds.\n        ==> (forall i. V = H i + Tl i / B i) /\\\n            (forall i. i >= 0 ==> abs(Tl i) <= tau i V) /\\\n            (forall i. i >= 0 ==> abs(Tp i) <= taup i V)
-  posynomial p <=>\n  ?c (n:num->real) k.\n        (forall i. 1 <= i /\\ i <= k ==> c i > &0 /\\ integer(n i)) /\\\n        (forall v. &0 < v ==> sum (1..k) (\\i. c i * v rpow (n i)) = p v)
+  (PSI : (Num, (Real, Real)) -> Real)((i : Num), ((V : Real), abs((Tl : (Num) -> Real)(i))))
+  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+  1 <= (i : Num) + 1
+  abs((x : Real)) <= (a : Real) && abs((y : Real)) <= (b : Real) \226\134\146 abs(x + y) <= a + b
+  (beta : (Num) -> Real)((i : Num) + 1) * (abs((psi : (Num, (Real, Real)) -> Real)(i, ((V : Real), (Tl : (Num) -> Real)(i)))) * abs(Tl(i))) + (omega : (Num) -> Real)(i + 1)
+  abs(-(beta : (Num) -> Real)((i : Num) + 1) * ((psi : (Num, (Real, Real)) -> Real)(i, ((V : Real), (Tl : (Num) -> Real)(i))) * Tl(i)) + (beta(i + 1) * (Tp : (Num) -> Real)(i) - (DSF : (Num, Real) -> Real)(i + 1, beta(i + 1) * Tp(i))))
+  real_of_num(0) < (beta : (Num) -> Real)((i : Num) + 1) && real_of_num(0) < (B : (Num) -> Real)(i)
+  (PSI : (Num, (Real, Real)) -> Real)((i : Num), ((V : Real), abs((Tl : (Num) -> Real)(i))))
+  abs((x : Real)) <= (a : Real) \226\134\146 abs(real_of_num(1) + x) <= real_of_num(1) + a
+  ((p : Bool) && (q : Bool) \226\134\146 (r : Bool)) && p && q \226\134\146 p && q && r
+  \226\136\128 i : Num, real_of_num(0) < (B : (Num) -> Real)(i)
+  \226\136\128 V : Real, \226\136\128 beta : (Num) -> Real, \226\136\128 omega : (Num) -> Real, \226\136\128 DSF : (Num, Real) -> Real, \226\136\128 B : (Num) -> Real, \226\136\128 H : (Num) -> Real, \226\136\128 v : (Num) -> Real, \226\136\128 Tl : (Num) -> Real, \226\136\128 Tp : (Num) -> Real, \226\136\128 PSI : (Num, (Real, Real)) -> Real, \226\136\128 psi : (Num, (Real, Real)) -> Real, \226\136\128 tau : (Num, Real) -> Real, \226\136\128 taup : (Num, Real) -> Real, real_of_num(0) <= V && (\226\136\128 i : Num, i >= 0 \226\134\146 beta(i) > real_of_num(0)) && (\226\136\128 i : Num, i >= 1 \226\134\146 (\226\136\128 x : Real, abs(x - DSF(i, x)) <= omega(i))) && (\226\136\128 i : Num, i >= 0 \226\134\146 abs(psi(i, (V, Tl(i)))) <= PSI(i, (V, abs(Tl(i))))) && (\226\136\128 i : Num, \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x <= y \226\134\146 PSI(i, (V, x)) <= PSI(i, (V, y))) && (\226\136\128 u : Real, tau(0, u) == u) && (\226\136\128 i : Num, \226\136\128 u : Real, tau(i + 1, u) == beta(i + 1) * (PSI(i, (u, tau(i, u))) * tau(i, u)) + omega(i + 1)) && (\226\136\128 i : Num, \226\136\128 u : Real, taup(i, u) == (real_of_num(1) + PSI(i, (u, tau(i, u)))) * tau(i, u)) && B(0) == real_of_num(1) && H(0) == real_of_num(0) && Tl(0) == V && (\226\136\128 i : Num, Tp(i) == (real_of_num(1) + psi(i, (V, Tl(i)))) * Tl(i)) && (\226\136\128 i : Num, v(i + 1) == DSF(i + 1, beta(i + 1) * Tp(i))) && (\226\136\128 i : Num, B(i + 1) == beta(i + 1) * B(i)) && (\226\136\128 i : Num, H(i + 1) == H(i) + v(i + 1) / B(i + 1)) && (\226\136\128 i : Num, Tl(i + 1) == beta(i + 1) * Tl(i) - v(i + 1)) \226\134\146 (\226\136\128 i : Num, V == H(i) + Tl(i) / B(i)) && (\226\136\128 i : Num, i >= 0 \226\134\146 abs(Tl(i)) <= tau(i, V)) && (\226\136\128 i : Num, i >= 0 \226\134\146 abs(Tp(i)) <= taup(i, V))
+  (posynomial : ((Real) -> Real) -> Bool)((p : (Real) -> Real)) == (\226\136\131 c : (Num) -> Real, \226\136\131 n : (Num) -> Real, \226\136\131 k : Num, (\226\136\128 i : Num, 1 <= i && i <= k \226\134\146 c(i) > real_of_num(0) && integer(n(i))) && (\226\136\128 v : Real, real_of_num(0) < v \226\134\146 sum(op_dot_dot(1, k), (i : Num) => c(i) * rpow(v, n(i))) == p(v)))
   0
-  (\\i. &0):num->real
-  (\\i. &1):num->real
-  posynomial (\\v. &0)
+  (i : Num) => real_of_num(0)
+  (i : Num) => real_of_num(1)
+  posynomial((v : Real) => real_of_num(0))
   1
-  (\\i. &0):num->real
-  (\\i. &1):num->real
-  posynomial (\\v. &1)
-  d:num->real
-  forall p c. posynomial p /\\ &0 < c ==> posynomial(\\v. c * p(v))
-  (\\i. c * d i):num->real
-  &0 <= c <=> c = &0 \\/ &0 < c
-  forall c. &0 <= c ==> posynomial (\\v. c)
-  (\\i. nn i + n):num->real
-  nn:num->real
-  k:num
-  c:num->real
-  forall p n. posynomial p /\\ integer n ==> posynomial(\\v. p(v) * v rpow n)
-  &1:real
-  p:real->real
-  forall p. posynomial p ==> posynomial(\\v. p(v) * v)
-  -- &1:real
-  p:real->real
-  forall p. posynomial p ==> posynomial(\\v. p(v) / v)
-  posynomial(\\v. v)
-  (1 <= i /\\ i <= m + n) /\\ ~(i <= m) <=>\n                  1 + m <= i /\\ i <= n + m
-  (1 <= i /\\ i <= m + n) /\\ i <= m <=> 1 <= i /\\ i <= m
-  (if p then f else g) (if p then x else y) =\n        if p then f x else g y
-  ~(i:num <= m) /\\ i <= m + n ==> 1 <= i - m /\\ i - m <= n
-  m + n:num
-  \\i. if i <= m then (n1:num->real) i else n2 (i - m)
-  \\i. if i <= m then (c1:num->real) i else c2 (i - m)
-  n:num
-  n2:num->real
-  c2:num->real
-  m:num
-  n1:num->real
-  c1:num->real
-  forall p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v + q v)
-  forall k:A->bool p.\n        FINITE k /\\ (forall i. i IN k ==> posynomial(\\v. p v i))\n        ==> posynomial (\\v. sum k (p v))
-  (c * x) * (d * y):real = (c * d) * (x * y)
-  forall p q. posynomial p /\\ posynomial q ==> posynomial(\\v. p v * q v)
-  i:num
-  is_realinterval s /\\ f real_convex_on s\n    ==> (forall x. x IN s ==> f x = g x) ==> g real_convex_on s
-  &0 < v <=> v IN {x | &0 < x}
-  m:num
-  n:num->real
-  c:num->real
-  forall p. posynomial p ==> p real_convex_on {x | x > &0}
-  forall i:num. posynomial (taup i)
-  1 <= i + 1
-  forall i:num. posynomial (tau i)
+  (i : Num) => real_of_num(0)
+  (i : Num) => real_of_num(1)
+  posynomial((v : Real) => real_of_num(1))
+  (d : (Num) -> Real)
+  \226\136\128 p : (Real) -> Real, \226\136\128 c : Real, posynomial(p) && real_of_num(0) < c \226\134\146 posynomial((v : Real) => c * p(v))
+  (i : Num) => (c : Real) * (d : (Num) -> Real)(i)
+  (real_of_num(0) <= (c : Real)) == (c == real_of_num(0) || real_of_num(0) < c)
+  \226\136\128 c : Real, real_of_num(0) <= c \226\134\146 posynomial((v : Real) => c)
+  (i : Num) => (nn : (Num) -> Real)(i) + (n : Real)
+  (nn : (Num) -> Real)
+  (k : Num)
+  (c : (Num) -> Real)
+  \226\136\128 p : (Real) -> Real, \226\136\128 n : Real, posynomial(p) && integer(n) \226\134\146 posynomial((v : Real) => p(v) * rpow(v, n))
+  real_of_num(1)
+  (p : (Real) -> Real)
+  \226\136\128 p : (Real) -> Real, posynomial(p) \226\134\146 posynomial((v : Real) => p(v) * v)
+  -real_of_num(1)
+  (p : (Real) -> Real)
+  \226\136\128 p : (Real) -> Real, posynomial(p) \226\134\146 posynomial((v : Real) => p(v) / v)
+  posynomial((v : Real) => v)
+  ((1 <= (i : Num) && i <= (m : Num) + (n : Num)) && !(i <= m)) == (1 + m <= i && i <= n + m)
+  ((1 <= (i : Num) && i <= (m : Num) + (n : Num)) && i <= m) == (1 <= i && i <= m)
+  COND((p : Bool), (f : (_) -> _), (g : (_) -> _), if p { (x : _) } else { (y : _) }) == (if p { f(x) } else { g(y) })
+  !((i : Num) <= (m : Num)) && i <= m + (n : Num) \226\134\146 1 <= i - m && i - m <= n
+  (m : Num) + (n : Num)
+  (i : Num) => if i <= (m : Num) { (n1 : (Num) -> Real)(i) } else { (n2 : (Num) -> Real)(i - m) }
+  (i : Num) => if i <= (m : Num) { (c1 : (Num) -> Real)(i) } else { (c2 : (Num) -> Real)(i - m) }
+  (n : Num)
+  (n2 : (Num) -> Real)
+  (c2 : (Num) -> Real)
+  (m : Num)
+  (n1 : (Num) -> Real)
+  (c1 : (Num) -> Real)
+  \226\136\128 p : (Real) -> Real, \226\136\128 q : (Real) -> Real, posynomial(p) && posynomial(q) \226\134\146 posynomial((v : Real) => p(v) + q(v))
+  \226\136\128 k : (A) -> Bool, \226\136\128 p : (Real, A) -> Real, FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 posynomial((v : Real) => p(v, i))) \226\134\146 posynomial((v : Real) => sum(k, p(v)))
+  (c : Real) * (x : Real) * ((d : Real) * (y : Real)) == c * d * (x * y)
+  \226\136\128 p : (Real) -> Real, \226\136\128 q : (Real) -> Real, posynomial(p) && posynomial(q) \226\134\146 posynomial((v : Real) => p(v) * q(v))
+  (i : Num)
+  is_realinterval((s : (Real) -> Bool)) && real_convex_on((f : (Real) -> Real), s) \226\134\146 (\226\136\128 x : Real, IN(x, s) \226\134\146 f(x) == (g : (Real) -> Real)(x)) \226\134\146 real_convex_on(g, s)
+  (real_of_num(0) < (v : Real)) == IN(v, {(x : Real) | real_of_num(0) < x})
+  (m : Num)
+  (n : (Num) -> Real)
+  (c : (Num) -> Real)
+  \226\136\128 p : (Real) -> Real, posynomial(p) \226\134\146 real_convex_on(p, {(x : Real) | x > real_of_num(0)})
+  \226\136\128 i : Num, posynomial((taup : (Num, Real) -> Real)(i))
+  1 <= (i : Num) + 1
+  \226\136\128 i : Num, posynomial((tau : (Num, Real) -> Real)(i))
   forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Environmental assumptions including nondecreasing property\n        &0 < V /\\\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (forall i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude our bounds\n        ==> forall a b. real_interval[a,b] SUBSET {x | x > &0}\n                  ==> forall i u. u IN real_interval[a,b]\n                            ==> tau i u <= max (tau i a) (tau i b) /\\\n                                taup i u <= max (taup i a) (taup i b)
-  psi:num->real#real->real
-  PSI:num->real#real->real
-  Tp:num->real
-  Tl:num->real
-  v:num->real
-  H:num->real
-  B:num->real
-  DSF:num->real->real
-  omega:num->real
-  beta:num->real
-  V:real
-  psi:num->real#real->real
-  PSI:num->real#real->real
-  v:num->real
-  DSF:num->real->real
-  omega:num->real
-  beta:num->real
-  p /\\ q /\\ r /\\ s <=> (p /\\ q /\\ r) /\\ s
+  (psi : (Num, (Real, Real)) -> Real)
+  (PSI : (Num, (Real, Real)) -> Real)
+  (Tp : (Num) -> Real)
+  (Tl : (Num) -> Real)
+  (v : (Num) -> Real)
+  (H : (Num) -> Real)
+  (B : (Num) -> Real)
+  (DSF : (Num, Real) -> Real)
+  (omega : (Num) -> Real)
+  (beta : (Num) -> Real)
+  (V : Real)
+  (psi : (Num, (Real, Real)) -> Real)
+  (PSI : (Num, (Real, Real)) -> Real)
+  (v : (Num) -> Real)
+  (DSF : (Num, Real) -> Real)
+  (omega : (Num) -> Real)
+  (beta : (Num) -> Real)
+  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == ((p && q && r) && s)
   forall(V:real) (beta:num->real) (omega:num->real) (DSF:num->real->real)\n    (B:num->real) (H:num->real) (v:num->real) (Tl:num->real) (Tp:num->real)\n    (PSI:num->real#real->real) (psi:num->real#real->real)\n    (tau:num->real->real) (taup:num->real->real).\n\n        // Not stated explicitly in the theorem itself but higher up.\n        &0 < V /\\\n\n        // Environmental assumptions including nondecreasing property\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        (forall i. i >= 0 ==> abs (psi i (V,Tl i)) <= PSI i (V,abs(Tl i))) /\\\n        (forall i x y. &0 <= x /\\ x <= y ==> PSI i (V,x) <= PSI i (V,y)) /\\\n\n        (forall u. tau 0 u = u) /\\\n        (forall i u. tau (i + 1) u =\n               beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1)) /\\\n        (forall i u. taup i u = (&1 + PSI i (u,tau i u)) * tau i u) /\\\n\n        // Computing recursively\n        B 0 = &1 /\\ H 0 = &0 /\\ Tl 0 = V /\\\n\n        (forall i. Tp i = (&1 + psi i (V,Tl i)) * Tl i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. Tl (i + 1) = beta (i + 1) * Tl i - v (i + 1)) /\\\n\n        // The extra posynomial-related assumption\n        (forall i p. i >= 0 /\\ posynomial p\n               ==> posynomial (\\v. PSI i (v,p v)))\n\n        // Hence conclude invariant and all bounds.\n        ==> (forall i. V = H i + Tl i / B i) /\\\n            (forall i. abs(Tl i) <= tau i V) /\\\n            (forall i. abs(Tp i) <= taup i V) /\\\n            (forall a b. real_interval[a,b] SUBSET {x | x > &0}\n                   ==> forall i u. u IN real_interval[a,b]\n                             ==> tau i u <= max (tau i a) (tau i b) /\\\n                                 taup i u <= max (taup i a) (taup i b))
-  &1 / &4 <= X / Y /\\ X / Y <= &1 <=>\n      &1 / &2 * inv(&2) <= X * inv Y /\\ X * inv Y <= &1 * inv(&1)
-  X / Y:real
-  i:num
-  &1
-  &1 / &4
-  i:num
-  &0 < b ==> abs b = b
-  tau:num->real->real
-  j:num
-  i:num
-  a / b * c:real = a * c / b
-  i:num
-  i:num
-  taup:num->real->real
-  tau:num->real->real
-  psi:num->real#real->real
-  PSI:num->real#real->real
-  Tp:num->real
-  Tl:num->real
-  v:num->real
-  H:num->real
-  B:num->real
-  DSF:num->real->real
-  omega:num->real
-  beta:num->real
-  X / Y:real
-  taup:num->real->real = \\i u. (&1 + PSI i (u,tau i u)) * tau i u
-  Tl 0 :real = X / Y /\\\n    forall i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)
-  Tl:num->real
-  (forall u:real. tau 0 u = u) /\\\n     (forall i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))
-  tau:num->real->real
-  psi:num->real#real->real = \\i (u,t). sigma(Y:real)
-  PSI:num->real#real->real = \\i (u,t). Sigma
-  &0 < X / Y
-  &0 < X /\\ &0 < Y
-  forall i. &0 < (B:num->real) i
-  &1:real
-  &0 <= Sigma
-  forall beta Sigma omega B DSF H R Tp X Y g sigma v.\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        &1 / &2 <= X /\\ X < &1 /\\\n        &1 <= Y /\\ Y < &2 /\\\n        (forall y. &1 <= y /\\ y < &2\n             ==> g y = (&1 + sigma y) / y /\\ abs(sigma y) <= Sigma) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X /\\\n        (forall i. Tp i = g(Y) * R i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. R (i + 1) = beta (i + 1) * R i -  v(i + 1) * Y)\n        ==> ?tau. (forall u. tau 0 u = u) /\\\n                  (forall i u. tau (i + 1) u =\n                         beta (i + 1) * Sigma * tau i u + omega (i + 1)) /\\\n                  (forall i. abs(X / Y - H i)\n                       <= max (tau i (&1 / &4)) (tau i (&1)) / B i)
-  sqrt X
-  i:num
-  &1
-  &1 / &2
-  i:num
-  &0 < b ==> abs b = b
-  tau:num->real->real
-  &0 < inv(&2) * x <=> &0 < x
-  x * inv(&2) * inv y * z = (inv(&2) * z) * x / y
-  &0 <= s ==> &0 <= &1 + s
-  i = 0
-  p:real->real
-  i:num
-  &0 < beta(j + 1) /\\ &0 < B j
-  forall i. B (i + 1):real = beta (i + 1) * B i
-  forall i. H (i + 1):real = H i + v (i + 1) / B (i + 1)
-  j:num
-  forall i. R (i + 1) =\n           beta (i + 1) * R i - v (i + 1) * (H (i + 1) + H i) / &2
-  j:num
-  i:num
-  (x + h) / &2 * (x - h) = (x pow 2 - h pow 2) / &2
-  (B:num->real) i
-  forall b. &0 < b /\\ x / b = y / &2 * z / b ==> x = y / &2 * z
-  s - (s - h) / &2 = (s + h) / &2
-  &0 < beta(j + 1) /\\ &0 < B j
-  Tl(j:num) / B j = sqrt X - H j
-  forall j:num. Tl j / B j = sqrt X - H j
-  &0 < b /\\ &0 < s /\\ r = (s - t / b / &2) * t\n        ==> inv s * r = (&1 - t * inv(&2 * s * b)) * t
-  &1 + x - &1 = x
-  &2 * c / s * x / &2 = c * x / s
-  i = 0
-  i:num
-  &0 < &2 * x <=> &0 < x
-  &0 <= s ==> &0 < &1 + s
-  y:real
-  x:real
-  i:num
-  &0 < x ==> abs(&2 * x) = &2 * x
-  abs x <= a ==> abs(&1 + x) <= &1 + a
-  abs x <= a /\\ abs((&1 + x) * y) <= b\n        ==> abs((&1 + x) * (&1 - y) - &1) <= a + b
-  i = 0
-  i:num
-  taup:num->real->real
-  tau:num->real->real
-  psi:num->real#real->real
-  PSI:num->real#real->real
-  Tp:num->real
-  Tl:num->real
-  v:num->real
-  H:num->real
-  B:num->real
-  DSF:num->real->real
-  omega:num->real
-  beta:num->real
-  sqrt X
-  taup:num->real->real = \\i u. (&1 + PSI i (u,tau i u)) * tau i u
-  Tl 0 = sqrt(X) /\\\n    forall i. Tl (SUC i) = beta (i + 1) * Tl i - v (i + 1)
-  Tl:num->real
-  (forall u:real. tau 0 u = u) /\\\n     (forall i u. tau (SUC i) u =\n            beta (i + 1) * PSI i (u,tau i u) * tau i u + omega (i + 1))
-  tau:num->real->real
-  psi:num->real#real->real = \\i (u,t).\n        if i = 0 then sigma(X)\n        else (&1 + sigma(X:real)) * (&1 - t / (&2 * u * B i)) - &1
-  PSI:num->real#real->real = \\i (u,t).\n        if i = 0 then Sigma\n        else Sigma + (&1 + Sigma) * t / (&2 * u * B i)
-  &0 < sqrt X
-  &0 < X
-  forall i. &0 < (B:num->real) i
-  &1 / &2
-  &0 <= Sigma
-  forall beta Sigma omega B DSF H R Tp X g sigma v.\n        (forall i. i >= 0 ==> beta i > &0) /\\\n        &1 / &4 <= X /\\ X < &1 /\\\n        (forall x. &1 / &4 <= x /\\ x < &1\n             ==> g x = (&1 + sigma x) / sqrt x /\\\n                 abs(sigma x) <= Sigma) /\\\n        (forall i. i >= 1 ==> (forall x. abs (x - DSF i x) <= omega i)) /\\\n        B 0 = &1 /\\ H 0 = &0 /\\ R 0 = X / &2 /\\\n        (forall i. Tp i = (if i = 0 then &2 else &1) * g(X) * R i) /\\\n        (forall i. v (i + 1) = DSF (i + 1) (beta (i + 1) * Tp i)) /\\\n        (forall i. B (i + 1) = beta (i + 1) * B i) /\\\n        (forall i. H (i + 1) = H i + v (i + 1) / B (i + 1)) /\\\n        (forall i. R (i + 1) =\n             beta (i + 1) * R i -  v(i + 1) * (H(i + 1) + H i) / &2)\n        ==> ?tau.\n                  (forall u. tau 0 u = u) /\\\n                  (forall i u. tau (i + 1) u =\n                         beta (i + 1) *\n                         (if i = 0 then Sigma\n                          else Sigma + (&1 + Sigma) * tau i u / (&2 * u * B i))\n                          * tau i u +\n                         omega (i + 1)) /\\\n                  (forall i. abs(sqrt X - H i)\n                       <= max (tau i (&1 / &2)) (tau i (&1)) / B i)
-  a / b:real
-  x <= a / b ==> &0 <= b ==> forall a'. a <= a' ==> x <= a' / b
-  (\\i. if i = 0 then &1 / &2 else &9 / &16):num->real
-  inv(&2 pow 8):real
-  (\\i. if i = 2 then &32 else if i = 5 then &64 else &128):num->real
-  &1 / &2
-  &1 / &2
-  &1:real
-  &1:real
-  (\\i. &5 / &8):num->real
-  inv(&2 pow 9):real
-  (\\i. &128):num->real
-  &1 / &4
-  &1 / &4
-  &1:real
-  &1:real
-  (\\i. &5 / &8):num->real
-  inv(&2 pow 9):real
-  (\\i. if i = 2 then &32 else &128):num->real
-  &1 / &4
-  &1 / &4
-  &1:real
-  &1:real
-  (\\i. &5 / &8):num->real
-  inv(&2 pow 9):real
-  (\\i. &128):num->real
-  &1 / &2
-  &1 / &2
-  &1:real
-  &1:real
-  (\\i. &5 / &8):num->real
-  inv(&2 pow 9):real
-  (\\i. if i = 2 then &32 else &128):num->real
-  &1 / &2
-  &1 / &2
-  &1:real
-  &1:real
+  (real_of_num(1) / real_of_num(4) <= (X : Real) / (Y : Real) && X / Y <= real_of_num(1)) == (real_of_num(1) / real_of_num(2) * inv(real_of_num(2)) <= X * inv(Y) && X * inv(Y) <= real_of_num(1) * inv(real_of_num(1)))
+  (X : Real) / (Y : Real)
+  (i : Num)
+  real_of_num(1)
+  real_of_num(1) / real_of_num(4)
+  (i : Num)
+  real_of_num(0) < (b : Real) \226\134\146 abs(b) == b
+  (tau : (Num, Real) -> Real)
+  (j : Num)
+  (i : Num)
+  (a : Real) / (b : Real) * (c : Real) == a * (c / b)
+  (i : Num)
+  (i : Num)
+  (taup : (Num, Real) -> Real)
+  (tau : (Num, Real) -> Real)
+  (psi : (Num, (Real, Real)) -> Real)
+  (PSI : (Num, (Real, Real)) -> Real)
+  (Tp : (Num) -> Real)
+  (Tl : (Num) -> Real)
+  (v : (Num) -> Real)
+  (H : (Num) -> Real)
+  (B : (Num) -> Real)
+  (DSF : (Num, Real) -> Real)
+  (omega : (Num) -> Real)
+  (beta : (Num) -> Real)
+  (X : Real) / (Y : Real)
+  (taup : (Num, Real) -> Real) == ((i : Num) => (u : Real) => (real_of_num(1) + (PSI : (Num, (Real, Real)) -> Real)(i, (u, (tau : (Num, Real) -> Real)(i, u)))) * tau(i, u))
+  (Tl : (Num) -> Real)(0) == (X : Real) / (Y : Real) && (\226\136\128 i : Num, Tl(SUC(i)) == (beta : (Num) -> Real)(i + 1) * Tl(i) - (v : (Num) -> Real)(i + 1))
+  (Tl : (Num) -> Real)
+  (\226\136\128 u : Real, (tau : (Num, Real) -> Real)(0, u) == u) && (\226\136\128 i : Num, \226\136\128 u : Real, tau(SUC(i), u) == (beta : (Num) -> Real)(i + 1) * ((PSI : (Num, (Real, Real)) -> Real)(i, (u, tau(i, u))) * tau(i, u)) + (omega : (Num) -> Real)(i + 1))
+  (tau : (Num, Real) -> Real)
+  (psi : (Num, (Real, Real)) -> Real) == ((i : Num) => GABS((f : ((Real, Real)) -> Real) => \226\136\128 u : Real, \226\136\128 t : Real, GEQ(f((u, t)), (sigma : (Real) -> Real)((Y : Real)))))
+  (PSI : (Num, (Real, Real)) -> Real) == ((i : Num) => GABS((f : ((Real, Real)) -> Real) => \226\136\128 u : Real, \226\136\128 t : Real, GEQ(f((u, t)), (Sigma : Real))))
+  real_of_num(0) < (X : Real) / (Y : Real)
+  real_of_num(0) < (X : Real) && real_of_num(0) < (Y : Real)
+  \226\136\128 i : Num, real_of_num(0) < (B : (Num) -> Real)(i)
+  real_of_num(1)
+  real_of_num(0) <= (Sigma : Real)
+  \226\136\128 beta : (Num) -> Real, \226\136\128 Sigma : Real, \226\136\128 omega : (Num) -> Real, \226\136\128 B : (Num) -> Real, \226\136\128 DSF : (Num, Real) -> Real, \226\136\128 H : (Num) -> Real, \226\136\128 R : (Num) -> Real, \226\136\128 Tp : (Num) -> Real, \226\136\128 X : Real, \226\136\128 Y : Real, \226\136\128 g : (Real) -> Real, \226\136\128 sigma : (Real) -> Real, \226\136\128 v : (Num) -> Real, (\226\136\128 i : Num, i >= 0 \226\134\146 beta(i) > real_of_num(0)) && real_of_num(1) / real_of_num(2) <= X && X < real_of_num(1) && real_of_num(1) <= Y && Y < real_of_num(2) && (\226\136\128 y : Real, real_of_num(1) <= y && y < real_of_num(2) \226\134\146 g(y) == (real_of_num(1) + sigma(y)) / y && abs(sigma(y)) <= Sigma) && (\226\136\128 i : Num, i >= 1 \226\134\146 (\226\136\128 x : Real, abs(x - DSF(i, x)) <= omega(i))) && B(0) == real_of_num(1) && H(0) == real_of_num(0) && R(0) == X && (\226\136\128 i : Num, Tp(i) == g(Y) * R(i)) && (\226\136\128 i : Num, v(i + 1) == DSF(i + 1, beta(i + 1) * Tp(i))) && (\226\136\128 i : Num, B(i + 1) == beta(i + 1) * B(i)) && (\226\136\128 i : Num, H(i + 1) == H(i) + v(i + 1) / B(i + 1)) && (\226\136\128 i : Num, R(i + 1) == beta(i + 1) * R(i) - v(i + 1) * Y) \226\134\146 (\226\136\131 tau : (Num, Real) -> Real, (\226\136\128 u : Real, tau(0, u) == u) && (\226\136\128 i : Num, \226\136\128 u : Real, tau(i + 1, u) == beta(i + 1) * (Sigma * tau(i, u)) + omega(i + 1)) && (\226\136\128 i : Num, abs(X / Y - H(i)) <= max(tau(i, real_of_num(1) / real_of_num(4)), tau(i, real_of_num(1))) / B(i)))
+  sqrt((X : Real))
+  (i : Num)
+  real_of_num(1)
+  real_of_num(1) / real_of_num(2)
+  (i : Num)
+  real_of_num(0) < (b : Real) \226\134\146 abs(b) == b
+  (tau : (Num, Real) -> Real)
+  (real_of_num(0) < inv(real_of_num(2)) * (x : Real)) == (real_of_num(0) < x)
+  (x : Real) * (inv(real_of_num(2)) * (inv((y : Real)) * (z : Real))) == inv(real_of_num(2)) * z * (x / y)
+  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) <= real_of_num(1) + s
+  (i : Num) == 0
+  (p : (Real) -> Real)
+  (i : Num)
+  real_of_num(0) < (beta : (Num) -> Real)((j : Num) + 1) && real_of_num(0) < (B : (Num) -> Real)(j)
+  \226\136\128 i : Num, (B : (Num) -> Real)(i + 1) == (beta : (Num) -> Real)(i + 1) * B(i)
+  \226\136\128 i : Num, (H : (Num) -> Real)(i + 1) == H(i) + (v : (Num) -> Real)(i + 1) / (B : (Num) -> Real)(i + 1)
+  (j : Num)
+  \226\136\128 i : Num, (R : (Num) -> Real)(i + 1) == (beta : (Num) -> Real)(i + 1) * R(i) - (v : (Num) -> Real)(i + 1) * (((H : (Num) -> Real)(i + 1) + H(i)) / real_of_num(2))
+  (j : Num)
+  (i : Num)
+  ((x : Real) + (h : Real)) / real_of_num(2) * (x - h) == (pow(x, 2) - pow(h, 2)) / real_of_num(2)
+  (B : (Num) -> Real)((i : Num))
+  \226\136\128 b : Real, real_of_num(0) < b && (x : Real) / b == (y : Real) / real_of_num(2) * ((z : Real) / b) \226\134\146 x == y / real_of_num(2) * z
+  (s : Real) - (s - (h : Real)) / real_of_num(2) == (s + h) / real_of_num(2)
+  real_of_num(0) < (beta : (Num) -> Real)((j : Num) + 1) && real_of_num(0) < (B : (Num) -> Real)(j)
+  (Tl : (Num) -> Real)((j : Num)) / (B : (Num) -> Real)(j) == sqrt((X : Real)) - (H : (Num) -> Real)(j)
+  \226\136\128 j : Num, (Tl : (Num) -> Real)(j) / (B : (Num) -> Real)(j) == sqrt((X : Real)) - (H : (Num) -> Real)(j)
+  real_of_num(0) < (b : Real) && real_of_num(0) < (s : Real) && (r : Real) == (s - (t : Real) / b / real_of_num(2)) * t \226\134\146 inv(s) * r == (real_of_num(1) - t * inv(real_of_num(2) * (s * b))) * t
+  real_of_num(1) + ((x : Real) - real_of_num(1)) == x
+  real_of_num(2) * ((c : Real) / (s : Real) * ((x : Real) / real_of_num(2))) == c * (x / s)
+  (i : Num) == 0
+  (i : Num)
+  (real_of_num(0) < real_of_num(2) * (x : Real)) == (real_of_num(0) < x)
+  real_of_num(0) <= (s : Real) \226\134\146 real_of_num(0) < real_of_num(1) + s
+  (y : Real)
+  (x : Real)
+  (i : Num)
+  real_of_num(0) < (x : Real) \226\134\146 abs(real_of_num(2) * x) == real_of_num(2) * x
+  abs((x : Real)) <= (a : Real) \226\134\146 abs(real_of_num(1) + x) <= real_of_num(1) + a
+  abs((x : Real)) <= (a : Real) && abs((real_of_num(1) + x) * (y : Real)) <= (b : Real) \226\134\146 abs((real_of_num(1) + x) * (real_of_num(1) - y) - real_of_num(1)) <= a + b
+  (i : Num) == 0
+  (i : Num)
+  (taup : (Num, Real) -> Real)
+  (tau : (Num, Real) -> Real)
+  (psi : (Num, (Real, Real)) -> Real)
+  (PSI : (Num, (Real, Real)) -> Real)
+  (Tp : (Num) -> Real)
+  (Tl : (Num) -> Real)
+  (v : (Num) -> Real)
+  (H : (Num) -> Real)
+  (B : (Num) -> Real)
+  (DSF : (Num, Real) -> Real)
+  (omega : (Num) -> Real)
+  (beta : (Num) -> Real)
+  sqrt((X : Real))
+  (taup : (Num, Real) -> Real) == ((i : Num) => (u : Real) => (real_of_num(1) + (PSI : (Num, (Real, Real)) -> Real)(i, (u, (tau : (Num, Real) -> Real)(i, u)))) * tau(i, u))
+  (Tl : (Num) -> Real)(0) == sqrt((X : Real)) && (\226\136\128 i : Num, Tl(SUC(i)) == (beta : (Num) -> Real)(i + 1) * Tl(i) - (v : (Num) -> Real)(i + 1))
+  (Tl : (Num) -> Real)
+  (\226\136\128 u : Real, (tau : (Num, Real) -> Real)(0, u) == u) && (\226\136\128 i : Num, \226\136\128 u : Real, tau(SUC(i), u) == (beta : (Num) -> Real)(i + 1) * ((PSI : (Num, (Real, Real)) -> Real)(i, (u, tau(i, u))) * tau(i, u)) + (omega : (Num) -> Real)(i + 1))
+  (tau : (Num, Real) -> Real)
+  (psi : (Num, (Real, Real)) -> Real) == ((i : Num) => GABS((f : ((Real, Real)) -> Real) => \226\136\128 u : Real, \226\136\128 t : Real, GEQ(f((u, t)), if i == 0 { (sigma : (Real) -> Real)((X : Real)) } else { (real_of_num(1) + sigma(X)) * (real_of_num(1) - t / (real_of_num(2) * (u * (B : (Num) -> Real)(i)))) - real_of_num(1) })))
+  (PSI : (Num, (Real, Real)) -> Real) == ((i : Num) => GABS((f : ((Real, Real)) -> Real) => \226\136\128 u : Real, \226\136\128 t : Real, GEQ(f((u, t)), if i == 0 { (Sigma : Real) } else { Sigma + (real_of_num(1) + Sigma) * (t / (real_of_num(2) * (u * (B : (Num) -> Real)(i)))) })))
+  real_of_num(0) < sqrt((X : Real))
+  real_of_num(0) < (X : Real)
+  \226\136\128 i : Num, real_of_num(0) < (B : (Num) -> Real)(i)
+  real_of_num(1) / real_of_num(2)
+  real_of_num(0) <= (Sigma : Real)
+  \226\136\128 beta : (Num) -> Real, \226\136\128 Sigma : Real, \226\136\128 omega : (Num) -> Real, \226\136\128 B : (Num) -> Real, \226\136\128 DSF : (Num, Real) -> Real, \226\136\128 H : (Num) -> Real, \226\136\128 R : (Num) -> Real, \226\136\128 Tp : (Num) -> Real, \226\136\128 X : Real, \226\136\128 g : (Real) -> Real, \226\136\128 sigma : (Real) -> Real, \226\136\128 v : (Num) -> Real, (\226\136\128 i : Num, i >= 0 \226\134\146 beta(i) > real_of_num(0)) && real_of_num(1) / real_of_num(4) <= X && X < real_of_num(1) && (\226\136\128 x : Real, real_of_num(1) / real_of_num(4) <= x && x < real_of_num(1) \226\134\146 g(x) == (real_of_num(1) + sigma(x)) / sqrt(x) && abs(sigma(x)) <= Sigma) && (\226\136\128 i : Num, i >= 1 \226\134\146 (\226\136\128 x : Real, abs(x - DSF(i, x)) <= omega(i))) && B(0) == real_of_num(1) && H(0) == real_of_num(0) && R(0) == X / real_of_num(2) && (\226\136\128 i : Num, Tp(i) == (if i == 0 { real_of_num(2) } else { real_of_num(1) }) * (g(X) * R(i))) && (\226\136\128 i : Num, v(i + 1) == DSF(i + 1, beta(i + 1) * Tp(i))) && (\226\136\128 i : Num, B(i + 1) == beta(i + 1) * B(i)) && (\226\136\128 i : Num, H(i + 1) == H(i) + v(i + 1) / B(i + 1)) && (\226\136\128 i : Num, R(i + 1) == beta(i + 1) * R(i) - v(i + 1) * ((H(i + 1) + H(i)) / real_of_num(2))) \226\134\146 (\226\136\131 tau : (Num, Real) -> Real, (\226\136\128 u : Real, tau(0, u) == u) && (\226\136\128 i : Num, \226\136\128 u : Real, tau(i + 1, u) == beta(i + 1) * ((if i == 0 { Sigma } else { Sigma + (real_of_num(1) + Sigma) * (tau(i, u) / (real_of_num(2) * (u * B(i)))) }) * tau(i, u)) + omega(i + 1)) && (\226\136\128 i : Num, abs(sqrt(X) - H(i)) <= max(tau(i, real_of_num(1) / real_of_num(2)), tau(i, real_of_num(1))) / B(i)))
+  (a : Real) / (b : Real)
+  (x : Real) <= (a : Real) / (b : Real) \226\134\146 real_of_num(0) <= b \226\134\146 (\226\136\128 a' : Real, a <= a' \226\134\146 x <= a' / b)
+  (i : Num) => if i == 0 { real_of_num(1) / real_of_num(2) } else { real_of_num(9) / real_of_num(16) }
+  inv(pow(real_of_num(2), 8))
+  (i : Num) => if i == 2 { real_of_num(32) } else { if i == 5 { real_of_num(64) } else { real_of_num(128) } }
+  real_of_num(1) / real_of_num(2)
+  real_of_num(1) / real_of_num(2)
+  real_of_num(1)
+  real_of_num(1)
+  (i : Num) => real_of_num(5) / real_of_num(8)
+  inv(pow(real_of_num(2), 9))
+  (i : Num) => real_of_num(128)
+  real_of_num(1) / real_of_num(4)
+  real_of_num(1) / real_of_num(4)
+  real_of_num(1)
+  real_of_num(1)
+  (i : Num) => real_of_num(5) / real_of_num(8)
+  inv(pow(real_of_num(2), 9))
+  (i : Num) => if i == 2 { real_of_num(32) } else { real_of_num(128) }
+  real_of_num(1) / real_of_num(4)
+  real_of_num(1) / real_of_num(4)
+  real_of_num(1)
+  real_of_num(1)
+  (i : Num) => real_of_num(5) / real_of_num(8)
+  inv(pow(real_of_num(2), 9))
+  (i : Num) => real_of_num(128)
+  real_of_num(1) / real_of_num(2)
+  real_of_num(1) / real_of_num(2)
+  real_of_num(1)
+  real_of_num(1)
+  (i : Num) => real_of_num(5) / real_of_num(8)
+  inv(pow(real_of_num(2), 9))
+  (i : Num) => if i == 2 { real_of_num(32) } else { real_of_num(128) }
+  real_of_num(1) / real_of_num(2)
+  real_of_num(1) / real_of_num(2)
+  real_of_num(1)
+  real_of_num(1)
 THEOREM_V_1 =  |- (#forall:fun(fun(real,bool),bool) (\V:real. (#forall:fun(fun(fun(num,real),bool),bool) (\beta:fun(num,real). (#forall:fun(fun(fun(num,real),bool),bool) (\omega:fun(num,real). (#forall:fun(fun(fun(num,fun(real,real)),bool),bool) (\DSF:fun(num,fun(real,real)). (#forall:fun(fun(fun(num,real),bool),bool) (\B:fun(num,real). (#forall:fun(fun(fun(num,real),bool),bool) (\H:fun(num,real). (#forall:fun(fun(fun(num,real),bool),bool) (\v:fun(num,real). (#forall:fun(fun(fun(num,real),bool),bool) (\Tl:fun(num,real). (#forall:fun(fun(fun(num,real),bool),bool) (\Tp:fun(num,real). (#forall:fun(fun(fun(num,fun(prod(real,real),real)),bool),bool) (\PSI:fun(num,fun(prod(real,real),real)). (#forall:fun(fun(fun(num,fun(prod(real,real),real)),bool),bool) (\psi:fun(num,fun(prod(real,real),real)). (#forall:fun(fun(fun(num,fun(real,real)),bool),bool) (\tau:fun(num,fun(real,real)). (#forall:fun(fun(fun(num,fun(real,real)),bool),bool) (\taup:fun(num,fun(real,real)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) V:real)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) #_0:num))) ((#real_gt:fun(real,fun(real,bool)) (beta:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#forall:fun(fun(real,bool),bool) (\x:real. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) x:real) ((DSF:fun(num,fun(real,real)) i:num) x:real)))) (omega:fun(num,real) i:num)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) #_0:num))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((psi:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) V:real) (Tl:fun(num,real) i:num))))) ((PSI:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) V:real) (#real_abs:fun(real,real) (Tl:fun(num,real) i:num))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real))) ((#real_le:fun(real,fun(real,bool)) ((PSI:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) V:real) x:real))) ((PSI:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) V:real) y:real))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\u:real. ((#=:fun(real,fun(real,bool)) ((tau:fun(num,fun(real,real)) (#NUMERAL:fun(num,num) #_0:num)) u:real)) u:real)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(real,bool),bool) (\u:real. ((#=:fun(real,fun(real,bool)) ((tau:fun(num,fun(real,real)) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) u:real)) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (beta:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) ((PSI:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) u:real) ((tau:fun(num,fun(real,real)) i:num) u:real)))) ((tau:fun(num,fun(real,real)) i:num) u:real)))) (omega:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(real,bool),bool) (\u:real. ((#=:fun(real,fun(real,bool)) ((taup:fun(num,fun(real,real)) i:num) u:real)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((PSI:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) u:real) ((tau:fun(num,fun(real,real)) i:num) u:real))))) ((tau:fun(num,fun(real,real)) i:num) u:real)))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (B:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (H:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (Tl:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) V:real)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) (Tp:fun(num,real) i:num)) ((#real_mul:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((psi:fun(num,fun(prod(real,real),real)) i:num) ((#,:fun(real,fun(real,prod(real,real))) V:real) (Tl:fun(num,real) i:num))))) (Tl:fun(num,real) i:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) (v:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((DSF:fun(num,fun(real,real)) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_mul:fun(real,fun(real,real)) (beta:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (Tp:fun(num,real) i:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) (B:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) (beta:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (B:fun(num,real) i:num)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) (H:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) (H:fun(num,real) i:num)) ((#real_div:fun(real,fun(real,real)) (v:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (B:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) (Tl:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (beta:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (Tl:fun(num,real) i:num))) (v:fun(num,real) ((#+:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) V:real) ((#real_add:fun(real,fun(real,real)) (H:fun(num,real) i:num)) ((#real_div:fun(real,fun(real,real)) (Tl:fun(num,real) i:num)) (B:fun(num,real) i:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) #_0:num))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (Tl:fun(num,real) i:num))) ((tau:fun(num,fun(real,real)) i:num) V:real)))))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#>=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) #_0:num))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (Tp:fun(num,real) i:num))) ((taup:fun(num,fun(real,real)) i:num) V:real))))))))))))))))))))))))))))))))))
 posynomial =  |- (#forall:fun(fun(fun(real,real),bool),bool) (\p:fun(real,real). ((#=:fun(bool,fun(bool,bool)) (#posynomial:fun(fun(real,real),bool) p:fun(real,real))) (#?:fun(fun(fun(num,real),bool),bool) (\c:fun(num,real). (#?:fun(fun(fun(num,real),bool),bool) (\n:fun(num,real). (#?:fun(fun(num,bool),bool) (\k:num. ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) k:num))) ((#/\:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) (c:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#integer:fun(real,bool) (n:fun(num,real) i:num))))))) (#forall:fun(fun(real,bool),bool) (\v:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) v:real)) ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) k:num)) (\i:num. ((#real_mul:fun(real,fun(real,real)) (c:fun(num,real) i:num)) ((#rpow:fun(real,fun(real,real)) v:real) (n:fun(num,real) i:num)))))) (p:fun(real,real) v:real)))))))))))))))
 POSYNOMIAL_0 =  |- (#posynomial:fun(fun(real,real),bool) (\v:real. (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))
