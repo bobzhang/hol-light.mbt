@@ -5762,7 +5762,7 @@ test "Examples/dlo matches Examples/dlo.ml" {
       #|CPU time (user): <t>
       #|Examples/dlo quotations (278):
       #|  true
-      #|  op_lt
+      #|  real_lt
       #|  \226\136\128 x : Bool, !!x == x
       #|  \226\136\128 a : Bool, \226\136\128 b : Bool, (a \226\134\146 b) == (!a || b)
       #|  \226\136\128 a : Bool, \226\136\128 b : Bool, (a == b) == (a && b || !a && !b)
