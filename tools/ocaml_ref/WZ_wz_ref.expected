@@ -88295,316 +88295,316 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..1..solved at 4
 WZ/wz quotations (310):
-  x spow y = if x = &0 then &0\n             else if x < &0 then cos(y * pi) * (--x) rpow y else x rpow y
-  ~(x = &0) /\\ ~(x < &0) ==> &0 < x
-  (y + &1) * pi = y * pi + pi
-  x = &0
-  forall x y. x spow (y + &1) = x spow y * x
-  ~(x = &0) /\\ ~(x < &0) ==> &0 < x
-  (y - &1) * pi = y * pi - pi
-  x / &0 = &0
-  x = &0
-  forall x y. x spow (y - &1) = x spow y / x
-  x = &0
-  forall x y. x spow y = &0 <=> x = &0 \\/ x < &0 /\\ cos(y * pi) = &0
-  inv:real->real
-  (/):real->real->real
-  rfact x = gamma(x + &1)
-  rbinom(n,k) = rfact n / (rfact k * rfact (n - k))
-  x:real = -- &1 <=> x + &1 = &0
-  forall n. rfact(n + &1) = if n = --(&1) then &1 else (n + &1) * rfact n
-  forall n. rfact(n - &1) = rfact n / n
-  (n + &1) - k = (n - k) + &1
-  forall k n. ~(n + &1 = &0) /\\ ~(n + &1 = k)\n         ==> rbinom(n + &1,k) = (n + &1) / (n - k + &1) * rbinom (n,k)
-  n - (k + &1) = (n - k) - &1
-  forall k n. ~(k + &1 = &0)\n         ==> rbinom(n,k + &1) = (n - k) / (k + &1) * rbinom(n,k)
-  n - &1 - k = n - k - &1
-  forall k n. rbinom(n - &1,k) = (n - k) / n * rbinom(n,k)
-  n - k = -- &1 <=> n + &1 = k
-  n - (k - &1) = (n - k) + &1
-  forall k n. ~(n + &1 = k) ==> rbinom(n,k - &1) = k / (n - k + &1) * rbinom(n,k)
-  n = --x <=> n + x = &0
-  (n + &1) - (k + &1) = n - k
-  forall k n. ~(k + &1 = &0) /\\ ~(n + &1 = &0)\n         ==> rbinom(n + &1,k + &1) = (n + &1) / (k + &1) * rbinom(n,k)
-  (n - &1) - (k - &1) = n - k
-  forall k n. rbinom(n - &1,k - &1) = k / n * rbinom(n,k)
+  (spow : (Real, Real) -> Real)((x : Real), (y : Real)) == (if x == real_of_num(0) { real_of_num(0) } else { if x < real_of_num(0) { cos(y * pi) * rpow(-x, y) } else { rpow(x, y) } })
+  !((x : Real) == real_of_num(0)) && !(x < real_of_num(0)) \226\134\146 real_of_num(0) < x
+  ((y : Real) + real_of_num(1)) * pi == y * pi + pi
+  (x : Real) == real_of_num(0)
+  \226\136\128 x : Real, \226\136\128 y : Real, spow(x, y + real_of_num(1)) == spow(x, y) * x
+  !((x : Real) == real_of_num(0)) && !(x < real_of_num(0)) \226\134\146 real_of_num(0) < x
+  ((y : Real) - real_of_num(1)) * pi == y * pi - pi
+  (x : Real) / real_of_num(0) == real_of_num(0)
+  (x : Real) == real_of_num(0)
+  \226\136\128 x : Real, \226\136\128 y : Real, spow(x, y - real_of_num(1)) == spow(x, y) / x
+  (x : Real) == real_of_num(0)
+  \226\136\128 x : Real, \226\136\128 y : Real, (spow(x, y) == real_of_num(0)) == (x == real_of_num(0) || x < real_of_num(0) && cos(y * pi) == real_of_num(0))
+  real_inv
+  real_div
+  (rfact : (Real) -> Real)((x : Real)) == gamma(x + real_of_num(1))
+  (rbinom : ((Real, Real)) -> Real)(((n : Real), (k : Real))) == rfact(n) / (rfact(k) * rfact(n - k))
+  ((x : Real) == -real_of_num(1)) == (x + real_of_num(1) == real_of_num(0))
+  \226\136\128 n : Real, rfact(n + real_of_num(1)) == (if n == -real_of_num(1) { real_of_num(1) } else { (n + real_of_num(1)) * rfact(n) })
+  \226\136\128 n : Real, rfact(n - real_of_num(1)) == rfact(n) / n
+  (n : Real) + real_of_num(1) - (k : Real) == n - k + real_of_num(1)
+  \226\136\128 k : Real, \226\136\128 n : Real, !(n + real_of_num(1) == real_of_num(0)) && !(n + real_of_num(1) == k) \226\134\146 rbinom((n + real_of_num(1), k)) == (n + real_of_num(1)) / (n - k + real_of_num(1)) * rbinom((n, k))
+  (n : Real) - ((k : Real) + real_of_num(1)) == n - k - real_of_num(1)
+  \226\136\128 k : Real, \226\136\128 n : Real, !(k + real_of_num(1) == real_of_num(0)) \226\134\146 rbinom((n, k + real_of_num(1))) == (n - k) / (k + real_of_num(1)) * rbinom((n, k))
+  (n : Real) - real_of_num(1) - (k : Real) == n - k - real_of_num(1)
+  \226\136\128 k : Real, \226\136\128 n : Real, rbinom((n - real_of_num(1), k)) == (n - k) / n * rbinom((n, k))
+  ((n : Real) - (k : Real) == -real_of_num(1)) == (n + real_of_num(1) == k)
+  (n : Real) - ((k : Real) - real_of_num(1)) == n - k + real_of_num(1)
+  \226\136\128 k : Real, \226\136\128 n : Real, !(n + real_of_num(1) == k) \226\134\146 rbinom((n, k - real_of_num(1))) == k / (n - k + real_of_num(1)) * rbinom((n, k))
+  ((n : Real) == -(x : Real)) == (n + x == real_of_num(0))
+  (n : Real) + real_of_num(1) - ((k : Real) + real_of_num(1)) == n - k
+  \226\136\128 k : Real, \226\136\128 n : Real, !(k + real_of_num(1) == real_of_num(0)) && !(n + real_of_num(1) == real_of_num(0)) \226\134\146 rbinom((n + real_of_num(1), k + real_of_num(1))) == (n + real_of_num(1)) / (k + real_of_num(1)) * rbinom((n, k))
+  (n : Real) - real_of_num(1) - ((k : Real) - real_of_num(1)) == n - k
+  \226\136\128 k : Real, \226\136\128 n : Real, rbinom((n - real_of_num(1), k - real_of_num(1))) == k / n * rbinom((n, k))
   gamma
-  forall net:(A)net nn n.\n        (nn ---> &n) net ==> ((\\a. rfact(nn a)) ---> &(FACT n)) net
-  inv o gamma
-  --x < &0 ==> &0 < x
-  (--x + &1) + y = &0 <=> y = x - &1
-  m - 1
-  m:num
-  &0 = inv(gamma(x + &1))
-  forall net:(A)net nn x.\n        integer x /\\ x < &0 /\\ (nn ---> x) net\n        ==> ((\\a. inv(rfact(nn a))) ---> &0) net
-  &n - &k:real
-  &0 = (&(FACT n) * inv(&(FACT k))) * &0
-  forall net:(A)net nn kk n k.\n        (nn ---> &n) net /\\ (kk ---> &k) net\n        ==> ((\\a. rbinom(nn a,kk a)) ---> &(binom(n,k))) net
+  \226\136\128 net : Net[A], \226\136\128 nn : (A) -> Real, \226\136\128 n : Num, op_minus_minus_minus_gt(nn, real_of_num(n), net) \226\134\146 op_minus_minus_minus_gt((a : A) => rfact(nn(a)), real_of_num(FACT(n)), net)
+  o(inv, gamma)
+  -(x : Real) < real_of_num(0) \226\134\146 real_of_num(0) < x
+  (-(x : Real) + real_of_num(1) + (y : Real) == real_of_num(0)) == (y == x - real_of_num(1))
+  (m : Num) - 1
+  (m : Num)
+  real_of_num(0) == inv(gamma((x : Real) + real_of_num(1)))
+  \226\136\128 net : Net[A], \226\136\128 nn : (A) -> Real, \226\136\128 x : Real, integer(x) && x < real_of_num(0) && op_minus_minus_minus_gt(nn, x, net) \226\134\146 op_minus_minus_minus_gt((a : A) => inv(rfact(nn(a))), real_of_num(0), net)
+  real_of_num((n : Num)) - real_of_num((k : Num))
+  real_of_num(0) == real_of_num(FACT((n : Num))) * inv(real_of_num(FACT((k : Num)))) * real_of_num(0)
+  \226\136\128 net : Net[A], \226\136\128 nn : (A) -> Real, \226\136\128 kk : (A) -> Real, \226\136\128 n : Num, \226\136\128 k : Num, op_minus_minus_minus_gt(nn, real_of_num(n), net) && op_minus_minus_minus_gt(kk, real_of_num(k), net) \226\134\146 op_minus_minus_minus_gt((a : A) => rbinom((nn(a), kk(a))), real_of_num(binom((n, k))), net)
   cos
-  ~(t = &0) /\\ ~(t < &0) ==> &0 < t
-  t < &0
-  t = &0
-  forall net:A net f l.\n        (f ---> l) net ==> ((\\x. t spow f x) ---> t spow l) net
+  !((t : Real) == real_of_num(0)) && !(t < real_of_num(0)) \226\134\146 real_of_num(0) < t
+  (t : Real) < real_of_num(0)
+  (t : Real) == real_of_num(0)
+  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_minus_gt((x : A) => spow((t : Real), f(x)), spow(t, l), net)
   cos
-  \\x. abs((f:A->real) x - l) < --l
-  x < &0 ==> ~(x = &0)
-  \\x. (f:A->real) x < &0
-  \\x:A. cos(g x * pi) * (--f x) rpow (g x)
-  \\x. abs((f:A->real) x - l) < l
-  &0 < x ==> ~(x = &0) /\\ ~(x < &0)
-  \\x. &0 < (f:A->real) x
-  \\x:A. (f x) rpow (g x)
-  ~(x = &0) ==> &0 < x /\\ ~(x < &0) \\/ x < &0 /\\ ~(&0 < x)
-  forall net:A net f g l m.\n        (f ---> l) net /\\ (g ---> m) net /\\ ~(l = &0)\n        ==> ((\\x. (f x) spow (g x)) ---> l spow m) net
-  (x + a) - a:real = x
-  integer x
-  forall x. rfact x = &0 <=> integer x /\\ x < &0
-  (x + &1) + n = &0 ==> x = --(n + &1)
-  forall x. ~(integer x /\\ x <= -- &1) ==> rfact real_continuous atreal x
-  forall x. (inv o rfact) real_continuous atreal x
-  forall nn s z:real^N.\n        nn real_continuous (at z within s) /\\\n        ~(integer(nn z) /\\ nn z <= -- &1)\n        ==> (\\x. rfact(nn x)) real_continuous (at z within s)
-  forall nn s z:real^N.\n        nn real_continuous (at z within s)\n        ==> (\\x. inv(rfact(nn x))) real_continuous (at z within s)
-  forall nn kk s a:real^N.\n      nn real_continuous (at a within s) /\\\n      kk real_continuous (at a within s) /\\\n      ~(integer(nn a) /\\ nn a <= -- &1)\n      ==> (\\x. rbinom (nn x,kk x)) real_continuous (at a within s)
-  ratpoly p <=>\n         (forall m. rational(p m)) /\\\n         FINITE {m | ~(p m = &0)} /\\\n         (forall m. ~(p m = &0) ==> FINITE {i:num | ~(m i = 0)})
-  f:num->num
-  p(f:num->num) = &0
-  f:num->num
-  set_of_list:((num->num)#real)list->(num->num)#real->bool
-  q:(num->num)->real
-  p:(num->num)->real
-  \\p. list_of_set (IMAGE (\\m. (m,p m)) {m:num->num | ~(p m = &0)})
-  {x | x = a /\\ P x} = {x | x IN {a} /\\ P x}
-  ~((if x = a then c else z) = z) <=> x = a /\\ ~(c = z)
-  \\i. if i = 0 then j else 0
-  j:num
-  \\m:num->num. m 0
-  i:num
-  m2(i:num) = 0
-  i:num
-  set_of_list:(num#num)list->num#num->bool
-  m2:num->num
-  m1:num->num
-  \\m. list_of_set (IMAGE (\\i:num. (i,m i)) {i | ~(m i = 0)})
-  (:(num#num)list)
-  (:num) *_c (:num)
-  {m | FINITE {i:num | ~(m i = 0)}} CROSS rational =_c (:num)
-  {m | FINITE {i:num | ~(m i = 0)}} CROSS rational
-  COUNTABLE ratpoly
-  poly_eval p x =\n    sum (:num->num) (\\m. p m * product (:num) (\\i. x i pow m i))
-  m:num->num
-  forall p x. ratpoly p\n         ==> poly_eval p x =\n             sum {m | ~(p m = &0)}\n                 (\\m. p m * product {i | ~(m i = 0)} (\\i. x i pow m i))
-  ratpolyfun s f <=>\n    ?p. ratpoly p /\\\n        f = \\(x,y). poly_eval p (\\i. EL i (CONS x (CONS y (list_of_set s))))
-  \\p (x,y). poly_eval p (\\i. EL i (CONS x (CONS y (list_of_set s))))
-  forall s. COUNTABLE(ratpolyfun s)
-  {(\\i:num. 0)}
-  \\m. if m = \\i:num. 0 then c else &0
-  forall s c. rational c ==> ratpolyfun s (\\(x,y). c)
+  (x : A) => abs((f : (A) -> Real)(x) - (l : Real)) < -l
+  (x : Real) < real_of_num(0) \226\134\146 !(x == real_of_num(0))
+  (x : A) => (f : (A) -> Real)(x) < real_of_num(0)
+  (x : A) => cos((g : (A) -> Real)(x) * pi) * rpow(-(f : (A) -> Real)(x), g(x))
+  (x : A) => abs((f : (A) -> Real)(x) - (l : Real)) < l
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0)) && !(x < real_of_num(0))
+  (x : A) => real_of_num(0) < (f : (A) -> Real)(x)
+  (x : A) => rpow((f : (A) -> Real)(x), (g : (A) -> Real)(x))
+  !((x : Real) == real_of_num(0)) \226\134\146 real_of_num(0) < x && !(x < real_of_num(0)) || x < real_of_num(0) && !(real_of_num(0) < x)
+  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, \226\136\128 l : Real, \226\136\128 m : Real, op_minus_minus_minus_gt(f, l, net) && op_minus_minus_minus_gt(g, m, net) && !(l == real_of_num(0)) \226\134\146 op_minus_minus_minus_gt((x : A) => spow(f(x), g(x)), spow(l, m), net)
+  (x : Real) + (a : Real) - a == x
+  integer((x : Real))
+  \226\136\128 x : Real, (rfact(x) == real_of_num(0)) == (integer(x) && x < real_of_num(0))
+  (x : Real) + real_of_num(1) + (n : Real) == real_of_num(0) \226\134\146 x == -(n + real_of_num(1))
+  \226\136\128 x : Real, !(integer(x) && x <= -real_of_num(1)) \226\134\146 real_continuous(rfact, atreal(x))
+  \226\136\128 x : Real, real_continuous(o(inv, rfact), atreal(x))
+  \226\136\128 nn : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 z : Cart[Real, N], real_continuous(nn, within(at(z), s)) && !(integer(nn(z)) && nn(z) <= -real_of_num(1)) \226\134\146 real_continuous((x : Cart[Real, N]) => rfact(nn(x)), within(at(z), s))
+  \226\136\128 nn : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 z : Cart[Real, N], real_continuous(nn, within(at(z), s)) \226\134\146 real_continuous((x : Cart[Real, N]) => inv(rfact(nn(x))), within(at(z), s))
+  \226\136\128 nn : (Cart[Real, N]) -> Real, \226\136\128 kk : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], real_continuous(nn, within(at(a), s)) && real_continuous(kk, within(at(a), s)) && !(integer(nn(a)) && nn(a) <= -real_of_num(1)) \226\134\146 real_continuous((x : Cart[Real, N]) => rbinom((nn(x), kk(x))), within(at(a), s))
+  (ratpoly : (((Num) -> Num) -> Real) -> Bool)((p : ((Num) -> Num) -> Real)) == ((\226\136\128 m : (Num) -> Num, rational(p(m))) && FINITE({(m : (Num) -> Num) | !(p(m) == real_of_num(0))}) && (\226\136\128 m : (Num) -> Num, !(p(m) == real_of_num(0)) \226\134\146 FINITE({(i : Num) | !(m(i) == 0)})))
+  (f : (Num) -> Num)
+  (p : ((Num) -> Num) -> Real)((f : (Num) -> Num)) == real_of_num(0)
+  (f : (Num) -> Num)
+  (set_of_list : (List[((Num) -> Num, Real)], ((Num) -> Num, Real)) -> Bool)
+  (q : ((Num) -> Num) -> Real)
+  (p : ((Num) -> Num) -> Real)
+  (p : ((Num) -> Num) -> Real) => list_of_set(IMAGE((m : (Num) -> Num) => (m, p(m)), {(m : (Num) -> Num) | !(p(m) == real_of_num(0))}))
+  {(x : _) | x == (a : _) && (P : (_) -> Bool)(x)} == {(x : _) | IN(x, {a}) && P(x)}
+  !((if (x : _) == (a : _) { (c : _) } else { (z : _) }) == z) == (x == a && !(c == z))
+  (i : Num) => if i == 0 { (j : Num) } else { 0 }
+  (j : Num)
+  (m : (Num) -> Num) => m(0)
+  (i : Num)
+  (m2 : (Num) -> Num)((i : Num)) == 0
+  (i : Num)
+  (set_of_list : (List[(Num, Num)], (Num, Num)) -> Bool)
+  (m2 : (Num) -> Num)
+  (m1 : (Num) -> Num)
+  (m : (Num) -> Num) => list_of_set(IMAGE((i : Num) => (i, m(i)), {(i : Num) | !(m(i) == 0)}))
+  (UNIV : (List[(Num, Num)]) -> Bool)
+  (op_star_us_c : ((Num) -> Bool, (Num) -> Bool, (Num, Num)) -> Bool)((UNIV : (Num) -> Bool), (UNIV : (Num) -> Bool))
+  (op_eq_us_c : ((((Num) -> Num, Real)) -> Bool, (Num) -> Bool) -> Bool)((CROSS : (((Num) -> Num) -> Bool, (Real) -> Bool, ((Num) -> Num, Real)) -> Bool)({(m : (Num) -> Num) | (FINITE : ((Num) -> Bool) -> Bool)({(i : Num) | !(m(i) == 0)})}, rational), (UNIV : (Num) -> Bool))
+  CROSS({(m : (Num) -> Num) | FINITE({(i : Num) | !(m(i) == 0)})}, rational)
+  COUNTABLE(ratpoly)
+  (poly_eval : (((Num) -> Num) -> Real, (Num) -> Real) -> Real)((p : ((Num) -> Num) -> Real), (x : (Num) -> Real)) == sum(UNIV, (m : (Num) -> Num) => p(m) * product(UNIV, (i : Num) => pow(x(i), m(i))))
+  (m : (Num) -> Num)
+  \226\136\128 p : ((Num) -> Num) -> Real, \226\136\128 x : (Num) -> Real, ratpoly(p) \226\134\146 poly_eval(p, x) == sum({(m : (Num) -> Num) | !(p(m) == real_of_num(0))}, (m : (Num) -> Num) => p(m) * product({(i : Num) | !(m(i) == 0)}, (i : Num) => pow(x(i), m(i))))
+  (ratpolyfun : ((Real) -> Bool, ((Real, Real)) -> Real) -> Bool)((s : (Real) -> Bool), (f : ((Real, Real)) -> Real)) == (\226\136\131 p : ((Num) -> Num) -> Real, ratpoly(p) && f == GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), poly_eval(p, (i : Num) => EL(i, CONS(x, CONS(y, list_of_set(s))))))))
+  (p : ((Num) -> Num) -> Real) => GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), poly_eval(p, (i : Num) => EL(i, CONS(x, CONS(y, list_of_set((s : (Real) -> Bool))))))))
+  \226\136\128 s : (Real) -> Bool, COUNTABLE(ratpolyfun(s))
+  {(i : Num) => 0}
+  (m : (Num) -> Num) => if m == ((i : Num) => 0) { (c : Real) } else { real_of_num(0) }
+  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, rational(c) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), c)))
   1
-  y:real
-  x:real
-  ~(if p then F else T) <=> p
-  ~(if p then F else T) <=> p
-  \\m. if m = \\i. if i = 1 then 1 else 0 then &1 else &0
-  \\m. if m = \\i. if i = 0 then 1 else 0 then &1 else &0
-  forall s. ratpolyfun s (\\(n,k). n) /\\ ratpolyfun s (\\(n,k). k)
-  n + 2 = SUC(SUC n)
-  y:real
-  x:real
-  ~(if p then F else T) <=> p
-  ~(if p then F else T) <=> p
-  \\m. if m = \\i. if i = n + 2 then 1 else 0 then &1 else &0
-  n:num
-  a:real
-  forall s a. FINITE s /\\ a IN s ==> ratpolyfun s (\\(x,y). a)
-  (\\m. --(p m)):(num->num)->real
-  ?r. ratpoly r /\\ forall xs. --(poly_eval p xs) = poly_eval r xs
-  p:(num->num)->real
-  s:real->bool
-  f:real->real->real
-  forall p s. ratpolyfun s (\\(n,k). p n k) ==> ratpolyfun s (\\(n,k). --(p n k))
-  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
-  ~(x + y = &0) ==> ~(x = &0) \\/ ~(y = &0)
-  {m:num->num | ~(p m = &0)} UNION {m | ~(q m = &0)}
-  \\m. (p:(num->num)->real) m + q m
-  ?r. ratpoly r /\\ forall xs. poly_eval p xs + poly_eval q xs = poly_eval r xs
-  q:(num->num)->real
-  p:(num->num)->real
-  s:real->bool
-  g:real->real->real
-  f:real->real->real
-  forall p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k + q n k)
-  forall p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k - q n k)
-  {i | i IN UNIV /\\ ~(p i \\/ q i)} = {i | i IN {j | ~q j} /\\ ~p i}
-  z:real = x * y ==> (p * x) * q * y = (p * q) * z
-  m2:num->num
-  m1:num->num
-  (q:(num->num)->real) m2 = &0
-  (p:(num->num)->real) m1 = &0
-  (r ==> (p <=> q)) ==> (p /\\ r <=> r /\\ q)
-  m2:num->num
-  m1:num->num
-  s = t /\\ (forall x. x IN s ==> f x = g x) ==> sum s f = sum t g
-  {x | x IN {a,b | P a b} /\\ Q x} =\n      {a,b | P a b /\\ Q(a,b)}
-  m:num->num
-  (\\x. P x /\\ Q x) = {x | x IN {y | P y} /\\ Q x}
-  (forall f g s t. P f g s t) <=> (forall f t g s. P f g s t)
-  (:num->num)
-  \\(k:num->num,l) i. k i + l i
-  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
-  {x | ~(P x /\\ Q x)} = {x | ~P x} UNION {x | ~Q x}
-  l:num->num
-  k:num->num
-  m:num->num
-  {k,l | ~(P k \\/ Q l)} =\n          {k,l | k IN {x | ~P x} /\\ l IN {x | ~Q x}}
-  IMAGE (\\(k:num->num,l) i. k i + l i)\n                        {k,l | ~(p k * q l = &0)}
-  \\m. sum {(k,l) | (\\i. k i + l i) = m}\n                      (\\(k:num->num,l). p k * q l)
-  ?r. ratpoly r /\\ forall xs. poly_eval p xs * poly_eval q xs = poly_eval r xs
-  q:(num->num)->real
-  p:(num->num)->real
-  s:real->bool
-  g:real->real->real
-  f:real->real->real
-  forall p q s. ratpolyfun s (\\(n,k). p n k) /\\ ratpolyfun s (\\(n,k). q n k)\n           ==> ratpolyfun s (\\(n,k). p n k * q n k)
-  forall p r s. ratpolyfun s (\\(n,k). p n k)\n           ==> ratpolyfun s (\\(n,k). (p n k) pow r)
-  ratty s t <=> ?p. ratpolyfun s p /\\ p t = &0 /\\ ~(forall w. p w = &0)
+  (y : Real)
+  (x : Real)
+  !(if (p : Bool) { false } else { true }) == p
+  !(if (p : Bool) { false } else { true }) == p
+  (m : (Num) -> Num) => if m == ((i : Num) => if i == 1 { 1 } else { 0 }) { real_of_num(1) } else { real_of_num(0) }
+  (m : (Num) -> Num) => if m == ((i : Num) => if i == 0 { 1 } else { 0 }) { real_of_num(1) } else { real_of_num(0) }
+  \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), n))) && ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), k)))
+  (n : Num) + 2 == SUC(SUC(n))
+  (y : Real)
+  (x : Real)
+  !(if (p : Bool) { false } else { true }) == p
+  !(if (p : Bool) { false } else { true }) == p
+  (m : (Num) -> Num) => if m == ((i : Num) => if i == (n : Num) + 2 { 1 } else { 0 }) { real_of_num(1) } else { real_of_num(0) }
+  (n : Num)
+  (a : Real)
+  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, FINITE(s) && IN(a, s) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), a)))
+  (m : (Num) -> Num) => -(p : ((Num) -> Num) -> Real)(m)
+  \226\136\131 r : ((Num) -> Num) -> Real, ratpoly(r) && (\226\136\128 xs : (Num) -> Real, -poly_eval((p : ((Num) -> Num) -> Real), xs) == poly_eval(r, xs))
+  (p : ((Num) -> Num) -> Real)
+  (s : (Real) -> Bool)
+  (f : (Real, Real) -> Real)
+  \226\136\128 p : (Real, Real) -> Real, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), -p(n, k))))
+  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(y : _) | P(y)}) && Q(x)}
+  !((x : Real) + (y : Real) == real_of_num(0)) \226\134\146 !(x == real_of_num(0)) || !(y == real_of_num(0))
+  UNION({(m : (Num) -> Num) | !((p : ((Num) -> Num) -> Real)(m) == real_of_num(0))}, {(m : (Num) -> Num) | !((q : ((Num) -> Num) -> Real)(m) == real_of_num(0))})
+  (m : (Num) -> Num) => (p : ((Num) -> Num) -> Real)(m) + (q : ((Num) -> Num) -> Real)(m)
+  \226\136\131 r : ((Num) -> Num) -> Real, ratpoly(r) && (\226\136\128 xs : (Num) -> Real, poly_eval((p : ((Num) -> Num) -> Real), xs) + poly_eval((q : ((Num) -> Num) -> Real), xs) == poly_eval(r, xs))
+  (q : ((Num) -> Num) -> Real)
+  (p : ((Num) -> Num) -> Real)
+  (s : (Real) -> Bool)
+  (g : (Real, Real) -> Real)
+  (f : (Real, Real) -> Real)
+  \226\136\128 p : (Real, Real) -> Real, \226\136\128 q : (Real, Real) -> Real, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k) + q(n, k))))
+  \226\136\128 p : (Real, Real) -> Real, \226\136\128 q : (Real, Real) -> Real, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k) - q(n, k))))
+  {(i : _) | IN(i, UNIV) && !((p : (_) -> Bool)(i) || (q : (_) -> Bool)(i))} == {(i : _) | IN(i, {(j : _) | !q(j)}) && !p(i)}
+  (z : Real) == (x : Real) * (y : Real) \226\134\146 (p : Real) * x * ((q : Real) * y) == p * q * z
+  (m2 : (Num) -> Num)
+  (m1 : (Num) -> Num)
+  (q : ((Num) -> Num) -> Real)((m2 : (Num) -> Num)) == real_of_num(0)
+  (p : ((Num) -> Num) -> Real)((m1 : (Num) -> Num)) == real_of_num(0)
+  ((r : Bool) \226\134\146 (p : Bool) == (q : Bool)) \226\134\146 (p && r) == (r && q)
+  (m2 : (Num) -> Num)
+  (m1 : (Num) -> Num)
+  (s : (_) -> Bool) == (t : (_) -> Bool) && (\226\136\128 x : _, IN(x, s) \226\134\146 (f : (_) -> Real)(x) == (g : (_) -> Real)(x)) \226\134\146 sum(s, f) == sum(t, g)
+  {(x : (_, _)) | IN(x, {((a : _), (b : _)) | (P : (_, _) -> Bool)(a, b)}) && (Q : ((_, _)) -> Bool)(x)} == {((a : _), (b : _)) | P(a, b) && Q((a, b))}
+  (m : (Num) -> Num)
+  ((x : _) => (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)) == {(x : _) | IN(x, {(y : _) | P(y)}) && Q(x)}
+  (\226\136\128 f : _, \226\136\128 g : _, \226\136\128 s : _, \226\136\128 t : _, (P : (_, _, _, _) -> Bool)(f, g, s, t)) == (\226\136\128 f : _, \226\136\128 t : _, \226\136\128 g : _, \226\136\128 s : _, P(f, g, s, t))
+  (UNIV : ((Num) -> Num) -> Bool)
+  GABS((f : (((Num) -> Num, (Num) -> Num), Num) -> Num) => \226\136\128 k : (Num) -> Num, \226\136\128 l : (Num) -> Num, GEQ(f((k, l)), (i : Num) => k(i) + l(i)))
+  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(y : _) | P(y)}) && Q(x)}
+  {(x : _) | !((P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x))} == UNION({(x : _) | !P(x)}, {(x : _) | !Q(x)})
+  (l : (Num) -> Num)
+  (k : (Num) -> Num)
+  (m : (Num) -> Num)
+  {((k : _), (l : _)) | !((P : (_) -> Bool)(k) || (Q : (_) -> Bool)(l))} == {((k : _), (l : _)) | IN(k, {(x : _) | !P(x)}) && IN(l, {(x : _) | !Q(x)})}
+  IMAGE(GABS((f : (((Num) -> Num, (Num) -> Num), Num) -> Num) => \226\136\128 k : (Num) -> Num, \226\136\128 l : (Num) -> Num, GEQ(f((k, l)), (i : Num) => k(i) + l(i))), {((k : (Num) -> Num), (l : (Num) -> Num)) | !((p : ((Num) -> Num) -> Real)(k) * (q : ((Num) -> Num) -> Real)(l) == real_of_num(0))})
+  (m : (Num) -> Num) => sum({((k : (Num) -> Num), (l : (Num) -> Num)) | ((i : Num) => k(i) + l(i)) == m}, GABS((f : (((Num) -> Num, (Num) -> Num)) -> Real) => \226\136\128 k : (Num) -> Num, \226\136\128 l : (Num) -> Num, GEQ(f((k, l)), (p : ((Num) -> Num) -> Real)(k) * (q : ((Num) -> Num) -> Real)(l))))
+  \226\136\131 r : ((Num) -> Num) -> Real, ratpoly(r) && (\226\136\128 xs : (Num) -> Real, poly_eval((p : ((Num) -> Num) -> Real), xs) * poly_eval((q : ((Num) -> Num) -> Real), xs) == poly_eval(r, xs))
+  (q : ((Num) -> Num) -> Real)
+  (p : ((Num) -> Num) -> Real)
+  (s : (Real) -> Bool)
+  (g : (Real, Real) -> Real)
+  (f : (Real, Real) -> Real)
+  \226\136\128 p : (Real, Real) -> Real, \226\136\128 q : (Real, Real) -> Real, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k) * q(n, k))))
+  \226\136\128 p : (Real, Real) -> Real, \226\136\128 r : Num, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), pow(p(n, k), r))))
+  (ratty : ((Real) -> Bool, (Real, Real)) -> Bool)((s : (Real) -> Bool), (t : (Real, Real))) == (\226\136\131 p : ((Real, Real)) -> Real, ratpolyfun(s, p) && p(t) == real_of_num(0) && !(\226\136\128 w : (Real, Real), p(w) == real_of_num(0)))
   magical_set s =\n        INTERS { {z | ~((FST p)(FST(SND p) + Re z,SND(SND p) + Im z) = &0)} |\n                 p IN (ratpolyfun s DELETE (\\x. &0)) CROSS\n                      (integer CROSS integer)}
-  k:real
-  &n:real
-  p:real#real->real
-  forall s d e n k. integer k /\\ complex(d,e) IN magical_set s\n             ==> ~ratty s (&n + d,k + e)
-  j:num
-  i:num
-  i:num
-  m:num->num
-  q:(num->num)->real
-  q:complex->real = (\\z. p(Re z,Im z)) o (\\z. complex(n,k) + z)
-  complex(x - n,y - k)
-  y:real
-  x:real
-  real_polynomial_function (q:complex->real)
-  q:complex->real = \\z. p(n + Re z,k + Im z)
-  k:real
-  n:real
-  p:real#real->real
-  UNIV DIFF {z | ~P z} = {x | P x}
-  UNIV DIFF (UNIV DIFF s) = s
-  s = UNIV <=> UNIV DIFF s = {}
-  closure (magical_set s) = (:complex)
-  (s INTER t) DELETE a = (s DELETE a) INTER t
-  forall p s. open s /\\ Cx(&0) limit_point_of s\n       ==> ~trivial_limit (at(Cx(&0)) within (s INTER magical_set p))
-  (a + z) - a:complex = z
-  (f ---> l) (at a within {a + z | z IN s}) <=>\n     ((\\w. f(a + w)) ---> l) (at (Cx(&0)) within s)
-  j:num
-  i:num
-  i:num
-  s:(num->num)->real
-  ratpolyfun e q
-  ratpolyfun e p
-  f real_continuous at z /\\ f z = l ==> (f ---> l) (at z within s)
-  s:complex->bool
-  ~(m + 1 < m)
-  b = &0 ==> --y = a * b - y
-  --(p (&n,&0) / q (&n,&0) * f n 0):real =\n      p(&n,&(m + 1)) / q(&n,&(m + 1)) * f n (m + 1) -\n      p(&n,&0) / q(&n,&0) * f n 0
-  (x + &1) + y = (x + y) + &1
-  k:num
-  w:complex
-  &1
-  \\z. sum (0..m)\n              (\\k. p(&n + Re z,(&k + &1) + Im z) /\n                   q(&n + Re z,(&k + &1) + Im z) *\n                   ff(complex (&n,&k + &1) + z) -\n                   p(&n + Re z,&k + Im z) /\n                   q(&n + Re z,&k + Im z) *\n                   ff(complex (&n,&k) + z))
-  s:complex->bool
-  k:num
-  sum (:num) (\\k. (h:num->num->real) n k) =\n      sum (0..m) (\\k. (h:num->num->real) n k)
-  \\z. sum (0..m) (\\k. hh(complex(&n,&k) + z))
-  at (Cx(&0)) within\n     ((s INTER {z | &0 < Re z}) INTER magical_set e)
-  ~((a + 1) + 1 <= a)
-  m < n + 1 <=> m <= n
-  (forall a. P a ==> Q(a + 1)) ==> ((?a. P a) ==> (?b. Q b))
-  \\i:num. i
-  j:num
-  i:num
-  i:num
-  s:(num->num)->real
-  ratpolyfun e q
-  {k | (q:real#real->real)(&n,&k) = &0} =\n        {k | &k IN {x | (q:real#real->real)(&n,x) = &0}}
-  FINITE {k | (q:real#real->real)(&n,&k) = &0}
-  FINITE {k | ~((f:num->num->real) n k = &0)} /\\\n      FINITE {k | ~((h:num->num->real) n k = &0)}
-  ?m.  ~(q(&n,&m + &1) = &0) /\\\n          (forall k. ~(f n k = &0) ==> k < m) /\\\n          (forall k. ~(h n k = &0) ==> k < m)
-  (P:num->bool) n
-  n:num
-  forall P e f h ff hh p q s.\n        open s /\\ Cx(&0) limit_point_of (s INTER {z | &0 < Re z}) /\\\n        ((forall n. FINITE {k | ~(f n k = &0)}) /\\\n         (forall n. FINITE {k | ~(h n k = &0)})) /\\\n        ((forall n k. P n ==> (ff ---> f n k) (at(complex(&n,&k)) within\n                                         { complex(&n,&k) + x | x IN s})) /\\\n         (forall n k. P n ==> (hh ---> h n k) (at(complex(&n,&k))\n                                    within { complex(&n,&k) + x | x IN s}))) /\\\n        (ratpolyfun e p /\\ ratpolyfun e q) /\\\n        (forall n. P n ==> ~(q(&n,&0) = &0)) /\\\n        (forall n k. ~ratty e (n,k) /\\ &0 < n\n               ==> hh(complex(n,k)) =\n                   p(n,k + &1) / q(n,k + &1) * ff(complex(n,k + &1)) -\n                   p(n,k) / q(n,k) * ff(complex(n,k)))\n        ==> forall n. P n\n                ==> sum (:num) (\\k. h n k) = --(p(&n,&0) / q(&n,&0) * f n 0)
-  w + z:complex = y <=> z = y - w
-  forall w. {w + z | z IN (:complex)} = (:complex)
-  ~(a IN s) ==> s DELETE a = s
-  (:complex)
-  forall P e f h ff hh p q.\n        ((forall n. FINITE {k | ~(f n k = &0)}) /\\\n         (forall n. FINITE {k | ~(h n k = &0)})) /\\\n        ((forall n k. P n ==> (ff ---> f n k) (at(complex(&n,&k)))) /\\\n         (forall n k. P n ==> (hh ---> h n k) (at(complex(&n,&k))))) /\\\n        (ratpolyfun e p /\\ ratpolyfun e q) /\\\n        (forall n. P n ==> ~(q(&n,&0) = &0)) /\\\n        (forall n k. ~ratty e (n,k) /\\ &0 < n\n               ==> hh(complex(n,k)) =\n                   p(n,k + &1) / q(n,k + &1) * ff(complex(n,k + &1)) -\n                   p(n,k) / q(n,k) * ff(complex(n,k)))\n        ==> forall n. P n\n                ==> sum (:num) (\\k. h n k) = --(p(&n,&0) / q(&n,&0) * f n 0)
-  k:num
-  k:num
-  0..n
-  forall m n. (forall k. k <= m k) ==> FINITE {k | ~(binom(n,m k) = 0)}
-  forall f g:A->num.\n        FINITE {k | ~(f k = 0)} /\\ FINITE {k | ~(g k = 0)}\n        ==> FINITE {k | ~(f k + g k = 0)}
-  forall f g:A->num.\n        FINITE {k | ~(f k = 0)} \\/ FINITE {k | ~(g k = 0)}\n        ==> FINITE {k | ~(f k * g k = 0)}
-  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} /\\ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k + g k = &0)}
-  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} /\\ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k - g k = &0)}
-  forall f:A->real.\n        FINITE {k | ~(f k = &0)} ==> FINITE {k | ~(inv(f k) = &0)}
-  forall f:A->real n.\n        FINITE {k | ~(f k = &0)} /\\ ~(n = 0)\n        ==> FINITE {k | ~(f k pow n = &0)}
-  forall f:A->real y.\n        FINITE {k | ~(f k = &0)} /\\ ~(y = &0)\n        ==> FINITE {k | ~(f k spow y = &0)}
-  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} \\/ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k * g k = &0)}
-  forall f g:A->real.\n        FINITE {k | ~(f k = &0)} \\/ FINITE {k | ~(g k = &0)}\n        ==> FINITE {k | ~(f k / g k = &0)}
-  forall f:A->num.\n        FINITE {k | ~(f k = 0)} ==> FINITE {k | ~(&(f k) = &0)}
-  (forall n k. ~(k IN s n) ==> f n k = &0)\n     ==> forall n. sum (s n) (f n) = sum (s n) (f n)
-  (forall n. FINITE {k | ~(f n k = &0)})\n     ==> forall n. sum (s n) (f n) = sum (s n) (f n)
-  (forall n k. ~(k IN s n) ==> f n k = &0)\n   ==> forall n:num. sum (s n) (f n) = sum (:num) (f n)
-  a(n:num)..b n
-  (forall n k. ~(k IN a n..b n) ==> f n k = &0)\n   ==> forall n:num. FINITE {k | ~(f n k = &0)}
-  &p pow n
-  &(p EXP n)
-  &p * &q
-  &(p * q)
-  &p - &q
-  &(p - q)
-  &p + &q
-  &(p + q)
-  rfact(&p)
-  &(FACT p)
-  rbinom(&p,&q)
-  &(binom(p,q))
-  (&):num->real
+  (k : Real)
+  real_of_num((n : Num))
+  (p : ((Real, Real)) -> Real)
+  \226\136\128 s : (Real) -> Bool, \226\136\128 d : Real, \226\136\128 e : Real, \226\136\128 n : Num, \226\136\128 k : Real, integer(k) && IN(complex((d, e)), magical_set(s)) \226\134\146 !ratty(s, (real_of_num(n) + d, k + e))
+  (j : Num)
+  (i : Num)
+  (i : Num)
+  (m : (Num) -> Num)
+  (q : ((Num) -> Num) -> Real)
+  (q : (Cart[Real, Tybit0[Unit]]) -> Real) == o((z : Cart[Real, Tybit0[Unit]]) => (p : ((Real, Real)) -> Real)((Re(z), Im(z))), (z : Cart[Real, Tybit0[Unit]]) => complex(((n : Real), (k : Real))) + z)
+  complex(((x : Real) - (n : Real), (y : Real) - (k : Real)))
+  (y : Real)
+  (x : Real)
+  real_polynomial_function((q : (Cart[Real, Tybit0[Unit]]) -> Real))
+  (q : (Cart[Real, Tybit0[Unit]]) -> Real) == ((z : Cart[Real, Tybit0[Unit]]) => (p : ((Real, Real)) -> Real)(((n : Real) + Re(z), (k : Real) + Im(z))))
+  (k : Real)
+  (n : Real)
+  (p : ((Real, Real)) -> Real)
+  DIFF(UNIV, {(z : _) | !(P : (_) -> Bool)(z)}) == {(x : _) | P(x)}
+  DIFF(UNIV, DIFF(UNIV, (s : (_) -> Bool))) == s
+  ((s : (_) -> Bool) == UNIV) == (DIFF(UNIV, s) == {})
+  closure(magical_set((s : (Real) -> Bool))) == UNIV
+  DELETE(INTER((s : (_) -> Bool), (t : (_) -> Bool)), (a : _)) == INTER(DELETE(s, a), t)
+  \226\136\128 p : (Real) -> Bool, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) && limit_point_of(Cx(real_of_num(0)), s) \226\134\146 !trivial_limit(within(at(Cx(real_of_num(0))), INTER(s, magical_set(p))))
+  (a : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]) - a == z
+  op_minus_minus_minus_gt((f : (Cart[Real, Tybit0[Unit]]) -> Real), (l : Real), within(at((a : Cart[Real, Tybit0[Unit]])), {a + (z : Cart[Real, Tybit0[Unit]]) | IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))})) == op_minus_minus_minus_gt((w : Cart[Real, Tybit0[Unit]]) => f(a + w), l, within(at(Cx(real_of_num(0))), s))
+  (j : Num)
+  (i : Num)
+  (i : Num)
+  (s : ((Num) -> Num) -> Real)
+  ratpolyfun((e : (Real) -> Bool), (q : ((Real, Real)) -> Real))
+  ratpolyfun((e : (Real) -> Bool), (p : ((Real, Real)) -> Real))
+  real_continuous((f : (Cart[Real, _]) -> Real), at((z : Cart[Real, _]))) && f(z) == (l : Real) \226\134\146 op_minus_minus_minus_gt(f, l, within(at(z), (s : (Cart[Real, _]) -> Bool)))
+  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  !((m : Num) + 1 < m)
+  (b : Real) == real_of_num(0) \226\134\146 -(y : Real) == (a : Real) * b - y
+  -((p : ((Real, Real)) -> Real)((real_of_num((n : Num)), real_of_num(0))) / (q : ((Real, Real)) -> Real)((real_of_num(n), real_of_num(0))) * (f : (Num, Num) -> Real)(n, 0)) == p((real_of_num(n), real_of_num((m : Num) + 1))) / q((real_of_num(n), real_of_num(m + 1))) * f(n, m + 1) - p((real_of_num(n), real_of_num(0))) / q((real_of_num(n), real_of_num(0))) * f(n, 0)
+  (x : Real) + real_of_num(1) + (y : Real) == x + y + real_of_num(1)
+  (k : Num)
+  (w : Cart[Real, Tybit0[Unit]])
+  real_of_num(1)
+  (z : Cart[Real, Tybit0[Unit]]) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (p : ((Real, Real)) -> Real)((real_of_num((n : Num)) + Re(z), real_of_num(k) + real_of_num(1) + Im(z))) / (q : ((Real, Real)) -> Real)((real_of_num(n) + Re(z), real_of_num(k) + real_of_num(1) + Im(z))) * (ff : (Cart[Real, Tybit0[Unit]]) -> Real)(complex((real_of_num(n), real_of_num(k) + real_of_num(1))) + z) - p((real_of_num(n) + Re(z), real_of_num(k) + Im(z))) / q((real_of_num(n) + Re(z), real_of_num(k) + Im(z))) * ff(complex((real_of_num(n), real_of_num(k))) + z))
+  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  (k : Num)
+  sum(UNIV, (k : Num) => (h : (Num, Num) -> Real)((n : Num), k)) == sum(op_dot_dot(0, (m : Num)), (k : Num) => h(n, k))
+  (z : Cart[Real, Tybit0[Unit]]) => sum(op_dot_dot(0, (m : Num)), (k : Num) => (hh : (Cart[Real, Tybit0[Unit]]) -> Real)(complex((real_of_num((n : Num)), real_of_num(k))) + z))
+  within(at(Cx(real_of_num(0))), INTER(INTER((s : (Cart[Real, Tybit0[Unit]]) -> Bool), {(z : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < Re(z)}), magical_set((e : (Real) -> Bool))))
+  !((a : Num) + 1 + 1 <= a)
+  ((m : Num) < (n : Num) + 1) == (m <= n)
+  (\226\136\128 a : Num, (P : (Num) -> Bool)(a) \226\134\146 (Q : (Num) -> Bool)(a + 1)) \226\134\146 (\226\136\131 a : Num, P(a)) \226\134\146 (\226\136\131 b : Num, Q(b))
+  (i : Num) => i
+  (j : Num)
+  (i : Num)
+  (i : Num)
+  (s : ((Num) -> Num) -> Real)
+  ratpolyfun((e : (Real) -> Bool), (q : ((Real, Real)) -> Real))
+  {(k : Num) | (q : ((Real, Real)) -> Real)((real_of_num((n : Num)), real_of_num(k))) == real_of_num(0)} == {(k : Num) | IN(real_of_num(k), {(x : Real) | q((real_of_num(n), x)) == real_of_num(0)})}
+  FINITE({(k : Num) | (q : ((Real, Real)) -> Real)((real_of_num((n : Num)), real_of_num(k))) == real_of_num(0)})
+  FINITE({(k : Num) | !((f : (Num, Num) -> Real)((n : Num), k) == real_of_num(0))}) && FINITE({(k : Num) | !((h : (Num, Num) -> Real)(n, k) == real_of_num(0))})
+  \226\136\131 m : Num, !((q : ((Real, Real)) -> Real)((real_of_num((n : Num)), real_of_num(m) + real_of_num(1))) == real_of_num(0)) && (\226\136\128 k : Num, !((f : (Num, Num) -> Real)(n, k) == real_of_num(0)) \226\134\146 k < m) && (\226\136\128 k : Num, !((h : (Num, Num) -> Real)(n, k) == real_of_num(0)) \226\134\146 k < m)
+  (P : (Num) -> Bool)((n : Num))
+  (n : Num)
+  \226\136\128 P : (Num) -> Bool, \226\136\128 e : (Real) -> Bool, \226\136\128 f : (Num, Num) -> Real, \226\136\128 h : (Num, Num) -> Real, \226\136\128 ff : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 hh : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 p : ((Real, Real)) -> Real, \226\136\128 q : ((Real, Real)) -> Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) && limit_point_of(Cx(real_of_num(0)), INTER(s, {(z : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < Re(z)})) && ((\226\136\128 n : Num, FINITE({(k : Num) | !(f(n, k) == real_of_num(0))})) && (\226\136\128 n : Num, FINITE({(k : Num) | !(h(n, k) == real_of_num(0))}))) && ((\226\136\128 n : Num, \226\136\128 k : Num, P(n) \226\134\146 op_minus_minus_minus_gt(ff, f(n, k), within(at(complex((real_of_num(n), real_of_num(k)))), {complex((real_of_num(n), real_of_num(k))) + (x : Cart[Real, Tybit0[Unit]]) | IN(x, s)}))) && (\226\136\128 n : Num, \226\136\128 k : Num, P(n) \226\134\146 op_minus_minus_minus_gt(hh, h(n, k), within(at(complex((real_of_num(n), real_of_num(k)))), {complex((real_of_num(n), real_of_num(k))) + (x : Cart[Real, Tybit0[Unit]]) | IN(x, s)})))) && (ratpolyfun(e, p) && ratpolyfun(e, q)) && (\226\136\128 n : Num, P(n) \226\134\146 !(q((real_of_num(n), real_of_num(0))) == real_of_num(0))) && (\226\136\128 n : Real, \226\136\128 k : Real, !ratty(e, (n, k)) && real_of_num(0) < n \226\134\146 hh(complex((n, k))) == p((n, k + real_of_num(1))) / q((n, k + real_of_num(1))) * ff(complex((n, k + real_of_num(1)))) - p((n, k)) / q((n, k)) * ff(complex((n, k)))) \226\134\146 (\226\136\128 n : Num, P(n) \226\134\146 sum(UNIV, (k : Num) => h(n, k)) == -(p((real_of_num(n), real_of_num(0))) / q((real_of_num(n), real_of_num(0))) * f(n, 0)))
+  ((w : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]) == (y : Cart[Real, Tybit0[Unit]])) == (z == y - w)
+  \226\136\128 w : Cart[Real, Tybit0[Unit]], {w + (z : Cart[Real, Tybit0[Unit]]) | IN(z, UNIV)} == UNIV
+  !IN((a : _), (s : (_) -> Bool)) \226\134\146 DELETE(s, a) == s
+  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  \226\136\128 P : (Num) -> Bool, \226\136\128 e : (Real) -> Bool, \226\136\128 f : (Num, Num) -> Real, \226\136\128 h : (Num, Num) -> Real, \226\136\128 ff : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 hh : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 p : ((Real, Real)) -> Real, \226\136\128 q : ((Real, Real)) -> Real, ((\226\136\128 n : Num, FINITE({(k : Num) | !(f(n, k) == real_of_num(0))})) && (\226\136\128 n : Num, FINITE({(k : Num) | !(h(n, k) == real_of_num(0))}))) && ((\226\136\128 n : Num, \226\136\128 k : Num, P(n) \226\134\146 op_minus_minus_minus_gt(ff, f(n, k), at(complex((real_of_num(n), real_of_num(k)))))) && (\226\136\128 n : Num, \226\136\128 k : Num, P(n) \226\134\146 op_minus_minus_minus_gt(hh, h(n, k), at(complex((real_of_num(n), real_of_num(k))))))) && (ratpolyfun(e, p) && ratpolyfun(e, q)) && (\226\136\128 n : Num, P(n) \226\134\146 !(q((real_of_num(n), real_of_num(0))) == real_of_num(0))) && (\226\136\128 n : Real, \226\136\128 k : Real, !ratty(e, (n, k)) && real_of_num(0) < n \226\134\146 hh(complex((n, k))) == p((n, k + real_of_num(1))) / q((n, k + real_of_num(1))) * ff(complex((n, k + real_of_num(1)))) - p((n, k)) / q((n, k)) * ff(complex((n, k)))) \226\134\146 (\226\136\128 n : Num, P(n) \226\134\146 sum(UNIV, (k : Num) => h(n, k)) == -(p((real_of_num(n), real_of_num(0))) / q((real_of_num(n), real_of_num(0))) * f(n, 0)))
+  (k : Num)
+  (k : Num)
+  op_dot_dot(0, (n : Num))
+  \226\136\128 m : (Num) -> Num, \226\136\128 n : Num, (\226\136\128 k : Num, k <= m(k)) \226\134\146 FINITE({(k : Num) | !(binom((n, m(k))) == 0)})
+  \226\136\128 f : (A) -> Num, \226\136\128 g : (A) -> Num, FINITE({(k : A) | !(f(k) == 0)}) && FINITE({(k : A) | !(g(k) == 0)}) \226\134\146 FINITE({(k : A) | !(f(k) + g(k) == 0)})
+  \226\136\128 f : (A) -> Num, \226\136\128 g : (A) -> Num, FINITE({(k : A) | !(f(k) == 0)}) || FINITE({(k : A) | !(g(k) == 0)}) \226\134\146 FINITE({(k : A) | !(f(k) * g(k) == 0)})
+  \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, FINITE({(k : A) | !(f(k) == real_of_num(0))}) && FINITE({(k : A) | !(g(k) == real_of_num(0))}) \226\134\146 FINITE({(k : A) | !(f(k) + g(k) == real_of_num(0))})
+  \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, FINITE({(k : A) | !(f(k) == real_of_num(0))}) && FINITE({(k : A) | !(g(k) == real_of_num(0))}) \226\134\146 FINITE({(k : A) | !(f(k) - g(k) == real_of_num(0))})
+  \226\136\128 f : (A) -> Real, FINITE({(k : A) | !(f(k) == real_of_num(0))}) \226\134\146 FINITE({(k : A) | !(inv(f(k)) == real_of_num(0))})
+  \226\136\128 f : (A) -> Real, \226\136\128 n : Num, FINITE({(k : A) | !(f(k) == real_of_num(0))}) && !(n == 0) \226\134\146 FINITE({(k : A) | !(pow(f(k), n) == real_of_num(0))})
+  \226\136\128 f : (A) -> Real, \226\136\128 y : Real, FINITE({(k : A) | !(f(k) == real_of_num(0))}) && !(y == real_of_num(0)) \226\134\146 FINITE({(k : A) | !(spow(f(k), y) == real_of_num(0))})
+  \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, FINITE({(k : A) | !(f(k) == real_of_num(0))}) || FINITE({(k : A) | !(g(k) == real_of_num(0))}) \226\134\146 FINITE({(k : A) | !(f(k) * g(k) == real_of_num(0))})
+  \226\136\128 f : (A) -> Real, \226\136\128 g : (A) -> Real, FINITE({(k : A) | !(f(k) == real_of_num(0))}) || FINITE({(k : A) | !(g(k) == real_of_num(0))}) \226\134\146 FINITE({(k : A) | !(f(k) / g(k) == real_of_num(0))})
+  \226\136\128 f : (A) -> Num, FINITE({(k : A) | !(f(k) == 0)}) \226\134\146 FINITE({(k : A) | !(real_of_num(f(k)) == real_of_num(0))})
+  (\226\136\128 n : _, \226\136\128 k : _, !IN(k, (s : (_, _) -> Bool)(n)) \226\134\146 (f : (_, _) -> Real)(n, k) == real_of_num(0)) \226\134\146 (\226\136\128 n : _, sum(s(n), f(n)) == sum(s(n), f(n)))
+  (\226\136\128 n : _, FINITE({(k : _) | !((f : (_, _) -> Real)(n, k) == real_of_num(0))})) \226\134\146 (\226\136\128 n : _, sum((s : (_, _) -> Bool)(n), f(n)) == sum(s(n), f(n)))
+  (\226\136\128 n : Num, \226\136\128 k : Num, !IN(k, (s : (Num, Num) -> Bool)(n)) \226\134\146 (f : (Num, Num) -> Real)(n, k) == real_of_num(0)) \226\134\146 (\226\136\128 n : Num, sum(s(n), f(n)) == sum(UNIV, f(n)))
+  op_dot_dot((a : (Num) -> Num)((n : Num)), (b : (Num) -> Num)(n))
+  (\226\136\128 n : Num, \226\136\128 k : Num, !IN(k, op_dot_dot((a : (Num) -> Num)(n), (b : (Num) -> Num)(n))) \226\134\146 (f : (Num, Num) -> Real)(n, k) == real_of_num(0)) \226\134\146 (\226\136\128 n : Num, FINITE({(k : Num) | !(f(n, k) == real_of_num(0))}))
+  pow(real_of_num((p : Num)), (n : Num))
+  real_of_num(EXP((p : Num), (n : Num)))
+  real_of_num((p : Num)) * real_of_num((q : Num))
+  real_of_num((p : Num) * (q : Num))
+  real_of_num((p : Num)) - real_of_num((q : Num))
+  real_of_num((p : Num) - (q : Num))
+  real_of_num((p : Num)) + real_of_num((q : Num))
+  real_of_num((p : Num) + (q : Num))
+  rfact(real_of_num((p : Num)))
+  real_of_num(FACT((p : Num)))
+  rbinom((real_of_num((p : Num)), real_of_num((q : Num))))
+  real_of_num(binom(((p : Num), (q : Num))))
+  real_of_num
   :real
   (+):num->num->num
-  (forall k. ~(k IN s) ==> f k = &0) /\\\n   sum s (\\k. f k) = sum (:num) (\\k. f k) /\\\n   FINITE {k | ~(f k = &0)}\n   ==> forall c. (forall k. ~(k IN s) ==> c * f k = &0) /\\\n           c * sum s (\\k. f k) = sum (:num) (\\k. c * f k) /\\\n           FINITE {k | ~(c * f k = &0)}
-  ((forall k. ~(k IN s) ==> f' k = &0) /\\\n    f = sum (:num) (\\k. f' k) /\\\n    FINITE {k | ~(f' k = &0)}) /\\\n   ((forall k. ~(k IN t) ==> g' k = &0) /\\\n    g = sum (:num) (\\k. g' k) /\\\n    FINITE {k | ~(g' k = &0)})\n   ==> ((forall k. ~(k IN s UNION t) ==> f' k + g' k = &0) /\\\n         f + g =\n         sum (:num) (\\k. f' k + g' k) /\\\n         FINITE {k | ~(f' k + g' k = &0)})
-  x + &(SUC n) = (x + &1) + &n /\\\n     x + -- &(SUC n) = (x - &1) + -- &n
-  x + -- &0 = x
-  rfact x
-  rbinom(x,y)
-  x spow y
-  (\\(n,k). p n k + &1):real#real->real
-  ~ratty e (n,k)\n   ==> ratpolyfun e (\\(n,k). p n k) /\\ ~(forall n k. p n k + &1 = &0)\n       ==> rfact(p n k + &1) = (p n k + &1) * rfact(p n k)
-  ~ratty e (n,k) ==> rfact(p n k - &1) = rfact(p n k) / p n k
-  ~ratty e (n,k)\n   ==> rbinom(p n k - &1,q n k) =\n       (p n k - q n k) / p n k * rbinom(p n k,q n k)
-  ~ratty e (n,k)\n   ==> rbinom(p n k - &1,q n k - &1) =\n       q n k / p n k * rbinom(p n k,q n k)
-  p /\\ ~r ==> ~(p /\\ q /\\ ~r) ==> ~q
-  (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(forall n k. p n k + &1 = &0) /\\ ~(forall n k. q n k + &1 = &0)\n        ==> rbinom(p n k + &1,q n k + &1) =\n            (p n k + &1) / (q n k + &1) * rbinom(p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        (~(forall n k. p n k + &1 = &0) /\\ ~(forall n k. p n k + &1 = q n k))\n        ==> rbinom(p n k + &1,q n k) =\n            (p n k + &1) / (p n k - q n k + &1) * rbinom (p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(forall n k. q n k + &1 = &0)\n        ==> rbinom(p n k,q n k + &1) =\n            (p n k - q n k) / (q n k + &1) * rbinom(p n k,q n k)) /\\\n   (~ratty e (n,k)\n    ==> (ratpolyfun e (\\(n,k). p n k) /\\ ratpolyfun e (\\(n,k). q n k)) /\\\n        ~(forall n k. p n k + &1 = q n k)\n        ==> rbinom(p n k,q n k - &1) =\n            q n k / (p n k - q n k + &1) * rbinom(p n k,q n k))
-  (n:real,k:real)
-  (n:real,k:real)
-  (n:real,k:real)
-  (n:real,k:real)
-  (n:real,k:real)
-  (n:real,k:real)
-  forall x. ~rational x ==> ~(x = &0)
-  integer x
-  forall x. ~(rational x /\\ x <= -- &1) ==> ~(rfact x = &0)
-  forall x y. ~(rational x /\\ x <= -- &1) /\\\n         ~(rational y /\\ y <= -- &1) /\\\n         ~(rational(x - y) /\\ x - y <= -- &1)\n         ==> ~(rbinom(x,y) = &0)
-  ~(x = &0) /\\ ~rational y ==> ~(x spow y = &0)
-  \\(x,y). (p:real->real->real) x y - p n k
-  ~ratty e (n,k)\n   ==> ratpolyfun e (\\(n,k). p n k) /\\ ~(?c. forall n k. p n k = c)\n       ==> ~rational(p n k)
-  (&0 <= x /\\ &0 <= y) /\\\n                      (~(x = &0) \\/ ~(y = &0)) ==> ~(x + y = &0)
+  (\226\136\128 k : Num, !IN(k, (s : (Num) -> Bool)) \226\134\146 (f : (Num) -> Real)(k) == real_of_num(0)) && sum(s, (k : Num) => f(k)) == sum(UNIV, (k : Num) => f(k)) && FINITE({(k : Num) | !(f(k) == real_of_num(0))}) \226\134\146 (\226\136\128 c : Real, (\226\136\128 k : Num, !IN(k, s) \226\134\146 c * f(k) == real_of_num(0)) && c * sum(s, (k : Num) => f(k)) == sum(UNIV, (k : Num) => c * f(k)) && FINITE({(k : Num) | !(c * f(k) == real_of_num(0))}))
+  ((\226\136\128 k : Num, !IN(k, (s : (Num) -> Bool)) \226\134\146 (f' : (Num) -> Real)(k) == real_of_num(0)) && (f : Real) == sum(UNIV, (k : Num) => f'(k)) && FINITE({(k : Num) | !(f'(k) == real_of_num(0))})) && (\226\136\128 k : Num, !IN(k, (t : (Num) -> Bool)) \226\134\146 (g' : (Num) -> Real)(k) == real_of_num(0)) && (g : Real) == sum(UNIV, (k : Num) => g'(k)) && FINITE({(k : Num) | !(g'(k) == real_of_num(0))}) \226\134\146 (\226\136\128 k : Num, !IN(k, UNION(s, t)) \226\134\146 f'(k) + g'(k) == real_of_num(0)) && f + g == sum(UNIV, (k : Num) => f'(k) + g'(k)) && FINITE({(k : Num) | !(f'(k) + g'(k) == real_of_num(0))})
+  (x : Real) + real_of_num(SUC((n : Num))) == x + real_of_num(1) + real_of_num(n) && x + -real_of_num(SUC(n)) == x - real_of_num(1) + -real_of_num(n)
+  (x : Real) + -real_of_num(0) == x
+  rfact((x : Real))
+  rbinom(((x : Real), (y : Real)))
+  spow((x : Real), (y : Real))
+  GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), (p : (Real, Real) -> Real)(n, k) + real_of_num(1)))
+  !ratty((e : (Real) -> Bool), ((n : Real), (k : Real))) \226\134\146 ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), (p : (Real, Real) -> Real)(n, k)))) && !(\226\136\128 n : Real, \226\136\128 k : Real, p(n, k) + real_of_num(1) == real_of_num(0)) \226\134\146 rfact(p(n, k) + real_of_num(1)) == (p(n, k) + real_of_num(1)) * rfact(p(n, k))
+  !ratty((e : (Real) -> Bool), ((n : Real), (k : Real))) \226\134\146 rfact((p : (Real, Real) -> Real)(n, k) - real_of_num(1)) == rfact(p(n, k)) / p(n, k)
+  !ratty((e : (Real) -> Bool), ((n : Real), (k : Real))) \226\134\146 rbinom(((p : (Real, Real) -> Real)(n, k) - real_of_num(1), (q : (Real, Real) -> Real)(n, k))) == (p(n, k) - q(n, k)) / p(n, k) * rbinom((p(n, k), q(n, k)))
+  !ratty((e : (Real) -> Bool), ((n : Real), (k : Real))) \226\134\146 rbinom(((p : (Real, Real) -> Real)(n, k) - real_of_num(1), (q : (Real, Real) -> Real)(n, k) - real_of_num(1))) == q(n, k) / p(n, k) * rbinom((p(n, k), q(n, k)))
+  (p : Bool) && !(r : Bool) \226\134\146 !(p && (q : Bool) && !r) \226\134\146 !q
+  (!ratty((e : (Real) -> Bool), ((n : Real), (k : Real))) \226\134\146 (ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), (p : (Real, Real) -> Real)(n, k)))) && ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), (q : (Real, Real) -> Real)(n, k))))) && !(\226\136\128 n : Real, \226\136\128 k : Real, p(n, k) + real_of_num(1) == real_of_num(0)) && !(\226\136\128 n : Real, \226\136\128 k : Real, q(n, k) + real_of_num(1) == real_of_num(0)) \226\134\146 rbinom((p(n, k) + real_of_num(1), q(n, k) + real_of_num(1))) == (p(n, k) + real_of_num(1)) / (q(n, k) + real_of_num(1)) * rbinom((p(n, k), q(n, k)))) && (!ratty(e, (n, k)) \226\134\146 (ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k))))) && !(\226\136\128 n : Real, \226\136\128 k : Real, p(n, k) + real_of_num(1) == real_of_num(0)) && !(\226\136\128 n : Real, \226\136\128 k : Real, p(n, k) + real_of_num(1) == q(n, k)) \226\134\146 rbinom((p(n, k) + real_of_num(1), q(n, k))) == (p(n, k) + real_of_num(1)) / (p(n, k) - q(n, k) + real_of_num(1)) * rbinom((p(n, k), q(n, k)))) && (!ratty(e, (n, k)) \226\134\146 (ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k))))) && !(\226\136\128 n : Real, \226\136\128 k : Real, q(n, k) + real_of_num(1) == real_of_num(0)) \226\134\146 rbinom((p(n, k), q(n, k) + real_of_num(1))) == (p(n, k) - q(n, k)) / (q(n, k) + real_of_num(1)) * rbinom((p(n, k), q(n, k)))) && (!ratty(e, (n, k)) \226\134\146 (ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k))))) && !(\226\136\128 n : Real, \226\136\128 k : Real, p(n, k) + real_of_num(1) == q(n, k)) \226\134\146 rbinom((p(n, k), q(n, k) - real_of_num(1))) == q(n, k) / (p(n, k) - q(n, k) + real_of_num(1)) * rbinom((p(n, k), q(n, k))))
+  ((n : Real), (k : Real))
+  ((n : Real), (k : Real))
+  ((n : Real), (k : Real))
+  ((n : Real), (k : Real))
+  ((n : Real), (k : Real))
+  ((n : Real), (k : Real))
+  \226\136\128 x : Real, !rational(x) \226\134\146 !(x == real_of_num(0))
+  integer((x : Real))
+  \226\136\128 x : Real, !(rational(x) && x <= -real_of_num(1)) \226\134\146 !(rfact(x) == real_of_num(0))
+  \226\136\128 x : Real, \226\136\128 y : Real, !(rational(x) && x <= -real_of_num(1)) && !(rational(y) && y <= -real_of_num(1)) && !(rational(x - y) && x - y <= -real_of_num(1)) \226\134\146 !(rbinom((x, y)) == real_of_num(0))
+  !((x : Real) == real_of_num(0)) && !rational((y : Real)) \226\134\146 !(spow(x, y) == real_of_num(0))
+  GABS((f : ((Real, Real)) -> Real) => \226\136\128 x : Real, \226\136\128 y : Real, GEQ(f((x, y)), (p : (Real, Real) -> Real)(x, y) - p((n : Real), (k : Real))))
+  !ratty((e : (Real) -> Bool), ((n : Real), (k : Real))) \226\134\146 ratpolyfun(e, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), (p : (Real, Real) -> Real)(n, k)))) && !(\226\136\131 c : Real, \226\136\128 n : Real, \226\136\128 k : Real, p(n, k) == c) \226\134\146 !rational(p(n, k))
+  (real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real)) && (!(x == real_of_num(0)) || !(y == real_of_num(0))) \226\134\146 !(x + y == real_of_num(0))
   real_add
   real_mul
-  integer a /\\ ~(integer b) ==> ~(a = b)
-  a + b = &0 ==> --(inv(b) * a) = inv(b) * b
-  f x = y /\\ f real_continuous at x ==> (f ---> y) (at x)
-  n:num
-  f x = y /\\ f real_continuous at x ==> (f ---> y) (at x)
+  integer((a : Real)) && !integer((b : Real)) \226\134\146 !(a == b)
+  (a : Real) + (b : Real) == real_of_num(0) \226\134\146 -(inv(b) * a) == inv(b) * b
+  (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) == (y : Real) && real_continuous(f, at(x)) \226\134\146 op_minus_minus_minus_gt(f, y, at(x))
+  (n : Num)
+  (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) == (y : Real) && real_continuous(f, at(x)) \226\134\146 op_minus_minus_minus_gt(f, y, at(x))
 spow =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#spow:fun(real,fun(real,real)) x:real) y:real)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_lt:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_mul:fun(real,fun(real,real)) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) y:real) #pi:real))) ((#rpow:fun(real,fun(real,real)) (#real_neg:fun(real,real) x:real)) y:real))) ((#rpow:fun(real,fun(real,real)) x:real) y:real))))))))
 SPOW_STEP_UP =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#spow:fun(real,fun(real,real)) x:real) ((#real_add:fun(real,fun(real,real)) y:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_mul:fun(real,fun(real,real)) ((#spow:fun(real,fun(real,real)) x:real) y:real)) x:real))))))
 SPOW_STEP_DOWN =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#=:fun(real,fun(real,bool)) ((#spow:fun(real,fun(real,real)) x:real) ((#real_sub:fun(real,fun(real,real)) y:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_div:fun(real,fun(real,real)) ((#spow:fun(real,fun(real,real)) x:real) y:real)) x:real))))))
